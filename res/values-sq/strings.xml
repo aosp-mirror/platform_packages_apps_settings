@@ -210,6 +210,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Porta që shkrove nuk është e vlefshme."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Përfaqësuesi HTTP përdoret zakonisht nga shfletuesi. Ai mund të mos përdoret nga aplikacionet e tjera."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"URL-ja e përfaqësuesit: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"ID-ja dytësore aktuale:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"ID-ja dytësore e kartës SIM të parazgjedhur të të dhënave:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Gjerësia e bandës DL (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Gjerësia e bandës UL (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Informacionet e vendndodhjes të rrjetit celular (e vjetruar):"</string>
@@ -232,6 +234,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Përzgjidh brezin e radios"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Lloji i rrjetit të zërit:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Lloji i rrjetit të të dhënave:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Zgjidh indeksin e telefonit"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Cakto llojin e preferuar të rrjetit:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Verifiko emrin e pritësit (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Verifiko emrin e pritësit (www.google.com) IPv6:"</string>
@@ -979,6 +982,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Rrjeti Wi-Fi i operatorit celular"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"E lidhur përmes <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Për të përmirësuar saktësinë e vendndodhjes dhe për qëllime të tjera, <xliff:g id="APP_NAME">%1$s</xliff:g> dëshiron të aktivizojë skanimin e rrjetit, edhe kur Wi-Fi është joaktiv.\n\nTë lejohet kjo për të gjitha aplikacionet që dëshirojnë të skanojnë?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Për të përmirësuar saktësinë e vendndodhjes dhe për qëllime të tjera, një aplikacion i panjohur dëshiron të aktivizojë skanimin e rrjetit, edhe kur Wi-Fi është joaktiv.\n\nTë lejohet kjo për të gjitha aplikacionet që dëshirojnë të skanojnë?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Për ta çaktivizuar këtë, shko te \"Të përparuara\" në menynë e tejkalimit."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Lejo"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Refuzo"</string>
@@ -1203,11 +1207,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimizo nivelin e ndriçimit sipas dritës së ambientit. Kur ky funksion është aktiv, mund ta rregullosh përsëri përkohësisht ndriçimin."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Ndriçimi i ekranit tënd do t\'i përshtatet automatikisht mjedisit dhe aktiviteteve të tua. Mund ta lëvizësh rrëshqitësin manualisht për të ndihmuar ndriçimin përshtatës që të mësojë preferencat e tua."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Shfaq balancimin e të bardhës"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"Informimi i ekranit"</string>
+    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
+    <skip />
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Aktiv / Ekrani nuk do të fiket nëse shikon tek ai"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Joaktiv"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Parandalon fikjen e ekranit nëse shikon tek ai."</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"\"Informimi i ekranit\" përdor kamerën e përparme për të parë nëse dikush po shikon tek ekrani. Funksionon në pajisje dhe imazhet nuk dërgohen apo ruhen asnjëherë te Google."</string>
+    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
+    <skip />
     <string name="night_display_title" msgid="2626451512200357686">"Drita e natës"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Drita e natës e ngjyros ekranin në ngjyrë qelibari. Kjo e bën më të lehtë shikimin e ekranit ose leximin në dritë të zbehtë dhe mund të të ndihmojë të flesh gjumë më lehtë."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Planifikimi"</string>
@@ -1233,11 +1239,12 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Çaktivizo deri në <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Çaktivizo deri në <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"\"Drita e natës\" aktualisht nuk është aktive"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"Në gjendje gjumi"</string>
+    <!-- no translation found for screen_timeout (4882669461447531301) -->
+    <skip />
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekrani çaktivizohet"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Pas <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> pa aktivitet"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Imazhi i sfondit"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"Stilet dhe imazhet e sfondit"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"Stilet dhe imazhet e sfondit"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"I parazgjedhur"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"I personalizuar"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Ndrysho imazhin e sfondit"</string>
@@ -2283,9 +2290,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tableti është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Pajisja është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"Bateria mund të mbarojë më herët se zakonisht"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"Telefoni yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet më të përdorura që nga karikimi i plotë:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"Tableti yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet më të përdorura që nga karikimi i plotë:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"Pajisja jote është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet më të përdorura që nga karikimi i plotë:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Telefoni yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Tableti yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Pajisja jote është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Përfshin aktivitetin me nivel të lartë të energjisë në sfond"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Kufizo %1$d aplikacione</item>
@@ -3161,7 +3168,7 @@
     <string name="emergency_tone_alert" msgid="8523447641290736852">"Tonet"</string>
     <string name="emergency_tone_vibrate" msgid="2278872257053690683">"Dridhjet"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Aktivizo tingujt"</string>
-    <string name="live_caption_title" msgid="2241633148129286971">"Titrat drejtpërdrejt"</string>
+    <string name="live_caption_title" msgid="2241633148129286971">"Titra automatike"</string>
     <string name="live_caption_summary" msgid="3365960379606535783">"Media me titra automatike"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Asnjëherë"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
@@ -3862,7 +3869,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Hapësira ruajtëse e brendshme: <xliff:g id="PERCENTAGE">%1$s</xliff:g> e përdorur - <xliff:g id="FREE_SPACE">%2$s</xliff:g> e lirë"</string>
     <string name="display_summary" msgid="6737806235882127328">"Në gjumë pas <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> pa aktivitet"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Sfond, fjetje, madhësia e shkrimit"</string>
-    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"Stilet dhe imazhet e sfondit, gjumi, madhësia e fontit"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Stilet, imazhet e sfondit, koha e pritjes së ekranit, madhësia e fontit"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Në gjumë, madhësia e fontit"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Në gjumë pas 10 minutash pa aktivitet"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Mesatarisht <xliff:g id="USED_MEMORY">%1$s</xliff:g> nga <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memorie të përdorura"</string>
@@ -4074,10 +4081,11 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Lidhur me <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Lidhur me shumë pajisje"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Modaliteti i demonstrimit i ndërfaqes së përdoruesit të sistemit"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"Tema"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"Zgjidh temën"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"Ky cilësim zbatohet edhe për aplikacionet"</string>
+    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
+    <skip />
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Aplikacionet e mbështetura do të kalojnë po ashtu te tema e errët"</string>
+    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
+    <skip />
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Pllakëzat e zhvilluesit të cilësimeve të shpejta"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Gjurma e Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Sensorët joaktivë"</string>
@@ -4508,9 +4516,10 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Vendndodhja"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Ofruesi yt i shërbimit mund të marrë vendndodhjen tënde për të ofruar këtë shërbim.\n\nRishiko politikën e privatësisë së ofruesit të shërbimit."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Mund të humbasësh qasjen për çdo kohë ose të dhënë të mbetur. Kontakto me ofruesin tënd para se ta heqësh."</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"regjistrimi i përmbajtjes, sugjerimet inteligjente"</string>
-    <string name="content_capture" msgid="4486543205504396210">"Sugjerimet inteligjente"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"Lejo që Android të ruajë informacionet e shfaqura në ekran ose informacionet që dëgjohen në përmbajtjen video ose audio. Android bën sugjerime të dobishme bazuar në aktivitetin e pajisjes sate."</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"regjistrimi i përmbajtjes"</string>
+    <string name="content_capture" msgid="6456873729933463600">"Regjistrimi i përmbajtjes"</string>
+    <!-- no translation found for content_capture_summary (659506647507221852) -->
+    <skip />
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"Regjistro stivën e skedarëve fiktivë të sistemit"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"Stiva e skedarëve fiktivë të sistemit po regjistrohet"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"Stiva e skedarëve fiktivë të sistemit nuk mund të regjistrohej"</string>

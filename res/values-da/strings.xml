@@ -210,6 +210,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Den indtastede port er ikke gyldig."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP-proxyen anvendes af browseren, men må ikke bruges af andre apps."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"Webadresse til PAC: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Nuværende under-id:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Under-id for standard-SIM-kort til data:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Båndbredde til download (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Båndbredde til upload (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Oplysning om placering af celle (udfaset):"</string>
@@ -232,6 +234,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Vælg radiobånd"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Talenetværkstype:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Datanetværkstype:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Vælg telefonindeks"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Angiv den foretrukne netværkstype:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ping værtsnavn (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ping værtsnavn (www.google.com) IPv6:"</string>
@@ -906,7 +909,7 @@
     <string name="wifi_hidden_network_warning" msgid="6674068093531603452">"Hvis din router ikke udsender et netværks-id, men du gerne vil oprette forbindelse til netværket i fremtiden, kan du indstille det til at være skjult.\n\nDette kan medføre et sikkerhedsproblem, da din telefon med jævne mellemrum udsender et signal for at finde netværket.\n\nDine routerindstillinger ændres ikke, når du skjuler netværket."</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signalstyrke"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Status"</string>
-    <string name="tx_wifi_speed" msgid="2994278184097786511">"Send linkhastighed"</string>
+    <string name="tx_wifi_speed" msgid="2994278184097786511">"Overførselshastighed"</string>
     <string name="rx_wifi_speed" msgid="7206089638282839236">"Modtag linkhastighed"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"Frekvens"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP-adresse"</string>
@@ -979,6 +982,8 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Wi-Fi-netværk for mobilselskab"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Opret forbindelse via <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"For bl.a. at kunne angive en mere nøjagtig placering vil <xliff:g id="APP_NAME">%1$s</xliff:g> gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
+    <!-- no translation found for wifi_scan_always_turn_on_message_unknown (6162424298483845679) -->
+    <skip />
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Gå til Avanceret i prikmenuen for at slå denne funktion fra."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Tillad"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Afvis"</string>
@@ -1117,7 +1122,7 @@
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Aktivér Wi-Fi-opkald"</string>
     <string name="wifi_calling_not_supported" msgid="7878640438907807754">"Wi-Fi-opkald understøttes ikke for %1$s"</string>
     <string name="carrier" msgid="5264014738689761132">"Mobilselskab"</string>
-    <string name="display_settings_title" msgid="1708697328627382561">"Skærm"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"Visning"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Lyd"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Lydstyrke"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Musikeffekter"</string>
@@ -1167,7 +1172,7 @@
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"Arbejdskonto – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Personlig konto – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Søg"</string>
-    <string name="display_settings" msgid="7965901687241669598">"Skærm"</string>
+    <string name="display_settings" msgid="7965901687241669598">"Visning"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Roter skærm automatisk"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"Farver"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturlig"</string>
@@ -1203,11 +1208,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimer lysstyrken til det omgivende lys. Når denne funktion er slået til, kan du stadig justere lysstyrken midlertidigt."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Skærmens lysstyrke tilpasses automatisk på baggrund af dine omgivelser og dine aktiviteter. Du kan flytte skyderen manuelt for at hjælpe Automatisk lysstyrke med at lære dine præferencer."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Skærmens hvidbalance"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"Opmærksom skærm"</string>
+    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
+    <skip />
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Aktiveret/Skærmen slukker ikke, når du kigger på den"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Fra"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Forhindrer at din skærm slukker, når du kigger på den."</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"Den opmærksomme skærm bruger frontkameraet til at tjekke, om der er nogen, der kigger på skærmen. Funktionen fungerer kun lokalt på enheden, og den gemmer ikke billeder eller sender billeder til Google."</string>
+    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
+    <skip />
     <string name="night_display_title" msgid="2626451512200357686">"Nattelys"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Nattelys gør farverne på din skærm mere gullige. Det gør din skærm mere behagelig at se på i svag belysning og kan gøre det nemmere at falde i søvn."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Planlæg"</string>
@@ -1233,11 +1240,11 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Aktivér indtil <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Deaktiver indtil <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Nattelys er deaktiveret"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"Dvale"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Timeout for skærmen"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skærmen slukker"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> med inaktivitet"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Baggrund"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"Stilarter og baggrunde"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"Stil og baggrunde"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"Standard"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Tilpasset"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Skift baggrund"</string>
@@ -1528,7 +1535,7 @@
     <string name="apn_edit" msgid="1354715499708424718">"Rediger adgangspunkt"</string>
     <string name="apn_not_set" msgid="4974192007399968164">"Ikke angivet"</string>
     <string name="apn_name" msgid="4115580098369824123">"Navn"</string>
-    <string name="apn_apn" msgid="2479425126733513353">"APN"</string>
+    <string name="apn_apn" msgid="2479425126733513353">"Adgangspunkt"</string>
     <string name="apn_http_proxy" msgid="1826885957243696354">"Proxy"</string>
     <string name="apn_http_port" msgid="3763259523984976226">"Port"</string>
     <string name="apn_user" msgid="455637547356117761">"Brugernavn"</string>
@@ -1544,28 +1551,28 @@
     <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
     <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP eller CHAP"</string>
-    <string name="apn_type" msgid="469613123902220544">"APN-type"</string>
-    <string name="apn_protocol" msgid="3272222921649348640">"APN-protokol"</string>
-    <string name="apn_roaming_protocol" msgid="3386954381510788422">"APN-roamingprotokol"</string>
-    <string name="carrier_enabled" msgid="407655861175280806">"Aktivér/deaktiver APN"</string>
-    <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN er aktiveret"</string>
-    <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN er deaktiveret"</string>
+    <string name="apn_type" msgid="469613123902220544">"Adgangspunktstype"</string>
+    <string name="apn_protocol" msgid="3272222921649348640">"Adgangspunktets protokol"</string>
+    <string name="apn_roaming_protocol" msgid="3386954381510788422">"Adgangspunktets roamingprotokol"</string>
+    <string name="carrier_enabled" msgid="407655861175280806">"Aktivér/deaktiver adgangspunkt"</string>
+    <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"Adgangspunktet er aktiveret"</string>
+    <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"Adgangspunktet er deaktiveret"</string>
     <string name="bearer" msgid="594270280031923558">"Bærer"</string>
     <string name="mvno_type" msgid="2543253857818336421">"MVNO-type"</string>
     <string name="mvno_match_data" msgid="4560671695220540466">"MVNO-værdi"</string>
-    <string name="menu_delete" msgid="6981294422841124659">"Slet APN"</string>
-    <string name="menu_new" msgid="3014205883303921729">"Ny APN"</string>
+    <string name="menu_delete" msgid="6981294422841124659">"Slet adgangspunkt"</string>
+    <string name="menu_new" msgid="3014205883303921729">"Nyt adgangspunkt"</string>
     <string name="menu_save" msgid="8109345640668285399">"Gem"</string>
     <string name="menu_cancel" msgid="2194502410474697474">"Kassér"</string>
     <string name="error_title" msgid="7631322303341024692"></string>
     <string name="error_name_empty" msgid="5508155943840201232">"Feltet Navn skal udfyldes."</string>
-    <string name="error_apn_empty" msgid="4932211013600863642">"Du skal angive et APN."</string>
+    <string name="error_apn_empty" msgid="4932211013600863642">"Du skal angive et adgangspunkt."</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"MCC-feltet skal indeholde 3 tal."</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"MNC-feltet skal indeholde 2 eller 3 tal."</string>
     <string name="error_adding_apn_type" msgid="4181334016628549645">"Mobilselskabet tillader ikke, at du tilføjer adgangspunkter af typen %s."</string>
-    <string name="restore_default_apn" msgid="8178010218751639581">"Gendannelse af standardindstillingerne for APN."</string>
+    <string name="restore_default_apn" msgid="8178010218751639581">"Gendannelse af standardindstillingerne for adgangspunktet."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Nulstil til standard"</string>
-    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Standardindstillingerne for APN er nulstillet."</string>
+    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Standardindstillingerne for adgangspunktet er nulstillet."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Nulstil valg"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Netværk, apps eller enheden kan nulstilles"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Nulstil Wi-Fi, mobil og Bluetooth"</string>
@@ -1584,7 +1591,7 @@
     <string name="master_clear_title" msgid="3531267871084279512">"Ryd alle data (gendan fabriksindstillinger)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Ryd alle data (nulstil)"</string>
     <string name="master_clear_desc" product="tablet" msgid="2314458161059569301">"Dette sletter alle data fra den "<b>"interne lagerplads"</b>" på din tablet, f.eks.: \n\n"<li>"Din Google-konto"</li>\n<li>"Data og indstillinger for system og apps"</li>\n<li>"Downloadede apps"</li></string>
-    <string name="master_clear_desc" product="default" msgid="7647628092266675099">"Dette sletter alle data fra den "<b>"interne lagerplads"</b>" på telefonen, f.eks.: \n\n"<li>"din Google-konto"</li>\n<li>"Data og indstillinger for system og apps"</li>\n<li>"Downloadede apps"</li></string>
+    <string name="master_clear_desc" product="default" msgid="7647628092266675099">"Dette sletter alle data fra den "<b>"interne lagerplads"</b>" på telefonen, f.eks.: \n\n"<li>"Din Google-konto"</li>\n<li>"Data og indstillinger for system og apps"</li>\n<li>"Downloadede apps"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Du er i øjeblikket logget ind på disse konti:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Der er andre brugere til stede på denne enhed.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musik"</li>\n<li>"Billeder"</li>\n<li>"Andre brugerdata"</li></string>
@@ -1660,9 +1667,9 @@
     <string name="location_low_battery_use" msgid="8602232529541903596">"Lavt batteriforbrug"</string>
     <string name="location_scanning_screen_title" msgid="2297479353298444503">"Wi-Fi- og Bluetooth-scanning"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi-Fi-scanning"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Tillad, at apps og tjenester til enhver tid kan søge efter Wi-Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester."</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Tillad, at apps og tjenester altid kan søge efter Wi-Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetooth-scanning"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Tillad, at apps og tjenester til enhver tid kan søge efter enheder i nærheden, også selvom Bluetooth er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester."</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Tillad, at apps og tjenester altid kan søge efter enheder i nærheden, også selvom Bluetooth er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester."</string>
     <string name="managed_profile_location_services" msgid="4723268446874715222">"Placeringstjenester til arbejdet"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Placering af Wi-Fi- og mobilnet."</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Tillad, at apps bruger Googles placeringstjeneste til at beregne din placering hurtigere. Der indsamles anonyme placeringsdata, som sendes til Google."</string>
@@ -2040,7 +2047,7 @@
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Skift skriftstørrelse"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Skærmlæsere"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Lyd og tekst på skærmen"</string>
-    <string name="display_category_title" msgid="685461049938269166">"Skærm"</string>
+    <string name="display_category_title" msgid="685461049938269166">"Visning"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktionsstyring"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Downloadede tjenester"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimentel"</string>
@@ -2283,9 +2290,12 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Din tablet er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Enheden er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"Enheden løber muligvis tør for batteri hurtigere end forventet"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"Din telefon er blevet brugt mere end normalt. Telefonen løber muligvis tør for batteri hurtigere end forventet.\n\nDe mest anvendte apps siden sidste fulde opladning:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"Din tablet er blevet brugt mere end normalt. Din tablet løber muligvis tør for batteri hurtigere end forventet.\n\nDe mest anvendte apps siden sidste fulde opladning:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"Din enhed er blevet brugt mere end normalt. Enheden løber muligvis tør for batteri hurtigere end forventet.\n\nDe mest anvendte apps siden sidste fulde opladning:"</string>
+    <!-- no translation found for battery_tip_dialog_message (797225122502556066) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (49788591262480482) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (7959652003221931962) -->
+    <skip />
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Omfatter batterikrævende aktivitet i baggrunden"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="one">Begræns %1$d app</item>
@@ -2541,7 +2551,7 @@
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Vil du fjerne alt indhold?"</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Lager for loginoplysninger er slettet."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Loginlageret kan ikke ryddes."</string>
-    <string name="usage_access_title" msgid="332333405495457839">"Apps med adgang til forbrug"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"Apps med adgang til telefonbrug"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Ringesignal i nødsituationer"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Angiv adfærd ved nødopkald"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Backup"</string>
@@ -2587,7 +2597,7 @@
     <string name="admin_more_details" msgid="7901420667346456102">"Flere oplysninger"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Notifikationslogfil"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Ringetone og vibration ved opkald"</string>
-    <string name="wifi_setup_detail" msgid="2336990478140503605">"Netværkoplysninger"</string>
+    <string name="wifi_setup_detail" msgid="2336990478140503605">"Netværksoplysninger"</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Synkronisering aktiveret"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Sync deaktiveret"</string>
     <string name="accessibility_sync_in_progress" msgid="4501160520879902723">"Synkroniserer nu"</string>
@@ -2711,7 +2721,7 @@
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Dato for nulstilling af forbrugsperiode"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Dato i hver måned:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Gem"</string>
-    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Angiv en advarsel om dataforbrug"</string>
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Konfigurer en advarsel om dataforbrug"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Angiv en grænse for dataforbrug"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Grænse for dataforbrug"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Din tablet deaktiverer mobildata, når den angivne grænse er nået.\n\nEftersom dataforbrug måles af din tablet, og dit mobilselskab muligvis beregner forbrug på en anden måde, kan du eventuelt angive en lav grænse."</string>
@@ -2756,7 +2766,7 @@
     <string name="vpn_username" msgid="1863901629860867849">"Brugernavn"</string>
     <string name="vpn_password" msgid="6756043647233596772">"Adgangskode"</string>
     <string name="vpn_save_login" msgid="6350322456427484881">"Gem kontooplysninger"</string>
-    <string name="vpn_not_used" msgid="9094191054524660891">"bruges ikke"</string>
+    <string name="vpn_not_used" msgid="9094191054524660891">"(bruges ikke)"</string>
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(ingen bekræftelse af serveren)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(modtaget fra serveren)"</string>
     <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Denne VPN-type kan ikke være forbundet hele tiden"</string>
@@ -2870,8 +2880,8 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Bruger"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Begrænset profil"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"Vil du tilføje en ny bruger?"</string>
-    <string name="user_add_user_message_long" msgid="6768718238082929201">"Du kan dele denne enhed med andre ved at oprette ekstra brugere. Hver bruger har sin egen plads, som kan tilpasses med apps, baggrund osv. Brugerne kan også justere enhedsindstillinger, som for eksempel Wi-Fi, som påvirker alle.\n\nNår du tilføjer en ny bruger, skal vedkommende konfigurere sin plads.\n\nEnhver bruger kan opdatere apps for alle andre brugere. Indstillinger og tjenester for hjælpefunktioner overføres muligvis ikke til den nye bruger."</string>
-    <string name="user_add_user_message_short" msgid="1511354412249044381">"Når du tilføjer en ny bruger, skal personen konfigurere sit område.\n\nEnhver bruger kan opdatere apps for alle andre brugere."</string>
+    <string name="user_add_user_message_long" msgid="6768718238082929201">"Du kan dele denne enhed med andre ved at oprette ekstra brugere. Hver bruger har sit eget rum, som kan tilpasses med apps, baggrund osv. Brugerne kan også justere enhedsindstillinger, som for eksempel Wi-Fi, som påvirker alle.\n\nNår du tilføjer en ny bruger, skal vedkommende konfigurere sin plads.\n\nEnhver bruger kan opdatere apps for alle andre brugere. Indstillinger og tjenester for hjælpefunktioner overføres muligvis ikke til den nye bruger."</string>
+    <string name="user_add_user_message_short" msgid="1511354412249044381">"Når du tilføjer en ny bruger, skal personen konfigurere sit rum.\n\nEnhver bruger kan opdatere apps for alle andre brugere."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Vil du konfigurere brugeren nu?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"Sørg for, at brugeren har mulighed for at oprette sin egen plads på enheden"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Vil du oprette en profil nu?"</string>
@@ -2890,7 +2900,7 @@
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Vil du fjerne profilen?"</string>
     <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Fjern arbejdsprofilen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="2391372805233812410">"Du vil miste dit univers og dine data på denne tablet. Du kan ikke fortryde denne handling."</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="7943645442479360048">"Du vil miste dit univers og dine data på denne telefon. Du kan ikke fortryde denne handling."</string>
+    <string name="user_confirm_remove_self_message" product="default" msgid="7943645442479360048">"Du vil miste dit rum og dine data på denne telefon. Du kan ikke fortryde denne handling."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Alle apps og data slettes."</string>
     <string name="work_profile_confirm_remove_message" msgid="323856589749078140">"Alle apps og data i denne profil slettes, hvis du fortsætter."</string>
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Alle apps og data slettes."</string>
@@ -3300,11 +3310,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Avanceret"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Arbejdsunderretninger"</string>
     <string name="asst_capability_prioritizer_title" msgid="1008391045235540115">"Automatisk prioritering af notifikationer"</string>
-    <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"Nedryk mindre vigtige notifikationer, og gør dem automatisk lydløse"</string>
+    <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"Nedryk automatisk mindre vigtige notifikationer, og gør dem lydløse"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Smarte handlinger og svar"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"Føj automatisk indholdsbestemte handlinger og hurtige svar til notifikationer"</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"Vis automatisk indholdsbestemte handlinger og hurtige svar i notifikationer"</string>
     <string name="hide_silent_icons_title" msgid="2378514357635207742">"Skjul statusikoner for lydløse notifikationer"</string>
-    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Skjul ikoner for lydløse notifikationer i statusbjælken"</string>
+    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Skjul ikoner for lydløse notifikationer på statusbjælken"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Tillad notifikationscirkler"</string>
     <string name="notification_bubbles_title" msgid="526545466417027926">"Bobler"</string>
     <string name="notification_bubbles_summary" msgid="5269674863510678257">"Få hurtigt adgang til appindhold fra hvor som helst ved hjælp af svævende genveje"</string>
@@ -3443,7 +3453,7 @@
     <string name="zen_mode_add_time_rule" msgid="7890557350868257760">"Tilføj tidsplan"</string>
     <string name="zen_mode_delete_rule" msgid="8055032645990309096">"Slet tidsplan"</string>
     <string name="zen_mode_choose_rule_type" msgid="40993242338494595">"Vælg typen af tidsplan"</string>
-    <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"Vil du slette reglen \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
+    <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"Vil du slette \"<xliff:g id="RULE">%1$s</xliff:g>\"-reglen?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"Slet"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"Ukendt"</string>
     <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"Disse indstillinger kan ikke ændres lige nu. En app (<xliff:g id="APP_NAME">%1$s</xliff:g>) har automatisk aktiveret Forstyr ikke ved hjælp af en tilpasset funktion."</string>
@@ -3455,9 +3465,9 @@
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"En automatisk regel er indstillet til at slå \"Forstyr ikke\" til ved bestemte begivenheder"</string>
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Til begivenheder fra"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Til begivenheder fra <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
-    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"enhver kalender"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"alle kalendere"</string>
     <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Hvor svaret er <xliff:g id="REPLY">%1$s</xliff:g>"</string>
-    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Enhver kalender"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Alle kalendere"</string>
     <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Hvor svaret er"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Ja, Måske eller Ikke besvaret"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Ja eller Måske"</string>
@@ -3544,7 +3554,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Skift til Kun alarmer frem til <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Skift til Afbryd altid"</string>
     <string name="zen_mode_screen_on" msgid="8774571998575673502">"Når skærmen er tændt"</string>
-    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"Tillad, at notifikationer, der gøres lydløse af tilstanden Forstyr ikke, vises på skærmen, og vis et ikon i statusbjælken"</string>
+    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"Tillad, at notifikationer, der gøres lydløse af tilstanden Forstyr ikke, vises på skærmen, og vis et ikon på statusbjælken"</string>
     <string name="zen_mode_screen_off" msgid="3144446765110327937">"Når skærmen er slukket"</string>
     <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"Tillad, at notifikationer, der gøres lydløse af Forstyr ikke, tænder skærmen og får lampen til at blinke"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"Tillad, at notifikationer, der gøres lydløse af Forstyr ikke, tænder skærmen"</string>
@@ -3678,11 +3688,11 @@
     <string name="system_app" msgid="9068313769550747372">"(System)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Systemstandard)"</string>
     <string name="apps_storage" msgid="4353308027210435513">"Applagerplads"</string>
-    <string name="usage_access" msgid="5479504953931038165">"Adgang til forbrug"</string>
-    <string name="permit_usage_access" msgid="4012876269445832300">"Tillad adgang til forbrug"</string>
+    <string name="usage_access" msgid="5479504953931038165">"Adgang til telefonbrug"</string>
+    <string name="permit_usage_access" msgid="4012876269445832300">"Tillad adgang til telefonbrug"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Præferencer for appbrug"</string>
     <string name="time_spent_in_app_pref_title" msgid="9124796405314626532">"Skærmtid"</string>
-    <string name="usage_access_description" msgid="1352111094596416795">"Med adgang til forbrug kan en app aflæse, hvilke andre apps du anvender og hvor ofte, samt dit mobilselskab, dine sprogindstillinger og andre oplysninger."</string>
+    <string name="usage_access_description" msgid="1352111094596416795">"Med adgang til telefonbrug kan en app aflæse, hvilke andre apps du anvender og hvor ofte, samt dit mobilselskab, dine sprogindstillinger og andre oplysninger."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Hukommelse"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Hukommelsesoplysninger"</string>
     <string name="always_running" msgid="6042448320077429656">"Kører altid (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -3797,7 +3807,7 @@
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Anbefales for længere batteritid"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Vil du tillade, at <xliff:g id="APP">%s</xliff:g> ignorerer batterioptimeringer?"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"Ingen"</string>
-    <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"Deaktivering af adgang til forbrug for denne app forhindrer ikke din administrator i at holde øje med dataforbrug for apps i din arbejdsprofil"</string>
+    <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"Selvom du deaktiverer denne apps adgang til telefonbrug, kan din administrator stadig holde øje med dataforbruget i apps på din arbejdsprofil"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Du har brugt <xliff:g id="COUNT_0">%1$d</xliff:g> af <xliff:g id="COUNT_1">%2$d</xliff:g> tegn"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"Vis oven på andre apps"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Vis oven på andre apps"</string>
@@ -3816,7 +3826,7 @@
     <string name="write_settings" msgid="4797457275727195681">"Rediger systemindstillinger"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"redigere ændre systemindstillinger"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_0">%1$d</xliff:g> af <xliff:g id="COUNT_1">%2$d</xliff:g> apps med tilladelse til at ændre systemindstillinger"</string>
-    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"Sms-adgang i finansielle apps"</string>
+    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"Sms-adgang i pengeapps"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"Kan installere andre apps"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Kan ændre systemindstillinger"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Kan ændre systemindstillinger"</string>
@@ -3862,7 +3872,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Intern lagerplads: <xliff:g id="PERCENTAGE">%1$s</xliff:g> er anvendt – <xliff:g id="FREE_SPACE">%2$s</xliff:g> ledig plads"</string>
     <string name="display_summary" msgid="6737806235882127328">"Gå i dvale efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> uden aktivitet"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Baggrund, dvale, skriftstørrelse"</string>
-    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"Stilarter og baggrunde, dvale, skriftstørrelse"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Stilarter, baggrunde, timeout for skærmen, skriftstørrelse"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Dvale, skriftstørrelse"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Gå i dvale efter 10 minutters inaktivitet"</string>
     <string name="memory_summary" msgid="8080825904671961872">"I gennemsnit er <xliff:g id="USED_MEMORY">%1$s</xliff:g> ud af <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> hukommelse anvendt"</string>
@@ -3934,7 +3944,7 @@
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Anvend opdateringer, når enheden genstarter"</string>
     <string name="usage" msgid="2977875522080448986">"Forbrug"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Mobildataforbrug"</string>
-    <string name="app_cellular_data_usage" msgid="5468472735806533448">"Dataforbrug fra apps"</string>
+    <string name="app_cellular_data_usage" msgid="5468472735806533448">"Dataforbrug i apps"</string>
     <string name="wifi_data_usage" msgid="771603760674507659">"Dataforbrug via Wi-Fi"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Forbrug af Ethernet-data"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
@@ -3942,7 +3952,7 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> mobildata"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi-data"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> Ethernet-data"</string>
-    <string name="billing_cycle" msgid="6614597736285325497">"Dataadvarsel og -begrænsning"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Dataadvarsel og -grænse"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Cyklus for appdataforbrug"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Dataadvarsel ved <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Datagrænse på <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -3955,27 +3965,27 @@
     </plurals>
     <string name="operator_warning" msgid="1862988028996859195">"Mobilselskabets dataopgørelse kan afvige fra enhedens opgørelse."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> brugt"</string>
-    <string name="set_data_warning" msgid="6115364758236594593">"Konfigurer en dataadvarsel"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Konfigurer dataadvarsel"</string>
     <string name="data_warning" msgid="209133958008062117">"Dataadvarsel"</string>
-    <string name="data_warning_footnote" msgid="776341964125603711">"Dataadvarsel og datagrænse måles af din enhed. Dette er muligvis ikke det samme som mobildata."</string>
+    <string name="data_warning_footnote" msgid="776341964125603711">"Dataadvarsel og datagrænse måles af din enhed. Dit mobilselskabs måling kan afvige."</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Angiv datagrænse"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datagrænse"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> brugt <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Konfigurer"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Andre apps, der er inkluderet i forbruget"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> app har tilladelse til at anvende ubegrænset data, når datasparefunktionen er slået til</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> apps har tilladelse til at anvende ubegrænset data, når datasparefunktionen er slået til</item>
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> app har tilladelse til at anvende ubegrænset data, selvom datasparefunktionen er aktiveret</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> apps har tilladelse til at anvende ubegrænset data, selvom datasparefunktionen er aktiveret</item>
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"Primære data"</string>
     <string name="data_usage_wifi_title" msgid="7063659423081820720">"Wi‑Fi-data"</string>
-    <string name="data_used" msgid="5116389957228457203">"Der er brugt <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="data_used_formatted" msgid="2989129931961311051">"Der er brugt <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> data brugt"</string>
+    <string name="data_used_formatted" msgid="2989129931961311051">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> data brugt"</string>
     <string name="data_overusage" msgid="1134445012475270295">"Overskredet med <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="8998091725895502181">"Der er <xliff:g id="ID_1">^1</xliff:g> tilbage"</string>
     <plurals name="billing_cycle_days_left" formatted="false" msgid="456503215317213651">
-      <item quantity="one">Der er %d dag tilbage</item>
-      <item quantity="other">Der er %d dage tilbage</item>
+      <item quantity="one">%d dag tilbage</item>
+      <item quantity="other">%d dage tilbage</item>
     </plurals>
     <string name="billing_cycle_none_left" msgid="5892754995098583472">"Der er ingen resterende tid"</string>
     <string name="billing_cycle_less_than_one_day_left" msgid="825838050296069404">"Der er mindre end 1 dag tilbage"</string>
@@ -3992,7 +4002,7 @@
     <string name="data_saver_off" msgid="6892309031162738794">"Fra"</string>
     <string name="data_saver_switch_title" msgid="836312690356005669">"Brug Datasparefunktion"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"Ubegrænset dataforbrug"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Tillad ubegrænset dataadgang, når datasparefunktionen er slået til"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Tillad ubegrænset dataadgang, selvom datasparefunktionen er aktiveret"</string>
     <string name="home_app" msgid="4066188520886810030">"Startapp"</string>
     <string name="no_default_home" msgid="7184117487704520238">"Ingen standardstartskærm"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"Sikker opstart"</string>
@@ -4074,10 +4084,11 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Forbundet med <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Forbundet med flere enheder"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demotilstand for systemets brugerflade"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"Tema"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"Vælg tema"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"Denne indstilling gælder også for apps"</string>
+    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
+    <skip />
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Understøttede apps skifter også til mørkt tema"</string>
+    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
+    <skip />
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Felter for udviklere til Hurtige indstillinger"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Sporing af Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Sensorer er slået fra"</string>
@@ -4136,7 +4147,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Tryk for at tjekke enheden"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Tryk på skærmen for at se klokkeslæt, notifikationer og andre oplysninger."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Stryg over fingeraftrykslæser for at se notifikationer"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Stryg fingeraftrykslæser"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Stryg over fingeraftrykslæser"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykslæseren på bagsiden af telefonen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykslæseren på bagsiden af din tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykslæseren på bagsiden af enheden."</string>
@@ -4316,7 +4327,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Enheden kan ikke bruges under opkald"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Ikke tilgængelig"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Besvar opkald på"</string>
-    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Dette APN kan ikke ændres."</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Dette adgangspunkt kan ikke ændres."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Forlæng din tablets batteritid"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Forlæng enhedens batteritid"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Forlæng telefonens batteritid"</string>
@@ -4439,7 +4450,7 @@
     <string name="register_automatically" msgid="518185886971595020">"Automatisk registrering…"</string>
     <string name="roaming_alert_title" msgid="7458177294163751484">"Vil du tillade dataroaming?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Kontakt din netværksudbyder for at få oplyst priser."</string>
-    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Dataforbrug for apps"</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Dataforbrug i apps"</string>
     <string name="mobile_network_mode_error" msgid="4784347953600013818">"Ugyldig netværkstilstand <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorer."</string>
     <string name="mobile_network_apn_title" msgid="7610812642954395440">"Adgangspunkter"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Utilgængelig ved forbindelse til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4508,9 +4519,10 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Placering"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Din tjenesteudbyder kan indsamle din placering med henblik på at levere denne tjeneste.\n\nGennemse din tjenesteudbyders privatlivspolitik."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Du kan miste adgangen til resterende tid eller data. Kontakt din udbyder, før du fjerner det."</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"indholdsregistrering, smarte forslag"</string>
-    <string name="content_capture" msgid="4486543205504396210">"Smarte forslag"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"Giv Android tilladelse til at gemme oplysninger, som er blevet vist på din skærm eller afspillet i video- eller lydindhold. Android giver nyttige forslag baseret på din enhedsaktivitet."</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"indholdsregistrering"</string>
+    <string name="content_capture" msgid="6456873729933463600">"Indholdsregistrering"</string>
+    <!-- no translation found for content_capture_summary (659506647507221852) -->
+    <skip />
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"Registrer systemets heap dump"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"Registrering af systemets heap dump"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"Systemets heap dump kunne ikke registreres"</string>
