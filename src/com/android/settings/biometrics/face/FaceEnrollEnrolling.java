@@ -41,7 +41,7 @@ import java.util.ArrayList;
 public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private static final String TAG = "FaceEnrollEnrolling";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private static final String TAG_FACE_PREVIEW = "tag_preview";
 
     private TextView mErrorText;
