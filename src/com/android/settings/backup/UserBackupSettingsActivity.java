@@ -98,7 +98,7 @@ public class UserBackupSettingsActivity extends FragmentActivity implements Inde
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-                private static final String BACKUP_SEARCH_INDEX_KEY = "backup";
+                private static final String BACKUP_SEARCH_INDEX_KEY = "Backup";
 
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
@@ -118,6 +118,15 @@ public class UserBackupSettingsActivity extends FragmentActivity implements Inde
                     result.add(data);
 
                     return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    if (!new BackupSettingsHelper(context).showBackupSettingsForUser()) {
+                        keys.add(BACKUP_SEARCH_INDEX_KEY);
+                    }
+                    return keys;
                 }
             };
 

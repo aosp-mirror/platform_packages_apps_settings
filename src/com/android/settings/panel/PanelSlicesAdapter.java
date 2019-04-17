@@ -20,7 +20,6 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDIC
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +29,13 @@ import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
-import androidx.slice.widget.SliceLiveData;
 import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.google.android.setupdesign.DividerItemDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,14 +44,15 @@ import java.util.List;
 public class PanelSlicesAdapter
         extends RecyclerView.Adapter<PanelSlicesAdapter.SliceRowViewHolder> {
 
-    private final List<Uri> mSliceUris;
+    private final List<LiveData<Slice>> mSliceLiveData;
+    private final int mMetricsCategory;
     private final PanelFragment mPanelFragment;
-    private final PanelContent mPanelContent;
 
-    public PanelSlicesAdapter(PanelFragment fragment, PanelContent panel) {
+    public PanelSlicesAdapter(
+            PanelFragment fragment, List<LiveData<Slice>> sliceLiveData, int metricsCategory) {
         mPanelFragment = fragment;
-        mSliceUris = panel.getSlices();
-        mPanelContent = panel;
+        mSliceLiveData = new ArrayList<>(sliceLiveData);
+        mMetricsCategory = metricsCategory;
     }
 
     @NonNull
@@ -62,67 +62,60 @@ public class PanelSlicesAdapter
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view = inflater.inflate(R.layout.panel_slice_row, viewGroup, false);
 
-        return new SliceRowViewHolder(view, mPanelContent);
+        return new SliceRowViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SliceRowViewHolder sliceRowViewHolder, int position) {
-        sliceRowViewHolder.onBind(mPanelFragment, mSliceUris.get(position));
+        sliceRowViewHolder.onBind(mSliceLiveData.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mSliceUris.size();
+        return mSliceLiveData.size();
     }
 
     @VisibleForTesting
-    List<Uri> getData() {
-        return mSliceUris;
+    List<LiveData<Slice>> getData() {
+        return mSliceLiveData;
     }
 
     /**
      * ViewHolder for binding Slices to SliceViews.
      */
-    public static class SliceRowViewHolder extends RecyclerView.ViewHolder
+    public class SliceRowViewHolder extends RecyclerView.ViewHolder
             implements DividerItemDecoration.DividedViewHolder {
-
-        private final PanelContent mPanelContent;
 
         private boolean mDividerAllowedAbove = true;
 
         @VisibleForTesting
-        LiveData<Slice> sliceLiveData;
-
-        @VisibleForTesting
         final SliceView sliceView;
 
-        public SliceRowViewHolder(View view, PanelContent panelContent) {
+        public SliceRowViewHolder(View view) {
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
             sliceView.setMode(SliceView.MODE_LARGE);
             sliceView.showTitleItems(true);
-            mPanelContent = panelContent;
         }
 
-        public void onBind(PanelFragment fragment, Uri sliceUri) {
-            final Context context = sliceView.getContext();
-            sliceLiveData = SliceLiveData.fromUri(context, sliceUri);
-            sliceLiveData.observe(fragment.getViewLifecycleOwner(), sliceView);
+        public void onBind(LiveData<Slice> sliceLiveData) {
+            sliceLiveData.observe(mPanelFragment.getViewLifecycleOwner(), sliceView);
 
             // Do not show the divider above media devices switcher slice per request
-            if (sliceUri.equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
+            final Slice slice = sliceLiveData.getValue();
+            if (slice != null && slice.getUri().equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
                 mDividerAllowedAbove = false;
             }
 
             // Log Panel interaction
             sliceView.setOnSliceActionListener(
                     ((eventInfo, sliceItem) -> {
-                        FeatureFactory.getFactory(context)
+                        FeatureFactory.getFactory(sliceView.getContext())
                                 .getMetricsFeatureProvider()
                                 .action(0 /* attribution */,
                                         SettingsEnums.ACTION_PANEL_INTERACTION,
-                                        mPanelContent.getMetricsCategory(),
-                                        sliceUri.toString() /* log key */,
+                                        mMetricsCategory,
+                                        sliceLiveData.toString() /* log key */,
                                         eventInfo.actionType /* value */);
                     })
             );

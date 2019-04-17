@@ -87,10 +87,10 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="ThemeOverlay.SwitchBar.Settings" parent="@android:style/ThemeOverlay.Material.ActionBar">
+    <style name="ThemeOverlay.SwitchBar.Settings" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
-        <item name="switchBarBackgroundColor">?android:attr/textColorSecondary</item>
+        <item name="switchBarBackgroundColor">@color/switchbar_background_color</item>
         <item name="switchBarBackgroundActivatedColor">?android:attr/colorAccent</item>
         <item name="switchBarRestrictionIcon">@*android:drawable/ic_info</item>
     </style>
@@ -203,7 +203,7 @@
 
     <!-- Note that Dialog themes do not set list dividers -->
     <style name="Theme.BottomDialog" parent="@*android:style/Theme.DeviceDefault.Settings.Dialog">
-        <item name="android:windowBackground">@drawable/settings_panel_background</item>
+        <item name="android:windowBackground">@null</item>
         <item name="android:dividerHorizontal">@*android:drawable/list_divider_material</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:listDivider">@*android:drawable/list_divider_material</item>

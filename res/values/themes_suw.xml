@@ -191,12 +191,14 @@
     </style>
 
     <style name="SuwAlertDialogThemeCompat" parent="@style/Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowSoftInputMode">adjustResize</item>
         <!-- copied from Theme.DeviceDefault.Light.Dialog.Alert -->
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
         <item name="dialogCornerRadius">@*android:dimen/config_dialogCornerRadius</item>
     </style>
 
     <style name="SuwAlertDialogThemeCompat.Light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowSoftInputMode">adjustResize</item>
         <!-- copied from Theme.DeviceDefault.Light.Dialog.Alert -->
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
         <item name="dialogCornerRadius">@*android:dimen/config_dialogCornerRadius</item>

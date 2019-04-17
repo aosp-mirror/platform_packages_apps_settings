@@ -345,6 +345,9 @@ public class WifiDppUtils {
      */
     public static boolean isSupportConfiguratorQrCodeScanner(Context context,
             AccessPoint accessPoint) {
+        if (accessPoint.isPasspoint()) {
+            return false;
+        }
         return isSupportWifiDpp(context, accessPoint.getSecurity());
     }
 
@@ -356,6 +359,9 @@ public class WifiDppUtils {
      */
     public static boolean isSupportConfiguratorQrCodeGenerator(Context context,
             AccessPoint accessPoint) {
+        if (accessPoint.isPasspoint()) {
+            return false;
+        }
         return isSupportZxing(context, accessPoint.getSecurity());
     }
 

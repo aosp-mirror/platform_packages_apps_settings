@@ -99,22 +99,23 @@ public class DataUsageList extends DataUsageBaseFragment {
                 }
             };
 
-    private ChartDataUsagePreference mChart;
-    private TelephonyManager mTelephonyManager;
-
     @VisibleForTesting
     NetworkTemplate mTemplate;
     @VisibleForTesting
     int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     @VisibleForTesting
     int mNetworkType;
+    @VisibleForTesting
+    Spinner mCycleSpinner;
+    @VisibleForTesting
+    LoadingViewController mLoadingViewController;
+
+    private ChartDataUsagePreference mChart;
+    private TelephonyManager mTelephonyManager;
     private List<NetworkCycleChartData> mCycleData;
     private ArrayList<Long> mCycles;
-
-    private LoadingViewController mLoadingViewController;
     private UidDetailProvider mUidDetailProvider;
     private CycleAdapter mCycleAdapter;
-    private Spinner mCycleSpinner;
     private Preference mUsageAmount;
     private PreferenceGroup mApps;
     private View mHeader;
@@ -158,6 +159,7 @@ public class DataUsageList extends DataUsageBaseFragment {
                     .launch();
         });
         mCycleSpinner = mHeader.findViewById(R.id.filter_spinner);
+        mCycleSpinner.setVisibility(View.GONE);
         mCycleAdapter = new CycleAdapter(mCycleSpinner.getContext(), new SpinnerInterface() {
             @Override
             public void setAdapter(CycleAdapter cycleAdapter) {
@@ -276,7 +278,8 @@ public class DataUsageList extends DataUsageBaseFragment {
      * Update chart sweeps and cycle list to reflect {@link NetworkPolicy} for
      * current {@link #mTemplate}.
      */
-    private void updatePolicy() {
+    @VisibleForTesting
+    void updatePolicy() {
         final NetworkPolicy policy = services.mPolicyEditor.getPolicy(mTemplate);
         final View configureButton = mHeader.findViewById(R.id.filter_settings);
         //SUB SELECT
@@ -486,7 +489,8 @@ public class DataUsageList extends DataUsageBaseFragment {
         }
     };
 
-    private final LoaderCallbacks<List<NetworkCycleChartData>> mNetworkCycleDataCallbacks =
+    @VisibleForTesting
+    final LoaderCallbacks<List<NetworkCycleChartData>> mNetworkCycleDataCallbacks =
             new LoaderCallbacks<List<NetworkCycleChartData>>() {
         @Override
         public Loader<List<NetworkCycleChartData>> onCreateLoader(int id, Bundle args) {
@@ -503,6 +507,7 @@ public class DataUsageList extends DataUsageBaseFragment {
             mCycleData = data;
             // calculate policy cycles based on available data
             updatePolicy();
+            mCycleSpinner.setVisibility(View.VISIBLE);
         }
 
         @Override

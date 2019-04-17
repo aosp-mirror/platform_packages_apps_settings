@@ -13,17 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:width="24dp"
-        android:height="24dp"
-        android:viewportWidth="24.0"
-        android:viewportHeight="24.0"
-        android:tint="?android:attr/colorAccent">
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M16.67,4H14.5V2h-5v2H7.33C6.6,4 6,4.6 6,5.33V15v5.67C6,21.4 6.6,22 7.33,22h9.33C17.4,22 18,21.4 18,20.67V15V5.33C18,4.6 17.4,4 16.67,4zM16,15v5H8v-5V6h8V15z"/>
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M15,12l-2,0l0,-2l-2,0l0,2l-2,0l0,2l2,0l0,2l2,0l0,-2l2,0z"/>
-</vector>
+<com.android.settings.widget.TintDrawable
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_battery_status_bad_24dp"
+    android:tint="?android:attr/colorAccent" />

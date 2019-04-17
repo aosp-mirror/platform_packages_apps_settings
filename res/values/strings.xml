@@ -2791,7 +2791,7 @@
     <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
     <string name="display_white_balance_title">Display white balance</string>
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
-    <string name="adaptive_sleep_title">Screen aware</string>
+    <string name="adaptive_sleep_title">Screen attention</string>
     <!-- Setting option summary when adaptive sleep is on [CHAR LIMIT=NONE] -->
     <string name="adaptive_sleep_summary_on">On / Screen won’t turn off if you’re looking at it</string>
     <!-- Setting option summary when adaptive sleep is off [CHAR LIMIT=NONE] -->
@@ -2799,7 +2799,7 @@
     <!-- Description about the feature adaptive sleep [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_description">Prevents your screen from turning off if you’re looking at it.</string>
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
-    <string name="adaptive_sleep_privacy">Screen aware uses the front camera to see if someone is looking at the screen. It works on device, and images are never stored or sent to Google.</string>
+    <string name="adaptive_sleep_privacy">Screen attention uses the front camera to see if someone is looking at the screen. It works on device, and images are never stored or sent to Google.</string>
 
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
@@ -9900,16 +9900,13 @@
     <string name="demo_mode">System UI demo mode</string>
 
     <!-- [CHAR LIMIT=60] Name of setting that changes the UI to dark -->
-    <string name="dark_ui_mode">Theme</string>
-
-    <!-- [CHAR LIMIT=60] Name of dev option that changes the color of the UI -->
-    <string name="dark_ui_mode_title">Choose Theme</string>
-
-    <!-- [CHAR_LIMIT=NONE] Summary that is shown in the footer when light mode is selected -->
-    <string name="dark_ui_settings_light_summary">This setting also applies to apps</string>
+    <string name="dark_ui_mode">Dark Theme</string>
 
     <!-- [CHAR_LIMIT=NONE] Summary that is shown in the footer when dark mode is selected -->
     <string name="dark_ui_settings_dark_summary">Supported apps will also switch to dark theme</string>
+
+    <!-- [CHAR_LIMIT=40] Positive button text in dark theme notification -->
+    <string name="dark_ui_settings_dialog_acknowledge">Got it</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
@@ -11025,12 +11022,12 @@
     <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
 
-    <!-- Keywords for Content Capture / Smart Suggestions feature [CHAR_LIMIT=none] -->
-    <string name="keywords_content_capture">content capture, smart suggestions</string>
+    <!-- Keywords for Content Capture feature [CHAR_LIMIT=none] -->
+    <string name="keywords_content_capture">content capture</string>
     <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
-    <string name="content_capture">Smart Suggestions</string>
-    <!-- Description of the 'Content Capture / Smart Suggestions' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
-    <string name="content_capture_summary">Allow Android to save information seen on your screen or heard in video or audio content. Android makes helpful suggestions based on your device activity.</string>
+    <string name="content_capture">Content Capture</string>
+    <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
+    <string name="content_capture_summary">Allow apps to send content to the Android system</string>
 
     <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capture_system_heap_dump_title">Capture system heap dump</string>
