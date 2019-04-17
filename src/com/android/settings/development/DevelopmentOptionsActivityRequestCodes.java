@@ -25,4 +25,6 @@ public interface DevelopmentOptionsActivityRequestCodes {
     int REQUEST_CODE_DEBUG_APP = 1;
 
     int REQUEST_MOCK_LOCATION_APP = 2;
+
+    int REQUEST_CODE_GUP_DEV_OPT_IN_APPS = 6;
 }
