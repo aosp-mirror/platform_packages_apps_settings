@@ -52,7 +52,8 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
+        return (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
+                || mSavedDockUpdater != null)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
