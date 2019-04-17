@@ -44,7 +44,7 @@ public abstract class SliderPreferenceController extends BasePreferenceControlle
     }
 
     /**
-     * @return the value of the Slider's position based on the range: [0, maxSteps).
+     * @return the value of the Slider's position based on the range: [min, max].
      */
     public abstract int getSliderPosition();
 
@@ -57,9 +57,14 @@ public abstract class SliderPreferenceController extends BasePreferenceControlle
     public abstract boolean setSliderPosition(int position);
 
     /**
-     * @return the number of steps supported by the slider.
+     * @return the maximum value supported by the slider.
      */
-    public abstract int getMaxSteps();
+    public abstract int getMax();
+
+    /**
+     * @return the minimum value supported by the slider.
+     */
+    public abstract int getMin();
 
     @Override
     public int getSliceType() {

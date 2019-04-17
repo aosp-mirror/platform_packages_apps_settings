@@ -41,7 +41,8 @@ public class SettingsSliderPreferenceControllerTest {
                 "key");
 
         mPreference.setContinuousUpdates(true);
-        mPreference.setMax(mSliderController.getMaxSteps());
+        mPreference.setMin(mSliderController.getMin());
+        mPreference.setMax(mSliderController.getMax());
     }
 
     @Test
@@ -89,8 +90,13 @@ public class SettingsSliderPreferenceControllerTest {
         }
 
         @Override
-        public int getMaxSteps() {
+        public int getMax() {
             return MAX_STEPS;
+        }
+
+        @Override
+        public int getMin() {
+            return 0;
         }
 
         @Override

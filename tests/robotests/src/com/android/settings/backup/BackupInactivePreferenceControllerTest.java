@@ -31,8 +31,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import static com.android.settings.backup.UserBackupSettingsActivityTest.ShadowBackupSettingsHelper;
+
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowPrivacySettingsUtils.class})
+@Config(shadows = {ShadowPrivacySettingsUtils.class, ShadowBackupSettingsHelper.class})
 public class BackupInactivePreferenceControllerTest {
     private Context mContext;
     private BackupInactivePreferenceController mController;
@@ -48,18 +50,32 @@ public class BackupInactivePreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowPrivacySettingsUtils.reset();
+        ShadowBackupSettingsHelper.reset();
     }
 
     @Test
-    public void getAvailabilityStatus_isnotInvisibleKey_shouldBeAvailable() {
+    public void getAvailabilityStatus_isnotInvisibleKey_showBackup_shouldBeAvailable() {
         ShadowPrivacySettingsUtils.setIsInvisibleKey(false);
+        ShadowBackupSettingsHelper.showBackupSettingsForUser = true;
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
+    public void getAvailabilityStatus_isnotInvisibleKey_dontShowBackup_shouldBeUnsearchable() {
+        ShadowPrivacySettingsUtils.setIsInvisibleKey(false);
+        ShadowBackupSettingsHelper.showBackupSettingsForUser = false;
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+    }
+
+    @Test
     public void getAvailabilityStatus_isInvisibleKey_shouldBeDisabledUnsupported() {
         ShadowPrivacySettingsUtils.setIsInvisibleKey(true);
+        ShadowBackupSettingsHelper.showBackupSettingsForUser = true;
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }

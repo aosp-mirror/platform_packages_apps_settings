@@ -92,11 +92,19 @@ public abstract class VolumeSeekBarPreferenceController extends
     }
 
     @Override
-    public int getMaxSteps() {
+    public int getMax() {
         if (mPreference != null) {
             return mPreference.getMax();
         }
         return mHelper.getMaxVolume(getAudioStream());
+    }
+
+    @Override
+    public int getMin() {
+        if (mPreference != null) {
+            return mPreference.getMin();
+        }
+        return mHelper.getMinVolume(getAudioStream());
     }
 
     protected abstract int getAudioStream();

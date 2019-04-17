@@ -4,6 +4,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
 import com.android.settingslib.wifi.AccessPoint;
@@ -38,6 +39,18 @@ public class WifiDialogTest {
 
         WifiDialog wifiDialog = new WifiDialog(mContext, mListener, mockAccessPoint,
                 WifiConfigUiBase.MODE_CONNECT, 0 /* style */, false /* hideSubmitButton */);
+        assertThat(modal.getContext().getThemeResId())
+                .isEqualTo(wifiDialog.getContext().getThemeResId());
+    }
+
+    @Test
+    public void createModal_whenSetTheme_shouldBeCustomizedTheme() {
+        WifiDialog modal = WifiDialog.createModal(mContext, mListener, mockAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light);
+
+        WifiDialog wifiDialog = new WifiDialog(mContext, mListener, mockAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light,
+                        false /* hideSubmitButton */);
         assertThat(modal.getContext().getThemeResId())
                 .isEqualTo(wifiDialog.getContext().getThemeResId());
     }

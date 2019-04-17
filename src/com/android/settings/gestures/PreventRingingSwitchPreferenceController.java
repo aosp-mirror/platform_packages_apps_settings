@@ -102,8 +102,15 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        final int preventRingingSetting = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_VIBRATE);
+        final int newRingingSetting = preventRingingSetting == Settings.Secure.VOLUME_HUSH_OFF
+                ? Settings.Secure.VOLUME_HUSH_VIBRATE
+                : preventRingingSetting;
+
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.VOLUME_HUSH_GESTURE, isChecked ? Settings.Secure.VOLUME_HUSH_VIBRATE
+                Settings.Secure.VOLUME_HUSH_GESTURE, isChecked
+                        ? newRingingSetting
                         : Settings.Secure.VOLUME_HUSH_OFF);
     }
 

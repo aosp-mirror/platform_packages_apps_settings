@@ -18,12 +18,16 @@ package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.Parcelable;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -39,9 +43,10 @@ public class SeekBarPreferenceTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
 
-        mSeekBarPreference = new SeekBarPreference(mContext);
+        mSeekBarPreference = spy(new SeekBarPreference(mContext));
         mSeekBarPreference.setMax(MAX);
         mSeekBarPreference.setMin(MIN);
         mSeekBarPreference.setProgress(PROGRESS);
@@ -58,5 +63,19 @@ public class SeekBarPreferenceTest {
         assertThat(preference.getMax()).isEqualTo(MAX);
         assertThat(preference.getMin()).isEqualTo(MIN);
         assertThat(preference.getProgress()).isEqualTo(PROGRESS);
+    }
+
+    @Test
+    public void isSelectable_disabledByAdmin_returnTrue() {
+        when(mSeekBarPreference.isDisabledByAdmin()).thenReturn(true);
+
+        assertThat(mSeekBarPreference.isSelectable()).isTrue();
+    }
+
+    @Test
+    public void isSelectable_notDisabledByAdmin_returnFalse() {
+        when(mSeekBarPreference.isDisabledByAdmin()).thenReturn(false);
+
+        assertThat(mSeekBarPreference.isSelectable()).isFalse();
     }
 }

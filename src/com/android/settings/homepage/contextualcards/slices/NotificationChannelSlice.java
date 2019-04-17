@@ -154,16 +154,12 @@ public class NotificationChannelSlice implements CustomSliceable {
         // TODO(b/123065955): Review latency of NotificationChannelSlice
         final List<PackageInfo> multiChannelPackages = getMultiChannelPackages(
                 getRecentlyInstalledPackages());
-        final PackageInfo packageInfo = getMaxSentNotificationsPackage(multiChannelPackages);
-
-        // Return a header with IsError flag, if package is not found.
-        if (packageInfo == null) {
+        mPackageName = getMaxSentNotificationsPackage(multiChannelPackages);
+        if (mPackageName == null) {
+            // Return a header with IsError flag, if package is not found.
             return listBuilder.setHeader(getNoSuggestedAppHeader())
                     .setIsError(true).build();
         }
-
-        // Save eligible package name and its uid, they will be used in getIntent().
-        mPackageName = packageInfo.packageName;
         mUid = getApplicationUid(mPackageName);
 
         // Add notification channel header.
@@ -177,7 +173,7 @@ public class NotificationChannelSlice implements CustomSliceable {
                 .setPrimaryAction(getPrimarySliceAction(icon, title, getIntent())));
 
         // Add notification channel rows.
-        final List<ListBuilder.RowBuilder> rows = getNotificationChannelRows(packageInfo, icon);
+        final List<ListBuilder.RowBuilder> rows = getNotificationChannelRows(icon);
         for (ListBuilder.RowBuilder rowBuilder : rows) {
             listBuilder.addRow(rowBuilder);
         }
@@ -282,8 +278,7 @@ public class NotificationChannelSlice implements CustomSliceable {
                 .setPrimaryAction(primarySliceActionForNoSuggestedApp);
     }
 
-    private List<ListBuilder.RowBuilder> getNotificationChannelRows(PackageInfo packageInfo,
-            IconCompat icon) {
+    private List<ListBuilder.RowBuilder> getNotificationChannelRows(IconCompat icon) {
         final List<ListBuilder.RowBuilder> notificationChannelRows = new ArrayList<>();
         final List<NotificationChannel> displayableChannels = getDisplayableChannels(mAppRow);
 
@@ -388,14 +383,14 @@ public class NotificationChannelSlice implements CustomSliceable {
                 .collect(Collectors.toList());
     }
 
-    private PackageInfo getMaxSentNotificationsPackage(List<PackageInfo> packageInfoList) {
+    private String getMaxSentNotificationsPackage(List<PackageInfo> packageInfoList) {
         if (packageInfoList.isEmpty()) {
             return null;
         }
 
         // Get the package which has sent at least ~10 notifications and not turn off channels.
         int maxSentCount = 0;
-        PackageInfo maxSentCountPackage = null;
+        String maxSentCountPackage = null;
         for (PackageInfo packageInfo : packageInfoList) {
             final NotificationBackend.AppRow appRow = mNotificationBackend.loadAppRow(mContext,
                     mContext.getPackageManager(), packageInfo);
@@ -408,7 +403,7 @@ public class NotificationChannelSlice implements CustomSliceable {
             final int sentCount = appRow.sentByApp.sentCount;
             if (sentCount >= MIN_NOTIFICATION_SENT_COUNT && sentCount > maxSentCount) {
                 maxSentCount = sentCount;
-                maxSentCountPackage = packageInfo;
+                maxSentCountPackage = packageInfo.packageName;
                 mAppRow = appRow;
             }
         }

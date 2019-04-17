@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static android.app.slice.Slice.HINT_ERROR;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
@@ -112,6 +114,14 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         sliceLiveData.observe(mLifecycleOwner, slice -> {
             if (slice == null) {
                 Log.w(TAG, "Slice is null");
+                mContext.getContentResolver().notifyChange(CardContentProvider.REFRESH_CARD_URI,
+                        null);
+                return;
+            }
+
+            if (slice.hasHint(HINT_ERROR)) {
+                Log.w(TAG, "Slice has HINT_ERROR, skipping rendering. uri=" + slice.getUri());
+                mSliceLiveDataMap.get(slice.getUri()).removeObservers(mLifecycleOwner);
                 mContext.getContentResolver().notifyChange(CardContentProvider.REFRESH_CARD_URI,
                         null);
                 return;

@@ -18,8 +18,6 @@ package com.android.settings.notification;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
-import static com.android.settings.notification.ZenModeSoundSettingsPreferenceController.ZEN_MODE_KEY;
-
 import android.annotation.ColorInt;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -46,6 +44,8 @@ import com.android.settings.slices.SliceBuilderUtils;
 public class ZenModeSliceBuilder {
 
     private static final String TAG = "ZenModeSliceBuilder";
+
+    private static final String ZEN_MODE_SLICE_KEY = ZenModeButtonPreferenceController.KEY;
 
     /**
      * Action notifying a change on the Zen Mode Slice.
@@ -78,7 +78,8 @@ public class ZenModeSliceBuilder {
         final PendingIntent primaryAction = getPrimaryAction(context);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction,
                 (IconCompat) null /* icon */, ListBuilder.ICON_IMAGE, title);
-        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction, null /* actionTitle */,
+        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
+                null /* actionTitle */,
                 isZenModeEnabled);
 
         return new ListBuilder(context, CustomSliceRegistry.ZEN_MODE_SLICE_URI,
@@ -110,10 +111,10 @@ public class ZenModeSliceBuilder {
     }
 
     public static Intent getIntent(Context context) {
-        final Uri contentUri = new Uri.Builder().appendPath(ZEN_MODE_KEY).build();
+        final Uri contentUri = new Uri.Builder().appendPath(ZEN_MODE_SLICE_KEY).build();
         final String screenTitle = context.getText(R.string.zen_mode_settings_title).toString();
         return SliceBuilderUtils.buildSearchResultPageIntent(context,
-                ZenModeSettings.class.getName(), ZEN_MODE_KEY, screenTitle,
+                ZenModeSettings.class.getName(), ZEN_MODE_SLICE_KEY, screenTitle,
                 SettingsEnums.NOTIFICATION_ZEN_MODE)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);

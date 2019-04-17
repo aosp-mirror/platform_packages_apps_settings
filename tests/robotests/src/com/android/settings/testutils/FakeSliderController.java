@@ -25,7 +25,7 @@ public class FakeSliderController extends SliderPreferenceController {
 
     public static final String AVAILABILITY_KEY = "fake_slider_availability_key";
 
-    public static final int MAX_STEPS = 9;
+    public static final int MAX_VALUE = 9;
 
     private static final String SETTING_KEY = "fake_slider_key";
 
@@ -44,8 +44,13 @@ public class FakeSliderController extends SliderPreferenceController {
     }
 
     @Override
-    public int getMaxSteps() {
-        return MAX_STEPS;
+    public int getMax() {
+        return MAX_VALUE;
+    }
+
+    @Override
+    public int getMin() {
+        return 0;
     }
 
     @Override

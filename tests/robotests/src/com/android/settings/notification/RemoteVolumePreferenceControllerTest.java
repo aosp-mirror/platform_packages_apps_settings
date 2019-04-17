@@ -29,10 +29,12 @@ import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -50,9 +52,9 @@ public class RemoteVolumePreferenceControllerTest {
     private MediaSessionManager mMediaSessionManager;
     @Mock
     private MediaController mMediaController;
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private ISessionController mStub;
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private ISessionController mStub2;
     private MediaSession.Token mToken;
     private MediaSession.Token mToken2;
@@ -78,22 +80,30 @@ public class RemoteVolumePreferenceControllerTest {
         mPlaybackInfo = new MediaController.PlaybackInfo(
                 MediaController.PlaybackInfo.PLAYBACK_TYPE_REMOTE, 0, MAX_POS, CURRENT_POS, null);
         when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getSessionToken()).thenReturn(mToken);
     }
 
     @Test
-    public void isAvailable_containRemoteMedia_returnTrue() {
+    public void getActiveRemoteToken_containRemoteMedia_returnToken() {
         when(mMediaController.getPlaybackInfo()).thenReturn(
                 new MediaController.PlaybackInfo(MediaController.PlaybackInfo.PLAYBACK_TYPE_REMOTE,
                         0, 0, 0, null));
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getActiveRemoteToken(mContext)).isEqualTo(mToken);
     }
 
     @Test
-    public void isAvailable_noRemoteMedia_returnFalse() {
+    public void getActiveRemoteToken_noRemoteMedia_returnNull() {
         when(mMediaController.getPlaybackInfo()).thenReturn(
                 new MediaController.PlaybackInfo(MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL,
                         0, 0, 0, null));
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getActiveRemoteToken(mContext)).isNull();
+    }
+
+    @Test
+    public void isAvailable_returnAvailableUnsearchable() {
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
@@ -122,17 +132,31 @@ public class RemoteVolumePreferenceControllerTest {
     }
 
     @Test
-    public void getMaxSteps_controllerNull_returnZero() {
+    public void getMinValue_controllerNull_returnZero() {
         mController.mMediaController = null;
 
-        assertThat(mController.getMaxSteps()).isEqualTo(0);
+        assertThat(mController.getMin()).isEqualTo(0);
     }
 
     @Test
-    public void getMaxSteps_controllerExists_returnValue() {
+    public void getMinValue_controllerExists_returnValue() {
         mController.mMediaController = mMediaController;
 
-        assertThat(mController.getMaxSteps()).isEqualTo(MAX_POS);
+        assertThat(mController.getMin()).isEqualTo(0);
+    }
+
+    @Test
+    public void getMaxValue_controllerNull_returnZero() {
+        mController.mMediaController = null;
+
+        assertThat(mController.getMax()).isEqualTo(0);
+    }
+
+    @Test
+    public void getMaxValue_controllerExists_returnValue() {
+        mController.mMediaController = mMediaController;
+
+        assertThat(mController.getMax()).isEqualTo(MAX_POS);
     }
 
     @Test

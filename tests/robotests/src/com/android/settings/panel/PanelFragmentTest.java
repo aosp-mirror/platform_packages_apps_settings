@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,12 +82,16 @@ public class PanelFragmentTest {
     }
 
     @Test
-    public void onCreateView_adapterGetsDataset() {
+    public void onCreateView_countdownLatch_setup() {
         mPanelFragment.onCreateView(LayoutInflater.from(mContext),
                 new LinearLayout(mContext), null);
-        PanelSlicesAdapter adapter = mPanelFragment.mAdapter;
+        PanelSlicesLoaderCountdownLatch countdownLatch =
+                mPanelFragment.mPanelSlicesLoaderCountdownLatch;
+        for (Uri sliecUri: mFakePanelContent.getSlices()) {
+            countdownLatch.markSliceLoaded(sliecUri);
+        }
 
-        assertThat(adapter.getData()).containsAllIn(mFakePanelContent.getSlices());
+        assertThat(countdownLatch.isPanelReadyToLoad()).isTrue();
     }
 
     @Test

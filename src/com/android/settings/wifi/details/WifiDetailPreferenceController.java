@@ -404,9 +404,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton3Enabled(true)
                 .setButton4Text(R.string.share)
                 .setButton4Icon(R.drawable.ic_qrcode_24dp)
-                .setButton4OnClickListener(view -> shareNetwork())
-                .setButton4Visible(
-                        WifiDppUtils.isSupportConfiguratorQrCodeGenerator(mContext, mAccessPoint));
+                .setButton4OnClickListener(view -> shareNetwork());
 
         mSignalStrengthPref = screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
         mTxLinkSpeedPref = screen.findPreference(KEY_TX_LINK_SPEED);
@@ -739,14 +737,19 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mButtonsPref.setButton1Text(
                 mIsEphemeral ? R.string.wifi_disconnect_button_text : R.string.forget);
 
-        mButtonsPref.setButton1Visible(canForgetNetwork());
-        mButtonsPref.setButton2Visible(canSignIntoNetwork());
-        mButtonsPref.setButton3Visible(canConnectNetwork());
-        mButtonsPref.setButton4Visible(canShareNetwork());
-        mButtonsPref.setVisible(canSignIntoNetwork()
-                || canForgetNetwork()
-                || canShareNetwork()
-                || canConnectNetwork());
+        boolean canForgetNetwork = canForgetNetwork();
+        boolean canSignIntoNetwork = canSignIntoNetwork();
+        boolean canConnectNetwork = canConnectNetwork();
+        boolean canShareNetwork = canShareNetwork();
+
+        mButtonsPref.setButton1Visible(canForgetNetwork);
+        mButtonsPref.setButton2Visible(canSignIntoNetwork);
+        mButtonsPref.setButton3Visible(canConnectNetwork);
+        mButtonsPref.setButton4Visible(canShareNetwork);
+        mButtonsPref.setVisible(canForgetNetwork
+                || canSignIntoNetwork
+                || canConnectNetwork
+                || canShareNetwork);
     }
 
     private boolean canConnectNetwork() {
@@ -843,7 +846,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Returns whether the user can share the network represented by this preference with QR code.
      */
     private boolean canShareNetwork() {
-        return mAccessPoint.getConfig() != null;
+        return mAccessPoint.getConfig() != null &&
+                WifiDppUtils.isSupportConfiguratorQrCodeGenerator(mContext, mAccessPoint);
     }
 
     /**
