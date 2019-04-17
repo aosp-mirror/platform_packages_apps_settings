@@ -15,8 +15,13 @@ package com.android.settings.display;
 
 import static android.provider.Settings.System.ADAPTIVE_SLEEP;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -27,15 +32,23 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
     private final String SYSTEM_KEY = ADAPTIVE_SLEEP;
     private final int DEFAULT_VALUE = 0;
 
+    private final boolean hasSufficientPermissions;
+
     public AdaptiveSleepPreferenceController(Context context, String key) {
         super(context, key);
+
+        final PackageManager packageManager = mContext.getPackageManager();
+        final String attentionPackage = packageManager.getAttentionServicePackageName();
+        hasSufficientPermissions = attentionPackage != null && packageManager.checkPermission(
+                Manifest.permission.CAMERA, attentionPackage) == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.System.getInt(mContext.getContentResolver(),
+        return hasSufficientPermissions && Settings.System.getInt(mContext.getContentResolver(),
                 SYSTEM_KEY, DEFAULT_VALUE) != DEFAULT_VALUE;
     }
+
 
     @Override
     public boolean setChecked(boolean isChecked) {
@@ -63,5 +76,16 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
         return mContext.getText(isChecked()
                 ? R.string.adaptive_sleep_summary_on
                 : R.string.adaptive_sleep_summary_off);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference preference = screen.findPreference(SYSTEM_KEY);
+
+        if (preference != null) {
+            preference.setEnabled(hasSufficientPermissions);
+        }
+
     }
 }
