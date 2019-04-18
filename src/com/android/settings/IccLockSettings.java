@@ -68,7 +68,7 @@ import com.android.internal.telephony.TelephonyIntents;
 public class IccLockSettings extends SettingsPreferenceFragment
         implements EditPinPreference.OnPinEnteredListener {
     private static final String TAG = "IccLockSettings";
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
 
     private static final int OFF_MODE = 0;
     // State when enabling/disabling ICC lock

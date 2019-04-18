@@ -52,7 +52,7 @@ public class NightDisplayTimeFormatter {
         return context.getString(summaryFormatResId, getAutoModeSummary(context, manager));
     }
 
-    private String getAutoModeSummary(Context context, ColorDisplayManager manager) {
+    public String getAutoModeSummary(Context context, ColorDisplayManager manager) {
         final boolean isActivated = manager.isNightDisplayActivated();
         final int autoMode = manager.getNightDisplayAutoMode();
         if (autoMode == ColorDisplayManager.AUTO_MODE_CUSTOM_TIME) {

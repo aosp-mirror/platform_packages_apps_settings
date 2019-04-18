@@ -210,6 +210,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"El puerto que has escrito no es válido."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"El navegador usa el proxy HTTP, pero tal vez las demás aplicaciones no lo usen."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"URL config. autom. proxy: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"ID secundario actual:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"ID secundario de la SIM de datos predeterminada:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Ancho de banda de DL (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Ancho de banda de UL (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Información sobre la ubicación del teléfono (no disponible):"</string>
@@ -232,6 +234,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Seleccionar banda de radio"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Tipo de red de voz:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Tipo de red de datos:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Seleccionar guía telefónica"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Establecer el tipo de red preferida:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Hacer ping a IPv4 de nombre de host (www.google.com):"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Hacer ping a IPv6 de nombre de host (www.google.com):"</string>
@@ -596,19 +599,19 @@
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Desactivar el bloqueo de pantalla"</string>
     <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"¿Deseas quitar la protección del dispositivo?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="5507136301904313583">"¿Quieres quitar la protección del perfil?"</string>
-    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Las funciones de protección del dispositivo no funcionarán sin el patrón."</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Las funciones de protección del dispositivo no estarán disponibles sin el patrón."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2986105377420905314">"Las funciones de protección del dispositivo no podrán usarse sin tu patrón.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>También se quitarán las huellas digitales guardadas del dispositivo, por lo que no podrás usarlas para desbloquear el teléfono, autorizar compras ni acceder a las apps."</string>
-    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Las funciones de protección del dispositivo no funcionarán sin el PIN."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Las funciones de protección del dispositivo no estarán disponibles sin el PIN."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="3370462835533123695">"Las funciones de protección del dispositivo no podrán usarse sin tu PIN.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>También se quitarán las huellas digitales guardadas del dispositivo, por lo que no podrás usarlas para desbloquear el teléfono, autorizar compras ni acceder a las apps."</string>
-    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Las funciones de protección del dispositivo no funcionarán sin la contraseña."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Las funciones de protección del dispositivo no estarán disponibles sin la contraseña."</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="3595476296430536798">"Las funciones de protección del dispositivo no podrán usarse sin tu contraseña.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>También se quitarán las huellas digitales guardadas del dispositivo, por lo que no podrás usarlas para desbloquear el teléfono, autorizar compras ni acceder a las apps."</string>
-    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Las funciones de protección del dispositivo no funcionarán sin el bloqueo de pantalla."</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Las funciones de protección del dispositivo no estarán disponibles sin el bloqueo de pantalla."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="3679351662094349506">"Las funciones de protección del dispositivo no podrán usarse sin el bloqueo de pantalla.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>También se quitarán las huellas digitales guardadas del dispositivo, por lo que no podrás usarlas para desbloquear el teléfono, autorizar compras ni acceder a las apps."</string>
@@ -979,6 +982,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Red Wi‑Fi del proveedor"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Conectarse mediante <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Para mejorar la precisión de la ubicación y para otros fines, <xliff:g id="APP_NAME">%1$s</xliff:g> quiere activar la búsqueda de redes, incluso cuando la conexión Wi-Fi esté desactivada.\n\n¿Quieres permitir esto para todas las aplicaciones que deseen buscar redes?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Para mejorar la precisión de la ubicación y otros fines, una app desconocida quiere activar la búsqueda de redes aunque el Wi‑Fi esté desactivado.\n\n¿Permitir que todas las apps puedan hacerlo?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Para desactivar la opción, accede a la sección Avanzada del menú ampliado."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Permitir"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Denegar"</string>
@@ -1203,11 +1207,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimiza el nivel de brillo según la luz disponible. También puedes ajustarlo temporalmente."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"El brillo de la pantalla se ajustará automáticamente según el entorno y las actividades que hagas. Puedes mover el control deslizante para que la función de brillo automático reconozca tus preferencias."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Mostrar balance de blancos"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"Pantalla adaptable"</string>
+    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
+    <skip />
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Activado: No se apagará la pantalla si estás mirándola"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Desactivada"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Evita que se apague la pantalla si estás mirándola."</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"Esta opción usa la cámara frontal para detectar si hay alguien mirando la pantalla. Funciona en el dispositivo, y no se almacenan las imágenes ni se envían a Google."</string>
+    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
+    <skip />
     <string name="night_display_title" msgid="2626451512200357686">"Luz nocturna"</string>
     <string name="night_display_text" msgid="1837277457033025056">"La Luz nocturna le da un tono ámbar a tu pantalla. No solo te permitirá ver o leer mejor en lugares con luz tenue, sino que también podría ayudarte a conciliar el sueño más rápido."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Programa"</string>
@@ -1233,11 +1239,11 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Activar hasta la(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Desactivar hasta la(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Luz nocturna no activada ahora"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"Suspender"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Tiempo de espera de la pant."</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Cuando se apaga la pantalla"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Después de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fondo de pantalla"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"Estilos y fondos de pantalla"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"Estilos y fondos de pantalla"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"Predeterminado"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Personalizado"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Cambiar fondo de pantalla"</string>
@@ -1752,7 +1758,7 @@
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Presiona Menú para obtener ayuda."</string>
     <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Levanta el dedo cuando termines."</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Une al menos <xliff:g id="NUMBER">%d</xliff:g> puntos. Vuelve a intentarlo."</string>
-    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Patrón grabado"</string>
+    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Patrón registrado"</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Vuelve a trazar el patrón para confirmar."</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Patrón de desbloqueo nuevo"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Confirmar"</string>
@@ -2283,9 +2289,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"La tablet se usó más de lo habitual"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"El dispositivo se usó más de lo habitual"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"La batería podría agotarse antes de lo habitual."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"El teléfono se usó más de lo habitual. La batería podría agotarse antes de lo esperado.\n\nEstas son las apps con mayor consumo desde la última carga:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"La tablet se usó más de lo habitual. La batería podría agotarse antes de lo esperado.\n\nEstas son las apps con mayor consumo desde la última carga:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"El dispositivo se usó más de lo habitual. La batería podría agotarse antes de lo esperado.\n\nEstas son las apps con mayor consumo desde la última carga:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"El teléfono se usó más de lo habitual. Es posible que la batería se agote antes de lo esperado.\n\nEstas son las apps que más batería consumen:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"La tablet se usó más de lo habitual. Es posible que la batería se agote antes de lo esperado.\n\nEstas son las apps que más batería consumen:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"El dispositivo se usó más de lo habitual. Es posible que la batería se agote antes de lo esperado.\n\nEstas son las apps que más batería consumen:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Incluye actividad en segundo plano de alta potencia"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Restringir %1$d apps</item>
@@ -2759,7 +2765,7 @@
     <string name="vpn_not_used" msgid="9094191054524660891">"(no se utiliza)"</string>
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(no verificar el servidor)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(recibido desde el servidor)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Este tipo de VPN no puede permanecer conectado todo el tiempo"</string>
+    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Este tipo de VPN no puede permanecer conectada todo el tiempo"</string>
     <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"VPN siempre activada solo es compatible con direcciones de servidor numéricas"</string>
     <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"Debe especificarse un servidor DNS para VPN siempre activada"</string>
     <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"Las direcciones de servidor DNS deben ser numéricas para VPN siempre activada"</string>
@@ -3302,7 +3308,7 @@
     <string name="asst_capability_prioritizer_title" msgid="1008391045235540115">"Priorización automática de notificaciones"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"Silenciar automáticamente y bajar de nivel las notificaciones menos importantes"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Respuestas y acciones inteligentes"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"Agregar automáticamente acciones para notificacions contextuales y respuestas rápidas a notificaciones"</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"Agregar automáticamente acciones para notificaciones contextuales y respuestas rápidas a notificaciones"</string>
     <string name="hide_silent_icons_title" msgid="2378514357635207742">"Ocultar íconos de estado de notificaciones silenciosas"</string>
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Ocultar íconos para notificaciones silenciosas en la barra de estado"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Activar puntos de notificación"</string>
@@ -3761,7 +3767,7 @@
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Utilizar la captura de pantalla"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Permitir que la aplicación de asistencia acceda a una imagen de la pantalla"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Iluminar pantalla"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"Iluminar los bordes de la pantalla cuando la app de asistencia accede al texto desde la pantalla o una captura de pantalla"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"Iluminar los bordes de la pantalla cuando la app de asistencia acceda al texto desde la pantalla o una captura de pantalla"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Las aplicaciones de asistencia pueden brindarte ayuda en función de la pantalla que estás viendo. Para ofrecerte asistencia integrada, algunas aplicaciones son compatibles con los servicios de selector y entrada de voz."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Uso promedio de la memoria"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Uso máximo de la memoria"</string>
@@ -3860,7 +3866,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Almacenamiento interno: <xliff:g id="PERCENTAGE">%1$s</xliff:g> en uso (<xliff:g id="FREE_SPACE">%2$s</xliff:g> libre)"</string>
     <string name="display_summary" msgid="6737806235882127328">"Suspender después de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fondo de pantalla, suspender, tamaño de fuente"</string>
-    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"Estilos y fondos de pantalla, suspender, tamaño de fuente"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Estilos, fondos de pantalla, tiempo de espera y tamaño de fuente"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Suspender, tamaño de fuente"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Suspender después de 10 minutos de inactividad"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Se usó un promedio de <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memoria"</string>
@@ -4072,10 +4078,11 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Conectado a <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Conectado a varios dispositivos"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Modo demostración de la IU del sistema"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"Tema"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"Elegir tema"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"Esta configuración también afecta a las apps"</string>
+    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
+    <skip />
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Las apps compatibles también se cambiarán a tema oscuro"</string>
+    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
+    <skip />
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Mosaicos de configuración rápida para programadores"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Seguimiento de Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Sensores desactivados"</string>
@@ -4506,9 +4513,10 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Ubicación"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Es posible que tu proveedor de servicios recopile información sobre tu ubicación para brindar este servicio.\n\nRevisa su política de privacidad."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Es posible que pierdas acceso a los datos o al tiempo restantes. Consúltalo con tu proveedor antes de quitarlo."</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"captura de contenido, sugerencias inteligentes"</string>
-    <string name="content_capture" msgid="4486543205504396210">"Sugerencias inteligentes"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"Permite que Android guarde información que ve en tu pantalla o que escucha en un video o contenido de audio. Android te brinda sugerencias útiles en función de la actividad de tu dispositivo."</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"captura de contenido"</string>
+    <string name="content_capture" msgid="6456873729933463600">"Captura de contenido"</string>
+    <!-- no translation found for content_capture_summary (659506647507221852) -->
+    <skip />
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"Capturar volcado del pila del sistema"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"Capturando volcado del montón del sistema"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"No se pudo capturar el volcado de pila del sistema"</string>

@@ -33,13 +33,11 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     static final int OFF = 1;
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_power_video";
-    private final String mDoubleTapPowerKey;
 
     private final String SECURE_KEY = CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 
     public DoubleTapPowerPreferenceController(Context context, String key) {
         super(context, key);
-        mDoubleTapPowerKey = key;
     }
 
     public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {

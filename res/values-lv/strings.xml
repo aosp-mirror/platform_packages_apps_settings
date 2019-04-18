@@ -211,6 +211,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Ierakstītais porta numurs nav derīgs."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP starpniekserveris tiek izmantots pārlūkprogrammā, taču, iespējams, netiek izmantots citās lietotnēs."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Pašreizējais papildu ID:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Noklusējuma datu SIM kartes papildu ID:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"DL joslas platums (kb/s):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"UL joslas platums (kb/s):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Mobilā tālruņa atrašanās vietas informācija (novecojusi):"</string>
@@ -233,6 +235,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Atlasīt radio frekvenču joslu"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Balss pakalpojumu tīkla veids:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Datu tīkla veids:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Atlasiet tālruņa kodu"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Iestatiet ieteicamo tīkla veidu:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ehotestēšanas saimniekdatora nosaukuma (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ehotestēšanas saimniekdatora nosaukuma (www.google.com) IPv6:"</string>
@@ -995,6 +998,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Mobilo sakaru operatora Wi‑Fi tīkls"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Izveidojiet savienojumu, izmantojot <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Lai uzlabotu atrašanās vietu noteikšanas precizitāti, kā arī citas funkcijas, lietotnē <xliff:g id="APP_NAME">%1$s</xliff:g> tiek pieprasīts ieslēgt tīkla skenēšanu, pat ja Wi-Fi savienojums ir izslēgts.\n\nVai atļaut šo darbību visām lietotnēm, kurās tiek pieprasīta skenēšana?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Atrašanās vietas datu precizitātes uzlabošanas un citos nolūkos nezināma lietotne vēlas ieslēgt tīkla meklēšanu, pat ja Wi-Fi ir izslēgts.\n\nAtļaut šo darbību visām lietotnēm, kuras vēlas meklēt tīklu?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Lai to izslēgtu, pārpildes izvēlnē pārejiet uz sadaļu Papildu."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Atļaut"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Noraidīt"</string>
@@ -1220,11 +1224,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimizēt spilgtumu apgaismojumam. Ja funkcija ieslēgta, tāpat varat īslaicīgi pielāgot spilgtumu."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Ekrāna spilgtums automātiski tiks pielāgots apkārtējai videi un veiktajām darbībām. Lai adaptīvajam spilgtumam iestatītu savas preferences, pārvietojiet slīdni."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Displeja baltās krāsas balanss"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"Atpazīšana ekrānā"</string>
+    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
+    <skip />
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Ieslēgts/ekrāns netiks izslēgts, ja uz to skatīsieties"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Izslēgts"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Ekrāns netiek izslēgts, ja uz to skatāties."</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"Atpazīšanai ekrānā tiek izmantota priekšējā kamera, lai noteiktu, vai kāds skatās uz ekrānu. Šī funkcija darbojas ierīcē, un attēli netiek ne saglabāti, ne nosūtīti uzņēmumam Google."</string>
+    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
+    <skip />
     <string name="night_display_title" msgid="2626451512200357686">"Nakts režīms"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Nakts režīmā ekrāns iekrāsojas dzintara krāsā, lai jums būtu vieglāk skatīties ekrānā un lasīt blāvā apgaismojumā, kā arī vieglāk iemigt."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Ieplānot"</string>
@@ -1250,11 +1256,11 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Ieslēgt līdz <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Izslēgt līdz <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Nakts režīms nav ieslēgts"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"Miega režīms"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Ekrāna taimauts"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekrāns tiek izslēgts"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Pēc <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neaktivitātes"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fona tapete"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"Stili un fona tapetes"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"Stili un fona tapetes"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"Noklusējums"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Pielāgota"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Mainīt fona tapeti"</string>
@@ -2311,9 +2317,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Planšetdators tika izmantots vairāk nekā parasti."</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Ierīce tika izmantota vairāk nekā parasti."</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"Akumulators var izlādēties ātrāk nekā parasti"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"Jūsu tālrunis tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nVisbiežāk izmantotās lietotnes kopš pilnas uzlādes:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"Jūsu planšetdators tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nVisbiežāk izmantotās lietotnes kopš pilnas uzlādes:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"Jūsu ierīce tika izmantota vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nVisbiežāk izmantotās lietotnes kopš pilnas uzlādes:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Jūsu tālrunis tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nLietotnes, kas izmanto visvairāk akumulatora enerģijas:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Jūsu planšetdators tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nLietotnes, kas izmanto visvairāk akumulatora enerģijas:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Jūsu ierīce tika izmantota vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nLietotnes, kas izmanto visvairāk akumulatora enerģijas:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Iekļautas lieljaudas fona darbības"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="zero">Ierobežojiet %1$d lietotnes</item>
@@ -3922,7 +3928,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Iekšējā krātuve: <xliff:g id="PERCENTAGE">%1$s</xliff:g> izmantota, <xliff:g id="FREE_SPACE">%2$s</xliff:g> brīva"</string>
     <string name="display_summary" msgid="6737806235882127328">"Pāriešana miega režīmā, ja <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nav aktivitātes"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fona tapete, miega režīms, fonta lielums"</string>
-    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"Stili un fona tapetes, miega režīms, fonta lielums"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Stili, fona tapetes, ekrāna noildze, fonta lielums"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Miega režīms, fonta lielums"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Miega režīms pēc 10 minūšu neaktivitātes"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Izmantotais atmiņas apjoms: vidēji <xliff:g id="USED_MEMORY">%1$s</xliff:g> no <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
@@ -4140,10 +4146,11 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Izveidots savienojums ar ierīci <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Izveidots savienojums ar vairākām ierīcēm"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Sistēmas lietotāja saskarnes demonstrācijas režīms"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"Motīvs"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"Izvēlēties motīvu"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"Šis iestatījums attiecas arī uz lietotnēm"</string>
+    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
+    <skip />
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Arī lietotnes, kas atbalsta šo režīmu, tiks pārslēgtas uz tumšo motīvu"</string>
+    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
+    <skip />
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Izstrādātāja ātro iestatījumu elementi"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope izsekošana"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Sensori izslēgti"</string>
@@ -4589,9 +4596,10 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Atrašanās vieta"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Pakalpojuma sniedzējs var apkopot jūsu atrašanās informāciju, lai nodrošinātu šo pakalpojumu.\n\nSkatiet pakalpojuma sniedzēja konfidencialitātes politiku."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Iespējams, zaudēsiet piekļuvi atlikušajam laikam vai datiem. Pirms noņemšanas sazinieties ar pakalpojuma sniedzēju."</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"satura uzņēmums, viedie ieteikumi"</string>
-    <string name="content_capture" msgid="4486543205504396210">"Viedie ieteikumi"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"Atļaut operētājsistēmai Android saglabāt informāciju, kas redzama ekrānā vai dzirdama video vai audio saturā. Android sniedz ieteikumus atbilstoši darbībām ierīcē."</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"satura tveršana"</string>
+    <string name="content_capture" msgid="6456873729933463600">"Satura tveršana"</string>
+    <!-- no translation found for content_capture_summary (659506647507221852) -->
+    <skip />
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"Tvert sistēmas kaudzes izrakstu"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"Notiek sistēmas kaudzes izraksta tveršana"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"Neizdevās tvert sistēmas kaudzes izrakstu"</string>
