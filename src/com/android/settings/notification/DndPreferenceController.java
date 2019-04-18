@@ -50,7 +50,7 @@ public class DndPreferenceController extends NotificationPreferenceController
         if (mChannel != null) {
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setDisabledByAdmin(mAdmin);
-            pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
+            pref.setEnabled(!pref.isDisabledByAdmin());
             pref.setChecked(mChannel.canBypassDnd());
         }
     }
