@@ -115,6 +115,8 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
                 update(cachedBluetoothDevice);
             }
+        } else {
+          removeAllDevicesFromPreference();
         }
     }
 

@@ -215,11 +215,14 @@ public class BluetoothDeviceUpdaterTest {
     }
 
     @Test
-    public void forceUpdate_bluetoothDisabled_doNothing() {
+    public void forceUpdate_bluetoothDisabled_removeAllDevicesFromPreference() {
         mShadowBluetoothAdapter.setEnabled(false);
+        mBluetoothDeviceUpdater.mPreferenceMap.put(mBluetoothDevice, mPreference);
+
         mBluetoothDeviceUpdater.forceUpdate();
 
-        verify(mDevicePreferenceCallback, never()).onDeviceAdded(any(Preference.class));
+        verify(mDevicePreferenceCallback).onDeviceRemoved(mPreference);
+        assertThat(mBluetoothDeviceUpdater.mPreferenceMap).isEmpty();
     }
 
     @Test
