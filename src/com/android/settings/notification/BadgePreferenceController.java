@@ -72,7 +72,7 @@ public class BadgePreferenceController extends NotificationPreferenceController
             pref.setDisabledByAdmin(mAdmin);
             if (mChannel != null) {
                 pref.setChecked(mChannel.canShowBadge());
-                pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
+                pref.setEnabled(!pref.isDisabledByAdmin());
             } else {
                 pref.setChecked(mAppRow.showBadge);
             }
