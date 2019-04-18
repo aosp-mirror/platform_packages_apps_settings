@@ -83,7 +83,6 @@ public class NotificationPreferenceControllerTest {
         mController.updateState(mock(Preference.class));
         assertFalse(mController.checkCanBeVisible(IMPORTANCE_UNSPECIFIED));
         mController.saveChannel();
-        assertFalse(mController.isChannelConfigurable());
         assertFalse(mController.isChannelBlockable());
         assertFalse(mController.isChannelGroupBlockable());
     }
@@ -204,7 +203,7 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void testIsConfigurable() {
+    public void testIsBlockable_channelLevelWhitelist() {
         String sameId = "bananas";
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.lockedChannelId = sameId;
@@ -212,25 +211,25 @@ public class NotificationPreferenceControllerTest {
         when(channel.getId()).thenReturn(sameId);
 
         mController.onResume(appRow, channel, null, null);
-        assertFalse(mController.isChannelConfigurable());
+        assertFalse(mController.isChannelBlockable());
 
         when(channel.getId()).thenReturn("something new");
         mController.onResume(appRow, channel, null, null);
-        assertTrue(mController.isChannelConfigurable());
+        assertTrue(mController.isChannelBlockable());
     }
 
     @Test
-    public void testIsConfigurable_appLevel() {
+    public void testIsBlockable_appLevelWhitelist() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.lockedChannelId = "something";
         appRow.lockedImportance = true;
 
         mController.onResume(appRow, mock(NotificationChannel.class), null, null);
-        assertFalse(mController.isChannelConfigurable());
+        assertFalse(mController.isChannelBlockable());
 
         appRow.lockedImportance = false;
         mController.onResume(appRow, mock(NotificationChannel.class), null, null);
-        assertTrue(mController.isChannelConfigurable());
+        assertTrue(mController.isChannelBlockable());
     }
 
     @Test

@@ -77,7 +77,7 @@ public class SoundPreferenceController extends NotificationPreferenceController
     public void updateState(Preference preference) {
         if (mAppRow!= null && mChannel != null) {
             NotificationSoundPreference pref = (NotificationSoundPreference) preference;
-            pref.setEnabled(mAdmin == null && isChannelConfigurable());
+            pref.setEnabled(mAdmin == null);
             pref.setRingtone(mChannel.getSound());
         }
     }
