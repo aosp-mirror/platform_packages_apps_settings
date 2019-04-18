@@ -48,7 +48,7 @@ import java.util.Map;
 public class AppStateNotificationBridge extends AppStateBaseBridge {
 
     private final String TAG = "AppStateNotificationBridge";
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
     private final Context mContext;
     private IUsageStatsManager mUsageStatsManager;
     protected List<Integer> mUserIds;

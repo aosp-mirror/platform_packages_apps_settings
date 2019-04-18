@@ -210,6 +210,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"入力したポートは無効です。"</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTPプロキシはブラウザで使用されていますが、他のアプリでは使用できません。"</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"現在の SUBID:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"デフォルトのデータ SIM の SUBID:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"DL 帯域幅（kbps）:"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"UL 帯域幅（kbps）:"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"セルの位置情報（サポート終了）:"</string>
@@ -232,6 +234,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"無線バンドを選択"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"音声ネットワークの種類:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"データ ネットワークの種類:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"スマートフォンのインデックスを選択"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"優先ネットワークの種類を設定:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"ホスト名（www.google.com）の ping（IPv4）:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"ホスト名（www.google.com）の ping（IPv6）:"</string>
@@ -310,8 +313,8 @@
     <string name="cellular_data_summary" msgid="4660351864416939504">"モバイル ネットワークでのデータ使用を許可"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"ローミング時にデータ使用を許可"</string>
     <string name="roaming" msgid="2619521775007402005">"ローミング"</string>
-    <string name="roaming_enable" msgid="3737380951525303961">"ローミング中にデータサービスに接続します"</string>
-    <string name="roaming_disable" msgid="1295279574370898378">"ローミング中にデータサービスに接続します"</string>
+    <string name="roaming_enable" msgid="3737380951525303961">"ローミング中にデータサービスに接続する"</string>
+    <string name="roaming_disable" msgid="1295279574370898378">"ローミング中にデータサービスに接続する"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"データローミングをOFFにしたままホームネットワークの外に出たためデータ接続が切断されました。"</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"ONにする"</string>
     <string name="roaming_warning" msgid="4275443317524544705">"高額な通信料が発生することがあります。"</string>
@@ -876,7 +879,7 @@
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"Wi‑Fi 設定"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"Wi‑Fi は自動的に ON になります"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="2782566279864356713">"Wi‑Fi は自動的に ON になりません"</string>
-    <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fiネットワーク"</string>
+    <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi ネットワーク"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"その他のオプション"</string>
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"スキャン"</string>
@@ -893,7 +896,7 @@
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自動設定（WPS）"</string>
     <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"Wi‑Fi のスキャンを ON にする"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Wi‑Fi を自動的に ON にするには、まず Wi‑Fi のスキャンを ON にしてください。"</string>
-    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Wi-Fi のスキャンによって、アプリやサービスに対し、Wi‑Fi が OFF の場合でも常に Wi-Fi ネットワークをスキャンすることを許可します。たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
+    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Wi-Fi のスキャンでは、アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"ON にする"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"Wi‑Fi のスキャンを ON にしました"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"詳細設定"</string>
@@ -929,7 +932,7 @@
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi アクセス ポイントの帯域幅を少なくとも 1 つ選択してください。"</string>
-    <string name="wifi_ip_settings" msgid="3359331401377059481">"IP設定"</string>
+    <string name="wifi_ip_settings" msgid="3359331401377059481">"IP 設定"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"プライバシー"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"ランダム化 MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"デバイスの追加"</string>
@@ -979,6 +982,8 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"携帯通信会社の Wi‑Fi ネットワーク"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"<xliff:g id="NAME">%1$s</xliff:g> 経由で接続"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"現在地情報の精度向上やその他の目的で、<xliff:g id="APP_NAME">%1$s</xliff:g>ではWi-FiがOFFのときでもネットワークスキャンをオンにすることを要求しています。\n\nスキャンを必要とするすべてのアプリでスキャンを許可しますか？"</string>
+    <!-- no translation found for wifi_scan_always_turn_on_message_unknown (6162424298483845679) -->
+    <skip />
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"この機能をOFFにするには、オーバーフローメニューの[詳細設定]にアクセスします。"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"許可する"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"許可しない"</string>
@@ -1026,7 +1031,7 @@
     <string name="wifi_subscribed_access_points_tab" msgid="6480224551765489055">"サブスクリプション"</string>
     <!-- no translation found for wifi_saved_access_points_tab (2659675386657663705) -->
     <skip />
-    <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP設定"</string>
+    <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP 設定"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"このユーザーは Wi‑Fi 詳細設定を利用できません"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"保存"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"キャンセル"</string>
@@ -1203,11 +1208,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"周囲に合わせて明るさを最適化します。この機能が ON の場合でも、一時的に明るさを調整できます。"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"画面の明るさは環境やアクティビティに応じて自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"ディスプレイのホワイト バランス"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"Screen Aware"</string>
+    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
+    <skip />
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"ON / 見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"OFF"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"見ている間は画面が OFF にならなくなります。"</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"Screen Aware は前面カメラを使用して、ユーザーが画面を見ているかどうかを検出します。この検出はデバイスのみで行われ、画像が保存されたり、Google に送信されたりすることはありません。"</string>
+    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
+    <skip />
     <string name="night_display_title" msgid="2626451512200357686">"夜間モード"</string>
     <string name="night_display_text" msgid="1837277457033025056">"夜間モードを利用すると画面が黄味がかった色になります。薄明かりの下でも画面を見やすくなり、寝付きを良くする効果も期待できます。"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"スケジュール"</string>
@@ -1233,11 +1240,11 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"<xliff:g id="ID_1">%1$s</xliff:g> まで ON にする"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"<xliff:g id="ID_1">%1$s</xliff:g> まで OFF にする"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"夜間モードは現在 OFF です"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"スリープ"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"画面消灯"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"画面がOFFになったとき"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"操作が行われない状態で<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁紙"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"スタイルと壁紙"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"スタイルと壁紙"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"デフォルト"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"カスタム"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"壁紙を変更する"</string>
@@ -1649,8 +1656,8 @@
     <string name="location_app_level_permissions" msgid="2777033567595680764">"アプリの権限"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"位置情報は OFF です"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="6755614454444493071">
-      <item quantity="other"><xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> 個中 <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_2">%1$d</xliff:g> 個のアプリでアクセスが制限されていません</item>
-      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> 個中 <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_0">%1$d</xliff:g> 個のアプリでアクセスが制限されていません</item>
+      <item quantity="other"><xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> 個中 <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_2">%1$d</xliff:g> 個のアプリに無制限のアクセスが許可されています</item>
+      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> 個中 <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_0">%1$d</xliff:g> 個のアプリに無制限のアクセスが許可されています</item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"位置情報への最近のアクセス"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"詳細を表示"</string>
@@ -1660,9 +1667,9 @@
     <string name="location_low_battery_use" msgid="8602232529541903596">"電池使用量: 低"</string>
     <string name="location_scanning_screen_title" msgid="2297479353298444503">"Wi‑Fi のスキャンと Bluetooth のスキャン"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi‑Fiのスキャン"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。この設定は、たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetoothのスキャン"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"アプリやサービスに対し、Bluetooth が OFF の場合でも、常に付近のデバイスをスキャンすることを許可します。たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"アプリやサービスに対し、Bluetooth が OFF の場合でも、常に付近のデバイスをスキャンすることを許可します。この設定は、たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
     <string name="managed_profile_location_services" msgid="4723268446874715222">"仕事用プロファイル向けの位置情報サービス"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi/モバイル接続時の位置情報"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Googleの位置情報サービスで現在地をすばやく推定することをアプリに許可します。匿名の現在地データが収集され、Googleに送信されます。"</string>
@@ -2283,9 +2290,12 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"タブレットの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"デバイスの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"電池が通常より早くなくなる可能性があります"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"スマートフォンの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\nフル充電以降の使用量の多いアプリは次のとおりです。"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"タブレットの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\nフル充電以降の使用量の多いアプリは次のとおりです。"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"デバイスの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\nフル充電以降の使用量の多いアプリは次のとおりです。"</string>
+    <!-- no translation found for battery_tip_dialog_message (797225122502556066) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (49788591262480482) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (7959652003221931962) -->
+    <skip />
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"電力消費量の多いバックグラウンド アクティビティを含める"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">%1$d 個のアプリの制限</item>
@@ -2464,7 +2474,9 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"使用しない"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"電池残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
     <string name="battery_percentage" msgid="723291197508049369">"電池残量"</string>
-    <string name="battery_percentage_description" msgid="8511658577507384014">"ステータスバーに電池残量を%%で表示する"</string>
+    <!-- String.format failed for translation -->
+    <!-- no translation found for battery_percentage_description (8511658577507384014) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="1144688045609771677">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"メモリ使用"</string>
@@ -2711,9 +2723,9 @@
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"使用サイクルのリセット日"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"毎月のリセット日:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"設定"</string>
-    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"データ使用の警告の設定"</string>
-    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"データ使用の上限の設定"</string>
-    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"データ使用の上限の設定"</string>
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"データ使用量の警告の設定"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"データ使用量の上限の設定"</string>
+    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"データ使用量の上限の設定"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"タブレットで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はタブレットで測定された値ですが、携帯通信会社での使用量の計算はこれと異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"スマートフォンで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はスマートフォンで測定された値ですが、携帯通信会社での使用量の計算はこれと異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"バックグラウンドデータを制限しますか？"</string>
@@ -2741,7 +2753,7 @@
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"通話に戻る"</string>
     <string name="vpn_name" msgid="4689699885361002297">"名前"</string>
     <string name="vpn_type" msgid="5435733139514388070">"タイプ"</string>
-    <string name="vpn_server" msgid="2123096727287421913">"サーバーアドレス"</string>
+    <string name="vpn_server" msgid="2123096727287421913">"サーバー アドレス"</string>
     <string name="vpn_mppe" msgid="6639001940500288972">"PPP 暗号化（MPPE）"</string>
     <string name="vpn_l2tp_secret" msgid="529359749677142076">"L2TPセキュリティ保護"</string>
     <string name="vpn_ipsec_identifier" msgid="4098175859460006296">"IPSec ID"</string>
@@ -2750,8 +2762,8 @@
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA証明書"</string>
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSecサーバー証明書"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"詳細オプションを表示する"</string>
-    <string name="vpn_search_domains" msgid="5391995501541199624">"DNS検索ドメイン"</string>
-    <string name="vpn_dns_servers" msgid="5570715561245741829">"DNSサーバー（例: 8.8.8.8）"</string>
+    <string name="vpn_search_domains" msgid="5391995501541199624">"DNS 検索ドメイン"</string>
+    <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS サーバー（例: 8.8.8.8）"</string>
     <string name="vpn_routes" msgid="3818655448226312232">"転送ルート（例: 10.0.0.0/8）"</string>
     <string name="vpn_username" msgid="1863901629860867849">"ユーザー名"</string>
     <string name="vpn_password" msgid="6756043647233596772">"パスワード"</string>
@@ -2789,7 +2801,7 @@
     <string name="vpn_create" msgid="5628219087569761496">"VPNプロファイルの追加"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"プロファイルを編集"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"プロファイルを削除"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"常時接続VPN"</string>
+    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"常時接続 VPN"</string>
     <string name="vpn_no_vpns_added" msgid="5002741367858707244">"VPN は追加されていません"</string>
     <string name="vpn_always_on_summary" msgid="2821344524094363617">"VPN に常時接続する"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="592304911378771510">"このアプリは対応していません"</string>
@@ -3046,7 +3058,7 @@
     <string name="account_dashboard_title" msgid="5895948991491438911">"アカウント"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"アカウントが追加されていません"</string>
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"デフォルト アプリ"</string>
-    <string name="system_dashboard_summary" msgid="6839969589170062254">"言語, 操作, 時間, バックアップ"</string>
+    <string name="system_dashboard_summary" msgid="6839969589170062254">"言語、操作、時間、バックアップ"</string>
     <string name="search_results_title" msgid="1796252422574886932">"設定"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"wifi, wi-fi, ネットワーク接続, インターネット, ワイヤレス, データ, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="8745178424405564885">"Wi‑Fi 通知, wifi 通知"</string>
@@ -3300,15 +3312,15 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"詳細設定"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"仕事用プロファイルの通知"</string>
     <string name="asst_capability_prioritizer_title" msgid="1008391045235540115">"自動通知優先設定"</string>
-    <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"自動的に消音にし、重要性の低い通知の順位を下げます"</string>
+    <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"重要度の低い通知を自動的に消音し、優先度を下げる"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"スマートなアクションと応答"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"状況に基づく通知アクションと通知へのクイック返信を自動的に追加します"</string>
-    <string name="hide_silent_icons_title" msgid="2378514357635207742">"通知消音ステータス アイコンを非表示にする"</string>
-    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"ステータスバーで通知消音アイコンを非表示にする"</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"状況に基づく通知アクションと通知へのクイック返信を自動的に追加する"</string>
+    <string name="hide_silent_icons_title" msgid="2378514357635207742">"サイレント通知のステータス アイコンを非表示"</string>
+    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"ステータスバーでサイレント通知のアイコンを非表示にする"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"通知ドットの許可"</string>
-    <string name="notification_bubbles_title" msgid="526545466417027926">"バブル"</string>
-    <string name="notification_bubbles_summary" msgid="5269674863510678257">"フローティング ショートカットを使用すると、アプリのコンテンツにどこからでもすぐにアクセスできます"</string>
-    <string name="bubbles_feature_education" msgid="69923617148394578">"一部の通知などのコンテンツを画面にふきだしとして表示できます。ふきだしを開くには、タップします。ふきだしを非表示にするには、画面の下部にドラッグします。"</string>
+    <string name="notification_bubbles_title" msgid="526545466417027926">"ふきだし"</string>
+    <string name="notification_bubbles_summary" msgid="5269674863510678257">"フローティング ショートカットにより、アプリのコンテンツにどこからでもすぐにアクセスできます"</string>
+    <string name="bubbles_feature_education" msgid="69923617148394578">"一部の通知や他のコンテンツを画面にふきだしとして表示できます。ふきだしはタップすると開き、画面の下へドラッグすると消えます。"</string>
     <string name="bubbles_app_toggle_title" msgid="9143702245165359360">"ふきだし"</string>
     <string name="bubbles_app_toggle_summary" msgid="7714358008428342285">"一部の通知をふきだしとして表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="8013961655723563787">"ふきだしの有効化"</string>
@@ -3316,8 +3328,8 @@
     <string name="bubbles_feature_disabled_button_approve" msgid="5317196831268846883">"デバイスで有効にする"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8176870537170586852">"キャンセル"</string>
     <string name="swipe_direction_title" msgid="6877543492435053137">"スワイプの動作"</string>
-    <string name="swipe_direction_ltr" msgid="3623394320915041215">"右にスワイプでメニューを閉じ、左にスワイプでメニューを表示"</string>
-    <string name="swipe_direction_rtl" msgid="4972099509548044938">"左にスワイプでメニューを閉じ、右にスワイプでメニューを表示"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"右にスワイプで通知を閉じ、左にスワイプでメニューを表示"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"左にスワイプで通知を閉じ、右にスワイプでメニューを表示"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"点滅"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"ロック画面上"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"仕事用プロファイルのロック時"</string>
@@ -3759,9 +3771,9 @@
     <string name="background_check_pref" msgid="7550258400138010979">"バックグラウンド チェック"</string>
     <string name="background_check_title" msgid="4534254315824525593">"バックグラウンドへのフルアクセス"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"画面のテキストを使用"</string>
-    <string name="assist_access_context_summary" msgid="1991421283142279560">"画面コンテンツのテキストにアクセスすることをアシストアプリに許可します"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"画面コンテンツのテキストにアクセスすることをアシストアプリに許可する"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"スクリーンショットを使用"</string>
-    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"画面の画像にアクセスすることをアシストアプリに許可します"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"画面の画像にアクセスすることをアシストアプリに許可する"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"画面の点滅"</string>
     <string name="assist_flash_summary" msgid="9160668468824099262">"アシストアプリが画面のテキストやスクリーンショットにアクセスしたときに画面の端を点滅させる"</string>
     <string name="assist_footer" msgid="1982791172085896864">"アシストアプリは、表示している画面の情報に基づいてアシスタントを提供します。一部のアプリはランチャーと音声入力サービスの両方に対応しており、統合されたアシスタントを提供します。"</string>
@@ -3862,7 +3874,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"内部ストレージ: 使用済み <xliff:g id="PERCENTAGE">%1$s</xliff:g> - 空き容量 <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過するとスリープ状態になります"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"壁紙、スリープ、フォントサイズ"</string>
-    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"スタイルと壁紙、スリープ、フォントサイズ"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"スタイル、壁紙、画面の消灯、フォントサイズ"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"スリープ、フォントサイズ"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"操作が行われない状態で 10 分経過するとスリープ状態になります"</string>
     <string name="memory_summary" msgid="8080825904671961872">"平均で<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>のうち<xliff:g id="USED_MEMORY">%1$s</xliff:g>を使用しています"</string>
@@ -3933,7 +3945,7 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"自動システム アップデート"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"デバイスの再起動時にアップデートを適用する"</string>
     <string name="usage" msgid="2977875522080448986">"使用量"</string>
-    <string name="cellular_data_usage" msgid="2155683719898158203">"モバイルデータ使用"</string>
+    <string name="cellular_data_usage" msgid="2155683719898158203">"モバイルデータ使用量"</string>
     <string name="app_cellular_data_usage" msgid="5468472735806533448">"アプリのデータ使用量"</string>
     <string name="wifi_data_usage" msgid="771603760674507659">"Wi-Fi データ使用量"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"イーサネット データ使用量"</string>
@@ -3957,15 +3969,15 @@
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> 使用"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"データ警告を設定"</string>
     <string name="data_warning" msgid="209133958008062117">"データ警告"</string>
-    <string name="data_warning_footnote" msgid="776341964125603711">"データ警告とデータ上限はお使いのデバイスで測定されます。結果は携帯通信会社のデータとは異なることがあります。"</string>
-    <string name="set_data_limit" msgid="2901526323210516923">"データ上限の設定"</string>
+    <string name="data_warning_footnote" msgid="776341964125603711">"データ警告とデータ上限はお使いのデバイスで測定されます。測定結果は携帯通信会社のデータとは異なることがあります。"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"データ上限を設定"</string>
     <string name="data_limit" msgid="1885406964934590552">"データ上限"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
     <string name="configure" msgid="1029654422228677273">"設定"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"データ使用量に含まれている他のアプリ"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="other">データセーバーが ON のときのデータ無制限使用を <xliff:g id="COUNT">%1$d</xliff:g> 個のアプリに許可しました</item>
-      <item quantity="one">データセーバーが ON のときのデータ無制限使用を 1 個のアプリに許可しました</item>
+      <item quantity="other">データセーバーが ON の場合に、無制限のデータ使用を <xliff:g id="COUNT">%1$d</xliff:g> 個のアプリに許可します</item>
+      <item quantity="one">データセーバーが ON の場合に、無制限のデータ使用を 1 個のアプリに許可します</item>
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"メインデータ"</string>
     <string name="data_usage_wifi_title" msgid="7063659423081820720">"Wi‑Fi データ"</string>
@@ -3986,13 +3998,13 @@
     <string name="launch_mdp_app_text" msgid="6751296320061773169">"プランを表示"</string>
     <string name="launch_wifi_text" msgid="2311424914664372687">"詳細を表示"</string>
     <string name="data_saver_title" msgid="8034286939200289826">"データセーバー"</string>
-    <string name="unrestricted_data_saver" msgid="952796077540228711">"データ無制限アクセス"</string>
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"無制限のデータアクセス"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"バックグラウンド データは無効になっています"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"ON"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"OFF"</string>
     <string name="data_saver_switch_title" msgid="836312690356005669">"データセーバーを使用"</string>
-    <string name="unrestricted_app_title" msgid="4465437191723332066">"データの無制限使用"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"データセーバーが ON のときのデータ無制限アクセスを許可"</string>
+    <string name="unrestricted_app_title" msgid="4465437191723332066">"無制限のデータ使用"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"データセーバーが ON の場合に無制限のデータアクセスを許可"</string>
     <string name="home_app" msgid="4066188520886810030">"ホームアプリ"</string>
     <string name="no_default_home" msgid="7184117487704520238">"デフォルトのホームがありません"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"安全な起動"</string>
@@ -4074,10 +4086,11 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> に接続しました"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"複数のデバイスに接続しました"</string>
     <string name="demo_mode" msgid="2798762752209330277">"システム UI デモモード"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"テーマ"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"テーマを選択"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"この設定はアプリにも適用されます"</string>
+    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
+    <skip />
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"サポートされているアプリもダークテーマに切り替わります"</string>
+    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
+    <skip />
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"クイック設定開発者用タイル"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"ウィンスコープ トレース"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"センサー OFF"</string>
@@ -4337,7 +4350,7 @@
     <string name="homepage_personal_settings" msgid="1570415428680432319">"おすすめの設定"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"ネットワークを選択"</string>
     <string name="network_disconnected" msgid="2933191767567503504">"接続が解除されました"</string>
-    <string name="network_connected" msgid="4943925032253989621">"接続しました"</string>
+    <string name="network_connected" msgid="4943925032253989621">"接続済み"</string>
     <string name="network_connecting" msgid="76404590784733557">"接続しています…"</string>
     <string name="network_could_not_connect" msgid="1113813392274155369">"接続できませんでした"</string>
     <string name="empty_networks_list" msgid="2578752112731781190">"ネットワークが見つかりません。"</string>
@@ -4469,7 +4482,7 @@
     <string name="hwui_force_dark_title" msgid="2466919877609396257">"フォースダークのオーバーライド"</string>
     <string name="hwui_force_dark_summary" msgid="8705328793382981780">"フォースダーク機能をオーバーライドして常に ON にする"</string>
     <string name="privacy_dashboard_title" msgid="2458407399263943923">"プライバシー"</string>
-    <string name="privacy_dashboard_summary" msgid="4570241983077984329">"権限, アカウント アクティビティ, 個人データ"</string>
+    <string name="privacy_dashboard_summary" msgid="4570241983077984329">"権限、アカウント アクティビティ、個人データ"</string>
     <string name="contextual_card_dismiss_remove" msgid="2813670241047194713">"削除"</string>
     <string name="contextual_card_dismiss_keep" msgid="2230740610451447340">"保存"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="5507487987591500742">"このおすすめを削除しますか？"</string>
@@ -4508,9 +4521,10 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"場所"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"サービス プロバイダが、このサービスを提供するために位置情報を収集することがあります。\n\nサービス プロバイダのプライバシー ポリシーをご確認ください。"</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"残り時間や残りデータを利用できなくなる可能性があります。削除前にプロバイダにご確認ください。"</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"コンテンツの取得、スマート候補"</string>
-    <string name="content_capture" msgid="4486543205504396210">"スマート候補"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"画面に表示される情報や、動画、音声コンテンツの音声情報を保存することを Android に許可します。Android はデバイスのアクティビティに基づいて役立つアドバイスを提供します。"</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"コンテンツの取得"</string>
+    <string name="content_capture" msgid="6456873729933463600">"コンテンツの取得"</string>
+    <!-- no translation found for content_capture_summary (659506647507221852) -->
+    <skip />
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"システムのヒープダンプを取得"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"システムのヒープダンプを取得しています"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"システムのヒープダンプを取得できませんでした"</string>

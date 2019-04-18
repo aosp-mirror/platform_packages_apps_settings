@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
  */
 public class NetworkScanHelper {
     public static final String TAG = "NetworkScanHelper";
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
 
     /**
      * Callbacks interface to inform the network scan results.
