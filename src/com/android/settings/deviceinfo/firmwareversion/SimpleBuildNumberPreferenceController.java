@@ -16,16 +16,10 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
-
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
 import android.text.BidiFormatter;
-import android.widget.Toast;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class SimpleBuildNumberPreferenceController extends BasePreferenceController {
@@ -37,38 +31,11 @@ public class SimpleBuildNumberPreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
     public CharSequence getSummary() {
         return BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY);
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return true;
-    }
-
-    @Override
-    public boolean isCopyableSlice() {
-        return true;
-    }
-
-    @Override
-    public boolean useDynamicSliceSummary() {
-        return true;
-    }
-
-    @Override
-    public void copy() {
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        final ClipData clip = ClipData.newPlainText("text", getSummary());
-        clipboard.setPrimaryClip(clip);
-
-        final String toast = mContext.getString(R.string.copyable_slice_toast,
-                mContext.getText(R.string.build_number));
-        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 }
