@@ -74,6 +74,12 @@
         settings:controller="com.android.settings.datausage.BillingCyclePreferenceController" />
 
     <SwitchPreference
+        android:key="mms_message"
+        android:title="@string/mms_message_title"
+        android:summary="@string/mms_message_summary"
+        settings:controller="com.android.settings.network.telephony.MmsMessagePreferenceController" />
+
+    <SwitchPreference
         android:key="enhanced_4g_lte"
         android:title="@string/enhanced_4g_lte_mode_title"
         android:persistent="false"
