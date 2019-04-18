@@ -189,39 +189,28 @@ public class SliceBuilderUtils {
      */
     public static CharSequence getSubtitleText(Context context,
             BasePreferenceController controller, SliceData sliceData) {
-        final boolean isDynamicSummaryAllowed = controller.useDynamicSliceSummary();
-        CharSequence summaryText = controller.getSummary();
 
         // Priority 1 : User prefers showing the dynamic summary in slice view rather than static
         // summary. Note it doesn't require a valid summary - so we can force some slices to have
         // empty summaries (ex: volume).
-        if (isDynamicSummaryAllowed) {
+        if (controller.useDynamicSliceSummary()) {
+            return controller.getSummary();
+        }
+
+        // Priority 2: Show summary from slice data.
+        CharSequence summaryText = sliceData.getSummary();
+        if (isValidSummary(context, summaryText)) {
             return summaryText;
         }
 
-        // Priority 2 : Show screen title.
+        // Priority 3: Show screen title.
         summaryText = sliceData.getScreenTitle();
         if (isValidSummary(context, summaryText) && !TextUtils.equals(summaryText,
                 sliceData.getTitle())) {
             return summaryText;
         }
 
-        // Priority 3 : Show dynamic summary from preference controller.
-        if (controller != null) {
-            summaryText = controller.getSummary();
-
-            if (isValidSummary(context, summaryText)) {
-                return summaryText;
-            }
-        }
-
-        // Priority 4 : Show summary from slice data.
-        summaryText = sliceData.getSummary();
-        if (isValidSummary(context, summaryText)) {
-            return summaryText;
-        }
-
-        // Priority 5 : Show empty text.
+        // Priority 4: Show empty text.
         return "";
     }
 
