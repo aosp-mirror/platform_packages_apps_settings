@@ -74,14 +74,15 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="2"/>
+            android:layout_weight="1"/>
 
         <!-- Contains the buttons and extra information text at the bottom -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal|bottom">
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="24dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
