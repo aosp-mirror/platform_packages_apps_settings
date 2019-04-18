@@ -377,7 +377,9 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
             final TextView titleView = view.findViewById(android.R.id.title);
             if (titleView != null) {
-                titleView.setText(accessPoint.getSsidStr());
+                // Shows whole SSID for better UX.
+                titleView.setSingleLine(false);
+                titleView.setText(accessPoint.getTitle());
             }
 
             final TextView summary = view.findViewById(android.R.id.summary);
