@@ -2303,10 +2303,19 @@
     <string name="wifi_forget_dialog_message">All passwords for this network will be deleted</string>
 
     <!-- Wi-Fi Advanced Settings --> <skip />
-    <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks a user has saved. -->
+    <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks, not including passpoint network, a user has saved. [CHAR LIMIT=30] -->
     <plurals name="wifi_saved_access_points_summary">
         <item quantity="one">1 network</item>
         <item quantity="other">%d networks</item>
+    </plurals>
+    <!-- Wi-Fi settings screen, Saved passpoint networks summary.  This shows below the "Saved networks" item and indicates the number of passpoint networks a user has saved. [CHAR LIMIT=30] -->
+    <plurals name="wifi_saved_passpoint_access_points_summary">
+        <item quantity="one">1 subscription</item>
+        <item quantity="other">%d subscriptions</item>
+    </plurals>
+    <!-- Wi-Fi settings screen, Saved passpoint networks summary.  This shows below the "Saved networks" item and indicates number of whole kinds networks, if there are both normal saved networks and saved passpoint networks. The number will be at least 2. [CHAR LIMIT=60] -->
+    <plurals name="wifi_saved_all_access_points_summary">
+        <item quantity="other">%d networks &amp; subscriptions</item>
     </plurals>
     <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. [CHAR LIMIT=30] -->
     <string name="wifi_advanced_titlebar">Advanced Wi\u2011Fi</string>
