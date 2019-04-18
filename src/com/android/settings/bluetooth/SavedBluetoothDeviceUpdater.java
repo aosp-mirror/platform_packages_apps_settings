@@ -31,7 +31,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
     private static final String TAG = "SavedBluetoothDeviceUpdater";
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
 
     public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {

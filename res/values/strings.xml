@@ -890,9 +890,9 @@
     <string name="security_settings_face_preference_title">Face authentication</string>
     <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
     <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
-    <!-- Message shown for a toggle which when disabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
+    <!-- Message shown for a toggle which when enabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_accessibility_diversity"></string>
-    <!-- Message shown for a toggle which when disabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
+    <!-- Message shown for a toggle which when enabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_accessibility_vision"></string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
@@ -1060,11 +1060,11 @@
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face authentication. (default) [CHAR LIMIT=NONE] -->
     <string name="face_lock_screen_setup_skip_dialog_text" product="default">Protect your phone with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option.</string>
     <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
-    <string name="lock_screen_pin_skip_title">Skip PIN Setup?</string>
+    <string name="lock_screen_pin_skip_title">Skip PIN setup?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a password, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
-    <string name="lock_screen_password_skip_title">Skip Password Setup?</string>
+    <string name="lock_screen_password_skip_title">Skip password setup?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a pattern, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
-    <string name="lock_screen_pattern_skip_title">Skip Pattern Setup?</string>
+    <string name="lock_screen_pattern_skip_title">Skip pattern setup?</string>
 
     <!-- Button text to setup screen lock in onboard dialog [CHAR LIMIT=34] -->
     <string name="security_settings_fingerprint_enroll_setup_screen_lock">Set up screen lock</string>
@@ -7431,6 +7431,9 @@
 
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
+
+    <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
+    <string name="zen_mode_slice_subtitle">Limit interruptions</string>
 
     <!-- Do not disturb: Title for the Do not Disturb dialog to turn on Do not disturb. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_turn_on_dialog_title">Turn on Do Not Disturb</string>

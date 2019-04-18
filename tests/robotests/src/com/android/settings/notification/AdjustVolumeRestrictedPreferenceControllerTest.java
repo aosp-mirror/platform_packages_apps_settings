@@ -121,7 +121,12 @@ public class AdjustVolumeRestrictedPreferenceControllerTest {
         }
 
         @Override
-        public int getMaxSteps() {
+        public int getMax() {
+            return 0;
+        }
+
+        @Override
+        public int getMin() {
             return 0;
         }
     }

@@ -124,7 +124,7 @@ public class FingerprintSettings extends SubSettings {
 
         private static final int ADD_FINGERPRINT_REQUEST = 10;
 
-        protected static final boolean DEBUG = true;
+        protected static final boolean DEBUG = false;
 
         private FingerprintManager mFingerprintManager;
         private boolean mInFingerprintLockout;

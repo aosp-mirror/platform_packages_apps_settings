@@ -33,7 +33,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
 
     private static final String TAG = "ConnBluetoothDeviceUpdater";
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
 
     private final AudioManager mAudioManager;
 

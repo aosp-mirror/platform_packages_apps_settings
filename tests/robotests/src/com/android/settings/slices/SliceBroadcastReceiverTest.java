@@ -191,8 +191,8 @@ public class SliceBroadcastReceiverTest {
                 .build();
         final ContentResolver resolver = mock(ContentResolver.class);
         doReturn(resolver).when(mContext).getContentResolver();
-        final int position = FakeSliderController.MAX_STEPS - 1;
-        final int oldPosition = FakeSliderController.MAX_STEPS;
+        final int position = FakeSliderController.MAX_VALUE - 1;
+        final int oldPosition = FakeSliderController.MAX_VALUE;
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         insertSpecialCase(FakeSliderController.class, key);
 
@@ -310,8 +310,8 @@ public class SliceBroadcastReceiverTest {
 
         // Insert Fake Slider into Database
         final String key = "key";
-        final int position = FakeSliderController.MAX_STEPS - 1;
-        final int oldPosition = FakeSliderController.MAX_STEPS;
+        final int position = FakeSliderController.MAX_VALUE - 1;
+        final int oldPosition = FakeSliderController.MAX_VALUE;
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         insertSpecialCase(FakeSliderController.class, key);
 
