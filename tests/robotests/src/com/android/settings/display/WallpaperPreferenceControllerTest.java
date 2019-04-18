@@ -116,6 +116,30 @@ public class WallpaperPreferenceControllerTest {
     }
 
     @Test
+    public void getKeywords_withoutStyles() {
+        mShadowPackageManager.setResolveInfosForIntent(
+                mStylesAndWallpaperIntent, Lists.newArrayList());
+
+        assertThat(mController.getKeywords())
+                .contains(mContext.getString(R.string.keywords_wallpaper));
+        assertThat(mController.getKeywords())
+                .doesNotContain(mContext.getString(R.string.theme_customization_category));
+    }
+
+    @Test
+    public void getKeywords_withStyles() {
+        mShadowPackageManager.setResolveInfosForIntent(
+                mStylesAndWallpaperIntent,
+                Lists.newArrayList(mock(ResolveInfo.class)));
+
+        assertThat(mController.areStylesAvailable()).isTrue();
+        assertThat(mController.getKeywords())
+                .contains(mContext.getString(R.string.keywords_wallpaper));
+        assertThat(mController.getKeywords())
+                .contains(mContext.getString(R.string.theme_customization_category));
+    }
+
+    @Test
     public void handlePreferenceTreeClick_wallpaperOnly() {
         mShadowPackageManager.setResolveInfosForIntent(
                 mWallpaperIntent, Lists.newArrayList(mock(ResolveInfo.class)));

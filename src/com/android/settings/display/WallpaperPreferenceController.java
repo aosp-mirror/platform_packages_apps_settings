@@ -53,8 +53,27 @@ public class WallpaperPreferenceController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         Preference preference = screen.findPreference(getPreferenceKey());
-        preference.setTitle(mContext.getString(areStylesAvailable()
-                ? R.string.style_and_wallpaper_settings_title : R.string.wallpaper_settings_title));
+        preference.setTitle(getTitle());
+    }
+
+    public String getTitle() {
+        return mContext.getString(areStylesAvailable()
+                ? R.string.style_and_wallpaper_settings_title : R.string.wallpaper_settings_title);
+    }
+
+    public ComponentName getComponentName() {
+        return new ComponentName(mWallpaperPackage,
+                areStylesAvailable() ? mStylesAndWallpaperClass : mWallpaperClass);
+    }
+
+    public String getKeywords() {
+        StringBuilder sb = new StringBuilder(mContext.getString(R.string.keywords_wallpaper));
+        if (areStylesAvailable()) {
+            // TODO(b/130759285): Create a new string keywords_styles_and_wallpaper
+            sb.append(", ").append(mContext.getString(R.string.theme_customization_category))
+                    .append(", ").append(mContext.getString(R.string.keywords_dark_ui_mode));
+        }
+        return sb.toString();
     }
 
     @Override
@@ -75,9 +94,7 @@ public class WallpaperPreferenceController extends BasePreferenceController {
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (getPreferenceKey().equals(preference.getKey())) {
-            final ComponentName componentName = new ComponentName(mWallpaperPackage,
-                    areStylesAvailable() ? mStylesAndWallpaperClass : mWallpaperClass);
-            preference.getContext().startActivity(new Intent().setComponent(componentName));
+            preference.getContext().startActivity(new Intent().setComponent(getComponentName()));
             return true;
         }
         return super.handlePreferenceTreeClick(preference);
