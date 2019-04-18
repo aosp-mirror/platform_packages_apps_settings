@@ -117,12 +117,12 @@ public class ImportancePreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_evenIfChannelBlocked() {
+    public void testIsAvailable_ifChannelBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
         mController.onResume(appRow, channel, null, null);
-        assertTrue(mController.isAvailable());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -183,8 +183,8 @@ public class ImportancePreferenceControllerTest {
         mController.updateState(pref);
 
         verify(pref, times(1)).setConfigurable(anyBoolean());
-        verify(pref, times(1)).setBlockable(anyBoolean());
         verify(pref, times(1)).setImportance(IMPORTANCE_HIGH);
+        verify(pref, times(1)).setDisplayInStatusBar(false);
     }
     
     @Test

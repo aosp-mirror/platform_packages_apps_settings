@@ -94,6 +94,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
         mControllers.add(new HeaderPreferenceController(context, this));
+        mControllers.add(new BlockPreferenceController(context, mImportanceListener, mBackend));
         mControllers.add(new ImportancePreferenceController(
                 context, mImportanceListener, mBackend));
         mControllers.add(new MinImportancePreferenceController(
