@@ -54,7 +54,7 @@ public class ConnectedAccessPointPreferenceTest {
 
         mContext = RuntimeEnvironment.application;
         mConnectedAccessPointPreference = new ConnectedAccessPointPreference(mAccessPoint, mContext,
-                null, 0 /* iconResId */, false /* forSavedNetworks */);
+                null, 0 /* iconResId */, false /* forSavedNetworks */, null /* fragment */);
         mConnectedAccessPointPreference.setOnGearClickListener(mOnGearClickListener);
     }
 
