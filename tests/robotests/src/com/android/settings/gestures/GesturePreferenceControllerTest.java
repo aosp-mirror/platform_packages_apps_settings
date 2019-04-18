@@ -176,21 +176,6 @@ public class GesturePreferenceControllerTest {
         verify(preference).setChecked(false);
     }
 
-    @Test
-    public void updateState_notTwoStatePreference_setSummary() {
-        // Mock a regular preference
-        final Preference preference = mock(Preference.class);
-        // Set the setting to be disabled.
-        mController.mIsPrefEnabled = false;
-
-        // Run through updateState
-        mController.updateState(preference);
-
-        // Verify summary is set to off (as setting is disabled).
-        assertThat(preference.getSummary()).isEqualTo(
-                mContext.getString(com.android.settings.R.string.gesture_setting_off));
-    }
-
     private class TestPrefController extends GesturePreferenceController {
 
         boolean mIsPrefAvailable;
