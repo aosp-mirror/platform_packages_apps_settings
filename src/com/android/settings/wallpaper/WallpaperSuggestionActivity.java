@@ -19,6 +19,7 @@ package com.android.settings.wallpaper;
 import android.app.Activity;
 import android.app.WallpaperManager;
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,6 +29,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.display.WallpaperPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -46,8 +48,8 @@ public class WallpaperSuggestionActivity extends Activity implements Indexable {
         super.onCreate(savedInstanceState);
         final PackageManager pm = getPackageManager();
         final Intent intent = new Intent()
-                .setClassName(getString(R.string.config_wallpaper_picker_package),
-                        getString(R.string.config_wallpaper_picker_class))
+                .setComponent(new WallpaperPreferenceController(this, "dummy key")
+                        .getComponentName())
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
 
         // passing the necessary extra to next page
@@ -95,21 +97,19 @@ public class WallpaperSuggestionActivity extends Activity implements Indexable {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
                         boolean enabled) {
-
                     final List<SearchIndexableRaw> result = new ArrayList<>();
-
+                    WallpaperPreferenceController controller =
+                            new WallpaperPreferenceController(context, "dummy key");
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.title = context.getString(R.string.wallpaper_settings_fragment_title);
-                    data.screenTitle = context.getString(
-                            R.string.wallpaper_settings_fragment_title);
-                    data.intentTargetPackage = context.getString(
-                            R.string.config_wallpaper_picker_package);
-                    data.intentTargetClass = context.getString(
-                            R.string.config_wallpaper_picker_class);
+                    data.title = controller.getTitle();
+                    data.screenTitle = data.title;
+                    ComponentName component = controller.getComponentName();
+                    data.intentTargetPackage = component.getPackageName();
+                    data.intentTargetClass = component.getClassName();
                     data.intentAction = Intent.ACTION_MAIN;
                     data.key = SUPPORT_SEARCH_INDEX_KEY;
+                    data.keywords = controller.getKeywords();
                     result.add(data);
-
                     return result;
                 }
             };
