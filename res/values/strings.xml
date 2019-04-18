@@ -7951,10 +7951,10 @@
     <string name="notification_block_title">Block</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title -->
-    <string name="notification_silence_title">Show silently</string>
+    <string name="notification_silence_title">Gentle</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title -->
-    <string name="notification_alert_title">Alert</string>
+    <string name="notification_alert_title">Prioritized</string>
 
     <!-- [CHAR LIMIT=40] Notification importance title. This setting controls how notifications in older apps may alert the user (eg, sound, visual, vibrate). -->
     <string name="allow_interruption">Allow interruptions</string>
@@ -7964,17 +7964,26 @@
 
     <!-- Channel summaries for the app notification page -->
 
-    <!-- [CHAR LIMIT=100] Notification Importance title: min importance level title -->
-    <string name="notification_channel_summary_min">Low importance</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: min importance level summary -->
+    <string name="notification_channel_summary_min">In the pull-down shade, collapse notifications to one line</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level title -->
-    <string name="notification_channel_summary_low">Medium importance</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
+    <string name="notification_channel_summary_low">Gentle notifications will display in pull-down list</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance title: normal importance level title -->
-    <string name="notification_channel_summary_default">High importance</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
+    <string name="notification_channel_summary_low_status">Gentle notifications will display in pull-down list &amp; status bar</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance title: high importance level title -->
-    <string name="notification_channel_summary_high">Urgent importance</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
+    <string name="notification_channel_summary_low_lock">Gentle notifications will display in pull-down list &amp; on lock screen</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
+    <string name="notification_channel_summary_low_status_lock">Gentle notifications will display in pull-down list, status bar &amp; on lock screen</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: normal importance level summary -->
+    <string name="notification_channel_summary_default">Prioritized notifications will alert and display in pull-down list, status bar &amp; on lock screen</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: high importance level summary -->
+    <string name="notification_channel_summary_high">When phone is unlocked, show notifications as a banner across top of screen</string>
 
     <!-- [CHAR LIMIT=100] Label for on/off toggle -->
     <string name="notification_switch_label">Show notifications</string>
