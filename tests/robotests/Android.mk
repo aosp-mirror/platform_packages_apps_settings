@@ -109,6 +109,3 @@ LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src \
 LOCAL_ROBOTEST_TIMEOUT := 36000
 
 include external/robolectric-shadows/run_robotests.mk
-
-# include separate settings robotest moduldes
-include $(LOCAL_PATH)/settings_robotest_modules.mk
