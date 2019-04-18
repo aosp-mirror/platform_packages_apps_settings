@@ -469,13 +469,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return;
             }
 
-            // "forget" for normal saved network. And "disconnect" for ephemeral network because we
-            // could only disconnect it and put it in blacklists so it won't be used again.
-            if (mSelectedAccessPoint.isEphemeral()) {
-                menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */,
-                    R.string.wifi_disconnect_button_text);
-            } else if (mSelectedAccessPoint.isSaved()) {
-                menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
+            // "forget" for normal saved network. And "disconnect" for ephemeral network because it
+            // could only be disconnected and be put in blacklists so it won't be used again.
+            if (mSelectedAccessPoint.isSaved() || mSelectedAccessPoint.isEphemeral()) {
+                final int stringId = mSelectedAccessPoint.isEphemeral() ?
+                    R.string.wifi_disconnect_button_text : R.string.forget;
+                menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, stringId);
             }
 
             if (mSelectedAccessPoint.isSaved() && !mSelectedAccessPoint.isActive()) {
