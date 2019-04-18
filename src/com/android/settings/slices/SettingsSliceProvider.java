@@ -18,9 +18,11 @@ package com.android.settings.slices;
 
 import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
 
+import android.app.PendingIntent;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.StrictMode;
@@ -32,6 +34,8 @@ import android.util.KeyValueListParser;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.collection.ArraySet;
 import androidx.slice.Slice;
@@ -293,6 +297,16 @@ public class SettingsSliceProvider extends SliceProvider {
         descendants.addAll(getSpecialCaseUris(isPlatformUri));
         grantWhitelistedPackagePermissions(getContext(), descendants);
         return descendants;
+    }
+
+    @Nullable
+    @Override
+    public PendingIntent onCreatePermissionRequest(@NonNull Uri sliceUri,
+            @NonNull String callingPackage) {
+        final Intent settingsIntent = new Intent(Settings.ACTION_SETTINGS);
+        final PendingIntent noOpIntent = PendingIntent.getActivity(getContext(),
+                0 /* requestCode */, settingsIntent, 0 /* flags */);
+        return noOpIntent;
     }
 
     @VisibleForTesting
