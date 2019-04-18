@@ -16,6 +16,7 @@
 package com.android.settings.dashboard;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.DASHBOARD_CONTAINER;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -53,6 +54,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -79,6 +81,8 @@ public class DashboardFragmentTest {
         mActivityInfo = new ActivityInfo();
         mActivityInfo.packageName = "pkg";
         mActivityInfo.name = "class";
+        mActivityInfo.metaData = new Bundle();
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key");
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mDashboardCategory = new DashboardCategory("key");
         mDashboardCategory.addTile(new Tile(mActivityInfo, mDashboardCategory.key));
@@ -138,6 +142,20 @@ public class DashboardFragmentTest {
     @Test
     public void displayTilesAsPreference_withEmptyCategory_shouldNotAddTiles() {
         mDashboardCategory.removeTile(0);
+        mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
+
+        verify(mTestFragment.mScreen, never()).addPreference(nullable(Preference.class));
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void displayTilesAsPreference_shouldNotAddSuppressedTiles() {
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getTilesForCategory(nullable(String.class)))
+                .thenReturn(mDashboardCategory);
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getDashboardKeyForTile(nullable(Tile.class)))
+                .thenReturn("test_key");
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
         verify(mTestFragment.mScreen, never()).addPreference(nullable(Preference.class));
