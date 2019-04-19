@@ -79,18 +79,20 @@ public class GameDriverGlobalSwitchBarController
 
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
-        if (!isChecked) {
-            Settings.Global.putInt(
-                    mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+        final int gameDriver = Settings.Global.getInt(
+                mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+
+        if (isChecked
+                && (gameDriver == GAME_DRIVER_DEFAULT || gameDriver == GAME_DRIVER_ALL_APPS)) {
             return true;
         }
 
-        if (Settings.Global.getInt(
-                    mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
-                != GAME_DRIVER_ALL_APPS) {
-            Settings.Global.putInt(
-                    mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+        if (!isChecked && gameDriver == GAME_DRIVER_OFF) {
+            return true;
         }
+
+        Settings.Global.putInt(mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS,
+                isChecked ? GAME_DRIVER_DEFAULT : GAME_DRIVER_OFF);
 
         return true;
     }
