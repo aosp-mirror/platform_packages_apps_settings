@@ -82,7 +82,8 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
 
     @Override
     public int getMin() {
-        return ColorDisplayManager.getMinimumColorTemperature(mContext);
+        // The min should always be 0 in this case.
+        return 0;
     }
 
     /**

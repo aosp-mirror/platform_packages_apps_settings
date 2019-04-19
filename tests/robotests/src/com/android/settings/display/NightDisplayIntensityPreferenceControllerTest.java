@@ -85,10 +85,24 @@ public class NightDisplayIntensityPreferenceControllerTest {
   }
 
   @Test
+  public void rangeOfSlider_staysWithinValidRange() {
+    SettingsShadowResources.overrideResource(
+            com.android.internal.R.integer.config_nightDisplayColorTemperatureMin, 2950);
+    SettingsShadowResources.overrideResource(
+            com.android.internal.R.integer.config_nightDisplayColorTemperatureMax, 3050);
+
+    assertThat(mPreferenceController.getMax() - mPreferenceController.getMin())
+            .isGreaterThan(0);
+  }
+
+  @Test
+  public void getMin_alwaysReturnsZero() {
+    assertThat(mPreferenceController.getMin()).isEqualTo(0);
+  }
+
+  @Test
   public void isSliceableCorrectKey_returnsTrue() {
-    final NightDisplayIntensityPreferenceController controller =
-        new NightDisplayIntensityPreferenceController(mContext, "night_display_temperature");
-    assertThat(controller.isSliceable()).isTrue();
+    assertThat(mPreferenceController.isSliceable()).isTrue();
   }
 
   @Test

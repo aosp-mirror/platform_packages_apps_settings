@@ -33,6 +33,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -255,7 +256,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 int childCount = groupGroup.getPreferenceCount();
                 for (int i = 0; i < childCount; i++) {
                     Preference pref = groupGroup.getPreference(i);
-                    if (pref instanceof ChannelSummaryPreference) {
+                    if (pref instanceof MasterSwitchPreference) {
                         toRemove.add(pref);
                     }
                 }

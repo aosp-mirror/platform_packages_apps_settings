@@ -81,7 +81,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
             pref.setDisabledByAdmin(mAdmin);
             if (mChannel != null) {
                 pref.setChecked(mChannel.canBubble());
-                pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
+                pref.setEnabled(!pref.isDisabledByAdmin());
             } else {
                 pref.setChecked(mAppRow.allowBubbles
                         && Settings.Secure.getInt(mContext.getContentResolver(),
