@@ -202,7 +202,7 @@ public class BubblePreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_channelNotConfigurable() {
+    public void testUpdateState_channelNotBlockable() {
         String lockedId = "locked";
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.lockedChannelId = lockedId;
@@ -213,7 +213,7 @@ public class BubblePreferenceControllerTest {
         Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
 
-        assertFalse(pref.isEnabled());
+        assertTrue(pref.isEnabled());
     }
 
     @Test
