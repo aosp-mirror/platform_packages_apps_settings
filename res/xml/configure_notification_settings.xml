@@ -19,23 +19,35 @@
                   android:title="@string/configure_notification_settings"
                   android:key="configure_notification_settings">
 
-    <SwitchPreference
-        android:key="asst_capability_prioritizer"
-        android:title="@string/asst_capability_prioritizer_title"
-        android:summary="@string/asst_capability_prioritizer_summary"
-        settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
-
-    <SwitchPreference
-        android:key="asst_capabilities_actions_replies"
-        android:title="@string/asst_capabilities_actions_replies_title"
-        android:summary="@string/asst_capabilities_actions_replies_summary"
-        settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+    <com.android.settings.widget.VideoPreference
+        android:key="notification_model_illustration"
+        android:title="@string/summary_placeholder"
+        settings:animation="@raw/notification_interruption_model"
+        settings:controller="com.android.settings.widget.VideoPreferenceController"
+        android:persistent="false" />
 
     <SwitchPreference
         android:key="hide_silent_icons"
         android:title="@string/hide_silent_icons_title"
         android:summary="@string/hide_silent_icons_summary"
         settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController" />
+
+    <PreferenceCategory
+        android:key="configure_notifications_smart"
+        android:title="@string/smart_notifications_title"
+        android:order="3">
+        <SwitchPreference
+            android:key="asst_capability_prioritizer"
+            android:title="@string/asst_capability_prioritizer_title"
+            android:summary="@string/asst_capability_prioritizer_summary"
+            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+
+        <SwitchPreference
+            android:key="asst_capabilities_actions_replies"
+            android:title="@string/asst_capabilities_actions_replies_title"
+            android:summary="@string/asst_capabilities_actions_replies_summary"
+            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="configure_notifications_advanced"
