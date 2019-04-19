@@ -209,6 +209,7 @@ public class NotificationPreferenceControllerTest {
         appRow.lockedChannelId = sameId;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn(sameId);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
 
         mController.onResume(appRow, channel, null, null);
         assertFalse(mController.isChannelBlockable());
@@ -223,8 +224,10 @@ public class NotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.lockedChannelId = "something";
         appRow.lockedImportance = true;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
 
-        mController.onResume(appRow, mock(NotificationChannel.class), null, null);
+        mController.onResume(appRow, channel, null, null);
         assertFalse(mController.isChannelBlockable());
 
         appRow.lockedImportance = false;

@@ -161,7 +161,7 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notConfigurable() {
+    public void testUpdateState_notBlockable() {
         String lockedId = "locked";
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.lockedChannelId = lockedId;
@@ -173,7 +173,7 @@ public class SoundPreferenceControllerTest {
         Preference pref = new NotificationSoundPreference(mContext, attributeSet);
         mController.updateState(pref);
 
-        assertFalse(pref.isEnabled());
+        assertTrue(pref.isEnabled());
     }
 
     @Test
