@@ -28,6 +28,7 @@
 
         <PreferenceCategory
             android:key="location_advanced_settings"
+            android:layout="@layout/preference_category_no_label"
             settings:initialExpandedChildrenCount="2">
 
             <!-- This preference category gets removed if new_recent_location_ui is disabled -->
@@ -54,7 +55,8 @@
                 android:selectable="true" />
 
             <PreferenceCategory
-                android:key="location_services" />
+                android:key="location_services"
+                android:layout="@layout/preference_category_no_label"/>
 
             <!-- This preference gets removed if there is no managed profile -->
             <PreferenceCategory
@@ -65,5 +67,6 @@
 
         <PreferenceCategory
             android:key="location_footer"
+            android:layout="@layout/preference_category_no_label"
             settings:allowDividerAbove="false"/>
 </PreferenceScreen>
