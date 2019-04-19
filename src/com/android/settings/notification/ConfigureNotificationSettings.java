@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import android.app.Activity;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
@@ -24,10 +26,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
@@ -62,10 +67,11 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     static final String KEY_NOTIFICATION_ASSISTANT = "notification_assistant";
 
     private static final String KEY_NOTI_DEFAULT_RINGTONE = "notification_default_ringtone";
-
-    private RingtonePreference mRequestPreference;
     private static final int REQUEST_CODE = 200;
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
+    private static final String KEY_ADVANCED_CATEGORY = "configure_notifications_advanced";
+
+    private RingtonePreference mRequestPreference;
 
     @Override
     public int getMetricsCategory() {
@@ -116,6 +122,27 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
 
         });
         return controllers;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        final PreferenceScreen screen = getPreferenceScreen();
+        final Bundle arguments = getArguments();
+
+        if (screen == null) {
+            return;
+        }
+        if (arguments != null) {
+            final String highlightKey = arguments.getString(EXTRA_FRAGMENT_ARG_KEY);
+            if (!TextUtils.isEmpty(highlightKey)) {
+                final PreferenceCategory advancedCategory =
+                        screen.findPreference(KEY_ADVANCED_CATEGORY);
+                // Has highlight row - expand everything
+                advancedCategory.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
+                scrollToPreference(advancedCategory);
+            }
+        }
     }
 
     @Override
