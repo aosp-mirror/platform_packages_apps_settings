@@ -16,20 +16,19 @@
 
 package com.android.settings.development.gup;
 
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_ALL_APPS;
 import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_DEFAULT;
+import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_OFF;
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.SwitchWidgetController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,69 +39,86 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GupEnableForAllAppsPreferenceControllerTest {
+public class GupGlobalSwitchBarControllerTest {
     @Mock
-    private PreferenceScreen mScreen;
+    private SwitchBar mSwitchBar;
     @Mock
-    private SwitchPreference mPreference;
+    private SwitchWidgetController mSwitchWidgetController;
     @Mock
     private GameDriverContentObserver mGameDriverContentObserver;
 
     private Context mContext;
     private ContentResolver mResolver;
-    private GupEnableForAllAppsPreferenceController mController;
+    private GupGlobalSwitchBarController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mResolver = mContext.getContentResolver();
-        mController = new GupEnableForAllAppsPreferenceController(mContext, "testKey");
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        mController.displayPreference(mScreen);
-
-        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
     }
 
     @Test
-    public void displayPreference_shouldAddSwitchPreference() {
+    public void constructor_gupOn_shouldCheckSwitchBar() {
         Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
-        mController.updateState(mPreference);
+        mController =
+                new GupGlobalSwitchBarController(mContext, new SwitchBarController(mSwitchBar));
 
-        verify(mPreference).setChecked(false);
+        verify(mSwitchBar).setChecked(true);
     }
 
     @Test
-    public void onStart_shouldRegister() {
+    public void constructor_gupOff_shouldUncheckSwitchBar() {
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_OFF);
+        mController =
+                new GupGlobalSwitchBarController(mContext, new SwitchBarController(mSwitchBar));
+
+        verify(mSwitchBar).setChecked(false);
+    }
+
+    @Test
+    public void onStart_shouldStartListeningAndRegister() {
+        mController =
+                new GupGlobalSwitchBarController(mContext, new SwitchBarController(mSwitchBar));
+        mController.mSwitchWidgetController = mSwitchWidgetController;
         mController.mGameDriverContentObserver = mGameDriverContentObserver;
         mController.onStart();
 
+        verify(mSwitchWidgetController).startListening();
         verify(mGameDriverContentObserver).register(mResolver);
     }
 
     @Test
-    public void onStop_shouldUnregister() {
+    public void onStop_shouldStopListeningAndUnregister() {
+        mController =
+                new GupGlobalSwitchBarController(mContext, new SwitchBarController(mSwitchBar));
+        mController.mSwitchWidgetController = mSwitchWidgetController;
         mController.mGameDriverContentObserver = mGameDriverContentObserver;
         mController.onStop();
 
+        verify(mSwitchWidgetController).stopListening();
         verify(mGameDriverContentObserver).unregister(mResolver);
     }
 
     @Test
-    public void onPreferenceChange_check_shouldUpdateSettingsGlobal() {
-        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
-        mController.onPreferenceChange(mPreference, true);
-
-        assertThat(Settings.Global.getInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT))
-                .isEqualTo(GUP_ALL_APPS);
-    }
-
-    @Test
-    public void onPreferenceChange_uncheck_shouldUpdateSettingsGlobal() {
-        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_ALL_APPS);
-        mController.onPreferenceChange(mPreference, false);
+    public void onSwitchToggled_checked_shouldTurnOnGup() {
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_OFF);
+        mController =
+                new GupGlobalSwitchBarController(mContext, new SwitchBarController(mSwitchBar));
+        mController.onSwitchToggled(true);
 
         assertThat(Settings.Global.getInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT))
                 .isEqualTo(GUP_DEFAULT);
+    }
+
+    @Test
+    public void onSwitchToggled_unchecked_shouldTurnOffGup() {
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
+        mController =
+                new GupGlobalSwitchBarController(mContext, new SwitchBarController(mSwitchBar));
+        mController.onSwitchToggled(false);
+
+        assertThat(Settings.Global.getInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT))
+                .isEqualTo(GUP_OFF);
     }
 }

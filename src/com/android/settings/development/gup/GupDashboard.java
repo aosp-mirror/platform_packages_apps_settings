@@ -17,14 +17,20 @@
 package com.android.settings.development.gup;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchBarController;
 
 import java.util.List;
 
+/**
+ * Dashboard for Game Driver preferences.
+ */
 public class GupDashboard extends DashboardFragment {
     private static final String TAG = "GupDashboard";
 
@@ -46,5 +52,17 @@ public class GupDashboard extends DashboardFragment {
     @Override
     public int getHelpResource() {
         return 0;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        final SwitchBar switchBar = activity.getSwitchBar();
+        final GupGlobalSwitchBarController switchBarController =
+                new GupGlobalSwitchBarController(activity, new SwitchBarController(switchBar));
+        getLifecycle().addObserver(switchBarController);
+        switchBar.show();
     }
 }

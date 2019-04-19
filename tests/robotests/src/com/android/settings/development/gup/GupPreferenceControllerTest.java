@@ -20,6 +20,7 @@ import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -63,6 +64,8 @@ public class GupPreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private GameDriverContentObserver mGameDriverContentObserver;
 
     private Context mContext;
     private PreferenceGroup mGroup;
@@ -93,10 +96,28 @@ public class GupPreferenceControllerTest {
     }
 
     @Test
+    public void onStart_shouldRegister() {
+        loadDefaultConfig();
+        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.onStart();
+
+        verify(mGameDriverContentObserver).register(mResolver);
+    }
+
+    @Test
+    public void onStop_shouldUnregister() {
+        loadDefaultConfig();
+        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.onStop();
+
+        verify(mGameDriverContentObserver).unregister(mResolver);
+    }
+
+    @Test
     public void createPreference_configDefault_shouldSetDefaultAttributes() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
         assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
         assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
@@ -112,7 +133,7 @@ public class GupPreferenceControllerTest {
     public void createPreference_configGup_shouldSetGupAttributes() {
         loadConfig(TEST_PKG_NAME, "");
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
         assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
         assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
@@ -128,7 +149,7 @@ public class GupPreferenceControllerTest {
     public void createPreference_configSystem_shouldSetSystemAttributes() {
         loadConfig("", TEST_PKG_NAME);
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
         assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
         assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
@@ -144,7 +165,7 @@ public class GupPreferenceControllerTest {
     public void onPreferenceChange_selectDefault_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[DEFAULT]);
 
         assertThat(preference.getEntry()).isEqualTo(mValueList[DEFAULT]);
@@ -160,7 +181,7 @@ public class GupPreferenceControllerTest {
     public void onPreferenceChange_selectGup_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[GUP]);
 
         assertThat(preference.getEntry()).isEqualTo(mValueList[GUP]);
@@ -176,7 +197,7 @@ public class GupPreferenceControllerTest {
     public void onPreferenceChange_selectSystem_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[SYSTEM]);
 
         assertThat(preference.getEntry()).isEqualTo(mValueList[SYSTEM]);
@@ -212,6 +233,7 @@ public class GupPreferenceControllerTest {
         mController = new GupPreferenceController(mContext, "testKey");
         mGroup = spy(new PreferenceCategory(mContext));
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        when(mGroup.getContext()).thenReturn(mContext);
         when(mGroup.getPreferenceManager()).thenReturn(preferenceManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mGroup);
         mController.displayPreference(mScreen);
