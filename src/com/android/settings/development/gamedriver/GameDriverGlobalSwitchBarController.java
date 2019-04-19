@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
 
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_ALL_APPS;
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_DEFAULT;
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_OFF;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -37,10 +37,11 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 /**
  * Controller of global switch bar used to fully turn off Game Driver.
  */
-public class GupGlobalSwitchBarController
+public class GameDriverGlobalSwitchBarController
         implements SwitchWidgetController.OnSwitchChangeListener,
                    GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
                    OnStart, OnStop {
+
     private final Context mContext;
     private final ContentResolver mContentResolver;
     @VisibleForTesting
@@ -48,7 +49,8 @@ public class GupGlobalSwitchBarController
     @VisibleForTesting
     GameDriverContentObserver mGameDriverContentObserver;
 
-    GupGlobalSwitchBarController(Context context, SwitchWidgetController switchWidgetController) {
+    GameDriverGlobalSwitchBarController(
+            Context context, SwitchWidgetController switchWidgetController) {
         mContext = context;
         mContentResolver = context.getContentResolver();
         mGameDriverContentObserver =
@@ -56,9 +58,10 @@ public class GupGlobalSwitchBarController
         mSwitchWidgetController = switchWidgetController;
         mSwitchWidgetController.setEnabled(
                 DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context));
-        mSwitchWidgetController.setChecked(Settings.Global.getInt(mContentResolver,
-                                                   Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
-                != GUP_OFF);
+        mSwitchWidgetController.setChecked(
+                Settings.Global.getInt(
+                        mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
+                != GAME_DRIVER_OFF);
         mSwitchWidgetController.setListener(this);
     }
 
@@ -77,13 +80,16 @@ public class GupGlobalSwitchBarController
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
         if (!isChecked) {
-            Settings.Global.putInt(mContentResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_OFF);
+            Settings.Global.putInt(
+                    mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
             return true;
         }
 
-        if (Settings.Global.getInt(mContentResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
-                != GUP_ALL_APPS) {
-            Settings.Global.putInt(mContentResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
+        if (Settings.Global.getInt(
+                    mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
+                != GAME_DRIVER_ALL_APPS) {
+            Settings.Global.putInt(
+                    mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
         }
 
         return true;
@@ -91,8 +97,9 @@ public class GupGlobalSwitchBarController
 
     @Override
     public void onGameDriverContentChanged() {
-        mSwitchWidgetController.setChecked(Settings.Global.getInt(mContentResolver,
-                                                   Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
-                != GUP_OFF);
+        mSwitchWidgetController.setChecked(
+                Settings.Global.getInt(
+                        mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
+                != GAME_DRIVER_OFF);
     }
 }

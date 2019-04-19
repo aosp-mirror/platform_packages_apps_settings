@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
+
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -25,35 +28,28 @@ import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.widget.FooterPreference;
 
 /**
- * Controller of global switch to enable Game Driver for all Apps.
+ * Controller of footer preference for Game Driver.
  */
-public class GupEnableForAllAppsPreferenceController extends BasePreferenceController
-        implements Preference.OnPreferenceChangeListener,
-                   GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
+public class GameDriverFooterPreferenceController extends BasePreferenceController
+        implements GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
                    OnStart, OnStop {
-    public static final int GUP_DEFAULT = 0;
-    public static final int GUP_ALL_APPS = 1;
-    public static final int GUP_OFF = 2;
 
-    private final Context mContext;
     private final ContentResolver mContentResolver;
     @VisibleForTesting
     GameDriverContentObserver mGameDriverContentObserver;
 
-    private SwitchPreference mPreference;
+    private FooterPreference mPreference;
 
-    public GupEnableForAllAppsPreferenceController(Context context, String key) {
-        super(context, key);
-        mContext = context;
+    public GameDriverFooterPreferenceController(Context context) {
+        super(context, FooterPreference.KEY_FOOTER);
         mContentResolver = context.getContentResolver();
         mGameDriverContentObserver =
                 new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
@@ -61,10 +57,9 @@ public class GupEnableForAllAppsPreferenceController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
-                        && (Settings.Global.getInt(
-                                    mContentResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
-                                != GUP_OFF)
+        return Settings.Global.getInt(
+                       mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
+                        == GAME_DRIVER_OFF
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
@@ -72,7 +67,7 @@ public class GupEnableForAllAppsPreferenceController extends BasePreferenceContr
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
+        mPreference = (FooterPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -87,19 +82,7 @@ public class GupEnableForAllAppsPreferenceController extends BasePreferenceContr
 
     @Override
     public void updateState(Preference preference) {
-        final SwitchPreference switchPreference = (SwitchPreference) preference;
-        switchPreference.setVisible(isAvailable());
-        switchPreference.setChecked(Settings.Global.getInt(mContentResolver,
-                                            Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
-                == GUP_ALL_APPS);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Settings.Global.putInt(mContentResolver, Settings.Global.GUP_DEV_ALL_APPS,
-                (boolean) newValue ? GUP_ALL_APPS : GUP_DEFAULT);
-
-        return true;
+        preference.setVisible(isAvailable());
     }
 
     @Override

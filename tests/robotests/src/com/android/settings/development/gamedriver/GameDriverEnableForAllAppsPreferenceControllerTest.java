@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
 
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_ALL_APPS;
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_DEFAULT;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.atLeastOnce;
@@ -40,7 +40,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GupEnableForAllAppsPreferenceControllerTest {
+public class GameDriverEnableForAllAppsPreferenceControllerTest {
+
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -50,14 +51,14 @@ public class GupEnableForAllAppsPreferenceControllerTest {
 
     private Context mContext;
     private ContentResolver mResolver;
-    private GupEnableForAllAppsPreferenceController mController;
+    private GameDriverEnableForAllAppsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mResolver = mContext.getContentResolver();
-        mController = new GupEnableForAllAppsPreferenceController(mContext, "testKey");
+        mController = new GameDriverEnableForAllAppsPreferenceController(mContext, "testKey");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
 
@@ -66,7 +67,8 @@ public class GupEnableForAllAppsPreferenceControllerTest {
 
     @Test
     public void displayPreference_shouldAddSwitchPreference() {
-        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
@@ -90,19 +92,23 @@ public class GupEnableForAllAppsPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_check_shouldUpdateSettingsGlobal() {
-        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
         mController.onPreferenceChange(mPreference, true);
 
-        assertThat(Settings.Global.getInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT))
-                .isEqualTo(GUP_ALL_APPS);
+        assertThat(Settings.Global.getInt(
+                           mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
+                .isEqualTo(GAME_DRIVER_ALL_APPS);
     }
 
     @Test
     public void onPreferenceChange_uncheck_shouldUpdateSettingsGlobal() {
-        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_ALL_APPS);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_ALL_APPS);
         mController.onPreferenceChange(mPreference, false);
 
-        assertThat(Settings.Global.getInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT))
-                .isEqualTo(GUP_DEFAULT);
+        assertThat(Settings.Global.getInt(
+                           mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
+                .isEqualTo(GAME_DRIVER_DEFAULT);
     }
 }
