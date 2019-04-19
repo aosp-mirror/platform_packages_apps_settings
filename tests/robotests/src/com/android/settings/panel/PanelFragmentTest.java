@@ -36,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -105,6 +106,7 @@ public class PanelFragmentTest {
     }
 
     @Test
+    @Ignore("b/130896218")
     public void onDestroy_logCloseEvent() {
         mPanelFragment.onDestroy();
         verify(mFakeFeatureFactory.metricsFeatureProvider).action(
@@ -115,6 +117,7 @@ public class PanelFragmentTest {
                 0);    }
 
     @Test
+    @Ignore("b/130896218")
     public void panelSeeMoreClick_logsCloseEvent() {
         final View.OnClickListener listener = mPanelFragment.getSeeMoreListener();
 
@@ -130,6 +133,7 @@ public class PanelFragmentTest {
     }
 
     @Test
+    @Ignore("b/130896218")
     public void panelDoneClick_logsCloseEvent() {
         final View.OnClickListener listener = mPanelFragment.getCloseListener();
 
