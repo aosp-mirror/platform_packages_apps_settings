@@ -136,6 +136,7 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
                 <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
+                <action android:name="android.settings.MMS_MESSAGE_SETTING" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -2623,6 +2624,7 @@
         <receiver android:name=".sim.SimSelectNotification">
             <intent-filter>
                 <action android:name="android.telephony.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
+                <action android:name="android.settings.ENABLE_MMS_DATA_REQUEST"/>
             </intent-filter>
         </receiver>
 

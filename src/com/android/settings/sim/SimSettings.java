@@ -101,7 +101,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         mSimCards = (PreferenceScreen)findPreference(SIM_CARD_CATEGORY);
         mAvailableSubInfos = new ArrayList<SubscriptionInfo>(mNumSlots);
         mSelectableSubInfos = new ArrayList<SubscriptionInfo>();
-        SimSelectNotification.cancelNotification(getActivity());
+        SimSelectNotification.cancelSimSelectNotification(getActivity());
     }
 
     private final SubscriptionManager.OnSubscriptionsChangedListener mOnSubscriptionsChangeListener
