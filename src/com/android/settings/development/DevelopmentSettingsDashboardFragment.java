@@ -400,7 +400,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));
         controllers.add(new WaitForDebuggerPreferenceController(context));
         controllers.add(new EnableGpuDebugLayersPreferenceController(context));
-        controllers.add(new GameUpdatePackageDevOptInPreferenceController(context, fragment));
         controllers.add(new VerifyAppsOverUsbPreferenceController(context));
         controllers.add(new LogdSizePreferenceController(context));
         controllers.add(new LogPersistPreferenceController(context, fragment, lifecycle));
