@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -38,6 +39,7 @@ import com.google.android.setupcompat.template.FooterButton;
  */
 public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
+    private static final String TAG = "FingerprintEnrollFinish";
     @VisibleForTesting
     static final int REQUEST_ADD_ANOTHER = 1;
     @VisibleForTesting
@@ -70,6 +72,13 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        updateFingerprintSuggestionEnableState();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -93,12 +102,12 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     @Override
     protected void onNextButtonClick(View view) {
-        setFingerprintSuggestionEnabled();
+        updateFingerprintSuggestionEnableState();
         setResult(RESULT_FINISHED);
         finish();
     }
 
-    private void setFingerprintSuggestionEnabled() {
+    private void updateFingerprintSuggestionEnableState() {
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
         if (fpm != null) {
             int enrolled = fpm.getEnrolledFingerprints(mUserId).size();
@@ -114,6 +123,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                     FINGERPRINT_SUGGESTION_ACTIVITY);
             getPackageManager().setComponentEnabledSetting(
                     componentName, flag, PackageManager.DONT_KILL_APP);
+            Log.d(TAG, FINGERPRINT_SUGGESTION_ACTIVITY + " enabled state = " + (enrolled == 1));
         }
     }
 
@@ -123,7 +133,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        setFingerprintSuggestionEnabled();
+        updateFingerprintSuggestionEnableState();
         if (requestCode == REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
             setResult(resultCode, data);
             finish();

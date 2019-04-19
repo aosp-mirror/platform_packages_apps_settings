@@ -19,7 +19,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="smart_battery_detail"
-    android:title="@string/smart_battery_manager_title">
+    android:title="@string/smart_battery_manager_title"
+    settings:searchable="false">
 
     <com.android.settings.widget.VideoPreference
         android:key="auto_awesome_battery"

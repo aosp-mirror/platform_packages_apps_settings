@@ -360,6 +360,15 @@ public class NotificationBackend {
         return new ArrayList<>();
     }
 
+    public boolean showSilentInStatusBar(String pkg) {
+        try {
+            return !sINM.shouldHideSilentStatusIcons(pkg);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
+    }
+
     protected void recordAggregatedUsageEvents(Context context, AppRow appRow) {
         long now = System.currentTimeMillis();
         long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);

@@ -47,32 +47,24 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        if (mAppRow == null) {
-            return false;
-        }
-        if (mAppRow.banned) {
+        if (!super.isAvailable()) {
             return false;
         }
         if (mChannel == null) {
             return false;
         }
-        if (isDefaultChannel()) {
-            return false;
-        }
-        if (mChannelGroup != null && mChannelGroup.isBlocked()) {
-            return false;
-        }
-        return true;
+        return !isDefaultChannel();
     }
 
     @Override
     public void updateState(Preference preference) {
         if (mAppRow!= null && mChannel != null) {
-            preference.setEnabled(mAdmin == null && isChannelConfigurable());
+            preference.setEnabled(mAdmin == null && isChannelBlockable());
             ImportancePreference pref = (ImportancePreference) preference;
-            pref.setBlockable(isChannelBlockable());
-            pref.setConfigurable(isChannelConfigurable());
+            pref.setConfigurable(isChannelBlockable());
             pref.setImportance(mChannel.getImportance());
+            pref.setDisplayInStatusBar(mBackend.showSilentInStatusBar(mContext.getPackageName()));
+            // TODO: b/128445911 pass along lock screen setting
         }
     }
 

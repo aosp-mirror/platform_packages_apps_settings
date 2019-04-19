@@ -2303,10 +2303,19 @@
     <string name="wifi_forget_dialog_message">All passwords for this network will be deleted</string>
 
     <!-- Wi-Fi Advanced Settings --> <skip />
-    <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks a user has saved. -->
+    <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks, not including passpoint network, a user has saved. [CHAR LIMIT=30] -->
     <plurals name="wifi_saved_access_points_summary">
         <item quantity="one">1 network</item>
         <item quantity="other">%d networks</item>
+    </plurals>
+    <!-- Wi-Fi settings screen, Saved passpoint networks summary.  This shows below the "Saved networks" item and indicates the number of passpoint networks a user has saved. [CHAR LIMIT=30] -->
+    <plurals name="wifi_saved_passpoint_access_points_summary">
+        <item quantity="one">1 subscription</item>
+        <item quantity="other">%d subscriptions</item>
+    </plurals>
+    <!-- Wi-Fi settings screen, Saved passpoint networks summary.  This shows below the "Saved networks" item and indicates number of whole kinds networks, if there are both normal saved networks and saved passpoint networks. The number will be at least 2. [CHAR LIMIT=60] -->
+    <plurals name="wifi_saved_all_access_points_summary">
+        <item quantity="other">%d networks &amp; subscriptions</item>
     </plurals>
     <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. [CHAR LIMIT=30] -->
     <string name="wifi_advanced_titlebar">Advanced Wi\u2011Fi</string>
@@ -7786,17 +7795,20 @@
     <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
     <string name="profile_section_header">Work notifications</string>
 
+    <!-- Configure Notifications: section header for prioritizer settings  [CHAR LIMIT=80] -->
+    <string name="smart_notifications_title">Smart notifications</string>
+
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
-    <string name="asst_capability_prioritizer_title">Automatic Notification Prioritizer</string>
+    <string name="asst_capability_prioritizer_title">Automatic Prioritization</string>
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
-    <string name="asst_capability_prioritizer_summary">Automatically silence and demote less important notifications</string>
+    <string name="asst_capability_prioritizer_summary">Automatically de-prioritize less important notifications to the gentle section</string>
 
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
     <string name="asst_capabilities_actions_replies_title">Smart actions and replies</string>
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
-    <string name="asst_capabilities_actions_replies_summary">Automatically add contextual notification actions and quick replies to notifications</string>
+    <string name="asst_capabilities_actions_replies_summary">Automatically add suggested actions and replies to notifications</string>
 
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
     <string name="hide_silent_icons_title">Hide silent notification status icons</string>
@@ -7942,10 +7954,10 @@
     <string name="notification_block_title">Block</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title -->
-    <string name="notification_silence_title">Show silently</string>
+    <string name="notification_silence_title">Gentle</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title -->
-    <string name="notification_alert_title">Alert</string>
+    <string name="notification_alert_title">Prioritized</string>
 
     <!-- [CHAR LIMIT=40] Notification importance title. This setting controls how notifications in older apps may alert the user (eg, sound, visual, vibrate). -->
     <string name="allow_interruption">Allow interruptions</string>
@@ -7955,17 +7967,26 @@
 
     <!-- Channel summaries for the app notification page -->
 
-    <!-- [CHAR LIMIT=100] Notification Importance title: min importance level title -->
-    <string name="notification_channel_summary_min">Low importance</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: min importance level summary -->
+    <string name="notification_channel_summary_min">In the pull-down shade, collapse notifications to one line</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level title -->
-    <string name="notification_channel_summary_low">Medium importance</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
+    <string name="notification_channel_summary_low">Gentle notifications will display in pull-down list</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance title: normal importance level title -->
-    <string name="notification_channel_summary_default">High importance</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
+    <string name="notification_channel_summary_low_status">Gentle notifications will display in pull-down list &amp; status bar</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance title: high importance level title -->
-    <string name="notification_channel_summary_high">Urgent importance</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
+    <string name="notification_channel_summary_low_lock">Gentle notifications will display in pull-down list &amp; on lock screen</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
+    <string name="notification_channel_summary_low_status_lock">Gentle notifications will display in pull-down list, status bar &amp; on lock screen</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: normal importance level summary -->
+    <string name="notification_channel_summary_default">Prioritized notifications will alert and display in pull-down list, status bar &amp; on lock screen</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: high importance level summary -->
+    <string name="notification_channel_summary_high">When phone is unlocked, show notifications as a banner across top of screen</string>
 
     <!-- [CHAR LIMIT=100] Label for on/off toggle -->
     <string name="notification_switch_label">Show notifications</string>

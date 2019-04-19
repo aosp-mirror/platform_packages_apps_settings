@@ -542,4 +542,24 @@
         <item name="sudUsePartnerHeavyTheme">true</item>
     </style>
 
+    <style name="TextAppearance.NotificationImportanceDetail">
+        <item name="android:textSize">@dimen/notification_importance_description_text</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextAppearance.NotificationImportanceButton">
+        <item name="android:textSize">@dimen/notification_importance_button_text</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextAppearance.NotificationImportanceButton.Selected" parent="TextAppearance.NotificationImportanceButton">
+        <item name="android:textColor">?android:attr/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.NotificationImportanceButton.Unselected" parent="TextAppearance.NotificationImportanceButton">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
 </resources>

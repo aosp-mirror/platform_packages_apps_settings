@@ -31,10 +31,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.PendingIntent;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.StrictMode;
@@ -442,6 +444,16 @@ public class SettingsSliceProviderTest {
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 
         assertThat(descendants).containsExactlyElementsIn(expectedUris);
+    }
+
+    @Test
+    public void onCreatePermissionRequest_returnsSettingIntent() {
+        final PendingIntent pendingIntent = mProvider.onCreatePermissionRequest(
+                CustomSliceRegistry.FLASHLIGHT_SLICE_URI, "com.android.whaaaat");
+        PendingIntent settingsPendingIntent =
+                PendingIntent.getActivity(mContext, 0, new Intent(Settings.ACTION_SETTINGS), 0);
+
+        assertThat(pendingIntent).isEqualTo(settingsPendingIntent);
     }
 
     @Test
