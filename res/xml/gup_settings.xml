@@ -17,4 +17,14 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/gup_dashboard_title" />
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="gup_settings"
+    android:title="@string/gup_dashboard_title">
+
+    <PreferenceCategory
+        android:key="gup_category"
+        android:title="@string/gup_app_preference_title"
+        settings:controller="com.android.settings.development.gup.GupPreferenceController">
+    </PreferenceCategory>
+
+</PreferenceScreen>
