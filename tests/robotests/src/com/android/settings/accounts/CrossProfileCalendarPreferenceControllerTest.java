@@ -40,6 +40,7 @@ import android.util.ArraySet;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -91,6 +92,7 @@ public class CrossProfileCalendarPreferenceControllerTest {
     }
 
     @Test
+    @Ignore("b/130896049")
     public void getAvailabilityStatus_hasManagedUser_AVAILABLE() {
         mController.setManagedUser(mManagedUser);
         assertThat(mController.getAvailabilityStatus())

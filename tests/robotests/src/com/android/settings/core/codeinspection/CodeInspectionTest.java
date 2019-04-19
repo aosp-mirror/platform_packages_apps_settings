@@ -24,6 +24,7 @@ import com.android.settings.search.SearchIndexProviderCodeInspector;
 import com.android.settings.slices.SliceControllerInXmlCodeInspector;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -46,6 +47,7 @@ public class CodeInspectionTest {
     }
 
     @Test
+    @Ignore("b/130897640")
     public void runInstrumentableFragmentCodeInspection() {
         new InstrumentableFragmentCodeInspector(mClasses).run();
     }

@@ -35,6 +35,7 @@ import android.view.MotionEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -89,6 +90,7 @@ public class SettingsPanelActivityTest {
     }
 
     @Test
+    @Ignore("b/130896218")
     public void onTouchEvent_outsideAction_logsPanelClosed() {
         final MotionEvent event = mock(MotionEvent.class);
         when(event.getAction()).thenReturn(MotionEvent.ACTION_OUTSIDE);
