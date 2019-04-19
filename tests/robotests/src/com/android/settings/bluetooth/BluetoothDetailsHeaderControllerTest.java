@@ -27,7 +27,9 @@ import android.bluetooth.BluetoothDevice;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
@@ -44,7 +46,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowEntityHeaderController.class)
+@Config(shadows = {ShadowEntityHeaderController.class, ShadowDeviceConfig.class})
 public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsControllerTestBase {
 
     private BluetoothDetailsHeaderController mController;
@@ -123,10 +125,24 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
     }
 
     @Test
-    public void isAvailable_untetheredHeadset_returnFalse() {
+    public void isAvailable_untetheredHeadsetWithConfigOn_returnFalse() {
+        android.provider.DeviceConfig.setProperty(
+                android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn("true".getBytes());
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_untetheredHeadsetWithConfigOff_returnTrue() {
+        android.provider.DeviceConfig.setProperty(
+                android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "false", true);
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn("true".getBytes());
+
+        assertThat(mController.isAvailable()).isTrue();
     }
 }
