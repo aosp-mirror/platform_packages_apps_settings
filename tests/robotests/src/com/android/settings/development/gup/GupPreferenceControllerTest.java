@@ -50,7 +50,7 @@ import org.robolectric.RuntimeEnvironment;
 public class GupPreferenceControllerTest {
     private static final int DEFAULT = 0;
     private static final int GUP = 1;
-    private static final int NATIVE = 2;
+    private static final int SYSTEM = 2;
     private static final String TEST_APP_NAME = "testApp";
     private static final String TEST_PKG_NAME = "testPkg";
 
@@ -125,7 +125,7 @@ public class GupPreferenceControllerTest {
     }
 
     @Test
-    public void createPreference_configNative_shouldSetNativeAttributes() {
+    public void createPreference_configSystem_shouldSetSystemAttributes() {
         loadConfig("", TEST_PKG_NAME);
         final ListPreference preference =
                 mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
@@ -135,9 +135,9 @@ public class GupPreferenceControllerTest {
         assertThat(preference.getDialogTitle()).isEqualTo(mDialogTitle);
         assertThat(preference.getEntries()).isEqualTo(mValueList);
         assertThat(preference.getEntryValues()).isEqualTo(mValueList);
-        assertThat(preference.getEntry()).isEqualTo(mValueList[NATIVE]);
-        assertThat(preference.getValue()).isEqualTo(mValueList[NATIVE]);
-        assertThat(preference.getSummary()).isEqualTo(mValueList[NATIVE]);
+        assertThat(preference.getEntry()).isEqualTo(mValueList[SYSTEM]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[SYSTEM]);
+        assertThat(preference.getSummary()).isEqualTo(mValueList[SYSTEM]);
     }
 
     @Test
@@ -147,6 +147,8 @@ public class GupPreferenceControllerTest {
                 mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[DEFAULT]);
 
+        assertThat(preference.getEntry()).isEqualTo(mValueList[DEFAULT]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[DEFAULT]);
         assertThat(preference.getSummary()).isEqualTo(mValueList[DEFAULT]);
         assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_IN_APPS))
                 .isEqualTo("");
@@ -161,6 +163,8 @@ public class GupPreferenceControllerTest {
                 mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[GUP]);
 
+        assertThat(preference.getEntry()).isEqualTo(mValueList[GUP]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[GUP]);
         assertThat(preference.getSummary()).isEqualTo(mValueList[GUP]);
         assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_IN_APPS))
                 .isEqualTo(TEST_PKG_NAME);
@@ -169,13 +173,15 @@ public class GupPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_selectNative_shouldUpdateAttributesAndSettingsGlobal() {
+    public void onPreferenceChange_selectSystem_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
                 mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
-        mController.onPreferenceChange(preference, mValueList[NATIVE]);
+        mController.onPreferenceChange(preference, mValueList[SYSTEM]);
 
-        assertThat(preference.getSummary()).isEqualTo(mValueList[NATIVE]);
+        assertThat(preference.getEntry()).isEqualTo(mValueList[SYSTEM]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[SYSTEM]);
+        assertThat(preference.getSummary()).isEqualTo(mValueList[SYSTEM]);
         assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_IN_APPS))
                 .isEqualTo("");
         assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_OUT_APPS))

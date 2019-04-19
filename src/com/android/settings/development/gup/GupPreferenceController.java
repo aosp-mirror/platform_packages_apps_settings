@@ -48,7 +48,7 @@ public class GupPreferenceController
     private final String mPreferenceTitle;
     private final String mPreferenceDefault;
     private final String mPreferenceGup;
-    private final String mPreferenceNative;
+    private final String mPreferenceSystem;
 
     private final List<AppInfo> mAppInfos;
     private final Set<String> mDevOptInApps;
@@ -62,7 +62,7 @@ public class GupPreferenceController
         mPreferenceTitle = resources.getString(R.string.gup_app_preference_title);
         mPreferenceDefault = resources.getString(R.string.gup_app_preference_default);
         mPreferenceGup = resources.getString(R.string.gup_app_preference_gup);
-        mPreferenceNative = resources.getString(R.string.gup_app_preference_native);
+        mPreferenceSystem = resources.getString(R.string.gup_app_preference_system);
 
         // TODO: Move this task to background if there's potential ANR/Jank.
         // Update the UI when all the app infos are ready.
@@ -105,19 +105,18 @@ public class GupPreferenceController
 
         // When user choose a new preference, update both Sets for
         // opt-in and opt-out apps. Then set the new summary text.
-        if (value.equals(mPreferenceNative)) {
+        if (value.equals(mPreferenceSystem)) {
             mDevOptInApps.remove(packageName);
             mDevOptOutApps.add(packageName);
-            listPref.setSummary(mPreferenceNative);
         } else if (value.equals(mPreferenceGup)) {
             mDevOptInApps.add(packageName);
             mDevOptOutApps.remove(packageName);
-            listPref.setSummary(mPreferenceGup);
         } else {
             mDevOptInApps.remove(packageName);
             mDevOptOutApps.remove(packageName);
-            listPref.setSummary(mPreferenceDefault);
         }
+        listPref.setValue(value);
+        listPref.setSummary(value);
 
         // Push the updated Sets for opt-in and opt-out apps to
         // corresponding Settings.Global.GUP_DEV_OPT_(IN|OUT)_APPS
@@ -189,8 +188,8 @@ public class GupPreferenceController
         // Initialize preference default and summary with the opt in/out choices
         // from Settings.Global.GUP_DEV_OPT_(IN|OUT)_APPS
         if (mDevOptOutApps.contains(packageName)) {
-            listPreference.setValue(mPreferenceNative);
-            listPreference.setSummary(mPreferenceNative);
+            listPreference.setValue(mPreferenceSystem);
+            listPreference.setSummary(mPreferenceSystem);
         } else if (mDevOptInApps.contains(packageName)) {
             listPreference.setValue(mPreferenceGup);
             listPreference.setSummary(mPreferenceGup);
