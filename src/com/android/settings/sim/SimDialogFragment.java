@@ -20,10 +20,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
+
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /** Common functionality for showing a dialog in SimDialogActivity. */
-public abstract class SimDialogFragment extends DialogFragment {
+public abstract class SimDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "SimDialogFragment";
 
     private static final String KEY_TITLE_ID = "title_id";
