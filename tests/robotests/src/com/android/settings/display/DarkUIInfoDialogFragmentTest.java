@@ -50,7 +50,7 @@ public class DarkUIInfoDialogFragmentTest {
     }
 
     @Test
-    @@Ignore("b/130897882")
+    @Ignore("b/130897882")
     public void dialogDismissedOnConfirmation() {
         doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
         SharedPreferences prefs = RuntimeEnvironment.application.getSharedPreferences(
