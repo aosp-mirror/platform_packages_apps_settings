@@ -25,7 +25,6 @@ public class FeatureFlags {
     public static final String HEARING_AID_SETTINGS = "settings_bluetooth_hearing_aid";
     public static final String MOBILE_NETWORK_V2 = "settings_mobile_network_v2";
     public static final String NETWORK_INTERNET_V2 = "settings_network_and_internet_v2";
-    public static final String SLICE_INJECTION = "settings_slice_injection";
     public static final String WIFI_DETAILS_DATAUSAGE_HEADER =
             "settings_wifi_details_datausage_header";
 }
