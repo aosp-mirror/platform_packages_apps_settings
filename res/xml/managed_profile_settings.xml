@@ -32,11 +32,18 @@
         settings:useAdditionalSummary="true"
         settings:controller="com.android.settings.accounts.ContactSearchPreferenceController"/>
 
-    <com.android.settingslib.RestrictedSwitchPreference
+    <!-- Only one of these preferences will be visible at a time, depending on
+         CrossProfileCalendarPreferenceController#isCrossProfileCalendarDisallowedByAdmin -->
+    <SwitchPreference
         android:key="cross_profile_calendar"
         android:summary="@string/cross_profile_calendar_summary"
         android:title="@string/cross_profile_calendar_title"
-        settings:useAdditionalSummary="true"
         settings:controller="com.android.settings.accounts.CrossProfileCalendarPreferenceController"/>
+    <Preference
+        android:key="cross_profile_calendar_disabled"
+        android:summary="@string/cross_profile_calendar_restricted_summary"
+        android:title="@string/cross_profile_calendar_title"
+        android:enabled="false"
+        settings:controller="com.android.settings.accounts.CrossProfileCalendarDisabledPreferenceController"/>
 
 </PreferenceScreen>
