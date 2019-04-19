@@ -45,6 +45,7 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
@@ -313,7 +314,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @VisibleForTesting
     void updateLastFullChargePreference() {
         if (mBatteryInfo != null && mBatteryInfo.averageTimeToDischarge
-                != Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN) {
+                != EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN) {
             mLastFullChargePref.setTitle(R.string.battery_full_charge_last);
             mLastFullChargePref.setSubtitle(
                     StringUtil.formatElapsedTime(getContext(), mBatteryInfo.averageTimeToDischarge,

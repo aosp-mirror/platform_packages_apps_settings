@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.util.SparseIntArray;
 
 import com.android.internal.os.BatterySipper;
+import com.android.settingslib.fuelgauge.Estimate;
 
 /**
  * Feature Provider used in power usage
