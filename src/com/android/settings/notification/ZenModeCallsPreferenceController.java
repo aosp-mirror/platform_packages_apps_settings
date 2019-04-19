@@ -16,7 +16,9 @@
 
 package com.android.settings.notification;
 
+import android.app.NotificationManager;
 import android.content.Context;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 
@@ -50,6 +52,16 @@ public class ZenModeCallsPreferenceController extends
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        preference.setSummary(mSummaryBuilder.getCallsSettingSummary(getPolicy()));
+        switch (getZenMode()) {
+            case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
+            case Settings.Global.ZEN_MODE_ALARMS:
+                preference.setEnabled(false);
+                preference.setSummary(mBackend.getAlarmsTotalSilenceCallsMessagesSummary(
+                        NotificationManager.Policy.PRIORITY_CATEGORY_CALLS));
+                break;
+            default:
+                preference.setEnabled(true);
+                preference.setSummary(mSummaryBuilder.getCallsSettingSummary(getPolicy()));
+        }
     }
 }
