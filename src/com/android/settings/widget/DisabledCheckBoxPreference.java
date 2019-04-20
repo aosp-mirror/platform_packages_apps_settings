@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.PreferenceViewHolder;
@@ -89,6 +90,12 @@ public class DisabledCheckBoxPreference extends CheckBoxPreference {
         mCheckBox = holder.findViewById(android.R.id.checkbox);
 
         enableCheckbox(mEnabledCheckBox);
+
+        TextView title = (TextView) holder.findViewById(android.R.id.title);
+        if (title != null) {
+            title.setSingleLine(false);
+            title.setMaxLines(2);
+        }
     }
 
     @Override

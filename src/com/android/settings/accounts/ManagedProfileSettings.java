@@ -16,16 +16,22 @@
 
 package com.android.settings.accounts;
 
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -36,6 +42,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Setting page for managed profile.
@@ -72,6 +79,7 @@ public class ManagedProfileSettings extends DashboardFragment {
         use(WorkModePreferenceController.class).setManagedUser(mManagedUser);
         use(ContactSearchPreferenceController.class).setManagedUser(mManagedUser);
         use(CrossProfileCalendarPreferenceController.class).setManagedUser(mManagedUser);
+        use(CrossProfileCalendarDisabledPreferenceController.class).setManagedUser(mManagedUser);
     }
 
     @Override
