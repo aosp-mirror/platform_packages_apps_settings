@@ -62,7 +62,7 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
         if (mChannel != null) {
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setDisabledByAdmin(mAdmin);
-            pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
+            pref.setEnabled(!pref.isDisabledByAdmin());
             pref.setChecked(mChannel.getImportance() >= IMPORTANCE_DEFAULT
                     || mChannel.getImportance() == IMPORTANCE_UNSPECIFIED);
         } else { Log.i(TAG, "tried to updatestate on a null channel?!"); }

@@ -34,6 +34,8 @@ import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.R;
+import com.android.settingslib.fuelgauge.Estimate;
+import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 
@@ -44,7 +46,7 @@ public class BatteryInfo {
     public int batteryLevel;
     public boolean discharging = true;
     public long remainingTimeUs = 0;
-    public long averageTimeToDischarge = Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
+    public long averageTimeToDischarge = EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
     public String batteryPercentString;
     public String statusLabel;
     public String suggestionLabel;
@@ -202,7 +204,7 @@ public class BatteryInfo {
         final Estimate estimate = new Estimate(
                 PowerUtil.convertUsToMs(prediction),
                 false, /* isBasedOnUsage */
-                Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         BatteryUtils.logRuntime(LOG_TAG, "time for regular BatteryInfo", startTime);
         return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
                 estimate, elapsedRealtimeUs, shortString);
@@ -214,7 +216,7 @@ public class BatteryInfo {
         Estimate estimate = new Estimate(
                 PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
                 false,
-                Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         return getBatteryInfo(context, batteryBroadcast, stats, estimate, elapsedRealtimeUs,
                 shortString);
     }
@@ -228,7 +230,7 @@ public class BatteryInfo {
         info.batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
         info.batteryPercentString = Utils.formatPercentage(info.batteryLevel);
         info.mCharging = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
-        info.averageTimeToDischarge = estimate.averageDischargeTime;
+        info.averageTimeToDischarge = estimate.getAverageDischargeTime();
         final Resources resources = context.getResources();
 
         info.statusLabel = Utils.getBatteryStatus(resources, batteryBroadcast);
@@ -269,20 +271,20 @@ public class BatteryInfo {
 
     private static void updateBatteryInfoDischarging(Context context, boolean shortString,
             Estimate estimate, BatteryInfo info) {
-        final long drainTimeUs = PowerUtil.convertMsToUs(estimate.estimateMillis);
+        final long drainTimeUs = PowerUtil.convertMsToUs(estimate.getEstimateMillis());
         if (drainTimeUs > 0) {
             info.remainingTimeUs = drainTimeUs;
             info.remainingLabel = PowerUtil.getBatteryRemainingStringFormatted(
                     context,
                     PowerUtil.convertUsToMs(drainTimeUs),
                     null /* percentageString */,
-                    estimate.isBasedOnUsage && !shortString
+                    estimate.isBasedOnUsage() && !shortString
             );
             info.chargeLabel = PowerUtil.getBatteryRemainingStringFormatted(
                     context,
                     PowerUtil.convertUsToMs(drainTimeUs),
                     info.batteryPercentString,
-                    estimate.isBasedOnUsage && !shortString
+                    estimate.isBasedOnUsage() && !shortString
             );
             info.suggestionLabel = PowerUtil.getBatteryTipStringFormatted(
                     context, PowerUtil.convertUsToMs(drainTimeUs));

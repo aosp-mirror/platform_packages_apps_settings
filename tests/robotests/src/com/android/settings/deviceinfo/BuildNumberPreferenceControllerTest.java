@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -24,6 +26,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Process;
 import android.os.UserManager;
@@ -189,5 +192,15 @@ public class BuildNumberPreferenceControllerTest {
 
         assertThat(activityResultHandled).isTrue();
         assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isTrue();
+    }
+
+    @Test
+    public void copy_shouldCopyBuildNumberToClipboard() {
+        mController.copy();
+
+        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
+                CLIPBOARD_SERVICE);
+        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
+        assertThat(data.toString()).isEqualTo(mController.getSummary());
     }
 }

@@ -82,7 +82,7 @@ public class BatteryMeterView extends ImageView {
     }
 
     public int getBatteryLevel() {
-        return mDrawable.getLevel();
+        return mDrawable.getBatteryLevel();
     }
 
     public void setCharging(boolean charging) {

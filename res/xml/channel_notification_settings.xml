@@ -25,6 +25,11 @@
         android:order="1"
         android:layout="@layout/settings_entity_header" />
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="block"
+        android:order="2"
+        android:layout="@layout/styled_switch_bar" />
+
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="allow_sound"
@@ -43,13 +48,15 @@
         android:key="min_importance"
         android:order="5"
         settings:allowDividerAbove="true"
-        android:title="@string/notification_importance_min_title"/>
+        android:title="@string/notification_importance_min_title"
+        android:summary="@string/notification_channel_summary_min"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="high_importance"
         android:order="6"
         settings:allowDividerAbove="true"
-        android:title="@string/notification_importance_high_title"/>
+        android:title="@string/notification_importance_high_title"
+        android:summary="@string/notification_channel_summary_high"/>
 
     <PreferenceCategory
         android:key="channel_advanced"

@@ -32,6 +32,7 @@ import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -40,6 +41,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore("b/130897305")
 public class AdaptiveSleepPreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "adaptive_sleep";

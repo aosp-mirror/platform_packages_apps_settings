@@ -56,7 +56,7 @@ public class VibrationPreferenceController extends NotificationPreferenceControl
         if (mChannel != null) {
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setDisabledByAdmin(mAdmin);
-            pref.setEnabled(!pref.isDisabledByAdmin() && isChannelConfigurable());
+            pref.setEnabled(!pref.isDisabledByAdmin());
             pref.setChecked(mChannel.shouldVibrate());
         }
     }

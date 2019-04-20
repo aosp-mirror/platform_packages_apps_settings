@@ -39,6 +39,7 @@ public class TetherProvisioningActivity extends Activity {
     private static final int PROVISION_REQUEST = 0;
     private static final String TAG = "TetherProvisioningAct";
     private static final String EXTRA_TETHER_TYPE = "TETHER_TYPE";
+    private static final String EXTRA_SUBID = "subId";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private ResultReceiver mResultReceiver;
 
@@ -49,14 +50,21 @@ public class TetherProvisioningActivity extends Activity {
         mResultReceiver = (ResultReceiver)getIntent().getParcelableExtra(
                 ConnectivityManager.EXTRA_PROVISION_CALLBACK);
 
-        int tetherType = getIntent().getIntExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE,
+        final int tetherType = getIntent().getIntExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE,
                 ConnectivityManager.TETHERING_INVALID);
+
+        final int tetherSubId = getIntent().getIntExtra(EXTRA_SUBID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         final int subId = SubscriptionManager.getDefaultDataSubscriptionId();
+        if (tetherSubId != subId) {
+            Log.e(TAG, "This Provisioning request is outdated, current subId: " + subId);
+            return;
+        }
         final Resources res = Utils.getResourcesForSubId(this, subId);
         final String[] provisionApp = res.getStringArray(
                 com.android.internal.R.array.config_mobile_hotspot_provision_app);
 
-        Intent intent = new Intent(Intent.ACTION_MAIN);
+        final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClassName(provisionApp[0], provisionApp[1]);
         intent.putExtra(EXTRA_TETHER_TYPE, tetherType);
         if (DEBUG) {

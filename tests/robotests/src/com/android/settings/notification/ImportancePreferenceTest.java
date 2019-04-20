@@ -27,18 +27,12 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.Switch;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +40,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 @RunWith(RobolectricTestRunner.class)
@@ -59,11 +52,6 @@ public class ImportancePreferenceTest {
         mContext = RuntimeEnvironment.application;
     }
 
-    private GradientDrawable getBackground(ImageButton button) {
-        return (GradientDrawable) ((LayerDrawable) button.getDrawable())
-                .findDrawableByLayerId(R.id.back);
-    }
-
     @Test
     public void createNewPreference_shouldSetLayout() {
         final ImportancePreference preference = new ImportancePreference(mContext);
@@ -72,36 +60,26 @@ public class ImportancePreferenceTest {
     }
 
     @Test
-    public void onBindViewHolder_hideBlockNonBlockable() {
-        final ImportancePreference preference = new ImportancePreference(mContext);
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                inflater.inflate(R.layout.notif_importance_preference, null));
-
-        preference.setBlockable(false);
-        preference.setConfigurable(true);
-        preference.setImportance(IMPORTANCE_DEFAULT);
-        preference.onBindViewHolder(holder);
-
-        assertThat(holder.itemView.findViewById(R.id.block).getVisibility()).isEqualTo(View.GONE);
-    }
-
-    @Test
-    public void onBindViewHolder_hideNonSelectedNonConfigurable() {
+    public void onBindViewHolder_nonConfigurable() {
         final ImportancePreference preference = new ImportancePreference(mContext);
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(R.layout.notif_importance_preference, null));
+        Drawable unselected = mock(Drawable.class);
+        Drawable selected = mock(Drawable.class);
+        preference.selectedBackground = selected;
+        preference.unselectedBackground = unselected;
 
-        preference.setBlockable(true);
         preference.setConfigurable(false);
         preference.setImportance(IMPORTANCE_DEFAULT);
         preference.onBindViewHolder(holder);
 
-        assertThat(holder.itemView.findViewById(R.id.block).getVisibility()).isEqualTo(View.GONE);
-        assertThat(holder.itemView.findViewById(R.id.silence).getVisibility()).isEqualTo(View.GONE);
-        assertThat(holder.itemView.findViewById(R.id.alert).getVisibility())
-                .isEqualTo(View.VISIBLE);
+        assertThat(holder.itemView.findViewById(R.id.silence).isEnabled()).isFalse();
+        assertThat(holder.itemView.findViewById(R.id.alert).isEnabled()).isFalse();
+
+        assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(selected);
+        assertThat(holder.itemView.findViewById(R.id.silence).getBackground())
+                .isEqualTo(unselected);
 
         // other button
         preference.setImportance(IMPORTANCE_LOW);
@@ -109,37 +87,31 @@ public class ImportancePreferenceTest {
                 inflater.inflate(R.layout.notif_importance_preference, null));
         preference.onBindViewHolder(holder);
 
-        assertThat(holder.itemView.findViewById(R.id.block).getVisibility()).isEqualTo(View.GONE);
-        assertThat(holder.itemView.findViewById(R.id.silence).getVisibility())
-                .isEqualTo(View.VISIBLE);
-        assertThat(holder.itemView.findViewById(R.id.alert).getVisibility())
-                .isEqualTo(View.GONE);
+        assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.silence).getBackground()).isEqualTo(selected);
     }
 
     @Test
-    public void onBindViewHolder_selectButton() {
+    public void onBindViewHolder_selectButtonAndText() {
         final ImportancePreference preference = new ImportancePreference(mContext);
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(R.layout.notif_importance_preference, null));
+        Drawable unselected = mock(Drawable.class);
+        Drawable selected = mock(Drawable.class);
+        preference.selectedBackground = selected;
+        preference.unselectedBackground = unselected;
 
-        preference.setBlockable(true);
         preference.setConfigurable(true);
         preference.setImportance(IMPORTANCE_DEFAULT);
 
-        ImageButton blockButton = (ImageButton) holder.findViewById(R.id.block_icon);
-        ImageButton silenceButton = (ImageButton) holder.findViewById(R.id.silence_icon);
-        ImageButton alertButton = (ImageButton) holder.findViewById(R.id.alert_icon);
-
         preference.onBindViewHolder(holder);
 
-        // selected has full color background. others are transparent
-        assertThat(getBackground(alertButton).getColor().getColors()[0]).isNotEqualTo(
-                Color.TRANSPARENT);
-        assertThat(getBackground(silenceButton).getColor().getColors()[0]).isEqualTo(
-                Color.TRANSPARENT);
-        assertThat(getBackground(blockButton).getColor().getColors()[0]).isEqualTo(
-                Color.TRANSPARENT);
+        assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(selected);
+        assertThat(holder.itemView.findViewById(R.id.silence).getBackground())
+                .isEqualTo(unselected);
+        assertThat(((TextView) holder.itemView.findViewById(R.id.description)).getText()).isEqualTo(
+                mContext.getString(R.string.notification_channel_summary_default));
     }
 
     @Test
@@ -148,45 +120,84 @@ public class ImportancePreferenceTest {
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(R.layout.notif_importance_preference, null));
+        Drawable unselected = mock(Drawable.class);
+        Drawable selected = mock(Drawable.class);
+        preference.selectedBackground = selected;
+        preference.unselectedBackground = unselected;
 
-        preference.setBlockable(true);
         preference.setConfigurable(true);
         preference.setImportance(IMPORTANCE_DEFAULT);
         preference.onBindViewHolder(holder);
 
-        ImageButton blockButton = (ImageButton) holder.findViewById(R.id.block_icon);
-        ImageButton silenceButton = (ImageButton) holder.findViewById(R.id.silence_icon);
-        ImageButton alertButton = (ImageButton) holder.findViewById(R.id.alert_icon);
+        Button silenceButton = holder.itemView.findViewById(R.id.silence);
 
         silenceButton.callOnClick();
 
-        // selected has full color background. others are transparent
-        assertThat(getBackground(silenceButton).getColor().getColors()[0]).isNotEqualTo(
-                Color.TRANSPARENT);
-        assertThat(getBackground(alertButton).getColor().getColors()[0]).isEqualTo(
-                Color.TRANSPARENT);
-        assertThat(getBackground(blockButton).getColor().getColors()[0]).isEqualTo(
-                Color.TRANSPARENT);
+        assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.silence).getBackground()).isEqualTo(selected);
+        assertThat(((TextView) holder.itemView.findViewById(R.id.description)).getText()).isEqualTo(
+                mContext.getString(R.string.notification_channel_summary_low));
 
         verify(preference, times(1)).callChangeListener(IMPORTANCE_LOW);
     }
 
     @Test
-    public void onBindViewHolder_allButtonsVisible() {
-        final ImportancePreference preference = new ImportancePreference(mContext);
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                inflater.inflate(R.layout.notif_importance_preference, null));
+    public void setImportanceSummary_status() {
+        TextView tv = new TextView(mContext);
 
-        preference.setBlockable(true);
-        preference.setConfigurable(true);
-        preference.onBindViewHolder(holder);
+        final ImportancePreference preference = spy(new ImportancePreference(mContext));
 
-        assertThat(holder.itemView.findViewById(R.id.block).getVisibility())
-                .isEqualTo(View.VISIBLE);
-        assertThat(holder.itemView.findViewById(R.id.silence).getVisibility())
-                .isEqualTo(View.VISIBLE);
-        assertThat(holder.itemView.findViewById(R.id.alert).getVisibility())
-                .isEqualTo(View.VISIBLE);
+        preference.setDisplayInStatusBar(true);
+        preference.setDisplayOnLockscreen(false);
+
+        preference.setImportanceSummary(tv, IMPORTANCE_LOW);
+
+        assertThat(tv.getText()).isEqualTo(
+                mContext.getString(R.string.notification_channel_summary_low_status));
+    }
+
+    @Test
+    public void setImportanceSummary_lock() {
+        TextView tv = new TextView(mContext);
+
+        final ImportancePreference preference = spy(new ImportancePreference(mContext));
+
+        preference.setDisplayInStatusBar(false);
+        preference.setDisplayOnLockscreen(true);
+
+        preference.setImportanceSummary(tv, IMPORTANCE_LOW);
+
+        assertThat(tv.getText()).isEqualTo(
+                mContext.getString(R.string.notification_channel_summary_low_lock));
+    }
+
+    @Test
+    public void setImportanceSummary_statusLock() {
+        TextView tv = new TextView(mContext);
+
+        final ImportancePreference preference = spy(new ImportancePreference(mContext));
+
+        preference.setDisplayInStatusBar(true);
+        preference.setDisplayOnLockscreen(true);
+
+        preference.setImportanceSummary(tv, IMPORTANCE_LOW);
+
+        assertThat(tv.getText()).isEqualTo(
+                mContext.getString(R.string.notification_channel_summary_low_status_lock));
+    }
+
+    @Test
+    public void setImportanceSummary_statusLock_default() {
+        TextView tv = new TextView(mContext);
+
+        final ImportancePreference preference = spy(new ImportancePreference(mContext));
+
+        preference.setDisplayInStatusBar(true);
+        preference.setDisplayOnLockscreen(true);
+
+        preference.setImportanceSummary(tv, IMPORTANCE_DEFAULT);
+
+        assertThat(tv.getText()).isEqualTo(
+                mContext.getString(R.string.notification_channel_summary_default));
     }
 }

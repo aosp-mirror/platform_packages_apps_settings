@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="apps_and_notification_screen"
     android:title="@string/app_and_notification_dashboard_title"
-    settings:initialExpandedChildrenCount="3">
+    settings:initialExpandedChildrenCount="4">
     <!-- the initial count should include the dynamic tiles -->
 
     <Preference
@@ -43,6 +43,7 @@
     <!-- Empty category to draw divider -->
     <PreferenceCategory
         android:key="recent_apps_divider"
+        android:layout="@layout/preference_category_no_label"
         android:order="-997"/>
 
     <!-- Notifications (appears before manage_perms), default apps (appears after) -->

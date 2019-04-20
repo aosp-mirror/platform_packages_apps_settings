@@ -16,11 +16,10 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.ClipboardManager;
 import android.content.Context;
 
 import org.junit.Before;
@@ -45,12 +44,7 @@ public class SimpleBuildNumberPreferenceControllerTest {
     }
 
     @Test
-    public void copy_shouldCopyBuildNumberToClipboard() {
-        mController.copy();
-
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
-        assertThat(data.toString()).isEqualTo(mController.getSummary());
+    public void getAvailabilityStatus_unsearchable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 }

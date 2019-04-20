@@ -23,6 +23,7 @@ import android.net.Uri;
 import com.android.settings.slices.CustomSliceRegistry;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -41,6 +42,7 @@ public class VolumePanelTest {
     }
 
     @Test
+    @Ignore("b/130896218")
     public void getSlices_containsNecessarySlices() {
         final List<Uri> uris = mPanel.getSlices();
 
