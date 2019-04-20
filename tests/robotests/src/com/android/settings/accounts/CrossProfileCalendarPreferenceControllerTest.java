@@ -84,41 +84,11 @@ public class CrossProfileCalendarPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_noManagedUser_DISABLED() {
+    public void getAvailabilityStatus_noManagedUser_shouldBeDisabled() {
         mController.setManagedUser(null);
 
         assertThat(mController.getAvailabilityStatus())
                 .isNotEqualTo(CrossProfileCalendarPreferenceController.AVAILABLE);
-    }
-
-    @Test
-    @Ignore("b/130896049")
-    public void getAvailabilityStatus_hasManagedUser_AVAILABLE() {
-        mController.setManagedUser(mManagedUser);
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(CrossProfileCalendarPreferenceController.AVAILABLE);
-    }
-
-    @Test
-    public void updateStateToDisabled_isNotChecked() {
-        Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                CROSS_PROFILE_CALENDAR_ENABLED, 0, mManagedUser.getIdentifier());
-
-        mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isFalse();
-    }
-
-    @Test
-    public void updateStateToEnabled_isChecked() throws Exception {
-        // Put 0 first so we know the value is not originally 1.
-        Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                CROSS_PROFILE_CALENDAR_ENABLED, 0, mManagedUser.getIdentifier());
-        mController.updateState(mPreference);
-        Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                CROSS_PROFILE_CALENDAR_ENABLED, 1, mManagedUser.getIdentifier());
-
-        mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
@@ -143,6 +113,28 @@ public class CrossProfileCalendarPreferenceControllerTest {
         dpm.setCrossProfileCalendarPackages(TEST_COMPONENT_NAME, null);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void updateStateToDisabled_isNotChecked() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                CROSS_PROFILE_CALENDAR_ENABLED, 0, mManagedUser.getIdentifier());
+
+        mController.updateState(mPreference);
+        assertThat(mPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void updateStateToEnabled_isChecked() throws Exception {
+        // Put 0 first so we know the value is not originally 1.
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                CROSS_PROFILE_CALENDAR_ENABLED, 0, mManagedUser.getIdentifier());
+        mController.updateState(mPreference);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                CROSS_PROFILE_CALENDAR_ENABLED, 1, mManagedUser.getIdentifier());
+
+        mController.updateState(mPreference);
+        assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
