@@ -26,13 +26,13 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.fuelgauge.Estimate;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.fuelgauge.EstimateKt;
 
 import java.util.HashMap;
 import java.util.List;
@@ -93,7 +93,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
 
         // Add summary tip in advance to avoid UI flakiness
         final SummaryTip summaryTip = new SummaryTip(BatteryTip.StateType.NEW,
-                Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         summaryTip.updatePreference(mCardPreference);
     }
 
