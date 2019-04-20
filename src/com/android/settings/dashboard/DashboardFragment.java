@@ -24,12 +24,14 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
@@ -43,6 +45,7 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -65,12 +68,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private SummaryLoader mSummaryLoader;
+    private List<String> mSuppressInjectedTileKeys;
     @VisibleForTesting
     UiBlockerController mBlockerController;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mSuppressInjectedTileKeys = Arrays.asList(context.getResources().getStringArray(
+                R.array.config_suppress_injected_tile_keys));
         mDashboardFeatureProvider = FeatureFactory.getFactory(context).
                 getDashboardFeatureProvider(context);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
@@ -283,7 +289,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Returns true if this tile should be displayed
      */
+    @CallSuper
     protected boolean displayTile(Tile tile) {
+        if (mSuppressInjectedTileKeys != null && tile.hasKey()) {
+            // For suppressing injected tiles for OEMs.
+            return !mSuppressInjectedTileKeys.contains(tile.getKey(getContext()));
+        }
         return true;
     }
 

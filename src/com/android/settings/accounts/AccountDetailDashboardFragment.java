@@ -150,6 +150,9 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
 
     @Override
     protected boolean displayTile(Tile tile) {
+        if (!super.displayTile(tile)) {
+            return false;
+        }
         if (mAccountType == null) {
             return false;
         }
