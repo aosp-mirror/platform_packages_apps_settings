@@ -266,11 +266,26 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         assertEquals(TetherService.class.getName(), pi.getIntent().getComponent().getClassName());
     }
 
+    public void testIgnoreOutdatedRequest() {
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_ADD_TETHER_TYPE, TETHERING_WIFI);
+        intent.putExtra(EXTRA_RUN_PROVISION, true);
+        intent.putExtra(EXTRA_PROVISION_CALLBACK, mResultReceiver);
+        intent.putExtra(TetherService.EXTRA_SUBID, 1 /* Tested subId number */);
+        startService(intent);
+
+        SystemClock.sleep(PROVISION_TIMEOUT);
+        assertEquals(TETHERING_INVALID, mLastTetherRequestType);
+        assertTrue(mWrapper.isAppInactive(ENTITLEMENT_PACKAGE_NAME));
+        assertTrue(mWrapper.isAppInactive(FAKE_PACKAGE_NAME));
+    }
+
     private void runProvisioningForType(int type) {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_ADD_TETHER_TYPE, type);
         intent.putExtra(EXTRA_RUN_PROVISION, true);
         intent.putExtra(EXTRA_PROVISION_CALLBACK, mResultReceiver);
+        intent.putExtra(TetherService.EXTRA_SUBID, INVALID_SUBSCRIPTION_ID);
         startService(intent);
     }
 
@@ -291,7 +306,7 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         long startTime = SystemClock.uptimeMillis();
         while (true) {
             if (mLastTetherRequestType == expectedType) {
-                mLastTetherRequestType = -1;
+                mLastTetherRequestType = TETHERING_INVALID;
                 return true;
             }
             if ((SystemClock.uptimeMillis() - startTime) > PROVISION_TIMEOUT) {
