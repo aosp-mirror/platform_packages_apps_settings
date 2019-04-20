@@ -50,7 +50,6 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -136,7 +135,6 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    @Ignore("b/130896701")
     public void displayPreference_displayBatteryLevel() {
         mController.displayPreference(mPreferenceScreen);
 
@@ -190,7 +188,6 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    @Ignore("b/130896701")
     public void quickUpdateHeaderPreference_onlyUpdateBatteryLevelAndChargingState() {
         mSummary.setText(BATTERY_STATUS);
         mSummary2.setText(BATTERY_STATUS);
