@@ -16,12 +16,14 @@
 
 package com.android.settings.panel;
 
+import static com.android.settings.panel.PanelSlicesAdapter.MAX_NUM_OF_SLICES;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -40,7 +42,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
@@ -61,11 +62,6 @@ public class PanelSlicesAdapterTest {
     private FakeFeatureFactory mFakeFeatureFactory;
     private FakePanelContent mFakePanelContent;
     private List<LiveData<Slice>> mData = new ArrayList<>();
-
-    @Mock
-    private LiveData<Slice> mLiveData;
-
-    private Slice mSlice;
 
     @Before
     public void setUp() {
@@ -91,17 +87,18 @@ public class PanelSlicesAdapterTest {
 
     }
 
-    private void constructTestLiveData(Uri uri) {
+    private void addTestLiveData(Uri uri) {
         // Create a slice to return for the LiveData
-        mSlice = spy(new Slice());
-        doReturn(uri).when(mSlice).getUri();
-        when(mLiveData.getValue()).thenReturn(mSlice);
-        mData.add(mLiveData);
+        final Slice slice = spy(new Slice());
+        doReturn(uri).when(slice).getUri();
+        final LiveData<Slice> liveData = mock(LiveData.class);
+        when(liveData.getValue()).thenReturn(slice);
+        mData.add(liveData);
     }
 
     @Test
     public void onCreateViewHolder_returnsSliceRowViewHolder() {
-        constructTestLiveData(DATA_URI);
+        addTestLiveData(DATA_URI);
         final PanelSlicesAdapter adapter =
                 new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
         final ViewGroup view = new FrameLayout(mContext);
@@ -112,8 +109,26 @@ public class PanelSlicesAdapterTest {
     }
 
     @Test
+    public void sizeOfAdapter_shouldNotExceedMaxNum() {
+        for (int i = 0; i < MAX_NUM_OF_SLICES + 2; i++) {
+            addTestLiveData(DATA_URI);
+        }
+
+        assertThat(mData.size()).isEqualTo(MAX_NUM_OF_SLICES + 2);
+
+        final PanelSlicesAdapter adapter =
+                new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
+        final ViewGroup view = new FrameLayout(mContext);
+        final PanelSlicesAdapter.SliceRowViewHolder viewHolder =
+                adapter.onCreateViewHolder(view, 0);
+
+        assertThat(adapter.getItemCount()).isEqualTo(MAX_NUM_OF_SLICES);
+        assertThat(adapter.getData().size()).isEqualTo(MAX_NUM_OF_SLICES);
+    }
+
+    @Test
     public void nonMediaOutputIndicatorSlice_shouldAllowDividerAboveAndBelow() {
-        constructTestLiveData(DATA_URI);
+        addTestLiveData(DATA_URI);
         final PanelSlicesAdapter adapter =
                 new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
         final int position = 0;
@@ -129,7 +144,7 @@ public class PanelSlicesAdapterTest {
 
     @Test
     public void mediaOutputIndicatorSlice_shouldNotAllowDividerAbove() {
-        constructTestLiveData(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
+        addTestLiveData(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
 
         final PanelSlicesAdapter adapter =
                 new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);

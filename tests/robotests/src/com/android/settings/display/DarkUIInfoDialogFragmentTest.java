@@ -28,6 +28,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -49,6 +50,7 @@ public class DarkUIInfoDialogFragmentTest {
     }
 
     @Test
+    @Ignore("b/130897882")
     public void dialogDismissedOnConfirmation() {
         doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
         SharedPreferences prefs = RuntimeEnvironment.application.getSharedPreferences(

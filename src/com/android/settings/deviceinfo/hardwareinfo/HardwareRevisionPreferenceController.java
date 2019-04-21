@@ -21,6 +21,7 @@ import android.os.SystemProperties;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.slices.Sliceable;
 
 public class HardwareRevisionPreferenceController extends BasePreferenceController {
 
@@ -42,6 +43,17 @@ public class HardwareRevisionPreferenceController extends BasePreferenceControll
     @Override
     public boolean isSliceable() {
         return true;
+    }
+
+    @Override
+    public boolean isCopyableSlice() {
+        return true;
+    }
+
+    @Override
+    public void copy() {
+        Sliceable.setCopyContent(mContext, getSummary(),
+                mContext.getText(R.string.hardware_revision));
     }
 
     @Override

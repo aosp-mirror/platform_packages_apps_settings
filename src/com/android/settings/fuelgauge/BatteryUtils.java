@@ -47,6 +47,8 @@ import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.StatsManagerConfig;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.fuelgauge.Estimate;
+import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.ThreadUtils;
@@ -460,7 +462,7 @@ public class BatteryUtils {
             estimate = new Estimate(
                     PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
                     false /* isBasedOnUsage */,
-                    Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+                    EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
 
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader post query", startTime);

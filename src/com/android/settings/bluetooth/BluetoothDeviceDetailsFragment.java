@@ -22,7 +22,7 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.FeatureFlagUtils;
+import android.provider.DeviceConfig;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,7 +30,7 @@ import android.view.MenuItem;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.BlockingSlicePrefController;
@@ -117,10 +117,10 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
                 context).getBluetoothFeatureProvider(context);
-        final boolean injectionEnabled = FeatureFlagUtils.isEnabled(context,
-                FeatureFlags.SLICE_INJECTION);
+        final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
 
-        use(BlockingSlicePrefController.class).setSliceUri(injectionEnabled
+        use(BlockingSlicePrefController.class).setSliceUri(sliceEnabled
                 ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
     }
