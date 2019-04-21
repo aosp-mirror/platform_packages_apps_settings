@@ -484,9 +484,12 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Védje meg táblagépét képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az arcfelismerés beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, vagy válasszon ki egy másik képernyőzár-beállítást."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Védje meg eszközét képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az arcfelismerés beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, vagy válasszon ki egy másik képernyőzár-beállítást."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Védje meg telefonját képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az arcfelismerés beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, vagy válasszon ki egy másik képernyőzár-beállítást."</string>
-    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"PIN-beállítás átugrása?"</string>
-    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Átugorja a jelszó beállítását?"</string>
-    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Átugorja a minta beállítását?"</string>
+    <!-- no translation found for lock_screen_pin_skip_title (8064328201816780457) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_title (4155009417576409182) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_title (6467327818577283960) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Képernyőzár beállítása"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Kész"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Hoppá! Az nem az érzékelő"</string>
@@ -1018,6 +1021,8 @@
       <item quantity="other">%d hálózat</item>
       <item quantity="one">1 hálózat</item>
     </plurals>
+    <!-- no translation found for wifi_saved_passpoint_access_points_summary (8256430439661111672) -->
+    <!-- no translation found for wifi_saved_all_access_points_summary (149386761654596280) -->
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Speciális Wi-Fi-beállítások"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC-cím"</string>
@@ -1207,13 +1212,11 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"A fényerőt a rendelkezésre álló fényhez optimalizálja. Átmenetileg továbbra is módosíthatja a fényerőt, ha be van kapcsolva a funkció."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"A képernyő fényerőssége automatikusan alkalmazkodik a környezethez és az adott tevékenységhez. A csúszka manuális mozgatásával segít az alkalmazkodó fényerő funkciónak az Ön személyes preferenciáinak megtanulásában."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Kijelző fehéregyensúlya"</string>
-    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
-    <skip />
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Képernyőfigyelő"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Be / A képernyő nem kapcsol majd ki, ha Ön épp azt nézi"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Ki"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Amíg Ön a képernyőt nézi, megakadályozza annak kikapcsolását."</string>
-    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
-    <skip />
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"A Képernyőfigyelő az előlapi kamerát használja annak ellenőrzésére, hogy nézi-e felhasználó a képernyőt. A funkció az eszközön működik, és a fotókat sosem tárolja vagy küldi tovább a Google-nak."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Éjszakai fény"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Az Éjszakai fény borostyánsárga árnyalatúra színezi a képernyőt, hogy gyenge fény mellett se legyen kellemetlen a képernyőre nézni. Emellett az elalvást is megkönnyítheti."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Ütemezés"</string>
@@ -1709,7 +1712,12 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Biztonsági információk"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Nincs adatkapcsolat. Az információ azonnali megtekintéséhez keresse fel a következő helyet bármelyik számítógépről, amely csatlakozik az internethez: %s."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Betöltés…"</string>
-    <string name="confirm_device_credential_use_alternate_method" msgid="793877757665026949">"Másik módszer használata"</string>
+    <!-- no translation found for confirm_device_credential_pin (5308435093406166355) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_pattern (1350321840134412900) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_password (2195705238498478704) -->
+    <skip />
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Képernyőzár beállítása"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"A biztonság érdekében állítson be jelszót"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Jelszó az ujjlenyomathoz"</string>
@@ -2458,6 +2466,8 @@
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"Az Akkumulátorkímélő mód bekapcsol, ha az akkumulátor lemerül a töltés várható időpontja előtt"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"<xliff:g id="PERCENT">%1$s</xliff:g>-os értéknél kapcsol be"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Ütemezés beállítása"</string>
+    <!-- no translation found for battery_saver_turn_on_summary (5552800757174173459) -->
+    <skip />
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Kikapcsolás teljes feltöltöttség esetén"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Az Akkumulátorkímélő mód <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttségi szint elérésekor kikapcsol"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"Az Akkumulátorkímélő mód <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttségi szint elérésekor kikapcsol"</string>
@@ -3175,6 +3185,8 @@
       <item quantity="one">1 engedélyezve</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Ne zavarjanak"</string>
+    <!-- no translation found for zen_mode_slice_subtitle (1495506059205752083) -->
+    <skip />
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"A Ne zavarjanak mód bekapcsolása"</string>
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Kivételek"</string>
     <string name="zen_mode_duration_settings_title" msgid="8471983919324532829">"Alapértelmezett időtartam"</string>
@@ -3305,10 +3317,15 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Az összes megtekintése az utolsó hét napból"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Speciális"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Munkahelyi profil értesítései"</string>
-    <string name="asst_capability_prioritizer_title" msgid="1008391045235540115">"Értesítések prioritásának automatikus megadása"</string>
-    <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"A kevésbé fontos értesítések automatikus némítása és lefokozása"</string>
+    <!-- no translation found for smart_notifications_title (475969117151722852) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_title (6691908606916292167) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_summary (3532556835426559362) -->
+    <skip />
     <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Okos műveletek és válaszok"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"Kontextushoz illő értesítési műveletek automatikus hozzáadása és gyors reagálás értesítésekre"</string>
+    <!-- no translation found for asst_capabilities_actions_replies_summary (5358499322896238048) -->
+    <skip />
     <string name="hide_silent_icons_title" msgid="2378514357635207742">"Néma értesítések állapotikonjainak elrejtése"</string>
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"A néma értesítések ikonjainak elrejtése az állapotsoron"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Értesítési pöttyök engedélyezése"</string>
@@ -3325,13 +3342,17 @@
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"Csúsztasson jobbra az elvetéshez, balra a menü megnyitásához."</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"Csúsztasson balra az elvetéshez, jobbra a menü megnyitásához."</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Villogó fény"</string>
-    <string name="lock_screen_notifications_title" msgid="2583595963286467672">"A lezárási képernyőn"</string>
+    <!-- no translation found for lock_screen_notifications_title (7604704224172951090) -->
+    <skip />
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Zárolt munkaprofil esetén"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Az összes értesítés jelenjen meg"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Bizalmas tartalom elrejtése"</string>
+    <!-- no translation found for lock_screen_notifications_summary_hide (1133085507139112569) -->
+    <skip />
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Semmilyen értesítés ne jelenjen meg"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Ha az eszköz zárolva van, hogyan kívánja megjeleníteni az értesítéseket?"</string>
-    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Értesítések"</string>
+    <!-- no translation found for lock_screen_notifications_interstitial_message (3143593517597479937) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_interstitial_title (709573564312902481) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"A munkaprofil-értesítés teljes tartalmának megjelenítése"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"Bizalmas munkahelyi tartalom elrejtése"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Ha az eszköz zárolva van, hogyan szeretné megjeleníteni a profilértesítéseket?"</string>
@@ -3353,14 +3374,26 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Magas"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Felugró értesítés a képernyőn"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Tiltás"</string>
-    <string name="notification_silence_title" msgid="6082383633107433802">"Megjelenítés hang nélkül"</string>
-    <string name="notification_alert_title" msgid="7755552340126176938">"Figyelmeztetés"</string>
+    <!-- no translation found for notification_silence_title (8575600650015431622) -->
+    <skip />
+    <!-- no translation found for notification_alert_title (7426286507434650473) -->
+    <skip />
     <string name="allow_interruption" msgid="7136150018111848721">"Megszakítások engedélyezése"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Az alkalmazás aktiválhat hangjelzést, rezgést és/vagy értesítéseket jeleníthet meg a képernyőn"</string>
-    <string name="notification_channel_summary_min" msgid="5401718014765921892">"Kevésbé fontos"</string>
-    <string name="notification_channel_summary_low" msgid="322317684244981244">"Átlagos"</string>
-    <string name="notification_channel_summary_default" msgid="1111749130423589931">"Fontos"</string>
-    <string name="notification_channel_summary_high" msgid="2085017556511003283">"Sürgős"</string>
+    <!-- no translation found for notification_channel_summary_min (2965790706738495761) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low (250062606667099181) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status (1151953801054796200) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_lock (3801118119803089599) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status_lock (3400487706701402136) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (6837975360341956621) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_high (8779797505981599285) -->
+    <skip />
     <string name="notification_switch_label" msgid="6843075654538931025">"Értesítések mutatása"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Értesítési segéd"</string>
     <string name="notifications_sent_daily" msgid="3584506541352710975">"~<xliff:g id="NUMBER">%1$s</xliff:g>/nap"</string>
@@ -3430,7 +3463,8 @@
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Értesítési pötty megjelenítése"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"A Ne zavarjanak mód felülbírálása"</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"Bekapcsolt Ne zavarjanak mód esetén ezek az értesítések továbbra is zavarhatnak"</string>
-    <string name="app_notification_visibility_override_title" msgid="7821124557634786985">"A lezárási képernyőn"</string>
+    <!-- no translation found for app_notification_visibility_override_title (3618860781666494595) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Letiltva"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritást élvező"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Bizalmas"</string>
@@ -4080,11 +4114,9 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"A(z) <xliff:g id="ID_1">%1$s</xliff:g> eszközhöz csatlakozik"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Több eszközhöz csatlakozik"</string>
     <string name="demo_mode" msgid="2798762752209330277">"A rendszer kezelőfelületének demómódja"</string>
-    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
-    <skip />
+    <string name="dark_ui_mode" msgid="3888371857083890543">"Sötét téma"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"A támogatott alkalmazások témája is sötét lesz"</string>
-    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
-    <skip />
+    <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"Értem"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Fejlesztői gyorsbeállítási csempék"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope Trace"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Érzékelők kikapcsolva"</string>
@@ -4517,8 +4549,7 @@
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Elveszítheti hozzáférését a fennmaradó idő- vagy adatmennyiséghez. Az eltávolítás előtt egyeztessen szolgáltatójával."</string>
     <string name="keywords_content_capture" msgid="859132453327059493">"tartalom rögzítése"</string>
     <string name="content_capture" msgid="6456873729933463600">"Tartalom rögzítése"</string>
-    <!-- no translation found for content_capture_summary (659506647507221852) -->
-    <skip />
+    <string name="content_capture_summary" msgid="659506647507221852">"Engedélyezi, hogy az alkalmazások tartalmakat küldhessenek az Android rendszernek"</string>
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"A rendszer memória-pillanatfelvételeinek rögzítése"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"A rendszer memória-pillanatfelvételének rögzítése…"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"Nem sikerült a rendszer memória-pillanatfelvételének rögzítése"</string>
