@@ -127,7 +127,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Kopplungsanfrage"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"Für Kopplung mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> tippen."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"Empfangene Dateien"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"Daten über Bluetooth erhalten"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"Über Bluetooth empfangene Dateien"</string>
     <string name="device_picker" msgid="4978696506172252813">"Bluetooth-Gerät auswählen"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, Bluetooth zu aktivieren"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, Bluetooth zu deaktivieren"</string>
@@ -312,8 +312,8 @@
     <string name="cellular_data_summary" msgid="4660351864416939504">"Datennutzung über Mobilfunknetz zulassen"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Datennutzung bei Roaming zulassen"</string>
     <string name="roaming" msgid="2619521775007402005">"Roaming"</string>
-    <string name="roaming_enable" msgid="3737380951525303961">"Bei Roaming mit Datendienst verbinden"</string>
-    <string name="roaming_disable" msgid="1295279574370898378">"Bei Roaming mit Datendienst verbinden"</string>
+    <string name="roaming_enable" msgid="3737380951525303961">"Mobile Daten auch bei Roaming nutzen"</string>
+    <string name="roaming_disable" msgid="1295279574370898378">"Mobile Daten auch bei Roaming nutzen"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Die Datenkonnektivität wurde unterbrochen, weil du dein Heimnetzwerk verlassen hast und Daten-Roaming nicht aktiviert ist."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Aktivieren"</string>
     <string name="roaming_warning" msgid="4275443317524544705">"Es können hohe Gebühren anfallen."</string>
@@ -483,9 +483,12 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Mit der Displaysperre kannst du dein Tablet schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\", um eine PIN festzulegen oder eine andere Methode für die Displaysperre auszuwählen."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Mit der Displaysperre kannst du dein Gerät schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\", um eine PIN festzulegen oder eine andere Methode für die Displaysperre auszuwählen."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Mit der Displaysperre kannst du dein Smartphone schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\", um eine PIN festzulegen oder eine andere Methode für die Displaysperre auszuwählen."</string>
-    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"PIN-Einrichtung überspringen?"</string>
-    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Einrichtung überspringen?"</string>
-    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Einrichtung überspringen?"</string>
+    <!-- no translation found for lock_screen_pin_skip_title (8064328201816780457) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_title (4155009417576409182) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_title (6467327818577283960) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Displaysperre einrichten"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Fertig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Das ist nicht der Sensor"</string>
@@ -847,17 +850,17 @@
     <string name="wifi_error" msgid="3207971103917128179">"Fehler"</string>
     <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"Das 5-GHz-Band ist in diesem Land nicht verfügbar."</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"Im Flugmodus"</string>
-    <string name="wifi_notify_open_networks" msgid="76298880708051981">"Benachr. zu offenen Netzwerken"</string>
+    <string name="wifi_notify_open_networks" msgid="76298880708051981">"Bei offenen WLANs benachrichtigen"</string>
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Benachrichtigen, wenn ein leistungsstarkes öffentliches Netzwerk verfügbar ist"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"WLAN automatisch aktivieren"</string>
-    <string name="wifi_wakeup_summary" msgid="2530814331062997163">"WLAN wird in der Nähe von leistungsstarken gespeicherten Netzwerken wie deinem Heimnetzwerk automatisch aktiviert"</string>
+    <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wenn du in den Abdeckungsbereich gespeicherter WLANs kommst und die Signalqualität gut ist, wird die WLAN-Funktion automatisch wieder eingeschaltet"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="7494539594649967699">"Nicht verfügbar, weil die Einstellung \"Standort\" deaktiviert ist. Aktiviere die Einstellung "<annotation id="link">"Standort"</annotation>"."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Nicht verfügbar, weil WLAN-Suche deaktiviert ist"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Für diese Funktion musst du zuerst einen Anbieter von Netzwerkbewertungen auswählen"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Schlechte Internetverbindungen vermeiden"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"WLAN nur bei guter Internetverbindung verwenden"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="1644292503152790501">"Nur Netzwerke mit stabiler Internetverbindung verwenden"</string>
-    <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Verbindung zu offenen Netzwerken herstellen"</string>
+    <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Automatisch mit offenen WLANs verbinden"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Automatisch mit leistungsstarken öffentlichen Netzwerken verbinden"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Für diese Funktion musst du zuerst einen Anbieter von Netzwerkbewertungen auswählen"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Für diese Funktion musst du zuerst einen kompatiblen Anbieter von Netzwerkbewertungen auswählen"</string>
@@ -875,7 +878,7 @@
     <string name="wifi_switch_away_when_unvalidated" msgid="8593144541347373394">"Zu mobilen Daten wechseln, wenn über WLAN kein Internetzugriff mehr möglich ist."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="8753386877755616476">"Automatisch zur mobilen Datennutzung wechseln"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="1403505355490119307">"Wenn Internetzugriff über WLAN nicht möglich ist, mobile Daten verwenden. Es können Gebühren für die Datennutzung anfallen."</string>
-    <string name="wifi_add_network" msgid="6234851776910938957">"Netzwerk hinzufügen"</string>
+    <string name="wifi_add_network" msgid="6234851776910938957">"WLAN hinzufügen"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"WLAN-Einstellungen"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"WLAN wird automatisch wieder aktiviert"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="2782566279864356713">"WLAN wird nicht automatisch wieder aktiviert"</string>
@@ -894,9 +897,9 @@
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Du verfügst nicht über die Berechtigung zum Ändern des WLAN-Netzwerks."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Mehr"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Automatisches Setup (WPS)"</string>
-    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"WLAN-Suche aktivieren?"</string>
-    <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Um das WLAN automatisch zu aktivieren, musst du zuerst die WLAN-Suche aktivieren."</string>
-    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Bei der WLAN-Suche dürfen Apps und Dienste immer nach WLANs suchen, auch wenn die WLAN-Funktion deaktiviert ist. Dadurch können beispielsweise standortbasierte Funktionen und Dienste verbessert werden."</string>
+    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"\"WLAN-Suche\" aktivieren?"</string>
+    <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Damit die WLAN-Funktion automatisch aktiviert werden kann, musst die Funktion \"WLAN-Suche\" aktiviert sein."</string>
+    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Wenn die Funktion \"WLAN-Suche\" aktiviert ist, dürfen Apps und Dienste immer nach WLANs suchen, auch wenn die WLAN-Funktion deaktiviert ist. Das hilft z. B. dabei, standortbasierte Funktionen und Dienste zu verbessern."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"Aktivieren"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"WLAN-Suche aktiviert"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Erweiterte Optionen"</string>
@@ -950,7 +953,7 @@
     <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Prüfe, ob das Gerät angeschlossen, aufgeladen und eingeschaltet ist. Falls das Problem weiterhin besteht, wende dich an den Hersteller des Geräts"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"Das Hinzufügen von \"<xliff:g id="SSID">%1$s</xliff:g>\" wird von diesem Gerät nicht unterstützt"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Prüfe die Verbindung und versuche es noch einmal"</string>
-    <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Netzwerk auswählen"</string>
+    <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Mobilfunknetz auswählen"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Wenn du dein Gerät verbinden möchtest, wähle ein Netzwerk"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Dieses Gerät zu \"<xliff:g id="SSID">%1$s</xliff:g>\" hinzufügen?"</string>
     <string name="wifi_dpp_wifi_shared_with_device" msgid="7669684043486750097">"WLAN mit Gerät geteilt"</string>
@@ -981,7 +984,8 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS verfügbar)"</string>
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"WLAN eines Mobilfunkanbieters"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Über <xliff:g id="NAME">%1$s</xliff:g> verbinden"</string>
-    <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Zur Verbesserung der Standortgenauigkeit und zu anderen Zwecken möchte <xliff:g id="APP_NAME">%1$s</xliff:g> die Netzwerküberprüfung aktivieren, auch wenn das WLAN deaktiviert ist.\n\nMöchtest du dies für alle Apps zulassen, die eine Überprüfung durchführen möchten?"</string>
+    <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Zur Verbesserung der Standortgenauigkeit und zu anderen Zwecken möchte <xliff:g id="APP_NAME">%1$s</xliff:g> nach WLANs suchen können, auch wenn die WLAN-Funktion deaktiviert ist.\n\nSollen alle Apps nach WLANs suchen können?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Zur Verbesserung der Standortgenauigkeit und zu anderen Zwecken möchte eine unbekannte App nach WLANs suchen können, auch wenn die WLAN-Funktion deaktiviert ist.\n\nSollen alle Apps nach WLANs suchen können?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Rufe im Dreipunkt-Menü \"Erweitert\" auf, um diese Option zu deaktivieren."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Zulassen"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Ablehnen"</string>
@@ -1017,6 +1021,8 @@
       <item quantity="other">%d Netzwerke</item>
       <item quantity="one">1 Netzwerk</item>
     </plurals>
+    <!-- no translation found for wifi_saved_passpoint_access_points_summary (8256430439661111672) -->
+    <!-- no translation found for wifi_saved_all_access_points_summary (149386761654596280) -->
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Erweiterte WLAN-Einstellungen"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC-Adresse"</string>
@@ -1025,7 +1031,7 @@
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Subnetzmaske"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6-Adressen"</string>
-    <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Gespeicherte Netzwerke"</string>
+    <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Gespeicherte WLANs"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="6480224551765489055">"Abos"</string>
     <!-- no translation found for wifi_saved_access_points_tab (2659675386657663705) -->
     <skip />
@@ -1114,7 +1120,7 @@
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Notfalladresse"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Wird als dein Standort verwendet, wenn du einen Notruf über WLAN tätigst"</string>
-    <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Weitere Informationen"</annotation>" zu privaten DNS-Funktionen"</string>
+    <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Weitere Informationen zu privaten DNS-Funktionen"</annotation></string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Einstellung wird vom Mobilfunkanbieter verwaltet"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"WLAN-Telefonie aktivieren"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"WLAN-Telefonie verwenden"</string>
@@ -1206,11 +1212,11 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"\"Helligkeit an Lichtverhältnisse anpassen\": Ist diese Funktion aktiviert, kannst du die Helligkeit dennoch vorübergehend ändern."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Die Helligkeit des Displays passt sich automatisch an deine Umgebung und deine Aktivitäten an. Mit dem Schieberegler kannst du manuell nachjustieren und \"Automatische Helligkeit\" merkt sich deine Präferenz."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Weißabgleich des Bildschirms"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"Screen Aware"</string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Screen Attention"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"An/Der Bildschirm wird nicht ausgeschaltet, wenn du ihn ansiehst"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Aus"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Verhindert, dass dein Bildschirm ausgeschaltet wird, wenn du ihn ansiehst."</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"Screen Aware verwendet die Frontkamera, um zu erkennen, ob jemand den Bildschirm ansieht. Die Funktion ist auf diesem Gerät verfügbar. Bilder werden nie gespeichert oder an Google gesendet."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Screen Attention verwendet die Frontkamera, um zu erkennen, ob jemand den Bildschirm ansieht. Die Funktion ist auf diesem Gerät verfügbar. Bilder werden nie gespeichert oder an Google gesendet."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nachtlicht"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Die Funktion \"Nachtlicht\" gibt der Displayanzeige eine gelbe Tönung. Das schont in dunklen Umgebungen die Augen und kann das Einschlafen erleichtern."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Zeitplan"</string>
@@ -1236,11 +1242,11 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Bis <xliff:g id="ID_1">%1$s</xliff:g> aktivieren"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Bis <xliff:g id="ID_1">%1$s</xliff:g> deaktivieren"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Nachtlicht nicht aktiviert"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"Ruhezustand"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Display-Zeitlimit"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Display wird ausgeschaltet."</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Nach <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Hintergrund"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"Stile &amp; Hintergründe"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"Designs &amp; Hintergründe"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"Standard"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Benutzerdefiniert"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Hintergrund ändern"</string>
@@ -1357,7 +1363,7 @@
     <string name="status_service_state" msgid="2323931627519429503">"Servicestatus"</string>
     <string name="status_signal_strength" msgid="3732655254188304547">"Signalstärke"</string>
     <string name="status_roaming" msgid="2638800467430913403">"Roaming"</string>
-    <string name="status_operator" msgid="2274875196954742087">"Netzwerk"</string>
+    <string name="status_operator" msgid="2274875196954742087">"Mobilfunknetz"</string>
     <string name="status_wifi_mac_address" msgid="2202206684020765378">"WLAN-MAC-Adresse"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Bluetooth-Adresse"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"Seriennummer"</string>
@@ -1655,7 +1661,7 @@
       <item quantity="other"> <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_2">%1$d</xliff:g> von <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> Apps haben unbegrenzten Zugriff</item>
       <item quantity="one"> <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_0">%1$d</xliff:g> von <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> Apps hat unbegrenzten Zugriff</item>
     </plurals>
-    <string name="location_category_recent_location_access" msgid="4911449278675337490">"Aktueller Standortzugriff"</string>
+    <string name="location_category_recent_location_access" msgid="4911449278675337490">"Letzte Standortzugriffe"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"Details ansehen"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Keine App hat kürzlich den Standort abgefragt."</string>
     <string name="location_no_recent_accesses" msgid="7489449862187886009">"Kürzlich hat keine App auf den Standort zugegriffen"</string>
@@ -1706,7 +1712,12 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Sicherheitsinformationen"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Es ist keine Datenverbindung vorhanden. Wenn Sie diese Informationen jetzt sehen möchten, gehen Sie auf einem beliebigen Computer mit Internetanschluss zu %s."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Wird geladen..."</string>
-    <string name="confirm_device_credential_use_alternate_method" msgid="793877757665026949">"Alternative Methode verwenden"</string>
+    <!-- no translation found for confirm_device_credential_pin (5308435093406166355) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_pattern (1350321840134412900) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_password (2195705238498478704) -->
+    <skip />
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Displaysperre einrichten"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Richte zur Sicherheit ein Passwort ein"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Passwort festlegen, um Fingerabdruck zu verwenden"</string>
@@ -2286,9 +2297,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tablet mehr als üblich genutzt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Gerät mehr als üblich genutzt"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"Der Akku könnte früher als üblich leer sein"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"Dein Smartphone wurde mehr als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nMeistverwendete Apps seit dem letzten vollständigen Ladevorgang:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"Dein Tablet wurde mehr als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nMeistverwendete Apps seit dem letzten vollständigen Ladevorgang:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"Dein Gerät wurde mehr als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nMeistverwendete Apps seit dem letzten vollständigen Ladevorgang:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Dein Smartphone wurde mehr als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps nach höchstem Akkuverbrauch:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Dein Tablet wurde mehr als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps nach höchstem Akkuverbrauch:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Dein Gerät wurde mehr als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps nach höchstem Akkuverbrauch:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Umfasst Hintergrundaktivitäten mit hohem Stromverbrauch"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">%1$d Apps einschränken</item>
@@ -2455,6 +2466,8 @@
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"Der Energiesparmodus wird automatisch aktiviert, wenn offenbar wird, dass der Akku wahrscheinlich nicht bis zum nächsten Aufladen hält (ermittelt anhand deines typischen Aufladezeitpunkts)."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"Wird bei <xliff:g id="PERCENT">%1$s</xliff:g> aktiviert"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Zeitplan festlegen"</string>
+    <!-- no translation found for battery_saver_turn_on_summary (5552800757174173459) -->
+    <skip />
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Bei vollem Akku ausschalten"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Der Energiesparmodus wird deaktiviert, wenn dein Smartphoneakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"Der Energiesparmodus wird deaktiviert, wenn dein Tabletakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
@@ -2579,7 +2592,7 @@
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Nutzer"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Geschäftlich"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Zugriff auf SMS und Anrufliste einschränken"</string>
-    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Nur standardmäßige Telefon- und Nachrichten-Apps haben Zugriff auf SMS und Anruflisten"</string>
+    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Nur standardmäßige Telefon- und Nachrichten-Apps haben Zugriff auf SMS und Anruflisteneinträge"</string>
     <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Beschränkungen für Gerätekennungen aufheben"</string>
     <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Die neuen Zugangsbeschränkungen für Gerätekennungen werden aufgehoben"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Keine verfügbaren Trust Agents"</string>
@@ -2697,7 +2710,7 @@
     <string name="data_usage_tab_3g" msgid="6092169523081538718">"2G/3G"</string>
     <string name="data_usage_list_mobile" msgid="5588685410495019866">"Mobil"</string>
     <string name="data_usage_list_none" msgid="3933892774251050735">"Keine"</string>
-    <string name="data_usage_enable_mobile" msgid="986782622560157977">"Mobiler Datenverkehr"</string>
+    <string name="data_usage_enable_mobile" msgid="986782622560157977">"Mobile Daten"</string>
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"2G-/3G-Daten"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G-Daten"</string>
     <string name="data_roaming_enable_mobile" msgid="1523331545457578362">"Roaming"</string>
@@ -2711,8 +2724,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Diese Funktion kann dazu führen, dass eine auf Hintergrunddaten basierende App nicht mehr funktioniert, wenn nur Mobilfunknetze verfügbar sind.\n\nGeeignetere Kontrollmechanismen für den Datenverbrauch findest du in den Einstellungen der App."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"Hintergrunddaten können nur eingeschränkt werden, wenn du ein Limit für mobile Daten festgelegt hast."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Automatische Synchronisierung aktivieren?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Änderungen, die du im Web an deinem Konto vornimmst, werden automatisch auf dein Tablet kopiert.\n\nBei manchen Konten werden ggf. auch automatisch alle Änderungen, die du auf dem Tablet vornimmst, ins Web kopiert. Das ist die übliche Synchronisierungsfunktion eines Google-Kontos."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Änderungen, die du im Web an deinem Konto vornimmst, werden automatisch auf dein Telefon kopiert.\n\nBei manchen Konten werden ggf. auch automatisch alle Änderungen, die du auf dem Telefon vornimmst, ins Web kopiert. Das ist die übliche Synchronisierungsfunktion eines Google-Kontos."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Wenn du im Web Änderungen an deinen Konten vornimmst, werden diese automatisch auf dein Tablet kopiert.\n\nIm Gegenzug werden bei manchen Konten automatisch alle Änderungen, die auf dem Tablet vorgenommen wurden, ins Web kopiert. Dazu gehören auch Google-Konten."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Wenn du im Web Änderungen an deinen Konten vornimmst, werden diese automatisch auf dein Telefon kopiert.\n\nIm Gegenzug werden bei manchen Konten automatisch alle Änderungen, die auf dem Telefon vorgenommen wurden, ins Web kopiert. Dazu gehören auch Google-Konten."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Automatische Synchronisierung deaktivieren?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"So reduzierst du den Datenverbrauch und schonst den Akku, musst jedoch jedes einzelne Konto manuell synchronisieren, um neue Informationen abzurufen. Außerdem erhältst du keine Benachrichtigungen, wenn Aktualisierungen erfolgen."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Datum für Zurücksetzung des Nutzungszyklus"</string>
@@ -2720,9 +2733,9 @@
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Übernehmen"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Warnung für Datenverbrauch festlegen"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Limit festlegen"</string>
-    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Datenverbrauch begrenzen"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDa die Datennutzung von deinem Tablet gemessen wird und dein Mobilfunkanbieter diese möglicherweise anders berechnet, solltest du von einem eher etwas niedrigeren Limit ausgehen."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDa die Datennutzung von deinem Smartphone gemessen wird und dein Mobilfunkanbieter sie möglicherweise anders berechnet, solltest du von einem eher etwas niedrigeren Limit ausgehen."</string>
+    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Datennutzung begrenzen"</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDer dabei angesetzte Wert wird von deinem Tablet berechnet und kann von der Messung des genutzten Datenvolumens durch deinen Mobilfunkanbieter abweichen. Daher empfiehlt es sich, einen eher eher etwas niedrigeren Limitwert anzugeben."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDer dabei angesetzte Wert wird von deinem Smartphone berechnet und kann von der Messung des genutzten Datenvolumens durch deinen Mobilfunkanbieter abweichen. Daher empfiehlt es sich, einen eher eher etwas niedrigeren Limitwert anzugeben."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Hintergrunddaten beschränken?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"Wenn du die mobilen Hintergrunddaten einschränkst, funktionieren einige Apps und Dienste nur bei einer aktiven WLAN-Verbindung."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Wenn du die mobilen Hintergrunddaten einschränkst, funktionieren einige Apps und Dienste nur bei einer aktiven WLAN-Verbindung.\n\nDiese Einstellung betrifft alle Nutzer auf diesem Tablet."</string>
@@ -2756,7 +2769,7 @@
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"IPSec-Nutzerzertifikat"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec-CA-Zertifikat"</string>
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec-Serverzertifikat"</string>
-    <string name="vpn_show_options" msgid="7182688955890457003">"Erweiterte Optionen einblenden"</string>
+    <string name="vpn_show_options" msgid="7182688955890457003">"Erweiterte Optionen anzeigen"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS-Suchdomains"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS-Server (z. B. 8.8.8.8)"</string>
     <string name="vpn_routes" msgid="3818655448226312232">"Weiterleitungsrouten (z. B. 10.0.0.0/8)"</string>
@@ -2966,7 +2979,7 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="6839553611093179243">"4G-Anrufe"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="4156658595226379286">"Zur Verbesserung von Sprache und Kommunikation LTE-Dienste verwenden (empfohlen)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="6145184730437907078">"Zur Verbesserung von Sprache und Kommunikation 4G-Dienste verwenden (empfohlen)"</string>
-    <string name="preferred_network_type_title" msgid="3431041717309776341">"Bevorzugter Netzwerktyp"</string>
+    <string name="preferred_network_type_title" msgid="3431041717309776341">"Bevorzugter Netztyp"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (empfohlen)"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"SIM-Karte für Arbeit"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"Zugriff auf Apps und Inhalte"</string>
@@ -3176,6 +3189,8 @@
       <item quantity="one">1 aktiviert</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Bitte nicht stören"</string>
+    <!-- no translation found for zen_mode_slice_subtitle (1495506059205752083) -->
+    <skip />
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"\"Bitte nicht stören\" aktivieren"</string>
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Ausnahmen"</string>
     <string name="zen_mode_duration_settings_title" msgid="8471983919324532829">"Standarddauer"</string>
@@ -3220,7 +3235,7 @@
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Bei deaktiviertem Display"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Töne und Vibration ausschalten"</string>
     <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"Display nicht einschalten"</string>
-    <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Licht nicht blinken lassen"</string>
+    <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Benachrichtigungslicht blinkt nicht"</string>
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Keine Pop-up-Benachrichtigungen auf dem Display"</string>
     <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"Symbole in der Statusleiste oben auf dem Bildschirm ausblenden"</string>
     <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"App-Benachrichtigungspunkte auf App-Symbolen ausblenden"</string>
@@ -3306,33 +3321,42 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Alle der letzten 7 Tage ansehen"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Erweitert"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Geschäftliche Benachrichtigungen"</string>
-    <string name="asst_capability_prioritizer_title" msgid="1008391045235540115">"Automatische Benachrichtigungspriorisierung"</string>
-    <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"Weniger wichtige Benachrichtigungen automatisch unterdrücken und herabstufen"</string>
+    <!-- no translation found for smart_notifications_title (475969117151722852) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_title (6691908606916292167) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_summary (3532556835426559362) -->
+    <skip />
     <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Intelligente Aktionen und Antworten"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"Fügt automatisch kontextbezogene Benachrichtigungsaktionen und Schnellantworten für Benachrichtigungen hinzu"</string>
-    <string name="hide_silent_icons_title" msgid="2378514357635207742">"Symbole für den Status von lautlosen Benachrichtigungen ausblenden"</string>
-    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Symbole für lautlose Benachrichtigungen in der Statusleiste ausblenden"</string>
+    <!-- no translation found for asst_capabilities_actions_replies_summary (5358499322896238048) -->
+    <skip />
+    <string name="hide_silent_icons_title" msgid="2378514357635207742">"Symbole für lautlose Benachrichtigungen in Statusleiste ausblenden"</string>
+    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Für lautlose Benachrichtigungen werden in der Statusleiste keine Symbole angezeigt"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Benachrichtigungspunkte zulassen"</string>
-    <string name="notification_bubbles_title" msgid="526545466417027926">"Blasen"</string>
-    <string name="notification_bubbles_summary" msgid="5269674863510678257">"Mit unverankerten Verknüpfungen von überall schnell auf App-Inhalte zugreifen"</string>
-    <string name="bubbles_feature_education" msgid="69923617148394578">"Einige Benachrichtigungen und weitere Inhalte können auf dem Bildschirm als Infofelder angezeigt werden. Tippe auf ein Infofeld, um es zu öffnen. Zum Schließen des Infofeldes ziehst du es zum unteren Bildschirmrand."</string>
-    <string name="bubbles_app_toggle_title" msgid="9143702245165359360">"Infofelder"</string>
-    <string name="bubbles_app_toggle_summary" msgid="7714358008428342285">"<xliff:g id="APP_NAME">%1$s</xliff:g> erlauben, einige Benachrichtigungen als Infofelder anzuzeigen"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="8013961655723563787">"Infofelder aktivieren"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="3616822820657195387">"Damit du Infofelder für diese App aktivieren kannst, musst du sie zuerst auf deinem Gerät aktivieren Dies betrifft auch andere Apps, in denen du Infofelder bereits aktiviert hast."</string>
+    <string name="notification_bubbles_title" msgid="526545466417027926">"Bubbles"</string>
+    <string name="notification_bubbles_summary" msgid="5269674863510678257">"Schwebende Verknüpfungen erlauben überall schnellen Zugriff auf App-Inhalte"</string>
+    <string name="bubbles_feature_education" msgid="69923617148394578">"Bestimmte Benachrichtigungen und Inhalte können als \"Bubbles\" angezeigt werden. Wenn du eine solche Bubble öffnen möchtest, tippe auf sie. Geschlossen wird die Bubble, indem du sie an den unteren Bildschirmrand ziehst."</string>
+    <string name="bubbles_app_toggle_title" msgid="9143702245165359360">"Bubbles"</string>
+    <string name="bubbles_app_toggle_summary" msgid="7714358008428342285">"<xliff:g id="APP_NAME">%1$s</xliff:g> erlauben, einige Benachrichtigungen als Bubbles anzuzeigen"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="8013961655723563787">"Bubbles aktivieren"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="3616822820657195387">"Damit du Bubbles für diese App aktivieren kannst, musst du die Funktion zuerst auf deinem Gerät aktivieren. Das wirkt sich auch auf andere Apps aus, in denen du Bubbles bereits aktiviert hast."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="5317196831268846883">"Für Gerät aktivieren"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8176870537170586852">"Abbrechen"</string>
     <string name="swipe_direction_title" msgid="6877543492435053137">"Aktionen beim Wischen"</string>
-    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Zum Schließen nach rechts wischen und zum Anzeigen des Menüs nach links wischen"</string>
-    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Zum Schließen nach links wischen und zum Anzeigen des Menüs nach rechts wischen"</string>
-    <string name="notification_pulse_title" msgid="1905382958860387030">"Licht blinken lassen"</string>
-    <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Auf dem Sperrbildschirm"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Nach rechts: schließen, nach links: Menü anzeigen"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Nach links: schließen, nach rechts: Menü anzeigen"</string>
+    <string name="notification_pulse_title" msgid="1905382958860387030">"Benachrichtigungslicht blinkt"</string>
+    <!-- no translation found for lock_screen_notifications_title (7604704224172951090) -->
+    <skip />
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Wenn das Arbeitsprofil gesperrt ist"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Alle Benachrichtigungen anzeigen"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Vertrauliche Inhalte ausblenden"</string>
+    <!-- no translation found for lock_screen_notifications_summary_hide (1133085507139112569) -->
+    <skip />
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Keine Benachrichtigungen anzeigen"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Wie sollen Benachrichtigungen angezeigt werden, wenn dein Gerät gesperrt ist?"</string>
-    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Benachrichtigungen"</string>
+    <!-- no translation found for lock_screen_notifications_interstitial_message (3143593517597479937) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_interstitial_title (709573564312902481) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Alle geschäftlichen Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"Vertrauliche geschäftliche Inhalte ausblenden"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Wie sollen Profilbenachrichtigungen angezeigt werden, wenn dein Gerät gesperrt ist?"</string>
@@ -3354,14 +3378,26 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Hoch"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Auf Bildschirm aufpoppen"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blockieren"</string>
-    <string name="notification_silence_title" msgid="6082383633107433802">"Ohne Ton anzeigen"</string>
-    <string name="notification_alert_title" msgid="7755552340126176938">"Benachrichtigung"</string>
+    <!-- no translation found for notification_silence_title (8575600650015431622) -->
+    <skip />
+    <!-- no translation found for notification_alert_title (7426286507434650473) -->
+    <skip />
     <string name="allow_interruption" msgid="7136150018111848721">"Unterbrechungen zulassen"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Die App darf Töne sowie Vibrationen erzeugen und/oder Pop-up-Benachrichtigungen auf dem Bildschirm einblenden"</string>
-    <string name="notification_channel_summary_min" msgid="5401718014765921892">"Geringe Wichtigkeit"</string>
-    <string name="notification_channel_summary_low" msgid="322317684244981244">"Mittlere Wichtigkeit"</string>
-    <string name="notification_channel_summary_default" msgid="1111749130423589931">"Hohe Wichtigkeit"</string>
-    <string name="notification_channel_summary_high" msgid="2085017556511003283">"Sehr hohe Wichtigkeit"</string>
+    <!-- no translation found for notification_channel_summary_min (2965790706738495761) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low (250062606667099181) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status (1151953801054796200) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_lock (3801118119803089599) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status_lock (3400487706701402136) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (6837975360341956621) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_high (8779797505981599285) -->
+    <skip />
     <string name="notification_switch_label" msgid="6843075654538931025">"Benachrichtigungen anzeigen"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Benachrichtigungsassistent"</string>
     <string name="notifications_sent_daily" msgid="3584506541352710975">"Ungefähr <xliff:g id="NUMBER">%1$s</xliff:g> pro Tag"</string>
@@ -3378,9 +3414,9 @@
     <string name="no_notification_assistant" msgid="3230229194702623108">"Kein Assistent"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Keine installierte App hat Benachrichtigungszugriff angefordert."</string>
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g> Zugriff auf Benachrichtigungen erlauben?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> kann alle Benachrichtigungen lesen, darunter auch persönliche Informationen wie Kontaktnamen und eingehende Nachrichten. Außerdem können Benachrichtigungen geändert oder geschlossen und damit verbundene Aktionen ausgelöst werden. \n\nZusätzlich kann durch die App die \"Bitte nicht stören\"-Funktion aktiviert bzw. deaktiviert werden. Verwandte Einstellungen können ebenfalls geändert werden."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"Bei Aktivierung kann der <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> alle Benachrichtigungen lesen, also auch persönliche Informationen wie Kontaktnamen und eingehende Nachrichten, sowie Benachrichtigungen ändern oder schließen oder in ihnen enthaltene Aktionen auslösen. \n\nZusätzlich wird die App in die Lage versetzt, die \"Bitte nicht stören\"-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Benachrichtigungszugriff für <xliff:g id="SERVICE">%1$s</xliff:g> zulassen?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kann alle Benachrichtigungen lesen, darunter auch persönliche Informationen wie Kontaktnamen und eingehende Nachrichten. Außerdem können Benachrichtigungen geschlossen und damit verbundene Aktionen ausgelöst werden. \n\nZusätzlich kann durch die App die \"Bitte nicht stören\"-Funktion aktiviert bzw. deaktiviert werden. Verwandte Einstellungen können ebenfalls geändert werden."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"Bei Aktivierung kann der <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> alle Benachrichtigungen lesen, also auch persönliche Informationen wie Kontaktnamen und eingehende Nachrichten, sowie Benachrichtigungen schließen oder in ihnen enthaltene Aktionen auslösen. \n\nZusätzlich wird die App in die Lage versetzt, die \"Bitte nicht stören\"-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Wenn du den Benachrichtigungszugriff für <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> deaktivierst, wird möglicherweise auch der \"Bitte nicht stören\"-Zugriff deaktiviert."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Deaktivieren"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Abbrechen"</string>
@@ -3431,13 +3467,14 @@
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"App-Benachrichtigungspunkt anzeigen"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\"Bitte nicht stören\" deaktivieren"</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"Diese Benachrichtigungen dürfen auch dann gemeldet werden, wenn \"Bitte nicht stören\" aktiviert ist"</string>
-    <string name="app_notification_visibility_override_title" msgid="7821124557634786985">"Auf dem Sperrbildschirm"</string>
+    <!-- no translation found for app_notification_visibility_override_title (3618860781666494595) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blockiert"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Wichtig"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensibel"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Fertig"</string>
     <string name="app_notification_importance_title" msgid="8002263131149345584">"Wichtigkeit"</string>
-    <string name="notification_show_lights_title" msgid="7671781299688190532">"Licht blinken lassen"</string>
+    <string name="notification_show_lights_title" msgid="7671781299688190532">"Benachrichtigungslicht blinkt"</string>
     <string name="notification_vibrate_title" msgid="1646667807969755957">"Vibrieren"</string>
     <string name="notification_channel_sound_title" msgid="3899212238513507941">"Ton"</string>
     <string name="zen_mode_rule_delete_button" msgid="903658142711011617">"Löschen"</string>
@@ -3679,7 +3716,7 @@
     <string name="choose_voice_input_title" msgid="975471367067718019">"Spracheingabe wählen"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Browser-App"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Kein Standardbrowser"</string>
-    <string name="default_phone_title" msgid="282005908059637350">"Standard-App für Telefonie"</string>
+    <string name="default_phone_title" msgid="282005908059637350">"Telefonie-App"</string>
     <string name="roles_title" msgid="8739481762225637569">"Rollen"</string>
     <string name="default_app" msgid="6864503001385843060">"(Standard)"</string>
     <string name="system_app" msgid="9068313769550747372">"(System)"</string>
@@ -3765,13 +3802,13 @@
     <string name="usb_summary_MIDI_power" msgid="3308250484012677596">"MIDI und Stromversorgung"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Hintergrundprüfung"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Vollständiger Zugriff auf Hintergrund"</string>
-    <string name="assist_access_context_title" msgid="2269032346698890257">"Text auf Bildschirm verwenden"</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"Auf Text auf Bildschirm zugreifen"</string>
     <string name="assist_access_context_summary" msgid="1991421283142279560">"Der Assistent-App den Zugriff auf Bildschirminhalte wie Text gestatten"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Screenshot verwenden"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Der Assistent-App den Zugriff auf eine Aufnahme deines Bildschirms gestatten"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Bildschirm kurz aufleuchten lassen"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"Bildschirmrand kurz aufleuchten lassen, wenn Assistent-App auf Bildschirm- oder Screenshot-Text zugreift"</string>
-    <string name="assist_footer" msgid="1982791172085896864">"Assistent-Apps helfen dir basierend auf den aktuell auf deinem Bildschirm angezeigten Informationen. Einige Apps unterstützen für eine einfachere Verwendung Übersichts- und Spracheingabedienste."</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"Bildschirmränder kurz aufleuchten lassen, wenn Assistent-App auf Bildschirm-Text oder Screenshot zugreift"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"Assistent-Apps können dir bei bestimmten Dingen helfen. Dazu greifen sie auf die Informationen zu, die aktuell auf deinem Bildschirm angezeigt werden. Für eine integrierte Unterstützung unterstützen einige Apps sowohl Launcher- als auch Spracheingabedienste."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Durchschnittl. Speicherverbrauch"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maximaler Speicherverbrauch"</string>
     <string name="memory_usage" msgid="1781358557214390033">"Speicherverbrauch"</string>
@@ -3803,7 +3840,7 @@
     <string name="ignore_optimizations_on_desc" msgid="3549930955839111652">"Der Akku könnte hierdurch schneller leer sein, denn die App kann jetzt auch im Hintergrund Energie verbrauchen."</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Zur Verlängerung der Akkulaufzeit empfohlen"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"<xliff:g id="APP">%s</xliff:g> das Ignorieren von Akku-Leistungsoptimierungen gestatten?"</string>
-    <string name="app_list_preference_none" msgid="108006867520327904">"Keine"</string>
+    <string name="app_list_preference_none" msgid="108006867520327904">"Keine App"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"Das Deaktivieren des Zugriffs auf Nutzungsdaten für diese App hindert deinen Administrator nicht am Erfassen der Datennutzung für Apps in deinem Arbeitsprofil"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g> von <xliff:g id="COUNT_1">%2$d</xliff:g> Zeichen verwendet"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"Über anderen Apps einblenden"</string>
@@ -3817,7 +3854,7 @@
     <string name="overlay_settings" msgid="6930854109449524280">"Über anderen Apps einblenden"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g> von <xliff:g id="COUNT_1">%2$d</xliff:g> Apps dürfen über anderen eingeblendet werden"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Apps mit Berechtigung"</string>
-    <string name="app_permission_summary_allowed" msgid="1505409933012886711">"Zulässig"</string>
+    <string name="app_permission_summary_allowed" msgid="1505409933012886711">"Zugelassen"</string>
     <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"Nicht zulässig"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"apps installieren aus unbekannten quellen"</string>
     <string name="write_settings" msgid="4797457275727195681">"Systemeinstellungen ändern"</string>
@@ -3869,7 +3906,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Interner Speicher: <xliff:g id="PERCENTAGE">%1$s</xliff:g> belegt – <xliff:g id="FREE_SPACE">%2$s</xliff:g> frei"</string>
     <string name="display_summary" msgid="6737806235882127328">"Ruhemodus wird nach <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> Inaktivität aktiviert"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Hintergrund, Ruhemodus, Schriftgröße"</string>
-    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"Stile &amp; Hintergründe, Ruhemodus, Schriftgröße"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Designs, Hintergründe, Zeitlimit für Bildschirm, Schriftgröße"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Ruhemodus, Schriftgröße"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Ruhemodus wird nach 10 Minuten Inaktivität aktiviert"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Im Mittel werden <xliff:g id="USED_MEMORY">%1$s</xliff:g> von <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> genutzt"</string>
@@ -3949,7 +3986,7 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> mobile Daten"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> WLAN-Datennutzung"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> Ethernet-Datennutzung"</string>
-    <string name="billing_cycle" msgid="6614597736285325497">"Datenwarnung &amp; Datenlimit"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Datenwarnung &amp; -limit"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"App-Datenverbrauchszyklus"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Warnlimit für mobile Datennutzung: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Datenlimit: <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -3961,7 +3998,7 @@
       <item quantity="one">1 Beschränkung</item>
     </plurals>
     <string name="operator_warning" msgid="1862988028996859195">"Dein Mobilfunkanbieter berechnet die Datennutzung eventuell anders als das Gerät"</string>
-    <string name="data_used_template" msgid="3245919669966296505">"Datennutzung: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="data_used_template" msgid="3245919669966296505">"Verbrauchte Daten: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"Datenwarnung festlegen"</string>
     <string name="data_warning" msgid="209133958008062117">"Warnlimit für mobile Daten"</string>
     <string name="data_warning_footnote" msgid="776341964125603711">"Das Warnlimit für mobile Datennutzung und das Datenlimit werden vom Gerät berechnet und können von den Angaben des Mobilfunkanbieters abweichen."</string>
@@ -4081,10 +4118,9 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Mit <xliff:g id="ID_1">%1$s</xliff:g> verbunden"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Mit mehreren Geräten verbunden"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demomodus der System-UI"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"Design"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"Design auswählen"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"Diese Einstellung gilt auch für Apps"</string>
+    <string name="dark_ui_mode" msgid="3888371857083890543">"Dunkles Design"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Unterstützte Apps wechseln ebenfalls zum dunklen Design"</string>
+    <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"OK"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Kacheln für Schnelleinstellungen für Entwickler"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope Trace"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Sensoren aus"</string>
@@ -4159,7 +4195,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Instant-Apps"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Links in Apps öffnen, selbst wenn diese nicht installiert sind"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Instant-Apps"</string>
-    <string name="instant_apps_settings" msgid="8827777916518348213">"Instant-Apps-Einstell."</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Instant-Apps-Einstellungen"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Installierte Apps"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Dein Speicher wird jetzt vom Speichermanager verwaltet"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Konten für <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4342,7 +4378,7 @@
     <string name="devices_title" msgid="7701726109334110391">"Geräte"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Alle Einstellungen"</string>
     <string name="homepage_personal_settings" msgid="1570415428680432319">"Vorschläge"</string>
-    <string name="choose_network_title" msgid="5702586742615861037">"Netzwerk auswählen"</string>
+    <string name="choose_network_title" msgid="5702586742615861037">"Mobilfunknetz auswählen"</string>
     <string name="network_disconnected" msgid="2933191767567503504">"Nicht verbunden"</string>
     <string name="network_connected" msgid="4943925032253989621">"Verbunden"</string>
     <string name="network_connecting" msgid="76404590784733557">"Verbindung wird hergestellt…"</string>
@@ -4386,7 +4422,7 @@
     <string name="not_allowed" msgid="1667079919821581706">"Deine SIM-Karte lässt keine Verbindung mit diesem Netzwerk zu."</string>
     <string name="connect_later" msgid="978991102125216741">"Momentan kann keine Verbindung mit diesem Netzwerk aufgebaut werden. Bitte versuch es später noch einmal."</string>
     <string name="registration_done" msgid="4573820010512184521">"In Netzwerk registriert."</string>
-    <string name="select_automatically" msgid="7318032984017853975">"Netzwerk automatisch auswählen"</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Netz automatisch auswählen"</string>
     <string name="carrier_settings_title" msgid="3503012527671299886">"Mobilfunkanbieter-Einstellungen"</string>
     <string name="cdma_lte_data_service" msgid="8507044148856536098">"Datendienst einrichten"</string>
     <string name="mobile_data_settings_title" msgid="7674604042461065482">"Mobile Daten"</string>
@@ -4395,7 +4431,7 @@
     <string name="calls_preference" msgid="4628557570999372758">"Anrufeinstellung"</string>
     <string name="sms_preference" msgid="3479810211828513772">"SMS-Einstellung"</string>
     <string name="calls_and_sms_ask_every_time" msgid="2127802836576375306">"Jedes Mal fragen"</string>
-    <string name="mobile_network_summary_add_a_network" msgid="9148476748420654283">"Netzwerk hinzufügen"</string>
+    <string name="mobile_network_summary_add_a_network" msgid="9148476748420654283">"Netz hinzufügen"</string>
     <plurals name="mobile_network_summary_count" formatted="false" msgid="4505694491027023039">
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> SIM-Karten</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> SIM-Karte</item>
@@ -4428,9 +4464,9 @@
     <string name="mobile_network_erase_sim_dialog_progress" msgid="6541813899575453878">"SIM wird gelöscht…"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="730767308428197756">"SIM kann nicht gelöscht werden"</string>
     <string name="mobile_network_erase_sim_error_dialog_body" msgid="6835262809290075813">"Diese SIM kann aufgrund eines Fehlers nicht gelöscht werden.\n\nStarte dein Gerät neu und versuche es noch einmal."</string>
-    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Bevorzugter Netzwerktyp"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Bevorzugter Netztyp"</string>
     <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Netzwerkmodus ändern"</string>
-    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Bevorzugter Netzwerktyp"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Bevorzugter Netztyp"</string>
     <string name="carrier_settings_euicc" msgid="8658562169133242581">"Mobilfunkanbieter"</string>
     <string name="carrier_settings_version" msgid="3469507893844448432">"Einstellungen-Version"</string>
     <string name="call_category" msgid="8108654745239563833">"Anruffunktionen"</string>
@@ -4438,8 +4474,8 @@
     <string name="cdma_system_select_title" msgid="7210256688912895790">"Systemauswahl"</string>
     <string name="cdma_system_select_summary" msgid="3413863051181111941">"CDMA-Roamingmodus ändern"</string>
     <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Systemauswahl"</string>
-    <string name="network_operator_category" msgid="8451238364605724918">"Netzwerk"</string>
-    <string name="network_select_title" msgid="8394621216255081026">"Netzwerk"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Mobilfunknetz"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Mobilfunknetz"</string>
     <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA-Abo"</string>
     <string name="cdma_subscription_summary" msgid="7191590908367194209">"Zwischen RUIM/SIM und NV wechseln"</string>
     <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"Abo"</string>
@@ -4515,9 +4551,9 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Ort"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Dein Dienstanbieter erfasst möglicherweise deinen Standort, um diesen Dienst bereitzustellen.\n\nBitte lies die Datenschutzrichtlinie deines Dienstanbieters."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Möglicherweise verlierst du den Zugriff auf ggf. verbliebene Zeit- oder Datenkontingente. Wende dich deswegen vor dem Entfernen an deinen Anbieter."</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"inhaltserfassung, intelligente vorschläge"</string>
-    <string name="content_capture" msgid="4486543205504396210">"Intelligente Vorschläge"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"Zulassen, dass Android Informationen speichert, die auf deinem Display angezeigt oder in Video- oder Audioinhalten zu hören sind. Android macht anhand deiner Geräteaktivität nützliche Vorschläge."</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"Inhalte erfassen"</string>
+    <string name="content_capture" msgid="6456873729933463600">"Inhalte erfassen"</string>
+    <string name="content_capture_summary" msgid="659506647507221852">"Apps erlauben, Inhalte an das Android-System zu senden"</string>
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"System-Heap-Dump erfassen"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"System-Heap-Dump wird erfasst"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"System-Heap-Dump konnte nicht erfasst werden"</string>
