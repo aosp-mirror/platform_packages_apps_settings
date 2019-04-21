@@ -118,7 +118,7 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"У вас нет разрешения на смену настроек Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"Добавить устройство"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Устройства поблизости могут обнаружить <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, пока открыты настройки Bluetooth."</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"Адрес Bluetooth для телефона: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"Bluetooth-адрес телефона: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="6807634484499166486">"Адрес Bluetooth для планшета: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"Адрес Bluetooth для устройства: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Отключить <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -342,7 +342,7 @@
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Дата"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"Поиск по региону"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Регион"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Смещение относительно UTC"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Разница с UTC"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"Переход на <xliff:g id="TIME_TYPE">%1$s</xliff:g>: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -351,7 +351,7 @@
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Летнее время"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Стандартное время"</string>
     <string name="zone_menu_by_region" msgid="8370437123807764346">"Регион"</string>
-    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Разница относительно UTC"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Выбрать по разнице с UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Время"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоблокировка"</string>
@@ -376,13 +376,13 @@
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Информация о профиле"</string>
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Аккаунты"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Местоположение"</string>
-    <string name="location_settings_master_switch_title" msgid="3560242980335542411">"Использовать местоположение"</string>
+    <string name="location_settings_master_switch_title" msgid="3560242980335542411">"Определять местоположение"</string>
     <string name="location_settings_summary_location_off" msgid="794370259612167176">"Откл."</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="5222949914335428617">
-      <item quantity="one">Вкл. – у <xliff:g id="COUNT_1">%1$d</xliff:g> приложения есть доступ</item>
-      <item quantity="few">Вкл. – у <xliff:g id="COUNT_1">%1$d</xliff:g> приложений есть доступ</item>
-      <item quantity="many">Вкл. – у <xliff:g id="COUNT_1">%1$d</xliff:g> приложений есть доступ</item>
-      <item quantity="other">Вкл. – у <xliff:g id="COUNT_1">%1$d</xliff:g> приложения есть доступ</item>
+      <item quantity="one">Включено, доступно <xliff:g id="COUNT_1">%1$d</xliff:g> приложению</item>
+      <item quantity="few">Включено, доступно <xliff:g id="COUNT_1">%1$d</xliff:g> приложениям</item>
+      <item quantity="many">Включено, доступно <xliff:g id="COUNT_1">%1$d</xliff:g> приложениям</item>
+      <item quantity="other">Включено, доступно <xliff:g id="COUNT_1">%1$d</xliff:g> приложения</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="8523775367089431611">"Загрузка…"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Аккаунты"</string>
@@ -492,9 +492,12 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Для настройки функции \"Распознавание лиц\" необходимо установить блокировку экрана. Это поможет защитить ваши данные в случае потери или кражи планшета. Чтобы включить блокировку, нажмите \"Отмена\" и установите PIN-код или выберите другой способ."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Для настройки сканера отпечатков пальцев необходимо установить блокировку экрана. Это поможет защитить ваши данные в случае потери или кражи устройства. Чтобы включить блокировку, нажмите \"Отмена\" и установите PIN-код или выберите другой способ."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Для настройки сканера отпечатков пальцев необходимо установить блокировку экрана. Это поможет защитить ваши данные в случае потери или кражи телефона. Чтобы включить блокировку, нажмите \"Отмена\" и установите PIN-код или выберите другой способ."</string>
-    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"Не устанавливать PIN-код?"</string>
-    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Не устанавливать пароль?"</string>
-    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Не устанавливать графический ключ?"</string>
+    <!-- no translation found for lock_screen_pin_skip_title (8064328201816780457) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_title (4155009417576409182) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_title (6467327818577283960) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Настроить блокировку экрана"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Мимо! Это не сканер отпечатков пальцев..."</string>
@@ -532,8 +535,8 @@
     <string name="crypt_keeper_final_desc" product="tablet" msgid="517662068757620756">"Если прервать шифрование, данные будут потеряны. Операция займет не менее часа. Устройство будет перезагружено несколько раз."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="287503113671320916">"Если прервать шифрование, данные будут потеряны. Операция займет не менее часа. Устройство будет перезагружено несколько раз."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Шифрование"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"Дождитесь завершения шифрования планшета. Выполнено: <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Дождитесь завершения шифрования телефона. Выполнено: <xliff:g id="PERCENT">^1</xliff:g>%."</string>
+    <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"Дождитесь завершения шифрования планшета. Выполнено: <xliff:g id="PERCENT">^1</xliff:g> %."</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Дождитесь завершения шифрования телефона. Выполнено: <xliff:g id="PERCENT">^1</xliff:g> %."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Шифрование завершится через <xliff:g id="DURATION">^1</xliff:g>."</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Шифрование завершится через <xliff:g id="DURATION">^1</xliff:g>."</string>
     <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Чтобы разблокировать планшетный ПК, выключите его и снова включите."</string>
@@ -748,7 +751,7 @@
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> активных приложений</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> активного приложения</item>
     </plurals>
-    <string name="manage_trust_agents" msgid="4629279457536987768">"Агенты доверия"</string>
+    <string name="manage_trust_agents" msgid="4629279457536987768">"Промежуточные агенты"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Сначала необходимо настроить блокировку экрана"</string>
     <string name="manage_trust_agents_summary" msgid="1475819820389620546">"Нет"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="3935182396726101824">
@@ -928,7 +931,7 @@
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Автонастройка (WPS)"</string>
     <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"Включить поиск сетей Wi‑Fi?"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Чтобы подключаться к сетям Wi‑Fi автоматически, нужно включить поиск Wi‑Fi."</string>
-    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Эта функция позволяет приложениям и сервисам искать беспроводные сети, даже когда Wi-Fi отключен. Это может улучшить работу функций и сервисов, использующих данные о местоположении."</string>
+    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Эта функция позволяет приложениям и сервисам искать беспроводные сети, даже когда Wi-Fi отключен. Это может использоваться для улучшения работы функций и сервисов, использующих данные о местоположении."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"Да"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"Поиск сетей Wi‑Fi включен"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Расширенные настройки"</string>
@@ -997,7 +1000,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4938294574591503213">"Пароль сети Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="4120419278831581613">"Пароль точки доступа: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_add_device" msgid="4072206063308645677">"Добавить устройство"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="8898075663321081592">"К этой сети можно подключиться с помощью QR-кода."</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="8898075663321081592">"Подключиться к этой сети с помощью QR-кода"</string>
     <string name="retry" msgid="6472609612090877557">"Повторить попытку"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Поделиться с другими пользователями устройства"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(без изменений)"</string>
@@ -1014,6 +1017,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Сеть Wi‑Fi оператора связи"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Подключиться через <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Чтобы определение местоположения и некоторые другие функции работали лучше, приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" необходимо выполнять поиск сетей, даже если модуль Wi-Fi отключен.\n\nРазрешить?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Чтобы геолокация и другие функции работали лучше, неизвестному приложению необходимо выполнять поиск сетей, даже когда модуль Wi-Fi отключен.\n\nРазрешить это всем приложениям, которые сканируют сети?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Этот параметр можно отключить в расширенных настройках в дополнительном меню."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Разрешить"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Отклонить"</string>
@@ -1051,6 +1055,8 @@
       <item quantity="many">%d сетей</item>
       <item quantity="other">%d сети</item>
     </plurals>
+    <!-- no translation found for wifi_saved_passpoint_access_points_summary (8256430439661111672) -->
+    <!-- no translation found for wifi_saved_all_access_points_summary (149386761654596280) -->
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Дополнительные функции"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC-адрес"</string>
@@ -1240,11 +1246,11 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Яркость регулируется с учетом уровня освещенности. При необходимости ее можно временно изменить."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Яркость экрана будет автоматически регулироваться в зависимости от окружающих условий и ваших действий. Вы можете вручную перемещать ползунок, чтобы помочь запомнить ваши предпочтения адаптивной яркости."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Баланс белого на экране"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"Адаптивный спящий режим"</string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Адаптивный спящий режим"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Когда эта настройка включена, экран не будет отключаться, если вы смотрите на него."</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Отключено"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Экран не будет отключаться, если вы смотрите на него."</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"Когда адаптивный спящий режим включен, устройство использует фронтальную камеру, чтобы отслеживать, смотрит ли кто-то на экран. Эта функция работает только на вашем устройстве: собранные данные не сохраняются и не отправляются в Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Когда адаптивный спящий режим включен, устройство определяет через фронтальную камеру, смотрит ли кто-то на экран. Эта функция работает только на вашем устройстве. Изображения не сохраняются и не отправляются в Google."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Ночной режим"</string>
     <string name="night_display_text" msgid="1837277457033025056">"В ночном режиме экран приобретает желтоватый оттенок. Это снижает напряжение глаз при тусклом свете и может помочь вам быстрее заснуть."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Расписание"</string>
@@ -1270,11 +1276,11 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Включить до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Отключить до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Ночной режим сейчас выключен"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"Спящий режим"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Автоотключение экрана"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Отключение экрана"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Обои"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"Темы и обои"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"Темы и обои"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"По умолчанию"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Пользовательские"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Смените обои"</string>
@@ -1379,10 +1385,10 @@
     <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="1007470446618081441">"Версия PRL"</string>
     <string name="meid_multi_sim" msgid="748999971744491771">"MEID (слот SIM %1$d)"</string>
-    <string name="scanning_status_text_wifi_on_ble_on" msgid="5262263689045962681">"Поиск сетей Wi‑Fi и устройств Bluetooth включен."</string>
+    <string name="scanning_status_text_wifi_on_ble_on" msgid="5262263689045962681">"Сканирование Wi‑Fi и Bluetooth включено"</string>
     <string name="scanning_status_text_wifi_on_ble_off" msgid="2115399719199757550">"Поиск сетей Wi‑Fi включен, поиск устройств Bluetooth выключен"</string>
     <string name="scanning_status_text_wifi_off_ble_on" msgid="3212656150021004088">"Поиск устройств Bluetooth включен, поиск сетей Wi‑Fi выключен"</string>
-    <string name="scanning_status_text_wifi_off_ble_off" msgid="6381094990708345188">"Поиск сетей Wi‑Fi и устройств Bluetooth выключен"</string>
+    <string name="scanning_status_text_wifi_off_ble_off" msgid="6381094990708345188">"Сканирование Wi‑Fi и Bluetooth отключено"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
     <string name="status_data_network_type" msgid="7570837037428932780">"Тип мобильной сети для передачи данных"</string>
@@ -1699,11 +1705,11 @@
     <string name="location_no_recent_accesses" msgid="7489449862187886009">"Ни одно приложение ещё не получало доступ к местоположению."</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Высокий расход заряда батареи"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Низкий расход заряда батареи"</string>
-    <string name="location_scanning_screen_title" msgid="2297479353298444503">"Поиск сетей Wi‑Fi и сигнала Bluetooth"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Поиск сетей Wi‑Fi"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Разрешить приложениям и сервисам искать сети Wi-Fi, даже если функция Wi-Fi отключена. Эту настройку можно использовать, чтобы повысить точность геолокации."</string>
-    <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Поиск Bluetooth-устройств"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Разрешить приложениям и сервисам искать сигналы устройств, расположенных поблизости, даже если функция Bluetooth отключена. Эту настройку можно использовать, чтобы повысить точность геолокации."</string>
+    <string name="location_scanning_screen_title" msgid="2297479353298444503">"Сканирование Wi-Fi и Bluetooth"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Сканирование Wi‑Fi"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Разрешить приложениям и сервисам сканировать сети Wi-Fi, даже когда Wi-Fi отключен. Это может помочь улучшить работу функций и сервисов, использующих данные о местоположении."</string>
+    <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Сканирование Bluetooth"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Разрешить приложениям и сервисам сканировать устройства поблизости, даже когда Bluetooth отключен. Это может помочь улучшить работу функций и сервисов, использующих данные о местоположении."</string>
     <string name="managed_profile_location_services" msgid="4723268446874715222">"Геолокация для работы"</string>
     <string name="location_network_based" msgid="9134175479520582215">"По координатам сети"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Разрешить отправлять анонимные геоданные и позволить приложениям определять ваше местоположение с помощью Wi-Fi и мобильных сетей"</string>
@@ -1744,14 +1750,19 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Сведения о безопасности"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Устройство не подключено к Интернету. Чтобы просмотреть эту информацию, откройте страницу %s на любом компьютере с интернет-доступом."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Загрузка…"</string>
-    <string name="confirm_device_credential_use_alternate_method" msgid="793877757665026949">"Использовать другой способ"</string>
+    <!-- no translation found for confirm_device_credential_pin (5308435093406166355) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_pattern (1350321840134412900) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_password (2195705238498478704) -->
+    <skip />
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Настройте блокировку экрана"</string>
-    <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Защитите устройство: задайте пароль"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Установите пароль"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Задайте пароль"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Задайте графический ключ"</string>
-    <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"Защитите устройство: задайте PIN-код"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"Установите PIN-код"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Задайте PIN-код"</string>
-    <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"Защитите устройство: создайте графический ключ"</string>
+    <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"Задайте графический ключ"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Введите пароль ещё раз"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Подтвердите графический ключ"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Введите PIN-код ещё раз"</string>
@@ -2342,9 +2353,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Планшет используется больше, чем обычно"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Устройство используется больше, чем обычно"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"Заряд батареи расходуется быстрее, чем обычно."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"Телефон используется больше, чем обычно. Батарея скоро разрядится.\n\nС момента последней зарядки активнее всего использовались следующие приложения с высоким потреблением энергии:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"Планшет используется больше, чем обычно. Батарея скоро разрядится.\n\nС момента последней зарядки активнее всего использовались следующие приложения с высоким потреблением энергии:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"Устройство используется больше, чем обычно. Батарея скоро разрядится.\n\nС момента последней зарядки активнее всего использовались следующие приложения с высоким потреблением энергии:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Телефон используется больше, чем обычно. Из-за этого батарея может разрядиться быстрее.\n\nСписок приложений с высоким энергопотреблением:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Планшет используется больше, чем обычно. Из-за этого батарея может разрядиться быстрее.\n\nСписок приложений с высоким энергопотреблением:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Устройство используется больше, чем обычно. Из-за этого батарея может разрядиться быстрее.\n\nСписок приложений с высоким энергопотреблением:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Идут фоновые процессы с высоким потреблением энергии."</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="one">Необходимо ограничить работу %1$d приложения</item>
@@ -2525,6 +2536,8 @@
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"Включать, если высока вероятность, что уровня заряда не хватит до подзарядки"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"Включать при уровне заряда <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Создать расписание"</string>
+    <!-- no translation found for battery_saver_turn_on_summary (5552800757174173459) -->
+    <skip />
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Выключать при полном заряде"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Режим энергосбережения отключается, когда уровень заряда достигает <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"Режим энергосбережения отключается, когда уровень заряда достигает <xliff:g id="PERCENT">%1$s</xliff:g>."</string>
@@ -2601,9 +2614,9 @@
     <string name="credentials_reset" msgid="3239382277144980418">"Очистить учетные данные"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Удалить все сертификаты"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Надежные сертификаты"</string>
-    <string name="trusted_credentials_summary" msgid="6735221351155686632">"Смотреть надежные сертификаты ЦС"</string>
+    <string name="trusted_credentials_summary" msgid="6735221351155686632">"Показать надежные сертификаты ЦС"</string>
     <string name="user_credentials" msgid="3719013347787187083">"Учетные данные пользователя"</string>
-    <string name="user_credentials_summary" msgid="7271228342106080167">"Смотреть/изменить сохраненные учетные данные"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Посмотреть/изменить сохраненные учетные данные"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Дополнительные настройки"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Тип хранилища"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Аппаратное"</string>
@@ -2700,7 +2713,7 @@
     <string name="preference_change_password_title" msgid="8955581790270130056">"Изменить пароль"</string>
     <string name="header_account_settings" msgid="5382475087121880626">"Настройки аккаунта"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Удалить аккаунт"</string>
-    <string name="header_add_an_account" msgid="756108499532023798">"Добавьте аккаунт"</string>
+    <string name="header_add_an_account" msgid="756108499532023798">"Добавить аккаунт"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Удалить аккаунт?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Все сообщения, контакты и другие данные из этого аккаунта будут удалены с планшета."</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Все сообщения, контакты и другие данные из этого аккаунта будут удалены с телефона."</string>
@@ -3213,10 +3226,10 @@
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"энергосбережение, постоянная экономия заряда, батарея"</string>
     <string name="default_sound" msgid="8821684447333687810">"Мелодия по умолчанию"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Громкость звонка: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="sound_dashboard_summary" msgid="3402435125958012986">"Звук, вибрация, режим \"Не беспокоить\""</string>
+    <string name="sound_dashboard_summary" msgid="3402435125958012986">"Громкость, вибрация, режим \"Не беспокоить\""</string>
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"Включен вибросигнал"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Включен режим без звука"</string>
-    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Громкость звонка: 80%"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Громкость звонка: 80 %"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Музыка, видео, игры"</string>
     <string name="remote_media_volume_option_title" msgid="7602586327091007461">"Громкость трансляции"</string>
     <string name="call_volume_option_title" msgid="1265865226974255384">"Разговор"</string>
@@ -3254,6 +3267,8 @@
       <item quantity="other">Включено <xliff:g id="ON_COUNT">%d</xliff:g> расписания.</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Не беспокоить"</string>
+    <!-- no translation found for zen_mode_slice_subtitle (1495506059205752083) -->
+    <skip />
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"Включите режим \"Не беспокоить\""</string>
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Исключения"</string>
     <string name="zen_mode_duration_settings_title" msgid="8471983919324532829">"Продолжительность по умолчанию"</string>
@@ -3388,10 +3403,15 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Смотреть все за последние 7 дней"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Расширенные настройки"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Рабочие уведомления"</string>
-    <string name="asst_capability_prioritizer_title" msgid="1008391045235540115">"Автоматическая приоритизация уведомлений"</string>
-    <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"Автоматически отключать звук у менее важных уведомлений и понижать их приоритет."</string>
+    <!-- no translation found for smart_notifications_title (475969117151722852) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_title (6691908606916292167) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_summary (3532556835426559362) -->
+    <skip />
     <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Быстрые ответы и действия"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"Автоматически добавлять в уведомления контекстные действия и быстрые ответы."</string>
+    <!-- no translation found for asst_capabilities_actions_replies_summary (5358499322896238048) -->
+    <skip />
     <string name="hide_silent_icons_title" msgid="2378514357635207742">"Скрывать значки состояния беззвучных уведомлений"</string>
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Скрыть значки беззвучных уведомлений в строке состояния"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Показывать значки уведомлений"</string>
@@ -3405,16 +3425,20 @@
     <string name="bubbles_feature_disabled_button_approve" msgid="5317196831268846883">"Включить на устройстве"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8176870537170586852">"Отмена"</string>
     <string name="swipe_direction_title" msgid="6877543492435053137">"Жесты пролистывания"</string>
-    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Проведите по экрану влево, чтобы закрыть уведомление, или вправо, чтобы открыть меню."</string>
-    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Проведите по экрану влево, чтобы закрыть уведомление, или вправо, чтобы открыть меню."</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Проведите вправо, чтобы закрыть уведомление, или влево, чтобы открыть меню"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Проведите  влево, чтобы закрыть уведомление, или вправо, чтобы открыть меню"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Световая индикация"</string>
-    <string name="lock_screen_notifications_title" msgid="2583595963286467672">"На заблокированном экране"</string>
+    <!-- no translation found for lock_screen_notifications_title (7604704224172951090) -->
+    <skip />
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Рабочий профиль заблокирован"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Показывать уведомления полностью"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Скрыть конфиденциальные данные"</string>
+    <!-- no translation found for lock_screen_notifications_summary_hide (1133085507139112569) -->
+    <skip />
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Не показывать уведомления"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Выберите режим уведомлений на заблокированном устройстве."</string>
-    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Уведомления"</string>
+    <!-- no translation found for lock_screen_notifications_interstitial_message (3143593517597479937) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_interstitial_title (709573564312902481) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Показывать рабочие уведомления полностью"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"Скрыть конфиденциальные рабочие данные"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Выберите режим уведомлений профиля на заблокированном устройстве."</string>
@@ -3436,14 +3460,26 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Высокая"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Всплывающее окно"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Блокировка"</string>
-    <string name="notification_silence_title" msgid="6082383633107433802">"Без звука"</string>
-    <string name="notification_alert_title" msgid="7755552340126176938">"Оповещение"</string>
+    <!-- no translation found for notification_silence_title (8575600650015431622) -->
+    <skip />
+    <!-- no translation found for notification_alert_title (7426286507434650473) -->
+    <skip />
     <string name="allow_interruption" msgid="7136150018111848721">"Разрешить оповещения"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Включить звуковой сигнал, вибрацию, а также показывать уведомления поверх других приложений"</string>
-    <string name="notification_channel_summary_min" msgid="5401718014765921892">"Низкая важность"</string>
-    <string name="notification_channel_summary_low" msgid="322317684244981244">"Средняя важность"</string>
-    <string name="notification_channel_summary_default" msgid="1111749130423589931">"Высокая важность"</string>
-    <string name="notification_channel_summary_high" msgid="2085017556511003283">"Крайняя важность"</string>
+    <!-- no translation found for notification_channel_summary_min (2965790706738495761) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low (250062606667099181) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status (1151953801054796200) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_lock (3801118119803089599) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status_lock (3400487706701402136) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (6837975360341956621) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_high (8779797505981599285) -->
+    <skip />
     <string name="notification_switch_label" msgid="6843075654538931025">"Включить уведомления"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Настройка уведомлений"</string>
     <string name="notifications_sent_daily" msgid="3584506541352710975">"~<xliff:g id="NUMBER">%1$s</xliff:g> в день"</string>
@@ -3521,7 +3557,8 @@
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Показывать значок уведомления"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Переопределить \"Не беспокоить\""</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"Разрешить этим уведомлениям появляться даже в режиме \"Не беспокоить\""</string>
-    <string name="app_notification_visibility_override_title" msgid="7821124557634786985">"На заблокированном экране"</string>
+    <!-- no translation found for app_notification_visibility_override_title (3618860781666494595) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Заблокировано"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Важные"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Конфиденциальные"</string>
@@ -3764,7 +3801,7 @@
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Дважды нажмите в любом месте экрана, чтобы включить устройство"</string>
     <string name="domain_urls_title" msgid="3132983644568821250">"Открытие ссылок"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Не открывать поддерживаемые ссылки"</string>
-    <string name="domain_urls_summary_one" msgid="3704934031930978405">"<xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Открывать <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"Открывать <xliff:g id="DOMAIN">%s</xliff:g> и другие URL"</string>
     <string name="domain_urls_apps_summary_off" msgid="1833056772600031220">"Нет приложений, которые могут открыть поддерживаемые ссылки"</string>
     <plurals name="domain_urls_apps_summary_on" formatted="false" msgid="240214361240709399">
@@ -3793,7 +3830,7 @@
     <string name="system_app" msgid="9068313769550747372">"(системное)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(по умолчанию)"</string>
     <string name="apps_storage" msgid="4353308027210435513">"Хранилище приложений"</string>
-    <string name="usage_access" msgid="5479504953931038165">"Доступ к данным"</string>
+    <string name="usage_access" msgid="5479504953931038165">"Доступ к данным об использовании"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"Доступ к истории использования"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Настройки использования приложения"</string>
     <string name="time_spent_in_app_pref_title" msgid="9124796405314626532">"Время использования"</string>
@@ -3985,7 +4022,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Внутренний накопитель: использовано <xliff:g id="PERCENTAGE">%1$s</xliff:g>, свободно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Устройство переходит в спящий режим после <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Обои, спящий режим, размер шрифта"</string>
-    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"Темы и обои, спящий режим, размер шрифта"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Стили, обои, отключение экрана, размер шрифта."</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Спящий режим, размер шрифта"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Устройство переходит в спящий режим через 10 минут бездействия"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Используется в среднем <xliff:g id="USED_MEMORY">%1$s</xliff:g> из <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
@@ -4083,7 +4120,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ограничения</item>
     </plurals>
     <string name="operator_warning" msgid="1862988028996859195">"Статистика оператора связи может отличаться от статистики устройства."</string>
-    <string name="data_used_template" msgid="3245919669966296505">"Передано: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="data_used_template" msgid="3245919669966296505">"Расход: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"Установить предупреждение"</string>
     <string name="data_warning" msgid="209133958008062117">"Предупреждение"</string>
     <string name="data_warning_footnote" msgid="776341964125603711">"Объем трафика измеряется вашим устройством. Значения могут отличаться от данных оператора связи."</string>
@@ -4192,7 +4229,7 @@
       <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> приложений без ограничений мобильного Интернета</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> приложения без ограничений мобильного Интернета</item>
     </plurals>
-    <string name="special_access_more" msgid="6927066457969301921">"Подробнее"</string>
+    <string name="special_access_more" msgid="6927066457969301921">"Ещё"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Удалить пользовательские данные и перейти к шифрованию?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Очистить и перейти"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Сброс счетчиков ShortcutManager"</string>
@@ -4209,10 +4246,9 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Подключено к устройству <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Подключено к нескольким устройствам"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Интерфейс системы: деморежим"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"Тема"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"Выберите тему"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"Эта настройка также применяется к приложениям."</string>
+    <string name="dark_ui_mode" msgid="3888371857083890543">"Тёмная тема"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Приложения, которые поддерживают эту функцию, также перейдут в ночной режим."</string>
+    <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"ОК"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Элементы в быстрых настройках"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Трассировка Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Датчики отключены"</string>
@@ -4301,10 +4337,10 @@
     <string name="auto_sync_account_title" msgid="898796354710116383">"Автосинхронизация данных"</string>
     <string name="auto_sync_personal_account_title" msgid="8496263182646100610">"Автоматическая синхронизация личных данных"</string>
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Автоматическая синхронизация корпоративных данных"</string>
-    <string name="auto_sync_account_summary" msgid="692499211629185107">"Данные приложений обновляются без участия пользователя"</string>
+    <string name="auto_sync_account_summary" msgid="692499211629185107">"Обновлять данные приложений автоматически"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Синхронизация аккаунта"</string>
     <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Синхронизация включена для некоторых элементов (<xliff:g id="ID_1">%1$d</xliff:g> из <xliff:g id="ID_2">%2$d</xliff:g>)"</string>
-    <string name="account_sync_summary_all_on" msgid="570431636622254156">"Синхронизация включена для всех элементов"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"Включена синхронизация всех компонентов"</string>
     <string name="account_sync_summary_all_off" msgid="8782409931761182734">"Синхронизация отключена для всех элементов"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Информация об управляемом устройстве"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"Изменения и настройки, управляемые организацией"</string>
@@ -4476,8 +4512,8 @@
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Продлите время работы от батареи"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Продлите время работы от батареи"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Отключить звук звонка"</string>
-    <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"Одновременно нажмите кнопки питания и увеличения громкости"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Отключение звука звонка"</string>
+    <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"Одновременное нажатие кнопок питания и увеличения громкости:"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Быстрое отключение звука звонка"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Вибрация"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Без звука"</string>
@@ -4641,7 +4677,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"Никакие приложения не использовали разрешения."</string>
     <string name="permission_bar_chart_title" msgid="2745425703472199837">"Разрешения, использованные за последние 24 часа"</string>
-    <string name="permission_bar_chart_details" msgid="2977943114535855210">"Открыть в панели управления"</string>
+    <string name="permission_bar_chart_details" msgid="2977943114535855210">"Показать все в панели управления"</string>
     <plurals name="permission_bar_chart_label" formatted="false" msgid="5346938677887948252">
       <item quantity="one"><xliff:g id="NUMBER">%s</xliff:g> приложение</item>
       <item quantity="few"><xliff:g id="NUMBER">%s</xliff:g> приложения</item>
@@ -4673,9 +4709,9 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Местоположение"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Для оказания этой услуги оператор мобильной связи может собирать сведения о вашем местоположении.\n\nОзнакомьтесь с политикой конфиденциальности оператора."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Вы можете потерять доступ к оставшимся минутам или трафику. Прежде чем выполнять удаление, обратитесь к оператору связи."</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"быстрый переход к контенту, умные подсказки"</string>
-    <string name="content_capture" msgid="4486543205504396210">"Умные подсказки"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"Разрешите Android сохранять информацию, которая появляется на экране или слышна при воспроизведении аудио и видео. Вы будете получать рекомендации, подобранные с учетом ваших действий."</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"content capture"</string>
+    <string name="content_capture" msgid="6456873729933463600">"Content Capture"</string>
+    <string name="content_capture_summary" msgid="659506647507221852">"Разрешить приложениям передавать контент системе Android"</string>
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"Создать системный дамп кучи"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"Создание системного дампа кучи…"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"Не удалось создать системный дамп кучи."</string>
