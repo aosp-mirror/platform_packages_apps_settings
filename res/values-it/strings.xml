@@ -372,7 +372,7 @@
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Informazioni profilo"</string>
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Account"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Geolocalizzazione"</string>
-    <string name="location_settings_master_switch_title" msgid="3560242980335542411">"Usa posizione"</string>
+    <string name="location_settings_master_switch_title" msgid="3560242980335542411">"Usa geolocalizzazione"</string>
     <string name="location_settings_summary_location_off" msgid="794370259612167176">"Off"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="5222949914335428617">
       <item quantity="other">On - <xliff:g id="COUNT_1">%1$d</xliff:g> app possono accedere alla posizione</item>
@@ -484,9 +484,12 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Proteggi il tuo tablet con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'autenticazione volti. Tocca Annulla, quindi imposta un PIN o scegli un\'altra opzione di blocco schermo."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Proteggi il tuo dispositivo con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'autenticazione volti. Tocca Annulla, quindi imposta un PIN o scegli un\'altra opzione di blocco schermo."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Proteggi il tuo telefono con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'autenticazione volti. Tocca Annulla, quindi imposta un PIN o scegli un\'altra opzione di blocco schermo."</string>
-    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"Saltare impostazione del PIN?"</string>
-    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Saltare impostazione password?"</string>
-    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Saltare impostazione sequenza?"</string>
+    <!-- no translation found for lock_screen_pin_skip_title (8064328201816780457) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_title (4155009417576409182) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_title (6467327818577283960) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Imposta blocco schermo"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Fine"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ops, questo non è il sensore"</string>
@@ -982,7 +985,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Rete Wi‑Fi dell\'operatore"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Connettiti tramite <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Per migliorare la precisione della posizione e per altri scopi, <xliff:g id="APP_NAME">%1$s</xliff:g> chiede di attivare la ricerca della rete, anche quando il Wi-Fi è disattivato.\n\nConsetirlo a tutte le app che vogliono eseguire la ricerca?"</string>
-    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Per migliorare la precisione della posizione e per altri scopi, un\'app sconosciuta vuole attivare la ricerca della rete, anche con Wi‑Fi disattivato.\n\nConsentire ciò a ogni app che vuole la ricerca?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Per migliorare la precisione della posizione e per altri scopi, un\'app sconosciuta vuole attivare la ricerca della rete, anche con Wi‑Fi non attivo.\n\nConsentire a ogni app che vuole eseguire la ricerca?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Per disattivare questa impostazione, vai alla sezione Avanzate nel menu extra."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Consenti"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Rifiuta"</string>
@@ -1018,6 +1021,8 @@
       <item quantity="other">%d reti</item>
       <item quantity="one">1 rete</item>
     </plurals>
+    <!-- no translation found for wifi_saved_passpoint_access_points_summary (8256430439661111672) -->
+    <!-- no translation found for wifi_saved_all_access_points_summary (149386761654596280) -->
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Wi‑Fi avanzate"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Indirizzo MAC"</string>
@@ -1207,13 +1212,11 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Ottimizza il livello di luminosità per la luce disponibile. Quando questa funzione è attiva, puoi comunque regolare la luminosità temporaneamente."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"La luminosità dello schermo verrà regolata automaticamente in base all\'ambiente e alle attività. Puoi spostare manualmente il dispositivo di scorrimento per far sì che la luminosità adattiva memorizzi le tue preferenze."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Bilanciamento bianco display"</string>
-    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
-    <skip />
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Schermo vigile"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"On/Lo schermo non si spegne se lo stai guardando"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Off"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Consente di impedire lo spegnimento dello schermo se lo stai guardando."</string>
-    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
-    <skip />
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"L\'opzione Schermo vigile usa la fotocamera anteriore per controllare se qualcuno sta guardando lo schermo. Funziona sul dispositivo e le immagini non vengono mai memorizzate o inviate a Google."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Luminosità notturna"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Con la funzione Luminosità notturna, il tuo schermo diventa color ambra. In questo modo potrai guardarlo senza sforzare la vista o leggere in condizioni di luce attenuata e potrai addormentarti più facilmente."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Pianificazione"</string>
@@ -1653,7 +1656,7 @@
     <string name="location_title" msgid="1029961368397484576">"La mia posizione"</string>
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Posizione per profilo di lavoro"</string>
     <string name="location_app_level_permissions" msgid="2777033567595680764">"Autorizzazione app"</string>
-    <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"La localizzazione non è attiva"</string>
+    <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"La geolocalizzazione non è attiva"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="6755614454444493071">
       <item quantity="other"> <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_2">%1$d</xliff:g> app su <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> hanno accesso illimitato</item>
       <item quantity="one"> <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_0">%1$d</xliff:g> app su <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> ha accesso illimitato</item>
@@ -1709,7 +1712,12 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informazioni sulla sicurezza"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Nessuna connessione dati disponibile. Per visualizzare ora le informazioni, visita il sito %s da qualsiasi computer collegato a Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Caricamento..."</string>
-    <string name="confirm_device_credential_use_alternate_method" msgid="793877757665026949">"Utilizza metodo alternativo"</string>
+    <!-- no translation found for confirm_device_credential_pin (5308435093406166355) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_pattern (1350321840134412900) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_password (2195705238498478704) -->
+    <skip />
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Imposta il blocco schermo"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Per sicurezza, imposta una password"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Per usare l\'impronta digitale, imposta una password"</string>
@@ -2458,6 +2466,8 @@
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"La funzionalità Risparmio energetico viene attivata se è probabile che la batteria si scarichi prima della successiva ricarica prevista"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"Si attiva quando la batteria raggiunge <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Imposta una pianificazione"</string>
+    <!-- no translation found for battery_saver_turn_on_summary (5552800757174173459) -->
+    <skip />
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Disattiva quando la ricarica è completa"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Risparmio energetico si disattiva quando il livello di carica del telefono è <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"Risparmio energetico si attiva quando il tablet è a un livello di carica pari a <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3175,6 +3185,8 @@
       <item quantity="one">1 attiva</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Non disturbare"</string>
+    <!-- no translation found for zen_mode_slice_subtitle (1495506059205752083) -->
+    <skip />
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"Attiva Non disturbare"</string>
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Eccezioni"</string>
     <string name="zen_mode_duration_settings_title" msgid="8471983919324532829">"Durata predefinita"</string>
@@ -3305,10 +3317,15 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Mostra tutte le app degli ultimi 7 giorni"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avanzate"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notifiche di lavoro"</string>
-    <string name="asst_capability_prioritizer_title" msgid="1008391045235540115">"Priorità notifiche automatiche"</string>
-    <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"Silenzia e retrocedi automaticamente le notifiche meno importanti"</string>
+    <!-- no translation found for smart_notifications_title (475969117151722852) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_title (6691908606916292167) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_summary (3532556835426559362) -->
+    <skip />
     <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Azioni e risposte rapide"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"Aggiungi automaticamente azioni di notifica contestuali e risposte rapide alle notifiche"</string>
+    <!-- no translation found for asst_capabilities_actions_replies_summary (5358499322896238048) -->
+    <skip />
     <string name="hide_silent_icons_title" msgid="2378514357635207742">"Nascondi le icone di stato per le notifiche silenziose"</string>
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Nascondi le icone per le notifiche silenziose nella barra di stato"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Consenti indicatori notifica"</string>
@@ -3325,13 +3342,17 @@
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"Scorri verso destra per ignorare, verso sinistra per mostrare il menu"</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"Scorri verso sinistra per ignorare, verso destra per mostrare il menu"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Luce lampeggiante"</string>
-    <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Nella schermata di blocco"</string>
+    <!-- no translation found for lock_screen_notifications_title (7604704224172951090) -->
+    <skip />
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Con profilo di lavoro bloccato"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostra tutti i contenuti delle notifiche"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Nascondi contenuti sensibili"</string>
+    <!-- no translation found for lock_screen_notifications_summary_hide (1133085507139112569) -->
+    <skip />
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Non mostrare le notifiche"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Quando il dispositivo è bloccato, come vuoi visualizzare le notifiche?"</string>
-    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notifiche"</string>
+    <!-- no translation found for lock_screen_notifications_interstitial_message (3143593517597479937) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_interstitial_title (709573564312902481) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Mostra tutti i contenuti delle notifiche di lavoro"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"Nascondi contenuti di lavoro sensibili"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Quando il dispositivo è bloccato, come vuoi visualizzare le notifiche del profilo?"</string>
@@ -3353,14 +3374,26 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Alta"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Visualizza sullo schermo"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blocca"</string>
-    <string name="notification_silence_title" msgid="6082383633107433802">"Mostra in modalità silenziosa"</string>
-    <string name="notification_alert_title" msgid="7755552340126176938">"Avviso"</string>
+    <!-- no translation found for notification_silence_title (8575600650015431622) -->
+    <skip />
+    <!-- no translation found for notification_alert_title (7426286507434650473) -->
+    <skip />
     <string name="allow_interruption" msgid="7136150018111848721">"Consenti interruzioni"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Consenti all\'app di emettere suoni o vibrazioni e/o mostrare notifiche sullo schermo"</string>
-    <string name="notification_channel_summary_min" msgid="5401718014765921892">"Importanza scarsa"</string>
-    <string name="notification_channel_summary_low" msgid="322317684244981244">"Importanza media"</string>
-    <string name="notification_channel_summary_default" msgid="1111749130423589931">"Importanza elevata"</string>
-    <string name="notification_channel_summary_high" msgid="2085017556511003283">"Urgente"</string>
+    <!-- no translation found for notification_channel_summary_min (2965790706738495761) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low (250062606667099181) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status (1151953801054796200) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_lock (3801118119803089599) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status_lock (3400487706701402136) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (6837975360341956621) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_high (8779797505981599285) -->
+    <skip />
     <string name="notification_switch_label" msgid="6843075654538931025">"Mostra notifiche"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Assistente notifiche"</string>
     <string name="notifications_sent_daily" msgid="3584506541352710975">"~ <xliff:g id="NUMBER">%1$s</xliff:g> al giorno"</string>
@@ -3430,7 +3463,8 @@
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Mostra indicatore di notifica"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ignora Non disturbare"</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"Consenti queste notifiche quando l\'opzione Non disturbare è attiva"</string>
-    <string name="app_notification_visibility_override_title" msgid="7821124557634786985">"Nella schermata di blocco"</string>
+    <!-- no translation found for app_notification_visibility_override_title (3618860781666494595) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloccate"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Priorità"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Riservate"</string>
@@ -4080,11 +4114,9 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Connesso a <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Connesso a più dispositivi"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Modalità demo dell\'interfaccia utente di sistema"</string>
-    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
-    <skip />
+    <string name="dark_ui_mode" msgid="3888371857083890543">"Tema scuro"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Anche le app supportate passeranno al tema scuro"</string>
-    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
-    <skip />
+    <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"OK"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Riquadri sviluppatore per impostazioni rapide"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Traccia Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Sensori disattivati"</string>
@@ -4517,8 +4549,7 @@
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Potresti non avere più accesso a tempi o dati restanti. Prima di effettuare la rimozione, rivolgiti al tuo fornitore di servizi."</string>
     <string name="keywords_content_capture" msgid="859132453327059493">"acquisizione dei contenuti"</string>
     <string name="content_capture" msgid="6456873729933463600">"Acquisizione dei contenuti"</string>
-    <!-- no translation found for content_capture_summary (659506647507221852) -->
-    <skip />
+    <string name="content_capture_summary" msgid="659506647507221852">"Consente alle app di inviare contenuti al sistema Android"</string>
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"Acquisisci dump dell\'heap del sistema"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"Acquisizione del dump dell\'heap del sistema"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"Impossibile acquisire dump dell\'heap del sistema"</string>
