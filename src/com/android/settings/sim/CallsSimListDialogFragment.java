@@ -16,6 +16,7 @@
 
 package com.android.settings.sim;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -55,5 +56,10 @@ public class CallsSimListDialogFragment extends SimListDialogFragment {
             result.add(subscriptionManager.getActiveSubscriptionInfo(subId));
         }
         return result;
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.DIALOG_CALL_SIM_LIST;
     }
 }

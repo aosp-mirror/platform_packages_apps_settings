@@ -17,6 +17,7 @@
 package com.android.settings.sim;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -50,7 +51,7 @@ public class SimListDialogFragment extends SimDialogFragment implements
 
     protected SelectSubscriptionAdapter mAdapter;
     @VisibleForTesting
-    List<SubscriptionInfo>  mSubscriptions;
+    List<SubscriptionInfo> mSubscriptions;
 
     public static SimListDialogFragment newInstance(int dialogType, int titleResId,
             boolean includeAskEveryTime) {
@@ -120,6 +121,11 @@ public class SimListDialogFragment extends SimDialogFragment implements
     @VisibleForTesting
     void setAdapter(AlertDialog.Builder builder) {
         builder.setAdapter(mAdapter, this);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.DIALOG_SIM_LIST;
     }
 
     private static class SelectSubscriptionAdapter extends BaseAdapter {
