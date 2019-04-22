@@ -136,6 +136,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
           use(MobileNetworkSwitchController.class).init(getLifecycle(), mSubId);
           use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
           use(BillingCyclePreferenceController.class).init(mSubId);
+          use(MmsMessagePreferenceController.class).init(mSubId);
         }
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
