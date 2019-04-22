@@ -18,6 +18,7 @@ package com.android.settings.sim;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
@@ -97,5 +98,10 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
     @VisibleForTesting
     protected SubscriptionManager getSubscriptionManager() {
         return getContext().getSystemService(SubscriptionManager.class);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.DIALOG_PREFERRED_SIM_PICKER;
     }
 }
