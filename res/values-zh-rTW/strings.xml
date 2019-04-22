@@ -484,9 +484,12 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"建議你設定螢幕鎖定選項保護你的平板電腦。這樣一來，即使平板電腦遺失或遭竊，其他人也無法使用。此外，你也必須設定螢幕鎖定選項，才能設定臉孔驗證。請輕觸 [取消]，然後設定 PIN 碼或選擇其他螢幕鎖定選項。"</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"建議你設定螢幕鎖定選項保護你的裝置。這樣一來，即使裝置遺失或遭竊，其他人也無法使用。此外，你也必須設定螢幕鎖定選項，才能設定臉孔驗證。請輕觸 [取消]，然後設定 PIN 碼或選擇其他螢幕鎖定選項。"</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"建議你設定螢幕鎖定選項保護你的手機。這樣一來，即使手機遺失或遭竊，其他人也無法使用。此外，你也必須設定螢幕鎖定選項，才能設定臉孔驗證。請輕觸 [取消]，然後設定 PIN 碼或選擇其他螢幕鎖定選項。"</string>
-    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"要略過 PIN 碼設定程序嗎？"</string>
-    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"要略過密碼設定程序嗎？"</string>
-    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"要略過解鎖圖案設定程序嗎？"</string>
+    <!-- no translation found for lock_screen_pin_skip_title (8064328201816780457) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_title (4155009417576409182) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_title (6467327818577283960) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"設定螢幕鎖定"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"糟糕，這不是感應器"</string>
@@ -982,8 +985,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"電信業者 Wi‑Fi 網路"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"透過「<xliff:g id="NAME">%1$s</xliff:g>」連線"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"<xliff:g id="APP_NAME">%1$s</xliff:g> 要求開啟網路掃描功能 (即使 Wi-Fi 已關閉)，藉此提升定位精確度及用於其他用途。\n\n你要對所有需要執行掃描的應用程式允許這項要求嗎？"</string>
-    <!-- no translation found for wifi_scan_always_turn_on_message_unknown (6162424298483845679) -->
-    <skip />
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"某個不明應用程式要求開啟網路掃描功能 (即使 Wi-Fi 已關閉)，藉此提升定位精確度及用於其他用途。\n\n你要對所有需要執行掃描的應用程式允許這項要求嗎？"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"如要關閉這項功能，請在溢位選單中選取 [進階]。"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"允許"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"拒絕"</string>
@@ -1019,6 +1021,8 @@
       <item quantity="other">%d 個網路</item>
       <item quantity="one">1 個網路</item>
     </plurals>
+    <!-- no translation found for wifi_saved_passpoint_access_points_summary (8256430439661111672) -->
+    <!-- no translation found for wifi_saved_all_access_points_summary (149386761654596280) -->
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"進階 Wi-Fi"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC 位址"</string>
@@ -1208,13 +1212,11 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"根據環境光源調整最佳亮度。開啟這項功能之後，你依然可以暫時調整亮度。"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"系統會根據你的所在環境和從事的活動自動調整螢幕亮度。你可以手動移動滑桿協助自動調整亮度功能記憶你偏好的亮度。"</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"螢幕白平衡"</string>
-    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
-    <skip />
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"螢幕感知"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"啟用/螢幕不會在你注視時關閉"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"關閉"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"避免螢幕在你注視時關閉。"</string>
-    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
-    <skip />
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"螢幕感知功能會使用前置鏡頭判斷是否有人正在看著螢幕。這項功能只會在裝置上執行，系統不會儲存相關圖片或將其傳送給 Google。"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜燈"</string>
     <string name="night_display_text" msgid="1837277457033025056">"夜燈功能會將你的螢幕色調改為琥珀色，讓你更輕鬆地在光線昏暗的環境中查看螢幕，也比較容易入睡。"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"設定時間"</string>
@@ -1710,7 +1712,12 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"安全資訊"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"你沒有數據連線，如要立即查看這項資訊，請使用任何已連上網際網路的電腦前往 %s。"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"載入中…"</string>
-    <string name="confirm_device_credential_use_alternate_method" msgid="793877757665026949">"改用其他方法"</string>
+    <!-- no translation found for confirm_device_credential_pin (5308435093406166355) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_pattern (1350321840134412900) -->
+    <skip />
+    <!-- no translation found for confirm_device_credential_password (2195705238498478704) -->
+    <skip />
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"設定螢幕鎖定"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"為了安全起見，請設定密碼"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"如要使用指紋，請設定密碼"</string>
@@ -2290,12 +2297,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"平板電腦使用率比平常高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"裝置使用率比平常高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"電池電量可能會比平常更快耗盡"</string>
-    <!-- no translation found for battery_tip_dialog_message (797225122502556066) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (49788591262480482) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (7959652003221931962) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"你的手機使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"你的平板電腦使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"你的裝置使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"包含高耗電背景活動"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">限制 %1$d 個應用程式</item>
@@ -2462,6 +2466,8 @@
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"如果電池電量可能會在你下次的例行充電時間前耗盡，系統就會開啟「節約耗電量」模式"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"將在電量為 <xliff:g id="PERCENT">%1$s</xliff:g> 時開啟"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"設定時間表"</string>
+    <!-- no translation found for battery_saver_turn_on_summary (5552800757174173459) -->
+    <skip />
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"充電完成後關閉"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"在你手機的電池電量達 <xliff:g id="PERCENT">%1$s</xliff:g> 時關閉節約耗電量模式"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"在你平板電腦的電池電量達 <xliff:g id="PERCENT">%1$s</xliff:g> 時關閉節約耗電量模式"</string>
@@ -3179,6 +3185,8 @@
       <item quantity="one">已啟用 1 項排程</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"零打擾"</string>
+    <!-- no translation found for zen_mode_slice_subtitle (1495506059205752083) -->
+    <skip />
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"開啟「零打擾」模式"</string>
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"例外狀況"</string>
     <string name="zen_mode_duration_settings_title" msgid="8471983919324532829">"預設持續時間"</string>
@@ -3309,10 +3317,15 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"查看過去 7 天的所有相關內容"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"進階"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Work 通知"</string>
-    <string name="asst_capability_prioritizer_title" msgid="1008391045235540115">"自動通知優先順序排序工具"</string>
-    <string name="asst_capability_prioritizer_summary" msgid="7174545871607005997">"自動將重要性較低的通知設為靜音並降級"</string>
+    <!-- no translation found for smart_notifications_title (475969117151722852) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_title (6691908606916292167) -->
+    <skip />
+    <!-- no translation found for asst_capability_prioritizer_summary (3532556835426559362) -->
+    <skip />
     <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"智慧操作和回覆"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"自動將內容通知操作和快速回覆新增至通知"</string>
+    <!-- no translation found for asst_capabilities_actions_replies_summary (5358499322896238048) -->
+    <skip />
     <string name="hide_silent_icons_title" msgid="2378514357635207742">"隱藏無聲通知狀態圖示"</string>
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"在狀態列隱藏無聲通知圖示"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"允許使用通知圓點"</string>
@@ -3329,13 +3342,17 @@
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"向右滑動即可關閉，向左滑動即可顯示選單"</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"向左滑動即可關閉，向右滑動即可顯示選單"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"閃爍燈光"</string>
-    <string name="lock_screen_notifications_title" msgid="2583595963286467672">"在螢幕鎖定畫面上"</string>
+    <!-- no translation found for lock_screen_notifications_title (7604704224172951090) -->
+    <skip />
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"當工作資料夾遭鎖定時"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"顯示所有通知內容"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"隱藏敏感內容"</string>
+    <!-- no translation found for lock_screen_notifications_summary_hide (1133085507139112569) -->
+    <skip />
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不顯示通知"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"當裝置鎖定時，你要如何顯示通知？"</string>
-    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"通知"</string>
+    <!-- no translation found for lock_screen_notifications_interstitial_message (3143593517597479937) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_interstitial_title (709573564312902481) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"顯示所有 Work 通知內容"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"隱藏敏感的 Work 內容"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"當裝置鎖定時，你要如何顯示個人資料通知？"</string>
@@ -3357,14 +3374,26 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"在畫面上彈出通知"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"封鎖"</string>
-    <string name="notification_silence_title" msgid="6082383633107433802">"顯示通知但不發出音效"</string>
-    <string name="notification_alert_title" msgid="7755552340126176938">"快訊"</string>
+    <!-- no translation found for notification_silence_title (8575600650015431622) -->
+    <skip />
+    <!-- no translation found for notification_alert_title (7426286507434650473) -->
+    <skip />
     <string name="allow_interruption" msgid="7136150018111848721">"允許干擾"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"允許應用程式發出音效、震動，以及/或在畫面上彈出通知"</string>
-    <string name="notification_channel_summary_min" msgid="5401718014765921892">"低重要性"</string>
-    <string name="notification_channel_summary_low" msgid="322317684244981244">"中重要性"</string>
-    <string name="notification_channel_summary_default" msgid="1111749130423589931">"高重要性"</string>
-    <string name="notification_channel_summary_high" msgid="2085017556511003283">"緊急重要性"</string>
+    <!-- no translation found for notification_channel_summary_min (2965790706738495761) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low (250062606667099181) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status (1151953801054796200) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_lock (3801118119803089599) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_low_status_lock (3400487706701402136) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (6837975360341956621) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_high (8779797505981599285) -->
+    <skip />
     <string name="notification_switch_label" msgid="6843075654538931025">"顯示通知"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知小幫手"</string>
     <string name="notifications_sent_daily" msgid="3584506541352710975">"每天大約 <xliff:g id="NUMBER">%1$s</xliff:g> 則"</string>
@@ -3434,7 +3463,8 @@
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"顯示通知圓點"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"忽略「零打擾」模式設定"</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"允許系統在「零打擾」模式開啟時繼續發出這些通知"</string>
-    <string name="app_notification_visibility_override_title" msgid="7821124557634786985">"在螢幕鎖定畫面上"</string>
+    <!-- no translation found for app_notification_visibility_override_title (3618860781666494595) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"已封鎖"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"優先"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"機密"</string>
@@ -4084,11 +4114,9 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"已連線到「<xliff:g id="ID_1">%1$s</xliff:g>」"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"已連線到多個裝置"</string>
     <string name="demo_mode" msgid="2798762752209330277">"系統 UI 示範模式"</string>
-    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
-    <skip />
+    <string name="dark_ui_mode" msgid="3888371857083890543">"深色主題"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"支援的應用程式也會切換為深色主題"</string>
-    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
-    <skip />
+    <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"我知道了"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"快速設定開發人員圖塊"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope 追蹤"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"感應器已關閉"</string>
@@ -4521,8 +4549,7 @@
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"你可能無法再存取任何剩餘時間或資料。請先洽詢你的供應商，再進行移除。"</string>
     <string name="keywords_content_capture" msgid="859132453327059493">"內容擷取"</string>
     <string name="content_capture" msgid="6456873729933463600">"內容擷取"</string>
-    <!-- no translation found for content_capture_summary (659506647507221852) -->
-    <skip />
+    <string name="content_capture_summary" msgid="659506647507221852">"允許應用程式將內容傳送到 Android 系統"</string>
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"擷取系統記憶體快照資料"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"正在擷取系統記憶體快照資料"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"無法擷取系統記憶體快照資料"</string>
