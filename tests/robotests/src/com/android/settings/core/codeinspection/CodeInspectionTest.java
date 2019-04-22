@@ -24,12 +24,11 @@ import com.android.settings.search.SearchIndexProviderCodeInspector;
 import com.android.settings.slices.SliceControllerInXmlCodeInspector;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
-import org.robolectric.RobolectricTestRunner;
 
 /**
  * Test suite that scans all classes in app package, and performs different types of code inspection
@@ -47,7 +46,6 @@ public class CodeInspectionTest {
     }
 
     @Test
-    @Ignore("b/130897640")
     public void runInstrumentableFragmentCodeInspection() {
         new InstrumentableFragmentCodeInspector(mClasses).run();
     }
