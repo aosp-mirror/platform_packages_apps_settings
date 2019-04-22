@@ -106,9 +106,9 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
-    public void getSlice_noConnectableDevice_returnNull() {
+    public void getSlice_noConnectedDevice_returnNull() {
         mDevicesList.clear();
-        when(mA2dpProfile.getConnectableDevices()).thenReturn(mDevicesList);
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
 
         assertThat(mMediaOutputIndicatorSlice.getSlice()).isNull();
     }
@@ -116,7 +116,7 @@ public class MediaOutputIndicatorSliceTest {
     @Test
     public void getSlice_noActiveDevice_verifyDefaultName() {
         mDevicesList.add(mA2dpDevice);
-        when(mA2dpProfile.getConnectableDevices()).thenReturn(mDevicesList);
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
         when(mA2dpProfile.getActiveDevice()).thenReturn(null);
 
         // Verify slice title and subtitle
@@ -130,7 +130,7 @@ public class MediaOutputIndicatorSliceTest {
     @Test
     public void getSlice_A2dpDeviceActive_verifyName() {
         mDevicesList.add(mA2dpDevice);
-        when(mA2dpProfile.getConnectableDevices()).thenReturn(mDevicesList);
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
         when(mA2dpProfile.getActiveDevice()).thenReturn(mA2dpDevice);
 
         final Slice mediaSlice = mMediaOutputIndicatorSlice.getSlice();
@@ -142,7 +142,7 @@ public class MediaOutputIndicatorSliceTest {
     @Test
     public void getSlice_HADeviceActive_verifyName() {
         mDevicesList.add(mHapDevice);
-        when(mHearingAidProfile.getConnectableDevices()).thenReturn(mDevicesList);
+        when(mHearingAidProfile.getConnectedDevices()).thenReturn(mDevicesList);
         when(mHearingAidProfile.getActiveDevices()).thenReturn(mDevicesList);
 
         // Verify slice title and subtitle
