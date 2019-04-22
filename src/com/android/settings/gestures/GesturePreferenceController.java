@@ -23,6 +23,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -61,6 +62,12 @@ public abstract class GesturePreferenceController extends TogglePreferenceContro
             // Different meanings of "Enabled" for the Preference and Controller.
             preference.setEnabled(canHandleClicks());
         }
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mContext.getText(
+                isChecked() ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
 
     @Override
