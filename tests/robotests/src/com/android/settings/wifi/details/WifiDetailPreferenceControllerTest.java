@@ -1653,7 +1653,7 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         // change as not in range
-        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(false);
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(false);
         boolean changed = mController.updateAccessPoint();
 
         assertThat(changed).isTrue();
@@ -1666,7 +1666,7 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         // change as in range
-        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(true);
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(true);
         boolean changed = mController.updateAccessPoint();
 
         assertThat(changed).isTrue();
