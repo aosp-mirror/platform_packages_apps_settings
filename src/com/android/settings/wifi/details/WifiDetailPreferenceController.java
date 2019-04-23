@@ -441,8 +441,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         if (usingDataUsageHeader(mContext)) {
             mSummaryHeaderController.updateState(mDataUsageSummaryPref);
         } else {
-            mEntityHeaderController.setSummary(mAccessPoint.getSettingsSummary())
-                    .done(mFragment.getActivity(), true /* rebind */);
+            mEntityHeaderController.setSummary(
+                    mAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                            .done(mFragment.getActivity(), true /* rebind */);
         }
     }
 
