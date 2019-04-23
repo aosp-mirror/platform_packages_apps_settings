@@ -35,6 +35,7 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -96,6 +97,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowToast;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -1307,6 +1309,406 @@ public class WifiDetailPreferenceControllerTest {
 
         verify(mockButtonsPref, never()).setButton2Visible(true);
         verify(mockButtonsPref).setButton2Visible(false);
+    }
+
+    @Test
+    public void testConnectButton_shouldInvisibleForConnectNetwork() {
+        setUpForConnectedNetwork();
+
+        displayAndResume();
+
+        verify(mockButtonsPref, times(1)).setButton3Visible(false);
+    }
+
+    @Test
+    public void testConnectButton_shouldVisibleForDisconnectNetwork() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        verify(mockButtonsPref, times(1)).setButton3Text(R.string.wifi_connect);
+    }
+
+    private void setUpForToast() {
+        Resources res = mContext.getResources();
+        when(mockActivity.getResources()).thenReturn(res);
+    }
+
+    @Test
+    public void testConnectButton_clickConnect_displayAsSuccess() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        String label = "title";
+        when(mockAccessPoint.getTitle()).thenReturn(label);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as connected
+        when(mockAccessPoint.isActive()).thenReturn(true);
+        mController.updateAccessPoint();
+
+        // check connect button invisible, be init as default state and toast success message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(false);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_connected_to_message, label));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectButFailed_displayFailMessage() {
+        setUpForDisconnectedNetwork();
+        ArgumentCaptor<WifiManager.ActionListener> connectListenerCaptor =
+                ArgumentCaptor.forClass(WifiManager.ActionListener.class);
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), connectListenerCaptor.capture());
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        connectListenerCaptor.getValue().onFailure(-1);
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_connect_message));
+    }
+
+    private void verifyConnectBtnSetUpAsVisible(InOrder inOrder) {
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Icon(R.drawable.ic_settings_wireless);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+    }
+
+    private void verifyConnectBtnSetUpAsConnecting(InOrder inOrder) {
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Text(R.string.wifi_connecting);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Enabled(false);
+    }
+
+    private void verifyConnectBtnBeInitAsDefault(InOrder inOrder) {
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Icon(R.drawable.ic_settings_wireless);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Enabled(true);
+    }
+
+    @Test
+    public void testConnectButton_clickConnectButTimeout_displayFailMessage() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_connect_message));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectButTimeout_displayNotInRangeMessage() {
+        setUpForNotInRangeNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_not_in_range_message));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectWhenWiFiDisabled_displaySuccessMessage() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
+        InOrder inOrder = inOrder(mockButtonsPref);
+        String label = "title";
+        when(mockAccessPoint.getTitle()).thenReturn(label);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check turn on Wi-Fi, display button as connecting and toast turn on Wi-Fi message
+        verify(mockWifiManager, times(1)).setWifiEnabled(true);
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_turned_on_message));
+
+        // notify Wi-Fi enabled
+        mController.mWifiListener.onWifiStateChanged(WifiManager.WIFI_STATE_ENABLED);
+
+        // check had connect network and icon display as expected
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as connected
+        when(mockAccessPoint.isActive()).thenReturn(true);
+        mController.updateAccessPoint();
+
+        // check connect button invisible, be init as default state and toast success message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(false);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_connected_to_message, label));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectWhenWiFiDisabled_failedToConnectWiFi() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check turn on Wi-Fi, display button as connecting and toast turn on Wi-Fi message
+        verify(mockWifiManager, times(1)).setWifiEnabled(true);
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_turned_on_message));
+
+        // notify Wi-Fi enabled
+        mController.mWifiListener.onWifiStateChanged(WifiManager.WIFI_STATE_ENABLED);
+
+        // check had connect network and icon display as expected
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_connect_message));
+    }
+
+    @Test
+    public void
+            testConnectButton_clickConnectWhenWiFiDisabled_failedToConnectWifiBecauseNotInRange() {
+        setUpForNotInRangeNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check turn on Wi-Fi, display button as connecting and toast turn on Wi-Fi message
+        verify(mockWifiManager, times(1)).setWifiEnabled(true);
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_turned_on_message));
+
+        // notify Wi-Fi enabled
+        mController.mWifiListener.onWifiStateChanged(WifiManager.WIFI_STATE_ENABLED);
+
+        // check had connect network and icon display as expected
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_not_in_range_message));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectWhenWiFiDisabled_failedToEnableWifi() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check turn on Wi-Fi, display button as connecting and toast turn on Wi-Fi message
+        verify(mockWifiManager, times(1)).setWifiEnabled(true);
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_turned_on_message));
+
+        // notify turn on Wi-Fi failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_connect_message));
+    }
+
+    @Test
+    public void updateAccessPoint_returnFalseForNothingChanged() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isFalse();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForSignalLevelChanged() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        // Level changed
+        when(mockAccessPoint.getLevel()).thenReturn(LEVEL + 1);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForChangeAsNotInRange() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        // change as not in range
+        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(false);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForChangeAsInRange() {
+        setUpForNotInRangeNetwork();
+
+        displayAndResume();
+
+        // change as in range
+        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(true);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForChangeAsConnected() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        // change as connected
+        when(mockAccessPoint.isActive()).thenReturn(true);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForChangeAsDisconnected() {
+        setUpForConnectedNetwork();
+
+        displayAndResume();
+
+        // change as disconnected
+        when(mockAccessPoint.isActive()).thenReturn(false);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForAccessPointUpdated() {
+        setUpForConnectedNetwork();
+
+        displayAndResume();
+
+        // change as disconnected
+        when(mockAccessPoint.update(mockWifiConfig, mockWifiInfo, mockNetworkInfo))
+                .thenReturn(true);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
     }
 
     @Test
