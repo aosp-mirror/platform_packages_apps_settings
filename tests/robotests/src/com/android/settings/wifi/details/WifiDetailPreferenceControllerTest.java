@@ -84,7 +84,6 @@ import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -108,7 +107,6 @@ import java.util.stream.Collectors;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDevicePolicyManager.class, ShadowEntityHeaderController.class})
-@Ignore("b/130896210")
 public class WifiDetailPreferenceControllerTest {
 
     private static final int LEVEL = 1;
@@ -120,6 +118,7 @@ public class WifiDetailPreferenceControllerTest {
     private static final String RANDOMIZED_MAC_ADDRESS = "RANDOMIZED_MAC_ADDRESS";
     private static final String FACTORY_MAC_ADDRESS = "FACTORY_MAC_ADDRESS";
     private static final String SECURITY = "None";
+    private static final String FQDN = "fqdn";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mockScreen;
@@ -301,7 +300,7 @@ public class WifiDetailPreferenceControllerTest {
         list.add(mockAccessPoint);
         when(mockWifiTracker.getAccessPoints()).thenReturn(list);
         WifiTrackerFactory.setTestingWifiTracker(mockWifiTracker);
-        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(true);
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(true);
         when(mockAccessPoint.isReachable()).thenReturn(true);
 
         mController = newWifiDetailPreferenceController();
@@ -313,7 +312,7 @@ public class WifiDetailPreferenceControllerTest {
         list.add(mockAccessPoint);
         when(mockWifiTracker.getAccessPoints()).thenReturn(list);
         WifiTrackerFactory.setTestingWifiTracker(mockWifiTracker);
-        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(true);
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(true);
         when(mockAccessPoint.isReachable()).thenReturn(true);
 
         mController = newWifiDetailPreferenceController();
@@ -325,7 +324,7 @@ public class WifiDetailPreferenceControllerTest {
         list.add(mockAccessPoint);
         when(mockWifiTracker.getAccessPoints()).thenReturn(list);
         WifiTrackerFactory.setTestingWifiTracker(mockWifiTracker);
-        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(false);
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(false);
         when(mockAccessPoint.isReachable()).thenReturn(false);
 
         mController = newWifiDetailPreferenceController();
@@ -1116,12 +1115,13 @@ public class WifiDetailPreferenceControllerTest {
         FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
 
         mockWifiConfig.networkId = 5;
-        when(mockWifiConfig.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.getPasspointFqdn()).thenReturn(FQDN);
 
         mController.displayPreference(mockScreen);
         mForgetClickListener.getValue().onClick(null);
 
-        verify(mockWifiManager).removePasspointConfiguration(mockWifiConfig.FQDN);
+        verify(mockWifiManager).removePasspointConfiguration(FQDN);
         verify(mockMetricsFeatureProvider)
                 .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
     }
@@ -1132,13 +1132,14 @@ public class WifiDetailPreferenceControllerTest {
         final WifiDetailPreferenceController spyController = spy(mController);
 
         mockWifiConfig.networkId = 5;
-        when(mockWifiConfig.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.getPasspointFqdn()).thenReturn(FQDN);
         spyController.displayPreference(mockScreen);
         FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
 
         mForgetClickListener.getValue().onClick(null);
 
-        verify(mockWifiManager, times(0)).removePasspointConfiguration(mockWifiConfig.FQDN);
+        verify(mockWifiManager, times(0)).removePasspointConfiguration(FQDN);
         verify(mockMetricsFeatureProvider, times(0))
                 .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         verify(spyController).showConfirmForgetDialog();
