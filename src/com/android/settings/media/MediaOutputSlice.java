@@ -70,21 +70,27 @@ public class MediaOutputSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
+        // Reload theme for switching dark mode on/off
+        mContext.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
+
+        final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
+                .setAccentColor(COLOR_NOT_TINTED);
+
         final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (!adapter.isEnabled()) {
             Log.d(TAG, "getSlice() Bluetooth is off");
-            return null;
+            return listBuilder.build();
         }
 
         if (getWorker() == null) {
             Log.d(TAG, "getSlice() Can not get worker through uri!");
-            return null;
+            return listBuilder.build();
         }
 
         final List<MediaDevice> devices = getMediaDevices();
 
         final MediaDevice connectedDevice = getWorker().getCurrentConnectedMediaDevice();
-        final ListBuilder listBuilder = buildActiveDeviceHeader(connectedDevice);
+        listBuilder.addRow(getActiveDeviceHeaderRow(connectedDevice));
 
         for (MediaDevice device : devices) {
             if (!TextUtils.equals(connectedDevice.getId(), device.getId())) {
@@ -95,7 +101,7 @@ public class MediaOutputSlice implements CustomSliceable {
         return listBuilder.build();
     }
 
-    private ListBuilder buildActiveDeviceHeader(MediaDevice device) {
+    private ListBuilder.RowBuilder getActiveDeviceHeaderRow(MediaDevice device) {
         final String title = device.getName();
         final IconCompat icon = getDeviceIconCompat(device);
 
@@ -104,16 +110,13 @@ public class MediaOutputSlice implements CustomSliceable {
         final SliceAction primarySliceAction = SliceAction.createDeeplink(broadcastAction, icon,
                 ListBuilder.ICON_IMAGE, title);
 
-        final ListBuilder listBuilder = new ListBuilder(mContext, MEDIA_OUTPUT_SLICE_URI,
-                ListBuilder.INFINITY)
-                .setAccentColor(COLOR_NOT_TINTED)
-                .addRow(new ListBuilder.RowBuilder()
-                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                        .setTitle(title)
-                        .setSubtitle(device.getSummary())
-                        .setPrimaryAction(primarySliceAction));
+        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
+                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                .setTitle(title)
+                .setSubtitle(device.getSummary())
+                .setPrimaryAction(primarySliceAction);
 
-        return listBuilder;
+        return rowBuilder;
     }
 
     private IconCompat getDeviceIconCompat(MediaDevice device) {
