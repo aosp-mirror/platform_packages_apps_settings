@@ -231,7 +231,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
         @Override
         protected Intent getBiometricEnrollIntent(Context context) {
-            final Intent intent = getBiometricEnrollIntent(context);
+            final Intent intent = super.getBiometricEnrollIntent(context);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }
