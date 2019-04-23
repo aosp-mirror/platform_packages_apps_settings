@@ -39,6 +39,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.AirplaneModePreferenceController;
+import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
@@ -267,7 +268,7 @@ public class MobileDataSlice implements CustomSliceable {
             }
 
             public void register(Context context, int subId) {
-                final Uri uri = MobileDataPreferenceController.getObservableUri(subId);
+                final Uri uri = MobileDataContentObserver.getObservableUri(subId);
                 context.getContentResolver().registerContentObserver(uri, false, this);
             }
 
