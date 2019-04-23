@@ -144,7 +144,7 @@ public class RemoveAccountPreferenceControllerTest {
     }
 
     @Test
-    public void onClick_shouldNotStartConfirmDialogWhenModifyAccountsIsDisallowed() {
+    public void onClick_modifyAccountsIsDisallowed_shouldNotStartConfirmDialog() {
         when(mFragment.isAdded()).thenReturn(true);
 
         final int userId = UserHandle.myUserId();
@@ -195,7 +195,41 @@ public class RemoveAccountPreferenceControllerTest {
         Bundle resultBundle = new Bundle();
         resultBundle.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, true);
         when(future.getResult()).thenReturn(resultBundle);
+
         callback.run(future);
         verify(activity).finish();
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    public void confirmRemove_activityGone_shouldSilentlyRemoveAccount()
+            throws AuthenticatorException, OperationCanceledException, IOException {
+        final Account account = new Account("Account11", "com.acct1");
+        final UserHandle userHandle = new UserHandle(10);
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(mFragment.isAdded()).thenReturn(true);
+        when(activity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
+        when(mFragment.getActivity()).thenReturn(activity).thenReturn(null);
+
+        final RemoveAccountPreferenceController.ConfirmRemoveAccountDialog dialog =
+                RemoveAccountPreferenceController.ConfirmRemoveAccountDialog.show(
+                        mFragment, account, userHandle);
+        dialog.onCreate(new Bundle());
+        dialog.onClick(null, 0);
+
+        ArgumentCaptor<AccountManagerCallback<Bundle>> callbackCaptor = ArgumentCaptor.forClass(
+                AccountManagerCallback.class);
+        verify(mAccountManager).removeAccountAsUser(eq(account), nullable(Activity.class),
+                callbackCaptor.capture(), nullable(Handler.class), eq(userHandle));
+
+        AccountManagerCallback<Bundle> callback = callbackCaptor.getValue();
+        assertThat(callback).isNotNull();
+        AccountManagerFuture<Bundle> future = mock(AccountManagerFuture.class);
+        Bundle resultBundle = new Bundle();
+        resultBundle.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, true);
+        when(future.getResult()).thenReturn(resultBundle);
+
+        callback.run(future);
+        verify(activity, never()).finish();
     }
 }
