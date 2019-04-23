@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import static android.app.slice.Slice.HINT_ERROR;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -30,6 +32,7 @@ import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 
 import org.junit.Before;
@@ -90,6 +93,57 @@ public class EligibleCardCheckerTest {
         mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI));
 
         assertThat(mEligibleCardChecker.mCard.hasInlineAction()).isFalse();
+    }
+
+    @Test
+    public void isCardEligibleToDisplay_customCard_returnTrue() {
+        final ContextualCard customCard = new ContextualCard.Builder()
+                .setName("custom_card")
+                .setCardType(ContextualCard.CardType.DEFAULT)
+                .setTitleText("custom_title")
+                .setSummaryText("custom_summary")
+                .build();
+
+        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(customCard)).isTrue();
+    }
+
+    @Test
+    public void isCardEligibleToDisplay_invalidScheme_returnFalse() {
+        final Uri sliceUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
+
+        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(sliceUri)))
+                .isFalse();
+    }
+
+    @Test
+    public void isCardEligibleToDisplay_invalidRankingScore_returnFalse() {
+        final ContextualCard card = new ContextualCard.Builder()
+                .setName("test_card")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(CustomSliceRegistry.FLASHLIGHT_SLICE_URI)
+                .setRankingScore(-1)
+                .build();
+
+        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(card))
+                .isFalse();
+    }
+
+    @Test
+    public void isCardEligibleToDisplay_nullSlice_returnFalse() {
+        doReturn(null).when(mEligibleCardChecker).bindSlice(any(Uri.class));
+
+        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI)))
+                .isFalse();
+    }
+
+    @Test
+    public void isCardEligibleToDisplay_errorSlice_returnFalse() {
+        final Slice slice = new Slice.Builder(TEST_SLICE_URI)
+                .addHints(HINT_ERROR).build();
+        doReturn(slice).when(mEligibleCardChecker).bindSlice(any(Uri.class));
+
+        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI)))
+                .isFalse();
     }
 
     private ContextualCard getContextualCard(Uri sliceUri) {
