@@ -193,6 +193,7 @@ public class BatteryInfo {
                 && provider.isEnhancedBatteryPredictionEnabled(context)) {
             Estimate estimate = provider.getEnhancedBatteryPrediction(context);
             if (estimate != null) {
+                Estimate.storeCachedEstimate(context, estimate);
                 BatteryUtils
                         .logRuntime(LOG_TAG, "time for enhanced BatteryInfo", startTime);
                 return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
