@@ -33,15 +33,18 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.View;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.view.menu.ContextMenuBuilder;
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,6 +55,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
@@ -72,6 +76,8 @@ public class MobileNetworkActivityTest {
 
     @Mock
     private SubscriptionManager mSubscriptionManager;
+    @Mock
+    private TelephonyManager mTelephonyManager;
     @Mock
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
@@ -99,6 +105,8 @@ public class MobileNetworkActivityTest {
 
         doReturn(mSubscriptionManager).when(mMobileNetworkActivity).getSystemService(
                 SubscriptionManager.class);
+        doReturn(mTelephonyManager).when(mMobileNetworkActivity).getSystemService(
+                TelephonyManager.class);
         doReturn(mBottomNavigationView).when(mMobileNetworkActivity).findViewById(R.id.bottom_nav);
         doReturn(mFragmentManager).when(mMobileNetworkActivity).getSupportFragmentManager();
         doReturn(mFragmentTransaction).when(mFragmentManager).beginTransaction();
@@ -106,6 +114,11 @@ public class MobileNetworkActivityTest {
                 MOBILE_SETTINGS_TAG + PREV_SUB_ID);
         doReturn(mShowFragment).when(mFragmentManager).findFragmentByTag(
                 MOBILE_SETTINGS_TAG + CURRENT_SUB_ID);
+    }
+
+    @After
+    public void tearDown() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
     }
 
     @Test
@@ -169,7 +182,7 @@ public class MobileNetworkActivityTest {
         doReturn(intent).when(mMobileNetworkActivity).getIntent();
         mSubscriptionInfos.add(mSubscriptionInfo);
         mSubscriptionInfos.add(mSubscriptionInfo2);
-        doReturn(mSubscriptionInfos).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(mSubscriptionInfos);
         doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(CURRENT_SUB_ID);
 
         assertThat(mMobileNetworkActivity.getSubscriptionId()).isEqualTo(CURRENT_SUB_ID);
