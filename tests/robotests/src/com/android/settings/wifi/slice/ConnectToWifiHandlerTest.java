@@ -27,7 +27,6 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.NetworkSelectionStatus;
 import android.net.wifi.WifiManager;
 
-import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -41,13 +40,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowConnectivityManager.class,
-        ShadowWifiManager.class,
-})
+@Config(shadows = ShadowWifiManager.class)
 public class ConnectToWifiHandlerTest {
 
-    private static final String AP1_SSID = "\"ap1\"";
+    private static final String AP_SSID = "\"ap\"";
     private ConnectToWifiHandler mHandler;
     private WifiConfiguration mWifiConfig;
     @Mock
@@ -59,7 +55,7 @@ public class ConnectToWifiHandlerTest {
 
         mHandler = Robolectric.setupActivity(ConnectToWifiHandler.class);
         mWifiConfig = new WifiConfiguration();
-        mWifiConfig.SSID = AP1_SSID;
+        mWifiConfig.SSID = AP_SSID;
         doReturn(mWifiConfig).when(mAccessPoint).getConfig();
     }
 
@@ -70,7 +66,7 @@ public class ConnectToWifiHandlerTest {
 
         mHandler.connect(mAccessPoint);
 
-        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP1_SSID);
+        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP_SSID);
     }
 
     @Test
@@ -91,7 +87,7 @@ public class ConnectToWifiHandlerTest {
 
         mHandler.connect(mAccessPoint);
 
-        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP1_SSID);
+        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP_SSID);
     }
 
     @Test
@@ -104,7 +100,7 @@ public class ConnectToWifiHandlerTest {
 
         mHandler.connect(mAccessPoint);
 
-        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP1_SSID);
+        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP_SSID);
     }
 
     @Test
