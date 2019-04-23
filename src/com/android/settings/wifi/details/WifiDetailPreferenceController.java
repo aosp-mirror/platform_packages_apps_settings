@@ -885,13 +885,19 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     /**
      * Show QR code to share the network represented by this preference.
      */
-    public void launchWifiDppConfiguratorActivity() {
+    private void launchWifiDppConfiguratorActivity() {
         final Intent intent = WifiDppUtils.getConfiguratorQrCodeGeneratorIntentOrNull(mContext,
                 mWifiManager, mAccessPoint);
 
         if (intent == null) {
             Log.e(TAG, "Launch Wi-Fi DPP QR code generator with a wrong Wi-Fi network!");
         } else {
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_SETTINGS_SHARE_WIFI_QR_CODE,
+                    SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR,
+                    /* key */ null,
+                    /* value */ Integer.MIN_VALUE);
+
             mContext.startActivity(intent);
         }
     }
