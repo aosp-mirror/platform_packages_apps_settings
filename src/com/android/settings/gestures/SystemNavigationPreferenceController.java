@@ -139,12 +139,11 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
      * Enables the specified overlay package.
      */
     static void setNavBarInteractionMode(IOverlayManager overlayManager, String overlayPackage) {
-        setOverlayEnabled(overlayManager, NAV_BAR_MODE_3BUTTON_OVERLAY,
-                overlayPackage == NAV_BAR_MODE_3BUTTON_OVERLAY);
-        setOverlayEnabled(overlayManager, NAV_BAR_MODE_2BUTTON_OVERLAY,
-                overlayPackage == NAV_BAR_MODE_2BUTTON_OVERLAY);
-        setOverlayEnabled(overlayManager, NAV_BAR_MODE_GESTURAL_OVERLAY,
-                overlayPackage == NAV_BAR_MODE_GESTURAL_OVERLAY);
+        try {
+            overlayManager.setEnabledExclusiveInCategory(overlayPackage, USER_CURRENT);
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
+        }
     }
 
     static boolean isSwipeUpEnabled(Context context) {
@@ -158,13 +157,5 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
     static boolean isEdgeToEdgeEnabled(Context context) {
         return NAV_BAR_MODE_GESTURAL == context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode);
-    }
-
-    static void setOverlayEnabled(IOverlayManager overlayManager, String pkg, boolean enabled) {
-        try {
-            overlayManager.setEnabled(pkg, enabled, USER_CURRENT);
-        } catch (RemoteException e) {
-            throw e.rethrowFromSystemServer();
-        }
     }
 }
