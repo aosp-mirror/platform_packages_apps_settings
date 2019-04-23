@@ -114,29 +114,29 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     private boolean isVisible() {
         // To decide Slice's visibility.
         // return true if device is connected or previously connected, false for other cases.
-        return !CollectionUtils.isEmpty(getConnectableA2dpDevices())
-                || !CollectionUtils.isEmpty(getConnectableHearingAidDevices());
+        return !CollectionUtils.isEmpty(getConnectedA2dpDevices())
+                || !CollectionUtils.isEmpty(getConnectedHearingAidDevices());
     }
 
-    private List<BluetoothDevice> getConnectableA2dpDevices() {
-        // Get A2dp devices on all states
-        // (STATE_DISCONNECTED, STATE_CONNECTING, STATE_CONNECTED,  STATE_DISCONNECTING)
+    private List<BluetoothDevice> getConnectedA2dpDevices() {
+        // Get A2dp devices on states
+        // (STATE_CONNECTING, STATE_CONNECTED,  STATE_DISCONNECTING)
         final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
         if (a2dpProfile == null) {
             return new ArrayList<>();
         }
-        return a2dpProfile.getConnectableDevices();
+        return a2dpProfile.getConnectedDevices();
     }
 
-    private List<BluetoothDevice> getConnectableHearingAidDevices() {
-        // Get hearing aid profile devices on all states
-        // (STATE_DISCONNECTED, STATE_CONNECTING, STATE_CONNECTED,  STATE_DISCONNECTING)
+    private List<BluetoothDevice> getConnectedHearingAidDevices() {
+        // Get hearing aid profile devices on states
+        // (STATE_CONNECTING, STATE_CONNECTED,  STATE_DISCONNECTING)
         final HearingAidProfile hapProfile = mProfileManager.getHearingAidProfile();
         if (hapProfile == null) {
             return new ArrayList<>();
         }
 
-        return hapProfile.getConnectableDevices();
+        return hapProfile.getConnectedDevices();
     }
 
     private CharSequence findActiveDeviceName() {
