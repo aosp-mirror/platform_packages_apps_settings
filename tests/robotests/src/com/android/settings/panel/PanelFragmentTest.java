@@ -36,20 +36,19 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.android.controller.ActivityController;
 
 @RunWith(RobolectricTestRunner.class)
 public class PanelFragmentTest {
 
     private Context mContext;
     private PanelFragment mPanelFragment;
+    private FakeSettingsPanelActivity mActivity;
     private FakeFeatureFactory mFakeFeatureFactory;
     private PanelFeatureProvider mPanelFeatureProvider;
     private FakePanelContent mFakePanelContent;
@@ -66,16 +65,12 @@ public class PanelFragmentTest {
         mFakePanelContent = new FakePanelContent();
         doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any(), any());
 
-        ActivityController<FakeSettingsPanelActivity> activityController =
-                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
-        activityController.setup();
+        mActivity = spy(Robolectric.buildActivity(FakeSettingsPanelActivity.class).setup().get());
 
         mPanelFragment =
                 spy((PanelFragment)
-                        activityController
-                                .get()
-                                .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_content));
+                        mActivity.getSupportFragmentManager().findFragmentById(R.id.main_content));
+        doReturn(mActivity).when(mPanelFragment).getActivity();
 
         final Bundle bundle = new Bundle();
         bundle.putString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT, FAKE_EXTRA);
@@ -106,23 +101,23 @@ public class PanelFragmentTest {
     }
 
     @Test
-    @Ignore("b/130896218")
     public void onDestroy_logCloseEvent() {
-        mPanelFragment.onDestroy();
+        mPanelFragment.onDestroyView();
         verify(mFakeFeatureFactory.metricsFeatureProvider).action(
                 0,
-                SettingsEnums.PAGE_VISIBLE,
+                SettingsEnums.PAGE_HIDE,
                 mFakePanelContent.getMetricsCategory(),
-                any(String.class),
-                0);    }
+                PanelLoggingContract.PanelClosedKeys.KEY_OTHERS,
+                0);
+    }
 
     @Test
-    @Ignore("b/130896218")
     public void panelSeeMoreClick_logsCloseEvent() {
         final View.OnClickListener listener = mPanelFragment.getSeeMoreListener();
-
         listener.onClick(null);
+        verify(mActivity).finish();
 
+        mPanelFragment.onDestroyView();
         verify(mFakeFeatureFactory.metricsFeatureProvider).action(
                 0,
                 SettingsEnums.PAGE_HIDE,
@@ -133,12 +128,12 @@ public class PanelFragmentTest {
     }
 
     @Test
-    @Ignore("b/130896218")
     public void panelDoneClick_logsCloseEvent() {
         final View.OnClickListener listener = mPanelFragment.getCloseListener();
-
         listener.onClick(null);
+        verify(mActivity).finish();
 
+        mPanelFragment.onDestroyView();
         verify(mFakeFeatureFactory.metricsFeatureProvider).action(
                 0,
                 SettingsEnums.PAGE_HIDE,
