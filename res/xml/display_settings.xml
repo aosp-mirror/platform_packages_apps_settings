@@ -44,8 +44,7 @@
         android:title="@string/auto_brightness_title"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.display.AutoBrightnessSettings"
-        settings:controller="com.android.settings.display.AutoBrightnessPreferenceController"
-        settings:keywords="@string/keywords_auto_brightness"/>
+        settings:controller="com.android.settings.display.AutoBrightnessPreferenceController"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="wallpaper"
