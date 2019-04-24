@@ -72,12 +72,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
         final Button accessibilityButton = findViewById(R.id.accessibility_button);
-        final View footerView = findViewById(R.id.footer_layout);
         accessibilityButton.setOnClickListener(view -> {
             mSwitchDiversity.setChecked(true);
             accessibilityButton.setVisibility(View.GONE);
             mSwitchDiversity.setVisibility(View.VISIBLE);
-            footerView.setVisibility(View.GONE);
         });
 
         mSwitchDiversity = findViewById(R.id.toggle_diversity);

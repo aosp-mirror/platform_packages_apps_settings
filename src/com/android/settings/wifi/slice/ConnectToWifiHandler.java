@@ -43,17 +43,21 @@ public class ConnectToWifiHandler extends Activity {
                 WifiDialogActivity.KEY_ACCESS_POINT_STATE);
 
         if (network != null) {
+            WifiScanWorker.clearClickedWifi();
             final ConnectivityManager cm = getSystemService(ConnectivityManager.class);
             // start captive portal app to sign in to network
             cm.startCaptivePortalApp(network);
         } else if (accessPointState != null) {
             connect(new AccessPoint(this, accessPointState));
         }
+
         finish();
     }
 
     @VisibleForTesting
     void connect(AccessPoint accessPoint) {
+        WifiScanWorker.saveClickedWifi(accessPoint);
+
         final WifiConnectListener connectListener = new WifiConnectListener(this);
         switch (WifiUtils.getConnectingType(accessPoint)) {
             case WifiUtils.CONNECT_TYPE_OSU_PROVISION:

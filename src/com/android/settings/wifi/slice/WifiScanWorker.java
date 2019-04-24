@@ -20,6 +20,7 @@ import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.Network;
@@ -27,9 +28,12 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -55,22 +59,21 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
     CaptivePortalNetworkCallback mCaptivePortalNetworkCallback;
 
     private final Context mContext;
+    private final ConnectivityManager mConnectivityManager;
+    private final WifiTracker mWifiTracker;
 
-    private WifiTracker mWifiTracker;
-    private ConnectivityManager mConnectivityManager;
+    private static String sClickedWifiSsid;
 
     public WifiScanWorker(Context context, Uri uri) {
         super(context, uri);
         mContext = context;
         mConnectivityManager = context.getSystemService(ConnectivityManager.class);
+        mWifiTracker = new WifiTracker(mContext, this /* wifiListener */,
+                true /* includeSaved */, true /* includeScans */);
     }
 
     @Override
     protected void onSlicePinned() {
-        if (mWifiTracker == null) {
-            mWifiTracker = new WifiTracker(mContext, this /* wifiListener */,
-                    true /* includeSaved */, true /* includeScans */);
-        }
         mWifiTracker.onStart();
         onAccessPointsChanged();
     }
@@ -79,6 +82,7 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
     protected void onSliceUnpinned() {
         mWifiTracker.onStop();
         unregisterCaptivePortalNetworkCallback();
+        clearClickedWifi();
     }
 
     @Override
@@ -146,6 +150,19 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
         return null;
     }
 
+    static void saveClickedWifi(AccessPoint accessPoint) {
+        sClickedWifiSsid = accessPoint.getSsidStr();
+    }
+
+    static void clearClickedWifi() {
+        sClickedWifiSsid = null;
+    }
+
+    static boolean isWifiClicked(WifiInfo info) {
+        final String ssid = WifiInfo.removeDoubleQuotes(info.getSSID());
+        return !TextUtils.isEmpty(ssid) && TextUtils.equals(ssid, sClickedWifiSsid);
+    }
+
     public void registerCaptivePortalNetworkCallback(Network wifiNetwork) {
         if (wifiNetwork == null) {
             return;
@@ -191,7 +208,7 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
         @Override
         public void onCapabilitiesChanged(Network network,
                 NetworkCapabilities networkCapabilities) {
-            if (!mNetwork.equals(network)) {
+            if (!isSameNetwork(network)) {
                 return;
             }
 
@@ -202,6 +219,19 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
 
             mIsCaptivePortal = isCaptivePortal;
             notifySliceChange();
+
+            // Automatically start captive portal
+            if (mIsCaptivePortal) {
+                if (!isWifiClicked(mWifiTracker.getManager().getConnectionInfo())) {
+                    return;
+                }
+
+                final Intent intent = new Intent(mContext, ConnectToWifiHandler.class)
+                        .putExtra(ConnectivityManager.EXTRA_NETWORK, network)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                // Starting activity in the system process needs to specify a user
+                mContext.startActivityAsUser(intent, UserHandle.CURRENT);
+            }
         }
 
         /**

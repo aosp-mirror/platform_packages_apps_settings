@@ -890,6 +890,8 @@
     <string name="security_settings_face_preference_title">Face authentication</string>
     <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
     <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
+    <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded"></string>
     <!-- Message shown for a toggle which when enabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_accessibility_diversity"></string>
     <!-- Message shown for a toggle which when enabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
@@ -2203,10 +2205,10 @@
     <string name="wifi_dpp_wifi_password">Wi\u2011Fi password: <xliff:g id="password" example="my password">%1$s</xliff:g></string>
     <!-- Hint for Wi-Fi hotspot password [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_hotspot_password">Hotspot password: <xliff:g id="password" example="my password">%1$s</xliff:g></string>
-    <!-- Label for "Connect to this network using a QR code" [CHAR LIMIT=50]  -->
+    <!-- Label for "Use a QR code to add a device to this network" [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_add_device">Add device</string>
     <!-- Hint for "Add device" [CHAR LIMIT=NONE]  -->
-    <string name="wifi_dpp_connect_network_using_qr_code">Connect to this network using a QR code</string>
+    <string name="wifi_dpp_connect_network_using_qr_code">Use a QR code to add a device to this network</string>
      <!-- Label for the try again button [CHAR LIMIT=20]-->
     <string name="retry">Retry</string>
     <!-- Label for the check box to share a network with other users on the same device -->
@@ -7652,19 +7654,19 @@
     <string name="zen_mode_sound_summary_on">On</string>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating user will be prompted to set dnd duration whenever dnd is manually toggled on [CHAR LIMIT=NONE]-->
-    <string name="zen_mode_duration_summary_always_prompt">Ask every time (unless turned on automatically)</string>
+    <string name="zen_mode_duration_summary_always_prompt">Ask every time</string>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when dnd is manually toggled on [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_duration_summary_forever">Until you turn off (unless turned on automatically)</string>
+    <string name="zen_mode_duration_summary_forever">Until you turn off</string>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when dnd is manually toggled on [CHAR LIMIT=NONE] -->
     <plurals name="zen_mode_duration_summary_time_hours">
-        <item quantity="one">1 hour (unless turned on automatically)</item>
-        <item quantity="other"><xliff:g id="num_hours" example="3">%d</xliff:g> hours (unless turned on automatically)</item>
+        <item quantity="one">1 hour</item>
+        <item quantity="other"><xliff:g id="num_hours" example="3">%d</xliff:g> hours</item>
     </plurals>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when toggled on -->
-    <string name="zen_mode_duration_summary_time_minutes"><xliff:g id="num_minutes" example="5">%d</xliff:g> minutes (unless turned on automatically)</string>
+    <string name="zen_mode_duration_summary_time_minutes"><xliff:g id="num_minutes" example="5">%d</xliff:g> minutes</string>
 
     <!-- Summary for the Sound Do not Disturb option when at least one automatic rules is enabled. [CHAR LIMIT=NONE]-->
     <plurals name="zen_mode_sound_summary_summary_off_info">

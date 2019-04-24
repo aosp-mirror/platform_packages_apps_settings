@@ -193,6 +193,13 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                         return;
                     }
 
+                    mMetricsFeatureProvider.action(
+                            mMetricsFeatureProvider.getAttribution(getActivity()),
+                            SettingsEnums.ACTION_SETTINGS_ENROLL_WIFI_QR_CODE,
+                            SettingsEnums.SETTINGS_WIFI_DPP_ENROLLEE,
+                            /* key */ null,
+                            /* value */ Integer.MIN_VALUE);
+
                     notifyUserForQrCodeRecognition();
                     break;
 

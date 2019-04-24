@@ -72,6 +72,7 @@ public class ContextualCard {
     @LayoutRes
     private final int mViewType;
     private final boolean mIsPendingDismiss;
+    private final boolean mHasInlineAction;
 
     public String getName() {
         return mName;
@@ -161,6 +162,10 @@ public class ContextualCard {
         return mIsPendingDismiss;
     }
 
+    public boolean hasInlineAction() {
+        return mHasInlineAction;
+    }
+
     public Builder mutate() {
         return mBuilder;
     }
@@ -187,6 +192,7 @@ public class ContextualCard {
         mIsLargeCard = builder.mIsLargeCard;
         mViewType = builder.mViewType;
         mIsPendingDismiss = builder.mIsPendingDismiss;
+        mHasInlineAction = builder.mHasInlineAction;
     }
 
     ContextualCard(Cursor c) {
@@ -234,6 +240,8 @@ public class ContextualCard {
         mBuilder.setViewType(mViewType);
         mIsPendingDismiss = false;
         mBuilder.setIsPendingDismiss(mIsPendingDismiss);
+        mHasInlineAction = false;
+        mBuilder.setHasInlineAction(mHasInlineAction);
     }
 
     @Override
@@ -286,6 +294,7 @@ public class ContextualCard {
         @LayoutRes
         private int mViewType;
         private boolean mIsPendingDismiss;
+        private boolean mHasInlineAction;
 
         public Builder setName(String name) {
             mName = name;
@@ -384,6 +393,11 @@ public class ContextualCard {
 
         public Builder setIsPendingDismiss(boolean isPendingDismiss) {
             mIsPendingDismiss = isPendingDismiss;
+            return this;
+        }
+
+        public Builder setHasInlineAction(boolean hasInlineAction) {
+            mHasInlineAction = hasInlineAction;
             return this;
         }
 

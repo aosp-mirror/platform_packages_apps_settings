@@ -40,6 +40,7 @@ import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
+import com.android.settings.network.SubscriptionUtil;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -165,7 +166,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
             final int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL);
             if (subId != SUB_ID_NULL) {
                 for (SubscriptionInfo subscription :
-                        mSubscriptionManager.getSelectableSubscriptionInfoList()) {
+                        SubscriptionUtil.getAvailableSubscriptions(this)) {
                     if (subscription.getSubscriptionId() == subId) {
                         return subscription;
                     }

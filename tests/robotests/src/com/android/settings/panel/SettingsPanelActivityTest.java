@@ -35,7 +35,6 @@ import android.view.MotionEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -52,8 +51,8 @@ public class SettingsPanelActivityTest {
     @Before
     public void setUp() {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mSettingsPanelActivity = Robolectric.buildActivity(FakeSettingsPanelActivity.class)
-                .create().get();
+        mSettingsPanelActivity = spy(
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class).create().get());
         mPanelFeatureProvider = spy(new PanelFeatureProviderImpl());
         mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
         mFakePanelContent = new FakePanelContent();
@@ -87,22 +86,5 @@ public class SettingsPanelActivityTest {
         assertThat(activity.mBundle.containsKey(KEY_MEDIA_PACKAGE_NAME)).isTrue();
         assertThat(activity.mBundle.getString(KEY_PANEL_TYPE_ARGUMENT))
                 .isEqualTo("com.android.settings.panel.action.MEDIA_OUTPUT");
-    }
-
-    @Test
-    @Ignore("b/130896218")
-    public void onTouchEvent_outsideAction_logsPanelClosed() {
-        final MotionEvent event = mock(MotionEvent.class);
-        when(event.getAction()).thenReturn(MotionEvent.ACTION_OUTSIDE);
-
-        mSettingsPanelActivity.onTouchEvent(event);
-
-        verify(mFakeFeatureFactory.metricsFeatureProvider).action(
-                0,
-                SettingsEnums.PAGE_HIDE,
-                SettingsEnums.TESTING,
-                PanelLoggingContract.PanelClosedKeys.KEY_OTHERS,
-                0
-        );
     }
 }
