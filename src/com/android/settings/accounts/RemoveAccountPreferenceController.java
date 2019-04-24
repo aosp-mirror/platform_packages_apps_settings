@@ -17,8 +17,6 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
@@ -30,6 +28,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -153,28 +152,27 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
         public void onClick(DialogInterface dialog, int which) {
             Activity activity = getTargetFragment().getActivity();
             AccountManager.get(activity).removeAccountAsUser(mAccount, activity,
-                    new AccountManagerCallback<Bundle>() {
-                        @Override
-                        public void run(AccountManagerFuture<Bundle> future) {
-                            boolean failed = true;
-                            try {
-                                if (future.getResult()
-                                        .getBoolean(AccountManager.KEY_BOOLEAN_RESULT)) {
-                                    failed = false;
-                                }
-                            } catch (OperationCanceledException e) {
-                                // handled below
-                            } catch (IOException e) {
-                                // handled below
-                            } catch (AuthenticatorException e) {
-                                // handled below
+                    future -> {
+                        final Activity targetActivity = getTargetFragment().getActivity();
+                        if (targetActivity == null || targetActivity.isFinishing()) {
+                            Log.w(TAG, "Activity is no longer alive, skipping results");
+                            return;
+                        }
+                        boolean failed = true;
+                        try {
+                            if (future.getResult()
+                                    .getBoolean(AccountManager.KEY_BOOLEAN_RESULT)) {
+                                failed = false;
                             }
-                            final Activity activity = getTargetFragment().getActivity();
-                            if (failed && activity != null && !activity.isFinishing()) {
-                                RemoveAccountFailureDialog.show(getTargetFragment());
-                            } else {
-                                activity.finish();
-                            }
+                        } catch (OperationCanceledException
+                                | IOException
+                                | AuthenticatorException e) {
+                            // handled below
+                        }
+                        if (failed) {
+                            RemoveAccountFailureDialog.show(getTargetFragment());
+                        } else {
+                            targetActivity.finish();
                         }
                     }, null, mUserHandle);
         }
