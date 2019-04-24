@@ -64,7 +64,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public int getAvailabilityStatus(int subId) {
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 ? AVAILABLE
-                : CONDITIONALLY_UNAVAILABLE;
+                : DISABLED_DEPENDENT_SETTING;
     }
 
     @Override
