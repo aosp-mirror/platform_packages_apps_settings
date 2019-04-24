@@ -22,6 +22,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
@@ -99,7 +100,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     @Override
     public CharSequence getSummary() {
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
-                mSubscriptionManager);
+                mContext);
         if (subs.isEmpty()) {
             if (MobileNetworkUtils.showEuiccSettings(mContext)) {
                 return mContext.getResources().getString(
@@ -132,7 +133,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         mPreference.setEnabled(!mChangeListener.isAirplaneModeOn());
 
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
-                mSubscriptionManager);
+                mContext);
 
         if (subs.isEmpty()) {
             if (MobileNetworkUtils.showEuiccSettings(mContext)) {
@@ -154,6 +155,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             if (subs.size() == 1) {
                 mPreference.setOnPreferenceClickListener((Preference pref) -> {
                     final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+                    intent.putExtra(Settings.EXTRA_SUB_ID, subs.get(0).getSubscriptionId());
                     mContext.startActivity(intent);
                     return true;
                 });
