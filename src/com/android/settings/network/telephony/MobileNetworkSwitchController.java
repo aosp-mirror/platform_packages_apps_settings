@@ -94,8 +94,9 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             return;
         }
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
-                mSubscriptionManager);
-        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID || subs.size() < 2) {
+                mContext);
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID ||
+                mSubscriptionManager.isSubscriptionEnabled(mSubId) && subs.size() < 2) {
             mSwitchBar.hide();
             return;
         }
