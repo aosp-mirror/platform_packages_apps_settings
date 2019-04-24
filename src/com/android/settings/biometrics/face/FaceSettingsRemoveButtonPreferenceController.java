@@ -24,7 +24,6 @@ import android.content.DialogInterface;
 import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +47,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         implements View.OnClickListener {
 
     private static final String TAG = "FaceSettings/Remove";
-    private static final String KEY = "security_settings_face_delete_faces_container";
+    static final String KEY = "security_settings_face_delete_faces_container";
 
     public static class ConfirmRemoveDialog extends InstrumentedDialogFragment {
 
@@ -85,6 +84,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     private Listener mListener;
     private SettingsActivity mActivity;
     private int mUserId;
+    private boolean mRemoving;
 
     private final Context mContext;
     private final FaceManager mFaceManager;
@@ -103,6 +103,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
                 if (!faces.isEmpty()) {
                     mButton.setEnabled(true);
                 } else {
+                    mRemoving = false;
                     mListener.onRemoved();
                 }
             } else {
@@ -154,6 +155,12 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         mButton = ((LayoutPreference) preference)
                 .findViewById(R.id.security_settings_face_settings_remove_button);
         mButton.setOnClickListener(this);
+
+        if (!FaceSettings.isAvailable(mContext)) {
+            mButton.setEnabled(false);
+        } else {
+            mButton.setEnabled(!mRemoving);
+        }
     }
 
     @Override
@@ -169,6 +176,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     @Override
     public void onClick(View v) {
         if (v == mButton) {
+            mRemoving = true;
             mButton.setEnabled(false);
             ConfirmRemoveDialog dialog = new ConfirmRemoveDialog();
             dialog.setOnClickListener(mOnClickListener);

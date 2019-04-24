@@ -19,7 +19,10 @@ package com.android.settings.biometrics.face;
 import static android.provider.Settings.Secure.FACE_UNLOCK_APP_ENABLED;
 
 import android.content.Context;
+import android.hardware.face.FaceManager;
 import android.provider.Settings;
+
+import androidx.preference.Preference;
 
 /**
  * Preference controller for Face settings page controlling the ability to use
@@ -27,14 +30,17 @@ import android.provider.Settings;
  */
 public class FaceSettingsAppPreferenceController extends FaceSettingsPreferenceController {
 
-    private static final String KEY = "security_settings_face_app";
+    static final String KEY = "security_settings_face_app";
 
     private static final int ON = 1;
     private static final int OFF = 0;
     private static final int DEFAULT = ON;  // face unlock is enabled for BiometricPrompt by default
 
+    private FaceManager mFaceManager;
+
     public FaceSettingsAppPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mFaceManager = context.getSystemService(FaceManager.class);
     }
 
     public FaceSettingsAppPreferenceController(Context context) {
@@ -54,6 +60,18 @@ public class FaceSettingsAppPreferenceController extends FaceSettingsPreferenceC
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putIntForUser(mContext.getContentResolver(), FACE_UNLOCK_APP_ENABLED,
                 isChecked ? ON : OFF, getUserId());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!FaceSettings.isAvailable(mContext)) {
+            preference.setEnabled(false);
+        } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override
