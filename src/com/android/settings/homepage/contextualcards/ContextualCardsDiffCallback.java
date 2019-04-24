@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.List;
 
-//TODO(b/117816826): add test cases for DiffUtil.
 /**
  * A DiffCallback to calculate the difference between old and new {@link ContextualCard} List.
  */
@@ -53,6 +52,11 @@ public class ContextualCardsDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areContentsTheSame(int oldCardPosition, int newCardPosition) {
+        // Slices with toggles needs to be updated continuously, which means their contents may
+        // change. So here we assume the content will always be different to force view rebinding.
+        if (mNewCards.get(newCardPosition).hasInlineAction()) {
+            return false;
+        }
         return mOldCards.get(oldCardPosition).equals(mNewCards.get(newCardPosition));
     }
 }
