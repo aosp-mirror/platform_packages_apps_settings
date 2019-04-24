@@ -123,8 +123,8 @@ public class UserBackupSettingsActivityTest {
     }
 
     @Test
-    public void getNonIndexableKeys_whenShowBackupSettings() {
-        ShadowBackupSettingsHelper.showBackupSettingsForUser = true;
+    public void getNonIndexableKeys_whenBackupServiceActive() {
+        ShadowBackupSettingsHelper.isBackupServiceActive = true;
 
         assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
                 mApplication, true)).isNotEmpty();
@@ -133,8 +133,8 @@ public class UserBackupSettingsActivityTest {
     }
 
     @Test
-    public void getNonIndexableKeys_whenDontShowBackupSettings() {
-        ShadowBackupSettingsHelper.showBackupSettingsForUser = false;
+    public void getNonIndexableKeys_whenBackupServiceNotActive() {
+        ShadowBackupSettingsHelper.isBackupServiceActive = false;
 
         assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
             mApplication, true)).isNotEmpty();
@@ -144,11 +144,11 @@ public class UserBackupSettingsActivityTest {
 
     @Implements(BackupSettingsHelper.class)
     public static class ShadowBackupSettingsHelper {
-        static boolean showBackupSettingsForUser = true;
+        static boolean isBackupServiceActive = true;
 
         @Implementation
-        public boolean showBackupSettingsForUser() {
-            return showBackupSettingsForUser;
+        public boolean isBackupServiceActive() {
+            return isBackupServiceActive;
         }
 
         @Implementation
@@ -163,7 +163,7 @@ public class UserBackupSettingsActivityTest {
 
         @Resetter
         public static void reset() {
-            showBackupSettingsForUser = true;
+            isBackupServiceActive = true;
         }
     }
 }

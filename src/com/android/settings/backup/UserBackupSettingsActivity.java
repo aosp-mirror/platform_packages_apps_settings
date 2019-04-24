@@ -123,7 +123,7 @@ public class UserBackupSettingsActivity extends FragmentActivity implements Inde
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    if (!new BackupSettingsHelper(context).showBackupSettingsForUser()) {
+                    if (!new BackupSettingsHelper(context).isBackupServiceActive()) {
                         keys.add(BACKUP_SEARCH_INDEX_KEY);
                     }
                     return keys;
