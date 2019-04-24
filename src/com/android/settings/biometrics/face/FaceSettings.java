@@ -52,7 +52,7 @@ import java.util.List;
 public class FaceSettings extends DashboardFragment {
 
     private static final String TAG = "FaceSettings";
-    private static final String KEY_TOKEN = "key_token";
+    private static final String KEY_TOKEN = "hw_auth_token";
 
     private UserManager mUserManager;
     private FaceManager mFaceManager;
@@ -98,6 +98,7 @@ public class FaceSettings extends DashboardFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mToken = getIntent().getByteArrayExtra(KEY_TOKEN);
         mUserManager = getPrefContext().getSystemService(UserManager.class);
         mFaceManager = getPrefContext().getSystemService(FaceManager.class);
         mUserId = getActivity().getIntent().getIntExtra(
