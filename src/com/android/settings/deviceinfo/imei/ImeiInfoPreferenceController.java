@@ -20,6 +20,8 @@ import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 
 import android.content.Context;
 import android.os.UserManager;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -77,10 +79,26 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     }
 
     @Override
+    public void updateState(Preference preference) {
+        if (preference == null) {
+            return;
+        }
+        int size = mPreferenceList.size();
+        for (int i = 0; i < size; i++) {
+            Preference pref = mPreferenceList.get(i);
+            updatePreference(pref, i);
+        }
+    }
+
+    @Override
     public CharSequence getSummary() {
-        final int phoneType = mTelephonyManager.getPhoneType();
-        return phoneType == PHONE_TYPE_CDMA ? mTelephonyManager.getMeid()
-                : mTelephonyManager.getImei();
+        return getSummary(0);
+    }
+
+    private CharSequence getSummary(int simSlot) {
+        final int phoneType = getPhoneType(simSlot);
+        return phoneType == PHONE_TYPE_CDMA ? mTelephonyManager.getMeid(simSlot)
+                : mTelephonyManager.getImei(simSlot);
     }
 
     @Override
@@ -117,19 +135,12 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     @Override
     public void copy() {
-        Sliceable.setCopyContent(mContext, getSummary(), mContext.getText(R.string.status_imei));
+        Sliceable.setCopyContent(mContext, getSummary(0), getTitle(0));
     }
 
     private void updatePreference(Preference preference, int simSlot) {
-        final int phoneType = mTelephonyManager.getPhoneType();
-        if (phoneType == PHONE_TYPE_CDMA) {
-            preference.setTitle(getTitleForCdmaPhone(simSlot));
-            preference.setSummary(getMeid(simSlot));
-        } else {
-            // GSM phone
-            preference.setTitle(getTitleForGsmPhone(simSlot));
-            preference.setSummary(mTelephonyManager.getImei(simSlot));
-        }
+        preference.setTitle(getTitle(simSlot));
+        preference.setSummary(getSummary(simSlot));
     }
 
     private CharSequence getTitleForGsmPhone(int simSlot) {
@@ -142,9 +153,17 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
                 : mContext.getString(R.string.status_meid_number);
     }
 
-    @VisibleForTesting
-    String getMeid(int simSlot) {
-        return mTelephonyManager.getMeid(simSlot);
+    private CharSequence getTitle(int simSlot) {
+        final int phoneType = getPhoneType(simSlot);
+        return phoneType == PHONE_TYPE_CDMA ? getTitleForCdmaPhone(simSlot)
+                : getTitleForGsmPhone(simSlot);
+    }
+
+    private int getPhoneType(int slotIndex) {
+        SubscriptionInfo subInfo = SubscriptionManager.from(mContext)
+            .getActiveSubscriptionInfoForSimSlotIndex(slotIndex);
+        return mTelephonyManager.getCurrentPhoneType(subInfo != null ? subInfo.getSubscriptionId()
+                : SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
     }
 
     @VisibleForTesting
