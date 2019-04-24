@@ -1624,6 +1624,39 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    public void testConnectButton_clickConnectAndBackKey_ignoreTimeoutEvent() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // leave detail page
+        when(mockFragment.getActivity()).thenReturn(null);
+
+        // timeout happened
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        inOrder.verify(mockButtonsPref, never()).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mockButtonsPref, never()).setButton3Icon(R.drawable.ic_settings_wireless);
+        inOrder.verify(mockButtonsPref, never()).setButton3Enabled(true);
+        inOrder.verify(mockButtonsPref, never()).setButton3Visible(true);
+        assertThat(ShadowToast.shownToastCount()).isEqualTo(0);
+    }
+
+    @Test
     public void updateAccessPoint_returnFalseForNothingChanged() {
         setUpForDisconnectedNetwork();
 
