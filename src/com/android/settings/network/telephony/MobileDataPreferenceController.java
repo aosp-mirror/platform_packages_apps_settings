@@ -17,26 +17,23 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-
-import com.android.settings.network.MobileDataContentObserver;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.network.MobileDataContentObserver;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * Preference controller for "Mobile data"
@@ -60,7 +57,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         super(context, key);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mDataContentObserver = new MobileDataContentObserver(new Handler(Looper.getMainLooper()));
-        mDataContentObserver.setOnMobileDataChangedListener(()-> updateState(mPreference));
+        mDataContentObserver.setOnMobileDataChangedListener(() -> updateState(mPreference));
     }
 
     @Override
@@ -144,18 +141,10 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         final int defaultSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
         final boolean needToDisableOthers = mSubscriptionManager
                 .isActiveSubscriptionId(defaultSubId) && defaultSubId != mSubId;
-        if (enableData) {
-            if (isMultiSim && needToDisableOthers) {
-                mDialogType = MobileDataDialogFragment.TYPE_MULTI_SIM_DIALOG;
-                return true;
-            }
-        } else {
-            if (!isMultiSim) {
-                mDialogType = MobileDataDialogFragment.TYPE_DISABLE_DIALOG;
-                return true;
-            }
+        if (enableData && isMultiSim && needToDisableOthers) {
+            mDialogType = MobileDataDialogFragment.TYPE_MULTI_SIM_DIALOG;
+            return true;
         }
-
         return false;
     }
 
