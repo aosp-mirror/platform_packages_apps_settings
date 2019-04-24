@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.os.UserManager;
 import android.util.Log;
@@ -47,7 +48,7 @@ public class SystemServerHeapDumpPreferenceController extends DeveloperOptionsPr
         super(context);
 
         mUserManager = context.getSystemService(UserManager.class);
-        mHandler = new Handler();
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override

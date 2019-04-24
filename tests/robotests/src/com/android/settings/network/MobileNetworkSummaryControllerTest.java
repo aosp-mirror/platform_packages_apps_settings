@@ -34,6 +34,7 @@ import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
@@ -151,8 +152,11 @@ public class MobileNetworkSummaryControllerTest {
         mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mContext).startActivity(intentCaptor.capture());
-        assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
+        Intent intent = intentCaptor.getValue();
+        assertThat(intent.getComponent().getClassName()).isEqualTo(
                 MobileNetworkActivity.class.getName());
+        assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(sub1.getSubscriptionId());
     }
 
     @Test

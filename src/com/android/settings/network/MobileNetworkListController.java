@@ -98,7 +98,7 @@ public class MobileNetworkListController extends AbstractPreferenceController im
         mPreferences = new ArrayMap<>();
 
         final List<SubscriptionInfo> subscriptions = SubscriptionUtil.getAvailableSubscriptions(
-                mSubscriptionManager);
+                mContext);
         for (SubscriptionInfo info : subscriptions) {
             final int subId = info.getSubscriptionId();
             Preference pref = existingPreferences.remove(subId);
