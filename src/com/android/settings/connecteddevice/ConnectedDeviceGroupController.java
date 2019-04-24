@@ -73,10 +73,11 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (isAvailable()) {
-            mPreferenceGroup = screen.findPreference(KEY);
-            mPreferenceGroup.setVisible(false);
 
+        mPreferenceGroup = screen.findPreference(KEY);
+        mPreferenceGroup.setVisible(false);
+
+        if (isAvailable()) {
             final Context context = screen.getContext();
             mBluetoothDeviceUpdater.setPrefContext(context);
             mBluetoothDeviceUpdater.forceUpdate();
@@ -88,7 +89,11 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
+        final PackageManager packageManager = mContext.getPackageManager();
+        return (packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
+                || packageManager.hasSystemFeature(PackageManager.FEATURE_USB_ACCESSORY)
+                || packageManager.hasSystemFeature(PackageManager.FEATURE_USB_HOST)
+                || mConnectedDockUpdater != null)
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
