@@ -20,6 +20,9 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentResolver;
@@ -27,6 +30,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,8 +38,10 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {SettingsShadowResources.class})
 public class AutoBrightnessPreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "auto_brightness";
@@ -115,17 +121,18 @@ public class AutoBrightnessPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceable_correctKey_returnsTrue() {
-        final AutoBrightnessPreferenceController controller =
-                new AutoBrightnessPreferenceController(mContext,
-                        "auto_brightness");
-        assertThat(controller.isSliceable()).isTrue();
+    public void getAvailabilityStatus_configTrueSet_shouldReturnAvailableUnsearchable() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_automatic_brightness_available, true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    public void isSliceable_incorrectKey_returnsFalse() {
-        final AutoBrightnessPreferenceController controller =
-                new AutoBrightnessPreferenceController(mContext, "bad_key");
-        assertThat(controller.isSliceable()).isFalse();
+    public void getAvailabilityStatus_configFalseSet_shouldReturnUnsupportedOnDevice() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_automatic_brightness_available, false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

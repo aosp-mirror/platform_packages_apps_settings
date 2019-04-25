@@ -60,8 +60,12 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
         @Override
         public void onCompleted(boolean success, int feature, boolean value) {
             if (feature == FaceManager.FEATURE_REQUIRE_ATTENTION && success) {
-                mPreference.setEnabled(true);
-                mPreference.setChecked(value);
+                if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
+                    mPreference.setEnabled(false);
+                } else {
+                    mPreference.setEnabled(true);
+                    mPreference.setChecked(value);
+                }
             }
         }
     };

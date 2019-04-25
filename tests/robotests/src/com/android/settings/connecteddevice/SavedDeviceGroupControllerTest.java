@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -81,6 +82,7 @@ public class SavedDeviceGroupControllerTest {
         verify(mBluetoothDeviceUpdater).registerCallback();
         verify(mSavedDockUpdater).registerCallback();
     }
+
     @Test
     public void testUnregister() {
         // unregister the callback in onStop()
@@ -88,16 +90,30 @@ public class SavedDeviceGroupControllerTest {
         verify(mBluetoothDeviceUpdater).unregisterCallback();
         verify(mSavedDockUpdater).unregisterCallback();
     }
+
     @Test
-    public void testGetAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
+    public void testGetAvailabilityStatus_noBluetoothDockFeature_returnUnSupported() {
         doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+        mSavedDeviceGroupController.setSavedDockUpdater(null);
+
         assertThat(mSavedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
                 UNSUPPORTED_ON_DEVICE);
     }
+
     @Test
     public void testGetAvailabilityStatus_BluetoothFeature_returnSupported() {
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+        mSavedDeviceGroupController.setSavedDockUpdater(null);
+
         assertThat(mSavedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
                 AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_haveDockFeature_returnSupported() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)).thenReturn(false);
+
+        assertThat(mSavedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
+            AVAILABLE);
     }
 }

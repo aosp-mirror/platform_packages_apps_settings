@@ -16,8 +16,6 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import static android.app.slice.Slice.HINT_ERROR;
-
 import static com.android.settings.homepage.contextualcards.ContextualCardLoader.DEFAULT_CARD_COUNT;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -33,8 +31,6 @@ import static org.mockito.Mockito.verify;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
-
-import androidx.slice.Slice;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -53,71 +49,15 @@ import java.util.stream.Collectors;
 @RunWith(RobolectricTestRunner.class)
 public class ContextualCardLoaderTest {
 
-    private static final String TEST_SLICE_URI = "content://test/test";
-
     private Context mContext;
     private ContextualCardLoader mContextualCardLoader;
-    private EligibleCardChecker mEligibleCardChecker;
     private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mContextualCardLoader = spy(new ContextualCardLoader(mContext));
-        mEligibleCardChecker =
-                spy(new EligibleCardChecker(mContext, getContextualCard(TEST_SLICE_URI)));
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-    }
-
-    @Test
-    public void isCardEligibleToDisplay_customCard_returnTrue() {
-        final ContextualCard customCard = new ContextualCard.Builder()
-                .setName("custom_card")
-                .setCardType(ContextualCard.CardType.DEFAULT)
-                .setTitleText("custom_title")
-                .setSummaryText("custom_summary")
-                .build();
-
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(customCard)).isTrue();
-    }
-
-    @Test
-    public void isCardEligibleToDisplay_invalidScheme_returnFalse() {
-        final String sliceUri = "contet://com.android.settings.slices/action/flashlight";
-
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(sliceUri)))
-                .isFalse();
-    }
-
-    @Test
-    public void isCardEligibleToDisplay_invalidRankingScore_returnFalse() {
-        final ContextualCard card = new ContextualCard.Builder()
-                .setName("test_card")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.FLASHLIGHT_SLICE_URI)
-                .setRankingScore(-1)
-                .build();
-
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(card))
-                .isFalse();
-    }
-
-    @Test
-    public void isCardEligibleToDisplay_nullSlice_returnFalse() {
-        doReturn(null).when(mEligibleCardChecker).bindSlice(Uri.parse(TEST_SLICE_URI));
-
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI)))
-                .isFalse();
-    }
-
-    @Test
-    public void isCardEligibleToDisplay_errorSlice_returnFalse() {
-        final Slice slice = new Slice.Builder(Uri.parse(TEST_SLICE_URI))
-                .addHints(HINT_ERROR).build();
-        doReturn(slice).when(mEligibleCardChecker).bindSlice(Uri.parse(TEST_SLICE_URI));
-
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI)))
-                .isFalse();
     }
 
     @Test
@@ -199,15 +139,6 @@ public class ContextualCardLoaderTest {
 
         verify(mFakeFeatureFactory.metricsFeatureProvider, never()).action(any(),
                 eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW), any(String.class));
-    }
-
-    private ContextualCard getContextualCard(String sliceUri) {
-        return new ContextualCard.Builder()
-                .setName("test_card")
-                .setRankingScore(0.5)
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(Uri.parse(sliceUri))
-                .build();
     }
 
     private List<ContextualCard> getContextualCardList() {

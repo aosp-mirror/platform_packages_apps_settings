@@ -19,7 +19,6 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -52,13 +51,8 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_automatic_brightness_available)
-                ? AVAILABLE
+                ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "auto_brightness");
     }
 
     @Override
