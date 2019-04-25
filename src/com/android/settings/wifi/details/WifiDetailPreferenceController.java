@@ -1109,6 +1109,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             }
             @Override
             public void onFinish() {
+                if (mFragment == null || mFragment.getActivity() == null) {
+                    Log.d(TAG, "Ignore timeout since activity not exist!");
+                    return;
+                }
                 Log.e(TAG, "Timeout for state:" + mConnectingState);
                 if (mConnectingState == STATE_ENABLE_WIFI) {
                     updateConnectingState(STATE_ENABLE_WIFI_FAILED);
