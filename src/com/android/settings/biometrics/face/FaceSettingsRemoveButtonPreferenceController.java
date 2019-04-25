@@ -117,6 +117,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
+                mButton.setEnabled(false);
                 final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
                 if (faces.isEmpty()) {
                     Log.e(TAG, "No faces");
@@ -177,7 +178,6 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     public void onClick(View v) {
         if (v == mButton) {
             mRemoving = true;
-            mButton.setEnabled(false);
             ConfirmRemoveDialog dialog = new ConfirmRemoveDialog();
             dialog.setOnClickListener(mOnClickListener);
             dialog.show(mActivity.getSupportFragmentManager(), ConfirmRemoveDialog.class.getName());
