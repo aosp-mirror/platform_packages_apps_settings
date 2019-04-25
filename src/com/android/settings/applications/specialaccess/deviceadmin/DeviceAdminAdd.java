@@ -46,6 +46,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.text.TextUtils.TruncateAt;
+import android.text.method.ScrollingMovementMethod;
 import android.util.EventLog;
 import android.util.Log;
 import android.view.Display;
@@ -273,15 +274,63 @@ public class DeviceAdminAdd extends Activity {
             }
         }
 
-        // If we're trying to add a profile owner and user setup hasn't completed yet, no
-        // need to prompt for permission. Just add and finish.
-        if (mAddingProfileOwner && !mDPM.hasUserSetupCompleted()) {
-            addAndFinish();
-            return;
-        }
-
         mAddMsgText = getIntent().getCharSequenceExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION);
 
+        if (mAddingProfileOwner) {
+            // If we're trying to add a profile owner and user setup hasn't completed yet, no
+            // need to prompt for permission. Just add and finish
+            if (!mDPM.hasUserSetupCompleted()) {
+                addAndFinish();
+                return;
+            }
+
+            // othewise, only the defined default supervision profile owner can be set after user
+            // setup.
+            final String supervisor = getString(
+                    com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent);
+            if (supervisor == null) {
+                Log.w(TAG, "Unable to set profile owner post-setup, no default supervisor"
+                        + "profile owner defined");
+                finish();
+                return;
+            }
+
+            final ComponentName supervisorComponent = ComponentName.unflattenFromString(
+                    supervisor);
+            if (who.compareTo(supervisorComponent) != 0) {
+                Log.w(TAG, "Unable to set non-default profile owner post-setup " + who);
+                finish();
+                return;
+            }
+
+            // Build and show the simplified dialog
+            final Dialog dialog = new AlertDialog.Builder(this)
+                    .setTitle(getText(R.string.profile_owner_add_title_simplified))
+                    .setView(R.layout.profile_owner_add)
+                    .setPositiveButton(R.string.allow, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            addAndFinish();
+                        }
+                    })
+                    .setNeutralButton(R.string.cancel, null)
+                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        public void onDismiss(DialogInterface dialogInterface) {
+                            finish();
+                        }
+                    })
+                    .create();
+            dialog.show();
+
+            mActionButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+            mActionButton.setFilterTouchesWhenObscured(true);
+            mAddMsg = dialog.findViewById(R.id.add_msg_simplified);
+            mAddMsg.setMovementMethod(new ScrollingMovementMethod());
+            mAddMsg.setText(mAddMsgText);
+            mAdminWarning = dialog.findViewById(R.id.admin_warning_simplified);
+            mAdminWarning.setText(getString(R.string.device_admin_warning_simplified,
+                    mProfileOwnerName));
+            return;
+        }
         setContentView(R.layout.device_admin_add);
 
         mAdminIcon = (ImageView)findViewById(R.id.admin_icon);
@@ -501,7 +550,9 @@ public class DeviceAdminAdd extends Activity {
     protected void onResume() {
         super.onResume();
         mActionButton.setEnabled(true);
-        updateInterface();
+        if (!mAddingProfileOwner) {
+            updateInterface();
+        }
         // As long as we are running, don't let anyone overlay stuff on top of the screen.
         mAppOps.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, true, mToken);
         mAppOps.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW, true, mToken);
@@ -571,9 +622,6 @@ public class DeviceAdminAdd extends Activity {
         } catch (Resources.NotFoundException e) {
             mAdminDescription.setVisibility(View.GONE);
         }
-        if (mAddingProfileOwner) {
-            mProfileOwnerWarning.setVisibility(View.VISIBLE);
-        }
         if (mAddMsgText != null) {
             mAddMsg.setText(mAddMsgText);
             mAddMsg.setVisibility(View.VISIBLE);
@@ -634,11 +682,7 @@ public class DeviceAdminAdd extends Activity {
             addDeviceAdminPolicies(true /* showDescription */);
             mAdminWarning.setText(getString(R.string.device_admin_warning,
                     mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));
-            if (mAddingProfileOwner) {
-                setTitle(getText(R.string.profile_owner_add_title));
-            } else {
-                setTitle(getText(R.string.add_device_admin_msg));
-            }
+            setTitle(getText(R.string.add_device_admin_msg));
             mActionButton.setText(getText(R.string.add_device_admin));
             if (isAdminUninstallable()) {
                 mUninstallButton.setVisibility(View.VISIBLE);
