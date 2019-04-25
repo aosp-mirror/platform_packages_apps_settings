@@ -54,6 +54,15 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         return SetupChooseLockPatternFragment.class;
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Show generic pattern title when pattern lock screen launch in Setup wizard flow before
+        // fingerprint and face setup.
+        setTitle(R.string.lockpassword_choose_your_screen_lock_header);
+    }
+
     public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment
             implements ChooseLockTypeDialogFragment.OnLockTypeSelectedListener {
 
@@ -115,6 +124,14 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                 mLeftButtonIsSkip = true;
             } else {
                 mLeftButtonIsSkip = false;
+            }
+
+            // Show generic pattern message when pattern lock screen launch in Setup wizard flow
+            // before fingerprint and face setup.
+            if (stage.message == ID_EMPTY_MESSAGE) {
+                mMessageText.setText("");
+            } else {
+                mMessageText.setText(stage.message);
             }
         }
 
