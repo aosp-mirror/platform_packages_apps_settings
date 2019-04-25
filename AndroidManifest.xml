@@ -108,7 +108,7 @@
             android:hardwareAccelerated="true"
             android:requiredForAllUsers="true"
             android:supportsRtl="true"
-            android:allowBackup="false"
+            android:backupAgent="com.android.settings.backup.SettingsBackupHelper"
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"

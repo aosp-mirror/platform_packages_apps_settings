@@ -38,11 +38,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
-
 import com.android.settings.R;
 import com.android.settings.Settings.TetherSettingsActivity;
 import com.android.settings.core.BasePreferenceController;
@@ -53,6 +48,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
 
 /**
  * {@link BasePreferenceController} that populates a list of widgets that Settings app support.
@@ -143,24 +143,7 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
     @VisibleForTesting
     Intent createResultIntent(Intent shortcutIntent, ResolveInfo resolveInfo,
             CharSequence label) {
-        final ActivityInfo activityInfo = resolveInfo.activityInfo;
-
-        final Icon maskableIcon;
-        if (activityInfo.icon != 0 && activityInfo.applicationInfo != null) {
-            maskableIcon = Icon.createWithAdaptiveBitmap(createIcon(
-                    activityInfo.applicationInfo, activityInfo.icon,
-                    R.layout.shortcut_badge_maskable,
-                    mContext.getResources().getDimensionPixelSize(R.dimen.shortcut_size_maskable)));
-        } else {
-            maskableIcon = Icon.createWithResource(mContext, R.drawable.ic_launcher_settings);
-        }
-        final String shortcutId = SHORTCUT_ID_PREFIX +
-                shortcutIntent.getComponent().flattenToShortString();
-        ShortcutInfo info = new ShortcutInfo.Builder(mContext, shortcutId)
-                .setShortLabel(label)
-                .setIntent(shortcutIntent)
-                .setIcon(maskableIcon)
-                .build();
+        ShortcutInfo info = createShortcutInfo(mContext, shortcutIntent, resolveInfo, label);
         Intent intent = mShortcutManager.createShortcutResultIntent(info);
         if (intent == null) {
             intent = new Intent();
@@ -170,8 +153,10 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                 .putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent)
                 .putExtra(Intent.EXTRA_SHORTCUT_NAME, label);
 
+        final ActivityInfo activityInfo = resolveInfo.activityInfo;
         if (activityInfo.icon != 0) {
             intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createIcon(
+                    mContext,
                     activityInfo.applicationInfo,
                     activityInfo.icon,
                     R.layout.shortcut_badge,
@@ -217,15 +202,40 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                 info.activityInfo.name);
     }
 
-    private Intent buildShortcutIntent(ResolveInfo info) {
+    private static Intent buildShortcutIntent(ResolveInfo info) {
         return new Intent(SHORTCUT_PROBE)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 .setClassName(info.activityInfo.packageName, info.activityInfo.name);
     }
 
-    private Bitmap createIcon(ApplicationInfo app, int resource, int layoutRes, int size) {
-        final Context context = new ContextThemeWrapper(mContext, android.R.style.Theme_Material);
-        final View view = LayoutInflater.from(context).inflate(layoutRes, null);
+    private static ShortcutInfo createShortcutInfo(Context context, Intent shortcutIntent,
+            ResolveInfo resolveInfo, CharSequence label) {
+        final ActivityInfo activityInfo = resolveInfo.activityInfo;
+
+        final Icon maskableIcon;
+        if (activityInfo.icon != 0 && activityInfo.applicationInfo != null) {
+            maskableIcon = Icon.createWithAdaptiveBitmap(createIcon(
+                    context,
+                    activityInfo.applicationInfo, activityInfo.icon,
+                    R.layout.shortcut_badge_maskable,
+                    context.getResources().getDimensionPixelSize(R.dimen.shortcut_size_maskable)));
+        } else {
+            maskableIcon = Icon.createWithResource(context, R.drawable.ic_launcher_settings);
+        }
+        final String shortcutId = SHORTCUT_ID_PREFIX +
+                shortcutIntent.getComponent().flattenToShortString();
+        return new ShortcutInfo.Builder(context, shortcutId)
+                .setShortLabel(label)
+                .setIntent(shortcutIntent)
+                .setIcon(maskableIcon)
+                .build();
+    }
+
+    private static Bitmap createIcon(Context context, ApplicationInfo app, int resource,
+            int layoutRes, int size) {
+        final Context themedContext = new ContextThemeWrapper(context,
+                android.R.style.Theme_Material);
+        final View view = LayoutInflater.from(themedContext).inflate(layoutRes, null);
         final int spec = View.MeasureSpec.makeMeasureSpec(size, View.MeasureSpec.EXACTLY);
         view.measure(spec, spec);
         final Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
@@ -234,14 +244,15 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
 
         Drawable iconDrawable;
         try {
-            iconDrawable = mPackageManager.getResourcesForApplication(app).getDrawable(resource);
+            iconDrawable = context.getPackageManager().getResourcesForApplication(app)
+                    .getDrawable(resource);
             if (iconDrawable instanceof LayerDrawable) {
                 iconDrawable = ((LayerDrawable) iconDrawable).getDrawable(1);
             }
             ((ImageView) view.findViewById(android.R.id.icon)).setImageDrawable(iconDrawable);
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Cannot load icon from app " + app + ", returning a default icon");
-            Icon icon = Icon.createWithResource(mContext, R.drawable.ic_launcher_settings);
+            Icon icon = Icon.createWithResource(context, R.drawable.ic_launcher_settings);
             ((ImageView) view.findViewById(android.R.id.icon)).setImageIcon(icon);
         }
 
@@ -250,12 +261,24 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
         return bitmap;
     }
 
-    private static final Comparator<ResolveInfo> SHORTCUT_COMPARATOR =
-            new Comparator<ResolveInfo>() {
+    public static void updateRestoredShortcuts(Context context) {
+        ShortcutManager sm = context.getSystemService(ShortcutManager.class);
+        List<ShortcutInfo> updatedShortcuts = new ArrayList<>();
+        for (ShortcutInfo si : sm.getPinnedShortcuts()) {
+            if (si.getId().startsWith(SHORTCUT_ID_PREFIX)) {
+                ResolveInfo ri = context.getPackageManager().resolveActivity(si.getIntent(), 0);
 
-                @Override
-                public int compare(ResolveInfo i1, ResolveInfo i2) {
-                    return i1.priority - i2.priority;
+                if (ri != null) {
+                    updatedShortcuts.add(createShortcutInfo(context, buildShortcutIntent(ri), ri,
+                            si.getShortLabel()));
                 }
-            };
+            }
+        }
+        if (!updatedShortcuts.isEmpty()) {
+            sm.updateShortcuts(updatedShortcuts);
+        }
+    }
+
+    private static final Comparator<ResolveInfo> SHORTCUT_COMPARATOR =
+            (i1, i2) -> i1.priority - i2.priority;
 }
