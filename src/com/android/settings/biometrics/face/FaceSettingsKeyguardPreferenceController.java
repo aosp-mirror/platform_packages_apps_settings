@@ -26,6 +26,7 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -44,7 +45,7 @@ public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPrefer
 
     public FaceSettingsKeyguardPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mFaceManager = context.getSystemService(FaceManager.class);
+        mFaceManager = Utils.getFaceManagerOrNull(context);
     }
 
     public FaceSettingsKeyguardPreferenceController(Context context) {
