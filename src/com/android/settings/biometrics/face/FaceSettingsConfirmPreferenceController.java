@@ -24,6 +24,7 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -46,7 +47,7 @@ public class FaceSettingsConfirmPreferenceController extends FaceSettingsPrefere
     public FaceSettingsConfirmPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
-        mFaceManager = context.getSystemService(FaceManager.class);
+        mFaceManager = Utils.getFaceManagerOrNull(context);
     }
 
     @Override

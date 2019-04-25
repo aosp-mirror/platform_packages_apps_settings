@@ -22,6 +22,8 @@ import android.content.Context;
 import android.hardware.face.FaceManager;
 import android.provider.Settings;
 
+import com.android.settings.Utils;
+
 import androidx.preference.Preference;
 
 /**
@@ -40,7 +42,7 @@ public class FaceSettingsAppPreferenceController extends FaceSettingsPreferenceC
 
     public FaceSettingsAppPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mFaceManager = context.getSystemService(FaceManager.class);
+        mFaceManager = Utils.getFaceManagerOrNull(context);
     }
 
     public FaceSettingsAppPreferenceController(Context context) {
