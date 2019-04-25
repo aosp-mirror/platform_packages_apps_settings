@@ -842,8 +842,8 @@
     <string name="location_settings_summary_location_off">Off</string>
     <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
     <plurals name="location_settings_summary_location_on">
-        <item quantity="one">On - <xliff:g id="count">%1$d</xliff:g> app can access location</item>
-        <item quantity="other">On - <xliff:g id="count">%1$d</xliff:g> apps can access location</item>
+        <item quantity="one">On - <xliff:g id="count">%1$d</xliff:g> app has access to location</item>
+        <item quantity="other">On - <xliff:g id="count">%1$d</xliff:g> apps have access to location</item>
     </plurals>
     <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
     <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
@@ -3838,29 +3838,25 @@
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
     <!--
-    Summary for Location settings when location is on, explaining how many apps have unlimited
-    location permission.
-
-    "Unlimited access" means the app can access the device location even when it's not being used
-    (on background), while "limited" means the app can only access the device location when the user
-    is using it (foreground only).
+    Summary for Location settings when location is on, explaining how many apps have location
+    permission.
 
     Please note that the distinction between singular and plural of this sentence only depends on
-    the quantity of "background_location_app_count" ("has" vs "have"). The quantity of
+    the quantity of "permitted_location_app_count" ("has" vs "have"). The quantity of
     "total_location_app_count" is almost always greater than 1, so "apps" is always in plural form.
 
     [CHAR LIMIT=NONE]-->
     <plurals name="location_app_permission_summary_location_on">
         <item quantity="one">
-            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            <xliff:g id="permitted_location_app_count">%1$d</xliff:g>
             of
             <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            apps has unlimited access</item>
+            apps has access to location</item>
         <item quantity="other">
-            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            <xliff:g id="permitted_location_app_count">%1$d</xliff:g>
             of
             <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            apps have unlimited access</item>
+            apps have access to location</item>
     </plurals>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
     <string name="location_category_recent_location_access">Recent location access</string>

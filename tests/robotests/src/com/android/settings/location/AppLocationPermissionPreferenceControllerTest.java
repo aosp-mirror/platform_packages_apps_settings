@@ -76,7 +76,7 @@ public class AppLocationPermissionPreferenceControllerTest {
     @Test
     public void getSummary_whenLocationAppCountIsOne_shouldShowSingularString() {
         mLocationManager.setLocationEnabledForUser(true, android.os.Process.myUserHandle());
-        mController.mNumBackground = 1;
+        mController.mNumHasLocation = 1;
         mController.mNumTotal = 1;
 
         assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getQuantityString(
@@ -86,7 +86,7 @@ public class AppLocationPermissionPreferenceControllerTest {
     @Test
     public void getSummary_whenLocationAppCountIsGreaterThanOne_shouldShowPluralString() {
         mLocationManager.setLocationEnabledForUser(true, android.os.Process.myUserHandle());
-        mController.mNumBackground = 5;
+        mController.mNumHasLocation = 5;
         mController.mNumTotal = 10;
 
         assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getQuantityString(
