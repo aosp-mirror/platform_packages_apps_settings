@@ -51,4 +51,9 @@ public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBlueto
     public void setConnectionState(int state) {
         mState = state;
     }
+
+    @Implementation
+    protected boolean factoryReset() {
+        return true;
+    }
 }
