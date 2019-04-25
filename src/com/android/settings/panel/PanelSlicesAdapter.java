@@ -33,6 +33,7 @@ import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+
 import com.google.android.setupdesign.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -128,7 +129,8 @@ public class PanelSlicesAdapter
                                 .action(0 /* attribution */,
                                         SettingsEnums.ACTION_PANEL_INTERACTION,
                                         mMetricsCategory,
-                                        sliceLiveData.toString() /* log key */,
+                                        sliceLiveData.getValue().getUri().getLastPathSegment()
+                                        /* log key */,
                                         eventInfo.actionType /* value */);
                     })
             );
