@@ -196,8 +196,14 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             final String key = preference.getKey();
             if (KEY_UNLOCK_SET_DO_LATER.equals(key)) {
                 // show warning.
-                SetupSkipDialog dialog = SetupSkipDialog.newInstance(getActivity().getIntent()
-                        .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
+                SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                        getActivity().getIntent()
+                                .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
+                        /* isPatternMode= */ false,
+                        /* isAlphaMode= */ false,
+                        /* isFingerprintSupported= */ false,
+                        /* isFaceSupported= */ false
+                );
                 dialog.show(getFragmentManager());
                 return true;
             }
