@@ -342,7 +342,7 @@
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> започва на <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="4192803402331390389">"Използва <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> започва на <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"Използва <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g>: започва на <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Използва <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Няма лятно часово време."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Лятно часово време"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Стандартно време"</string>
@@ -400,6 +400,7 @@
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Докоснете за настр. на удостов. с лице"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Удостоверяване с лице"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Настр. на ф-ята за достъпност: Ползване"</string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Отказ"</string>
@@ -428,6 +429,8 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Винаги да се изисква потвърждение"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="2002651109571928756">"При удостоверяване в приложенията винаги да се изисква потвърждение"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Премахване на лицето"</string>
+    <!-- no translation found for security_settings_face_settings_enroll (8921299174877503544) -->
+    <skip />
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Лицето ви може да се използва за отключване на устройството ви и за достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Да се изтрият ли данните за лицето?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Данните, записани от „Отключване с лице“, ще бъдат изтрити надеждно и за постоянно. След премахването ще имате нужда от ПИН кода, фигурата или паролата си, за да отключвате телефона си, да влизате в приложения и да потвърждавате плащания."</string>
@@ -484,12 +487,9 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Защитете таблета си с опция за заключване на екрана, така че никой друг да не може да го използва, ако бъде изгубен или откраднат. Такава опция е нужна и за настройване на удостоверяването с лице. Докоснете „Отказ“, след което задайте ПИН код или изберете друга опция за заключване на екрана."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Защитете устройството си с опция за заключване на екрана, така че никой друг да не може да го използва, ако бъде изгубено или откраднато. Такава опция е нужна и за настройване на удостоверяването с лице. Докоснете „Отказ“, след което задайте ПИН код или изберете друга опция за заключване на екрана."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Защитете телефона си с опция за заключване на екрана, така че никой друг да не може да го използва, ако бъде изгубен или откраднат. Такава опция е нужна и за настройване на удостоверяването с лице. Докоснете „Отказ“, след което задайте ПИН код или изберете друга опция за заключване на екрана."</string>
-    <!-- no translation found for lock_screen_pin_skip_title (8064328201816780457) -->
-    <skip />
-    <!-- no translation found for lock_screen_password_skip_title (4155009417576409182) -->
-    <skip />
-    <!-- no translation found for lock_screen_pattern_skip_title (6467327818577283960) -->
-    <skip />
+    <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Да се пропусне ли настройването на ПИН?"</string>
+    <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Да се пропусне ли настройването на парола?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Да се пропусне ли настройването на фигура?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Заключване на екрана: Настройване"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ами сега! Това не е сензорът"</string>
@@ -968,7 +968,8 @@
     <string name="wifi_dpp_wifi_password" msgid="4938294574591503213">"Парола за Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="4120419278831581613">"Парола за точката за достъп: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_add_device" msgid="4072206063308645677">"Добавяне на устройство"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="8898075663321081592">"Свържете се с тази мрежа чрез код за бърза реакция"</string>
+    <!-- no translation found for wifi_dpp_connect_network_using_qr_code (3887335309163999665) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Нов опит"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Споделяне с другите потребители на устройството"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(непроменени)"</string>
@@ -1021,7 +1022,10 @@
       <item quantity="other">%d мрежи</item>
       <item quantity="one">1 мрежа</item>
     </plurals>
-    <!-- no translation found for wifi_saved_passpoint_access_points_summary (8256430439661111672) -->
+    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="8256430439661111672">
+      <item quantity="other">%d абонамента</item>
+      <item quantity="one">1 абонамент</item>
+    </plurals>
     <!-- no translation found for wifi_saved_all_access_points_summary (149386761654596280) -->
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Wi‑Fi: разширени настр."</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
@@ -1193,6 +1197,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"Яркост"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Наглася яркостта на екрана"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Адаптивна яркост"</string>
+    <!-- no translation found for auto_brightness_summary (5652108419977937800) -->
+    <skip />
     <string name="auto_brightness_summary_on" msgid="3519854265558828744">"Вкл."</string>
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Изключено"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Предпочита се много ниска яркост"</string>
@@ -1712,12 +1718,9 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Информация за безопасност"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Нямате връзка за данни. За да видите тази информация сега, отворете %s от компютър, свързан с интернет."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Зарежда се…"</string>
-    <!-- no translation found for confirm_device_credential_pin (5308435093406166355) -->
-    <skip />
-    <!-- no translation found for confirm_device_credential_pattern (1350321840134412900) -->
-    <skip />
-    <!-- no translation found for confirm_device_credential_password (2195705238498478704) -->
-    <skip />
+    <string name="confirm_device_credential_pin" msgid="5308435093406166355">"Използване на ПИН"</string>
+    <string name="confirm_device_credential_pattern" msgid="1350321840134412900">"Използване на фигура"</string>
+    <string name="confirm_device_credential_password" msgid="2195705238498478704">"Използване на парола"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Задаване на заключване на екрана"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"От съображения за сигурност задайте парола"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Задайте парола, за да ползвате отпечатък"</string>
@@ -2466,8 +2469,7 @@
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"Режимът за запазване на батерията се включва, ако има вероятност батерията ви да се изтощи преди следващото обичайно за вас зареждане"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"Ще се включи при <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Задаване на график"</string>
-    <!-- no translation found for battery_saver_turn_on_summary (5552800757174173459) -->
-    <skip />
+    <string name="battery_saver_turn_on_summary" msgid="5552800757174173459">"Удължаване на живота на батерията"</string>
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Изключване при пълно зареждане"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Режимът за запазване на батерията се изключва, когато телефонът ви е зареден на <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"Режимът за запазване на батерията се изключва, когато таблетът ви е зареден на <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2977,6 +2979,10 @@
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="6145184730437907078">"Използване на 4G услуги за подобряване на гласовите и други комуникации (препоръчително)"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Предпочитан тип мрежа"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (препоръчително)"</string>
+    <!-- no translation found for mms_message_title (6068098013612041440) -->
+    <skip />
+    <!-- no translation found for mms_message_summary (8408985719331988420) -->
+    <skip />
     <string name="work_sim_title" msgid="4843322164662606891">"Служебна SIM карта"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"Достъп до прилож. и съдържанието"</string>
     <string name="user_rename" msgid="8523499513614655279">"ПРЕИМЕНУВАНЕ"</string>
@@ -3066,7 +3072,6 @@
     <string name="search_results_title" msgid="1796252422574886932">"Настройки"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"Wi-Fi, Wi-Fi, връзка с мрежата, интернет, безжично, пренос на данни, Wi-Fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="8745178424405564885">"известие за Wi‑Fi, известие за wifi"</string>
-    <string name="keywords_auto_brightness" msgid="2109098908025156362">"Автоматична яркост"</string>
     <string name="keywords_vibrate_on_touch" msgid="1494239633254176598">"спиране на вибрирането, докосване, клавиатура"</string>
     <string name="keywords_time_format" msgid="5581515674151927461">"Използване на 24-часов формат"</string>
     <string name="keywords_storage_files" msgid="7075933058850826819">"Изтегляне"</string>
@@ -3127,7 +3132,8 @@
     <string name="keywords_lock_screen_notif" msgid="6716392855813576197">"известие на заключения екран, известия"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"лице"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"отпечатък, добавяне на отпечатък"</string>
-    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"затъмняване на екрана, сензорен екран, батерия, интелигентна яркост, динамична яркост"</string>
+    <!-- no translation found for keywords_display_auto_brightness (4561771351118904241) -->
+    <skip />
     <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"затъмняване на екрана, спящ режим, батерия, време за изчакване, внимание, дисплей, екран, неактивност"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"завъртане, обръщане, завъртане, вертикален режим, хоризонтален режим, ориентация, вертикално, хоризонтално"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"надстройване, Android"</string>
@@ -3185,8 +3191,7 @@
       <item quantity="one">Активирахте 1</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Не безпокойте"</string>
-    <!-- no translation found for zen_mode_slice_subtitle (1495506059205752083) -->
-    <skip />
+    <string name="zen_mode_slice_subtitle" msgid="1495506059205752083">"Ограничаване на прекъсванията"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"Включване на режима „Не безпокойте“"</string>
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Изключения"</string>
     <string name="zen_mode_duration_settings_title" msgid="8471983919324532829">"Стандартна продължителност"</string>
@@ -3262,13 +3267,13 @@
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Изключено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"Изключено"</string>
     <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"Включено"</string>
-    <string name="zen_mode_duration_summary_always_prompt" msgid="5976427426278136178">"Да се пита винаги (освен ако не е включен автоматично)"</string>
-    <string name="zen_mode_duration_summary_forever" msgid="3144786357459137066">"Докато го изключите (освен ако не е включен автоматично)"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="1060823390336822337">
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> часа (освен ако не е включен автоматично)</item>
-      <item quantity="one">1 час (освен ако не е включен автоматично)</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3959860288930526323">"<xliff:g id="NUM_MINUTES">%d</xliff:g> минути (освен ако не е включен автоматично)"</string>
+    <!-- no translation found for zen_mode_duration_summary_always_prompt (3483258992533158479) -->
+    <skip />
+    <!-- no translation found for zen_mode_duration_summary_forever (8597777321810802309) -->
+    <skip />
+    <!-- no translation found for zen_mode_duration_summary_time_hours (3224363976852136871) -->
+    <!-- no translation found for zen_mode_duration_summary_time_minutes (6238305783533884764) -->
+    <skip />
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="6751226506661227581">
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> графика могат да се включват автоматично</item>
       <item quantity="one">1 график може да се включва автоматично</item>
@@ -3317,17 +3322,18 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Преглед на всички от последните 7 дни"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Разширени"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Служебни известия"</string>
-    <!-- no translation found for smart_notifications_title (475969117151722852) -->
+    <string name="smart_notifications_title" msgid="475969117151722852">"Интелигентни известия"</string>
+    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Автоматично приоритизиране"</string>
+    <!-- no translation found for asst_capability_prioritizer_summary (7553129095829077229) -->
     <skip />
-    <!-- no translation found for asst_capability_prioritizer_title (6691908606916292167) -->
+    <!-- no translation found for asst_capabilities_actions_replies_title (8621608733904251499) -->
     <skip />
-    <!-- no translation found for asst_capability_prioritizer_summary (3532556835426559362) -->
+    <!-- no translation found for asst_capabilities_actions_replies_summary (2367828721274129806) -->
     <skip />
-    <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Интелигентни действия и отговори"</string>
-    <!-- no translation found for asst_capabilities_actions_replies_summary (5358499322896238048) -->
+    <!-- no translation found for hide_silent_icons_title (3803036978493857276) -->
     <skip />
-    <string name="hide_silent_icons_title" msgid="2378514357635207742">"Скриване на иконите за състоянието на беззвучните известия"</string>
-    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Скриване на иконите за беззвучните известия в лентата на състоянието"</string>
+    <!-- no translation found for hide_silent_icons_summary (8422819235336628802) -->
+    <skip />
     <string name="notification_badging_title" msgid="5938709971403474078">"Разрешав. на точки за известия"</string>
     <string name="notification_bubbles_title" msgid="526545466417027926">"Балончета"</string>
     <string name="notification_bubbles_summary" msgid="5269674863510678257">"Плаващите преки пътища ви дават бърз достъп от всяко място до съдържанието на приложенията"</string>
@@ -3342,17 +3348,13 @@
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"Прекарайте пръст надясно, за да отхвърлите, и наляво за показване на менюто"</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"Прекарайте пръст наляво, за да отхвърлите, и надясно за показване на менюто"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Премигваща светлина"</string>
-    <!-- no translation found for lock_screen_notifications_title (7604704224172951090) -->
-    <skip />
+    <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Заключен екран"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"При закл. служ. потреб. профил"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Цялото съдържание от известията"</string>
-    <!-- no translation found for lock_screen_notifications_summary_hide (1133085507139112569) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Показв. на деликатно съдърж. само при откл. екран"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Да не се показват известията"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_message (3143593517597479937) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_interstitial_title (709573564312902481) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_message" msgid="3143593517597479937">"Как искате да се показват известията на заключения екран?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="709573564312902481">"Заключен екран"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Показване на цялото съдържание на служ. известия"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"Скриване на поверителното служебно съдържание"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Как искате да се показват известията от потребителския профил, когато устройството ви е заключено?"</string>
@@ -3374,30 +3376,28 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Голяма важност"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Показване на изскачащ прозорец на екрана"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Блокиране"</string>
-    <!-- no translation found for notification_silence_title (8575600650015431622) -->
-    <skip />
-    <!-- no translation found for notification_alert_title (7426286507434650473) -->
-    <skip />
+    <string name="notification_silence_title" msgid="8575600650015431622">"Ненатрапчиви известия"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Приоритетни известия"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Разрешаване на прекъсвания"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Разрешаване на приложението да издава звук, да вибрира и/или да показва изскачащи прозорци с известия на екрана"</string>
-    <!-- no translation found for notification_channel_summary_min (2965790706738495761) -->
+    <string name="notification_channel_summary_min" msgid="2965790706738495761">"Свиване на известията в падащия панел, така че да се показват на един ред"</string>
+    <!-- no translation found for notification_channel_summary_low (6402445462723804533) -->
     <skip />
-    <!-- no translation found for notification_channel_summary_low (250062606667099181) -->
+    <!-- no translation found for notification_channel_summary_low_status (6002754076815282625) -->
     <skip />
-    <!-- no translation found for notification_channel_summary_low_status (1151953801054796200) -->
+    <!-- no translation found for notification_channel_summary_low_lock (6834375877468977563) -->
     <skip />
-    <!-- no translation found for notification_channel_summary_low_lock (3801118119803089599) -->
+    <!-- no translation found for notification_channel_summary_low_status_lock (6845350570727515894) -->
     <skip />
-    <!-- no translation found for notification_channel_summary_low_status_lock (3400487706701402136) -->
+    <!-- no translation found for notification_channel_summary_default (1390343431643455716) -->
     <skip />
-    <!-- no translation found for notification_channel_summary_default (6837975360341956621) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_high (8779797505981599285) -->
+    <!-- no translation found for notification_channel_summary_high (7737315941884569891) -->
     <skip />
     <string name="notification_switch_label" msgid="6843075654538931025">"Показване на известията"</string>
-    <string name="default_notification_assistant" msgid="7631945224761430146">"Помощник за известия"</string>
-    <string name="notifications_sent_daily" msgid="3584506541352710975">"~<xliff:g id="NUMBER">%1$s</xliff:g> на ден"</string>
-    <string name="notifications_sent_weekly" msgid="1030525736746720584">"~<xliff:g id="NUMBER">%1$s</xliff:g> на седмица"</string>
+    <!-- no translation found for default_notification_assistant (8441022088918117445) -->
+    <skip />
+    <!-- no translation found for notifications_sent_daily (6049014219388148161) -->
+    <!-- no translation found for notifications_sent_weekly (5096638662520720959) -->
     <string name="notifications_sent_never" msgid="1001964786456700536">"Никога"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Достъп до известията"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Достъпът до известията в служебния потребителски профил е блокиран"</string>
@@ -3406,8 +3406,10 @@
       <item quantity="other">%d приложения могат да четат известията</item>
       <item quantity="one">%d приложение може да чете известията</item>
     </plurals>
-    <string name="notification_assistant_title" msgid="4788805096903794353">"Помощник за известия"</string>
-    <string name="no_notification_assistant" msgid="3230229194702623108">"Няма помощник за известия"</string>
+    <!-- no translation found for notification_assistant_title (7531256823396529700) -->
+    <skip />
+    <!-- no translation found for no_notification_assistant (2818970196806227480) -->
+    <skip />
     <string name="no_notification_listeners" msgid="3487091564454192821">"Няма инсталирани приложения, които са заявили достъп до известията."</string>
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Да се разреши ли достъпът до известията за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> ще може да чете всички известия, включително личната информация, като например имената на контактите и текстовете на съобщенията, които получавате. Ще е в състояние и да променя и отхвърля известия или да задейства бутоните за действие в тях. \n\nТова ще предостави на приложението и възможността да включва или изключва „Не безпокойте“, както и да променя сродните настройки."</string>
@@ -3463,8 +3465,7 @@
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Показване на точката за известия"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Отмяна на „Не безпокойте“"</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"Разрешаване на тези известия да продължат да ви прекъсват, когато режимът „Не безпокойте“ е включен"</string>
-    <!-- no translation found for app_notification_visibility_override_title (3618860781666494595) -->
-    <skip />
+    <string name="app_notification_visibility_override_title" msgid="3618860781666494595">"Заключен екран"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Блокирано"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Приоритет"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Деликатно"</string>
