@@ -425,10 +425,12 @@ public class NotificationBackend {
             return StringUtil.formatRelativeTime(
                     context, System.currentTimeMillis() - state.lastSent, true);
         } else {
-            if (state.avgSentWeekly > 0) {
-                return context.getString(R.string.notifications_sent_weekly, state.avgSentWeekly);
+            if (state.avgSentDaily > 0) {
+                return context.getResources().getQuantityString(R.plurals.notifications_sent_daily,
+                        state.avgSentDaily, state.avgSentDaily);
             }
-            return context.getString(R.string.notifications_sent_daily, state.avgSentDaily);
+            return context.getResources().getQuantityString(R.plurals.notifications_sent_weekly,
+                    state.avgSentWeekly, state.avgSentWeekly);
         }
     }
 

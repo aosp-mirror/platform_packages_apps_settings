@@ -147,7 +147,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
             getSupportFragmentManager().beginTransaction().remove(mSidecar).
                     commitAllowingStateLoss();
             mSidecar = null;
-            startActivityForResult(getFingerprintEnrollingIntent(), ENROLLING);
+            startActivityForResult(getFingerprintEnrollingIntent(), ENROLL_REQUEST);
         }
     }
 
@@ -162,7 +162,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
             } else {
                 finish();
             }
-        } else if (requestCode == ENROLLING) {
+        } else if (requestCode == ENROLL_REQUEST) {
             if (resultCode == RESULT_FINISHED) {
                 setResult(RESULT_FINISHED);
                 finish();

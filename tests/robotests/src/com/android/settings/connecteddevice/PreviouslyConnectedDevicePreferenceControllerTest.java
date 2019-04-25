@@ -95,16 +95,29 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
+    public void getAvailabilityStatus_noBluetoothDockFeature_returnUnSupported() {
         doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+        mPreConnectedDeviceController.setSavedDockUpdater(null);
+
         assertThat(mPreConnectedDeviceController.getAvailabilityStatus()).isEqualTo(
                 CONDITIONALLY_UNAVAILABLE);
     }
+
     @Test
     public void getAvailabilityStatus_hasBluetoothFeature_returnSupported() {
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+        mPreConnectedDeviceController.setSavedDockUpdater(null);
+
         assertThat(mPreConnectedDeviceController.getAvailabilityStatus()).isEqualTo(
                 AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_haveDockFeature_returnSupported() {
+        doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+
+        assertThat(mPreConnectedDeviceController.getAvailabilityStatus()).isEqualTo(
+            AVAILABLE);
     }
 
     @Test

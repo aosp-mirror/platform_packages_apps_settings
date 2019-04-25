@@ -174,7 +174,7 @@ public class SimListDialogFragment extends SimDialogFragment implements
             if (sub == null) {
                 title.setText(R.string.sim_calls_ask_first_prefs_title);
                 summary.setText("");
-                icon.setImageDrawable(mContext.getDrawable(R.drawable.ic_help));
+                icon.setImageDrawable(mContext.getDrawable(R.drawable.ic_feedback_24dp));
                 icon.setImageTintList(
                         Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
             } else {
