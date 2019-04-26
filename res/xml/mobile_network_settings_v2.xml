@@ -191,4 +191,10 @@
 
     </PreferenceCategory>
 
+    <Preference
+        android:key="erase_sim"
+        android:persistent="false"
+        android:title="@string/mobile_network_erase_sim"
+        settings:controller="com.android.settings.network.telephony.DeleteSimProfilePreferenceController" />
+
 </PreferenceScreen>
