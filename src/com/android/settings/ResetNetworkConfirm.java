@@ -72,6 +72,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     @VisibleForTesting Activity mActivity;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ProgressDialog mProgressDialog;
+    private AlertDialog mAlertDialog;
 
     /**
      * Async task used to do all reset task. If error happens during
@@ -141,7 +142,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 Toast.makeText(mContext, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                         .show();
             } else {
-                new AlertDialog.Builder(mContext)
+                mAlertDialog = new AlertDialog.Builder(mContext)
                         .setTitle(R.string.reset_esim_error_title)
                         .setMessage(R.string.reset_esim_error_msg)
                         .setPositiveButton(android.R.string.ok, null /* listener */)
@@ -264,6 +265,12 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         if (mResetNetworkTask != null) {
             mResetNetworkTask.cancel(true /* mayInterruptIfRunning */);
             mResetNetworkTask = null;
+        }
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+        if (mAlertDialog != null) {
+            mAlertDialog.dismiss();
         }
         super.onDestroy();
     }
