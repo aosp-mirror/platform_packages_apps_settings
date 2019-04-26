@@ -183,6 +183,7 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
                 <action android:name="android.settings.AIRPLANE_MODE_SETTINGS" />
+                <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -2623,27 +2624,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <activity
-            android:name="Settings$SimSettingsActivity"
-            android:label="@string/sim_settings_title"
-            android:icon="@drawable/ic_settings_sim"
-            android:parentActivityName="Settings">
-            <intent-filter android:priority="1">
-                <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-2"/>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.wireless" />
-            <meta-data android:name="com.android.settings.summary"
-                android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.sim.SimSettings" />
-        </activity>
 
         <activity android:name=".sim.SimPreferenceDialog"
             android:theme="@style/Theme.AlertDialog"
