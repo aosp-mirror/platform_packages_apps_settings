@@ -17,6 +17,9 @@
 
 package com.android.settings.media;
 
+import static android.app.slice.Slice.HINT_LIST_ITEM;
+import static android.app.slice.SliceItem.FORMAT_SLICE;
+
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -36,6 +39,7 @@ import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
+import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
@@ -97,10 +101,27 @@ public class MediaOutputSliceTest {
     }
 
     @Test
-    public void getSlice_workerIsNull_shouldNotCrash() {
+    public void getSlice_workerIsNull_shouldReturnZeroRow() {
         mMediaOutputSlice.init(TEST_PACKAGE_NAME, null);
 
-        mMediaOutputSlice.getSlice();
+        final Slice slice = mMediaOutputSlice.getSlice();
+
+        final int rows = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null /* nonHints */).size();
+
+        assertThat(rows).isEqualTo(0);
+    }
+
+    @Test
+    public void getSlice_bluetoothIsDisable_shouldReturnZeroRow() {
+        mShadowBluetoothAdapter.setEnabled(false);
+
+        final Slice slice = mMediaOutputSlice.getSlice();
+
+        final int rows = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null /* nonHints */).size();
+
+        assertThat(rows).isEqualTo(0);
     }
 
     @Test
