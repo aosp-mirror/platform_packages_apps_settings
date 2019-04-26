@@ -20,12 +20,25 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.text.Annotation;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.TextUtils;
+import android.text.style.URLSpan;
+import android.view.View;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,10 +49,14 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class BatterySaverSettings extends DashboardFragment {
     private static final String TAG = "BatterySaverSettings";
+    public static final String KEY_FOOTER_PREFERENCE = "footer_preference";
+    private SpannableStringBuilder mFooterText;
+    private String mHelpUri;
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onStart() {
+        super.onStart();
+        setupFooter();
     }
 
     @Override
@@ -75,4 +92,82 @@ public class BatterySaverSettings extends DashboardFragment {
                     return Arrays.asList(sir);
                 }
             };
+
+    // Updates the footer for this page.
+    @VisibleForTesting
+    void setupFooter() {
+        mFooterText =  new SpannableStringBuilder(getText(
+                com.android.internal.R.string.battery_saver_description_with_learn_more));
+        mHelpUri = getString(R.string.help_url_battery_saver_settings);
+        if (!TextUtils.isEmpty(mHelpUri)) {
+            addHelpLink();
+        }
+    }
+
+    // Changes the text to include a learn more link if possible.
+    @VisibleForTesting
+    void addHelpLink() {
+        FooterPreference pref = getPreferenceScreen().findPreference(KEY_FOOTER_PREFERENCE);
+        if (pref != null) {
+            SupportPageLearnMoreSpan.linkify(mFooterText, this, mHelpUri);
+            pref.setTitle(mFooterText);
+        }
+    }
+
+    /**
+     * A {@link URLSpan} that opens a support page when clicked
+     */
+    public static class SupportPageLearnMoreSpan extends URLSpan {
+
+
+        private static final String ANNOTATION_URL = "url";
+        private final Fragment mFragment;
+        private final String mUriString;
+
+        public SupportPageLearnMoreSpan(Fragment fragment, String uriString) {
+            // sets the url to empty string so we can prevent any other span processing from
+            // from clearing things we need in this string.
+            super("");
+            mFragment = fragment;
+            mUriString = uriString;
+        }
+
+        @Override
+        public void onClick(View widget) {
+            if (mFragment != null) {
+                // launch the support page
+                mFragment.startActivityForResult(HelpUtils.getHelpIntent(mFragment.getContext(),
+                        mUriString, ""), 0);
+            }
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            super.updateDrawState(ds);
+            // remove underline
+            ds.setUnderlineText(false);
+        }
+
+        /**
+         * This method takes a string and turns it into a url span that will launch a support page
+         * @param msg The text to turn into a link
+         * @param fragment The fragment which contains this span
+         * @param uriString The URI string of the help article to open when clicked
+         * @return A CharSequence containing the original text content as a url
+         */
+        public static CharSequence linkify(Spannable msg, Fragment fragment, String uriString) {
+            Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
+            for (Annotation annotation : spans) {
+                int start = msg.getSpanStart(annotation);
+                int end = msg.getSpanEnd(annotation);
+                if (ANNOTATION_URL.equals(annotation.getValue())) {
+                    SupportPageLearnMoreSpan link =
+                            new SupportPageLearnMoreSpan(fragment, uriString);
+                    msg.removeSpan(annotation);
+                    msg.setSpan(link, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+            return msg;
+        }
+    }
 }
