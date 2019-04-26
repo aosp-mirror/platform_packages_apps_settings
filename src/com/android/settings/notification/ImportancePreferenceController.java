@@ -59,9 +59,9 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
     @Override
     public void updateState(Preference preference) {
         if (mAppRow!= null && mChannel != null) {
-            preference.setEnabled(mAdmin == null && isChannelBlockable());
+            preference.setEnabled(mAdmin == null && !mChannel.isImportanceLockedByOEM());
             ImportancePreference pref = (ImportancePreference) preference;
-            pref.setConfigurable(isChannelBlockable());
+            pref.setConfigurable(!mChannel.isImportanceLockedByOEM());
             pref.setImportance(mChannel.getImportance());
             pref.setDisplayInStatusBar(mBackend.showSilentInStatusBar(mContext.getPackageName()));
             // TODO: b/128445911 pass along lock screen setting

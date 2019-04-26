@@ -18,22 +18,28 @@ package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import android.app.role.RoleManager;
 import android.app.usage.UsageEvents;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Parcel;
 
 import com.android.settings.notification.NotificationBackend.AppRow;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class NotificationBackendTest {
@@ -50,81 +56,40 @@ public class NotificationBackendTest {
 
         // This package has a package lock but no locked channels
         assertTrue(appRow.lockedImportance);
-        assertNull(appRow.lockedChannelId);
     }
 
     @Test
-    public void testMarkAppRow_unblockableChannelOrPkg() {
-        String channelBlockName = "foo.bar.pkgWithChannel";
-        String pkgBlockName = "foo.bar.pkgBlock";
-        String[] nonBlockablePkgs = new String[2];
-        nonBlockablePkgs[0] = pkgBlockName;
-        nonBlockablePkgs[1] = channelBlockName + ":SpecificChannel";
+    public void testMarkAppRow_defaultPackage() {
+        PackageInfo pi = new PackageInfo();
+        pi.packageName = "test";
+        pi.applicationInfo = new ApplicationInfo();
+        pi.applicationInfo.packageName = "test";
+        List<String> roles = new ArrayList<>();
+        roles.add(RoleManager.ROLE_DIALER);
+        RoleManager rm = mock(RoleManager.class);
+        when(rm.getHeldRolesFromController(anyString())).thenReturn(roles);
 
-        // This package has a channel level lock but no full package lock
-        AppRow channelBlockApp = new AppRow();
-        channelBlockApp.pkg = channelBlockName;
-        NotificationBackend.markAppRowWithBlockables(nonBlockablePkgs, channelBlockApp,
-                channelBlockName);
-        assertFalse(channelBlockApp.lockedImportance);
-        assertEquals("SpecificChannel", channelBlockApp.lockedChannelId);
+        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
+                mock(PackageManager.class), rm, pi);
 
-        // This other package has the reverse
-        AppRow pkgBlock = new AppRow();
-        pkgBlock.pkg = pkgBlockName;
-        NotificationBackend.markAppRowWithBlockables(nonBlockablePkgs, pkgBlock, pkgBlockName);
-        assertTrue(pkgBlock.lockedImportance);
-        assertNull(pkgBlock.lockedChannelId);
-
-        // This third package has no locks at all
-        AppRow otherAppRow = new AppRow();
-        otherAppRow.pkg ="foo.bar.nothingBlocked";
-        NotificationBackend.markAppRowWithBlockables(nonBlockablePkgs, otherAppRow,
-                "foo.bar.nothingBlocked");
-        assertFalse(otherAppRow.lockedImportance);
-        assertNull(otherAppRow.lockedChannelId);
+        assertTrue(appRow.systemApp);
     }
 
     @Test
-    public void testMarkAppRow_unblockableChannelAndPkg() {
-        AppRow appRow = new AppRow();
-        String packageName = "foo.bar.unblockable";
-        appRow.pkg = packageName;
-        String[] nonBlockablePkgs = new String[2];
-        nonBlockablePkgs[0] = "foo.bar.unblockable";
-        nonBlockablePkgs[1] = "foo.bar.unblockable:SpecificChannel";
-        NotificationBackend.markAppRowWithBlockables(nonBlockablePkgs, appRow, packageName);
+    public void testMarkAppRow_notDefaultPackage() {
+        PackageInfo pi = new PackageInfo();
+        pi.packageName = "test";
+        pi.applicationInfo = new ApplicationInfo();
+        pi.applicationInfo.packageName = "test";
+        List<String> roles = new ArrayList<>();
+        roles.add(RoleManager.ROLE_HOME);
+        RoleManager rm = mock(RoleManager.class);
+        when(rm.getHeldRolesFromController(anyString())).thenReturn(roles);
 
-        // This package has both a channel lock and a package lock
-        assertTrue(appRow.lockedImportance);
-        assertEquals("SpecificChannel", appRow.lockedChannelId);
-    }
+        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
+                mock(PackageManager.class), rm, pi);
 
-    @Test
-    public void testMarkAppRow_channelNameWithColons() {
-        AppRow appRow = new AppRow();
-        String packageName = "foo.bar.unblockable";
-        String channelName = "SpecificChannel:1234:abc:defg";
-        appRow.pkg = packageName;
-        String[] nonBlockablePkgs = new String[1];
-        nonBlockablePkgs[0] = packageName + ":" + channelName;
-        NotificationBackend.markAppRowWithBlockables(nonBlockablePkgs, appRow, packageName);
-
-        assertEquals(channelName, appRow.lockedChannelId);
-    }
-
-    @Test
-    public void testMarkAppRow_blocklistWithNullEntries() {
-        AppRow appRow = new AppRow();
-        String packageName = "foo.bar.unblockable";
-        appRow.pkg = packageName;
-        String[] nonBlockablePkgs = new String[6]; // extra long list with some entries left null
-        nonBlockablePkgs[2] = "foo.bar.unblockable";
-        nonBlockablePkgs[4] = "foo.bar.unblockable:SpecificChannel";
-        NotificationBackend.markAppRowWithBlockables(nonBlockablePkgs, appRow, packageName);
-
-        assertTrue(appRow.lockedImportance);
-        assertEquals("SpecificChannel", appRow.lockedChannelId);
+        assertFalse(appRow.systemApp);
     }
 
     @Test

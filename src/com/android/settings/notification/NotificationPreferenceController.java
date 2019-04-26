@@ -110,25 +110,11 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         }
     }
 
-    private boolean isChannelConfigurable() {
-        if (mAppRow != null && mAppRow.lockedImportance) {
-            return false;
-        }
-        if (mChannel != null && mAppRow != null) {
-            return !Objects.equals(mChannel.getId(), mAppRow.lockedChannelId);
-        }
-        return false;
-    }
-
     protected boolean isChannelBlockable() {
         if (mChannel != null && mAppRow != null) {
-            if (!isChannelConfigurable()) {
+            if (mChannel.isImportanceLockedByCriticalDeviceFunction()
+                    || mChannel.isImportanceLockedByOEM()) {
                 return mChannel.getImportance() == IMPORTANCE_NONE;
-            }
-
-            if (mChannel.isImportanceLockedByOEM()
-                    || mChannel.isImportanceLockedByCriticalDeviceFunction()) {
-                return false;
             }
 
             return mChannel.isBlockableSystem() || !mAppRow.systemApp

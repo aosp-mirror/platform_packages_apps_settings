@@ -30,6 +30,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -345,7 +346,7 @@ public class NotificationChannelSliceTest {
         doReturn(buildNotificationChannelGroups(channels)).when(mNotificationBackend).getGroups(
                 any(String.class), any(int.class));
         doReturn(appRow).when(mNotificationBackend).loadAppRow(any(Context.class),
-                any(PackageManager.class), any(PackageInfo.class));
+                any(PackageManager.class), any(RoleManager.class), any(PackageInfo.class));
         doReturn(channelCount).when(mNotificationBackend).getChannelCount(
                 any(String.class), any(int.class));
     }

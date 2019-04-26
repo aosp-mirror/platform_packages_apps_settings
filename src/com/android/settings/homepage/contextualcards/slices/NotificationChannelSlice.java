@@ -459,7 +459,7 @@ public class NotificationChannelSlice implements CustomSliceable {
     private boolean isChannelConfigurable(NotificationChannel channel,
             NotificationBackend.AppRow appRow) {
         if (channel != null && appRow != null) {
-            return !TextUtils.equals(channel.getId(), appRow.lockedChannelId);
+            return !channel.isImportanceLockedByOEM();
         }
 
         return false;
