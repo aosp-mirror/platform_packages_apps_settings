@@ -50,7 +50,6 @@ import java.util.List;
 /**
  * Settings preference fragment that displays data usage summary.
  */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DataUsageSummary extends DataUsageBaseFragment implements DataUsageEditController {
 
     private static final String TAG = "DataUsageSummary";
@@ -334,55 +333,4 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
         = SummaryProvider::new;
-
-    /**
-     * For search
-     */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                    boolean enabled) {
-                List<SearchIndexableResource> resources = new ArrayList<>();
-                SearchIndexableResource resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage;
-                resources.add(resource);
-
-                resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage_cellular;
-                resources.add(resource);
-
-                resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage_wifi;
-                resources.add(resource);
-
-                return resources;
-            }
-
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                List<String> keys = super.getNonIndexableKeys(context);
-
-                if (!DataUsageUtils.hasMobileData(context)) {
-                    keys.add(KEY_MOBILE_USAGE_TITLE);
-                    keys.add(KEY_MOBILE_DATA_USAGE_TOGGLE);
-                    keys.add(KEY_MOBILE_DATA_USAGE);
-                }
-
-                if (!DataUsageUtils.hasWifiRadio(context)) {
-                    keys.add(KEY_WIFI_DATA_USAGE);
-                }
-
-                // This title is named Wifi, and will confuse users.
-                keys.add(KEY_WIFI_USAGE_TITLE);
-
-                // Duplicate entry for "Data saver"
-                keys.add(KEY_RESTRICT_BACKGROUND);
-                // Duplicate entry for "Data warning & limit"
-                keys.add(KEY_MOBILE_BILLING_CYCLE);
-
-                return keys;
-            }
-        };
 }
