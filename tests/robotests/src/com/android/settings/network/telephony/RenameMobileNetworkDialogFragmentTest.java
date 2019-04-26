@@ -34,9 +34,15 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
@@ -48,9 +54,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
@@ -121,6 +124,20 @@ public class RenameMobileNetworkDialogFragmentTest {
         verify(mSubscriptionMgr).setDisplayName(captor.capture(), eq(mSubscriptionId),
                 eq(SubscriptionManager.NAME_SOURCE_USER_INPUT));
         assertThat(captor.getValue()).isEqualTo("test2");
+    }
+
+    @Test
+    public void populateView_infoIsOpportunistic_hideNumberLabel() {
+        final View view = LayoutInflater.from(mActivity).inflate(
+                R.layout.dialog_mobile_network_rename, null);
+        when(mSubscriptionMgr.getActiveSubscriptionInfo(mSubscriptionId)).thenReturn(
+                mSubscriptionInfo);
+        when(mSubscriptionInfo.isOpportunistic()).thenReturn(true);
+
+        startDialog();
+        mFragment.populateView(view);
+
+        assertThat(view.findViewById(R.id.number_label).getVisibility()).isEqualTo(View.GONE);
     }
 
     /** Helper method to start the dialog */
