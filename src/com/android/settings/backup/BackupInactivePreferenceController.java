@@ -28,7 +28,7 @@ public class BackupInactivePreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        if (!new BackupSettingsHelper(mContext).showBackupSettingsForUser()) {
+        if (!new BackupSettingsHelper(mContext).isBackupServiceActive()) {
             return AVAILABLE_UNSEARCHABLE;
         }
         if (PrivacySettingsUtils.isInvisibleKey(mContext, PrivacySettingsUtils.BACKUP_INACTIVE)) {
