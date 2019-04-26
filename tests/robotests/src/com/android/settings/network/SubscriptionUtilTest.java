@@ -72,7 +72,6 @@ public class SubscriptionUtilTest {
     @Test
     public void getAvailableSubscriptions_oneSubscription_oneResult() {
         final SubscriptionInfo info = mock(SubscriptionInfo.class);
-        when(info.getMncString()).thenReturn("fake1234");
         when(mSubMgr.getSelectableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mContext);
         assertThat(subs).isNotNull();
@@ -83,46 +82,10 @@ public class SubscriptionUtilTest {
     public void getAvailableSubscriptions_twoSubscriptions_twoResults() {
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
-        when(info1.getMncString()).thenReturn("fake1234");
-        when(info2.getMncString()).thenReturn("fake5678");
         when(mSubMgr.getSelectableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mContext);
         assertThat(subs).isNotNull();
         assertThat(subs).hasSize(2);
-    }
-
-    @Test
-    public void getAvailableSubscriptions_oneSubWithHiddenNetworks_oneResult() {
-        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo info3 = mock(SubscriptionInfo.class);
-        when(info1.getSubscriptionId()).thenReturn(1);
-        when(info1.getMncString()).thenReturn("fake1234");
-        when(mSubMgr.getSelectableSubscriptionInfoList()).thenReturn(
-                new ArrayList<>(Arrays.asList(info1, info2, info3)));
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mContext);
-        assertThat(subs).isNotNull();
-        assertThat(subs).hasSize(1);
-        assertThat(subs.get(0).getSubscriptionId()).isEqualTo(1);
-    }
-
-    @Test
-    public void getAvailableSubscriptions_twoSubsWithHiddenNetworks_twoResults() {
-        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo info3 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo info4 = mock(SubscriptionInfo.class);
-        when(info1.getSubscriptionId()).thenReturn(1);
-        when(info1.getMncString()).thenReturn("fake1234");
-        when(info4.getSubscriptionId()).thenReturn(4);
-        when(info4.getMncString()).thenReturn("fake5678");
-        when(mSubMgr.getSelectableSubscriptionInfoList()).thenReturn(new ArrayList<>(
-                Arrays.asList(info1, info2, info3, info4)));
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mContext);
-        assertThat(subs).isNotNull();
-        assertThat(subs).hasSize(2);
-        assertThat(subs.get(0).getSubscriptionId()).isEqualTo(1);
-        assertThat(subs.get(1).getSubscriptionId()).isEqualTo(4);
     }
 
     @Test
@@ -131,12 +94,10 @@ public class SubscriptionUtilTest {
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
 
         when(info1.getSubscriptionId()).thenReturn(111);
-        when(info1.getMncString()).thenReturn("fake111");
         when(info1.getSimSlotIndex()).thenReturn(-1);
         when(info1.getCardString()).thenReturn("info1_cardid");
 
         when(info2.getSubscriptionId()).thenReturn(222);
-        when(info2.getMncString()).thenReturn("fake222");
         when(info2.getSimSlotIndex()).thenReturn(0);
         when(info2.getCardString()).thenReturn("info2_cardid");
 
@@ -165,17 +126,14 @@ public class SubscriptionUtilTest {
         final SubscriptionInfo info3 = mock(SubscriptionInfo.class);
 
         when(info1.getSubscriptionId()).thenReturn(111);
-        when(info1.getMncString()).thenReturn("fake111");
         when(info1.getSimSlotIndex()).thenReturn(-1);
         when(info1.getCardString()).thenReturn("info1_cardid");
 
         when(info2.getSubscriptionId()).thenReturn(222);
-        when(info2.getMncString()).thenReturn("fake222");
         when(info2.getSimSlotIndex()).thenReturn(-1);
         when(info2.getCardString()).thenReturn("info2_cardid");
 
         when(info3.getSubscriptionId()).thenReturn(333);
-        when(info3.getMncString()).thenReturn("fake333");
         when(info3.getSimSlotIndex()).thenReturn(0);
         when(info3.getCardString()).thenReturn("info3_cardid");
 
