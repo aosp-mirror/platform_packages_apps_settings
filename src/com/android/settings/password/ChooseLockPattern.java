@@ -185,7 +185,7 @@ public class ChooseLockPattern extends SettingsActivity {
         // how long we wait to clear a wrong pattern
         private static final int WRONG_PATTERN_CLEAR_TIMEOUT_MS = 2000;
 
-        private static final int ID_EMPTY_MESSAGE = -1;
+        protected static final int ID_EMPTY_MESSAGE = -1;
 
         private static final String FRAGMENT_TAG_SAVE_AND_FINISH = "save_and_finish_worker";
 

@@ -78,23 +78,24 @@ public class SimDialogActivity extends FragmentActivity {
     }
 
     private SimDialogFragment createFragment(int dialogType) {
-        switch(dialogType) {
+        switch (dialogType) {
             case DATA_PICK:
                 return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_data,
                         false /* includeAskEveryTime */);
             case CALLS_PICK:
-                return CallsSimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_calls,
+                return CallsSimListDialogFragment.newInstance(dialogType,
+                        R.string.select_sim_for_calls,
                         true /* includeAskEveryTime */);
             case SMS_PICK:
                 return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_sms,
-                        false /* includeAskEveryTime */);
+                        true /* includeAskEveryTime */);
             case PREFERRED_PICK:
                 if (!getIntent().hasExtra(PREFERRED_SIM)) {
                     throw new IllegalArgumentException("Missing required extra " + PREFERRED_SIM);
                 }
                 return PreferredSimDialogFragment.newInstance();
             default:
-                throw new IllegalArgumentException( "Invalid dialog type " + dialogType + " sent.");
+                throw new IllegalArgumentException("Invalid dialog type " + dialogType + " sent.");
         }
     }
 

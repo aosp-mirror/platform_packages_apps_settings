@@ -83,6 +83,7 @@
         <PreferenceScreen
             android:key="wifi_calling_key"
             android:title="@string/wifi_calling_settings_title"
+            android:summary="@string/wifi_calling_summary"
             settings:controller="com.android.settings.network.telephony.WifiCallingPreferenceController" >
             <intent android:action="android.intent.action.MAIN"
                     android:targetPackage="com.android.settings"

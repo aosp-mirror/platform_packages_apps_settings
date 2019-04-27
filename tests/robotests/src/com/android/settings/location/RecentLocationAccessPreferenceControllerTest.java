@@ -129,32 +129,26 @@ public class RecentLocationAccessPreferenceControllerTest {
         final View app1View = mAppEntitiesHeaderView.findViewById(R.id.app1_view);
         final ImageView appIconView1 = app1View.findViewById(R.id.app_icon);
         final TextView appTitle1 = app1View.findViewById(R.id.app_title);
-        final TextView appSummary1 = app1View.findViewById(R.id.app_summary);
 
         assertThat(app1View.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(appIconView1.getDrawable()).isNotNull();
         assertThat(appTitle1.getText()).isEqualTo("appTitle0");
-        assertThat(appSummary1.getText()).isEqualTo("appSummary0");
 
         final View app2View = mAppEntitiesHeaderView.findViewById(R.id.app2_view);
         final ImageView appIconView2 = app2View.findViewById(R.id.app_icon);
         final TextView appTitle2 = app2View.findViewById(R.id.app_title);
-        final TextView appSummary2 = app2View.findViewById(R.id.app_summary);
 
         assertThat(app2View.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(appIconView2.getDrawable()).isNotNull();
         assertThat(appTitle2.getText()).isEqualTo("appTitle1");
-        assertThat(appSummary2.getText()).isEqualTo("appSummary1");
 
         final View app3View = mAppEntitiesHeaderView.findViewById(R.id.app3_view);
         final ImageView appIconView3 = app3View.findViewById(R.id.app_icon);
         final TextView appTitle3 = app3View.findViewById(R.id.app_title);
-        final TextView appSummary3 = app3View.findViewById(R.id.app_summary);
 
         assertThat(app3View.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(appIconView3.getDrawable()).isNotNull();
         assertThat(appTitle3.getText()).isEqualTo("appTitle2");
-        assertThat(appSummary3.getText()).isEqualTo("appSummary2");
     }
 
     private List<RecentLocationAccesses.Access> createMockAccesses(int count) {

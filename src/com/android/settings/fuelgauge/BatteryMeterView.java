@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 
 import android.annotation.Nullable;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -38,7 +37,8 @@ public class BatteryMeterView extends ImageView {
     ColorFilter mErrorColorFilter;
     @VisibleForTesting
     ColorFilter mAccentColorFilter;
-    private boolean mPowerSaveEnabled;
+    @VisibleForTesting
+    ColorFilter mForegroundColorFilter;
 
     public BatteryMeterView(Context context) {
         this(context, null, 0);
@@ -57,7 +57,9 @@ public class BatteryMeterView extends ImageView {
                 PorterDuff.Mode.SRC);
         mErrorColorFilter = new PorterDuffColorFilter(
                 context.getColor(R.color.battery_icon_color_error), PorterDuff.Mode.SRC_IN);
-
+        mForegroundColorFilter =new PorterDuffColorFilter(
+                Utils.getColorAttrDefaultColor(context, android.R.attr.colorForeground),
+                PorterDuff.Mode.SRC);
         mDrawable = new BatteryMeterDrawable(context, frameColor);
         mDrawable.setColorFilter(mAccentColorFilter);
         setImageDrawable(mDrawable);
@@ -65,20 +67,16 @@ public class BatteryMeterView extends ImageView {
 
     public void setBatteryLevel(int level) {
         mDrawable.setBatteryLevel(level);
-        if (level < mDrawable.getCriticalLevel()) {
-            mDrawable.setColorFilter(mErrorColorFilter);
-        } else {
-            mDrawable.setColorFilter(mAccentColorFilter);
-        }
+        updateColorFilter();
     }
 
     public void setPowerSave(boolean powerSave) {
         mDrawable.setPowerSaveEnabled(powerSave);
-        mPowerSaveEnabled = powerSave;
+        updateColorFilter();
     }
 
     public boolean getPowerSave() {
-        return mPowerSaveEnabled;
+        return mDrawable.getPowerSaveEnabled();
     }
 
     public int getBatteryLevel() {
@@ -92,6 +90,18 @@ public class BatteryMeterView extends ImageView {
 
     public boolean getCharging() {
         return mDrawable.getCharging();
+    }
+
+    private void updateColorFilter() {
+        final boolean powerSaveEnabled = mDrawable.getPowerSaveEnabled();
+        final int level = mDrawable.getBatteryLevel();
+        if (powerSaveEnabled) {
+            mDrawable.setColorFilter(mForegroundColorFilter);
+        } else if (level < mDrawable.getCriticalLevel()) {
+            mDrawable.setColorFilter(mErrorColorFilter);
+        } else {
+            mDrawable.setColorFilter(mAccentColorFilter);
+        }
     }
 
     public static class BatteryMeterDrawable extends ThemedBatteryDrawable {

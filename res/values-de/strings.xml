@@ -399,6 +399,7 @@
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tippen, um Gesichtserkennung einzurichten"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Gesichtserkennung"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Bedienungshilfen-Einrichtung verwenden"</string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Abbrechen"</string>
@@ -427,6 +428,7 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Bestätigung immer erforderlich"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="2002651109571928756">"Bei Authentifizierung in Apps immer Bestätigung anfordern"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Gesichtsdaten entfernen"</string>
+    <string name="security_settings_face_settings_enroll" msgid="8921299174877503544">"Gesichtserkennung einrichten"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Du kannst dein Gerät per Gesichtserkennung entsperren und auf deine Apps zugreifen. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Gesichtsdaten löschen?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Mit Face Unlock aufgezeichnete Daten werden dauerhaft und sicher gelöscht. Nach dem Entfernen benötigst du deine PIN, dein Muster oder dein Passwort zum Entsperren deines Smartphones, zum Anmelden bei Apps und zum Bestätigen von Zahlungen."</string>
@@ -483,12 +485,9 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Mit der Displaysperre kannst du dein Tablet schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\", um eine PIN festzulegen oder eine andere Methode für die Displaysperre auszuwählen."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Mit der Displaysperre kannst du dein Gerät schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\", um eine PIN festzulegen oder eine andere Methode für die Displaysperre auszuwählen."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Mit der Displaysperre kannst du dein Smartphone schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\", um eine PIN festzulegen oder eine andere Methode für die Displaysperre auszuwählen."</string>
-    <!-- no translation found for lock_screen_pin_skip_title (8064328201816780457) -->
-    <skip />
-    <!-- no translation found for lock_screen_password_skip_title (4155009417576409182) -->
-    <skip />
-    <!-- no translation found for lock_screen_pattern_skip_title (6467327818577283960) -->
-    <skip />
+    <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"PIN-Einrichtung überspringen?"</string>
+    <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Passworteinrichtung überspringen?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Mustereinrichtung überspringen?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Displaysperre einrichten"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Fertig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Das ist nicht der Sensor"</string>
@@ -968,7 +967,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4938294574591503213">"WLAN-Passwort: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="4120419278831581613">"Passwort des Hotspots: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_add_device" msgid="4072206063308645677">"Gerät hinzufügen"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="8898075663321081592">"Verbindung zu diesem Netzwerk über einen QR-Code herstellen"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="3887335309163999665">"QR-Code verwenden, um diesem Netzwerk ein Gerät hinzuzufügen"</string>
     <string name="retry" msgid="6472609612090877557">"Noch mal versuchen"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Für andere Gerätenutzer freigeben"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nicht geändert)"</string>
@@ -1021,7 +1020,10 @@
       <item quantity="other">%d Netzwerke</item>
       <item quantity="one">1 Netzwerk</item>
     </plurals>
-    <!-- no translation found for wifi_saved_passpoint_access_points_summary (8256430439661111672) -->
+    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="8256430439661111672">
+      <item quantity="other">%d Abos</item>
+      <item quantity="one">1 Abo</item>
+    </plurals>
     <!-- no translation found for wifi_saved_all_access_points_summary (149386761654596280) -->
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Erweiterte WLAN-Einstellungen"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
@@ -1193,6 +1195,7 @@
     <string name="brightness_title" msgid="5746272622112982836">"Helligkeit"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Helligkeit des Bildschirms anpassen"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Automatische Helligkeit"</string>
+    <string name="auto_brightness_summary" msgid="5652108419977937800">"Bildschirmhelligkeit passt sich der Umgebung an"</string>
     <string name="auto_brightness_summary_on" msgid="3519854265558828744">"An"</string>
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Deaktiviert"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Bevorzugte Helligkeit ist sehr niedrig"</string>
@@ -1712,12 +1715,9 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Sicherheitsinformationen"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Es ist keine Datenverbindung vorhanden. Wenn Sie diese Informationen jetzt sehen möchten, gehen Sie auf einem beliebigen Computer mit Internetanschluss zu %s."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Wird geladen..."</string>
-    <!-- no translation found for confirm_device_credential_pin (5308435093406166355) -->
-    <skip />
-    <!-- no translation found for confirm_device_credential_pattern (1350321840134412900) -->
-    <skip />
-    <!-- no translation found for confirm_device_credential_password (2195705238498478704) -->
-    <skip />
+    <string name="confirm_device_credential_pin" msgid="5308435093406166355">"PIN nutzen"</string>
+    <string name="confirm_device_credential_pattern" msgid="1350321840134412900">"Muster verwenden"</string>
+    <string name="confirm_device_credential_password" msgid="2195705238498478704">"Passwort nutzen"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Displaysperre einrichten"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Richte zur Sicherheit ein Passwort ein"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Passwort festlegen, um Fingerabdruck zu verwenden"</string>
@@ -2466,8 +2466,7 @@
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"Der Energiesparmodus wird automatisch aktiviert, wenn offenbar wird, dass der Akku wahrscheinlich nicht bis zum nächsten Aufladen hält (ermittelt anhand deines typischen Aufladezeitpunkts)."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"Wird bei <xliff:g id="PERCENT">%1$s</xliff:g> aktiviert"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Zeitplan festlegen"</string>
-    <!-- no translation found for battery_saver_turn_on_summary (5552800757174173459) -->
-    <skip />
+    <string name="battery_saver_turn_on_summary" msgid="5552800757174173459">"Akkulaufzeit verlängern"</string>
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Bei vollem Akku ausschalten"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Der Energiesparmodus wird deaktiviert, wenn dein Smartphoneakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"Der Energiesparmodus wird deaktiviert, wenn dein Tabletakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
@@ -2821,7 +2820,7 @@
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Für ein durchgehend aktives VPN ist eine IP-Adresse für den Server und für das DNS erforderlich."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"Es ist keine Netzwerkverbindung verfügbar. Bitte versuche es später noch einmal."</string>
     <string name="vpn_disconnected" msgid="280531508768927471">"Verbindung mit VPN getrennt"</string>
-    <string name="vpn_disconnected_summary" msgid="3082851661207900606">"Keine"</string>
+    <string name="vpn_disconnected_summary" msgid="3082851661207900606">"Kein VPN"</string>
     <string name="vpn_missing_cert" msgid="5357192202207234745">"Ein Zertifikat fehlt. Versuche, das Profil zu ändern."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"System"</string>
     <string name="trusted_credentials_user_tab" msgid="2244732111398939475">"Nutzer"</string>
@@ -2981,6 +2980,8 @@
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="6145184730437907078">"Zur Verbesserung von Sprache und Kommunikation 4G-Dienste verwenden (empfohlen)"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Bevorzugter Netztyp"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (empfohlen)"</string>
+    <string name="mms_message_title" msgid="6068098013612041440">"MMS"</string>
+    <string name="mms_message_summary" msgid="8408985719331988420">"Senden und empfangen, wenn mobile Daten aus sind"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"SIM-Karte für Arbeit"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"Zugriff auf Apps und Inhalte"</string>
     <string name="user_rename" msgid="8523499513614655279">"Umbenennen"</string>
@@ -3070,7 +3071,6 @@
     <string name="search_results_title" msgid="1796252422574886932">"Einstellungen"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"wlan, wi-fi, netzwerkverbindung, internet, kabellos, daten, wifi, wi-fi, w-lan"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="8745178424405564885">"WLAN-Benachrichtigung, WLAN-Benachrichtigung"</string>
-    <string name="keywords_auto_brightness" msgid="2109098908025156362">"Automatische Helligkeit"</string>
     <string name="keywords_vibrate_on_touch" msgid="1494239633254176598">"Vibration abschalten, tippen, Tastatur"</string>
     <string name="keywords_time_format" msgid="5581515674151927461">"24-Stunden-Format verwenden"</string>
     <string name="keywords_storage_files" msgid="7075933058850826819">"Download"</string>
@@ -3131,7 +3131,7 @@
     <string name="keywords_lock_screen_notif" msgid="6716392855813576197">"Sperrbildschirmbenachrichtigung, Benachrichtigungen"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"Gesicht"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"Fingerabdruck, Fingerabdruck hinzufügen"</string>
-    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"display dimmen, touchscreen, akku, intelligente helligkeit, dynamische helligkeit"</string>
+    <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"display dimmen, touchscreen, akku, intelligente helligkeit, dynamische helligkeit, automatische helligkeit"</string>
     <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"display dimmen, ruhemodus, akku, zeitlimit, aufmerksamkeit, display, bildschirm, inaktivität"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"drehen, spiegeln, drehung, hochformat, querformat, ausrichtung, vertikal, horizontal"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"upgrade, android"</string>
@@ -3148,6 +3148,8 @@
     <string name="keywords_ring_vibration" msgid="4652101158979064884">"Haptik, vibrieren, Smartphone, Anruf, Empfindlichkeit, klingeln"</string>
     <string name="keywords_notification_vibration" msgid="31924624421190547">"Haptik, vibrieren, Empfindlichkeit"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"Energiesparmodus, fixiert, nichtflüchtig, Stromsparfunktion, Akku"</string>
+    <!-- no translation found for keywords_battery_saver_schedule (7358789228486231944) -->
+    <skip />
     <string name="default_sound" msgid="8821684447333687810">"Standardton"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Klingeltonlautstärke: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Lautstärke, Vibration, Bitte nicht stören"</string>
@@ -3189,8 +3191,7 @@
       <item quantity="one">1 aktiviert</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Bitte nicht stören"</string>
-    <!-- no translation found for zen_mode_slice_subtitle (1495506059205752083) -->
-    <skip />
+    <string name="zen_mode_slice_subtitle" msgid="1495506059205752083">"Unterbrechungen einschränken"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"\"Bitte nicht stören\" aktivieren"</string>
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Ausnahmen"</string>
     <string name="zen_mode_duration_settings_title" msgid="8471983919324532829">"Standarddauer"</string>
@@ -3266,13 +3267,13 @@
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Aus/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"Aus"</string>
     <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"An"</string>
-    <string name="zen_mode_duration_summary_always_prompt" msgid="5976427426278136178">"Jedes Mal fragen (sofern nicht automatisch aktiviert)"</string>
-    <string name="zen_mode_duration_summary_forever" msgid="3144786357459137066">"Bis zum Ausschalten (sofern nicht automatisch aktiviert)"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="1060823390336822337">
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> Stunden (sofern nicht automatisch aktiviert)</item>
-      <item quantity="one">1 Stunde (sofern nicht automatisch aktiviert)</item>
+    <string name="zen_mode_duration_summary_always_prompt" msgid="3483258992533158479">"Jedes Mal fragen"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="8597777321810802309">"Bis zur Deaktivierung"</string>
+    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3224363976852136871">
+      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> Stunden</item>
+      <item quantity="one">1 Stunde</item>
     </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3959860288930526323">"<xliff:g id="NUM_MINUTES">%d</xliff:g> Minuten (sofern nicht automatisch aktiviert)"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="6238305783533884764">"<xliff:g id="NUM_MINUTES">%d</xliff:g> Minuten"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="6751226506661227581">
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> Zeitpläne können automatisch aktiviert werden</item>
       <item quantity="one">1 Zeitplan kann automatisch aktiviert werden</item>
@@ -3321,17 +3322,13 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Alle der letzten 7 Tage ansehen"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Erweitert"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Geschäftliche Benachrichtigungen"</string>
-    <!-- no translation found for smart_notifications_title (475969117151722852) -->
-    <skip />
-    <!-- no translation found for asst_capability_prioritizer_title (6691908606916292167) -->
-    <skip />
-    <!-- no translation found for asst_capability_prioritizer_summary (3532556835426559362) -->
-    <skip />
-    <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Intelligente Aktionen und Antworten"</string>
-    <!-- no translation found for asst_capabilities_actions_replies_summary (5358499322896238048) -->
-    <skip />
-    <string name="hide_silent_icons_title" msgid="2378514357635207742">"Symbole für lautlose Benachrichtigungen in Statusleiste ausblenden"</string>
-    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Für lautlose Benachrichtigungen werden in der Statusleiste keine Symbole angezeigt"</string>
+    <string name="smart_notifications_title" msgid="475969117151722852">"Intelligente Benachrichtigungen"</string>
+    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Automatische Priorisierung"</string>
+    <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Benachrichtigungen mit niedriger Priorität automatisch auf \"Stumm\" schalten"</string>
+    <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Vorgeschlagene Maßnahmen und Antworten"</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Vorgeschlagene Maßnahmen und Antworten automatisch anzeigen"</string>
+    <string name="hide_silent_icons_title" msgid="3803036978493857276">"Symbole von stummen Benachrichtigungen ausblenden"</string>
+    <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Symbole von stummen Benachrichtigungen werden nicht auf der Statusleiste angezeigt"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Benachrichtigungspunkte zulassen"</string>
     <string name="notification_bubbles_title" msgid="526545466417027926">"Bubbles"</string>
     <string name="notification_bubbles_summary" msgid="5269674863510678257">"Schwebende Verknüpfungen erlauben überall schnellen Zugriff auf App-Inhalte"</string>
@@ -3346,17 +3343,13 @@
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"Nach rechts: schließen, nach links: Menü anzeigen"</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"Nach links: schließen, nach rechts: Menü anzeigen"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Benachrichtigungslicht blinkt"</string>
-    <!-- no translation found for lock_screen_notifications_title (7604704224172951090) -->
-    <skip />
+    <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Sperrbildschirm"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Wenn das Arbeitsprofil gesperrt ist"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Alle Benachrichtigungen anzeigen"</string>
-    <!-- no translation found for lock_screen_notifications_summary_hide (1133085507139112569) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Sensible Inhalte nur im entsperrten Zustand zeigen"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Keine Benachrichtigungen anzeigen"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_message (3143593517597479937) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_interstitial_title (709573564312902481) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_message" msgid="3143593517597479937">"Wie soll der Sperrbildschirm angezeigt werden?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="709573564312902481">"Sperrbildschirm"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Alle geschäftlichen Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"Vertrauliche geschäftliche Inhalte ausblenden"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Wie sollen Profilbenachrichtigungen angezeigt werden, wenn dein Gerät gesperrt ist?"</string>
@@ -3378,30 +3371,27 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Hoch"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Auf Bildschirm aufpoppen"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blockieren"</string>
-    <!-- no translation found for notification_silence_title (8575600650015431622) -->
-    <skip />
-    <!-- no translation found for notification_alert_title (7426286507434650473) -->
-    <skip />
+    <string name="notification_silence_title" msgid="8575600650015431622">"Stumm"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Priorisiert"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Unterbrechungen zulassen"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Die App darf Töne sowie Vibrationen erzeugen und/oder Pop-up-Benachrichtigungen auf dem Bildschirm einblenden"</string>
-    <!-- no translation found for notification_channel_summary_min (2965790706738495761) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low (250062606667099181) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status (1151953801054796200) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_lock (3801118119803089599) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status_lock (3400487706701402136) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (6837975360341956621) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_high (8779797505981599285) -->
-    <skip />
+    <string name="notification_channel_summary_min" msgid="2965790706738495761">"Benachrichtigungen in der Benachrichtigungsleiste auf eine Zeile minimieren"</string>
+    <string name="notification_channel_summary_low" msgid="6402445462723804533">"Immer lautlos. Benachrichtigungen erscheinen in der Benachrichtigungsleiste."</string>
+    <string name="notification_channel_summary_low_status" msgid="6002754076815282625">"Immer lautlos. Benachrichtigungen erscheinen in der Benachrichtigungsleiste und der Statusleiste."</string>
+    <string name="notification_channel_summary_low_lock" msgid="6834375877468977563">"Immer lautlos. Erscheinen in der Benachrichtigungsleiste und auf dem Sperrbildschirm."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="6845350570727515894">"Immer lautlos. Erscheinen in der Benachrichtigungsleiste, Statusleiste und auf dem Sperrbildschirm."</string>
+    <string name="notification_channel_summary_default" msgid="1390343431643455716">"Signal ertönt. Erscheinen in der Benachrichtigungsleiste, Statusleiste und auf dem Sperrbildschirm."</string>
+    <string name="notification_channel_summary_high" msgid="7737315941884569891">"Bei entsperrtem Gerät Benachrichtigungen als Banner oben auf dem Bildschirm anzeigen"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Benachrichtigungen anzeigen"</string>
-    <string name="default_notification_assistant" msgid="7631945224761430146">"Benachrichtigungsassistent"</string>
-    <string name="notifications_sent_daily" msgid="3584506541352710975">"Ungefähr <xliff:g id="NUMBER">%1$s</xliff:g> pro Tag"</string>
-    <string name="notifications_sent_weekly" msgid="1030525736746720584">"Ungefähr <xliff:g id="NUMBER">%1$s</xliff:g> pro Woche"</string>
+    <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptive Benachrichtigungen"</string>
+    <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
+      <item quantity="other">Ungefähr <xliff:g id="NUMBER_1">%d</xliff:g> Benachrichtigungen pro Tag</item>
+      <item quantity="one">Ungefähr <xliff:g id="NUMBER_0">%d</xliff:g> Benachrichtigung pro Tag</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="5096638662520720959">
+      <item quantity="other">Ungefähr <xliff:g id="NUMBER_1">%d</xliff:g> Benachrichtigungen pro Woche</item>
+      <item quantity="one">Ungefähr <xliff:g id="NUMBER_0">%d</xliff:g> Benachrichtigung pro Woche</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="1001964786456700536">"Nie"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Benachrichtigungszugriff"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Zugriff auf Arbeitsprofil-Benachrichtigungen ist blockiert"</string>
@@ -3410,8 +3400,8 @@
       <item quantity="other">%d Apps können Benachrichtigungen lesen</item>
       <item quantity="one">%d App kann Benachrichtigungen lesen</item>
     </plurals>
-    <string name="notification_assistant_title" msgid="4788805096903794353">"Benachrichtigungsassistent"</string>
-    <string name="no_notification_assistant" msgid="3230229194702623108">"Kein Assistent"</string>
+    <string name="notification_assistant_title" msgid="7531256823396529700">"Adaptive Benachrichtigungen"</string>
+    <string name="no_notification_assistant" msgid="2818970196806227480">"Kein Dienst"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Keine installierte App hat Benachrichtigungszugriff angefordert."</string>
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g> Zugriff auf Benachrichtigungen erlauben?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"Bei Aktivierung kann der <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> alle Benachrichtigungen lesen, also auch persönliche Informationen wie Kontaktnamen und eingehende Nachrichten, sowie Benachrichtigungen ändern oder schließen oder in ihnen enthaltene Aktionen auslösen. \n\nZusätzlich wird die App in die Lage versetzt, die \"Bitte nicht stören\"-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
@@ -3467,8 +3457,7 @@
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"App-Benachrichtigungspunkt anzeigen"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\"Bitte nicht stören\" deaktivieren"</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"Diese Benachrichtigungen dürfen auch dann gemeldet werden, wenn \"Bitte nicht stören\" aktiviert ist"</string>
-    <!-- no translation found for app_notification_visibility_override_title (3618860781666494595) -->
-    <skip />
+    <string name="app_notification_visibility_override_title" msgid="3618860781666494595">"Sperrbildschirm"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blockiert"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Wichtig"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensibel"</string>
@@ -3563,7 +3552,7 @@
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"Kontakten"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"markierten Kontakten"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Wiederholte Anrufer"</string>
-    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"Wiederholte Anrufer"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"wiederholten Anrufern"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Wiederholte Anrufer zulassen"</string>
     <string name="zen_mode_calls_summary_one" msgid="1711737896388108388">"Anrufe von <xliff:g id="CALLER_TYPE">%1$s</xliff:g> zulassen"</string>
     <string name="zen_mode_calls_summary_two" msgid="8476861928783654064">"Anrufe von <xliff:g id="CALLER_TYPE">%1$s</xliff:g> und <xliff:g id="CALLERT_TPYE">%2$s</xliff:g> zulassen"</string>
@@ -4562,4 +4551,6 @@
     <string name="wifi_disconnect_button_text" msgid="2032651902928903819">"Trennen"</string>
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Notrufe"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Notrufe über WLAN-Telefonie werden von deinem Mobilfunkanbieter nicht unterstützt.\nDas Gerät wechselt automatisch zu einem Mobilfunknetz, um einen Notruf abzusetzen.\nNotrufe sind nur in Bereichen mit Mobilfunkabdeckung möglich."</string>
+    <!-- no translation found for wifi_calling_summary (513599567573172420) -->
+    <skip />
 </resources>
