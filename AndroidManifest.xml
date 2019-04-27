@@ -1274,6 +1274,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.privacy.PrivacyDashboardFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity android:name="SetFullBackupPassword"
@@ -1627,6 +1629,7 @@
                        android:resource="@string/suggestion_additional_fingerprints" />
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/suggestion_additional_fingerprints_summary" />
+            <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity-alias>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
@@ -3092,7 +3095,7 @@
 
         <activity android:name=".panel.SettingsPanelActivity"
             android:label="@string/settings_panel_title"
-            android:theme="@style/Theme.BottomDialog"
+            android:theme="@style/Theme.Panel"
             android:documentLaunchMode="always"
             android:excludeFromRecents="true"
             android:exported="true">

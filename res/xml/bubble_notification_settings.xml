@@ -18,6 +18,14 @@
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/bubbles_app_toggle_title"
                   android:key="bubble_notification_settings">
+
+        <com.android.settings.widget.VideoPreference
+            android:key="bubbles_illustration"
+            android:title="@string/summary_placeholder"
+            settings:animation="@raw/bubbles"
+            settings:controller="com.android.settings.widget.VideoPreferenceController"
+            android:persistent="false" />
+
         <!-- Notification bubbles -->
         <SwitchPreference
             android:key="global_notification_bubbles"

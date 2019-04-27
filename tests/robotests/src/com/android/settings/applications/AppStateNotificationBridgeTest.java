@@ -398,8 +398,20 @@ public class AppStateNotificationBridgeTest {
                 mContext, sentRarely, R.id.sort_order_frequent_notification).toString())
                 .contains("1");
         assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentRarely, R.id.sort_order_frequent_notification).toString())
+                .contains("notification ");
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentRarely, R.id.sort_order_frequent_notification).toString())
+                .contains("week");
+        assertThat(AppStateNotificationBridge.getSummary(
                 mContext, sentOften, R.id.sort_order_frequent_notification).toString())
                 .contains("8");
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentOften, R.id.sort_order_frequent_notification).toString())
+                .contains("notifications");
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentOften, R.id.sort_order_frequent_notification).toString())
+                .contains("day");
     }
 
     @Test

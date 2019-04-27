@@ -91,6 +91,7 @@ public class ImportancePreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+        holder.itemView.setClickable(false);
 
         TextView textView = (TextView) holder.findViewById(R.id.description);
         mSilenceButton = (Button) holder.findViewById(R.id.silence);

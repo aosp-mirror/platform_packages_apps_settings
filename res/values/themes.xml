@@ -117,6 +117,7 @@
 
     <style name="Theme.AlertDialog.Base" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
+        <item name="android:background">@color/dialog_background</item>
     </style>
 
     <style name="Theme.AlertDialog" parent="Theme.AlertDialog.Base">
@@ -202,7 +203,7 @@
     </style>
 
     <!-- Note that Dialog themes do not set list dividers -->
-    <style name="Theme.BottomDialog" parent="@*android:style/Theme.DeviceDefault.Settings.Dialog">
+    <style name="Theme.Panel" parent="@*android:style/Theme.DeviceDefault.Settings.Dialog">
         <item name="android:windowBackground">@null</item>
         <item name="android:dividerHorizontal">@*android:drawable/list_divider_material</item>
         <item name="android:windowNoTitle">true</item>

@@ -27,6 +27,7 @@ import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.support.test.uiautomator.UiDevice;
 
 import androidx.test.InstrumentationRegistry;
 import androidx.test.filters.SmallTest;
@@ -42,6 +43,7 @@ import java.util.concurrent.TimeUnit;
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class RestrictAppTest {
+    private static final String WM_DISMISS_KEYGUARD_COMMAND = "wm dismiss-keyguard";
     private static final String BATTERY_INTENT = "android.intent.action.POWER_USAGE_SUMMARY";
     private static final String PACKAGE_SETTINGS = "com.android.settings";
     private static final String PACKAGE_SYSTEM_UI = "com.android.systemui";
@@ -50,10 +52,16 @@ public class RestrictAppTest {
 
     private BatteryDatabaseManager mBatteryDatabaseManager;
     private PackageManager mPackageManager;
+    private UiDevice mUiDevice;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         final Context context = InstrumentationRegistry.getTargetContext();
+
+        mUiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        mUiDevice.wakeUp();
+        mUiDevice.executeShellCommand(WM_DISMISS_KEYGUARD_COMMAND);
+
         mPackageManager = context.getPackageManager();
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
         mBatteryDatabaseManager.deleteAllAnomaliesBeforeTimeStamp(System.currentTimeMillis() +
@@ -68,7 +76,7 @@ public class RestrictAppTest {
                 AnomalyDatabaseHelper.State.NEW, System.currentTimeMillis());
 
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        instrumentation.startActivitySync(new Intent(BATTERY_INTENT));
+        instrumentation.startActivitySync(createBatteryIntent());
         onView(withText("Restrict 1 app")).check(matches(isDisplayed()));
     }
 
@@ -83,23 +91,8 @@ public class RestrictAppTest {
                 AnomalyDatabaseHelper.State.NEW, System.currentTimeMillis());
 
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        instrumentation.startActivitySync(new Intent(BATTERY_INTENT));
+        instrumentation.startActivitySync(createBatteryIntent());
         onView(withText("Restrict 2 apps")).check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void batterySettings_hasAutoHandledAnomalies_showAutoHandled() throws
-            PackageManager.NameNotFoundException {
-        mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SETTINGS, 0),
-                PACKAGE_SETTINGS, 1,
-                AnomalyDatabaseHelper.State.AUTO_HANDLED, System.currentTimeMillis());
-        mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SYSTEM_UI, 0),
-                PACKAGE_SYSTEM_UI, 1,
-                AnomalyDatabaseHelper.State.AUTO_HANDLED, System.currentTimeMillis());
-
-        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        instrumentation.startActivitySync(new Intent(BATTERY_INTENT));
-        onView(withText("2 apps recently restricted")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -122,5 +115,12 @@ public class RestrictAppTest {
                 .setPackageName(PACKAGE_SETTINGS)
                 .addAnomalyType(ANOMALY_TYPE)
                 .build());
+    }
+
+    private Intent createBatteryIntent() {
+        final Intent intent = new Intent(BATTERY_INTENT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        return intent;
     }
 }
