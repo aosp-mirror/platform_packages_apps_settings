@@ -88,6 +88,7 @@ public class ConnectedDeviceGroupControllerTest {
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
         when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mContext).when(mDashboardFragment).getContext();
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
 
         mConnectedDeviceGroupController = new ConnectedDeviceGroupController(mContext);
         mConnectedDeviceGroupController.init(mConnectedBluetoothDeviceUpdater,
@@ -153,8 +154,12 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
+    public void getAvailabilityStatus_noBluetoothUsbDockFeature_returnUnSupported() {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_ACCESSORY, false);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_HOST, false);
+        mConnectedDeviceGroupController.init(mConnectedBluetoothDeviceUpdater,
+                mConnectedUsbDeviceUpdater, null);
 
         assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
                 UNSUPPORTED_ON_DEVICE);
@@ -163,8 +168,37 @@ public class ConnectedDeviceGroupControllerTest {
     @Test
     public void getAvailabilityStatus_BluetoothFeature_returnSupported() {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_ACCESSORY, false);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_HOST, false);
+        mConnectedDeviceGroupController.init(mConnectedBluetoothDeviceUpdater,
+                mConnectedUsbDeviceUpdater, null);
 
         assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
                 AVAILABLE_UNSEARCHABLE);
     }
+
+    @Test
+    public void getAvailabilityStatus_haveUsbFeature_returnSupported() {
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_ACCESSORY, false);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_HOST, true);
+        mConnectedDeviceGroupController.init(mConnectedBluetoothDeviceUpdater,
+                mConnectedUsbDeviceUpdater, null);
+
+        assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
+                AVAILABLE_UNSEARCHABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_haveDockFeature_returnSupported() {
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_ACCESSORY, false);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_HOST, false);
+        mConnectedDeviceGroupController.init(mConnectedBluetoothDeviceUpdater,
+                mConnectedUsbDeviceUpdater, mConnectedDockUpdater);
+
+        assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
+                AVAILABLE_UNSEARCHABLE);
+    }
+
 }

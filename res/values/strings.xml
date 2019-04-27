@@ -948,6 +948,8 @@
     <string name="security_settings_face_settings_require_confirmation_details">When authenticating in apps, always require confirmation</string>
     <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_remove_face_data">Remove face data</string>
+    <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
+    <string name="security_settings_face_settings_enroll">Set up face authentication</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer">Your face can be used to unlock your device and access apps.
         <annotation id="url">Learn more</annotation></string>
@@ -2761,6 +2763,8 @@
     <string name="brightness_summary">Adjust the brightness of the screen</string>
     <!-- Sound & display settings screen, setting option name to enable adaptive brightness [CHAR LIMIT=30] -->
     <string name="auto_brightness_title">Adaptive brightness</string>
+    <!-- Summary about the feature adaptive brightness [CHAR LIMIT=NONE] -->
+    <string name="auto_brightness_summary">Screen brightness adjusts to environment</string>
     <!-- Setting option summary when adaptive brightness is on [CHAR LIMIT=NONE] -->
     <string name="auto_brightness_summary_on">On</string>
     <!-- Setting option summary when adaptive brightness is off [CHAR LIMIT=NONE] -->
@@ -7194,8 +7198,6 @@
     <string name="keywords_wifi">wifi, wi-fi, network connection, internet, wireless, data, wi fi</string>
     <!-- Search keyword for "Open Network Notification" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_wifi_notify_open_networks">Wi\u2011Fi notification, wifi notification</string>
-    <!-- Search keyword for "Adaptive brightness" settings. [CHAR_LIMIT=NONE]-->
-    <string name="keywords_auto_brightness">Auto brightness</string>
     <!-- Search keyword for "Vibrate on touch" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_vibrate_on_touch">Stop vibration, tap, keyboard</string>
     <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
@@ -7282,7 +7284,7 @@
     <string name="keywords_fingerprint_settings">fingerprint, add fingerprint</string>
 
     <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
-    <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness</string>
+    <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness, Auto brightness</string>
 
     <!-- Search keywords for adaptive sleep setting [CHAR LIMIT=NONE]-->
     <string name="keywords_display_adaptive_sleep">dim screen, sleep, battery, timeout, attention, display, screen, inactivity</string>
@@ -7808,19 +7810,19 @@
     <string name="asst_capability_prioritizer_title">Automatic Prioritization</string>
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
-    <string name="asst_capability_prioritizer_summary">Automatically de-prioritize less important notifications to the gentle section</string>
+    <string name="asst_capability_prioritizer_summary">Automatically set lower priority notifications to Gentle</string>
 
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
-    <string name="asst_capabilities_actions_replies_title">Smart actions and replies</string>
+    <string name="asst_capabilities_actions_replies_title">Suggested actions and replies</string>
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
-    <string name="asst_capabilities_actions_replies_summary">Automatically add suggested actions and replies to notifications</string>
+    <string name="asst_capabilities_actions_replies_summary">Automatically show suggested actions &amp; replies</string>
 
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
-    <string name="hide_silent_icons_title">Hide silent notification status icons</string>
+    <string name="hide_silent_icons_title">Hide icons from gentle notifications</string>
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=NONE] -->
-    <string name="hide_silent_icons_summary">Hide icons for silent notifications in the status bar</string>
+    <string name="hide_silent_icons_summary">Icons from gentle notifications aren\'t shown in the status bar</string>
 
     <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=5125022693565388760] -->
     <string name="notification_badging_title">Allow notification dots</string>
@@ -7977,33 +7979,38 @@
     <string name="notification_channel_summary_min">In the pull-down shade, collapse notifications to one line</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
-    <string name="notification_channel_summary_low">Gentle notifications will display in pull-down list</string>
+    <string name="notification_channel_summary_low">Always silent. Displays in pull-down shade.</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
-    <string name="notification_channel_summary_low_status">Gentle notifications will display in pull-down list &amp; status bar</string>
+    <string name="notification_channel_summary_low_status">Always silent. Displays in pull-down shade &amp; status bar.</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
-    <string name="notification_channel_summary_low_lock">Gentle notifications will display in pull-down list &amp; on lock screen</string>
+    <string name="notification_channel_summary_low_lock">Always silent. Displays in pull-down shade &amp; on lock screen.</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title: low importance level summary -->
-    <string name="notification_channel_summary_low_status_lock">Gentle notifications will display in pull-down list, status bar &amp; on lock screen</string>
+    <string name="notification_channel_summary_low_status_lock">Always silent. Displays in pull-down shade, status bar &amp; on lock screen.</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title: normal importance level summary -->
-    <string name="notification_channel_summary_default">Prioritized notifications will alert and display in pull-down list, status bar &amp; on lock screen</string>
+    <string name="notification_channel_summary_default">Makes sound and displays in pull-down shade, status bar &amp; on lock screen.</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title: high importance level summary -->
-    <string name="notification_channel_summary_high">When phone is unlocked, show notifications as a banner across top of screen</string>
+    <string name="notification_channel_summary_high">When device is unlocked, show notifications as a banner across the top of the screen</string>
 
     <!-- [CHAR LIMIT=100] Label for on/off toggle -->
     <string name="notification_switch_label">Show notifications</string>
 
     <!-- Default Apps > Default notification assistant -->
-    <string name="default_notification_assistant">Notification assistant</string>
+    <string name="default_notification_assistant">Adaptive Notifications</string>
 
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <string name="notifications_sent_daily">~<xliff:g id="number">%1$s</xliff:g> per day</string>
-    <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <string name="notifications_sent_weekly">~<xliff:g id="number">%1$s</xliff:g> per week</string>
+    <plurals name="notifications_sent_daily">
+        <item quantity="one">~<xliff:g id="number">%d</xliff:g> notification per day</item>
+        <item quantity="other">~<xliff:g id="number">%d</xliff:g> notifications per day</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly">
+        <item quantity="one">~<xliff:g id="number">%d</xliff:g> notification per week</item>
+        <item quantity="other">~<xliff:g id="number">%d</xliff:g> notifications per week</item>
+    </plurals>
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
 
@@ -8025,10 +8032,10 @@
     </plurals>
 
     <!-- Title for Notification Assistant Picker screen [CHAR LIMIT=30]-->
-    <string name="notification_assistant_title">Notification Assistant</string>
+    <string name="notification_assistant_title">Adaptive Notifications</string>
 
     <!-- Label for no NotificationAssistantService [CHAR_LIMIT=NONE] -->
-    <string name="no_notification_assistant">No assistant</string>
+    <string name="no_notification_assistant">None</string>
 
     <!-- String to show in the list of notification listeners, when none is installed -->
     <string name="no_notification_listeners">No installed apps have requested notification access.</string>

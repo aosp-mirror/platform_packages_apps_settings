@@ -151,7 +151,8 @@ public class NotificationChannelSliceTest {
         for (int i = 0; i < rowItems.size(); i++) {
             // Assert the summary text is the same as expectation.
             assertThat(getSummaryFromSliceItem(rowItems.get(i))).isEqualTo(
-                    mContext.getString(R.string.notifications_sent_weekly, CHANNEL_COUNT - i));
+                    mContext.getResources().getQuantityString(R.plurals.notifications_sent_weekly,
+                            CHANNEL_COUNT - i, CHANNEL_COUNT - i));
         }
     }
 

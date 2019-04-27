@@ -61,6 +61,11 @@
             android:key="security_settings_face_delete_faces_container"
             android:selectable="false"
             android:layout="@layout/face_remove_button" />
+
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="security_settings_face_enroll_faces_container"
+            android:selectable="false"
+            android:layout="@layout/face_enroll_button " />
     </PreferenceCategory>
 
     <PreferenceCategory

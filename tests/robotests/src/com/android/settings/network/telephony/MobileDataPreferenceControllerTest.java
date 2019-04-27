@@ -21,7 +21,6 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -29,6 +28,10 @@ import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,10 +42,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSubscriptionManager;
-
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.SwitchPreference;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSubscriptionManager.class)
@@ -94,14 +93,13 @@ public class MobileDataPreferenceControllerTest {
     }
 
     @Test
-    public void isDialogNeeded_disableSingleSim_returnTrue() {
+    public void isDialogNeeded_disableSingleSim_returnFalse() {
         doReturn(true).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(1).when(mTelephonyManager).getSimCount();
 
-        assertThat(mController.isDialogNeeded()).isTrue();
-        assertThat(mController.mDialogType).isEqualTo(MobileDataDialogFragment.TYPE_DISABLE_DIALOG);
+        assertThat(mController.isDialogNeeded()).isFalse();
     }
 
     @Test
@@ -127,7 +125,7 @@ public class MobileDataPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_needDialog_doNothing() {
+    public void onPreferenceChange_singleSim_On_shouldEnableData() {
         doReturn(true).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
@@ -135,11 +133,11 @@ public class MobileDataPreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, true);
 
-        verify(mTelephonyManager, never()).setDataEnabled(true);
+        verify(mTelephonyManager).setDataEnabled(true);
     }
 
     @Test
-    public void onPreferenceChange_notNeedDialog_update() {
+    public void onPreferenceChange_multiSim_On_shouldEnableData() {
         doReturn(true).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
