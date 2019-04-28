@@ -33,6 +33,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Activity which concludes fingerprint enrollment.
@@ -104,6 +105,9 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     protected void onNextButtonClick(View view) {
         updateFingerprintSuggestionEnableState();
         setResult(RESULT_FINISHED);
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            postEnroll();
+        }
         finish();
     }
 
@@ -124,6 +128,16 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
             getPackageManager().setComponentEnabledSetting(
                     componentName, flag, PackageManager.DONT_KILL_APP);
             Log.d(TAG, FINGERPRINT_SUGGESTION_ACTIVITY + " enabled state = " + (enrolled == 1));
+        }
+    }
+
+    private void postEnroll() {
+        final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
+        if (fpm != null) {
+            int result = fpm.postEnroll();
+            if (result < 0) {
+                Log.w(TAG, "postEnroll failed: result = " + result);
+            }
         }
     }
 
