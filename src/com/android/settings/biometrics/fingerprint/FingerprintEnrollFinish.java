@@ -30,6 +30,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -41,6 +42,8 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     private static final String TAG = "FingerprintEnrollFinish";
+    private static final String ACTION_FINGERPRINT_SETTINGS =
+            "android.settings.FINGERPRINT_SETTINGS";
     @VisibleForTesting
     static final int REQUEST_ADD_ANOTHER = 1;
     @VisibleForTesting
@@ -107,6 +110,8 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         setResult(RESULT_FINISHED);
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
             postEnroll();
+        } else {
+            launchFingerprintSettings();
         }
         finish();
     }
@@ -139,6 +144,14 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                 Log.w(TAG, "postEnroll failed: result = " + result);
             }
         }
+    }
+
+    private void launchFingerprintSettings() {
+        final Intent intent = new Intent(ACTION_FINGERPRINT_SETTINGS);
+        intent.setPackage(Utils.SETTINGS_PACKAGE_NAME);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void onAddAnotherButtonClick(View view) {
