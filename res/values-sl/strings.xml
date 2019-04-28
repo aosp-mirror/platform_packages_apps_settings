@@ -406,6 +406,7 @@
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Dotaknite se za nast. preverjanja obraza"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Preverjanje obraza"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Uporabi nastavitev dostopnosti"</string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Prekliči"</string>
@@ -434,6 +435,7 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Vedno zahtevaj potrditev"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="2002651109571928756">"Vedno zahtevaj potrditev pri preverjanju pristnosti v aplikacijah"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Odstrani podatke o obrazu"</string>
+    <string name="security_settings_face_settings_enroll" msgid="8921299174877503544">"Nastavi preverjanje pristnosti z obrazom"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Z obrazom lahko odklenete napravo in dostopate do aplikacij. "<annotation id="url">"Več o tem"</annotation></string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Želite izbrisati podatke o obrazu?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Podatki, ki jih je zabeležilo odklepanje z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona, prijavo v aplikacije in potrjevanje plačil potrebovali kodo PIN, vzorec ali geslo."</string>
@@ -492,12 +494,9 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Tablični računalnik zaščitite z možnostjo zaklepanja zaslona, tako da ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev preverjanja pristnosti z obrazom. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN ali izberite drugo možnost zaklepanja zaslona."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Napravo zaščitite z možnostjo zaklepanja zaslona, tako da je ne bo mogel uporabljati nihče drug, če jo izgubite ali vam jo ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev preverjanja pristnosti z obrazom. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN ali izberite drugo možnost zaklepanja zaslona."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Telefon zaščitite z možnostjo zaklepanja zaslona, tako da ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev preverjanja pristnosti z obrazom. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN ali izberite drugo možnost zaklepanja zaslona."</string>
-    <!-- no translation found for lock_screen_pin_skip_title (8064328201816780457) -->
-    <skip />
-    <!-- no translation found for lock_screen_password_skip_title (4155009417576409182) -->
-    <skip />
-    <!-- no translation found for lock_screen_pattern_skip_title (6467327818577283960) -->
-    <skip />
+    <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Ne želite nastaviti kode PIN?"</string>
+    <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Ne želite nastaviti gesla?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Ne želite nastaviti vzorca?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Nastavi zaklepanje zaslona"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Končano"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ups, to ni tipalo"</string>
@@ -1000,7 +999,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4938294574591503213">"Geslo za Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="4120419278831581613">"Geslo za dostopno točko: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_add_device" msgid="4072206063308645677">"Dodajte napravo"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="8898075663321081592">"Povezavo s tem omrežjem vzpostavite s kodo QR"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="3887335309163999665">"Če želite dodati napravo v to omrežje, uporabite kodo QR"</string>
     <string name="retry" msgid="6472609612090877557">"Poskusi znova"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Skupna raba z drugimi uporabniki naprave"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nespremenjeno)"</string>
@@ -1055,7 +1054,12 @@
       <item quantity="few">%d omrežja</item>
       <item quantity="other">%d omrežij</item>
     </plurals>
-    <!-- no translation found for wifi_saved_passpoint_access_points_summary (8256430439661111672) -->
+    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="8256430439661111672">
+      <item quantity="one">%d naročnina</item>
+      <item quantity="two">%d naročnini</item>
+      <item quantity="few">%d naročnine</item>
+      <item quantity="other">%d naročnin</item>
+    </plurals>
     <!-- no translation found for wifi_saved_all_access_points_summary (149386761654596280) -->
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Dodatne nast. za Wi‑Fi"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
@@ -1227,6 +1231,7 @@
     <string name="brightness_title" msgid="5746272622112982836">"Svetlost"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Prilagoditev svetlosti zaslona"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Prilagodljiva svetlost"</string>
+    <string name="auto_brightness_summary" msgid="5652108419977937800">"Svetlost zaslona se prilagaja okolici"</string>
     <string name="auto_brightness_summary_on" msgid="3519854265558828744">"Vklopljeno"</string>
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Izklopljeno"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Prednostna svetlost je zelo nizka"</string>
@@ -1750,12 +1755,9 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informacije o varnosti"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Nimate podatkovne povezave. Če si želite te informacije ogledati zdaj, obiščite %s v katerem koli računalniku z vzpostavljeno internetno povezavo."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Nalaganje …"</string>
-    <!-- no translation found for confirm_device_credential_pin (5308435093406166355) -->
-    <skip />
-    <!-- no translation found for confirm_device_credential_pattern (1350321840134412900) -->
-    <skip />
-    <!-- no translation found for confirm_device_credential_password (2195705238498478704) -->
-    <skip />
+    <string name="confirm_device_credential_pin" msgid="5308435093406166355">"Uporaba kode PIN"</string>
+    <string name="confirm_device_credential_pattern" msgid="1350321840134412900">"Uporaba vzorca"</string>
+    <string name="confirm_device_credential_password" msgid="2195705238498478704">"Uporaba gesla"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Nastavitev zaklepanja zaslona"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Zaradi varnosti nastavite geslo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Nastavite geslo za prstni odtis"</string>
@@ -2536,8 +2538,7 @@
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"Varčevanje z energijo akumulatorja se vklopi, če je verjetno, da se bo akumulator izpraznil pred naslednjim običajnim polnjenjem"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"Vklopilo se bo pri <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Nastavitev razporeda"</string>
-    <!-- no translation found for battery_saver_turn_on_summary (5552800757174173459) -->
-    <skip />
+    <string name="battery_saver_turn_on_summary" msgid="5552800757174173459">"Podaljšanje časa delovanja akumulatorja"</string>
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Izklop ob polni napolnjenosti"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Varčevanje z energijo akumulatorja se izklopi, ko je telefon napolnjen na <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"Varčevanje z energijo akumulatorja se izklopi, ko je tablični računalnik napolnjen na <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3055,6 +3056,8 @@
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="6145184730437907078">"Uporaba storitev 4G za izboljšanje glasovne in druge komunikacije (priporočeno)"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Prednostna vrsta omrežja"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (priporočeno)"</string>
+    <string name="mms_message_title" msgid="6068098013612041440">"Sporočila MMS"</string>
+    <string name="mms_message_summary" msgid="8408985719331988420">"Pošiljanje in prejemanje, ko je prenos podatkov v mobilnih omrežjih izklopljen"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"Delovna kartica SIM"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"Dostop do aplikacij in vsebine"</string>
     <string name="user_rename" msgid="8523499513614655279">"PREIMENOVANJE"</string>
@@ -3146,7 +3149,6 @@
     <string name="search_results_title" msgid="1796252422574886932">"Nastavitve"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"wifi, wi-fi, omrežna povezava, internet, brezžično, podatki, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="8745178424405564885">"Obvestilo za Wi‑Fi, obvestilo za wifi"</string>
-    <string name="keywords_auto_brightness" msgid="2109098908025156362">"Samodejno prilagajanje svetlosti"</string>
     <string name="keywords_vibrate_on_touch" msgid="1494239633254176598">"Onemogočanje vibriranja, dotik, tipkovnica"</string>
     <string name="keywords_time_format" msgid="5581515674151927461">"Uporaba 24-urne oblike"</string>
     <string name="keywords_storage_files" msgid="7075933058850826819">"Prenos"</string>
@@ -3207,7 +3209,7 @@
     <string name="keywords_lock_screen_notif" msgid="6716392855813576197">"obvestilo na zaklenjenem zaslonu, obvestila"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"obraz"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"prstni odtis, dodajanje prstnega odtisa"</string>
-    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"zatemnitev zaslona, zaslon na dotik, akumulator, pametna svetlost, dinamična svetlost"</string>
+    <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"zatemnitev zaslona, zaslon na dotik, akumulator, pametna svetlost, dinamična svetlost, samodejno prilagajanje svetlosti"</string>
     <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"zatemnitev zaslona, stanje pripravljenosti, akumulator, časovna omejitev, pozor, prikaz, zaslon, nedejavnost"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"zavrteti, obrniti, vrtenje, pokončno, ležeče, postavitev, navpično, vodoravno"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"nadgradnja, android"</string>
@@ -3267,8 +3269,7 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> omogočenih</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Ne moti"</string>
-    <!-- no translation found for zen_mode_slice_subtitle (1495506059205752083) -->
-    <skip />
+    <string name="zen_mode_slice_subtitle" msgid="1495506059205752083">"Omejitev prekinitev"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"Vklop načina »ne moti«"</string>
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Izjeme"</string>
     <string name="zen_mode_duration_settings_title" msgid="8471983919324532829">"Privzeto trajanje"</string>
@@ -3344,15 +3345,15 @@
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Izklopljeno/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"Izklopljeno"</string>
     <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"Vklopljeno"</string>
-    <string name="zen_mode_duration_summary_always_prompt" msgid="5976427426278136178">"Vedno vprašaj (razen če se vklopi samodejno)"</string>
-    <string name="zen_mode_duration_summary_forever" msgid="3144786357459137066">"Dokler ne izklopite (razen če se vklopi samodejno)"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="1060823390336822337">
-      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> ura (razen če se vklopi samodejno)</item>
-      <item quantity="two"><xliff:g id="NUM_HOURS">%d</xliff:g> uri (razen če se vklopi samodejno)</item>
-      <item quantity="few"><xliff:g id="NUM_HOURS">%d</xliff:g> ure (razen če se vklopi samodejno)</item>
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> ur (razen če se vklopi samodejno)</item>
+    <string name="zen_mode_duration_summary_always_prompt" msgid="3483258992533158479">"Vedno vprašaj"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="8597777321810802309">"Dokler ne izklopite"</string>
+    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3224363976852136871">
+      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> ura</item>
+      <item quantity="two"><xliff:g id="NUM_HOURS">%d</xliff:g> uri</item>
+      <item quantity="few"><xliff:g id="NUM_HOURS">%d</xliff:g> ure</item>
+      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> ur</item>
     </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3959860288930526323">"<xliff:g id="NUM_MINUTES">%d</xliff:g> min. (razen če se vklopi samodejno)"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="6238305783533884764">"<xliff:g id="NUM_MINUTES">%d</xliff:g> min"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="6751226506661227581">
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> razpored se lahko samodejno vklopi</item>
       <item quantity="two"><xliff:g id="ON_COUNT">%d</xliff:g> razporeda se lahko samodejno vklopita</item>
@@ -3403,17 +3404,13 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Prikaz vseh za zadnjih 7 dni"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Dodatno"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Obvestila za delovni profil"</string>
-    <!-- no translation found for smart_notifications_title (475969117151722852) -->
-    <skip />
-    <!-- no translation found for asst_capability_prioritizer_title (6691908606916292167) -->
-    <skip />
-    <!-- no translation found for asst_capability_prioritizer_summary (3532556835426559362) -->
-    <skip />
-    <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Pametna dejanja in odgovori"</string>
-    <!-- no translation found for asst_capabilities_actions_replies_summary (5358499322896238048) -->
-    <skip />
-    <string name="hide_silent_icons_title" msgid="2378514357635207742">"Skrij ikone stanja za obvestila z izklopljenim zvokom"</string>
-    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Skrivanje ikon za obvestila z izklopljenim zvokom v vrstici stanja"</string>
+    <string name="smart_notifications_title" msgid="475969117151722852">"Pametna obvestila"</string>
+    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Samodejno določanje prednosti"</string>
+    <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Samodejna nastavitev manj pomembnih obvestil na »Brez zvočnega opozorila«"</string>
+    <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Predlagana dejanja in odgovori"</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Samodejen prikaz predlaganih dejanj in odgovorov"</string>
+    <string name="hide_silent_icons_title" msgid="3803036978493857276">"Skrivanje ikon obvestil brez zvočnega opozorila"</string>
+    <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Ikone obvestil brez zvočnega opozorila niso prikazane v vrstici stanja"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Dovoli obvestilne pike"</string>
     <string name="notification_bubbles_title" msgid="526545466417027926">"Oblački"</string>
     <string name="notification_bubbles_summary" msgid="5269674863510678257">"Hiter dostop do vsebine aplikacij od koder koli z lebdečimi bližnjicami"</string>
@@ -3428,17 +3425,13 @@
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"Povlecite desno za opustitev ali levo za prikaz menija"</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"Povlecite levo za opustitev ali desno za prikaz menija"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Utripajoča lučka"</string>
-    <!-- no translation found for lock_screen_notifications_title (7604704224172951090) -->
-    <skip />
+    <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Na zaklenjenem zaslonu"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Ko je delovni profil zaklenjen"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Pokaži vso vsebino obvestil"</string>
-    <!-- no translation found for lock_screen_notifications_summary_hide (1133085507139112569) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Prikaz občutljive vsebine samo na odklenjenem zas."</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Sploh ne prikazuj obvestil"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_message (3143593517597479937) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_interstitial_title (709573564312902481) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_message" msgid="3143593517597479937">"Kaj želite, da je prikazano na zaklenjenem zaslonu?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="709573564312902481">"Na zaklenjenem zaslonu"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Pokaži vso vsebino obvestil za delovni profil"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"Skrivanje občutljive vsebine za delovni profil"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Kako naj se obvestila o profilu prikazujejo, ko je naprava zaklenjena?"</string>
@@ -3460,30 +3453,31 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Visoka pomembnost"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Prikaz na zaslonu"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blokiranje"</string>
-    <!-- no translation found for notification_silence_title (8575600650015431622) -->
-    <skip />
-    <!-- no translation found for notification_alert_title (7426286507434650473) -->
-    <skip />
+    <string name="notification_silence_title" msgid="8575600650015431622">"Brez zvočnega opozorila"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Prednostno"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Dovoli prekinitve"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Dovoli aplikaciji, da predvaja zvok, vibrira in/ali prikaže obvestila na zaslonu"</string>
-    <!-- no translation found for notification_channel_summary_min (2965790706738495761) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low (250062606667099181) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status (1151953801054796200) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_lock (3801118119803089599) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status_lock (3400487706701402136) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (6837975360341956621) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_high (8779797505981599285) -->
-    <skip />
+    <string name="notification_channel_summary_min" msgid="2965790706738495761">"Na poteznem zaslonu z obvestili so obvestila strnjena v eno vrstico"</string>
+    <string name="notification_channel_summary_low" msgid="6402445462723804533">"Vedno tiho. Prikaz na poteznem zaslonu z obvestili."</string>
+    <string name="notification_channel_summary_low_status" msgid="6002754076815282625">"Vedno tiho. Prikaz na poteznem zaslonu z obvestili in v vrstici stanja."</string>
+    <string name="notification_channel_summary_low_lock" msgid="6834375877468977563">"Vedno tiho. Prikaz na poteznem zaslonu z obvestili in na zaklenjenem zaslonu."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="6845350570727515894">"Vedno tiho. Prikaz na poteznem zaslonu z obvestili, v vrstici stanja in na zaklenjenem zaslonu."</string>
+    <string name="notification_channel_summary_default" msgid="1390343431643455716">"Zvok ter prikaz na poteznem zaslonu z obvestili, v vrstici stanja in na zaklenjenem zaslonu."</string>
+    <string name="notification_channel_summary_high" msgid="7737315941884569891">"Ko je naprava odklenjena, so obvestila prikazana kot pasica na vrhu zaslona"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Pokaži obvestila"</string>
-    <string name="default_notification_assistant" msgid="7631945224761430146">"Pomočnik za obvestila"</string>
-    <string name="notifications_sent_daily" msgid="3584506541352710975">"~<xliff:g id="NUMBER">%1$s</xliff:g> na dan"</string>
-    <string name="notifications_sent_weekly" msgid="1030525736746720584">"~<xliff:g id="NUMBER">%1$s</xliff:g> na teden"</string>
+    <string name="default_notification_assistant" msgid="8441022088918117445">"Prilagodljiva obvestila"</string>
+    <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
+      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestilo na dan</item>
+      <item quantity="two">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestili na dan</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestila na dan</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestil na dan</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="5096638662520720959">
+      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestilo na teden</item>
+      <item quantity="two">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestili na teden</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestila na teden</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestil na teden</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="1001964786456700536">"Nikoli"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Dostop do obvestil"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Dostop do obvestil delovnega profila je blokiran"</string>
@@ -3494,8 +3488,8 @@
       <item quantity="few">%d aplikacije lahko berejo obvestila</item>
       <item quantity="other">%d aplikacij lahko bere obvestila</item>
     </plurals>
-    <string name="notification_assistant_title" msgid="4788805096903794353">"Pomočnik za obvestila"</string>
-    <string name="no_notification_assistant" msgid="3230229194702623108">"Ni pomočnika"</string>
+    <string name="notification_assistant_title" msgid="7531256823396529700">"Prilagodljiva obvestila"</string>
+    <string name="no_notification_assistant" msgid="2818970196806227480">"Brez"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nobena nameščena aplikacija ni zahtevala dostopa do obvestil."</string>
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Želite storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovoliti dostop do obvestil?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> lahko prebere vsa obvestila, vključno z osebnimi podatki, kot so imena stikov in besedilo prejetih sporočil. Prav tako lahko spremeni ali opusti obvestila ali sproži gumbe dejanj v obvestilih. \n\nS tem lahko aplikacija tudi vklopi ali izklopi način »ne moti« in spremeni povezane nastavitve."</string>
@@ -3557,8 +3551,7 @@
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Pokaži obvestilno piko"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Preglasitev načina »Ne moti«"</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"Dovoli prikazovanje teh obvestil tudi, ko je vklopljen način »ne moti«"</string>
-    <!-- no translation found for app_notification_visibility_override_title (3618860781666494595) -->
-    <skip />
+    <string name="app_notification_visibility_override_title" msgid="3618860781666494595">"Na zaklenjenem zaslonu"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokirano"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prednost"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Občutljivo"</string>
@@ -4720,4 +4713,6 @@
     <string name="wifi_disconnect_button_text" msgid="2032651902928903819">"Prekini povezavo"</string>
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Klici v sili"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Vaš operater ne podpira klicev v sili, opravljenih s funkcijo Klicanje prek Wi-Fi-ja.\nNaprava samodejno preklopi na mobilno omrežje, da opravi klic v sili.\nKlici v sili so mogoči samo na območjih, ki so pokrita z mobilnim signalom."</string>
+    <!-- no translation found for wifi_calling_summary (513599567573172420) -->
+    <skip />
 </resources>
