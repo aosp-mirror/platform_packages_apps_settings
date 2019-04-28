@@ -101,16 +101,6 @@ public class SubscriptionUtil {
                 }
             }
         }
-
-        // With some carriers such as Google Fi which provide a sort of virtual service that spans
-        // across multiple underlying networks, we end up with subscription entries for the
-        // underlying networks that need to be hidden from the user in the UI.
-        for (Iterator<SubscriptionInfo> iter = subscriptions.iterator(); iter.hasNext(); ) {
-            SubscriptionInfo info = iter.next();
-            if (TextUtils.isEmpty(info.getMncString())) {
-                iter.remove();
-            }
-        }
         return subscriptions;
     }
 }

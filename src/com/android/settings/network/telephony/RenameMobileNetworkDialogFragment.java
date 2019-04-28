@@ -109,7 +109,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
 
     @VisibleForTesting
     protected void populateView(View view) {
-        mNameView = (EditText) view.findViewById(R.id.edittext);
+        mNameView = view.findViewById(R.id.edittext);
         final SubscriptionInfo info = mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
         if (info == null) {
             Log.w(TAG, "got null SubscriptionInfo for mSubId:" + mSubId);
@@ -124,6 +124,9 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         final TextView operatorName = view.findViewById(R.id.operator_name_value);
         final ServiceState serviceState = mTelephonyManager.getServiceStateForSubscriber(mSubId);
         operatorName.setText(serviceState.getOperatorAlphaLong());
+
+        final TextView phoneTitle = view.findViewById(R.id.number_label);
+        phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
 
         final TextView phoneNumber = view.findViewById(R.id.number_value);
         final String formattedNumber = DeviceInfoUtils.getFormattedPhoneNumber(getContext(), info);

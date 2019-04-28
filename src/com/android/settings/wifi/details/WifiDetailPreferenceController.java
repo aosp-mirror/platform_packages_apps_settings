@@ -441,8 +441,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         if (usingDataUsageHeader(mContext)) {
             mSummaryHeaderController.updateState(mDataUsageSummaryPref);
         } else {
-            mEntityHeaderController.setSummary(mAccessPoint.getSettingsSummary())
-                    .done(mFragment.getActivity(), true /* rebind */);
+            mEntityHeaderController.setSummary(
+                    mAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                            .done(mFragment.getActivity(), true /* rebind */);
         }
     }
 
@@ -1109,6 +1110,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             }
             @Override
             public void onFinish() {
+                if (mFragment == null || mFragment.getActivity() == null) {
+                    Log.d(TAG, "Ignore timeout since activity not exist!");
+                    return;
+                }
                 Log.e(TAG, "Timeout for state:" + mConnectingState);
                 if (mConnectingState == STATE_ENABLE_WIFI) {
                     updateConnectingState(STATE_ENABLE_WIFI_FAILED);

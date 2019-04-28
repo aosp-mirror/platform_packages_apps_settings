@@ -106,7 +106,16 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             if (mLeftButtonIsSkip) {
                 SetupSkipDialog dialog = SetupSkipDialog.newInstance(
                         getActivity().getIntent()
-                                .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
+                                .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
+                        /* isPatternMode= */ false,
+                        mIsAlphaMode,
+                        getActivity().getIntent()
+                                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
+                                        false),
+                        getActivity().getIntent()
+                                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false)
+
+                );
                 dialog.show(getFragmentManager());
                 return;
             }
@@ -129,6 +138,13 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                 return;
             }
             startChooseLockActivity(lock, getActivity());
+        }
+
+        @Override
+        protected int getStageType() {
+            // Return TYPE_NONE to make generic lock screen launch in Setup wizard flow before
+            // fingerprint and face setup.
+            return Stage.TYPE_NONE;
         }
 
         @Override

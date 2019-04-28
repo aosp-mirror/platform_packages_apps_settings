@@ -16,9 +16,6 @@
 
 package com.android.settings.display;
 
-import static com.android.settings.display.DarkUIPreferenceController.DARK_MODE_PREFS;
-import static com.android.settings.display.DarkUIPreferenceController.PREF_DARK_MODE_DIALOG_SEEN;
-
 import android.app.Dialog;
 import android.app.UiModeManager;
 import android.content.Context;
