@@ -41,7 +41,7 @@ import java.util.Set;
 
 public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvider {
 
-    private final Context mContext;
+    protected final Context mContext;
     private final PackageManager mPm;
     private final IPackageManager mPms;
     private final DevicePolicyManager mDpm;
