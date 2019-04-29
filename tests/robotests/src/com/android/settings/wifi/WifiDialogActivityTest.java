@@ -27,6 +27,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
+import com.android.settings.wifi.dpp.WifiDppEnrolleeActivity;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -37,6 +38,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -110,5 +112,24 @@ public class WifiDialogActivityTest {
 
         assertThat(dialog.getContext().getThemeResId())
                 .isEqualTo(R.style.SuwAlertDialogThemeCompat_Light);
+    }
+
+    @Test
+    public void onScan_whenLaunchFromDeferredSetup_shouldApplyLightTheme() {
+        ActivityController<WifiDppEnrolleeActivity> controller = Robolectric.buildActivity(
+                WifiDppEnrolleeActivity.class,
+                new Intent()
+                        .setAction(WifiDppEnrolleeActivity.ACTION_ENROLLEE_QR_CODE_SCANNER)
+                        .putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true)
+                        .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true)
+        );
+        controller.create();
+
+        Intent intent = controller.getIntent();
+        assertThat(intent.getBooleanExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, false)).isTrue();
+        assertThat(intent.getBooleanExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, false)).isTrue();
+
+        assertThat(controller.get().getThemeResId()).
+                isEqualTo(R.style.LightTheme_SettingsBase_SetupWizard);
     }
 }

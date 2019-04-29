@@ -18,7 +18,6 @@ package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +28,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedActivity;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * To provision "this" device with specified Wi-Fi network.
@@ -53,6 +54,10 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            setTheme(R.style.LightTheme_SettingsBase_SetupWizard);
+        }
 
         setContentView(R.layout.wifi_dpp_activity);
         mFragmentManager = getSupportFragmentManager();
