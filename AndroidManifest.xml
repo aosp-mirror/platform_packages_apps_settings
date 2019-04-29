@@ -848,6 +848,23 @@
             <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity>
 
+        <activity android:name=".wallpaper.StyleSuggestionActivity"
+                  android:label="@string/style_suggestion_title"
+                  android:icon="@drawable/ic_theme"
+                  android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.title"
+                       android:resource="@string/style_suggestion_title" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/style_suggestion_summary" />
+            <meta-data android:name="com.android.settings.dismiss"
+                       android:value="3,7,30" />
+            <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
+        </activity>
+
         <activity
             android:name="Settings$ZenModeScheduleRuleSettingsActivity"
             android:exported="true"
