@@ -2558,7 +2558,7 @@
     <string name="wifi_calling_roaming_mode_summary"><xliff:g id="wfc_roaming_preference" example="Wi-Fi">%1$s</xliff:g></string>
     <!-- WFC mode dialog [CHAR LIMIT=45] -->
     <string name="wifi_calling_roaming_mode_dialog_title">Roaming preference</string>
-    <string-array name="wifi_calling_mode_choices">
+    <string-array name="wifi_calling_mode_choices" translatable="false">
         <item>@*android:string/wfc_mode_wifi_preferred_summary</item>
         <item>@*android:string/wfc_mode_cellular_preferred_summary</item>
         <item>@*android:string/wfc_mode_wifi_only_summary</item>
@@ -2573,7 +2573,7 @@
         <item>"1"</item>
         <item>"0"</item>
     </string-array>
-    <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <string-array name="wifi_calling_mode_choices_without_wifi_only" translatable="false">
         <item>@*android:string/wfc_mode_wifi_preferred_summary</item>
         <item>@*android:string/wfc_mode_cellular_preferred_summary</item>
     </string-array>
