@@ -20,9 +20,14 @@ import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpd
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
+import android.provider.Settings.Global;
 import android.text.format.Formatter;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -101,6 +106,13 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @VisibleForTesting
     BatteryTipPreferenceController mBatteryTipPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
+
+    private final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            restartBatteryInfoLoader();
+        }
+    };
 
     @VisibleForTesting
     LoaderManager.LoaderCallbacks<BatteryInfo> mBatteryInfoLoaderCallbacks =
@@ -188,6 +200,21 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
                 }
             };
+
+    @Override
+    public void onStop() {
+        getContentResolver().unregisterContentObserver(mSettingsObserver);
+        super.onStop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getContentResolver().registerContentObserver(
+                Global.getUriFor(Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
+                false,
+                mSettingsObserver);
+    }
 
     @Override
     public void onAttach(Context context) {
