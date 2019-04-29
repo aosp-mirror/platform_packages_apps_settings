@@ -262,6 +262,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         switch (item.getItemId()) {
             case MENU_STATS_TYPE:
                 if (mStatsType == BatteryStats.STATS_SINCE_CHARGED) {
+                    // TODO: STATS_SINCE_UNPLUGGED is deprecated in Q, so this accomplishes nothing,
+                    // but mStatsType doesn't seem to be hooked up to anything anyway.
                     mStatsType = BatteryStats.STATS_SINCE_UNPLUGGED;
                 } else {
                     mStatsType = BatteryStats.STATS_SINCE_CHARGED;
