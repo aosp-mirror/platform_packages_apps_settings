@@ -54,13 +54,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
         if (mAppRow == null) {
             return false;
         }
-        if (mChannel != null) {
-            return isChannelBlockable();
-        } else if (mChannelGroup != null) {
-            return isChannelGroupBlockable();
-        } else {
-            return !mAppRow.systemApp || (mAppRow.systemApp && mAppRow.banned);
-        }
+        return true;
     }
 
     public void updateState(Preference preference) {
@@ -77,6 +71,19 @@ public class BlockPreferenceController extends NotificationPreferenceController
                 // an exception is thrown if you try to add the listener twice
             }
             bar.setDisabledByAdmin(mAdmin);
+
+            if (mChannel != null && !isChannelBlockable()) {
+                bar.setEnabled(false);
+            }
+
+            if (mChannelGroup != null && !isChannelGroupBlockable()) {
+                bar.setEnabled(false);
+            }
+
+            if (mChannel == null && mAppRow.systemApp
+                    && (!mAppRow.banned || mAppRow.lockedImportance)) {
+                bar.setEnabled(false);
+            }
 
             if (mChannel != null) {
                 bar.setChecked(!mAppRow.banned

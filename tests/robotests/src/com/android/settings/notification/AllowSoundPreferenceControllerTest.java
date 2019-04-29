@@ -139,12 +139,11 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notBlockable() {
-        String lockedId = "locked";
+    public void testUpdateState_notBlockable_oem() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = lockedId;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn(lockedId);
+        when(channel.getId()).thenReturn("");
+        when(channel.isImportanceLockedByOEM()).thenReturn(true);
         mController.onResume(appRow, channel, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
