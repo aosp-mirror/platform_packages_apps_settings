@@ -50,7 +50,7 @@ import java.util.concurrent.TimeoutException;
 public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 
     @VisibleForTesting
-    static final int DEFAULT_CARD_COUNT = 4;
+    static final int DEFAULT_CARD_COUNT = 2;
     static final int CARD_CONTENT_LOADER_ID = 1;
 
     private static final String TAG = "ContextualCardLoader";
@@ -141,42 +141,19 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
             }
         }
 
-        try {
-            // The maximum cards are four small cards OR
-            // one large card with two small cards OR
-            // two large cards
-            if (visibleCards.size() <= 2 || getNumberOfLargeCard(visibleCards) == 0) {
-                // four small cards
-                return visibleCards;
-            }
+        if (!CardContentProvider.DELETE_CARD_URI.equals(mNotifyUri)) {
+            final MetricsFeatureProvider metricsFeatureProvider =
+                    FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
 
-            if (visibleCards.size() == DEFAULT_CARD_COUNT) {
-                hiddenCards.add(visibleCards.remove(visibleCards.size() - 1));
-            }
+            metricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW,
+                    ContextualCardLogUtils.buildCardListLog(visibleCards));
 
-            if (getNumberOfLargeCard(visibleCards) == 1) {
-                // One large card with two small cards
-                return visibleCards;
-            }
-
-            hiddenCards.add(visibleCards.remove(visibleCards.size() - 1));
-
-            // Two large cards
-            return visibleCards;
-        } finally {
-            if (!CardContentProvider.DELETE_CARD_URI.equals(mNotifyUri)) {
-                final MetricsFeatureProvider metricsFeatureProvider =
-                        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
-
-                metricsFeatureProvider.action(mContext,
-                        SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW,
-                        ContextualCardLogUtils.buildCardListLog(visibleCards));
-
-                metricsFeatureProvider.action(mContext,
-                        SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW,
-                        ContextualCardLogUtils.buildCardListLog(hiddenCards));
-            }
+            metricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW,
+                    ContextualCardLogUtils.buildCardListLog(hiddenCards));
         }
+        return visibleCards;
     }
 
     @VisibleForTesting
@@ -206,12 +183,6 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
             }
         }
         return cards;
-    }
-
-    private int getNumberOfLargeCard(List<ContextualCard> cards) {
-        return (int) cards.stream()
-                .filter(card -> isLargeCard(card))
-                .count();
     }
 
     private boolean isLargeCard(ContextualCard card) {
