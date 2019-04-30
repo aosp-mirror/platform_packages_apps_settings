@@ -30,6 +30,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.ArrayMap;
+import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
@@ -112,9 +113,12 @@ public class BatteryFixSlice implements CustomSliceable {
                 continue;
             }
             final Drawable drawable = mContext.getDrawable(batteryTip.getIconId());
-            drawable.setColorFilter(new PorterDuffColorFilter(
-                    mContext.getResources().getColor(batteryTip.getIconTintColorId()),
-                    PorterDuff.Mode.SRC_IN));
+            final int iconTintColorId = batteryTip.getIconTintColorId();
+            if (iconTintColorId != View.NO_ID) {
+                drawable.setColorFilter(new PorterDuffColorFilter(
+                        mContext.getResources().getColor(iconTintColorId),
+                        PorterDuff.Mode.SRC_IN));
+            }
 
             final IconCompat icon = Utils.createIconWithDrawable(drawable);
             final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(),
