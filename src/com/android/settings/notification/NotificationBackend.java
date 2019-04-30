@@ -21,6 +21,7 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.role.RoleManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.content.ComponentName;
@@ -86,14 +87,22 @@ public class NotificationBackend {
         return !systemApp || (systemApp && blocked);
     }
 
-    public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
+    public AppRow loadAppRow(Context context, PackageManager pm,
+            RoleManager roleManager, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
-        recordCanBeBlocked(context, pm, app, row);
+        recordCanBeBlocked(context, pm, roleManager, app, row);
         return row;
     }
 
-    void recordCanBeBlocked(Context context, PackageManager pm, PackageInfo app, AppRow row) {
+    void recordCanBeBlocked(Context context, PackageManager pm, RoleManager rm, PackageInfo app,
+            AppRow row) {
         row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
+        List<String> roles = rm.getHeldRolesFromController(app.packageName);
+        if (roles.contains(RoleManager.ROLE_SMS)
+                || roles.contains(RoleManager.ROLE_DIALER)
+                || roles.contains(RoleManager.ROLE_EMERGENCY)) {
+            row.systemApp = true;
+        }
         final String[] nonBlockablePkgs = context.getResources().getStringArray(
                 com.android.internal.R.array.config_nonBlockableNotificationPackages);
         markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
@@ -108,10 +117,8 @@ public class NotificationBackend {
                 if (pkg == null) {
                     continue;
                 } else if (pkg.contains(":")) {
-                    // Interpret as channel; lock only this channel for this app.
-                    if (packageName.equals(pkg.split(":", 2)[0])) {
-                        row.lockedChannelId = pkg.split(":", 2 )[1];
-                    }
+                    // handled by NotificationChannel.isImportanceLockedByOEM()
+                    continue;
                 } else if (packageName.equals(nonBlockablePkgs[i])) {
                     row.systemApp = row.lockedImportance = true;
                 }
@@ -123,8 +130,9 @@ public class NotificationBackend {
         try {
             PackageInfo info = context.getPackageManager().getPackageInfo(
                     app.packageName, PackageManager.GET_SIGNATURES);
+            RoleManager rm = context.getSystemService(RoleManager.class);
             final AppRow row = new AppRow();
-            recordCanBeBlocked(context,  context.getPackageManager(), info, row);
+            recordCanBeBlocked(context, context.getPackageManager(), rm, info, row);
             return row.systemApp;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -491,7 +499,6 @@ public class NotificationBackend {
         public boolean first;  // first app in section
         public boolean systemApp;
         public boolean lockedImportance;
-        public String lockedChannelId;
         public boolean showBadge;
         public boolean allowBubbles;
         public int userId;

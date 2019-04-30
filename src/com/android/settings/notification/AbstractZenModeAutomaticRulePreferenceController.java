@@ -123,11 +123,14 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
             return new ComponentName(ci.packageName, ci.name);
         }
         // old service backed rule
-        final String configurationActivity =
-                ci.metaData.getString(ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY);
-        if (configurationActivity != null) {
-            return ComponentName.unflattenFromString(configurationActivity);
+        if (ci.metaData != null) {
+            final String configurationActivity = ci.metaData.getString(
+                    ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY);
+            if (configurationActivity != null) {
+                return ComponentName.unflattenFromString(configurationActivity);
+            }
         }
+
         return null;
     }
 
