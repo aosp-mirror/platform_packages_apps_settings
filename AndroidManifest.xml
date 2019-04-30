@@ -436,6 +436,17 @@
                 android:value="com.android.settings.biometrics.face.FaceSettings" />
         </activity>
 
+        <activity android:name="Settings$FingerprintSettingsActivity"
+                  android:label="@string/security_settings_fingerprint_preference_title"
+                  android:icon="@drawable/ic_fingerprint_header">
+            <intent-filter>
+                <action android:name="android.settings.FINGERPRINT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment" />
+        </activity>
+
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:label="@string/device_picker"
                 android:configChanges="orientation|keyboardHidden|screenSize"

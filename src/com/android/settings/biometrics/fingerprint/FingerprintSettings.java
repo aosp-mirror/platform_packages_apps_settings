@@ -276,6 +276,9 @@ public class FingerprintSettings extends SubSettings {
             Activity activity = getActivity();
             mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
 
+            mToken = getIntent().getByteArrayExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+
             mAuthenticateSidecar = (FingerprintAuthenticateSidecar)
                     getFragmentManager().findFragmentByTag(TAG_AUTHENTICATE_SIDECAR);
             if (mAuthenticateSidecar == null) {

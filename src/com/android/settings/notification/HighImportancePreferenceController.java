@@ -62,7 +62,7 @@ public class HighImportancePreferenceController extends NotificationPreferenceCo
     @Override
     public void updateState(Preference preference) {
         if (mAppRow != null && mChannel != null) {
-            preference.setEnabled(mAdmin == null && isChannelBlockable());
+            preference.setEnabled(mAdmin == null && !mChannel.isImportanceLockedByOEM());
 
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setChecked(mChannel.getImportance() >= IMPORTANCE_HIGH);
