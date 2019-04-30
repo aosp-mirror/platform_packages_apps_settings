@@ -519,11 +519,21 @@ public class WifiDetailPreferenceControllerTest {
     public void entityHeader_shouldHaveSummarySet() {
         setUpForConnectedNetwork();
         String summary = "summary";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
 
         displayAndResume();
 
         verify(mockHeaderController).setSummary(summary);
+    }
+
+    @Test
+    public void entityHeader_shouldConvertSavedAsDisconnected() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        verify(mockAccessPoint, times(1)).getSettingsSummary(true /*convertSavedAsDisconnected*/);
     }
 
     @Test
@@ -950,7 +960,8 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(new NetworkCapabilities(nc));
 
         String summary = "Connected, no Internet";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
 
         InOrder inOrder = inOrder(mockHeaderController);
         displayAndResume();
@@ -959,7 +970,8 @@ public class WifiDetailPreferenceControllerTest {
         // Check that an irrelevant capability update does not update the access point summary, as
         // doing so could cause unnecessary jank...
         summary = "Connected";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
         updateNetworkCapabilities(nc);
         inOrder.verify(mockHeaderController, never()).setSummary(any(CharSequence.class));
 
@@ -969,7 +981,8 @@ public class WifiDetailPreferenceControllerTest {
         inOrder.verify(mockHeaderController).setSummary(summary);
 
         summary = "Connected, no Internet";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
 
         // Another irrelevant update won't cause the UI to refresh...
         updateNetworkCapabilities(nc);
@@ -982,7 +995,8 @@ public class WifiDetailPreferenceControllerTest {
 
         // UI will be refreshed when device connects to a partial connectivity network.
         summary = "Limited connection";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
         nc.addCapability(NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY);
         updateNetworkCapabilities(nc);
         inOrder.verify(mockHeaderController).setSummary(summary);
