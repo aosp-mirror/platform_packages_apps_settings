@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link SliceBackgroundWorker} for Wi-Fi, used by WifiSlice.
+ * {@link SliceBackgroundWorker} for Wi-Fi, used by {@link WifiSlice}.
  */
 public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implements
         WifiTracker.WifiListener {
@@ -84,7 +84,7 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
     protected void onSliceUnpinned() {
         mWifiTracker.onStop();
         unregisterNetworkCallback();
-        clearClickedWifi();
+        clearClickedWifiOnSliceUnpinned();
     }
 
     @Override
@@ -157,6 +157,14 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
         return !TextUtils.isEmpty(ssid) && TextUtils.equals(ssid, sClickedWifiSsid);
     }
 
+    protected void clearClickedWifiOnSliceUnpinned() {
+        clearClickedWifi();
+    }
+
+    protected boolean isSessionValid() {
+        return true;
+    }
+
     public void registerNetworkCallback(Network wifiNetwork) {
         if (wifiNetwork == null) {
             return;
@@ -224,12 +232,13 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
 
             // Automatically start captive portal
             if (!prevIsCaptivePortal && mIsCaptivePortal
-                    && isWifiClicked(mWifiTracker.getManager().getConnectionInfo())) {
+                    && isWifiClicked(mWifiTracker.getManager().getConnectionInfo())
+                    && isSessionValid()) {
                 final Intent intent = new Intent(mContext, ConnectToWifiHandler.class)
                         .putExtra(ConnectivityManager.EXTRA_NETWORK, network)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                // Starting activity in the system process needs to specify a user
-                mContext.startActivityAsUser(intent, UserHandle.CURRENT);
+                        .addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+                // Sending a broadcast in the system process needs to specify a user
+                mContext.sendBroadcastAsUser(intent, UserHandle.CURRENT);
             }
         }
 

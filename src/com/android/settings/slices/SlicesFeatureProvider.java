@@ -18,9 +18,9 @@ public interface SlicesFeatureProvider {
     /**
      * Starts a new UI session for the purpose of using Slices.
      *
-     * A UI session is defined as an duration of time when user stays in a UI screen. Screen
-     * rotation does not break the continuation of session, going to a sub-page and coming out does
-     * not break the continuation either. Leaving the page and coming back breaks it.
+     * A UI session is defined as a duration of time when user stays in a UI screen. Screen rotation
+     * does not break the continuation of session, going to a sub-page and coming out does not break
+     * the continuation either. Leaving the page and coming back breaks it.
      */
     void newUiSession();
 
