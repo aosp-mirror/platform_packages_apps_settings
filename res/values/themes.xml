@@ -211,4 +211,25 @@
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     </style>
 
+    <!-- This light theme for a window that can be applied to show light theme in setupwizard flow,
+         regardless of whether system theme changed to dark or light theme. WARNING: your settings
+         activity shows in setupwizard flow, but doesn't use setupwizard theme. This theme must be
+         set to ensure settings activity always shows light theme in setupwizard flow. -->
+    <style name="LightTheme.SettingsBase.SetupWizard" parent="@android:style/Theme.DeviceDefault">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarDividerColor">@*android:color/navigation_bar_divider_device_default_settings</item>
+
+        <item name="android:colorPrimary">@*android:color/primary_device_default_settings_light</item>
+        <item name="android:colorPrimaryDark">@*android:color/primary_dark_device_default_settings_light</item>
+        <item name="android:colorBackground">@*android:color/background_device_default_light</item>
+        <item name="android:colorAccent">@*android:color/accent_device_default_light</item>
+
+        <item name="android:listDivider">@*android:color/list_divider_color_light</item>
+
+        <item name="android:textColorPrimary">@*android:color/primary_text_light</item>
+        <item name="android:textColorSecondary">@*android:color/secondary_text_light</item>
+    </style>
+
 </resources>
