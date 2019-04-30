@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -107,7 +108,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     BatteryTipPreferenceController mBatteryTipPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
-    private final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
+    @VisibleForTesting
+    final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             restartBatteryInfoLoader();
@@ -202,21 +204,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
             };
 
     @Override
-    public void onStop() {
-        getContentResolver().unregisterContentObserver(mSettingsObserver);
-        super.onStop();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getContentResolver().registerContentObserver(
-                Global.getUriFor(Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
-                false,
-                mSettingsObserver);
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         final SettingsActivity activity = (SettingsActivity) getActivity();
@@ -249,6 +236,21 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         restartBatteryInfoLoader();
         mBatteryTipPreferenceController.restoreInstanceState(icicle);
         updateBatteryTipFlag(icicle);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getContentResolver().registerContentObserver(
+                Global.getUriFor(Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
+                false,
+                mSettingsObserver);
+    }
+
+    @Override
+    public void onPause() {
+        getContentResolver().unregisterContentObserver(mSettingsObserver);
+        super.onPause();
     }
 
     @Override
