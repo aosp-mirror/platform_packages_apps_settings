@@ -214,7 +214,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
                     .setSourceMetricsCategory(
                             SettingsEnums.MANAGE_APPLICATIONS_NOTIFICATIONS)
                     .toIntent());
-            pref.setEnabled(mNotificationBackend.isBlockable(mContext, appEntry.info));
+            pref.setSwitchEnabled(mNotificationBackend.isBlockable(mContext, appEntry.info));
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean blocked = !(Boolean) newValue;
                 mNotificationBackend.setNotificationsEnabledForPackage(
