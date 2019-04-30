@@ -50,14 +50,6 @@ public class BackupSettingsHelper {
         mContext = context;
     }
 
-    public boolean showBackupSettingsForUser() {
-        // For profiles, we want them to be included in the profile select dialog even if
-        // backup is not activated.
-        // For other users, enable/disable backup settings depending on whether backup is activated
-        // for the user.
-        return UserManager.get(mContext).isManagedProfile() || isBackupServiceActive();
-    }
-
     /**
      * If there is only one profile, show whether the backup is on or off.
      * Otherwise, show nothing.
