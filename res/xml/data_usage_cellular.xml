@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="data_usage_cellular_screen">
 
     <com.android.settings.datausage.TemplatePreferenceCategory
@@ -24,7 +25,8 @@
 
         <com.android.settings.datausage.CellDataPreference
             android:key="data_usage_enable"
-            android:title="@string/data_usage_enable_mobile" />
+            android:title="@string/data_usage_enable_mobile"
+            settings:searchable="false" />
 
         <com.android.settings.datausage.DataUsagePreference
             android:key="cellular_data_usage"
