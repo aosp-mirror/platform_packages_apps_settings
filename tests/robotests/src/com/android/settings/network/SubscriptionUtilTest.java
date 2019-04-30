@@ -187,4 +187,9 @@ public class SubscriptionUtilTest {
         assertThat(subs).isNotNull();
         assertThat(subs).hasSize(2);
     }
+
+    @Test
+    public void isInactiveInsertedPSim_nullSubInfo_doesNotCrash() {
+        assertThat(SubscriptionUtil.isInactiveInsertedPSim(null)).isFalse();
+    }
 }
