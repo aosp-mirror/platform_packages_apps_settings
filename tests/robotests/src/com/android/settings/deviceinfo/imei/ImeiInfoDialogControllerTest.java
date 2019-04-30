@@ -28,12 +28,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import org.junit.Before;
@@ -43,6 +45,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowSubscriptionManager;
+import org.robolectric.shadows.ShadowTelephonyManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
@@ -53,6 +58,8 @@ public class ImeiInfoDialogControllerTest {
     private static final String IMEI_NUMBER = "2341982751254";
     private static final String MIN_NUMBER = "123417851315";
     private static final String IMEI_SV_NUMBER = "12";
+    private static final int SLOT_ID = 0;
+    private static final int SUB_ID = 0;
 
     @Mock
     private ImeiInfoDialogFragment mDialog;
@@ -68,16 +75,30 @@ public class ImeiInfoDialogControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
+        final ShadowSubscriptionManager ssm = Shadow.extract(mContext.getSystemService(
+                SubscriptionManager.class));
+        ssm.setActiveSubscriptionInfos(mSubscriptionInfo);
+        when(mSubscriptionInfo.getSubscriptionId()).thenReturn(SUB_ID);
+        final ShadowTelephonyManager stm = Shadow.extract(mContext.getSystemService(
+                TelephonyManager.class));
+        stm.setTelephonyManagerForSubscriptionId(SUB_ID, mTelephonyManager);
         when(mDialog.getContext()).thenReturn(mContext);
-        mController = spy(new ImeiInfoDialogController(mDialog, 0 /* phone id */));
-        ReflectionHelpers.setField(mController, "mSubscriptionInfo", mSubscriptionInfo);
+
+        mController = spy(new ImeiInfoDialogController(mDialog, SLOT_ID));
 
         doReturn(PRL_VERSION).when(mController).getCdmaPrlVersion();
         doReturn(MEID_NUMBER).when(mController).getMeid();
         when(mTelephonyManager.getCdmaMin(anyInt())).thenReturn(MIN_NUMBER);
         when(mTelephonyManager.getDeviceSoftwareVersion(anyInt())).thenReturn(IMEI_SV_NUMBER);
         when(mTelephonyManager.getImei(anyInt())).thenReturn(IMEI_NUMBER);
+    }
+
+    @Test
+    public void populateImeiInfo_invalidSlot_shouldSetNothing() {
+        mController = spy(new ImeiInfoDialogController(mDialog, SLOT_ID + 1));
+
+        mController.populateImeiInfo();
+        verify(mDialog, never()).setText(anyInt(), any());
     }
 
     @Test
