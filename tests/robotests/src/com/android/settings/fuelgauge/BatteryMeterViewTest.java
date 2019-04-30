@@ -43,6 +43,8 @@ public class BatteryMeterViewTest {
     private ColorFilter mErrorColorFilter;
     @Mock
     private ColorFilter mAccentColorFilter;
+    @Mock
+    private ColorFilter mForegroundColorFilter;
     private Context mContext;
     private BatteryMeterView mBatteryMeterView;
     private BatteryMeterView.BatteryMeterDrawable mDrawable;
@@ -58,6 +60,7 @@ public class BatteryMeterViewTest {
         mBatteryMeterView.mDrawable = mDrawable;
         mBatteryMeterView.mAccentColorFilter = mAccentColorFilter;
         mBatteryMeterView.mErrorColorFilter = mErrorColorFilter;
+        mBatteryMeterView.mForegroundColorFilter = mForegroundColorFilter;
 
         when(mDrawable.getCriticalLevel()).thenReturn(BATTERY_CRITICAL_LEVEL);
     }
@@ -88,5 +91,6 @@ public class BatteryMeterViewTest {
         mBatteryMeterView.setPowerSave(true);
 
         assertThat(mBatteryMeterView.getPowerSave()).isEqualTo(true);
+        verify(mDrawable).setColorFilter(mForegroundColorFilter);
     }
 }
