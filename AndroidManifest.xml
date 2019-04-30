@@ -1474,8 +1474,7 @@
 
         <activity
             android:name="Settings$TextToSpeechSettingsActivity"
-            android:label="@string/tts_settings"
-            android:parentActivityName="Settings">
+            android:label="@string/tts_settings">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.TTS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
