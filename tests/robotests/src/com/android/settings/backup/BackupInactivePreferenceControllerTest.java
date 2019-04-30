@@ -54,18 +54,18 @@ public class BackupInactivePreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_isnotInvisibleKey_showBackup_shouldBeAvailable() {
+    public void getAvailabilityStatus_isnotInvisibleKey_backupActive_shouldBeAvailable() {
         ShadowPrivacySettingsUtils.setIsInvisibleKey(false);
-        ShadowBackupSettingsHelper.showBackupSettingsForUser = true;
+        ShadowBackupSettingsHelper.isBackupServiceActive = true;
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_isnotInvisibleKey_dontShowBackup_shouldBeUnsearchable() {
+    public void getAvailabilityStatus_isnotInvisibleKey_backupNotActive_shouldBeUnsearchable() {
         ShadowPrivacySettingsUtils.setIsInvisibleKey(false);
-        ShadowBackupSettingsHelper.showBackupSettingsForUser = false;
+        ShadowBackupSettingsHelper.isBackupServiceActive = false;
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
@@ -74,7 +74,7 @@ public class BackupInactivePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_isInvisibleKey_shouldBeDisabledUnsupported() {
         ShadowPrivacySettingsUtils.setIsInvisibleKey(true);
-        ShadowBackupSettingsHelper.showBackupSettingsForUser = true;
+        ShadowBackupSettingsHelper.isBackupServiceActive = true;
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
