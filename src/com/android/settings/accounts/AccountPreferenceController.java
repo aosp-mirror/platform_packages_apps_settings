@@ -351,7 +351,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         RestrictedPreference preference =
             new RestrictedPreference(mParent.getPreferenceManager().getContext());
         preference.setTitle(R.string.add_account_label);
-        preference.setIcon(R.drawable.ic_menu_add);
+        preference.setIcon(R.drawable.ic_add_24dp);
         preference.setOnPreferenceClickListener(this);
         preference.setOrder(ORDER_NEXT_TO_NEXT_TO_LAST);
         return preference;

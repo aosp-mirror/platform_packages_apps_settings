@@ -73,7 +73,7 @@ public class BluetoothPairingPreferenceControllerTest {
         Preference pref = mController.createBluetoothPairingPreference(ORDER);
 
         assertThat(pref.getKey()).isEqualTo(BluetoothPairingPreferenceController.KEY_PAIRING);
-        DrawableTestHelper.assertDrawableResId(pref.getIcon(), R.drawable.ic_menu_add);
+        DrawableTestHelper.assertDrawableResId(pref.getIcon(), R.drawable.ic_add_24dp);
         assertThat(pref.getOrder()).isEqualTo(ORDER);
         assertThat(pref.getTitle())
                 .isEqualTo(mContext.getString(R.string.bluetooth_pairing_pref_title));
