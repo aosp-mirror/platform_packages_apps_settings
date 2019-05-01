@@ -30,9 +30,11 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Activity which concludes fingerprint enrollment.
@@ -40,6 +42,8 @@ import com.google.android.setupcompat.template.FooterButton;
 public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     private static final String TAG = "FingerprintEnrollFinish";
+    private static final String ACTION_FINGERPRINT_SETTINGS =
+            "android.settings.FINGERPRINT_SETTINGS";
     @VisibleForTesting
     static final int REQUEST_ADD_ANOTHER = 1;
     @VisibleForTesting
@@ -104,6 +108,11 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     protected void onNextButtonClick(View view) {
         updateFingerprintSuggestionEnableState();
         setResult(RESULT_FINISHED);
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            postEnroll();
+        } else {
+            launchFingerprintSettings();
+        }
         finish();
     }
 
@@ -125,6 +134,24 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                     componentName, flag, PackageManager.DONT_KILL_APP);
             Log.d(TAG, FINGERPRINT_SUGGESTION_ACTIVITY + " enabled state = " + (enrolled == 1));
         }
+    }
+
+    private void postEnroll() {
+        final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
+        if (fpm != null) {
+            int result = fpm.postEnroll();
+            if (result < 0) {
+                Log.w(TAG, "postEnroll failed: result = " + result);
+            }
+        }
+    }
+
+    private void launchFingerprintSettings() {
+        final Intent intent = new Intent(ACTION_FINGERPRINT_SETTINGS);
+        intent.setPackage(Utils.SETTINGS_PACKAGE_NAME);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void onAddAnotherButtonClick(View view) {
