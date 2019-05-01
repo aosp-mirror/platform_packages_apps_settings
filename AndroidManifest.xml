@@ -102,13 +102,15 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 
+    <protected-broadcast android:name="com.android.settings.DELETE_SIM_PROFILE_RESULT"/>
+
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
             android:theme="@style/Theme.Settings"
             android:hardwareAccelerated="true"
             android:requiredForAllUsers="true"
             android:supportsRtl="true"
-            android:allowBackup="false"
+            android:backupAgent="com.android.settings.backup.SettingsBackupHelper"
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
@@ -1474,8 +1476,7 @@
 
         <activity
             android:name="Settings$TextToSpeechSettingsActivity"
-            android:label="@string/tts_settings"
-            android:parentActivityName="Settings">
+            android:label="@string/tts_settings">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.TTS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />

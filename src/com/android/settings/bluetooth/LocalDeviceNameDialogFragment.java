@@ -31,10 +31,6 @@ public class LocalDeviceNameDialogFragment extends BluetoothNameDialogFragment {
     public static final String TAG = "LocalAdapterName";
     private BluetoothAdapter mBluetoothAdapter;
 
-    public static LocalDeviceNameDialogFragment newInstance() {
-        return new LocalDeviceNameDialogFragment();
-    }
-
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

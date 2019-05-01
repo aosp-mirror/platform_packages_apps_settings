@@ -24,6 +24,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +95,9 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     }
 
     public void connectDevice(MediaDevice device) {
-        mLocalMediaManager.connectDevice(device);
+        ThreadUtils.postOnBackgroundThread(() -> {
+            mLocalMediaManager.connectDevice(device);
+        });
     }
 
     public MediaDevice getMediaDeviceById(String id) {
