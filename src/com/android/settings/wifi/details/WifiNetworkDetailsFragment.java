@@ -47,12 +47,14 @@ import java.util.List;
  * <p>The AccessPoint should be saved to the intent Extras when launching this class via
  * {@link AccessPoint#saveWifiState(Bundle)} in order to properly render this page.
  */
-public class WifiNetworkDetailsFragment extends DashboardFragment {
+public class WifiNetworkDetailsFragment extends DashboardFragment implements
+        WifiDialog.WifiDialogListener {
 
     private static final String TAG = "WifiNetworkDetailsFrg";
 
     private AccessPoint mAccessPoint;
     private WifiDetailPreferenceController mWifiDetailPreferenceController;
+    private List<WifiDialog.WifiDialogListener> mWifiDialogListeners = new ArrayList<>();
 
     @Override
     public void onAttach(Context context) {
@@ -89,7 +91,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
                 || mAccessPoint == null) {
             return null;
         }
-        return WifiDialog.createModal(getActivity(), mWifiDetailPreferenceController, mAccessPoint,
+        return WifiDialog.createModal(getActivity(), this, mAccessPoint,
                 WifiConfigUiBase.MODE_MODIFY);
     }
 
@@ -135,15 +137,31 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
         controllers.add(mWifiDetailPreferenceController);
         controllers.add(new AddDevicePreferenceController(context).init(mAccessPoint));
-        controllers.add(new WifiMeteredPreferenceController(context, mAccessPoint.getConfig()));
-        WifiPrivacyPreferenceController privacyController = new WifiPrivacyPreferenceController(
-                context);
+
+        final WifiMeteredPreferenceController meteredPreferenceController =
+                new WifiMeteredPreferenceController(context, mAccessPoint.getConfig());
+        controllers.add(meteredPreferenceController);
+
+        final WifiPrivacyPreferenceController privacyController =
+                new WifiPrivacyPreferenceController(context);
         privacyController.setWifiConfiguration(mAccessPoint.getConfig());
         privacyController.setIsEphemeral(mAccessPoint.isEphemeral());
         privacyController.setIsPasspoint(
                 mAccessPoint.isPasspoint() || mAccessPoint.isPasspointConfig());
         controllers.add(privacyController);
 
+        // Sets callback listener for wifi dialog.
+        mWifiDialogListeners.add(mWifiDetailPreferenceController);
+        mWifiDialogListeners.add(privacyController);
+        mWifiDialogListeners.add(meteredPreferenceController);
+
         return controllers;
+    }
+
+    @Override
+    public void onSubmit(WifiDialog dialog) {
+        for (WifiDialog.WifiDialogListener listener : mWifiDialogListeners) {
+            listener.onSubmit(dialog);
+        }
     }
 }
