@@ -20,10 +20,16 @@ import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_MIN;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -38,11 +44,12 @@ public class ImportancePreference extends Preference {
     private int mImportance;
     private boolean mDisplayInStatusBar;
     private boolean mDisplayOnLockscreen;
-    private Button mSilenceButton;
-    private Button mAlertButton;
+    private View mSilenceButton;
+    private View mAlertButton;
     private Context mContext;
     Drawable selectedBackground;
     Drawable unselectedBackground;
+    private static final int BUTTON_ANIM_TIME_MS = 100;
 
     public ImportancePreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
@@ -89,13 +96,12 @@ public class ImportancePreference extends Preference {
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
+    public void onBindViewHolder(final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         holder.itemView.setClickable(false);
 
-        TextView textView = (TextView) holder.findViewById(R.id.description);
-        mSilenceButton = (Button) holder.findViewById(R.id.silence);
-        mAlertButton = (Button) holder.findViewById(R.id.alert);
+        mSilenceButton = holder.findViewById(R.id.silence);
+        mAlertButton = holder.findViewById(R.id.alert);
 
         if (!mIsConfigurable) {
             mSilenceButton.setEnabled(false);
@@ -114,34 +120,41 @@ public class ImportancePreference extends Preference {
                 mAlertButton.setBackground(selectedBackground);
                 break;
         }
-        setImportanceSummary(textView, mImportance);
+        setImportanceSummary((ViewGroup) holder.itemView, mImportance, false);
 
         mSilenceButton.setOnClickListener(v -> {
             callChangeListener(IMPORTANCE_LOW);
             mAlertButton.setBackground(unselectedBackground);
+            mAlertButton.setSelected(false);
             mSilenceButton.setBackground(selectedBackground);
-            mSilenceButton.setTextAppearance(
-                    R.style.TextAppearance_NotificationImportanceButton_Selected);
-            mAlertButton.setTextAppearance(
-                    R.style.TextAppearance_NotificationImportanceButton_Unselected);
-            setImportanceSummary(textView, IMPORTANCE_LOW);
+            mSilenceButton.setSelected(true);
+            setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_LOW, true);
         });
         mAlertButton.setOnClickListener(v -> {
             callChangeListener(IMPORTANCE_DEFAULT);
             mSilenceButton.setBackground(unselectedBackground);
+            mSilenceButton.setSelected(false);
             mAlertButton.setBackground(selectedBackground);
-            mAlertButton.setTextAppearance(
-                    R.style.TextAppearance_NotificationImportanceButton_Selected);
-            mSilenceButton.setTextAppearance(
-                    R.style.TextAppearance_NotificationImportanceButton_Unselected);
-            setImportanceSummary(textView, IMPORTANCE_DEFAULT);
+            mAlertButton.setSelected(true);
+            setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_DEFAULT, true);
         });
     }
 
-    void setImportanceSummary(TextView view, int importance) {
+    void setImportanceSummary(ViewGroup parent, int importance, boolean fromUser) {
+        if (fromUser) {
+            AutoTransition transition = new AutoTransition();
+            transition.setDuration(BUTTON_ANIM_TIME_MS);
+            TransitionManager.beginDelayedTransition(parent, transition);
+        }
         if (importance >= IMPORTANCE_DEFAULT) {
+            parent.findViewById(R.id.silence_summary).setVisibility(GONE);
+            TextView view = parent.findViewById(R.id.alert_summary);
             view.setText(R.string.notification_channel_summary_default);
+            view.setVisibility(VISIBLE);
         } else {
+            parent.findViewById(R.id.alert_summary).setVisibility(GONE);
+            TextView view = parent.findViewById(R.id.silence_summary);
+            view.setVisibility(VISIBLE);
             if (mDisplayInStatusBar) {
                  if (mDisplayOnLockscreen) {
                      view.setText(R.string.notification_channel_summary_low_status_lock);
