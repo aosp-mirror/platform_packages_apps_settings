@@ -40,6 +40,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentityCdma;
@@ -130,6 +131,13 @@ public class RadioInfo extends Activity {
     private static final int CELL_INFO_LIST_RATE_DISABLED = Integer.MAX_VALUE;
     private static final int CELL_INFO_LIST_RATE_MAX = 0;
 
+    private static final String DSDS_MODE_PROPERTY = "ro.boot.hardware.dsds";
+
+    /**
+     * A value indicates the device is always on dsds mode.
+     * @see {@link #DSDS_MODE_PROPERTY}
+     */
+    private static final int ALWAYS_ON_DSDS_MODE = 1;
 
     private static final int IMS_VOLTE_PROVISIONED_CONFIG_ID =
         ImsConfig.ConfigConstants.VLT_SETTING_ENABLED;
@@ -497,7 +505,7 @@ public class RadioInfo extends Activity {
         cbrsDataSwitch.setVisibility(isCbrsSupported() ? View.VISIBLE : View.GONE);
 
         dsdsSwitch = findViewById(R.id.dsds_switch);
-        if (isDsdsSupported()) {
+        if (isDsdsSupported() && !dsdsModeOnly()) {
             dsdsSwitch.setVisibility(View.VISIBLE);
             dsdsSwitch.setOnClickListener(v -> {
                 if (mTelephonyManager.doesSwitchMultiSimConfigTriggerReboot()) {
@@ -1695,6 +1703,14 @@ public class RadioInfo extends Activity {
 
     private void performDsdsSwitch() {
         mTelephonyManager.switchMultiSimConfig(dsdsSwitch.isChecked() ? 2 : 1);
+    }
+
+    /**
+     * @return {@code True} if the device is only supported dsds mode.
+     */
+    private boolean dsdsModeOnly() {
+        String dsdsMode = SystemProperties.get(DSDS_MODE_PROPERTY);
+        return !TextUtils.isEmpty(dsdsMode) && Integer.parseInt(dsdsMode) == ALWAYS_ON_DSDS_MODE;
     }
 
     DialogInterface.OnClickListener mOnDsdsDialogConfirmedListener =
