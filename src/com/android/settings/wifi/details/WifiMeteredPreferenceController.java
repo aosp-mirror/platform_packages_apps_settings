@@ -24,19 +24,22 @@ import android.net.wifi.WifiManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.wifi.WifiDialog;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * {@link AbstractPreferenceController} that controls whether the wifi network is metered or not
  */
 public class WifiMeteredPreferenceController extends BasePreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, WifiDialog.WifiDialogListener {
 
     private static final String KEY_WIFI_METERED = "metered";
     private WifiConfiguration mWifiConfiguration;
     private WifiManager mWifiManager;
+    private Preference mPreference;
 
     public WifiMeteredPreferenceController(Context context, WifiConfiguration wifiConfiguration) {
         super(context, KEY_WIFI_METERED);
@@ -80,5 +83,26 @@ public class WifiMeteredPreferenceController extends BasePreferenceController im
 
     private void updateSummary(DropDownPreference preference, int meteredOverride) {
         preference.setSummary(preference.getEntries()[meteredOverride]);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void onSubmit(WifiDialog dialog) {
+        if (dialog.getController() != null) {
+            final WifiConfiguration newConfig = dialog.getController().getConfig();
+            if (newConfig == null || mWifiConfiguration == null) {
+                return;
+            }
+
+            if (newConfig.meteredOverride != mWifiConfiguration.meteredOverride) {
+                mWifiConfiguration = newConfig;
+                onPreferenceChange(mPreference, String.valueOf(newConfig.meteredOverride));
+            }
+        }
     }
 }
