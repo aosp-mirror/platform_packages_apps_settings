@@ -22,6 +22,7 @@ import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import android.app.NotificationChannel;
 import android.content.Context;
 import android.media.RingtoneManager;
+import android.provider.Settings;
 
 import com.android.settings.core.PreferenceControllerMixin;
 
@@ -64,7 +65,8 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
             pref.setConfigurable(!mChannel.isImportanceLockedByOEM());
             pref.setImportance(mChannel.getImportance());
             pref.setDisplayInStatusBar(mBackend.showSilentInStatusBar(mContext.getPackageName()));
-            // TODO: b/128445911 pass along lock screen setting
+            pref.setDisplayOnLockscreen(Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 0) == 1);
         }
     }
 
