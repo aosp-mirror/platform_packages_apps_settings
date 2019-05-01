@@ -61,6 +61,14 @@ public class ContextualCardLoaderTest {
     }
 
     @Test
+    public void loadInBackground_legacyMode_shouldReturnNothing() {
+        assertThat(mContext.getResources().getBoolean(R.bool.config_use_legacy_suggestion))
+                .isTrue();
+
+        assertThat(mContextualCardLoader.loadInBackground()).isEmpty();
+    }
+
+    @Test
     public void getDisplayableCards_twoEligibleCards_shouldShowAll() {
         final List<ContextualCard> cards = getContextualCardList().stream().limit(2)
                 .collect(Collectors.toList());
@@ -72,51 +80,14 @@ public class ContextualCardLoaderTest {
     }
 
     @Test
-    public void getDisplayableCards_fiveEligibleCardsNoLarge_shouldShowDefaultCardCount() {
-        final List<ContextualCard> fiveCards = getContextualCardListWithNoLargeCard();
-        doReturn(fiveCards).when(mContextualCardLoader).filterEligibleCards(anyList());
+    public void getDisplayableCards_fourEligibleCards_shouldShowDefaultCardCount() {
+        final List<ContextualCard> fourCards = getContextualCardList();
+        doReturn(fourCards).when(mContextualCardLoader).filterEligibleCards(anyList());
 
-        final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(
-                fiveCards);
+        final List<ContextualCard> result = mContextualCardLoader
+                .getDisplayableCards(fourCards);
 
         assertThat(result).hasSize(DEFAULT_CARD_COUNT);
-    }
-
-    @Test
-    public void getDisplayableCards_threeEligibleCardsOneLarge_shouldShowThreeCards() {
-        final List<ContextualCard> cards = getContextualCardList().stream().limit(2)
-                .collect(Collectors.toList());
-        cards.add(new ContextualCard.Builder()
-                .setName("test_gesture")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(Uri.parse(
-                        "content://com.android.settings.test.slices/action/gesture_pick_up"))
-                .build());
-        doReturn(cards).when(mContextualCardLoader).filterEligibleCards(anyList());
-
-        final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(cards);
-
-        assertThat(result).hasSize(3);
-    }
-
-    @Test
-    public void getDisplayableCards_threeEligibleCardsTwoLarge_shouldShowTwoCards() {
-        final List<ContextualCard> threeCards = getContextualCardList().stream().limit(3)
-                .collect(Collectors.toList());
-        doReturn(threeCards).when(mContextualCardLoader).filterEligibleCards(anyList());
-
-        final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(
-                threeCards);
-
-        assertThat(result).hasSize(2);
-    }
-
-    @Test
-    public void loadInBackground_legacyMode_shouldReturnNothing() {
-        assertThat(mContext.getResources().getBoolean(R.bool.config_use_legacy_suggestion))
-                .isTrue();
-
-        assertThat(mContextualCardLoader.loadInBackground()).isEmpty();
     }
 
     @Test
@@ -158,34 +129,6 @@ public class ContextualCardLoaderTest {
                 .setName("test_connected")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI)
-                .build());
-        cards.add(new ContextualCard.Builder()
-                .setName("test_gesture")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(Uri.parse(
-                        "content://com.android.settings.test.slices/action/gesture_pick_up"))
-                .build());
-        return cards;
-    }
-
-    private List<ContextualCard> getContextualCardListWithNoLargeCard() {
-        final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(new ContextualCard.Builder()
-                .setName("test_rotate")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(
-                        Uri.parse("content://com.android.settings.test.slices/action/auto_rotate"))
-                .build());
-        cards.add(new ContextualCard.Builder()
-                .setName("test_flashlight")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(
-                        Uri.parse("content://com.android.settings.test.slices/action/flashlight"))
-                .build());
-        cards.add(new ContextualCard.Builder()
-                .setName("test_bt")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(Uri.parse("content://android.settings.test.slices/action/bluetooth"))
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_gesture")
