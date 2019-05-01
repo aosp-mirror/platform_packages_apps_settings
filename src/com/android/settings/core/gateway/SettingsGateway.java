@@ -54,6 +54,7 @@ import com.android.settings.backup.PrivacySettings;
 import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.biometrics.face.FaceSettings;
+import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -203,6 +204,7 @@ public class SettingsGateway {
             AccountSyncSettings.class.getName(),
             AssistGestureSettings.class.getName(),
             FaceSettings.class.getName(),
+            FingerprintSettings.FingerprintSettingsFragment.class.getName(),
             SwipeToNotificationSettings.class.getName(),
             DoubleTapPowerSettings.class.getName(),
             DoubleTapScreenSettings.class.getName(),
