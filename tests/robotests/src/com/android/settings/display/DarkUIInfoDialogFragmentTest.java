@@ -26,9 +26,9 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.provider.Settings;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -50,7 +50,6 @@ public class DarkUIInfoDialogFragmentTest {
     }
 
     @Test
-    @Ignore("b/130897882")
     public void dialogDismissedOnConfirmation() {
         doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
         SharedPreferences prefs = RuntimeEnvironment.application.getSharedPreferences(
@@ -60,8 +59,7 @@ public class DarkUIInfoDialogFragmentTest {
                 .isFalse();
         mFragment.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
         verify(dialog, times(1)).dismiss();
-        assertThat(prefs.getBoolean(DarkUIPreferenceController.PREF_DARK_MODE_DIALOG_SEEN, false))
-                .isTrue();
-
+        assertThat(Settings.Secure.getInt(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Secure.DARK_MODE_DIALOG_SEEN, -1)).isEqualTo(1);
     }
 }

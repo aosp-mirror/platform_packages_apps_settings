@@ -93,7 +93,7 @@ public class ImeiInfoPreferenceControllerTest {
     public void displayPreference_multiSimGsm_shouldAddSecondPreference() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", true);
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
-        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_GSM);
+        when(mTelephonyManager.getCurrentPhoneType(anyInt())).thenReturn(PHONE_TYPE_GSM);
 
         mController.displayPreference(mScreen);
 
@@ -104,8 +104,8 @@ public class ImeiInfoPreferenceControllerTest {
     public void displayPreference_singleSimCdmaPhone_shouldSetSingleSimCdmaTitleAndMeid() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", false);
         final String meid = "125132215123";
-        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_CDMA);
-        doReturn(meid).when(mController).getMeid(anyInt());
+        when(mTelephonyManager.getCurrentPhoneType(anyInt())).thenReturn(PHONE_TYPE_CDMA);
+        when(mTelephonyManager.getMeid(anyInt())).thenReturn(meid);
 
         mController.displayPreference(mScreen);
 
@@ -118,8 +118,8 @@ public class ImeiInfoPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mIsMultiSim", true);
         final String meid = "125132215123";
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
-        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_CDMA);
-        doReturn(meid).when(mController).getMeid(anyInt());
+        when(mTelephonyManager.getCurrentPhoneType(anyInt())).thenReturn(PHONE_TYPE_CDMA);
+        when(mTelephonyManager.getMeid(anyInt())).thenReturn(meid);
 
         mController.displayPreference(mScreen);
 
@@ -134,7 +134,7 @@ public class ImeiInfoPreferenceControllerTest {
     public void displayPreference_singleSimGsmPhone_shouldSetSingleSimGsmTitleAndImei() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", false);
         final String imei = "125132215123";
-        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_GSM);
+        when(mTelephonyManager.getCurrentPhoneType(anyInt())).thenReturn(PHONE_TYPE_GSM);
         when(mTelephonyManager.getImei(anyInt())).thenReturn(imei);
 
         mController.displayPreference(mScreen);
@@ -148,7 +148,7 @@ public class ImeiInfoPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mIsMultiSim", true);
         final String imei = "125132215123";
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
-        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_GSM);
+        when(mTelephonyManager.getCurrentPhoneType(anyInt())).thenReturn(PHONE_TYPE_GSM);
         when(mTelephonyManager.getImei(anyInt())).thenReturn(imei);
 
         mController.displayPreference(mScreen);
@@ -176,8 +176,8 @@ public class ImeiInfoPreferenceControllerTest {
     public void copy_shouldCopyImeiToClipboard() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", false);
         final String meid = "125132215123";
-        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_CDMA);
-        when(mTelephonyManager.getMeid()).thenReturn(meid);
+        when(mTelephonyManager.getCurrentPhoneType(anyInt())).thenReturn(PHONE_TYPE_CDMA);
+        when(mTelephonyManager.getMeid(anyInt())).thenReturn(meid);
 
         mController.copy();
 
