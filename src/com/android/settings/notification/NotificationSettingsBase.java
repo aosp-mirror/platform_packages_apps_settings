@@ -25,6 +25,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
+import android.app.role.RoleManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +37,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.graphics.BlendMode;
 import android.graphics.BlendModeColorFilter;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -71,6 +71,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
     protected PackageManager mPm;
     protected NotificationBackend mBackend = new NotificationBackend();
     protected NotificationManager mNm;
+    protected RoleManager mRm;
     protected Context mContext;
 
     protected int mUid;
@@ -101,6 +102,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
 
         mPm = getPackageManager();
         mNm = NotificationManager.from(mContext);
+        mRm = mContext.getSystemService(RoleManager.class);
 
         mPkg = mArgs != null && mArgs.containsKey(AppInfoBase.ARG_PACKAGE_NAME)
                 ? mArgs.getString(AppInfoBase.ARG_PACKAGE_NAME)
@@ -195,7 +197,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
     }
 
     private void loadAppRow() {
-        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
+        mAppRow = mBackend.loadAppRow(mContext, mPm, mRm, mPkgInfo);
     }
 
     private void loadChannelGroup() {
@@ -342,7 +344,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
 
     protected boolean isChannelConfigurable(NotificationChannel channel) {
         if (channel != null && mAppRow != null) {
-            return !channel.getId().equals(mAppRow.lockedChannelId);
+            return !channel.isImportanceLockedByOEM();
         }
         return false;
     }
@@ -351,6 +353,14 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         if (channel != null && mAppRow != null) {
             if (!mAppRow.systemApp) {
                 return true;
+            }
+
+            if (channel.isImportanceLockedByCriticalDeviceFunction()) {
+                return false;
+            }
+
+            if (channel.isImportanceLockedByOEM()) {
+                return false;
             }
 
             return channel.isBlockableSystem()

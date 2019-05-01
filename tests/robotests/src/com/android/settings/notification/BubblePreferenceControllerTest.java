@@ -203,11 +203,9 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testUpdateState_channelNotBlockable() {
-        String lockedId = "locked";
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = lockedId;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn(lockedId);
+        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
         mController.onResume(appRow, channel, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
@@ -219,7 +217,6 @@ public class BubblePreferenceControllerTest {
     @Test
     public void testUpdateState_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = "a";
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.canBubble()).thenReturn(true);
         mController.onResume(appRow, channel, null, null);

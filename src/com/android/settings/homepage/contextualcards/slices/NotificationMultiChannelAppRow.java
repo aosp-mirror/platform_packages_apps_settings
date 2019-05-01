@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 
@@ -46,7 +47,7 @@ class NotificationMultiChannelAppRow implements Callable<NotificationBackend.App
                 mPackageInfo.applicationInfo.packageName, mPackageInfo.applicationInfo.uid);
         if (channelCount > 1) {
             return mNotificationBackend.loadAppRow(mContext, mContext.getPackageManager(),
-                    mPackageInfo);
+                    mContext.getSystemService(RoleManager.class), mPackageInfo);
         }
         return null;
     }

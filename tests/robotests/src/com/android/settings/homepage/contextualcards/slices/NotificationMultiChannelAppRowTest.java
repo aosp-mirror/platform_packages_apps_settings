@@ -21,6 +21,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -65,7 +66,7 @@ public class NotificationMultiChannelAppRowTest {
         mNotificationMultiChannelAppRow.call();
 
         verify(mNotificationBackend).loadAppRow(any(Context.class), any(PackageManager.class),
-                any(PackageInfo.class));
+                any(RoleManager.class), any(PackageInfo.class));
     }
 
     @Test
@@ -76,6 +77,6 @@ public class NotificationMultiChannelAppRowTest {
         mNotificationMultiChannelAppRow.call();
 
         verify(mNotificationBackend, never()).loadAppRow(any(Context.class),
-                any(PackageManager.class), any(PackageInfo.class));
+                any(PackageManager.class), any(RoleManager.class), any(PackageInfo.class));
     }
 }
