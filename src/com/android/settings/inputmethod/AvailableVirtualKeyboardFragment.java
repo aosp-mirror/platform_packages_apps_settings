@@ -16,20 +16,11 @@
 
 package com.android.settings.inputmethod;
 
-import android.annotation.DrawableRes;
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.view.inputmethod.InputMethodInfo;
@@ -93,59 +84,12 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
         return SettingsEnums.ENABLE_VIRTUAL_KEYBOARDS;
     }
 
-    @Nullable
-    private static Drawable loadDrawable(@NonNull final PackageManager packageManager,
-            @NonNull final String packageName, @DrawableRes final int resId,
-            @NonNull final ApplicationInfo applicationInfo) {
-        if (resId == 0) {
-            return null;
-        }
-        try {
-            return packageManager.getDrawable(packageName, resId, applicationInfo);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    @NonNull
-    private static Drawable getInputMethodIcon(@NonNull final PackageManager packageManager,
-            @NonNull final InputMethodInfo imi) {
-        final ServiceInfo si = imi.getServiceInfo();
-        final ApplicationInfo ai = si != null ? si.applicationInfo : null;
-        final String packageName = imi.getPackageName();
-        if (si == null || ai == null || packageName == null) {
-            return new ColorDrawable(Color.TRANSPARENT);
-        }
-        // We do not use ServiceInfo#loadLogo() and ServiceInfo#loadIcon here since those methods
-        // internally have some fallback rules, which we want to do manually.
-        Drawable drawable = loadDrawable(packageManager, packageName, si.logo, ai);
-        if (drawable != null) {
-            return drawable;
-        }
-        drawable = loadDrawable(packageManager, packageName, si.icon, ai);
-        if (drawable != null) {
-            return drawable;
-        }
-        // We do not use ApplicationInfo#loadLogo() and ApplicationInfo#loadIcon here since those
-        // methods internally have some fallback rules, which we want to do manually.
-        drawable = loadDrawable(packageManager, packageName, ai.logo, ai);
-        if (drawable != null) {
-            return drawable;
-        }
-        drawable = loadDrawable(packageManager, packageName, ai.icon, ai);
-        if (drawable != null) {
-            return drawable;
-        }
-        return new ColorDrawable(Color.TRANSPARENT);
-    }
-
     private void updateInputMethodPreferenceViews() {
         mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
         // Clear existing "InputMethodPreference"s
         mInputMethodPreferenceList.clear();
         List<String> permittedList = mDpm.getPermittedInputMethodsForCurrentUser();
         final Context context = getPrefContext();
-        final PackageManager packageManager = getActivity().getPackageManager();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
         final int numImis = (imis == null ? 0 : imis.size());
         for (int i = 0; i < numImis; ++i) {
@@ -154,7 +98,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
                     || permittedList.contains(imi.getPackageName());
             final InputMethodPreference pref = new InputMethodPreference(
                     context, imi, true, isAllowedByOrganization, this);
-            pref.setIcon(getInputMethodIcon(packageManager, imi));
+            pref.setIcon(imi.loadIcon(context.getPackageManager()));
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();
