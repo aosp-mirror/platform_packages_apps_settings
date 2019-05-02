@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -114,7 +115,6 @@ public class DeleteSimProfileProgressDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/131519375) - use a real id here once it's been created in the metrics proto
-        return 0;
+        return SettingsEnums.DIALOG_DELETE_SIM_PROGRESS;
     }
 }
