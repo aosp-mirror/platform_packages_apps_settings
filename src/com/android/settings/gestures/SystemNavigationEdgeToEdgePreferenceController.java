@@ -43,11 +43,6 @@ public class SystemNavigationEdgeToEdgePreferenceController extends
     }
 
     @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(PREF_KEY_EDGE_TO_EDGE, getPreferenceKey());
-    }
-
-    @Override
     public void onRadioButtonClicked(RadioButtonPreference preference) {
         setNavBarInteractionMode(mOverlayManager, NAV_BAR_MODE_GESTURAL_OVERLAY);
         selectRadioButtonInGroup(PREF_KEY_EDGE_TO_EDGE, mPreferenceScreen);
