@@ -39,7 +39,7 @@ public class SystemNavigationLegacyPreferenceController extends
     @VisibleForTesting
     public SystemNavigationLegacyPreferenceController(Context context,
             IOverlayManager overlayManager, String key) {
-        super(context, overlayManager, key);
+        super(context, overlayManager, key, NAV_BAR_MODE_3BUTTON_OVERLAY);
     }
 
     @Override
