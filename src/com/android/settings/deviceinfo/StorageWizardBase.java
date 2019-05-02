@@ -187,6 +187,14 @@ public abstract class StorageWizardBase extends FragmentActivity {
         mNext.setVisibility(View.VISIBLE);
     }
 
+    protected void setBackButtonVisibility(int visible) {
+        mBack.setVisibility(visible);
+    }
+
+    protected void setNextButtonVisibility(int visible) {
+        mNext.setVisibility(visible);
+    }
+
     protected void setIcon(int resId) {
         final GlifLayout layout = getGlifLayout();
         final Drawable icon = getDrawable(resId).mutate();
