@@ -18,11 +18,15 @@ package com.android.settings.notification;
 
 import android.app.Application;
 import android.app.settings.SettingsEnums;
+import android.app.usage.IUsageStatsManager;
+import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.service.notification.NotifyingApp;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -30,13 +34,8 @@ import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
@@ -47,10 +46,17 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 /**
  * This controller displays a list of recently used apps and a "See all" button. If there is
@@ -66,28 +72,35 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
     @VisibleForTesting
     static final String KEY_SEE_ALL = "all_notifications";
     private static final int SHOW_RECENT_APP_COUNT = 5;
+    private static final int DAYS = 3;
     private static final Set<String> SKIP_SYSTEM_PACKAGES = new ArraySet<>();
 
     private final Fragment mHost;
     private final PackageManager mPm;
     private final NotificationBackend mNotificationBackend;
+    private IUsageStatsManager mUsageStatsManager;
     private final int mUserId;
     private final IconDrawableFactory mIconDrawableFactory;
 
-    private List<NotifyingApp> mApps;
+    private Calendar mCal;
+    List<NotifyingApp> mApps;
     private final ApplicationsState mApplicationsState;
 
     private PreferenceCategory mCategory;
     private Preference mSeeAllPref;
     private Preference mDivider;
+    protected List<Integer> mUserIds;
 
     public RecentNotifyingAppsPreferenceController(Context context, NotificationBackend backend,
+            IUsageStatsManager usageStatsManager, UserManager userManager,
             Application app, Fragment host) {
-        this(context, backend, app == null ? null : ApplicationsState.getInstance(app), host);
+        this(context, backend, usageStatsManager, userManager,
+                app == null ? null : ApplicationsState.getInstance(app), host);
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     RecentNotifyingAppsPreferenceController(Context context, NotificationBackend backend,
+            IUsageStatsManager usageStatsManager, UserManager userManager,
             ApplicationsState appState, Fragment host) {
         super(context);
         mIconDrawableFactory = IconDrawableFactory.newInstance(context);
@@ -96,6 +109,13 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
         mHost = host;
         mApplicationsState = appState;
         mNotificationBackend = backend;
+        mUsageStatsManager = usageStatsManager;
+        mUserIds = new ArrayList<>();
+        mUserIds.add(mContext.getUserId());
+        int workUserId = Utils.getManagedProfileId(userManager, mContext.getUserId());
+        if (workUserId != UserHandle.USER_NULL) {
+            mUserIds.add(workUserId);
+        }
     }
 
     @Override
@@ -145,7 +165,48 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     @VisibleForTesting
     void reloadData() {
-        mApps = mNotificationBackend.getRecentApps();
+        mApps = new ArrayList<>();
+        mCal = Calendar.getInstance();
+        mCal.add(Calendar.DAY_OF_YEAR, -DAYS);
+        for (int userId : mUserIds) {
+            UsageEvents events = null;
+            try {
+                events = mUsageStatsManager.queryEventsForUser(mCal.getTimeInMillis(),
+                        System.currentTimeMillis(), userId, mContext.getPackageName());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            if (events != null) {
+
+                ArrayMap<String, NotifyingApp> aggregatedStats = new ArrayMap<>();
+
+                UsageEvents.Event event = new UsageEvents.Event();
+                while (events.hasNextEvent()) {
+                    events.getNextEvent(event);
+
+                    if (event.getEventType() == UsageEvents.Event.NOTIFICATION_INTERRUPTION) {
+                        NotifyingApp app =
+                                aggregatedStats.get(getKey(userId, event.getPackageName()));
+                        if (app == null) {
+                            app = new NotifyingApp();
+                            aggregatedStats.put(getKey(userId, event.getPackageName()), app);
+                            app.setPackage(event.getPackageName());
+                            app.setUserId(userId);
+                        }
+                        if (event.getTimeStamp() > app.getLastNotified()) {
+                            app.setLastNotified(event.getTimeStamp());
+                        }
+                    }
+
+                }
+
+                mApps.addAll(aggregatedStats.values());
+            }
+        }
+    }
+
+    private static String getKey(int userId, String pkg) {
+        return userId + "|" + pkg;
     }
 
     private void displayOnlyAllAppsLink() {
@@ -185,7 +246,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             // Bind recent apps to existing prefs if possible, or create a new pref.
             final String pkgName = app.getPackage();
             final ApplicationsState.AppEntry appEntry =
-                    mApplicationsState.getEntry(app.getPackage(), mUserId);
+                    mApplicationsState.getEntry(app.getPackage(), app.getUserId());
             if (appEntry == null) {
                 continue;
             }
