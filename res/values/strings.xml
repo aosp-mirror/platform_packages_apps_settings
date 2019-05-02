@@ -842,8 +842,8 @@
     <string name="location_settings_summary_location_off">Off</string>
     <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
     <plurals name="location_settings_summary_location_on">
-        <item quantity="one">On - <xliff:g id="count">%1$d</xliff:g> app can access location</item>
-        <item quantity="other">On - <xliff:g id="count">%1$d</xliff:g> apps can access location</item>
+        <item quantity="one">On - <xliff:g id="count">%1$d</xliff:g> app has access to location</item>
+        <item quantity="other">On - <xliff:g id="count">%1$d</xliff:g> apps have access to location</item>
     </plurals>
     <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
     <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
@@ -2558,7 +2558,7 @@
     <string name="wifi_calling_roaming_mode_summary"><xliff:g id="wfc_roaming_preference" example="Wi-Fi">%1$s</xliff:g></string>
     <!-- WFC mode dialog [CHAR LIMIT=45] -->
     <string name="wifi_calling_roaming_mode_dialog_title">Roaming preference</string>
-    <string-array name="wifi_calling_mode_choices">
+    <string-array name="wifi_calling_mode_choices" translatable="false">
         <item>@*android:string/wfc_mode_wifi_preferred_summary</item>
         <item>@*android:string/wfc_mode_cellular_preferred_summary</item>
         <item>@*android:string/wfc_mode_wifi_only_summary</item>
@@ -2573,7 +2573,7 @@
         <item>"1"</item>
         <item>"0"</item>
     </string-array>
-    <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <string-array name="wifi_calling_mode_choices_without_wifi_only" translatable="false">
         <item>@*android:string/wfc_mode_wifi_preferred_summary</item>
         <item>@*android:string/wfc_mode_cellular_preferred_summary</item>
     </string-array>
@@ -3838,29 +3838,25 @@
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
     <!--
-    Summary for Location settings when location is on, explaining how many apps have unlimited
-    location permission.
-
-    "Unlimited access" means the app can access the device location even when it's not being used
-    (on background), while "limited" means the app can only access the device location when the user
-    is using it (foreground only).
+    Summary for Location settings when location is on, explaining how many apps have location
+    permission.
 
     Please note that the distinction between singular and plural of this sentence only depends on
-    the quantity of "background_location_app_count" ("has" vs "have"). The quantity of
+    the quantity of "permitted_location_app_count" ("has" vs "have"). The quantity of
     "total_location_app_count" is almost always greater than 1, so "apps" is always in plural form.
 
     [CHAR LIMIT=NONE]-->
     <plurals name="location_app_permission_summary_location_on">
         <item quantity="one">
-            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            <xliff:g id="permitted_location_app_count">%1$d</xliff:g>
             of
             <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            apps has unlimited access</item>
+            apps has access to location</item>
         <item quantity="other">
-            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            <xliff:g id="permitted_location_app_count">%1$d</xliff:g>
             of
             <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            apps have unlimited access</item>
+            apps have access to location</item>
     </plurals>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
     <string name="location_category_recent_location_access">Recent location access</string>
@@ -7334,6 +7330,9 @@
     <!-- Battery Saver: Search terms for battery saver schedule preference. Feel free to add additional terms when translating if appropriate [CHAR_LIMIT=NONE] -->
     <string name="keywords_battery_saver_schedule">routine, schedule, battery saver, power saver, battery, automatic, percent</string>
 
+    <!-- List of synonyms for the Add an account setting [CHAR_LIMIT=NONE] -->
+    <string name="keywords_add_an_account">work profile</string>
+
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
 
@@ -7587,7 +7586,7 @@
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
     <string name="zen_mode_block_effect_ambient">Don\'t wake for notifications</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_block_effect_list">Hide from notification list</string>
+    <string name="zen_mode_block_effect_list">Hide from pull-down shade</string>
 
     <!-- Do not disturb: what to block summary, none -->
     <string name="zen_mode_block_effect_summary_none">Never</string>
@@ -8382,13 +8381,13 @@
     </plurals>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
-    <string name="zen_mode_messages">Allow text messages</string>
+    <string name="zen_mode_messages">Allow messages</string>
 
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
     <string name="zen_mode_messages_footer">To be sure allowed messages make sound, check whether your device is set to ring, vibrate, or silent.</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
-    <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+    <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
     <string name="zen_mode_messages_title">SMS, MMS, and messaging apps</string>

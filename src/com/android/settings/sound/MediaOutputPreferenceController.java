@@ -16,9 +16,6 @@
 
 package com.android.settings.sound;
 
-import static android.media.AudioManager.STREAM_MUSIC;
-import static android.media.AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
-
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
@@ -56,13 +53,6 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        if (isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_REMOTE_SUBMIX)) {
-            // In cast mode, disable switch entry.
-            mPreference.setVisible(false);
-            preference.setSummary(mContext.getText(R.string.media_output_summary_unavailable));
-            return;
-        }
-
         if (Utils.isAudioModeOngoingCall(mContext)) {
             // Ongoing call status, switch entry for media will be disabled.
             mPreference.setVisible(false);
@@ -71,19 +61,19 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        boolean deviceConnectable = false;
+        boolean deviceConnected = false;
         BluetoothDevice activeDevice = null;
         // Show preference if there is connected or previously connected device
         // Find active device and set its name as the preference's summary
-        List<BluetoothDevice> connectableA2dpDevices = getConnectableA2dpDevices();
-        List<BluetoothDevice> connectableHADevices = getConnectableHearingAidDevices();
+        List<BluetoothDevice> connectedA2dpDevices = getConnectedA2dpDevices();
+        List<BluetoothDevice> connectedHADevices = getConnectedHearingAidDevices();
         if (mAudioManager.getMode() == AudioManager.MODE_NORMAL
-                && ((connectableA2dpDevices != null && !connectableA2dpDevices.isEmpty())
-                || (connectableHADevices != null && !connectableHADevices.isEmpty()))) {
-            deviceConnectable = true;
+                && ((connectedA2dpDevices != null && !connectedA2dpDevices.isEmpty())
+                || (connectedHADevices != null && !connectedHADevices.isEmpty()))) {
+            deviceConnected = true;
             activeDevice = findActiveDevice();
         }
-        mPreference.setVisible(deviceConnectable);
+        mPreference.setVisible(deviceConnected);
         mPreference.setSummary((activeDevice == null) ?
                 mContext.getText(R.string.media_output_default_summary) :
                 activeDevice.getAliasName());

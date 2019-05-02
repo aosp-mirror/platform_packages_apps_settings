@@ -100,13 +100,15 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 
+    <protected-broadcast android:name="com.android.settings.DELETE_SIM_PROFILE_RESULT"/>
+
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
             android:theme="@style/Theme.Settings"
             android:hardwareAccelerated="true"
             android:requiredForAllUsers="true"
             android:supportsRtl="true"
-            android:allowBackup="false"
+            android:backupAgent="com.android.settings.backup.SettingsBackupHelper"
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
@@ -134,6 +136,7 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
                 <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
+                <action android:name="android.settings.MMS_MESSAGE_SETTING" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -432,6 +435,17 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.biometrics.face.FaceSettings" />
+        </activity>
+
+        <activity android:name="Settings$FingerprintSettingsActivity"
+                  android:label="@string/security_settings_fingerprint_preference_title"
+                  android:icon="@drawable/ic_fingerprint_header">
+            <intent-filter>
+                <action android:name="android.settings.FINGERPRINT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment" />
         </activity>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
@@ -1461,8 +1475,7 @@
 
         <activity
             android:name="Settings$TextToSpeechSettingsActivity"
-            android:label="@string/tts_settings"
-            android:parentActivityName="Settings">
+            android:label="@string/tts_settings">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.TTS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2610,6 +2623,7 @@
         <receiver android:name=".sim.SimSelectNotification">
             <intent-filter>
                 <action android:name="android.telephony.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
+                <action android:name="android.settings.ENABLE_MMS_DATA_REQUEST"/>
             </intent-filter>
         </receiver>
 
