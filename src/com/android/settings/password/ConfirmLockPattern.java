@@ -462,7 +462,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                                 mLockPatternUtils, pattern, challenge, localUserId,
                                 onVerifyCallback)
                         : LockPatternChecker.verifyTiedProfileChallenge(
-                                mLockPatternUtils, LockPatternUtils.patternToByteArray(pattern),
+                                mLockPatternUtils, LockPatternUtils.patternToString(pattern),
                                 true, challenge, localUserId, onVerifyCallback);
             }
 
@@ -487,7 +487,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
                                                     StorageManager.CRYPT_TYPE_PATTERN);
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
-                                                    LockPatternUtils.patternToByteArray(pattern));
+                                                    LockPatternUtils.patternToString(pattern));
                                 }
                                 mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
                                         localEffectiveUserId);

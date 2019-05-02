@@ -56,8 +56,9 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
 
     private RestrictedSwitchPreference mUnifyProfile;
 
-    private byte[] mCurrentDevicePassword;
-    private byte[] mCurrentProfilePassword;
+
+    private String mCurrentDevicePassword;
+    private String mCurrentProfilePassword;
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
@@ -138,13 +139,13 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         } else if (requestCode == UNIFY_LOCK_CONFIRM_DEVICE_REQUEST
                 && resultCode == Activity.RESULT_OK) {
             mCurrentDevicePassword =
-                    data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                    data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             launchConfirmProfileLockForUnification();
             return true;
         } else if (requestCode == UNIFY_LOCK_CONFIRM_PROFILE_REQUEST
                 && resultCode == Activity.RESULT_OK) {
             mCurrentProfilePassword =
-                    data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                    data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             unifyLocks();
             return true;
         }
@@ -191,7 +192,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
                 mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileChallengeUserId);
         if (profileQuality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
             mLockPatternUtils.saveLockPattern(
-                    LockPatternUtils.byteArrayToPattern(mCurrentProfilePassword),
+                    LockPatternUtils.stringToPattern(mCurrentProfilePassword),
                     mCurrentDevicePassword, MY_USER_ID);
         } else {
             mLockPatternUtils.saveLockPassword(

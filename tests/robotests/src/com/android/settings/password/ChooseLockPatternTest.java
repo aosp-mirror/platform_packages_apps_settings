@@ -58,7 +58,7 @@ public class ChooseLockPatternTest {
     @Test
     public void intentBuilder_setPattern_shouldAddExtras() {
         Intent intent = new IntentBuilder(application)
-                .setPattern("pattern".getBytes())
+                .setPattern("pattern")
                 .setUserId(123)
                 .build();
 
@@ -67,9 +67,9 @@ public class ChooseLockPatternTest {
                 .named("EXTRA_KEY_HAS_CHALLENGE")
                 .isFalse();
         assertThat(intent
-                .getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
+                .getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
                 .named("EXTRA_KEY_PASSWORD")
-                .isEqualTo("pattern".getBytes());
+                .isEqualTo("pattern");
         assertThat(intent.getIntExtra(Intent.EXTRA_USER_ID, 0))
                 .named("EXTRA_USER_ID")
                 .isEqualTo(123);

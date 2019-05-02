@@ -332,9 +332,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return;
             }
 
-            // TODO(b/120484642): This is a point of entry for passwords from the UI
-            final byte[] pin = LockPatternUtils.charSequenceToByteArray(mPasswordEntry.getText());
-            if (pin == null || pin.length == 0) {
+            final String pin = mPasswordEntry.getText().toString();
+            if (TextUtils.isEmpty(pin)) {
                 return;
             }
 
@@ -360,7 +359,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             return getActivity() instanceof ConfirmLockPassword.InternalActivity;
         }
 
-        private void startVerifyPassword(final byte[] pin, final Intent intent) {
+        private void startVerifyPassword(final String pin, final Intent intent) {
             long challenge = getActivity().getIntent().getLongExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
             final int localEffectiveUserId = mEffectiveUserId;
@@ -391,7 +390,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             onVerifyCallback);
         }
 
-        private void startCheckPassword(final byte[] pin, final Intent intent) {
+        private void startCheckPassword(final String pin, final Intent intent) {
             final int localEffectiveUserId = mEffectiveUserId;
             mPendingLockCheck = LockPatternChecker.checkPassword(
                     mLockPatternUtils,

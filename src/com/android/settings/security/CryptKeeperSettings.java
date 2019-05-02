@@ -172,7 +172,7 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
 
         if (helper.utils().getKeyguardStoredPasswordQuality(UserHandle.myUserId())
                 == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
-            showFinalConfirmation(StorageManager.CRYPT_TYPE_DEFAULT, "".getBytes());
+            showFinalConfirmation(StorageManager.CRYPT_TYPE_DEFAULT, "");
             return true;
         }
 
@@ -192,14 +192,14 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
         // confirmation prompt; otherwise, go back to the initial state.
         if (resultCode == Activity.RESULT_OK && data != null) {
             int type = data.getIntExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE, -1);
-            byte[] password = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-            if (!(password == null || password.length == 0)) {
+            String password = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            if (!TextUtils.isEmpty(password)) {
                 showFinalConfirmation(type, password);
             }
         }
     }
 
-    private void showFinalConfirmation(int type, byte[] password) {
+    private void showFinalConfirmation(int type, String password) {
         Preference preference = new Preference(getPreferenceManager().getContext());
         preference.setFragment(CryptKeeperConfirm.class.getName());
         preference.setTitle(R.string.crypt_keeper_confirm_title);
@@ -207,16 +207,16 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
         ((SettingsActivity) getActivity()).onPreferenceStartFragment(null, preference);
     }
 
-    private void addEncryptionInfoToPreference(Preference preference, int type, byte[] password) {
+    private void addEncryptionInfoToPreference(Preference preference, int type, String password) {
         Activity activity = getActivity();
         DevicePolicyManager dpm = (DevicePolicyManager)
                 activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         if (dpm.getDoNotAskCredentialsOnBoot()) {
             preference.getExtras().putInt(TYPE, StorageManager.CRYPT_TYPE_DEFAULT);
-            preference.getExtras().putByteArray(PASSWORD, "".getBytes());
+            preference.getExtras().putString(PASSWORD, "");
         } else {
             preference.getExtras().putInt(TYPE, type);
-            preference.getExtras().putByteArray(PASSWORD, password);
+            preference.getExtras().putString(PASSWORD, password);
         }
     }
 }

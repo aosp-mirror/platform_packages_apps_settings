@@ -65,7 +65,7 @@ public class ChooseLockPasswordTest {
     @Test
     public void intentBuilder_setPassword_shouldAddExtras() {
         Intent intent = new IntentBuilder(application)
-                .setPassword("password".getBytes())
+                .setPassword("password")
                 .setPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC)
                 .setPasswordLengthRange(123, 456)
                 .setUserId(123)
@@ -74,9 +74,9 @@ public class ChooseLockPasswordTest {
         assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true))
                 .named("EXTRA_KEY_HAS_CHALLENGE")
                 .isFalse();
-        assertThat(intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
+        assertThat(intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
                 .named("EXTRA_KEY_PASSWORD")
-                .isEqualTo("password".getBytes());
+                .isEqualTo("password");
         assertThat(intent.getIntExtra(ChooseLockPassword.PASSWORD_MIN_KEY, 0))
                 .named("PASSWORD_MIN_KEY")
                 .isEqualTo(123);
