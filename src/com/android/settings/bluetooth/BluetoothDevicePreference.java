@@ -29,6 +29,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.VisibleForTesting;
@@ -170,6 +171,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         final ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
         if (imageView != null) {
             imageView.setContentDescription(contentDescription);
+            // Set property to prevent Talkback from reading out.
+            imageView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
             imageView.setElevation(
                     getContext().getResources().getDimension(R.dimen.bt_icon_elevation));
         }
