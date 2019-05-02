@@ -66,7 +66,7 @@ public class BluetoothDeviceRenamePreferenceController extends
         if (TextUtils.equals(getPreferenceKey(), preference.getKey()) && mFragment != null) {
             mMetricsFeatureProvider.action(mContext,
                     SettingsEnums.ACTION_BLUETOOTH_RENAME);
-            LocalDeviceNameDialogFragment.newInstance()
+            new LocalDeviceNameDialogFragment()
                     .show(mFragment.getFragmentManager(), LocalDeviceNameDialogFragment.TAG);
             return true;
         }

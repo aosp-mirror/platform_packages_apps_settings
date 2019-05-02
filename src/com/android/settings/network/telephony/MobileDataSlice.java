@@ -73,11 +73,6 @@ public class MobileDataSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
-        // Mobile data not available, thus return no Slice.
-        if (!isMobileDataAvailable()) {
-            return null;
-        }
-
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_network_cell);
         final String title = mContext.getText(R.string.mobile_data_settings_title).toString();
@@ -85,20 +80,14 @@ public class MobileDataSlice implements CustomSliceable {
 
         // Return a Slice without the mobile data toggle when airplane mode is on.
         if (isAirplaneModeEnabled()) {
-            final CharSequence summary = mContext.getText(R.string.mobile_data_ap_mode_disabled);
-            // Intent does nothing, but we have to pass an intent to the Row.
-            final PendingIntent intent = PendingIntent.getActivity(mContext, 0 /* requestCode */,
-                    new Intent(), 0 /* flags */);
-            final SliceAction deadAction =
-                    SliceAction.create(intent, icon, ListBuilder.ICON_IMAGE, title);
-            final ListBuilder listBuilder = new ListBuilder(mContext, getUri(),
-                    ListBuilder.INFINITY)
-                    .setAccentColor(color)
-                    .addRow(new ListBuilder.RowBuilder()
-                            .setTitle(title)
-                            .setSubtitle(summary)
-                            .setPrimaryAction(deadAction));
-            return listBuilder.build();
+            return buildUnavailableMobileDataSlice(title,
+                    mContext.getText(R.string.mobile_data_ap_mode_disabled), icon, color);
+        }
+
+        // Return a Slice without the mobile data toggle when mobile data disabled.
+        if (!isMobileDataAvailable()) {
+            return buildUnavailableMobileDataSlice(title,
+                    mContext.getText(R.string.sim_cellular_data_unavailable), icon, color);
         }
 
         final CharSequence summary = getSummary();
@@ -128,7 +117,7 @@ public class MobileDataSlice implements CustomSliceable {
     @Override
     public void onNotifyChange(Intent intent) {
         final boolean newState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
-                    isMobileDataEnabled());
+                isMobileDataEnabled());
 
         final int defaultSubId = getDefaultSubscriptionId(mSubscriptionManager);
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
@@ -210,6 +199,22 @@ public class MobileDataSlice implements CustomSliceable {
         }
 
         return mTelephonyManager.isDataEnabled();
+    }
+
+    private Slice buildUnavailableMobileDataSlice(String title, CharSequence summary,
+            IconCompat icon, int color) {
+        final PendingIntent intent = PendingIntent.getActivity(mContext, 0 /* requestCode */,
+                new Intent(), 0 /* flags */);
+        final SliceAction deadAction =
+                SliceAction.create(intent, icon, ListBuilder.ICON_IMAGE, title);
+        final ListBuilder listBuilder = new ListBuilder(mContext, getUri(),
+                ListBuilder.INFINITY)
+                .setAccentColor(color)
+                .addRow(new ListBuilder.RowBuilder()
+                        .setTitle(title)
+                        .setSubtitle(summary)
+                        .setPrimaryAction(deadAction));
+        return listBuilder.build();
     }
 
     /**

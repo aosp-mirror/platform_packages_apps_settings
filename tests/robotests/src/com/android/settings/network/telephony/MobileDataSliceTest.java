@@ -170,21 +170,47 @@ public class MobileDataSliceTest {
     }
 
     @Test
-    public void isMobileDataAvailable_noSubscriptions_returnsNull() {
+    public void isMobileDataAvailable_noSubscriptions_slicePrimaryActionIsEmpty() {
         doReturn(new ArrayList<>()).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+        final Slice mobileData = mMobileDataSlice.getSlice();
 
-        final Slice slice = mMobileDataSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mobileData);
+        assertThat(metadata.getTitle())
+                .isEqualTo(mContext.getString(R.string.mobile_data_settings_title));
 
-        assertThat(slice).isNull();
+        assertThat(metadata.getSubtitle())
+                .isEqualTo(mContext.getString(R.string.sim_cellular_data_unavailable));
+
+        final List<SliceAction> toggles = metadata.getToggles();
+        assertThat(toggles).hasSize(0);
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final PendingIntent pendingIntent = primaryAction.getAction();
+        final Intent actionIntent = pendingIntent.getIntent();
+
+        assertThat(actionIntent).isNull();
     }
 
     @Test
-    public void isMobileDataAvailable_nullSubscriptions_returnsNull() {
+    public void isMobileDataAvailable_nullSubscriptions_slicePrimaryActionIsEmpty() {
         doReturn(null).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+        final Slice mobileData = mMobileDataSlice.getSlice();
 
-        final Slice slice = mMobileDataSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mobileData);
+        assertThat(metadata.getTitle())
+                .isEqualTo(mContext.getString(R.string.mobile_data_settings_title));
 
-        assertThat(slice).isNull();
+        assertThat(metadata.getSubtitle())
+                .isEqualTo(mContext.getString(R.string.sim_cellular_data_unavailable));
+
+        final List<SliceAction> toggles = metadata.getToggles();
+        assertThat(toggles).hasSize(0);
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final PendingIntent pendingIntent = primaryAction.getAction();
+        final Intent actionIntent = pendingIntent.getIntent();
+
+        assertThat(actionIntent).isNull();
     }
 
     @Test
