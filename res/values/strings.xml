@@ -2317,8 +2317,9 @@
         <item quantity="one">1 subscription</item>
         <item quantity="other">%d subscriptions</item>
     </plurals>
-    <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates number of whole kinds networks, if there are both normal saved networks and saved passpoint networks. The number will be at least 2. [CHAR LIMIT=60] -->
+    <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates number of whole kinds networks, if there are both normal saved networks and saved passpoint networks. The number will be at least 2, so the one case is only to prevent lint error. [CHAR LIMIT=60] -->
     <plurals name="wifi_saved_all_access_points_summary">
+        <item quantity="one">1 network &amp; subscription</item>
         <item quantity="other">%d networks &amp; subscriptions</item>
     </plurals>
     <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. [CHAR LIMIT=30] -->
