@@ -1333,22 +1333,23 @@
         </activity-alias>
 
         <activity android:name=".applications.specialaccess.deviceadmin.DeviceAdminAdd"
-                android:label="@string/device_admin_add_title"
-                android:clearTaskOnLaunch="true">
+                  android:label="@string/device_admin_add_title"
+                  android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity-alias android:name="SetProfileOwner"
-                        android:label="@string/profile_owner_add_title"
-                        android:targetActivity=".applications.specialaccess.deviceadmin.DeviceAdminAdd">
+        <activity android:name=".applications.specialaccess.deviceadmin.ProfileOwnerAdd"
+                  android:excludeFromRecents="true"
+                  android:theme="@style/Transparent"
+                  android:clearTaskOnLaunch="true">
             <intent-filter android:priority="1000">
                 <action android:name="android.app.action.SET_PROFILE_OWNER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity-alias>
+        </activity>
 
         <activity
             android:name="Settings$UsageAccessSettingsActivity"
