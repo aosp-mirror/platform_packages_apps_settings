@@ -43,11 +43,6 @@ public class SystemNavigationSwipeUpPreferenceController extends
     }
 
     @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(PREF_KEY_SWIPE_UP, getPreferenceKey());
-    }
-
-    @Override
     public void onRadioButtonClicked(RadioButtonPreference preference) {
         setNavBarInteractionMode(mOverlayManager, NAV_BAR_MODE_2BUTTON_OVERLAY);
         selectRadioButtonInGroup(PREF_KEY_SWIPE_UP, mPreferenceScreen);

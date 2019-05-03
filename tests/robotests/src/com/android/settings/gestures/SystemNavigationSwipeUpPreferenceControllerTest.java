@@ -180,8 +180,8 @@ public class SystemNavigationSwipeUpPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceableCorrectKey_returnsTrue() {
-        assertThat(mController.isSliceable()).isTrue();
+    public void isSliceable_returnsFalse() {
+        assertThat(mController.isSliceable()).isFalse();
     }
 
     @Test
