@@ -17,15 +17,20 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
+import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -51,7 +56,17 @@ import java.util.List;
 public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
 
     public BatterySaverScheduleRadioButtonsController mRadioButtonController;
+    @VisibleForTesting
+    Context mContext;
     private BatterySaverScheduleSeekBarController mSeekBarController;
+
+    @VisibleForTesting
+    final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            updateCandidates();
+        }
+    };
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -64,6 +79,16 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
         mSeekBarController = new BatterySaverScheduleSeekBarController(context);
         mRadioButtonController = new BatterySaverScheduleRadioButtonsController(
                 context, mSeekBarController);
+        mContext = context;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mContext.getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED),
+                false,
+                mSettingsObserver);
     }
 
     @Override
@@ -76,6 +101,12 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onPause() {
+        mContext.getContentResolver().unregisterContentObserver(mSettingsObserver);
+        super.onPause();
     }
 
     @Override
