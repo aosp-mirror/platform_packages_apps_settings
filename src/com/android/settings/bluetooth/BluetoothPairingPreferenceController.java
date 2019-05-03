@@ -76,7 +76,7 @@ public class BluetoothPairingPreferenceController extends AbstractPreferenceCont
     public Preference createBluetoothPairingPreference(int order) {
         mPreference = new Preference(mFragment.getPreferenceScreen().getContext());
         mPreference.setKey(KEY_PAIRING);
-        mPreference.setIcon(R.drawable.ic_menu_add);
+        mPreference.setIcon(R.drawable.ic_add_24dp);
         mPreference.setOrder(order);
         mPreference.setTitle(R.string.bluetooth_pairing_pref_title);
 

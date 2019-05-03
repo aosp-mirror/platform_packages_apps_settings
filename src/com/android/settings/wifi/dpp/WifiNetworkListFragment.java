@@ -148,7 +148,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
         mFakeNetworkPreference.setTitle("fake network");
 
         mAddPreference = new Preference(getPrefContext());
-        mAddPreference.setIcon(R.drawable.ic_menu_add);
+        mAddPreference.setIcon(R.drawable.ic_add_24dp);
         mAddPreference.setTitle(R.string.wifi_add_network);
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
