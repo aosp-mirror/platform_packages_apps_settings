@@ -45,7 +45,6 @@ import java.util.stream.Collectors;
  */
 public class NetworkScanHelper {
     public static final String TAG = "NetworkScanHelper";
-    private static final boolean DBG = false;
 
     /**
      * Callbacks interface to inform the network scan results.
@@ -184,7 +183,6 @@ public class NetworkScanHelper {
             mExecutor.execute(new NetworkScanSyncTask(
                     mTelephonyManager, (SettableFuture) mNetworkScanFuture));
         } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS) {
-            if (DBG) Log.d(TAG, "start network scan async");
             mNetworkScanRequester = mTelephonyManager.requestNetworkScan(
                     NETWORK_SCAN_REQUEST,
                     mExecutor,
@@ -240,17 +238,18 @@ public class NetworkScanHelper {
 
     private final class NetworkScanCallbackImpl extends TelephonyScanManager.NetworkScanCallback {
         public void onResults(List<CellInfo> results) {
-            if (DBG) Log.d(TAG, "async scan onResults() results = " + results);
+            Log.d(TAG, "Async scan onResults() results = "
+                    + CellInfoUtil.cellInfoListToString(results));
             NetworkScanHelper.this.onResults(results);
         }
 
         public void onComplete() {
-            if (DBG) Log.d(TAG, "async scan onComplete()");
+            Log.d(TAG, "async scan onComplete()");
             NetworkScanHelper.this.onComplete();
         }
 
         public void onError(@NetworkScan.ScanErrorCode int errCode) {
-            if (DBG) Log.d(TAG, "async scan onError() errorCode = " + errCode);
+            Log.d(TAG, "async scan onError() errorCode = " + errCode);
             NetworkScanHelper.this.onError(errCode);
         }
     }
@@ -267,19 +266,21 @@ public class NetworkScanHelper {
 
         @Override
         public void run() {
-            if (DBG) Log.d(TAG, "sync scan start");
-            CellNetworkScanResult result = mTelephonyManager.getAvailableNetworks();
+            final CellNetworkScanResult result = mTelephonyManager.getAvailableNetworks();
             if (result.getStatus() == CellNetworkScanResult.STATUS_SUCCESS) {
-                List<CellInfo> cellInfos = result.getOperators()
+                final List<CellInfo> cellInfos = result.getOperators()
                         .stream()
                         .map(operatorInfo
                                 -> CellInfoUtil.convertOperatorInfoToCellInfo(operatorInfo))
                         .collect(Collectors.toList());
-                if (DBG) Log.d(TAG, "sync scan complete");
+                Log.d(TAG, "Sync network scan completed, cellInfos = "
+                        + CellInfoUtil.cellInfoListToString(cellInfos));
                 mCallback.set(cellInfos);
             } else {
-                mCallback.setException(new Throwable(
-                        Integer.toString(convertToScanErrorCode(result.getStatus()))));
+                final Throwable error = new Throwable(
+                        Integer.toString(convertToScanErrorCode(result.getStatus())));
+                mCallback.setException(error);
+                Log.d(TAG, "Sync network scan error, ex = " + error);
             }
         }
     }
