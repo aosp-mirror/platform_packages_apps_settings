@@ -26,6 +26,7 @@ import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -44,7 +45,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
@@ -215,7 +215,7 @@ public class NotificationChannelSlice implements CustomSliceable {
                 .setDestination(AppNotificationSettings.class.getName())
                 .setTitleRes(R.string.notifications_title)
                 .setArguments(args)
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SLICE)
+                .setSourceMetricsCategory(SettingsEnums.SLICE)
                 .toIntent();
     }
 
@@ -263,7 +263,7 @@ public class NotificationChannelSlice implements CustomSliceable {
                 .setDestination(ChannelNotificationSettings.class.getName())
                 .setArguments(channelArgs)
                 .setTitleRes(R.string.notification_channel_title)
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SLICE)
+                .setSourceMetricsCategory(SettingsEnums.SLICE)
                 .toIntent();
 
         return SliceAction.createDeeplink(
@@ -439,7 +439,7 @@ public class NotificationChannelSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 AppAndNotificationDashboardFragment.class.getName(), "" /* key */,
                 screenTitle,
-                MetricsProto.MetricsEvent.SLICE)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(getUri());
     }

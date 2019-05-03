@@ -19,7 +19,6 @@ package com.android.settings.homepage.contextualcards.slices;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
