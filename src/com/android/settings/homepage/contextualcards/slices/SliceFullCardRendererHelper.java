@@ -74,10 +74,10 @@ class SliceFullCardRendererHelper {
                 });
 
         // Customize slice view for Settings
-        cardHolder.sliceView.showTitleItems(true);
+        cardHolder.sliceView.setShowTitleItems(true);
         if (card.isLargeCard()) {
-            cardHolder.sliceView.showHeaderDivider(true);
-            cardHolder.sliceView.showActionDividers(true);
+            cardHolder.sliceView.setShowHeaderDivider(true);
+            cardHolder.sliceView.setShowActionDividers(true);
         }
     }
 
