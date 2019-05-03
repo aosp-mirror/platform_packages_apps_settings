@@ -70,7 +70,6 @@ import com.android.settings.widget.ImeAwareEditText;
 import com.android.setupwizardlib.GlifLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ChooseLockPassword extends SettingsActivity {
@@ -131,7 +130,7 @@ public class ChooseLockPassword extends SettingsActivity {
             return this;
         }
 
-        public IntentBuilder setPassword(byte[] password) {
+        public IntentBuilder setPassword(String password) {
             mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
             return this;
         }
@@ -177,8 +176,8 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final String KEY_CURRENT_PASSWORD = "current_password";
         private static final String FRAGMENT_TAG_SAVE_AND_FINISH = "save_and_finish_worker";
 
-        private byte[] mCurrentPassword;
-        private byte[] mChosenPassword;
+        private String mCurrentPassword;
+        private String mChosenPassword;
         private boolean mHasChallenge;
         private long mChallenge;
         private ImeAwareEditText mPasswordEntry;
@@ -209,7 +208,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private GlifLayout mLayout;
         protected boolean mForFingerprint;
 
-        private byte[] mFirstPin;
+        private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
         protected boolean mIsAlphaMode;
         protected Button mSkipButton;
@@ -229,7 +228,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final int MIN_NUMBER_IN_PASSWORD = 4;
         private static final int MIN_NON_LETTER_IN_PASSWORD = 5;
 
-        // Error code returned from {@link #validatePassword(byte[])}.
+        // Error code returned from {@link #validatePassword(String)}.
         static final int NO_ERROR = 0;
         static final int CONTAIN_INVALID_CHARACTERS = 1 << 0;
         static final int TOO_SHORT = 1 << 1;
@@ -351,13 +350,12 @@ public class ChooseLockPassword extends SettingsActivity {
                 SaveAndFinishWorker w = new SaveAndFinishWorker();
                 final boolean required = getActivity().getIntent().getBooleanExtra(
                         EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
-                byte[] currentBytes = intent.getByteArrayExtra(
+                String current = intent.getStringExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-
                 w.setBlocking(true);
                 w.setListener(this);
-                w.start(mChooseLockSettingsHelper.utils(), required, false, 0,
-                        currentBytes, currentBytes, mRequestedQuality, mUserId);
+                w.start(mChooseLockSettingsHelper.utils(), required,
+                        false, 0, current, current, mRequestedQuality, mUserId);
             }
             mTextChangedHandler = new TextChangedHandler();
         }
@@ -418,8 +416,7 @@ public class ChooseLockPassword extends SettingsActivity {
             Intent intent = getActivity().getIntent();
             final boolean confirmCredentials = intent.getBooleanExtra(
                     ChooseLockGeneric.CONFIRM_CREDENTIALS, true);
-            mCurrentPassword = intent.getByteArrayExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            mCurrentPassword = intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             mHasChallenge = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
             mChallenge = intent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
@@ -431,9 +428,8 @@ public class ChooseLockPassword extends SettingsActivity {
                             mUserId);
                 }
             } else {
-
                 // restore from previous state
-                mFirstPin = savedInstanceState.getByteArray(KEY_FIRST_PIN);
+                mFirstPin = savedInstanceState.getString(KEY_FIRST_PIN);
                 final String state = savedInstanceState.getString(KEY_UI_STAGE);
                 if (state != null) {
                     mUiStage = Stage.valueOf(state);
@@ -441,7 +437,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 }
 
                 if (mCurrentPassword == null) {
-                    mCurrentPassword = savedInstanceState.getByteArray(KEY_CURRENT_PASSWORD);
+                    mCurrentPassword = savedInstanceState.getString(KEY_CURRENT_PASSWORD);
                 }
 
                 // Re-attach to the exiting worker if there is one.
@@ -540,8 +536,8 @@ public class ChooseLockPassword extends SettingsActivity {
         public void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
             outState.putString(KEY_UI_STAGE, mUiStage.name());
-            outState.putByteArray(KEY_FIRST_PIN, mFirstPin);
-            outState.putByteArray(KEY_CURRENT_PASSWORD, mCurrentPassword);
+            outState.putString(KEY_FIRST_PIN, mFirstPin);
+            outState.putString(KEY_CURRENT_PASSWORD, mCurrentPassword);
         }
 
         @Override
@@ -554,7 +550,7 @@ public class ChooseLockPassword extends SettingsActivity {
                         getActivity().setResult(RESULT_FINISHED);
                         getActivity().finish();
                     } else {
-                        mCurrentPassword = data.getByteArrayExtra(
+                        mCurrentPassword = data.getStringExtra(
                                 ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                     }
                     break;
@@ -645,22 +641,22 @@ public class ChooseLockPassword extends SettingsActivity {
          * @param password the raw password the user typed in
          * @return the validation result.
          */
-        int validatePassword(byte[] password) {
+        private int validatePassword(String password) {
             int errorCode = NO_ERROR;
             final PasswordMetrics metrics = PasswordMetrics.computeForPassword(password);
 
 
-            if (password == null || password.length < mPasswordMinLength) {
+            if (password.length() < mPasswordMinLength) {
                 if (mPasswordMinLength > mPasswordMinLengthToFulfillAllPolicies) {
                     errorCode |= TOO_SHORT;
                 }
-            } else if (password.length > mPasswordMaxLength) {
+            } else if (password.length() > mPasswordMaxLength) {
                 errorCode |= TOO_LONG;
             } else {
                 // The length requirements are fulfilled.
                 final int dpmQuality = mLockPatternUtils.getRequestedPasswordQuality(mUserId);
                 if (dpmQuality == PASSWORD_QUALITY_NUMERIC_COMPLEX &&
-                        metrics.numeric == password.length) {
+                        metrics.numeric == password.length()) {
                     // Check for repeated characters or sequences (e.g. '1234', '0000', '2468')
                     // if DevicePolicyManager requires a complex numeric password. There can be
                     // two cases in the UI: 1. User chooses to enroll a PIN, 2. User chooses to
@@ -679,8 +675,8 @@ public class ChooseLockPassword extends SettingsActivity {
             }
 
             // Allow non-control Latin-1 characters only.
-            for (int i = 0; i < password.length; i++) {
-                char c = (char) password[i];
+            for (int i = 0; i < password.length(); i++) {
+                char c = password.charAt(i);
                 if (c < 32 || c > 127) {
                     errorCode |= CONTAIN_INVALID_CHARACTERS;
                     break;
@@ -750,9 +746,8 @@ public class ChooseLockPassword extends SettingsActivity {
 
         public void handleNext() {
             if (mSaveAndFinishWorker != null) return;
-            // TODO(b/120484642): This is a point of entry for passwords from the UI
-            mChosenPassword = LockPatternUtils.charSequenceToByteArray(mPasswordEntry.getText());
-            if (mChosenPassword == null || mChosenPassword.length == 0) {
+            mChosenPassword = mPasswordEntry.getText().toString();
+            if (TextUtils.isEmpty(mChosenPassword)) {
                 return;
             }
             if (mUiStage == Stage.Introduction) {
@@ -760,11 +755,9 @@ public class ChooseLockPassword extends SettingsActivity {
                     mFirstPin = mChosenPassword;
                     mPasswordEntry.setText("");
                     updateStage(Stage.NeedToConfirm);
-                } else {
-                    Arrays.fill(mChosenPassword, (byte) 0);
                 }
             } else if (mUiStage == Stage.NeedToConfirm) {
-                if (Arrays.equals(mFirstPin, mChosenPassword)) {
+                if (mFirstPin.equals(mChosenPassword)) {
                     startSaveAndFinish();
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();
@@ -772,7 +765,6 @@ public class ChooseLockPassword extends SettingsActivity {
                         Selection.setSelection((Spannable) tmp, 0, tmp.length());
                     }
                     updateStage(Stage.ConfirmWrong);
-                    Arrays.fill(mChosenPassword, (byte) 0);
                 }
             }
         }
@@ -883,8 +875,8 @@ public class ChooseLockPassword extends SettingsActivity {
          */
         protected void updateUi() {
             final boolean canInput = mSaveAndFinishWorker == null;
-            byte[] password = LockPatternUtils.charSequenceToByteArray(mPasswordEntry.getText());
-            final int length = password.length;
+            String password = mPasswordEntry.getText().toString();
+            final int length = password.length();
             if (mUiStage == Stage.Introduction) {
                 mPasswordRestrictionView.setVisibility(View.VISIBLE);
                 final int errorCode = validatePassword(password);
@@ -912,7 +904,6 @@ public class ChooseLockPassword extends SettingsActivity {
 
             setNextText(mUiStage.buttonText);
             mPasswordEntryInputDisabler.setInputEnabled(canInput);
-            Arrays.fill(password, (byte) 0);
         }
 
         private int toVisibility(boolean visibleOrGone) {
@@ -971,18 +962,6 @@ public class ChooseLockPassword extends SettingsActivity {
         public void onChosenLockSaveFinished(boolean wasSecureBefore, Intent resultData) {
             getActivity().setResult(RESULT_FINISHED, resultData);
 
-            if (mChosenPassword != null) {
-                Arrays.fill(mChosenPassword, (byte) 0);
-            }
-            if (mCurrentPassword != null) {
-                Arrays.fill(mCurrentPassword, (byte) 0);
-            }
-            if (mFirstPin != null) {
-                Arrays.fill(mFirstPin, (byte) 0);
-            }
-
-            mPasswordEntry.setText("");
-
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
                 if (intent != null) {
@@ -1020,13 +999,13 @@ public class ChooseLockPassword extends SettingsActivity {
 
     public static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
 
-        private byte[] mChosenPassword;
-        private byte[] mCurrentPassword;
+        private String mChosenPassword;
+        private String mCurrentPassword;
         private int mRequestedQuality;
 
         public void start(LockPatternUtils utils, boolean required,
                 boolean hasChallenge, long challenge,
-                byte[] chosenPassword, byte[] currentPassword, int requestedQuality, int userId) {
+                String chosenPassword, String currentPassword, int requestedQuality, int userId) {
             prepare(utils, required, hasChallenge, challenge, userId);
 
             mChosenPassword = chosenPassword;

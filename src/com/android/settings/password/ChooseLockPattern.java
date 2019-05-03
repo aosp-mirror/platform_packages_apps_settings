@@ -52,7 +52,6 @@ import com.android.setupwizardlib.GlifLayout;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -112,7 +111,7 @@ public class ChooseLockPattern extends SettingsActivity {
             return this;
         }
 
-        public IntentBuilder setPattern(byte[] pattern) {
+        public IntentBuilder setPattern(String pattern) {
             mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pattern);
             return this;
         }
@@ -171,7 +170,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private static final String FRAGMENT_TAG_SAVE_AND_FINISH = "save_and_finish_worker";
 
-        private byte[] mCurrentPattern;
+        private String mCurrentPattern;
         private boolean mHasChallenge;
         private long mChallenge;
         protected TextView mTitleText;
@@ -209,7 +208,7 @@ public class ChooseLockPattern extends SettingsActivity {
                         getActivity().setResult(RESULT_FINISHED);
                         getActivity().finish();
                     } else {
-                        mCurrentPattern = data.getByteArrayExtra(
+                        mCurrentPattern = data.getStringExtra(
                                 ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                     }
 
@@ -442,12 +441,12 @@ public class ChooseLockPattern extends SettingsActivity {
                 SaveAndFinishWorker w = new SaveAndFinishWorker();
                 final boolean required = getActivity().getIntent().getBooleanExtra(
                         EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
-                byte[] current = intent.getByteArrayExtra(
+                String current = intent.getStringExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 w.setBlocking(true);
                 w.setListener(this);
                 w.start(mChooseLockSettingsHelper.utils(), required,
-                        false, 0, LockPatternUtils.byteArrayToPattern(current), current, mUserId);
+                        false, 0, LockPatternUtils.stringToPattern(current), current, mUserId);
             }
             mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
             mForFingerprint = intent.getBooleanExtra(
@@ -508,8 +507,7 @@ public class ChooseLockPattern extends SettingsActivity {
             final boolean confirmCredentials = getActivity().getIntent()
                     .getBooleanExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, true);
             Intent intent = getActivity().getIntent();
-            mCurrentPattern =
-                    intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            mCurrentPattern = intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             mHasChallenge = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
             mChallenge = intent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
@@ -532,13 +530,13 @@ public class ChooseLockPattern extends SettingsActivity {
                 }
             } else {
                 // restore from previous state
-                final byte[] pattern = savedInstanceState.getByteArray(KEY_PATTERN_CHOICE);
-                if (pattern != null) {
-                    mChosenPattern = LockPatternUtils.byteArrayToPattern(pattern);
+                final String patternString = savedInstanceState.getString(KEY_PATTERN_CHOICE);
+                if (patternString != null) {
+                    mChosenPattern = LockPatternUtils.stringToPattern(patternString);
                 }
 
                 if (mCurrentPattern == null) {
-                    mCurrentPattern = savedInstanceState.getByteArray(KEY_CURRENT_PATTERN);
+                    mCurrentPattern = savedInstanceState.getString(KEY_CURRENT_PATTERN);
                 }
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
 
@@ -634,12 +632,13 @@ public class ChooseLockPattern extends SettingsActivity {
 
             outState.putInt(KEY_UI_STAGE, mUiStage.ordinal());
             if (mChosenPattern != null) {
-                outState.putByteArray(KEY_PATTERN_CHOICE,
-                        LockPatternUtils.patternToByteArray(mChosenPattern));
+                outState.putString(KEY_PATTERN_CHOICE,
+                        LockPatternUtils.patternToString(mChosenPattern));
             }
 
             if (mCurrentPattern != null) {
-                outState.putByteArray(KEY_CURRENT_PATTERN, mCurrentPattern);
+                outState.putString(KEY_CURRENT_PATTERN,
+                        mCurrentPattern);
             }
         }
 
@@ -785,10 +784,6 @@ public class ChooseLockPattern extends SettingsActivity {
         public void onChosenLockSaveFinished(boolean wasSecureBefore, Intent resultData) {
             getActivity().setResult(RESULT_FINISHED, resultData);
 
-            if (mCurrentPattern != null) {
-                Arrays.fill(mCurrentPattern, (byte) 0);
-            }
-
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
                 if (intent != null) {
@@ -803,12 +798,12 @@ public class ChooseLockPattern extends SettingsActivity {
     public static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
 
         private List<LockPatternView.Cell> mChosenPattern;
-        private byte[] mCurrentPattern;
+        private String mCurrentPattern;
         private boolean mLockVirgin;
 
         public void start(LockPatternUtils utils, boolean credentialRequired,
                 boolean hasChallenge, long challenge,
-                List<LockPatternView.Cell> chosenPattern, byte[] currentPattern, int userId) {
+                List<LockPatternView.Cell> chosenPattern, String currentPattern, int userId) {
             prepare(utils, credentialRequired, hasChallenge, challenge, userId);
 
             mCurrentPattern = currentPattern;

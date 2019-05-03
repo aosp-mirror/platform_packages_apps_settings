@@ -63,7 +63,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ChooseLockGeneric extends SettingsActivity {
@@ -145,7 +144,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private int mEncryptionRequestQuality;
         private boolean mEncryptionRequestDisabled;
         private boolean mForChangeCredRequiredForBoot = false;
-        private byte[] mUserPassword;
+        private String mUserPassword;
         private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
         private int mUserId;
@@ -185,7 +184,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 .getBooleanExtra(CONFIRM_CREDENTIALS, true);
             if (getActivity() instanceof ChooseLockGeneric.InternalActivity) {
                 mPasswordConfirmed = !confirmCredentials;
-                mUserPassword = getActivity().getIntent().getByteArrayExtra(
+                mUserPassword = getActivity().getIntent().getStringExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             }
             mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
@@ -207,7 +206,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mEncryptionRequestDisabled = savedInstanceState.getBoolean(
                         ENCRYPT_REQUESTED_DISABLED);
                 if (mUserPassword == null) {
-                    mUserPassword = savedInstanceState.getByteArray(
+                    mUserPassword = savedInstanceState.getString(
                             ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 }
             }
@@ -352,12 +351,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             mWaitingForConfirmation = false;
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
-                mUserPassword = data != null
-                    ? data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD)
-                    : null;
+                mUserPassword = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 updatePreferencesOrFinish(false /* isRecreatingActivity */);
                 if (mForChangeCredRequiredForBoot) {
-                    if (!(mUserPassword == null || mUserPassword.length == 0)) {
+                    if (!TextUtils.isEmpty(mUserPassword)) {
                         maybeEnableEncryption(
                                 mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId), false);
                     } else {
@@ -417,7 +414,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             outState.putInt(ENCRYPT_REQUESTED_QUALITY, mEncryptionRequestQuality);
             outState.putBoolean(ENCRYPT_REQUESTED_DISABLED, mEncryptionRequestDisabled);
             if (mUserPassword != null) {
-                outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, mUserPassword);
+                outState.putString(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, mUserPassword);
             }
         }
 
@@ -593,7 +590,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             setPreferenceSummary(ScreenLockType.MANAGED, R.string.secure_lock_encryption_warning);
         }
 
-        protected Intent getLockManagedPasswordIntent(byte[] password) {
+        protected Intent getLockManagedPasswordIntent(String password) {
             return mManagedPasswordProvider.createIntent(false, password);
         }
 

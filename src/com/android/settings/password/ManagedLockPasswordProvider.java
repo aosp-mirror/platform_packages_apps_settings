@@ -61,7 +61,7 @@ public class ManagedLockPasswordProvider {
      * @param password Current lock password.
      * @return Intent that should update lock password to a managed password.
      */
-    Intent createIntent(boolean requirePasswordToDecrypt, byte[] password) {
+    Intent createIntent(boolean requirePasswordToDecrypt, String password) {
         return null;
     }
 }
