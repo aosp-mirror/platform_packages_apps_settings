@@ -29,7 +29,10 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -110,8 +113,8 @@ public class ImportancePreferenceTest {
         assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(selected);
         assertThat(holder.itemView.findViewById(R.id.silence).getBackground())
                 .isEqualTo(unselected);
-        assertThat(((TextView) holder.itemView.findViewById(R.id.description)).getText()).isEqualTo(
-                mContext.getString(R.string.notification_channel_summary_default));
+        assertThat(((TextView) holder.itemView.findViewById(R.id.alert_summary)).getText())
+                .isEqualTo(mContext.getString(R.string.notification_channel_summary_default));
     }
 
     @Test
@@ -129,28 +132,32 @@ public class ImportancePreferenceTest {
         preference.setImportance(IMPORTANCE_DEFAULT);
         preference.onBindViewHolder(holder);
 
-        Button silenceButton = holder.itemView.findViewById(R.id.silence);
+        View silenceButton = holder.itemView.findViewById(R.id.silence);
 
         silenceButton.callOnClick();
 
         assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(unselected);
         assertThat(holder.itemView.findViewById(R.id.silence).getBackground()).isEqualTo(selected);
-        assertThat(((TextView) holder.itemView.findViewById(R.id.description)).getText()).isEqualTo(
-                mContext.getString(R.string.notification_channel_summary_low));
 
         verify(preference, times(1)).callChangeListener(IMPORTANCE_LOW);
     }
 
     @Test
     public void setImportanceSummary_status() {
+        ViewGroup parent = new LinearLayout(mContext);
         TextView tv = new TextView(mContext);
+        tv.setId(R.id.silence_summary);
+        parent.addView(tv);
+        TextView other = new TextView(mContext);
+        other.setId(R.id.alert_summary);
+        parent.addView(other);
 
         final ImportancePreference preference = spy(new ImportancePreference(mContext));
 
         preference.setDisplayInStatusBar(true);
         preference.setDisplayOnLockscreen(false);
 
-        preference.setImportanceSummary(tv, IMPORTANCE_LOW);
+        preference.setImportanceSummary(parent, IMPORTANCE_LOW, true);
 
         assertThat(tv.getText()).isEqualTo(
                 mContext.getString(R.string.notification_channel_summary_low_status));
@@ -158,14 +165,20 @@ public class ImportancePreferenceTest {
 
     @Test
     public void setImportanceSummary_lock() {
+        ViewGroup parent = new LinearLayout(mContext);
         TextView tv = new TextView(mContext);
+        tv.setId(R.id.silence_summary);
+        parent.addView(tv);
+        TextView other = new TextView(mContext);
+        other.setId(R.id.alert_summary);
+        parent.addView(other);
 
         final ImportancePreference preference = spy(new ImportancePreference(mContext));
 
         preference.setDisplayInStatusBar(false);
         preference.setDisplayOnLockscreen(true);
 
-        preference.setImportanceSummary(tv, IMPORTANCE_LOW);
+        preference.setImportanceSummary(parent, IMPORTANCE_LOW, true);
 
         assertThat(tv.getText()).isEqualTo(
                 mContext.getString(R.string.notification_channel_summary_low_lock));
@@ -173,14 +186,20 @@ public class ImportancePreferenceTest {
 
     @Test
     public void setImportanceSummary_statusLock() {
+        ViewGroup parent = new LinearLayout(mContext);
         TextView tv = new TextView(mContext);
+        tv.setId(R.id.silence_summary);
+        parent.addView(tv);
+        TextView other = new TextView(mContext);
+        other.setId(R.id.alert_summary);
+        parent.addView(other);
 
         final ImportancePreference preference = spy(new ImportancePreference(mContext));
 
         preference.setDisplayInStatusBar(true);
         preference.setDisplayOnLockscreen(true);
 
-        preference.setImportanceSummary(tv, IMPORTANCE_LOW);
+        preference.setImportanceSummary(parent, IMPORTANCE_LOW, true);
 
         assertThat(tv.getText()).isEqualTo(
                 mContext.getString(R.string.notification_channel_summary_low_status_lock));
@@ -188,14 +207,20 @@ public class ImportancePreferenceTest {
 
     @Test
     public void setImportanceSummary_statusLock_default() {
+        ViewGroup parent = new LinearLayout(mContext);
         TextView tv = new TextView(mContext);
+        tv.setId(R.id.alert_summary);
+        parent.addView(tv);
+        TextView other = new TextView(mContext);
+        other.setId(R.id.silence_summary);
+        parent.addView(other);
 
         final ImportancePreference preference = spy(new ImportancePreference(mContext));
 
         preference.setDisplayInStatusBar(true);
         preference.setDisplayOnLockscreen(true);
 
-        preference.setImportanceSummary(tv, IMPORTANCE_DEFAULT);
+        preference.setImportanceSummary(parent, IMPORTANCE_DEFAULT, true);
 
         assertThat(tv.getText()).isEqualTo(
                 mContext.getString(R.string.notification_channel_summary_default));

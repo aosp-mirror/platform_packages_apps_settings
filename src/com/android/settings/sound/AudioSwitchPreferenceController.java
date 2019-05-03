@@ -17,7 +17,6 @@
 package com.android.settings.sound;
 
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
-import static android.media.MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -29,7 +28,6 @@ import android.media.AudioDeviceCallback;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.MediaRouter;
-import android.media.MediaRouter.Callback;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.FeatureFlagUtils;
@@ -76,7 +74,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     protected AudioSwitchCallback mAudioSwitchPreferenceCallback;
 
     private final AudioManagerAudioDeviceCallback mAudioManagerAudioDeviceCallback;
-    private final MediaRouterCallback mMediaRouterCallback;
     private final WiredHeadsetBroadcastReceiver mReceiver;
     private final Handler mHandler;
     private LocalBluetoothManager mLocalBluetoothManager;
@@ -92,7 +89,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         mHandler = new Handler(Looper.getMainLooper());
         mAudioManagerAudioDeviceCallback = new AudioManagerAudioDeviceCallback();
         mReceiver = new WiredHeadsetBroadcastReceiver();
-        mMediaRouterCallback = new MediaRouterCallback();
         mConnectedDevices = new ArrayList<>();
         final FutureTask<LocalBluetoothManager> localBtManagerFutureTask = new FutureTask<>(
                 // Avoid StrictMode ThreadPolicy violation
@@ -210,12 +206,12 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
      * get A2dp devices on all states
      * (STATE_DISCONNECTED, STATE_CONNECTING, STATE_CONNECTED,  STATE_DISCONNECTING)
      */
-    protected List<BluetoothDevice> getConnectableA2dpDevices() {
+    protected List<BluetoothDevice> getConnectedA2dpDevices() {
         final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
         if (a2dpProfile == null) {
             return new ArrayList<>();
         }
-        return a2dpProfile.getConnectableDevices();
+        return a2dpProfile.getConnectedDevices();
     }
 
     /**
@@ -234,31 +230,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             // device with same hiSyncId should not be shown in the UI.
             // So do not add it into connectedDevices.
             if (!devicesHiSyncIds.contains(hiSyncId) && device.isConnected()) {
-                devicesHiSyncIds.add(hiSyncId);
-                connectedDevices.add(device);
-            }
-        }
-        return connectedDevices;
-    }
-
-    /**
-     * get hearing aid profile devices on all states
-     * (STATE_DISCONNECTED, STATE_CONNECTING, STATE_CONNECTED,  STATE_DISCONNECTING)
-     * exclude other devices with same hiSyncId.
-     */
-    protected List<BluetoothDevice> getConnectableHearingAidDevices() {
-        final List<BluetoothDevice> connectedDevices = new ArrayList<>();
-        final HearingAidProfile hapProfile = mProfileManager.getHearingAidProfile();
-        if (hapProfile == null) {
-            return connectedDevices;
-        }
-        final List<Long> devicesHiSyncIds = new ArrayList<>();
-        final List<BluetoothDevice> devices = hapProfile.getConnectableDevices();
-        for (BluetoothDevice device : devices) {
-            final long hiSyncId = hapProfile.getHiSyncId(device);
-            // device with same hiSyncId should not be shown in the UI.
-            // So do not add it into connectedDevices.
-            if (!devicesHiSyncIds.contains(hiSyncId)) {
                 devicesHiSyncIds.add(hiSyncId);
                 connectedDevices.add(device);
             }
@@ -299,7 +270,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     private void register() {
         mLocalBluetoothManager.getEventManager().registerCallback(this);
         mAudioManager.registerAudioDeviceCallback(mAudioManagerAudioDeviceCallback, mHandler);
-        mMediaRouter.addCallback(ROUTE_TYPE_REMOTE_DISPLAY, mMediaRouterCallback);
 
         // Register for misc other intent broadcasts.
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
@@ -310,7 +280,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     private void unregister() {
         mLocalBluetoothManager.getEventManager().unregisterCallback(this);
         mAudioManager.unregisterAudioDeviceCallback(mAudioManagerAudioDeviceCallback);
-        mMediaRouter.removeCallback(mMediaRouterCallback);
         mContext.unregisterReceiver(mReceiver);
     }
 
@@ -336,51 +305,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
                     AudioManager.STREAM_DEVICES_CHANGED_ACTION.equals(action)) {
                 updateState(mPreference);
             }
-        }
-    }
-
-    /** Callback for cast device events. */
-    private class MediaRouterCallback extends Callback {
-        @Override
-        public void onRouteSelected(MediaRouter router, int type, MediaRouter.RouteInfo info) {
-        }
-
-        @Override
-        public void onRouteUnselected(MediaRouter router, int type, MediaRouter.RouteInfo info) {
-        }
-
-        @Override
-        public void onRouteAdded(MediaRouter router, MediaRouter.RouteInfo info) {
-            if (info != null && !info.isDefault()) {
-                // cast mode
-                updateState(mPreference);
-            }
-        }
-
-        @Override
-        public void onRouteRemoved(MediaRouter router, MediaRouter.RouteInfo info) {
-        }
-
-        @Override
-        public void onRouteChanged(MediaRouter router, MediaRouter.RouteInfo info) {
-            if (info != null && !info.isDefault()) {
-                // cast mode
-                updateState(mPreference);
-            }
-        }
-
-        @Override
-        public void onRouteGrouped(MediaRouter router, MediaRouter.RouteInfo info,
-                MediaRouter.RouteGroup group, int index) {
-        }
-
-        @Override
-        public void onRouteUngrouped(MediaRouter router, MediaRouter.RouteInfo info,
-                MediaRouter.RouteGroup group) {
-        }
-
-        @Override
-        public void onRouteVolumeChanged(MediaRouter router, MediaRouter.RouteInfo info) {
         }
     }
 }

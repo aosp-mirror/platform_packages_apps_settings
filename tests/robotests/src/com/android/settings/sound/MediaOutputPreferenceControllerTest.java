@@ -109,7 +109,7 @@ public class MediaOutputPreferenceControllerTest {
     private BluetoothDevice mRightBluetoothHapDevice;
     private LocalBluetoothManager mLocalBluetoothManager;
     private MediaOutputPreferenceController mController;
-    private List<BluetoothDevice> mProfileConnectableDevices;
+    private List<BluetoothDevice> mProfileConnectedDevices;
     private List<BluetoothDevice> mHearingAidActiveDevices;
 
     @Before
@@ -150,7 +150,7 @@ public class MediaOutputPreferenceControllerTest {
         mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
         mScreen = spy(new PreferenceScreen(mContext, null));
         mPreference = new Preference(mContext);
-        mProfileConnectableDevices = new ArrayList<>();
+        mProfileConnectedDevices = new ArrayList<>();
         mHearingAidActiveDevices = new ArrayList<>(2);
 
         when(mScreen.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
@@ -172,11 +172,11 @@ public class MediaOutputPreferenceControllerTest {
      * Preference should be invisible
      */
     @Test
-    public void updateState_withoutConnectableBtDevice_preferenceInvisible() {
+    public void updateState_withoutConnectedBtDevice_preferenceInvisible() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_EARPIECE);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mProfileConnectableDevices.clear();
-        when(mA2dpProfile.getConnectableDevices()).thenReturn(mProfileConnectableDevices);
+        mProfileConnectedDevices.clear();
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
         mPreference.setVisible(true);
 
         assertThat(mPreference.isVisible()).isTrue();
@@ -185,16 +185,16 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     /**
-     * A2DP Bluetooth device(s) are connectable, no matter active or inactive
+     * A2DP Bluetooth device(s) are connected, no matter active or inactive
      * Preference should be visible
      */
     @Test
-    public void updateState_withConnectableBtDevice_preferenceVisible() {
+    public void updateState_withConnectedBtDevice_preferenceVisible() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mProfileConnectableDevices.clear();
-        mProfileConnectableDevices.add(mBluetoothDevice);
-        when(mA2dpProfile.getConnectableDevices()).thenReturn(mProfileConnectableDevices);
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
         assertThat(mPreference.isVisible()).isFalse();
 
         // Without Active Bluetooth Device
@@ -208,17 +208,17 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     /**
-     * A2DP Bluetooth device(s) are connectable, but no device is set as activated
+     * A2DP Bluetooth device(s) are connected, but no device is set as activated
      * Preference summary should be "This device"
      */
     @Test
-    public void updateState_withConnectableBtDevice_withoutActiveBtDevice_setDefaultSummary() {
+    public void updateState_withConnectedBtDevice_withoutActiveBtDevice_setDefaultSummary() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_EARPIECE);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mProfileConnectableDevices.clear();
-        mProfileConnectableDevices.add(mBluetoothDevice);
-        mProfileConnectableDevices.add(mSecondBluetoothDevice);
-        when(mA2dpProfile.getConnectableDevices()).thenReturn(mProfileConnectableDevices);
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        mProfileConnectedDevices.add(mSecondBluetoothDevice);
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
         when(mA2dpProfile.getActiveDevice()).thenReturn(null);
 
         assertThat(mPreference.getSummary()).isNull();
@@ -235,10 +235,10 @@ public class MediaOutputPreferenceControllerTest {
     public void updateState_withActiveBtDevice_setActivatedDeviceName() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mProfileConnectableDevices.clear();
-        mProfileConnectableDevices.add(mBluetoothDevice);
-        mProfileConnectableDevices.add(mSecondBluetoothDevice);
-        when(mA2dpProfile.getConnectableDevices()).thenReturn(mProfileConnectableDevices);
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        mProfileConnectedDevices.add(mSecondBluetoothDevice);
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
         when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
 
         assertThat(mPreference.getSummary()).isNull();
@@ -248,16 +248,16 @@ public class MediaOutputPreferenceControllerTest {
 
 
     /**
-     * Hearing Aid device(s) are connectable, no matter active or inactive
+     * Hearing Aid device(s) are connected, no matter active or inactive
      * Preference should be visible
      */
     @Test
-    public void updateState_withConnectableHADevice_preferenceVisible() {
+    public void updateState_withConnectedHADevice_preferenceVisible() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mHearingAidActiveDevices.clear();
         mHearingAidActiveDevices.add(mLeftBluetoothHapDevice);
-        when(mHearingAidProfile.getConnectableDevices()).thenReturn(mHearingAidActiveDevices);
+        when(mHearingAidProfile.getConnectedDevices()).thenReturn(mHearingAidActiveDevices);
         assertThat(mPreference.isVisible()).isFalse();
 
         // Without Active Hearing Aid Device
@@ -280,7 +280,7 @@ public class MediaOutputPreferenceControllerTest {
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mHearingAidActiveDevices.clear();
         mHearingAidActiveDevices.add(mLeftBluetoothHapDevice);
-        when(mHearingAidProfile.getConnectableDevices()).thenReturn(mHearingAidActiveDevices);
+        when(mHearingAidProfile.getConnectedDevices()).thenReturn(mHearingAidActiveDevices);
         when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
 
         assertThat(mPreference.getSummary()).isNull();
@@ -330,22 +330,6 @@ public class MediaOutputPreferenceControllerTest {
         assertThat(mPreference.isVisible()).isFalse();
         assertThat(mPreference.getSummary()).isEqualTo(
                 mContext.getText(R.string.media_out_summary_ongoing_call_state));
-    }
-
-    /**
-     * Media stream is captured by something else (cast device):
-     * Preference should be invisible
-     * Preference summary should be "unavailable"
-     */
-    @Test
-    public void updateState_mediaStreamIsCapturedByCast_shouldDisableAndSetDefaultSummary() {
-        mShadowAudioManager.setOutputDevice(DEVICE_OUT_REMOTE_SUBMIX);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.isVisible()).isFalse();
-        String defaultString = mContext.getString(R.string.media_output_summary_unavailable);
-        assertThat(mPreference.getSummary()).isEqualTo(defaultString);
     }
 
     @Test
