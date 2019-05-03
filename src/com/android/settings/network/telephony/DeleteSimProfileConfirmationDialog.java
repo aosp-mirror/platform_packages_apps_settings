@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -77,7 +78,6 @@ public class DeleteSimProfileConfirmationDialog extends InstrumentedDialogFragme
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/131519375) - use a real id here once it's been created in the metrics proto
-        return 0;
+        return SettingsEnums.DIALOG_DELETE_SIM_CONFIRMATION;
     }
 }
