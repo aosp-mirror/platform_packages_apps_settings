@@ -28,6 +28,7 @@ import android.text.format.Formatter;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settingslib.net.DataUsageController;
 
 /**
@@ -77,7 +78,7 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
 
         if (enabled) {
             preference.setSummary(mContext.getString(R.string.data_usage_template,
-                    Formatter.formatFileSize(mContext, mDataUsageInfo.usageLevel),
+                    DataUsageUtils.formatDataUsage(mContext, mDataUsageInfo.usageLevel),
                     mDataUsageInfo.period));
         }
     }
