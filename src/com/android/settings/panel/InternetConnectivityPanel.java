@@ -63,7 +63,8 @@ public class InternetConnectivityPanel implements PanelContent {
 
     @Override
     public Intent getSeeMoreIntent() {
-        return new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+        return new Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override
