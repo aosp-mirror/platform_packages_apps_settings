@@ -20,18 +20,25 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.accessibility.AccessibilityEvent;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.display.FontSizePreferenceFragmentForSetupWizard;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 
     private static final String SAVE_KEY_TITLE = "activity_title";
+
+    @VisibleForTesting
+    static final String EXTRA_GO_TO_FONT_SIZE_PREFERENCE = "go_to_font_size_preference";
 
     @Override
     protected void onSaveInstanceState(Bundle savedState) {
@@ -78,5 +85,28 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
                         : Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .launch();
         return true;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedState) {
+        super.onCreate(savedState);
+
+        tryLaunchFontSizePreference();
+    }
+
+    @VisibleForTesting
+    void tryLaunchFontSizePreference() {
+        if (WizardManagerHelper.isAnySetupWizard(getIntent()) && getIntent().getBooleanExtra(
+                EXTRA_GO_TO_FONT_SIZE_PREFERENCE, false)) {
+            Bundle args = new Bundle();
+            args.putInt(HelpResourceProvider.HELP_URI_RESOURCE_KEY, 0);
+            args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
+            new SubSettingLauncher(this)
+                    .setDestination(FontSizePreferenceFragmentForSetupWizard.class.getName())
+                    .setArguments(args)
+                    .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                    .launch();
+            finish();
+        }
     }
 }

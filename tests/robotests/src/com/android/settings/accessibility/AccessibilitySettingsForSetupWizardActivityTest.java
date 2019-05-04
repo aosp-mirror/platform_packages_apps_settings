@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilitySettingsForSetupWizardActivity.EXTRA_GO_TO_FONT_SIZE_PREFERENCE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Intent;
@@ -23,11 +25,14 @@ import android.content.Intent;
 import androidx.test.filters.SmallTest;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.display.FontSizePreferenceFragmentForSetupWizard;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 
 @RunWith(RobolectricTestRunner.class)
 @SmallTest
@@ -40,5 +45,21 @@ public class AccessibilitySettingsForSetupWizardActivityTest {
         Robolectric.buildActivity(AccessibilitySettingsForSetupWizardActivity.class, intent).get();
 
     assertThat(activity.getThemeResId()).isEqualTo(R.style.GlifV3Theme_Light);
+  }
+
+  @Test
+  public void onCreate_whenHasFontSizeExtra_shouldGoToFontSizePreferenceDirectly() {
+    AccessibilitySettingsForSetupWizardActivity activity =
+            Robolectric.buildActivity(AccessibilitySettingsForSetupWizardActivity.class,
+                    new Intent().putExtra(EXTRA_GO_TO_FONT_SIZE_PREFERENCE, true).
+                                 putExtra("isSetupFlow", true)).get();
+
+    activity.tryLaunchFontSizePreference();
+
+    final Intent launchIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+    assertThat(launchIntent).isNotNull();
+    assertThat(launchIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
+            FontSizePreferenceFragmentForSetupWizard.class.getName());
+    assertThat(activity.isFinishing()).isTrue();
   }
 }

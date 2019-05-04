@@ -421,6 +421,10 @@ public class AppStorageSettings extends AppInfoWithHeader
         for (GrantedUriPermission perm : perms) {
             String authority = perm.uri.getAuthority();
             ProviderInfo provider = pm.resolveContentProvider(authority, 0);
+            if (provider == null) {
+                continue;
+            }
+
             CharSequence app = provider.applicationInfo.loadLabel(pm);
             MutableInt count = uriCounters.get(app);
             if (count == null) {
