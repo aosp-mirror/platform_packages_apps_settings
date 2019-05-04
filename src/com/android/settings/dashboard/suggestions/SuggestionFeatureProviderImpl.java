@@ -31,6 +31,7 @@ import com.android.settings.notification.ZenOnboardingActivity;
 import com.android.settings.notification.ZenSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ScreenLockSuggestionActivity;
+import com.android.settings.wallpaper.StyleSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -62,6 +63,8 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         final String className = component.getClassName();
         if (className.equals(WallpaperSuggestionActivity.class.getName())) {
             return WallpaperSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(StyleSuggestionActivity.class.getName())) {
+            return StyleSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(FingerprintSuggestionActivity.class.getName())) {
             return FingerprintSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(FingerprintEnrollSuggestionActivity.class.getName())) {

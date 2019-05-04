@@ -50,6 +50,7 @@ import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -169,6 +170,7 @@ public class WebViewAppPickerTest {
     }
 
     @Test
+    @Ignore
     public void testDisabledPackageShownAsDisabled() {
         DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mContext, mPackageManager,
                 createApplicationInfo(DEFAULT_PACKAGE_NAME), "disabled");
@@ -181,6 +183,7 @@ public class WebViewAppPickerTest {
     }
 
     @Test
+    @Ignore
     public void testEnabledPackageShownAsEnabled() {
         String disabledReason = "";
         DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mContext, mPackageManager,
@@ -194,6 +197,7 @@ public class WebViewAppPickerTest {
     }
 
     @Test
+    @Ignore
     public void testDisabledPackageShowsDisabledReasonSummary() {
         String disabledReason = "disabled";
         DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mContext, mPackageManager,
@@ -208,6 +212,7 @@ public class WebViewAppPickerTest {
     }
 
     @Test
+    @Ignore
     public void testEnabledPackageShowsEmptySummary() {
         DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mContext, mPackageManager,
                 createApplicationInfo(DEFAULT_PACKAGE_NAME), null);

@@ -20,8 +20,10 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -31,21 +33,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.usage.IUsageStatsManager;
+import android.app.usage.UsageEvents;
+import android.app.usage.UsageEvents.Event;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.Parcel;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.notification.NotifyingApp;
 import android.text.TextUtils;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.AppUtils;
@@ -66,6 +66,12 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
 public class RecentNotifyingAppsPreferenceControllerTest {
@@ -94,6 +100,8 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     private Fragment mHost;
     @Mock
     private FragmentActivity mActivity;
+    @Mock
+    private IUsageStatsManager mIUsageStatsManager;
 
     private Context mContext;
     private RecentNotifyingAppsPreferenceController mController;
@@ -104,9 +112,10 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         doReturn(mPackageManager).when(mContext).getPackageManager();
+        when(mUserManager.getProfileIdsWithDisabled(0)).thenReturn(new int[] {0});
 
         mController = new RecentNotifyingAppsPreferenceController(
-                mContext, mBackend, mAppState, mHost);
+                mContext, mBackend, mIUsageStatsManager, mUserManager, mAppState, mHost);
         when(mScreen.findPreference(anyString())).thenReturn(mCategory);
 
         when(mScreen.findPreference(RecentNotifyingAppsPreferenceController.KEY_SEE_ALL))
@@ -135,7 +144,7 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     @Test
     public void onDisplayAndUpdateState_shouldRefreshUi() {
         mController = spy(new RecentNotifyingAppsPreferenceController(
-                mContext, null, (ApplicationsState) null, null));
+                mContext, null, mIUsageStatsManager, mUserManager, (ApplicationsState) null, null));
 
         doNothing().when(mController).refreshUi(mContext);
 
@@ -158,32 +167,41 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     }
 
     @Test
-    public void display_showRecents() {
-        final List<NotifyingApp> apps = new ArrayList<>();
-        final NotifyingApp app1 = new NotifyingApp()
-                .setPackage("pkg.class")
-                .setLastNotified(System.currentTimeMillis());
-        final NotifyingApp app2 = new NotifyingApp()
-                .setLastNotified(System.currentTimeMillis())
-                .setPackage("com.android.settings");
-        final NotifyingApp app3 = new NotifyingApp()
-                .setLastNotified(System.currentTimeMillis() - 1000)
-                .setPackage("pkg.class2");
+    public void display_showRecents() throws Exception {
 
-        apps.add(app1);
-        apps.add(app2);
-        apps.add(app3);
+        List<Event> events = new ArrayList<>();
+        Event app = new Event();
+        app.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app.mPackage = "a";
+        app.mTimeStamp = System.currentTimeMillis();
+        events.add(app);
+        Event app1 = new Event();
+        app1.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app1.mPackage = "com.android.settings";
+        app1.mTimeStamp = System.currentTimeMillis();
+        events.add(app1);
+        Event app2 = new Event();
+        app2.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app2.mPackage = "pkg.class2";
+        app2.mTimeStamp = System.currentTimeMillis() - 1000;
+        events.add(app2);
 
         // app1, app2 are valid apps. app3 is invalid.
-        when(mAppState.getEntry(app1.getPackage(), UserHandle.myUserId()))
+        when(mAppState.getEntry(app.getPackageName(), UserHandle.myUserId()))
                 .thenReturn(mAppEntry);
-        when(mAppState.getEntry(app2.getPackage(), UserHandle.myUserId()))
+        when(mAppState.getEntry(app1.getPackageName(), UserHandle.myUserId()))
                 .thenReturn(mAppEntry);
-        when(mAppState.getEntry(app3.getPackage(), UserHandle.myUserId()))
+        when(mAppState.getEntry(app2.getPackageName(), UserHandle.myUserId()))
                 .thenReturn(null);
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
                 new ResolveInfo());
-        when(mBackend.getRecentApps()).thenReturn(apps);
+
+        UsageEvents usageEvents = getUsageEvents(
+                new String[] {app.getPackageName(), app1.getPackageName(), app2.getPackageName()},
+                events);
+        when(mIUsageStatsManager.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(usageEvents);
+
         mAppEntry.info = mApplicationInfo;
 
         mController.displayPreference(mScreen);
@@ -198,33 +216,36 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     }
 
     @Test
-    public void display_showRecentsWithInstantApp() {
-        // Regular app.
-        final List<NotifyingApp> apps = new ArrayList<>();
-        final NotifyingApp app1 = new NotifyingApp().
-                setLastNotified(System.currentTimeMillis())
-                .setPackage("com.foo.bar");
-        apps.add(app1);
-
-        // Instant app.
-        final NotifyingApp app2 = new NotifyingApp()
-                .setLastNotified(System.currentTimeMillis() + 200)
-                .setPackage("com.foo.barinstant");
-        apps.add(app2);
+    public void display_showRecentsWithInstantApp() throws Exception {
+        List<Event> events = new ArrayList<>();
+        Event app = new Event();
+        app.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app.mPackage = "com.foo.bar";
+        app.mTimeStamp = System.currentTimeMillis();
+        events.add(app);
+        Event app1 = new Event();
+        app1.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app1.mPackage = "com.foo.barinstant";
+        app1.mTimeStamp = System.currentTimeMillis() + 200;
+        events.add(app1);
+        UsageEvents usageEvents = getUsageEvents(
+                new String[] {"com.foo.bar", "com.foo.barinstant"}, events);
+        when(mIUsageStatsManager.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(usageEvents);
 
         ApplicationsState.AppEntry app1Entry = mock(ApplicationsState.AppEntry.class);
         ApplicationsState.AppEntry app2Entry = mock(ApplicationsState.AppEntry.class);
         app1Entry.info = mApplicationInfo;
         app2Entry.info = mApplicationInfo;
 
-        when(mAppState.getEntry(app1.getPackage(), UserHandle.myUserId())).thenReturn(app1Entry);
-        when(mAppState.getEntry(app2.getPackage(), UserHandle.myUserId())).thenReturn(app2Entry);
+        when(mAppState.getEntry(
+                app.getPackageName(), UserHandle.myUserId())).thenReturn(app1Entry);
+        when(mAppState.getEntry(
+                app1.getPackageName(), UserHandle.myUserId())).thenReturn(app2Entry);
 
         // Only the regular app app1 should have its intent resolve.
-        when(mPackageManager.resolveActivity(argThat(intentMatcher(app1.getPackage())),
+        when(mPackageManager.resolveActivity(argThat(intentMatcher(app.getPackageName())),
                 anyInt())).thenReturn(new ResolveInfo());
-
-        when(mBackend.getRecentApps()).thenReturn(apps);
 
         // Make sure app2 is considered an instant app.
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
@@ -241,28 +262,92 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mCategory, times(2)).addPreference(prefCaptor.capture());
         List<Preference> prefs = prefCaptor.getAllValues();
-        assertThat(prefs.get(1).getKey()).isEqualTo(app1.getPackage());
-        assertThat(prefs.get(0).getKey()).isEqualTo(app2.getPackage());
+        assertThat(prefs.get(1).getKey()).isEqualTo(app.getPackageName());
+        assertThat(prefs.get(0).getKey()).isEqualTo(app1.getPackageName());
     }
 
     @Test
-    public void display_showRecents_formatSummary() {
-        final List<NotifyingApp> apps = new ArrayList<>();
-        final NotifyingApp app1 = new NotifyingApp()
-                .setLastNotified(System.currentTimeMillis())
-                .setPackage("pkg.class");
-        apps.add(app1);
+    public void display_showRecents_formatSummary() throws Exception {
+        List<Event> events = new ArrayList<>();
+        Event app = new Event();
+        app.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app.mPackage = "pkg.class";
+        app.mTimeStamp = System.currentTimeMillis();
+        events.add(app);
+        UsageEvents usageEvents = getUsageEvents(new String[] {"pkg.class"}, events);
+        when(mIUsageStatsManager.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(usageEvents);
 
-        when(mAppState.getEntry(app1.getPackage(), UserHandle.myUserId()))
+        when(mAppState.getEntry(app.getPackageName(), UserHandle.myUserId()))
                 .thenReturn(mAppEntry);
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
                 new ResolveInfo());
-        when(mBackend.getRecentApps()).thenReturn(apps);
+
         mAppEntry.info = mApplicationInfo;
 
         mController.displayPreference(mScreen);
 
         verify(mCategory).addPreference(argThat(summaryMatches("Just now")));
+    }
+
+    @Test
+    public void reloadData() throws Exception {
+        when(mUserManager.getProfileIdsWithDisabled(0)).thenReturn(new int[] {0, 10});
+
+        mController = new RecentNotifyingAppsPreferenceController(
+                mContext, mBackend, mIUsageStatsManager, mUserManager, mAppState, mHost);
+
+        List<Event> events = new ArrayList<>();
+        Event app = new Event();
+        app.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app.mPackage = "b";
+        app.mTimeStamp = 1;
+        events.add(app);
+        Event app1 = new Event();
+        app1.mEventType = Event.MAX_EVENT_TYPE;
+        app1.mPackage = "com.foo.bar";
+        app1.mTimeStamp = 10;
+        events.add(app1);
+        UsageEvents usageEvents = getUsageEvents(
+                new String[] {"b", "com.foo.bar"}, events);
+        when(mIUsageStatsManager.queryEventsForUser(anyLong(), anyLong(), eq(0), anyString()))
+                .thenReturn(usageEvents);
+
+        List<Event> events10 = new ArrayList<>();
+        Event app10 = new Event();
+        app10.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app10.mPackage = "a";
+        app10.mTimeStamp = 2;
+        events10.add(app10);
+        Event app10a = new Event();
+        app10a.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app10a.mPackage = "a";
+        app10a.mTimeStamp = 20;
+        events10.add(app10a);
+        UsageEvents usageEvents10 = getUsageEvents(
+                new String[] {"a"}, events10);
+        when(mIUsageStatsManager.queryEventsForUser(anyLong(), anyLong(), eq(10), anyString()))
+                .thenReturn(usageEvents10);
+
+        mController.reloadData();
+
+        assertThat(mController.mApps.size()).isEqualTo(2);
+        boolean foundPkg0 = false;
+        boolean foundPkg10 = false;
+        for (NotifyingApp notifyingApp : mController.mApps) {
+            if (notifyingApp.getLastNotified() == 20
+                    && notifyingApp.getPackage().equals("a")
+                    && notifyingApp.getUserId() == 10) {
+                foundPkg10 = true;
+            }
+            if (notifyingApp.getLastNotified() == 1
+                    && notifyingApp.getPackage().equals("b")
+                    && notifyingApp.getUserId() == 0) {
+                foundPkg0 = true;
+            }
+        }
+        assertThat(foundPkg0).isTrue();
+        assertThat(foundPkg10).isTrue();
     }
 
     private static ArgumentMatcher<Preference> summaryMatches(String expected) {
@@ -272,5 +357,14 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     // Used for matching an intent with a specific package name.
     private static ArgumentMatcher<Intent> intentMatcher(String packageName) {
         return intent -> packageName.equals(intent.getPackage());
+    }
+
+    private UsageEvents getUsageEvents(String[] pkgs, List<Event> events) {
+        UsageEvents usageEvents = new UsageEvents(events, pkgs);
+        Parcel parcel = Parcel.obtain();
+        parcel.setDataPosition(0);
+        usageEvents.writeToParcel(parcel, 0);
+        parcel.setDataPosition(0);
+        return UsageEvents.CREATOR.createFromParcel(parcel);
     }
 }

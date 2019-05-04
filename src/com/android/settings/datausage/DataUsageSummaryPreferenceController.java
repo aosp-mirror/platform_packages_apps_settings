@@ -25,7 +25,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
 import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.util.RecurrenceRule;
 
@@ -247,7 +246,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             summaryPreference.setChartEnabled(false);
         } else {
             summaryPreference.setChartEnabled(true);
-            summaryPreference.setLabels(Formatter.formatFileSize(mContext, 0 /* sizeBytes */),
+            summaryPreference.setLabels(DataUsageUtils.formatDataUsage(mContext, 0 /* sizeBytes */),
                     DataUsageUtils.formatDataUsage(mContext, mDataBarSize));
             summaryPreference.setProgress(mDataplanUse / (float) mDataBarSize);
         }

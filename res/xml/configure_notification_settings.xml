@@ -26,11 +26,11 @@
         settings:controller="com.android.settings.widget.VideoPreferenceController"
         android:persistent="false" />
 
-    <SwitchPreference
-        android:key="hide_silent_icons"
-        android:title="@string/hide_silent_icons_title"
-        android:summary="@string/hide_silent_icons_summary"
-        settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController" />
+    <Preference
+        android:key="gentle_notifications"
+        android:title="@string/gentle_notifications_title"
+        settings:controller="com.android.settings.notification.GentleNotificationsPreferenceController"
+        android:fragment="com.android.settings.notification.GentleNotificationSettings"/>
 
     <PreferenceCategory
         android:key="configure_notifications_smart"

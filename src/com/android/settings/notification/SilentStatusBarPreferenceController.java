@@ -28,9 +28,10 @@ import com.google.common.annotations.VisibleForTesting;
 
 public class SilentStatusBarPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY = "hide_silent_icons";
+    private static final String KEY = "silent_icons";
     private static final int MY_USER_ID = UserHandle.myUserId();
     private NotificationBackend mBackend;
+    private Listener mListener;
 
     public SilentStatusBarPreferenceController(Context context) {
         super(context, KEY);
@@ -44,12 +45,15 @@ public class SilentStatusBarPreferenceController extends TogglePreferenceControl
 
     @Override
     public boolean isChecked() {
-        return mBackend.shouldHideSilentStatusBarIcons(mContext);
+        return !mBackend.shouldHideSilentStatusBarIcons(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mBackend.setHideSilentStatusIcons(isChecked);
+        mBackend.setHideSilentStatusIcons(!isChecked);
+        if (mListener != null) {
+            mListener.onChange(isChecked);
+        }
         return true;
     }
 
@@ -58,6 +62,14 @@ public class SilentStatusBarPreferenceController extends TogglePreferenceControl
         return Settings.Secure.getInt(
                 mContext.getContentResolver(), NOTIFICATION_NEW_INTERRUPTION_MODEL, 1) != 0
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    public void setListener(Listener listener) {
+        mListener = listener;
+    }
+
+    interface Listener {
+        void onChange(boolean shown);
     }
 
 }
