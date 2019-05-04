@@ -396,7 +396,7 @@ public class FingerprintSettings extends SubSettings {
             Preference addPreference = new Preference(root.getContext());
             addPreference.setKey(KEY_FINGERPRINT_ADD);
             addPreference.setTitle(R.string.fingerprint_add_title);
-            addPreference.setIcon(R.drawable.ic_menu_add);
+            addPreference.setIcon(R.drawable.ic_add_24dp);
             root.addPreference(addPreference);
             addPreference.setOnPreferenceChangeListener(this);
             updateAddPreference();
