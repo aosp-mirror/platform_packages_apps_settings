@@ -28,8 +28,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.testutils.FakeFeatureFactory;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,23 +40,20 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
-public class SilentStatusBarPreferenceControllerTest {
+public class SilentLockscreenPreferenceControllerTest {
 
-    @Mock
-    private NotificationBackend mBackend;
     @Mock
     private PreferenceScreen mScreen;
 
     private Context mContext;
-    private SilentStatusBarPreferenceController mController;
+    private SilentLockscreenPreferenceController mController;
     private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new SilentStatusBarPreferenceController(mContext);
-        mController.setBackend(mBackend);
+        mController = new SilentLockscreenPreferenceController(mContext);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -80,32 +75,36 @@ public class SilentStatusBarPreferenceControllerTest {
 
     @Test
     public void isChecked_settingIsOff_false() {
-        when(mBackend.shouldHideSilentStatusBarIcons(any())).thenReturn(true);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 0);
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void isChecked_settingIsOn_true() {
-        when(mBackend.shouldHideSilentStatusBarIcons(any())).thenReturn(false);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 1);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void onPreferenceChange_on() {
         mController.onPreferenceChange(mPreference, true);
-        verify(mBackend).setHideSilentStatusIcons(false);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 0)).isEqualTo(1);
     }
 
     @Test
     public void onPreferenceChange_off() {
         mController.onPreferenceChange(mPreference, false);
-        verify(mBackend).setHideSilentStatusIcons(true);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 1)).isEqualTo(0);
     }
 
     @Test
     public void listenerTriggered() {
-        SilentStatusBarPreferenceController.Listener listener = mock(
-                SilentStatusBarPreferenceController.Listener.class);
+        SilentLockscreenPreferenceController.Listener listener = mock(
+                SilentLockscreenPreferenceController.Listener.class);
         mController.setListener(listener);
 
         mController.setChecked(false);
