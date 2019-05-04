@@ -43,7 +43,7 @@ public class AddWifiNetworkPreference extends Preference {
 
         setLayoutResource(com.android.settingslib.R.layout.preference_access_point);
         setWidgetLayoutResource(R.layout.wifi_button_preference_widget);
-        setIcon(R.drawable.ic_menu_add);
+        setIcon(R.drawable.ic_add_24dp);
         setTitle(R.string.wifi_add_network);
 
         mScanIconDrawable = getDrawable(R.drawable.ic_scan_24dp);
