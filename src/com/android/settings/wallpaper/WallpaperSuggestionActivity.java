@@ -16,63 +16,31 @@
 
 package com.android.settings.wallpaper;
 
-import android.app.Activity;
 import android.app.WallpaperManager;
-import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.R;
-import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.display.WallpaperPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
 
-import com.google.android.setupcompat.util.WizardManagerHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class WallpaperSuggestionActivity extends Activity implements Indexable {
+public class WallpaperSuggestionActivity extends StyleSuggestionActivityBase implements Indexable {
+
+    private static final String WALLPAPER_FLAVOR_EXTRA = "com.android.launcher3.WALLPAPER_FLAVOR";
+    private static final String WALLPAPER_FOCUS = "focus_wallpaper";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        final PackageManager pm = getPackageManager();
-        final Intent intent = new Intent()
-                .setComponent(new WallpaperPreferenceController(this, "dummy key")
-                        .getComponentName())
-                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-
-        // passing the necessary extra to next page
-        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
-
-        if (pm.resolveActivity(intent, 0) != null) {
-            startActivity(intent);
-        } else {
-            startFallbackSuggestion();
-        }
-
-        finish();
-    }
-
-    @VisibleForTesting
-    void startFallbackSuggestion() {
-        // fall back to default wallpaper picker
-        new SubSettingLauncher(this)
-                .setDestination(WallpaperTypeSettings.class.getName())
-                .setTitleRes(R.string.wallpaper_suggestion_title)
-                .setSourceMetricsCategory(SettingsEnums.DASHBOARD_SUMMARY)
-                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
-                .launch();
+    protected void addExtras(Intent intent) {
+        intent.putExtra(WALLPAPER_FLAVOR_EXTRA, WALLPAPER_FOCUS);
     }
 
     @VisibleForTesting
@@ -83,11 +51,6 @@ public class WallpaperSuggestionActivity extends Activity implements Indexable {
         final WallpaperManager manager = (WallpaperManager) context.getSystemService(
                 WALLPAPER_SERVICE);
         return manager.getWallpaperId(WallpaperManager.FLAG_SYSTEM) > 0;
-    }
-
-    private static boolean isWallpaperServiceEnabled(Context context) {
-        return context.getResources().getBoolean(
-                com.android.internal.R.bool.config_enableWallpaperService);
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
