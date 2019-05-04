@@ -312,15 +312,6 @@ public class NotificationBackend {
         }
     }
 
-    public List<NotifyingApp> getRecentApps() {
-        try {
-            return sINM.getRecentNotifyingAppsForUser(UserHandle.myUserId()).getList();
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return new ArrayList<>();
-        }
-    }
-
     public int getBlockedAppCount() {
         try {
             return sINM.getBlockedAppCount(UserHandle.myUserId());
