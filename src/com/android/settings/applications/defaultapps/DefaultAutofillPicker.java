@@ -178,7 +178,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
                     return true;
                 });
         preference.setTitle(R.string.print_menu_item_add_service);
-        preference.setIcon(R.drawable.ic_menu_add);
+        preference.setIcon(R.drawable.ic_add_24dp);
         preference.setOrder(Integer.MAX_VALUE -1);
         preference.setPersistent(false);
         return preference;
