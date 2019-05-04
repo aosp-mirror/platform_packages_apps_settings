@@ -26,31 +26,25 @@ import com.android.settings.core.TogglePreferenceController;
 
 import com.google.common.annotations.VisibleForTesting;
 
-public class SilentStatusBarPreferenceController extends TogglePreferenceController {
+public class SilentLockscreenPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY = "silent_icons";
-    private static final int MY_USER_ID = UserHandle.myUserId();
-    private NotificationBackend mBackend;
+    private static final String KEY = "lock_screen";
     private Listener mListener;
 
-    public SilentStatusBarPreferenceController(Context context) {
+    public SilentLockscreenPreferenceController(Context context) {
         super(context, KEY);
-        mBackend = new NotificationBackend();
-    }
-
-    @VisibleForTesting
-    void setBackend(NotificationBackend backend) {
-        mBackend = backend;
     }
 
     @Override
     public boolean isChecked() {
-        return !mBackend.shouldHideSilentStatusBarIcons(mContext);
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 0) == 1;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mBackend.setHideSilentStatusIcons(!isChecked);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, isChecked ? 1 : 0);
         if (mListener != null) {
             mListener.onChange(isChecked);
         }
@@ -71,7 +65,6 @@ public class SilentStatusBarPreferenceController extends TogglePreferenceControl
     interface Listener {
         void onChange(boolean shown);
     }
-
 }
 
 
