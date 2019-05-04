@@ -19,7 +19,6 @@ package com.android.settings.datausage;
 import android.app.Activity;
 import android.net.NetworkTemplate;
 import android.telephony.SubscriptionManager;
-import android.text.format.Formatter;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -28,7 +27,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
 /**
- *  The controller displays a data usage chart for the specified Wi-Fi network.
+ * The controller displays a data usage chart for the specified Wi-Fi network.
  */
 public class WifiDataUsageSummaryPreferenceController extends DataUsageSummaryPreferenceController {
     final String mNetworkId;
@@ -66,7 +65,7 @@ public class WifiDataUsageSummaryPreferenceController extends DataUsageSummaryPr
 
         // TODO(b/126142293): Passpoint Wi-Fi should have limit of data usage and time remaining
         mPreference.setProgress(100);
-        mPreference.setLabels(Formatter.formatFileSize(mContext, /* sizeBytes */ 0),
+        mPreference.setLabels(DataUsageUtils.formatDataUsage(mContext, /* sizeBytes */ 0),
                 DataUsageUtils.formatDataUsage(mContext, info.usageLevel));
     }
 }
