@@ -21,6 +21,7 @@ import static android.provider.Settings.Secure.NOTIFICATION_NEW_INTERRUPTION_MOD
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -79,26 +80,39 @@ public class SilentStatusBarPreferenceControllerTest {
 
     @Test
     public void isChecked_settingIsOff_false() {
-        when(mBackend.shouldHideSilentStatusBarIcons(any())).thenReturn(false);
+        when(mBackend.shouldHideSilentStatusBarIcons(any())).thenReturn(true);
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void isChecked_settingIsOn_true() {
-        when(mBackend.shouldHideSilentStatusBarIcons(any())).thenReturn(true);
+        when(mBackend.shouldHideSilentStatusBarIcons(any())).thenReturn(false);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void onPreferenceChange_on() {
         mController.onPreferenceChange(mPreference, true);
-        verify(mBackend).setHideSilentStatusIcons(true);
+        verify(mBackend).setHideSilentStatusIcons(false);
     }
 
     @Test
     public void onPreferenceChange_off() {
         mController.onPreferenceChange(mPreference, false);
-        verify(mBackend).setHideSilentStatusIcons(false);
+        verify(mBackend).setHideSilentStatusIcons(true);
+    }
+
+    @Test
+    public void listenerTriggered() {
+        SilentStatusBarPreferenceController.Listener listener = mock(
+                SilentStatusBarPreferenceController.Listener.class);
+        mController.setListener(listener);
+
+        mController.setChecked(false);
+        verify(listener).onChange(false);
+
+        mController.setChecked(true);
+        verify(listener).onChange(true);
     }
 }
 

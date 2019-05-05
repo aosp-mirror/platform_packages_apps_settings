@@ -43,11 +43,6 @@ public class SystemNavigationLegacyPreferenceController extends
     }
 
     @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(PREF_KEY_LEGACY, getPreferenceKey());
-    }
-
-    @Override
     public void onRadioButtonClicked(RadioButtonPreference preference) {
         setNavBarInteractionMode(mOverlayManager, NAV_BAR_MODE_3BUTTON_OVERLAY);
         selectRadioButtonInGroup(PREF_KEY_LEGACY, mPreferenceScreen);

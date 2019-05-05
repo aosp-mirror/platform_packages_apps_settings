@@ -21,10 +21,13 @@ import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 import android.app.Activity;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
+import android.app.usage.IUsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 
@@ -112,7 +115,9 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
             lifecycle.addObserver(lockScreenNotificationController);
         }
         controllers.add(new RecentNotifyingAppsPreferenceController(
-                context, new NotificationBackend(), app, host));
+                context, new NotificationBackend(), IUsageStatsManager.Stub.asInterface(
+                        ServiceManager.getService(Context.USAGE_STATS_SERVICE)),
+                context.getSystemService(UserManager.class), app, host));
         controllers.add(lockScreenNotificationController);
         controllers.add(new NotificationRingtonePreferenceController(context) {
             @Override

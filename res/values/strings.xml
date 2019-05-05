@@ -933,26 +933,27 @@
     <!-- Button text to exit face wizard after everything is done [CHAR LIMIT=15] -->
     <string name="security_settings_face_enroll_done">Done</string>
     <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
-    <string name="security_settings_face_settings_use_face_category">Use your face for</string>
+    <string name="security_settings_face_settings_use_face_category">Use face unlock for</string>
     <!-- Text shown on a toggle which allows or disallows the device to use face for unlocking the device. [CHAR LIMIT=20] -->
-    <string name="security_settings_face_settings_use_face_unlock_phone">Unlocking your device</string>
+    <string name="security_settings_face_settings_use_face_unlock_phone">Unlocking your phone</string>
     <!-- Text shown on a toggle which allows or disallows the device to use face authentication for apps. This will be presented to the user together with the context of security_settings_face_settings_use_face_category. [CHAR LIMIT=30] -->
     <string name="security_settings_face_settings_use_face_for_apps">App sign-in \u0026 payments</string>
+    <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. -->
+    <string name="security_settings_face_settings_require_category">Require for face unlock</string>
     <!-- Text shown on a toggle which disables/enables face authentication, depending if the user's eyes are open. [CHAR LIMIT=30] -->
-    <string name="security_settings_face_settings_require_attention">Eyes open to unlock</string>
+    <string name="security_settings_face_settings_require_attention">Open eyes looking at screen</string>
     <!-- Text shown on the details of a toggle which disables/enables face authentication, depending if the user's eyes are open. [CHAR LIMIT=70] -->
-    <string name="security_settings_face_settings_require_attention_details">When using face authentication, your eyes must be open</string>
+    <string name="security_settings_face_settings_require_attention_details">To unlock the phone, always require looking at the screen with your eyes open</string>
     <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=50] -->
-    <string name="security_settings_face_settings_require_confirmation">Always require confirmation</string>
+    <string name="security_settings_face_settings_require_confirmation">Confirm button</string>
     <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=70] -->
-    <string name="security_settings_face_settings_require_confirmation_details">When authenticating in apps, always require confirmation</string>
+    <string name="security_settings_face_settings_require_confirmation_details">When authenticating for apps, always require confirmation</string>
     <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
-    <string name="security_settings_face_settings_remove_face_data">Remove face data</string>
+    <string name="security_settings_face_settings_remove_face_data">Delete face data</string>
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
-    <string name="security_settings_face_settings_enroll">Set up face authentication</string>
+    <string name="security_settings_face_settings_enroll">Set up new face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Your face can be used to unlock your device and access apps.
-        <annotation id="url">Learn more</annotation></string>
+    <string name="security_settings_face_settings_footer">Use Face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, your child or an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
@@ -1052,17 +1053,17 @@
     <!-- Content of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=NONE] -->
     <string name="setup_fingerprint_enroll_enrolling_skip_message">You\u2019ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you\u2019ll need to set this up later. Setup takes only a minute or so.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet">Protect your tablet with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet">Protect your tablet with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN, pattern, or password.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device">Protect your device with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device">Protect your device with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN, pattern, or password.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default">Protect your phone with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default">Protect your phone with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN, pattern, or password.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face authentication. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet">Protect your tablet with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet">Protect your tablet with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN, pattern, or password.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face authentication. (device) [CHAR LIMIT=NONE] -->
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device">Protect your device with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device">Protect your device with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN, pattern, or password.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face authentication. (default) [CHAR LIMIT=NONE] -->
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default">Protect your phone with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default">Protect your phone with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN, pattern, or password.</string>
     <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
     <string name="lock_screen_pin_skip_title">Skip PIN setup?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a password, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
@@ -1786,6 +1787,9 @@
     <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. -->
     <string name="bluetooth_unpair_dialog_body" product="device">Your device will no longer be paired with <xliff:g id="device_name">%1$s</xliff:g></string>
 
+    <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_untethered_unpair_dialog_body"><xliff:g id="device_name" example="Jack's headphone">%1$s</xliff:g> will no longer be paired with any device linked to this account</string>
+
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
 
@@ -2317,8 +2321,9 @@
         <item quantity="one">1 subscription</item>
         <item quantity="other">%d subscriptions</item>
     </plurals>
-    <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates number of whole kinds networks, if there are both normal saved networks and saved passpoint networks. The number will be at least 2. [CHAR LIMIT=60] -->
+    <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates number of whole kinds networks, if there are both normal saved networks and saved passpoint networks. The number will be at least 2, so the one case is only to prevent lint error. [CHAR LIMIT=60] -->
     <plurals name="wifi_saved_all_access_points_summary">
+        <item quantity="one">1 network &amp; subscription</item>
         <item quantity="other">%d networks &amp; subscriptions</item>
     </plurals>
     <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. [CHAR LIMIT=30] -->
@@ -2888,6 +2893,10 @@
     <string name="wallpaper_suggestion_summary">Personalize your screen</string>
     <!-- Wallpaper settings fragment title [CHAR LIMIT=30] -->
     <string name="wallpaper_settings_fragment_title">Choose wallpaper from</string>
+    <!-- Styles and Wallpaper settings title [CHAR_LIMIT=46] -->
+    <string name="style_suggestion_title">Customize your Pixel</string>
+    <!-- Styles and Wallpapers summary [CHAR_LIMIT=55] -->
+    <string name="style_suggestion_summary">Try different styles, wallpapers, clocks, and more</string>
     <!-- Display settings screen, trigger for screen saver options -->
     <string name="screensaver_settings_title">Screen saver</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging -->
@@ -4885,13 +4894,13 @@
     <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
-    <string name="accessibility_vibration_settings_title">Vibration</string>
+    <string name="accessibility_vibration_settings_title">Vibration &amp; haptic strength</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->
     <string name="accessibility_notification_vibration_title">Notification vibration</string>
     <!-- Title for accessibility preference for configuring ring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_ring_vibration_title">Ring vibration</string>
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
-    <string name="accessibility_touch_vibration_title">Touch vibration</string>
+    <string name="accessibility_touch_vibration_title">Touch feedback</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
     <string name="accessibility_service_master_switch_title">Use service</string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
@@ -6019,6 +6028,9 @@
     <string name="device_admin_warning">Activating this admin app will allow
         the app <xliff:g id="app_name">%1$s</xliff:g> to perform the
         following operations:</string>
+    <!-- Simplified device admin warning message [CHAR LIMIT=NONE]-->
+    <string name="device_admin_warning_simplified">This device will be managed and monitored by
+        <xliff:g id="app_name" example="Example Supervisor">%1$s</xliff:g>.</string>
     <!-- Device admin warning message about policies an admin can use -->
     <string name="device_admin_status">This admin app is active and allows
         the app <xliff:g id="app_name">%1$s</xliff:g> to perform the
@@ -6026,6 +6038,8 @@
 
     <!-- Title for screen to set a profile owner [CHAR LIMIT=40] -->
     <string name="profile_owner_add_title">Activate Profile Manager?</string>
+    <!-- Simplified title for dialog to set a profile owner [CHAR LIMIT=40] -->
+    <string name="profile_owner_add_title_simplified">Allow supervision?</string>
     <!-- Warning when trying to add a profile owner admin after setup has completed. [CHAR LIMIT=none] -->
     <string name="adding_profile_owner_warning">By proceeding, your user will be managed by your
         admin which may also be able to store associated data, in addition to your personal
@@ -6372,6 +6386,8 @@
 
     <!-- Option for indicating that a network being metered (expensive) should be determined automatically. [CHAR LIMIT=32] -->
     <string name="data_usage_metered_auto">Automatic</string>
+    <!-- Title for Network usage to control whether Wifi is metered or not [CHAR LIMIT=20] -->
+    <string name="wifi_metered_title">Network usage</string>
     <!-- Option for indicating that a network is metered (expensive). [CHAR LIMIT=32] -->
     <string name="data_usage_metered_yes">Metered</string>
     <!-- Option for indicating that a network is not metered (inexpensive). [CHAR LIMIT=32] -->
@@ -7855,6 +7871,33 @@
 
     <!-- Configure notifications: value for swipe direction [CHAR LIMIT=100] -->
     <string name="swipe_direction_rtl">Swipe left to dismiss, right to show menu</string>
+
+    <!-- Configure notifications: link to education/gentle notification settings [CHAR LIMIT=100] -->
+    <string name="gentle_notifications_title">Gentle notifications</string>
+
+    <!-- Gentle notifications settings : header for selecting where gentle notifications should appear [CHAR LIMIT=100] -->
+    <string name="gentle_notifications_also_display">Also display in</string>
+
+    <!-- Gentle notifications settings: display in status bar  [CHAR LIMIT=100] -->
+    <string name="gentle_notifications_display_status">Status bar</string>
+
+    <!-- Gentle notifications settings: display in lock screen  [CHAR LIMIT=100] -->
+    <string name="gentle_notifications_display_lock">Lock screen</string>
+
+    <!-- Gentle notifications footer: what are gentle notification  [CHAR LIMIT=NONE] -->
+    <string name="gentle_notifications_education">Gentle notifications are always silent and always appear in the pull-down shade</string>
+
+    <!-- Gentle notifications settings: display only in shade  [CHAR LIMIT=100] -->
+    <string name="gentle_notifications_display_summary_shade">Display in pull-down shade only</string>
+
+    <!-- Gentle notifications settings: display in shade and on the lock screen  [CHAR LIMIT=100] -->
+    <string name="gentle_notifications_display_summary_shade_lock">Display in pull-down shade &amp; on lock screen</string>
+
+    <!-- Gentle notifications settings: display in shade and on status bar  [CHAR LIMIT=100] -->
+    <string name="gentle_notifications_display_summary_shade_status">Display in pull-down shade &amp; status bar</string>
+
+    <!-- Gentle notifications settings: display on all surfaces  [CHAR LIMIT=100] -->
+    <string name="gentle_notifications_display_summary_shade_status_lock">Display in pull-down shade, status bar &amp; on lock screen</string>
 
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
@@ -11068,9 +11111,9 @@
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
 
     <!-- Keywords for Content Capture feature [CHAR_LIMIT=none] -->
-    <string name="keywords_content_capture">content capture</string>
+    <string name="keywords_content_capture">content capture, app content</string>
     <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
-    <string name="content_capture">Content Capture</string>
+    <string name="content_capture">App content</string>
     <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
     <string name="content_capture_summary">Allow apps to send content to the Android system</string>
 
