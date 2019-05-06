@@ -16,11 +16,17 @@
 
 package com.android.settings;
 
+import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_FIRST_RUN;
+import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW;
+
 import android.content.Intent;
+import android.os.Bundle;
 import android.sysprop.SetupWizardProperties;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
+
+import java.util.Arrays;
 
 
 public class SetupWizardUtils {
@@ -89,5 +95,15 @@ public class SetupWizardUtils {
 
     public static void copySetupExtras(Intent fromIntent, Intent toIntent) {
         WizardManagerHelper.copyWizardManagerExtras(fromIntent, toIntent);
+    }
+
+    public static Bundle copyLifecycleExtra(Bundle srcBundle, Bundle dstBundle) {
+        for (String key :
+                Arrays.asList(
+                        EXTRA_IS_FIRST_RUN,
+                        EXTRA_IS_SETUP_FLOW)) {
+            dstBundle.putBoolean(key, srcBundle.getBoolean(key, false));
+        }
+        return dstBundle;
     }
 }
