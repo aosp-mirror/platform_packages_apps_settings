@@ -19,6 +19,7 @@ package com.android.settings.core;
 import android.annotation.StringRes;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
@@ -89,6 +90,11 @@ public class SubSettingLauncher {
         return this;
     }
 
+    public SubSettingLauncher setExtras(Bundle extras) {
+        mLaunchRequest.extras = extras;
+        return this;
+    }
+
     public SubSettingLauncher setSourceMetricsCategory(int sourceMetricsCategory) {
         mLaunchRequest.sourceMetricsCategory = sourceMetricsCategory;
         return this;
@@ -136,6 +142,7 @@ public class SubSettingLauncher {
 
     public Intent toIntent() {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
+        copyExtras(intent);
         intent.setClass(mContext, SubSettings.class);
         if (TextUtils.isEmpty(mLaunchRequest.destinationName)) {
             throw new IllegalArgumentException("Destination fragment must be set");
@@ -180,6 +187,11 @@ public class SubSettingLauncher {
         listener.startActivityForResult(intent, requestCode);
     }
 
+    private void copyExtras(Intent intent) {
+        if (mLaunchRequest.extras != null) {
+            intent.replaceExtras(mLaunchRequest.extras);
+        }
+    }
     /**
      * Simple container that has information about how to launch a subsetting.
      */
@@ -194,5 +206,6 @@ public class SubSettingLauncher {
         int mRequestCode;
         UserHandle userHandle;
         Bundle arguments;
+        Bundle extras;
     }
 }
