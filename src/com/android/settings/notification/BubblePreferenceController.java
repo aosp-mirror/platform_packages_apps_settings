@@ -25,6 +25,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
@@ -33,8 +34,10 @@ public class BubblePreferenceController extends NotificationPreferenceController
 
     private static final String TAG = "BubblePrefContr";
     private static final String KEY = "bubble_pref";
-    private static final int SYSTEM_WIDE_ON = 1;
-    private static final int SYSTEM_WIDE_OFF = 0;
+    @VisibleForTesting
+    static final int SYSTEM_WIDE_ON = 1;
+    @VisibleForTesting
+    static final int SYSTEM_WIDE_OFF = 0;
 
     private FragmentManager mFragmentManager;
 
@@ -58,18 +61,14 @@ public class BubblePreferenceController extends NotificationPreferenceController
         if (!super.isAvailable()) {
             return false;
         }
-        if (mAppRow == null && mChannel == null) {
+        if (!isGloballyEnabled()) {
             return false;
         }
         if (mChannel != null) {
-            if (Settings.Secure.getInt(mContext.getContentResolver(),
-                    NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
-                return false;
-            }
             if (isDefaultChannel()) {
                 return true;
             } else {
-                return mAppRow == null ? false : mAppRow.allowBubbles;
+                return mAppRow != null && mAppRow.allowBubbles;
             }
         }
         return true;
@@ -80,12 +79,10 @@ public class BubblePreferenceController extends NotificationPreferenceController
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setDisabledByAdmin(mAdmin);
             if (mChannel != null) {
-                pref.setChecked(mChannel.canBubble());
+                pref.setChecked(mChannel.canBubble() && isGloballyEnabled());
                 pref.setEnabled(!pref.isDisabledByAdmin());
             } else {
-                pref.setChecked(mAppRow.allowBubbles
-                        && Settings.Secure.getInt(mContext.getContentResolver(),
-                        NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_ON);
+                pref.setChecked(mAppRow.allowBubbles && isGloballyEnabled());
                 pref.setSummary(mContext.getString(
                         R.string.bubbles_app_toggle_summary, mAppRow.label));
             }
@@ -94,7 +91,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean value = (Boolean) newValue;
+        final boolean value = (Boolean) newValue && isGloballyEnabled();
         if (mChannel != null) {
             mChannel.setAllowBubbles(value);
             saveChannel();
@@ -103,9 +100,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             // if the global setting is off, toggling app level permission requires extra
             // confirmation
-            if (Settings.Secure.getInt(mContext.getContentResolver(),
-                    NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF
-                    && !pref.isChecked()) {
+            if (!isGloballyEnabled() && !pref.isChecked()) {
                 new BubbleWarningDialogFragment()
                         .setPkgInfo(mAppRow.pkg, mAppRow.uid)
                         .show(mFragmentManager, "dialog");
@@ -116,6 +111,11 @@ public class BubblePreferenceController extends NotificationPreferenceController
             }
         }
         return true;
+    }
+
+    private boolean isGloballyEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF) == SYSTEM_WIDE_ON;
     }
 
     // Used in app level prompt that confirms the user is ok with turning on bubbles
