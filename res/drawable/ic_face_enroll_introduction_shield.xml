@@ -1,0 +1,45 @@
+<!--
+  ~ Copyright (C) 2019 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector android:height="24dp" android:width="24dp" android:viewportHeight="24"
+                android:viewportWidth="24"
+                android:tint="?android:attr/colorControlNormal">
+            <group android:name="_R_G">
+                <group android:name="_R_G_L_0_G">
+                    <path android:name="_R_G_L_0_G_D_0_P_0" android:fillColor="#000000"
+                          android:fillAlpha="1" android:fillType="nonZero"
+                          android:pathData=" M12 2 C12,2 3.82,5.64 3.82,5.64 C3.82,5.64 3.82,11.09 3.82,11.09 C3.82,16.14 7.31,20.85 12,22 C16.69,20.85 20.18,16.14 20.18,11.09 C20.18,11.09 20.18,5.64 20.18,5.64 C20.18,5.64 12,2 12,2c  M18.18 11.09 C18.18,12.64 17.77,14.14 17.08,15.47 C15.77,14.5 13.4,14 12,14 C10.6,14 8.23,14.5 6.92,15.47 C6.23,14.14 5.82,12.64 5.82,11.09 C5.82,11.09 5.82,6.94 5.82,6.94 C5.82,6.94 12,4.19 12,4.19 C12,4.19 18.18,6.94 18.18,6.94 C18.18,6.94 18.18,11.09 18.18,11.09c "/>
+                    <path android:name="_R_G_L_0_G_D_1_P_0" android:fillColor="#000000"
+                          android:fillAlpha="1" android:fillType="nonZero"
+                          android:pathData=" M12 7.5 C13.66,7.5 15,8.84 15,10.5 C15,12.16 13.66,13.5 12,13.5 C10.34,13.5 9,12.16 9,10.5 C9,8.84 10.34,7.5 12,7.5c "/>
+                </group>
+            </group>
+            <group android:name="time_group"/>
+        </vector>
+    </aapt:attr>
+    <target android:name="time_group">
+        <aapt:attr name="android:animation">
+            <set android:ordering="together">
+                <objectAnimator android:propertyName="translateX" android:duration="2000"
+                                android:startOffset="0" android:valueFrom="0" android:valueTo="1"
+                                android:valueType="floatType"/>
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
