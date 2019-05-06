@@ -16,14 +16,11 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
-import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
