@@ -24,6 +24,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
@@ -113,9 +114,14 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
 
     private boolean isVisible() {
         // To decide Slice's visibility.
-        // return true if device is connected or previously connected, false for other cases.
-        return !CollectionUtils.isEmpty(getConnectedA2dpDevices())
-                || !CollectionUtils.isEmpty(getConnectedHearingAidDevices());
+        // Return true if
+        // 1. phone is not in ongoing call mode
+        // 2. Bluetooth device is connected
+        final TelephonyManager telephonyManager =
+                (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE
+                && (!CollectionUtils.isEmpty(getConnectedA2dpDevices())
+                || !CollectionUtils.isEmpty(getConnectedHearingAidDevices()));
     }
 
     private List<BluetoothDevice> getConnectedA2dpDevices() {
