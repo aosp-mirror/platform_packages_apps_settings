@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.applications.AppPermissionsPreferenceController.NUM_PERMISSIONS_TO_SHOW;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -32,11 +34,11 @@ import androidx.preference.Preference;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class AppPermissionsPreferenceControllerTest {
@@ -47,7 +49,6 @@ public class AppPermissionsPreferenceControllerTest {
 
     @Before
     public void setUp() throws NameNotFoundException {
-        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mPreference = spy(new Preference(mContext));
         mController = spy(new AppPermissionsPreferenceController(mContext, "pref_key"));
@@ -105,5 +106,30 @@ public class AppPermissionsPreferenceControllerTest {
         mController.updateSummary(labels);
 
         verify(mPreference, never()).setSummary(anyString());
+    }
+
+    @Test
+    public void updateSummary_hasFiveItems_shouldShowCertainNumItems() {
+        doNothing().when(mController).queryPermissionSummary();
+        mController.updateState(mPreference);
+        mController.mNumPackageChecked = 2;
+
+        mController.updateSummary(getPermissionGroupsSet());
+
+        final CharSequence summary = mPreference.getSummary();
+        final int items = summary.toString().split(",").length;
+        assertThat(items).isEqualTo(NUM_PERMISSIONS_TO_SHOW);
+    }
+
+    private List<CharSequence> getPermissionGroupsSet() {
+        final List<CharSequence> labels = new ArrayList<>();
+        labels.add("Phone");
+        labels.add("SMS");
+        labels.add("Microphone");
+        labels.add("Contacts");
+        labels.add("Camera");
+        labels.add("Location");
+
+        return labels;
     }
 }

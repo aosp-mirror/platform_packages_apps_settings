@@ -35,6 +35,9 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
     private static final String TAG = "AppPermissionPrefCtrl";
     private static int NUM_PACKAGE_TO_CHECK = 3;
 
+    @VisibleForTesting
+    static int NUM_PERMISSIONS_TO_SHOW = 3;
+
     private final PackageManager mPackageManager;
     private final Set<CharSequence> mPermissionGroups;
 
@@ -95,9 +98,13 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
         if (mNumPackageChecked < NUM_PACKAGE_TO_CHECK) {
             return;
         }
-        final CharSequence summary = !mPermissionGroups.isEmpty()
+
+        final List<CharSequence> permissionsToShow = mPermissionGroups.stream()
+                .limit(NUM_PERMISSIONS_TO_SHOW)
+                .collect(Collectors.toList());
+        final CharSequence summary = !permissionsToShow.isEmpty()
                 ? mContext.getString(R.string.app_permissions_summary,
-                ListFormatter.getInstance().format(mPermissionGroups).toLowerCase())
+                ListFormatter.getInstance().format(permissionsToShow).toLowerCase())
                 : null;
         mPreference.setSummary(summary);
     }
