@@ -34,6 +34,7 @@ import android.util.Log;
 import com.android.internal.telephony.OperatorInfo;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Add static Utility functions to get information from the CellInfo object.
@@ -160,5 +161,22 @@ public final class CellInfoUtil {
     public static boolean isForbidden(CellInfo cellInfo, List<String> forbiddenPlmns) {
         String plmn = CellInfoUtil.getOperatorInfoFromCellInfo(cellInfo).getOperatorNumeric();
         return forbiddenPlmns != null && forbiddenPlmns.contains(plmn);
+    }
+
+    /** Convert a list of cellInfos to readable string without sensitive info. */
+    public static String cellInfoListToString(List<CellInfo> cellInfos) {
+        return cellInfos.stream()
+                .map(cellInfo -> cellInfoToString(cellInfo))
+                .collect(Collectors.joining(", "));
+    }
+
+    /** Convert {@code cellInfo} to a readable string without sensitive info. */
+    public static String cellInfoToString(CellInfo cellInfo) {
+        String cellType = cellInfo.getClass().getSimpleName();
+        CellIdentity cid = cellInfo.getCellIdentity();
+        return String.format(
+                "{CellType = %s, isRegistered = %b, mcc = %s, mnc = %s, alphaL = %s, alphaS = %s}",
+                cellType, cellInfo.isRegistered(), cid.getMccString(), cid.getMncString(),
+                cid.getOperatorAlphaLong(), cid.getOperatorAlphaShort());
     }
 }
