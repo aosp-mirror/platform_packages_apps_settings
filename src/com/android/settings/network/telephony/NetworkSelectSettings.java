@@ -31,6 +31,7 @@ import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -230,6 +231,8 @@ public class NetworkSelectSettings extends DashboardFragment {
                     break;
                 case EVENT_NETWORK_SCAN_RESULTS:
                     List<CellInfo> results = aggregateCellInfoList((List<CellInfo>) msg.obj);
+                    Log.d(TAG, "CellInfoList after aggregation: "
+                            + CellInfoUtil.cellInfoListToString(results));
                     mCellInfoList = new ArrayList<>(results);
                     if (mCellInfoList != null && mCellInfoList.size() != 0) {
                         updateAllPreferenceCategory();
