@@ -16,38 +16,50 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.PermissionGroupInfo;
-import android.content.pm.PermissionInfo;
 import android.icu.text.ListFormatter;
 import android.util.ArraySet;
-import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.applications.PermissionsSummaryHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AppPermissionsPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "AppPermissionPrefCtrl";
-    private static final String[] PERMISSION_GROUPS = new String[]{
-            "android.permission-group.LOCATION",
-            "android.permission-group.MICROPHONE",
-            "android.permission-group.CAMERA",
-            "android.permission-group.SMS",
-            "android.permission-group.CONTACTS",
-            "android.permission-group.PHONE"};
+    private static int NUM_PACKAGE_TO_CHECK = 3;
 
-    private static final int NUM_PERMISSION_TO_USE = 3;
+    @VisibleForTesting
+    static int NUM_PERMISSIONS_TO_SHOW = 3;
 
     private final PackageManager mPackageManager;
+    private final Set<CharSequence> mPermissionGroups;
+
+    private final PermissionsSummaryHelper.PermissionsResultCallback mPermissionsCallback =
+            new PermissionsSummaryHelper.PermissionsResultCallback() {
+                @Override
+                public void onPermissionSummaryResult(int standardGrantedPermissionCount,
+                        int requestedPermissionCount, int additionalGrantedPermissionCount,
+                        List<CharSequence> grantedGroupLabels) {
+                    updateSummary(grantedGroupLabels);
+                }
+            };
+
+    @VisibleForTesting
+    int mNumPackageChecked;
+
+    private Preference mPreference;
 
     public AppPermissionsPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mPackageManager = context.getPackageManager();
+        mPermissionGroups = new ArraySet<>();
     }
 
     @Override
@@ -55,72 +67,45 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
         return AVAILABLE;
     }
 
-    /*
-       Summary text looks like: Apps using Permission1, Permission2, Permission3
-       The 3 permissions are the first three from the list which any app has granted:
-       Location, Microphone, Camera, Sms, Contacts, and Phone
-     */
     @Override
-    public CharSequence getSummary() {
-        final Set<String> permissions = getAllPermissionsInGroups();
-        Set<String> grantedPermissionGroups = getGrantedPermissionGroups(permissions);
-        int count = 0;
-        final List<String> summaries = new ArrayList<>();
-
-        for (String group : PERMISSION_GROUPS) {
-            if (!grantedPermissionGroups.contains(group)) {
-                continue;
-            }
-            summaries.add(getPermissionGroupLabel(group).toString().toLowerCase());
-            if (++count >= NUM_PERMISSION_TO_USE) {
-                break;
-            }
-        }
-        return count > 0 ? mContext.getString(R.string.app_permissions_summary,
-                ListFormatter.getInstance().format(summaries)) : null;
+    public void updateState(Preference preference) {
+        mPreference = preference;
+        mNumPackageChecked = 0;
+        queryPermissionSummary();
     }
 
-    private Set<String> getGrantedPermissionGroups(Set<String> permissions) {
-        ArraySet<String> grantedPermissionGroups = new ArraySet<>();
-        List<PackageInfo> installedPackages =
+    @VisibleForTesting
+    void queryPermissionSummary() {
+        final List<PackageInfo> installedPackages =
                 mPackageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS);
-        for (PackageInfo installedPackage : installedPackages) {
-            if (installedPackage.permissions == null) {
-                continue;
-            }
-            for (PermissionInfo permissionInfo : installedPackage.permissions) {
-                if (permissions.contains(permissionInfo.name)
-                        && !grantedPermissionGroups.contains(permissionInfo.group)) {
-                    grantedPermissionGroups.add(permissionInfo.group);
-                }
-            }
+        // Here we only get the first three apps and check their permissions.
+        final List<PackageInfo> packagesWithPermission = installedPackages.stream()
+                .filter(pInfo -> pInfo.permissions != null)
+                .limit(NUM_PACKAGE_TO_CHECK)
+                .collect(Collectors.toList());
+
+        for (PackageInfo installedPackage : packagesWithPermission) {
+            PermissionsSummaryHelper.getPermissionSummary(mContext,
+                    installedPackage.packageName, mPermissionsCallback);
         }
-        return grantedPermissionGroups;
     }
 
-    private CharSequence getPermissionGroupLabel(String group) {
-        try {
-            final PermissionGroupInfo groupInfo = mPackageManager.getPermissionGroupInfo(group, 0);
-            return groupInfo.loadLabel(mPackageManager);
-        } catch (NameNotFoundException e) {
-            Log.e(TAG, "Error getting permissions label.", e);
-        }
-        return group;
-    }
+    @VisibleForTesting
+    void updateSummary(List<CharSequence> grantedGroupLabels) {
+        mPermissionGroups.addAll(grantedGroupLabels);
+        mNumPackageChecked++;
 
-    private Set<String> getAllPermissionsInGroups() {
-        ArraySet<String> result = new ArraySet<>();
-        for (String group : PERMISSION_GROUPS) {
-            try {
-                final List<PermissionInfo> permissions =
-                        mPackageManager.queryPermissionsByGroup(group, 0);
-                for (PermissionInfo permissionInfo : permissions) {
-                    result.add(permissionInfo.name);
-                }
-            } catch (NameNotFoundException e) {
-                Log.e(TAG, "Error getting permissions in group " + group, e);
-            }
+        if (mNumPackageChecked < NUM_PACKAGE_TO_CHECK) {
+            return;
         }
-        return result;
+
+        final List<CharSequence> permissionsToShow = mPermissionGroups.stream()
+                .limit(NUM_PERMISSIONS_TO_SHOW)
+                .collect(Collectors.toList());
+        final CharSequence summary = !permissionsToShow.isEmpty()
+                ? mContext.getString(R.string.app_permissions_summary,
+                ListFormatter.getInstance().format(permissionsToShow).toLowerCase())
+                : null;
+        mPreference.setSummary(summary);
     }
 }
