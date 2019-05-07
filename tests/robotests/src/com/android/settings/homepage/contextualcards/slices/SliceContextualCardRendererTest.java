@@ -137,6 +137,30 @@ public class SliceContextualCardRendererTest {
     }
 
     @Test
+    public void bindView_beforeSuccessfulSliceBinding_shouldHideSwipeBackground() {
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final ContextualCard card = buildContextualCard(TEST_SLICE_URI);
+        final View swipeBg = viewHolder.itemView.findViewById(R.id.dismissal_swipe_background);
+
+        mRenderer.bindView(viewHolder, card);
+
+        assertThat(swipeBg.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void bindView_reuseViewHolder_shouldHideSwipeBackgroundBeforeSliceBinding() {
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final ContextualCard card = buildContextualCard(TEST_SLICE_URI);
+        final View swipeBg = viewHolder.itemView.findViewById(R.id.dismissal_swipe_background);
+        swipeBg.setVisibility(View.VISIBLE);
+        mRenderer.mSliceLiveDataMap.put(TEST_SLICE_URI, mSliceLiveData);
+
+        mRenderer.bindView(viewHolder, card);
+
+        assertThat(swipeBg.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
     public void viewClick_keepCard_shouldShowSlice() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final View sliceView = viewHolder.itemView.findViewById(R.id.slice_view);
