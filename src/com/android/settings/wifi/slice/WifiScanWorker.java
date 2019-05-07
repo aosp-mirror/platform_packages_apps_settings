@@ -16,7 +16,11 @@
 
 package com.android.settings.wifi.slice;
 
+import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
+import static android.net.NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY;
+import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
+
 import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
 
 import android.content.Context;
@@ -25,7 +29,6 @@ import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.Network;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
@@ -40,7 +43,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.slices.SliceBackgroundWorker;
-import com.android.settings.wifi.WifiUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 
@@ -56,7 +58,7 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
     private static final String TAG = "WifiScanWorker";
 
     @VisibleForTesting
-    CaptivePortalNetworkCallback mCaptivePortalNetworkCallback;
+    WifiNetworkCallback mNetworkCallback;
 
     private final Context mContext;
     private final ConnectivityManager mConnectivityManager;
@@ -81,7 +83,7 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
     @Override
     protected void onSliceUnpinned() {
         mWifiTracker.onStop();
-        unregisterCaptivePortalNetworkCallback();
+        unregisterNetworkCallback();
         clearClickedWifi();
     }
 
@@ -135,19 +137,11 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
         // compare access point states one by one
         final int listSize = a.size();
         for (int i = 0; i < listSize; i++) {
-            if (getState(a.get(i)) != getState(b.get(i))) {
+            if (a.get(i).getDetailedState() != b.get(i).getDetailedState()) {
                 return false;
             }
         }
         return true;
-    }
-
-    private NetworkInfo.State getState(AccessPoint accessPoint) {
-        final NetworkInfo networkInfo = accessPoint.getNetworkInfo();
-        if (networkInfo != null) {
-            return networkInfo.getState();
-        }
-        return null;
     }
 
     static void saveClickedWifi(AccessPoint accessPoint) {
@@ -163,69 +157,74 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
         return !TextUtils.isEmpty(ssid) && TextUtils.equals(ssid, sClickedWifiSsid);
     }
 
-    public void registerCaptivePortalNetworkCallback(Network wifiNetwork) {
+    public void registerNetworkCallback(Network wifiNetwork) {
         if (wifiNetwork == null) {
             return;
         }
 
-        if (mCaptivePortalNetworkCallback != null
-                && mCaptivePortalNetworkCallback.isSameNetwork(wifiNetwork)) {
+        if (mNetworkCallback != null && mNetworkCallback.isSameNetwork(wifiNetwork)) {
             return;
         }
 
-        unregisterCaptivePortalNetworkCallback();
+        unregisterNetworkCallback();
 
-        mCaptivePortalNetworkCallback = new CaptivePortalNetworkCallback(wifiNetwork);
+        mNetworkCallback = new WifiNetworkCallback(wifiNetwork);
         mConnectivityManager.registerNetworkCallback(
                 new NetworkRequest.Builder()
                         .clearCapabilities()
                         .addTransportType(TRANSPORT_WIFI)
                         .build(),
-                mCaptivePortalNetworkCallback,
+                mNetworkCallback,
                 new Handler(Looper.getMainLooper()));
     }
 
-    public void unregisterCaptivePortalNetworkCallback() {
-        if (mCaptivePortalNetworkCallback != null) {
+    public void unregisterNetworkCallback() {
+        if (mNetworkCallback != null) {
             try {
-                mConnectivityManager.unregisterNetworkCallback(mCaptivePortalNetworkCallback);
+                mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
             } catch (RuntimeException e) {
                 Log.e(TAG, "Unregistering CaptivePortalNetworkCallback failed.", e);
             }
-            mCaptivePortalNetworkCallback = null;
+            mNetworkCallback = null;
         }
     }
 
-    class CaptivePortalNetworkCallback extends NetworkCallback {
+    class WifiNetworkCallback extends NetworkCallback {
 
         private final Network mNetwork;
         private boolean mIsCaptivePortal;
+        private boolean mHasPartialConnectivity;
+        private boolean mIsValidated;
 
-        CaptivePortalNetworkCallback(Network network) {
+        WifiNetworkCallback(Network network) {
             mNetwork = Preconditions.checkNotNull(network);
         }
 
         @Override
-        public void onCapabilitiesChanged(Network network,
-                NetworkCapabilities networkCapabilities) {
+        public void onCapabilitiesChanged(Network network, NetworkCapabilities nc) {
             if (!isSameNetwork(network)) {
                 return;
             }
 
-            final boolean isCaptivePortal = WifiUtils.canSignIntoNetwork(networkCapabilities);
-            if (mIsCaptivePortal == isCaptivePortal) {
+            final boolean prevIsCaptivePortal = mIsCaptivePortal;
+            final boolean prevHasPartialConnectivity = mHasPartialConnectivity;
+            final boolean prevIsValidated = mIsValidated;
+
+            mIsCaptivePortal = nc.hasCapability(NET_CAPABILITY_CAPTIVE_PORTAL);
+            mHasPartialConnectivity = nc.hasCapability(NET_CAPABILITY_PARTIAL_CONNECTIVITY);
+            mIsValidated = nc.hasCapability(NET_CAPABILITY_VALIDATED);
+
+            if (prevIsCaptivePortal == mIsCaptivePortal
+                    && prevHasPartialConnectivity == mHasPartialConnectivity
+                    && prevIsValidated == mIsValidated) {
                 return;
             }
 
-            mIsCaptivePortal = isCaptivePortal;
             notifySliceChange();
 
             // Automatically start captive portal
-            if (mIsCaptivePortal) {
-                if (!isWifiClicked(mWifiTracker.getManager().getConnectionInfo())) {
-                    return;
-                }
-
+            if (!prevIsCaptivePortal && mIsCaptivePortal
+                    && isWifiClicked(mWifiTracker.getManager().getConnectionInfo())) {
                 final Intent intent = new Intent(mContext, ConnectToWifiHandler.class)
                         .putExtra(ConnectivityManager.EXTRA_NETWORK, network)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

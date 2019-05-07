@@ -17,7 +17,10 @@
 package com.android.settings.wifi.slice;
 
 import android.content.Context;
+import android.net.NetworkCapabilities;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
 import android.text.TextUtils;
 import android.util.Log;
@@ -69,6 +72,22 @@ public class ContextualWifiSlice extends WifiSlice {
     }
 
     private boolean hasWorkingNetwork() {
-        return !TextUtils.equals(getActiveSSID(), WifiSsid.NONE) && !isCaptivePortal();
+        return !TextUtils.equals(getActiveSSID(), WifiSsid.NONE) && hasInternetAccess();
+    }
+
+    private String getActiveSSID() {
+        if (mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
+            return WifiSsid.NONE;
+        }
+        return WifiInfo.removeDoubleQuotes(mWifiManager.getConnectionInfo().getSSID());
+    }
+
+    private boolean hasInternetAccess() {
+        final NetworkCapabilities nc = mConnectivityManager.getNetworkCapabilities(
+                mWifiManager.getCurrentNetwork());
+        return nc != null
+                && !nc.hasCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL)
+                && !nc.hasCapability(NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY)
+                && nc.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
     }
 }
