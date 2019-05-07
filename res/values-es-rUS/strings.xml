@@ -353,7 +353,7 @@
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> a partir del <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="4192803402331390389">"Zona horaria: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> comienza el <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"Zona horaria: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> (<xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> a partir del <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>)."</string>
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Zona horaria: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Sin horario de verano."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Horario de verano"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Hora estándar"</string>
@@ -1211,7 +1211,7 @@
     <string name="device_status" msgid="607405385799807324">"Estado"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Estado de la batería, la red y otra información"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Número de teléfono, señal, etc."</string>
-    <string name="storage_settings" msgid="4211799979832404953">"Espacio de almacenamiento"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"Almacenamiento"</string>
     <string name="storage_usb_settings" msgid="7293054033137078060">"Almacenamiento"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Configuración de almacenamiento"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Desmontar almacenamiento USB, ver almacenamiento disponible"</string>
@@ -1586,7 +1586,7 @@
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Configura tu contraseña"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Configura el patrón"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"Por motivos de seguridad, establece un PIN"</string>
-    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Configura el PIN"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Configura el PIN para usar la huella"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"Por motivos de seguridad, establece un patrón"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Vuelve a ingresar tu contraseña"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Confirma el patrón"</string>
@@ -1622,7 +1622,7 @@
     <string name="lock_settings_title" msgid="4213839087748988686">"Seguridad del dispositivo"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Cambiar patrón de desbloqueo"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Cambiar PIN de desbloqueo"</string>
-    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Dibuja un patrón de desbloqueo."</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Dibuja un patrón de desbloqueo"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Presiona Menú para obtener ayuda."</string>
     <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Levanta el dedo cuando termines."</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Une al menos <xliff:g id="NUMBER">%d</xliff:g> puntos. Vuelve a intentarlo."</string>
@@ -1670,8 +1670,8 @@
     <string name="install_all_warning" product="device" msgid="3648003301476423145">"Tu dispositivo y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas apps de esta fuente, serás responsable de los daños que sufra el dispositivo o de la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Configuración avanzada"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Activar más opciones de configuración"</string>
-    <string name="application_info_label" msgid="5736524913065714880">"Info. de la aplicación"</string>
-    <string name="storage_label" msgid="8700867073480107253">"Espacio de almacenamiento"</string>
+    <string name="application_info_label" msgid="5736524913065714880">"Info. de las apps"</string>
+    <string name="storage_label" msgid="8700867073480107253">"Almacenamiento"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"Abrir de forma predet."</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Valores predeterminados"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilidad de la pantalla"</string>
@@ -1944,11 +1944,11 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Ampliar presionando tres veces"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Ampliar con el botón"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Ampliar con el botón y al presionar tres veces"</string>
-    <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Acercar en la pantalla"</string>
-    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Presiona tres veces para aplicar el zoom"</string>
-    <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Presiona un botón para acercar"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Para ampliar"</b>", presiona la pantalla 3 veces rápidamente \n"<ul><li>"Arrastra 2 o más dedos para desplazarte."</li>\n<li>"Pellizca con 2 o más dedos para ajustar el zoom."</li></ul>\n\n<b>"Para hacer zoom de manera temporal"</b>", presiona la pantalla 3 veces rápidamente y mantén presionado la última vez.\n"<ul><li>"Arrastra el dedo para moverte por la pantalla."</li>\n<li>"Levanta el dedo para alejar la imagen."</li></ul>\n\n"No puedes acercar con el teclado ni en la barra de navegación."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Cuando se activa la ampliación, usa el botón de Accesibilidad en la parte inferior de la pantalla para ampliar rápidamente.\n\n"<b>"Para acercar"</b>", presiona el botón de Accesibilidad y, luego, presiona cualquier lugar de la pantalla.\n"<ul><li>"Arrastra 2 o más dedos para desplazarte."</li>\n<li>"Pellizca con 2 o más dedos para ajustar el zoom."</li></ul>\n\n<b>"Para hacer zoom de manera temporal"</b>", presiona el botón de Accesibilidad y, luego, mantén presionado cualquier lugar de la pantalla.\n"<ul><li>"Arrastra el dedo para moverte por la pantalla."</li>\n<li>"Levanta el dedo para alejar la imagen."</li></ul>\n\n"No puedes ampliar el teclado ni la barra de navegación."</string>
+    <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Ampliar la pantalla"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Presiona tres veces para ampliar"</string>
+    <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Presiona un botón para ampliar"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Para ampliar"</b>", presiona la pantalla 3 veces rápidamente \n"<ul><li>"Arrastra 2 o más dedos para desplazarte."</li>\n<li>"Pellizca con 2 o más dedos para ajustar el zoom."</li></ul>\n\n<b>"Para hacer zoom de manera temporal"</b>", presiona la pantalla 3 veces rápidamente y mantén presionado la última vez.\n"<ul><li>"Arrastra el dedo para moverte por la pantalla."</li>\n<li>"Levanta el dedo para alejar la imagen."</li></ul>\n\n"No se puede ampliar el teclado ni la barra de navegación."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Cuando esté activada la ampliación, usa el botón de Accesibilidad que aparece en la parte inferior de la pantalla para ampliar rápidamente.\n\n"<b>"Para acercar"</b>", presiona el botón de Accesibilidad y, luego, presiona cualquier lugar de la pantalla.\n"<ul><li>"Arrastra 2 o más dedos para desplazarte."</li>\n<li>"Pellizca con 2 o más dedos para ajustar el zoom."</li></ul>\n\n<b>"Para hacer zoom de manera temporal"</b>", presiona el botón de Accesibilidad y, luego, mantén presionado cualquier lugar de la pantalla.\n"<ul><li>"Arrastra el dedo para moverte por la pantalla."</li>\n<li>"Levanta el dedo para alejar la imagen."</li></ul>\n\n"No se puede ampliar el teclado ni la barra de navegación."</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"El botón de Accesibilidad está configurado para <xliff:g id="SERVICE">%1$s</xliff:g>. Para ampliar, mantén presionado el botón y, luego, selecciona ampliación."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Combinación de teclas de volumen"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Servicio de combinación de teclas"</string>
@@ -2273,7 +2273,7 @@
     <string name="usage_type_computed_power" msgid="5862792259009981479">"Uso de energía computado"</string>
     <string name="usage_type_actual_power" msgid="7047814738685578335">"Uso de energía observado"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"Forzar la detención"</string>
-    <string name="battery_action_app_details" msgid="7861051816778419018">"Info. de la aplicación"</string>
+    <string name="battery_action_app_details" msgid="7861051816778419018">"Info. de las apps"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"Configuración de aplicación"</string>
     <string name="battery_action_display" msgid="7338551244519110831">"Configuraciones de pantalla"</string>
     <string name="battery_action_wifi" msgid="8181553479021841207">"Configuración de Wi-Fi"</string>
@@ -2436,7 +2436,7 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Credenciales borradas"</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Imposible borrar almac credenc"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"El almacenamiento de credenciales está activado."</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Para poder usar el almacenamiento de claves, debes configurar una pantalla bloqueada segura en tu dispositivo"</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Para poder usar el almacenamiento de claves, debes configurar un bloqueo de pantalla seguro en tu dispositivo"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"CONFIGURAR BLOQUEO"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Acceso a datos de uso"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Indicador de marcado de emergencia"</string>
@@ -2711,7 +2711,7 @@
     <string name="vpn_menu_edit" msgid="408275284159243490">"Modificar perfil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Borrar perfil"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN siempre activada"</string>
-    <string name="vpn_no_vpns_added" msgid="5002741367858707244">"No se agregaron VPN"</string>
+    <string name="vpn_no_vpns_added" msgid="5002741367858707244">"No se agregó ninguna VPN"</string>
     <string name="vpn_always_on_summary" msgid="2821344524094363617">"Mantente siempre conectado a una VPN"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="592304911378771510">"La opción no es compatible con esta app"</string>
     <string name="vpn_always_on_summary_active" msgid="8800736191241875669">"La opción Siempre activa está habilitada"</string>
@@ -3355,7 +3355,7 @@
     <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"De contactos destacados y emisores repetidos"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"De contactos y emisores repetidos"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Solo de emisores repetidos"</string>
-    <string name="zen_mode_from_none" msgid="8219706639954614136">"Ninguno"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"De nadie"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmas"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"Contenido multimedia"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Tonos táctiles"</string>
@@ -3490,7 +3490,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Avanzada"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Configurar apps"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplicación desconocida"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Permisos de aplicaciones"</string>
+    <string name="app_permissions" msgid="4148222031991883874">"Permisos de la app"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Apps que usan <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Presionar para activar"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Presiona dos veces en cualquier lugar de la pantalla para activar el dispositivo."</string>
@@ -3788,8 +3788,8 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"Datos de Ethernet: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Advertencia de datos: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Advertencia de datos: <xliff:g id="ID_1">%1$s</xliff:g>/Límite de datos: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="billing_cycle" msgid="6614597736285325497">"Advertencia de límite de datos"</string>
-    <string name="app_usage_cycle" msgid="8877223251648092131">"Ciclo de uso de datos de app"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Límite y advertencia de datos"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"Ciclo de uso de datos de las apps"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Advertencia de datos: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Límite de datos: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="6888825370687743208">"Advertencia de datos: <xliff:g id="ID_1">^1</xliff:g>/Límite de datos: <xliff:g id="ID_2">^2</xliff:g>"</string>

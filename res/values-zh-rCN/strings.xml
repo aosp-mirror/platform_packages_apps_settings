@@ -646,15 +646,15 @@
     <string name="manage_device_admin" msgid="537804979483211453">"设备管理应用"</string>
     <string name="number_of_device_admins_none" msgid="7185056721919496069">"没有运行中的应用"</string>
     <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个有效应用</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个有效应用</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个应用正在运行</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个应用正在运行</item>
     </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"可信代理"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"要开始使用，请先设置屏幕锁定方式"</string>
     <string name="manage_trust_agents_summary" msgid="1475819820389620546">"无"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="3935182396726101824">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个可信代理处于有效状态</item>
-      <item quantity="one">1 个可信代理处于有效状态</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个可信代理正在运行</item>
+      <item quantity="one">1 个可信代理正在运行</item>
     </plurals>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"蓝牙"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"打开蓝牙"</string>
@@ -1106,7 +1106,7 @@
     <string name="night_display_start_time_title" msgid="8918016772613689584">"开始时间"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"结束时间"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"状态"</string>
-    <string name="night_display_temperature_title" msgid="1435292789272017136">"浓度"</string>
+    <string name="night_display_temperature_title" msgid="1435292789272017136">"强度"</string>
     <string name="night_display_summary_off" msgid="1792750041697946539">"关闭 / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"一律不自动开启"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"将在<xliff:g id="ID_1">%1$s</xliff:g>自动开启"</string>
@@ -2408,7 +2408,7 @@
     <string name="gadget_brightness_state_half" msgid="3696671957608774204">"一半"</string>
     <string name="gadget_brightness_state_off" msgid="946382262872753084">"关闭"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
-    <string name="credentials_title" msgid="4446234003860769883">"凭据存储空间"</string>
+    <string name="credentials_title" msgid="4446234003860769883">"凭据存储"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"从存储设备安装"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"从SD卡安装"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"从存储设备安装证书"</string>
@@ -3059,7 +3059,7 @@
     <string name="docking_sounds_title" msgid="155236288949940607">"基座提示音"</string>
     <string name="touch_sounds_title" msgid="5326587106892390176">"触摸提示音"</string>
     <string name="vibrate_on_touch_title" msgid="1510405818894719079">"触摸振动"</string>
-    <string name="vibrate_on_touch_summary" msgid="8015901758501868229">"点按、按键等操作的触感"</string>
+    <string name="vibrate_on_touch_summary" msgid="8015901758501868229">"点按、按键等操作的触感反馈"</string>
     <string name="dock_audio_media_title" msgid="1346838179626123900">"基座扬声器播放的音频"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"所有音频"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"仅限媒体音频"</string>
@@ -3163,8 +3163,8 @@
     <string name="zen_sound_one_allowed" msgid="8447313454438932276">"已设为静音（但<xliff:g id="SOUND_TYPE">%1$s</xliff:g>除外）"</string>
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"已设为静音（但<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>和<xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>除外）"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"已设为静音（但<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>、<xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>和<xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>除外）"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"信息、活动和提醒"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"开启勿扰模式后，系统会忽略信息、提醒和活动（您在上方允许的几项内容除外）。您可以调整相应信息设置，以便允许您的好友、家人或其他联系人与您联系。"</string>
+    <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"消息、活动和提醒"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"开启勿扰模式后，系统会忽略消息、提醒和活动（您在上方允许的几项内容除外）。您可以调整相应消息设置，以便您的好友、家人或其他联系人能联系上您。"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"完成"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"设置"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"不显示通知，也不发出通知提示音"</string>
@@ -3353,7 +3353,7 @@
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"部分信息"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"来自任何人"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"仅限来自联系人"</string>
-    <string name="zen_mode_from_starred" msgid="2678345811950997027">"仅限来自收藏的联系人"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"仅限来自已加星标的联系人"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"来自已加星标的联系人和重复来电者"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"来自联系人和重复来电者"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"仅限来自重复来电者"</string>
