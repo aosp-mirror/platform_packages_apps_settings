@@ -16,30 +16,24 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.applications.AppPermissionsPreferenceController.NUM_PERMISSIONS_TO_SHOW;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.PermissionGroupInfo;
-import android.content.pm.PermissionInfo;
 
 import androidx.preference.Preference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -49,99 +43,14 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class AppPermissionsPreferenceControllerTest {
 
-    private static final String PERM_LOCATION = "android.permission-group.LOCATION";
-    private static final String PERM_MICROPHONE = "android.permission-group.MICROPHONE";
-    private static final String PERM_CAMERA = "android.permission-group.CAMERA";
-    private static final String PERM_SMS = "android.permission-group.SMS";
-    private static final String PERM_CONTACTS = "android.permission-group.CONTACTS";
-    private static final String PERM_PHONE = "android.permission-group.PHONE";
-    private static final String LABEL_LOCATION = "Location";
-    private static final String LABEL_MICROPHONE = "Microphone";
-    private static final String LABEL_CAMERA = "Camera";
-    private static final String LABEL_SMS = "Sms";
-    private static final String LABEL_CONTACTS = "Contacts";
-    private static final String LABEL_PHONE = "Phone";
-
-    @Mock
-    private Preference mPreference;
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private PermissionGroupInfo mGroupLocation;
-    @Mock
-    private PermissionGroupInfo mGroupMic;
-    @Mock
-    private PermissionGroupInfo mGroupCamera;
-    @Mock
-    private PermissionGroupInfo mGroupSms;
-    @Mock
-    private PermissionGroupInfo mGroupContacts;
-    @Mock
-    private PermissionGroupInfo mGroupPhone;
-
     private Context mContext;
     private AppPermissionsPreferenceController mController;
-    private PermissionInfo mPermLocation;
-    private PermissionInfo mPermMic;
-    private PermissionInfo mPermCamera;
-    private PermissionInfo mPermSms;
-    private PermissionInfo mPermContacts;
-    private PermissionInfo mPermPhone;
+    private Preference mPreference;
 
     @Before
     public void setUp() throws NameNotFoundException {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-
-        // create permission groups
-        when(mPackageManager.getPermissionGroupInfo(eq(PERM_LOCATION), anyInt()))
-                .thenReturn(mGroupLocation);
-        when(mGroupLocation.loadLabel(mPackageManager)).thenReturn(LABEL_LOCATION);
-        when(mPackageManager.getPermissionGroupInfo(eq(PERM_MICROPHONE), anyInt()))
-                .thenReturn(mGroupMic);
-        when(mGroupMic.loadLabel(mPackageManager)).thenReturn(LABEL_MICROPHONE);
-        when(mPackageManager.getPermissionGroupInfo(eq(PERM_CAMERA), anyInt()))
-                .thenReturn(mGroupCamera);
-        when(mGroupCamera.loadLabel(mPackageManager)).thenReturn(LABEL_CAMERA);
-        when(mPackageManager.getPermissionGroupInfo(eq(PERM_SMS), anyInt())).thenReturn(mGroupSms);
-        when(mGroupSms.loadLabel(mPackageManager)).thenReturn(LABEL_SMS);
-        when(mPackageManager.getPermissionGroupInfo(eq(PERM_CONTACTS), anyInt()))
-                .thenReturn(mGroupContacts);
-        when(mGroupContacts.loadLabel(mPackageManager)).thenReturn(LABEL_CONTACTS);
-        when(mPackageManager.getPermissionGroupInfo(eq(PERM_PHONE), anyInt()))
-                .thenReturn(mGroupPhone);
-        when(mGroupPhone.loadLabel(mPackageManager)).thenReturn(LABEL_PHONE);
-
-        // create permissions
-        mPermLocation = new PermissionInfo();
-        mPermLocation.name = "Permission1";
-        mPermLocation.group = PERM_LOCATION;
-        mPermMic = new PermissionInfo();
-        mPermMic.name = "Permission2";
-        mPermMic.group = PERM_MICROPHONE;
-        mPermCamera = new PermissionInfo();
-        mPermCamera.name = "Permission3";
-        mPermCamera.group = PERM_CAMERA;
-        mPermSms = new PermissionInfo();
-        mPermSms.name = "Permission4";
-        mPermSms.group = PERM_SMS;
-        mPermContacts = new PermissionInfo();
-        mPermContacts.name = "Permission4";
-        mPermContacts.group = PERM_CONTACTS;
-        mPermPhone = new PermissionInfo();
-        mPermPhone.name = "Permission4";
-        mPermPhone.group = PERM_PHONE;
-        final List<PermissionInfo> permissions = new ArrayList<>();
-        permissions.add(mPermLocation);
-        permissions.add(mPermMic);
-        permissions.add(mPermCamera);
-        permissions.add(mPermSms);
-        permissions.add(mPermContacts);
-        permissions.add(mPermPhone);
-        when(mPackageManager.queryPermissionsByGroup(anyString(), anyInt()))
-                .thenReturn(permissions);
-
+        mContext = RuntimeEnvironment.application;
+        mPreference = spy(new Preference(mContext));
         mController = spy(new AppPermissionsPreferenceController(mContext, "pref_key"));
     }
 
@@ -151,65 +60,76 @@ public class AppPermissionsPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_noGrantedPermissions_shouldNotSetSummary() {
-        final List<PackageInfo> installedPackages = new ArrayList<>();
-        final PackageInfo info = new PackageInfo();
-        installedPackages.add(info);
-        when(mPackageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS))
-                .thenReturn(installedPackages);
+    public void updateState_shouldResetNumPackageChecked() {
+        doNothing().when(mController).queryPermissionSummary();
+        mController.mNumPackageChecked = 3;
 
         mController.updateState(mPreference);
+
+        assertThat(mController.mNumPackageChecked).isEqualTo(0);
+    }
+
+    @Test
+    public void updateSummary_noGrantedPermission_shouldSetNullSummary() {
+        doNothing().when(mController).queryPermissionSummary();
+        mController.updateState(mPreference);
+        mController.mNumPackageChecked = 2;
+
+        mController.updateSummary(new ArrayList<>());
+
+        assertThat(mPreference.getSummary()).isNull();
+    }
+
+    @Test
+    public void updateSummary_hasPermissionGroups_shouldSetPermissionAsSummary() {
+        doNothing().when(mController).queryPermissionSummary();
+        mController.updateState(mPreference);
+        final String permission = "location";
+        final ArrayList<CharSequence> labels = new ArrayList<>();
+        labels.add(permission);
+        final String summary = "Apps using " + permission;
+        mController.mNumPackageChecked = 2;
+
+        mController.updateSummary(labels);
+
+        assertThat(mPreference.getSummary()).isEqualTo(summary);
+    }
+
+    @Test
+    public void updateSummary_notReachCallbackCount_shouldNotSetSummary() {
+        doNothing().when(mController).queryPermissionSummary();
+        mController.updateState(mPreference);
+        final String permission = "location";
+        final ArrayList<CharSequence> labels = new ArrayList<>();
+        labels.add(permission);
+
+        mController.updateSummary(labels);
 
         verify(mPreference, never()).setSummary(anyString());
     }
 
     @Test
-    public void updateState_hasPermissions_shouldSetSummary() {
-        final List<PackageInfo> installedPackages = new ArrayList<>();
-        final PackageInfo info = new PackageInfo();
-        installedPackages.add(info);
-        when(mPackageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS))
-                .thenReturn(installedPackages);
-        PermissionInfo[] permissions = new PermissionInfo[4];
-        info.permissions = permissions;
-
-        permissions[0] = mPermLocation;
-        permissions[1] = mPermMic;
-        permissions[2] = mPermCamera;
-        permissions[3] = mPermSms;
+    public void updateSummary_hasFiveItems_shouldShowCertainNumItems() {
+        doNothing().when(mController).queryPermissionSummary();
         mController.updateState(mPreference);
+        mController.mNumPackageChecked = 2;
 
-        verify(mPreference).setSummary("Apps using location, microphone, and camera");
+        mController.updateSummary(getPermissionGroupsSet());
 
-        permissions[0] = mPermPhone;
-        permissions[1] = mPermMic;
-        permissions[2] = mPermCamera;
-        permissions[3] = mPermSms;
-        mController.updateState(mPreference);
+        final CharSequence summary = mPreference.getSummary();
+        final int items = summary.toString().split(",").length;
+        assertThat(items).isEqualTo(NUM_PERMISSIONS_TO_SHOW);
+    }
 
-        verify(mPreference).setSummary("Apps using microphone, camera, and sms");
+    private List<CharSequence> getPermissionGroupsSet() {
+        final List<CharSequence> labels = new ArrayList<>();
+        labels.add("Phone");
+        labels.add("SMS");
+        labels.add("Microphone");
+        labels.add("Contacts");
+        labels.add("Camera");
+        labels.add("Location");
 
-        permissions[0] = mPermPhone;
-        permissions[1] = mPermMic;
-        permissions[2] = mPermContacts;
-        permissions[3] = mPermSms;
-        mController.updateState(mPreference);
-
-        verify(mPreference).setSummary("Apps using microphone, sms, and contacts");
-
-        permissions = new PermissionInfo[2];
-        info.permissions = permissions;
-        permissions[0] = mPermLocation;
-        permissions[1] = mPermCamera;
-        mController.updateState(mPreference);
-
-        verify(mPreference).setSummary("Apps using location and camera");
-
-        permissions = new PermissionInfo[1];
-        info.permissions = permissions;
-        permissions[0] = mPermCamera;
-        mController.updateState(mPreference);
-
-        verify(mPreference).setSummary("Apps using camera");
+        return labels;
     }
 }
