@@ -34,6 +34,7 @@ import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pGroupList;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.net.wifi.p2p.WifiP2pManager.DeviceInfoListener;
 import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.net.wifi.p2p.WifiP2pManager.PersistentGroupInfoListener;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ import java.util.List;
  * Displays Wi-fi p2p settings UI
  */
 public class WifiP2pSettings extends DashboardFragment
-        implements PersistentGroupInfoListener, PeerListListener {
+        implements PersistentGroupInfoListener, PeerListListener, DeviceInfoListener {
 
     private static final String TAG = "WifiP2pSettings";
     private static final boolean DBG = false;
@@ -134,10 +135,12 @@ public class WifiP2pSettings extends DashboardFragment
                 mLastGroupFormed = wifip2pinfo.groupFormed;
                 mIsIgnoreInitConnectionInfoCallback = true;
             } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
-                mThisDevice = (WifiP2pDevice) intent.getParcelableExtra(
-                        WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
-                if (DBG) Log.d(TAG, "Update device info: " + mThisDevice);
-                mThisDevicePreferenceController.updateDeviceName(mThisDevice);
+                // Do not use WifiP2pManager.EXTRA_WIFI_P2P_DEVICE from the extras, as the system
+                // broadcast does not contain the device's MAC.
+                // Requesting our own device info as an app holding the NETWORK_SETTINGS permission
+                // ensures that the MAC address will be available in the result.
+                if (DBG) Log.d(TAG, "This device changed. Requesting device info.");
+                mWifiP2pManager.requestDeviceInfo(mChannel, WifiP2pSettings.this);
             } else if (WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)) {
                 int discoveryState = intent.getIntExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE,
                     WifiP2pManager.WIFI_P2P_DISCOVERY_STOPPED);
@@ -340,13 +343,7 @@ public class WifiP2pSettings extends DashboardFragment
         getActivity().registerReceiver(mReceiver, mIntentFilter);
         if (mWifiP2pManager != null) {
             mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
-            mWifiP2pManager.requestDeviceInfo(mChannel, wifiP2pDevice -> {
-                if (DBG) {
-                    Log.d(TAG, "Get device info: " + wifiP2pDevice);
-                }
-                mThisDevice = wifiP2pDevice;
-                mThisDevicePreferenceController.updateDeviceName(wifiP2pDevice);
-            });
+            mWifiP2pManager.requestDeviceInfo(mChannel, WifiP2pSettings.this);
             mIsIgnoreInitConnectionInfoCallback = false;
             mWifiP2pManager.requestNetworkInfo(mChannel, networkInfo -> {
                 mWifiP2pManager.requestConnectionInfo(mChannel, wifip2pinfo -> {
@@ -597,6 +594,13 @@ public class WifiP2pSettings extends DashboardFragment
         if (DBG) Log.d(TAG, "Requested peers are available");
         mPeers = peers;
         handlePeersChanged();
+    }
+
+    @Override
+    public void onDeviceInfoAvailable(WifiP2pDevice wifiP2pDevice) {
+        mThisDevice = wifiP2pDevice;
+        if (DBG) Log.d(TAG, "Update device info: " + mThisDevice);
+        mThisDevicePreferenceController.updateDeviceName(mThisDevice);
     }
 
     private void handleP2pStateChanged() {
