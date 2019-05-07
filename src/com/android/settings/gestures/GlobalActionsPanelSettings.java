@@ -33,10 +33,9 @@ public class GlobalActionsPanelSettings extends DashboardFragment {
 
     private static final String TAG = "GlobalActionsPanelSettings";
 
-    // TODO (132184167): Use correct settings constant
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_GESTURES;
+        return SettingsEnums.GLOBAL_ACTIONS_PANEL_SETTINGS;
     }
 
     @Override
