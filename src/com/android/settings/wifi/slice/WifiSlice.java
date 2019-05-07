@@ -34,17 +34,10 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
-import android.net.NetworkInfo.State;
-import android.net.NetworkInfo.DetailedState;
 import android.net.Uri;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.net.wifi.WifiSsid;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -99,16 +92,16 @@ public class WifiSlice implements CustomSliceable {
         mContext.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
 
         final boolean isWifiEnabled = isWifiEnabled();
-        ListBuilder listBuilder = getListBuilder(isWifiEnabled, null /* accessPoint */);
+        ListBuilder listBuilder = getHeaderRow(isWifiEnabled);
         if (!isWifiEnabled) {
             return listBuilder.build();
         }
 
         final WifiScanWorker worker = SliceBackgroundWorker.getInstance(getUri());
-        final List<AccessPoint> results = worker != null ? worker.getResults() : null;
-        final int apCount = results == null ? 0 : results.size();
-        final boolean isFirstApActive = apCount > 0 && results.get(0).isActive();
-        handleCaptivePortalCallback(worker, isFirstApActive);
+        final List<AccessPoint> apList = worker != null ? worker.getResults() : null;
+        final int apCount = apList == null ? 0 : apList.size();
+        final boolean isFirstApActive = apCount > 0 && apList.get(0).isActive();
+        handleNetworkCallback(worker, isFirstApActive);
 
         // Need a loading text when results are not ready or out of date.
         boolean needLoadingRow = true;
@@ -117,7 +110,7 @@ public class WifiSlice implements CustomSliceable {
         // This loop checks the existence of reachable APs to determine the validity of the current
         // AP list.
         for (; index < apCount; index++) {
-            if (results.get(index).isReachable()) {
+            if (apList.get(index).isReachable()) {
                 needLoadingRow = false;
                 break;
             }
@@ -127,28 +120,24 @@ public class WifiSlice implements CustomSliceable {
         final CharSequence placeholder = mContext.getText(R.string.summary_placeholder);
         for (int i = 0; i < DEFAULT_EXPANDED_ROW_COUNT; i++) {
             if (i < apCount) {
-                final AccessPoint accessPoint = results.get(i);
-                if (accessPoint.isActive()) {
-                    // update summary
-                    listBuilder = getListBuilder(isWifiEnabled, accessPoint);
-                }
-                listBuilder.addRow(getAccessPointRow(accessPoint));
+                listBuilder.addRow(getAccessPointRow(apList.get(i)));
             } else if (needLoadingRow) {
-                listBuilder.addRow(getLoadingRow());
+                listBuilder.addRow(getLoadingRow(placeholder));
                 needLoadingRow = false;
             } else {
                 listBuilder.addRow(new ListBuilder.RowBuilder()
-                        .setTitle(placeholder));
+                        .setTitle(placeholder)
+                        .setSubtitle(placeholder));
             }
         }
         return listBuilder.build();
     }
 
-    private ListBuilder getListBuilder(boolean isWifiEnabled, AccessPoint accessPoint) {
+    private ListBuilder getHeaderRow(boolean isWifiEnabled) {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_wireless);
         final String title = mContext.getString(R.string.wifi_settings);
-        final CharSequence summary = getSummary(accessPoint);
+        final CharSequence summary = getSummary();
         final PendingIntent toggleAction = getBroadcastIntent(mContext);
         final PendingIntent primaryAction = getPrimaryAction();
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
@@ -166,24 +155,26 @@ public class WifiSlice implements CustomSliceable {
                         .setPrimaryAction(primarySliceAction));
     }
 
-    private void handleCaptivePortalCallback(WifiScanWorker worker, boolean isFirstApActive) {
+    private void handleNetworkCallback(WifiScanWorker worker, boolean isFirstApActive) {
         if (worker == null) {
             return;
         }
         if (isFirstApActive) {
-            worker.registerCaptivePortalNetworkCallback(mWifiManager.getCurrentNetwork());
+            worker.registerNetworkCallback(mWifiManager.getCurrentNetwork());
         } else {
-            worker.unregisterCaptivePortalNetworkCallback();
+            worker.unregisterNetworkCallback();
         }
     }
 
     private ListBuilder.RowBuilder getAccessPointRow(AccessPoint accessPoint) {
-        final CharSequence title = getAccessPointName(accessPoint);
-        final IconCompat levelIcon = getAccessPointLevelIcon(accessPoint);
         final boolean isCaptivePortal = accessPoint.isActive() && isCaptivePortal();
+        final CharSequence title = accessPoint.getTitle();
+        final CharSequence summary = getAccessPointSummary(accessPoint, isCaptivePortal);
+        final IconCompat levelIcon = getAccessPointLevelIcon(accessPoint);
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                 .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
-                .setSubtitle(title)
+                .setTitle(title)
+                .setSubtitle(summary)
                 .setPrimaryAction(SliceAction.createDeeplink(
                         getAccessPointAction(accessPoint, isCaptivePortal), levelIcon,
                         ListBuilder.ICON_IMAGE, title));
@@ -199,14 +190,13 @@ public class WifiSlice implements CustomSliceable {
         return rowBuilder;
     }
 
-    private CharSequence getAccessPointName(AccessPoint accessPoint) {
-        final CharSequence name = accessPoint.getTitle();
-        final Spannable span = new SpannableString(name);
-        @ColorInt final int color = Utils.getColorAttrDefaultColor(mContext,
-                android.R.attr.textColorPrimary);
-        span.setSpan(new ForegroundColorSpan(color), 0, name.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return span;
+    private CharSequence getAccessPointSummary(AccessPoint accessPoint, boolean isCaptivePortal) {
+        if (isCaptivePortal) {
+            return mContext.getText(R.string.wifi_tap_to_sign_in);
+        }
+
+        final CharSequence summary = accessPoint.getSettingsSummary();
+        return TextUtils.isEmpty(summary) ? mContext.getText(R.string.disconnected) : summary;
     }
 
     private IconCompat getAccessPointLevelIcon(AccessPoint accessPoint) {
@@ -274,7 +264,7 @@ public class WifiSlice implements CustomSliceable {
                 intent, 0 /* flags */);
     }
 
-    private ListBuilder.RowBuilder getLoadingRow() {
+    private ListBuilder.RowBuilder getLoadingRow(CharSequence placeholder) {
         final CharSequence title = mContext.getText(R.string.wifi_empty_list_wifi_on);
 
         // for aligning to the Wi-Fi AP's name
@@ -283,6 +273,7 @@ public class WifiSlice implements CustomSliceable {
 
         return new ListBuilder.RowBuilder()
                 .setTitleItem(emptyIcon, ListBuilder.ICON_IMAGE)
+                .setTitle(placeholder)
                 .setSubtitle(title);
     }
 
@@ -319,13 +310,6 @@ public class WifiSlice implements CustomSliceable {
         return intent;
     }
 
-    protected String getActiveSSID() {
-        if (mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
-            return WifiSsid.NONE;
-        }
-        return WifiInfo.removeDoubleQuotes(mWifiManager.getConnectionInfo().getSSID());
-    }
-
     private boolean isWifiEnabled() {
         switch (mWifiManager.getWifiState()) {
             case WifiManager.WIFI_STATE_ENABLED:
@@ -339,13 +323,8 @@ public class WifiSlice implements CustomSliceable {
     private CharSequence getSummary() {
         switch (mWifiManager.getWifiState()) {
             case WifiManager.WIFI_STATE_ENABLED:
-                final String ssid = getActiveSSID();
-                if (TextUtils.equals(ssid, WifiSsid.NONE)) {
-                    return mContext.getText(R.string.disconnected);
-                }
-                return ssid;
             case WifiManager.WIFI_STATE_ENABLING:
-                return mContext.getText(R.string.disconnected);
+                return mContext.getText(R.string.switch_on_text);
             case WifiManager.WIFI_STATE_DISABLED:
             case WifiManager.WIFI_STATE_DISABLING:
                 return mContext.getText(R.string.switch_off_text);
@@ -353,38 +332,6 @@ public class WifiSlice implements CustomSliceable {
             default:
                 return null;
         }
-    }
-
-    private CharSequence getSummary(AccessPoint accessPoint) {
-        if (isCaptivePortal()) {
-            final int id = mContext.getResources()
-                    .getIdentifier("network_available_sign_in", "string", "android");
-            return mContext.getText(id);
-        }
-
-        if (accessPoint == null) {
-            return getSummary();
-        }
-
-        final NetworkInfo networkInfo = accessPoint.getNetworkInfo();
-        if (networkInfo == null) {
-            return getSummary();
-        }
-
-        final State state = networkInfo.getState();
-        DetailedState detailedState;
-        if (state == State.CONNECTING) {
-            detailedState = DetailedState.CONNECTING;
-        } else if (state == State.CONNECTED) {
-            detailedState = DetailedState.CONNECTED;
-        } else {
-            return getSummary();
-        }
-
-        final String[] formats = mContext.getResources().getStringArray(
-                R.array.wifi_status_with_ssid);
-        final int index = detailedState.ordinal();
-        return String.format(formats[index], accessPoint.getTitle());
     }
 
     private PendingIntent getPrimaryAction() {
