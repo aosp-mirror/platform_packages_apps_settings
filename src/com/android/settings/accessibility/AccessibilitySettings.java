@@ -660,6 +660,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mServicePreferenceToPreferenceCategoryMap.put(preference, prefCategory);
         }
 
+        // Update the order of all the category according to the order defined in xml file.
+        updateCategoryOrderFromArray(CATEGORY_SCREEN_READER,
+            R.array.config_order_screen_reader_services);
+        updateCategoryOrderFromArray(CATEGORY_AUDIO_AND_CAPTIONS,
+            R.array.config_order_audio_and_caption_services);
+        updateCategoryOrderFromArray(CATEGORY_INTERACTION_CONTROL,
+            R.array.config_order_interaction_control_services);
+        updateCategoryOrderFromArray(CATEGORY_DISPLAY,
+            R.array.config_order_display_services);
+
         // If the user has not installed any additional services, hide the category.
         if (downloadedServicesCategory.getPreferenceCount() == 0) {
             final PreferenceScreen screen = getPreferenceScreen();
@@ -673,6 +683,29 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         for (int i = 0; i < services.length; i++) {
             ComponentName component = ComponentName.unflattenFromString(services[i]);
             mPreBundledServiceComponentToCategoryMap.put(component, category);
+        }
+    }
+
+    /**
+     * Update the order of perferences in the category by matching their preference
+     * key with the string array of preference order which is defined in the xml.
+     *
+     * @param categoryKey The key of the category need to update the order
+     * @param key The key of the string array which defines the order of category
+     */
+    private void updateCategoryOrderFromArray(String categoryKey, int key) {
+        String[] services = getResources().getStringArray(key);
+        PreferenceCategory category = mCategoryToPrefCategoryMap.get(categoryKey);
+        int preferenceCount = category.getPreferenceCount();
+        int serviceLength = services.length;
+        for (int preferenceIndex = 0; preferenceIndex < preferenceCount; preferenceIndex++) {
+            for (int serviceIndex = 0; serviceIndex < serviceLength; serviceIndex++) {
+                if (category.getPreference(preferenceIndex).getKey()
+                        .equals(services[serviceIndex])) {
+                    category.getPreference(preferenceIndex).setOrder(serviceIndex);
+                    break;
+                }
+            }
         }
     }
 

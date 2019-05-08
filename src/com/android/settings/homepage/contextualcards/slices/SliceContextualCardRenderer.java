@@ -110,7 +110,10 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
             mSliceLiveDataMap.put(uri, sliceLiveData);
         }
 
+        final View swipeBackground = holder.itemView.findViewById(R.id.dismissal_swipe_background);
         sliceLiveData.removeObservers(mLifecycleOwner);
+        // set the background to Gone in case the holder is reused.
+        swipeBackground.setVisibility(View.GONE);
         sliceLiveData.observe(mLifecycleOwner, slice -> {
             if (slice == null) {
                 Log.w(TAG, "Slice is null");
@@ -137,6 +140,8 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                 default:
                     mFullCardHelper.bindView(holder, card, slice);
             }
+
+            swipeBackground.setVisibility(View.VISIBLE);
         });
 
         switch (holder.getItemViewType()) {

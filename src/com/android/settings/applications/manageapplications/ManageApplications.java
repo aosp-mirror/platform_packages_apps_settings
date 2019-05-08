@@ -373,6 +373,7 @@ public class ManageApplications extends InstrumentedFragment
                                 UserHandle.of(userId)));
             }
             mRecyclerView = mListContainer.findViewById(R.id.apps_list);
+            mRecyclerView.setItemAnimator(null);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(
                     getContext(), RecyclerView.VERTICAL, false /* reverseLayout */));
             mRecyclerView.setAdapter(mApplications);
