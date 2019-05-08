@@ -17,14 +17,29 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
+import android.util.Log;
+import android.util.Pair;
 
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class SettingsMetricsFeatureProvider extends MetricsFeatureProvider {
+    private static final String TAG = "SettingsMetricsFeature";
+
     @Override
     protected void installLogWriters() {
-        super.installLogWriters();
         mLoggerWriters.add(new StatsLogWriter());
+        mLoggerWriters.add(new SettingsEventLogWriter());
         mLoggerWriters.add(new SettingsIntelligenceLogWriter());
+    }
+
+    /**
+     * @deprecated Use {@link #action(int, int, int, String, int)} instead.
+     */
+    @Deprecated
+    @Override
+    public void action(Context context, int category, Pair<Integer, Object>... taggedData) {
+        Log.w(TAG, "action(Pair<Integer, Object>... taggedData) is deprecated, "
+                + "Use action(int, int, int, String, int) instead.");
+        super.action(context, category, taggedData);
     }
 }
