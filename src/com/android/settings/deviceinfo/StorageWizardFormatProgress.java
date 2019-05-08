@@ -30,6 +30,7 @@ import android.os.SystemProperties;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.settings.R;
@@ -59,7 +60,8 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
 
         setHeaderText(R.string.storage_wizard_format_progress_title, getDiskShortDescription());
         setBodyText(R.string.storage_wizard_format_progress_body, getDiskDescription());
-
+        setBackButtonVisibility(View.INVISIBLE);
+        setNextButtonVisibility(View.INVISIBLE);
         mTask = (PartitionTask) getLastCustomNonConfigurationInstance();
         if (mTask == null) {
             mTask = new PartitionTask();
