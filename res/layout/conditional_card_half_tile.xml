@@ -25,14 +25,15 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/contextual_condition_half_card_padding_top"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/contextual_condition_half_card_padding_top"
             android:paddingEnd="@dimen/contextual_card_padding_end"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="?android:attr/selectableItemBackground">
 
             <ImageView
                 android:id="@android:id/icon"

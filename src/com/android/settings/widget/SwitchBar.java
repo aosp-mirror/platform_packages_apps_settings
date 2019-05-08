@@ -30,7 +30,6 @@ import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -110,6 +109,11 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         super(context, attrs, defStyleAttr, defStyleRes);
 
         LayoutInflater.from(context).inflate(R.layout.switch_bar, this);
+        // Set the whole SwitchBar focusable and clickable.
+        setFocusable(true);
+        setClickable(true);
+        // Set a onClickListener to handle the functionality of ToggleSwitch.
+        setOnClickListener((View v) -> getDelegatingView().performClick());
 
         final TypedArray a = context.obtainStyledAttributes(attrs, XML_ATTRIBUTES);
         final int switchBarMarginStart = (int) a.getDimension(0, 0);
@@ -128,6 +132,9 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         // Prevent onSaveInstanceState() to be called as we are managing the state of the Switch
         // on our own
         mSwitch.setSaveEnabled(false);
+        // Set the ToggleSwitch non-focusable and non-clickable to avoid multiple focus.
+        mSwitch.setFocusable(false);
+        mSwitch.setClickable(false);
 
         lp = (MarginLayoutParams) mSwitch.getLayoutParams();
         lp.setMarginEnd(switchBarMarginEnd);
@@ -239,14 +246,14 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             mSwitch.setEnabled(false);
             mSwitch.setVisibility(View.GONE);
             mRestrictedIcon.setVisibility(View.VISIBLE);
+            mRestrictedIcon.setFocusable(false);
+            mRestrictedIcon.setClickable(false);
         } else {
             mDisabledByAdmin = false;
             mSwitch.setVisibility(View.VISIBLE);
             mRestrictedIcon.setVisibility(View.GONE);
             setEnabled(true);
         }
-        setTouchDelegate(new TouchDelegate(new Rect(0, 0, getWidth(), getHeight()),
-                getDelegatingView()));
     }
 
     public final ToggleSwitch getSwitch() {
@@ -257,10 +264,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         if (!isShowing()) {
             setVisibility(View.VISIBLE);
             mSwitch.setOnCheckedChangeListener(this);
-            // Make the entire bar work as a switch
-            post(() -> setTouchDelegate(
-                    new TouchDelegate(new Rect(0, 0, getWidth(), getHeight()),
-                            getDelegatingView())));
         }
     }
 
@@ -268,14 +271,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         if (isShowing()) {
             setVisibility(View.GONE);
             mSwitch.setOnCheckedChangeListener(null);
-        }
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        if ((w > 0) && (h > 0)) {
-            setTouchDelegate(new TouchDelegate(new Rect(0, 0, w, h),
-                    getDelegatingView()));
         }
     }
 
