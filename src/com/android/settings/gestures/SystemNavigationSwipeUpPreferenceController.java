@@ -39,7 +39,7 @@ public class SystemNavigationSwipeUpPreferenceController extends
     @VisibleForTesting
     public SystemNavigationSwipeUpPreferenceController(Context context,
             IOverlayManager overlayManager, String key) {
-        super(context, overlayManager, key);
+        super(context, overlayManager, key, NAV_BAR_MODE_2BUTTON_OVERLAY);
     }
 
     @Override
