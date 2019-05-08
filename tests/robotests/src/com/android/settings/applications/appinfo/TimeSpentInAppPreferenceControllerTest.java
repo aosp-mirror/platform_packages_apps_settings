@@ -20,6 +20,8 @@ import static android.content.Intent.EXTRA_PACKAGE_NAME;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -32,6 +34,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,10 +61,12 @@ public class TimeSpentInAppPreferenceControllerTest {
     private ShadowPackageManager mPackageManager;
     private TimeSpentInAppPreferenceController mController;
     private Preference mPreference;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = RuntimeEnvironment.application;
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
         mController = new TimeSpentInAppPreferenceController(mContext, TEST_KEY);
@@ -111,5 +116,13 @@ public class TimeSpentInAppPreferenceControllerTest {
         assertThat(intent.getAction()).isEqualTo(TEST_INTENT.getAction());
         assertThat(intent.getStringExtra(EXTRA_PACKAGE_NAME))
                 .isEqualTo(TEST_INTENT.getStringExtra(EXTRA_PACKAGE_NAME));
+    }
+
+    @Test
+    public void getSummary_shouldQueryAppFeatureProvider() {
+        mController.getSummary();
+
+        verify(mFeatureFactory.applicationFeatureProvider).getTimeSpentInApp(
+                nullable(String.class));
     }
 }
