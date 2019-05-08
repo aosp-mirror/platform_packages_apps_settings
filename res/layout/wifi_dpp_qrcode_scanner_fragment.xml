@@ -43,21 +43,18 @@
                 android:layout_marginBottom="8dp"
                 style="?android:attr/progressBarStyleHorizontal"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextureView
                     android:id="@+id/preview_view"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintDimensionRatio="1:1"/>
+                    android:layout_height="@dimen/qrcode_preview_size"/>
                 <com.android.settings.wifi.qrcode.QrDecorateView
                     android:id="@+id/decorate_view"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintDimensionRatio="1:1"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="@dimen/qrcode_preview_size"/>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/error_message"
