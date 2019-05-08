@@ -78,9 +78,12 @@ public class ImeiInfoDialogController {
         final Context context = dialog.getContext();
         mSubscriptionInfo = context.getSystemService(SubscriptionManager.class)
                 .getActiveSubscriptionInfoForSimSlotIndex(slotId);
+        TelephonyManager tm = context.getSystemService(TelephonyManager.class);
         if (mSubscriptionInfo != null) {
             mTelephonyManager = context.getSystemService(TelephonyManager.class)
                     .createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
+        } else if(isValidSlotIndex(slotId, tm)) {
+            mTelephonyManager = tm;
         } else {
             mTelephonyManager = null;
         }
@@ -104,6 +107,7 @@ public class ImeiInfoDialogController {
     private void updateDialogForCdmaPhone() {
         final Resources res = mDialog.getContext().getResources();
         mDialog.setText(ID_MEID_NUMBER_VALUE, getMeid());
+        // MIN needs to read from SIM. So if no SIM, we should not show MIN on UI
         mDialog.setText(ID_MIN_NUMBER_VALUE, mSubscriptionInfo != null
                 ? mTelephonyManager.getCdmaMin(mSubscriptionInfo.getSubscriptionId())
                 : "");
@@ -137,7 +141,8 @@ public class ImeiInfoDialogController {
 
     @VisibleForTesting
     String getCdmaPrlVersion() {
-        return mTelephonyManager.getCdmaPrlVersion();
+        // PRL needs to read from SIM. So if no SIM, return empty
+        return mSubscriptionInfo != null ? mTelephonyManager.getCdmaPrlVersion() : "";
     }
 
     @VisibleForTesting
@@ -149,5 +154,10 @@ public class ImeiInfoDialogController {
     @VisibleForTesting
     String getMeid() {
         return mTelephonyManager.getMeid(mSlotId);
+    }
+
+    @VisibleForTesting
+    private boolean isValidSlotIndex(int slotIndex, TelephonyManager telephonyManager) {
+        return slotIndex >= 0 && slotIndex < telephonyManager.getPhoneCount();
     }
 }
