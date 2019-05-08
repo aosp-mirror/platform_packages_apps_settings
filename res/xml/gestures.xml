@@ -75,4 +75,10 @@
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
+    <Preference
+        android:key="gesture_global_actions_panel_summary"
+        android:title="@string/global_actions_panel_short_title"
+        android:fragment="com.android.settings.gestures.GlobalActionsPanelSettings"
+        settings:controller="com.android.settings.gestures.GlobalActionsPanelPreferenceController" />
+
 </PreferenceScreen>
