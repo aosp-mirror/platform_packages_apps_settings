@@ -37,8 +37,10 @@ public class AppStateInstallAppsBridgeTest {
                 .InstallAppsState();
         assertThat(appState.canInstallApps()).isFalse();
 
-        appState.permissionGranted = true;
         appState.permissionRequested = true;
+        assertThat(appState.canInstallApps()).isFalse();
+
+        appState.appOpMode = AppOpsManager.MODE_ALLOWED;
         assertThat(appState.canInstallApps()).isTrue();
 
         appState.appOpMode = AppOpsManager.MODE_ERRORED;
