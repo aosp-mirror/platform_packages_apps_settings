@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.storage.DiskInfo;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.settings.R;
@@ -51,7 +52,8 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
         setIcon(R.drawable.ic_swap_horiz);
         setHeaderText(R.string.storage_wizard_migrate_progress_v2_title);
         setAuxChecklist();
-
+        setBackButtonVisibility(View.INVISIBLE);
+        setNextButtonVisibility(View.INVISIBLE);
         // Register for updates and push through current status
         getPackageManager().registerMoveCallback(mCallback, new Handler());
         mCallback.onStatusChanged(mMoveId, getPackageManager().getMoveStatus(mMoveId), -1);
