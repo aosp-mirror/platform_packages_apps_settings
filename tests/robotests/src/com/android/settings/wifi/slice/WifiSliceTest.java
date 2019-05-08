@@ -247,8 +247,7 @@ public class WifiSliceTest {
     }
 
     private void assertCaptivePortalItems(List<SliceItem> sliceItems) {
-        final String expectedSummary = mContext.getString(mContext.getResources()
-                .getIdentifier("network_available_sign_in", "string", "android"));
+        final String expectedSummary = mContext.getString(R.string.switch_on_text);
         SliceTester.assertAnySliceItemContainsSubtitle(sliceItems, expectedSummary);
 
         final IconCompat expectedIcon = IconCompat.createWithResource(mContext,

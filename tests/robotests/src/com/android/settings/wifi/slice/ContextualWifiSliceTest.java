@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi.slice;
 
-import static org.mockito.ArgumentMatchers.any;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
@@ -25,7 +24,7 @@ import static org.mockito.Mockito.spy;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 
@@ -40,22 +39,24 @@ import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowConnectivityManager.class)
 public class ContextualWifiSliceTest {
 
     private Context mContext;
     private ContentResolver mResolver;
     private WifiManager mWifiManager;
-    private ConnectivityManager mConnectivityManager;
     private ContextualWifiSlice mWifiSlice;
     private FakeFeatureFactory mFeatureFactory;
 
@@ -73,9 +74,6 @@ public class ContextualWifiSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mWifiManager.setWifiEnabled(true);
 
-        mConnectivityManager = spy(mContext.getSystemService(ConnectivityManager.class));
-        doReturn(mConnectivityManager).when(mContext).getSystemService(ConnectivityManager.class);
-
         mWifiSlice = new ContextualWifiSlice(mContext);
         mWifiSlice.sPreviouslyDisplayed = false;
     }
@@ -83,9 +81,7 @@ public class ContextualWifiSliceTest {
     @Test
     public void getWifiSlice_hasActiveConnection_shouldReturnNull() {
         mWifiSlice.sPreviouslyDisplayed = false;
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "123";
-        mWifiManager.connect(config, null /* listener */);
+        connectToWifi(makeValidatedNetworkCapabilities());
 
         final Slice wifiSlice = mWifiSlice.getSlice();
 
@@ -98,10 +94,7 @@ public class ContextualWifiSliceTest {
         // previous displayed: yes
         mWifiSlice.sPreviouslyDisplayed = true;
         mWifiSlice.sActiveUiSession = ~mFeatureFactory.slicesFeatureProvider.getUiSessionToken();
-
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "123";
-        mWifiManager.connect(config, null /* listener */);
+        connectToWifi(makeValidatedNetworkCapabilities());
 
         final Slice wifiSlice = mWifiSlice.getSlice();
 
@@ -112,9 +105,7 @@ public class ContextualWifiSliceTest {
     public void getWifiSlice_previousDisplayed_hasActiveConnection_shouldHaveTitleAndToggle() {
         mWifiSlice.sActiveUiSession = mFeatureFactory.slicesFeatureProvider.getUiSessionToken();
         mWifiSlice.sPreviouslyDisplayed = true;
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "123";
-        mWifiManager.connect(config, null /* listener */);
+        connectToWifi(makeValidatedNetworkCapabilities());
 
         final Slice wifiSlice = mWifiSlice.getSlice();
 
@@ -133,11 +124,7 @@ public class ContextualWifiSliceTest {
     @Test
     public void getWifiSlice_isCaptivePortal_shouldHaveTitleAndToggle() {
         mWifiSlice.sPreviouslyDisplayed = false;
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "123";
-        mWifiManager.connect(config, null /* listener */);
-        doReturn(WifiSliceTest.makeCaptivePortalNetworkCapabilities()).when(mConnectivityManager)
-                .getNetworkCapabilities(any());
+        connectToWifi(WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
         final Slice wifiSlice = mWifiSlice.getSlice();
 
@@ -161,5 +148,21 @@ public class ContextualWifiSliceTest {
         final Slice wifiSlice = mWifiSlice.getSlice();
 
         assertThat(wifiSlice.getUri()).isEqualTo(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI);
+    }
+
+    private void connectToWifi(NetworkCapabilities nc) {
+        final WifiConfiguration config = new WifiConfiguration();
+        config.SSID = "123";
+        mWifiManager.connect(config, null /* listener */);
+        ShadowConnectivityManager.getShadow().setNetworkCapabilities(
+                mWifiManager.getCurrentNetwork(), nc);
+    }
+
+    private NetworkCapabilities makeValidatedNetworkCapabilities() {
+        final NetworkCapabilities nc = new NetworkCapabilities();
+        nc.clearAll();
+        nc.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        return nc;
     }
 }

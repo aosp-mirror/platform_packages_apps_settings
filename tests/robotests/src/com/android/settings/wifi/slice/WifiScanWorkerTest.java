@@ -32,9 +32,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.ConnectivityManager.NetworkCallback;
 import android.net.Network;
 import android.net.NetworkInfo;
-import android.net.NetworkInfo.State;
+import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
@@ -62,6 +63,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowNetworkInfo;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -69,8 +71,6 @@ import org.robolectric.annotation.Implements;
         WifiScanWorkerTest.ShadowWifiTracker.class,
 })
 public class WifiScanWorkerTest {
-
-    private static final String AP_NAME = "ap";
 
     private Context mContext;
     private ContentResolver mResolver;
@@ -107,20 +107,10 @@ public class WifiScanWorkerTest {
         verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
     }
 
-    private AccessPoint createAccessPoint(String name, State state) {
-        final NetworkInfo info = mock(NetworkInfo.class);
-        doReturn(state).when(info).getState();
-
-        final Bundle savedState = new Bundle();
-        savedState.putString("key_ssid", name);
-        savedState.putParcelable("key_networkinfo", info);
-        return new AccessPoint(mContext, savedState);
-    }
-
     @Test
     public void AccessPointList_sameState_shouldBeTheSame() {
-        final AccessPoint ap1 = createAccessPoint(AP_NAME, State.CONNECTED);
-        final AccessPoint ap2 = createAccessPoint(AP_NAME, State.CONNECTED);
+        final AccessPoint ap1 = createAccessPoint(DetailedState.CONNECTED);
+        final AccessPoint ap2 = createAccessPoint(DetailedState.CONNECTED);
 
         assertThat(mWifiScanWorker.areListsTheSame(Arrays.asList(ap1), Arrays.asList(ap2)))
                 .isTrue();
@@ -128,17 +118,17 @@ public class WifiScanWorkerTest {
 
     @Test
     public void AccessPointList_differentState_shouldBeDifferent() {
-        final AccessPoint ap1 = createAccessPoint(AP_NAME, State.CONNECTING);
-        final AccessPoint ap2 = createAccessPoint(AP_NAME, State.CONNECTED);
+        final AccessPoint ap1 = createAccessPoint(DetailedState.CONNECTING);
+        final AccessPoint ap2 = createAccessPoint(DetailedState.CONNECTED);
 
         assertThat(mWifiScanWorker.areListsTheSame(Arrays.asList(ap1), Arrays.asList(ap2)))
                 .isFalse();
     }
 
     @Test
-    public void AccessPointList_differentLength_shouldBeDifferent() {
-        final AccessPoint ap1 = createAccessPoint(AP_NAME, State.CONNECTED);
-        final AccessPoint ap2 = createAccessPoint(AP_NAME, State.CONNECTED);
+    public void AccessPointList_differentListLength_shouldBeDifferent() {
+        final AccessPoint ap1 = createAccessPoint(DetailedState.CONNECTED);
+        final AccessPoint ap2 = createAccessPoint(DetailedState.CONNECTED);
         final List<AccessPoint> list = new ArrayList<>();
         list.add(ap1);
         list.add(ap2);
@@ -149,18 +139,12 @@ public class WifiScanWorkerTest {
     @Test
     public void NetworkCallback_onCapabilitiesChanged_shouldNotifyChange() {
         final Network network = mConnectivityManager.getActiveNetwork();
-        mWifiScanWorker.registerCaptivePortalNetworkCallback(network);
+        mWifiScanWorker.registerNetworkCallback(network);
 
-        mWifiScanWorker.mCaptivePortalNetworkCallback.onCapabilitiesChanged(network,
+        mWifiScanWorker.mNetworkCallback.onCapabilitiesChanged(network,
                 WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
         verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
-    }
-
-    private AccessPoint createAccessPoint(String ssid) {
-        final AccessPoint accessPoint = mock(AccessPoint.class);
-        doReturn(ssid).when(accessPoint).getSsidStr();
-        return accessPoint;
     }
 
     private void setConnectionInfoSSID(String ssid) {
@@ -174,10 +158,10 @@ public class WifiScanWorkerTest {
         final AccessPoint accessPoint = createAccessPoint("ap1");
         setConnectionInfoSSID("ap1");
         final Network network = mConnectivityManager.getActiveNetwork();
-        mWifiScanWorker.registerCaptivePortalNetworkCallback(network);
+        mWifiScanWorker.registerNetworkCallback(network);
 
         mConnectToWifiHandler.connect(accessPoint);
-        mWifiScanWorker.mCaptivePortalNetworkCallback.onCapabilitiesChanged(network,
+        mWifiScanWorker.mNetworkCallback.onCapabilitiesChanged(network,
                 WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
         verify(mContext).startActivityAsUser(any(Intent.class), eq(UserHandle.CURRENT));
@@ -188,10 +172,10 @@ public class WifiScanWorkerTest {
         final AccessPoint accessPoint = createAccessPoint("ap1");
         setConnectionInfoSSID("ap2");
         final Network network = mConnectivityManager.getActiveNetwork();
-        mWifiScanWorker.registerCaptivePortalNetworkCallback(network);
+        mWifiScanWorker.registerNetworkCallback(network);
 
         mConnectToWifiHandler.connect(accessPoint);
-        mWifiScanWorker.mCaptivePortalNetworkCallback.onCapabilitiesChanged(network,
+        mWifiScanWorker.mNetworkCallback.onCapabilitiesChanged(network,
                 WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
         verify(mContext, never()).startActivityAsUser(any(Intent.class), eq(UserHandle.CURRENT));
@@ -201,9 +185,9 @@ public class WifiScanWorkerTest {
     public void NetworkCallback_onCapabilitiesChanged_neverClickWifi_shouldNotStartActivity() {
         setConnectionInfoSSID("ap1");
         final Network network = mConnectivityManager.getActiveNetwork();
-        mWifiScanWorker.registerCaptivePortalNetworkCallback(network);
+        mWifiScanWorker.registerNetworkCallback(network);
 
-        mWifiScanWorker.mCaptivePortalNetworkCallback.onCapabilitiesChanged(network,
+        mWifiScanWorker.mNetworkCallback.onCapabilitiesChanged(network,
                 WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
         verify(mContext, never()).startActivityAsUser(any(Intent.class), eq(UserHandle.CURRENT));
@@ -214,9 +198,8 @@ public class WifiScanWorkerTest {
         final AccessPoint accessPoint = createAccessPoint("ap1");
         setConnectionInfoSSID("ap1");
         final Network network = mConnectivityManager.getActiveNetwork();
-        mWifiScanWorker.registerCaptivePortalNetworkCallback(network);
-        final WifiScanWorker.CaptivePortalNetworkCallback callback =
-                mWifiScanWorker.mCaptivePortalNetworkCallback;
+        mWifiScanWorker.registerNetworkCallback(network);
+        final NetworkCallback callback = mWifiScanWorker.mNetworkCallback;
 
         mWifiScanWorker.onSlicePinned();
         mConnectToWifiHandler.connect(accessPoint);
@@ -225,6 +208,23 @@ public class WifiScanWorkerTest {
                 WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
         verify(mContext, never()).startActivityAsUser(any(Intent.class), eq(UserHandle.CURRENT));
+    }
+
+    private AccessPoint createAccessPoint(String ssid, DetailedState detailedState) {
+        final NetworkInfo info = ShadowNetworkInfo.newInstance(detailedState, 1 /* type */,
+                0 /*subType */, true /* isAvailable */, true /* isConnected */);
+        final Bundle savedState = new Bundle();
+        savedState.putString("key_ssid", ssid);
+        savedState.putParcelable("key_networkinfo", info);
+        return new AccessPoint(mContext, savedState);
+    }
+
+    private AccessPoint createAccessPoint(DetailedState detailedState) {
+        return createAccessPoint("ap", detailedState);
+    }
+
+    private AccessPoint createAccessPoint(String ssid) {
+        return createAccessPoint(ssid, DetailedState.DISCONNECTED);
     }
 
     @Implements(WifiTracker.class)
