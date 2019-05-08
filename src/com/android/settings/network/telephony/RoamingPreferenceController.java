@@ -33,7 +33,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -114,8 +113,10 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     public void updateState(Preference preference) {
         super.updateState(preference);
         final RestrictedSwitchPreference switchPreference = (RestrictedSwitchPreference) preference;
-        switchPreference.setEnabled(mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        switchPreference.setChecked(isChecked());
+        if (!switchPreference.isDisabledByAdmin()) {
+            switchPreference.setEnabled(mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            switchPreference.setChecked(isChecked());
+        }
     }
 
     @VisibleForTesting
