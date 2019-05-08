@@ -25,12 +25,11 @@ import com.android.internal.annotations.VisibleForTesting;
 public class GlobalActionsPanelPreferenceController extends GesturePreferenceController {
     private static final String PREF_KEY_VIDEO = "global_actions_panel_video";
 
-    // TODO (b/132182180) -- Use Secure Settings constants instead of hard-coded strings
     @VisibleForTesting
-    protected static final String ENABLED_SETTING = "global_actions_panel_enabled";
-    // TODO (b/132182180) -- Use Secure Settings constants instead of hard-coded strings
+    protected static final String ENABLED_SETTING = Settings.Secure.GLOBAL_ACTIONS_PANEL_ENABLED;
     @VisibleForTesting
-    protected static final String AVAILABLE_SETTING = "global_actions_panel_available";
+    protected static final String AVAILABLE_SETTING =
+            Settings.Secure.GLOBAL_ACTIONS_PANEL_AVAILABLE;
 
     @VisibleForTesting
     protected static final String TOGGLE_KEY = "gesture_global_actions_panel_switch";
