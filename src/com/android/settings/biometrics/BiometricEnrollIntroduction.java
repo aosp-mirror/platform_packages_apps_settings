@@ -164,9 +164,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         final int errorMsg = checkMaxEnrolled();
         if (errorMsg == 0) {
             mErrorText.setText(null);
+            mErrorText.setVisibility(View.GONE);
             getNextButton().setVisibility(View.VISIBLE);
         } else {
             mErrorText.setText(errorMsg);
+            mErrorText.setVisibility(View.VISIBLE);
             getNextButton().setText(getResources().getString(R.string.done));
             getNextButton().setVisibility(View.VISIBLE);
         }
