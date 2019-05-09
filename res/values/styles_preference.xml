@@ -27,6 +27,7 @@
         <item name="twoStateButtonPreferenceStyle">@style/TwoStateButtonPreference</item>
         <item name="preferenceCategoryTitleTextAppearance">@style/TextAppearance.CategoryTitle
         </item>
+        <item name="preferenceFragmentCompatStyle">@style/SettingsPreferenceFragmentStyle</item>
     </style>
 
     <style name="PreferenceTheme.SetupWizard">
@@ -61,6 +62,10 @@
     <style name="SettingsMultiSelectListPreference" parent="@style/Preference.Material">
         <item name="android:positiveButtonText">@android:string/ok</item>
         <item name="android:negativeButtonText">@android:string/cancel</item>
+    </style>
+
+    <style name="SettingsPreferenceFragmentStyle" parent="@style/PreferenceFragment.Material">
+        <item name="android:divider">@*android:drawable/list_divider_material</item>
     </style>
 
     <style name="SetupWizardPreferenceFragmentStyle" parent="PreferenceFragment.Material">
