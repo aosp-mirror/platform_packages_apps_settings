@@ -175,4 +175,40 @@ public class WifiDppConfiguratorActivityTest {
         assertThat(restoredWifiNetworkConfig.getNetworkId()).isEqualTo(0);
         assertThat(restoredWifiNetworkConfig.isHotspot()).isTrue();
     }
+
+    @Test
+    public void launchScanner_onNavigateUp_shouldFinish() {
+        Intent intent = new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
+        final Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+
+        mActivityRule.launchActivity(intent);
+
+        instrumentation.runOnMainSync(() -> {
+            mActivityRule.getActivity().onNavigateUp();
+
+            assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(true);
+        });
+    }
+
+    @Test
+    public void launchGenerator_onNavigateUp_shouldFinish() {
+        Intent intent = new Intent(
+                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
+        final Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+
+        mActivityRule.launchActivity(intent);
+
+        instrumentation.runOnMainSync(() -> {
+            mActivityRule.getActivity().onNavigateUp();
+
+            assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(true);
+        });
+    }
+
 }
