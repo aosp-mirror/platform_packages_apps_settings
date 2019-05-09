@@ -27,11 +27,9 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.provider.Settings;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
@@ -46,8 +44,6 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilitySettingsTest {
     private static final String VIBRATION_PREFERENCE_SCREEN = "vibration_preference_screen";
-    private static final String ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE =
-            "accessibility_content_timeout_preference_fragment";
     private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
             "accessibility_control_timeout_preference_fragment";
     private static final String DARK_UI_MODE_PREFERENCE =
@@ -71,9 +67,9 @@ public class AccessibilitySettingsTest {
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER
-            .getNonIndexableKeys(mContext);
+                .getNonIndexableKeys(mContext);
         final List<String> keys =
-            XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings);
+                XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings);
 
         assertThat(keys).containsAllIn(niks);
     }
@@ -112,12 +108,6 @@ public class AccessibilitySettingsTest {
         };
 
         for (int i = 0; i < testingValues.length; i++) {
-            Settings.Secure.putString(mContentResolver,
-                    Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, testingValues[i]);
-
-            verifyAccessibilityTimeoutSummary(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE,
-                    exceptedResIds[i]);
-
             Settings.Secure.putString(mContentResolver,
                     Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, testingValues[i]);
 
