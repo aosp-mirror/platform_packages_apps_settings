@@ -33,4 +33,9 @@ public class SettingsUIDeviceConfig {
      * {@code true} if near by device suggestion is enabled in connected device page
      */
     public static final String BT_NEAR_BY_SUGGESTION_ENABLED = "bt_near_by_suggestion_enabled";
+
+    /**
+     * {@code true} whether or not event_log for generic actions is enabled. Default is true.
+     */
+    public static final String GENERIC_EVENT_LOGGING_ENABLED = "event_logging_enabled";
 }

@@ -50,6 +50,7 @@ public class StorageWizardReady extends StorageWizardBase {
         }
 
         setNextButtonText(R.string.done);
+        setBackButtonVisibility(View.INVISIBLE);
     }
 
     @Override

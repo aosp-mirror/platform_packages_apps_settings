@@ -33,6 +33,9 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -74,7 +77,13 @@ public class SubscriptionsPreferenceControllerTest {
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
+    private ConnectivityManager mConnectivityManager;
+    @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private Network mActiveNetwork;
+    @Mock
+    private NetworkCapabilities mCapabilities;
 
     private Context mContext;
     private LifecycleOwner mLifecycleOwner;
@@ -90,7 +99,10 @@ public class SubscriptionsPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mConnectivityManager.getActiveNetwork()).thenReturn(mActiveNetwork);
+        when(mConnectivityManager.getNetworkCapabilities(mActiveNetwork)).thenReturn(mCapabilities);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mScreen.findPreference(eq(KEY))).thenReturn(mPreferenceCategory);
         when(mPreferenceCategory.getContext()).thenReturn(mContext);
@@ -308,11 +320,33 @@ public class SubscriptionsPreferenceControllerTest {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
-        when(mTelephonyManager.getDataState()).thenReturn(TelephonyManager.DATA_CONNECTED);
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
+        when(mCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)).thenReturn(true);
 
         assertThat(mController.getSummary(11)).isEqualTo(
                 mContext.getString(R.string.default_for_calls_and_sms) + System.lineSeparator()
                         + mContext.getString(R.string.mobile_data_active));
+
+        assertThat(mController.getSummary(22)).isEqualTo(
+                mContext.getString(R.string.subscription_available));
+    }
+
+    @Test
+    public void getSummary_twoSubsOneDefaultForEverythingDataNotActive() {
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        when(sub1.getSubscriptionId()).thenReturn(11);
+        when(sub2.getSubscriptionId()).thenReturn(22);
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
+        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
+        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
+
+        assertThat(mController.getSummary(11)).isEqualTo(
+                mContext.getString(R.string.default_for_calls_and_sms) + System.lineSeparator()
+                        + mContext.getString(R.string.default_for_mobile_data));
 
         assertThat(mController.getSummary(22)).isEqualTo(
                 mContext.getString(R.string.subscription_available));
@@ -329,7 +363,6 @@ public class SubscriptionsPreferenceControllerTest {
         ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
-        when(mTelephonyManager.getDataState()).thenReturn(TelephonyManager.DATA_DISCONNECTED);
         when(mTelephonyManager.isDataEnabled()).thenReturn(false);
 
         assertThat(mController.getSummary(11)).isEqualTo(
@@ -351,7 +384,6 @@ public class SubscriptionsPreferenceControllerTest {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultSmsSubscriptionId(22);
         ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
-        when(mTelephonyManager.getDataState()).thenReturn(TelephonyManager.DATA_DISCONNECTED);
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         assertThat(mController.getSummary(11)).isEqualTo(

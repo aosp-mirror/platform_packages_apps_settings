@@ -888,6 +888,12 @@
     <string name="security_settings_face_preference_summary_none">Tap to set up face authentication</string>
     <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
     <string name="security_settings_face_preference_title">Face authentication</string>
+    <!-- Introduction title shown in face enrollment education screen [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_education_title">How to set up Face unlock</string>
+    <!-- Introduction title shown in face enrollment education screen to show the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_education_title_unlock_disabled">Use your face to authenticate</string>
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message"></string>
     <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
     <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
     <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
@@ -908,8 +914,12 @@
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled">Use your face to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your face to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Introduction detail message shown in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_message_setup">Use your face to unlock your phone, authorize purchases, or sign in to apps</string>
-    <!-- Introduction detail message shown in face enrollment that provides extra detais. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_enroll_introduction_footer_message"></string>
+    <!-- Introduction message shown in face enrollment that provides extra detail. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_footer_part_1"></string>
+    <!-- Introduction message shown in face enrollment that provides extra detail. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_footer_part_2"></string>
+    <!-- Introduction message shown in face enrollment that provides extra detail. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_footer_part_3"></string>
     <!-- Title shown in face enrollment dialog [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_repeat_title">Center your face in the circle</string>
     <!-- Button text to skip enrollment of face [CHAR LIMIT=40] -->
@@ -2895,7 +2905,7 @@
     <string name="wallpaper_settings_fragment_title">Choose wallpaper from</string>
     <!-- Styles and Wallpaper settings title [CHAR_LIMIT=46] -->
     <string name="style_suggestion_title">Customize your Pixel</string>
-    <!-- Styles and Wallpapers summary [CHAR_LIMIT=55] -->
+    <!-- Styles and Wallpapers summary [CHAR_LIMIT=70] -->
     <string name="style_suggestion_summary">Try different styles, wallpapers, clocks, and more</string>
     <!-- Display settings screen, trigger for screen saver options -->
     <string name="screensaver_settings_title">Screen saver</string>
@@ -7264,6 +7274,8 @@
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
     <string name="keywords_gesture">gestures</string>
+    <!-- Search keywords for Global Actions Panel. [DO NOT TRANSLATE] -->
+    <string name="keywords_global_actions_panel" translatable="false">global actions</string>
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
@@ -10147,6 +10159,15 @@
 
     <!-- Summary text for ambient display tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_tap_screen_summary">To check time, notifications, and other info, tap your screen.</string>
+
+    <!-- Summary text for global actions panel [CHAR LIMIT=NONE] [DO NOT TRANSLATE]-->
+    <string name="global_actions_panel_summary" translatable="false">To show the global actions panel, press &amp; hold Power button</string>
+    <!-- Preference and settings suggestion title text for global actions panel [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
+    <string name="global_actions_panel_title" translatable="false">Show global actions</string>
+    <!-- Short title text for global actions panel [CHAR LIMIT=40] [DO NOT TRANSLATE]-->
+    <string name="global_actions_panel_short_title" translatable="false">Global actions</string>
+    <!-- Footer text for global actions panel [CHAR LIMIT=NONE] [DO NOT TRANSLATE]-->
+    <string name="global_actions_panel_footer" translatable="false">The global actions panel can be accessed even when the device is locked.</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
