@@ -137,7 +137,6 @@ public class WifiSlice implements CustomSliceable {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_wireless);
         final String title = mContext.getString(R.string.wifi_settings);
-        final CharSequence summary = getSummary();
         final PendingIntent toggleAction = getBroadcastIntent(mContext);
         final PendingIntent primaryAction = getPrimaryAction();
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
@@ -150,7 +149,6 @@ public class WifiSlice implements CustomSliceable {
                 .setKeywords(getKeywords())
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitle(title)
-                        .setSubtitle(summary)
                         .addEndItem(toggleSliceAction)
                         .setPrimaryAction(primarySliceAction));
     }
@@ -317,20 +315,6 @@ public class WifiSlice implements CustomSliceable {
                 return true;
             default:
                 return false;
-        }
-    }
-
-    private CharSequence getSummary() {
-        switch (mWifiManager.getWifiState()) {
-            case WifiManager.WIFI_STATE_ENABLED:
-            case WifiManager.WIFI_STATE_ENABLING:
-                return mContext.getText(R.string.switch_on_text);
-            case WifiManager.WIFI_STATE_DISABLED:
-            case WifiManager.WIFI_STATE_DISABLING:
-                return mContext.getText(R.string.switch_off_text);
-            case WifiManager.WIFI_STATE_UNKNOWN:
-            default:
-                return null;
         }
     }
 
