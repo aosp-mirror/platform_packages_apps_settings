@@ -19,9 +19,10 @@ package com.android.settings.bluetooth;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.util.Pair;
+
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
-import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
