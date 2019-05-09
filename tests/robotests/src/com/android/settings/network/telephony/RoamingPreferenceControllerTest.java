@@ -18,9 +18,12 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
@@ -76,7 +79,7 @@ public class RoamingPreferenceControllerTest {
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         doReturn(mFragmentTransaction).when(mFragmentManager).beginTransaction();
 
-        mPreference = new RestrictedSwitchPreference(mContext);
+        mPreference = spy(new RestrictedSwitchPreference(mContext));
         mController = new RoamingPreferenceController(mContext, "roaming");
         mController.init(mFragmentManager, SUB_ID);
         mPreference.setKey(mController.getPreferenceKey());
@@ -139,5 +142,23 @@ public class RoamingPreferenceControllerTest {
 
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void updateState_isNotDisabledByAdmin_shouldInvokeSetEnabled() {
+        when(mPreference.isDisabledByAdmin()).thenReturn(false);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setEnabled(anyBoolean());
+    }
+
+    @Test
+    public void updateState_isDisabledByAdmin_shouldNotInvokeSetEnabled() {
+        when(mPreference.isDisabledByAdmin()).thenReturn(true);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference, never()).setEnabled(anyBoolean());
     }
 }
