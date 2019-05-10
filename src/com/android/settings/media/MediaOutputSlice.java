@@ -90,10 +90,13 @@ public class MediaOutputSlice implements CustomSliceable {
         final List<MediaDevice> devices = getMediaDevices();
 
         final MediaDevice connectedDevice = getWorker().getCurrentConnectedMediaDevice();
-        listBuilder.addRow(getActiveDeviceHeaderRow(connectedDevice));
+        if (connectedDevice != null) {
+            listBuilder.addRow(getActiveDeviceHeaderRow(connectedDevice));
+        }
 
         for (MediaDevice device : devices) {
-            if (!TextUtils.equals(connectedDevice.getId(), device.getId())) {
+            if (connectedDevice == null
+                    || !TextUtils.equals(connectedDevice.getId(), device.getId())) {
                 listBuilder.addRow(getMediaDeviceRow(device));
             }
         }
