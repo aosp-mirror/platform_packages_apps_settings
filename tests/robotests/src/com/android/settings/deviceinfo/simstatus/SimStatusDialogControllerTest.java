@@ -63,6 +63,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 
@@ -103,6 +104,8 @@ public class SimStatusDialogControllerTest {
     private PersistableBundle mPersistableBundle;
     @Mock
     private EuiccManager mEuiccManager;
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
 
     private SimStatusDialogController mController;
     private Context mContext;
@@ -123,6 +126,7 @@ public class SimStatusDialogControllerTest {
         doReturn(mPhoneStateListener).when(mController).getPhoneStateListener();
         doReturn("").when(mController).getPhoneNumber();
         doReturn(mSignalStrength).when(mController).getSignalStrength();
+        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(anyInt());
 
         when(mEuiccManager.isEnabled()).thenReturn(true);
         when(mEuiccManager.getEid()).thenReturn("");
@@ -130,6 +134,7 @@ public class SimStatusDialogControllerTest {
         ReflectionHelpers.setField(mController, "mCarrierConfigManager", mCarrierConfigManager);
         ReflectionHelpers.setField(mController, "mSubscriptionInfo", mSubscriptionInfo);
         ReflectionHelpers.setField(mController, "mEuiccManager", mEuiccManager);
+        ReflectionHelpers.setField(mController, "mSubscriptionManager", mSubscriptionManager);
         when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(mPersistableBundle);
 
         final ShadowPackageManager shadowPackageManager =
@@ -141,8 +146,8 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updateNetworkProviderWithFoobarCarrier_shouldUpdateCarrierWithFoobar() {
-        final String carrierName = "foobar";
-        when(mServiceState.getOperatorAlphaLong()).thenReturn(carrierName);
+        final CharSequence carrierName = "foobar";
+        doReturn(carrierName).when(mSubscriptionInfo).getCarrierName();
 
         mController.initialize();
 
