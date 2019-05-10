@@ -22,7 +22,6 @@ import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -34,9 +33,8 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-
-import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -48,7 +46,7 @@ import com.android.settingslib.accessibility.AccessibilityUtils;
 import java.util.List;
 
 public class ToggleAccessibilityServicePreferenceFragment
-        extends ToggleFeaturePreferenceFragment implements DialogInterface.OnClickListener {
+        extends ToggleFeaturePreferenceFragment implements View.OnClickListener {
 
     private static final int DIALOG_ID_ENABLE_WARNING = 1;
     private static final int DIALOG_ID_DISABLE_WARNING = 2;
@@ -67,7 +65,7 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     private ComponentName mComponentName;
 
-    private int mShownDialogId;
+    private Dialog mDialog;
 
     @Override
     public int getMetricsCategory() {
@@ -129,35 +127,28 @@ public class ToggleAccessibilityServicePreferenceFragment
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case DIALOG_ID_ENABLE_WARNING: {
-                mShownDialogId = DIALOG_ID_ENABLE_WARNING;
                 final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
                 if (info == null) {
                     return null;
                 }
-
-                return AccessibilityServiceWarning
+                mDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getActivity(), info, this);
+                break;
             }
             case DIALOG_ID_DISABLE_WARNING: {
-                mShownDialogId = DIALOG_ID_DISABLE_WARNING;
                 AccessibilityServiceInfo info = getAccessibilityServiceInfo();
                 if (info == null) {
                     return null;
                 }
-                return new AlertDialog.Builder(getActivity())
-                        .setTitle(getString(R.string.disable_service_title,
-                                info.getResolveInfo().loadLabel(getPackageManager())))
-                        .setMessage(getString(R.string.disable_service_message,
-                                info.getResolveInfo().loadLabel(getPackageManager())))
-                        .setCancelable(true)
-                        .setPositiveButton(android.R.string.ok, this)
-                        .setNegativeButton(android.R.string.cancel, this)
-                        .create();
+                mDialog = AccessibilityServiceWarning
+                        .createDisableDialog(getActivity(), info, this);
+                break;
             }
             default: {
                 throw new IllegalArgumentException();
             }
         }
+        return mDialog;
     }
 
     @Override
@@ -205,30 +196,31 @@ public class ToggleAccessibilityServicePreferenceFragment
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
-        final boolean checked;
-        switch (which) {
-            case DialogInterface.BUTTON_POSITIVE:
-                if (mShownDialogId == DIALOG_ID_ENABLE_WARNING) {
-                    if (isFullDiskEncrypted()) {
-                        String title = createConfirmCredentialReasonMessage();
-                        Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
-                        startActivityForResult(intent,
-                                ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
-                    } else {
-                        handleConfirmServiceEnabled(true);
-                    }
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.permission_enable_allow_button:
+                if (isFullDiskEncrypted()) {
+                    String title = createConfirmCredentialReasonMessage();
+                    Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
+                    startActivityForResult(intent,
+                            ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
                 } else {
-                    handleConfirmServiceEnabled(false);
+                    handleConfirmServiceEnabled(true);
                 }
                 break;
-            case DialogInterface.BUTTON_NEGATIVE:
-                checked = (mShownDialogId == DIALOG_ID_DISABLE_WARNING);
-                handleConfirmServiceEnabled(checked);
+            case R.id.permission_enable_deny_button:
+                handleConfirmServiceEnabled(false);
+                break;
+            case R.id.permission_disable_stop_button:
+                handleConfirmServiceEnabled(false);
+                break;
+            case R.id.permission_disable_cancel_button:
+                handleConfirmServiceEnabled(true);
                 break;
             default:
                 throw new IllegalArgumentException();
         }
+        mDialog.dismiss();
     }
 
     private void handleConfirmServiceEnabled(boolean confirmed) {
