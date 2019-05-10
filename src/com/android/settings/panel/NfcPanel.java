@@ -64,6 +64,7 @@ public class NfcPanel implements PanelContent {
                 screenTitle,
                 SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
         intent.setClassName(mContext.getPackageName(), SubSettings.class.getName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
 

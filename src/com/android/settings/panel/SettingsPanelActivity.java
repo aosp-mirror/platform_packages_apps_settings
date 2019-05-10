@@ -21,6 +21,7 @@ import static com.android.settingslib.media.MediaOutputSliceConstants.EXTRA_PACK
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -65,7 +66,17 @@ public class SettingsPanelActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        showOrUpdatePanel();
+    }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        showOrUpdatePanel();
+    }
+
+    private void showOrUpdatePanel() {
         final Intent callingIntent = getIntent();
         if (callingIntent == null) {
             Log.e(TAG, "Null intent, closing Panel Activity");
@@ -76,24 +87,28 @@ public class SettingsPanelActivity extends FragmentActivity {
         // We will use it once media output switch panel support remote device.
         final String mediaPackageName = callingIntent.getStringExtra(EXTRA_PACKAGE_NAME);
 
-        setContentView(R.layout.settings_panel);
-
-        // Move the window to the bottom of screen, and make it take up the entire screen width.
-        final Window window = getWindow();
-        window.setGravity(Gravity.BOTTOM);
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT);
-
         mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, callingIntent.getAction());
         mBundle.putString(KEY_CALLING_PACKAGE_NAME, getCallingPackage());
         mBundle.putString(KEY_MEDIA_PACKAGE_NAME, mediaPackageName);
 
-        final PanelFragment panelFragment = new PanelFragment();
-        panelFragment.setArguments(mBundle);
-
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final Fragment fragment = fragmentManager.findFragmentById(R.id.main_content);
-        if (fragment == null) {
+
+        // If fragment already exists, we will need to update panel with animation.
+        if (fragment != null && fragment instanceof PanelFragment) {
+            final PanelFragment panelFragment = (PanelFragment) fragment;
+            panelFragment.setArguments(mBundle);
+            ((PanelFragment) fragment).updatePanelWithAnimation();
+        } else {
+            setContentView(R.layout.settings_panel);
+
+            // Move the window to the bottom of screen, and make it take up the entire screen width.
+            final Window window = getWindow();
+            window.setGravity(Gravity.BOTTOM);
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT);
+            final PanelFragment panelFragment = new PanelFragment();
+            panelFragment.setArguments(mBundle);
             fragmentManager.beginTransaction().add(R.id.main_content, panelFragment).commit();
         }
     }
