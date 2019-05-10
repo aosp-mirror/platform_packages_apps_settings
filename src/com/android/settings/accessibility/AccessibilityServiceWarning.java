@@ -22,7 +22,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.storage.StorageManager;
 import android.text.BidiFormatter;
 import android.view.LayoutInflater;
@@ -30,10 +30,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
 
@@ -44,36 +47,41 @@ import java.util.Locale;
  * accessibility service to access user data before the service is enabled
  */
 public class AccessibilityServiceWarning {
-    public static Dialog createCapabilitiesDialog(Activity parentActivity,
-            AccessibilityServiceInfo info, DialogInterface.OnClickListener listener) {
-        final AlertDialog ad = new AlertDialog.Builder(parentActivity)
-                .setTitle(parentActivity.getString(R.string.enable_service_title,
-                        getServiceName(parentActivity, info)))
-                .setView(createEnableDialogContentView(parentActivity, info))
-                .setPositiveButton(android.R.string.ok, listener)
-                .setNegativeButton(android.R.string.cancel, listener)
-                .create();
-
-        final View.OnTouchListener filterTouchListener = (View v, MotionEvent event) -> {
-            // Filter obscured touches by consuming them.
-            if (((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0)
-                    || ((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_PARTIALLY_OBSCURED) != 0)) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    Toast.makeText(v.getContext(), R.string.touch_filtered_warning,
-                            Toast.LENGTH_SHORT).show();
-                }
-                return true;
+    private static final View.OnTouchListener filterTouchListener = (View v, MotionEvent event) -> {
+        // Filter obscured touches by consuming them.
+        if (((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0)
+                || ((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_PARTIALLY_OBSCURED) != 0)) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                Toast.makeText(v.getContext(), R.string.touch_filtered_warning,
+                        Toast.LENGTH_SHORT).show();
             }
-            return false;
-        };
+            return true;
+        }
+        return false;
+    };
+
+    public static Dialog createCapabilitiesDialog(Activity parentActivity,
+            AccessibilityServiceInfo info, View.OnClickListener listener) {
+        final AlertDialog ad = new AlertDialog.Builder(parentActivity)
+                .setView(createEnableDialogContentView(parentActivity, info, listener))
+                .create();
 
         Window window = ad.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.privateFlags |= SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
         window.setAttributes(params);
         ad.create();
-        ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(filterTouchListener);
         ad.setCanceledOnTouchOutside(true);
+
+        return ad;
+    }
+
+    public static Dialog createDisableDialog(Activity parentActivity,
+            AccessibilityServiceInfo info, View.OnClickListener listener) {
+        final AlertDialog ad = new AlertDialog.Builder(parentActivity)
+                .setView(createDisableDialogContentView(parentActivity, info, listener))
+                .setCancelable(true)
+                .create();
 
         return ad;
     }
@@ -96,7 +104,7 @@ public class AccessibilityServiceWarning {
      * @return A content view suitable for viewing
      */
     private static View createEnableDialogContentView(Context context,
-            AccessibilityServiceInfo info) {
+            AccessibilityServiceInfo info, View.OnClickListener listener) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
@@ -114,9 +122,55 @@ public class AccessibilityServiceWarning {
             encryptionWarningView.setVisibility(View.GONE);
         }
 
-        TextView serviceWarningTextView = content.findViewById(R.id.accessibility_service_warning);
-        serviceWarningTextView.setText(context.getString(R.string.accessibility_service_warning,
-            getServiceName(context, info)));
+        final Drawable icon;
+        if (info.getResolveInfo().getIconResource() == 0) {
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_accessibility_generic);
+        } else {
+            icon = info.getResolveInfo().loadIcon(context.getPackageManager());
+        }
+
+        ImageView permissionDialogIcon = content.findViewById(
+                R.id.permissionDialog_icon);
+        permissionDialogIcon.setImageDrawable(icon);
+
+        TextView permissionDialogTitle = content.findViewById(R.id.permissionDialog_title);
+        permissionDialogTitle.setText(context.getString(R.string.enable_service_title,
+                getServiceName(context, info)));
+
+        Button permissionAllowButton = content.findViewById(
+                R.id.permission_enable_allow_button);
+        Button permissionDenyButton = content.findViewById(
+                R.id.permission_enable_deny_button);
+        permissionAllowButton.setOnClickListener(listener);
+        permissionAllowButton.setOnTouchListener(filterTouchListener);
+        permissionDenyButton.setOnClickListener(listener);
+
+        return content;
+    }
+
+    private static View createDisableDialogContentView(Context context,
+            AccessibilityServiceInfo info, View.OnClickListener listener) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+
+        View content = inflater.inflate(R.layout.disable_accessibility_service_dialog_content,
+                null);
+
+        TextView permissionDialogTitle = content.findViewById(R.id.permissionDialog_disable_title);
+        permissionDialogTitle.setText(context.getString(R.string.disable_service_title,
+                getServiceName(context, info)));
+        TextView permissionDialogMessage = content
+                .findViewById(R.id.permissionDialog_disable_message);
+        permissionDialogMessage.setText(context.getString(R.string.disable_service_message,
+                context.getString(R.string.accessibility_dialog_button_stop),
+                getServiceName(context, info)));
+
+        Button permissionAllowButton = content.findViewById(
+                R.id.permission_disable_stop_button);
+        Button permissionDenyButton = content.findViewById(
+                R.id.permission_disable_cancel_button);
+        permissionAllowButton.setOnClickListener(listener);
+        permissionDenyButton.setOnClickListener(listener);
 
         return content;
     }
