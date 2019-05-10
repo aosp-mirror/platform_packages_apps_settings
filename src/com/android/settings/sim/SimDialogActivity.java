@@ -16,6 +16,7 @@
 
 package com.android.settings.sim;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telecom.PhoneAccount;
@@ -44,11 +45,15 @@ public class SimDialogActivity extends FragmentActivity {
 
     public static String PREFERRED_SIM = "preferred_sim";
     public static String DIALOG_TYPE_KEY = "dialog_type";
+    // sub ID returned from startActivityForResult
+    public static String RESULT_SUB_ID = "result_sub_id";
     public static final int INVALID_PICK = -1;
     public static final int DATA_PICK = 0;
     public static final int CALLS_PICK = 1;
     public static final int SMS_PICK = 2;
     public static final int PREFERRED_PICK = 3;
+    // Show the "select SMS subscription" dialog, but don't save as default, just return a result
+    public static final int SMS_PICK_FOR_MESSAGE = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +99,9 @@ public class SimDialogActivity extends FragmentActivity {
                     throw new IllegalArgumentException("Missing required extra " + PREFERRED_SIM);
                 }
                 return PreferredSimDialogFragment.newInstance();
+            case SMS_PICK_FOR_MESSAGE:
+                return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_sms,
+                        false /* includeAskEveryTime */);
             default:
                 throw new IllegalArgumentException("Invalid dialog type " + dialogType + " sent.");
         }
@@ -116,6 +124,13 @@ public class SimDialogActivity extends FragmentActivity {
                 break;
             case PREFERRED_PICK:
                 setPreferredSim(subId);
+                break;
+            case SMS_PICK_FOR_MESSAGE:
+                // Don't set a default here.
+                // The caller has created this dialog waiting for a result.
+                Intent intent = new Intent();
+                intent.putExtra(RESULT_SUB_ID, subId);
+                setResult(Activity.RESULT_OK, intent);
                 break;
             default:
                 throw new IllegalArgumentException(
