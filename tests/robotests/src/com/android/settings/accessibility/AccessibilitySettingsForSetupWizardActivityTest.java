@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.display.FontSizePreferenceFragmentForSetupWizard;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -48,6 +49,7 @@ public class AccessibilitySettingsForSetupWizardActivityTest {
   }
 
   @Test
+  @Ignore
   public void onCreate_whenHasFontSizeExtra_shouldGoToFontSizePreferenceDirectly() {
     AccessibilitySettingsForSetupWizardActivity activity =
             Robolectric.buildActivity(AccessibilitySettingsForSetupWizardActivity.class,
