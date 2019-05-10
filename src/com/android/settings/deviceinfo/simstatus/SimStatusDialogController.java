@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.simstatus;
 import static android.content.Context.CARRIER_CONFIG_SERVICE;
 import static android.content.Context.EUICC_SERVICE;
 import static android.content.Context.TELEPHONY_SERVICE;
+import static android.content.Context.TELEPHONY_SUBSCRIPTION_SERVICE;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -36,6 +37,7 @@ import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.BidiFormatter;
@@ -52,8 +54,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-
-import java.util.List;
 
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
@@ -98,9 +98,21 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             "com.android.cellbroadcastreceiver.GET_LATEST_CB_AREA_INFO";
     private final static String CELL_BROADCAST_RECEIVER_APP = "com.android.cellbroadcastreceiver";
 
+    private final OnSubscriptionsChangedListener mOnSubscriptionsChangedListener =
+            new OnSubscriptionsChangedListener() {
+                @Override
+                public void onSubscriptionsChanged() {
+                    mSubscriptionInfo = mSubscriptionManager.getActiveSubscriptionInfo(
+                            mSubscriptionInfo.getSubscriptionId());
+                    updateNetworkProvider();
+                }
+            };
+
+    private SubscriptionInfo mSubscriptionInfo;
+
     private final SimStatusDialogFragment mDialog;
-    private final SubscriptionInfo mSubscriptionInfo;
     private final TelephonyManager mTelephonyManager;
+    private final SubscriptionManager mSubscriptionManager;
     private final CarrierConfigManager mCarrierConfigManager;
     private final EuiccManager mEuiccManager;
     private final Resources mRes;
@@ -134,11 +146,10 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mDialog = dialog;
         mContext = dialog.getContext();
         mSubscriptionInfo = getPhoneSubscriptionInfo(slotId);
-        mTelephonyManager = (TelephonyManager) mContext.getSystemService(
-                TELEPHONY_SERVICE);
-        mCarrierConfigManager = (CarrierConfigManager) mContext.getSystemService(
-                CARRIER_CONFIG_SERVICE);
-        mEuiccManager = (EuiccManager) mContext.getSystemService(EUICC_SERVICE);
+        mTelephonyManager =  mContext.getSystemService(TelephonyManager.class);
+        mCarrierConfigManager =  mContext.getSystemService(CarrierConfigManager.class);
+        mEuiccManager =  mContext.getSystemService(EuiccManager.class);
+        mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
 
         mRes = mContext.getResources();
 
@@ -155,9 +166,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
 
         mPhoneStateListener = getPhoneStateListener();
+        updateNetworkProvider();
 
         final ServiceState serviceState = getCurrentServiceState();
-        updateNetworkProvider(serviceState);
         updatePhoneNumber();
         updateLatestAreaInfo();
         updateServiceState(serviceState);
@@ -179,6 +190,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
                         | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
                         | PhoneStateListener.LISTEN_SERVICE_STATE);
+        mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
 
         if (mShowLatestAreaInfo) {
             mContext.registerReceiver(mAreaInfoReceiver,
@@ -198,6 +210,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
+        mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
         mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId())
                 .listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
@@ -206,8 +219,10 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
     }
 
-    private void updateNetworkProvider(ServiceState serviceState) {
-        mDialog.setText(NETWORK_PROVIDER_VALUE_ID, serviceState.getOperatorAlphaLong());
+    private void updateNetworkProvider() {
+        final CharSequence carrierName =
+                mSubscriptionInfo != null ? mSubscriptionInfo.getCarrierName() : null;
+        mDialog.setText(NETWORK_PROVIDER_VALUE_ID, carrierName);
     }
 
     private void updatePhoneNumber() {
@@ -441,7 +456,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
             @Override
             public void onServiceStateChanged(ServiceState serviceState) {
-                updateNetworkProvider(serviceState);
+                updateNetworkProvider();
                 updateServiceState(serviceState);
                 updateRoamingStatus(serviceState);
             }
