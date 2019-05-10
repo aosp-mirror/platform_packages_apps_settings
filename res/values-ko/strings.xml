@@ -338,7 +338,7 @@
     <string name="date_time_set_date_title" msgid="6928286765325608604">"날짜"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"지역 검색"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"지역"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"UTC 오프셋 선택"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"협정 세계시 기준 선택"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g>은(는) <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>에 시작됩니다."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g>(<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g>(<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -347,7 +347,7 @@
     <string name="zone_time_type_dst" msgid="8850494578766845276">"일광 절약 시간"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"표준 시간"</string>
     <string name="zone_menu_by_region" msgid="8370437123807764346">"지역별로 선택"</string>
-    <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC 오프셋으로 선택"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"협정 세계시 기준으로 선택"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"날짜"</string>
     <string name="time_picker_title" msgid="483460752287255019">"시간"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"자동 잠금"</string>
@@ -374,7 +374,10 @@
     <string name="location_settings_title" msgid="1369675479310751735">"위치"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"위치 사용"</string>
     <string name="location_settings_summary_location_off" msgid="794370259612167176">"사용 안함"</string>
-    <!-- no translation found for location_settings_summary_location_on (5513447650619485188) -->
+    <plurals name="location_settings_summary_location_on" formatted="false" msgid="5513447650619485188">
+      <item quantity="other">사용 - <xliff:g id="COUNT_1">%1$d</xliff:g>개의 앱이 위치에 액세스할 수 있음</item>
+      <item quantity="one">사용 - <xliff:g id="COUNT_0">%1$d</xliff:g>개의 앱이 위치에 액세스할 수 있음</item>
+    </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="8523775367089431611">"로드 중…"</string>
     <string name="account_settings_title" msgid="626177544686329806">"계정"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"보안"</string>
@@ -418,27 +421,17 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"얼굴이 등록되지 않았습니다."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"준비가 완료되었습니다. 감사합니다."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"완료"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_category (4087133372842623883) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_use_face_unlock_phone (8780794239930621913) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"얼굴인식 잠금해제를 사용할 항목"</string>
+    <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"휴대전화 잠금 해제"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"앱 로그인 &amp; 결제"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2643852178287575557) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1891157027896989860) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6063278991544881786) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_confirmation (3555852478589689141) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (7965662696468917986) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_remove_face_data (304401377141467791) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_enroll (664990192460698660) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer (7769500154351757004) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"얼굴인식 잠금해제 시 요구"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"눈 뜨고 화면 보기"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"휴대전화를 잠금 해제하려면 항상 눈을 뜨고 화면을 바라봐야 합니다."</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"확인 버튼"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"앱에서 인증할 때 항상 확인을 요청합니다."</string>
+    <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"얼굴 데이터 삭제"</string>
+    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"새로운 얼굴인식 잠금해제 설정"</string>
+    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"얼굴인식 잠금해제를 사용하여 기기를 잠금 해제하고 앱에 로그인하거나 결제를 확인하세요.\n\n주의사항:\n휴대전화를 바라보면 의도치 않게 잠금이 해제될 수 있습니다.\n\n다른 사람이 눈을 뜨고 있는 내 얼굴에 휴대전화를 가져다 대도 잠금이 해제될 수 있습니다\n\n자녀나 일란성 쌍둥이와 같이 나와 많이 닮은 사람이 휴대전화의 잠금을 해제할 수도 있습니다."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"얼굴 데이터를 삭제하시겠습니까?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"얼굴인식 잠금해제에서 기록한 데이터가 완전히 삭제됩니다. 삭제 이후에 휴대전화를 잠금 해제하고 앱에 로그인하고 결제를 확인하려면 PIN, 패턴 또는 비밀번호가 필요합니다."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"지문"</string>
@@ -488,18 +481,12 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"나중에"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"지문 설정을 건너뛰시겠습니까?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"지문으로 휴대전화를 잠금 해제하도록 설정했습니다. 지금 건너뛰면 나중에 설정해야 하며 설정에는 약 1분 정도 소요됩니다."</string>
-    <!-- no translation found for fingerprint_lock_screen_setup_skip_dialog_text (7914950545902198894) -->
-    <skip />
-    <!-- no translation found for fingerprint_lock_screen_setup_skip_dialog_text (2300047476104528001) -->
-    <skip />
-    <!-- no translation found for fingerprint_lock_screen_setup_skip_dialog_text (5823994499768751994) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (4490601819500843860) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (3741624920522374098) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (3523360900206227082) -->
-    <skip />
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"태블릿을 분실하거나 도난당한 경우 다른 사람이 사용할 수 없도록 화면 잠금 옵션으로 태블릿을 보호하세요. 또한 지문을 설정하려면 화면 잠금 옵션이 필요합니다. 취소를 탭한 다음 PIN, 패턴 또는 비밀번호를 설정하세요."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"기기를 분실하거나 도난당한 경우 다른 사람이 사용할 수 없도록 화면 잠금 옵션으로 기기를 보호하세요. 또한 지문을 설정하려면 화면 잠금 옵션이 필요합니다. 취소를 탭한 다음 PIN, 패턴 또는 비밀번호를 설정하세요."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"휴대전화를 분실하거나 도난당한 경우 다른 사람이 사용할 수 없도록 화면 잠금 옵션으로 휴대전화를 보호하세요. 또한 지문을 설정하려면 화면 잠금 옵션이 필요합니다. 취소를 탭한 다음 PIN, 패턴 또는 비밀번호를 설정하세요."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"태블릿을 분실하거나 도난당한 경우 다른 사람이 사용할 수 없도록 화면 잠금 옵션으로 태블릿을 보호하세요. 또한 얼굴 인증을 설정하려면 화면 잠금 옵션이 필요합니다. 취소를 탭한 다음 PIN, 패턴 또는 비밀번호를 설정하세요."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"기기를 분실하거나 도난당한 경우 다른 사람이 사용할 수 없도록 화면 잠금 옵션으로 기기를 보호하세요. 또한 얼굴 인증을 설정하려면 화면 잠금 옵션이 필요합니다. 취소를 탭한 다음 PIN, 패턴 또는 비밀번호를 설정하세요."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"휴대전화를 분실하거나 도난당한 경우 다른 사람이 사용할 수 없도록 화면 잠금 옵션으로 휴대전화를 보호하세요. 또한 얼굴 인증을 설정하려면 화면 잠금 옵션이 필요합니다. 취소를 탭한 다음 PIN, 패턴 또는 비밀번호를 설정하세요."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"PIN 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"비밀번호 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"패턴 설정을 건너뛰시겠습니까?"</string>
@@ -792,8 +779,7 @@
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"휴대전화가 더 이상 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>과(와) 페어링되지 않습니다."</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"태블릿이 더 이상 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>과(와) 페어링되지 않습니다."</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"기기가 더 이상 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>과(와) 페어링되지 않습니다."</string>
-    <!-- no translation found for bluetooth_untethered_unpair_dialog_body (5932168717642676140) -->
-    <skip />
+    <string name="bluetooth_untethered_unpair_dialog_body" msgid="5932168717642676140">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 더 이상 이 계정에 연결된 기기와 페어링되지 않습니다."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"기기 지우기"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"연결..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>와(과) 미디어 오디오의 연결이 끊어집니다."</string>
@@ -1040,7 +1026,10 @@
       <item quantity="other">구독 %d개</item>
       <item quantity="one">구독 1개</item>
     </plurals>
-    <!-- no translation found for wifi_saved_all_access_points_summary (2504425359919617586) -->
+    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="2504425359919617586">
+      <item quantity="other">네트워크 및 구독 %d개</item>
+      <item quantity="one">네트워크 및 구독 1개</item>
+    </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"고급 Wi-Fi"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC 주소"</string>
@@ -1189,8 +1178,8 @@
     <string name="accelerometer_title" msgid="7854608399547349157">"자동 화면 회전"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"색상"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"자연스럽게"</string>
-    <string name="color_mode_option_boosted" msgid="8588223970257287524">"강렬하게"</string>
-    <string name="color_mode_option_saturated" msgid="4569683960058798843">"선명하게"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"생생하게"</string>
+    <string name="color_mode_option_saturated" msgid="4569683960058798843">"강렬하게"</string>
     <string name="color_mode_option_automatic" msgid="7996505473528529568">"색상 자동 조절"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"정확한 색상만 사용"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"색상 선명도와 정확도 간 조정"</string>
@@ -1262,10 +1251,8 @@
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"배경화면 변경"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"화면 맞춤설정"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"배경화면 선택"</string>
-    <!-- no translation found for style_suggestion_title (4710867417147087928) -->
-    <skip />
-    <!-- no translation found for style_suggestion_summary (4592087484229499188) -->
-    <skip />
+    <string name="style_suggestion_title" msgid="4710867417147087928">"Pixel 맞춤설정"</string>
+    <string name="style_suggestion_summary" msgid="4592087484229499188">"다른 스타일, 배경화면, 시계 등 사용해 보기"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"화면 보호기"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"충전 또는 도킹하는 동안"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"도킹이나 충전 중일 때"</string>
@@ -1274,7 +1261,7 @@
     <string name="screensaver_settings_summary_never" msgid="5165622985174349585">"사용 안함"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"사용 안함"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"휴대전화가 도킹 또는 절전 모드일 때 작동 방식을 조정하려면 화면 보호기를 사용 설정합니다."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"시작 시간"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"표시 시간"</string>
     <string name="screensaver_settings_current" msgid="4663846038247130023">"현재 화면 보호기"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"지금 시작하기"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"설정"</string>
@@ -1283,7 +1270,7 @@
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"절전 모드 자동 해제"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"표시 시점"</string>
     <string name="doze_title" msgid="2375510714460456687">"새로운 알림"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"알림을 수신하면 절전 모드를 해제"</string>
+    <string name="doze_summary" msgid="3846219936142814032">"알림 수신 시 절전 모드 해제"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"항상 사용"</string>
     <string name="doze_always_on_summary" msgid="6978257596231155345">"시간, 알림 아이콘 등의 정보가 표시되며 배터리 사용량이 증가함"</string>
     <string name="title_font_size" msgid="4405544325522105222">"글꼴 크기"</string>
@@ -1592,9 +1579,9 @@
     <string name="reset_dashboard_title" msgid="6254873816990678620">"옵션 초기화"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"네트워크, 앱, 기기를 재설정할 수 있음"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Wi-Fi, 모바일, 블루투스 초기화"</string>
-    <string name="reset_network_desc" msgid="5547979398298881406">"이렇게 하면 다음을 포함한 모든 네트워크 설정이 초기화됩니다.\n\n"<li>"Wi‑Fi"</li>\n<li>"모바일 데이터"</li>\n<li>"블루투스"</li></string>
+    <string name="reset_network_desc" msgid="5547979398298881406">"다음을 포함한 모든 네트워크 설정이 초기화됩니다.\n\n"<li>"Wi‑Fi"</li>\n<li>"모바일 데이터"</li>\n<li>"블루투스"</li></string>
     <string name="reset_esim_title" msgid="1979762943163078939">"다운로드한 SIM 삭제"</string>
-    <string name="reset_esim_desc" msgid="5940105242448544634">"교체 SIM을 다운로드하려면 이동통신사에 문의하세요. 이렇게 해도 모바일 서비스 요금제는 취소되지 않습니다."</string>
+    <string name="reset_esim_desc" msgid="5940105242448544634">"교체 SIM을 다운로드하려면 이동통신사에 문의하세요. 모바일 서비스 요금제에는 영향을 주지 않습니다."</string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"설정 초기화"</string>
     <string name="reset_network_final_desc" msgid="4690205209934596665">"네트워크 설정을 모두 초기화하시겠습니까? 이 작업은 실행취소할 수 없습니다."</string>
     <string name="reset_network_final_desc_esim" msgid="6641433458865914227">"모든 네트워크 설정을 초기화하고 다운로드한 SIM을 삭제하시겠습니까? 이 작업은 실행취소할 수 없습니다."</string>
@@ -1671,7 +1658,10 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"직장 프로필 위치"</string>
     <string name="location_app_level_permissions" msgid="2777033567595680764">"앱 권한"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"위치 서비스 사용 안함"</string>
-    <!-- no translation found for location_app_permission_summary_location_on (5336807018727349708) -->
+    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="5336807018727349708">
+      <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g>개 중 <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>개의 앱이 위치 정보에 액세스할 수 있음</item>
+      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g>개 중 <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g>개의 앱이 위치 정보에 액세스할 수 있음</item>
+    </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"최근에 위치 정보에 액세스한 앱"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"세부정보 보기"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"최근에 위치 정보를 요청한 앱이 없습니다."</string>
@@ -1703,7 +1693,7 @@
     <string name="about_settings" product="device" msgid="6717640957897546887">"기기 정보"</string>
     <string name="about_settings" product="emulator" msgid="221313099578564438">"에뮬레이트된 기기 정보"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"법률 정보, 상태, 소프트웨어 버전 보기"</string>
-    <string name="legal_information" msgid="5769301644270604095">"법률정보"</string>
+    <string name="legal_information" msgid="5769301644270604095">"법률 정보"</string>
     <string name="contributors_title" msgid="5917703088825286504">"도움을 주신 분들"</string>
     <string name="manual" msgid="3025943393642974445">"수동"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"규정 라벨"</string>
@@ -2070,7 +2060,7 @@
     <string name="talkback_title" msgid="7912059827205988080">"음성 안내 지원"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"주로 시각 장애가 있는 사용자를 위한 스크린 리더"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"화면에서 항목을 탭하여 읽는 소리 듣기"</string>
-    <string name="accessibility_captioning_title" msgid="7589266662024836291">"자막"</string>
+    <string name="accessibility_captioning_title" msgid="8068289534732163115">"자막 환경설정"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"확대"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"세 번 탭하여 확대"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"버튼을 눌러 확대"</string>
@@ -2111,12 +2101,10 @@
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"정지 시간"</string>
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"마우스를 사용하는 경우 커서가 일정 시간 동안 움직이지 않으면 자동으로 작동하도록 설정할 수 있습니다."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"지연 후 클릭"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (3196059463767462026) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"진동 및 햅틱 강도"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"알림 진동"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"진동 벨소리"</string>
-    <!-- no translation found for accessibility_touch_vibration_title (3548641513105226156) -->
-    <skip />
+    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"터치 반응"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"서비스 사용"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"색상 보정 사용"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"자막 사용"</string>
@@ -2605,12 +2593,10 @@
     <string name="add_device_admin" msgid="4192055385312215731">"이 기기 관리자 앱 활성화"</string>
     <string name="device_admin_add_title" msgid="3140663753671809044">"기기 관리자"</string>
     <string name="device_admin_warning" msgid="7482834776510188134">"이 관리자 앱을 활성화하면 <xliff:g id="APP_NAME">%1$s</xliff:g> 앱에서 다음 작업을 처리할 수 있습니다."</string>
-    <!-- no translation found for device_admin_warning_simplified (8085544856342321981) -->
-    <skip />
+    <string name="device_admin_warning_simplified" msgid="8085544856342321981">"이 기기는 <xliff:g id="APP_NAME">%1$s</xliff:g>에서 관리하고 모니터링합니다."</string>
     <string name="device_admin_status" msgid="7234814785374977990">"이 관리자 앱은 활성 상태로, <xliff:g id="APP_NAME">%1$s</xliff:g> 앱에서 다음 작업을 처리할 수 있도록 합니다."</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"프로필 관리자를 활성화하시겠습니까?"</string>
-    <!-- no translation found for profile_owner_add_title_simplified (6856400286736117006) -->
-    <skip />
+    <string name="profile_owner_add_title_simplified" msgid="6856400286736117006">"감독을 허용하시겠습니까?"</string>
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"계속하면 관리자가 내 사용자를 관리하게 되며, 관리자가 내 개인 데이터뿐만 아니라 연결된 데이터까지 저장할 수 있게 됩니다.\n\n관리자는 설정, 액세스 권한, 앱뿐만 아니라 네트워크 활동과 기기의 위치 정보 등 사용자와 연결된 데이터까지 모니터링하고 관리할 수 있습니다."</string>
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"관리자가 다른 옵션을 사용 중지함"</string>
     <string name="admin_more_details" msgid="7901420667346456102">"세부정보 더보기"</string>
@@ -2763,8 +2749,7 @@
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"종량제 Wi‑Fi 네트워크"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"종량제 네트워크를 선택하려면 Wi-Fi를 사용 설정합니다."</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"자동"</string>
-    <!-- no translation found for wifi_metered_title (5536703738895222444) -->
-    <skip />
+    <string name="wifi_metered_title" msgid="5536703738895222444">"네트워크 사용량"</string>
     <string name="data_usage_metered_yes" msgid="9217539611385225894">"종량제 네트워크"</string>
     <string name="data_usage_metered_no" msgid="4025232961929071789">"무제한 네트워크"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"이동통신사에서 산출한 데이터 사용량은 기기와 다를 수 있습니다."</string>
@@ -2904,7 +2889,7 @@
     <string name="user_add_user_message_long" msgid="6768718238082929201">"추가 사용자를 만들어 다른 사용자와 기기를 공유할 수 있습니다. 각 사용자는 앱, 배경화면 등으로 맞춤설정할 수 있는 자신만의 공간을 갖게 됩니다. 또한 모든 사용자에게 영향을 미치는 Wi‑Fi와 같은 기기 설정도 조정할 수 있습니다.\n\n추가된 신규 사용자는 자신의 공간을 설정해야 합니다.\n\n모든 사용자가 앱을 업데이트할 수 있으며, 업데이트는 다른 사용자에게도 적용됩니다. 접근성 설정 및 서비스는 신규 사용자에게 이전되지 않을 수도 있습니다."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"추가된 새로운 사용자는 자신의 공간을 설정해야 합니다.\n\n모든 사용자는 다른 사용자들을 위하여 앱을 업데이트할 수 있습니다."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"지금 사용자를 설정하시겠습니까?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"사용자가 기기를 사용하여 자신의 공간을 설정할 수 있도록 하세요."</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"사용자가 기기에서 자신의 공간을 설정하도록 하세요."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"지금 프로필을 설정하시겠습니까?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"지금 설정"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"나중에"</string>
@@ -3147,7 +3132,7 @@
     <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"화면 어둡게, 절전 모드, 배터리, 시간 초과, 주의 인식, 디스플레이, 화면, 활동 없음"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"돌리기, 뒤집기, 회전, 세로 모드, 가로 모드, 방향, 세로, 가로"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"업그레이드, Android"</string>
-    <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"알림 일시중지, 일정, 알림, 차단, 무음, 진동, 절전 모드, 업무, 집중, 소리, 음소거, 낮, 평일, 주말, 평일 밤, 이벤트"</string>
+    <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"방해 금지 모드, 예약, 알림, 차단, 무음, 진동, 절전 모드, 업무, 집중, 소리, 음소거, 낮, 평일, 주말, 평일 밤, 일정"</string>
     <string name="keywords_screen_timeout" msgid="8161370660970309476">"화면, 잠금 시간, 시간 초과, 잠금 화면"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"메모리, 캐시, 데이터, 삭제, 지우기, 공간 확보, 공간"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"연결됨, 기기, 헤드폰, 헤드셋, 스피커, 무선, 페어링, 이어폰, 음악, 미디어"</string>
@@ -3161,8 +3146,7 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"햅틱, 진동, 민감도"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"절전 모드, 고정, 지속, 절전, 배터리"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"루틴, 일정, 절전 모드, 전력 절약 모드, 배터리, 자동, 퍼센트"</string>
-    <!-- no translation found for keywords_add_an_account (6488139919428902434) -->
-    <skip />
+    <string name="keywords_add_an_account" msgid="6488139919428902434">"직장 프로필"</string>
     <string name="default_sound" msgid="8821684447333687810">"기본 사운드"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"벨소리 볼륨 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"볼륨, 진동, 방해 금지 모드"</string>
@@ -3188,7 +3172,7 @@
     <string name="docking_sounds_title" msgid="155236288949940607">"도킹 소리"</string>
     <string name="touch_sounds_title" msgid="5326587106892390176">"터치음"</string>
     <string name="vibrate_on_touch_title" msgid="1510405818894719079">"터치 진동"</string>
-    <string name="vibrate_on_touch_summary" msgid="8015901758501868229">"탭, 키보드 등의 햅틱 반응"</string>
+    <string name="vibrate_on_touch_summary" msgid="8015901758501868229">"탭, 키보드 등에 대한 햅틱 반응"</string>
     <string name="dock_audio_media_title" msgid="1346838179626123900">"도크 스피커 재생"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"모든 오디오"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"미디어 오디오만"</string>
@@ -3213,19 +3197,19 @@
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"모두 음소거"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g>을(를) 제외한 모든 소리 음소거"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"알람 및 미디어를 제외한 모든 소리 음소거"</string>
-    <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"일정"</string>
-    <string name="zen_mode_delete_automatic_rules" msgid="5975522152123354381">"일정 삭제"</string>
+    <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"예약"</string>
+    <string name="zen_mode_delete_automatic_rules" msgid="5975522152123354381">"예약 삭제"</string>
     <string name="zen_mode_schedule_delete" msgid="5717258786128155695">"삭제"</string>
     <string name="zen_mode_rule_name_edit" msgid="812185626159430507">"수정"</string>
-    <string name="zen_mode_automation_settings_page_title" msgid="8995524726286378583">"일정"</string>
-    <string name="zen_mode_automatic_rule_settings_page_title" msgid="4773111805919088437">"일정"</string>
-    <string name="zen_mode_schedule_category_title" msgid="5482757877262584975">"일정"</string>
+    <string name="zen_mode_automation_settings_page_title" msgid="8995524726286378583">"예약"</string>
+    <string name="zen_mode_automatic_rule_settings_page_title" msgid="4773111805919088437">"예약"</string>
+    <string name="zen_mode_schedule_category_title" msgid="5482757877262584975">"예약"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="4321254843908888574">"특정 시간 동안 휴대전화 무음 설정"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="6223252025075862701">"방해 금지 모드 규칙 설정"</string>
-    <string name="zen_mode_schedule_title" msgid="8616187805239590649">"일정"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="489102635414919052">"일정 사용"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"중요 알림만"</string>
-    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"알람만"</string>
+    <string name="zen_mode_schedule_title" msgid="8616187805239590649">"예약"</string>
+    <string name="zen_mode_use_automatic_rule" msgid="489102635414919052">"예약 사용"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"중요 알림만 허용"</string>
+    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"알람만 허용"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"모두 차단"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"시각적 방해 차단"</string>
@@ -3238,7 +3222,7 @@
     <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"알림 표시 및 소리 차단"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"알림을 보거나 들을 수 없게 됩니다."</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="1069960859746788356">"새로운 알림 또는 기존 알림이 있을 때 휴대전화가 표시, 진동 또는 소리로 알려 주지 않습니다. 휴대전화 활동 및 상태에 관한 중요한 알림은 계속 표시됩니다.\n\n방해 금지 모드를 해제한 후 화면 상단에서 아래로 스와이프하여 놓친 알림을 확인할 수 있습니다."</string>
-    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"맞춤"</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"맞춤 설정"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"맞춤 설정 사용"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"맞춤 설정 삭제"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="5450158135853888485">"알림 소리 차단"</string>
@@ -3254,8 +3238,7 @@
     <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"화면 상단의 상태 표시줄 아이콘 숨기기"</string>
     <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"앱 아이콘에서 알림 표시 점 숨기기"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"알림 수신 시 화면 켜지 않기"</string>
-    <!-- no translation found for zen_mode_block_effect_list (4722887783222298295) -->
-    <skip />
+    <string name="zen_mode_block_effect_list" msgid="4722887783222298295">"풀다운 창에서 숨기기"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"차단하지 않음"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"화면이 꺼져 있을 때"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="6017536991063513394">"화면이 켜져 있을 때"</string>
@@ -3271,11 +3254,11 @@
     <string name="zen_mode_button_turn_off" msgid="6181953727880503094">"지금 사용 중지"</string>
     <string name="zen_mode_settings_dnd_manual_end_time" msgid="8860646554263965569">"<xliff:g id="FORMATTED_TIME">%s</xliff:g>까지 방해 금지 모드를 사용합니다"</string>
     <string name="zen_mode_settings_dnd_manual_indefinite" msgid="7186615007561990908">"방해 금지 모드를 끌 때까지 계속 사용합니다"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule" msgid="6195725842906270996">"방해 금지 모드가 일정(<xliff:g id="RULE_NAME">%s</xliff:g>)에 의해 자동으로 사용 설정되었습니다."</string>
+    <string name="zen_mode_settings_dnd_automatic_rule" msgid="6195725842906270996">"예약(<xliff:g id="RULE_NAME">%s</xliff:g>)에 따라 방해 금지 모드가 자동으로 시작되었습니다."</string>
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"방해 금지 모드가 앱(<xliff:g id="APP_NAME">%s</xliff:g>)에 의해 자동으로 사용 설정되었습니다"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="1965922539531521052">"<xliff:g id="RULE_NAMES">%s</xliff:g>까지 맞춤 설정이 적용된 방해 금지 모드를 사용합니다."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="7555742240858292255"><annotation id="link">" 맞춤 설정 보기"</annotation></string>
-    <string name="zen_interruption_level_priority" msgid="2078370238113347720">"중요 알림만"</string>
+    <string name="zen_interruption_level_priority" msgid="2078370238113347720">"중요 알림만 허용"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"켜짐/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"사용 안함/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -3289,12 +3272,12 @@
     </plurals>
     <string name="zen_mode_duration_summary_time_minutes" msgid="6238305783533884764">"<xliff:g id="NUM_MINUTES">%d</xliff:g>분"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="6751226506661227581">
-      <item quantity="other">일정 <xliff:g id="ON_COUNT">%d</xliff:g>개가 자동으로 사용 설정될 수 있습니다.</item>
-      <item quantity="one">일정 1개가 자동으로 사용 설정될 수 있습니다.</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>개의 예약이 자동으로 설정될 수 있습니다.</item>
+      <item quantity="one">1개의 예약이 자동으로 설정될 수 있습니다.</item>
     </plurals>
     <string name="zen_category_behavior" msgid="554277240833452070">"기기를 음소거하되 예외 허용"</string>
     <string name="zen_category_exceptions" msgid="7601136604273265629">"예외"</string>
-    <string name="zen_category_schedule" msgid="9000447592251450453">"일정"</string>
+    <string name="zen_category_schedule" msgid="9000447592251450453">"예약"</string>
     <string name="zen_sound_title" msgid="4461494611692749446">"예외 모두 보기"</string>
     <string name="zen_sound_footer" msgid="7621745273287208979">"방해 금지 모드가 사용 설정되어 있으면 위에서 허용한 항목을 제외한 소리 및 진동이 음소거됩니다."</string>
     <string name="zen_sound_category_title" msgid="4336596939661729188">"다음을 제외하고 모두 음소거"</string>
@@ -3304,7 +3287,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> 및 <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>을(를) 제외하고 음소거됨"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>, <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>을(를) 제외하고 음소거됨"</string>
     <string name="zen_custom_settings_dialog_title" msgid="3999383687283620283">"맞춤 설정"</string>
-    <string name="zen_custom_settings_dialog_review_schedule" msgid="7056997717364939238">"일정 검토"</string>
+    <string name="zen_custom_settings_dialog_review_schedule" msgid="7056997717364939238">"예약 검토"</string>
     <string name="zen_custom_settings_dialog_ok" msgid="5302885851078421866">"확인"</string>
     <string name="zen_custom_settings_notifications_header" msgid="6931035609369698584">"알림"</string>
     <string name="zen_custom_settings_duration_header" msgid="1190989278065507035">"길이"</string>
@@ -3314,7 +3297,7 @@
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"설정"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"알림 표시 및 소리 차단"</string>
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"알림 소리 차단"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"알림을 보거나 들을 수 없게 됩니다. 별표표시된 연락처 및 반복 발신자의 전화는 허용됩니다."</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"알림을 보거나 들을 수 없게 됩니다. 별표 표시된 연락처 및 반복 발신자의 전화는 허용됩니다."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(현재 설정)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"방해 금지 모드의 알림 설정을 변경하시겠습니까?"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"직장 프로필 사운드"</string>
@@ -3336,8 +3319,7 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"지난 7일간의 모든 항목 보기"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"고급"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"직장 알림"</string>
-    <!-- no translation found for smart_notifications_title (3702411478231865970) -->
-    <skip />
+    <string name="smart_notifications_title" msgid="3702411478231865970">"적응형 알림"</string>
     <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"자동 우선순위 지정"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"우선순위가 낮은 알림을 조용한 알림으로 자동 설정합니다."</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"추천 작업 및 답장"</string>
@@ -3357,6 +3339,15 @@
     <string name="swipe_direction_title" msgid="6877543492435053137">"스와이프 동작"</string>
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"오른쪽으로 스와이프하여 닫기, 왼쪽으로 스와이프하여 메뉴 표시"</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"왼쪽으로 스와이프하여 닫기, 오른쪽으로 스와이프하여 메뉴 표시"</string>
+    <string name="gentle_notifications_title" msgid="3976374971153475110">"조용한 알림"</string>
+    <string name="gentle_notifications_also_display" msgid="6455360420411828133">"다음 알림에도 표시됩니다."</string>
+    <string name="gentle_notifications_display_status" msgid="2904115658980383410">"상태 표시줄"</string>
+    <string name="gentle_notifications_display_lock" msgid="1395567209329239992">"잠금 화면"</string>
+    <string name="gentle_notifications_education" msgid="8713358646047345762">"조용한 알림은 항상 알림이 없으며 풀다운 창에 표시됩니다."</string>
+    <string name="gentle_notifications_display_summary_shade" msgid="6583107817329430916">"풀다운 창에만 표시됩니다."</string>
+    <string name="gentle_notifications_display_summary_shade_lock" msgid="1434426811760016414">"풀다운 창 및 잠금 화면에 표시됩니다."</string>
+    <string name="gentle_notifications_display_summary_shade_status" msgid="6113566548809874319">"풀다운 창 및 상태 표시줄에 표시됩니다."</string>
+    <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"풀다운 창, 상태 표시줄, 잠금 화면에 표시됩니다."</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"표시등 깜박임"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"잠금 화면"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"직장 프로필이 잠긴 경우"</string>
@@ -3391,22 +3382,17 @@
     <string name="allow_interruption" msgid="7136150018111848721">"알림 허용"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"앱의 소리, 진동, 화면 알림 표시 허용"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"풀다운 창에서 알림을 한 줄로 접습니다."</string>
-    <!-- no translation found for notification_channel_summary_low (7875385321253491191) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status (7866565328564018007) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_lock (4009247523075328235) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status_lock (3668028634045057230) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (4618537204284469990) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"풀다운 창에만 알림을 표시하여 집중에 방해가 되지 않습니다. 항상 음소거됩니다."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"우선순위 알림 아래에 표시됩니다. 항상 음소거됩니다."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"우선순위 알림 아래에 표시됩니다. 항상 음소거됩니다."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"우선순위 알림 아래에 표시됩니다. 항상 음소거됩니다."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"소리 및 상태 표시줄 아이콘으로 주의를 끕니다. 잠금 화면에 표시됩니다."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"기기가 잠금 해제되었을 때 화면 상단에 알림 배너 표시"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"알림 표시"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"적응형 알림"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
-      <item quantity="other">1일에 알림 최대 <xliff:g id="NUMBER_1">%d</xliff:g>개</item>
-      <item quantity="one">1일에 알림 최대 <xliff:g id="NUMBER_0">%d</xliff:g>개</item>
+      <item quantity="other">하루 최대 <xliff:g id="NUMBER_1">%d</xliff:g>개</item>
+      <item quantity="one">하루 최대 <xliff:g id="NUMBER_0">%d</xliff:g>개</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="5096638662520720959">
       <item quantity="other">1주일에 알림 최대 <xliff:g id="NUMBER_1">%d</xliff:g>개</item>
@@ -3476,7 +3462,7 @@
     <string name="notification_badge_title" msgid="6370122441168519809">"알림 표시 점 허용"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"알림 표시 점 보기"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"방해 금지 모드 무시"</string>
-    <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"방해 금지 모드가 사용 설정되어 있어도 이러한 알림을 계속 받도록 허용합니다."</string>
+    <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"방해 금지 모드가 사용 설정되어 있어도 알림을 계속 받도록 허용합니다."</string>
     <string name="app_notification_visibility_override_title" msgid="3618860781666494595">"잠금 화면"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"차단됨"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"최우선만 수신"</string>
@@ -3488,14 +3474,14 @@
     <string name="notification_channel_sound_title" msgid="3899212238513507941">"소리"</string>
     <string name="zen_mode_rule_delete_button" msgid="903658142711011617">"삭제"</string>
     <string name="zen_mode_rule_rename_button" msgid="4642843370946599164">"이름 바꾸기"</string>
-    <string name="zen_mode_rule_name" msgid="5607736317244760638">"일정 이름"</string>
-    <string name="zen_mode_rule_name_hint" msgid="278109122579468433">"일정 이름 입력"</string>
-    <string name="zen_mode_rule_name_warning" msgid="3856485373110366912">"이미 사용 중인 일정 이름입니다."</string>
+    <string name="zen_mode_rule_name" msgid="5607736317244760638">"예약 이름"</string>
+    <string name="zen_mode_rule_name_hint" msgid="278109122579468433">"예약 이름 입력"</string>
+    <string name="zen_mode_rule_name_warning" msgid="3856485373110366912">"이미 사용 중인 예약 이름입니다."</string>
     <string name="zen_mode_add_rule" msgid="7459154136384467057">"추가"</string>
-    <string name="zen_mode_add_event_rule" msgid="4454759739839069898">"이벤트 일정 추가"</string>
-    <string name="zen_mode_add_time_rule" msgid="7890557350868257760">"시간 일정 추가"</string>
-    <string name="zen_mode_delete_rule" msgid="8055032645990309096">"일정 삭제"</string>
-    <string name="zen_mode_choose_rule_type" msgid="40993242338494595">"일정 유형 선택"</string>
+    <string name="zen_mode_add_event_rule" msgid="4454759739839069898">"일정 예약 추가"</string>
+    <string name="zen_mode_add_time_rule" msgid="7890557350868257760">"시간 예약 추가"</string>
+    <string name="zen_mode_delete_rule" msgid="8055032645990309096">"예약 삭제"</string>
+    <string name="zen_mode_choose_rule_type" msgid="40993242338494595">"예약 유형 선택"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"\'<xliff:g id="RULE">%1$s</xliff:g>\' 규칙을 삭제하시겠습니까?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"삭제"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"알 수 없음"</string>
@@ -3504,8 +3490,8 @@
     <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"지금은 이 설정을 변경할 수 없습니다. 맞춤 동작을 사용하여 방해 금지 모드가 수동으로 사용 설정되었습니다."</string>
     <string name="zen_schedule_rule_type_name" msgid="6163149826036287324">"시간"</string>
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"지정된 시간 동안 방해 금지 모드를 사용하도록 자동 규칙 설정"</string>
-    <string name="zen_event_rule_type_name" msgid="6503468472212606158">"이벤트"</string>
-    <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"지정된 이벤트 동안 방해 금지 모드를 사용하도록 자동 규칙 설정"</string>
+    <string name="zen_event_rule_type_name" msgid="6503468472212606158">"일정"</string>
+    <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"지정된 일정이 시작되면 방해 금지 모드를 사용하도록 자동 규칙 설정"</string>
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"다음 계정의 일정"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"<xliff:g id="CALENDAR">%1$s</xliff:g>의 일정"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"모든 캘린더"</string>
@@ -3522,33 +3508,31 @@
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"없음"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"매일"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"알람이 종료 시간을 무시할 수 있음"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="1673667979187593693">"알람이 울리면 일정 사용 중지"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="1673667979187593693">"알람이 울리면 예약 사용 중지"</string>
     <string name="zen_mode_custom_behavior_title" msgid="1148856394866360783">"방해 금지 모드 동작"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="7750128187766412708">"기본 설정 사용"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="7458258833216726120">"이 일정에 관한 맞춤 설정 생성"</string>
-    <string name="zen_mode_custom_behavior_category_title" msgid="4070854282812755247">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ 대상"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="7458258833216726120">"예약에 대한 맞춤 설정 생성"</string>
+    <string name="zen_mode_custom_behavior_category_title" msgid="4070854282812755247">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\' 방해 금지 모드"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g>~<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g>부터 <xliff:g id="END">%2$s</xliff:g>까지"</string>
     <string name="zen_mode_calls" msgid="4769117032399813012">"통화 허용"</string>
     <string name="zen_mode_calls_title" msgid="2905770092665685857">"통화"</string>
     <string name="zen_mode_calls_footer" msgid="2002070641802102110">"허용된 통화를 놓치지 않도록 기기가 벨소리, 진동, 무음 중 무엇으로 설정되어 있는지 확인하세요."</string>
-    <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ 동안 수신 전화가 차단됩니다. 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자가 나에게 연락하도록 허용할 수 있습니다."</string>
+    <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"예약된 시간(‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\')에 수신 전화가 차단됩니다. 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자의 연락을 허용할 수 있습니다."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"별표 표시한 연락처"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
       <item quantity="other">외 <xliff:g id="NUM_PEOPLE">%d</xliff:g>명</item>
       <item quantity="one">외 1명</item>
     </plurals>
-    <!-- no translation found for zen_mode_messages (6406892731721926170) -->
-    <skip />
+    <string name="zen_mode_messages" msgid="6406892731721926170">"메시지 허용"</string>
     <string name="zen_mode_messages_footer" msgid="2616568463646674149">"허용된 메시지를 놓치지 않도록 기기가 벨소리, 진동, 무음 중 무엇으로 설정되어 있는지 확인하세요."</string>
-    <!-- no translation found for zen_mode_custom_messages_footer (800067279796770040) -->
-    <skip />
+    <string name="zen_mode_custom_messages_footer" msgid="800067279796770040">"예약된 시간(‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\')에 수신 메시지가 차단됩니다. 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자의 연락을 허용할 수 있습니다."</string>
     <string name="zen_mode_messages_title" msgid="7325983674655986445">"SMS, MMS 및 메시지 앱"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"누구나"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"연락처에 등록된 사용자만"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"별표 표시한 연락처만"</string>
-    <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"별표표시된 연락처 및 반복 발신자의 전화"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"별표 표시된 연락처 및 반복 발신자의 전화"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"연락처 및 반복 발신자의 전화"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"반복 발신자의 전화만"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"없음"</string>
@@ -3562,7 +3546,7 @@
     <string name="zen_mode_system_list" msgid="6996104733185177115">"터치음"</string>
     <string name="zen_mode_reminders" msgid="5445657061499098675">"알림 허용"</string>
     <string name="zen_mode_reminders_list" msgid="2853975802240340190">"알림"</string>
-    <string name="zen_mode_events" msgid="6154853744271591007">"이벤트 허용"</string>
+    <string name="zen_mode_events" msgid="6154853744271591007">"일정 알림 허용"</string>
     <string name="zen_mode_bypassing_apps" msgid="5493729796981237881">"앱에서 무시하도록 허용"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="2072590348079644482">"앱 예외"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3726913165356014788">
@@ -3572,7 +3556,7 @@
     <string name="zen_mode_events_list" msgid="5571368229052715098">"이벤트"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"모든 발신자"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"연락처"</string>
-    <string name="zen_mode_starred_callers" msgid="1023167821338514140">"별표표시된 연락처"</string>
+    <string name="zen_mode_starred_callers" msgid="1023167821338514140">"별표 표시된 연락처"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"반복 발신자"</string>
     <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"반복 발신자"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"반복 발신자 허용"</string>
@@ -3911,8 +3895,8 @@
       <item quantity="one">앱 1개의 알림이 사용 중지됨</item>
     </plurals>
     <string name="notification_summary_none" msgid="4586376436702610">"모든 앱에서 사용"</string>
-    <string name="apps_summary" msgid="193158055537070092">"앱 <xliff:g id="COUNT">%1$d</xliff:g>개 설치됨"</string>
-    <string name="apps_summary_example" msgid="2118896966712746139">"앱 24개가 설치됨"</string>
+    <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g>개의 앱이 설치됨"</string>
+    <string name="apps_summary_example" msgid="2118896966712746139">"24개의 앱이 설치됨"</string>
     <string name="storage_summary" msgid="3801281635351732202">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> 사용 - <xliff:g id="FREE_SPACE">%2$s</xliff:g> 사용 가능"</string>
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"내부 저장소: <xliff:g id="PERCENTAGE">%1$s</xliff:g> 사용 중 - <xliff:g id="FREE_SPACE">%2$s</xliff:g> 사용 가능"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 동안 사용하지 않으면 절전 모드로 전환됩니다."</string>
@@ -3920,7 +3904,7 @@
     <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"스타일, 배경화면, 화면 제한시간, 글꼴 크기"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"절전 모드, 글꼴 크기"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"10분 동안 사용하지 않으면 절전 모드로 전환"</string>
-    <string name="memory_summary" msgid="8080825904671961872">"평균 <xliff:g id="USED_MEMORY">%1$s</xliff:g>/<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> 저장용량 사용됨"</string>
+    <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> 중 평균 <xliff:g id="USED_MEMORY">%1$s</xliff:g> 사용됨"</string>
     <string name="users_summary" msgid="1674864467098487328">"<xliff:g id="USER_NAME">%1$s</xliff:g>(으)로 로그인됨"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g>은(는) 기본 앱입니다."</string>
     <string name="backup_disabled" msgid="485189128759595412">"백업 사용 안함"</string>
@@ -4178,7 +4162,7 @@
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"두 번 탭하여 태블릿 확인"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"두 번 탭하여 기기 확인"</string>
     <string name="ambient_display_summary" msgid="8534654210539169707">"시간, 알림, 기타 정보를 확인하려면 화면을 두 번 탭하세요."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"들어올려 휴대전화 확인"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"들어 올려 휴대전화 확인"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"들어서 태블릿 확인"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"들어서 기기 확인"</string>
     <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"디스플레이 대기 모드 해제"</string>
@@ -4307,7 +4291,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g>님의 경우 사용 안함)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"자동완성 서비스"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"자동, 완성, 자동완성"</string>
-    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;이 앱을 신뢰할 수 있는지 확인하세요.&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;에서는 자동완성할 수 있는 항목을 결정하기 위해 화면의 내용을 사용합니다."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;신뢰할 수 있는 앱인지 확인하세요.&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;에서는 자동 완성할 수 있는 항목을 결정하기 위해 화면의 내용을 사용합니다."</string>
     <string name="debug_autofill_category" msgid="8050326960545979035">"자동 완성"</string>
     <string name="autofill_logging_level_title" msgid="899483289251346778">"로깅 수준"</string>
     <string name="autofill_max_partitions" msgid="7590272120101271461">"세션당 최대 요청 수"</string>
@@ -4332,7 +4316,7 @@
     <string name="disabled_feature" msgid="2102058661071271076">"이 기능은 사용할 수 없습니다."</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"휴대전화 속도를 저하시키는 기능입니다."</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"전체 GNSS 측정 강제 사용"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"사용률 없이 모든 GNSS 배열 및 빈도를 추적"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"듀티 사이클 없이 모든 GNSS 배열 및 빈도를 추적"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"백그라운드 활동 시작 허용"</string>
     <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"모든 백그라운드 활동 시작 허용"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"비정상 종료 대화상자 항상 표시"</string>
@@ -4376,7 +4360,7 @@
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"휴대전화 배터리 수명 향상"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"벨 울림 방지"</string>
-    <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"전원 및 볼륨 업 버튼을 함께 눌러 다음 작업 실행"</string>
+    <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"전원 및 볼륨 업 버튼을 함께 눌러 다음으로 변경"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"벨 울림 방지 단축키"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"진동"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"음소거"</string>
@@ -4562,11 +4546,9 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"위치"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"서비스 제공업체에서 이 서비스를 제공하기 위해 내 위치 정보를 수집할 수 있습니다.\n\n서비스 제공업체의 개인정보처리방침을 검토하세요."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"남은 시간 또는 데이터를 이용하지 못할 수 있습니다. 삭제하기 전에 제공업체에 확인하세요."</string>
-    <!-- no translation found for keywords_content_capture (8252675452668954083) -->
-    <skip />
-    <!-- no translation found for content_capture (3210232615756364639) -->
-    <skip />
-    <string name="content_capture_summary" msgid="659506647507221852">"앱이 콘텐츠를 Android 시스템에 전송하도록 허용합니다."</string>
+    <string name="keywords_content_capture" msgid="8252675452668954083">"콘텐츠 캡처, 앱 콘텐츠"</string>
+    <string name="content_capture" msgid="3210232615756364639">"앱 콘텐츠"</string>
+    <string name="content_capture_summary" msgid="659506647507221852">"앱이 콘텐츠를 Android 시스템에 전송하도록 허용"</string>
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"시스템 힙 덤프 캡처"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"시스템 힙 덤프 캡처 중"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"시스템 힙 덤프를 캡처하지 못함"</string>

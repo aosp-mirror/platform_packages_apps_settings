@@ -328,13 +328,13 @@
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"তারিখ, সময়, সময় অঞ্চল ও ফর্ম্যাট সেট করুন"</string>
     <string name="date_time_auto" msgid="4290527098376721491">"নেটওয়ার্ক প্রদত্ত সময় ব্যবহার করুন"</string>
     <string name="zone_auto_title" msgid="3217703906014135437">"নেটওয়ার্ক প্রদত্ত টাইম জোন ব্যবহার করুন"</string>
-    <string name="date_time_24hour_auto" msgid="6276269188890332084">"ডিফল্ট হিসেবে লোকেল ব্যবহার করুন"</string>
+    <string name="date_time_24hour_auto" msgid="6276269188890332084">"লোকেল ডিফল্ট ব্যবহার করুন"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"২৪-ঘণ্টা বিন্যাস"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"২৪ ঘন্টার ফর্ম্যাট ব্যবহার করুন"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"সময়"</string>
     <string name="time_format_category_title" msgid="736190761036057769">"সময়ের ফর্ম্যাট"</string>
     <string name="date_time_set_timezone_title" msgid="3047322337368233197">"টাইম জোন"</string>
-    <string name="date_time_set_timezone" msgid="5045627174274377814">"সময় অঞ্চল বেছে নিন"</string>
+    <string name="date_time_set_timezone" msgid="5045627174274377814">"টাইম জোন বেছে নিন"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"তারিখ"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"অঞ্চল খুঁজুন"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"অঞ্চল"</string>
@@ -374,7 +374,10 @@
     <string name="location_settings_title" msgid="1369675479310751735">"লোকেশন"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"লোকেশন ব্যবহার করুন"</string>
     <string name="location_settings_summary_location_off" msgid="794370259612167176">"বন্ধ আছে"</string>
-    <!-- no translation found for location_settings_summary_location_on (5513447650619485188) -->
+    <plurals name="location_settings_summary_location_on" formatted="false" msgid="5513447650619485188">
+      <item quantity="one">চালু আছে - <xliff:g id="COUNT_1">%1$d</xliff:g>টি অ্যাপ লোকেশন অ্যাক্সেস করতে পারবে</item>
+      <item quantity="other">চালু আছে - <xliff:g id="COUNT_1">%1$d</xliff:g>টি অ্যাপ লোকেশন অ্যাক্সেস করতে পারবে</item>
+    </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="8523775367089431611">"লোড হচ্ছে…"</string>
     <string name="account_settings_title" msgid="626177544686329806">"অ্যাকাউন্টগুলি"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"নিরাপত্তা"</string>
@@ -418,27 +421,17 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"ফেস নথিভুক্ত বিকল্প কাজ করেনি।"</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"সমস্ত সেট আছে। সবকিছু ঠিক লাগছে।"</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"হয়ে গেছে"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_category (4087133372842623883) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_use_face_unlock_phone (8780794239930621913) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"মুখের সাহায্যে আনলক করার সুবিধা ব্যবহার করুন"</string>
+    <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"ফোন আনলক করা"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"অ্যাপ সাইন-ইন ও পেমেন্ট"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2643852178287575557) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1891157027896989860) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6063278991544881786) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_confirmation (3555852478589689141) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (7965662696468917986) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_remove_face_data (304401377141467791) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_enroll (664990192460698660) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer (7769500154351757004) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"মুখের সাহায্যে আনলক করতে প্রয়োজন"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"স্ক্রিনের দিকে তাকিয়ে চোখ খোলা রাখা"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"যেকোনও সময়ে ফোন আনলক করতে চোখ খোলা রেখে স্ক্রিনের দিকে তাকাতে হবে"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"কনফার্ম করার বোতাম"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"অ্যাপ ব্যবহার করে যাচাইকরণ করার সময় প্রত্যেকবার কনফার্ম করতে হবে"</string>
+    <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"ফেস ডেটা মুছে ফেলুন"</string>
+    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"নতুন মুখের সাহায্যে আনলক সেট-আপ করুন"</string>
+    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"আপনার ডিভাইস আনলক, অ্যাপে সাইন-ইন এবং পেমেন্ট কনফার্ম করতে মুখের সাহায্যে আনলক ফিচারটি ব্যবহার করুন। \n\nমনে রাখবেন:\nআপনি না চাইলেও ফোনের দিকে তাকালে তা আনলক হয়ে যাবে।\n\nআপনার চোখ খোলা থাকলে এবং ফোনটি আপনার মুখের সামনে ধরে অন্য কেউ আপনার ফোন আনলক করতে পারে।\n\nআপনার মতো দেখতে এমন যে কেউ; যেমন, আপনার সন্তান অথবা আপনার যমজ ভাই বা বোন, আপনার ফোন আনলক করতে পারে।"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"মুখের ডেটা মুছে ফেলতে চান?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"মুখের সাহায্যে আনলক করার মাধ্যমে রেকর্ড করা ডেটা স্থায়ীভাবে ও নিরাপদে মুছে ফেলা হবে। সরিয়ে দেওয়ার পরে আপনাকে পিন, প্যাটার্ন বা পাসওয়ার্ডের সাহায্যে ফোন আনলক করতে, অ্যাপে সাইন-ইন করতে এবং পেমেন্ট কনফার্ম করতে হবে।"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"আঙ্গুলের ছাপ"</string>
@@ -488,18 +481,12 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"এটি পরে করুন"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"আঙ্গুলের ছাপ সেট আপ করা এড়িয়ে যাবেন?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"আপনি আপনার ফোন আনলক করার একটি উপায় হিসেবে আপনার আঙ্গুলের ছাপ ব্যবহারের ব্যবস্থাটিকে বেছে নিয়েছেন। আপনি যদি এখনই এটিকে এড়িয়ে যান, তাহলে আপনাকে পরে আবার এটি সেট আপ করতে হবে। সেট আপ করতে মাত্র এক মিনিট এর মত সময় লাগতে পারে।"</string>
-    <!-- no translation found for fingerprint_lock_screen_setup_skip_dialog_text (7914950545902198894) -->
-    <skip />
-    <!-- no translation found for fingerprint_lock_screen_setup_skip_dialog_text (2300047476104528001) -->
-    <skip />
-    <!-- no translation found for fingerprint_lock_screen_setup_skip_dialog_text (5823994499768751994) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (4490601819500843860) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (3741624920522374098) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (3523360900206227082) -->
-    <skip />
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"স্ক্রিন লক বিকল্প ব্যবহার করে আপনার ট্যাবলেট সুরক্ষিত করুন যাতে এটি হারিয়ে গেলে বা চুরি হয়ে গেলে কেউ ব্যবহার করতে না পারে। আঙ্গুলের ছাপ সেট-আপ করার জন্য আপনার ডিভাইসে একটি স্ক্রিন লক বিকল্পরেও প্রয়োজন আছে। \'বাতিল করুন\' বিকল্পটি ট্যাপ করে পিন, প্যাটার্ন অথবা পাসওয়ার্ড সেট করুন।"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"স্ক্রিন লক বিকল্প ব্যবহার করে আপনার ডিভাইস সুরক্ষিত করুন যাতে এটি হারিয়ে গেলে বা চুরি হয়ে গেলে কেউ ব্যবহার করতে না পারে। আঙ্গুলের ছাপ সেট-আপ করার জন্য আপনার ডিভাইসে একটি স্ক্রিন লক বিকল্পরেও প্রয়োজন আছে। \'বাতিল করুন\' বিকল্পটি ট্যাপ করে পিন, প্যাটার্ন অথবা পাসওয়ার্ড সেট করুন।"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"স্ক্রিন লক বিকল্প ব্যবহার করে আপনার ফোন সুরক্ষিত করুন যাতে এটি হারিয়ে গেলে বা চুরি হয়ে গেলে কেউ ব্যবহার করতে না পারে। আঙ্গুলের ছাপ সেট-আপ করার জন্য আপনার ডিভাইসে একটি স্ক্রিন লক বিকল্পরেও প্রয়োজন আছে। \'বাতিল করুন\' বিকল্পটি ট্যাপ করে পিন, প্যাটার্ন অথবা পাসওয়ার্ড সেট করুন।"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"স্ক্রিন লক বিকল্প ব্যবহার করে আপনার ট্যাবলেট সুরক্ষিত করুন যাতে এটি হারিয়ে গেলে বা চুরি হয়ে গেলে কেউ ব্যবহার করতে না পারে। ফেস যাচাই করার প্রক্রিয়াটি সেট-আপ করার জন্য আপনার ডিভাইসে একটি স্ক্রিন লক বিকল্পও থাকতে হবে। \'বাতিল করুন\' বিকল্পটি ট্যাপ করে পিন, প্যাটার্ন অথবা পাসওয়ার্ড সেট করুন।"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"স্ক্রিন লক বিকল্প ব্যবহার করে আপনার ডিভাইস সুরক্ষিত করুন যাতে এটি হারিয়ে গেলে বা চুরি হয়ে গেলে কেউ ব্যবহার করতে না পারে। ফেস যাচাই করার প্রক্রিয়াটি সেট-আপ করার জন্য আপনার ডিভাইসে একটি স্ক্রিন লক বিকল্পও থাকতে হবে। \'বাতিল করুন\' বিকল্পটি ট্যাপ করে পিন, প্যাটার্ন অথবা পাসওয়ার্ড সেট করুন।"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"স্ক্রিন লক বিকল্প ব্যবহার করে আপনার ফোন সুরক্ষিত করুন যাতে এটি হারিয়ে গেলে বা চুরি হয়ে গেলে কেউ ব্যবহার করতে না পারে। ফেস যাচাই করার প্রক্রিয়াটি সেট-আপ করার জন্য আপনার ডিভাইসে একটি স্ক্রিন লক বিকল্পও থাকতে হবে। \'বাতিল করুন\' বিকল্পটি ট্যাপ করে পিন, প্যাটার্ন অথবা পাসওয়ার্ড সেট করুন।"</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"পিন সেট-আপ করার পদ্ধতি এড়াতে চান?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"পাসওয়ার্ড সেট-আপ করার ধাপটি এড়াতে চান?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"প্যাটার্ন সেট-আপ করার ধাপ এড়াতে চান?"</string>
@@ -792,8 +779,7 @@
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> এর সাথে আপনার ফোনটি আর যুক্ত থাকবে না"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> এর সাথে আপনার ট্যাবলেটটি আর যুক্ত থাকবে না"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> এর সাথে আপনার ডিভাইসটি আর যুক্ত থাকবে না"</string>
-    <!-- no translation found for bluetooth_untethered_unpair_dialog_body (5932168717642676140) -->
-    <skip />
+    <string name="bluetooth_untethered_unpair_dialog_body" msgid="5932168717642676140">"এই অ্যাকাউন্টের সাথে লিঙ্ক করা আছে এমন যেকোনও ডিভাইসের সাথে <xliff:g id="DEVICE_NAME">%1$s</xliff:g> আর পেয়ার করা যাবে না"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"ডিভাইসটি ভুলে যান"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"এতে কানেক্ট করুন..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> মিডিয়া অডিও থেকে ডিসকানেক্ট হয়ে যাবে।"</string>
@@ -1040,7 +1026,10 @@
       <item quantity="one">%dটি সাবস্ক্রিপশন</item>
       <item quantity="other">%dটি সাবস্ক্রিপশন</item>
     </plurals>
-    <!-- no translation found for wifi_saved_all_access_points_summary (2504425359919617586) -->
+    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="2504425359919617586">
+      <item quantity="one">%dটি নেটওয়ার্ক ও সাবস্ক্রিপশন</item>
+      <item quantity="other">%dটি নেটওয়ার্ক ও সাবস্ক্রিপশন</item>
+    </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"উন্নত ওয়াই-ফাই"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC অ্যাড্রেস"</string>
@@ -1184,7 +1173,7 @@
     <string name="accessibility_category_personal" msgid="1263518850905945594">"ব্যক্তিগত প্রোফাইল অ্যাকাউন্টগুলি"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"কাজের অ্যাকাউন্ট - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"ব্যক্তিগত অ্যাকাউন্ট - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
-    <string name="search_settings" msgid="1910951467596035063">"খুঁজুন"</string>
+    <string name="search_settings" msgid="1910951467596035063">"সার্চ"</string>
     <string name="display_settings" msgid="7965901687241669598">"ডিসপ্লে"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"অটো-রোটেট স্ক্রিন"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"রঙ"</string>
@@ -1263,10 +1252,8 @@
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"ওয়ালপেপার পরিবর্তন করুন"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"আপনার স্ক্রিন ব্যক্তিগতকৃত করুন"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"ওয়ালপেপার বেছে নিন"</string>
-    <!-- no translation found for style_suggestion_title (4710867417147087928) -->
-    <skip />
-    <!-- no translation found for style_suggestion_summary (4592087484229499188) -->
-    <skip />
+    <string name="style_suggestion_title" msgid="4710867417147087928">"আপনার Pixel কাস্টমাইজ করুন"</string>
+    <string name="style_suggestion_summary" msgid="4592087484229499188">"ভিন্ন স্টাইল, ওয়ালপেপার, ঘড়ি ও অনেক কিছু ব্যবহার করুন"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"স্ক্রিন সেভার"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"চার্জ অথবা ডক করার সময়"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"উভয় ক্ষেত্রেই"</string>
@@ -1672,7 +1659,10 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"কাজের প্রোফাইলের জন্য লোকেশন"</string>
     <string name="location_app_level_permissions" msgid="2777033567595680764">"অ্যাপের অনুমতি"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"লোকেশন বন্ধ করা আছে"</string>
-    <!-- no translation found for location_app_permission_summary_location_on (5336807018727349708) -->
+    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="5336807018727349708">
+      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g>টি অ্যাপের মধ্যে <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>টি লোকেশন অ্যাক্সেস করতে পারবে</item>
+      <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g>টি অ্যাপের মধ্যে <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>টি লোকেশন অ্যাক্সেস করতে পারবে</item>
+    </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"সম্প্রতি লোকেশন অ্যাক্সেসের অ্যাক্টিভিটি"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"বিবরণ দেখুন"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"সম্প্রতি কোনো অ্যাপ্লিকেশান অবস্থানের অনুরোধ করেনি"</string>
@@ -1866,7 +1856,7 @@
     <string name="reset_app_preferences" msgid="1321050641018356925">"অ্যাপ্লিকেশানগুলির পছন্দ আবার সেট করুন"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"অ্যাপ্লিকেশানগুলির পছন্দ আবার সেট করবেন?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"এটি এগুলির জন্য সমস্ত পছন্দ পরিবর্তন করবে:\n\n "<li>"বন্ধ করা অ্যাপ"</li>\n" "<li>"বন্ধ করা অ্যাপ বিজ্ঞপ্তি"</li>\n" "<li>"কাজের জন্য ডিফল্ট অ্যাপ"</li>\n" "<li>"অ্যাপের জন্য ব্যাকগ্রাউন্ড ডেটার সীমাবদ্ধতা"</li>\n" "<li>"যেকোনও অনুমতির সীমাবদ্ধতা"</li>\n\n" আপনি কোনও অ্যাপ ডেটা হারাবেন না।"</string>
-    <string name="reset_app_preferences_button" msgid="2559089511841281242">"অ্যাপ্লিকেশনগুলি পুনরায় সেট করুন"</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"অ্যাপ রিসেট করুন"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"জায়গা পরিচালনা করুন"</string>
     <string name="filter" msgid="2018011724373033887">"ফিল্টার"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"ফিল্টার বিকল্পগুলি বেছে নিন"</string>
@@ -2055,7 +2045,7 @@
     <string name="app_name_label" msgid="5440362857006046193">"অ্যাপ্লিকেশান"</string>
     <string name="last_time_used_label" msgid="8459441968795479307">"সর্বশেষ ব্যবহার হয়েছে"</string>
     <string name="usage_time_label" msgid="295954901452833058">"ব্যবহারের সময়"</string>
-    <string name="accessibility_settings" msgid="3975902491934816215">"সহজ ব্যবহার"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"অ্যাক্সেসিবিলিটি"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"সহজ ব্যবহার সেটিংস"</string>
     <string name="accessibility_settings_summary" msgid="981260486011624939">"স্ক্রিন রিডার, ডিসপ্লে, ইন্টারঅ্যাকশন নিয়ন্ত্রণগুলি"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"দৃষ্টিশক্তি সেটিংস"</string>
@@ -2071,7 +2061,7 @@
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"স্ক্রিন রিডার প্রাথমিকভাবে অন্ধত্ব এবং কম দৃষ্টি সম্পন্ন ব্যক্তিদের জন্য"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"স্ক্রিনের আইটেমগুলিতে আলতো চাপ দিলে সেগুলি উচ্চারণ করে শোনানো হবে"</string>
-    <string name="accessibility_captioning_title" msgid="7589266662024836291">"ক্যাপশান"</string>
+    <string name="accessibility_captioning_title" msgid="8068289534732163115">"ক্যাপশন অভিরুচি"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"বড় করে দেখা"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"তিনবার ট্যাপ করে বড় করে দেখুন"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"বোতাম দিয়ে বড় করুন"</string>
@@ -2112,12 +2102,10 @@
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"দেখার সময়"</string>
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"আপনি যদি মাউস ব্যবহার করেন তাহলে কার্সার এমনভাবে সেট করতে পারেন যাতে নির্দিষ্ট কিছুক্ষণ মাউস ব্যবহার করা না হলে নিজে থেকেই বিশেষ কোনও অ্যাকশন নেওয়া হয়।"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"ক্লিক করার আগে বিলম্ব"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (3196059463767462026) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"ভাইব্রেশন ও হ্যাপটিক মাত্রা"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"বিজ্ঞপ্তির ভাইব্রেশন"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"রিং ভাইব্রেশন"</string>
-    <!-- no translation found for accessibility_touch_vibration_title (3548641513105226156) -->
-    <skip />
+    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"টাচ ফিডব্যাক"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"পরিষেবা ব্যবহার করুন"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"কালার কারেকশন ব্যবহার করুন"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"ক্যাপশন ব্যবহার করুন"</string>
@@ -2234,7 +2222,7 @@
     <string name="print_feature_state_off" msgid="7294876968403966040">"বন্ধ করুন"</string>
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"পরিষেবা যোগ করুন"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"প্রিন্টার যোগ করুন"</string>
-    <string name="print_menu_item_search" msgid="7025589328240514553">"খুঁজুন"</string>
+    <string name="print_menu_item_search" msgid="7025589328240514553">"সার্চ করুন"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"প্রিন্টার খোঁজা হচ্ছে"</string>
     <string name="print_service_disabled" msgid="7739452396114245222">"পরিষেবা অক্ষমিত"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"প্রিন্ট কাজগুলি"</string>
@@ -2606,12 +2594,10 @@
     <string name="add_device_admin" msgid="4192055385312215731">"এই ডিভাইস প্রশাসক অ্যাপটি সক্রিয় করুন"</string>
     <string name="device_admin_add_title" msgid="3140663753671809044">"ডিভাইসের প্রশাসক"</string>
     <string name="device_admin_warning" msgid="7482834776510188134">"এই প্রশাসক অ্যাপটি সক্রিয় করলে তা <xliff:g id="APP_NAME">%1$s</xliff:g> অ্যাপকে নিম্নলিখিত কাজগুলি করতে দেবে।"</string>
-    <!-- no translation found for device_admin_warning_simplified (8085544856342321981) -->
-    <skip />
+    <string name="device_admin_warning_simplified" msgid="8085544856342321981">"<xliff:g id="APP_NAME">%1$s</xliff:g> অ্যাপের মাধ্যমে এই ডিভাইসটি ম্যানেজ এবং মনিটর করা হবে।"</string>
     <string name="device_admin_status" msgid="7234814785374977990">"এই প্রশাসক অ্যাপটি সক্রিয় এবং <xliff:g id="APP_NAME">%1$s</xliff:g> অ্যাপকে নিম্নলিখিত কাজগুলি করতে দেয়।"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"প্রোফাইল ম্যানেজার সক্রিয় করবেন?"</string>
-    <!-- no translation found for profile_owner_add_title_simplified (6856400286736117006) -->
-    <skip />
+    <string name="profile_owner_add_title_simplified" msgid="6856400286736117006">"তত্ত্বাবধানের অনুমতি দিতে চান?"</string>
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"এগিয়ে যাওয়ার মাধ্যমে, প্রশাসক দ্বারা আপনার ব্যবহারকারী পরিচালিত হবে যা আপনার ব্যক্তিগত ডেটা ছাড়াও অন্যান্য সম্পর্কিত ডেটা সঞ্চয়ে সক্ষম।\n\nআপনার প্রশাসক এই ব্যবহারকারীর সাথে সম্পর্কিত সেটিংস, অ্যাক্সেস, অ্যাপ এবং ডেটা নিরীক্ষণ ও পরিচালনা করতে পারেন, যাতে সামিল রয়েছে নেটওয়ার্ক অ্যাক্টিভিটি এবং আপনার ডিভাইসের লোকেশন তথ্য।"</string>
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"আপনার প্রশাসক অন্যান্য বিকল্পগুলিকে অক্ষম করেছেন"</string>
     <string name="admin_more_details" msgid="7901420667346456102">"আরো বিশদ বিবরণ"</string>
@@ -2764,8 +2750,7 @@
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"পরিমাপ করা ওয়াই-ফাই নেটওয়ার্ক"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"পরিমাপ করা নেটওয়ার্ক নির্বাচন করতে,ওয়াই-ফাই চালু করুন।"</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"অটোমেটিক"</string>
-    <!-- no translation found for wifi_metered_title (5536703738895222444) -->
-    <skip />
+    <string name="wifi_metered_title" msgid="5536703738895222444">"নেটওয়ার্কের ব্যবহার"</string>
     <string name="data_usage_metered_yes" msgid="9217539611385225894">"মিটার্ড"</string>
     <string name="data_usage_metered_no" msgid="4025232961929071789">"পরিমাপ করা নয়"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"পরিষেবা প্রদানকারীর ডেটার হিসাব আপনার ডিভাইসের হিসাবের থেকে ভিন্ন হতে পারে।"</string>
@@ -2946,7 +2931,7 @@
     <string name="application_restrictions" msgid="8207332020898004394">"অ্যাপ্লিকেশান এবং সামগ্রীর অনুমতি দিন"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"সীমাবদ্ধ সহ অ্যাপ্লিকেশানগুলি"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"অ্যাপ্লিকেশনের জন্য সেটিংস খুলুন"</string>
-    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"ট্যাপ ও পে"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"ট্যাপ করে পে করা"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"এটি কীভাবে কাজ করে"</string>
     <string name="nfc_payment_no_apps" msgid="5477904979148086424">"আপনার ফোন দিয়ে অর্থপ্রদান করুন"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"অর্থপ্রদান ডিফল্ট"</string>
@@ -3186,7 +3171,7 @@
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"স্ক্রিন লক হওয়ার শব্দ"</string>
     <string name="charging_sounds_title" msgid="3379885700913955599">"চার্জিংয়ে সাউন্ড ও ভাইব্রেশন"</string>
     <string name="docking_sounds_title" msgid="155236288949940607">"ডকিং শব্দগুলি"</string>
-    <string name="touch_sounds_title" msgid="5326587106892390176">"স্পর্শ শব্দ"</string>
+    <string name="touch_sounds_title" msgid="5326587106892390176">"টাচ সাউন্ড"</string>
     <string name="vibrate_on_touch_title" msgid="1510405818894719079">"টাচ ভাইব্রেশন"</string>
     <string name="vibrate_on_touch_summary" msgid="8015901758501868229">"ট্যাপ, কীবোর্ড এবং অন্যান্য উপায়ে হ্যাপটিক প্রতিক্রিয়া"</string>
     <string name="dock_audio_media_title" msgid="1346838179626123900">"ডক স্পিকার শুরু"</string>
@@ -3218,7 +3203,7 @@
     <string name="zen_mode_schedule_delete" msgid="5717258786128155695">"মুছে দিন"</string>
     <string name="zen_mode_rule_name_edit" msgid="812185626159430507">"এডিট করুন"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="8995524726286378583">"সময়সূচি"</string>
-    <string name="zen_mode_automatic_rule_settings_page_title" msgid="4773111805919088437">"সময়সূচী"</string>
+    <string name="zen_mode_automatic_rule_settings_page_title" msgid="4773111805919088437">"সময়সূচি"</string>
     <string name="zen_mode_schedule_category_title" msgid="5482757877262584975">"সময়সূচি"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="4321254843908888574">"নির্দিষ্ট সময়ে ফোন সাইলেন্ট করুন"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="6223252025075862701">"\'বিরক্ত করবেন না\' মোডের নিয়ম সেট-আপ করুন"</string>
@@ -3235,15 +3220,15 @@
     <string name="zen_mode_restrict_notifications_mute" msgid="3690261619682396872">"বিজ্ঞপ্তি থেকে কোনও সাউন্ড হবে না"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"আপনার স্ক্রিনে বিজ্ঞপ্তি দেখতে পাবেন"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"বিজ্ঞপ্তি দেখানো হলে ফোনে সাউন্ড বা ভাইব্রেশন হবে না।"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"বিজ্ঞপ্তি থেকে কোনওকিছু দেখা বা শোনা যাবে না"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"বিজ্ঞপ্তি থেকে কোনও কিছু দেখা বা শোনা যাবে না"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"আপনি কোনও বিজ্ঞপ্তি দেখতে বা শুনতে পাবেন না"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="1069960859746788356">"আপনার ফোনে ভাইব্রেশন, অথবা নতুন অথবা আগে থেকে সাউন্ড আগে থেকে থাকা বিজ্ঞপ্তি দেখাবে না। মনে রাখবেন, ফোনের অ্যাক্টিভিটি এবং স্ট্যাটাস সংক্রান্ত জরুরি বিজ্ঞপ্তি দেখানো হবে।\n\nআপনার ফোন থেকে \"বিরক্ত করবেন না মোড\" বন্ধ করে স্ক্রিনের উপর থেকে নিচে সোয়াইপ করে মিস হওয়া বিজ্ঞপ্তিগুলি দেখুন।"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="1069960859746788356">"নতুন অথবা আগে থেকে রয়েছে এমন বিজ্ঞপ্তির ক্ষেত্রে আপনার ফোনে ভাইব্রেশন অথবা সাউন্ড হবে না বা কোনও কিছু দেখাবে না। মনে রাখবেন, ফোনের অ্যাক্টিভিটি এবং স্ট্যাটাস সংক্রান্ত জরুরি বিজ্ঞপ্তি দেখানো হবে।\n\nআপনি ফোনে \"বিরক্ত করবেন না মোড\" বন্ধ করে রাখলে, স্ক্রিনের উপর থেকে নিচে সোয়াইপ করে মিস হওয়া বিজ্ঞপ্তিগুলি দেখুন।"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"কাস্টম"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"কাস্টম সেটিং চালু করুন"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"কাস্টম সেটিং সরান"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="5450158135853888485">"বিজ্ঞপ্তি থেকে কোনও সাউন্ড হবে না"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"আংশিকভাবে আড়াল করা"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="3618285192806732504">"বিজ্ঞপ্তি থেকে কোনওকিছু দেখা বা শোনা যাবে না"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="3618285192806732504">"বিজ্ঞপ্তি থেকে কোনও কিছু দেখা বা শোনা যাবে না"</string>
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"কাস্টম সীমাবদ্ধতা"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"যখন স্ক্রিনটি চালু থাকে"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"যখন স্ক্রিনটি বন্ধ থাকে"</string>
@@ -3254,8 +3239,7 @@
     <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"স্ক্রিনের উপরে স্ট্যাটাস বার লুকান"</string>
     <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"অ্যাপ আইকনে আসা বিজ্ঞপ্তির ডট লুকান"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"বিজ্ঞপ্তি এলেও স্লিপ মোড চালু রাখুন"</string>
-    <!-- no translation found for zen_mode_block_effect_list (4722887783222298295) -->
-    <skip />
+    <string name="zen_mode_block_effect_list" msgid="4722887783222298295">"পুল-ডাউন শেড থেকে লুকান"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"কখনও না"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"যখন স্ক্রিন বন্ধ থাকে"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="6017536991063513394">"যখন স্ক্রিন চালু থাকে"</string>
@@ -3312,7 +3296,7 @@
     <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"\'বিরক্ত করবেন না\' মোড চালু থাকলে আপনি উপরে যে আইটেমগুলি ব্যতিক্রম হিসেবে চিহ্নিত করবেন সেগুলি ছাড়া বাকি সমস্ত মেসেজ, রিমাইন্ডার এবং ইভেন্ট মিউট করা হবে। আপনার বন্ধুবান্ধব, পরিবারের সদস্য অথবা অন্য পরিচিতিরা যাতে আপনার সাথে যোগাযোগ করতে পারেন তার জন্য আপনি মেসেজের সেটিংস অ্যাডজাস্ট করে নিতে পারেন।"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"হয়ে গেছে"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"সেটিংস"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"বিজ্ঞপ্তি থেকে কোনওকিছু দেখা বা শোনা যাবে না"</string>
+    <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"বিজ্ঞপ্তি থেকে কোনও কিছু দেখা বা শোনা যাবে না"</string>
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"বিজ্ঞপ্তি থেকে কোনও সাউন্ড হবে না"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"আপনি কোনও বিজ্ঞপ্তি দেখতে বা শুনতে পাবেন না। যারা তারা চিহ্নিত পরিচিতি এবং আগে যারা ফোন করেছেন তারা আবার ফোন করতে পারবেন।"</string>
     <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(বর্তমান সেটিং)"</string>
@@ -3336,8 +3320,7 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"গত ৭ দিন থেকে সব দেখুন"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"উন্নত"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"কর্মস্থলের বিজ্ঞপ্তিগুলি"</string>
-    <!-- no translation found for smart_notifications_title (3702411478231865970) -->
-    <skip />
+    <string name="smart_notifications_title" msgid="3702411478231865970">"অ্যাডাপটিভ বিজ্ঞপ্তি"</string>
     <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"অটোমেটিক অগ্রাধিকার"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"কম অগ্রাধিকার সম্পন্ন বিজ্ঞপ্তি অটোমেটিক সাইলেন্ট মোডে সেট করা থাকে"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"সাজেস্ট করা অ্যাকশন ও উত্তর"</string>
@@ -3354,9 +3337,18 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="3616822820657195387">"এই অ্যাপে বুদবুদ চালু করতে, প্রথমে আপনার ডিভাইসে চালু করতে হবে। এটা অন্য অ্যাপকেও প্রভাবিত করে যেখানে আগে বুদবুদ চালু করা ছিল।"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="5317196831268846883">"ডিভাইস চালু করুন"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8176870537170586852">"বাতিল করুন"</string>
-    <string name="swipe_direction_title" msgid="6877543492435053137">"অ্যাকশন সোয়াইপ করুন"</string>
-    <string name="swipe_direction_ltr" msgid="3623394320915041215">"খারিজ করতে বাঁ দিকে সোয়াইপ করুন, মেনু দেখতে ডান দিকে সোয়াইপ করুন"</string>
-    <string name="swipe_direction_rtl" msgid="4972099509548044938">"খারিজ করার জন্য বাঁ দিকে সোয়াইপ করুন, মেনু দেখতে ডান দিকে সোয়াইল করুন"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"সোয়াইপ অ্যাকশন"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"খারিজ করতে ডান দিকে সোয়াইপ করুন, মেনু দেখতে বাঁ দিকে সোয়াইপ করুন"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"খারিজ করার জন্য বাঁ দিকে সোয়াইপ করুন, মেনু দেখতে ডান দিকে সোয়াইপ করুন"</string>
+    <string name="gentle_notifications_title" msgid="3976374971153475110">"সবিনয় বিজ্ঞপ্তি"</string>
+    <string name="gentle_notifications_also_display" msgid="6455360420411828133">"এছাড়া এতে দেখানো হয়"</string>
+    <string name="gentle_notifications_display_status" msgid="2904115658980383410">"স্ট্যাটাস বার"</string>
+    <string name="gentle_notifications_display_lock" msgid="1395567209329239992">"লক স্ক্রিন"</string>
+    <string name="gentle_notifications_education" msgid="8713358646047345762">"সবিনয় বিজ্ঞপ্তি কখনই বিরক্ত করে না এবং সবসময় পুল-ডাউন শেডে দেখানো হয়"</string>
+    <string name="gentle_notifications_display_summary_shade" msgid="6583107817329430916">"শুধু পুল-ডাউন শেডে দেখানো হয়"</string>
+    <string name="gentle_notifications_display_summary_shade_lock" msgid="1434426811760016414">"পুল-ডাউন শেড ও লক স্ক্রিনে দেখানো হয়"</string>
+    <string name="gentle_notifications_display_summary_shade_status" msgid="6113566548809874319">"পুল-ডাউন শেড ও স্ট্যাটাস বারে দেখানো হয়"</string>
+    <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"পুল-ডাউন শেড, স্ট্যাটাস বার ও লক স্ক্রিনে দেখানো হয়"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"মিটমিট করা আলো"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"লক স্ক্রিন"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"কাজের প্রোফাইল লক করা থাকলে"</string>
@@ -3391,22 +3383,17 @@
     <string name="allow_interruption" msgid="7136150018111848721">"বিরক্ত করার অনুমতি দিন"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"অ্যাপটিকে আওয়াজ করতে, ভাইব্রেট করতে, এবং স্ক্রিনে বিজ্ঞপ্তি দেখাতে দিন"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"পুল-ডাউন শেডে বিজ্ঞপ্তিগুলিকে একটি লাইনের মধ্যে দেখুন"</string>
-    <!-- no translation found for notification_channel_summary_low (7875385321253491191) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status (7866565328564018007) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_lock (4009247523075328235) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status_lock (3668028634045057230) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (4618537204284469990) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"আপনি যাতে বিরক্ত না হন, তার জন্য শুধুমাত্র পুল-ডাউন শেডে এই বিজ্ঞপ্তি দেখায়। সবসময় সাইলেন্ট।"</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"অগ্রাধিকারযুক্ত বিজ্ঞপ্তির নিচে দেখানো হয়। সবসময় সাইলেন্ট।"</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"অগ্রাধিকারযুক্ত বিজ্ঞপ্তির নিচে দেখানো হয়। সবসময় সাইলেন্ট।"</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"অগ্রাধিকারযুক্ত বিজ্ঞপ্তির নিচে দেখানো হয়। সবসময় সাইলেন্ট।"</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"সাউন্ড ও স্ট্যাটাস বার আইকনের সাহায্যে দৃষ্টি আকর্ষণ করে। এটি লক স্ক্রিনে দেখা যায়।"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"কোনও ডিভাইস আনলক করা হলে বিজ্ঞপ্তি, স্ক্রিনের উপরে একটি ব্যানার হিসেবে দেখানো হয়"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"বিজ্ঞপ্তি দেখুন"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"অ্যাডাপটিভ বিজ্ঞপ্তি"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
-      <item quantity="one">প্রতিদিন ~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি</item>
-      <item quantity="other">প্রতিদিন ~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি প্রতিদিন</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি প্রতিদিন</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="5096638662520720959">
       <item quantity="one">প্রতি সপ্তাহে ~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি</item>
@@ -3443,7 +3430,7 @@
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"ছবির-মধ্যে-ছবি"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"ছবির-মধ্যে-ছবি তৈরির অনুমতি দিন"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="1264019085827708920">"অ্যাপটি খোলা থাকার সময় অথবা আপনি এটি ছেড়ে বেরিয়ে গেলে (যেমন, কোনও ভিডিও দেখার জন্য) এটিকে একটি ছবির-মধ্যে-ছবি সমেত উইন্ডো তৈরি করার অনুমতি দিন। চালু থাকা অন্যান্য অ্যাপের উপরে এই উইন্ডোটি দেখা যাবে।"</string>
-    <string name="manage_zen_access_title" msgid="2611116122628520522">"বিরক্ত করবেন না অ্যাক্সেস করুন"</string>
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"বিরক্ত করবেন না মোডের ক্ষেত্রে অ্যাক্সেস"</string>
     <string name="zen_access_detail_switch" msgid="1188754646317450926">"\'বিরক্ত করবেন না\' মোডের জন্য অনুমতি দিন"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ইনস্টল করা নেই এমন অ্যাপগুলি বিরক্ত করবেন না অ্যাক্সেস করুন এর অনুরোধ জানিয়েছে"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"অ্যাপ্লিকেশানগুলি লোড করা হচ্ছে..."</string>
@@ -3493,7 +3480,7 @@
     <string name="zen_mode_rule_name_warning" msgid="3856485373110366912">"সময়সূচির নাম আগে থেকেই ব্যবহার করা হচ্ছে"</string>
     <string name="zen_mode_add_rule" msgid="7459154136384467057">"আরও জুড়ুন"</string>
     <string name="zen_mode_add_event_rule" msgid="4454759739839069898">"ইভেন্টের সময়সূচি যোগ করুন"</string>
-    <string name="zen_mode_add_time_rule" msgid="7890557350868257760">"সময়সূচী যোগ করুন"</string>
+    <string name="zen_mode_add_time_rule" msgid="7890557350868257760">"সময়সূচি যোগ করুন"</string>
     <string name="zen_mode_delete_rule" msgid="8055032645990309096">"সময়সূচী মুছুন"</string>
     <string name="zen_mode_choose_rule_type" msgid="40993242338494595">"কলের সময়সূচি বেছে নিন"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"\"<xliff:g id="RULE">%1$s</xliff:g>\" নিয়ম মুছে ফেলবেন?"</string>
@@ -3512,7 +3499,7 @@
     <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"যেখানে উত্তর হল <xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"যেকোনো ক্যালেন্ডার"</string>
     <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"যেখানে উত্তর হল"</string>
-    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"হ্যাঁ, হয়তো বা উত্তর দেয় নি"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"হ্যাঁ, হয়তো বা উত্তর দেয়নি"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"হ্যাঁ অথবা হয়তো"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"হ্যাঁ"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"নিয়ম খুঁজে পাওয়া যায়নি৷"</string>
@@ -3532,18 +3519,16 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> থেকে <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="4769117032399813012">"কলের অনুমতি দিন"</string>
     <string name="zen_mode_calls_title" msgid="2905770092665685857">"কল"</string>
-    <string name="zen_mode_calls_footer" msgid="2002070641802102110">"আপনার ডিভাইসে অনুমতি দেওয়া আছে এমন নম্বর থেকে কল এলে ডিভাইসটিতে শোনা যাবে নিশ্চিত করতে, সেটি রিং ভাইব্রেশন, অথবা মিউট মোডে আছে কিনা দেখে নিন।"</string>
+    <string name="zen_mode_calls_footer" msgid="2002070641802102110">"আপনার ডিভাইসে অনুমতি দেওয়া আছে এমন নম্বর থেকে কল এলে রিং বাজবে কিনা নিশ্চিত করতে সেটি রিং, ভাইব্রেশন অথবা মিউট মোডে আছে কিনা দেখে নিন।"</string>
     <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’-এর জন্য ইনকামিং কল ব্লক করা হয়েছে। আপনার বন্ধুবান্ধব, পরিবারের সদস্য অথবা অন্য পরিচিতিরা যাতে আপনার সাথে যোগাযোগ করতে পারেন তার জন্য আপনি সেটিংস অ্যাডজাস্ট করে নিতে পারেন।"</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"তারা চিহ্নিত পরিচিতি"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
       <item quantity="one">আরও <xliff:g id="NUM_PEOPLE">%d</xliff:g>টি</item>
       <item quantity="other">আরও <xliff:g id="NUM_PEOPLE">%d</xliff:g>টি</item>
     </plurals>
-    <!-- no translation found for zen_mode_messages (6406892731721926170) -->
-    <skip />
-    <string name="zen_mode_messages_footer" msgid="2616568463646674149">"আপনার ডিভাইসে অনুমতি দেওয়া আছে এমন নম্বর থেকে মেসেজ এলে রিং বাজবে কিনা নিশ্চিত করতে, সেটি রিং ভাইব্রেশন অথবা মিউট মোডে আছে কিনা দেখে নিন।"</string>
-    <!-- no translation found for zen_mode_custom_messages_footer (800067279796770040) -->
-    <skip />
+    <string name="zen_mode_messages" msgid="6406892731721926170">"মেসেজের অনুমতি দিন"</string>
+    <string name="zen_mode_messages_footer" msgid="2616568463646674149">"আপনার ডিভাইসে অনুমতি দেওয়া আছে এমন নম্বর থেকে মেসেজ এলে রিং বাজবে কিনা নিশ্চিত করতে সেটি রিং, ভাইব্রেশন অথবা মিউট মোডে আছে কিনা দেখে নিন।"</string>
+    <string name="zen_mode_custom_messages_footer" msgid="800067279796770040">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’-এর জন্য ইনকামিং মেসেজ ব্লক করা হয়েছে। আপনার বন্ধুবান্ধব, পরিবারের সদস্য অথবা অন্য পরিচিতিরা যাতে আপনার সাথে যোগাযোগ করতে পারেন তার জন্য আপনি সেটিংস অ্যাডজাস্ট করে নিতে পারেন।"</string>
     <string name="zen_mode_messages_title" msgid="7325983674655986445">"এসএমএস, এমএমএস এবং মেসেজিং অ্যাপ"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"যে কোনো ব্যক্তির কাছ থেকে"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"শুধুমাত্র পরিচিতিদের থেকে"</string>
@@ -3554,7 +3539,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"কোনো কিছুই নয়"</string>
     <string name="zen_mode_from_none_calls" msgid="7705112158761351044">"কলের অনুমতি দেবেন না"</string>
     <string name="zen_mode_from_none_messages" msgid="3300937656725582608">"কোনও মেসেজের অনুমতি নেই"</string>
-    <string name="zen_mode_alarms" msgid="6510378757005935647">"অ্যালার্মকে অনুমতি দিন"</string>
+    <string name="zen_mode_alarms" msgid="6510378757005935647">"অ্যালার্ম বাজার অনুমতি দিন"</string>
     <string name="zen_mode_alarms_list" msgid="1090332840207025714">"অ্যালার্ম"</string>
     <string name="zen_mode_media" msgid="4529187475698084320">"মিডিয়া সাউন্ড চালান"</string>
     <string name="zen_mode_media_list" msgid="5483540766397328038">"মিডিয়া"</string>
@@ -3575,7 +3560,7 @@
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"তারা চিহ্নিত পরিচিতি"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"রিপিট কলার"</string>
     <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"রিপিট কলার"</string>
-    <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"রিপিট কলারের অনুমতি দিন"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"রিপিট কলারদের অনুমতি দিন"</string>
     <string name="zen_mode_calls_summary_one" msgid="1711737896388108388">"<xliff:g id="CALLER_TYPE">%1$s</xliff:g> থেকে অনুমতি দিন"</string>
     <string name="zen_mode_calls_summary_two" msgid="8476861928783654064">"<xliff:g id="CALLER_TYPE">%1$s</xliff:g> ও <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>-এর থেকে অনুমতি দিন"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"একই ব্যক্তি <xliff:g id="MINUTES">%d</xliff:g> মিনিটের ভিতরে দ্বিতীয়বার কল করলে"</string>
@@ -3733,7 +3718,7 @@
     <string name="system_app" msgid="9068313769550747372">"(সিস্টেম)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(সিস্টেম ডিফল্ট)"</string>
     <string name="apps_storage" msgid="4353308027210435513">"অ্যাপ্লিকেশনের স্টোরেজ"</string>
-    <string name="usage_access" msgid="5479504953931038165">"ব্যবহার অ্যাক্সেস"</string>
+    <string name="usage_access" msgid="5479504953931038165">"ব্যবহারের তথ্যে অ্যাক্সেস"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"ব্যবহার অ্যাক্সেসের অনুমতি"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"পছন্দের অ্যাপ্লিকেশানগুলির ব্যবহার"</string>
     <string name="time_spent_in_app_pref_title" msgid="9124796405314626532">"স্ক্রিন টাইম"</string>
@@ -3871,7 +3856,7 @@
     <string name="write_settings" msgid="4797457275727195681">"সিস্টেম সেটিংস সংশোধন করুন"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"সিস্টেম সেটিংস সংশোধন করা লেখা"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_1">%2$d</xliff:g>টির মধ্যে <xliff:g id="COUNT_0">%1$d</xliff:g>টি অ্যাপ্লিকেশানকে সিস্টেম সেটিংস সংশোধন করার অনুমতি দেওয়া হয়েছে"</string>
-    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"ফিন্যান্সিয়াল অ্যাপ এসএমএস অ্যাক্সেস"</string>
+    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"ফিন্যান্সিয়াল অ্যাপের দ্বারা এসএমএস অ্যাক্সেস"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"অন্যান্য অ্যাপ ইনস্টল করতে সক্ষম"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"সিস্টেম সেটিংস সংশোধন করতে পারে"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"সিস্টেম সেটিংস সংশোধন করতে পারে"</string>
@@ -4207,7 +4192,7 @@
     <string name="web_action_enable_summary" msgid="3108127559723396382">"অ্যাপ ইনস্টল করা না থাকলেও অ্যাপের মাধ্যমে লিঙ্ক খুলুন"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"ঝটপট অ্যাপগুলি"</string>
     <string name="instant_apps_settings" msgid="8827777916518348213">"ঝটপট অ্যাপের পছন্দগুলি"</string>
-    <string name="domain_url_section_title" msgid="7046835219056428883">"ইনস্টল করা অ্যাপ্স"</string>
+    <string name="domain_url_section_title" msgid="7046835219056428883">"ইনস্টল করা অ্যাপ"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"আপনার স্টোরেজ এখন স্টোরেজ ম্যানেজারের দ্বারা পরিচালিত হচ্ছে"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> এর অ্যাকাউন্ট"</string>
     <string name="configure_section_header" msgid="7391183586410814450">"কনফিগার"</string>
@@ -4307,7 +4292,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(ইউজার <xliff:g id="USER">%s</xliff:g> এর জন্য অক্ষম হয়েছে)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"আটোফিল পরিষেবা"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"স্বতঃ, পূরণ, স্বতঃপূরণ"</string>
-    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;নিশ্চিত করুন যে এই অ্যাপটি বিশ্বাসযোগ্য&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; কোনও তথ্য নিজে থেকে পূরণ করা যাবে কি না, তা নির্ণয় করতে &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; অ্যাপটি আপনার স্ক্রিনে যা দেখা যাচ্ছে সেই অনুযায়ী সিদ্ধান্ত নেয়।"</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;নিশ্চিত করুন যে এই অ্যাপটি বিশ্বাসযোগ্য&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; কোনও তথ্য নিজে থেকে পূরণ করা যাবে কিনা, তা নির্ণয় করতে &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; অ্যাপটি আপনার স্ক্রিনে যা দেখা যাচ্ছে সেই অনুযায়ী সিদ্ধান্ত নেয়।"</string>
     <string name="debug_autofill_category" msgid="8050326960545979035">"অটো-ফিল"</string>
     <string name="autofill_logging_level_title" msgid="899483289251346778">"লগ-ইন লেভেল"</string>
     <string name="autofill_max_partitions" msgid="7590272120101271461">"প্রতি সেশনের সবচেয়ে বেশি অনুরোধ"</string>
@@ -4562,10 +4547,8 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"লোকেশন"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"এই পরিষেবা প্রদান করতে পরিষেবা প্রদানকারী আপনার লোকেশনের তথ্য সংগ্রহ করতে পারে।\n\nআপনার পরিষেবা প্রদানকারীর গোপনীয়তা নীতি দেখুন।"</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"বাকি সময় বা ডেটাতে আপনি অ্যাক্সেস হারাতে পারেন। সরানোর আগে প্রদানকারীর সাথে যোগাযোগ করুন।"</string>
-    <!-- no translation found for keywords_content_capture (8252675452668954083) -->
-    <skip />
-    <!-- no translation found for content_capture (3210232615756364639) -->
-    <skip />
+    <string name="keywords_content_capture" msgid="8252675452668954083">"কন্টেন্ট ক্যাপচার, অ্যাপের কন্টেন্ট"</string>
+    <string name="content_capture" msgid="3210232615756364639">"অ্যাপের কন্টেন্ট"</string>
     <string name="content_capture_summary" msgid="659506647507221852">"অ্যাপকে Android সিস্টেমে কন্টেন্ট পাঠানোর অনুমতি দিন"</string>
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"সিস্টেমের হিপ ডাম্প ক্যাপচার করুন"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"সিস্টেমের হিপ ডাম্প ক্যাপচার করা হচ্ছে"</string>
