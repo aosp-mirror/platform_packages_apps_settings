@@ -146,10 +146,6 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
                     FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
 
             metricsFeatureProvider.action(mContext,
-                    SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW,
-                    ContextualCardLogUtils.buildCardListLog(visibleCards));
-
-            metricsFeatureProvider.action(mContext,
                     SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW,
                     ContextualCardLogUtils.buildCardListLog(hiddenCards));
         }

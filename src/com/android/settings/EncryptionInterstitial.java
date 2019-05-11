@@ -84,8 +84,7 @@ public class EncryptionInterstitial extends SettingsActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
+        findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
     public static class EncryptionInterstitialFragment extends InstrumentedFragment {

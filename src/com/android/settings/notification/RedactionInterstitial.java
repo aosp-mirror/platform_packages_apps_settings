@@ -33,7 +33,6 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -74,12 +73,12 @@ public class RedactionInterstitial extends SettingsActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
+        findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
     /**
      * Create an intent for launching RedactionInterstitial.
+     *
      * @return An intent to launch the activity is if is available, @null if the activity is not
      * available to be launched.
      */
@@ -87,8 +86,8 @@ public class RedactionInterstitial extends SettingsActivity {
         return new Intent(ctx, RedactionInterstitial.class)
                 .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID,
                         UserManager.get(ctx).isManagedProfile(userId)
-                            ? R.string.lock_screen_notifications_interstitial_title_profile
-                            : R.string.lock_screen_notifications_interstitial_title)
+                                ? R.string.lock_screen_notifications_interstitial_title_profile
+                                : R.string.lock_screen_notifications_interstitial_title)
                 .putExtra(Intent.EXTRA_USER_ID, userId);
     }
 
@@ -160,7 +159,7 @@ public class RedactionInterstitial extends SettingsActivity {
 
             checkNotificationFeaturesAndSetDisabled(mShowAllButton,
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS |
-                    KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
+                            KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
             checkNotificationFeaturesAndSetDisabled(mRedactSensitiveButton,
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
             loadFromSettings();

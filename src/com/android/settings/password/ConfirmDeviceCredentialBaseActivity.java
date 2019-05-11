@@ -96,8 +96,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
         if (mConfirmCredentialTheme == ConfirmCredentialTheme.NORMAL) {
             // Prevent the content parent from consuming the window insets because GlifLayout uses
             // it to show the status bar background.
-            LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-            layout.setFitsSystemWindows(false);
+            findViewById(R.id.content_parent).setFitsSystemWindows(false);
         }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         mIsKeyguardLocked = savedState == null
