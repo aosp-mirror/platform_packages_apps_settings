@@ -38,6 +38,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import com.android.settings.homepage.contextualcards.conditional.ConditionalCardController;
+import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -208,19 +209,26 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
         final List<ContextualCard> cardsToKeep = getCardsToKeep(cards);
 
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+
         //navigate back to the homepage, screen rotate or after card dismissal
         if (!mIsFirstLaunch) {
             onContextualCardUpdated(cardsToKeep.stream()
                     .collect(groupingBy(ContextualCard::getCardType)));
+            metricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW,
+                    ContextualCardLogUtils.buildCardListLog(cardsToKeep));
             return;
         }
 
-        final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
         final long timeoutLimit = getCardLoaderTimeout();
         if (loadTime <= timeoutLimit) {
             onContextualCardUpdated(cards.stream()
                     .collect(groupingBy(ContextualCard::getCardType)));
+            metricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW,
+                    ContextualCardLogUtils.buildCardListLog(cards));
         } else {
             // log timeout occurrence
             metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
