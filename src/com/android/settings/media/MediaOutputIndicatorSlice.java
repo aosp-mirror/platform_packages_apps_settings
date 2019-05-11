@@ -90,7 +90,7 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     private Intent getMediaOutputSliceIntent() {
         final Intent intent = new Intent()
                 .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
 

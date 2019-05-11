@@ -888,6 +888,12 @@
     <string name="security_settings_face_preference_summary_none">Tap to set up face authentication</string>
     <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
     <string name="security_settings_face_preference_title">Face authentication</string>
+    <!-- Introduction title shown in face enrollment education screen [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_education_title">How to set up Face unlock</string>
+    <!-- Introduction title shown in face enrollment education screen to show the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_education_title_unlock_disabled">Use your face to authenticate</string>
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message"></string>
     <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
     <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
     <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
@@ -908,8 +914,12 @@
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled">Use your face to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your face to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Introduction detail message shown in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_message_setup">Use your face to unlock your phone, authorize purchases, or sign in to apps</string>
-    <!-- Introduction detail message shown in face enrollment that provides extra detais. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_enroll_introduction_footer_message"></string>
+    <!-- Introduction message shown in face enrollment that provides extra detail. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_footer_part_1"></string>
+    <!-- Introduction message shown in face enrollment that provides extra detail. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_footer_part_2"></string>
+    <!-- Introduction message shown in face enrollment that provides extra detail. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_footer_part_3"></string>
     <!-- Title shown in face enrollment dialog [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_repeat_title">Center your face in the circle</string>
     <!-- Button text to skip enrollment of face [CHAR LIMIT=40] -->
@@ -5070,8 +5080,9 @@
 
     <!-- Title for a warning about security implications of enabling an accessibility
          service. [CHAR LIMIT=NONE] -->
-    <string name="enable_service_title">Use
-         <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
+    <string name="enable_service_title">Allow
+         <xliff:g id="service" example="TalkBack">%1$s</xliff:g> to have full contol of your
+        device?</string>
     <!-- Title for the list of capabilities of an accessibility service. -->
     <string name="capabilities_list_title"><xliff:g id="service" example="TalkBack">%1$s</xliff:g>
         needs to:</string>
@@ -5112,11 +5123,43 @@
         This level of control is not appropriate for most apps.
     </string>
 
+    <!-- Warning description that explains that it's appropriate for accessibility
+         services to have full control to help users with accessibility needs. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_warning_description">Full control is appropriate for apps
+        that help you with accessibility needs, but not for most apps.
+    </string>
+
+    <!-- Title for the screen control in accessibility dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_screen_control_title">View and control screen</string>
+
+    <!-- Description for the screen control in accessibility dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_screen_control_description">It can read all content on the
+        screen and display content over other apps.
+    </string>
+
+    <!-- Title for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_action_perform_title">View and platform actions</string>
+
+    <!-- Description for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_action_perform_description">It can track your interactions
+        with an app or a hardware sensor, and interact with apps on your behalf.
+    </string>
+
+    <!-- String for the allow button in accessibility permission dialog. [CHAR LIMIT=10] -->
+    <string name="accessibility_dialog_button_allow">Allow</string>
+    <!-- String for the deny button in accessibility permission dialog. [CHAR LIMIT=10] -->
+    <string name="accessibility_dialog_button_deny">Deny</string>
+
+    <!-- String for the allow button in accessibility permission dialog. [CHAR LIMIT=10] -->
+    <string name="accessibility_dialog_button_stop">Stop</string>
+    <!-- String for the deny button in accessibility permission dialog. [CHAR LIMIT=10] -->
+    <string name="accessibility_dialog_button_cancel">Cancel</string>
+
     <!-- Title for a warning about disabling an accessibility service. [CHAR LIMIT=NONE] -->
     <string name="disable_service_title">Stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
     <!-- Message for a warning about disabling accessibility service. [CHAR LIMIT=NONE] -->
-    <string name="disable_service_message">Tapping OK will
-        stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>.</string>
+    <string name="disable_service_message">Tapping <xliff:g id="stop" example="Stop">%1$s</xliff:g> will
+        stop <xliff:g id="service" example="TalkBack">%2$s</xliff:g>.</string>
 
     <!-- Title for the prompt shown as a placeholder if no accessibility services are installed. [CHAR LIMIT=50] -->
     <string name="accessibility_no_services_installed">No services installed</string>
@@ -10500,9 +10543,9 @@
     <!-- Note displayed when certain features are not available on low ram devices. [CHAR LIMIT=NONE] -->
     <string name="disabled_low_ram_device">This feature is not available on this device</string>
     <!-- Note displayed when certain features are not available. [CHAR LIMIT=NONE] -->
-    <string name="disabled_feature">This feature is not available</string>
+    <string name="disabled_feature">Feature not available</string>
     <!-- Note displayed to explain that a feature is not available because it will slow down the phone. [CHAR LIMIT=NONE] -->
-    <string name="disabled_feature_reason_slow_down_phone">It will slow down this phone</string>
+    <string name="disabled_feature_reason_slow_down_phone">This feature has been turned off because it slows down your phone</string>
 
     <!-- UI debug setting: preference title - enforce full raw GNSS satellite measurements [CHAR LIMIT=60] -->
     <string name="enable_gnss_raw_meas_full_tracking">Force full GNSS measurements</string>

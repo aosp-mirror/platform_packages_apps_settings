@@ -333,7 +333,7 @@
     <string name="date_time_24hour" msgid="1193032284921000063">"24 گھنٹے کا فارمیٹ استعمال کریں"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"وقت"</string>
     <string name="time_format_category_title" msgid="736190761036057769">"ٹائم فارمیٹ"</string>
-    <string name="date_time_set_timezone_title" msgid="3047322337368233197">"منطقۂ وقت"</string>
+    <string name="date_time_set_timezone_title" msgid="3047322337368233197">"ٹائم زون"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"ٹائم زون منتخب کریں"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"تاریخ"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"علاقہ تلاش کریں"</string>
@@ -374,9 +374,9 @@
     <string name="location_settings_title" msgid="1369675479310751735">"مقام"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"مقام استعمال کریں"</string>
     <string name="location_settings_summary_location_off" msgid="794370259612167176">"آف ہے"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="5222949914335428617">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> - پر اپپس مقام تک رسائی حاصل کر سکتی ہے</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> - پر اپپ مقام تک رسائی حاصل کر سکتی ہے</item>
+    <plurals name="location_settings_summary_location_on" formatted="false" msgid="5513447650619485188">
+      <item quantity="other"> - <xliff:g id="COUNT_1">%1$d</xliff:g> ایپس پر مقام تک رسائی حاصل ہے</item>
+      <item quantity="one"> - <xliff:g id="COUNT_0">%1$d</xliff:g> ایپ پر مقام تک رسائی حاصل ہے</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="8523775367089431611">"لوڈ ہو رہی ہے…"</string>
     <string name="account_settings_title" msgid="626177544686329806">"اکاؤنٹس"</string>
@@ -421,16 +421,17 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"چہرے کا اندراج نہیں ہوا۔"</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"سب کچھ ہو گیا ہے۔ اچھا لگ رہا ہے۔"</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"ہو گیا"</string>
-    <string name="security_settings_face_settings_use_face_category" msgid="4102604281840004724">"اپنا چہرہ یوز کریں"</string>
-    <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5275635645351823301">"اپنا آلہ ان لاک کریں"</string>
+    <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"چہرہ ان لاک استعمال کریں"</string>
+    <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"اپنا فون ان لاک کریں"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"ایپ سائن ان اور ادائیگی"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"غیر مقفل کرنے کیلئے آنکھیں کھلی ہونا"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"چہرے کی شناخت کرتے وقت، آپ کی آنکھیں کھلی ہونی چاہئیں"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"ہمیشہ تصدیق طلب کریں"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="2002651109571928756">"ایپس میں توثیق کرتے وقت، ہمیشہ تصدیق طلب کریں"</string>
-    <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"چہرے کا ڈیتا ہٹائیں"</string>
-    <string name="security_settings_face_settings_enroll" msgid="8921299174877503544">"چہرے سے تصدیق سیٹ اپ کریں"</string>
-    <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"آپ کے چہرے کے استعمال سے آپ آلہ غیر مقفل کیا جا سکتا ہے اور ایپس تک رسائی حاصل کی جا سکتی ہے۔ "<annotation id="url">"مزید جانیں"</annotation></string>
+    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"چہرے کے ذریعے غیر مقفل کرنا درکار ہے"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"کھلی آنکھیں اسکرین دیکھ رہی ہیں"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"فون ان لاک کرنے کیلئے، کھلی ہوئی آنکھوں سے اسکرین کو ہمیشہ دیکھنا ہے"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"بٹن کی تصدیق کریں"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"ایپس کے لیے توثیق کرتے وقت، ہمیشہ تصدیق طلب کریں"</string>
+    <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"چہرے کا ڈیٹا حذف کریں"</string>
+    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"نئے چہرے کے ذریعے غیر مقفل کرنا ترتیب دیں"</string>
+    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"اپنے آلہ کو غیر مقفل کرنے، ایپس میں سائن ان کرنے اور ادائیگیوں کی تصدیق کرنے کے لیے چہرے کے ذریعے غیر مقفل کرنے کا استعمال کریں۔\n\nیاد رکھیں:\nجب آپ کا ارادہ نہ ہو تو فون پر دیکھتے ہوئے اسے غیر مقفل کر سکتے ہیں۔\n\nآپ کی آنکھیں کھلی ہونے پر کوئی اور شخص فون کو آپ کے چہرے کے سامنے رکھ کر آپ کے فون کو غیر مقفل کر سکتا ہے۔\n\nآپ کی طرح بہت زيادہ نظر آنے والے کسی بھی شخص، جیسے آپ کے بچے یا آپ جیسے آپ کے بھائی بہن کے ذریعے آپ کا فون غیر مقفل کیا جا سکتا ہے۔"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"چہرے کا ڈیٹا حذف کریں؟"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"‏چہرے کے ذریعے غیر مقفل کر کے ریکارڈ کردہ ڈیٹا کو مستقل اور محفوظ طور پر حذف کر دیا جائے گا۔ ہٹانے کے بعد، آپ کو اپنا فون غیر مقفل کرنے، ایپس میں سائن ان کرنے اور ادائیگیوں کی تصدیق کرنے کے لیے اپنا PIN، پیٹرن یا پاس ورڈ درکار ہوگا۔"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"فنگر پرنٹ"</string>
@@ -480,12 +481,12 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"اسے بعد میں کریں"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"فنگر پرنٹ سیٹ اپ نظر انداز کریں؟"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"آپ نے اپنا فون غیر مقفل کرنے کیلئے ایک طریقہ اپنے فنگرپرنٹ کا استعمال منتخب کیا ہے۔ اگر آپ اب نظر انداز کرتے ہیں تو آپ کو اسے بعد میں سیٹ اپ کرنا ہوگا۔ سیٹ اپ میں کم و بیش ایک منٹ کا وقت لگتا ہے۔"</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"‏اپنے ٹیبلیٹ کو اسکرین لاک کے اختیار کے ساتھ محفوظ رکھیں تاکہ گم یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر سکے۔ فنگر پرنٹ کو سیٹ اپ کرنے کی خاطر آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN سیٹ کریں یا اسکرین لاک کا کوئی دوسرا اختیار منتخب کریں۔"</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"‏اپنے آلہ کو اسکرین لاک کے اختیار کے ذریعے محفوظ رکھیں تاکہ گم یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر سکے۔ فنگر پرنٹ کو سیٹ اپ کرنے کی خاطر آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN سیٹ کریں یا اسکرین لاک کا کوئی دوسرا اختیار منتخب کریں۔"</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"‏اپنے فون کو اسکرین لاک کے اختیار سے محفوظ رکھیں تاکہ گمشدہ یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر پائے۔ فنگر پرنٹ کو سیٹ اپ کرنے کی خاطر آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN سیٹ کریں یا اسکرین لاک کا کوئی دوسرا اختیار منتخب کریں۔"</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"‏اپنے ٹیبلیٹ کو اسکرین لاک کے اختیار کے ساتھ محفوظ رکھیں تاکہ گم یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر سکے۔ چہرے سے تصدیق کو سیٹ اپ کرنے کے لیے آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN سیٹ کریں یا اسکرین لاک کا کوئی دوسرا اختیار منتخب کریں۔"</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"‏اپنے آلہ کو اسکرین لاک کے اختیار کے ذریعے محفوظ رکھیں تاکہ گم یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر سکے۔ چہرے سے تصدیق کو سیٹ اپ کرنے کے لیے آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN سیٹ کریں یا اسکرین لاک کا کوئی دوسرا اختیار منتخب کریں۔"</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"‏اپنے فون کو اسکرین لاک کے اختیار سے محفوظ رکھیں تاکہ گمشدہ یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر پائے۔ چہرے سے تصدیق کو سیٹ اپ کرنے کے لیے آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN سیٹ کریں یا اسکرین لاک کا کوئی دوسرا اختیار منتخب کریں۔"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"‏اپنے ٹیبلیٹ کو اسکرین لاک کے اختیار کے ساتھ محفوظ رکھیں تاکہ گم یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر سکے۔ فنگر پرنٹ کو سیٹ اپ کرنے کی خاطر آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN، پیٹرن یا پاس ورڈ سیٹ کریں۔"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"‏اپنے آلہ کو اسکرین لاک کے اختیار کے ذریعے محفوظ رکھیں تاکہ گم یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر سکے۔ فنگر پرنٹ کو سیٹ اپ کرنے کی خاطر آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN، پیٹرن یا پاس ورڈ سیٹ کریں۔"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"‏اپنے فون کو اسکرین لاک کے اختیار سے محفوظ رکھیں تاکہ گمشدہ یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر پائے۔ فنگر پرنٹ کو سیٹ اپ کرنے کی خاطر آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN، پیٹرن یا پاس ورڈ سیٹ کریں۔"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"‏اپنے ٹیبلیٹ کو اسکرین لاک کے اختیار کے ساتھ محفوظ رکھیں تاکہ گم یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر سکے۔ چہرے سے تصدیق کو سیٹ اپ کرنے کے لیے آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN، پیٹرن یا پاس ورڈ سیٹ کریں۔"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"‏اپنے آلہ کو اسکرین لاک کے اختیار کے ذریعے محفوظ رکھیں تاکہ گم یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر سکے۔ چہرے سے تصدیق کو سیٹ اپ کرنے کے لیے آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN، پیٹرن یا پاس ورڈ سیٹ کریں۔"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"‏اپنے فون کو اسکرین لاک کے اختیار سے محفوظ رکھیں تاکہ گمشدہ یا چوری ہونے پر بھی کوئی اس کا استعمال نہ کر پائے۔ چہرے سے تصدیق کو سیٹ اپ کرنے کے لیے آپ کے لیے اسکرین لاک کا اختیار بھی ضروری ہے۔ \'منسوخ کريں\' پر تھپتھپائیں، پھر PIN، پیٹرن یا پاس ورڈ سیٹ کریں۔"</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"‏PIN سیٹ اپ کو نظر انداز کریں؟"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"پاس ورڈ کے سیٹ اپ نظر انداز کریں؟"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"پیٹرن کے سیٹ اپ نظر انداز کریں؟"</string>
@@ -657,7 +658,7 @@
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"بہت زیادہ غلط کوششیں۔ یہ دفتری پروفائل اور اس کا ڈیٹا حذف کر دیا جائے گا۔"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"برخاست کریں"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
-      <item quantity="other">کم از کم <xliff:g id="COUNT_1">%d</xliff:g> حروف پر مشتمل ہونے چاہئیں</item>
+      <item quantity="other">کم از کم <xliff:g id="COUNT_1">%d</xliff:g> حروف پر مشتمل ہونا چاہیے</item>
       <item quantity="one">کم از کم <xliff:g id="COUNT_0">%d</xliff:g> حرف پر مشتمل ہونا چاہیے</item>
     </plurals>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
@@ -778,6 +779,7 @@
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"آپ کے فون کو <xliff:g id="DEVICE_NAME">%1$s</xliff:g> کے ساتھ مزید نہیں جوڑا جائے گا"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"آپ کے ٹیبلیٹ کو <xliff:g id="DEVICE_NAME">%1$s</xliff:g> کے ساتھ مزید نہیں جوڑا جائے گا"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"آپ کے آلہ کو <xliff:g id="DEVICE_NAME">%1$s</xliff:g> کے ساتھ مزید نہیں جوڑا جائے گا"</string>
+    <string name="bluetooth_untethered_unpair_dialog_body" msgid="5932168717642676140">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> اس اکاؤنٹ سے لنک کردہ کسی بھی آلہ کے ساتھ مزید نہیں جوڑا جائے گا"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"آلہ بھول جائیں"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"اس سے مربوط ہوں…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> میڈیا آڈیو سے منقطع ہو جائے گا۔"</string>
@@ -1024,7 +1026,10 @@
       <item quantity="other">‏‎%d سبسکرپشنز</item>
       <item quantity="one">1 سبسکرپشن</item>
     </plurals>
-    <!-- no translation found for wifi_saved_all_access_points_summary (149386761654596280) -->
+    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="2504425359919617586">
+      <item quantity="other">‏‎%d نیٹ ورک اور سبسکرپشنز</item>
+      <item quantity="one">1 نیٹ ورک اور سبسکرپشن</item>
+    </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"‏جدید Wi‑Fi"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"‏MAC پتہ"</string>
@@ -1097,19 +1102,10 @@
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"رومنگ کی ترجیح"</string>
-  <string-array name="wifi_calling_mode_choices">
-    <item msgid="772621647207148279">"‎@*android:string/wfc_mode_wifi_preferred_summary"</item>
-    <item msgid="2226422868199612072">"‎@*android:string/wfc_mode_cellular_preferred_summary"</item>
-    <item msgid="7041954411163832397">"‎@*android:string/wfc_mode_wifi_only_summary"</item>
-  </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
     <item msgid="7715869266611010880">"موبائل"</item>
     <item msgid="2838022395783120596">"‏صرف Wi-Fi"</item>
-  </string-array>
-  <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="4430473354160964286">"‎@*android:string/wfc_mode_wifi_preferred_summary"</item>
-    <item msgid="5965810717958113109">"‎@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1256,6 +1252,8 @@
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"وال پیپر تبدیل کریں"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"اپنی اسکرین کو ذاتی نوعیت کا بنائیں"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"وال پیپر منتخب کریں منجانب"</string>
+    <string name="style_suggestion_title" msgid="4710867417147087928">"‏اپنے Pixel کو حسب ضرورت بنائیں"</string>
+    <string name="style_suggestion_summary" msgid="4592087484229499188">"مختلف طرزیں، والپیپرز، گھڑیاں وغیرہ آزمائیں"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"اسکرین سیور"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"ڈاک سے منسلک یا چارج ہونے کے دوران"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"دونوں صورتوں میں"</string>
@@ -1582,12 +1580,12 @@
     <string name="reset_dashboard_title" msgid="6254873816990678620">"ری سیٹ کے اختیارات"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"نیٹ ورک، ایپس، یا آلہ کو ری سیٹ کیا جا سکتا ہے"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"‏Wi-Fi، موبائل اور بلوٹوتھ ری سیٹ کریں"</string>
-    <string name="reset_network_desc" msgid="5547979398298881406">"‏یہ نیٹ ورک کی سبھی ترتیبات کو دوبارہ ترتیب دے گا، بشمول:\n\n"<li>"Wi‑Fi"</li>\n<li>"موبائل ڈیٹا"</li>\n<li>"بلوٹوتھ"</li></string>
+    <string name="reset_network_desc" msgid="5547979398298881406">"‏اس سے نیٹ ورک کی سبھی ترتیبات ری سیٹ ہو جائیں گی، بشمول:\n\n"<li>"Wi‑Fi"</li>\n<li>"موبائل ڈیٹا"</li>\n<li>"بلوٹوتھ"</li></string>
     <string name="reset_esim_title" msgid="1979762943163078939">"‏ڈاؤن لوڈ کردہ SIMs کو مٹائیں"</string>
     <string name="reset_esim_desc" msgid="5940105242448544634">"‏متبادل SIMs کو ڈاؤن لوڈ کرنے کے لیے، اپنے کیریئر سے رابطہ کریں۔ اس سے موبائل سروس کا کوئی بھی پلان منسوخ نہیں ہوگا۔"</string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"ترتیبات ری سیٹ کریں"</string>
     <string name="reset_network_final_desc" msgid="4690205209934596665">"نیٹ ورک کی سبھی ترتیبات کو دوبارہ ترتیب دیں؟ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
-    <string name="reset_network_final_desc_esim" msgid="6641433458865914227">"‏نیٹ ورک کی سبھی ترتیبات کو دوبارہ ترتیب دیں اور ڈاؤن لوڈ کردہ SIMs کو مٹائیں؟ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
+    <string name="reset_network_final_desc_esim" msgid="6641433458865914227">"‏نیٹ ورک کی سبھی ترتیبات کو ری سیٹ کریں اور ڈاؤن لوڈ کردہ SIMs کو مٹائیں؟ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"ترتیبات ری سیٹ کریں"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"ری سیٹ کریں؟"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"اس صارف کیلئے نیٹ ورک کو دوبارہ ترتیب دینا دستیاب نہیں ہے"</string>
@@ -1661,9 +1659,9 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"دفتری پروفائل کیلئے مقام"</string>
     <string name="location_app_level_permissions" msgid="2777033567595680764">"اپپ کی اجازت"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"مقام آف ہے"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="6755614454444493071">
-      <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> میں سے <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_2">%1$d</xliff:g> اپپس کو لا محدود رسائی حاصل ہے</item>
-      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> میں سے <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_0">%1$d</xliff:g> اپپس کو لا محدود رسائی حاصل ہے</item>
+    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="5336807018727349708">
+      <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> میں سے <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> ایپس کو مقام تک رسائی حاصل ہے</item>
+      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> میں سے <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> ایپس کو مقام تک رسائی حاصل ہے</item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"مقام تک حالیہ رسائی"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"تفصیلات دیکھیں"</string>
@@ -1671,7 +1669,7 @@
     <string name="location_no_recent_accesses" msgid="7489449862187886009">"حال میں کسی ایپ نے مقام تک رسائی حاصل نہیں کی ہے"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"بیٹری کا زیادہ استعمال"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"بیٹری کا کم استعمال"</string>
-    <string name="location_scanning_screen_title" msgid="2297479353298444503">"‏Wi-Fi اور بلوٹوتھ کے ذریعے اسکین کرنا"</string>
+    <string name="location_scanning_screen_title" msgid="2297479353298444503">"‏Wi-Fi اور بلوٹوتھ اسکیننگ"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"‏Wi‑Fi اسکیننگ"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"‏Wi‑Fi کے آف ہونے پر بھی ایپس اور سروسز کو کسی بھی وقت Wi‑Fi نیٹ ورکس اسکین کرنے کی اجازت دیں۔ مثال کے طور، اسے مقام پر مبنی خصوصیات اور سروسز کو بہتر بنانے کے لیے استعمال کیا جا سکتا ہے۔"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"بلوٹوتھ اسکیننگ"</string>
@@ -1857,7 +1855,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"ہنگامی ایپ"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"ایپ کی ترجیحات کو ری سیٹ کریں"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"ایپ کی ترجیحات کو ری سیٹ کریں؟"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"یہ مندرجہ ذیل کیلئے تمام ترجیحات کو دوبارہ ترتیب دے گا:\n\n "<li>"غیر فعال ایپس"</li>\n" "<li>"غیر فعال ایپس کی اطلاعات"</li>\n" "<li>"کارروائیوں کیلئے ڈیفالٹ ایپلیکیشنز"</li>\n" "<li>"ایپس کیلئے پس منظر کے ڈیٹا کی پابندیاں"</li>\n" "<li>"کوئی اجازتی پابندیاں"</li>\n\n" آپ کسی ایپ کے ڈیٹا سے محروم نہیں ہوں گے۔"</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"اس سے مندرجہ ذیل کیلئے تمام ترجیحات ری سیٹ ہو جائیں گی:\n\n "<li>"غیر فعال ایپس"</li>\n" "<li>"غیر فعال ایپس کی اطلاعات"</li>\n" "<li>"کارروائیوں کیلئے ڈیفالٹ ایپلیکیشنز"</li>\n" "<li>"ایپس کیلئے پس منظر کے ڈیٹا کی پابندیاں"</li>\n" "<li>"کوئی اجازتی پابندیاں"</li>\n\n" آپ کسی ایپ کے ڈیٹا سے محروم نہیں ہوں گے۔"</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"ایپس کو دوبارہ ترتیب دیں"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"خالی جگہ کا نظم کریں"</string>
     <string name="filter" msgid="2018011724373033887">"فلٹر"</string>
@@ -1971,7 +1969,7 @@
     <string name="auto_punctuate" msgid="4595367243950425833">"خود کار طور پر رموز اوقاف لگائیں"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"فزیکل کی بورڈ کی ترتیبات"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"\".\" کو داخل کرنے کیلئے اسپیس کلید کو دو بار دبائیں"</string>
-    <string name="show_password" msgid="4837897357002495384">"پاس ورڈ دکھائیں"</string>
+    <string name="show_password" msgid="4837897357002495384">"پاس ورڈز دکھائیں"</string>
     <string name="show_password_summary" msgid="3365397574784829969">"ٹائپ کرتے وقت حروف کو تھوڑی دیر کیلئے ڈسپلے کریں"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"یہ سپیل چیکر آپ کے ذریعے ٹائپ کردہ سبھی متن کو جمع کر سکتا ہے، بشمول ذاتی ڈیٹا جیسے پاس ورڈز اور کریڈٹ کارڈ نمبرز۔ یہ <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> ایپ سے آتا ہے۔ یہ سپیل چیکر استعمال کریں؟"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"ترتیبات"</string>
@@ -2063,7 +2061,7 @@
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"سکرین قاری بنیادی طور پر اندھے پن اور کم بصارت والے لوگوں کیلئے ہے"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"آئٹمز کو بہ آواز بلند پڑھتے ہوئے سننے کیلئے اپنی اسکرین پر ان آئٹمز کو تھپتھپائیں"</string>
-    <string name="accessibility_captioning_title" msgid="7589266662024836291">"کیپشنز"</string>
+    <string name="accessibility_captioning_title" msgid="8068289534732163115">"کیپشن کی ترجیحات"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"میگنیفکیشن"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"تین بار تھپتھپا کر بڑا کریں"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"بٹن سے بڑا کریں"</string>
@@ -2104,10 +2102,10 @@
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"پوائنٹر حرکت کے بعد کلک کا وقت"</string>
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"اگر آپ ماؤس استعمال کر رہے ہیں تو مخصوص وقت کے لئے کرسر کی حرکت موقوف ہونے پر آپ خودکار طور پر کارروائی کرنے کے لئے کرسر کو سیٹ کر سکتے ہیں۔"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"کلک سے قبل توقف"</string>
-    <string name="accessibility_vibration_settings_title" msgid="3453277326300320803">"وائبریشن"</string>
+    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"وائبریشن اور تھپتھپانے کی طاقت"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"اطلاع وائبریشن"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"رنگ وائبریشن"</string>
-    <string name="accessibility_touch_vibration_title" msgid="7931823772673770492">"ٹچ کرنے پر وائبریشن"</string>
+    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"تاثرات ٹچ کریں"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"سروس استعمال کریں"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"رنگ کی اصلاح استعمال کریں"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"کیپشنز استعمال کریں"</string>
@@ -2596,8 +2594,10 @@
     <string name="add_device_admin" msgid="4192055385312215731">"اس آلہ کے منتظم کی ایپ فعال کریں"</string>
     <string name="device_admin_add_title" msgid="3140663753671809044">"آلہ کا منتظم"</string>
     <string name="device_admin_warning" msgid="7482834776510188134">"اس منتظم کی ایپ فعال کرنے سے <xliff:g id="APP_NAME">%1$s</xliff:g> ایپ کو مندرجہ ذيل اعمال انجام دینے کی اجازت مل جائے گی:"</string>
+    <string name="device_admin_warning_simplified" msgid="8085544856342321981">"یہ آلہ <xliff:g id="APP_NAME">%1$s</xliff:g> کے ذریعے نظم اور نگرانی کیا جائے گا۔"</string>
     <string name="device_admin_status" msgid="7234814785374977990">"منتظم کی یہ ایپ فعال ہے اور <xliff:g id="APP_NAME">%1$s</xliff:g> ایپ کو مندرجہ ذیل اعمال انجام دینے کی اجازت دیتی ہے:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"پروفائل مینیجر کو فعال کریں؟"</string>
+    <string name="profile_owner_add_title_simplified" msgid="6856400286736117006">"نگرانی کی اجازت دیں؟"</string>
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"جاری رکھنے سے، آپ کا منتظم آپ کے صارف کا نظم کر‌ے گا جو آپ کے ذاتی ڈیٹا کے علاوہ وابستہ ڈیٹا کو بھی اسٹور کر سکتا ہے۔\n\nآپ کے منتظم کے پاس نیٹ ورک کی سرگرمی اور آپ کے آلہ کے مقام کی معلومات سمیت ترتیبات، رسائی، ایپس اور اس صارف کے ساتھ وابستہ ڈیٹا کو مانیٹر کرنے اور ان کا نظم کرنے کی اہلیت ہے۔"</string>
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"دیگر اختیارات آپ کے منتظم کی جانب سے غیر فعال کردہ ہیں"</string>
     <string name="admin_more_details" msgid="7901420667346456102">"مزید تفصیلات"</string>
@@ -2750,6 +2750,7 @@
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"‏میٹرڈ Wi‑Fi نیٹ ورکس"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"‏میٹرڈ نیٹ ورکس منتخب کرنے کیلئے، Wi‑Fi کو آن کریں۔"</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"خودکار"</string>
+    <string name="wifi_metered_title" msgid="5536703738895222444">"نیٹ ورک کا استعمال"</string>
     <string name="data_usage_metered_yes" msgid="9217539611385225894">"میٹرڈ ہے"</string>
     <string name="data_usage_metered_no" msgid="4025232961929071789">"میٹرڈ نہیں ہے"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"کیریئر ڈیٹا کا حساب آپ کے آلہ سے مختلف ہو سکتا ہے۔"</string>
@@ -2873,7 +2874,7 @@
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"محدود پروفائل"</string>
     <string name="user_need_lock_message" msgid="5879715064416886811">"ایک محدود پروفائل بنانے سے پہلے، آپ کو اپنی ایپس اور ذاتی ڈیٹا کو محفوظ کرنے کیلئے ایک اسکرین لاک سیٹ اپ کرنا ہوگا۔"</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"لاک سیٹ کریں"</string>
-    <string name="user_summary_not_set_up" msgid="8778205026866794909">"ترتیب نہیں دی گئی"</string>
+    <string name="user_summary_not_set_up" msgid="8778205026866794909">"سیٹ اپ نہیں کیا گیا"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"ترتیب نہیں دی گئی - محدود پروفائل"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"ترتیب نہیں دیا گیا - دفتری پروفائل"</string>
     <string name="user_admin" msgid="993402590002400782">"منتظم"</string>
@@ -2886,10 +2887,10 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"صارف"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"محدود پروفائل"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"نیا صارف شامل کریں؟"</string>
-    <string name="user_add_user_message_long" msgid="6768718238082929201">"‏آپ اضافی صارفین بنا کر دوسرے لوگوں کے ساتھ اس آلہ کا اشتراک کر سکتے ہیں۔ ہر صارف کے پاس اپنی جگہ ہوتی ہے، جسے وہ ایپس، وال پیپر وغیرہ کے ساتھ حسب ضرورت بنا سکتا ہے۔ صارفین Wi‑Fi جیسی آلے کی ترتیبات کو ایڈجسٹ بھی کر سکتے ہیں جس کا اثر ہر کسی پر ہوتا ہے۔\n\nجب آپ ایک نیا صارف شامل کرتے ہیں، تو اسے اپنی جگہ ترتیب دینی پڑتی ہے۔\n\nکوئی بھی صارف دیگر تمام صارفین کیلئے ایپس اپ ڈیٹ کر سکتا ہے۔ رسائی کی ترتیبات اور سروسز کو نئے صارف کو منتقل نہیں کیا جا سکتا۔"</string>
+    <string name="user_add_user_message_long" msgid="6768718238082929201">"‏آپ اضافی صارفین تخلیق کر کے دوسرے لوگوں کے ساتھ اس آلہ کا اشتراک کر سکتے ہیں۔ ہر صارف کے پاس اپنی جگہ ہوتی ہے، جسے وہ ایپس، وال پیپر وغیرہ کے ساتھ حسب ضرورت بنا سکتا ہے۔ صارفین Wi‑Fi جیسی آلے کی ترتیبات کو ایڈجسٹ بھی کر سکتے ہیں جس کا اثر ہر کسی پر ہوتا ہے۔\n\nجب آپ ایک نیا صارف شامل کرتے ہیں، تو اسے اپنی جگہ سیٹ اپ کرنا پڑتی ہے۔\n\nکوئی بھی صارف دیگر تمام صارفین کیلئے ایپس اپ ڈیٹ کر سکتا ہے۔ رسائی کی ترتیبات اور سروسز کو نئے صارف کو منتقل نہیں کیا جا سکتا۔"</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"جب آپ ایک نیا صارف شامل کرتے ہیں تو اس شخص کو اپنی جگہ کو ترتیب دینے کی ضرورت ہوتی ہے\n\nکوئی بھی صارف دیگر سبھی صارفین کیلئے ایپس کو اپ ڈیٹ کر سکتا ہے۔"</string>
-    <string name="user_setup_dialog_title" msgid="1765794166801864563">"صارف کو ابھی ترتیب دیں؟"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"یقینی بنائیں کہ وہ شخص آلہ لینے اور اپنی جگہ ترتیب دینے کیلئے دستیاب ہے"</string>
+    <string name="user_setup_dialog_title" msgid="1765794166801864563">"صارف کو ابھی سیٹ اپ کریں؟"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"یقینی بنائیں کہ وہ شخص آلہ لینے اور اپنی جگہ کو سیٹ اپ کرنے کیلئے دستیاب ہے"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"پروفائل کو ابھی ترتیب دیں؟"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"ابھی ترتیب دیں"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"ابھی نہیں"</string>
@@ -3143,6 +3144,8 @@
     <string name="keywords_ring_vibration" msgid="4652101158979064884">"ہیپٹکس، وائبریٹ، فون، کال، حساسیت، رنگ"</string>
     <string name="keywords_notification_vibration" msgid="31924624421190547">"ہیپٹکس، وائبریٹ، حساسیت"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"بیٹری سیور، چپک جانے والی، برقرار، پاور سیور، بیٹری"</string>
+    <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"روٹین، شیڈول، بیٹری سیور، پاور سیور، بیٹری، خودکار طور پر، فیصد"</string>
+    <string name="keywords_add_an_account" msgid="6488139919428902434">"دفتری پروفائل"</string>
     <string name="default_sound" msgid="8821684447333687810">"ڈیفالٹ ساؤنڈ"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"رنگ والیوم <xliff:g id="PERCENTAGE">%1$s</xliff:g> پر ہے"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"والیوم، ارتعاش، ڈسٹرب نہ کریں"</string>
@@ -3234,7 +3237,7 @@
     <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"اسکرین کے اوپر اسٹیٹس بار کے آئیکنز کو چھپائیں"</string>
     <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"ایپ کے آئیکنز پر اطلاعاتی ڈاٹس کو چھپائیں"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"اطلاعات کے لیے نہ جگائیں"</string>
-    <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"اطلاع کی فہرست سے چھپائیں"</string>
+    <string name="zen_mode_block_effect_list" msgid="4722887783222298295">"نیچے کی طرف کھینچیں شیڈ سے چھپائیں"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"کبھی نہیں"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"اسکرین کے آف ہونے پر"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="6017536991063513394">"اسکرین کے آن ہونے پر"</string>
@@ -3315,7 +3318,7 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"گزشتہ 7 دنوں کی تمام ملاحظہ کریں"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"جدید ترین"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"دفتری اطلاعات"</string>
-    <string name="smart_notifications_title" msgid="475969117151722852">"اسمارٹ اطلاعات"</string>
+    <string name="smart_notifications_title" msgid="3702411478231865970">"تغیر پذیر اطلاعات"</string>
     <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"خودکار ترجیح"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"کم ترجیحی اطلاعات کو لطیف پر خودکار طور پر سیٹ کریں"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"تجویز کردہ کارروائیاں اور جوابات"</string>
@@ -3335,6 +3338,15 @@
     <string name="swipe_direction_title" msgid="6877543492435053137">"سوائپ کی کارروائیاں"</string>
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"برخاست کرنے کے لیے دائیں، مینو دکھانے کے لیے بائیں سوائپ کریں"</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"برخاست کرنے کے لیے بائیں، مینو دکھانے کے لیے دائیں سوائپ کریں"</string>
+    <string name="gentle_notifications_title" msgid="3976374971153475110">"لطیف اطلاعات"</string>
+    <string name="gentle_notifications_also_display" msgid="6455360420411828133">"اس میں بھی ڈسپلے کرتا ہے"</string>
+    <string name="gentle_notifications_display_status" msgid="2904115658980383410">"اسٹیٹس بار"</string>
+    <string name="gentle_notifications_display_lock" msgid="1395567209329239992">"مقفل اسکرین"</string>
+    <string name="gentle_notifications_education" msgid="8713358646047345762">"لطیف اطلاعات ہمیشہ خاموش اور ہمیشہ نیچے کی طرف کھینچیں شیڈ میں ظاہر ہوتی ہیں"</string>
+    <string name="gentle_notifications_display_summary_shade" msgid="6583107817329430916">"صرف نیچے کی طرف کھینچیں شیڈ پر ڈسپلے کرتا ہے"</string>
+    <string name="gentle_notifications_display_summary_shade_lock" msgid="1434426811760016414">"نیچے کی طرف کھینچیں شیڈ اور مقفل اسکرین پر ڈسپلے کرتا ہے"</string>
+    <string name="gentle_notifications_display_summary_shade_status" msgid="6113566548809874319">"نیچے کی طرف کھینچیں شیڈ اور اسٹیٹس بار پر ڈسپلے کرتا ہے"</string>
+    <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"نیچے کی طرف کھینچیں شیڈ، اسٹیٹس بار اور مقفل اسکرین پر ڈسپلے کرتا ہے"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"بلنک لائٹ"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"مقفل اسکرین"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"دفتری پروفائل مقفل ہونے پر"</string>
@@ -3365,15 +3377,15 @@
     <string name="notification_importance_high_title" msgid="8792310396497954857">"اسکرین پر دکھائیں"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"مسدود کریں"</string>
     <string name="notification_silence_title" msgid="8575600650015431622">"لطیف"</string>
-    <string name="notification_alert_title" msgid="7426286507434650473">"ترجیح دی گئی"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"ترجیحی"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"مداخلتوں کو اجازت دیں"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"ایپ کو اسکرین پر آواز، وائبریٹ اور/یا پاپ اطلاعات ظاہر کرنے دیں"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"نیچے کی طرف کھیچیں کے شیڈ میں، اطلاعات کو ایک لائن میں سکیڑیں"</string>
-    <string name="notification_channel_summary_low" msgid="6402445462723804533">"ہمیشہ خاموش رکھیں۔ نیچے کی طرف کھینچیں شیڈ میں ڈسپلے کرتا ہے۔"</string>
-    <string name="notification_channel_summary_low_status" msgid="6002754076815282625">"ہمیشہ خاموش رکھیں۔ نیچے کی طرف کھینچیں شیڈ اور اسٹیٹس بار پر ڈسپلے کرتا ہے۔"</string>
-    <string name="notification_channel_summary_low_lock" msgid="6834375877468977563">"ہمیشہ خاموش رکھیں۔ نیچے کی طرف کھینچیں شیڈ اور مقفل اسکرین پر ڈسپلے کرتا ہے۔"</string>
-    <string name="notification_channel_summary_low_status_lock" msgid="6845350570727515894">"ہمیشہ خاموش رکھیں۔ نیچے کی طرف کھینچیں شیڈ، اسٹیٹس بار اور مقفل اسکرین پر ڈسپلے کرتا ہے۔"</string>
-    <string name="notification_channel_summary_default" msgid="1390343431643455716">"نیچے کی طرف کھینچیں شیڈ، اسٹیٹس بار اور مقفل اسکرین پر آواز اور ڈسپلے کرتا ہے۔"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"صرف نیچے کی طرف کھینچیں شیڈ میں اطلاعات کے ساتھ فوکس کرنے میں آپ کی مدد کرتا ہے۔ ہمیشہ خاموش۔"</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"کم ترجیحی اطلاعات ڈسپلے کرتا ہے۔ ہمیشہ خاموش۔"</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"کم ترجیحی اطلاعات ڈسپلے کرتا ہے۔ ہمیشہ خاموش۔"</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"کم ترجیحی اطلاعات ڈسپلے کرتا ہے۔ ہمیشہ خاموش۔"</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"آواز اور اسٹیٹس بار کے آئیکن کے ساتھ آپ کی توجہ حاصل کرتا ہے۔ مقفل اسکرین پر دکھاتا ہے۔"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"آلہ کے غیر مقفل ہو جانے پر، اطلاعات کو اسکرین کے اوپر بینر کے طور پر دکھائيں"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"اطلاعات دکھائیں"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"تغیر پذیر اطلاعات"</string>
@@ -3512,9 +3524,9 @@
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> دیگر</item>
       <item quantity="one">1 دیگر</item>
     </plurals>
-    <string name="zen_mode_messages" msgid="3463040297974005265">"ٹیکسٹ پیغامات کی اجازت دیں"</string>
+    <string name="zen_mode_messages" msgid="6406892731721926170">"پیغامات کی اجازت دیں"</string>
     <string name="zen_mode_messages_footer" msgid="2616568463646674149">"اجازت یافتہ پیغامات کے آواز کرنے کو یقینی بنانے کیلئے، چیک کریں کہ آیا آپ کا آلہ رِنگ، وائبریٹ یا خاموش پر سیٹ ہے۔"</string>
-    <string name="zen_mode_custom_messages_footer" msgid="356699532253965350">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ کے لیے موصول ہونے والے متنی پیغامات کو مسدود کر دیا جاتا ہے۔ اپنے دوستوں، فیملی اور دیگر رابطوں کو آپ سے رابطہ کرنے کی اجازت دینے کے لیے، آپ ترتیبات کو ایڈجسٹ کر سکتے ہیں۔"</string>
+    <string name="zen_mode_custom_messages_footer" msgid="800067279796770040">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ کے لیے آنے والے پیغامات مسدود ہیں۔ اپنے دوستوں، فیملی اور دیگر رابطوں کو آپ سے رابطہ کرنے کی اجازت دینے کے لیے، آپ ترتیبات کو ایڈجسٹ کر سکتے ہیں۔"</string>
     <string name="zen_mode_messages_title" msgid="7325983674655986445">"‏SMS, MMS اور پیغام رسانی کی ایپس"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"کسی سے بھی"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"صرف رابطوں سے"</string>
@@ -4533,8 +4545,8 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"مقام"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"یہ سروس فراہم کرنے کے لیے آپ کا سروس فراہم کنندہ آپ کے مقام کی معلومات اکٹھا کر سکتا ہے۔\n\nبراہ کرم اپنے سروس فراہم کنندہ کی رازداری کی پالیسی کا جائزہ لیں۔"</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"آپ باقی کسی وقت یا ڈیٹا تک رسائی سے محروم ہو سکتے ہیں۔ ہٹانے سے پہلے اپنے فراہم کنندہ سے رابطہ کریں۔"</string>
-    <string name="keywords_content_capture" msgid="859132453327059493">"مواد کیپچر"</string>
-    <string name="content_capture" msgid="6456873729933463600">"مواد کیپچر"</string>
+    <string name="keywords_content_capture" msgid="8252675452668954083">"مواد کیپچر،ایپ کا مواد"</string>
+    <string name="content_capture" msgid="3210232615756364639">"ایپ کا مواد"</string>
     <string name="content_capture_summary" msgid="659506647507221852">"‏ایپس کو Android سسٹم میں مواد بھیجنے کی اجازت دیں"</string>
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"سسٹم کا ہیپ ڈمپ کیپچر کریں"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"سسٹم کا ہیپ ڈمپ کیپچر کیا جا رہا ہے"</string>
@@ -4544,6 +4556,9 @@
     <string name="wifi_disconnect_button_text" msgid="2032651902928903819">"غیر منسلک کریں"</string>
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"ہنگامی کالز"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"‏آپ کے کیریئر کی جانب سے Wi-Fi پر ہنگامی کالز تعاون یافتہ نہیں ہیں۔\nہنگامی کال کرنے کے لیے آلہ خود کار طور پر سیلولر نیٹ ورک پر سوئچ ہو جاتا ہے۔\nہنگامی کالز صرف سیلولر کوریج والے علاقے میں ممکن ہیں۔"</string>
-    <!-- no translation found for wifi_calling_summary (513599567573172420) -->
-    <skip />
+    <string name="wifi_calling_summary" msgid="513599567573172420">"‏معیار کو بہتر بنانے کے لیے کالز کے لیے Wi-Fi کا استعمال کریں"</string>
+    <string name="enable_receiving_mms_notification_title" msgid="8809328429865242752">"‏آنے والا MMS پیغام"</string>
+    <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"‏MMS پیغام نہیں بھیجا جا سکتا"</string>
+    <string name="enable_mms_notification_summary" msgid="7643379825980866408">"‏موبائل ڈیٹا آف ہونے پر <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> پر MMS پیغام رسانی کی اجازت دینے کے لیے تھپتھپائیں"</string>
+    <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"‏MMS پیغام"</string>
 </resources>

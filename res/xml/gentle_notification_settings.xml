@@ -24,6 +24,7 @@
             android:title="@string/summary_placeholder"
             android:layout="@layout/drawable_layout"
             settings:controller="com.android.settings.notification.GentleDrawablePreferenceController"
+            android:selectable="false"
             android:order="1"
             settings:allowDividerBelow="true"
             android:persistent="false" />

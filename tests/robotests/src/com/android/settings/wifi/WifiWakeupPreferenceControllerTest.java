@@ -22,6 +22,7 @@ import static android.provider.Settings.Global.WIFI_WAKEUP_ENABLED;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
 
 import android.content.Context;
 import android.location.LocationManager;
@@ -93,6 +94,19 @@ public class WifiWakeupPreferenceControllerTest {
         assertThat(mController.handlePreferenceTreeClick(pref)).isTrue();
         assertThat(Settings.Global.getInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 0))
                 .isEqualTo(1);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_wifiWakeupEnableScanningDisable_wifiWakeupEnable() {
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        doReturn(true).when(mLocationManager).isLocationEnabled();
+
+        mController.handlePreferenceTreeClick(mPreference);
+        final boolean isWifiWakeupEnabled = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
+
+        assertThat(isWifiWakeupEnabled).isTrue();
     }
 
     @Test

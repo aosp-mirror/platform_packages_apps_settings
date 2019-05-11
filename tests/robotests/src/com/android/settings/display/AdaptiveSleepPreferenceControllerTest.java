@@ -70,9 +70,9 @@ public class AdaptiveSleepPreferenceControllerTest {
         when(mPackageManager.getAttentionServicePackageName()).thenReturn("some.package");
         when(mPackageManager.checkPermission(any(), any())).thenReturn(
                 PackageManager.PERMISSION_GRANTED);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
 
         mController = new AdaptiveSleepPreferenceController(mContext, PREFERENCE_KEY);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
     @Test
@@ -143,9 +143,11 @@ public class AdaptiveSleepPreferenceControllerTest {
     public void isChecked_returnsFalseWhenNotSufficientPermissions() {
         when(mPackageManager.checkPermission(any(), any())).thenReturn(
                 PackageManager.PERMISSION_DENIED);
+        final AdaptiveSleepPreferenceController controller = new AdaptiveSleepPreferenceController(
+                mContext, PREFERENCE_KEY);
 
-        mController.setChecked(true);
-        assertThat(mController.isChecked()).isFalse();
+        controller.setChecked(true);
+        assertThat(controller.isChecked()).isFalse();
     }
 
     @Test
