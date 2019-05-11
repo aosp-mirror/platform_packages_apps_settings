@@ -57,6 +57,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private IllustrationVideoView mIllustrationNormal;
     private View mIllustrationAccessibility;
     private Handler mHandler;
+    private Intent mResultIntent;
 
     private CompoundButton.OnCheckedChangeListener mSwitchDiversityListener =
             new CompoundButton.OnCheckedChangeListener() {
@@ -151,6 +152,9 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             intent.setClass(this, FaceEnrollEnrolling.class);
         }
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
+        if (mResultIntent != null) {
+            intent.putExtras(mResultIntent);
+        }
         WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
     }
@@ -162,9 +166,13 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mResultIntent = data;
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
-            setResult(resultCode);
-            finish();
+            // If the user finished or skipped enrollment, finish this activity
+            if (resultCode == RESULT_SKIP || resultCode == RESULT_FINISHED) {
+                setResult(resultCode);
+                finish();
+            }
         }
     }
 
