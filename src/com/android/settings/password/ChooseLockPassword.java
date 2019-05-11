@@ -175,8 +175,7 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         setTitle(msg);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
+        findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
     public static class ChooseLockPasswordFragment extends InstrumentedFragment

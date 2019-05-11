@@ -163,8 +163,7 @@ public class ChooseLockPattern extends SettingsActivity {
         }
 
         setTitle(msg);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
+        findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
     @Override
