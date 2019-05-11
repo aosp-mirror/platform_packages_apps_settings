@@ -93,8 +93,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             }
         }
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
+        findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
     public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment {
