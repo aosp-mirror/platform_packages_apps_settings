@@ -91,25 +91,23 @@ public class ContextualCardLoaderTest {
     }
 
     @Test
-    public void getDisplayableCards_refreshCardUri_shouldLogContextualCardDisplay() {
+    public void getDisplayableCards_refreshCardUri_shouldLogContextualCard() {
         mContextualCardLoader.mNotifyUri = CardContentProvider.REFRESH_CARD_URI;
 
         mContextualCardLoader.getDisplayableCards(new ArrayList<>());
 
         verify(mFakeFeatureFactory.metricsFeatureProvider).action(any(),
-                eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW), any(String.class));
-        verify(mFakeFeatureFactory.metricsFeatureProvider).action(any(),
                 eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW), any(String.class));
     }
 
     @Test
-    public void getDisplayableCards_deleteCardUri_shouldNotLogContextualCardDisplay() {
+    public void getDisplayableCards_deleteCardUri_shouldNotLogContextualCard() {
         mContextualCardLoader.mNotifyUri = CardContentProvider.DELETE_CARD_URI;
 
         mContextualCardLoader.getDisplayableCards(new ArrayList<>());
 
         verify(mFakeFeatureFactory.metricsFeatureProvider, never()).action(any(),
-                eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW), any(String.class));
+                eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW), any(String.class));
     }
 
     private List<ContextualCard> getContextualCardList() {

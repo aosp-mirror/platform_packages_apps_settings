@@ -19,23 +19,36 @@ package com.android.settings.privacy;
 import android.annotation.NonNull;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.dashboard.profileselector.UserAdapter;
 import com.android.settings.utils.ContentCaptureUtils;
-import com.android.settings.widget.MasterSwitchPreference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class EnableContentCaptureWithServiceSettingsPreferenceController
         extends TogglePreferenceController {
 
     private static final String TAG = "ContentCaptureController";
 
+    private final UserManager mUserManager;
+
     public EnableContentCaptureWithServiceSettingsPreferenceController(@NonNull Context context,
             @NonNull String key) {
         super(context, key);
+
+        mUserManager = UserManager.get(context);
     }
 
     @Override
@@ -61,6 +74,11 @@ public final class EnableContentCaptureWithServiceSettingsPreferenceController
             Log.w(TAG, "No component name for custom service settings");
             preference.setSelectable(false);
         }
+
+        preference.setOnPreferenceClickListener((pref) -> {
+            ProfileSelectDialog.show(mContext, pref);
+            return true;
+        });
     }
 
     @Override
@@ -69,4 +87,28 @@ public final class EnableContentCaptureWithServiceSettingsPreferenceController
                 && ContentCaptureUtils.getServiceSettingsComponentName() != null;
         return available ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
+
+    private static final class ProfileSelectDialog {
+        public static void show(Context context, Preference pref) {
+            final UserManager userManager = UserManager.get(context);
+            final List<UserInfo> userInfos = userManager.getUsers();
+            final ArrayList<UserHandle> userHandles = new ArrayList<>(userInfos.size());
+            for (UserInfo info: userInfos) {
+                userHandles.add(info.getUserHandle());
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            UserAdapter adapter = UserAdapter.createUserAdapter(userManager, context, userHandles);
+            builder.setTitle(com.android.settingslib.R.string.choose_profile)
+                    .setAdapter(adapter, (DialogInterface dialog, int which) -> {
+                        final UserHandle user = userHandles.get(which);
+                        // Show menu on top level items.
+                        final Intent intent = pref.getIntent();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivityAsUser(intent, user);
+                    })
+                    .show();
+        }
+    }
+
 }

@@ -203,11 +203,11 @@
     <string name="proxy_hostname_label" msgid="8490171412999373362">"प्रॉक्सी होस्‍टनाम"</string>
     <string name="proxy_error" msgid="8926675299638611451">"ध्यान दें"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"ठीक है"</string>
-    <string name="proxy_error_invalid_host" msgid="6865850167802455230">"आपके द्वारा लिखा गया होस्‍टनाम मान्‍य नहीं है."</string>
+    <string name="proxy_error_invalid_host" msgid="6865850167802455230">"  लिखा गया होस्‍टनाम मान्‍य नहीं है."</string>
     <string name="proxy_error_invalid_exclusion_list" msgid="678527645450894773">"अलग किये गए डोमेन (वो डोमेन जिन्हें सर्च में शामिल नहीं किया जाएगा) की जो सूची आपने टाइप की है वो सही फ़ॉर्मेट में नहीं है. डोमेन की बीच में कॉमा लगाकर बनाई गई सूची टाइप करें।"</string>
     <string name="proxy_error_empty_port" msgid="5539106187558215246">"आपको पोर्ट फ़ील्‍ड पूर्ण करना होगा."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"अगर होस्‍ट फ़ील्‍ड खाली है तो पोर्ट फ़ील्‍ड को खाली होना ही चाहिए."</string>
-    <string name="proxy_error_invalid_port" msgid="5988270202074492710">"आपके द्वारा लिखा गया पोर्ट मान्‍य नहीं है."</string>
+    <string name="proxy_error_invalid_port" msgid="5988270202074492710">"  लिखा गया पोर्ट मान्‍य नहीं है."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP प्रॉक्सी का उपयोग ब्राउज़र द्वारा किया जाता है लेकिन अन्य ऐप्लिकेशन द्वारा उपयोग नहीं किया जा सकता."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC यूआरएल: "</string>
     <string name="radio_info_subid" msgid="204582608052503412">"मौजूदा सब-आईडी:"</string>
@@ -374,7 +374,10 @@
     <string name="location_settings_title" msgid="1369675479310751735">"जगह"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"जगह की जानकारी की सुविधा का इस्तेमाल करें"</string>
     <string name="location_settings_summary_location_off" msgid="794370259612167176">"बंद करें"</string>
-    <!-- no translation found for location_settings_summary_location_on (5513447650619485188) -->
+    <plurals name="location_settings_summary_location_on" formatted="false" msgid="5513447650619485188">
+      <item quantity="one">चालू है - <xliff:g id="COUNT_1">%1$d</xliff:g> ऐप्लिकेशन के पास जगह की जानकारी का एक्सेस है</item>
+      <item quantity="other">चालू है - <xliff:g id="COUNT_1">%1$d</xliff:g> ऐप्लिकेशन के पास जगह की जानकारी का एक्सेस है</item>
+    </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="8523775367089431611">"लोड हो रहा है…"</string>
     <string name="account_settings_title" msgid="626177544686329806">"खाते"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"सुरक्षा"</string>
@@ -522,7 +525,7 @@
     <string name="fingerprint_delete_title" msgid="1368196182612202898">"फ़िंगरप्रिंट \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' हटाएं"</string>
     <string name="fingerprint_delete_message" msgid="8597787803567398131">"क्या आप इस फ़िंगरप्रिंट को हटाना चाहते हैं?"</string>
     <string name="fingerprint_last_delete_message" msgid="7852321001254275878">"आप अपना फ़ोन अनलॉक करने, खरीदी अधिकृत करने या ऐप्लिकेशन में प्रवेश करने के लिए अपने फ़िंगरप्रिंट का उपयोग नहीं कर सकेंगे"</string>
-    <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"आप अपनी कार्य प्रोफ़ाइल अनलॉक करने, खरीदारी अधिकृत करने या अपने कार्य ऐप्लिकेशन में प्रवेश करने के लिए अपने फ़िंगरप्रिंट का उपयोग नहीं कर सकेंगे."</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"आप अपनी वर्क प्रोफ़ाइल अनलॉक करने, खरीदारी अधिकृत करने या अपने काम से जुड़े ऐप्लिकेशन में प्रवेश करने के लिए अपने फ़िंगरप्रिंट का उपयोग नहीं कर सकेंगे."</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"हां, निकालें"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"सुरक्षित करना"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"टैबलेट सुरक्षित करें"</string>
@@ -552,8 +555,8 @@
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="8219375738445017266">"सुरक्षित करने में रुकावट हुई और यह काम पूरा नहीं किया जा सका. इसलिए अब आपके टैबलेट के डेटा तक नहीं पहुंचा जा सकता. \n\nअपने टैबलेट का इस्तेमाल फिर से शुरू करने के लिए, आपको फ़ैक्‍ट्री रीसेट करना होगा. जब आप रीसेट करने के बाद अपना टैबलेट सेट करेंगे, तो आप अपने Google खाते पर बैकअप लिए गए किसी भी डेटा को बहाल कर सकेंगे."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3270131542549577953">"सुरक्षित करने में रुकावट हुई और यह काम पूरा नहीं किया जा सका. इसलिए अब आपके फ़ोन के डेटा तक नहीं पहुंचा जा सकता. \n\nअपने फ़ोन का इस्तेमाल फिर से शुरू करने के लिए, आपको फ़ैक्‍ट्री रीसेट करना होगा. जब आप रीसेट करने के बाद अपना फ़ोन सेट करेंगे, तो आप अपने Google खाते पर बैकअप लिए गए किसी भी डेटा को बहाल कर सकेंगे."</string>
     <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"डीक्रिप्‍शन असफल"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"आपके द्वारा डाला गया पासवर्ड सही है, लेकिन दुर्भाग्‍य से आपका डेटा दूषित है. \n\nअपने टैबलेट का उपयोग फिर से शुरू करने के लिए आपको फ़ैक्टरी रीसेट करना होगा. जब आप रीसेट के बाद अपना टैबलेट रीसेट करते हैं, तो आपके पास अपने Google खाते में बैकअप लिए गए किसी भी डेटा को फिर से स्‍थापित करने का अवसर होगा."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"आपके द्वारा डाला गया पासवर्ड सही है, लेकिन दुर्भाग्‍य से आपका डेटा दूषित है. \n\nअपने फ़ोन का उपयोग फिर से शुरू करने के लिए आपको फ़ैक्टरी रीसेट करना होगा. जब आप रीसेट के बाद अपना फ़ोन सेट करते हैं, तो आपके पास अपने Google खाते में बैकअप किए गए किसी भी डेटा को फिर से स्‍थापित करने का अवसर होगा."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"  डाला गया पासवर्ड सही है, लेकिन दुर्भाग्‍य से आपका डेटा दूषित है. \n\nअपने टैबलेट का उपयोग फिर से शुरू करने के लिए आपको फ़ैक्टरी रीसेट करना होगा. जब आप रीसेट के बाद अपना टैबलेट रीसेट करते हैं, तो आपके पास अपने Google खाते में बैकअप लिए गए किसी भी डेटा को फिर से स्‍थापित करने का अवसर होगा."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"  डाला गया पासवर्ड सही है, लेकिन दुर्भाग्‍य से आपका डेटा दूषित है. \n\nअपने फ़ोन का उपयोग फिर से शुरू करने के लिए आपको फ़ैक्टरी रीसेट करना होगा. जब आप रीसेट के बाद अपना फ़ोन सेट करते हैं, तो आपके पास अपने Google खाते में बैकअप किए गए किसी भी डेटा को फिर से स्‍थापित करने का अवसर होगा."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"इनपुट का तरीका बदलें"</string>
     <string name="suggested_lock_settings_title" msgid="8498743819223200961">"अपना फ़ोन सुरक्षित करें"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"टैबलेट को सुरक्षित रखने के लिए स्क्रीन लॉक सेट करें"</string>
@@ -579,7 +582,7 @@
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"स्क्रीन लॉक"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / कम बैटरी मोड में जाने के तुरंत बाद"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> कम बैटरी मोड में जाने के बाद"</string>
-    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"कार्य प्रोफ़ाइल लॉक"</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"वर्क प्रोफ़ाइल लॉक"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"लॉक स्‍क्रीन बदलें"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"आकार, पिन या पासवर्ड सुरक्षा बदलें या अक्षम करें"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"स्‍क्रीन को लॉक करने की विधि चुनें"</string>
@@ -663,12 +666,12 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"अगर आप अगली कोशिश में गलत पैटर्न डालते हैं, तो इस उपयोगकर्ता को मिटा दिया जाएगा"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"अगर आप अगली कोशिश में गलत पिन डालते हैं, तो इस उपयोगकर्ता को मिटा दिया जाएगा"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"अगर आप अगली कोशिश में गलत पासवर्ड डालते हैं, तो इस उपयोगकर्ता को मिटा दिया जाएगा"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"अगर आप अगली कोशिश में गलत पैटर्न डालते हैं, तो आपकी कार्य प्रोफ़ाइल और उसके डेटा को हटा दिया जाएगा"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"अगर आप अगली कोशिश में गलत पिन डालते हैं, तो आपकी कार्य प्रोफ़ाइल और उसके डेटा को हटा दिया जाएगा"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"अगर आप अगली कोशिश में गलत पासवर्ड डालते हैं, तो आपकी कार्य प्रोफ़ाइल और उसके डेटा को हटा दिया जाएगा"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"अगर आप अगली कोशिश में गलत पैटर्न डालते हैं, तो आपकी वर्क प्रोफ़ाइल और उसके डेटा को हटा दिया जाएगा"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"अगर आप अगली कोशिश में गलत पिन डालते हैं, तो आपकी वर्क प्रोफ़ाइल और उसके डेटा को हटा दिया जाएगा"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"अगर आप अगली कोशिश में गलत पासवर्ड डालते हैं, तो आपकी वर्क प्रोफ़ाइल और उसके डेटा को हटा दिया जाएगा"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"बहुत सारी गलत कोशिशें की गई हैं. इस डिवाइस का डेटा हटा दिया जाएगा."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"बहुत सारी गलत कोशिशें की गई हैं. इस उपयोगकर्ता को मिटा दिया जाएगा."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"बहुत सारी गलत कोशिशें की गई हैं. इस कार्य प्रोफ़ाइल और इसके डेटा को हटा दिया जाएगा."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"बहुत सारी गलत कोशिशें की गई हैं. इस वर्क प्रोफ़ाइल और इसके डेटा को हटा दिया जाएगा."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"खारिज करें"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
       <item quantity="one">पासवर्ड में कम से कम <xliff:g id="COUNT_1">%d</xliff:g> वर्ण होने चाहिए</item>
@@ -1145,7 +1148,7 @@
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"रिंगटोन"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"सूचना की आवाज़"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"सूचना के लिए आने वाले कॉल (इनकमिंग) की आवाज़ का इस्तेमाल करें"</string>
-    <string name="home_work_profile_not_supported" msgid="1357721012342357037">"कार्य प्रोफ़ाइल का समर्थन नहीं करता है"</string>
+    <string name="home_work_profile_not_supported" msgid="1357721012342357037">"वर्क प्रोफ़ाइल का समर्थन नहीं करता है"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"सूचना की डिफ़ॉल्ट टोन"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"मीडिया"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"संगीत और वीडियो के लिए आवाज़ सेट करें"</string>
@@ -1180,7 +1183,7 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"डॉक में टैबलेट सम्‍मिलित करते या निकालते समय ध्‍वनि न चलाएं"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"डॉक में फ़ोन सम्‍मिलित करते या निकालते समय ध्‍वनि न चलाएं"</string>
     <string name="account_settings" msgid="6403589284618783461">"खाते"</string>
-    <string name="accessibility_category_work" msgid="4339262969083355720">"कार्य प्रोफ़ाइल खाते - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_category_work" msgid="4339262969083355720">"वर्क प्रोफ़ाइल खाते - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"व्‍यक्‍तिगत प्रोफ़ाइल खाते"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"कार्यस्‍थल खाता - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"व्‍यक्‍तिगत खाता - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -1252,7 +1255,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"<xliff:g id="ID_1">%1$s</xliff:g> तक के लिए चालू करें"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"<xliff:g id="ID_1">%1$s</xliff:g> तक बंद रखें"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"नाइट लाइट इस समय चालू नहीं है"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"स्‍क्रीन समयबाह्य"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"स्क्रीन इतनी देर में बंद हो जाएगी (टाइम आउट)"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"स्क्रीन बंद हो जाती है"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> तक इस्तेमाल न होने पर"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"वॉलपेपर"</string>
@@ -1416,8 +1419,8 @@
     <string name="mtp_ptp_mode_summary" msgid="3710436114807789270">"MTP या PTP प्रकार्य सक्रिय है"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"USB मेमोरी अनमाउंट करें?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"SD कार्ड को अनमाउंट करें?"</string>
-    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="4322636662873269018">"अगर आप USB मेमोरी को अनमाउंट करते हैं, तो आपके द्वारा उपयोग किए जा रहे कुछ ऐप्लिकेशन बंद हो जाएंगे और जब तक आप USB मेमोरी को फिर से माउंट नहीं करते, तब तक अनुपलब्‍ध रह सकते हैं."</string>
-    <string name="dlg_confirm_unmount_text" product="default" msgid="6998379994779187692">"अगर आप SD कार्ड अनमाउंट करते हैं, तो आपके द्वारा उपयोग किए जा रहे कुछ ऐप्लिकेशन बंद हो जाएंगे और जब तक आप SD कार्ड को फिर से माउंट नहीं करते, तब तक अनुपलब्‍ध रह सकते हैं."</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="4322636662873269018">"अगर आप USB मेमोरी को अनमाउंट करते हैं, तो   उपयोग किए जा रहे कुछ ऐप्लिकेशन बंद हो जाएंगे और जब तक आप USB मेमोरी को फिर से माउंट नहीं करते, तब तक अनुपलब्‍ध रह सकते हैं."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="6998379994779187692">"अगर आप SD कार्ड अनमाउंट करते हैं, तो   उपयोग किए जा रहे कुछ ऐप्लिकेशन बंद हो जाएंगे और जब तक आप SD कार्ड को फिर से माउंट नहीं करते, तब तक अनुपलब्‍ध रह सकते हैं."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="4642742385125426529"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="4642742385125426529"></string>
     <string name="dlg_error_unmount_text" product="nosdcard" msgid="9191518889746166147">"USB मेमोरी को अनमाउंट नहीं किया जा सका. बाद में फिर से प्रयास करें."</string>
@@ -1447,7 +1450,7 @@
     <string name="usb_ptp_title" msgid="3852760810622389620">"कैमरा (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7406889433172511530">"आपको कैमरा सॉफ़्टवेयर का इस्तेमाल करके फ़ोटो ट्रांसफ़र करने देता है और जिन कंप्‍यूटर पर MTP काम नहीं करता, उन पर कोई भी फ़ाइल ट्रांसफ़र करने देता है"</string>
     <string name="usb_midi_title" msgid="3069990264258413994">"MIDI"</string>
-    <string name="usb_midi_summary" msgid="539169474810956358">"MIDI सक्षम ऐप्‍लिकेशन को आपके कंप्‍यूटर पर MIDI सॉफ़्टवेयर के साथ USB पर कार्य करने देती है."</string>
+    <string name="usb_midi_summary" msgid="539169474810956358">"MIDI सक्षम ऐप्‍लिकेशन को आपके कंप्‍यूटर पर MIDI सॉफ़्टवेयर के साथ USB पर काम करने देती है."</string>
     <string name="storage_other_users" msgid="808708845102611856">"अन्य उपयोगकर्ता"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"डिवाइस मेमोरी"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"पोर्टेबल संग्रहण"</string>
@@ -1671,7 +1674,10 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"वर्क प्रोफ़ाइल की जगह"</string>
     <string name="location_app_level_permissions" msgid="2777033567595680764">"ऐप्लिकेशन की अनुमति"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"जगह की जानकारी बंद है"</string>
-    <!-- no translation found for location_app_permission_summary_location_on (5336807018727349708) -->
+    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="5336807018727349708">
+      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> में से<xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> ऐप्लिकेशन के पास जगह की जानकरी का एक्सेस है</item>
+      <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> में से<xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> ऐप्लिकेशन के पास जगह की जानकरी का एक्सेस है</item>
+    </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"हाल ही में एक्सेस की गई जगह की जानकारी"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"जानकारी देखें"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"किसी भी ऐप ने हाल में जगह का अनुरोध नहीं किया है"</string>
@@ -1749,7 +1755,7 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"जारी रखने के लिए अपने डिवाइस पैटर्न का इस्तेमाल करें"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"जारी रखने के लिए अपना डिवाइस पिन डालें"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"जारी रखने के लिए अपना डिवाइस पासवर्ड डालें"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"जारी रखने के लिए अपने कार्य पैटर्न का उपयोग करें"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"जारी रखने के लिए अपने काम पैटर्न का उपयोग करें"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"जारी रखने के लिए अपना कार्य पिन डालें"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"जारी रखने के लिए अपना कार्य पासवर्ड डालें"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="530802132223800623">"अतिरिक्त सुरक्षा के लिए, अपने पैटर्न का इस्तेमाल करें"</string>
@@ -1794,13 +1800,13 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"अनलॉक आकार कैसे आरेखित करें"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"बहुत सारे गलत प्रयास. <xliff:g id="NUMBER">%d</xliff:g> सेकंड में फिर से प्रयास करें."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"आपके फ़ोन पर ऐप्लिकेशन  इंस्टॉल नहीं है."</string>
-    <string name="lock_settings_profile_title" msgid="2121876391814535295">"कार्य प्रोफ़ाइल सुरक्षा"</string>
-    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"कार्य प्रोफ़ाइल स्क्रीन लॉक"</string>
+    <string name="lock_settings_profile_title" msgid="2121876391814535295">"वर्क प्रोफ़ाइल सुरक्षा"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"वर्क प्रोफ़ाइल स्क्रीन लॉक"</string>
     <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"एक लॉक का उपयोग करें"</string>
-    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"कार्य प्रोफ़ाइल और डिवाइस स्क्रीन के लिए एक लॉक का उपयोग करें"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"वर्क प्रोफ़ाइल और डिवाइस स्क्रीन के लिए एक लॉक का उपयोग करें"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"एक लॉक का उपयोग करें?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="7128305504872026659">"आपका डिवाइस आपकी कार्य प्रोफ़ाइल के स्क्रीन लॉक का उपयोग करेगा. दोनों ही लॉक पर कार्य नीतियां लागू होंगी."</string>
-    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"आपका कार्य प्रोफ़ाइल लॉक आपके संगठन की सुरक्षा आवश्यकताएं पूरी नहीं करता है. आप अपनी डिवाइस स्क्रीन और अपनी कार्य प्रोफ़ाइल के लिए एक ही लॉक का उपयोग कर सकते हैं, लेकिन सभी कार्य लॉक पॉलिसी लागू होंगी."</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="7128305504872026659">"आपका डिवाइस आपकी वर्क प्रोफ़ाइल के स्क्रीन लॉक का उपयोग करेगा. दोनों ही लॉक पर कार्य नीतियां लागू होंगी."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"आपका वर्क प्रोफ़ाइल लॉक आपके संगठन की सुरक्षा आवश्यकताएं पूरी नहीं करता है. आप अपनी डिवाइस स्क्रीन और अपनी वर्क प्रोफ़ाइल के लिए एक ही लॉक का उपयोग कर सकते हैं, लेकिन सभी कार्य लॉक पॉलिसी लागू होंगी."</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"एक लॉक का उपयोग करें"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"एक लॉक का उपयोग करें"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"डिवाइस स्क्रीन लॉक के समान"</string>
@@ -1958,8 +1964,8 @@
     <string name="process_service_in_use_description" msgid="8993335064403217080">"सेवा <xliff:g id="COMP_NAME">%1$s</xliff:g> उपयोग में हैं."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"प्रदाता <xliff:g id="COMP_NAME">%1$s</xliff:g> उपयोग में है."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"सिस्‍टम सेवा बंद करें?"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"अगर आप यह सेवा रोकते हैं, तो हो सकता है कि आपके टैबलेट की कुछ सुविधाएं ठीक से कार्य करना बंद कर दें जब तक कि आप उसे बंद करके फिर से चालू  न कर लें."</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"अगर आप यह सेवा रोकते हैं, तो हो सकता है कि आपके फ़ोन की कुछ सुविधाएं ठीक से कार्य करना बंद कर दें जब तक कि आप उसे बंद करके फिर से चालू  न कर लें."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"अगर आप यह सेवा रोकते हैं, तो हो सकता है कि आपके टैबलेट की कुछ सुविधाएं ठीक से काम करना बंद कर दें जब तक कि आप उसे बंद करके फिर से चालू  न कर लें."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"अगर आप यह सेवा रोकते हैं, तो हो सकता है कि आपके फ़ोन की कुछ सुविधाएं ठीक से काम करना बंद कर दें जब तक कि आप उसे बंद करके फिर से चालू  न कर लें."</string>
     <string name="language_input_gesture_title" msgid="8749227808244881255">"भाषाएं, इनपुट और जेस्चर"</string>
     <string name="language_input_gesture_summary_on_with_assist" msgid="7219895055450633449"></string>
     <string name="language_input_gesture_summary_on_non_assist" msgid="756147879200943161"></string>
@@ -2070,7 +2076,7 @@
     <string name="talkback_title" msgid="7912059827205988080">"टॉकबैक"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"स्क्रीन रीडर खास तौर पर दृष्टिहीन और कमज़ोर नज़र वाले लोगों के लिए है"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"अपनी स्क्रीन पर दिए गए आइटम तेज़ आवाज़ में सुनने के लिए उन्हें टैप करें"</string>
-    <string name="accessibility_captioning_title" msgid="7589266662024836291">"कैप्शन"</string>
+    <string name="accessibility_captioning_title" msgid="8068289534732163115">"कैप्शन की प्राथमिकताएं"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"बड़ा करना"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"तीन बार टैप करके आकार बढ़ाएं"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"बटन के ज़रिए आकार बढ़ाएं"</string>
@@ -2221,8 +2227,8 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> प्रिंट सेवाएं चालू हैं</item>
     </plurals>
     <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
-      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> प्रिंट कार्य</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> प्रिंट कार्य</item>
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> प्रिंट जॉ</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> प्रिंट जॉ</item>
     </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"प्रिंट सेवाएं"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"कोई सेवा इंस्‍टॉल नहीं है"</string>
@@ -2237,7 +2243,7 @@
     <string name="print_searching_for_printers" msgid="4680248496457576358">"प्रिंटर को सर्च कर रहा है"</string>
     <string name="print_service_disabled" msgid="7739452396114245222">"सेवा अक्षम है"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"प्रिंट करने के निर्देश"</string>
-    <string name="print_print_job" msgid="7563741676053287211">"प्रिंट कार्य"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"प्रिंट जॉ"</string>
     <string name="print_restart" msgid="8373999687329384202">"फिर से शुरू करें"</string>
     <string name="print_cancel" msgid="3621199386568672235">"रद्द करें"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
@@ -2595,7 +2601,7 @@
     <string name="select_device_admin_msg" msgid="7347389359013278077">"डिवाइस के एडमिन ऐप्लिकेशन"</string>
     <string name="no_device_admins" msgid="4846602835339095768">"कोई भी डिवाइस व्यवस्थापक ऐप्लिकेशन उपलब्ध नहीं है"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"व्यक्तिगत"</string>
-    <string name="managed_device_admin_title" msgid="7853955652864478435">"कार्यस्थल"</string>
+    <string name="managed_device_admin_title" msgid="7853955652864478435">"दफ़्तर"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"मैसेज (एसएमएस) और कॉल लॉग एक्सेस प्रतिबंधित करें"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"सिर्फ़ डिफ़ॉल्ट फ़ोन और मैसेज-सेवा देने वाले ऐप्लिकेशन के पास मैसेज (एसएमएस) और कॉल लॉग की अनुमतियां होती हैं"</string>
     <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"डिवाइस पहचानकर्ता पाबंदियां हटाएं"</string>
@@ -2626,11 +2632,11 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"सिंक करें"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"किसी समस्या के कारण अभी समन्वयन नहीं हो पाया.यह शीघ्र ही उपलब्ध होगा."</string>
     <string name="add_account_label" msgid="7811707265834013767">"खाता जोड़ें"</string>
-    <string name="managed_profile_not_available_label" msgid="852263300911325904">"कार्य प्रोफ़ाइल अभी तक उपलब्ध नहीं है"</string>
-    <string name="work_mode_label" msgid="7157582467956920750">"कार्य प्रोफ़ाइल"</string>
+    <string name="managed_profile_not_available_label" msgid="852263300911325904">"वर्क प्रोफ़ाइल अभी तक उपलब्ध नहीं है"</string>
+    <string name="work_mode_label" msgid="7157582467956920750">"वर्क प्रोफ़ाइल"</string>
     <string name="work_mode_on_summary" msgid="3628349169847990263">"आपका संगठन प्रबंधित कर रहा है"</string>
     <string name="work_mode_off_summary" msgid="2657138190560082508">"ऐप्लिकेशन और सूचनाएं बंद हैं"</string>
-    <string name="remove_managed_profile_label" msgid="3856519337797285325">"कार्य प्रोफ़ाइल निकालें"</string>
+    <string name="remove_managed_profile_label" msgid="3856519337797285325">"वर्क प्रोफ़ाइल निकालें"</string>
     <string name="background_data" msgid="5779592891375473817">"पृष्ठभूमि डेटा"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"ऐप्लिकेशन किसी भी समय डेटा समन्वयित, भेज और प्राप्त कर सकते हैं"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"पृष्ठभू. डेटा अक्षम करें?"</string>
@@ -2890,7 +2896,7 @@
     <string name="user_set_lock_button" msgid="8311219392856626841">"लॉक सेट करें"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"सेट नहीं है"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"सेट नहीं की गई - प्रतिबंधित प्रोफ़ाइल"</string>
-    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"सेट नहीं की गई - कार्य प्रोफ़ाइल"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"सेट नहीं की गई - वर्क प्रोफ़ाइल"</string>
     <string name="user_admin" msgid="993402590002400782">"एडमिन"</string>
     <string name="user_you" msgid="1639158809315025986">"आप (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"प्रचलित नाम"</string>
@@ -2919,7 +2925,7 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"खुद को मिटाएं?"</string>
     <string name="user_confirm_remove_title" msgid="8068422695175097315">"इस उपयोगकर्ता को हटाएं?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"इस प्रोफ़ाइल को निकालें?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"कार्य प्रोफ़ाइल निकालें?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"वर्क प्रोफ़ाइल निकालें?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="2391372805233812410">"आप इस टैबलेट पर जगह और डेटा को खो देंगे. आप इस कार्रवाई को पहले जैसा नहीं कर सकते."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="7943645442479360048">"आप इस फ़ोन पर अपनी जगह और डेटा को खो देंगे. आप इस कार्रवाई को पहले जैसा नहीं कर सकते."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"सभी ऐप्लिकेशन और डेटा हटा दिए जाएंगे."</string>
@@ -2994,7 +3000,7 @@
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (सुझाया गया)"</string>
     <string name="mms_message_title" msgid="6068098013612041440">"मल्टीमीडिया मैसेज (एमएमएस)"</string>
     <string name="mms_message_summary" msgid="8408985719331988420">"मोबाइल डेटा बंद होने पर मल्टीमीडिया मैसेज (एमएमएस) भेजें और पाएं"</string>
-    <string name="work_sim_title" msgid="4843322164662606891">"कार्यस्थल सिम"</string>
+    <string name="work_sim_title" msgid="4843322164662606891">"दफ़्तर सिम"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"ऐप और सामग्री तक पहुंच"</string>
     <string name="user_rename" msgid="8523499513614655279">"नाम बदलें"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"ऐप्लिकेशन  प्रतिबंधों को सेट करें"</string>
@@ -3075,7 +3081,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"ब्लूटूथ"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ऐप्लिकेशन और सूचनाएं"</string>
     <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Assistant, हाल ही के ऐप्लिकेशन, डिफ़ॉल्ट ऐप्लिकेशन"</string>
-    <string name="notification_settings_work_profile" msgid="3186757479243373003">"कार्य प्रोफ़ाइल चालू होने पर ऐप्लिकेशन से जुड़ी सूचना नहीं देखी जा सकती है."</string>
+    <string name="notification_settings_work_profile" msgid="3186757479243373003">"वर्क प्रोफ़ाइल चालू होने पर ऐप्लिकेशन से जुड़ी सूचना नहीं देखी जा सकती है."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"खाते"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"कोई खाता नहीं जोड़ा गया"</string>
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"डिफ़ॉल्‍ट ऐप्लिकेशन"</string>
@@ -3125,7 +3131,7 @@
     <string name="keywords_color_temperature" msgid="6239410718075715449">"रंग, तापमान, D65, D73, सफ़ेद, पीला, नीला, वॉर्म, कूल"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"अनलॉक करने के लिए स्लाइड करें, पासवर्ड, पैटर्न, पिन"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"कार्य चुनौती, कार्य, प्रोफ़ाइल"</string>
-    <string name="keywords_unification" msgid="1922900767659821025">"कार्य प्रोफ़ाइल, प्रबंधित प्रोफ़ाइल, एक करना, एकीकरण, कार्य, प्रोफ़ाइल"</string>
+    <string name="keywords_unification" msgid="1922900767659821025">"वर्क प्रोफ़ाइल, प्रबंधित प्रोफ़ाइल, एक करना, एकीकरण, कार्य, प्रोफ़ाइल"</string>
     <string name="keywords_gesture" msgid="3526905012224714078">"जेस्चर"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"भुगतान करें, टैप करें, भुगतान"</string>
     <string name="keywords_backup" msgid="470070289135403022">"बैकअप, बैक अप"</string>
@@ -3161,8 +3167,7 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"हैप्टिक, वाइब्रेशन, संवेदनशीलता"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"बैटरी सेव करने वाला, स्टिकी, लगातार, पावर सेवर, बैटरी"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"रूटीन, शेड्यूल, बैटरी सेवर, पावर सेवर, बैटरी, ऑटोमैटिक, प्रतिशत"</string>
-    <!-- no translation found for keywords_add_an_account (6488139919428902434) -->
-    <skip />
+    <string name="keywords_add_an_account" msgid="6488139919428902434">"वर्क प्रोफ़ाइल"</string>
     <string name="default_sound" msgid="8821684447333687810">"डिफ़ॉल्‍ट ध्‍वनि"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"रिंग की आवाज़ <xliff:g id="PERCENTAGE">%1$s</xliff:g> है"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"आवाज़, कंपन (वाइब्रेशन), परेशान न करें"</string>
@@ -3254,8 +3259,7 @@
     <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"स्क्रीन के ऊपर दिए स्टेटस बार आइकॉन छिपाएं"</string>
     <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"ऐप्लिकेशन आइकॉन पर नई सूचनाएं बताने वाले गोल निशान छिपाएं"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"सूचनाएं पाने के लिए ऐप्लिकेशन को न जगाएं"</string>
-    <!-- no translation found for zen_mode_block_effect_list (4722887783222298295) -->
-    <skip />
+    <string name="zen_mode_block_effect_list" msgid="4722887783222298295">"नीचे खींचने वाली सूची से छिपाएं"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"कभी नहीं"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"स्क्रीन बंद होने पर"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="6017536991063513394">"स्क्रीन चालू होने पर"</string>
@@ -3317,16 +3321,16 @@
     <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"अगर आप यह सेटिंग चुनते हैं तो, सूचना आने पर न तो स्क्रीन पर कुछ दिखाया जाएगा और न ही कोई आवाज़ आएगी. पसंदीदा संपर्कों और दोबारा (पहली बार कॉल रिसीव न करने के 15 मिनट के अंदर ही दोबारा) कॉल करने वालों के कॉल आने दिए जाएंगे."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(मौजूदा सेटिंग)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"क्या आप \'परेशान न करें\' की सूचना सेटिंग में बदलाव करना चाहते हैं?"</string>
-    <string name="sound_work_settings" msgid="6774324553228566442">"कार्य प्रोफ़ाइल की ध्वनियां"</string>
+    <string name="sound_work_settings" msgid="6774324553228566442">"वर्क प्रोफ़ाइल की ध्वनियां"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"व्यक्तिगत प्रोफाइल ध्वनि काम में लें"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"कार्य और व्यक्तिगत प्रोफ़ाइल के लिए ध्वनियां एक समान होती हैं"</string>
     <string name="work_ringtone_title" msgid="5806657896300235315">"कार्य फ़ोन की रिंगटोन"</string>
-    <string name="work_notification_ringtone_title" msgid="6081247402404510004">"कार्य सूचना की डिफ़ॉल्ट आवाज़"</string>
+    <string name="work_notification_ringtone_title" msgid="6081247402404510004">"काम की सूचना वाली की डिफ़ॉल्ट आवाज़"</string>
     <string name="work_alarm_ringtone_title" msgid="1441926676833738891">"डिफ़ॉल्ट कार्य अलाम ध्वनि"</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"व्यक्तिगत प्रोफ़ाइल के समान"</string>
     <string name="work_sync_dialog_title" msgid="7123973297187354813">"ध्वनियां बदलें?"</string>
     <string name="work_sync_dialog_yes" msgid="7243884940551635717">"बदलें"</string>
-    <string name="work_sync_dialog_message" msgid="7841728953710863208">"आपकी व्यक्तिगत प्रोफ़ाइल की ध्वनियों का उपयोग आपकी कार्य प्रोफ़ाइल के लिए किया जाएगा"</string>
+    <string name="work_sync_dialog_message" msgid="7841728953710863208">"आपकी व्यक्तिगत प्रोफ़ाइल की ध्वनियों का उपयोग आपकी वर्क प्रोफ़ाइल के लिए किया जाएगा"</string>
     <string name="ringtones_install_custom_sound_title" msgid="5948792721161302255">"अपने मुताबिक आवाज़ जोड़ना चाहते हैं?"</string>
     <string name="ringtones_install_custom_sound_content" msgid="2195581481608512786">"इस फ़ाइल को <xliff:g id="FOLDER_NAME">%s</xliff:g> फ़ोल्डर में कॉपी किया जाएगा"</string>
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"रिंगटोन"</string>
@@ -3357,15 +3361,24 @@
     <string name="swipe_direction_title" msgid="6877543492435053137">"स्वाइप करने पर होने वाली कार्रवाइयां"</string>
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"खारिज करने के लिए दाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए बाईं ओर"</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"खारिज करने के लिए बाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए दाईं ओर"</string>
+    <string name="gentle_notifications_title" msgid="3976374971153475110">"सामान्य सूचनाएं"</string>
+    <string name="gentle_notifications_also_display" msgid="6455360420411828133">"इसमें भी दिखाएं"</string>
+    <string name="gentle_notifications_display_status" msgid="2904115658980383410">"स्टेटस बार"</string>
+    <string name="gentle_notifications_display_lock" msgid="1395567209329239992">"लॉक स्क्रीन"</string>
+    <string name="gentle_notifications_education" msgid="8713358646047345762">"सामान्य सूचनाएं हमेशा बिना आवाज़ और वाइब्रेशन के मिलती हैं और नीचे खींचने वाली सूची में ही दिखाई देती हैं"</string>
+    <string name="gentle_notifications_display_summary_shade" msgid="6583107817329430916">"सिर्फ़ नीचे खींचने वाली सूची में दिखाएं"</string>
+    <string name="gentle_notifications_display_summary_shade_lock" msgid="1434426811760016414">"नीचे खींचने वाली सूची और लॉक स्क्रीन पर दिखाएं"</string>
+    <string name="gentle_notifications_display_summary_shade_status" msgid="6113566548809874319">"नीचे खींचने वाली सूची और स्टेटस बार पर दिखाएं"</string>
+    <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"नीचे खींचने वाली सूची, स्टेटस बार और लॉक स्क्रीन पर दिखाएं"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"ब्लिंक लाइट"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"लॉक स्क्रीन"</string>
-    <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"कार्य प्रोफ़ाइल लॉक होने पर"</string>
+    <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"वर्क प्रोफ़ाइल लॉक होने पर"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"सारी सूचनाएं दिखाएं"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"संवेदनशील सामग्री, अनलॉक होने पर ही दिखाएं"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"सूचनाएं बिल्कुल न दिखाएं"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="3143593517597479937">"आपकी लॉक स्क्रीन कैसी दिखनी चाहिए?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="709573564312902481">"लॉक स्क्रीन"</string>
-    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"सभी कार्य सूचना सामग्री दिखाएं"</string>
+    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"सभी काम की सूचना वाली सामग्री दिखाएं"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"काम से जुड़ी संवेदनशील सूचनाएं छिपाएं"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"जब आपका डिवाइस लॉक हो, तो आप प्रोफ़ाइल सूचना को किस तरह दिखाया जाना चाहेंगे?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"प्रोफ़ाइल सूचना"</string>
@@ -3414,7 +3427,7 @@
     </plurals>
     <string name="notifications_sent_never" msgid="1001964786456700536">"कभी नहीं"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"सूचना का एक्सेस"</string>
-    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"कार्य प्रोफ़ाइल सूचना की पहुंच रोक दी गई है"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"वर्क प्रोफ़ाइल सूचना की पहुंच रोक दी गई है"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"ऐप सूचनाएं नहीं पढ़ सकते"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="one">%d ऐप सूचनाएं पढ़ सकते हैं</item>
@@ -3539,11 +3552,9 @@
       <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> और संपर्क</item>
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> और संपर्क</item>
     </plurals>
-    <!-- no translation found for zen_mode_messages (6406892731721926170) -->
-    <skip />
+    <string name="zen_mode_messages" msgid="6406892731721926170">"मैसेज दिखाने की मंज़ूरी दें"</string>
     <string name="zen_mode_messages_footer" msgid="2616568463646674149">"जिन मैसेज के आने की अनुमति है, उनके आने पर आवाज़ आए, यह पक्का करने के लिए देखें कि आपका डिवाइस रिंग करने, वाइब्रेट करने या मौन रहने में से किस मोड पर सेट है."</string>
-    <!-- no translation found for zen_mode_custom_messages_footer (800067279796770040) -->
-    <skip />
+    <string name="zen_mode_custom_messages_footer" msgid="800067279796770040">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ के लिए आने वाले मैसेज ब्लॉक कर दिए गए हैं. आप सेटिंग में अपने हिसाब से बदलाव करके दोस्तों, परिवार के सदस्यों या दूसरे लोगों को आपसे संपर्क करने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_mode_messages_title" msgid="7325983674655986445">"एसएमएस, एमएमएस, और मैसेज सेवा ऐप्लिकेशन"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"किसी से भी"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"सिर्फ़ संपर्कों से"</string>
@@ -3615,7 +3626,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"अनपिन करने से पहले पिन के लिए पूछें"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"अनपिन करने से पहले पासवर्ड के लिए पूछें"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"अनपिन करते समय डिवाइस लॉक करें"</string>
-    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"यह कार्य प्रोफ़ाइल इनके द्वारा प्रबंधित की जाती है:"</string>
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"यह वर्क प्रोफ़ाइल इनके द्वारा प्रबंधित की जाती है:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> द्वारा प्रबंधित"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(प्रायोगिक)"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"सुरक्षित स्‍टार्ट-अप"</string>
@@ -3717,7 +3728,7 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"हर बार पूछें"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"इस ऐप में ना खोलें"</string>
     <string name="default_apps_title" msgid="1660450272764331490">"डिफ़ॉल्ट"</string>
-    <string name="default_for_work" msgid="9152194239366247932">"कार्य के लिए डिफ़ॉल्ट"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"काम के लिए डिफ़ॉल्ट"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"सहायक और बोलकर निर्देश देना"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"सहायक ऐप्लिकेशन"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> को आपका सहायक बनाएं?"</string>
@@ -3954,7 +3965,7 @@
     <string name="condition_cellular_summary" msgid="816822977403022625">"इंटरनेट सिर्फ़ वाई-फ़ाई का इस्तेमाल करके चलेगा"</string>
     <string name="condition_bg_data_title" msgid="5475793236997935138">"डेटा बचाने की सेटिंग"</string>
     <string name="condition_bg_data_summary" msgid="1852811387315557164">"सुविधाओं पर पाबंदी लगाई गई है"</string>
-    <string name="condition_work_title" msgid="7293722361184366648">"कार्य प्रोफ़ाइल बंद है"</string>
+    <string name="condition_work_title" msgid="7293722361184366648">"वर्क प्रोफ़ाइल बंद है"</string>
     <string name="condition_work_summary" msgid="9167580982244020746">"ऐप्लिकेशन और सूचनाओं के लिए"</string>
     <string name="condition_device_muted_action_turn_on_sound" msgid="4930240942726349213">"आवाज़ चालू करें"</string>
     <string name="condition_device_muted_title" msgid="3476439379918599716">"रिंगर म्यूट कर दिया गया"</string>
@@ -4135,7 +4146,7 @@
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"त्वरित सेटिंग डेवलपर टाइल"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope ट्रेस"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"सेंसर बंद हैं"</string>
-    <string name="managed_profile_settings_title" msgid="2729481936758125054">"कार्य प्रोफ़ाइल सेटिंग"</string>
+    <string name="managed_profile_settings_title" msgid="2729481936758125054">"वर्क प्रोफ़ाइल सेटिंग"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"संपर्क सर्च"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"कॉल करने वालों (कॉलर) और संपर्कों की पहचान करने के लिए अपने संगठन को संपर्क खोजने दें"</string>
     <string name="cross_profile_calendar_title" msgid="4414835261437899531">"क्रॉस-प्रोफ़ाइल कैलेंडर"</string>
@@ -4213,7 +4224,7 @@
     <string name="configure_section_header" msgid="7391183586410814450">"कॉन्फ़िगर करें"</string>
     <string name="auto_sync_account_title" msgid="898796354710116383">"डेटा को अपने आप सिंक करें"</string>
     <string name="auto_sync_personal_account_title" msgid="8496263182646100610">"व्यक्तिगत डेटा अपने आप सिंक करें"</string>
-    <string name="auto_sync_work_account_title" msgid="4489172450037434152">"कार्यस्थल डेटा अपने आप सिंक करें"</string>
+    <string name="auto_sync_work_account_title" msgid="4489172450037434152">"दफ़्तर डेटा अपने आप सिंक करें"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"ऐप्लिकेशन को डेटा अपने आप रीफ्रे़श करने दें"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"खाता सिंक"</string>
     <string name="account_sync_summary_some_on" msgid="3375930757891381175">"<xliff:g id="ID_2">%2$d</xliff:g> में से <xliff:g id="ID_1">%1$d</xliff:g> आइटम के लिए सिंक करना चालू है"</string>
@@ -4251,11 +4262,11 @@
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"<xliff:g id="APP_LABEL">%s</xliff:g> पर सेट किया गया है"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"हमेशा-चालू VPN चालू है"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"आपकी व्यक्तिगत प्रोफ़ाइल में हमेशा-चालू VPN चालू है"</string>
-    <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"आपकी कार्य प्रोफ़ाइल में हमेशा-चालू VPN चालू है"</string>
+    <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"आपकी वर्क प्रोफ़ाइल में हमेशा-चालू VPN चालू है"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"वैश्विक HTTP प्रॉक्सी सेट है"</string>
     <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"भरोसेमंद क्रेडेंशियल"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"आपकी निजी प्रोफ़ाइल में मौजूद भरोसेमंद क्रेडेंशियल"</string>
-    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"आपकी कार्य प्रोफ़ाइल में मौजूद भरोसेमंद क्रेडेंशियल"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"आपकी वर्क प्रोफ़ाइल में मौजूद भरोसेमंद क्रेडेंशियल"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="one">कम से कम <xliff:g id="COUNT_1">%d</xliff:g> CA प्रमाणपत्र</item>
       <item quantity="other">कम से कम <xliff:g id="COUNT_1">%d</xliff:g> CA प्रमाणपत्र</item>
@@ -4263,7 +4274,7 @@
     <string name="enterprise_privacy_lock_device" msgid="8791656477097208540">"एडमिन डिवाइस को लॉक कर सकते हैं और पासवर्ड फिर से कर सकते हैं"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"व्यवस्थापक डिवाइस का सभी डेटा हटा सकता है"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="1001255609345002878">"डिवाइस का सभी डेटा हटाने से पहले विफल रही पासवर्ड की कोशिशें"</string>
-    <string name="enterprise_privacy_failed_password_wipe_work" msgid="4040565826652951057">"कार्य प्रोफ़ाइल डेटा हटाने से पहले विफल रही पासवर्ड की कोशिशें"</string>
+    <string name="enterprise_privacy_failed_password_wipe_work" msgid="4040565826652951057">"वर्क प्रोफ़ाइल डेटा हटाने से पहले विफल रही पासवर्ड की कोशिशें"</string>
     <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="5279099270351036696">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> कोशिशें</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> कोशिशें</item>

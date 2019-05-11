@@ -21,7 +21,6 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -112,8 +111,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         // Set the whole SwitchBar focusable and clickable.
         setFocusable(true);
         setClickable(true);
-        // Set a onClickListener to handle the functionality of ToggleSwitch.
-        setOnClickListener((View v) -> getDelegatingView().performClick());
 
         final TypedArray a = context.obtainStyledAttributes(attrs, XML_ATTRIBUTES);
         final int switchBarMarginStart = (int) a.getDimension(0, 0);
@@ -168,6 +165,12 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         setVisibility(View.GONE);
 
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+    }
+
+    // Override the performClick method to eliminate redundant click.
+    @Override
+    public boolean performClick() {
+        return getDelegatingView().performClick();
     }
 
     public void setMetricsTag(String tag) {

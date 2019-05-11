@@ -323,15 +323,10 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
     @Override
     public boolean onNavigateUp() {
-        Fragment fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
-        if (fragment instanceof WifiDppQrCodeGeneratorFragment) {
+        if (!mFragmentManager.popBackStackImmediate()) {
             finish();
-            return true;
-        } else if (fragment instanceof WifiDppQrCodeScannerFragment) {
-            mFragmentManager.popBackStackImmediate();
         }
-
-        return false;
+        return true;
     }
 
     @Override

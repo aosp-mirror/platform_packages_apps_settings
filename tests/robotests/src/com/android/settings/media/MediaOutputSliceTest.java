@@ -34,6 +34,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.telephony.TelephonyManager;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -55,12 +56,13 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowTelephonyManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class})
+@Config(shadows = {ShadowBluetoothAdapter.class, ShadowTelephonyManager.class})
 public class MediaOutputSliceTest {
 
     private static final String TEST_PACKAGE_NAME = "com.fake.android.music";
@@ -80,17 +82,21 @@ public class MediaOutputSliceTest {
     private MediaOutputSlice mMediaOutputSlice;
     private MediaDeviceUpdateWorker mMediaDeviceUpdateWorker;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
+    private ShadowTelephonyManager mShadowTelephonyManager;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mShadowTelephonyManager = Shadow.extract(mContext.getSystemService(
+                Context.TELEPHONY_SERVICE));
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         // Setup BluetoothAdapter
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);
+        mShadowTelephonyManager.setCallState(TelephonyManager.CALL_STATE_IDLE);
 
         mMediaOutputSlice = new MediaOutputSlice(mContext);
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, MEDIA_OUTPUT_SLICE_URI);
@@ -115,6 +121,18 @@ public class MediaOutputSliceTest {
     @Test
     public void getSlice_bluetoothIsDisable_shouldReturnZeroRow() {
         mShadowBluetoothAdapter.setEnabled(false);
+
+        final Slice slice = mMediaOutputSlice.getSlice();
+
+        final int rows = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null /* nonHints */).size();
+
+        assertThat(rows).isEqualTo(0);
+    }
+
+    @Test
+    public void getSlice_callStateRinging_shouldReturnZeroRow() {
+        mShadowTelephonyManager.setCallState(TelephonyManager.CALL_STATE_RINGING);
 
         final Slice slice = mMediaOutputSlice.getSlice();
 

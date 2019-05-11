@@ -95,4 +95,11 @@ public class SwitchBarTest {
         mBar.setDisabledByAdmin(null);
         assertThat(mBar.getDelegatingView().getId()).isEqualTo(R.id.switch_widget);
     }
+
+    @Test
+    public void performClick_shouldIsCheckedValueChange() {
+        boolean isChecked = mBar.isChecked();
+        mBar.performClick();
+        assertThat(mBar.isChecked()).isEqualTo(!isChecked);
+    }
 }

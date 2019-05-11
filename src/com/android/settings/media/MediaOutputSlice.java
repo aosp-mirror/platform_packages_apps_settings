@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -76,24 +77,21 @@ public class MediaOutputSlice implements CustomSliceable {
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED);
 
-        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        if (!adapter.isEnabled()) {
-            Log.d(TAG, "getSlice() Bluetooth is off");
-            return listBuilder.build();
-        }
-
-        if (getWorker() == null) {
-            Log.d(TAG, "getSlice() Can not get worker through uri!");
+        if (!isVisible()) {
+            Log.d(TAG, "getSlice() is not visible");
             return listBuilder.build();
         }
 
         final List<MediaDevice> devices = getMediaDevices();
 
         final MediaDevice connectedDevice = getWorker().getCurrentConnectedMediaDevice();
-        listBuilder.addRow(getActiveDeviceHeaderRow(connectedDevice));
+        if (connectedDevice != null) {
+            listBuilder.addRow(getActiveDeviceHeaderRow(connectedDevice));
+        }
 
         for (MediaDevice device : devices) {
-            if (!TextUtils.equals(connectedDevice.getId(), device.getId())) {
+            if (connectedDevice == null
+                    || !TextUtils.equals(connectedDevice.getId(), device.getId())) {
                 listBuilder.addRow(getMediaDeviceRow(device));
             }
         }
@@ -194,5 +192,20 @@ public class MediaOutputSlice implements CustomSliceable {
     @Override
     public Class getBackgroundWorkerClass() {
         return MediaDeviceUpdateWorker.class;
+    }
+
+    private boolean isVisible() {
+        // To decide Slice's visibility.
+        // Return true if
+        // 1. phone is not in ongoing call mode
+        // 2. worker is not null
+        // 3. Bluetooth is enabled
+        final TelephonyManager telephonyManager =
+                (TelephonyManager)mContext.getSystemService(Context.TELEPHONY_SERVICE);
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+
+        return telephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE
+                && adapter.isEnabled()
+                && getWorker() != null;
     }
 }

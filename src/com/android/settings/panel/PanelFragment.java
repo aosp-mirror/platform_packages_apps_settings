@@ -16,6 +16,8 @@
 
 package com.android.settings.panel;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -29,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -59,9 +60,14 @@ public class PanelFragment extends Fragment {
     private static final String TAG = "PanelFragment";
 
     /**
-     * Duration of the animation entering or exiting the screen, in milliseconds.
+     * Duration of the animation entering the screen, in milliseconds.
      */
-    private static final int DURATION_ANIMATE_PANEL_MS = 250;
+    private static final int DURATION_ANIMATE_PANEL_EXPAND_MS = 250;
+
+    /**
+     * Duration of the animation exiting the screen, in milliseconds.
+     */
+    private static final int DURATION_ANIMATE_PANEL_COLLAPSE_MS = 200;
 
     /**
      * Duration of timeout waiting for Slice data to bind, in milliseconds.
@@ -104,14 +110,52 @@ public class PanelFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        final FragmentActivity activity = getActivity();
-
         mLayoutView = inflater.inflate(R.layout.panel_layout, container, false);
+        createPanelContent();
+        return mLayoutView;
+    }
+
+    /**
+     * Animate the old panel out from the screen, then update the panel with new content once the
+     * animation is done.
+     * <p>
+     *     Takes the entire panel and animates out from behind the navigation bar.
+     * <p>
+     *     Call createPanelContent() once animation end.
+     */
+    void updatePanelWithAnimation() {
+        final View panelContent = mLayoutView.findViewById(R.id.panel_container);
+        final AnimatorSet animatorSet = buildAnimatorSet(mLayoutView,
+                0.0f /* startY */, panelContent.getHeight() /* endY */,
+                1.0f /* startAlpha */, 0.0f /* endAlpha */,
+                DURATION_ANIMATE_PANEL_COLLAPSE_MS);
+
+        final ValueAnimator animator = new ValueAnimator();
+        animator.setFloatValues(0.0f, 1.0f);
+        animatorSet.play(animator);
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                createPanelContent();
+            }
+        });
+        animatorSet.start();
+    }
+
+    private void createPanelContent() {
+        final FragmentActivity activity = getActivity();
+        if (mLayoutView == null) {
+            activity.finish();
+        }
 
         mPanelSlices = mLayoutView.findViewById(R.id.panel_parent_layout);
         mSeeMoreButton = mLayoutView.findViewById(R.id.see_more);
         mDoneButton = mLayoutView.findViewById(R.id.done);
         mTitleView = mLayoutView.findViewById(R.id.panel_title);
+
+        // Make the panel layout gone here, to avoid janky animation when updating from old panel.
+        // We will make it visible once the panel is ready to load.
+        mPanelSlices.setVisibility(View.GONE);
 
         final Bundle arguments = getArguments();
         final String panelType =
@@ -152,8 +196,6 @@ public class PanelFragment extends Fragment {
                 mPanel.getMetricsCategory(),
                 callingPackageName,
                 0 /* value */);
-
-        return mLayoutView;
     }
 
     private void loadAllSlices() {
@@ -220,6 +262,7 @@ public class PanelFragment extends Fragment {
             mPanelSlices.setAdapter(mAdapter);
             mPanelSlices.getViewTreeObserver()
                     .addOnGlobalLayoutListener(mOnGlobalLayoutListener);
+            mPanelSlices.setVisibility(View.VISIBLE);
 
             DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
             itemDecoration
@@ -237,8 +280,10 @@ public class PanelFragment extends Fragment {
      */
     private void animateIn() {
         final View panelContent = mLayoutView.findViewById(R.id.panel_container);
-        final AnimatorSet animatorSet = buildAnimatorSet(mLayoutView, panelContent.getHeight(),
-                0.0f, new DecelerateInterpolator());
+        final AnimatorSet animatorSet = buildAnimatorSet(mLayoutView,
+                panelContent.getHeight() /* startY */, 0.0f /* endY */,
+                0.0f /* startAlpha */, 1.0f /* endAlpha */,
+                DURATION_ANIMATE_PANEL_EXPAND_MS);
         final ValueAnimator animator = new ValueAnimator();
         animator.setFloatValues(0.0f, 1.0f);
         animatorSet.play(animator);
@@ -248,18 +293,21 @@ public class PanelFragment extends Fragment {
     }
 
     /**
-     * Build an {@link AnimatorSet} to bring the Panel, {@param parentView}in our out of the screen,
-     * based on the positional parameters {@param startY}, {@param endY} and at the rate set by the
-     * {@param interpolator}.
+     * Build an {@link AnimatorSet} to animate the Panel, {@param parentView} in or out of the
+     * screen, based on the positional parameters {@param startY}, {@param endY}, the parameters
+     * for alpha changes {@param startAlpha}, {@param endAlpha}, and the {@param duration} in
+     * milliseconds.
      */
     @NonNull
     private static AnimatorSet buildAnimatorSet(@NonNull View parentView, float startY, float endY,
-            @NonNull Interpolator interpolator) {
+            float startAlpha, float endAlpha, int duration) {
         final View sheet = parentView.findViewById(R.id.panel_container);
         final AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setDuration(DURATION_ANIMATE_PANEL_MS);
-        animatorSet.setInterpolator(interpolator);
-        animatorSet.playTogether(ObjectAnimator.ofFloat(sheet, View.TRANSLATION_Y, startY, endY));
+        animatorSet.setDuration(duration);
+        animatorSet.setInterpolator(new DecelerateInterpolator());
+        animatorSet.playTogether(
+                ObjectAnimator.ofFloat(sheet, View.TRANSLATION_Y, startY, endY),
+                ObjectAnimator.ofFloat(sheet, View.ALPHA, startAlpha,endAlpha));
         return animatorSet;
     }
 

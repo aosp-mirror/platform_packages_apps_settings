@@ -5080,8 +5080,9 @@
 
     <!-- Title for a warning about security implications of enabling an accessibility
          service. [CHAR LIMIT=NONE] -->
-    <string name="enable_service_title">Use
-         <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
+    <string name="enable_service_title">Allow
+         <xliff:g id="service" example="TalkBack">%1$s</xliff:g> to have full contol of your
+        device?</string>
     <!-- Title for the list of capabilities of an accessibility service. -->
     <string name="capabilities_list_title"><xliff:g id="service" example="TalkBack">%1$s</xliff:g>
         needs to:</string>
@@ -5122,11 +5123,43 @@
         This level of control is not appropriate for most apps.
     </string>
 
+    <!-- Warning description that explains that it's appropriate for accessibility
+         services to have full control to help users with accessibility needs. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_warning_description">Full control is appropriate for apps
+        that help you with accessibility needs, but not for most apps.
+    </string>
+
+    <!-- Title for the screen control in accessibility dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_screen_control_title">View and control screen</string>
+
+    <!-- Description for the screen control in accessibility dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_screen_control_description">It can read all content on the
+        screen and display content over other apps.
+    </string>
+
+    <!-- Title for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_action_perform_title">View and platform actions</string>
+
+    <!-- Description for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_action_perform_description">It can track your interactions
+        with an app or a hardware sensor, and interact with apps on your behalf.
+    </string>
+
+    <!-- String for the allow button in accessibility permission dialog. [CHAR LIMIT=10] -->
+    <string name="accessibility_dialog_button_allow">Allow</string>
+    <!-- String for the deny button in accessibility permission dialog. [CHAR LIMIT=10] -->
+    <string name="accessibility_dialog_button_deny">Deny</string>
+
+    <!-- String for the allow button in accessibility permission dialog. [CHAR LIMIT=10] -->
+    <string name="accessibility_dialog_button_stop">Stop</string>
+    <!-- String for the deny button in accessibility permission dialog. [CHAR LIMIT=10] -->
+    <string name="accessibility_dialog_button_cancel">Cancel</string>
+
     <!-- Title for a warning about disabling an accessibility service. [CHAR LIMIT=NONE] -->
     <string name="disable_service_title">Stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
     <!-- Message for a warning about disabling accessibility service. [CHAR LIMIT=NONE] -->
-    <string name="disable_service_message">Tapping OK will
-        stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>.</string>
+    <string name="disable_service_message">Tapping <xliff:g id="stop" example="Stop">%1$s</xliff:g> will
+        stop <xliff:g id="service" example="TalkBack">%2$s</xliff:g>.</string>
 
     <!-- Title for the prompt shown as a placeholder if no accessibility services are installed. [CHAR LIMIT=50] -->
     <string name="accessibility_no_services_installed">No services installed</string>
@@ -10510,9 +10543,9 @@
     <!-- Note displayed when certain features are not available on low ram devices. [CHAR LIMIT=NONE] -->
     <string name="disabled_low_ram_device">This feature is not available on this device</string>
     <!-- Note displayed when certain features are not available. [CHAR LIMIT=NONE] -->
-    <string name="disabled_feature">This feature is not available</string>
+    <string name="disabled_feature">Feature not available</string>
     <!-- Note displayed to explain that a feature is not available because it will slow down the phone. [CHAR LIMIT=NONE] -->
-    <string name="disabled_feature_reason_slow_down_phone">It will slow down this phone</string>
+    <string name="disabled_feature_reason_slow_down_phone">This feature has been turned off because it slows down your phone</string>
 
     <!-- UI debug setting: preference title - enforce full raw GNSS satellite measurements [CHAR LIMIT=60] -->
     <string name="enable_gnss_raw_meas_full_tracking">Force full GNSS measurements</string>

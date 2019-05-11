@@ -30,6 +30,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -120,7 +121,13 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(!isOpportunistic());
+        if (isOpportunistic()) {
+            preference.setEnabled(false);
+            preference.setSummary(R.string.mobile_data_settings_summary_auto_switch);
+        } else {
+            preference.setEnabled(true);
+            preference.setSummary(R.string.mobile_data_settings_summary);
+        }
     }
 
     private boolean isOpportunistic() {

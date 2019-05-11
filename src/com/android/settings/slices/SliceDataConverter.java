@@ -25,6 +25,7 @@ import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAILABLE_SLICE_SUBTITLE;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -52,6 +53,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable.SearchIndexProvider;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -76,10 +78,12 @@ class SliceDataConverter {
 
     private static final String NODE_NAME_PREFERENCE_SCREEN = "PreferenceScreen";
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
 
     public SliceDataConverter(Context context) {
         mContext = context;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     /**
@@ -151,6 +155,7 @@ class SliceDataConverter {
         XmlResourceParser parser = null;
 
         final List<SliceData> xmlSliceData = new ArrayList<>();
+        String controllerClassName = "";
 
         try {
             parser = mContext.getResources().getXml(xmlResId);
@@ -188,7 +193,7 @@ class SliceDataConverter {
             for (Bundle bundle : metadata) {
                 // TODO (b/67996923) Non-controller Slices should become intent-only slices.
                 // Note that without a controller, dynamic summaries are impossible.
-                final String controllerClassName = bundle.getString(METADATA_CONTROLLER);
+                controllerClassName = bundle.getString(METADATA_CONTROLLER);
                 if (TextUtils.isEmpty(controllerClassName)) {
                     continue;
                 }
@@ -226,12 +231,25 @@ class SliceDataConverter {
             }
         } catch (SliceData.InvalidSliceDataException e) {
             Log.w(TAG, "Invalid data when building SliceData for " + fragmentName, e);
-        } catch (XmlPullParserException e) {
-            Log.w(TAG, "XML Error parsing PreferenceScreen: ", e);
-        } catch (IOException e) {
-            Log.w(TAG, "IO Error parsing PreferenceScreen: ", e);
-        } catch (Resources.NotFoundException e) {
-            Log.w(TAG, "Resource not found error parsing PreferenceScreen: ", e);
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_VERIFY_SLICE_ERROR_INVALID_DATA,
+                    SettingsEnums.PAGE_UNKNOWN,
+                    controllerClassName,
+                    1);
+        } catch (XmlPullParserException | IOException | Resources.NotFoundException e) {
+            Log.w(TAG, "Error parsing PreferenceScreen: ", e);
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_VERIFY_SLICE_PARSING_ERROR,
+                    SettingsEnums.PAGE_UNKNOWN,
+                    fragmentName,
+                    1);
+        } catch (Exception e) {
+            Log.w(TAG, "Get slice data from XML failed ", e);
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_VERIFY_SLICE_OTHER_EXCEPTION,
+                    SettingsEnums.PAGE_UNKNOWN,
+                    fragmentName + "_" + controllerClassName,
+                    1);
         } finally {
             if (parser != null) parser.close();
         }

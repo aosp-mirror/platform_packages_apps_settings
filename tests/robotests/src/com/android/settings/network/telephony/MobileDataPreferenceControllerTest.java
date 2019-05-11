@@ -33,6 +33,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -165,5 +167,19 @@ public class MobileDataPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.mobile_data_settings_summary_auto_switch));
+    }
+
+    @Test
+    public void updateState_notOpportunistic_enabled() {
+        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
+        mController.init(mFragmentManager, SUB_ID);
+        doReturn(false).when(mSubscriptionInfo).isOpportunistic();
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.mobile_data_settings_summary));
     }
 }

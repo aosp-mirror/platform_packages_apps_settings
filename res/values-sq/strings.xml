@@ -374,7 +374,10 @@
     <string name="location_settings_title" msgid="1369675479310751735">"Vendndodhja"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"Përdor vendndodhjen"</string>
     <string name="location_settings_summary_location_off" msgid="794370259612167176">"Joaktiv"</string>
-    <!-- no translation found for location_settings_summary_location_on (5513447650619485188) -->
+    <plurals name="location_settings_summary_location_on" formatted="false" msgid="5513447650619485188">
+      <item quantity="other">Aktiv - <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacione kanë qasje te vendndodhja</item>
+      <item quantity="one">Aktiv - <xliff:g id="COUNT_0">%1$d</xliff:g> aplikacion ka qasje te vendndodhja</item>
+    </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="8523775367089431611">"Po ngarkohet…"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Llogaritë"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Siguria"</string>
@@ -418,27 +421,17 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Regjistrimi i fytyrës nuk funksionoi"</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Gjithçka gati. Duket mirë."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"U krye"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_category (4087133372842623883) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_use_face_unlock_phone (8780794239930621913) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Përdor shkyçjen me fytyrën për"</string>
+    <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Shkyçja e telefonit"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Identifikimi dhe pagesat e aplikacionit"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2643852178287575557) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1891157027896989860) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6063278991544881786) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_confirmation (3555852478589689141) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (7965662696468917986) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_remove_face_data (304401377141467791) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_enroll (664990192460698660) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer (7769500154351757004) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Kërko për shkyçjen me fytyrën"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Hap sytë kur shikon ekranin"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Për ta shkyçur telefonin, kërko gjithmonë që të shikosh në ekran me sytë të hapur"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Butoni i konfirmimit"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Kërko gjithmonë konfirmimin kur vërtetohet për aplikacionet"</string>
+    <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Fshi të dhënat e fytyrës"</string>
+    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Konfiguro një shkyçje të re me fytyrë"</string>
+    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Përdor Shkyçjen me fytyrën për të shkyçur pajisjen, për t\'u identifikuar tek aplikacionet dhe për të konfirmuar pagesat.\n\nKi parasysh:\nShikimi te telefoni mund ta shkyçë atë kur nuk planifikon këtë.\n\nTelefoni yt mund të shkyçet nga dikush tjetër nëse ai mbahet te fytyra jote kur i ke sytë të hapur.\n\nTelefoni yt mund të shkyçet nga dikush që ngjan shumë me ty, p.sh. fëmija yt ose një binjak."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Do t\'i fshish të dhënat e fytyrës?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Të dhënat e regjistruara nga shkyçja me fytyrën do të fshihen përgjithmonë dhe në mënyrë të sigurt. Pas heqjes, do të të duhet kodi PIN, motivi ose fjalëkalimi për ta shkyçur telefonin, për t\'u identifikuar në aplikacione dhe për të konfirmuar pagesat."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Gjurma e gishtit"</string>
@@ -488,18 +481,12 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Bëje më vonë"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Kapërce konfigurimin e gjurmës së gishtit?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Ke zgjedhur që të përdorësh gjurmën e gishtit si një mënyrë për ta shkyçur telefonin. Nëse e kapërcen teni, do të duhet ta konfigurosh këtë më vonë. Konfigurimi do të zgjasë vetëm afro një minutë."</string>
-    <!-- no translation found for fingerprint_lock_screen_setup_skip_dialog_text (7914950545902198894) -->
-    <skip />
-    <!-- no translation found for fingerprint_lock_screen_setup_skip_dialog_text (2300047476104528001) -->
-    <skip />
-    <!-- no translation found for fingerprint_lock_screen_setup_skip_dialog_text (5823994499768751994) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (4490601819500843860) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (3741624920522374098) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (3523360900206227082) -->
-    <skip />
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Mbroje tabletin tënd me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar gjurmën e gishtit. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Mbroje pajisjen tënde me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar gjurmën e gishtit. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Mbroje telefonin tënd me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar gjurmën e gishtit. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Mbroje tabletin tënd me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar vërtetimin me fytyrë. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Mbroje pajisjen tënde me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar vërtetimin me fytyrë. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Mbroje telefonin tënd me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar vërtetimin me fytyrë. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Do ta kapërcesh konfigurimin e kodit PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Do ta kapërcesh konfigurimin e fjalëkalimit?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Do ta kapërcesh konfigurimin e motivit?"</string>
@@ -792,8 +779,7 @@
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"Telefoni yt nuk do të jetë më i çiftuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"Tableti yt nuk do të jetë më i çiftuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"Pajisja jote nuk do të jetë më e çiftuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_untethered_unpair_dialog_body (5932168717642676140) -->
-    <skip />
+    <string name="bluetooth_untethered_unpair_dialog_body" msgid="5932168717642676140">"Pajisja <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nuk do të jetë më e çiftuar me asnjë pajisje të lidhur me këtë llogari"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"Harroje pajisjen"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Lidhu me…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> do të shkëputet nga audioja e medias."</string>
@@ -1040,7 +1026,10 @@
       <item quantity="other">%d abonime</item>
       <item quantity="one">1 abonim</item>
     </plurals>
-    <!-- no translation found for wifi_saved_all_access_points_summary (2504425359919617586) -->
+    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="2504425359919617586">
+      <item quantity="other">%d rrjete dhe abonime</item>
+      <item quantity="one">1 rrjet dhe abonim</item>
+    </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Cilësimet e Wi‑Fi"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Adresa MAC"</string>
@@ -1263,10 +1252,8 @@
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Ndrysho imazhin e sfondit"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizo ekranin"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Zgjidh imazhin e sfondit nga"</string>
-    <!-- no translation found for style_suggestion_title (4710867417147087928) -->
-    <skip />
-    <!-- no translation found for style_suggestion_summary (4592087484229499188) -->
-    <skip />
+    <string name="style_suggestion_title" msgid="4710867417147087928">"Personalizo Pixel"</string>
+    <string name="style_suggestion_summary" msgid="4592087484229499188">"Provo stile, imazhe sfondi, ora të ndryshme etj."</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Mbrojtësi i ekranit"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Gjatë karikimit ose lidhjes me stacionin"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Në të dyja rastet"</string>
@@ -1672,7 +1659,10 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Vend. për profilin e punës"</string>
     <string name="location_app_level_permissions" msgid="2777033567595680764">"Autorizimi i aplikacionit"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"Vendndodhja është joaktive"</string>
-    <!-- no translation found for location_app_permission_summary_location_on (5336807018727349708) -->
+    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="5336807018727349708">
+      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> nga <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacione kanë qasje te vendndodhja</item>
+      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> nga <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> aplikacione ka qasje te vendndodhja</item>
+    </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"Qasja te vendndodhja e fundit"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"Shiko detajet"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Asnjë aplikacion nuk ka kërkuar vendndodhje kohët e fundit"</string>
@@ -2071,7 +2061,7 @@
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Një lexues i ekranit kryesisht për personat e verbër dhe me shikim të dobët"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Trokit artikujt në ekran për t\'i dëgjuar të lexuar me zë të lartë"</string>
-    <string name="accessibility_captioning_title" msgid="7589266662024836291">"Titrat"</string>
+    <string name="accessibility_captioning_title" msgid="8068289534732163115">"Preferencat e titrave"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Zmadhimi"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Zmadho me tre trokitje"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Zmadho me butonin"</string>
@@ -2112,12 +2102,10 @@
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Koha e qëndrimit pa lëvizur"</string>
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Nëse po përdor një mi, mund të caktosh që kursori të kryejë automatikisht një veprim kur ai të ndalojë lëvizjen për një kohë të caktuar."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Vonesa përpara klikimit"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (3196059463767462026) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"Fuqia e dridhjeve dhe e prekjes"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Dridhjet e njoftimeve"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Dridhjet e ziles"</string>
-    <!-- no translation found for accessibility_touch_vibration_title (3548641513105226156) -->
-    <skip />
+    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Reagimi me prekje"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Përdor shërbimin"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Përdor korrigjimin e ngjyrave"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Përdor titrat"</string>
@@ -2606,12 +2594,10 @@
     <string name="add_device_admin" msgid="4192055385312215731">"Aktivizo këtë aplikacion të administratorit të pajisjes"</string>
     <string name="device_admin_add_title" msgid="3140663753671809044">"Administratori i pajisjes"</string>
     <string name="device_admin_warning" msgid="7482834776510188134">"Aktivizimi i këtij aplikacioni të administratorit do të lejojë që aplikacioni <xliff:g id="APP_NAME">%1$s</xliff:g> të kryejë veprimet e mëposhtme:"</string>
-    <!-- no translation found for device_admin_warning_simplified (8085544856342321981) -->
-    <skip />
+    <string name="device_admin_warning_simplified" msgid="8085544856342321981">"Kjo pajisje do të menaxhohet dhe do të monitorohet nga <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
     <string name="device_admin_status" msgid="7234814785374977990">"Ky aplikacion administratori është aktiv dhe lejon apl. <xliff:g id="APP_NAME">%1$s</xliff:g> të kryejë veprimet e mëposhtme:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Të aktivizohet menaxheri i profilit?"</string>
-    <!-- no translation found for profile_owner_add_title_simplified (6856400286736117006) -->
-    <skip />
+    <string name="profile_owner_add_title_simplified" msgid="6856400286736117006">"Të lejohet mbikëqyrja?"</string>
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"Duke vazhduar, profili yt si \"përdorues\" do të menaxhohet nga administratori yt, i cili mund të ruajë të dhënat e lidhura, përveç të dhënave të tua personale.\n\nAdministratori yt ka aftësinë që të monitorojë dhe të menaxhojë cilësimet, qasjen, aplikacionet dhe të dhënat e lidhura me këtë përdorues, duke përfshirë aktivitetin e rrjetit dhe informacionet e vendndodhjes së pajisjes tënde."</string>
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"Opsionet e tjera janë çaktivizuar nga administratori yt"</string>
     <string name="admin_more_details" msgid="7901420667346456102">"Më shumë detaje"</string>
@@ -2764,8 +2750,7 @@
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Rrjetet Wi‑Fi me konsum të kufizuar"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Për të zgjedhur rrjetet me konsum të kufizuar, aktivizo Wi‑Fi."</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"Automatike"</string>
-    <!-- no translation found for wifi_metered_title (5536703738895222444) -->
-    <skip />
+    <string name="wifi_metered_title" msgid="5536703738895222444">"Përdorimi i rrjetit"</string>
     <string name="data_usage_metered_yes" msgid="9217539611385225894">"Me matje"</string>
     <string name="data_usage_metered_no" msgid="4025232961929071789">"Pa matje"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"Llogaritja e të dhënave nga operatori mund të ndryshojë nga ajo e pajisjes tënde."</string>
@@ -3214,7 +3199,7 @@
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Asnjë tingull përveç <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Asnjë tingull përveç alarmeve dhe medias"</string>
     <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"Oraret"</string>
-    <string name="zen_mode_delete_automatic_rules" msgid="5975522152123354381">"Fshi planifikimet"</string>
+    <string name="zen_mode_delete_automatic_rules" msgid="5975522152123354381">"Fshi oraret"</string>
     <string name="zen_mode_schedule_delete" msgid="5717258786128155695">"Fshi"</string>
     <string name="zen_mode_rule_name_edit" msgid="812185626159430507">"Redakto"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="8995524726286378583">"Oraret"</string>
@@ -3254,8 +3239,7 @@
     <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"Fshih ikonat e shiritit të statusit në krye të ekranit"</string>
     <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"Fshih pikat e njoftimeve në ikonat e aplikacioneve"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Mos zgjo për njoftimet"</string>
-    <!-- no translation found for zen_mode_block_effect_list (4722887783222298295) -->
-    <skip />
+    <string name="zen_mode_block_effect_list" msgid="4722887783222298295">"Fshihe nga streha me tërheqje poshtë"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Asnjëherë"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Kur ekrani është joaktiv"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="6017536991063513394">"Kur ekrani është aktiv"</string>
@@ -3336,8 +3320,7 @@
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Shih të gjithë apl. në 7 ditët e fundit"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Të përparuara"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Njoftimet e punës"</string>
-    <!-- no translation found for smart_notifications_title (3702411478231865970) -->
-    <skip />
+    <string name="smart_notifications_title" msgid="3702411478231865970">"Njoftimet me përshtatje"</string>
     <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Përcaktimi automatik i prioritetit"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Caktoji automatikisht njoftimet me prioritet më të ulët te \"Me rëndësi të ulët\""</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Veprimet dhe përgjigjet e sugjeruara"</string>
@@ -3357,6 +3340,15 @@
     <string name="swipe_direction_title" msgid="6877543492435053137">"Veprimet me rrëshqitje"</string>
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"Rrëshqit shpejt djathtas për ta hequr, ose majtas për të shfaqur menynë"</string>
     <string name="swipe_direction_rtl" msgid="4972099509548044938">"Rrëshqit shpejt majtas për ta hequr, ose djathtas për të shfaqur menynë"</string>
+    <string name="gentle_notifications_title" msgid="3976374971153475110">"Njoftimet me rëndësi të ulët"</string>
+    <string name="gentle_notifications_also_display" msgid="6455360420411828133">"Shfaq po ashtu në"</string>
+    <string name="gentle_notifications_display_status" msgid="2904115658980383410">"Shiriti i statusit"</string>
+    <string name="gentle_notifications_display_lock" msgid="1395567209329239992">"Ekrani i kyçjes"</string>
+    <string name="gentle_notifications_education" msgid="8713358646047345762">"Njoftimet me rëndësi të ulët janë gjithmonë në heshtje dhe shfaqen gjithmonë në strehën me tërheqje poshtë"</string>
+    <string name="gentle_notifications_display_summary_shade" msgid="6583107817329430916">"Shfaq vetëm në strehën me tërheqje poshtë"</string>
+    <string name="gentle_notifications_display_summary_shade_lock" msgid="1434426811760016414">"Shfaq në strehën me tërheqje poshtë dhe në ekranin e kyçjes"</string>
+    <string name="gentle_notifications_display_summary_shade_status" msgid="6113566548809874319">"Shfaq në strehën me tërheqje poshtë dhe shiritin e statusit"</string>
+    <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Shfaq në strehën me tërheqje poshtë, shiritin e statusit dhe në ekranin e kyçjes"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Drita me pulsim"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Ekrani i kyçjes"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kur profili i punës është i kyçur"</string>
@@ -3391,16 +3383,11 @@
     <string name="allow_interruption" msgid="7136150018111848721">"Lejo ndërprerjet"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Lejo që aplikacioni të lëshojë tingull, të dridhet dhe/ose të shfaqë njoftime në ekran"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Në strehën me tërheqje poshtë, palosi njoftimet në një rresht"</string>
-    <!-- no translation found for notification_channel_summary_low (7875385321253491191) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status (7866565328564018007) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_lock (4009247523075328235) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_low_status_lock (3668028634045057230) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (4618537204284469990) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Të ndihmon të përqendrohesh me njoftimet vetëm në panelin zbritës. Gjithmonë në heshtje."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Shfaqet nën njoftimet me përparësi. Gjithmonë në heshtje."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Shfaqet nën njoftimet me përparësi. Gjithmonë në heshtje."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Shfaqet nën njoftimet me përparësi. Gjithmonë në heshtje."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Të tërheq vëmendjen me tingull dhe një ikonë në shiritin e statusit. Shfaqet në ekranin e kyçjes."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Kur pajisja është e shkyçur, shfaq njoftimet si një banderolë përgjatë kreut të ekranit"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Shfaq njoftimet"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Njoftimet me përshtatje"</string>
@@ -3539,11 +3526,9 @@
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> të tjerë</item>
       <item quantity="one">1 tjetër</item>
     </plurals>
-    <!-- no translation found for zen_mode_messages (6406892731721926170) -->
-    <skip />
+    <string name="zen_mode_messages" msgid="6406892731721926170">"Lejo mesazhet"</string>
     <string name="zen_mode_messages_footer" msgid="2616568463646674149">"Sigurohu që mesazhet e lejuara të lëshojnë tingull, kontrollo nëse pajisja jote është caktuar me zile, dridhje ose heshtje."</string>
-    <!-- no translation found for zen_mode_custom_messages_footer (800067279796770040) -->
-    <skip />
+    <string name="zen_mode_custom_messages_footer" msgid="800067279796770040">"Për \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\", mesazhet hyrëse janë të bllokuara. Mund t\'i rregullosh cilësimet për të lejuar shokët, familjen ose kontakte të tjera të lidhen me ty."</string>
     <string name="zen_mode_messages_title" msgid="7325983674655986445">"Aplikacionet për SMS, MMS dhe mesazhe"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Nga të gjithë"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Vetëm nga kontaktet"</string>
@@ -4562,10 +4547,8 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Vendndodhja"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Ofruesi yt i shërbimit mund të marrë vendndodhjen tënde për të ofruar këtë shërbim.\n\nRishiko politikën e privatësisë së ofruesit të shërbimit."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Mund të humbasësh qasjen për çdo kohë ose të dhënë të mbetur. Kontakto me ofruesin tënd para se ta heqësh."</string>
-    <!-- no translation found for keywords_content_capture (8252675452668954083) -->
-    <skip />
-    <!-- no translation found for content_capture (3210232615756364639) -->
-    <skip />
+    <string name="keywords_content_capture" msgid="8252675452668954083">"regjistrimi i përmbajtjes, përmbajtja e aplikacionit"</string>
+    <string name="content_capture" msgid="3210232615756364639">"Përmbajtja e aplikacionit"</string>
     <string name="content_capture_summary" msgid="659506647507221852">"Lejo që aplikacionet të dërgojnë përmbajtje te sistemi Android"</string>
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"Regjistro stivën e skedarëve fiktivë të sistemit"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"Stiva e skedarëve fiktivë të sistemit po regjistrohet"</string>
