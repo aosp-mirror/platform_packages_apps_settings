@@ -83,15 +83,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         mHandler = new Handler();
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
-        final Button accessibilityButton = findViewById(R.id.accessibility_button);
-        accessibilityButton.setOnClickListener(view -> {
-            mSwitchDiversity.setChecked(true);
-            accessibilityButton.setVisibility(View.GONE);
-            mSwitchDiversity.setVisibility(View.VISIBLE);
-        });
-
-        mSwitchDiversity = findViewById(R.id.toggle_diversity);
-        mSwitchDiversity.setListener(mSwitchDiversityListener);
 
         mIllustrationNormal = findViewById(R.id.illustration_normal);
         mIllustrationAccessibility = findViewById(R.id.illustration_accessibility);
@@ -125,6 +116,17 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                 footerButton.setEnabled(true);
             }, FACE_ENROLL_EDUCATION_DELAY);
         }
+
+        final Button accessibilityButton = findViewById(R.id.accessibility_button);
+        accessibilityButton.setOnClickListener(view -> {
+            footerButton.setEnabled(true);
+            mSwitchDiversity.setChecked(true);
+            accessibilityButton.setVisibility(View.GONE);
+            mSwitchDiversity.setVisibility(View.VISIBLE);
+        });
+
+        mSwitchDiversity = findViewById(R.id.toggle_diversity);
+        mSwitchDiversity.setListener(mSwitchDiversityListener);
     }
 
     @Override
