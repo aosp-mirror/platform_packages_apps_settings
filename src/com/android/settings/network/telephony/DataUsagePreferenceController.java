@@ -21,9 +21,7 @@ import android.content.Intent;
 import android.net.NetworkTemplate;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.text.format.Formatter;
 
 import androidx.preference.Preference;
 
@@ -87,9 +85,10 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
         mSubId = subId;
 
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            mTemplate = getNetworkTemplate(mContext, subId);
+            mTemplate = DataUsageUtils.getDefaultTemplate(mContext, mSubId);
 
             final DataUsageController controller = new DataUsageController(mContext);
+            controller.setSubscriptionId(mSubId);
             mDataUsageInfo = controller.getDataUsageInfo(mTemplate);
 
             mIntent = new Intent(Settings.ACTION_MOBILE_DATA_USAGE);
@@ -97,12 +96,4 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
             mIntent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
         }
     }
-
-    private NetworkTemplate getNetworkTemplate(Context context, int subId) {
-        final TelephonyManager tm = TelephonyManager.from(context).createForSubscriptionId(subId);
-        NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(tm.getSubscriberId());
-
-        return NetworkTemplate.normalize(mobileAll, tm.getMergedSubscriberIds());
-    }
-
 }

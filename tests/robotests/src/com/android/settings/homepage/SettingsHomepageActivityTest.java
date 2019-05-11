@@ -35,8 +35,6 @@ public class SettingsHomepageActivityTest {
     public void setHomepageContainerPaddingTop_shouldBeSetPaddingTop() {
         final SettingsHomepageActivity activity = Robolectric.buildActivity(
                 SettingsHomepageActivity.class).create().get();
-        final int statusBarHeight = activity.getResources().getDimensionPixelSize(
-                com.android.internal.R.dimen.status_bar_height);
         final int searchBarHeight = activity.getResources().getDimensionPixelSize(
                 R.dimen.search_bar_height);
         final int searchBarMargin = activity.getResources().getDimensionPixelSize(
@@ -46,8 +44,7 @@ public class SettingsHomepageActivityTest {
         activity.setHomepageContainerPaddingTop();
 
         final int actualPaddingTop = view.getPaddingTop();
-        assertThat(actualPaddingTop).isEqualTo(
-                statusBarHeight + searchBarHeight + searchBarMargin * 2);
+        assertThat(actualPaddingTop).isEqualTo(searchBarHeight + searchBarMargin * 2);
     }
 
     @Test

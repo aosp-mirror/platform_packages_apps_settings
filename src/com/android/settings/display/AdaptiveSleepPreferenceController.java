@@ -20,9 +20,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
@@ -60,10 +57,12 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_adaptive_sleep_available)
-                ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        final boolean supportedOnDevice =  mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_adaptive_sleep_available);
+        if (!supportedOnDevice) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        return hasSufficientPermissions ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 
     @Override
@@ -76,16 +75,5 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
         return mContext.getText(isChecked()
                 ? R.string.adaptive_sleep_summary_on
                 : R.string.adaptive_sleep_summary_off);
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference preference = screen.findPreference(SYSTEM_KEY);
-
-        if (preference != null) {
-            preference.setEnabled(hasSufficientPermissions);
-        }
-
     }
 }

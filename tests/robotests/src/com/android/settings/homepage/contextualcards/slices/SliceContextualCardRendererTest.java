@@ -16,11 +16,13 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_DEFERRED_SETUP;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
@@ -161,6 +163,15 @@ public class SliceContextualCardRendererTest {
     }
 
     @Test
+    public void bindView_deferredSetupCard_shouldNotCrash() {
+        final RecyclerView.ViewHolder viewHolder = getDeferredSetupViewHolder();
+        final ContextualCard card = buildContextualCard(TEST_SLICE_URI);
+        mRenderer.mSliceLiveDataMap.put(TEST_SLICE_URI, mSliceLiveData);
+
+        mRenderer.bindView(viewHolder, card);
+    }
+
+    @Test
     public void viewClick_keepCard_shouldShowSlice() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final View sliceView = viewHolder.itemView.findViewById(R.id.slice_view);
@@ -244,6 +255,18 @@ public class SliceContextualCardRendererTest {
                 false);
 
         return mRenderer.createViewHolder(view, VIEW_TYPE_FULL_WIDTH);
+    }
+
+    private RecyclerView.ViewHolder getDeferredSetupViewHolder() {
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final View view = LayoutInflater.from(mActivity)
+                .inflate(VIEW_TYPE_DEFERRED_SETUP, recyclerView, false);
+        final RecyclerView.ViewHolder viewHolder = spy(
+                new SliceDeferredSetupCardRendererHelper.DeferredSetupCardViewHolder(view));
+        doReturn(VIEW_TYPE_DEFERRED_SETUP).when(viewHolder).getItemViewType();
+
+        return viewHolder;
     }
 
     private ContextualCard buildContextualCard(Uri sliceUri) {

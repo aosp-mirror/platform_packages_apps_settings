@@ -99,10 +99,15 @@ public class BatterySaverScheduleSeekBarController implements
         }
     }
 
+    /**
+     * Adds the seekbar to the end of the provided preference screen
+     *
+     * @param screen The preference screen to add the seekbar to
+     */
     public void addToScreen(PreferenceScreen screen) {
         // makes sure it gets added after the preferences if called due to first time battery
         // saver message
-        mSeekBarPreference.setOrder(5);
+        mSeekBarPreference.setOrder(100);
         screen.addPreference(mSeekBarPreference);
     }
 }

@@ -378,6 +378,9 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     @VisibleForTesting
     void restartBatteryInfoLoader() {
+        if (getContext() == null) {
+            return;
+        }
         getLoaderManager().restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
                 mBatteryInfoLoaderCallbacks);
         if (mPowerFeatureProvider.isEstimateDebugEnabled()) {

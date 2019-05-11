@@ -52,16 +52,18 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
 
     protected final IOverlayManager mOverlayManager;
     protected PreferenceScreen mPreferenceScreen;
+    private final String mOverlayPackage;
 
     public SystemNavigationPreferenceController(Context context, IOverlayManager overlayManager,
-            String key) {
+            String key, String overlayPackage) {
         super(context, key);
         mOverlayManager = overlayManager;
+        mOverlayPackage = overlayPackage;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return isGestureAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return isGestureAvailable(mContext, mOverlayPackage) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -105,23 +107,43 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
         return PREF_KEY_VIDEO;
     }
 
+
     static boolean isGestureAvailable(Context context) {
+        return isGestureAvailable(context, null /* overlayPackage */);
+    }
+
+    static boolean isGestureAvailable(Context context, String overlayPackage) {
+        // Skip if the swipe up settings are not available
         if (!context.getResources().getBoolean(
                 com.android.internal.R.bool.config_swipe_up_gesture_setting_available)) {
             return false;
         }
 
+        // Skip if the recents component is not defined
         final ComponentName recentsComponentName = ComponentName.unflattenFromString(
                 context.getString(com.android.internal.R.string.config_recentsComponentName));
         if (recentsComponentName == null) {
             return false;
         }
+
+        // Skip if the overview proxy service exists
+        final PackageManager pm = context.getPackageManager();
         final Intent quickStepIntent = new Intent(ACTION_QUICKSTEP)
                 .setPackage(recentsComponentName.getPackageName());
-        if (context.getPackageManager().resolveService(quickStepIntent,
-                PackageManager.MATCH_SYSTEM_ONLY) == null) {
+        if (pm.resolveService(quickStepIntent, PackageManager.MATCH_SYSTEM_ONLY) == null) {
             return false;
         }
+
+        // Skip if the required overlay package is defined but doesn't exist
+        if (overlayPackage != null) {
+            try {
+                return pm.getPackageInfo(overlayPackage, 0 /* flags */) != null;
+            } catch (PackageManager.NameNotFoundException e) {
+                // Not found, just return unavailable
+                return false;
+            }
+        }
+
         return true;
     }
 

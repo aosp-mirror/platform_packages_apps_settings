@@ -21,6 +21,9 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -35,6 +38,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.network.telephony.DataConnectivityListener;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -46,14 +50,18 @@ import java.util.Map;
  * available if there are 2 or more subscriptions.
  */
 public class SubscriptionsPreferenceController extends AbstractPreferenceController implements
-        LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
+        LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
+        MobileDataEnabledListener.Client, DataConnectivityListener.Client {
     private static final String TAG = "SubscriptionsPrefCntrlr";
 
     private UpdateListener mUpdateListener;
     private String mPreferenceGroupKey;
     private PreferenceGroup mPreferenceGroup;
     private SubscriptionManager mManager;
+    private ConnectivityManager mConnectivityManager;
     private SubscriptionsChangeListener mSubscriptionsListener;
+    private MobileDataEnabledListener mDataEnabledListener;
+    private DataConnectivityListener mConnectivityListener;
 
     // Map of subscription id to Preference
     private Map<Integer, Preference> mSubscriptionPreferences;
@@ -89,20 +97,27 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mPreferenceGroupKey = preferenceGroupKey;
         mStartOrder = startOrder;
         mManager = context.getSystemService(SubscriptionManager.class);
+        mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
         mSubscriptionPreferences = new ArrayMap<>();
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
+        mDataEnabledListener = new MobileDataEnabledListener(context, this);
+        mConnectivityListener = new DataConnectivityListener(context, this);
         lifecycle.addObserver(this);
     }
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
         mSubscriptionsListener.start();
+        mDataEnabledListener.start(SubscriptionManager.getDefaultDataSubscriptionId());
+        mConnectivityListener.start();
         update();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
         mSubscriptionsListener.stop();
+        mDataEnabledListener.stop();
+        mConnectivityListener.stop();
     }
 
     @Override
@@ -158,6 +173,19 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mUpdateListener.onChildrenUpdated();
     }
 
+    private boolean activeNetworkIsCellular() {
+        final Network activeNetwork = mConnectivityManager.getActiveNetwork();
+        if (activeNetwork == null) {
+            return false;
+        }
+        final NetworkCapabilities networkCapabilities = mConnectivityManager.getNetworkCapabilities(
+                activeNetwork);
+        if (networkCapabilities == null) {
+            return false;
+        }
+        return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
+    }
+
     /**
      * The summary can have either 1 or 2 lines depending on which services (calls, SMS, data) this
      * subscription is the default for.
@@ -187,10 +215,10 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         if (subId == dataDefaultSubId) {
             final TelephonyManager telMgrForSub = mContext.getSystemService(
                     TelephonyManager.class).createForSubscriptionId(subId);
-            final int dataState = telMgrForSub.getDataState();
-            if (dataState == TelephonyManager.DATA_CONNECTED) {
+            boolean dataEnabled = telMgrForSub.isDataEnabled();
+            if (dataEnabled && activeNetworkIsCellular()) {
                 line2 = mContext.getString(R.string.mobile_data_active);
-            } else if (!telMgrForSub.isDataEnabled()) {
+            } else if (!dataEnabled) {
                 line2 = mContext.getString(R.string.mobile_data_off);
             } else {
                 line2 = mContext.getString(R.string.default_for_mobile_data);
@@ -231,6 +259,22 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
     @Override
     public void onSubscriptionsChanged() {
+        // See if we need to change which sub id we're using to listen for enabled/disabled changes.
+        int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
+        if (defaultDataSubId != mDataEnabledListener.getSubId()) {
+            mDataEnabledListener.stop();
+            mDataEnabledListener.start(defaultDataSubId);
+        }
+        update();
+    }
+
+    @Override
+    public void onMobileDataEnabledChange() {
+        update();
+    }
+
+    @Override
+    public void onDataConnectivityChange() {
         update();
     }
 }

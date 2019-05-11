@@ -178,9 +178,10 @@ public final class DataUsageUtils {
      * Returns the default network template based on the availability of mobile data, Wifi. Returns
      * ethernet template if both mobile data and Wifi are not available.
      */
-    static NetworkTemplate getDefaultTemplate(Context context, int defaultSubId) {
+    public static NetworkTemplate getDefaultTemplate(Context context, int defaultSubId) {
         if (hasMobileData(context) && defaultSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            TelephonyManager telephonyManager = TelephonyManager.from(context);
+            TelephonyManager telephonyManager = TelephonyManager.from(context)
+                    .createForSubscriptionId(defaultSubId);
             NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
                     telephonyManager.getSubscriberId(defaultSubId));
             return NetworkTemplate.normalize(mobileAll,

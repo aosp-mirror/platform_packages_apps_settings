@@ -27,11 +27,13 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -44,6 +46,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -68,6 +71,8 @@ public class DataUsageSummaryTest {
     private NetworkPolicyManager mNetworkPolicyManager;
     @Mock
     private NetworkStatsManager mNetworkStatsManager;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private TelephonyManager mTelephonyManager;
     private Context mContext;
     private FragmentActivity mActivity;
     private SummaryLoader.SummaryProvider mSummaryProvider;
@@ -84,7 +89,9 @@ public class DataUsageSummaryTest {
         ShadowUserManager.getShadow().setIsAdminUser(true);
         shadowContext.setSystemService(Context.NETWORK_POLICY_SERVICE, mNetworkPolicyManager);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         doReturn(mNetworkStatsManager).when(mActivity).getSystemService(NetworkStatsManager.class);
 

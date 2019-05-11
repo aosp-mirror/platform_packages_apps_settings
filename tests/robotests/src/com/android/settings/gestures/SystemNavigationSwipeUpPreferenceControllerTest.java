@@ -131,6 +131,12 @@ public class SystemNavigationSwipeUpPreferenceControllerTest {
     }
 
     @Test
+    public void testIsGestureAvailable_noOverlayPackage_shouldReturnFalse() {
+        assertThat(SystemNavigationSwipeUpPreferenceController.isGestureAvailable(mContext,
+                "com.package.fake")).isFalse();
+    }
+
+    @Test
     public void testIsChecked_defaultIsSwipeUp_shouldReturnTrue() {
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_2BUTTON);

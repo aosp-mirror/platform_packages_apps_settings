@@ -18,6 +18,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settings_homepage_container"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -57,7 +59,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="@*android:dimen/status_bar_height"
+            android:layout_height="0dp"
             android:background="@android:color/transparent"
             app:layout_scrollFlags="scroll|enterAlways"/>
 

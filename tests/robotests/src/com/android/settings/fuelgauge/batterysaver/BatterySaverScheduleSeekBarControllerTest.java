@@ -7,9 +7,14 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+
+import androidx.preference.PreferenceScreen;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -19,9 +24,12 @@ public class BatterySaverScheduleSeekBarControllerTest {
     private Context mContext;
     private ContentResolver mResolver;
     private BatterySaverScheduleSeekBarController mController;
+    @Mock
+    private PreferenceScreen mScreen;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = new BatterySaverScheduleSeekBarController(mContext);
         mResolver = mContext.getContentResolver();
@@ -62,4 +70,14 @@ public class BatterySaverScheduleSeekBarControllerTest {
         mController.updateSeekBar();
         assertThat(mController.mSeekBarPreference.isVisible()).isFalse();
     }
+
+    @Test
+    public void addToScreen_addsToEnd() {
+        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
+        Settings.Global.putInt(mResolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 15);
+        mController.addToScreen(mScreen);
+        assertThat(mController.mSeekBarPreference.getOrder()).isEqualTo(100);
+    }
+
 }

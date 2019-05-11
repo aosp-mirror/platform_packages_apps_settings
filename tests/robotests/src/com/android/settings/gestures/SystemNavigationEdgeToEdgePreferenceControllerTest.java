@@ -131,6 +131,12 @@ public class SystemNavigationEdgeToEdgePreferenceControllerTest {
     }
 
     @Test
+    public void testIsGestureAvailable_noOverlayPackage_shouldReturnFalse() {
+        assertThat(SystemNavigationEdgeToEdgePreferenceController.isGestureAvailable(mContext,
+                "com.package.fake")).isFalse();
+    }
+
+    @Test
     public void testIsChecked_defaultIsEdgeToEdge_shouldReturnTrue() {
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_GESTURAL);

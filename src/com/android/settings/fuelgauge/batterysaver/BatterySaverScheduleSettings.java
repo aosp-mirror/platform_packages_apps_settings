@@ -64,6 +64,7 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange, Uri uri) {
+            getPreferenceScreen().removeAll();
             updateCandidates();
         }
     };

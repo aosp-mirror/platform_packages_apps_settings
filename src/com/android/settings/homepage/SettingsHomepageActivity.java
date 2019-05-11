@@ -42,8 +42,11 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        updateWindowProperties();
         setContentView(R.layout.settings_homepage_container);
+        final View root = findViewById(R.id.settings_homepage_container);
+        root.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+
         setHomepageContainerPaddingTop();
 
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
@@ -76,29 +79,15 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
         fragmentTransaction.commit();
     }
 
-    private void updateWindowProperties() {
-        final View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                decorView.getSystemUiVisibility() |
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        );
-
-        getWindow().setStatusBarColor(getColor(R.color.homepage_status_bar_color));
-    }
-
     @VisibleForTesting
     void setHomepageContainerPaddingTop() {
         final View view = this.findViewById(R.id.homepage_container);
 
-        final int statusBarHeight = getResources().getDimensionPixelSize(
-                com.android.internal.R.dimen.status_bar_height);
         final int searchBarHeight = getResources().getDimensionPixelSize(R.dimen.search_bar_height);
         final int searchBarMargin = getResources().getDimensionPixelSize(R.dimen.search_bar_margin);
 
-        // The top padding is the height of status bar + height of action bar(48dp) + top/bottom
-        // margins(16dp)
-        final int paddingTop = statusBarHeight + searchBarHeight + searchBarMargin * 2;
+        // The top padding is the height of action bar(48dp) + top/bottom margins(16dp)
+        final int paddingTop = searchBarHeight + searchBarMargin * 2;
         view.setPadding(0 /* left */, paddingTop, 0 /* right */, 0 /* bottom */);
     }
 }

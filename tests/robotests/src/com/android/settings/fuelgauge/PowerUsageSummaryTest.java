@@ -15,6 +15,7 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.PowerUsageSummary.BATTERY_INFO_LOADER;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADVANCED_BATTERY;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -371,6 +372,17 @@ public class PowerUsageSummaryTest {
 
         verify(mContentResolver).unregisterContentObserver(
                 mFragment.mSettingsObserver);
+    }
+
+    @Test
+    public void restartBatteryInfoLoader_contextNull_doNothing() {
+        when(mFragment.getContext()).thenReturn(null);
+        when(mFragment.getLoaderManager()).thenReturn(mLoaderManager);
+
+        mFragment.restartBatteryInfoLoader();
+
+        verify(mLoaderManager, never()).restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
+                mFragment.mBatteryInfoLoaderCallbacks);
     }
 
     public static class TestFragment extends PowerUsageSummary {
