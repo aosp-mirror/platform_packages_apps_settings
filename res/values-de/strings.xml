@@ -380,7 +380,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="8523775367089431611">"Wird geladen…"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Konten"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sicherheit"</string>
-    <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Verschlüsselung &amp; Anmeldedaten"</string>
+    <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Verschlüsselung und Anmeldedaten"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Smartphone verschlüsselt"</string>
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Smartphone nicht verschlüsselt"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Gerät verschlüsselt"</string>
@@ -398,6 +398,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Gesicht hinzugefügt"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tippen, um Gesichtserkennung einzurichten"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Gesichtserkennung"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Bedienungshilfen-Einrichtung verwenden"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -408,7 +413,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Verwende die Gesichtserkennung, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Du kannst die Gesichtserkennung verwenden, um dein Smartphone zu entsperren oder Käufe zu autorisieren.\n\nHinweis: Dieses Gerät kannst du nicht per Gesichtserkennung entsperren. Weitere Informationen erhältst du vom Administrator deiner Organisation."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Verwende die Gesichtserkennung, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Gesicht in den Kreis halten"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Später"</string>
     <string name="face_add_max" msgid="4408683751143942949">"Du kannst bis zu <xliff:g id="COUNT">%d</xliff:g> Gesichter hinzufügen"</string>
@@ -425,12 +432,12 @@
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"App-Anmeldung &amp; Zahlungen"</string>
     <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Für Face Unlock erforderlich"</string>
     <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Augen auf Bildschirm gerichtet"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Zum Entsperren des Smartphones musst du auf den Bildschirm blicken"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Zum Entsperren musst du mit offenen Augen auf den Bildschirm blicken"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Schaltfläche zum Bestätigen"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Bei Authentifizierung für Apps immer Bestätigung anfordern"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Gesichtsdaten löschen"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Face Unlock neu einrichten"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Du kannst Face Unlock verwenden, um dein Gerät zu entsperren, dich in Apps anzumelden und Zahlungen zu bestätigen.\n\nDenk aber daran:\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone dadurch entsperren, dass sie es vor dein Gesicht hält, während deine Augen geöffnet sind.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise deinem Kind oder deinem eineiigen Zwilling."</string>
+    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Mit Face Unlock kannst du dein Gerät entsperren, dich in Apps anmelden und Zahlungen bestätigen.\n\nWenn du diese Option nutzt, solltest du Folgendes bedenken:\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone dadurch entsperren, dass sie es vor dein Gesicht hält, während deine Augen geöffnet sind.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise deinem Kind oder deinem eineiigen Zwilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Gesichtsdaten löschen?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Mit Face Unlock aufgezeichnete Daten werden dauerhaft und sicher gelöscht. Nach dem Entfernen benötigst du deine PIN, dein Muster oder dein Passwort zum Entsperren deines Smartphones, zum Anmelden bei Apps und zum Bestätigen von Zahlungen."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerabdruck"</string>
@@ -480,12 +487,12 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Später"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Fingerabdruck-Einrichtung überspringen?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Du hast festgelegt, dass du unter anderem deinen Fingerabdruck zum Entsperren deines Smartphones verwenden möchtest. Wenn du diesen Schritt jetzt überspringst, musst du die Einrichtung zu einem späteren Zeitpunkt vornehmen. Die Einrichtung dauert nur ca. eine Minute."</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Mit der Displaysperre kannst du dein Tablet schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Mit der Displaysperre kannst du dein Gerät schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Mit der Displaysperre kannst du dein Smartphone schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Mit der Displaysperre kannst du dein Tablet schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Mit der Displaysperre kannst du dein Gerät schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Mit der Displaysperre kannst du dein Smartphone schützen, damit niemand es verwenden kann, falls es verloren gehen oder gestohlen werden sollte. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Mit der Displaysperre kannst du dein Tablet schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Mit der Displaysperre kannst du dein Gerät schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Mit der Displaysperre kannst du dein Smartphone schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Mit der Displaysperre kannst du dein Tablet schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Mit der Displaysperre kannst du dein Gerät schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Mit der Displaysperre kannst du dein Smartphone schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"PIN-Einrichtung überspringen?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Passworteinrichtung überspringen?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Mustereinrichtung überspringen?"</string>
@@ -862,7 +869,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"WLAN nur bei guter Internetverbindung verwenden"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="1644292503152790501">"Nur Netzwerke mit stabiler Internetverbindung verwenden"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Automatisch mit offenen WLANs verbinden"</string>
-    <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Automatisch mit leistungsstarken öffentlichen Netzwerken verbinden"</string>
+    <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Wenn dein Gerät leistungsstarke öffentliche Netzwerke findet, verbindet es sich automatisch"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Für diese Funktion musst du zuerst einen Anbieter von Netzwerkbewertungen auswählen"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Für diese Funktion musst du zuerst einen kompatiblen Anbieter von Netzwerkbewertungen auswählen"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Zertifikate installieren"</string>
@@ -943,7 +950,7 @@
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Wenn du das Gerät zu \"<xliff:g id="SSID">%1$s</xliff:g>\" hinzufügen möchtest, scanne den QR-Code unten"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR-Code scannen"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="4371771604088014396">"Wenn du eine Verbindung zu \"<xliff:g id="SSID">%1$s</xliff:g>\" herstellen möchtest, scanne den QR-Code unten"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"WLAN durch Scannen eines QR-Codes beitreten"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Scanne den QR-Code, um dein Gerät mit dem WLAN zu verbinden"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"WLAN teilen"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="5854392840857123065">"Scanne diesen QR-Code, um eine Verbindung mit \"<xliff:g id="SSID">%1$s</xliff:g>\" herzustellen und das Passwort zu teilen"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="4436318319178361543">"Diesen QR-Code scannen, um eine Verbindung mit \"<xliff:g id="SSID">%1$s</xliff:g>\" herzustellen"</string>
@@ -1027,8 +1034,8 @@
       <item quantity="one">1 Abo</item>
     </plurals>
     <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="2504425359919617586">
-      <item quantity="other">%d Netzwerke &amp;amp Abos</item>
-      <item quantity="one">1 Netzwerk &amp; Abo</item>
+      <item quantity="other">%d Netzwerke und Abos</item>
+      <item quantity="one">1 Netzwerk und Abo</item>
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Erweiterte WLAN-Einstellungen"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
@@ -1294,7 +1301,7 @@
     <string name="sim_reenter_new" msgid="6523819386793546888">"Neue PIN erneut eingeben"</string>
     <string name="sim_change_pin" msgid="7328607264898359112">"PIN für SIM-Karte"</string>
     <string name="sim_bad_pin" msgid="2345230873496357977">"Falsche PIN"</string>
-    <string name="sim_pins_dont_match" msgid="1695021563878890574">"Die PINs stimmen nicht überein."</string>
+    <string name="sim_pins_dont_match" msgid="1695021563878890574">"Die PINs stimmen nicht überein"</string>
     <string name="sim_change_failed" msgid="3602072380172511475">"PIN kann nicht geändert werden.\nEventuell ist es die falsche PIN."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM-PIN erfolgreich geändert"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Status der SIM-Kartensperrung kann nicht geändert werden.\nMöglicherweise falsche PIN."</string>
@@ -1629,8 +1636,8 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Tethering oder Verwendung von mobilen Hotspots nicht möglich, während der Datensparmodus aktiviert ist"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-Tethering"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3711893746716442706">"Internetverbindung des Smartphones über USB freigegeben"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="2292916486612255069">"Internetverbindung des Tablets über USB freigegeben"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="3711893746716442706">"Internetverbindung des Smartphones wird über USB freigegeben"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="2292916486612255069">"Internetverbindung des Tablets wird über USB freigegeben"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetooth-Tethering"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="8828883800511737077">"Internetverbindung des Tablets über Bluetooth freigeben"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="1904667146601254812">"Internetverbindung des Smartphones über Bluetooth freigeben"</string>
@@ -1727,7 +1734,7 @@
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Muster bestätigen"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"PIN noch einmal eingeben"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Die Passwörter stimmen nicht überein."</string>
-    <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Die PINs stimmen nicht überein."</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Die PINs stimmen nicht überein"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="2872194349688886781">"Muster noch einmal zeichnen"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Sperre einrichten"</string>
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Das Passwort wurde festgelegt."</string>
@@ -1845,7 +1852,7 @@
     <string name="ask_compatibility" msgid="7225195569089607846">"Beim Start fragen"</string>
     <string name="enable_compatibility" msgid="5806819252068617811">"App skalieren"</string>
     <string name="unknown" msgid="1592123443519355854">"Unbekannt"</string>
-    <string name="sort_order_alpha" msgid="1410278099123670628">"Nach Namen sortieren"</string>
+    <string name="sort_order_alpha" msgid="1410278099123670628">"Nach Name sortieren"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Nach Größe sortieren"</string>
     <string name="sort_order_recent_notification" msgid="6064103501358974282">"Letzte"</string>
     <string name="sort_order_frequent_notification" msgid="1733204081305830670">"Häufigste"</string>
@@ -2187,7 +2194,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"Blaugrün"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Gelb"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> verwenden?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> muss:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Deine Eingabe wird von \"Einstellungen\" nicht erkannt, weil die Berechtigungsanfrage von einer App verdeckt wird."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Wenn du <xliff:g id="SERVICE">%1$s</xliff:g> aktivierst, verwendet dein Gerät nicht die Displaysperre, um die Datenverschlüsselung zu verbessern."</string>
@@ -2196,8 +2204,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Da die Aktivierung von <xliff:g id="SERVICE">%1$s</xliff:g> Auswirkungen auf die Datenverschlüsselung hat, musst du deine PIN bestätigen."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Da die Aktivierung von <xliff:g id="SERVICE">%1$s</xliff:g> Auswirkungen auf die Datenverschlüsselung hat, musst du dein Passwort bestätigen."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> fordert eine volle Kontrolle für dieses Gerät an. Der Dienst kann den Bildschirm lesen und im Namen von Nutzern mit Bedarf an Bedienungshilfen handeln. Dieses Maß an Kontrolle ist für die meisten Apps ungeeignet."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> beenden?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Tippe auf \"Ok\", um <xliff:g id="SERVICE">%1$s</xliff:g> zu beenden."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Keine Dienste installiert"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Kein Dienst ausgewählt"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Es wurde keine Beschreibung bereitgestellt."</string>
@@ -2327,9 +2354,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"Diese App läuft im Hintergrund und beansprucht dabei den Akku. Er könnte deshalb früher als erwartet leer sein."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"Entfernen"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"Abbrechen"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"Der Akkuverbrauch durch Apps ist normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"Der Akkuverbrauch durch Apps ist normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Der Akkuverbrauch durch Apps ist normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Akku-Manager"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Apps automatisch verwalten"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"Akkunutzung für selten verwendete Apps einschränken"</string>
@@ -2459,14 +2486,14 @@
     <string name="battery_saver" msgid="8172485772238572153">"Energiesparmodus"</string>
     <string name="battery_saver_auto_title" msgid="8368709389419695611">"Automatisch aktivieren"</string>
     <string name="battery_saver_auto_no_schedule" msgid="632243833320671052">"Keine Aktivierung nach Zeitplan"</string>
-    <string name="battery_saver_auto_routine" msgid="8076053160450346731">"Anhand deines Routineverhaltens"</string>
-    <string name="battery_saver_auto_percentage" msgid="9000542338151528905">"Nach Ladestand"</string>
-    <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"Der Energiesparmodus wird automatisch aktiviert, wenn offenbar wird, dass der Akku wahrscheinlich nicht bis zum nächsten Aufladen hält (ermittelt anhand deines typischen Aufladezeitpunkts)."</string>
+    <string name="battery_saver_auto_routine" msgid="8076053160450346731">"Anhand deiner üblichen Abläufe"</string>
+    <string name="battery_saver_auto_percentage" msgid="9000542338151528905">"Anhand des Ladestands"</string>
+    <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"Der Energiesparmodus wird automatisch aktiviert, wenn offenbar wird, dass der Akku wahrscheinlich nicht bis zum nächsten Aufladen hält (ermittelt anhand deines üblichen Aufladezeitpunkts)."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"Wird bei <xliff:g id="PERCENT">%1$s</xliff:g> aktiviert"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Zeitplan festlegen"</string>
     <string name="battery_saver_turn_on_summary" msgid="5552800757174173459">"Akkulaufzeit verlängern"</string>
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Bei vollem Akku ausschalten"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Der Energiesparmodus wird deaktiviert, wenn dein Smartphoneakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Der Energiesparmodus wird deaktiviert, sobald dein Smartphone wieder zu <xliff:g id="PERCENT">%1$s</xliff:g> geladen ist"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"Der Energiesparmodus wird deaktiviert, wenn dein Tabletakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="8309483774864505603">"Der Energiesparmodus wird deaktiviert, wenn dein Geräteakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
     <!-- no translation found for battery_saver_seekbar_title (3795833548145424276) -->
@@ -2666,7 +2693,7 @@
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g> von <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"Alles auswählen"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Datennutzung"</string>
-    <string name="data_usage_app_summary_title" msgid="5571051159374290375">"Mobile Daten &amp; WLAN"</string>
+    <string name="data_usage_app_summary_title" msgid="5571051159374290375">"Mobile Daten und WLAN"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Dein Mobilfunkanbieter berechnet die Datennutzung eventuell anders als das Gerät."</string>
     <string name="data_usage_app" msgid="4970478397515423303">"App-Nutzung"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"Informationen zur App"</string>
@@ -2725,14 +2752,14 @@
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Wenn du im Web Änderungen an deinen Konten vornimmst, werden diese automatisch auf dein Telefon kopiert.\n\nIm Gegenzug werden bei manchen Konten automatisch alle Änderungen, die auf dem Telefon vorgenommen wurden, ins Web kopiert. Dazu gehören auch Google-Konten."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Automatische Synchronisierung deaktivieren?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"So reduzierst du den Datenverbrauch und schonst den Akku, musst jedoch jedes einzelne Konto manuell synchronisieren, um neue Informationen abzurufen. Außerdem erhältst du keine Benachrichtigungen, wenn Aktualisierungen erfolgen."</string>
-    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Datum für Zurücksetzung des Nutzungszyklus"</string>
-    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Datum (monatlich):"</string>
+    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Tag für Zurücksetzung des Nutzungszyklus"</string>
+    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Jeden Monat zurücksetzen am:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Übernehmen"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Warnung für Datenverbrauch festlegen"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Limit festlegen"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Datennutzung begrenzen"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDer dabei angesetzte Wert wird von deinem Tablet berechnet und kann von der Messung des genutzten Datenvolumens durch deinen Mobilfunkanbieter abweichen. Daher empfiehlt es sich, einen eher eher etwas niedrigeren Limitwert anzugeben."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDer dabei angesetzte Wert wird von deinem Smartphone berechnet und kann von der Messung des genutzten Datenvolumens durch deinen Mobilfunkanbieter abweichen. Daher empfiehlt es sich, einen eher eher etwas niedrigeren Limitwert anzugeben."</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDer dabei angesetzte Wert wird von deinem Tablet berechnet und kann von der Messung des genutzten Datenvolumens durch deinen Mobilfunkanbieter abweichen. Daher empfiehlt es sich, einen eher etwas niedrigeren Limitwert anzugeben."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDer dabei angesetzte Wert wird von deinem Smartphone berechnet und kann von der Messung des genutzten Datenvolumens durch deinen Mobilfunkanbieter abweichen. Daher empfiehlt es sich, einen eher etwas niedrigeren Limitwert anzugeben."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Hintergrunddaten beschränken?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"Wenn du die mobilen Hintergrunddaten einschränkst, funktionieren einige Apps und Dienste nur bei einer aktiven WLAN-Verbindung."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Wenn du die mobilen Hintergrunddaten einschränkst, funktionieren einige Apps und Dienste nur bei einer aktiven WLAN-Verbindung.\n\nDiese Einstellung betrifft alle Nutzer auf diesem Tablet."</string>
@@ -2777,7 +2804,7 @@
     <string name="vpn_not_used" msgid="9094191054524660891">"(nicht verwendet)"</string>
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(Server nicht überprüfen)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(vom Server erhalten)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Dieser VPN-Typ kann nicht durchgehend verbunden sein"</string>
+    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Dieser VPN-Typ kann nicht durchgehend verbunden bleiben"</string>
     <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"Durchgehend aktives VPN unterstützt numerische Serveradressen"</string>
     <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"Ein DNS-Server muss für durchgehend aktives VPN angegeben werden"</string>
     <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"DNS-Serveradressen müssen für durchgehend aktives VPN numerisch sein"</string>
@@ -3737,7 +3764,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Akku-Optimierung"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Akkuwarnung"</string>
-    <string name="show_all_apps" msgid="1512506948197818534">"Vollständige Gerätenutzung zeigen"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Vollständige Gerätenutzung anzeigen"</string>
     <string name="hide_extra_apps" msgid="5016497281322459633">"App-Nutzung zeigen"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
       <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> Apps funktionieren nicht wie gewohnt</item>
@@ -3983,7 +4010,7 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> mobile Daten"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> WLAN-Datennutzung"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> Ethernet-Datennutzung"</string>
-    <string name="billing_cycle" msgid="6614597736285325497">"Datenwarnung &amp; -limit"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Datenwarnung und -limit"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"App-Datenverbrauchszyklus"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Warnlimit für mobile Datennutzung: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Datenlimit: <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -3998,7 +4025,7 @@
     <string name="data_used_template" msgid="3245919669966296505">"Verbrauchte Daten: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"Datenwarnung festlegen"</string>
     <string name="data_warning" msgid="209133958008062117">"Warnlimit für mobile Daten"</string>
-    <string name="data_warning_footnote" msgid="776341964125603711">"Das Warnlimit für mobile Datennutzung und das Datenlimit werden vom Gerät berechnet und können von den Angaben des Mobilfunkanbieters abweichen."</string>
+    <string name="data_warning_footnote" msgid="776341964125603711">"Die Berechnung, wann das Warnlimit für die Nutzung mobiler Daten und das Datenlimit erreicht sind, erfolgt durch das Gerät. Die Nutzungsangaben des Mobilfunkanbieters können abweichen."</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Datenlimit festlegen"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datenlimit"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"Datennutzung im Zeitraum <xliff:g id="ID_2">%2$s</xliff:g>: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4315,8 +4342,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"\"Bitte nicht stören\" aktualisieren"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Zur besseren Konzentration Benachrichtigungen pausieren"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Diese Funktion ist auf diesem Gerät nicht verfügbar"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"Diese Funktion ist nicht verfügbar"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Sie würde dieses Smartphone langsamer machen"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Vollständige GNSS-Messung erzwingen"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Alle GNSS-Konstellationen und -Frequenzen ohne GNSS-Zyklus erfassen"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Start von Hintergrundaktivitäten zulassen"</string>
