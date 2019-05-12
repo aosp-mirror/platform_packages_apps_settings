@@ -399,6 +399,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Yuz kiritildi"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Yuz tekshiruvini sozlash uchun bosing"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Yuz tekshiruvi"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Maxsus imkoniyatlarni sozlash"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -409,7 +414,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Telefoningizni qulfdan chiqarish, xaridlarni amalga oshirish yoki ilovalarga kirish uchun yuzingizdan foydalaning."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Telefonni qulfdan chiqarish yoki xaridlarni tasdiqlash uchun barmoq izingizdan foydalaning.\n\nEslatma: barmoq izi orqali bu qurilmani qulfdan chiqara olmaysiz. Batafsil axborot olish uchun tashkilot administratoriga murojaat qiling."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Telefoningizni qulfdan chiqarish, xaridlarni amalga oshirish yoki ilovalarga kirish uchun yuzingizdan foydalaning"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Yuzingizni aylana markaziga moslang"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Keyinroq"</string>
     <string name="face_add_max" msgid="4408683751143942949">"Maksimal <xliff:g id="COUNT">%d</xliff:g> ta yuzni kiritish mumkin"</string>
@@ -1721,7 +1728,7 @@
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Xavfsizlik uchun parol o‘rnating"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Barmoq izidan foydalanish uchun parol o‘rnating"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Barmoq izidan foydalanish uchun avval grafik kalit tayinlang"</string>
-    <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"PIN kod tayinlang"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"PIN kod yarating"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Barmoq izidan foydalanish uchun PIN kod o‘rnating"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"Grafik kalit yarating"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Parolni qayta kiriting"</string>
@@ -2188,7 +2195,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"Moviy"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Sariq"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Pushtirang"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> yoqilsinmi?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Ilova ruxsatnoma so‘roviga xalaqit qilayotgani tufayli, “Sozlamalar” ilovasi javobingizni tekshira olmaydi."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Agar <xliff:g id="SERVICE">%1$s</xliff:g> xizmatini yoqsangiz, qurilmangiz ma’lumotlarni shifrlashni kuchaytirish uchun ekran qulfidan foydalanmaydi."</string>
@@ -2197,8 +2205,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"“<xliff:g id="SERVICE">%1$s</xliff:g>” xizmatini yoqish ma’lumotlarni shifrlashga ta’sir qilgani bois PIN-kodingizni tasdiqlashingiz lozim."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"“<xliff:g id="SERVICE">%1$s</xliff:g>” xizmatini yoqish ma’lumotlarni shifrlashga ta’sir qilgani bois parolingizni tasdiqlashingiz lozim."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> bu qurilmaning toʻliq boshqaruvini talab qilmoqda. Xizmat ekrandagilarni oʻqishi va maxsus imkoniyatlarga ehtiyoji bor foydalanuvchilar nomidan harakat qilishi mumkin. Boshqaruvning bu darajasi ayrim ilovalargagina mos keladi."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> xizmati to‘xtatilsinmi?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"<xliff:g id="SERVICE">%1$s</xliff:g> xizmatini to‘xtatish uchun OK tugmasini bosing."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Hech qanday xizmat o‘rnatilmagan"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Hech qanday xizmat tanlanmagan"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Hech qanday tavsif berilmagan."</string>
@@ -2251,7 +2278,7 @@
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"Fonda ishlashi cheklansinmi?"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"Bu ilovaning ishlashiga ta’sir ko‘rsatishi mumkin"</string>
     <string name="background_activity_disabled_dialog_text" msgid="6133420589651880824">"Bu ilova batareya sarfini optimallashtirish uchun sozlanmagani sababli uni cheklash imkonsiz.\n\nIlovani cheklash uchun avval batareya sarfini optimallashtirish funksiyasini yoqing."</string>
-    <string name="device_screen_usage" msgid="3386088035570409683">"Toʻliq quvvat olganidan beri ekrandan foydalanish"</string>
+    <string name="device_screen_usage" msgid="3386088035570409683">"Toʻliq quvvatlanganidan beri ekrandan foydalanish"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for power_usage_list_summary (5584049564906462506) -->
     <skip />
@@ -2446,9 +2473,7 @@
     <!-- String.format failed for translation -->
     <!-- no translation found for battery_detail_since_full_charge (7515347842046955855) -->
     <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_last_full_charge (7151251641099019361) -->
-    <skip />
+    <string name="battery_last_full_charge" msgid="7151251641099019361">"Oxirgi toʻliq quvvatlanish"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for battery_full_charge_last (8892335687734288031) -->
     <skip />
@@ -2478,9 +2503,7 @@
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"<xliff:g id="PERCENT">%1$s</xliff:g> quvvat qolganda yoqiladi"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Jadval tuzish"</string>
     <string name="battery_saver_turn_on_summary" msgid="5552800757174173459">"Batareya quvvati sarfini uzaytirish"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_saver_sticky_title_new (613272902035943099) -->
-    <skip />
+    <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Toʻliq quvvatlanganda faolsizlantirish"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"Telefon quvvati <xliff:g id="PERCENT">%1$s</xliff:g> ga yetganda Quvvat tejash rejimi faolsizlantiriladi"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6537930800784858686">"Planshet quvvati <xliff:g id="PERCENT">%1$s</xliff:g> ga yetganda Quvvat tejash rejimi faolsizlantiriladi"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="8309483774864505603">"Qurilma quvvati <xliff:g id="PERCENT">%1$s</xliff:g> ga yetganda Quvvat tejash rejimi faolsizlantiriladi"</string>
@@ -2782,8 +2805,8 @@
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec serveri sertifikati"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"Kengaytirilgan sozlamalar"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS qidiruvi uchun domenlar"</string>
-    <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS-serverlar (m-n, 8.8.8.8)"</string>
-    <string name="vpn_routes" msgid="3818655448226312232">"Uzatish yo‘laklari (m-n, 10.0.0.0/8)"</string>
+    <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS serverlar (m-n, 8.8.8.8)"</string>
+    <string name="vpn_routes" msgid="3818655448226312232">"Uzatish marshrutlari (m-n, 10.0.0.0/8)"</string>
     <string name="vpn_username" msgid="1863901629860867849">"Foydalanuvchi nomi"</string>
     <string name="vpn_password" msgid="6756043647233596772">"Parol"</string>
     <string name="vpn_save_login" msgid="6350322456427484881">"Hisob ma’lumotini saqlash"</string>
@@ -4332,8 +4355,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Bezovta qilinmasin rejimini yoqing"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Bezovta qiluvchi bildirishnomalarni pauza qiling"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Bu funksiya ushbu qurilmada ishlamaydi"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"Bu funksiya ishlamaydi"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Bunda telefon sekinlashi mumkin"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Butun GNSS statistikasini yuklash"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Siklsiz barcha GNSS sxema va davriyliklarini kuzatish"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Orqa fonda ishga tushirishga ruxsat berish"</string>

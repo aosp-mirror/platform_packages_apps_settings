@@ -399,6 +399,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Kasvot lisätty"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Määritä kasvojentunnistus napauttamalla"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Kasvojentunnistus"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Käytä esteettömyysvalintoja"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -409,7 +414,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Voit avata puhelimen, hyväksyä ostoksia tai kirjautua sisään sovelluksiin kasvojen avulla."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Avaa puhelin tai hyväksy ostoksia sormenjäljellä.\n\nHuom. Tämän laitteen lukitusta ei voi avata kasvojentunnistuksella. Saat lisätietoja organisaatiosi järjestelmänvalvojalta."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Voit avata puhelimen, hyväksyä ostoksia tai kirjautua sisään sovelluksiin kasvojen avulla."</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Keskitä kasvosi ympyrän sisälle"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Tee myöhemmin"</string>
     <string name="face_add_max" msgid="4408683751143942949">"Voit lisätä korkeintaan <xliff:g id="COUNT">%d</xliff:g> kasvoa"</string>
@@ -940,12 +947,12 @@
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Tietosuoja"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Satunnaistettu MAC-osoite"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Lisää laite"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Lisää laite verkkoon <xliff:g id="SSID">%1$s</xliff:g> keskittämällä alla olevaan QR-koodiin"</string>
+    <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Lisää laite verkkoon <xliff:g id="SSID">%1$s</xliff:g> keskittämällä alla olevaan QR-koodiin."</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Lue QR-koodi"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="4371771604088014396">"Yhdistä verkkoon <xliff:g id="SSID">%1$s</xliff:g> keskittämällä alla olevaan QR-koodiin"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Yhdistä Wi-Fi-verkkoon lukemalla QR-koodi"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Yhdistä Wi-Fi-verkkoon lukemalla QR-koodi."</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Jaa Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="5854392840857123065">"Yhdistä <xliff:g id="SSID">%1$s</xliff:g> ja jaa salasana lukemalla tämä QR-koodi"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="5854392840857123065">"Yhdistä <xliff:g id="SSID">%1$s</xliff:g> ja jaa salasana lukemalla tämä QR-koodi."</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="4436318319178361543">"Yhdistä <xliff:g id="SSID">%1$s</xliff:g> skannaamalla tämä QR-koodi"</string>
     <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR-koodin luku epäonnistui. Keskitä koodi ja yritä uudelleen."</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Yritä uudelleen. Jos ongelma ei ratkea, ota yhteyttä laitteen valmistajaan"</string>
@@ -969,7 +976,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4938294574591503213">"Wi-Fi-verkon salasana: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="4120419278831581613">"Hotspotin salasana: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_add_device" msgid="4072206063308645677">"Lisää laite"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="3887335309163999665">"Lisää laite tähän verkkoon QR-koodin avulla"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="3887335309163999665">"Lisää laite tähän verkkoon QR-koodin avulla."</string>
     <string name="retry" msgid="6472609612090877557">"Yritä uudelleen"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Jaa muiden laitteen käyttäjien kanssa"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ei muutettu)"</string>
@@ -2187,7 +2194,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"Turkoosi"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Keltainen"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"Otetaanko <xliff:g id="SERVICE">%1$s</xliff:g> käyttöön?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> saa luvan:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Sovellus peittää lupapyynnön, joten Asetukset ei voi vahvistaa valintaasi."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Jos <xliff:g id="SERVICE">%1$s</xliff:g> otetaan käyttöön, laitteesi ei käytä näytön lukitusta tiedon salauksen parantamiseen."</string>
@@ -2196,8 +2204,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Koska palvelun <xliff:g id="SERVICE">%1$s</xliff:g> ottaminen käyttöön vaikuttaa tietojen salaukseen, sinun pitää vahvistaa PIN-koodi."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Koska palvelun <xliff:g id="SERVICE">%1$s</xliff:g> ottaminen käyttöön vaikuttaa tietojen salaukseen, sinun pitää vahvistaa salasana."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> pyytää laitteen täyttä hallintaoikeutta. Palvelu voi lukea näytön sisällön ja toimia esteettömyyspalvelujen käyttäjien puolesta. Hallintaoikeudet ovat useimmille sovelluksille liian laajat."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"Pysäytetäänkö <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Jos valitset OK, <xliff:g id="SERVICE">%1$s</xliff:g> pysäytetään."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Ei asennettuja palveluita"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Palvelua ei ole valittuna"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Ei kuvausta."</string>
@@ -4313,8 +4340,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Päivitä Älä häiritse ‑tila"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Keskeytä ilmoitukset, jotta voit keskittyä"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ominaisuus ei ole käytettävissä tällä laitteella."</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"Ominaisuus ei ole käytettävissä"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Se hidastaa puhelinta"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Pakota täydet GNSS-mitat"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Seuraa kaikkia GNSS-kuvioita ja ‑taajuuksia, joissa ei ole pulssisuhdetta."</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Taustatoiminnan salliminen alkaa"</string>

@@ -21,7 +21,7 @@
     <string name="create" msgid="3578857613172647409">"Utwórz"</string>
     <string name="allow" msgid="3349662621170855910">"Zezwól"</string>
     <string name="deny" msgid="6947806159746484865">"Odmów"</string>
-    <string name="device_info_default" msgid="7847265875578739287">"Nieznane"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"Nieznany"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="few">Od zostania programistą dzielą Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroki.</item>
       <item quantity="many">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroków.</item>
@@ -405,6 +405,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Dodano twarz"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Kliknij, by ustawić uwierzytelnianie twarzą"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Uwierzytelnianie twarzą"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Użyj konfiguracji ułatwień dostępu"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -415,7 +420,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Używaj skanu twarzy do odblokowywania telefonu, autoryzowania zakupów i logowania się w aplikacjach."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Odblokowuj telefon i zatwierdzaj zakupy skanem twarzy.\n\nUwaga: nie możesz odblokowywać tego urządzenia skanem twarzy. Więcej informacji uzyskasz od administratora swojej organizacji."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Używaj skanu twarzy do odblokowywania telefonu, autoryzowania zakupów i logowania się w aplikacjach"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Ustaw twarz w środku okręgu"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Później"</string>
     <string name="face_add_max" msgid="4408683751143942949">"Możesz dodać do <xliff:g id="COUNT">%d</xliff:g> skanów twarzy"</string>
@@ -2243,7 +2250,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cyjan"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Żółty"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Amarantowy"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"Włączyć <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"Wymagania <xliff:g id="SERVICE">%1$s</xliff:g>:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Aplikacja Ustawienia nie może zweryfikować Twojej odpowiedzi, ponieważ inna aplikacja zasłania prośbę o udzielenie uprawnień."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Jeśli włączysz usługę <xliff:g id="SERVICE">%1$s</xliff:g>, Twoje urządzenie nie będzie korzystać z blokady ekranu, by usprawnić szyfrowanie danych."</string>
@@ -2252,8 +2260,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Ponieważ włączenie <xliff:g id="SERVICE">%1$s</xliff:g> wpływa na szyfrowanie danych, musisz potwierdzić swój PIN."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Ponieważ włączenie <xliff:g id="SERVICE">%1$s</xliff:g> wpływa na szyfrowanie danych, musisz potwierdzić swoje hasło."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"Usługa <xliff:g id="SERVICE">%1$s</xliff:g> prosi o pełną kontrolę nad urządzeniem. Ta usługa może odczytywać zawartość ekranu i wykonywać działania w imieniu użytkownika, który potrzebuje ułatwień dostępu. Taki poziom kontroli nie jest odpowiedni w przypadku większości aplikacji."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"Zatrzymać <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Dotknięcie OK spowoduje zatrzymanie usługi <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Brak zainstalowanych usług"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Nie wybrano usługi"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Brak opisu"</string>
@@ -3306,7 +3333,7 @@
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"Nie zobaczysz powiadomień na ekranie"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Telefon nie będzie sygnalizował powiadomień dźwiękiem ani wibracjami."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"Brak wizualnego i dźwiękowego sygnalizowania powiadomień"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"Powiadomienia nie będą wyświetlane ani sygnalizowane dźwiękiem."</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"Powiadomienia nie będą wyświetlane ani sygnalizowane dźwiękiem"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="1069960859746788356">"Telefon nie będzie sygnalizował nowych ani obecnych powiadomień poprzez wyświetlenie informacji, wibrację ani dzwonek. Pamiętaj, że krytyczne powiadomienia dotyczące aktywności i stanu telefonu nadal będą się pojawiać.\n\nPo wyłączeniu trybu Nie przeszkadzać możesz zobaczyć wszystkie powiadomienia, przesuwając palcem w dół z góry ekranu."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Niestandardowe"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Włącz ustawienia niestandardowe"</string>
@@ -3590,12 +3617,12 @@
     <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"Tych ustawień nie można teraz zmienić. Aplikacja (<xliff:g id="APP_NAME">%1$s</xliff:g>) automatycznie włączyła niestandardowe ustawienia trybu Nie przeszkadzać."</string>
     <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"Tych ustawień nie można teraz zmienić. Aplikacja automatycznie włączyła niestandardowe ustawienia trybu Nie przeszkadzać."</string>
     <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"Tych ustawień nie można teraz zmienić. Ręcznie włączono niestandardowe ustawienia trybu Nie przeszkadzać."</string>
-    <string name="zen_schedule_rule_type_name" msgid="6163149826036287324">"Czas"</string>
+    <string name="zen_schedule_rule_type_name" msgid="6163149826036287324">"Godzina"</string>
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Automatyczna reguła będzie włączać funkcję „Nie przeszkadzać” w określonych dniach i godzinach"</string>
     <string name="zen_event_rule_type_name" msgid="6503468472212606158">"Wydarzenie"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Automatyczna reguła będzie włączać funkcję „Nie przeszkadzać” podczas określonych wydarzeń"</string>
-    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Podczas wydarzeń dla"</string>
-    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Podczas wydarzeń dla <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Podczas wydarzeń z kalendarza"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Podczas wydarzeń z kalendarza <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"dowolnego kalendarza"</string>
     <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Gdy odpowiedź to <xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Dowolny kalendarz"</string>
@@ -3611,17 +3638,17 @@
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Codziennie"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Alarm może zastąpić godzinę zakończenia"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="1673667979187593693">"Harmonogram wyłączy się w przypadku dzwonka alarmu"</string>
-    <string name="zen_mode_custom_behavior_title" msgid="1148856394866360783">"Działanie w trybie Nie przeszkadzać"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="1148856394866360783">"Działanie Nie przeszkadzać"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="7750128187766412708">"Użyj ustawień domyślnych"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="7458258833216726120">"Wybierz ustawienia niestandardowe dla tego harmonogramu"</string>
-    <string name="zen_mode_custom_behavior_category_title" msgid="4070854282812755247">"Dotyczy: <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>"</string>
+    <string name="zen_mode_custom_behavior_category_title" msgid="4070854282812755247">"W harmonogramie „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>”"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"Od: <xliff:g id="START">%1$s</xliff:g> do: <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="4769117032399813012">"Zezwól na połączenia"</string>
     <string name="zen_mode_calls_title" msgid="2905770092665685857">"Połączenia"</string>
     <string name="zen_mode_calls_footer" msgid="2002070641802102110">"Aby mieć pewność, że dopuszczone połączenia będą sygnalizowane dźwiękowo, sprawdź, czy urządzenie ma włączony dzwonek, a nie jest ustawione na wibracje ani wyciszone."</string>
-    <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"W harmonogramie <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> połączenia przychodzące są zablokowane. Możesz dostosować ustawienia, tak by znajomi, rodzina i inne osoby z kontaktów mogły do Ciebie pisać."</string>
+    <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"W harmonogramie „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>” połączenia przychodzące są zablokowane. Możesz dostosować ustawienia, tak by znajomi, rodzina i inne osoby z kontaktów mogły do Ciebie pisać."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Kontakty oznaczone gwiazdką"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
       <item quantity="few"><xliff:g id="NUM_PEOPLE">%d</xliff:g> inne osoby</item>
@@ -3662,7 +3689,7 @@
     <string name="zen_mode_events_list" msgid="5571368229052715098">"wydarzenia"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"każdy"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"kontakty"</string>
-    <string name="zen_mode_starred_callers" msgid="1023167821338514140">"kontakty oznaczone gwiazdką"</string>
+    <string name="zen_mode_starred_callers" msgid="1023167821338514140">"kontakty z gwiazdką"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Dzwoniący powtórnie"</string>
     <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"dzwoniący powtórnie"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Zezwól na połączenia od dzwoniących powtórnie"</string>
@@ -4304,7 +4331,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Aby przełączać aplikacje, przesuń palcem w górę po przycisku ekranu głównego. Przesuń ponownie w górę, by zobaczyć wszystkie aplikacje. Funkcja działa na każdym ekranie. Nie będziesz już mieć przycisku Przegląd w prawym dolnym rogu ekranu."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Wypróbuj nowy przycisk ekranu głównego"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Włącz nowy gest, by przełączać aplikacje"</string>
-    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Kliknij dwukrotnie, aby sprawdzić telefon"</string>
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Kliknij dwukrotnie, by sprawdzić telefon"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Kliknij dwukrotnie, by sprawdzić tablet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Kliknij dwukrotnie, by sprawdzić urządzenie"</string>
     <string name="ambient_display_summary" msgid="8534654210539169707">"Aby sprawdzić godzinę, powiadomienia i inne informacje, kliknij ekran dwukrotnie."</string>
@@ -4473,8 +4500,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Zmień ustawienia trybu Nie przeszkadzać"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Wstrzymaj powiadomienia, by Cię nie rozpraszały"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ta funkcja jest niedostępna na tym urządzeniu."</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"Ta funkcja jest niedostępna"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Spowoduje spowolnienie telefonu"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Wymuś pełną procedurę pomiarów GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Śledź wszystkie konstelacje GNSS i częstotliwości bez uwzględniania współczynnika impulsu"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Zezwól na uruchomienie aktywności w tle"</string>
