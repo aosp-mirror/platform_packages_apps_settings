@@ -276,7 +276,7 @@
       <item quantity="other">Seçilen diller kaldırılsın mı?</item>
       <item quantity="one">Seçilen dil kaldırılsın mı?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"Metin bir başka dilde görüntülenecek."</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"Metin başka bir dilde görüntülenecek."</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Tüm diller kaldırılamaz"</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Tercih edilen en az dil bırakın"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"Bazı uygulamalarda kullanılamayabilir"</string>
@@ -399,6 +399,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Yüz eklendi"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Yüzle kimlik doğrulamayı kurmak için dokunun"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Yüzle kimlik doğrulama"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Erişilebilirlik kurulumunu kullan"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -409,7 +414,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Telefonunuzun kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için yüzünüzü kullanın."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Telefonunuzun kilidini açmak veya bir satın alma işlemini onaylamak için yüzünüzü kullanın.\n\nNot: Bu cihazın kilidini açmak için yüzünüzü kullanamazsınız. Daha fazla bilgi için kuruluşunuzun yöneticisine başvurun."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Telefonunuzun kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için yüzünüzü kullanın"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Yüzünüzü çemberin ortasına getirin"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Daha sonra yap"</string>
     <string name="face_add_max" msgid="4408683751143942949">"<xliff:g id="COUNT">%d</xliff:g> adede kadar yüz ekleyebilirsiniz"</string>
@@ -1346,7 +1353,7 @@
     <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"Telefon numarası (SIM yuvası %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"SIM\'deki MDN"</string>
     <string name="status_number_sim_status" product="default" msgid="9123351360569466330">"SIM\'deki telefon numarası"</string>
-    <string name="status_min_number" msgid="3519504522179420597">"MİN"</string>
+    <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
     <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="1007470446618081441">"PRL sürümü"</string>
     <string name="meid_multi_sim" msgid="748999971744491771">"MEID (SIM yuvası %1$d)"</string>
@@ -1356,8 +1363,8 @@
     <string name="scanning_status_text_wifi_off_ble_off" msgid="6381094990708345188">"Kablosuz ağ ve Bluetooth taraması kapalı"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
-    <string name="status_data_network_type" msgid="7570837037428932780">"Mobil veri ağ türü"</string>
-    <string name="status_voice_network_type" msgid="5663112239742353547">"Mobil ses ağ türü"</string>
+    <string name="status_data_network_type" msgid="7570837037428932780">"Mobil veri ağı türü"</string>
+    <string name="status_voice_network_type" msgid="5663112239742353547">"Mobil ses ağı türü"</string>
     <string name="status_latest_area_info" msgid="7222470836568238054">"Operatör bilgileri"</string>
     <string name="status_data_state" msgid="5503181397066522950">"Mobil ağ durumu"</string>
     <string name="status_esim_id" msgid="6456255368300906317">"EID"</string>
@@ -1659,8 +1666,8 @@
     <string name="location_app_level_permissions" msgid="2777033567595680764">"Uygulama izni"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"Konum özelliği kapalı"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="5336807018727349708">
-      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> / <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> uygulamanın konuma erişimi var</item>
-      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> / <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> uygulamanın konuma erişimi var</item>
+      <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> uygulamadan <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> tanesinin konuma erişimi var</item>
+      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> uygulamadan <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> tanesinin konuma erişimi var</item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"Son konum erişimi"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"Ayrıntıları göster"</string>
@@ -2187,7 +2194,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"Camgöbeği"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Sarı"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Macenta"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> kullanılsın mı?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> şunları gerektiriyor:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Bir uygulama bir izin isteğinin anlaşılmasını engellediğinden, Ayarlar, yanıtınızı doğrulayamıyor."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> hizmetini açarsanız cihazınız veri şifrelemeyi geliştirmek için ekran kilidinizi kullanmaz."</string>
@@ -2196,8 +2204,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"<xliff:g id="SERVICE">%1$s</xliff:g> hizmetini etkinleştirmek veri şifrelemesini etkileyeceğinden PIN\'inizi doğrulamanız gerekmektedir."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"<xliff:g id="SERVICE">%1$s</xliff:g> hizmetini etkinleştirmek veri şifrelemesini etkileyeceğinden şifrenizi doğrulamanız gerekmektedir."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g>, bu cihazın tam kontrolünü istiyor. Hizmet, ekranı okuyabilir ve erişilebilirlik gereksinimleri olan kullanıcıların adına hareket edebilir. Bu kontrol düzeyi, çoğu uygulama için uygun değildir."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> durdurulsun mu?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Tamam\'a dokunulduğunda <xliff:g id="SERVICE">%1$s</xliff:g> hizmeti durdurulur."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Hiçbir hizmet yüklenmedi"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Hizmet seçilmedi"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Hiçbir açıklama sağlanmadı."</string>
@@ -2251,7 +2278,7 @@
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"Uygulama için arka plan etkinliğini sınırlarsanız hatalı davranabilir"</string>
     <string name="background_activity_disabled_dialog_text" msgid="6133420589651880824">"Uygulama, pili optimize etmek için ayarlanmadığından kısıtlanamaz.\n\nUygulamayı kısıtlamak için önce pil optimizasyonunu açın."</string>
     <string name="device_screen_usage" msgid="3386088035570409683">"Tam şarj sonrası ekran kullanımı"</string>
-    <string name="power_usage_list_summary" msgid="5584049564906462506">"Tam şarjdan beri pil kullanımı"</string>
+    <string name="power_usage_list_summary" msgid="5584049564906462506">"Tam şarjdan itibaren pil kullanımı"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Tam şarjdan sonra ekranın açık olduğu süre"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Tam şarj sonrası cihaz kullanımı"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Fişten çekildikten sonra pil kullanımı"</string>
@@ -3245,7 +3272,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"Ses ve titreşim"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"Ses, titreşim ve bazı görsel bildirim işaretleri"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"Ses, titreşim ve görsel bildirim işaretleri"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="5710896246703497760">"Temel telefon etkinliği ve durum için gereken bildirimler hiçbir zaman gizlenmez"</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="5710896246703497760">"Temel telefon etkinliği ve durumu için gereken bildirimler hiçbir zaman gizlenmez"</string>
     <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"Yok"</string>
     <string name="zen_mode_other_options" msgid="520015080445012355">"diğer seçenekler"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"Ekle"</string>
@@ -3488,7 +3515,7 @@
     <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"Bu ayarlar şu anda değiştirilemez. Bir uygulama (<xliff:g id="APP_NAME">%1$s</xliff:g>) Rahatsız Etmeyin ayarını özel bir davranışla otomatik olarak açtı."</string>
     <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"Bu ayarlar şu anda değiştirilemez. Bir uygulama Rahatsız Etmeyin ayarını özel bir davranışla açtı."</string>
     <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"Bu ayarlar şu an değiştirilemez. Rahatsız Etmeyin ayarı özel bir davranışla manuel olarak açıldı."</string>
-    <string name="zen_schedule_rule_type_name" msgid="6163149826036287324">"Saat"</string>
+    <string name="zen_schedule_rule_type_name" msgid="6163149826036287324">"Zaman"</string>
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Otomatik kural, belirtilen zamanlarda Rahatsız Etmeyin seçeneği açılacak şekilde ayarlandı"</string>
     <string name="zen_event_rule_type_name" msgid="6503468472212606158">"Etkinlik"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Otomatik kural, belirtilen etkinlikler sırasında Rahatsız Etmeyin seçeneği açılacak şekilde ayarlandı"</string>
@@ -3511,7 +3538,7 @@
     <string name="zen_mode_schedule_alarm_summary" msgid="1673667979187593693">"Alarm çaldığında program kapanır"</string>
     <string name="zen_mode_custom_behavior_title" msgid="1148856394866360783">"Rahatsız Etmeyin özelliğinin davranışı"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="7750128187766412708">"Varsayılan ayarları kullan"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="7458258833216726120">"Bu plan için özel ayarlar oluştur"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="7458258833216726120">"Bu program için özel ayarlar oluştur"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="4070854282812755247">"\"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" için"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3559,7 +3586,7 @@
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"yıldız işaretli kişiler"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Tekrar arayanlar"</string>
     <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"tekrar arayanlar"</string>
-    <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Tekrarlı arayanlara izin ver"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Tekrar arayanlara izin ver"</string>
     <string name="zen_mode_calls_summary_one" msgid="1711737896388108388">"<xliff:g id="CALLER_TYPE">%1$s</xliff:g> tarafından gönderilenlere izin ver"</string>
     <string name="zen_mode_calls_summary_two" msgid="8476861928783654064">"İzin ver: <xliff:g id="CALLER_TYPE">%1$s</xliff:g> ve <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"Aynı kişi <xliff:g id="MINUTES">%d</xliff:g> dakika içinde ikinci defa ararsa"</string>
@@ -3577,8 +3604,8 @@
       <item quantity="one">Bir dakika için yalnızca alarmlar seçeneğine değiştir (şu saate kadar: <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
     </plurals>
     <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="2407703455581767748">
-      <item quantity="other"><xliff:g id="DURATION">%1$d</xliff:g> saat için yalnızca alarmlar seçeneğine değiştir (şu saate kadar: <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Bir saat için yalnızca alarmlar seçeneğine değiştir (şu saate kadar: <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
+      <item quantity="other"><xliff:g id="DURATION">%1$d</xliff:g> saat için yalnızca alarmlar olarak değiştir (şu saate kadar: <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="one">Bir saat için yalnızca alarmlar olarak değiştir (şu saate kadar: <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Yalnızca şu saate kadar alarmlara geç: <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Her zaman kes seçeneğine değiştir"</string>
@@ -4292,7 +4319,7 @@
     <string name="autofill_app" msgid="7338387238377914374">"Otomatik doldurma hizmeti"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"otomatik, doldur, otomatik doldur"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Bu uygulamaya güvendiğinizden emin olun&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Otomatik Doldurma&gt;%1$s&lt;/xliff:g&gt; otomatik doldurulabilecek öğeleri belirlemek için ekranınızdaki bilgileri kullanır."</string>
-    <string name="debug_autofill_category" msgid="8050326960545979035">"Otomatik doldur"</string>
+    <string name="debug_autofill_category" msgid="8050326960545979035">"Otomatik Doldurma"</string>
     <string name="autofill_logging_level_title" msgid="899483289251346778">"Günlük kaydı düzeyi"</string>
     <string name="autofill_max_partitions" msgid="7590272120101271461">"Oturum başına maksimum istek"</string>
     <string name="autofill_max_visible_datasets" msgid="4531033613378881109">"Maksimum görünür veri kümesi"</string>
@@ -4313,8 +4340,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Rahatsız Etmeyin özelliğini güncelleyin"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Konsantrasyonunuzu bozmamak için bildirimleri duraklatın"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Bu özellik bu cihazda kullanılamıyor"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"Bu özellik kullanılamıyor"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Söz konusu özellik bu telefonu yavaşlatır"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Tam GNSS ölçümlerini zorla"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Tüm GNSS takımyıldızlarını ve görev döngüsü olmayan frekansları takip et"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Arka planda başlayan işlemlere izin ver"</string>
