@@ -399,6 +399,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"अनुहार थपियो"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"अनुहार प्रमाणीकरण सेटअप गर्न ट्याप गर्नु…"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"अनुहार प्रमाणीकरण"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"पहुँचसम्बन्धी सेटअप प्रयोग गर्नु"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -409,7 +414,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"आफ्नो फोन अनलक गर्न, खरिद अधिकार दिन वा अनुप्रयोगहरूमा साइन इन गर्न आफ्नो अनुहार प्रयोग गर्नुहोस्।"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"तपाईंको फोन अनलक वा खरिदहरूको अनुमोदन गर्न आफ्ना अनुहारको प्रयोग गर्नुहोस्।\n\nटिपोट: तपाईं यो यन्त्र अनलक गर्न आफ्नो अनुहारको प्रयोग गर्न सक्नुहुन्न। थप जानकारीका लागि आफ्नो सङ्गठनको प्रशासकसँग सम्पर्क गर्नुहोस्।"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"आफ्नो फोन अनलक गर्न, खरिद अधिकार दिन वा अनुप्रयोगहरूमा साइन इन गर्न आफ्नो अनुहार प्रयोग गर्नुहोस्"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"आफ्नो अनुहार वृतको बिचमा पार्नुहोस्"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"यो कार्य पछि गर्नुहोस्‌"</string>
     <string name="face_add_max" msgid="4408683751143942949">"तपाईं अधिकतम <xliff:g id="COUNT">%d</xliff:g> अनुहारहरू थप्न सक्नुहुन्छ"</string>
@@ -2187,7 +2194,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"सायन"</string>
     <string name="color_yellow" msgid="9112680561610873529">"पहेँलो"</string>
     <string name="color_magenta" msgid="5059212823607815549">"म्याजेन्टा"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> प्रयोग गर्नुहुन्छ?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> लाई आवश्यक:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"एपले अनुमति अनुरोधलाई अस्पष्ट मानिरहेको हुनाले, सेटिङहरूलले तपाईंको प्रतिक्रियालाई प्रमाणित गर्न सक्दैनन्।"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"यदि तपाईंले <xliff:g id="SERVICE">%1$s</xliff:g> खोल्नुभयो भने, आफ्नो उपकरणले डेटा गुप्तिकरण अभिवृद्धि गर्न स्क्रिन लक प्रयोग गर्ने छैन।"</string>
@@ -2196,8 +2204,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेवा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो PIN पुष्टि गर्न आवश्यक छ।"</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेबा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो पासवर्ड पुष्टि गर्न आवश्यक छ।"</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> ले यो यन्त्र पूर्ण रूपमा नियन्त्रण गर्ने अनुमति माग्दै छ। यो सेवाले स्क्रिनमा भएका जानकारी पढ्न तथा पहुँचसम्बन्धी आवश्यकता भएका प्रयोगकर्ताहरूका तर्फबाट कारबाही गर्न सक्छ। धेरैजसो अनुप्रयोगहरूका हकमा यो स्तरको नियन्त्रण उपयुक्त हुँदैन।"</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g>बन्द गर्नुहुन्छ?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"OK ट्याप गरिँदा <xliff:g id="SERVICE">%1$s</xliff:g>लाई रोक्ने छ।"</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"कुनै पनि सेवाहरू स्थापित छैनन्"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"कुनै पनि सेवा चयन गरिएको छैन"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"वर्णन प्रदान गरिएको छैन।"</string>
@@ -4313,8 +4340,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"बाधा नपुर्‍याउनुहोस्‌ नामक सेवालाई अद्यावधिक गर्नुहोस्‌"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"केन्द्रित रहन सूचनाहरू पज गर्नुहोस्"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"यस यन्त्रमा यो सुविधा उपलब्ध छैन"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"यो सुविधा उपलब्ध छैन"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"यो सुविधा प्रयोग गर्नुले फोनको कार्यक्षमता सुस्त पार्ने छ"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"पूर्ण GNSS मापनहरू बलपूर्वक लागू गर्नुहोस्"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"कुनै उपयोगिता अनुपात बिना नै सबै GNSS कन्स्टेलेसन तथा फ्रिक्वेन्सीहरूलाई ट्र्याक गर्नुहोस्"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"पृष्ठभूमिको क्रियाकलाप सुरु हुने अनुमति दिनुहोस्"</string>

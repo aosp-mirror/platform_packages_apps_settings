@@ -399,6 +399,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Fytyra u shtua"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Trokit për të vendosur vërtetimin me fytyrë"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Vërtetimi me fytyrë"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Përdor konfigurimin e qasshmërisë"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -409,7 +414,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Përdor fytyrën për të shkyçur telefonin, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Përdor fytyrën për të shkyçur telefonin ose për të miratuar blerjet.\n\nShënim. Nuk mund ta përdorësh fytyrën tënde për të shkyçur këtë pajisje. Për më shumë informacione, kontakto me administratorin e organizatës sate."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Përdor fytyrën për të shkyçur telefonin, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Mbaje fytyrën në mes të rrethit"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Bëje më vonë"</string>
     <string name="face_add_max" msgid="4408683751143942949">"Mund të shtosh deri në <xliff:g id="COUNT">%d</xliff:g> fytyra"</string>
@@ -2188,7 +2195,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"Gurkali"</string>
     <string name="color_yellow" msgid="9112680561610873529">"E verdhë"</string>
     <string name="color_magenta" msgid="5059212823607815549">"E purpurt"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"Të përdoret \"<xliff:g id="SERVICE">%1$s</xliff:g>\"?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"\"<xliff:g id="SERVICE">%1$s</xliff:g>\" ka nevojë të:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Duke qenë se një aplikacion po bllokon një kërkesë për leje, \"Cilësimet\" nuk mund të verifikojnë përgjigjen tënde."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Nëse aktivizon <xliff:g id="SERVICE">%1$s</xliff:g>, pajisja nuk do të përdorë kyçjen e ekranit për të rritur enkriptimin e të dhënave."</string>
@@ -2197,8 +2205,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Duke qenë se aktivizimi i <xliff:g id="SERVICE">%1$s</xliff:g> ndikon në enkriptimin e të dhënave, duhet të konfirmosh kodin PIN."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Meqenëse aktivizimi i <xliff:g id="SERVICE">%1$s</xliff:g> ndikon në enkriptimin e të dhënave, duhet të konfirmosh fjalëkalimin tënd."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> po kërkon kontroll të plotë të kësaj pajisjeje. Shërbimi mund të lexojë ekranin dhe të veprojë në emër të përdoruesve me nevoja qasshmërie. Ky nivel kontrolli nuk është i përshtatshëm për shumicën e aplikacioneve."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"Të ndalohet shërbimi \"<xliff:g id="SERVICE">%1$s</xliff:g>\"?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Trokitja te \"Në rregull\" do të ndalojë shërbimin <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nuk është instaluar asnjë shërbim"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Nuk është zgjedhur asnjë shërbim"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Nuk është dhënë asnjë përshkrim."</string>
@@ -3199,7 +3226,7 @@
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Asnjë tingull përveç <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Asnjë tingull përveç alarmeve dhe medias"</string>
     <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"Oraret"</string>
-    <string name="zen_mode_delete_automatic_rules" msgid="5975522152123354381">"Fshi planifikimet"</string>
+    <string name="zen_mode_delete_automatic_rules" msgid="5975522152123354381">"Fshi oraret"</string>
     <string name="zen_mode_schedule_delete" msgid="5717258786128155695">"Fshi"</string>
     <string name="zen_mode_rule_name_edit" msgid="812185626159430507">"Redakto"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="8995524726286378583">"Oraret"</string>
@@ -4314,8 +4341,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Përditëso modalitetin \"Mos shqetëso\""</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Vendos njoftimet në pauzë për të qëndruar i fokusuar"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ky funksion nuk ofrohet në këtë pajisje"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"Ky funksion nuk ofrohet"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Ai do ta ngadalësojë këtë telefon"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Matjet GNSS me fuqi të plotë"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Gjurmo të gjitha koleksionet dhe frekuencat e GNSS pa ciklim të detyruar"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Lejo nisjet e aktiviteteve në sfond"</string>

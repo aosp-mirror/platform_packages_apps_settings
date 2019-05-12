@@ -378,7 +378,12 @@
     <string name="location_settings_title" msgid="1369675479310751735">"Vietovė"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"Naudoti vietovę"</string>
     <string name="location_settings_summary_location_off" msgid="794370259612167176">"Išjungti"</string>
-    <!-- no translation found for location_settings_summary_location_on (5513447650619485188) -->
+    <plurals name="location_settings_summary_location_on" formatted="false" msgid="5513447650619485188">
+      <item quantity="one">Įjungta – <xliff:g id="COUNT_1">%1$d</xliff:g> programa gali pasiekti vietovę</item>
+      <item quantity="few">Įjungta – <xliff:g id="COUNT_1">%1$d</xliff:g> programos gali pasiekti vietovę</item>
+      <item quantity="many">Įjungta – <xliff:g id="COUNT_1">%1$d</xliff:g> programos gali pasiekti vietovę</item>
+      <item quantity="other">Įjungta – <xliff:g id="COUNT_1">%1$d</xliff:g> programų gali pasiekti vietovę</item>
+    </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="8523775367089431611">"Įkeliama…"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Paskyros"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sauga"</string>
@@ -400,6 +405,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Veidas pridėtas"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Palieskite, kad nust. veido autentifik."</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Veido autentifikavimas"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Naud. pritaikymo neįgal. sąranką"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -410,7 +420,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Naudokite veidą, norėdami atrakinti telefoną, įgalioti pirkimo veiksmus arba prisijungti prie programų."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Atrakinkite telefoną ir patvirtinkite pirkimo operacijas veidu.\n\nPastaba: negalite atrakinti šio įrenginio veidu. Norėdami gauti daugiau informacijos, susisiekite su organizacijos administratoriumi."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Naudokite veidą, norėdami atrakinti telefoną, įgalioti pirkimo veiksmus arba prisijungti prie programų"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Veidas turi būti apskritimo centre"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Atlikti vėliau"</string>
     <string name="face_add_max" msgid="4408683751143942949">"Galite pridėti daugiausia tiek veidų: <xliff:g id="COUNT">%d</xliff:g>"</string>
@@ -1611,7 +1623,7 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Atkuriami numatytieji APN nustatymai."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Nustatyti iš naujo į numatytuosius nust."</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Numatytųjų APN nustatymų nustatymas iš naujo baigtas."</string>
-    <string name="reset_dashboard_title" msgid="6254873816990678620">"Nustatyti parinktis iš naujo"</string>
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"Nustat. parinkt. iš naujo"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Tinklą, programas arba įrenginį galima nustatyti iš naujo"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Iš naujo nustatyti „Wi-Fi“, mobiliųjų duomenų ir „Bluetooth“ nustatymus"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Bus iš naujo nustatyti visi tinklo nustatymai, įskaitant:\n\n"<li>"„Wi‑Fi“;"</li>\n<li>"mobiliojo ryšio duomenis;"</li>\n<li>"„Bluetooth“."</li></string>
@@ -1693,7 +1705,12 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Darbo profilio vieta"</string>
     <string name="location_app_level_permissions" msgid="2777033567595680764">"Programos leidimas"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"Vietovė išjungta"</string>
-    <!-- no translation found for location_app_permission_summary_location_on (5336807018727349708) -->
+    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="5336807018727349708">
+      <item quantity="one"> Tiek programų gali pasiekti vietovę: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> iš <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="few"> Tiek programų gali pasiekti vietovę: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> iš <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="many"> Tiek programų gali pasiekti vietovę: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> iš <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="other"> Tiek programų gali pasiekti vietovę: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> iš <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+    </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"Pastaroji vietovės prieiga"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"Žr. išsamią informaciją"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Nė viena programa pastaruoju metu nepateikė užklausų dėl vietovės"</string>
@@ -2094,8 +2111,7 @@
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Ekrano skaitytuvas pirmiausia skirtas akliems ar regos sutrikimų turintiems žmonėms"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Palieskite elementus ekrane, kad jie būtų skaitomi balsu"</string>
-    <!-- no translation found for accessibility_captioning_title (8068289534732163115) -->
-    <skip />
+    <string name="accessibility_captioning_title" msgid="8068289534732163115">"Subtitrų nuostatos"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Didinimas"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Didinti palietus tris kartus"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Didinti naudojant mygtuką"</string>
@@ -2234,7 +2250,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"Žalsvai mėlyna"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Geltona"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Purpurinė"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"Naudoti „<xliff:g id="SERVICE">%1$s</xliff:g>“?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"„<xliff:g id="SERVICE">%1$s</xliff:g>“ reikia:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Kadangi programa užstoja leidimo užklausą, nustatymuose negalima patvirtinti jūsų atsakymo."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Jei įjungsite „<xliff:g id="SERVICE">%1$s</xliff:g>“, įrenginyje nebus naudojamas ekrano užraktas siekiant patobulinti duomenų šifruotę."</string>
@@ -2243,8 +2260,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Įjungus „<xliff:g id="SERVICE">%1$s</xliff:g>“ paveikiama duomenų šifruotė, todėl reikia patvirtinti PIN kodą."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Įjungus „<xliff:g id="SERVICE">%1$s</xliff:g>“ paveikiama duomenų šifruotė, todėl reikia patvirtinti slaptažodį."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"„<xliff:g id="SERVICE">%1$s</xliff:g>“ nori valdyti visas šio įrenginio funkcijas. Paslauga gali skaityti ekraną ir veikti specialiųjų poreikių turinčių naudotojų vardu. Šis valdymo lygis nėra tinkamas daugumai programų."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"Sustabdyti „<xliff:g id="SERVICE">%1$s</xliff:g>“?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Palietus „Gerai“ bus sustabdyta „<xliff:g id="SERVICE">%1$s</xliff:g>“."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nėra įdiegta jokių paslaugų"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Nepasirinkta jokia paslauga"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Nepateikta jokių aprašų."</string>
@@ -3315,8 +3351,7 @@
     <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"Slėpti būsenos juostos piktogramas ekrano viršuje"</string>
     <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"Slėpti pranešimų taškus programų piktogramose"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Nepažadinti gavus pranešimų"</string>
-    <!-- no translation found for zen_mode_block_effect_list (4722887783222298295) -->
-    <skip />
+    <string name="zen_mode_block_effect_list" msgid="4722887783222298295">"Slėpti išskleidžiamajame skydelyje"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Niekada"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Kai ekranas išjungtas"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="6017536991063513394">"Kai ekranas įjungtas"</string>
@@ -3508,7 +3543,7 @@
     <string name="no_vr_listeners" msgid="2689382881717507390">"Nėra įdiegtų programų, kurios pateikė užklausą būti vykdomos kaip pagalbinės virtualiosios realybės paslaugos."</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Leisti „<xliff:g id="SERVICE">%1$s</xliff:g>“ pasiekti virtualiosios realybės paslaugą?"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"„<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>“ galės veikti, kai programas naudosite virtualiosios realybės režimu."</string>
-    <string name="display_vr_pref_title" msgid="8104485269504335481">"Kai įrenginys veikia virtualiosios realybės režimu"</string>
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"Kai įrenginys veikia VR režimu"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Sumažinti suliejimą (rekomenduojama)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Sumažti mirgėjimą"</string>
     <string name="picture_in_picture_title" msgid="5824849294270017113">"Vaizdas vaizde"</string>
@@ -3621,11 +3656,9 @@
       <item quantity="many">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontakto</item>
       <item quantity="other">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktų</item>
     </plurals>
-    <!-- no translation found for zen_mode_messages (6406892731721926170) -->
-    <skip />
+    <string name="zen_mode_messages" msgid="6406892731721926170">"Leisti pranešimus"</string>
     <string name="zen_mode_messages_footer" msgid="2616568463646674149">"Kad užtikrintumėte, jog įrenginys skambės priimant leidžiamus pranešimus, patikrinkite, ar jame nustatytas skambėjimo, vibravimo ar begarsis režimas."</string>
-    <!-- no translation found for zen_mode_custom_messages_footer (800067279796770040) -->
-    <skip />
+    <string name="zen_mode_custom_messages_footer" msgid="800067279796770040">"Veikiant „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“ blokuojami gaunami pranešimai. Galite koreguoti nustatymus ir leisti draugams, šeimos nariams ar kitiems kontaktams jus pasiekti."</string>
     <string name="zen_mode_messages_title" msgid="7325983674655986445">"SMS, MMS ir pranešimų programos"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Iš bet ko"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Tik iš kontaktų"</string>
@@ -4467,8 +4500,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Atnaujinti netrukdymo režimą"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Pristabdyti pranešimus, kad neblaškytų dėmesio"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ši funkcija nepasiekiama šiame įrenginyje"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"Ši funkcija negalima"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Ją įjungus telefonas veiks lėčiau"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Priversti vykdyti visus GNSS matavimus"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Stebėti visas GNSS konferencijas ir visus dažnius netaikant darbo ciklų"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Leisti pradėti veiklą fone"</string>
