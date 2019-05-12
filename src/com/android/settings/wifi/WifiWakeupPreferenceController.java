@@ -97,15 +97,22 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
             return false;
         }
 
-        if (!mLocationManager.isLocationEnabled()) {
-            final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            mFragment.startActivity(intent);
-        } else if (getWifiWakeupEnabled()) {
+        // TODO(b/132391311): WifiWakeupPreferenceController is essentially reimplementing
+        // TogglePreferenceController. Refactor it into TogglePreferenceController.
+
+        // Toggle wifi-wakeup setting between 1/0 based on its current state, and some other checks.
+        if (isWifiWakeupAvailable()) {
             setWifiWakeupEnabled(false);
-        } else if (!getWifiScanningEnabled()) {
-            showScanningDialog();
         } else {
-            setWifiWakeupEnabled(true);
+            if (!mLocationManager.isLocationEnabled()) {
+                final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                mFragment.startActivityForResult(intent, WIFI_WAKEUP_REQUEST_CODE);
+                return true;
+            } else if (!getWifiScanningEnabled()) {
+                showScanningDialog();
+            } else {
+                setWifiWakeupEnabled(true);
+            }
         }
 
         updateState(mPreference);
@@ -124,9 +131,7 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         }
         final SwitchPreference enableWifiWakeup = (SwitchPreference) preference;
 
-        enableWifiWakeup.setChecked(getWifiWakeupEnabled()
-                && getWifiScanningEnabled()
-                && mLocationManager.isLocationEnabled());
+        enableWifiWakeup.setChecked(isWifiWakeupAvailable());
         if (!mLocationManager.isLocationEnabled()) {
             preference.setSummary(getNoLocationSummary());
         } else {
@@ -145,7 +150,7 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         if (requestCode != WIFI_WAKEUP_REQUEST_CODE) {
             return;
         }
-        if (mLocationManager.isLocationEnabled()) {
+        if (mLocationManager.isLocationEnabled() && getWifiScanningEnabled()) {
             setWifiWakeupEnabled(true);
         }
         updateState(mPreference);
@@ -166,6 +171,15 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
     private boolean getWifiWakeupEnabled() {
         return Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
+    }
+
+    /**
+     * Wifi wakeup is available only when both location and Wi-Fi scanning are enabled.
+     */
+    private boolean isWifiWakeupAvailable() {
+        return getWifiWakeupEnabled()
+                && getWifiScanningEnabled()
+                && mLocationManager.isLocationEnabled();
     }
 
     private void setWifiWakeupEnabled(boolean enabled) {

@@ -23,28 +23,118 @@
     android:gravity="top">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="16dip"
-        android:paddingEnd="16dip">
+        android:theme="@style/Theme.AlertDialog"
+        style="@style/AccessibilityDialog">
 
-        <TextView
-            android:id="@+id/encryption_warning"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dip"
-            android:textAlignment="viewStart"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
 
-        <TextView
-            android:id="@+id/accessibility_service_warning"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dip"
-            android:textAlignment="viewStart"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            <ImageView
+                android:id="@+id/permissionDialog_icon"
+                style="@style/AccessibilityDialogServiceIcon" />
 
+            <TextView
+                android:id="@+id/permissionDialog_title"
+                style="@style/AccessibilityDialogTitle" />
+
+            <TextView
+                android:id="@+id/encryption_warning"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:textAlignment="viewStart"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <TextView
+                android:id="@+id/permissionDialog_description"
+                android:text="@string/accessibility_service_warning_description"
+                style="@style/AccessibilityDialogDescription" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp" >
+
+                <ImageView
+                    android:id="@+id/controlScreen_icon"
+                    android:src="@drawable/ic_visibility_18dp"
+                    style="@style/AccessibilityDialogIcon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/controlScreen_title"
+                        android:text="@string/accessibility_service_screen_control_title"
+                        style="@style/AccessibilityDialogPermissionTitle" />
+
+                    <TextView
+                        android:id="@+id/controlScreen_description"
+                        android:text="@string/accessibility_service_screen_control_description"
+                        style="@style/AccessibilityDialogPermissionDescription" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp" >
+
+                <ImageView
+                    android:id="@+id/performAction_icon"
+                    android:src="@drawable/ic_pan_tool_18dp"
+                    style="@style/AccessibilityDialogIcon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/performAction_title"
+                        android:text="@string/accessibility_service_action_perform_title"
+                        style="@style/AccessibilityDialogPermissionTitle" />
+
+                    <TextView
+                        android:id="@+id/performAction_description"
+                        android:text="@string/accessibility_service_action_perform_description"
+                        style="@style/AccessibilityDialogPermissionDescription" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Buttons on bottom of dialog -->
+        <LinearLayout
+            style="@style/AccessibilityDialogButtonList">
+
+            <Space
+                style="@style/AccessibilityDialogButtonBarSpace"/>
+
+            <Button
+                android:id="@+id/permission_enable_allow_button"
+                android:text="@string/accessibility_dialog_button_allow"
+                style="@style/AccessibilityDialogButtonAllow" />
+
+            <Button
+                android:id="@+id/permission_enable_deny_button"
+                android:text="@string/accessibility_dialog_button_deny"
+                style="@style/AccessibilityDialogButtonDeny" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

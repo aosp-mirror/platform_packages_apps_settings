@@ -37,6 +37,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
+import android.view.View;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -148,7 +149,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
     }
 
     public static class ConfirmationDialogFragment extends InstrumentedDialogFragment
-            implements DialogInterface.OnClickListener {
+            implements View.OnClickListener {
         private static final String EXTRA_KEY = "extra_key";
         private static final String TAG = "ConfirmationDialogFragment";
         private IBinder mToken;
@@ -182,9 +183,10 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
         }
 
         @Override
-        public void onClick(DialogInterface dialog, int which) {
+        public void onClick(View view) {
             final Fragment fragment = getTargetFragment();
-            if ((which == BUTTON_POSITIVE) && (fragment instanceof ShortcutServicePickerFragment)) {
+            if ((view.getId() == R.id.permission_enable_allow_button)
+                && (fragment instanceof ShortcutServicePickerFragment)) {
                 final Bundle bundle = getArguments();
                 ((ShortcutServicePickerFragment) fragment).onServiceConfirmed(
                         bundle.getString(EXTRA_KEY));

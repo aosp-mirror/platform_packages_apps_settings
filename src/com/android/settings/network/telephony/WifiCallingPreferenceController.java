@@ -68,7 +68,6 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
-        mSimCallManager = context.getSystemService(TelecomManager.class).getSimCallManager();
         mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
         mEditableWfcRoamingMode = true;
         mUseWfcHomeModeForRoaming = false;
@@ -77,8 +76,7 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     @Override
     public int getAvailabilityStatus(int subId) {
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
-                && MobileNetworkUtils.isWifiCallingEnabled(mContext,
-                SubscriptionManager.getPhoneId(subId))
+                && MobileNetworkUtils.isWifiCallingEnabled(mContext, subId)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -155,6 +153,8 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
         mSubId = subId;
         mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
         mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
+        mSimCallManager = mContext.getSystemService(TelecomManager.class)
+                .getSimCallManagerForSubscription(mSubId);
         if (mCarrierConfigManager != null) {
             final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
             if (carrierConfig != null) {
