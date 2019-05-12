@@ -399,6 +399,9 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Face added"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tap to set up face authentication"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Face authentication"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"How to set up Face Unlock"</string>
+    <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Use your face to authenticate"</string>
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Use accessibility setup"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -409,7 +412,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Use your face to unlock your phone, authorise purchases or sign in to apps."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Use your face to unlock your phone or approve purchases.\n\nNote: You can’t use your face to unlock this device. For more information, contact your organisation’s admin."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Use your face to unlock your phone, authorise purchases or sign in to apps"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Centre your face in the circle"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Do it later"</string>
     <string name="face_add_max" msgid="4408683751143942949">"You can add up to <xliff:g id="COUNT">%d</xliff:g> faces"</string>
@@ -2187,7 +2192,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cyan"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Yellow"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"Use <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="enable_service_title" msgid="1374048678465697350">"Allow <xliff:g id="SERVICE">%1$s</xliff:g> to have full contol of your device?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> needs to:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Because an app is obscuring a permission request, Settings can’t verify your response."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"If you turn on <xliff:g id="SERVICE">%1$s</xliff:g>, your device won’t use your screen lock to enhance data encryption."</string>
@@ -2196,8 +2201,17 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Because turning on <xliff:g id="SERVICE">%1$s</xliff:g> affects data encryption, you need to confirm your PIN."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Because turning on <xliff:g id="SERVICE">%1$s</xliff:g> affects data encryption, you need to confirm your password."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> is requesting full control of this device. The service can read the screen and act on behalf of users with accessibility needs. This level of control is not appropriate for most apps."</string>
+    <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Full control is appropriate for apps that help you with accessibility needs, but not for most apps."</string>
+    <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"View and control screen"</string>
+    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"It can read all content on the screen and display content over other apps."</string>
+    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"View and platform actions"</string>
+    <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"It can track your interactions with an app or a hardware sensor, and interact with apps on your behalf."</string>
+    <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Allow"</string>
+    <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Deny"</string>
+    <string name="accessibility_dialog_button_stop" msgid="7861331860214808622">"Stop"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="5006357240387387028">"Cancel"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Stop <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Tapping OK will stop <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
+    <string name="disable_service_message" msgid="4593387199926310801">"Tapping <xliff:g id="STOP">%1$s</xliff:g> will stop <xliff:g id="SERVICE">%2$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"No services installed"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"No service selected"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"No description provided."</string>
@@ -3482,7 +3496,7 @@
     <string name="zen_mode_add_time_rule" msgid="7890557350868257760">"Add time schedule"</string>
     <string name="zen_mode_delete_rule" msgid="8055032645990309096">"Delete schedule"</string>
     <string name="zen_mode_choose_rule_type" msgid="40993242338494595">"Choose schedule type"</string>
-    <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"Delete \"<xliff:g id="RULE">%1$s</xliff:g>\" rule?"</string>
+    <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"Delete \'<xliff:g id="RULE">%1$s</xliff:g>\' rule?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"Delete"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"Unknown"</string>
     <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"These settings can\'t be changed at the moment. An app (<xliff:g id="APP_NAME">%1$s</xliff:g>) has automatically turned on Do Not Disturb with custom behaviour."</string>
@@ -3519,7 +3533,7 @@
     <string name="zen_mode_calls" msgid="4769117032399813012">"Allow calls"</string>
     <string name="zen_mode_calls_title" msgid="2905770092665685857">"Calls"</string>
     <string name="zen_mode_calls_footer" msgid="2002070641802102110">"To make sure that allowed calls make sound, check whether your device is set to ring, vibrate or silent."</string>
-    <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"For ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ incoming calls are blocked. You can adjust settings to allow your friends, family or other contacts to reach you."</string>
+    <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"For ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, incoming calls are blocked. You can adjust settings to allow your friends, family or other contacts to reach you."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Starred contacts"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> others</item>
@@ -3527,7 +3541,7 @@
     </plurals>
     <string name="zen_mode_messages" msgid="6406892731721926170">"Allow messages"</string>
     <string name="zen_mode_messages_footer" msgid="2616568463646674149">"To make sure that allowed messages make sound, check whether your device is set to ring, vibrate or silent."</string>
-    <string name="zen_mode_custom_messages_footer" msgid="800067279796770040">"For ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ incoming messages are blocked. You can adjust settings to allow your friends, family or other contacts to reach you."</string>
+    <string name="zen_mode_custom_messages_footer" msgid="800067279796770040">"For ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, incoming messages are blocked. You can adjust settings to allow your friends, family or other contacts to reach you."</string>
     <string name="zen_mode_messages_title" msgid="7325983674655986445">"SMS, MMS and messaging apps"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"From anyone"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"From contacts only"</string>
@@ -4313,8 +4327,8 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Update Do Not Disturb"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Pause notifications to stay focused"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"This feature is not available on this device"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"This feature is not available"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"It will slow down this phone"</string>
+    <string name="disabled_feature" msgid="3232554901854971743">"Feature not available"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"This feature has been turned off because it slows down your phone"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Force full GNSS measurements"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Track all GNSS constellations and frequencies with no duty cycling"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Allow background activity starts"</string>

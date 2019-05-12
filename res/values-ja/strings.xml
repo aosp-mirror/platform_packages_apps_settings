@@ -399,6 +399,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"顔を追加しました"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"タップして顔認証を設定してください"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"顔認証"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"ユーザー補助の設定を使用"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -409,7 +414,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"顔を使って、スマートフォンのロック解除や購入の承認を行います。\n\n注: 顔を使ってこのデバイスのロックを解除することはできません。詳しくは、組織の管理者にお問い合わせください。"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"顔が円の中央にくるようにしてください"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"後で"</string>
     <string name="face_add_max" msgid="4408683751143942949">"最大で <xliff:g id="COUNT">%d</xliff:g> 個の顔を追加できます"</string>
@@ -831,7 +838,7 @@
     <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC を ON にする"</string>
     <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC がこのデバイスと他の付近のデバイスまたはターゲット（決済デバイス、アクセス リーダー、インタラクティブ広告またはタグなど）の間でデータのやり取りを行います。"</string>
     <string name="nfc_secure_settings_title" msgid="150400737244061585">"NFC の保護"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="2135032222065627938">"画面がロックされている場合のみ NFC 決済と乗換案内の使用を許可します"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="2135032222065627938">"画面がアンロックされている場合のみ NFC 決済と公共交通機関での利用を許可します"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android ビーム"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"アプリコンテンツをNFCで転送できます"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"OFF"</string>
@@ -900,7 +907,7 @@
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自動設定（WPS）"</string>
     <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"Wi‑Fi のスキャンを ON にする"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Wi‑Fi を自動的に ON にするには、まず Wi‑Fi のスキャンを ON にしてください。"</string>
-    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Wi-Fi のスキャンでは、アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
+    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Wi-Fi のスキャンでは、アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。"</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"ON にする"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"Wi‑Fi のスキャンを ON にしました"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"詳細設定"</string>
@@ -1670,9 +1677,9 @@
     <string name="location_low_battery_use" msgid="8602232529541903596">"電池使用量: 低"</string>
     <string name="location_scanning_screen_title" msgid="2297479353298444503">"Wi‑Fi のスキャンと Bluetooth のスキャン"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi‑Fiのスキャン"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。この設定は、たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetoothのスキャン"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"アプリやサービスに対し、Bluetooth が OFF の場合でも、常に付近のデバイスをスキャンすることを許可します。この設定は、たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"アプリやサービスに対し、Bluetooth が OFF の場合でも、常に付近のデバイスをスキャンすることを許可します。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。"</string>
     <string name="managed_profile_location_services" msgid="4723268446874715222">"仕事用プロファイル向けの位置情報サービス"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi/モバイル接続時の位置情報"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Googleの位置情報サービスで現在地をすばやく推定することをアプリに許可します。匿名の現在地データが収集され、Googleに送信されます。"</string>
@@ -2187,7 +2194,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"水色"</string>
     <string name="color_yellow" msgid="9112680561610873529">"黄"</string>
     <string name="color_magenta" msgid="5059212823607815549">"マゼンタ"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g>を利用しますか？"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>では以下が必要です。"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"アプリが許可リクエストを隠しているため、設定側でユーザーの応答を確認できません。"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにすると、デバイスデータの暗号化の強化に画面ロックは使用されなくなります。"</string>
@@ -2196,8 +2204,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにするとデータの暗号化に影響するため、PINの確認が必要となります。"</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにするとデータの暗号化に影響するため、パスワードの確認が必要となります。"</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> はこのデバイスのフル コントロールをリクエストしています。これは、ユーザー補助を必要とするユーザーに代わって画面を読み上げたり操作したりするサービスです。大半のアプリに、このレベルのコントロールは適していません。"</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g>を停止しますか？"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"[OK] をタップすると「<xliff:g id="SERVICE">%1$s</xliff:g>」が停止します。"</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"インストールされているサービスはありません"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"サービスが選択されていません"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"説明はありません。"</string>
@@ -2327,7 +2354,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"このアプリはバックグラウンドで電池を使用するため、電池が予想より早くなくなる可能性があります。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"削除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"キャンセル"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"アプリの電池使用量は正常です。アプリが電池を使いすぎる場合は、対処可能なおすすめの方法がスマートフォンに表示されます。\n\n電池の残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"アプリの電池使用量は正常です。アプリが電池を使いすぎる場合は、おすすめの対処方法をスマートフォンがお知らせします。\n\n電池の残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"アプリの電池使用量は正常です。アプリが電池を使いすぎる場合は、対処可能なおすすめの方法がタブレットに表示されます。\n\n電池の残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"アプリの電池使用量は正常です。アプリが電池を使いすぎる場合は、対処可能なおすすめの方法がデバイスに表示されます。\n\n電池の残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"バッテリー マネージャ"</string>
@@ -2461,7 +2488,7 @@
     <string name="battery_saver_auto_no_schedule" msgid="632243833320671052">"スケジュールなし"</string>
     <string name="battery_saver_auto_routine" msgid="8076053160450346731">"ルーティンに基づく"</string>
     <string name="battery_saver_auto_percentage" msgid="9000542338151528905">"残量に基づく"</string>
-    <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"次回の通常の充電前に電池が切れる可能性がある場合、バッテリー セーバーが ON になります"</string>
+    <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"次回のいつもの充電前に電池が切れる可能性がある場合、バッテリー セーバーが ON になります"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"<xliff:g id="PERCENT">%1$s</xliff:g> で ON"</string>
     <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"スケジュールの設定"</string>
     <string name="battery_saver_turn_on_summary" msgid="5552800757174173459">"電池を長持ちさせる"</string>
@@ -4313,8 +4340,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"サイレント モードの更新"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"集中するために通知を一時停止する"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"この機能は、お使いのデバイスではご利用いただけません"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"この機能はご利用いただけません"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"このスマートフォンの動作が遅くなります"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"GNSS 計測の完全な実行"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"デューティ サイクリングを無効にした状態で、すべての GNSS コンステレーションと頻度をトラッキングします"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"バックグラウンド アクティビティの開始を許可"</string>

@@ -399,6 +399,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Visage ajouté"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Appuyez pour configurer authent. faciale"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Authentificat. faciale"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Utiliser config. d\'accessibilité"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -409,7 +414,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Utilisez votre visage pour déverrouiller votre téléphone ou approuver des achats.\n\nRemarque : Vous ne pouvez pas utiliser votre visage pour déverrouiller cet appareil. Pour en savoir plus, contactez l\'administrateur de votre organisation."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Centrer votre visage dans le cercle"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Plus tard"</string>
     <string name="face_add_max" msgid="4408683751143942949">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> visages"</string>
@@ -576,7 +583,7 @@
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Aucune sécurité"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Schéma"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Sécurité moyenne"</string>
-    <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"Code PIN"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"Code"</string>
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Sécurité moyenne à élevée"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Mot de passe"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Sécurité élevée"</string>
@@ -596,7 +603,7 @@
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Aucun"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Balayer l\'écran"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Schéma"</string>
-    <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"Code PIN"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"Code"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Mot de passe"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Une fois que vous avez configuré un verrouillage de l\'écran, vous pouvez également configurer votre empreinte digitale dans Paramètres &gt; Sécurité."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Désactiver le verrouillage de l\'écran"</string>
@@ -722,7 +729,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> applications actives</item>
     </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Agents de confiance"</string>
-    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Pour l\'utiliser, définissez d\'abord un écran de verrouillage."</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Pour utiliser cette option, vous devez d\'abord définir un écran de verrouillage"</string>
     <string name="manage_trust_agents_summary" msgid="1475819820389620546">"Aucun"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="3935182396726101824">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> agent de confiance actif</item>
@@ -1294,7 +1301,7 @@
     <string name="sim_reenter_new" msgid="6523819386793546888">"Saisissez à nouveau le code d\'accès."</string>
     <string name="sim_change_pin" msgid="7328607264898359112">"Code PIN de la carte SIM"</string>
     <string name="sim_bad_pin" msgid="2345230873496357977">"Code PIN incorrect."</string>
-    <string name="sim_pins_dont_match" msgid="1695021563878890574">"Les codes PIN ne correspondent pas."</string>
+    <string name="sim_pins_dont_match" msgid="1695021563878890574">"Les codes ne correspondent pas"</string>
     <string name="sim_change_failed" msgid="3602072380172511475">"Impossible de modifier le code PIN.\nLe code PIN est peut-être incorrect."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"Le code PIN de la carte SIM a été modifié."</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Impossible de changer l\'état de verrouillage de la carte SIM.\nLe code PIN est peut-être incorrect."</string>
@@ -1727,7 +1734,7 @@
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Confirmez votre schéma"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Saisissez de nouveau votre code"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Les mots de passe ne correspondent pas."</string>
-    <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Les codes PIN ne correspondent pas."</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Les codes ne correspondent pas"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="2872194349688886781">"Dessinez de nouveau votre schéma"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Méthode de déverrouillage"</string>
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Le mot de passe a été défini."</string>
@@ -1825,7 +1832,7 @@
     <string name="controls_label" msgid="7611113077086853799">"Commandes"</string>
     <string name="force_stop" msgid="7435006169872876756">"Forcer l\'arrêt"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Total"</string>
-    <string name="application_size_label" msgid="7376689739076506885">"Taille d\'application"</string>
+    <string name="application_size_label" msgid="7376689739076506885">"Taille de l\'application"</string>
     <string name="external_code_size_label" msgid="3459343140355961335">"Application sur USB"</string>
     <string name="data_size_label" msgid="6117971066063850416">"Données utilisateur"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"Données sur USB"</string>
@@ -1835,7 +1842,7 @@
     <string name="install_text" msgid="884360662922471113">"Installer"</string>
     <string name="disable_text" msgid="6544054052049395202">"Désactiver"</string>
     <string name="enable_text" msgid="9217362512327828987">"Activer"</string>
-    <string name="clear_user_data_text" msgid="355574089263023363">"Effacer le stockage"</string>
+    <string name="clear_user_data_text" msgid="355574089263023363">"Effacer les données"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Désinstaller les mises à jour"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"Vous avez choisi de lancer cette application par défaut pour certaines actions."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"Vous avez choisi de permettre à cette application de créer des widgets et d\'accéder à leurs données."</string>
@@ -1871,7 +1878,7 @@
     <string name="internal_storage" msgid="1584700623164275282">"Stockage interne"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Calcul de la taille..."</string>
     <string name="clear_data_dlg_title" msgid="5605258400134511197">"Supprimer les données de l\'application ?"</string>
-    <string name="clear_data_dlg_text" msgid="3951297329833822490">"Les données de cette application (fichiers, paramètres, comptes, bases de données, etc.) seront définitivement supprimées."</string>
+    <string name="clear_data_dlg_text" msgid="3951297329833822490">"Toutes les données de cette application (fichiers, paramètres, comptes, bases de données, etc.) seront définitivement supprimées."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Annuler"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
@@ -2187,7 +2194,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cyan"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Jaune"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"Utiliser <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> doit pouvoir :"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Une application masque la demande d\'autorisation. Impossible de valider votre réponse via l\'application Paramètres."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si vous activez <xliff:g id="SERVICE">%1$s</xliff:g>, votre appareil n\'utilisera pas le verrouillage de l\'écran pour améliorer le chiffrement des données."</string>
@@ -2196,8 +2204,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Vous devez confirmer le code PIN, car l\'activation du service <xliff:g id="SERVICE">%1$s</xliff:g> influe sur le chiffrement des données."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Vous devez confirmer le mot de passe, car l\'activation du service <xliff:g id="SERVICE">%1$s</xliff:g> influe sur le chiffrement des données."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> demande le contrôle total de cet appareil. Le service peut lire l\'écran et agir pour le compte des utilisateurs ayant des besoins en matière d\'accessibilité. Ce niveau de contrôle n\'est pas approprié pour la plupart des applications."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"Arrêter <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Si vous appuyez sur \"OK\", <xliff:g id="SERVICE">%1$s</xliff:g> sera interrompu."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Aucun service installé"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Aucun service sélectionné"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Aucune description fournie"</string>
@@ -2239,7 +2266,7 @@
     <string name="printer_info_desc" msgid="5824995108703060003">"Plus d\'informations sur cette imprimante"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batterie"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Répartition de l\'utilisation de la batterie"</string>
-    <string name="power_usage_not_available" msgid="3109326074656512387">"Infos d\'utilisation batterie indisponibles"</string>
+    <string name="power_usage_not_available" msgid="3109326074656512387">"Données non disponibles"</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Temps restant : <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> avant chargement complet"</string>
@@ -2332,7 +2359,7 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Vos applications utilisent une quantité normale d\'énergie. Si elles sollicitent trop la batterie, votre téléphone vous suggérera des mesures à prendre.\n\nSi le niveau de votre batterie est faible, vous pouvez également activer l\'économiseur de batterie."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Gestionnaire de batterie"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Gérer les applications automatiquement"</string>
-    <string name="smart_battery_summary" msgid="1339184602000004058">"Limiter l\'utilisation de la batterie pour les applications que vous n\'utilisez pas souvent"</string>
+    <string name="smart_battery_summary" msgid="1339184602000004058">"Limiter l\'utilisation de la batterie pour les applications peu utilisées"</string>
     <string name="smart_battery_footer" product="default" msgid="5555604955956219544">"Si le gestionnaire de batterie détecte que certaines applications déchargent la batterie, vous pouvez choisir de limiter ces applications. Les applications auxquelles une restriction est appliquée peuvent ne pas fonctionner correctement et leurs notifications risquent d\'être retardées."</string>
     <string name="smart_battery_footer" product="tablet" msgid="5555604955956219544">"Si le gestionnaire de batterie détecte que certaines applications déchargent la batterie, vous pouvez choisir de limiter ces applications. Les applications auxquelles une restriction est appliquée peuvent ne pas fonctionner correctement et leurs notifications risquent d\'être retardées."</string>
     <string name="smart_battery_footer" product="device" msgid="5555604955956219544">"Si le gestionnaire de batterie détecte que certaines applications déchargent la batterie, vous pouvez choisir de limiter ces applications. Les applications auxquelles une restriction est appliquée peuvent ne pas fonctionner correctement et leurs notifications risquent d\'être retardées."</string>
@@ -2458,12 +2485,12 @@
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Optimisation des applications"</string>
     <string name="battery_saver" msgid="8172485772238572153">"Économiseur de batterie"</string>
     <string name="battery_saver_auto_title" msgid="8368709389419695611">"Activer automatiquement"</string>
-    <string name="battery_saver_auto_no_schedule" msgid="632243833320671052">"Pas de programmation"</string>
+    <string name="battery_saver_auto_no_schedule" msgid="632243833320671052">"Aucun paramétrage"</string>
     <string name="battery_saver_auto_routine" msgid="8076053160450346731">"En fonction de vos habitudes"</string>
-    <string name="battery_saver_auto_percentage" msgid="9000542338151528905">"En fonction du pourcentage"</string>
+    <string name="battery_saver_auto_percentage" msgid="9000542338151528905">"En fonction du pourcentage de batterie"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"L\'économiseur de batterie s\'activera si l\'autonomie restante risque d\'être insuffisante pour tenir jusqu\'au moment où vous mettez généralement votre téléphone en charge"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"S\'activera à <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Définir une programmation"</string>
+    <string name="battery_saver_schedule_settings_title" msgid="6000660866895036589">"Paramétrer l\'économiseur de batterie"</string>
     <string name="battery_saver_turn_on_summary" msgid="5552800757174173459">"Prolonger l\'autonomie de la batterie"</string>
     <string name="battery_saver_sticky_title_new" msgid="613272902035943099">"Désactiver une fois la batterie complètement chargée"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6659545534053937371">"L\'économiseur de batterie se désactive lorsque votre téléphone atteint un niveau de charge de <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -4313,8 +4340,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Mettre à jour le mode Ne pas déranger"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Suspendre les notifications pour rester concentré"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Cette fonctionnalité n\'est pas disponible sur cet appareil"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"Cette fonctionnalité n\'est pas disponible"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Elle ralentit le téléphone"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Forcer les mesures GNSS complètes"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Effectuer le suivi de toutes les fréquences et constellations GNSS sans rapport cyclique"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Autoriser le démarrage des activités en arrière-plan"</string>
