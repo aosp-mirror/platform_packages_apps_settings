@@ -411,6 +411,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"تمت إضافة الوجه"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"انقر لإعداد المصادقة بالوجه"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"المصادقة بالوجه"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"استخدام إعداد إمكانية الوصول"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -421,7 +426,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"استخدم وجهك لإلغاء قفل الهاتف أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"يمكنك استخدام وجهك لفتح الهاتف أو الموافقة على عمليات الشراء.\n\nملاحظة: لا يمكنك استخدام وجهك لفتح هذا الجهاز. للحصول على المزيد من المعلومات، اتصل بمشرف المؤسسة."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"استخدم وجهك لإلغاء قفل الهاتف أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات."</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"وضع الوجه في منتصف الدائرة"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"تنفيذ ذلك لاحقًا"</string>
     <string name="face_add_max" msgid="4408683751143942949">"يمكنك إضافة ما يصل إلى <xliff:g id="COUNT">%d</xliff:g> وجه."</string>
@@ -995,7 +1002,7 @@
     <string name="wifi_ap_band_config" msgid="1611826705989117930">"‏تحديد نطاق AP"</string>
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"تلقائي"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"نطاق بتردد ٢٫٤ غيغاهرتز"</string>
-    <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"نطاق بتردد 5.0 غيغاهرتز"</string>
+    <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"نطاق بتردد ٥ غيغاهرتز"</string>
     <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"يفضّل نطاق بتردد 5.0 غيغاهرتز"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"٢٫٤ غيغاهرتز"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 غيغاهرتز"</string>
@@ -2299,7 +2306,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"سماوي"</string>
     <string name="color_yellow" msgid="9112680561610873529">"أصفر"</string>
     <string name="color_magenta" msgid="5059212823607815549">"أرجواني"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"هل تريد استخدام <xliff:g id="SERVICE">%1$s</xliff:g>؟"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"خدمة <xliff:g id="SERVICE">%1$s</xliff:g> تحتاج إلى:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"نظرًا لأن هناك تطبيقًا يحجب طلب الإذن، لا تستطيع الإعدادات التحقق من ردك."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"في حالة تفعيل <xliff:g id="SERVICE">%1$s</xliff:g>، لن يستخدم جهازك ميزة قفل الشاشة لتحسين تشفير البيانات."</string>
@@ -2308,8 +2316,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"نظرًا لأن تشغيل <xliff:g id="SERVICE">%1$s</xliff:g> يؤثر في تشفير البيانات، يجب تأكيد رقم التعريف الشخصي."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"نظرًا لأن تشغيل <xliff:g id="SERVICE">%1$s</xliff:g> يؤثر في تشفير البيانات، يجب تأكيد كلمة المرور."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"تطلب خدمة <xliff:g id="SERVICE">%1$s</xliff:g> الحصول على تحكم كامل في هذا الجهاز. ويمكن للخدمة قراءة الشاشة والتصرف بالنيابة عن المستخدمين ذوي الاحتياجات المتعلقة بإمكانية الوصول. ولا يناسب هذا المستوى من التحكم معظم التطبيقات."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"هل تريد إيقاف <xliff:g id="SERVICE">%1$s</xliff:g>؟"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"يؤدي النقر على \"موافق\" إلى إيقاف <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"لم يتم تثبيت أي خدمات"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"لم يتم اختيار أي خدمة"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"لم يتم تقديم أي وصف."</string>
@@ -4633,8 +4660,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"تحديث إعداد \"الرجاء عدم الإزعاج\""</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"إيقاف الإشعارات مؤقتًا للحفاظ على التركيز"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"لا تتوفر هذه الميزة على هذا الجهاز"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"هذه الميزة ليست متوفرة."</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"ستؤدي إلى إبطاء هذا الهاتف."</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"‏فرض كامل لقياسات GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"‏تتبّع جميع مجموعات وفترات تكرار GNSS التي لا تحتوي على دورات عمل"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"السماح ببدء الأنشطة في الخلفية"</string>
