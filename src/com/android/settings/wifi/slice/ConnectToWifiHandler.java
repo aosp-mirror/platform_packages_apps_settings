@@ -16,7 +16,9 @@
 
 package com.android.settings.wifi.slice;
 
-import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.wifi.WifiManager;
@@ -30,35 +32,36 @@ import com.android.settings.wifi.WifiUtils;
 import com.android.settingslib.wifi.AccessPoint;
 
 /**
- * This activity helps connect to the Wi-Fi network which is open or saved
+ * This receiver helps connect to Wi-Fi network
  */
-public class ConnectToWifiHandler extends Activity {
+public class ConnectToWifiHandler extends BroadcastReceiver {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onReceive(Context context, Intent intent) {
+        if (context == null || intent == null) {
+            return;
+        }
 
-        final Network network = getIntent().getParcelableExtra(ConnectivityManager.EXTRA_NETWORK);
-        final Bundle accessPointState = getIntent().getBundleExtra(
+        final Network network = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK);
+        final Bundle accessPointState = intent.getBundleExtra(
                 WifiDialogActivity.KEY_ACCESS_POINT_STATE);
 
         if (network != null) {
             WifiScanWorker.clearClickedWifi();
-            final ConnectivityManager cm = getSystemService(ConnectivityManager.class);
+            final ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
             // start captive portal app to sign in to network
             cm.startCaptivePortalApp(network);
         } else if (accessPointState != null) {
-            connect(new AccessPoint(this, accessPointState));
+            connect(context, new AccessPoint(context, accessPointState));
         }
-
-        finish();
     }
 
     @VisibleForTesting
-    void connect(AccessPoint accessPoint) {
+    void connect(Context context, AccessPoint accessPoint) {
+        ContextualWifiScanWorker.saveSession();
         WifiScanWorker.saveClickedWifi(accessPoint);
 
-        final WifiConnectListener connectListener = new WifiConnectListener(this);
+        final WifiConnectListener connectListener = new WifiConnectListener(context);
         switch (WifiUtils.getConnectingType(accessPoint)) {
             case WifiUtils.CONNECT_TYPE_OSU_PROVISION:
                 accessPoint.startOsuProvisioning(connectListener);
@@ -68,7 +71,7 @@ public class ConnectToWifiHandler extends Activity {
                 accessPoint.generateOpenNetworkConfig();
 
             case WifiUtils.CONNECT_TYPE_SAVED_NETWORK:
-                final WifiManager wifiManager = getSystemService(WifiManager.class);
+                final WifiManager wifiManager = context.getSystemService(WifiManager.class);
                 wifiManager.connect(accessPoint.getConfig(), connectListener);
                 break;
         }

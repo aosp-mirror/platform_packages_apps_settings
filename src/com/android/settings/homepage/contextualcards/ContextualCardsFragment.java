@@ -33,11 +33,10 @@ import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.slice.ContextualWifiScanWorker;
 
 public class ContextualCardsFragment extends InstrumentedFragment implements
         FocusRecyclerView.FocusListener {
-
-    private static final String TAG = "ContextualCardsFragment";
 
     private FocusRecyclerView mCardsContainer;
     private GridLayoutManager mLayoutManager;
@@ -60,6 +59,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
     @Override
     public void onStart() {
         super.onStart();
+        ContextualWifiScanWorker.newVisibleUiSession();
         mContextualCardManager.loadContextualCards(LoaderManager.getInstance(this));
     }
 
