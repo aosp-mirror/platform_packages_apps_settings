@@ -838,7 +838,7 @@
     <string name="wifi_hidden_network_warning" msgid="6674068093531603452">"Bideratzaileak ez badu igortzen sarearen IDrik, baina etorkizunean harekin konektatu nahi baduzu, ezkutuko gisa ezar dezakezu sarea.\n\nHorrek segurtasuna arriskuan jar dezake, telefonoak aldian-aldian igorriko baitu seinalea sarea aurkitzeko.\n\nSarea ezkutuko gisa ezartzeak ez ditu aldatuko bideratzailearen ezarpenak."</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Seinalearen indarra"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Egoera"</string>
-    <string name="wifi_speed" msgid="3526198708812322037">"Estekatze-abiadura"</string>
+    <string name="wifi_speed" msgid="3526198708812322037">"Lotura-abiadura"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"Frekuentzia"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP helbidea"</string>
     <string name="passpoint_label" msgid="6381371313076009926">"Honen bidez gorde da:"</string>
@@ -1915,9 +1915,9 @@
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Teklatu fisikoaren ezarpenak"</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Aukeratu gadgeta"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Aukeratu widgeta"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Widgeta sortu eta sarbidea baimendu?"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Widgeta sortu eta sartzeko baimena eman?"</string>
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="1584388129273282080">"Widgeta sortu ondoren, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ostalariak bistaratzen dituen datu guztiak atzitu ahal izango ditu."</string>
-    <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"Baimendu beti <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ostalariari widgetak sortzea eta haietako datuak atzitzea"</string>
+    <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"Eman baimena beti widgetak sortzeko eta haietako datuak atzitzeko <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ostalariari"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Erabilera-estatistikak"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Erabilera-estatistikak"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Ordenatzeko irizpidea:"</string>
@@ -1976,13 +1976,13 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Erabili azpitituluak"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Audiofonoak"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Ez dago audiofonorik konektatuta"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Gehitu audiofonoa"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Gehitu audifonoa"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Audiofonoak parekatzeko, bilatu eta sakatu gailua hurrengo pantailan."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Ziurtatu audiofonoak parekatze moduan daudela."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> aktibo dago"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> audiofono gorde dira</item>
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> audiofono gorde da</item>
+      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> audifono gorde dira</item>
+      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> audifono gorde da</item>
     </plurals>
     <string name="accessibility_summary_state_enabled" msgid="7914278500885887763">"Aktibatuta"</string>
     <string name="accessibility_summary_state_disabled" msgid="2984230257590246745">"Desaktibatuta"</string>
@@ -2855,7 +2855,7 @@
     <string name="help_label" msgid="6886837949306318591">"Laguntza eta iritziak"</string>
     <string name="support_summary" msgid="2705726826263742491">"Laguntza-artikuluak, telefono eta txat bidezko laguntza, lehen urratsen gidak"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Edukia gordetzeko kontua"</string>
-    <string name="user_picture_title" msgid="7297782792000291692">"Argazkiaren IDa"</string>
+    <string name="user_picture_title" msgid="7297782792000291692">"Nortasun-agiri argazkiduna"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"Mehatxu oso larriak"</string>
     <string name="extreme_threats_summary" msgid="8777860706500920667">"Jaso bizitza eta jabetzen aurkako mehatxu oso larrien alertak"</string>
     <string name="severe_threats_title" msgid="8362676353803170963">"Mehatxu larriak"</string>
@@ -3653,7 +3653,7 @@
     <string name="system_alert_window_access_title" msgid="6297115362542361241">"Beste aplikazioen gainean bistaratzea"</string>
     <string name="permit_draw_overlay" msgid="7456536798718633432">"Baimendu beste aplikazioen gainean bistaratzea"</string>
     <string name="allow_overlay_description" msgid="8961670023925421358">"Baimendu aplikazioari erabiltzen ari zaren aplikazioen gainean agertzea. Eginbide honek abian diren aplikazioen erabilera oztopa dezake, edo haien itxura edo portaera aldatu."</string>
-    <string name="keywords_vr_listener" msgid="7441221822576384680">"eb errealitate birtuala estereoa laguntzailea laguntza zerbitzua"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"eb errealitate birtuala hautemailea estereoa laguntzailea laguntza zerbitzua"</string>
     <string name="keywords_system_alert_window" msgid="5049498015597864850">"sistema alerta leiho koadro bistaratu beste aplikazio gainean"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Bistaratu aplikazioen gainean"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g> aplikaziok dute besteen gainean bistaratzeko baimena"</string>
