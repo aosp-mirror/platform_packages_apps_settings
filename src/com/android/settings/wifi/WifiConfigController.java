@@ -582,9 +582,11 @@ public class WifiConfigController implements TextWatcher,
     }
 
     /**
-     * Special handling for WPA2/WPA3 in Transition mode: The key SECURITY_PSK_SAE_TRANSITION is
-     * a pseudo key which results by the scan results, but never appears in the saved networks.
-     * A saved network is either WPA3 for supporting devices or WPA2 for non-supporting devices.
+     * Special handling for WPA2/WPA3 and OWE in Transition mode: The key
+     * SECURITY_PSK_SAE_TRANSITION and SECURITY_OWE_TRANSITION are pseudo keys which result by the
+     * scan results, but never appears in the saved networks.
+     * A saved network is either WPA3 for supporting devices or WPA2 for non-supporting devices,
+     * or, OWE for supporting devices or Open for non-supporting devices.
      *
      * @param accessPointSecurity Access point current security type
      * @return Converted security type (if required)
@@ -597,6 +599,14 @@ public class WifiConfigController implements TextWatcher,
                 return AccessPoint.SECURITY_PSK;
             }
         }
+        if (accessPointSecurity == AccessPoint.SECURITY_OWE_TRANSITION) {
+            if (mWifiManager.isEnhancedOpenSupported()) {
+                return AccessPoint.SECURITY_OWE;
+            } else {
+                return AccessPoint.SECURITY_NONE;
+            }
+        }
+
         return accessPointSecurity;
     }
 
@@ -948,7 +958,8 @@ public class WifiConfigController implements TextWatcher,
 
     private void showSecurityFields() {
         if (mAccessPointSecurity == AccessPoint.SECURITY_NONE ||
-                  mAccessPointSecurity == AccessPoint.SECURITY_OWE) {
+                mAccessPointSecurity == AccessPoint.SECURITY_OWE ||
+                mAccessPointSecurity == AccessPoint.SECURITY_OWE_TRANSITION) {
             mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
             return;
         }
