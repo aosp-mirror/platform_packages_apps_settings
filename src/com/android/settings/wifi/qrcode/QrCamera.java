@@ -313,9 +313,6 @@ public class QrCamera extends Handler {
     private void setTransformationMatrix(Size viewSize) {
         // Check aspect ratio, can only handle square view.
         final int viewRatio = (int)getRatio(viewSize.getWidth(), viewSize.getHeight());
-        if (viewRatio != 1) {
-            throw new IllegalArgumentException("Preview area should be square");
-        }
 
         final boolean isPortrait = mContext.get().getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_PORTRAIT ? true : false;
