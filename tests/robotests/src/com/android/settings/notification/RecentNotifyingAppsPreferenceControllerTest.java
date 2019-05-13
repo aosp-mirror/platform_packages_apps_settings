@@ -168,7 +168,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
 
     @Test
     public void display_showRecents() throws Exception {
-
         List<Event> events = new ArrayList<>();
         Event app = new Event();
         app.mEventType = Event.NOTIFICATION_INTERRUPTION;
@@ -262,8 +261,12 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mCategory, times(2)).addPreference(prefCaptor.capture());
         List<Preference> prefs = prefCaptor.getAllValues();
-        assertThat(prefs.get(1).getKey()).isEqualTo(app.getPackageName());
-        assertThat(prefs.get(0).getKey()).isEqualTo(app1.getPackageName());
+        assertThat(prefs.get(1).getKey()).isEqualTo(
+                RecentNotifyingAppsPreferenceController.getKey(UserHandle.myUserId(),
+                        app.getPackageName()));
+        assertThat(prefs.get(0).getKey()).isEqualTo(
+                RecentNotifyingAppsPreferenceController.getKey(UserHandle.myUserId(),
+                        app1.getPackageName()));
     }
 
     @Test
