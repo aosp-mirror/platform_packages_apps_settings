@@ -74,13 +74,6 @@
             android:title="@string/notification_badging_title"
             settings:controller="com.android.settings.notification.BadgingNotificationPreferenceController"/>
 
-        <!-- Notification bubbles -->
-        <Preference
-            android:key="notification_bubbles"
-            android:title="@string/notification_bubbles_title"
-            settings:controller="com.android.settings.notification.BubbleSummaryNotificationPreferenceController"
-            android:fragment="com.android.settings.notification.BubbleNotificationSettings"/>
-
         <!-- Pulse notification light -->
         <SwitchPreference
             android:key="notification_pulse"
