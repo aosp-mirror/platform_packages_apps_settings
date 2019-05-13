@@ -48,8 +48,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private static final String TAG = "FaceEducation";
     private static final int ON = 1;
     private static final int OFF = 0;
-    // 10 seconds.
-    private static final long FACE_ENROLL_EDUCATION_DELAY = 16000;
+    // 8 seconds.
+    private static final long FACE_ENROLL_EDUCATION_DELAY = 8000;
 
     private FaceManager mFaceManager;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
