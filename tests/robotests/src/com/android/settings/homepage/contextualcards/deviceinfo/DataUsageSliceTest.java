@@ -17,13 +17,13 @@
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
@@ -31,19 +31,18 @@ import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
-
 import com.android.settings.R;
 import com.android.settings.testutils.SliceTester;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
-
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-
-import java.util.List;
+import org.robolectric.shadows.ShadowTelephonyManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowDataUsageUtils.class)
@@ -62,6 +61,11 @@ public class DataUsageSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
         mDataUsageSlice = spy(new DataUsageSlice(mContext));
+
+        final TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
+        final ShadowTelephonyManager shadowTelephonyManager = Shadows.shadowOf(telephonyManager);
+        shadowTelephonyManager.setTelephonyManagerForSubscriptionId(
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID, telephonyManager);
     }
 
     @Test
