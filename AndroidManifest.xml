@@ -2703,10 +2703,8 @@
             </intent-filter>
         </activity>
 
-        <activity
+        <receiver
             android:name=".wifi.slice.ConnectToWifiHandler"
-            android:theme="@android:style/Theme.NoDisplay"
-            android:excludeFromRecents="true"
             android:exported="false" />
 
         <activity
