@@ -23,6 +23,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.NetworkSelectionStatus;
 import android.net.wifi.WifiManager;
@@ -35,8 +36,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -44,6 +45,7 @@ import org.robolectric.annotation.Config;
 public class ConnectToWifiHandlerTest {
 
     private static final String AP_SSID = "\"ap\"";
+    private Context mContext;
     private ConnectToWifiHandler mHandler;
     private WifiConfiguration mWifiConfig;
     @Mock
@@ -53,7 +55,8 @@ public class ConnectToWifiHandlerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mHandler = Robolectric.setupActivity(ConnectToWifiHandler.class);
+        mContext = RuntimeEnvironment.application;
+        mHandler = new ConnectToWifiHandler();
         mWifiConfig = new WifiConfiguration();
         mWifiConfig.SSID = AP_SSID;
         doReturn(mWifiConfig).when(mAccessPoint).getConfig();
@@ -64,7 +67,7 @@ public class ConnectToWifiHandlerTest {
         when(mAccessPoint.isSaved()).thenReturn(false);
         when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_NONE);
 
-        mHandler.connect(mAccessPoint);
+        mHandler.connect(mContext, mAccessPoint);
 
         assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP_SSID);
     }
@@ -74,7 +77,7 @@ public class ConnectToWifiHandlerTest {
         when(mAccessPoint.isSaved()).thenReturn(false);
         when(mAccessPoint.isOsuProvider()).thenReturn(true);
 
-        mHandler.connect(mAccessPoint);
+        mHandler.connect(mContext, mAccessPoint);
 
         verify(mAccessPoint).startOsuProvisioning(any(WifiManager.ActionListener.class));
     }
@@ -85,7 +88,7 @@ public class ConnectToWifiHandlerTest {
         when(mAccessPoint.isSaved()).thenReturn(false);
         when(mAccessPoint.isPasspoint()).thenReturn(true);
 
-        mHandler.connect(mAccessPoint);
+        mHandler.connect(mContext, mAccessPoint);
 
         assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP_SSID);
     }
@@ -98,7 +101,7 @@ public class ConnectToWifiHandlerTest {
         status.setHasEverConnected(true);
         mWifiConfig.setNetworkSelectionStatus(status);
 
-        mHandler.connect(mAccessPoint);
+        mHandler.connect(mContext, mAccessPoint);
 
         assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP_SSID);
     }
@@ -108,7 +111,7 @@ public class ConnectToWifiHandlerTest {
         when(mAccessPoint.isSaved()).thenReturn(false);
         when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_PSK);
 
-        mHandler.connect(mAccessPoint);
+        mHandler.connect(mContext, mAccessPoint);
 
         assertThat(ShadowWifiManager.get().savedWifiConfig).isNull();
     }

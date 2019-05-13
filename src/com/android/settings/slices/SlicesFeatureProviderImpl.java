@@ -24,8 +24,6 @@ import com.android.settings.network.telephony.Enhanced4gLteSliceHelper;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.Random;
-
 /**
  * Manages Slices in Settings.
  */

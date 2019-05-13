@@ -29,7 +29,7 @@ import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.wifi.AccessPoint;
 
 /**
- * {@link AbstractPreferenceController} that launches Wi-Fi Easy Connect configurator flow
+ * {@link BasePreferenceController} that launches Wi-Fi Easy Connect configurator flow
  */
 public class AddDevicePreferenceController extends BasePreferenceController {
 
