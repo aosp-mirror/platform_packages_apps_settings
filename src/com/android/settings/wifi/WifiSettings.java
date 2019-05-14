@@ -494,7 +494,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                 if (isSavedNetwork) {
                     connect(mSelectedAccessPoint.getConfig(), isSavedNetwork);
                 } else if ((mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
-                        (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
+                        (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE) ||
+                        (mSelectedAccessPoint.getSecurity()
+                                == AccessPoint.SECURITY_OWE_TRANSITION)) {
                     /** Bypass dialog for unsecured networks */
                     mSelectedAccessPoint.generateOpenNetworkConfig();
                     connect(mSelectedAccessPoint.getConfig(), isSavedNetwork);
@@ -748,7 +750,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 preference.setOrder(index);
                 if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
                         && (accessPoint.getSecurity() != AccessPoint.SECURITY_NONE &&
-                        accessPoint.getSecurity() != AccessPoint.SECURITY_OWE)) {
+                        accessPoint.getSecurity() != AccessPoint.SECURITY_OWE &&
+                        accessPoint.getSecurity() != AccessPoint.SECURITY_OWE_TRANSITION)) {
                     if (!accessPoint.isSaved() || isDisabledByWrongPassword(accessPoint)) {
                         onPreferenceTreeClick(preference);
                         mOpenSsid = null;
