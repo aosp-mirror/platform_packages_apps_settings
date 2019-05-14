@@ -162,7 +162,8 @@
         </receiver>
 
         <activity android:name=".SubSettings"
-                android:parentActivityName="Settings" />
+                android:parentActivityName="Settings"
+                android:theme="@style/Theme.SubSettings"/>
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:label="@string/settings_shortcut">
