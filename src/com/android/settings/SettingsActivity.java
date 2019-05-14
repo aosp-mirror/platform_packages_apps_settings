@@ -35,6 +35,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -50,6 +51,7 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.backup.BackupSettingsHelper;
 import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
@@ -166,6 +168,8 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private Button mNextButton;
 
+    private ViewGroup mContent;
+
     // Categories
     private ArrayList<DashboardCategory> mCategories = new ArrayList<>();
 
@@ -249,6 +253,8 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         setContentView(R.layout.settings_main_prefs);
+
+        mContent = findViewById(R.id.main_content);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
