@@ -33,7 +33,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.location.RecentLocationAccesses;
+import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ import java.util.List;
  *         <li>In switch bar: location master switch. Used to toggle location on and off.
  *         </li>
  *     </ul>
- *     <li>Recent location requests: automatically populated by {@link RecentLocationAccesses}</li>
+ *     <li>Recent location requests: automatically populated by {@link RecentLocationApps}</li>
  *     <li>Location services: multi-app settings provided from outside the Android framework. Each
  *     is injected by a system-partition app via the {@link SettingInjectorService} API.</li>
  * </ul>
@@ -118,7 +118,7 @@ public class LocationSettings extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new AppLocationPermissionPreferenceController(context, lifecycle));
         controllers.add(new LocationForWorkPreferenceController(context, lifecycle));
-        controllers.add(new RecentLocationAccessPreferenceController(context));
+        controllers.add(new RecentLocationRequestPreferenceController(context, fragment, lifecycle));
         controllers.add(new LocationScanningPreferenceController(context));
         controllers.add(new LocationServicePreferenceController(context, fragment, lifecycle));
         controllers.add(new LocationFooterPreferenceController(context, lifecycle));

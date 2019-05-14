@@ -20,11 +20,16 @@
         android:title="@string/location_settings_title"
         settings:keywords="@string/keywords_location">
 
-        <com.android.settingslib.widget.LayoutPreference
-            android:key="apps_dashboard"
-            android:layout="@layout/app_entities_header"
-            android:selectable="false"
-            settings:allowDividerBelow="true" />
+        <PreferenceCategory
+            android:key="recent_location_requests"
+            android:title="@string/location_category_recent_location_requests"/>
+
+        <Preference
+            android:key="recent_location_requests_see_all_button"
+            android:title="@string/location_recent_location_requests_see_all"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"
+            settings:searchable="false"/>
 
         <PreferenceCategory
             android:key="location_advanced_settings"
