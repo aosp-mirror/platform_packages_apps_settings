@@ -66,7 +66,12 @@ public class SettingsBaseActivity extends FragmentActivity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
         super.setContentView(R.layout.settings_base_layout);
+        final View decorView = getWindow().getDecorView();
 
+        decorView.setSystemUiVisibility(
+                decorView.getSystemUiVisibility()
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         final Toolbar toolbar = findViewById(R.id.action_bar);
         if (theme.getBoolean(android.R.styleable.Theme_windowNoTitle, false)) {
             toolbar.setVisibility(View.GONE);
