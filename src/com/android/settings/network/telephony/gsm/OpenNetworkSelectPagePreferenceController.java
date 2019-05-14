@@ -42,7 +42,6 @@ public class OpenNetworkSelectPagePreferenceController extends
         TelephonyBasePreferenceController implements
         AutoSelectPreferenceController.OnNetworkSelectModeListener {
 
-    private int mSubId;
     private TelephonyManager mTelephonyManager;
     private Preference mPreference;
 
