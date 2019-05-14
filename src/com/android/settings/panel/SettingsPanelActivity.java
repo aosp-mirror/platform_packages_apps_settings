@@ -18,13 +18,10 @@ package com.android.settings.panel;
 
 import static com.android.settingslib.media.MediaOutputSliceConstants.EXTRA_PACKAGE_NAME;
 
-import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -35,8 +32,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.panel.PanelLoggingContract.PanelClosedKeys;
 
 /**
  * Dialog Activity to host Settings Slices.
@@ -66,17 +61,17 @@ public class SettingsPanelActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showOrUpdatePanel();
+        createOrUpdatePanel(true /* shouldForceCreation */);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        showOrUpdatePanel();
+        createOrUpdatePanel(false /* shouldForceCreation */);
     }
 
-    private void showOrUpdatePanel() {
+    private void createOrUpdatePanel(boolean shouldForceCreation) {
         final Intent callingIntent = getIntent();
         if (callingIntent == null) {
             Log.e(TAG, "Null intent, closing Panel Activity");
@@ -95,7 +90,7 @@ public class SettingsPanelActivity extends FragmentActivity {
         final Fragment fragment = fragmentManager.findFragmentById(R.id.main_content);
 
         // If fragment already exists, we will need to update panel with animation.
-        if (fragment != null && fragment instanceof PanelFragment) {
+        if (!shouldForceCreation && fragment != null && fragment instanceof PanelFragment) {
             final PanelFragment panelFragment = (PanelFragment) fragment;
             panelFragment.setArguments(mBundle);
             ((PanelFragment) fragment).updatePanelWithAnimation();

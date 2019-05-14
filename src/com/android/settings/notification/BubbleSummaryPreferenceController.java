@@ -27,13 +27,16 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 public class BubbleSummaryPreferenceController extends NotificationPreferenceController {
 
     private static final String KEY = "bubble_link_pref";
-    private static final int SYSTEM_WIDE_ON = 1;
-    private static final int SYSTEM_WIDE_OFF = 0;
+    @VisibleForTesting
+    static final int SYSTEM_WIDE_ON = 1;
+    @VisibleForTesting
+    static final int SYSTEM_WIDE_OFF = 0;
 
     public BubbleSummaryPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
@@ -53,17 +56,16 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
             return false;
         }
         if (mChannel != null) {
-            if (Settings.Secure.getInt(mContext.getContentResolver(),
-                    NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
+            if (!isGloballyEnabled()) {
                 return false;
             }
             if (isDefaultChannel()) {
                 return true;
             } else {
-                return mAppRow == null ? false : mAppRow.allowBubbles;
+                return mAppRow != null && mAppRow.allowBubbles;
             }
         }
-        return true;
+        return isGloballyEnabled();
     }
 
     @Override
@@ -89,13 +91,16 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
         boolean canBubble = false;
         if (mAppRow != null) {
             if (mChannel != null) {
-                canBubble |= mChannel.canBubble();
+               canBubble |= mChannel.canBubble() && isGloballyEnabled();
             } else {
-               canBubble |= mAppRow.allowBubbles
-                       && (Settings.Secure.getInt(mContext.getContentResolver(),
-                       NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_ON);
+               canBubble |= mAppRow.allowBubbles && isGloballyEnabled();
             }
         }
         return mContext.getString(canBubble ? R.string.switch_on_text : R.string.switch_off_text);
+    }
+
+    private boolean isGloballyEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF) == SYSTEM_WIDE_ON;
     }
 }

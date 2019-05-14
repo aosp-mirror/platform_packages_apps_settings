@@ -78,4 +78,9 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
             notifySliceChange();
         }
     }
+
+    @Override
+    public void onAudioModeChanged() {
+        notifySliceChange();
+    }
 }
