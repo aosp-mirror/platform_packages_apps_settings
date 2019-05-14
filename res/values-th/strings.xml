@@ -399,6 +399,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"เพิ่มใบหน้าแล้ว"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"แตะเพื่อตั้งค่าตรวจสอบสิทธิ์ด้วยใบหน้า"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"ตรวจสิทธิ์ด้วยใบหน้า"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"ใช้การตั้งค่าการช่วยเหลือพิเศษ"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -409,7 +414,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์ อนุญาตการซื้อ หรือลงชื่อเข้าใช้แอป"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์หรืออนุมัติการซื้อ\n\nหมายเหตุ: คุณใช้ใบหน้าเพื่อปลดล็อกอุปกรณ์นี้ไม่ได้ โปรดติดต่อผู้ดูแลระบบขององค์กรสำหรับข้อมูลเพิ่มเติม"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์ อนุญาตการซื้อ หรือลงชื่อเข้าใช้แอป"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"จัดใบหน้าของคุณให้อยู่กลางวงกลม"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"ข้ามไปก่อน"</string>
     <string name="face_add_max" msgid="4408683751143942949">"คุณเพิ่มใบหน้าได้สูงสุด <xliff:g id="COUNT">%d</xliff:g> รายการ"</string>
@@ -883,7 +890,7 @@
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"ค่ากำหนด Wi‑Fi"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"เปิด Wi‑Fi อีกครั้งโดยอัตโนมัติ"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="2782566279864356713">"ไม่เปิด Wi‑Fi อีกครั้งโดยอัตโนมัติ"</string>
-    <string name="wifi_access_points" msgid="7053990007031968609">"เครือข่าย WiFi"</string>
+    <string name="wifi_access_points" msgid="7053990007031968609">"เครือข่าย Wi-Fi"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"ตัวเลือกอื่น"</string>
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"WiFi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"สแกน"</string>
@@ -941,9 +948,9 @@
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"MAC แบบสุ่ม"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"เพิ่มอุปกรณ์"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"ถือให้โค้ด QR อยู่กลางช่องด้านล่างเพื่อเพิ่มอุปกรณ์ไปยัง “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"สแกนโค้ด QR"</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"สแกนคิวอาร์โค้ด"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="4371771604088014396">"ถือให้โค้ด QR อยู่กลางช่องด้านล่างเพื่อเชื่อมต่อไปยัง “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"เข้าร่วม Wi‑Fi โดยการสแกนโค้ด QR"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"เข้าร่วม Wi‑Fi โดยการสแกนคิวอาร์โค้ด"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"แชร์ Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="5854392840857123065">"สแกนโค้ด QR นี้เพื่อเชื่อมต่อกับ “<xliff:g id="SSID">%1$s</xliff:g>” และแชร์รหัสผ่าน"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="4436318319178361543">"สแกนโค้ด QR นี้เพื่อเชื่อมต่อกับ “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -2187,7 +2194,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"ฟ้า"</string>
     <string name="color_yellow" msgid="9112680561610873529">"เหลือง"</string>
     <string name="color_magenta" msgid="5059212823607815549">"ม่วงแดง"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"ใช้ <xliff:g id="SERVICE">%1$s</xliff:g> ใช่ไหม"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> ต้องการที่จะ"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"เนื่องจากแอปหนึ่งได้บดบังคำขอสิทธิ์ ระบบจึงไม่สามารถยืนยันคำตอบของคุณสำหรับการตั้งค่าได้"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"หากคุณเปิด <xliff:g id="SERVICE">%1$s</xliff:g> อุปกรณ์ของคุณจะไม่ใช้ล็อกหน้าจอเพื่อปรับปรุงการเข้ารหัสข้อมูล"</string>
@@ -2196,8 +2204,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"คุณต้องยืนยัน PIN เนื่องจากการเปิด <xliff:g id="SERVICE">%1$s</xliff:g> จะส่งผลต่อการเข้ารหัสข้อมูล"</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"คุณต้องยืนยันรหัสผ่าน เนื่องจากการเปิด <xliff:g id="SERVICE">%1$s</xliff:g> จะส่งผลต่อการเข้ารหัสข้อมูล"</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> กำลังขอควบคุมอุปกรณ์นี้โดยสมบูรณ์ บริการนี้จะอ่านหน้าจอและดำเนินการในนามของผู้ใช้ที่ต้องการการช่วยเหลือพิเศษได้ การควบคุมระดับนี้ไม่เหมาะสำหรับแอปส่วนใหญ่"</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"หยุด <xliff:g id="SERVICE">%1$s</xliff:g> ไหม"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"การแตะตกลงจะหยุดใช้ <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"ไม่ได้ติดตั้งบริการใดไว้"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"ไม่ได้เลือกบริการ"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"ไม่มีคำอธิบาย"</string>
@@ -2441,7 +2468,7 @@
     <string name="battery_full_charge_last" msgid="8892335687734288031">"การชาร์จเต็มใช้งานได้นานประมาณ"</string>
     <string name="battery_footer_summary" msgid="67169726550144016">"ข้อมูลการใช้งานแบตเตอรี่เป็นเพียงการประมาณการและอาจเปลี่ยนไปตามการใช้งาน"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"ขณะใช้งานอยู่"</string>
-    <string name="battery_detail_background" msgid="1929644393553768999">"ขณะอยู่ในพื้นหลัง"</string>
+    <string name="battery_detail_background" msgid="1929644393553768999">"ขณะทำงานอยู่เบื้องหลัง"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"การใช้งานแบตเตอรี่"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"ตั้งแต่ชาร์จจนเต็ม"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"จัดการการใช้งานแบตเตอรี่"</string>
@@ -2453,7 +2480,7 @@
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"การใช้งานตั้งแต่ถอดปลั๊กของ <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"ยอดใช้งานรวม"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"รีเฟรช"</string>
-    <string name="process_kernel_label" msgid="3916858646836739323">"ระบบปฏิบัติการของ Android"</string>
+    <string name="process_kernel_label" msgid="3916858646836739323">"ระบบปฏิบัติการ Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"การเพิ่มประสิทธิภาพแอป"</string>
     <string name="battery_saver" msgid="8172485772238572153">"โหมดประหยัดแบตเตอรี่"</string>
@@ -3594,7 +3621,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"เปิด"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"ปิด"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"การตรึงหน้าจอ"</string>
-    <string name="screen_pinning_description" msgid="1110847562111827766">"เมื่อเปิดการตั้งค่านี้ คุณจะใช้การตรึงหน้าจอเพื่อให้หน้าจอปัจจุบันอยู่ในมุมมองตลอดจนกว่าจะเลิกตรึงได้\n\nวิธีใช้การตรึงหน้าจอ\n\n1. ดูว่าคุณเปิดใช้การตรึงหน้าจอแล้ว\n\n2. เปิด \"ภาพรวม\"\n\n3. แตะไอคอนแอปที่ด้านบนของหน้าจอ แล้วแตะ \"ตรึง\""</string>
+    <string name="screen_pinning_description" msgid="1110847562111827766">"เมื่อเปิดการตั้งค่านี้ คุณจะใช้การตรึงหน้าจอเพื่อให้หน้าจอปัจจุบันอยู่ในมุมมองตลอดได้จนกว่าจะเลิกตรึง\n\nวิธีใช้การตรึงหน้าจอ\n\n1. ดูว่าคุณเปิดใช้การตรึงหน้าจอแล้ว\n\n2. เปิด \"ภาพรวม\"\n\n3. แตะไอคอนแอปที่ด้านบนของหน้าจอ แล้วแตะ \"ตรึง\""</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"ขอรูปแบบการปลดล็อกก่อนเลิกตรึง"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"ขอ PIN ก่อนเลิกตรึง"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"ขอรหัสผ่านก่อนเลิกตรึง"</string>
@@ -3996,7 +4023,7 @@
     <string name="data_used_template" msgid="3245919669966296505">"ใช้ไป <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"ตั้งค่าเตือนการใช้อินเทอร์เน็ต"</string>
     <string name="data_warning" msgid="209133958008062117">"เตือนปริมาณอินเทอร์เน็ต"</string>
-    <string name="data_warning_footnote" msgid="776341964125603711">"อุปกรณ์จะวัดคำเตือนปริมาณอินเทอร์เน็ตและขีดจำกัดอินเทอร์เน็ต ซึ่งอาจต่างจากข้อมูลของผู้ให้บริการ"</string>
+    <string name="data_warning_footnote" msgid="776341964125603711">"อุปกรณ์จะวัดข้อมูลสำหรับขีดจำกัดและคำเตือนปริมาณอินเทอร์เน็ต ซึ่งอาจต่างจากข้อมูลของผู้ให้บริการ"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"ตั้งค่าขีดจำกัดอินเทอร์เน็ต"</string>
     <string name="data_limit" msgid="1885406964934590552">"ขีดจำกัดอินเทอร์เน็ต"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"ใช้ไป <xliff:g id="ID_1">%1$s</xliff:g> ช่วงวันที่ <xliff:g id="ID_2">%2$s</xliff:g>"</string>
@@ -4313,8 +4340,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"อัปเดตโหมดห้ามรบกวน"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"หยุดการแจ้งเตือนชั่วคราวเพื่อไม่ให้มีสิ่งรบกวน"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ฟีเจอร์นี้ไม่สามารถใช้ได้บนอุปกรณ์นี้"</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"ฟีเจอร์นี้ไม่พร้อมใช้งาน"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"ฟีเจอร์ดังกล่าวจะทำให้โทรศัพท์เครื่องนี้ทำงานช้าลง"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"บังคับใช้การวัด GNSS เต็มรูปแบบ"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"ติดตามระบบดาวเทียมและความถี่สัญญาณ GNSS ทั้งหมดโดยไม่มีการปิดพักเพื่อประหยัดพลังงาน"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"อนุญาตให้เริ่มกิจกรรมในเบื้องหลัง"</string>
@@ -4421,7 +4450,7 @@
     <string name="carrier_settings_title" msgid="3503012527671299886">"การตั้งค่าผู้ให้บริการ"</string>
     <string name="cdma_lte_data_service" msgid="8507044148856536098">"ตั้งค่าบริการข้อมูล"</string>
     <string name="mobile_data_settings_title" msgid="7674604042461065482">"เน็ตมือถือ"</string>
-    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"เข้าถึงข้อมูลโดยใช้เครือข่ายมือถือ"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"เข้าถึงอินเทอร์เน็ตโดยใช้เครือข่ายมือถือ"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="2914985502279794000">"โทรศัพท์จะเปลี่ยนไปใช้ผู้ให้บริการรายนี้โดยอัตโนมัติเมื่ออยู่ในพื้นที่ให้บริการ"</string>
     <string name="calls_preference" msgid="4628557570999372758">"ค่ากำหนดการโทร"</string>
     <string name="sms_preference" msgid="3479810211828513772">"ค่ากำหนด SMS"</string>

@@ -402,6 +402,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Lice je dodato"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Dodirom podesite potvrdu identiteta licem"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Potvr. identit. licem"</string>
+    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
+    <skip />
+    <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Koristite podeš. za pristupačn."</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -412,7 +417,9 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Otključavajte telefon, odobravajte kupovine ili se prijavljujte u aplikacije pomoću lica."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Otključavajte telefon ili odobravajte kupovine pomoću lica.\n\nNapomena: Ne možete da otključavate ovaj uređaj pomoću lica. Više informacija zatražite od administratora organizacije."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Otključavajte telefon, odobravajte kupovine ili se prijavljujte u aplikacije pomoću lica"</string>
-    <string name="security_settings_face_enroll_introduction_footer_message" msgid="6129862379306304035"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
+    <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"Postavite lice u centar kruga"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"Uradiću to kasnije"</string>
     <string name="face_add_max" msgid="4408683751143942949">"Maksimalan broj lica koji možete da dodate je <xliff:g id="COUNT">%d</xliff:g>"</string>
@@ -959,7 +966,7 @@
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Postavite QR kôd u nastavku da biste dodali uređaj na mrežu „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Skeniraj QR kôd"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="4371771604088014396">"Postavite QR kôd u nastavku da biste dodali uređaj na mrežu „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Pridružite se Wi‑Fi mreži tako što ćete skenirati QR kôd"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Povežite se na Wi‑Fi mrežu tako što ćete skenirati QR kôd"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Deli Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="5854392840857123065">"Skenirajte ovaj QR kôd da biste se povezali sa „<xliff:g id="SSID">%1$s</xliff:g>“ i delili lozinku"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="4436318319178361543">"Skenirajte ovaj QR kôd da biste se pridružili mreži „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
@@ -2215,7 +2222,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cijan"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Žuta"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"Želite li da koristite <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <!-- no translation found for enable_service_title (1374048678465697350) -->
+    <skip />
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> treba:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Pošto aplikacija skriva zahtev za dozvolu, Podešavanja ne mogu da verifikuju odgovor."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ako uključite <xliff:g id="SERVICE">%1$s</xliff:g>, uređaj neće koristiti zaključavanje ekrana da bi poboljšao šifrovanje podataka."</string>
@@ -2224,8 +2232,27 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Pošto uključivanje usluge <xliff:g id="SERVICE">%1$s</xliff:g> utiče na šifrovanje podataka, treba da potvrdite PIN."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Pošto uključivanje usluge <xliff:g id="SERVICE">%1$s</xliff:g> utiče na šifrovanje podataka, treba da potvrdite lozinku."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> traži potpunu kontrolu nad ovim uređajem. Usluga može da čita sadržaj sa ekrana i da obavlja razne zadatke za korisnike usluga pristupačnosti. Ovaj nivo kontrole nije odgovarajući za većinu aplikacija."</string>
+    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
+    <skip />
+    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
+    <skip />
     <string name="disable_service_title" msgid="3624005212728512896">"Želite li da zaustavite <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Ako dodirnete Potvrdi, zaustavićete <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
+    <!-- no translation found for disable_service_message (4593387199926310801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nijedna usluga nije instalirana"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Nijedna usluga nije izabrana"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Nije naveden opis."</string>
@@ -4068,7 +4095,7 @@
     <string name="data_limit" msgid="1885406964934590552">"Ograničenje za potrošnju podataka"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"Iskoristili ste <xliff:g id="ID_1">%1$s</xliff:g> u periodu <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Konfigurišite"</string>
-    <string name="data_usage_other_apps" msgid="3272872663517382050">"Druge aplikacije uključene u upotrebu"</string>
+    <string name="data_usage_other_apps" msgid="3272872663517382050">"Druge aplikacije koje su trošile podatke"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> aplikacija ima dozvolu da koristi neograničenu količinu podataka kada je Ušteda podataka uključena</item>
       <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> aplikacije imaju dozvolu da koriste neograničenu količinu podataka kada je Ušteda podataka uključena</item>
@@ -4393,8 +4420,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Ažurirajte režim Ne uznemiravaj"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Pauzirajte obaveštenja radi bolje koncentracije"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ova funkcija nije dostupna na ovom uređaju."</string>
-    <string name="disabled_feature" msgid="2102058661071271076">"Ova funkcija nije dostupna"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Usporiće ovaj telefon"</string>
+    <!-- no translation found for disabled_feature (3232554901854971743) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Prinudno pokreni puna GNSS merenja"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Prati sve GNSS konstalacije i frekvencije bez ciklusa rada"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Dozvoli pokretanje aplikacija u pozadini"</string>
