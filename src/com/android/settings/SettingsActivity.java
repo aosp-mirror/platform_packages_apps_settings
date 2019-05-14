@@ -65,6 +65,8 @@ import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -239,8 +241,10 @@ public class SettingsActivity extends SettingsBaseActivity
                 intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
 
         // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content
-        // insets
-        if (isSubSettings) {
+        // insets.
+        // If this is in setup flow, don't apply theme. Because light theme needs to be applied
+        // in SettingsBaseActivity#onCreate().
+        if (isSubSettings && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
             setTheme(R.style.Theme_SubSettings);
         }
 
