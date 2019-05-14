@@ -22,23 +22,17 @@
               android:layout_height="match_parent"
               android:layout_width="match_parent">
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="0px"
-            android:layout_width="match_parent"
-            android:layout_weight="1">
+    <com.android.settings.widget.SwitchBar
+        android:id="@+id/switch_bar"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:theme="?attr/switchBarTheme"/>
 
-        <com.android.settings.widget.SwitchBar android:id="@+id/switch_bar"
-                  android:layout_height="?android:attr/actionBarSize"
-                  android:layout_width="match_parent"
-                  android:theme="?attr/switchBarTheme" />
-
-        <FrameLayout
-                android:id="@+id/main_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-    </LinearLayout>
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <RelativeLayout android:id="@+id/button_bar"
                     android:layout_height="wrap_content"
@@ -51,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:layout_alignParentStart="true"
-                android:text="@*android:string/back_button_label" />
+                android:text="@*android:string/back_button_label"/>
 
         <LinearLayout
                 android:orientation="horizontal"
@@ -64,13 +58,13 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
                     android:text="@*android:string/skip_button_label"
-                    android:visibility="gone" />
+                    android:visibility="gone"/>
 
             <Button android:id="@+id/next_button"
                     android:layout_width="150dip"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
-                    android:text="@*android:string/next_button_label" />
+                    android:text="@*android:string/next_button_label"/>
 
         </LinearLayout>
 
