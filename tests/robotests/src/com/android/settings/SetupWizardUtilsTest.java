@@ -19,6 +19,7 @@ package com.android.settings;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.sysprop.SetupWizardProperties;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -30,9 +31,6 @@ import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class SetupWizardUtilsTest {
-
-    private static final String EXTRA_IS_SETUP_FLOW = "isSetupFlow";
-    private static final String EXTRA_IS_FIRST_RUN = "firstRun";
 
     @Test
     public void testCopySetupExtras() {
@@ -46,6 +44,25 @@ public class SetupWizardUtilsTest {
         assertThat(theme).isEqualTo(toIntent.getStringExtra(WizardManagerHelper.EXTRA_THEME));
         assertThat(toIntent.getBooleanExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, false))
                 .isTrue();
+        assertThat(toIntent.getBooleanExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true))
+                .isFalse();
+    }
+
+    @Test
+    public void testCopyLifecycleExtra() {
+        Intent fromIntent = new Intent();
+        final String theme = "TEST_THEME";
+        fromIntent.putExtra(WizardManagerHelper.EXTRA_THEME, theme);
+        fromIntent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
+        Bundle dstBundle = new Bundle();
+        dstBundle = SetupWizardUtils.copyLifecycleExtra(fromIntent.getExtras(), dstBundle);
+
+        assertThat(dstBundle).isNotNull();
+        assertThat(dstBundle.getString(WizardManagerHelper.EXTRA_THEME)).isNull();
+        assertThat(dstBundle.getBoolean(WizardManagerHelper.EXTRA_IS_SETUP_FLOW))
+                .isTrue();
+        assertThat(dstBundle.getBoolean(WizardManagerHelper.EXTRA_IS_FIRST_RUN))
+                .isFalse();
     }
 
     @Test
@@ -87,7 +104,7 @@ public class SetupWizardUtilsTest {
 
     private Intent createSetupWizardIntent() {
         return new Intent()
-                .putExtra(EXTRA_IS_SETUP_FLOW, true)
-                .putExtra(EXTRA_IS_FIRST_RUN, true);
+                .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true)
+                .putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true);
     }
 }
