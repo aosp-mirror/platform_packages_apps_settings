@@ -3847,6 +3847,13 @@
     <!-- Ask user to connect to the internet [CHAR_ LIMIT=50]-->
     <string name="mobile_connect_to_internet" translatable="true">Please connect to the internet</string>
 
+    <!-- Location settings screen, sub category for recent location requests [CHAR LIMIT=42] -->
+    <string name="location_category_recent_location_requests">Recent location requests</string>
+    <!-- Location settings screen, displayed when there're more than three recent location requests [CHAR LIMIT=30] -->
+    <string name="location_recent_location_requests_see_all">See all</string>
+    <!-- Location settings screen, sub category for location services [CHAR LIMIT=30] -->
+    <string name="location_category_location_services">Location services</string>
+
     <!-- Security & location settings screen, section header for settings relating to location -->
     <string name="location_title">My Location</string>
     <!-- [CHAR LIMIT=30] Title for managed profile location switch  -->
@@ -7059,6 +7066,18 @@
     <string name="mms_message_title">MMS messages</string>
     <!-- Summary of multimedia messaging service settings.  [CHAR LIMIT=100] -->
     <string name="mms_message_summary">Send &amp; receive when mobile data is off</string>
+
+    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
+         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might not be available during a phone call. [CHAR LIMIT=60] -->
+    <string name="data_during_calls_title">Data during calls</string>
+    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
+         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might not be available during a phone call. [CHAR LIMIT=NONE] -->
+    <string name="data_during_calls_summary">
+        Allow this SIM to be used for mobile data only during calls
+    </string>
+
     <!-- Work SIM title.  [CHAR LIMIT=50] -->
     <string name="work_sim_title">Work SIM</string>
 
@@ -7891,8 +7910,8 @@
 
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
     <string name="notification_bubbles_title">Bubbles</string>
-    <!-- Configure Notifications: Summary for the notification bubbles option. [CHAR LIMIT=NONE] -->
-    <string name="notification_bubbles_summary">Quickly access app content from anywhere using floating shortcuts</string>
+    <!-- Developer setting summary for bubbles [CHAR LIMIT=NONE] -->
+    <string name="notification_bubbles_developer_setting_summary">Some notifications can appear as bubbles on the screen</string>
     <!-- Feature education for bubbles. [CHAR LIMIT=NONE] -->
     <string name="bubbles_feature_education">Some notifications and other content can appear as bubbles on the screen. To open a bubble, tap it. To dismiss it, drag it down the screen.</string>
     <!-- Title for the toggle shown on the app-level bubbles page  [CHAR LIMIT=60] -->
@@ -10134,11 +10153,11 @@
     <!-- Title for settings suggestion for double twist for camera [CHAR LIMIT=60] -->
     <string name="double_twist_for_camera_suggestion_title">Take selfies faster</string>
 
-    <!-- Title text for system navigation [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
-    <string name="system_navigation_title" translatable="false">System navigation</string>
+    <!-- Title text for system navigation [CHAR LIMIT=60] -->
+    <string name="system_navigation_title">System navigation</string>
 
-    <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
-    <string name="swipe_up_to_switch_apps_title" translatable="false">2-button navigation</string>
+    <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] -->
+    <string name="swipe_up_to_switch_apps_title">2-button navigation</string>
     <!-- Summary text for swipe up to switch apps  [CHAR LIMIT=250] -->
     <string name="swipe_up_to_switch_apps_summary">To switch apps, swipe up on the Home button. Swipe up again to see all apps. Works from any screen. You’ll no longer have an Overview button on the bottom right of your screen.</string>
     <!-- Title for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
@@ -10146,15 +10165,18 @@
     <!-- Summary for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_suggestion_summary">Turn on the new gesture to switch apps</string>
 
-    <!-- Title text for edge to edge navigation [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
-    <string name="edge_to_edge_navigation_title" translatable="false">Fully gestural navigation</string>
-    <!-- Summary text for edge to edge navigation  [CHAR LIMIT=None] [DO NOT TRANSLATE] -->
-    <string name="edge_to_edge_navigation_summary" translatable="false">To go Home, swipe up from the bottom of the screen. To go Back, swipe from either the left or right edge of the screen. To switch apps, start swiping up from the bottom of the screen and hold before releasing.</string>
+    <!-- Title text for edge to edge navigation [CHAR LIMIT=60] -->
+    <string name="edge_to_edge_navigation_title">Gesture navigation</string>
+    <!-- Summary text for edge to edge navigation [CHAR LIMIT=NONE] -->
+    <string name="edge_to_edge_navigation_summary">To go Home, swipe up from the bottom of the screen. To go Back, swipe from either the left or right edge of the screen. To switch apps, start swiping up from the bottom of the screen and hold before releasing.</string>
 
-    <!-- Title text for 3-button navigation [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
-    <string name="legacy_navigation_title" translatable="false">3-button navigation</string>
-    <!-- Summary text for 3-button navigation  [CHAR LIMIT=250] [DO NOT TRANSLATE] -->
-    <string name="legacy_navigation_summary" translatable="false">Classic Android navigation mode where going Home, switching apps, and going Back are accessible via buttons.</string>
+    <!-- Title text for 3-button navigation [CHAR LIMIT=60] -->
+    <string name="legacy_navigation_title">3-button navigation</string>
+    <!-- Summary text for 3-button navigation  [CHAR LIMIT=NONE] -->
+    <string name="legacy_navigation_summary">Classic Android navigation mode where going Home, switching apps, and going Back are accessible via buttons.</string>
+
+    <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation</string>
 
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
@@ -10542,9 +10564,9 @@
 
     <!-- Note displayed when certain features are not available on low ram devices. [CHAR LIMIT=NONE] -->
     <string name="disabled_low_ram_device">This feature is not available on this device</string>
-    <!-- Note displayed when certain features are not available. [CHAR LIMIT=NONE] -->
+    <!-- Title of a message for an empty state screen. A user will see this message if they try to use a certain feature, but the feature was turned off so it won't slow down their phone. [CHAR LIMIT=NONE] -->
     <string name="disabled_feature">Feature not available</string>
-    <!-- Note displayed to explain that a feature is not available because it will slow down the phone. [CHAR LIMIT=NONE] -->
+    <!-- Part of a message for an empty state screen. A user will see this message if they try to use a certain feature, but the feature was turned off so it won't slow down their phone. [CHAR LIMIT=NONE] -->
     <string name="disabled_feature_reason_slow_down_phone">This feature has been turned off because it slows down your phone</string>
 
     <!-- UI debug setting: preference title - enforce full raw GNSS satellite measurements [CHAR LIMIT=60] -->

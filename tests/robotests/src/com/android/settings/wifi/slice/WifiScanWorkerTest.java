@@ -17,6 +17,7 @@
 package com.android.settings.wifi.slice;
 
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
+import static com.android.settings.wifi.WifiDialogActivity.KEY_ACCESS_POINT_STATE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -42,9 +43,6 @@ import android.net.wifi.WifiSsid;
 import android.os.Bundle;
 import android.os.UserHandle;
 
-import androidx.slice.SliceProvider;
-import androidx.slice.widget.SliceLiveData;
-
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
@@ -57,7 +55,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -85,14 +82,11 @@ public class WifiScanWorkerTest {
         mResolver = mock(ContentResolver.class);
         doReturn(mResolver).when(mContext).getContentResolver();
         mWifiManager = mContext.getSystemService(WifiManager.class);
-
-        // Set-up specs for SliceMetadata.
-        SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mWifiManager.setWifiEnabled(true);
 
         mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
         mWifiScanWorker = new WifiScanWorker(mContext, WIFI_SLICE_URI);
-        mConnectToWifiHandler = Robolectric.setupActivity(ConnectToWifiHandler.class);
+        mConnectToWifiHandler = new ConnectToWifiHandler();
     }
 
     @After
@@ -147,42 +141,36 @@ public class WifiScanWorkerTest {
         verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
     }
 
-    private void setConnectionInfoSSID(String ssid) {
-        final WifiInfo wifiInfo = new WifiInfo();
-        wifiInfo.setSSID(WifiSsid.createFromAsciiEncoded(ssid));
-        ShadowWifiManager.get().setConnectionInfo(wifiInfo);
-    }
-
     @Test
-    public void NetworkCallback_onCapabilitiesChanged_isClickedWifi_shouldStartActivity() {
-        final AccessPoint accessPoint = createAccessPoint("ap1");
+    public void NetworkCallback_onCapabilitiesChanged_isClickedWifi_shouldSendBroadcast() {
+        final Intent intent = getIntentWithAccessPoint("ap1");
         setConnectionInfoSSID("ap1");
         final Network network = mConnectivityManager.getActiveNetwork();
         mWifiScanWorker.registerNetworkCallback(network);
 
-        mConnectToWifiHandler.connect(accessPoint);
+        mConnectToWifiHandler.onReceive(mContext, intent);
         mWifiScanWorker.mNetworkCallback.onCapabilitiesChanged(network,
                 WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
-        verify(mContext).startActivityAsUser(any(Intent.class), eq(UserHandle.CURRENT));
+        verify(mContext).sendBroadcastAsUser(any(Intent.class), eq(UserHandle.CURRENT));
     }
 
     @Test
-    public void NetworkCallback_onCapabilitiesChanged_isNotClickedWifi_shouldNotStartActivity() {
-        final AccessPoint accessPoint = createAccessPoint("ap1");
+    public void NetworkCallback_onCapabilitiesChanged_isNotClickedWifi_shouldNotSendBroadcast() {
+        final Intent intent = getIntentWithAccessPoint("ap1");
         setConnectionInfoSSID("ap2");
         final Network network = mConnectivityManager.getActiveNetwork();
         mWifiScanWorker.registerNetworkCallback(network);
 
-        mConnectToWifiHandler.connect(accessPoint);
+        mConnectToWifiHandler.onReceive(mContext, intent);
         mWifiScanWorker.mNetworkCallback.onCapabilitiesChanged(network,
                 WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
-        verify(mContext, never()).startActivityAsUser(any(Intent.class), eq(UserHandle.CURRENT));
+        verify(mContext, never()).sendBroadcastAsUser(any(Intent.class), eq(UserHandle.CURRENT));
     }
 
     @Test
-    public void NetworkCallback_onCapabilitiesChanged_neverClickWifi_shouldNotStartActivity() {
+    public void NetworkCallback_onCapabilitiesChanged_neverClickWifi_shouldNotSendBroadcast() {
         setConnectionInfoSSID("ap1");
         final Network network = mConnectivityManager.getActiveNetwork();
         mWifiScanWorker.registerNetworkCallback(network);
@@ -190,24 +178,36 @@ public class WifiScanWorkerTest {
         mWifiScanWorker.mNetworkCallback.onCapabilitiesChanged(network,
                 WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
-        verify(mContext, never()).startActivityAsUser(any(Intent.class), eq(UserHandle.CURRENT));
+        verify(mContext, never()).sendBroadcastAsUser(any(Intent.class), eq(UserHandle.CURRENT));
     }
 
     @Test
-    public void NetworkCallback_onCapabilitiesChanged_sliceIsUnpinned_shouldNotStartActivity() {
-        final AccessPoint accessPoint = createAccessPoint("ap1");
+    public void NetworkCallback_onCapabilitiesChanged_sliceIsUnpinned_shouldNotSendBroadcast() {
+        final Intent intent = getIntentWithAccessPoint("ap1");
         setConnectionInfoSSID("ap1");
         final Network network = mConnectivityManager.getActiveNetwork();
         mWifiScanWorker.registerNetworkCallback(network);
         final NetworkCallback callback = mWifiScanWorker.mNetworkCallback;
 
         mWifiScanWorker.onSlicePinned();
-        mConnectToWifiHandler.connect(accessPoint);
+        mConnectToWifiHandler.onReceive(mContext, intent);
         mWifiScanWorker.onSliceUnpinned();
         callback.onCapabilitiesChanged(network,
                 WifiSliceTest.makeCaptivePortalNetworkCapabilities());
 
-        verify(mContext, never()).startActivityAsUser(any(Intent.class), eq(UserHandle.CURRENT));
+        verify(mContext, never()).sendBroadcastAsUser(any(Intent.class), eq(UserHandle.CURRENT));
+    }
+
+    static Intent getIntentWithAccessPoint(String ssid) {
+        final Bundle savedState = new Bundle();
+        savedState.putString("key_ssid", ssid);
+        return new Intent().putExtra(KEY_ACCESS_POINT_STATE, savedState);
+    }
+
+    static void setConnectionInfoSSID(String ssid) {
+        final WifiInfo wifiInfo = new WifiInfo();
+        wifiInfo.setSSID(WifiSsid.createFromAsciiEncoded(ssid));
+        ShadowWifiManager.get().setConnectionInfo(wifiInfo);
     }
 
     private AccessPoint createAccessPoint(String ssid, DetailedState detailedState) {
@@ -221,10 +221,6 @@ public class WifiScanWorkerTest {
 
     private AccessPoint createAccessPoint(DetailedState detailedState) {
         return createAccessPoint("ap", detailedState);
-    }
-
-    private AccessPoint createAccessPoint(String ssid) {
-        return createAccessPoint(ssid, DetailedState.DISCONNECTED);
     }
 
     @Implements(WifiTracker.class)
