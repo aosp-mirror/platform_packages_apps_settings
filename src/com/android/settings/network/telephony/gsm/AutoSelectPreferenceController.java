@@ -52,7 +52,6 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     private static final long MINIMUM_DIALOG_TIME_MILLIS = TimeUnit.SECONDS.toMillis(1);
 
     private final Handler mUiHandler;
-    private int mSubId;
     private TelephonyManager mTelephonyManager;
     private boolean mOnlyAutoSelectInHome;
     private List<OnNetworkSelectModeListener> mListeners;
