@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License
  */
 
 package com.android.settings.gestures;
@@ -20,36 +20,25 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
-import static com.android.settings.gestures.SystemNavigationEdgeToEdgePreferenceController.PREF_KEY_EDGE_TO_EDGE;
-import static com.android.settings.gestures.SystemNavigationLegacyPreferenceController.PREF_KEY_LEGACY;
-import static com.android.settings.gestures.SystemNavigationSwipeUpPreferenceController.PREF_KEY_SWIPE_UP;
+import static com.android.settings.gestures.SystemNavigationPreferenceController.PREF_KEY_SYSTEM_NAVIGATION;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.om.IOverlayManager;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-
-import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.internal.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.widget.RadioButtonPreference;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -59,15 +48,12 @@ import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
-public class SystemNavigationEdgeToEdgePreferenceControllerTest {
+public class SystemNavigationPreferenceControllerTest {
 
     private Context mContext;
     private ShadowPackageManager mPackageManager;
 
-    @Mock
-    private IOverlayManager mOverlayManager;
-
-    private SystemNavigationEdgeToEdgePreferenceController mController;
+    private SystemNavigationPreferenceController mController;
 
     private static final String ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE";
 
@@ -81,8 +67,8 @@ public class SystemNavigationEdgeToEdgePreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
 
-        mController = new SystemNavigationEdgeToEdgePreferenceController(mContext, mOverlayManager,
-                PREF_KEY_EDGE_TO_EDGE);
+        mController = new SystemNavigationPreferenceController(mContext,
+                PREF_KEY_SYSTEM_NAVIGATION);
     }
 
     @After
@@ -105,8 +91,7 @@ public class SystemNavigationEdgeToEdgePreferenceControllerTest {
         info.serviceInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
         mPackageManager.addResolveInfoForIntent(quickStepIntent, info);
 
-        assertThat(SystemNavigationEdgeToEdgePreferenceController.isGestureAvailable(mContext))
-                .isTrue();
+        assertThat(SystemNavigationPreferenceController.isGestureAvailable(mContext)).isTrue();
     }
 
     @Test
@@ -120,80 +105,65 @@ public class SystemNavigationEdgeToEdgePreferenceControllerTest {
                 .setPackage(recentsComponentName.getPackageName());
         mPackageManager.addResolveInfoForIntent(quickStepIntent, new ResolveInfo());
 
-        assertThat(SystemNavigationEdgeToEdgePreferenceController.isGestureAvailable(mContext))
-                .isFalse();
+        assertThat(SystemNavigationPreferenceController.isGestureAvailable(mContext)).isFalse();
     }
 
     @Test
     public void testIsGestureAvailable_noMatchingServiceExists_shouldReturnFalse() {
-        assertThat(SystemNavigationEdgeToEdgePreferenceController.isGestureAvailable(mContext))
-                .isFalse();
+        assertThat(SystemNavigationPreferenceController.isGestureAvailable(mContext)).isFalse();
     }
 
     @Test
-    public void testIsGestureAvailable_noOverlayPackage_shouldReturnFalse() {
-        assertThat(SystemNavigationEdgeToEdgePreferenceController.isGestureAvailable(mContext,
+    public void testIsOverlayPackageAvailable_noOverlayPackage_shouldReturnFalse() {
+        assertThat(SystemNavigationPreferenceController.isOverlayPackageAvailable(mContext,
                 "com.package.fake")).isFalse();
     }
 
     @Test
-    public void testIsChecked_defaultIsEdgeToEdge_shouldReturnTrue() {
-        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
-                NAV_BAR_MODE_GESTURAL);
-        assertThat(mController.isChecked()).isTrue();
-    }
-
-    @Test
-    public void testIsChecked_defaultIsLegacy_shouldReturnFalse() {
-        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
-                NAV_BAR_MODE_3BUTTON);
-        assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void testIsChecked_defaultIsSwipeUp_shouldReturnFalse() {
+    public void testIsSwipeUpEnabled() {
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_2BUTTON);
-        assertThat(mController.isChecked()).isFalse();
-    }
+        assertThat(SystemNavigationPreferenceController.isSwipeUpEnabled(mContext)).isTrue();
 
-    @Test
-    public void testIsChecked_radioButtonClicked_shouldReturnTrue() {
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_3BUTTON);
+        assertThat(SystemNavigationPreferenceController.isSwipeUpEnabled(mContext)).isFalse();
+
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_GESTURAL);
-        // Set the setting to be enabled.
-        mController.onRadioButtonClicked(null);
-        assertThat(mController.isChecked()).isTrue();
+        assertThat(SystemNavigationPreferenceController.isSwipeUpEnabled(mContext)).isFalse();
     }
 
     @Test
-    public void testOnRadioButtonClicked_setsCorrectRadioButtonChecked() {
-        RadioButtonPreference radioLegacy = mock(RadioButtonPreference.class);
-        RadioButtonPreference radioSwipeUp = mock(RadioButtonPreference.class);
-        RadioButtonPreference radioEdgeToEdge = mock(RadioButtonPreference.class);
-        PreferenceScreen screen = mock(PreferenceScreen.class);
+    public void testIsEdgeToEdgeEnabled() {
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_GESTURAL);
+        assertThat(SystemNavigationPreferenceController.isEdgeToEdgeEnabled(mContext)).isTrue();
 
-        when(screen.findPreference(PREF_KEY_LEGACY)).thenReturn(radioLegacy);
-        when(screen.findPreference(PREF_KEY_SWIPE_UP)).thenReturn(radioSwipeUp);
-        when(screen.findPreference(PREF_KEY_EDGE_TO_EDGE)).thenReturn(radioEdgeToEdge);
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_3BUTTON);
+        assertThat(SystemNavigationPreferenceController.isEdgeToEdgeEnabled(mContext)).isFalse();
 
-        mController.displayPreference(screen);
-        mController.onRadioButtonClicked(radioEdgeToEdge);
-
-        verify(radioLegacy, times(1)).setChecked(false);
-        verify(radioSwipeUp, times(1)).setChecked(false);
-        verify(radioEdgeToEdge, times(1)).setChecked(true);
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_2BUTTON);
+        assertThat(SystemNavigationPreferenceController.isEdgeToEdgeEnabled(mContext)).isFalse();
     }
 
     @Test
-    public void isSliceable_returnsFalse() {
-        assertThat(mController.isSliceable()).isFalse();
-    }
+    public void testGetSummary() {
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_GESTURAL);
+        assertThat(TextUtils.equals(mController.getSummary(), mContext.getText(
+                com.android.settings.R.string.edge_to_edge_navigation_title))).isTrue();
 
-    @Test
-    public void isSliceableIncorrectKey_returnsFalse() {
-        final SystemNavigationEdgeToEdgePreferenceController controller =
-                new SystemNavigationEdgeToEdgePreferenceController(mContext, "bad_key");
-        assertThat(controller.isSliceable()).isFalse();
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_3BUTTON);
+        assertThat(TextUtils.equals(mController.getSummary(),
+                mContext.getText(com.android.settings.R.string.legacy_navigation_title))).isTrue();
+
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_2BUTTON);
+        assertThat(TextUtils.equals(mController.getSummary(), mContext.getText(
+                com.android.settings.R.string.swipe_up_to_switch_apps_title))).isTrue();
     }
 }
