@@ -86,8 +86,8 @@ public class ImeiInfoDialogControllerTest {
 
         mController = spy(new ImeiInfoDialogController(mDialog, SLOT_ID));
 
-        doReturn(PRL_VERSION).when(mController).getCdmaPrlVersion();
-        doReturn(MEID_NUMBER).when(mController).getMeid();
+        when(mTelephonyManager.getCdmaPrlVersion()).thenReturn(PRL_VERSION);
+        when(mTelephonyManager.getMeid(anyInt())).thenReturn(MEID_NUMBER);
         when(mTelephonyManager.getCdmaMin(anyInt())).thenReturn(MIN_NUMBER);
         when(mTelephonyManager.getDeviceSoftwareVersion(anyInt())).thenReturn(IMEI_SV_NUMBER);
         when(mTelephonyManager.getImei(anyInt())).thenReturn(IMEI_NUMBER);
@@ -98,6 +98,7 @@ public class ImeiInfoDialogControllerTest {
         mController = spy(new ImeiInfoDialogController(mDialog, SLOT_ID + 1));
 
         mController.populateImeiInfo();
+
         verify(mDialog, never()).setText(anyInt(), any());
     }
 
@@ -129,14 +130,28 @@ public class ImeiInfoDialogControllerTest {
     }
 
     @Test
-    public void populateImeiInfo_cdmaSimDisabled_shouldRemoveImeiInfoAndSetMinToEmpty() {
+    public void populateImeiInfo_cdmaSimDisabled_shouldRemoveImeiInfoAndSetMinPrlToEmpty() {
         ReflectionHelpers.setField(mController, "mSubscriptionInfo", null);
         when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_CDMA);
 
         mController.populateImeiInfo();
 
+        verify(mDialog).setText(ID_MEID_NUMBER_VALUE, MEID_NUMBER);
         verify(mDialog).setText(ID_MIN_NUMBER_VALUE, "");
+        verify(mDialog).setText(ID_PRL_VERSION_VALUE, "");
         verify(mDialog).removeViewFromScreen(ID_GSM_SETTINGS);
+    }
+
+    @Test
+    public void populateImeiInfo_gsmSimDisabled_shouldSetImeiAndRemoveCdmaSettings() {
+        ReflectionHelpers.setField(mController, "mSubscriptionInfo", null);
+        when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_GSM);
+
+        mController.populateImeiInfo();
+
+        verify(mDialog).setText(eq(ID_IMEI_VALUE), any());
+        verify(mDialog).setText(eq(ID_IMEI_SV_VALUE), any());
+        verify(mDialog).removeViewFromScreen(ID_CDMA_SETTINGS);
     }
 
     @Test
