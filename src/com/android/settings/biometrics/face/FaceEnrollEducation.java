@@ -99,7 +99,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         );
 
         final FooterButton footerButton = new FooterButton.Builder(this)
-                .setText(R.string.wizard_next)
+                .setText(R.string.security_settings_face_enroll_education_start)
                 .setListener(this::onNextButtonClick)
                 .setButtonType(FooterButton.ButtonType.NEXT)
                 .setTheme(R.style.SudGlifButton_Primary)
