@@ -234,4 +234,17 @@
         <item name="android:textColorSecondary">@*android:color/secondary_text_light</item>
     </style>
 
+    <!-- Light theme for those pages inherit SubSettings and launched during setup flow -->
+    <style name="LightTheme.SubSettings.SetupWizard" parent="@android:style/Theme.DeviceDefault.Light">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:navigationBarDividerColor">@*android:color/navigation_bar_divider_device_default_settings</item>
+
+        <item name="android:colorPrimary">@android:color/white</item>
+        <item name="android:colorPrimaryDark">@android:color/white</item>
+        <item name="android:colorAccent">@color/material_blue_700</item>
+    </style>
 </resources>
