@@ -16,79 +16,29 @@
 
 package com.android.settings.gestures;
 
-import static android.os.UserHandle.USER_CURRENT;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON_OVERLAY;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.om.IOverlayManager;
 import android.content.pm.PackageManager;
-import android.os.RemoteException;
-import android.text.TextUtils;
-import android.view.View;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.widget.RadioButtonPreference;
+import com.android.settings.core.BasePreferenceController;
 
-public abstract class SystemNavigationPreferenceController extends GesturePreferenceController
-        implements RadioButtonPreference.OnClickListener {
+public class SystemNavigationPreferenceController extends BasePreferenceController {
 
+    static final String PREF_KEY_SYSTEM_NAVIGATION = "gesture_system_navigation";
     private static final String ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE";
-    private static final String PREF_KEY_VIDEO = "gesture_swipe_up_video";
 
-    private static final String[] RADIO_BUTTONS_IN_GROUP = {
-            SystemNavigationLegacyPreferenceController.PREF_KEY_LEGACY,
-            SystemNavigationSwipeUpPreferenceController.PREF_KEY_SWIPE_UP,
-            SystemNavigationEdgeToEdgePreferenceController.PREF_KEY_EDGE_TO_EDGE,
-    };
-
-    protected final IOverlayManager mOverlayManager;
-    protected PreferenceScreen mPreferenceScreen;
-    private final String mOverlayPackage;
-
-    public SystemNavigationPreferenceController(Context context, IOverlayManager overlayManager,
-            String key, String overlayPackage) {
+    public SystemNavigationPreferenceController(Context context, String key) {
         super(context, key);
-        mOverlayManager = overlayManager;
-        mOverlayPackage = overlayPackage;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return isGestureAvailable(mContext, mOverlayPackage) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreferenceScreen = screen;
-
-        Preference preference = screen.findPreference(getPreferenceKey());
-        if (preference != null && preference instanceof RadioButtonPreference) {
-            RadioButtonPreference radioPreference = (RadioButtonPreference) preference;
-            radioPreference.setOnClickListener(this);
-            radioPreference.setAppendixVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        if (!isChecked || mPreferenceScreen == null) {
-            return false;
-        }
-        Preference preference = mPreferenceScreen.findPreference(getPreferenceKey());
-        if (preference != null && preference instanceof RadioButtonPreference) {
-            onRadioButtonClicked((RadioButtonPreference) preference);
-        }
-        return true;
+        return isGestureAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -102,17 +52,7 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
         }
     }
 
-    @Override
-    protected String getVideoPrefKey() {
-        return PREF_KEY_VIDEO;
-    }
-
-
     static boolean isGestureAvailable(Context context) {
-        return isGestureAvailable(context, null /* overlayPackage */);
-    }
-
-    static boolean isGestureAvailable(Context context, String overlayPackage) {
         // Skip if the swipe up settings are not available
         if (!context.getResources().getBoolean(
                 com.android.internal.R.bool.config_swipe_up_gesture_setting_available)) {
@@ -127,44 +67,22 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
         }
 
         // Skip if the overview proxy service exists
-        final PackageManager pm = context.getPackageManager();
         final Intent quickStepIntent = new Intent(ACTION_QUICKSTEP)
                 .setPackage(recentsComponentName.getPackageName());
-        if (pm.resolveService(quickStepIntent, PackageManager.MATCH_SYSTEM_ONLY) == null) {
+        if (context.getPackageManager().resolveService(quickStepIntent,
+                PackageManager.MATCH_SYSTEM_ONLY) == null) {
             return false;
-        }
-
-        // Skip if the required overlay package is defined but doesn't exist
-        if (overlayPackage != null) {
-            try {
-                return pm.getPackageInfo(overlayPackage, 0 /* flags */) != null;
-            } catch (PackageManager.NameNotFoundException e) {
-                // Not found, just return unavailable
-                return false;
-            }
         }
 
         return true;
     }
 
-    static void selectRadioButtonInGroup(String preferenceKey, PreferenceScreen screen) {
-        if (screen == null) {
-            return;
-        }
-        for (String key : RADIO_BUTTONS_IN_GROUP) {
-            ((RadioButtonPreference) screen.findPreference(key)).setChecked(
-                    TextUtils.equals(key, preferenceKey));
-        }
-    }
-
-    /**
-     * Enables the specified overlay package.
-     */
-    static void setNavBarInteractionMode(IOverlayManager overlayManager, String overlayPackage) {
+    static boolean isOverlayPackageAvailable(Context context, String overlayPackage) {
         try {
-            overlayManager.setEnabledExclusiveInCategory(overlayPackage, USER_CURRENT);
-        } catch (RemoteException e) {
-            throw e.rethrowFromSystemServer();
+            return context.getPackageManager().getPackageInfo(overlayPackage, 0) != null;
+        } catch (PackageManager.NameNotFoundException e) {
+            // Not found, just return unavailable
+            return false;
         }
     }
 
