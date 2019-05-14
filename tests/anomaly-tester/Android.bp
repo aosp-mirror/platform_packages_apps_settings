@@ -1,0 +1,24 @@
+android_test {
+    name: "AnomalyTester",
+
+    certificate: "platform",
+
+    libs: ["android.test.runner"],
+
+    static_libs: [
+        "androidx.test.rules",
+        "mockito-target",
+        "ub-uiautomator",
+        "truth-prebuilt",
+    ],
+
+    srcs: ["**/*.java"],
+
+    optimize: {
+        enabled: false,
+    },
+
+    platform_apis: true,
+
+    instrumentation_for: "Settings",
+}
