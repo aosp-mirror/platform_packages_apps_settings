@@ -22,13 +22,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceFrameLayout;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnLayoutChangeListener;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 
@@ -46,6 +41,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.Locale;
 
@@ -54,6 +50,7 @@ import java.util.Locale;
  */
 public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnValueChangedListener {
+    private static final String PREF_CAPTION_PREVIEW = "caption_preview";
     private static final String PREF_BACKGROUND_COLOR = "captioning_background_color";
     private static final String PREF_BACKGROUND_OPACITY = "captioning_background_opacity";
     private static final String PREF_FOREGROUND_COLOR = "captioning_foreground_color";
@@ -113,43 +110,6 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         updateAllPreferences();
         refreshShowingCustom();
         installUpdateListeners();
-    }
-
-    @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.captioning_preview, container, false);
-
-        // We have to do this now because PreferenceFrameLayout looks at it
-        // only when the view is added.
-        if (container instanceof PreferenceFrameLayout) {
-            ((PreferenceFrameLayout.LayoutParams) rootView.getLayoutParams()).removeBorders = true;
-        }
-
-        final View content = super.onCreateView(inflater, container, savedInstanceState);
-        ((ViewGroup) rootView.findViewById(R.id.properties_fragment)).addView(
-                content, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-
-        return rootView;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        final boolean enabled = mCaptioningManager.isEnabled();
-        mPreviewText = (SubtitleView) view.findViewById(R.id.preview_text);
-        mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-
-        mPreviewWindow = view.findViewById(R.id.preview_window);
-        mPreviewViewport = view.findViewById(R.id.preview_viewport);
-        mPreviewViewport.addOnLayoutChangeListener(new OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom,
-                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                refreshPreviewText();
-            }
-        });
     }
 
     @Override
@@ -263,6 +223,19 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     }
 
     private void initializeAllPreferences() {
+        final LayoutPreference captionPreview = findPreference(PREF_CAPTION_PREVIEW);
+
+        final boolean enabled = mCaptioningManager.isEnabled();
+        mPreviewText = captionPreview.findViewById(R.id.preview_text);
+        mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+
+        mPreviewWindow = captionPreview.findViewById(R.id.preview_window);
+
+        mPreviewViewport = captionPreview.findViewById(R.id.preview_viewport);
+        mPreviewViewport.addOnLayoutChangeListener(
+                (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom)
+                        -> refreshPreviewText());
+
         mLocale = (LocalePreference) findPreference(PREF_LOCALE);
         mFontSize = (ListPreference) findPreference(PREF_FONT_SIZE);
 
@@ -370,9 +343,9 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     /**
      * Unpack the specified color value and update the preferences.
      *
-     * @param color color preference
+     * @param color   color preference
      * @param opacity opacity preference
-     * @param value packed value
+     * @param value   packed value
      */
     private void parseColorOpacity(ColorPreference color, ColorPreference opacity, int value) {
         final int colorValue;
