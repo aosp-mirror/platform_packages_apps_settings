@@ -30,6 +30,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 
@@ -99,17 +100,23 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         );
 
         final FooterButton footerButton = new FooterButton.Builder(this)
-                .setText(R.string.wizard_next)
+                .setText(R.string.security_settings_face_enroll_education_start)
                 .setListener(this::onNextButtonClick)
                 .setButtonType(FooterButton.ButtonType.NEXT)
                 .setTheme(R.style.SudGlifButton_Primary)
                 .build();
 
+        boolean accessibilityEnabled = false;
+        final AccessibilityManager accessibilityManager = getApplicationContext().getSystemService(
+                AccessibilityManager.class);
+        if (accessibilityManager != null) {
+            accessibilityEnabled = accessibilityManager.isEnabled();
+        }
         mFooterBarMixin.setPrimaryButton(footerButton);
         final Context context = getApplicationContext();
         final boolean didDisplayEdu = Settings.Secure.getIntForUser(context.getContentResolver(),
                 FACE_UNLOCK_EDUCATION_INFO_DISPLAYED, OFF, mUserId) == ON;
-        if (!didDisplayEdu) {
+        if (!didDisplayEdu && !accessibilityEnabled) {
             Settings.Secure.putIntForUser(context.getContentResolver(),
                     FACE_UNLOCK_EDUCATION_INFO_DISPLAYED, ON, mUserId);
             footerButton.setEnabled(false);
@@ -128,6 +135,10 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
         mSwitchDiversity = findViewById(R.id.toggle_diversity);
         mSwitchDiversity.setListener(mSwitchDiversityListener);
+
+        if (accessibilityEnabled) {
+            accessibilityButton.callOnClick();
+        }
     }
 
     @Override
