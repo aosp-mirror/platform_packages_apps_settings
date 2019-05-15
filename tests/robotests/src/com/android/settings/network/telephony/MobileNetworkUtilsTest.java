@@ -198,4 +198,25 @@ public class MobileNetworkUtilsTest {
         assertThat(MobileNetworkUtils.getSearchableSubscriptionId(mContext))
                 .isEqualTo(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
+
+    @Test
+    public void shouldDisplayNetworkSelectOptions_HideCarrierNetwork_returnFalse() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
+                true);
+
+        assertThat(MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, SUB_ID_1))
+                .isFalse();
+    }
+
+    @Test
+    public void shouldDisplayNetworkSelectOptions_allCheckPass_returnTrue() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
+                false);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_OPERATOR_SELECTION_EXPAND_BOOL, true);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_CSP_ENABLED_BOOL, false);
+        when(mTelephonyManager.getPhoneType()).thenReturn(PhoneConstants.PHONE_TYPE_GSM);
+
+        assertThat(MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, SUB_ID_1))
+                .isTrue();
+    }
 }

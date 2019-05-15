@@ -123,6 +123,18 @@ public class ApnPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
+
+    @Test
+    public void getAvailabilityStatus_hideCarrierNetworkSettings_returnUnavailable() {
+        doReturn(PhoneConstants.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
+        final PersistableBundle bundle = new PersistableBundle();
+        bundle.putBoolean(CarrierConfigManager.KEY_APN_EXPAND_BOOL, true);
+        bundle.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL, true);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
     @Test
     public void handPreferenceTreeClick_fireIntent() {
         ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);

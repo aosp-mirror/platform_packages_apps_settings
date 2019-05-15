@@ -90,4 +90,9 @@ public class ContextualWifiSlice extends WifiSlice {
                 && !nc.hasCapability(NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY)
                 && nc.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
     }
+
+    @Override
+    public Class getBackgroundWorkerClass() {
+        return ContextualWifiScanWorker.class;
+    }
 }
