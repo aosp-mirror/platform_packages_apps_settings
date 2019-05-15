@@ -496,7 +496,6 @@ public class DataUsageList extends DataUsageBaseFragment {
         public Loader<List<NetworkCycleChartData>> onCreateLoader(int id, Bundle args) {
             return NetworkCycleChartDataLoader.builder(getContext())
                     .setNetworkTemplate(mTemplate)
-                    .setSubscriberId(mTelephonyManager.getSubscriberId(mSubId))
                     .build();
         }
 
@@ -523,8 +522,7 @@ public class DataUsageList extends DataUsageBaseFragment {
             return new NetworkStatsSummaryLoader.Builder(getContext())
                     .setStartTime(mChart.getInspectStart())
                     .setEndTime(mChart.getInspectEnd())
-                    .setNetworkType(mNetworkType)
-                    .setSubscriberId(mTelephonyManager.getSubscriberId(mSubId))
+                    .setNetworkTemplate(mTemplate)
                     .build();
         }
 

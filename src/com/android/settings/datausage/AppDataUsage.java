@@ -393,8 +393,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 final NetworkCycleDataForUidLoader.Builder builder
                     = NetworkCycleDataForUidLoader.builder(mContext);
                 builder.setRetrieveDetail(true)
-                    .setNetworkTemplate(mTemplate)
-                    .setSubscriberId(mTemplate.getSubscriberId());
+                    .setNetworkTemplate(mTemplate);
                 if (mAppItem.category == AppItem.CATEGORY_USER) {
                     for (int i = 0; i < mAppItem.uids.size(); i++) {
                         builder.addUid(mAppItem.uids.keyAt(i));
