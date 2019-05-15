@@ -105,13 +105,11 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 @Override
                 public int getSpanSize(int position) {
                     final int viewType = mContextualCards.get(position).getViewType();
-                    switch (viewType) {
-                        case ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH:
-                        case SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH:
-                            return HALF_WIDTH;
-                        default:
-                            return FULL_WIDTH;
+                    if (viewType == ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH
+                            || viewType == SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH) {
+                        return HALF_WIDTH;
                     }
+                    return FULL_WIDTH;
                 }
             });
         }

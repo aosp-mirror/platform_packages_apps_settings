@@ -492,15 +492,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.next_button:
-                    handleNext();
-                    break;
-
-                case R.id.cancel_button:
-                    getActivity().setResult(RESULT_CANCELED);
-                    getActivity().finish();
-                    break;
+            if (v.getId() == R.id.next_button) {
+                handleNext();
+            } else if (v.getId() == R.id.cancel_button) {
+                getActivity().setResult(RESULT_CANCELED);
+                getActivity().finish();
             }
         }
 

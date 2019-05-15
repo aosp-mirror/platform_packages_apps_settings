@@ -197,28 +197,23 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.permission_enable_allow_button:
-                if (isFullDiskEncrypted()) {
-                    String title = createConfirmCredentialReasonMessage();
-                    Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
-                    startActivityForResult(intent,
-                            ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
-                } else {
-                    handleConfirmServiceEnabled(true);
-                }
-                break;
-            case R.id.permission_enable_deny_button:
-                handleConfirmServiceEnabled(false);
-                break;
-            case R.id.permission_disable_stop_button:
-                handleConfirmServiceEnabled(false);
-                break;
-            case R.id.permission_disable_cancel_button:
+        if (view.getId() == R.id.permission_enable_allow_button) {
+            if (isFullDiskEncrypted()) {
+                String title = createConfirmCredentialReasonMessage();
+                Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
+                startActivityForResult(intent,
+                        ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
+            } else {
                 handleConfirmServiceEnabled(true);
-                break;
-            default:
-                throw new IllegalArgumentException();
+            }
+        } else if (view.getId() == R.id.permission_enable_deny_button) {
+            handleConfirmServiceEnabled(false);
+        } else if (view.getId() == R.id.permission_disable_stop_button) {
+            handleConfirmServiceEnabled(false);
+        } else if (view.getId() == R.id.permission_disable_cancel_button) {
+            handleConfirmServiceEnabled(true);
+        } else {
+            throw new IllegalArgumentException();
         }
         mDialog.dismiss();
     }

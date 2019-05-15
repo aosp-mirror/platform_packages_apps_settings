@@ -690,38 +690,33 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuId = item.getItemId();
-        switch (item.getItemId()) {
-            case R.id.sort_order_alpha:
-            case R.id.sort_order_size:
-                if (mApplications != null) {
-                    mApplications.rebuild(menuId);
-                }
-                break;
-            case R.id.show_system:
-            case R.id.hide_system:
-                mShowSystem = !mShowSystem;
-                mApplications.rebuild();
-                break;
-            case R.id.reset_app_preferences:
-                mResetAppsHelper.buildResetDialog();
-                return true;
-            case R.id.advanced:
-                if (mListType == LIST_TYPE_NOTIFICATION) {
-                    new SubSettingLauncher(getContext())
-                            .setDestination(ConfigureNotificationSettings.class.getName())
-                            .setTitleRes(R.string.configure_notification_settings)
-                            .setSourceMetricsCategory(getMetricsCategory())
-                            .setResultListener(this, ADVANCED_SETTINGS)
-                            .launch();
-                } else {
-                    Intent intent = new Intent(
-                            android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS);
-                    startActivityForResult(intent, ADVANCED_SETTINGS);
-                }
-                return true;
-            default:
-                // Handle the home button
-                return false;
+        int i = item.getItemId();
+        if (i == R.id.sort_order_alpha || i == R.id.sort_order_size) {
+            if (mApplications != null) {
+                mApplications.rebuild(menuId);
+            }
+        } else if (i == R.id.show_system || i == R.id.hide_system) {
+            mShowSystem = !mShowSystem;
+            mApplications.rebuild();
+        } else if (i == R.id.reset_app_preferences) {
+            mResetAppsHelper.buildResetDialog();
+            return true;
+        } else if (i == R.id.advanced) {
+            if (mListType == LIST_TYPE_NOTIFICATION) {
+                new SubSettingLauncher(getContext())
+                        .setDestination(ConfigureNotificationSettings.class.getName())
+                        .setTitleRes(R.string.configure_notification_settings)
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .setResultListener(this, ADVANCED_SETTINGS)
+                        .launch();
+            } else {
+                Intent intent = new Intent(
+                        android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS);
+                startActivityForResult(intent, ADVANCED_SETTINGS);
+            }
+            return true;
+        } else {// Handle the home button
+            return false;
         }
         updateOptionsMenu();
         return true;
@@ -1133,29 +1128,24 @@ public class ManageApplications extends InstrumentedFragment
                             ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER);
                 }
             }
-            switch (mLastSortMode) {
-                case R.id.sort_order_size:
-                    switch (mWhichSize) {
-                        case SIZE_INTERNAL:
-                            comparatorObj = ApplicationsState.INTERNAL_SIZE_COMPARATOR;
-                            break;
-                        case SIZE_EXTERNAL:
-                            comparatorObj = ApplicationsState.EXTERNAL_SIZE_COMPARATOR;
-                            break;
-                        default:
-                            comparatorObj = ApplicationsState.SIZE_COMPARATOR;
-                            break;
-                    }
-                    break;
-                case R.id.sort_order_recent_notification:
-                    comparatorObj = AppStateNotificationBridge.RECENT_NOTIFICATION_COMPARATOR;
-                    break;
-                case R.id.sort_order_frequent_notification:
-                    comparatorObj = AppStateNotificationBridge.FREQUENCY_NOTIFICATION_COMPARATOR;
-                    break;
-                default:
-                    comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
-                    break;
+            if (mLastSortMode == R.id.sort_order_size) {
+                switch (mWhichSize) {
+                    case SIZE_INTERNAL:
+                        comparatorObj = ApplicationsState.INTERNAL_SIZE_COMPARATOR;
+                        break;
+                    case SIZE_EXTERNAL:
+                        comparatorObj = ApplicationsState.EXTERNAL_SIZE_COMPARATOR;
+                        break;
+                    default:
+                        comparatorObj = ApplicationsState.SIZE_COMPARATOR;
+                        break;
+                }
+            } else if (mLastSortMode == R.id.sort_order_recent_notification) {
+                comparatorObj = AppStateNotificationBridge.RECENT_NOTIFICATION_COMPARATOR;
+            } else if (mLastSortMode == R.id.sort_order_frequent_notification) {
+                comparatorObj = AppStateNotificationBridge.FREQUENCY_NOTIFICATION_COMPARATOR;
+            } else {
+                comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
             }
 
             filterObj = new CompoundFilter(filterObj, ApplicationsState.FILTER_NOT_HIDE);
