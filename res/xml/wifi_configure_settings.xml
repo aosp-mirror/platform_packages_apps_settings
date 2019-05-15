@@ -24,7 +24,8 @@
         android:key="enable_wifi_wakeup"
         android:title="@string/wifi_wakeup"
         android:icon="@drawable/ic_auto_wifi"
-        android:summary="@string/wifi_wakeup_summary" />
+        android:summary="@string/wifi_wakeup_summary"
+        settings:controller="com.android.settings.wifi.WifiWakeupPreferenceController"/>
 
     <SwitchPreference
         android:key="use_open_wifi_automatically"

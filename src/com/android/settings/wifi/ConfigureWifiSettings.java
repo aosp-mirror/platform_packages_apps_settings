@@ -74,13 +74,10 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context, this,
-                getSettingsLifecycle());
         mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
                 getSettingsLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(mWifiWakeupPreferenceController);
         controllers.add(new NotifyOpenNetworksPreferenceController(context,
                 getSettingsLifecycle()));
         controllers.add(mUseOpenWifiPreferenceController);
@@ -92,8 +89,16 @@ public class ConfigureWifiSettings extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mWifiWakeupPreferenceController = use(WifiWakeupPreferenceController.class);
+        mWifiWakeupPreferenceController.setFragment(this);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == WIFI_WAKEUP_REQUEST_CODE && mWifiWakeupPreferenceController != null) {
+        if (requestCode == WIFI_WAKEUP_REQUEST_CODE) {
             mWifiWakeupPreferenceController.onActivityResult(requestCode, resultCode);
             return;
         }
