@@ -21,6 +21,12 @@
     android:key="captioning_preference_screen"
     android:title="@string/accessibility_captioning_title" >
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="caption_preview"
+        android:title="@string/summary_placeholder"
+        android:layout="@layout/captioning_preview"
+        settings:searchable="false"/>
+
     <PreferenceCategory
         android:key="standard"
         android:title="@string/captioning_standard_options_title" >
