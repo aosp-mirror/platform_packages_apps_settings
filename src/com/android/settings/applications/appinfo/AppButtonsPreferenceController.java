@@ -160,8 +160,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @Override
     public int getAvailabilityStatus() {
         // TODO(b/37313605): Re-enable once this controller supports instant apps
-        return mAppEntry != null && !AppUtils.isInstant(mAppEntry.info)
-                ? AVAILABLE : DISABLED_FOR_USER;
+        return isInstantApp() || isSystemModule() ? DISABLED_FOR_USER : AVAILABLE;
     }
 
     @Override
@@ -683,6 +682,14 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (mAppLaunchIntent != null) {
             mContext.startActivityAsUser(mAppLaunchIntent, new UserHandle(mUserId));
         }
+    }
+
+    private boolean isInstantApp() {
+        return mAppEntry != null && AppUtils.isInstant(mAppEntry.info);
+    }
+
+    private boolean isSystemModule() {
+        return mAppEntry != null && AppUtils.isSystemModule(mContext, mAppEntry.info.packageName);
     }
 
     /**
