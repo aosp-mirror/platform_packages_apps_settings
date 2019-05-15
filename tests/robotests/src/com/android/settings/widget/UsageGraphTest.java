@@ -24,6 +24,8 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.SparseIntArray;
 
 import com.android.settingslib.R;
@@ -176,5 +178,15 @@ public class UsageGraphTest {
         assertThat(localPaths.valueAt(4)).isEqualTo(50);
         assertThat(localPaths.keyAt(5)).isEqualTo(1001);
         assertThat(localPaths.valueAt(5)).isEqualTo(-1);
+    }
+
+    @Test
+    public void drawFilledPath_emptyPath_shouldNotCrash() {
+        final Canvas canvas = new Canvas();
+        final SparseIntArray localPaths = new SparseIntArray();
+        final Paint paint = new Paint();
+
+        // Should not crash
+        mGraph.drawFilledPath(canvas, localPaths, paint);
     }
 }
