@@ -1,0 +1,65 @@
+java_library {
+    name: "settings-logtags",
+    srcs: ["src/**/*.logtags"],
+}
+
+// Build the Settings APK
+android_library {
+    name: "Settings-core",
+    platform_apis: true,
+    defaults: [
+        "SettingsLibDefaults",
+        "SettingsLib-search-defaults",
+    ],
+
+    srcs: ["src/**/*.java"],
+
+    static_libs: [
+        "androidx-constraintlayout_constraintlayout",
+        "androidx.slice_slice-builders",
+        "androidx.slice_slice-core",
+        "androidx.slice_slice-view",
+        "androidx.core_core",
+        "androidx.appcompat_appcompat",
+        "androidx.cardview_cardview",
+        "androidx.preference_preference",
+        "androidx.recyclerview_recyclerview",
+        "com.google.android.material_material",
+        "setupcompat",
+        "setupdesign",
+        "androidx-constraintlayout_constraintlayout-solver",
+        "androidx.lifecycle_lifecycle-runtime",
+        "androidx.lifecycle_lifecycle-extensions",
+        "guava",
+        "jsr305",
+        "settings-contextual-card-protos-lite",
+        "settings-log-bridge-protos-lite",
+        "contextualcards",
+        "settings-logtags",
+        "zxing-core-1.7",
+    ],
+
+    libs: [
+        "telephony-common",
+        "ims-common",
+    ],
+}
+
+android_app {
+    name: "Settings",
+    platform_apis: true,
+    certificate: "platform",
+    product_specific: true,
+    privileged: true,
+    required: ["privapp_whitelist_com.android.settings"],
+    static_libs: ["Settings-core"],
+    resource_dirs: [],
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+}
+
+android_library_import {
+    name: "contextualcards",
+    aars: ["libs/contextualcards.aar"],
+}
