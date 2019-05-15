@@ -890,10 +890,12 @@
     <string name="security_settings_face_preference_title">Face authentication</string>
     <!-- Introduction title shown in face enrollment education screen [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_education_title">How to set up Face unlock</string>
-    <!-- Introduction title shown in face enrollment education screen to show the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <!-- Introduction title shown in face enrollment education screen to show the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
     <string name="security_settings_face_enroll_education_title_unlock_disabled">Use your face to authenticate</string>
     <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_education_message"></string>
+    <!-- Button that takes the user to the enrollment activity [CHAR LIMIT=20] -->
+    <string name="security_settings_face_enroll_education_start">Start</string>
     <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
     <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
     <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
@@ -906,7 +908,7 @@
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_introduction_title">Unlock with your face</string>
-    <!-- Introduction title shown in face enrollment to introduce the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <!-- Introduction title shown in face enrollment to introduce the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled">Use your face to authenticate</string>
     <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_message">Use your face to unlock your phone, authorize purchases, or sign in to apps.</string>
@@ -3846,6 +3848,13 @@
 
     <!-- Ask user to connect to the internet [CHAR_ LIMIT=50]-->
     <string name="mobile_connect_to_internet" translatable="true">Please connect to the internet</string>
+
+    <!-- Location settings screen, sub category for recent location requests [CHAR LIMIT=42] -->
+    <string name="location_category_recent_location_requests">Recent location requests</string>
+    <!-- Location settings screen, displayed when there're more than three recent location requests [CHAR LIMIT=30] -->
+    <string name="location_recent_location_requests_see_all">See all</string>
+    <!-- Location settings screen, sub category for location services [CHAR LIMIT=30] -->
+    <string name="location_category_location_services">Location services</string>
 
     <!-- Security & location settings screen, section header for settings relating to location -->
     <string name="location_title">My Location</string>
@@ -7059,6 +7068,18 @@
     <string name="mms_message_title">MMS messages</string>
     <!-- Summary of multimedia messaging service settings.  [CHAR LIMIT=100] -->
     <string name="mms_message_summary">Send &amp; receive when mobile data is off</string>
+
+    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
+         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might not be available during a phone call. [CHAR LIMIT=60] -->
+    <string name="data_during_calls_title">Data during calls</string>
+    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
+         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might not be available during a phone call. [CHAR LIMIT=NONE] -->
+    <string name="data_during_calls_summary">
+        Allow this SIM to be used for mobile data only during calls
+    </string>
+
     <!-- Work SIM title.  [CHAR LIMIT=50] -->
     <string name="work_sim_title">Work SIM</string>
 
@@ -10134,11 +10155,11 @@
     <!-- Title for settings suggestion for double twist for camera [CHAR LIMIT=60] -->
     <string name="double_twist_for_camera_suggestion_title">Take selfies faster</string>
 
-    <!-- Title text for system navigation [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
-    <string name="system_navigation_title" translatable="false">System navigation</string>
+    <!-- Title text for system navigation [CHAR LIMIT=60] -->
+    <string name="system_navigation_title">System navigation</string>
 
-    <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
-    <string name="swipe_up_to_switch_apps_title" translatable="false">2-button navigation</string>
+    <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] -->
+    <string name="swipe_up_to_switch_apps_title">2-button navigation</string>
     <!-- Summary text for swipe up to switch apps  [CHAR LIMIT=250] -->
     <string name="swipe_up_to_switch_apps_summary">To switch apps, swipe up on the Home button. Swipe up again to see all apps. Works from any screen. You’ll no longer have an Overview button on the bottom right of your screen.</string>
     <!-- Title for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
@@ -10146,15 +10167,18 @@
     <!-- Summary for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_suggestion_summary">Turn on the new gesture to switch apps</string>
 
-    <!-- Title text for edge to edge navigation [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
-    <string name="edge_to_edge_navigation_title" translatable="false">Fully gestural navigation</string>
-    <!-- Summary text for edge to edge navigation  [CHAR LIMIT=None] [DO NOT TRANSLATE] -->
-    <string name="edge_to_edge_navigation_summary" translatable="false">To go Home, swipe up from the bottom of the screen. To go Back, swipe from either the left or right edge of the screen. To switch apps, start swiping up from the bottom of the screen and hold before releasing.</string>
+    <!-- Title text for edge to edge navigation [CHAR LIMIT=60] -->
+    <string name="edge_to_edge_navigation_title">Gesture navigation</string>
+    <!-- Summary text for edge to edge navigation [CHAR LIMIT=NONE] -->
+    <string name="edge_to_edge_navigation_summary">To go Home, swipe up from the bottom of the screen. To go Back, swipe from either the left or right edge of the screen. To switch apps, start swiping up from the bottom of the screen and hold before releasing.</string>
 
-    <!-- Title text for 3-button navigation [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
-    <string name="legacy_navigation_title" translatable="false">3-button navigation</string>
-    <!-- Summary text for 3-button navigation  [CHAR LIMIT=250] [DO NOT TRANSLATE] -->
-    <string name="legacy_navigation_summary" translatable="false">Classic Android navigation mode where going Home, switching apps, and going Back are accessible via buttons.</string>
+    <!-- Title text for 3-button navigation [CHAR LIMIT=60] -->
+    <string name="legacy_navigation_title">3-button navigation</string>
+    <!-- Summary text for 3-button navigation  [CHAR LIMIT=NONE] -->
+    <string name="legacy_navigation_summary">Classic Android navigation mode where going Home, switching apps, and going Back are accessible via buttons.</string>
+
+    <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation</string>
 
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>

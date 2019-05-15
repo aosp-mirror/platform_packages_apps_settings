@@ -17,35 +17,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="gesture_system_navigation_screen"
-    android:title="@string/system_navigation_title">
-
-    <com.android.settings.widget.VideoPreference
-        android:key="gesture_swipe_up_video"
-        app:animation="@raw/gesture_swipe_up"
-        app:preview="@drawable/gesture_swipe_up" />
-
-    <com.android.settings.widget.RadioButtonPreference
-        android:key="gesture_edge_to_edge"
-        android:title="@string/edge_to_edge_navigation_title"
-        android:summary="@string/edge_to_edge_navigation_summary"
-        app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.SystemNavigationEdgeToEdgePreferenceController"
-        app:allowDividerAbove="true" />
-
-    <com.android.settings.widget.RadioButtonPreference
-        android:key="gesture_swipe_up"
-        android:title="@string/swipe_up_to_switch_apps_title"
-        android:summary="@string/swipe_up_to_switch_apps_summary"
-        app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.SystemNavigationSwipeUpPreferenceController" />
-
-    <com.android.settings.widget.RadioButtonPreference
-        android:key="gesture_legacy"
-        android:title="@string/legacy_navigation_title"
-        android:summary="@string/legacy_navigation_summary"
-        app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.SystemNavigationLegacyPreferenceController" />
-
-</PreferenceScreen>
+    android:title="@string/system_navigation_title"
+    settings:keywords="@string/keywords_system_navigation"/>

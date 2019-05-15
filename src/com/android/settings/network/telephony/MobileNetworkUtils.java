@@ -355,6 +355,8 @@ public class MobileNetworkUtils {
                 || carrierConfig == null
                 || !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_OPERATOR_SELECTION_EXPAND_BOOL)
+                || carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
                 || (carrierConfig.getBoolean(CarrierConfigManager.KEY_CSP_ENABLED_BOOL)
                 && !telephonyManager.isManualNetworkSelectionAllowed())) {
             return false;
