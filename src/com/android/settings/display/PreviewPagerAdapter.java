@@ -67,7 +67,8 @@ public class PreviewPagerAdapter extends PagerAdapter {
             mPreviewFrames[p].setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT));
-
+            mPreviewFrames[p].setClipToPadding(true);
+            mPreviewFrames[p].setClipChildren(true);
             for (int j = 0; j < configurations.length; ++j) {
                 // Create a new configuration for the specified value. It won't
                 // have any theme set, so manually apply the current theme.
