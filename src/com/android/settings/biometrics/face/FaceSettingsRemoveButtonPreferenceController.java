@@ -94,6 +94,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
             Log.e(TAG, "Unable to remove face: " + face.getBiometricId()
                     + " error: " + errMsgId + " " + errString);
             Toast.makeText(mContext, errString, Toast.LENGTH_SHORT).show();
+            mRemoving = false;
         }
 
         @Override
@@ -131,6 +132,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
                 mFaceManager.remove(faces.get(0), mUserId, mRemovalCallback);
             } else {
                 mButton.setEnabled(true);
+                mRemoving = false;
             }
         }
     };

@@ -890,6 +890,8 @@
     <string name="security_settings_face_preference_title">Face authentication</string>
     <!-- Introduction title shown in face enrollment education screen [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_education_title">How to set up Face unlock</string>
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMI=40]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Set up Face unlock</string>
     <!-- Introduction title shown in face enrollment education screen to show the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
     <string name="security_settings_face_enroll_education_title_unlock_disabled">Use your face to authenticate</string>
     <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
@@ -4815,7 +4817,7 @@
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
-    <string name="user_installed_services_category_title">Downloaded services</string>
+    <string name="user_installed_services_category_title">Downloaded apps</string>
     <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->
     <string name="experimental_category_title">Experimental</string>
     <!-- Title for feature flags dashboard where developers can turn on experimental features [CHAR LIMIT=50] -->
@@ -4921,7 +4923,7 @@
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
-    <string name="accessibility_service_master_switch_title">Use service</string>
+    <string name="accessibility_service_master_switch_title">Use <xliff:g id="service" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
@@ -5147,7 +5149,7 @@
     </string>
 
     <!-- Title for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_action_perform_title">View and platform actions</string>
+    <string name="accessibility_service_action_perform_title">View and perform actions</string>
 
     <!-- Description for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_action_perform_description">It can track your interactions
@@ -10055,6 +10057,12 @@
 
     <!-- [CHAR LIMIT=60] Name of setting that changes the UI to dark -->
     <string name="dark_ui_mode">Dark Theme</string>
+
+    <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is still on-->
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on">On / Temporarily disabled due to Battery Saver</string>
+
+    <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is off-->
+    <string name="dark_ui_mode_disabled_summary_dark_theme_off">Temporarily turned on due to Battery Saver</string>
 
     <!-- [CHAR_LIMIT=NONE] Summary that is shown in the footer when dark mode is selected -->
     <string name="dark_ui_settings_dark_summary">Supported apps will also switch to dark theme</string>

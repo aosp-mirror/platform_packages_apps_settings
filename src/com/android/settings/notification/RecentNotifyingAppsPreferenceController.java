@@ -79,7 +79,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
     private final PackageManager mPm;
     private final NotificationBackend mNotificationBackend;
     private IUsageStatsManager mUsageStatsManager;
-    private final int mUserId;
     private final IconDrawableFactory mIconDrawableFactory;
 
     private Calendar mCal;
@@ -104,7 +103,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             ApplicationsState appState, Fragment host) {
         super(context);
         mIconDrawableFactory = IconDrawableFactory.newInstance(context);
-        mUserId = UserHandle.myUserId();
         mPm = context.getPackageManager();
         mHost = host;
         mApplicationsState = appState;
@@ -177,7 +175,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
                 e.printStackTrace();
             }
             if (events != null) {
-
                 ArrayMap<String, NotifyingApp> aggregatedStats = new ArrayMap<>();
 
                 UsageEvents.Event event = new UsageEvents.Event();
@@ -205,7 +202,8 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
         }
     }
 
-    private static String getKey(int userId, String pkg) {
+    @VisibleForTesting
+    static String getKey(int userId, String pkg) {
         return userId + "|" + pkg;
     }
 
@@ -252,12 +250,13 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             }
 
             boolean rebindPref = true;
-            NotificationAppPreference pref = appPreferences.remove(pkgName);
+            NotificationAppPreference pref = appPreferences.remove(getKey(app.getUserId(),
+                    pkgName));
             if (pref == null) {
                 pref = new NotificationAppPreference(prefContext);
                 rebindPref = false;
             }
-            pref.setKey(pkgName);
+            pref.setKey(getKey(app.getUserId(), pkgName));
             pref.setTitle(appEntry.label);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info));
             pref.setIconSize(TwoTargetPreference.ICON_SIZE_SMALL);
@@ -267,11 +266,11 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             Bundle args = new Bundle();
             args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkgName);
             args.putInt(AppInfoBase.ARG_PACKAGE_UID, appEntry.info.uid);
-
             pref.setIntent(new SubSettingLauncher(mHost.getActivity())
                     .setDestination(AppNotificationSettings.class.getName())
                     .setTitleRes(R.string.notifications_title)
                     .setArguments(args)
+                    .setUserHandle(new UserHandle(UserHandle.getUserId(appEntry.info.uid)))
                     .setSourceMetricsCategory(
                             SettingsEnums.MANAGE_APPLICATIONS_NOTIFICATIONS)
                     .toIntent());
@@ -301,11 +300,11 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
         int count = 0;
         for (NotifyingApp app : mApps) {
             final ApplicationsState.AppEntry appEntry = mApplicationsState.getEntry(
-                    app.getPackage(), mUserId);
+                    app.getPackage(), app.getUserId());
             if (appEntry == null) {
                 continue;
             }
-            if (!shouldIncludePkgInRecents(app.getPackage())) {
+            if (!shouldIncludePkgInRecents(app.getPackage(), app.getUserId())) {
                 continue;
             }
             displayableApps.add(app);
@@ -321,14 +320,14 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
     /**
      * Whether or not the app should be included in recent list.
      */
-    private boolean shouldIncludePkgInRecents(String pkgName) {
+    private boolean shouldIncludePkgInRecents(String pkgName, int userId) {
         final Intent launchIntent = new Intent().addCategory(Intent.CATEGORY_LAUNCHER)
                 .setPackage(pkgName);
 
         if (mPm.resolveActivity(launchIntent, 0) == null) {
             // Not visible on launcher -> likely not a user visible app, skip if non-instant.
             final ApplicationsState.AppEntry appEntry =
-                    mApplicationsState.getEntry(pkgName, mUserId);
+                    mApplicationsState.getEntry(pkgName, userId);
             if (appEntry == null || appEntry.info == null || !AppUtils.isInstant(appEntry.info)) {
                 Log.d(TAG, "Not a user visible or instant app, skipping " + pkgName);
                 return false;
