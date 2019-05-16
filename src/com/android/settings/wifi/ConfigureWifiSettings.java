@@ -76,8 +76,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new NotifyOpenNetworksPreferenceController(context,
-                getSettingsLifecycle()));
         controllers.add(new WifiInfoPreferenceController(context, getSettingsLifecycle(),
                 wifiManager));
         controllers.add(new WifiP2pPreferenceController(context, getSettingsLifecycle(),

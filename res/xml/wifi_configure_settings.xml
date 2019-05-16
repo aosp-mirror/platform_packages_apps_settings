@@ -39,7 +39,8 @@
         android:title="@string/wifi_notify_open_networks"
         android:icon="@drawable/ic_open_wifi_notifications"
         android:summary="@string/wifi_notify_open_networks_summary"
-        settings:keywords="@string/keywords_wifi_notify_open_networks"/>
+        settings:keywords="@string/keywords_wifi_notify_open_networks"
+        settings:controller="com.android.settings.wifi.NotifyOpenNetworksPreferenceController"/>
 
     <SwitchPreference
         android:key="wifi_cellular_data_fallback"

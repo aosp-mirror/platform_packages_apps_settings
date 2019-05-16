@@ -29,8 +29,6 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +37,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class NotifyOpenNetworkPreferenceControllerTest {
+public class NotifyOpenNetworksPreferenceControllerTest {
 
     private Context mContext;
     private NotifyOpenNetworksPreferenceController mController;
@@ -48,7 +46,7 @@ public class NotifyOpenNetworkPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new NotifyOpenNetworksPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new NotifyOpenNetworksPreferenceController(mContext);
     }
 
     @Test
@@ -57,30 +55,27 @@ public class NotifyOpenNetworkPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_nonMatchingKey_shouldDoNothing() {
-        final SwitchPreference pref = new SwitchPreference(mContext);
+    public void setChecked_withTrue_shouldUpdateSetting() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0);
 
-        assertThat(mController.handlePreferenceTreeClick(pref)).isFalse();
-    }
+        mController.setChecked(true);
 
-    @Test
-    public void handlePreferenceTreeClick_nonMatchingType_shouldDoNothing() {
-        final Preference pref = new Preference(mContext);
-        pref.setKey(mController.getPreferenceKey());
-
-        assertThat(mController.handlePreferenceTreeClick(pref)).isFalse();
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_matchingKeyAndType_shouldUpdateSetting() {
-        final SwitchPreference pref = new SwitchPreference(mContext);
-        pref.setChecked(true);
-        pref.setKey(mController.getPreferenceKey());
-
-        assertThat(mController.handlePreferenceTreeClick(pref)).isTrue();
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0))
                 .isEqualTo(1);
+    }
+
+    @Test
+    public void setChecked_withFalse_shouldUpdateSetting() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 1);
+
+        mController.setChecked(false);
+
+        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
+                WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0))
+                .isEqualTo(0);
     }
 
     @Test
