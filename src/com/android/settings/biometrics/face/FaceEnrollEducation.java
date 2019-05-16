@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -59,19 +60,28 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private View mIllustrationAccessibility;
     private Handler mHandler;
     private Intent mResultIntent;
+    private TextView mDescriptionText;
 
     private CompoundButton.OnCheckedChangeListener mSwitchDiversityListener =
             new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int titleRes = isChecked ?
+                            R.string.security_settings_face_enroll_education_title_accessibility
+                            : R.string.security_settings_face_enroll_education_title;
+                    getLayout().setHeaderText(titleRes);
+                    setTitle(titleRes);
+
                     if (isChecked) {
                         mIllustrationNormal.stop();
                         mIllustrationNormal.setVisibility(View.INVISIBLE);
                         mIllustrationAccessibility.setVisibility(View.VISIBLE);
+                        mDescriptionText.setVisibility(View.INVISIBLE);
                     } else {
                         mIllustrationNormal.setVisibility(View.VISIBLE);
                         mIllustrationNormal.start();
                         mIllustrationAccessibility.setVisibility(View.INVISIBLE);
+                        mDescriptionText.setVisibility(View.VISIBLE);
                     }
                 }
             };
@@ -88,6 +98,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
         mIllustrationNormal = findViewById(R.id.illustration_normal);
         mIllustrationAccessibility = findViewById(R.id.illustration_accessibility);
+        mDescriptionText = findViewById(R.id.sud_layout_description);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
