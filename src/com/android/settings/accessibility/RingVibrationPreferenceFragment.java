@@ -51,7 +51,7 @@ public class RingVibrationPreferenceFragment extends VibrationPreferenceFragment
 
     @Override
     protected int getPreviewVibrationAudioAttributesUsage() {
-        return AudioAttributes.USAGE_NOTIFICATION;
+        return AudioAttributes.USAGE_NOTIFICATION_RINGTONE;
     }
 
     @Override
