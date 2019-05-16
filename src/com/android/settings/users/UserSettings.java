@@ -1086,21 +1086,18 @@ public class UserSettings extends SettingsPreferenceFragment
     public void onClick(View v) {
         if (v.getTag() instanceof UserPreference) {
             int userId = ((UserPreference) v.getTag()).getUserId();
-            switch (v.getId()) {
-                case UserPreference.DELETE_ID:
-                    final EnforcedAdmin removeDisallowedAdmin =
-                            RestrictedLockUtilsInternal.checkIfRestrictionEnforced(getContext(),
-                                    UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
-                    if (removeDisallowedAdmin != null) {
-                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
-                                removeDisallowedAdmin);
-                    } else {
-                        onRemoveUserClicked(userId);
-                    }
-                    break;
-                case UserPreference.SETTINGS_ID:
-                    onManageUserClicked(userId, false);
-                    break;
+            if (v.getId() == UserPreference.DELETE_ID) {
+                final EnforcedAdmin removeDisallowedAdmin =
+                        RestrictedLockUtilsInternal.checkIfRestrictionEnforced(getContext(),
+                                UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
+                if (removeDisallowedAdmin != null) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                            removeDisallowedAdmin);
+                } else {
+                    onRemoveUserClicked(userId);
+                }
+            } else if (v.getId() == UserPreference.SETTINGS_ID) {
+                onManageUserClicked(userId, false);
             }
         }
     }

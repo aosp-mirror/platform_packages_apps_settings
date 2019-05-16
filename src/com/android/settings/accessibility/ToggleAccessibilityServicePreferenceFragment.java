@@ -86,6 +86,16 @@ public class ToggleAccessibilityServicePreferenceFragment
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mSwitchBar.setLabelDelegate((boolean isChecked) -> {
+            final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+            return getString(R.string.accessibility_service_master_switch_title,
+                    info.getResolveInfo().loadLabel(getPackageManager()));
+        });
+    }
+
+    @Override
     public void onResume() {
         mSettingsContentObserver.register(getContentResolver());
         updateSwitchBarToggleSwitch();
@@ -120,7 +130,7 @@ public class ToggleAccessibilityServicePreferenceFragment
                 return serviceInfo;
             }
         }
-        return null;
+        throw new IllegalStateException("ServiceInfo is not found.");
     }
 
     @Override
@@ -128,18 +138,12 @@ public class ToggleAccessibilityServicePreferenceFragment
         switch (dialogId) {
             case DIALOG_ID_ENABLE_WARNING: {
                 final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
-                if (info == null) {
-                    return null;
-                }
                 mDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getActivity(), info, this);
                 break;
             }
             case DIALOG_ID_DISABLE_WARNING: {
                 AccessibilityServiceInfo info = getAccessibilityServiceInfo();
-                if (info == null) {
-                    return null;
-                }
                 mDialog = AccessibilityServiceWarning
                         .createDisableDialog(getActivity(), info, this);
                 break;
@@ -197,28 +201,23 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.permission_enable_allow_button:
-                if (isFullDiskEncrypted()) {
-                    String title = createConfirmCredentialReasonMessage();
-                    Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
-                    startActivityForResult(intent,
-                            ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
-                } else {
-                    handleConfirmServiceEnabled(true);
-                }
-                break;
-            case R.id.permission_enable_deny_button:
-                handleConfirmServiceEnabled(false);
-                break;
-            case R.id.permission_disable_stop_button:
-                handleConfirmServiceEnabled(false);
-                break;
-            case R.id.permission_disable_cancel_button:
+        if (view.getId() == R.id.permission_enable_allow_button) {
+            if (isFullDiskEncrypted()) {
+                String title = createConfirmCredentialReasonMessage();
+                Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
+                startActivityForResult(intent,
+                        ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
+            } else {
                 handleConfirmServiceEnabled(true);
-                break;
-            default:
-                throw new IllegalArgumentException();
+            }
+        } else if (view.getId() == R.id.permission_enable_deny_button) {
+            handleConfirmServiceEnabled(false);
+        } else if (view.getId() == R.id.permission_disable_stop_button) {
+            handleConfirmServiceEnabled(false);
+        } else if (view.getId() == R.id.permission_disable_cancel_button) {
+            handleConfirmServiceEnabled(true);
+        } else {
+            throw new IllegalArgumentException();
         }
         mDialog.dismiss();
     }

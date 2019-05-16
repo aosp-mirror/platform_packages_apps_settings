@@ -1,0 +1,32 @@
+android_test {
+    name: "SettingsUnitTests",
+
+    certificate: "platform",
+
+    libs: [
+        "android.test.runner",
+        "telephony-common",
+        "ims-common",
+        "android.test.base",
+        "android.test.mock",
+    ],
+
+    static_libs: [
+        "androidx.test.rules",
+        "androidx.test.espresso.core",
+        "androidx.test.espresso.contrib-nodeps",
+        "androidx.test.espresso.intents-nodeps",
+        "mockito-target-minus-junit4",
+        "platform-test-annotations",
+        "truth-prebuilt",
+        "ub-uiautomator",
+    ],
+
+    // Include all test java files.
+    srcs: ["src/**/*.java"],
+
+    platform_apis: true,
+    test_suites: ["device-tests"],
+
+    instrumentation_for: "Settings",
+}

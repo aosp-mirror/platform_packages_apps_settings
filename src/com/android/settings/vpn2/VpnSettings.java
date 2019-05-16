@@ -153,17 +153,15 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.vpn_create: {
-                // Generate a new key. Here we just use the current time.
-                long millis = System.currentTimeMillis();
-                while (mLegacyVpnPreferences.containsKey(Long.toHexString(millis))) {
-                    ++millis;
-                }
-                VpnProfile profile = new VpnProfile(Long.toHexString(millis));
-                ConfigDialogFragment.show(this, profile, true /* editing */, false /* exists */);
-                return true;
+        // Generate a new key. Here we just use the current time.
+        if (item.getItemId() == R.id.vpn_create) {
+            long millis = System.currentTimeMillis();
+            while (mLegacyVpnPreferences.containsKey(Long.toHexString(millis))) {
+                ++millis;
             }
+            VpnProfile profile = new VpnProfile(Long.toHexString(millis));
+            ConfigDialogFragment.show(this, profile, true /* editing */, false /* exists */);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
