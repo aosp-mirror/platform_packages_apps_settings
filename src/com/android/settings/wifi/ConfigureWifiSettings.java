@@ -74,13 +74,10 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
-                getSettingsLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new NotifyOpenNetworksPreferenceController(context,
                 getSettingsLifecycle()));
-        controllers.add(mUseOpenWifiPreferenceController);
         controllers.add(new WifiInfoPreferenceController(context, getSettingsLifecycle(),
                 wifiManager));
         controllers.add(new WifiP2pPreferenceController(context, getSettingsLifecycle(),
@@ -92,8 +89,12 @@ public class ConfigureWifiSettings extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+
         mWifiWakeupPreferenceController = use(WifiWakeupPreferenceController.class);
         mWifiWakeupPreferenceController.setFragment(this);
+
+        mUseOpenWifiPreferenceController = use(UseOpenWifiPreferenceController.class);
+        mUseOpenWifiPreferenceController.setFragment(this);
     }
 
     @Override
@@ -102,8 +103,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
             mWifiWakeupPreferenceController.onActivityResult(requestCode, resultCode);
             return;
         }
-        if (requestCode == UseOpenWifiPreferenceController.REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY
-                && mUseOpenWifiPreferenceController != null) {
+        if (requestCode == UseOpenWifiPreferenceController.REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY) {
             mUseOpenWifiPreferenceController.onActivityResult(requestCode, resultCode);
             return;
         }
