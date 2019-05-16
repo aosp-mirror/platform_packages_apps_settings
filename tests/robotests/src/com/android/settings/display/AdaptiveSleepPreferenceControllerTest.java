@@ -133,10 +133,10 @@ public class AdaptiveSleepPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceable_returnsTrue() {
+    public void isSliceable_returnsFalse() {
         final AdaptiveSleepPreferenceController controller =
                 new AdaptiveSleepPreferenceController(mContext, "any_key");
-        assertThat(controller.isSliceable()).isTrue();
+        assertThat(controller.isSliceable()).isFalse();
     }
 
     @Test
