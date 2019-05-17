@@ -67,7 +67,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         QrCamera.ScannerCallback,
         WifiManager.ActionListener,
         WifiTracker.WifiListener {
-    private static final String TAG = "WifiDppQrCodeScannerFragment";
+    private static final String TAG = "WifiDppQrCodeScanner";
 
     /** Message sent to hide error message */
     private static final int MESSAGE_HIDE_ERROR_MESSAGE = 1;
