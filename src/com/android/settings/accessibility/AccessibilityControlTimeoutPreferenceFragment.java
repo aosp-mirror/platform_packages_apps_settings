@@ -98,7 +98,7 @@ public final class AccessibilityControlTimeoutPreferenceFragment extends Dashboa
 
             for (int i=0; i < timeoutKeys.length; i++) {
                 sControllers.add(new AccessibilityTimeoutController(
-                        context, lifecycle, timeoutKeys[i], TAG));
+                        context, lifecycle, timeoutKeys[i]));
             }
         }
         return sControllers;

@@ -45,8 +45,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityTimeoutControllerTest
         implements AccessibilityTimeoutController.OnChangeListener {
-    private static final String PREF_KEY = "accessibility_content_timeout_30secs";
-    private static String PREF_TITLE;
+    private static final String PREF_KEY = "accessibility_control_timeout_30secs";
 
     private AccessibilityTimeoutController mController;
 
@@ -62,15 +61,14 @@ public class AccessibilityTimeoutControllerTest
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new AccessibilityTimeoutController(mContext, mock(Lifecycle.class),
-                PREF_KEY, AccessibilityContentTimeoutPreferenceFragment.TAG);
+        mController = new AccessibilityTimeoutController(mContext, mock(Lifecycle.class), PREF_KEY);
         mController.setOnChangeListener(this);
         mContentResolver = mContext.getContentResolver();
-        PREF_TITLE = mContext.getResources().getString(R.string.accessibility_timeout_30secs);
+        String prefTitle = mContext.getResources().getString(R.string.accessibility_timeout_30secs);
 
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mMockPref);
         when(mMockPref.getKey()).thenReturn(PREF_KEY);
-        when(mMockPref.getTitle()).thenReturn(PREF_TITLE);
+        when(mMockPref.getTitle()).thenReturn(prefTitle);
         mController.displayPreference(mScreen);
     }
 
@@ -87,7 +85,7 @@ public class AccessibilityTimeoutControllerTest
     @Test
     public void updateState_notChecked() {
         Settings.Secure.putString(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, "0");
+                Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, "0");
 
         mController.updateState(mMockPref);
 
@@ -99,7 +97,7 @@ public class AccessibilityTimeoutControllerTest
     @Test
     public void updateState_checked() {
         Settings.Secure.putString(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, "30000");
+                Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, "30000");
 
         mController.updateState(mMockPref);
 
@@ -113,7 +111,7 @@ public class AccessibilityTimeoutControllerTest
         mController.onRadioButtonClicked(mMockPref);
 
         String accessibilityUiTimeoutValue = Settings.Secure.getString(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS);
+                Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS);
 
         assertThat(accessibilityUiTimeoutValue).isEqualTo("30000");
     }
