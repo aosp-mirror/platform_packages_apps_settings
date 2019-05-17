@@ -149,7 +149,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             final TextView title = mLayoutPreference.findViewById(R.id.entity_header_title);
             title.setText(mCachedDevice.getName());
             final TextView summary = mLayoutPreference.findViewById(R.id.entity_header_summary);
-            summary.setText(mCachedDevice.getConnectionSummary());
+            summary.setText(mCachedDevice.getConnectionSummary(true /* shortSummary */));
 
             if (!mCachedDevice.isConnected()) {
                 updateDisconnectLayout();
