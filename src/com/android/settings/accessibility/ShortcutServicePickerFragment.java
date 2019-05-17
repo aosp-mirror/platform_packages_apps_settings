@@ -15,8 +15,6 @@
  */
 package com.android.settings.accessibility;
 
-import static android.content.DialogInterface.BUTTON_POSITIVE;
-
 import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
 
@@ -25,7 +23,6 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -191,6 +188,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
                 ((ShortcutServicePickerFragment) fragment).onServiceConfirmed(
                         bundle.getString(EXTRA_KEY));
             }
+            dismiss();
         }
     }
 
