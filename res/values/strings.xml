@@ -927,7 +927,7 @@
     <!-- Title shown in face enrollment dialog [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_repeat_title">Center your face in the circle</string>
     <!-- Button text to skip enrollment of face [CHAR LIMIT=40] -->
-    <string name="security_settings_face_enroll_enrolling_skip">Do it later</string>
+    <string name="security_settings_face_enroll_enrolling_skip">Skip</string>
     <!-- Text shown when "Add face" button is disabled -->
     <string name="face_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> faces</string>
     <!-- Text shown when users has enrolled a maximum number of faces [CHAR LIMIT=NONE] -->
@@ -4817,7 +4817,7 @@
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
-    <string name="user_installed_services_category_title">Downloaded apps</string>
+    <string name="user_installed_services_category_title">Downloaded services</string>
     <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->
     <string name="experimental_category_title">Experimental</string>
     <!-- Title for feature flags dashboard where developers can turn on experimental features [CHAR LIMIT=50] -->
@@ -4893,12 +4893,10 @@
     <string name="accessibility_timeout_1min">1 minute</string>
     <!-- Option heading to leave the timeout requirement for accessibility users at 2 mins. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_2mins">2 minutes</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
-    <string name="accessibility_content_timeout_preference_title">Time to read</string>
+    <!-- Title for accessibility settings timeout item. [CHAR LIMIT=43] -->
+    <string name="accessibility_setting_item_control_timeout_title">Time to take action (Accessibility timeout)</string>
     <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
     <string name="accessibility_control_timeout_preference_title">Time to take action</string>
-    <!-- Descriptive text for accessibility preference to accessibility content timeout. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_content_timeout_preference_summary">Choose how long to show messages that you need to read, but are visible only temporarily.\n\nNot all apps support this setting.</string>
     <!-- Descriptive text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
     <string name="accessibility_control_timeout_preference_summary">Choose how long to show messages that ask you to take action, but are visible only temporarily.\n\nNot all apps support this setting.</string>
 
@@ -4923,7 +4921,7 @@
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
-    <string name="accessibility_service_master_switch_title">Use <xliff:g id="service" example="TalkBack">%1$s</xliff:g></string>
+    <string name="accessibility_service_master_switch_title">Use service</string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
@@ -5149,7 +5147,7 @@
     </string>
 
     <!-- Title for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_action_perform_title">View and perform actions</string>
+    <string name="accessibility_service_action_perform_title">View and platform actions</string>
 
     <!-- Description for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_action_perform_description">It can track your interactions
@@ -8968,12 +8966,6 @@
 
     <!--  Title for Default Phone app settings [CHAR LIMIT=30] -->
     <string name="default_phone_title">Phone app</string>
-
-    <!--
-     ~ STOPSHIP(b/110557011): Remove once the new UI is ready.
-     -->
-    <!-- Title for Roles settings [CHAR LIMIT=30] -->
-    <string name="roles_title">Roles</string>
 
     <!-- Label of default app for current setting [CHAR LIMIT=40] -->
     <string name="default_app">(Default)</string>

@@ -399,11 +399,11 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"अनुहार थपियो"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"अनुहार प्रमाणीकरण सेटअप गर्न ट्याप गर्नु…"</string>
     <string name="security_settings_face_preference_title" msgid="7074548721778680481">"अनुहार प्रमाणीकरण"</string>
-    <!-- no translation found for security_settings_face_enroll_education_title (2695443729648587731) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_education_title_unlock_disabled (4697363240703556987) -->
-    <skip />
+    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"फेस अनलक गर्ने सुविधा सेट अप गर्ने तरिका"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"फेस अनलक सेटअप गर्नुहोस्"</string>
+    <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"प्रमाणित गर्न आफ्नो अनुहार प्रयोग गर्नु…"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
+    <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"सुरु गर्नुहोस्"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"पहुँचसम्बन्धी सेटअप प्रयोग गर्नु"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -418,7 +418,7 @@
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"आफ्नो अनुहार वृतको बिचमा पार्नुहोस्"</string>
-    <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"यो कार्य पछि गर्नुहोस्‌"</string>
+    <string name="security_settings_face_enroll_enrolling_skip" msgid="5808832403353263368">"छाड्नुहोस्"</string>
     <string name="face_add_max" msgid="4408683751143942949">"तपाईं अधिकतम <xliff:g id="COUNT">%d</xliff:g> अनुहारहरू थप्न सक्नुहुन्छ"</string>
     <string name="face_intro_error_max" msgid="160022811747660581">"तपाईंले थप्न मिल्ने अधिकतम सङ्ख्या बराबरका अनुहारहरू थप्नुभएको छ"</string>
     <string name="face_intro_error_unknown" msgid="6367721696446677261">"थप अनुहारहरू थप्न सकिँदैन"</string>
@@ -1661,6 +1661,9 @@
     <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"<xliff:g id="OPERATOR">%1$s</xliff:g> को प्रावधानीकरणको कुनै ज्ञात वेबसाइट छैन"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"कृपया SIM कार्ड भित्र राखेर पुनः स्टार्ट गर्नुहोस्"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"कृपया इन्टरनेटसँग जोड्नुहोस्"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"हालका स्थान अनुरोधहरू"</string>
+    <string name="location_recent_location_requests_see_all" msgid="9063541547120162593">"सबै हेर्नुहोस्"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"स्थान सेवाहरू"</string>
     <string name="location_title" msgid="1029961368397484576">"मेरो स्थान"</string>
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"काम प्रोफाइलका लागि स्थान"</string>
     <string name="location_app_level_permissions" msgid="2777033567595680764">"अनुप्रयोगको अनुमति"</string>
@@ -2061,7 +2064,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"अडियो तथा स्क्रिनमा देखिने पाठ सन्देश"</string>
     <string name="display_category_title" msgid="685461049938269166">"प्रदर्शन"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"अन्तर्क्रियाका नियन्त्रणहरू"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"डाउनलोड गरिएका सेवाहरू"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"डाउनलोड गरिएका अनुप्रयोगहरू"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"प्रयोगात्मक"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"विशेष फ्ल्यागहरू"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2098,9 +2101,8 @@
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"३० सेकेन्ड"</string>
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"१ मिनेट"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"२ मिनेट"</string>
-    <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"पढ्ने समय"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"कारबाही गर्ने बेला भयो (पहुँचको समयावधि सकियो)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"कारबाही गर्ने समय"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2637322628166175371">"तपाईंले पढ्नु पर्ने तर अस्थायी रूपमा मात्र देखिने सन्देशहरू देखाइने समय छनौट गर्नुहोस्।\n\nयो सेटिङले सबै अनुप्रयोगहरूमा काम गर्दैन।"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"तपाईंलाई कारबाही गर्न लगाउने तर अस्थायी रूपमा मात्र देखिने सन्देशहरू देखाइने समय छनौट गर्नुहोस्।\n\nसबै अनुप्रयोगहरूले यो सेटिङ समर्थन गर्दैनन्।"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"छुनुहोस् र केहीबेर समाउनुहोस्"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"रंग इन्भर्सन"</string>
@@ -2112,7 +2114,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"सूचना आएको जनाउने कम्पन"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"कम्पनसहितको घन्टी"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"छोएर दिइने प्रतिक्रिया"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"सुविधा प्रयोग गर्नुहोस्"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"<xliff:g id="SERVICE">%1$s</xliff:g> प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"रङ सुधार गर्ने सुविधा प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"क्याप्सनहरू प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"जारी राख्नुहोस्"</string>
@@ -2194,8 +2196,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"सायन"</string>
     <string name="color_yellow" msgid="9112680561610873529">"पहेँलो"</string>
     <string name="color_magenta" msgid="5059212823607815549">"म्याजेन्टा"</string>
-    <!-- no translation found for enable_service_title (1374048678465697350) -->
-    <skip />
+    <string name="enable_service_title" msgid="1374048678465697350">"<xliff:g id="SERVICE">%1$s</xliff:g>लाई तपाईंको यन्त्रलाई पूर्ण नियन्त्रण गर्ने दिने हो?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> लाई आवश्यक:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"एपले अनुमति अनुरोधलाई अस्पष्ट मानिरहेको हुनाले, सेटिङहरूलले तपाईंको प्रतिक्रियालाई प्रमाणित गर्न सक्दैनन्।"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"यदि तपाईंले <xliff:g id="SERVICE">%1$s</xliff:g> खोल्नुभयो भने, आफ्नो उपकरणले डेटा गुप्तिकरण अभिवृद्धि गर्न स्क्रिन लक प्रयोग गर्ने छैन।"</string>
@@ -2204,27 +2205,17 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेवा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो PIN पुष्टि गर्न आवश्यक छ।"</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेबा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो पासवर्ड पुष्टि गर्न आवश्यक छ।"</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> ले यो यन्त्र पूर्ण रूपमा नियन्त्रण गर्ने अनुमति माग्दै छ। यो सेवाले स्क्रिनमा भएका जानकारी पढ्न तथा पहुँचसम्बन्धी आवश्यकता भएका प्रयोगकर्ताहरूका तर्फबाट कारबाही गर्न सक्छ। धेरैजसो अनुप्रयोगहरूका हकमा यो स्तरको नियन्त्रण उपयुक्त हुँदैन।"</string>
-    <!-- no translation found for accessibility_service_warning_description (5678294638592090340) -->
-    <skip />
-    <!-- no translation found for accessibility_service_screen_control_title (1262218781398117580) -->
-    <skip />
-    <!-- no translation found for accessibility_service_screen_control_description (5263900135083661468) -->
-    <skip />
-    <!-- no translation found for accessibility_service_action_perform_title (5228338448018587344) -->
-    <skip />
-    <!-- no translation found for accessibility_service_action_perform_description (2402904134246069476) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_allow (8427955451281232788) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_deny (4307331121783796869) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_stop (7861331860214808622) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (5006357240387387028) -->
-    <skip />
+    <string name="accessibility_service_warning_description" msgid="5678294638592090340">"तपाईंलाई पहुँच राख्न आवश्यक पर्ने कुरामा सहयोग गर्ने अनुप्रयोगहरूमाथि पूर्ण नियन्त्रण गर्नु उपयुक्त हुन्छ तर अधिकांश अनुप्रयोगहरूका हकमा यस्तो नियन्त्रण उपयुक्त हुँदैन।"</string>
+    <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"स्क्रिन हेर्नुहोस् र नियन्त्रण गर्नुहोस्"</string>
+    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"यसले स्क्रिनमा देखिने सबै सामग्री पढ्न सक्छ र अन्य अनुप्रयोगहरूमा उक्त सामग्री देखाउन सक्छ।"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"कारबाहीहरू हेर्नुहोस् र तिनमा कार्य गर्नुहोस्"</string>
+    <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"यसले कुनै अनुप्रयोग वा हार्डवेयर सेन्सरसँग तपाईंले गर्ने अन्तर्क्रियाको ट्र्याक गर्न सक्छ र तपाईंका तर्फबाट अनुप्रयोगहरूसँग अन्तर्क्रिया गर्न सक्छ।"</string>
+    <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"अनुमति दिनुहोस्"</string>
+    <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"इन्कार गर्नु⋯"</string>
+    <string name="accessibility_dialog_button_stop" msgid="7861331860214808622">"रोक्नुहोस्"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="5006357240387387028">"रद्द गर्नु⋯"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g>बन्द गर्नुहुन्छ?"</string>
-    <!-- no translation found for disable_service_message (4593387199926310801) -->
-    <skip />
+    <string name="disable_service_message" msgid="4593387199926310801">"<xliff:g id="STOP">%1$s</xliff:g> मा ट्याप गर्नुले <xliff:g id="SERVICE">%2$s</xliff:g> सुविधा बन्द गर्ने छ।"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"कुनै पनि सेवाहरू स्थापित छैनन्"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"कुनै पनि सेवा चयन गरिएको छैन"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"वर्णन प्रदान गरिएको छैन।"</string>
@@ -3006,6 +2997,8 @@
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (सिफारिस गरिएको)"</string>
     <string name="mms_message_title" msgid="6068098013612041440">"MMS सन्देश"</string>
     <string name="mms_message_summary" msgid="8408985719331988420">"मोबाइल डेटा निष्क्रिय हुँदा पठाउनुहोस् तथा प्राप्त गर्नुहोस्"</string>
+    <string name="data_during_calls_title" msgid="4476240693784306761">"कलहरूको अवधिमा मोबाइल डेटा"</string>
+    <string name="data_during_calls_summary" msgid="497978580819604521">"केवल कल गरेको अवधिमा मात्र यो SIM लाई डेटा इन्टरनेटका लागि प्रयोग गर्न दिनुहोस्"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"कार्य SIM"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"अनुप्रयोग र सामग्री पहुँच"</string>
     <string name="user_rename" msgid="8523499513614655279">"पुनःनामाकरण गर्नुहोस्"</string>
@@ -3355,7 +3348,7 @@
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"मौन सूचनाका आइकनहरू वस्तुस्थिति पट्टीमा देखाइँदैनन्"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"सूचनाको प्रतीक जनाउने थोप्लोहरूलाई अनुमति दिनुहोस्"</string>
     <string name="notification_bubbles_title" msgid="526545466417027926">"बबलहरू"</string>
-    <string name="notification_bubbles_summary" msgid="5269674863510678257">"तैरने सर्टकटहरूको प्रयोग गरी अनुप्रयोगका सामग्रीमाथि जुनसुकै ठाउँबाट द्रुत पहुँच राख्नुहोस्"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="5044678712656329427">"केही सूचनाहरू स्क्रिनमा बबलका रूपमा देखिन सक्छन्"</string>
     <string name="bubbles_feature_education" msgid="69923617148394578">"केही सूचनाहरू र अन्य सामग्री स्क्रिनमा बबलका रूपमा देखिन सक्छन्। कुनै बबल खोल्न यसमा ट्याप गर्नुहोस्। यसलाई खारेज गर्न यसलाई स्क्रिनका पुछारतिर ड्र्याग गर्नुहोस्।"</string>
     <string name="bubbles_app_toggle_title" msgid="9143702245165359360">"बबलहरू"</string>
     <string name="bubbles_app_toggle_summary" msgid="7714358008428342285">"<xliff:g id="APP_NAME">%1$s</xliff:g> लाई केही सूचनाहरू बबलका रूपमा देखाउन दिनुहोस्"</string>
@@ -3621,7 +3614,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"सक्रिय"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"निष्क्रिय"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"पर्दा पिन गर्दै"</string>
-    <string name="screen_pinning_description" msgid="1110847562111827766">"यो सेटिङ सक्रिय गर्दा, हालको स्क्रिनलाई तपाईंले अनपिन नगरुन्जेल दृश्य अवस्थामा राख्न स्क्रिन पिनिङ प्रयोग गर्न सक्नुहुन्छ।\n\nस्क्रिन पिनिङ सुविधा प्रयोग गर्न:\n\n१. स्क्रिन पिनिङ सक्रिय रहेको सुनिश्चित गर्ने\n\n२. अवलोकन खोल्ने\n\n३. स्क्रिनको सिरानमा रहेको अनुप्रयोग आइकनमा ट्याप गर्ने, त्यसपछि पिनमा ट्याप गर्ने"</string>
+    <string name="screen_pinning_description" msgid="1110847562111827766">"यो सेटिङ सक्रिय गर्दा, हालको स्क्रिनलाई तपाईंले अनपिन नगरुन्जेल दृश्य अवस्थामा राख्न स्क्रिन पिनिङ प्रयोग गर्न सक्नुहुन्छ।\n\nस्क्रिन पिनिङ सुविधा प्रयोग गर्न:\n\n१. स्क्रिन पिनिङ सक्रिय रहेको सुनिश्चित गर्नुहोस् \n\n२. ओभरभ्यू खोल्नुहोस्\n\n३. स्क्रिनको सिरानमा रहेको अनुप्रयोग आइकनमा ट्याप गरी  पिनमा ट्याप गर्नुहोस्"</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"पिन निकाल्नुअघि खोल्ने ढाँचा सोध्नुहोस्"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"पिन निकाल्नुअघि PIN सोध्नुहोस्"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"पिन निकाल्नुअघि पासवर्ड सोध्नुहोस्"</string>
@@ -3739,7 +3732,6 @@
     <string name="default_browser_title" msgid="8101772675085814670">"ब्राउजर अनुप्रयोग"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"कुनै पूर्वनिर्धारित ब्राउजर छैन"</string>
     <string name="default_phone_title" msgid="282005908059637350">"फोन अनुप्रयोग"</string>
-    <string name="roles_title" msgid="8739481762225637569">"भूमिकाहरू"</string>
     <string name="default_app" msgid="6864503001385843060">"(पूर्वनिर्धारित)"</string>
     <string name="system_app" msgid="9068313769550747372">"(प्रणाली)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(प्रणालीको पूर्वनिर्धारित)"</string>
@@ -4141,6 +4133,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"धेरै यन्त्रहरूमा जडान गरियो"</string>
     <string name="demo_mode" msgid="2798762752209330277">"प्रणालीको UI को प्रदर्शन मोड"</string>
     <string name="dark_ui_mode" msgid="3888371857083890543">"अँध्यारो विषयवस्तु"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"सक्रिय / ब्याट्री सेभर सक्रिय भएकाले अस्थायी रूपमा असक्षम पारिएको छ"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"ब्याट्री सेभरका कारण अस्थायी रूपमा सक्रिय गरिएको"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"समर्थन गरिएका अनुप्रयोगहरू पनि बदलिएर गाढा विषयवस्तुमा जाने छन्"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"बुझेँ"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"द्रुत सेटिङहरू सम्बन्धी विकासकर्ताका टाइलहरू"</string>
@@ -4182,9 +4176,16 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"क्यामेरा फ्लिप गर्ने"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"अझ छिटो सेल्फी लिनुहोस्‌"</string>
+    <string name="system_navigation_title" msgid="6797710220442338366">"प्रणालीको नेभिगेसन"</string>
+    <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"२ बटनमार्फत गरिने नेभिगेसन"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"अनुप्रयोगहरू बदल्न, गृह बटनमा माथि स्वाइप गर्नुहोस्। सबै अनुप्रयोगहरू हेर्न फेरि माथि स्वाइप गर्नुहोस्। कुनै पनि स्क्रिनबाट काम गर्छ। अब उप्रान्त तपाईंको स्क्रिनको तल्लो भागको दायाँमा परिदृश्य बटन हुने छैन।"</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"नयाँ गृह बटन प्रयास गर्नुहोस्‌"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"अनुप्रयोगहरू बदल्न नयाँ इसारा सक्रिय गर्नुहोस्‌"</string>
+    <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"इसाराले गरिने नेभिगेसन"</string>
+    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"गृहस्क्रिनमा जान स्क्रिनको फेदबाट माथितिर स्वाइप गर्नुहोस्। पछाडि जान स्क्रिनको बायाँ वा दायाँ कुनाबाट स्वाइप गर्नुहोस्। अनुप्रयोगहरू बदल्न आफ्नो स्क्रिनको फेदबाट माथितिर स्वाइप गर्न सुरु गरी छोड्नुअघि होल्ड गर्नुहोस्।"</string>
+    <string name="legacy_navigation_title" msgid="2635061924638361565">"३ बटनमार्फत गरिने नेभिगेसन"</string>
+    <string name="legacy_navigation_summary" msgid="8824432558082404832">"बटनहरूमार्फत गृहपृष्ठमा जाने, अनुप्रयोगहरू बदल्ने र पछाडि जाने सुविधामाथि पहुँच राख्न सकिन्छ।"</string>
+    <string name="keywords_system_navigation" msgid="5825645072714635357">"प्रणालीको नेभिगेसन, २ बटनमार्फत गरिने नेभिगेसन, ३ बटनमार्फत गरिने नेभिगेसन, इसाराले गरिने नेभिगेसन"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"फोनको जाँच गर्न डबल-ट्याप गर्नुहोस्"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"ट्याब्लेटको जाँच गर्न डबल-ट्याप गर्नुहोस्"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"यन्त्रको जाँच गर्न डबल-ट्याप गर्नुहोस्"</string>
@@ -4340,10 +4341,8 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"बाधा नपुर्‍याउनुहोस्‌ नामक सेवालाई अद्यावधिक गर्नुहोस्‌"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"केन्द्रित रहन सूचनाहरू पज गर्नुहोस्"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"यस यन्त्रमा यो सुविधा उपलब्ध छैन"</string>
-    <!-- no translation found for disabled_feature (3232554901854971743) -->
-    <skip />
-    <!-- no translation found for disabled_feature_reason_slow_down_phone (3557117039415422481) -->
-    <skip />
+    <string name="disabled_feature" msgid="3232554901854971743">"सुविधा उपलब्ध छैन"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"यो सुविधाले तपाईंको फोन ढिलो बनाउने हुनाले यसलाई निष्क्रिय पारिएको छ"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"पूर्ण GNSS मापनहरू बलपूर्वक लागू गर्नुहोस्"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"कुनै उपयोगिता अनुपात बिना नै सबै GNSS कन्स्टेलेसन तथा फ्रिक्वेन्सीहरूलाई ट्र्याक गर्नुहोस्"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"पृष्ठभूमिको क्रियाकलाप सुरु हुने अनुमति दिनुहोस्"</string>

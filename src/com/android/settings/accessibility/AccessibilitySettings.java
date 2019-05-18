@@ -132,8 +132,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference";
-    private static final String ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE =
-            "accessibility_content_timeout_preference_fragment";
     private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
             "accessibility_control_timeout_preference_fragment";
     private static final String DARK_UI_MODE_PREFERENCE =
@@ -727,8 +725,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     mToggleInversionPreference.getOrder() + 1);
             mToggleDisableAnimationsPreference.setOrder(
                     mToggleLargePointerIconPreference.getOrder() + 1);
-            findPreference(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE).setOrder(
-                    mToggleDisableAnimationsPreference.getOrder() + 1);
             mToggleInversionPreference.setSummary(R.string.summary_empty);
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
@@ -795,8 +791,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
 
         updateAccessibilityTimeoutSummary(getContentResolver(),
-                findPreference(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE));
-        updateAccessibilityTimeoutSummary(getContentResolver(),
                 findPreference(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE));
     }
 
@@ -806,14 +800,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         int[] timeoutValues = getResources().getIntArray(
                 R.array.accessibility_timeout_selector_values);
 
-        int timeoutValue = 0;
-        if (pref.getKey().equals(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE)) {
-            timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
-                    resolver, AccessibilityTimeoutController.CONTENT_TIMEOUT_SETTINGS_SECURE);
-        } else if (pref.getKey().equals(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE)) {
-            timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
+        int timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
                     resolver, AccessibilityTimeoutController.CONTROL_TIMEOUT_SETTINGS_SECURE);
-        }
 
         int idx = Ints.indexOf(timeoutValues, timeoutValue);
         pref.setSummary(timeoutSummarys[idx == -1 ? 0 : idx]);
