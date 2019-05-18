@@ -61,16 +61,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         void onSwitchChanged(Switch switchView, boolean isChecked);
     }
 
-    public interface LabelDelegate {
-        /**
-         * Called to create label and set the title with Accessibility
-         * service name to the textView of switchBar.
-         *
-         * @param isChecked  The checked state of switchView.
-         */
-        String createLabel(boolean isChecked);
-    }
-
     private static final int[] XML_ATTRIBUTES = {
             R.attr.switchBarMarginStart,
             R.attr.switchBarMarginEnd,
@@ -100,7 +90,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     private boolean mDisabledByAdmin;
     private EnforcedAdmin mEnforcedAdmin = null;
     private String mMetricsTag;
-    private LabelDelegate mLabelDelegate;
 
 
     public SwitchBar(Context context) {
@@ -189,11 +178,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     }
 
     public void setTextViewLabelAndBackground(boolean isChecked) {
-        if(mLabelDelegate != null) {
-            mLabel = mLabelDelegate.createLabel(isChecked);
-        } else {
-            mLabel = getResources().getString(isChecked ? mOnTextId : mOffTextId);
-        }
+        mLabel = getResources().getString(isChecked ? mOnTextId : mOffTextId);
         setBackgroundColor(isChecked ? mBackgroundActivatedColor : mBackgroundColor);
         updateText();
     }
@@ -397,10 +382,5 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         mSwitch.setOnCheckedChangeListener(ss.visible ? this : null);
 
         requestLayout();
-    }
-
-    public void setLabelDelegate(LabelDelegate labelDelegate) {
-        mLabelDelegate = labelDelegate;
-        setTextViewLabelAndBackground(isChecked());
     }
 }
