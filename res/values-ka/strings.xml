@@ -358,7 +358,7 @@
     <string name="zone_time_type_dst" msgid="8850494578766845276">"ზაფხულის/ზამთრის დრო"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"სტანდარტული დრო"</string>
     <string name="zone_menu_by_region" msgid="8370437123807764346">"რეგიონის მიხედვით არჩევა"</string>
-    <string name="zone_menu_by_offset" msgid="7161573994228041794">"მსოფლიო კოორდინირებული დროის წანაცვლებით არჩევა"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC  წანაცვლებით არჩევა"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"თარიღი"</string>
     <string name="time_picker_title" msgid="483460752287255019">"დრო"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"ავტომატურად დაბლოკვა"</string>
@@ -366,7 +366,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"დაუყოვნებლივ ძილის შემდეგ, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>-ის მიერ"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ძილის შემდეგ, გარდა <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>-ის მიერ განბლოკილ მდგომარეობაში დატოვებისას"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"მფლობელის ინფორმაციის დაბლოკვის ეკრანზე ჩვენება"</string>
-    <string name="owner_info_settings_title" msgid="5530285568897386122">"ეკრ. დაბლოკ. შეტყობ."</string>
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"შეტყობინება ჩაკეტილ ეკრანზე"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ვიჯეტების ჩართვა"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"გათიშულია ადმინისტრატორის მიერ"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"დაბლოკვის ვარიანტის ჩვენება"</string>
@@ -1066,7 +1066,7 @@
     <string name="accelerometer_title" msgid="7854608399547349157">"ეკრანის ავტოროტაცია"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"ფერები"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"ბუნებრივი"</string>
-    <string name="color_mode_option_boosted" msgid="8588223970257287524">"კონტრასტული"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"გაძლიერებული"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"ინტენსიური"</string>
     <string name="color_mode_option_automatic" msgid="7996505473528529568">"ადაპტაციური"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"მხოლოდ მკვეთრი ფერების გამოყენება"</string>
@@ -1581,7 +1581,7 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"ინფორმაცია უსაფრთხოების შესახებ"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"თქვენ არ გაქვთ ინტერნეტ კავშირი. ამ ინფორმაციის ახლავე სანახავად, გადადით %s-ზე ინტერნეტში ჩართული ნებისმიერი კომპიუტერიდან."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"იტვირთება…"</string>
-    <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"ეკრანის დაბლოკვის მეთოდის დაყენება"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"ეკრანის დაბლოკვის დაყენება"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"უსაფრთხოებისთვის დააყენეთ პაროლი"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"თითის ანაბეჭდის გამოსაყენებლად დააყენეთ პაროლი"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"თითის ანაბეჭდისთვის დააყენეთ ნიმუში"</string>
@@ -1627,7 +1627,7 @@
     <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"როცა დაასრულებთ აუშვით თითი"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"შეაერთეთ სულ მცირე <xliff:g id="NUMBER">%d</xliff:g> წერტილი. კიდევ სცადეთ:"</string>
     <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"ნიმუში შენახულია."</string>
-    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"დასადასტურებლად ხელახლა დახაზეთ ნიმუში:"</string>
+    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"დასადასტურებლად ხელახლა დახატეთ ნიმუში:"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"განბლოკვის თქვენი ახალი ნიმუში:"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"დადასტურება"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"ხელმეორედ აღწარმოება"</string>
@@ -1708,7 +1708,7 @@
     <string name="enable_compatibility" msgid="5806819252068617811">"აპის მასშტაბირება"</string>
     <string name="unknown" msgid="1592123443519355854">"უცნობი"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"სორტირება სახელის მიხედვით"</string>
-    <string name="sort_order_size" msgid="7024513286636502362">"დაახარისხე ზომის მიხედვით"</string>
+    <string name="sort_order_size" msgid="7024513286636502362">"სორტირება ზომის მიხედვით"</string>
     <string name="sort_order_recent_notification" msgid="6064103501358974282">"უახლესი"</string>
     <string name="sort_order_frequent_notification" msgid="1733204081305830670">"ყველაზე ხშირი"</string>
     <string name="show_running_services" msgid="5736278767975544570">"გაშვებული სერვის. ჩვენება"</string>
@@ -1736,7 +1736,7 @@
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD მეხსიერება."</string>
     <string name="recompute_size" msgid="7722567982831691718">"ზომის გადათვლა…"</string>
     <string name="clear_data_dlg_title" msgid="5605258400134511197">"წაიშალოს აპის მონაცემები?"</string>
-    <string name="clear_data_dlg_text" msgid="3951297329833822490">"აპლიკაციის მონაცემები, მათ შორის ყველა ფაილი, პარამეტრი, ანგარიში, მონაცემთა ბაზა და ა.შ. სამუდამოდ წაიშლება."</string>
+    <string name="clear_data_dlg_text" msgid="3951297329833822490">"აპის მონაცემები, მათ შორის ყველა ფაილი, პარამეტრი, ანგარიში, მონაცემთა ბაზა და ა.შ. სამუდამოდ წაიშლება."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"კარგი"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"გაუქმება"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
@@ -1887,7 +1887,7 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"სიტყვა:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"მალსახმობი:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"ენა:"</string>
-    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"სიტყვის დაწერა"</string>
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"აკრიფეთ სიტყვა"</string>
     <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"მალსახმობი (არასავალდ.)"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"სიტყვის შესწორება"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"რედაქტირება"</string>
@@ -2469,7 +2469,7 @@
     <string name="add_device_admin_msg" msgid="1501847129819382149">"გააქტიურდეს მოწყ-ის ადმინისტრატორის აპი?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"მოწყობილობის ადმინისტრატორის ამ აპის გააქტიურება"</string>
     <string name="device_admin_add_title" msgid="3140663753671809044">"მოწყობილობის ადმინისტრატორი"</string>
-    <string name="device_admin_warning" msgid="7482834776510188134">"ადმინისტრატორის ამ აპის გააქტიურების შემთხვევაში, <xliff:g id="APP_NAME">%1$s</xliff:g> აპი შეძლებს განახორციელოს შემდეგი ოპერაციები:"</string>
+    <string name="device_admin_warning" msgid="7482834776510188134">"ადმინისტრატორის ამ აპის გააქტიურების შემთხვევაში, <xliff:g id="APP_NAME">%1$s</xliff:g>ს აპი შეძლებს განახორციელოს შემდეგი ოპერაციები:"</string>
     <string name="device_admin_status" msgid="7234814785374977990">"ადმინისტრატორის აპი აქტიურია და საშუალებას აძლევს <xliff:g id="APP_NAME">%1$s</xliff:g> აპს, განახორციელოს შემდეგი ოპერაციები:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"გსურთ, პროფილის მმართველის აქტივაცია?"</string>
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"გაგრძელების შემთხვევაში, თქვენი მომხმარებელი მართული იქნება ადმინისტრატორის მიერ, რომელიც თქვენს პირად მონაცემებთან ერთად, დაკავშირებული მონაცემების შენახვასაც შეძლებს.\n\nთქვენს ადმინისტრატორს შეუძლია ამ მომხმარებელთან ასოცირებული პარამეტრების, წვდომის, აპებისა და მონაცემების (მათ შორის, ქსელის აქტივობისა და თქვენი მოწყობილობის მდებარეობის ინფორმაციის) მონიტორინგი და მართვა."</string>
@@ -2545,7 +2545,7 @@
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"მონაცემთა სინქრონიზაცია"</string>
     <string name="preference_change_password_title" msgid="8955581790270130056">"პაროლის შეცვლა"</string>
     <string name="header_account_settings" msgid="5382475087121880626">"ანგარიშის პარამეტრები"</string>
-    <string name="remove_account_label" msgid="5921986026504804119">"ანგარიშის წაშლა"</string>
+    <string name="remove_account_label" msgid="5921986026504804119">"ანგარიშის ამოშლა"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"ანგარიშის დამატება"</string>
     <string name="finish_button_label" msgid="481587707657751116">"დასრულება"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"გსურთ, ანგარიშის წაშლა?"</string>
@@ -2636,7 +2636,7 @@
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"ინტერნეტის მოხმარების ლიმიტის დაყენება"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"მონაცემთა გადაცემის გამოყენების შეზღუდვა"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"თქვენი ტაბლეტი მობილურ ინტერნეტს გამორთავს, როდესაც მითითებული ლიმიტი მიიღწევა.\n\nდაიცავით ზომიერი ლიმიტი, რადგან ინტერნეტის გამოყენებას თქვენი ტაბლეტი აღრიცხავს, რაც შეიძლება განსხვავდებოდეს ოპერატორის მიერ აღრიცხვისაგან."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"თქვენი ტელეფონი მობილურ ინტერნეტს გამორთავს, როდესაც მითითებული ლიმიტი მიიღწევა.\n\nდაიცავით ზომიერი ლიმიტი, რადგან ინტერნეტის გამოყენებას თქვენი ტელეფონი აღრიცხავს, რაც შეიძლება განსხვავდებოდეს ოპერატორის მიერ აღრიცხვისაგან."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"თქვენი ტელეფონი მობილურ ინტერნეტს გამორთავს, როდესაც მითითებული ლიმიტი მიიღწევა.\n\nრადგან ინტერნეტის გამოყენებას თქვენი ტელეფონი აღრიცხავს, რაც შეიძლება განსხვავდებოდეს ოპერატორის მიერ აღრიცხვისაგან, გირჩევთ დააყენოთ უფრო დაბალი ლიმიტი."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"შეიზღუდოს უკანა ფონის მონაცემები?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"თუ მობილური ინტერნეტის ფონურ გადაცემას შეზღუდავთ, ზოგიერთი აპი და სერვისი არ იმუშავებს, სანამ არ დაუკავშირდებით Wi‑Fi ქსელს."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"თუ მობილური ინტერნეტის ფონურ გადაცემას შეზღუდავთ, ზოგიერთი აპი და სერვისი არ იმუშავებს, სანამ არ დაუკავშირდებით Wi‑Fi ქსელს.\n\nამ პარამეტრს ზეგავლენა აქვს მოცემული ტაბლეტის ყველა მომხმარებელზე."</string>
@@ -3116,7 +3116,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"ეკრანზე შეტყობინებათა გამოტანის აკრძალვა"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"სტატუსის ზოლის ხატულების დამალვა"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"შეტყობინებათა ნიშნულების დამალვა"</string>
-    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"არ მოხდეს შეტყობინებების გამო გამოღვიძება"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"შეტყობინებებმა არ გააღვიძოს"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"შეტყობინებათა სიიდან დამალვა"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"არასოდეს"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"გამორთული ეკრანისას"</string>
@@ -3327,7 +3327,7 @@
     <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"სადაც პასუხი არის"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"დიახ, შესაძლოა, ან პასუხგაუცემელი"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"დიახ ან შეიძლება"</string>
-    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"კი"</string>
+    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"დიახ"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"წესი ვერ მოიძებნა."</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"ჩართული / <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>

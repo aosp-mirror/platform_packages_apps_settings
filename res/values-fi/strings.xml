@@ -353,7 +353,7 @@
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> alkaa <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="4192803402331390389">"Käytössä on <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> alkaa seuraavana päivänä: <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"Käytössä on <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> alkaa <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Käytössä on <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Ei kesäaikaa."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Kesäaika"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Normaaliaika"</string>
@@ -1585,7 +1585,7 @@
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Aseta salasana tietoturvan parantamiseksi."</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Sormenjälki: aseta salasana"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Sormenjälki: aseta kuvio"</string>
-    <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"Aseta PIN-koodi tietoturvan parantamiseksi."</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"Määritä PIN-koodi tietoturvan parantamiseksi."</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Sormenjälki: aseta PIN-koodi"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"Aseta kuvio tietoturvan parantamiseksi."</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Anna salasana uudelleen"</string>
@@ -1968,7 +1968,7 @@
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Viiveajoitus"</string>
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Jos käytät hiirtä, voit asettaa osoittimen klikkaamaan automaattisesti, kun se on ollut paikoillaan tietyn aikaa."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Viive ennen klikkausta"</string>
-    <string name="accessibility_vibration_settings_title" msgid="3453277326300320803">"Värähtely"</string>
+    <string name="accessibility_vibration_settings_title" msgid="3453277326300320803">"Värinä"</string>
     <string name="accessibility_notification_vibration_title" msgid="660829933960942244">"Puhelujen ja ilmoitusten värinä"</string>
     <string name="accessibility_touch_vibration_title" msgid="7931823772673770492">"Kosketusvärinä"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Käytä palvelua"</string>
@@ -2441,7 +2441,7 @@
     <string name="usage_access_title" msgid="332333405495457839">"Sovellukset, joilla käyttölupa"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Hätäpuhelun äänimerkki"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Aseta toiminta hätäpuhelun tapauksessa"</string>
-    <string name="privacy_settings_title" msgid="2978878794187459190">"Varmuuskopioi"</string>
+    <string name="privacy_settings_title" msgid="2978878794187459190">"Varmuuskopiointi"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Varmuuskopiointi &amp; palautus"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Henkilötiedot"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Tietojen varmuuskopiointi"</string>
@@ -2549,8 +2549,8 @@
     <string name="header_add_an_account" msgid="756108499532023798">"Lisää tili"</string>
     <string name="finish_button_label" msgid="481587707657751116">"Valmis"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Poistetaanko tili?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Poistamalla tämän tilin poistat kaikki sen viestit, kontaktit ja muut tiedot tablet-laitteesta."</string>
-    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Poistamalla tämän tilin poistat kaikki sen viestit, kontaktit ja muut tiedot puhelimesta."</string>
+    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Poistamalla tämän tilin poistat kaikki sen viestit, yhteystiedot ja muut tiedot tabletista."</string>
+    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Poistamalla tämän tilin poistat kaikki sen viestit, yhteystiedot ja muut tiedot puhelimesta."</string>
     <string name="really_remove_account_message" product="device" msgid="7507474724882080166">"Poistamalla tämän tilin poistat kaikki sen viestit, yhteystiedot ja muut tiedot laitteelta."</string>
     <string name="remove_account_failed" msgid="3901397272647112455">"Järjestelmänvalvoja ei salli tätä muutosta."</string>
     <string name="cant_sync_dialog_title" msgid="2777238588398046285">"Manuaalinen synkronointi epäonnistui"</string>
@@ -2574,7 +2574,7 @@
     <string name="data_usage_app" msgid="4970478397515423303">"Sovellusten käyttötiedot"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"SOVELLUSTIEDOT"</string>
     <string name="data_usage_cellular_data" msgid="9168928285122125137">"Mobiilidata"</string>
-    <string name="data_usage_data_limit" msgid="1193930999713192703">"Aseta tiedonsiirtoraja"</string>
+    <string name="data_usage_data_limit" msgid="1193930999713192703">"Aseta datankäyttöraja"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Tiedonsiirtojakso"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"Sovellusten käyttötiedot"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Verkkoyhteys roaming-tilassa"</string>
@@ -2601,8 +2601,8 @@
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"rajoitettu"</string>
     <string name="data_usage_disable_mobile" msgid="8656552431969276305">"Poistetaanko mobiilidata käytöstä?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Aseta mobiilitiedonsiirtoraja"</string>
-    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Aseta 4G-tiedonsiirtoraja"</string>
-    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Aseta 2G-3G-tiedonsiirtoraja"</string>
+    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Aseta 4G-datankäyttöraja"</string>
+    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Aseta 2G-3G-datankäyttöraja"</string>
     <string name="data_usage_disable_wifi_limit" msgid="1394901415264660888">"Aseta Wi-Fi-tiedons.raja"</string>
     <string name="data_usage_tab_wifi" msgid="481146038146585749">"Wi-Fi"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"Ethernet"</string>
@@ -2632,11 +2632,11 @@
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Käyttöjakson nollauspäivä"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Kuukauden päivä:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Aseta"</string>
-    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Aseta tiedonsiirtovaroitus"</string>
-    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Aseta tiedonsiirtoraja"</string>
-    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Tiedonsiirron rajoittaminen"</string>
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Aseta datankäyttövaroitus"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Aseta datankäyttöraja"</string>
+    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Datan käytön rajoittaminen"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Tabletin mobiilidata poistetaan käytöstä, kun määritetty raja saavutetaan.\n\nTabletti mittaa tiedonsiirron. Operaattorisi voi kuitenkin käyttää eri mittaustapaa, joten suosittelemme määrittämään rajan todellista ylärajaa alemmaksi."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Puhelimen mobiilidata poistetaan käytöstä, kun määritetty raja saavutetaan.\n\nPuhelin mittaa tiedonsiirron. Operaattorisi voi kuitenkin käyttää eri mittaustapaa, joten suosittelemme määrittämään rajan todellista ylärajaa alemmaksi."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Puhelimen mobiilidata poistetaan käytöstä, kun määritetty raja saavutetaan.\n\nPuhelin mittaa datan käytön. Operaattorisi voi kuitenkin käyttää eri mittaustapaa, joten suosittelemme määrittämään rajan todellista ylärajaa alemmaksi."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Rajoitetaanko taustatiedonsiirtoa?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"Jos rajoitat taustalla tapahtuvaa mobiilitiedonsiirtoa, osa sovelluksista ja palveluista toimii vain kun käytät Wi‑Fi-yhteyttä."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Jos rajoitat taustalla tapahtuvaa mobiilitiedonsiirtoa, osa sovelluksista ja palveluista toimii vain kun käytät Wi‑Fi-yhteyttä.\n\nAsetus vaikuttaa tämän tabletin kaikkiin käyttäjiin."</string>
@@ -2790,7 +2790,7 @@
     <string name="user_add_user_message_long" msgid="6768718238082929201">"Voit jakaa tämän laitteen muiden kanssa luomalla lisää käyttäjiä. Kullakin käyttäjällä on oma tilansa, jota he voivat muokata esimerkiksi omilla sovelluksilla ja taustakuvilla. Käyttäjät voivat myös muokata laiteasetuksia, kuten Wi‑Fi-asetuksia, jotka vaikuttavat laitteen kaikkiin käyttäjiin.\n\nKun lisäät uuden käyttäjän, hänen tulee määrittää oman tilansa asetukset.\n\nKaikki käyttäjät voivat päivittää muiden käyttäjien sovelluksia. Esteettömyysominaisuuksia tai ‑palveluita ei välttämättä siirretä uudelle käyttäjälle."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Kun lisäät uuden käyttäjän, hänen tulee määrittää oman tilansa asetukset.\n\nKaikki käyttäjät voivat päivittää sovelluksia muille käyttäjille."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Määritetäänkö käyttäjän asetukset nyt?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Varmista, että käyttäjä voi vastaanottaa laitteen ja määrittää oman tilansa"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Varmista, että käyttäjä voi vastaanottaa laitteen ja määrittää oman tilansa."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Määritetäänkö profiilin asetukset nyt?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Määritä nyt"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ei nyt"</string>
@@ -3096,10 +3096,10 @@
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"Kun älä häiritse ‑tila on käytössä"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Ilmoitukset"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="3690261619682396872">"Ei ilmoitusääniä"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"Näet ilmoituksia näytöllä"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"Näet ilmoituksia näytöllä."</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Puhelin ei anna äänimerkkiä eikä värise ilmoituksen saapuessa."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"Ei ilmoitusgrafiikoita tai ‑ääntä"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"Et näe tai kuule ilmoituksia"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"Et näe tai kuule ilmoituksia."</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"Kun älä häiritse ‑tila on käytössä, et näe puhelimen uusia tai nykyisiä ilmoituksia tai saa niistä äänimerkkiä tai värinää. Niitä ei näytetä, kun pyyhkäiset näytön ylälaidasta alaspäin.\n\nTärkeät puhelimen perustoimintojen ja ‑tilan ilmoitukset näytetään silti."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Oma"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Ota oma asetus käyttöön"</string>
@@ -3195,9 +3195,9 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Vilkuta valoa"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Lukitusnäytöllä"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kun työprofiili on lukittu"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Näytä ilmoitusten koko sisältö"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Näytä ilmoitusten koko sisältö."</string>
     <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Piilota arkaluontoinen sisältö"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Älä näytä ilmoituksia lainkaan"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Älä näytä ilmoituksia lainkaan."</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Miten haluat ilmoitusten näkyvän, kun laite on lukittu?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Ilmoitukset"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Näytä kaikki työilmoitussisältö"</string>
@@ -3352,8 +3352,8 @@
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Viestit"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"Osa viesteistä"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Keneltä tahansa"</string>
-    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Vain kontakteilta"</string>
-    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Vain tähdellä merkityiltä kontakteilta"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Vain yhteystiedoilta"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Vain tähdellä merkityiltä yhteystiedoilta"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"Tähdellä merkityiltä yhteyshenkilöiltä ja toistuvilta soittajilta"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"Yhteyshenkilöiltä ja toistuvilta soittajilta"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Vain toistuvilta soittajilta"</string>
@@ -3423,7 +3423,7 @@
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Kyllä"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Ei"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Rajoitettu"</string>
-    <string name="restricted_false_label" msgid="3279282180297058755">"Voi käyttää akkua taustalla"</string>
+    <string name="restricted_false_label" msgid="3279282180297058755">"Akun käyttö taustalla sallittu"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Vaaditaanko PIN-koodi?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Vaaditaanko kuvio?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Vaaditaanko salasana?"</string>
@@ -3607,9 +3607,9 @@
     <string name="background_check_pref" msgid="7550258400138010979">"Taustatarkistus"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Täydet taustakäyttöoikeudet"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Käytä näytön tekstiä"</string>
-    <string name="assist_access_context_summary" msgid="1991421283142279560">"Salli avustajasovelluksen käsitellä näytön sisältöä tekstinä"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"Salli avustajasovelluksen käsitellä näytön sisältöä tekstinä."</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Käytä kuvakaappausta"</string>
-    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Salli avustajasovelluksen käsitellä näytön kuvaa"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Salli avustajasovelluksen käsitellä näytön kuvaa."</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Näytön välkytys"</string>
     <string name="assist_flash_summary" msgid="9160668468824099262">"Välkytä näytön reunoja, kun avustajasovellus käyttää näytöllä tai kuvakaappauksessa näkyvää tekstiä."</string>
     <string name="assist_footer" msgid="1982791172085896864">"Avustajasovellukset voivat auttaa sinua näytöllä näkyvien tietojen perusteella. Jotkin sovellukset tukevat myös käynnistysohjelma- ja äänisyötepalveluja, joten ne voivat tarjota sinulle integroitua apua."</string>
@@ -3633,7 +3633,7 @@
     </plurals>
     <string name="running_frequency" msgid="6622624669948277693">"Toistuvuus"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Enimmäiskäyttö"</string>
-    <string name="no_data_usage" msgid="9131454024293628063">"Tietoja ei käytetty."</string>
+    <string name="no_data_usage" msgid="9131454024293628063">"Dataa ei käytetty"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Myönnetäänkö Älä häiritse -tilan käyttöoikeus sovellukselle <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Sovellus voi ottaa Älä häiritse -tilan käyttöön tai poistaa sen käytöstä sekä muokata siihen liittyviä asetuksia."</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"Tämän täytyy olla käytössä, sillä ilmoitusten käyttöoikeus on myönnetty."</string>
@@ -3741,7 +3741,7 @@
     <string name="condition_zen_title" msgid="2897779738211625">"Älä häiritse ‑tila on käytössä"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"Virransäästö on päällä"</string>
     <string name="condition_battery_summary" msgid="507347940746895275">"Virransäästö poistaa joitakin laitteen ominaisuuksia käytöstä ja rajoittaa sovelluksia"</string>
-    <string name="condition_cellular_title" msgid="1327317003797575735">"Mobiilidata on poissa käytöstä"</string>
+    <string name="condition_cellular_title" msgid="1327317003797575735">"Mobiilidata pois käytöstä"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Voit muodostaa yhteyden internetiin vain Wi-Fin kautta."</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"Data Saver on käytössä"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Taustatiedonsiirto on käytettävissä vain Wi-Fi-yhteyden kautta. Tämä voi vaikuttaa joidenkin sovellusten tai palvelujen toimintaan, kun et käytä Wi-Fi-yhteyttä."</string>
@@ -3757,7 +3757,7 @@
     <string name="condition_device_vibrate_summary" product="default" msgid="5877034997839162763">"Puhelin värisee, kun puhelu tai ilmoitus saapuu"</string>
     <string name="night_display_suggestion_title" msgid="6602129097059325291">"Määritä Yövalon aikataulu"</string>
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"Muuta näytön väriä automaattisesti iltaisin"</string>
-    <string name="condition_night_display_title" msgid="5599814941976856183">"Yövalo otettiin käyttöön."</string>
+    <string name="condition_night_display_title" msgid="5599814941976856183">"Yövalo käytössä"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"Näyttö on keltasävyinen. Tämä voi auttaa sinua nukahtamaan."</string>
     <string name="suggestions_title_v2" msgid="5601181602924147569">"Sinulle ehdotetut"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Ehdotukset"</string>
@@ -3790,7 +3790,7 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> Ethernet-dataa"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Datavaroitus <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Datavaroitus <xliff:g id="ID_1">%1$s</xliff:g> / Datankäyttöraja <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="billing_cycle" msgid="6614597736285325497">"Datankäytön varoitus ja raja"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Datavaroitus ja raja"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Sovellustietojen käyttösykli"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Datavaroitus <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Dataraja <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -3806,7 +3806,7 @@
     <string name="set_data_warning" msgid="6115364758236594593">"Aseta datankäyttövaroitus"</string>
     <string name="data_warning" msgid="209133958008062117">"Datavaroitus"</string>
     <string name="data_warning_footnote" msgid="776341964125603711">"Datavaroitus ja dataraja perustuvat laitteesi mittauksiin. Operaattorin mittaukset saattavat erota näistä."</string>
-    <string name="set_data_limit" msgid="2901526323210516923">"Aseta tiedonsiirtoraja"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"Aseta datankäyttöraja"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datankäyttöraja"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> käytetty <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Määritä"</string>
@@ -3959,7 +3959,7 @@
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tarkista ilmoitukset kaksoisnapauttamalla tabletin näyttöä"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tarkista ilmoitukset kaksoisnapauttamalla laitteen näyttöä"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"Kaksoisnapauta näyttöä, niin näet ajan, ilmoituskuvakkeet ja muita tietoja."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Tarkista ilmoitukset nostamalla puhelimesi"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Tarkista nostamalla"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Tarkista ilmoitukset nostamalla tablettisi"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Tarkista ilmoitukset nostamalla laitteesi"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Ota puhelin käteesi, niin näet ajan, ilmoituskuvakkeet ja muita tietoja."</string>
