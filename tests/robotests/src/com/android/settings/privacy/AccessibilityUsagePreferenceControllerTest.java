@@ -64,16 +64,6 @@ public class AccessibilityUsagePreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_permissionHubNotSet_shouldReturnUnsupported() {
-        mAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
-        AccessibilityUsagePreferenceController controller =
-                new AccessibilityUsagePreferenceController(mContext, "test_key");
-
-        // We have not yet set the property to show the Permissions Hub.
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
     public void getAvailabilityStatus_noEnabledServices_shouldReturnUnsupported() {
         DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
                 Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
@@ -85,9 +75,9 @@ public class AccessibilityUsagePreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_enabledServices_shouldReturnAvailableUnsearchable() {
+    public void getAvailabilityStatus_enabledServices_shouldReturnAvailable() {
         DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
-                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "false", true);
         mAccessibilityManager.setEnabledAccessibilityServiceList(
                 new ArrayList<>(Arrays.asList(new AccessibilityServiceInfo())));
         AccessibilityUsagePreferenceController controller =

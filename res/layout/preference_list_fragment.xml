@@ -27,7 +27,9 @@
     <FrameLayout android:id="@+id/pinned_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:background="?android:attr/windowBackground"
+        android:elevation="1dp"
+        android:visibility="gone"/>
 
     <FrameLayout
         android:id="@android:id/list_container"

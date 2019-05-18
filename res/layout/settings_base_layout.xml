@@ -19,6 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
     <Toolbar
         android:id="@+id/action_bar"
@@ -30,6 +31,5 @@
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:background="?android:attr/windowBackground" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -77,12 +77,6 @@
             android:key="toggle_disable_animations"
             android:title="@string/accessibility_disable_animations" />
 
-        <Preference
-            android:fragment="com.android.settings.accessibility.AccessibilityContentTimeoutPreferenceFragment"
-            android:key="accessibility_content_timeout_preference_fragment"
-            android:title="@string/accessibility_content_timeout_preference_title"
-            android:persistent="false" />
-
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -115,7 +109,7 @@
         <Preference
             android:fragment="com.android.settings.accessibility.AccessibilityControlTimeoutPreferenceFragment"
             android:key="accessibility_control_timeout_preference_fragment"
-            android:title="@string/accessibility_control_timeout_preference_title"
+            android:title="@string/accessibility_setting_item_control_timeout_title"
             android:persistent="false" />
 
         <Preference

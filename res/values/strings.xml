@@ -890,6 +890,8 @@
     <string name="security_settings_face_preference_title">Face authentication</string>
     <!-- Introduction title shown in face enrollment education screen [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_education_title">How to set up Face unlock</string>
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMI=40]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Set up Face unlock</string>
     <!-- Introduction title shown in face enrollment education screen to show the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
     <string name="security_settings_face_enroll_education_title_unlock_disabled">Use your face to authenticate</string>
     <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
@@ -917,6 +919,8 @@
     <!-- Introduction detail message shown in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_message_setup">Use your face to unlock your phone, authorize purchases, or sign in to apps</string>
     <!-- Introduction message shown in face enrollment that provides extra detail. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_footer_part_0"></string>
+    <!-- Introduction message shown in face enrollment that provides extra detail. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_footer_part_1"></string>
     <!-- Introduction message shown in face enrollment that provides extra detail. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_footer_part_2"></string>
@@ -925,7 +929,7 @@
     <!-- Title shown in face enrollment dialog [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_repeat_title">Center your face in the circle</string>
     <!-- Button text to skip enrollment of face [CHAR LIMIT=40] -->
-    <string name="security_settings_face_enroll_enrolling_skip">Do it later</string>
+    <string name="security_settings_face_enroll_enrolling_skip">Skip</string>
     <!-- Text shown when "Add face" button is disabled -->
     <string name="face_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> faces</string>
     <!-- Text shown when users has enrolled a maximum number of faces [CHAR LIMIT=NONE] -->
@@ -965,7 +969,7 @@
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up new face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Use Face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, your child or an identical sibling.</string>
+    <string name="security_settings_face_settings_footer">Use Face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
@@ -4891,12 +4895,10 @@
     <string name="accessibility_timeout_1min">1 minute</string>
     <!-- Option heading to leave the timeout requirement for accessibility users at 2 mins. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_2mins">2 minutes</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
-    <string name="accessibility_content_timeout_preference_title">Time to read</string>
+    <!-- Title for accessibility settings timeout item. [CHAR LIMIT=43] -->
+    <string name="accessibility_setting_item_control_timeout_title">Time to take action (Accessibility timeout)</string>
     <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
     <string name="accessibility_control_timeout_preference_title">Time to take action</string>
-    <!-- Descriptive text for accessibility preference to accessibility content timeout. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_content_timeout_preference_summary">Choose how long to show messages that you need to read, but are visible only temporarily.\n\nNot all apps support this setting.</string>
     <!-- Descriptive text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
     <string name="accessibility_control_timeout_preference_summary">Choose how long to show messages that ask you to take action, but are visible only temporarily.\n\nNot all apps support this setting.</string>
 
@@ -8967,12 +8969,6 @@
     <!--  Title for Default Phone app settings [CHAR LIMIT=30] -->
     <string name="default_phone_title">Phone app</string>
 
-    <!--
-     ~ STOPSHIP(b/110557011): Remove once the new UI is ready.
-     -->
-    <!-- Title for Roles settings [CHAR LIMIT=30] -->
-    <string name="roles_title">Roles</string>
-
     <!-- Label of default app for current setting [CHAR LIMIT=40] -->
     <string name="default_app">(Default)</string>
 
@@ -10055,6 +10051,12 @@
 
     <!-- [CHAR LIMIT=60] Name of setting that changes the UI to dark -->
     <string name="dark_ui_mode">Dark Theme</string>
+
+    <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is still on-->
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on">On / Temporarily disabled due to Battery Saver</string>
+
+    <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is off-->
+    <string name="dark_ui_mode_disabled_summary_dark_theme_off">Temporarily turned on due to Battery Saver</string>
 
     <!-- [CHAR_LIMIT=NONE] Summary that is shown in the footer when dark mode is selected -->
     <string name="dark_ui_settings_dark_summary">Supported apps will also switch to dark theme</string>
