@@ -128,6 +128,8 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
             // Update vibration intensity setting
             Settings.System.putInt(getContext().getContentResolver(),
                     getVibrationIntensitySetting(), candidate.getIntensity());
+        } else {
+            playVibrationPreview();
         }
     }
 
