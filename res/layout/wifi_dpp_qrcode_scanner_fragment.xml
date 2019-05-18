@@ -45,7 +45,8 @@
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:clipChildren="true">
                 <TextureView
                     android:id="@+id/preview_view"
                     android:layout_width="match_parent"
