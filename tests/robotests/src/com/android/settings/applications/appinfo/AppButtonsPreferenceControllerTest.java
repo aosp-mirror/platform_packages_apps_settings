@@ -46,6 +46,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import android.os.UserManager;
+import android.util.ArraySet;
 import android.view.View;
 
 import com.android.settings.R;
@@ -58,6 +59,8 @@ import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
+import java.util.Set;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,6 +70,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
@@ -149,6 +156,11 @@ public class AppButtonsPreferenceControllerTest {
         doAnswer(callable).when(mFragment).startActivityForResult(captor.capture(), anyInt());
     }
 
+    @After
+    public void tearDown() {
+        ShadowAppUtils.reset();
+    }
+
     @Test
     public void retrieveAppEntry_hasAppEntry_notNull()
             throws PackageManager.NameNotFoundException {
@@ -212,15 +224,9 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
+    @Config(shadows = ShadowAppUtils.class)
     public void isAvailable_nonInstantApp() {
         mController.mAppEntry = mAppEntry;
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                new InstantAppDataProvider() {
-                    @Override
-                    public boolean isInstantApp(ApplicationInfo info) {
-                        return false;
-                    }
-                });
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -436,6 +442,14 @@ public class AppButtonsPreferenceControllerTest {
         // Should not crash in this method
     }
 
+    @Test
+    @Config(shadows = ShadowAppUtils.class)
+    public void getAvailabilityStatus_systemModule() {
+        ShadowAppUtils.addHiddenModule(mController.mPackageName);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                AppButtonsPreferenceController.DISABLED_FOR_USER);
+    }
+
     /**
      * The test fragment which implements
      * {@link ButtonActionDialogFragment.AppButtonsDialogListener}
@@ -476,5 +490,30 @@ public class AppButtonsPreferenceControllerTest {
                 0 /* userId */,
                 priority,
                 false /* isStatic */);
+    }
+
+    @Implements(AppUtils.class)
+    public static class ShadowAppUtils {
+
+        public static Set<String> sSystemModules = new ArraySet<>();
+
+        @Resetter
+        public static void reset() {
+            sSystemModules.clear();
+        }
+
+        public static void addHiddenModule(String pkg) {
+            sSystemModules.add(pkg);
+        }
+
+        @Implementation
+        protected static boolean isInstant(ApplicationInfo info) {
+            return false;
+        }
+
+        @Implementation
+        protected static boolean isSystemModule(Context context, String packageName) {
+            return sSystemModules.contains(packageName);
+        }
     }
 }
