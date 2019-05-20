@@ -115,7 +115,7 @@ public class AllowBackgroundActivityStartsPreferenceControllerTest {
     public void onDeveloperOptionsSwitchDisabled_noDefault_shouldResetPreference() {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        verify(mPreference).setChecked(true);
+        verify(mPreference).setChecked(false);
         verify(mPreference).setEnabled(false);
 
         assertThat(getModeFroMSettings()).isEqualTo(-1);
