@@ -55,6 +55,8 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -450,16 +452,10 @@ public class BatteryUtils {
                 SystemClock.elapsedRealtime());
         final BatteryStats stats = statsHelper.getStats();
         BatteryInfo batteryInfo;
-        Estimate estimate = null;
-        // Get enhanced prediction if available
-        if (mPowerUsageFeatureProvider != null &&
-                mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(mContext)) {
-            estimate = mPowerUsageFeatureProvider.getEnhancedBatteryPrediction(mContext);
-        }
+        Estimate estimate = getEnhancedEstimate();
 
-        if (estimate != null) {
-            Estimate.storeCachedEstimate(mContext, estimate);
-        } else {
+        // couldn't get estimate from cache or provider, use fallback
+        if (estimate == null) {
             estimate = new Estimate(
                     PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
                     false /* isBasedOnUsage */,
@@ -472,6 +468,23 @@ public class BatteryUtils {
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 
         return batteryInfo;
+    }
+
+    @VisibleForTesting
+    Estimate getEnhancedEstimate() {
+        Estimate estimate = null;
+        // Get enhanced prediction if available
+        if (Duration.between(Estimate.getLastCacheUpdateTime(mContext), Instant.now())
+                .compareTo(Duration.ofSeconds(10)) < 0) {
+            estimate = Estimate.getCachedEstimateIfAvailable(mContext);
+        } else if (mPowerUsageFeatureProvider != null &&
+                mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(mContext)) {
+            estimate = mPowerUsageFeatureProvider.getEnhancedBatteryPrediction(mContext);
+            if (estimate != null) {
+                Estimate.storeCachedEstimate(mContext, estimate);
+            }
+        }
+        return estimate;
     }
 
     /**
