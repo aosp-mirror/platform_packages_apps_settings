@@ -1159,7 +1159,8 @@ public class ApnEditor extends SettingsPreferenceFragment
                 // add APN type if it is not read-only and is not wild-cardable
                 if (!readOnlyApnTypes.contains(apnType)
                         && !apnType.equals(PhoneConstants.APN_TYPE_IA)
-                        && !apnType.equals(PhoneConstants.APN_TYPE_EMERGENCY)) {
+                        && !apnType.equals(PhoneConstants.APN_TYPE_EMERGENCY)
+                        && !apnType.equals(PhoneConstants.APN_TYPE_MCX)) {
                     if (first) {
                         first = false;
                     } else {
