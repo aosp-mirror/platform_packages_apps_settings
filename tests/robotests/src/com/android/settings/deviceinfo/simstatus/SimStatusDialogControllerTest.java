@@ -121,8 +121,8 @@ public class SimStatusDialogControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new SimStatusDialogController(mDialog, mLifecycle, 0 /* phone id */));
         doReturn(mServiceState).when(mController).getCurrentServiceState();
-        doReturn(0).when(mController).getDbm(any());
-        doReturn(0).when(mController).getAsuLevel(any());
+        doReturn(0).when(mSignalStrength).getDbm();
+        doReturn(0).when(mSignalStrength).getAsuLevel();
         doReturn(mPhoneStateListener).when(mController).getPhoneStateListener();
         doReturn("").when(mController).getPhoneNumber();
         doReturn(mSignalStrength).when(mController).getSignalStrength();
@@ -136,6 +136,9 @@ public class SimStatusDialogControllerTest {
         ReflectionHelpers.setField(mController, "mEuiccManager", mEuiccManager);
         ReflectionHelpers.setField(mController, "mSubscriptionManager", mSubscriptionManager);
         when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(mPersistableBundle);
+        when(mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL))
+                .thenReturn(true);
 
         final ShadowPackageManager shadowPackageManager =
             Shadows.shadowOf(RuntimeEnvironment.application.getPackageManager());
@@ -228,8 +231,8 @@ public class SimStatusDialogControllerTest {
     public void initialize_updateSignalStrengthWith50_shouldUpdateSignalStrengthTo50() {
         final int signalDbm = 50;
         final int signalAsu = 50;
-        doReturn(signalDbm).when(mController).getDbm(mSignalStrength);
-        doReturn(signalAsu).when(mController).getAsuLevel(mSignalStrength);
+        doReturn(signalDbm).when(mSignalStrength).getDbm();
+        doReturn(signalAsu).when(mSignalStrength).getAsuLevel();
         when(mPersistableBundle.getBoolean(
                 CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
 
@@ -249,8 +252,8 @@ public class SimStatusDialogControllerTest {
 
         final int signalDbm = 50;
         final int signalAsu = 50;
-        doReturn(signalDbm).when(mController).getDbm(mSignalStrength);
-        doReturn(signalAsu).when(mController).getAsuLevel(mSignalStrength);
+        doReturn(signalDbm).when(mSignalStrength).getDbm();
+        doReturn(signalAsu).when(mSignalStrength).getAsuLevel();
         when(mPersistableBundle.getBoolean(
                 CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
 
@@ -414,5 +417,12 @@ public class SimStatusDialogControllerTest {
 
         verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
         verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+    }
+
+    @Test
+    public void initialize_nullSignalStrength_noCrash() {
+        doReturn(null).when(mController).getSignalStrength();
+        // we should not crash when running the following line
+        mController.initialize();
     }
 }
