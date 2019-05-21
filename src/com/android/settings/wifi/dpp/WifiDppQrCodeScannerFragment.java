@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -42,7 +41,6 @@ import android.view.TextureView.SurfaceTextureListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.StringRes;
@@ -91,7 +89,6 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     private static final int ARG_RESTART_CAMERA = 1;
 
-    private ProgressBar mProgressBar;
     private QrCamera mCamera;
     private TextureView mTextureView;
     private QrDecorateView mDecorateView;
@@ -136,7 +133,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                             SHOW_ERROR_MESSAGE_INTERVAL);
 
                     if (msg.arg1 == ARG_RESTART_CAMERA) {
-                        mProgressBar.setVisibility(View.INVISIBLE);
+                        setProgressBarShown(false);
                         mDecorateView.setFocused(false);
                         restartCamera();
                     }
@@ -150,7 +147,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     mScanWifiDppSuccessListener.onScanWifiDppSuccess((WifiQrCode)msg.obj);
 
                     if (!mIsConfiguratorMode) {
-                        mProgressBar.setVisibility(View.VISIBLE);
+                        setProgressBarShown(true);
                         startWifiDppEnrolleeInitiator((WifiQrCode)msg.obj);
                         updateEnrolleeSummary();
                         mSummary.sendAccessibilityEvent(
@@ -335,12 +332,6 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         } else {
             getActivity().setTitle(R.string.wifi_dpp_scan_qr_code);
         }
-
-        final ActionBar actionBar = getActivity().getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.show();
-        }
     }
 
     @Override
@@ -373,13 +364,10 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
         mDecorateView = (QrDecorateView) view.findViewById(R.id.decorate_view);
 
-        setHeaderIconImageResource(R.drawable.ic_scan_24dp);
-
-        mProgressBar = view.findViewById(R.id.indeterminate_bar);
-        mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
+        setProgressBarShown(isGoingInitiator());
 
         if (mIsConfiguratorMode) {
-            mTitle.setText(R.string.wifi_dpp_add_device_to_network);
+            setHeaderTitle(R.string.wifi_dpp_add_device_to_network);
 
             WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
                 .getWifiNetworkConfig();
@@ -389,7 +377,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             mSummary.setText(getString(R.string.wifi_dpp_center_qr_code,
                     wifiNetworkConfig.getSsid()));
         } else {
-            mTitle.setText(R.string.wifi_dpp_scan_qr_code);
+            setHeaderTitle(R.string.wifi_dpp_scan_qr_code);
 
             updateEnrolleeSummary();
         }
@@ -732,5 +720,10 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @VisibleForTesting
     protected boolean isDecodeTaskAlive() {
         return mCamera != null && mCamera.isDecodeTaskAlive();
+    }
+
+    @Override
+    protected boolean isFooterAvailable() {
+        return false;
     }
 }

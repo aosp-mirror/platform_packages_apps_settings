@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -70,13 +69,6 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         } else {
             getActivity().setTitle(R.string.wifi_dpp_share_wifi);
         }
-
-        setHasOptionsMenu(true);
-        final ActionBar actionBar = getActivity().getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.show();
-        }
     }
 
     @Override
@@ -116,13 +108,11 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
         mQrCodeView = view.findViewById(R.id.qrcode_view);
 
-        setHeaderIconImageResource(R.drawable.ic_qrcode_24dp);
-
         final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
         if (wifiNetworkConfig.isHotspot()) {
-            mTitle.setText(R.string.wifi_dpp_share_hotspot);
+            setHeaderTitle(R.string.wifi_dpp_share_hotspot);
         } else {
-            mTitle.setText(R.string.wifi_dpp_share_wifi);
+            setHeaderTitle(R.string.wifi_dpp_share_wifi);
         }
 
         final String password = wifiNetworkConfig.getPreSharedKey();
@@ -167,5 +157,10 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         }
 
         return wifiNetworkConfig;
+    }
+
+    @Override
+    protected boolean isFooterAvailable() {
+        return false;
     }
 }

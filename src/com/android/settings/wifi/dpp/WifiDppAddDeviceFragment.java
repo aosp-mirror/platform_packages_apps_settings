@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -32,7 +31,6 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -47,11 +45,8 @@ import java.util.concurrent.Executor;
 public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG = "WifiDppAddDeviceFragment";
 
-    private ProgressBar mProgressBar;
     private ImageView mWifiApPictureView;
     private Button mChooseDifferentNetwork;
-    private Button mButtonLeft;
-    private Button mButtonRight;
 
     private int mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE;
 
@@ -83,16 +78,16 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     }
 
     private void showSuccessUi(boolean isConfigurationChange) {
-        setHeaderIconImageResource(R.drawable.ic_devices_check_circle_green);
-        mTitle.setText(R.string.wifi_dpp_wifi_shared_with_device);
-        mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
+        setHeaderIconImageResource(R.drawable.ic_devices_check_circle_green_32dp);
+        setHeaderTitle(R.string.wifi_dpp_wifi_shared_with_device);
+        setProgressBarShown(isGoingInitiator());
         mSummary.setVisibility(View.INVISIBLE);
         mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_success);
         mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
-        mButtonLeft.setText(R.string.wifi_dpp_add_another_device);
-        mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
-        mButtonRight.setText(R.string.done);
-        mButtonRight.setOnClickListener(v -> {
+        mLeftButton.setText(getContext(), R.string.wifi_dpp_add_another_device);
+        mLeftButton.setOnClickListener(v -> getFragmentManager().popBackStack());
+        mRightButton.setText(getContext(), R.string.done);
+        mRightButton.setOnClickListener(v -> {
             final Activity activity = getActivity();
             activity.setResult(Activity.RESULT_OK);
             activity.finish();
@@ -100,7 +95,6 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         if (!isConfigurationChange) {
             mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
-            changeFocusAndAnnounceChange(mButtonRight, mTitle);
         }
     }
 
@@ -159,27 +153,26 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
                 throw(new IllegalStateException("Unexpected Wi-Fi DPP error"));
         }
 
-        mTitle.setText(R.string.wifi_dpp_could_not_add_device);
+        setHeaderTitle(R.string.wifi_dpp_could_not_add_device);
         mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_error);
         mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
         if (hasRetryButton(code)) {
-            mButtonRight.setText(R.string.retry);
+            mRightButton.setText(getContext(), R.string.retry);
         } else {
-            mButtonRight.setText(R.string.done);
-            mButtonRight.setOnClickListener(v -> getActivity().finish());
-            mButtonLeft.setVisibility(View.INVISIBLE);
+            mRightButton.setText(getContext(), R.string.done);
+            mRightButton.setOnClickListener(v -> getActivity().finish());
+            mLeftButton.setVisibility(View.INVISIBLE);
         }
 
         if (isGoingInitiator()) {
             mSummary.setText(R.string.wifi_dpp_sharing_wifi_with_this_device);
         }
 
-        mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
-        mButtonRight.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
+        setProgressBarShown(isGoingInitiator());
+        mRightButton.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
 
         if (!isConfigurationChange) {
             mLatestStatusCode = code;
-            changeFocusAndAnnounceChange(mButtonRight, mSummary);
         }
     }
 
@@ -229,16 +222,6 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        final ActionBar actionBar = getActivity().getActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
-    }
-
-    @Override
     public final View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.wifi_dpp_add_device_fragment, container,
@@ -249,17 +232,15 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setHeaderIconImageResource(R.drawable.ic_devices_other_opaque_black);
-
-        mProgressBar = view.findViewById(R.id.indeterminate_bar);
+        setHeaderIconImageResource(R.drawable.ic_devices_other_32dp);
 
         final WifiQrCode wifiQrCode = ((WifiDppConfiguratorActivity) getActivity())
                 .getWifiDppQrCode();
         final String information = wifiQrCode.getInformation();
         if (TextUtils.isEmpty(information)) {
-            mTitle.setText(R.string.wifi_dpp_device_found);
+            setHeaderTitle(R.string.wifi_dpp_device_found);
         } else {
-            mTitle.setText(information);
+            setHeaderTitle(information);
         }
 
         updateSummary();
@@ -270,31 +251,26 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mClickChooseDifferentNetworkListener.onClickChooseDifferentNetwork()
         );
 
-        mButtonLeft = view.findViewById(R.id.button_left);
-        mButtonLeft.setText(R.string.cancel);
-        mButtonLeft.setOnClickListener(v -> getActivity().finish());
+        mLeftButton.setText(getContext(), R.string.cancel);
+        mLeftButton.setOnClickListener(v -> getActivity().finish());
 
-        mButtonRight = view.findViewById(R.id.button_right);
-        mButtonRight.setText(R.string.wifi_dpp_share_wifi);
-        mButtonRight.setOnClickListener(v -> {
-            mProgressBar.setVisibility(View.VISIBLE);
-            mButtonRight.setVisibility(View.INVISIBLE);
+        mRightButton.setText(getContext(), R.string.wifi_dpp_share_wifi);
+        mRightButton.setOnClickListener(v -> {
+            setProgressBarShown(true);
+            mRightButton.setVisibility(View.INVISIBLE);
             startWifiDppConfiguratorInitiator();
             updateSummary();
-            mTitleSummaryContainer.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
         });
 
         if (savedInstanceState != null) {
             if (mLatestStatusCode == WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS) {
                 showSuccessUi(/* isConfigurationChange */ true);
             } else if (mLatestStatusCode == WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE) {
-                mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
-                mButtonRight.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
+                setProgressBarShown(isGoingInitiator());
+                mRightButton.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
             } else {
                 showErrorUi(mLatestStatusCode, /* isConfigurationChange */ true);
             }
-        } else {
-            changeFocusAndAnnounceChange(mButtonRight, mTitleSummaryContainer);
         }
     }
 
@@ -373,5 +349,10 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private void changeFocusAndAnnounceChange(View focusView, View announceView) {
         focusView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
         announceView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+    }
+
+    @Override
+    protected boolean isFooterAvailable() {
+        return true;
     }
 }
