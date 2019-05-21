@@ -23,6 +23,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_MEDIUM;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -182,10 +183,20 @@ public class ChooseLockGenericTest {
         CharSequence expectedTitle =
                 mActivity.getString(R.string.unlock_footer_none_complexity_requested, "app name");
 
-        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+        mFragment.updatePreferencesOrFinish(/* isRecreatingActivity= */ false);
         FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
 
         assertThat(footer.getTitle()).isEqualTo(expectedTitle);
+    }
+
+    @Test
+    public void updatePreferencesOrFinish_callingAppIsAdmin_noFooter() {
+        initActivity(new Intent().putExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, true));
+
+        mFragment.updatePreferencesOrFinish(/* isRecreatingActivity= */ false);
+
+        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+        assertThat(footer).isNull();
     }
 
     @Test
