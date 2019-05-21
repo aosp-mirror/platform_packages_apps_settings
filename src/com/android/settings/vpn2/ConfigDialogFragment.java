@@ -143,6 +143,10 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
     @Override
     public void onClick(DialogInterface dialogInterface, int button) {
         ConfigDialog dialog = (ConfigDialog) getDialog();
+        if (dialog == null) {
+            Log.e(TAG, "ConfigDialog object is null");
+            return;
+        }
         VpnProfile profile = dialog.getProfile();
 
         if (button == DialogInterface.BUTTON_POSITIVE) {

@@ -197,6 +197,12 @@
             android:title="@string/enable_gpu_debug_layers"
             android:summary="@string/enable_gpu_debug_layers_summary" />
 
+        <Preference
+            android:key="game_driver_dashboard"
+            android:title="@string/game_driver_dashboard_title"
+            android:summary="@string/game_driver_dashboard_summary"
+            android:fragment="com.android.settings.development.gamedriver.GameDriverDashboard" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

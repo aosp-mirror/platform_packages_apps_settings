@@ -3409,9 +3409,9 @@
     <!-- Reset settings complete toast text [CHAR LIMIT=75] -->
     <string name="reset_network_complete_toast">Network settings have been reset</string>
     <!-- Title of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_error_title">Can\u2019t reset eSIMs</string>
+    <string name="reset_esim_error_title">Cant\u2019t reset eSIMs</string>
     <!-- Message of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_error_msg">The eSIMs can\u2019t be reset due to an error.</string>
+    <string name="reset_esim_error_msg">The eSIMs can\u2019tt be reset due to an error.</string>
 
     <!-- Master Clear -->
     <!-- Button title to factory data reset the entire device -->
@@ -9982,6 +9982,29 @@
          show both names, with the directory name wrapped in parenthesis -->
     <string name="directory_on_volume"><xliff:g id="volume" example="SD Card">%1$s</xliff:g> (<xliff:g id="directory" example="Movies">%2$s</xliff:g>)</string>
 
+    <!-- Title for Game Driver dashboard where developers can configure apps to use game driver or not [CHAR LIMIT=50] -->
+    <string name="game_driver_dashboard_title">Game Driver Preferences</string>
+    <!-- Summary for Game Driver dashboard [CHAR LIMIT=50] -->
+    <string name="game_driver_dashboard_summary">Modify Game Driver settings</string>
+    <!-- Footer text for Game Driver dashboard [CHAR LIMIT=NONE] -->
+    <string name="game_driver_footer_text">When Game Driver is turned on, you can pick to use the updated graphics driver for Apps installed on the device.</string>
+    <!-- Title for Game Driver all apps preference [CHAR LIMIT=50] -->
+    <string name="game_driver_all_apps_preference_title">Enable for all apps</string>
+    <!-- Title for Game Driver app preference [CHAR LIMIT=50] -->
+    <string name="game_driver_app_preference_title">Select Graphics Driver</string>
+    <!-- The default value for Game Driver app preference [CHAR LIMIT=50] -->
+    <string name="game_driver_app_preference_default">Default</string>
+    <!-- The game driver value for Game Driver app preference [CHAR LIMIT=50] -->
+    <string name="game_driver_app_preference_game_driver">Game Driver</string>
+    <!-- The system value for Game Driver app preference [CHAR LIMIT=50] -->
+    <string name="game_driver_app_preference_system">System Graphics Driver</string>
+    <!-- All the values for Game Driver app preference [CHAR LIMIT=50] -->
+    <string-array name="game_driver_app_preference_values">
+        <item>@string/game_driver_app_preference_default</item>
+        <item>@string/game_driver_app_preference_game_driver</item>
+        <item>@string/game_driver_app_preference_system</item>
+    </string-array>
+
     <!-- Slices Strings -->
 
     <!-- Summary text on a card explaining that a setting does not exist / is not supported on the device [CHAR_LIMIT=NONE]-->
@@ -10117,4 +10140,17 @@
 
     <!-- Warn the user that the phone have emergency call limitation. [CHAR LIMIT=NONE] -->
     <string name="wfc_disclaimer_emergency_limitation_desc_text">Emergency calls over Wi\u2011Fi Calling are not supported by your carrier.\nThe device switches automatically to a cellular network to place an emergency call.\nEmergency calls are only possible in areas with cellular coverage.</string>
+
+    <!-- Summary for Wi-Fi calling to explain this feature [CHAR LIMIT=NONE] -->
+    <string name="wifi_calling_summary">Use Wi\u2011Fi for calls to improve quality</string>
+
+    <!-- Title for enable MMS notification when trying to receive MMS.  [CHAR LIMIT=40] -->
+    <string name="enable_receiving_mms_notification_title">Incoming MMS message</string>
+    <!-- Title for enable MMS notification when trying to send MMS.  [CHAR LIMIT=40] -->
+    <string name="enable_sending_mms_notification_title">Can\u2019t send MMS message</string>
+    <!-- Message under title informing the user to touch to go to SIM Cards in Settings.  [CHAR LIMIT=100] -->
+    <string name="enable_mms_notification_summary">Tap to allow MMS messaging on <xliff:g id="operator_name" example="T-Mobile">%1$s</xliff:g> when mobile data is off</string>
+
+    <!-- Title for enable MMS notification channel.  [CHAR LIMIT=40] -->
+    <string name="enable_mms_notification_channel_title">MMS message</string>
 </resources>
