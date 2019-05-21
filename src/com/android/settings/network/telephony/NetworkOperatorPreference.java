@@ -30,6 +30,7 @@ import android.view.Gravity;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.graph.SignalDrawable;
 
 import java.util.List;
@@ -144,6 +145,7 @@ public class NetworkOperatorPreference extends Preference {
         // Set the signal strength icon at the bottom right
         icons.setLayerGravity(1 /* index of SignalDrawable */, Gravity.BOTTOM | Gravity.RIGHT);
         icons.setLayerSize(1 /* index of SignalDrawable */, iconSize, iconSize);
+        icons.setTintList(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
         setIcon(icons);
     }
 }
