@@ -275,11 +275,13 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     protected void setHeaderView(int resource) {
         mHeader = new LayoutPreference(getPrefContext(), resource);
+        mHeader.setSelectable(false);
         addPreferenceToTop(mHeader);
     }
 
     protected void setHeaderView(View view) {
         mHeader = new LayoutPreference(getPrefContext(), view);
+        mHeader.setSelectable(false);
         addPreferenceToTop(mHeader);
     }
 
