@@ -62,6 +62,7 @@ import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
+import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
@@ -727,5 +728,18 @@ public class BatteryUtilsTest {
 
         //Should not crash
         assertThat(mBatteryUtils.getBatteryInfo(mBatteryStatsHelper, TAG)).isNotNull();
+    }
+
+    @Test
+    public void getEnhancedEstimate_doesNotUpdateCache_ifEstimateFresh() {
+        Estimate estimate = new Estimate(1000, true, 1000);
+        Estimate.storeCachedEstimate(mContext, estimate);
+
+        estimate = mBatteryUtils.getEnhancedEstimate();
+
+        // only pass if estimate has not changed
+        assertThat(estimate).isNotNull();
+        assertThat(estimate.isBasedOnUsage()).isTrue();
+        assertThat(estimate.getAverageDischargeTime()).isEqualTo(1000);
     }
 }
