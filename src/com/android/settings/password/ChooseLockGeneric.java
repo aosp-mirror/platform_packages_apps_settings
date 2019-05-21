@@ -25,6 +25,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
 import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -169,6 +170,12 @@ public class ChooseLockGeneric extends SettingsActivity {
         /** From intent extra {@link ChooseLockSettingsHelper#EXTRA_KEY_CALLER_APP_NAME}. */
         private String mCallerAppName = null;
 
+        /**
+         * The value from the intent extra {@link
+         * ChooseLockSettingsHelper#EXTRA_KEY_IS_CALLING_APP_ADMIN}.
+         */
+        private boolean mIsCallingAppAdmin;
+
         protected boolean mForFingerprint = false;
         protected boolean mForFace = false;
 
@@ -217,6 +224,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     .getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
             mCallerAppName =
                     getActivity().getIntent().getStringExtra(EXTRA_KEY_CALLER_APP_NAME);
+            mIsCallingAppAdmin = getActivity().getIntent()
+                    .getBooleanExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, /* defValue= */ false);
             mForChangeCredRequiredForBoot = getArguments() != null && getArguments().getBoolean(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT);
             mUserManager = UserManager.get(getActivity());
@@ -490,7 +499,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected void addPreferences() {
             addPreferencesFromResource(R.xml.security_settings_picker);
 
-            if (!TextUtils.isEmpty(mCallerAppName)) {
+            if (!TextUtils.isEmpty(mCallerAppName) && !mIsCallingAppAdmin) {
                 FooterPreferenceMixinCompat footerMixin =
                         new FooterPreferenceMixinCompat(this, getSettingsLifecycle());
                 FooterPreference footer = footerMixin.createFooterPreference();

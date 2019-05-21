@@ -23,6 +23,7 @@ import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
 import android.app.Activity;
@@ -30,6 +31,8 @@ import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.admin.PasswordMetrics;
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -38,6 +41,8 @@ import android.util.Log;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import java.util.List;
 
 /**
  * Trampolines {@link DevicePolicyManager#ACTION_SET_NEW_PASSWORD} and
@@ -116,8 +121,26 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
         if (mRequestedMinComplexity != PASSWORD_COMPLEXITY_NONE) {
             intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, mRequestedMinComplexity);
         }
+        if (isCallingAppAdmin()) {
+            intent.putExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, true);
+        }
         startActivity(intent);
         finish();
+    }
+
+    private boolean isCallingAppAdmin() {
+        DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);
+        String callingAppPackageName = PasswordUtils.getCallingAppPackageName(getActivityToken());
+        List<ComponentName> admins = devicePolicyManager.getActiveAdmins();
+        if (admins == null) {
+            return false;
+        }
+        for (ComponentName componentName : admins) {
+            if (componentName.getPackageName().equals(callingAppPackageName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void logSetNewPasswordIntent() {
