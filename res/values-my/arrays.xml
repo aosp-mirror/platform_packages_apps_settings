@@ -71,7 +71,7 @@
     <item msgid="8513729475867537913">"ချိတ်ဆက်နေသည်"</item>
     <item msgid="515055375277271756">"စစ်မှန်ကြောင်းအတည်ပြုနေသည်"</item>
     <item msgid="1943354004029184381">"အိုင်ပီလိပ်စာရယူနေသည်"</item>
-    <item msgid="4221763391123233270">"ချိတ်ဆက်ထားသည်"</item>
+    <item msgid="4221763391123233270">"ဆက်သွယ်ထားပြီး"</item>
     <item msgid="624838831631122137">"ဆိုင်းငံ့ထားသည်"</item>
     <item msgid="7979680559596111948">"အဆက်အသွယ်ဖြတ်တောက်နေသည်"</item>
     <item msgid="1634960474403853625">"ချိတ်ဆက်မှုပြတ်တောက်သည်"</item>
@@ -100,12 +100,6 @@
     <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
     <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
-    <!-- no translation found for wifi_tether_security:0 (1748357338693290598) -->
-    <!-- no translation found for wifi_tether_security:1 (4760482622566629462) -->
-  <string-array name="wifi_tether_security_values">
-    <item msgid="2252927183588236198">"4"</item>
-    <item msgid="5900372418924184351">"0"</item>
-  </string-array>
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -121,13 +115,18 @@
     <item msgid="3079489731769553856">"TTLS"</item>
     <item msgid="35269224158638258">"PWD"</item>
   </string-array>
+    <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
+    <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
+    <!-- no translation found for wifi_ap_band_config_full:2 (3580217704310339410) -->
+    <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
+    <!-- no translation found for wifi_ap_band_config_2G_only:1 (8904289885593822837) -->
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"နှိပ်ရန်ခလုတ်"</item>
     <item msgid="1624323946324499595">"တန်းတူစက်ပစ္စည်းမှပင်နံပါတ်"</item>
     <item msgid="5366790421523328066">"ဤစက်မှပင်နံပါတ်"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
-    <item msgid="1701505390737218306">"ချိတ်ဆက်ထားသည်"</item>
+    <item msgid="1701505390737218306">"ဆက်သွယ်ထားပြီး"</item>
     <item msgid="3189211552661432651">"ဖိတ်ခေါ်ထားပြီး"</item>
     <item msgid="3206450250360237549">"မအောင်မြင်ပါ"</item>
     <item msgid="7785896708926971207">"ချိတ်ဆက်နိုင်သော"</item>
@@ -139,14 +138,12 @@
     <item msgid="477015974247590543">"၁ နာရီ"</item>
     <item msgid="5198271470953124739">"ဘယ်တော့မှ ပိတ်မပစ်ရန်"</item>
   </string-array>
-  <string-array name="bluetooth_max_connected_audio_devices">
-    <item msgid="834764606877643762">"စနစ်မူရင်းကို အသုံးပြုရန်− <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
-    <item msgid="4428462068012149533">"၁"</item>
-    <item msgid="2620881722754455257">"၂"</item>
-    <item msgid="402831176731135702">"၃"</item>
-    <item msgid="4923580285404888038">"၄"</item>
-    <item msgid="3643103044864989283">"၅"</item>
-  </string-array>
+    <!-- no translation found for bluetooth_max_connected_audio_devices:0 (834764606877643762) -->
+    <!-- no translation found for bluetooth_max_connected_audio_devices:1 (4428462068012149533) -->
+    <!-- no translation found for bluetooth_max_connected_audio_devices:2 (2620881722754455257) -->
+    <!-- no translation found for bluetooth_max_connected_audio_devices:3 (402831176731135702) -->
+    <!-- no translation found for bluetooth_max_connected_audio_devices:4 (4923580285404888038) -->
+    <!-- no translation found for bluetooth_max_connected_audio_devices:5 (3643103044864989283) -->
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"ညံ့သည်"</item>
     <item msgid="2042505933058940139">"ညံ့သည်"</item>
@@ -170,7 +167,7 @@
     <item msgid="2318274046749286642">"PWD"</item>
   </string-array>
   <string-array name="wifi_peap_phase2_entries">
-    <item msgid="2577747762745812488">"တစ်ခုမျှ မဟုတ်ပါ"</item>
+    <item msgid="2577747762745812488">"တစ်ခုမှမဟုတ်ပါ"</item>
     <item msgid="937786527870979616">"MSCHAPV2"</item>
     <item msgid="5302613883318643629">"GTC"</item>
   </string-array>
@@ -183,7 +180,7 @@
     <item msgid="8926455723452645935">"AKA\'"</item>
   </string-array>
   <string-array name="wifi_phase2_entries">
-    <item msgid="1818786254010764570">"တစ်ခုမျှ မဟုတ်ပါ"</item>
+    <item msgid="1818786254010764570">"တစ်ခုမှမဟုတ်ပါ"</item>
     <item msgid="6189918678874123056">"PAP"</item>
     <item msgid="1524112260493662517">"MSCHAP"</item>
     <item msgid="5923246669412752932">"MSCHAPV2"</item>
@@ -194,7 +191,7 @@
     <item msgid="628395202971532382">"ပုံမှန်ဖြစ်သော"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
-    <item msgid="4473276491748503377">"တစ်ခုမျှ မဟုတ်ပါ"</item>
+    <item msgid="4473276491748503377">"တစ်ခုမှမဟုတ်ပါ"</item>
     <item msgid="8673874894887358090">"ကိုယ်တိုင်ထည့်သွင်းခြင်း"</item>
     <item msgid="168893341855953140">"ပရောက်စီ အော်တို-စီစဉ်"</item>
   </string-array>
@@ -228,14 +225,14 @@
     <item msgid="7471182818083460781">"IS95A"</item>
   </string-array>
   <string-array name="mvno_type_entries">
-    <item msgid="4367119357633573465">"တစ်ခုမျှ မဟုတ်ပါ"</item>
+    <item msgid="4367119357633573465">"တစ်ခုမှမဟုတ်ပါ"</item>
     <item msgid="6062567900587138000">"SPN"</item>
     <item msgid="2454085083342423481">"IMSI"</item>
     <item msgid="2681427309183221543">"GID"</item>
   </string-array>
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"စက်တွင်းသိုလှောင်ကိရိယာ"</item>
-    <item msgid="3738430123799803530">"ဖယ်ရှား၍ရသောSDကတ်"</item>
+    <item msgid="3738430123799803530">"ဖယ်ရှား၍ရသောSDကဒ်"</item>
     <item msgid="4498124044785815005">"စနစ်အား ဆုံးဖြတ်ပါစေ"</item>
   </string-array>
   <string-array name="app_ops_categories">
@@ -432,15 +429,11 @@
     <item msgid="8064740940687465039">"အသိအမှတ်ပြုလက်မှတ်နှင့်Xauthစစ်မှန်ကြောင်းပါရှိသောIPSec VPN"</item>
     <item msgid="4946199982372391490">"အသိအမှတ်ပြုလက်မှတ်များနှင့် ရောနှောထားတဲ့ စစ်မှန်ကြောင်းပါရှိသောIPSec VPN"</item>
   </string-array>
-  <string-array name="vpn_proxy_settings">
-    <item msgid="4474139132577932676">"မရှိ"</item>
-    <item msgid="2943781954264525815">"ကိုယ်တိုင်"</item>
-  </string-array>
   <string-array name="vpn_states">
     <item msgid="8621078286418985762">"ချိတ်ဆက်မှုပြတ်တောက်သည်"</item>
     <item msgid="6692305604213080515">"စတင်နေသည်"</item>
     <item msgid="8001704909356800092">"ချိတ်ဆက်နေသည်"</item>
-    <item msgid="4039737283841672166">"ချိတ်ဆက်ထားသည်"</item>
+    <item msgid="4039737283841672166">"ဆက်သွယ်ထားပြီး"</item>
     <item msgid="4042143101664725090">"သတ်မှတ်ချိန်ကျော်လွန်သွားသည်"</item>
     <item msgid="7664124146786465092">"မအောင်မြင်ပါ"</item>
   </string-array>
@@ -467,7 +460,7 @@
     <item msgid="5779398140277006695">"အသုံး အများဆုံး"</item>
     <item msgid="1439598363694578255">"အရေးကြီး (ရှေ့ပိုင်း)"</item>
     <item msgid="3396458970745718652">"အရေးကြီး (နောက်ခံ)"</item>
-    <item msgid="5214825238247511992">"အရန်သိမ်းရန်"</item>
+    <item msgid="5214825238247511992">"ဘက်အာပ်"</item>
     <item msgid="311372689168254967">"အထူး ကြီးလေး"</item>
     <item msgid="7438189122367820362">"ဝန်ဆောင်မှု (ဖွင့်ထား)"</item>
     <item msgid="918687422516982498">"ဝန်ဆောင်မှု (ပြန်ဖွင့်နေ)"</item>
@@ -487,25 +480,18 @@
     <item msgid="6131821495505931173">"အနီ"</item>
   </string-array>
   <string-array name="automatic_storage_management_days">
-    <item msgid="687318592238852312">"ရက်ပေါင်း ၃၀ ထက်ကျော်သော"</item>
-    <item msgid="2900554746706302178">"ရက်ပေါင်း ၆၀ ထက်ကျော်သော"</item>
-    <item msgid="5692284879054004388">"ရက်ပေါင်း ၉၀ ထက်ကျော်သော"</item>
+    <item msgid="687318592238852312">"ရက်ပေါင်း ၃၀ ထက်ကျော်နေပါပြီ"</item>
+    <item msgid="2900554746706302178">"ရက်ပေါင်း ၆၀ ထက်ကျော်နေပါပြီ"</item>
+    <item msgid="5692284879054004388">"ရက်ပေါင်း ၉၀ ထက်ကျော်နေပါပြီ"</item>
   </string-array>
   <string-array name="wifi_metered_entries">
-    <item msgid="5200910605264415911">"အလိုအလျောက် ရှာရန်"</item>
+    <item msgid="2975784243692054526">"ကွန်ရက် စိတ်ကြိုက်ရွေးချယ်မှုကို အသုံးပြုရန်"</item>
     <item msgid="8745603368609022803">"အခမဲ့ မဟုတ်သော အသုံးပြုခြင်းအဖြစ် သတ်မှတ်ရန်"</item>
     <item msgid="2266114985518865625">"အခမဲ့ အသုံးပြုခြင်းအဖြစ် သတ်မှတ်ရန်"</item>
-  </string-array>
-  <string-array name="wifi_hidden_entries">
-    <item msgid="234221371123852300">"No"</item>
-    <item msgid="3863157480502955888">"Yes"</item>
   </string-array>
   <string-array name="dark_ui_mode_entries">
     <item msgid="146804192658443142">"အလိုအလျောက် (တစ်နေ့တာ၏ အချိန်အပေါ် မူတည်သည်)"</item>
     <item msgid="6620560879508595181">"အမြဲတမ်း ဖွင့်ထားခြင်း"</item>
     <item msgid="6385301106124765323">"အမြဲပိတ်ခြင်း"</item>
   </string-array>
-    <!-- no translation found for systemui_theme_entries:0 (2470122177508109711) -->
-    <!-- no translation found for systemui_theme_entries:1 (5595198131199979987) -->
-    <!-- no translation found for systemui_theme_entries:2 (883155044873038544) -->
 </resources>

@@ -55,6 +55,8 @@ public class TetherService extends Service {
 
     @VisibleForTesting
     public static final String EXTRA_RESULT = "EntitlementResult";
+    @VisibleForTesting
+    public static final String EXTRA_SUBID = "subId";
 
     // Activity results to match the activity provision protocol.
     // Default to something not ok.
@@ -100,6 +102,18 @@ public class TetherService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent.hasExtra(EXTRA_SUBID)) {
+            final int tetherSubId = intent.getIntExtra(EXTRA_SUBID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            final int subId = getTetherServiceWrapper().getDefaultDataSubscriptionId();
+            if (tetherSubId != subId) {
+                Log.e(TAG, "This Provisioning request is outdated, current subId: " + subId);
+                if (!mInProvisionCheck) {
+                    stopSelf();
+                }
+                return START_NOT_STICKY;
+            }
+        }
         if (intent.hasExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE)) {
             int type = intent.getIntExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE,
                     ConnectivityManager.TETHERING_INVALID);

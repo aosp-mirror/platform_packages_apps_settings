@@ -23,8 +23,8 @@ import static org.robolectric.RuntimeEnvironment.application;
 import androidx.annotation.Nullable;
 
 import com.google.common.truth.ComparableSubject;
-import com.google.common.truth.FailureStrategy;
-import com.google.common.truth.SubjectFactory;
+import com.google.common.truth.FailureMetadata;
+import com.google.common.truth.Subject;
 
 /**
  * Custom subject for use with {@link com.google.common.truth.Truth}, to provide a more readable
@@ -38,12 +38,12 @@ import com.google.common.truth.SubjectFactory;
  */
 public class ResIdSubject extends ComparableSubject<ResIdSubject, Integer> {
 
-    public static final SubjectFactory<ResIdSubject, Integer> FACTORY =
-            new SubjectFactory<ResIdSubject, Integer>() {
+    public static final Subject.Factory<ResIdSubject, Integer> FACTORY =
+            new Subject.Factory<ResIdSubject, Integer>() {
                 @Override
-                public ResIdSubject getSubject(
-                        FailureStrategy failureStrategy, Integer integer) {
-                    return new ResIdSubject(failureStrategy, integer);
+                public ResIdSubject createSubject(
+                        FailureMetadata failureMetadata, Integer integer) {
+                    return new ResIdSubject(failureMetadata, integer);
                 }
             };
 
@@ -52,9 +52,9 @@ public class ResIdSubject extends ComparableSubject<ResIdSubject, Integer> {
     }
 
     public ResIdSubject(
-            FailureStrategy failureStrategy,
+            FailureMetadata failureMetadata,
             @Nullable Integer integer) {
-        super(failureStrategy, integer);
+        super(failureMetadata, integer);
     }
 
     public void isEqualTo(int other) {
@@ -65,7 +65,7 @@ public class ResIdSubject extends ComparableSubject<ResIdSubject, Integer> {
     }
 
     @Override
-    protected String getDisplaySubject() {
+    protected String actualCustomStringRepresentation() {
         String resourceName = "<" + resIdToString(getSubject()) + ">";
         String customName = internalCustomName();
         if (customName != null) {
