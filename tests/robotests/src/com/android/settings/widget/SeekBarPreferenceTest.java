@@ -22,7 +22,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Parcelable;
+
+import androidx.preference.PreferenceFragmentCompat;
+
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +35,11 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowRestrictedLockUtilsInternal.class)
 public class SeekBarPreferenceTest {
 
     private static final int MAX = 75;
@@ -73,9 +81,39 @@ public class SeekBarPreferenceTest {
     }
 
     @Test
-    public void isSelectable_notDisabledByAdmin_returnFalse() {
-        when(mSeekBarPreference.isDisabledByAdmin()).thenReturn(false);
+    @Config(qualifiers = "mcc998")
+    public void isSelectable_default_returnFalse() {
+        final PreferenceFragmentCompat fragment = FragmentController.of(new TestFragment(),
+                new Bundle())
+                .create()
+                .start()
+                .resume()
+                .get();
 
-        assertThat(mSeekBarPreference.isSelectable()).isFalse();
+        final SeekBarPreference seekBarPreference = fragment.findPreference("seek_bar");
+
+        assertThat(seekBarPreference.isSelectable()).isFalse();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isSelectable_selectableInXml_returnTrue() {
+        final PreferenceFragmentCompat fragment = FragmentController.of(new TestFragment(),
+                new Bundle())
+                .create()
+                .start()
+                .resume()
+                .get();
+
+        final SeekBarPreference seekBarPreference = fragment.findPreference("seek_bar");
+
+        assertThat(seekBarPreference.isSelectable()).isTrue();
+    }
+
+    public static class TestFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            addPreferencesFromResource(com.android.settings.R.xml.seekbar_preference);
+        }
     }
 }
