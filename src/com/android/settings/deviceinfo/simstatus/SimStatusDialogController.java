@@ -297,6 +297,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateSignalStrength(SignalStrength signalStrength) {
+        if (signalStrength == null) {
+            return;
+        }
         final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
         final PersistableBundle carrierConfig =
                 mCarrierConfigManager.getConfigForSubId(subscriptionId);
@@ -430,13 +433,11 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 mSubscriptionInfo.getSubscriptionId());
     }
 
-    @VisibleForTesting
-    int getDbm(SignalStrength signalStrength) {
+    private int getDbm(SignalStrength signalStrength) {
         return signalStrength.getDbm();
     }
 
-    @VisibleForTesting
-    int getAsuLevel(SignalStrength signalStrength) {
+    private int getAsuLevel(SignalStrength signalStrength) {
         return signalStrength.getAsuLevel();
     }
 
