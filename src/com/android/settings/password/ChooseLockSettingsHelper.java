@@ -61,6 +61,12 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_CALLER_APP_NAME = "caller_app_name";
 
     /**
+     * Intent extra indicating that the calling app is an admin, such as a Device Adimn, Device
+     * Owner, or Profile Owner.
+     */
+    public static final String EXTRA_KEY_IS_CALLING_APP_ADMIN = "is_calling_app_admin";
+
+    /**
      * When invoked via {@link ConfirmLockPassword.InternalActivity}, this flag
      * controls if we relax the enforcement of
      * {@link Utils#enforceSameOwner(android.content.Context, int)}.
