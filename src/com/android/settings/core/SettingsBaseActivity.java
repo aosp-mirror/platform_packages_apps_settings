@@ -37,7 +37,10 @@ import android.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.SubSettings;
 import com.android.settings.dashboard.CategoryManager;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,13 +68,12 @@ public class SettingsBaseActivity extends FragmentActivity {
         if (!theme.getBoolean(android.R.styleable.Theme_windowNoTitle, false)) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
+        // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
+        if (WizardManagerHelper.isAnySetupWizard(getIntent()) && this instanceof SubSettings) {
+            setTheme(R.style.LightTheme_SubSettings_SetupWizard);
+        }
         super.setContentView(R.layout.settings_base_layout);
-        final View decorView = getWindow().getDecorView();
 
-        decorView.setSystemUiVisibility(
-                decorView.getSystemUiVisibility()
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         final Toolbar toolbar = findViewById(R.id.action_bar);
         if (theme.getBoolean(android.R.styleable.Theme_windowNoTitle, false)) {
             toolbar.setVisibility(View.GONE);

@@ -92,7 +92,6 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
             .addUid(mParent.getAppEntry().info.uid)
             .setRetrieveDetail(false)
             .setNetworkTemplate(template)
-            .setSubscriberId(template.getSubscriberId())
             .build();
     }
 
