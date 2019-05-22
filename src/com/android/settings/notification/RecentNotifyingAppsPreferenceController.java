@@ -71,7 +71,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
     static final String KEY_DIVIDER = "all_notifications_divider";
     @VisibleForTesting
     static final String KEY_SEE_ALL = "all_notifications";
-    private static final int SHOW_RECENT_APP_COUNT = 5;
+    private static final int SHOW_RECENT_APP_COUNT = 3;
     private static final int DAYS = 3;
     private static final Set<String> SKIP_SYSTEM_PACKAGES = new ArraySet<>();
 

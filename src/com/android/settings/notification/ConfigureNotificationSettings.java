@@ -58,16 +58,8 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     private static final String TAG = "ConfigNotiSettings";
 
     @VisibleForTesting
-    static final String KEY_LOCKSCREEN = "lock_screen_notifications";
-    @VisibleForTesting
-    static final String KEY_LOCKSCREEN_WORK_PROFILE_HEADER =
-            "lock_screen_notifications_profile_header";
-    @VisibleForTesting
-    static final String KEY_LOCKSCREEN_WORK_PROFILE = "lock_screen_notifications_profile";
-    @VisibleForTesting
     static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
-    @VisibleForTesting
-    static final String KEY_NOTIFICATION_ASSISTANT = "notification_assistant";
+    static final String KEY_LOCKSCREEN = "lock_screen_notifications";
 
     private static final String KEY_NOTI_DEFAULT_RINGTONE = "notification_default_ringtone";
     private static final int REQUEST_CODE = 200;
@@ -100,25 +92,18 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
         } else {
             app = null;
         }
-        return buildPreferenceControllers(context, getSettingsLifecycle(), app, this);
+        return buildPreferenceControllers(context, app, this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, Application app, Fragment host) {
+            Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final LockScreenNotificationPreferenceController lockScreenNotificationController =
-                new LockScreenNotificationPreferenceController(context,
-                        KEY_LOCKSCREEN,
-                        KEY_LOCKSCREEN_WORK_PROFILE_HEADER,
-                        KEY_LOCKSCREEN_WORK_PROFILE);
-        if (lifecycle != null) {
-            lifecycle.addObserver(lockScreenNotificationController);
-        }
         controllers.add(new RecentNotifyingAppsPreferenceController(
                 context, new NotificationBackend(), IUsageStatsManager.Stub.asInterface(
                         ServiceManager.getService(Context.USAGE_STATS_SERVICE)),
                 context.getSystemService(UserManager.class), app, host));
-        controllers.add(lockScreenNotificationController);
+        controllers.add(new ShowOnLockScreenNotificationPreferenceController(
+                context, KEY_LOCKSCREEN));
         controllers.add(new NotificationRingtonePreferenceController(context) {
             @Override
             public String getPreferenceKey() {
@@ -245,7 +230,7 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null, null, null);
+                    return buildPreferenceControllers(context, null, null);
                 }
 
                 @Override

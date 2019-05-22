@@ -26,27 +26,52 @@
         settings:controller="com.android.settings.widget.VideoPreferenceController"
         android:persistent="false" />
 
-    <Preference
-        android:key="gentle_notifications"
-        android:title="@string/gentle_notifications_title"
-        settings:controller="com.android.settings.notification.GentleNotificationsPreferenceController"
-        android:fragment="com.android.settings.notification.GentleNotificationSettings"/>
+    <!-- Empty category to draw divider -->
+    <PreferenceCategory
+        android:key="all_notifications_divider"
+        android:order="2"/>
 
     <PreferenceCategory
-        android:key="configure_notifications_smart"
-        android:title="@string/smart_notifications_title"
+        android:key="recent_notifications_category"
+        android:title="@string/recent_notifications"
+        settings:allowDividerAbove="false"
         android:order="3">
-        <SwitchPreference
-            android:key="asst_capability_prioritizer"
-            android:title="@string/asst_capability_prioritizer_title"
-            android:summary="@string/asst_capability_prioritizer_summary"
-            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+        <!-- Placeholder for a list of recent apps -->
+
+        <!-- See all apps button -->
+        <Preference
+            android:key="all_notifications"
+            android:title="@string/notifications_title"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            android:order="4">
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.Settings$NotificationAppListActivity"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="configure_notifications_lock"
+        android:title="@string/lock_screen_notifications_title"
+        android:order="10">
+        <!-- When device is locked -->
+        <com.android.settings.RestrictedListPreference
+            android:key="lock_screen_notifications"
+            android:title="@string/lock_screen_notifs_title"
+            android:summary="@string/summary_placeholder" />
 
         <SwitchPreference
-            android:key="asst_capabilities_actions_replies"
-            android:title="@string/asst_capabilities_actions_replies_title"
-            android:summary="@string/asst_capabilities_actions_replies_summary"
-            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+            android:key="lock_screen_redact"
+            android:title="@string/lock_screen_notifs_redact"
+            android:summary="@string/lock_screen_notifs_redact_summary"
+            settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
+
+        <SwitchPreference
+            android:key="lock_screen_work_redact"
+            android:title="@string/lock_screen_notifs_redact_work"
+            android:summary="@string/lock_screen_notifs_redact_work_summary"
+            settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -54,19 +79,11 @@
         android:order="15"
         settings:initialExpandedChildrenCount="0">
 
-        <com.android.settings.RestrictedListPreference
-            android:key="swipe"
-            android:title="@string/swipe_direction_title"
-            android:entries="@array/swipe_direction_titles"
-            android:entryValues="@array/swipe_direction_values"
-            settings:controller="com.android.settings.notification.SwipeDirectionPreferenceController"/>
-
-        <!-- When device is locked -->
-        <com.android.settings.RestrictedListPreference
-            android:key="lock_screen_notifications"
-            android:title="@string/lock_screen_notifications_title"
-            android:summary="@string/summary_placeholder"
-            settings:searchable="false"/>
+        <SwitchPreference
+            android:key="asst_capabilities_actions_replies"
+            android:title="@string/asst_capabilities_actions_replies_title"
+            android:summary="@string/asst_capabilities_actions_replies_summary"
+            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
 
         <!-- Notification badging -->
         <SwitchPreference
@@ -102,45 +119,4 @@
             settings:controller="com.android.settings.notification.ZenModePreferenceController"
             settings:allowDividerAbove="false"/>
     </PreferenceCategory>
-
-    <!-- Empty category to draw divider -->
-    <PreferenceCategory
-        android:key="all_notifications_divider"
-        android:order="20"/>
-
-    <PreferenceCategory
-        android:key="recent_notifications_category"
-        android:title="@string/recent_notifications"
-        settings:allowDividerAbove="false"
-        android:order="21">
-        <!-- Placeholder for a list of recent apps -->
-
-        <!-- See all apps button -->
-        <Preference
-            android:key="all_notifications"
-            android:title="@string/notifications_title"
-            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            android:order="22">
-            <extra
-                android:name="classname"
-                android:value="com.android.settings.Settings$NotificationAppListActivity"/>
-        </Preference>
-    </PreferenceCategory>
-
-    <!-- Place work profile section at the bottom to avoid users thinking that any of the
-         above settings are specific to the work profile -->
-    <PreferenceCategory
-        android:key="lock_screen_notifications_profile_header"
-        android:title="@string/profile_section_header"
-        android:order="23"
-        settings:searchable="false">
-
-        <com.android.settings.RestrictedListPreference
-            android:key="lock_screen_notifications_profile"
-            android:title="@string/locked_work_profile_notification_title"
-            android:summary="@string/summary_placeholder"
-            android:order="24"
-            settings:searchable="false"/>
-    </PreferenceCategory>
-
 </PreferenceScreen>
