@@ -25,6 +25,10 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
     public PanelContent getPanel(Context context, String panelType, String mediaPackageName) {
+        if (context == null) {
+            return null;
+        }
+
         switch (panelType) {
             case Settings.Panel.ACTION_INTERNET_CONNECTIVITY:
                 return InternetConnectivityPanel.create(context);
