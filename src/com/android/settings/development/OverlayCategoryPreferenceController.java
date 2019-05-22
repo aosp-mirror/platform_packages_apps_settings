@@ -198,8 +198,8 @@ public class OverlayCategoryPreferenceController extends DeveloperOptionsPrefere
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        // STOPSHIP b/122308197: reset the overlays to the set in
-        // Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES
+        // TODO b/133222035: remove these developer settings when the
+        // Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES setting is used
         setOverlay(PACKAGE_DEVICE_DEFAULT);
         updateState(mPreference);
     }
