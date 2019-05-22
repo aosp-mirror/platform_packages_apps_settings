@@ -41,11 +41,13 @@ public class BubblePreferenceController extends NotificationPreferenceController
     static final int SYSTEM_WIDE_OFF = 0;
 
     private FragmentManager mFragmentManager;
+    private boolean mIsAppPage;
 
     public BubblePreferenceController(Context context, @Nullable FragmentManager fragmentManager,
-            NotificationBackend backend) {
+            NotificationBackend backend, boolean isAppPage) {
         super(context, backend);
         mFragmentManager = fragmentManager;
+        mIsAppPage = isAppPage;
     }
 
     @Override
@@ -58,7 +60,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
         if (!super.isAvailable()) {
             return false;
         }
-        if (!isGloballyEnabled()) {
+        if (!mIsAppPage && !isGloballyEnabled()) {
             return false;
         }
         if (mChannel != null) {
