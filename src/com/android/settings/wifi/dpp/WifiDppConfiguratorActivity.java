@@ -16,9 +16,9 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.core.InstrumentedActivity;
 
 import java.util.List;
@@ -94,6 +95,13 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     }
 
     @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        resid = SetupWizardUtils.getTheme(getIntent());
+        theme.applyStyle(R.style.SetupWizardPartnerResource, /* force */ true);
+        super.onApplyThemeResource(theme, resid, first);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -116,12 +124,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     preSharedKey, hiddenSsid, networkId, isHotspot);
         } else {
             handleIntent(getIntent());
-        }
-
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setElevation(0);
-            actionBar.setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -318,14 +320,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         }
 
         mWifiDppQrCode = new WifiQrCode(wifiQrCode.getQrCode());
-        return true;
-    }
-
-    @Override
-    public boolean onNavigateUp() {
-        if (!mFragmentManager.popBackStackImmediate()) {
-            finish();
-        }
         return true;
     }
 

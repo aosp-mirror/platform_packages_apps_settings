@@ -16,9 +16,9 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -27,9 +27,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.core.InstrumentedActivity;
-
-import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * To provision "this" device with specified Wi-Fi network.
@@ -52,24 +51,21 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
     }
 
     @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        resid = SetupWizardUtils.getTheme(getIntent());
+        theme.applyStyle(R.style.SetupWizardPartnerResource, /* force */ true);
+        super.onApplyThemeResource(theme, resid, first);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            setTheme(R.style.LightTheme_SettingsBase_SetupWizard);
-        }
 
         setContentView(R.layout.wifi_dpp_activity);
         mFragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
             handleIntent(getIntent());
-        }
-
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setElevation(0);
-            actionBar.setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -110,12 +106,6 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
             fragmentTransaction.addToBackStack(/* name */ null);
         }
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public boolean onNavigateUp(){
-        finish();
-        return true;
     }
 
     @Override
