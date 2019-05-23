@@ -86,16 +86,6 @@ public class ToggleAccessibilityServicePreferenceFragment
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mSwitchBar.setLabelDelegate((boolean isChecked) -> {
-            final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
-            return getString(R.string.accessibility_service_master_switch_title,
-                    info.getResolveInfo().loadLabel(getPackageManager()));
-        });
-    }
-
-    @Override
     public void onResume() {
         mSettingsContentObserver.register(getContentResolver());
         updateSwitchBarToggleSwitch();
@@ -130,7 +120,7 @@ public class ToggleAccessibilityServicePreferenceFragment
                 return serviceInfo;
             }
         }
-        throw new IllegalStateException("ServiceInfo is not found.");
+        return null;
     }
 
     @Override
@@ -138,12 +128,18 @@ public class ToggleAccessibilityServicePreferenceFragment
         switch (dialogId) {
             case DIALOG_ID_ENABLE_WARNING: {
                 final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                if (info == null) {
+                    return null;
+                }
                 mDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getActivity(), info, this);
                 break;
             }
             case DIALOG_ID_DISABLE_WARNING: {
                 AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                if (info == null) {
+                    return null;
+                }
                 mDialog = AccessibilityServiceWarning
                         .createDisableDialog(getActivity(), info, this);
                 break;

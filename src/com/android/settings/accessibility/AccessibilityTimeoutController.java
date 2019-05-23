@@ -36,6 +36,9 @@ import com.google.common.primitives.Ints;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller class that control accessibility time out settings.
+ */
 public class AccessibilityTimeoutController extends AbstractPreferenceController implements
         LifecycleObserver, RadioButtonPreference.OnClickListener, PreferenceControllerMixin {
     static final String CONTENT_TIMEOUT_SETTINGS_SECURE =
@@ -43,11 +46,11 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
     static final String CONTROL_TIMEOUT_SETTINGS_SECURE =
             Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS;
 
-    // pair the preference key and timeout value
+    // pair the preference key and timeout value.
     private final Map<String, Integer> mAccessibilityTimeoutKeyToValueMap = new HashMap<>();
 
+    // RadioButtonPreference key, each preference represent a timeout value.
     private final String mPreferenceKey;
-    private final String mfragmentTag;
     private final ContentResolver mContentResolver;
     private final Resources mResources;
     private OnChangeListener mOnChangeListener;
@@ -55,7 +58,7 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
     private int mAccessibilityUiTimeoutValue;
 
     public AccessibilityTimeoutController(Context context, Lifecycle lifecycle,
-            String preferenceKey, String fragmentTag) {
+            String preferenceKey) {
         super(context);
 
         mContentResolver = context.getContentResolver();
@@ -65,7 +68,6 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
             lifecycle.addObserver(this);
         }
         mPreferenceKey = preferenceKey;
-        mfragmentTag = fragmentTag;
     }
 
     protected static int getSecureAccessibilityTimeoutValue(ContentResolver resolver, String name) {
@@ -84,14 +86,8 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
     private Map<String, Integer> getTimeoutValueToKeyMap() {
         if (mAccessibilityTimeoutKeyToValueMap.size() == 0) {
 
-            String[] timeoutKeys = null;
-            if (mfragmentTag.equals(AccessibilityContentTimeoutPreferenceFragment.TAG)) {
-                timeoutKeys = mResources.getStringArray(
-                        R.array.accessibility_timeout_content_selector_keys);
-            } else if (mfragmentTag.equals(AccessibilityControlTimeoutPreferenceFragment.TAG)) {
-                timeoutKeys = mResources.getStringArray(
+            String[] timeoutKeys = mResources.getStringArray(
                         R.array.accessibility_timeout_control_selector_keys);
-            }
 
             int[] timeoutValues = mResources.getIntArray(
                     R.array.accessibility_timeout_selector_values);
@@ -109,11 +105,9 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
     }
 
     private void handlePreferenceChange(String value) {
-        if (mfragmentTag.equals(AccessibilityContentTimeoutPreferenceFragment.TAG)) {
-            putSecureString(Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, value);
-        } else if (mfragmentTag.equals(AccessibilityControlTimeoutPreferenceFragment.TAG)) {
-            putSecureString(Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, value);
-        }
+        // save value to both content and control timeout setting.
+        putSecureString(Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, value);
+        putSecureString(Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, value);
     }
 
     @Override
@@ -144,16 +138,10 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
         }
     }
 
-    private int getAccessibilityTimeoutValue(String fragmentTag) {
-        int timeoutValue = 0;
-        // two kinds of Secure value, one is content timeout, the other is control timeout.
-        if (AccessibilityContentTimeoutPreferenceFragment.TAG.equals(fragmentTag)) {
-            timeoutValue = getSecureAccessibilityTimeoutValue(mContentResolver,
-                    CONTENT_TIMEOUT_SETTINGS_SECURE);
-        } else if (AccessibilityControlTimeoutPreferenceFragment.TAG.equals(fragmentTag)) {
-            timeoutValue = getSecureAccessibilityTimeoutValue(mContentResolver,
+    private int getAccessibilityTimeoutValue() {
+        // get accessibility control timeout value
+        int timeoutValue = getSecureAccessibilityTimeoutValue(mContentResolver,
                     CONTROL_TIMEOUT_SETTINGS_SECURE);
-        }
         return timeoutValue;
     }
 
@@ -167,7 +155,7 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        mAccessibilityUiTimeoutValue = getAccessibilityTimeoutValue(mfragmentTag);
+        mAccessibilityUiTimeoutValue = getAccessibilityTimeoutValue();
 
         // reset RadioButton
         mPreference.setChecked(false);
@@ -175,7 +163,13 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
         updatePreferenceCheckedState(preferenceValue);
     }
 
-    public static interface OnChangeListener {
+    /**
+     * Listener interface handles checked event.
+     */
+    public interface OnChangeListener {
+        /**
+         * A hook that is called when preference checked.
+         */
         void onCheckedChanged(Preference preference);
     }
 }
