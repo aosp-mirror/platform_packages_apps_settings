@@ -164,7 +164,8 @@ public class SimSelectNotification extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.ic_sim_card_alert_white_48dp)
                 .setColor(context.getColor(R.color.sim_noitification))
                 .setContentTitle(resources.getText(R.string.sim_notification_title))
-                .setContentText(resources.getText(R.string.sim_notification_summary));
+                .setContentText(resources.getText(R.string.sim_notification_summary))
+                .setAutoCancel(true);
         Intent resultIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
@@ -197,7 +198,8 @@ public class SimSelectNotification extends BroadcastReceiver {
                         .setColor(context.getColor(R.color.sim_noitification))
                         .setContentTitle(titleString)
                         .setContentText(notificationSummary)
-                        .setStyle(new Notification.BigTextStyle().bigText(notificationSummary));
+                        .setStyle(new Notification.BigTextStyle().bigText(notificationSummary))
+                        .setAutoCancel(true);
 
         // Create the pending intent that will lead to the subscription setting page.
         Intent resultIntent = new Intent(Settings.ACTION_MMS_MESSAGE_SETTING);
