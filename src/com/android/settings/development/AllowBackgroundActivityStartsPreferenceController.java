@@ -82,10 +82,10 @@ public class AllowBackgroundActivityStartsPreferenceController
 
     private boolean isDefaultEnabled() {
         // The default in the absence of user preference is settable via DeviceConfig.
-        // Note that the default default is enabled.
+        // Note that the default default is disabled.
         return DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_ACTIVITY_MANAGER,
                 KEY_DEFAULT_BACKGROUND_ACTIVITY_STARTS_ENABLED,
-                /*defaultValue*/ true);
+                /*defaultValue*/ false);
     }
 }
