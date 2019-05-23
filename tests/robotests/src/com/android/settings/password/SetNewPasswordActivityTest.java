@@ -24,6 +24,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_HIGH;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -32,8 +33,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -54,6 +57,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowDevicePolicyManager;
+import org.robolectric.shadows.ShadowLog;
 
 @RunWith(RobolectricTestRunner.class)
 public class SetNewPasswordActivityTest {
@@ -91,7 +96,7 @@ public class SetNewPasswordActivityTest {
                 Robolectric.buildActivity(SetNewPasswordActivity.class).get();
         activity.launchChooseLock(new Bundle());
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent intent = shadowActivity.getNextStartedActivityForResult().intent;
+        Intent intent = getLaunchChooseLockIntent(shadowActivity);
 
         assertThat(intent.getComponent())
                 .isEqualTo(new ComponentName(activity, ChooseLockGeneric.class));
@@ -105,7 +110,7 @@ public class SetNewPasswordActivityTest {
                 Robolectric.buildActivity(SetNewPasswordActivity.class).get();
         activity.launchChooseLock(new Bundle());
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent intent = shadowActivity.getNextStartedActivityForResult().intent;
+        Intent intent = getLaunchChooseLockIntent(shadowActivity);
 
         assertThat(intent.getComponent())
                 .isEqualTo(new ComponentName(activity, SetupChooseLockGeneric.class));
@@ -149,7 +154,7 @@ public class SetNewPasswordActivityTest {
                 Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent actualIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        Intent actualIntent = getLaunchChooseLockIntent(shadowActivity);
         assertThat(actualIntent.getAction()).isEqualTo(ACTION_SET_NEW_PASSWORD);
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isTrue();
         assertThat(actualIntent.getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE))
@@ -179,7 +184,7 @@ public class SetNewPasswordActivityTest {
                 Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent actualIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        Intent actualIntent = getLaunchChooseLockIntent(shadowActivity);
         assertThat(actualIntent.getAction()).isEqualTo(ACTION_SET_NEW_PASSWORD);
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
@@ -207,7 +212,7 @@ public class SetNewPasswordActivityTest {
                 Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent actualIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        Intent actualIntent = getLaunchChooseLockIntent(shadowActivity);
         assertThat(actualIntent.getAction()).isEqualTo(ACTION_SET_NEW_PASSWORD);
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
@@ -234,7 +239,7 @@ public class SetNewPasswordActivityTest {
                 Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent actualIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        Intent actualIntent = getLaunchChooseLockIntent(shadowActivity);
         assertThat(actualIntent.getAction()).isEqualTo(ACTION_SET_NEW_PASSWORD);
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
@@ -262,7 +267,7 @@ public class SetNewPasswordActivityTest {
                 Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent actualIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        Intent actualIntent = getLaunchChooseLockIntent(shadowActivity);
         assertThat(actualIntent.getAction()).isEqualTo(ACTION_SET_NEW_PARENT_PROFILE_PASSWORD);
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
@@ -289,7 +294,7 @@ public class SetNewPasswordActivityTest {
                 Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent actualIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        Intent actualIntent = getLaunchChooseLockIntent(shadowActivity);
         assertThat(actualIntent.getAction()).isEqualTo(ACTION_SET_NEW_PARENT_PROFILE_PASSWORD);
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
@@ -300,5 +305,46 @@ public class SetNewPasswordActivityTest {
                 SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
                 PKG_NAME,
                 Integer.MIN_VALUE);
+    }
+
+    @Test
+    @Config(shadows = {ShadowPasswordUtils.class})
+    public void launchChooseLock_callingAppIsAdmin_setsAdminExtra() {
+        SetNewPasswordActivity activity =
+                Robolectric.buildActivity(SetNewPasswordActivity.class).get();
+        DevicePolicyManager devicePolicyManager =
+                (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        Shadows.shadowOf(devicePolicyManager).setActiveAdmin(buildTestComponentName(PKG_NAME));
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
+
+        activity.launchChooseLock(new Bundle());
+
+        Intent intent = getLaunchChooseLockIntent(Shadows.shadowOf(activity));
+        assertThat(intent.hasExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN)).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {ShadowPasswordUtils.class})
+    public void launchChooseLock_callingAppIsNotAdmin_doesNotSetAdminExtra() {
+        SetNewPasswordActivity activity =
+                Robolectric.buildActivity(SetNewPasswordActivity.class).get();
+        DevicePolicyManager devicePolicyManager =
+                (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        Shadows.shadowOf(devicePolicyManager)
+                .setActiveAdmin(buildTestComponentName("other_pkg_name"));
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
+
+        activity.launchChooseLock(new Bundle());
+
+        Intent intent = getLaunchChooseLockIntent(Shadows.shadowOf(activity));
+        assertThat(intent.hasExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN)).isFalse();
+    }
+
+    private ComponentName buildTestComponentName(String packageName) {
+        return new ComponentName(packageName, "clazz");
+    }
+
+    private Intent getLaunchChooseLockIntent(ShadowActivity shadowActivity) {
+        return shadowActivity.getNextStartedActivityForResult().intent;
     }
 }
