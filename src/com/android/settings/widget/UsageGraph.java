@@ -288,7 +288,11 @@ public class UsageGraph extends View {
         canvas.drawPath(mPath, paint);
     }
 
-    private void drawFilledPath(Canvas canvas, SparseIntArray localPaths, Paint paint) {
+    @VisibleForTesting
+    void drawFilledPath(Canvas canvas, SparseIntArray localPaths, Paint paint) {
+        if (localPaths.size() == 0) {
+            return;
+        }
         mPath.reset();
         float lastStartX = localPaths.keyAt(0);
         mPath.moveTo(localPaths.keyAt(0), localPaths.valueAt(0));
