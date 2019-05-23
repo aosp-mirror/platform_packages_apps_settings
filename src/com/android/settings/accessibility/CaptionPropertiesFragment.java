@@ -31,18 +31,17 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.ToggleSwitch;
-import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.LayoutPreference;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -63,6 +62,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private static final String PREF_TYPEFACE = "captioning_typeface";
     private static final String PREF_LOCALE = "captioning_locale";
     private static final String PREF_PRESET = "captioning_preset";
+    private static final String PREF_SWITCH = "captioning_preference_switch";
     private static final String PREF_CUSTOM = "custom";
 
     /** WebVtt specifies line height as 5.3% of the viewport height. */
@@ -72,10 +72,9 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private SubtitleView mPreviewText;
     private View mPreviewWindow;
     private View mPreviewViewport;
-    private SwitchBar mSwitchBar;
-    private ToggleSwitch mToggleSwitch;
 
     // Standard options.
+    private SwitchPreference mSwitch;
     private LocalePreference mLocale;
     private ListPreference mFontSize;
     private PresetPreference mPreset;
@@ -94,6 +93,8 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
     private boolean mShowingCustom;
 
+    private final List<Preference> mPreferenceList = new ArrayList<>();
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_CAPTION_PROPERTIES;
@@ -110,31 +111,18 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         updateAllPreferences();
         refreshShowingCustom();
         installUpdateListeners();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        final boolean enabled = mCaptioningManager.isEnabled();
-        SettingsActivity activity = (SettingsActivity) getActivity();
-        mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.setSwitchBarText(R.string.accessibility_caption_master_switch_title,
-                R.string.accessibility_caption_master_switch_title);
-        mSwitchBar.setCheckedInternal(enabled);
-        mToggleSwitch = mSwitchBar.getSwitch();
-
-        getPreferenceScreen().setEnabled(enabled);
-
         refreshPreviewText();
-
-        installSwitchBarToggleSwitch();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        removeSwitchBarToggleSwitch();
+    private void setPreferenceViewEnabled(boolean enabled) {
+        for (Preference preference : mPreferenceList) {
+            preference.setEnabled(enabled);
+        }
+    }
+
+    private void refreshPreferenceViewEnabled(boolean enabled) {
+        setPreferenceViewEnabled(enabled);
+        mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void refreshPreviewText() {
@@ -196,38 +184,10 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         }
     }
 
-    protected void onInstallSwitchBarToggleSwitch() {
-        mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
-            @Override
-            public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
-                mSwitchBar.setCheckedInternal(checked);
-                Settings.Secure.putInt(getActivity().getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, checked ? 1 : 0);
-                getPreferenceScreen().setEnabled(checked);
-                if (mPreviewText != null) {
-                    mPreviewText.setVisibility(checked ? View.VISIBLE : View.INVISIBLE);
-                }
-                return false;
-            }
-        });
-    }
-
-    private void installSwitchBarToggleSwitch() {
-        onInstallSwitchBarToggleSwitch();
-        mSwitchBar.show();
-    }
-
-    private void removeSwitchBarToggleSwitch() {
-        mSwitchBar.hide();
-        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
-    }
-
     private void initializeAllPreferences() {
         final LayoutPreference captionPreview = findPreference(PREF_CAPTION_PREVIEW);
 
-        final boolean enabled = mCaptioningManager.isEnabled();
         mPreviewText = captionPreview.findViewById(R.id.preview_text);
-        mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
 
         mPreviewWindow = captionPreview.findViewById(R.id.preview_window);
 
@@ -236,15 +196,23 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
                 (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom)
                         -> refreshPreviewText());
 
-        mLocale = (LocalePreference) findPreference(PREF_LOCALE);
-        mFontSize = (ListPreference) findPreference(PREF_FONT_SIZE);
-
         final Resources res = getResources();
         final int[] presetValues = res.getIntArray(R.array.captioning_preset_selector_values);
         final String[] presetTitles = res.getStringArray(R.array.captioning_preset_selector_titles);
         mPreset = (PresetPreference) findPreference(PREF_PRESET);
         mPreset.setValues(presetValues);
         mPreset.setTitles(presetTitles);
+
+        mSwitch = (SwitchPreference) findPreference(PREF_SWITCH);
+        mLocale = (LocalePreference) findPreference(PREF_LOCALE);
+        mFontSize = (ListPreference) findPreference(PREF_FONT_SIZE);
+
+        // Initialize the preference list
+        mPreferenceList.add(mLocale);
+        mPreferenceList.add(mFontSize);
+        mPreferenceList.add(mPreset);
+
+        refreshPreferenceViewEnabled(mCaptioningManager.isEnabled());
 
         mCustom = (PreferenceCategory) findPreference(PREF_CUSTOM);
         mShowingCustom = true;
@@ -304,6 +272,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mWindowOpacity.setOnValueChangedListener(this);
         mEdgeType.setOnValueChangedListener(this);
 
+        mSwitch.setOnPreferenceChangeListener(this);
         mTypeface.setOnPreferenceChangeListener(this);
         mFontSize.setOnPreferenceChangeListener(this);
         mLocale.setOnPreferenceChangeListener(this);
@@ -338,6 +307,8 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
         final String rawLocale = mCaptioningManager.getRawLocale();
         mLocale.setValue(rawLocale == null ? "" : rawLocale);
+
+        mSwitch.setChecked(mCaptioningManager.isEnabled());
     }
 
     /**
@@ -431,16 +402,22 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         if (mTypeface == preference) {
             Settings.Secure.putString(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE, (String) value);
+            refreshPreviewText();
         } else if (mFontSize == preference) {
             Settings.Secure.putFloat(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE,
                     Float.parseFloat((String) value));
+            refreshPreviewText();
         } else if (mLocale == preference) {
             Settings.Secure.putString(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_LOCALE, (String) value);
+            refreshPreviewText();
+        } else if (mSwitch == preference) {
+            Settings.Secure.putInt(
+                    cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, (boolean) value ? 1 : 0);
+            refreshPreferenceViewEnabled((boolean) value);
         }
 
-        refreshPreviewText();
         return true;
     }
 }
