@@ -16,14 +16,7 @@
 
 package com.android.settings.notification;
 
-import static com.android.settings.notification.ConfigureNotificationSettings.KEY_LOCKSCREEN;
-import static com.android.settings.notification.ConfigureNotificationSettings
-        .KEY_LOCKSCREEN_WORK_PROFILE;
-import static com.android.settings.notification.ConfigureNotificationSettings
-        .KEY_LOCKSCREEN_WORK_PROFILE_HEADER;
-import static com.android.settings.notification.ConfigureNotificationSettings.KEY_SWIPE_DOWN;
-import static com.android.settings.notification.ConfigureNotificationSettings
-        .SUMMARY_PROVIDER_FACTORY;
+import static com.android.settings.notification.ConfigureNotificationSettings.SUMMARY_PROVIDER_FACTORY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -37,8 +30,6 @@ import android.app.Activity;
 
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.ConfigureNotificationSettings.SummaryProvider;
-import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
-import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,10 +37,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class ConfigureNotificationSettingsTest {
@@ -59,20 +46,6 @@ public class ConfigureNotificationSettingsTest {
     @Before
     public void setUp() {
         mActivity = spy(Robolectric.buildActivity(Activity.class).get());
-    }
-
-    @Test
-    @Config(shadows = {
-            ShadowUtils.class,
-            ShadowLockPatternUtils.class
-    })
-    public void getNonIndexableKeys_shouldContainLockScreenPrefs() {
-        final List<String> keys = ConfigureNotificationSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(RuntimeEnvironment.application);
-
-        assertThat(keys).containsAllOf(
-                KEY_SWIPE_DOWN, KEY_LOCKSCREEN, KEY_LOCKSCREEN_WORK_PROFILE,
-                KEY_LOCKSCREEN_WORK_PROFILE_HEADER);
     }
 
     @Test
