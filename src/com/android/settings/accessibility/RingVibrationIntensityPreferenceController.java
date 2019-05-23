@@ -29,7 +29,7 @@ public class RingVibrationIntensityPreferenceController
 
     public RingVibrationIntensityPreferenceController(Context context) {
         super(context, PREF_KEY, Settings.System.RING_VIBRATION_INTENSITY,
-                Settings.System.VIBRATE_WHEN_RINGING);
+                Settings.System.VIBRATE_WHEN_RINGING, /* supportRampingRinger= */ true);
     }
 
     @Override
