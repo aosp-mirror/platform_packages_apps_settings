@@ -170,6 +170,10 @@ public class PanelFragment extends Fragment {
                 .getPanelFeatureProvider()
                 .getPanel(activity, panelType, mediaPackageName);
 
+        if (mPanel == null) {
+            activity.finish();
+        }
+
         mMetricsProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
 
         mPanelSlices.setLayoutManager(new LinearLayoutManager((activity)));

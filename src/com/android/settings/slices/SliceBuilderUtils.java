@@ -300,6 +300,10 @@ public class SliceBuilderUtils {
     private static Slice buildSliderSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
         final SliderPreferenceController sliderController = (SliderPreferenceController) controller;
+        if (sliderController.getMax() <= sliderController.getMin()) {
+            Log.e(TAG, "Invalid sliderController: " + sliderController.getPreferenceKey());
+            return null;
+        }
         final PendingIntent actionIntent = getSliderAction(context, sliceData);
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
         final IconCompat icon = getSafeIcon(context, sliceData);
