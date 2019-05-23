@@ -18,6 +18,7 @@ package com.android.settings.display;
 
 import android.app.Dialog;
 import android.app.UiModeManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -39,9 +40,7 @@ public class DarkUIInfoDialogFragment extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/130251804): Add metrics constant in followup change to avoid merge conflict in
-        // beta cherrypick
-        return 0;
+        return SettingsEnums.DIALOG_DARK_UI_INFO;
     }
 
     @NonNull
