@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -41,11 +42,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
 
     private FragmentManager mFragmentManager;
 
-    public BubblePreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend);
-    }
-
-    public BubblePreferenceController(Context context, FragmentManager fragmentManager,
+    public BubblePreferenceController(Context context, @Nullable FragmentManager fragmentManager,
             NotificationBackend backend) {
         super(context, backend);
         mFragmentManager = fragmentManager;
@@ -96,7 +93,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
             mChannel.setAllowBubbles(value);
             saveChannel();
             return true;
-        } else if (mAppRow != null) {
+        } else if (mAppRow != null && mFragmentManager != null) {
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             // if the global setting is off, toggling app level permission requires extra
             // confirmation
