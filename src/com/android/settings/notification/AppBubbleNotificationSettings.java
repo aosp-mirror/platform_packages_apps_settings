@@ -64,7 +64,7 @@ public class AppBubbleNotificationSettings extends NotificationSettingsBase impl
         controllers.add(new BubblePreferenceController(context, fragment != null
                 ? fragment.getChildFragmentManager()
                 : null,
-                new NotificationBackend()));
+                new NotificationBackend(), true /* isAppPage */));
         return controllers;
     }
 
