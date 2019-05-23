@@ -120,7 +120,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     private CharSequence getFirstPhoneNumber() {
         final List<SubscriptionInfo> subscriptionInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList(true);
-        if (subscriptionInfoList == null) {
+        if (subscriptionInfoList == null || subscriptionInfoList.isEmpty()) {
             return mContext.getText(R.string.device_info_default);
         }
 
