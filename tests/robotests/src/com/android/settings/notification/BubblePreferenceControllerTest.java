@@ -78,6 +78,7 @@ public class BubblePreferenceControllerTest {
     private FragmentManager mFragmentManager;
 
     private BubblePreferenceController mController;
+    private BubblePreferenceController mAppPageController;
 
     @Before
     public void setUp() {
@@ -87,7 +88,10 @@ public class BubblePreferenceControllerTest {
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
-        mController = spy(new BubblePreferenceController(mContext, mFragmentManager, mBackend));
+        mController = spy(new BubblePreferenceController(mContext, mFragmentManager, mBackend,
+                false /* isAppPage */));
+        mAppPageController = spy(new BubblePreferenceController(mContext, mFragmentManager,
+                mBackend, true /* isAppPage */));
     }
 
     @Test
@@ -148,6 +152,16 @@ public class BubblePreferenceControllerTest {
                 NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
 
         assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_app_evenIfOffGlobally() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        mAppPageController.onResume(appRow, null, null, null);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
+
+        assertTrue(mAppPageController.isAvailable());
     }
 
     @Test
