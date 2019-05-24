@@ -138,7 +138,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
         mVibrator = getSystemService(Vibrator.class);
 
-        DescriptionStyler.applyPartnerCustomizationStyle(mRepeatMessage);
+        if (getLayout().shouldApplyPartnerHeavyThemeResource()) {
+            DescriptionStyler.applyPartnerCustomizationStyle(mRepeatMessage);
+        }
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
