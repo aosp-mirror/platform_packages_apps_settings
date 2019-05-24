@@ -20,9 +20,15 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class QrCodeGenerator {
     /**
@@ -34,8 +40,13 @@ public final class QrCodeGenerator {
      */
     public static Bitmap encodeQrCode(String contents, int size)
             throws WriterException, IllegalArgumentException {
+        final Map<EncodeHintType, Object> hints = new HashMap<>();
+        if (!isIso88591(contents)) {
+            hints.put(EncodeHintType.CHARACTER_SET, StandardCharsets.UTF_8.name());
+        }
+
         final BitMatrix qrBits = new MultiFormatWriter().encode(contents, BarcodeFormat.QR_CODE,
-                size, size);
+                size, size, hints);
         final Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565);
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
@@ -43,5 +54,10 @@ public final class QrCodeGenerator {
             }
         }
         return bitmap;
+    }
+
+    private static boolean isIso88591(String contents) {
+        CharsetEncoder encoder = StandardCharsets.ISO_8859_1.newEncoder();
+        return encoder.canEncode(contents);
     }
 }
