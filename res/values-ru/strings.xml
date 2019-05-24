@@ -2109,7 +2109,7 @@
     <string name="display_category_title" msgid="685461049938269166">"Экран"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Элементы управления"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Скачанные сервисы"</string>
-    <string name="experimental_category_title" msgid="5272318666666893547">"Экспериментальная функция"</string>
+    <string name="experimental_category_title" msgid="5272318666666893547">"Экспериментальные функции"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Экспериментальные функции"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Инструмент для озвучивания данных с экрана для людей с нарушениями зрения"</string>
@@ -2138,9 +2138,9 @@
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Монофонический звук"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Объединять каналы при воспроизведении аудио"</string>
     <string name="accessibility_toggle_master_balance_title" msgid="551441665399043471">"Баланс звука"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Устройство слева"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Устройство справа"</string>
-    <string name="accessibility_timeout_default" msgid="8316215621219570607">"Стандартный"</string>
+    <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Левый канал"</string>
+    <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Правый канал"</string>
+    <string name="accessibility_timeout_default" msgid="8316215621219570607">"По умолчанию"</string>
     <string name="accessibility_timeout_10secs" msgid="1976492627730727871">"10 секунд"</string>
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 секунд"</string>
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 минута"</string>
@@ -2261,9 +2261,9 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Включение сервиса <xliff:g id="SERVICE">%1$s</xliff:g> затронет шифрование данных, поэтому необходимо ввести PIN-код."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Включение сервиса <xliff:g id="SERVICE">%1$s</xliff:g> затронет шифрование данных, поэтому необходимо ввести пароль."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> запрашивает полный доступ к устройству. Сервис может считывать данные с экрана и действовать от имени пользователей, которым требуются специальные возможности. Этот уровень доступа не подходит для большинства приложений."</string>
-    <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Предоставляйте полный доступ только тем приложениям, которые обеспечивают ваши особые потребности."</string>
+    <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Полный контроль нужен приложениям для реализации специальных возможностей и не нужен большинству остальных."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Просмотр и контроль экрана"</string>
-    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Сервис читает весь контент на экране и отображает его поверх других приложений."</string>
+    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Сервис читает весь контент на экране и отображает контент поверх других приложений."</string>
     <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Просмотр и выполнение действий"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Сервис отслеживает ваше взаимодействие с приложением или датчиками устройства и дает приложениям команды от вашего имени."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Разрешить"</string>
@@ -3503,16 +3503,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Высокая"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Всплывающее окно"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Блокировка"</string>
-    <string name="notification_silence_title" msgid="8575600650015431622">"Беззвучные"</string>
+    <!-- no translation found for notification_silence_title (6986752165900591125) -->
+    <skip />
     <string name="notification_alert_title" msgid="7426286507434650473">"Приоритетные"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Разрешить оповещения"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Включить звуковой сигнал, вибрацию, а также показывать уведомления поверх других приложений"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Объединять уведомления в одну строку на панели уведомлений"</string>
-    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Уведомления появляются только на специальной панели, чтобы вы не отвлекались. Всегда без звука."</string>
-    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Показ уведомлений с низким приоритетом. Всегда без звука."</string>
-    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Показ уведомлений с низким приоритетом. Всегда без звука."</string>
-    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Показ уведомлений с низким приоритетом. Всегда без звука."</string>
-    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Со звуком и значком в строке состояния. Появляются на заблокированном экране."</string>
+    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
+    <skip />
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"При разблокированном устройстве показывать уведомления в виде баннера в верхней части экрана"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Включить уведомления"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Адаптивные уведомления"</string>
