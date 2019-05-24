@@ -128,4 +128,23 @@ public class QrCameraTest {
 
         assertThat(mQrCode).isEqualTo(googleUrl);
     }
+
+    @Test
+    public void testDecode_unicodePictureCaptured_QrCodeCorrectValue() {
+        final String unicodeTest = "中文測試";
+
+        try {
+            final Bitmap bmp = QrCodeGenerator.encodeQrCode(unicodeTest, 320);
+            final int[] intArray = new int[bmp.getWidth() * bmp.getHeight()];
+            bmp.getPixels(intArray, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
+            LuminanceSource source = new RGBLuminanceSource(bmp.getWidth(), bmp.getHeight(),
+                    intArray);
+            final BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            mCamera.decodeImage(bitmap);
+            bmp.recycle();
+        } catch (WriterException e) {
+        }
+
+        assertThat(mQrCode).isEqualTo(unicodeTest);
+    }
 }
