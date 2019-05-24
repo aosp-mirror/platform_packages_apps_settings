@@ -32,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -143,84 +144,44 @@ public class ImportancePreferenceTest {
     }
 
     @Test
-    public void setImportanceSummary_status() {
-        ViewGroup parent = new LinearLayout(mContext);
-        TextView tv = new TextView(mContext);
-        tv.setId(R.id.silence_summary);
-        parent.addView(tv);
-        TextView other = new TextView(mContext);
-        other.setId(R.id.alert_summary);
-        parent.addView(other);
-
+    public void setImportanceSummary() {
         final ImportancePreference preference = spy(new ImportancePreference(mContext));
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
+        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
+                inflater.inflate(R.layout.notif_importance_preference, null));
 
-        preference.setDisplayInStatusBar(true);
-        preference.setDisplayOnLockscreen(false);
+        preference.setConfigurable(true);
+        preference.setImportance(IMPORTANCE_DEFAULT);
+        preference.onBindViewHolder(holder);
 
-        preference.setImportanceSummary(parent, IMPORTANCE_LOW, true);
-
-        assertThat(tv.getText()).isEqualTo(
-                mContext.getString(R.string.notification_channel_summary_low_status));
-    }
-
-    @Test
-    public void setImportanceSummary_lock() {
-        ViewGroup parent = new LinearLayout(mContext);
-        TextView tv = new TextView(mContext);
-        tv.setId(R.id.silence_summary);
-        parent.addView(tv);
-        TextView other = new TextView(mContext);
-        other.setId(R.id.alert_summary);
-        parent.addView(other);
-
-        final ImportancePreference preference = spy(new ImportancePreference(mContext));
-
-        preference.setDisplayInStatusBar(false);
-        preference.setDisplayOnLockscreen(true);
-
-        preference.setImportanceSummary(parent, IMPORTANCE_LOW, true);
-
-        assertThat(tv.getText()).isEqualTo(
-                mContext.getString(R.string.notification_channel_summary_low_lock));
-    }
-
-    @Test
-    public void setImportanceSummary_statusLock() {
-        ViewGroup parent = new LinearLayout(mContext);
-        TextView tv = new TextView(mContext);
-        tv.setId(R.id.silence_summary);
-        parent.addView(tv);
-        TextView other = new TextView(mContext);
-        other.setId(R.id.alert_summary);
-        parent.addView(other);
-
-        final ImportancePreference preference = spy(new ImportancePreference(mContext));
+        TextView tv = holder.itemView.findViewById(R.id.silence_summary);
 
         preference.setDisplayInStatusBar(true);
         preference.setDisplayOnLockscreen(true);
 
-        preference.setImportanceSummary(parent, IMPORTANCE_LOW, true);
+        preference.setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_LOW, true);
 
         assertThat(tv.getText()).isEqualTo(
-                mContext.getString(R.string.notification_channel_summary_low_status_lock));
+                mContext.getString(R.string.notification_channel_summary_low));
     }
 
     @Test
-    public void setImportanceSummary_statusLock_default() {
-        ViewGroup parent = new LinearLayout(mContext);
-        TextView tv = new TextView(mContext);
-        tv.setId(R.id.alert_summary);
-        parent.addView(tv);
-        TextView other = new TextView(mContext);
-        other.setId(R.id.silence_summary);
-        parent.addView(other);
-
+    public void setImportanceSummary_default() {
         final ImportancePreference preference = spy(new ImportancePreference(mContext));
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
+        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
+                inflater.inflate(R.layout.notif_importance_preference, null));
+
+        preference.setConfigurable(true);
+        preference.setImportance(IMPORTANCE_DEFAULT);
+        preference.onBindViewHolder(holder);
+
+        TextView tv = holder.itemView.findViewById(R.id.alert_summary);
 
         preference.setDisplayInStatusBar(true);
         preference.setDisplayOnLockscreen(true);
 
-        preference.setImportanceSummary(parent, IMPORTANCE_DEFAULT, true);
+        preference.setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_DEFAULT, true);
 
         assertThat(tv.getText()).isEqualTo(
                 mContext.getString(R.string.notification_channel_summary_default));
