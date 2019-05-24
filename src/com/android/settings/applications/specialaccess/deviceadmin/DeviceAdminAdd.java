@@ -312,7 +312,7 @@ public class DeviceAdminAdd extends Activity {
                             addAndFinish();
                         }
                     })
-                    .setNeutralButton(R.string.cancel, null)
+                    .setNegativeButton(R.string.cancel, null)
                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
                         public void onDismiss(DialogInterface dialogInterface) {
                             finish();
