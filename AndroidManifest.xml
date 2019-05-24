@@ -3239,6 +3239,17 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings" />
         </activity>
+
+        <activity android:name="Settings$GlobalActionsPanelSettingsActivity"
+            android:label="@string/global_actions_panel_title">
+            <intent-filter>
+                <action android:name="com.android.settings.GLOBAL_ACTIONS_PANEL_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.gestures.GlobalActionsPanelSettings" />
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
