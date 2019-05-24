@@ -53,6 +53,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -279,6 +280,12 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         return null;
     }
 
+    private Drawable getAlertingIcon() {
+        Drawable icon = getContext().getDrawable(R.drawable.ic_notifications);
+        icon.setTintList(Utils.getColorAccent(getContext()));
+        return icon;
+    }
+
     protected Preference populateSingleChannelPrefs(PreferenceGroup parent,
             final NotificationChannel channel, final boolean groupBlocked) {
         MasterSwitchPreference channelPref = new MasterSwitchPreference(getPrefContext());
@@ -286,8 +293,10 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                 && isChannelBlockable(channel)
                 && isChannelConfigurable(channel)
                 && !groupBlocked);
-        channelPref.setIcon(channel.getImportance() > IMPORTANCE_LOW
-                ? R.drawable.ic_notification_alert : R.drawable.ic_notification_silence);
+        channelPref.setIcon(null);
+        if (channel.getImportance() > IMPORTANCE_LOW) {
+            channelPref.setIcon(getAlertingIcon());
+        }
         channelPref.setIconSize(MasterSwitchPreference.ICON_SIZE_SMALL);
         channelPref.setKey(channel.getId());
         channelPref.setTitle(channel.getName());
@@ -314,9 +323,10 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                     channel.lockFields(
                             NotificationChannel.USER_LOCKED_IMPORTANCE);
                     MasterSwitchPreference channelPref1 = (MasterSwitchPreference) preference;
-                    channelPref1.setIcon(channel.getImportance() > IMPORTANCE_LOW
-                            ? R.drawable.ic_notification_alert
-                            : R.drawable.ic_notification_silence);
+                    channelPref1.setIcon(null);
+                    if (channel.getImportance() > IMPORTANCE_LOW) {
+                        channelPref1.setIcon(getAlertingIcon());
+                    }
                     toggleBehaviorIconState(channelPref1.getIcon(),
                             importance != IMPORTANCE_NONE);
                     mBackend.updateChannel(mPkg, mUid, channel);
@@ -330,9 +340,14 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
     }
 
     private void toggleBehaviorIconState(Drawable icon, boolean enabled) {
+        if (icon == null) return;
+
         LayerDrawable layerDrawable = (LayerDrawable) icon;
         GradientDrawable background =
                 (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.back);
+
+        if (background == null) return;
+
         if (enabled) {
             background.clearColorFilter();
         } else {
