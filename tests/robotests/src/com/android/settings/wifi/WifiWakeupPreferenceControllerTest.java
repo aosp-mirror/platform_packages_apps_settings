@@ -35,7 +35,6 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,14 +54,13 @@ public class WifiWakeupPreferenceControllerTest {
     private LocationManager mLocationManager;
     @Mock
     private SwitchPreference mPreference;
-    @Mock
-    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new WifiWakeupPreferenceController(mContext, mFragment, mLifecycle);
+        mController = new WifiWakeupPreferenceController(mContext);
+        mController.setFragment(mFragment);
         mController.mLocationManager = mLocationManager;
         mController.mPreference = mPreference;
 
@@ -71,42 +69,29 @@ public class WifiWakeupPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_nonMatchingKey_shouldDoNothing() {
-        final SwitchPreference pref = new SwitchPreference(mContext);
+    public void setChecked_scanEnableLocationEnable_wifiWakeupEnable() {
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 0);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        doReturn(true).when(mLocationManager).isLocationEnabled();
 
-        assertThat(mController.handlePreferenceTreeClick(pref)).isFalse();
-    }
+        mController.setChecked(true);
 
-    @Test
-    public void handlePreferenceTreeClick_nonMatchingType_shouldDoNothing() {
-        final Preference pref = new Preference(mContext);
-        pref.setKey(mController.getPreferenceKey());
-
-        assertThat(mController.handlePreferenceTreeClick(pref)).isFalse();
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_matchingKeyAndType_shouldUpdateSetting() {
-        final SwitchPreference pref = new SwitchPreference(mContext);
-        pref.setChecked(true);
-        pref.setKey(mController.getPreferenceKey());
-
-        assertThat(mController.handlePreferenceTreeClick(pref)).isTrue();
         assertThat(Settings.Global.getInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 0))
                 .isEqualTo(1);
     }
 
     @Test
-    public void handlePreferenceTreeClick_wifiWakeupEnableScanningDisable_wifiWakeupEnable() {
+    public void updateState_wifiWakeupEnableScanningDisable_wifiWakeupDisabled() {
+        final SwitchPreference preference = new SwitchPreference(mContext);
         Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
         Settings.Global.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 0);
         doReturn(true).when(mLocationManager).isLocationEnabled();
 
-        mController.handlePreferenceTreeClick(mPreference);
-        final boolean isWifiWakeupEnabled = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
+        mController.updateState(preference);
 
-        assertThat(isWifiWakeupEnabled).isTrue();
+        assertThat(preference.isChecked()).isFalse();
+        assertThat(preference.getSummary())
+            .isEqualTo(mContext.getString(R.string.wifi_wakeup_summary));
     }
 
     @Test
@@ -114,6 +99,7 @@ public class WifiWakeupPreferenceControllerTest {
         final SwitchPreference preference = new SwitchPreference(mContext);
         Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
         Settings.Global.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        doReturn(true).when(mLocationManager).isLocationEnabled();
 
         mController.updateState(preference);
 
