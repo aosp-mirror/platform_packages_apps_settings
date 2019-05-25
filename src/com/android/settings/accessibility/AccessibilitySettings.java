@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.Vibrator;
+import android.provider.DeviceConfig;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -167,6 +168,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     };
     private static final String ANIMATION_ON_VALUE = "1";
     private static final String ANIMATION_OFF_VALUE = "0";
+
+    static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
 
     private final Map<String, String> mLongPressTimeoutValueToTitleMap = new HashMap<>();
 
@@ -387,6 +390,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         return (TextUtils.isEmpty(serviceSummary))
                 ? serviceState
                 : stateSummaryCombo;
+    }
+
+    @VisibleForTesting
+    static boolean isRampingRingerEnabled(final Context context) {
+        return (Settings.Global.getInt(
+                        context.getContentResolver(),
+                        Settings.Global.APPLY_RAMPING_RINGER, 0) == 1)
+                && DeviceConfig.getBoolean(
+                        DeviceConfig.NAMESPACE_TELEPHONY, RAMPING_RINGER_ENABLED, false);
     }
 
     private void handleToggleTextContrastPreferenceClick() {
@@ -866,7 +878,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 Settings.System.RING_VIBRATION_INTENSITY,
                 vibrator.getDefaultRingVibrationIntensity());
         if (Settings.System.getInt(context.getContentResolver(),
-                Settings.System.VIBRATE_WHEN_RINGING, 0) == 0) {
+                Settings.System.VIBRATE_WHEN_RINGING, 0) == 0 && !isRampingRingerEnabled(context)) {
             ringIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
         }
         CharSequence ringIntensityString =

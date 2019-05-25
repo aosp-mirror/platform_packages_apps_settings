@@ -51,7 +51,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private static final int ON = 1;
     private static final int OFF = 0;
     // 8 seconds.
-    private static final long FACE_ENROLL_EDUCATION_DELAY = 8000;
+    private static final long FACE_ENROLL_EDUCATION_DELAY = 3000;
 
     private FaceManager mFaceManager;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
@@ -101,14 +101,26 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         mDescriptionText = findViewById(R.id.sud_layout_description);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-        mFooterBarMixin.setSecondaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.security_settings_face_enroll_enrolling_skip)
-                        .setListener(this::onSkipButtonClick)
-                        .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
-        );
+
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            mFooterBarMixin.setSecondaryButton(
+                    new FooterButton.Builder(this)
+                            .setText(R.string.skip_label)
+                            .setListener(this::onSkipButtonClick)
+                            .setButtonType(FooterButton.ButtonType.SKIP)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+        } else {
+            mFooterBarMixin.setSecondaryButton(
+                    new FooterButton.Builder(this)
+                            .setText(R.string.security_settings_face_enroll_introduction_cancel)
+                            .setListener(this::onSkipButtonClick)
+                            .setButtonType(FooterButton.ButtonType.CANCEL)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+        }
 
         final FooterButton footerButton = new FooterButton.Builder(this)
                 .setText(R.string.security_settings_face_enroll_education_start)

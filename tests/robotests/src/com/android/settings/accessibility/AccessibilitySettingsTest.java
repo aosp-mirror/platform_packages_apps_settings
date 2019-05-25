@@ -25,12 +25,14 @@ import android.app.UiModeManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Vibrator;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,6 +40,7 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
@@ -133,6 +136,32 @@ public class AccessibilitySettingsTest {
             verifyAccessibilityTimeoutSummary(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE,
                     R.string.accessibility_timeout_default);
         }
+    }
+
+    @Test
+    @Config(shadows = {ShadowDeviceConfig.class})
+    public void testIsRampingRingerEnabled_bothFlagsOn_Enabled() {
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 1 /* ON */);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
+                AccessibilitySettings.RAMPING_RINGER_ENABLED, "true", false /* makeDefault*/);
+      assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {ShadowDeviceConfig.class})
+    public void testIsRampingRingerEnabled_settingsFlagOff_Disabled() {
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0 /* OFF */);
+      assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isFalse();
+    }
+
+    @Test
+    @Config(shadows = {ShadowDeviceConfig.class})
+    public void testIsRampingRingerEnabled_deviceConfigFlagOff_Disabled() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
+                AccessibilitySettings.RAMPING_RINGER_ENABLED, "false", false /* makeDefault*/);
+      assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isFalse();
     }
 
     private void verifyAccessibilityTimeoutSummary(String preferenceKey, int resId) {

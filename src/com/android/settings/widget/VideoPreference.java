@@ -24,10 +24,12 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -51,11 +53,12 @@ public class VideoPreference extends Preference {
     @VisibleForTesting
     boolean mVideoReady;
     private boolean mVideoPaused;
-    private float mAspectRadio = 1.0f;
+    private float mAspectRatio = 1.0f;
     private int mPreviewResource;
     private boolean mViewVisible;
     private Surface mSurface;
     private int mAnimationId;
+    private int mHeight = LinearLayout.LayoutParams.MATCH_PARENT - 1; // video height in pixels
 
     public VideoPreference(Context context) {
         super(context);
@@ -121,7 +124,11 @@ public class VideoPreference extends Preference {
                 R.id.video_container);
 
         imageView.setImageResource(mPreviewResource);
-        layout.setAspectRatio(mAspectRadio);
+        layout.setAspectRatio(mAspectRatio);
+        if (mHeight >= LinearLayout.LayoutParams.MATCH_PARENT) {
+            layout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, mHeight));
+        }
         updateViewStates(imageView, playButton);
 
         video.setOnClickListener(v -> updateViewStates(imageView, playButton));
@@ -247,8 +254,17 @@ public class VideoPreference extends Preference {
         return mVideoPaused;
     }
 
+    /**
+     * sets the height of the video preference
+     * @param height in dp
+     */
+    public void setHeight(float height) {
+        mHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height,
+                mContext.getResources().getDisplayMetrics());
+    }
+
     @VisibleForTesting
     void updateAspectRatio() {
-        mAspectRadio = mMediaPlayer.getVideoWidth() / (float) mMediaPlayer.getVideoHeight();
+        mAspectRatio = mMediaPlayer.getVideoWidth() / (float) mMediaPlayer.getVideoHeight();
     }
 }

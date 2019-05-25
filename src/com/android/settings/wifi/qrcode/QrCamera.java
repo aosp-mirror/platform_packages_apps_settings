@@ -62,7 +62,14 @@ public class QrCamera extends Handler {
 
     private static final int MSG_AUTO_FOCUS = 1;
 
-    private static double MIN_RATIO_DIFF_PERCENT = 0.1;
+    /**
+     * The max allowed difference between picture size ratio and preview size ratio.
+     * Uses to filter the picture sizes of similar preview size ratio, for example, if a preview
+     * size is 1920x1440, MAX_RATIO_DIFF 0.1 could allow picture size of 720x480 or 352x288 or
+     * 176x44 but not 1920x1080.
+     */
+    private static double MAX_RATIO_DIFF = 0.1;
+
     private static long AUTOFOCUS_INTERVAL_MS = 1500L;
 
     private static Map<DecodeHintType, List<BarcodeFormat>> HINTS = new ArrayMap<>();
@@ -168,7 +175,8 @@ public class QrCamera extends Handler {
         mParameters = mCamera.getParameters();
         mPreviewSize = getBestPreviewSize(mParameters);
         mParameters.setPreviewSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
-        mParameters.setPictureSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
+        Size pictureSize = getBestPictureSize(mParameters);
+        mParameters.setPreviewSize(pictureSize.getWidth(), pictureSize.getHeight());
 
         if (mParameters.getSupportedFlashModes().contains(Parameters.FLASH_MODE_OFF)) {
             mParameters.setFlashMode(Parameters.FLASH_MODE_OFF);
@@ -338,8 +346,8 @@ public class QrCamera extends Handler {
 
     private QrYuvLuminanceSource getFrameImage(byte[] imageData) {
         final Rect frame = mScannerCallback.getFramePosition(mPreviewSize, mCameraOrientation);
-        final Camera.Size size = mParameters.getPictureSize();
-        QrYuvLuminanceSource image = new QrYuvLuminanceSource(imageData, size.width, size.height);
+        final QrYuvLuminanceSource image = new QrYuvLuminanceSource(imageData,
+                mPreviewSize.getWidth(), mPreviewSize.getHeight());
         return (QrYuvLuminanceSource)
                 image.crop(frame.left, frame.top, frame.width(), frame.height());
     }
@@ -374,6 +382,48 @@ public class QrCamera extends Handler {
                     || Math.abs(ratio - winRatio) / winRatio <= minRatioDiffPercent)) {
                 bestChoice = new Size(size.width, size.height);
                 bestChoiceRatio = getRatio(size.width, size.height);
+            }
+        }
+        return bestChoice;
+    }
+
+    /** Get best picture size from the list of camera supported picture sizes. Compares the
+     *  picture size and aspect ratio to choose the best one. */
+    private Size getBestPictureSize(Camera.Parameters parameters) {
+        final Camera.Size previewSize = parameters.getPreviewSize();
+        final double previewRatio = getRatio(previewSize.width, previewSize.height);
+        List<Size> bestChoices = new ArrayList<>();
+        final List<Size> similarChoices = new ArrayList<>();
+
+        // Filter by ratio
+        for (Camera.Size size : parameters.getSupportedPictureSizes()) {
+            double ratio = getRatio(size.width, size.height);
+            if (ratio == previewRatio) {
+                bestChoices.add(new Size(size.width, size.height));
+            } else if (Math.abs(ratio - previewRatio) < MAX_RATIO_DIFF) {
+                similarChoices.add(new Size(size.width, size.height));
+            }
+        }
+
+        if (bestChoices.size() == 0 && similarChoices.size() == 0) {
+            Log.d(TAG, "No proper picture size, return default picture size");
+            Camera.Size defaultPictureSize = parameters.getPictureSize();
+            return new Size(defaultPictureSize.width, defaultPictureSize.height);
+        }
+
+        if (bestChoices.size() == 0) {
+            bestChoices = similarChoices;
+        }
+
+        // Get the best by area
+        int bestAreaDifference = Integer.MAX_VALUE;
+        Size bestChoice = null;
+        final int previewArea = previewSize.width * previewSize.height;
+        for (Size size : bestChoices) {
+            int areaDifference = Math.abs(size.getWidth() * size.getHeight() - previewArea);
+            if (areaDifference < bestAreaDifference) {
+                bestAreaDifference = areaDifference;
+                bestChoice = size;
             }
         }
         return bestChoice;
