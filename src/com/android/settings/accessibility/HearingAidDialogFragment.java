@@ -16,11 +16,12 @@
 
 package com.android.settings.accessibility;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
