@@ -29,7 +29,7 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
     private final String SYSTEM_KEY = ADAPTIVE_SLEEP;
     private final int DEFAULT_VALUE = 0;
 
-    private final boolean hasSufficientPermissions;
+    final boolean hasSufficientPermissions;
 
     public AdaptiveSleepPreferenceController(Context context, String key) {
         super(context, key);
@@ -57,17 +57,10 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        final boolean supportedOnDevice =  mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_adaptive_sleep_available);
-        if (!supportedOnDevice) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-        return hasSufficientPermissions ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return true;
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_adaptive_sleep_available)
+                ? AVAILABLE_UNSEARCHABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
