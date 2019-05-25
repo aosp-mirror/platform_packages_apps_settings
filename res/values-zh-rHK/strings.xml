@@ -2065,7 +2065,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"音訊和螢幕上的文字"</string>
     <string name="display_category_title" msgid="685461049938269166">"螢幕"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"互動控制項"</string>
-    <string name="user_installed_services_category_title" msgid="419853083751790648">"已下載的應用程式"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"已下載的服務"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"實驗性"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"功能標示"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2115,7 +2115,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"通知震動"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"鈴聲震動"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"輕觸反應"</string>
-    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"使用「<xliff:g id="SERVICE">%1$s</xliff:g>」"</string>
+    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"使用服務"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"使用色彩校正"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"使用字幕"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"繼續"</string>
@@ -2209,7 +2209,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"為您提供所需無障礙功能的應用程式有權完全控制您的裝置，但大部分應用程式均沒有此權限。"</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"查看和控制螢幕"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"這項功能可以讀出螢幕上的所有內容，並透過其他應用程式顯示內容。"</string>
-    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"查看和執行動作"</string>
+    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"查看並執行動作"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"這項功能會追蹤您與應用程式或硬件感應器的互動，並代表您直接與應用程式互動。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"允許"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"拒絕"</string>
@@ -3372,6 +3372,22 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"閃燈"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"上鎖畫面"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"當工作設定檔被鎖定時"</string>
+    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"顯示所有通知內容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"僅在解鎖時顯示敏感內容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不顯示通知"</string>
@@ -3398,17 +3414,17 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"在螢幕上彈出"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"封鎖"</string>
-    <string name="notification_silence_title" msgid="8575600650015431622">"低重要性"</string>
+    <!-- no translation found for notification_silence_title (6986752165900591125) -->
+    <skip />
     <string name="notification_alert_title" msgid="7426286507434650473">"優先"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"允許打擾"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"允許應用程式發出音效、震動以及/或在螢幕上彈出通知"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"在下拉式通知欄中，將通知收合為一行"</string>
-    <string name="notification_channel_summary_low" msgid="7875385321253491191">"協助您只查看下拉式通知欄中的通知。一律靜音。"</string>
-    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"顯示不重要的通知。一律靜音。"</string>
-    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"顯示不重要的通知。一律靜音。"</string>
-    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"顯示不重要的通知。一律靜音。"</string>
-    <string name="notification_channel_summary_default" msgid="4618537204284469990">"透過聲音和狀態列圖示引起您的注意，並在上鎖畫面顯示。"</string>
-    <string name="notification_channel_summary_high" msgid="7737315941884569891">"當裝置已解鎖，系統會在螢幕頂部以橫額形式顯示通知"</string>
+    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
+    <skip />
+    <string name="notification_channel_summary_high" msgid="7737315941884569891">"裝置處於解鎖狀態時，系統會在螢幕頂部以橫額形式顯示通知"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"顯示通知"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"自動調節通知"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
@@ -4134,8 +4150,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"已連接多部裝置"</string>
     <string name="demo_mode" msgid="2798762752209330277">"系統使用者介面示範模式"</string>
     <string name="dark_ui_mode" msgid="3888371857083890543">"深色主題背景"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"開啟/由於「省電模式」已開啟，切換功能已暫時停用"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"由於「省電模式」已關閉，切換功能已暫時啟用"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"開啟/由於「省電模式」已開啟，因此切換功能暫時停用"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"由於「省電模式」已關閉，因此切換功能暫時啟用"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"受支援的應用程式也會切換至深色主題背景"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"知道了"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"快速設定開發人員圖塊"</string>

@@ -2064,7 +2064,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio e testo su schermo"</string>
     <string name="display_category_title" msgid="685461049938269166">"Display"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Controlli di interazione"</string>
-    <string name="user_installed_services_category_title" msgid="419853083751790648">"App scaricate"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Servizi scaricati"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Sperimentali"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Flag di funzioni"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2114,7 +2114,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Vibrazione notifiche"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Vibrazione allo squillo"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Feedback tattile"</string>
-    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Usa <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utilizza servizio"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Usa correzione del colore"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Utilizza sottotitoli"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continua"</string>
@@ -2154,7 +2154,7 @@
       <item quantity="other">Ritardo molto lungo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="one">Ritardo molto lungo (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="4272038147476749536">"Squillo <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, notifica <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, tocco <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
+    <string name="accessibility_vibration_summary" msgid="4272038147476749536">"Squillo: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>. Notifiche: <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>. Tocco: <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>."</string>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"Impostazione di suoneria e notifiche: off"</string>
     <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"Impostazione di suoneria e notifiche: bassa"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"Impostazione di suoneria e notifiche: media"</string>
@@ -2208,14 +2208,14 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Il pieno controllo è appropriato per le app che rispondono alle tue esigenze di accessibilità, ma non per gran parte delle app."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Visualizza e controlla lo schermo"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Può leggere i contenuti presenti sullo schermo e mostrare i contenuti su altre app."</string>
-    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Visualizza ed esegui azioni"</string>
+    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Visualizza ed esegui azioni"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Può tenere traccia delle tue interazioni con un\'app o un sensore hardware e interagire con app per tuo conto."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Consenti"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Nega"</string>
     <string name="accessibility_dialog_button_stop" msgid="7861331860214808622">"Interrompi"</string>
     <string name="accessibility_dialog_button_cancel" msgid="5006357240387387028">"Annulla"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Interrompere <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="4593387199926310801">"Se tocchi <xliff:g id="STOP">%1$s</xliff:g> il servizio <xliff:g id="SERVICE">%2$s</xliff:g> verrà interrotto."</string>
+    <string name="disable_service_message" msgid="4593387199926310801">"Se tocchi <xliff:g id="STOP">%1$s</xliff:g>, il servizio <xliff:g id="SERVICE">%2$s</xliff:g> verrà interrotto."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nessun servizio installato"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Nessun servizio selezionato"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Nessuna descrizione fornita."</string>
@@ -3371,6 +3371,22 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Luce lampeggiante"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Schermata di blocco"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Con profilo di lavoro bloccato"</string>
+    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostra tutti i contenuti delle notifiche"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Mostra contenuti sensibili solo se sbloccato"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Non mostrare le notifiche"</string>
@@ -3382,7 +3398,7 @@
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Notifiche del profilo"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Notifiche"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notifiche app"</string>
-    <string name="notification_channel_title" msgid="2260666541030178452">"Categoria della notifica"</string>
+    <string name="notification_channel_title" msgid="2260666541030178452">"Categoria delle notifiche"</string>
     <string name="notification_group_title" msgid="7180506440133859601">"Gruppo di categorie di notifica"</string>
     <string name="notification_importance_title" msgid="4368578960344731828">"Comportamento"</string>
     <string name="notification_importance_unspecified" msgid="6622173510486113958">"Attiva audio"</string>
@@ -3397,16 +3413,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Alta"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Visualizza sullo schermo"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blocca"</string>
-    <string name="notification_silence_title" msgid="8575600650015431622">"Silenziose"</string>
+    <!-- no translation found for notification_silence_title (6986752165900591125) -->
+    <skip />
     <string name="notification_alert_title" msgid="7426286507434650473">"Con priorità"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Consenti interruzioni"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Consenti all\'app di emettere suoni o vibrazioni e/o mostrare notifiche sullo schermo"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Nell\'area a discesa comprimi le notifiche su una sola riga"</string>
-    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Puoi concentrarti perché le notifiche sono visualizzate solo nell\'area a discesa. Sempre silenziose."</string>
-    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Vengono mostrate le notifiche con priorità bassa. Sempre silenziose."</string>
-    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Vengono mostrate le notifiche con priorità bassa. Sempre silenziose."</string>
-    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Vengono mostrate le notifiche con priorità bassa. Sempre silenziose."</string>
-    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Attirano la tua attenzione con un suono e un\'icona nella barra di stato. Le notifiche sono mostrate nella schermata di blocco."</string>
+    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
+    <skip />
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Quando il dispositivo è sbloccato, mostra le notifiche come banner in cima allo schermo"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Mostra notifiche"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Notifiche adattative"</string>
@@ -4133,7 +4149,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Connesso a più dispositivi"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Modalità demo dell\'interfaccia utente di sistema"</string>
     <string name="dark_ui_mode" msgid="3888371857083890543">"Tema scuro"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"On/Disattivata temporaneamente per Risparmio energetico"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"On/Opzione disattivata temporaneamente per Risparmio energetico"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Disattivata temporaneamente a causa del Risparmio energetico"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Anche le app supportate passeranno al tema scuro"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"OK"</string>

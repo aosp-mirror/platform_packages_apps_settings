@@ -49,6 +49,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupdesign.util.DescriptionStyler;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
@@ -137,6 +138,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
         mVibrator = getSystemService(Vibrator.class);
 
+        if (getLayout().shouldApplyPartnerHeavyThemeResource()) {
+            DescriptionStyler.applyPartnerCustomizationStyle(mRepeatMessage);
+        }
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)

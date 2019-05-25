@@ -2086,7 +2086,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio și text pe ecran"</string>
     <string name="display_category_title" msgid="685461049938269166">"Afișare"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Comenzi pentru interacțiune"</string>
-    <string name="user_installed_services_category_title" msgid="419853083751790648">"Aplicații descărcate"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Servicii descărcate"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentale"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Semnalări ale funcției"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2123,7 +2123,7 @@
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 de secunde"</string>
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"Un minut"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minute"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"E timpul să acționați (timp limită de accesibilitate)"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Timp de reacție (timp limită de accesibilitate)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Timp pentru a acționa"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Alegeți durata de afișare a mesajelor care vă cer să acționați, dar care sunt vizibile numai temporar.\n\nNu toate aplicațiile permit această setare."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Întârziere la atingere lungă"</string>
@@ -2136,7 +2136,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Vibrații la notificare"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Vibrațiile soneriei"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Feedback la atingere"</string>
-    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Folosiți <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utilizați serviciul"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Utilizați corecție de culoare"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Utilizați subtitrările"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continuați"</string>
@@ -2236,7 +2236,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Controlul total este adecvat pentru aplicații care vă ajută cu accesibilitatea, însă nu pentru majoritatea aplicaților."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Vedeți și controlați ecranul"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Poate citi tot conținutul de pe ecran și poate afișa conținut peste alte aplicații."</string>
-    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Vedeți și efectuați acțiuni"</string>
+    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Vizualizarea și efectuarea acțiunilor"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Poate urmări interacțiunile dvs. cu o aplicație sau cu un senzor hardware și poate interacționa cu aplicații în numele dvs."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Permiteți"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Refuzați"</string>
@@ -3416,6 +3416,22 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Lumină intermitentă"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Ecran de blocare"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Când este blocat profilul de serviciu"</string>
+    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Afișează integral conținutul notificărilor"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Afișați conținutul sensibil doar când ecranul este deblocat"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Nu afișa nicio notificare"</string>
@@ -3442,17 +3458,17 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Ridicată"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Evidențiere pe ecran"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blocați"</string>
-    <string name="notification_silence_title" msgid="8575600650015431622">"Discret"</string>
+    <!-- no translation found for notification_silence_title (6986752165900591125) -->
+    <skip />
     <string name="notification_alert_title" msgid="7426286507434650473">"Cu prioritate"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Permiteți întreruperi"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Permiteți aplicației să emită sunete, să vibreze și/sau să trimită notificări pe ecran"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"În fereastra trasă în jos, restrângeți notificările la un rând"</string>
-    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Vă ajută să vă concentrați cu notificări doar în fereastra trasă în jos. Întotdeauna silențios."</string>
-    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Se afișează sub notificările prioritare. Întotdeauna silențios."</string>
-    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Se afișează sub notificările prioritare. Întotdeauna silențios."</string>
-    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Se afișează sub notificările prioritare. Întotdeauna silențios."</string>
-    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Vă atrage atenția cu sunete și o pictogramă în bara de stare. Se afișează pe ecranul de blocare."</string>
-    <string name="notification_channel_summary_high" msgid="7737315941884569891">"Când dispozitivul este deblocat, afișați notificările ca un banner în partea de sus a ecranului"</string>
+    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
+    <skip />
+    <string name="notification_channel_summary_high" msgid="7737315941884569891">"Când dispozitivul este deblocat, afișează notificările ca un banner în partea de sus a ecranului"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Afișați notificările"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Notificări adaptive"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
@@ -4255,9 +4271,9 @@
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Încercați noul buton Ecran de pornire"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Activați gestul nou pentru a comuta între aplicații"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigare prin gesturi"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Pentru a merge înapoi la ecranul de pornire, glisați în sus din partea de jos a ecranului. Pentru a merge înapoi, glisați dinspre marginea stângă sau dreaptă a ecranului. Pentru a comuta aplicațiile, glisați în sus din partea de jos a ecranului și țineți apăsat înainte de-a da drumul."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Pentru a reveni la ecranul de pornire, glisați în sus din partea de jos a ecranului. Pentru a merge înapoi, glisați dinspre marginea stângă sau dreaptă a ecranului. Pentru a comuta între aplicații, glisați în sus din partea de jos a ecranului și țineți apăsat înainte de a da drumul."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigare cu 3 butoane"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Mod de navigare Android clasic, în care deplasarea la ecranul de pornire, comutarea aplicațiilor și revenirea înapoi sunt accesibile prin butoane."</string>
+    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Mod de navigare Android clasic, în care accesarea ecranului de pornire, comutarea între aplicații și comanda Înapoi sunt accesibile prin butoane."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigarea sistemului, navigare cu 2 butoane, navigare cu 3 butoane, navigare prin gesturi"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Atingeți de două ori pentru a verifica telefonul"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Atingeți de două ori pentru a verifica tableta"</string>

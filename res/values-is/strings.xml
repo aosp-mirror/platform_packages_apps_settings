@@ -1248,8 +1248,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Kveikja á þangað til <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Slökkva á þangað til <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Ekki er kveikt á næturljósi"</string>
-    <!-- no translation found for screen_timeout (4882669461447531301) -->
-    <skip />
+    <string name="screen_timeout" msgid="4882669461447531301">"Tímamörk skjás"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Slökkt er á skjánum"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Eftir <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> af aðgerðaleysi"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Veggfóður"</string>
@@ -2065,7 +2064,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Hljóð og skjátexti"</string>
     <string name="display_category_title" msgid="685461049938269166">"Skjár"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Gagnvirknistýringar"</string>
-    <string name="user_installed_services_category_title" msgid="419853083751790648">"Sótt forrit"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Sótt þjónusta"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Tilraunastillingar"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Eiginleikaflögg"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2115,7 +2114,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Titringur fyrir tilkynningar"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Titringur hringingar"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Snertisvörun"</string>
-    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Nota <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Nota þjónustu"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Nota litaleiðréttingu"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Nota skjátexta"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Áfram"</string>
@@ -2209,7 +2208,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Full stjórnun er viðeigandi fyrir forrit sem hjálpa þér ef þú hefur ekki aðgang, en ekki fyrir flest forrit."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Skoða og stjórna skjá"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Það getur lesið allt efni á skjánum og birt efni yfir öðrum forritum."</string>
-    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Skoða og framkvæma aðgerðir"</string>
+    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Skoða og framkvæma aðgerðir"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Það getur fylgst með samskiptum þínum við forrit eða skynjara vélbúnaðar, og haft samskipti við forrit fyrir þína hönd."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Leyfa"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Hafna"</string>
@@ -3372,6 +3371,22 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blikkandi ljós"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lásskjár"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Þegar vinnusnið er læst"</string>
+    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Sýna allt innihald tilkynninga"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Sýna aðeins viðkvæmt efni þegar sími er opinn"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Sýna engar tilkynningar"</string>
@@ -3398,16 +3413,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Mikið"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Opnast á skjánum"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Setja á bannlista"</string>
-    <string name="notification_silence_title" msgid="8575600650015431622">"Lágstemmdar"</string>
+    <!-- no translation found for notification_silence_title (6986752165900591125) -->
+    <skip />
     <string name="notification_alert_title" msgid="7426286507434650473">"Í forgangi"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Leyfa truflanir"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Leyfa forriti að nota hljóð, titra og/eða birta tilkynningar á skjá"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Sameina tilkynningar í einni línu á fellisvæði"</string>
-    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Auðveldar þér að einbeita þér með tilkynningum sem birtast aðeins á fellisvæði. Alltaf án hljóðs."</string>
-    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Birtir tilkynningar með lítinn forgang. Alltaf án hljóðs."</string>
-    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Birtir tilkynningar með lítinn forgang. Alltaf án hljóðs."</string>
-    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Birtir tilkynningar með lítinn forgang. Alltaf án hljóðs."</string>
-    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Fangar athygli þína með hljóði og stöðustikutákni. Sést á lásskjánum."</string>
+    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
+    <skip />
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Birta tilkynningar á borða efst á skjánum þegar tækið er opið"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Sýna tilkynningar"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Breytilegar tilkynningar"</string>

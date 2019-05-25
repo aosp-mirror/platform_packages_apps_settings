@@ -2064,7 +2064,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio et texte à l\'écran"</string>
     <string name="display_category_title" msgid="685461049938269166">"Affichage"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Commandes d\'interaction"</string>
-    <string name="user_installed_services_category_title" msgid="419853083751790648">"Applications téléchargées"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Services téléchargés"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Fonctions expérimentales"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Indicateurs de fonctionnalité"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2088,7 +2088,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Texte de contraste élevé"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Mettre à jour la loupe si transition entre applis"</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Bouton Marche/arrêt pour raccrocher"</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Interrupteur pour raccrocher"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Grand curseur de souris"</string>
     <string name="accessibility_disable_animations" msgid="5876035711526394795">"Supprimer les animations"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Audio mono"</string>
@@ -2114,7 +2114,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Vibrations pour les notifications"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Vibrations de sonnerie"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Retour tactile"</string>
-    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Utiliser <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utiliser le service"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Utiliser la correction des couleurs"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Utiliser les légendes"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continuer"</string>
@@ -2207,13 +2207,13 @@
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> demande l\'autorisation de contrôler cet appareil. Le service peut lire l\'écran et agir pour les utilisateurs qui font appels aux fonctions d\'accessibilité. Ce niveau de contrôle ne convient pas à la majorité des applications."</string>
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Le contrôle total convient aux applications qui répondent à vos besoins d\'accessibilité. Il ne convient pas à la plupart des applications."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Afficher et commander l\'écran"</string>
-    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Elle peut lire tout le contenu à l\'écran et afficher du contenu par-dessus d\'autres applications."</string>
-    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Afficher et effectuer des actions"</string>
-    <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Elle peut faire le suivi de vos interactions avec une application ou un capteur matériel, et interagir avec des applications en votre nom."</string>
+    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Cette fonctionnalité peut lire tout le contenu à l\'écran et afficher du contenu par-dessus d\'autres applications."</string>
+    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Afficher et effectuer des actions"</string>
+    <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Cette fonctionnalité peut faire le suivi de vos interactions avec une application ou un capteur matériel, et interagir avec des applications en votre nom."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Autoriser"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Refuser"</string>
     <string name="accessibility_dialog_button_stop" msgid="7861331860214808622">"Arrêter"</string>
-    <string name="accessibility_dialog_button_cancel" msgid="5006357240387387028">"Cancel"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="5006357240387387028">"Annuler"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Arrêter <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="disable_service_message" msgid="4593387199926310801">"Touchez <xliff:g id="STOP">%1$s</xliff:g> pour arrêter le service <xliff:g id="SERVICE">%2$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Aucun service installé"</string>
@@ -3371,6 +3371,22 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Faire clignoter le voyant"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Écran de verrouillage"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Lorsque le profil professionnel est verrouillé"</string>
+    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Afficher tout le contenu des notifications"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Affich. contenu sensible seulement quand verrouillé"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"N\'afficher aucune notification"</string>
@@ -3397,17 +3413,17 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Élevée"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Afficher sur l\'écran"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Bloquer"</string>
-    <string name="notification_silence_title" msgid="8575600650015431622">"Discrètes"</string>
+    <!-- no translation found for notification_silence_title (6986752165900591125) -->
+    <skip />
     <string name="notification_alert_title" msgid="7426286507434650473">"Priorisées"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Autoriser les interruptions"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Autoriser l\'application à émettre des sons, à vibrer et à afficher des notifications à l\'écran"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Dans le volet déroulant, afficher les notifications sur une seule ligne"</string>
-    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Vous aide à vous concentrer en affichant seulement les notifications dans le volet déroulant. Toujours silencieux."</string>
-    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"S\'affiche sous les notifications prioritaires. Toujours silencieux."</string>
-    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"S\'affiche sous les notifications prioritaires. Toujours silencieux."</string>
-    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"S\'affiche sous les notifications prioritaires. Toujours silencieux."</string>
-    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Attire votre attention à l\'aide de sons et d\'une icône dans la barre d\'état. S\'affiche sur l\'écran de verrouillage."</string>
-    <string name="notification_channel_summary_high" msgid="7737315941884569891">"Lorsque l\'appareil est déverrouillé, afficher les notificat. comme bannière dans le haut de l\'écran"</string>
+    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
+    <skip />
+    <string name="notification_channel_summary_high" msgid="7737315941884569891">"Lorsque l\'appareil est déverrouillé, afficher les notifications dans une bannière dans le haut de l\'écran"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Afficher les notifications"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Notifications adaptatives"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
@@ -4133,8 +4149,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Connecté à plusieurs appareils"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Mode de démonstration de l\'interface système"</string>
     <string name="dark_ui_mode" msgid="3888371857083890543">"Thème sombre"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Activé : fonct. désact. temp. à cause de l\'économie de pile"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Fonct. activée temporairement à cause de l\'économiseur de pile"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Activé/Temporairement désactivé par l\'économiseur de batterie"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Temporairement activé par l\'économiseur de pile"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Les applications compatibles utiliseront aussi le thème sombre"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"OK"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Paramètres rapides, tuiles de concepteur"</string>
@@ -4178,11 +4194,11 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Prenez des égoportraits plus rapidement"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navigation système"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navigation à deux boutons"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Pour changer d\'appli, balayez vers le haut sur la touche d\'accueil. Pour afficher toutes les applis, effectuez le même geste de nouveau. Cela fonctionne sur tous les écrans. Vous ne verrez plus de bouton Aperçu dans le coin inférieur droit de l\'écran."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Pour changer d\'application, balayez vers le haut sur la touche d\'accueil. Recommencez pour afficher toutes les applications. Cela fonctionne sur tous les écrans. Vous ne verrez plus de bouton Aperçu dans le coin inférieur droit de l\'écran."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Essayer la nouvelle touche d\'accueil"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Activez le nouveau geste pour changer d\'application"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigation par gestes"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Pour accéder à l\'écran d\'accueil, balayez du bas de l\'écran vers le haut. Pour revenir en arrière, balayez un doigt de l\'extrémité gauche ou droite de l\'écran dans la direction opposée. Pour basculer entre les applications, commencez à balayer un doigt à partir du bas de l\'écran, puis arrêtez avant de le relâcher."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Pour accéder à l\'écran d\'accueil, balayez du bas de l\'écran vers le haut. Pour revenir en arrière, balayez un doigt de l\'extrémité gauche ou droite de l\'écran vers la direction opposée. Pour basculer entre les applications, commencez à balayer un doigt à partir du bas de l\'écran, puis arrêtez avant de le relâcher."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigation à trois boutons"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"Mode de navigation classique Android, dans lequel on utilise les boutons de l\'appareil pour accéder à l\'écran d\'accueil, basculer entre les applications et revenir en arrière."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigation système, navigation à deux boutons, navigation à trois boutons, navigation par gestes"</string>
@@ -4228,7 +4244,7 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Synchroniser automatiquement les données professionnelles"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Autoriser les applications à actualiser les données automatiquement"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Synchro. du compte"</string>
-    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"La synchronisation est activée pour <xliff:g id="ID_1">%1$d</xliff:g> éléments sur <xliff:g id="ID_2">%2$d</xliff:g>"</string>
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"La synchronisation est activée pour <xliff:g id="ID_1">%1$d</xliff:g> élément(s) sur <xliff:g id="ID_2">%2$d</xliff:g>"</string>
     <string name="account_sync_summary_all_on" msgid="570431636622254156">"La synchronisation est activée pour tous les éléments"</string>
     <string name="account_sync_summary_all_off" msgid="8782409931761182734">"La synchronisation est désactivée pour tous les éléments"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Renseignements sur l\'appareil géré"</string>
@@ -4505,7 +4521,7 @@
     <string name="register_automatically" msgid="518185886971595020">"Enregistrement automatique en cours…"</string>
     <string name="roaming_alert_title" msgid="7458177294163751484">"Autoriser les données en itinérance?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Communiquez avec votre fournisseur réseau pour connaître les tarifs."</string>
-    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Utilisation des données par l\'application"</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Utilisation des données par application"</string>
     <string name="mobile_network_mode_error" msgid="4784347953600013818">"Mode réseau non valide : <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorer."</string>
     <string name="mobile_network_apn_title" msgid="7610812642954395440">"Noms des points d\'accès"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Indisponible lorsque vous êtes connectés au réseau de <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
