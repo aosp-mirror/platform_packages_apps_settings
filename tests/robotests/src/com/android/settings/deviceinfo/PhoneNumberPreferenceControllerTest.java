@@ -150,6 +150,16 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
+    public void getSummary_getEmptySubscriptionInfo_shouldShowUnknown() {
+        List<SubscriptionInfo> infos = new ArrayList<>();
+        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(infos);
+
+        CharSequence primaryNumber = mController.getSummary();
+
+        assertThat(primaryNumber).isEqualTo(mContext.getString(R.string.device_info_default));
+    }
+
+    @Test
     public void isSliceable_shouldBeTrue() {
         assertThat(mController.isSliceable()).isTrue();
     }

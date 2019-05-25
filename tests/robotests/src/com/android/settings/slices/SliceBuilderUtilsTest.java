@@ -43,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeCopyableController;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.FakeInvalidSliderController;
 import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.FakeUnavailablePreferenceController;
@@ -67,6 +68,7 @@ public class SliceBuilderUtilsTest {
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final Class TOGGLE_CONTROLLER = FakeToggleController.class;
     private final Class SLIDER_CONTROLLER = FakeSliderController.class;
+    private final Class INVALID_SLIDER_CONTROLLER = FakeInvalidSliderController.class;
     private final Class COPYABLE_CONTROLLER = FakeCopyableController.class;
     private final Class CONTEXT_CONTROLLER = FakeContextOnlyPreferenceController.class;
 
@@ -468,6 +470,14 @@ public class SliceBuilderUtilsTest {
         final SliceAction primaryAction = metadata.getPrimaryAction();
         final int actualIconResource = primaryAction.getIcon().toIcon().getResId();
         assertThat(actualIconResource).isEqualTo(expectedIconResource);
+    }
+
+    @Test
+    public void buildSliderSlice_invalidSlider_returnNull() {
+        final SliceData data = getDummyData(INVALID_SLIDER_CONTROLLER, SliceData.SliceType.SLIDER,
+                0x0 /* icon */);
+
+        assertThat(SliceBuilderUtils.buildSlice(mContext, data)).isNull();
     }
 
     @Test

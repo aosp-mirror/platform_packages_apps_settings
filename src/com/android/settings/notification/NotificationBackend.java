@@ -98,8 +98,7 @@ public class NotificationBackend {
             AppRow row) {
         row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
         List<String> roles = rm.getHeldRolesFromController(app.packageName);
-        if (roles.contains(RoleManager.ROLE_SMS)
-                || roles.contains(RoleManager.ROLE_DIALER)
+        if (roles.contains(RoleManager.ROLE_DIALER)
                 || roles.contains(RoleManager.ROLE_EMERGENCY)) {
             row.systemApp = true;
         }
