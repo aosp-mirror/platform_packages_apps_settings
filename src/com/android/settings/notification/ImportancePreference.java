@@ -24,6 +24,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -31,8 +32,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.settings.Utils;
 import com.android.settingslib.R;
 
 import androidx.preference.Preference;
@@ -50,6 +53,7 @@ public class ImportancePreference extends Preference {
     Drawable selectedBackground;
     Drawable unselectedBackground;
     private static final int BUTTON_ANIM_TIME_MS = 100;
+    private static final boolean SHOW_BUTTON_SUMMARY = false;
 
     public ImportancePreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
@@ -140,32 +144,45 @@ public class ImportancePreference extends Preference {
         });
     }
 
+    private ColorStateList getAccentTint() {
+        return Utils.getColorAccent(getContext());
+    }
+
+    private ColorStateList getRegularTint() {
+        return Utils.getColorAttr(getContext(), android.R.attr.textColorPrimary);
+    }
+
     void setImportanceSummary(ViewGroup parent, int importance, boolean fromUser) {
         if (fromUser) {
             AutoTransition transition = new AutoTransition();
             transition.setDuration(BUTTON_ANIM_TIME_MS);
             TransitionManager.beginDelayedTransition(parent, transition);
         }
+
+        ColorStateList colorAccent = getAccentTint();
+        ColorStateList colorNormal = getRegularTint();
+
         if (importance >= IMPORTANCE_DEFAULT) {
             parent.findViewById(R.id.silence_summary).setVisibility(GONE);
+            ((ImageView) parent.findViewById(R.id.silence_icon)).setImageTintList(colorNormal);
+            ((TextView) parent.findViewById(R.id.silence_label)).setTextColor(colorNormal);
+
+            ((ImageView) parent.findViewById(R.id.alert_icon)).setImageTintList(colorAccent);
+            ((TextView) parent.findViewById(R.id.alert_label)).setTextColor(colorAccent);
+
             TextView view = parent.findViewById(R.id.alert_summary);
             view.setText(R.string.notification_channel_summary_default);
             view.setVisibility(VISIBLE);
         } else {
             parent.findViewById(R.id.alert_summary).setVisibility(GONE);
+            ((ImageView) parent.findViewById(R.id.alert_icon)).setImageTintList(colorNormal);
+            ((TextView) parent.findViewById(R.id.alert_label)).setTextColor(colorNormal);
+
+            ((ImageView) parent.findViewById(R.id.silence_icon)).setImageTintList(colorAccent);
+            ((TextView) parent.findViewById(R.id.silence_label)).setTextColor(colorAccent);
             TextView view = parent.findViewById(R.id.silence_summary);
             view.setVisibility(VISIBLE);
-            if (mDisplayInStatusBar) {
-                 if (mDisplayOnLockscreen) {
-                     view.setText(R.string.notification_channel_summary_low_status_lock);
-                 } else {
-                     view.setText(R.string.notification_channel_summary_low_status);
-                 }
-            } else if (mDisplayOnLockscreen) {
-                view.setText(R.string.notification_channel_summary_low_lock);
-            } else {
-                view.setText(R.string.notification_channel_summary_low);
-            }
+            view.setText(R.string.notification_channel_summary_low);
         }
     }
 }
