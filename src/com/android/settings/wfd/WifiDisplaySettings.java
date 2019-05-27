@@ -136,6 +136,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
 
         final Context context = getActivity();
         mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
+        mRouter.setRouterGroupId(MediaRouter.MIRRORING_GROUP_ID);
         mDisplayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
         mWifiP2pManager = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
         mWifiP2pChannel = mWifiP2pManager.initialize(context, Looper.getMainLooper(), null);
@@ -798,6 +799,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
             mContext = context;
             mSummaryLoader = summaryLoader;
             mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
+            mRouter.setRouterGroupId(MediaRouter.MIRRORING_GROUP_ID);
         }
 
         @Override
