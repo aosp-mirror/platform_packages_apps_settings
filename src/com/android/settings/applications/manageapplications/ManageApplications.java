@@ -1169,9 +1169,15 @@ public class ManageApplications extends InstrumentedFragment
             });
         }
 
-        public void filterSearch(String query) {
+        @VisibleForTesting
+        void filterSearch(String query) {
             if (mSearchFilter == null) {
                 mSearchFilter = new SearchFilter();
+            }
+            // If we haven't load apps list completely, don't filter anything.
+            if(mOriginalEntries == null) {
+                Log.w(TAG, "Apps haven't loaded completely yet, so nothing can be filtered");
+                return;
             }
             mSearchFilter.filter(query);
         }
