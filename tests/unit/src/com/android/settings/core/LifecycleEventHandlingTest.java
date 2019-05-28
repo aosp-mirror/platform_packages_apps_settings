@@ -36,6 +36,7 @@ import com.android.settings.development.featureflags.FeatureFlagsDashboard;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -60,6 +61,7 @@ public class LifecycleEventHandlingTest {
 
     @Test
     @Presubmit
+    @Ignore("b/133334887")
     public void launchDashboard_shouldSeeFooter() {
         new SubSettingLauncher(mContext)
                 .setDestination(FeatureFlagsDashboard.class.getName())
