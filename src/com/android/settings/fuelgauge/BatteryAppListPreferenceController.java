@@ -352,15 +352,10 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
     @VisibleForTesting
     boolean shouldHideSipper(BatterySipper sipper) {
-        // Don't show hidden system module
-        final String packageName = mBatteryUtils.getPackageName(sipper.getUid());
-        if (!TextUtils.isEmpty(packageName)
-                && AppUtils.isHiddenSystemModule(mContext, packageName)) {
-            return true;
-        }
-        // Don't show over-counted and unaccounted in any condition
+        // Don't show over-counted, unaccounted and hidden system module in any condition
         return sipper.drainType == BatterySipper.DrainType.OVERCOUNTED
-                || sipper.drainType == BatterySipper.DrainType.UNACCOUNTED;
+                || sipper.drainType == BatterySipper.DrainType.UNACCOUNTED
+                || mBatteryUtils.isHiddenSystemModule(sipper);
     }
 
     @VisibleForTesting
