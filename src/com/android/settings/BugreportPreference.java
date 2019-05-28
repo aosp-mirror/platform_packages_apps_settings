@@ -21,20 +21,30 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.RemoteException;
+import android.os.BugreportParams;
+import android.os.SystemProperties;
 import android.util.AttributeSet;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
+import android.content.Intent;
 
 import androidx.appcompat.app.AlertDialog.Builder;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 
 public class BugreportPreference extends CustomDialogPreferenceCompat {
 
     private static final String TAG = "BugreportPreference";
+    private static final String INTENT_BUGREPORT_REQUESTED =
+            "com.android.internal.intent.action.BUGREPORT_REQUESTED";
+    private static final String EXTRA_ORIGINAL_INTENT = "android.intent.extra.ORIGINAL_INTENT";
+    private static final String EXTRA_BUGREPORT_TYPE = "android.intent.extra.BUGREPORT_TYPE";
+    private static final String SHELL_APP_PACKAGE = "com.android.shell";
 
     private CheckedTextView mInteractiveTitle;
     private TextView mInteractiveSummary;
@@ -98,7 +108,24 @@ public class BugreportPreference extends CustomDialogPreferenceCompat {
 
     private void takeBugreport(int bugreportType) {
         try {
-            ActivityManager.getService().requestBugReport(bugreportType);
+            final Context context = getContext();
+            // USE_BUGREPORT_API is a system property flag used to switch back to the old workflow
+            // using dumpstate. By using the default value as false, old workflow remains
+            // untouched. To switch to the new workflow using Bugreport API run the following
+            // commands on the terminal:
+            // * adb root
+            // * adb shell setprop settings_call_bugreport_api true
+            if (FeatureFlagUtils.isEnabled(context, FeatureFlags.USE_BUGREPORT_API)) {
+                Intent triggerShellBugreport = new Intent();
+                triggerShellBugreport.setAction(INTENT_BUGREPORT_REQUESTED);
+                triggerShellBugreport.setPackage(SHELL_APP_PACKAGE);
+                triggerShellBugreport.putExtra(EXTRA_BUGREPORT_TYPE, bugreportType);
+
+                // Send broadcast to shell to trigger bugreport using Bugreport API
+                context.sendBroadcast(triggerShellBugreport);
+            } else {
+                ActivityManager.getService().requestBugReport(bugreportType);
+            }
         } catch (RemoteException e) {
             Log.e(TAG, "error taking bugreport (bugreportType=" + bugreportType + ")", e);
         }
