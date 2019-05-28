@@ -36,7 +36,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "slices_index.db";
     private static final String SHARED_PREFS_TAG = "slices_shared_prefs";
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     public interface Tables {
         String TABLE_SLICES_INDEX = "slices_index";
@@ -98,12 +98,19 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
          * Customized subtitle if it's a unavailable slice
          */
         String UNAVAILABLE_SLICE_SUBTITLE = "unavailable_slice_subtitle";
+
+        /**
+         * The uri of slice.
+         */
+        String SLICE_URI = "slice_uri";
     }
 
     private static final String CREATE_SLICES_TABLE =
             "CREATE VIRTUAL TABLE " + Tables.TABLE_SLICES_INDEX + " USING fts4" +
                     "(" +
                     IndexColumns.KEY +
+                    ", " +
+                    IndexColumns.SLICE_URI +
                     ", " +
                     IndexColumns.TITLE +
                     ", " +
