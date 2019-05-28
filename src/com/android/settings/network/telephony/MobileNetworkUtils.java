@@ -24,6 +24,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.PersistableBundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -37,6 +41,7 @@ import android.telephony.euicc.EuiccManager;
 import android.telephony.ims.feature.ImsFeature;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -45,7 +50,10 @@ import com.android.ims.ImsManager;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.graph.SignalDrawable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,6 +72,10 @@ public class MobileNetworkUtils {
             "esim.enable_esim_system_ui_by_default";
     private static final String LEGACY_ACTION_CONFIGURE_PHONE_ACCOUNT =
             "android.telecom.action.CONNECTION_SERVICE_CONFIGURE";
+
+    // The following constants are used to draw signal icon.
+    public static final int NO_CELL_DATA_TYPE_ICON = 0;
+    public static final Drawable EMPTY_DRAWABLE = new ColorDrawable(Color.TRANSPARENT);
 
     /**
      * Returns if DPC APNs are enforced.
@@ -494,5 +506,33 @@ public class MobileNetworkUtils {
         }
 
         return false;
+    }
+
+    public static Drawable getSignalStrengthIcon(Context context, int level, int numLevels,
+            int iconType, boolean cutOut) {
+        SignalDrawable signalDrawable = new SignalDrawable(context);
+        signalDrawable.setLevel(
+                SignalDrawable.getState(level, numLevels, cutOut));
+
+        // Make the network type drawable
+        Drawable networkDrawable =
+                iconType == NO_CELL_DATA_TYPE_ICON
+                        ? EMPTY_DRAWABLE
+                        : context
+                                .getResources().getDrawable(iconType, context.getTheme());
+
+        // Overlay the two drawables
+        final Drawable[] layers = {networkDrawable, signalDrawable};
+        final int iconSize =
+                context.getResources().getDimensionPixelSize(R.dimen.signal_strength_icon_size);
+
+        LayerDrawable icons = new LayerDrawable(layers);
+        // Set the network type icon at the top left
+        icons.setLayerGravity(0 /* index of networkDrawable */, Gravity.TOP | Gravity.LEFT);
+        // Set the signal strength icon at the bottom right
+        icons.setLayerGravity(1 /* index of SignalDrawable */, Gravity.BOTTOM | Gravity.RIGHT);
+        icons.setLayerSize(1 /* index of SignalDrawable */, iconSize, iconSize);
+        icons.setTintList(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
+        return icons;
     }
 }

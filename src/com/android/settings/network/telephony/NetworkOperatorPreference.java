@@ -16,22 +16,17 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
+
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.telephony.CellInfo;
 import android.telephony.CellSignalStrength;
-import android.telephony.SignalStrength;
 import android.util.Log;
-import android.view.Gravity;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.graph.SignalDrawable;
 
 import java.util.List;
 
@@ -45,17 +40,11 @@ public class NetworkOperatorPreference extends Preference {
 
     private static final int LEVEL_NONE = -1;
 
-    // number of signal strength level
-    public static final int NUMBER_OF_LEVELS = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
     private CellInfo mCellInfo;
     private List<String> mForbiddenPlmns;
     private int mLevel = LEVEL_NONE;
     private boolean mShow4GForLTE;
     private boolean mUseNewApi;
-
-    // The following constants are used to draw signal icon.
-    private static final Drawable EMPTY_DRAWABLE = new ColorDrawable(Color.TRANSPARENT);
-    private static final int NO_CELL_DATA_CONNECTED_ICON = 0;
 
     public NetworkOperatorPreference(
             CellInfo cellinfo, Context context, List<String> forbiddenPlmns, boolean show4GForLTE) {
@@ -113,39 +102,16 @@ public class NetworkOperatorPreference extends Preference {
             case CellInfo.TYPE_CDMA:
                 return R.drawable.signal_strength_1x;
             default:
-                return 0;
+                return MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
         }
     }
 
     private void updateIcon(int level) {
-        if (!mUseNewApi || level < 0 || level >= NUMBER_OF_LEVELS) {
+        if (!mUseNewApi || level < 0 || level >= NUM_SIGNAL_STRENGTH_BINS) {
             return;
         }
         Context context = getContext();
-        SignalDrawable signalDrawable = new SignalDrawable(getContext());
-        signalDrawable.setLevel(
-                SignalDrawable.getState(level, NUMBER_OF_LEVELS, false /* cutOut */));
-
-        // Make the network type drawable
-        int iconType = getIconIdForCell(mCellInfo);
-        Drawable networkDrawable =
-                iconType == NO_CELL_DATA_CONNECTED_ICON
-                        ? EMPTY_DRAWABLE
-                        : getContext()
-                                .getResources().getDrawable(iconType, getContext().getTheme());
-
-        // Overlay the two drawables
-        final Drawable[] layers = {networkDrawable, signalDrawable};
-        final int iconSize =
-                context.getResources().getDimensionPixelSize(R.dimen.signal_strength_icon_size);
-
-        LayerDrawable icons = new LayerDrawable(layers);
-        // Set the network type icon at the top left
-        icons.setLayerGravity(0 /* index of networkDrawable */, Gravity.TOP | Gravity.LEFT);
-        // Set the signal strength icon at the bottom right
-        icons.setLayerGravity(1 /* index of SignalDrawable */, Gravity.BOTTOM | Gravity.RIGHT);
-        icons.setLayerSize(1 /* index of SignalDrawable */, iconSize, iconSize);
-        icons.setTintList(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
-        setIcon(icons);
+        setIcon(MobileNetworkUtils.getSignalStrengthIcon(context, level, NUM_SIGNAL_STRENGTH_BINS,
+                getIconIdForCell(mCellInfo), false));
     }
 }
