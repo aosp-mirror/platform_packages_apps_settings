@@ -61,6 +61,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     private static final String LOG_TAG = "NetworkSettings";
     public static final int REQUEST_CODE_EXIT_ECM = 17;
+    public static final int REQUEST_CODE_DELETE_SUBSCRIPTION = 18;
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
@@ -138,7 +139,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
             use(BillingCyclePreferenceController.class).init(mSubId);
             use(MmsMessagePreferenceController.class).init(mSubId);
             use(DisabledSubscriptionController.class).init(getLifecycle(), mSubId);
-            use(DeleteSimProfilePreferenceController.class).init(mSubId, this);
+            use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
+                    REQUEST_CODE_DELETE_SUBSCRIPTION);
         }
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
@@ -223,6 +225,13 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                     if (preference != null) {
                         preference.performClick();
                     }
+                }
+                break;
+
+            case REQUEST_CODE_DELETE_SUBSCRIPTION:
+                final Activity activity = getActivity();
+                if (activity != null && !activity.isFinishing()) {
+                    activity.finish();
                 }
                 break;
 
