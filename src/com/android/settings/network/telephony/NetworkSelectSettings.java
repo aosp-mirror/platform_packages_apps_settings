@@ -29,6 +29,7 @@ import android.telephony.CellIdentity;
 import android.telephony.CellInfo;
 import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
+import android.telephony.SignalStrength;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -336,7 +337,7 @@ public class NetworkSelectSettings extends DashboardFragment {
                 pref.setSummary(R.string.network_connected);
                 // Update the signal strength icon, since the default signalStrength value would be
                 // zero (it would be quite confusing why the connected network has no signal)
-                pref.setIcon(NetworkOperatorPreference.NUMBER_OF_LEVELS - 1);
+                pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
                 mConnectedPreferenceCategory.addPreference(pref);
             } else {
                 // Remove the connected network operators category
