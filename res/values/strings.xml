@@ -10197,6 +10197,15 @@
     <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation</string>
 
+    <!-- Message for the alert dialog which says that the current default home app does not support gesture navigation. [CHAR LIMIT=NONE] -->
+    <string name="gesture_not_supported_dialog_message">Not supported by your default home app, <xliff:g id="default_home_app" example="Pixel Launcher">%s</xliff:g></string>
+
+    <!-- Positive button for the alert dialog when gesture nav not supported by launcher [CHAR LIMIT=40] -->
+    <string name="gesture_not_supported_positive_button">Switch default home app</string>
+
+    <!-- Content description for the Information icon [CHAR LIMIT=30] -->
+    <string name="information_label">Information</string>
+
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
     <!-- Preference and settings suggestion title text for ambient display double tap (tablet) [CHAR LIMIT=60]-->
