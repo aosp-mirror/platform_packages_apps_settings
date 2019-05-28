@@ -522,6 +522,11 @@
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
 
+        <SwitchPreference
+            android:key="asst_capability_prioritizer"
+            android:title="@string/asst_capability_prioritizer_title"
+            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+
         <Preference
             android:key="inactive_apps"
             android:title="@string/inactive_apps_title"
