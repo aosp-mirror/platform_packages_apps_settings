@@ -16,11 +16,14 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.network.telephony.MobileNetworkSettings.REQUEST_CODE_DELETE_SUBSCRIPTION;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.usage.NetworkStatsManager;
@@ -80,6 +83,7 @@ public class MobileNetworkSettingsTest {
         args.putInt(Settings.EXTRA_SUB_ID, subscriptionId);
         mFragment.setArguments(args);
         when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mActivity.isFinishing()).thenReturn(false);
         when(mActivity.getSystemService(NetworkPolicyManager.class)).thenReturn(
                 mNetworkPolicyManager);
     }
@@ -117,5 +121,18 @@ public class MobileNetworkSettingsTest {
                 c -> c.getClass().equals(DataUsageSummaryPreferenceController.class))
                 .count())
                 .isEqualTo(1);
+    }
+
+    @Test
+    public void onActivityResult_noActivity_noCrash() {
+        when(mFragment.getActivity()).thenReturn(null);
+        // this should not crash
+        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, 0, null);
+    }
+
+    @Test
+    public void onActivityResult_deleteSubscription_activityFinishes() {
+        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, 0, null);
+        verify(mActivity).finish();
     }
 }
