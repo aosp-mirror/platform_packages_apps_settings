@@ -27,14 +27,17 @@ import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAI
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -199,17 +202,24 @@ class SliceDataConverter {
                 }
 
                 final String key = bundle.getString(METADATA_KEY);
+                final BasePreferenceController controller = SliceBuilderUtils
+                        .getPreferenceController(mContext, controllerClassName, key);
+                // Only add pre-approved Slices available on the device.
+                if (!controller.isSliceable() || !controller.isAvailable()) {
+                    continue;
+                }
                 final String title = bundle.getString(METADATA_TITLE);
                 final String summary = bundle.getString(METADATA_SUMMARY);
                 final int iconResId = bundle.getInt(METADATA_ICON);
-                final int sliceType = SliceBuilderUtils.getSliceType(mContext, controllerClassName,
-                        key);
+
+                final int sliceType = controller.getSliceType();
                 final boolean isPlatformSlice = bundle.getBoolean(METADATA_PLATFORM_SLICE_FLAG);
                 final String unavailableSliceSubtitle = bundle.getString(
                         METADATA_UNAVAILABLE_SLICE_SUBTITLE);
 
                 final SliceData xmlSlice = new SliceData.Builder()
                         .setKey(key)
+                        .setUri(controller.getSliceUri())
                         .setTitle(title)
                         .setSummary(summary)
                         .setIcon(iconResId)
@@ -221,13 +231,7 @@ class SliceDataConverter {
                         .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                         .build();
 
-                final BasePreferenceController controller =
-                        SliceBuilderUtils.getPreferenceController(mContext, xmlSlice);
-
-                // Only add pre-approved Slices available on the device.
-                if (controller.isSliceable() && controller.isAvailable()) {
-                    xmlSliceData.add(xmlSlice);
-                }
+                xmlSliceData.add(xmlSlice);
             }
         } catch (SliceData.InvalidSliceDataException e) {
             Log.w(TAG, "Invalid data when building SliceData for " + fragmentName, e);
@@ -294,6 +298,12 @@ class SliceDataConverter {
 
             sliceDataBuilder.setKey(flattenedName)
                     .setTitle(title)
+                    .setUri(new Uri.Builder()
+                            .scheme(ContentResolver.SCHEME_CONTENT)
+                            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                            .appendPath(flattenedName)
+                            .build())
                     .setIcon(iconResource)
                     .setSliceType(SliceData.SliceType.SWITCH);
             try {

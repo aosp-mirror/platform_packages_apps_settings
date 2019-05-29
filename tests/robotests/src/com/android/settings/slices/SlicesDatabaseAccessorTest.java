@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 
 import android.app.ApplicationPackageManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -139,10 +140,15 @@ public class SlicesDatabaseAccessorTest {
 
     @Test
     public void testGetSliceFromUri_validUri_validSliceReturned() {
-        String key = "key";
-        String path = "intent/" + key;
+        final String key = "key";
         insertSpecialCase(key);
-        Uri uri = SliceBuilderUtils.getUri(path, false);
+
+        final Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath("action")
+                .appendPath(key)
+                .build();
 
         SliceData data = mAccessor.getSliceDataFromUri(uri);
 
@@ -159,7 +165,12 @@ public class SlicesDatabaseAccessorTest {
 
     @Test(expected = IllegalStateException.class)
     public void testGetSliceFromUri_invalidUri_errorThrown() {
-        Uri uri = SliceBuilderUtils.getUri("intent/durr", false);
+        final Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath("intent")
+                .appendPath("durr")
+                .build();
         mAccessor.getSliceDataFromUri(uri);
     }
 
