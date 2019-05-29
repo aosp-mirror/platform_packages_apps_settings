@@ -7891,8 +7891,8 @@
     <!-- Configure Notifications: section header for prioritizer settings  [CHAR LIMIT=80] -->
     <string name="smart_notifications_title">Adaptive notifications</string>
 
-    <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
-    <string name="asst_capability_prioritizer_title">Automatic Prioritization</string>
+    <!-- Configure Notifications: setting title [CHAR LIMIT=80 BACKUP_MESSAGE_ID=6691908606916292167] -->
+    <string name="asst_capability_prioritizer_title">Adaptive notification priority</string>
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
     <string name="asst_capability_prioritizer_summary">Automatically set lower priority notifications to Gentle</string>
@@ -10199,6 +10199,15 @@
     <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation</string>
 
+    <!-- Message for the alert dialog which says that the current default home app does not support gesture navigation. [CHAR LIMIT=NONE] -->
+    <string name="gesture_not_supported_dialog_message">Not supported by your default home app, <xliff:g id="default_home_app" example="Pixel Launcher">%s</xliff:g></string>
+
+    <!-- Positive button for the alert dialog when gesture nav not supported by launcher [CHAR LIMIT=40] -->
+    <string name="gesture_not_supported_positive_button">Switch default home app</string>
+
+    <!-- Content description for the Information icon [CHAR LIMIT=30] -->
+    <string name="information_label">Information</string>
+
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
     <!-- Preference and settings suggestion title text for ambient display double tap (tablet) [CHAR LIMIT=60]-->
@@ -11209,11 +11218,11 @@
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
 
     <!-- Keywords for Content Capture feature [CHAR_LIMIT=none] -->
-    <string name="keywords_content_capture">content capture, app content</string>
+    <string name="keywords_content_capture">content capture, app content, app data</string>
     <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
-    <string name="content_capture">App content</string>
+    <string name="content_capture">Personalize using app data</string>
     <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
-    <string name="content_capture_summary">Allow apps to send content to the Android system</string>
+    <string name="content_capture_summary">Allow apps to send content to the Android system. Tap to learn more.</string>
 
     <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capture_system_heap_dump_title">Capture system heap dump</string>
