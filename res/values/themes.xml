@@ -126,6 +126,8 @@
 
     <style name="Theme.AlertDialog" parent="Theme.AlertDialog.Base">
         <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:clipToPadding">true</item>
+        <item name="android:clipChildren">true</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Widget.ActionBar</item>

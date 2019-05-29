@@ -16,11 +16,17 @@
 
 package com.android.settings.network;
 
+import static android.telephony.SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
+import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GOOD;
+import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GREAT;
+import static android.telephony.SignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN;
+import static android.telephony.SignalStrength.SIGNAL_STRENGTH_POOR;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -33,16 +39,20 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.provider.Settings;
+import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.graph.SignalDrawable;
 
 import org.junit.After;
 import org.junit.Before;
@@ -84,6 +94,8 @@ public class SubscriptionsPreferenceControllerTest {
     private Network mActiveNetwork;
     @Mock
     private NetworkCapabilities mCapabilities;
+    @Mock
+    private Drawable mSignalStrengthIcon;
 
     private Context mContext;
     private LifecycleOwner mLifecycleOwner;
@@ -109,8 +121,10 @@ public class SubscriptionsPreferenceControllerTest {
         mOnChildUpdatedCount = 0;
         mUpdateListener = () -> mOnChildUpdatedCount++;
 
-        mController = new SubscriptionsPreferenceController(mContext, mLifecycle, mUpdateListener,
-                KEY, 5);
+        mController = spy(
+                new SubscriptionsPreferenceController(mContext, mLifecycle, mUpdateListener,
+                        KEY, 5));
+        doReturn(mSignalStrengthIcon).when(mController).getIcon(anyInt(), anyInt(), anyBoolean());
     }
 
     @After
@@ -120,32 +134,25 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     public void isAvailable_oneSubscription_availableFalse() {
-        SubscriptionUtil.setActiveSubscriptionsForTesting(
-                Arrays.asList(mock(SubscriptionInfo.class)));
+        setupMockSubscriptions(1);
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_twoSubscriptions_availableTrue() {
-        SubscriptionUtil.setActiveSubscriptionsForTesting(
-                Arrays.asList(mock(SubscriptionInfo.class), mock(SubscriptionInfo.class)));
+        setupMockSubscriptions(2);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_fiveSubscriptions_availableTrue() {
-        final ArrayList<SubscriptionInfo> subs = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            subs.add(mock(SubscriptionInfo.class));
-        }
-        SubscriptionUtil.setActiveSubscriptionsForTesting(subs);
+        setupMockSubscriptions(5);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_airplaneModeOn_availableFalse() {
-        SubscriptionUtil.setActiveSubscriptionsForTesting(
-                Arrays.asList(mock(SubscriptionInfo.class), mock(SubscriptionInfo.class)));
+        setupMockSubscriptions(2);
         assertThat(mController.isAvailable()).isTrue();
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
         assertThat(mController.isAvailable()).isFalse();
@@ -153,8 +160,7 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     public void onAirplaneModeChanged_airplaneModeTurnedOn_eventFired() {
-        SubscriptionUtil.setActiveSubscriptionsForTesting(
-                Arrays.asList(mock(SubscriptionInfo.class), mock(SubscriptionInfo.class)));
+        setupMockSubscriptions(2);
         mController.onResume();
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isTrue();
@@ -169,8 +175,7 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     public void onAirplaneModeChanged_airplaneModeTurnedOff_eventFired() {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
-        SubscriptionUtil.setActiveSubscriptionsForTesting(
-                Arrays.asList(mock(SubscriptionInfo.class), mock(SubscriptionInfo.class)));
+        setupMockSubscriptions(2);
         mController.onResume();
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isFalse();
@@ -184,15 +189,14 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     public void onSubscriptionsChanged_countBecameTwo_eventFired() {
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(2);
+        SubscriptionUtil.setActiveSubscriptionsForTesting(subs.subList(0, 1));
         mController.onResume();
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isFalse();
 
         final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(subs);
         mController.onSubscriptionsChanged();
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
@@ -200,18 +204,14 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     public void onSubscriptionsChanged_countBecameOne_eventFiredAndPrefsRemoved() {
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(1);
-        when(sub2.getSubscriptionId()).thenReturn(2);
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(2);
         mController.onResume();
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isTrue();
         verify(mPreferenceCategory, times(2)).addPreference(any(Preference.class));
 
         final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(subs.subList(0, 1));
         mController.onSubscriptionsChanged();
         assertThat(mController.isAvailable()).isFalse();
         assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
@@ -219,21 +219,12 @@ public class SubscriptionsPreferenceControllerTest {
         verify(mPreferenceCategory, times(2)).removePreference(any(Preference.class));
     }
 
-
     @Test
     public void onSubscriptionsChanged_subscriptionReplaced_preferencesChanged() {
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub3 = mock(SubscriptionInfo.class);
-        when(sub1.getDisplayName()).thenReturn("sub1");
-        when(sub2.getDisplayName()).thenReturn("sub2");
-        when(sub3.getDisplayName()).thenReturn("sub3");
-        when(sub1.getSubscriptionId()).thenReturn(1);
-        when(sub2.getSubscriptionId()).thenReturn(2);
-        when(sub3.getSubscriptionId()).thenReturn(3);
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(3);
 
         // Start out with only sub1 and sub2.
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(subs.subList(0, 2));
         mController.onResume();
         mController.displayPreference(mScreen);
         final ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
@@ -245,7 +236,7 @@ public class SubscriptionsPreferenceControllerTest {
         // Now replace sub2 with sub3, and make sure the old preference was removed and the new
         // preference was added.
         final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub3));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(subs.get(0), subs.get(2)));
         mController.onSubscriptionsChanged();
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
@@ -264,14 +255,8 @@ public class SubscriptionsPreferenceControllerTest {
      * @param subscriptionCount the number of subscriptions
      * @param selectedPrefIndex index of the subscription to click on
      */
-    private void runPreferenceClickTest(int subscriptionCount, int selectedPrefIndex) {
-        final ArrayList<SubscriptionInfo> subscriptions = new ArrayList<>();
-        for (int i = 0; i < subscriptionCount; i++) {
-            final SubscriptionInfo sub = mock(SubscriptionInfo.class);
-            doReturn(i + 1).when(sub).getSubscriptionId();
-            subscriptions.add(sub);
-        }
-        SubscriptionUtil.setActiveSubscriptionsForTesting(subscriptions);
+    private void runPreferenceClickTest(final int subscriptionCount, final int selectedPrefIndex) {
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(subscriptionCount);
         mController.displayPreference(mScreen);
         final ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mPreferenceCategory, times(subscriptionCount)).addPreference(prefCaptor.capture());
@@ -286,7 +271,7 @@ public class SubscriptionsPreferenceControllerTest {
         final int subIdFromIntent = intent.getIntExtra(Settings.EXTRA_SUB_ID,
                 INVALID_SUBSCRIPTION_ID);
         assertThat(subIdFromIntent).isEqualTo(
-                subscriptions.get(selectedPrefIndex).getSubscriptionId());
+                subs.get(selectedPrefIndex).getSubscriptionId());
     }
 
     @Test
@@ -311,86 +296,248 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     public void getSummary_twoSubsOneDefaultForEverythingDataActive() {
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(11);
-        when(sub2.getSubscriptionId()).thenReturn(22);
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        setupMockSubscriptions(2);
 
-        ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
         when(mCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)).thenReturn(true);
 
-        assertThat(mController.getSummary(11)).isEqualTo(
+        assertThat(mController.getSummary(11, true)).isEqualTo(
                 mContext.getString(R.string.default_for_calls_and_sms) + System.lineSeparator()
                         + mContext.getString(R.string.mobile_data_active));
 
-        assertThat(mController.getSummary(22)).isEqualTo(
+        assertThat(mController.getSummary(22, false)).isEqualTo(
                 mContext.getString(R.string.subscription_available));
     }
 
     @Test
     public void getSummary_twoSubsOneDefaultForEverythingDataNotActive() {
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(11);
-        when(sub2.getSubscriptionId()).thenReturn(22);
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        setupMockSubscriptions(2, 1, true);
 
-        ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
-        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
-        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
+        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(1);
+        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(1);
 
-        assertThat(mController.getSummary(11)).isEqualTo(
+        assertThat(mController.getSummary(1, true)).isEqualTo(
                 mContext.getString(R.string.default_for_calls_and_sms) + System.lineSeparator()
                         + mContext.getString(R.string.default_for_mobile_data));
 
-        assertThat(mController.getSummary(22)).isEqualTo(
+        assertThat(mController.getSummary(2, false)).isEqualTo(
                 mContext.getString(R.string.subscription_available));
     }
 
     @Test
     public void getSummary_twoSubsOneDefaultForEverythingDataDisabled() {
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(11);
-        when(sub2.getSubscriptionId()).thenReturn(22);
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        setupMockSubscriptions(2);
 
-        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
-        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
-        ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
-        when(mTelephonyManager.isDataEnabled()).thenReturn(false);
+        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(1);
+        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(1);
 
-        assertThat(mController.getSummary(11)).isEqualTo(
+        assertThat(mController.getSummary(1, true)).isEqualTo(
                 mContext.getString(R.string.default_for_calls_and_sms) + System.lineSeparator()
                         + mContext.getString(R.string.mobile_data_off));
 
-        assertThat(mController.getSummary(22)).isEqualTo(
+        assertThat(mController.getSummary(2, false)).isEqualTo(
                 mContext.getString(R.string.subscription_available));
     }
 
     @Test
     public void getSummary_twoSubsOneForCallsAndDataOneForSms() {
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(11);
-        when(sub2.getSubscriptionId()).thenReturn(22);
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        setupMockSubscriptions(2, 1, true);
 
-        ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
-        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(22);
-        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
+        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(2);
+        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(1);
 
-        assertThat(mController.getSummary(11)).isEqualTo(
+        assertThat(mController.getSummary(1, true)).isEqualTo(
                 mContext.getString(R.string.default_for_calls) + System.lineSeparator()
                         + mContext.getString(R.string.default_for_mobile_data));
 
-        assertThat(mController.getSummary(22)).isEqualTo(
+        assertThat(mController.getSummary(2, false)).isEqualTo(
                 mContext.getString(R.string.default_for_sms));
+    }
+
+    @Test
+    public void setIcon_nullStrength_noCrash() {
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(2);
+        setMockSubSignalStrength(subs, 0, -1);
+        final Preference pref = mock(Preference.class);
+
+        mController.setIcon(pref, 1, true /* isDefaultForData */);
+        verify(mController).getIcon(eq(0), eq(NUM_SIGNAL_STRENGTH_BINS), eq(true));
+    }
+
+    @Test
+    public void setIcon_noSignal_correctLevels() {
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(2, 1, true);
+        setMockSubSignalStrength(subs, 0, SIGNAL_STRENGTH_NONE_OR_UNKNOWN);
+        setMockSubSignalStrength(subs, 1, SIGNAL_STRENGTH_NONE_OR_UNKNOWN);
+        setMockSubDataEnabled(subs, 0, true);
+        final Preference pref = mock(Preference.class);
+
+        mController.setIcon(pref, 1, true /* isDefaultForData */);
+        verify(mController).getIcon(eq(0), eq(NUM_SIGNAL_STRENGTH_BINS), eq(false));
+
+        mController.setIcon(pref, 2, false /* isDefaultForData */);
+        verify(mController).getIcon(eq(0), eq(NUM_SIGNAL_STRENGTH_BINS), eq(true));
+    }
+
+    @Test
+    public void setIcon_noSignal_withInflation_correctLevels() {
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(2, 1, true);
+        setMockSubSignalStrength(subs, 0, SIGNAL_STRENGTH_NONE_OR_UNKNOWN);
+        setMockSubSignalStrength(subs, 1, SIGNAL_STRENGTH_NONE_OR_UNKNOWN);
+        final Preference pref = mock(Preference.class);
+        doReturn(true).when(mController).shouldInflateSignalStrength(anyInt());
+
+        mController.setIcon(pref, 1, true /* isDefaultForData */);
+        verify(mController).getIcon(eq(1), eq(NUM_SIGNAL_STRENGTH_BINS + 1), eq(false));
+
+        mController.setIcon(pref, 2, false /* isDefaultForData */);
+        verify(mController).getIcon(eq(1), eq(NUM_SIGNAL_STRENGTH_BINS + 1), eq(true));
+    }
+
+    @Test
+    public void setIcon_greatSignal_correctLevels() {
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(2, 1, true);
+        setMockSubSignalStrength(subs, 0, SIGNAL_STRENGTH_GREAT);
+        setMockSubSignalStrength(subs, 1, SIGNAL_STRENGTH_GREAT);
+        final Preference pref = mock(Preference.class);
+
+        mController.setIcon(pref, 1, true /* isDefaultForData */);
+        verify(mController).getIcon(eq(4), eq(NUM_SIGNAL_STRENGTH_BINS), eq(false));
+
+        mController.setIcon(pref, 2, false /* isDefaultForData */);
+        verify(mController).getIcon(eq(4), eq(NUM_SIGNAL_STRENGTH_BINS), eq(true));
+    }
+
+    @Test
+    public void onSignalStrengthChanged_subTwoGoesFromGoodToGreat_correctLevels() {
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(2);
+        setMockSubSignalStrength(subs, 0, SIGNAL_STRENGTH_POOR);
+        setMockSubSignalStrength(subs, 1, SIGNAL_STRENGTH_GOOD);
+
+        mController.onResume();
+        mController.displayPreference(mScreen);
+
+        // Now change the signal strength for the 2nd subscription from Good to Great
+        setMockSubSignalStrength(subs, 1, SIGNAL_STRENGTH_GREAT);
+        mController.onSignalStrengthChanged();
+
+        final ArgumentCaptor<Integer> level = ArgumentCaptor.forClass(Integer.class);
+        verify(mController, times(4)).getIcon(level.capture(), eq(NUM_SIGNAL_STRENGTH_BINS),
+                eq(true));
+        assertThat(level.getAllValues().get(0)).isEqualTo(1);
+        assertThat(level.getAllValues().get(1)).isEqualTo(3); // sub2, first time
+        assertThat(level.getAllValues().get(2)).isEqualTo(1);
+        assertThat(level.getAllValues().get(3)).isEqualTo(4); // sub2, after change
+    }
+
+    @Test
+    public void displayPreference_mobileDataOff_bothSubsHaveCutOut() {
+        setupMockSubscriptions(2, 1, false);
+
+        mController.onResume();
+        mController.displayPreference(mScreen);
+
+        verify(mController, times(2)).getIcon(eq(SIGNAL_STRENGTH_GOOD),
+                eq(NUM_SIGNAL_STRENGTH_BINS), eq(true));
+    }
+
+    @Test
+    public void displayPreference_mobileDataOn_onlyNonDefaultSubHasCutOut() {
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(2, 1, true);
+        setMockSubSignalStrength(subs, 1, SIGNAL_STRENGTH_POOR);
+
+        mController.onResume();
+        mController.displayPreference(mScreen);
+
+        verify(mController).getIcon(eq(SIGNAL_STRENGTH_GOOD), eq(NUM_SIGNAL_STRENGTH_BINS),
+                eq(false));
+        verify(mController).getIcon(eq(SIGNAL_STRENGTH_POOR), eq(NUM_SIGNAL_STRENGTH_BINS),
+                eq(true));
+    }
+
+
+    @Test
+    public void onMobileDataEnabledChange_mobileDataTurnedOff_bothSubsHaveCutOut() {
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(2, 1, true);
+
+        mController.onResume();
+        mController.displayPreference(mScreen);
+
+        setMockSubDataEnabled(subs, 0, false);
+        mController.onMobileDataEnabledChange();
+
+        final ArgumentCaptor<Boolean> cutOutCaptor = ArgumentCaptor.forClass(Boolean.class);
+        verify(mController, times(4)).getIcon(eq(SIGNAL_STRENGTH_GOOD),
+                eq(NUM_SIGNAL_STRENGTH_BINS), cutOutCaptor.capture());
+        assertThat(cutOutCaptor.getAllValues().get(0)).isEqualTo(false); // sub1, first time
+        assertThat(cutOutCaptor.getAllValues().get(1)).isEqualTo(true);
+        assertThat(cutOutCaptor.getAllValues().get(2)).isEqualTo(true); // sub1, second time
+        assertThat(cutOutCaptor.getAllValues().get(3)).isEqualTo(true);
+    }
+
+    private List<SubscriptionInfo> setupMockSubscriptions(int count) {
+        return setupMockSubscriptions(count, 0, true);
+    }
+
+    /** Helper method to setup several mock active subscriptions. The generated subscription id's
+     * start at 1.
+     *
+     * @param count How many subscriptions to create
+     * @param defaultDataSubId The subscription id of the default data subscription - pass
+     *                         INVALID_SUBSCRIPTION_ID if there should not be one
+     * @param mobileDataEnabled Whether mobile data should be considered enabled for the default
+     *                          data subscription
+     */
+    private List<SubscriptionInfo> setupMockSubscriptions(int count, int defaultDataSubId,
+            boolean mobileDataEnabled) {
+        if (defaultDataSubId != INVALID_SUBSCRIPTION_ID) {
+            ShadowSubscriptionManager.setDefaultDataSubscriptionId(defaultDataSubId);
+        }
+        final ArrayList<SubscriptionInfo> infos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            final int subscriptionId = i + 1;
+            final SubscriptionInfo info = mock(SubscriptionInfo.class);
+            final TelephonyManager mgrForSub = mock(TelephonyManager.class);
+            final SignalStrength signalStrength = mock(SignalStrength.class);
+
+            if (subscriptionId == defaultDataSubId) {
+                when(mgrForSub.isDataEnabled()).thenReturn(mobileDataEnabled);
+            }
+            when(info.getSubscriptionId()).thenReturn(i + 1);
+            when(info.getDisplayName()).thenReturn("sub" + (i + 1));
+            doReturn(mgrForSub).when(mTelephonyManager).createForSubscriptionId(eq(subscriptionId));
+            when(mgrForSub.getSignalStrength()).thenReturn(signalStrength);
+            when(signalStrength.getLevel()).thenReturn(SIGNAL_STRENGTH_GOOD);
+
+            infos.add(info);
+        }
+        SubscriptionUtil.setActiveSubscriptionsForTesting(infos);
+        return infos;
+    }
+
+    /**
+     * Helper method to set the signal strength returned for a mock subscription
+     * @param subs The list of subscriptions
+     * @param index The index in of the subscription in |subs| to change
+     * @param level The signal strength level to return for the subscription. Pass -1 to force
+     *              return of a null SignalStrength object for the subscription.
+     */
+    private void setMockSubSignalStrength(List<SubscriptionInfo> subs, int index, int level) {
+        final TelephonyManager mgrForSub =
+                mTelephonyManager.createForSubscriptionId(subs.get(index).getSubscriptionId());
+        if (level == -1) {
+            when(mgrForSub.getSignalStrength()).thenReturn(null);
+        } else {
+            final SignalStrength signalStrength = mgrForSub.getSignalStrength();
+            when(signalStrength.getLevel()).thenReturn(level);
+        }
+    }
+
+    private void setMockSubDataEnabled(List<SubscriptionInfo> subs, int index, boolean enabled) {
+        final TelephonyManager mgrForSub =
+                mTelephonyManager.createForSubscriptionId(subs.get(index).getSubscriptionId());
+        when(mgrForSub.isDataEnabled()).thenReturn(enabled);
     }
 }
