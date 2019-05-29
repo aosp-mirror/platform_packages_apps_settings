@@ -248,6 +248,11 @@
             android:summary="@string/wifi_verbose_logging_summary" />
 
         <SwitchPreference
+            android:key="wifi_scan_throttling"
+            android:title="@string/wifi_scan_throttling"
+            android:summary="@string/wifi_scan_throttling_summary" />
+
+        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary" />
@@ -521,6 +526,11 @@
             android:key="show_notification_channel_warnings"
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
+
+        <SwitchPreference
+            android:key="asst_capability_prioritizer"
+            android:title="@string/asst_capability_prioritizer_title"
+            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
 
         <Preference
             android:key="inactive_apps"

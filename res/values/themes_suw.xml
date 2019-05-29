@@ -112,6 +112,11 @@
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
     </style>
 
+    <style name="GlifV3Theme.Footer" parent="@style/SudThemeGlifV3.DayNight">
+        <item name="android:clipChildren">true</item>
+        <item name="android:clipToPadding">true</item>
+    </style>
+
     <style name="GlifV3Theme.Light" parent="SudThemeGlifV3.Light">
         <!-- For all AndroidX Alert Dialogs -->
         <item name="alertDialogTheme">@style/GlifV2ThemeAlertDialog.Light</item>
