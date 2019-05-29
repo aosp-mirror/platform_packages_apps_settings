@@ -95,13 +95,9 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         builder.setTitle(R.string.mobile_network_sim_name)
                 .setView(view)
                 .setPositiveButton(R.string.mobile_network_sim_name_rename, (dialog, which) -> {
-                    SubscriptionInfo currentInfo = mSubscriptionManager.getActiveSubscriptionInfo(
-                            mSubId);
                     String newName = mNameView.getText().toString();
-                    if (currentInfo != null && !currentInfo.getDisplayName().equals(newName)) {
-                        mSubscriptionManager.setDisplayName(newName, mSubId,
-                                SubscriptionManager.NAME_SOURCE_USER_INPUT);
-                    }
+                    mSubscriptionManager.setDisplayName(newName, mSubId,
+                            SubscriptionManager.NAME_SOURCE_USER_INPUT);
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         return builder.create();
