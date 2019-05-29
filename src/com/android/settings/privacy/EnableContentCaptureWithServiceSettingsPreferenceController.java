@@ -96,18 +96,23 @@ public final class EnableContentCaptureWithServiceSettingsPreferenceController
             for (UserInfo info: userInfos) {
                 userHandles.add(info.getUserHandle());
             }
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            UserAdapter adapter = UserAdapter.createUserAdapter(userManager, context, userHandles);
-            builder.setTitle(com.android.settingslib.R.string.choose_profile)
-                    .setAdapter(adapter, (DialogInterface dialog, int which) -> {
-                        final UserHandle user = userHandles.get(which);
-                        // Show menu on top level items.
-                        final Intent intent = pref.getIntent();
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        context.startActivityAsUser(intent, user);
-                    })
-                    .show();
+            if (userHandles.size() == 1) {
+                final Intent intent = pref.getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivityAsUser(intent, userHandles.get(0));
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                UserAdapter adapter = UserAdapter.createUserAdapter(userManager, context,
+                        userHandles);
+                builder.setTitle(com.android.settingslib.R.string.choose_profile)
+                        .setAdapter(adapter, (DialogInterface dialog, int which) -> {
+                            final UserHandle user = userHandles.get(which);
+                            // Show menu on top level items.
+                            final Intent intent = pref.getIntent()
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            context.startActivityAsUser(intent, user);
+                        })
+                        .show();
+            }
         }
     }
 
