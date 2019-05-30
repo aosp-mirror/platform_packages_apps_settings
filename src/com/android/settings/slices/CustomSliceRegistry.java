@@ -59,17 +59,7 @@ import java.util.Map;
 public class CustomSliceRegistry {
 
     /**
-     * Uri for Airplane mode Slice.
-     */
-    public static final Uri AIRPLANE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSlicesContract.AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(SettingsSlicesContract.KEY_AIRPLANE_MODE)
-            .build();
-
-    /**
-     *  Uri for Contextual Adaptive Sleep Slice
+     * Uri for Contextual Adaptive Sleep Slice
      */
     public static final Uri CONTEXTUAL_ADAPTIVE_SLEEP_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
