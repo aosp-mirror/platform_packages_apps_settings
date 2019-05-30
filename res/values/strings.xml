@@ -7337,7 +7337,7 @@
     <string name="keywords_assist_gesture_launch">gesture</string>
     <string name="keywords_face_unlock">face, unlock, auth, sign in</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
-    <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
+    <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid, eid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
     <!-- Search keywords for dark mode settings [CHAR LIMIT=NONE] -->
@@ -7903,6 +7903,9 @@
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
     <string name="asst_capabilities_actions_replies_summary">Automatically show suggested actions &amp; replies</string>
 
+    <!-- Configure Notifications: setting title, whether the snooze menu is shown on notifications [CHAR LIMIT=80] -->
+    <string name="snooze_options_title">Allow notification snoozing</string>
+
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
     <string name="hide_silent_icons_title">Hide icons from gentle notifications</string>
 
@@ -8103,7 +8106,7 @@
     <string name="notification_silence_title">Silent</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title -->
-    <string name="notification_alert_title">Prioritized</string>
+    <string name="notification_alert_title">Alerting</string>
 
     <!-- [CHAR LIMIT=40] Notification importance title. This setting controls how notifications in older apps may alert the user (eg, sound, visual, vibrate). -->
     <string name="allow_interruption">Allow interruptions</string>
@@ -11212,11 +11215,11 @@
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
 
     <!-- Keywords for Content Capture feature [CHAR_LIMIT=none] -->
-    <string name="keywords_content_capture">content capture, app content, app data</string>
+    <string name="keywords_content_capture">content capture, app content</string>
     <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
-    <string name="content_capture">Personalize using app data</string>
+    <string name="content_capture">App content</string>
     <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
-    <string name="content_capture_summary">Allow apps to send content to the Android system. Tap to learn more.</string>
+    <string name="content_capture_summary">Allow apps to send content to the Android system</string>
 
     <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capture_system_heap_dump_title">Capture system heap dump</string>
