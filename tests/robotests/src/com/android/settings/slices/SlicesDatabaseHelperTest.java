@@ -65,6 +65,7 @@ public class SlicesDatabaseHelperTest {
 
         String[] expectedNames = {
                 IndexColumns.KEY,
+                IndexColumns.SLICE_URI,
                 IndexColumns.TITLE,
                 IndexColumns.SUMMARY,
                 IndexColumns.SCREENTITLE,
