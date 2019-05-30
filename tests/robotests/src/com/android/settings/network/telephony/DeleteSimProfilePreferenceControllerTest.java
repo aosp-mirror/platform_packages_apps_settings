@@ -18,11 +18,15 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
 
 import androidx.fragment.app.Fragment;
@@ -35,6 +39,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -46,12 +51,12 @@ import java.util.Arrays;
 @RunWith(RobolectricTestRunner.class)
 public class DeleteSimProfilePreferenceControllerTest {
     private static final String PREF_KEY = "delete_profile_key";
+    private static final int REQUEST_CODE = 4321;
     private static final int SUB_ID = 1234;
     private static final int OTHER_ID = 5678;
 
     @Mock
     private Fragment mFragment;
-
     @Mock
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
@@ -85,27 +90,42 @@ public class DeleteSimProfilePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_noSubs_notAvailable() {
         SubscriptionUtil.setAvailableSubscriptionsForTesting(new ArrayList<>());
-        mController.init(SUB_ID, mFragment);
+        mController.init(SUB_ID, mFragment, REQUEST_CODE);
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void getAvailabilityStatus_physicalSim_notAvailable() {
         when(mSubscriptionInfo.isEmbedded()).thenReturn(false);
-        mController.init(SUB_ID, mFragment);
+        mController.init(SUB_ID, mFragment, REQUEST_CODE);
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void getAvailabilityStatus_unknownSim_notAvailable() {
         when(mSubscriptionInfo.getSubscriptionId()).thenReturn(OTHER_ID);
-        mController.init(SUB_ID, mFragment);
+        mController.init(SUB_ID, mFragment, REQUEST_CODE);
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void getAvailabilityStatus_knownEsim_isAvailable() {
-        mController.init(SUB_ID, mFragment);
+        mController.init(SUB_ID, mFragment, REQUEST_CODE);
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void onPreferenceClick_startsIntent() {
+        mController.init(SUB_ID, mFragment, REQUEST_CODE);
+        mController.displayPreference(mScreen);
+        mPreference.performClick();
+
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mFragment).startActivityForResult(intentCaptor.capture(), eq(REQUEST_CODE));
+        final Intent intent = intentCaptor.getValue();
+        assertThat(intent.getAction()).isEqualTo(
+                EuiccManager.ACTION_DELETE_SUBSCRIPTION_PRIVILEGED);
+        assertThat(intent.getIntExtra(EuiccManager.EXTRA_SUBSCRIPTION_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(SUB_ID);
     }
 }
