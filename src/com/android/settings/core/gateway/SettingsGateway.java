@@ -84,6 +84,7 @@ import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
+import com.android.settings.display.AutoBrightnessSettings;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.display.SmartAutoRotatePreferenceFragment;
 import com.android.settings.display.darkmode.DarkModeSettingsFragment;
@@ -313,7 +314,8 @@ public class SettingsGateway {
             MediaControlsSettings.class.getName(),
             NetworkProviderSettings.class.getName(),
             AlarmsAndRemindersDetails.class.getName(),
-            MediaManagementAppsDetails.class.getName()
+            MediaManagementAppsDetails.class.getName(),
+            AutoBrightnessSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
@@ -344,6 +346,8 @@ public class SettingsGateway {
             Settings.ConfigureNotificationSettingsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
+            // Home page > Display
+            Settings.AdaptiveBrightnessActivity.class.getName(),
             // Home page > Security & screen lock
             Settings.LocationSettingsActivity.class.getName(),
             // Home page > System
