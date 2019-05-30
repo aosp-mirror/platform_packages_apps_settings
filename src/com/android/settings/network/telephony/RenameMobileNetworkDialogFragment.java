@@ -19,6 +19,10 @@ package com.android.settings.network.telephony;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Paint;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
@@ -30,7 +34,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -42,9 +51,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-/** A dialog allowing the display name of a mobile network subscription to be changed */
+/**
+ * A dialog allowing the display name of a mobile network subscription to be changed
+ */
 public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragment {
-    public static final String TAG ="RenameMobileNetwork";
+
+    public static final String TAG = "RenameMobileNetwork";
 
     private static final String KEY_SUBSCRIPTION_ID = "subscription_id";
 
@@ -52,6 +64,8 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
     private SubscriptionManager mSubscriptionManager;
     private int mSubId;
     private EditText mNameView;
+    private Spinner mColorSpinner;
+    private Color[] mColors;
 
     public static RenameMobileNetworkDialogFragment newInstance(int subscriptionId) {
         final Bundle args = new Bundle(1);
@@ -76,6 +90,11 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         return mNameView;
     }
 
+    @VisibleForTesting
+    protected Spinner getColorSpinnerView() {
+        return mColorSpinner;
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -87,6 +106,8 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        mColors = getColors();
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final LayoutInflater layoutInflater = builder.getContext().getSystemService(
                 LayoutInflater.class);
@@ -95,9 +116,11 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         builder.setTitle(R.string.mobile_network_sim_name)
                 .setView(view)
                 .setPositiveButton(R.string.mobile_network_sim_name_rename, (dialog, which) -> {
-                    String newName = mNameView.getText().toString();
-                    mSubscriptionManager.setDisplayName(newName, mSubId,
+                    mSubscriptionManager.setDisplayName(mNameView.getText().toString(), mSubId,
                             SubscriptionManager.NAME_SOURCE_USER_INPUT);
+                    mSubscriptionManager.setIconTint(
+                            mColors[mColorSpinner.getSelectedItemPosition()].getColor(),
+                            mSubId);
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         return builder.create();
@@ -105,7 +128,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
 
     @VisibleForTesting
     protected void populateView(View view) {
-        mNameView = view.findViewById(R.id.edittext);
+        mNameView = view.findViewById(R.id.name_edittext);
         final SubscriptionInfo info = mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
         if (info == null) {
             Log.w(TAG, "got null SubscriptionInfo for mSubId:" + mSubId);
@@ -115,6 +138,17 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         mNameView.setText(displayName);
         if (!TextUtils.isEmpty(displayName)) {
             mNameView.setSelection(displayName.length());
+        }
+
+        mColorSpinner = view.findViewById(R.id.color_spinner);
+        final ColorAdapter adapter = new ColorAdapter(getContext(),
+                R.layout.dialog_mobile_network_color_picker_item, mColors);
+        mColorSpinner.setAdapter(adapter);
+        for (int i = 0; i < mColors.length; i++) {
+            if (mColors[i].getColor() == info.getIconTint()) {
+                mColorSpinner.setSelection(i);
+                break;
+            }
         }
 
         final TextView operatorName = view.findViewById(R.id.operator_name_value);
@@ -133,5 +167,81 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.MOBILE_NETWORK_RENAME_DIALOG;
+    }
+
+    private class ColorAdapter extends ArrayAdapter<Color> {
+
+        private Context mContext;
+        private int mItemResId;
+
+        public ColorAdapter(Context context, int resource, Color[] colors) {
+            super(context, resource, colors);
+            mContext = context;
+            mItemResId = resource;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            final LayoutInflater inflater = (LayoutInflater)
+                    mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            if (convertView == null) {
+                convertView = inflater.inflate(mItemResId, null);
+            }
+            ((ImageView) convertView.findViewById(R.id.color_icon))
+                    .setImageDrawable(getItem(position).getDrawable());
+            ((TextView) convertView.findViewById(R.id.color_label))
+                    .setText(getItem(position).getLabel());
+
+            return convertView;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return getView(position, convertView, parent);
+        }
+    }
+
+    private Color[] getColors() {
+        final Resources res = getContext().getResources();
+        final int[] colorInts = res.getIntArray(com.android.internal.R.array.sim_colors);
+        final String[] colorStrings = res.getStringArray(R.array.color_picker);
+        final int iconSize = res.getDimensionPixelSize(R.dimen.color_swatch_size);
+        final int strokeWidth = res.getDimensionPixelSize(R.dimen.color_swatch_stroke_width);
+        final Color[] colors = new Color[colorInts.length];
+        for (int i = 0; i < colors.length; i++) {
+            colors[i] = new Color(colorStrings[i], colorInts[i], iconSize, strokeWidth);
+        }
+        return colors;
+    }
+
+    private static class Color {
+
+        private String mLabel;
+        private int mColor;
+        private ShapeDrawable mDrawable;
+
+        private Color(String label, int color, int iconSize, int strokeWidth) {
+            mLabel = label;
+            mColor = color;
+            mDrawable = new ShapeDrawable(new OvalShape());
+            mDrawable.setIntrinsicHeight(iconSize);
+            mDrawable.setIntrinsicWidth(iconSize);
+            mDrawable.getPaint().setStrokeWidth(strokeWidth);
+            mDrawable.getPaint().setStyle(Paint.Style.FILL_AND_STROKE);
+            mDrawable.getPaint().setColor(color);
+        }
+
+        private String getLabel() {
+            return mLabel;
+        }
+
+        private int getColor() {
+            return mColor;
+        }
+
+        private ShapeDrawable getDrawable() {
+            return mDrawable;
+        }
     }
 }
