@@ -2102,7 +2102,7 @@
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 dəqiqə"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 dəqiqə"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Əməliyyatın müddəti (Əlçatımlılıq vaxt limiti)"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Əməliyyatın icrası vaxtıdır"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Əməliyyatın icra vaxtı"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Əməliyyatın icrasını tələb edən, lakin müvəqqəti görünən mesajların görünmə müddətini seçin.\n\nBu ayarı bütün tətbiqlər dəstəkləmir."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Toxunma və basılı saxlama müddəti"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Rəng inversiyası"</string>
@@ -2110,7 +2110,7 @@
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Dayanma vaxtı"</string>
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Siçandan istifadə edirsinizsə, kursorun müəyyən vaxt ərzində hərəkət edib dayamasından sonra onu avtomatik başlayacaq şəkildə ayarlaya bilərsiniz."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Klikləmədən əvvəl gözləyin"</string>
-    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"Vibrasiya &amp; haptik güc"</string>
+    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"Vibrasiya &amp; toxunuş gücü"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Bildiriş vibrasiyası"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Zəng vibrasiyası"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Toxunuş rəyi"</string>
@@ -3137,7 +3137,8 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"jest"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"üz, kiliddən çıxarma, orijinal, giriş"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl versiyası, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"şəbəkə, mobil şəbəkə vəziyyəti, servis vəziyyəti, siqnalın gücü, mobil şəbəkə növü, roaminq, iccid"</string>
+    <!-- no translation found for keywords_sim_status (6682044233620329507) -->
+    <skip />
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"seriya nömrəsi, proqram versiyası"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"android təhlükəsizliyinin yenilənmə səviyyəsi, baseband versiyası, kernel versiyası"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"tema, açıq, tünd, rejim"</string>
@@ -3340,10 +3341,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Qabaqcıl ayarlar"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"İş bildirişləri"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Adaptiv bildirişlər"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Avtomatik Prioritetləşdirmə"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Adaptiv bildiriş prioriteti"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Mühüm olmayan bildirişləri avtomatik olaraq \"Daha az əhəmiyyətli\" seçiminə ayarlayın"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Təklif edilən əməliyyat və cavablar"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Təklif edilən əməliyyat və cavabları avtomatik göstərin"</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"Bildirişin mürgü rejiminə keçirilməsinə icazə verin"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Daha az əhəmiyyətli bildirişlərin işarələrini gizlədin"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Daha az əhəmiyyətli bildirişlərin işarələri status panelində görünmür"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Bildiriş nöqtələrinə icazə verin"</string>
@@ -3371,22 +3373,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Parıltı işığı"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Ekran kilidi"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"İş profili kilidləndikdə"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Kilid ekranında bildirişlər"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Siqnal və səssiz bildirişləri göstərin"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Yalnız siqnal bildirişlərini göstərin"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Bildirişləri göstərməyin"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Həssas bildirişlər"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Kilidli olduqda həssas kontenti göstərin"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Həssas iş profili bildirişləri"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Kilidli olduqda həssas iş profili kontentini göstərin"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Bütün bildiriş məzmunlarını göstər"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Yalnız kiliddən çıxardıqda həssas kontenti göstərin"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Bildirişləri heç göstərmə"</string>
@@ -3413,16 +3407,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Yüksək"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Ekranda göstərin"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blok edin"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Mühüm"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"Səssiz"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Siqnal"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Kəsintilərə icazə verin"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Tətbiqin ekranda səs çıxarmasına, vibrasiya etməsinə və/və ya bildiriş göstərməsinə icazə verin"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Aşağı açılan siyahıdakı bildirişləri bir sətrə yığcamlaşdırın"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Səs və ya vibrasiya olmadan foksulanmağınıza kömək edir"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Səs və ya vibrasiya ilə diqqətinizi çəkir"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Cihaz kilidli olduğu zaman bildirişlər ekranının yuxarısında baner ilə göstərilsin"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Bildirişləri göstərin"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptiv bildirişlər"</string>
@@ -4202,6 +4193,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3 düyməli naviqasiya"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klassik Android naviqasiya rejimində Əsas səhifəyə keçmək, tətbiqlər arasında keçid etmək və Geri qayıtmaq kimi funksiyalar düymələr ilə əlçatandır."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"sistem naviqasiyası, 2 düyməli naviqasiya, 3 düyməli naviqasiya, jest naviqasiyası"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Defolt home tətbiqi <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> tərəfindən dəstəklənmir"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Defolt home tətbiqini dəyişin"</string>
+    <string name="information_label" msgid="8133109685432913360">"Məlumat"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Telefonu yoxlamaq üçün iki dəfə tıklayın"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Planşeti yoxlamaq üçün iki dəfə tıklayın"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Cihazı yoxlamaq üçün iki dəfə tıklayın"</string>
@@ -4335,7 +4329,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g> üçün deaktiv edildi)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Avtodoldurma xidməti"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"avtomatik, doldurmaq, avtomatik doldurmaq"</string>
-    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Bu tətbiqə etibar etdiyinizə əmin olun&lt;b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=tətbiq_adı nümunə=Google Avtodoldurma &gt;%1$s&lt;/xliff:g&gt; nəyin avtomatik doldurula biləcəyini müəyyən etmək üçün ekrandakılardan istifadə edir."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Bu tətbiqə etibar etdiyinizə əmin olun&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Avtodoldurma&gt;%1$s&lt;/xliff:g&gt;  nəyin avtomatik doldurula biləcəyini müəyyən etmək üçün ekrandakılardan istifadə edir."</string>
     <string name="debug_autofill_category" msgid="8050326960545979035">"Avtodoldurma"</string>
     <string name="autofill_logging_level_title" msgid="899483289251346778">"Giriş səviyyəsi"</string>
     <string name="autofill_max_partitions" msgid="7590272120101271461">"Hər sessiya üçün maksimum təklif"</string>
@@ -4489,8 +4483,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Deaktiv / SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktiv / Endirilən SIM"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Deaktiv / Endirilən SIM"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"SIM adı"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Yenidən adlandırın"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"SIM istifadə edin"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Deaktiv"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"<xliff:g id="CARRIER">%1$s</xliff:g> operatoruna keçmək istəyirsiniz?"</string>

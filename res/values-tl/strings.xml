@@ -863,7 +863,7 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Awtomatikong i-on ang Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Mag-o-on ulit ang Wi‑Fi kapag malapit sa mga naka-save na network na may mataas na kalidad, gaya ng iyong home network"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="7494539594649967699">"Hindi available dahil naka-off ang lokasyon. I-on ang "<annotation id="link">"lokasyon"</annotation>"."</string>
-    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Hindi available dahil naka-off ang pag-scan para sa Wi‑Fi"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Hindi available dahil naka-off ang pag-scan ng Wi‑Fi"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Upang magamit, pumili ng provider ng rating ng network"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Iwasan ang mahihinang koneksyon"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"Huwag gumamit ng Wi‑Fi network maliban kung mayroon itong magandang koneksyon sa internet"</string>
@@ -1679,7 +1679,7 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Mataas na paggamit ng baterya"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Mababang paggamit ng baterya"</string>
     <string name="location_scanning_screen_title" msgid="2297479353298444503">"Pag-scan ng Wi‑Fi at Bluetooth"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Pagsa-scan para sa Wi‑Fi"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"pag-scan ng Wi‑Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Payagan ang mga app at serbisyo na mag-scan ng mga Wi-Fi network anumang oras, kahit na naka-off ang Wi-Fi. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Pagsa-scan para sa Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Payagan ang mga app at serbisyo na mag-scan ng mga kalapit na device anumang oras, kahit na naka-off ang Bluetooth. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon."</string>
@@ -2114,14 +2114,14 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Pag-vibrate kapag may notification"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Pag-vibrate kapag nag-ring"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Feedback sa pagpindot"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Gumamit ng serbisyo"</string>
+    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Gamitin ang serbisyo"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Gumamit ng pagwawasto ng kulay"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Gumamit ng mga caption"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Magpatuloy"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Mga hearing aid"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Walang nakakonektang hearing aid"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Magdagdag ng mga hearing aid"</string>
-    <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Para ipares ang iyong mga hearing aid, hanapin at i-tap ang iyong device sa susunod na screen."</string>
+    <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Para ipares ang hearing aids mo, hanapin at i-tap ang device mo sa susunod na screen."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Tiyaking nasa mode ng pagpapares ang iyong mga hearing aid."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"Aktibo ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
@@ -3137,7 +3137,8 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"galaw"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"mukha, i-unlock, auth, mag-sign in"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, bersyon ng prl, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"network, status ng mobile network, status ng serbisyo, lakas ng signal, uri ng mobile network, naka-roaming, iccid"</string>
+    <!-- no translation found for keywords_sim_status (6682044233620329507) -->
+    <skip />
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serial number, bersyon ng hardware"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"antas ng patch ng seguridad ng android, bersyon ng baseband, kernel version"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"tema, maliwanag, madilim, mode"</string>
@@ -3340,10 +3341,12 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Advanced"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Mga notification sa trabaho"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Mga adaptive na notification"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Awtomatikong Pag-prioritize"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Priyoridad ng adaptive na notification"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Awtomatikong itakda sa Malumanay ang mga notification na may mababang priyoridad"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Mga iminumungkahing pagkilos at tugon"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Awtomatikong ipakita ang mga iminumungkahing pagkilos at tugon"</string>
+    <!-- no translation found for snooze_options_title (7447722951050463793) -->
+    <skip />
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Itago ang mga icon mula sa mga malumanay na notification"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Hindi ipinapakita sa status bar ang mga icon mula sa mga malumanay na notification"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Payagan ang notification dots"</string>
@@ -3371,22 +3374,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Patay-sinding ilaw"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lock screen"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kapag naka-lock ang work profile"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Mga notification sa lockscreen"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Ipakita ang mga nag-aalerto at tahimik na notification"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Mga nag-aalertong notification lang ang ipakita"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Huwag magpakita ng mga notification"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Mga sensitibong notification"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Magpakita ng sensitibong content kapag naka-lock"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Mga sensitibong notification mula sa profile sa trabaho"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Magpakita ng sensitibong content mula sa profile sa trabaho kapag naka-lock"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Ipakita ang lahat ng content ng notification"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Ipakita lang ang sensitibong content kapag naka-unlock"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Huwag magpakita ng mga notification"</string>
@@ -3413,16 +3408,14 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Mataas"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Mag-pop sa screen"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"I-block"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
+    <string name="notification_silence_title" msgid="6986752165900591125">"Naka-silent"</string>
+    <!-- no translation found for notification_alert_title (2267584776990348784) -->
     <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Naka-prioritize"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Payagan ang mga pagkaantala"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Hayaan ang app na tumunog, mag-vibrate, at/o mag-pop ng mga notification sa screen"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Sa pull-down shade, i-collapse ang mga notification sa isang linya"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Nakakatulong sa iyong tumuon nang walang tunog o pag-vibrate"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Kinukuha ang iyong atensyon sa pamamagitan ng tunog o pag-vibrate"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Kapag naka-unlock ang device, ipakita ang mga notification bilang banner sa itaas ng screen"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Ipakita ang mga notification"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Mga Adaptive na Notification"</string>
@@ -4202,6 +4195,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3-button na navigation"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"Classic na Android navigation mode kung saan ang pagpunta sa Home, pagpapalit ng mga app, at Pagbalik ay puwedeng ma-access sa pamamagitan ng mga button."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"system navigation, 2 button na navigation, 3 button na navigation, navigation gamit ang galaw"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Hindi sinusuportahan ng iyong default na home app na <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Lumipat sa default na home app"</string>
+    <string name="information_label" msgid="8133109685432913360">"Impormasyon"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Mag-double tap para suriin ang telepono"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Mag-double tap upang suriin ang tablet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Mag-double tap upang suriin ang device"</string>
@@ -4489,8 +4485,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Hindi aktibo / SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktibo / Na-download na SIM"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Hindi aktibo / Na-download na SIM"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"Pangalan ng SIM"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Palitan ang pangalan"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Gumamit ng SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Naka-off"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Lumipat sa <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>

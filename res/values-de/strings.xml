@@ -905,7 +905,7 @@
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Du verfügst nicht über die Berechtigung zum Ändern des WLAN-Netzwerks."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Mehr"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Automatisches Setup (WPS)"</string>
-    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"\"WLAN-Suche\" aktivieren?"</string>
+    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"WLAN-Suche aktivieren?"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Damit die WLAN-Funktion automatisch aktiviert werden kann, musst die Funktion \"WLAN-Suche\" aktiviert sein."</string>
     <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Wenn die Funktion \"WLAN-Suche\" aktiviert ist, dürfen Apps und Dienste immer nach WLANs suchen, auch wenn die WLAN-Funktion deaktiviert ist. Das hilft z. B. dabei, standortbasierte Funktionen und Dienste zu verbessern."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"Aktivieren"</string>
@@ -2494,10 +2494,8 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Automatisch aktivieren"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nie"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"bei <xliff:g id="PERCENT">%1$s</xliff:g> Akku"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_percentage (723291197508049369) -->
-    <skip />
-    <string name="battery_percentage_description" msgid="8511658577507384014">"Ladestand in Statusleiste in %% anzeigen"</string>
+    <string name="battery_percentage" msgid="723291197508049369">"Ladestandanzeige in Prozent"</string>
+    <string name="battery_percentage_description" msgid="8511658577507384014">"Ladestand in Statusleiste in Prozent anzeigen"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Prozessstatistiken"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistiken zu laufenden Prozessen"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Speichernutzung"</string>
@@ -3139,7 +3137,8 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"Bewegung"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"Face, Unlock, Gesichtserkennung, Anmeldung"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl version, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"netzwerk, status des mobilfunknetz, servicestatus, signalstärke, art des mobilfunknetzes, roaming, iccid"</string>
+    <!-- no translation found for keywords_sim_status (6682044233620329507) -->
+    <skip />
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"seriennummer, hardwareversion"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"stand der sicherheitsupdates android, baseband version, kernel version"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"design, hell, dunkel, modus, dark"</string>
@@ -3342,10 +3341,12 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Erweitert"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Geschäftliche Benachrichtigungen"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Adaptive Benachrichtigungen"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Automatische Priorisierung"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Adaptive Priorität der Benachrichtigungen"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Benachrichtigungen mit niedriger Priorität automatisch auf \"Stumm\" schalten"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Maßnahmen- und Antwortvorschläge"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Es werden automatisch Vorschläge für Maßnahmen und Antworten angezeigt"</string>
+    <!-- no translation found for snooze_options_title (7447722951050463793) -->
+    <skip />
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Bei stummen Benachrichtigungen keine Symbole anzeigen"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Bei stummen Benachrichtigungen werden in der Statusleiste keine Symbole angezeigt"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Benachrichtigungspunkte zulassen"</string>
@@ -3373,22 +3374,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Benachrichtigungslicht blinkt"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Sperrbildschirm"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Wenn das Arbeitsprofil gesperrt ist"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Benachrichtigungen auf dem Sperrbildschirm"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Warn- und lautlose Benachrichtigungen anzeigen"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Nur Warnmeldungen anzeigen"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Keine Benachrichtigungen anzeigen"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Vertrauliche Benachrichtigungen"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Vertrauliche Inhalte anzeigen, wenn das Gerät gesperrt ist"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Vertrauliche Benachrichtigungen aus Arbeitsprofilen"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Vertrauliche Inhalte aus Arbeitsprofilen anzeigen, wenn das Gerät gesperrt ist"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Alle Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Sensible Inhalte nur im entsperrten Zustand zeigen"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Keine Benachrichtigungen anzeigen"</string>
@@ -3415,16 +3408,14 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Hoch"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Auf Bildschirm aufpoppen"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blockieren"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
+    <string name="notification_silence_title" msgid="6986752165900591125">"Lautlos"</string>
+    <!-- no translation found for notification_alert_title (2267584776990348784) -->
     <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Priorisiert"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Unterbrechungen zulassen"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Die App darf Töne sowie Vibrationen erzeugen und/oder Pop-up-Benachrichtigungen auf dem Bildschirm einblenden"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Benachrichtigungen in der Benachrichtigungsleiste werden auf eine Zeile minimiert"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Benachrichtigungen werden ohne Ton oder Vibration angekündigt, um deine Konzentration nicht zu stören"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Benachrichtigungen werden mit einem Ton oder einer Vibration angekündigt, um dich auf sie aufmerksam zu machen"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Bei entsperrtem Gerät Benachrichtigungen als Banner oben auf dem Bildschirm anzeigen"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Benachrichtigungen anzeigen"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptive Benachrichtigungen"</string>
@@ -3631,9 +3622,9 @@
     <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"Administrator-PIN eingeben"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"An"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Aus"</string>
-    <string name="screen_pinning_title" msgid="2292573232264116542">"Bildschirmfixierung"</string>
-    <string name="screen_pinning_description" msgid="1110847562111827766">"Mit dieser Einstellung kannst du den aktuellen Bildschirm fixieren, sodass er immer zu sehen ist.\n\nSo gehts:\n\n1. Sofern noch nicht geschehen, aktiviere \"Bildschirmfixierung\".\n\n2. Tippe auf \"Übersicht\".\n\n3. Tippe am oberen Bildschirmrand auf das App-Symbol und dann auf \"Fixieren\"."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Nach Entsperrungsmuster fragen, um Fixierung aufzuheben"</string>
+    <string name="screen_pinning_title" msgid="2292573232264116542">"Bildschirm anpinnen"</string>
+    <string name="screen_pinning_description" msgid="1110847562111827766">"Mit dieser Einstellung kannst du den aktuellen Bildschirm anpinnen, sodass er immer zu sehen ist.\n\nSo gehts:\n\n1. Sofern noch nicht geschehen, aktiviere \"Bildschirm anpinnen\".\n\n2. Tippe auf \"Übersicht\".\n\n3. Tippe am oberen Bildschirmrand auf das App-Symbol und dann auf \"Anpinnen\"."</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Zum Loslösen nach Entsperrungsmuster fragen"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Vor Beenden nach PIN fragen"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Vor dem Beenden nach Passwort fragen"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Gerät beim Beenden sperren"</string>
@@ -4038,7 +4029,7 @@
     <string name="data_limit" msgid="1885406964934590552">"Datenlimit"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"Datennutzung im Zeitraum <xliff:g id="ID_2">%2$s</xliff:g>: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Konfigurieren"</string>
-    <string name="data_usage_other_apps" msgid="3272872663517382050">"Weitere bei der Nutzung mitgerechnete Apps"</string>
+    <string name="data_usage_other_apps" msgid="3272872663517382050">"Weitere Apps, die ebenfalls Daten verbraucht haben"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> Apps dürfen uneingeschränkt Daten verbrauchen, auch wenn der Datensparmodus aktiviert ist</item>
       <item quantity="one">1 App darf uneingeschränkt Daten verbrauchen, auch wenn der Datensparmodus aktiviert ist</item>
@@ -4204,6 +4195,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3-Schaltflächen-Steuerung"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klassischer Android-Steuerungsmodus, bei dem Schaltflächen genutzt werden, um den Startbildschirm aufzurufen, zwischen Apps zu wechseln und zurückzugehen."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"Systemsteuerung, 2-Schaltflächen-Steuerung, 3-Schaltflächen-Steuerung, Bewegungssteuerung"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Wird von deiner Standard-Start-App, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>, nicht unterstützt"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Standard-Home-App wechseln"</string>
+    <string name="information_label" msgid="8133109685432913360">"Information"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Für Blick aufs Display doppeltippen"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Doppeltippen für schnellen Blick auf das Display des Tablets"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Doppeltippen für schnellen Blick auf das Display des Geräts"</string>
@@ -4491,8 +4485,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Inaktiv/SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktiv/Heruntergeladene SIM"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Inaktiv/Heruntergeladene SIM"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"Name der SIM-Karte"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Umbenennen"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"SIM verwenden"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Aus"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Zu <xliff:g id="CARRIER">%1$s</xliff:g> wechseln?"</string>

@@ -2165,7 +2165,7 @@
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Naslouchátka"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nejsou připojena žádná naslouchátka"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Přidat naslouchátka"</string>
-    <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Chcete-li spárovat naslouchátka, na další obrazovce najděte své zařízení a klepněte na něj."</string>
+    <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Chcete-li spárovat naslouchátka, na další obrazovce klepněte na své zařízení."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Ujistěte se, zda jsou naslouchátka v režimu párování."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"Zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je aktivní"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
@@ -2216,9 +2216,9 @@
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"Pro vyzvánění a oznámení jsou nastaveny střední vibrace"</string>
     <string name="accessibility_vibration_summary_high" msgid="3239807793182635729">"Pro vyzvánění a oznámení jsou nastaveny silné vibrace"</string>
     <string name="accessibility_vibration_intensity_off" msgid="4613890213008630847">"Vypnuto"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="2017572546489862987">"Slabé"</string>
+    <string name="accessibility_vibration_intensity_low" msgid="2017572546489862987">"Slabá"</string>
     <string name="accessibility_vibration_intensity_medium" msgid="3782136025830279769">"Střední"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="2543921139337952491">"Silné"</string>
+    <string name="accessibility_vibration_intensity_high" msgid="2543921139337952491">"Silná"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Nastavení"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Zapnuto"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Vypnuto"</string>
@@ -3221,7 +3221,8 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"gesto"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"obličej, odemknutí, autorizace, přihlášení"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, verze prl, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"síť, stav mobilní sítě, stav služby, síla signálu, typ mobilní sítě, roaming, iccid"</string>
+    <!-- no translation found for keywords_sim_status (6682044233620329507) -->
+    <skip />
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"sériové číslo, verze hardwaru"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"úroveň opravy zabezpečení androidu, verze základního pásma, verze jádra"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"motiv, světlý, tmavý, režim"</string>
@@ -3430,10 +3431,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Rozšířená nastavení"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Pracovní oznámení"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Adaptivní oznámení"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Automatické priority"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Adaptivní priorita oznámení"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Oznámení s nižší prioritou automaticky nastavit na Nenápadná"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Navrhované akce a odpovědi"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Automaticky zobrazovat navrhované akce a odpovědi"</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"Povolit odložení oznámení"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Skrýt ikony z nenápadných oznámení"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Ikony nenápadných oznámení nejsou zobrazovány na stavovém řádku"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Povolit puntíky s oznámením"</string>
@@ -3461,22 +3463,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blikání kontrolky"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Obrazovka uzamčení"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Když je profil uzamčen"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Oznámení na obrazovce uzamčení"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Zobrazovat upozorňující a tichá oznámení"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Zobrazovat pouze upozorňující oznámení"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Nezobrazovat oznámení"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Citlivá oznámení"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Při uzamknutí zobrazovat citlivý obsah"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Citlivá oznámení v pracovním profilu"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Při uzamknutí zobrazovat citlivý obsah pracovního profilu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Zobrazit veškerý obsah oznámení"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Zobrazovat citlivý obsah jen během odemknutí"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Oznámení vůbec nezobrazovat"</string>
@@ -3503,16 +3497,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Vysoká"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Vyskočit na obrazovce"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blok"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Prioritní"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"Ticho"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Upozornění"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Povolit vyrušení"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Umožněte aplikacím vydávat zvuky, vibrovat nebo zobrazovat oznámení na obrazovce"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"V rozbalovacím panelu sbalit oznámení na jeden řádek"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Pomáhá vám soustředit se vypnutím zvuku a vibrací"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Upozorňuje vás pomocí zvuku a vibrací"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Když je zařízení odemčené, zobrazovat oznámení jako banner v horní části obrazovky"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Zobrazit oznámení"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptivní oznámení"</string>
@@ -4348,6 +4339,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigace třemi tlačítky"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klasická navigace v Androidu, kdy k přechodu na plochu, přepínání aplikací a návratu zpět slouží tlačítka."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"systémová navigace, navigace dvěma tlačítky, navigace třemi tlačítky, navigace gesty"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Vaše výchozí aplikace pro domácnost (<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>) tuto funkci nepodporuje"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Přepnout výchozí aplikace pro domácnost"</string>
+    <string name="information_label" msgid="8133109685432913360">"Informace"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Kontrola telefonu dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Kontrola tabletu dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Kontrola zařízení dvojitým klepnutím"</string>
@@ -4651,8 +4645,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Neaktivní / SIM karta"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktivní / stažená SIM karta"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Neaktivní / stažená SIM karta"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"Název SIM karty"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Přejmenovat"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Používat SIM kartu"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Vypnuto"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Přepnout na operátora <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
