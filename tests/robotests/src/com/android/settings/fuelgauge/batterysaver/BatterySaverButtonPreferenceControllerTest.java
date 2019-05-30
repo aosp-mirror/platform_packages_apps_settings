@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PowerManager;
+import android.provider.SettingsSlicesContract;
 import android.widget.Button;
 
 import androidx.preference.PreferenceScreen;
@@ -70,6 +71,12 @@ public class BatterySaverButtonPreferenceControllerTest {
 
         mController = new BatterySaverButtonPreferenceController(mContext, "test_key");
         mController.displayPreference(mPreferenceScreen);
+    }
+
+    @Test
+    public void getSliceUri_shouldUsePlatformAuthority() {
+        assertThat(mController.getSliceUri().getAuthority())
+                .isEqualTo(SettingsSlicesContract.AUTHORITY);
     }
 
     @Test

@@ -17,10 +17,13 @@ package com.android.settings.network;
 
 import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.SystemProperties;
+import android.provider.SettingsSlicesContract;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -44,6 +47,15 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     public static final int REQUEST_CODE_EXIT_ECM = 1;
 
+    /**
+     * Uri for Airplane mode Slice.
+     */
+    public static final Uri SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSlicesContract.AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath(SettingsSlicesContract.KEY_AIRPLANE_MODE)
+            .build();
     private static final String EXIT_ECM_RESULT = "exit_ecm_result";
 
     private Fragment mFragment;
@@ -75,6 +87,11 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         }
 
         return false;
+    }
+
+    @Override
+    public Uri getSliceUri() {
+        return SLICE_URI;
     }
 
     @Override
