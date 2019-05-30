@@ -10961,10 +10961,14 @@
          subscription in various places in the Settings app. The default name is typically just the
          carrier name, but especially in multi-SIM configurations users may want to use a different
          name. [CHAR LIMIT=40] -->
-    <string name="mobile_network_sim_name">SIM name</string>
-    <!-- Label on the confirmation button of a dialog that lets a user set the display name of a
-         mobile network subscription [CHAR LIMIT=20] -->
-    <string name="mobile_network_sim_name_rename">Rename</string>
+    <string name="mobile_network_sim_name">SIM name &amp; color</string>
+    <!-- Label for an item listing the name of the SIM that the user has specified. [CHAR LIMIT=40] -->
+    <string name="mobile_network_sim_name_label">Name</string>
+    <!-- Label for an item listing the color of the SIM that the user has specified. [CHAR LIMIT=40] -->
+    <string name="mobile_network_sim_color_label">Color (used by compatible apps)</string>
+    <!-- Label on the confirmation button of a dialog that lets a user set the display name and
+         color of a mobile network subscription [CHAR LIMIT=20] -->
+    <string name="mobile_network_sim_name_rename">Save</string>
     <!-- Label for the on position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is enabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_on">Use SIM</string>
