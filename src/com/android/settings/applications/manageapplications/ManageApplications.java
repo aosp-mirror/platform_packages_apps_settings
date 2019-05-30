@@ -151,7 +151,8 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_HAS_ENTRIES = "hasEntries";
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
     private static final String EXTRA_FILTER_TYPE = "filterType";
-    private static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
+    @VisibleForTesting
+    static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
 
     // attributes used as keys when passing values to AppInfoDashboardFragment activity
     public static final String APP_CHG = "chg";
@@ -505,11 +506,13 @@ public class ManageApplications extends InstrumentedFragment
         super.onSaveInstanceState(outState);
         mResetAppsHelper.onSaveInstanceState(outState);
         outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
+        outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
         outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
-        outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
-        outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
+        if(mSearchView != null) {
+            outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
+        }
         if (mApplications != null) {
             mApplications.onSaveInstanceState(outState);
         }

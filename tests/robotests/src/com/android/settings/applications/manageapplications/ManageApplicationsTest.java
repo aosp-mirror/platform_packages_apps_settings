@@ -494,6 +494,36 @@ public class ManageApplicationsTest {
         assertThat(mFragment.mRecyclerView.getPaddingTop()).isEqualTo(0);
     }
 
+    @Test
+    public void onSaveInstanceState_noSearchView_shouldNotSetBundleValue() {
+        final Bundle bundle = new Bundle();
+        ReflectionHelpers.setField(mFragment, "mResetAppsHelper", mock(ResetAppsHelper.class));
+        ReflectionHelpers.setField(mFragment, "mFilter", mock(AppFilterItem.class));
+        ReflectionHelpers.setField(mFragment, "mApplications",
+                mock(ManageApplications.ApplicationsAdapter.class));
+
+        mFragment.onSaveInstanceState(bundle);
+
+        assertThat(bundle.containsKey(ManageApplications.EXTRA_EXPAND_SEARCH_VIEW)).isFalse();
+    }
+
+    @Test
+    public void onSaveInstanceState_searchViewSet_shouldSetBundleValue() {
+        final SearchView searchView = mock(SearchView.class);
+        final Bundle bundle = new Bundle();
+        ReflectionHelpers.setField(mFragment, "mResetAppsHelper", mock(ResetAppsHelper.class));
+        ReflectionHelpers.setField(mFragment, "mFilter", mock(AppFilterItem.class));
+        ReflectionHelpers.setField(mFragment, "mApplications",
+                mock(ManageApplications.ApplicationsAdapter.class));
+        ReflectionHelpers.setField(mFragment, "mSearchView", searchView);
+        when(searchView.isIconified()).thenReturn(true);
+
+        mFragment.onSaveInstanceState(bundle);
+
+        assertThat(bundle.containsKey(ManageApplications.EXTRA_EXPAND_SEARCH_VIEW)).isTrue();
+        assertThat(bundle.getBoolean(ManageApplications.EXTRA_EXPAND_SEARCH_VIEW)).isFalse();
+    }
+
     private void setUpOptionMenus() {
         when(mMenu.findItem(anyInt())).thenAnswer(invocation -> {
             final Object[] args = invocation.getArguments();
