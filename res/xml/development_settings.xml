@@ -248,6 +248,11 @@
             android:summary="@string/wifi_verbose_logging_summary" />
 
         <SwitchPreference
+            android:key="wifi_scan_throttling"
+            android:title="@string/wifi_scan_throttling"
+            android:summary="@string/wifi_scan_throttling_summary" />
+
+        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary" />
@@ -576,7 +581,7 @@
     <com.android.settings.development.autofill.AutofillPreferenceCategory
         android:key="debug_autofill_category"
         android:title="@string/debug_autofill_category"
-        android:order="1100">
+        android:order="1100"> <!-- Incremented by 100 from last order (i.e. 1000) -->
 
         <ListPreference
             android:key="autofill_logging_level"
@@ -597,20 +602,4 @@
             android:title="@string/autofill_reset_developer_options" />
 
     </com.android.settings.development.autofill.AutofillPreferenceCategory>
-
-    <PreferenceCategory
-        android:key="theme_customization_category"
-        android:title="@string/theme_customization_category"
-        android:order="1200"> <!-- Incremented by 100 from last order (i.e. 1100) -->
-
-        <ListPreference
-            android:key="android.theme.customization.accent_color"
-            android:title="@string/theme_customization_accent_color_title"/>
-        <ListPreference
-            android:key="android.theme.customization.font"
-            android:title="@string/theme_customization_font_title"/>
-        <ListPreference
-            android:key="android.theme.customization.adaptive_icon_shape"
-            android:title="@string/theme_customization_icon_shape_title"/>
-    </PreferenceCategory>
 </PreferenceScreen>
