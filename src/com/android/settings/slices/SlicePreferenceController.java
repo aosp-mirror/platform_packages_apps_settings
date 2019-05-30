@@ -40,7 +40,8 @@ public class SlicePreferenceController extends BasePreferenceController implemen
         LifecycleObserver, OnStart, OnStop, Observer<Slice> {
     @VisibleForTesting
     LiveData<Slice> mLiveData;
-    private SlicePreference mSlicePreference;
+    @VisibleForTesting
+    SlicePreference mSlicePreference;
     private Uri mUri;
 
     public SlicePreferenceController(Context context, String preferenceKey) {
@@ -82,8 +83,6 @@ public class SlicePreferenceController extends BasePreferenceController implemen
 
     @Override
     public void onChanged(Slice slice) {
-        if (slice != null) {
-            mSlicePreference.onSliceUpdated(slice);
-        }
+        mSlicePreference.onSliceUpdated(slice);
     }
 }
