@@ -30,6 +30,7 @@ import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
@@ -38,6 +39,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -50,6 +52,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -134,5 +137,35 @@ public class MobileNetworkSettingsTest {
     public void onActivityResult_deleteSubscription_activityFinishes() {
         mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, 0, null);
         verify(mActivity).finish();
+    }
+
+    @Test
+    public void isPageSearchEnabled_adminUser_shouldReturnTrue() {
+        final UserManager userManager = mock(UserManager.class);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(userManager);
+        when(userManager.isAdminUser()).thenReturn(true);
+        final BaseSearchIndexProvider provider =
+                (BaseSearchIndexProvider) mFragment.SEARCH_INDEX_DATA_PROVIDER;
+
+        final Object obj = ReflectionHelpers.callInstanceMethod(provider, "isPageSearchEnabled",
+                ReflectionHelpers.ClassParameter.from(Context.class, mContext));
+        final boolean isEnabled = (Boolean) obj;
+
+        assertThat(isEnabled).isTrue();
+    }
+
+    @Test
+    public void isPageSearchEnabled_nonAdminUser_shouldReturnFalse() {
+        final UserManager userManager = mock(UserManager.class);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(userManager);
+        when(userManager.isAdminUser()).thenReturn(false);
+        final BaseSearchIndexProvider provider =
+                (BaseSearchIndexProvider) mFragment.SEARCH_INDEX_DATA_PROVIDER;
+
+        final Object obj = ReflectionHelpers.callInstanceMethod(provider, "isPageSearchEnabled",
+                ReflectionHelpers.ClassParameter.from(Context.class, mContext));
+        final boolean isEnabled = (Boolean) obj;
+
+        assertThat(isEnabled).isFalse();
     }
 }
