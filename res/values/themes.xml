@@ -90,7 +90,7 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="ThemeOverlay.SwitchBar.Settings" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
+    <style name="ThemeOverlay.SwitchBar.Settings.Base" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
         <item name="android:elevation">1dp</item>
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
@@ -98,6 +98,8 @@
         <item name="switchBarBackgroundActivatedColor">?android:attr/colorAccent</item>
         <item name="switchBarRestrictionIcon">@*android:drawable/ic_info</item>
     </style>
+
+    <style name="ThemeOverlay.SwitchBar.Settings" parent="ThemeOverlay.SwitchBar.Settings.Base"/>
 
     <style name="Widget.SwitchBar.Switch" parent="@android:style/Widget.Material.CompoundButton.Switch">
         <item name="android:trackTint">@color/switchbar_switch_track_tint</item>
