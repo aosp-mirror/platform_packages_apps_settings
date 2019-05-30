@@ -117,11 +117,13 @@ public class ImportancePreference extends Preference {
             case IMPORTANCE_LOW:
                 mAlertButton.setBackground(unselectedBackground);
                 mSilenceButton.setBackground(selectedBackground);
+                mSilenceButton.setSelected(true);
                 break;
             case IMPORTANCE_HIGH:
             default:
                 mSilenceButton.setBackground(unselectedBackground);
                 mAlertButton.setBackground(selectedBackground);
+                mAlertButton.setSelected(true);
                 break;
         }
         setImportanceSummary((ViewGroup) holder.itemView, mImportance, false);
