@@ -62,6 +62,14 @@
         android:summary="@string/summary_placeholder"
         settings:searchable="false"/>
 
+    <!-- Bypass lock screen -->
+    <SwitchPreference
+        android:key="privacy_lockscreen_bypass"
+        android:title="@string/lockscreen_bypass_title"
+        android:summary="@string/lockscreen_bypass_summary"
+        settings:keywords="@string/keywords_lockscreen_bypass"
+        settings:controller="com.android.settings.security.LockscreenBypassPreferenceController" />
+
     <!-- Privacy Service -->
     <PreferenceCategory
         android:key="privacy_services"
