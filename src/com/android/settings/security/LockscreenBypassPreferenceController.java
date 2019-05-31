@@ -17,6 +17,7 @@
 package com.android.settings.security;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.provider.Settings;
 
@@ -30,7 +31,9 @@ public class LockscreenBypassPreferenceController extends TogglePreferenceContro
 
     public LockscreenBypassPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mFaceManager = context.getSystemService(FaceManager.class);
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
+            mFaceManager = context.getSystemService(FaceManager.class);
+        }
     }
 
     @Override
