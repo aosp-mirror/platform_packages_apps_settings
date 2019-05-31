@@ -24,10 +24,14 @@ import static com.android.settings.gestures.SystemNavigationPreferenceController
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.text.TextUtils;
@@ -39,6 +43,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -53,9 +58,15 @@ public class SystemNavigationPreferenceControllerTest {
     private Context mContext;
     private ShadowPackageManager mPackageManager;
 
+    @Mock
+    private Context mMockContext;
+    @Mock
+    private PackageManager mMockPackageManager;
+
     private SystemNavigationPreferenceController mController;
 
     private static final String ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE";
+    private static final String TEST_RECENTS_COMPONENT_NAME = "test.component.name/.testActivity";
 
     @Before
     public void setUp() {
@@ -69,6 +80,10 @@ public class SystemNavigationPreferenceControllerTest {
 
         mController = new SystemNavigationPreferenceController(mContext,
                 PREF_KEY_SYSTEM_NAVIGATION);
+
+        when(mMockContext.getPackageManager()).thenReturn(mMockPackageManager);
+        when(mMockContext.getString(com.android.internal.R.string.config_recentsComponentName))
+                .thenReturn(TEST_RECENTS_COMPONENT_NAME);
     }
 
     @After
@@ -165,5 +180,47 @@ public class SystemNavigationPreferenceControllerTest {
                 NAV_BAR_MODE_2BUTTON);
         assertThat(TextUtils.equals(mController.getSummary(), mContext.getText(
                 com.android.settings.R.string.swipe_up_to_switch_apps_title))).isTrue();
+    }
+
+    @Test
+    public void testIsGestureNavSupportedByDefaultLauncher_noDefaultLauncher() {
+        when(mMockPackageManager.getHomeActivities(any())).thenReturn(null);
+        assertThat(SystemNavigationPreferenceController
+                .isGestureNavSupportedByDefaultLauncher(mMockContext)).isTrue();
+    }
+
+    @Test
+    public void testIsGestureNavSupportedByDefaultLauncher_supported() {
+        when(mMockPackageManager.getHomeActivities(any())).thenReturn(
+                ComponentName.unflattenFromString(TEST_RECENTS_COMPONENT_NAME));
+        assertThat(SystemNavigationPreferenceController
+                .isGestureNavSupportedByDefaultLauncher(mMockContext)).isTrue();
+    }
+
+    @Test
+    public void testIsGestureNavSupportedByDefaultLauncher_notSupported() {
+        when(mMockPackageManager.getHomeActivities(any())).thenReturn(
+                new ComponentName("unsupported", "launcher"));
+        assertThat(SystemNavigationPreferenceController
+                .isGestureNavSupportedByDefaultLauncher(mMockContext)).isFalse();
+    }
+
+    @Test
+    public void testGetDefaultHomeAppName_noDefaultLauncher() {
+        when(mMockPackageManager.getHomeActivities(any())).thenReturn(null);
+        assertThat(SystemNavigationPreferenceController
+                .getDefaultHomeAppName(mMockContext)).isEqualTo("");
+    }
+
+    @Test
+    public void testGetDefaultHomeAppName_defaultLauncherExists() throws Exception {
+        when(mMockPackageManager.getHomeActivities(any())).thenReturn(
+                new ComponentName("supported", "launcher"));
+        ApplicationInfo info = new ApplicationInfo();
+        when(mMockPackageManager.getApplicationInfo("supported", 0)).thenReturn(info);
+        when(mMockPackageManager.getApplicationLabel(info)).thenReturn("Test Home App");
+
+        assertThat(SystemNavigationPreferenceController
+                .getDefaultHomeAppName(mMockContext)).isEqualTo("Test Home App");
     }
 }
