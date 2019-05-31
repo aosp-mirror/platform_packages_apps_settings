@@ -92,4 +92,75 @@ public class RecentLocationAccessPreferenceControllerTest {
         // We have not yet set the property to show the Permissions Hub.
         assertThat(mController.isAvailable()).isEqualTo(false);
     }
+
+    @Test
+    public void isAvailable_permissionHubEnabled_shouldReturnTrue() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+
+        assertThat(mController.isAvailable()).isEqualTo(true);
+    }
+
+    /** Verifies the title text, details text are correct, and the click listener is set. */
+    @Test
+    @Ignore
+    public void updateState_whenAppListIsEmpty_shouldDisplayTitleTextAndDetailsText() {
+        doReturn(new ArrayList<>()).when(mRecentLocationApps).getAppListSorted();
+        mController.displayPreference(mScreen);
+        mController.updateState(mLayoutPreference);
+
+        final TextView title = mAppEntitiesHeaderView.findViewById(R.id.header_title);
+        assertThat(title.getText()).isEqualTo(
+                mContext.getText(R.string.location_category_recent_location_access));
+        final TextView details = mAppEntitiesHeaderView.findViewById(R.id.header_details);
+        assertThat(details.getText()).isEqualTo(
+                mContext.getText(R.string.location_recent_location_access_view_details));
+        assertThat(details.hasOnClickListeners()).isTrue();
+    }
+
+    @Test
+    public void updateState_whenAppListMoreThanThree_shouldDisplayTopThreeApps() {
+        final List<RecentLocationAccesses.Access> accesses = createMockAccesses(6);
+        doReturn(accesses).when(mRecentLocationApps).getAppListSorted();
+        mController.displayPreference(mScreen);
+        mController.updateState(mLayoutPreference);
+
+        // The widget can display the top 3 apps from the list when there're more than 3.
+        final View app1View = mAppEntitiesHeaderView.findViewById(R.id.app1_view);
+        final ImageView appIconView1 = app1View.findViewById(R.id.app_icon);
+        final TextView appTitle1 = app1View.findViewById(R.id.app_title);
+
+        assertThat(app1View.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(appIconView1.getDrawable()).isNotNull();
+        assertThat(appTitle1.getText()).isEqualTo("appTitle0");
+
+        final View app2View = mAppEntitiesHeaderView.findViewById(R.id.app2_view);
+        final ImageView appIconView2 = app2View.findViewById(R.id.app_icon);
+        final TextView appTitle2 = app2View.findViewById(R.id.app_title);
+
+        assertThat(app2View.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(appIconView2.getDrawable()).isNotNull();
+        assertThat(appTitle2.getText()).isEqualTo("appTitle1");
+
+        final View app3View = mAppEntitiesHeaderView.findViewById(R.id.app3_view);
+        final ImageView appIconView3 = app3View.findViewById(R.id.app_icon);
+        final TextView appTitle3 = app3View.findViewById(R.id.app_title);
+
+        assertThat(app3View.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(appIconView3.getDrawable()).isNotNull();
+        assertThat(appTitle3.getText()).isEqualTo("appTitle2");
+    }
+
+    private List<RecentLocationAccesses.Access> createMockAccesses(int count) {
+        final List<RecentLocationAccesses.Access> accesses = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            final Drawable icon = mock(Drawable.class);
+            // Add mock accesses
+            final RecentLocationAccesses.Access access = new RecentLocationAccesses.Access(
+                    "packageName", android.os.Process.myUserHandle(), icon,
+                    "appTitle" + i, "appSummary" + i, 1000 - i);
+            accesses.add(access);
+        }
+        return accesses;
+    }
 }
