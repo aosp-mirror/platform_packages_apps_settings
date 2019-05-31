@@ -131,6 +131,11 @@ public final class Utils extends com.android.settingslib.Utils {
             "device_identifier_access_restrictions_disabled";
 
     /**
+     * Whether to show the Permissions Hub.
+     */
+    public static final String PROPERTY_PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
+
+    /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
      *
