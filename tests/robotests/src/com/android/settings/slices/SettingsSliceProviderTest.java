@@ -96,8 +96,18 @@ import java.util.Set;
 public class SettingsSliceProviderTest {
 
     private static final String KEY = "KEY";
-    private static final String INTENT_PATH =
-            SettingsSlicesContract.PATH_SETTING_INTENT + "/" + KEY;
+    private static final Uri INTENT_SLICE_URI =
+            new Uri.Builder().scheme(SCHEME_CONTENT)
+                    .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                    .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
+                    .appendPath(KEY)
+                    .build();
+    private static final Uri ACTION_SLICE_URI =
+            new Uri.Builder().scheme(SCHEME_CONTENT)
+                    .authority(SettingsSlicesContract.AUTHORITY)
+                    .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                    .appendPath(KEY)
+                    .build();
     private static final String TITLE = "title";
     private static final String SUMMARY = "summary";
     private static final String SCREEN_TITLE = "screen title";
@@ -155,20 +165,18 @@ public class SettingsSliceProviderTest {
     @Test
     public void testInitialSliceReturned_emptySlice() {
         insertSpecialCase(KEY);
-        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
-        Slice slice = mProvider.onBindSlice(uri);
+        Slice slice = mProvider.onBindSlice(INTENT_SLICE_URI);
 
-        assertThat(slice.getUri()).isEqualTo(uri);
+        assertThat(slice.getUri()).isEqualTo(INTENT_SLICE_URI);
         assertThat(slice.getItems()).isEmpty();
     }
 
     @Test
     public void testLoadSlice_returnsSliceFromAccessor() {
         insertSpecialCase(KEY);
-        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
-        mProvider.loadSlice(uri);
-        SliceData data = mProvider.mSliceWeakDataCache.get(uri);
+        mProvider.loadSlice(INTENT_SLICE_URI);
+        SliceData data = mProvider.mSliceWeakDataCache.get(INTENT_SLICE_URI);
 
         assertThat(data.getKey()).isEqualTo(KEY);
         assertThat(data.getTitle()).isEqualTo(TITLE);
@@ -177,24 +185,23 @@ public class SettingsSliceProviderTest {
     @Test
     public void loadSlice_registersIntentFilter() {
         insertSpecialCase(KEY);
-        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
-        mProvider.loadSlice(uri);
+        mProvider.loadSlice(INTENT_SLICE_URI);
 
-        verify(mProvider).registerIntentToUri(eq(FakeToggleController.INTENT_FILTER), eq(uri));
+        verify(mProvider)
+                .registerIntentToUri(eq(FakeToggleController.INTENT_FILTER), eq(INTENT_SLICE_URI));
     }
 
     @Test
     public void loadSlice_registersBackgroundListener() {
         insertSpecialCase(KEY);
-        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
-        mProvider.loadSlice(uri);
+        mProvider.loadSlice(INTENT_SLICE_URI);
 
         Robolectric.flushForegroundThreadScheduler();
         Robolectric.flushBackgroundThreadScheduler();
 
-        assertThat(mProvider.mPinnedWorkers.get(uri).getClass())
+        assertThat(mProvider.mPinnedWorkers.get(INTENT_SLICE_URI).getClass())
                 .isEqualTo(FakeToggleController.TestWorker.class);
     }
 
@@ -255,27 +262,26 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void getDescendantUris_fullActionUri_returnsSelf() {
-        final Uri uri = SliceBuilderUtils.getUri(
-                SettingsSlicesContract.PATH_SETTING_ACTION + "/key", true);
+        final Collection<Uri> descendants = mProvider.onGetSliceDescendants(ACTION_SLICE_URI);
 
-        final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
-
-        assertThat(descendants).containsExactly(uri);
+        assertThat(descendants).containsExactly(ACTION_SLICE_URI);
     }
 
     @Test
     public void getDescendantUris_fullIntentUri_returnsSelf() {
-        final Uri uri = SliceBuilderUtils.getUri(
-                SettingsSlicesContract.PATH_SETTING_ACTION + "/key", true);
 
-        final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
+        final Collection<Uri> descendants = mProvider.onGetSliceDescendants(ACTION_SLICE_URI);
 
-        assertThat(descendants).containsExactly(uri);
+        assertThat(descendants).containsExactly(ACTION_SLICE_URI);
     }
 
     @Test
     public void getDescendantUris_wrongPath_returnsEmpty() {
-        final Uri uri = SliceBuilderUtils.getUri("invalid_path", true);
+        final Uri uri = new Uri.Builder()
+                .scheme(SCHEME_CONTENT)
+                .authority(SettingsSlicesContract.AUTHORITY)
+                .appendPath("invalid_path")
+                .build();
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 

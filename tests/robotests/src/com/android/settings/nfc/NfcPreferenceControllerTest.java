@@ -163,6 +163,7 @@ public class NfcPreferenceControllerTest {
 
         assertThat(keys).hasSize(1);
     }
+
     @Test
     public void setChecked_True_nfcShouldEnable() {
         mNfcController.setChecked(true);
@@ -209,7 +210,7 @@ public class NfcPreferenceControllerTest {
     @Test
     public void shouldTurnOffNFCInAirplaneMode_airplaneModeRadiosContainsNfc_shouldReturnTrue() {
         Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
+                Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
 
         assertThat(NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)).isTrue();
     }
@@ -217,7 +218,7 @@ public class NfcPreferenceControllerTest {
     @Test
     public void shouldTurnOffNFCInAirplaneMode_airplaneModeRadiosWithoutNfc_shouldReturnFalse() {
         Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_RADIOS, "");
+                Settings.Global.AIRPLANE_MODE_RADIOS, "");
 
         assertThat(NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)).isFalse();
     }
@@ -225,7 +226,7 @@ public class NfcPreferenceControllerTest {
     @Test
     public void displayPreference_airplaneModeRadiosContainsNfc_shouldCreateAirplaneModeObserver() {
         Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
+                Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
 
         mNfcController.displayPreference(mScreen);
 
@@ -235,7 +236,7 @@ public class NfcPreferenceControllerTest {
     @Test
     public void displayPreference_nfcToggleableInAirplaneMode_shouldCreateAirplaneModeObserver() {
         Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Settings.Global.RADIO_NFC);
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Settings.Global.RADIO_NFC);
 
         mNfcController.displayPreference(mScreen);
 
@@ -245,9 +246,9 @@ public class NfcPreferenceControllerTest {
     @Test
     public void displayPreference_nfcNotAffectByAirplaneMode_shouldNotCreateAirplaneModeObserver() {
         Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, "");
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, "");
         Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_RADIOS, "");
+                Settings.Global.AIRPLANE_MODE_RADIOS, "");
 
         mNfcController.displayPreference(mScreen);
 
@@ -256,7 +257,8 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_noExtra_sliceDoesntUpdate() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
 
@@ -267,7 +269,8 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_turningOn_sliceDoesntUpdate() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
         triggerIntent.putExtra(NfcAdapter.EXTRA_ADAPTER_STATE, NfcAdapter.STATE_TURNING_ON);
@@ -279,7 +282,8 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_turningOff_sliceDoesntUpdate() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
         triggerIntent.putExtra(NfcAdapter.EXTRA_ADAPTER_STATE, NfcAdapter.STATE_TURNING_OFF);
@@ -291,7 +295,8 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_nfcOn_sliceUpdates() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
         triggerIntent.putExtra(NfcAdapter.EXTRA_ADAPTER_STATE, NfcAdapter.STATE_ON);
@@ -303,7 +308,8 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_nfcOff_sliceUpdates() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
         triggerIntent.putExtra(NfcAdapter.EXTRA_ADAPTER_STATE, NfcAdapter.STATE_OFF);
@@ -311,9 +317,5 @@ public class NfcPreferenceControllerTest {
         receiver.onReceive(mContext, triggerIntent);
 
         verify(worker).updateSlice();
-    }
-
-    private Uri getDummyUri() {
-        return SliceBuilderUtils.getUri("action/nfc", false);
     }
 }

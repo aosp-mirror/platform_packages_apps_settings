@@ -14,7 +14,10 @@
 package com.android.settings.core;
 
 import android.annotation.IntDef;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
+import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -22,6 +25,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceData;
 import com.android.settings.slices.Sliceable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -156,7 +160,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     }
 
     /**
-     * @return {@AvailabilityStatus} for the Setting. This status is used to determine if the
+     * @return {@link AvailabilityStatus} for the Setting. This status is used to determine if the
      * Setting should be shown or disabled in Settings. Further, it can be used to produce
      * appropriate error / warning Slice in the case of unavailability.
      * </p>
@@ -169,6 +173,19 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     @Override
     public String getPreferenceKey() {
         return mPreferenceKey;
+    }
+
+    @Override
+    public Uri getSliceUri() {
+        return new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                // Default to non-platform authority. Platform Slices will override authority
+                // accordingly.
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                // Default to action based slices. Intent based slices will override accordingly.
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(getPreferenceKey())
+                .build();
     }
 
     /**
