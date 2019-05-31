@@ -86,6 +86,12 @@ public class AirplaneModePreferenceControllerTest {
     }
 
     @Test
+    public void getSliceUri_shouldUsePlatformAuthority() {
+        assertThat(mController.getSliceUri().getAuthority())
+                .isEqualTo(SettingsSlicesContract.AUTHORITY);
+    }
+
+    @Test
     @Config(qualifiers = "mcc999")
     public void airplaneModePreference_shouldNotBeAvailable_ifSetToNotVisible() {
         assertThat(mController.getAvailabilityStatus())
@@ -182,9 +188,7 @@ public class AirplaneModePreferenceControllerTest {
     }
 
     @Test
-    public void isSliceableCorrectKey_returnsTrue() {
-        final AirplaneModePreferenceController controller =
-                new AirplaneModePreferenceController(mContext,"toggle_airplane");
-        assertThat(controller.isSliceable()).isTrue();
+    public void isSliceable_returnsTrue() {
+        assertThat(mController.isSliceable()).isTrue();
     }
 }
