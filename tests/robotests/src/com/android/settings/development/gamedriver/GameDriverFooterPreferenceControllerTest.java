@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -62,7 +63,7 @@ public class GameDriverFooterPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mResolver = mContext.getContentResolver();
-        mController = spy(new GameDriverFooterPreferenceController(mContext));
+        mController = spy(new GameDriverFooterPreferenceController(mContext, "key"));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
@@ -103,21 +104,5 @@ public class GameDriverFooterPreferenceControllerTest {
         mController.onStop();
 
         verify(mGameDriverContentObserver).unregister(mResolver);
-    }
-
-    @Test
-    public void updateState_available_visible() {
-        when(mController.getAvailabilityStatus()).thenReturn(AVAILABLE_UNSEARCHABLE);
-        mController.updateState(mPreference);
-
-        verify(mPreference).setVisible(true);
-    }
-
-    @Test
-    public void updateState_unavailable_invisible() {
-        when(mController.getAvailabilityStatus()).thenReturn(CONDITIONALLY_UNAVAILABLE);
-        mController.updateState(mPreference);
-
-        verify(mPreference).setVisible(false);
     }
 }
