@@ -20,7 +20,6 @@ import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
 
 import android.app.PendingIntent;
 import android.app.slice.SliceManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -57,6 +56,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
+import java.util.stream.Collectors;
 
 /**
  * A {@link SliceProvider} for Settings to enabled inline results in system apps.
@@ -117,6 +117,22 @@ public class SettingsSliceProvider extends SliceProvider {
      */
     public static final String EXTRA_SLICE_PLATFORM_DEFINED =
             "com.android.settings.slice.extra.platform";
+
+
+    /**
+     * A list of custom slice uris that are supported publicly. This is a subset of slices defined
+     * in {@link CustomSliceRegistry}. Things here are exposed publicly so all clients with proper
+     * permission can use them.
+     */
+    private static final List<Uri> PUBLICLY_SUPPORTED_CUSTOM_SLICE_URIS =
+            Arrays.asList(
+                    CustomSliceRegistry.BLUETOOTH_URI,
+                    CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
+                    CustomSliceRegistry.LOCATION_SLICE_URI,
+                    CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+                    CustomSliceRegistry.WIFI_SLICE_URI,
+                    CustomSliceRegistry.ZEN_MODE_SLICE_URI
+            );
 
     private static final KeyValueListParser KEY_VALUE_LIST_PARSER = new KeyValueListParser(',');
 
@@ -264,37 +280,30 @@ public class SettingsSliceProvider extends SliceProvider {
         }
 
         final String authority = uri.getAuthority();
-        final String pathPrefix = uri.getPath();
-        final boolean isPathEmpty = pathPrefix.isEmpty();
-
-        // No path nor authority. Return all possible Uris.
-        if (isPathEmpty && TextUtils.isEmpty(authority)) {
-            final List<String> platformKeys = mSlicesDatabaseAccessor.getSliceKeys(
-                    true /* isPlatformSlice */);
-            final List<String> oemKeys = mSlicesDatabaseAccessor.getSliceKeys(
-                    false /* isPlatformSlice */);
-            descendants.addAll(buildUrisFromKeys(platformKeys, SettingsSlicesContract.AUTHORITY));
-            descendants.addAll(buildUrisFromKeys(oemKeys, SettingsSliceProvider.SLICE_AUTHORITY));
-            descendants.addAll(getSpecialCaseUris(true /* isPlatformSlice */));
-            descendants.addAll(getSpecialCaseUris(false /* isPlatformSlice */));
-
-            return descendants;
-        }
+        final String path = uri.getPath();
+        final boolean isPathEmpty = path.isEmpty();
 
         // Path is anything but empty, "action", or "intent". Return empty list.
         if (!isPathEmpty
-                && !TextUtils.equals(pathPrefix, "/" + SettingsSlicesContract.PATH_SETTING_ACTION)
-                && !TextUtils.equals(pathPrefix,
-                "/" + SettingsSlicesContract.PATH_SETTING_INTENT)) {
+                && !TextUtils.equals(path, "/" + SettingsSlicesContract.PATH_SETTING_ACTION)
+                && !TextUtils.equals(path, "/" + SettingsSlicesContract.PATH_SETTING_INTENT)) {
             // Invalid path prefix, there are no valid Uri descendants.
             return descendants;
         }
 
-        // Can assume authority belongs to the provider. Return all Uris for the authority.
-        final boolean isPlatformUri = TextUtils.equals(authority, SettingsSlicesContract.AUTHORITY);
-        final List<String> keys = mSlicesDatabaseAccessor.getSliceKeys(isPlatformUri);
-        descendants.addAll(buildUrisFromKeys(keys, authority));
-        descendants.addAll(getSpecialCaseUris(isPlatformUri));
+        // Add all descendants from db with matching authority.
+        descendants.addAll(mSlicesDatabaseAccessor.getSliceUris(authority));
+
+        if (isPathEmpty && TextUtils.isEmpty(authority)) {
+            // No path nor authority. Return all possible Uris by adding all special slice uri
+            descendants.addAll(PUBLICLY_SUPPORTED_CUSTOM_SLICE_URIS);
+        } else {
+            // Can assume authority belongs to the provider. Return all Uris for the authority.
+            final List<Uri> customSlices = PUBLICLY_SUPPORTED_CUSTOM_SLICE_URIS.stream()
+                    .filter(sliceUri -> TextUtils.equals(authority, sliceUri.getAuthority()))
+                    .collect(Collectors.toList());
+            descendants.addAll(customSlices);
+        }
         grantWhitelistedPackagePermissions(getContext(), descendants);
         return descendants;
     }
@@ -332,54 +341,11 @@ public class SettingsSliceProvider extends SliceProvider {
         }
     }
 
-    private void startBackgroundWorker(Sliceable sliceable, Uri uri) {
-        final Class workerClass = sliceable.getBackgroundWorkerClass();
-        if (workerClass == null) {
-            return;
-        }
-
-        if (mPinnedWorkers.containsKey(uri)) {
-            return;
-        }
-
-        Log.d(TAG, "Starting background worker for: " + uri);
-        final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(
-                getContext(), sliceable, uri);
-        mPinnedWorkers.put(uri, worker);
-        worker.onSlicePinned();
-    }
-
-    private void stopBackgroundWorker(Uri uri) {
-        final SliceBackgroundWorker worker = mPinnedWorkers.get(uri);
-        if (worker != null) {
-            Log.d(TAG, "Stopping background worker for: " + uri);
-            worker.onSliceUnpinned();
-            mPinnedWorkers.remove(uri);
-        }
-    }
-
     @Override
     public void shutdown() {
         ThreadUtils.postOnMainThread(() -> {
             SliceBackgroundWorker.shutdown();
         });
-    }
-
-    private List<Uri> buildUrisFromKeys(List<String> keys, String authority) {
-        final List<Uri> descendants = new ArrayList<>();
-
-        final Uri.Builder builder = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(authority)
-                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION);
-
-        final String newUriPathPrefix = SettingsSlicesContract.PATH_SETTING_ACTION + "/";
-        for (String key : keys) {
-            builder.path(newUriPathPrefix + key);
-            descendants.add(builder.build());
-        }
-
-        return descendants;
     }
 
     @VisibleForTesting
@@ -416,38 +382,6 @@ public class SettingsSliceProvider extends SliceProvider {
         ThreadUtils.postOnBackgroundThread(() -> loadSlice(uri));
     }
 
-    /**
-     * @return an empty {@link Slice} with {@param uri} to be used as a stub while the real
-     * {@link SliceData} is loaded from {@link SlicesDatabaseHelper.Tables#TABLE_SLICES_INDEX}.
-     */
-    private Slice getSliceStub(Uri uri) {
-        // TODO: Switch back to ListBuilder when slice loading states are fixed.
-        return new Slice.Builder(uri).build();
-    }
-
-    private List<Uri> getSpecialCaseUris(boolean isPlatformUri) {
-        if (isPlatformUri) {
-            return getSpecialCasePlatformUris();
-        }
-        return getSpecialCaseOemUris();
-    }
-
-    private List<Uri> getSpecialCasePlatformUris() {
-        return Arrays.asList(
-                CustomSliceRegistry.WIFI_SLICE_URI,
-                CustomSliceRegistry.BLUETOOTH_URI,
-                CustomSliceRegistry.LOCATION_SLICE_URI
-        );
-    }
-
-    private List<Uri> getSpecialCaseOemUris() {
-        return Arrays.asList(
-                CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
-                CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
-                CustomSliceRegistry.ZEN_MODE_SLICE_URI
-        );
-    }
-
     @VisibleForTesting
     /**
      * Registers an IntentFilter in SysUI to notify changes to {@param sliceUri} when broadcasts to
@@ -476,7 +410,42 @@ public class SettingsSliceProvider extends SliceProvider {
         return set;
     }
 
-    private String[] parseStringArray(String value) {
+    private void startBackgroundWorker(Sliceable sliceable, Uri uri) {
+        final Class workerClass = sliceable.getBackgroundWorkerClass();
+        if (workerClass == null) {
+            return;
+        }
+
+        if (mPinnedWorkers.containsKey(uri)) {
+            return;
+        }
+
+        Log.d(TAG, "Starting background worker for: " + uri);
+        final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(
+                getContext(), sliceable, uri);
+        mPinnedWorkers.put(uri, worker);
+        worker.onSlicePinned();
+    }
+
+    private void stopBackgroundWorker(Uri uri) {
+        final SliceBackgroundWorker worker = mPinnedWorkers.get(uri);
+        if (worker != null) {
+            Log.d(TAG, "Stopping background worker for: " + uri);
+            worker.onSliceUnpinned();
+            mPinnedWorkers.remove(uri);
+        }
+    }
+
+    /**
+     * @return an empty {@link Slice} with {@param uri} to be used as a stub while the real
+     * {@link SliceData} is loaded from {@link SlicesDatabaseHelper.Tables#TABLE_SLICES_INDEX}.
+     */
+    private static Slice getSliceStub(Uri uri) {
+        // TODO: Switch back to ListBuilder when slice loading states are fixed.
+        return new Slice.Builder(uri).build();
+    }
+
+    private static String[] parseStringArray(String value) {
         if (value != null) {
             String[] parts = value.split(":");
             if (parts.length > 0) {

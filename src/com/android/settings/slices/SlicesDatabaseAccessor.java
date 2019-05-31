@@ -23,6 +23,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Binder;
+import android.text.TextUtils;
 import android.util.Pair;
 
 import androidx.slice.Slice;
@@ -91,34 +92,29 @@ public class SlicesDatabaseAccessor {
     }
 
     /**
-     * @return a list of keys in the Slices database matching on {@param isPlatformSlice}.
+     * @return a list of Slice {@link Uri}s matching {@param authority}.
      */
-    public List<String> getSliceKeys(boolean isPlatformSlice) {
+    public List<Uri> getSliceUris(String authority) {
         verifyIndexing();
-        final String whereClause;
-
-        if (isPlatformSlice) {
-            whereClause = IndexColumns.PLATFORM_SLICE + " = 1";
-        } else {
-            whereClause = IndexColumns.PLATFORM_SLICE + " = 0";
-        }
-
+        final List<Uri> uris = new ArrayList<>();
         final SQLiteDatabase database = mHelper.getReadableDatabase();
-        final String[] columns = new String[]{IndexColumns.KEY};
-        final List<String> keys = new ArrayList<>();
-
-        try (final Cursor resultCursor = database.query(TABLE_SLICES_INDEX, columns, whereClause,
-                null /* selection */, null /* groupBy */, null /* having */, null /* orderBy */)) {
+        final String[] columns = new String[]{IndexColumns.SLICE_URI};
+        try (final Cursor resultCursor = database.query(TABLE_SLICES_INDEX, columns,
+                null /* where */, null /* selection */, null /* groupBy */, null /* having */,
+                null /* orderBy */)) {
             if (!resultCursor.moveToFirst()) {
-                return keys;
+                return uris;
             }
 
             do {
-                keys.add(resultCursor.getString(0 /* key index */));
+                final Uri uri = Uri.parse(resultCursor.getString(0 /* SLICE_URI */));
+                if (TextUtils.isEmpty(authority)
+                        || TextUtils.equals(authority, uri.getAuthority())) {
+                    uris.add(uri);
+                }
             } while (resultCursor.moveToNext());
         }
-
-        return keys;
+        return uris;
     }
 
     private Cursor getIndexedSliceData(String path) {

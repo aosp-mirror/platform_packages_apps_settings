@@ -108,13 +108,8 @@ public class SettingsSliceProviderTest {
                     .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                     .appendPath(KEY)
                     .build();
-    private static final String TITLE = "title";
-    private static final String SUMMARY = "summary";
-    private static final String SCREEN_TITLE = "screen title";
-    private static final String FRAGMENT_NAME = "fragment name";
-    private static final int ICON = R.drawable.ic_settings_accent;
+
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
-    private static final String PREF_CONTROLLER = FakeToggleController.class.getName();
 
     private Context mContext;
     private SettingsSliceProvider mProvider;
@@ -164,7 +159,7 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void testInitialSliceReturned_emptySlice() {
-        insertSpecialCase(KEY);
+        SliceTestUtils.insertSliceToDb(mContext, KEY);
         Slice slice = mProvider.onBindSlice(INTENT_SLICE_URI);
 
         assertThat(slice.getUri()).isEqualTo(INTENT_SLICE_URI);
@@ -173,18 +168,18 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void testLoadSlice_returnsSliceFromAccessor() {
-        insertSpecialCase(KEY);
+        SliceTestUtils.insertSliceToDb(mContext, KEY);
 
         mProvider.loadSlice(INTENT_SLICE_URI);
         SliceData data = mProvider.mSliceWeakDataCache.get(INTENT_SLICE_URI);
 
         assertThat(data.getKey()).isEqualTo(KEY);
-        assertThat(data.getTitle()).isEqualTo(TITLE);
+        assertThat(data.getTitle()).isEqualTo(SliceTestUtils.FAKE_TITLE);
     }
 
     @Test
     public void loadSlice_registersIntentFilter() {
-        insertSpecialCase(KEY);
+        SliceTestUtils.insertSliceToDb(mContext, KEY);
 
         mProvider.loadSlice(INTENT_SLICE_URI);
 
@@ -194,7 +189,7 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void loadSlice_registersBackgroundListener() {
-        insertSpecialCase(KEY);
+        SliceTestUtils.insertSliceToDb(mContext, KEY);
 
         mProvider.loadSlice(INTENT_SLICE_URI);
 
@@ -210,7 +205,7 @@ public class SettingsSliceProviderTest {
         SliceData data = getDummyData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
         mProvider.onBindSlice(data.getUri());
-        insertSpecialCase(data.getKey());
+        SliceTestUtils.insertSliceToDb(mContext, data.getKey());
 
         SliceData cachedData = mProvider.mSliceWeakDataCache.get(data.getUri());
 
@@ -291,7 +286,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void getDescendantUris_invalidPath_returnsEmpty() {
         final String key = "platform_key";
-        insertSpecialCase(key, true /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
@@ -306,7 +301,7 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void getDescendantUris_platformSlice_doesNotReturnOEMSlice() {
-        insertSpecialCase("oem_key", false /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, "oem_key", false /* isPlatformSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
@@ -320,7 +315,7 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void getDescendantUris_oemSlice_doesNotReturnPlatformSlice() {
-        insertSpecialCase("platform_key", true /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, "platform_key", true /* isPlatformSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
@@ -335,7 +330,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void getDescendantUris_oemSlice_returnsOEMUriDescendant() {
         final String key = "oem_key";
-        insertSpecialCase(key, false /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
@@ -358,7 +353,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void getDescendantUris_oemSliceNoPath_returnsOEMUriDescendant() {
         final String key = "oem_key";
-        insertSpecialCase(key, false /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
@@ -380,7 +375,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void getDescendantUris_platformSlice_returnsPlatformUriDescendant() {
         final String key = "platform_key";
-        insertSpecialCase(key, true /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
@@ -403,7 +398,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void getDescendantUris_platformSliceNoPath_returnsPlatformUriDescendant() {
         final String key = "platform_key";
-        insertSpecialCase(key, true /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
@@ -426,8 +421,8 @@ public class SettingsSliceProviderTest {
     public void getDescendantUris_noAuthorityNorPath_returnsAllUris() {
         final String platformKey = "platform_key";
         final String oemKey = "oemKey";
-        insertSpecialCase(platformKey, true /* isPlatformSlice */);
-        insertSpecialCase(oemKey, false /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, platformKey, true /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, oemKey, false /* isPlatformSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .build();
@@ -492,31 +487,6 @@ public class SettingsSliceProviderTest {
         mProvider.onSlicePinned(uri);
     }
 
-    @Implements(WifiScanWorker.class)
-    public static class ShadowWifiScanWorker {
-        private static WifiTracker mWifiTracker;
-
-        @Implementation
-        protected void onSlicePinned() {
-            mWifiTracker = mock(WifiTracker.class);
-            mWifiTracker.onStart();
-        }
-
-        @Implementation
-        protected void onSliceUnpinned() {
-            mWifiTracker.onStop();
-        }
-
-        @Implementation
-        protected void close() {
-            mWifiTracker.onDestroy();
-        }
-
-        static WifiTracker getWifiTracker() {
-            return mWifiTracker;
-        }
-    }
-
     @Test
     public void onSlicePinned_backgroundWorker_started() {
         mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
@@ -563,43 +533,42 @@ public class SettingsSliceProviderTest {
                 .grantSlicePermission("com.android.settings.slice_whitelist_package", uris.get(0));
     }
 
-    private void insertSpecialCase(String key) {
-        insertSpecialCase(key, true);
-    }
-
-    private void insertSpecialCase(String key, boolean isPlatformSlice) {
-        final ContentValues values = new ContentValues();
-        values.put(SlicesDatabaseHelper.IndexColumns.KEY, key);
-        values.put(SlicesDatabaseHelper.IndexColumns.TITLE, TITLE);
-        values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, "s");
-        values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, "s");
-        values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, R.drawable.ic_settings_accent);
-        values.put(SlicesDatabaseHelper.IndexColumns.FRAGMENT, "test");
-        values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, PREF_CONTROLLER);
-        values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);
-        values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
-        final SQLiteDatabase db = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
-        db.beginTransaction();
-        try {
-            db.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
-        }
-        db.close();
-    }
-
     private static SliceData getDummyData() {
         return new SliceData.Builder()
                 .setKey(KEY)
-                .setTitle(TITLE)
-                .setSummary(SUMMARY)
-                .setScreenTitle(SCREEN_TITLE)
-                .setIcon(ICON)
-                .setFragmentName(FRAGMENT_NAME)
                 .setUri(URI)
-                .setPreferenceControllerClassName(PREF_CONTROLLER)
+                .setTitle(SliceTestUtils.FAKE_TITLE)
+                .setSummary(SliceTestUtils.FAKE_SUMMARY)
+                .setScreenTitle(SliceTestUtils.FAKE_SCREEN_TITLE)
+                .setIcon(SliceTestUtils.FAKE_ICON)
+                .setFragmentName(SliceTestUtils.FAKE_FRAGMENT_NAME)
+                .setPreferenceControllerClassName(SliceTestUtils.FAKE_CONTROLLER_NAME)
                 .build();
+    }
+
+    @Implements(WifiScanWorker.class)
+    public static class ShadowWifiScanWorker {
+        private static WifiTracker mWifiTracker;
+
+        @Implementation
+        protected void onSlicePinned() {
+            mWifiTracker = mock(WifiTracker.class);
+            mWifiTracker.onStart();
+        }
+
+        @Implementation
+        protected void onSliceUnpinned() {
+            mWifiTracker.onStop();
+        }
+
+        @Implementation
+        protected void close() {
+            mWifiTracker.onDestroy();
+        }
+
+        static WifiTracker getWifiTracker() {
+            return mWifiTracker;
+        }
     }
 
     @Implements(value = StrictMode.class)
