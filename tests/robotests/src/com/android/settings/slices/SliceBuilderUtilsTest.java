@@ -137,58 +137,6 @@ public class SliceBuilderUtilsTest {
     }
 
     @Test
-    public void testUriBuilder_oemAuthority_intentPath_returnsValidSliceUri() {
-        final Uri expectedUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-                .appendPath(INTENT_PATH)
-                .build();
-
-        final Uri actualUri = SliceBuilderUtils.getUri(INTENT_PATH, false);
-
-        assertThat(actualUri).isEqualTo(expectedUri);
-    }
-
-    @Test
-    public void testUriBuilder_oemAuthority_actionPath_returnsValidSliceUri() {
-        final Uri expectedUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-                .appendPath(ACTION_PATH)
-                .build();
-
-        final Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, false);
-
-        assertThat(actualUri).isEqualTo(expectedUri);
-    }
-
-    @Test
-    public void testUriBuilder_platformAuthority_intentPath_returnsValidSliceUri() {
-        final Uri expectedUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SettingsSlicesContract.AUTHORITY)
-                .appendPath(ACTION_PATH)
-                .build();
-
-        final Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, true);
-
-        assertThat(actualUri).isEqualTo(expectedUri);
-    }
-
-    @Test
-    public void testUriBuilder_platformAuthority_actionPath_returnsValidSliceUri() {
-        final Uri expectedUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SettingsSlicesContract.AUTHORITY)
-                .appendPath(ACTION_PATH)
-                .build();
-
-        final Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, true);
-
-        assertThat(actualUri).isEqualTo(expectedUri);
-    }
-
-    @Test
     public void testGetPreferenceController_buildsMatchingController() {
         final BasePreferenceController controller =
                 SliceBuilderUtils.getPreferenceController(mContext, getDummyData());
