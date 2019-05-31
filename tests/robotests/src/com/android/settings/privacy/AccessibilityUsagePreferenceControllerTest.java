@@ -65,8 +65,6 @@ public class AccessibilityUsagePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_noEnabledServices_shouldReturnUnsupported() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
-                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
         mAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
         AccessibilityUsagePreferenceController controller =
                 new AccessibilityUsagePreferenceController(mContext, "test_key");
@@ -76,8 +74,6 @@ public class AccessibilityUsagePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_enabledServices_shouldReturnAvailable() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
-                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "false", true);
         mAccessibilityManager.setEnabledAccessibilityServiceList(
                 new ArrayList<>(Arrays.asList(new AccessibilityServiceInfo())));
         AccessibilityUsagePreferenceController controller =
