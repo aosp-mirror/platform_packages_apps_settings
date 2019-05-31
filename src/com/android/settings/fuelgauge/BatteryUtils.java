@@ -47,6 +47,7 @@ import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.StatsManagerConfig;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
@@ -189,8 +190,10 @@ public class BatteryUtils {
                         && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED
                         && sipper.drainType != BatterySipper.DrainType.BLUETOOTH
                         && sipper.drainType != BatterySipper.DrainType.WIFI
-                        && sipper.drainType != BatterySipper.DrainType.IDLE) {
-                    // Don't add it if it is overcounted, unaccounted, wifi, bluetooth, or screen
+                        && sipper.drainType != BatterySipper.DrainType.IDLE
+                        && !isHiddenSystemModule(sipper)) {
+                    // Don't add it if it is overcounted, unaccounted, wifi, bluetooth, screen
+                    // or hidden system modules
                     proportionalSmearPowerMah += sipper.totalPowerMah;
                 }
             }
@@ -253,7 +256,27 @@ public class BatteryUtils {
                 || drainType == BatterySipper.DrainType.WIFI
                 || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
                 || mPowerUsageFeatureProvider.isTypeService(sipper)
-                || mPowerUsageFeatureProvider.isTypeSystem(sipper);
+                || mPowerUsageFeatureProvider.isTypeSystem(sipper)
+                || isHiddenSystemModule(sipper);
+    }
+
+    /**
+     * Return {@code true} if one of packages in {@code sipper} is hidden system modules
+     */
+    public boolean isHiddenSystemModule(BatterySipper sipper) {
+        if (sipper.uidObj == null) {
+            return false;
+        }
+        sipper.mPackages = mPackageManager.getPackagesForUid(sipper.getUid());
+        if (sipper.mPackages != null) {
+            for (int i = 0, length = sipper.mPackages.length; i < length; i++) {
+                if (AppUtils.isHiddenSystemModule(mContext, sipper.mPackages[i])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
