@@ -7014,6 +7014,8 @@
     <string name="help_uri_wifi_scanning_required" translatable="false"></string>
     <!-- url for the bluetooth toggle required dialog help page -->
     <string name="help_uri_bluetooth_screen" translatable="false"></string>
+    <!-- url for the SIM combination warning required dialog help page -->
+    <string name="help_uri_sim_combination_warning" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -11254,4 +11256,12 @@
 
     <!-- Title for enable MMS notification channel.  [CHAR LIMIT=40] -->
     <string name="enable_mms_notification_channel_title">MMS message</string>
+
+    <!-- Title for SIM combination warning. [CHAR LIMIT=80] -->
+    <string name="sim_combination_warning_notification_title">Issue with SIM combination</string>
+    <!-- Message for DSDS dual CDMA SIM combination warning. [CHAR LIMIT=100] -->
+    <string name="dual_cdma_sim_warning_notification_summary">Using <xliff:g id="operator_names" example="T-Mobile &amp; Verizon">%1$s</xliff:g> may limit functionality. Tap to learn more.</string>
+
+    <!-- Title for enable MMS notification channel.  [CHAR LIMIT=40] -->
+    <string name="dual_cdma_sim_warning_notification_channel_title">SIM combination</string>
 </resources>
