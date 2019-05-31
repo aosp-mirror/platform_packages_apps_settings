@@ -17,7 +17,9 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.content.Intent;
 import android.telephony.SubscriptionInfo;
+import android.telephony.euicc.EuiccManager;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -31,12 +33,13 @@ public class DeleteSimProfilePreferenceController extends BasePreferenceControll
 
     private SubscriptionInfo mSubscriptionInfo;
     private Fragment mParentFragment;
+    private int mRequestCode;
 
     public DeleteSimProfilePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
-    public void init(int subscriptionId, Fragment parentFragment) {
+    public void init(int subscriptionId, Fragment parentFragment, int requestCode) {
         mParentFragment = parentFragment;
 
         for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(
@@ -46,6 +49,7 @@ public class DeleteSimProfilePreferenceController extends BasePreferenceControll
                 break;
             }
         }
+        mRequestCode = requestCode;
     }
 
     @Override
@@ -53,11 +57,10 @@ public class DeleteSimProfilePreferenceController extends BasePreferenceControll
         super.displayPreference(screen);
         final Preference pref = screen.findPreference(getPreferenceKey());
         pref.setOnPreferenceClickListener(p -> {
-            final DeleteSimProfileConfirmationDialog dialogFragment =
-                    DeleteSimProfileConfirmationDialog.newInstance(mSubscriptionInfo);
-            dialogFragment.setTargetFragment(mParentFragment, 0);
-            dialogFragment.show(mParentFragment.getFragmentManager(),
-                    DeleteSimProfileConfirmationDialog.TAG);
+            final Intent intent = new Intent(EuiccManager.ACTION_DELETE_SUBSCRIPTION_PRIVILEGED);
+            intent.putExtra(EuiccManager.EXTRA_SUBSCRIPTION_ID,
+                    mSubscriptionInfo.getSubscriptionId());
+            mParentFragment.startActivityForResult(intent, mRequestCode);
             return true;
         });
     }
