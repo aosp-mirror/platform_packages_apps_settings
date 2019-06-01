@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.net.Uri;
 
+import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.slices.CustomSliceRegistry;
 
 import org.junit.Before;
@@ -47,7 +48,7 @@ public class InternetConnectivityPanelTest {
         final List<Uri> uris = mPanel.getSlices();
 
         assertThat(uris).containsExactly(
-                CustomSliceRegistry.AIRPLANE_URI,
+                AirplaneModePreferenceController.SLICE_URI,
                 CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
                 CustomSliceRegistry.WIFI_SLICE_URI);
     }

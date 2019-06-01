@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -40,6 +41,7 @@ import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -52,22 +54,25 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class HighUsageDetectorTest {
     private static final int UID_HIGH = 123;
-    private static final int UID_ZERO = 345;
-    private static final long SCREEN_ON_TIME_MS = DateUtils.HOUR_IN_MILLIS;
+    private static final int UID_LOW = 345;
+    private static final double POWER_HIGH = 20000;
+    private static final double POWER_LOW = 10000;
     private Context mContext;
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryStatsHelper;
-    @Mock
-    private BatteryUtils mBatteryUtils;
     @Mock
     private BatterySipper mHighBatterySipper;
     @Mock
-    private BatterySipper mZeroBatterySipper;
+    private BatterySipper mLowBatterySipper;
+    @Mock
+    private BatterySipper mSystemBatterySipper;
     @Mock
     private HighUsageDataParser mDataParser;
 
-    private AppInfo mAppInfo;
+    private AppInfo mHighAppInfo;
+    private AppInfo mLowAppInfo;
     private BatteryTipPolicy mPolicy;
+    private BatteryUtils mBatteryUtils;
     private HighUsageDetector mHighUsageDetector;
     private List<BatterySipper> mUsageList;
 
@@ -77,28 +82,37 @@ public class HighUsageDetectorTest {
 
         mContext = RuntimeEnvironment.application;
         mPolicy = spy(new BatteryTipPolicy(mContext));
+        mBatteryUtils = spy(BatteryUtils.getInstance(mContext));
         mHighUsageDetector = spy(new HighUsageDetector(mContext, mPolicy, mBatteryStatsHelper,
                 true /* mDischarging */));
         mHighUsageDetector.mBatteryUtils = mBatteryUtils;
         mHighUsageDetector.mDataParser = mDataParser;
         doNothing().when(mHighUsageDetector).parseBatteryData();
         doReturn(UID_HIGH).when(mHighBatterySipper).getUid();
+        doReturn(UID_LOW).when(mLowBatterySipper).getUid();
         mHighBatterySipper.uidObj = mock(BatteryStats.Uid.class);
-        mZeroBatterySipper.uidObj = mock(BatteryStats.Uid.class);
-        doReturn(UID_ZERO).when(mZeroBatterySipper).getUid();
-        mAppInfo = new AppInfo.Builder()
+        mHighBatterySipper.drainType = BatterySipper.DrainType.APP;
+        mHighBatterySipper.totalSmearedPowerMah = POWER_HIGH;
+        mLowBatterySipper.uidObj = mock(BatteryStats.Uid.class);
+        mLowBatterySipper.drainType = BatterySipper.DrainType.APP;
+        mLowBatterySipper.totalSmearedPowerMah = POWER_LOW;
+        when(mBatteryUtils.shouldHideSipper(mSystemBatterySipper)).thenReturn(true);
+        when(mBatteryUtils.shouldHideSipper(mHighBatterySipper)).thenReturn(false);
+        when(mBatteryUtils.shouldHideSipper(mLowBatterySipper)).thenReturn(false);
+        when(mBatteryStatsHelper.getStats().getDischargeAmount(anyInt())).thenReturn(100);
+        when(mBatteryStatsHelper.getTotalPower()).thenReturn(POWER_HIGH + POWER_LOW);
+
+
+        mHighAppInfo = new AppInfo.Builder()
                 .setUid(UID_HIGH)
-                .setScreenOnTimeMs(SCREEN_ON_TIME_MS)
+                .build();
+        mLowAppInfo = new AppInfo.Builder()
+                .setUid(UID_LOW)
                 .build();
 
-        doReturn(SCREEN_ON_TIME_MS).when(mBatteryUtils).getProcessTimeMs(
-                BatteryUtils.StatusType.FOREGROUND, mHighBatterySipper.uidObj,
-                BatteryStats.STATS_SINCE_CHARGED);
-        doReturn(0L).when(mBatteryUtils).getProcessTimeMs(
-                BatteryUtils.StatusType.FOREGROUND, mZeroBatterySipper.uidObj,
-                BatteryStats.STATS_SINCE_CHARGED);
-
         mUsageList = new ArrayList<>();
+        mUsageList.add(mSystemBatterySipper);
+        mUsageList.add(mLowBatterySipper);
         mUsageList.add(mHighBatterySipper);
         when(mBatteryStatsHelper.getUsageList()).thenReturn(mUsageList);
     }
@@ -128,21 +142,15 @@ public class HighUsageDetectorTest {
     }
 
     @Test
-    public void testDetect_containsHighUsageApp_tipVisible() {
+    public void testDetect_containsHighUsageApp_tipVisibleAndSorted() {
         doReturn(true).when(mDataParser).isDeviceHeavilyUsed();
 
         final HighUsageTip highUsageTip = (HighUsageTip) mHighUsageDetector.detect();
         assertThat(highUsageTip.isVisible()).isTrue();
-        assertThat(highUsageTip.getHighUsageAppList()).containsExactly(mAppInfo);
-    }
 
-    @Test
-    public void testDetect_containsHighUsageApp_removeZeroOne() {
-        doReturn(true).when(mDataParser).isDeviceHeavilyUsed();
-        mUsageList.add(mZeroBatterySipper);
-
-        final HighUsageTip highUsageTip = (HighUsageTip) mHighUsageDetector.detect();
-        assertThat(highUsageTip.isVisible()).isTrue();
-        assertThat(highUsageTip.getHighUsageAppList()).containsExactly(mAppInfo);
+        // Contain two appInfo and large one comes first
+        final List<AppInfo> appInfos = highUsageTip.getHighUsageAppList();
+        assertThat(appInfos).containsExactly(mLowAppInfo, mHighAppInfo);
+        assertThat(appInfos.get(0)).isEqualTo(mHighAppInfo);
     }
 }
