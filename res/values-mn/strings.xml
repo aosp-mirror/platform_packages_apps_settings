@@ -3137,7 +3137,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"зангаа"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"царай, түгжээг тайлах, нотлох, нэвтрэх"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl хувилбар, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"сүлжээ, мобайл сүлжээний төлөв, үйлчилгээний төлөв, дохионы хүч, мобайл сүлжээний төрөл, роуминг, iccid"</string>
+    <string name="keywords_sim_status" msgid="6682044233620329507">"сүлжээ, мобайл сүлжээний төлөв, үйлчилгээний төлөв, дохионы хүч, мобайл сүлжээний төрөл, роуминг, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"серийн дугаар, техник хангамжийн хувилбар"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"андройдын аюулгүй байдлын patch-н түвшин, долгион баригчийн хувилбар, кернел хувилбар"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"загвар, цайвар, бараан, горим"</string>
@@ -3340,10 +3340,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Нарийвчилсан"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Ажлын мэдэгдэл"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Орчинтой тохирсон мэдэгдлүүд"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Автомат эрэмбэлэгч"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Орчинтой тохирсон мэдэгдлийн давуу эрх"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Ач холбогдол багатай мэдэгдлүүдийг автоматаар Бага ач холбогдолтой гэж тохируулах"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Санал болгосон үйлдлүүд болон хариу"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Санал болгосон үйлдлүүд болон хариуг автоматаар харуулах"</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"Мэдэгдлийг түр хойшлуулахыг зөвшөөрөх"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Бага ач холбогдолтой мэдэгдлүүдийн дүрс тэмдгийг нуух"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Бага ач холбогдолтой мэдэгдлүүдийн дүрс тэмдгийг статусын хэсэгт харуулахгүй"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Мэдэгдлийн цэгийг зөвшөөрөх"</string>
@@ -3371,22 +3372,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Анивчих гэрэл"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Түгжигдсэн дэлгэц"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Ажлын профайлыг түгжсэн үед"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Түгжигдсэн дэлгэц дээрх мэдэгдлүүд"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Дуутай болон дуугүй мэдэгдлүүдийг харуулах"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Зөвхөн дуутай мэдэгдлүүдийг харуулах"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Мэдэгдлүүдийг харуулахгүй"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Мэдрэг мэдэгдлүүд"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Түгжигдсэн үед мэдрэг контентыг харуулах"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Ажлын профайлын мэдрэг мэдэгдлүүд"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Түгжигдсэн үед ажлын профайлын эмзэг контентыг харуулах"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Бүх мэдэгдлийн агуулгыг харуулах"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Мэдрэг контентыг зөвхөн түгжээг тайлсан үед харуулах"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Огт мэдэгдэл харуулахгүй"</string>
@@ -3413,16 +3406,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Их"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Дэлгэцэд гаргах"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Хориглох"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Чухал ач холбогдолтой"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"Чимээгүй"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Дуутай"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Саатлыг зөвшөөрөх"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Апп дуу гаргах, чичиргэх, дэлгэц дээр мэдэгдэл гаргахыг зөвшөөрөх"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Мэдэгдлүүдийг доош татдаг сүүдэрт нэг мөрөнд буулгаарай"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Дуу эсвэл чичиргээгүйгээр танд төвлөрөхөд тусална"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Дуу эсвэл чичиргээгээр таны анхаарлыг татна"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Төхөөрөмжийн түгжээг тайлсан үед мэдэгдлүүдийг дэлгэцийн дээд хэсэгт баннер болгож харуулах"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Мэдэгдлийг харуулах"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Орчинтой тохирсон мэдэгдлүүд"</string>
@@ -4200,6 +4190,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3-товчлуурт-навигац"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"Нүүр хэсэг рүү очих, аппуудыг сэлгэх болон Буцахыг товчлуураар дамжуулан хийдэг Сонгодог Андройд навигацын горим юм."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"системийн навигац, 2 товчлуурт навигац, 3 товчлуурт навигац, зангааны навигац"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Таны өгөгдмөл үндсэн апп болох<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>-с дэмжээгүй байна"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Өгөгдмөл үндсэн аппыг сэлгэх"</string>
+    <string name="information_label" msgid="8133109685432913360">"Мэдээлэл"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Утсаа шалгахын тулд хоёр товшино уу"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Таблетаа шалгахын тулд хоёр товшино уу"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Төхөөрөмжийг шалгахын тулд хоёр товшино уу"</string>
@@ -4487,8 +4480,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Идэвхгүй / СИМ"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Идэвхтэй / Татаж авсан СИМ"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Идэвхгүй / Татаж авсан СИМ"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"СИМ-ийн нэр"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Нэрийг нь өөрчлөх"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"СИМ ашиглах"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Унтраах"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"<xliff:g id="CARRIER">%1$s</xliff:g> руу сэлгэх үү?"</string>

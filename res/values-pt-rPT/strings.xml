@@ -1604,7 +1604,7 @@
     <string name="master_clear_desc" product="default" msgid="7647628092266675099">"Serão apagados todos os dados do "<b>"armazenamento interno"</b>" do telemóvel, incluindo:\n\n"<li>"A Conta Google"</li>\n<li>"Dados e definições do sistema e da aplicação"</li>\n<li>"Aplicações transferidas"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Actualmente, tem sessão iniciada nas seguintes contas:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Existem outros utilizadores presentes neste dispositivo.\n"</string>
-    <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Música"</li>\n<li>"Fotografias"</li>\n<li>"Outros dados do utilizador"</li></string>
+    <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Outros dados do utilizador"</li></string>
     <string name="master_clear_desc_also_erases_esim" msgid="6008213558725767177"><li>"eSIMs"</li></string>
     <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"Esta ação não cancela o seu plano de serviços móveis."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Para limpar músicas, imagens e outros dados do utilizador, é necessário apagar a "<b>"memória de armazenamento USB"</b>"."</string>
@@ -1679,7 +1679,7 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Utilização de bateria elevada"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Utilização de bateria baixa"</string>
     <string name="location_scanning_screen_title" msgid="2297479353298444503">"Procura de Wi‑Fi e Bluetooth"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Procurar por Wi‑Fi"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Procura de Wi‑Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Permita que as aplicações e os serviços procurem redes Wi‑Fi em qualquer altura, mesmo quando o Wi-Fi estiver desativado. Isto pode ser utilizado, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Procurar por Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Permita que as aplicações e os serviços procurem dispositivos próximos em qualquer altura, mesmo quando o Bluetooth estiver desativado. Isto pode ser utilizado, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização."</string>
@@ -3137,7 +3137,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"gesto"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"rosto, desbloquear, autenticação, iniciar sessão"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, versão de prl, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"rede, estado da rede móvel, estado do serviço, intensidade do sinal, tipo de rede móvel, roaming, iccid"</string>
+    <string name="keywords_sim_status" msgid="6682044233620329507">"rede, estado da rede móvel, estado do serviço, intensidade do sinal, tipo de rede móvel, roaming, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"número de série, versão de hardware"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"nível de patch de segurança android, versão da banda de base, versão do kernel"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"tema, claro, escuro, modo"</string>
@@ -3340,10 +3340,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Avançadas"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notificações de trabalho"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Notificações adaptáveis"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Prioridade automática"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Prioridade das notificações adaptável"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Defina automaticamente as notificações de prioridade mais baixa como discretas."</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Respostas e ações sugeridas"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"São apresentadas automaticamente respostas e ações sugeridas."</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"Permitir a suspensão de notificações"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Ocultar os ícones das notificações discretas"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Os ícones das notificações discretas não são apresentados na barra de estado."</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Permitir pontos de notificação"</string>
@@ -3371,22 +3372,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Emitir luz intermitente"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Ecrã de bloqueio"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Quando perfil trabalho bloq."</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Notificações no ecrã de bloqueio"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Mostrar notificações de alerta e silenciosas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Mostrar apenas notificações de alerta"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Não mostrar notificações"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Notificações confidenciais"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Mostrar conteúdo confidencial quando estiver bloqueado"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Notificações confidenciais do perfil de trabalho"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Mostrar conteúdo confidencial do perfil de trabalho quando estiver bloqueado"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todas as notificações"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Mostrar cont. confidencial apenas quando desbloq."</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Não mostrar notificações"</string>
@@ -3413,16 +3406,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Alta"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Aparecer no ecrã"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Bloquear"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Prioritárias"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"Silencioso"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Alertar"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Permitir interrupções"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Permitir que a aplicação emita som, vibre e/ou apresente notificações no ecrã"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"No painel pendente, reduza as notificações para uma linha"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Ajuda-o a focar-se sem som ou vibração"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Chama a sua atenção com som ou vibração"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Com o dispositivo desbloqueado, as notificações são apresentadas como uma faixa no topo do ecrã."</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Mostrar notificações"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Notificações adaptáveis"</string>
@@ -4149,7 +4139,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Ligado a vários dispositivos"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Modo de demonstração da IU do sistema"</string>
     <string name="dark_ui_mode" msgid="3888371857083890543">"Tema escuro"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Ativado/Temporar. desativado devido à Poupança de bateria"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Ativado/Temporariamente desativado devido à Poupança de bateria"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Temporariamente ativado devido à Poupança de bateria"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"As aplicações suportadas também mudam para o tema escuro"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"Compreendi"</string>
@@ -4202,6 +4192,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navegação com 3 botões"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"O modo clássico de navegação no Android, no qual é possível aceder à página inicial, alternar entre aplicações e retroceder através de botões."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navegação no sistema, navegação com 2 botões, navegação com 3 botões, navegação por gestos"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Não suportada pela sua aplicação Página inicial predefinida, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>."</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Mudar de aplic. Página inicial predef."</string>
+    <string name="information_label" msgid="8133109685432913360">"Informações"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Tocar duas vezes para verificar o telemóvel"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tocar duas vezes para verificar o tablet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tocar duas vezes para verificar o dispositivo"</string>
@@ -4489,8 +4482,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Inativo/SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Ativo/SIM transferido"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Inativo/SIM transferido"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"Nome do SIM"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Mudar nome"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Utilizar SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Desativado"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Pretende mudar para <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>

@@ -30,6 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -38,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -58,6 +60,7 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class RenameMobileNetworkDialogFragmentTest {
+
     @Mock
     private TelephonyManager mTelephonyMgr;
     @Mock
@@ -95,7 +98,7 @@ public class RenameMobileNetworkDialogFragmentTest {
     }
 
     @Test
-    public void dialog_cancelButtonClicked_setDisplayNameNotCalled() {
+    public void dialog_cancelButtonClicked_setDisplayNameAndIconTintNotCalled() {
         when(mSubscriptionMgr.getActiveSubscriptionInfo(mSubscriptionId)).thenReturn(
                 mSubscriptionInfo);
         final AlertDialog dialog = startDialog();
@@ -106,16 +109,20 @@ public class RenameMobileNetworkDialogFragmentTest {
         negativeButton.performClick();
 
         verify(mSubscriptionMgr, never()).setDisplayName(anyString(), anyInt(), anyInt());
+        verify(mSubscriptionMgr, never()).setIconTint(anyInt(), anyInt());
     }
 
     @Test
-    public void dialog_renameButtonClicked_setDisplayNameCalled() {
+    public void dialog_saveButtonClicked_setDisplayNameAndIconTint() {
         when(mSubscriptionMgr.getActiveSubscriptionInfo(mSubscriptionId)).thenReturn(
                 mSubscriptionInfo);
 
         final AlertDialog dialog = startDialog();
         final EditText nameView = mFragment.getNameView();
         nameView.setText("test2");
+
+        final Spinner colorSpinnerView = mFragment.getColorSpinnerView();
+        colorSpinnerView.setSelection(0);
 
         final Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         positiveButton.performClick();
@@ -124,6 +131,8 @@ public class RenameMobileNetworkDialogFragmentTest {
         verify(mSubscriptionMgr).setDisplayName(captor.capture(), eq(mSubscriptionId),
                 eq(SubscriptionManager.NAME_SOURCE_USER_INPUT));
         assertThat(captor.getValue()).isEqualTo("test2");
+        verify(mSubscriptionMgr)
+                .setIconTint(eq(Color.parseColor("#ff00796b" /* teal */)), eq(mSubscriptionId));
     }
 
     @Test
@@ -140,7 +149,9 @@ public class RenameMobileNetworkDialogFragmentTest {
         assertThat(view.findViewById(R.id.number_label).getVisibility()).isEqualTo(View.GONE);
     }
 
-    /** Helper method to start the dialog */
+    /**
+     * Helper method to start the dialog
+     */
     private AlertDialog startDialog() {
         mFragment.show(mActivity.getSupportFragmentManager(), null);
         return ShadowAlertDialogCompat.getLatestAlertDialog();

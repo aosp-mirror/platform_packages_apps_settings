@@ -863,7 +863,7 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"自动开启 WLAN"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"位于已保存的高品质网络（例如您的家庭网络）附近时自动重新开启 WLAN"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="7494539594649967699">"无法使用，因为位置信息服务已关闭。请开启"<annotation id="link">"位置信息服务"</annotation>"。"</string>
-    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"无法使用，因为 WLAN 搜索功能已关闭"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"无法使用，因为 WLAN 扫描功能已关闭"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"要使用该功能，请选择一个网络评分服务提供方"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"避开状况不佳的网络"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"仅在 WLAN 互联网连接状况良好时使用 WLAN 网络"</string>
@@ -2101,8 +2101,8 @@
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 秒"</string>
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 分钟"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 分钟"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"操作执行时间（无障碍功能超时）"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"执行操作时间"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"操作执行时长（无障碍功能超时）"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"操作执行时长"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"请选择提示您执行操作的消息的显示时间（只会暂时显示）。\n\n部分应用可能不支持这项设置。"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"触摸和按住延迟"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"颜色反转"</string>
@@ -2113,7 +2113,7 @@
     <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"震动和触感强度"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"通知振动"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"响铃振动"</string>
-    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"触摸反馈"</string>
+    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"按触反馈"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"使用服务"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"使用色彩校正"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"使用字幕"</string>
@@ -3137,7 +3137,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"手势"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"人脸, 解锁, 身份验证, 登录"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"IMEI, MEID, MIN, PRL 版本, IMEI SV"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"网络, 移动网络状态, 服务状态, 信号强度, 移动网络类型, 漫游, ICCID"</string>
+    <string name="keywords_sim_status" msgid="6682044233620329507">"网络, 移动网络状态, 服务状态, 信号强度, 移动网络类型, 漫游, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"序列号, 硬件版本"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android 安全补丁程序级别, 基带版本, 内核版本"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"主题背景, 浅色, 夜间, 模式"</string>
@@ -3340,10 +3340,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"高级"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"工作通知"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"自动调节通知"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"自动排定优先顺序"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"自适应通知优先级"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"自动将优先级较低的通知设为无声通知"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"建议操作和回复"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"自动显示建议操作和回复"</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"允许通知暂停"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"隐藏无声通知的图标"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"无声通知的图标不会显示在状态栏中"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"允许使用通知圆点"</string>
@@ -3371,22 +3372,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"闪烁指示灯"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"锁定屏幕"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"当工作资料遭到锁定时"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"锁定屏幕上的通知"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"显示提醒和无声通知"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"仅显示提醒通知"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"不再显示通知"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"敏感通知"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"锁定时显示敏感内容"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"敏感工作资料通知"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"锁定时显示敏感的工作资料内容"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"显示所有通知内容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"仅在解锁状态下显示敏感内容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不显示通知"</string>
@@ -3413,16 +3406,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"在屏幕上弹出"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"屏蔽"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"已设为优先"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"静音"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"提醒"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"允许打扰"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"允许应用发出提示音、振动，以及/或在屏幕上弹出通知"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"将下拉通知栏中的通知合拢为一行"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"不会发出提示音或振动，可帮助您保持专注"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"通过提示音或振动吸引您的注意"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"当设备处于解锁状态时，在屏幕顶端以横幅形式显示通知"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"显示通知"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"自动调节通知"</string>
@@ -3833,7 +3823,7 @@
     <string name="background_check_pref" msgid="7550258400138010979">"后台检查"</string>
     <string name="background_check_title" msgid="4534254315824525593">"完整的后台访问权限"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"使用屏幕上的文字内容"</string>
-    <string name="assist_access_context_summary" msgid="1991421283142279560">"允许助手应用使用屏幕上的文字内容"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"允许助手应用获取屏幕上的文字内容"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"使用屏幕截图"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"允许助手应用使用屏幕截图"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"闪烁屏幕"</string>
@@ -4202,6 +4192,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"“三按钮”导航"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"经典 Android 导航模式，可让您通过按钮转到主屏幕、切换应用及返回上一个屏幕。"</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"系统导航,“双按钮”导航,“三按钮”导航,手势导航"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"您的默认主屏幕应用<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>不支持手势导航"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"切换默认主屏幕应用"</string>
+    <string name="information_label" msgid="8133109685432913360">"信息"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"点按两次即可查看手机"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"点按两次即可查看平板电脑"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"点按两次即可查看设备"</string>
@@ -4489,8 +4482,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"未启用/SIM 卡"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"已启用/已下载的 SIM 卡"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"未启用/已下载的 SIM 卡"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"SIM 卡名称"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"重命名"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"使用 SIM 卡"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"关闭"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"要切换到<xliff:g id="CARRIER">%1$s</xliff:g>吗？"</string>

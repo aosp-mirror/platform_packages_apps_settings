@@ -863,7 +863,7 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"自動開啟 Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"位於已儲存的高品質 Wi‑Fi 網路範圍內 (例如家用網路) 時自動重新開啟 Wi‑Fi"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="7494539594649967699">"定位服務已關閉，因此無法使用。請開啟 [定位]"<annotation id="link"></annotation>"。"</string>
-    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi-Fi 掃描已關閉，因此無法使用"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"掃描 Wi-Fi 功能已關閉，因此無法使用"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"如要使用這項功能，請選取網路評分供應商"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"避開品質不佳的連線"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"除非 Wi-Fi 網路連線狀態良好，否則不使用"</string>
@@ -874,7 +874,7 @@
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"如要使用這項功能，請選取相容的網路評分供應商"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
     <string name="wifi_scan_notify_text" msgid="5544778734762998889">"為了提升定位精確度，應用程式和服務仍隨時可掃描 Wi‑Fi 網路 (即使 Wi‑Fi 連線功能處於關閉狀態)。這可以用來改善適地性功能和服務。你可以前往<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>變更這項設定。"</string>
-    <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"如要提升定位精確度，請前往<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>開啟 Wi-Fi 掃描功能。"</string>
+    <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"如要提升定位精確度，請前往<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>開啟掃描 Wi-Fi 功能。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"不要再顯示"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"休眠狀態仍保持 Wi-Fi 連線"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"休眠時仍保持 Wi-Fi 連線"</string>
@@ -905,11 +905,11 @@
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"你沒有變更 Wi-Fi 網路的權限。"</string>
     <string name="wifi_more" msgid="3195296805089107950">"更多"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自動設定 (WPS)"</string>
-    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"要開啟 Wi‑Fi 掃描功能嗎？"</string>
-    <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"必須先開啟 Wi‑Fi 掃描功能，才能自動開啟 Wi‑Fi。"</string>
-    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Wi‑Fi 掃描功能可讓應用程式和服務隨時掃描 Wi‑Fi 網路 (即使 Wi‑Fi 功能處於關閉狀態)。這可以用來改善適地性功能和服務。"</string>
+    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"要開啟掃描 Wi-Fi 功能嗎？"</string>
+    <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"必須先開啟掃描 Wi-Fi 功能，才能自動開啟 Wi‑Fi。"</string>
+    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"掃描 Wi-Fi 功能可讓應用程式和服務隨時掃描 Wi‑Fi 網路 (即使 Wi‑Fi 功能處於關閉狀態)。這可以用來改善適地性功能和服務。"</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"開啟"</string>
-    <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"已開啟 Wi‑Fi 掃描功能"</string>
+    <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"已開啟掃描 Wi-Fi 功能"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"進階選項"</string>
     <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"進階選項下拉式清單。輕觸兩下即可收合。"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="1463812308429197263">"進階選項下拉式清單。輕觸兩下即可展開。"</string>
@@ -1358,8 +1358,8 @@
     <string name="status_prl_version" msgid="1007470446618081441">"PRL 版本"</string>
     <string name="meid_multi_sim" msgid="748999971744491771">"MEID (SIM 卡插槽 %1$d)"</string>
     <string name="scanning_status_text_wifi_on_ble_on" msgid="5262263689045962681">"Wi‑Fi 掃描和藍牙掃描功能皆已開啟"</string>
-    <string name="scanning_status_text_wifi_on_ble_off" msgid="2115399719199757550">"已開啟 Wi‑Fi 掃描功能，並關閉藍牙掃描功能"</string>
-    <string name="scanning_status_text_wifi_off_ble_on" msgid="3212656150021004088">"已開啟藍牙掃描功能，並關閉 Wi‑Fi 掃描功能"</string>
+    <string name="scanning_status_text_wifi_on_ble_off" msgid="2115399719199757550">"已開啟掃描 Wi-Fi 功能，並關閉藍牙掃描功能"</string>
+    <string name="scanning_status_text_wifi_off_ble_on" msgid="3212656150021004088">"已開啟藍牙掃描功能，並關閉掃描 Wi-Fi 功能"</string>
     <string name="scanning_status_text_wifi_off_ble_off" msgid="6381094990708345188">"Wi‑Fi 掃描和藍牙掃描功能皆已關閉"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
@@ -1679,7 +1679,7 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"耗電量高"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"耗電量低"</string>
     <string name="location_scanning_screen_title" msgid="2297479353298444503">"Wi‑Fi 和藍牙掃描"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi-Fi 掃描"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"掃描 Wi-Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"允許應用程式和服務隨時掃描 Wi‑Fi 網路 (即使 Wi-Fi 功能處於關閉狀態)。這麼做可以改善適地性功能和服務等等。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"藍牙掃描"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"允許應用程式和服務隨時掃描附近裝置 (即使藍牙功能處於關閉狀態)。這麼做可以改善適地性功能和服務等等。"</string>
@@ -2103,7 +2103,7 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 分鐘"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"可執行動作的時間 (無障礙功能逾時)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"可進行操作的時間"</string>
-    <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"選擇要求你進行操作的訊息會暫時顯示多久。\n\n只有部分應用程式支援這項設定。"</string>
+    <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"選擇提示你進行操作的訊息會暫時顯示多久。\n\n只有部分應用程式支援這項設定。"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"輕觸並按住的延遲時間"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"色彩反轉"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"可能會影響效能"</string>
@@ -2207,7 +2207,7 @@
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g>要求這個裝置的完整控制權。如果你授予相關權限，該服務就能讀取畫面內容及執行動作，以協助需要無障礙服務的使用者。這個等級的控制權不適用於大多數應用程式。"</string>
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"如果你有無障礙服務需求，可以將完整控制權授予具有相關功能的應用程式，但請勿將完整控制權授予大多數的應用程式。"</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"查看及控制螢幕"</string>
-    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"可讀取螢幕上的所有內容及顯示其他應用程式中的內容。"</string>
+    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"可讀取螢幕上的所有內容及在其他應用程式上顯示內容。"</string>
     <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"查看及執行動作"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"可追蹤你與應用程式或硬體感應器的互動，並代表你與應用程式進行互動。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"允許"</string>
@@ -2215,7 +2215,7 @@
     <string name="accessibility_dialog_button_stop" msgid="7861331860214808622">"停止"</string>
     <string name="accessibility_dialog_button_cancel" msgid="5006357240387387028">"取消"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"停止「<xliff:g id="SERVICE">%1$s</xliff:g>」？"</string>
-    <string name="disable_service_message" msgid="4593387199926310801">"如果你輕觸 [<xliff:g id="STOP">%1$s</xliff:g>]，「<xliff:g id="SERVICE">%2$s</xliff:g>」就會停止。"</string>
+    <string name="disable_service_message" msgid="4593387199926310801">"輕觸 [<xliff:g id="STOP">%1$s</xliff:g>] 會讓「<xliff:g id="SERVICE">%2$s</xliff:g>」停止運作。"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"未安裝任何服務"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"未選取任何服務"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"未提供說明。"</string>
@@ -3137,7 +3137,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"手勢"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"臉孔, 解鎖, 驗證, 登入"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"IMEI、MEID、MIN、PRL 版本、IMEI SV"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"網路、行動網路狀態、服務狀態、訊號強度、行動網路類型、漫遊、ICCID"</string>
+    <string name="keywords_sim_status" msgid="6682044233620329507">"網路, 行動網路狀態, 服務狀態, 訊號強度, 行動網路類型, 漫遊, ICCID, EID"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"序號、硬體版本"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android 安全性修補程式等級、基頻版本、核心版本"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"主題、淺色、深色、模式"</string>
@@ -3340,10 +3340,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"進階"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Work 通知"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"自動調整通知"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"自動排定優先順序"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"自動調整通知優先順序"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"自動將優先順序較低的通知設為無聲通知"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"建議採取的動作和回覆"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"自動顯示建議採取的動作和回覆"</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"允許顯示通知延後選項"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"隱藏無聲通知的圖示"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"無聲通知的圖示不會顯示在狀態列中"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"允許使用通知圓點"</string>
@@ -3371,22 +3372,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"閃爍燈光"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"螢幕鎖定"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"當工作資料夾遭鎖定時"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"螢幕鎖定畫面上的通知"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"顯示快訊和無聲通知"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"僅顯示快訊通知"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"不要顯示通知"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"敏感通知"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"鎖定時顯示敏感內容"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"敏感工作資料夾通知"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"鎖定時顯示敏感工作資料夾內容"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"顯示所有通知內容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"僅在解鎖狀態下顯示敏感內容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不顯示通知"</string>
@@ -3413,16 +3406,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"在畫面上彈出通知"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"封鎖"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"已設為優先"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"靜音"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"快訊"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"允許干擾"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"允許應用程式發出音效、震動，以及/或在畫面上彈出通知"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"將下拉式通知欄中的通知收合為單一行"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"協助你不受音效或震動干擾"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"發出音效或震動吸引你的注意力"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"裝置處於解鎖狀態時，在螢幕頂端以橫幅形式顯示通知"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"顯示通知"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"自動調整通知"</string>
@@ -4202,6 +4192,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"透過 3 個按鈕操作系統"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"傳統的 Android 系統操作機制，只要使用對應按鈕即可前往主螢幕、切換應用程式及返回。"</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"系統操作機制, 透過 2 個按鈕操作系統, 透過 3 個按鈕操作系統, 透過手勢操作系統"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"預設的主螢幕應用程式「<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>」不支援透過手勢操作系統"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"切換預設的主螢幕應用程式"</string>
+    <string name="information_label" msgid="8133109685432913360">"資訊"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"輕觸兩下手機即可查看"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"輕觸兩下平板電腦即可查看"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"輕觸兩下裝置即可查看"</string>
@@ -4489,8 +4482,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"未啟用/SIM 卡"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"已啟用/已下載的 SIM 卡"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"未啟用/已下載的 SIM 卡"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"SIM 卡名稱"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"重新命名"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"使用 SIM 卡"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"停用"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"要切換至「<xliff:g id="CARRIER">%1$s</xliff:g>」嗎？"</string>
