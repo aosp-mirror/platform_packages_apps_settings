@@ -2833,7 +2833,7 @@
     <!-- Setting option summary when adaptive sleep is off [CHAR LIMIT=NONE] -->
     <string name="adaptive_sleep_summary_off">Off</string>
     <!-- Description about the feature adaptive sleep [CHAR LIMIT=NONE]-->
-    <string name="adaptive_sleep_description">Prevents your screen from turning off if you’re looking at it.</string>
+    <string name="adaptive_sleep_description">Keep screen on when viewing it</string>
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_privacy">Screen attention uses the front camera to see if someone is looking at the screen. It works on device, and images are never stored or sent to Google.</string>
 
@@ -10208,7 +10208,7 @@
     <!-- Message for the alert dialog which says that the current default home app does not support gesture navigation. [CHAR LIMIT=NONE] -->
     <string name="gesture_not_supported_dialog_message">Not supported by your default home app, <xliff:g id="default_home_app" example="Pixel Launcher">%s</xliff:g></string>
 
-    <!-- Positive button for the alert dialog when gesture nav not supported by launcher [CHAR LIMIT=40] -->
+    <!-- Positive button for the alert dialog when gesture nav not supported by launcher [CHAR LIMIT=60] -->
     <string name="gesture_not_supported_positive_button">Switch default home app</string>
 
     <!-- Content description for the Information icon [CHAR LIMIT=30] -->
@@ -10961,10 +10961,14 @@
          subscription in various places in the Settings app. The default name is typically just the
          carrier name, but especially in multi-SIM configurations users may want to use a different
          name. [CHAR LIMIT=40] -->
-    <string name="mobile_network_sim_name">SIM name</string>
-    <!-- Label on the confirmation button of a dialog that lets a user set the display name of a
-         mobile network subscription [CHAR LIMIT=20] -->
-    <string name="mobile_network_sim_name_rename">Rename</string>
+    <string name="mobile_network_sim_name">SIM name &amp; color</string>
+    <!-- Label for an item listing the name of the SIM that the user has specified. [CHAR LIMIT=40] -->
+    <string name="mobile_network_sim_name_label">Name</string>
+    <!-- Label for an item listing the color of the SIM that the user has specified. [CHAR LIMIT=40] -->
+    <string name="mobile_network_sim_color_label">Color (used by compatible apps)</string>
+    <!-- Label on the confirmation button of a dialog that lets a user set the display name and
+         color of a mobile network subscription [CHAR LIMIT=20] -->
+    <string name="mobile_network_sim_name_rename">Save</string>
     <!-- Label for the on position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is enabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_on">Use SIM</string>

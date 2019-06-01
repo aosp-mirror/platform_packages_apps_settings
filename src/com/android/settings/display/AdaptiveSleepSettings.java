@@ -16,10 +16,15 @@
 
 package com.android.settings.display;
 
+import static com.android.settings.homepage.contextualcards.slices.ContextualAdaptiveSleepSlice.PREF;
+import static com.android.settings.homepage.contextualcards.slices.ContextualAdaptiveSleepSlice.PREF_KEY_INTERACTED;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -40,8 +45,15 @@ public class AdaptiveSleepSettings extends DashboardFragment {
         super.onCreate(icicle);
         final FooterPreference footerPreference =
                 mFooterPreferenceMixin.createFooterPreference();
+        final Context context = getContext();
+
         footerPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
         footerPreference.setTitle(R.string.adaptive_sleep_privacy);
+
+        context.getSharedPreferences(PREF, Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean(PREF_KEY_INTERACTED, true)
+                .apply();
     }
 
     @Override
