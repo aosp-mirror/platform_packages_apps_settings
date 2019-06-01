@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ResolveInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -65,7 +66,7 @@ public class FallbackHome extends Activity {
         @Override
         public void onColorsChanged(WallpaperColors colors, int which) {
             if (colors != null) {
-                View decorView = getWindow().getDecorView();
+                final View decorView = getWindow().getDecorView();
                 decorView.setSystemUiVisibility(
                         updateVisibilityFlagsFromColors(colors, decorView.getSystemUiVisibility()));
                 mWallManager.removeOnColorsChangedListener(this);
@@ -81,7 +82,7 @@ public class FallbackHome extends Activity {
         // we don't flash the wallpaper before SUW
         mProvisioned = Settings.Global.getInt(getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0) != 0;
-        int flags;
+        final int flags;
         if (!mProvisioned) {
             setTheme(R.style.FallbackHome_SetupWizard);
             flags = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -91,18 +92,11 @@ public class FallbackHome extends Activity {
                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
         }
 
-        // Set the system ui flags to light status bar if the wallpaper supports dark text to match
-        // current system ui color tints. Use a listener to wait for colors if not ready yet.
         mWallManager = getSystemService(WallpaperManager.class);
         if (mWallManager == null) {
             Log.w(TAG, "Wallpaper manager isn't ready, can't listen to color changes!");
         } else {
-            WallpaperColors colors = mWallManager.getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
-            if (colors == null) {
-                mWallManager.addOnColorsChangedListener(mColorsChangedListener, null /* handler */);
-            } else {
-                flags = updateVisibilityFlagsFromColors(colors, flags);
-            }
+            loadWallpaperColors(flags);
         }
         getWindow().getDecorView().setSystemUiVisibility(flags);
 
@@ -139,6 +133,33 @@ public class FallbackHome extends Activity {
         }
     };
 
+    private void loadWallpaperColors(int flags) {
+        final AsyncTask loadWallpaperColorsTask = new AsyncTask<Object, Void, Integer>() {
+            @Override
+            protected Integer doInBackground(Object... params) {
+                final WallpaperColors colors =
+                        mWallManager.getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
+
+                // Use a listener to wait for colors if not ready yet.
+                if (colors == null) {
+                    mWallManager.addOnColorsChangedListener(mColorsChangedListener,
+                            null /* handler */);
+                    return null;
+                }
+                return updateVisibilityFlagsFromColors(colors, flags);
+            }
+
+            @Override
+            protected void onPostExecute(Integer flagsToUpdate) {
+                if (flagsToUpdate == null) {
+                    return;
+                }
+                getWindow().getDecorView().setSystemUiVisibility(flagsToUpdate);
+            }
+        };
+        loadWallpaperColorsTask.execute();
+    }
+
     private void maybeFinish() {
         if (getSystemService(UserManager.class).isUserUnlocked()) {
             final Intent homeIntent = new Intent(Intent.ACTION_MAIN)
@@ -162,6 +183,8 @@ public class FallbackHome extends Activity {
         }
     }
 
+    // Set the system ui flags to light status bar if the wallpaper supports dark text to match
+    // current system ui color tints.
     private int updateVisibilityFlagsFromColors(WallpaperColors colors, int flags) {
         if ((colors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_TEXT) != 0) {
             return flags | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
