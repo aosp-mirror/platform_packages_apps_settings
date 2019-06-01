@@ -70,7 +70,7 @@ import java.util.stream.Collectors;
  * return an stub {@link Slice} with the correct {@link Uri} immediately. In the background, the
  * data corresponding to the key in the {@link Uri} is read by {@link SlicesDatabaseAccessor}, and
  * the entire row is converted into a {@link SliceData}. Once complete, it is stored in
- * {@link #mSliceDataCache}, and then an update sent via the Slice framework to the Slice.
+ * {@link #mSliceWeakDataCache}, and then an update sent via the Slice framework to the Slice.
  * The {@link Slice} displayed by the Slice-presenter will re-query this Slice-provider and find
  * the {@link SliceData} cached to build the full {@link Slice}.
  *
@@ -111,13 +111,6 @@ public class SettingsSliceProvider extends SliceProvider {
      * Intent Extra passed for the key identifying the Setting Slice.
      */
     public static final String EXTRA_SLICE_KEY = "com.android.settings.slice.extra.key";
-
-    /**
-     * Boolean extra to indicate if the Slice is platform-defined.
-     */
-    public static final String EXTRA_SLICE_PLATFORM_DEFINED =
-            "com.android.settings.slice.extra.platform";
-
 
     /**
      * A list of custom slice uris that are supported publicly. This is a subset of slices defined

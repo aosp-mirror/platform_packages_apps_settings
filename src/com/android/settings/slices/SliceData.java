@@ -71,8 +71,6 @@ public class SliceData {
     @SliceType
     private final int mSliceType;
 
-    private final boolean mIsPlatformDefined;
-
     private final String mUnavailableSliceSubtitle;
 
     public String getKey() {
@@ -115,10 +113,6 @@ public class SliceData {
         return mSliceType;
     }
 
-    public boolean isPlatformDefined() {
-        return mIsPlatformDefined;
-    }
-
     public String getUnavailableSliceSubtitle() {
         return mUnavailableSliceSubtitle;
     }
@@ -134,7 +128,6 @@ public class SliceData {
         mUri = builder.mUri;
         mPreferenceController = builder.mPrefControllerClassName;
         mSliceType = builder.mSliceType;
-        mIsPlatformDefined = builder.mIsPlatformDefined;
         mUnavailableSliceSubtitle = builder.mUnavailableSliceSubtitle;
     }
 
@@ -172,8 +165,6 @@ public class SliceData {
         private String mPrefControllerClassName;
 
         private int mSliceType;
-
-        private boolean mIsPlatformDefined;
 
         private String mUnavailableSliceSubtitle;
 
@@ -224,11 +215,6 @@ public class SliceData {
 
         public Builder setSliceType(@SliceType int sliceType) {
             mSliceType = sliceType;
-            return this;
-        }
-
-        public Builder setPlatformDefined(boolean isPlatformDefined) {
-            mIsPlatformDefined = isPlatformDefined;
             return this;
         }
 

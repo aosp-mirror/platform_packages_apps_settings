@@ -73,5 +73,4 @@ class SliceTestUtils {
         db.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
         db.close();
     }
-
 }

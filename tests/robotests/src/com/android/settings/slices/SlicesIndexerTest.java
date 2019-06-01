@@ -52,7 +52,6 @@ public class SlicesIndexerTest {
     private final int ICON = 1234; // I declare a thumb war
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
-    private final boolean PLATFORM_DEFINED = true;
     private final int SLICE_TYPE = SliceData.SliceType.SLIDER;
     private final String UNAVAILABLE_SLICE_SUBTITLE = "subtitleOfUnavailableSlice";
 
@@ -136,9 +135,6 @@ public class SlicesIndexerTest {
                 assertThat(
                         cursor.getString(cursor.getColumnIndex(IndexColumns.CONTROLLER)))
                         .isEqualTo(PREF_CONTROLLER);
-                assertThat(cursor.getInt(
-                        cursor.getColumnIndex(IndexColumns.PLATFORM_SLICE)))
-                        .isEqualTo(1 /* true */);
                 assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.SLICE_TYPE)))
                         .isEqualTo(SLICE_TYPE);
                 assertThat(cursor.getString(
@@ -176,7 +172,6 @@ public class SlicesIndexerTest {
                 .setIcon(ICON)
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
-                .setPlatformDefined(PLATFORM_DEFINED)
                 .setSliceType(SLICE_TYPE)
                 .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE);
 

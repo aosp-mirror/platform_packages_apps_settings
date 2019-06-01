@@ -48,13 +48,9 @@ public class SlicesDatabaseAccessor {
             IndexColumns.ICON_RESOURCE,
             IndexColumns.FRAGMENT,
             IndexColumns.CONTROLLER,
-            IndexColumns.PLATFORM_SLICE,
             IndexColumns.SLICE_TYPE,
             IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
     };
-
-    // Cursor value for boolean true
-    private static final int TRUE = 1;
 
     private final Context mContext;
     private final SlicesDatabaseHelper mHelper;
@@ -159,8 +155,6 @@ public class SlicesDatabaseAccessor {
                 cursor.getColumnIndex(IndexColumns.FRAGMENT));
         final String controllerClassName = cursor.getString(
                 cursor.getColumnIndex(IndexColumns.CONTROLLER));
-        final boolean isPlatformDefined = cursor.getInt(
-                cursor.getColumnIndex(IndexColumns.PLATFORM_SLICE)) == TRUE;
         int sliceType = cursor.getInt(
                 cursor.getColumnIndex(IndexColumns.SLICE_TYPE));
         final String unavailableSliceSubtitle = cursor.getString(
@@ -180,7 +174,6 @@ public class SlicesDatabaseAccessor {
                 .setFragmentName(fragmentClassName)
                 .setPreferenceControllerClassName(controllerClassName)
                 .setUri(uri)
-                .setPlatformDefined(isPlatformDefined)
                 .setSliceType(sliceType)
                 .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                 .build();

@@ -124,7 +124,6 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_CLASSNAME);
         assertThat(fakeSlice.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
         assertThat(fakeSlice.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER);
-        assertThat(fakeSlice.isPlatformDefined()).isTrue(); // from XML
         assertThat(fakeSlice.getUnavailableSliceSubtitle()).isEqualTo(
                 "subtitleOfUnavailableSlice"); // from XML
     }
