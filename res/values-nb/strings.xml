@@ -863,7 +863,7 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Slå på Wi‑Fi automatisk"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi slås på igjen i nærheten av lagrede nettverk av høy kvalitet, for eksempel hjemmenettverket ditt"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="7494539594649967699">"Utilgjengelig fordi Posisjon er slått av. Slå på "<annotation id="link">"Posisjon"</annotation>"."</string>
-    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Utilgjengelig fordi Wi‑Fi-skanning er slått av"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Utilgjengelig fordi Wi‑Fi-søking er slått av"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"For å bruke funksjonen, velg en leverandør av nettverksvurdering"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Unngå dårlige tilkoblinger"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"Ikke bruk et Wi-Fi-nettverk med mindre det har en brukbar internettilkobling"</string>
@@ -905,8 +905,8 @@
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Du har ikke tillatelse til å endre Wi-Fi-nettverk."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Se mer"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Automatisk konfig. (WPS)"</string>
-    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"Vil du slå på Wi‑Fi-skanning?"</string>
-    <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"For å slå på Wi-Fi automatisk må du først slå på Wi-Fi-skanning."</string>
+    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"Vil du slå på Wi‑Fi-søking?"</string>
+    <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"For å slå på Wi-Fi automatisk må du først slå på Wi-Fi-søking."</string>
     <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Med Wi-Fi-skanning kan apper og tjenester søke etter enheter i nærheten når som helst, selv når Wi-Fi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"Slå på"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"Wi‑Fi-skanning er slått på"</string>
@@ -1358,8 +1358,8 @@
     <string name="status_prl_version" msgid="1007470446618081441">"PRL-versjon"</string>
     <string name="meid_multi_sim" msgid="748999971744491771">"MEID (SIM-kortspor %1$d)"</string>
     <string name="scanning_status_text_wifi_on_ble_on" msgid="5262263689045962681">"Både Wi‑Fi- og Bluetooth-skanning er på"</string>
-    <string name="scanning_status_text_wifi_on_ble_off" msgid="2115399719199757550">"Wi‑Fi-skanning er på, Bluetooth-søking er av"</string>
-    <string name="scanning_status_text_wifi_off_ble_on" msgid="3212656150021004088">"Bluetooth-søking er på, Wi-Fi-skanning er av"</string>
+    <string name="scanning_status_text_wifi_on_ble_off" msgid="2115399719199757550">"Wi‑Fi-søking er på, Bluetooth-søking er av"</string>
+    <string name="scanning_status_text_wifi_off_ble_on" msgid="3212656150021004088">"Bluetooth-søking er på, Wi-Fi-søking er av"</string>
     <string name="scanning_status_text_wifi_off_ble_off" msgid="6381094990708345188">"Både Wi‑Fi- og Bluetooth-skanning er av"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
@@ -2102,7 +2102,7 @@
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 minutt"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minutter"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Tid for å gjøre noe (tidsavbrudd)"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Tid til å gjøre noe"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Tidsperiode for handling"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Velg hvor lenge du vil se meldinger som ber deg gjøre noe, men som bare vises midlertidig.\n\nIkke alle apper støtter denne innstillingen."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Forsinkelse for trykk-og-hold"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Fargeinvertering"</string>
@@ -3137,7 +3137,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"bevegelse"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"ansikt, lås opp, autentisering, pålogging"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl-versjon, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"nettverk, status for mobilnettverk, servicestatus, signalstyrke, mobilnettverkstype, roaming, iccid"</string>
+    <string name="keywords_sim_status" msgid="6682044233620329507">"nettverk, status for mobilnettverk, servicestatus, signalstyrke, mobilnettverkstype, roaming, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serienummer, maskinvareversjon"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"nivå av sikkerhetsoppdatering i Android, basisbåndversjon, kjerneversjon"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"tema, lyst, mørkt, modus"</string>
@@ -3340,10 +3340,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Avansert"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Jobbvarsler"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Varsler som kan tilpasses"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Automatisk prioritering"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Tilpasset varselprioritet"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Angi varsler med lavere prioritet automatisk til Diskré"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Foreslåtte handlinger og svar"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Vis foreslåtte handlinger og svar automatisk"</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"Tillat slumring av varsler"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Skjul ikoner fra diskré varsler"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Ikoner fra diskré varsler vises ikke i statusfeltet"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Tillat varselprikker"</string>
@@ -3371,22 +3372,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blinkende lys"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Låseskjerm"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Når jobbprofilen er låst"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Varsler på låseskjermen"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Vis varsler med varsling og lydløse varsler"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Vis bare varsler med varsling"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Ikke vis varsler"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Sensitive varsler"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Vis sensitivt innhold når skjermen er låst"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Sensitive varsler fra jobbprofilen"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Vis sensitivt innhold fra jobbprofilen når skjermen er låst"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Vis alt innhold i varsler"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Bare vis sensitivt innhold når enheten er låst opp"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Ikke vis varsler i det hele tatt"</string>
@@ -3413,16 +3406,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Høy"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Vis i forgrunnen"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blokkér"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Prioritert"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"Lydløs"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Varsling"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Tillat forstyrrelser"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"La appen lage lyd, vibrere og/eller vise varsler på skjermen"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"I nedtrekkspanelet reduserer du varsler til én linje"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Hjelper deg med å fokusere uten lyd eller vibrering"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Får oppmerksomheten din med lyd eller vibrering"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Når enheten låses opp, vises varsler som et banner over toppen av skjermen"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Vis varsler"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Varsler som kan tilpasses"</string>
@@ -4197,11 +4187,14 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"For å bytte app, sveip opp på startsideknappen. Sveip opp igjen for å se alle apper. Dette fungerer på hvilken som helst skjerm. Du trenger ikke å ha en Oversikt-knapp nederst til høyre på skjermen lenger."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Prøv den nye startsideknappen"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Slå på den nye bevegelsen for å bytte apper"</string>
-    <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigasjon med fakter"</string>
+    <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigasjon med bevegelser"</string>
     <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"For å gå til startsiden, sveip opp fra bunnen av skjermen. For å gå tilbake, sveip fra enten venstre eller høyre kant av skjermen. For å bytte app, start å sveipe fra bunnen av skjermen, og hold før du slipper."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigasjon med tre knapper"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klassisk navigasjonsmodus for Android der du kan gå til startsiden, bytte app og gå tilbake med knapper."</string>
-    <string name="keywords_system_navigation" msgid="5825645072714635357">"systemnavigasjon, navigasjon med to knapper, navigasjon med tre knapper, navigasjon med fakter"</string>
+    <string name="keywords_system_navigation" msgid="5825645072714635357">"systemnavigasjon, navigasjon med to knapper, navigasjon med tre knapper, navigasjon med bevegelser"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Støttes ikke av standard startsideapp, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Bytt standard startsideapp"</string>
+    <string name="information_label" msgid="8133109685432913360">"Informasjon"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dobbelttrykk for å sjekke telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Dobbelttrykk for å sjekke nettbrettet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Dobbelttrykk for å sjekke enheten"</string>
@@ -4489,8 +4482,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Inaktiv / SIM-kort"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktiv / nedlastet SIM-kort"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Inaktiv / nedlastet SIM-kort"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"Navn på SIM-kort"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Gi nytt navn"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Bruk SIM-kort"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Av"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Vil du bytte til <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>

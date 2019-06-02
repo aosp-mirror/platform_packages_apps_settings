@@ -905,8 +905,8 @@
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Vous n\'avez pas l\'autorisation de modifier le réseau Wi‑Fi."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Plus"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Configuration auto (WPS)"</string>
-    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"Activer la recherche de réseaux Wi-Fi ?"</string>
-    <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Pour activer automatiquement le Wi‑Fi, vous devez d\'abord activer la recherche de réseaux Wi‑Fi."</string>
+    <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"Activer la recherche Wi-Fi ?"</string>
+    <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Pour activer automatiquement le Wi‑Fi, vous devez d\'abord activer la recherche Wi‑Fi."</string>
     <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"L\'option \"Recherche Wi-Fi\" autorise les applications et les services à rechercher des réseaux Wi-Fi à tout moment, même si le Wi-Fi est désactivé. Cette autorisation peut permettre, par exemple, d\'améliorer les fonctionnalités et les services basés sur la localisation."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"Activer"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"Recherche Wi-Fi activée"</string>
@@ -2102,7 +2102,7 @@
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 minute"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minutes"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Délai pour effectuer une action (accessibilité)"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Durée pour effectuer une action"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Temps pour réagir"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Choisissez la durée d\'affichage des messages qui vous demandent d\'effectuer une action, mais dont la visibilité est temporaire.\n\nCertaines applications ne sont pas compatibles avec ce paramètre."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Délai de pression"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversion des couleurs"</string>
@@ -3137,7 +3137,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"geste"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"visage, déverrouiller, authentifier, se connecter"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, version prl, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"réseau, état du réseau mobile, état du service, force du signal, type de réseau mobile, roaming, iccid"</string>
+    <string name="keywords_sim_status" msgid="6682044233620329507">"réseau, état du réseau mobile, état du service, force du signal, type de réseau mobile, roaming, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"numéro de série, version logicielle"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"mise à jour du correctif de sécurité Android, version de bande de base, version de noyau"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"thème, clair, foncé, mode"</string>
@@ -3340,10 +3340,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Paramètres avancés"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notifications profil pro"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Notifications intelligentes"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Hiérarchisation automatique"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Priorité des notifications intelligentes"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Définir automatiquement les notifications à faible priorité sur Discret"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Actions et réponses suggérées"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Afficher automatiquement les actions et réponses suggérées"</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"Autoriser la répétition des notifications"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Masquer les icônes des notifications discrètes"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Les icônes des notifications discrètes ne s\'affichent pas dans la barre d\'état"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Autoriser les pastilles de notification"</string>
@@ -3371,22 +3372,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Clignotement"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Écran de verrouillage"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Profil professionnel verrouillé"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Notifications sur l\'écran de verrouillage"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Afficher les notifications d\'alertes et notif. silencieuses"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Afficher les notifications d\'alerte uniquement"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Ne pas afficher les notifications"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Notifications de contenu sensible"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Afficher les contenus sensibles lorsque l\'écran est verrouillé"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Notifications de contenu sensible du profil professionnel"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Afficher les contenus sensibles du profil professionnel lorsque l\'écran est verrouillé"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Afficher tout le contenu des notifications"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Afficher les contenus sensibles seulement si l\'appareil est déverrouillé"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Ne pas afficher les notifications"</string>
@@ -3413,16 +3406,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Élevée"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Afficher sur l\'écran"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Bloquer"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Notifications prioritaires"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"Silencieux"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Alertes"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Autoriser les interruptions"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Autoriser l\'application à émettre des sons, vibrer et/ou afficher des notifications à l\'écran"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Dans le volet déroulant, afficher les notifications sur une seule ligne"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Sans sons ni vibrations, vous aide à vous concentrer"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Attire votre attention à l\'aide de sons ou de vibrations"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Lorsque l\'appareil est déverrouillé, afficher les notifications dans une bannière en haut de l\'écran"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Afficher les notifications"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Notifications intelligentes"</string>
@@ -4202,6 +4192,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigation à trois boutons"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"Mode de navigation classique d\'Android, dans lequel des boutons permettent d\'accéder à l\'écran d\'accueil, de changer d\'application et de revenir en arrière."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigation système, navigation à deux boutons, navigation à trois boutons, navigation par gestes"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Non compatible avec votre application d\'écran d\'accueil par défaut (<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>)"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Modifier appli écran d\'accueil par déf."</string>
+    <string name="information_label" msgid="8133109685432913360">"Informations"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Appuyer deux fois sur le téléphone pour le consulter"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Appuyez deux fois sur la tablette pour la consulter"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Appuyez deux fois sur l\'appareil pour le consulter"</string>
@@ -4489,8 +4482,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Inactif/Carte SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Actif/Carte SIM téléchargée"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Inactif/Carte SIM téléchargée"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"Nom de la carte SIM"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Renommer"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Utiliser la carte SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Désactivé"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Utiliser <xliff:g id="CARRIER">%1$s</xliff:g> ?"</string>

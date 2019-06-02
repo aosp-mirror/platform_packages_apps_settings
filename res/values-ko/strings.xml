@@ -2112,7 +2112,7 @@
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"지연 후 클릭"</string>
     <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"진동 및 햅틱 강도"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"알림 진동"</string>
-    <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"진동 벨소리"</string>
+    <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"벨소리 진동"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"터치 반응"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"서비스 사용"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"색상 보정 사용"</string>
@@ -3137,7 +3137,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"동작"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"얼굴, 잠금 해제, 승인, 로그인"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"IMEI, MEID, MIN, PRL 버전, IMEI SV"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"네트워크, 모바일 네트워크 상태, 서비스 상태, 신호 강도, 모바일 네트워크 유형, 로밍, ICCID"</string>
+    <string name="keywords_sim_status" msgid="6682044233620329507">"네트워크, 모바일 네트워크 상태, 서비스 상태, 신호 강도, 모바일 네트워크 유형, 로밍, ICCID, EID"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"일련번호, 하드웨어 버전"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android 보안 패치 수준, 베이스밴드 버전, 커널 버전"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"테마, 밝게, 어둡게, 모드"</string>
@@ -3340,10 +3340,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"고급"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"직장 알림"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"적응형 알림"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"자동 우선순위 지정"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"적응형 알림 우선순위"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"우선순위가 낮은 알림을 조용한 알림으로 자동 설정합니다."</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"추천 작업 및 답장"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"추천 작업 및 답장을 자동으로 표시합니다."</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"알림 일시 중지 허용"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"조용한 알림 아이콘 숨기기"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"조용한 알림 아이콘이 상태 표시줄에 표시되지 않습니다."</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"알림 표시 점 허용"</string>
@@ -3371,22 +3372,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"표시등 깜박임"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"잠금 화면"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"직장 프로필이 잠긴 경우"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"잠금 화면에 표시할 알림"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"경고 및 무음 알림 표시"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"경고 알림만 표시"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"알림 표시 안함"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"민감한 알림"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"잠금 상태일 때 민감한 콘텐츠 표시"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"민감한 직장 프로필 알림"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"잠금 상태일 때 민감한 직장 프로필 콘텐츠 표시"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"모든 알림 내용 표시"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"잠금이 해제되었을 때만 민감한 콘텐츠 표시"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"알림 표시 안함"</string>
@@ -3413,16 +3406,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"높음"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"화면 표시로 알림"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"차단"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"우선순위 지정됨"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"무음"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"알림"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"알림 허용"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"앱의 소리, 진동, 화면 알림 표시 허용"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"풀다운 창에서 알림을 한 줄로 접습니다."</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"소리나 진동 없이 집중할 수 있도록 도와줍니다"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"소리나 진동으로 주의를 끕니다"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"기기가 잠금 해제되었을 때 화면 상단에 알림 배너 표시"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"알림 표시"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"적응형 알림"</string>
@@ -4202,6 +4192,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3버튼 탐색"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"버튼을 사용하여 홈으로 이동하고, 앱을 전환하고, 뒤로 이동할 수 있는 기존의 Android 탐색 모드입니다."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"시스템 탐색, 2버튼 탐색, 3버튼 탐색, 동작 탐색"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"기본 홈 앱(<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>)에서 지원하지 않는 기능입니다."</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"기본 홈 앱 전환"</string>
+    <string name="information_label" msgid="8133109685432913360">"정보"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"두 번 탭하여 휴대전화 확인"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"두 번 탭하여 태블릿 확인"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"두 번 탭하여 기기 확인"</string>
@@ -4489,8 +4482,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"비활성/SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"활성/다운로드한 SIM"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"비활성/다운로드한 SIM"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"SIM 이름"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"이름 변경"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"SIM 사용"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"꺼짐"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"<xliff:g id="CARRIER">%1$s</xliff:g>(으)로 전환하시겠습니까?"</string>

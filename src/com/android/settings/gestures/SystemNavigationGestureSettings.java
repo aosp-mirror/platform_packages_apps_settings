@@ -21,6 +21,10 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON_OVE
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY;
 
+import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_GONE;
+import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_INFO;
+
+import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -29,7 +33,6 @@ import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.SearchIndexableResource;
-import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -41,6 +44,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
+import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
@@ -94,8 +98,25 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
     }
 
     @Override
-    protected void addStaticPreferences(PreferenceScreen screen) {
+    public void updateCandidates() {
+        final String defaultKey = getDefaultKey();
+        final String systemDefaultKey = getSystemDefaultKey();
+        final PreferenceScreen screen = getPreferenceScreen();
+        screen.removeAll();
         screen.addPreference(mVideoPreference);
+
+        final List<? extends CandidateInfo> candidateList = getCandidates();
+        if (candidateList == null) {
+            return;
+        }
+        for (CandidateInfo info : candidateList) {
+            RadioButtonPreferenceWithExtraWidget pref =
+                    new RadioButtonPreferenceWithExtraWidget(getPrefContext());
+            bindPreference(pref, info.getKey(), info, defaultKey);
+            bindPreferenceExtra(pref, info.getKey(), info, defaultKey, systemDefaultKey);
+            screen.addPreference(pref);
+        }
+        mayCheckOnlyRadioButton();
     }
 
     @Override
@@ -135,6 +156,13 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
 
     @Override
     protected boolean setDefaultKey(String key) {
+        final Context c = getContext();
+        if (key == KEY_SYSTEM_NAV_GESTURAL &&
+                !SystemNavigationPreferenceController.isGestureNavSupportedByDefaultLauncher(c)) {
+            // This should not happen since the preference is disabled. Return to be safe.
+            return false;
+        }
+
         setCurrentSystemNavigationMode(mOverlayManager, key);
         setIllustrationVideo(mVideoPreference, key);
         return true;
@@ -196,10 +224,36 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
     @Override
     public void bindPreferenceExtra(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
-        if (info instanceof NavModeCandidateInfo) {
-            pref.setSummary(((NavModeCandidateInfo) info).loadSummary());
-            pref.setAppendixVisibility(View.GONE);
+        if (!(info instanceof NavModeCandidateInfo)
+                || !(pref instanceof RadioButtonPreferenceWithExtraWidget)) {
+            return;
         }
+
+        pref.setSummary(((NavModeCandidateInfo) info).loadSummary());
+
+        RadioButtonPreferenceWithExtraWidget p = (RadioButtonPreferenceWithExtraWidget) pref;
+        if (info.getKey() == KEY_SYSTEM_NAV_GESTURAL
+                && !SystemNavigationPreferenceController.isGestureNavSupportedByDefaultLauncher(
+                        getContext())) {
+            p.setEnabled(false);
+            p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_INFO);
+            p.setExtraWidgetOnClickListener((v) -> {
+                showGestureNavDisabledDialog();
+            });
+        } else {
+            p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_GONE);
+        }
+    }
+
+    private void showGestureNavDisabledDialog() {
+        final String defaultHomeAppName = SystemNavigationPreferenceController
+                .getDefaultHomeAppName(getContext());
+        final String message = getString(R.string.gesture_not_supported_dialog_message,
+                defaultHomeAppName);
+        AlertDialog d = new AlertDialog.Builder(getContext())
+                .setMessage(message)
+                .setPositiveButton(R.string.okay, null)
+                .show();
     }
 
     static class NavModeCandidateInfo extends CandidateInfo {

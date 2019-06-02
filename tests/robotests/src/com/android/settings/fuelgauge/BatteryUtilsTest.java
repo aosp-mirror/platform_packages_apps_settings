@@ -369,6 +369,15 @@ public class BatteryUtilsTest {
     }
 
     @Test
+    public void testShouldHideSipper_hiddenSystemModule_ReturnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mNormalBatterySipper.getUid()).thenReturn(UID);
+        when(mBatteryUtils.isHiddenSystemModule(mNormalBatterySipper)).thenReturn(true);
+
+        assertThat(mBatteryUtils.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
     public void testCalculateBatteryPercent() {
         assertThat(mBatteryUtils.calculateBatteryPercent(BATTERY_SYSTEM_USAGE, TOTAL_BATTERY_USAGE,
                 HIDDEN_USAGE, DISCHARGE_AMOUNT))

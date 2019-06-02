@@ -3137,7 +3137,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"gerak isyarat"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"wajah, buka kunci, auth, daftar masuk"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, versi prl, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"rangkaian, keadaan rangkaian mudah alih, keadaan perkhidmatan, kekuatan isyarat, jenis rangkaian mudah alih, perayauan, iccid"</string>
+    <string name="keywords_sim_status" msgid="6682044233620329507">"rangkaian, keadaan rangkaian mudah alih, keadaan perkhidmatan, kekuatan isyarat, jenis rangkaian mudah alih, perayauan, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"nombor siri, versi perkakasan"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"tahap tampung keselamatan android, versi jalur dasar, versi inti"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"tema, cerah, gelap, mod"</string>
@@ -3340,10 +3340,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Terperinci"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Pemberitahuan kerja"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Pemberitahuan boleh suai"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Pengutamaan Automatik"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Keutamaan pemberitahuan mudah suai"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Tetapkan pemberitahuan berkeutamaan rendah kepada Lembut secara automatik"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Tindakan dan balasan yang dicadangkan"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Tunjukkan secara automatik tindakan &amp; balasan yang dicadangkan"</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"Benarkan penundaan pemberitahuan"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Sembunyikan ikon daripada pemberitahuan lembut"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Ikon daripada pemberitahuan lembut tidak ditunjukkan dalam bar status"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Benarkan titik pemberitahuan"</string>
@@ -3371,22 +3372,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Lampu berkelip"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Skrin kunci"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Apabila profil kerja dikunci"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Pemberitahuan pada skrin kunci"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Tunjukkan pemberitahuan makluman dan pemberitahuan senyap"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Tunjukkan pemberitahuan makluman sahaja"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Jangan tunjukkan pemberitahuan"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Pemberitahuan sensitif"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Tunjukkan kandungan sensitif apabila berkunci"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Pemberitahuan profil kerja sensitif"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Tunjukkan kandungan profil kerja sensitif apabila berkunci"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Tunjukkan semua kandungan pemberitahuan"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Tnjkkan kandungan sensitif apabila tdk brknci shj"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Jangan tunjukkan pemberitahuan sama sekali"</string>
@@ -3413,16 +3406,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Tinggi"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Paparkan pada skrin"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Sekat"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Diutamakan"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"Senyap"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Memaklumi"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Benarkan gangguan"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Benarkan apl membuat bunyi, bergetar dan/atau memaparkan pemberitahuan pada skrin"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Dalam bidai tarik turun, runtuhkan pemberitahuan kepada satu baris"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Membantu anda fokus tanpa bunyi atau getaran"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Menarik perhatian anda dengan bunyi atau getaran"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Apabila kunci peranti dibuka, tunjukkan pemberitahan sebagai sepanduk di bahagian atas skrin"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Tunjukkan pemberitahuan"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Pemberitahuan Boleh Suai"</string>
@@ -4202,6 +4192,9 @@
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigasi 3 butang"</string>
     <string name="legacy_navigation_summary" msgid="8824432558082404832">"Dalam mod navigasi Android Klasik, anda boleh pergi ke Skrin Utama, bertukar apl dan Kembali melalui butang."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigasi sistem, navigasi 2 butang, navigasi 3 butang, navigasi gerak isyarat."</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Tidak disokong oleh apl rumah anda, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Tukar apl rumah lalai"</string>
+    <string name="information_label" msgid="8133109685432913360">"Maklumat"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Ketik dua kali untuk menyemak telefon"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Ketik dua kali untuk menyemak tablet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Ketik dua kali untuk menyemak peranti"</string>
@@ -4489,8 +4482,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Tidak aktif / SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktif / SIM Dimuat Turun"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Tidak Aktif / SIM Dimuat Turun"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"Nama SIM"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Namakan semula"</string>
+    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
+    <skip />
+    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
+    <skip />
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Gunakan SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Mati"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Tukar kepada <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
