@@ -33,12 +33,13 @@ import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Utility methods for data usage classes.
  */
-public final class DataUsageUtils {
+public final class DataUsageUtils extends com.android.settingslib.net.DataUsageUtils {
     static final boolean TEST_RADIOS = false;
     static final String TEST_RADIOS_PROP = "test.radios";
     private static final boolean LOGD = false;
@@ -71,14 +72,14 @@ public final class DataUsageUtils {
             return false;
         }
 
-        final TelephonyManager telephonyManager = TelephonyManager.from(context);;
+        final TelephonyManager telephonyManager = TelephonyManager.from(context);
         final NetworkStatsManager networkStatsManager =
-            context.getSystemService(NetworkStatsManager.class);
+                context.getSystemService(NetworkStatsManager.class);
         boolean hasEthernetUsage = false;
         try {
             final Bucket bucket = networkStatsManager.querySummaryForUser(
-                ConnectivityManager.TYPE_ETHERNET, telephonyManager.getSubscriberId(),
-                0L /* startTime */, System.currentTimeMillis() /* endTime */);
+                    ConnectivityManager.TYPE_ETHERNET, telephonyManager.getSubscriberId(),
+                    0L /* startTime */, System.currentTimeMillis() /* endTime */);
             if (bucket != null) {
                 hasEthernetUsage = bucket.getRxBytes() > 0 || bucket.getTxBytes() > 0;
             }
@@ -106,7 +107,7 @@ public final class DataUsageUtils {
             return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
         }
         final List<SubscriptionInfo> subInfoList =
-            SubscriptionManager.from(context).getActiveSubscriptionInfoList(true);
+                SubscriptionManager.from(context).getActiveSubscriptionInfoList(true);
         // No activated Subscriptions
         if (subInfoList == null) {
             if (LOGD) {
@@ -127,9 +128,9 @@ public final class DataUsageUtils {
         final boolean retVal = conn.isNetworkSupported(TYPE_MOBILE) && isReady;
         if (LOGD) {
             Log.d(TAG, "hasReadyMobileRadio:"
-                + " conn.isNetworkSupported(TYPE_MOBILE)="
-                + conn.isNetworkSupported(TYPE_MOBILE)
-                + " isReady=" + isReady);
+                    + " conn.isNetworkSupported(TYPE_MOBILE)="
+                    + conn.isNetworkSupported(TYPE_MOBILE)
+                    + " isReady=" + isReady);
         }
         return retVal;
     }
@@ -180,16 +181,12 @@ public final class DataUsageUtils {
      */
     public static NetworkTemplate getDefaultTemplate(Context context, int defaultSubId) {
         if (hasMobileData(context) && defaultSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            TelephonyManager telephonyManager = TelephonyManager.from(context)
-                    .createForSubscriptionId(defaultSubId);
-            NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
-                    telephonyManager.getSubscriberId(defaultSubId));
-            return NetworkTemplate.normalize(mobileAll,
-                    telephonyManager.getMergedSubscriberIds());
+            return getMobileTemplate(context, defaultSubId);
         } else if (hasWifiRadio(context)) {
             return NetworkTemplate.buildTemplateWifiWildcard();
         } else {
             return NetworkTemplate.buildTemplateEthernet();
         }
     }
+
 }
