@@ -19,7 +19,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
@@ -37,12 +36,9 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.DataUsageController;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +87,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
             hasMobileData = false;
         }
         mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, defaultSubId);
-        mSummaryPreference = (DataUsageSummaryPreference) findPreference(KEY_STATUS_HEADER);
+        mSummaryPreference = findPreference(KEY_STATUS_HEADER);
 
         if (!hasMobileData || !isAdmin()) {
             removePreference(KEY_RESTRICT_BACKGROUND);
@@ -155,7 +151,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_cellular);
-        category.setTemplate(getNetworkTemplate(subId), subId, services);
+        category.setTemplate(DataUsageUtils.getMobileTemplate(getContext(), subId),
+                subId, services);
         category.pushTemplates(services);
         if (subInfo != null && !TextUtils.isEmpty(subInfo.getDisplayName())) {
             Preference title  = category.findPreference(KEY_MOBILE_USAGE_TITLE);
@@ -187,13 +184,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         screen.addPreference(pref);
 
         return pref;
-    }
-
-    private NetworkTemplate getNetworkTemplate(int subscriptionId) {
-        NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
-                services.mTelephonyManager.getSubscriberId(subscriptionId));
-        return NetworkTemplate.normalize(mobileAll,
-                services.mTelephonyManager.getMergedSubscriberIds());
     }
 
     @Override
