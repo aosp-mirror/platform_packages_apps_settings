@@ -86,6 +86,12 @@
             settings:controller="com.android.settings.network.telephony.MmsMessagePreferenceController"/>
 
         <SwitchPreference
+            android:key="data_during_calls"
+            android:title="@string/data_during_calls_title"
+            android:summary="@string/data_during_calls_summary"
+            settings:controller="com.android.settings.network.telephony.DataDuringCallsPreferenceController"/>
+
+        <SwitchPreference
             android:key="enhanced_4g_lte"
             android:title="@string/enhanced_4g_lte_mode_title"
             android:persistent="false"
