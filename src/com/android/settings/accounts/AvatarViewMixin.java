@@ -67,7 +67,8 @@ public class AvatarViewMixin implements LifecycleObserver {
     private final MutableLiveData<Bitmap> mAvatarImage;
     private final ActivityManager mActivityManager;
 
-    private String mAccountName;
+    @VisibleForTesting
+    String mAccountName;
 
     public AvatarViewMixin(SettingsHomepageActivity activity, ImageView avatarView) {
         mContext = activity.getApplicationContext();
@@ -127,6 +128,7 @@ public class AvatarViewMixin implements LifecycleObserver {
         if (hasAccount()) {
             loadAccount();
         } else {
+            mAccountName = null;
             mAvatarView.setImageResource(R.drawable.ic_account_circle_24dp);
         }
     }
