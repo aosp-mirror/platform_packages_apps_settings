@@ -145,11 +145,7 @@ public class FaceSettings extends DashboardFragment {
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
         }
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
         if (mToken == null) {
             final long challenge = mFaceManager.generateChallenge();
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
@@ -159,7 +155,13 @@ public class FaceSettings extends DashboardFragment {
                 Log.e(TAG, "Password not set");
                 finish();
             }
-        } else {
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mToken != null) {
             mAttentionController.setToken(mToken);
             mEnrollController.setToken(mToken);
         }
@@ -194,12 +196,13 @@ public class FaceSettings extends DashboardFragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        mToken = null;
-        final int result = mFaceManager.revokeChallenge();
-        if (result < 0) {
-            Log.w(TAG, "revokeChallenge failed, result: " + result);
+    public void onDestroy() {
+        super.onDestroy();
+        if (getActivity().isFinishing()) {
+            final int result = mFaceManager.revokeChallenge();
+            if (result < 0) {
+                Log.w(TAG, "revokeChallenge failed, result: " + result);
+            }
         }
     }
 
