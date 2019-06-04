@@ -20,7 +20,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
+import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -38,6 +40,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
@@ -50,15 +54,20 @@ public class DataUsageSliceTest {
     private static final String DATA_USAGE_TITLE = "Data usage";
     private static final String DATA_USAGE_SUMMARY = "test_summary";
 
+    @Mock
+    private NetworkStatsManager mNetworkStatsManager;
+
     private Context mContext;
     private DataUsageSlice mDataUsageSlice;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        MockitoAnnotations.initMocks(this);
 
+        mContext = spy(RuntimeEnvironment.application);
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
+        when(mContext.getSystemService(NetworkStatsManager.class)).thenReturn(mNetworkStatsManager);
 
         mDataUsageSlice = spy(new DataUsageSlice(mContext));
 
