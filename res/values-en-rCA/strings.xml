@@ -2073,13 +2073,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Caption preferences"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Magnification"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Magnify with triple-tap"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Magnify with button"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Magnify with button &amp; triple-tap"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Magnify with shortcut"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Magnify with shortcut &amp; triple-tap"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Zoom in on screen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Tap 3 times to zoom"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Tap a button to zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"To zoom"</b>", quickly tap the screen 3 times.\n"<ul><li>"Drag 2 or more fingers to scroll"</li>\n<li>"Pinch 2 or more fingers to adjust zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", quickly tap the screen 3 times and hold down your finger on the third tap.\n"<ul><li>"Drag to move around the screen"</li>\n<li>"Lift finger to zoom out"</li></ul>\n\n"You can\'t zoom in on the keyboard and navigation bar."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"When magnification is turned on, use the Accessibility button at the bottom of the screen to quickly magnify.\n\n"<b>"To zoom"</b>", tap the Accessibility button, then tap anywhere on the screen.\n"<ul><li>"Drag 2 or more fingers to scroll"</li>\n<li>"Pinch 2 or more fingers to adjust zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", tap the Accessibility button, then touch &amp; hold anywhere on the screen.\n"<ul><li>"Drag to move around the screen"</li>\n<li>"Lift finger to zoom out"</li></ul>\n\n"You can’t zoom in on the keyboard or navigation bar."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"To zoom"</b>", start magnification, then tap anywhere on the screen.\n"<ul><li>"• Drag two or more fingers to scroll"</li>\n<li>"• Pinch two or more fingers to adjust zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", start magnification, then touch &amp; hold anywhere on the screen.\n"<ul><li>"• Drag to move around the screen"</li>\n<li>"• Lift finger to zoom out"</li></ul>\n\n"You can’t zoom in on the keyboard or navigation bar."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Use accessibility button to open"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Use gesture to open"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Use new accessibility gesture"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"To turn this service on or off, tap the accessibility button<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>at the bottom of your screen.\n\nTo switch between services, touch &amp; hold the accessibility button."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"To turn this service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"To turn this service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"To turn an accessibility service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"The accessibility button is set to <xliff:g id="SERVICE">%1$s</xliff:g>. To use magnification, touch &amp; hold the accessibility button, then select magnification."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Volume key shortcut"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Shortcut service"</string>
@@ -4482,14 +4491,10 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Inactive/SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Active/Downloaded SIM"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Inactive/Downloaded SIM"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"SIM name &amp; colour"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Name"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Colour (used by compatible apps)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Save"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Use SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Off"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Switch to <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
