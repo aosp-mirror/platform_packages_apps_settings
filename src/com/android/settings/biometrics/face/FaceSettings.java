@@ -69,6 +69,8 @@ public class FaceSettings extends DashboardFragment {
     private Preference mRemoveButton;
     private Preference mEnrollButton;
 
+    private boolean mConfirmingPassword;
+
     private final FaceSettingsRemoveButtonPreferenceController.Listener mRemovalListener = () -> {
 
         // Disable the toggles until the user re-enrolls
@@ -145,23 +147,27 @@ public class FaceSettings extends DashboardFragment {
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
         }
+    }
 
-        if (mToken == null) {
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mToken == null && !mConfirmingPassword) {
+            // Generate challenge in onResume instead of onCreate, since FaceSettings can be
+            // created while Keyguard is showing, in which case the resetLockout revokeChallenge
+            // will invalidate the too-early created challenge here.
             final long challenge = mFaceManager.generateChallenge();
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
+
+            mConfirmingPassword = true;
             if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
                     getString(R.string.security_settings_face_preference_title),
                     null, null, challenge, mUserId)) {
                 Log.e(TAG, "Password not set");
                 finish();
             }
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mToken != null) {
+        } else {
             mAttentionController.setToken(mToken);
             mEnrollController.setToken(mToken);
         }
@@ -175,6 +181,7 @@ public class FaceSettings extends DashboardFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CONFIRM_REQUEST) {
+            mConfirmingPassword = false;
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                 mFaceManager.setActiveUser(mUserId);
                 // The pin/pattern/password was set.
@@ -196,13 +203,20 @@ public class FaceSettings extends DashboardFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (getActivity().isFinishing()) {
-            final int result = mFaceManager.revokeChallenge();
-            if (result < 0) {
-                Log.w(TAG, "revokeChallenge failed, result: " + result);
+    public void onStop() {
+        super.onStop();
+
+        if (!mEnrollController.isClicked() && !getActivity().isChangingConfigurations()
+                && !mConfirmingPassword) {
+            // Revoke challenge and finish
+            if (mToken != null) {
+                final int result = mFaceManager.revokeChallenge();
+                if (result < 0) {
+                    Log.w(TAG, "revokeChallenge failed, result: " + result);
+                }
+                mToken = null;
             }
+            getActivity().finish();
         }
     }
 
