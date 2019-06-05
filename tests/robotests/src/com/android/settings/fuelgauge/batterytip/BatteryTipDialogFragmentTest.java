@@ -39,6 +39,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.fuelgauge.EstimateKt;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -100,6 +101,7 @@ public class BatteryTipDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void testOnCreateDialog_highUsageTip_fireHighUsageDialog() {
         Robolectric.getForegroundThreadScheduler().pause();
 
@@ -135,6 +137,7 @@ public class BatteryTipDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void testOnCreateDialog_restrictTwoAppsTip_fireRestrictTwoAppsDialog() {
         Robolectric.getForegroundThreadScheduler().pause();
 
