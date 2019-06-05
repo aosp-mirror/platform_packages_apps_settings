@@ -21,10 +21,15 @@ import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_INCOMING_
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_OUTGOING_MMS;
 import static android.provider.Settings.EXTRA_ENABLE_MMS_DATA_REQUEST_REASON;
 import static android.provider.Settings.EXTRA_SUB_ID;
+import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_NAMES;
+import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE;
+import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE_DUAL_CDMA;
 import static android.telephony.data.ApnSetting.TYPE_MMS;
 
 import static com.android.settings.sim.SimSelectNotification.ENABLE_MMS_NOTIFICATION_CHANNEL;
 import static com.android.settings.sim.SimSelectNotification.ENABLE_MMS_NOTIFICATION_ID;
+import static com.android.settings.sim.SimSelectNotification.SIM_WARNING_NOTIFICATION_CHANNEL;
+import static com.android.settings.sim.SimSelectNotification.SIM_WARNING_NOTIFICATION_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -76,10 +81,16 @@ public class SimSelectNotificationTest {
     @Mock
     private Resources mResources;
 
-    private String mFakeOperatorName = "fake_operator_name";
-    private CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
-    private CharSequence mFakeNotificationTitle = "fake_notification_title";
-    private String mFakeNotificationSummary = "fake_notification_Summary";
+    private final String mFakeOperatorName = "fake_operator_name";
+    private final CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
+    private final CharSequence mFakeNotificationTitle = "fake_notification_title";
+    private final String mFakeNotificationSummary = "fake_notification_Summary";
+
+    // Dual CDMA combination notification.
+    private final String mFakeDualCdmaWarningChannelTitle = "fake_dual_cdma_warning_channel_title";
+    private final String mFakeDualCdmaWarningTitle = "fake_dual_cdma_warning_title";
+    private final String mFakeDualCdmaWarningSummary = "fake_dual_cdma_warning_summary";
+    private final String mSimCombinationName = " carrier1 & carrier 2";
 
     private int mSubId = 1;
 
@@ -89,6 +100,8 @@ public class SimSelectNotificationTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.NOTIFICATION_SERVICE))
+                .thenReturn(mNotificationManager);
+        when(mContext.getSystemService(NotificationManager.class))
                 .thenReturn(mNotificationManager);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mTelephonyManager);
@@ -111,6 +124,13 @@ public class SimSelectNotificationTest {
                 .thenReturn(mFakeNotificationChannelTitle);
         when(mResources.getString(R.string.enable_mms_notification_summary,
                 mFakeOperatorName)).thenReturn(mFakeNotificationSummary);
+
+        when(mResources.getText(R.string.dual_cdma_sim_warning_notification_channel_title))
+                .thenReturn(mFakeDualCdmaWarningChannelTitle);
+        when(mResources.getText(R.string.sim_combination_warning_notification_title))
+                .thenReturn(mFakeDualCdmaWarningTitle);
+        when(mResources.getString(R.string.dual_cdma_sim_warning_notification_summary,
+                mSimCombinationName)).thenReturn(mFakeDualCdmaWarningSummary);
     }
 
     @Test
@@ -161,6 +181,44 @@ public class SimSelectNotificationTest {
         // If MMS data is already enabled, there's no need to trigger the notification.
         mSimSelectNotification.onReceive(mContext, intent);
         verify(mNotificationManager, never()).createNotificationChannel(any());
+    }
+
+    @Test
+    public void onReceivePrimarySubListChange_NoExtra_notificationShouldNotSend() {
+        Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
+
+        // EXTRA_SUB_ID and EXTRA_ENABLE_MMS_DATA_REQUEST_REASON are required.
+        mSimSelectNotification.onReceive(mContext, intent);
+        verify(mNotificationManager, never()).createNotificationChannel(any());
+    }
+
+    @Test
+    public void onReceivePrimarySubListChange_DualCdmaWarning_notificationShouldSend() {
+        Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
+
+        intent.putExtra(EXTRA_SIM_COMBINATION_NAMES, mSimCombinationName);
+        intent.putExtra(EXTRA_SIM_COMBINATION_WARNING_TYPE,
+                EXTRA_SIM_COMBINATION_WARNING_TYPE_DUAL_CDMA);
+
+        mSimSelectNotification.onReceive(mContext, intent);
+
+        // Capture the notification channel created and verify its fields.
+        ArgumentCaptor<NotificationChannel> nc = ArgumentCaptor.forClass(NotificationChannel.class);
+        verify(mNotificationManager).createNotificationChannel(nc.capture());
+
+        assertThat(nc.getValue().getId()).isEqualTo(SIM_WARNING_NOTIFICATION_CHANNEL);
+        assertThat(nc.getValue().getName()).isEqualTo(mFakeDualCdmaWarningChannelTitle);
+        assertThat(nc.getValue().getImportance()).isEqualTo(IMPORTANCE_HIGH);
+
+        // Capture the notification it notifies and verify its fields.
+        ArgumentCaptor<Notification> notification = ArgumentCaptor.forClass(Notification.class);
+        verify(mNotificationManager).notify(
+                eq(SIM_WARNING_NOTIFICATION_ID), notification.capture());
+        assertThat(notification.getValue().extras.getCharSequence(Notification.EXTRA_TITLE))
+                .isEqualTo(mFakeDualCdmaWarningTitle);
+        assertThat(notification.getValue().extras.getCharSequence(Notification.EXTRA_BIG_TEXT))
+                .isEqualTo(mFakeDualCdmaWarningSummary);
+        assertThat(notification.getValue().contentIntent).isNotNull();
     }
 }
 
