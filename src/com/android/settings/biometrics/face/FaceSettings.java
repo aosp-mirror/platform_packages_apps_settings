@@ -69,6 +69,8 @@ public class FaceSettings extends DashboardFragment {
     private Preference mRemoveButton;
     private Preference mEnrollButton;
 
+    private boolean mConfirmingPassword;
+
     private final FaceSettingsRemoveButtonPreferenceController.Listener mRemovalListener = () -> {
 
         // Disable the toggles until the user re-enrolls
@@ -150,9 +152,15 @@ public class FaceSettings extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mToken == null) {
+
+        if (mToken == null && !mConfirmingPassword) {
+            // Generate challenge in onResume instead of onCreate, since FaceSettings can be
+            // created while Keyguard is showing, in which case the resetLockout revokeChallenge
+            // will invalidate the too-early created challenge here.
             final long challenge = mFaceManager.generateChallenge();
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
+
+            mConfirmingPassword = true;
             if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
                     getString(R.string.security_settings_face_preference_title),
                     null, null, challenge, mUserId)) {
@@ -173,6 +181,7 @@ public class FaceSettings extends DashboardFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CONFIRM_REQUEST) {
+            mConfirmingPassword = false;
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                 mFaceManager.setActiveUser(mUserId);
                 // The pin/pattern/password was set.
@@ -196,10 +205,18 @@ public class FaceSettings extends DashboardFragment {
     @Override
     public void onStop() {
         super.onStop();
-        mToken = null;
-        final int result = mFaceManager.revokeChallenge();
-        if (result < 0) {
-            Log.w(TAG, "revokeChallenge failed, result: " + result);
+
+        if (!mEnrollController.isClicked() && !getActivity().isChangingConfigurations()
+                && !mConfirmingPassword) {
+            // Revoke challenge and finish
+            if (mToken != null) {
+                final int result = mFaceManager.revokeChallenge();
+                if (result < 0) {
+                    Log.w(TAG, "revokeChallenge failed, result: " + result);
+                }
+                mToken = null;
+            }
+            getActivity().finish();
         }
     }
 
