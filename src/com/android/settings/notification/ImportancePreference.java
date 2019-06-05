@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.transition.AutoTransition;
+import android.transition.Transition;
 import android.transition.TransitionManager;
 import android.util.AttributeSet;
 import android.view.View;
@@ -112,6 +113,7 @@ public class ImportancePreference extends Preference {
             mAlertButton.setEnabled(false);
         }
 
+        setImportanceSummary((ViewGroup) holder.itemView, mImportance, false);
         switch (mImportance) {
             case IMPORTANCE_MIN:
             case IMPORTANCE_LOW:
@@ -126,23 +128,29 @@ public class ImportancePreference extends Preference {
                 mAlertButton.setSelected(true);
                 break;
         }
-        setImportanceSummary((ViewGroup) holder.itemView, mImportance, false);
 
         mSilenceButton.setOnClickListener(v -> {
             callChangeListener(IMPORTANCE_LOW);
             mAlertButton.setBackground(unselectedBackground);
-            mAlertButton.setSelected(false);
             mSilenceButton.setBackground(selectedBackground);
-            mSilenceButton.setSelected(true);
             setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_LOW, true);
+            // a11y service won't always read the newly appearing text in the right order if the
+            // selection happens too soon (readback happens on a different thread as layout). post
+            // the selection to make that conflict less likely
+            holder.itemView.post(() -> {
+                mAlertButton.setSelected(false);
+                mSilenceButton.setSelected(true);
+            });
         });
         mAlertButton.setOnClickListener(v -> {
             callChangeListener(IMPORTANCE_DEFAULT);
             mSilenceButton.setBackground(unselectedBackground);
-            mSilenceButton.setSelected(false);
             mAlertButton.setBackground(selectedBackground);
-            mAlertButton.setSelected(true);
             setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_DEFAULT, true);
+            holder.itemView.post(() -> {
+                mSilenceButton.setSelected(false);
+                mAlertButton.setSelected(true);
+            });
         });
     }
 
@@ -172,9 +180,7 @@ public class ImportancePreference extends Preference {
             ((ImageView) parent.findViewById(R.id.alert_icon)).setImageTintList(colorAccent);
             ((TextView) parent.findViewById(R.id.alert_label)).setTextColor(colorAccent);
 
-            TextView view = parent.findViewById(R.id.alert_summary);
-            view.setText(R.string.notification_channel_summary_default);
-            view.setVisibility(VISIBLE);
+            parent.findViewById(R.id.alert_summary).setVisibility(VISIBLE);
         } else {
             parent.findViewById(R.id.alert_summary).setVisibility(GONE);
             ((ImageView) parent.findViewById(R.id.alert_icon)).setImageTintList(colorNormal);
@@ -182,9 +188,7 @@ public class ImportancePreference extends Preference {
 
             ((ImageView) parent.findViewById(R.id.silence_icon)).setImageTintList(colorAccent);
             ((TextView) parent.findViewById(R.id.silence_label)).setTextColor(colorAccent);
-            TextView view = parent.findViewById(R.id.silence_summary);
-            view.setVisibility(VISIBLE);
-            view.setText(R.string.notification_channel_summary_low);
+            parent.findViewById(R.id.silence_summary).setVisibility(VISIBLE);
         }
     }
 }
