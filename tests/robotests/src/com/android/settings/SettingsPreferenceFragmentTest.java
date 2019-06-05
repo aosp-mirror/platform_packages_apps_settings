@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -185,6 +186,24 @@ public class SettingsPreferenceFragmentTest {
 
         verify(mPreferenceScreen, never()).removePreference(workOnlyCategory);
         verify(workOnlyCategory).setVisible(false);
+    }
+
+    @Test
+    public void showPinnedHeader_shouldBeVisible() {
+        mFragment.mPinnedHeaderFrameLayout = new FrameLayout(mContext);
+
+        mFragment.showPinnedHeader(true);
+
+        assertThat(mFragment.mPinnedHeaderFrameLayout.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void hidePinnedHeader_shouldBeInvisible() {
+        mFragment.mPinnedHeaderFrameLayout = new FrameLayout(mContext);
+
+        mFragment.showPinnedHeader(false);
+
+        assertThat(mFragment.mPinnedHeaderFrameLayout.getVisibility()).isEqualTo(View.INVISIBLE);
     }
 
     public static class TestFragment extends SettingsPreferenceFragment {
