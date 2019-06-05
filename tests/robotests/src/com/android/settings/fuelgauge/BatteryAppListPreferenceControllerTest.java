@@ -20,14 +20,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ModuleInfo;
 import android.content.pm.PackageManager;
-import android.os.BatteryStats;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -96,7 +94,6 @@ public class BatteryAppListPreferenceControllerTest {
         when(mNormalBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
-        mNormalBatterySipper.uidObj = mock(BatteryStats.Uid.class);
 
         mPreferenceController = new BatteryAppListPreferenceController(mContext, KEY_APP_LIST, null,
                 mSettingsActivity, mFragment);
@@ -206,7 +203,15 @@ public class BatteryAppListPreferenceControllerTest {
 
     @Test
     public void testShouldHideSipper_hiddenSystemModule_returnTrue() {
-        when(mBatteryUtils.isHiddenSystemModule(mNormalBatterySipper)).thenReturn(true);
+        ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", null);
+        final String packageName = "test.hidden.module";
+        final ModuleInfo moduleInfo = new ModuleInfo();
+        moduleInfo.setPackageName(packageName);
+        moduleInfo.setHidden(true);
+        final List<ModuleInfo> modules = new ArrayList<>();
+        modules.add(moduleInfo);
+        when(mBatteryUtils.getPackageName(anyInt() /* uid */)).thenReturn(packageName);
+        when(mPackageManager.getInstalledModules(anyInt() /* flags */)).thenReturn(modules);
 
         assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }

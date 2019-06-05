@@ -277,11 +277,5 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                     result.add(sir);
                     return result;
                 }
-
-                /** suppress full page if user is not admin */
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    return context.getSystemService(UserManager.class).isAdminUser();
-                }
             };
 }

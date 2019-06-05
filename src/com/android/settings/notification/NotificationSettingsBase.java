@@ -281,7 +281,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
     }
 
     private Drawable getAlertingIcon() {
-        Drawable icon = getContext().getDrawable(R.drawable.ic_notifications_alert);
+        Drawable icon = getContext().getDrawable(R.drawable.ic_notifications);
         icon.setTintList(Utils.getColorAccent(getContext()));
         return icon;
     }

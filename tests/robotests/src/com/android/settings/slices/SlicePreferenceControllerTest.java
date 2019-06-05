@@ -41,8 +41,6 @@ public class SlicePreferenceControllerTest {
 
     @Mock
     private LiveData<Slice> mLiveData;
-    @Mock
-    private SlicePreference mSlicePreference;
     private Context mContext;
     private SlicePreferenceController mController;
     private Uri mUri;
@@ -55,7 +53,6 @@ public class SlicePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mController = new SlicePreferenceController(mContext, KEY);
         mController.mLiveData = mLiveData;
-        mController.mSlicePreference = mSlicePreference;
         mUri = Uri.EMPTY;
     }
 
@@ -80,12 +77,5 @@ public class SlicePreferenceControllerTest {
     public void onStop_unregisterObserver() {
         mController.onStop();
         verify(mLiveData).removeObserver(mController);
-    }
-
-    @Test
-    public void onChanged_nullSlice_updateSlice() {
-        mController.onChanged(null);
-
-        verify(mController.mSlicePreference).onSliceUpdated(null);
     }
 }

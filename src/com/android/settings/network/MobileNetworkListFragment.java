@@ -18,7 +18,6 @@ package com.android.settings.network;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
@@ -66,11 +65,6 @@ public class MobileNetworkListFragment extends DashboardFragment {
                     sir.xmlResId = R.xml.mobile_network_list;
                     result.add(sir);
                     return result;
-                }
-
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    return context.getSystemService(UserManager.class).isAdminUser();
                 }
             };
 }
