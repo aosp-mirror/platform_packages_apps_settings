@@ -80,7 +80,8 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
             final IconCompat icon = IconCompat.createWithResource(mContext,
                     R.drawable.ic_settings_adaptive_sleep);
             final CharSequence title = mContext.getText(R.string.adaptive_sleep_title);
-            final CharSequence subtitle = mContext.getText(R.string.adaptive_sleep_description);
+            final CharSequence subtitle = mContext.getText(
+                    R.string.adaptive_sleep_contextual_slice_summary);
 
             final SliceAction pAction = SliceAction.createDeeplink(getPrimaryAction(),
                     icon,
