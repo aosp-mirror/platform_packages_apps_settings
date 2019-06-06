@@ -72,7 +72,7 @@ public class GentleDrawablePreferenceController extends BasePreferenceController
 
     private boolean showOnLockscreen() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 0) == ON;
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, ON) == ON;
     }
 
     private boolean showOnStatusBar() {
