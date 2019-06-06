@@ -7032,6 +7032,8 @@
     <string name="help_uri_wifi_scanning_required" translatable="false"></string>
     <!-- url for the bluetooth toggle required dialog help page -->
     <string name="help_uri_bluetooth_screen" translatable="false"></string>
+    <!-- url for the SIM combination warning required dialog help page -->
+    <string name="help_uri_sim_combination_warning" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -10983,6 +10985,20 @@
     <!-- Label for the off position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_off">Off</string>
+    <!-- Text shown in an information footer on the SIM details page for a physical SIM notifying
+         the user that the way to disable this SIM is to physically remove it. This is in contrast
+         to eSIM's, which can disabled using an on/off toggle switch. [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_disable_sim_explanation">
+        To disable this SIM, remove the SIM card
+    </string>
+
+    <!--Summary used when a physical SIM is disabled, indicating that tapping on the preference will
+        enable the SIM. This may be used as the summary of the 'Mobile network' item on the
+        Network & internet page (if there are no other SIMs), or on the mobile network list page.
+        [CHAR LIMIT=50] -->
+    <string name="mobile_network_tap_to_activate">
+        Tap to activate <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>
+    </string>
 
     <!-- Title for a confirmation dialog when the user is enabling an eSIM subscription and there
          is already another active eSIM subscription which will need to be disabled if they proceed.
@@ -11274,4 +11290,12 @@
 
     <!-- Title for enable MMS notification channel.  [CHAR LIMIT=40] -->
     <string name="enable_mms_notification_channel_title">MMS message</string>
+
+    <!-- Title for SIM combination warning. [CHAR LIMIT=80] -->
+    <string name="sim_combination_warning_notification_title">Issue with SIM combination</string>
+    <!-- Message for DSDS dual CDMA SIM combination warning. [CHAR LIMIT=100] -->
+    <string name="dual_cdma_sim_warning_notification_summary">Using <xliff:g id="operator_names" example="T-Mobile &amp; Verizon">%1$s</xliff:g> may limit functionality. Tap to learn more.</string>
+
+    <!-- Title for enable MMS notification channel.  [CHAR LIMIT=40] -->
+    <string name="dual_cdma_sim_warning_notification_channel_title">SIM combination</string>
 </resources>
