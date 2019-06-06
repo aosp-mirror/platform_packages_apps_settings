@@ -790,13 +790,13 @@
     <!-- Security Settings --><skip />
 
     <!-- Security settings screen, setting option name to change screen timeout -->
-    <string name="lock_after_timeout">Automatically lock</string>
+    <string name="lock_after_timeout">Lock after screen timeout</string>
     <!-- Security settings screen, setting option summary to change screen timeout -->
-    <string name="lock_after_timeout_summary"><xliff:g id="timeout_string">%1$s</xliff:g> after sleep</string>
+    <string name="lock_after_timeout_summary"><xliff:g id="timeout_string">%1$s</xliff:g> after timeout</string>
     <!-- Security settings screen, setting option summary to change screen timeout, with additional explanation-->
-    <string name="lock_immediately_summary_with_exception">Immediately after sleep, except when kept unlocked by <xliff:g id="trust_agent_name">%1$s</xliff:g></string>
+    <string name="lock_immediately_summary_with_exception">Immediately after timeout, except when kept unlocked by <xliff:g id="trust_agent_name">%1$s</xliff:g></string>
     <!-- Security settings screen, setting option summary to change screen timeout, with additional explanation-->
-    <string name="lock_after_timeout_summary_with_exception"><xliff:g id="timeout_string">%1$s</xliff:g> after sleep, except when kept unlocked by <xliff:g id="trust_agent_name">%2$s</xliff:g></string>
+    <string name="lock_after_timeout_summary_with_exception"><xliff:g id="timeout_string">%1$s</xliff:g> after timeout, except when kept unlocked by <xliff:g id="trust_agent_name">%2$s</xliff:g></string>
     <!-- Text shown next to checkbox for showing owner info on LockScreen [CHAR LIMIT=50]-->
     <string name="show_owner_info_on_lockscreen_label">Show owner info on lock screen</string>
     <!-- Text shown for title of owner info setting [CHAR LIMIT=20]-->
@@ -7034,6 +7034,8 @@
     <string name="help_uri_wifi_scanning_required" translatable="false"></string>
     <!-- url for the bluetooth toggle required dialog help page -->
     <string name="help_uri_bluetooth_screen" translatable="false"></string>
+    <!-- url for the SIM combination warning required dialog help page -->
+    <string name="help_uri_sim_combination_warning" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -11279,4 +11281,12 @@
 
     <!-- Title for enable MMS notification channel.  [CHAR LIMIT=40] -->
     <string name="enable_mms_notification_channel_title">MMS message</string>
+
+    <!-- Title for SIM combination warning. [CHAR LIMIT=80] -->
+    <string name="sim_combination_warning_notification_title">Issue with SIM combination</string>
+    <!-- Message for DSDS dual CDMA SIM combination warning. [CHAR LIMIT=100] -->
+    <string name="dual_cdma_sim_warning_notification_summary">Using <xliff:g id="operator_names" example="T-Mobile &amp; Verizon">%1$s</xliff:g> may limit functionality. Tap to learn more.</string>
+
+    <!-- Title for enable MMS notification channel.  [CHAR LIMIT=40] -->
+    <string name="dual_cdma_sim_warning_notification_channel_title">SIM combination</string>
 </resources>
