@@ -133,6 +133,18 @@ public class ShowOnLockscreenNotificationPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_allNotifsOnLockscreen_isDefault() {
+        // settings don't exist
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getValue()).isEqualTo(
+                String.valueOf(R.string.lock_screen_notifs_show_all));
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.lock_screen_notifs_show_all));
+    }
+
+    @Test
     public void updateState_dpmSaysNo() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 LOCK_SCREEN_SHOW_NOTIFICATIONS,
