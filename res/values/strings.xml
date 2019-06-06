@@ -10989,6 +10989,20 @@
     <!-- Label for the off position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_off">Off</string>
+    <!-- Text shown in an information footer on the SIM details page for a physical SIM notifying
+         the user that the way to disable this SIM is to physically remove it. This is in contrast
+         to eSIM's, which can disabled using an on/off toggle switch. [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_disable_sim_explanation">
+        To disable this SIM, remove the SIM card
+    </string>
+
+    <!--Summary used when a physical SIM is disabled, indicating that tapping on the preference will
+        enable the SIM. This may be used as the summary of the 'Mobile network' item on the
+        Network & internet page (if there are no other SIMs), or on the mobile network list page.
+        [CHAR LIMIT=50] -->
+    <string name="mobile_network_tap_to_activate">
+        Tap to activate <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>
+    </string>
 
     <!-- Title for a confirmation dialog when the user is enabling an eSIM subscription and there
          is already another active eSIM subscription which will need to be disabled if they proceed.
