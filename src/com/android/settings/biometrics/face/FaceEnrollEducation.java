@@ -169,6 +169,15 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         super.onResume();
         mSwitchDiversityListener.onCheckedChanged(mSwitchDiversity.getSwitch(),
                 mSwitchDiversity.isChecked());
+
+        // If the user goes back after enrollment, we should send them back to the intro page
+        // if they've met the max limit.
+        final int max = getResources().getInteger(
+                com.android.internal.R.integer.config_faceMaxTemplatesPerUser);
+        final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
+        if (numEnrolledFaces >= max) {
+            finish();
+        }
     }
 
     @Override
