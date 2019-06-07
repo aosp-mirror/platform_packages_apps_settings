@@ -223,38 +223,6 @@ public class NfcPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_airplaneModeRadiosContainsNfc_shouldCreateAirplaneModeObserver() {
-        Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
-
-        mNfcController.displayPreference(mScreen);
-
-        assertThat(mNfcController.mAirplaneModeObserver).isNotNull();
-    }
-
-    @Test
-    public void displayPreference_nfcToggleableInAirplaneMode_shouldCreateAirplaneModeObserver() {
-        Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Settings.Global.RADIO_NFC);
-
-        mNfcController.displayPreference(mScreen);
-
-        assertThat(mNfcController.mAirplaneModeObserver).isNotNull();
-    }
-
-    @Test
-    public void displayPreference_nfcNotAffectByAirplaneMode_shouldNotCreateAirplaneModeObserver() {
-        Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, "");
-        Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_RADIOS, "");
-
-        mNfcController.displayPreference(mScreen);
-
-        assertThat(mNfcController.mAirplaneModeObserver).isNull();
-    }
-
-    @Test
     public void ncfSliceWorker_nfcBroadcast_noExtra_sliceDoesntUpdate() {
         final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
