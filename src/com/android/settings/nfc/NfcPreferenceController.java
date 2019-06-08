@@ -41,8 +41,6 @@ public class NfcPreferenceController extends TogglePreferenceController
     public static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private final NfcAdapter mNfcAdapter;
     private NfcEnabler mNfcEnabler;
-    @VisibleForTesting
-    NfcAirplaneModeObserver mAirplaneModeObserver;
 
     public NfcPreferenceController(Context context, String key) {
         super(context, key);
@@ -61,11 +59,6 @@ public class NfcPreferenceController extends TogglePreferenceController
 
         mNfcEnabler = new NfcEnabler(mContext, switchPreference);
 
-        // Listen to airplane mode updates if NFC should be turned off when airplane mode is on
-        if (shouldTurnOffNFCInAirplaneMode(mContext) || isToggleableInAirplaneMode(mContext)) {
-            mAirplaneModeObserver =
-                    new NfcAirplaneModeObserver(mContext, mNfcAdapter, switchPreference);
-        }
     }
 
     @Override
@@ -108,9 +101,6 @@ public class NfcPreferenceController extends TogglePreferenceController
 
     @Override
     public void onResume() {
-        if (mAirplaneModeObserver != null) {
-            mAirplaneModeObserver.register();
-        }
         if (mNfcEnabler != null) {
             mNfcEnabler.resume();
         }
@@ -118,9 +108,6 @@ public class NfcPreferenceController extends TogglePreferenceController
 
     @Override
     public void onPause() {
-        if (mAirplaneModeObserver != null) {
-            mAirplaneModeObserver.unregister();
-        }
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }

@@ -66,7 +66,7 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
             pref.setImportance(mChannel.getImportance());
             pref.setDisplayInStatusBar(mBackend.showSilentInStatusBar(mContext.getPackageName()));
             pref.setDisplayOnLockscreen(Settings.Secure.getInt(mContext.getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 0) == 1);
+                    Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 1) == 1);
         }
     }
 
