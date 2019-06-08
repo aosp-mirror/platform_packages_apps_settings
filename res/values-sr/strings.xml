@@ -352,10 +352,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Изаб. према одступ. од UTC-а"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Датум"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Време"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Аутоматски закључај"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после стања спавања"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Одмах после спавања, осим када га <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> оставља откључаним"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после спавања, осим када га <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> оставља откључаним"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Закључај после истека временског ограничења за екран"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после истека временског ограничења"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Одмах после истека временског ограничења, осим када <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> не дозвољава закључавање"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после истека временског ограничења, осим када <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> спречава закључавање"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Прикажи информације о власнику на закључ. екрану"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Порука на закључаном екрану"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Омогући виџете"</string>
@@ -400,8 +400,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Закључавање екрана, отисак прста"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Закључавање екрана"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Лице је додато"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Подесите откључавање лицем"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Откључавање лицем"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Како да подесите откључавање лицем"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Подесите откључавање лицем"</string>
@@ -436,22 +435,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Корис. откљ. лиц. за"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Откључавање телефона"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Пријава у апликације и плаћања"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Услови за откључавање лицем"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Очи морају да буду отворене"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Да бисте откључали телефон, очи морају да буду отворене"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Увек тражи потврду"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Увек захтевај потврду при коришћењу откључавања лицем у апликацијама"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Бриши податке о лицу"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Подесите откључавање лицем"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Откључајте уређај, пријавите се у апликацију и потврдите плаћање помоћу откључавања лицем.\n\nИмајте у виду:\nАко погледате телефон, можете нехотице да га откључате.\n\nТелефон може да откључа неко други ако га приближи вашем лицу док су вам очи отворене.\n\nТелефон може да откључа неко ко много личи на вас, на пример, идентични близанац."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Избрисати податке о лицу?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Слике и биометријски подаци које користи откључавање лицем биће трајно и безбедно избрисани. После брисања требаће вам PIN, образац или лозинка да бисте откључали телефон, пријављивали се у апликације и потврђивали плаћања."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Отисак прста"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Управљај отис. прстију"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Користи отис. прста за"</string>
@@ -503,12 +496,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Заштитите таблет помоћу опције закључавања екрана да нико не би могао да га користи ако га изгубите или вам га украду. Опција закључавања екрана вам треба и да бисте подесили отисак прста. Додирните Откажи, па подесите PIN, шаблон или лозинку."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Заштитите уређај помоћу опције закључавања екрана да нико не би могао да га користи ако га изгубите или вам га украду. Опција закључавања екрана вам треба и да бисте подесили отисак прста. Додирните Откажи, па подесите PIN, шаблон или лозинку."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Заштитите телефон помоћу опције закључавања екрана да нико не би могао да га користи ако га изгубите или вам га украду. Опција закључавања екрана вам треба и да бисте подесили отисак прста. Додирните Откажи, па подесите PIN, шаблон или лозинку."</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Заштитите таблет помоћу опције закључавања екрана да нико не би могао да га користи ако га изгубите или вам га украду. Опција закључавања екрана вам треба и да бисте подесили откључавање лицем. Додирните Откажи да бисте се вратили."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Заштитите уређај помоћу опције закључавања екрана да нико не би могао да га користи ако га изгубите или вам га украду. Опција закључавања екрана вам треба и да бисте подесили откључавање лицем. Додирните Откажи да бисте се вратили."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Заштитите телефон помоћу опције закључавања екрана да нико не би могао да га користи ако га изгубите или вам га украду. Опција закључавања екрана вам треба и да бисте подесили откључавање лицем. Додирните Откажи да бисте се вратили."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Желите ли да прескочите подешавање PIN-а?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Желите ли да прескочите подешавање лозинке?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Желите ли да прескочите подешавање шаблона?"</string>
@@ -1251,9 +1241,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Пажња екрана"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Укључено/екран се неће искључити ако гледате у њега"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Искључено"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Спречава искључивање екрана ако гледате у њега"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Пажња екрана користи предњу камеру да би утврдила да ли неко гледа у екран. Ради на уређају, а слике се никада не чувају нити шаљу Google-у."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Нека екран буде укључен када гледате у њега"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Ноћно светло"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Ноћно светло даје екрану жутонаранџасту нијансу. То вам омогућава да лакше прегледате садржај екрана при пригушеном светлу и да лакше заспите."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Закажите"</string>
@@ -2107,13 +2097,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Подешавања титла"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Увећање"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Увећање помоћу троструког додира"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Увећање помоћу дугмета"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Увећање помоћу дугмета и троструког додира"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Увећавајте помоћу пречице"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Увећавајте помоћу пречице и троструког додира"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Увећајте приказ на екрану"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Додирните 3 пута да бисте зумирали"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Додирните дугме да бисте зумирали"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Да бисте зумирали"</b>", брзо додирните екран 3 пута.\n"<ul><li>"Превуците помоћу 2 или више прстију да бисте померали приказ"</li>\n<li>"Скупите 2 или више прстију да бисте прилагодили зумирање"</li></ul>\n\n<b>"За привремено зумирање"</b>" брзо додирните екран 3 пута и задржите прст при трећем додиру.\n"<ul><li>"Превлачите прстом да бисте се кретали по екрану"</li>\n<li>"Подигните прст да бисте умањили приказ"</li></ul>\n\n"Не можете да зумирате тастатуру ни траку за навигацију."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Када је увећање укључено, користите дугме за приступачност у дну екрана да бисте брзо увећали приказ.\n\n"<b>"Да бисте зумирали"</b>", додирните дугме за приступачност, па притисните било који део екрана.\n"<ul><li>"Превлачите помоћу 2 или више прстију да бисте померали приказ"</li>\n<li>"Скупите 2 или више прстију да бисте прилагодили зумирање"</li></ul>\n\n<b>"За привремено зумирање"</b>" додирните дугме за приступачност, па додирните и задржите било који део екрана.\n"<ul><li>"Превлачите да бисте се кретали по екрану"</li>\n<li>"Подигните прст да бисте умањили приказ"</li></ul>\n\n"Не можете да увећавате тастатуру или траку за навигацију."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Када је увећање укључено, можете да увећате екран.\n\n"<b>"Да бисте зумирали"</b>", покрените увећање, па додирните било који део екрана.\n"<ul><li>"• Превуците помоћу 2 или више прстију да бисте померали приказ"</li>\n<li>"• Скупите 2 или више прстију да бисте прилагодили зумирање"</li></ul>\n\n<b>"За привремено зумирање"</b>" покрените увећање, па додирните и задржите било који део екрана.\n"<ul><li>"• Превлачите прстом да бисте се кретали по екрану"</li>\n<li>"• Подигните прст да бисте умањили приказ"</li></ul>\n\n"Не можете да увећавате тастатуру или траку за навигацију."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Отварајте помоћу дугмета за приступачност"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Отварајте помоћу покрета"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Користите нови покрет за приступачност"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Да бисте укључили или искључили ову услугу, додирните дугме за приступачност <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> у дну екрана.\n\nДа бисте прелазили са једне услуге на другу, додирните и задржите дугме за приступачност."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Да бисте укључили или искључили ову услугу, превлачите нагоре од дна екрана помоћу два прста.\n\nДа бисте прелазили са једне услуге на другу, превлачите нагоре помоћу два прста и задржите."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Да бисте укључили или искључили ову услугу, превлачите нагоре од дна екрана помоћу три прста.\n\nДа бисте прелазили са једне услуге на другу, превлачите нагоре помоћу три прста и задржите."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Да бисте укључили или искључили услугу приступачности, превлачите нагоре од дна екрана помоћу два прста.\n\nДа бисте прелазили са једне услуге на другу, превлачите нагоре помоћу два прста и задржите."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Да бисте укључили или искључили услугу приступачности, превлачите нагоре од дна екрана помоћу три прста.\n\nДа бисте прелазили са једне услуге на другу, превлачите нагоре помоћу три прста и задржите."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Важи"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Дугме за приступачност је подешено на <xliff:g id="SERVICE">%1$s</xliff:g>. Да бисте користили увећање, додирните и задржите дугме за приступачност, па изаберите увећање."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Тастер јачине звука као пречица"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Услуга пречице"</string>
@@ -2128,8 +2127,8 @@
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Моно звук"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Комбинујте канале када пуштате аудио садржај"</string>
     <string name="accessibility_toggle_master_balance_title" msgid="551441665399043471">"Баланс звука"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Леви"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Десни"</string>
+    <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Лево"</string>
+    <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Десно"</string>
     <string name="accessibility_timeout_default" msgid="8316215621219570607">"Подразумевано"</string>
     <string name="accessibility_timeout_10secs" msgid="1976492627730727871">"10 секунди"</string>
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 секунди"</string>
@@ -4268,13 +4267,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Брже снимајте селфије"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Навигација кроз систем"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Навигација помоћу 2 дугмета"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Да бисте прешли са једне апликације на другу, превуците нагоре преко дугмета Почетак. Превуците поново да бисте видели све апликације. Ради на сваком екрану. Више нећете имати дугме Преглед у доњем десном углу екрана."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Да бисте прешли са једне апликације на другу, превуците нагоре на дугмету Почетак. Да бисте видели све апликације, поново превуците нагоре. Да бисте се вратили, додирните дугме Назад."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Испробајте ново дугме Почетак"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Укључите нови покрет да бисте прешли на другу апликацију"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Навигација помоћу покрета"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Да бисте отишли на почетну страницу, превлачите нагоре од дна екрана. Да бисте се вратили на претходну страницу, превлачите са леве или десне стране екрана. Да бисте мењали апликације, почните да превлачите нагоре од дна екрана и задржите пре пуштања."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Да бисте отишли на почетни екран, превуците нагоре од дна екрана. Да бисте прешли са једне апликације на другу, превуците нагоре од дна екрана, задржите, па пустите. Да бисте се вратили назад, превуците од леве или десне ивице."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Навигација помоћу 3 дугмета"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Класични Android режим навигације у коме су одлазак на почетну страницу, мењање апликација и враћање на претходну страницу доступни преко дугмади."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Вратите се назад, приступите почетном екрану и прелазите са једне апликације на другу помоћу дугмади у дну екрана."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"навигација кроз систем, навигација помоћу 2 дугмета, навигација помоћу 3 дугмета, навигација помоћу покрета"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Не подржава подразумевана апликација почетне странице, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Промени подраз. апликацију поч. странице"</string>
@@ -4445,8 +4444,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Ова функција је искључена јер успорава телефон"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Принудно покрени пуна GNSS мерења"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Прати све GNSS консталације и фреквенције без циклуса рада"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Дозволи покретање апликација у позадини"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Дозвољава покретање свих активности у позадини"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Увек приказуј дијалог о отказивању"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Прикажи дијалог сваки пут када апликација откаже"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Изабери апликацију омогућену за ANGLE"</string>
@@ -4574,16 +4571,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Неактивно/SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Активно/преузети SIM"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Неактивно/преузети SIM"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"Назив и боја SIM картице"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Име"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Боја (користе компатибилне апликације)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Сачувај"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Користи SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Искључено"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Да бисте онемогућили ову SIM картицу, уклоните је"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Додирните да бисте активирали <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Желите ли да пређете на <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"У датом тренутку може да буде активна само једна SIM картица.\n\nПребацивање на <xliff:g id="CARRIER1">%1$s</xliff:g> неће отказати <xliff:g id="CARRIER2">%2$s</xliff:g> услугу."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Пређи на <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4701,4 +4696,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Слање MMS порука није могуће"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Додирните да бисте омогућили слање MMS порука на уређају <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> када су мобилни подаци искључени"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS порука"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Проблем са SIM комбинацијом"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Функционалност може да буде ограничена ако користите оператере <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g>. Додирните да бисте сазнали више."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM комбинација"</string>
 </resources>

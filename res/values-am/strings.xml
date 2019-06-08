@@ -350,10 +350,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"በUTC ሽግሽግ ምረጥ"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"ቀን"</string>
     <string name="time_picker_title" msgid="483460752287255019">"ጊዜ"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"በራስ ሰር ቆልፍ"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ከእንቅልፍ በኋላ"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"ከእንቅልፍ በኋላ ወዲያውኑ፣ በ<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ተከፍቶ እንዲቆይ ካልተደረገ በቀር"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"ከእንቅልፍ በኋላ <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>፣ በ<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ከተከፈተ በስተቀር"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"ከማያ ገጽ እረፍት ጊዜ በኋላ ቆልፍ"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ከእረፍት ጊዜ በኋላ"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"በ <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> እንደተከፈተ እንዲቆይ ካልተደረገ በቀር ከእረፍት ጊዜ በኋላ ወዲያውኑ"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"ከእረፍት ጊዜ በኋላ <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>፣ በ<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ካልተከፈተ በስተቀር"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"በተቆለፈ ማያ የባለቤት መረጃ አሳይ"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"የቁልፍ ገጽ መልዕክት"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ንዑስ ፕሮግራሞችን አንቃ"</string>
@@ -397,8 +397,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"የማያ ገጽ ቁልፍ፣ የጣት አሻራ"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"ማሳያ መቆለፊያ"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"መልክ ታክሏል"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"በመልክ መክፈቻን ያቀናብሩ"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"በመልክ መክፈት"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"በፊት መክፈቻን እንዴት ማቀናበር እንደሚቻል"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"በመልክ መክፈቻን ያቀናብሩ"</string>
@@ -433,22 +432,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"በመልክ መክፈት ይጠቀሙ ለ፦"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"ስልክዎን መክፈት"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"የመተግበሪያ በመለያ መግቢያ እና ክፍያዎች"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"የበመልክ መክፈቻ ማሟያዎች"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"አይኖች ክፍት እንዲሆኑ ጠይቅ"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"ስልኩን ለመክፈት አይኖችዎ ክፍት መሆን አለበት"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"ሁልጊዜ ማረጋገጫን ጠይቅ"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"በመተግበሪያዎች ውስጥ በመልክ መክፈቻን ስትጠቀም ሁልጊዜ የማረጋገጫ እርምጃን ጠይቅ"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"የመልክ ውሂብ ይሰረዝ?"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"በመልክ መክፈቻን ያቀናብሩ"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"መሣሪያዎን ለመክፈት፣ በመለያ ወደ መተግበሪያዎች ለመግባት እና ክፍያዎችን ለማረጋገጥ በመልክ መክፈቻን ይጠቀሙ።\n\nእነዚህን ከግምት ውስጥ ያስገቡ፦\nስልኩን ሲመለከቱት ሳያስቡት ሊከፍተው ይችላል።\n\nአይኖችዎ ክፍት ሆነው ሳለ የሆነ ሰው ስልክዎ ፊትዎ ላይ ቢይዘው ሊከፈት ይችላል።\n\nስልክዎ እንደ ለምሳሌ ልጅዎ ወይም መንታ ወንድም/እህት ያለ በጣም እርስዎን በሚመስል ሰው ሊከፈት ይችላል።"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"የፊት ውሂብ ይሰረዝ?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"በመልክ መክፈቻ የሚጠቀምባቸው ምስሎች እና ባዮሜትሪክ ውሂብ እስከመጨረሻው እና ደህንነታቸው በተጠበቀ መልኩ ይሰረዛሉ። ከተወገደ በኋላ የእርስዎን ስልክ ለመክፈት በመለያ ወደ መተግበሪያዎ ገብተው ክፍያዎችን ለማረጋገጥ የእርስዎን ፒን፣ ሥርዓተ ጥለት ወይም የይለፍ ቃል መጠቀም ይኖርብዎታል።"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"የጣት አሻራ"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"የጣት አሻራዎችን ያስተዳድሩ"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"የጣት አሻራን ይጠቀሙ ለ"</string>
@@ -499,12 +492,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"ከጠፋ ወይም ከተሰረቀ ማንም ሊጠቀምበት እንዳይችል ጡባዊዎን በማያ ገጽ መቆለፊያ አማራጭ ይጠብቁት። እንዲሁም የጣት አሻራን ለማቀናበር የማያ ገጽ መቆለፊያ አማራጭ ያስፈልገዎታል። ይቅርን መታ ያድርጉ፣ ከዚያ ፒን፣ ስርዓተ-ጥለት ወይም የይለፍ ቃል ያቀናብሩ።"</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"ከጠፋ ወይም ከተሰረቀ ማንም ሊጠቀምበት እንዳይችል መሣሪያዎን በማያ ገጽ መቆለፊያ አማራጭ ይጠብቁት። እንዲሁም የጣት አሻራን ለማቀናበር የማያ ገጽ መቆለፊያ አማራጭ ያስፈልገዎታል። ይቅርን መታ ያድርጉ፣ ከዚያ ፒን፣ ስርዓተ-ጥለት ወይም የይለፍ ቃል ያቀናብሩ።"</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"ከጠፋ ወይም ከተሰረቀ ማንም ሊጠቀምበት እንዳይችል ስልክዎን በማያ ገጽ መቆለፊያ አማራጭ ይጠብቁት። እንዲሁም የጣት አሻራን ለማቀናበር የማያ ገጽ መቆለፊያ አማራጭ ያስፈልገዎታል። ይቅርን መታ ያድርጉ፣ ከዚያ ፒን፣ ስርዓተ-ጥለት ወይም የይለፍ ቃል ያቀናብሩ።"</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"የእርስዎን ጡባዊ በማያ ገጽ መቆለፊያ አማራጭ በመጠበቅዎ ቢጠፋ ወይም ቢሰረቅ ማንም ሰው ሊጠቀምበት አይችልም። እንዲሁም በመልክ መክፈቻን ለማቀናበር የማያ ገጽ መቆለፊያ አማራጭ ያስፈልገዎታል። ለመመለስ ይቅርን መታ ያድርጉ።"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"የእርስዎን መሣሪያ በማያ ገጽ መቆለፊያ አማራጭ በመጠበቅዎ ቢጠፋ ወይም ቢሰረቅ ማንም ሰው ሊጠቀምበት አይችልም። እንዲሁም በመልክ መክፈቻን ለማቀናበር የማያ ገጽ መቆለፊያ አማራጭ ያስፈልገዎታል። ለመመለስ ይቅርን መታ ያድርጉ።"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"የእርስዎን ስልክ በማያ ገጽ መቆለፊያ አማራጭ በመጠበቅዎ ቢጠፋ ወይም ቢሰረቅ ማንም ሰው ሊጠቀምበት አይችልም። እንዲሁም በመልክ መክፈቻን ለማቀናበር የማያ ገጽ መቆለፊያ አማራጭ ያስፈልገዎታል። ለመመለስ ይቅርን መታ ያድርጉ።"</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"የፒን ቅንብር ይዘለል?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"የይለፍ ቃል ቅንብር ይዘለል?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"የሥርዓተ ጥለት ቅንብር ይዘለል?"</string>
@@ -1232,9 +1222,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"የማያ ገጽ ትኩረት"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"በርቷል / ማያ ገጽ እርስዎ እየተመለከቱት ያሉ ከሆነ አይጠፋም"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"ጠፍቷል"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"እርስዎ እየተመለከቱት ያሉ ከሆነ የእርስዎ ማያ ገጽ እንዳይጠፋ ይከላከላል"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"የማያ ገጽ ትኩረት በማያ ገጹ ላይ የሆነ ሰው እያየ መሆኑን ለመመልከት የፊት ካሜራውን ይጠቀማል። በመሣሪያ ላይ ይሠራል፣ እና ምስሎች በጭራሽ ወደ Google አይላኩም ወይም በዚያ አይከማቹም።"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"ማያ ገጹን ሲመለከቱት እንደበራ አቆይ"</string>
     <string name="night_display_title" msgid="2626451512200357686">"የምሽት ብርሃን"</string>
     <string name="night_display_text" msgid="1837277457033025056">"የምሽት ብርሃን ለማያ ገጽዎ ብርቱካናማ ቅልም ይሰጠዋል። ይሄ ማያ ገጽዎን በደበዘዘ ብርሃን ላይ መመልከት ቀላል ያድርግልዎታል፣ እና በበለጠ ቅለት እንዲተኙ ሊያገዘዎት ይችላል።"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"የጊዜ ሰሌዳ"</string>
@@ -2085,13 +2075,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"የመግለጫ ጽሑፍ ምርጫዎች"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"ማጉላት"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"ሶስቴ መታ በማድረግ ያጉሉ"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"በአዝራር ያጉሉ"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"በአዝራር እና ሦስቴ መታ በማድረግ ያጉሉ"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"በአቋራጭ ያጉሉ"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"በአቋራጭ እና ሦስቴ መታ በማድረግ ያጉሉ"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"በማያ ገጹ ላይ ያጉሉ"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"ለማጉላት 3 ጊዜ መታ ያድርጉ"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"ለማጉላት አንድ አዝራር መታ ያድርጉ"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"ለማጉላት"</b>" ማያ ገጹን በፍጥነት 3 ጊዜ መታ ያድርጉት።\n"<ul><li>"ለማሸብለል 2 ወይም ተጨማሪ ጣቶችን ይጎትቱ"</li>\n<li>"ማጉላትን ለማስተካከል በ2 ወይም ተጨማሪ ጣቶች ይቆንጥጡ"</li></ul>\n\n<b>"ለጊዜው ለማጉላት"</b>" ማያ ገጹን በፍጥነት ሶስቴ መታ ያድርጉና ለሶስተኛ ጊዜ መታ ሲያደርጉት በዚያው ያዝ ያድርጉት።\n"<ul><li>"በማያ ገጹ ላይ ለማንቀሳቀስ ይጎትቱ"</li>\n<li>"ለማሳነስ ጣት ያንሱ"</li></ul>\n\n"ቁልፍ ሰሌዳውን እና የአሰሳ አሞሌውን ማጉላት አይችሉም።"</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"ማጉላት ሲበራ በፍጥነት ለማጉላት በማያ ገጹ ታችኛው ክፍል ላይ ያለውን የተደራሽነት አዝራር ይጠቀሙ።\n\n"<b>"ለማጉላት"</b>" የተደራሽነት አዝራሩን መታ ያድርጉ፣ ከዚያ በማያ ገጹ ማንኛውም ክፍል ላይ መታ ያድርጉ።\n"<ul><li>"ለማዘብለል 2 ወይም ተጨማሪ ጣቶችን ይጎትቱ"</li>\n<li>"ማጉላትን ለማስተካከል በ2 ወይም ተጨማሪ ጣቶችን ይቆንጥጡ"</li></ul>\n\n<b>"ለጊዜው ለማጉላት"</b>" የተደራሽነት አዝራሩን መታ ያድርጉ፣ ከዚያ ማንኛውም የማያ ገጽ ክፍሉን ነክተው ይያዙ።\n"<ul><li>"በማያ ገጹ ላይ ለማንቀሳቀስ ይጎትቱ"</li>\n<li>"ለማሳነት ጣት ያንሱ"</li></ul>\n\n"ቁልፍ ሰሌዳውን ወይም የአሰሳ አሞሌውን ማጉላት አይችሉም።"</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"ማጉያ ሲበራ ማያ ገጽዎን ማጉላት ይችላሉ።\n\n"<b>"ለማጉላት"</b>" ማጉያን ያስጀምሩ፣ ከዚያ በማያ ገጹ ማንኛውም ክፍል ላይ መታ ያድርጉ።\n"<ul><li>"• ለማሸብለል 2 ወይም ተጨማሪ ጣቶችን ይጎትቱ"</li>\n<li>"• ማጉያን ለማስተካከል በ2 ወይም ተጨማሪ ጣቶችን ይቆንጥጡ"</li></ul>\n\n<b>"ለጊዜው ለማጉላት"</b>" ማጉያን ያስጀምሩ፣ ከዚያ በማያ ገጹ ማንኛውም ቦታ ላይ ነክተው ይያዙ።\n"<ul><li>"• በማያ ገጹ ዙሪያ ለመንቀሳቀስ ይጎትቱ"</li>\n<li>"• ለማሳነስ ጣትን ያንሱ"</li></ul>\n\n"ቁልፍ ሰሌዳውን ወይም የመዳሰሻ አሞሌውን ማጉላት አይችሉም።"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"ለመክፈት የተደራሽነት አዝራር ይጠቀሙ"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"ለመክፈት የጣት ምልክትን ይጠቀሙ"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"አዲስ የተደራሽነት የጣት ምልክትን ይጠቀሙ"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"ይህን አገልግሎት ለማጥፋት በማያ ገጽዎ ግርጌ ላይ ያለውን የተደራሽነት አዝራሩን<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> መታ ያድርጉ።\n\nበአገልግሎቶች መካከል ለመቀያየር የተደራሽነት አአዝራሩን ነክተው ይያዙ።"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"ይህን አገልግሎት ለማብራት ወይም ለማጥፋት በሁለት ጣቶች ከማያ ገጹ ግርጌው ወደ ላይ ይጥረጉ።\n\nበአገልግሎቶች መካከል ለመቀያየር በሁለት ጣቶች ወደ ላይ ይጥረጉና ይያዙ።"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"ይህን አገልግሎት ለማብራት ወይም ለማጥፋት በሶስት ጣቶች ከማያ ገጹ ግርጌ ወደ ላይ ይጥረጉ።\n\nበአገልግሎቶች መካከል ለመቀያየር በሶስት ጣቶች ወደ ላይ ጠርገው ይያዙ።"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"አንድ የተደራሽነት አገልግሎትን ለማብራት ወይም ለማጥፋት በሁለት ጣቶት ከማያ ገጹ ግርጌ ወደ ላይ ይጥረጉ።\n\nበአገልግሎቶች መካከል ለመቀያየር በሁለት ጣቶች ወደ ላይ ጠርገው ይያዙ።"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"አንድ የተደራሽነት አገልግሎትን ለማብራት ወይም ለማጥፋት በሶስት ጣቶት ከማያ ገጹ ግርጌ ወደ ላይ ይጥረጉ።\n\nበአገልግሎቶች መካከል ለመቀያየር በሶስት ጣቶች ወደ ላይ ጠርገው ይያዙ።"</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"ገባኝ"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"የተደራሽነት አዝራሩ ወደ <xliff:g id="SERVICE">%1$s</xliff:g> ተቀናብሯል። ማጉላትን ለመጠቀም የተደራሽነት አዛሩን ነክተው ይያዙ፣ ከዚያ ማጉላትን ይምረጡ።"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"የድምፅ ቁልፍ አቋራጭ"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"የአቋራጭ አገልግሎት"</string>
@@ -4195,13 +4194,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"የራስ ፎቶዎችን በፍጥነት ያንሱ"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"የሥርዓት ዳሰሳ"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"2-አዝራር ዳሰሳ"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"መተግበሪያዎችን ለመቀየር በመነሻ አዝራሩ ላይ ወደ ላይ ያንሸራትቱ። ሁሉንም መተግበሪያዎች እንደገና ለመመልከት ወደ ላይ ያንሸራትቱ። ከማንኛውም ማያ ገጽ ሆኖ ይሰራል። በማያ ገጽዎ ታችኛው ክፍል በስተቀኝ ላይ ከእንግዲህ የአጠቃላይ እይታ አዝራር አይኖረዎትም።"</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"መተግበሪያዎችን ለመቀየር በመነሻ አዝራሩ ላይ ወደ ላይ ይጥረጉ። ሁሉንም መተግበሪያዎች ለማየት እንደገና ወደ ላይ ይጥረጉ። ለመመለስ የተመለስ አአዝራሩን መታ ያድርጉ።"</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"አዲሱን የመነሻ ገጽ አዝራር ይሞክሩ"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"መተግበሪያዎችን ለመቀየር አዲሱን የጣት ምልክት ያብሩ"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"የእጅ ውዝዋዜ ዳሰሳ"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"ወደ መነሻ ለመሄድ፣ ከማያ ገጹ ግርጌ ላይ ወደ ላይ በጣት ጠረግ ያድርጉ። ወደ ኋላ ለመመለስ፣ ከማያ ገጹ ግራ ወይም ቀኝ ጫፍ ላይ በጣት ጠረግ ያድርጉ። መተግበሪያዎችን ለመቀያየር፣ ከማያ ገጹ ግርጌ ላይ ወደ ላይ በጣት ጠረግ በማድረግ ይጀምሩ እና ከመልቀቅዎ በፊት ይያዙት።"</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"ወደ መነሻ ለመሄድ ከማያ ገጹ ግርጌ ላይ ወደ ላይ በጣት ይጥረጉ። መተግበሪያዎችን ለመቀየር ከግርጌው ወደ ላይ በጣት ይጥረጉ፣ ይያዙ፣ ከዚያ ይልቀቁ። ለመመለስ ከግራ ወይም ቀኝ ጠርዝ በጣት ይጥረጉ።"</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3-አዝራር ዳሰሳ"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"ወደ መነሻ መሄድ፣ መተግበሪያዎችን መቀያየር እና ወደ ኋላ መመለስ በአዝራሮች የሚደረስበት የታወቀ የ Android ዳሰሳ ሁነታ።"</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"በማያ ገጽዎ ግርጌ ላይ ባሉ አዝራሮች አማካኝነት ይመለሱ፣ ወደ መነሻ ይሂዱ እና መተግበሪያዎችን ይቀይሩ።"</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"የሥርዓት ዳሰሳ፣ 2 አዝራር ዳሰሳ፣ 3 አዝራር ዳሰሳ፣ የእጅ ውዝውዜ ዳሰሳ"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"በእርስዎ ነባሪ የቤት መተግበሪያ <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> አይደገፍም"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"ነባሪ የቤት መተግበሪያ ቀያይር"</string>
@@ -4365,8 +4364,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"የእርስዎን ስልክ ፍጥነት ስለሚቀንስ ይህ ባህሪ ጠፍቷል"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"ሙሉ የGNSS መለኪያዎች አስገድድ"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"ሁሉንም የGNSS ህብረ ፎቶዎችን እና ድግምግሞሾችን ያለምንም የሥራ ብስክሌት ግልቢያ ዱካቸውን ይከታተሉ"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"የበስተጀርባ እንቅስቃሴ ጅምሮችን ፍቀድ"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"ሁሉም የበስተጀርባ እንቅስቃሴ ጅምሮችን ይፈቅዳል"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"የስንክል ንግግር ሳጥንን ሁልጊዜ አሳይ"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"መተግበሪያ በሚሰናከልበት እያንዳንዱ ጊዜ የንግግር ሳጥን አሳይ"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"በANGLE የነቃ መተግበሪያ ይምረጡ"</string>
@@ -4493,16 +4490,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"ገቢር ያልሆነ / ሲም"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"ገባሪ / የወረደ ሲም"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"ገቢር ያልሆነ / የወረደ ሲም"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"የሲም ስም እና ቀለም"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"ስም"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"ቀለም (በተኳኋኝ መተግበሪያዎች ስራ ላይ የሚውል)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"አስቀምጥ"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"ሲም ይጠቀሙ"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"ጠፍቷል"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"ይህን ሲም ለማሰናከል፣ የሲም ካርድ ያስወግዱ"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"<xliff:g id="CARRIER">%1$s</xliff:g> ን ለማግበር መታ ያድርጉ"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"ወደ <xliff:g id="CARRIER">%1$s</xliff:g> ይቀየር?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"አንድ ብቻ የወረደ ሲም በአንድ ጊዜ ገባሪ ሊሆን ይችላል።\n\nወደ <xliff:g id="CARRIER1">%1$s</xliff:g> መቀየር የእርስዎን <xliff:g id="CARRIER2">%2$s</xliff:g> አገልግሎት አይሰርዘውም።"</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"ወደ <xliff:g id="CARRIER">%1$s</xliff:g> ቀይር"</string>
@@ -4616,4 +4611,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"የኤምኤምኤስ መልዕክት መላክ አይቻልም"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"የሞባይል ውሂብ ሲጠፋ በ <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> የኤምኤምኤስ መልዕክቶችን መላላክ ለመፍቀድ መታ ያድርጉ"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"የኤምኤምኤስ መልዕክት"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"በሲም ጥምረት ላይ ችግር"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g>ን መጠቀም ተግባርን ሊገድብ ይችላል። የበለጠ ለመረዳት መታ ያድርጉ።"</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"የሲም ጥምረት"</string>
 </resources>

@@ -350,10 +350,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Pilih mengikut ofset UTS"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Tarikh"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Masa"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Kunci secara automatik"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> selepas tidur"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Serta-merta selepas tidur, melainkan dibiarkan tidak berkunci oleh <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> selepas tidur, kecuali semasa dibiarkan tidak dikunci oleh <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Kunci setelah tamat masa skrin"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> selepas tamat masa"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Serta-merta selepas tamat masa, kecuali apabila dibiarkan tidak berkunci oleh <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> selepas tamat masa, kecuali apabila dibiarkan tidak berkunci oleh <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Tunjuk maklumat pemilik pada skrin yang dikunci"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Mesej skrin kunci"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Dayakan widget"</string>
@@ -397,8 +397,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Kunci skrin, cap jari"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Kunci skrin"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Wajah ditambahkan"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Sediakan wajah buka kunci"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Wajah buka kunci"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Cara menyediakan wajah buka kunci"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Sediakan wajah buka kunci"</string>
@@ -433,22 +432,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Gnakn wjh bka knci utk"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Membuka knci telefon"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Log masuk apl &amp; pembayaran"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Keperluan untuk wajah buka kunci"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Mata perlu dibuka"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Untuk membuka kunci telefon, mata anda mesti dibuka"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Sentiasa memerlukan pengesahan"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Apabla menggunakan wjh buka knci dlm apl, sentiasa perlukan pengesahan"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Padamkan data wajah"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Sediakan wajah buka kunci"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Gunakan wajah buka kunci untuk membuka kunci peranti anda, log masuk ke apl dan mengesahkan pembayaran.\n\nJangan lupa:\nTindakan melihat telefon boleh membuka kunci telefon itu apabila anda tidak bermaksud untuk melakukan perkara ini.\n\nTelefon anda boleh dibuka kuncinya oleh seseorang jika telefon itu dihalakan rapat ke wajah anda semasa mata anda terbuka.\n\nTelefon anda boleh dibuka kuncinya oleh seseorang yang kelihatan mirip anda, seperti adik beradik yang berwajah iras anda."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Padamkan data wajah?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Imej dan data biometrik yang digunakan oleh wajah buka kunci akan dipadamkan secara kekal dengan selamat. Selepas pengalihan keluar, anda memerlukan PIN, corak atau kata laluan untuk membuka kunci telefon, log masuk ke apl dan mengesahkan pembayaran."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Cap jari"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Urus cap jari"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Gunakan cap jari untuk"</string>
@@ -499,12 +492,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Lindungi tablet anda dengan pilihan kunci skrin supaya tiada sesiapa yang dapat menggunakan tablet itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan cap jari. Ketik Batal, kemudian tetapkan PIN, corak atau kata laluan."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Lindungi peranti anda dengan pilihan kunci skrin supaya tiada sesiapa yang dapat menggunakan peranti itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan cap jari. Ketik Batal, kemudian tetapkan PIN, corak atau kata laluan."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Lindungi telefon anda dengan pilihan kunci skrin supaya tiada sesiapa yang dapat menggunakan telefon itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan cap jari. Ketik Batal, kemudian tetapkan PIN, corak atau kata laluan."</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Dengan melindungi tablet anda menggunakan pilihan kunci skrin, tiada sesiapa yang dapat menggunakan tablet itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan wajah buka kunci. Untuk kembali, ketik Batal."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Dengan melindungi peranti anda menggunakan pilihan kunci skrin, tiada sesiapa yang dapat menggunakan peranti itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan wajah buka kunci. Untuk kembali, ketik Batal."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Dengan melindungi telefon anda menggunakan pilihan kunci skrin, tiada sesiapa yang dapat menggunakan telefon itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan wajah buka kunci. Untuk kembali, ketik Batal."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Langkau persediaan PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Langkau persediaan kata laluan?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Langkau persediaan corak?"</string>
@@ -1232,9 +1222,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Perhatian skrin"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Hidup / Skrin tidak akan dimatikan jika anda melihat pada skrin"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Mati"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Menghalang skrin daripada dimatikan jika anda melihat pada skrin"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Perhatian skrin menggunakan kamera depan untuk melihat sama ada seseorang sedang memandang skrin. Ciri ini berfungsi pada peranti dan imej tidak sekali-kali disimpan atau dihantar kepada Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Pastikan skrin sentiasa hidup apabila anda melihat pada skrin"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Cahaya Malam"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Cahaya Malam memberi seri warna kuning jingga pada skrin anda. Ini memudahkan lagi anda melihat skrin atau membaca dalam cahaya malap dan mungkin dapat membantu anda tidur dengan lebih mudah."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Jadual"</string>
@@ -2085,13 +2075,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Pilihan kapsyen"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Pembesaran"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Besarkan dengan tiga ketikan"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Besarkan menggunakan butang"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Besarkan menggunakan butang &amp; tiga ketikan"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Besarkan menggunakan pintasan"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Besarkan menggunakan pintasan &amp; tiga ketikan"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Zum masuk pada skrin"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Ketik 3 kali untuk mengezum"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Ketik butang untuk mengezum"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Untuk mengezum"</b>", ketik skrin 3 kali dengan cepat.\n"<ul><li>"Seret sekurang-kurangnya 2 jari untuk menatal"</li>\n<li>"Cubit menggunakan sekurang-kurangnya 2 jari untuk melaraskan zum"</li></ul>\n\n<b>"Untuk mengezum sementara"</b>", ketik skrin 3 kali dengan cepat dan tahan jari anda pada ketikan yang ketiga.\n"<ul><li>"Seret untuk beralih-alih di sekitar skrin"</li>\n<li>"Angkat jari untuk mengezum keluar"</li></ul>\n\n"Anda tidak boleh mengezum masuk pada papan kekunci dan bar navigasi."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Apabila pembesaran dihidupkan, gunakan butang Kebolehaksesan di bahagian bawah skrin untuk membuat pembesaran dengan cepat.\n\n"<b>"Untuk mengezum"</b>", ketik butang Kebolehaksesan, kemudian ketik di mana-mana pada skrin.\n"<ul><li>"Seret sekurang-kurangnya 2 jari untuk menatal"</li>\n<li>"Cubit menggunakan sekurang-kurangnya 2 jari untuk melaraskan zum"</li></ul>\n\n<b>"Untuk mengezum sementara"</b>", ketik butang Kebolehaksesan, kemudian sentuh &amp; tahan di mana-mana pada skrin.\n"<ul><li>"Seret untuk beralih-alih di sekitar skrin"</li>\n<li>"Angkat jari untuk mengezum keluar"</li></ul>\n\n"Anda tidak boleh mengezum masuk pada papan kekunci atau bar navigasi."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Apabila pembesaran dihidupkan, anda boleh mengezum masuk pada skrin.\n\n"<b>"Untuk mengezum"</b>", mulakan pembesaran, kemudian ketik di mana-mana pada skrin.\n"<ul><li>"• Seret sekurang-kurangnya 2 jari untuk menatal"</li>\n<li>"• Cubit menggunakan sekurang-kurangnya 2 jari untuk melaraskan zum"</li></ul>\n\n<b>"Untuk mengezum sementara"</b>", mulakan pembesaran, kemudian sentuh &amp; tahan di mana-mana pada skrin.\n"<ul><li>"• Seret untuk bergerak di sekitar skrin"</li>\n<li>"• Angkat jari untuk mengezum keluar"</li></ul>\n\n"Anda tidak boleh mengezum masuk pada papan kekunci atau bar navigasi."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Gunakan butang kebolehaksesan untuk buka"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Gunakan gerak isyarat untuk buka"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Gunakan gerak isyarat kebolehaksesan baharu"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Untuk menghidupkan atau mematikan perkhidmatan ini, ketik butang kebolehaksesan<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>di sebelah bawah skrin anda.\n\nUntuk beralih antara perkhidmatan, sentuh &amp; tahan butang kebolehaksesan."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Untuk menghidupkan atau mematikan perkhidmatan ini, leret ke atas dari bahagian bawah skrin menggunakan dua jari.\n\nUntuk beralih antara perkhidmatan, leret ke atas menggunakan dua jari dan tahan."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Untuk menghidupkan atau mematikan perkhidmatan ini, leret ke atas dari bahagian bawah skrin menggunakan tiga jari.\n\nUntuk beralih antara perkhidmatan, leret ke atas menggunakan tiga jari dan tahan."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Untuk menghidupkan atau mematikan perkhidmatan kebolehaksesan, leret ke atas dari bahagian bawah skrin menggunakan dua jari.\n\nUntuk beralih antara perkhidmatan, leret ke atas menggunakan dua jari dan tahan."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Untuk menghidupkan atau mematikan perkhidmatan kebolehaksesan, leret ke atas dari bahagian bawah skrin menggunakan tiga jari.\n\nUntuk beralih antara perkhidmatan, leret ke atas menggunakan tiga jari dan tahan."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Butang Kebolehaksesan ditetapkan kepada <xliff:g id="SERVICE">%1$s</xliff:g>. Untuk menggunakan pembesaran, sentuh &amp; tahan butang Kebolehaksesan, kemudian pilih pembesaran."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Pintasan kekunci kelantangan"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Perkhidmatan pintasan"</string>
@@ -2113,7 +2112,7 @@
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 saat"</string>
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 minit"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minit"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Ambil tindakan (tamat masa Kebolehaksesan)"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Tempoh tindakan (tamat masa Kebolehaksesan)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Tempoh untuk mengambil tindakan"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Pilih tempoh untuk menunjukkan mesej yang meminta anda mengambil tindakan, tetapi mesej itu hanya dapat dilihat buat sementara waktu.\n\nTidak semua apl menyokong tetapan ini."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Lengahan sentuh &amp; tahan"</string>
@@ -2217,9 +2216,9 @@
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Oleh kerana menghidupkan <xliff:g id="SERVICE">%1$s</xliff:g> mempengaruhi penyulitan data, anda perlu mengesahkan kata laluan anda."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> meminta kawalan sepenuhnya ke atas peranti ini. Perkhidmatan dapat membaca skrin dan bertindak bagi pihak pengguna dengan keperluan kebolehaksesan. Tahap kawalan ini tidak sesuai untuk kebanyakan apl."</string>
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Kawalan penuh sesuai untuk apl yang membantu anda dengan keperluan kebolehaksesan tetapi bukan untuk kebanyakan apl."</string>
-    <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Paparan dan skrin kawalan"</string>
+    <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Melihat dan mengawal skrin"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Ciri ini boleh membaca semua kandungan pada skrin dan memaparkan kandungan di atas apl lain."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Paparan dan tindakan platform"</string>
+    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Melihat dan melaksanakan tindakan"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Tindakan ini boleh menjejak interaksi anda dengan apl atau penderia perkakasan dan berinteraksi dengan apl bagi pihak anda."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Benarkan"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Tolak"</string>
@@ -3382,12 +3381,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Paparkan dalam bidai tarik turun, bar status &amp; pada skrin kunci"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Lampu berkelip"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Skrin kunci"</string>
-    <!-- no translation found for lockscreen_bypass_title (3077831331856929085) -->
-    <skip />
-    <!-- no translation found for lockscreen_bypass_summary (2767475923650816867) -->
-    <skip />
-    <!-- no translation found for keywords_lockscreen_bypass (250300001805572693) -->
-    <skip />
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Langkau skrin kunci"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Slps wajah buka kunci, teruskan ke skrin terakhir digunakan"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Skrin kunci, Langkau, Pintas"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Apabila profil kerja dikunci"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Pemberitahuan pada skrin kunci"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Tunjukkan pemberitahuan makluman dan pemberitahuan senyap"</string>
@@ -4198,13 +4194,16 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Ambil potret diri dengan lebih pantas"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navigasi sistem"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navigasi 2 butang"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Untuk menukar apl, leret ke atas pada butang Skrin Utama. Leret ke atas sekali lagi untuk melihat semua apl. Berfungsi dari mana-mana skrin. Anda tiada lagi butang Ikhtisar di bahagian bawah sebelah kanan skrin."</string>
+    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Cuba butang Skrin Utama baharu"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Hidupkan gerak isyarat baharu untuk menukar apl"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigasi gerak isyarat"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Untuk pergi ke Skrin Utama, leret ke atas dari bahagian bawah skrin. Untuk Kembali, leret dari tepi bahagian kiri atau kanan skrin. Untuk beralih apl, leret ke atas dari bahagian bawah skrin dan tahan sebelum melepaskan jari anda."</string>
+    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
+    <skip />
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigasi 3 butang"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Dalam mod navigasi Android Klasik, anda boleh pergi ke Skrin Utama, bertukar apl dan Kembali melalui butang."</string>
+    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigasi sistem, navigasi 2 butang, navigasi 3 butang, navigasi gerak isyarat."</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Tidak disokong oleh apl rumah anda, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Tukar apl rumah lalai"</string>
@@ -4368,8 +4367,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Ciri ini telah dimatikan kerana memperlahankan telefon anda"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Paksa ukuran GNSS penuh"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Jejak semua gugusan dan kekerapan GNSS tanpa kitaran tugas"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Benarkan aktiviti latar belakang bermula"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Membenarkan semua aktiviti latar belakang bermula"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Sentiasa tunjukkan dialog ranap sistem"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Tunjukkan dialog setiap kali apl ranap"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Pilih apl didayakan ANGLE"</string>
@@ -4496,16 +4493,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Tidak aktif / SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktif / SIM Dimuat Turun"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Tidak Aktif / SIM Dimuat Turun"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"Nama &amp; warna SIM"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Nama"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Warna (digunakan oleh apl yang serasi)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Simpan"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Gunakan SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Mati"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Untuk melumpuhkan SIM ini, keluarkan kad SIM"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Ketik untuk mengaktifkan <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Tukar kepada <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Hanya satu SIM yang dimuat turun boleh aktif pada satu-satu masa.\n\nBertukar kepada <xliff:g id="CARRIER1">%1$s</xliff:g> tidak akan membatalkan perkhidmatan <xliff:g id="CARRIER2">%2$s</xliff:g> anda."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Tukar kepada <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4619,4 +4614,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Tidak dapat menghantar mesej MMS"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Ketik untuk membenarkan pemesejan MMS pada <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> apabila data mudah alih dimatikan"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Mesej MMS"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Isu dengan gabungan SIM"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Penggunaan <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> mungkin mengehadkan kefungsian. Ketik untuk mengetahui lebih lanjut."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Gabungan SIM"</string>
 </resources>

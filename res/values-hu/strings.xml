@@ -350,10 +350,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Kiválasztás UTC-eltolódással"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Dátum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Idő"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Automatikus zárolás"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> alvó mód után"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Rögtön az alvó mód bekapcsolása után, kivéve ha a(z) <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> alvó üzemmód után; kivéve akkor, amikor <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Zárolás a képernyő elsötétedése után"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Az időkorlát után azonnal, kivéve ha a következő tartja feloldva: <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, kivéve ha a következő tartja feloldva: <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Tulajdonosi adatok megjelenítése a lezáró képernyőn"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Képernyőzár üzenete"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Modulengedélyezés"</string>
@@ -397,8 +397,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Képernyőzár, ujjlenyomat"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Képernyőzár"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Arc hozzáadva"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Az arcalapú feloldás beállítása"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Arcalapú feloldás"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Az arcalapú feloldás beállítása"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Az arcalapú feloldás beállítása"</string>
@@ -433,22 +432,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Feloldás használata:"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Zárolás feloldása"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Alkalmazásbejelentkezés, fizetés"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Az arcalapú feloldás követelményei"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"A szemének nyitva kell lennie"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"A telefon feloldásához nyitva kell lennie a szemének"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Mindig kérjen megerősítést"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Alkalmazáson belüli arcalapú feloldáshoz megerősítés is szükséges"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Arcadatok törlése"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Az arcalapú feloldás beállítása"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Az arcalapú feloldás segítségével feloldhatja eszköze zárolását, bejelentkezhet alkalmazásokba, illetve megerősíthet fizetéseket.\n\nNe feledje:\nHa a telefonja felé fordul, azzal akkor is feloldhatja az eszköz zárolását, ha nem áll szándékában.\n\nTelefonját más is feloldhatja, ha az Ön arca elé tartja, amikor a szeme nyitva van.\n\nElőfordulhat, hogy telefonja zárolását egy Önre nagyon hasonlító személy, például egypetéjű ikertestvére is feloldhatja."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Törli az arcadatokat?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Az arcalapú feloldáshoz használt képi és biometrikus adatok véglegesen és biztonságosan törlődnek. Az eltávolítás után PIN-kódra, mintára vagy jelszóra lesz szüksége a telefon feloldásához, az alkalmazásokba való bejelentkezéshez és a tranzakciók megerősítéséhez."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Ujjlenyomat"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Ujjlenyomatok kezelése"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Ujjlenyomat ehhez:"</string>
@@ -499,12 +492,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Védje meg táblagépét képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az ujjlenyomat beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, mintát vagy jelszót."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Védje meg eszközét képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az ujjlenyomat beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, mintát vagy jelszót."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Védje meg telefonját képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az ujjlenyomat beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, mintát vagy jelszót."</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Képernyőzárral védett táblagépéhez nem férhetnek hozzá, ha ellopják vagy elveszíti. A képernyőzár az arcalapú feloldás használatához is szükséges. A visszalépéshez koppintson a Mégse gombra."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Képernyőzárral védett eszközéhez nem férhetnek hozzá, ha ellopják vagy elveszíti. A képernyőzár az arcalapú feloldás használatához is szükséges. A visszalépéshez koppintson a Mégse gombra."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Képernyőzárral védett telefonjához nem férhetnek hozzá, ha ellopják vagy elveszíti. A képernyőzár az arcalapú feloldás használatához is szükséges. A visszalépéshez koppintson a Mégse gombra."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Kihagyja a PIN-kód beállítását?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Kihagyja a jelszó beállítását?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Kihagyja a minta beállítását?"</string>
@@ -1232,9 +1222,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Képernyőfigyelő"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Be / A képernyő nem kapcsol majd ki, ha Ön épp azt nézi"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Ki"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Amíg Ön a képernyőt nézi, megakadályozza annak kikapcsolását"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"A Képernyőfigyelő az előlapi kamerát használja annak ellenőrzésére, hogy nézi-e felhasználó a képernyőt. A funkció az eszközön működik, és a fotókat sosem tárolja vagy küldi tovább a Google-nak."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ne kapcsoljon ki a képernyő, amíg nézem"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Éjszakai fény"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Az Éjszakai fény borostyánsárga árnyalatúra színezi a képernyőt, hogy gyenge fény mellett se legyen kellemetlen a képernyőre nézni. Emellett az elalvást is megkönnyítheti."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Ütemezés"</string>
@@ -2085,13 +2075,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Feliratbeállítások"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Nagyítás"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Nagyítás három koppintással"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Nagyítás gombbal"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Nagyítás gombbal és háromszoros koppintással"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Nagyítás gyorsparanccsal"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Nagyítás gyorsparanccsal és három koppintással"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"A képernyő nagyítása"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"A nagyításhoz koppintson háromszor"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Nagyításhoz koppintson a gombra"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Nagyításhoz"</b>" gyorsan koppintson háromszor a képernyőre.\n"<ul><li>"Görgetéshez húzza legalább két ujját a képernyőn."</li>\n<li>"A nagyítás mértékét két vagy több ujjának össze- vagy széthúzásával módosíthatja."</li></ul>\n\n<b>"Ideiglenes nagyításhoz"</b>" gyorsan koppintson háromszor a képernyőre, és az utolsó koppintást követően ne emelje fel az ujját.\n"<ul><li>"A képernyőn húzással mozoghat"</li>\n<li>"Kicsinyítéshez emelje fel az ujját."</li></ul>\n\n"A billentyűzetre és a navigációs sávra nem lehet ránagyítani."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Ha be van kapcsolva a nagyítás, a képernyő alján található Kisegítő lehetőségek gomb segítségével gyorsan ránagyíthat a kívánt részre.\n\n"<b>"Nagyításhoz"</b>" koppintson a Kisegítő lehetőségek gombra, majd bárhova a képernyőn.\n"<ul><li>"Görgetéshez húzza legalább két ujját a képernyőn."</li>\n<li>"A nagyítás/kicsinyítés mértékének módosításához húzza össze/szét legalább két ujját."</li></ul>\n\n<b>"Ideiglenes nagyításhoz"</b>" koppintson a Kisegítő lehetőségek gombra, majd tartsa ujját lenyomva bárhol a képernyőn.\n"<ul><li>"A képernyőn húzással mozoghat."</li>\n<li>"Kicsinyítéshez emelje fel az ujját."</li></ul>\n\n"A billentyűzetre és a navigációs sávra nem lehet ránagyítani."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Ha be van kapcsolva a nagyítás funkció, ránagyíthat a képernyő tartalmára.\n\nA "<b>"nagyításhoz"</b>" indítsa el a funkciót, majd koppintson a kívánt területre a képernyőn.\n"<ul><li>"• Görgetéshez húzza legalább két ujját a képernyőn."</li>\n<li>"• A nagyítás mértékét két vagy több ujjának össze- vagy széthúzásával módosíthatja."</li></ul>\n\n<b>"Ideiglenes nagyításhoz"</b>" indítsa el a funkciót, majd tartsa lenyomva a kívánt területet a képernyőn.\n"<ul><li>"• Ujját lenyomva tartva mozoghat a képernyőn."</li>\n<li>"• A méret visszaállításához emelje fel ujját a képernyőről."</li></ul>\n\n"A billentyűzeten és a navigációs sávon nem lehetséges a nagyítás."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Megnyitás a kisegítő gombbal"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Megnyitás kézmozdulattal"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Új kisegítő kézmozdulat használata"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"A szolgáltatás be- vagy kikapcsolásához koppintson a képernyő alján található Kisegítő lehetőségek <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> gombra.\n\nA szolgáltatások közötti váltáshoz tartsa lenyomva a Kisegítő lehetőségek gombot."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"A szolgáltatás be- vagy kikapcsolásához csúsztasson két ujjával felfelé a képernyő aljáról.\n\nA szolgáltatások közötti váltáshoz csúsztasson felfelé két ujjával, és ne engedje el a képernyőt."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"A szolgáltatás be- vagy kikapcsolásához csúsztasson három ujjával felfelé a képernyő aljáról.\n\nA szolgáltatások közötti váltáshoz csúsztasson felfelé három ujjával, és ne engedje el a képernyőt."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"A kisegítő szolgáltatás be- vagy kikapcsolásához csúsztasson két ujjával felfelé a képernyő aljáról.\n\nA szolgáltatások közötti váltáshoz csúsztasson felfelé két ujjával, és ne engedje el a képernyőt."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"A kisegítő szolgáltatás be- vagy kikapcsolásához csúsztasson három ujjával felfelé a képernyő aljáról.\n\nA szolgáltatások közötti váltáshoz csúsztasson felfelé három ujjával, és ne engedje el a képernyőt."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Értem"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"A Kisegítő lehetőségek gomb a következőre van állítva: <xliff:g id="SERVICE">%1$s</xliff:g>. Nagyításhoz tartsa lenyomva a Kisegítő lehetőségek gombot, majd válassza a nagyítás lehetőséget."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Gyorsparancs a hangerőgombokkal"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Gyorsparancs-szolgáltatás"</string>
@@ -2216,7 +2215,7 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Mivel a(z) <xliff:g id="SERVICE">%1$s</xliff:g> bekapcsolása hatással van az adatok titkosítására, meg kell erősítenie PIN-kódját."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Mivel a(z) <xliff:g id="SERVICE">%1$s</xliff:g> bekapcsolása hatással van az adatok titkosítására, meg kell erősítenie jelszavát."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"A(z) <xliff:g id="SERVICE">%1$s</xliff:g> teljes irányítást kér az eszköz felett. Az alkalmazás felolvashatja a képernyőn lévő tartalmat, és cselekedhet a kisegítő lehetőségekre szoruló felhasználók helyett. Az irányítás ilyen szintje nem megfelelő a legtöbb alkalmazás számára."</string>
-    <string name="accessibility_service_warning_description" msgid="5678294638592090340">"A teljes vezérlés indokolt olyan alkalmazásoknál, amelyek kisegítő lehetőségekkel kapcsolatban nyújtanak segítséget, a legtöbb alkalmazásnál azonban nem."</string>
+    <string name="accessibility_service_warning_description" msgid="5678294638592090340">"A teljes vezérlés indokolt olyan alkalmazásoknál, amelyek kisegítő lehetőségeket nyújtanak, a legtöbb alkalmazásnál azonban nem."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Képernyő megtekintése és kezelése"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Elolvashatja a képernyő tartalmát, és tartalmakat jeleníthet meg más alkalmazások felett."</string>
     <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Műveletek megtekintése és elvégzése"</string>
@@ -4195,13 +4194,16 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Gyors szelfikészítés"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Rendszernavigáció"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Kétgombos navigáció"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Az alkalmazások közti váltáshoz csúsztassa gyorsan ujját felfelé a Kezdőképernyő gombon. A műveletet megismételve az összes alkalmazást megtekintheti. Minden képernyőn működik. Az Áttekintés gomb többé nem jelenik meg a képernyő jobb alsó sarkában."</string>
+    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Az új Kezdőképernyő gomb kipróbálása"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Új kézmozdulat bekapcsolása az alkalmazások közti váltáshoz"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigáció kézmozdulatokkal"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"A kezdőképernyőre való ugráshoz csúsztasson felfelé a képernyő aljáról. A visszalépéshez csúsztasson a képernyő jobb vagy bal széléről. Alkalmazásváltáshoz csúsztasson felfelé a képernyő aljáról, és tartsa nyomva ujját, mielőtt elengedi a képernyőt."</string>
+    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
+    <skip />
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Háromgombos navigáció"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klasszikus Android-navigációs mód, amelynél a kezdőképernyő, az alkalmazásváltás és a visszalépés gombok segítségével érhető el."</string>
+    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="5825645072714635357">"rendszernavigáció, kétgombos navigáció, háromgombos navigáció, navigáció kézmozdulatokkal"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Nem támogatja az alapértelmezett kezdőalkalmazás, a(z) <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Alapértelmezett kezdőalkalmazás cseréje"</string>
@@ -4365,8 +4367,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"A rendszer kikapcsolta ezt a funkciót, mert lelassítja a telefont"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Teljes GNSS-mérés indítása"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Az összes GNSS-műhold és -frekvencia nyomon követése aktívciklus-szabályozás nélkül"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Háttér-tevékenységek megkezdésének engedélyezése"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Minden háttér-tevékenység megkezdését engedélyezi"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Összeomlási párbeszédablak megjelenítése minden alkalommal"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Mindig megjeleníti a párbeszédablakot, amikor valamelyik alkalmazás összeomlik"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"ANGLE-kompatibilis alkalmazás kiválasztása"</string>
@@ -4493,16 +4493,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Inaktív / SIM-kártya"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktív / Letöltött SIM"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Inaktív / Letöltött SIM"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"SIM-kártya neve és színe"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Név"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Szín (kompatibilis alkalmazásokhoz)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Mentés"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"SIM-kártya használata"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Ki"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"A SIM letiltásához távolítsa el a kártyát az eszközből"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Koppintson a következő aktiválásához: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Vált a(z) <xliff:g id="CARRIER">%1$s</xliff:g> szolgáltatóra?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Egyszerre csak egy letöltött SIM lehet aktív.\n\nHa átvált a(z) <xliff:g id="CARRIER1">%1$s</xliff:g> szolgáltatóra, nem mondja le a(z) <xliff:g id="CARRIER2">%2$s</xliff:g> szolgáltatását."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Váltás erre: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4616,4 +4614,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Nem lehet MMS-üzenetet küldeni"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Koppintson az MMS-üzenet-küldés engedélyezéséhez a(z) <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> hálózatán kikapcsolt mobiladatok esetén"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS-üzenet"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"SIM-kombinációs probléma"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"A(z) <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> használata korlátozhatja a működést. Koppintson, ha további információra van szüksége."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM-kombináció"</string>
 </resources>
