@@ -161,6 +161,10 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
         if (accessibilityEnabled) {
             accessibilityButton.callOnClick();
+            mSwitchDiversity.setClickable(true);
+            mSwitchDiversity.setOnClickListener(v -> {
+                mSwitchDiversity.getSwitch().toggle();
+            });
         }
     }
 
