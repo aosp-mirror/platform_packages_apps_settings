@@ -214,6 +214,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
+        intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
     }
 
