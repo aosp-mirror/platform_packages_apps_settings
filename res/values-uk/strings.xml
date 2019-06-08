@@ -354,10 +354,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"За зміщенням від UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Автоматичне блокування"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> після режиму сну"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Одразу після переходу в сон, якщо <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> не запобігає блокуванню"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> після переходу в сон, якщо <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> не запобігає блокуванню"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Блокувати після завершення часу очікування екрана"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"За <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> після завершення часу очікування"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Одразу після завершення часу очікування, якщо <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> не запобігає блокуванню"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"За <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> після завершення часу очікування, якщо <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> не запобігає блокуванню"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Показувати дані про власника на заблоков. екрані"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Текст на екрані"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Увімкнути віджети"</string>
@@ -403,8 +403,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Блокування екрана, відбиток пальця"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Блокування екрана"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Обличчя додано"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Налаштуйте Фейсконтроль"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Фейсконтроль"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Як налаштувати Фейсконтроль"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Налаштуйте Фейсконтроль"</string>
@@ -439,22 +438,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Використання фейсконтролю"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Розблокування телефона"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Вхід у додатки та платежі"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Вимоги для використання Фейсконтролю"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Очі мають бути відкритими"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Розблоковувати телефон, коли очі відкриті"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Завжди просити підтвердження"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Просити підтвердження під час використання Фейсконтролю в додатках"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Видалити дані про обличчя"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Налаштувати Фейсконтроль"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Використовуйте Фейсконтроль, щоб розблоковувати пристрій, входити в додатки й підтверджувати платежі.\n\nВажливо\nТелефон можна розблокувати поглядом випадково.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя, коли у вас відкриті очі.\n\nТелефон може розблокувати людина, схожа на вас, зокрема ваш близнюк."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Видалити дані про обличчя?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Зображення й біометричні дані, потрібні для Фейсконтролю, остаточно й безпечно видаляться. Після цього потрібно буде вводити PIN-код, ключ або пароль, щоб розблоковувати телефон, входити в додатки й підтверджувати платежі."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Цифровий відбиток"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Керування відбитками"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Використ. відбиток для"</string>
@@ -507,12 +500,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Блокування екрана захистить ваш планшет, якщо його буде загублено або викрадено. Ця функція також потрібна, щоб налаштувати автентифікацію за відбитками пальців. Натисніть \"Скасувати\", а потім налаштуйте PIN-код, ключ або пароль."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Блокування екрана захистить ваш пристрій, якщо його буде загублено або викрадено. Ця функція також потрібна, щоб налаштувати автентифікацію за відбитками пальців. Натисніть \"Скасувати\", а потім налаштуйте PIN-код, ключ або пароль."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Блокування екрана захистить ваш телефон, якщо його буде загублено або викрадено. Ця функція також потрібна, щоб налаштувати автентифікацію за відбитками пальців. Натисніть \"Скасувати\", а потім налаштуйте PIN-код, ключ або пароль."</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Блокування екрана захистить ваш планшет, якщо він загубиться чи його викрадуть. Воно також потрібне, щоб налаштувати Фейсконтроль. Щоб повернутися назад, натисніть \"Скасувати\"."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Блокування екрана захистить ваш пристрій, якщо він загубиться чи його викрадуть. Воно також потрібне, щоб налаштувати Фейсконтроль. Щоб повернутися назад, натисніть \"Скасувати\"."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Блокування екрана захистить ваш телефон, якщо він загубиться чи його викрадуть. Воно також потрібне, щоб налаштувати Фейсконтроль. Щоб повернутися назад, натисніть \"Скасувати\"."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Не налаштовувати PIN-код?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Не налаштовувати пароль?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Не налаштовувати ключ?"</string>
@@ -1270,9 +1260,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Розпізнавання уваги"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Ввімкнено: екран не вимикатиметься, доки ви на нього дивитесь"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Вимкнено"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Не дає екрану вимикатись, якщо ви на нього дивитесь"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Розпізнавання уваги за допомогою передньої камери визначає, чи дивиться користувач на екран. Ця функція працює лише на пристрої, не зберігає зображень і не надсилає їх у Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Екран не вимикається, коли ви на нього дивитесь"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Нічний режим"</string>
     <string name="night_display_text" msgid="1837277457033025056">"У нічному режимі екран набуває бурштинового відтінку. Це знімає напруження очей при тьмяному освітленні та допомагає легше заснути."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Розклад"</string>
@@ -2129,13 +2119,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Налаштування субтитрів"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Збільшення"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Збільшувати потрійним торканням"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Збільшувати кнопкою"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Збільшувати кнопкою та потрійним торканням"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Збільшувати кнопкою/жестом"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Збільшувати кнопкою й потрійним дотиком"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Наблизити екран"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Тричі торкніться, щоб збільшити"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Торкніться кнопки, щоб збільшити вміст"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Щоб збільшити вміст"</b>", тричі торкніться екрана.\n"<ul><li>"Щоб прокрутити вміст, проведіть по екрану принаймні двома пальцями."</li>\n<li>"Щоб змінити масштаб, стисніть або розведіть принаймні два пальці."</li></ul>\n\n<b>"Щоб тимчасово збільшити вміст"</b>", тричі натисніть і втримуйте його.\n"<ul><li>"Пересувайте палець, щоб переміщатись екраном."</li>\n<li>"Підніміть палець, щоб знову зменшити елемент."</li></ul>\n\n"Масштабування не підтримується на клавіатурі та панелі навігації."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Коли ввімкнено збільшення, використовуйте кнопку спеціальних можливостей унизу екрана, щоб швидко збільшувати його вміст.\n\n"<b>"Щоб збільшити вміст"</b>", торкніться кнопки спеціальних можливостей, а потім будь-де на екрані.\n"<ul><li>"Щоб прокрутити вміст, проведіть по екрану принаймні двома пальцями."</li>\n<li>"Щоб змінити масштаб, стисніть або розведіть принаймні два пальці."</li></ul>\n\n<b>"Щоб тимчасово збільшити вміст"</b>", торкніться кнопки спеціальних можливостей, а потім натисніть і втримуйте будь-яке місце на екрані.\n"<ul><li>"Пересувайте палець, щоб переміщатись екраном.у"</li>\n<li>"Підніміть палець, щоб знову зменшити елемент."</li></ul>\n\n"Масштабування не підтримується на клавіатурі та панелі навігації."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Коли функцію збільшення ввімкнено, ви можете наближувати вміст на екрані.\n\n"<b>"Щоб наблизити вміст"</b>", увімкніть збільшення, а потім торкніться будь-якого місця на екрані.\n"<ul><li>"• Щоб прокрутити, потягніть екран принаймні двома пальцями"</li>\n<li>"• Щоб змінити рівень масштабування, стисніть принаймні два пальці"</li></ul>\n\n<b>"Щоб тимчасово наблизити вміст"</b>", увімкніть функцію збільшення, а потім натисніть і утримуйте будь-яке місце на екрані.\n"<ul><li>"• Щоб переміщатись екраном, пересувайте палець."</li>\n<li>"• Щоб віддалити зображення, підніміть палець."</li></ul>\n\n"Наближення не підтримується на клавіатурі чи панелі навігації."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Використовуйте кнопку спеціальних можливостей"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Використовуйте жест"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Спробуйте новий жест для спеціальних можливостей"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Щоб увімкнути або вимкнути цей сервіс, натисніть кнопку спеціальних можливостей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> унизу екрана.\n\nЩоб переключитися між сервісами, натисніть і утримуйте цю кнопку."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Щоб увімкнути або вимкнути цей сервіс, проведіть двома пальцями знизу екрана.\n\nЩоб переключитися між сервісами, проведіть двома пальцями вгору й утримуйте екран."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Щоб увімкнути або вимкнути цей сервіс, проведіть трьома пальцями знизу екрана.\n\nЩоб переключитися між сервісами, проведіть трьома пальцями вгору й утримуйте екран."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Щоб увімкнути або вимкнути сервіс спеціальних можливостей, проведіть двома пальцями знизу екрана.\n\nЩоб переключитися між сервісами, проведіть двома пальцями вгору й утримуйте екран."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Щоб увімкнути або вимкнути сервіс спеціальних можливостей, проведіть трьома пальцями знизу екрана.\n\nЩоб переключитися між сервісами, проведіть трьома пальцями вгору й утримуйте екран."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Для кнопки спеціальних можливостей вибрано службу \"<xliff:g id="SERVICE">%1$s</xliff:g>\". Щоб змінити на збільшення, натисніть і втримуйте кнопку спеціальних можливостей, а потім виберіть \"Збільшення\"."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Комбінація клавіш гучності"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Служба, пов’язана з ярликом"</string>
@@ -2150,8 +2149,8 @@
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Монофонічне аудіо"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Об’єднувати канали під час відтворення аудіо"</string>
     <string name="accessibility_toggle_master_balance_title" msgid="551441665399043471">"Баланс аудіо"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Лівий"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Правий"</string>
+    <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Зліва"</string>
+    <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Справа"</string>
     <string name="accessibility_timeout_default" msgid="8316215621219570607">"За умовчанням"</string>
     <string name="accessibility_timeout_10secs" msgid="1976492627730727871">"10 секунд"</string>
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 секунд"</string>
@@ -3570,7 +3569,7 @@
     <string name="zen_access_detail_switch" msgid="1188754646317450926">"Дозволити доступ у режимі \"Не турбувати\""</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Установлені додатки не запитували доступу до функції \"Не турбувати\""</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Завантаження додатків…"</string>
-    <string name="app_notifications_off_desc" msgid="8289223211387083447">"На ваш запит Android блокує сповіщення з цього додатка на пристрої"</string>
+    <string name="app_notifications_off_desc" msgid="8289223211387083447">"Android блокує сповіщення з цього додатка на цьому пристрої"</string>
     <string name="channel_notifications_off_desc" msgid="9013011134681491778">"На ваш запит Android блокує цю категорію сповіщень на пристрої"</string>
     <string name="channel_group_notifications_off_desc" msgid="2315252834146837470">"На ваш запит Android блокує цю групу сповіщень на пристрої"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Категорії"</string>
@@ -4342,13 +4341,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Робіть селфі швидше"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Навігація в системі"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Навігація з двома кнопками"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Щоб перейти між додатками, проведіть пальцем угору на кнопці головного екрана. Щоб переглянути всі додатки, знову проведіть угору. Працює на будь-якому екрані. Кнопки \"Огляд\" у правому нижньому куті екрана більше не буде."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Щоб переключитися між додатками, проведіть пальцем угору на кнопці головного екрана. Щоб переглянути всі додатки, знову проведіть пальцем угору. Щоб повернутися, торкніться кнопки \"Назад\"."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Спробуйте нову кнопку головного екрана"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Увімкніть новий жест, щоб переходити між додатками"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Навігація жестами"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Щоб перейти на головний екран, проведіть пальцем від нижнього краю екрана вгору. Щоб перейти на попередній екран, проведіть пальцем від лівого або правого краю. Щоб перейти в інший додаток, проведіть пальцем від нижнього краю вгору й утримуйте палець."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Щоб перейти на головний екран, проведіть пальцем знизу вгору. Щоб переключитися між додатками, проведіть пальцем знизу вгору, утримуйте екран, а потім відпустіть. Щоб повернутися назад, проведіть пальцем від лівого чи правого краю."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Навігація з трьома кнопками"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Класичний режим навігації Android: на головний або попередній екран чи в інший додаток можна переходити кнопками."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Щоб повертатися назад, виходити на головний екран і переключатися між додатками, використовуйте кнопки внизу екрана."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"навігація в системі, навігація з двома кнопками, навігація з трьома кнопками, навігація жестами"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Не підтримується додатком головного екрана за умовчанням, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Змінити додаток головного екрана за умовчанням"</string>
@@ -4526,8 +4525,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Цю функцію вимкнено, оскільки вона сповільнює роботу телефона"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Увімкнути повне вимірювання GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Відстежувати всі фотосхеми й частоти GNSS без застосування циклічного режиму"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Починати дії у фоновому режимі"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Дозволяє починати будь-які дії у фоновому режимі"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Завжди показувати вікно збоїв"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Показувати вікно під час кожного збою додатка"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Виберіть додаток із підтримкою ANGLE"</string>
@@ -4656,16 +4653,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Неактивний/SIM-карта"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Активний/завантажена SIM-карта"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Неактивний/завантажена SIM-карта"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"Назва й колір SIM-карти"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Назва"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Колір (для сумісних додатків)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Зберегти"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Використовувати SIM-карту"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Вимкнено"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Щоб вимкнути цю SIM-карту, вийміть її"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Торкніться, щоб активувати оператора <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Перейти до оператора <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Активною може бути лише одна завантажена SIM-карта.\n\nЯкщо ви перейдете до оператора <xliff:g id="CARRIER1">%1$s</xliff:g>, сервіс <xliff:g id="CARRIER2">%2$s</xliff:g> не буде скасовано."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Перейти до оператора <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4787,4 +4782,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Не вдається надіслати MMS-повідомлення"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Торкніться, щоб увімкнути MMS-повідомлення для оператора <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>, коли мобільне передавання даних вимкнено"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS-повідомлення"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Виникли проблеми з комбінацією SIM-карт"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"За використання операторів <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> можуть працювати не всі функції. Торкніться, щоб дізнатися більше."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Комбінація SIM-карт"</string>
 </resources>
