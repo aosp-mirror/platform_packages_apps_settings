@@ -4193,13 +4193,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Ta selfies snabbare"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Systemnavigering"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navigering med två knappar"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Svep uppåt från hemknappen om du vill byta app. Svep uppåt igen om du vill se alla appar. Du kan göra detta oavsett vilken skärm som är öppen. Det finns inte längre någon knapp för översikt nere till höger på skärmen."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Svep uppåt från hemknappen om du vill byta app. Svep uppåt igen om du vill visa alla appar. Tryck på bakåtknappen om du vill gå tillbaka."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Testa den nya hemknappen"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Aktivera den nya rörelsen för att byta mellan appar"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigering med rörelser"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Du öppnar startskärmen genom att svepa uppåt från skärmens nederkant, backar ett steg genom att svepa från skärmens höger- eller vänsterkant och byter app genom att först svepa uppåt från skärmens nederkant och sedan hålla kvar fingret en stund innan du släpper."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Du öppnar startskärmen genom att svepa uppåt från skärmens nederkant, Byt app genom att svepa uppåt från nederkanten, hålla stilla och sedan släppa. Gå tillbaka genom att svepa från skärmens höger- eller vänsterkant."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigering med tre knappar"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Det klassiska navigeringsläget i Android med en hemknapp som öppnar startskärmen, en knapp att byta app med och en bakåtknapp."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Öppna startskärmen, gå tillbaka och byt app med knappar längst ned på skärmen."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"systemnavigering, navigering med två knappar, navigering med tre knappar, navigering med rörelser"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Stöds inte av din standardapp för startskärm, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Byt standardapp för startskärm"</string>
@@ -4363,8 +4363,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Denna funktion har inaktiverats eftersom den gör mobilen långsammare"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Framtvinga fullständiga GNSS-mätningar"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Spåra alla konstellationer och frekvenser för GNSS utan arbetscykel"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Tillåt att aktiviteter startas i bakgrunden"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Tillåter att aktiviteter startas i bakgrunden"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Visa alltid en dialogruta vid krascher"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Visa alltid en dialogruta när en app kraschar"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Välj en ANGLE-kompatibel app"</string>
@@ -4497,6 +4495,8 @@
     <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Spara"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Använd SIM-kort"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Av"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Ta ut SIM-kortet om du vill inaktivera det"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Aktivera <xliff:g id="CARRIER">%1$s</xliff:g> genom att trycka"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Vill du byta till <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Du kan bara ha ett aktivt SIM-kort åt gången.\n\nOm du byter till <xliff:g id="CARRIER1">%1$s</xliff:g> avslutas inte tjänsten hos <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Byt till <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4610,4 +4610,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Det går inte att skicka mms"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Tryck för att tillåta mms via <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> när mobildata är inaktiverat"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Mms"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problem med SIM-kombination"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Om du använder <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> kan funktionerna begränsas. Tryck för att läsa mer."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM-kombination"</string>
 </resources>
