@@ -21,7 +21,6 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import android.annotation.Nullable;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.Resources.Theme;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -44,6 +43,7 @@ import com.google.android.setupdesign.GlifLayout;
  */
 public abstract class BiometricEnrollBase extends InstrumentedActivity {
 
+    public static final String EXTRA_FROM_SETTINGS_SUMMARY = "from_settings_summary";
     public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
     public static final String EXTRA_KEY_REQUIRE_VISION = "accessibility_vision";
     public static final String EXTRA_KEY_REQUIRE_DIVERSITY = "accessibility_diversity";
@@ -81,16 +81,20 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;
     protected int mUserId;
+    protected boolean mFromSettingsSummary;
     protected FooterBarMixin mFooterBarMixin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mToken = getIntent().getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+        mFromSettingsSummary = getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false);
         if (savedInstanceState != null && mToken == null) {
             mLaunchedConfirmLock = savedInstanceState.getBoolean(EXTRA_KEY_LAUNCHED_CONFIRM);
             mToken = savedInstanceState.getByteArray(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+            mFromSettingsSummary =
+                    savedInstanceState.getBoolean(EXTRA_FROM_SETTINGS_SUMMARY, false);
         }
         mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
     }
@@ -107,6 +111,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         super.onSaveInstanceState(outState);
         outState.putBoolean(EXTRA_KEY_LAUNCHED_CONFIRM, mLaunchedConfirmLock);
         outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+        outState.putBoolean(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
     }
 
     @Override
@@ -154,6 +159,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         Intent intent = new Intent();
         intent.setClassName(SETTINGS_PACKAGE_NAME, FingerprintEnrollEnrolling.class.getName());
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+        intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
