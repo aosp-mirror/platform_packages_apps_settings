@@ -38,7 +38,7 @@ public class SilentLockscreenPreferenceController extends TogglePreferenceContro
     @Override
     public boolean isChecked() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 0) == 1;
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 1) == 1;
     }
 
     @Override
