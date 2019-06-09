@@ -4193,13 +4193,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Ota selfieitä nopeasti"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Järjestelmän navigointi"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Kahden painikkeen navigointi"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Jos haluat vaihtaa sovelluksesta toiseen, pyyhkäise ylöspäin aloitusnäyttöpainikkeen kohdalla. Näet kaikki sovellukset pyyhkäisemällä ylös uudelleen. Toimii miltä tahansa näytöltä. Näytön oikeassa alareunassa ei ole enää Viimeisimmät-painiketta."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Vaihda sovelluksesta toiseen pyyhkäisemällä ylös aloitusnäyttöpainikkeesta. Näet kaikki sovellukset pyyhkäisemällä ylös uudelleen. Palaa takaisin koskettamalla Takaisin-painiketta."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Kokeile uutta aloitusnäyttöpainiketta"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Ota käyttöön uusi ele sovelluksesta toiseen vaihtamiseen."</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Eleillä navigointi"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Siirry aloitusnäytölle pyyhkäisemällä ylös näytön alalaidasta. Palaa edelliseen kohtaan pyyhkäisemällä näytön vasemmasta tai oikeasta reunasta. Kun haluat vaihtaa sovelluksia, ala pyyhkäistä ylös näytön alalaidasta, paina pitkään ja nosta sormi."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Siirry aloitusnäytölle pyyhkäisemällä ylös näytön alalaidasta. Vaihda sovelluksesta toiseen pyyhkäisemällä alareunasta ylös, pitämällä sormea paikallaan ja päästämällä sitten irti. Palaa takaisin pyyhkäisemällä näytön vasemmasta tai oikeasta reunasta."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Kolmen painikkeen navigointi"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Androidin perinteinen navigointi, jossa aloitusnäytölle ja taaksepäin siirtyminen sekä sovellusten vaihtaminen tapahtuu painikkeilla."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Palaa takaisin, siirry aloitusnäytölle ja vaihda sovelluksesta toiseen näytön alareunan painikkeilla."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"järjestelmän navigointi, kahden painikkeen navigointi, kolmen painikkeen navigointi, eleillä navigointi"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Aloitusnäytön oletussovellus (<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>) ei tue tätä"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Vaihda aloitusnäytön oletussovellusta"</string>
@@ -4363,8 +4363,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Tämä ominaisuus on poistettu käytöstä, koska se hidastaa puhelintasi"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Pakota täydet GNSS-mitat"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Seuraa kaikkia GNSS-kuvioita ja ‑taajuuksia, joissa ei ole pulssisuhdetta."</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Taustatoiminnan salliminen alkaa"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Kaiken taustatoiminnan salliminen alkaa."</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Näytä aina kaatumisikkuna"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Näytä valintaikkuna aina, kun sovellus kaatuu."</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Valitse ANGLE-yhteensopiva sovellus"</string>
@@ -4497,6 +4495,8 @@
     <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Tallenna"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Käytä SIM-korttia"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Pois käytöstä"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Poista SIM-kortti, jos haluat poistaa sen käytöstä"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Aktivoi <xliff:g id="CARRIER">%1$s</xliff:g> napauttamalla"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Otetaanko <xliff:g id="CARRIER">%1$s</xliff:g> käyttöön?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Vain yksi ladattu SIM-kortti voi olla kerrallaan aktiivinen.\n\nVanhaa palvelua (<xliff:g id="CARRIER2">%2$s</xliff:g>) ei peruuteta, jos <xliff:g id="CARRIER1">%1$s</xliff:g> otetaan käyttöön."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Vaihda: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4610,4 +4610,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"MMS-viestiä ei voi lähettää"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Napauta, jos haluat sallia MMS-viestit (<xliff:g id="OPERATOR_NAME">%1$s</xliff:g>), kun mobiilidata ei ole käytössä"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS-viesti"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"SIM-yhdistelmässä on ongelma"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> voi rajoittaa toimintoja. Napauta, niin näet lisätietoja."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM-yhdistelmä"</string>
 </resources>

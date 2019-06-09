@@ -2217,7 +2217,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Full control is appropriate for apps that help you with accessibility needs, but not for most apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"View and control screen"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"It can read all content on the screen and display content over other apps."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"View and platform actions"</string>
+    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"View and perform actions"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"It can track your interactions with an app or a hardware sensor, and interact with apps on your behalf."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Allow"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Deny"</string>
@@ -4193,13 +4193,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Take selfies faster"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"System navigation"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"2-button navigation"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"To switch apps, swipe up on the Home button. Swipe up again to see all apps. Works from any screen. You’ll no longer have an Overview button at the bottom-right of your screen."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"To switch apps, swipe up on the Home button. To see all apps, swipe up again. To go back, tap the back button."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Try the new Home button"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Turn on the new gesture to switch apps"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Gesture navigation"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"To go Home, swipe up from the bottom of the screen. To go Back, swipe from either the left or right edge of the screen. To switch apps, start swiping up from the bottom of the screen and hold before releasing."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"To go Home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3-button navigation"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Classic Android navigation mode where going Home, switching apps, and going Back are accessible via buttons."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Go back, Home and switch apps with buttons at the bottom of your screen."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"system navigation, 2 button navigation, 3 button navigation, gesture navigation"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Not supported by your default home app, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Switch default home app"</string>
@@ -4363,8 +4363,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"This feature has been turned off because it slows down your phone"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Force full GNSS measurements"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Track all GNSS constellations and frequencies with no duty cycling"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Allow background activity starts"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Allow all background activity starts"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Always show crash dialogue"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Show dialogue every time an app crashes"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Select ANGLE enabled app"</string>
@@ -4497,6 +4495,8 @@
     <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Save"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Use SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Off"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"To disable this SIM, remove the SIM card"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Tap to activate <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Switch to <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Only one downloaded SIM can be active at a time.\n\nSwitching to <xliff:g id="CARRIER1">%1$s</xliff:g> won\'t cancel your <xliff:g id="CARRIER2">%2$s</xliff:g> service."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Switch to <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4610,4 +4610,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Can’t send MMS message"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Tap to allow MMS messaging on <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> when mobile data is off"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS message"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Issue with SIM combination"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Using <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> may limit functionality. Tap to find out more."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM combination"</string>
 </resources>
