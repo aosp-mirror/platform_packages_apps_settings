@@ -350,10 +350,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Vali ajavöönd UTC suhtes"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Kuupäev"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Kellaaeg"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Lukusta automaatselt"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pärast unerežiimi"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Kohe pärast unerežiimile lülitamist, välja arvatud siis, kui <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> hoiab seadme avatuna"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pärast unerežiimile lülitumist, välja arvatud siis, kui <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> hoiab seadet avatuna"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Lukustamine pärast ekraani ajalõppu"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pärast ajalõppu"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Kohe pärast ajalõppu, välja arvatud siis, kui <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> hoiab seadme avatuna"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pärast ajalõppu, välja arvatud siis, kui <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> hoiab seadme avatuna"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Kuva lukustusekraanil teave omaniku kohta"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Lukustuskuva sõnum"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Luba vidinad"</string>
@@ -397,8 +397,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Ekraanilukk, sõrmejälg"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Ekraanilukk"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Nägu on lisatud"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Seadistage Face Unlock"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Face Unlock"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Face Unlocki seadistamine"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Face Unlocki seadistamine"</string>
@@ -433,22 +432,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Kasuta Face Unlocki:"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Telefoni avamine"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Rakendusse sisselog. ja maksed"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Funktsiooni Face Unlock nõuded"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Nõuab avatud silmi"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Telefoni avamiseks peavad teie silmad avatud olema"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Nõua alati kinnitust"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Face Unlocki kasutamisel rakendustes nõutakse alati kinnitustoimingut"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Kustuta näoandmed"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Seadista Face Unlock"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Kasutage Face Unlocki oma seadme avamiseks, rakendustesse sisselogimiseks ja maksete kinnitamiseks.\n\nTasub teada.\nTelefoni vaatamisel võib see soovimatult avaneda.\n\nKeegi teine võib teie telefoni avada, kui seda hoitakse teie näo ees ja teie silmad on avatud.\n\nVõib juhtuda, et teiega sarnane inimene, näiteks teie laps või identne vend/õde, saab teie telefoni avada."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Kas soovite näoandmed kustutada?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Face Unlocki kasutatud kujutised ja biomeetrilised andmed kustutatakse jäädavalt ning turvaliselt. Pärast eemaldamist vajate telefoni avamiseks, rakendustesse sisselogimiseks ja maksete kinnitamiseks PIN-koodi, mustrit või parooli."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Sõrmejälg"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Sõrmejälgede haldamine"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Sõrmej. kasutatakse:"</string>
@@ -499,12 +492,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Kaitske oma tahvelarvutit ekraanilukuga, et keegi ei saaks seda kasutada, kui see kaotsi läheb või varastatakse. Ekraaniluku valikut on vaja ka sõrmejälje seadistamiseks. Puudutage käsku Tühista, seejärel määrake PIN-kood, muster või parool."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Kaitske oma seadet ekraanilukuga, et keegi ei saaks seda kasutada, kui see kaotsi läheb või varastatakse. Ekraaniluku valikut on vaja ka sõrmejälje seadistamiseks. Puudutage käsku Tühista, seejärel määrake PIN-kood, muster või parool."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Kaitske oma telefoni ekraanilukuga, et keegi ei saaks seda kasutada, kui see kaotsi läheb või varastatakse. Ekraaniluku valikut on vaja ka sõrmejälje seadistamiseks. Puudutage käsku Tühista, seejärel määrake PIN-kood, muster või parool."</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Kaitstes oma tahvelarvuti ekraaniluku valikuga, ei saa keegi seda kasutada, kui see kaotsi läheb või varastatakse. Ekraaniluku valikut on vaja ka Face Unlocki seadistamiseks. Tagasiminemiseks puudutage valikut Tühista."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Kaitstes oma seadme ekraaniluku valikuga, ei saa keegi seda kasutada, kui see kaotsi läheb või varastatakse. Ekraaniluku valikut on vaja ka Face Unlocki seadistamiseks. Tagasiminemiseks puudutage valikut Tühista."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Kaitstes oma telefoni ekraaniluku valikuga, ei saa keegi seda kasutada, kui see kaotsi läheb või varastatakse. Ekraaniluku valikut on vaja ka Face Unlocki seadistamiseks. Tagasiminemiseks puudutage valikut Tühista."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Kas jätta PIN-koodi määramine vahele?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Kas jätta parooli määramine vahele?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Kas jätta mustri määramine vahele?"</string>
@@ -1232,9 +1222,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Kuvateadlik"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Sees / ekraan jääb sisselülitatuks, kui seda vaatate"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Väljas"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Takistab ekraani väljalülitamist, kui seda vaatate"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Kuvateadlik funktsioon tuvastab esikaamera abil, kas keegi vaatab ekraani. See töötab ainult seadmes ja pilte ei salvestata kunagi ega saadeta Google\'ile."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ekraan jääb vaatamise ajal sisselülitatuks"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Öövalgus"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Funktsioon Öövalgus toonib ekraani oranžkollaseks. Nii on hämaras ekraani mugavam vaadata ja sellelt teksti lugeda. See võib aidata teil ka hõlpsamini magama jääda."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Ajastamine"</string>
@@ -2085,13 +2075,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Subtiitrite eelistused"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Suurendus"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Kolmikpuudutusega suurendamine"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Nupuga suurendamine"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Nupu ja kolmikpuudutusega suurendamine"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Otsetee abil suurendamine"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Otsetee ja kolmikpuudutusega suurendamine"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Suumige ekraanil sisse"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Suumimiseks puudutage kolm korda"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Suumimiseks puudutage nuppu"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Suumimiseks"</b>" puudutage ekraani kiiresti kolm korda.\n"<ul><li>"Kerimiseks lohistage vähemalt kahe sõrmega"</li>\n<li>"Suumi reguleerimiseks suruge vähemalt kaht sõrme kokku"</li></ul>\n\n<b>"Ajutiselt suumimiseks"</b>" puudutage ekraani kiiresti kolm korda ja hoidke pärast kolmandat puudutust sõrme ekraanil.\n"<ul><li>"Lohistage ekraanil liikumiseks"</li>\n<li>"Väljasuumimiseks tõstke sõrm ekraanilt"</li></ul>\n\n"Klaviatuuril ja navigeerimisribal ei saa suumida."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Kui suurendus on sisse lülitatud, saate ekraani alaosas oleva juurdepääsetavuse nupuga kiiresti suurendada.\n\n"<b>"Suumimiseks"</b>" puudutage juurdepääsetavuse nuppu ja seejärel mis tahes punkti ekraanil.\n"<ul><li>"Kerimiseks lohistage vähemalt kahe sõrmega"</li>\n<li>"Suumi reguleerimiseks suruge vähemalt kaht sõrme kokku"</li></ul>\n\n<b>"Ajutiselt suumimiseks"</b>" puudutage juurdepääsetavuse nuppu ning seejärel puudutage ja hoidke mis tahes punkti ekraanil.\n"<ul><li>"Lohistage ekraanil liikumiseks"</li>\n<li>"Väljasuumimiseks tõstke sõrm ekraanilt"</li></ul>\n\n"Klaviatuuril ja navigeerimisribal ei saa suumida."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Kui suurendus on sisse lülitatud, võite oma ekraanil sisse suumida.\n\n"<b>"Suumimiseks"</b>" alustage suurendamist, seejärel puudutage ekraanil mis tahes kohta.\n"<ul><li>"• Lohistage kerimiseks vähemalt kahe sõrmega"</li>\n<li>"• Liigutage suumi reguleerimiseks vähemalt kahte sõrme kokku-lahku"</li></ul>\n\n<b>"Ajutiselt suumimiseks"</b>" alustage suurendamist, seejärel puudutage ekraanil pikalt mis tahes kohta.\n"<ul><li>"• Lohistage ekraanikuval ringi liikumiseks"</li>\n<li>"• Tõstke väljasuumimiseks sõrm üles"</li></ul>\n\n"Te ei saa sisse suumida klaviatuuril ega navigeerimisribal."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Kasutage avamiseks juurdepääsetavuse nuppu"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Kasutage avamiseks liigutust"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Kasutage uut juurdepääsetavuse liigutust"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Selle teenuse sisse- või väljalülitamiseks puudutage oma ekraanikuva allosas juurdepääsetavuse nuppu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nTeenuste vahel vahetamiseks vajutage pikalt juurdepääsetavuse nuppu."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Selle teenuse sisse- või väljalülitamiseks pühkige kahe sõrmega ekraanikuva allosast üles.\n\nTeenuste vahel vahetamiseks pühkige kahe sõrmega üles ja hoidke."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Selle teenuse sisse- või väljalülitamiseks pühkige kolme sõrmega ekraanikuva allosast üles.\n\nTeenuste vahel vahetamiseks pühkige kolme sõrmega üles ja hoidke."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Juurdepääsetavuse teenuse sisse- või väljalülitamiseks pühkige kahe sõrmega ekraanikuva allosast üles.\n\nTeenuste vahel vahetamiseks pühkige kahe sõrmega üles ja hoidke."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Juurdepääsetavuse teenuse sisse- või väljalülitamiseks pühkige kolme sõrmega ekraanikuva allosast üles.\n\nTeenuste vahel vahetamiseks pühkige kolme sõrmega üles ja hoidke."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Selge"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Juurdepääsetavuse nupu jaoks on valitud seade <xliff:g id="SERVICE">%1$s</xliff:g>. Suurenduse kasutamiseks puudutage ja hoidke juurdepääsetavuse nuppu ning seejärel valige suurendus."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Helitugevuse nupu otsetee"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Otsetee teenus"</string>
@@ -3382,12 +3381,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Kuva allatõmmatavas menüüs, olekuribal ja lukustuskuval"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Vilkuv tuli"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lukustuskuva"</string>
-    <!-- no translation found for lockscreen_bypass_title (3077831331856929085) -->
-    <skip />
-    <!-- no translation found for lockscreen_bypass_summary (2767475923650816867) -->
-    <skip />
-    <!-- no translation found for keywords_lockscreen_bypass (250300001805572693) -->
-    <skip />
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Lukustuskuva vahelejätmine"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Pärast Face Unlocki kasutamist avaneb viimati vaadatud kuva"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Lukustuskuva, lukustuskuva, vahelejätmine, mittekasutamine"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kui tööprofiil on lukustatud"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Märguanded lukustuskuval"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Kuva hoiatused ja hääletud märguanded"</string>
@@ -4198,13 +4194,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Selfide kiiremini jäädvustamine"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Süsteemis navigeerimine"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Kahe nupuga navigeerimine"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Rakenduste vahetamiseks pühkige avakuva nupul üles. Kõigi rakenduste nägemiseks pühkige uuesti üles. See töötab igal ekraanikuval. Ekraanikuva paremas alanurgas ei ole enam nuppu Ülevaade."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Rakenduste vahetamiseks pühkige avakuva nupul üles. Kõigi rakenduste nägemiseks pühkige uuesti üles. Tagasiliikumiseks puudutage nuppu Tagasi."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Proovige uut avakuva nuppu"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Rakenduste vahetamiseks lülitage sisse uus liigutus"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Liigutustega navigeerimine"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Avakuvale liikumiseks pühkige ekraani alaosast üles. Tagasiliikumiseks pühkige ekraani vasakust või paremast servast. Rakenduste vahetamiseks alustage ekraani allosast üles pühkimist ja hoidke sõrme enne vabastamist paigal."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Avakuvale liikumiseks pühkige ekraani allosast üles. Rakenduste vahetamiseks pühkige allosast üles, hoidke ja seejärel tõstke sõrm üles. Tagasiliikumiseks pühkige ekraani vasakust või paremast servast."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Kolme nupuga navigeerimine"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klassikaline Androidi navigeerimisrežiim, kus avakuvale liikumiseks, rakenduste vahetamiseks ja tagasiliikumiseks kasutatakse nuppe."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Liikuge tagasi või avakuvale ja vahetage rakendusi oma ekraani allosas olevate nuppude abil."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"süsteemis navigeerimine, kahe nupuga navigeerimine, kolme nupuga navigeerimine, liigutustega navigeerimine"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Teie avakuva vaikerakendus <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> ei toeta"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Lülitu avakuva vaikerakendusele"</string>
@@ -4368,8 +4364,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"See funktsioon on välja lülitatud, kuna see muudab teie telefoni aeglaseks"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Jõusta GNSS-i täielikud mõõtmistulemused"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Jälgi kõiki GNSS-i radu ja sagedusi ilma töötsüklita"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Luba taustategevuste käivitamine"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Lubab kõik taustategevuste käivitamised"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Kuva alati kokkujooksmise dialoog"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Dialoog kuvatakse alati, kui rakendus kokku jookseb"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Valige rakendus, milles ANGLE on lubatud"</string>
@@ -4496,16 +4490,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Inaktiivne / SIM-kaart"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktiivne / allalaaditud SIM-kaart"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Inaktiivne / allalaaditud SIM-kaart"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"SIMi nimi ja värv"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Nimi"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Värv (kasutavad ühilduvad rakendused)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Salvesta"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Kasuta SIM-kaarti"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Väljas"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Selle SIM-i keelamiseks eemaldage SIM-kaart"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Puudutage operaatori <xliff:g id="CARRIER">%1$s</xliff:g> aktiveerimiseks"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Kas soovite aktiveerida operaatori <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Korraga saab aktiivne olla vaid üks allalaaditud SIM-kaart.\n\nOperaatori <xliff:g id="CARRIER1">%1$s</xliff:g> aktiveerimisel ei tühistata operaatori <xliff:g id="CARRIER2">%2$s</xliff:g> teenust."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Aktiveeri <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4619,4 +4611,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"MMS-i ei saa saata"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Puudutage, et lubada MMS-sõnumside operaatori <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> võrgus, kui mobiilne andmeside on välja lülitatud"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS-sõnum"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Probleem SIM-kombinatsiooniga"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Operaatorite <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> kasutamine võib piirata funktsionaalsust. Puudutage lisateabe saamiseks."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM-i kombinatsioon"</string>
 </resources>
