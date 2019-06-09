@@ -354,10 +354,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"‏בחירה לפי קיזוז ל-UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"תאריך"</string>
     <string name="time_picker_title" msgid="483460752287255019">"שעה"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"נעילה אוטומטית"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> לאחר שינה"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"מיד לאחר מעבר למצב שינה, אלא אם <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> מונע את הנעילה"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> לאחר מצב שינה, מלבד כאשר נמנעת נעילה על ידי <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"נעילה בתום הזמן הקצוב לתפוגה"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> לאחר תום הזמן הקצוב לתפוגה"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"מיד לאחר תום הזמן הקצוב לתפוגה, מלבד כאשר נמנעת נעילה על ידי <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> לאחר תום הזמן הקצוב לתפוגה, מלבד כאשר נמנעת נעילה על ידי <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"הצג פרטי בעלים בנעילת מסך"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"הודעה במסך הנעילה"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"הפעל יישומי ווידג\'ט"</string>
@@ -403,8 +403,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"נעילת מסך, טביעת אצבע"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"נעילת מסך"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"הפנים נוספו"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"שחרור נעילה על ידי זיהוי פנים"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"איך להגדיר שחרור נעילה על ידי זיהוי פנים"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
@@ -439,22 +438,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"שחרור בזיהוי פנים ל-"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"ביטול נעילת הטלפון"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"כניסה לאפליקציה ותשלומים"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"דרישות לשחרור נעילה על ידי זיהוי פנים"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"העיניים חייבות להיות פקוחות"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"העיניים שלך חייבות להיות פקוחות כדי לבטל את נעילת הטלפון"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"תמיד לדרוש אישור"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"כשמשתמשים בשחרור נעילה על ידי זיהוי פנים באפליקציות, יש לדרוש תמיד שלב אימות"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"מחיקת נתוני הפנים"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"אפשר להשתמש בשחרור נעילה על ידי זיהוי פנים כדי לשחרר את נעילת המכשיר, להיכנס לחשבון באפליקציות ולאשר תשלומים.\n\nחשוב לזכור:\nמבט לטלפון עשוי לבטל נעילה בלי כוונה.\n\nנעילת הטלפון עשויה להתבטל על ידי מישהו אחר, אם הטלפון מוחזק אל מול הפנים שלך ועיניך פקוחות.\n\nנעילת הטלפון עשויה להתבטל על ידי מישהו שדומה לך מאוד, כמו למשל אח/ות זהה."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"למחוק נתוני פנים?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"התמונות והנתונים הביומטריים אשר בהם נעשה שימוש על ידי התכונה \'שחרור נעילה על ידי זיהוי פנים\' יימחקו באופן מאובטח ולתמיד. אחרי ההסרה יהיה צורך בקוד האימות, קו ביטול הנעילה או הסיסמה כדי לבטל את נעילת הטלפון, להיכנס לאפליקציות ולאשר תשלומים."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"טביעת אצבע"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"נהל טביעות אצבע"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"השתמש בטביעות אצבע ל-"</string>
@@ -507,12 +500,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"כדאי להגן על הטאבלט באמצעות אפשרות של נעילת מסך כדי שאף אחד לא יוכל להשתמש בו אם הוא יאבד או ייגנב. האפשרות של נעילת המסך נדרשת גם כדי להגדיר טביעת אצבע. יש להקיש על ביטול, ואז להגדיר קוד אימות, קו ביטול נעילה או סיסמה."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"כדאי להגן על המכשיר באמצעות אפשרות של נעילת מסך כדי שאף אחד לא יוכל להשתמש בו אם הוא יאבד או ייגנב. האפשרות של נעילת המסך נדרשת גם כדי להגדיר טביעת אצבע. יש להקיש על ביטול, ואז להגדיר קוד אימות, קו ביטול נעילה או סיסמה."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"כדאי להגן על הטלפון באמצעות אפשרות של נעילת מסך כדי שאף אחד לא יוכל להשתמש בו אם הוא יאבד או ייגנב. האפשרות של נעילת המסך נדרשת גם כדי להגדיר טביעת אצבע. יש להקיש על ביטול, ואז להגדיר קוד אימות, קו ביטול נעילה או סיסמה."</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"עם הגדרת הגנה על הטאבלט באמצעות אפשרות של נעילת מסך, אף אחד לא יוכל להשתמש בו אם הוא יאבד או ייגנב. האפשרות של נעילת המסך נדרשת גם כדי להגדיר שחרור נעילה על ידי זיהוי פנים. כדי לחזור יש להקיש על ביטול."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"עם הגדרת הגנה על המכשיר באמצעות אפשרות של נעילת מסך, אף אחד לא יוכל להשתמש בו אם הוא יאבד או ייגנב. האפשרות של נעילת המסך נדרשת גם כדי להגדיר שחרור נעילה על ידי זיהוי פנים. כדי לחזור יש להקיש על ביטול."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"עם הגדרת הגנה על הטלפון באמצעות אפשרות של נעילת מסך, אף אחד לא יוכל להשתמש בו אם הוא יאבד או ייגנב. האפשרות של נעילת המסך נדרשת גם כדי להגדיר שחרור נעילה על ידי זיהוי פנים. כדי לחזור יש להקיש על ביטול."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"לדלג על הגדרת קוד הגישה?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"לדלג על הגדרת הסיסמה?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"לדלג על הגדרת קו ביטול הנעילה?"</string>
@@ -1270,9 +1260,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"הפעלה במבט"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"התכונה פועלת / המסך לא נכבה כשמביטים בו"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"כבוי"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"התכונה מונעת מהמסך להיכבות אם מביטים בו"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"‏במסגרת \'הפעלה במבט\', המכשיר מגלה באמצעות המצלמה הקדמית אם מישהו מביט במסך. התכונה פועלת במכשיר, והתמונות אף פעם לא נשמרות ולא נשלחות אל Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"יש להקפיד שהמסך פתוח תוך כדי הצפייה בו"</string>
     <string name="night_display_title" msgid="2626451512200357686">"תאורת לילה"</string>
     <string name="night_display_text" msgid="1837277457033025056">"תאורת הלילה מעניקה למסך גוון ענבר בשעת לילה. כך יהיה לך קל יותר להביט במסך או לקרוא באור מעומעם, ויהיה לך קל יותר להירדם."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"לוח זמנים"</string>
@@ -2129,13 +2119,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"העדפות לכתוביות"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"הגדלה"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"הגדלה על-ידי הקשה שלוש פעמים"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"הגדלה בעזרת לחצן"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"הגדלה בעזרת לחצן והקשה שלוש פעמים"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"הגדלה בעזרת קיצור דרך"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"הגדלה בעזרת קיצור דרך והקשה שלוש פעמים"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"שינוי מרחק התצוגה (זום)"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"הקש שלוש פעמים כדי לשנות את המרחק מהתצוגה"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"הקש על לחצן כדי לשנות את מרחק התצוגה"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"כדי לשנות את מרחק התצוגה"</b>", הקש על המסך במהירות שלוש פעמים.\n"<ul><li>"גרור שתי אצבעות או יותר כדי לגלול"</li>\n<li>"עשה תנועת צביטה בעזרת שתי אצבעות או יותר כדי להתאים את מרחק התצוגה"</li></ul>\n\n<b>"כדי לשנות את מרחק התצוגה באופן זמני"</b>", הקש במהירות על המסך שלוש פעמים, ובפעם השלישית החזק את האצבע על המסך.\n"<ul><li>"גרור כדי לנוע על פני המסך"</li>\n<li>"הרם את האצבע כדי להתרחק"</li></ul>\n\n"לא ניתן להתקרב בעזרת המקלדת או סרגל הניווט."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"כשההגדלה מופעלת, ניתן להשתמש בלחצן \'נגישות\' שבתחתית המסך כדי להגדיל במהירות.\n\n"<b>"כדי לשנות את מרחק התצוגה"</b>", הקש על הלחצן \'נגישות\' ולאחר מכן הקש במקום כלשהו במסך.\n"<ul><li>"גרור שתי אצבעות או יותר כדי לגלול"</li>\n<li>"עשה תנועת צביטה בעזרת שתי אצבעות או יותר כדי להתאים את מרחק התצוגה"</li></ul>\n\n<b>"כדי לשנות את מרחק התצוגה באופן זמני"</b>", הקש על הלחצן \'נגישות\' וגע נגיעה ממושכת במקום כלשהו במסך.\n"<ul><li>"גרור כדי לנוע על פני המסך"</li>\n<li>"הרם את האצבע כדי להתרחק"</li></ul>\n\n"לא ניתן להתקרב בעזרת המקלדת או סרגל הניווט."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"כשההגדלה מופעלת, ניתן להתקרב למסך.\n\n"<b>"כדי להתקרב,"</b>", יש להתחיל בהגדלה ולאחר מכן להקיש במקום כלשהו במסך.\n"<ul><li>"• גוררים שתי אצבעות או יותר כדי לגלול"</li>\n<li>"• עושים תנועת צביטה עם שתי אצבעות או יותר כדי לשנות את מרחק התצוגה"</li></ul>\n\n<b>"כדי להתקרב באופן זמני"</b>", מתחילים בהגדלה ולאחר מכן לוחצים לחיצה ארוכה על מקום כלשהו במסך.\n"<ul><li>"• גוררים כדי לנוע במסך"</li>\n<li>"• מרימים את האצבע כדי להתרחק"</li></ul>\n\n"לא ניתן להתקרב בעזרת המקלדת או סרגל הניווט."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"שימוש בלחצן נגישות לצורך פתיחה"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"שימוש בתנועה לצורך פתיחה"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"שימוש בתנועת נגישות חדשה"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"כדי להפעיל או לכבות את השירות הזה, יש להקיש על לחצן הנגישות<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>שבתחתית המסך.\n\nכדי לעבור בין השירותים השונים, יש ללחוץ לחיצה ארוכה על לחצן הנגישות."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"כדי להפעיל או לכבות את השירות הזה, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"כדי להפעיל או לכבות את השירות הזה, יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"כדי להפעיל או לכבות שירות נגישות, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"כדי להפעיל או לכבות שירות נגישות, יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"הבנתי"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"הלחצן \'נגישות\' מוגדר לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש ללחוץ לחיצה ארוכה על לחצן הנגישות ולאחר מכן לבחור בהגדלה."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"מקש עוצמת הקול כמקש קיצור"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"שירות קיצורי דרך"</string>
@@ -3235,8 +3234,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"תנועה"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"פנים, ביטול נעילה, אימות, כניסה"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"‏imei,‏ meid,‏ min, גרסת prl,‏ imei sv"</string>
-    <!-- no translation found for keywords_sim_status (6682044233620329507) -->
-    <skip />
+    <string name="keywords_sim_status" msgid="6682044233620329507">"‏רשת, מצב הרשת הסלולרית, מצב השירות, עוצמת האות, סוג הרשת הסלולרית, נדידה, iccid,‏ eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"מספר סידורי, גרסת חומרה"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"‏רמת תיקון האבטחה ב-Android, גרסת פס בסיס, גרסת ליבה"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"עיצוב, בהיר, כהה, מצב"</string>
@@ -3449,8 +3447,7 @@
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"הגדרה אוטומטית של התראות בעדיפות נמוכה כ\'רמה מתונה\'"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"הצעות לפעולות ותשובות"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"הצגה אוטומטית של פעולות ותגובות מומלצות"</string>
-    <!-- no translation found for snooze_options_title (7447722951050463793) -->
-    <skip />
+    <string name="snooze_options_title" msgid="7447722951050463793">"הפעלת האפשרות להעביר התראות למצב \'נודניק\'"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"הסתרת הסמלים מההתראות המתונות"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"סמלים מהתזכורות המתונות לא מוצגים בשורת הסטטוס"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"הצגה של סימני התראות"</string>
@@ -3477,12 +3474,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"מוצגות בלוח ההתראות הנפתח, בשורת הסטטוס ובמסך הנעילה"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"אור מהבהב"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"מסך נעילה"</string>
-    <!-- no translation found for lockscreen_bypass_title (3077831331856929085) -->
-    <skip />
-    <!-- no translation found for lockscreen_bypass_summary (2767475923650816867) -->
-    <skip />
-    <!-- no translation found for keywords_lockscreen_bypass (250300001805572693) -->
-    <skip />
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"דילוג על מסך הנעילה"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"מעבר למסך האחרון שהיה בשימוש לאחר שחרור נעילה בזיהוי פנים"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"מסך נעילה, דילוג, מעקף"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"כשפרופיל העבודה נעול"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"התראות במסך הנעילה"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"הצגת התראות דחופות ושקטות"</string>
@@ -3519,8 +3513,7 @@
     <string name="notification_importance_high_title" msgid="8792310396497954857">"הופעה במסך"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"חסימה"</string>
     <string name="notification_silence_title" msgid="6986752165900591125">"שקט"</string>
-    <!-- no translation found for notification_alert_title (2267584776990348784) -->
-    <skip />
+    <string name="notification_alert_title" msgid="2267584776990348784">"התראות עם צלילים או רטט"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"סוגי הפרעות שאפשר להפעיל"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"האפליקציה יכולה להפעיל צלילים ורטט ו/או להציג התראות קופצות במסך"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"כיווץ ההתראות בלוח ההתראות הנפתח לשורה אחת"</string>
@@ -4350,13 +4343,16 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"צילום מהיר יותר של סלפי"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"ניווט במערכת"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"ניווט באמצעות 2 לחצנים"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"כדי לעבור בין אפליקציות, צריך להחליק כלפי מעלה על הלחצן הראשי. אפשר להחליק שוב כלפי מעלה כדי לראות את כל האפליקציות. פועל מכל מסך. לחצן המסכים האחרונים לא יופיע עוד בצד שמאל למטה במסך."</string>
+    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"כדאי לנסות את הלחצן הראשי החדש"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"הפעלת התנועה החדשה למעבר בין אפליקציות"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"ניווט באמצעות תנועות"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"כדי לעבור למסך הבית, יש להחליק מעלה מתחתית המסך. כדי לחזור, יש להחליק מהקצה הימני או השמאלי של המסך. כדי לעבור בין אפליקציות, יש להתחיל להחליק מעלה מתחתית המסך ולהחזיק לפני שמשחררים."</string>
+    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
+    <skip />
     <string name="legacy_navigation_title" msgid="2635061924638361565">"ניווט באמצעות 3 לחצנים"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"‏מצב ניווט קלאסי ב-Android שבו לחצנים משמשים לביצוע פעולות של הצגת מסך הבית, מעבר בין אפליקציות וחזרה."</string>
+    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="5825645072714635357">"ניווט במערכת, ניווט באמצעות 2 לחצנים, ניווט באמצעות 3 לחצנים, ניווט באמצעות תנועות"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"הפעולה לא נתמכת באפליקציית ברירת המחדל לדף הבית, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"החלפה של אפליקציית ברירת המחדל לדף הבית"</string>
@@ -4534,8 +4530,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"התכונה הזו הושבתה מפני שהיא מאטה את הטלפון שלך"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"‏אילוץ של הרצה מלאה של מדידות Gnss"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"‏מעקב אחר כל מערכות הניווט והתדרים של GNSS ללא מחזור פעילות"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"הפעלת התחלות של פעילות ברקע"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"הפעלת כל ההתחלות של הפעילות ברקע"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"הצג תמיד דו-שיח של קריסות מחשב"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"הצג דו-שיח בכל פעם שאפליקציה קורסת"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"‏בחירת אפליקציה המותאמת ל-ANGLE"</string>
@@ -4664,16 +4658,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"‏לא פעיל / SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"‏פעיל / SIM שהורדת"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"‏לא פעיל / SIM שהורדת"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"‏השם והצבע של ה-SIM"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"שם"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"צבע (בשימוש על ידי אפליקציות תואמות)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"שמירה"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"‏שימוש ב-SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"מושבת"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"‏כדי להשבית את ה-SIM הזה, יש להסיר את כרטיס ה-SIM"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"יש להקיש כדי להפעיל את <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"לעבור אל <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"‏בכל רגע נתון אפשר להשתמש רק בכרטיס SIM אחד שהורדת.\n\nמעבר אל <xliff:g id="CARRIER1">%1$s</xliff:g> לא יבטל את השירות של<xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"מעבר אל <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4795,4 +4787,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"‏לא ניתן לשלוח הודעת MMS"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"‏יש להקיש כדי להתיר העברת הודעות MMS ב-<xliff:g id="OPERATOR_NAME">%1$s</xliff:g> כשחבילת הגלישה מושבתת"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"‏הודעת MMS"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"‏יש בעיה בשילוב של כרטיסי ה-SIM"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"השימוש ב<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> עלול להגביל את הפונקציונליות. למידע נוסף, יש להקיש."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"‏שילוב SIM"</string>
 </resources>
