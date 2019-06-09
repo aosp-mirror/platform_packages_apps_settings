@@ -4193,13 +4193,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Scatta selfie più rapidamente"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navigazione del sistema"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navigazione con due pulsanti"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Per cambiare app, scorri verso l\'alto sul pulsante Home. Scorri ancora verso l\'alto per visualizzare tutte le app. Questa operazione funziona da qualsiasi schermata. Non troverai più un pulsante Panoramica nella parte in basso a destra dello schermo."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Per cambiare app, scorri verso l\'alto sul pulsante Home. Scorri ancora verso l\'alto per visualizzare tutte le app. Per tornare indietro, tocca il pulsante Indietro."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Prova il nuovo pulsante Home"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Attiva il nuovo gesto per cambiare app"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigazione tramite gesti"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Per andare alla schermata Home, scorri verso l\'alto dalla parte inferiore dello schermo. Per tornare indietro, scorri dal bordo sinistro o destro dello schermo. Per cambiare app, inizia a scorrere verso l\'alto dalla parte inferiore dello schermo e tieni premuto prima di rilasciare."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Per andare alla schermata Home, scorri verso l\'alto dalla parte inferiore dello schermo. Per cambiare app, scorri verso l\'alto dalla parte inferiore dello schermo, tieni premuto e rilascia. Per tornare indietro, scorri dal bordo sinistro o destro."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigazione con tre pulsanti"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Modalità di navigazione classica di Android che consente di accedere alla schermata Home, cambiare app e tornare indietro tramite pulsanti."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Torna indietro, vai alla schermata Home e cambia app usando i pulsanti nella parte inferiore dello schermo."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigazione del sistema, navigazione con due pulsanti, navigazione con tre pulsanti, navigazione tramite gesti"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Funzionalità non supportata dall\'app predefinita per la schermata Home <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Passa all\'app predef. per schermata Home"</string>
@@ -4363,8 +4363,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Questa funzionalità è stata disattivata perché rallenta il telefono"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Forza esecuzione completa delle misurazioni GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Monitora tutte le costellazioni e le frequenze GNSS senza ciclo di lavoro utile"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Consenti l\'avvio dell\'attività in background"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Consente l\'avvio di tutte le attività in background"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Mostra sempre finestra di dialogo di arresti anomali"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Mostra finestra di dialogo a ogni arresto anomalo delle app"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Seleziona le app che supportano ANGLE"</string>
@@ -4497,6 +4495,8 @@
     <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Salva"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Utilizza SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Off"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Per disattivare questa scheda SIM, rimuovila"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Tocca per attivare <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Passare a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"È possibile attivare una sola SIM scaricata alla volta.\n\nIl passaggio a <xliff:g id="CARRIER1">%1$s</xliff:g> non annullerà il servizio di <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Passa a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4610,4 +4610,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Impossibile inviare messaggio MMS"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Tocca per consentire i messaggi MMS su <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> quando i dati mobili non sono attivi"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Messaggio MMS"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problema con la combinazione di SIM"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"L\'uso di <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> potrebbe limitare la funzionalità. Tocca per avere ulteriori informazioni."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Combinazione di SIM"</string>
 </resources>

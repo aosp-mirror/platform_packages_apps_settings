@@ -4193,13 +4193,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Tirar selfies mais rapidamente"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navegação no sistema"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navegação com 2 botões"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Para alternar entre aplicações, deslize rapidamente para cima no botão página inicial. Volte a deslizar rapidamente para cima para ver todas as aplicações. Funciona em qualquer ecrã. Deixa de ter o botão Vista geral na parte inferior direita do ecrã."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Para mudar de aplicação, deslize rapidamente para cima no botão página inicial. Para ver todas as aplicações, volte a deslizar rapidamente para cima. Para retroceder, toque no botão Anterior."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Experimentar o novo botão página inicial"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Ativar o novo gesto para alternar entre aplicações"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navegação por gestos"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Para aceder à página inicial, deslize rapidamente para cima a partir da parte inferior do ecrã. Para retroceder, deslize rapidamente a partir da extremidade esquerda ou direita do ecrã. Para alternar entre aplicações, comece a deslizar rapidamente para cima a partir da parte inferior do ecrã, toque sem soltar e liberte."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Para aceder à página inicial, deslize rapidamente para cima a partir da parte inferior do ecrã. Para mudar de aplicação, deslize rapidamente para cima a partir da parte inferior do ecrã sem soltar e, em seguida, solte. Para retroceder, deslize rapidamente a partir da extremidade esquerda ou direita do ecrã."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navegação com 3 botões"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"O modo clássico de navegação no Android, no qual é possível aceder à página inicial, alternar entre aplicações e retroceder através de botões."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Retroceda, aceda à página inicial e mude de aplicação com os botões na parte inferior do ecrã."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navegação no sistema, navegação com 2 botões, navegação com 3 botões, navegação por gestos"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Não suportada pela sua aplicação Página inicial predefinida, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>."</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Mudar de aplic. Página inicial predef."</string>
@@ -4363,8 +4363,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Esta funcionalidade foi desativada porque torna o seu telemóvel lento."</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Forçar medições de GNSS completas"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Monitorizar todas as constelações e frequências de GNSS sem ciclos"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Permitir inícios da atividade em segundo plano"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Permite os inícios de toda a atividade em segundo plano."</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Mostrar sempre a caixa de diálogo de falhas"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Mostrar a caixa de diálogo sempre que uma aplicação falhar"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Selecionar aplicação compatível com o ANGLE"</string>
@@ -4491,16 +4489,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Inativo/SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Ativo/SIM transferido"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Inativo/SIM transferido"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"Nome e cor do SIM"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Nome"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Cor (utilizada pelas aplic. compatíveis)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Guardar"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Utilizar SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Desativado"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Para desativar este SIM, remova o cartão SIM"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Toque para ativar o operador <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Pretende mudar para <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Só pode ter um SIM transferido ativo de cada vez.\n\nMudar para o operador <xliff:g id="CARRIER1">%1$s</xliff:g> não cancela o seu serviço no operador <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Mudar para <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4614,4 +4610,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Não é possível enviar a mensagem MMS"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Toque para permitir mensagens MMS no operador <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> quando os dados móveis estão desativados."</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Mensagem MMS"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problema com a combinação de SIMs"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"A utilização dos operadores <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> pode limitar a funcionalidade. Toque para saber mais."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Combinação de SIMs"</string>
 </resources>

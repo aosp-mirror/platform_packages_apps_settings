@@ -2132,8 +2132,8 @@
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 sekundi"</string>
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 minuta"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minute"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Rok za poduzimanje radnje (istek vremena pristupačnosti)"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Vrijeme za poduzimanje radnje"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Rok za poduzimanje radnje za pristupačnost"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Rok za poduzimanje radnje"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Odaberite koliko dugo želite da se prikazuju poruke koje od vas zahtijevaju da poduzmete radnju, a koje će biti vidljive samo privremeno.\n\nOvu postavku ne podržavaju sve aplikacije."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Odgoda za dodirivanje i držanje"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inverzija boja"</string>
@@ -4266,13 +4266,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Snimajte selfije brže"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navigiranje sistemom"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navigiranje pomoću 2 dugmeta"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Za prelazak s jedne aplikacije na drugu, prevucite prema gore na dugmetu za Početni ekran za promjenu aplikacije. Ponovo prevucite prema gore da pogledate sve aplikacije. Funkcionira na svakom ekranu. Više nećete imati dugme za Pregled u donjem desnom dijelu ekrana."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Da prebacite aplikacije, na dugmetu za početni ekran prevucite prema gore. Za prikaz svih aplikacija ponovo prevucite prema gore. Dodirnite dugme za povratak da se vratite."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Isprobajte novo dugme za Početni ekran"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Uključite novi pokret za promjenu aplikacije"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigiranje pokretima"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Za odlazak na početni ekran prevucite prema gore s dna ekrana. Za vraćanje nazad prevucite s lijevog ili desnog ruba ekrana. Za prebacivanje aplikacija prevlačite prema gore s dna ekrana i zadržite prije puštanja."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Za odlazak na početni ekran prevucite prema gore s dna ekrana. Da prebacite aplikacije, prevucite prema gore s dna, zadržite, a zatim otpustite. Za vraćanje prevucite s lijevog ili desnog ruba ekrana."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigiranje pomoću 3 dugmeta"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klasičan način navigiranja za Android u kojem su odlazak na početni ekran, prebacivanje aplikacija i vraćanje na prethodni ekran dostupni pomoću dugmadi."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Za vraćanje, otvaranje početnog ekrana i promjenu aplikacije koristite dugmad u dnu ekrana."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigiranje za sistem, navigiranje pomoću 2 dugmeta, navigiranje pomoću 3 dugmeta, navigiranje pokretima"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Nije podržano u vašoj zadanoj aplikaciji početnog ekrana, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Promijeni zadanu aplik. početnog ekrana"</string>
@@ -4443,8 +4443,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Ova funkcija je isključena jer usporava vaš telefon"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Prisilno omogući potpuno GNSS mjerenje"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Praćenje svih konstelacija i frekvencija GNSS-a bez ciklusa rada"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Dozvoli pokretanja aktivnosti u pozadini"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Dozvoljava sva pokretanja aktivnosti u pozadini"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Uvijek prikaži dijaloški okvir za pad aplikacije"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Prikaz dijaloškog okvira pri svakom padu aplikacije"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Odaberite aplikaciju u kojoj je omogućen ANGLE"</string>
@@ -4578,6 +4576,8 @@
     <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Sačuvaj"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Koristite SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Isključeno"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Uklonite SIM karticu da onemogućite ovaj SIM"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Dodirnite da aktivirate operatera <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Prebaciti na operatera <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Aktivan može biti samo po jedan SIM.\n\nPrebacivanjem na operatera <xliff:g id="CARRIER1">%1$s</xliff:g> neće se otkazati usluga operatera <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Prebaci na operatera <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4695,4 +4695,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Nije moguće poslati MMS poruku"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Dodirnite da dozvolite MMS poruke koristeći <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> kada je isključen prijenos podataka na mobilnoj mreži"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS poruka"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problem sa SIM kombinacijom"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Korištenjem operatera <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> možete ograničiti funkcionalnost. Dodirnite da saznate više."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM kombinacija"</string>
 </resources>

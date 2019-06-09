@@ -671,7 +671,7 @@
     <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"Príliš veľa chybných pokusov. Dáta tohto zariadenia budú odstránené."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Príliš veľa chybných pokusov. Tento používateľ bude odstránený."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Príliš veľa chybných pokusov. Tento pracovný profil a jeho dáta budú odstránené."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Zatvoriť"</string>
+    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Zavrieť"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
       <item quantity="few">Musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> znaky</item>
       <item quantity="many">Must be at least <xliff:g id="COUNT_1">%d</xliff:g> characters</item>
@@ -2117,34 +2117,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Nastavenia titulkov"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Priblíženie"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Priblíženie trojitým klepnutím"</string>
-    <!-- no translation found for accessibility_screen_magnification_navbar_title (4203215572713684224) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_state_navbar_gesture (8416035446297644642) -->
-    <skip />
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Priblíženie skratkou"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Priblíženie skratkou a trojitým klepnutím"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Priblížte si obrazovku"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Na priblíženie trikrát klepnite"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Na priblíženie klepnite na tlačidlo"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Ak chcete zobrazenie priblížiť"</b>", trikrát rýchlo klepnite na obrazovku.\n"<ul><li>"Zobrazenie posuniete presunutím dvoch alebo viacerých prstov po obrazovke."</li>\n<li>"Priblíženie upravíte priblížením dvoch alebo viacerých prstov."</li></ul>\n\n<b>"Zobrazenie dočasne priblížite"</b>" tak, že trikrát rýchlo klepnete na obrazovku jedným prstom a po poslednom klepnutí prst pridržíte.\n"<ul><li>"Obrazovku môžete posúvať presúvaním prsta."</li>\n<li>"Zdvihnutím prsta zobrazenie oddialite."</li></ul>\n\n"Klávesnica ani navigačný panel sa nedajú priblížiť."</string>
-    <!-- no translation found for accessibility_screen_magnification_navbar_summary (2272878354599332009) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_button (3682222614034474845) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture (1342726230497913398) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture_settings (8539392614235820285) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (4803108127318033537) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_without_talkback (5331865763478710038) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_with_talkback (7656710338811226339) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_without_talkback (3582632565941330367) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_with_talkback (8539343463529744661) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_button (8530755446904847423) -->
-    <skip />
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Keď je priblíženie zapnuté, môžete si zväčšiť obsah obrazovky.\n\n"<b>"Urobíte to tak"</b>", že spustíte priblíženie a klepnete kamkoľvek na obrazovku.\n"<ul><li>"• Zobrazenie posuniete presunutím dvoch alebo viacerých prstov."</li>\n<li>"• Priblíženie upravíte stiahnutím dvoch alebo viacerých prstov."</li></ul>\n\n<b>"Ak chcete obsah priblížiť krátkodobo"</b>", spustite priblíženie a pridržte ľubovoľné miesto na obrazovke.\n"<ul><li>"• Po obrazovke prechádzate presunutím"</li>\n<li>"• Oddialite zdvihnutím prsta."</li></ul>\n\n"Nemôžete priblížiť klávesnicu ani navigačný panel."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Otváranie tlačidlom dostupnosti"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Otváranie gestom"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Používanie nového gesta dostupnosti"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Túto službu zapnete alebo vypnete klepnutím na tlačidlo dostupnosti <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> v dolnej časti obrazovky.\n\nSlužby prepnete pridržaním tlačidla dostupnosti."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Túto službu zapnete alebo vypnete potiahnutím dvoma prstami z dolnej časti obrazovky smerom nahor.\n\nSlužby prepnete potiahnutím dvoma prstami smerom nahor a pridržaním."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Túto službu zapnete alebo vypnete potiahnutím troma prstami z dolnej časti obrazovky smerom nahor.\n\nSlužby prepnete potiahnutím troma prstami smerom nahor a pridržaním."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Službu dostupnosti zapnete alebo vypnete potiahnutím dvoma prstami z dolnej časti obrazovky smerom nahor.\n\nSlužby prepnete potiahnutím dvoma prstami smerom nahor a pridržaním."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Službu dostupnosti zapnete alebo vypnete potiahnutím troma prstami z dolnej časti obrazovky smerom nahor.\n\nSlužby prepnete potiahnutím troma prstami smerom nahor a pridržaním."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Dobre"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Tlačidlo dostupnosti je nastavené na službu <xliff:g id="SERVICE">%1$s</xliff:g>. Ak chcete použiť priblíženie, klepnite na tlačidlo dostupnosti, podržte ho a potom vyberte priblíženie."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Skratka klávesa hlasitosti"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Pripojená služba"</string>
@@ -2894,7 +2882,7 @@
     <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"Vždy zapnuté siete VPN musia mať numerické adresy serverov DNS"</string>
     <string name="vpn_always_on_invalid_reason_other" msgid="5959352052515258208">"Zadané informácie nepodporujú vždy zapnuté siete VPN"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"Zrušiť"</string>
-    <string name="vpn_done" msgid="8678655203910995914">"Zatvoriť"</string>
+    <string name="vpn_done" msgid="8678655203910995914">"Zavrieť"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Uložiť"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Pripojiť"</string>
     <string name="vpn_replace" msgid="5442836256121957861">"Nahradiť"</string>
@@ -4351,13 +4339,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Rýchlejšie fotenie snímok selfie"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navigácia v systéme"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navigácia dvoma tlačidlami"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Medzi aplikáciami prepnete potiahnutím nahor po tlačidle plochy. Opätovným potiahnutím nahor zobrazíte všetky aplikácie. Funguje to na všetkých obrazovkách. V pravom dolnom rohu obrazovky už nebude tlačidlo prehľadu."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Aplikácie prepnete potiahnutím prstom nahor po tlačidle plochy. Všetky aplikácie zobrazíte opätovným potiahnutím prstom nahor. Vrátite sa klepnutím na tlačidlo Späť."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Vyskúšajte nové tlačidlo plochy"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Zapnite nové gesto na prepínanie aplikácií"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigácia gestami"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Na plochu prejdete potiahnutím nahor z dolnej časti obrazovky. Späť prejdete potiahnutím od ľavého alebo pravého okraja obrazovky. Na prepnutie medzi aplikáciami potiahnite nahor z dolnej časti obrazovky a pred uvoľnením podržte."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Na plochu prejdete potiahnutím prstom z dolnej časti obrazovky smerom nahor. Aplikácie prepnete potiahnutím prstom nahor, podržaním a následným uvoľnením. Vrátite sa potiahnutím prstom z ľavého alebo pravého okraja obrazovky."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigácia troma tlačidlami"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klasická navigácie v Androide. Na prechod na plochu, prepínanie medzi aplikáciami a návrat späť slúžia tlačidlá."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Prejdenie späť, prejdenie na plochu a prepínanie aplikácií pomocou tlačidiel v dolnej časti obrazovky."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigácia v systéme, navigácia dvoma tlačidlami, navigácia troma tlačidlami, navigácia gestami"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Predvolená vstupná aplikácia <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> túto funkciu nepodporuje"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Prepnúť predvolenú vstupnú aplikáciu"</string>
@@ -4535,8 +4523,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Táto funkcia bola vypnutá, pretože spomaľuje telefón"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Vynútiť úplné meranie GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Sledovať všetky konštelácie a frekvencie GNSS bez cyklického vypínania a zapínania"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Povoliť spúšťanie aktivity na pozadí"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Povolí spúšťanie všetkých aktivít na pozadí"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Vždy zobrazovať dialógové okno zlyhania"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Zobraziť dialógové okno pri každom zlyhaní aplikácie"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Vybrať aplikáciu podporujúcu ANGLE"</string>
@@ -4671,6 +4657,8 @@
     <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Uložiť"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Použiť SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Vypnuté"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Ak chcete túto SIM kartu deaktivovať, odstráňte ju"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Klepnutím aktivujete operátora <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Chcete prepnúť na operátora <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"V jednej chvíli môže byť aktívna iba jedna stiahnutá SIM karta.\n\nPrepnutím na operátora <xliff:g id="CARRIER1">%1$s</xliff:g> nezrušíte službu operátora <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Prepnúť na <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4792,4 +4780,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Správu MMS sa nepodarilo odoslať"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Klepnutím povolíte správy MMS pre operátora <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> pri vypnutých mobilných dátach"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Správa MMS"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problém s kombináciou SIM kariet"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Použitie operátora <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> môže obmedziť funkcie. Ďalšie informácie zobrazíte klepnutím."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Kombinácia SIM kariet"</string>
 </resources>
