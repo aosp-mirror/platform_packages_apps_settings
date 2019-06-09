@@ -350,10 +350,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Seleziona per scarto da UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Blocca automaticamente"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo sospensione"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Subito dopo la sospensione, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo la sospensione, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Blocca dopo il timeout dello schermo"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo il timeout"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Subito dopo il timeout, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo il timeout, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostra info proprietario su blocco schermo"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Messaggio schermata di blocco"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Abilita widget"</string>
@@ -397,8 +397,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Blocco schermo, impronta digitale"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Blocco schermo"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Volto aggiunto"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Imposta Sblocco col sorriso"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Sblocco col sorriso"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Come configurare lo Sblocco col sorriso"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Imposta Sblocco col sorriso"</string>
@@ -433,22 +432,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Sblocco sorriso per"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Sblocco del telefono"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Accesso all\'app e pagamenti"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Requisiti per Sblocco col sorriso"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Richiedi occhi aperti"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Per sbloccare il telefono gli occhi devono essere aperti"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Chiedi sempre conferma"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Chiedi sempre conferma se viene usato Sblocco col sorriso nelle app"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Elimina dati viso"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Imposta Sblocco col sorriso"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Usa la funzionalità Sblocco col sorriso per sbloccare il dispositivo, accedere alle app e confermare pagamenti.\n\nTieni presente che:\nSe guardi il telefono puoi sbloccarlo anche quando non hai intenzione di farlo.\n\nIl tuo telefono può essere sbloccato da un\'altra persona se viene rivolto verso il tuo viso e hai gli occhi aperti.\n\nIl tuo telefono può essere sbloccato da qualcuno che ti assomiglia molto, ad esempio un gemello."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Rimuovere i dati viso?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Le immagini e i dati biometrici usati da Sblocco col sorriso verranno eliminati in modo definitivo e sicuro. Dopo la rimozione, ti serviranno il tuo PIN, la tua sequenza o la tua password per sbloccare il telefono, accedere alle app e confermare i pagamenti."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Impronta digitale"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gestisci impronte digitali"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Utilizza l\'impronta digitale per"</string>
@@ -499,12 +492,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Proteggi il tuo tablet con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'impronta. Tocca Annulla, quindi imposta un PIN, una sequenza o una password."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Proteggi il tuo dispositivo con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'impronta. Tocca Annulla, quindi imposta un PIN, una sequenza o una password."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Proteggi il tuo telefono con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'impronta. Tocca Annulla, quindi imposta un PIN, una sequenza o una password."</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Se proteggi il tablet con un\'opzione di blocco schermo, nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare lo Sblocco col sorriso. Per tornare indietro, tocca Annulla."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Se proteggi il dispositivo con un\'opzione di blocco schermo, nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare lo Sblocco col sorriso. Per tornare indietro, tocca Annulla."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Se proteggi il telefono con un\'opzione di blocco schermo, nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare lo Sblocco col sorriso. Per tornare indietro, tocca Annulla."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Saltare l\'impostazione del PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Saltare l\'impostazione della password?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Saltare l\'impostazione della sequenza?"</string>
@@ -1232,9 +1222,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Schermo vigile"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"On/Lo schermo non si spegne se lo stai guardando"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Off"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Consente di impedire lo spegnimento dello schermo se lo stai guardando"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"L\'opzione Schermo vigile usa la fotocamera anteriore per controllare se qualcuno sta guardando lo schermo. Funziona sul dispositivo e le immagini non vengono mai memorizzate o inviate a Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Mantieni lo schermo attivo quando lo guardi"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Luminosità notturna"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Con la funzione Luminosità notturna, il tuo schermo diventa color ambra. In questo modo potrai guardarlo senza sforzare la vista o leggere in condizioni di luce attenuata e potrai addormentarti più facilmente."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Pianificazione"</string>
@@ -2085,13 +2075,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Preferenze sottotitoli"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Ingrandimento"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Ingrandisci con triplo tocco"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Ingrandisci con pulsante"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Ingrandisci con pulsante e triplo tocco"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Ingrandisci con scorciatoia"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Ingrandisci con scorciatoia e triplo tocco"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Aumenta lo zoom della schermata"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Tocca tre volte per eseguire lo zoom"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Tocca un pulsante per eseguire lo zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Per ingrandire"</b>", tocca velocemente lo schermo per tre volte.\n"<ul><li>"Trascina almeno due dita per scorrere."</li>\n<li>"Pizzica con almeno due dita per regolare lo zoom."</li></ul>\n\n<b>"Per ingrandire temporaneamente"</b>", tocca velocemente per tre volte e tieni il dito premuto all\'ultimo tocco.\n"<ul><li>"Trascina il dito per spostarti sullo schermo."</li>\n<li>"Solleva il dito per ridurre lo zoom."</li></ul>\n\n"Non puoi aumentare lo zoom sulla tastiera e nella barra di navigazione."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Quando è attivo l\'ingrandimento, utilizza il pulsante Accessibilità nella parte inferiore della schermata per ingrandire velocemente.\n\n"<b>"Per ingrandire"</b>", tocca il pulsante Accessibilità, quindi tocca un punto qualsiasi sullo schermo.\n"<ul><li>"Trascina almeno due dita per scorrere."</li>\n<li>"Pizzica con almeno due dita per regolare lo zoom."</li></ul>\n\n<b>"Per ingrandire temporaneamente"</b>", tocca il pulsante Accessibilità, quindi tocca e tieni premuto un punto qualsiasi dello schermo.\n"<ul><li>"Trascina per spostarti sullo schermo."</li>\n<li>"Solleva il dito per ridurre lo zoom."</li></ul>\n\n"Non puoi aumentare lo zoom sulla tastiera e nella barra di navigazione."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Quando è attivo l\'ingrandimento, puoi aumentare lo zoom sullo schermo.\n\n"<b>"Per eseguire lo zoom"</b>", avvia l\'ingrandimento, quindi tocca un punto qualsiasi sullo schermo.\n"<ul><li>"• Trascina con due o più dita per scorrere."</li>\n<li>"• Pizzica con due o più dita per regolare lo zoom."</li></ul>\n\n<b>"Per eseguire temporaneamente lo zoom"</b>", avvia l\'ingrandimento, quindi tocca e tieni premuto un punto qualsiasi sullo schermo.\n"<ul><li>"• Trascina per spostarti sullo schermo."</li>\n<li>"• Solleva il dito per diminuire lo zoom."</li></ul>\n\n"Non puoi aumentare lo zoom sulla tastiera o nella barra di navigazione."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Usa il pulsante Accessibilità per aprire"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Usa un gesto per aprire"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Usa il nuovo gesto di accessibilità"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Per attivare o disattivare questo servizio, tocca il pulsante Accessibilità <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> nella parte inferiore dello schermo.\n\nPer spostarti tra i servizi, tocca e tieni premuto il pulsante Accessibilità."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Per attivare o disattivare questo servizio, scorri verso l\'alto dalla parte inferiore dello schermo con due dita.\n\nPer spostarti tra i servizi, scorri verso l\'alto con due dita e tieni premuto."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Per attivare o disattivare questo servizio, scorri verso l\'alto dalla parte inferiore dello schermo con tre dita.\n\nPer spostarti tra i servizi, scorri verso l\'alto con tre dita e tieni premuto."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Per attivare o disattivare un servizio di accessibilità, scorri verso l\'alto dalla parte inferiore dello schermo con due dita.\n\nPer spostarti tra i servizi, scorri verso l\'alto con due dita e tieni premuto."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Per attivare o disattivare un servizio di accessibilità, scorri verso l\'alto dalla parte inferiore dello schermo con tre dita.\n\nPer spostarti tra i servizi, scorri verso l\'alto con tre dita e tieni premuto."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Il pulsante Accessibilità è impostato su <xliff:g id="SERVICE">%1$s</xliff:g>. Per utilizzare l\'ingrandimento, tocca e tieni premuto il pulsante Accessibilità, quindi seleziona l\'ingrandimento."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Scorciatoia per i tasti del volume"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Servizio scorciatoia"</string>
@@ -4196,13 +4195,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Scatta selfie più rapidamente"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navigazione del sistema"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navigazione con due pulsanti"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Per cambiare app, scorri verso l\'alto sul pulsante Home. Scorri ancora verso l\'alto per visualizzare tutte le app. Questa operazione funziona da qualsiasi schermata. Non troverai più un pulsante Panoramica nella parte in basso a destra dello schermo."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Per cambiare app, scorri verso l\'alto sul pulsante Home. Scorri ancora verso l\'alto per visualizzare tutte le app. Per tornare indietro, tocca il pulsante Indietro."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Prova il nuovo pulsante Home"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Attiva il nuovo gesto per cambiare app"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigazione tramite gesti"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Per andare alla schermata Home, scorri verso l\'alto dalla parte inferiore dello schermo. Per tornare indietro, scorri dal bordo sinistro o destro dello schermo. Per cambiare app, inizia a scorrere verso l\'alto dalla parte inferiore dello schermo e tieni premuto prima di rilasciare."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Per andare alla schermata Home, scorri verso l\'alto dalla parte inferiore dello schermo. Per cambiare app, scorri verso l\'alto dalla parte inferiore dello schermo, tieni premuto e rilascia. Per tornare indietro, scorri dal bordo sinistro o destro."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigazione con tre pulsanti"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Modalità di navigazione classica di Android che consente di accedere alla schermata Home, cambiare app e tornare indietro tramite pulsanti."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Torna indietro, vai alla schermata Home e cambia app usando i pulsanti nella parte inferiore dello schermo."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigazione del sistema, navigazione con due pulsanti, navigazione con tre pulsanti, navigazione tramite gesti"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Funzionalità non supportata dall\'app predefinita per la schermata Home <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Passa all\'app predef. per schermata Home"</string>
@@ -4366,8 +4365,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Questa funzionalità è stata disattivata perché rallenta il telefono"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Forza esecuzione completa delle misurazioni GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Monitora tutte le costellazioni e le frequenze GNSS senza ciclo di lavoro utile"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Consenti l\'avvio dell\'attività in background"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Consente l\'avvio di tutte le attività in background"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Mostra sempre finestra di dialogo di arresti anomali"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Mostra finestra di dialogo a ogni arresto anomalo delle app"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Seleziona le app che supportano ANGLE"</string>
@@ -4494,16 +4491,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Non attivo/SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Attivo/SIM scaricata"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Non attivo/SIM scaricata"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"Nome e colore SIM"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Nome"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Colore (usato da app compatibili)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Salva"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Utilizza SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Off"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Per disattivare questa scheda SIM, rimuovila"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Tocca per attivare <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Passare a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"È possibile attivare una sola SIM scaricata alla volta.\n\nIl passaggio a <xliff:g id="CARRIER1">%1$s</xliff:g> non annullerà il servizio di <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Passa a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4617,4 +4612,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Impossibile inviare messaggio MMS"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Tocca per consentire i messaggi MMS su <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> quando i dati mobili non sono attivi"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Messaggio MMS"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problema con la combinazione di SIM"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"L\'uso di <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> potrebbe limitare la funzionalità. Tocca per avere ulteriori informazioni."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Combinazione di SIM"</string>
 </resources>

@@ -350,10 +350,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Velja eftir tímamun frá UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Dagsetning"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Tími"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Læsa sjálfkrafa"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> eftir hvíldarstöðu"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Strax eftir svefn nema þegar <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> heldur tækinu ólæstu"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> eftir svefn nema þegar <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> heldur tækinu ólæstu"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Læsa þegar tímamörk skjás renna út"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> eftir að tímamörk renna út"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Strax þegar tímamörk renna út nema þegar <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> heldur tækinu ólæstu"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> eftir að tímamörk renna út, nema þegar <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> heldur tækinu ólæstu"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Birta upplýsingar um eiganda á lásskjá"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Skilaboð lásskjás"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Virkja græjur"</string>
@@ -397,8 +397,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Skjálás, fingrafar"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Skjálás"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Andliti bætt við"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Setja upp andlitsopnun"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Andlitsopnun"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Hvernig setja á upp andlitsopnun"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Setja upp andlitsopnun"</string>
@@ -433,22 +432,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Nota andlitsopnun f."</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Taka símann úr lás"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Innskr. í forrit og greiðslur"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Kröfur fyrir andlitsopnun"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Krefst þess að augun séu opin"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Augun verða að vera opin til að aflæsa"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Krefjast alltaf staðfestingar"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Krefjast alltaf staðfestingarþreps þegar andlitsopnun er notuð"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Eyða andlitsgögnum"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Setja upp andlitsopnun"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Notaðu andlitsopnun til að taka tækið úr lás, skrá þig inn í forrit og staðfesta greiðslur.\n\nHafðu í huga að:\nSíminn kann að opnast óvart þegar þú lítur á hann.\n\nAðrir geta opnað símann þinn með því að halda honum upp að andliti þínu þegar þú ert með augun opin.\n\nEinhver sem er mjög lík(ur) þér getur opnað símann þinn, t.d. eineggja tvíburi."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Eyða andlitsgögnum?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Myndum og líffræðilegum tölfræðigögnum sem andlitsopnun notar verður eytt á öruggan hátt fyrir fullt og allt. Þegar þeim hefur verið eytt þarftu PIN-númer, mynstur eða aðgangsorð til að taka símann úr lás, skrá þig inn í forrit og staðfesta greiðslur."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingrafar"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Stjórna fingraförum"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Nota fingrafar fyrir"</string>
@@ -499,12 +492,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Verndaðu spjaldtölvuna þína með því að velja skjálás svo enginn geti notað hana ef hún týnist eða ef henni er stolið. Þú þarft einnig að velja skjálás til að setja upp fingrafar. Ýttu á „Hætta við“ og stilltu svo PIN-númer, mynstur eða aðgangsorð."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Verndaðu tækið þitt með því að velja skjálás svo enginn geti notað það ef það týnist eða ef því er stolið. Þú þarft einnig að velja skjálás til að setja upp fingrafar. Ýttu á „Hætta við“ og stilltu svo PIN-númer, mynstur eða aðgangsorð."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Verndaðu símann þinn með því að velja skjálás svo enginn geti notað hann ef hann týnist eða ef honum er stolið. Þú þarft einnig að velja skjálás til að setja upp fingrafar. Ýttu á „Hætta við“ og stilltu svo PIN-númer, mynstur eða aðgangsorð."</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Ef þú verndar spjaldtölvuna þína með því að velja skjálás getur enginn notað hana ef hún týnist eða ef henni er stolið. Þú þarft einnig að velja skjálás til að setja upp andlitsopnun. Ýttu á „Hætta við“ til að fara til baka."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Ef þú verndar tækið þitt með því að velja skjálás getur enginn notað það ef það týnist eða ef því er stolið. Þú þarft einnig að velja skjálás til að setja upp andlitsopnun. Ýttu á „Hætta við“ til að fara til baka."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Ef þú verndar símann þinn með því að velja skjálás getur enginn notað hann ef hann týnist eða ef honum er stolið. Þú þarft einnig að velja skjálás til að setja upp andlitsopnun. Ýttu á „Hætta við“ til að fara til baka."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Viltu sleppa uppsetningu PIN-númers?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Viltu sleppa uppsetningu aðgangsorðs?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Viltu sleppa uppsetningu mynsturs?"</string>
@@ -1232,9 +1222,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Skjáskynjun"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Kveikt / Það slokknar ekki á skjánum ef þú horfir á hann"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Slökkt"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Kemur í veg fyrir að það slokkni á skjánum ef þú ert að horfa á hann"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Skjáskynjun notar fremri myndavélina til að sjá hvort einhver sé að horfa á skjáinn. Skjáskynjun virkar í tækinu, en myndir eru aldrei geymdar eða sendar til Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Hafa kveikt á skjá þegar horft er á hann"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Næturljós"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Næturljós gefur skjánum gulbrúnan litblæ. Þetta gerir þér auðveldara að skoða skjáinn í litlu ljósi og gæti auðveldað þér að sofna."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Áætlun"</string>
@@ -2085,13 +2075,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Kjörstillingar skjátexta"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Stækkun"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Stækka með því að ýta þrisvar"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Stækka með hnappi"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Stækka með hnappi og með því að ýta þrisvar"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Stækka með flýtilykli"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Stækka með flýtilykli og með því að ýta þrisvar"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Auka aðdrátt á skjá"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Ýtt þrisvar til að auka aðdrátt"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Ýttu á hnapp til að stækka"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Til að stækka"</b>" skaltu ýta snögglega þrisvar sinnum á skjáinn.\n"<ul><li>"Dragðu með tveimur eða fleiri fingrum til að fletta"</li>\n<li>"Færðu tvo eða fleiri fingur saman til að stilla aðdrátt"</li></ul>\n\n<b>"Til að stækka tímabundið"</b>" skaltu ýta snögglega þrisvar sinnum á skjáinn og halda fingrinum á skjánum í þriðja skiptið.\n"<ul><li>"Dragðu til að fara um skjáinn"</li>\n<li>"Lyftu fingri til að minnka aðdrátt"</li></ul>\n\n"Þú getur ekki stækkað á lyklaborði eða yfirlitsstiku."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Þegar kveikt er á stækkun skal nota aðgengishnappinn neðst á skjánum til að stækka á fljótlegan hátt.\n\n"<b>"Til að stækka"</b>" skaltu ýta á aðgengishnappinn og ýta síðan hvar sem er á skjáinn.\n"<ul><li>"Dragðu með tveimur eða fleiri fingrum til að fletta"</li>\n<li>"Færðu tvo eða fleiri fingur saman til að stilla aðdrátt"</li></ul>\n\n<b>"Til að stækka tímabundið"</b>" skaltu ýta á aðgengishnappinn og síðan halda fingri hvar sem er á skjánum.\n"<ul><li>"Dragðu til að fara um skjáinn"</li>\n<li>"Lyftu fingrinum til að minnka aðdrátt"</li></ul>\n\n"Þú getur ekki stækkað á lyklaborðinu eða yfirlitsstikunni."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Þegar kveikt er á stækkun geturðu aukið aðdráttinn á skjánum.\n\n"<b>"Til að stækka"</b>" skaltu hefja stækkun og ýta svo hvar sem er á skjáinn.\n"<ul><li>"• Færðu tvo eða fleiri fingur eftir skjánum til að fletta"</li>\n<li>"• Færðu saman tvo eða fleiri fingur til að breyta aðdrættinum"</li></ul>\n\n<b>"Til að stækka tímabundið"</b>" skaltu hefja stækkun og halda síðan fingri hvar sem er á skjánum.\n"<ul><li>"• Dragðu til að fara um skjáinn"</li>\n<li>"• Lyftu fingrinum til að minnka aðdrátt"</li></ul>\n\n"Þú getur ekki stækkað á lyklaborðinu eða yfirlitsstikunni."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Notaðu aðgengishnappinn til að opna"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Nota bendingu til að opna"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Notaðu nýja aðgengisbendingu"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Til að kveikja eða slökkva á þessari þjónustu skaltu ýta á aðgengishnappinn<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>neðst á skjánum.\n\nTil að skipta á milli þjónusta skaltu halda aðgengishnappinum inni."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Til að kveikja eða slökkva á þessari þjónustu skaltu strjúka upp frá neðri hluta skjásins með tveimur fingrum.\n\nTil að skipta á milli þjónusta skaltu strjúka upp með tveimur fingrum og halda inni."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Til að kveikja eða slökkva á þessari þjónustu skaltu strjúka upp frá neðri hluta skjásins með þremur fingrum.\n\nTil að skipta á milli þjónusta skaltu strjúka upp með þremur fingrum og halda inni."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Til að kveikja eða slökkva á aðgengisþjónustu skaltu strjúka upp frá neðri hluta skjásins með tveimur fingrum.\n\nTil að skipta á milli þjónusta skaltu strjúka upp með tveimur fingrum og halda inni."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Til að kveikja eða slökkva á aðgengisþjónustu skaltu strjúka upp frá neðri hluta skjásins með þremur fingrum.\n\nTil að skipta á milli þjónusta skaltu strjúka upp með þremur fingrum og halda inni."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Ég skil"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Aðgengishnappurinn er stilltur á <xliff:g id="SERVICE">%1$s</xliff:g>. Til að nota stækkun skaltu halda aðgengishnappnum inni og velja stækkun."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Flýtileið með hljóðstyrkstakka"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Flýtileiðarþjónusta"</string>
@@ -4196,13 +4195,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Taka sjálfsmyndir hraðar"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Kerfisstjórnun"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Tveggja hnappa stjórnun"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Til að skipta um forrit skaltu strjúka upp á heimahnappinum. Strjúktu aftur upp til að sjá öll forrit. Þetta virkar á hvaða skjá sem er. Yfirlitshnappur verður ekki lengur neðst til hægri á skjánum."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Til að skipta um forrit skaltu strjúka upp á heimahnappinum. Strjúktu aftur upp til að sjá öll forrit. Ýttu á bakkhnappinn til að fara til baka."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Prófaðu nýja heimahnappinn"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Kveiktu á nýju bendingunni til að skipta um forrit"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Bendingastjórnun"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Til að fara á upphafssíðu skaltu strjúka upp frá neðri hluta skjásins. Til að fara til baka skaltu strjúka frá vinstri eða hægri brún skjásins. Til að skipta um forrit skaltu strjúka frá neðri hluta skjásins og halda inni áður en þú sleppir."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Til að fara á upphafssíðu skaltu strjúka upp frá neðri hluta skjásins. Til að skipta um forrit skaltu strjúka upp frá neðri hluta skjásins og halda inni áður en þú sleppir. Til að fara til baka skaltu strjúka frá vinstri eða hægri brún skjásins."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Þriggja hnappa stjórnun"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Sígild stjórnunarstilling Android þar sem hægt er að fara á upphafssíðu, skipta um forrit og fara til baka með hnöppum."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Farðu til baka, á upphafssíðu og skiptu um forrit með hnöppum neðst á skjánum."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"kerfisstjórnun, tveggja hnappa stjórnun, þriggja hnappa stjórnun, bendingastjórnun"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Ekki stutt af sjálfgefnu heimaforriti, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Skipta um sjálfgefið heimaforrit"</string>
@@ -4366,8 +4365,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Slökkt hefur verið á þessum eiginleika því hann hægir á símanum"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Full GNSS-mæling"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Rekja öll GNSS söfn og tíðnir með engum vinnulotum"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Leyfa aðgerðir í bakgrunninum"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Leyfir allar aðgerðir í bakgrunninum"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Sýna alltaf hrunglugga"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Sýna glugga í hvert sinn sem forrit hrynur"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Velja forrit sem styður ANGLE"</string>
@@ -4494,16 +4491,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Óvirkt / SIM-kort"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Virk / sótt SIM-kort"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Óvirk / sótt SIM-kort"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"Heiti og litur SIM-korts"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Heiti"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Litur (notaður af samhæfum forritum)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Vista"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Nota SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Slökkt"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Til að gera SIM-kort óvirkt þarftu að fjarlægja það úr símanum"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Ýttu til að virkja <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Skipta yfir í <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Aðeins eitt SIM-kort getur verið virkt í einu.\n\nÞótt þú skiptir yfir í <xliff:g id="CARRIER1">%1$s</xliff:g> verður þjónustu þinni hjá <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Skipta yfir í <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4617,4 +4612,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Ekki er hægt að senda MMS-skilaboð"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Ýttu til að leyfa MMS-skilaboð hjá <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> þegar slökkt er á farsímagögnum"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS-skilaboð"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Vandamál með SIM-samsetningu"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Notkun <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> kann að takmarka virkni. Ýttu til að fá frekari upplýsingar."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM-samsetning"</string>
 </resources>
