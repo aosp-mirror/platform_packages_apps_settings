@@ -350,10 +350,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Chọn theo độ lệch UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Ngày"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Thời gian"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Tự động khóa"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi ngủ"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Ngay sau khi chuyển sang chế độ ngủ, trừ khi vẫn được <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mở khóa"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi sang chế độ ngủ, trừ khi vẫn được <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> mở khóa"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Khóa sau khi hết thời gian chờ khóa màn hình"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi hết thời gian chờ"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Ngay sau khi hết thời gian chờ, trừ khi vẫn được <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mở khóa"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi hết thời gian chờ, trừ khi vẫn được <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> mở khóa"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Hiển thị thông tin chủ sở hữu trên màn hình khóa"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Thông điệp trên màn hình khóa"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Bật tiện ích"</string>
@@ -397,8 +397,7 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Phương thức khóa màn hình, vân tay"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Phương thức khóa màn hình"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Đã thêm khuôn mặt"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (5596571291522936724) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Thiết lập tính năng mở khóa bằng khuôn mặt"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Mở khóa bằng khuôn mặt"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Cách thiết lập mở khóa bằng khuôn mặt"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Thiết lập mở khóa bằng khuôn mặt"</string>
@@ -433,22 +432,16 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Dùng mở khóa bằng khuôn mặt cho"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Mở khóa điện thoại"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Đăng nhập ứng dụng và thanh toán"</string>
-    <!-- no translation found for security_settings_face_settings_require_category (2523822050054597822) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (8523824066748480516) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (6595676992796133643) -->
-    <skip />
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Các yêu cầu về tính năng mở khóa bằng khuôn mặt"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Yêu cầu mở mắt"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Để mở khóa điện thoại, bạn phải mở mắt"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Luôn yêu cầu xác nhận"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (6466094680756211420) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Luôn yêu cầu xác nhận khi dùng mở khóa bằng khuôn mặt trong ứng dụng"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Xóa dữ liệu khuôn mặt"</string>
-    <!-- no translation found for security_settings_face_settings_enroll (495403103503629382) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Thiết lập mở khóa bằng khuôn mặt"</string>
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Sử dụng tính năng mở khóa bằng khuôn mặt để mở khóa thiết bị, đăng nhập vào ứng dụng và xác nhận thanh toán.\n\nLưu ý:\nViệc nhìn vào điện thoại có thể khiến điện thoại mở khóa ngay cả khi bạn không định làm vậy.\n\nNgười khác có thể mở khóa điện thoại khi họ giơ điện thoại trước mặt bạn khi bạn đang mở mắt.\n\nNhững người có diện mạo giống bạn, chẳng hạn như anh chị em ruột giống hệt bạn, đều có thể mở khóa điện thoại."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Bạn muốn xóa dữ liệu khuôn mặt?"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (1959642447512807205) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Hình ảnh và dữ liệu sinh trắc học mà tính năng mở khóa bằng khuôn mặt sử dụng sẽ được xóa vĩnh viễn và an toàn. Sau khi xóa, bạn phải có mã PIN, hình mở khóa hoặc mật khẩu để mở khóa điện thoại, đăng nhập vào ứng dụng và xác nhận thanh toán."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Vân tay"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Quản lý vân tay"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Sử dụng vân tay để"</string>
@@ -499,12 +492,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Hãy bảo vệ máy tính bảng của bạn bằng tùy chọn khóa màn hình để không ai có thể sử dụng được nếu máy tính bảng này bị mất hoặc bị đánh cắp. Bạn cũng cần có tùy chọn khóa màn hình để thiết lập vân tay số. Nhấn vào Hủy, rồi đặt mã PIN, hình mở khóa hoặc mật khẩu."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Hãy bảo vệ thiết bị của bạn bằng tùy chọn khóa màn hình để không ai có thể sử dụng được nếu thiết bị này bị mất hoặc bị đánh cắp. Bạn cũng cần có tùy chọn khóa màn hình để thiết lập vân tay số. Nhấn vào Hủy, rồi đặt mã PIN, hình mở khóa hoặc mật khẩu."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Hãy bảo vệ điện thoại của bạn bằng tùy chọn khóa màn hình để không ai có thể sử dụng được nếu điện thoại này bị mất hoặc bị đánh cắp. Bạn cũng cần có tùy chọn khóa màn hình để thiết lập vân tay số. Nhấn vào Hủy, rồi đặt mã PIN, hình mở khóa hoặc mật khẩu."</string>
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (2053646029913482047) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (8884769457436280503) -->
-    <skip />
-    <!-- no translation found for face_lock_screen_setup_skip_dialog_text (1752907123591111728) -->
-    <skip />
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Bảo vệ máy tính bảng của bạn bằng tùy chọn khóa màn hình để không ai khác sử dụng được nếu máy tính bảng này bị mất hoặc bị đánh cắp. Bạn cũng cần có tùy chọn khóa màn hình để thiết lập tính năng mở khóa bằng khuôn mặt. Để quay lại, hãy nhấn vào Hủy."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Bảo vệ thiết bị của bạn bằng tùy chọn khóa màn hình để không ai khác sử dụng được nếu thiết bị này bị mất hoặc bị đánh cắp. Bạn cũng cần có tùy chọn khóa màn hình để thiết lập tính năng mở khóa bằng khuôn mặt. Để quay lại, hãy nhấn vào Hủy."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Bảo vệ điện thoại của bạn bằng tùy chọn khóa màn hình để không ai khác sử dụng được nếu điện thoại này bị mất hoặc bị đánh cắp. Bạn cũng cần có tùy chọn khóa màn hình để thiết lập tính năng mở khóa bằng khuôn mặt. Để quay lại, hãy nhấn vào Hủy."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Bỏ qua bước thiết lập mã PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Bỏ qua bước thiết lập mật khẩu?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Bỏ qua bước thiết lập hình mở khóa?"</string>
@@ -1232,9 +1222,9 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Chú ý đến màn hình"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Bật / Màn hình sẽ không tắt nếu bạn đang nhìn vào màn hình"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Tắt"</string>
-    <!-- no translation found for adaptive_sleep_description (8521495734829172889) -->
-    <skip />
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Ngăn không cho màn hình tắt khi bạn đang nhìn vào đó"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Tính năng chú ý đến màn hình sử dụng máy ảnh trước để xem liệu có ai đang nhìn vào màn hình hay không. Tính năng này hoạt động trên thiết bị nên sẽ không bao giờ lưu trữ hoặc gửi hình ảnh cho Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Giữ màn hình luôn bật khi nhìn vào"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Ánh sáng đêm"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Chế độ Ánh sáng đêm phủ màu hổ phách lên màn hình. Điều này giúp bạn dễ nhìn hoặc đọc màn hình trong ánh sáng yếu và có thể giúp bạn dễ ngủ hơn."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Lịch biểu"</string>
@@ -2085,13 +2075,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Tùy chọn phụ đề"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Phóng to"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Phóng to bằng cách nhấn 3 lần"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Phóng to bằng nút"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Phóng to bằng nút và nhấn ba lần"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Phóng to bằng phím tắt"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Phóng to bằng phím tắt và nhấn 3 lần"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Phóng to trên màn hình"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Nhấn 3 lần để thu phóng"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Nhấn vào nút để thu phóng"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Để thu phóng"</b>", nhấn nhanh màn hình 3 lần.\n"<ul><li>"Kéo 2 hoặc nhiều ngón tay để cuộn"</li>\n<li>"Chụm 2 hoặc nhiều ngón tay để điều chỉnh mức thu phóng"</li></ul>\n\n<b>"Để thu phóng tạm thời"</b>", nhấn nhanh màn hình 3 lần và giữ ngón tay của bạn vào lần nhấn thứ ba.\n"<ul><li>"Kéo để di chuyển quanh màn hình"</li>\n<li>"Nhấc ngón tay để thu nhỏ"</li></ul>\n\n"Bạn không thể phóng to trên thanh điều hướng."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Khi tính năng phóng đại được bật, sử dụng nút Hỗ trợ tiếp cận ở cuối màn hình để phóng đại nhanh.\n\n"<b>"Để thu phóng"</b>", nhấn vào nút Hỗ trợ tiếp cận, sau đó nhấn bất kỳ chỗ nào trên màn hình.\n"<ul><li>"Kéo 2 hoặc nhiều ngón tay để cuộn"</li>\n<li>"Chụm 2 hoặc nhiều ngón tay để điều chỉnh mức thu phóng"</li></ul>\n\n<b>"Để thu phóng tạm thời"</b>", nhấn vào nút Hỗ trợ tiếp cận, sau đó chạm và giữ bất kỳ chỗ nào trên màn hình.\n"<ul><li>"Kéo để di chuyển quanh màn hình"</li>\n<li>"Nhấc ngón tay để thu nhỏ"</li></ul>\n\n"Bạn không thể phóng to trên bàn phím hoặc thanh điều hướng."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Khi tính năng phóng to đang bật, bạn có thể phóng to trên màn hình.\n\n"<b>"Để thu phóng"</b>", hãy bắt đầu tính năng phóng to, sau đó nhấn vào vị trí bất kỳ trên màn hình.\n"<ul><li>"• Kéo 2 hoặc nhiều ngón tay để cuộn"</li>\n<li>"• Chụm 2 hoặc nhiều ngón tay để điều chỉnh mức thu phóng"</li></ul>\n\n<b>"Để thu phóng tạm thời"</b>", hãy bắt đầu tính năng phóng to, sau đó chạm và giữ vị trí bất kỳ trên màn hình.\n"<ul><li>"• Kéo để di chuyển xung quanh màn hình"</li>\n<li>"• Nhấc ngón tay lên để thu nhỏ"</li></ul>\n\n"Bạn không thể phóng to trên bàn phím hoặc thanh điều hướng."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Dùng nút hỗ trợ tiếp cận để mở"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Dùng cử chỉ để mở"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Dùng cử chỉ hỗ trợ tiếp cận mới"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Để bật hoặc tắt dịch vụ này, hãy nhấn vào nút hỗ trợ tiếp cận <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ở cuối màn hình.\n\nĐể chuyển đổi giữa các dịch vụ, hãy chạm và giữ nút hỗ trợ tiếp cận."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Để bật hoặc tắt dịch vụ này, hãy vuốt lên từ cuối màn hình bằng 2 ngón tay.\n\nĐể chuyển đổi giữa các dịch vụ, hãy vuốt lên và giữ bằng 2 ngón tay."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Để bật hoặc tắt dịch vụ này, hãy vuốt lên từ cuối màn hình bằng 3 ngón tay.\n\nĐể chuyển đổi giữa các dịch vụ, hãy vuốt lên và giữ bằng 3 ngón tay."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Để bật hoặc tắt một dịch vụ hỗ trợ tiếp cận, hãy vuốt lên từ cuối màn hình bằng 2 ngón tay.\n\nĐể chuyển đổi giữa các dịch vụ, hãy vuốt lên và giữ bằng 2 ngón tay."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Để bật hoặc tắt một dịch vụ hỗ trợ tiếp cận, hãy vuốt lên từ cuối màn hình bằng 3 ngón tay.\n\nĐể chuyển đổi giữa các dịch vụ, hãy vuốt lên và giữ bằng 3 ngón tay."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Đã hiểu"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Nút Hỗ trợ tiếp cận được đặt thành <xliff:g id="SERVICE">%1$s</xliff:g>. Để sử dụng tính năng phóng đại, hãy chạm và giữ nút Hỗ trợ tiếp cận, sau đó chọn độ phóng đại."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Dùng phím âm lượng làm phím tắt"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Dịch vụ phím tắt"</string>
@@ -2104,7 +2103,7 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Con trỏ chuột lớn"</string>
     <string name="accessibility_disable_animations" msgid="5876035711526394795">"Xóa hiệu ứng động"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Âm thanh đơn âm"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Kết hợp kênh khi phát âm thanh"</string>
+    <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Kết hợp các kênh khi phát âm thanh"</string>
     <string name="accessibility_toggle_master_balance_title" msgid="551441665399043471">"Cân bằng âm thanh"</string>
     <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Bên trái"</string>
     <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Bên phải"</string>
@@ -2113,7 +2112,7 @@
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 giây"</string>
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 phút"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 phút"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Thời gian hành động (Thời gian chờ hỗ trợ tiếp cận)"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Thời gian hành động (Thời gian chờ của tính năng Hỗ trợ tiếp cận)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Thời gian thực hiện hành động"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Chọn thời lượng hiển thị thông báo yêu cầu bạn thực hiện hành động nhưng chỉ hiển thị tạm thời.\n\nKhông phải tất cả ứng dụng đều hỗ trợ tùy chọn cài đặt này."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Thời gian chờ cho chạm và giữ"</string>
@@ -3382,12 +3381,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Hiển thị trong ngăn kéo xuống, thanh trạng thái và trên màn hình khóa"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Nhấp nháy đèn"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Màn hình khóa"</string>
-    <!-- no translation found for lockscreen_bypass_title (3077831331856929085) -->
-    <skip />
-    <!-- no translation found for lockscreen_bypass_summary (2767475923650816867) -->
-    <skip />
-    <!-- no translation found for keywords_lockscreen_bypass (250300001805572693) -->
-    <skip />
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Bỏ qua màn hình khóa"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Sau khi mở khóa bằng khuôn mặt, chuyển thẳng tới màn hình dùng gần đây nhất"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Khóa màn hình, Màn hình khóa, Bỏ qua"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Khi hồ sơ công việc bị khóa"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Thông báo trên màn hình khóa"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Hiển thị thông báo cảnh báo và im lặng"</string>
@@ -4198,13 +4194,16 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Tự chụp ảnh mình nhanh hơn"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Di chuyển trên hệ thống"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Di chuyển bằng 2 nút"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Để chuyển đổi giữa các ứng dụng, hãy vuốt lên trên nút Màn hình chính. Vuốt lên lại để xem tất cả ứng dụng. Thao tác này có hiệu lực trên mọi màn hình. Nút Tổng quan ở dưới cùng bên phải của màn hình sẽ không còn nữa."</string>
+    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
+    <skip />
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Thử nút Màn hình chính mới"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Bật cử chỉ mới để chuyển đổi giữa các ứng dụng"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Di chuyển bằng cử chỉ"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Để chuyển đến Màn hình chính, hãy vuốt lên từ cuối màn hình. Để Quay lại, hãy vuốt từ cạnh trái hoặc cạnh phải của màn hình. Để chuyển đổi ứng dụng, hãy bắt đầu vuốt lên từ cuối màn hình và giữ trước khi thả tay ra."</string>
+    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
+    <skip />
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Di chuyển bằng 3 nút"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Chế độ di chuyển cũ trên Android. Trong chế độ này, bạn có thể chuyển đến Màn hình chính, chuyển đổi ứng dụng và Quay lại thông qua các nút."</string>
+    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="5825645072714635357">"di chuyển trên hệ thống, di chuyển bằng 2 nút, di chuyển bằng 3 nút, di chuyển bằng cử chỉ"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Chưa hỗ trợ trong ứng dụng mặc định trên màn hình chính <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Chuyển ứng dụng mặc định trên màn hình chính"</string>
@@ -4368,8 +4367,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Tính năng này đã bị tắt vì sẽ khiến điện thoại chạy chậm"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Thực thi số đo GNSS đầy đủ"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Theo dõi tất cả chòm sao và tần suất GNSS mà không có chu kỳ làm việc"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Cho phép các lượt bắt đầu hoạt động trong nền"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Cho phép tất cả các lượt bắt đầu hoạt động trong nền"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Luôn hiển thị hộp thoại sự cố"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Hiển thị hộp thoại mỗi khi ứng dụng gặp sự cố"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Chọn ứng dụng hỗ trợ ANGLE"</string>
@@ -4496,16 +4493,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Không hoạt động/SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Đang hoạt động/SIM đã tải xuống"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Không hoạt động/SIM đã tải xuống"</string>
-    <!-- no translation found for mobile_network_sim_name (6026120971523242277) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_label (281403463781467324) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_color_label (3662112943353180621) -->
-    <skip />
-    <!-- no translation found for mobile_network_sim_name_rename (3082357234342116252) -->
-    <skip />
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"Tên và màu SIM"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Tên"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Màu (do các ứng dụng tương thích dùng)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"Lưu"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Dùng SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Tắt"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Để tắt SIM này, hãy tháo thẻ SIM"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"Nhấn để kích hoạt <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Bạn muốn chuyển sang <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Chỉ một SIM đã tải xuống có thể hoạt động mỗi lần.\n\nKhi chuyển sang <xliff:g id="CARRIER1">%1$s</xliff:g>, dịch vụ <xliff:g id="CARRIER2">%2$s</xliff:g> của bạn sẽ không bị hủy."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Chuyển sang <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4619,4 +4614,7 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Không thể gửi tin nhắn MMS"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Nhấn để cho phép nhắn tin MMS qua <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> khi dữ liệu di động đang tắt"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Tin nhắn MMS"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Vấn đề với việc kết hợp SIM"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Việc sử dụng <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> có thể làm giới hạn chức năng. Nhấn để tìm hiểu thêm."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Kết hợp SIM"</string>
 </resources>
