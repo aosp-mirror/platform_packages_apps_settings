@@ -218,7 +218,8 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
                 protected boolean isPageSearchEnabled(Context context) {
                     final int[] availableColorModes = context.getResources().getIntArray(
                             com.android.internal.R.array.config_availableColorModes);
-                    return availableColorModes != null && availableColorModes.length > 0;
+                    return availableColorModes != null && availableColorModes.length > 0
+                            && !ColorDisplayManager.areAccessibilityTransformsEnabled(context);
                 }
             };
 }
