@@ -16,7 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.display.AdaptiveSleepPreferenceController.PREF_NAME;
 import static com.android.settings.display.AdaptiveSleepPreferenceController.isControllerAvailable;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_ADAPTIVE_SLEEP_URI;
@@ -80,7 +80,8 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
             final IconCompat icon = IconCompat.createWithResource(mContext,
                     R.drawable.ic_settings_adaptive_sleep);
             final CharSequence title = mContext.getText(R.string.adaptive_sleep_title);
-            final CharSequence subtitle = mContext.getText(R.string.adaptive_sleep_description);
+            final CharSequence subtitle = mContext.getText(
+                    R.string.adaptive_sleep_contextual_slice_summary);
 
             final SliceAction pAction = SliceAction.createDeeplink(getPrimaryAction(),
                     icon,
@@ -89,6 +90,7 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
             final ListBuilder listBuilder = new ListBuilder(mContext,
                     CONTEXTUAL_ADAPTIVE_SLEEP_URI,
                     ListBuilder.INFINITY)
+                    .setAccentColor(COLOR_NOT_TINTED)
                     .addRow(new ListBuilder.RowBuilder()
                             .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                             .setTitle(title)
@@ -149,6 +151,6 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
      */
     @VisibleForTesting
     boolean isSettingsAvailable() {
-        return isControllerAvailable(mContext) == AVAILABLE;
+        return isControllerAvailable(mContext) == AVAILABLE_UNSEARCHABLE;
     }
 }

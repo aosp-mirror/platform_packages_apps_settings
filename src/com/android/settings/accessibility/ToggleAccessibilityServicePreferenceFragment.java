@@ -16,14 +16,18 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,6 +54,7 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     private static final int DIALOG_ID_ENABLE_WARNING = 1;
     private static final int DIALOG_ID_DISABLE_WARNING = 2;
+    private static final int DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL = 3;
 
     public static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION = 1;
 
@@ -57,7 +62,7 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     private final SettingsContentObserver mSettingsContentObserver =
             new SettingsContentObserver(new Handler()) {
-            @Override
+                @Override
                 public void onChange(boolean selfChange, Uri uri) {
                     updateSwitchBarToggleSwitch();
                 }
@@ -144,6 +149,16 @@ public class ToggleAccessibilityServicePreferenceFragment
                         .createDisableDialog(getActivity(), info, this);
                 break;
             }
+            case DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL: {
+                if (isGestureNavigateEnabled()) {
+                    mDialog = AccessibilityGestureNavigationTutorial
+                            .showGestureNavigationTutorialDialog(getActivity());
+                } else {
+                    mDialog = AccessibilityGestureNavigationTutorial
+                            .showAccessibilityButtonTutorialDialog(getActivity());
+                }
+                break;
+            }
             default: {
                 throw new IllegalArgumentException();
             }
@@ -197,30 +212,52 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.permission_enable_allow_button:
-                if (isFullDiskEncrypted()) {
-                    String title = createConfirmCredentialReasonMessage();
-                    Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
-                    startActivityForResult(intent,
-                            ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
-                } else {
-                    handleConfirmServiceEnabled(true);
-                }
-                break;
-            case R.id.permission_enable_deny_button:
-                handleConfirmServiceEnabled(false);
-                break;
-            case R.id.permission_disable_stop_button:
-                handleConfirmServiceEnabled(false);
-                break;
-            case R.id.permission_disable_cancel_button:
+        if (view.getId() == R.id.permission_enable_allow_button) {
+            if (isFullDiskEncrypted()) {
+                String title = createConfirmCredentialReasonMessage();
+                Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
+                startActivityForResult(intent,
+                        ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
+            } else {
                 handleConfirmServiceEnabled(true);
-                break;
-            default:
-                throw new IllegalArgumentException();
+                if (isServiceSupportAccessibilityButton()) {
+                    showDialog(DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL);
+                }
+            }
+        } else if (view.getId() == R.id.permission_enable_deny_button) {
+            handleConfirmServiceEnabled(false);
+        } else if (view.getId() == R.id.permission_disable_stop_button) {
+            handleConfirmServiceEnabled(false);
+        } else if (view.getId() == R.id.permission_disable_cancel_button) {
+            handleConfirmServiceEnabled(true);
+        } else {
+            throw new IllegalArgumentException();
         }
         mDialog.dismiss();
+    }
+
+    private boolean isGestureNavigateEnabled() {
+        return getContext().getResources().getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode)
+                == NAV_BAR_MODE_GESTURAL;
+    }
+
+    private boolean isServiceSupportAccessibilityButton() {
+        final AccessibilityManager ams = (AccessibilityManager) getContext().getSystemService(
+                Context.ACCESSIBILITY_SERVICE);
+        final List<AccessibilityServiceInfo> services = ams.getInstalledAccessibilityServiceList();
+
+        for (AccessibilityServiceInfo info : services) {
+            if ((info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0) {
+                ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
+                if (serviceInfo != null && TextUtils.equals(serviceInfo.name,
+                        getAccessibilityServiceInfo().getResolveInfo().serviceInfo.name)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     private void handleConfirmServiceEnabled(boolean confirmed) {
@@ -234,11 +271,13 @@ public class ToggleAccessibilityServicePreferenceFragment
         switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING: {
                 resId = R.string.enable_service_pattern_reason;
-            } break;
+            }
+            break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX: {
                 resId = R.string.enable_service_pin_reason;
-            } break;
+            }
+            break;
         }
         return getString(resId, getAccessibilityServiceInfo().getResolveInfo()
                 .loadLabel(getPackageManager()));
@@ -248,7 +287,7 @@ public class ToggleAccessibilityServicePreferenceFragment
     protected void onInstallSwitchBarToggleSwitch() {
         super.onInstallSwitchBarToggleSwitch();
         mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
-                @Override
+            @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
                 if (checked) {
                     mSwitchBar.setCheckedInternal(false);

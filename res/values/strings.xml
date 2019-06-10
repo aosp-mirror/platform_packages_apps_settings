@@ -2829,14 +2829,15 @@
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
     <string name="adaptive_sleep_title">Screen attention</string>
     <!-- Setting option summary when adaptive sleep is on [CHAR LIMIT=NONE] -->
-    <string name="adaptive_sleep_summary_on">On / Screen won’t turn off if you’re looking at it</string>
+    <string name="adaptive_sleep_summary_on">On / Screen won\u2019t turn off if you\u2019re looking at it</string>
     <!-- Setting option summary when adaptive sleep is off [CHAR LIMIT=NONE] -->
     <string name="adaptive_sleep_summary_off">Off</string>
     <!-- Description about the feature adaptive sleep [CHAR LIMIT=NONE]-->
-    <string name="adaptive_sleep_description">Keep screen on when viewing it</string>
+    <string name="adaptive_sleep_description">Prevents your screen from turning off if you\u2019re looking at it</string>
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_privacy">Screen attention uses the front camera to see if someone is looking at the screen. It works on device, and images are never stored or sent to Google.</string>
-
+    <!-- Description about the contextual adaptive sleep card [CHAR LIMIT=NONE]-->
+    <string name="adaptive_sleep_contextual_slice_summary">Keep screen on when viewing it</string>
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="night_display_title">Night Light</string>
@@ -10206,7 +10207,7 @@
     <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_title">2-button navigation</string>
     <!-- Summary text for swipe up to switch apps  [CHAR LIMIT=250] -->
-    <string name="swipe_up_to_switch_apps_summary">To switch apps, swipe up on the Home button. Swipe up again to see all apps. Works from any screen. You’ll no longer have an Overview button on the bottom right of your screen.</string>
+    <string name="swipe_up_to_switch_apps_summary">To switch apps, swipe up on the Home button. To see all apps, swipe up again. To go back, tap the back button.</string>
     <!-- Title for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_suggestion_title">Try the new Home button</string>
     <!-- Summary for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
@@ -10215,12 +10216,12 @@
     <!-- Title text for edge to edge navigation [CHAR LIMIT=60] -->
     <string name="edge_to_edge_navigation_title">Gesture navigation</string>
     <!-- Summary text for edge to edge navigation [CHAR LIMIT=NONE] -->
-    <string name="edge_to_edge_navigation_summary">To go Home, swipe up from the bottom of the screen. To go Back, swipe from either the left or right edge of the screen. To switch apps, start swiping up from the bottom of the screen and hold before releasing.</string>
+    <string name="edge_to_edge_navigation_summary">To go Home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge.</string>
 
     <!-- Title text for 3-button navigation [CHAR LIMIT=60] -->
     <string name="legacy_navigation_title">3-button navigation</string>
     <!-- Summary text for 3-button navigation  [CHAR LIMIT=NONE] -->
-    <string name="legacy_navigation_summary">Classic Android navigation mode where going Home, switching apps, and going Back are accessible via buttons.</string>
+    <string name="legacy_navigation_summary">Go back, Home, and switch apps with buttons at the bottom of your screen.</string>
 
     <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation</string>
@@ -10990,6 +10991,20 @@
     <!-- Label for the off position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_off">Off</string>
+    <!-- Text shown in an information footer on the SIM details page for a physical SIM notifying
+         the user that the way to disable this SIM is to physically remove it. This is in contrast
+         to eSIM's, which can disabled using an on/off toggle switch. [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_disable_sim_explanation">
+        To disable this SIM, remove the SIM card
+    </string>
+
+    <!--Summary used when a physical SIM is disabled, indicating that tapping on the preference will
+        enable the SIM. This may be used as the summary of the 'Mobile network' item on the
+        Network & internet page (if there are no other SIMs), or on the mobile network list page.
+        [CHAR LIMIT=50] -->
+    <string name="mobile_network_tap_to_activate">
+        Tap to activate <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>
+    </string>
 
     <!-- Title for a confirmation dialog when the user is enabling an eSIM subscription and there
          is already another active eSIM subscription which will need to be disabled if they proceed.
