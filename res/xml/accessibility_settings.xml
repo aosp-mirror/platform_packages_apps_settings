@@ -97,7 +97,8 @@
         <SwitchPreference
                 android:key="toggle_lock_screen_rotation_preference"
                 android:title="@string/accelerometer_title"
-                android:persistent="false"/>
+                android:persistent="false"
+                settings:controller="com.android.settings.accessibility.LockScreenRotationPreferenceController"/>
 
         <ListPreference
                 android:key="select_long_press_timeout_preference"

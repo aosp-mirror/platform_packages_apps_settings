@@ -55,8 +55,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.content.PackageMonitor;
-import com.android.internal.view.RotationPolicy;
-import com.android.internal.view.RotationPolicy.RotationPolicyListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -212,13 +210,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private final SettingsContentObserver mSettingsContentObserver;
 
-    private final RotationPolicyListener mRotationPolicyListener = new RotationPolicyListener() {
-        @Override
-        public void onChange() {
-            updateLockScreenRotationCheckbox();
-        }
-    };
-
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
     private final Map<Preference, PreferenceCategory> mServicePreferenceToPreferenceCategoryMap =
@@ -248,6 +239,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mDarkUIModePreference;
     private DarkUIPreferenceController mDarkUIPreferenceController;
     private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
+
+    private LockScreenRotationPreferenceController mLockScreenRotationPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -318,20 +311,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
         mSettingsContentObserver.register(getContentResolver());
-        if (RotationPolicy.isRotationSupported(getActivity())) {
-            RotationPolicy.registerRotationPolicyListener(getActivity(),
-                    mRotationPolicyListener);
-        }
     }
 
     @Override
     public void onPause() {
         mSettingsPackageMonitor.unregister();
         mSettingsContentObserver.unregister(getContentResolver());
-        if (RotationPolicy.isRotationSupported(getActivity())) {
-            RotationPolicy.unregisterRotationPolicyListener(getActivity(),
-                    mRotationPolicyListener);
-        }
         super.onPause();
     }
 
@@ -358,9 +343,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             return true;
         } else if (mTogglePowerButtonEndsCallPreference == preference) {
             handleTogglePowerButtonEndsCallPreferenceClick();
-            return true;
-        } else if (mToggleLockScreenRotationPreference == preference) {
-            handleLockScreenRotationPreferenceClick();
             return true;
         } else if (mToggleLargePointerIconPreference == preference) {
             handleToggleLargePointerIconPreferenceClick();
@@ -415,11 +397,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                         : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
     }
 
-    private void handleLockScreenRotationPreferenceClick() {
-        RotationPolicy.setRotationLockForAccessibility(getActivity(),
-                !mToggleLockScreenRotationPreference.isChecked());
-    }
-
     private void handleToggleLargePointerIconPreferenceClick() {
         Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON,
@@ -465,12 +442,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
 
         // Lock screen rotation.
-        mToggleLockScreenRotationPreference =
-                (SwitchPreference) findPreference(TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE);
-        if (!RotationPolicy.isRotationSupported(getActivity())) {
-            mCategoryToPrefCategoryMap.get(CATEGORY_INTERACTION_CONTROL)
-                    .removePreference(mToggleLockScreenRotationPreference);
-        }
+        mToggleLockScreenRotationPreference = findPreference(
+                TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE);
+        mLockScreenRotationPreferenceController = new LockScreenRotationPreferenceController(
+                getContext(), TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE);
+        mLockScreenRotationPreferenceController.displayPreference(getPreferenceScreen());
 
         // Large pointer icon.
         mToggleLargePointerIconPreference =
@@ -765,7 +741,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
 
         // Auto-rotate screen
-        updateLockScreenRotationCheckbox();
+        mLockScreenRotationPreferenceController.updateState(mToggleLockScreenRotationPreference);
 
         // Large pointer icon.
         mToggleLargePointerIconPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
@@ -938,14 +914,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             } else {
                 return context.getString(R.string.switch_off_text);
             }
-        }
-    }
-
-    private void updateLockScreenRotationCheckbox() {
-        Context context = getActivity();
-        if (context != null) {
-            mToggleLockScreenRotationPreference.setChecked(
-                    !RotationPolicy.isRotationLocked(context));
         }
     }
 
