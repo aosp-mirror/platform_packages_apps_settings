@@ -16,16 +16,21 @@
 
 package com.android.settings.display;
 
+import static com.android.settings.display.AdaptiveSleepPreferenceController.hasSufficientPermission;
 import static com.android.settings.homepage.contextualcards.slices.ContextualAdaptiveSleepSlice.PREF;
 import static com.android.settings.homepage.contextualcards.slices.ContextualAdaptiveSleepSlice.PREF_KEY_INTERACTED;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.util.Log;
 
+import androidx.preference.Preference;
+
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -39,21 +44,43 @@ import java.util.List;
 public class AdaptiveSleepSettings extends DashboardFragment {
 
     private static final String TAG = "AdaptiveSleepSettings";
+    private Context mContext;
+    private String mPackageName;
+    private PackageManager mPackageManager;
+
+    @VisibleForTesting
+    Preference mPermissionRequiredPreference;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         final FooterPreference footerPreference =
                 mFooterPreferenceMixin.createFooterPreference();
-        final Context context = getContext();
+        mContext = getContext();
+        mPermissionRequiredPreference = createPermissionMissionPreference();
 
         footerPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
         footerPreference.setTitle(R.string.adaptive_sleep_privacy);
 
-        context.getSharedPreferences(PREF, Context.MODE_PRIVATE)
+        getPreferenceScreen().addPreference(mPermissionRequiredPreference);
+        mPermissionRequiredPreference.setVisible(false);
+        mPackageManager = mContext.getPackageManager();
+        mPackageName = mPackageManager.getAttentionServicePackageName();
+        mContext.getSharedPreferences(PREF, Context.MODE_PRIVATE)
                 .edit()
                 .putBoolean(PREF_KEY_INTERACTED, true)
                 .apply();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!hasSufficientPermission(mPackageManager)) {
+            mPermissionRequiredPreference.setVisible(true);
+        }
+        else {
+            mPermissionRequiredPreference.setVisible(false);
+        }
     }
 
     @Override
@@ -86,4 +113,29 @@ public class AdaptiveSleepSettings extends DashboardFragment {
                     return Arrays.asList(sir);
                 }
             };
+
+    private Preference createPermissionMissionPreference() {
+        Preference preference = new Preference(mContext, null);
+        preference.setIcon(R.drawable.ic_info_outline_24);
+        // Makes sure it's above the toggle.
+        preference.setOrder(1);
+        preference.setPersistent(true);
+        preference.setTitle(R.string.adaptive_sleep_title_no_permission);
+        preference.setSummary(R.string.adaptive_sleep_summary_no_permission);
+        preference.setOnPreferenceClickListener(p -> {
+            final Intent intent = new Intent(
+                    android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(Uri.parse("package:" + mPackageName));
+            mContext.startActivity(intent);
+            return true;
+        });
+        return preference;
+    }
+
+    @VisibleForTesting
+    void setupForTesting(PackageManager packageManager, Context context) {
+        mContext = context;
+        mPackageManager = packageManager;
+        mPermissionRequiredPreference = createPermissionMissionPreference();
+    }
 }
