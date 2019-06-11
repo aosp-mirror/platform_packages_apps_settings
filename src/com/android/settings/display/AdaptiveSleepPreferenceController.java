@@ -29,7 +29,7 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
     private static final String SYSTEM_KEY = ADAPTIVE_SLEEP;
     private static final int DEFAULT_VALUE = 0;
 
-    final boolean hasSufficientPermissions;
+    private final boolean hasSufficientPermissions;
 
     public AdaptiveSleepPreferenceController(Context context, String key) {
         super(context, key);
@@ -71,7 +71,7 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
                 : UNSUPPORTED_ON_DEVICE;
     }
 
-    private static boolean hasSufficientPermission(PackageManager packageManager) {
+    static boolean hasSufficientPermission(PackageManager packageManager) {
         final String attentionPackage = packageManager.getAttentionServicePackageName();
         return attentionPackage != null && packageManager.checkPermission(
                 Manifest.permission.CAMERA, attentionPackage) == PackageManager.PERMISSION_GRANTED;
