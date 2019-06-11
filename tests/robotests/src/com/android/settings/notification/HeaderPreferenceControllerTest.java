@@ -21,7 +21,6 @@ import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -35,8 +34,8 @@ import android.os.UserManager;
 import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceFragmentCompat;
 
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
@@ -70,7 +69,7 @@ public class HeaderPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
-        PreferenceFragmentCompat fragment = mock(PreferenceFragmentCompat.class);
+        DashboardFragment fragment = mock(DashboardFragment.class);
         when(fragment.getContext()).thenReturn(mContext);
         FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getApplicationContext()).thenReturn(mContext);
