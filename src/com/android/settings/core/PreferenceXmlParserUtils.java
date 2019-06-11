@@ -83,7 +83,6 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PREF_TITLE = 1 << 4;
         int FLAG_NEED_PREF_SUMMARY = 1 << 5;
         int FLAG_NEED_PREF_ICON = 1 << 6;
-        int FLAG_NEED_PLATFORM_SLICE_FLAG = 1 << 7;
         int FLAG_NEED_KEYWORDS = 1 << 8;
         int FLAG_NEED_SEARCHABLE = 1 << 9;
         int FLAG_NEED_PREF_APPEND = 1 << 10;
@@ -96,7 +95,6 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_TITLE = "title";
     public static final String METADATA_SUMMARY = "summary";
     public static final String METADATA_ICON = "icon";
-    public static final String METADATA_PLATFORM_SLICE_FLAG = "platform_slice";
     public static final String METADATA_KEYWORDS = "keywords";
     public static final String METADATA_SEARCHABLE = "searchable";
     public static final String METADATA_APPEND = "staticPreferenceLocation";
@@ -231,10 +229,6 @@ public class PreferenceXmlParserUtils {
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_ICON)) {
                 preferenceMetadata.putInt(METADATA_ICON, getIcon(preferenceAttributes));
             }
-            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG)) {
-                preferenceMetadata.putBoolean(METADATA_PLATFORM_SLICE_FLAG,
-                        getPlatformSlice(preferenceAttributes));
-            }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_KEYWORDS)) {
                 preferenceMetadata.putString(METADATA_KEYWORDS, getKeywords(preferenceAttributes));
             }
@@ -316,10 +310,6 @@ public class PreferenceXmlParserUtils {
 
     private static int getIcon(TypedArray styledAttributes) {
         return styledAttributes.getResourceId(com.android.internal.R.styleable.Icon_icon, 0);
-    }
-
-    private static boolean getPlatformSlice(TypedArray styledAttributes) {
-        return styledAttributes.getBoolean(R.styleable.Preference_platform_slice, false /* def */);
     }
 
     private static boolean isSearchable(TypedArray styledAttributes) {

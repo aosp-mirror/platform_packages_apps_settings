@@ -18,7 +18,6 @@ package com.android.settings.slices;
 
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
-import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
@@ -158,8 +157,7 @@ public class SliceBuilderUtils {
         final Intent intent = new Intent(action)
                 .setData(data.getUri())
                 .setClass(context, SliceBroadcastReceiver.class)
-                .putExtra(EXTRA_SLICE_KEY, data.getKey())
-                .putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
+                .putExtra(EXTRA_SLICE_KEY, data.getKey());
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }
