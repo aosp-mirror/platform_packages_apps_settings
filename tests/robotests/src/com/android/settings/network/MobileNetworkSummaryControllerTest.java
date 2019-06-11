@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.atLeastOnce;
@@ -64,6 +65,8 @@ public class MobileNetworkSummaryControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
+    private SubscriptionManager mSubscriptionManager;
+    @Mock
     private EuiccManager mEuiccManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -79,9 +82,11 @@ public class MobileNetworkSummaryControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(Robolectric.setupActivity(Activity.class));
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mTelephonyManager.getNetworkCountryIso()).thenReturn("");
+        when(mSubscriptionManager.isActiveSubscriptionId(anyInt())).thenReturn(true);
         when(mEuiccManager.isEnabled()).thenReturn(true);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.EUICC_PROVISIONED, 1);
 
@@ -157,6 +162,24 @@ public class MobileNetworkSummaryControllerTest {
                 MobileNetworkActivity.class.getName());
         assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(sub1.getSubscriptionId());
+    }
+
+    @Test
+    public void getSummary_oneInactivePSim_correctSummaryAndClickHandler() {
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        when(sub1.getSubscriptionId()).thenReturn(1);
+        when(sub1.getDisplayName()).thenReturn("sub1");
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        when(mSubscriptionManager.isActiveSubscriptionId(eq(1))).thenReturn(false);
+
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+
+        assertThat(mController.getSummary()).isEqualTo("Tap to activate sub1");
+
+        assertThat(mPreference.getFragment()).isNull();
+        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
+        verify(mSubscriptionManager).setSubscriptionEnabled(eq(sub1.getSubscriptionId()), eq(true));
     }
 
     @Test

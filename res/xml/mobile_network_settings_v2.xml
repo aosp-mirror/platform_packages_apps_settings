@@ -203,4 +203,14 @@
         android:title="@string/mobile_network_erase_sim"
         settings:controller="com.android.settings.network.telephony.DeleteSimProfilePreferenceController" />
 
+    <PreferenceCategory
+        android:key="footer_container"
+        android:title="@string/summary_placeholder"
+        android:layout="@layout/preference_category_no_label"
+        settings:controller="com.android.settings.network.telephony.DisableSimFooterPreferenceController">
+        <com.android.settingslib.widget.FooterPreference
+            android:key="disable_sim_explanation"
+            android:title="@string/mobile_network_disable_sim_explanation" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
