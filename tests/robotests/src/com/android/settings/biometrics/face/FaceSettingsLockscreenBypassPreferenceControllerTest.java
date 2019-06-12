@@ -51,7 +51,7 @@ public class FaceSettingsLockscreenBypassPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
 
-        mController = new FaceSettingsLockscreenBypassPreferenceController(mContext, "TestKey");
+        mController = new FaceSettingsLockscreenBypassPreferenceController(mContext);
         ReflectionHelpers.setField(mController, "mFaceManager", mFaceManager);
     }
 

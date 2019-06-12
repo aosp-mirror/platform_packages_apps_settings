@@ -21,13 +21,21 @@ import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.provider.Settings;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.core.TogglePreferenceController;
+import androidx.preference.Preference;
 
-public class FaceSettingsLockscreenBypassPreferenceController extends TogglePreferenceController {
+import com.android.internal.annotations.VisibleForTesting;
+
+public class FaceSettingsLockscreenBypassPreferenceController
+        extends FaceSettingsPreferenceController {
+
+    static final String KEY = "security_lockscreen_bypass";
 
     @VisibleForTesting
     protected FaceManager mFaceManager;
+
+    public FaceSettingsLockscreenBypassPreferenceController(Context context) {
+        this(context, KEY);
+    }
 
     public FaceSettingsLockscreenBypassPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -49,6 +57,20 @@ public class FaceSettingsLockscreenBypassPreferenceController extends TogglePref
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD, isChecked ? 1 : 0);
         return true;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!FaceSettings.isAvailable(mContext)) {
+            preference.setEnabled(false);
+        } else if (adminDisabled()) {
+            preference.setEnabled(false);
+        } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override
