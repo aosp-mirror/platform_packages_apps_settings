@@ -142,6 +142,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
             use(DisabledSubscriptionController.class).init(getLifecycle(), mSubId);
             use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
                     REQUEST_CODE_DELETE_SUBSCRIPTION);
+            use(DisableSimFooterPreferenceController.class).init(mSubId);
         }
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
