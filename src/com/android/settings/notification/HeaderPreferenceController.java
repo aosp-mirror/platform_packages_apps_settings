@@ -25,13 +25,14 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
@@ -39,11 +40,11 @@ import com.android.settingslib.widget.LayoutPreference;
 public class HeaderPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver {
 
-    private final PreferenceFragmentCompat mFragment;
+    private final DashboardFragment mFragment;
     private EntityHeaderController mHeaderController;
     private boolean mStarted = false;
 
-    public HeaderPreferenceController(Context context, PreferenceFragmentCompat fragment) {
+    public HeaderPreferenceController(Context context, DashboardFragment fragment) {
         super(context, null);
         mFragment = fragment;
     }
@@ -83,16 +84,10 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                     .setButtonActions(EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
                             EntityHeaderController.ActionType.ACTION_NONE)
                     .setHasAppInfoLink(true)
+                    .setRecyclerView(mFragment.getListView(), mFragment.getSettingsLifecycle())
                     .done(activity, mContext);
             pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
         }
-    }
-
-    CharSequence getLabel() {
-        return (mChannel != null && !isDefaultChannel()) ? mChannel.getName()
-                : mChannelGroup != null
-                        ? mChannelGroup.getName()
-                        : mAppRow.label;
     }
 
     @Override
@@ -123,5 +118,13 @@ public class HeaderPreferenceController extends NotificationPreferenceController
         if (mHeaderController != null) {
             mHeaderController.styleActionBar(mFragment.getActivity());
         }
+    }
+
+    @VisibleForTesting
+    CharSequence getLabel() {
+        return (mChannel != null && !isDefaultChannel()) ? mChannel.getName()
+                : mChannelGroup != null
+                        ? mChannelGroup.getName()
+                        : mAppRow.label;
     }
 }
