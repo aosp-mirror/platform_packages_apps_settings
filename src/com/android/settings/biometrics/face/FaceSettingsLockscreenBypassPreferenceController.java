@@ -11,25 +11,33 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License
  */
 
-package com.android.settings.security;
+package com.android.settings.biometrics.face;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.provider.Settings;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.core.TogglePreferenceController;
+import androidx.preference.Preference;
 
-public class LockscreenBypassPreferenceController extends TogglePreferenceController {
+import com.android.internal.annotations.VisibleForTesting;
+
+public class FaceSettingsLockscreenBypassPreferenceController
+        extends FaceSettingsPreferenceController {
+
+    static final String KEY = "security_lockscreen_bypass";
 
     @VisibleForTesting
     protected FaceManager mFaceManager;
 
-    public LockscreenBypassPreferenceController(Context context, String preferenceKey) {
+    public FaceSettingsLockscreenBypassPreferenceController(Context context) {
+        this(context, KEY);
+    }
+
+    public FaceSettingsLockscreenBypassPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
             mFaceManager = context.getSystemService(FaceManager.class);
@@ -49,6 +57,20 @@ public class LockscreenBypassPreferenceController extends TogglePreferenceContro
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD, isChecked ? 1 : 0);
         return true;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!FaceSettings.isAvailable(mContext)) {
+            preference.setEnabled(false);
+        } else if (adminDisabled()) {
+            preference.setEnabled(false);
+        } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override
