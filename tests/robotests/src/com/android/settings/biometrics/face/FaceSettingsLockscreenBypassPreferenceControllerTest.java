@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings.security;
+package com.android.settings.biometrics.face;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -36,14 +36,14 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-public class LockscreenBypassPreferenceControllerTest {
+public class FaceSettingsLockscreenBypassPreferenceControllerTest {
 
     @Mock
     private FaceManager mFaceManager;
     private SwitchPreference mPreference;
 
     private Context mContext;
-    private LockscreenBypassPreferenceController mController;
+    private FaceSettingsLockscreenBypassPreferenceController mController;
 
     @Before
     public void setUp() {
@@ -51,7 +51,7 @@ public class LockscreenBypassPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
 
-        mController = new LockscreenBypassPreferenceController(mContext, "TestKey");
+        mController = new FaceSettingsLockscreenBypassPreferenceController(mContext);
         ReflectionHelpers.setField(mController, "mFaceManager", mFaceManager);
     }
 
