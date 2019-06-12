@@ -118,14 +118,19 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                 if (mSubscriptionManager.isActiveSubscriptionId(subId)) {
                     pref.setSummary(R.string.mobile_network_active_sim);
                 } else {
-                    pref.setSummary(R.string.mobile_network_inactive_sim);
+                    pref.setSummary(mContext.getString(R.string.mobile_network_tap_to_activate,
+                            SubscriptionUtil.getDisplayName(info)));
                 }
             }
 
             pref.setOnPreferenceClickListener(clickedPref -> {
-                final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
-                intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
-                mContext.startActivity(intent);
+                if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)) {
+                    mSubscriptionManager.setSubscriptionEnabled(subId, true);
+                } else {
+                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+                    intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
+                    mContext.startActivity(intent);
+                }
                 return true;
             });
             mPreferences.put(subId, pref);
