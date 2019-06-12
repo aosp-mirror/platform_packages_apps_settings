@@ -19,7 +19,6 @@ package com.android.settings.slices;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ICON;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
-import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_PLATFORM_SLICE_FLAG;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SUMMARY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAILABLE_SLICE_SUBTITLE;
@@ -190,7 +189,6 @@ class SliceDataConverter {
                             | MetadataFlag.FLAG_NEED_PREF_TITLE
                             | MetadataFlag.FLAG_NEED_PREF_ICON
                             | MetadataFlag.FLAG_NEED_PREF_SUMMARY
-                            | MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG
                             | MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE);
 
             for (Bundle bundle : metadata) {
@@ -213,7 +211,6 @@ class SliceDataConverter {
                 final int iconResId = bundle.getInt(METADATA_ICON);
 
                 final int sliceType = controller.getSliceType();
-                final boolean isPlatformSlice = bundle.getBoolean(METADATA_PLATFORM_SLICE_FLAG);
                 final String unavailableSliceSubtitle = bundle.getString(
                         METADATA_UNAVAILABLE_SLICE_SUBTITLE);
 
@@ -227,7 +224,6 @@ class SliceDataConverter {
                         .setPreferenceControllerClassName(controllerClassName)
                         .setFragmentName(fragmentName)
                         .setSliceType(sliceType)
-                        .setPlatformDefined(isPlatformSlice)
                         .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                         .build();
 

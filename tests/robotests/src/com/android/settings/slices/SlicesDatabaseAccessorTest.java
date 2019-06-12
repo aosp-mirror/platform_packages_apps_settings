@@ -28,6 +28,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.provider.SettingsSlicesContract;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.settings.search.SearchFeatureProvider;
@@ -62,16 +63,8 @@ import java.util.Locale;
         ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class})
 public class SlicesDatabaseAccessorTest {
 
-    private final String FAKE_TITLE = "title";
-    private final String FAKE_SUMMARY = "summary";
-    private final String FAKE_SCREEN_TITLE = "screen_title";
-    private final String FAKE_KEYWORDS = "a, b, c";
-    private final int FAKE_ICON = 1234;
-    private final String FAKE_FRAGMENT_NAME = FakeIndexProvider.class.getName();
-    private final String FAKE_CONTROLLER_NAME = FakePreferenceController.class.getName();
 
     private Context mContext;
-    private SQLiteDatabase mDb;
     private SlicesDatabaseAccessor mAccessor;
 
     @Before
@@ -79,7 +72,6 @@ public class SlicesDatabaseAccessorTest {
         mContext = RuntimeEnvironment.application;
         ShadowUserManager.getShadow().setIsAdminUser(true);
         mAccessor = spy(new SlicesDatabaseAccessor(mContext));
-        mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
 
         // Register the fake a11y Service
@@ -96,39 +88,39 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void testGetSliceDataFromKey_validKey_validSliceReturned() {
         String key = "key";
-        insertSpecialCase(key);
+        SliceTestUtils.insertSliceToDb(mContext, key);
 
         SliceData data = mAccessor.getSliceDataFromKey(key);
 
         assertThat(data.getKey()).isEqualTo(key);
-        assertThat(data.getTitle()).isEqualTo(FAKE_TITLE);
-        assertThat(data.getSummary()).isEqualTo(FAKE_SUMMARY);
-        assertThat(data.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
-        assertThat(data.getKeywords()).isEqualTo(FAKE_KEYWORDS);
-        assertThat(data.getIconResource()).isEqualTo(FAKE_ICON);
-        assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
+        assertThat(data.getTitle()).isEqualTo(SliceTestUtils.FAKE_TITLE);
+        assertThat(data.getSummary()).isEqualTo(SliceTestUtils.FAKE_SUMMARY);
+        assertThat(data.getScreenTitle()).isEqualTo(SliceTestUtils.FAKE_SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(SliceTestUtils.FAKE_KEYWORDS);
+        assertThat(data.getIconResource()).isEqualTo(SliceTestUtils.FAKE_ICON);
+        assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
-        assertThat(data.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
+        assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
         assertThat(data.getUnavailableSliceSubtitle()).isNull();
     }
 
     @Test
     public void testGetSliceDataFromKey_allowDynamicSummary_validSliceReturned() {
         String key = "key";
-        insertSpecialCase(key, true /* isPlatformSlice */,
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
                 null /* customizedUnavailableSliceSubtitle */);
 
         SliceData data = mAccessor.getSliceDataFromKey(key);
 
         assertThat(data.getKey()).isEqualTo(key);
-        assertThat(data.getTitle()).isEqualTo(FAKE_TITLE);
-        assertThat(data.getSummary()).isEqualTo(FAKE_SUMMARY);
-        assertThat(data.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
-        assertThat(data.getKeywords()).isEqualTo(FAKE_KEYWORDS);
-        assertThat(data.getIconResource()).isEqualTo(FAKE_ICON);
-        assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
+        assertThat(data.getTitle()).isEqualTo(SliceTestUtils.FAKE_TITLE);
+        assertThat(data.getSummary()).isEqualTo(SliceTestUtils.FAKE_SUMMARY);
+        assertThat(data.getScreenTitle()).isEqualTo(SliceTestUtils.FAKE_SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(SliceTestUtils.FAKE_KEYWORDS);
+        assertThat(data.getIconResource()).isEqualTo(SliceTestUtils.FAKE_ICON);
+        assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
-        assertThat(data.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
+        assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -141,7 +133,7 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void testGetSliceFromUri_validUri_validSliceReturned() {
         final String key = "key";
-        insertSpecialCase(key);
+        SliceTestUtils.insertSliceToDb(mContext, key);
 
         final Uri uri = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
@@ -153,14 +145,14 @@ public class SlicesDatabaseAccessorTest {
         SliceData data = mAccessor.getSliceDataFromUri(uri);
 
         assertThat(data.getKey()).isEqualTo(key);
-        assertThat(data.getTitle()).isEqualTo(FAKE_TITLE);
-        assertThat(data.getSummary()).isEqualTo(FAKE_SUMMARY);
-        assertThat(data.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
-        assertThat(data.getKeywords()).isEqualTo(FAKE_KEYWORDS);
-        assertThat(data.getIconResource()).isEqualTo(FAKE_ICON);
-        assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
+        assertThat(data.getTitle()).isEqualTo(SliceTestUtils.FAKE_TITLE);
+        assertThat(data.getSummary()).isEqualTo(SliceTestUtils.FAKE_SUMMARY);
+        assertThat(data.getScreenTitle()).isEqualTo(SliceTestUtils.FAKE_SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(SliceTestUtils.FAKE_KEYWORDS);
+        assertThat(data.getIconResource()).isEqualTo(SliceTestUtils.FAKE_ICON);
+        assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isEqualTo(uri);
-        assertThat(data.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
+        assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -177,9 +169,8 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void getDescendantUris_platformSlice_doesNotReturnOEMSlice() {
         final String key = "oem_key";
-        final boolean isPlatformSlice = false;
-        insertSpecialCase(key, isPlatformSlice);
-        final List<String> keys = mAccessor.getSliceKeys(!isPlatformSlice);
+        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */);
+        final List<Uri> keys = mAccessor.getSliceUris(SettingsSlicesContract.AUTHORITY);
 
         assertThat(keys).isEmpty();
     }
@@ -187,9 +178,8 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void getDescendantUris_oemSlice_doesNotReturnPlatformSlice() {
         final String key = "platform_key";
-        final boolean isPlatformSlice = true;
-        insertSpecialCase(key, isPlatformSlice);
-        final List<String> keys = mAccessor.getSliceKeys(!isPlatformSlice);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
+        final List<Uri> keys = mAccessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY);
 
         assertThat(keys).isEmpty();
     }
@@ -197,21 +187,21 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void getDescendantUris_oemSlice_returnsOEMUriDescendant() {
         final String key = "oem_key";
-        final boolean isPlatformSlice = false;
-        insertSpecialCase(key, isPlatformSlice);
-        final List<String> keys = mAccessor.getSliceKeys(isPlatformSlice);
+        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */);
+        final List<Uri> keys = mAccessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY);
 
-        assertThat(keys).containsExactly(key);
+        assertThat(keys).containsExactly(
+                Uri.parse("content://com.android.settings.slices/action/oem_key"));
     }
 
     @Test
     public void getDescendantUris_platformSlice_returnsPlatformUriDescendant() {
         final String key = "platform_key";
-        final boolean isPlatformSlice = true;
-        insertSpecialCase(key, isPlatformSlice);
-        final List<String> keys = mAccessor.getSliceKeys(isPlatformSlice);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
+        final List<Uri> keys = mAccessor.getSliceUris(SettingsSlicesContract.AUTHORITY);
 
-        assertThat(keys).containsExactly(key);
+        assertThat(keys).containsExactly(
+                Uri.parse("content://android.settings.slices/action/platform_key"));
     }
 
     @Test
@@ -220,7 +210,7 @@ public class SlicesDatabaseAccessorTest {
         // Force new indexing
         Locale.setDefault(new Locale("ca"));
         final SearchFeatureProvider provider = new SearchFeatureProviderImpl();
-        final SlicesFeatureProvider sliceProvider = spy(new SlicesFeatureProviderImpl());
+        final SlicesFeatureProvider sliceProvider = new SlicesFeatureProviderImpl();
         final FakeFeatureFactory factory = FakeFeatureFactory.setupForTest();
         factory.searchFeatureProvider = provider;
         factory.slicesFeatureProvider = sliceProvider;
@@ -230,7 +220,7 @@ public class SlicesDatabaseAccessorTest {
                 FakeIndexProvider.class);
 
         final SlicesDatabaseAccessor accessor = new SlicesDatabaseAccessor(mContext);
-        final List<String> keys = accessor.getSliceKeys(true);
+        final List<Uri> keys = accessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY);
 
         assertThat(keys).isNotEmpty();
     }
@@ -238,20 +228,20 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void testGetSliceDataFromKey_defaultUnavailableSlice_validSliceReturned() {
         String key = "key";
-        insertSpecialCase(key, true /* isPlatformSlice */,
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
                 null /* customizedUnavailableSliceSubtitle */);
 
         SliceData data = mAccessor.getSliceDataFromKey(key);
 
         assertThat(data.getKey()).isEqualTo(key);
-        assertThat(data.getTitle()).isEqualTo(FAKE_TITLE);
-        assertThat(data.getSummary()).isEqualTo(FAKE_SUMMARY);
-        assertThat(data.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
-        assertThat(data.getKeywords()).isEqualTo(FAKE_KEYWORDS);
-        assertThat(data.getIconResource()).isEqualTo(FAKE_ICON);
-        assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
+        assertThat(data.getTitle()).isEqualTo(SliceTestUtils.FAKE_TITLE);
+        assertThat(data.getSummary()).isEqualTo(SliceTestUtils.FAKE_SUMMARY);
+        assertThat(data.getScreenTitle()).isEqualTo(SliceTestUtils.FAKE_SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(SliceTestUtils.FAKE_KEYWORDS);
+        assertThat(data.getIconResource()).isEqualTo(SliceTestUtils.FAKE_ICON);
+        assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
-        assertThat(data.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
+        assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
         assertThat(data.getUnavailableSliceSubtitle()).isNull();
     }
 
@@ -259,47 +249,20 @@ public class SlicesDatabaseAccessorTest {
     public void testGetSliceDataFromKey_customizeSubtitleOfUnavailableSlice_validSliceReturned() {
         String key = "key";
         String subtitle = "subtitle";
-        insertSpecialCase(key, true /* isPlatformSlice */, subtitle);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */, subtitle);
 
         SliceData data = mAccessor.getSliceDataFromKey(key);
 
         assertThat(data.getKey()).isEqualTo(key);
-        assertThat(data.getTitle()).isEqualTo(FAKE_TITLE);
-        assertThat(data.getSummary()).isEqualTo(FAKE_SUMMARY);
-        assertThat(data.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
-        assertThat(data.getKeywords()).isEqualTo(FAKE_KEYWORDS);
-        assertThat(data.getIconResource()).isEqualTo(FAKE_ICON);
-        assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
+        assertThat(data.getTitle()).isEqualTo(SliceTestUtils.FAKE_TITLE);
+        assertThat(data.getSummary()).isEqualTo(SliceTestUtils.FAKE_SUMMARY);
+        assertThat(data.getScreenTitle()).isEqualTo(SliceTestUtils.FAKE_SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(SliceTestUtils.FAKE_KEYWORDS);
+        assertThat(data.getIconResource()).isEqualTo(SliceTestUtils.FAKE_ICON);
+        assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
-        assertThat(data.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
+        assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
         assertThat(data.getUnavailableSliceSubtitle()).isEqualTo(subtitle);
-    }
-
-    private void insertSpecialCase(String key) {
-        insertSpecialCase(key, true);
-    }
-
-    private void insertSpecialCase(String key, boolean isPlatformSlice) {
-        insertSpecialCase(key, isPlatformSlice, null /*customizedUnavailableSliceSubtitle*/);
-    }
-
-    private void insertSpecialCase(String key, boolean isPlatformSlice,
-            String customizedUnavailableSliceSubtitle) {
-        ContentValues values = new ContentValues();
-        values.put(SlicesDatabaseHelper.IndexColumns.KEY, key);
-        values.put(SlicesDatabaseHelper.IndexColumns.TITLE, FAKE_TITLE);
-        values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, FAKE_SUMMARY);
-        values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, FAKE_SCREEN_TITLE);
-        values.put(SlicesDatabaseHelper.IndexColumns.KEYWORDS, FAKE_KEYWORDS);
-        values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, FAKE_ICON);
-        values.put(SlicesDatabaseHelper.IndexColumns.FRAGMENT, FAKE_FRAGMENT_NAME);
-        values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, FAKE_CONTROLLER_NAME);
-        values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);
-        values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
-        values.put(SlicesDatabaseHelper.IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
-                customizedUnavailableSliceSubtitle);
-
-        mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
     }
 
     @Implements(ApplicationPackageManager.class)

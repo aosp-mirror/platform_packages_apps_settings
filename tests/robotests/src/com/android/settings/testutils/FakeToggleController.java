@@ -49,7 +49,7 @@ public class FakeToggleController extends TogglePreferenceController {
     @Override
     public boolean isChecked() {
         return Settings.System.getInt(mContext.getContentResolver(),
-            SETTING_KEY, OFF) == ON;
+                SETTING_KEY, OFF) == ON;
     }
 
     @Override
@@ -103,7 +103,7 @@ public class FakeToggleController extends TogglePreferenceController {
         }
 
         @Override
-        public void close() throws IOException {
+        public void close() {
         }
     }
 }
