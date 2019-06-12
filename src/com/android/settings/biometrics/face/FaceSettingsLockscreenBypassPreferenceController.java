@@ -11,10 +11,10 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License
  */
 
-package com.android.settings.security;
+package com.android.settings.biometrics.face;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -24,12 +24,12 @@ import android.provider.Settings;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.TogglePreferenceController;
 
-public class LockscreenBypassPreferenceController extends TogglePreferenceController {
+public class FaceSettingsLockscreenBypassPreferenceController extends TogglePreferenceController {
 
     @VisibleForTesting
     protected FaceManager mFaceManager;
 
-    public LockscreenBypassPreferenceController(Context context, String preferenceKey) {
+    public FaceSettingsLockscreenBypassPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
             mFaceManager = context.getSystemService(FaceManager.class);
