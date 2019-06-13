@@ -56,7 +56,8 @@ public class GameDriverAppPreferenceControllerTest {
 
     private static final int DEFAULT = 0;
     private static final int GAME_DRIVER = 1;
-    private static final int SYSTEM = 2;
+    private static final int PRERELEASE_DRIVER = 2;
+    private static final int SYSTEM = 3;
     private static final String TEST_APP_NAME = "testApp";
     private static final String TEST_PKG_NAME = "testPkg";
 
@@ -181,7 +182,7 @@ public class GameDriverAppPreferenceControllerTest {
 
     @Test
     public void createPreference_configGAME_DRIVER_shouldSetGameDriverAttributes() {
-        loadConfig(TEST_PKG_NAME, "");
+        loadConfig(TEST_PKG_NAME, "", "");
         final ListPreference preference =
                 mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
@@ -196,8 +197,24 @@ public class GameDriverAppPreferenceControllerTest {
     }
 
     @Test
+    public void createPreference_configPRERELEASE_DRIVER_shouldSetPrereleaseDriverAttributes() {
+        loadConfig("", TEST_PKG_NAME, "");
+        final ListPreference preference =
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
+
+        assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
+        assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
+        assertThat(preference.getDialogTitle()).isEqualTo(mDialogTitle);
+        assertThat(preference.getEntries()).isEqualTo(mValueList);
+        assertThat(preference.getEntryValues()).isEqualTo(mValueList);
+        assertThat(preference.getEntry()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+        assertThat(preference.getSummary()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+    }
+
+    @Test
     public void createPreference_configSystem_shouldSetSystemAttributes() {
-        loadConfig("", TEST_PKG_NAME);
+        loadConfig("", "", TEST_PKG_NAME);
         final ListPreference preference =
                 mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
@@ -274,10 +291,12 @@ public class GameDriverAppPreferenceControllerTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
     }
 
-    private void loadDefaultConfig() { loadConfig("", ""); }
+    private void loadDefaultConfig() { loadConfig("", "", ""); }
 
-    private void loadConfig(String optIn, String optOut) {
+    private void loadConfig(String optIn, String prereleaseOptIn, String optOut) {
         Settings.Global.putString(mResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS, optIn);
+        Settings.Global.putString(
+                mResolver, Settings.Global.GAME_DRIVER_PRERELEASE_OPT_IN_APPS, prereleaseOptIn);
         Settings.Global.putString(mResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS, optOut);
 
         mController = new GameDriverAppPreferenceController(mContext, "testKey");
