@@ -50,6 +50,7 @@ import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 
@@ -247,7 +248,7 @@ public class WifiSettingsTest {
     }
 
     @Test
-    @Config(shadows = {ShadowDataUsageUtils.class})
+    @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceInvisibleIfWifiNotSupported() {
         setUpForOnCreate();
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = false;
@@ -258,7 +259,7 @@ public class WifiSettingsTest {
     }
 
     @Test
-    @Config(shadows = {ShadowDataUsageUtils.class})
+    @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceVisibleIfWifiSupported() {
         setUpForOnCreate();
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;

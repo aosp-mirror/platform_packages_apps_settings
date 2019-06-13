@@ -41,6 +41,7 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowDisclaimerItemFactory;
+import com.android.settings.testutils.shadow.ShadowFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowDisclaimerItemFactory.class)
+@Config(shadows = {ShadowDisclaimerItemFactory.class, ShadowFragment.class})
 public class WifiCallingDisclaimerFragmentTest {
 
     @Mock

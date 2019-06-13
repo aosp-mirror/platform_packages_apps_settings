@@ -54,6 +54,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -169,7 +170,8 @@ public class RemoveAccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
+            ShadowFragment.class})
     public void confirmRemove_shouldRemoveAccount()
             throws AuthenticatorException, OperationCanceledException, IOException {
         when(mFragment.isAdded()).thenReturn(true);
@@ -201,7 +203,8 @@ public class RemoveAccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
+            ShadowFragment.class})
     public void confirmRemove_activityGone_shouldSilentlyRemoveAccount()
             throws AuthenticatorException, OperationCanceledException, IOException {
         final Account account = new Account("Account11", "com.acct1");

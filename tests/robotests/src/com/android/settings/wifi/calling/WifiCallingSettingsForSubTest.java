@@ -55,6 +55,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 
@@ -67,7 +68,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.annotation.Config;
 
+@Config(shadows = ShadowFragment.class)
 @RunWith(RobolectricTestRunner.class)
 public class WifiCallingSettingsForSubTest {
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";

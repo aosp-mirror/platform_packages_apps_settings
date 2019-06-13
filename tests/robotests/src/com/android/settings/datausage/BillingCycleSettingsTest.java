@@ -45,6 +45,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
@@ -56,6 +57,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
@@ -142,6 +144,7 @@ public class BillingCycleSettingsTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_emptyArguments_shouldSetDefaultNetworkTemplate() {
         final BillingCycleSettings billingCycleSettings = spy(new BillingCycleSettings());
         when(billingCycleSettings.getContext()).thenReturn(mContext);

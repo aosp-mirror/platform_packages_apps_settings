@@ -37,6 +37,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.WorkOnlyCategory;
 
 import org.junit.Before;
@@ -46,6 +47,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
@@ -147,6 +149,7 @@ public class SettingsPreferenceFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_hasExtraFragmentKey_shouldExpandPreferences() {
         doReturn(mContext.getTheme()).when(mActivity).getTheme();
         doReturn(mContext.getResources()).when(mFragment).getResources();
@@ -161,6 +164,7 @@ public class SettingsPreferenceFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_noPreferenceScreen_shouldNotCrash() {
         doReturn(mContext.getTheme()).when(mActivity).getTheme();
         doReturn(mContext.getResources()).when(mFragment).getResources();

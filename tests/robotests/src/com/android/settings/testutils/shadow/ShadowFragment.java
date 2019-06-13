@@ -16,6 +16,8 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 
 import org.robolectric.annotation.Implementation;
@@ -25,6 +27,11 @@ import org.robolectric.annotation.Implements;
 public class ShadowFragment {
 
     private Fragment mTargetFragment;
+
+    @Implementation
+    public void onCreate(Bundle icicle) {
+        // do nothing
+    }
 
     @Implementation
     protected void setTargetFragment(Fragment fragment, int requestCode) {
