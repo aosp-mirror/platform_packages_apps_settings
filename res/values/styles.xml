@@ -651,4 +651,10 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="Widget.PopupWindow.Settings"
+           parent="@android:style/Widget.DeviceDefault.PopupWindow">
+        <item name="android:clipToPadding">true</item>
+        <item name="android:clipChildren">true</item>
+    </style>
+
 </resources>
