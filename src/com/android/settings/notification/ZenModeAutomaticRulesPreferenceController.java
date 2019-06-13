@@ -69,7 +69,7 @@ public class ZenModeAutomaticRulesPreferenceController extends
             for (int i = 0; i < sortedRules.length; i++) {
                 ZenRulePreference pref = (ZenRulePreference) mPreferenceCategory.getPreference(i);
                 // we are either:
-                // 1. updating the enabled state or name of the rule
+                // 1. updating everything about the rule
                 // 2. rule was added or deleted, so reload the entire list
                 if (Objects.equals(pref.mId, sortedRules[i].getKey())) {
                     AutomaticZenRule rule = sortedRules[i].getValue();
