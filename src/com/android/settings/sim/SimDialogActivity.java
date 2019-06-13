@@ -22,6 +22,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.content.Intent;
 import android.os.Bundle;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -50,11 +51,15 @@ public class SimDialogActivity extends Activity {
 
     public static String PREFERRED_SIM = "preferred_sim";
     public static String DIALOG_TYPE_KEY = "dialog_type";
+    // sub ID returned from startActivityForResult
+    public static String RESULT_SUB_ID = "result_sub_id";
     public static final int INVALID_PICK = -1;
     public static final int DATA_PICK = 0;
     public static final int CALLS_PICK = 1;
     public static final int SMS_PICK = 2;
     public static final int PREFERRED_PICK = 3;
+    // Show the "select SMS subscription" dialog, but don't save as default, just return a result
+    public static final int SMS_PICK_FOR_MESSAGE = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,7 @@ public class SimDialogActivity extends Activity {
             case DATA_PICK:
             case CALLS_PICK:
             case SMS_PICK:
+            case SMS_PICK_FOR_MESSAGE:
                 createDialog(this, dialogType).show();
                 break;
             case PREFERRED_PICK:
@@ -179,6 +185,14 @@ public class SimDialogActivity extends Activity {
                                 sir = subInfoList.get(value);
                                 setDefaultSmsSubId(context, sir.getSubscriptionId());
                                 break;
+                            case SMS_PICK_FOR_MESSAGE:
+                                sir = subInfoList.get(value);
+                                // Don't set a default here.
+                                // The caller has created this dialog waiting for a result.
+                                Intent intent = new Intent();
+                                intent.putExtra(RESULT_SUB_ID, sir.getSubscriptionId());
+                                setResult(Activity.RESULT_OK, intent);
+                                break;
                             default:
                                 throw new IllegalArgumentException("Invalid dialog type "
                                         + id + " in SIM dialog.");
@@ -250,8 +264,11 @@ public class SimDialogActivity extends Activity {
                 builder.setTitle(R.string.select_sim_for_calls);
                 break;
             case SMS_PICK:
+                // intentional fallthrough
+            case SMS_PICK_FOR_MESSAGE:
                 builder.setTitle(R.string.sim_card_select_title);
                 break;
+
             default:
                 throw new IllegalArgumentException("Invalid dialog type "
                         + id + " in SIM dialog.");
