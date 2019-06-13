@@ -113,7 +113,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                 }
             };
 
-    private ViewGroup mPinnedHeaderFrameLayout;
+    @VisibleForTesting
+    ViewGroup mPinnedHeaderFrameLayout;
     private ViewGroup mButtonBar;
 
     private LayoutPreference mHeader;
@@ -184,6 +185,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     public void setPinnedHeaderView(View pinnedHeader) {
         mPinnedHeaderFrameLayout.addView(pinnedHeader);
         mPinnedHeaderFrameLayout.setVisibility(View.VISIBLE);
+    }
+
+    public void showPinnedHeader(boolean show) {
+        mPinnedHeaderFrameLayout.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
