@@ -49,7 +49,7 @@ public class ZenRulePreference extends TwoTargetPreference {
     final ZenServiceListing mServiceListing;
     final PackageManager mPm;
     final MetricsFeatureProvider mMetricsFeatureProvider;
-    final AutomaticZenRule mRule;
+    AutomaticZenRule mRule;
     CharSequence mName;
 
     private Intent mIntent;
@@ -122,14 +122,14 @@ public class ZenRulePreference extends TwoTargetPreference {
         if (!mRule.getName().equals(rule.getName())) {
             mName = rule.getName();
             setTitle(mName);
-            mRule.setName(mName.toString());
         }
 
         if (mRule.isEnabled() != rule.isEnabled()) {
-            mRule.setEnabled(rule.isEnabled());
             setChecked(mRule.isEnabled());
             setSummary(computeRuleSummary(mRule));
         }
+
+        mRule = rule;
     }
 
     @Override
