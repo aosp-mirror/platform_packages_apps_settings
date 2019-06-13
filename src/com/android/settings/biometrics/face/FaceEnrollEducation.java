@@ -61,6 +61,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private Handler mHandler;
     private Intent mResultIntent;
     private TextView mDescriptionText;
+    private boolean mNextClicked;
 
     private CompoundButton.OnCheckedChangeListener mSwitchDiversityListener =
             new CompoundButton.OnCheckedChangeListener() {
@@ -161,6 +162,10 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
         if (accessibilityEnabled) {
             accessibilityButton.callOnClick();
+            mSwitchDiversity.setClickable(true);
+            mSwitchDiversity.setOnClickListener(v -> {
+                mSwitchDiversity.getSwitch().toggle();
+            });
         }
     }
 
@@ -181,6 +186,17 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (!isChangingConfigurations() && !WizardManagerHelper.isAnySetupWizard(getIntent())
+                && !mNextClicked) {
+            setResult(RESULT_SKIP);
+            finish();
+        }
+    }
+
+    @Override
     protected void onNextButtonClick(View view) {
         final Intent intent = new Intent();
         if (mToken != null) {
@@ -189,6 +205,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
+        intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         final String flattenedString = getString(R.string.config_face_enroll);
         if (!TextUtils.isEmpty(flattenedString)) {
             ComponentName componentName = ComponentName.unflattenFromString(flattenedString);
@@ -200,6 +217,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         if (mResultIntent != null) {
             intent.putExtras(mResultIntent);
         }
+        mNextClicked = true;
         WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
     }
