@@ -16,7 +16,9 @@
 
 package com.android.settings.biometrics.face;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.os.UserHandle;
 
 import com.android.settings.core.TogglePreferenceController;
 
@@ -37,5 +39,14 @@ public abstract class FaceSettingsPreferenceController extends TogglePreferenceC
 
     protected int getUserId() {
         return mUserId;
+    }
+
+    protected boolean adminDisabled() {
+        DevicePolicyManager dpm =
+                (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        return dpm != null &&
+                (dpm.getKeyguardDisabledFeatures(null, UserHandle.myUserId())
+                        & DevicePolicyManager.KEYGUARD_DISABLE_FACE)
+                        != 0;
     }
 }
