@@ -131,7 +131,6 @@ public class WifiConfigController implements TextWatcher,
     int mAccessPointSecurity;
     private TextView mPasswordView;
     private ImageButton mSsidScanButton;
-    private ImageButton mPasswordScanButton;
 
     private String mUnspecifiedCertString;
     private String mMultipleCertSetString;
@@ -243,7 +242,6 @@ public class WifiConfigController implements TextWatcher,
             mContext.getString(R.string.wifi_do_not_validate_eap_server);
 
         mSsidScanButton = (ImageButton) mView.findViewById(R.id.ssid_scanner_button);
-        mPasswordScanButton = (ImageButton) mView.findViewById(R.id.password_scanner_button);
         mDialogContainer = mView.findViewById(R.id.dialog_scrollview);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
@@ -269,7 +267,6 @@ public class WifiConfigController implements TextWatcher,
         if (mAccessPoint == null) { // new network
             configureSecuritySpinner();
             mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
-            mPasswordScanButton.setVisibility(View.GONE);
         } else {
             mConfigUi.setTitle(mAccessPoint.getTitle());
 
@@ -415,9 +412,6 @@ public class WifiConfigController implements TextWatcher,
                 }
             }
 
-            if (!WifiDppUtils.isSupportEnrolleeQrCodeScanner(mContext, mAccessPointSecurity)) {
-                mPasswordScanButton.setVisibility(View.GONE);
-            }
             mSsidScanButton.setVisibility(View.GONE);
         }
 

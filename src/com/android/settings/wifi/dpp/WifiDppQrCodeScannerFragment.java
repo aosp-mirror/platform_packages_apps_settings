@@ -437,18 +437,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             return false;
         }
 
-        final String scheme = mWifiQrCode.getScheme();
-
-        // When SSID is specified for enrollee, avoid to connect to the Wi-Fi of different SSID
-        if (!mIsConfiguratorMode && WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG.equals(scheme)) {
-            final String ssidQrCode = mWifiQrCode.getWifiNetworkConfig().getSsid();
-            if (!TextUtils.isEmpty(mSsid) && !mSsid.equals(ssidQrCode)) {
-                showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
-                return false;
-            }
-        }
-
         // It's impossible to provision other device with ZXing Wi-Fi Network config format
+        final String scheme = mWifiQrCode.getScheme();
         if (mIsConfiguratorMode && WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG.equals(scheme)) {
             showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
             return false;

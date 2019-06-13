@@ -288,30 +288,12 @@
                         style="@style/wifi_item_label"
                         android:text="@string/wifi_password" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText android:id="@+id/password"
-                              android:layout_width="0dp"
-                              android:layout_height="wrap_content"
-                              app:layout_constraintStart_toStartOf="parent"
-                              app:layout_constraintEnd_toStartOf="@+id/password_scanner_button"
-                              style="@style/wifi_item_edit_content"
-                              android:singleLine="true"
-                              android:password="true"/>
-
-                    <ImageButton
-                        android:id="@+id/password_scanner_button"
-                        android:layout_width="wrap_content"
+                <EditText android:id="@+id/password"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minWidth="@dimen/min_tap_target_size"
-                        android:minHeight="@dimen/min_tap_target_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:src="@drawable/ic_scan_24dp"
-                        android:contentDescription="@string/wifi_dpp_scan_qr_code"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        style="@style/wifi_item_edit_content"
+                        android:singleLine="true"
+                        android:password="true"/>
             </LinearLayout>
 
             <LinearLayout android:id="@+id/show_password_layout"
