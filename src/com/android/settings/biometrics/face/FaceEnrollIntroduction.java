@@ -78,6 +78,16 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (!isChangingConfigurations() && !mConfirmingCredentials && !mNextClicked
+                && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            finish();
+        }
+    }
+
+    @Override
     protected boolean isDisabledByAdmin() {
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                 this, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
