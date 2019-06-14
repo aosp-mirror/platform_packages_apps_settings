@@ -21,11 +21,9 @@ import android.content.Context;
 import androidx.preference.Preference;
 
 public class AdaptiveSleepDetailPreferenceController extends AdaptiveSleepPreferenceController {
-    private final Context mContext;
 
     public AdaptiveSleepDetailPreferenceController(Context context, String key) {
         super(context, key);
-        mContext = context;
     }
 
     @Override
@@ -45,7 +43,6 @@ public class AdaptiveSleepDetailPreferenceController extends AdaptiveSleepPrefer
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(AdaptiveSleepPreferenceController.hasSufficientPermission(
-                mContext.getPackageManager()));
+        preference.setEnabled(hasSufficientPermission(mContext.getPackageManager()));
     }
 }
