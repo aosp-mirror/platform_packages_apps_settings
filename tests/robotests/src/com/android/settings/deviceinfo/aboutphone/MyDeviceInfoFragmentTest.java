@@ -38,6 +38,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -90,6 +91,7 @@ public class MyDeviceInfoFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_fromSearch_shouldNotOverrideInitialExpandedCount() {
         final Bundle args = new Bundle();
         args.putString(EXTRA_FRAGMENT_ARG_KEY, "search_key");

@@ -46,6 +46,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.network.ApnEditor.ApnData;
+import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +59,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class ApnEditorTest {
@@ -455,6 +457,7 @@ public class ApnEditorTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_noAction_shouldFinishAndNoCrash() {
         doNothing().when(mApnEditorUT).addPreferencesFromResource(anyInt());
 
