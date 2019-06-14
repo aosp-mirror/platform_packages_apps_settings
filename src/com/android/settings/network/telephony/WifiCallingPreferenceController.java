@@ -114,6 +114,10 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
         if (mSimCallManager != null) {
             Intent intent = MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
                     mSimCallManager);
+            if (intent == null) {
+                // Do nothing in this case since preference is invisible
+                return;
+            }
             final PackageManager pm = mContext.getPackageManager();
             List<ResolveInfo> resolutions = pm.queryIntentActivities(intent, 0);
             preference.setTitle(resolutions.get(0).loadLabel(pm));
