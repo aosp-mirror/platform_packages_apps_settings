@@ -16,8 +16,6 @@
 
 package com.android.settings.privacy;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,7 +25,6 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.permission.PermissionControllerManager;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
@@ -57,8 +54,6 @@ public class PrivacyDashboardFragmentTest {
 
     @Mock
     private LockPatternUtils mLockPatternUtils;
-    @Mock
-    private PermissionControllerManager mPCM;
 
     private Context mContext;
     private PrivacyDashboardFragment mFragment;
@@ -80,32 +75,9 @@ public class PrivacyDashboardFragmentTest {
     }
 
     @Test
-    public void onViewCreated_shouldSetActionBarShadowAnimation() {
-        mFragment.onViewCreated(new View(mContext), new Bundle());
-
-        assertThat(mFragment.getActivity().getActionBar().getElevation()).isEqualTo(0.f);
-    }
-
-    @Test
     public void onViewCreated_shouldInitLinearProgressBar() {
         mFragment.onViewCreated(new View(mContext), new Bundle());
 
         verify(mFragment).initLoadingBar();
-    }
-
-    @Test
-    public void updateLinearProgressbar_isVisible_shouldShowProgressBar() {
-        mFragment.setLoadingEnabled(true /* enabled */);
-
-        assertThat(mFragment.mProgressHeader.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(mFragment.mProgressAnimation.getVisibility()).isEqualTo(View.VISIBLE);
-    }
-
-    @Test
-    public void updateLinearProgressbar_isInVisible_shouldHideProgressBar() {
-        mFragment.setLoadingEnabled(false /* enabled */);
-
-        assertThat(mFragment.mProgressHeader.getVisibility()).isEqualTo(View.INVISIBLE);
-        assertThat(mFragment.mProgressAnimation.getVisibility()).isEqualTo(View.INVISIBLE);
     }
 }
