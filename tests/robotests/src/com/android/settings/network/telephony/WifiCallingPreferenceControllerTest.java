@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PersistableBundle;
 import android.provider.Settings;
+import android.telecom.PhoneAccountHandle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -115,6 +116,14 @@ public class WifiCallingPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void updateState_invalidPhoneAccountHandle_shouldNotCrash() {
+        mController.mSimCallManager = new PhoneAccountHandle(null /* invalid */, "");
+
+        //Should not crash
+        mController.updateState(mPreference);
     }
 
     @Test
