@@ -19,6 +19,7 @@ package com.android.settings.development.gamedriver;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_PRERELEASE_ALL_APPS;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -83,7 +84,8 @@ public class GameDriverGlobalSwitchBarController
                 mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
 
         if (isChecked
-                && (gameDriver == GAME_DRIVER_DEFAULT || gameDriver == GAME_DRIVER_ALL_APPS)) {
+                && (gameDriver == GAME_DRIVER_DEFAULT || gameDriver == GAME_DRIVER_ALL_APPS
+                        || gameDriver == GAME_DRIVER_PRERELEASE_ALL_APPS)) {
             return true;
         }
 
