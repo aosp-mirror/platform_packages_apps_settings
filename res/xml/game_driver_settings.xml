@@ -21,11 +21,14 @@
     android:key="game_driver_settings"
     android:title="@string/game_driver_dashboard_title">
 
-    <SwitchPreference
+    <ListPreference
         android:key="game_driver_all_apps_preference"
         android:title="@string/game_driver_all_apps_preference_title"
+        android:dialogTitle="@string/game_driver_all_apps_preference_title"
+        android:entries="@array/game_driver_all_apps_preference_values"
+        android:entryValues="@array/game_driver_all_apps_preference_values"
         settings:controller="com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController">
-    </SwitchPreference>
+    </ListPreference>
 
     <PreferenceCategory
         android:key="game_driver_category"
