@@ -27,6 +27,7 @@ import com.android.settings.R;
 public class RadioButtonPreferenceWithExtraWidget extends RadioButtonPreference {
     public static final int EXTRA_WIDGET_VISIBILITY_GONE = 0;
     public static final int EXTRA_WIDGET_VISIBILITY_INFO = 1;
+    public static final int EXTRA_WIDGET_VISIBILITY_SETTING = 2;
 
     private View mExtraWidgetDivider;
     private ImageView mExtraWidget;
@@ -66,6 +67,15 @@ public class RadioButtonPreferenceWithExtraWidget extends RadioButtonPreference 
             mExtraWidget.setClickable(true);
             mExtraWidget.setVisibility(View.VISIBLE);
             mExtraWidgetDivider.setVisibility(View.VISIBLE);
+            if (mExtraWidgetVisibility == EXTRA_WIDGET_VISIBILITY_INFO) {
+                mExtraWidget.setImageResource(R.drawable.ic_settings_about);
+                mExtraWidget.setContentDescription(
+                        getContext().getResources().getText(R.string.information_label));
+            } else if (mExtraWidgetVisibility == EXTRA_WIDGET_VISIBILITY_SETTING) {
+                mExtraWidget.setImageResource(R.drawable.ic_settings_accent);
+                mExtraWidget.setContentDescription(
+                        getContext().getResources().getText(R.string.settings_label));
+            }
         }
     }
 
