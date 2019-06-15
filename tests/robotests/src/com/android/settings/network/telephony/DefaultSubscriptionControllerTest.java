@@ -204,6 +204,28 @@ public class DefaultSubscriptionControllerTest {
     }
 
     @Test
+    public void onPreferenceChange_prefBecomesAvailable_onPreferenceChangeCallbackNotNull() {
+        final SubscriptionInfo sub1 = createMockSub(111, "sub1");
+        final SubscriptionInfo sub2 = createMockSub(222, "sub2");
+
+        // Start with only one sub active, so the pref is not available
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
+        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+
+        mController.displayPreference(mScreen);
+        assertThat(mController.isAvailable()).isFalse();
+
+        // Now make two subs be active - the pref should become available, and the
+        // onPreferenceChange callback should be properly wired up.
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        mController.onSubscriptionsChanged();
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mListPreference.getOnPreferenceChangeListener()).isEqualTo(mController);
+        mListPreference.callChangeListener("222");
+        verify(mController).setDefaultSubscription(eq(222));
+    }
+
+    @Test
     public void onSubscriptionsChanged_twoSubscriptionsDefaultChanges_selectedEntryGetsUpdated() {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");

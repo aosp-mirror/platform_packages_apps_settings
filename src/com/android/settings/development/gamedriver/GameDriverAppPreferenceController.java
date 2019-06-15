@@ -64,12 +64,14 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
     private final String mPreferenceTitle;
     private final String mPreferenceDefault;
     private final String mPreferenceGameDriver;
+    private final String mPreferencePrereleaseDriver;
     private final String mPreferenceSystem;
     @VisibleForTesting
     GameDriverContentObserver mGameDriverContentObserver;
 
     private final List<AppInfo> mAppInfos;
     private final Set<String> mDevOptInApps;
+    private final Set<String> mDevPrereleaseOptInApps;
     private final Set<String> mDevOptOutApps;
 
     private PreferenceGroup mPreferenceGroup;
@@ -88,6 +90,8 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
         mPreferenceDefault = resources.getString(R.string.game_driver_app_preference_default);
         mPreferenceGameDriver =
                 resources.getString(R.string.game_driver_app_preference_game_driver);
+        mPreferencePrereleaseDriver =
+                resources.getString(R.string.game_driver_app_preference_prerelease_driver);
         mPreferenceSystem = resources.getString(R.string.game_driver_app_preference_system);
 
         // TODO: Move this task to background if there's potential ANR/Jank.
@@ -96,6 +100,8 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
 
         mDevOptInApps =
                 getGlobalSettingsString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS);
+        mDevPrereleaseOptInApps = getGlobalSettingsString(
+                mContentResolver, Settings.Global.GAME_DRIVER_PRERELEASE_OPT_IN_APPS);
         mDevOptOutApps =
                 getGlobalSettingsString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS);
     }
@@ -147,21 +153,31 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
         // opt-in and opt-out apps. Then set the new summary text.
         if (value.equals(mPreferenceSystem)) {
             mDevOptInApps.remove(packageName);
+            mDevPrereleaseOptInApps.remove(packageName);
             mDevOptOutApps.add(packageName);
         } else if (value.equals(mPreferenceGameDriver)) {
             mDevOptInApps.add(packageName);
+            mDevPrereleaseOptInApps.remove(packageName);
+            mDevOptOutApps.remove(packageName);
+        } else if (value.equals(mPreferencePrereleaseDriver)) {
+            mDevOptInApps.remove(packageName);
+            mDevPrereleaseOptInApps.add(packageName);
             mDevOptOutApps.remove(packageName);
         } else {
             mDevOptInApps.remove(packageName);
+            mDevPrereleaseOptInApps.remove(packageName);
             mDevOptOutApps.remove(packageName);
         }
         listPref.setValue(value);
         listPref.setSummary(value);
 
-        // Push the updated Sets for opt-in and opt-out apps to
-        // corresponding Settings.Global.GAME_DRIVER_OPT_(IN|OUT)_APPS
+        // Push the updated Sets for stable/prerelease opt-in and opt-out apps to
+        // corresponding Settings.Global.GAME_DRIVER(_PRERELEASE)?_OPT_(IN|OUT)_APPS
         Settings.Global.putString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS,
                 String.join(",", mDevOptInApps));
+        Settings.Global.putString(mContentResolver,
+                Settings.Global.GAME_DRIVER_PRERELEASE_OPT_IN_APPS,
+                String.join(",", mDevPrereleaseOptInApps));
         Settings.Global.putString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS,
                 String.join(",", mDevOptOutApps));
 
@@ -233,10 +249,13 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
         listPreference.setEntryValues(mEntryList);
 
         // Initialize preference default and summary with the opt in/out choices
-        // from Settings.Global.GAME_DRIVER_OPT_(IN|OUT)_APPS
+        // from Settings.Global.GAME_DRIVER(_PRERELEASE)?_OPT_(IN|OUT)_APPS
         if (mDevOptOutApps.contains(packageName)) {
             listPreference.setValue(mPreferenceSystem);
             listPreference.setSummary(mPreferenceSystem);
+        } else if (mDevPrereleaseOptInApps.contains(packageName)) {
+            listPreference.setValue(mPreferencePrereleaseDriver);
+            listPreference.setSummary(mPreferencePrereleaseDriver);
         } else if (mDevOptInApps.contains(packageName)) {
             listPreference.setValue(mPreferenceGameDriver);
             listPreference.setSummary(mPreferenceGameDriver);
