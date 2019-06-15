@@ -119,6 +119,11 @@ public class FaceSettings extends DashboardFragment {
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
 
+        if (mUserManager.getUserInfo(mUserId).isManagedProfile()) {
+            getActivity().setTitle(getActivity().getResources().getString(
+                    R.string.security_settings_face_profile_preference_title));
+        }
+
         Preference keyguardPref = findPreference(FaceSettingsKeyguardPreferenceController.KEY);
         Preference appPref = findPreference(FaceSettingsAppPreferenceController.KEY);
         Preference attentionPref = findPreference(FaceSettingsAttentionPreferenceController.KEY);
