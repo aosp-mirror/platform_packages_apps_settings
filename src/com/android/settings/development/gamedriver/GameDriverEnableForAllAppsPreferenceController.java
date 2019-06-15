@@ -18,15 +18,17 @@ package com.android.settings.development.gamedriver;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -43,19 +45,30 @@ public class GameDriverEnableForAllAppsPreferenceController extends BasePreferen
 
     public static final int GAME_DRIVER_DEFAULT = 0;
     public static final int GAME_DRIVER_ALL_APPS = 1;
-    public static final int GAME_DRIVER_OFF = 2;
+    public static final int GAME_DRIVER_PRERELEASE_ALL_APPS = 2;
+    public static final int GAME_DRIVER_OFF = 3;
 
     private final Context mContext;
     private final ContentResolver mContentResolver;
+    private final String mPreferenceDefault;
+    private final String mPreferenceGameDriver;
+    private final String mPreferencePrereleaseDriver;
     @VisibleForTesting
     GameDriverContentObserver mGameDriverContentObserver;
 
-    private SwitchPreference mPreference;
+    private ListPreference mPreference;
 
     public GameDriverEnableForAllAppsPreferenceController(Context context, String key) {
         super(context, key);
         mContext = context;
         mContentResolver = context.getContentResolver();
+
+        final Resources resources = context.getResources();
+        mPreferenceDefault = resources.getString(R.string.game_driver_app_preference_default);
+        mPreferenceGameDriver =
+                resources.getString(R.string.game_driver_app_preference_game_driver);
+        mPreferencePrereleaseDriver =
+                resources.getString(R.string.game_driver_app_preference_prerelease_driver);
         mGameDriverContentObserver =
                 new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
     }
@@ -89,30 +102,43 @@ public class GameDriverEnableForAllAppsPreferenceController extends BasePreferen
 
     @Override
     public void updateState(Preference preference) {
-        final SwitchPreference switchPreference = (SwitchPreference) preference;
-        switchPreference.setVisible(isAvailable());
-        switchPreference.setChecked(
-                Settings.Global.getInt(
-                        mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
-                == GAME_DRIVER_ALL_APPS);
+        final ListPreference listPref = (ListPreference) preference;
+        listPref.setVisible(isAvailable());
+        final int currentChoice = Settings.Global.getInt(
+                mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+        if (currentChoice == GAME_DRIVER_ALL_APPS) {
+            listPref.setValue(mPreferenceGameDriver);
+            listPref.setSummary(mPreferenceGameDriver);
+        } else if (currentChoice == GAME_DRIVER_PRERELEASE_ALL_APPS) {
+            listPref.setValue(mPreferencePrereleaseDriver);
+            listPref.setSummary(mPreferencePrereleaseDriver);
+        } else {
+            listPref.setValue(mPreferenceDefault);
+            listPref.setSummary(mPreferenceDefault);
+        }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean isChecked = (boolean) newValue;
-        final int gameDriver = Settings.Global.getInt(
+        final ListPreference listPref = (ListPreference) preference;
+        final String value = newValue.toString();
+        final int currentChoice = Settings.Global.getInt(
                 mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
-
-        if (isChecked && gameDriver == GAME_DRIVER_ALL_APPS) {
-            return true;
+        final int userChoice;
+        if (value.equals(mPreferenceGameDriver)) {
+            userChoice = GAME_DRIVER_ALL_APPS;
+        } else if (value.equals(mPreferencePrereleaseDriver)) {
+            userChoice = GAME_DRIVER_PRERELEASE_ALL_APPS;
+        } else {
+            userChoice = GAME_DRIVER_DEFAULT;
         }
+        listPref.setValue(value);
+        listPref.setSummary(value);
 
-        if (!isChecked && (gameDriver == GAME_DRIVER_DEFAULT || gameDriver == GAME_DRIVER_OFF)) {
-            return true;
+        if (userChoice != currentChoice) {
+            Settings.Global.putInt(
+                    mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, userChoice);
         }
-
-        Settings.Global.putInt(mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS,
-                isChecked ? GAME_DRIVER_ALL_APPS : GAME_DRIVER_DEFAULT);
 
         return true;
     }

@@ -121,6 +121,11 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
         }
         mPreference.setVisible(true);
 
+        // TODO(b/135142209) - for now we need to manually ensure we're registered as a change
+        // listener, because this might not have happened during displayPreference if
+        // getAvailabilityStatus returned CONDITIONALLY_UNAVAILABLE at the time.
+        mPreference.setOnPreferenceChangeListener(this);
+
         final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
 
         // We'll have one entry for each available subscription, plus one for a "ask me every

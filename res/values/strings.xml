@@ -5108,7 +5108,7 @@
     <!-- Title for a warning about security implications of enabling an accessibility
          service. [CHAR LIMIT=NONE] -->
     <string name="enable_service_title">Allow
-         <xliff:g id="service" example="TalkBack">%1$s</xliff:g> to have full contol of your
+         <xliff:g id="service" example="TalkBack">%1$s</xliff:g> to have full control of your
         device?</string>
     <!-- Title for the list of capabilities of an accessibility service. -->
     <string name="capabilities_list_title"><xliff:g id="service" example="TalkBack">%1$s</xliff:g>
@@ -5165,7 +5165,7 @@
     </string>
 
     <!-- Title for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_action_perform_title">View and platform actions</string>
+    <string name="accessibility_service_action_perform_title">View and perform actions</string>
 
     <!-- Description for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_action_perform_description">It can track your interactions
@@ -10225,6 +10225,17 @@
     <!-- Content description for the Information icon [CHAR LIMIT=30] -->
     <string name="information_label">Information</string>
 
+    <!-- Label on the left side of sensitivity adjustment slider [CHAR LIMIT=30] -->
+    <string name="low_label">Low</string>
+    <!-- Label on the right side of sensitivity adjustment slider [CHAR LIMIT=30] -->
+    <string name="high_label">High</string>
+
+    <!-- Message for the dialog that explains how increasing sensitivity can affect gestures along the edges. [CHAR LIMIT=NONE] -->
+    <string name="back_sensitivity_dialog_message">\nHigher sensitivity may conflict with any app gestures along the edges of the screen.</string>
+
+    <!-- Title for the dialog that is shown to adjust the back sensitivity [CHAR LIMIT=60] -->
+    <string name="back_sensitivity_dialog_title">Back Sensitivity</string>
+
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
     <!-- Preference and settings suggestion title text for ambient display double tap (tablet) [CHAR LIMIT=60]-->
@@ -10648,12 +10659,21 @@
     <string name="game_driver_app_preference_default">Default</string>
     <!-- The game driver value for Game Driver app preference [CHAR LIMIT=50] -->
     <string name="game_driver_app_preference_game_driver">Game Driver</string>
+    <!-- The game driver value for Prerelease Game Driver app preference [CHAR LIMIT=50] -->
+    <string name="game_driver_app_preference_prerelease_driver">Prerelease Driver</string>
     <!-- The system value for Game Driver app preference [CHAR LIMIT=50] -->
     <string name="game_driver_app_preference_system">System Graphics Driver</string>
+    <!-- All the values for Game Driver all apps preference [CHAR LIMIT=50] -->
+    <string-array name="game_driver_all_apps_preference_values">
+        <item>@string/game_driver_app_preference_default</item>
+        <item>@string/game_driver_app_preference_game_driver</item>
+        <item>@string/game_driver_app_preference_prerelease_driver</item>
+    </string-array>
     <!-- All the values for Game Driver app preference [CHAR LIMIT=50] -->
     <string-array name="game_driver_app_preference_values">
         <item>@string/game_driver_app_preference_default</item>
         <item>@string/game_driver_app_preference_game_driver</item>
+        <item>@string/game_driver_app_preference_prerelease_driver</item>
         <item>@string/game_driver_app_preference_system</item>
     </string-array>
 
