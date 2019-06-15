@@ -40,6 +40,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.applications.DefaultAppInfo;
 
@@ -133,6 +134,7 @@ public class DefaultAutofillPickerTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void mUserId_shouldDeriveUidFromManagedCaller() {
         setupUserManager();
         setupCaller();
@@ -145,6 +147,7 @@ public class DefaultAutofillPickerTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void mUserId_shouldDeriveUidFromMainCaller() {
         setupUserManager();
         setupCaller();
@@ -157,6 +160,7 @@ public class DefaultAutofillPickerTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void mUserId_shouldDeriveUidFromManagedClick() {
         setupUserManager();
         setupClick(/* forWork= */ true);
@@ -169,6 +173,7 @@ public class DefaultAutofillPickerTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void mUserId_shouldDeriveUidFromMainClick() {
         setupUserManager();
         setupClick(/* forWork= */ false);

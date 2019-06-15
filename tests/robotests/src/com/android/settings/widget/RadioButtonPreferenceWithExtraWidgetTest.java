@@ -18,6 +18,7 @@ package com.android.settings.widget;
 
 import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_GONE;
 import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_INFO;
+import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_SETTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -104,6 +105,18 @@ public class RadioButtonPreferenceWithExtraWidgetTest {
         assertEquals(View.VISIBLE, mExtraWidget.getVisibility());
         assertEquals(View.VISIBLE, mExtraWidgetDivider.getVisibility());
         assertThat(mExtraWidget.isClickable()).isTrue();
+        assertEquals(mContext.getResources().getText(R.string.information_label),
+                mExtraWidget.getContentDescription());
+    }
+
+    @Test
+    public void testSetExtraWidgetVisibility_setting() {
+        mPreference.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
+        assertEquals(View.VISIBLE, mExtraWidget.getVisibility());
+        assertEquals(View.VISIBLE, mExtraWidgetDivider.getVisibility());
+        assertThat(mExtraWidget.isClickable()).isTrue();
+        assertEquals(mContext.getResources().getText(R.string.settings_label),
+                mExtraWidget.getContentDescription());
     }
 
     @Test

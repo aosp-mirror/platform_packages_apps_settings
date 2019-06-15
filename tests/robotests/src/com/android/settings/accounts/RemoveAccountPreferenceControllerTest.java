@@ -54,6 +54,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -64,6 +65,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -113,8 +115,8 @@ public class RemoveAccountPreferenceControllerTest {
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt()))
                 .thenReturn(new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
-        mController = new RemoveAccountPreferenceController(RuntimeEnvironment.application,
-                mFragment);
+        mController = new RemoveAccountPreferenceController(
+                Robolectric.setupActivity(Activity.class), mFragment);
     }
 
     @After
@@ -169,7 +171,8 @@ public class RemoveAccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
+            ShadowFragment.class})
     public void confirmRemove_shouldRemoveAccount()
             throws AuthenticatorException, OperationCanceledException, IOException {
         when(mFragment.isAdded()).thenReturn(true);
@@ -201,7 +204,8 @@ public class RemoveAccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
+            ShadowFragment.class})
     public void confirmRemove_activityGone_shouldSilentlyRemoveAccount()
             throws AuthenticatorException, OperationCanceledException, IOException {
         final Account account = new Account("Account11", "com.acct1");

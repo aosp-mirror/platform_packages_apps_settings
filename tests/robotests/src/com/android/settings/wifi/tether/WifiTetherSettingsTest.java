@@ -39,6 +39,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 
 import org.junit.Before;
@@ -115,6 +116,7 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void startFragment_notAdminUser_shouldRemoveAllPreferences() {
         final WifiTetherSettings settings = spy(new WifiTetherSettings());
         final FragmentActivity activity = mock(FragmentActivity.class);

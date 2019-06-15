@@ -26,7 +26,6 @@ import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
@@ -40,7 +39,7 @@ import com.android.settingslib.widget.FooterPreference;
  */
 public class GameDriverFooterPreferenceController extends BasePreferenceController
         implements GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
-                   OnStart, OnStop {
+        OnStart, OnStop {
 
     private final ContentResolver mContentResolver;
     @VisibleForTesting
@@ -48,8 +47,8 @@ public class GameDriverFooterPreferenceController extends BasePreferenceControll
 
     private FooterPreference mPreference;
 
-    public GameDriverFooterPreferenceController(Context context) {
-        super(context, FooterPreference.KEY_FOOTER);
+    public GameDriverFooterPreferenceController(Context context, String key) {
+        super(context, key);
         mContentResolver = context.getContentResolver();
         mGameDriverContentObserver =
                 new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
@@ -58,8 +57,8 @@ public class GameDriverFooterPreferenceController extends BasePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         return Settings.Global.getInt(
-                       mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
-                        == GAME_DRIVER_OFF
+                mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
+                == GAME_DRIVER_OFF
                 ? AVAILABLE_UNSEARCHABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
@@ -78,11 +77,6 @@ public class GameDriverFooterPreferenceController extends BasePreferenceControll
     @Override
     public void onStop() {
         mGameDriverContentObserver.unregister(mContentResolver);
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        preference.setVisible(isAvailable());
     }
 
     @Override

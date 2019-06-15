@@ -53,6 +53,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
@@ -102,6 +103,7 @@ public class AppDataUsageTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_appUid_shouldGetAppLabelFromAppInfo() throws NameNotFoundException {
         mFragment = spy(new AppDataUsage());
         final FragmentActivity activity = spy(Robolectric.setupActivity(FragmentActivity.class));
@@ -109,17 +111,17 @@ public class AppDataUsageTest {
         doReturn(activity).when(mFragment).getActivity();
         doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
         ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
-            FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
+                FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
         final String packageName = "testPackage";
         final int uid = (Process.FIRST_APPLICATION_UID + Process.LAST_APPLICATION_UID) / 2;
-        doReturn(new String[] {packageName}).when(mPackageManager).getPackagesForUid(uid);
+        doReturn(new String[]{packageName}).when(mPackageManager).getPackagesForUid(uid);
         final String label = "testLabel";
         final AppItem appItem = new AppItem(uid);
         appItem.uids.put(uid, true);
         final ApplicationInfo info = spy(new ApplicationInfo());
         doReturn(label).when(info).loadLabel(mPackageManager);
         when(mPackageManager.getApplicationInfoAsUser(
-            eq(packageName), anyInt() /* flags */, anyInt() /* userId */)).thenReturn(info);
+                eq(packageName), anyInt() /* flags */, anyInt() /* userId */)).thenReturn(info);
         final Bundle args = new Bundle();
         args.putParcelable(AppDataUsage.ARG_APP_ITEM, appItem);
         args.putInt(AppInfoBase.ARG_PACKAGE_UID, uid);
@@ -131,10 +133,11 @@ public class AppDataUsageTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_notAppUid_shouldGetAppLabelFromUidDetailProvider() {
         mFragment = spy(new AppDataUsage());
         ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
-            FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
+                FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
         doReturn(Robolectric.setupActivity(FragmentActivity.class)).when(mFragment).getActivity();
         doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
         final UidDetailProvider uidDetailProvider = mock(UidDetailProvider.class);
@@ -144,7 +147,7 @@ public class AppDataUsageTest {
         final UidDetail uidDetail = new UidDetail();
         uidDetail.label = label;
         when(uidDetailProvider.getUidDetail(eq(uid), anyBoolean() /* blocking */)).
-            thenReturn(uidDetail);
+                thenReturn(uidDetail);
         final AppItem appItem = new AppItem(uid);
         appItem.uids.put(uid, true);
         final Bundle args = new Bundle();
@@ -166,7 +169,7 @@ public class AppDataUsageTest {
         mFragment = spy(new AppDataUsage());
 
         when(mFragment.getPreferenceManager())
-            .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
+                .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
         ReflectionHelpers.setField(mFragment, "mAppItem", mock(AppItem.class));
 
@@ -177,7 +180,7 @@ public class AppDataUsageTest {
 
     @Test
     public void bindAppHeader_workApp_shouldSetWorkAppUid()
-        throws PackageManager.NameNotFoundException {
+            throws PackageManager.NameNotFoundException {
         final int fakeUserId = 100;
 
         mFragment = spy(new AppDataUsage());
@@ -198,7 +201,7 @@ public class AppDataUsageTest {
         when(mHeaderController.setHasAppInfoLink(anyBoolean())).thenReturn(mHeaderController);
 
         when(mFragment.getPreferenceManager())
-            .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
+                .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
 
         mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
@@ -276,7 +279,7 @@ public class AppDataUsageTest {
         final long foregroundBytes = 5678L;
         final List<NetworkCycleDataForUid> appUsage = new ArrayList<>();
         appUsage.add(new NetworkCycleDataForUid.Builder()
-            .setBackgroundUsage(backgroundBytes).setForegroundUsage(foregroundBytes).build());
+                .setBackgroundUsage(backgroundBytes).setForegroundUsage(foregroundBytes).build());
         ReflectionHelpers.setField(mFragment, "mUsageData", appUsage);
         final Preference backgroundPref = mock(Preference.class);
         ReflectionHelpers.setField(mFragment, "mBackgroundUsage", backgroundPref);
@@ -291,7 +294,7 @@ public class AppDataUsageTest {
 
         verify(cycle).setVisible(true);
         verify(totalPref).setSummary(
-            DataUsageUtils.formatDataUsage(context, backgroundBytes + foregroundBytes));
+                DataUsageUtils.formatDataUsage(context, backgroundBytes + foregroundBytes));
         verify(backgroundPref).setSummary(DataUsageUtils.formatDataUsage(context, backgroundBytes));
         verify(foregroundPref).setSummary(DataUsageUtils.formatDataUsage(context, foregroundBytes));
     }
@@ -306,12 +309,12 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mContext", context);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mTemplate",
-            NetworkTemplate.buildTemplateWifiWildcard());
+                NetworkTemplate.buildTemplateWifiWildcard());
         final long end = System.currentTimeMillis();
         final long start = end - (DateUtils.WEEK_IN_MILLIS * 4);
 
         final NetworkCycleDataForUidLoader loader = (NetworkCycleDataForUidLoader)
-            mFragment.mUidDataCallbacks.onCreateLoader(0, Bundle.EMPTY);
+                mFragment.mUidDataCallbacks.onCreateLoader(0, Bundle.EMPTY);
 
         final List<Integer> uids = loader.getUids();
         assertThat(uids).hasSize(1);
@@ -331,12 +334,12 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mContext", context);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mTemplate",
-            NetworkTemplate.buildTemplateWifiWildcard());
+                NetworkTemplate.buildTemplateWifiWildcard());
         final long end = System.currentTimeMillis();
         final long start = end - (DateUtils.WEEK_IN_MILLIS * 4);
 
         final NetworkCycleDataForUidLoader loader = (NetworkCycleDataForUidLoader)
-            mFragment.mUidDataCallbacks.onCreateLoader(0, Bundle.EMPTY);
+                mFragment.mUidDataCallbacks.onCreateLoader(0, Bundle.EMPTY);
 
         final List<Integer> uids = loader.getUids();
         assertThat(uids).hasSize(3);
@@ -362,10 +365,10 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mCycles", testCycles);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mTemplate",
-            NetworkTemplate.buildTemplateWifiWildcard());
+                NetworkTemplate.buildTemplateWifiWildcard());
 
         final NetworkCycleDataForUidLoader loader = (NetworkCycleDataForUidLoader)
-            mFragment.mUidDataCallbacks.onCreateLoader(0 /* id */, Bundle.EMPTY /* args */);
+                mFragment.mUidDataCallbacks.onCreateLoader(0 /* id */, Bundle.EMPTY /* args */);
 
         final ArrayList<Long> cycles = loader.getCycles();
         assertThat(cycles).hasSize(2);
@@ -409,13 +412,14 @@ public class AppDataUsageTest {
     }
 
     @Test
-    @Config(shadows = {ShadowDataUsageUtils.class, ShadowSubscriptionManager.class})
+    @Config(shadows = {ShadowDataUsageUtils.class, ShadowSubscriptionManager.class,
+            ShadowFragment.class})
     public void onCreate_noNetworkTemplateAndInvalidDataSubscription_shouldUseWifiTemplate() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
         ShadowDataUsageUtils.HAS_SIM = false;
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(
-            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mFragment = spy(new AppDataUsage());
         doReturn(Robolectric.setupActivity(FragmentActivity.class)).when(mFragment).getActivity();
         doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
@@ -424,7 +428,7 @@ public class AppDataUsageTest {
         doReturn(new UidDetail()).when(uidDetailProvider).getUidDetail(anyInt(), anyBoolean());
 
         ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
-            FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
+                FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
         final Bundle args = new Bundle();
         args.putInt(AppInfoBase.ARG_PACKAGE_UID, 123123);
         mFragment.setArguments(args);
@@ -432,6 +436,6 @@ public class AppDataUsageTest {
         mFragment.onCreate(Bundle.EMPTY);
 
         assertThat(mFragment.mTemplate.getMatchRule())
-            .isEqualTo(NetworkTemplate.MATCH_WIFI_WILDCARD);
+                .isEqualTo(NetworkTemplate.MATCH_WIFI_WILDCARD);
     }
 }
