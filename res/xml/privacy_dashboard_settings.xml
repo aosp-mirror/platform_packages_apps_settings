@@ -29,6 +29,14 @@
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.privacy.PermissionBarChartPreferenceController"/>
 
+    <!-- Work Policy info -->
+    <Preference
+        android:key="work_policy_info"
+        android:title="@string/work_policy_privacy_settings"
+        android:summary="@string/work_policy_privacy_settings_summary"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.privacy.WorkPolicyInfoPreferenceController"/>
+
     <!-- Accessibility usage -->
     <Preference
         android:key="privacy_accessibility_usage"
