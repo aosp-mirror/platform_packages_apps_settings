@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -61,19 +62,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
 
     @Override
     public boolean hasDeviceOwner() {
-        if (!mPm.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN)) {
-            return false;
-        }
-        return mDpm.getDeviceOwnerComponentOnAnyUser() != null;
-    }
-
-    private int getManagedProfileUserId() {
-        for (final UserInfo userInfo : mUm.getProfiles(MY_USER_ID)) {
-            if (userInfo.isManagedProfile()) {
-                return userInfo.id;
-            }
-        }
-        return UserHandle.USER_NULL;
+        return getDeviceOwnerComponent() != null;
     }
 
     @Override
@@ -232,6 +221,94 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
             }
         }
         return activeAdmins;
+    }
+
+    @Override
+    public boolean hasWorkPolicyInfo() {
+        return (getWorkPolicyInfoIntentDO() != null) || (getWorkPolicyInfoIntentPO() != null);
+    }
+
+    @Override
+    public boolean showWorkPolicyInfo() {
+        Intent intent = getWorkPolicyInfoIntentDO();
+        if (intent != null) {
+            mContext.startActivity(intent);
+            return true;
+        }
+
+        intent = getWorkPolicyInfoIntentPO();
+        final UserInfo userInfo = getManagedProfileUserInfo();
+        if (intent != null && userInfo != null) {
+            mContext.startActivityAsUser(intent, userInfo.getUserHandle());
+            return true;
+        }
+
+        return false;
+    }
+
+    private ComponentName getDeviceOwnerComponent() {
+        if (!mPm.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN)) {
+            return null;
+        }
+        return mDpm.getDeviceOwnerComponentOnAnyUser();
+    }
+
+    private UserInfo getManagedProfileUserInfo() {
+        for (final UserInfo userInfo : mUm.getProfiles(MY_USER_ID)) {
+            if (userInfo.isManagedProfile()) {
+                return userInfo;
+            }
+        }
+        return null;
+    }
+
+    private int getManagedProfileUserId() {
+        final UserInfo userInfo = getManagedProfileUserInfo();
+        if (userInfo != null) {
+            return userInfo.id;
+        }
+        return UserHandle.USER_NULL;
+    }
+
+    private Intent getWorkPolicyInfoIntentDO() {
+        final ComponentName ownerComponent = getDeviceOwnerComponent();
+        if (ownerComponent == null) {
+            return null;
+        }
+
+        // Only search for the required action in the Device Owner's package
+        final Intent intent =
+                new Intent(mResources.getString(R.string.config_work_policy_info_intent_action))
+                        .setPackage(ownerComponent.getPackageName());
+        final List<ResolveInfo> activities = mPm.queryIntentActivities(intent, 0);
+        if (activities.size() != 0) {
+            return intent;
+        }
+
+        return null;
+    }
+
+    private Intent getWorkPolicyInfoIntentPO() {
+        final int userId = getManagedProfileUserId();
+        if (userId == UserHandle.USER_NULL) {
+            return null;
+        }
+
+        final ComponentName ownerComponent = mDpm.getProfileOwnerAsUser(userId);
+        if (ownerComponent == null) {
+            return null;
+        }
+
+        // Only search for the required action in the Profile Owner's package
+        final Intent intent =
+                new Intent(mResources.getString(R.string.config_work_policy_info_intent_action))
+                        .setPackage(ownerComponent.getPackageName());
+        final List<ResolveInfo> activities = mPm.queryIntentActivitiesAsUser(intent, 0, userId);
+        if (activities.size() != 0) {
+            return intent;
+        }
+
+        return null;
     }
 
     protected static class EnterprisePrivacySpan extends ClickableSpan {
