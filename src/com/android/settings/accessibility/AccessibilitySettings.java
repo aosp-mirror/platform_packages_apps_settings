@@ -59,6 +59,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.display.DarkUIPreferenceController;
+import com.android.settings.display.FontSizePreferenceController;
 import com.android.settings.display.ToggleFontSizePreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -241,6 +242,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
 
     private LockScreenRotationPreferenceController mLockScreenRotationPreferenceController;
+    private FontSizePreferenceController mFontSizePreferenceController;
+    private MagnificationPreferenceController mMagnificationPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -489,10 +492,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
-        configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreferenceScreen);
+        mMagnificationPreferenceController = new MagnificationPreferenceController(getContext(),
+                DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
+        mMagnificationPreferenceController.displayPreference(getPreferenceScreen());
 
         // Font size.
         mFontSizePreferenceScreen = findPreference(FONT_SIZE_PREFERENCE_SCREEN);
+        mFontSizePreferenceController = new FontSizePreferenceController(getContext(),
+                FONT_SIZE_PREFERENCE_SCREEN);
 
         // Autoclick after pointer stops.
         mAutoclickPreferenceScreen = findPreference(AUTOCLICK_PREFERENCE_SCREEN);
@@ -770,9 +777,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
-        updateMagnificationSummary(mDisplayMagnificationPreferenceScreen);
+        mMagnificationPreferenceController.updateState(mDisplayMagnificationPreferenceScreen);
 
-        updateFontSizeSummary(mFontSizePreferenceScreen);
+        mFontSizePreferenceController.updateState(mFontSizePreferenceScreen);
 
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
@@ -795,25 +802,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         pref.setSummary(timeoutSummarys[idx == -1 ? 0 : idx]);
     }
 
-    private void updateMagnificationSummary(Preference pref) {
-        final boolean tripleTapEnabled = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1;
-        final boolean buttonEnabled = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, 0) == 1;
-
-        int summaryResId = 0;
-        if (!tripleTapEnabled && !buttonEnabled) {
-            summaryResId = R.string.accessibility_feature_state_off;
-        } else if (!tripleTapEnabled && buttonEnabled) {
-            summaryResId = R.string.accessibility_screen_magnification_navbar_title;
-        } else if (tripleTapEnabled && !buttonEnabled) {
-            summaryResId = R.string.accessibility_screen_magnification_gestures_title;
-        } else {
-            summaryResId = R.string.accessibility_screen_magnification_state_navbar_gesture;
-        }
-        pref.setSummary(summaryResId);
-    }
-
     private void updateFeatureSummary(String prefKey, Preference pref) {
         final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
         pref.setSummary(enabled ? R.string.accessibility_feature_state_on
@@ -832,17 +820,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
         pref.setSummary(ToggleAutoclickPreferenceFragment.getAutoclickPreferenceSummary(
                 getResources(), delay));
-    }
-
-    private void updateFontSizeSummary(Preference pref) {
-        final float currentScale = Settings.System.getFloat(getContext().getContentResolver(),
-                Settings.System.FONT_SCALE, 1.0f);
-        final Resources res = getContext().getResources();
-        final String[] entries = res.getStringArray(R.array.entries_font_size);
-        final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
-        final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(currentScale,
-                strEntryValues);
-        pref.setSummary(entries[index]);
     }
 
     @VisibleForTesting
@@ -951,19 +928,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     ? AccessibilityShortcutPreferenceFragment.getServiceName(getContext())
                     : getString(R.string.accessibility_feature_state_off);
             mAccessibilityShortcutPreferenceScreen.setSummary(summary);
-        }
-    }
-
-    private static void configureMagnificationPreferenceIfNeeded(Preference preference) {
-        // Some devices support only a single magnification mode. In these cases, we redirect to
-        // the magnification mode's UI directly, rather than showing a PreferenceScreen with a
-        // single list item.
-        final Context context = preference.getContext();
-        if (!MagnificationPreferenceFragment.isApplicable(context.getResources())) {
-            preference.setFragment(ToggleScreenMagnificationPreferenceFragment.class.getName());
-            final Bundle extras = preference.getExtras();
-            MagnificationGesturesPreferenceController
-                    .populateMagnificationGesturesPreferenceExtras(extras, context);
         }
     }
 
