@@ -1334,7 +1334,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Versión de banda base"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versión de núcleo"</string>
     <string name="build_number" msgid="3075795840572241758">"Número de compilación"</string>
-    <string name="module_version" msgid="4826567303427436423">"Versiones de módulo de línea principal"</string>
+    <string name="module_version" msgid="7329118610303805859">"Actualización del sistema de Google Play"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"No disponible"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Estado"</string>
     <string name="device_status" msgid="607405385799807324">"Estado"</string>
@@ -2205,7 +2205,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cian"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Amarillo"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"¿Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga control total de tu dispositivo?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"¿Deseas permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga el control total de tu dispositivo?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> necesita:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Debido a que una aplicación está bloqueando una solicitud de permiso, la Configuración no puede verificar tu respuesta."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si activas <xliff:g id="SERVICE">%1$s</xliff:g>, el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
@@ -2217,7 +2217,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"El control total es apropiado para las apps que te ayudan con las necesidades de accesibilidad, pero no para la mayoría de las apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Ver y controlar la pantalla"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Puede leer todo el contenido en la pantalla y mostrarlo sobre otras apps."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Ver y realizar acciones"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Ver y realizar acciones"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Puede realizar el seguimiento de tus interacciones con una app o un sensor de hardware, así como interactuar con las apps por ti."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Permitir"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Rechazar"</string>
@@ -2613,8 +2613,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Trabajo"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Restringir acceso a SMS y registro de llamadas"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Solo las apps de teléfono y mensajes predeterminadas tienen permiso de acceso a los SMS y el registro de llamadas"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Inhabilitar restricción de identificador de disp."</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Inhabilitar las nuevas restricciones de acceso para los identificadores de dispositivo"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"No hay agentes de confianza disponibles."</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"¿Activar la app de administración?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Activar la app de administración de este dispositivo"</string>
@@ -4202,6 +4200,14 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"La app de inicio predeterminada <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> no admite la navegación por gestos"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Cambiar de app de inicio predeterminada"</string>
     <string name="information_label" msgid="8133109685432913360">"Información"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Presiona la pantalla dos veces para consultar el teléfono"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Presionar dos veces la tablet para revisarla"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Presionar dos veces el dispositivo para revisarlo"</string>
@@ -4373,10 +4379,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Seleccionar controlador gráfico"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Predeterminado"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Controlador de juegos"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Controlador previo al lanzamiento"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Controlador gráfico del sistema"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Este teléfono no admite esa opción de configuración"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Esta tablet no admite esa opción de configuración"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Este dispositivo no admite esa opción de configuración"</string>
@@ -4611,4 +4622,8 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problema con la combinación de SIM"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Usar <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> podría limitar la funcionalidad. Presiona para obtener más información."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Combinación de SIM"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>

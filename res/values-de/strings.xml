@@ -1145,7 +1145,7 @@
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"Standard-Benachrichtigungston"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"Medien"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"Lautstärke für Musik und Videos festlegen"</string>
-    <string name="alarm_volume_title" msgid="2285597478377758706">"Wecker"</string>
+    <string name="alarm_volume_title" msgid="2285597478377758706">"Weckruf"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Audioeinstellungen für angeschlossenes Dock"</string>
     <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Wähltastentöne"</string>
     <string name="sound_effects_enable_title" msgid="4429690369187229592">"Töne bei Berührung"</string>
@@ -1154,11 +1154,11 @@
     <string name="volume_media_description" msgid="7949355934788807863">"Musik, Video, Spiele und andere Medien"</string>
     <string name="volume_ring_description" msgid="5936851631698298989">"Klingelton &amp; Benachrichtigungen"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Benachrichtigungen"</string>
-    <string name="volume_alarm_description" msgid="8322615148532654841">"Wecker"</string>
+    <string name="volume_alarm_description" msgid="8322615148532654841">"Weckrufe"</string>
     <string name="volume_ring_mute" msgid="3018992671608737202">"Klingelton &amp; Benachrichtigungen stummschalten"</string>
     <string name="volume_media_mute" msgid="3399059928695998166">"Musik &amp; andere Medien stummschalten"</string>
     <string name="volume_notification_mute" msgid="7955193480006444159">"Benachrichtigungen stummschalten"</string>
-    <string name="volume_alarm_mute" msgid="4452239420351035936">"Wecker stummschalten"</string>
+    <string name="volume_alarm_mute" msgid="4452239420351035936">"Weckrufe stummschalten"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Dock"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Dock-Einstellungen"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
@@ -1334,7 +1334,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Baseband-Version"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernel-Version"</string>
     <string name="build_number" msgid="3075795840572241758">"Build-Nummer"</string>
-    <string name="module_version" msgid="4826567303427436423">"Mainline-Modulversionen"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play-Systemupdate"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Nicht verfügbar"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
@@ -2205,7 +2205,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Blaugrün"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Gelb"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"<xliff:g id="SERVICE">%1$s</xliff:g> die vollständige Kontrolle über dein Gerät geben?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"<xliff:g id="SERVICE">%1$s</xliff:g> die vollständige Kontrolle über dein Gerät geben?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> muss:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Deine Eingabe wird von \"Einstellungen\" nicht erkannt, weil die Berechtigungsanfrage von einer App verdeckt wird."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Wenn du <xliff:g id="SERVICE">%1$s</xliff:g> aktivierst, verwendet dein Gerät nicht die Displaysperre, um die Datenverschlüsselung zu verbessern."</string>
@@ -2217,7 +2217,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Die vollständige Kontrolle sollte nur für die Apps aktiviert werden, die dir den Zugang zu den App-Funktionen erleichtern. Das ist in der Regel nur ein kleiner Teil der Apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Bildschirm aufrufen und steuern"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Die Funktion kann alle Inhalte auf dem Bildschirm lesen und diese Inhalte über andere Apps anzeigen."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Aktionen aufrufen und durchführen"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Aktionen aufrufen und durchführen"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Die Funktion kann deine Interaktionen mit einer App oder einem Hardwaresensor verfolgen und in deinem Namen mit Apps interagieren."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Zulassen"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Ablehnen"</string>
@@ -2613,8 +2613,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Geschäftlich"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Zugriff auf SMS und Anrufliste einschränken"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Nur standardmäßige Telefon- und Nachrichten-Apps haben Zugriff auf SMS und Anruflisteneinträge"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Beschränkungen für Gerätekennungen aufheben"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Die neuen Zugangsbeschränkungen für Gerätekennungen werden aufgehoben"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Keine verfügbaren Trust Agents"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"App zur Geräteverwaltung aktivieren?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Diese App zur Geräteverwaltung aktivieren"</string>
@@ -3185,7 +3183,7 @@
     <string name="media_volume_option_title" msgid="2811531786073003825">"Medienlautstärke"</string>
     <string name="remote_media_volume_option_title" msgid="7602586327091007461">"Streaminglautstärke"</string>
     <string name="call_volume_option_title" msgid="1265865226974255384">"Anruflautstärke"</string>
-    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Weckerlautstärke"</string>
+    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Weckruflautstärke"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Klingeltonlautstärke"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Benachrichtigungslautstärke"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Klingelton"</string>
@@ -3238,7 +3236,7 @@
     <string name="zen_mode_schedule_title" msgid="8616187805239590649">"Zeitplan"</string>
     <string name="zen_mode_use_automatic_rule" msgid="489102635414919052">"Zeitplan verwenden"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Nur wichtige Unterbrechungen"</string>
-    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Nur Wecker"</string>
+    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Nur Weckrufe"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Lautlos"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Visuelle Störungen blockieren"</string>
@@ -3542,8 +3540,8 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Tage"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Keine"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Täglich"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Wecker kann Schlusszeit außer Kraft setzen"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="1673667979187593693">"Zeitplan wird deaktiviert, wenn ein Wecker klingelt"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Weckruf kann Schlusszeit außer Kraft setzen"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="1673667979187593693">"Zeitplan wird deaktiviert, wenn ein Weckruf ertönt"</string>
     <string name="zen_mode_custom_behavior_title" msgid="1148856394866360783">"\"Bitte nicht stören\"-Verhalten"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="7750128187766412708">"Standardeinstellungen verwenden"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="7458258833216726120">"Benutzerdefinierte Einstellungen festlegen"</string>
@@ -3573,7 +3571,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Keine"</string>
     <string name="zen_mode_from_none_calls" msgid="7705112158761351044">"Keine Anrufe zulassen"</string>
     <string name="zen_mode_from_none_messages" msgid="3300937656725582608">"Keine Nachrichten zulassen"</string>
-    <string name="zen_mode_alarms" msgid="6510378757005935647">"Wecker zulassen"</string>
+    <string name="zen_mode_alarms" msgid="6510378757005935647">"Weckrufe zulassen"</string>
     <string name="zen_mode_alarms_list" msgid="1090332840207025714">"Wecker"</string>
     <string name="zen_mode_media" msgid="4529187475698084320">"Medientöne abspielen"</string>
     <string name="zen_mode_media_list" msgid="5483540766397328038">"Medien"</string>
@@ -3606,16 +3604,16 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Startzeit"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Schlusszeit"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"Am nächsten Tag um <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_summary_alarms_only_indefinite" msgid="2061973221027570123">"Für unbegrenzte Zeit zur Option \"Nur Wecker\" wechseln"</string>
+    <string name="zen_mode_summary_alarms_only_indefinite" msgid="2061973221027570123">"Für unbegrenzte Zeit zur Option \"Nur Weckrufe\" wechseln"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
-      <item quantity="other">Für <xliff:g id="DURATION">%1$d</xliff:g> Minuten bis <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> zur Option \"Nur Wecker\" wechseln</item>
-      <item quantity="one">Für eine Minute bis <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> zur Option \"Nur Wecker\" wechseln</item>
+      <item quantity="other">Für <xliff:g id="DURATION">%1$d</xliff:g> Minuten bis <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> zur Option \"Nur Weckrufe\" wechseln</item>
+      <item quantity="one">Für eine Minute bis <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> zur Option \"Nur Weckerufe\" wechseln</item>
     </plurals>
     <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="2407703455581767748">
-      <item quantity="other">Für <xliff:g id="DURATION">%1$d</xliff:g> Stunden bis <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> zur Option \"Nur Wecker\" wechseln</item>
-      <item quantity="one">Für eine Stunde bis <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> zur Option \"Nur Wecker\" wechseln</item>
+      <item quantity="other">Für <xliff:g id="DURATION">%1$d</xliff:g> Stunden bis <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> zur Option \"Nur Weckrufe\" wechseln</item>
+      <item quantity="one">Für eine Stunde bis <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> zur Option \"Nur Weckrufe\" wechseln</item>
     </plurals>
-    <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Bis <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> zur Option \"Nur Wecker\" wechseln"</string>
+    <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Bis <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> zur Option \"Nur Weckrufe\" wechseln"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Zur Option \"Immer unterbrechen\" wechseln"</string>
     <string name="zen_mode_screen_on" msgid="8774571998575673502">"Wenn der Bildschirm aktiviert ist"</string>
     <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"Benachrichtigungen, die durch \"Bitte Bitte nicht stören\" stummgeschaltet wurden, werden auf dem Bildschirm eingeblendet und in der Statusleiste ist ein Symbol für sie zu sehen"</string>
@@ -3639,15 +3637,15 @@
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimentell)"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Sicherer Start"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Weiter"</string>
-    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Du kannst dieses Gerät zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden. \n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Du kannst dieses Gerät zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden. \n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Du kannst dieses Gerät zusätzlich schützen, indem du festlegst, dass dein Passwort vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden. \n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Neben dem Fingerabdruck zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Neben dem Fingerabdruck zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Neben der Verwendung deines Fingerabdrucks zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten oder Benachrichtigungen (wie Wecker) empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Du kannst dieses Gerät zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden. \n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Du kannst dieses Gerät zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden. \n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Du kannst dieses Gerät zusätzlich schützen, indem du festlegst, dass dein Passwort vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden. \n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Neben dem Fingerabdruck zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Neben dem Fingerabdruck zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Neben der Verwendung deines Fingerabdrucks zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"Neben der Gesichtserkennung zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Neben der Gesichtserkennung zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Neben der Verwendung der Gesichtserkennung zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten oder Benachrichtigungen (wie Wecker) empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Neben der Gesichtserkennung zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Neben der Verwendung der Gesichtserkennung zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"\"Ja\""</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nein"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Eingeschränkt"</string>
@@ -4204,6 +4202,14 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Wird von deiner Standard-Start-App, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>, nicht unterstützt"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Standard-Home-App wechseln"</string>
     <string name="information_label" msgid="8133109685432913360">"Information"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Für Blick aufs Display doppeltippen"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Doppeltippen für schnellen Blick auf das Display des Tablets"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Doppeltippen für schnellen Blick auf das Display des Geräts"</string>
@@ -4375,10 +4381,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Grafiktreiber auswählen"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Standard"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Game Driver"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Vorab veröffentlichter Treiber"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Grafiktreiber des Systems"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Die Einstellung wird auf diesem Smartphone nicht unterstützt"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Die Einstellung wird auf diesem Tablet nicht unterstützt"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Die Einstellung wird auf diesem Gerät nicht unterstützt"</string>
@@ -4611,6 +4622,10 @@
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Tippen, um MMS über <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> zuzulassen, wenn mobile Daten aus sind"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS"</string>
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problem mit der SIM-Kombination"</string>
-    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Wenn du <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> verwendest, kann das die Funktionalität einschränken. Für weitere Informationen tippen."</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Bei Verwendung von <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> sind u. U. nicht alle Funktionen verfügbar. Für weitere Informationen tippen."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM-Kombination"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>
