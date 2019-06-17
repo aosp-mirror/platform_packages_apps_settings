@@ -1334,7 +1334,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"基带版本"</string>
     <string name="kernel_version" msgid="9192574954196167602">"内核版本"</string>
     <string name="build_number" msgid="3075795840572241758">"版本号"</string>
-    <string name="module_version" msgid="4826567303427436423">"主线内核模块版本"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play 系统更新"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"无法获取"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"状态信息"</string>
     <string name="device_status" msgid="607405385799807324">"状态信息"</string>
@@ -2205,7 +2205,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"青色"</string>
     <string name="color_yellow" msgid="9112680561610873529">"黄色"</string>
     <string name="color_magenta" msgid="5059212823607815549">"紫红色"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"要允许“<xliff:g id="SERVICE">%1$s</xliff:g>”完全控制您的设备吗？"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"要允许<xliff:g id="SERVICE">%1$s</xliff:g>完全控制您的设备吗？"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"“<xliff:g id="SERVICE">%1$s</xliff:g>”需要："</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"由于某个应用遮挡了权限请求界面，因此“设置”应用无法验证您的回应。"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您开启 <xliff:g id="SERVICE">%1$s</xliff:g>，您的设备将无法使用屏幕锁定来增强数据加密。"</string>
@@ -2217,7 +2217,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"完全控制权限适用于可帮助您满足无障碍需求的应用，但不适用于大部分应用。"</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"查看和控制屏幕"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"此功能可以读出屏幕上的所有内容，并在其他应用上层显示内容。"</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"查看及平台操作"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"查看及执行操作"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"此功能可以跟踪您与应用或硬件传感器的互动，并代表您与应用互动。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"允许"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"拒绝"</string>
@@ -2613,8 +2613,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"工作"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"限制短信和通话记录访问权限"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"只有默认的电话和短信应用拥有短信和通话记录权限"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"停用设备标识符限制"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"停用设备标识符的新访问限制"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"没有可信代理"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"要启用设备管理应用吗？"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"启用此设备管理应用"</string>
@@ -4193,20 +4191,25 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"自拍更便捷"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"系统导航"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"“双按钮”导航"</string>
-    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
-    <skip />
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"在主屏幕按钮上向上滑动，可切换应用；再次向上滑动，可查看所有应用；点按返回按钮，可返回上一个屏幕。"</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"试用新版主屏幕按钮"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"开启新手势即可切换应用"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"手势导航"</string>
-    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
-    <skip />
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"从屏幕底部向上滑动，可转到主屏幕；从底部向上滑动并按住再松开，可切换应用；从左侧或右侧边缘向另一侧滑动，可返回上一个屏幕。"</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"“三按钮”导航"</string>
-    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
-    <skip />
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"使用屏幕底部的按钮即可轻松返回上一个屏幕、转到主屏幕和切换应用。"</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"系统导航,“双按钮”导航,“三按钮”导航,手势导航"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"您的默认主屏幕应用<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>不支持手势导航"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"切换默认主屏幕应用"</string>
     <string name="information_label" msgid="8133109685432913360">"信息"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"点按两次即可查看手机"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"点按两次即可查看平板电脑"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"点按两次即可查看设备"</string>
@@ -4378,10 +4381,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"选择图形驱动程序"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"默认"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"游戏驱动程序"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"预发布驱动程序"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"系统图形驱动程序"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"此手机不支持这项设置"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"此平板电脑不支持这项设置"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"此设备不支持这项设置"</string>
@@ -4616,4 +4624,8 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"SIM 卡组合功能发生问题"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"如果您使用<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g>，这项功能可能会因此受限。点按即可了解详情。"</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM 卡组合"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>
