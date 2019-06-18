@@ -399,6 +399,7 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Wajah ditambahkan"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Siapkan Face Unlock"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Face unlock"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Face Unlock untuk profil kerja"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Cara menyiapkan face unlock"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Siapkan face unlock"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Gunakan wajah Anda untuk mengautentikasi"</string>
@@ -1222,9 +1223,11 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Screen attention"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Aktif/Layar tidak akan mati jika Anda sedang melihatnya"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Nonaktif"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Perlu akses kamera"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tap untuk mengelola izin untuk Layanan Personalisasi Perangkat"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Mencegah layar mati jika Anda sedang melihatnya"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Screen attention menggunakan kamera depan untuk mengetahui apakah seseorang sedang melihat layar. Fitur ini berjalan di perangkat, dan gambar tidak pernah disimpan atau dikirimkan ke Google."</string>
-    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Membuat layar tetap menyala saat melihatnya"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Membuat layar tetap menyala saat dilihat"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Cahaya Malam"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Cahaya Malam memberikan rona kuning pada layar. Ini membuat Anda dapat melihat layar atau membaca dengan lebih mudah saat cahaya redup, serta membantu Anda lebih mudah tidur."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Jadwal"</string>
@@ -1336,7 +1339,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Versi pita basis"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versi kernel"</string>
     <string name="build_number" msgid="3075795840572241758">"Nomor versi"</string>
-    <string name="module_version" msgid="4826567303427436423">"Versi modul mainline"</string>
+    <string name="module_version" msgid="7329118610303805859">"Update sistem Google Play"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Tidak tersedia"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
@@ -1712,6 +1715,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Manual keselamatan &amp; peraturan"</string>
     <string name="copyright_title" msgid="865906688917260647">"Hak cipta"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisensi"</string>
+    <string name="module_license_title" msgid="258743239066841860">"Lisensi update sistem Google Play"</string>
     <string name="terms_title" msgid="7697580845616764642">"Persyaratan dan ketentuan"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Lisensi WebView Sistem"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Wallpaper"</string>
@@ -2207,7 +2211,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Sian"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Kuning"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"Izinkan <xliff:g id="SERVICE">%1$s</xliff:g> memiliki kontrol penuh atas perangkat Anda?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"Izinkan <xliff:g id="SERVICE">%1$s</xliff:g> memiliki kontrol penuh atas perangkat Anda?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> perlu:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Karena sebuah aplikasi menghalangi permintaan izin, Setelan tidak dapat memverifikasi tanggapan Anda."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Jika Anda mengaktifkan <xliff:g id="SERVICE">%1$s</xliff:g>, perangkat tidak akan menggunakan kunci layar untuk meningkatkan enkripsi data."</string>
@@ -2219,7 +2223,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Kontrol penuh sesuai untuk aplikasi yang membantu Anda terkait kebutuhan aksesibilitas, tetapi tidak untuk sebagian besar aplikasi."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Tampilan dan layar kontrol"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Aplikasi dapat membaca semua konten di layar dan menampilkan konten di atas aplikasi lain."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Tampilan dan tindakan platform"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Menampilkan dan melakukan tindakan"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Aplikasi dapat melacak interaksi Anda dengan aplikasi atau sensor hardware, dan berinteraksi dengan aplikasi atas nama Anda."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Izinkan"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Tolak"</string>
@@ -2615,8 +2619,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Kantor"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Batasi akses SMS &amp; log panggilan"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Hanya aplikasi telepon dan pesan default yang memiliki izin SMS &amp; log panggilan"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Nonaktifkan batasan ID perangkat"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Menonaktifkan batasan akses baru untuk ID perangkat"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Perangkat tepercaya tidak tersedia"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Aktifkan aplikasi admin perangkat?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Aktifkan aplikasi admin perangkat ini"</string>
@@ -3090,7 +3092,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplikasi &amp; notifikasi"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Asisten, aplikasi terbaru, aplikasi default"</string>
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Aplikasi baru-baru ini, aplikasi default"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Akses notifikasi tidak tersedia untuk aplikasi di profil kerja"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Akun"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Tidak ada akun yang ditambahkan"</string>
@@ -4206,6 +4208,10 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Tidak didukung oleh aplikasi layar utama default, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Beralih aplikasi layar utama default"</string>
     <string name="information_label" msgid="8133109685432913360">"Informasi"</string>
+    <string name="low_label" msgid="1679136861385616813">"Rendah"</string>
+    <string name="high_label" msgid="7278863493316447831">"Tinggi"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Sensitivitas yang lebih tinggi dapat bentrok dengan gestur aplikasi di tepi layar."</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Sensitivitas Bagian Belakang"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Tap dua kali untuk memeriksa ponsel"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tap dua kali untuk memeriksa tablet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tap dua kali untuk memeriksa perangkat"</string>
@@ -4377,10 +4383,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Pilih Driver Grafis"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Default"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Driver Game"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Driver Prarilis"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Driver Grafis Sistem"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Setelan tidak didukung di ponsel ini"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Setelan tidak didukung di tablet ini"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Setelan tidak didukung di perangkat ini"</string>
@@ -4615,4 +4626,6 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Masalah pada kombinasi SIM"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Menggunakan <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> dapat membatasi fungsi. Tap untuk mempelajari lebih lanjut."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Kombinasi SIM"</string>
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"Info kebijakan kerja Anda"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Setelan yang dikelola oleh admin IT"</string>
 </resources>

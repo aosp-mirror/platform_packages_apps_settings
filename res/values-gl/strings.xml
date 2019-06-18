@@ -399,6 +399,8 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Engadiuse a cara"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Configura o desbloqueo facial"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Desbloqueo facial"</string>
+    <!-- no translation found for security_settings_face_profile_preference_title (3906383224724942953) -->
+    <skip />
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Como configurar o desbloqueo facial?"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Configurar a o desbloqueo facial"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Utilizar a autenticación facial"</string>
@@ -1222,6 +1224,8 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Atención á pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Activado/A pantalla non se apagará se miras para ela"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Opción desactivada"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Necesítase acceso á cámara"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Toca para xestionar os permisos de Device Personalization Services"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Evita que se apague a pantalla se miras para ela"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"A función Atención á pantalla utiliza a cámara dianteira para ver se alguén está mirando a pantalla. Funciona no dispositivo e as imaxes nunca se almacenan nin envían a Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Mantén a pantalla acendida mentres a miras"</string>
@@ -1336,7 +1340,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Versión de banda base"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versión de kernel"</string>
     <string name="build_number" msgid="3075795840572241758">"Número de compilación"</string>
-    <string name="module_version" msgid="4826567303427436423">"Versións do módulo principal"</string>
+    <string name="module_version" msgid="7329118610303805859">"Actualización do sistema de Google Play"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Non dispoñible"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Estado"</string>
     <string name="device_status" msgid="607405385799807324">"Estado"</string>
@@ -1712,6 +1716,8 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Manual normativo e de seguranza"</string>
     <string name="copyright_title" msgid="865906688917260647">"Copyright"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenza"</string>
+    <!-- no translation found for module_license_title (258743239066841860) -->
+    <skip />
     <string name="terms_title" msgid="7697580845616764642">"Termos e condicións"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Licenza WebView do sistema"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Fondos de pantalla"</string>
@@ -2207,7 +2213,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cián"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Amarelo"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Maxenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"Queres permitir que <xliff:g id="SERVICE">%1$s</xliff:g> poida controlar totalmente o teu dispositivo?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"Queres permitir que <xliff:g id="SERVICE">%1$s</xliff:g> poida controlar totalmente o teu dispositivo?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> precisa:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Posto que unha aplicación se superpón sobre una solicitude de permiso, a configuración non pode verificar a túa resposta."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Se activas <xliff:g id="SERVICE">%1$s</xliff:g>, o dispositivo non utilizará o teu bloqueo da pantalla para mellorar o cifrado de datos."</string>
@@ -2219,7 +2225,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"O control total é adecuado para as aplicacións que che axudan coa accesibilidade, pero non para a maioría das aplicacións."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Ver e controlar a pantalla"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Pode ler todo o contido da pantalla e mostralo sobre outras aplicacións."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Ver e realizar accións"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Ver e realizar accións"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Pode facer un seguimento das túas interaccións cunha aplicación ou cun sensor de hardware, así como interactuar por ti coas aplicacións."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Permitir"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Denegar"</string>
@@ -2615,8 +2621,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Traballo"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Restrinxir acceso ao rexistro de chamadas e SMS"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Só as aplicacións de teléfono e mensaxaría predeterminadas teñen permisos de acceso ao rexistro de chamadas e SMS"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Desactivar restricións de identificadores"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Desactiva as novas restricións de acceso aos identificadores do dispositivo"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Non hai ningún axente de confianza dispoñible"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Activar aplicación de administración?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Activar esta aplicación de administración de dispositivos"</string>
@@ -3091,7 +3095,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplicacións e notificacións"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Asistente, aplicacións recentes, aplicacións predeterminadas"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Non se permite que as aplicacións do perfil de traballo accedan ás notificacións."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Contas"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Non se engadiron contas"</string>
@@ -3212,7 +3217,7 @@
     <string name="emergency_tone_alert" msgid="8523447641290736852">"Tons"</string>
     <string name="emergency_tone_vibrate" msgid="2278872257053690683">"Vibracións"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Sons de acendido"</string>
-    <string name="live_caption_title" msgid="2241633148129286971">"Transcrición instantánea"</string>
+    <string name="live_caption_title" msgid="2241633148129286971">"Subtítulos instantáneos"</string>
     <string name="live_caption_summary" msgid="3365960379606535783">"Crear subtítulos automáticos"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Nunca"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
@@ -4196,20 +4201,25 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Fai autofotos máis rápido"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navegación do sistema"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navegación con 2 botóns"</string>
-    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
-    <skip />
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Para cambiar de aplicación, pasa o dedo cara arriba no botón Inicio. Para ver todas as aplicacións pasa o dedo cara arriba de novo. Para volver á pantalla anterior, toca o botón Atrás."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Proba o novo botón de inicio"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Activa o novo xesto para cambiar de aplicacións"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navegación con xestos"</string>
-    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
-    <skip />
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Para ir a Inicio, pasa o dedo cara arriba desde a parte inferior da pantalla. Para cambiar de aplicación, pasa o dedo cara arriba desde a parte inferior da pantalla, mantena premida e sóltaa. Para volver á pantalla anterior, pasa o dedo desde o bordo esquerdo ou dereito."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navegación con 3 botóns"</string>
-    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
-    <skip />
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Para volver á pantalla anterior, ir a Inicio e cambiar de aplicación, utiliza os botóns da parte inferior da pantalla."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navegación do sistema, navegación con 2 botóns, navegación con 3 botóns, navegación con xestos"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Non compatible coa túa aplicación de inicio predeterminada, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Cambiar app de inicio predeterminada"</string>
     <string name="information_label" msgid="8133109685432913360">"Información"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dobre toque para consultar o teléfono"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tocar dúas veces para consultar a tableta"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tocar dúas veces para consultar o dispositivo"</string>
@@ -4381,10 +4391,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Seleccionar controlador de gráficos"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Valor predeterminado"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Controlador de xogos"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Controlador lanzado previamente"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Controlador de gráficos do sistema"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"A opción de configuración non é compatible con este teléfono"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"A opción de configuración non é compatible con esta tableta"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"A opción de configuración non é compatible con este dispositivo"</string>
@@ -4619,4 +4634,8 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Produciuse un problema coa combinación de tarxetas SIM"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"O uso de <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> pode limitar a funcionalidade. Toca para consultar máis información."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Combinación de tarxetas SIM"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>
