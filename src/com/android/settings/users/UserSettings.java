@@ -271,6 +271,10 @@ public class UserSettings extends SettingsPreferenceFragment
             mMePreference.setSummary(R.string.user_admin);
         }
         mAddUser = (RestrictedPreference) findPreference(KEY_ADD_USER);
+        if (!mUserCaps.mCanAddRestrictedProfile) {
+            // Label should only mention adding a "user", not a "profile"
+            mAddUser.setTitle(R.string.user_add_user_menu);
+        }
         mAddUser.setOnPreferenceClickListener(this);
 
         activity.registerReceiverAsUser(
