@@ -263,6 +263,20 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    @Config(shadows = {ShadowTileUtils.class})
+    public void bindPreference_hasTitleUri_shouldLoadFromContentProvider() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(TileUtils.META_DATA_PREFERENCE_TITLE_URI,
+                "content://com.android.settings/tile_title");
+
+        mImpl.bindPreferenceToTile(mActivity, mForceRoundedIcon, MetricsEvent.VIEW_UNKNOWN,
+                preference, tile, null /*key */, Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getTitle()).isEqualTo(ShadowTileUtils.MOCK_SUMMARY);
+    }
+
+    @Test
     public void bindPreference_withNullKeyTileKey_shouldUseTileKey() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");

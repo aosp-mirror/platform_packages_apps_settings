@@ -21,6 +21,8 @@ import static android.content.Intent.EXTRA_USER;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON_URI;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY_URI;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE_URI;
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -108,12 +110,12 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         if (pref == null) {
             return;
         }
-        pref.setTitle(tile.getTitle(activity.getApplicationContext()));
         if (!TextUtils.isEmpty(key)) {
             pref.setKey(key);
         } else {
             pref.setKey(getDashboardKeyForTile(tile));
         }
+        bindTitle(pref, tile);
         bindSummary(pref, tile);
         bindIcon(pref, tile, forceRoundedIcon);
         final Bundle metadata = tile.getMetaData();
@@ -166,6 +168,28 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                         SettingsEnums.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchIntentOrSelectProfile(activity, tile, intent, SettingsEnums.DASHBOARD_SUMMARY);
+    }
+
+    private void bindTitle(Preference preference, Tile tile) {
+        final CharSequence title = tile.getTitle(mContext.getApplicationContext());
+        if (title != null) {
+            preference.setTitle(title);
+            return;
+        }
+        if (tile.getMetaData() != null && tile.getMetaData().containsKey(
+                META_DATA_PREFERENCE_TITLE_URI)) {
+            // Set a placeholder title before starting to fetch real title, this is necessary
+            // to avoid preference height change.
+            preference.setTitle(R.string.summary_placeholder);
+
+            ThreadUtils.postOnBackgroundThread(() -> {
+                final Map<String, IContentProvider> providerMap = new ArrayMap<>();
+                final String uri = tile.getMetaData().getString(META_DATA_PREFERENCE_TITLE_URI);
+                final String titleFromUri = TileUtils.getTextFromUri(
+                        mContext, uri, providerMap, META_DATA_PREFERENCE_TITLE);
+                ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
+            });
+        }
     }
 
     private void bindSummary(Preference preference, Tile tile) {
@@ -247,7 +271,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
                 mMetricsFeatureProvider.logDashboardStartIntent(
-                    mContext, intent, sourceMetricCategory);
+                        mContext, intent, sourceMetricCategory);
                 activity.startActivityForResultAsUser(intent, 0, userHandle);
             } else {
                 ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile);
