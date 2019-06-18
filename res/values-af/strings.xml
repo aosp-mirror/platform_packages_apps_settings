@@ -1334,7 +1334,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Basisbandweergawe"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernweergawe"</string>
     <string name="build_number" msgid="3075795840572241758">"Bounommer"</string>
-    <string name="module_version" msgid="4826567303427436423">"Hoofmoduleweergawes"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play-stelselopdatering"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Nie beskikbaar nie"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
@@ -2205,7 +2205,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Groen-blou"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Geel"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"Laat <xliff:g id="SERVICE">%1$s</xliff:g> toe om heeltemal in beheer van jou toestel te wees?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"Gee <xliff:g id="SERVICE">%1$s</xliff:g> volle beheer oor jou toestel?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> moet:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Instellings kan nie jou antwoord verifieer nie omdat \'n program \'n toestemmingversoek verberg."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"As jy <xliff:g id="SERVICE">%1$s</xliff:g> aanskakel, sal jou toestel nie jou skermslot gebruik om data-enkripsie te verbeter nie."</string>
@@ -2217,7 +2217,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Volle beheer is gepas vir programme wat jou help met toeganklikheidsbehoeftes, maar nie vir die meeste programme nie."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Bekyk en beheer skerm"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Dit kan alle inhoud op die skerm lees en inhoud bo-oor ander programme vertoon."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Bekyk en voer handelinge uit"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Bekyk en voer handelinge uit"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Dit kan jou interaksies met \'n program of \'n hardewaresensor naspoor en namens jou met programme interaksie hê."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Laat toe"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Weier"</string>
@@ -2613,8 +2613,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Werk"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Beperk SMS- en oproeprekordtoegang"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Net verstekfoon- en -boodskapprogramme het SMS- en oproeprekordtoestemmings"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Deaktiveer toestelidentifiseerderbeperkings"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Deaktiveer die nuwe toegangbeperkings vir toestelidentifiseerders"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Geen beskikbare vertrouensagente nie"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Aktiveer toesteladministrasieprogram?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Aktiveer toesteladministrasieprogram"</string>
@@ -4204,6 +4202,14 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Word nie deur jou verstekhuisprogram, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>, gesteun nie"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Wissel verstekhuisprogram"</string>
     <string name="information_label" msgid="8133109685432913360">"Inligting"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dubbeltik om na foon te kyk"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Dubbeltik om na tablet te kyk"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Dubbeltik om na toestel te kyk"</string>
@@ -4375,10 +4381,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Kies grafikadrywer"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Verstek"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Speletjiedrywer"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Voorbekendstellingdrywer"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Stelselgrafikadrywer"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Instelling word nie op hierdie foon gesteun nie"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Instelling word nie op hierdie tablet gesteun nie"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Instelling word nie op hierdie toestel gesteun nie"</string>
@@ -4613,4 +4624,8 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Probleem met SIM-kombinasie"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Die gebruik van <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> kan funksionaliteit beperk. Tik om meer te wete te kom."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM-kombinasie"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>
