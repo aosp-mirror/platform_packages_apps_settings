@@ -123,10 +123,13 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
             return;
         }
 
+        // Add a shadow animation to action bar scroll only when the chart is available.
+        com.android.settings.Utils.setActionBarShadowAnimation(mParent.getActivity(),
+                mParent.getSettingsLifecycle(), mParent.getListView());
         // We don't hide chart when we have existing data.
         mBarChartPreference.updateLoadingState(mOldUsageInfos.isEmpty() /* isLoading */);
         // But we still need to hint user with progress bar that we are updating new usage data.
-        mParent.setLoadingEnabled(true /* enabled */);
+        mParent.showPinnedHeader(true);
         retrievePermissionUsageData();
     }
 
@@ -162,7 +165,7 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
         }
 
         mBarChartPreference.updateLoadingState(false /* isLoading */);
-        mParent.setLoadingEnabled(false /* enabled */);
+        mParent.showPinnedHeader(false);
     }
 
     private void retrievePermissionUsageData() {
