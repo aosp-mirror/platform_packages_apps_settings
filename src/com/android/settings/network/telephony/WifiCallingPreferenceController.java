@@ -61,16 +61,12 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     PhoneAccountHandle mSimCallManager;
     private PhoneCallStateListener mPhoneStateListener;
     private Preference mPreference;
-    private boolean mEditableWfcRoamingMode;
-    private boolean mUseWfcHomeModeForRoaming;
 
     public WifiCallingPreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
-        mEditableWfcRoamingMode = true;
-        mUseWfcHomeModeForRoaming = false;
     }
 
     @Override
@@ -129,9 +125,18 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
             preference.setTitle(title);
             int resId = com.android.internal.R.string.wifi_calling_off_summary;
             if (mImsManager.isWfcEnabledByUser()) {
-                boolean wfcRoamingEnabled = mEditableWfcRoamingMode && !mUseWfcHomeModeForRoaming;
+                boolean useWfcHomeModeForRoaming = false;
+                if (mCarrierConfigManager != null) {
+                    final PersistableBundle carrierConfig =
+                            mCarrierConfigManager.getConfigForSubId(mSubId);
+                    if (carrierConfig != null) {
+                        useWfcHomeModeForRoaming = carrierConfig.getBoolean(
+                                CarrierConfigManager
+                                        .KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL);
+                    }
+                }
                 final boolean isRoaming = mTelephonyManager.isNetworkRoaming();
-                int wfcMode = mImsManager.getWfcMode(isRoaming && wfcRoamingEnabled);
+                int wfcMode = mImsManager.getWfcMode(isRoaming && !useWfcHomeModeForRoaming);
                 switch (wfcMode) {
                     case ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY:
                         resId = com.android.internal.R.string.wfc_mode_wifi_only_summary;
@@ -159,16 +164,6 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
         mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
         mSimCallManager = mContext.getSystemService(TelecomManager.class)
                 .getSimCallManagerForSubscription(mSubId);
-        if (mCarrierConfigManager != null) {
-            final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-            if (carrierConfig != null) {
-                mEditableWfcRoamingMode = carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
-                mUseWfcHomeModeForRoaming = carrierConfig.getBoolean(
-                        CarrierConfigManager
-                                .KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL);
-            }
-        }
     }
 
     private class PhoneCallStateListener extends PhoneStateListener {
