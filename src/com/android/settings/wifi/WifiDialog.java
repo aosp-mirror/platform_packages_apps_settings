@@ -114,31 +114,22 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
 
     @Override
     protected void onStart() {
+        final ImageButton ssidScannerButton = findViewById(R.id.ssid_scanner_button);
+        if (mHideSubmitButton) {
+            ssidScannerButton.setVisibility(View.GONE);
+            return;
+        }
+
         View.OnClickListener onClickScannerButtonListener = v -> {
             if (mListener == null) {
                 return;
             }
 
-            String ssid = null;
-            if (mAccessPoint == null) {
-                final TextView ssidEditText = findViewById(R.id.ssid);
-                ssid = ssidEditText.getText().toString();
-            } else {
-                ssid = mAccessPoint.getSsidStr();
-            }
+            final TextView ssidEditText = findViewById(R.id.ssid);
+            final String ssid = ssidEditText.getText().toString();
             mListener.onScan(/* WifiDialog */ this, ssid);
         };
-
-        final ImageButton ssidScannerButton = findViewById(R.id.ssid_scanner_button);
         ssidScannerButton.setOnClickListener(onClickScannerButtonListener);
-
-        final ImageButton passwordScannerButton = findViewById(R.id.password_scanner_button);
-        passwordScannerButton.setOnClickListener(onClickScannerButtonListener);
-
-        if (mHideSubmitButton) {
-            ssidScannerButton.setVisibility(View.GONE);
-            passwordScannerButton.setVisibility(View.GONE);
-        }
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
