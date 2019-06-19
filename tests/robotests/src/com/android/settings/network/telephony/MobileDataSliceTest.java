@@ -174,21 +174,7 @@ public class MobileDataSliceTest {
         doReturn(new ArrayList<>()).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
         final Slice mobileData = mMobileDataSlice.getSlice();
 
-        final SliceMetadata metadata = SliceMetadata.from(mContext, mobileData);
-        assertThat(metadata.getTitle())
-                .isEqualTo(mContext.getString(R.string.mobile_data_settings_title));
-
-        assertThat(metadata.getSubtitle())
-                .isEqualTo(mContext.getString(R.string.sim_cellular_data_unavailable));
-
-        final List<SliceAction> toggles = metadata.getToggles();
-        assertThat(toggles).hasSize(0);
-
-        final SliceAction primaryAction = metadata.getPrimaryAction();
-        final PendingIntent pendingIntent = primaryAction.getAction();
-        final Intent actionIntent = pendingIntent.getIntent();
-
-        assertThat(actionIntent).isNull();
+        assertThat(mobileData).isNull();
     }
 
     @Test
@@ -196,21 +182,7 @@ public class MobileDataSliceTest {
         doReturn(null).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
         final Slice mobileData = mMobileDataSlice.getSlice();
 
-        final SliceMetadata metadata = SliceMetadata.from(mContext, mobileData);
-        assertThat(metadata.getTitle())
-                .isEqualTo(mContext.getString(R.string.mobile_data_settings_title));
-
-        assertThat(metadata.getSubtitle())
-                .isEqualTo(mContext.getString(R.string.sim_cellular_data_unavailable));
-
-        final List<SliceAction> toggles = metadata.getToggles();
-        assertThat(toggles).hasSize(0);
-
-        final SliceAction primaryAction = metadata.getPrimaryAction();
-        final PendingIntent pendingIntent = primaryAction.getAction();
-        final Intent actionIntent = pendingIntent.getIntent();
-
-        assertThat(actionIntent).isNull();
+        assertThat(mobileData).isNull();
     }
 
     @Test
@@ -219,20 +191,6 @@ public class MobileDataSliceTest {
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
         final Slice mobileData = mMobileDataSlice.getSlice();
 
-        final SliceMetadata metadata = SliceMetadata.from(mContext, mobileData);
-        assertThat(metadata.getTitle())
-                .isEqualTo(mContext.getString(R.string.mobile_data_settings_title));
-
-        assertThat(metadata.getSubtitle())
-                .isEqualTo(mContext.getString(R.string.mobile_data_ap_mode_disabled));
-
-        final List<SliceAction> toggles = metadata.getToggles();
-        assertThat(toggles).hasSize(0);
-
-        final SliceAction primaryAction = metadata.getPrimaryAction();
-        final PendingIntent pendingIntent = primaryAction.getAction();
-        final Intent actionIntent = pendingIntent.getIntent();
-
-        assertThat(actionIntent).isNull();
+        assertThat(mobileData).isNull();
     }
 }
