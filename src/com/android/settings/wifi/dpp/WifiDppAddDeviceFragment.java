@@ -92,6 +92,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             activity.setResult(Activity.RESULT_OK);
             activity.finish();
         });
+        mRightButton.setVisibility(View.VISIBLE);
 
         if (!isConfigurationChange) {
             mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
