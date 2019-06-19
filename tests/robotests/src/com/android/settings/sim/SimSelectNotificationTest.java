@@ -49,6 +49,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -80,8 +81,10 @@ public class SimSelectNotificationTest {
     private PackageManager mPackageManager;
     @Mock
     private Resources mResources;
+    @Mock
+    private SubscriptionInfo mSubInfo;
 
-    private final String mFakeOperatorName = "fake_operator_name";
+    private final String mFakeDisplayName = "fake_display_name";
     private final CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
     private final CharSequence mFakeNotificationTitle = "fake_notification_title";
     private final String mFakeNotificationSummary = "fake_notification_Summary";
@@ -113,9 +116,10 @@ public class SimSelectNotificationTest {
                 .thenReturn(PackageManager.PERMISSION_GRANTED);
 
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
-        when(mTelephonyManager.getSimOperatorName()).thenReturn(mFakeOperatorName);
         when(mTelephonyManager.isDataEnabledForApn(TYPE_MMS)).thenReturn(false);
         when(mSubscriptionManager.isActiveSubId(mSubId)).thenReturn(true);
+        when(mSubscriptionManager.getActiveSubscriptionInfo(mSubId)).thenReturn(mSubInfo);
+        when(mSubInfo.getDisplayName()).thenReturn(mFakeDisplayName);
         when(mContext.getResources()).thenReturn(mResources);
 
         when(mResources.getText(R.string.enable_sending_mms_notification_title))
@@ -123,7 +127,7 @@ public class SimSelectNotificationTest {
         when(mResources.getText(R.string.enable_mms_notification_channel_title))
                 .thenReturn(mFakeNotificationChannelTitle);
         when(mResources.getString(R.string.enable_mms_notification_summary,
-                mFakeOperatorName)).thenReturn(mFakeNotificationSummary);
+                mFakeDisplayName)).thenReturn(mFakeNotificationSummary);
 
         when(mResources.getText(R.string.dual_cdma_sim_warning_notification_channel_title))
                 .thenReturn(mFakeDualCdmaWarningChannelTitle);

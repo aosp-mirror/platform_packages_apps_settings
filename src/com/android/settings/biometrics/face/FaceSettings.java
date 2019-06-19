@@ -229,6 +229,11 @@ public class FaceSettings extends DashboardFragment {
     }
 
     @Override
+    public int getHelpResource() {
+        return R.string.help_url_face;
+    }
+
+    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         if (!isAvailable(context)) {
             return null;

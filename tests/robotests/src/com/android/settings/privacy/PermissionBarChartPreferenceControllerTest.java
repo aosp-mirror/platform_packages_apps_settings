@@ -103,8 +103,7 @@ public class PermissionBarChartPreferenceControllerTest {
                 .create().start().get());
         mController.setFragment(mFragment);
         mPreference = spy(new BarChartPreference(context));
-        when(mScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn((BarChartPreference) mPreference);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
     @After
@@ -189,7 +188,8 @@ public class PermissionBarChartPreferenceControllerTest {
 
         mController.onStart();
 
-        verify(mFragment).setLoadingEnabled(true /* enabled */);
+        assertThat(mFragment.getActivity().getActionBar().getElevation()).isZero();
+        verify(mFragment).showPinnedHeader(true);
         verify(mPreference).updateLoadingState(true /* isLoading */);
     }
 
@@ -205,7 +205,8 @@ public class PermissionBarChartPreferenceControllerTest {
 
         mController.onStart();
 
-        verify(mFragment).setLoadingEnabled(true /* enabled */);
+        assertThat(mFragment.getActivity().getActionBar().getElevation()).isZero();
+        verify(mFragment).showPinnedHeader(true);
         verify(mPreference).updateLoadingState(false /* isLoading */);
     }
 
@@ -217,7 +218,8 @@ public class PermissionBarChartPreferenceControllerTest {
 
         mController.onStart();
 
-        verify(mFragment, never()).setLoadingEnabled(true /* enabled */);
+        assertThat(mFragment.getActivity().getActionBar().getElevation()).isNonZero();
+        verify(mFragment, never()).showPinnedHeader(true);
         verify(mPreference, never()).updateLoadingState(true /* isLoading */);
     }
 
@@ -231,7 +233,7 @@ public class PermissionBarChartPreferenceControllerTest {
 
         mController.onPermissionUsageResult(infos1);
 
-        verify(mFragment).setLoadingEnabled(false /* enabled */);
+        verify(mFragment).showPinnedHeader(false);
         verify(mPreference).updateLoadingState(false /* isLoading */);
     }
 
