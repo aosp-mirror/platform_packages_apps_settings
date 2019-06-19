@@ -388,8 +388,8 @@
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"기기가 암호화되지 않았습니다."</string>
     <string name="lockscreen_settings_title" msgid="1099738951060387656">"잠금 화면 표시"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"표시 내용"</string>
-    <string name="security_settings_summary" msgid="967393342537986570">"내 위치, 화면 잠금해제, SIM 카드 잠금, 자격증명 저장소 잠금 설정"</string>
-    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"내 위치, 화면 잠금해제, 자격증명 저장소 잠금 설정"</string>
+    <string name="security_settings_summary" msgid="967393342537986570">"내 위치, 화면 잠금해제, SIM 카드 잠금, 사용자 인증 정보 저장소 잠금 설정"</string>
+    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"내 위치, 화면 잠금해제, 사용자 인증 정보 저장소 잠금 설정"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"개인정보 보호"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"관리자가 사용 중지함"</string>
     <string name="security_status_title" msgid="5848766673665944640">"보안 상태"</string>
@@ -399,6 +399,8 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"얼굴 추가 완료"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"얼굴인식 잠금해제 설정"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"얼굴인식 잠금해제"</string>
+    <!-- no translation found for security_settings_face_profile_preference_title (3906383224724942953) -->
+    <skip />
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"얼굴인식 잠금해제 설정 방법"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"얼굴인식 잠금해제 설정"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"얼굴로 인증"</string>
@@ -600,7 +602,7 @@
     <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"얼굴인식 잠금해제 + 비밀번호"</string>
     <string name="face_unlock_skip_face" msgid="3481956557015165094">"얼굴인식 잠금해제 없이 계속하기"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"얼굴을 사용하여 휴대전화를 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"관리자, 암호화 정책 또는 자격증명 저장소에 의해 사용 중지됨"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"관리자, 암호화 정책 또는 사용자 인증 정보 저장소에 의해 사용 중지됨"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"없음"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"스와이프"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"패턴"</string>
@@ -1222,6 +1224,8 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"화면 시선 감지"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"사용/화면을 보고 있으면 꺼지지 않음"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"사용 안함"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"카메라 액세스 권한 필요"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"기기 맞춤설정 서비스의 권한을 관리하려면 탭하세요."</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"화면을 보고 있으면 꺼지지 않습니다."</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"화면 시선 감지는 전면 카메라를 사용하여 화면을 보고 있는 사용자가 있는지 확인하는 기능입니다. 이 기능은 기기에서 작동하며 이미지는 Google에 전송되거나 저장되지 않습니다."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"화면을 보고 있으면 화면을 켜진 상태로 유지합니다."</string>
@@ -1336,7 +1340,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"기저대역 버전"</string>
     <string name="kernel_version" msgid="9192574954196167602">"커널 버전"</string>
     <string name="build_number" msgid="3075795840572241758">"빌드 번호"</string>
-    <string name="module_version" msgid="4826567303427436423">"간선 모듈 버전"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play 시스템 업데이트"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"표시할 수 없음"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"상태"</string>
     <string name="device_status" msgid="607405385799807324">"상태"</string>
@@ -1712,6 +1716,8 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"안전 및 규제 설명서"</string>
     <string name="copyright_title" msgid="865906688917260647">"저작권"</string>
     <string name="license_title" msgid="1990487604356037871">"라이선스"</string>
+    <!-- no translation found for module_license_title (258743239066841860) -->
+    <skip />
     <string name="terms_title" msgid="7697580845616764642">"약관"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"시스템 WebView 라이선스"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"배경화면"</string>
@@ -2207,7 +2213,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"청록색"</string>
     <string name="color_yellow" msgid="9112680561610873529">"노란색"</string>
     <string name="color_magenta" msgid="5059212823607815549">"자홍색"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"<xliff:g id="SERVICE">%1$s</xliff:g>에서 기기를 완전히 제어하도록 허용하시겠습니까?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"<xliff:g id="SERVICE">%1$s</xliff:g>에서 기기를 완전히 제어하도록 허용하시겠습니까?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>에 필요한 기능:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"권한 요청을 보이지 않게 하는 앱이 있어서 설정에서 내 응답을 확인할 수 없습니다."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용 설정하면 기기에서 데이터 암호화를 개선하기 위해 화면 잠금을 사용하지 않습니다."</string>
@@ -2219,7 +2225,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"접근성 관련 지원을 제공하는 앱에는 완벽한 제어권을 부여하는 것이 좋으나, 대부분의 앱에는 적합하지 않습니다."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"화면 확인 및 제어"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"화면에 표시된 모든 콘텐츠를 읽고 다른 앱 위에 콘텐츠를 표시할 수 있습니다."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"작업 확인 및 플랫폼 작업"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"작업 확인 및 실행"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"앱 또는 하드웨어 센서와의 상호작용을 추적할 수 있으며 나를 대신해 앱과 상호작용할 수 있습니다."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"허용"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"거부"</string>
@@ -2562,7 +2568,7 @@
     <string name="tts_reset" msgid="2661752909256313270">"재설정"</string>
     <string name="tts_play" msgid="2628469503798633884">"재생"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
-    <string name="credentials_title" msgid="4446234003860769883">"자격증명 저장소"</string>
+    <string name="credentials_title" msgid="4446234003860769883">"사용자 인증 정보 저장소"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"저장소에서 설치"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"SD 카드에서 설치"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"저장소에서 인증서 설치"</string>
@@ -2581,8 +2587,8 @@
     <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"VPN 및 앱에 사용하도록 설치됨"</string>
     <string name="credential_for_wifi" msgid="6228425986551591864">"Wi-Fi에 사용하도록 설치됨"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"콘텐츠를 모두 삭제하시겠습니까?"</string>
-    <string name="credentials_erased" msgid="2907836028586342969">"자격증명 저장소가 삭제되었습니다."</string>
-    <string name="credentials_not_erased" msgid="7685932772284216097">"자격증명 저장소를 삭제하지 못했습니다."</string>
+    <string name="credentials_erased" msgid="2907836028586342969">"사용자 인증 정보 저장소가 삭제되었습니다."</string>
+    <string name="credentials_not_erased" msgid="7685932772284216097">"사용자 인증 정보 저장소를 삭제하지 못했습니다."</string>
     <string name="usage_access_title" msgid="332333405495457839">"사용 액세스 권한을 보유한 앱"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"응급 상황 다이얼링 신호"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"긴급 통화 중 동작 설정"</string>
@@ -2615,8 +2621,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"직장"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"SMS 및 통화 기록 액세스 제한"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"기본 전화 및 메시지 앱에만 SMS 및 통화 기록 권한 부여"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"기기 식별자 제한 사용 중지"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"기기 식별자에 관한 새로운 액세스 제한 사용 중지"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"사용 가능한 Trust Agent 없음"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"기기 관리자 앱을 활성화하시겠습니까?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"이 기기 관리자 앱 활성화"</string>
@@ -3090,7 +3094,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"블루투스, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"블루투스"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"앱 및 알림"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"어시스턴트, 최근 앱, 기본 앱"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"알림 액세스는 직장 프로필에 있는 앱에서 사용할 수 없습니다."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"계정"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"추가된 계정 없음"</string>
@@ -4195,20 +4200,25 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"셀카 더 빨리 찍기"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"시스템 탐색"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"2버튼 탐색"</string>
-    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
-    <skip />
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"앱을 전환하려면 홈 버튼에서 위로 스와이프합니다. 모든 앱을 보려면 다시 위로 스와이프합니다. 뒤로 돌아가려면 뒤로 버튼을 탭합니다."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"새로운 홈 버튼 사용해 보기"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"앱을 전환하는 새로운 동작을 사용 설정합니다."</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"동작 탐색"</string>
-    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
-    <skip />
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"홈으로 이동하려면 화면 하단에서 위로 스와이프합니다. 앱을 전환하려면 아래에서 위로 스와이프하고 잠시 기다린 다음 손가락을 뗍니다. 뒤로 돌아가려면 왼쪽 또는 오른쪽 가장자리에서 스와이프합니다."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3버튼 탐색"</string>
-    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
-    <skip />
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"화면 하단의 버튼을 사용하여 뒤로 돌아가고 홈으로 이동하거나 앱을 전환합니다."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"시스템 탐색, 2버튼 탐색, 3버튼 탐색, 동작 탐색"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"기본 홈 앱(<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>)에서 지원하지 않는 기능입니다."</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"기본 홈 앱 전환"</string>
     <string name="information_label" msgid="8133109685432913360">"정보"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"두 번 탭하여 휴대전화 확인"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"두 번 탭하여 태블릿 확인"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"두 번 탭하여 기기 확인"</string>
@@ -4380,10 +4390,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"그래픽 드라이버 선택"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"기본값"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"게임 드라이버"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"출시 전 드라이버"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"시스템 그래픽 드라이버"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"휴대전화에서 지원되지 않는 설정"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"태블릿에서 지원되지 않는 설정"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"기기에서 지원되지 않는 설정"</string>
@@ -4618,4 +4633,8 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"SIM 조합 문제"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> 사용 시 기능이 제한될 수 있습니다. 자세한 내용을 보려면 탭하세요."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM 조합"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>

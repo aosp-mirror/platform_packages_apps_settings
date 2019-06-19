@@ -399,6 +399,8 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Yüz eklendi"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Yüz tanıma kilidini kurun"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Yüz tanıma kilidi"</string>
+    <!-- no translation found for security_settings_face_profile_preference_title (3906383224724942953) -->
+    <skip />
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Yüz tanıma kilidini ayarlama"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Yüz tanıma kilidi ayarla"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Kimlik doğrulama için yüzünüzü kullanın"</string>
@@ -1222,6 +1224,8 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Ekran kullanımı"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Açık / Bakıyorsanız ekran kapanmaz"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Kapat"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kamera erişimi gerekiyor"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Cihaz Kişiselleştirme Hizmetleri için izinleri yönetmek üzere dokunun"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Baktığınız sürece ekranın kapanmasını engeller"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ekran kullanımı seçeneğinde, ekrana bakan birisi olup olmadığını görmek için ön kamera kullanılır. Tüm işlemler cihazda gerçekleşir ve resimler hiçbir zaman saklanmaz ya da Google\'a gönderilmez."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Telefona baktığınız sürece ekran açık kalır"</string>
@@ -1336,7 +1340,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Ana bant sürümü"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Çekirdek sürümü"</string>
     <string name="build_number" msgid="3075795840572241758">"Derleme numarası"</string>
-    <string name="module_version" msgid="4826567303427436423">"Ana hat modül sürümleri"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play sistem güncellemesi"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Yok"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Durum"</string>
     <string name="device_status" msgid="607405385799807324">"Durum"</string>
@@ -1712,6 +1716,8 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Güvenlik ve mevzuat kılavuzu"</string>
     <string name="copyright_title" msgid="865906688917260647">"Telif Hakkı"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisans"</string>
+    <!-- no translation found for module_license_title (258743239066841860) -->
+    <skip />
     <string name="terms_title" msgid="7697580845616764642">"Şartlar ve koşullar"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Sistem Web Görünümü Lisansı"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Duvar kağıtları"</string>
@@ -2207,7 +2213,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Camgöbeği"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Sarı"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Macenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"Cihazınızın <xliff:g id="SERVICE">%1$s</xliff:g> tarafından tam kontrolüne izin veriyor musunuz?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"<xliff:g id="SERVICE">%1$s</xliff:g> hizmetinin cihazınızı tamamen kontrol etmesine izin veriyor musunuz?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> şunları gerektiriyor:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Bir uygulama bir izin isteğinin anlaşılmasını engellediğinden, Ayarlar, yanıtınızı doğrulayamıyor."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> hizmetini açarsanız cihazınız veri şifrelemeyi geliştirmek için ekran kilidinizi kullanmaz."</string>
@@ -2219,7 +2225,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Erişebilirlik ihtiyaçlarınıza yardımcı olan uygulamalara tam kontrol verilmesi uygundur ancak diğer pek çok uygulama için uygun değildir."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Ekranı görüntüleme ve kontrol etme"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Ekrandaki tüm içeriği okuyabilir ve içeriği diğer uygulamaların üzerinde gösterebilir"</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"İşlemleri görüntüleme ve gerçekleştirme"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"İşlemleri görüntüleyin ve gerçekleştirin"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Bir uygulama veya donanım sensörüyle etkileşimlerinizi takip edebilir ve sizin adınıza uygulamalarla etkileşimde bulunabilir."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"İzin ver"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Reddet"</string>
@@ -2615,8 +2621,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"İş"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"SMS ve çağrı günlüğüne erişimi kısıtla"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Yalnızca varsayılan telefon ve mesajlaşma uygulamalarının SMS ve çağrı günlüğüne erişim izinleri vardır"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Cihaz tanımlayıcı kısıtlamalarını devre dışı bırak"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Cihaz tanımlayıcılar için yeni erişim kısıtlamalarını devre dışı bırak"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Kullanılabilir güven aracısı yok"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Cihaz yönetimi uygulaması etkinleştirilsin mi?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Bu cihaz yönetimi uygulamasını etkinleştir"</string>
@@ -3090,7 +3094,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Uygulama ve bildirimler"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Asistan, son uygulamalar, varsayılan uygulamalar"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"İş profilindeki uygulamalar için bildirim erişimi kullanılamaz."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Hesaplar"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Hiçbir hesap eklenmedi"</string>
@@ -4195,20 +4200,25 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Selfie\'leri daha hızlı çekin"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Sistemde gezinme"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"2 düğmeli gezinme"</string>
-    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
-    <skip />
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Uygulamalar arasında geçiş yapmak için Ana sayfa düğmesinde parmağınızı yukarı doğru kaydırın. Tüm uygulamaları görmek için parmağınızı tekrar yukarı doğru kaydırın. Geri gitmek için geri düğmesine dokunun."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Yeni Ana Sayfa düğmesini deneyin"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Uygulamalar arasında geçiş yapmak için yeni hareketi açın"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Hareketle gezinme"</string>
-    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
-    <skip />
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Ana sayfaya gitmek için ekranın altından yukarı kaydırın. Uygulamalar arasında geçiş yapmak için ekranın altından yukarı kaydırın, tutun ve sonra bırakın. Geri gitmek için ekranın sol veya sağ kenarından kaydırın."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3 düğmeli gezinme"</string>
-    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
-    <skip />
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Geri gitme, Ana sayfaya gitme ve uygulamalar arasında geçiş yapma işlemleri için ekranınızın altındaki simgeleri kullanın."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"sistemde gezinme, 2 düğmeli gezinme, 3 düğmeli gezinme, hareketle gezinme"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Varsayılan Home uygulamanız (<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>) tarafından desteklenmiyor"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Varsayılan Home uygulamasını değiştir"</string>
     <string name="information_label" msgid="8133109685432913360">"Bilgi"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Bakmak için telefona iki kez dokun"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tableti kontrol etmek için iki kez dokunun"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Cihazı kontrol etmek için iki kez dokunun"</string>
@@ -4380,10 +4390,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Grafik Sürücüsünü Seçin"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Varsayılan"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Oyun Sürücüsü"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Yayın Öncesi Sürücü"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Sistem Grafik Sürücüsü"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Ayar bu telefonda desteklenmiyor"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Ayar bu tablette desteklenmiyor"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Ayar bu cihazda desteklenmiyor"</string>
@@ -4618,4 +4633,8 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"SIM kombinasyonuyla ilgili sorun"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> kullanımı işlevleri etkileyebilir. Daha fazla bilgi için dokunun."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM kombinasyonu"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>

@@ -350,10 +350,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"按世界協調時間 (UTC) 偏移量選取"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"螢幕自動關閉後鎖定"</string>
-    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"螢幕自動關閉 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"螢幕自動關閉後立即鎖定 (除非<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>讓螢幕保持解鎖狀態)"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"螢幕自動關閉 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後 (除非<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>讓螢幕保持解鎖狀態)"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"在螢幕逾時後上鎖"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"逾時 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"在逾時後立即上鎖 (由<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>保持解鎖狀態時除外)"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"在逾時 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後上鎖 (由<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>保持解鎖狀態時除外)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在鎖定畫面上顯示擁有者資訊"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"上鎖畫面訊息"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"啟用小工具"</string>
@@ -399,6 +399,8 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"已加入臉孔"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"設定「臉容解鎖」"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"臉容解鎖"</string>
+    <!-- no translation found for security_settings_face_profile_preference_title (3906383224724942953) -->
+    <skip />
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"如何設定「臉容解鎖」"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"設定「臉容解鎖」"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"使用臉孔驗證"</string>
@@ -1222,9 +1224,11 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"螢幕意識"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"啟用 / 假如正您望向螢幕，螢幕將不會關閉"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"關閉"</string>
-    <string name="adaptive_sleep_description" msgid="3741651460279997459">"避免螢幕在你注視時關閉"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"需要獲取相機權限"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"輕按以管理「裝置個人化服務」的權限"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"防止螢幕在您望著時關閉"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"「螢幕意識」利用前置鏡頭偵測使用者是否正望向螢幕。此功能只在裝置上使用，同時圖片不會被儲存或傳送至 Google。"</string>
-    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"看著螢幕時讓螢幕保持開啟"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"望著螢幕時保持螢幕開啟"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜燈模式"</string>
     <string name="night_display_text" msgid="1837277457033025056">"「夜燈模式」會將螢幕調校至橙黃色，在光線昏暗的環境下看螢幕或閱讀時就更舒適，並讓您更易入睡。"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"設定時間"</string>
@@ -1336,7 +1340,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"基帶版本"</string>
     <string name="kernel_version" msgid="9192574954196167602">"核心版本"</string>
     <string name="build_number" msgid="3075795840572241758">"版本號碼"</string>
-    <string name="module_version" msgid="4826567303427436423">"主流模組版本"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play 系統更新"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"無法使用"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"狀態"</string>
     <string name="device_status" msgid="607405385799807324">"狀態"</string>
@@ -1713,6 +1717,8 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"安全及監管手冊"</string>
     <string name="copyright_title" msgid="865906688917260647">"版權"</string>
     <string name="license_title" msgid="1990487604356037871">"授權"</string>
+    <!-- no translation found for module_license_title (258743239066841860) -->
+    <skip />
     <string name="terms_title" msgid="7697580845616764642">"條款及細則"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"System WebView License"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"桌布"</string>
@@ -2208,7 +2214,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"洋青色"</string>
     <string name="color_yellow" msgid="9112680561610873529">"黃色"</string>
     <string name="color_magenta" msgid="5059212823607815549">"洋紅色"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"要允許 <xliff:g id="SERVICE">%1$s</xliff:g> 完全控制您的裝置嗎？"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"要允許 <xliff:g id="SERVICE">%1$s</xliff:g> 完全控制您的裝置嗎？"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"「<xliff:g id="SERVICE">%1$s</xliff:g>」需要："</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"由於有應用程式阻礙權限請求，「設定」無法驗證您的回覆。"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您開啟<xliff:g id="SERVICE">%1$s</xliff:g>，您的裝置將不能透過螢幕鎖定加強資料加密。"</string>
@@ -2220,7 +2226,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"為您提供所需無障礙功能的應用程式有權完全控制您的裝置，但大部分應用程式均沒有此權限。"</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"查看和控制螢幕"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"這項功能可以讀出螢幕上的所有內容，並透過其他應用程式顯示內容。"</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"查看並執行動作"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"查看和執行動作"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"這項功能會追蹤您與應用程式或硬件感應器的互動，並代表您直接與應用程式互動。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"允許"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"拒絕"</string>
@@ -2616,8 +2622,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"公司"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"限制存取短訊和通話記錄"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"只有預設手機和短訊應用程式能夠存取短訊和通話記錄"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"停用裝置識別碼限制"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"停用裝置識別碼的新存取權限制"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"沒有信任的代理程式可供使用"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"要啟動裝置管理應用程式嗎？"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"啟動此裝置管理應用程式"</string>
@@ -3091,7 +3095,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"藍牙、NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"藍牙"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"應用程式和通知"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Google 助理、最近使用的應用程式、預設應用程式"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"工作設定檔中的應用程式無法存取通知設定。"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"帳戶"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"未新增任何帳戶"</string>
@@ -4196,20 +4201,25 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"自拍更快速"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"系統導覽"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"雙按鈕導覽"</string>
-    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
-    <skip />
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"如要切換應用程式，請從主按鈕向上滑動。如要查看所有應用程式，請再次向上滑動。如要返回，請輕按 [返回] 按鈕。"</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"試按新版主按鈕"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"啟用新手勢即可切換應用程式"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"手勢導覽"</string>
-    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
-    <skip />
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"如要前往主畫面，請從螢幕底部向上滑動。如要切換應用程式，請從螢幕底部向上滑動並按住，然後放手。如要返回，請從左側或右側邊緣滑動。"</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3 按鈕導覽"</string>
-    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
-    <skip />
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"使用畫面底部的按鈕返回上一個畫面、前往主畫面和切換應用程式。"</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"系統導覽, 雙按鈕導覽, 3 按鈕導覽, 手勢導覽"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"您的預設主畫面應用程式「<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>」不支援此功能"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"切換預設主畫面應用程式"</string>
     <string name="information_label" msgid="8133109685432913360">"資料"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"輕按兩下以查看手機"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"輕按兩下即可查看平板電腦"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"輕按兩下即可查看裝置"</string>
@@ -4381,10 +4391,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"選取顯示卡驅動程式"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"預設"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"遊戲驅動程式"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"預先發佈版驅動程式"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"系統顯示卡驅動程式"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"此手機不支援這項設定"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"此平板電腦不支援這項設定"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"此裝置不支援這項設定"</string>
@@ -4501,8 +4516,8 @@
     <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"儲存"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"使用 SIM 卡"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"關"</string>
-    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"如要停用這張 SIM 卡，請將其移除"</string>
-    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"輕觸即可啟用「<xliff:g id="CARRIER">%1$s</xliff:g>」"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"如要停用此 SIM 卡，請將其移除"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"輕按即可啟用<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"要切換至<xliff:g id="CARRIER">%1$s</xliff:g>？"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"每次只可啟用一張已下載的 SIM 卡。\n\n切換至<xliff:g id="CARRIER1">%1$s</xliff:g>將不會取消您的<xliff:g id="CARRIER2">%2$s</xliff:g>服務。"</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"切換至<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4619,4 +4634,8 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"SIM 卡組合問題"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"使用<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g>可能會使某些功能受限。輕按即可瞭解詳情。"</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM 卡組合"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>
