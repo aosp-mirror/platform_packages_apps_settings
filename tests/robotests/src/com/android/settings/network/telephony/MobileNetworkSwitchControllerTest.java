@@ -109,7 +109,7 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     public void displayPreference_oneEnabledSubscription_switchBarNotHidden() {
-        doReturn(true).when(mSubscriptionManager).isSubscriptionEnabled(mSubId);
+        doReturn(true).when(mSubscriptionManager).isActiveSubId(mSubId);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubscription));
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
@@ -117,7 +117,7 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     public void displayPreference_oneDisabledSubscription_switchBarNotHidden() {
-        doReturn(false).when(mSubscriptionManager).isSubscriptionEnabled(mSubId);
+        doReturn(false).when(mSubscriptionManager).isActiveSubId(mSubId);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubscription));
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
@@ -125,7 +125,7 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     public void displayPreference_subscriptionEnabled_switchIsOn() {
-        when(mSubscriptionManager.isSubscriptionEnabled(mSubId)).thenReturn(true);
+        when(mSubscriptionManager.isActiveSubId(mSubId)).thenReturn(true);
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isTrue();
@@ -133,7 +133,7 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     public void displayPreference_subscriptionDisabled_switchIsOff() {
-        when(mSubscriptionManager.isSubscriptionEnabled(mSubId)).thenReturn(false);
+        when(mSubscriptionManager.isActiveSubId(mSubId)).thenReturn(false);
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isFalse();
@@ -141,7 +141,7 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     public void switchChangeListener_fromEnabledToDisabled_setSubscriptionEnabledCalledCorrectly() {
-        when(mSubscriptionManager.isSubscriptionEnabled(mSubId)).thenReturn(true);
+        when(mSubscriptionManager.isActiveSubId(mSubId)).thenReturn(true);
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isTrue();
@@ -153,7 +153,7 @@ public class MobileNetworkSwitchControllerTest {
     public void switchChangeListener_fromEnabledToDisabled_setSubscriptionEnabledFailed() {
         when(mSubscriptionManager.setSubscriptionEnabled(eq(mSubId), anyBoolean()))
                 .thenReturn(false);
-        when(mSubscriptionManager.isSubscriptionEnabled(mSubId)).thenReturn(true);
+        when(mSubscriptionManager.isActiveSubId(mSubId)).thenReturn(true);
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isTrue();
@@ -164,7 +164,7 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     public void switchChangeListener_fromDisabledToEnabled_setSubscriptionEnabledCalledCorrectly() {
-        when(mSubscriptionManager.isSubscriptionEnabled(mSubId)).thenReturn(false);
+        when(mSubscriptionManager.isActiveSubId(mSubId)).thenReturn(false);
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isFalse();
