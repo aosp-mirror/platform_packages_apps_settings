@@ -78,16 +78,14 @@ public class MobileDataSlice implements CustomSliceable {
         final String title = mContext.getText(R.string.mobile_data_settings_title).toString();
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
 
-        // Return a Slice without the mobile data toggle when airplane mode is on.
+        // Return null until we can show a disabled-action Slice, blaming Airplane mode.
         if (isAirplaneModeEnabled()) {
-            return buildUnavailableMobileDataSlice(title,
-                    mContext.getText(R.string.mobile_data_ap_mode_disabled), icon, color);
+            return null;
         }
 
-        // Return a Slice without the mobile data toggle when mobile data disabled.
+        // Return null until we can show a disabled-action Slice.
         if (!isMobileDataAvailable()) {
-            return buildUnavailableMobileDataSlice(title,
-                    mContext.getText(R.string.sim_cellular_data_unavailable), icon, color);
+            return null;
         }
 
         final CharSequence summary = getSummary();
@@ -199,22 +197,6 @@ public class MobileDataSlice implements CustomSliceable {
         }
 
         return mTelephonyManager.isDataEnabled();
-    }
-
-    private Slice buildUnavailableMobileDataSlice(String title, CharSequence summary,
-            IconCompat icon, int color) {
-        final PendingIntent intent = PendingIntent.getActivity(mContext, 0 /* requestCode */,
-                new Intent(), 0 /* flags */);
-        final SliceAction deadAction =
-                SliceAction.create(intent, icon, ListBuilder.ICON_IMAGE, title);
-        final ListBuilder listBuilder = new ListBuilder(mContext, getUri(),
-                ListBuilder.INFINITY)
-                .setAccentColor(color)
-                .addRow(new ListBuilder.RowBuilder()
-                        .setTitle(title)
-                        .setSubtitle(summary)
-                        .setPrimaryAction(deadAction));
-        return listBuilder.build();
     }
 
     /**

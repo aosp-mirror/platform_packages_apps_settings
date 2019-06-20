@@ -433,24 +433,14 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         try {
             mWifiQrCode = new WifiQrCode(qrCode);
         } catch (IllegalArgumentException e) {
-            showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
+            showErrorMessage(R.string.wifi_dpp_qr_code_is_not_valid_format);
             return false;
         }
 
-        final String scheme = mWifiQrCode.getScheme();
-
-        // When SSID is specified for enrollee, avoid to connect to the Wi-Fi of different SSID
-        if (!mIsConfiguratorMode && WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG.equals(scheme)) {
-            final String ssidQrCode = mWifiQrCode.getWifiNetworkConfig().getSsid();
-            if (!TextUtils.isEmpty(mSsid) && !mSsid.equals(ssidQrCode)) {
-                showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
-                return false;
-            }
-        }
-
         // It's impossible to provision other device with ZXing Wi-Fi Network config format
+        final String scheme = mWifiQrCode.getScheme();
         if (mIsConfiguratorMode && WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG.equals(scheme)) {
-            showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
+            showErrorMessage(R.string.wifi_dpp_qr_code_is_not_valid_format);
             return false;
         }
 
@@ -574,7 +564,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             int errorMessageResId = 0;
             switch (code) {
                 case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_URI:
-                    errorMessageResId = R.string.wifi_dpp_could_not_detect_valid_qr_code;
+                    errorMessageResId = R.string.wifi_dpp_qr_code_is_not_valid_format;
                     break;
 
                 case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_AUTHENTICATION:

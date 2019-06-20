@@ -69,32 +69,32 @@ public class DisabledSubscriptionControllerTest {
 
     @Test
     public void displayPreference_subscriptionEnabled_categoryIsVisible() {
-        doReturn(true).when(mSubscriptionManager).isSubscriptionEnabled(SUB_ID);
+        doReturn(true).when(mSubscriptionManager).isActiveSubId(SUB_ID);
         mController.displayPreference(mScreen);
         assertThat(mCategory.isVisible()).isTrue();
     }
 
     @Test
     public void displayPreference_subscriptionDisabled_categoryIsNotVisible() {
-        doReturn(false).when(mSubscriptionManager).isSubscriptionEnabled(SUB_ID);
+        doReturn(false).when(mSubscriptionManager).isActiveSubId(SUB_ID);
         mController.displayPreference(mScreen);
         assertThat(mCategory.isVisible()).isFalse();
     }
 
     @Test
     public void onSubscriptionsChanged_subscriptionBecomesDisabled_categoryIsNotVisible() {
-        doReturn(true).when(mSubscriptionManager).isSubscriptionEnabled(SUB_ID);
+        doReturn(true).when(mSubscriptionManager).isActiveSubId(SUB_ID);
         mController.displayPreference(mScreen);
-        doReturn(false).when(mSubscriptionManager).isSubscriptionEnabled(SUB_ID);
+        doReturn(false).when(mSubscriptionManager).isActiveSubId(SUB_ID);
         mController.onSubscriptionsChanged();
         assertThat(mCategory.isVisible()).isFalse();
     }
 
     @Test
     public void onSubscriptionsChanged_subscriptionBecomesEnabled_categoryIsVisible() {
-        doReturn(false).when(mSubscriptionManager).isSubscriptionEnabled(SUB_ID);
+        doReturn(false).when(mSubscriptionManager).isActiveSubId(SUB_ID);
         mController.displayPreference(mScreen);
-        doReturn(true).when(mSubscriptionManager).isSubscriptionEnabled(SUB_ID);
+        doReturn(true).when(mSubscriptionManager).isActiveSubId(SUB_ID);
         mController.onSubscriptionsChanged();
         assertThat(mCategory.isVisible()).isTrue();
     }

@@ -92,6 +92,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             activity.setResult(Activity.RESULT_OK);
             activity.finish();
         });
+        mRightButton.setVisibility(View.VISIBLE);
 
         if (!isConfigurationChange) {
             mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
@@ -101,7 +102,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private void showErrorUi(int code, boolean isConfigurationChange) {
         switch (code) {
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_URI:
-                mSummary.setText(R.string.wifi_dpp_could_not_detect_valid_qr_code);
+                mSummary.setText(R.string.wifi_dpp_qr_code_is_not_valid_format);
                 break;
 
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_AUTHENTICATION:
