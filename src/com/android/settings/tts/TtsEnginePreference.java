@@ -30,6 +30,8 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
+import androidx.annotation.VisibleForTesting;
+
 
 public class TtsEnginePreference extends Preference {
 
@@ -45,6 +47,7 @@ public class TtsEnginePreference extends Preference {
      * The shared radio button state, which button is checked etc.
      */
     private final RadioButtonGroupState mSharedState;
+    private RadioButton mRadioButton;
 
     /**
      * When true, the change callbacks on the radio button will not
@@ -95,6 +98,12 @@ public class TtsEnginePreference extends Preference {
         mPreventRadioButtonCallbacks = true;
         rb.setChecked(isChecked);
         mPreventRadioButtonCallbacks = false;
+        mRadioButton = rb;
+    }
+
+    @Override
+    public void onClick() {
+        mRadioButton.setChecked(true);
     }
 
     private boolean shouldDisplayDataAlert() {
