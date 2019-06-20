@@ -26,6 +26,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.telephony.SubscriptionManager;
@@ -75,6 +76,22 @@ public class SimListDialogFragmentTest extends SimDialogFragmentTestBase<SimList
 
         mFragment.onClick(alertDialog, 1);
         verify(activity).onSubscriptionSelected(dialogType, SIM2_ID);
+    }
+
+    @Test
+    public void onSubscriptionsChanged_dialogUpdates() {
+        final int dialogType = DATA_PICK;
+        setDialogType(dialogType);
+        mFragment = spy(SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_data,
+                false /* includeAskEveryTime */));
+        doReturn(Arrays.asList(mSim1, mSim2)).when(mFragment).getCurrentSubscriptions();
+        // Avoid problems robolectric has with our real adapter.
+        doNothing().when(mFragment).setAdapter(any());
+        startDialog();
+        verify(mFragment).updateDialog();
+
+        mFragment.onSubscriptionsChanged();
+        verify(mFragment, times(2)).updateDialog();
     }
 
     @Test
