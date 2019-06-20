@@ -399,6 +399,7 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Yuz kiritildi"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Yuz bilan ochish funksiyasini sozlash"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Yuz bilan ochish"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Ish uchun yuz bilan ochish"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Yuz bilan ochish qanday sozlanadi"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Yuz bilan ochish funksiyasini sozlash"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Qurilma qulfini yuzingiz bilan oching"</string>
@@ -1222,9 +1223,11 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Moslashuvchan kutish rejimi"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Yoniq / Ekranga qarab turganingizda u yoniq holatda qoladi"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Yoqilmagan"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kameraga ruxsat kerak"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Qurilmaning personalizatsiya xizmatlari ruxsatlarini boshqarish uchun bosing"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Ekranga qarab turganingizda u yoniq holatda qoladi"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Moslashuvchan kutish rejimi kimdir old kameraga qaraganini aniqlashda ishlatiladi U faqat qurilmada ishlatiladi va rasmlar hech qachon Google serverlariga yuborilmaydi."</string>
-    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ekranga qaralganda u yoniq boʻlishi kerak"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ekranga qarab turilganda, u yoniq turadi"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Tungi rejim"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Tungi rejimda ekraningiz xira sariq tusga kiradi. Bu ekranga kunning xira qismida qarashni osonlashtiradi va osonroq uyquga ketishga yordamlashadi."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Jadval"</string>
@@ -1336,7 +1339,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Aloqa moduli versiyasi"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Yadro versiyasi"</string>
     <string name="build_number" msgid="3075795840572241758">"Nashr raqami"</string>
-    <string name="module_version" msgid="4826567303427436423">"Asosiy modul versiyasi"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play tizim yangilanishi"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Mavjud emas"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Holat"</string>
     <string name="device_status" msgid="607405385799807324">"Holat"</string>
@@ -1712,6 +1715,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Xavfsizlik va sertifikat qo‘llanmasi"</string>
     <string name="copyright_title" msgid="865906688917260647">"Mualliflik huquqi"</string>
     <string name="license_title" msgid="1990487604356037871">"Litsenziya"</string>
+    <string name="module_license_title" msgid="258743239066841860">"Google Play tizim yangilanishi litsenziyalari"</string>
     <string name="terms_title" msgid="7697580845616764642">"Foydalanish shartlari"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"WebView tizim litsenziyasi"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Fon rasmlari"</string>
@@ -2207,7 +2211,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Moviy"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Sariq"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Pushtirang"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"<xliff:g id="SERVICE">%1$s</xliff:g> xizmatiga qurilmangizning toʻliq boshqaruvi ruxsati berilsinmi?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"<xliff:g id="SERVICE">%1$s</xliff:g> xizmatiga qurilmangizni boshqarish uchun toʻliq ruxsat berilsinmi?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Ilova ruxsatnoma so‘roviga xalaqit qilayotgani tufayli, “Sozlamalar” ilovasi javobingizni tekshira olmaydi."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Agar <xliff:g id="SERVICE">%1$s</xliff:g> xizmatini yoqsangiz, qurilmangiz ma’lumotlarni shifrlashni kuchaytirish uchun ekran qulfidan foydalanmaydi."</string>
@@ -2219,14 +2223,14 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Toʻliq nazorat maxsus imkoniyatlar bilan ishlovchi ilovalar uchun mos, lekin barcha ilovalar uchun emas."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Ekranni ochish va boshqarish"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Ekrandagi barcha kontentni oʻqishi va kontentni boshqa ilovalar ustida ochishi mumkin."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Harakatlarni koʻrish va rejalashtirish"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Harakatlarni koʻrish va bajarish"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Ilova yoki qurilma sensori bilan munosabatlaringizni kuzatishi hamda sizning nomingizdan ilovalar bilan ishlashi mumkin."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Ruxsat"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Rad etish"</string>
     <string name="accessibility_dialog_button_stop" msgid="7861331860214808622">"Stop"</string>
     <string name="accessibility_dialog_button_cancel" msgid="5006357240387387028">"Bekor qilish"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> xizmati to‘xtatilsinmi?"</string>
-    <string name="disable_service_message" msgid="4593387199926310801">"<xliff:g id="STOP">%1$s</xliff:g> tugmasi bosilganda <xliff:g id="SERVICE">%2$s</xliff:g> xizmati toʻxtatiladi."</string>
+    <string name="disable_service_message" msgid="4593387199926310801">"<xliff:g id="SERVICE">%2$s</xliff:g> xizmatini toʻxtatish uchun <xliff:g id="STOP">%1$s</xliff:g> tugmasini bosing."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Hech qanday xizmat o‘rnatilmagan"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Hech qanday xizmat tanlanmagan"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Hech qanday tavsif berilmagan."</string>
@@ -2625,8 +2629,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Ish"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"SMS va chaqiruvlar jurnaliga kirishni cheklash"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Faqat asosiy telefon va SMS ilovalarida SMS va chaqiruvlar jurnaliga kirish uchun ruxsat bor"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Qurilma identifikatori cheklovini faolsizlantirish"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Qurilma identifikatorlari uchun yangi foydalanish cheklovlarini faolsizlantirish"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Ishonchli agentlar mavjud emas"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Bu ilova faollashtirilsinmi?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Bu qurilma administratori ilovasini faollashtirish"</string>
@@ -3100,7 +3102,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Ilovalar va bildirishnomalar"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Assistent, oxirgi ilovalar, birlamchi ilovalar"</string>
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Oxirgi ilovalar, birlamchi ilovalar"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Ishchi profildagi ilovalarga bildirishnomalar ruxsati berilmagan."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Hisoblar"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Hech qanday hisobga kirilmagan"</string>
@@ -4209,20 +4211,21 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Tezkor selfi olish"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Tizim navigatsiyasi"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"2 tugmali navigatsiya"</string>
-    <!-- no translation found for swipe_up_to_switch_apps_summary (2158312695920408870) -->
-    <skip />
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Bir ilovadan boshqasiga almashish uchun “Boshiga” tugmasi ustida tepaga suring. Barcha ilovalarni koʻrish uchun yana tepaga suring. Orqaga qaytish uchun “Orqaga” tugmasini bosing."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Yangi asosiy tugmani sinang"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Ilovalarni almashtirish uchun yangi ishorani yoqing"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Ishorali navigatsiya"</string>
-    <!-- no translation found for edge_to_edge_navigation_summary (511639046551586471) -->
-    <skip />
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Bosh ekranga qaytish uchun ekranning pastidan tepaga qarab suring. Bir ilovadan boshqasiga oʻtish uchun pastdan tepaga surib, bosib turing va qoʻyib yuboring. Orqaga qaytish uchun chap yoki oʻng burchakdan teskari tomonga suring."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3 tugmali navigatsiya"</string>
-    <!-- no translation found for legacy_navigation_summary (5631274479304544610) -->
-    <skip />
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Orqaga, Boshiga va bir ilovadan boshqasiga oʻtish tugmalari ekranning pastida joylashgan."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"tizim navigatsiyasi, 2 tugmali navigatsiya, 3 tugmali navigatsiya, ishorali navigatsiya"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Bu funksiya bosh ekran ilovasida (<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>) ishlamaydi"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Bosh ekran ilovasini almashtirish"</string>
     <string name="information_label" msgid="8133109685432913360">"Axborot"</string>
+    <string name="low_label" msgid="1679136861385616813">"Past"</string>
+    <string name="high_label" msgid="7278863493316447831">"Yuqori"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Yuqori sezuvchanlik sozlansa, ekran chekkasidan tortiladigan ishoralar ilovalarnikiga zid kelishi mumkin."</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Sezuvchanlik sozlamalariga qaytish"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Ekranga ikki marta bosib tekshirish"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Ekranga ikki marta bosib tekshirish"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Ekranga ikki marta bosib tekshirish"</string>
@@ -4394,10 +4397,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Grafik drayverni tanlang"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Standart"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Game Driver"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Nashrdan oldingi drayver"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Tizim grafik drayveri"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Parametr bu telefonda ishlamaydi"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Parametr bu planshetda ishlamaydi"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Parametr bu qurilmada ishlamaydi"</string>
@@ -4632,4 +4640,6 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"SIM kartalar bir biriga mos emas"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> birga ishlashi funksiyalarni cheklashi mumkin. Batafsil axborot olish uchun bosing."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM kartalarning bir biriga mosligi"</string>
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"Ish siyosati haqida axborot"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Sozlamalar AT admini tomonidan boshqariladi"</string>
 </resources>

@@ -399,6 +399,7 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Rosto adicionado"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Configurar desbloqueio facial"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Desbloqueio facial"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Desbloqueio facial para o trabalho"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Como configurar o desbloqueio facial"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Configurar desbloqueio facial"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Usar seu rosto para autenticar"</string>
@@ -1222,6 +1223,8 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Reconhecimento de tela em uso"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Ativado / A tela não será desativada se você estiver olhando para ela"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Desativada"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Acesso à câmera necessário"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Toque para gerenciar as permissões dos serviços de personalização do dispositivo"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Evita que a tela seja desativada se você estiver olhando para ela"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Usando a câmera frontal, o \"Reconhecimento de tela em uso\" detecta se alguém está olhando para a tela. Ele funciona no dispositivo, e as imagens nunca são armazenada nem enviadas ao Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Manter a tela ligada enquanto estiver olhando para ela"</string>
@@ -1336,7 +1339,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Versão da banda de base"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versão do kernel"</string>
     <string name="build_number" msgid="3075795840572241758">"Número da versão"</string>
-    <string name="module_version" msgid="4826567303427436423">"Versões do módulo principal"</string>
+    <string name="module_version" msgid="7329118610303805859">"Atualização do sistema do Google Play"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Não disponível"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
@@ -1712,6 +1715,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Manual de segurança e regulamentação"</string>
     <string name="copyright_title" msgid="865906688917260647">"Direitos autorais"</string>
     <string name="license_title" msgid="1990487604356037871">"Licença"</string>
+    <string name="module_license_title" msgid="258743239066841860">"Licenças de atualização do sistema do Google Play"</string>
     <string name="terms_title" msgid="7697580845616764642">"Termos e Condições"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Licença do sistema Webview"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Planos de fundo"</string>
@@ -2207,7 +2211,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Ciano"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Amarelo"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"Permitir que o <xliff:g id="SERVICE">%1$s</xliff:g> controle seu dispositivo?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenha controle total do seu dispositivo?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> precisa:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Como um app está ocultando uma solicitação de permissão, as configurações não podem confirmar sua resposta."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Se <xliff:g id="SERVICE">%1$s</xliff:g> for ativado, o dispositivo não usará o bloqueio de tela para melhorar a criptografia de dados."</string>
@@ -2219,7 +2223,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"O controle total é adequado para apps que ajudam você com as necessidades de acessibilidade, mas não para a maioria dos apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Ver e controlar tela"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Pode ler todo o conteúdo na tela e mostrar conteúdo sobreposto a outros apps."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Ver ações da plataforma"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Ver e realizar ações"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Pode monitorar suas interações com um app ou um sensor de hardware e interagir com apps em seu nome."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Permitir"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Negar"</string>
@@ -2615,8 +2619,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Trabalho"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Restringir acesso a SMS e registro de chamadas"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Apenas apps padrão de chamadas e mensagens têm permissões para SMS e registro de chamadas"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Desativar restrição de identificador de dispositivo"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Desativar restrições de novo acesso para identificadores de dispositivo"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Nenhum agente de confiança disponível"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Ativar app de admin. do dispositivo?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Ativar o app de administrador deste dispositivo"</string>
@@ -3090,7 +3092,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Apps e notificações"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Assistente, apps recentes, apps padrão"</string>
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Apps recentes, apps padrão"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"O acesso às notificações não está disponível para apps no perfil de trabalho."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Contas"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Nenhuma conta adicionada"</string>
@@ -4206,6 +4208,10 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Não é compatível com <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>, seu app de início padrão"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Alternar app de início padrão"</string>
     <string name="information_label" msgid="8133109685432913360">"Informações"</string>
+    <string name="low_label" msgid="1679136861385616813">"Baixa"</string>
+    <string name="high_label" msgid="7278863493316447831">"Alta"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Uma sensibilidade maior pode causar conflitos com gestos de apps ao longo das bordas da tela."</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Sensibilidade da parte de trás"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Tocar duas vezes na tela para verificar o smartphone"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tocar duas vezes na tela para verificar o tablet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tocar duas vezes na tela para verificar o dispositivo"</string>
@@ -4377,10 +4383,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Selecionar driver gráfico"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Padrão"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Driver de jogo"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Driver de pré-lançamento"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Driver gráfico do sistema"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"A configuração não está disponível neste smartphone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"A configuração não está disponível neste tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"A configuração não está disponível neste dispositivo"</string>
@@ -4615,4 +4626,6 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problema com a combinação de chips"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Usar a <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> pode limitar a funcionalidade. Toque para saber mais."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Combinação de chips"</string>
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"Informações sobre sua política de trabalho"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Configurações gerenciadas pelo administrador de TI"</string>
 </resources>

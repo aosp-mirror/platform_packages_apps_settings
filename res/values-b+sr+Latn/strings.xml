@@ -315,8 +315,8 @@
     <string name="cellular_data_summary" msgid="4660351864416939504">"Omogućava potrošnju podataka na mob. mreži"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Dozvoli potr. podat. u romingu"</string>
     <string name="roaming" msgid="2619521775007402005">"Roming"</string>
-    <string name="roaming_enable" msgid="3737380951525303961">"Poveži sa uslugom za podatke tokom rominga"</string>
-    <string name="roaming_disable" msgid="1295279574370898378">"Povezivanje sa uslugom za podatke tokom rominga"</string>
+    <string name="roaming_enable" msgid="3737380951525303961">"Poveži sa uslugom za podatke u romingu"</string>
+    <string name="roaming_disable" msgid="1295279574370898378">"Poveži sa uslugom za podatke u romingu"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Veza za prenos podataka je prekinuta zato što ste napustili matičnu mrežu sa isključenim prenosom podataka u romingu."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Uključi"</string>
     <string name="roaming_warning" msgid="4275443317524544705">"Mogu da nastanu značajni troškovi."</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Lice je dodato"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Podesite otključavanje licem"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Otključavanje licem"</string>
+    <!-- no translation found for security_settings_face_profile_preference_title (3906383224724942953) -->
+    <skip />
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Kako da podesite otključavanje licem"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Podesite otključavanje licem"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Potvrdite identitet licem"</string>
@@ -1241,9 +1243,11 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Pažnja ekrana"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Uključeno/ekran se neće isključiti ako gledate u njega"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Isključeno"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Potreban je pristup kameri"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Dodirnite da biste upravljali dozvolama za usluge za personalizaciju uređaja"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Sprečava isključivanje ekrana ako gledate u njega"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Pažnja ekrana koristi prednju kameru da bi utvrdila da li neko gleda u ekran. Radi na uređaju, a slike se nikada ne čuvaju niti šalju Google-u."</string>
-    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Neka ekran bude uključen kada gledate u njega"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Neka se ekran ne gasi dok gledate u njega"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Noćno svetlo"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Noćno svetlo daje ekranu žutonarandžastu nijansu. To vam omogućava da lakše pregledate sadržaj ekrana pri prigušenom svetlu i da lakše zaspite."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Zakažite"</string>
@@ -1356,7 +1360,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Verzija osnovnog propusnog opsega"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Verzija jezgra"</string>
     <string name="build_number" msgid="3075795840572241758">"Broj verzije"</string>
-    <string name="module_version" msgid="4826567303427436423">"Verzije glavnog modula"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play ažuriranje sistema"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Nije dostupno"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
@@ -1733,6 +1737,8 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Priručnik sa bezbed. i regulat. podacima"</string>
     <string name="copyright_title" msgid="865906688917260647">"Autorska prava"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenca"</string>
+    <!-- no translation found for module_license_title (258743239066841860) -->
+    <skip />
     <string name="terms_title" msgid="7697580845616764642">"Uslovi i odredbe"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Licenca za sistemski WebView"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Pozadine"</string>
@@ -2125,7 +2131,7 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Veliki pokazivač miša"</string>
     <string name="accessibility_disable_animations" msgid="5876035711526394795">"Ukloni animacije"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Mono zvuk"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Kombinujte kanale kada puštate audio sadržaj"</string>
+    <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Kombinuj kanale pri puštanju audio sadržaja"</string>
     <string name="accessibility_toggle_master_balance_title" msgid="551441665399043471">"Balans zvuka"</string>
     <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Levo"</string>
     <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Desno"</string>
@@ -2235,7 +2241,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cijan"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Žuta"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"Želite li da dozvolite da <xliff:g id="SERVICE">%1$s</xliff:g> ima potpunu kontrolu nad uređajem?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"Želite li da dozvolite da <xliff:g id="SERVICE">%1$s</xliff:g> ima potpunu kontrolu nad uređajem?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> treba:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Pošto aplikacija skriva zahtev za dozvolu, Podešavanja ne mogu da verifikuju odgovor."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ako uključite <xliff:g id="SERVICE">%1$s</xliff:g>, uređaj neće koristiti zaključavanje ekrana da bi poboljšao šifrovanje podataka."</string>
@@ -2247,7 +2253,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Potpuna kontrola je primerena za aplikacije koje vam pomažu kod usluga pristupačnosti, ali ne i za većinu aplikacija."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Pregledaj i kontroliši ekran"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Može da čita sav sadržaj na ekranu i prikazuje ga u drugim aplikacijama."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Pregledaj i obavljaj radnje"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Pregledaj i obavljaj radnje"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Može da prati interakcije sa aplikacijom ili senzorom hardvera i koristi aplikacije umesto vas."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Dozvoli"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Odbij"</string>
@@ -2652,8 +2658,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Posao"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Ograniči pristup SMS-ovima i evidenciji poziva"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Samo podrazumevane aplikacije za pozive i razmenu SMS-ova imaju dozvole za pristup SMS-ovima i evidenciji poziva"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Onemogući ograničenja za identifikatore uređaja"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Onemogućite nova ograničenja pristupa za identifikatore uređaja"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Nema dostupnih pouzdanih agenata"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Aktiviraj aplikaciju za administratore?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Aktiviraj ovu aplikaciju za administratore uređaja"</string>
@@ -3132,7 +3136,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplikacije i obaveštenja"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Pomoćnik, nedavne aplikacije, podrazumevane aplikacije"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Pristup obaveštenjima nije dostupan za aplikacije na radnom profilu."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Nalozi"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Nijedan nalog nije dodat"</string>
@@ -4279,6 +4284,14 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Ne podržava podrazumevana aplikacija početne stranice, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Promeni podraz. aplikaciju poč. stranice"</string>
     <string name="information_label" msgid="8133109685432913360">"Informacije"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dvaput dodirnite telefon da biste ga proverili"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Dvaput dodirnite tablet da biste ga proverili"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Dvaput dodirnite uređaj da biste ga proverili"</string>
@@ -4457,10 +4470,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Izaberite upravljački program za grafiku"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Podrazumevano"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Upravljački program za igre"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Upravljački program za neobjavljenu verziju"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Sistemski upravljački program za grafiku"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Podešavanje nije podržano na ovom telefonu"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Podešavanje nije podržano na ovom tabletu"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Podešavanje nije podržano na ovom uređaju"</string>
@@ -4700,4 +4718,8 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problem sa SIM kombinacijom"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Funkcionalnost može da bude ograničena ako koristite operatere <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g>. Dodirnite da biste saznali više."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM kombinacija"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>
