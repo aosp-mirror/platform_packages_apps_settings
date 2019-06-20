@@ -249,7 +249,7 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = {ShadowTileUtils.class, ShadowThreadUtils.class})
+    @Config(shadows = {ShadowTileUtils.class})
     public void bindPreference_hasSummaryUri_shouldLoadSummaryFromContentProvider() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
@@ -274,7 +274,7 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = {ShadowTileUtils.class, ShadowThreadUtils.class})
+    @Config(shadows = {ShadowTileUtils.class})
     public void bindPreference_withIconUri_shouldLoadIconFromContentProvider() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         mActivityInfo.packageName = RuntimeEnvironment.application.getPackageName();
@@ -341,7 +341,8 @@ public class DashboardFeatureProviderImplTest {
         final Intent launchIntent = shadowActivity.getNextStartedActivityForResult().intent;
         assertThat(launchIntent.getAction())
                 .isEqualTo("TestAction");
-        assertThat(launchIntent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, 0))
+        assertThat(
+                launchIntent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, 0))
                 .isEqualTo(MetricsEvent.SETTINGS_GESTURES);
     }
 
@@ -433,7 +434,7 @@ public class DashboardFeatureProviderImplTest {
 
         final ArgumentCaptor<UserHandle> argument = ArgumentCaptor.forClass(UserHandle.class);
         verify(mActivity)
-            .startActivityForResultAsUser(any(Intent.class), anyInt(), argument.capture());
+                .startActivityForResultAsUser(any(Intent.class), anyInt(), argument.capture());
         assertThat(argument.getValue().getIdentifier()).isEqualTo(userId);
         verify(mActivity, never()).getSupportFragmentManager();
     }
@@ -452,7 +453,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl.openTileIntent(mActivity, tile);
 
         verify(mActivity, never())
-            .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
+                .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
         verify(mActivity).getSupportFragmentManager();
     }
 }
