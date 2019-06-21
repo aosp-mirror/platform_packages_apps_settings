@@ -25,7 +25,6 @@ import android.content.Context;
 
 import com.android.settings.homepage.contextualcards.ContextualCardUpdateListener;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settingslib.suggestions.SuggestionController;
 
 import org.junit.Before;
@@ -38,7 +37,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowThreadUtils.class)
 public class LegacySuggestionContextualCardControllerTest {
 
     @Mock

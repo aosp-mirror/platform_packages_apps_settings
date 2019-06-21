@@ -16,21 +16,16 @@
 
 package com.android.settings.dashboard;
 
-import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
-import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
@@ -88,27 +83,5 @@ public class SummaryLoaderTest {
         mSummaryLoader.updateSummaryIfNeeded(mContext, mTile, SUMMARY_2);
 
         assertThat(mCallbackInvoked).isTrue();
-    }
-
-    @Test
-    public void testUpdateSummaryToCache_hasCache_shouldUpdate() {
-        final String testSummary = "test_summary";
-        final DashboardCategory category = new DashboardCategory(CategoryKey.CATEGORY_HOMEPAGE);
-        final ActivityInfo activityInfo = new ActivityInfo();
-        activityInfo.packageName = "pkg";
-        activityInfo.name = "cls";
-        activityInfo.metaData = new Bundle();
-        activityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "123");
-        final Tile tile = new Tile(activityInfo, category.key);
-
-        category.addTile(tile);
-        when(mFeatureFactory.dashboardFeatureProvider.getDashboardKeyForTile(tile))
-                .thenReturn(tile.getKey(RuntimeEnvironment.application));
-
-        mSummaryLoader.updateSummaryIfNeeded(mContext, tile, testSummary);
-        tile.overrideSummary(null);
-        mSummaryLoader.updateSummaryToCache(category);
-
-        assertThat(tile.getSummary(mContext)).isEqualTo(testSummary);
     }
 }

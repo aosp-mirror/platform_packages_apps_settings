@@ -86,7 +86,7 @@ import java.util.Set;
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowThreadUtils.class, ShadowUtils.class,
+@Config(shadows = {ShadowUserManager.class, ShadowUtils.class,
         SlicesDatabaseAccessorTest.ShadowApplicationPackageManager.class,
         ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class,
         SettingsSliceProviderTest.ShadowWifiScanWorker.class})

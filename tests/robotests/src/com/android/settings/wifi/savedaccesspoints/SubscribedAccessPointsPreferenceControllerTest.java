@@ -26,24 +26,19 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
-import android.content.pm.FeatureInfo;
-import android.content.pm.PackageManager;
 import android.net.wifi.WifiConfiguration;
-
+import android.net.wifi.WifiManager;
 import android.net.wifi.hotspot2.PasspointConfiguration;
 import android.net.wifi.hotspot2.pps.HomeSp;
-import android.net.wifi.WifiEnterpriseConfig;
-import android.net.wifi.WifiManager;
+
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.testutils.shadow.ShadowAccessPoint;
-import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settingslib.wifi.AccessPointPreference;
 
@@ -58,7 +53,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowThreadUtils.class, ShadowWifiManager.class})
+@Config(shadows = {ShadowWifiManager.class})
 public class SubscribedAccessPointsPreferenceControllerTest {
 
     @Mock
