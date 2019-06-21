@@ -16,19 +16,24 @@
 
 package com.android.settings.sim;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.SubscriptionsChangeListener;
 
 /** Common functionality for showing a dialog in SimDialogActivity. */
-public abstract class SimDialogFragment extends InstrumentedDialogFragment {
+public abstract class SimDialogFragment extends InstrumentedDialogFragment implements
+        SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String TAG = "SimDialogFragment";
 
     private static final String KEY_TITLE_ID = "title_id";
     private static final String KEY_DIALOG_TYPE = "dialog_type";
+
+    private SubscriptionsChangeListener mChangeListener;
 
     protected static Bundle initArguments(int dialogType, int titleResId) {
         final Bundle args = new Bundle();
@@ -46,6 +51,24 @@ public abstract class SimDialogFragment extends InstrumentedDialogFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mChangeListener = new SubscriptionsChangeListener(context, this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mChangeListener.stop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mChangeListener.start();
+    }
+
+    @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         final SimDialogActivity activity = (SimDialogActivity) getActivity();
@@ -55,4 +78,13 @@ public abstract class SimDialogFragment extends InstrumentedDialogFragment {
     }
 
     public abstract void updateDialog();
+
+    @Override
+    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
+    }
+
+    @Override
+    public void onSubscriptionsChanged() {
+        updateDialog();
+    }
 }
