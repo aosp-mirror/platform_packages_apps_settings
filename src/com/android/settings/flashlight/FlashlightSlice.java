@@ -39,6 +39,7 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -131,10 +132,19 @@ public class FlashlightSlice implements CustomSliceable {
         return null;
     }
 
-
-    private static boolean isFlashlightAvailable(Context context) {
-        return Settings.Secure.getInt(
-                context.getContentResolver(), Secure.FLASHLIGHT_AVAILABLE, 0) == 1;
+    @VisibleForTesting
+    static boolean isFlashlightAvailable(Context context) {
+        int defaultAvailability = 0;
+        try {
+            // check if there is a flash unit
+            if (getCameraId(context) != null) {
+                defaultAvailability = 1;
+            }
+        } catch (CameraAccessException e) {
+            Log.e(TAG, "Error getting camera id.", e);
+        }
+        return Secure.getInt(context.getContentResolver(),
+                Secure.FLASHLIGHT_AVAILABLE, defaultAvailability) == 1;
     }
 
     private static boolean isFlashlightEnabled(Context context) {
