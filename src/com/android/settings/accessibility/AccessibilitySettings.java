@@ -58,7 +58,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.DarkUIPreferenceController;
-import com.android.settings.display.FontSizePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -107,8 +106,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             "toggle_inversion_preference";
     private static final String TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE =
             "toggle_power_button_ends_call_preference";
-    private static final String TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE =
-            "toggle_lock_screen_rotation_preference";
     private static final String TOGGLE_LARGE_POINTER_ICON =
             "toggle_large_pointer_icon";
     private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
@@ -124,8 +121,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "magnification_preference_screen";
-    private static final String FONT_SIZE_PREFERENCE_SCREEN =
-            "font_size_preference_screen";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
             "autoclick_preference";
     private static final String VIBRATION_PREFERENCE_SCREEN =
@@ -220,14 +215,12 @@ public class AccessibilitySettings extends DashboardFragment implements
 
     private SwitchPreference mToggleHighTextContrastPreference;
     private SwitchPreference mTogglePowerButtonEndsCallPreference;
-    private SwitchPreference mToggleLockScreenRotationPreference;
     private SwitchPreference mToggleLargePointerIconPreference;
     private SwitchPreference mToggleDisableAnimationsPreference;
     private SwitchPreference mToggleMasterMonoPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private Preference mCaptioningPreferenceScreen;
     private Preference mDisplayMagnificationPreferenceScreen;
-    private Preference mFontSizePreferenceScreen;
     private Preference mAutoclickPreferenceScreen;
     private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
@@ -235,15 +228,10 @@ public class AccessibilitySettings extends DashboardFragment implements
     private Preference mVibrationPreferenceScreen;
     private Preference mLiveCaptionPreference;
     private SwitchPreference mToggleInversionPreference;
-    private ColorInversionPreferenceController mInversionPreferenceController;
     private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
     private SwitchPreference mDarkUIModePreference;
     private DarkUIPreferenceController mDarkUIPreferenceController;
     private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
-
-    private LockScreenRotationPreferenceController mLockScreenRotationPreferenceController;
-    private FontSizePreferenceController mFontSizePreferenceController;
-    private MagnificationPreferenceController mMagnificationPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -308,8 +296,8 @@ public class AccessibilitySettings extends DashboardFragment implements
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         updateAllPreferences();
 
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
@@ -317,10 +305,10 @@ public class AccessibilitySettings extends DashboardFragment implements
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         mSettingsPackageMonitor.unregister();
         mSettingsContentObserver.unregister(getContentResolver());
-        super.onPause();
+        super.onStop();
     }
 
     @Override
@@ -440,10 +428,7 @@ public class AccessibilitySettings extends DashboardFragment implements
                 (SwitchPreference) findPreference(TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE);
 
         // Display inversion.
-        mToggleInversionPreference = (SwitchPreference) findPreference(TOGGLE_INVERSION_PREFERENCE);
-        mInversionPreferenceController =
-                new ColorInversionPreferenceController(getContext(), TOGGLE_INVERSION_PREFERENCE);
-        mInversionPreferenceController.displayPreference(getPreferenceScreen());
+        mToggleInversionPreference = findPreference(TOGGLE_INVERSION_PREFERENCE);
 
         // Power button ends calls.
         mTogglePowerButtonEndsCallPreference =
@@ -453,13 +438,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             mCategoryToPrefCategoryMap.get(CATEGORY_INTERACTION_CONTROL)
                     .removePreference(mTogglePowerButtonEndsCallPreference);
         }
-
-        // Lock screen rotation.
-        mToggleLockScreenRotationPreference = findPreference(
-                TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE);
-        mLockScreenRotationPreferenceController = new LockScreenRotationPreferenceController(
-                getContext(), TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE);
-        mLockScreenRotationPreferenceController.displayPreference(getPreferenceScreen());
 
         // Large pointer icon.
         mToggleLargePointerIconPreference =
@@ -502,14 +480,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
-        mMagnificationPreferenceController = new MagnificationPreferenceController(getContext(),
-                DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
-        mMagnificationPreferenceController.displayPreference(getPreferenceScreen());
-
-        // Font size.
-        mFontSizePreferenceScreen = findPreference(FONT_SIZE_PREFERENCE_SCREEN);
-        mFontSizePreferenceController = new FontSizePreferenceController(getContext(),
-                FONT_SIZE_PREFERENCE_SCREEN);
 
         // Autoclick after pointer stops.
         mAutoclickPreferenceScreen = findPreference(AUTOCLICK_PREFERENCE_SCREEN);
@@ -740,9 +710,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                 Settings.Secure.getInt(getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0) == 1);
 
-        // If the quick setting is enabled, the preference MUST be enabled.
-        mInversionPreferenceController.updateState(mToggleInversionPreference);
-
         // Dark Mode
         mDarkUIPreferenceController.updateState(mDarkUIModePreference);
 
@@ -756,9 +723,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                     (incallPowerBehavior == Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP);
             mTogglePowerButtonEndsCallPreference.setChecked(powerButtonEndsCall);
         }
-
-        // Auto-rotate screen
-        mLockScreenRotationPreferenceController.updateState(mToggleLockScreenRotationPreference);
 
         // Large pointer icon.
         mToggleLargePointerIconPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
@@ -786,10 +750,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                 mCaptioningPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
-
-        mMagnificationPreferenceController.updateState(mDisplayMagnificationPreferenceScreen);
-
-        mFontSizePreferenceController.updateState(mFontSizePreferenceScreen);
 
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
