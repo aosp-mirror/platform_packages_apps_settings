@@ -34,7 +34,6 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.testutils.DatabaseTestUtils;
-import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,13 +44,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowThreadUtils.class)
 public class AnomalyCleanupJobServiceTest {
     private static final int UID = 1234;
     private static final String PACKAGE_NAME = "com.android.package";

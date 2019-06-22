@@ -28,7 +28,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.hardware.display.ColorDisplayManager;
 import android.net.Uri;
@@ -56,11 +55,10 @@ import androidx.preference.SwitchPreference;
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.display.FontSizePreferenceController;
-import com.android.settings.display.ToggleFontSizePreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -81,8 +79,10 @@ import java.util.Set;
  * Activity with the accessibility settings.
  */
 @SearchIndexable
-public class AccessibilitySettings extends SettingsPreferenceFragment implements
+public class AccessibilitySettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
+
+    private static final String TAG = "AccessibilitySettings";
 
     // Index of the first preference in a preference category.
     private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
@@ -360,6 +360,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             return true;
         }
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_settings;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     public static CharSequence getServiceSummary(Context context, AccessibilityServiceInfo info,

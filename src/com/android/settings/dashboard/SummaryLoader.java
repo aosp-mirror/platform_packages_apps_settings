@@ -206,22 +206,6 @@ public class SummaryLoader {
         });
     }
 
-    /**
-     * Updates all tile's summary to latest cached version. This is necessary to handle the case
-     * where category is updated after summary change.
-     */
-    public void updateSummaryToCache(DashboardCategory category) {
-        if (category == null) {
-            return;
-        }
-        for (Tile tile : category.getTiles()) {
-            final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
-            if (mSummaryTextMap.containsKey(key)) {
-                tile.overrideSummary(mSummaryTextMap.get(key));
-            }
-        }
-    }
-
     private synchronized void setListeningW(boolean listening) {
         if (mWorkerListening == listening) {
             return;
