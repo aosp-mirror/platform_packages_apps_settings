@@ -686,6 +686,10 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             return;
         }
 
+        if (mCamera.isDecodeTaskAlive()) {
+            mCamera.stop();
+        }
+
         final SurfaceTexture surfaceTexture = mTextureView.getSurfaceTexture();
         if (surfaceTexture == null) {
             throw new IllegalStateException("SurfaceTexture is not ready for restarting camera");

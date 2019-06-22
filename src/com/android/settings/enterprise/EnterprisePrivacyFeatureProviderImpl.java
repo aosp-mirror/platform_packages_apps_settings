@@ -279,7 +279,8 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         // Only search for the required action in the Device Owner's package
         final Intent intent =
                 new Intent(mResources.getString(R.string.config_work_policy_info_intent_action))
-                        .setPackage(ownerComponent.getPackageName());
+                        .setPackage(ownerComponent.getPackageName())
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         final List<ResolveInfo> activities = mPm.queryIntentActivities(intent, 0);
         if (activities.size() != 0) {
             return intent;
@@ -302,7 +303,8 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         // Only search for the required action in the Profile Owner's package
         final Intent intent =
                 new Intent(mResources.getString(R.string.config_work_policy_info_intent_action))
-                        .setPackage(ownerComponent.getPackageName());
+                        .setPackage(ownerComponent.getPackageName())
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         final List<ResolveInfo> activities = mPm.queryIntentActivitiesAsUser(intent, 0, userId);
         if (activities.size() != 0) {
             return intent;
