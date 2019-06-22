@@ -29,19 +29,14 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
     private static final String SYSTEM_KEY = ADAPTIVE_SLEEP;
     private static final int DEFAULT_VALUE = 0;
 
-    private final boolean hasSufficientPermissions;
-
     public AdaptiveSleepPreferenceController(Context context, String key) {
         super(context, key);
-
-        final PackageManager packageManager = mContext.getPackageManager();
-        hasSufficientPermissions = hasSufficientPermission(packageManager);
     }
 
     @Override
     public boolean isChecked() {
-        return hasSufficientPermissions && Settings.System.getInt(mContext.getContentResolver(),
-                SYSTEM_KEY, DEFAULT_VALUE) != DEFAULT_VALUE;
+        return hasSufficientPermission(mContext.getPackageManager()) && Settings.System.getInt(
+                mContext.getContentResolver(), SYSTEM_KEY, DEFAULT_VALUE) != DEFAULT_VALUE;
     }
 
     @Override
