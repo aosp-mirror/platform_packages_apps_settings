@@ -1,6 +1,7 @@
 java_library {
     name: "settings-logtags",
     srcs: ["src/**/*.logtags"],
+    static_libs: ["WifiTrackerLib"],
 }
 
 // Build the Settings APK
