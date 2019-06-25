@@ -4869,6 +4869,8 @@
     <string name="accessibility_tutorial_dialog_button">Got it</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_configuration_warning">The Accessibility button is set to <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, touch &amp; hold the Accessibility button, then select magnification.</string>
+    <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_gesture_navigation_warning">The accessibility gesture is set to the <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, swipe up with two fingers from the bottom of the screen and hold. Then select magnification.</string>
     <!-- Title for the preference to configure the accessibility shortcut, which uses the volume keys. [CHAR LIMIT=35] -->
     <string name="accessibility_global_gesture_preference_title">Volume key shortcut</string>
     <!-- Title for the preference to choose the service that is turned on and off by the accessibility shortcut. [CHAR LIMIT=35] -->
@@ -7355,8 +7357,6 @@
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
     <!-- Search keywords for dark mode settings [CHAR LIMIT=NONE] -->
     <string name="keywords_dark_ui_mode">theme, light, dark, mode</string>
-    <!-- Search keywords for financial apps sms access settings [CHAR LIMIT=NONE] -->
-    <string name="keywords_financial_apps_sms_access">financial app, sms, permission</string>
 
     <!-- Search keyword for Device Theme Settings [CHAR LIMIT=NONE] -->
     <string name="keywords_systemui_theme">dark theme</string>
@@ -9413,10 +9413,6 @@
     <!-- Summary of number of apps currently can write system settings [CHAR LIMIT=60] -->
     <string name="write_settings_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed to modify system settings</string>
 
-    <!-- Settings title in main settings screen for financial apps sms access [CHAR LIMIT=60] -->
-    <string name="financial_apps_sms_access_title">Financial Apps Sms Access</string>
-    <!-- Preference key for financial apps sms access screen -->
-    <string name="financial_sms_root_screen_key" translatable="false">financial_sms_root_screen_key</string>
     <!-- Label for showing apps that can install other apps [CHAR LIMIT=45] -->
     <string name="filter_install_sources_apps">Can install other apps</string>
     <!-- Label for showing apps that can write system settings [CHAR LIMIT=45] -->
@@ -10086,7 +10082,7 @@
     <string name="demo_mode">System UI demo mode</string>
 
     <!-- [CHAR LIMIT=60] Name of setting that changes the UI to dark -->
-    <string name="dark_ui_mode">Dark Theme</string>
+    <string name="dark_ui_mode">Dark theme</string>
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is still on-->
     <string name="dark_ui_mode_disabled_summary_dark_theme_on">On / Temporarily disabled due to Battery Saver</string>

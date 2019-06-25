@@ -25,11 +25,11 @@ import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class LockScreenRotationPreferenceController extends TogglePreferenceController implements
-        LifecycleObserver, OnPause, OnResume {
+        LifecycleObserver, OnStart, OnStop {
 
     private Preference mPreference;
     private RotationPolicyListener mRotationPolicyListener;
@@ -62,14 +62,14 @@ public class LockScreenRotationPreferenceController extends TogglePreferenceCont
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         if (mRotationPolicyListener != null) {
             RotationPolicy.unregisterRotationPolicyListener(mContext, mRotationPolicyListener);
         }
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (mRotationPolicyListener == null) {
             mRotationPolicyListener = new RotationPolicyListener() {
                 @Override
