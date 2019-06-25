@@ -52,8 +52,7 @@ public class GestureNavigationBackSensitivityDialog extends InstrumentedDialogFr
 
     @Override
     public int getMetricsCategory() {
-        // TODO(135211145): Use a separate metrics category for this dialog.
-        return SettingsEnums.SETTINGS_GESTURE_SWIPE_UP;
+        return SettingsEnums.SETTINGS_GESTURE_NAV_BACK_SENSITIVITY_DLG;
     }
 
     @Override
