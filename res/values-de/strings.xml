@@ -392,7 +392,7 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"Datenschutz"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Vom Administrator deaktiviert"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Sicherheitsstatus"</string>
-    <string name="security_dashboard_summary_face" msgid="268234254306703218">"Displaysperre, Face Unlock"</string>
+    <string name="security_dashboard_summary_face" msgid="268234254306703218">"Displaysperre, Gesichtserkennung"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Displaysperre und Fingerabdruck"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Displaysperre"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Gesicht hinzugefügt"</string>
@@ -402,7 +402,7 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Face Unlock einrichten"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Per Gesichtserkennung authentifizieren"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
-    <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Start"</string>
+    <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Starten"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="7784083491315229721">"Bedienungshilfen-Einrichtung verwenden"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="5924018301323255439"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
@@ -490,9 +490,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Mit der Displaysperre kannst du dein Tablet schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Mit der Displaysperre kannst du dein Gerät schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Mit der Displaysperre kannst du dein Smartphone schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Mit der Displaysperre kannst du dein Tablet schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Mit der Displaysperre kannst du dein Gerät schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Mit der Displaysperre kannst du dein Smartphone schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Mit der Displaysperre kannst du dein Tablet schützen, damit es niemand anders verwenden kann, falls es gestohlen wird oder du es verloren hast. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Mit der Displaysperre kannst du dein Gerät schützen, damit es niemand anders verwenden kann, falls es gestohlen wird oder du es verloren hast. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Mit der Displaysperre kannst du dein Smartphone schützen, damit es niemand anders verwenden kann, falls es gestohlen wird oder du es verloren hast. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"PIN-Einrichtung überspringen?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Passworteinrichtung überspringen?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Mustereinrichtung überspringen?"</string>
@@ -1218,11 +1218,11 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"\"Helligkeit an Lichtverhältnisse anpassen\": Ist diese Funktion aktiviert, kannst du die Helligkeit dennoch vorübergehend ändern."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Die Helligkeit des Displays passt sich automatisch an deine Umgebung und deine Aktivitäten an. Mit dem Schieberegler kannst du manuell nachjustieren und \"Automatische Helligkeit\" merkt sich deine Präferenz."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Weißabgleich des Bildschirms"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Screen Attention"</string>
-    <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"An/Der Bildschirm wird nicht ausgeschaltet, wenn du ihn ansiehst"</string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Aufmerksamkeitserkennung"</string>
+    <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"An / Der Bildschirm wird nicht ausgeschaltet, solange du auf ihn blickst"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Aus"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Verhindert, dass dein Bildschirm ausgeschaltet wird, wenn du ihn ansiehst."</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Screen Attention verwendet die Frontkamera, um zu erkennen, ob jemand den Bildschirm ansieht. Die Funktion ist auf diesem Gerät verfügbar. Bilder werden nie gespeichert oder an Google gesendet."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Die Funktion \"Aufmerksamkeitserkennung\" verwendet die Frontkamera, um zu erkennen, ob jemand den Bildschirm ansieht. Es werden dabei keine Bilder gespeichert und auch nie an Google gesendet."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nachtlicht"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Die Funktion \"Nachtlicht\" gibt der Displayanzeige eine gelbe Tönung. Das schont in dunklen Umgebungen die Augen und kann das Einschlafen erleichtern."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Zeitplan"</string>
@@ -1710,8 +1710,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Sicherheits- &amp; Regulierungsinformationen"</string>
     <string name="copyright_title" msgid="865906688917260647">"Urheberrecht"</string>
     <string name="license_title" msgid="1990487604356037871">"Lizenz"</string>
-    <!-- no translation found for module_license_title (258743239066841860) -->
-    <skip />
+    <string name="module_license_title" msgid="258743239066841860">"Lizenzen für Google Play-Systemupdates"</string>
     <string name="terms_title" msgid="7697580845616764642">"Nutzungsbedingungen"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"System-WebView-Lizenz"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Hintergründe"</string>
@@ -1866,7 +1865,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"App für Notfallbenachrichtigungen"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"App-Einstellungen zurücksetzen"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"App-Einstellungen zurücksetzen?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Hierdurch werden die folgenden Einstellungen zurückgesetzt:\n\n "<li>"Deaktivierung von Apps"</li>\n" "<li>"Deaktivierung von App-Benachrichtigungen"</li>\n" "<li>"Festlegung von Standard-Apps für bestimmte Aktionen"</li>\n" "<li>"Einschränkungen der Hintergrunddaten für Apps"</li>\n" "<li>"Jegliche Zugriffsbeschränkungen"</li>\n\n" Alle App-Daten bleiben erhalten."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Hierdurch werden die folgenden Einstellungen zurückgesetzt:\n\n"<li>"Deaktivierung von Apps"</li>\n<li>"Deaktivierung von App-Benachrichtigungen"</li>\n<li>"Festlegung von Standard-Apps für bestimmte Aktionen"</li>\n<li>"Einschränkungen der Hintergrunddaten für Apps"</li>\n<li>"Jegliche Zugriffsbeschränkungen"</li>\n\n"Alle App-Daten bleiben erhalten."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Apps zurücksetzen"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Speicherplatz verwalten"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -1962,7 +1961,7 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Systemdienst beenden?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"Wenn du diesen Dienst beendest, funktionieren möglicherweise einige Funktionen deines Tablets nicht mehr richtig, bis du es aus- und wieder einschaltest."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"Wenn du diesen Dienst beendest, funktionieren möglicherweise einige Funktionen deines Telefons nicht mehr richtig, bis du es aus- und wieder einschaltest."</string>
-    <string name="language_input_gesture_title" msgid="8749227808244881255">"Sprachen, Eingabe und Bewegungen"</string>
+    <string name="language_input_gesture_title" msgid="8749227808244881255">"Sprachen, Eingabe und Gesten"</string>
     <string name="language_input_gesture_summary_on_with_assist" msgid="7219895055450633449"></string>
     <string name="language_input_gesture_summary_on_non_assist" msgid="756147879200943161"></string>
     <string name="language_input_gesture_summary_off" msgid="4617198819416948217"></string>
@@ -2103,8 +2102,8 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Großer Mauszeiger"</string>
     <string name="accessibility_disable_animations" msgid="5876035711526394795">"Animationen entfernen"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Mono-Audio"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Kanäle bei der Audiowiedergabe verbinden"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="551441665399043471">"Audiosymmetrie"</string>
+    <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Kanäle bei Audiowiedergabe kombinieren"</string>
+    <string name="accessibility_toggle_master_balance_title" msgid="551441665399043471">"Audiobalance"</string>
     <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Links"</string>
     <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Rechts"</string>
     <string name="accessibility_timeout_default" msgid="8316215621219570607">"Standard"</string>
@@ -2324,9 +2323,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tablet mehr als üblich genutzt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Gerät mehr als üblich genutzt"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"Der Akku könnte früher als üblich leer sein"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Dein Smartphone wurde mehr als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps nach höchstem Akkuverbrauch:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Dein Tablet wurde mehr als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps nach höchstem Akkuverbrauch:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Dein Gerät wurde mehr als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps nach höchstem Akkuverbrauch:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Dein Smartphone wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Dein Tablet wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Dein Gerät wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Umfasst Hintergrundaktivitäten mit hohem Stromverbrauch"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">%1$d Apps einschränken</item>
@@ -2374,7 +2373,7 @@
     <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Diese Apps verbrauchen im Hintergrund Strom. Durch Einschränken der Apps funktionieren sie möglicherweise nicht mehr richtig und Benachrichtigungen können verzögert angezeigt werden."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Funktion \"Akku-Manager\" verwenden"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Starke Beanspruchung des Akkus durch Apps erkennen"</string>
-    <string name="battery_manager_on" msgid="8643310865054362396">"An/Starke Beanspruchung des Akkus durch Apps wird erkannt"</string>
+    <string name="battery_manager_on" msgid="8643310865054362396">"An / Starke Beanspruchung des Akkus durch Apps wird erkannt"</string>
     <string name="battery_manager_off" msgid="5473135235710343576">"Aus"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="1026141135861471129">
       <item quantity="other">%1$d Apps beschränkt</item>
@@ -3088,8 +3087,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Apps &amp; Benachrichtigungen"</string>
-    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
-    <skip />
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Kürzlich verwendete Apps, Standard-Apps"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Für Apps im Arbeitsprofil ist der Benachrichtigungszugriff nicht verfügbar."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Konten"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Keine Konten hinzugefügt"</string>
@@ -3141,7 +3139,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"zum entsperren über das display streichen, zum entsperren wischen, passwort, muster, pin"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"herausforderung bei der arbeit, arbeit, profil"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"arbeitsprofil, verwaltetes profil, gruppieren, gruppierung, arbeit, profil"</string>
-    <string name="keywords_gesture" msgid="3526905012224714078">"Bewegungen"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"Gesten"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"Bezahlen, tippen, Zahlungen"</string>
     <string name="keywords_backup" msgid="470070289135403022">"Sicherung, sicherung"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"Bewegung"</string>
@@ -3210,7 +3208,7 @@
     <string name="emergency_tone_alert" msgid="8523447641290736852">"Töne"</string>
     <string name="emergency_tone_vibrate" msgid="2278872257053690683">"Vibration"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Töne beim Hochfahren"</string>
-    <string name="live_caption_title" msgid="2241633148129286971">"Live Caption"</string>
+    <string name="live_caption_title" msgid="2241633148129286971">"Automatische Untertitel"</string>
     <string name="live_caption_summary" msgid="3365960379606535783">"Medien automatisch untertiteln"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Nie"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
@@ -3290,8 +3288,8 @@
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="7555742240858292255"><annotation id="link">" Benutzerdefinierte Einstellungen ansehen"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"Nur wichtige Unterbrechungen"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>."</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"An/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Aus/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"An / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Aus / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"Aus"</string>
     <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"An"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="3483258992533158479">"Jedes Mal fragen"</string>
@@ -3448,7 +3446,7 @@
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g> Zugriff auf Benachrichtigungen erlauben?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"Bei Aktivierung kann der <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> alle Benachrichtigungen lesen, also auch persönliche Informationen wie Kontaktnamen und eingehende Nachrichten, sowie Benachrichtigungen ändern oder schließen oder in ihnen enthaltene Aktionen auslösen. \n\nZusätzlich wird die App in die Lage versetzt, die \"Bitte nicht stören\"-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Benachrichtigungszugriff für <xliff:g id="SERVICE">%1$s</xliff:g> zulassen?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"Bei Aktivierung kann der <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> alle Benachrichtigungen lesen, also auch persönliche Informationen wie Kontaktnamen und eingehende Nachrichten, sowie Benachrichtigungen schließen oder in ihnen enthaltene Aktionen auslösen. \n\nZusätzlich wird die App in die Lage versetzt, die \"Bitte nicht stören\"-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"Bei Aktivierung kann <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> alle Benachrichtigungen lesen, also auch persönliche Informationen wie Kontaktnamen und eingehende Nachrichten, sowie Benachrichtigungen schließen oder in ihnen enthaltene Aktionen auslösen. \n\nZusätzlich wird die App in die Lage versetzt, die \"Bitte nicht stören\"-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Wenn du den Benachrichtigungszugriff für <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> deaktivierst, wird möglicherweise auch der \"Bitte nicht stören\"-Zugriff deaktiviert."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Deaktivieren"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Abbrechen"</string>
@@ -3538,7 +3536,7 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"\"Ja\" oder \"Vielleicht\""</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"\"Ja\""</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Regel nicht gefunden"</string>
-    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"An/<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"An / <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n: <xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Tage"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Keine"</string>
@@ -4149,7 +4147,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Mit mehreren Geräten verbunden"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demomodus der System-UI"</string>
     <string name="dark_ui_mode" msgid="3888371857083890543">"Dunkles Design"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"An/Wegen Energiesparmodus vorübergehend deaktiviert"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"An / Wegen Energiesparmodus vorübergehend deaktiviert"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Wegen Energiesparmodus vorübergehend aktiviert"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Unterstützte Apps wechseln ebenfalls zum dunklen Design"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"Ok"</string>
@@ -4182,10 +4180,10 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatisch"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuell"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Jetzt Speicherplatz freigeben"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"Bewegungen"</string>
-    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Schnelle Gesten zum Steuern deines Smartphones"</string>
-    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Schnelle Gesten zum Steuern deines Tablets"</string>
-    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Schnelle Gesten zum Steuern deines Geräts"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Gesten"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gesten zum Steuern deines Smartphones"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gesten zum Steuern deines Tablets"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gesten zum Steuern deines Geräts"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Zur Kamera wechseln"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Ein-/Aus-Taste zweimal drücken, um Kamera direkt zu starten. Funktioniert bei jedem Display."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Kamera schnell öffnen"</string>
@@ -4200,19 +4198,15 @@
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Bewegungssteuerung"</string>
     <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Öffne den Startbildschirm, indem du vom unteren Bildschirmrand nach oben wischst. Wenn du zwischen Apps wechseln möchtest, wische von unten nach oben, halte den Finger gedrückt und lass ihn dann los. Wenn du zurückgehen möchtest, wische vom linken oder vom rechten Rand nach innen."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3-Schaltflächen-Steuerung"</string>
-    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Gehe zurück, Startbildschirm, und wechsle mit den Schaltflächen unten auf deinem Bildschirm zwischen Apps."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Mithilfe der Schaltflächen unten auf deinem Bildschirm kannst du zurückgehen, den Startbildschirm aufrufen und zwischen Apps wechseln."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"Systemsteuerung, 2-Schaltflächen-Steuerung, 3-Schaltflächen-Steuerung, Bewegungssteuerung"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Wird von deiner Standard-Start-App, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>, nicht unterstützt"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Standard-Home-App wechseln"</string>
     <string name="information_label" msgid="8133109685432913360">"Information"</string>
-    <!-- no translation found for low_label (1679136861385616813) -->
-    <skip />
-    <!-- no translation found for high_label (7278863493316447831) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
-    <skip />
+    <string name="low_label" msgid="1679136861385616813">"Niedrig"</string>
+    <string name="high_label" msgid="7278863493316447831">"Hoch"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Wenn du die Empfindlichkeit erhöhst, werden eventuell Gesten am Bildschirmrand beeinträchtigt."</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Randempfindlichkeit bei Zurück-Bewegung"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Für Blick aufs Display doppeltippen"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Doppeltippen für schnellen Blick auf das Display des Tablets"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Doppeltippen für schnellen Blick auf das Display des Geräts"</string>
@@ -4369,7 +4363,7 @@
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Zur besseren Konzentration Benachrichtigungen pausieren"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Diese Funktion ist auf diesem Gerät nicht verfügbar"</string>
     <string name="disabled_feature" msgid="3232554901854971743">"Funktion nicht verfügbar"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Diese Funktion wurde deaktiviert, weil sie dein Smartphone verlangsamt"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Diese Funktion wurde deaktiviert, weil sie dein Smartphone langsamer macht"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Vollständige GNSS-Messung erzwingen"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Alle GNSS-Konstellationen und -Frequenzen ohne GNSS-Zyklus erfassen"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Bei Absturz immer Absturz-Dialogfeld anzeigen"</string>
@@ -4384,7 +4378,7 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Grafiktreiber auswählen"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Standard"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Game Driver"</string>
-    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Vorab veröffentlichter Treiber"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Prerelase-Treiber"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Grafiktreiber des Systems"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
@@ -4627,8 +4621,6 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problem mit der SIM-Kombination"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Bei Verwendung von <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> sind u. U. nicht alle Funktionen verfügbar. Für weitere Informationen tippen."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM-Kombination"</string>
-    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
-    <skip />
-    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
-    <skip />
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"Informationen zu den Arbeitsrichtlinien"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Einstellungen, die von deinem IT-Administrator verwaltet werden"</string>
 </resources>

@@ -434,7 +434,7 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Včlanitev obraza ni uspela."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Vse je pravilno nastavljeno."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Končano"</string>
-    <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Odklep. z obrazom za"</string>
+    <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Uporabi odklepanje z obrazom za"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Odklepanje telefona"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Prijava v aplikacije in plačila"</string>
     <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Obvezno za odklepanje z obrazom"</string>
@@ -1025,7 +1025,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Omrežje Wi‑Fi operaterja"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Povezava prek omrežja <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Za izboljšanje natančnosti lokacijskih podatkov in druge namene želi <xliff:g id="APP_NAME">%1$s</xliff:g> vklopiti iskanje omrežij, tudi ko je Wi-Fi izklopljen.\n\nŽelite to dovoliti vsem aplikacijam, ki želijo iskati omrežja?"</string>
-    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Za izboljšanje natančnosti lokacijskih podatkov in druge namene želi neznana aplikacija vklopiti iskanje omrežij, tudi ko je Wi-Fi izklopljen.\n\nŽelite to dovoliti vsem aplikacijam, ki želijo iskati?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Za izboljšanje natančnosti lokacijskih podatkov in druge namene želi neznana aplikacija vklopiti iskanje omrežij, tudi ko je Wi-Fi izklopljen.\n\nDovolite to vsem aplikacijam, ki želijo iskati?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Če želite to možnost izklopiti, v meniju z dodatnimi elementi odprite »Dodatno«."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Dovoli"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Zavrni"</string>
@@ -1752,8 +1752,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Priročnik z varn. in zak. predpis. inf."</string>
     <string name="copyright_title" msgid="865906688917260647">"Avtorska pravica"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenca"</string>
-    <!-- no translation found for module_license_title (258743239066841860) -->
-    <skip />
+    <string name="module_license_title" msgid="258743239066841860">"Licence za posodabljanje sistema Google Play"</string>
     <string name="terms_title" msgid="7697580845616764642">"Določila in pogoji"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Licenca za WebView v sistemu"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Ozadja"</string>
@@ -3172,8 +3171,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplikacije in obvestila"</string>
-    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
-    <skip />
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Nedavne aplikacije, privzete aplikacije"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Dostop do obvestil ni na voljo za aplikacije v delovnem profilu."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Računi"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Dodan ni bil noben račun"</string>
@@ -3294,7 +3292,7 @@
     <string name="emergency_tone_alert" msgid="8523447641290736852">"Toni"</string>
     <string name="emergency_tone_vibrate" msgid="2278872257053690683">"Vibriranje"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Zvoki ob zagonu"</string>
-    <string name="live_caption_title" msgid="2241633148129286971">"Sprotni podnapisi"</string>
+    <string name="live_caption_title" msgid="2241633148129286971">"Samodejni podnapisi"</string>
     <string name="live_caption_summary" msgid="3365960379606535783">"Samodejni napisi predstavnosti"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Nikoli"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
@@ -4351,14 +4349,10 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Privzeta aplikacija začetnega zaslona <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> ne podpira te funkcije"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Zamenjaj privzeto apl. začetnega zaslona"</string>
     <string name="information_label" msgid="8133109685432913360">"Informacije"</string>
-    <!-- no translation found for low_label (1679136861385616813) -->
-    <skip />
-    <!-- no translation found for high_label (7278863493316447831) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
-    <skip />
+    <string name="low_label" msgid="1679136861385616813">"Nizko"</string>
+    <string name="high_label" msgid="7278863493316447831">"Visoko"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Višja občutljivost bo morda ovirala izvajanje potez ob robovih zaslona v aplikaciji."</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Občutljivost hrbtnega dela"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dvojni dotik za preverjanje telefona"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Dvakratni dotik za preverjanje tabličnega računalnika"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Dvakratni dotik za preverjanje naprave"</string>
@@ -4792,13 +4786,11 @@
     <string name="wifi_calling_summary" msgid="513599567573172420">"Uporabljajte omrežje Wi‑Fi za izboljšanje kakovosti klicev"</string>
     <string name="enable_receiving_mms_notification_title" msgid="8809328429865242752">"Dohodno sporočilo MMS"</string>
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Sporočila MMS ni mogoče poslati"</string>
-    <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Dotaknite se za pošiljanje sporočil MMS v omrežju <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>, ko je prenos podatkov v mob. omrežju izklopljen"</string>
+    <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Dotaknite se za uporabo sporočil MMS v omrežju <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>, ko je prenos podatkov v mobilnem omrežju izklopljen"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Sporočilo MMS"</string>
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Težava s kombinacijo kartic SIM"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Hkratna uporaba operaterjev <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> lahko omeji nekatere funkcije. Za več informacij se dotaknite."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Kombinacija kartic SIM"</string>
-    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
-    <skip />
-    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
-    <skip />
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"Podatki o službenem pravilniku"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Nastavitve upravlja skrbnik za IT"</string>
 </resources>
