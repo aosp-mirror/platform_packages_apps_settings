@@ -44,8 +44,7 @@ public class GestureNavigationNotAvailableDialog extends InstrumentedDialogFragm
 
     @Override
     public int getMetricsCategory() {
-        // TODO(135211145): Use a separate metrics category for this dialog.
-        return SettingsEnums.SETTINGS_GESTURE_SWIPE_UP;
+        return SettingsEnums.SETTINGS_GESTURE_NAV_NOT_AVAILABLE_DLG;
     }
 
     @Override
