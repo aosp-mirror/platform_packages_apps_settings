@@ -321,9 +321,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         } else if (mTogglePowerButtonEndsCallPreference == preference) {
             handleTogglePowerButtonEndsCallPreferenceClick();
             return true;
-        } else if (mToggleLargePointerIconPreference == preference) {
-            handleToggleLargePointerIconPreferenceClick();
-            return true;
         } else if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
             return true;
@@ -381,12 +378,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                         : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
     }
 
-    private void handleToggleLargePointerIconPreferenceClick() {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON,
-                mToggleLargePointerIconPreference.isChecked() ? 1 : 0);
-    }
-
     private void handleToggleMasterMonoPreferenceClick() {
         Settings.System.putIntForUser(getContentResolver(), Settings.System.MASTER_MONO,
                 mToggleMasterMonoPreference.isChecked() ? 1 : 0, UserHandle.USER_CURRENT);
@@ -415,8 +406,7 @@ public class AccessibilitySettings extends DashboardFragment implements
         }
 
         // Large pointer icon.
-        mToggleLargePointerIconPreference =
-                (SwitchPreference) findPreference(TOGGLE_LARGE_POINTER_ICON);
+        mToggleLargePointerIconPreference = findPreference(TOGGLE_LARGE_POINTER_ICON);
 
         mToggleDisableAnimationsPreference =
                 (SwitchPreference) findPreference(TOGGLE_DISABLE_ANIMATIONS);
@@ -698,10 +688,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                     (incallPowerBehavior == Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP);
             mTogglePowerButtonEndsCallPreference.setChecked(powerButtonEndsCall);
         }
-
-        // Large pointer icon.
-        mToggleLargePointerIconPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON, 0) != 0);
 
         // Master mono
         updateMasterMono();
