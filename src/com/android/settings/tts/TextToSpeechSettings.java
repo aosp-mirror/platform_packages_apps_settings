@@ -49,6 +49,7 @@ import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -509,8 +510,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             }
         }
 
-        // Sort it
-        Collections.sort(entryPairs, (lhs, rhs) -> lhs.first.compareToIgnoreCase(rhs.first));
+        // Get the primary locale and create a Collator to sort the strings
+        Locale userLocale = getResources().getConfiguration().getLocales().get(0);
+        Collator collator = Collator.getInstance(userLocale);
+
+        // Sort the list
+        Collections.sort(entryPairs, (lhs, rhs) -> collator.compare(lhs.first, rhs.first));
 
         // Get two arrays out of one of pairs
         mSelectedLocaleIndex = 0; // Will point to the R.string.tts_lang_use_system value
