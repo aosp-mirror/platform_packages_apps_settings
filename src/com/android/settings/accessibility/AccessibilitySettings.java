@@ -118,8 +118,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "magnification_preference_screen";
-    private static final String AUTOCLICK_PREFERENCE_SCREEN =
-            "autoclick_preference";
     private static final String VIBRATION_PREFERENCE_SCREEN =
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
@@ -208,7 +206,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private ListPreference mSelectLongPressTimeoutPreference;
     private Preference mCaptioningPreferenceScreen;
     private Preference mDisplayMagnificationPreferenceScreen;
-    private Preference mAutoclickPreferenceScreen;
     private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mHearingAidPreference;
@@ -455,9 +452,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
-
-        // Autoclick after pointer stops.
-        mAutoclickPreferenceScreen = findPreference(AUTOCLICK_PREFERENCE_SCREEN);
 
         // Display color adjustments.
         mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
@@ -724,8 +718,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
-        updateAutoclickSummary(mAutoclickPreferenceScreen);
-
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
     }
 
@@ -733,20 +725,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
         pref.setSummary(enabled ? R.string.accessibility_feature_state_on
                 : R.string.accessibility_feature_state_off);
-    }
-
-    private void updateAutoclickSummary(Preference pref) {
-        final boolean enabled = Settings.Secure.getInt(
-                getContentResolver(), Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 0) == 1;
-        if (!enabled) {
-            pref.setSummary(R.string.accessibility_feature_state_off);
-            return;
-        }
-        int delay = Settings.Secure.getInt(
-                getContentResolver(), Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
-                AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
-        pref.setSummary(ToggleAutoclickPreferenceFragment.getAutoclickPreferenceSummary(
-                getResources(), delay));
     }
 
     @VisibleForTesting
