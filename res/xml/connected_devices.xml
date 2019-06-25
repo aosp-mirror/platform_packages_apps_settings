@@ -67,4 +67,11 @@
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="discoverable_footer"
+        android:title="@string/bluetooth_off_footer"
+        android:selectable="false"
+        settings:controller="com.android.settings.connecteddevice.DiscoverableFooterPreferenceController">
+    </com.android.settingslib.widget.FooterPreference>
+
 </PreferenceScreen>
