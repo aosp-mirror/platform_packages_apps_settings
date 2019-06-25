@@ -98,7 +98,9 @@
         <SwitchPreference
             android:key="toggle_power_button_ends_call_preference"
             android:title="@string/accessibility_power_button_ends_call_prerefence_title"
-            android:persistent="false"/>
+            android:persistent="false"
+            settings:controller="com.android.settings.accessibility.PowerButtonEndsCallPreferenceController"/>
+
 
         <SwitchPreference
             android:key="toggle_lock_screen_rotation_preference"
