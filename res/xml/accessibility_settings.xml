@@ -79,7 +79,8 @@
 
         <SwitchPreference
             android:key="toggle_disable_animations"
-            android:title="@string/accessibility_disable_animations"/>
+            android:title="@string/accessibility_disable_animations"
+            settings:controller="com.android.settings.accessibility.DisableAnimationsPreferenceController"/>
 
     </PreferenceCategory>
 
