@@ -607,16 +607,7 @@ public class AccessibilitySettings extends DashboardFragment implements
 
         mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
 
-        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
-                mDisplayDaltonizerPreferenceScreen);
-
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
-    }
-
-    private void updateFeatureSummary(String prefKey, Preference pref) {
-        final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
-        pref.setSummary(enabled ? R.string.accessibility_feature_state_on
-                : R.string.accessibility_feature_state_off);
     }
 
     private void updateAccessibilityShortcut(Preference preference) {

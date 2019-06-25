@@ -173,11 +173,11 @@
             settings:controller="com.android.settings.accessibility.HighTextContrastPreferenceController"/>
 
         <Preference
-            android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
             android:key="daltonizer_preference"
             android:title="@string/accessibility_display_daltonizer_preference_title"
             android:icon="@drawable/ic_daltonizer"
-            settings:searchable="false"/>
+            android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
+            settings:controller="com.android.settings.accessibility.DaltonizerPreferenceController"/>
 
         <SwitchPreference
             android:key="toggle_inversion_preference"
