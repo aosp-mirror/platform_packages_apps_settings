@@ -24,7 +24,6 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -64,8 +63,6 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.search.SearchIndexable;
-
-import com.google.common.primitives.Ints;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -127,8 +124,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference";
-    private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
-            "accessibility_control_timeout_preference_fragment";
     private static final String DARK_UI_MODE_PREFERENCE =
             "dark_ui_mode_accessibility";
     private static final String LIVE_CAPTION_PREFERENCE_KEY =
@@ -277,7 +272,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.accessibility_settings);
         initializeAllPreferences();
         mDpm = (DevicePolicyManager) (getActivity()
                 .getSystemService(Context.DEVICE_POLICY_SERVICE));
@@ -754,22 +748,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
-
-        updateAccessibilityTimeoutSummary(getContentResolver(),
-                findPreference(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE));
-    }
-
-    void updateAccessibilityTimeoutSummary(ContentResolver resolver, Preference pref) {
-        String[] timeoutSummarys = getResources().getStringArray(
-                R.array.accessibility_timeout_summaries);
-        int[] timeoutValues = getResources().getIntArray(
-                R.array.accessibility_timeout_selector_values);
-
-        int timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
-                    resolver, AccessibilityTimeoutController.CONTROL_TIMEOUT_SETTINGS_SECURE);
-
-        int idx = Ints.indexOf(timeoutValues, timeoutValue);
-        pref.setSummary(timeoutSummarys[idx == -1 ? 0 : idx]);
     }
 
     private void updateFeatureSummary(String prefKey, Preference pref) {
