@@ -163,7 +163,8 @@
 
         <SwitchPreference
             android:key="toggle_high_text_contrast_preference"
-            android:title="@string/accessibility_toggle_high_text_contrast_preference_title"/>
+            android:title="@string/accessibility_toggle_high_text_contrast_preference_title"
+            settings:controller="com.android.settings.accessibility.HighTextContrastPreferenceController"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
