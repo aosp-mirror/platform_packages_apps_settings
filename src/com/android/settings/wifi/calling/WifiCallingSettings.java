@@ -199,6 +199,12 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         return imsManager.isWfcEnabledByPlatform();
     }
 
+    @VisibleForTesting
+    boolean isWfcProvisionedOnDevice(SubscriptionInfo info) {
+        ImsManager imsManager = ImsManager.getInstance(getActivity(), info.getSimSlotIndex());
+        return imsManager.isWfcProvisionedOnDevice();
+    }
+
     private void updateSubList() {
         mSil = SubscriptionUtil.getActiveSubscriptions(
                 getContext().getSystemService(SubscriptionManager.class));
@@ -208,7 +214,8 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
             return;
         }
         for (int i = 0; i < mSil.size(); ) {
-            if (!isWfcEnabledByPlatform(mSil.get(i))) {
+            final SubscriptionInfo info = mSil.get(i);
+            if (!isWfcEnabledByPlatform(info) || !isWfcProvisionedOnDevice(info)) {
                 mSil.remove(i);
             } else {
                 i++;
