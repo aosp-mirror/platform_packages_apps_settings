@@ -397,10 +397,9 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"画面ロック、指紋"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"画面ロック"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"顔を追加しました"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"フェイスアンロックの設定"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"フェイスアンロックを設定します"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"フェイスアンロック"</string>
-    <!-- no translation found for security_settings_face_profile_preference_title (3906383224724942953) -->
-    <skip />
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"仕事用のフェイスアンロック"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"フェイスアンロックの設定方法"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"フェイスアンロックの設定"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"顔で認証"</string>
@@ -435,7 +434,7 @@
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"デバイスのロック解除"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"アプリのログインと支払い"</string>
     <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"フェイスアンロックの要件"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"目を開いている必要があります"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"目を開く"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"スマートフォンのロックを解除するには、目を開いている必要があります"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"常に確認が必要"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"アプリでフェイスアンロックを使用する場合、常に確認手順が必要です"</string>
@@ -825,8 +824,8 @@
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"削除"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"完了"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"名前"</string>
-    <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4GHz"</string>
-    <string name="wifi_band_5ghz" msgid="6433822023268515117">"5GHz"</string>
+    <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
+    <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"ログイン"</string>
     <string name="wifi_tap_to_sign_in" msgid="6990161842394669054">"ここをタップしてネットワークにログイン"</string>
     <string name="tx_link_speed" msgid="6139577455916971837">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
@@ -1033,8 +1032,8 @@
       <item quantity="one">ネットワーク: 1 件</item>
     </plurals>
     <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="8256430439661111672">
-      <item quantity="other">%d 件の定期購入</item>
-      <item quantity="one">1 件の定期購入</item>
+      <item quantity="other">%d 件の登録</item>
+      <item quantity="one">1 件の登録</item>
     </plurals>
     <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="2504425359919617586">
       <item quantity="other">%d 件のネットワークと登録</item>
@@ -1228,7 +1227,7 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"タップすると、デバイス カスタマイズ サービスのアクセス権限を管理できます"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Screen Attention は前面カメラを使用して、ユーザーが画面を見ているかどうかを検出します。この検出はデバイスのみで行われ、画像が保存されたり、Google に送信されたりすることはありません。"</string>
-    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"画面を見ている間は ON のままになります"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"見ている間は画面を ON のままにします"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜間モード"</string>
     <string name="night_display_text" msgid="1837277457033025056">"夜間モードを利用すると画面が黄味がかった色になります。薄明かりの下でも画面を見やすくなり、寝付きを良くする効果も期待できます。"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"スケジュール"</string>
@@ -1716,8 +1715,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"安全と規制に関する情報"</string>
     <string name="copyright_title" msgid="865906688917260647">"著作権"</string>
     <string name="license_title" msgid="1990487604356037871">"ライセンス"</string>
-    <!-- no translation found for module_license_title (258743239066841860) -->
-    <skip />
+    <string name="module_license_title" msgid="258743239066841860">"Google Play システム アップデートのライセンス"</string>
     <string name="terms_title" msgid="7697580845616764642">"利用規約"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"システムのWebViewライセンス"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"壁紙"</string>
@@ -1872,7 +1870,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"緊急アプリ"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"アプリの設定をリセット"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"アプリの設定をリセットしますか？"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"この操作により、次の設定がすべてリセットされます。\n\n "<li>"無効化されているアプリ"</li>\n" "<li>"無効化されているアプリの通知"</li>\n" "<li>"特定の操作で使用するデフォルトのアプリ"</li>\n" "<li>"アプリのバックグラウンドデータの制限"</li>\n" "<li>"権限のすべての制限"</li>\n\n"アプリのデータが失われることはありません。"</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"この操作により、次の設定がすべてリセットされます。\n\n"<li>"無効化されているアプリ"</li>\n<li>"無効化されているアプリの通知"</li>\n<li>"特定の操作で使用するデフォルトのアプリ"</li>\n<li>"アプリのバックグラウンドデータの制限"</li>\n<li>"権限のすべての制限"</li>\n\n"アプリのデータが失われることはありません。"</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"アプリをリセット"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"容量を管理"</string>
     <string name="filter" msgid="2018011724373033887">"フィルタ"</string>
@@ -2088,8 +2086,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"ボタンをタップしてズームします"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"ズーム"</b>"するには、画面をすばやく 3 回タップします。\n"<ul><li>"2 本以上の指をドラッグしてスクロール"</li>\n<li>"2 本以上の指でピンチ操作してズームを調整"</li></ul>\n\n<b>"一時的にズーム"</b>"するには、画面をすばやく 3 回タップし、3 回目のタップで指を押し続けます。\n"<ul><li>"ドラッグで画面上を移動"</li>\n<li>"指を放してズームアウト"</li></ul>\n\n"キーボードやナビゲーション バーでは拡大できません。"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"拡大機能を ON にすると、画面をズームインできます。\n\n"<b>"ズームするには"</b>"、拡大機能を ON にし、画面上のどこかをタップします。\n"<ul><li>"• スクロールするには 2 本以上の指でドラッグします"</li>\n<li>"• ズームレベルを調整するには 2 本以上の指でピンチします"</li></ul>\n\n<b>"一時的にズームするには"</b>"、拡大機能を ON にし、画面上のどこかを長押しします。\n"<ul><li>"• 拡大領域を移動するにはドラッグします"</li>\n<li>"• 拡大を停止するには指を離します"</li></ul>\n\n"キーボードやナビゲーション バーはズームインできません。"</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"ユーザー補助ボタンで開く"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"開く操作"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"ユーザー補助機能ボタンで開く"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"指の動きで開く"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"新しいユーザー補助操作を使用する"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"このサービスを ON または OFF にするには、画面の下部にあるユーザー補助機能ボタン <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> をタップします。\n\nサービスを切り替えるには、ユーザー補助機能ボタンを長押しします。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"このサービスを ON または OFF にするには、2 本の指で画面の下から上にスワイプします。\n\nサービスを切り替えるには、2 本の指で上にスワイプしたまま長押しします。"</string>
@@ -2512,7 +2510,9 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"使用しない"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"電池残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
     <string name="battery_percentage" msgid="723291197508049369">"電池残量"</string>
-    <string name="battery_percentage_description" msgid="8511658577507384014">"ステータスバーに電池残量を*%%*で表示する"</string>
+    <!-- String.format failed for translation -->
+    <!-- no translation found for battery_percentage_description (8511658577507384014) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="1144688045609771677">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"メモリ使用"</string>
@@ -3094,8 +3094,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth、NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"アプリと通知"</string>
-    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
-    <skip />
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"最近使ったアプリ、デフォルトのアプリ"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"仕事用プロファイルのアプリには通知へのアクセス権限はありません。"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"アカウント"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"アカウントが追加されていません"</string>
@@ -3216,8 +3215,8 @@
     <string name="emergency_tone_alert" msgid="8523447641290736852">"通知音"</string>
     <string name="emergency_tone_vibrate" msgid="2278872257053690683">"バイブレーション"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"電源オンの音"</string>
-    <string name="live_caption_title" msgid="2241633148129286971">"ライブ字幕"</string>
-    <string name="live_caption_summary" msgid="3365960379606535783">"自動字幕起こしメディア"</string>
+    <string name="live_caption_title" msgid="2241633148129286971">"自動字幕起こし"</string>
+    <string name="live_caption_summary" msgid="3365960379606535783">"メディアの自動字幕起こし"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"なし"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> 件有効</item>
@@ -4211,14 +4210,10 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"デフォルトのホームアプリ（<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>）でサポートされていません"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"デフォルトのホームアプリを切り替える"</string>
     <string name="information_label" msgid="8133109685432913360">"情報"</string>
-    <!-- no translation found for low_label (1679136861385616813) -->
-    <skip />
-    <!-- no translation found for high_label (7278863493316447831) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
-    <skip />
+    <string name="low_label" msgid="1679136861385616813">"低"</string>
+    <string name="high_label" msgid="7278863493316447831">"高"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"感度を上げると、画面の縁付近でのアプリの操作に影響することがあります。"</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"「戻る」の感度"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"画面をダブルタップして通知をチェック"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"タブレットの画面をダブルタップして通知をチェック"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"デバイスの画面をダブルタップして通知をチェック"</string>
@@ -4230,7 +4225,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"時刻、通知などの情報を確認するには、スマートフォンを持ち上げます。"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"時刻、通知などの情報を確認するには、タブレットを持ち上げます。"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"時刻、通知などの情報を確認するには、デバイスを持ち上げます。"</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"スマートフォンをタップしてチェックする"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"スマートフォンをタップしてチェック"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"タブレットをタップしてチェックする"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"デバイスをタップしてチェックする"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"時刻、通知などの情報を確認するには、画面をタップします。"</string>
@@ -4375,7 +4370,7 @@
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"集中するために通知を一時停止する"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"この機能は、お使いのデバイスではご利用いただけません"</string>
     <string name="disabled_feature" msgid="3232554901854971743">"この機能はご利用いただけません"</string>
-    <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"この機能はスマートフォンのパフォーマンスを低下させるためオフになっています"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"この機能はスマートフォンのパフォーマンスを低下させるため OFF になっています"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"GNSS 計測の完全な実行"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"デューティ サイクリングを無効にした状態で、すべての GNSS コンステレーションと頻度をトラッキングします"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"クラッシュ ダイアログを常に表示"</string>
@@ -4633,8 +4628,6 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"SIM の組み合わせに関する問題"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> を使用すると、機能が制限されることがあります。タップして詳細をご確認ください。"</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM の組み合わせ"</string>
-    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
-    <skip />
-    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
-    <skip />
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"仕事に関するポリシーの情報"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"IT 管理者によって管理されている設定"</string>
 </resources>
