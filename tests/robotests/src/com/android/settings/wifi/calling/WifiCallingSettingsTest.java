@@ -19,6 +19,7 @@ package com.android.settings.wifi.calling;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -105,5 +106,31 @@ public class WifiCallingSettingsTest {
         WifiCallingSettings.WifiCallingViewPagerAdapter adapter =
                 (WifiCallingSettings.WifiCallingViewPagerAdapter) pager.getAdapter();
         assertThat(adapter.getCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void setupFragment_twoSubscriptionsOneNotProvisionedOnDevice_oneResult() {
+        SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(111);
+        when(info2.getSubscriptionId()).thenReturn(222);
+
+        SubscriptionUtil.setActiveSubscriptionsForTesting(new ArrayList<>(
+                Arrays.asList(info1, info2)));
+        doReturn(true).when(mFragment).isWfcEnabledByPlatform(any(SubscriptionInfo.class));
+        doReturn(false).when(mFragment).isWfcProvisionedOnDevice(eq(info2));
+
+        Intent intent = new Intent();
+        intent.putExtra(Settings.EXTRA_SUB_ID, info1.getSubscriptionId());
+        FragmentController.of(mFragment, intent).create(0 /* containerViewId*/,
+                null /* bundle */).start().resume().visible().get();
+
+        View view = mFragment.getView();
+        RtlCompatibleViewPager pager = view.findViewById(R.id.view_pager);
+        assertThat(pager.getCurrentItem()).isEqualTo(0);
+
+        WifiCallingSettings.WifiCallingViewPagerAdapter adapter =
+                (WifiCallingSettings.WifiCallingViewPagerAdapter) pager.getAdapter();
+        assertThat(adapter.getCount()).isEqualTo(1);
     }
 }
