@@ -37,6 +37,7 @@ import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
 import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
 import com.android.settings.homepage.contextualcards.slices.ContextualAdaptiveSleepSlice;
 import com.android.settings.homepage.contextualcards.slices.ContextualNotificationChannelSlice;
+import com.android.settings.homepage.contextualcards.slices.FaceSetupSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.homepage.contextualcards.slices.NotificationChannelSlice;
 import com.android.settings.location.LocationSlice;
@@ -161,6 +162,15 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("enhanced_4g_lte")
+            .build();
+    /**
+     * Slice Uri for Face Enrollment
+     */
+    public static final Uri FACE_ENROLL_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("face_unlock_greeting_card")
             .build();
     /**
      * Backing Uri for the Flashlight Slice.
@@ -347,6 +357,7 @@ public class CustomSliceRegistry {
         sUriToSlice.put(DATA_USAGE_SLICE_URI, DataUsageSlice.class);
         sUriToSlice.put(DEVICE_INFO_SLICE_URI, DeviceInfoSlice.class);
         sUriToSlice.put(EMERGENCY_INFO_SLICE_URI, EmergencyInfoSlice.class);
+        sUriToSlice.put(FACE_ENROLL_SLICE_URI, FaceSetupSlice.class);
         sUriToSlice.put(FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
         sUriToSlice.put(LOCATION_SLICE_URI, LocationSlice.class);
         sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
