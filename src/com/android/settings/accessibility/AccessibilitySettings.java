@@ -150,14 +150,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     // presentation.
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
 
-    // Settings that should be changed when toggling animations
-    private static final String[] TOGGLE_ANIMATION_TARGETS = {
-            Settings.Global.WINDOW_ANIMATION_SCALE, Settings.Global.TRANSITION_ANIMATION_SCALE,
-            Settings.Global.ANIMATOR_DURATION_SCALE
-    };
-    private static final String ANIMATION_ON_VALUE = "1";
-    private static final String ANIMATION_OFF_VALUE = "0";
-
     static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
 
     private final Map<String, String> mLongPressTimeoutValueToTitleMap = new HashMap<>();
@@ -332,9 +324,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         } else if (mToggleLargePointerIconPreference == preference) {
             handleToggleLargePointerIconPreferenceClick();
             return true;
-        } else if (mToggleDisableAnimationsPreference == preference) {
-            handleToggleDisableAnimations();
-            return true;
         } else if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
             return true;
@@ -396,14 +385,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON,
                 mToggleLargePointerIconPreference.isChecked() ? 1 : 0);
-    }
-
-    private void handleToggleDisableAnimations() {
-        String newAnimationValue = mToggleDisableAnimationsPreference.isChecked()
-                ? ANIMATION_OFF_VALUE : ANIMATION_ON_VALUE;
-        for (String animationPreference : TOGGLE_ANIMATION_TARGETS) {
-            Settings.Global.putString(getContentResolver(), animationPreference, newAnimationValue);
-        }
     }
 
     private void handleToggleMasterMonoPreferenceClick() {
@@ -722,8 +703,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         mToggleLargePointerIconPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON, 0) != 0);
 
-        updateDisableAnimationsToggle();
-
         // Master mono
         updateMasterMono();
 
@@ -840,19 +819,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                 return context.getString(R.string.switch_off_text);
             }
         }
-    }
-
-    private void updateDisableAnimationsToggle() {
-        boolean allAnimationsDisabled = true;
-        for (String animationSetting : TOGGLE_ANIMATION_TARGETS) {
-            if (!TextUtils.equals(
-                    Settings.Global.getString(getContentResolver(), animationSetting),
-                    ANIMATION_OFF_VALUE)) {
-                allAnimationsDisabled = false;
-                break;
-            }
-        }
-        mToggleDisableAnimationsPreference.setChecked(allAnimationsDisabled);
     }
 
     private void updateMasterMono() {
