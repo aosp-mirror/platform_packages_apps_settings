@@ -1025,7 +1025,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Síť Wi-Fi operátora"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Připojit přes: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> chce zapnout vyhledávání sítí (kvůli lepšímu určení polohy i kvůli jiným účelům) a hledat sítě i v případě, že je vypnut modul Wi-Fi.\n\nChcete tuto možnost povolit všem aplikacím, které chtějí vyhledávat sítě?"</string>
-    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Neznámá aplikace chce zapnout vyhledávání sítí (kvůli lepšímu určení polohy a dalším účelům) i v případě, že je vypnutá Wi-Fi.\n\nChcete tuto možnost povolit všem aplikacím, které chtějí vyhledávat sítě?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Neznámá aplikace chce zapnout vyhledávání sítí (kvůli lepšímu určení polohy a dalším účelům) i v případě, že je vypnutá Wi-Fi. \n\nChcete tuto možnost povolit všem aplikacím, které chtějí vyhledávat sítě?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Chcete-li toto nastavení vypnout, přejděte do rozbalovací nabídky Rozšířené."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Povolit"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Zamítnout"</string>
@@ -1064,16 +1064,16 @@
       <item quantity="one">1 síť</item>
     </plurals>
     <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="8256430439661111672">
-      <item quantity="few">%d předplatná</item>
-      <item quantity="many">%d předplatného</item>
-      <item quantity="other">%d předplatných</item>
-      <item quantity="one">1 předplatné</item>
+      <item quantity="few">%d odběry</item>
+      <item quantity="many">%d odběru</item>
+      <item quantity="other">%d odběrů</item>
+      <item quantity="one">1 odběr</item>
     </plurals>
     <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="2504425359919617586">
-      <item quantity="few">%d sítě a předplatná</item>
-      <item quantity="many">%d sítě a předplatná</item>
-      <item quantity="other">%d sítí a předplatná</item>
-      <item quantity="one">1 síť a předplatné</item>
+      <item quantity="few">%d sítě a odběry</item>
+      <item quantity="many">%d sítě a odběru</item>
+      <item quantity="other">%d sítí a odběrů</item>
+      <item quantity="one">1 síť a odběr</item>
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Rozšířené nastavení"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
@@ -1374,7 +1374,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Verze základního pásma"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Verze jádra"</string>
     <string name="build_number" msgid="3075795840572241758">"Číslo sestavení"</string>
-    <string name="module_version" msgid="7329118610303805859">"Aktualizovat systém Google Play"</string>
+    <string name="module_version" msgid="7329118610303805859">"Aktualizace systému Google Play"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Nedostupné"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Stav"</string>
     <string name="device_status" msgid="607405385799807324">"Stav"</string>
@@ -1752,8 +1752,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Příručka k bezpečnosti a předpisům"</string>
     <string name="copyright_title" msgid="865906688917260647">"Autorská práva"</string>
     <string name="license_title" msgid="1990487604356037871">"Licence"</string>
-    <!-- no translation found for module_license_title (258743239066841860) -->
-    <skip />
+    <string name="module_license_title" msgid="258743239066841860">"Licence aktualizace systému Google Play"</string>
     <string name="terms_title" msgid="7697580845616764642">"Smluvní podmínky"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Systémová licence WebView"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Tapety"</string>
@@ -1910,7 +1909,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplikace k příjmu výstražných zpráv"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Obnovit nastavení aplikací"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Obnovit nastavení aplikací?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Tímto obnovíte všechna nastavení následujících položek:\n\n "<li>"deaktivované aplikace,"</li>\n" "<li>"deaktivovaná oznámení aplikací,"</li>\n" "<li>"výchozí aplikace pro různé akce,"</li>\n" "<li>"omezení datových přenosů na pozadí pro aplikace,"</li>\n" "<li>"veškerá omezení oprávnění."</li>\n\n" Nepřijdete o žádná data aplikací."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Tímto obnovíte všechna nastavení následujících položek:\n\n"<li>"deaktivované aplikace,"</li>\n<li>"deaktivovaná oznámení aplikací,"</li>\n<li>"výchozí aplikace pro různé akce,"</li>\n<li>"omezení datových přenosů na pozadí pro aplikace,"</li>\n<li>"veškerá omezení oprávnění."</li>\n\n"Nepřijdete o žádná data aplikací."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Obnovit aplikace"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Správa paměti"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrovat"</string>
@@ -3172,8 +3171,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplikace a oznámení"</string>
-    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
-    <skip />
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Nedávné aplikace, výchozí aplikace"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Aplikace v pracovním profilu nemají přístup k oznámením."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Účty"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Nebyly přidány žádné účty"</string>
@@ -3295,7 +3293,7 @@
     <string name="emergency_tone_vibrate" msgid="2278872257053690683">"Vibrace"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Zvuky při spouštění"</string>
     <string name="live_caption_title" msgid="2241633148129286971">"Okamžitý přepis"</string>
-    <string name="live_caption_summary" msgid="3365960379606535783">"Automatické titulky k médiím"</string>
+    <string name="live_caption_summary" msgid="3365960379606535783">"Automatické přepisy médií"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Nikdy"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
       <item quantity="few"><xliff:g id="ON_COUNT">%d</xliff:g> aktivována</item>
@@ -4351,14 +4349,10 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Vaše výchozí aplikace pro domácnost (<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>) tuto funkci nepodporuje"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Přepnout výchozí aplikace pro domácnost"</string>
     <string name="information_label" msgid="8133109685432913360">"Informace"</string>
-    <!-- no translation found for low_label (1679136861385616813) -->
-    <skip />
-    <!-- no translation found for high_label (7278863493316447831) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
-    <skip />
+    <string name="low_label" msgid="1679136861385616813">"Nízká"</string>
+    <string name="high_label" msgid="7278863493316447831">"Vysoká"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Vyšší citlivost může narušovat gesta v aplikacích prováděná u okrajů obrazovky."</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Citlivost na zpětné gesto"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Kontrola telefonu dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Kontrola tabletu dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Kontrola zařízení dvojitým klepnutím"</string>
@@ -4797,8 +4791,6 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problém s kombinací SIM karet"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Použití operátora <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> může omezit funkce. Klepnutím zobrazíte další informace."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Kombinace SIM karet"</string>
-    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
-    <skip />
-    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
-    <skip />
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"Informace o vašich pracovních zásadách"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Nastavení spravováno administrátorem IT"</string>
 </resources>

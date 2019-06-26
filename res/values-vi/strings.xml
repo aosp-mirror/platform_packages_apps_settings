@@ -993,7 +993,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Mạng Wi‑Fi của nhà cung cấp dịch vụ"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Kết nối qua <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Để nâng cao độ chính xác vị trí và phục vụ các mục đích khác, <xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật tính năng quét mạng ngay cả khi Wi-Fi đang tắt.\n\nCho phép cài đặt này đối với tất cả ứng dụng muốn quét?"</string>
-    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Để nâng cao độ chính xác vị trí và phục vụ các mục đích khác, ứng dụng không xác định muốn bật tính năng quét mạng ngay cả khi Wi-Fi tắt.\n\nCho phép bật tính năng này đối với tất cả ứng dụng muốn quét?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Để nâng cao độ chính xác vị trí và phục vụ các mục đích khác, một ứng dụng không xác định muốn bật tính năng quét tìm mạng ngay cả khi Wi-Fi tắt.\n\nBạn có muốn cho phép tất cả các ứng dụng có thể quét tìm mạng không?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Để tắt tính năng này, đi tới phần Nâng cao trong trình đơn mục bổ sung."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Cho phép"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Từ chối"</string>
@@ -1710,8 +1710,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Hướng dẫn về an toàn và quy định"</string>
     <string name="copyright_title" msgid="865906688917260647">"Bản quyền"</string>
     <string name="license_title" msgid="1990487604356037871">"Giấy phép"</string>
-    <!-- no translation found for module_license_title (258743239066841860) -->
-    <skip />
+    <string name="module_license_title" msgid="258743239066841860">"Giấy phép cho bản cập nhật hệ thống Google Play"</string>
     <string name="terms_title" msgid="7697580845616764642">"Điều khoản và điều kiện"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Giấy phép WebView hệ thống"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Hình nền"</string>
@@ -2165,7 +2164,7 @@
       <item quantity="other">Độ trễ rất dài (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> mili giây)</item>
       <item quantity="one">Độ trễ rất dài (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> mili giây)</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="4272038147476749536">"Mức độ đổ chuông <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, thông báo <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, mức độ chạm <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
+    <string name="accessibility_vibration_summary" msgid="4272038147476749536">"Chuông: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, thông báo: <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, chạm: <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"Đổ chuông và thông báo được đặt thành tắt"</string>
     <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"Đổ chuông và thông báo được đặt thành thấp"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"Đổ chuông và thông báo được đặt thành trung bình"</string>
@@ -2324,9 +2323,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Máy tính bảng được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Thiết bị được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"Pin có thể hết sớm hơn thường lệ"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Bạn sử dụng điện thoại nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng hàng đầu theo mức sử dụng pin:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Bạn đã sử dụng máy tính bảng nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng hàng đầu theo mức sử dụng pin:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Bạn đã sử dụng thiết bị nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng hàng đầu theo mức sử dụng pin:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Bạn sử dụng điện thoại nhiều hơn mức bình thường. Pin điện thoại có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Bạn dùng máy tính bảng nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Bạn dùng thiết bị nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Bao gồm hoạt động công suất cao trong nền"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other"> Hạn chế %1$d ứng dụng</item>
@@ -3000,7 +2999,7 @@
     <string name="enhanced_4g_lte_mode_title" msgid="2544026384901010606">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="480304128966864221">"Gọi nâng cao"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="6839553611093179243">"Gọi qua 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="4156658595226379286">"Sử dụng dịch vụ LTE để cải tiến tính năng thoại và các phương thức giao tiếp khác (khuyến nghị)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="4156658595226379286">"Dùng dịch vụ LTE để cải thiện tính năng thoại và các phương thức giao tiếp khác (khuyên dùng)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="6145184730437907078">"Sử dụng dịch vụ 4G để cải tiến tính năng thoại và các phương thức giao tiếp khác (đề xuất)"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Loại mạng ưu tiên"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (khuyên dùng)"</string>
@@ -3088,8 +3087,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Ứng dụng và thông báo"</string>
-    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
-    <skip />
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Ứng dụng gần đây, ứng dụng mặc định"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Trong hồ sơ công việc, các ứng dụng không có quyền truy cập vào mục thông báo."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Tài khoản"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Chưa thêm tài khoản nào"</string>
@@ -3211,7 +3209,7 @@
     <string name="emergency_tone_vibrate" msgid="2278872257053690683">"Rung"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Âm thanh bật nguồn"</string>
     <string name="live_caption_title" msgid="2241633148129286971">"Phụ đề trực tiếp"</string>
-    <string name="live_caption_summary" msgid="3365960379606535783">"Tự động chú thích nội dung"</string>
+    <string name="live_caption_summary" msgid="3365960379606535783">"Tự động tạo phụ đề cho nội dung nghe nhìn"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Không bao giờ"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
       <item quantity="other">Đã bật <xliff:g id="ON_COUNT">%d</xliff:g></item>
@@ -3569,8 +3567,8 @@
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Chỉ từ danh bạ"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Chỉ từ những người liên hệ có gắn dấu sao"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"Từ liên hệ có gắn dấu sao và người gọi nhiều lần"</string>
-    <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"Từ danh bạ và người gọi lặp lại"</string>
-    <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Chỉ từ người gọi lặp lại"</string>
+    <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"Từ danh bạ và người gọi nhiều lần"</string>
+    <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Chỉ từ người gọi nhiều lần"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Không có"</string>
     <string name="zen_mode_from_none_calls" msgid="7705112158761351044">"Không cho phép cuộc gọi"</string>
     <string name="zen_mode_from_none_messages" msgid="3300937656725582608">"Không cho phép tin nhắn"</string>
@@ -3593,8 +3591,8 @@
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"bất kỳ ai"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"liên hệ"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"người liên hệ có gắn dấu sao"</string>
-    <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Người gọi lặp lại"</string>
-    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"người gọi lặp lại"</string>
+    <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Người gọi nhiều lần"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"người gọi nhiều lần"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Cho phép người gọi nhiều lần"</string>
     <string name="zen_mode_calls_summary_one" msgid="1711737896388108388">"Cho phép từ <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="8476861928783654064">"Cho phép từ <xliff:g id="CALLER_TYPE">%1$s</xliff:g> và <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
@@ -4205,14 +4203,10 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Chưa hỗ trợ trong ứng dụng mặc định trên màn hình chính <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Chuyển ứng dụng mặc định trên màn hình chính"</string>
     <string name="information_label" msgid="8133109685432913360">"Thông tin"</string>
-    <!-- no translation found for low_label (1679136861385616813) -->
-    <skip />
-    <!-- no translation found for high_label (7278863493316447831) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
-    <skip />
+    <string name="low_label" msgid="1679136861385616813">"Thấp"</string>
+    <string name="high_label" msgid="7278863493316447831">"Cao"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Độ nhạy cao hơn có thể xung đột với mọi cử chỉ trong ứng dụng dọc theo các cạnh màn hình."</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Độ nhạy với cử chỉ quay lại"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Nhấn đúp để kiểm tra điện thoại"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Nhấn đúp để kiểm tra máy tính bảng"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Nhấn đúp để kiểm tra thiết bị"</string>
@@ -4368,7 +4362,7 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Cập nhật chế độ Không làm phiền"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Tạm dừng thông báo để tập trung"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Không sử dụng được tính năng này trên thiết bị này"</string>
-    <string name="disabled_feature" msgid="3232554901854971743">"Tính năng chưa có sẵn"</string>
+    <string name="disabled_feature" msgid="3232554901854971743">"Tính năng không hoạt động"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Tính năng này đã bị tắt vì sẽ khiến điện thoại chạy chậm"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Thực thi số đo GNSS đầy đủ"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Theo dõi tất cả chòm sao và tần suất GNSS mà không có chu kỳ làm việc"</string>
@@ -4624,11 +4618,9 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Không thể gửi tin nhắn MMS"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Nhấn để cho phép nhắn tin MMS qua <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> khi dữ liệu di động đang tắt"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Tin nhắn MMS"</string>
-    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Vấn đề với việc kết hợp SIM"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Sự cố kết hợp SIM"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Việc sử dụng <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> có thể làm giới hạn chức năng. Nhấn để tìm hiểu thêm."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Kết hợp SIM"</string>
-    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
-    <skip />
-    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
-    <skip />
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"Thông tin về chính sách công việc của bạn"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Các tùy chọn cài đặt do quản trị viên CNTT quản lý"</string>
 </resources>
