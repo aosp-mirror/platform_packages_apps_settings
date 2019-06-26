@@ -143,7 +143,8 @@
             android:key="toggle_master_mono"
             android:title="@string/accessibility_toggle_master_mono_title"
             android:summary="@string/accessibility_toggle_master_mono_summary"
-            android:persistent="false"/>
+            android:persistent="false"
+            settings:controller="com.android.settings.accessibility.MasterMonoPreferenceController"/>
 
         <com.android.settings.accessibility.BalanceSeekBarPreference
             android:key="seekbar_master_balance"
