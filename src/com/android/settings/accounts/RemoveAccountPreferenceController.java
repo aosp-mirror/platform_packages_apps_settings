@@ -191,7 +191,11 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
             }
             final RemoveAccountFailureDialog dialog = new RemoveAccountFailureDialog();
             dialog.setTargetFragment(parent, 0);
-            dialog.show(parent.getFragmentManager(), FAILED_REMOVAL_DIALOG);
+            try {
+                dialog.show(parent.getFragmentManager(), FAILED_REMOVAL_DIALOG);
+            } catch (IllegalStateException e) {
+                Log.w(TAG, "Can't show RemoveAccountFailureDialog. " +  e.getMessage());
+            }
         }
 
         @Override
