@@ -24,7 +24,6 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -64,8 +63,6 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.search.SearchIndexable;
-
-import com.google.common.primitives.Ints;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -127,8 +124,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference";
-    private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
-            "accessibility_control_timeout_preference_fragment";
     private static final String DARK_UI_MODE_PREFERENCE =
             "dark_ui_mode_accessibility";
     private static final String LIVE_CAPTION_PREFERENCE_KEY =
@@ -154,14 +149,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     // to generate the AccessibilityServiceInfo we need for proper
     // presentation.
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
-
-    // Settings that should be changed when toggling animations
-    private static final String[] TOGGLE_ANIMATION_TARGETS = {
-            Settings.Global.WINDOW_ANIMATION_SCALE, Settings.Global.TRANSITION_ANIMATION_SCALE,
-            Settings.Global.ANIMATOR_DURATION_SCALE
-    };
-    private static final String ANIMATION_ON_VALUE = "1";
-    private static final String ANIMATION_OFF_VALUE = "0";
 
     static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
 
@@ -277,7 +264,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.accessibility_settings);
         initializeAllPreferences();
         mDpm = (DevicePolicyManager) (getActivity()
                 .getSystemService(Context.DEVICE_POLICY_SERVICE));
@@ -337,9 +323,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             return true;
         } else if (mToggleLargePointerIconPreference == preference) {
             handleToggleLargePointerIconPreferenceClick();
-            return true;
-        } else if (mToggleDisableAnimationsPreference == preference) {
-            handleToggleDisableAnimations();
             return true;
         } else if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
@@ -402,14 +385,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON,
                 mToggleLargePointerIconPreference.isChecked() ? 1 : 0);
-    }
-
-    private void handleToggleDisableAnimations() {
-        String newAnimationValue = mToggleDisableAnimationsPreference.isChecked()
-                ? ANIMATION_OFF_VALUE : ANIMATION_ON_VALUE;
-        for (String animationPreference : TOGGLE_ANIMATION_TARGETS) {
-            Settings.Global.putString(getContentResolver(), animationPreference, newAnimationValue);
-        }
     }
 
     private void handleToggleMasterMonoPreferenceClick() {
@@ -728,8 +703,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         mToggleLargePointerIconPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON, 0) != 0);
 
-        updateDisableAnimationsToggle();
-
         // Master mono
         updateMasterMono();
 
@@ -754,22 +727,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
-
-        updateAccessibilityTimeoutSummary(getContentResolver(),
-                findPreference(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE));
-    }
-
-    void updateAccessibilityTimeoutSummary(ContentResolver resolver, Preference pref) {
-        String[] timeoutSummarys = getResources().getStringArray(
-                R.array.accessibility_timeout_summaries);
-        int[] timeoutValues = getResources().getIntArray(
-                R.array.accessibility_timeout_selector_values);
-
-        int timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
-                    resolver, AccessibilityTimeoutController.CONTROL_TIMEOUT_SETTINGS_SECURE);
-
-        int idx = Ints.indexOf(timeoutValues, timeoutValue);
-        pref.setSummary(timeoutSummarys[idx == -1 ? 0 : idx]);
     }
 
     private void updateFeatureSummary(String prefKey, Preference pref) {
@@ -862,19 +819,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                 return context.getString(R.string.switch_off_text);
             }
         }
-    }
-
-    private void updateDisableAnimationsToggle() {
-        boolean allAnimationsDisabled = true;
-        for (String animationSetting : TOGGLE_ANIMATION_TARGETS) {
-            if (!TextUtils.equals(
-                    Settings.Global.getString(getContentResolver(), animationSetting),
-                    ANIMATION_OFF_VALUE)) {
-                allAnimationsDisabled = false;
-                break;
-            }
-        }
-        mToggleDisableAnimationsPreference.setChecked(allAnimationsDisabled);
     }
 
     private void updateMasterMono() {

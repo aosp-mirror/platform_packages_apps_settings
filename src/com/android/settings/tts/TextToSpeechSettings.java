@@ -26,7 +26,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings.Secure;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
@@ -44,6 +47,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.Utils;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
@@ -148,6 +152,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
      */
     private final TextToSpeech.OnInitListener mInitListener = this::onInitEngine;
 
+    /**
+     * A UserManager used to set settings for both person and work profiles for a user
+     */
+    private UserManager mUserManager;
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.TTS_TEXT_TO_SPEECH;
@@ -175,6 +184,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                 .setButton2Text(R.string.tts_reset)
                 .setButton2OnClickListener(v -> resetTts())
                 .setButton1Enabled(true);
+
+        mUserManager = (UserManager) getActivity()
+                .getApplicationContext().getSystemService(Context.USER_SERVICE);
 
         if (savedInstanceState == null) {
             mLocalePreference.setEnabled(false);
@@ -670,8 +682,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     private void updateSpeechRate(int speechRateSeekBarProgress) {
         mDefaultRate = getValueFromSeekBarProgress(KEY_DEFAULT_RATE, speechRateSeekBarProgress);
         try {
-            android.provider.Settings.Secure.putInt(
-                    getContentResolver(), TTS_DEFAULT_RATE, mDefaultRate);
+            updateTTSSetting(TTS_DEFAULT_RATE, mDefaultRate);
             if (mTts != null) {
                 mTts.setSpeechRate(mDefaultRate / 100.0f);
             }
@@ -685,8 +696,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     private void updateSpeechPitchValue(int speechPitchSeekBarProgress) {
         mDefaultPitch = getValueFromSeekBarProgress(KEY_DEFAULT_PITCH, speechPitchSeekBarProgress);
         try {
-            android.provider.Settings.Secure.putInt(
-                    getContentResolver(), TTS_DEFAULT_PITCH, mDefaultPitch);
+            updateTTSSetting(TTS_DEFAULT_PITCH, mDefaultPitch);
             if (mTts != null) {
                 mTts.setPitch(mDefaultPitch / 100.0f);
             }
@@ -695,6 +705,16 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             Log.e(TAG, "could not persist default TTS pitch setting", e);
         }
         return;
+    }
+
+    private void updateTTSSetting(String key, int value) {
+        Secure.putInt(
+                    getContentResolver(), key, value);
+        final int managedProfileUserId =
+                Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+        if (managedProfileUserId != UserHandle.USER_NULL) {
+            Secure.putIntForUser(getContentResolver(), key, value, managedProfileUserId);
+        }
     }
 
     private void updateWidgetState(boolean enable) {
