@@ -89,10 +89,7 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.NAMESPACE_PRIVACY,
-                        com.android.settings.Utils.PROPERTY_PERMISSIONS_HUB_ENABLED)) ?
-                AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
+        return UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
