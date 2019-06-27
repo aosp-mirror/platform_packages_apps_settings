@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static android.os.Vibrator.VibrationIntensity;
-
 import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -33,7 +31,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
-import android.os.Vibrator;
 import android.provider.DeviceConfig;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -110,8 +107,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "magnification_preference_screen";
-    private static final String VIBRATION_PREFERENCE_SCREEN =
-            "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference";
     private static final String DARK_UI_MODE_PREFERENCE =
@@ -198,7 +193,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mHearingAidPreference;
-    private Preference mVibrationPreferenceScreen;
     private Preference mLiveCaptionPreference;
     private SwitchPreference mToggleInversionPreference;
     private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
@@ -392,9 +386,6 @@ public class AccessibilitySettings extends DashboardFragment implements
 
         // Accessibility shortcut.
         mAccessibilityShortcutPreferenceScreen = findPreference(ACCESSIBILITY_SHORTCUT_PREFERENCE);
-
-        // Vibrations.
-        mVibrationPreferenceScreen = findPreference(VIBRATION_PREFERENCE_SCREEN);
 
         // Dark Mode.
         mDarkUIModePreference = findPreference(DARK_UI_MODE_PREFERENCE);
@@ -618,8 +609,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         mSelectLongPressTimeoutPreference.setValue(value);
         mSelectLongPressTimeoutPreference.setSummary(mLongPressTimeoutValueToTitleMap.get(value));
 
-        updateVibrationSummary(mVibrationPreferenceScreen);
-
         mHearingAidPreferenceController.updateState(mHearingAidPreference);
 
         mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
@@ -636,78 +625,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
         pref.setSummary(enabled ? R.string.accessibility_feature_state_on
                 : R.string.accessibility_feature_state_off);
-    }
-
-    @VisibleForTesting
-    void updateVibrationSummary(Preference pref) {
-        final Context context = getContext();
-        final Vibrator vibrator = context.getSystemService(Vibrator.class);
-
-        int ringIntensity = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.RING_VIBRATION_INTENSITY,
-                vibrator.getDefaultRingVibrationIntensity());
-        if (Settings.System.getInt(context.getContentResolver(),
-                Settings.System.VIBRATE_WHEN_RINGING, 0) == 0 && !isRampingRingerEnabled(context)) {
-            ringIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
-        }
-        CharSequence ringIntensityString =
-                VibrationIntensityPreferenceController.getIntensityString(context, ringIntensity);
-
-        int notificationIntensity = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                vibrator.getDefaultNotificationVibrationIntensity());
-        CharSequence notificationIntensityString =
-                VibrationIntensityPreferenceController.getIntensityString(context,
-                        notificationIntensity);
-
-        int touchIntensity = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.HAPTIC_FEEDBACK_INTENSITY,
-                vibrator.getDefaultHapticFeedbackIntensity());
-        if (Settings.System.getInt(context.getContentResolver(),
-                Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) == 0) {
-            touchIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
-        }
-        CharSequence touchIntensityString =
-                VibrationIntensityPreferenceController.getIntensityString(context, touchIntensity);
-
-        if (mVibrationPreferenceScreen == null) {
-            mVibrationPreferenceScreen = findPreference(VIBRATION_PREFERENCE_SCREEN);
-        }
-
-        if (ringIntensity == touchIntensity && ringIntensity == notificationIntensity) {
-            mVibrationPreferenceScreen.setSummary(ringIntensityString);
-        } else {
-            mVibrationPreferenceScreen.setSummary(
-                    getString(R.string.accessibility_vibration_summary,
-                            ringIntensityString,
-                            notificationIntensityString,
-                            touchIntensityString));
-        }
-    }
-
-    private String getVibrationSummary(Context context, @VibrationIntensity int intensity) {
-        final boolean supportsMultipleIntensities = context.getResources().getBoolean(
-                R.bool.config_vibration_supports_multiple_intensities);
-        if (supportsMultipleIntensities) {
-            switch (intensity) {
-                case Vibrator.VIBRATION_INTENSITY_OFF:
-                    return context.getString(R.string.accessibility_vibration_summary_off);
-                case Vibrator.VIBRATION_INTENSITY_LOW:
-                    return context.getString(R.string.accessibility_vibration_summary_low);
-                case Vibrator.VIBRATION_INTENSITY_MEDIUM:
-                    return context.getString(R.string.accessibility_vibration_summary_medium);
-                case Vibrator.VIBRATION_INTENSITY_HIGH:
-                    return context.getString(R.string.accessibility_vibration_summary_high);
-                default:
-                    return "";
-            }
-        } else {
-            if (intensity == Vibrator.VIBRATION_INTENSITY_OFF) {
-                return context.getString(R.string.switch_on_text);
-            } else {
-                return context.getString(R.string.switch_off_text);
-            }
-        }
     }
 
     private void updateAccessibilityShortcut(Preference preference) {
