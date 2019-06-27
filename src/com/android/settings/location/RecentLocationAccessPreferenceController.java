@@ -64,9 +64,7 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
 
     @Override
     public boolean isAvailable() {
-        return Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.NAMESPACE_PRIVACY,
-                        Utils.PROPERTY_PERMISSIONS_HUB_ENABLED));
+        return false;
     }
 
     @Override
