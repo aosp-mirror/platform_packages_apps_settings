@@ -157,9 +157,10 @@
             android:title="@string/accessibility_hearingaid_title"/>
 
         <Preference
-            android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
             android:key="captioning_preference_screen"
-            android:title="@string/accessibility_captioning_title"/>
+            android:title="@string/accessibility_captioning_title"
+            android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
+            settings:controller="com.android.settings.accessibility.CaptioningPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
