@@ -3033,6 +3033,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
         <service
             android:name=".development.qstile.DevelopmentTiles$GPUProfiling"
@@ -3043,6 +3045,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
         <service
             android:name=".development.qstile.DevelopmentTiles$ForceRTL"
@@ -3053,6 +3057,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
         <service
             android:name=".development.qstile.DevelopmentTiles$AnimationSpeed"
@@ -3063,6 +3069,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
 
         <service
@@ -3074,6 +3082,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
 
         <service
@@ -3085,6 +3095,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
 
         <activity
