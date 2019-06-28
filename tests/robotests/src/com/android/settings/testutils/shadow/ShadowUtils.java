@@ -39,6 +39,7 @@ public class ShadowUtils {
     private static ComponentName sDeviceOwnerComponentName;
     private static Map<String, String> sAppNameMap;
     private static boolean sIsSystemAlertWindowEnabled;
+    private static boolean sIsVoiceCapable;
 
     @Implementation
     protected static int enforceSameOwner(Context context, int userId) {
@@ -58,6 +59,7 @@ public class ShadowUtils {
         sFingerprintManager = null;
         sIsUserAMonkey = false;
         sIsDemoUser = false;
+        sIsVoiceCapable = false;
     }
 
     public static void setIsDemoUser(boolean isDemoUser) {
@@ -122,5 +124,14 @@ public class ShadowUtils {
 
     public static void setIsSystemAlertWindowEnabled(boolean enabled) {
         sIsSystemAlertWindowEnabled = enabled;
+    }
+
+    @Implementation
+    protected static boolean isVoiceCapable(Context context) {
+        return sIsVoiceCapable;
+    }
+
+    public static void setIsVoiceCapable(boolean isVoiceCapable) {
+        sIsVoiceCapable = isVoiceCapable;
     }
 }

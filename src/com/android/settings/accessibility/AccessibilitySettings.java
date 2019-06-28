@@ -39,8 +39,6 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -97,12 +95,8 @@ public class AccessibilitySettings extends DashboardFragment implements
     };
 
     // Preferences
-    private static final String TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE =
-            "toggle_high_text_contrast_preference";
     private static final String TOGGLE_INVERSION_PREFERENCE =
             "toggle_inversion_preference";
-    private static final String TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE =
-            "toggle_power_button_ends_call_preference";
     private static final String TOGGLE_LARGE_POINTER_ICON =
             "toggle_large_pointer_icon";
     private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
@@ -200,8 +194,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private final Map<ComponentName, PreferenceCategory> mPreBundledServiceComponentToCategoryMap =
             new ArrayMap<>();
 
-    private SwitchPreference mToggleHighTextContrastPreference;
-    private SwitchPreference mTogglePowerButtonEndsCallPreference;
     private SwitchPreference mToggleLargePointerIconPreference;
     private SwitchPreference mToggleDisableAnimationsPreference;
     private SwitchPreference mToggleMasterMonoPreference;
@@ -315,16 +307,7 @@ public class AccessibilitySettings extends DashboardFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (mToggleHighTextContrastPreference == preference) {
-            handleToggleTextContrastPreferenceClick();
-            return true;
-        } else if (mTogglePowerButtonEndsCallPreference == preference) {
-            handleTogglePowerButtonEndsCallPreferenceClick();
-            return true;
-        } else if (mToggleLargePointerIconPreference == preference) {
-            handleToggleLargePointerIconPreferenceClick();
-            return true;
-        } else if (mToggleMasterMonoPreference == preference) {
+        if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
             return true;
         } else if (mHearingAidPreferenceController.handlePreferenceTreeClick(preference)) {
@@ -367,26 +350,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                         DeviceConfig.NAMESPACE_TELEPHONY, RAMPING_RINGER_ENABLED, false);
     }
 
-    private void handleToggleTextContrastPreferenceClick() {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED,
-                (mToggleHighTextContrastPreference.isChecked() ? 1 : 0));
-    }
-
-    private void handleTogglePowerButtonEndsCallPreferenceClick() {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
-                (mTogglePowerButtonEndsCallPreference.isChecked()
-                        ? Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP
-                        : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
-    }
-
-    private void handleToggleLargePointerIconPreferenceClick() {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON,
-                mToggleLargePointerIconPreference.isChecked() ? 1 : 0);
-    }
-
     private void handleToggleMasterMonoPreferenceClick() {
         Settings.System.putIntForUser(getContentResolver(), Settings.System.MASTER_MONO,
                 mToggleMasterMonoPreference.isChecked() ? 1 : 0, UserHandle.USER_CURRENT);
@@ -398,25 +361,11 @@ public class AccessibilitySettings extends DashboardFragment implements
             mCategoryToPrefCategoryMap.put(CATEGORIES[i], prefCategory);
         }
 
-        // Text contrast.
-        mToggleHighTextContrastPreference =
-                (SwitchPreference) findPreference(TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE);
-
         // Display inversion.
         mToggleInversionPreference = findPreference(TOGGLE_INVERSION_PREFERENCE);
 
-        // Power button ends calls.
-        mTogglePowerButtonEndsCallPreference =
-                (SwitchPreference) findPreference(TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE);
-        if (!KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
-                || !Utils.isVoiceCapable(getActivity())) {
-            mCategoryToPrefCategoryMap.get(CATEGORY_INTERACTION_CONTROL)
-                    .removePreference(mTogglePowerButtonEndsCallPreference);
-        }
-
         // Large pointer icon.
-        mToggleLargePointerIconPreference =
-                (SwitchPreference) findPreference(TOGGLE_LARGE_POINTER_ICON);
+        mToggleLargePointerIconPreference = findPreference(TOGGLE_LARGE_POINTER_ICON);
 
         mToggleDisableAnimationsPreference =
                 (SwitchPreference) findPreference(TOGGLE_DISABLE_ANIMATIONS);
@@ -680,28 +629,8 @@ public class AccessibilitySettings extends DashboardFragment implements
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
         }
 
-        // Text contrast.
-        mToggleHighTextContrastPreference.setChecked(
-                Settings.Secure.getInt(getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0) == 1);
-
         // Dark Mode
         mDarkUIPreferenceController.updateState(mDarkUIModePreference);
-
-        // Power button ends calls.
-        if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
-                && Utils.isVoiceCapable(getActivity())) {
-            final int incallPowerBehavior = Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
-                    Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_DEFAULT);
-            final boolean powerButtonEndsCall =
-                    (incallPowerBehavior == Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP);
-            mTogglePowerButtonEndsCallPreference.setChecked(powerButtonEndsCall);
-        }
-
-        // Large pointer icon.
-        mToggleLargePointerIconPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON, 0) != 0);
 
         // Master mono
         updateMasterMono();

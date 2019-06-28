@@ -75,7 +75,8 @@
 
         <SwitchPreference
             android:key="toggle_large_pointer_icon"
-            android:title="@string/accessibility_toggle_large_pointer_icon_title"/>
+            android:title="@string/accessibility_toggle_large_pointer_icon_title"
+            settings:controller="com.android.settings.accessibility.LargePointerIconPreferenceController"/>
 
         <SwitchPreference
             android:key="toggle_disable_animations"
@@ -97,7 +98,9 @@
         <SwitchPreference
             android:key="toggle_power_button_ends_call_preference"
             android:title="@string/accessibility_power_button_ends_call_prerefence_title"
-            android:persistent="false"/>
+            android:persistent="false"
+            settings:controller="com.android.settings.accessibility.PowerButtonEndsCallPreferenceController"/>
+
 
         <SwitchPreference
             android:key="toggle_lock_screen_rotation_preference"
@@ -163,7 +166,8 @@
 
         <SwitchPreference
             android:key="toggle_high_text_contrast_preference"
-            android:title="@string/accessibility_toggle_high_text_contrast_preference_title"/>
+            android:title="@string/accessibility_toggle_high_text_contrast_preference_title"
+            settings:controller="com.android.settings.accessibility.HighTextContrastPreferenceController"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
