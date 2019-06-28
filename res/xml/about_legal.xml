@@ -42,6 +42,13 @@
         android:title="@string/terms_title"
         settings:controller="com.android.settings.deviceinfo.legal.TermsPreferenceController" />
 
+    <!-- Mainline Module License information -->
+    <Preference
+        android:key="module_license"
+        android:title="@string/module_license_title"
+        android:fragment="com.android.settings.deviceinfo.legal.ModuleLicensesDashboard"
+        settings:controller="com.android.settings.deviceinfo.legal.ModuleLicensesListPreferenceController" />
+
     <!-- System WebView License information -->
     <Preference
         android:key="webview_license"
