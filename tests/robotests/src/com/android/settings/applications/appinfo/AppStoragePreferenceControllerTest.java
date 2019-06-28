@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -97,6 +98,16 @@ public class AppStoragePreferenceControllerTest {
         mController.updateState(preference);
 
         verify(preference).setSummary(any());
+    }
+
+    @Test
+    public void updateState_entryIsNull_shouldNotUpdatePreferenceSummary() {
+        when(mFragment.getAppEntry()).thenReturn(null);
+        Preference preference = mock(Preference.class);
+
+        mController.updateState(preference);
+
+        verify(preference, never()).setSummary(any());
     }
 
     @Test
