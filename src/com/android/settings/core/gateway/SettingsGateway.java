@@ -72,6 +72,7 @@ import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
+import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
@@ -175,6 +176,7 @@ public class SettingsGateway {
             UserDictionarySettings.class.getName(),
             DisplaySettings.class.getName(),
             MyDeviceInfoFragment.class.getName(),
+            ModuleLicensesDashboard.class.getName(),
             ManageApplications.class.getName(),
             FirmwareVersionSettings.class.getName(),
             ManageAssist.class.getName(),
@@ -318,6 +320,7 @@ public class SettingsGateway {
             Settings.DateTimeSettingsActivity.class.getName(),
             Settings.EnterprisePrivacySettingsActivity.class.getName(),
             Settings.MyDeviceInfoActivity.class.getName(),
+            Settings.ModuleLicensesActivity.class.getName(),
             UserBackupSettingsActivity.class.getName(),
     };
 }
