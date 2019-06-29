@@ -100,8 +100,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private static final String TOGGLE_LARGE_POINTER_ICON =
             "toggle_large_pointer_icon";
     private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
-    private static final String TOGGLE_MASTER_MONO =
-            "toggle_master_mono";
     private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
             "select_long_press_timeout_preference";
     private static final String ACCESSIBILITY_SHORTCUT_PREFERENCE =
@@ -112,8 +110,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "magnification_preference_screen";
-    private static final String AUTOCLICK_PREFERENCE_SCREEN =
-            "autoclick_preference";
     private static final String VIBRATION_PREFERENCE_SCREEN =
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
@@ -196,11 +192,9 @@ public class AccessibilitySettings extends DashboardFragment implements
 
     private SwitchPreference mToggleLargePointerIconPreference;
     private SwitchPreference mToggleDisableAnimationsPreference;
-    private SwitchPreference mToggleMasterMonoPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private Preference mCaptioningPreferenceScreen;
     private Preference mDisplayMagnificationPreferenceScreen;
-    private Preference mAutoclickPreferenceScreen;
     private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mHearingAidPreference;
@@ -307,10 +301,7 @@ public class AccessibilitySettings extends DashboardFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (mToggleMasterMonoPreference == preference) {
-            handleToggleMasterMonoPreferenceClick();
-            return true;
-        } else if (mHearingAidPreferenceController.handlePreferenceTreeClick(preference)) {
+        if (mHearingAidPreferenceController.handlePreferenceTreeClick(preference)) {
             return true;
         }
         return super.onPreferenceTreeClick(preference);
@@ -350,11 +341,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                         DeviceConfig.NAMESPACE_TELEPHONY, RAMPING_RINGER_ENABLED, false);
     }
 
-    private void handleToggleMasterMonoPreferenceClick() {
-        Settings.System.putIntForUser(getContentResolver(), Settings.System.MASTER_MONO,
-                mToggleMasterMonoPreference.isChecked() ? 1 : 0, UserHandle.USER_CURRENT);
-    }
-
     private void initializeAllPreferences() {
         for (int i = 0; i < CATEGORIES.length; i++) {
             PreferenceCategory prefCategory = (PreferenceCategory) findPreference(CATEGORIES[i]);
@@ -369,10 +355,6 @@ public class AccessibilitySettings extends DashboardFragment implements
 
         mToggleDisableAnimationsPreference =
                 (SwitchPreference) findPreference(TOGGLE_DISABLE_ANIMATIONS);
-
-        // Master Mono
-        mToggleMasterMonoPreference =
-                (SwitchPreference) findPreference(TOGGLE_MASTER_MONO);
 
         // Long press timeout.
         mSelectLongPressTimeoutPreference =
@@ -404,9 +386,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
-
-        // Autoclick after pointer stops.
-        mAutoclickPreferenceScreen = findPreference(AUTOCLICK_PREFERENCE_SCREEN);
 
         // Display color adjustments.
         mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
@@ -632,9 +611,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Dark Mode
         mDarkUIPreferenceController.updateState(mDarkUIModePreference);
 
-        // Master mono
-        updateMasterMono();
-
         // Long press timeout.
         final int longPressTimeout = Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.LONG_PRESS_TIMEOUT, mLongPressTimeoutDefault);
@@ -653,8 +629,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
-        updateAutoclickSummary(mAutoclickPreferenceScreen);
-
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
     }
 
@@ -662,20 +636,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
         pref.setSummary(enabled ? R.string.accessibility_feature_state_on
                 : R.string.accessibility_feature_state_off);
-    }
-
-    private void updateAutoclickSummary(Preference pref) {
-        final boolean enabled = Settings.Secure.getInt(
-                getContentResolver(), Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 0) == 1;
-        if (!enabled) {
-            pref.setSummary(R.string.accessibility_feature_state_off);
-            return;
-        }
-        int delay = Settings.Secure.getInt(
-                getContentResolver(), Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
-                AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
-        pref.setSummary(ToggleAutoclickPreferenceFragment.getAutoclickPreferenceSummary(
-                getResources(), delay));
     }
 
     @VisibleForTesting
@@ -748,13 +708,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                 return context.getString(R.string.switch_off_text);
             }
         }
-    }
-
-    private void updateMasterMono() {
-        final boolean masterMono = Settings.System.getIntForUser(
-                getContentResolver(), Settings.System.MASTER_MONO,
-                0 /* default */, UserHandle.USER_CURRENT) == 1;
-        mToggleMasterMonoPreference.setChecked(masterMono);
     }
 
     private void updateAccessibilityShortcut(Preference preference) {

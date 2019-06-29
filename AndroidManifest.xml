@@ -986,6 +986,18 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name=".Settings$ModuleLicensesActivity"
+                  android:label="@string/module_license_title">
+            <intent-filter>
+                <action android:name="android.settings.MODULE_LICENSES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.deviceinfo.legal.ModuleLicensesDashboard" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <activity
             android:name="Settings$ManageApplicationsActivity"
             android:label="@string/applications_settings">
@@ -2662,6 +2674,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <provider
+            android:name=".deviceinfo.legal.ModuleLicenseProvider"
+            android:authorities="com.android.settings.module_licenses"
+            android:grantUriPermissions="true"
+            android:exported="false"/>
 
         <activity android:name=".sim.SimPreferenceDialog"
             android:theme="@style/Theme.AlertDialog"
