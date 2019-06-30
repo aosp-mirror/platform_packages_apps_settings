@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Enable widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Disabled by admin"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Show lockdown option"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Display power button option that turns off Smart Lock, fingerprint unlocking and notifications on the lock screen"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Display power button option that turns off Smart Lock, biometric unlocking and notifications on the lock screen"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Trust agents only extend unlock"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"If enabled, trust agents will keep your device unlocked for longer, but can no longer unlock a locked device."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Lock screen when trust is lost"</string>
@@ -399,6 +399,7 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Face added"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Set up Face Unlock"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Face Unlock"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Face unlock for work"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"How to set up Face Unlock"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Set up Face Unlock"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Use your face to authenticate"</string>
@@ -439,9 +440,10 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"When using Face Unlock in apps, always require confirmation step"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Delete face data"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Set up Face Unlock"</string>
-    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Use Face Unlock to unlock your device, sign in to apps and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Use Face Unlock to unlock your device, sign in to apps and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, such as an identical sibling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Delete face data?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"The images and biometric data used by Face Unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern or password to unlock your phone, sign in to apps and confirm payments."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Use face unlock to unlock your phone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerprint"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Manage fingerprints"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Use fingerprint for"</string>
@@ -1222,8 +1224,10 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Screen attention"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"On/Screen won’t turn off if you’re looking at it"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Off"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Camera access needed"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tap to manage permissions for Device Personalisation Services"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Prevents your screen from turning off if you’re looking at it"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Screen attention uses the front camera to see if someone is looking at the screen. It works on device, and images are never stored or sent to Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Screen attention uses the front camera to see if someone is looking at the screen. It works on-device, and images are never stored or sent to Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Keep screen on when viewing it"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Night Light"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Night Light tints your screen amber. This makes it easier to look at your screen or read in dim light, and may help you fall asleep more easily."</string>
@@ -1336,7 +1340,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Baseband version"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernel version"</string>
     <string name="build_number" msgid="3075795840572241758">"Build number"</string>
-    <string name="module_version" msgid="4826567303427436423">"Mainline module versions"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play system update"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Not available"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
@@ -1712,6 +1716,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Safety &amp; regulatory manual"</string>
     <string name="copyright_title" msgid="865906688917260647">"Copyright"</string>
     <string name="license_title" msgid="1990487604356037871">"Licence"</string>
+    <string name="module_license_title" msgid="258743239066841860">"Google Play system update licences"</string>
     <string name="terms_title" msgid="7697580845616764642">"Terms and conditions"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"System WebView Licence"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Wallpapers"</string>
@@ -1866,7 +1871,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Emergency app"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Reset app preferences"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Reset app preferences?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"This will reset all preferences for:\n\n "<li>"Disabled apps"</li>\n" "<li>"Disabled app notifications"</li>\n" "<li>"Default applications for actions"</li>\n" "<li>"Background data restrictions for apps"</li>\n" "<li>"Any permission restrictions"</li>\n\n" You will not lose any app data."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"This will reset all preferences for:\n\n"<li>"Disabled apps"</li>\n<li>"Disabled app notifications"</li>\n<li>"Default applications for actions"</li>\n<li>"Background data restrictions for apps"</li>\n<li>"Any permission restrictions"</li>\n\n"You will not lose any app data."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Reset apps"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Manage space"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -2063,7 +2068,7 @@
     <string name="vision_settings_description" msgid="5679491180156408260">"You can customise this device to fit your needs. These accessibility features can be changed later in Settings."</string>
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Change font size"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Screen readers"</string>
-    <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio &amp; on-screen text"</string>
+    <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio and on-screen text"</string>
     <string name="display_category_title" msgid="685461049938269166">"Display"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaction controls"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Downloaded services"</string>
@@ -2121,7 +2126,7 @@
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Dwell timing"</string>
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"If you are using a mouse, you can set the cursor to take action automatically when it stops moving for a certain amount of time."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Delay before click"</string>
-    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"Vibration &amp; haptic strength"</string>
+    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"Vibration and haptic strength"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Notification vibration"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Ring vibration"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Touch feedback"</string>
@@ -2207,7 +2212,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cyan"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Yellow"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"Allow <xliff:g id="SERVICE">%1$s</xliff:g> to have full contol of your device?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"Allow <xliff:g id="SERVICE">%1$s</xliff:g> to have full control of your device?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> needs to:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Because an app is obscuring a permission request, Settings can’t verify your response."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"If you turn on <xliff:g id="SERVICE">%1$s</xliff:g>, your device won’t use your screen lock to enhance data encryption."</string>
@@ -2219,7 +2224,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Full control is appropriate for apps that help you with accessibility needs, but not for most apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"View and control screen"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"It can read all content on the screen and display content over other apps."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"View and perform actions"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"View and perform actions"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"It can track your interactions with an app or a hardware sensor, and interact with apps on your behalf."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Allow"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Deny"</string>
@@ -2615,8 +2620,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Work"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Restrict SMS &amp; call log access"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Only default phone and messaging apps have SMS &amp; call log permissions"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Disable device identifier restrictions"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Disable the new access restrictions for device identifiers"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"No available trust agents"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Activate device admin app?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Activate this device admin app"</string>
@@ -3090,7 +3093,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Apps &amp; notifications"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Assistant, recent apps, default apps"</string>
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Recent apps, default apps"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Notification access is not available for apps in the work profile."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Accounts"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"No accounts added"</string>
@@ -3152,7 +3155,6 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serial number, hardware version"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"android security patch level, baseband version, kernel version"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"theme, light, dark, mode"</string>
-    <string name="keywords_financial_apps_sms_access" msgid="391349097813320537">"financial app, sms, permission"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"dark theme"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"bug"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ambient display, Lock screen display"</string>
@@ -3894,7 +3896,6 @@
     <string name="write_settings" msgid="4797457275727195681">"Modify system settings"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"write modify system settings"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_0">%1$d</xliff:g> of <xliff:g id="COUNT_1">%2$d</xliff:g> apps allowed to modify system settings"</string>
-    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"Financial apps SMS access"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"Can install other apps"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Can modify system settings"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Can modify system settings"</string>
@@ -4149,7 +4150,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Connected to <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Connected to multiple devices"</string>
     <string name="demo_mode" msgid="2798762752209330277">"System UI demo mode"</string>
-    <string name="dark_ui_mode" msgid="3888371857083890543">"Dark Theme"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Dark theme"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"On/Temporarily disabled due to Battery Saver"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Temporarily turned on due to Battery Saver"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Supported apps will also switch to dark theme"</string>
@@ -4206,6 +4207,10 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Not supported by your default home app, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Switch default home app"</string>
     <string name="information_label" msgid="8133109685432913360">"Information"</string>
+    <string name="low_label" msgid="1679136861385616813">"Low"</string>
+    <string name="high_label" msgid="7278863493316447831">"High"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Higher sensitivity may conflict with any app gestures along the edges of the screen."</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Back sensitivity"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Double-tap to check phone"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Double-tap to check tablet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Double-tap to check device"</string>
@@ -4377,10 +4382,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Select Graphics Driver"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Default"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Game Driver"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Pre-release Driver"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"System Graphics Driver"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Setting isn’t supported on this phone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Setting isn’t supported on this tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Setting isn’t supported on this device"</string>
@@ -4612,7 +4622,9 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Can’t send MMS message"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"Tap to allow MMS messaging on <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> when mobile data is off"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"MMS message"</string>
-    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Issue with SIM combination"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"Problem with SIM combination"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Using <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> may limit functionality. Tap to find out more."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM combination"</string>
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"Your work policy info"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Settings managed by your IT admin"</string>
 </resources>

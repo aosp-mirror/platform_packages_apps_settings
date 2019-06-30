@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC ofsetinə görə seçin"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Tarix"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Vaxt"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Ekranın vaxt limiti bitdikdən sonra kilidləyin"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Ekranın avtomatik söndükdən sonra kilinlənsin"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"Vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən dərhal sonra"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Vidcetləri aktivləşdirin"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Admin tərəfindən deaktiv edildi"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Kilid seçimini göstərin"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Kilid ekranında Ağıllı Kilidi, barmaq izi ilə kiliddən çıxarmanı və bilidirişləri deaktiv edən yandırıb-söndürmək düyməsini göstərin"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Kilid ekranında Ağıllı Kilidi, biometrik kilidi və bilidirişləri deaktiv edən yandırıb-söndürmək düyməsini göstərin"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"İnam agentləri yalnız kiliddən çıxarmanı genişləndirir"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Aktiv edilərsə, cihaz kilidlənənə qədər inam agentləri cihazı kilidsiz saxlayacaq, lakin kilidli cihazı kiliddən çıxara bilməyəcək."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Təhlükəli mühitlərdə ekranı kilidləyin"</string>
@@ -399,6 +399,7 @@
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Üz əlavə edildi"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Üz kilidi ayarlayın"</string>
     <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Üz kilidi"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"İş üçün üz kilidi"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Üz kilidi ayarlamaq haqqında"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Üz kilidi ayarlayın"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Doğrulamaq üçün üzünüzdən istifadə edin"</string>
@@ -442,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Cihazı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün üz kilidindən istifadə edin.\n\nUnutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nTelefon gözləriniz açıq halda üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, həmçinin övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Üz datası silinsin?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Üz kilidi üçün istifadə edilən şəkillər və biometrik data həmişəlik və təhlükəsiz şəkildə silinəcək. Silindikdən sonra telefonu kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün PIN, model və ya parol tələb ediləcək."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Telefonu kiliddən çıxarmaq üçün üz kilidindən istifadə edin"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Barmaq izi"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Barmaq izlərini idarə edin"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Bunun üçün barmaq izi istifadə edin:"</string>
@@ -1222,6 +1224,8 @@
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Ekran həssaslığı"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Aktiv/ Ekrana baxırsınızsa, sönməyəcək"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Deaktiv"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kamera girişi lazımdır"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Cihaz fərdiləşdirmə xidmətlərinin icazələrini idarə etmək üçün toxunun"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Ekrana baxırsınızsa, onu sönməyə qoymayacaq"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ekran həssaslığı ekrana baxdığınızı bilmək üçün ön kameradan istifadə edir. Bu, cihazda işləyir. Şəkillər heç vaxt Google\'da saxlanılmır, yaxud göndərilmir."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ekrana baxarkən açıq saxlayın"</string>
@@ -1336,7 +1340,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Baseband versiyası"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernel versiyası"</string>
     <string name="build_number" msgid="3075795840572241758">"Quraşdırma nömrəsi"</string>
-    <string name="module_version" msgid="4826567303427436423">"Əsas modul versiyaları"</string>
+    <string name="module_version" msgid="7329118610303805859">"Google Play sistem güncəlləməsi"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Əlçatımlı deyil"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
@@ -1712,6 +1716,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Təhlükəsizlik və tənzimləyici təlimatı"</string>
     <string name="copyright_title" msgid="865906688917260647">"Müəlliflik hüququ"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisenziya"</string>
+    <string name="module_license_title" msgid="258743239066841860">"Google Play sistem güncəlləmə lisenziyaları"</string>
     <string name="terms_title" msgid="7697580845616764642">"Şərtlər"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Sistem WebView Lisenziyası"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Divar kağızları"</string>
@@ -1866,7 +1871,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Təcili tətbiq"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Tətbiq tərcihlərini sıfırla"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Tətbiq tərcihləri sıfırlansın?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Bu seçimlər sıfırlanacaq:\n\n "<li>"Deaktiv tətbiqlər"</li>\n" "<li>"Deaktiv tətbiq bildirişləri"</li>\n" "<li>"Əməliyyatlar üçün deaktiv tətbiq bildirişləri"</li>\n" "<li>"Tətbiqlər üçün arxa fon limitləri"</li>\n" "<li>"İcazə limitləri"</li>\n\n" Heç bir tətbiq datası itirməyəcəksiniz."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Bu seçimlər sıfırlanacaq:\n\n"<li>"Deaktiv tətbiqlər"</li>\n<li>"Deaktiv tətbiq bildirişləri"</li>\n<li>"Əməliyyatlar üçün deaktiv tətbiq bildirişləri"</li>\n<li>"Tətbiqlər üçün arxa fon limitləri"</li>\n<li>"İcazə limitləri"</li>\n\n"Heç bir tətbiq datası itirməyəcəksiniz."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Tətbiqləri sıfırla"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Boşluğu idarə edin"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -2056,7 +2061,7 @@
     <string name="app_name_label" msgid="5440362857006046193">"Tətbiq"</string>
     <string name="last_time_used_label" msgid="8459441968795479307">"Son istifadə vaxtı"</string>
     <string name="usage_time_label" msgid="295954901452833058">"İstifadə müddəti"</string>
-    <string name="accessibility_settings" msgid="3975902491934816215">"Giriş imkanı"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"Əlçatımlılıq"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Əlçatımlılıq parametrləri"</string>
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Ekran oxuyucuları, görüntü, bağlantı nəzarəti"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Görünüş Ayarları"</string>
@@ -2207,7 +2212,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Mavi"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Sarı"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"<xliff:g id="SERVICE">%1$s</xliff:g> funksiyasının cihaza tam nəzarət etməsinə icazə vermək istəyirsiniz?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"<xliff:g id="SERVICE">%1$s</xliff:g> xidmətinin cihaza tam nəzarət etməsinə icazə vermək istəyirsiniz?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> etməlidir:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Çünki, tətbiq icazə sorğusunu anlaşılmaz edir. Ayarlar cavabınızı doğrulaya bilməz."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> aktiv olarsa, cihazınız data şifrələnməsini genişləndirmək üçün ekran kilidini istifadə etməyəcək."</string>
@@ -2219,7 +2224,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Tam nəzarət əlçatımlılıq ehtiyaclarınızı ödəyən bəzi tətbiqlər üçün uyğundur."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Baxış və nəzarət ekranı"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Ekrandakı bütün kontenti oxuya və digər tətbiqlərdəki kontenti göstərə bilər."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Baxış və platforma əməliyyatları"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Əməliyyatlara baxın və icra edin"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"O, tətbiq və ya avadanlıq sensoru ilə interaktivliyinizi izləyir və əvəzinizdən tətbiqlərlə qarşılıqlı əlaqəyə girir."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"İcazə verin"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"İmtina edin"</string>
@@ -2324,9 +2329,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Planşet hədindən çox istifadə etdi"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Cihaz həddindən çox istifadə etdi"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"Batareya həmişə olduğundan daha tez bitə bilər"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Telefon həddindən artıq çox istifadə edilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya istifadə edən tətbiqlər:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Planşet həddindən artıq çox istifadə edilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya istifadə edən tətbiqlər:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Cihaz həddindən artıq çox istifadə olunub. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya istifadə edən tətbiqlər:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Telefon həddindən artıq çox işlədilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya işlədən tətbiqlər:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Planşet həddindən artıq çox işlədilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya işlədən tətbiqlər:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Cihaz həddindən artıq çox işlədilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya işlədən tətbiqlər:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Batareyadan çox istifadə edən arxa fon fəaliyyəti daxildir"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">%1$d tətbiqi məhdudlaşdırın</item>
@@ -2445,7 +2450,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Fonarın işlətdiyi enerji"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Kameranın istifadə etdiyi enerji"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Ekran və işıqlandırma tərəfindən istifadə olunan enerji"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Ekran parlaqlığını və ya ekran fasiləsini azaldın"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Ekran parlaqlığını və ya ekranın avtomatik sönməsini azaldın"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi-Fi tərəfindən işlənən enerji"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"İstifadə edilməyən zaman və ya əhatədən xaricdə olan zaman Wi-Fi söndürün"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Bluetooth tərəfindən istifadə olunan enerji"</string>
@@ -2615,8 +2620,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"İş"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"SMS və zəng siyahısına girişin məhdudlaşdırılması"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Yalnız defolt telefon və mesajlaşma tətbiqlərinin SMS və zəng siyahısına giriş icazələri var"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Cihaz identifikatoru məhdudiyyətlərini deaktiv edin"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Cihaz identifikatorları üçün yeni giriş məhdudiyyətlərini deaktiv edin"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Əlçatımlı əmanət agenti yoxdur"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Cihaz admin tətbiqi aktiv edilsin?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Bu cihazın admin tətbiqini aktiv edin"</string>
@@ -3002,7 +3005,7 @@
     <string name="enhanced_4g_lte_mode_title" msgid="2544026384901010606">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="480304128966864221">"Qabaqcıl Zəng"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="6839553611093179243">"4G Zəngi"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="4156658595226379286">"Səs və digər kommunikasiyaları təkmilləşdirmək üçün LTE xidmətlərindən istifadə edin (tövsiyə olunur)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="4156658595226379286">"Səs və digər kommunikasiyaları təkmilləşdirmək üçün LTE xidmətlərini işlədin (tövsiyə olunur)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="6145184730437907078">"Səs və digər kommunikasiyaları təkmilləşdirmək üçün 4G xidmətlərindən istifadə edin (tövsiyə olunur)"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Tərcih edilən şəbəkə növü"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (məsləhətlidir)"</string>
@@ -3090,7 +3093,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Tətbiq və bildirişlər"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Assistent, ən son istifadə edilən tətbiqlər, defolt tətbiqlər"</string>
+    <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Ən son istifadə edilən tətbiqlər, defolt tətbiqlər"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Bildiriş girişi iş profilindəki tətbiqlər üçün əlçatan deyil."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Hesablar"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Hesab əlavə edilməyib"</string>
@@ -3152,7 +3155,6 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"seriya nömrəsi, proqram versiyası"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"android təhlükəsizliyinin yenilənmə səviyyəsi, baseband versiyası, kernel versiyası"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"tema, açıq, tünd, rejim"</string>
-    <string name="keywords_financial_apps_sms_access" msgid="391349097813320537">"maliyyə tətbiqi, sms, icazə"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"tünd tema"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"baq"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ambient displey, Kilid ekranı"</string>
@@ -3894,7 +3896,6 @@
     <string name="write_settings" msgid="4797457275727195681">"Sistem ayarlarında dəyişiklik edin"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"sistem ayarlarını dəyişdirmək yazmaq"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_1">%2$d</xliff:g> tətbiqdən <xliff:g id="COUNT_0">%1$d</xliff:g> tətbiqin sistem ayarlarını dəyişdirməyə icazə verildi"</string>
-    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"Maliyyə Tətbiqləri Sms Girişi"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"Digər tətbiqləri quraşdıra bilər"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Sistem ayarlarını dəyişdirə bilər"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Sistem ayarlarını dəyişdirə bilər"</string>
@@ -3940,7 +3941,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Daxili yaddaş: <xliff:g id="PERCENTAGE">%1$s</xliff:g> istifadə olunub - <xliff:g id="FREE_SPACE">%2$s</xliff:g> boşdur"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> fəaliyyətsizlikdən sonra yuxu rejimi"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Divar kağızı, mürgü rejimi, şrift ölçüsü"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Üslublar, divar kağızları, ekran zaman aşımı, şrift ölçüsü"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Üslublar, divar kağızları, ekran sönməsi, şrift ölçüsü"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Yuxu, şrift ölçüsü"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"10 dəqiqəlik fəaliyyətsizlikdən sonra yuxu rejiminə keçir"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Ümumi <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> yaddaşdan ortalama <xliff:g id="USED_MEMORY">%1$s</xliff:g> yaddaş istifadə olunub"</string>
@@ -4149,7 +4150,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> cihazına qoşuldu"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Bir çox cihaza qoşuldu"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Sistem İİ demo rejimi"</string>
-    <string name="dark_ui_mode" msgid="3888371857083890543">"Tünd Tema"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Tünd tema"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Aktiv/Enerjiyə Qənaət rejiminə görə müvəqqəti deaktivdir"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Enerjiyə Qənaət rejiminə görə müvəqqəti aktivdir"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Dəstəklənən tətbiqlər də tünd temaya keçəcək"</string>
@@ -4206,6 +4207,10 @@
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Defolt home tətbiqi <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> tərəfindən dəstəklənmir"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Defolt home tətbiqini dəyişin"</string>
     <string name="information_label" msgid="8133109685432913360">"Məlumat"</string>
+    <string name="low_label" msgid="1679136861385616813">"Aşağı"</string>
+    <string name="high_label" msgid="7278863493316447831">"Yüksək"</string>
+    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Yüksək həssaslıq ekranın kənarları boyunca hər hansı tətbiq jestləri ilə ziddiyyətə səbəb ola bilər."</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Arxa Həssaslıq"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Telefonu yoxlamaq üçün iki dəfə tıklayın"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Planşeti yoxlamaq üçün iki dəfə tıklayın"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Cihazı yoxlamaq üçün iki dəfə tıklayın"</string>
@@ -4377,10 +4382,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Qrafik Drayverini Seçin"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Defolt"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Game Driver"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Diskin önizləməsi"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Sistem Qrafik Drayveri"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Ayar bu telefonda dəstəklənmir"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Ayar bu planşetdə dəstəklənmir"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Ayar bu cihazda dəstəklənmir"</string>
@@ -4615,4 +4625,6 @@
     <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"SIM kombinasiyası ilə bağlı problem"</string>
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"<xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> istifadəsi funksionallığı məhdudlaşdıra bilər. Ətraflı məlumat üçün klikləyin."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM kombinasiyası"</string>
+    <string name="work_policy_privacy_settings" msgid="2348992644755730215">"İş siyasətiniz haqqında məlumat"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Ayarlar IT admininiz tərəfindən idarə edilir"</string>
 </resources>
