@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC ഓഫ്‌സെറ്റ് വഴി തിരഞ്ഞെടുക്കൂ"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"തീയതി"</string>
     <string name="time_picker_title" msgid="483460752287255019">"സമയം"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"സ്‌ക്രീനിന്റെ സമയപരിധിക്ക് ശേഷം ലോക്ക് ചെയ്യുക"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"സ്ക്രീൻ ടൈംഔട്ടിന് ശേഷം ലോക്ക് ചെയ്യുക"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"ടൈംഔട്ടിന് ശേഷം <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>എന്നതിനാൽ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഒഴികെ, ടൈംഔട്ടായ ശേഷം ഉടനടി"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> എന്നതിനാൽ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഒഴികെ, <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ടൈംഔട്ടിന് ശേഷം"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"ടൈംഔട്ടിന് ശേഷം <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> കൊണ്ട് അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഒഴികെ"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"ലോക്ക് സ്‌ക്രീനിൽ ഉടമയുടെ വിവരം ദൃശ്യമാക്കുക"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"ലോക്ക് സ്‌ക്രീൻ സന്ദേശം"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"വിജറ്റുകൾ പ്രവർത്തനക്ഷമമാക്കുക"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"അഡ്‌മിൻ പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"ലോക്ക്‌ഡൗൺ ഓപ്‌ഷൻ കാണിക്കുക"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"ലോക്ക് സ്ക്രീനിലെ Smart Lock, ഫിംഗർപ്രിന്റ് അൺലോക്കിംഗ്, അറിയിപ്പുകൾ എന്നിവ ഓഫാക്കുന്ന പവർ ബട്ടൺ ഓപ്‌ഷൻ പ്രദർശിപ്പിക്കുക"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"ലോക്ക് സ്ക്രീനിലെ Smart Lock, ബയോമെട്രിക്‌ അൺലോക്കിംഗ്, അറിയിപ്പുകൾ എന്നിവ ഓഫാക്കുന്ന പവർ ബട്ടൺ ഓപ്‌ഷൻ പ്രദർശിപ്പിക്കുക"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"വിശ്വസ്‌ത ഏജൻ്റുമാർക്കേ അൺലോക്ക് വിപുലീകരിക്കാനാവൂ"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"പ്രവർത്തനക്ഷമമാക്കിയാൽ, വിശ്വസ്‌ത ഏജൻ്റുമാർ നിങ്ങളുടെ ഉപകരണം കൂടുതൽ നേരം അൺലോക്ക് ചെയ്‌ത നിലയിൽ സൂക്ഷിക്കും, പക്ഷെ ലോക്ക് ചെയ്‌ത ഉപകരണം അൺലോക്ക് ചെയ്യാനാവില്ല."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"വിശ്വാസം നഷ്‌ടപ്പെടുമ്പോൾ, സ്‌ക്രീൻ ലോക്കാവുന്നു"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"നിങ്ങളുടെ ഉപകരണം അൺലോക്ക് ചെയ്യാനും ആപ്പുകളിൽ സൈൻ ഇൻ ചെയ്യാനും പേയ്മെൻ്റുകൾ സ്ഥിരീകരിക്കാനും മുഖം തിരിച്ചറിഞ്ഞുള്ള അൺലോക്ക് ഉപയോഗിക്കുക.\n\nശ്രദ്ധിക്കുക:\nനിങ്ങൾ ഉദ്ദേശിക്കാത്തപ്പോഴും ഫോണിൽ നോക്കിയാൽ അത് അൺലോക്ക് ചെയ്യപ്പെടാം.\n\nനിങ്ങളുടെ കണ്ണുകൾ തുറന്നിരിക്കുമ്പോൾ മറ്റാർക്കെങ്കിലും നിങ്ങളുടെ ഫോൺ നിങ്ങളുടെ മുഖത്തിനു നേരെ നീട്ടി അൺലോക്ക് ചെയ്യാം.\n\nനിങ്ങളുടെ കൂടപ്പിറപ്പിനെ പോലെ, നിങ്ങളുമായി വളരെയധികം സാമ്യതയുള്ള ഒരാൾക്ക് നിങ്ങളുടെ ഫോൺ അൺലോക്ക് ചെയ്യാനായേക്കാം."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"മുഖ ഡാറ്റ ഇല്ലാതാക്കണോ?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"മുഖം തിരിച്ചറിഞ്ഞുള്ള അൺലോക്കിനായി ഉപയോഗിക്കുന്ന ചിത്രങ്ങളും ബയോമെട്രിക് ഡാറ്റയും ശാശ്വതമായും സുരക്ഷിതമായും ഇല്ലാതാക്കപ്പെടും. നീക്കം ചെയ്‌തതിന് ശേഷം ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യാനും ഫോൺ അൺലോക്ക് ചെയ്യാനും പേയ്‌മെൻ്റുകൾ സ്ഥിരീകരിക്കാനും നിങ്ങളുടെ പിൻ, പാറ്റേൺ അല്ലെങ്കിൽ പാസ്‌വേഡ് ആവശ്യമാണ്."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"നിങ്ങളുടെ ഫോൺ അൺലോക്ക് ചെയ്യാൻ മുഖം തിരിച്ചറിഞ്ഞുള്ള അൺലോക്ക് ഉപയോഗിക്കുക"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"വിരലടയാളം"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"വിരലടയാളങ്ങൾ നിയന്ത്രിക്കുക"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"ഇതിനായി വിരലടയാളം ഉപയോഗിക്കുക"</string>
@@ -1220,13 +1221,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"ലഭ്യമായ പ്രകാശത്തിന് അനുസരിച്ച് തെളിച്ചം ഒപ്‌റ്റിമൈസ് ചെയ്യുക. ഈ ഫീച്ചർ ഓണായിരിക്കുമ്പോഴും താൽക്കാലികമായി തെളിച്ചം ക്രമീകരിക്കാം."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"നിങ്ങളുടെ ചുറ്റുപാട്, പ്രവർത്തനം എന്നിവ അനുസരിച്ച് സ്‌ക്രീൻ തെളിച്ചം സ്വയമേവ ക്രമീകരിക്കും. നിങ്ങളുടെ താൽപര്യം മനസ്സിലാക്കാൻ അനുയോജ്യമായ തെളിച്ചത്തിനെ സഹായിക്കുന്നതിന് സ്ലൈഡർ നേരിട്ട് നീക്കാം."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"വൈറ്റ് ബാലന്‍സ് പ്രദര്‍ശിപ്പിക്കുക"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"സ്ക്രീൻ ശ്രദ്ധ"</string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"സ്ക്രീൻ അറ്റെൻഷൻ"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"ഓണാണ് / നിങ്ങൾ അതിൽ നോക്കുന്നുണ്ടെങ്കിൽ സ്ക്രീൻ ഓഫാക്കില്ല"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"ഓഫാണ്"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"ക്യാമറ ആക്‌സസ് ആവശ്യമാണ്"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"ഉപകരണ വ്യക്തിപരമാക്കൽ സേവനങ്ങൾക്കുള്ള അനുമതികൾ മാനേജ് ചെയ്യാൻ ടാപ്പ് ചെയ്യുക"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"നിങ്ങൾ അതിൽ നോക്കുന്നുണ്ടെങ്കിൽ സ്ക്രീൻ ഓഫാകുന്നതിൽ നിന്ന് തടയുന്നു"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"ആരെങ്കിലും സ്ക്രീനിൽ നോക്കുന്നുണ്ടോ എന്ന് കാണാൻ സ്‌ക്രീൻ ശ്രദ്ധ മുൻ ക്യാമറ ഉപയോഗിക്കുന്നു. ഇത് ഉപകരണത്തിലാണ് പ്രവർത്തിക്കുന്നത്, ചിത്രങ്ങൾ ഒരിക്കലും സംഭരിക്കുകയോ Google-ലേക്ക് അയയ്ക്കുകയോ ചെയ്യില്ല."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"ആരെങ്കിലും സ്ക്രീനിൽ നോക്കുന്നുണ്ടോ എന്ന് കാണാൻ സ്‌ക്രീൻ അറ്റെൻഷൻ മുൻ ക്യാമറ ഉപയോഗിക്കുന്നു. ഇത് ഉപകരണത്തിലാണ് പ്രവർത്തിക്കുന്നത്, ചിത്രങ്ങൾ ഒരിക്കലും സംഭരിക്കുകയോ Google-ലേക്ക് അയയ്ക്കുകയോ ചെയ്യില്ല."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"സ്ക്രീനിലേക്ക് നോക്കുമ്പോൾ അത് ഓണാക്കി നിലനിർത്തുക"</string>
     <string name="night_display_title" msgid="2626451512200357686">"നൈറ്റ് ലൈറ്റ്"</string>
     <string name="night_display_text" msgid="1837277457033025056">"\'നൈറ്റ് ലൈറ്റ്\' നിങ്ങളുടെ സ്ക്രീനിന് ചെറുതായി ഓറഞ്ച് നിറം നൽകുന്നു. മങ്ങിയ വെളിച്ചത്തിൽ സ്ക്രീനിൽ നോക്കുന്നതും വായിക്കുന്നതും ഈ ഡിസ്പ്ലേ എളുപ്പമാക്കുന്നു, പെട്ടെന്ന് ഉറങ്ങാനും ഇത് നിങ്ങളെ സഹായിച്ചേക്കാം."</string>
@@ -1253,7 +1254,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"<xliff:g id="ID_1">%1$s</xliff:g> വരെ ഓണാക്കുക"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"<xliff:g id="ID_1">%1$s</xliff:g> വരെ ഓഫാക്കുക"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"നൈറ്റ് ലൈറ്റ് നിലവിൽ ഓണല്ല"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"സ്‌ക്രീനിന്റെ സമയപരിധി"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"സ്ക്രീൻ ടൈംഔട്ട്"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"സ്ക്രീൻ ഓഫാക്കുന്നു"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> നിഷ്ക്രിയത്വത്തിന് ശേഷം"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"വാൾപേപ്പർ"</string>
@@ -2449,7 +2450,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"ഫ്ലാഷ്ലൈറ്റിൽ ഉപയോഗിക്കുന്ന ബാറ്ററി"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"ക്യാമറ ഉപയോഗിക്കുന്ന ബാറ്ററി"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"ഡിസ്‌പ്ലേയുടെയും ബാക്ക്‌ലൈറ്റിന്റെയും ബാറ്ററി ഉപഭോഗം"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"സ്‌ക്രീൻ തെളിച്ചം കൂടാതെ/അല്ലെങ്കിൽ സ്‌ക്രീൻ സമയപരിധി കുറയ്ക്കുക"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"സ്‌ക്രീൻ തെളിച്ചം കൂടാതെ/അല്ലെങ്കിൽ സ്‌ക്രീൻ ടൈംഔട്ട് കുറയ്ക്കുക"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi‑Fi-യുടെ ബാറ്ററി ഉപഭോഗം"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"വൈഫൈ ഉപയോഗിക്കാതിരിക്കുമ്പോഴോ ലഭ്യമല്ലെങ്കിലോ അത് ഓഫാക്കുക"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"ബ്ലൂടൂത്തിന്റെ ബാറ്ററി ഉപഭോഗം"</string>
@@ -3161,11 +3162,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"മുഖം"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"ഫിംഗർപ്രിന്റ്, ഫിംഗർപ്രിന്റ് ചേർക്കുക"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"സ്‌ക്രീൻ മങ്ങിക്കൽ, ടച്ച്‌സ്‌ക്രീൻ, ബാറ്ററി, സ്‌മാർട്ട് തെളിച്ചം, ചലനാത്മക തെളിച്ചം, സ്വയമേവ ഉള്ള തെളിച്ചം"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"മങ്ങിച്ച സ്ക്രീൻ, ഉറക്കം, ബാറ്ററി, സമയപരിധി, ശ്രദ്ധ, ഡിസ്‌പ്ലേ, സ്‌ക്രീൻ, നിഷ്ക്രിയത്വം"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"മങ്ങിയ സ്ക്രീൻ, സ്ലീപ്പ് മോഡ്, ബാറ്ററി, ടൈംഔട്ട്, അറ്റെൻഷൻ, ഡിസ്‌പ്ലേ, സ്‌ക്രീൻ, നിഷ്ക്രിയത്വം"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"തിരിക്കുക, ഫ്ലിപ്പ്, തിരിക്കൽ, പോർ‌ട്രെയ്റ്റ്, ലാൻഡ്‌സ്കേപ്പ്, ഓറിയന്റേഷൻ, ലംബം, സമാന്തരം"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"അപ്‌ഗ്രേഡ്, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, ഷെഡ്യൂൾ, അറിയിപ്പുകൾ, തടയുക, നിശബ്‌ദത, വൈബ്രേറ്റ്, സ്ലീപ്പ്, ജോലി, ഫോക്കസ്, ശബ്‌ദം, മ്യൂട്ട്, ദിവസം, പ്രവർത്തി ദിവസം, വാരാന്ത്യം, പ്രവർത്തിദിന രാവ്, ഇവന്റ്"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"സ്‌ക്രീൻ, ലോക്ക് സമയം, സമയപരിധി, ലോക്ക്‌സ്ക്രീൻ"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"സ്‌ക്രീൻ, ലോക്ക് സമയം, ടൈംഔട്ട്, ലോക്ക്‌സ്ക്രീൻ"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"മെമ്മറി, കാഷെ, ഡാറ്റ, ഇല്ലാതാക്കുക, മായ്ക്കുക, സൗജന്യം, സ്‌പെയ്‌സ്"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"കണക്‌റ്റ് ചെയ്‌തു, ഉപകരണം, ഹെഡ്‌ഫോണുകൾ, ഹെഡ്‌സെറ്റ്, സ്‌പീക്കർ, വയര്‍‌ലെസ്സ്, ജോടി, ഇയർ ബഡുകൾ, സംഗീതം, മീഡിയ"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"പശ്ചാത്തലം, സ്ക്രീൻ, ലോക്ക്‌സ്ക്രീൻ, തീം"</string>

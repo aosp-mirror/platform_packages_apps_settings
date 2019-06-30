@@ -354,7 +354,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"За зміщенням від UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Блокувати після завершення часу очікування екрана"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Блокувати після завершення часу вимкнення екрана"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"За <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> після завершення часу очікування"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Одразу після завершення часу очікування, якщо <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> не запобігає блокуванню"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"За <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> після завершення часу очікування, якщо <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> не запобігає блокуванню"</string>
@@ -363,7 +363,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Увімкнути віджети"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Вимкнено адміністратором"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Показувати опцію блокування"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Показувати кнопку живлення, яка вимикає Smart Lock, розблокування відбитком пальця та сповіщення на заблокованому екрані"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Показувати опцію кнопки живлення, яка вимикає Smart Lock, біометричне розблокування та сповіщення на заблокованому екрані"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Довірчі агенти лише подовжують розблокування"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Коли довірчі агенти ввімкнено, пристрій залишається розблокованим довше, але вони не можуть розблокувати заблокований пристрій."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Блокувати екран, коли втрачено довіру"</string>
@@ -449,6 +449,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Використовуйте Фейсконтроль, щоб розблоковувати пристрій, входити в додатки й підтверджувати платежі.\n\nВажливо\nТелефон можна розблокувати поглядом випадково.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя, коли у вас відкриті очі.\n\nТелефон може розблокувати людина, схожа на вас, зокрема ваш близнюк."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Видалити дані про обличчя?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Зображення й біометричні дані, потрібні для Фейсконтролю, остаточно й безпечно видаляться. Після цього потрібно буде вводити PIN-код, ключ або пароль, щоб розблоковувати телефон, входити в додатки й підтверджувати платежі."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Розблоковуйте телефон за допомогою фейсконтролю"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Цифровий відбиток"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Керування відбитками"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Використ. відбиток для"</string>
@@ -1258,13 +1259,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Оптимізація яскравості з урахуванням освітлення. Якщо цю функцію ввімкнено, ви все одно можете тимчасово змінювати яскравість."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Яскравість екрана автоматично пристосовується до середовища й ваших дій. Ви можете пересунути повзунок вручну, щоб відкоригувати яскравість за власним бажанням."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Баланс білого для екрана"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Розпізнавання уваги"</string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Адаптивний сплячий режим"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Ввімкнено: екран не вимикатиметься, доки ви на нього дивитесь"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Вимкнено"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Потрібен доступ до камери"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Торкніться, щоб керувати дозволами для сервісів персоналізації пристрою"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Не дає екрану вимикатись, якщо ви на нього дивитесь"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Розпізнавання уваги за допомогою передньої камери визначає, чи дивиться користувач на екран. Ця функція працює лише на пристрої, не зберігає зображень і не надсилає їх у Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Адаптивний сплячий режим за допомогою передньої камери визначає, чи дивиться користувач на екран. Ця функція працює лише на пристрої, не зберігає зображень і не надсилає їх у Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Не вимикати екран, поки ви на нього дивитеся"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Нічний режим"</string>
     <string name="night_display_text" msgid="1837277457033025056">"У нічному режимі екран набуває бурштинового відтінку. Це знімає напруження очей при тьмяному освітленні та допомагає легше заснути."</string>
@@ -1291,7 +1292,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Увімкнути до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Вимкнути до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Нічний режим не ввімкнено"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Час очікування екрана"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Час вимкнення екрана"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Вимикати екран"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Коли минає <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездіяльності"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Фоновий малюнок"</string>
@@ -2523,7 +2524,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Заряд акумулятора, використаний на ліхтарик"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Заряд акумулятора, який споживає камера"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Використання акумулятора для підсвічування екрана"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Зменште яскравість і/чи час очікування екрана"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Зменште яскравість і/або час вимкнення екрана"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Використання акумулятора мережею Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Вимкніть Wi-Fi, якщо з’єднання не використовується чи не доступне"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Як Bluetooth використовує акумулятор"</string>
@@ -3245,11 +3246,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"обличчя"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"відбиток, додати відбиток"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"затемнений екран, сенсорний екран, акумулятор, розумна яскравість, динамічна яскравість, автояскравість"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"затемнений екран, режим сну, акумулятор, час очікування, увага, дисплей, екран, бездіяльність"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"затемнений екран, режим сну, акумулятор, час вимкнення, адаптивний сплячий режим, дисплей, екран, бездіяльність"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"обернути, перевернути, обертання, книжкова орієнтація, альбомна орієнтація, орієнтація, вертикально, горизонтально"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"оновлення, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"не турбувати, графік, сповіщення, блокувати, без звуку, вібрація, сон, робота, зосередитися, звук, вимкнути звук, день, будній день, вихідні, будній вечір, подія"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"екран, час блокування, час очікування, заблокований екран"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"екран, час блокування, час вимкнення, заблокований екран"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"пам’ять, кеш, дані, видалити, очистити, звільнити, місце"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"під’єднано, пристрій, навушники, гарнітура, динамік, бездротовий, створення пари, вакуумні навушники, музика, медіа-вміст"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"фон, екран, заблокований екран, тема"</string>
@@ -4068,7 +4069,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Внутрішня пам’ять: використано <xliff:g id="PERCENTAGE">%1$s</xliff:g>, вільно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Перейти в режим сну після <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездіяльності"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Фоновий малюнок, режим сну та розмір шрифту"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Стилі, фонові малюнки, час очікування екрана, розмір шрифту"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Стилі, фонові малюнки, час вимкнення екрана, розмір шрифту"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Режим сну, розмір шрифту"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Перейти в режим сну після 10 хвилин бездіяльності"</string>
     <string name="memory_summary" msgid="8080825904671961872">"У середньому використовується <xliff:g id="USED_MEMORY">%1$s</xliff:g> пам’яті з <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>

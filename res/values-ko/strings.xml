@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"협정 세계시 기준으로 선택"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"날짜"</string>
     <string name="time_picker_title" msgid="483460752287255019">"시간"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"화면 시간 제한 경과 후 잠금"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"화면 자동 잠금 시간 경과 후 잠금"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"시간 제한 경과 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>후"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>에 의해 잠금 해제로 유지되는 경우를 제외하고 시간 제한 경과 후 즉시"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>에 의해 잠금 해제로 유지되는 경우를 제외하고 시간 제한 경과 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>후"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>에 의해 잠금 해제된 경우를 제외하고 자동 잠금 시간 경과 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> 후"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"화면 잠금에 소유자 정보 표시"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"잠금 화면 메시지"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"위젯 사용"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"관리자가 사용 중지함"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"잠금 옵션 표시"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"잠금 화면에 Smart Lock, 지문 잠금 해제, 알림을 사용 중지하는 전원 버튼 옵션을 표시"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"잠금 화면에 Smart Lock, 생체 인식 잠금 해제, 알림을 사용 중지하는 전원 버튼 옵션 표시"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Trust Agent는 잠금 해제 연장만 가능"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"이 옵션을 사용 설정하면 Trust Agent가 기기를 더 오랫동안 잠금 해제된 상태로 유지하지만, 더 이상 기기의 잠금을 해제할 수는 없습니다."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"신뢰를 잃었을 때 화면 잠금"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"얼굴인식 잠금해제를 사용하여 기기를 잠금 해제하거나 앱에 로그인하거나 결제를 확인하세요.\n\n주의사항:\n휴대전화를 바라보면 의도치 않게 잠금이 해제될 수 있습니다.\n\n다른 사람이 눈을 뜨고 있는 내 얼굴에 휴대전화를 가져다 대도 잠금이 해제될 수 있습니다\n\n일란성 쌍둥이와 같이 나와 많이 닮은 사람이 휴대전화의 잠금을 해제할 수도 있습니다."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"얼굴 데이터를 삭제하시겠습니까?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"얼굴인식 잠금해제에 사용되는 이미지와 생체 인식 데이터가 영구적으로 안전하게 삭제됩니다. 삭제한 후 휴대전화를 잠금 해제하고 앱에 로그인하거나 결제를 확인하려면 PIN, 패턴 또는 비밀번호가 필요합니다."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"얼굴인식 잠금해제로 휴대전화 잠금 해제"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"지문"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"지문 관리"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"지문을 사용할 항목"</string>
@@ -1253,7 +1254,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"<xliff:g id="ID_1">%1$s</xliff:g>까지 켜기"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"<xliff:g id="ID_1">%1$s</xliff:g>까지 끄기"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"현재 야간 조명 사용 안함"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"화면 시간 제한"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"화면 자동 잠금 시간"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"화면이 꺼짐"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 이상 동작이 없을 때"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"배경화면"</string>
@@ -2449,7 +2450,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"손전등에서 사용한 배터리"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"카메라의 배터리 소모"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"디스플레이 및 백라이트에서 배터리 사용"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"화면 밝기 및/또는 화면 시간제한 줄이기"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"화면 밝기 및/또는 화면 자동 잠금 시간 줄이기"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi-Fi에서 배터리 사용"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"사용 중이 아니거나 사용할 수 없을 때 Wi-Fi 끄기"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"블루투스 배터리 사용량"</string>
@@ -3161,11 +3162,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"얼굴"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"지문, 지문 추가"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"화면 어둡게 하기, 터치스크린, 배터리, 스마트 밝기, 동적 밝기, 자동 밝기"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"화면 어둡게, 절전 모드, 배터리, 시간 초과, 주의 인식, 디스플레이, 화면, 활동 없음"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"화면 어둡게, 절전 모드, 배터리, 자동 잠금 시간, 시선 감지, 디스플레이, 화면, 활동 없음"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"돌리기, 뒤집기, 회전, 세로 모드, 가로 모드, 방향, 세로, 가로"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"업그레이드, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"방해 금지 모드, 예약, 알림, 차단, 무음, 진동, 절전 모드, 업무, 집중, 소리, 음소거, 낮, 평일, 주말, 평일 밤, 일정"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"화면, 잠금 시간, 시간 초과, 잠금 화면"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"화면, 잠금 시간, 자동 잠금 시간, 잠금 화면"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"메모리, 캐시, 데이터, 삭제, 지우기, 공간 확보, 공간"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"연결됨, 기기, 헤드폰, 헤드셋, 스피커, 무선, 페어링, 이어폰, 음악, 미디어"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"백그라운드, 화면, 잠금 화면, 테마"</string>
@@ -3427,7 +3428,7 @@
     <string name="allow_interruption_summary" msgid="7870159391333957050">"앱의 소리, 진동, 화면 알림 표시 허용"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"풀다운 창에서 알림을 한 줄로 접습니다."</string>
     <string name="notification_channel_summary_low" msgid="7050068866167282765">"소리나 진동 없이 집중할 수 있도록 도와줍니다"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"소리나 진동으로 주의를 끕니다"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"소리나 진동으로 알립니다."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"기기가 잠금 해제되었을 때 화면 상단에 알림 배너 표시"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"알림 표시"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"적응형 알림"</string>
@@ -3940,7 +3941,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"내부 저장소: <xliff:g id="PERCENTAGE">%1$s</xliff:g> 사용 중 - <xliff:g id="FREE_SPACE">%2$s</xliff:g> 사용 가능"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 동안 사용하지 않으면 절전 모드로 전환됩니다."</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"배경화면, 절전 모드, 글꼴 크기"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"스타일, 배경화면, 화면 제한시간, 글꼴 크기"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"스타일, 배경화면, 화면 자동 잠금 시간, 글꼴 크기"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"절전 모드, 글꼴 크기"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"10분 동안 사용하지 않으면 절전 모드로 전환"</string>
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> 중 평균 <xliff:g id="USED_MEMORY">%1$s</xliff:g> 사용됨"</string>

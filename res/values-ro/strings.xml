@@ -352,7 +352,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Select. după decalaj de la UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Blocați după dezactivarea ecranului"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Blochează după dezactivarea ecranului"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după dezactivarea ecranului"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Imediat după dezactivarea ecranului, dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"La <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după dezactivarea ecranului, dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -361,7 +361,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Activați widgeturi"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Dezactivat de administrator"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Afișați opțiunea de blocare strictă"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Afișați opțiunea butonului de pornire care dezactivează Smart Lock, deblocarea cu amprentă și notificările pe ecranul de blocare."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Afișați opțiunea butonului de pornire care dezactivează Smart Lock, deblocarea biometrică și notificările pe ecranul de blocare"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Doar agenții de încredere mențin dispozitivul deblocat mai mult timp"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Dacă este activată această opțiune, agenții de încredere vor menține dispozitivul deblocat mai mult timp, dar nu mai pot debloca un dispozitiv blocat."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Ecranul de blocare când încrederea este pierdută"</string>
@@ -446,6 +446,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Folosiți deblocarea facială ca să deblocați dispozitivul, să vă conectați la aplicații și să confirmați plăți.\n\nRețineți:\ndacă vă uitați la telefon, îl puteți debloca când nu doriți.\n\nTelefonul poate fi deblocat de altcineva dacă este ținut în dreptul feței dvs., când aveți ochii deschiși.\n\nTelefonul poate fi deblocat de cineva are seamănă mult cu dvs., cum ar fi un frate sau o soră geamănă."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Ștergeți datele faciale?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Imaginile și datele biometrice folosite de deblocarea facială vor fi șterse permanent și în siguranță. După eliminare, veți avea nevoie de codul PIN, de model sau de parolă ca să deblocați telefonul, să vă conectați la aplicații și să confirmați plățile."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Folosiți deblocarea facială ca să vă deblocați telefonul"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Amprentă"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gestionați amprentele"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Folosiți amprenta la"</string>
@@ -1245,7 +1246,7 @@
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Este necesar accesul la camera foto"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Atingeți pentru a gestiona permisiunile pentru Serviciile de personalizare a dispozitivelor"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Nu lasă ecranul să se închidă dacă vă uitați la el"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Opțiunea Atenție la ecran folosește camera frontală pentru a vedea dacă se uită cineva la ecran. Funcționează pe dispozitiv, iar imaginile nu sunt niciodată stocate sau trimise la Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"„Atenție la ecran” folosește camera frontală pentru a vedea dacă se uită cineva la ecran. Funcționează pe dispozitiv, iar imaginile nu sunt niciodată stocate sau trimise la Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Mențineți activat ecranul când îl priviți"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Lumină de noapte"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Lumina de noapte dă o nuanță de chihlimbar ecranului. Astfel, este mai ușor să priviți ecranul sau să citiți într-o lumină slabă și vă poate ajuta să adormiți mai rapid."</string>
@@ -3203,11 +3204,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"chip"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"amprentă, adăugați amprenta"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"reduceți luminozitatea ecranului, ecran tactil, baterie, luminozitate inteligentă, luminozitate dinamică, luminozitate automată"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"reduceți luminozitatea ecranului, inactivitate, baterie, timp limită, atenție, afișaj, ecran, lipsă de activitate"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"reduceți luminozitatea ecranului, inactivitate, baterie, dezactivarea ecranului, atenție, afișaj, ecran, lipsă de activitate"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"rotiți, comutați, rotire, portret, peisaj, orientare, vertical, orizontal"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"upgrade, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"Nu deranja, program, notificări, blocați, dezactivați sonorul, vibrații, inactivitate, serviciu, concentrare, sunet, sunet dezactivat, zi, zi din săptămână, weekend, seară din săptămână, eveniment"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ecran, timp de blocare, timp limită, ecran de blocare"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ecran, durată până la dezactivarea ecranului, timp limită, ecran de blocare"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"memorie, memorie cache, date, ștergeți, goliți, liber, spațiu"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"conectat, dispozitiv, căști, set căști-microfon, difuzoare, wireless, asociere, căști intraauriculare, muzică, conținut media"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"fundal, ecran, ecran de blocare, temă"</string>
@@ -3230,8 +3231,8 @@
     <string name="media_volume_option_title" msgid="2811531786073003825">"Volum media"</string>
     <string name="remote_media_volume_option_title" msgid="7602586327091007461">"Volumul proiectării"</string>
     <string name="call_volume_option_title" msgid="1265865226974255384">"Volumul apelului"</string>
-    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volum alarmă"</string>
-    <string name="ring_volume_option_title" msgid="6767101703671248309">"Volum sonerie"</string>
+    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volumul alarmei"</string>
+    <string name="ring_volume_option_title" msgid="6767101703671248309">"Volumul soneriei"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volumul notificărilor"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ton de sonerie al telefonului"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Sunet de notificare prestabilit"</string>

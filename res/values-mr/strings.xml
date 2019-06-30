@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"विजेट सुरू करा"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"प्रशासकाने अक्षम केलेले"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"लॉकडाउन पर्याय दाखवा"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Smart Lock, फिंगरप्रिंट अनलॉकिंग आणि लॉक स्क्रीनवरील सूचना बंद करणारे पॉवर बटण दाखवा"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Smart Lock, बायोमेट्रिक अनलॉकिंग आणि लॉक स्क्रीनवरील सूचना बंद करणार्‍या पॉवर बटणाचा पर्याय दाखवा"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"विश्वासू एजंट फक्त अनलॉक विस्तारीत करतात"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"सुरू केल्यास, विश्वासू एजंट तुमचे डिव्हाइस आणखी जास्त काळ अनलॉक ठेवतील, पण लॉक केलेले डिव्हाइस यापुढे अनलॉक करू शकणार नाहीत."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"विश्वास गमावेल तेव्हा स्क्रीन लॉक करा"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"तुमचे डिव्हाइस अनलॉक करण्यासाठी, अ‍ॅप्समध्ये साइन इन करण्यासाठी आणि पेमेंटची खात्री करण्यासाठी फेस अनलॉक वापरा. \n\n लक्षात ठेवा:\nतुमचा हेतू नसताना देखील फोनकडे पाहिल्यास तो अनलॉक होऊ शकतो.\n\nतुमचे डोळे उघडे असताना एखाद्या व्यक्तीने तुमचा फोन तुमच्या चेहऱ्याकडे धरल्यास तुमचा फोन अनलॉक केला जाऊ शकतो\n\nतुमच्यासारखी दिसणारी व्यक्ती तुमचा फोन संभाव्यत: अनलॉक करू शकते, जसे की, तुमचे भावंड."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"फेस डेटा हटवायचा?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"फेस अनलॉकद्वारे वापरलेल्या इमेज आणि बायोमेट्रिक डेटा कायमचा आणि सुरक्षितपणे हटवला जाईल. काढल्यानंतर, तुमचा फोन अनलॉक करण्यासाठी, अ‍ॅप्समध्ये साइन इन करण्यासाठी आणि पेमेंट निश्चित करण्यासाठी तुम्हाला तुमचा पिन, पॅटर्न किंवा पासवर्ड लागेल."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"तुमचा फोन अनलॉक करण्यासाठी फेस अनलॉक वापरा"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"फिंगरप्रिंट"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"फिंगरप्रिंट व्यवस्‍थापित करा"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"फिंगरप्रिंट यासाठी वापरा"</string>
@@ -1794,7 +1795,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"पॅटर्न दृश्यमान बनवा"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"प्रोफाईल पॅटर्न दृश्यमान बनवा"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"टॅप केल्यावर व्हायब्रेट करा"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"पॉवर बटण तात्काळपणे लॉक करते"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"पॉवर बटण तात्काळ लॉक करते"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> द्वारे अनलॉक केलेले ठेवले असते ते वगळून"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"अनलॉक पॅटर्न सेट करा"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"अनलॉक पॅटर्न बदला"</string>
@@ -3166,7 +3167,7 @@
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"फिरवा, फ्लिप करा, रोटेशन, पोर्ट्रेट, लँडस्केप, ओरिएंटेशन, उभे, आडवे"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"अपग्रेड करा, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"डीएनडी, शेड्यूल, सूचना, ब्लॉक, शांतता, व्हायब्रेट, झोप, काम, फोकस, ध्वनी, म्यूट, दिवस, कार्य दिवस, शनिवार व रविवार, आठवड्याची शेवटची रात्र, इव्हेंट"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"स्क्रीन, लॉक टाइम, कालबाह्य, लॉकस्क्रीन"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"स्क्रीन, लॉक टाइम, टाइमआउट, लॉकस्क्रीन"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"मेमरी, कॅशे, डेटा, हटवा, साफ करा, मोकळी करा, जागा"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"कनेक्ट केलेले, डिव्हाइस, हेडफोन, हेडसेट, स्पीकर, वायरलेस, पेअर, इयरबड, संगीत, मीडिया"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"पार्श्वभूमी, स्क्रीन, लॉकस्क्रीन, थीम"</string>

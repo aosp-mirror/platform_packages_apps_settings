@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Selec. por diferença para UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Bloquear após a expiração do limite de tempo do ecrã"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Bloquear após o fim do tempo de ecrã"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> após a expiração do limite de tempo"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Imediatamente após a expiração do limite de tempo, exceto quando mantido desbloqueado por <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> após a expiração do limite de tempo, exceto quando mantido desbloqueado por <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Ativar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Desativado pelo gestor"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Mostrar opção de bloqueio"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Apresentar a opção de botão ligar/desligar, que desativa o Smart Lock, o desbloqueio com impressão digital e as notificações no ecrã de bloqueio."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Apresente a opção de botão ligar/desligar, que desativa o Smart Lock, o desbloqueio com dados biométricos e as notificações no ecrã de bloqueio"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Agentes fidedignos só podem ampliar o desbloqueio"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Se estiver ativado, os agentes fidedignos mantêm o seu dispositivo desbloqueado durante mais tempo, mas já não conseguem desbloquear um dispositivo bloqueado."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Bloq. ecrã quando se perder a confiança"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Utilize o Desbloqueio Através do Rosto para desbloquear o dispositivo, iniciar sessão em aplicações e confirmar pagamentos.\n\nTenha em atenção:\nPode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.\n\nAlguém pode desbloquear o telemóvel se o segurar junto ao seu rosto com os olhos abertos.\n\nAlguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Eliminar os dados do rosto?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"As imagens e os dados biométricos utilizados pelo Desbloqueio Através do Rosto serão eliminados permanentemente e em segurança. Após a remoção, precisará do PIN, do padrão ou da palavra-passe para desbloquear o telemóvel, iniciar sessão nas aplicações e confirmar pagamentos."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Utilize o Desbloqueio Através do Rosto para desbloquear o telemóvel"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Impressão digital"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gerir impressões dig."</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Usar impr. dig. para"</string>
@@ -1253,7 +1254,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Ativar até à(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Desativar até à(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"A Luz noturna não está ativada"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Tempo limite do ecrã"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Limite de tempo do ecrã"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"O ecrã desliga-se"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Depois de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inatividade"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Imagem de fundo"</string>
@@ -2449,7 +2450,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Bateria utilizada pela lanterna"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Bateria utilizada pela câmara"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Bateria utilizada pelo ecrã e pela iluminação de fundo"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Reduzir o brilho do ecrã e/ou o tempo que este permanece iluminado"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Reduzir o brilho do ecrã e/ou o limite de tempo do ecrã"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Bateria utilizada por Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Desativar Wi-Fi quando não estiver a ser utilizada ou não estiver disponível"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Bateria utilizada pelo Bluetooth"</string>
@@ -3161,11 +3162,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"rosto"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"impressão digital, adicionar impressão digital"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"escurecer ecrã, ecrã tátil, bateria, brilho inteligente, brilho dinâmico, brilho automático"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"escurecer ecrã, suspensão, bateria, tempo limite, atenção, visualização, ecrã, inatividade"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"escurecer ecrã, suspensão, bateria, limite de tempo, atenção, visualização, ecrã, inatividade"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"rodar, inverter, rotação, retrato, paisagem, orientação, vertical, horizontal"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"atualizar, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"não incomodar, agendar, notificações, bloquear, silêncio, vibrar, suspensão, trabalho, focar, som, desativar, dia, dia de semana, fim de semana, noite de semana, evento"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ecrã, tempo de bloqueio, tempo limite, ecrã de bloqueio"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ecrã, tempo de bloqueio, limite de tempo, ecrã de bloqueio"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"memória, cache, dados, eliminar, limpar, libertar, espaço"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"associado, dispositivo, auscultadores, auscultadores com microfone integrado, altifalante, sem fios, sincronizar, auriculares, música, multimédia"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"fundo, ecrã, ecrã de bloqueio, tema"</string>
@@ -3940,7 +3941,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Memória de armazenamento interno: <xliff:g id="PERCENTAGE">%1$s</xliff:g> utilizado – <xliff:g id="FREE_SPACE">%2$s</xliff:g> livre(s)"</string>
     <string name="display_summary" msgid="6737806235882127328">"Suspender após <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inatividade"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Imagem de fundo, suspensão, tamanho da letra"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Estilos, imagens de fundo, tempo limite do ecrã, tamanho do tipo de letra"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Estilos, imagens de fundo, limite de tempo do ecrã, tamanho do tipo de letra"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Suspensão, tamanho do tipo de letra"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Suspender após 10 minutos de inatividade"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Média de <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de memória utilizado(s)"</string>
@@ -4221,7 +4222,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Para consultar a hora, as notificações e outras informações, pegue no telemóvel."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Para consultar a hora, as notificações e outras informações, pegue no tablet."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Para consultar a hora, as notificações e outras informações, pegue no dispositivo."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Toque para verificar o telemóvel"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Tocar para verificar o telemóvel"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"Toque para verificar o tablet"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Toque para verificar o dispositivo"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Para consultar a hora, as notificações e outras informações, toque no ecrã."</string>

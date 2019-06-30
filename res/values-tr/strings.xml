@@ -352,14 +352,14 @@
     <string name="time_picker_title" msgid="483460752287255019">"Saat"</string>
     <string name="lock_after_timeout" msgid="3041497579354520533">"Ekran zaman aşımından sonra kilitle"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"Zaman aşımından <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> tarafından kilidi açık tutulduğu zaman dışında zaman aşımından hemen sonra"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> tarafından kilit açık tutulduğunda zaman aşımından <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> tarafından kilit açık tutulmadığında zaman aşımından hemen sonra"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> tarafından kilit açık tutulmadığında zaman aşımından <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Kilitli ekranda sahip bilgilerini göster"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Kilit ekranı mesajı"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Widget\'ları etkinleştir"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Yönetici devre dışı bıraktı"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Kilitleme seçeneğini göster"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Kilit ekranında Smart Lock, parmak iziyle kilit açma ve bildirimler özelliğini kapatan güç düğmesi seçeneğini görüntüleyin"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Kilit ekranında Smart Lock, biyometrik kilit açma ve bildirimler özelliğini kapatan güç düğmesi seçeneğini görüntüleyin"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Sadece güven aracıları kilit açmaya izin verir"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Etkinleştirilirse güven aracıları cihazınızı daha uzun süre kilidi açık olarak tutar, ancak artık kilitlenen bir cihazın kilidini açamaz."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Güven kaybedildiğinde ekranı kilitle"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Cihazınızın kilidini açmak, uygulamalarda oturum açmak ve ödemeleri onaylamak için yüz tanıma kilidini kullanın.\n\nDikkat edilecek noktalar:\nTelefona bakarsanız, istemediğiniz zamanlarda da telefonunuzun kilidi açılabilir.\n\nTelefonunuz, gözleriniz açıkken yüzünüzün hizasına kaldırılırsa telefonunuzun kilidi başka biri tarafından da açılabilir.\n\nTelefonunuzun kilidi, ikiziniz gibi size çok benzeyen başka biri tarafından da açılabilir."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Yüz verileri silinsin mi?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Yüz tanıma kilidi tarafından kullanılan resimler ve biyometrik veriler kalıcı olarak, güvenli bir şekilde silinecektir. Kaldırma işleminden sonra, telefonunuzun kilidini açmak, oturumlarda oturum açmak ve ödemeleri onaylamak için PIN\'inize, deseninize veya şifrenize ihtiyacınız olur."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Telefonunuzun kilidini açmak için yüz tanıma kilidini kullanın"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Parmak izi"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Parmak izi yönetimi"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Parmak izi kullanımı:"</string>
@@ -1220,13 +1221,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Parlaklık düzeyini mevcut ışık için optimize edin. Bu özellik açık olduğunda parlaklığı geçici olarak ayarlamaya devam edebilirsiniz."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Ekranınızın parlaklığı, bulunduğunuz ortama ve aktivitelerinize göre otomatik olarak ayarlanır. Otomatik parlaklık özelliğinin tercihlerinizi öğrenmesine yardımcı olmak için kaydırma çubuğunu manuel olarak hareket ettirebilirsiniz."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Beyaz dengeyi göster"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Ekran kullanımı"</string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Ekrana dikkat verme"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Açık / Bakıyorsanız ekran kapanmaz"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Kapat"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kamera erişimi gerekiyor"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Cihaz Kişiselleştirme Hizmetleri izinlerini yönetmek için dokunun"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Baktığınız sürece ekranın kapanmasını engeller"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ekran kullanımı seçeneğinde, ekrana bakan birisi olup olmadığını görmek için ön kamera kullanılır. Tüm işlemler cihazda gerçekleşir ve resimler hiçbir zaman saklanmaz ya da Google\'a gönderilmez."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ekrana dikkat verme seçeneğinde, ekrana bakan birisi olup olmadığını görmek için ön kamera kullanılır. Tüm işlemler cihazda gerçekleşir ve görüntüler hiçbir zaman saklanmaz ya da Google\'a gönderilmez."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Telefona baktığınız sürece ekran açık kalır"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Gece Işığı"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Gece Işığı, ekranınızın renk tonunu amber yapar. Bu renk tonlaması, ekranınızı loş ışıkta daha iyi görmenizi sağlar ve daha kolay uyumanıza yardımcı olabilir."</string>
@@ -3161,7 +3162,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"yüz"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"parmak izi, parmak izi ekle"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"ekranı karartma, dokunmatik ekran, pil, akıllı parlaklık, dinamik parlaklık, Otomatik parlaklık"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"ekranı karartma, uyku, pil, zaman aşımı, ilgi, görüntü, ekran, etkin olmama"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"ekranı karartma, uyku, pil, zaman aşımı, dikkat verme, görüntü, ekran, etkin olmama"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"döndür, çevir, döndürme, portre, manzara, yön, dikey, yatay"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"yeni sürüme geçme, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, zamanlama, bildirimler, engelleme, sessiz, titreşim, uyku, çalışma, odak, ses, sesi kapatma, gün, hafta içi, hafta sonu, hafta içi gece, etkinlik"</string>
@@ -4149,8 +4150,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> cihazına bağlı"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Birden çok cihaza bağlı"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Sistem Kullanıcı Arayüzü demo modu"</string>
-    <!-- no translation found for dark_ui_mode (6795784845192720944) -->
-    <skip />
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Koyu tema"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Açık / Pil Tasarrufu nedeniyle geçici olarak devre dışı bırakıldı"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Pil Tasarrufu nedeniyle geçici olarak açıldı"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Desteklenen uygulamalar koyu temaya da geçiş yapar"</string>
