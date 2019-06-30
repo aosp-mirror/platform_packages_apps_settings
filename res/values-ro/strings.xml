@@ -1241,7 +1241,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Activat/Ecranul nu se va închide dacă vă uitați la el"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Dezactivat"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Nu lasă ecranul să se închidă dacă vă uitați la el."</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Opțiunea Atenție la ecran folosește camera frontală pentru a vedea dacă se uită cineva la ecran. Funcționează pe dispozitiv, iar imaginile nu sunt niciodată stocate sau trimise la Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"„Atenție la ecran” folosește camera frontală pentru a vedea dacă se uită cineva la ecran. Funcționează pe dispozitiv, iar imaginile nu sunt niciodată stocate sau trimise la Google."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Lumină de noapte"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Lumina de noapte dă o nuanță de chihlimbar ecranului. Astfel, este mai ușor să priviți ecranul sau să citiți într-o lumină slabă și vă poate ajuta să adormiți mai rapid."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Program"</string>
@@ -3191,7 +3191,6 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"număr de serie, versiune de hardware"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"nivelul corecției de securitate Android, versiunea benzii de bază, versiune nucleu"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"temă, deschis la culoare, întunecat, mod"</string>
-    <string name="keywords_financial_apps_sms_access" msgid="391349097813320537">"aplicație financiară, sms, permisiune"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"temă întunecată"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"eroare"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Afișare ambient, Afișare ecran de blocare"</string>
@@ -3199,11 +3198,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"chip"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"amprentă, adăugați amprenta"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"reduceți luminozitatea ecranului, ecran tactil, baterie, luminozitate inteligentă, luminozitate dinamică, luminozitate automată"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"reduceți luminozitatea ecranului, inactivitate, baterie, timp limită, atenție, afișaj, ecran, lipsă de activitate"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"reduceți luminozitatea ecranului, inactivitate, baterie, dezactivarea ecranului, atenție, afișaj, ecran, lipsă de activitate"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"rotiți, comutați, rotire, portret, peisaj, orientare, vertical, orizontal"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"upgrade, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"Nu deranja, program, notificări, blocați, dezactivați sonorul, vibrații, inactivitate, serviciu, concentrare, sunet, sunet dezactivat, zi, zi din săptămână, weekend, seară din săptămână, eveniment"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ecran, timp de blocare, timp limită, ecran de blocare"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ecran, durată până la dezactivarea ecranului, timp limită, ecran de blocare"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"memorie, memorie cache, date, ștergeți, goliți, liber, spațiu"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"conectat, dispozitiv, căști, set căști-microfon, difuzoare, wireless, asociere, căști intraauriculare, muzică, conținut media"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"fundal, ecran, ecran de blocare, temă"</string>
@@ -3226,8 +3225,8 @@
     <string name="media_volume_option_title" msgid="2811531786073003825">"Volum media"</string>
     <string name="remote_media_volume_option_title" msgid="7602586327091007461">"Volumul proiectării"</string>
     <string name="call_volume_option_title" msgid="1265865226974255384">"Volumul apelului"</string>
-    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volum alarmă"</string>
-    <string name="ring_volume_option_title" msgid="6767101703671248309">"Volum sonerie"</string>
+    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volumul alarmei"</string>
+    <string name="ring_volume_option_title" msgid="6767101703671248309">"Volumul soneriei"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volumul notificărilor"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ton de sonerie al telefonului"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Sunet de notificare prestabilit"</string>
@@ -3951,7 +3950,6 @@
     <string name="write_settings" msgid="4797457275727195681">"Modifică setările de sistem"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"scrie modifică setări de sistem"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_0">%1$d</xliff:g> din <xliff:g id="COUNT_1">%2$d</xliff:g>   aplicații pot modifica setările de sistem"</string>
-    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"Acces la SMS-uri pentru aplicațiile financiare"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"Pot instala alte aplicații"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Pot modifica setările de sistem"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Pot modifica setările de sistem"</string>
@@ -4216,7 +4214,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Conectat la <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Conectat la mai multe dispozitive"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Mod demonstrativ pentru IU sistem"</string>
-    <string name="dark_ui_mode" msgid="3888371857083890543">"Temă întunecată"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Temă întunecată"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Pornit / dezactivat temporar de Economisirea bateriei"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Pornit temporar de Economisirea bateriei"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Și aplicațiile acceptate vor comuta la tema întunecată"</string>

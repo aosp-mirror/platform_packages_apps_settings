@@ -1222,7 +1222,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Միացված է – Երբ դուք նայում եք էկրանին, այն չի անջատվի։"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Անջատված է"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Երբ դուք նայում եք էկրանին, այն չի անջատվի։"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ադապտիվ քնի ռեժիմում սարքն օգտագործում է առջևի տեսախցիկը, որպեսզի հետևի՝ արդյոք ինչ-որ մեկը նայում է էկրանին։ Այս գործառույթն աշխատում է միայն ձեր սարքում, իսկ պատկերները չեն պահվում և չեն ուղարկվում Google-ին։"</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ադապտիվ քնի ռեժիմում սարքն առջևի տեսախցիկի միջոցով ճանաչում է, եթե ինչ-որ մեկը նայում է էկրանին։ Այս գործառույթն աշխատում է միայն ձեր սարքում, պատկերները չեն պահվում և չեն ուղարկվում Google-ին։"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Գիշերային ռեժիմ"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Գիշերային ռեժիմը դեղնավուն երանգ է հաղորդում էկրանին: Դա թույլ է տալիս հանել աչքերի լարվածությունը և օգնում է ավելի արագ քնել։"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Ժամանակացույց"</string>
@@ -1248,7 +1248,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Միացնել մինչև <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Անջատել մինչև <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Գիշերային ռեժիմը միացված չէ"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Էկրանի ակտիվ լինելու ժամանակի սպառում"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Էկրանի անջատում"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Էկրանը անջատվում է"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> անգործուն լինելուց հետո"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Պաստառ"</string>
@@ -1865,7 +1865,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Արտակարգ իրավիճակների հավելված"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Զրոյացնել հավելվածների կարգավորումները"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Զրոյացնե՞լ կարգավորումները"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Կզրոյանան հետևյալ բոլոր կարգավորումները՝\n\n "<li>"Անջատած հավելվածները"</li>\n" "<li>"Հավելվածների անջատած ծանուցումները"</li>\n" "<li>"Կանխադրված հավելվածները"</li>\n" "<li>"Ֆոնային ռեժիմում տվյալների փոխանցման սահմանափակումները"</li>\n\n" "<li>"Թույլտվությունների բոլոր սահմանափակումները"</li>\n"Հավելվածների տվյալները չեն կորի։"</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Կզրոյացվեն հետևյալ բոլոր կարգավորումները՝\n\n"<li>"Անջատած հավելվածները"</li>\n<li>"Հավելվածների անջատած ծանուցումները"</li>\n<li>"Կանխադրված հավելվածները"</li>\n<li>"Ֆոնային ռեժիմում տվյալների փոխանցման սահմանափակումները"</li>\n\n<li>"Թույլտվությունների բոլոր սահմանափակումները"</li>\n"Հավելվածների տվյալները չեն կորի։"</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Զրոյացնել"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Կառավարել տարածքը"</string>
     <string name="filter" msgid="2018011724373033887">"Զտիչ"</string>
@@ -2395,8 +2395,8 @@
     <string name="dialog_background_check_ok" msgid="412876934682899659">"Անջատել"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"Անջատե՞լ տեղորոշումը"</string>
     <string name="dialog_location_message" product="default" msgid="7774807745601479888">"Ձեր հեռախոսը չի կարող ինչպես հարկն է կառավարել մարտկոցի լիցքը, քանի որ <xliff:g id="APP">%1$s</xliff:g> հավելվածը պարբերաբար պահանջում է տեղորոշան տվյալները, երբ դուք այն չեք օգտագործում:\n\nԽնդիրը շտկելու համար կարող եք անջատել այս հավելվածի տեղորոշման ընտրանքը։"</string>
-    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"Ձեր պլաշետը չի կարող ինչպես հարկն է կառավարել մարտկոցի լիցքը, քանի որ <xliff:g id="APP">%1$s</xliff:g> հավելվածը պարբերաբար պահնջում է տեղորոշման տվյալները, երբ դուք այն չեք օգտագործում:\n\nԽնդիրը շտկելու համար կարող եք անջատել այս հավելվածի տեղորոշման ընտրանքը։"</string>
-    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"Ձեր սարքը չի կարող ինչպես հարկն է կառավարել մարտկոցի լիցքը, քանի որ <xliff:g id="APP">%1$s</xliff:g> հավելվածը պարբերաբար պահանջում է տեղորոշման տվյալները, երբ դուք այն չեք օգտագործում:\n\nԽնդիրը շտկելու համար կարող եք անջատել այս հավելվածի տեղորոշման ընտրանքը։"</string>
+    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"Ձեր պլաշետը չի կարող ինչպես հարկն է կառավարել մարտկոցի լիցքը, քանի որ <xliff:g id="APP">%1$s</xliff:g> հավելվածը պարբերաբար պահնջում է տեղադրության տվյալները, երբ դուք այն չեք օգտագործում:\n\nԽնդիրը շտկելու համար կարող եք անջատել այս հավելվածի տեղորոշման ընտրանքը։"</string>
+    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"Ձեր սարքը չի կարող ինչպես հարկն է կառավարել մարտկոցի լիցքը, քանի որ <xliff:g id="APP">%1$s</xliff:g> հավելվածը պարբերաբար պահանջում է տեղադրության տվյալները, երբ դուք այն չեք օգտագործում:\n\nԽնդիրը շտկելու համար կարող եք անջատել այս հավելվածի տեղորոշման ընտրանքը։"</string>
     <string name="dialog_location_ok" msgid="4572391197601313986">"Անջատել"</string>
     <string name="power_screen" msgid="3023346080675904613">"Էկրան"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Լապտեր"</string>
@@ -2444,7 +2444,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Մարտկոցի օգտագործումը լապտերի կողմից"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Մարտկոցի օգտագործումը խցիկի կողմից"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Ցուցադրիչի և հետնալույսի կողմից օգտագործված մարտկոցը"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Նվազեցրեք էկրանի պայծառությունը և/կամ էկրանի սպառման ժամանակը"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Նվազեցնել էկրանի պայծառությունը և/կամ անջատման ժամանակը"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi-Fi-ն օգտագործում է մարտկոցը"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Անջատել Wi-Fi-ը, երբ այն չի օգտագործվում կամ հասանելի չէ"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Bluetooth-ի կողմից օգտագործված մարտկոցը"</string>
@@ -3149,7 +3149,6 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"սերիական համար, սարքակազմի տարբերակ"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android-ի խոցելիության շտկման մակարդակ, Baseband-ի տարբերակ, միջուկի տարբերակ"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"թեմա, բաց, մուգ, ռեժիմ"</string>
-    <string name="keywords_financial_apps_sms_access" msgid="391349097813320537">"ֆինանսական հավելված, sms, թույլտվություն"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"մուգ թեմա"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"վրիպակ"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ամբիենտ էկրան, կողպէկրան"</string>
@@ -3157,11 +3156,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"դեմք"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"մատնահետք, ավելացնել մատնահետք"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"խամրեցված էկրան, հպէկրան, մարտկոց, խելացի պայծառություն, դինամիկ պայծառություն, ավտոմատ պայծառություն"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"խամրած էկրան, քնելու ռեժիմ, մարտկոց, ժամանակի սպառում, ուշադրություն, էկրան, ցուցադրել, անգործուն ռեժիմ"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"խամրած էկրան, քնի ռեժիմ, մարտկոց, ժամանակի սպառում, ուշադրություն, էկրան, ցուցադրել, անգործուն ռեժիմ"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"պտտել, շրջել, պտույտ, ուղղահայաց, հորիզոնական, դիրք, դիմանկար, բնանկար"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"թարմացնել, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"չանհանգստացնել, ժամանակացույց, ծանուցումներ, արգելափակել, անձայն ռեժիմ, թրթռալ, քուն, աշխատանք, կենտրոնացում, ձայն, անջատել ձայնը, օր, աշխատանքային օր, հանգստյան օր, աշխատանքային օրվա երեկո, միջոցառում"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"էկրան, կողպման ժամանակը, դադար, կողպէկրան"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"էկրան, կողպման ժամանակը, անջատում, կողպէկրան"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"հիշողություն, քեշ, տվյալներ, ջնջել, մաքրել, ազատել, տարածք"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"միացված, սարք, ականջակալ, բարձրախոս, անլար, զուգակցել, ներդիր ականջակալ, երաժշտություն, մեդիա"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"հետնապատկեր, էկրան, կողպէկրան, թեմա"</string>
@@ -3888,7 +3887,6 @@
     <string name="write_settings" msgid="4797457275727195681">"Համակարգային կարգավորումներ"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"փոփոխել համակարգի կարգավորումները"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_1">%2$d</xliff:g>-ից <xliff:g id="COUNT_0">%1$d</xliff:g> հավելված կարող են փոփոխել համակարգի կարգավորումները"</string>
-    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"Ֆինանսական հավելվածներում SMS-ի հասանելիություն"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"Կարող են այլ հավելվածներ տեղադրել"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Կարող են փոփոխել համակարգի կարգավորումները"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Կարող են փոփոխել համակարգի կարգավորումները"</string>
@@ -3934,7 +3932,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Ներքին հիշողություն՝ <xliff:g id="PERCENTAGE">%1$s</xliff:g> օգտագործված – <xliff:g id="FREE_SPACE">%2$s</xliff:g> ազատ"</string>
     <string name="display_summary" msgid="6737806235882127328">"Ակտիվացնել քնի ռեժիմը <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> անգործուն մնալուց հետո"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Պաստառ, քնի ռեժիմ, տառաչափ"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Ոճեր, պաստառներ, էկրանի սպասման ժամանակը, տառաչափ"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Ոճեր, պաստառներ, էկրանի անջատում, տառաչափ"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Քնի ռեժիմ, տառաչափ"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Ակտիվացնել քնի ռեժիմը 10 րոպե անգործուն մնալուց հետո"</string>
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>-ից օգտագործվել է <xliff:g id="USED_MEMORY">%1$s</xliff:g>"</string>
@@ -4146,7 +4144,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Կապակցված է <xliff:g id="ID_1">%1$s</xliff:g>-ին"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Կապակցված է բազմակի շարժական սարքերի"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Համակարգի միջերեսի ցուցադրական ռեժիմ"</string>
-    <string name="dark_ui_mode" msgid="3888371857083890543">"Մուգ թեմա"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Մուգ թեմա"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Միացնել (անջատվել է մարտկոցի տնտեսման համար)"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Ժամանակավորապես միացվել է մարտկոցի տնտեսման համար"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Աջակցվող հավելվածները ևս կանցնեն մուգ թեմային"</string>

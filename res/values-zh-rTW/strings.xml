@@ -353,7 +353,7 @@
     <string name="lock_after_timeout" msgid="4590337686681194648">"自動鎖定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後"</string>
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"休眠後立即鎖定 (<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> 讓螢幕保持解鎖狀態時除外)"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後 (由「<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>」維持解鎖狀態時除外)"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後 (由 <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> 維持解鎖狀態時除外)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在鎖定畫面上顯示擁有者資訊"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"鎖定螢幕訊息"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"啟用小工具"</string>
@@ -1789,7 +1789,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"顯示設定檔解鎖圖案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"輕觸時震動"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"按下電源按鈕立即鎖定"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"由「<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>」維持解鎖狀態時除外"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"由 <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> 維持解鎖狀態時除外"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"設定解鎖圖案"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"變更解鎖圖案"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"如何畫出解鎖圖案"</string>
@@ -3149,7 +3149,6 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"序號、硬體版本"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android 安全性修補程式等級、基頻版本、核心版本"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"主題、淺色、深色、模式"</string>
-    <string name="keywords_financial_apps_sms_access" msgid="391349097813320537">"財務應用程式, 簡訊, 權限"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"深色主題"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"錯誤"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"微光螢幕, 螢幕鎖定畫面"</string>
@@ -3157,11 +3156,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"臉孔"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"指紋, 新增指紋"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"調暗螢幕, 觸控螢幕, 電池, 智慧型亮度, 動態亮度, 自動亮度"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"調暗螢幕, 休眠, 電池, 逾時, 注意力, 顯示, 螢幕, 閒置"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"調暗螢幕, 休眠, 電池, 自動關閉, 感知, 顯示, 螢幕, 閒置"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"旋轉, 翻轉, 轉動, 直向, 橫向, 螢幕方向, 垂直, 水平"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"升級, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"零打擾, 時間表, 通知, 封鎖, 靜音, 震動, 休眠, 工作, 焦點, 音效, 忽略, 天, 週間, 週末, 週間晚上, 活動"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"螢幕, 鎖定時間, 逾時, 鎖定螢幕"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"螢幕, 鎖定時間, 自動關閉, 鎖定螢幕"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"記憶體, 快取, 資料, 刪除, 清除, 釋出, 空間"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"已連線, 裝置, 耳罩式耳機, 耳機, 喇叭, 無線, 配對, 耳塞式耳機, 音樂, 媒體"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"背景, 螢幕, 鎖定螢幕, 主題"</string>
@@ -3888,7 +3887,6 @@
     <string name="write_settings" msgid="4797457275727195681">"修改系統設定"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"編寫修改系統設定"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_0">%1$d</xliff:g> 個 (共 <xliff:g id="COUNT_1">%2$d</xliff:g> 個) 應用程式可修改系統設定"</string>
-    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"財務應用程式、簡訊、存取權"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"能夠安裝其他應用程式"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"可以修改系統設定"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"可以修改系統設定"</string>
@@ -3934,7 +3932,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"內部儲存空間：已使用 <xliff:g id="PERCENTAGE">%1$s</xliff:g> - 尚餘 <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後休眠"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"桌布、休眠、字型大小"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"樣式、桌布、螢幕逾時、字型大小"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"樣式、桌布、螢幕自動關閉、字型大小"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"休眠、字型大小"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"閒置 10 分鐘後休眠"</string>
     <string name="memory_summary" msgid="8080825904671961872">"平均記憶體用量為 <xliff:g id="USED_MEMORY">%1$s</xliff:g> (共 <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>)"</string>
@@ -4146,7 +4144,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"已連線到「<xliff:g id="ID_1">%1$s</xliff:g>」"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"已連線到多個裝置"</string>
     <string name="demo_mode" msgid="2798762752209330277">"系統 UI 示範模式"</string>
-    <string name="dark_ui_mode" msgid="3888371857083890543">"深色主題"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"深色主題"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"開啟/因「節約耗電量」功能而暫時停用"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"因「節約耗電量」功能而暫時啟用"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"支援的應用程式也會切換為深色主題"</string>
