@@ -103,8 +103,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             "accessibility_shortcut_preference";
     private static final String HEARING_AID_PREFERENCE =
             "hearing_aid_preference";
-    private static final String CAPTIONING_PREFERENCE_SCREEN =
-            "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "magnification_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
@@ -188,7 +186,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private SwitchPreference mToggleLargePointerIconPreference;
     private SwitchPreference mToggleDisableAnimationsPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
-    private Preference mCaptioningPreferenceScreen;
     private Preference mDisplayMagnificationPreferenceScreen;
     private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
@@ -369,9 +366,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Hearing Aid.
         mHearingAidPreference = findPreference(HEARING_AID_PREFERENCE);
         mHearingAidPreferenceController.displayPreference(getPreferenceScreen());
-
-        // Captioning.
-        mCaptioningPreferenceScreen = findPreference(CAPTIONING_PREFERENCE_SCREEN);
 
         // Live caption
         mLiveCaptionPreference = findPreference(LIVE_CAPTION_PREFERENCE_KEY);
@@ -613,8 +607,6 @@ public class AccessibilitySettings extends DashboardFragment implements
 
         mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
 
-        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
-                mCaptioningPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
