@@ -99,8 +99,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
     private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
             "select_long_press_timeout_preference";
-    private static final String ACCESSIBILITY_SHORTCUT_PREFERENCE =
-            "accessibility_shortcut_preference";
     private static final String HEARING_AID_PREFERENCE =
             "hearing_aid_preference";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
@@ -187,7 +185,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private SwitchPreference mToggleDisableAnimationsPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private Preference mDisplayMagnificationPreferenceScreen;
-    private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mHearingAidPreference;
     private Preference mLiveCaptionPreference;
@@ -377,9 +374,6 @@ public class AccessibilitySettings extends DashboardFragment implements
 
         // Display color adjustments.
         mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
-
-        // Accessibility shortcut.
-        mAccessibilityShortcutPreferenceScreen = findPreference(ACCESSIBILITY_SHORTCUT_PREFERENCE);
 
         // Dark Mode.
         mDarkUIModePreference = findPreference(DARK_UI_MODE_PREFERENCE);
@@ -606,25 +600,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         mHearingAidPreferenceController.updateState(mHearingAidPreference);
 
         mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
-
-        updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
-    }
-
-    private void updateAccessibilityShortcut(Preference preference) {
-        if (AccessibilityManager.getInstance(getActivity())
-                .getInstalledAccessibilityServiceList().isEmpty()) {
-            mAccessibilityShortcutPreferenceScreen
-                    .setSummary(getString(R.string.accessibility_no_services_installed));
-            mAccessibilityShortcutPreferenceScreen.setEnabled(false);
-        } else {
-            mAccessibilityShortcutPreferenceScreen.setEnabled(true);
-            boolean shortcutEnabled =
-                    AccessibilityUtils.isShortcutEnabled(getContext(), UserHandle.myUserId());
-            CharSequence summary = shortcutEnabled
-                    ? AccessibilityShortcutPreferenceFragment.getServiceName(getContext())
-                    : getString(R.string.accessibility_feature_state_off);
-            mAccessibilityShortcutPreferenceScreen.setSummary(summary);
-        }
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

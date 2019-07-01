@@ -23,8 +23,9 @@
 
     <Preference
         android:key="accessibility_shortcut_preference"
+        android:title="@string/accessibility_global_gesture_preference_title"
         android:fragment="com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment"
-        android:title="@string/accessibility_global_gesture_preference_title"/>
+        settings:controller="com.android.settings.accessibility.AccessibilityShortcutPreferenceController"/>
 
     <PreferenceCategory
         android:key="user_installed_services_category"
