@@ -114,7 +114,8 @@
             android:title="@string/accessibility_long_press_timeout_preference_title"
             android:entries="@array/long_press_timeout_selector_titles"
             android:entryValues="@array/long_press_timeout_selector_values"
-            android:persistent="false"/>
+            android:persistent="false"
+            settings:controller="com.android.settings.accessibility.SelectLongPressTimeoutPreferenceController"/>
 
         <Preference
             android:key="accessibility_control_timeout_preference_fragment"
