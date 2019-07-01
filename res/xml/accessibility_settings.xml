@@ -123,9 +123,10 @@
             settings:controller="com.android.settings.accessibility.AccessibilityTimeoutPreferenceController"/>
 
         <Preference
-            android:fragment="com.android.settings.accessibility.VibrationSettings"
             android:key="vibration_preference_screen"
-            android:title="@string/accessibility_vibration_settings_title"/>
+            android:title="@string/accessibility_vibration_settings_title"
+            android:fragment="com.android.settings.accessibility.VibrationSettings"
+            settings:controller="com.android.settings.accessibility.VibrationPreferenceController"/>
 
     </PreferenceCategory>
 
