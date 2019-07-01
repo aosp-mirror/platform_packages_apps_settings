@@ -352,14 +352,14 @@
     <string name="time_picker_title" msgid="483460752287255019">"زمان"</string>
     <string name="lock_after_timeout" msgid="3041497579354520533">"قفل شدن بعداز وقفه زمانی صفحه"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعد از وقفه زمانی"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"بلافاصله بعداز وقفه زمانی، به‌جز وقتی قفل صفحه را <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> باز نگه می‌دارد"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعد از وقفه زمانی، به‌جز زمانی‌که قفل صفحه را <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> باز نگه دارد"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"بلافاصله بعداز وقفه زمانی، به‌جز وقتی‌که <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> قفل صفحه را باز نگه می‌دارد"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعداز وقفه زمانی، به‌جز وقتی‌که <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> قفل صفحه را باز نگه دارد"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"نمایش اطلاعات مالک در صفحه قفل"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"پیام صفحه قفل"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"فعال کردن ابزارک‌ها"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"غیرفعال‌شده توسط سرپرست"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"نمایش گزینه «قفل همه»"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"‏نمایش گزینه دکمه روشن/خاموش که Smart Lock، باز کردن قفل با اثرانگشت و اعلان‌های در صفحه قفل را خاموش می‌کند"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"‏نمایش گزینه دکمه روشن/خاموش که Smart Lock، باز کردن قفل مبتنی بر زیست‌سنجی و اعلان‌های صفحه قفل را خاموش می‌کند"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"نماینده‌های معتمد فقط تمدید حالت باز"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"اگر فعال شود، نماینده‌های معتمد برای مدت طولانی‌تری دستگاهتان را باز نگه می‌دارند اما دیگر نمی‌توانند دستگاه قفلی را باز کنند."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"صفحه قفل وقتی اعتماد از بین می‌رود"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"از «بازگشایی با چهره» برای باز کردن قفل دستگاه، ورود به سیستم برنامه‌ها و تأیید پرداخت‌ها استفاده کنید.\n\nبه خاطر بسپارید:\nبا نگاه کردن به تلفن (حتی اگر نخواهید)، ممکن است قفل آن باز شود.\n\nافراد دیگر می‌توانند با نگه‌داشتن آن جلوی صورتتان، وقتی چشمانتان باز است، قفلش را باز کنند.\n\nفرد دیگری که شباهت زیادی به شما دارد - مثلاً خواهر و برادر دوقلو - می‌تواند قفل تلفنتان را باز کند."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"داده‌های چهره حذف شود؟"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"تصاویر و داده‌های زیست‌سنجشی که در «قفل‌گشایی با چهره» استفاده می‌شود به‌طور دائم و ایمن حذف می‌شود. پس از برداشتن داده‌ها، برای باز کردن قفل تلفن، ورود به سیستم برنامه‌ها، و تأیید پرداخت‌ها، به پین، الگو، یا گذرواژه نیاز دارید."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"‏با Face Unlock، قفل تلفنتان را باز کنید"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"اثر انگشت"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"مدیریت اثر انگشت"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"استفاده از اثر انگشت برای"</string>
@@ -1794,7 +1795,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"الگوی نمایه مرئی باشد"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"لرزش هنگام ضربه"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"قفل‌شدن فوری با دکمه روشن/خاموش"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"به جز زمانی که قفل صفحه توسط <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> باز نگه داشته شود"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"به‌جز وقتی‌که <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> قفل صفحه را باز نگه دارد"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"تنظیم الگوی بازگشایی قفل"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"تغییر الگوی بازگشایی قفل"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"نحوه ترسیم الگوی بازگشایی قفل"</string>
@@ -3388,8 +3389,8 @@
     <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"صفحه قفل، صفحه‌قفل، رد کردن، نادیده گرفتن"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"وقتی نمایه کاری قفل است"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"اعلان‌ها در صفحه قفل"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"نمایش زنگ ساعت و اعلان‌های بی‌صدا"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"فقط نمایش اعلان‌های زنگ ساعت"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"نمایش اعلان‌های بی‌صدا و هشدار"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"فقط نمایش اعلان‌های هشدار"</string>
     <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"عدم‌نمایش اعلان‌ها"</string>
     <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"اعلان‌های حساس"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"نمایش محتوای حساس درهنگام صفحه قفل"</string>

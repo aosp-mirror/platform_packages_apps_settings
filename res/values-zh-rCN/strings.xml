@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"按世界协调时间 (UTC) 偏移量选择"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"时间"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"屏幕超时后锁定"</string>
-    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"超时 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"超时后立即锁定屏幕（除非<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>让屏幕保持解锁状态）"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"超时 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（除非<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>让屏幕保持解锁状态）"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"设备空闲多长时间后锁屏"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"空闲 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"一空闲就立即锁定（除非 <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> 让屏幕保持解锁状态）"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"空闲 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（除非 <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> 让屏幕保持解锁状态）"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在锁定屏幕上显示机主信息"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"锁定屏幕消息"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"启用微件"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"已被管理员停用"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"显示锁定选项"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"显示可在锁定屏幕上关闭 Smart Lock、指纹解锁和通知功能的电源按钮选项"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"显示可在锁定屏幕上关闭 Smart Lock、指纹解锁和通知功能的电源按钮选项"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"可信代理只会延长解锁时间"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"启用后，可信代理会延长设备的解锁时间，但无法再将已锁定的设备解锁。"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"信任状态结束时锁定屏幕"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"您可以使用人脸解锁功能来解锁设备、登录应用以及确认付款。\n\n注意：\n目视手机可能会让手机意外解锁。\n\n如果有人在您睁开双眼时将手机对准您的脸，手机会因此解锁。\n\n此外，长相与您相似的人（例如同胞兄弟姐妹）也能够解锁您的手机。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"要删除人脸数据吗？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"系统将安全地将人脸解锁功能所用的图片和生物识别数据永久删除。移除数据后，您将需要使用 PIN 码、图案或密码来解锁手机、登录应用和确认付款。"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"使用人脸解锁功能将手机解锁"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"指纹"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"管理指纹"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"将指纹用于以下用途："</string>
@@ -1793,7 +1794,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"显示图案"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"显示资料解锁图案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"点按时振动"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"电源按钮即时锁定"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"按下电源按钮即时锁定"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>让屏幕保持解锁状态时除外"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"设置解锁图案"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"更改解锁图案"</string>
@@ -2449,7 +2450,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"手电筒所耗的电量"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"相机所耗的电量"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"显示屏和背光所耗的电量"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"降低屏幕亮度，缩短休眠延时"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"降低屏幕亮度，缩短屏幕超时"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"WLAN网络所耗的电量"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"未使用或无法使用WLAN网络时将WLAN关闭"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"蓝牙所耗的电量"</string>
@@ -3161,7 +3162,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"面孔"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"指纹, 添加指纹"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"降低屏幕亮度, 触摸屏, 电池, 智能亮度, 动态亮度, 自动调节亮度"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"调暗屏幕, 休眠, 电池, 超时, 注意力, 显示, 屏幕, 闲置"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"调暗屏幕, 休眠, 电池, 超时, 感知, 显示, 屏幕, 闲置"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"旋转, 翻转, 纵向, 横向, 屏幕方向, 垂直, 水平"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"升级, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"勿扰, 时间表, 通知, 屏蔽, 设为静音, 振动, 休眠, 工作, 焦点, 声音, 静音, 日, 工作日, 周末, 工作日晚上, 活动"</string>

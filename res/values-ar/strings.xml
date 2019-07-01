@@ -271,7 +271,7 @@
     <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"‏جارٍ فحص بطاقة SD للوسائط..."</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3624143937437417788">"‏وحدة تخزين USB التي تم تثبيتها للقراءة فقط."</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"‏بطاقة SD تم تثبيتها للقراءة فقط."</string>
-    <string name="skip_label" msgid="47510779345218297">"تخطي"</string>
+    <string name="skip_label" msgid="47510779345218297">"التخطي"</string>
     <string name="next_label" msgid="4693520878012668114">"التالي"</string>
     <string name="language_picker_title" msgid="3596315202551687690">"اللغات"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"إزالة"</string>
@@ -358,7 +358,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"‏الاختيار حسب فارق الوقت عن UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"التاريخ"</string>
     <string name="time_picker_title" msgid="483460752287255019">"الوقت"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"قفل الشاشة بعد انتهاء المهلة"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"قفل الشاشة بعد انتهاء مهلة غلقها"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"بعد <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> من انتهاء المهلة"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"بعد انتهاء المهلة مباشرة، إلا عندما يظلّ الجهاز مفتوحًا بسبب <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعد انتهاء المهلة، إلا عندما يظلّ الجهاز مفتوحًا بسبب <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -367,7 +367,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"تفعيل الأدوات"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"تم إيقاف الإعداد بواسطة المشرف"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"عرض خيار التأمين"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"‏عرض خيار زر التشغيل الذي يعمل على إيقاف كل من Smart Lock والقفل باستخدام بصمة الإصبع والإشعارات على شاشة القفل"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"‏عرض خيار زر التشغيل الذي يوقِف Smart Lock، وفتح القفل باستخدام البيانات الحيوية، والإشعارات على شاشة التأمين"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"بإمكان الوكلاء المعتمَدين تمديد فتح القفل فقط"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"في حال تفعيل هذه الميزة، سيُبقي الوكلاء المعتمَدون الجهاز مفتوحًا لوقت أطول، إلا أنّهم لن يتمكنوا بعد ذلك من فتح جهاز تمّ قفله."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"قفل الشاشة عند فقدان الثقة"</string>
@@ -455,6 +455,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"يمكنك استخدام \"فتح القفل بالوجه\" لفتح قفل الجهاز وتسجيل الدخول إلى التطبيقات وتأكيد عمليات الدفع.\n\nملاحظة مهمة:\nقد تفتح الهاتف بدون قصد بمجرّد النظر إليه.\n\nويمكن لشخص آخر فتح قفل هاتفك عند تقريبه من وجهك وأنت فاتح عينيك.\n\nوكذلك، يمكن لشخص يشبهك كثيرًا، مثل شقيقك التوأم، فتح قفل الهاتف."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"هل تريد حذف بيانات الوجه؟"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"سيتم حذف الصور والبيانات الحيوية التي تستخدمها ميزة \"فتح القفل بالوجه\" نهائيًا وبشكلٍ آمن. وبعد إزالتها، ستحتاج إلى رقم التعريف الشخصي أو النقش أو كلمة المرور لفتح قفل الهاتف وتسجيل الدخول إلى التطبيقات وتأكيد الدفعات."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"استخدام \"فتح القفل بالوجه\" لفتح قفل الهاتف"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"بصمة الإصبع"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"إدارة بصمات الإصبع"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"استخدام بصمة الإصبع في"</string>
@@ -476,7 +477,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"استخدم بصمة الإصبع لفتح قفل هاتفك أو الموافقة على عمليات الشراء.\n\nملاحظة: قد تكون بصمة إصبعك أقل أمانًا من استخدام نقش أو رقم تعريف شخصي قوي."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"إلغاء"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"متابعة"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"تخطي"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"التخطي"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"التالي"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"هل تريد تخطّي بصمة الإصبع؟"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"لا يستغرق إعداد بصمة الإصبع أكثر من دقيقة أو دقيقتين. وعند تخطّي ذلك، يمكنك إضافة بصمة إصبع لاحقًا من الإعدادات."</string>
@@ -1296,13 +1297,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"يمكنك تحسين مستوى السطوع حسب الإضاءة. وعند تشغيل هذه الميزة، سيظل بإمكانك ضبط السطوع مؤقتًا."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"سيتم ضبط سطوع الشاشة تلقائيًا حسب البيئة المحيطة والأنشطة. ويمكنك تحريك شريط التمرير يدويًا لضبط السطوع التكيُّفي حسبما تفضّل."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"موازنة اللون الأبيض للشاشة"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Screen attention"</string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"استعراض الشاشة"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"تفعيل / لن يتم إيقاف الشاشة إذا كنت تنظر إليها."</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"موقوف"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"يجب السماح بالوصول إلى الكاميرا."</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"يمكنك النقر لإدارة الأذونات في \"خدمات تخصيص الأجهزة\"."</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"منع إيقاف الشاشة إذا كنت تنظر إليها"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"‏يستخدم إعداد Screen attention الكاميرا الأمامية لمعرفة ما إذا كان أحد ينظر إلى الشاشة. يعمل هذا الإعداد على الجهاز، لكن لن يتم تخزين أي صور أو إرسالها إلى Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"‏يستخدم إعداد \"استعراض الشاشة\" الكاميرا الأمامية لمعرفة ما إذا كان أحد ينظر إلى الشاشة. يعمل هذا الإعداد على الجهاز، لكن لن يتم تخزين أي صور أو إرسالها إلى Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"إبقاء شاشتك قيد التشغيل أثناء استعراضها"</string>
     <string name="night_display_title" msgid="2626451512200357686">"الإضاءة الليلية"</string>
     <string name="night_display_text" msgid="1837277457033025056">"تؤدي الإضاءة الليلية إلى تلوين الشاشة باللون الكهرماني الخفيف، ما يسهّل النظر إلى الشاشة في الإضاءة الخافتة ويمكن أن يساعدك على الشعور بالنعاس أيضًا."</string>
@@ -1329,7 +1330,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"تفعيل الميزة حتى <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"إيقاف الميزة حتى <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"الإضاءة الليلية غير مفعلة حاليًا"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"مهلة الشاشة"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"مهلة غلق الشاشة"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"إيقاف الشاشة"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"بعد <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> من عدم النشاط"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"الخلفية"</string>
@@ -2597,7 +2598,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"طاقة البطارية المستخدمة بواسطة ضوء الفلاش"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"طاقة البطارية التي استهلكتها الكاميرا"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"طاقة البطارية المستخدمة بواسطة العرض والإضاءة الخلفية"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"تقليل سطوع الشاشة و/أو مهلة الشاشة"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"تقليل سطوع الشاشة و/أو مهلة غلق الشاشة"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"‏البطارية مستخدمة بواسطة Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"‏إيقاف Wi-Fi عند عدم استخدامها أو عندما لا تكون متاحة"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"البطارية المستخدمة بواسطة البلوتوث"</string>
@@ -3329,11 +3330,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"وجه"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"بصمة إصبع، إضافة بصمة إصبع"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"تعتيم الشاشة، شاشة تعمل باللمس، بطارية، سطوع ذكي، سطوع ديناميكي، سطوع تلقائي"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"إضاءة خافتة للشاشة، سكون، بطارية، مهلة، تنبيه، عرض، شاشة، عدم نشاط"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"إضاءة خافتة للشاشة، سكون، بطارية، مهلة غلق الشاشة، استعراض الشاشة، عرض، شاشة، عدم نشاط"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"تدوير، قلب، دوران، عمودي، أفقي، اتجاه، رأسي، عرضي"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"‏ترقية، android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"الرجاء عدم الإزعاج، جدول زمني، إشعارات، حظر، صامت، اهتزاز، سكون، عمل، تركيز، صوت، كتم الصوت، يوم، يوم من الأسبوع، عطلة نهاية الأسبوع، ليلة من الأسبوع، حدث"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"شاشة، وقت القفل، مهلة، شاشة تأمين"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"شاشة، وقت القفل، مهلة غلق الشاشة، شاشة تأمين"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"ذاكرة، تخزين مؤقت، بيانات، حذف، محو، فارغة، مساحة"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"متصل، جهاز، سماعات رأس، سماعة، مكبر صوت، لاسلكي، إقران، سمّاعات أذن، موسيقى، وسائط"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"خلفية، شاشة، شاشة تأمين، موضوع"</string>
@@ -4196,7 +4197,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"وحدة التخزين الداخلية: <xliff:g id="PERCENTAGE">%1$s</xliff:g> مستخدمة - <xliff:g id="FREE_SPACE">%2$s</xliff:g> فارغة"</string>
     <string name="display_summary" msgid="6737806235882127328">"السكون بعد <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> من عدم النشاط"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"خلفية، سكون، حجم الخط"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"الأنماط والخلفيات ومهلة الشاشة وحجم الخط"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"الأنماط والخلفيات ومهلة غلق الشاشة وحجم الخط"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"السكون وحجم الخط"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"السكون بعد 10 دقائق من عدم النشاط"</string>
     <string name="memory_summary" msgid="8080825904671961872">"تم استخدام متوسط ذاكرة بحجم <xliff:g id="USED_MEMORY">%1$s</xliff:g> من إجمالي <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>

@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"เลือกตามความต่างเวลา UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"วันที่"</string>
     <string name="time_picker_title" msgid="483460752287255019">"เวลา"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"ล็อกหลังจากหมดเวลาหน้าจอ"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"ล็อกหลังจากระยะหมดเวลาหน้าจอ"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> หลังหมดเวลาหน้าจอ"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"ทันทีหลังหมดเวลาหน้าจอ ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> สั่งไม่ให้ล็อก"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> หลังจากหมดเวลาหน้าจอ ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> สั่งไม่ให้ล็อก"</string>
@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"เปิดใช้งานวิดเจ็ต"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"ปิดใช้โดยผู้ดูแลระบบ"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"แสดงตัวเลือกการปิดล็อก"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"แสดงตัวเลือกปุ่มเปิด/ปิดที่จะปิด Smart Lock การปลดล็อกด้วยลายนิ้วมือ และการแจ้งเตือนในหน้าจอล็อก"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"แสดงตัวเลือกปุ่มเปิด/ปิดที่จะปิด Smart Lock การปลดล็อกด้วยข้อมูลไบโอเมตริก และการแจ้งเตือนในหน้าจอล็อก"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"เอเจนต์ความน่าเชื่อถือขยายเฉพาะการปลดล็อก"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"หากเปิดใช้ เอเจนต์ความน่าเชื่อถือจะปลดล็อกอุปกรณ์ค้างไว้นานขึ้น แต่จะปลดล็อกอุปกรณ์ที่ล็อกอยู่ไม่ได้อีกต่อไป"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"หน้าจอล็อกเมื่อสภาพแวดล้อมไม่น่าเชื่อถือ"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"ใช้ Face Unlock เพื่อปลดล็อกอุปกรณ์ ลงชื่อเข้าใช้แอป และยืนยันการชำระเงิน\n\nโปรดทราบว่า\nการดูโทรศัพท์อาจปลดล็อกเครื่องโดยไม่ได้ตั้งใจ\n\nคนอื่นอาจปลดล็อกโทรศัพท์ได้หากถือโทรศัพท์ไว้ตรงหน้าของคุณขณะที่คุณลืมตาอยู่\n\nคนที่หน้าคล้ายคุณมากๆ เช่น แฝดของคุณอาจปลดล็อกโทรศัพท์ได้"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"ลบข้อมูลใบหน้าไหม"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"ระบบจะลบรูปภาพและข้อมูลไบโอเมตริกที่ Face Unlock ใช้อย่างถาวรและปลอดภัย หลักจากที่นำออกแล้ว คุณจะต้องใช้ PIN, รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์ ลงชื่อเข้าใช้แอป และยืนยันการชำระเงิน"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"ใช้ Face Unlock เพื่อปลดล็อกโทรศัพท์"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"ลายนิ้วมือ"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"จัดการลายนิ้วมือ"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"ใช้ลายนิ้วมือเพื่อ"</string>
@@ -1220,13 +1221,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"เพิ่มประสิทธิภาพระดับความสว่างสำหรับแสงที่มี เมื่อเปิดฟีเจอร์นี้ คุณจะยังปรับความสว่างชั่วคราวได้"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"ความสว่างของหน้าจอจะปรับให้เหมาะสมกับสภาพแวดล้อมและกิจกรรมที่คุณทำโดยอัตโนมัติ คุณเลื่อนแถบเลื่อนด้วยตนเองได้เพื่อช่วยให้การปรับความสว่างอัตโนมัติทราบความสว่างที่คุณต้องการ"</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"แสดงไวท์บาลานซ์"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"ความสนใจของหน้าจอ"</string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"การจดจ่อที่หน้าจอ"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"เปิด/หน้าจอจะไม่ปิดหากคุณกำลังดูอยู่"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"ปิด"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"ต้องใช้สิทธิ์เข้าถึงกล้อง"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"แตะเพื่อจัดการสิทธิ์สำหรับบริการปรับเปลี่ยนอุปกรณ์ในแบบของคุณ"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"ป้องกันไม่ให้หน้าจอปิดหากคุณกำลังดูอยู่"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"ความสนใจของหน้าจอใช้กล้องหน้าเพื่อดูว่ามีใครกำลังดูหน้าจออยู่หรือไม่ ฟีเจอร์นี้จะทำงานในอุปกรณ์และจะไม่มีการเก็บหรือส่งรูปภาพไปให้ Google"</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"การจดจ่อที่หน้าจอใช้กล้องหน้าเพื่อดูว่ามีใครกำลังดูหน้าจออยู่หรือไม่ ฟีเจอร์นี้จะทำงานในอุปกรณ์และจะไม่มีการเก็บหรือส่งรูปภาพไปให้ Google"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"เปิดหน้าจอค้างไว้เมื่อดูหน้าจอ"</string>
     <string name="night_display_title" msgid="2626451512200357686">"แสงตอนกลางคืน"</string>
     <string name="night_display_text" msgid="1837277457033025056">"แสงตอนกลางคืนปรับให้หน้าจอเป็นสีเหลืองอำพัน ซึ่งจะทำให้ดูหรืออ่านหน้าจอในแสงสลัวได้ง่ายขึ้น และอาจช่วยให้คุณนอนหลับได้ง่ายขึ้นด้วย"</string>
@@ -2449,7 +2450,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"แบตเตอรี่ที่ไฟฉายใช้"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"พลังงานแบตเตอรี่ที่กล้องถ่ายรูปใช้งาน"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"แบตเตอรี่ที่ใช้โดยจอแสดงผลและแบ็คไลท์"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"ลดความสว่างและ/หรือระยะหมดเวลาของหน้าจอ"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"ลดความสว่างและ/หรือระยะหมดเวลาหน้าจอ"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"แบตเตอรี่ที่ใช้โดย WiFi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"ปิด WiFi เมื่อไม่ได้ใช้หรือเมื่อใช้งานไม่ได้"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"แบตเตอรี่จากการใช้บลูทูธ"</string>
@@ -3161,11 +3162,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"ใบหน้า"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"ลายนิ้วมือ เพิ่มลายนิ้วมือ"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"หน้าจอสลัว หน้าจอสัมผัส แบตเตอรี่ ความสว่างอัจฉริยะ ความสว่างแบบไดนามิก ปรับความสว่างอัตโนมัติ"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"หรี่แสงหน้าจอ สลีป แบตเตอรี่ ระยะหมดเวลา ความสนใจ จอแสดงผล หน้าจอ ไม่มีการใช้งาน"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"หรี่แสงหน้าจอ สลีป แบตเตอรี่ ระยะหมดเวลา การจดจ่อ จอแสดงผล หน้าจอ ไม่มีการใช้งาน"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"หมุน, พลิก, การหมุน, แนวตั้ง, แนวนอน, การวางแนว, ตั้ง, นอน"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"อัปเกรด, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, ตั้งเวลา, การแจ้งเตือน, บล็อก, เงียบ, สั่น, สลีป, ทำงาน, โฟกัส, เสียง, ปิดเสียง, วัน, วันทำการ, วันหยุดสุดสัปดาห์, คืนวันทำการ, กิจกรรม"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"หน้าจอ, เวลาล็อก, หมดเวลา, หน้าจอล็อก"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"หน้าจอ, เวลาล็อก, ระยะหมดเวลา, หน้าจอล็อก"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"หน่วยความจำ แคช ข้อมูล ลบ ล้าง เพิ่มพื้นที่ว่าง พื้นที่"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"เชื่อมต่อแล้ว, อุปกรณ์, หูฟัง, ชุดหูฟัง, ลำโพง, ไร้สาย, จับคู่, หูฟังเอียร์บัด, เพลง, สื่อ"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"พื้นหลัง, หน้าจอ, หน้าจอล็อก, ธีม"</string>

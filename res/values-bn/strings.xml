@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC অফসেট অনুযায়ী বেছে নিন"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"তারিখ"</string>
     <string name="time_picker_title" msgid="483460752287255019">"সময়"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"স্ক্রিনের সময়সীমা পেরিয়ে গেলে লক করুন"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"স্ক্রিন টাইম-আউট হয়ে গেলে লক হয়ে যাবে"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"সময় শেষ হয়ে যাওয়ার পর <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"সময় শেষ হয়ে যাওয়ার পর অবিলম্বে, <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ব্যবহার করে আনলক করে রেখে দেওয়া ছাড়া"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"সময় শেষ হয়ে যাওয়ার পর <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ব্যবহার করে আনলক করে রেখে দেওয়া ছাড়া"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"টাইম-আউট হয়ে যাওয়ার পর অবিলম্বে, <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ব্যবহার করে আনলক করে রেখে দেওয়া ছাড়া"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"টাইম-আউট হয়ে যাওয়ার <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> পর, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ব্যবহার করে আনলক করে রেখে দেওয়া ছাড়া"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"লক স্ক্রিনে মালিকের তথ্য প্রদর্শন করুন"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"লক স্ক্রিনের মেসেজ"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"উইজেটগুলি সক্ষম করুন"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"প্রশাসক দ্বারা অক্ষম করা হয়েছে"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"লকডাউনের বিকল্পগুলি দেখুন"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"পাওয়ার বোতামের যে বিকল্পে স্মার্ট লক, আঙ্গুলের ছাপ দিয়ে আনলক করার সুবিধা এবং লক স্ক্রিনে বিজ্ঞপ্তি দেখতে পাওয়ার বৈশিষ্ট্য বন্ধ করা যায়, সেটি দেখুন"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"পাওয়ার বোতামের যে বিকল্পে স্মার্ট লক, বায়োমেট্রিক আনলক করার সুবিধা এবং লক স্ক্রিনে বিজ্ঞপ্তি দেখতে পাওয়ার বৈশিষ্ট্য বন্ধ করা যায়, সেটি দেখুন"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"ট্রাস্ট এজেন্ট শুধু আনলকের সময়সীমা বাড়ায়"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"যদি চালু করা হয় তাহলে ট্রাস্ট এজেন্ট বেশি সময় ধরে আপনার ডিভাইস আনলক করে রাখতে পারবে, কিন্তু লক করা ডিভাইস আনলক করতে পারবে না।"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"\"বিশ্বস্ত\" না হওয়ায় লক স্ক্রিন"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"আপনার ডিভাইস আনলক, অ্যাপে সাইন-ইন এবং পেমেন্ট কনফার্ম করতে মুখের সাহায্যে আনলক করার সুবিধাটি ব্যবহার করুন। \n\nমনে রাখবেন:\nআপনি না চাইলেও ফোনের দিকে তাকালে সেটি আনলক হয়ে যেতে পারে।\n\nআপনার চোখ খোলা থাকা অবস্থায় অন্য কেউ আপনার মুখের সামনে ফোনটি ধরে আনলক করতে পারবেন।\n\nআপনার মতো দেখতে এমন যে কেউ; যেমন আপনার যমজ ভাই বা বোন, আপনার ফোন আনলক করতে পারবেন।"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"মুখ শনাক্তকরণ ডেটা মুছে ফেলতে চান?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"মুখের সাহায্যে আনলক ফিচারটি যে ছবি এবং বায়োমেট্রিক ডেটা ব্যবহার করেছে সেটি আপনার ফোন থেকে স্থায়ীভাবে এবং নিরাপদে মুছে যাবে। সরানো হয়ে গেলে আপনাকে পিন, প্যাটার্ন বা পাসওয়ার্ডের সাহায্যে ফোন আনলক, অ্যাপে সাইন-ইন এবং পেমেন্ট কনফার্ম করতে হবে।"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"আপনার ফোন আনলক করার জন্য ফেসের সাহায্যে আনলক বিকল্প ব্যবহার করুন"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"আঙ্গুলের ছাপ"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"আঙ্গুলের ছাপগুলি পরিচালনা করুন"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"এর জন্য আঙ্গুলের ছাপ ব্যবহার করুন"</string>
@@ -1226,7 +1227,7 @@
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"ক্যামেরা অ্যাক্সেস করার অনুমতি দিতে হবে"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"ডিভাইসে নিজের মতো সাজিয়ে নেওয়ার পরিষেবা সংক্রান্ত অনুমতি ম্যানেজ করতে ট্যাপ করুন"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"আপনি এটির দিকে তাকিয়ে থাকলে ডিভাইসের স্ক্রিন বন্ধ হতে দেয় না"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"স্ক্রিন অ্যাটেনশান ফিচারটি মোবাইলের সামনের ক্যামেরা ব্যবহার করে জানতে পারে যে কেউ স্ক্রিনের দিকে তাকিয়ে আছে কিনা। এটি ডিভাইসে কাজ করে এবং ছবি কখনই স্টোর করা বা Google-কে পাঠানো হয় না।"</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"স্ক্রিন অ্যাটেনশন ফিচারটি মোবাইলের সামনের ক্যামেরা ব্যবহার করে জানতে পারে যে কেউ স্ক্রিনের দিকে তাকিয়ে আছে কিনা। এটি ডিভাইসে কাজ করে এবং ছবি কখনই স্টোর করা বা Google-কে পাঠানো হয় না।"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"স্ক্রিনের দিকে তাকিয়ে থাকলে সেটি অন থাকবে"</string>
     <string name="night_display_title" msgid="2626451512200357686">"নাইট লাইট"</string>
     <string name="night_display_text" msgid="1837277457033025056">"নাইট লাইট আপনার স্ক্রিনকে হলুদাভ করে দেয়৷ এটি আপনাকে অল্প আলোয় স্ক্রিনের দিকে স্বচ্ছন্দে তাকানোর সুবিধা দেয় এবং সহজে ঘুমিয়ে পড়তে সাহায্য করে৷"</string>
@@ -1253,7 +1254,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"<xliff:g id="ID_1">%1$s</xliff:g> পর্যন্ত চালু রাখুন"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"<xliff:g id="ID_1">%1$s</xliff:g> পর্যন্ত বন্ধ রাখুন"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"নাইট লাইট এখন চালু নেই"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"স্ক্রিনের সময় সমাপ্ত"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"স্ক্রিন টাইম-আউট"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"স্ক্রিন বন্ধ হয়"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ধরে নিষ্ক্রিয়তার পরে"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"ওয়ালপেপার"</string>
@@ -2449,7 +2450,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"ফ্লাশলাইটের দ্বারা খরচকৃত ব্যাটারি"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"ক্যামেরা দ্বারা ব্যবহৃত ব্যাটারি"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"প্রদর্শন এবং ব্যাকলাইট দ্বারা ব্যবহৃত ব্যাটারি"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"স্ক্রীনের উজ্জ্বলতা এবং/অথবা স্ক্রীনের সময়সীমা হ্রাস করুন"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"স্ক্রিনের উজ্জ্বলতা এবং/অথবা স্ক্রিন টাইম-আউট কমান"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"ওয়াই-ফাই দ্বারা ব্যবহৃত ব্যাটারি"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"যখন ওয়াই-ফাই উপলব্ধ নয় অথবা ব্যবহার করছেন না তখন এটি বন্ধ রাখুন"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"ব্লুটুথ দ্বারা ব্যবহৃত ব্যাটারি"</string>
@@ -3161,11 +3162,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"ফেস"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"আঙ্গুলের ছাপ, আঙ্গুলের ছাপ যোগ করুন"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"অনুজ্জ্বল স্ক্রিন, টাচস্ক্রিন, ব্যাটারি, স্মার্ট উজ্জ্বলতা, ডায়নামিক উজ্জ্বলতা, অটোমেটিক উজ্জ্বলতা"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"ডিম স্ক্রিন, স্লিপ, ব্যাটারি, টাইম-আউট, নজর দিন, ডিসপ্লে, স্ক্রিন, ব্যবহার না করা"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"ডিম স্ক্রিন, স্লিপ, ব্যাটারি, টাইম-আউট, অ্যাটেনশন, ডিসপ্লে, স্ক্রিন, ব্যবহার না করা"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"ঘোরান, উল্টান, ঘূর্ণন, পোর্ট্রেট, ল্যান্ডস্কেপ, সজ্জা, উল্লম্ব, অনুভূমিক"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"আপগ্রেড করুন, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"ডিএনডি, সময়সূচি, বিজ্ঞপ্তি, ব্লক করুন, নীরবতা, ভাইব্রেট, স্লিপ, অফিস, ফোকাস, সাউন্ড, মিউট, দিন, কাজের দিন, সপ্তাহান্ত, সপ্তাহের রাত্রি, ইভেন্ট"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"স্ক্রিন, লক টাইম, সময় সমাপ্ত, লক স্ক্রিন"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"স্ক্রিন, লক টাইম, টাইম-আউট, লক স্ক্রিন"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"মেমরি, ক্যাশে, ডেটা, মুছে ফেলা, পরিষ্কার করা, খালি, জায়গা"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"কানেক্ট, ডিভাইস, হেডফোন, হেডসেট, স্পিকার, ওয়্যারলেস, পেয়ার, মিউজিক, মিডিয়া"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"ব্যাকগ্রাউন্ড, স্ক্রিন, লকস্ক্রিন, থিম"</string>

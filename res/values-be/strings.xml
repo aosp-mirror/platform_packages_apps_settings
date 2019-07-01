@@ -357,13 +357,13 @@
     <string name="lock_after_timeout" msgid="3041497579354520533">"Блакіраваць, калі міне час чакання экрана"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> пасля часу чакання"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Адразу ж пасля часу чакання, за выключэннем выпадкаў, калі экран разблакіруецца функцыяй \"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>\""</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> пасля часу чакання, за выключэннем выпадкаў, калі экран разблакіруецца функцыяй \"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>\""</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> пасля часу чакання, за выключэннем выпадкаў, калі экран разблакіруецца функцыяй <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Паказаць інфармацыю аб уладальніку на экране блакавання"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Тэкст на экране блакіроўкі"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Уключыць віджэты"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Адключана адміністратарам"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Паказаць параметр блакіроўкі"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Дадаць у меню кнопкі сілкавання функцыю, якая выключае разумную блакіроўку, разблакіроўку адбіткам пальца і апавяшчэнні на экране блакіроўкі"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Дадаць у меню кнопкі сілкавання функцыю, якая выключае разумную блакіроўку, біяметрычную разблакіроўку і апавяшчэнні на экране блакіроўкі"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Давераныя агенты падаўжаюць разблакіроўку"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Калі функцыя ўключана, давераныя агенты будуць даўжэй трымаць прыладу разблакіраванай, аднак не змогуць разблакіраваць ужо заблакіраваную прыладу."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Блакіраваць экран, калі давер страчаны"</string>
@@ -449,6 +449,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Выкарыстоўвайце функцыю распазнавання твару, каб разблакіраваць прыладу, уваходзіць у праграмы і пацвярджаць плацяжы.\n\nМайце на ўвазе:\nГледзячы на тэлефон, вы можаце разблакіраваць яго, нават калі не маеце такога намеру.\n\nВаш тэлефон можа быць разблакіраваны кімсьці яшчэ, хто трымае яго на ўзроўні вашага твару, калі ў вас расплюшчаны вочы.\n\nВаш тэлефон можа быць разблакіраваны кімсьці, хто падобны на вас – напрыклад, гэта можа быць ваш брат ці сястра."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Выдаліць даныя пра твар?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Відарысы і біяметрычныя даныя, якія выкарыстоўваюцца функцыяй распазнавання твару, будуць бяспечна выдалены. Пасля выдалення для разблакіроўкі тэлефона, уваходу ў праграмы і пацвярджэння плацяжоў трэба выкарыстоўваць PIN-код, узор разблакіроўкі ці пароль."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Выкарыстоўвайце функцыю распазнавання твару для разблакіроўкі тэлефона"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Адбітак пальца"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Кірав. адбіт. пальцаў"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Выкарыст. адбітак для"</string>
@@ -1292,7 +1293,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Уключыць да <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Выключыць да <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Начны рэжым не ўключаны"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Час выключэння экрану"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Час чакання экрана"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Экран выключаецца"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Пасля бяздзейнасці: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Шпалеры"</string>
@@ -1915,7 +1916,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Праграма для экстранных сітуацый"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Скінуць налады праграм"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Скінуць налады праграм?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Будуць скінуты наступныя налады:\n\n"<li>"Адключаныя праграмы"</li>\n<li>"Адключаныя апавяшчэнні з праграм"</li>\n<li>"Перадвызначаныя праграмы"</li>\n<li>"Абмежаванні на перадачу даных у фонавым рэжыме"</li>\n<li>"Любыя абмежаванні правоў доступу"</li>\n\n" Даныя праграм выдалены не будуць."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Будуць скінуты наступныя налады:\n\n"<li>"Адключаныя праграмы"</li>\n<li>"Адключаныя апавяшчэнні з праграм"</li>\n<li>"Перадвызначаныя праграмы"</li>\n<li>"Абмежаванні на перадачу даных у фонавым рэжыме"</li>\n<li>"Любыя абмежаванні правоў доступу"</li>\n\n"Даныя праграм выдалены не будуць."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Скінуць праграмы"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Кіраванне вольным месцам"</string>
     <string name="filter" msgid="2018011724373033887">"Фільтр"</string>
@@ -2524,7 +2525,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Зарад акумулятара, выкарыстаны ліхтарыкам"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Зарад, які выкарыстоўваецца камерай"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Выкарыстанне акумулятара экранам і падсветкай"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Паменшыць яркасць экрана і/або час да адключэння экрана"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Паменшыць яркасць экрана і/або час чакання экрана"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Выкарыстанне акумулятару модулем Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Выключаць Wi-Fi, калі не выкарыстоўваецца або недаступны"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Батарэя выкарыстоўваецца Bluetooth"</string>
@@ -3511,7 +3512,7 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Сярэдняя"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Высокая"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Паказ на экране"</string>
-    <string name="notification_block_title" msgid="1366361048463539674">"Блакіроўка"</string>
+    <string name="notification_block_title" msgid="1366361048463539674">"Заблакіраваць"</string>
     <string name="notification_silence_title" msgid="6986752165900591125">"Бязгучны рэжым"</string>
     <string name="notification_alert_title" msgid="2267584776990348784">"Абвесткі"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Дазволіць перарыванні"</string>
@@ -3520,7 +3521,7 @@
     <string name="notification_channel_summary_low" msgid="7050068866167282765">"Не адцягвае ўвагу дзякуючы выключаным гуку і вібрацыі"</string>
     <string name="notification_channel_summary_default" msgid="5753454293847059695">"Прыцягвае ўвагу гукам і вібрацыяй"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Калі прылада разблакіравана, паказваць апавяшчэнні ў выглядзе банера ўверсе экрана"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Паказваць апавяшчэнні"</string>
+    <string name="notification_switch_label" msgid="6843075654538931025">"Уключыць апавяшчэнні"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Адаптыўныя апавяшчэнні"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> апавяшчэнне ў дзень</item>
@@ -3601,7 +3602,7 @@
     <string name="notification_toggle_off" msgid="2142010737190671762">"Выключана"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Блакіраваць усё"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Ніколі не паказваць гэтыя апавяшчэнні"</string>
-    <string name="notification_content_block_title" msgid="5854232570963006360">"Паказваць апавяшчэнні"</string>
+    <string name="notification_content_block_title" msgid="5854232570963006360">"Уключыць апавяшчэнні"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Ніколі не паказваць апавяшчэнні на \"шторцы\" або на перыферыйных прыладах"</string>
     <string name="notification_badge_title" msgid="6370122441168519809">"Паказваць значок апавяшчэнняў"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Паказваць значок апавяшчэнняў"</string>

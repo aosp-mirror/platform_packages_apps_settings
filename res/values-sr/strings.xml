@@ -352,16 +352,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Изаб. према одступ. од UTC-а"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Датум"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Време"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Закључај после истека временског ограничења за екран"</string>
-    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после истека временског ограничења"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Одмах после истека временског ограничења, осим када <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> не дозвољава закључавање"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после истека временског ограничења, осим када <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> спречава закључавање"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Закључај после гашења екрана"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после гашења екрана"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Одмах после гашења екрана, осим када <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> не дозвољава закључавање"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после гашења екрана, осим када <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> спречава закључавање"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Прикажи информације о власнику на закључ. екрану"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Порука на закључаном екрану"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Омогући виџете"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Администратор је онемогућио"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Прикажи опцију закључавања"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Приказује се опција дугмета за напајање која искључује Smart Lock, откључавање помоћу отисака прстију и обавештења на закључаном екрану"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Приказује опцију дугмета за напајање која искључује Smart Lock, биометријско откључавање и обавештења на закључаном екрану"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Поуздани агенти - дуже откључано"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Ако је омогућено, поуздани агенти ће омогућити да уређај дуже остане откључан, али не могу више да откључавају закључан уређај."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Закључај екран када је агент непоуздан"</string>
@@ -446,6 +446,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Откључајте уређај, пријавите се у апликацију и потврдите плаћање помоћу откључавања лицем.\n\nИмајте у виду:\nАко погледате телефон, можете нехотице да га откључате.\n\nТелефон може да откључа неко други ако га приближи вашем лицу док су вам очи отворене.\n\nТелефон може да откључа неко ко много личи на вас, на пример, идентични близанац."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Бришете податке о лицу?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Слике и биометријски подаци које користи откључавање лицем биће трајно и безбедно избрисани. После брисања требаће вам PIN, образац или лозинка да бисте откључали телефон, пријављивали се у апликације и потврђивали плаћања."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Откључајте телефон лицем"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Отисак прста"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Управљај отис. прстију"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Користи отис. прста за"</string>
@@ -2486,7 +2487,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Енергија батерије коју троши лампа"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Проценат батерије који троши камера"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Батерија коју користи екран и позадинско светло"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Смањите осветљеност екрана и/или време до гашења"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Смањите осветљеност и/или време до гашења екрана"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Батерија коју користи Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Искључите Wi-Fi када га не користите или када није доступан"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Батерија коју користи Bluetooth"</string>

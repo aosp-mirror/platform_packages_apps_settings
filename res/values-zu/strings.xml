@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Kukhethwe i-UTC offset"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Idethi"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Isikhathi"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Khiya ngemuva kokuphela kwesikhathi sesikrini"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Khiya ngemuva kokuba isikrini siphelelwa yisikhathi"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ngemuva kokuphela kwesikhathi"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Ngokushesha ngemuva kokuphela kwesikhathi, ngaphandle lapho uma ishiywa ingakhiyiwe nge-<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ngemva kokuphela kwesikhathi, ngaphandle kokugcina ivuliwe yi-<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Nika amandla amawijethi"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Kukhutshazwe umlawuli"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Bonisa inketho yokukhiya"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Bonisa inketho yenkinobho yamandla evala i-Smart Lock, ukuvulwa kwezigxivizo zeminwe, nezaziso ekukhiyeni isikrini"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Bonisa inketho yenkinobho yamandla evala i-Smart Lock, ukuvulwa kwe-biometric, nezaziso ekukhiyeni isikrini"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Ukwethemba abenzeli kukhulisa ukuvula"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Uma kunikwe amandla, abasebenzeli bokwethembeka bazogcina idivayisi yakho ivulekile isikhathi eside, ngeke bakwazi ukuvula idivayisi ekhiyiwe."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Khiya isikrini uma ukwethemba kulahleka"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Sebenzisa i-face unlock ukuze uvule idivayisi yakho, ungene ngemvume kuzinhlelo zokusebenza, uphinde uqinisekise izinkokhelo.\n\nKhumbula:\nUkubheka ifoni kungayivula uma ungahlosile ukwenza njalo.\n\nIfoni yakho ingavulwa omunye umuntu uma iphethwe ngasebusweni bakho ngenkathi amehlo akho avuliwe.\n\nIfoni yakho ingavulwa omunye umuntu ofana kakhulu nawe, asithi isihlobo esifana nawe."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Susa idatha yobuso?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Izithombe nedatha ye-biometric esetshenziswe i-face unlock izosuswa ngunaphakade nangokuvikelekile. Ngemuva kokususwa, uzodinga iphinikhodi, iphethini, noma iphasiwedi ukuze uvule ifoni yakho, ungene ngemvume kuzinhlelo zokusebenza, uphinde uqinisekise izinkokhelo."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Sebenzisa i-face unlock ukuze uvule ifoni yakho"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Izigxivizo zeminwe"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Phatha izigxivizo zeminwe"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Sebenzisa izigxivizo zeminwe ukuthi"</string>
@@ -1220,13 +1221,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Thuthukisa ileveli yokukhanya emkhanyweni otholakalayo. Uma lesi sici sivuliwe, ungalungisa ukukhanya okwesikhashana."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Ukukhanya kwesikrini sakho kuzolungiswa ngokuzenzakalela kumvelo yakho nakumisebenzi. Ungahambisa isilayida ngesandla ukuze usize ukukhanya okushintshayo kufunde okuncamelayo."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Bonisa ibhalansi emhlophe"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Ukunakwa kwesikrini"</string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Ukunaka isikrini"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Kuvuliwe / Isikrini ngeke size sivaleke uma usibhekile"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Valiwe"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Ukufinyelela kwekhamera kuyadingeka"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Thepha ukuze uphathe izimvume zamasevisi okwenza kube ngokwakho idivayisi"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Ivimbela isikrini sakho ekuvalweni uma usibhekile"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ukunakwa kwesikrini kusebenzisa ikhamera engaphambili ukuze kwazi uma umuntu othile abheka isikrini. Kusebenza kudivayisi, futhi izithombe azilokothi zilondolozwe noma zithunyelwe ku-Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ukunaka isikrini kusebenzisa ikhamera engaphambili ukuze kwazi uma umuntu othile abheka isikrini. Kusebenza kudivayisi, futhi izithombe azilokothi zilondolozwe noma zithunyelwe ku-Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Gcina isikrini sivuliwe uma usibuka"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Ukukhanya kwasebusuku"</string>
     <string name="night_display_text" msgid="1837277457033025056">"I-Night Light ifiphaza isikrini sakho ngoku-amber. Lokhu kungenza kubelula ukubheka esikrinini sakho noma ufunde ngokufiphele, futhi ingakusiza ukuthi ulale kalula."</string>
@@ -2450,7 +2451,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Ibhethri elisetshenziswa i-flashlight"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Ibhethri elisetshenziswe yikhamera"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Ibhethri isebenziswa ukubukeka nokukhanya kwasemuva"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Yehlisa ukukhanya kwesikrini futhi/noma ukuphela kwesikhathi sesikrini"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Yehlisa ukukhanya kwesikrini futhi/noma isikrini ukuphelelwe kwesikhathi"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Ibhethri elisetshenziswe i-Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Vala i-Wi-Fi uma ungayisebenzisi noma uma ingatholakali"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Ibhethri isebenziswe i-bluetooth"</string>
@@ -3162,7 +3163,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"ubuso"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"izigxivizo zeminwe, engeza izigxivizo zeminwe"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"fiphalisa isikrini, isikrini sokuthinta, ibhethri, ukukhanya okuhlakaniphile, ukukhanya okuguqukayo, ukukhanya okuzenzakalelayo"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"fiphalisa isikrini, lala, ibhethri, isikhathi sokuvala, ukunakwa, isiboniso, ukungasebenzi kwesikrini"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"fiphalisa isikrini, lala, ibhethri, ukuphelelwa isikhathi, ukunaka, isiboniso, ukungasebenzi kwesikrini"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"zungezisa, phenya, ukupendukisa, i-portrait, i-landscape, umumo, okuqondile, okuvundlile"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"thuthukisa, i-android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"i-dnd, ishejuli, izaziso, vimbela, thulisa, ukudlidliza, ukulala, ukusebenza, ukugxila, umsindo, thulisa, nsukuzonke, bonke ubusuko, umculo"</string>
@@ -3941,7 +3942,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Isitoreij sangaphakathi: <xliff:g id="PERCENTAGE">%1$s</xliff:g> okusetshenzisiwe - <xliff:g id="FREE_SPACE">%2$s</xliff:g> okukhululekile"</string>
     <string name="display_summary" msgid="6737806235882127328">"Lala ngemuva ko-<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ukungasebenzi"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Isithombe sangemuva, ukulala, usayizi wefonti"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Izitayela, izithombe zangemuva, ukuphela kwesikhathi sesikrini, usayizi wefonti"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Izitayela, izithombe zangemuva, ukuphelelwa isikhathi sesikrini, usayizi wefonti"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Lala, usayizi wefonti"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Lalisa ngemuva kwamaminithi angu-10 okungasebenzi"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Okumaphakathi okungu-<xliff:g id="USED_MEMORY">%1$s</xliff:g> kokungu-<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> imemori esetshenzisiwe"</string>

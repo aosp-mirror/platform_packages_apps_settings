@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC ofsetinə görə seçin"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Tarix"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Vaxt"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Ekranın vaxt limiti bitdikdən sonra kilidləyin"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Ekranın avtomatik söndükdən sonra kilinlənsin"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"Vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən dərhal sonra"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Vidcetləri aktivləşdirin"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Admin tərəfindən deaktiv edildi"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Kilid seçimini göstərin"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Kilid ekranında Ağıllı Kilidi, barmaq izi ilə kiliddən çıxarmanı və bilidirişləri deaktiv edən yandırıb-söndürmək düyməsini göstərin"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Kilid ekranında Ağıllı Kilidi, biometrik kilidi və bilidirişləri deaktiv edən yandırıb-söndürmək düyməsini göstərin"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"İnam agentləri yalnız kiliddən çıxarmanı genişləndirir"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Aktiv edilərsə, cihaz kilidlənənə qədər inam agentləri cihazı kilidsiz saxlayacaq, lakin kilidli cihazı kiliddən çıxara bilməyəcək."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Təhlükəli mühitlərdə ekranı kilidləyin"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Cihazı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün üz kilidindən istifadə edin.\n\nUnutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nTelefon gözləriniz açıq halda üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, həmçinin övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Üz datası silinsin?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Üz kilidi üçün istifadə edilən şəkillər və biometrik data həmişəlik və təhlükəsiz şəkildə silinəcək. Silindikdən sonra telefonu kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün PIN, model və ya parol tələb ediləcək."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Telefonu kiliddən çıxarmaq üçün üz kilidindən istifadə edin"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Barmaq izi"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Barmaq izlərini idarə edin"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Bunun üçün barmaq izi istifadə edin:"</string>
@@ -2060,7 +2061,7 @@
     <string name="app_name_label" msgid="5440362857006046193">"Tətbiq"</string>
     <string name="last_time_used_label" msgid="8459441968795479307">"Son istifadə vaxtı"</string>
     <string name="usage_time_label" msgid="295954901452833058">"İstifadə müddəti"</string>
-    <string name="accessibility_settings" msgid="3975902491934816215">"Giriş imkanı"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"Əlçatımlılıq"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Əlçatımlılıq parametrləri"</string>
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Ekran oxuyucuları, görüntü, bağlantı nəzarəti"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Görünüş Ayarları"</string>
@@ -2449,7 +2450,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Fonarın işlətdiyi enerji"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Kameranın istifadə etdiyi enerji"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Ekran və işıqlandırma tərəfindən istifadə olunan enerji"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Ekran parlaqlığını və ya ekran fasiləsini azaldın"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Ekran parlaqlığını və ya ekranın avtomatik sönməsini azaldın"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi-Fi tərəfindən işlənən enerji"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"İstifadə edilməyən zaman və ya əhatədən xaricdə olan zaman Wi-Fi söndürün"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Bluetooth tərəfindən istifadə olunan enerji"</string>
@@ -3940,7 +3941,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Daxili yaddaş: <xliff:g id="PERCENTAGE">%1$s</xliff:g> istifadə olunub - <xliff:g id="FREE_SPACE">%2$s</xliff:g> boşdur"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> fəaliyyətsizlikdən sonra yuxu rejimi"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Divar kağızı, mürgü rejimi, şrift ölçüsü"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Üslublar, divar kağızları, ekran zaman aşımı, şrift ölçüsü"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Üslublar, divar kağızları, ekran sönməsi, şrift ölçüsü"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Yuxu, şrift ölçüsü"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"10 dəqiqəlik fəaliyyətsizlikdən sonra yuxu rejiminə keçir"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Ümumi <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> yaddaşdan ortalama <xliff:g id="USED_MEMORY">%1$s</xliff:g> yaddaş istifadə olunub"</string>
