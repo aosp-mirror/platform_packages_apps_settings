@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.android.settings.applications.appinfo.AppButtonsPreferenceController.KEY_REMOVE_TASK_WHEN_FINISHING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -448,6 +450,30 @@ public class AppButtonsPreferenceControllerTest {
         ShadowAppUtils.addHiddenModule(mController.mPackageName);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 AppButtonsPreferenceController.DISABLED_FOR_USER);
+    }
+
+    @Test
+    public void handleActivityResult_onAppUninstall_removeTask() {
+        mController.handleActivityResult(REQUEST_UNINSTALL, 0, new Intent());
+
+        ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mSettingsActivity).finishPreferencePanel(anyInt(), argumentCaptor.capture());
+
+        final Intent i = argumentCaptor.getValue();
+        assertThat(i).isNotNull();
+        assertThat(i.getBooleanExtra(KEY_REMOVE_TASK_WHEN_FINISHING, false)).isTrue();
+    }
+
+    @Test
+    public void handleActivityResult_onAppNotUninstall_persistTask() {
+        mController.handleActivityResult(REQUEST_UNINSTALL + 1, 0, new Intent());
+
+        ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mSettingsActivity).finishPreferencePanel(anyInt(), argumentCaptor.capture());
+
+        final Intent i = argumentCaptor.getValue();
+        assertThat(i).isNotNull();
+        assertThat(i.getBooleanExtra(KEY_REMOVE_TASK_WHEN_FINISHING, false)).isFalse();
     }
 
     /**
