@@ -23,6 +23,7 @@ import static android.content.pm.ApplicationInfo.CATEGORY_VIDEO;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
@@ -32,8 +33,7 @@ import android.util.Log;
 import android.util.SparseArray;
 
 import com.android.settingslib.applications.StorageStatsSource;
-import com.android.settingslib.utils.AsyncLoader;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -45,17 +45,17 @@ import java.util.List;
  * users
  */
 public class StorageAsyncLoader
-        extends AsyncLoader<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
+        extends AsyncLoaderCompat<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private UserManager mUserManager;
     private static final String TAG = "StorageAsyncLoader";
 
     private String mUuid;
     private StorageStatsSource mStatsManager;
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     private ArraySet<String> mSeenPackages;
 
     public StorageAsyncLoader(Context context, UserManager userManager,
-            String uuid, StorageStatsSource source, PackageManagerWrapper pm) {
+            String uuid, StorageStatsSource source, PackageManager pm) {
         super(context);
         mUserManager = userManager;
         mUuid = uuid;

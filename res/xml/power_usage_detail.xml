@@ -15,25 +15,29 @@
   limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
-        android:order="-10000"/>
+        android:order="-10000"
+        settings:allowDividerBelow="true"/>
 
-    <com.android.settings.widget.ActionButtonPreference
+    <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         android:order="-9999"/>
 
     <PreferenceCategory
         android:title="@string/battery_detail_manage_title">
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="background_activity"
             android:title="@string/background_activity_title"
-            android:selectable="true"/>
+            android:selectable="true"
+            settings:userRestriction="no_control_apps"/>
 
         <Preference
             android:key="battery_optimization"
@@ -42,11 +46,6 @@
             android:selectable="true"/>
 
     </PreferenceCategory>
-
-    <Preference
-        android:key="high_usage"
-        android:icon="@drawable/ic_battery_alert_24dp"
-        android:title="@string/power_high_usage_title"/>
 
     <PreferenceCategory
         android:title="@string/battery_detail_info_title">

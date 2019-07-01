@@ -24,6 +24,7 @@ import android.annotation.UiThread;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,9 +43,9 @@ import android.os.UserManager;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
+import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
-import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,6 @@ import android.widget.TextView;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.UnlaunchableAppActivity;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.InstrumentedFragment;
 
@@ -93,7 +93,7 @@ public class TrustedCredentialsSettings extends InstrumentedFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TRUSTED_CREDENTIALS;
+        return SettingsEnums.TRUSTED_CREDENTIALS;
     }
 
     private enum Tab {

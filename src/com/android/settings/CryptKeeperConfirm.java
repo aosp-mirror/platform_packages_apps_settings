@@ -19,6 +19,7 @@ package com.android.settings;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.StatusBarManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,10 +35,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.InstrumentedFragment;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 public class CryptKeeperConfirm extends InstrumentedFragment {
@@ -46,7 +47,7 @@ public class CryptKeeperConfirm extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CRYPT_KEEPER_CONFIRM;
+        return SettingsEnums.CRYPT_KEEPER_CONFIRM;
     }
 
     public static class Blank extends Activity {
@@ -87,7 +88,12 @@ public class CryptKeeperConfirm extends InstrumentedFragment {
                     IStorageManager storageManager = IStorageManager.Stub.asInterface(service);
                     try {
                         Bundle args = getIntent().getExtras();
-                        storageManager.encryptStorage(args.getInt("type", -1), args.getString("password"));
+                        // TODO(b/120484642): Update vold to accept a password as a byte array
+                        byte[] passwordBytes = args.getByteArray("password");
+                        String password = passwordBytes != null ? new String(passwordBytes) : null;
+                        Arrays.fill(passwordBytes, (byte) 0);
+                        storageManager.encryptStorage(args.getInt("type", -1),
+                                password);
                     } catch (Exception e) {
                         Log.e("CryptKeeper", "Error while encrypting...", e);
                     }

@@ -16,9 +16,11 @@
 
 package com.android.settings.password;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static androidx.test.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.InstrumentationRegistry.getTargetContext;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertTrue;
 
 import android.app.Activity;
@@ -28,16 +30,17 @@ import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.test.filters.MediumTest;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
-import android.support.test.runner.lifecycle.Stage;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiSelector;
 import android.text.format.DateUtils;
 import android.view.WindowManager;
+
+import androidx.test.filters.MediumTest;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
+import androidx.test.runner.lifecycle.Stage;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -56,7 +59,7 @@ import java.util.List;
  * adb install \
  * -r -g  ${ANDROID_PRODUCT_OUT}/data/app/SettingsTests/SettingsTests.apk &&
  * adb shell am instrument -e class com.android.settings.password.ChooseLockGenericTest \
- * -w com.android.settings.tests/android.support.test.runner.AndroidJUnitRunner
+ * -w com.android.settings.tests/androidx.test.runner.AndroidJUnitRunner
  */
 @RunWith(AndroidJUnit4.class)
 @MediumTest

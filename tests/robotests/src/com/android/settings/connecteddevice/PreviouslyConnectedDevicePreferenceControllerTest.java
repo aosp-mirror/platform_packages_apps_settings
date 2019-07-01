@@ -15,29 +15,36 @@
  */
 package com.android.settings.connecteddevice;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
 
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.*;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PreviouslyConnectedDevicePreferenceControllerTest {
 
     private final String KEY = "test_key";
@@ -50,10 +57,12 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     private DockUpdater mDockUpdater;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private PreferenceManager mPreferenceManager;
 
     private Context mContext;
     private PreviouslyConnectedDevicePreferenceController mPreConnectedDeviceController;
-    private Preference mPreference;
+    private PreferenceGroup mPreferenceGroup;
 
     @Before
     public void setUp() {
@@ -66,8 +75,10 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mPreConnectedDeviceController.setBluetoothDeviceUpdater(mBluetoothDeviceUpdater);
         mPreConnectedDeviceController.setSavedDockUpdater(mDockUpdater);
 
-        mPreference = new Preference(mContext);
-        mPreConnectedDeviceController.setPreference(mPreference);
+        mPreferenceGroup = spy(new PreferenceCategory(mContext));
+        doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
+        mPreferenceGroup.setVisible(false);
+        mPreConnectedDeviceController.setPreferenceGroup(mPreferenceGroup);
     }
 
     @Test
@@ -84,33 +95,59 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
+    public void getAvailabilityStatus_noBluetoothDockFeature_returnUnSupported() {
         doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+        mPreConnectedDeviceController.setSavedDockUpdater(null);
+
         assertThat(mPreConnectedDeviceController.getAvailabilityStatus()).isEqualTo(
                 CONDITIONALLY_UNAVAILABLE);
     }
+
     @Test
     public void getAvailabilityStatus_hasBluetoothFeature_returnSupported() {
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+        mPreConnectedDeviceController.setSavedDockUpdater(null);
+
         assertThat(mPreConnectedDeviceController.getAvailabilityStatus()).isEqualTo(
                 AVAILABLE);
     }
 
     @Test
-    public void onDeviceAdded_addFirstDevice_preferenceIsEnable() {
-        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
-        mPreConnectedDeviceController.setPreferenceSize(0);
-        mPreConnectedDeviceController.onDeviceAdded(mPreference);
+    public void getAvailabilityStatus_haveDockFeature_returnSupported() {
+        doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreConnectedDeviceController.getAvailabilityStatus()).isEqualTo(
+            AVAILABLE);
     }
 
     @Test
-    public void onDeviceRemoved_removeLastDevice_preferenceIsDisable() {
-        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
-        mPreConnectedDeviceController.setPreferenceSize(1);
-        mPreConnectedDeviceController.onDeviceRemoved(mPreference);
+    public void onDeviceAdded_addDevicePreference_displayIt() {
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
 
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreferenceGroup.isVisible()).isTrue();
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void onDeviceAdded_addFourDevicePreference_onlyDisplayThree() {
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
+
+        assertThat(mPreferenceGroup.isVisible()).isTrue();
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(3);
+    }
+
+    @Test
+    public void onDeviceRemoved_removeLastDevice_setInvisible() {
+        final Preference preference = new Preference(mContext);
+        mPreferenceGroup.addPreference(preference);
+        mPreferenceGroup.setVisible(true);
+
+        mPreConnectedDeviceController.onDeviceRemoved(preference);
+
+        assertThat(mPreferenceGroup.isVisible()).isFalse();
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(0);
     }
 }

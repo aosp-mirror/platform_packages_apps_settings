@@ -21,21 +21,20 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.accounts.AccountRestrictionHelper;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Base class for preference controller that handles preference that enforce adjust volume
  * restriction
  */
 public abstract class AdjustVolumeRestrictedPreferenceController extends
-        SliderPreferenceController implements PreferenceControllerMixin {
+        SliderPreferenceController {
 
     private AccountRestrictionHelper mHelper;
 

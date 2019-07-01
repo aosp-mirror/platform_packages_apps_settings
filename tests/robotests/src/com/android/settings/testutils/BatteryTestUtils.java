@@ -37,7 +37,7 @@ public class BatteryTestUtils {
                 BatteryManager.BATTERY_STATUS_DISCHARGING);
     }
 
-    public static Intent getCustomBatteryIntent(int plugged, int level, int scale, int status) {
+    private static Intent getCustomBatteryIntent(int plugged, int level, int scale, int status) {
         Intent intent = new Intent();
         intent.putExtra(BatteryManager.EXTRA_PLUGGED, plugged);
         intent.putExtra(BatteryManager.EXTRA_LEVEL, level);
@@ -46,5 +46,4 @@ public class BatteryTestUtils {
 
         return intent;
     }
-
 }

@@ -22,10 +22,9 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /**
  * A checkbox that can be restricted by device policy, in which case it shows a dialog explaining
@@ -59,7 +58,8 @@ public class RestrictedCheckBox extends CheckBox {
         mEnforcedAdmin = admin;
         if (mDisabledByAdmin != disabled) {
             mDisabledByAdmin = disabled;
-            RestrictedLockUtils.setTextViewAsDisabledByAdmin(mContext, this, mDisabledByAdmin);
+            RestrictedLockUtilsInternal.setTextViewAsDisabledByAdmin(mContext, this,
+                    mDisabledByAdmin);
             if (mDisabledByAdmin) {
                 getButtonDrawable().setColorFilter(mContext.getColor(R.color.disabled_text_color),
                         PorterDuff.Mode.MULTIPLY);

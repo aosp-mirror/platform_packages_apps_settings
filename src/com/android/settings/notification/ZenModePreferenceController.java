@@ -23,38 +23,30 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.util.Slog;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class ZenModePreferenceController extends AbstractPreferenceController
-        implements LifecycleObserver, OnResume, OnPause, PreferenceControllerMixin {
+public class ZenModePreferenceController extends BasePreferenceController
+        implements LifecycleObserver, OnResume, OnPause {
 
-    private final String mKey;
     private SettingObserver mSettingObserver;
     private ZenModeSettings.SummaryBuilder mSummaryBuilder;
 
-    public ZenModePreferenceController(Context context, Lifecycle lifecycle, String key) {
-        super(context);
+    public ZenModePreferenceController(Context context, String key) {
+        super(context, key);
         mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
-
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
-        mKey = key;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(mKey));
+        mSettingObserver = new SettingObserver(screen.findPreference(getPreferenceKey()));
     }
 
     @Override
@@ -72,13 +64,8 @@ public class ZenModePreferenceController extends AbstractPreferenceController
     }
 
     @Override
-    public String getPreferenceKey() {
-        return mKey;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override

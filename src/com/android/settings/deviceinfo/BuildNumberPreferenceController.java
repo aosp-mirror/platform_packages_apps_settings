@@ -17,7 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -25,37 +25,35 @@ import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
-import android.util.Pair;
 import android.widget.Toast;
+
+import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.slices.Sliceable;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
-public class BuildNumberPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin, LifecycleObserver, OnResume {
+public class BuildNumberPreferenceController extends BasePreferenceController implements
+        LifecycleObserver, OnStart {
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
     static final int REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF = 100;
 
-    private static final String KEY_BUILD_NUMBER = "build_number";
-
-    private final Activity mActivity;
-    private final Fragment mFragment;
+    private Activity mActivity;
+    private InstrumentedPreferenceFragment mFragment;
     private final UserManager mUm;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -65,47 +63,27 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
     private int mDevHitCountdown;
     private boolean mProcessingLastDevHit;
 
-    public BuildNumberPreferenceController(Context context, Activity activity, Fragment fragment,
-            Lifecycle lifecycle) {
-        super(context);
-        mActivity = activity;
-        mFragment = fragment;
+    public BuildNumberPreferenceController(Context context, String key) {
+        super(context, key);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
+    }
+
+    public void setHost(InstrumentedPreferenceFragment fragment) {
+        mFragment = fragment;
+        mActivity = fragment.getActivity();
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference preference = screen.findPreference(KEY_BUILD_NUMBER);
-        if (preference != null) {
-            try {
-                preference.setSummary(BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
-                preference.setEnabled(true);
-            } catch (Exception e) {
-                preference.setSummary(R.string.device_info_default);
-            }
-        }
+    public CharSequence getSummary() {
+        return BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_BUILD_NUMBER;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public void onResume() {
-        mDebuggingFeaturesDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(
+    public void onStart() {
+        mDebuggingFeaturesDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
-        mDebuggingFeaturesDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
+        mDebuggingFeaturesDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
                 mContext, UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
         mDevHitCountdown = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
                 ? -1 : TAPS_TO_BE_A_DEVELOPER;
@@ -113,8 +91,33 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
     }
 
     @Override
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public boolean isCopyableSlice() {
+        return true;
+    }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
+    public void copy() {
+        Sliceable.setCopyContent(mContext, getSummary(), mContext.getText(R.string.build_number));
+    }
+
+    @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), KEY_BUILD_NUMBER)) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return false;
         }
         if (Utils.isMonkeyRunning()) {
@@ -123,14 +126,14 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
         // Don't enable developer options for secondary non-demo users.
         if (!(mUm.isAdminUser() || mUm.isDemoUser())) {
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
+                    mContext, SettingsEnums.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
         }
 
         // Don't enable developer options until device has been provisioned
         if (!Utils.isDeviceProvisioned(mContext)) {
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
+                    mContext, SettingsEnums.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
         }
 
@@ -143,7 +146,7 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
                             .setPackage(componentName.getPackageName())
                             .setAction("com.android.settings.action.REQUEST_DEBUG_FEATURES");
                     final ResolveInfo resolveInfo = mContext.getPackageManager().resolveActivity(
-                        requestDebugFeatures, 0);
+                            requestDebugFeatures, 0);
                     if (resolveInfo != null) {
                         mContext.startActivity(requestDebugFeatures);
                         return false;
@@ -156,7 +159,7 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
                         mDebuggingFeaturesDisallowedAdmin);
             }
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
+                    mContext, SettingsEnums.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
         }
 
@@ -174,9 +177,11 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
                     enableDevelopmentSettings();
                 }
                 mMetricsFeatureProvider.action(
-                        mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF,
-                        Pair.create(MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
-                                mProcessingLastDevHit ? 0 : 1));
+                        mMetricsFeatureProvider.getAttribution(mActivity),
+                        MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
+                        mFragment.getMetricsCategory(),
+                        null,
+                        mProcessingLastDevHit ? 0 : 1);
             } else if (mDevHitCountdown > 0
                     && mDevHitCountdown < (TAPS_TO_BE_A_DEVELOPER - 2)) {
                 if (mDevHitToast != null) {
@@ -189,10 +194,13 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
                         Toast.LENGTH_SHORT);
                 mDevHitToast.show();
             }
+
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF,
-                    Pair.create(MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
-                            0));
+                    mMetricsFeatureProvider.getAttribution(mActivity),
+                    MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
+                    mFragment.getMetricsCategory(),
+                    null,
+                    0);
         } else if (mDevHitCountdown < 0) {
             if (mDevHitToast != null) {
                 mDevHitToast.cancel();
@@ -201,9 +209,11 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
                     Toast.LENGTH_LONG);
             mDevHitToast.show();
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF,
-                    Pair.create(MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
-                            1));
+                    mMetricsFeatureProvider.getAttribution(mActivity),
+                    MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
+                    mFragment.getMetricsCategory(),
+                    null,
+                    1);
         }
         return true;
     }

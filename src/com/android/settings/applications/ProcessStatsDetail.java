@@ -16,11 +16,13 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.widget.EntityHeaderController.ActionType;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,8 +35,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
 import android.util.IconDrawableFactory;
@@ -44,7 +44,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 import com.android.settings.CancellablePreference;
 import com.android.settings.CancellablePreference.OnCancelListener;
 import com.android.settings.R;
@@ -58,8 +61,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 public class ProcessStatsDetail extends SettingsPreferenceFragment {
 
@@ -128,7 +129,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* appHeader */)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(mApp.mUiTargetApp != null
                         ? IconDrawableFactory.newInstance(activity).getBadgedIcon(mApp.mUiTargetApp)
                         : new ColorDrawable(0))
@@ -145,7 +146,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_PROCESS_STATS_DETAIL;
+        return SettingsEnums.APPLICATIONS_PROCESS_STATS_DETAIL;
     }
 
     @Override

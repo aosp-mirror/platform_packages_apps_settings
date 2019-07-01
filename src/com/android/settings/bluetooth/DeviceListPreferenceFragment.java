@@ -20,22 +20,23 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.text.BidiFormatter;
+import android.util.Log;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
-import android.text.BidiFormatter;
-import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.WeakHashMap;
 
 /**
@@ -63,14 +64,14 @@ public abstract class DeviceListPreferenceFragment extends
 
     BluetoothDevice mSelectedDevice;
 
-    LocalBluetoothAdapter mLocalAdapter;
+    BluetoothAdapter mBluetoothAdapter;
     LocalBluetoothManager mLocalManager;
 
     @VisibleForTesting
     PreferenceGroup mDeviceListGroup;
 
-    final WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
-            new WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference>();
+    final HashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
+            new HashMap<>();
 
     boolean mShowDevicesWithoutNames;
 
@@ -96,7 +97,7 @@ public abstract class DeviceListPreferenceFragment extends
             Log.e(TAG, "Bluetooth is not supported on this device");
             return;
         }
-        mLocalAdapter = mLocalManager.getBluetoothAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mShowDevicesWithoutNames = SystemProperties.getBoolean(
                 BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
 
@@ -145,7 +146,7 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (KEY_BT_SCAN.equals(preference.getKey())) {
-            mLocalAdapter.startScanning(true);
+            startScanning();
             return true;
         }
 
@@ -171,7 +172,7 @@ public abstract class DeviceListPreferenceFragment extends
         }
 
         // Prevent updates while the list shows one of the state messages
-        if (mLocalAdapter.getBluetoothState() != BluetoothAdapter.STATE_ON) return;
+        if (mBluetoothAdapter.getState() != BluetoothAdapter.STATE_ON) return;
 
         if (mFilter.matches(cachedDevice.getDevice())) {
             createDevicePreference(cachedDevice);
@@ -192,18 +193,16 @@ public abstract class DeviceListPreferenceFragment extends
             preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice,
                     mShowDevicesWithoutNames);
             preference.setKey(key);
+            //Set hideSecondTarget is true if it's bonded device.
+            preference.hideSecondTarget(true);
             mDeviceListGroup.addPreference(preference);
-        } else {
-            // Tell the preference it is being re-used in case there is new info in the
-            // cached device.
-            preference.rebind();
         }
 
         initDevicePreference(preference);
         mDevicePreferenceMap.put(cachedDevice, preference);
     }
 
-    void initDevicePreference(BluetoothDevicePreference preference) {
+    protected void initDevicePreference(BluetoothDevicePreference preference) {
         // Does nothing by default
     }
 
@@ -213,7 +212,7 @@ public abstract class DeviceListPreferenceFragment extends
 
         myDevicePreference.setTitle(getString(
                 R.string.bluetooth_footer_mac_message,
-                bidiFormatter.unicodeWrap(mLocalAdapter.getAddress())));
+                bidiFormatter.unicodeWrap(mBluetoothAdapter.getAddress())));
     }
 
     @Override
@@ -226,26 +225,23 @@ public abstract class DeviceListPreferenceFragment extends
 
     @VisibleForTesting
     void enableScanning() {
-        // LocalBluetoothAdapter already handles repeated scan requests
-        mLocalAdapter.startScanning(true);
+        // BluetoothAdapter already handles repeated scan requests
+        startScanning();
         mScanEnabled = true;
     }
 
     @VisibleForTesting
     void disableScanning() {
-        mLocalAdapter.stopScanning();
+        stopScanning();
         mScanEnabled = false;
     }
 
     @Override
     public void onScanningStateChanged(boolean started) {
         if (!started && mScanEnabled) {
-            mLocalAdapter.startScanning(true);
+            startScanning();
         }
     }
-
-    @Override
-    public void onBluetoothStateChanged(int bluetoothState) {}
 
     /**
      * Add bluetooth device preferences to {@code preferenceGroup} which satisfy the {@code filter}
@@ -262,21 +258,15 @@ public abstract class DeviceListPreferenceFragment extends
         cacheRemoveAllPrefs(preferenceGroup);
         preferenceGroup.setTitle(titleId);
         mDeviceListGroup = preferenceGroup;
-        setFilter(filter);
         if (addCachedDevices) {
+            // Don't show bonded devices when screen turned back on
+            setFilter(BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER);
             addCachedDevices();
         }
+        setFilter(filter);
         preferenceGroup.setEnabled(true);
         removeCachedPrefs(preferenceGroup);
     }
-
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) { }
-
-    @Override
-    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) { }
-
-    @Override
-    public void onAudioModeChanged() { }
 
     /**
      * Return the key of the {@link PreferenceGroup} that contains the bluetooth devices
@@ -285,5 +275,17 @@ public abstract class DeviceListPreferenceFragment extends
 
     public boolean shouldShowDevicesWithoutNames() {
         return mShowDevicesWithoutNames;
+    }
+
+    void startScanning() {
+        if (!mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.startDiscovery();
+        }
+    }
+
+    void stopScanning() {
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
+        }
     }
 }

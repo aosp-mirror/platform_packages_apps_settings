@@ -16,6 +16,10 @@
 
 package com.android.settings.development.gamedriver;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 import static com.google.common.truth.Truth.assertThat;
 
@@ -52,7 +56,8 @@ public class GameDriverAppPreferenceControllerTest {
 
     private static final int DEFAULT = 0;
     private static final int GAME_DRIVER = 1;
-    private static final int SYSTEM = 2;
+    private static final int PRERELEASE_DRIVER = 2;
+    private static final int SYSTEM = 3;
     private static final String TEST_APP_NAME = "testApp";
     private static final String TEST_PKG_NAME = "testPkg";
 
@@ -87,6 +92,32 @@ public class GameDriverAppPreferenceControllerTest {
     }
 
     @Test
+    public void getAvailability_developmentSettingsEnabledAndGameDriverOn_available() {
+        loadDefaultConfig();
+        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailability_developmentSettingsDisabled_conditionallyUnavailable() {
+        loadDefaultConfig();
+        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailability_gameDriverOff_conditionallyUnavailable() {
+        loadDefaultConfig();
+        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
     public void displayPreference_shouldAddTwoPreferencesAndSortAscendingly() {
         mockPackageManager();
         loadDefaultConfig();
@@ -116,6 +147,24 @@ public class GameDriverAppPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_available_visible() {
+        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+        loadDefaultConfig();
+
+        assertThat(mGroup.isVisible()).isTrue();
+    }
+
+    @Test
+    public void updateState_gameDriverOff_notVisible() {
+        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+        loadDefaultConfig();
+
+        assertThat(mGroup.isVisible()).isFalse();
+    }
+
+    @Test
     public void createPreference_configDefault_shouldSetDefaultAttributes() {
         loadDefaultConfig();
         final ListPreference preference =
@@ -133,7 +182,7 @@ public class GameDriverAppPreferenceControllerTest {
 
     @Test
     public void createPreference_configGAME_DRIVER_shouldSetGameDriverAttributes() {
-        loadConfig(TEST_PKG_NAME, "");
+        loadConfig(TEST_PKG_NAME, "", "");
         final ListPreference preference =
                 mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
@@ -148,8 +197,24 @@ public class GameDriverAppPreferenceControllerTest {
     }
 
     @Test
+    public void createPreference_configPRERELEASE_DRIVER_shouldSetPrereleaseDriverAttributes() {
+        loadConfig("", TEST_PKG_NAME, "");
+        final ListPreference preference =
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
+
+        assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
+        assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
+        assertThat(preference.getDialogTitle()).isEqualTo(mDialogTitle);
+        assertThat(preference.getEntries()).isEqualTo(mValueList);
+        assertThat(preference.getEntryValues()).isEqualTo(mValueList);
+        assertThat(preference.getEntry()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+        assertThat(preference.getSummary()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+    }
+
+    @Test
     public void createPreference_configSystem_shouldSetSystemAttributes() {
-        loadConfig("", TEST_PKG_NAME);
+        loadConfig("", "", TEST_PKG_NAME);
         final ListPreference preference =
                 mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
@@ -226,10 +291,12 @@ public class GameDriverAppPreferenceControllerTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
     }
 
-    private void loadDefaultConfig() { loadConfig("", ""); }
+    private void loadDefaultConfig() { loadConfig("", "", ""); }
 
-    private void loadConfig(String optIn, String optOut) {
+    private void loadConfig(String optIn, String prereleaseOptIn, String optOut) {
         Settings.Global.putString(mResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS, optIn);
+        Settings.Global.putString(
+                mResolver, Settings.Global.GAME_DRIVER_PRERELEASE_OPT_IN_APPS, prereleaseOptIn);
         Settings.Global.putString(mResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS, optOut);
 
         mController = new GameDriverAppPreferenceController(mContext, "testKey");

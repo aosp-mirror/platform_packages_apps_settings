@@ -17,9 +17,7 @@
 package com.android.settings.users;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.UserInfo;
@@ -35,6 +33,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settingslib.Utils;
@@ -102,9 +104,8 @@ public class EditUserInfoController {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         mWaitingForActivityResult = false;
 
-        if (mEditUserInfoDialog != null && mEditUserInfoDialog.isShowing()
-                && mEditUserPhotoController.onActivityResult(requestCode, resultCode, data)) {
-            return;
+        if (mEditUserInfoDialog != null) {
+            mEditUserPhotoController.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -114,7 +115,7 @@ public class EditUserInfoController {
         Activity activity = fragment.getActivity();
         mUser = user;
         if (mUserManager == null) {
-            mUserManager = UserManager.get(activity);
+            mUserManager = activity.getSystemService(UserManager.class);
         }
         LayoutInflater inflater = activity.getLayoutInflater();
         View content = inflater.inflate(R.layout.edit_user_info_dialog_content, null);
@@ -135,8 +136,7 @@ public class EditUserInfoController {
             }
         }
         userPhotoView.setImageDrawable(drawable);
-        mEditUserPhotoController = new EditUserPhotoController(fragment, userPhotoView,
-                mSavedPhoto, drawable, mWaitingForActivityResult);
+        mEditUserPhotoController = createEditUserPhotoController(fragment, userPhotoView, drawable);
         mEditUserInfoDialog = new AlertDialog.Builder(activity)
                 .setTitle(R.string.profile_info_settings_title)
                 .setView(content)
@@ -193,5 +193,12 @@ public class EditUserInfoController {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         return mEditUserInfoDialog;
+    }
+
+    @VisibleForTesting
+    EditUserPhotoController createEditUserPhotoController(Fragment fragment,
+            ImageView userPhotoView, Drawable drawable) {
+        return new EditUserPhotoController(fragment, userPhotoView,
+                mSavedPhoto, drawable, mWaitingForActivityResult);
     }
 }

@@ -22,8 +22,10 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class UserCapabilities {
     boolean mEnabled = true;
@@ -31,13 +33,15 @@ public class UserCapabilities {
     boolean mCanAddRestrictedProfile = true;
     boolean mIsAdmin;
     boolean mIsGuest;
+    boolean mUserSwitcherEnabled;
     boolean mCanAddGuest;
     boolean mDisallowAddUser;
     boolean mDisallowAddUserSetByAdmin;
     boolean mDisallowSwitchUser;
     RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
 
-    private UserCapabilities() {}
+    private UserCapabilities() {
+    }
 
     public static UserCapabilities create(Context context) {
         UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
@@ -62,14 +66,15 @@ public class UserCapabilities {
     }
 
     public void updateAddUserCapabilities(Context context) {
-        mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+        final UserManager userManager =
+                (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mEnforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
                 UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
-        final boolean hasBaseUserRestriction = RestrictedLockUtils.hasBaseUserRestriction(
+        final boolean hasBaseUserRestriction = RestrictedLockUtilsInternal.hasBaseUserRestriction(
                 context, UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
-        mDisallowAddUserSetByAdmin =
-                mEnforcedAdmin != null && !hasBaseUserRestriction;
-        mDisallowAddUser =
-                (mEnforcedAdmin != null || hasBaseUserRestriction);
+        mDisallowAddUserSetByAdmin = mEnforcedAdmin != null && !hasBaseUserRestriction;
+        mDisallowAddUser = (mEnforcedAdmin != null || hasBaseUserRestriction);
+        mUserSwitcherEnabled = userManager.isUserSwitcherEnabled();
         mCanAddUser = true;
         if (!mIsAdmin || UserManager.getMaxSupportedUsers() < 2
                 || !UserManager.supportsMultipleUsers()
@@ -81,7 +86,6 @@ public class UserCapabilities {
                 context.getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
         mCanAddGuest = !mIsGuest && !mDisallowAddUser && canAddUsersWhenLocked;
 
-        UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mDisallowSwitchUser = userManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH);
     }
 
@@ -114,6 +118,8 @@ public class UserCapabilities {
                 ", mDisallowAddUser=" + mDisallowAddUser +
                 ", mEnforcedAdmin=" + mEnforcedAdmin +
                 ", mDisallowSwitchUser=" + mDisallowSwitchUser +
+                ", mDisallowAddUserSetByAdmin=" + mDisallowAddUserSetByAdmin +
+                ", mUserSwitcherEnabled=" + mUserSwitcherEnabled +
                 '}';
     }
 }

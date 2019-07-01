@@ -21,14 +21,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
-import androidx.preference.Preference;
 
 /**
  * BaseNfcEnabler is a abstract helper to manage the Nfc state for Nfc and Android Beam
  * preference. It will receive intent and update state to ensure preference show correct state.
  */
 public abstract class BaseNfcEnabler {
-    private final Context mContext;
+    protected final Context mContext;
     protected final NfcAdapter mNfcAdapter;
     private final IntentFilter mIntentFilter;
 

@@ -17,18 +17,17 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.os.BatteryStats;
-import android.os.Bundle;
 import android.os.UserManager;
+
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 /**
  * Loader to get new {@link BatteryStatsHelper} in the background
  */
-public class BatteryStatsHelperLoader extends AsyncLoader<BatteryStatsHelper> {
+public class BatteryStatsHelperLoader extends AsyncLoaderCompat<BatteryStatsHelper> {
     @VisibleForTesting
     UserManager mUserManager;
     @VisibleForTesting

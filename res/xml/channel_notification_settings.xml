@@ -20,12 +20,12 @@
     android:key="channel_settings"
     android:title="@string/notification_channel_title" >
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="pref_app_header"
         android:order="1"
         android:layout="@layout/settings_entity_header" />
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="block"
         android:order="2"
         android:layout="@layout/styled_switch_bar" />
@@ -38,10 +38,25 @@
         android:summary="@string/allow_interruption_summary" />
 
     <!-- Importance -->
-    <com.android.settings.RestrictedListPreference
+    <com.android.settings.notification.ImportancePreference
         android:key="importance"
-        android:order="10"
-        android:title="@string/notification_importance_title" />
+        android:order="4"
+        android:title="@string/notification_importance_title"
+        settings:allowDividerBelow="true"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="min_importance"
+        android:order="5"
+        settings:allowDividerAbove="true"
+        android:title="@string/notification_importance_min_title"
+        android:summary="@string/notification_channel_summary_min"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="high_importance"
+        android:order="6"
+        settings:allowDividerAbove="true"
+        android:title="@string/notification_importance_high_title"
+        android:summary="@string/notification_channel_summary_high"/>
 
     <PreferenceCategory
         android:key="channel_advanced"
@@ -55,8 +70,7 @@
             android:dialogTitle="@string/notification_channel_sound_title"
             android:order="11"
             android:showSilent="true"
-            android:showDefault="true"
-            android:ringtoneType="notification" />
+            android:showDefault="true"/>
 
         <!-- Vibration -->
         <com.android.settingslib.RestrictedSwitchPreference
@@ -86,17 +100,23 @@
             settings:useAdditionalSummary="true"
             settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
 
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="bubble_pref"
+            android:title="@string/notification_bubbles_title"
+            android:order="16"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+
         <!-- Bypass DND -->
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="bypass_dnd"
-            android:order="16"
+            android:order="17"
             android:title="@string/app_notification_override_dnd_title"
             android:summary="@string/app_notification_override_dnd_summary"
             settings:useAdditionalSummary="true"/>
 
         <Preference
             android:key="app_link"
-            android:order="17"
+            android:order="18"
             android:title="@string/app_settings_link"
             settings:allowDividerAbove="true"/>
     </PreferenceCategory>
@@ -107,6 +127,7 @@
 
     <com.android.settings.notification.NotificationFooterPreference
         android:key="block_desc"
-        android:order="110"/>
+        android:order="110"
+        settings:allowDividerAbove="false"/>
 
 </PreferenceScreen>

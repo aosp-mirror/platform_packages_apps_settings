@@ -21,6 +21,7 @@ import android.view.InputDevice;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,13 +33,15 @@ public class ShadowInputDevice extends org.robolectric.shadows.ShadowInputDevice
 
     private static Map<Integer, InputDevice> sDeviceMap = new HashMap<>();
 
+    private int mDeviceId;
+
     @Implementation
-    public static int[] getDeviceIds() {
+    protected static int[] getDeviceIds() {
         return sDeviceIds;
     }
 
     @Implementation
-    public static InputDevice getDevice(int id) {
+    protected static InputDevice getDevice(int id) {
         return sDeviceMap.get(id);
     }
 
@@ -50,5 +53,21 @@ public class ShadowInputDevice extends org.robolectric.shadows.ShadowInputDevice
     public static void reset() {
         sDeviceIds = null;
         sDeviceMap.clear();
+    }
+
+    @Implementation
+    protected int getId() {
+        return mDeviceId;
+    }
+
+    public static InputDevice makeInputDevicebyId(int id) {
+        final InputDevice inputDevice = Shadow.newInstanceOf(InputDevice.class);
+        final ShadowInputDevice shadowInputDevice = Shadow.extract(inputDevice);
+        shadowInputDevice.setId(id);
+        return inputDevice;
+    }
+
+    public void setId(int id) {
+        mDeviceId = id;
     }
 }

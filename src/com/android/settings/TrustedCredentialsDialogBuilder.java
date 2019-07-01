@@ -17,7 +17,6 @@ package com.android.settings;
 
 import android.annotation.NonNull;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
 import android.content.pm.UserInfo;
@@ -31,6 +30,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustedCredentialsSettings.CertHolder;
@@ -228,7 +229,7 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
                     && !mDpm.isCaCertApproved(certHolder.getAlias(), certHolder.getUserId());
 
             final boolean isProfileOrDeviceOwner = RestrictedLockUtils.getProfileOrDeviceOwner(
-                    mActivity, certHolder.getUserId()) != null;
+                    mActivity, UserHandle.of(certHolder.getUserId())) != null;
 
             // Show trust button only when it requires consumer user (non-PO/DO) to approve
             CharSequence displayText = mActivity.getText(!isProfileOrDeviceOwner && mNeedsApproval

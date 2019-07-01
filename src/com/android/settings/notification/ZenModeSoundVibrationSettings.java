@@ -16,34 +16,44 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeAlarmsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeCallsPreferenceController(context, lifecycle,
+                "zen_mode_calls_settings"));
+        controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle,
+                "zen_mode_messages_settings"));
+        controllers.add(new ZenModeAlarmsPreferenceController(context, lifecycle,
+                "zen_mode_alarms"));
         controllers.add(new ZenModeMediaPreferenceController(context, lifecycle));
         controllers.add(new ZenModeSystemPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeRemindersPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeEventsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle,
                 R.string.zen_sound_footer));
+        controllers.add(new ZenModeBypassingAppsPreferenceController(context, lifecycle));
         return controllers;
     }
 
@@ -54,7 +64,7 @@ public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implement
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_PRIORITY;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_PRIORITY;
     }
 
     /**

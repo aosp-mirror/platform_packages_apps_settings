@@ -16,49 +16,47 @@
 
 package com.android.settings.slices;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
-import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
-import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.Settings;
+import android.os.Bundle;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.InputRangeBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
+import androidx.slice.builders.SliceAction;
+
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import androidx.core.graphics.drawable.IconCompat;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
 
 
 /**
@@ -79,12 +77,12 @@ public class SliceBuilderUtils {
     public static Slice buildSlice(Context context, SliceData sliceData) {
         Log.d(TAG, "Creating slice for: " + sliceData.getPreferenceController());
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
-        final Pair<Integer, Object> sliceNamePair =
-                Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, sliceData.getKey());
-        // Log Slice requests using the same schema as SharedPreferenceLogger (but with a different
-        // action name).
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                .action(context, MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED, sliceNamePair);
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        SettingsEnums.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        sliceData.getKey(),
+                        0);
 
         if (!controller.isAvailable()) {
             // Cannot guarantee setting page is accessible, let the presenter handle error case.
@@ -93,6 +91,10 @@ public class SliceBuilderUtils {
 
         if (controller.getAvailabilityStatus() == DISABLED_DEPENDENT_SETTING) {
             return buildUnavailableSlice(context, sliceData);
+        }
+
+        if (controller.isCopyableSlice()) {
+            return buildCopyableSlice(context, sliceData, controller);
         }
 
         switch (sliceData.getSliceType()) {
@@ -165,10 +167,11 @@ public class SliceBuilderUtils {
      * @return {@link PendingIntent} for a non-primary {@link SliceAction}.
      */
     public static PendingIntent getActionIntent(Context context, String action, SliceData data) {
-        final Intent intent = new Intent(action);
-        intent.setClass(context, SliceBroadcastReceiver.class);
-        intent.putExtra(EXTRA_SLICE_KEY, data.getKey());
-        intent.putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
+        final Intent intent = new Intent(action)
+                .setData(data.getUri())
+                .setClass(context, SliceBroadcastReceiver.class)
+                .putExtra(EXTRA_SLICE_KEY, data.getKey())
+                .putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }
@@ -185,26 +188,29 @@ public class SliceBuilderUtils {
      * @return the summary text for a {@link Slice} built for {@param sliceData}.
      */
     public static CharSequence getSubtitleText(Context context,
-            AbstractPreferenceController controller, SliceData sliceData) {
-        CharSequence summaryText = sliceData.getScreenTitle();
+            BasePreferenceController controller, SliceData sliceData) {
+
+        // Priority 1 : User prefers showing the dynamic summary in slice view rather than static
+        // summary. Note it doesn't require a valid summary - so we can force some slices to have
+        // empty summaries (ex: volume).
+        if (controller.useDynamicSliceSummary()) {
+            return controller.getSummary();
+        }
+
+        // Priority 2: Show summary from slice data.
+        CharSequence summaryText = sliceData.getSummary();
+        if (isValidSummary(context, summaryText)) {
+            return summaryText;
+        }
+
+        // Priority 3: Show screen title.
+        summaryText = sliceData.getScreenTitle();
         if (isValidSummary(context, summaryText) && !TextUtils.equals(summaryText,
                 sliceData.getTitle())) {
             return summaryText;
         }
 
-        if (controller != null) {
-            summaryText = controller.getSummary();
-
-            if (isValidSummary(context, summaryText)) {
-                return summaryText;
-            }
-        }
-
-        summaryText = sliceData.getSummary();
-        if (isValidSummary(context, summaryText)) {
-            return summaryText;
-        }
-
+        // Priority 4: Show empty text.
         return "";
     }
 
@@ -219,10 +225,25 @@ public class SliceBuilderUtils {
                 .build();
     }
 
-    @VisibleForTesting
-    static Intent getContentIntent(Context context, SliceData sliceData) {
+    public static Intent buildSearchResultPageIntent(Context context, String className, String key,
+            String screenTitle, int sourceMetricsCategory) {
+        final Bundle args = new Bundle();
+        args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
+        final Intent searchDestination = new SubSettingLauncher(context)
+                .setDestination(className)
+                .setArguments(args)
+                .setTitleText(screenTitle)
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .toIntent();
+        searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
+                .setAction("com.android.settings.SEARCH_RESULT_TRAMPOLINE")
+                .setComponent(null);
+        return searchDestination;
+    }
+
+    public static Intent getContentIntent(Context context, SliceData sliceData) {
         final Uri contentUri = new Uri.Builder().appendPath(sliceData.getKey()).build();
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+        final Intent intent = buildSearchResultPageIntent(context,
                 sliceData.getFragmentClassName(), sliceData.getKey(),
                 sliceData.getScreenTitle().toString(), 0 /* TODO */);
         intent.setClassName(context.getPackageName(), SubSettings.class.getName());
@@ -233,22 +254,23 @@ public class SliceBuilderUtils {
     private static Slice buildToggleSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
-        final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
+        final IconCompat icon = getSafeIcon(context, sliceData);
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
-        @ColorInt final int color = Utils.getColorAccent(context);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final TogglePreferenceController toggleController =
                 (TogglePreferenceController) controller;
         final SliceAction sliceAction = getToggleAction(context, sliceData,
                 toggleController.isChecked());
-        final List<String> keywords = buildSliceKeywords(sliceData);
+        final Set<String> keywords = buildSliceKeywords(sliceData);
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(rowBuilder -> rowBuilder
+                .addRow(new RowBuilder()
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(
-                                new SliceAction(contentIntent, icon, sliceData.getTitle()))
+                                SliceAction.createDeeplink(contentIntent, icon,
+                                        ListBuilder.ICON_IMAGE, sliceData.getTitle()))
                         .addEndItem(sliceAction))
                 .setKeywords(keywords)
                 .build();
@@ -257,18 +279,20 @@ public class SliceBuilderUtils {
     private static Slice buildIntentSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
-        final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
+        final IconCompat icon = getSafeIcon(context, sliceData);
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
-        @ColorInt final int color = Utils.getColorAccent(context);
-        final List<String> keywords = buildSliceKeywords(sliceData);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
+        final Set<String> keywords = buildSliceKeywords(sliceData);
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(rowBuilder -> rowBuilder
+                .addRow(new RowBuilder()
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(
-                                new SliceAction(contentIntent, icon, sliceData.getTitle())))
+                                SliceAction.createDeeplink(contentIntent, icon,
+                                        ListBuilder.ICON_IMAGE,
+                                        sliceData.getTitle())))
                 .setKeywords(keywords)
                 .build();
     }
@@ -276,24 +300,52 @@ public class SliceBuilderUtils {
     private static Slice buildSliderSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
         final SliderPreferenceController sliderController = (SliderPreferenceController) controller;
+        if (sliderController.getMax() <= sliderController.getMin()) {
+            Log.e(TAG, "Invalid sliderController: " + sliderController.getPreferenceKey());
+            return null;
+        }
         final PendingIntent actionIntent = getSliderAction(context, sliceData);
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
-        final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
+        final IconCompat icon = getSafeIcon(context, sliceData);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
-        @ColorInt final int color = Utils.getColorAccent(context);
-        final SliceAction primaryAction = new SliceAction(contentIntent, icon,
-                sliceData.getTitle());
-        final List<String> keywords = buildSliceKeywords(sliceData);
+        final SliceAction primaryAction = SliceAction.createDeeplink(contentIntent, icon,
+                ListBuilder.ICON_IMAGE, sliceData.getTitle());
+        final Set<String> keywords = buildSliceKeywords(sliceData);
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addInputRange(builder -> builder
+                .addInputRange(new InputRangeBuilder()
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(primaryAction)
-                        .setMax(sliderController.getMaxSteps())
+                        .setMax(sliderController.getMax())
+                        .setMin(sliderController.getMin())
                         .setValue(sliderController.getSliderPosition())
                         .setInputAction(actionIntent))
+                .setKeywords(keywords)
+                .build();
+    }
+
+    private static Slice buildCopyableSlice(Context context, SliceData sliceData,
+            BasePreferenceController controller) {
+        final SliceAction copyableAction = getCopyableAction(context, sliceData);
+        final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
+        final IconCompat icon = getSafeIcon(context, sliceData);
+        final SliceAction primaryAction = SliceAction.createDeeplink(contentIntent, icon,
+                ListBuilder.ICON_IMAGE,
+                sliceData.getTitle());
+        final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
+        final Set<String> keywords = buildSliceKeywords(sliceData);
+
+        return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
+                .setAccentColor(color)
+                .addRow(new RowBuilder()
+                        .setTitle(sliceData.getTitle())
+                        .setSubtitle(subtitleText)
+                        .setPrimaryAction(primaryAction)
+                        .addEndItem(copyableAction))
                 .setKeywords(keywords)
                 .build();
     }
@@ -313,11 +365,19 @@ public class SliceBuilderUtils {
             boolean isChecked) {
         PendingIntent actionIntent = getActionIntent(context,
                 SettingsSliceProvider.ACTION_TOGGLE_CHANGED, sliceData);
-        return new SliceAction(actionIntent, null, isChecked);
+        return SliceAction.createToggle(actionIntent, null, isChecked);
     }
 
     private static PendingIntent getSliderAction(Context context, SliceData sliceData) {
         return getActionIntent(context, SettingsSliceProvider.ACTION_SLIDER_CHANGED, sliceData);
+    }
+
+    private static SliceAction getCopyableAction(Context context, SliceData sliceData) {
+        final PendingIntent intent = getActionIntent(context,
+                SettingsSliceProvider.ACTION_COPY, sliceData);
+        final IconCompat icon = IconCompat.createWithResource(context,
+                R.drawable.ic_content_copy_grey600_24dp);
+        return SliceAction.create(intent, icon, ListBuilder.ICON_IMAGE, sliceData.getTitle());
     }
 
     private static boolean isValidSummary(Context context, CharSequence summary) {
@@ -333,8 +393,8 @@ public class SliceBuilderUtils {
                 || TextUtils.equals(summary, doublePlaceHolder));
     }
 
-    private static List<String> buildSliceKeywords(SliceData data) {
-        final List<String> keywords = new ArrayList<>();
+    private static Set<String> buildSliceKeywords(SliceData data) {
+        final Set<String> keywords = new ArraySet<>();
 
         keywords.add(data.getTitle());
 
@@ -356,21 +416,41 @@ public class SliceBuilderUtils {
 
     private static Slice buildUnavailableSlice(Context context, SliceData data) {
         final String title = data.getTitle();
-        final List<String> keywords = buildSliceKeywords(data);
-        @ColorInt final int color = Utils.getColorAccent(context);
-        final CharSequence summary = context.getText(R.string.disabled_dependent_setting_summary);
-        final IconCompat icon = IconCompat.createWithResource(context, data.getIconResource());
-        final SliceAction primaryAction = new SliceAction(getContentPendingIntent(context, data),
-                icon, title);
+        final Set<String> keywords = buildSliceKeywords(data);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
+
+        final String customSubtitle = data.getUnavailableSliceSubtitle();
+        final CharSequence subtitle = !TextUtils.isEmpty(customSubtitle) ? customSubtitle
+                : context.getText(R.string.disabled_dependent_setting_summary);
+        final IconCompat icon = getSafeIcon(context, data);
+        final SliceAction primaryAction = SliceAction.createDeeplink(
+                getContentPendingIntent(context, data),
+                icon, ListBuilder.ICON_IMAGE, title);
 
         return new ListBuilder(context, data.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(builder -> builder
+                .addRow(new RowBuilder()
                         .setTitle(title)
-                        .setTitleItem(icon)
-                        .setSubtitle(summary)
+                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                        .setSubtitle(subtitle)
                         .setPrimaryAction(primaryAction))
                 .setKeywords(keywords)
                 .build();
+    }
+
+    @VisibleForTesting
+    static IconCompat getSafeIcon(Context context, SliceData data) {
+        int iconResource = data.getIconResource();
+
+        if (iconResource == 0) {
+            iconResource = R.drawable.ic_settings_accent;
+        }
+        try {
+            return IconCompat.createWithResource(context, iconResource);
+        } catch (Exception e) {
+            Log.w(TAG, "Falling back to settings icon because there is an error getting slice icon "
+                    + data.getUri(), e);
+            return IconCompat.createWithResource(context, R.drawable.ic_settings_accent);
+        }
     }
 }

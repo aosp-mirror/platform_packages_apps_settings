@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,8 +28,6 @@ import android.os.AsyncResult;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -48,7 +47,10 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.telephony.CommandException;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
@@ -66,7 +68,7 @@ import com.android.internal.telephony.TelephonyIntents;
 public class IccLockSettings extends SettingsPreferenceFragment
         implements EditPinPreference.OnPinEnteredListener {
     private static final String TAG = "IccLockSettings";
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
 
     private static final int OFF_MODE = 0;
     // State when enabling/disabling ICC lock
@@ -277,7 +279,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ICC_LOCK;
+        return SettingsEnums.ICC_LOCK;
     }
 
     @Override

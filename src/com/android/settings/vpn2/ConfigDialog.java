@@ -16,7 +16,6 @@
 
 package com.android.settings.vpn2;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Proxy;
@@ -35,6 +34,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
@@ -142,6 +143,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         }
         mMppe.setChecked(mProfile.mppe);
         mL2tpSecret.setText(mProfile.l2tpSecret);
+        mL2tpSecret.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
         mIpsecIdentifier.setText(mProfile.ipsecIdentifier);
         mIpsecSecret.setText(mProfile.ipsecSecret);
         loadCertificates(mIpsecUserCert, Credentials.USER_PRIVATE_KEY, 0, mProfile.ipsecUserCert);
@@ -151,6 +153,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
                 R.string.vpn_no_server_cert, mProfile.ipsecServerCert);
         mSaveLogin.setChecked(mProfile.saveLogin);
         mAlwaysOnVpn.setChecked(mProfile.key.equals(VpnUtils.getLockdownVpn()));
+        mPassword.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
 
         // Hide lockdown VPN on devices that require IMS authentication
         if (SystemProperties.getBoolean("persist.radio.imsregrequired", false)) {

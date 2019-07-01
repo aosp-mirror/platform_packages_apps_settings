@@ -17,36 +17,40 @@
 package com.android.settings.security;
 
 import static android.telephony.TelephonyManager.SIM_STATE_READY;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SimLockPreferenceControllerTest {
 
     @Mock
@@ -138,7 +142,7 @@ public class SimLockPreferenceControllerTest {
         SubscriptionInfo info = mock(SubscriptionInfo.class);
         subscriptionInfoList.add(info);
         when(mTelephonyManager.hasIccCard(anyInt())).thenReturn(true);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList())
+        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true)))
                 .thenReturn(subscriptionInfoList);
     }
 
@@ -147,7 +151,7 @@ public class SimLockPreferenceControllerTest {
         SubscriptionInfo info = mock(SubscriptionInfo.class);
         subscriptionInfoList.add(info);
         when(mTelephonyManager.getSimState(anyInt())).thenReturn(SIM_STATE_READY);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList())
+        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true)))
                 .thenReturn(subscriptionInfoList);
     }
 }

@@ -20,9 +20,10 @@ import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -35,10 +36,10 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -48,10 +49,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AllowSoundPreferenceControllerTest {
 
     private Context mContext;
@@ -81,14 +83,14 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testNoCrashIfNoOnResume() throws Exception {
+    public void testNoCrashIfNoOnResume() {
         mController.isAvailable();
         mController.updateState(mock(RestrictedSwitchPreference.class));
         mController.onPreferenceChange(mock(RestrictedSwitchPreference.class), true);
     }
 
     @Test
-    public void testIsAvailable_notIfNull() throws Exception {
+    public void testIsAvailable_notIfNull() {
         mController.onResume(null, mock(NotificationChannel.class), null, null);
         assertFalse(mController.isAvailable());
 
@@ -97,7 +99,7 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfAppBlocked() throws Exception {
+    public void testIsAvailable_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         mController.onResume(appRow, mock(NotificationChannel.class), null, null);
@@ -105,7 +107,7 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfAppCreatedChannel() throws Exception {
+    public void testIsAvailable_notIfAppCreatedChannel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something new");
@@ -114,7 +116,7 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable() throws Exception {
+    public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
@@ -124,7 +126,7 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_disabledByAdmin() throws Exception {
+    public void testUpdateState_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
         mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
@@ -137,22 +139,21 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notConfigurable() throws Exception {
-        String lockedId = "locked";
+    public void testUpdateState_notBlockable_oem() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = lockedId;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn(lockedId);
+        when(channel.getId()).thenReturn("");
+        when(channel.isImportanceLockedByOEM()).thenReturn(true);
         mController.onResume(appRow, channel, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
 
-        assertFalse(pref.isEnabled());
+        assertTrue(pref.isEnabled());
     }
 
     @Test
-    public void testUpdateState_configurable() throws Exception {
+    public void testUpdateState_configurable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
@@ -165,7 +166,7 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_checkedForHighImportanceChannel() throws Exception {
+    public void testUpdateState_checkedForHighImportanceChannel() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
@@ -176,7 +177,7 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_checkedForUnspecifiedImportanceChannel() throws Exception {
+    public void testUpdateState_checkedForUnspecifiedImportanceChannel() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_UNSPECIFIED);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
@@ -187,7 +188,7 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notCheckedForLowImportanceChannel() throws Exception {
+    public void testUpdateState_notCheckedForLowImportanceChannel() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);

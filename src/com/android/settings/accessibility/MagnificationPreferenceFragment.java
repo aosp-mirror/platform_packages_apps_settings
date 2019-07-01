@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -24,22 +25,24 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public final class MagnificationPreferenceFragment extends DashboardFragment {
     @VisibleForTesting
     static final int ON = 1;
@@ -59,7 +62,7 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_SCREEN_MAGNIFICATION_SETTINGS;
+        return SettingsEnums.ACCESSIBILITY_SCREEN_MAGNIFICATION_SETTINGS;
     }
 
     @Override
@@ -168,13 +171,6 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return isApplicable(context.getResources());
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(PREFERENCE_TITLE_KEY);
-                    return keys;
                 }
             };
 }

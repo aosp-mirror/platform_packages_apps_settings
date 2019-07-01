@@ -15,17 +15,15 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     style="?attr/fingerprint_layout_theme"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:suwFooter="@layout/fingerprint_enroll_finish_base_footer">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        style="@style/SuwContentFrame"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -33,11 +31,11 @@
         android:clipChildren="false">
 
         <TextView
-            android:id="@+id/message"
-            style="@style/SuwDescription.Glif"
+            android:id="@+id/sud_layout_description"
+            style="@style/SudDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/suw_description_glif_margin_top"
+            android:layout_marginTop="@dimen/sud_description_glif_margin_top"
             android:minLines="3"
             android:text="@string/security_settings_fingerprint_enroll_finish_message"/>
 
@@ -48,7 +46,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="@dimen/fingerprint_progress_bar_max_size"
                 android:layout_height="@dimen/fingerprint_progress_bar_max_size"
                 android:layout_marginVertical="24dp"
@@ -58,17 +56,17 @@
 
                 <ImageView
                     android:id="@+id/fingerprint_in_app_indicator"
-                    style="@style/SuwContentIllustration"
+                    style="@style/SudContentIllustration"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="7dp"
                     android:contentDescription="@android:string/fingerprint_icon_content_description"
                     android:src="@drawable/fingerprint_enroll_finish" />
-            </com.android.setupwizardlib.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
             <!-- Added to align elements with fingerprint_enroll_enrolling_base -->
             <TextView
-                style="@style/TextAppearance.FingerprintErrorText"
+                style="@style/TextAppearance.ErrorText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
@@ -78,4 +76,4 @@
 
     </LinearLayout>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

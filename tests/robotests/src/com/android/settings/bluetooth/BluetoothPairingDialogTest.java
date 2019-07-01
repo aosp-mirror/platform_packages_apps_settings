@@ -16,8 +16,9 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -26,7 +27,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.SpannableStringBuilder;
@@ -36,19 +36,24 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.util.FragmentTestUtil;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowAlertDialogCompat.class)
 public class BluetoothPairingDialogTest {
 
     private static final String FILLER = "text that goes in a view";
@@ -56,7 +61,6 @@ public class BluetoothPairingDialogTest {
 
     @Mock
     private BluetoothPairingController controller;
-
     @Mock
     private BluetoothPairingDialog dialogActivity;
 
@@ -186,7 +190,8 @@ public class BluetoothPairingDialogTest {
         BluetoothPairingDialogFragment frag = new BluetoothPairingDialogFragment();
 
         // this should throw an error
-        FragmentTestUtil.startFragment(frag);
+        FragmentController.setupFragment(frag, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
         fail("Starting the fragment with no controller set should have thrown an exception.");
     }
 
@@ -282,7 +287,7 @@ public class BluetoothPairingDialogTest {
 
         // verify that the checkbox is visible and that the device name is correct
         CheckBox sharingCheckbox =
-            frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
+                frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
         assertThat(sharingCheckbox.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
@@ -300,7 +305,7 @@ public class BluetoothPairingDialogTest {
 
         // verify that the checkbox is gone
         CheckBox sharingCheckbox =
-            frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
+                frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
         assertThat(sharingCheckbox.getVisibility()).isEqualTo(View.GONE);
     }
 
@@ -435,7 +440,7 @@ public class BluetoothPairingDialogTest {
         BluetoothPairingDialogFragment fragment = spy(new BluetoothPairingDialogFragment());
         when(fragment.getPairingViewText()).thenReturn(existingText);
         setupFragment(fragment);
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         boolean expected = !TextUtils.isEmpty(existingText);
         assertThat(dialog.getButton(Dialog.BUTTON_POSITIVE).isEnabled()).isEqualTo(expected);
@@ -446,7 +451,8 @@ public class BluetoothPairingDialogTest {
         frag.setPairingController(controller);
         assertThat(frag.isPairingDialogActivitySet()).isFalse();
         frag.setPairingDialogActivity(dialogActivity);
-        FragmentTestUtil.startFragment(frag);
+        FragmentController.setupFragment(frag, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
         assertThat(frag.getmDialog()).isNotNull();
         assertThat(frag.isPairingControllerSet()).isTrue();
         assertThat(frag.isPairingDialogActivitySet()).isTrue();

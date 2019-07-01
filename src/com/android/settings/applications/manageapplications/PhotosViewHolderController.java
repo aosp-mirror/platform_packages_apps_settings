@@ -16,13 +16,14 @@
 
 package com.android.settings.applications.manageapplications;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
-import androidx.annotation.WorkerThread;
 import android.text.format.Formatter;
 import android.util.Log;
+
+import androidx.annotation.WorkerThread;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

@@ -18,24 +18,22 @@ package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.Activity;
-import android.app.FragmentManager;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.password.ConfirmDeviceCredentialBaseFragment.LastTryDialog;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
+@RunWith(RobolectricTestRunner.class)
 public class ConfirmCredentialTest {
     @Test
     public void testLastTryDialogShownExactlyOnce() {
-        FragmentManager fm = Robolectric.buildActivity(Activity.class).get().getFragmentManager();
+        FragmentManager fm = Robolectric.buildActivity(FragmentActivity.class).
+                setup().get().getSupportFragmentManager();
 
         // Launch only one instance at a time.
         assertThat(LastTryDialog.show(

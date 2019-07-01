@@ -17,19 +17,19 @@
 package com.android.settings.display;
 
 import android.annotation.Nullable;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Display;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.PreviewSeekBarPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.display.DisplayDensityUtils;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,21 +37,31 @@ import java.util.List;
 /**
  * Preference fragment used to control screen zoom.
  */
-public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment implements Indexable {
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
+public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
 
     private int mDefaultDensity;
     private int[] mValues;
 
     @Override
+    protected int getActivityLayoutResId() {
+        return R.layout.screen_zoom_activity;
+    }
+
+    @Override
+    protected int[] getPreviewSampleResIds() {
+        return getContext().getResources().getBoolean(
+                R.bool.config_enable_extra_screen_zoom_preview)
+                ? new int[]{
+                        R.layout.screen_zoom_preview_1,
+                        R.layout.screen_zoom_preview_2,
+                        R.layout.screen_zoom_preview_settings}
+                : new int[]{R.layout.screen_zoom_preview_1};
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mActivityLayoutResId = R.layout.screen_zoom_activity;
-
-        // This should be replaced once the final preview sample screen is in place.
-        mPreviewSampleResIds = new int[] {R.layout.screen_zoom_preview_1,
-                R.layout.screen_zoom_preview_2,
-                R.layout.screen_zoom_preview_settings};
 
         final DisplayDensityUtils density = new DisplayDensityUtils(getContext());
 
@@ -61,8 +71,8 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
             // connect to the window manager service. Just use the current
             // density and don't let the user change anything.
             final int densityDpi = getResources().getDisplayMetrics().densityDpi;
-            mValues = new int[] {densityDpi};
-            mEntries = new String[] {getString(DisplayDensityUtils.SUMMARY_DEFAULT)};
+            mValues = new int[]{densityDpi};
+            mEntries = new String[]{getString(DisplayDensityUtils.SUMMARY_DEFAULT)};
             mInitialIndex = 0;
             mDefaultDensity = densityDpi;
         } else {
@@ -103,11 +113,11 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DISPLAY_SCREEN_ZOOM;
+        return SettingsEnums.DISPLAY_SCREEN_ZOOM;
     }
 
     /** Index provider used to expose this fragment in search. */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,

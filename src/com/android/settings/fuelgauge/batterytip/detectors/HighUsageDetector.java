@@ -16,17 +16,19 @@
 
 package com.android.settings.fuelgauge.batterytip.detectors;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.Context;
 import android.os.BatteryStats;
+
 import androidx.annotation.VisibleForTesting;
-import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
-import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.BatteryInfo;
+import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.HighUsageDataParser;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
@@ -69,35 +71,42 @@ public class HighUsageDetector implements BatteryTipDetector {
         if (mPolicy.highUsageEnabled && mDischarging) {
             parseBatteryData();
             if (mDataParser.isDeviceHeavilyUsed() || mPolicy.testHighUsageTip) {
-                final List<BatterySipper> batterySippers = mBatteryStatsHelper.getUsageList();
-                for (int i = 0, size = batterySippers.size(); i < size; i++) {
-                    final BatterySipper batterySipper = batterySippers.get(i);
-                    if (!mBatteryUtils.shouldHideSipper(batterySipper)) {
-                        final long foregroundTimeMs = mBatteryUtils.getProcessTimeMs(
-                                BatteryUtils.StatusType.FOREGROUND, batterySipper.uidObj,
-                                BatteryStats.STATS_SINCE_CHARGED);
-                        if (foregroundTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
-                            mHighUsageAppList.add(new AppInfo.Builder()
-                                    .setUid(batterySipper.getUid())
-                                    .setPackageName(
-                                            mBatteryUtils.getPackageName(batterySipper.getUid()))
-                                    .setScreenOnTimeMs(foregroundTimeMs)
-                                    .build());
-                        }
+                final BatteryStats batteryStats = mBatteryStatsHelper.getStats();
+                final List<BatterySipper> batterySippers
+                        = new ArrayList<>(mBatteryStatsHelper.getUsageList());
+                final double totalPower = mBatteryStatsHelper.getTotalPower();
+                final int dischargeAmount = batteryStats != null
+                        ? batteryStats.getDischargeAmount(BatteryStats.STATS_SINCE_CHARGED)
+                        : 0;
+
+                Collections.sort(batterySippers,
+                        (sipper1, sipper2) -> Double.compare(sipper2.totalSmearedPowerMah,
+                                sipper1.totalSmearedPowerMah));
+                for (BatterySipper batterySipper : batterySippers) {
+                    final double percent = mBatteryUtils.calculateBatteryPercent(
+                            batterySipper.totalSmearedPowerMah, totalPower, 0, dischargeAmount);
+                    if ((percent + 0.5f < 1f) || mBatteryUtils.shouldHideSipper(batterySipper)) {
+                        // Don't show it if we should hide or usage percentage is lower than 1%
+                        continue;
                     }
+                    mHighUsageAppList.add(new AppInfo.Builder()
+                            .setUid(batterySipper.getUid())
+                            .setPackageName(
+                                    mBatteryUtils.getPackageName(batterySipper.getUid()))
+                            .build());
+                    if (mHighUsageAppList.size() >= mPolicy.highUsageAppCount) {
+                        break;
+                    }
+
                 }
 
                 // When in test mode, add an app if necessary
                 if (mPolicy.testHighUsageTip && mHighUsageAppList.isEmpty()) {
                     mHighUsageAppList.add(new AppInfo.Builder()
-                            .setPackageName("com.android.settings")
+                            .setPackageName(SETTINGS_PACKAGE_NAME)
                             .setScreenOnTimeMs(TimeUnit.HOURS.toMillis(3))
                             .build());
                 }
-
-                Collections.sort(mHighUsageAppList, Collections.reverseOrder());
-                mHighUsageAppList = mHighUsageAppList.subList(0,
-                        Math.min(mPolicy.highUsageAppCount, mHighUsageAppList.size()));
             }
         }
 

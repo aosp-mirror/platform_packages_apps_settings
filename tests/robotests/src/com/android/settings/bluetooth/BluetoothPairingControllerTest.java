@@ -17,28 +17,30 @@ package com.android.settings.bluetooth;
 
 import static android.bluetooth.BluetoothDevice.PAIRING_VARIANT_CONSENT;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
-import com.android.settings.testutils.shadow.ShadowBluetoothPan;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothPan.class, ShadowBluetoothAdapter.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothPairingControllerTest {
+    private final BluetoothClass mBluetoothClass =
+            new BluetoothClass(BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE);
     @Mock
     private BluetoothDevice mBluetoothDevice;
     private Context mContext;
@@ -51,7 +53,7 @@ public class BluetoothPairingControllerTest {
         mContext = RuntimeEnvironment.application;
         final Intent intent = new Intent();
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mBluetoothDevice);
-        mBluetoothPairingController = spy(new BluetoothPairingController(intent, mContext));
+        mBluetoothPairingController = new BluetoothPairingController(intent, mContext);
     }
 
     @Test
@@ -62,5 +64,37 @@ public class BluetoothPairingControllerTest {
         mBluetoothPairingController.onDialogPositiveClick(null);
 
         verify(mBluetoothDevice).setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
+    }
+
+    @Test
+    public void onSetContactSharingState_permissionAllowed_setPBAPAllowed() {
+        when(mBluetoothDevice.getPhonebookAccessPermission()).thenReturn(
+                BluetoothDevice.ACCESS_ALLOWED);
+        mBluetoothPairingController.setContactSharingState();
+        mBluetoothPairingController.onDialogPositiveClick(null);
+
+        verify(mBluetoothDevice).setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
+    }
+
+    @Test
+    public void onSetContactSharingState_permissionUnknown_audioVideoHandsfree_setPBAPAllowed() {
+        when(mBluetoothDevice.getPhonebookAccessPermission()).thenReturn(
+                BluetoothDevice.ACCESS_UNKNOWN);
+        when(mBluetoothDevice.getBluetoothClass()).thenReturn(mBluetoothClass);
+        mBluetoothPairingController.setContactSharingState();
+        mBluetoothPairingController.onDialogPositiveClick(null);
+
+        verify(mBluetoothDevice).setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
+    }
+
+    @Test
+    public void onSetContactSharingState_permissionRejected_setPBAPRejected() {
+        when(mBluetoothDevice.getPhonebookAccessPermission()).thenReturn(
+                BluetoothDevice.ACCESS_REJECTED);
+        when(mBluetoothDevice.getBluetoothClass()).thenReturn(mBluetoothClass);
+        mBluetoothPairingController.setContactSharingState();
+        mBluetoothPairingController.onDialogPositiveClick(null);
+
+        verify(mBluetoothDevice).setPhonebookAccessPermission(BluetoothDevice.ACCESS_REJECTED);
     }
 }

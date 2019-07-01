@@ -21,9 +21,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
+import android.util.Log;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.PermissionsSummaryHelper;
@@ -45,11 +46,8 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
         public void onPermissionSummaryResult(int standardGrantedPermissionCount,
                 int requestedPermissionCount, int additionalGrantedPermissionCount,
                 List<CharSequence> grantedGroupLabels) {
-            if (mParent.getActivity() == null) {
-                return;
-            }
             final Resources res = mContext.getResources();
-            CharSequence summary = null;
+            CharSequence summary;
 
             if (requestedPermissionCount == 0) {
                 summary = res.getString(

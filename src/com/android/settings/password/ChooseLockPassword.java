@@ -16,16 +16,20 @@
 
 package com.android.settings.password;
 
+import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
 
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
+
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.admin.PasswordMetrics;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources.Theme;
@@ -34,9 +38,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import androidx.annotation.StringRes;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
@@ -44,18 +45,22 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
 import com.android.internal.widget.TextViewInputDisabler;
@@ -67,21 +72,16 @@ import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.settings.widget.ImeAwareEditText;
-import com.android.setupwizardlib.GlifLayout;
+
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupdesign.GlifLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ChooseLockPassword extends SettingsActivity {
-    public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";
-    public static final String PASSWORD_MAX_KEY = "lockscreen.password_max";
-    public static final String PASSWORD_MIN_LETTERS_KEY = "lockscreen.password_min_letters";
-    public static final String PASSWORD_MIN_LOWERCASE_KEY = "lockscreen.password_min_lowercase";
-    public static final String PASSWORD_MIN_UPPERCASE_KEY = "lockscreen.password_min_uppercase";
-    public static final String PASSWORD_MIN_NUMERIC_KEY = "lockscreen.password_min_numeric";
-    public static final String PASSWORD_MIN_SYMBOLS_KEY = "lockscreen.password_min_symbols";
-    public static final String PASSWORD_MIN_NONLETTER_KEY = "lockscreen.password_min_nonletter";
-
     private static final String TAG = "ChooseLockPassword";
 
     @Override
@@ -113,12 +113,6 @@ public class ChooseLockPassword extends SettingsActivity {
             return this;
         }
 
-        public IntentBuilder setPasswordLengthRange(int min, int max) {
-            mIntent.putExtra(PASSWORD_MIN_KEY, min);
-            mIntent.putExtra(PASSWORD_MAX_KEY, max);
-            return this;
-        }
-
         public IntentBuilder setUserId(int userId) {
             mIntent.putExtra(Intent.EXTRA_USER_ID, userId);
             return this;
@@ -130,13 +124,23 @@ public class ChooseLockPassword extends SettingsActivity {
             return this;
         }
 
-        public IntentBuilder setPassword(String password) {
+        public IntentBuilder setPassword(byte[] password) {
             mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
             return this;
         }
 
         public IntentBuilder setForFingerprint(boolean forFingerprint) {
             mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, forFingerprint);
+            return this;
+        }
+
+        public IntentBuilder setForFace(boolean forFace) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, forFace);
+            return this;
+        }
+
+        public IntentBuilder setRequestedMinComplexity(@PasswordComplexity int level) {
+            mIntent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, level);
             return this;
         }
 
@@ -158,26 +162,31 @@ public class ChooseLockPassword extends SettingsActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean forFingerprint = getIntent()
+        final boolean forFingerprint = getIntent()
                 .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
-        CharSequence msg = getText(forFingerprint
-                ? R.string.lockpassword_choose_your_password_header_for_fingerprint
-                : R.string.lockpassword_choose_your_screen_lock_header);
+        final boolean forFace = getIntent()
+                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
+
+        CharSequence msg = getText(R.string.lockpassword_choose_your_screen_lock_header);
+        if (forFingerprint) {
+            msg = getText(R.string.lockpassword_choose_your_password_header_for_fingerprint);
+        } else if (forFace) {
+            msg = getText(R.string.lockpassword_choose_your_password_header_for_face);
+        }
+
         setTitle(msg);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
+        findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
     public static class ChooseLockPasswordFragment extends InstrumentedFragment
-            implements OnClickListener, OnEditorActionListener, TextWatcher,
-            SaveAndFinishWorker.Listener {
+            implements OnEditorActionListener, TextWatcher, SaveAndFinishWorker.Listener {
         private static final String KEY_FIRST_PIN = "first_pin";
         private static final String KEY_UI_STAGE = "ui_stage";
         private static final String KEY_CURRENT_PASSWORD = "current_password";
         private static final String FRAGMENT_TAG_SAVE_AND_FINISH = "save_and_finish_worker";
 
-        private String mCurrentPassword;
-        private String mChosenPassword;
+        private byte[] mCurrentPassword;
+        private byte[] mChosenPassword;
         private boolean mHasChallenge;
         private long mChallenge;
         private ImeAwareEditText mPasswordEntry;
@@ -191,13 +200,10 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mPasswordMinNumeric = 0;
         private int mPasswordMinNonLetter = 0;
         private int mPasswordMinLengthToFulfillAllPolicies = 0;
+        private boolean mPasswordNumSequenceAllowed = true;
+        @PasswordComplexity private int mRequestedMinComplexity = PASSWORD_COMPLEXITY_NONE;
         protected int mUserId;
-        private boolean mHideDrawer = false;
         private byte[] mPasswordHistoryHashFactor;
-        /**
-         * Password requirements that we need to verify.
-         */
-        private int[] mPasswordRequirements;
 
         private LockPatternUtils mLockPatternUtils;
         private SaveAndFinishWorker mSaveAndFinishWorker;
@@ -207,13 +213,13 @@ public class ChooseLockPassword extends SettingsActivity {
         private PasswordRequirementAdapter mPasswordRequirementAdapter;
         private GlifLayout mLayout;
         protected boolean mForFingerprint;
+        protected boolean mForFace;
 
-        private String mFirstPin;
+        private byte[] mFirstPin;
         private RecyclerView mPasswordRestrictionView;
         protected boolean mIsAlphaMode;
-        protected Button mSkipButton;
-        private Button mClearButton;
-        private Button mNextButton;
+        protected FooterButton mSkipOrClearButton;
+        private FooterButton mNextButton;
         private TextView mMessage;
 
         private TextChangedHandler mTextChangedHandler;
@@ -228,7 +234,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final int MIN_NUMBER_IN_PASSWORD = 4;
         private static final int MIN_NON_LETTER_IN_PASSWORD = 5;
 
-        // Error code returned from {@link #validatePassword(String)}.
+        // Error code returned from {@link #validatePassword(byte[])}.
         static final int NO_ERROR = 0;
         static final int CONTAIN_INVALID_CHARACTERS = 1 << 0;
         static final int TOO_SHORT = 1 << 1;
@@ -249,19 +255,23 @@ public class ChooseLockPassword extends SettingsActivity {
         protected enum Stage {
 
             Introduction(
-                    R.string.lockpassword_choose_your_screen_lock_header,
+                    R.string.lockpassword_choose_your_screen_lock_header, // password
                     R.string.lockpassword_choose_your_password_header_for_fingerprint,
-                    R.string.lockpassword_choose_your_screen_lock_header,
+                    R.string.lockpassword_choose_your_password_header_for_face,
+                    R.string.lockpassword_choose_your_screen_lock_header, // pin
                     R.string.lockpassword_choose_your_pin_header_for_fingerprint,
-                    R.string.lockpassword_choose_your_password_message,
-                    R.string.lock_settings_picker_fingerprint_added_security_message,
+                    R.string.lockpassword_choose_your_pin_header_for_face,
+                    R.string.lockpassword_choose_your_password_message, // added security message
+                    R.string.lock_settings_picker_biometrics_added_security_message,
                     R.string.lockpassword_choose_your_pin_message,
-                    R.string.lock_settings_picker_fingerprint_added_security_message,
+                    R.string.lock_settings_picker_biometrics_added_security_message,
                     R.string.next_label),
 
             NeedToConfirm(
                     R.string.lockpassword_confirm_your_password_header,
                     R.string.lockpassword_confirm_your_password_header,
+                    R.string.lockpassword_confirm_your_password_header,
+                    R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     0,
@@ -273,6 +283,8 @@ public class ChooseLockPassword extends SettingsActivity {
             ConfirmWrong(
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_passwords_dont_match,
+                    R.string.lockpassword_confirm_passwords_dont_match,
+                    R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     0,
@@ -281,45 +293,71 @@ public class ChooseLockPassword extends SettingsActivity {
                     0,
                     R.string.lockpassword_confirm_label);
 
-            Stage(int hintInAlpha, int hintInAlphaForFingerprint,
-                    int hintInNumeric, int hintInNumericForFingerprint,
-                    int messageInAlpha, int messageInAlphaForFingerprint,
-                    int messageInNumeric, int messageInNumericForFingerprint,
+            Stage(int hintInAlpha, int hintInAlphaForFingerprint, int hintInAlphaForFace,
+                    int hintInNumeric, int hintInNumericForFingerprint, int hintInNumericForFace,
+                    int messageInAlpha, int messageInAlphaForBiometrics,
+                    int messageInNumeric, int messageInNumericForBiometrics,
                     int nextButtonText) {
                 this.alphaHint = hintInAlpha;
                 this.alphaHintForFingerprint = hintInAlphaForFingerprint;
+                this.alphaHintForFace = hintInAlphaForFace;
+
                 this.numericHint = hintInNumeric;
                 this.numericHintForFingerprint = hintInNumericForFingerprint;
+                this.numericHintForFace = hintInNumericForFace;
+
                 this.alphaMessage = messageInAlpha;
-                this.alphaMessageForFingerprint = messageInAlphaForFingerprint;
+                this.alphaMessageForBiometrics = messageInAlphaForBiometrics;
                 this.numericMessage = messageInNumeric;
-                this.numericMessageForFingerprint = messageInNumericForFingerprint;
+                this.numericMessageForBiometrics = messageInNumericForBiometrics;
                 this.buttonText = nextButtonText;
             }
 
+            public static final int TYPE_NONE = 0;
+            public static final int TYPE_FINGERPRINT = 1;
+            public static final int TYPE_FACE = 2;
+
+            // Password
             public final int alphaHint;
             public final int alphaHintForFingerprint;
+            public final int alphaHintForFace;
+
+            // PIN
             public final int numericHint;
             public final int numericHintForFingerprint;
+            public final int numericHintForFace;
+
             public final int alphaMessage;
-            public final int alphaMessageForFingerprint;
+            public final int alphaMessageForBiometrics;
             public final int numericMessage;
-            public final int numericMessageForFingerprint;
+            public final int numericMessageForBiometrics;
             public final int buttonText;
 
-            public @StringRes int getHint(boolean isAlpha, boolean isFingerprint) {
+            public @StringRes int getHint(boolean isAlpha, int type) {
                 if (isAlpha) {
-                    return isFingerprint ? alphaHintForFingerprint : alphaHint;
+                    if (type == TYPE_FINGERPRINT) {
+                        return alphaHintForFingerprint;
+                    } else if (type == TYPE_FACE) {
+                        return alphaHintForFace;
+                    } else {
+                        return alphaHint;
+                    }
                 } else {
-                    return isFingerprint ? numericHintForFingerprint : numericHint;
+                    if (type == TYPE_FINGERPRINT) {
+                        return numericHintForFingerprint;
+                    } else if (type == TYPE_FACE) {
+                        return numericHintForFace;
+                    } else {
+                        return numericHint;
+                    }
                 }
             }
 
-            public @StringRes int getMessage(boolean isAlpha, boolean isFingerprint) {
+            public @StringRes int getMessage(boolean isAlpha, int type) {
                 if (isAlpha) {
-                    return isFingerprint ? alphaMessageForFingerprint : alphaMessage;
+                    return type != TYPE_NONE ? alphaMessageForBiometrics : alphaMessage;
                 } else {
-                    return isFingerprint ? numericMessageForFingerprint : numericMessage;
+                    return type != TYPE_NONE ? numericMessageForBiometrics : numericMessage;
                 }
             }
         }
@@ -341,21 +379,28 @@ public class ChooseLockPassword extends SettingsActivity {
             mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
             mForFingerprint = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
-            processPasswordRequirements(intent);
+            mForFace = intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
+            mRequestedMinComplexity = intent.getIntExtra(
+                    EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
+            mRequestedQuality = Math.max(
+                    intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mRequestedQuality),
+                    mLockPatternUtils.getRequestedPasswordQuality(mUserId));
+
+            loadDpmPasswordRequirements();
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
-            mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
 
             if (intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
                 SaveAndFinishWorker w = new SaveAndFinishWorker();
                 final boolean required = getActivity().getIntent().getBooleanExtra(
                         EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
-                String current = intent.getStringExtra(
+                byte[] currentBytes = intent.getByteArrayExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+
                 w.setBlocking(true);
                 w.setListener(this);
-                w.start(mChooseLockSettingsHelper.utils(), required,
-                        false, 0, current, current, mRequestedQuality, mUserId);
+                w.start(mChooseLockSettingsHelper.utils(), required, false, 0,
+                        currentBytes, currentBytes, mRequestedQuality, mUserId);
             }
             mTextChangedHandler = new TextChangedHandler();
         }
@@ -377,17 +422,31 @@ public class ChooseLockPassword extends SettingsActivity {
             ViewGroup container = view.findViewById(R.id.password_container);
             container.setOpticalInsets(Insets.NONE);
 
-            mSkipButton = (Button) view.findViewById(R.id.skip_button);
-            mSkipButton.setOnClickListener(this);
-            mNextButton = (Button) view.findViewById(R.id.next_button);
-            mNextButton.setOnClickListener(this);
-            mClearButton = view.findViewById(R.id.clear_button);
-            mClearButton.setOnClickListener(this);
+            final FooterBarMixin mixin = mLayout.getMixin(FooterBarMixin.class);
+            mixin.setSecondaryButton(
+                    new FooterButton.Builder(getActivity())
+                            .setText(R.string.lockpassword_clear_label)
+                            .setListener(this::onSkipOrClearButtonClick)
+                            .setButtonType(FooterButton.ButtonType.SKIP)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+            mixin.setPrimaryButton(
+                    new FooterButton.Builder(getActivity())
+                            .setText(R.string.next_label)
+                            .setListener(this::onNextButtonClick)
+                            .setButtonType(FooterButton.ButtonType.NEXT)
+                            .setTheme(R.style.SudGlifButton_Primary)
+                            .build()
+            );
+            mSkipOrClearButton = mixin.getSecondaryButton();
+            mNextButton = mixin.getPrimaryButton();
 
-
-            mMessage = view.findViewById(R.id.message);
+            mMessage = view.findViewById(R.id.sud_layout_description);
             if (mForFingerprint) {
                 mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
+            } else if (mForFace) {
+                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_face_header));
             }
 
             mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mRequestedQuality
@@ -416,7 +475,8 @@ public class ChooseLockPassword extends SettingsActivity {
             Intent intent = getActivity().getIntent();
             final boolean confirmCredentials = intent.getBooleanExtra(
                     ChooseLockGeneric.CONFIRM_CREDENTIALS, true);
-            mCurrentPassword = intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            mCurrentPassword = intent.getByteArrayExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             mHasChallenge = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
             mChallenge = intent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
@@ -428,8 +488,9 @@ public class ChooseLockPassword extends SettingsActivity {
                             mUserId);
                 }
             } else {
+
                 // restore from previous state
-                mFirstPin = savedInstanceState.getString(KEY_FIRST_PIN);
+                mFirstPin = savedInstanceState.getByteArray(KEY_FIRST_PIN);
                 final String state = savedInstanceState.getString(KEY_UI_STAGE);
                 if (state != null) {
                     mUiStage = Stage.valueOf(state);
@@ -437,7 +498,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 }
 
                 if (mCurrentPassword == null) {
-                    mCurrentPassword = savedInstanceState.getString(KEY_CURRENT_PASSWORD);
+                    mCurrentPassword = savedInstanceState.getByteArray(KEY_CURRENT_PASSWORD);
                 }
 
                 // Re-attach to the exiting worker if there is one.
@@ -447,61 +508,20 @@ public class ChooseLockPassword extends SettingsActivity {
 
             if (activity instanceof SettingsActivity) {
                 final SettingsActivity sa = (SettingsActivity) activity;
-                int title = Stage.Introduction.getHint(mIsAlphaMode, mForFingerprint);
+                int title = Stage.Introduction.getHint(mIsAlphaMode, getStageType());
                 sa.setTitle(title);
                 mLayout.setHeaderText(title);
             }
         }
 
-        private void setupPasswordRequirementsView(View view) {
-            // Construct passwordRequirements and requirementDescriptions.
-            List<Integer> passwordRequirements = new ArrayList<>();
-            List<String> requirementDescriptions = new ArrayList<>();
-            if (mPasswordMinUpperCase > 0) {
-                passwordRequirements.add(MIN_UPPER_LETTERS_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_uppercase, mPasswordMinUpperCase,
-                        mPasswordMinUpperCase));
-            }
-            if (mPasswordMinLowerCase > 0) {
-                passwordRequirements.add(MIN_LOWER_LETTERS_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_lowercase, mPasswordMinLowerCase,
-                        mPasswordMinLowerCase));
-            }
-            if (mPasswordMinLetters > 0) {
-                if (mPasswordMinLetters > mPasswordMinUpperCase + mPasswordMinLowerCase) {
-                    passwordRequirements.add(MIN_LETTER_IN_PASSWORD);
-                    requirementDescriptions.add(getResources().getQuantityString(
-                            R.plurals.lockpassword_password_requires_letters, mPasswordMinLetters,
-                            mPasswordMinLetters));
-                }
-            }
-            if (mPasswordMinNumeric > 0) {
-                passwordRequirements.add(MIN_NUMBER_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_numeric, mPasswordMinNumeric,
-                        mPasswordMinNumeric));
-            }
-            if (mPasswordMinSymbols > 0) {
-                passwordRequirements.add(MIN_SYMBOLS_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_symbols, mPasswordMinSymbols,
-                        mPasswordMinSymbols));
-            }
-            if (mPasswordMinNonLetter > 0) {
-                if (mPasswordMinNonLetter > mPasswordMinNumeric + mPasswordMinSymbols) {
-                    passwordRequirements.add(MIN_NON_LETTER_IN_PASSWORD);
-                    requirementDescriptions.add(getResources().getQuantityString(
-                            R.plurals.lockpassword_password_requires_nonletter, mPasswordMinNonLetter,
+        protected int getStageType() {
+            return mForFingerprint ? Stage.TYPE_FINGERPRINT :
+                    mForFace ? Stage.TYPE_FACE :
+                            Stage.TYPE_NONE;
+        }
 
-                            mPasswordMinNonLetter));
-                }
-            }
-            // Convert list to array.
-            mPasswordRequirements = passwordRequirements.stream().mapToInt(i -> i).toArray();
-            mPasswordRestrictionView =
-                    (RecyclerView) view.findViewById(R.id.password_requirements_view);
+        private void setupPasswordRequirementsView(View view) {
+            mPasswordRestrictionView = view.findViewById(R.id.password_requirements_view);
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mPasswordRequirementAdapter = new PasswordRequirementAdapter();
             mPasswordRestrictionView.setAdapter(mPasswordRequirementAdapter);
@@ -509,7 +529,7 @@ public class ChooseLockPassword extends SettingsActivity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.CHOOSE_LOCK_PASSWORD;
+            return SettingsEnums.CHOOSE_LOCK_PASSWORD;
         }
 
         @Override
@@ -536,8 +556,8 @@ public class ChooseLockPassword extends SettingsActivity {
         public void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
             outState.putString(KEY_UI_STAGE, mUiStage.name());
-            outState.putString(KEY_FIRST_PIN, mFirstPin);
-            outState.putString(KEY_CURRENT_PASSWORD, mCurrentPassword);
+            outState.putByteArray(KEY_FIRST_PIN, mFirstPin);
+            outState.putByteArray(KEY_CURRENT_PASSWORD, mCurrentPassword);
         }
 
         @Override
@@ -550,7 +570,7 @@ public class ChooseLockPassword extends SettingsActivity {
                         getActivity().setResult(RESULT_FINISHED);
                         getActivity().finish();
                     } else {
-                        mCurrentPassword = data.getStringExtra(
+                        mCurrentPassword = data.getByteArrayExtra(
                                 ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                     }
                     break;
@@ -575,38 +595,23 @@ public class ChooseLockPassword extends SettingsActivity {
 
         /**
          * Read the requirements from {@link DevicePolicyManager} and intent and aggregate them.
-         *
-         * @param intent the incoming intent
          */
-        private void processPasswordRequirements(Intent intent) {
+        private void loadDpmPasswordRequirements() {
             final int dpmPasswordQuality = mLockPatternUtils.getRequestedPasswordQuality(mUserId);
-            mRequestedQuality = Math.max(intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
-                    mRequestedQuality), dpmPasswordQuality);
-            mPasswordMinLength = Math.max(Math.max(
-                    LockPatternUtils.MIN_LOCK_PASSWORD_SIZE,
-                    intent.getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength)),
+            if (dpmPasswordQuality == PASSWORD_QUALITY_NUMERIC_COMPLEX) {
+                mPasswordNumSequenceAllowed = false;
+            }
+            mPasswordMinLength = Math.max(LockPatternUtils.MIN_LOCK_PASSWORD_SIZE,
                     mLockPatternUtils.getRequestedMinimumPasswordLength(mUserId));
-            mPasswordMaxLength = intent.getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
-            mPasswordMinLetters = Math.max(intent.getIntExtra(PASSWORD_MIN_LETTERS_KEY,
-                    mPasswordMinLetters), mLockPatternUtils.getRequestedPasswordMinimumLetters(
-                    mUserId));
-            mPasswordMinUpperCase = Math.max(intent.getIntExtra(PASSWORD_MIN_UPPERCASE_KEY,
-                    mPasswordMinUpperCase), mLockPatternUtils.getRequestedPasswordMinimumUpperCase(
-                    mUserId));
-            mPasswordMinLowerCase = Math.max(intent.getIntExtra(PASSWORD_MIN_LOWERCASE_KEY,
-                    mPasswordMinLowerCase), mLockPatternUtils.getRequestedPasswordMinimumLowerCase(
-                    mUserId));
-            mPasswordMinNumeric = Math.max(intent.getIntExtra(PASSWORD_MIN_NUMERIC_KEY,
-                    mPasswordMinNumeric), mLockPatternUtils.getRequestedPasswordMinimumNumeric(
-                    mUserId));
-            mPasswordMinSymbols = Math.max(intent.getIntExtra(PASSWORD_MIN_SYMBOLS_KEY,
-                    mPasswordMinSymbols), mLockPatternUtils.getRequestedPasswordMinimumSymbols(
-                    mUserId));
-            mPasswordMinNonLetter = Math.max(intent.getIntExtra(PASSWORD_MIN_NONLETTER_KEY,
-                    mPasswordMinNonLetter), mLockPatternUtils.getRequestedPasswordMinimumNonLetter(
-                    mUserId));
+            mPasswordMaxLength = mLockPatternUtils.getMaximumPasswordLength(mRequestedQuality);
+            mPasswordMinLetters = mLockPatternUtils.getRequestedPasswordMinimumLetters(mUserId);
+            mPasswordMinUpperCase = mLockPatternUtils.getRequestedPasswordMinimumUpperCase(mUserId);
+            mPasswordMinLowerCase = mLockPatternUtils.getRequestedPasswordMinimumLowerCase(mUserId);
+            mPasswordMinNumeric = mLockPatternUtils.getRequestedPasswordMinimumNumeric(mUserId);
+            mPasswordMinSymbols = mLockPatternUtils.getRequestedPasswordMinimumSymbols(mUserId);
+            mPasswordMinNonLetter = mLockPatternUtils.getRequestedPasswordMinimumNonLetter(mUserId);
 
-            // Modify the value based on dpm policy.
+            // Modify the value based on dpm policy
             switch (dpmPasswordQuality) {
                 case PASSWORD_QUALITY_ALPHABETIC:
                     if (mPasswordMinLetters == 0) {
@@ -632,7 +637,75 @@ public class ChooseLockPassword extends SettingsActivity {
                     mPasswordMinSymbols = 0;
                     mPasswordMinNonLetter = 0;
             }
+
             mPasswordMinLengthToFulfillAllPolicies = getMinLengthToFulfillAllPolicies();
+        }
+
+        /**
+         * Merges the dpm requirements and the min complexity requirements.
+         *
+         * <p>Since there are more than one set of metrics to meet the min complexity requirement,
+         * and we are not hard-coding any one of them to be the requirements the user must fulfil,
+         * we are taking what the user has already entered into account when compiling the list of
+         * requirements from min complexity. Then we merge this list with the DPM requirements, and
+         * present the merged set as validation results to the user on the UI.
+         *
+         * <p>For example, suppose min complexity requires either ALPHABETIC(8+), or
+         * ALPHANUMERIC(6+). If the user has entered "a", the length requirement displayed on the UI
+         * would be 8. Then the user appends "1" to make it "a1". We now know the user is entering
+         * an alphanumeric password so we would update the min complexity required min length to 6.
+         * This might result in a little confusion for the user but the UI does not support showing
+         * multiple sets of requirements / validation results as options to users, this is the best
+         * we can do now.
+         */
+        private void mergeMinComplexityAndDpmRequirements(int userEnteredPasswordQuality) {
+            if (mRequestedMinComplexity == PASSWORD_COMPLEXITY_NONE) {
+                // dpm requirements are dominant if min complexity is none
+                return;
+            }
+
+            // reset dpm requirements
+            loadDpmPasswordRequirements();
+
+            PasswordMetrics minMetrics = PasswordMetrics.getMinimumMetrics(
+                    mRequestedMinComplexity, userEnteredPasswordQuality, mRequestedQuality,
+                    requiresNumeric(), requiresLettersOrSymbols());
+            mPasswordNumSequenceAllowed = mPasswordNumSequenceAllowed
+                    && minMetrics.quality != PASSWORD_QUALITY_NUMERIC_COMPLEX;
+            mPasswordMinLength = Math.max(mPasswordMinLength, minMetrics.length);
+            mPasswordMinLetters = Math.max(mPasswordMinLetters, minMetrics.letters);
+            mPasswordMinUpperCase = Math.max(mPasswordMinUpperCase, minMetrics.upperCase);
+            mPasswordMinLowerCase = Math.max(mPasswordMinLowerCase, minMetrics.lowerCase);
+            mPasswordMinNumeric = Math.max(mPasswordMinNumeric, minMetrics.numeric);
+            mPasswordMinSymbols = Math.max(mPasswordMinSymbols, minMetrics.symbols);
+            mPasswordMinNonLetter = Math.max(mPasswordMinNonLetter, minMetrics.nonLetter);
+
+            if (minMetrics.quality == PASSWORD_QUALITY_ALPHABETIC) {
+                if (!requiresLettersOrSymbols()) {
+                    mPasswordMinLetters = 1;
+                }
+            }
+            if (minMetrics.quality == PASSWORD_QUALITY_ALPHANUMERIC) {
+                if (!requiresLettersOrSymbols()) {
+                    mPasswordMinLetters = 1;
+                }
+                if (!requiresNumeric()) {
+                    mPasswordMinNumeric = 1;
+                }
+            }
+
+            mPasswordMinLengthToFulfillAllPolicies = getMinLengthToFulfillAllPolicies();
+        }
+
+        private boolean requiresLettersOrSymbols() {
+            // This is the condition for the password to be considered ALPHABETIC according to
+            // PasswordMetrics.computeForPassword()
+            return mPasswordMinLetters + mPasswordMinUpperCase
+                    + mPasswordMinLowerCase + mPasswordMinSymbols + mPasswordMinNonLetter > 0;
+        }
+
+        private boolean requiresNumeric() {
+            return mPasswordMinNumeric > 0;
         }
 
         /**
@@ -641,27 +714,39 @@ public class ChooseLockPassword extends SettingsActivity {
          * @param password the raw password the user typed in
          * @return the validation result.
          */
-        private int validatePassword(String password) {
+        @VisibleForTesting
+        int validatePassword(byte[] password) {
             int errorCode = NO_ERROR;
             final PasswordMetrics metrics = PasswordMetrics.computeForPassword(password);
+            mergeMinComplexityAndDpmRequirements(metrics.quality);
 
-
-            if (password.length() < mPasswordMinLength) {
+            if (password == null || password.length < mPasswordMinLength) {
                 if (mPasswordMinLength > mPasswordMinLengthToFulfillAllPolicies) {
                     errorCode |= TOO_SHORT;
                 }
-            } else if (password.length() > mPasswordMaxLength) {
+            } else if (password.length > mPasswordMaxLength) {
                 errorCode |= TOO_LONG;
             } else {
                 // The length requirements are fulfilled.
-                final int dpmQuality = mLockPatternUtils.getRequestedPasswordQuality(mUserId);
-                if (dpmQuality == PASSWORD_QUALITY_NUMERIC_COMPLEX &&
-                        metrics.numeric == password.length()) {
+                if (!mPasswordNumSequenceAllowed
+                        && !requiresLettersOrSymbols()
+                        && metrics.numeric == password.length) {
                     // Check for repeated characters or sequences (e.g. '1234', '0000', '2468')
-                    // if DevicePolicyManager requires a complex numeric password. There can be
-                    // two cases in the UI: 1. User chooses to enroll a PIN, 2. User chooses to
-                    // enroll a password but enters a numeric-only pin. We should carry out the
-                    // sequence check in both cases.
+                    // if DevicePolicyManager or min password complexity requires a complex numeric
+                    // password. There can be two cases in the UI: 1. User chooses to enroll a
+                    // PIN, 2. User chooses to enroll a password but enters a numeric-only pin. We
+                    // should carry out the sequence check in both cases.
+                    //
+                    // Conditions for the !requiresLettersOrSymbols() to be necessary:
+                    // - DPM requires NUMERIC_COMPLEX
+                    // - min complexity not NONE, user picks PASSWORD type so ALPHABETIC or
+                    // ALPHANUMERIC is required
+                    // Imagine user has entered "12345678", if we don't skip the sequence check, the
+                    // validation result would show both "requires a letter" and "sequence not
+                    // allowed", while the only requirement the user needs to know is "requires a
+                    // letter" because once the user has fulfilled the alphabetic requirement, the
+                    // password would not be containing only digits so this check would not be
+                    // performed anyway.
                     final int sequence = PasswordMetrics.maxLengthSequence(password);
                     if (sequence > PasswordMetrics.MAX_ALLOWED_SEQUENCE) {
                         errorCode |= CONTAIN_SEQUENTIAL_DIGITS;
@@ -675,8 +760,8 @@ public class ChooseLockPassword extends SettingsActivity {
             }
 
             // Allow non-control Latin-1 characters only.
-            for (int i = 0; i < password.length(); i++) {
-                char c = password.charAt(i);
+            for (int i = 0; i < password.length; i++) {
+                char c = (char) password[i];
                 if (c < 32 || c > 127) {
                     errorCode |= CONTAIN_INVALID_CHARACTERS;
                     break;
@@ -692,43 +777,24 @@ public class ChooseLockPassword extends SettingsActivity {
                 }
             }
 
-            // Check the requirements one by one.
-            for (int i = 0; i < mPasswordRequirements.length; i++) {
-                int passwordRestriction = mPasswordRequirements[i];
-                switch (passwordRestriction) {
-                    case MIN_LETTER_IN_PASSWORD:
-                        if (metrics.letters < mPasswordMinLetters) {
-                            errorCode |= NOT_ENOUGH_LETTER;
-                        }
-                        break;
-                    case MIN_UPPER_LETTERS_IN_PASSWORD:
-                        if (metrics.upperCase < mPasswordMinUpperCase) {
-                            errorCode |= NOT_ENOUGH_UPPER_CASE;
-                        }
-                        break;
-                    case MIN_LOWER_LETTERS_IN_PASSWORD:
-                        if (metrics.lowerCase < mPasswordMinLowerCase) {
-                            errorCode |= NOT_ENOUGH_LOWER_CASE;
-                        }
-                        break;
-                    case MIN_SYMBOLS_IN_PASSWORD:
-                        if (metrics.symbols < mPasswordMinSymbols) {
-                            errorCode |= NOT_ENOUGH_SYMBOLS;
-                        }
-                        break;
-                    case MIN_NUMBER_IN_PASSWORD:
-                        if (metrics.numeric < mPasswordMinNumeric) {
-                            errorCode |= NOT_ENOUGH_DIGITS;
-                        }
-                        break;
-                    case MIN_NON_LETTER_IN_PASSWORD:
-                        if (metrics.nonLetter < mPasswordMinNonLetter) {
-                            errorCode |= NOT_ENOUGH_NON_LETTER;
-                        }
-                        break;
-                }
+            if (metrics.letters < mPasswordMinLetters) {
+                errorCode |= NOT_ENOUGH_LETTER;
             }
-
+            if (metrics.upperCase < mPasswordMinUpperCase) {
+                errorCode |= NOT_ENOUGH_UPPER_CASE;
+            }
+            if (metrics.lowerCase < mPasswordMinLowerCase) {
+                errorCode |= NOT_ENOUGH_LOWER_CASE;
+            }
+            if (metrics.symbols < mPasswordMinSymbols) {
+                errorCode |= NOT_ENOUGH_SYMBOLS;
+            }
+            if (metrics.numeric < mPasswordMinNumeric) {
+                errorCode |= NOT_ENOUGH_DIGITS;
+            }
+            if (metrics.nonLetter < mPasswordMinNonLetter) {
+                errorCode |= NOT_ENOUGH_NON_LETTER;
+            }
             return errorCode;
         }
 
@@ -746,8 +812,9 @@ public class ChooseLockPassword extends SettingsActivity {
 
         public void handleNext() {
             if (mSaveAndFinishWorker != null) return;
-            mChosenPassword = mPasswordEntry.getText().toString();
-            if (TextUtils.isEmpty(mChosenPassword)) {
+            // TODO(b/120484642): This is a point of entry for passwords from the UI
+            mChosenPassword = LockPatternUtils.charSequenceToByteArray(mPasswordEntry.getText());
+            if (mChosenPassword == null || mChosenPassword.length == 0) {
                 return;
             }
             if (mUiStage == Stage.Introduction) {
@@ -755,9 +822,11 @@ public class ChooseLockPassword extends SettingsActivity {
                     mFirstPin = mChosenPassword;
                     mPasswordEntry.setText("");
                     updateStage(Stage.NeedToConfirm);
+                } else {
+                    Arrays.fill(mChosenPassword, (byte) 0);
                 }
             } else if (mUiStage == Stage.NeedToConfirm) {
-                if (mFirstPin.equals(mChosenPassword)) {
+                if (Arrays.equals(mFirstPin, mChosenPassword)) {
                     startSaveAndFinish();
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();
@@ -765,6 +834,7 @@ public class ChooseLockPassword extends SettingsActivity {
                         Selection.setSelection((Spannable) tmp, 0, tmp.length());
                     }
                     updateStage(Stage.ConfirmWrong);
+                    Arrays.fill(mChosenPassword, (byte) 0);
                 }
             }
         }
@@ -774,19 +844,15 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         protected void setNextText(int text) {
-            mNextButton.setText(text);
+            mNextButton.setText(getActivity(), text);
         }
 
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.next_button:
-                    handleNext();
-                    break;
+        protected void onSkipOrClearButtonClick(View view) {
+            mPasswordEntry.setText("");
+        }
 
-                case R.id.clear_button:
-                    mPasswordEntry.setText("");
-                    break;
-            }
+        protected void onNextButtonClick(View view) {
+            handleNext();
         }
 
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -843,14 +909,20 @@ public class ChooseLockPassword extends SettingsActivity {
                         mPasswordMinNonLetter));
             }
             if ((errorCode & TOO_SHORT) > 0) {
-                messages.add(getString(mIsAlphaMode ?
-                        R.string.lockpassword_password_too_short
-                        : R.string.lockpassword_pin_too_short, mPasswordMinLength));
+                messages.add(getResources().getQuantityString(
+                        mIsAlphaMode
+                                ? R.plurals.lockpassword_password_too_short
+                                : R.plurals.lockpassword_pin_too_short,
+                        mPasswordMinLength,
+                        mPasswordMinLength));
             }
             if ((errorCode & TOO_LONG) > 0) {
-                messages.add(getString(mIsAlphaMode ?
-                        R.string.lockpassword_password_too_long
-                        : R.string.lockpassword_pin_too_long, mPasswordMaxLength + 1));
+                messages.add(getResources().getQuantityString(
+                        mIsAlphaMode
+                                ? R.plurals.lockpassword_password_too_long
+                                : R.plurals.lockpassword_pin_too_long,
+                        mPasswordMaxLength + 1,
+                        mPasswordMaxLength + 1));
             }
             if ((errorCode & CONTAIN_SEQUENTIAL_DIGITS) > 0) {
                 messages.add(getString(R.string.lockpassword_pin_no_sequential_digits));
@@ -875,8 +947,8 @@ public class ChooseLockPassword extends SettingsActivity {
          */
         protected void updateUi() {
             final boolean canInput = mSaveAndFinishWorker == null;
-            String password = mPasswordEntry.getText().toString();
-            final int length = password.length();
+            byte[] password = LockPatternUtils.charSequenceToByteArray(mPasswordEntry.getText());
+            final int length = password.length;
             if (mUiStage == Stage.Introduction) {
                 mPasswordRestrictionView.setVisibility(View.VISIBLE);
                 final int errorCode = validatePassword(password);
@@ -888,11 +960,11 @@ public class ChooseLockPassword extends SettingsActivity {
             } else {
                 // Hide password requirement view when we are just asking user to confirm the pw.
                 mPasswordRestrictionView.setVisibility(View.GONE);
-                setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, mForFingerprint)));
+                setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, getStageType())));
                 setNextEnabled(canInput && length >= mPasswordMinLength);
-                mClearButton.setEnabled(canInput && length > 0);
+                mSkipOrClearButton.setVisibility(toVisibility(canInput && length > 0));
             }
-            int message = mUiStage.getMessage(mIsAlphaMode, mForFingerprint);
+            int message = mUiStage.getMessage(mIsAlphaMode, getStageType());
             if (message != 0) {
                 mMessage.setVisibility(View.VISIBLE);
                 mMessage.setText(message);
@@ -900,13 +972,12 @@ public class ChooseLockPassword extends SettingsActivity {
                 mMessage.setVisibility(View.INVISIBLE);
             }
 
-            mClearButton.setVisibility(toVisibility(mUiStage != Stage.Introduction));
-
             setNextText(mUiStage.buttonText);
             mPasswordEntryInputDisabler.setInputEnabled(canInput);
+            Arrays.fill(password, (byte) 0);
         }
 
-        private int toVisibility(boolean visibleOrGone) {
+        protected int toVisibility(boolean visibleOrGone) {
             return visibleOrGone ? View.VISIBLE : View.GONE;
         }
 
@@ -962,10 +1033,21 @@ public class ChooseLockPassword extends SettingsActivity {
         public void onChosenLockSaveFinished(boolean wasSecureBefore, Intent resultData) {
             getActivity().setResult(RESULT_FINISHED, resultData);
 
+            if (mChosenPassword != null) {
+                Arrays.fill(mChosenPassword, (byte) 0);
+            }
+            if (mCurrentPassword != null) {
+                Arrays.fill(mCurrentPassword, (byte) 0);
+            }
+            if (mFirstPin != null) {
+                Arrays.fill(mFirstPin, (byte) 0);
+            }
+
+            mPasswordEntry.setText("");
+
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
                 if (intent != null) {
-                    intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
                     startActivity(intent);
                 }
             }
@@ -999,13 +1081,13 @@ public class ChooseLockPassword extends SettingsActivity {
 
     public static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
 
-        private String mChosenPassword;
-        private String mCurrentPassword;
+        private byte[] mChosenPassword;
+        private byte[] mCurrentPassword;
         private int mRequestedQuality;
 
         public void start(LockPatternUtils utils, boolean required,
                 boolean hasChallenge, long challenge,
-                String chosenPassword, String currentPassword, int requestedQuality, int userId) {
+                byte[] chosenPassword, byte[] currentPassword, int requestedQuality, int userId) {
             prepare(utils, required, hasChallenge, challenge, userId);
 
             mChosenPassword = chosenPassword;
@@ -1017,12 +1099,11 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         @Override
-        protected Intent saveAndVerifyInBackground() {
+        protected Pair<Boolean, Intent> saveAndVerifyInBackground() {
+            final boolean success = mUtils.saveLockPassword(
+                    mChosenPassword, mCurrentPassword, mRequestedQuality, mUserId);
             Intent result = null;
-            mUtils.saveLockPassword(mChosenPassword, mCurrentPassword, mRequestedQuality,
-                    mUserId);
-
-            if (mHasChallenge) {
+            if (success && mHasChallenge) {
                 byte[] token;
                 try {
                     token = mUtils.verifyPassword(mChosenPassword, mChallenge, mUserId);
@@ -1037,8 +1118,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 result = new Intent();
                 result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
             }
-
-            return result;
+            return Pair.create(success, result);
         }
     }
 }

@@ -19,9 +19,12 @@ package com.android.settings.core;
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 import static android.content.pm.PackageManager.GET_META_DATA;
 import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
+
 import static com.android.settings.SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS;
 import static com.google.common.truth.Truth.assertThat;
+
 import static junit.framework.Assert.fail;
+
 import static org.junit.Assert.assertFalse;
 
 import android.content.ComponentName;
@@ -33,11 +36,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.platform.test.annotations.Presubmit;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.SmallTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.SmallTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.core.gateway.SettingsGateway;
 

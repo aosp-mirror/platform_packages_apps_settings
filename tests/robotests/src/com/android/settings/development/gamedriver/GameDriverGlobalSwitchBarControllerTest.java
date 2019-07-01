@@ -79,6 +79,24 @@ public class GameDriverGlobalSwitchBarControllerTest {
     }
 
     @Test
+    public void constructor_developmentSettingsEnabled_shouldEnableSwitchBar() {
+        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+        mController = new GameDriverGlobalSwitchBarController(
+                mContext, new SwitchBarController(mSwitchBar));
+
+        verify(mSwitchBar).setEnabled(true);
+    }
+
+    @Test
+    public void constructor_developmentSettingsDisabled_shouldDisableSwitchBar() {
+        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+        mController = new GameDriverGlobalSwitchBarController(
+                mContext, new SwitchBarController(mSwitchBar));
+
+        verify(mSwitchBar).setEnabled(false);
+    }
+
+    @Test
     public void onStart_shouldStartListeningAndRegister() {
         mController = new GameDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));

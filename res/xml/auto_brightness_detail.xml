@@ -23,15 +23,18 @@
 
     <com.android.settings.widget.VideoPreference
         android:key="auto_brightness_video"
+        android:title="@string/summary_placeholder"
         settings:animation="@raw/aab_brightness"
-        settings:preview="@drawable/aab_brightness"/>
+        settings:preview="@drawable/aab_brightness"
+        settings:controller="com.android.settings.widget.VideoPreferenceController"/>
 
     <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="auto_brightness"
         android:title="@string/auto_brightness_title"
+        android:summary="@string/auto_brightness_summary"
         settings:keywords="@string/keywords_display_auto_brightness"
-        settings:controller="com.android.settings.display.AutoBrightnessPreferenceController"
+        settings:controller="com.android.settings.display.AutoBrightnessDetailPreferenceController"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_brightness"
         settings:allowDividerAbove="true" />

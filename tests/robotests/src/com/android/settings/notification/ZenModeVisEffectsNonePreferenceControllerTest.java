@@ -29,23 +29,18 @@ import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_STATUS_BA
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_ZEN_SOUND_ONLY;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.Context;
+
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.DisabledCheckBoxPreference;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -53,10 +48,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeVisEffectsNonePreferenceControllerTest {
     private ZenModeVisEffectsNonePreferenceController mController;
 
@@ -68,16 +65,16 @@ public class ZenModeVisEffectsNonePreferenceControllerTest {
     private FakeFeatureFactory mFeatureFactory;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock NotificationManager mNotificationManager;
+    @Mock
+    NotificationManager mNotificationManager;
 
     private static final String PREF_KEY = "main_pref";
-    private static final int PREF_METRICS = 1;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(

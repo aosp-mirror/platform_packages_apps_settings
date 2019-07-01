@@ -17,25 +17,28 @@
 package com.android.settings.wifi;
 
 import static android.provider.Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class NotifyOpenNetworkPreferenceControllerTest {
 
     private Context mContext;
@@ -83,7 +86,7 @@ public class NotifyOpenNetworkPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetCheckedWhenSettingsAreEnabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 1);
 
         mController.updateState(preference);
@@ -94,7 +97,7 @@ public class NotifyOpenNetworkPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetCheckedWhenSettingsAreDisabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0);
 
         mController.updateState(preference);

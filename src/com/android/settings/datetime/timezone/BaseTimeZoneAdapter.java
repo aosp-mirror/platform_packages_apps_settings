@@ -17,17 +17,18 @@
 package com.android.settings.datetime.timezone;
 
 import android.icu.text.BreakIterator;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.BaseTimeZonePicker.OnListItemClickListener;
@@ -76,9 +77,10 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        switch(viewType) {
+        switch (viewType) {
             case TYPE_HEADER: {
-                final View view = inflater.inflate(R.layout.preference_category_material_settings,
+                final View view = inflater.inflate(
+                        R.layout.time_zone_search_header,
                         parent, false);
                 return new HeaderViewHolder(view);
             }
@@ -135,7 +137,8 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
         return mShowHeader && position == 0;
     }
 
-    public @NonNull ArrayFilter getFilter() {
+    @NonNull
+    public ArrayFilter getFilter() {
         if (mFilter == null) {
             mFilter = new ArrayFilter();
         }
@@ -152,14 +155,18 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
 
     public interface AdapterItem {
         CharSequence getTitle();
+
         CharSequence getSummary();
+
         String getIconText();
+
         String getCurrentTime();
 
         /**
          * @return unique non-negative number
          */
         long getItemId();
+
         String[] getSearchKeys();
     }
 

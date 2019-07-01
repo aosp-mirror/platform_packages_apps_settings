@@ -21,21 +21,22 @@ import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
 import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_OFF;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -43,11 +44,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeButtonPreferenceControllerTest {
 
     private ZenModeButtonPreferenceController mController;
@@ -75,7 +77,7 @@ public class ZenModeButtonPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         mController = new ZenModeButtonPreferenceController(mContext, mock(Lifecycle.class),
                 mock(FragmentManager.class));
@@ -84,8 +86,7 @@ public class ZenModeButtonPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mZenButtonOn", mZenButtonOn);
         ReflectionHelpers.setField(mController, "mZenButtonOff", mZenButtonOff);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 

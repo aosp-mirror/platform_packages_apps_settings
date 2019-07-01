@@ -19,10 +19,11 @@ package com.android.settings.wifi.tether;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.wifi.WifiConfiguration;
+import android.util.Log;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import android.util.Log;
 
 import com.android.settings.R;
 

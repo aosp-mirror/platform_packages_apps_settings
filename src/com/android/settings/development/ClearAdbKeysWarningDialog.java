@@ -16,14 +16,15 @@
 
 package com.android.settings.development;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -33,7 +34,7 @@ public class ClearAdbKeysWarningDialog extends InstrumentedDialogFragment implem
     public static final String TAG = "ClearAdbKeysDlg";
 
     public static void show(Fragment host) {
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final ClearAdbKeysWarningDialog dialog =
                     new ClearAdbKeysWarningDialog();
@@ -44,7 +45,7 @@ public class ClearAdbKeysWarningDialog extends InstrumentedDialogFragment implem
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_CLEAR_ADB_KEYS;
+        return SettingsEnums.DIALOG_CLEAR_ADB_KEYS;
     }
 
     @Override

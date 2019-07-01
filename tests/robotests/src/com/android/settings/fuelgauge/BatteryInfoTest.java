@@ -17,8 +17,9 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Matchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
@@ -36,12 +37,11 @@ import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.util.SparseIntArray;
 
-import com.android.settings.graph.UsageView;
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.widget.UsageView;
 import com.android.settingslib.R;
-import com.android.settingslib.utils.PowerUtil;
+import com.android.settingslib.fuelgauge.Estimate;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,12 +52,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryInfoTest {
 
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
@@ -65,13 +66,15 @@ public class BatteryInfoTest {
     private static final String STATUS_NOT_CHARGING = "Not charging";
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
+    // Strings are defined in frameworks/base/packages/SettingsLib/res/values/strings.xml
     private static final String ENHANCED_STRING_SUFFIX = "based on your usage";
+    private static final String EXTEND_PREFIX = "Extend battery life past";
     private static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
     private static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
             "1 min left until fully charged";
     private static final String TEST_BATTERY_LEVEL_10 = "10%";
     private static final String FIFTEEN_MIN_FORMATTED = "15 min";
-    public static final Estimate DUMMY_ESTIMATE = new Estimate(
+    private static final Estimate DUMMY_ESTIMATE = new Estimate(
             1000, /* estimateMillis */
             false, /* isBasedOnUsage */
             1000 /* averageDischargeTime */);
@@ -148,8 +151,10 @@ public class BatteryInfoTest {
 
         // We only add special mention for the long string
         assertThat(info.remainingLabel.toString()).contains(ENHANCED_STRING_SUFFIX);
+        assertThat(info.suggestionLabel).contains(EXTEND_PREFIX);
         // shortened string should not have extra text
         assertThat(info2.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
+        assertThat(info2.suggestionLabel).contains(EXTEND_PREFIX);
     }
 
     @Test
@@ -169,10 +174,24 @@ public class BatteryInfoTest {
                 mContext.getString(R.string.power_remaining_duration_only_shutdown_imminent));
         assertThat(info2.remainingLabel.toString()).isEqualTo(
                 mContext.getString(R.string.power_remaining_duration_only_shutdown_imminent));
+        assertThat(info2.suggestionLabel).contains(EXTEND_PREFIX);
     }
 
     @Test
-    public void testGetBatteryInfo_basedOnUsageTrueBetweenSevenAndFifteenMinutes_usesCorrectString() {
+    public void getBatteryInfo_MoreThanOneDay_suggestionLabelIsCorrectString() {
+        Estimate estimate = new Estimate(Duration.ofDays(3).toMillis(),
+                true /* isBasedOnUsage */,
+                1000 /* averageDischargeTime */);
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
+                mBatteryStats, estimate, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(info.suggestionLabel).doesNotContain(EXTEND_PREFIX);
+    }
+
+    @Test
+    public void
+    testGetBatteryInfo_basedOnUsageTrueBetweenSevenAndFifteenMinutes_usesCorrectString() {
         Estimate estimate = new Estimate(Duration.ofMinutes(10).toMillis(),
                 true /* isBasedOnUsage */,
                 1000 /* averageDischargeTime */);

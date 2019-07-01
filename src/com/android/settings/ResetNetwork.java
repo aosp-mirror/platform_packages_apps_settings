@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.annotation.Nullable;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,15 +42,16 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +76,8 @@ public class ResetNetwork extends InstrumentedFragment {
     private View mContentView;
     private Spinner mSubscriptionSpinner;
     private Button mInitiateButton;
-    private View mEsimContainer;
-    private CheckBox mEsimCheckbox;
+    @VisibleForTesting View mEsimContainer;
+    @VisibleForTesting CheckBox mEsimCheckbox;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,18 +114,20 @@ public class ResetNetwork extends InstrumentedFragment {
         }
     }
 
-    private void showFinalConfirmation() {
+    @VisibleForTesting
+    void showFinalConfirmation() {
         Bundle args = new Bundle();
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             int selectedIndex = mSubscriptionSpinner.getSelectedItemPosition();
             SubscriptionInfo subscription = mSubscriptions.get(selectedIndex);
             args.putInt(PhoneConstants.SUBSCRIPTION_KEY, subscription.getSubscriptionId());
         }
-        args.putBoolean(MasterClear.ERASE_ESIMS_EXTRA, mEsimCheckbox.isChecked());
+        args.putBoolean(MasterClear.ERASE_ESIMS_EXTRA,
+            mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked());
         new SubSettingLauncher(getContext())
                 .setDestination(ResetNetworkConfirm.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.reset_network_confirm_title)
+                .setTitleRes(R.string.reset_network_confirm_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
@@ -160,7 +164,8 @@ public class ResetNetwork extends InstrumentedFragment {
         mEsimContainer = mContentView.findViewById(R.id.erase_esim_container);
         mEsimCheckbox = mContentView.findViewById(R.id.erase_esim);
 
-        mSubscriptions = SubscriptionManager.from(getActivity()).getActiveSubscriptionInfoList();
+        mSubscriptions = SubscriptionManager.from(getActivity())
+                .getActiveSubscriptionInfoList(true);
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             // Get the default subscription in the order of data, voice, sms, first up.
             int defaultSubscription = SubscriptionManager.getDefaultDataSubscriptionId();
@@ -212,8 +217,6 @@ public class ResetNetwork extends InstrumentedFragment {
         mInitiateButton.setOnClickListener(mInitiateListener);
         if (showEuiccSettings(getContext())) {
             mEsimContainer.setVisibility(View.VISIBLE);
-            TextView title = mContentView.findViewById(R.id.erase_esim_title);
-            title.setText(R.string.reset_esim_title);
             mEsimContainer.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -240,9 +243,9 @@ public class ResetNetwork extends InstrumentedFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final UserManager um = UserManager.get(getActivity());
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 getActivity(), UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
-        if (!um.isAdminUser() || RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+        if (!um.isAdminUser() || RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
         } else if (admin != null) {
@@ -261,6 +264,6 @@ public class ResetNetwork extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.RESET_NETWORK;
+        return SettingsEnums.RESET_NETWORK;
     }
 }

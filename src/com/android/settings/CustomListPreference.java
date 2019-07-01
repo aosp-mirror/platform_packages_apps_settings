@@ -16,20 +16,21 @@
 
 package com.android.settings;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.preference.ListPreferenceDialogFragment;
-import androidx.preference.ListPreference;
 import android.util.AttributeSet;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.ListPreference;
+import androidx.preference.ListPreferenceDialogFragmentCompat;
+
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class CustomListPreference extends ListPreference {
@@ -39,11 +40,11 @@ public class CustomListPreference extends ListPreference {
     }
 
     public CustomListPreference(Context context, AttributeSet attrs, int defStyleAttr,
-                                int defStyleRes) {
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
     }
 
@@ -63,7 +64,7 @@ public class CustomListPreference extends ListPreference {
      *
      * @param value the value the user is about to choose
      * @return the message to show in a confirmation dialog, or {@code null} to
-     *         not request confirmation
+     * not request confirmation
      */
     protected CharSequence getConfirmationMessage(String value) {
         return null;
@@ -72,15 +73,17 @@ public class CustomListPreference extends ListPreference {
     protected void onDialogStateRestored(Dialog dialog, Bundle savedInstanceState) {
     }
 
-    public static class CustomListPreferenceDialogFragment extends ListPreferenceDialogFragment {
+    public static class CustomListPreferenceDialogFragment extends
+            ListPreferenceDialogFragmentCompat {
 
         private static final java.lang.String KEY_CLICKED_ENTRY_INDEX
                 = "settings.CustomListPrefDialog.KEY_CLICKED_ENTRY_INDEX";
 
         private int mClickedDialogEntryIndex;
 
-        public static ListPreferenceDialogFragment newInstance(String key) {
-            final ListPreferenceDialogFragment fragment = new CustomListPreferenceDialogFragment();
+        public static ListPreferenceDialogFragmentCompat newInstance(String key) {
+            final ListPreferenceDialogFragmentCompat fragment =
+                    new CustomListPreferenceDialogFragment();
             final Bundle b = new Bundle(1);
             b.putString(ARG_KEY, key);
             fragment.setArguments(b);
@@ -92,7 +95,7 @@ public class CustomListPreference extends ListPreference {
         }
 
         @Override
-        protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
+        protected void onPrepareDialogBuilder(Builder builder) {
             super.onPrepareDialogBuilder(builder);
             mClickedDialogEntryIndex = getCustomizablePreference()
                     .findIndexOfValue(getCustomizablePreference().getValue());
@@ -201,7 +204,7 @@ public class CustomListPreference extends ListPreference {
     public static class ConfirmDialogFragment extends InstrumentedDialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return new AlertDialog.Builder(getActivity())
+            return new Builder(getActivity())
                     .setMessage(getArguments().getCharSequence(Intent.EXTRA_TEXT))
                     .setPositiveButton(android.R.string.ok, new OnClickListener() {
                         @Override
@@ -218,7 +221,7 @@ public class CustomListPreference extends ListPreference {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_CUSTOM_LIST_CONFIRMATION;
+            return SettingsEnums.DIALOG_CUSTOM_LIST_CONFIRMATION;
         }
     }
 }

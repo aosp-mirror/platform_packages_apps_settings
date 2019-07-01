@@ -23,19 +23,16 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowSettingsPreferenceFragment.class)
+@RunWith(RobolectricTestRunner.class)
 public class LocaleListEditorTest {
 
     private LocaleListEditor mLocaleListEditor;

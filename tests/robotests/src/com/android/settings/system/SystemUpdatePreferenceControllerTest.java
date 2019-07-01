@@ -20,19 +20,21 @@ import static android.os.SystemUpdateManager.KEY_TITLE;
 import static android.os.SystemUpdateManager.STATUS_IDLE;
 import static android.os.SystemUpdateManager.STATUS_UNKNOWN;
 import static android.os.SystemUpdateManager.STATUS_WAITING_DOWNLOAD;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemUpdateManager;
-import android.os.UserManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -40,16 +42,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.shadows.ShadowUserManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUserManager.class)
 public class SystemUpdatePreferenceControllerTest {
 
     @Mock
@@ -66,8 +68,7 @@ public class SystemUpdatePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        mShadowUserManager = Shadows.shadowOf(userManager);
+        mShadowUserManager = ShadowUserManager.getShadow();
 
         ShadowApplication.getInstance().setSystemService(Context.SYSTEM_UPDATE_SERVICE,
                 mSystemUpdateManager);
@@ -137,7 +138,8 @@ public class SystemUpdatePreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
-            .isEqualTo(mContext.getString(R.string.android_version_summary, Build.VERSION.RELEASE));
+                .isEqualTo(mContext.getString(R.string.android_version_summary,
+                        Build.VERSION.RELEASE));
     }
 
     @Test
@@ -152,7 +154,7 @@ public class SystemUpdatePreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
-            .isEqualTo(mContext.getString(R.string.android_version_summary, testReleaseName));
+                .isEqualTo(mContext.getString(R.string.android_version_summary, testReleaseName));
     }
 
     @Test
@@ -164,6 +166,6 @@ public class SystemUpdatePreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
-            .isEqualTo(mContext.getString(R.string.android_version_pending_update_summary));
+                .isEqualTo(mContext.getString(R.string.android_version_pending_update_summary));
     }
 }

@@ -30,8 +30,8 @@ import com.android.settings.R;
 
 /**
  * Container for two-dimensional chart, drawn with a combination of
- * {@link ChartGridView}, {@link ChartNetworkSeriesView} and {@link ChartSweepView}
- * children. The entire chart uses {@link ChartAxis} to map between raw values
+ * {@link ChartGridView} and {@link ChartSweepView} children. The entire chart uses
+ * {@link ChartAxis} to map between raw values
  * and screen coordinates.
  */
 public class ChartView extends FrameLayout {
@@ -112,13 +112,7 @@ public class ChartView extends FrameLayout {
 
             parentRect.set(mContent);
 
-            if (child instanceof ChartNetworkSeriesView) {
-                // series are always laid out to fill entire graph area
-                // TODO: handle scrolling for series larger than content area
-                Gravity.apply(params.gravity, width, height, parentRect, childRect);
-                child.layout(childRect.left, childRect.top, childRect.right, childRect.bottom);
-
-            } else if (child instanceof ChartGridView) {
+            if (child instanceof ChartGridView) {
                 // Grid uses some extra room for labels
                 Gravity.apply(params.gravity, width, height, parentRect, childRect);
                 child.layout(childRect.left, childRect.top, childRect.right,

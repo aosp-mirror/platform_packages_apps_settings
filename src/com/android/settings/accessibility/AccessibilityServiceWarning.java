@@ -16,12 +16,13 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.storage.StorageManager;
 import android.text.BidiFormatter;
 import android.view.LayoutInflater;
@@ -29,53 +30,58 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+
 import com.android.settings.R;
 
-import java.util.List;
 import java.util.Locale;
 
-import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
-
 /**
- * Utility class for creating the dialog that asks users for explicit permission to grant
- * all of the requested capabilities to an accessibility service before the service is enabled
+ * Utility class for creating the dialog that asks users for explicit permission for an
+ * accessibility service to access user data before the service is enabled
  */
 public class AccessibilityServiceWarning {
-    public static Dialog createCapabilitiesDialog(Activity parentActivity,
-            AccessibilityServiceInfo info, DialogInterface.OnClickListener listener) {
-        final AlertDialog ad = new AlertDialog.Builder(parentActivity)
-                .setTitle(parentActivity.getString(R.string.enable_service_title,
-                        getServiceName(parentActivity, info)))
-                .setView(createEnableDialogContentView(parentActivity, info))
-                .setPositiveButton(android.R.string.ok, listener)
-                .setNegativeButton(android.R.string.cancel, listener)
-                .create();
-
-        final View.OnTouchListener filterTouchListener = (View v, MotionEvent event) -> {
-            // Filter obscured touches by consuming them.
-            if (((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0)
-                    || ((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_PARTIALLY_OBSCURED) != 0)) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    Toast.makeText(v.getContext(), R.string.touch_filtered_warning,
-                            Toast.LENGTH_SHORT).show();
-                }
-                return true;
+    private static final View.OnTouchListener filterTouchListener = (View v, MotionEvent event) -> {
+        // Filter obscured touches by consuming them.
+        if (((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0)
+                || ((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_PARTIALLY_OBSCURED) != 0)) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                Toast.makeText(v.getContext(), R.string.touch_filtered_warning,
+                        Toast.LENGTH_SHORT).show();
             }
-            return false;
-        };
+            return true;
+        }
+        return false;
+    };
+
+    public static Dialog createCapabilitiesDialog(Activity parentActivity,
+            AccessibilityServiceInfo info, View.OnClickListener listener) {
+        final AlertDialog ad = new AlertDialog.Builder(parentActivity)
+                .setView(createEnableDialogContentView(parentActivity, info, listener))
+                .create();
 
         Window window = ad.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
-        params.privateFlags |= PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+        params.privateFlags |= SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
         window.setAttributes(params);
         ad.create();
-        ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(filterTouchListener);
         ad.setCanceledOnTouchOutside(true);
+
+        return ad;
+    }
+
+    public static Dialog createDisableDialog(Activity parentActivity,
+            AccessibilityServiceInfo info, View.OnClickListener listener) {
+        final AlertDialog ad = new AlertDialog.Builder(parentActivity)
+                .setView(createDisableDialogContentView(parentActivity, info, listener))
+                .setCancelable(true)
+                .create();
 
         return ad;
     }
@@ -98,7 +104,7 @@ public class AccessibilityServiceWarning {
      * @return A content view suitable for viewing
      */
     private static View createEnableDialogContentView(Context context,
-            AccessibilityServiceInfo info) {
+            AccessibilityServiceInfo info, View.OnClickListener listener) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
@@ -116,60 +122,55 @@ public class AccessibilityServiceWarning {
             encryptionWarningView.setVisibility(View.GONE);
         }
 
-        TextView capabilitiesHeaderView = (TextView) content.findViewById(
-                R.id.capabilities_header);
-        capabilitiesHeaderView.setText(context.getString(R.string.capabilities_list_title,
+        final Drawable icon;
+        if (info.getResolveInfo().getIconResource() == 0) {
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_accessibility_generic);
+        } else {
+            icon = info.getResolveInfo().loadIcon(context.getPackageManager());
+        }
+
+        ImageView permissionDialogIcon = content.findViewById(
+                R.id.permissionDialog_icon);
+        permissionDialogIcon.setImageDrawable(icon);
+
+        TextView permissionDialogTitle = content.findViewById(R.id.permissionDialog_title);
+        permissionDialogTitle.setText(context.getString(R.string.enable_service_title,
                 getServiceName(context, info)));
 
-        LinearLayout capabilitiesView = (LinearLayout) content.findViewById(R.id.capabilities);
+        Button permissionAllowButton = content.findViewById(
+                R.id.permission_enable_allow_button);
+        Button permissionDenyButton = content.findViewById(
+                R.id.permission_enable_deny_button);
+        permissionAllowButton.setOnClickListener(listener);
+        permissionAllowButton.setOnTouchListener(filterTouchListener);
+        permissionDenyButton.setOnClickListener(listener);
 
-        // This capability is implicit for all services.
-        View capabilityView = inflater.inflate(
-                com.android.internal.R.layout.app_permission_item_old, null);
+        return content;
+    }
 
-        ImageView imageView = (ImageView) capabilityView.findViewById(
-                com.android.internal.R.id.perm_icon);
-        imageView.setImageDrawable(context.getDrawable(
-                com.android.internal.R.drawable.ic_text_dot));
+    private static View createDisableDialogContentView(Context context,
+            AccessibilityServiceInfo info, View.OnClickListener listener) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
 
-        TextView labelView = (TextView) capabilityView.findViewById(
-                com.android.internal.R.id.permission_group);
-        labelView.setText(context.getString(
-                R.string.capability_title_receiveAccessibilityEvents));
+        View content = inflater.inflate(R.layout.disable_accessibility_service_dialog_content,
+                null);
 
-        TextView descriptionView = (TextView) capabilityView.findViewById(
-                com.android.internal.R.id.permission_list);
-        descriptionView.setText(
-                context.getString(R.string.capability_desc_receiveAccessibilityEvents));
+        TextView permissionDialogTitle = content.findViewById(R.id.permissionDialog_disable_title);
+        permissionDialogTitle.setText(context.getString(R.string.disable_service_title,
+                getServiceName(context, info)));
+        TextView permissionDialogMessage = content
+                .findViewById(R.id.permissionDialog_disable_message);
+        permissionDialogMessage.setText(context.getString(R.string.disable_service_message,
+                context.getString(R.string.accessibility_dialog_button_stop),
+                getServiceName(context, info)));
 
-        List<AccessibilityServiceInfo.CapabilityInfo> capabilities =
-                info.getCapabilityInfos(context);
-
-        capabilitiesView.addView(capabilityView);
-
-        // Service-specific capabilities.
-        final int capabilityCount = capabilities.size();
-        for (int i = 0; i < capabilityCount; i++) {
-            AccessibilityServiceInfo.CapabilityInfo capability = capabilities.get(i);
-
-            capabilityView = inflater.inflate(
-                    com.android.internal.R.layout.app_permission_item_old, null);
-
-            imageView = (ImageView) capabilityView.findViewById(
-                    com.android.internal.R.id.perm_icon);
-            imageView.setImageDrawable(context.getDrawable(
-                    com.android.internal.R.drawable.ic_text_dot));
-
-            labelView = (TextView) capabilityView.findViewById(
-                    com.android.internal.R.id.permission_group);
-            labelView.setText(context.getString(capability.titleResId));
-
-            descriptionView = (TextView) capabilityView.findViewById(
-                    com.android.internal.R.id.permission_list);
-            descriptionView.setText(context.getString(capability.descResId));
-
-            capabilitiesView.addView(capabilityView);
-        }
+        Button permissionAllowButton = content.findViewById(
+                R.id.permission_disable_stop_button);
+        Button permissionDenyButton = content.findViewById(
+                R.id.permission_disable_cancel_button);
+        permissionAllowButton.setOnClickListener(listener);
+        permissionDenyButton.setOnClickListener(listener);
 
         return content;
     }

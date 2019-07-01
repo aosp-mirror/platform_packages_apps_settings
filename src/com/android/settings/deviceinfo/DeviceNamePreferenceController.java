@@ -16,53 +16,48 @@
 
 package com.android.settings.deviceinfo;
 
-import android.annotation.Nullable;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.SpannedString;
 
-import com.android.internal.annotations.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothLengthDeviceNameFilter;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.tether.WifiDeviceNameTextValidator;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 public class DeviceNamePreferenceController extends BasePreferenceController
         implements ValidatedEditTextPreference.Validator,
-                Preference.OnPreferenceChangeListener,
-                LifecycleObserver,
-                OnSaveInstanceState,
-                OnCreate {
-    private static final String PREF_KEY = "device_name";
-    public static final int DEVICE_NAME_SET_WARNING_ID = 1;
+        Preference.OnPreferenceChangeListener,
+        LifecycleObserver,
+        OnSaveInstanceState,
+        OnCreate {
     private static final String KEY_PENDING_DEVICE_NAME = "key_pending_device_name";
     private String mDeviceName;
     protected WifiManager mWifiManager;
+    private final BluetoothAdapter mBluetoothAdapter;
     private final WifiDeviceNameTextValidator mWifiDeviceNameTextValidator;
     private ValidatedEditTextPreference mPreference;
-    @Nullable
-    private LocalBluetoothManager mBluetoothManager;
     private DeviceNamePreferenceHost mHost;
     private String mPendingDeviceName;
 
-    public DeviceNamePreferenceController(Context context) {
-        super(context, PREF_KEY);
+    public DeviceNamePreferenceController(Context context, String key) {
+        super(context, key);
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         initializeDeviceName();
     }
@@ -70,7 +65,7 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (ValidatedEditTextPreference) screen.findPreference(PREF_KEY);
+        mPreference = screen.findPreference(getPreferenceKey());
         final CharSequence deviceName = getSummary();
         mPreference.setSummary(deviceName);
         mPreference.setText(deviceName.toString());
@@ -92,12 +87,9 @@ public class DeviceNamePreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return PREF_KEY;
+        return mContext.getResources().getBoolean(R.bool.config_show_device_name)
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -117,13 +109,11 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         return mWifiDeviceNameTextValidator.isTextValid(deviceName);
     }
 
-    public void setLocalBluetoothManager(LocalBluetoothManager localBluetoothManager) {
-        mBluetoothManager = localBluetoothManager;
-    }
-
-    public void confirmDeviceName() {
-        if (mPendingDeviceName != null) {
+    public void updateDeviceName(boolean update) {
+        if (update && mPendingDeviceName != null) {
             setDeviceName(mPendingDeviceName);
+        } else {
+            mPreference.setText(getSummary().toString());
         }
     }
 
@@ -148,14 +138,8 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     }
 
     private void setBluetoothDeviceName(String deviceName) {
-        // Bluetooth manager doesn't exist for certain devices.
-        if (mBluetoothManager == null) {
-            return;
-        }
-
-        final LocalBluetoothAdapter localBluetoothAdapter = mBluetoothManager.getBluetoothAdapter();
-        if (localBluetoothAdapter != null) {
-            localBluetoothAdapter.setName(getFilteredBluetoothString(deviceName));
+        if (mBluetoothAdapter != null) {
+            mBluetoothAdapter.setName(getFilteredBluetoothString(deviceName));
         }
     }
 
@@ -164,7 +148,8 @@ public class DeviceNamePreferenceController extends BasePreferenceController
      * For more information, see {@link com.android.settings.bluetooth.BluetoothNameDialogFragment}.
      */
     private static final String getFilteredBluetoothString(final String deviceName) {
-        CharSequence filteredSequence = new BluetoothLengthDeviceNameFilter().filter(deviceName, 0, deviceName.length(),
+        CharSequence filteredSequence = new BluetoothLengthDeviceNameFilter().filter(deviceName, 0,
+                deviceName.length(),
                 new SpannedString(""),
                 0, 0);
         // null -> use the original

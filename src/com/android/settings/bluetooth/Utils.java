@@ -16,21 +16,24 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
+import android.util.Log;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
-import com.android.settingslib.bluetooth.Utils.ErrorListener;
 
 /**
  * Utils is a helper class that contains constants for various
@@ -38,8 +41,11 @@ import com.android.settingslib.bluetooth.Utils.ErrorListener;
  * for creating dialogs.
  */
 public final class Utils {
-    static final boolean V = com.android.settingslib.bluetooth.Utils.V; // verbose logging
-    static final boolean D =  com.android.settingslib.bluetooth.Utils.D;  // regular logging
+
+    private static final String TAG = "BluetoothUtils";
+
+    static final boolean V = BluetoothUtils.V; // verbose logging
+    static final boolean D =  BluetoothUtils.D;  // regular logging
 
     private Utils() {
     }
@@ -84,15 +90,10 @@ public final class Utils {
         return dialog;
     }
 
-    // TODO: wire this up to show connection errors...
-    static void showConnectingError(Context context, String name) {
-        showConnectingError(context, name, getLocalBtManager(context));
-    }
-
     @VisibleForTesting
     static void showConnectingError(Context context, String name, LocalBluetoothManager manager) {
         FeatureFactory.getFactory(context).getMetricsFeatureProvider().visible(context,
-            MetricsEvent.VIEW_UNKNOWN, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR);
+            SettingsEnums.PAGE_UNKNOWN, SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR);
         showError(context, name, R.string.bluetooth_connecting_error_message, manager);
     }
 
@@ -105,11 +106,15 @@ public final class Utils {
         String message = context.getString(messageResId, name);
         Context activity = manager.getForegroundActivity();
         if (manager.isForegroundActivity()) {
-            new AlertDialog.Builder(activity)
-                .setTitle(R.string.bluetooth_error_title)
-                .setMessage(message)
-                .setPositiveButton(android.R.string.ok, null)
-                .show();
+            try {
+                new AlertDialog.Builder(activity)
+                        .setTitle(R.string.bluetooth_error_title)
+                        .setMessage(message)
+                        .setPositiveButton(android.R.string.ok, null)
+                        .show();
+            } catch (Exception e) {
+                Log.e(TAG, "Cannot show error dialog.", e);
+            }
         } else {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
         }
@@ -139,7 +144,7 @@ public final class Utils {
         @Override
         public void onBluetoothManagerInitialized(Context appContext,
                 LocalBluetoothManager bluetoothManager) {
-            com.android.settingslib.bluetooth.Utils.setErrorListener(mErrorListener);
+            BluetoothUtils.setErrorListener(mErrorListener);
         }
     };
 

@@ -18,9 +18,9 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
+
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -64,6 +64,25 @@ public class BluetoothA2dpHwOffloadPreferenceController extends DeveloperOptions
             mPreference.setEnabled(false);
             ((SwitchPreference) mPreference).setChecked(true);
         }
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
+        final boolean offloadSupported =
+                SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false);
+        if (offloadSupported) {
+            ((SwitchPreference) mPreference).setChecked(false);
+            SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, "false");
+        }
+    }
+
+    public boolean isDefaultValue() {
+        final boolean offloadSupported =
+                SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false);
+        final boolean offloadDisabled =
+                    SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
+        return offloadSupported ? !offloadDisabled : true;
     }
 
     public void onA2dpHwDialogConfirmed() {

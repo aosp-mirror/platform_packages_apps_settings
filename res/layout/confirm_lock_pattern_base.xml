@@ -40,7 +40,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@android:style/TextAppearance.Material.Headline"
+                    style="@*android:style/TextAppearance.DeviceDefault.Headline"
                     android:id="@+id/headerText"
                     android:layout_marginStart="?attr/confirmDeviceCredentialsSideMargin"
                     android:layout_marginEnd="?attr/confirmDeviceCredentialsSideMargin"
@@ -50,8 +50,8 @@
                     android:textColor="?android:attr/colorAccent"/>
 
                 <TextView
-                    style="@android:style/TextAppearance.Material.Body1"
-                    android:id="@+id/detailsText"
+                    style="@*android:style/TextAppearance.DeviceDefault.Body1"
+                    android:id="@+id/sud_layout_description"
                     android:layout_marginStart="?attr/confirmDeviceCredentialsSideMargin"
                     android:layout_marginEnd="?attr/confirmDeviceCredentialsSideMargin"
                     android:layout_marginTop="12dp"
@@ -85,7 +85,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/TextAppearance.ConfirmDeviceCredentialsErrorText"
+                style="@style/TextAppearance.ErrorText"
                 android:accessibilityLiveRegion="polite"
                 android:id="@+id/errorText"
                 android:layout_width="wrap_content"
@@ -97,15 +97,6 @@
                 android:layout_marginEnd="12dp"
                 android:gravity="center_vertical"/>
 
-            <ImageView
-                android:id="@+id/fingerprintIcon"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="24dp"
-                android:contentDescription="@string/confirm_fingerprint_icon_content_description"
-                android:visibility="gone"/>
         </LinearLayout>
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>

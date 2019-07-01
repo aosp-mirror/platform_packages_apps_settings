@@ -15,8 +15,8 @@
  */
 package com.android.settings.bluetooth;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -35,8 +35,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -112,7 +113,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.BLUETOOTH_DIALOG_FRAGMENT;
+        return SettingsEnums.BLUETOOTH_DIALOG_FRAGMENT;
     }
 
     /**

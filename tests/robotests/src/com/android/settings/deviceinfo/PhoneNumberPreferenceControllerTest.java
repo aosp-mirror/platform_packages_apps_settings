@@ -16,32 +16,41 @@
 
 package com.android.settings.deviceinfo;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static android.content.Context.CLIPBOARD_SERVICE;
+
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ClipboardManager;
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+import java.util.ArrayList;
+import java.util.List;
+
+@RunWith(RobolectricTestRunner.class)
 public class PhoneNumberPreferenceControllerTest {
 
     @Mock
@@ -53,6 +62,8 @@ public class PhoneNumberPreferenceControllerTest {
     @Mock
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
+    private SubscriptionManager mSubscriptionManager;
+    @Mock
     private PreferenceScreen mScreen;
 
     private Context mContext;
@@ -61,9 +72,10 @@ public class PhoneNumberPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = spy(new PhoneNumberPreferenceController(mContext));
-        ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        mController = spy(new PhoneNumberPreferenceController(mContext, "phone_number"));
         final String prefKey = mController.getPreferenceKey();
         when(mScreen.findPreference(prefKey)).thenReturn(mPreference);
         when(mScreen.getContext()).thenReturn(mContext);
@@ -73,17 +85,19 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_shouldBeTrueIfCallCapable() {
+    public void getAvailabilityStatus_isVoiceCapable_shouldBeAVAILABLE() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
 
-        assertTrue(mController.isAvailable());
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void isAvailable_shouldBeFalseIfNotCallCapable() {
+    public void getAvailabilityStatus_isNotVoiceCapable_shouldBeUNSUPPORTED_ON_DEVICE() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
 
-        assertFalse(mController.isAvailable());
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -123,5 +137,46 @@ public class PhoneNumberPreferenceControllerTest {
         verify(mSecondPreference).setTitle(
                 mContext.getString(R.string.status_number_sim_slot, 2 /* sim slot */));
         verify(mSecondPreference).setSummary(phoneNumber);
+    }
+
+    @Test
+    public void getSummary_cannotGetActiveSubscriptionInfo_shouldShowUnknown() {
+        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(null);
+
+        CharSequence primaryNumber = mController.getSummary();
+
+        assertThat(primaryNumber).isNotNull();
+        assertThat(primaryNumber).isEqualTo(mContext.getString(R.string.device_info_default));
+    }
+
+    @Test
+    public void getSummary_getEmptySubscriptionInfo_shouldShowUnknown() {
+        List<SubscriptionInfo> infos = new ArrayList<>();
+        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(infos);
+
+        CharSequence primaryNumber = mController.getSummary();
+
+        assertThat(primaryNumber).isEqualTo(mContext.getString(R.string.device_info_default));
+    }
+
+    @Test
+    public void isSliceable_shouldBeTrue() {
+        assertThat(mController.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void copy_shouldCopyPhoneNumberToClipboard() {
+        final List<SubscriptionInfo> list = new ArrayList<>();
+        list.add(mSubscriptionInfo);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(list);
+        final String phoneNumber = "1111111111";
+        doReturn(phoneNumber).when(mController).getFormattedPhoneNumber(mSubscriptionInfo);
+
+        mController.copy();
+
+        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
+                CLIPBOARD_SERVICE);
+        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
+        assertThat(phoneNumber.contentEquals(data)).isTrue();
     }
 }

@@ -23,8 +23,8 @@ import static android.provider.Settings.Global.PRIVATE_DNS_DEFAULT_MODE;
 import static android.provider.Settings.Global.PRIVATE_DNS_MODE;
 import static android.provider.Settings.Global.PRIVATE_DNS_SPECIFIER;
 
-import android.content.Context;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.net.ConnectivityManager;
@@ -34,7 +34,10 @@ import android.net.Network;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -42,9 +45,11 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import java.net.InetAddress;
 import java.util.List;
@@ -79,7 +84,9 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_private_dns_settings)
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -131,6 +138,18 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
                         : res.getString(R.string.private_dns_mode_provider_failure);
         }
         return "";
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        preference.setEnabled(!isManagedByAdmin());
+    }
+
+    private boolean isManagedByAdmin() {
+        EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_PRIVATE_DNS, UserHandle.myUserId());
+        return enforcedAdmin != null;
     }
 
     private class PrivateDnsSettingsObserver extends ContentObserver {

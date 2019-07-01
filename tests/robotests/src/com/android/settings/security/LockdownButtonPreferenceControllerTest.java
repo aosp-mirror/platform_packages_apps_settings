@@ -16,26 +16,28 @@
 package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
+
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LockdownButtonPreferenceControllerTest {
 
     @Mock
@@ -51,24 +53,24 @@ public class LockdownButtonPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
 
-        mController = spy(new LockdownButtonPreferenceController(mContext));
+        mController = spy(new LockdownButtonPreferenceController(mContext, "TestKey"));
         ReflectionHelpers.setField(mController, "mLockPatternUtils", mLockPatternUtils);
     }
 
     @Test
-    public void isAvailable_lockSet_shouldReturnTrue() throws Exception {
+    public void isAvailable_lockSet_shouldReturnTrue() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_lockUnset_shouldReturnFalse() throws Exception {
+    public void isAvailable_lockUnset_shouldReturnFalse() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void onPreferenceChange_settingIsUpdated() throws Exception {
+    public void onPreferenceChange_settingIsUpdated() {
         boolean state = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.LOCKDOWN_IN_POWER_MENU, 0) != 0;
         assertThat(mController.onPreferenceChange(mPreference, !state)).isTrue();
@@ -78,7 +80,7 @@ public class LockdownButtonPreferenceControllerTest {
     }
 
     @Test
-    public void onSettingChange_preferenceIsUpdated() throws Exception {
+    public void onSettingChange_preferenceIsUpdated() {
         boolean state = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.LOCKDOWN_IN_POWER_MENU, 0) != 0;
         mController.updateState(mPreference);

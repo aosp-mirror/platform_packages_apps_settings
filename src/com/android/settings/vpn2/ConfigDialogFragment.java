@@ -16,9 +16,8 @@
 
 package com.android.settings.vpn2;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
@@ -33,9 +32,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.net.LegacyVpnInfo;
-import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -57,12 +56,10 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
     private Context mContext;
 
-    private boolean mUnlocking = false;
-
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_LEGACY_VPN_CONFIG;
+        return SettingsEnums.DIALOG_LEGACY_VPN_CONFIG;
     }
 
     public static void show(VpnSettings parent, VpnProfile profile, boolean edit, boolean exists) {
@@ -83,27 +80,6 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
     public void onAttach(final Context context) {
         super.onAttach(context);
         mContext = context;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // Check KeyStore here, so others do not need to deal with it.
-        if (!KeyStore.getInstance().isUnlocked()) {
-            if (!mUnlocking) {
-                // Let us unlock KeyStore. See you later!
-                Credentials.getInstance().unlock(mContext);
-            } else {
-                // We already tried, but it is still not working!
-                dismiss();
-            }
-            mUnlocking = !mUnlocking;
-            return;
-        }
-
-        // Now KeyStore is always unlocked. Reset the flag.
-        mUnlocking = false;
     }
 
     @Override

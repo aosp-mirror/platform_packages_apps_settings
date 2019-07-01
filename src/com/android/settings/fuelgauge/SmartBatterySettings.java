@@ -16,17 +16,18 @@
 
 package com.android.settings.fuelgauge;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ import java.util.List;
 /**
  * Fragment to show smart battery and restricted app controls
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class SmartBatterySettings extends DashboardFragment {
     public static final String TAG = "SmartBatterySettings";
 
@@ -46,7 +48,7 @@ public class SmartBatterySettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FUELGAUGE_SMART_BATTERY;
+        return SettingsEnums.FUELGAUGE_SMART_BATTERY;
     }
 
     @Override

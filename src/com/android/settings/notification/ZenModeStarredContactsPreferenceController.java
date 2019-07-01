@@ -23,36 +23,25 @@ import static android.app.NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.icu.text.ListFormatter;
 import android.provider.Contacts;
-import android.provider.ContactsContract;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ZenModeStarredContactsPreferenceController extends
         AbstractZenModePreferenceController implements Preference.OnPreferenceClickListener {
-
-    protected static final String KEY = "zen_mode_starred_contacts";
     private Preference mPreference;
     private final int mPriorityCategory;
     private final PackageManager mPackageManager;
 
-    @VisibleForTesting
-    Intent mStarredContactsIntent;
-    @VisibleForTesting
-    Intent mFallbackIntent;
+    private Intent mStarredContactsIntent;
+    private Intent mFallbackIntent;
 
     public ZenModeStarredContactsPreferenceController(Context context, Lifecycle lifecycle, int
-            priorityCategory) {
-        super(context, KEY, lifecycle);
+            priorityCategory, String key) {
+        super(context, key, lifecycle);
         mPriorityCategory = priorityCategory;
         mPackageManager = mContext.getPackageManager();
 
@@ -66,7 +55,10 @@ public class ZenModeStarredContactsPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(KEY);
-        mPreference.setOnPreferenceClickListener(this);
+
+        if (mPreference != null) {
+            mPreference.setOnPreferenceClickListener(this);
+        }
     }
 
     @Override
@@ -91,31 +83,8 @@ public class ZenModeStarredContactsPreferenceController extends
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-
-        List<String> starredContacts = getStarredContacts();
-        int numStarredContacts = starredContacts.size();
-
-        List<String> displayContacts = new ArrayList<>();
-
-        if (numStarredContacts == 0) {
-            displayContacts.add(mContext.getString(R.string.zen_mode_from_none));
-        } else {
-            for (int i = 0; i < 2 && i < numStarredContacts; i++) {
-                displayContacts.add(starredContacts.get(i));
-            }
-
-            if (numStarredContacts == 3) {
-                displayContacts.add(starredContacts.get(2));
-            } else if (numStarredContacts > 2) {
-                displayContacts.add(mContext.getResources().getQuantityString(
-                        R.plurals.zen_mode_starred_contacts_summary_additional_contacts,
-                        numStarredContacts - 2, numStarredContacts - 2));
-            }
-        }
-
-        mPreference.setSummary(ListFormatter.getInstance().format(displayContacts));
+    public CharSequence getSummary() {
+        return mBackend.getStarredContactsSummary();
     }
 
     @Override
@@ -126,22 +95,6 @@ public class ZenModeStarredContactsPreferenceController extends
             mContext.startActivity(mFallbackIntent);
         }
         return true;
-    }
-
-    private List<String> getStarredContacts() {
-        List<String> starredContacts = new ArrayList<>();
-
-        Cursor cursor = mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
-                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
-                ContactsContract.Data.STARRED + "=1", null,
-                ContactsContract.Data.TIMES_CONTACTED);
-
-        if (cursor.moveToFirst()) {
-            do {
-                starredContacts.add(cursor.getString(0));
-            } while (cursor.moveToNext());
-        }
-        return starredContacts;
     }
 
     private boolean isIntentValid() {

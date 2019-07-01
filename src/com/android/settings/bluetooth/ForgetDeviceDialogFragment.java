@@ -17,17 +17,19 @@
 package com.android.settings.bluetooth;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -57,7 +59,7 @@ public class ForgetDeviceDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_BLUETOOTH_PAIRED_DEVICE_FORGET;
+        return SettingsEnums.DIALOG_BLUETOOTH_PAIRED_DEVICE_FORGET;
     }
 
     @Override
@@ -71,13 +73,18 @@ public class ForgetDeviceDialogFragment extends InstrumentedDialogFragment {
         };
         Context context = getContext();
         mDevice = getDevice(context);
+        final boolean untetheredHeadset = BluetoothUtils.getBooleanMetaData(
+                mDevice.getDevice(), BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
+
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setPositiveButton(R.string.bluetooth_unpair_dialog_forget_confirm_button,
                         onConfirm)
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
         dialog.setTitle(R.string.bluetooth_unpair_dialog_title);
-        dialog.setMessage(context.getString(R.string.bluetooth_unpair_dialog_body,
+        dialog.setMessage(context.getString(untetheredHeadset
+                        ? R.string.bluetooth_untethered_unpair_dialog_body
+                        : R.string.bluetooth_unpair_dialog_body,
                 mDevice.getName()));
         return dialog;
     }

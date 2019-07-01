@@ -17,11 +17,13 @@
 package com.android.settings.applications;
 
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -36,15 +38,13 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class InstalledAppCounterTest {
 
     private final String APP_1 = "app1";
@@ -74,7 +74,7 @@ public final class InstalledAppCounterTest {
     @Mock
     private Context mContext;
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
 
     private int mInstalledAppCount = -1;
     private ApplicationInfo mApp1;
@@ -230,7 +230,6 @@ public final class InstalledAppCounterTest {
         when(mPackageManager.getInstallReason(APP_6, managedProfileUser))
                 .thenReturn(PackageManager.INSTALL_REASON_UNKNOWN);
     }
-
 
     private class InstalledAppCounterTestable extends InstalledAppCounter {
         private InstalledAppCounterTestable(int installReason) {

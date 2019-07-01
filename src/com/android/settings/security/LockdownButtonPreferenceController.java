@@ -19,30 +19,25 @@ package com.android.settings.security;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 
 public class LockdownButtonPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY_LOCKDOWN_ENALBED = "security_setting_lockdown_enabled";
-
     private final LockPatternUtils mLockPatternUtils;
 
-    public LockdownButtonPreferenceController(Context context) {
-        super(context, KEY_LOCKDOWN_ENALBED);
+    public LockdownButtonPreferenceController(Context context, String key) {
+        super(context, key);
         mLockPatternUtils = new LockPatternUtils(context);
     }
 
     @Override
     public int getAvailabilityStatus() {
         if (mLockPatternUtils.isSecure(UserHandle.myUserId())) {
-            return BasePreferenceController.AVAILABLE;
+            return AVAILABLE;
         } else {
-            return BasePreferenceController.DISABLED_FOR_USER;
+            return DISABLED_FOR_USER;
         }
     }
 

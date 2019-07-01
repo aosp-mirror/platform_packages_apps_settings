@@ -14,16 +14,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="26dp"
-    android:height="24dp"
-    android:viewportWidth="26"
-    android:viewportHeight="24">
-    <path
-        android:fillAlpha="0.3"
-        android:fillColor="?attr/wifi_signal_color"
-        android:pathData="M13.0,22.0L25.6,6.5C25.1,6.1 20.3,2.1 13.0,2.1S0.9,6.1 0.4,6.5L13.0,22.0L13.0,22.0L13.0,22.0L13.0,22.0L13.0,22.0z"/>
-    <path
-        android:fillColor="?attr/wifi_signal_color"
-        android:pathData="M13.0,22.0l9.2,-11.4c-0.4,-0.3 -3.9,-3.2 -9.2,-3.2s-8.9,3.0 -9.2,3.2L13.0,22.0L13.0,22.0L13.0,22.0L13.0,22.0L13.0,22.0z"/>
-</vector>
+<com.android.settings.widget.TintDrawable
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@*android:drawable/ic_wifi_signal_3"
+    android:tint="?attr/wifi_signal_color" />

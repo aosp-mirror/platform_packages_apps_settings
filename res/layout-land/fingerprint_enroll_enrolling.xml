@@ -15,12 +15,12 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout="@layout/suw_glif_blank_template"
+    android:layout="@layout/sud_glif_blank_template"
     style="?attr/fingerprint_layout_theme">
 
     <ScrollView
@@ -28,7 +28,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
         <LinearLayout
-            style="@style/SuwContentFrame"
+            style="@style/SudContentFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -42,25 +42,25 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_marginStart="?attr/suwMarginSides"
-                android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
+                android:layout_marginStart="?attr/sudMarginSides"
+                android:layout_marginBottom="@dimen/sud_content_frame_padding_bottom"
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/suw_layout_icon"
-                    style="@style/SuwGlifIcon"
+                    android:id="@+id/sud_layout_icon"
+                    style="@style/SudGlifIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="?attr/suwGlifHeaderGravity"
+                    android:layout_gravity="?attr/sudGlifHeaderGravity"
                     android:layout_marginStart="0dp"
                     android:layout_marginEnd="0dp"
                     android:src="@drawable/ic_fingerprint_header" />
 
                 <TextView
-                    android:id="@+id/suw_layout_title"
-                    style="@style/SuwGlifHeaderTitle"
+                    android:id="@+id/suc_layout_title"
+                    style="@style/SudGlifHeaderTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
@@ -71,14 +71,14 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        style="@style/SuwDescription.Glif"
-                        android:id="@+id/start_message"
+                        style="@style/SudDescription.Glif"
+                        android:id="@+id/sud_layout_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/security_settings_fingerprint_enroll_start_message"/>
 
                     <TextView
-                        style="@style/SuwDescription.Glif"
+                        style="@style/SudDescription.Glif"
                         android:id="@+id/repeat_message"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -92,13 +92,6 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/skip_button"
-                    style="@style/SuwGlifButton.Secondary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/security_settings_fingerprint_enroll_enrolling_skip" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -108,7 +101,7 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <com.android.setupwizardlib.view.FillContentLayout
+                <com.google.android.setupdesign.view.FillContentLayout
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginVertical="24dp"
@@ -120,10 +113,10 @@
                          android:layout_width="match_parent"
                          android:layout_height="match_parent"
                          android:layout_gravity="center" />
-                </com.android.setupwizardlib.view.FillContentLayout>
+                </com.google.android.setupdesign.view.FillContentLayout>
 
                 <TextView
-                    style="@style/TextAppearance.FingerprintErrorText"
+                    style="@style/TextAppearance.ErrorText"
                     android:id="@+id/error_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -139,4 +132,4 @@
 
         </LinearLayout>
     </ScrollView>
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

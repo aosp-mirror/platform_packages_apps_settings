@@ -17,29 +17,28 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 
 import java.io.File;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingsLicenseActivityTest {
 
     private ActivityController<SettingsLicenseActivity> mActivityController;
@@ -76,12 +75,11 @@ public class SettingsLicenseActivityTest {
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setPackage("com.android.htmlviewer");
 
-        assertEqualIntents(shadowOf(mApplication).getNextStartedActivity(), intent);
+        assertEqualIntents(Shadows.shadowOf(mApplication).getNextStartedActivity(), intent);
     }
 
     @Test
     public void testOnCreateWithGeneratedHtmlFile() {
-        doReturn(null).when(mActivity).onCreateLoader(anyInt(), any());
         doReturn(Uri.parse("content://com.android.settings.files/my_cache/generated_test.html"))
                 .when(mActivity).getUriFromGeneratedHtmlFile(any());
 
@@ -98,6 +96,6 @@ public class SettingsLicenseActivityTest {
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setPackage("com.android.htmlviewer");
 
-        assertEqualIntents(shadowOf(mApplication).getNextStartedActivity(), intent);
+        assertEqualIntents(Shadows.shadowOf(mApplication).getNextStartedActivity(), intent);
     }
 }

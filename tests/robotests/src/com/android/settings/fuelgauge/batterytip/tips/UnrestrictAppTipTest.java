@@ -20,14 +20,14 @@ import static com.google.common.truth.Truth.assertThat;
 import android.os.Parcel;
 
 import com.android.settings.fuelgauge.batterytip.AppInfo;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UnrestrictAppTipTest {
 
     private static final String PACKAGE_NAME = "com.android.app";

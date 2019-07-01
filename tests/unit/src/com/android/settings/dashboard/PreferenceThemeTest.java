@@ -16,29 +16,27 @@
 
 package com.android.settings.dashboard;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
+import static org.hamcrest.Matchers.allOf;
+
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.matcher.ViewMatchers.Visibility;
-import android.support.test.filters.SmallTest;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.matcher.ViewMatchers.Visibility;
+import androidx.test.filters.SmallTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.android.settings.dashboard.FirstIdViewMatcher.withFirstId;
-
-import static org.hamcrest.Matchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -56,26 +54,12 @@ public class PreferenceThemeTest {
     }
 
     @Test
-    public void startPhoneStatus_preferenceIconSpaceReserved() throws InterruptedException {
-        launchPhoneStatus();
-        onView(withFirstId(R.id.icon_frame)).check(matches(isDisplayed()));
-    }
-
-    @Test
     public void startSetupWizardLockScreen_preferenceIconSpaceNotReserved() {
         launchSetupWizardLockScreen();
         // Icons should not be shown, and the frame should not occupy extra space.
         onView(allOf(withId(R.id.icon_frame), withEffectiveVisibility(Visibility.VISIBLE)))
                 .check(doesNotExist());
         onView(withId(R.id.icon_container)).check(doesNotExist());
-    }
-
-    private void launchPhoneStatus() {
-        final Intent settingsIntent = new Intent("android.settings.DEVICE_INFO_SETTINGS")
-                .addCategory(Intent.CATEGORY_DEFAULT)
-                .setPackage(mTargetPackage)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        InstrumentationRegistry.getInstrumentation().startActivitySync(settingsIntent);
     }
 
     private void launchSetupWizardLockScreen() {

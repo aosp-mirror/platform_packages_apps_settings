@@ -17,16 +17,13 @@
 package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
+import static org.mockito.Mockito.when;
+
+import android.app.Application;
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
-
-import com.android.settings.SubSettings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,17 +31,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.android.controller.ActivityController;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
-import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowPackageManager;
+import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WallpaperSuggestionActivityTest {
 
     @Mock
@@ -52,31 +48,19 @@ public class WallpaperSuggestionActivityTest {
     @Mock
     private Resources mResources;
 
-    private ActivityController<WallpaperSuggestionActivity> mController;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = Robolectric.buildActivity(WallpaperSuggestionActivity.class);
+
+        final Application application = RuntimeEnvironment.application;
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(application);
+        ShadowApplication shadowApplication = Shadows.shadowOf(application);
+        shadowApplication.setSystemService(Context.WALLPAPER_SERVICE, wallpaperManager);
     }
 
     @After
     public void tearDown() {
         ShadowWallpaperManager.reset();
-    }
-
-    @Test
-    public void launch_primarySuggestionActivityDoesNotExist_shouldFallback() {
-        ShadowPackageManager packageManager =
-                shadowOf(RuntimeEnvironment.application.getPackageManager());
-        packageManager.removePackage("com.android.settings");
-
-        ShadowActivity activity = shadowOf(mController.setup().get());
-        final Intent intent = activity.getNextStartedActivity();
-
-        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
-        assertThat(intent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        assertThat(activity.isFinishing()).isTrue();
     }
 
     @Test
@@ -107,7 +91,8 @@ public class WallpaperSuggestionActivityTest {
     }
 
     @Implements(WallpaperManager.class)
-    public static class ShadowWallpaperManager {
+    public static class ShadowWallpaperManager extends
+        org.robolectric.shadows.ShadowWallpaperManager {
 
         private static int sWallpaperId;
 
@@ -121,12 +106,12 @@ public class WallpaperSuggestionActivityTest {
         }
 
         @Implementation
-        public boolean isWallpaperServiceEnabled() {
+        protected boolean isWallpaperServiceEnabled() {
             return true;
         }
 
         @Implementation
-        public int getWallpaperId(int which) {
+        protected int getWallpaperId(int which) {
             return sWallpaperId;
         }
     }

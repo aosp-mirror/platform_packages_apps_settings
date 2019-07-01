@@ -18,23 +18,27 @@ package com.android.settings.security.screenlock;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
+
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -42,10 +46,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LockScreenPreferenceControllerTest {
 
     private static final int FAKE_PROFILE_USER_ID = 1234;
@@ -64,7 +69,6 @@ public class LockScreenPreferenceControllerTest {
     private LockScreenPreferenceController mController;
     private Preference mPreference;
 
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -79,7 +83,7 @@ public class LockScreenPreferenceControllerTest {
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = new LockScreenPreferenceController(mContext, mLifecycle);
+        mController = new LockScreenPreferenceController(mContext, "Test_key");
     }
 
     @Test
@@ -95,7 +99,7 @@ public class LockScreenPreferenceControllerTest {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
         when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(false);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
@@ -104,7 +108,7 @@ public class LockScreenPreferenceControllerTest {
         when(mLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
                 .thenReturn(PASSWORD_QUALITY_ALPHABETIC);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test

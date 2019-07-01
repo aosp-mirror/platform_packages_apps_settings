@@ -16,55 +16,24 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
-public class FirmwareVersionPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+public class FirmwareVersionPreferenceController extends BasePreferenceController {
 
-    private final static String FIRMWARE_VERSION_KEY = "firmware_version";
-
-    private final Fragment mFragment;
-
-    public FirmwareVersionPreferenceController(Context context, Fragment fragment) {
-        super(context);
-
-        mFragment = fragment;
+    public FirmwareVersionPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference pref = screen.findPreference(getPreferenceKey());
-        if (pref != null) {
-            pref.setSummary(Build.VERSION.RELEASE);
-        }
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return FIRMWARE_VERSION_KEY;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            return false;
-        }
-
-        FirmwareVersionDialogFragment.show(mFragment);
-        return true;
+    public CharSequence getSummary() {
+        return Build.VERSION.RELEASE;
     }
 }

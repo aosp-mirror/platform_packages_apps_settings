@@ -13,21 +13,15 @@
  */
 package com.android.settings.display;
 
-import android.content.Context;
-import android.content.Intent;
-import android.provider.Settings;
-import android.text.TextUtils;
-
-import com.android.settings.DisplaySettings;
-import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
-import com.android.settings.R;
-
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+
+import android.content.Context;
+import android.provider.Settings;
+
+import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 
 
 public class AutoBrightnessPreferenceController extends TogglePreferenceController {
@@ -57,24 +51,14 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_automatic_brightness_available)
-                ? AVAILABLE
+                ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "auto_brightness");
-    }
-
-    @Override
-    public ResultPayload getResultPayload() {
-        // TODO remove result payload
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                DisplaySettings.class.getName(), getPreferenceKey(),
-                mContext.getString(R.string.display_settings));
-
-        return new InlineSwitchPayload(SYSTEM_KEY,
-                ResultPayload.SettingsSource.SYSTEM, SCREEN_BRIGHTNESS_MODE_AUTOMATIC, intent,
-                isAvailable(), DEFAULT_VALUE);
+    public CharSequence getSummary() {
+        return mContext.getText(isChecked()
+                ? R.string.auto_brightness_summary_on
+                : R.string.auto_brightness_summary_off);
     }
 }

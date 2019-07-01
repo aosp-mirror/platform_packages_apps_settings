@@ -16,9 +16,8 @@
 package com.android.settings.users;
 
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,11 +25,13 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -146,7 +147,7 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_CONFIRM_AUTO_SYNC_CHANGE;
+            return SettingsEnums.DIALOG_CONFIRM_AUTO_SYNC_CHANGE;
         }
 
         @Override

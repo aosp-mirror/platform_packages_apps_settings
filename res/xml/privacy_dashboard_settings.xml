@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="privacy_dashboard_page"
+    android:title="@string/privacy_dashboard_title"
+    settings:initialExpandedChildrenCount="4">
+
+    <!-- This preference isn't searchable, and user won't see title in this preference.
+         So, we just set empty text for title. -->
+    <com.android.settingslib.widget.BarChartPreference
+        android:key="permission_bar_chart"
+        android:title="@string/summary_placeholder"
+        settings:controller="com.android.settings.privacy.PermissionBarChartPreferenceController"/>
+
+    <!-- Work Policy info -->
+    <Preference
+        android:key="work_policy_info"
+        android:title="@string/work_policy_privacy_settings"
+        android:summary="@string/work_policy_privacy_settings_summary"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.privacy.WorkPolicyInfoPreferenceController"/>
+
+    <!-- Accessibility usage -->
+    <Preference
+        android:key="privacy_accessibility_usage"
+        android:title="@string/accessibility_usage_title"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController">
+        <intent android:action="android.intent.action.REVIEW_ACCESSIBILITY_SERVICES"/>
+    </Preference>
+
+    <!-- App permissions -->
+    <Preference
+        android:key="privacy_manage_perms"
+        android:title="@string/app_permissions"
+        settings:allowDividerAbove="true"
+        settings:keywords="@string/keywords_app_permissions"
+        settings:controller="com.android.settings.applications.AppPermissionsPreferenceController">
+        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
+    </Preference>
+
+    <!-- Show passwords -->
+    <SwitchPreference
+        android:key="show_password"
+        android:title="@string/show_password"
+        android:summary="@string/show_password_summary"
+        settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
+
+    <!-- On lock screen notifications -->
+    <com.android.settings.RestrictedListPreference
+        android:key="privacy_lock_screen_notifications"
+        android:title="@string/lock_screen_notifications_title"
+        android:summary="@string/summary_placeholder"
+        settings:searchable="false"/>
+
+    <!-- Privacy Service -->
+    <PreferenceCategory
+        android:key="privacy_services"
+        android:layout="@layout/preference_category_no_label"/>
+
+    <PreferenceCategory
+        android:key="dashboard_tile_placeholder"/>
+
+    <!-- Work profile settings are at the bottom with high order value to avoid users thinking that
+         any of the above settings (including dynamic) are specific to the work profile. -->
+    <PreferenceCategory
+        android:key="privacy_work_profile_notifications_category"
+        android:title="@string/profile_section_header"
+        android:order="998"
+        settings:searchable="false">
+
+        <com.android.settings.RestrictedListPreference
+            android:key="privacy_lock_screen_work_profile_notifications"
+            android:title="@string/locked_work_profile_notification_title"
+            android:summary="@string/summary_placeholder"
+            android:order="999"
+            settings:searchable="false"/>
+    </PreferenceCategory>
+
+    <!-- Content Capture -->
+
+    <!-- NOTE: content capture has a different preference, depending whether or not the
+         ContentCaptureService implementations defines a custom settings activitiy on its manifest.
+         Hence, we show both here, but the controller itself will decide if it's available or not.
+    -->
+
+    <SwitchPreference
+        android:key="content_capture"
+        android:title="@string/content_capture"
+        android:summary="@string/content_capture_summary"
+        settings:controller="com.android.settings.privacy.EnableContentCapturePreferenceController"/>
+
+    <com.android.settings.widget.MasterSwitchPreference
+        android:key="content_capture_custom_settings"
+        android:title="@string/content_capture"
+        android:summary="@string/content_capture_summary"
+        settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController">
+    </com.android.settings.widget.MasterSwitchPreference>
+
+</PreferenceScreen>

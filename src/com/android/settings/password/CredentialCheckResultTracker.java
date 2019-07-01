@@ -16,9 +16,10 @@
 
 package com.android.settings.password;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * An invisible retained fragment to track lock check result.

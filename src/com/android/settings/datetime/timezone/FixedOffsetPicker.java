@@ -16,9 +16,9 @@
 
 package com.android.settings.datetime.timezone;
 
+import android.app.settings.SettingsEnums;
 import android.icu.util.TimeZone;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 
@@ -45,7 +45,7 @@ public class FixedOffsetPicker extends BaseTimeZoneInfoPicker {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_ZONE_PICKER_FIXED_OFFSET;
+        return SettingsEnums.SETTINGS_ZONE_PICKER_FIXED_OFFSET;
     }
 
     @Override

@@ -16,8 +16,11 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_ENABLE_OEM_UNLOCK;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
+        .REQUEST_CODE_ENABLE_OEM_UNLOCK;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -26,15 +29,17 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
-import androidx.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -43,8 +48,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class OemUnlockPreferenceControllerTest {
 
     @Mock
@@ -55,6 +63,8 @@ public class OemUnlockPreferenceControllerTest {
     private DevelopmentSettingsDashboardFragment mFragment;
     @Mock
     private RestrictedSwitchPreference mPreference;
+    @Mock
+    private PackageManager mPackageManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
@@ -70,6 +80,9 @@ public class OemUnlockPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager
+                    .FEATURE_TELEPHONY_CARRIERLOCK)).thenReturn(true);
         when(mContext.getSystemService(Context.OEM_LOCK_SERVICE)).thenReturn(mOemLockManager);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
@@ -80,6 +93,24 @@ public class OemUnlockPreferenceControllerTest {
         when(mFragment.getChildFragmentManager())
             .thenReturn(mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
         mController.displayPreference(mPreferenceScreen);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void OemUnlockPreferenceController_shouldNotCrashInEmulatorEngBuild() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_EMULATOR", true);
+        ReflectionHelpers.setStaticField(Build.class, "IS_ENG", true);
+
+        new OemUnlockPreferenceController(mContext, mActivity, mFragment);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void OemUnlockPreferenceController_shouldNotCrashInOtherBuild() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_EMULATOR", false);
+        ReflectionHelpers.setStaticField(Build.class, "IS_ENG", false);
+
+        new OemUnlockPreferenceController(mContext, mActivity, mFragment);
     }
 
     @Test
@@ -183,7 +214,6 @@ public class OemUnlockPreferenceControllerTest {
         mController.onDeveloperOptionsEnabled();
 
         verify(mPreference).checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
-
     }
 
     @Test

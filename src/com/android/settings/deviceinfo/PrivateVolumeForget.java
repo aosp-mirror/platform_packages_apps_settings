@@ -16,10 +16,8 @@
 
 package com.android.settings.deviceinfo;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -33,19 +31,31 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
-public class PrivateVolumeForget extends SettingsPreferenceFragment {
-    private static final String TAG_FORGET_CONFIRM = "forget_confirm";
+import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.search.actionbar.SearchMenuController;
+
+public class PrivateVolumeForget extends InstrumentedFragment {
+    @VisibleForTesting
+    static final String TAG_FORGET_CONFIRM = "forget_confirm";
 
     private VolumeRecord mRecord;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DEVICEINFO_STORAGE;
+        return SettingsEnums.DEVICEINFO_STORAGE;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        setHasOptionsMenu(true);
+        SearchMenuController.init(this /* host */);
     }
 
     @Override
@@ -87,7 +97,7 @@ public class PrivateVolumeForget extends SettingsPreferenceFragment {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_VOLUME_FORGET;
+            return SettingsEnums.DIALOG_VOLUME_FORGET;
         }
 
         public static void show(Fragment parent, String fsUuid) {
@@ -116,12 +126,12 @@ public class PrivateVolumeForget extends SettingsPreferenceFragment {
 
             builder.setPositiveButton(R.string.storage_menu_forget,
                     new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    storage.forgetVolume(fsUuid);
-                    getActivity().finish();
-                }
-            });
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            storage.forgetVolume(fsUuid);
+                            getActivity().finish();
+                        }
+                    });
             builder.setNegativeButton(R.string.cancel, null);
 
             return builder.create();

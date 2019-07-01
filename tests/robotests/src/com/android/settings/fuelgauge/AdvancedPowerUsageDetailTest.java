@@ -17,12 +17,14 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -30,9 +32,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.app.AppOpsManager;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -41,6 +41,9 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,11 +51,7 @@ import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -60,6 +59,7 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -70,14 +70,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowActivityManager.class})
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
@@ -102,7 +100,7 @@ public class AdvancedPowerUsageDetailTest {
     private static final long PHONE_BACKGROUND_TIME_MS = 0;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private EntityHeaderController mEntityHeaderController;
     @Mock
@@ -128,8 +126,6 @@ public class AdvancedPowerUsageDetailTest {
     @Mock
     private LoaderManager mLoaderManager;
     @Mock
-    private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
-    @Mock
     private BatteryStats.Timer mForegroundActivityTimer;
     @Mock
     private BatteryUtils mBatteryUtils;
@@ -138,7 +134,6 @@ public class AdvancedPowerUsageDetailTest {
     private Preference mBackgroundPreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
-    private List<Anomaly> mAnomalies;
 
     @Before
     public void setUp() {
@@ -215,11 +210,6 @@ public class AdvancedPowerUsageDetailTest {
         mBackgroundPreference = new Preference(mContext);
         mFragment.mForegroundPreference = mForegroundPreference;
         mFragment.mBackgroundPreference = mBackgroundPreference;
-        mFragment.mAnomalySummaryPreferenceController = mAnomalySummaryPreferenceController;
-
-        mAnomalies = new ArrayList<>();
-        mAnomalies.add(new Anomaly.Builder().setUid(UID).setType(
-                Anomaly.AnomalyType.WAKE_LOCK).build());
     }
 
     @After
@@ -268,13 +258,12 @@ public class AdvancedPowerUsageDetailTest {
         verify(mEntityHeaderController).setIcon(mAppEntry);
         verify(mEntityHeaderController).setLabel(mAppEntry);
         verify(mEntityHeaderController).setIsInstantApp(true);
-        verify(mEntityHeaderController).setSummary((CharSequence) null);
     }
 
     @Test
     public void testStartBatteryDetailPage_hasBasicData() {
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, mAnomalies);
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
@@ -283,8 +272,6 @@ public class AdvancedPowerUsageDetailTest {
             .isEqualTo(FOREGROUND_TIME_MS);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
             .isEqualTo(USAGE_PERCENT);
-        assertThat(mBundle.getParcelableArrayList(
-                AdvancedPowerUsageDetail.EXTRA_ANOMALY_LIST)).isEqualTo(mAnomalies);
     }
 
     @Test
@@ -293,7 +280,7 @@ public class AdvancedPowerUsageDetailTest {
         mBatterySipper.usageTimeMs = PHONE_FOREGROUND_TIME_MS;
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME))
@@ -302,8 +289,6 @@ public class AdvancedPowerUsageDetailTest {
             .isEqualTo(PHONE_BACKGROUND_TIME_MS);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
             .isEqualTo(USAGE_PERCENT);
-        assertThat(mBundle.getParcelableArrayList(
-                AdvancedPowerUsageDetail.EXTRA_ANOMALY_LIST)).isNull();
     }
 
     @Test
@@ -311,25 +296,21 @@ public class AdvancedPowerUsageDetailTest {
         mBatterySipper.mPackages = PACKAGE_NAME;
         mBatteryEntry.defaultPackageName = PACKAGE_NAME[0];
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, mAnomalies);
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(
                 PACKAGE_NAME[0]);
-        assertThat(mBundle.getParcelableArrayList(
-                AdvancedPowerUsageDetail.EXTRA_ANOMALY_LIST)).isEqualTo(mAnomalies);
     }
 
     @Test
     public void testStartBatteryDetailPage_SystemApp() {
         mBatterySipper.mPackages = null;
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_LABEL)).isEqualTo(APP_LABEL);
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_ICON_ID)).isEqualTo(ICON_ID);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isNull();
-        assertThat(mBundle.getParcelableArrayList(
-                AdvancedPowerUsageDetail.EXTRA_ANOMALY_LIST)).isNull();
     }
 
     @Test
@@ -338,8 +319,7 @@ public class AdvancedPowerUsageDetailTest {
         mBatterySipper.mPackages = PACKAGE_NAME;
         doReturn(appUid).when(mBatterySipper).getUid();
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
-
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
 
         verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(10)));
     }
@@ -352,7 +332,7 @@ public class AdvancedPowerUsageDetailTest {
         final int currentUser = 20;
         ShadowActivityManager.setCurrentUser(currentUser);
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
 
         verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(currentUser)));
     }
@@ -390,7 +370,7 @@ public class AdvancedPowerUsageDetailTest {
         mBatteryEntry.sipper.mPackages = PACKAGE_NAME;
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME))
             .isEqualTo(PACKAGE_NAME[0]);
@@ -414,25 +394,5 @@ public class AdvancedPowerUsageDetailTest {
 
         assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
         assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
-    }
-
-    @Test
-    public void testInitAnomalyInfo_anomalyNull_startAnomalyLoader() {
-        doReturn(null).when(mBundle)
-            .getParcelableArrayList(AdvancedPowerUsageDetail.EXTRA_ANOMALY_LIST);
-
-        mFragment.initAnomalyInfo();
-
-        verify(mLoaderManager).initLoader(eq(0), eq(Bundle.EMPTY), any());
-    }
-
-    @Test
-    public void testInitAnomalyInfo_anomalyExisted_updateAnomaly() {
-        doReturn(mAnomalies).when(mBundle)
-            .getParcelableArrayList(AdvancedPowerUsageDetail.EXTRA_ANOMALY_LIST);
-
-        mFragment.initAnomalyInfo();
-
-        verify(mAnomalySummaryPreferenceController).updateAnomalySummaryPreference(mAnomalies);
     }
 }

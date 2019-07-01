@@ -16,22 +16,21 @@
 
 package com.android.settings.applications.defaultapps;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
+
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
-import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 
@@ -41,16 +40,17 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultAppPickerFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -88,10 +88,12 @@ public class DefaultAppPickerFragmentTest {
         mFragment.onAttach((Context) mActivity);
         mFragment.onRadioButtonConfirmed("test_pkg");
 
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_UPDATE_DEFAULT_APP),
-                eq("test_pkg"),
-                any(Pair.class));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_SETTINGS_UPDATE_DEFAULT_APP,
+                mFragment.getMetricsCategory(),
+                "test_pkg",
+                0);
     }
 
     public static class TestFragment extends DefaultAppPickerFragment {

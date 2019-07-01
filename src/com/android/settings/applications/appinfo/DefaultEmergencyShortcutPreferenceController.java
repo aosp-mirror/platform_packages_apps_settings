@@ -14,9 +14,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import android.app.role.RoleManager;
 import android.content.Context;
-
-import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
 
 public class DefaultEmergencyShortcutPreferenceController
         extends DefaultAppShortcutPreferenceControllerBase {
@@ -24,17 +23,6 @@ public class DefaultEmergencyShortcutPreferenceController
     private static final String KEY = "default_emergency_app";
 
     public DefaultEmergencyShortcutPreferenceController(Context context, String packageName) {
-        super(context, KEY, packageName);
+        super(context, KEY, RoleManager.ROLE_EMERGENCY, packageName);
     }
-
-    @Override
-    protected boolean hasAppCapability() {
-        return DefaultEmergencyPreferenceController.hasEmergencyPreference(mPackageName, mContext);
-    }
-
-    @Override
-    protected boolean isDefaultApp() {
-        return DefaultEmergencyPreferenceController.isEmergencyDefault(mPackageName, mContext);
-    }
-
 }

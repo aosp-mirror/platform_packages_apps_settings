@@ -17,10 +17,11 @@
 package com.android.settings.utils;
 
 import android.content.Context;
+
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.setupwizardlib.DividerItemDecoration;
+import com.google.android.setupdesign.DividerItemDecoration;
 
 public class SettingsDividerItemDecoration extends DividerItemDecoration {
 

@@ -16,18 +16,14 @@
 
 package com.android.settings;
 
-import android.app.ActivityManager;
-import android.app.AlertDialog;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreferenceDialogFragment;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,14 +34,16 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.android.settings.Utils;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.preference.ListPreferenceDialogFragmentCompat;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class RestrictedListPreference extends CustomListPreference {
     private final RestrictedPreferenceHelper mHelper;
@@ -159,8 +157,8 @@ public class RestrictedListPreference extends CustomListPreference {
         return null;
     }
 
-    protected ListAdapter createListAdapter() {
-        return new RestrictedArrayAdapter(getContext(), getEntries(),
+    protected ListAdapter createListAdapter(Context context) {
+        return new RestrictedArrayAdapter(context, getEntries(),
                 getSelectedValuePos());
     }
 
@@ -172,11 +170,10 @@ public class RestrictedListPreference extends CustomListPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
-        builder.setAdapter(createListAdapter(), listener);
+        builder.setAdapter(createListAdapter(builder.getContext()), listener);
     }
-
 
     public class RestrictedArrayAdapter extends ArrayAdapter<CharSequence> {
         private final int mSelectedIndex;
@@ -222,8 +219,8 @@ public class RestrictedListPreference extends CustomListPreference {
             CustomListPreference.CustomListPreferenceDialogFragment {
         private int mLastCheckedPosition = AdapterView.INVALID_POSITION;
 
-        public static ListPreferenceDialogFragment newInstance(String key) {
-            final ListPreferenceDialogFragment fragment
+        public static ListPreferenceDialogFragmentCompat newInstance(String key) {
+            final ListPreferenceDialogFragmentCompat fragment
                     = new RestrictedListPreferenceDialogFragment();
             final Bundle b = new Bundle(1);
             b.putString(ARG_KEY, key);

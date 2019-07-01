@@ -16,10 +16,8 @@
 
 package com.android.settings.wifi;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -27,15 +25,19 @@ import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * This activity requests users permission to allow scanning even when Wi-Fi is turned off
  */
-public class WifiScanModeActivity extends Activity {
+public class WifiScanModeActivity extends FragmentActivity {
     private DialogFragment mDialog;
     private String mApp;
 
@@ -66,7 +68,7 @@ public class WifiScanModeActivity extends Activity {
     private void createDialog() {
         if (mDialog == null) {
             mDialog = AlertDialogFragment.newInstance(mApp);
-            mDialog.show(getFragmentManager(), "dialog");
+            mDialog.show(getSupportFragmentManager(), "dialog");
         }
     }
 
@@ -125,13 +127,15 @@ public class WifiScanModeActivity extends Activity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_WIFI_SCAN_MODE;
+            return SettingsEnums.DIALOG_WIFI_SCAN_MODE;
         }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
-                    .setMessage(getString(R.string.wifi_scan_always_turnon_message, mApp))
+                    .setMessage(TextUtils.isEmpty(mApp) ?
+                        getString(R.string.wifi_scan_always_turn_on_message_unknown) :
+                        getString(R.string.wifi_scan_always_turnon_message, mApp))
                     .setPositiveButton(R.string.wifi_scan_always_confirm_allow,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {

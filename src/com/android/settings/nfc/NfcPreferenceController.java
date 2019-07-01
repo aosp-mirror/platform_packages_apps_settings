@@ -15,22 +15,25 @@
  */
 package com.android.settings.nfc;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
-import android.text.TextUtils;
-
-import androidx.preference.Preference;
+import android.util.Log;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import java.util.List;
+import java.io.IOException;
 
 public class NfcPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
@@ -38,7 +41,6 @@ public class NfcPreferenceController extends TogglePreferenceController
     public static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private final NfcAdapter mNfcAdapter;
     private NfcEnabler mNfcEnabler;
-    private NfcAirplaneModeObserver mAirplaneModeObserver;
 
     public NfcPreferenceController(Context context, String key) {
         super(context, key);
@@ -53,16 +55,10 @@ public class NfcPreferenceController extends TogglePreferenceController
             return;
         }
 
-        final SwitchPreference switchPreference =
-                (SwitchPreference) screen.findPreference(getPreferenceKey());
+        final SwitchPreference switchPreference = screen.findPreference(getPreferenceKey());
 
         mNfcEnabler = new NfcEnabler(mContext, switchPreference);
 
-        // Manually set dependencies for NFC when not toggleable.
-        if (!isToggleableInAirplaneMode(mContext)) {
-            mAirplaneModeObserver = new NfcAirplaneModeObserver(mContext,
-                    mNfcAdapter, (Preference) switchPreference);
-        }
     }
 
     @Override
@@ -89,28 +85,22 @@ public class NfcPreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public IntentFilter getIntentFilter() {
-        final IntentFilter filter = new IntentFilter();
-        filter.addAction(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
-        filter.addAction(NfcAdapter.EXTRA_ADAPTER_STATE);
-        return filter;
-    }
-
-    @Override
     public boolean hasAsyncUpdate() {
         return true;
     }
 
     @Override
     public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), KEY_TOGGLE_NFC);
+        return true;
+    }
+
+    @Override
+    public Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
+        return NfcSliceWorker.class;
     }
 
     @Override
     public void onResume() {
-        if (mAirplaneModeObserver != null) {
-            mAirplaneModeObserver.register();
-        }
         if (mNfcEnabler != null) {
             mNfcEnabler.resume();
         }
@@ -118,17 +108,93 @@ public class NfcPreferenceController extends TogglePreferenceController
 
     @Override
     public void onPause() {
-        if (mAirplaneModeObserver != null) {
-            mAirplaneModeObserver.unregister();
-        }
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }
+    }
+
+    public static boolean shouldTurnOffNFCInAirplaneMode(Context context) {
+        final String airplaneModeRadios = Settings.Global.getString(context.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_RADIOS);
+        return airplaneModeRadios != null && airplaneModeRadios.contains(Settings.Global.RADIO_NFC);
     }
 
     public static boolean isToggleableInAirplaneMode(Context context) {
         final String toggleable = Settings.Global.getString(context.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
         return toggleable != null && toggleable.contains(Settings.Global.RADIO_NFC);
+    }
+
+    /**
+     * Listener for background changes to NFC.
+     *
+     * <p>
+     *     Listen to broadcasts from {@link NfcAdapter}. The worker will call notify changed on the
+     *     NFC Slice only when the following extras are present in the broadcast:
+     *     <ul>
+     *      <li>{@link NfcAdapter#STATE_ON}</li>
+     *      <li>{@link NfcAdapter#STATE_OFF}</li>
+     *     </ul>
+     */
+    public static class NfcSliceWorker extends SliceBackgroundWorker<Void> {
+
+        private static final String TAG = "NfcSliceWorker";
+
+        private static final IntentFilter NFC_FILTER =
+                new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
+
+        private NfcUpdateReceiver mUpdateObserver;
+
+        public NfcSliceWorker(Context context, Uri uri) {
+            super(context, uri);
+            mUpdateObserver = new NfcUpdateReceiver(this);
+        }
+
+        @Override
+        protected void onSlicePinned() {
+            getContext().registerReceiver(mUpdateObserver, NFC_FILTER);
+        }
+
+        @Override
+        protected void onSliceUnpinned() {
+            getContext().unregisterReceiver(mUpdateObserver);
+        }
+
+        @Override
+        public void close() throws IOException {
+            mUpdateObserver = null;
+        }
+
+        public void updateSlice() {
+            notifySliceChange();
+        }
+
+        public class NfcUpdateReceiver extends BroadcastReceiver {
+
+            private final int NO_EXTRA = -1;
+
+            private final NfcSliceWorker mSliceBackgroundWorker;
+
+            public NfcUpdateReceiver(NfcSliceWorker sliceWorker) {
+                mSliceBackgroundWorker = sliceWorker;
+            }
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                final int nfcStateExtra = intent.getIntExtra(NfcAdapter.EXTRA_ADAPTER_STATE,
+                        NO_EXTRA);
+
+                // Do nothing if state change is empty, or an intermediate step.
+                if ( (nfcStateExtra == NO_EXTRA)
+                        || (nfcStateExtra == NfcAdapter.STATE_TURNING_ON)
+                        || (nfcStateExtra == NfcAdapter.STATE_TURNING_OFF)) {
+                    Log.d(TAG, "Transitional update, dropping broadcast");
+                    return;
+                }
+
+                Log.d(TAG, "Nfc broadcast received, updating Slice.");
+                mSliceBackgroundWorker.updateSlice();
+            }
+        }
     }
 }

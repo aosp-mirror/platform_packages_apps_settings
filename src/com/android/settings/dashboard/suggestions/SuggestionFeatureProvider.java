@@ -19,14 +19,8 @@ package com.android.settings.dashboard.suggestions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.service.settings.suggestions.Suggestion;
+
 import androidx.annotation.NonNull;
-import android.util.Pair;
-
-import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
-
-import java.util.List;
 
 /** Interface should be implemented if you have added new suggestions */
 public interface SuggestionFeatureProvider {
@@ -41,11 +35,6 @@ public interface SuggestionFeatureProvider {
      */
     ComponentName getSuggestionServiceComponent();
 
-    /**
-     * Returns true if smart suggestion should be used instead of xml based SuggestionParser.
-     */
-    boolean isSmartSuggestionEnabled(Context context);
-
     /** Return true if the suggestion has already been completed and does not need to be shown */
     boolean isSuggestionComplete(Context context, @NonNull ComponentName suggestion);
 
@@ -53,20 +42,4 @@ public interface SuggestionFeatureProvider {
      * Returns the {@link SharedPreferences} that holds metadata for suggestions.
      */
     SharedPreferences getSharedPrefs(Context context);
-
-    /**
-     * Only keep top few suggestions from exclusive suggestions.
-     */
-    void filterExclusiveSuggestions(List<Tile> suggestions);
-
-    /**
-     * Dismisses a suggestion.
-     */
-    void dismissSuggestion(Context context, SuggestionControllerMixin suggestionMixin,
-            Suggestion suggestion);
-
-    /**
-     * Returns common tagged data for suggestion logging.
-     */
-    Pair<Integer, Object>[] getLoggingTaggedData(Context context);
 }

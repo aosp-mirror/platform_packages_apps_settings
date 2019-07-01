@@ -15,19 +15,19 @@
  */
 package com.android.settings.fuelgauge;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.LoaderManager;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.loader.app.LoaderManager;
+
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -36,11 +36,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowDashboardFragment.class)
 public class PowerUsageBaseTest {
 

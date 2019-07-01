@@ -16,16 +16,17 @@
 
 package com.android.settings.datetime.timezone;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.icu.text.Collator;
 import android.icu.text.LocaleDisplayNames;
 import android.icu.util.TimeZone;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.model.FilteredCountryTimeZones;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
@@ -54,7 +55,7 @@ public class RegionZonePicker extends BaseTimeZoneInfoPicker {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_ZONE_PICKER_TIME_ZONE;
+        return SettingsEnums.SETTINGS_ZONE_PICKER_TIME_ZONE;
     }
 
     @Override

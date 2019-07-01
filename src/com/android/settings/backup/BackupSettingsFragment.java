@@ -16,16 +16,16 @@
 
 package com.android.settings.backup;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,7 @@ import java.util.List;
 /**
  * Fragment showing the items to launch different backup settings screens.
  */
+@SearchIndexable
 public class BackupSettingsFragment extends DashboardFragment {
     private static final String TAG = "BackupSettings";
 
@@ -67,7 +68,7 @@ public class BackupSettingsFragment extends DashboardFragment {
         return controllers;
     }
 
-    // The intention is to index {@link BackupSettingsActivity} instead of the fragments,
+    // The intention is to index {@link UserBackupSettingsActivity} instead of the fragments,
     // therefore leaving this index provider empty.
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
@@ -75,6 +76,6 @@ public class BackupSettingsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.BACKUP_SETTINGS;
+        return SettingsEnums.BACKUP_SETTINGS;
     }
 }

@@ -16,113 +16,47 @@
 
 package com.android.settings;
 
-import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceGroup;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class LegalSettings extends SettingsPreferenceFragment implements Indexable {
+@SearchIndexable
+public class LegalSettings extends DashboardFragment {
 
-    private static final String KEY_TERMS = "terms";
-    private static final String KEY_LICENSE = "license";
-    private static final String KEY_COPYRIGHT = "copyright";
-    private static final String KEY_WEBVIEW_LICENSE = "webview_license";
-    @VisibleForTesting static final String KEY_WALLPAPER_ATTRIBUTIONS = "wallpaper_attributions";
-
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.about_legal);
-
-        final Activity act = getActivity();
-        // These are contained in the "container" preference group
-        PreferenceGroup parentPreference = getPreferenceScreen();
-        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_TERMS,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_LICENSE,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_COPYRIGHT,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_WEBVIEW_LICENSE,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-
-        checkWallpaperAttributionAvailability(act);
-    }
+    private static final String TAG = "LegalSettings";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ABOUT_LEGAL_SETTINGS;
+        return SettingsEnums.ABOUT_LEGAL_SETTINGS;
     }
 
-    @VisibleForTesting
-    void checkWallpaperAttributionAvailability(Context context) {
-        if (!context.getResources().getBoolean(
-                R.bool.config_show_wallpaper_attribution)) {
-            removePreference(KEY_WALLPAPER_ATTRIBUTIONS);
-        }
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.about_legal;
+    }
 
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(
-                    Context context, boolean enabled) {
-                final SearchIndexableResource sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.about_legal;
-                return Arrays.asList(sir);
-            }
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
 
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                final List<String> keys = super.getNonIndexableKeys(context);
-                if (!checkIntentAction(context, "android.settings.TERMS")) {
-                    keys.add(KEY_TERMS);
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.about_legal;
+                    return Arrays.asList(sir);
                 }
-                if (!checkIntentAction(context, "android.settings.LICENSE")) {
-                    keys.add(KEY_LICENSE);
-                }
-                if (!checkIntentAction(context, "android.settings.COPYRIGHT")) {
-                    keys.add(KEY_COPYRIGHT);
-                }
-                if (!checkIntentAction(context, "android.settings.WEBVIEW_LICENSE")) {
-                    keys.add(KEY_WEBVIEW_LICENSE);
-                }
-                keys.add(KEY_WALLPAPER_ATTRIBUTIONS);
-                return keys;
-            }
-
-            private boolean checkIntentAction(Context context, String action) {
-                final Intent intent = new Intent(action);
-
-                // Find the activity that is in the system image
-                final PackageManager pm = context.getPackageManager();
-                final List<ResolveInfo> list = pm.queryIntentActivities(intent, 0);
-                final int listSize = list.size();
-
-                for (int i = 0; i < listSize; i++) {
-                    ResolveInfo resolveInfo = list.get(i);
-                    if ((resolveInfo.activityInfo.applicationInfo.flags &
-                            ApplicationInfo.FLAG_SYSTEM) != 0) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-    };
-
+            };
 }

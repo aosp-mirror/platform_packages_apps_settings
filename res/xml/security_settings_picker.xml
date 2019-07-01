@@ -52,4 +52,9 @@
             android:title="@string/fingerprint_unlock_skip_fingerprint"
             android:persistent="false"/>
 
+    <com.android.settingslib.RestrictedPreference
+            android:key="unlock_skip_face"
+            android:title="@string/face_unlock_skip_face"
+            android:persistent="false"/>
+
 </PreferenceScreen>

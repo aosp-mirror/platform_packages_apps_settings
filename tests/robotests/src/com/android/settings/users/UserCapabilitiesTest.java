@@ -17,36 +17,37 @@
 package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class})
 public class UserCapabilitiesTest {
 
-    @Mock
     private Context mContext;
-    @Mock
-    private UserManager mUserManager;
+    private ShadowUserManager mUserManager;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        mContext = RuntimeEnvironment.application;
+        mUserManager = ShadowUserManager.getShadow();
     }
 
     @Test
-    public void disallowUserSwitchWhenRestrictionIsSet() {
-        when(mUserManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH)).thenReturn(true);
+    public void disallowUserSwitch_restrictionIsSet_true() {
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, true);
 
         UserCapabilities userCapabilities = UserCapabilities.create(mContext);
         userCapabilities.updateAddUserCapabilities(mContext);
@@ -55,12 +56,33 @@ public class UserCapabilitiesTest {
     }
 
     @Test
-    public void allowUserSwitchWhenRestrictionIsNotSet() {
-        when(mUserManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH)).thenReturn(false);
+    public void disallowUserSwitch_restrictionIsNotSet_false() {
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, false);
 
         UserCapabilities userCapabilities = UserCapabilities.create(mContext);
         userCapabilities.updateAddUserCapabilities(mContext);
 
         assertThat(userCapabilities.mDisallowSwitchUser).isFalse();
+    }
+
+    @Test
+    public void userSwitchEnabled_off() {
+        mUserManager.setUserSwitcherEnabled(false);
+
+        final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        userCapabilities.updateAddUserCapabilities(mContext);
+
+        assertThat(userCapabilities.mUserSwitcherEnabled).isFalse();
+    }
+
+    @Test
+    public void userSwitchEnabled_on() {
+        mUserManager.setUserSwitcherEnabled(true);
+
+        final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        userCapabilities.updateAddUserCapabilities(mContext);
+
+        assertThat(userCapabilities.mUserSwitcherEnabled).isTrue();
     }
 }

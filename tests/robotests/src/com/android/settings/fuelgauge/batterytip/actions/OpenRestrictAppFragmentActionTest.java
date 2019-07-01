@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip.actions;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -29,7 +30,6 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -37,12 +37,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class OpenRestrictAppFragmentActionTest {
 
     private static final String PACKAGE_NAME_1 = "com.android.app1";
@@ -63,7 +64,7 @@ public class OpenRestrictAppFragmentActionTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = Robolectric.setupActivity(Activity.class);
 
         mAppInfos = new ArrayList<>();
         mAppInfos.add(new AppInfo.Builder()

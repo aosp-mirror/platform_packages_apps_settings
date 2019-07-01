@@ -18,9 +18,7 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static junit.framework.Assert.assertEquals;
-
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
@@ -28,11 +26,11 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.VideoPreference;
 
 import org.junit.Before;
@@ -41,9 +39,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class GesturePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -177,28 +176,12 @@ public class GesturePreferenceControllerTest {
         verify(preference).setChecked(false);
     }
 
-    @Test
-    public void updateState_notTwoStatePreference_setSummary() {
-        // Mock a regular preference
-        final Preference preference = mock(Preference.class);
-        // Set the setting to be disabled.
-        mController.mIsPrefEnabled = false;
-
-        // Run through updateState
-        mController.updateState(preference);
-
-        // Verify summary is set to off (as setting is disabled).
-        assertThat(preference.getSummary()).isEqualTo(
-                mContext.getString(com.android.settings.R.string.gesture_setting_off));
-    }
-
     private class TestPrefController extends GesturePreferenceController {
 
         boolean mIsPrefAvailable;
         boolean mIsPrefEnabled;
 
-        private TestPrefController(Context context,
-                String key) {
+        private TestPrefController(Context context, String key) {
             super(context, key);
         }
 
