@@ -1865,7 +1865,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"App för nödsituationer"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Återställ inställningarna"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Vill du återställa?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Detta återställer alla inställningar för:\n\n "<li>"inaktiverade appar"</li>\n" "<li>"inaktiverade appaviseringar"</li>\n" "<li>"standardappar för åtgärder"</li>\n" "<li>"begränsningar i bakgrundsdata för appar"</li>\n" "<li>"begränsningar för alla behörigheter."</li>\n\n" Ingen appdata kommer att försvinna."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Detta återställer alla inställningar för:\n\n "<li>"inaktiverade appar"</li>\n" "<li>"inaktiverade appaviseringar"</li>\n" "<li>"standardappar för åtgärder"</li>\n" "<li>"begränsningar i bakgrundsdata för appar"</li>\n" "<li>"begränsningar för alla behörigheter."</li>\n\n"Ingen appdata kommer att försvinna."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Återställ appar"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Hantera utrymme"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrera"</string>
@@ -3149,7 +3149,6 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serienummer, maskinvaruversion"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"nivå av programkorrigering för android, basbandsversion, kernel-version"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"tema, ljust, mörkt, läge"</string>
-    <string name="keywords_financial_apps_sms_access" msgid="391349097813320537">"ekonomiapp, sms, behörighet"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"mörkt tema"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"fel"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Aktiv låsskärm, visning av låsskärm"</string>
@@ -3157,7 +3156,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"ansikte"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"fingeravtryck, lägg till fingeravtryck"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"nedtonad skärm, pekskärm, batteri, intelligent ljusstyrka, dynamisk ljusstyrka, automatisk ljusstyrka"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"tona ned skärmen, viloläge, batteri, tidsgräns, aktivitet, skärm, inaktiv"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"tona ned skärmen, viloläge, batteri, tidsgräns, avkänning, skärm, inaktiv"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"rotera, vänd, rotation, stående, liggande, orientering, lodrätt, vågrätt"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"uppgradera, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, schema, aviseringar, blockering, tystnad, vibration, viloläge, arbete, fokus, ljud, ljudlös, dag, veckodag, helg, vardagskväll, händelse"</string>
@@ -3888,7 +3887,6 @@
     <string name="write_settings" msgid="4797457275727195681">"Ändra systeminställningar"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"skriva ändra systeminställningar"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_0">%1$d</xliff:g> av <xliff:g id="COUNT_1">%2$d</xliff:g> appar tillåts ändra systeminställningarna"</string>
-    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"Åtkomst till sms för ekonomiappar"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"Kan installera andra appar"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Kan ändra systeminställningar"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Kan ändra systeminställningar"</string>
@@ -4146,7 +4144,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Ansluten till <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Ansluten till flera enheter"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demoläge för systemgränssnitt"</string>
-    <string name="dark_ui_mode" msgid="3888371857083890543">"Mörkt tema"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Mörkt tema"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"På/tillfälligt inaktiverat i batterisparläge"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Tillfälligt aktiverat i batterisparläge"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Mörkt tema aktiveras även för appar som stöds"</string>
@@ -4411,9 +4409,9 @@
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Förbättra enhetens batteritid"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Förbättra mobilens batteritid"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Hindra från att ringa"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Inaktivera ringsignal"</string>
     <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"Tryck ned strömbrytaren och knappen Höj volymen samtidigt för"</string>
-    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Genväg till Hindra enheten från att ringa"</string>
+    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Genväg till Inaktivera ringsignal"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Vibration"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Ljud av"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Gör ingenting"</string>
