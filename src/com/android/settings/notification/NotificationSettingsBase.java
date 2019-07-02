@@ -67,7 +67,6 @@ import java.util.List;
 abstract public class NotificationSettingsBase extends DashboardFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    public static final String ARG_FROM_SETTINGS = "fromSettings";
 
     protected PackageManager mPm;
     protected NotificationBackend mBackend = new NotificationBackend();
@@ -88,7 +87,6 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
     protected boolean mListeningToPackageRemove;
 
     protected List<NotificationPreferenceController> mControllers = new ArrayList<>();
-    protected List<Preference> mDynamicPreferences = new ArrayList<>();
     protected ImportanceListener mImportanceListener = new ImportanceListener();
 
     protected Intent mIntent;
@@ -125,7 +123,6 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
             mUserId = UserHandle.getUserId(mUid);
             mSuspendedAppsAdmin = RestrictedLockUtilsInternal.checkIfApplicationIsSuspended(
                     mContext, mPkg, mUserId);
-
 
             loadChannel();
             loadAppRow();
@@ -280,135 +277,6 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         return null;
     }
 
-    private Drawable getAlertingIcon() {
-        Drawable icon = getContext().getDrawable(R.drawable.ic_notifications_alert);
-        icon.setTintList(Utils.getColorAccent(getContext()));
-        return icon;
-    }
-
-    protected Preference populateSingleChannelPrefs(PreferenceGroup parent,
-            final NotificationChannel channel, final boolean groupBlocked) {
-        MasterSwitchPreference channelPref = new MasterSwitchPreference(getPrefContext());
-        channelPref.setSwitchEnabled(mSuspendedAppsAdmin == null
-                && isChannelBlockable(channel)
-                && isChannelConfigurable(channel)
-                && !groupBlocked);
-        channelPref.setIcon(null);
-        if (channel.getImportance() > IMPORTANCE_LOW) {
-            channelPref.setIcon(getAlertingIcon());
-        }
-        channelPref.setIconSize(MasterSwitchPreference.ICON_SIZE_SMALL);
-        channelPref.setKey(channel.getId());
-        channelPref.setTitle(channel.getName());
-        channelPref.setSummary(NotificationBackend.getSentSummary(
-                mContext, mAppRow.sentByChannel.get(channel.getId()), false));
-        channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
-        Bundle channelArgs = new Bundle();
-        channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-        channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-        channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
-        channelArgs.putBoolean(ARG_FROM_SETTINGS, true);
-        channelPref.setIntent(new SubSettingLauncher(getActivity())
-                .setDestination(ChannelNotificationSettings.class.getName())
-                .setArguments(channelArgs)
-                .setTitleRes(R.string.notification_channel_title)
-                .setSourceMetricsCategory(getMetricsCategory())
-                .toIntent());
-
-        channelPref.setOnPreferenceChangeListener(
-                (preference, o) -> {
-                    boolean value = (Boolean) o;
-                    int importance = value ? IMPORTANCE_LOW : IMPORTANCE_NONE;
-                    channel.setImportance(importance);
-                    channel.lockFields(
-                            NotificationChannel.USER_LOCKED_IMPORTANCE);
-                    MasterSwitchPreference channelPref1 = (MasterSwitchPreference) preference;
-                    channelPref1.setIcon(null);
-                    if (channel.getImportance() > IMPORTANCE_LOW) {
-                        channelPref1.setIcon(getAlertingIcon());
-                    }
-                    toggleBehaviorIconState(channelPref1.getIcon(),
-                            importance != IMPORTANCE_NONE);
-                    mBackend.updateChannel(mPkg, mUid, channel);
-
-                    return true;
-                });
-        if (parent.findPreference(channelPref.getKey()) == null) {
-            parent.addPreference(channelPref);
-        }
-        return channelPref;
-    }
-
-    private void toggleBehaviorIconState(Drawable icon, boolean enabled) {
-        if (icon == null) return;
-
-        LayerDrawable layerDrawable = (LayerDrawable) icon;
-        GradientDrawable background =
-                (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.back);
-
-        if (background == null) return;
-
-        if (enabled) {
-            background.clearColorFilter();
-        } else {
-            background.setColorFilter(new BlendModeColorFilter(
-                    mContext.getColor(R.color.material_grey_300),
-                    BlendMode.SRC_IN));
-        }
-    }
-
-    protected boolean isChannelConfigurable(NotificationChannel channel) {
-        if (channel != null && mAppRow != null) {
-            return !channel.isImportanceLockedByOEM();
-        }
-        return false;
-    }
-
-    protected boolean isChannelBlockable(NotificationChannel channel) {
-        if (channel != null && mAppRow != null) {
-            if (!mAppRow.systemApp) {
-                return true;
-            }
-
-            if (channel.isImportanceLockedByCriticalDeviceFunction()) {
-                return false;
-            }
-
-            if (channel.isImportanceLockedByOEM()) {
-                return false;
-            }
-
-            return channel.isBlockableSystem()
-                    || channel.getImportance() == NotificationManager.IMPORTANCE_NONE;
-        }
-        return false;
-    }
-
-    protected boolean isChannelGroupBlockable(NotificationChannelGroup group) {
-        if (group != null && mAppRow != null) {
-            if (!mAppRow.systemApp) {
-                return true;
-            }
-
-            return group.isBlocked();
-        }
-        return false;
-    }
-
-    protected void setVisible(Preference p, boolean visible) {
-        setVisible(getPreferenceScreen(), p, visible);
-    }
-
-    protected void setVisible(PreferenceGroup parent, Preference p, boolean visible) {
-        final boolean isVisible = parent.findPreference(p.getKey()) != null;
-        if (isVisible == visible) return;
-        if (visible) {
-            parent.addPreference(p);
-        } else {
-            parent.removePreference(p);
-        }
-    }
-
     protected void startListeningToPackageRemove() {
         if (mListeningToPackageRemove) {
             return;
@@ -445,20 +313,6 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         }
     };
 
-    protected Comparator<NotificationChannel> mChannelComparator =
-            (left, right) -> {
-                if (left.isDeleted() != right.isDeleted()) {
-                    return Boolean.compare(left.isDeleted(), right.isDeleted());
-                } else if (left.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
-                    // Uncategorized/miscellaneous legacy channel goes last
-                    return 1;
-                } else if (right.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
-                    return -1;
-                }
-
-                return left.getId().compareTo(right.getId());
-            };
-
     protected class ImportanceListener {
         protected void onImportanceChanged() {
             final PreferenceScreen screen = getPreferenceScreen();
@@ -466,20 +320,6 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                 controller.displayPreference(screen);
             }
             updatePreferenceStates();
-
-            boolean hideDynamicFields = false;
-            if (mAppRow == null || mAppRow.banned) {
-                hideDynamicFields = true;
-            } else {
-                if (mChannel != null) {
-                    hideDynamicFields = mChannel.getImportance() == IMPORTANCE_NONE;
-                } else if (mChannelGroup != null) {
-                    hideDynamicFields = mChannelGroup.isBlocked();
-                }
-            }
-            for (Preference preference : mDynamicPreferences) {
-                setVisible(getPreferenceScreen(), preference, !hideDynamicFields);
-            }
         }
     }
 }
