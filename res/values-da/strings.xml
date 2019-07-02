@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktivér widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Deaktiveret af administratoren"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Se mulighed for lukning"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Vis mulighed for afbryderknap, der deaktiverer Smart Lock, oplåsning med fingeraftryk og notifikationer på låseskærmen"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Vis mulighed for afbryderknap, der deaktiverer Smart Lock, biometrisk oplåsning og notifikationer på låseskærmen"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Trust agents låser kun op"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Hvis denne indstilling aktiveres, vil trust agents holde din enhed oplåst i længere tid, men en låst enhed kan ikke længere låses op."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Lås skærmen, når der ikke længere er sikkert"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Brug ansigtslås til at låse din enhed op, logge ind på apps og bekræfte betalinger.\n\nBemærk!\nDu kan komme til at låse telefonen op, hvis du kigger på den.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt, mens dine øjne er åbne.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en tvilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vil du slette ansigtsdata?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"De billeder og biometriske data, der anvendes af ansigtslås, slettes permanent på en sikker måde. Efter fjernelsen skal du bruge din pinkode, dit mønster eller din adgangskode til at låse din telefon op, logge ind i apps og bekræfte betalinger."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Brug ansigtslås til at låse din telefon op"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingeraftryk"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Adm. fingeraftryk"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Brug fingeraftryk til"</string>
@@ -1220,6 +1221,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimer lysstyrken til det omgivende lys. Når denne funktion er slået til, kan du stadig justere lysstyrken midlertidigt."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Skærmens lysstyrke tilpasses automatisk på baggrund af dine omgivelser og dine aktiviteter. Du kan flytte skyderen manuelt for at hjælpe Automatisk lysstyrke med at lære dine præferencer."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Skærmens hvidbalance"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Opmærksom skærm"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Aktiveret/Skærmen slukker ikke, når du kigger på den"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Fra"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Tilpas din skærm"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Vælg baggrund fra"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Tilpas din Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Prøv forskellige stilarter, baggrunde, ure m.m."</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Pauseskærm"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Under opladning, eller når enheden er tilsluttet en dockingstation"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Begge dele"</string>
@@ -3161,7 +3164,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"ansigt"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"fingeraftryk, tilføj fingeraftryk"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"dæmp skærmlys, touchskærm, batteri, intelligent lysstyrke, dynamisk klarhed, automatisk lysstyrke"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"dæmp skærm, dvale, batteri, timeout, betjening, visning, skærm, inaktivitet"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"dæmp skærm, dvale, batteri, timeout, opmærksom skærm, visning, skærm, inaktivitet,"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"rotere, vende, rotation, stående, liggende, retning, lodret, vandret"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"opgradere, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"forstyr ikke, planlægge, notifikationer, blokere, lydløs, vibrere, sove, arbejde, fokusere, lyd, slå lyden fra, dag, hverdag, weekend, hverdagsaften, begivenhed"</string>
@@ -4184,9 +4187,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuel"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Frigør plads nu"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Bevægelser"</string>
-    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr din telefon med hurtige bevægelser"</string>
-    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr din tablet med hurtige bevægelser"</string>
-    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr din enhed med hurtige bevægelser"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr din telefon med håndtegn"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr din tablet med håndtegn"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr din enhed med håndtegn"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Åbn kamera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Du kan åbne dit kamera hurtigt ved at trykke to gange på afbryderknappen. Denne genvej fungerer fra enhver skærm."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Åbn kameraet hurtigt"</string>

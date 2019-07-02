@@ -356,14 +356,14 @@
     <string name="time_picker_title" msgid="483460752287255019">"Čas"</string>
     <string name="lock_after_timeout" msgid="3041497579354520533">"Uzamknúť po uplynutí časového limitu obrazovky"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uplynutí časového limitu"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Okamžite po uplynutí časového limitu, keď zariadenie udržiava odomknuté agent dôvery <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uplynutí časového limitu, okrem prípadov, keď zariadenie udržiava odomknuté agent dôvery <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Okamžite po uplynutí časového limitu, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uplynutí časového limitu, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Zobrazovať vlastníka na uzamknutej obrazovke"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Správa na uzamknutej obrazovke"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktiv. miniaplikácie"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Zakázané správcom"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Zobraziť možnosti uzamknutia"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Zobrazenie vypínača, ktorý zapne Smart Lock, odomykanie odtlačkom prsta a upozornenia na uzamknutej obrazovke"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Zobrazenie vypínača, ktorý vypína Smart Lock, biometrické odomykanie a upozornenia na uzamknutej obrazovke"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Agenty dôvery predĺžia iba odomknutie"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Ak túto možnosť povolíte, agenty dôvery ponechajú vaše zariadenie dlhšie odomknuté, ale už nebudú môcť odomknúť uzamknuté zariadenie."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Uzamknutie obrazovky v prípade straty dôveryhodnosti"</string>
@@ -449,6 +449,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Odomknutím tvárou môžete odomykať zariadenie, prihlasovať sa do aplikácií a potvrdzovať platby.\n\nDôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár a budete mať otvorené oči.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše dvojča."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Chcete odstrániť údaje o tvári?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Snímky a biometrické údaje používané na odomykanie tvárou budú natrvalo a bezpečne odstránené. Po ich odstránení budete na odomykanie telefónu, prihlasovanie do aplikácií a potvrdzovanie platieb potrebovať svoj PIN, vzor alebo heslo."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Odomykajte telefón tvárou"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Odtlačok prsta"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Správa odtlačkov"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Použiť odtlačok na"</string>
@@ -1258,13 +1259,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimalizovať jas podľa okolitého svetla. Keď je táto funkcia zapnutá, môžete jas stále dočasne upraviť."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Jas obrazovky sa automaticky prispôsobí prostrediu a aktivitám. Ručným posúvaním posúvača učíte adaptáciu jasu svoje preferované nastavenia."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Zobrazenie vyváženia bielej"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Screen attention"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Vnímavá obrazovka"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Zapnuté – Obrazovka sa nevypne, ak sa na ňu budete pozerať"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Vypnuté"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Vyžaduje sa prístup k fotoaparátu"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Klepnutím môžete spravovať povolenia služieb prispôsobenia zariadenia"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Zabráni vypnutiu obrazovky, keď sa na ňu budete pozerať"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Screen attention pomocou predného fotoaparátu zistí, či sa používateľ pozerá na obrazovku. Spúšťa sa v zariadení a snímky sa nikdy neukladajú ani neodosielajú Googlu."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Vnímavá obrazovka pomocou predného fotoaparátu zistí, či sa používateľ pozerá na obrazovku. Spúšťa sa v zariadení a snímky sa nikdy neukladajú ani neodosielajú Googlu."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Nevypínať obrazovku pri pozeraní"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nočný režim"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Nočný režim zafarbí obrazovku do žltohneda. Obrazovka bude pri tlmenom osvetlení menej rušivá aj čitateľnejšia a bude sa vám lepšie zaspávať."</string>
@@ -1302,7 +1304,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Prispôsobte si obrazovku"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Vybrať tapetu"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Prispôsobte si Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Vyskúšajte rôzne štýly, tapety, hodiny a ďalšie"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Šetrič obrazovky"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Pri nabíjaní alebo v doku"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"V oboch prípadoch"</string>
@@ -2523,7 +2526,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Batéria využívaná baterkou"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Batéria využívaná fotoaparátom"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Využitie batérie obrazovkou a podsvietením"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Znížte jas obrazovky alebo interval vypnutia obrazovky"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Znížte jas obrazovky alebo časový limit obrazovky"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Využitie batérie sieťou Wi‑Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Vypnite pripojenie Wi‑Fi, keď sa sieť Wi‑Fi nepoužíva alebo keď nie je k dispozícii"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Využitie batérie technológiou Bluetooth"</string>
@@ -3245,7 +3248,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"tvár"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"odtlačok prsta, pridať odtlačok prsta"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"stmavenie obrazovky, dotyková obrazovka, batéria, inteligentný jas, dynamický jas, automatický jas"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"stlmiť obrazovku, spánok, batéria, časový limit, pozor, zobrazenie, obrazovka, nečinnosť"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"stlmiť obrazovku, spánok, batéria, časový limit, vnímavá, zobrazenie, obrazovka, nečinnosť"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"otočiť, prevrátiť, rotovať, na výšku, na šírku, orientácia, zvisle, vodorovne"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"inovovať, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"nerušiť, rozpis, upozornenia, blokovať, stíšiť, vibrovať, spánok, práca, sústredenie, zvuk, vypnúť zvuk, deň, pracovný deň, víkend, noc pracovného dňa, udalosť"</string>
@@ -3512,7 +3515,7 @@
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Vyskakovať na obrazovke"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blokovať"</string>
     <string name="notification_silence_title" msgid="6986752165900591125">"Tiché"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"So zvukom"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Upozorňovanie"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Povoliť vyrušenia"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Povoliť aplikácii prehrávať zvuk, vibrovať alebo zobrazovať upozornenia na obrazovke"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Na rozbaľovacom paneli zbaliť upozornenia do jedného riadka"</string>
@@ -4289,8 +4292,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Pripojené k zariadeniu <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Pripojené k viacerým zariadeniam"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Ukážka používateľského rozhrania systému"</string>
-    <!-- no translation found for dark_ui_mode (6795784845192720944) -->
-    <skip />
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Tmavý motív"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Zapnuté / dočasne vypnuté šetričom batérie"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Dočasne zapnuté šetričom batérie"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Na tmavý motív sa prepnú aj podporované aplikácie"</string>

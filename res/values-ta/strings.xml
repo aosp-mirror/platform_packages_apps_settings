@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTCஆஃப்செட்டின்படி தேர்வுசெய்க"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"தேதி"</string>
     <string name="time_picker_title" msgid="483460752287255019">"நேரம்"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"திரை நேரம் முடிந்ததும் பூட்டு"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"திரை அணைவு நேரம் முடிந்ததும் பூட்டு"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"நேரம் முடிந்த <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> நொடிகளுக்குப் பிறகு"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ஆல் திறக்கப்பட்டிருக்கும் சூழல்களைத் தவிர மற்ற சூழல்களில் நேரம் முடிந்ததும் பூட்டிக்கொள்ளும்"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ஆல் திறக்கப்பட்டிருக்கும் சூழல்களைத் தவிர மற்ற சூழல்களில் நேரம் முடிந்த <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> நொடிகளுக்குப் பிறகு பூட்டிக்கொள்ளும்"</string>
@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"விட்ஜெட்களை இயக்கு"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"நிர்வாகி முடக்கியுள்ளார்"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"பூட்டு விருப்பத்தைக் காட்டு"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Smart Lock, கைரேகை மூலம் திறக்கும் அனுமதி மற்றும் லாக் ஸ்கிரீனில் தெரியும் அறிவிப்புகள் ஆகியவற்றை ஆஃப் செய்யக்கூடிய, பவர் பட்டன் விருப்பத்தைக் காண்பிக்கும்"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Smart Lock, பயோமெட்ரிக் அன்லாக்கிங், பூட்டுத் திரையில் தெரியும் அறிவிப்புகள் ஆகியவற்றை ஆஃப் செய்யக்கூடிய \'பவர் பட்டன்\' விருப்பத்தைக் காட்டும்"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"நீடித்த திறப்பு: நம்பகமான ஏஜெண்டுக்கு"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"நம்பமான ஏஜெண்டுகளை இயக்குவதன் மூலம் நீண்ட நேரம் உங்கள் சாதனத்தைத் திறந்து வைக்க முடியுமே தவிர மூடப்பட்டுள்ள சாதனத்தை அது திறக்காது."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"நம்பிக்கை இழந்ததும் திரை பூட்டப்படுதல்"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"உங்கள் சாதனத்தைத் திறக்கவும் ஆப்ஸில் உள்நுழையவும் பேமெண்ட்டுகளை உறுதிப்படுத்தவும் \'முகம் காட்டித் திறத்தலைப்\' பயன்படுத்தலாம்.\n\nகவனத்திற்கு:\nநீங்கள் தற்செயலாக மொபைலைப் பார்க்கும் போதும் அது திறக்கக்கூடும்.\n\nஉங்கள் கண்கள் திறந்திருக்கும் போது முகத்திற்கு முன் மொபைலைக் காட்டி வேறொருவர் அதைத் திறக்கலாம்.\n\nபிள்ளைகள், உடன் பிறந்தவர்கள் போன்று உங்களின் சாயலில் இருப்பவர்களும் மொபைலைத் திறக்க முடியும்."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"முகத்திற்கான தரவை அகற்றவா?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"\'முகம் காட்டித் திறத்தல்’ அம்சம் பயன்படுத்தும் படங்களும் பயோமெட்ரிக் தரவும் நிரந்தரமாகவும் பாதுகாப்பாகவும் நீக்கப்படும். அவ்வாறு அகற்றப்பட்ட பிறகு மொபைலை அன்லாக் செய்யவும், ஆப்ஸில் உள்நுழையவும், பேமெண்ட்டுகளை உறுதிப்படுத்தவும் பின்னையோ, பேட்டர்னையோ, கடவுச்சொல்லையோ பயன்படுத்த வேண்டும்."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"உங்கள் மொபைலை அன்லாக் செய்ய \'முகம் காட்டித் திறத்தல்\' அம்சத்தைப் பயன்படுத்தலாம்."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"கைரேகை"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"கைரேகைகளை நிர்வகிக்கவும்"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"இதற்குப் பயன்படுத்து:"</string>
@@ -1220,13 +1221,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"கிடைக்கும் ஒளிக்கேற்ப ஒளிர்வை மேம்படுத்து. இதை இயக்கியிருந்தால், தற்காலிகமாக ஒளிர்வைச் சரிசெய்யலாம்."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"நீங்கள் இருக்கும் சூழலுக்கும், செய்யும் வேலைகளுக்கும் ஏற்றவாறு, தானாகவே உங்களின் திரை ஒளிர்வு கூடும், குறையும். நீங்கள் எவ்வளவு வெளிச்சத்தை விரும்புகிறீர்கள் என்பதைச் சூழலுக்கேற்ற ஒளிர்வு தெரிந்துகொள்ள, ஸ்லைடரைக் கைமுறையாக நகர்த்தலாம்."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"வெண் சமநிலையை காட்சிப்படுத்தல்"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"திரைக் கவனிப்பு"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"திரை மீது கவனம்"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"ஆன் / திரையைப் பார்த்துக் கொண்டிருக்கையில் அது ஆஃப் ஆகாது"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"முடக்கு"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"கேமரா அணுகல் தேவை"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"\'சாதனத்தின் பிரத்தியேகச் சேவைகளுக்கான’ அனுமதிகளை நிர்வகிக்கத் தட்டவும்"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"நீங்கள் பார்த்துக் கொண்டிருக்கையில் திரை ஆஃப் ஆவதைத் தவிர்க்கும்"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"முன்பக்கக் கேமராவைப் பயன்படுத்தி திரையை யாராவது பார்க்கிறார்களா என்பதை Screen aware அறியும். இது சாதன அளவிலேயே இயங்கும், படங்கள் சேமிக்கப்படவோ Googleளுக்கு அனுப்பப்படவோ மாட்டாது."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"முன்பக்கக் கேமராவைப் பயன்படுத்தி திரையை யாராவது பார்க்கிறார்களா என்பதை \'திரை மீது கவனம்\' எனும் அம்சம் அறியும். இது சாதன அளவிலேயே இயங்கும், படங்கள் சேமிக்கப்படவோ Googleளுக்கு அனுப்பப்படவோ மாட்டாது."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"பார்க்கும்போது திரையை ஆனில் வைத்திருக்கும்"</string>
     <string name="night_display_title" msgid="2626451512200357686">"நைட் லைட்"</string>
     <string name="night_display_text" msgid="1837277457033025056">"நைட் லைட் அம்சமானது உங்கள் திரையை மஞ்சளும் ஆரஞ்சும் கலந்த நிறத்திற்கு மாற்றும். இது மங்கலான ஒளியில் திரையைப் பார்ப்பதை அல்லது படிப்பதை எளிதாக்குவதோடு, விரைவாக உறங்க உதவக்கூடும்."</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"திரையைத் தனிப்பயனாக்கு"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"வால்பேப்பர் தேர்வு"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pixelலைப் பிரத்தியேகமாக்குதல்"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"வேறு ஸ்டைல், வால்பேப்பர், கடிகாரம் &amp; பலவற்றை முயல்க"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"ஸ்கிரீன் சேவர்"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"சார்ஜ் ஆகும் போது அல்லது சாதனத்தில் இணைந்திருக்கும்போது"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"இவற்றில் ஒன்று"</string>
@@ -2449,7 +2452,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"ஃபிளாஷ்லைட்டால் பயன்படுத்தப்பட்ட பேட்டரி"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"கேமரா பயன்படுத்திய பேட்டரி"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"காட்சி மற்றும் பின்னொளி ஆகியவற்றால் பயன்படுத்தப்பட்ட பேட்டரியின் அளவு"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"திரை ஒளிர்வு மற்றும்/அல்லது திரை காலநேரத்தைக் குறைக்கவும்"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"திரை ஒளிர்வு மற்றும்/அல்லது திரை அணைவு நேரத்தைக் குறைக்கவும்"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"வைஃபை ஆல் பயன்படுத்தப்பட்ட பேட்டரி"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"வைஃபை ஐப் பயன்படுத்தாமல் இருக்கும்போது அல்லது அது கிடைக்காதபோது அதை முடக்கவும்"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"புளூடூத்தால் பயன்படுத்தப்பட்ட பேட்டரி அளவு"</string>
@@ -3161,11 +3164,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"முகம்"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"கைரேகை, கைரேகையைச் சேர்"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"மங்கல் திரை, டச்ஸ்கிரீன், பேட்டரி, ஸ்மார்ட் ஒளிர்வு, சிறப்பு ஒளிர்வு, தானியங்கு ஒளிர்வு"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"மங்கலான திரை, உறக்கம், பேட்டரி, முடிவு நேரம், கவனம், காட்சி, திரை, செயலின்மை"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"மங்கலான திரை, உறக்கம், பேட்டரி, அணைவு நேரம், கவனம், காட்சி, திரை, செயலின்மை"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"சுழற்று, ஃபிலிப், சுழற்சி, போர்ட்ரெய்ட், லேண்ட்ஸ்கேப், திசையமைப்பு, நீளவாக்கு, அகலவாக்கு"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"மேம்படுத்து, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, திட்டமிடு, அறிவிப்புகள், தடு, நிசப்தம், அதிர்வு, உறங்கு, பணி, ஒலி, ஒலியடக்கு, நாள், வார நாள், வாரயிறுதி, வார நாளின் இரவு, நிகழ்வு"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"திரை, பூட்டு நேரம், முடிவு நேரம், பூட்டுத் திரை"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"திரை, பூட்டு நேரம், அணைவு நேரம், பூட்டுத் திரை"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"நினைவகம், தற்காலிக நினைவகம், தரவு, நீக்கு, அழி, காலியாக்கு, நினைவக இடம்"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"இணைக்கப்பட்டது, சாதனம், ஹெட்ஃபோன்கள், ஹெட்செட், ஸ்பீக்கர், வயர்லெஸ், இணை, சிறிய ஹெட்ஃபோன்கள், இசை, மீடியா"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"பின்னணி, திரை, பூட்டுத்திரை, தீம்"</string>
@@ -3940,7 +3943,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"சாதனச் சேமிப்பகம்: <xliff:g id="PERCENTAGE">%1$s</xliff:g> பயன்படுத்தப்பட்டது - <xliff:g id="FREE_SPACE">%2$s</xliff:g> பயன்படுத்துவதற்கு உள்ளது"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> நிமிடங்களாக எந்தச் செயல்பாடும் இல்லை எனில், உறக்கநிலைக்குச் செல்லும்"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"வால்பேப்பர், உறக்கம், எழுத்தின் அளவு"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"ஸ்டைல்கள், வால்பேப்பர்கள், திரை முடிவு நேரம், எழுத்துரு அளவு"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"ஸ்டைல்கள், வால்பேப்பர்கள், திரை அணைவு நேரம், எழுத்துரு அளவு"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"உறக்கப் பயன்முறை, எழுத்துரு அளவு"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"10 நிமிடங்களாக எந்தச் செயல்பாடும் இல்லை எனில், உறக்கநிலைக்குச் செல்லும்"</string>
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> இல் சராசரியாக <xliff:g id="USED_MEMORY">%1$s</xliff:g> நினைவகம் பயன்படுத்தப்பட்டுள்ளது"</string>

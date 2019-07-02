@@ -349,7 +349,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Auf UTC-Basis auswählen"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Uhrzeit"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Display automatisch sperren nach Ablauf des Zeitlimits"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Displaysperre nach autom. Ausschalten des Displays"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nach Ablauf des Zeitlimits"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Unmittelbar nach Ablauf des Zeitlimits, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nach Ablauf des Zeitlimits, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -358,7 +358,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Widgets aktivieren"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Vom Administrator deaktiviert"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Option zum Sperren anzeigen"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Option für Ein-/Aus-Taste des Displays, durch die Smart Lock, das Entsperren per Fingerabdruck und Benachrichtigungen auf dem Sperrbildschirm deaktiviert werden"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Option für Ein/Aus-Taste des Displays, durch die Smart Lock, das biometrische Entsperren und Benachrichtigungen auf dem Sperrbildschirm deaktiviert werden"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Trust Agents können Entsperrung nur verlängern"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Wenn aktiviert, halten Trust Agents das Gerät länger entsperrt, sie können aber gesperrte Geräte nicht mehr entsperren"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Bildschirm sperren, wenn nicht mehr vertrauenswürdig"</string>
@@ -442,6 +442,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Mit Face Unlock kannst du dein Gerät entsperren, dich in Apps anmelden und Zahlungen bestätigen.\n\nWenn du diese Option nutzt, solltest du Folgendes bedenken:\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone dadurch entsperren, dass sie es vor dein Gesicht hält, während deine Augen geöffnet sind.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise deinem eineiigen Zwilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Gesichtsdaten löschen?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Die von Face Unlock aufgezeichneten Bilder und biometrischen Daten werden dauerhaft und sicher gelöscht. Nach dem Entfernen benötigst du zum Entsperren deines Smartphones, zum Anmelden bei Apps und zum Bestätigen von Zahlungen deine PIN, dein Muster oder dein Passwort."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Verwende die Gesichtserkennung, um dein Smartphone zu entsperren"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerabdruck"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Fingerabdrücke verwalten"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Abdruck nutzen für"</string>
@@ -1202,13 +1203,13 @@
     <string name="auto_brightness_title" msgid="6341042882350279391">"Automatische Helligkeit"</string>
     <string name="auto_brightness_summary" msgid="5652108419977937800">"Bildschirmhelligkeit passt sich der Umgebung an"</string>
     <string name="auto_brightness_summary_on" msgid="3519854265558828744">"An"</string>
-    <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Deaktiviert"</string>
+    <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Aus"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Bevorzugte Helligkeit ist sehr niedrig"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"Bevorzugte Helligkeit ist niedrig"</string>
     <string name="auto_brightness_summary_default" msgid="7225666614394726845">"Bevorzugte Helligkeit ist standardmäßig eingestellt"</string>
     <string name="auto_brightness_summary_high" msgid="7172304165631136027">"Bevorzugte Helligkeit ist hoch"</string>
     <string name="auto_brightness_summary_very_high" msgid="979277812582279078">"Bevorzugte Helligkeit ist sehr hoch"</string>
-    <string name="auto_brightness_off_title" msgid="2996864829946190795">"Deaktiviert"</string>
+    <string name="auto_brightness_off_title" msgid="2996864829946190795">"Aus"</string>
     <string name="auto_brightness_very_low_title" msgid="8252988638614126320">"Sehr niedrig"</string>
     <string name="auto_brightness_low_title" msgid="1632186441514863377">"Niedrig"</string>
     <string name="auto_brightness_default_title" msgid="936771997353506620">"Standard"</string>
@@ -1220,6 +1221,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"\"Helligkeit an Lichtverhältnisse anpassen\": Ist diese Funktion aktiviert, kannst du die Helligkeit dennoch vorübergehend ändern."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Die Helligkeit des Displays passt sich automatisch an deine Umgebung und deine Aktivitäten an. Mit dem Schieberegler kannst du manuell nachjustieren und \"Automatische Helligkeit\" merkt sich deine Präferenz."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Weißabgleich des Bildschirms"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Aufmerksamkeitserkennung"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"An / Der Bildschirm wird nicht ausgeschaltet, solange du auf ihn blickst"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Aus"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Display personalisieren"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Hintergrund auswählen"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pixel personalisieren"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Verschiedene Designs, Hintergründe &amp; Uhren ausprobieren"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Bildschirmschoner"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Beim Aufladen oder wenn in Dockingstation"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"In beiden Fällen"</string>
@@ -1289,7 +1292,7 @@
     <string name="short_summary_font_size" msgid="6819778801232989076">"Text vergrößern oder verkleinern"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Einstellungen für SIM-Sperre"</string>
     <string name="sim_lock_settings_category" msgid="6242052161214271091">"SIM-Kartensperre"</string>
-    <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"Deaktiviert"</string>
+    <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"Aus"</string>
     <string name="sim_lock_settings_summary_on" msgid="39103355956342985">"Gesperrt"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM-Kartensperre"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"SIM-Karte sperren"</string>
@@ -1793,7 +1796,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Muster sichtbar machen"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Muster für das Profil anzeigen"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Bei Berührung vibrieren"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Ein/Aus sperrt Gerät"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Ein/Aus sperrt Gerät sofort"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Entsperrungsmuster"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Muster ändern"</string>
@@ -2236,7 +2239,7 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Es wurde keine Beschreibung bereitgestellt."</string>
     <string name="settings_button" msgid="3006713718908152930">"Einstellungen"</string>
     <string name="print_settings" msgid="4742428530112487843">"Drucken"</string>
-    <string name="print_settings_summary_no_service" msgid="6354322414246865875">"Deaktiviert"</string>
+    <string name="print_settings_summary_no_service" msgid="6354322414246865875">"Aus"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="6005468025646083029">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> Druckdienste aktiviert</item>
       <item quantity="one">1 Druckdienst aktiviert</item>
@@ -2535,7 +2538,7 @@
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 Stunden"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 Stunden"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 Tag"</string>
-    <string name="menu_show_system" msgid="8864603400415567635">"Systemprozesse anzeigen"</string>
+    <string name="menu_show_system" msgid="8864603400415567635">"System-Apps anzeigen"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"Systemprozesse ausblenden"</string>
     <string name="menu_show_percentage" msgid="4717204046118199806">"Prozentangaben anzeigen"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"USS verwenden"</string>
@@ -3161,7 +3164,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"Gesicht"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"Fingerabdruck, Fingerabdruck hinzufügen"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"display dimmen, touchscreen, akku, intelligente helligkeit, dynamische helligkeit, automatische helligkeit"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"display dimmen, ruhemodus, akku, zeitlimit, aufmerksamkeit, display, bildschirm, inaktivität, timout, automatisch ausschalten"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"display dimmen, ruhemodus, akku, zeitlimit, aufmerksamkeit, display, bildschirm, inaktivität, timeout, automatisch ausschalten"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"drehen, spiegeln, drehung, hochformat, querformat, ausrichtung, vertikal, horizontal"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"upgrade, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, zeitplan, benachrichtigungen, blockieren, lautlos, vibrieren, schlaf, arbeit, fokus, ton, stumm, tag, wochentag, wochenende, wochenende, ereignis, bns"</string>
@@ -3494,8 +3497,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> Kategorien gelöscht</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> Kategorie gelöscht</item>
     </plurals>
-    <string name="notification_toggle_on" msgid="650145396718191048">"Aktiviert"</string>
-    <string name="notification_toggle_off" msgid="2142010737190671762">"Deaktiviert"</string>
+    <string name="notification_toggle_on" msgid="650145396718191048">"An"</string>
+    <string name="notification_toggle_off" msgid="2142010737190671762">"Aus"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Alle blockieren"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Diese Benachrichtigungen nie anzeigen"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Benachrichtigungen anzeigen"</string>

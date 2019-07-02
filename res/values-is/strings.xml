@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Virkja græjur"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Gert óvirkt af kerfisstjóra"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Sýna valkost fyrir læsingu"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Sýna valkost fyrir aflrofa sem slekkur á Smart Lock, opnun með fingrafari og tilkynningum á lásskjá"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Sýna valkost fyrir aflrofa sem slekkur á Smart Lock, opnun með lífkennum og tilkynningum á lásskjá"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Aðeins traustfulltrúar geta lengt opnun"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Ef kveikt er á þessu munu traustfulltrúar halda tækinu opnu í lengri tíma, en þeir geta ekki lengur tekið læst tæki úr lás."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Læsir skjánum þegar traust vantar"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Notaðu andlitsopnun til að taka tækið úr lás, skrá þig inn í forrit og staðfesta greiðslur.\n\nHafðu í huga að:\nSíminn kann að opnast óvart þegar þú lítur á hann.\n\nAðrir geta opnað símann þinn með því að halda honum upp að andliti þínu þegar þú ert með augun opin.\n\nEinhver sem er mjög lík(ur) þér getur opnað símann þinn, t.d. eineggja tvíburi."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Eyða andlitsgögnum?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Myndum og líffræðilegum tölfræðigögnum sem andlitsopnun notar verður eytt á öruggan hátt fyrir fullt og allt. Þegar þeim hefur verið eytt þarftu PIN-númer, mynstur eða aðgangsorð til að taka símann úr lás, skrá þig inn í forrit og staðfesta greiðslur."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Nota andlitsopnun til að taka símann úr lás"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingrafar"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Stjórna fingraförum"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Nota fingrafar fyrir"</string>
@@ -1220,6 +1221,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Stilla birtustig eftir umhverfisbirtu. Þegar kveikt er á þessu má enn breyta birtustigi tímabundið."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Birtustigi skjásins verður breytt sjálfkrafa í samræmi við umhverfið og hvað þú ert að gera. Þú getur fært sleðann til að hjálpa aðlögun birtustigs að læra inn á hvernig þú vilt hafa birtuna."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Sýna hvítjöfnun"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Skjáskynjun"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Kveikt / Það slokknar ekki á skjánum ef þú horfir á hann"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Slökkt"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Sérsníddu skjáinn eftir þínu höfði"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Velja veggfóður úr"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Sérsníddu Pixel-símann þinn"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Prófaðu mismunandi stíla, veggfóður, klukkur og fleira"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Skjávari"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Við hleðslu eða í dokku"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Annaðhvort"</string>
@@ -3161,7 +3164,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"andlit"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"fingrafar, bæta við fingrafari"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"myrkva skjá, snertiskjár, rafhlaða, birtuaðlögun, kvikt birtustig, sjálfvirkt birtustig"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"myrkva skjá, biðstaða, rafhlaða, tímamörk, athuga, skjár, aðgerðarleysi"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"myrkva skjá, biðstaða, rafhlaða, tímamörk, skjáskynjun, skjár, aðgerðaleysi"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"snúa, spegla, snúningur, skammsnið, langsnið, stefna, lárétt, lóðrétt"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"uppfæra, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"ónáðið ekki, dagskrá, tilkynningar, setja á bannlista, þagga, titringur, sofa, vinna, fókus, hljóð, slökkva á hljóði, dagur, vikudagur, helgi, virkt kvöld, viðburður"</string>

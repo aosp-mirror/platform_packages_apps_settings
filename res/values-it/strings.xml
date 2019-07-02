@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Seleziona per scarto da UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Blocca dopo il timeout dello schermo"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Blocca dopo lo spegnimento schermo"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo il timeout"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Subito dopo il timeout, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo il timeout, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Subito dopo lo spegnimento dello schermo, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo lo spegnimento dello schermo, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostra info proprietario su blocco schermo"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Messaggio schermata di blocco"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Abilita widget"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Disattivati dall\'amministratore"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Mostra opzione di blocco"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Visualizza l\'opzione del tasto di accensione che disattiva Smart Lock, lo sblocco tramite impronta digitale e le notifiche nella schermata di blocco"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Visualizza l\'opzione del tasto di accensione che disattiva Smart Lock, lo sblocco tramite dati biometrici e le notifiche nella schermata di blocco"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Sblocco solo per agenti di attendibilità"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Se l\'opzione è attiva, gli agenti di attendibilità manterranno sbloccato il tuo dispositivo per più tempo, ma non potranno più sbloccare un dispositivo bloccato."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Blocco dello schermo quando viene persa l\'attendibilità"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Usa la funzionalità Sblocco col sorriso per sbloccare il dispositivo, accedere alle app e confermare pagamenti.\n\nTieni presente che:\nSe guardi il telefono puoi sbloccarlo anche quando non hai intenzione di farlo.\n\nIl tuo telefono può essere sbloccato da un\'altra persona se viene rivolto verso il tuo viso e hai gli occhi aperti.\n\nIl tuo telefono può essere sbloccato da qualcuno che ti assomiglia molto, ad esempio un gemello."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Rimuovere i dati viso?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Le immagini e i dati biometrici usati da Sblocco col sorriso verranno eliminati in modo definitivo e sicuro. Dopo la rimozione, ti serviranno il PIN, la sequenza o la password per sbloccare il telefono, accedere alle app e confermare i pagamenti."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Usa la funzionalità Sblocco col sorriso per sbloccare il tuo telefono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Impronta digitale"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gestisci impronte digitali"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Utilizza l\'impronta digitale per"</string>
@@ -1220,13 +1221,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Ottimizza il livello di luminosità per la luce disponibile. Quando questa funzione è attiva, puoi comunque regolare la luminosità temporaneamente."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"La luminosità dello schermo verrà regolata automaticamente in base all\'ambiente e alle attività. Puoi spostare manualmente il dispositivo di scorrimento per far sì che la luminosità adattiva memorizzi le tue preferenze."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Bilanciamento bianco display"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Schermo vigile"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"On/Lo schermo non si spegne se lo stai guardando"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Off"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Accesso alla fotocamera necessario"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tocca per gestire le autorizzazioni dei servizi di personalizzazione del dispositivo"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Consente di impedire lo spegnimento dello schermo se lo stai guardando"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"L\'opzione Schermo vigile usa la fotocamera anteriore per controllare se qualcuno sta guardando lo schermo. Funziona sul dispositivo e le immagini non vengono mai memorizzate o inviate a Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"La funzionalità Schermo vigile usa la fotocamera anteriore per controllare se qualcuno sta guardando lo schermo. Funziona sul dispositivo e le immagini non vengono mai memorizzate o inviate a Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Mantiene lo schermo attivo mentre lo guardi"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Luminosità notturna"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Con la funzione Luminosità notturna, il tuo schermo diventa color ambra. In questo modo potrai guardarlo senza sforzare la vista o leggere in condizioni di luce attenuata e potrai addormentarti più facilmente."</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizza lo schermo"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Scegli sfondo da"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personalizza il tuo Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Prova diversi stili, sfondi, orologi e non solo"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Salvaschermo"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Durante la ricarica o quando inserito nel dock"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Entrambi i casi"</string>
@@ -3161,11 +3164,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"volto"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"impronta, aggiungere impronta"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"attenuazione schermo, touchscreen, batteria, luminosità intelligente, luminosità dinamica, luminosità automatica"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"oscurare lo schermo, sospensione, batteria, timeout, attenzione, display, schermo, inattività"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"oscurare lo schermo, sospensione, batteria, spegnimento, attenzione, display, schermo, inattività"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"ruotare, capovolgere, rotazione, verticale, orizzontale, orientamento"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"upgrade, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"non disturbare, pianificare, notifiche, bloccare, silenziare, vibrazione, sospensione, lavoro, concentrazione, suono, audio disattivato, giorno, giorno feriale, fine settimana, notte di giorno feriale, evento"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"schermo, tempo blocco, timeout, schermata di blocco"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"schermo, tempo blocco, spegnimento, schermata di blocco"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"memoria, cache dati, eliminare, cancellare, liberare, spazio"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"connesso, dispositivo, cuffie, auricolari, altoparlante, wireless, accoppiare, musica, contenuti multimediali"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"sfondo, schermo, schermata di blocco, tema"</string>
@@ -3425,7 +3428,7 @@
     <string name="notification_alert_title" msgid="2267584776990348784">"Avvisi"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Consenti interruzioni"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Consenti all\'app di emettere suoni o vibrazioni e/o mostrare notifiche sullo schermo"</string>
-    <string name="notification_channel_summary_min" msgid="2965790706738495761">"Nell\'area a discesa comprimi le notifiche su una sola riga"</string>
+    <string name="notification_channel_summary_min" msgid="2965790706738495761">"Nell\'area a discesa comprime le notifiche su una sola riga"</string>
     <string name="notification_channel_summary_low" msgid="7050068866167282765">"Favorisce la tua concentrazione grazie all\'assenza di suono o vibrazione"</string>
     <string name="notification_channel_summary_default" msgid="5753454293847059695">"Richiama la tua attenzione con suono o vibrazione"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Quando il dispositivo è sbloccato, mostra le notifiche come banner in cima allo schermo"</string>

@@ -363,7 +363,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Omogoči pripomočke"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Onemogočil skrbnik"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Prikaz možnosti za zaklep"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Prikaz možnosti gumba za vklop, s katero izklopite funkcijo Smart Lock, odklepanje s prstnimi odtisi in obvestila na zaklenjenem zaslonu"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Prikaz možnosti gumba za vklop, s katero izklopite funkcijo Smart Lock, odklepanje z biometričnimi podatki in obvestila na zaklenjenem zaslonu"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Posredniki zaupanja le podaljšajo čas odklenjenosti"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Če je ta možnost omogočena, posredniki zaupanja poskrbijo, da naprava ostane odklenjena dalj časa, vendar ne more več odkleniti zaklenjene naprave."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Zakleni zaslon ob izgubljenem zaupanju"</string>
@@ -449,6 +449,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\nče pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nTelefon lahko odklene nekdo drug, če ga podrži pred vašim obrazom, ko imate odprte oči.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Želite izbrisati podatke o obrazu?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Slike in biometrični podatki, ki se uporabljajo za odklepanje z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona, prijavo v aplikacije in potrjevanje plačil potrebovali kodo PIN, vzorec ali geslo."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Odklepanje telefona z obrazom"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Prstni odtis"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Upravlj. prst. odtisov"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Upor. prst. odtisa za"</string>
@@ -1258,13 +1259,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimiziranje ravni svetlosti glede na razpoložljivo svetlobo. Ko je ta funkcija vklopljena, lahko še vedno začasno prilagodite svetlost."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Svetlost zaslona se bo samodejno prilagajala glede na okolje in dejavnosti. Če želite, da funkcija za prilagodljivo svetlost hitreje spozna vaše želje, lahko ročno premaknete drsnik."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Prikaz ravnovesja beline"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Zaznavanje uporabe zaslona"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Zaznavanje pogleda na zaslon"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Vklopljeno / zaslon se ne bo izklopil, če ga gledate"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Izklopljeno"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Potreben je dostop do fotoaparata"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Dotaknite se, če želite upravljati dovoljenja za storitve za individualno prilagajanje naprave"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Preprečuje, da bi se zaslon izklopil, če ga gledate"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Funkcija zaznavanja uporabe zaslona uporablja sprednji fotoaparat, da zazna, ali kdo gleda zaslon. Funkcija se izvaja v napravi, slike pa se v nobenem primeru ne shranijo in ne pošiljajo Googlu."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Funkcija zaznavanja pogleda na zaslon uporablja sprednji fotoaparat, da zazna, ali kdo gleda zaslon. Funkcija se izvaja v napravi, slike pa se v nobenem primeru ne shranijo in ne pošiljajo Googlu."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ko gledate zaslon, naj ostane vklopljen"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nočna svetloba"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Nočna svetloba zaslon obarva z jantarnim odtenkom. To olajša gledanje na zaslon ali branje pri šibki svetlobi in vam lahko pomaga prej zaspati."</string>
@@ -1302,7 +1304,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Prilagajanje zaslona"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Izberite ozadje iz"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Prilagajanje telefona Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Preizkusite različne sloge, ozadja, ure in drugo"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Ohranjevalnik zaslona"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Med polnjenjem ali v stojalu"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Eno ali drugo"</string>
@@ -2523,7 +2526,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Energija akumulatorja, porabljena za bliskavico"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Energija akumulatorja, ki jo porablja fotoaparat"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Energija akumulatorja, porabljena za osvetlitev zaslona"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Zmanjšajte svetlost zaslona in/ali časovno omejitev za vklop zaslona"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Zmanjšajte svetlost zaslona in/ali časovno omejitev za zaslon"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Energija akumulatorja, ki jo je porabil Wi‑Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Izklopite Wi-Fi, ko ga ne uporabljate ali če ni na voljo"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Energija akumulatorja, ki jo je porabil Bluetooth"</string>
@@ -3245,7 +3248,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"obraz"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"prstni odtis, dodajanje prstnega odtisa"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"zatemnitev zaslona, zaslon na dotik, akumulator, pametna svetlost, dinamična svetlost, samodejno prilagajanje svetlosti"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"zatemnitev zaslona, stanje pripravljenosti, akumulator, časovna omejitev, pozor, prikaz, zaslon, nedejavnost"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"zatemnitev zaslona, stanje pripravljenosti, akumulator, časovna omejitev, zaznavanje pogleda, prikaz, zaslon, nedejavnost"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"zavrteti, obrniti, vrtenje, pokončno, ležeče, postavitev, navpično, vodoravno"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"nadgradnja, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"ne moti, razpored, obvestila, blokirati, utišati, vibriranje, spanje, delo, zbranost, izklopiti zvok, dan, delavnik, vikend, noč med tednom, dogodek"</string>

@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Vidjetlarni yoqish"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Administrator tomonidan o‘chirilgan"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Qulflash funksiyasini ko‘rsatish"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Smart Lock, barmoq izi bilan qulfni ochish va ekran qulfidagi bildirishnomalarni faolsizlantiradigan quvvat tugmasi funksiyasini ko‘rsatish."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Smart Lock, qulfni biometrik sensor bilan ochish va ekran qulfidagi bildirishnomalarni faolsizlantiradigan quvvat tugmasini chiqarish"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Ishonch agentlari qulf ochishni sura oladi"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Bu parametr yoqilsa, ishonch agentlari uzoq vaqt qulfsiz saqlaydi, lekin qulflangan qurilmani qulfdan chiqara olmaydi."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Ishonch yoʻqolsa, ekran qulflansin"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Qulfni ochishda, ilovalarga kirishda va xaridlarni tasdiqlashda Yuz bilan ochish funksiyasidan foydalaning.\n\nDiqqat qiling:\nTelefon qulfi unga tasodifan qaralganda yechilishi mumkin.\n\nBegonalar telefoningizni yumilmagan koʻzlaringizga qaratish orqali ham qulfdan chiqarishi mumkin.\n\nTelefon sizga oʻxshagan yaqinlaringiz tomonidan ham qulfdan chiqarilishi mumkin."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Yuzga oid axborot oʻchirib tashlansinmi?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Yuz bilan ochish orqali yozib olingan tasvirlar va biometrik axborotlar butunlay va xavfsiz tozalanadi. Tozalangandan keyin telefonni ochish, ilovalarga kirish va toʻlovlarni tasdiqlash uchun PIN kod, grafik kalit yoki parol zarur."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Telefon qulfini yuz bilan ochish"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Barmoq izi"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Barmoq izlari"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Barmoq izi sozlamalari"</string>
@@ -1220,6 +1221,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Ekran yorqinligini atrofning yoritilganlik darajasiga qarab moslashtirish. Bu funksiya yoniq ekanligida yorqinlikni vaqtincha sozlashingiz mumkin."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Ekran yorqinligi muhit va harakatlaringizga qarab avtomatik moslanadi. Yorqinlikni o‘zingizga moslashtirish uchun slayderni qo‘lda surib sozlashingiz mumkin."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Ekrandagi oq rang muvozanati"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Moslashuvchan kutish rejimi"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Yoniq / Ekranga qarab turganingizda u yoniq holatda qoladi"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Yoqilmagan"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Ekran uchun fon rasmini tanlang"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Fon rasmi qayerdan tanlansin"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pixel qurilmangizni moslab oling"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Har xil mavzu, fon rasmi, soat va boshqalar"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Ekran lavhasi"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Quvvat olayotganda yoki dok-stansiyaga ulanganda"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Har doim"</string>
@@ -2455,7 +2458,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Fonar uchun sarflangan batareya quvvati"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Kamera sarflagan batareya quvvati"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Ekran va orqa chiroqning batareya sarfi"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Ekran yorqinligini kamaytirish yoki uyg‘oqlik muaddati"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Ekran yorqinligi va/yoki kutish vaqtini kamaytirish"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi‑Fi sarflagan batareya"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Wi‑Fi tarmog‘i mavjud bo‘lmasa yoki undan foydalanmayotgan vaqtda uni o‘chirib qo‘ying."</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Bluetooth batareyani qancha sarflaganligi"</string>
@@ -3171,11 +3174,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"yuz"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"barmoq izi, barmoq izi kiritish"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"xira ekran, sensorli ekran, batareya, smart yorqinlik, dinamik yorqinlik, avtomatik yorqinlik"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"ekranni xiralashtirish, uyqu, batareya, tanaffus, qurilmadan foydalanish, monitor, ekran, harakatsizlik"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"ekranni xiralashtirish, uyqu, batareya, ekranning kutish vaqti, qurilmadan foydalanish, monitor, ekran, harakatsizlik"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"burish, aylantirish, burilish, tik, yoqish, holat, portret, peyzaj"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"yangilash, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"bezovta qilinmasin, jadval, bildirishnomalar, bloklash, ovozsiz rejim, tebranish, uyqu, ish, konsentratsiya, tovush, kun, ish kuni, dam olish kuni, ish kuni kechasi, tadbir"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ekran, qulflash vaqti, tanaffus, ekran qulfi"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ekran, qulflash vaqti, kutish vaqti, ekran qulfi"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"xotira, kesh, maʼlumotlar, oʻchirish, tozalash, ochish, joy"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"ulangan, qurilma, quloqliklar, garnitura, karnay, simsiz, ulash, quloqliklar, musiqa, media"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"fon, ekran, ekran qulfi, mavzu"</string>

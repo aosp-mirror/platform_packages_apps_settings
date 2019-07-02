@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Activer les widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Désactivé par l\'administrateur"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Afficher l\'option de blocage"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Afficher l\'option du bouton Marche/Arrêt, qui désactive la fonctionnalité Smart Lock, le déverrouillage à l\'aide d\'une empreinte digitale et les notifications sur l\'écran de verrouillage"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Permet d\'afficher un bouton Marche/Arrêt qui désactive Smart Lock, le déverrouillage à l\'aide de données biométriques et les notifications sur l\'écran de verrouillage"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Déverrouillage prolongé pour les agents de confiance"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Si cette option est activée, les agents de confiance pourront maintenir votre appareil déverrouillé pendant plus longtemps, mais ne pourront plus déverrouiller un appareil verrouillé"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Verrouiller l\'écran en l\'absence d\'agent de confiance"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Utilisez Face Unlock pour déverrouiller votre appareil, vous connecter à des applications et confirmer des paiements.\n\nÀ savoir :\nSi vous regardez votre téléphone, vous pouvez le déverrouiller sans le vouloir.\n\nUne autre personne peut également déverrouiller votre téléphone en tenant celui-ci devant votre visage quand vous avez les yeux ouverts.\n\nVotre téléphone peut être déverrouillé par quelqu\'un qui vous ressemble beaucoup, comme votre enfant ou votre jumeau/jumelle."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Supprimer les données du visage ?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Les images et données biométriques utilisées par Face Unlock seront supprimées définitivement et en toute sécurité. Une fois l\'inscription retirée, vous devrez utiliser votre code, votre motif ou votre mot de passe pour déverrouiller votre téléphone, vous connecter aux applications et confirmer les paiements."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Utilisez Face Unlock pour déverrouiller votre téléphone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Empreinte digitale"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gérer empreintes num."</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Utiliser empr. num. pour"</string>
@@ -1220,6 +1221,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Adapte la luminosité selon l\'éclairage. Si l\'option est activée, un réglage temporaire est possible."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"La luminosité de l\'écran s\'adapte automatiquement à votre environnement et à vos activités. Vous pouvez déplacer le curseur manuellement pour aider l\'appareil à apprendre vos préférences."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Balance des blancs de l\'écran"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Concentration sur l\'écran"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Activé - L\'écran ne s\'éteint pas pendant que vous le regardez"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Désactivé"</string>
@@ -1253,7 +1255,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Activer jusqu\'à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Désactiver jusqu\'à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Éclairage nocturne inactif"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Mise en veille de l\'écran"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Délai de mise en veille de l\'écran"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"L\'écran s\'éteint"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Après <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivité"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fond d\'écran"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personnaliser votre écran"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Sélect. fond d\'écran"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personnaliser votre Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Essayez différents styles, fonds d\'écran, horloges, etc."</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Économiseur d\'écran"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Lorsque l\'appareil est en charge ou connecté à une station d\'accueil"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Dans les deux cas"</string>
@@ -3161,11 +3164,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"visage"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"empreinte digitale, ajouter une empreinte digitale"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"réduire la luminosité de l\'écran, écran tactile, batterie, réglage intelligent de la luminosité, luminosité dynamique, réglage automatique de la luminosité"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"assombrir l\'écran, veille, batterie, délai d\'inactivité, attention, affichage, écran, inactivité"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"assombrir l\'écran, veille, batterie, délai de mise en veille de l\'écran, concentration sur l\'écran, affichage, écran, inactivité"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"faire pivoter, inverser, rotation, portrait, paysage, orientation, vertical, horizontal"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"mettre à jour, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"ne pas déranger, calendrier, notifications, bloquer, silence, vibreur, veille, travail, sélectionner, son, couper le son, jour, jour de semaine, week-end, soir de semaine, événement"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"écran, temps de verrouillage, délai avant expiration, verrouillage de l\'écran"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"écran, temps de verrouillage, délai de mise en veille de l\'écran, verrouillage de l\'écran"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"mémoire, cache, données, supprimer, effacer, libérer, espace"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"associé, appareil, casque audio, casque, enceinte, sans fil, associer, écouteurs, musique, contenu multimédia"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"arrière-plan, écran, écran de verrouillage, thème"</string>
@@ -3940,7 +3943,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Mémoire de stockage interne : <xliff:g id="PERCENTAGE">%1$s</xliff:g> utilisés – <xliff:g id="FREE_SPACE">%2$s</xliff:g> disponibles"</string>
     <string name="display_summary" msgid="6737806235882127328">"Mode veille activé après <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivité"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fond d\'écran, mise en veille, taille de police"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Styles, fonds d\'écran, mise en veille de l\'écran, taille de la police"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Styles, fonds d\'écran, délai de mise en veille de l\'écran, taille de la police"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Sommeil, taille de police"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Mode veille après 10 minutes d\'inactivité"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Utilisation d\'environ <xliff:g id="USED_MEMORY">%1$s</xliff:g> sur <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de mémoire"</string>
@@ -4149,8 +4152,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Connecté à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Connecté à plusieurs appareils"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Mode de démonstration de l\'interface du système"</string>
-    <!-- no translation found for dark_ui_mode (6795784845192720944) -->
-    <skip />
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Thème foncé"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Temporairement désactivé par l\'économiseur de batterie"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Temporairement activé par l\'économiseur de batterie"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Le thème foncé s\'appliquera également aux applications compatibles."</string>
