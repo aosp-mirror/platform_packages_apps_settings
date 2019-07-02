@@ -352,8 +352,8 @@
     <string name="time_picker_title" msgid="483460752287255019">"Idő"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatikus zárolás"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> alvó mód után"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Rögtön az alvó mód bekapcsolása után, kivéve ha a(z) <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> alvó üzemmód után; kivéve akkor, amikor <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Rögtön az alvó mód bekapcsolása után, kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> alvó üzemmód után; kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Tulajdonosi adatok megjelenítése a lezáró képernyőn"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Képernyőzár üzenete"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Modulengedélyezés"</string>
@@ -1248,7 +1248,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Bekapcsolás eddig: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Kikapcsolás eddig: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Éjszakai fény kikapcsolva"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Képernyő elsötétedése"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Képernyő időkorlátja"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"A kijelző kikapcsol"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktivitás után"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Háttérkép"</string>
@@ -1789,7 +1789,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Legyen látható a profilhoz tartozó minta"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Rezgés koppintásra"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Bekapcsológomb azonnal zár"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Kivéve, amikor <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Feloldási minta beállítása"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Feloldási minta módosítása"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Hogyan kell feloldási mintát rajzolni"</string>
@@ -1865,7 +1865,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Segélyhívó"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Alapbeállítások"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Visszaállítja a beállításokat?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Ez visszaállítja a következőkre vonatkozó összes beállítást:\n\n "<li>"Letiltott alkalmazások"</li>\n" "<li>"Letiltott alkalmazásértesítések"</li>\n" "<li>"Alapértelmezett alkalmazások adott műveletekhez"</li>\n" "<li>"Alkalmazások háttéradat-korlátozása"</li>\n" "<li>"Minden engedélykorlátozás"</li>\n\n" Az alkalmazásadatok nem vesznek el."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Ez visszaállítja a következőkre vonatkozó összes beállítást:\n\n"<li>"Letiltott alkalmazások"</li>\n<li>"Letiltott alkalmazásértesítések"</li>\n<li>"Alapértelmezett alkalmazások adott műveletekhez"</li>\n<li>"Alkalmazások háttéradat-korlátozása"</li>\n<li>"Minden engedélykorlátozás"</li>\n\n" Az alkalmazásadatok nem vesznek el."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Visszaállítás"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Tárhely kezelése"</string>
     <string name="filter" msgid="2018011724373033887">"Szűrő"</string>
@@ -2444,7 +2444,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"A zseblámpa által felhasznált energia"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"A kamera által felhasznált energia"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"A kijelző és a háttérfény által felhasznált energia"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Csökkentse a képernyő fényerejét és kikapcsolási idejét"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Csökkentse a képernyő fényerejét és/vagy a képernyő időkorlátját"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi-Fi által felhasznált energia"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Kapcsolja ki a Wi-Fit, ha nem használja, vagy amikor nincs elérhető hálózat"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Bluetooth által felhasznált energia"</string>
@@ -3149,7 +3149,6 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"sorozatszám, hardververzió"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"androidos biztonsági javítókészlet szintje, alapsáv verziója, kernel verziója"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"téma, világos, sötét, mód"</string>
-    <string name="keywords_financial_apps_sms_access" msgid="391349097813320537">"pénzügyi alkalmazás, sms, engedély"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"sötét téma"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"programhiba"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Aktív kijelző, lezárási képernyő"</string>
@@ -3157,11 +3156,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"arc"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"ujjlenyomat, ujjlenyomat hozzáadása"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"képernyő halványítása, érintőképernyő, akkumulátor, okos fényerő, dinamikus fényerő, automatikus fényerő"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"képernyő halványítása, alvó mód, akkumulátor, időtúllépés, figyelem, képernyő, kijelző, inaktivitás"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"képernyő halványítása, alvó mód, akkumulátor, időkorlát, figyelem, képernyő, kijelző, inaktivitás, képernyőfigyelő"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"elforgatás, elfordítás, forgatás, álló, fekvő, tájolás, függőleges, vízszintes"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"verziófrissítés, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"ne zavarjanak, ütemezés, értesítések, letiltás, néma, rezgés, alvó mód, munka, fókusz, hang, némítás, nap, hétköznap, hétvége, hétköznap este, esemény"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"képernyő, lezárási idő, időtúllépés, lezárási képernyő"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"képernyő, lezárási idő, időkorlát, lezárási képernyő"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"memória, gyorsítótár, adatok, törlés, eltávolítás, felszabadítás, tárhely"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"csatlakoztatott, eszköz, fejhallgató, headset, hangfal, vezeték nélküli, párosítás, fülhallgató, zene, médiatartalom"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"háttér, képernyő, lezárási képernyő, téma"</string>
@@ -3888,7 +3887,6 @@
     <string name="write_settings" msgid="4797457275727195681">"Rendszerbeállítások módosítása"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"rendszerbeállítások írása és módosítása"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_1">%2$d</xliff:g>/<xliff:g id="COUNT_0">%1$d</xliff:g> alkalmazás módosíthatja a rendszerbeállításokat"</string>
-    <string name="financial_apps_sms_access_title" msgid="762694352017728050">"Pénzügyi alkalmazások SMS-hozzáférése"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"Telepíthet egyéb alkalmazásokat"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Módosíthatja a rendszerbeállításokat"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Módosíthatja a rendszerbeállításokat"</string>
@@ -3934,7 +3932,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Belső tárhely: Felhasznált: <xliff:g id="PERCENTAGE">%1$s</xliff:g> – Szabad: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Alvó mód bekapcsolása <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktivitás után"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Háttérkép, Alvó mód, betűméret"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Stílusok, háttérképek, képernyő elsötétedése, betűméret"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Stílusok, háttérképek, képernyő időkorlátja, betűméret"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Alvó mód, betűméret"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Alvó mód bekapcsolása 10 perc inaktivitás után"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Átlagosan <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>/<xliff:g id="USED_MEMORY">%1$s</xliff:g> memória használatban"</string>
@@ -4146,7 +4144,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"A(z) <xliff:g id="ID_1">%1$s</xliff:g> eszközhöz csatlakozik"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Több eszközhöz csatlakozik"</string>
     <string name="demo_mode" msgid="2798762752209330277">"A rendszer kezelőfelületének demómódja"</string>
-    <string name="dark_ui_mode" msgid="3888371857083890543">"Sötét téma"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Sötét téma"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Be/Átmenetileg kikapcsolva az Akkumulátorkímélő mód miatt"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Átmenetileg bekapcsolva az Akkumulátorkímélő mód miatt"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"A támogatott alkalmazások témája is sötét lesz"</string>
@@ -4413,7 +4411,7 @@
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Csörgés megakadályozása"</string>
     <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"Nyomja le egyszerre a bekapcsológombot és a hangerő növelése gombot a következőhöz:"</string>
-    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Gyorsparancs a csörgetés megakadályozásához"</string>
+    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Gyorsparancs a csengés megakadályozásához"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Rezgés"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Némítás"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Ne tegyen semmit"</string>
