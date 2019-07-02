@@ -21,20 +21,20 @@ import android.provider.Settings;
 
 import com.android.settings.core.BasePreferenceController;
 
-public class CaptioningPreferenceController extends BasePreferenceController {
+public class DaltonizerPreferenceController extends BasePreferenceController {
 
-    public CaptioningPreferenceController(Context context, String preferenceKey) {
+    public DaltonizerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
     public CharSequence getSummary() {
         return AccessibilityUtil.getSummary(mContext,
-                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED);
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED);
     }
 }
