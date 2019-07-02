@@ -22,11 +22,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.os.Vibrator;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
-
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
@@ -44,7 +41,6 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilitySettingsTest {
-    private static final String VIBRATION_PREFERENCE_SCREEN = "vibration_preference_screen";
 
     private Context mContext;
     private AccessibilitySettings mSettings;
@@ -65,28 +61,6 @@ public class AccessibilitySettingsTest {
                 XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings);
 
         assertThat(keys).containsAllIn(niks);
-    }
-
-    @Test
-    public void testUpdateVibrationSummary_shouldUpdateSummary() {
-        final Preference vibrationPreferenceScreen = new Preference(mContext);
-        doReturn(vibrationPreferenceScreen).when(mSettings).findPreference(
-                VIBRATION_PREFERENCE_SCREEN);
-
-        vibrationPreferenceScreen.setKey(VIBRATION_PREFERENCE_SCREEN);
-
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                Vibrator.VIBRATION_INTENSITY_OFF);
-
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.HAPTIC_FEEDBACK_INTENSITY,
-                Vibrator.VIBRATION_INTENSITY_OFF);
-
-        mSettings.updateVibrationSummary(vibrationPreferenceScreen);
-        assertThat(vibrationPreferenceScreen.getSummary()).isEqualTo(
-                VibrationIntensityPreferenceController.getIntensityString(mContext,
-                        Vibrator.VIBRATION_INTENSITY_OFF));
     }
 
     @Test
