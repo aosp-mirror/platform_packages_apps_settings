@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Ativar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Desativada pelo administrador"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Mostrar opção de bloqueio total"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Exibir a opção do botão liga/desliga que desativa o Smart Lock, o desbloqueio com impressão digital e as notificações na tela de bloqueio"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Exibir a opção do botão liga/desliga que desativa o Smart Lock, o desbloqueio biométrico e as notificações na tela de bloqueio"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Agentes de confiança só podem ampliar o desbloqueio"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Se essa opção for ativada, os agentes de confiança poderão manter o dispositivo desbloqueado por mais tempo, mas não poderão desbloquear o dispositivo"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Bloquear tela quando a confiança for perdida"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Use o desbloqueio facial para desbloquear o dispositivo, fazer login em apps e confirmar pagamentos.\n\nObservações importantes:\nOlhar para o smartphone poderá desbloqueá-lo mesmo que essa não seja sua intenção.\n\nSeu smartphone poderá ser desbloqueado por outra pessoa se ele for direcionado para seu rosto enquanto seus olhos estiverem abertos.\n\nPode acontecer de o smartphone ser desbloqueado por alguém que se pareça muito com você, por exemplo, um gêmeo idêntico."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Excluir dados faciais?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"As imagens e os dados biométricos usados pelo desbloqueio facial serão excluídos de forma permanente e segura. Depois da remoção, você precisará do PIN, padrão ou senha para desbloquear o smartphone, fazer login em apps e confirmar pagamentos."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Use o desbloqueio facial para acessar o smartphone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Impressão digital"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gerenciar impressões digitais"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Usar impressão digital para"</string>
@@ -1220,6 +1221,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Otimizar brilho conforme luz disponível. Quando o recurso está ativado, é possível ajustar o brilho temporariamente."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"O brilho da tela será ajustado automaticamente ao seu ambiente e às suas atividades. Mova o controle deslizante para ajudar o brilho adaptável a memorizar suas preferências."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Balanço de branco da tela"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Reconhecimento de tela em uso"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Ativado / A tela não será desativada se você estiver olhando para ela"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Desativada"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizar sua tela"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Selecionar de..."</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personalize seu Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Use diferentes estilos, planos de fundo, relógios etc."</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Protetor de tela"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Ao carregar ou quando ancorado"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Ambos"</string>
@@ -3161,7 +3164,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"rosto"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"impressão digital, adicionar impressão digital"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"escurecer tela, touchscreen, bateria, brilho inteligente, brilho dinâmico, brilho automático"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"escurecer tela, suspensão bateria, tempo limite, atenção, display, tela, inatividade"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"escurecer tela, suspensão, bateria, tempo limite, atenção, display, tela, inatividade"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"girar, virar, rotação, retrato, paisagem, orientação, vertical, horizontal"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"upgrade, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"não perturbe, programação, notificações, bloquear, silenciar, vibrar, suspender, trabalho, focar, som, desativar som, dia, dia da semana, final de semana, durante a semana à noite, evento"</string>

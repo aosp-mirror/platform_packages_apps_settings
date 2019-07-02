@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC オフセットで選択"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日付"</string>
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"画面のタイムアウト後にロック"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"画面消灯後にロック"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"タイムアウトから <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"タイムアウトの直後（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> がロック解除を管理している場合を除く）"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"タイムアウトから <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> がロック解除を管理している場合を除く）"</string>
@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ウィジェットの有効化"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"管理アプリによって無効化"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"ロックダウン オプションの表示"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Smart Lock、指紋認証によるロック解除、ロック画面上の通知を無効にする電源ボタン オプションを表示します"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Smart Lock、生体認証によるロック解除、ロック画面上の通知を無効にする電源ボタン オプションを表示します"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"信頼エージェントはロック解除の延長のみ"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"有効にすると、信頼エージェントによりデバイスのロック解除状態が延長されます。ただし、ロック状態のデバイスのロックは解除できなくなります。"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"信頼が失われた場合に画面をロックする"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"フェイスアンロックを使用して、デバイスのロック解除、アプリへのログイン、お支払いの確認を行えます。\n\n注:\nスマートフォンを見る動作を無意識に行うと、ロックが解除されることがあります。\n\n目を開いているときにスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できます。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"顔認証データを削除しますか？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"フェイスアンロックによって使用された画像や生体認証データは安全かつ完全に削除されます。削除後に、スマートフォンのロック解除、アプリへのログイン、お支払いの確認を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"フェイスアンロックを使用して、スマートフォンのロックを解除します"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"指紋"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"指紋の管理"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"指紋の用途"</string>
@@ -1220,13 +1221,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"周囲に合わせて明るさを最適化します。この機能が ON の場合でも、一時的に明るさを調整できます。"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"画面の明るさは環境やアクティビティに応じて自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"ディスプレイのホワイト バランス"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Screen Attention"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"スクリーン アテンション"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"ON / 見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"OFF"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"カメラへのアクセス権限が必要です"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"タップすると、デバイス カスタマイズ サービスのアクセス権限を管理できます"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"見ている間は画面が OFF になりません"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Screen Attention は前面カメラを使用して、ユーザーが画面を見ているかどうかを検出します。この検出はデバイスのみで行われ、画像が保存されたり、Google に送信されたりすることはありません。"</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"スクリーン アテンションは前面カメラを使用して、ユーザーが画面を見ているかどうかを検出します。この検出はデバイスのみで行われ、画像が保存されたり、Google に送信されたりすることはありません。"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"見ている間は画面を ON のままにします"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜間モード"</string>
     <string name="night_display_text" msgid="1837277457033025056">"夜間モードを利用すると画面が黄味がかった色になります。薄明かりの下でも画面を見やすくなり、寝付きを良くする効果も期待できます。"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"画面のカスタマイズ"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"壁紙タイプの選択"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pixel のカスタマイズ"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"別のスタイル、壁紙、時計などを試す"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"スクリーンセーバー"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"充電時またはホルダー装着時"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"いずれか"</string>
@@ -2510,7 +2513,7 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"使用しない"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"電池残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
     <string name="battery_percentage" msgid="723291197508049369">"電池残量"</string>
-    <string name="battery_percentage_description" msgid="8511658577507384014">"ステータスバーに電池残量を%%で表示する"</string>
+    <string name="battery_percentage_description" msgid="8511658577507384014">"ステータスバーに電池残量を％で表示する"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"メモリ使用"</string>
@@ -3161,11 +3164,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"顔"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"指紋, 指紋の追加"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"画面を暗くする, タッチスクリーン, 電池, スマート ブライトネス, ダイナミック ブライトネス, 明るさの自動調整"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"画面を暗くする, スリープ, 電池, タイムアウト, 注意, ディスプレイ, 画面, 操作が行われていない"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"画面を暗くする, スリープ, 電池, 消灯, アテンション, ディスプレイ, 画面, 操作が行われていない"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"回転, 切り替え, ローテーション, 縦向き, 横向き, 画面の向き, 縦, 横"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"アップグレード, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"マナーモード, スケジュール, 通知, ブロック, 消音, バイブレーション, スリープ, 仕事, 集中, 通知音, ミュート, 日, 平日, 週末, 平日の夜, イベント"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"画面, ロック時間, タイムアウト, ロック画面"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"画面, ロック時間, 消灯, ロック画面"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"メモリ, キャッシュ, データ, 削除, 消去, 解放, 空き容量"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"接続済み, デバイス, ヘッドフォン, ヘッドセット, スピーカー, ワイヤレス, ペア設定, イヤフォン, 音楽, メディア"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"背景, 画面, ロック画面, テーマ"</string>
@@ -3940,7 +3943,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"内部ストレージ: 使用済み <xliff:g id="PERCENTAGE">%1$s</xliff:g> - 空き容量 <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過するとスリープ状態になります"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"壁紙、スリープ、フォントサイズ"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"スタイル、壁紙、画面の消灯、フォントサイズ"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"スタイル、壁紙、画面消灯、フォントサイズ"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"スリープ、フォントサイズ"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"操作が行われない状態で 10 分経過するとスリープ状態になります"</string>
     <string name="memory_summary" msgid="8080825904671961872">"平均で<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>のうち<xliff:g id="USED_MEMORY">%1$s</xliff:g>を使用しています"</string>

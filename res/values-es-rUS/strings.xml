@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Seleccionar por desplazamiento de UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Fecha"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Bloquear después de que se agote tiempo de espera de la pantalla"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Bloquear al finalizar el tiempo de espera de pantalla"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> después de que se agote tiempo de espera"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Inmediatamente después de que se agote tiempo de espera, excepto cuando <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mantenga la pantalla desbloqueada"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> después de que se agote el tiempo de espera, excepto cuando <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> mantenga la pantalla desbloqueada"</string>
@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Habilitar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"El administrador inhabilitó la opción"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Mostrar opción de bloqueo"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Mostrar la opción del botón de encendido que desactiva Smart Lock, el desbloqueo con huella digital y las notificaciones en la pantalla bloqueada"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Mostrar la opción del botón de encendido que desactiva Smart Lock, el desbloqueo biométrico y las notificaciones en la pantalla bloqueada"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Los agentes de confianza solo extienden el desbloqueo"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Si habilitas la opción, los agentes de confianza mantendrán el dispositivo desbloqueado durante más tiempo, pero ya no podrán desbloquear un dispositivo bloqueado."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Bloquear pantalla al perder confianza"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Usa el Desbloqueo facial para desbloquear tu dispositivo, acceder a apps y confirmar pagos.\n\nTen en cuenta lo siguiente:\nMirar el teléfono puede desbloquearlo aunque no lo desees.\n\nUn tercero puede desbloquear el teléfono si lo sostiene frente a tu rostro mientras tienes los ojos abiertos.\n\nPor otro lado, también puede desbloquearlo cualquier persona que se parezca a ti, como un hermano gemelo."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"¿Quieres borrar los datos faciales?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Se borrarán de forma permanente y segura las imágenes y los datos biométricos que utilice el Desbloqueo facial. Luego de la eliminación, deberás ingresar tu PIN, patrón o contraseña para desbloquear el teléfono, acceder a apps y confirmar pagos."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Usa tu rostro para desbloquear el teléfono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Huella digital"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Adm. huellas digitales"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Usar huella dig. para"</string>
@@ -1220,13 +1221,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimiza el nivel de brillo según la luz disponible. También puedes ajustarlo temporalmente."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"El brillo de la pantalla se ajustará automáticamente según el entorno y las actividades que hagas. Puedes mover el control deslizante para que la función de brillo automático reconozca tus preferencias."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Mostrar balance de blancos"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Atención a la pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Activado: No se apagará la pantalla si estás mirándola"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Desactivado"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Se requiere acceso a la cámara"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Presiona para administrar los permisos de los Servicios de personalización del dispositivo"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Impide que se apague la pantalla si estás mirándola"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Esta opción usa la cámara frontal para detectar si hay alguien mirando la pantalla. Funciona en el dispositivo, y no se almacenan las imágenes ni se envían a Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"La función de atención a la pantalla usa la cámara frontal para detectar si hay alguien mirando la pantalla. Funciona en el dispositivo, y las imágenes no se almacenan ni se envían a Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Mantener la pantalla encendida mientras la miras"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Luz nocturna"</string>
     <string name="night_display_text" msgid="1837277457033025056">"La Luz nocturna le da un tono ámbar a la pantalla. No solo te permitirá ver o leer con luz tenue, sino que también podría ayudarte a conciliar el sueño más rápido."</string>
@@ -1253,7 +1255,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Activar hasta la(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Desactivar hasta la(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Luz nocturna no activada ahora"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Tiempo de espera de la pant."</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Tiempo de espera de la pantalla"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Cuando se apaga la pantalla"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Después de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fondo de pantalla"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizar tu pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Elegir fondo de pantalla"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personaliza tu Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Prueba estilos, fondos de pantalla, relojes y mucho más"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Protector de pantalla"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Mientras se carga o está conectado"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"En ambos casos"</string>
@@ -2449,7 +2452,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Batería utilizada por la linterna"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Batería que usa la cámara"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"La batería está siendo utilizada por la pantalla y la luz de fondo"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Reducir el brillo y el tiempo muerto de la pantalla"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Reduce el brillo y el tiempo de espera de la pantalla"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Batería utilizada por Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Desactiva Wi-Fi cuando no lo utilices o cuando no esté disponible."</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Batería utilizada por Bluetooth"</string>
@@ -3161,11 +3164,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"rostro"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"huella digital, agregar huella digital"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"atenuar pantalla, pantalla táctil, batería, brillo inteligente, brillo dinámico, brillo automático"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"atenuar pantalla, suspender, batería, tiempo de espera, atención, pantalla, inactividad"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"atenuar pantalla, suspender, batería, tiempo de espera de la pantalla, atención a la pantalla, pantalla, inactividad"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"rotar, girar, rotación, retrato, paisaje, orientación, vertical, horizontal"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"actualizar, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"no interrumpir, programar, notificaciones, bloquear, silenciar, vibrar, suspender, trabajar, enfocar, sonido, silencio, día, día de la semana, fin de semana, noche de la semana, evento"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"pantalla, tiempo de bloqueo, tiempo de espera, bloqueo de pantalla"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"pantalla, tiempo de bloqueo, tiempo de espera de la pantalla, bloqueo de pantalla"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"memoria, caché, datos, eliminar, borrar, liberar, espacio"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"conectado, dispositivo, audífonos, auriculares, bocina, inalámbrico, sincronizar, auricular, música, multimedia"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"fondo, pantalla, pantalla bloqueada, tema"</string>
@@ -3428,7 +3431,7 @@
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"En la cortina desplegable, contraer las notificaciones en una línea"</string>
     <string name="notification_channel_summary_low" msgid="7050068866167282765">"Te ayuda a concentrarte sin sonar ni vibrar"</string>
     <string name="notification_channel_summary_default" msgid="5753454293847059695">"Capta tu atención con sonido o vibración"</string>
-    <string name="notification_channel_summary_high" msgid="7737315941884569891">"Con el dispositivo desbloqueado, mostrar notificaciones como banner en la parte superior de la pant."</string>
+    <string name="notification_channel_summary_high" msgid="7737315941884569891">"Con el dispositivo desbloqueado, mostrar notificaciones como banners en la parte superior de la pantalla"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Ver notificaciones"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Notificaciones adaptables"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
@@ -3938,7 +3941,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Almacenamiento interno: <xliff:g id="PERCENTAGE">%1$s</xliff:g> en uso (<xliff:g id="FREE_SPACE">%2$s</xliff:g> libre)"</string>
     <string name="display_summary" msgid="6737806235882127328">"Suspender después de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fondo de pantalla, suspender, tamaño de fuente"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Estilos, fondos de pantalla, tiempo de espera y tamaño de fuente"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Estilos, fondos de pantalla, tiempo de espera de la pantalla y tamaño de fuente"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Suspender, tamaño de fuente"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Suspender después de 10 minutos de inactividad"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Se usó un promedio de <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memoria"</string>

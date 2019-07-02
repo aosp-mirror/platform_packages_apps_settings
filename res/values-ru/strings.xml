@@ -354,16 +354,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Выбрать по разнице с UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Время"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Блокировать экран по истечении времени ожидания"</string>
-    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"Через <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после истечения времени ожидания"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Блокировать после отключения"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после отключения"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Сразу по истечении времени ожидания (если блокировка экрана не контролируется функцией <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>)"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"Через <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после истечения времени ожидания (если блокировка экрана не контролируется функцией <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>)"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после отключения (если не управляется функцией <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Показывать данные о владельце на экране блокировки"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Текст на экране"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Включить виджеты"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Отключено администратором"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Добавить функцию блокировки входа"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Добавить в меню кнопки питания функцию, которая позволяет отключить Smart Lock, разблокировку по отпечатку пальца и уведомления на заблокированном экране"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Добавить в меню кнопки питания функцию, которая позволяет отключить Smart Lock, биометрическую разблокировку и уведомления на заблокированном экране"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Агенты доверия откладывают блокировку"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Если параметр включен, агенты доверия могут увеличивать время, в течение которого устройство остается разблокированным, но не могут разблокировать его"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Блокировать экран при утрате доверия"</string>
@@ -449,6 +449,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Используйте фейсконтроль, чтобы разблокировать устройство, входить в приложения и подтверждать платежи.\n\nОбратите внимание!\nПосмотрев на телефон, вы можете случайно разблокировать его.\n\nТелефон может быть разблокирован, если кто-то поднесет его к вашему лицу, когда у вас открыты глаза.\n\nТелефон может разблокировать человек, очень похожий на вас (например, ваш близнец)."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Удалить данные распознавания лица?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Изображения и биометрические данные, которые используются фейсконтролем, будут удалены навсегда. В дальнейшем для разблокировки телефона, входа в приложения и подтверждения платежей устройство будет запрашивать PIN-код, пароль или графический ключ."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Используйте распознавание лица для разблокировки телефона"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Отпечатки пальцев"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Управление отпечатками"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Для чего использовать"</string>
@@ -1258,6 +1259,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Яркость регулируется с учетом уровня освещенности. При необходимости ее можно временно изменить."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Яркость экрана будет автоматически регулироваться в зависимости от окружающих условий и ваших действий. Вы можете вручную перемещать ползунок, чтобы помочь запомнить ваши предпочтения адаптивной яркости."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Баланс белого на экране"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Адаптивный спящий режим"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Когда эта настройка включена, экран не будет отключаться, если вы смотрите на него."</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Отключено"</string>
@@ -1291,7 +1293,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Включить до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Отключить до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Ночной режим сейчас выключен"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Автоотключение экрана"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Время отключения экрана"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Отключение экрана"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Обои"</string>
@@ -1302,7 +1304,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Выберите обои для экрана"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Установка обоев"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Персонализация Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Пробуйте разные стили оформления, обои, часы и не только"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Заставка"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Во время зарядки или при подключении к док-станции"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Всегда"</string>
@@ -2523,7 +2526,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Заряд батареи, израсходованный на вспышку"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Заряд батареи, израсходованный камерой"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Использование батареи для подсветки экрана"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Уменьшить яркость экрана и/или время до отключения экрана"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Уменьшить яркость экрана и/или время отключения экрана"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Расход заряда батареи при подключении к Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Отключать модуль Wi-Fi, когда он не используется или сеть недоступна"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Использование батареи модулем Bluetooth"</string>
@@ -3245,11 +3248,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"лицо"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"отпечаток пальца, добавить отпечаток пальца"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"снижение яркости, сенсорный экран, батарея, умная яркость, динамическая яркость, автоматическая регулировка яркости"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"яркость, спящий режим, батарея, время до отключения экрана, использование устройства, дисплей, экран, время бездействия"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"яркость, спящий режим, батарея, время отключения экрана, использование устройства, дисплей, экран, время бездействия"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"повернуть, перевернуть, поворот, вертикальная, горизонтальная, ориентация, портрет, пейзаж"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"обновить, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"не беспокоить, расписание, уведомления, заблокировать, беззвучный режим, вибрировать, сон, работа, концентрация, звук, отключить звук, день, рабочий день, выходной день, вечер рабочего дня, мероприятие"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"экран, время блокировки, тайм-аут, блокировка экрана"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"экран, время блокировки, время отключения экрана, блокировка экрана"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"память, кеш, данные, удалить, очистить, освободить, место"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"подключено, устройство, наушники, гарнитура, динамик, беспроводной, связать, наушники-вкладыши, музыка, мультимедиа"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"фон, экран, блокировка экрана, тема"</string>

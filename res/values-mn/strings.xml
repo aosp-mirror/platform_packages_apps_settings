@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Хэрэгсэл идэвхжүүлэх"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Админ цуцалсан"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Аюулгүйгээр түгжих (lockdown) сонголтыг харуулах"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Ухаалаг түгжээ, хурууны хээгээр түгжээ тайлах онцлог болон мэдэгдлийг түгжигдсэн дэлгэцэд унтраадаг асаах/унтраах товчлуурын сонголтыг харуулна уу"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Ухаалаг түгжээ, биометрээр түгжээ тайлах онцлог болон мэдэгдлийг түгжигдсэн дэлгэц дээр унтраадаг дэлгэцийн асаах/унтраах товчлуурын сонголт"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Итгэмжлэгдсэн агент зөвхөн түгжээгүй байлгадаг"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Хэрэв идэвхжүүлсэн бол итгэмжлэгдсэн агент таны төхөөрөмжийг илүү удаан хугацаагаар түгжээгүй байлгах хэдий ч түгжигдсэн төхөөрөмжийн түгжээг цаашид тайлах боломжгүй болно."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Итгэмжлэлийг алдах үед дэлгэцийг түгжинэ"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Төхөөрөмжийнхөө түгжээг тайлах, аппуудад нэвтрэх болон төлбөр баталгаажуулахад царайгаар тайлах онцлогийг ашиглана уу.\n\nДараахыг анхаарна уу:\nТа утас руугаа санамсаргүй харснаар түгжээг тайлах боломжтой.\n\nХэн нэгэн таны утсыг таны нүүр лүү нүдээ нээлттэй байхад тань харуулсан тохиолдолд түгжээг нь тайлах боломжтой.\n\nТаны хүүхэд эсвэл ихэр зэрэг тантай маш адилхан харагддаг хүн таны утасны түгжээг тайлах боломжтой."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Царайн өгөгдлийг устгах уу?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Царайгаар тайлах онцлогийн ашигласан зураг болон биометрийн өгөгдлийг бүрмөсөн, аюулгүйгээр устгана. Та үүнийг устгасны дараа утасныхаа түгжээг тайлах, аппуудад нэвтрэх болон төлбөрийг баталгаажуулахын тулд ПИН, хээ эсвэл нууц үгээ оруулах шаардлагатай болно."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Утасныхаа түгжээг тайлахын тулд царайгаар тайлах онцлог ашиглах"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Хурууны хээ"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Хурууны хээ удирдах"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Хурууны хээг дараах зорилгоор ашиглах"</string>
@@ -1220,13 +1221,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Боломжит гэрэлд тохируулан гэрэлтүүлгийг зохицуулна. Энэ онцлог асаалттай үед та гэрэлтүүлгийг түр хугацаанд тохируулах боломжтой."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Дэлгэцийн гэрэл таны хүрээлэн буй орчин болон үйл ажиллагаанд автоматаар тохирно. Дасан зохицох гэрэлтүүлгийн таны тохиргоог мэдэхэд нь туслахын тулд гулсуулагчийг гараараа зөөх боломжтой."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Дэлгэцийн цайралтын тэнцвэр"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Дэлгэцийн анхаарал"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Соргог дэлгэц"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Асаалттай / Хэрэв та дэлгэц рүү харж байвал унтрахгүй"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Унтраалттай"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Камерын хандалт шаардлагатай"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Төхөөрөмжийн тохируулгын үйлчилгээний зөвшөөрлийг удирдахын тулд товшино уу"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Таныг дэлгэц рүү харж байгаа үед үүнийг унтрахаас сэргийлдэг"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Дэлгэцийн анхаарал хэн нэгнийг дэлгэц рүү харж байгаа эсэхийг харахын тулд урд талын камерыг ашигладаг. Энэ нь төхөөрөмж дээр ажилладаг бөгөөд зургийг хэзээ ч хадгалдаггүйгээс гадна Google-д илгээдэггүй."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Соргог дэлгэц нь хэн нэгнийг дэлгэц рүү харж байгаа эсэхийг харахын тулд урд талын камерыг ашигладаг. Энэ нь төхөөрөмж дээр ажилладаг бөгөөд зургийг хэзээ ч хадгалдаггүйгээс гадна Google-д илгээдэггүй."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Дэлгэцийг харж байхад асаалттай байлгана"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Шөнийн гэрэл"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Шөнийн гэрэл нь таны дэлгэцийг улбар шар туяатай болгодог. Дэлгэцээ бүдэг гэрэлтэй үед харах, уншихад илүү хялбар болохоос гадна энэ нь танд хурдан унтахад тусална."</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Дэлгэцээ өөрчлөх"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Ханын зураг сонгох"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pixel-ээ өөрчилнө үү"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Өөр загвар, ханын зураг, цаг болон бусад зүйлийг турших"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Дэлгэц амраагч"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Цэнэглэх эсвэл суурилуулах үед"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Аль аль нь"</string>
@@ -3161,7 +3164,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"царай"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"хурууны хээ, хурууны хээ нэмэх"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"бүдэг дэлгэц, мэдрэмтгий дэлгэц, батарей, ухаалаг гэрэлтүүлэг, динамик гэрэлтүүлэг, Автомат гэрэлтүүлэг"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"бүдэг дэлгэц, идэвхгүй, батарей, завсарлага, анхаарал, нүүр, дэлгэц, идэвхгүй горим"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"бүдэг дэлгэц, идэвхгүй, батарей, завсарлага, соргог, нүүр, дэлгэц, идэвхгүй горим"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"эргүүлэх, хөнтрөх, эргэлт, босоо, хөндлөн, чиглэл, босоо, хөндлөн"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"дэвшүүлэх, андройд"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"бүү саад бол, хуваарь, мэдэгдэл, блоклох, чимээгүй болгох, чичиргэх, унтах, ажил, төвлөрөх, дуу, дууг хаах, өдөр, ажлын өдөр, амралтын өдөр, энгийн үдэш, арга хэмжээ"</string>

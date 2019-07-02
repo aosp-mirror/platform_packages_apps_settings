@@ -350,7 +350,7 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Seleccionar desviación do UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Bloquear despois do tempo de espera da pantalla"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Bloquear despois de esgotar o tempo de espera da pantalla"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> despois do tempo de espera"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Inmediatamente despois do tempo de espera, excepto se o dispositivo está desbloqueado por <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> despois do tempo de espera, excepto se <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> mantén o dispositivo desbloqueado"</string>
@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Activar os widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Desactivado polo administrador"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Mostrar a opción de bloqueo"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Mostra a opción do botón de acendido que desactiva Smart Lock, o desbloqueo con impresión dixital e as notificacións da pantalla de bloqueo"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Mostra a opción do botón de acendido que desactiva Smart Lock, o desbloqueo biométrico e as notificacións da pantalla de bloqueo"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Desbloqueo ampliado axentes de confianza"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Se se activa, os axentes de confianza manterán o dispositivo desbloqueado durante máis tempo, pero cando se bloquee non se poderá desbloquear"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Bloquear pantalla ao perder a confianza"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Utiliza o desbloqueo facial para desbloquear o teu dispositivo, iniciar sesión en aplicacións e confirmar pagos.\n\nTen en conta o seguinte:\nAo mirar o teléfono, podes desbloquealo sen querer.\n\nOutra persoa pode desbloquealo se che pon o teléfono diante da cara e tes os ollos abertos.\n\nTamén pode desbloquealo alguén que se pareza moito a ti, como un xemelgo."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Queres eliminar os datos faciais?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"As imaxes e os datos biométricos que utiliza o desbloqueo facial eliminaranse de forma permanente e segura. Tras quitalos, deberás utilizar o teu PIN, padrón ou contrasinal para desbloquear o teléfono, iniciar sesión nas aplicacións e confirmar pagos."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Utiliza o Desbloqueo facial para desbloquear o teu teléfono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Impresión dixital"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Xest. identificación"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Usar identificac. para"</string>
@@ -1220,6 +1221,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimiza o nivel de brillo segundo a luz dispoñible. Cando estea activado, poderás axustar o brillo temporalmente."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"O brillo da pantalla axustarase automaticamente segundo o ambiente e as actividades que leves a cabo. Podes mover o control desprazable de forma manual para que o brillo automático recoñeza as túas preferencias."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Balance de brancos da pantalla"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Atención á pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Activado/A pantalla non se apagará se miras para ela"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Opción desactivada"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personaliza a pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Escoller fondo de pantalla en"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personalizar o teu Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Proba diversos estilos, fondos de pantalla, reloxos…"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Protector de pantalla"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Durante a carga ou mentres está conectado a unha base"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"As dúas opcións"</string>

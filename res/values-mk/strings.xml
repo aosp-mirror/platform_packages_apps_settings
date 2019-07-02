@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Изберете по UTC со отстапување"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Датум"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Време"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Заклучи после истекување на времето на екранот"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Заклучи по исклучување на екранот"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после истекувањето на времето"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Веднаш после истекувањето на времето, освен кога <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> го чува отклучен"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после истекувањето, освен кога <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> го чува отклучен"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> по исклучувањето, освен кога <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> го чува отклучен"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Прикажи инфо. за сопственик на екран за заклучув."</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Порака на закл.екран"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Овозможи виџети"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Оневозможено од администраторот"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Приказ на опцијата за заклучување"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Опција на копчето за вклучување на екранот што ги исклучува Smart Lock, отклучувањето со отпечаток и известувањата на заклучениот екран"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Опција на копчето за вклучување на екранот што ги исклучува Smart Lock, биометриското отклучување и известувањата на заклучениот екран"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Продолжено отклуч. за агенти од доверба"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Ако се овозможени, агентите од доверба ќе го држат уредот отклучен подолго време, но веќе нема да може да отклучат заклучен уред."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Заклучен екран кога довербата е загубена"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Користете „Отклучување со лик“ за отклучување на уредот, најавување на апликации и потврдување плаќања.\n\nИмајте предвид:\nТелефонот може да се отклучи кога гледате во него, дури и ако немате таква намера.\n\nНекој друг може да го отклучи вашиот телефон ако го подигне до вашиот лик кога очите ви се отворени.\n\nТелефонот може да го отклучи некој што многу наликува на вас, на пример, ваш идентичен близнак."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Да се избришат податоците за ликот?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Сликите и биометриските податоци што се користат за „Отклучување со лик“ трајно и безбедно ќе се избришат. После отстранувањето, ќе би треба PIN, шема или лозинка за да го отклучувате телефонот, да се најавувате на апликациите и да ги потврдувате плаќањата."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Користете „Отклучување со лик“ за отклучување на телефонот"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Отпечаток"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Управување отпечатоци"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Користи отпечатоци за"</string>
@@ -572,7 +573,7 @@
     <string name="lock_settings_picker_face_message" msgid="197106534637556054">"Изберете резервен метод за заклучување на екранот"</string>
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"Опции за заклучување на екранот"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"Опции за заклучување на екранот"</string>
-    <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Заклучување на екран"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Заклучување екран"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>/веднаш по режим во мирување"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>/<xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> по режим во мирување"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"Закл. работен профил"</string>
@@ -1220,13 +1221,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Оптимизирајте го нивото на осветленост. Може привремено да ја приспособите и при вклучена функција."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Осветленоста на екранот ќе се приспособи автоматски на вашата околина и активностите. Може да го поместите лизгачот рачно за да ѝ помогнете на приспособливата осветленост да ги научи вашите желби."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Баланс на бела боја на екранот"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Внимание на екранот"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Вклучен екран"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Вклучено/Екранот нема да се исклучи додека гледате во него"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Исклучено"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Потребен е пристап до камерата"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Допрете за да управувате со дозволите за „Услугите за персонализација на уредот“"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Спречува екранот да се исклучи додека гледате во него"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"„Внимание на екранот“ ја користи предната камера за да види дали некој го гледа екранот. Функционира на уред, а сликите никогаш не се складираат или испраќаат во Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"„Вклучен екран“ ја користи предната камера за да види дали некој го гледа екранот. Функционира на уредот, а сликите никогаш не се складираат или испраќаат до Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Екранот нека биде вклучен кога гледам во него"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Ноќно светло"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Ноќното светло го обојува екранот во килибарна боја. Тоа го олеснува гледањето во екранот или читањето при слаба светлина и може да ви помогне полесно да заспиете."</string>
@@ -1253,7 +1255,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Вклучи до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Исклучи до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"„Ноќното светло“ не е вклучено"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Исклучување на екран"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Исклучување на екранот"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Екранот се исклучува"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"По <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивност"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Тапет"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Персонализирајте го екранот"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Избери тапет од"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Приспособете го вашиот Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Пробајте различни стилови, тапети, часовници и друго"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Заштитник на екран"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Додека се полни или е приклучен"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"И во двата случаи"</string>
@@ -2449,7 +2452,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Батерија искористена од лампата"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Камерата ја користи батеријата"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Батеријата ја користат екранот и осветлувањето"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Намали ја осветленоста на екранот и/или истекот на време на екранот"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Намалете ја осветленоста на екранот и/или времето за исклучување на екранот"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Батеријата искористена од Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Исклучете ја Wi-Fi мрежата кога не се користи или кога не е достапна"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Bluetooth ја користи батеријата"</string>
@@ -3165,7 +3168,7 @@
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"ротирај, преврти, ротација, портрет, пејзаж, ориентација, вертикална, хоризонтална"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"надгради, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, распоред, известувања, блокирај, стиши, вибрации, во мирување, работа, фокус, звук, изклучен звук, ден, работен ден, викенд, ноќ од викенд, настан"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"екран, време на заклучување, истек на време, заклучен екран"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"екран, време на заклучување, исклучување екран, заклучен екран"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"меморија, кеш, податоци, избриши, бесплатно, простор"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"поврзан, уред, слушалки, слушалка, звучници, безжични уреди, спари, слушалки, музика, аудиовизуелни содржини"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"заднина, екран, заклучен екран, тема"</string>
@@ -3940,7 +3943,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Внатрешен капацитет: искористено <xliff:g id="PERCENTAGE">%1$s</xliff:g> - слободно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Стави го во режим на мирување по <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивност"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Тапет, режим во мирување, големина на фонт"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Стилови, тапети, истекување на времето на екранот, големина на фонт"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Стилови, тапети, исклучување на екранот, големина на фонт"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Режим во мирување, големина на фонт"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Стави го во режим на мирување по 10 минути неактивност"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Искористени се просечно <xliff:g id="USED_MEMORY">%1$s</xliff:g> од <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> меморија"</string>

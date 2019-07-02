@@ -356,14 +356,14 @@
     <string name="time_picker_title" msgid="483460752287255019">"Godzina"</string>
     <string name="lock_after_timeout" msgid="3041497579354520533">"Blokuj po wygaszeniu ekranu"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po wygaszeniu"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Zaraz po wygaszeniu, ale nie wtedy, gdy jest odblokowany przez: <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po wygaszeniu, ale nie wtedy, gdy jest odblokowany przez: <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Zaraz po wygaszeniu, ale nie wtedy, gdy jest odblokowany przez <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po wygaszeniu, ale nie wtedy, gdy jest odblokowany przez <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Pokaż tę informację na ekranie blokady"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Wiadomość przy blokadzie"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Włącz widżety"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Wyłączone przez administratora"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Pokaż opcję blokady"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Wyświetlaj opcję przycisku zasilania, która wyłącza Smart Lock, odblokowywanie odciskiem palca i powiadomienia na ekranie blokady"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Wyświetlaj opcję przycisku zasilania, która wyłącza Smart Lock, odblokowywanie biometryczne i powiadomienia na ekranie blokady"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Agenty zaufania przedłużają blokadę"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Po włączeniu tej opcji agenty zaufania będą dłużej utrzymywać urządzenie w stanie odblokowanym, ale nie będą miały możliwości odblokowania zablokowanego urządzenia"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Zablokuj ekran po utracie zaufania"</string>
@@ -449,6 +449,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Rozpoznanie twarzy umożliwia odblokowanie urządzenia, logowanie do aplikacji i zatwierdzanie płatności.\n\nPamiętaj:\nPatrząc na telefon, możesz go niezamierzenie odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy, gdy masz otwarte oczy.\n\nIstnieje możliwość, że Twój telefon odblokuje ktoś bardzo podobny do Ciebie (np. rodzeństwo)."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Usunąć dane twarzy?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Obrazy i dane biometryczne używane przez funkcję rozpoznania twarzy zostaną trwale i bezpiecznie usunięte. Po usunięciu danych do odblokowania telefonu, logowania się w aplikacjach i potwierdzania płatności będziesz potrzebować kodu PIN, wzoru lub hasła."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Używaj skanu twarzy do odblokowywania telefonu"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Odcisk palca"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Zarządzaj odciskami"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Używaj odcisku palca do"</string>
@@ -1258,13 +1259,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Dostosowuj poziom jasności do oświetlenia. Gdy ta funkcja jest włączona, nadal możesz tymczasowo korygować jasność."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Jasność ekranu będzie automatycznie dostosowywana do otoczenia i Twojej aktywności. Możesz ręcznie przesunąć suwak, by pomóc automatycznej jasności poznać Twoje preferencje."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Balans bieli wyświetlacza"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Uaktywnienie ekranu"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Aktywność ekranu"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Włączone / Ekran nie wyłączy się, jeśli na niego patrzysz"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Wyłączono"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Wymagany jest dostęp do aparatu"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Kliknij, by zarządzać uprawnieniami usług personalizacji urządzenia"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Zapobiega wyłączeniu ekranu, jeśli na niego patrzysz"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Uaktywnienie ekranu sprawdza za pomocą przedniego aparatu, czy ktoś patrzy na ekran. Działa na urządzeniu, a obrazy nie są zapisywane ani wysyłane do Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Aktywność ekranu sprawdza za pomocą przedniego aparatu, czy ktoś patrzy na ekran. Działa na urządzeniu, a obrazy nie są zapisywane ani wysyłane do Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Utrzymuj ekran włączony, gdy go oglądasz"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Podświetlenie nocne"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Gdy Podświetlenie nocne jest włączone, kolory na ekranie mają pomarańczowy odcień. To mniej męczy oczy podczas patrzenia na ekran czy czytania przy słabym oświetleniu i ułatwia zaśnięcie."</string>
@@ -1302,7 +1304,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Dostosuj swój ekran"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Wybierz tapetę z..."</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Dostosuj Pixela"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Wypróbuj różne style, tapety, zegary i inne elementy"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Wygaszacz ekranu"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Podczas ładowania lub na stacji dokującej"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Po zadokowaniu lub podczas ładowania"</string>
@@ -3245,11 +3248,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"twarz"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"odcisk palca, dodawanie odcisków palców"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"przyciemnianie ekranu, ekran dotykowy, bateria, inteligentna jasność, dynamiczna jasność, automatyczna jasność"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"przyciemniony ekran, uśpienie, bateria, wygaszanie, uwaga, wyświetlacz, ekran, brak aktywności"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"przyciemniony ekran, uśpienie, bateria, wygaszanie, aktywność, wyświetlacz, ekran, brak aktywności"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"obrót, odwrócenie, rotacja, pionowo, poziomo, orientacja, pionowa, pozioma"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"aktualizacja, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"nie przeszkadzać, harmonogram, powiadomienia, blokować, wyciszanie, wibrowanie, uśpienie, praca, koncentracja, dźwięk, wyciszenie, dzień, dzień tygodnia, weekend, noc poza weekendem, wydarzenie"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ekran, czas blokady, czas oczekiwania, blokada ekranu"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"ekran, czas blokady, czas wygaszania, blokada ekranu"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"pamięć, pamięć podręczna, dane, usuwanie, czyszczenie, wolne, miejsce"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"połączone, urządzenie, słuchawki, zestaw słuchawkowy, głośnik, bezprzewodowy, parowanie, słuchawki douszne, muzyka, multimedia"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"tło, ekran, blokada ekranu, motyw"</string>
@@ -3488,7 +3491,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Pokazuj wszystkie powiadomienia"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Pokaż poufne treści tylko po odblokowaniu"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Nie pokazuj żadnych powiadomień"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="3143593517597479937">"Jak mają być wyświetlane na ekranie blokady?"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="3143593517597479937">"Co ma się wyświetlać na ekranie blokady?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="709573564312902481">"Ekran blokady"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Pokazuj w całości powiadomienia związane z pracą"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"Ukryj poufne informacje związane z pracą"</string>
@@ -4289,8 +4292,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Połączono z: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Połączono z wieloma urządzeniami"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Tryb demonstracyjny interfejsu"</string>
-    <!-- no translation found for dark_ui_mode (6795784845192720944) -->
-    <skip />
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Ciemny motyw"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Wł. / Czasowo wyłączony z powodu oszczędzania baterii"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Czasowo włączony z powodu oszczędzania baterii"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Obsługiwane aplikacje również zostaną przełączone na ciemny motyw"</string>

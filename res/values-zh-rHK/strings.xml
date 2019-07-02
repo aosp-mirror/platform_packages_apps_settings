@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"啟用小工具"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"已由管理員停用"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"顯示鎖定選項"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"顯示開關按鈕選項，可在上鎖畫面停用 Smart Lock、指紋解鎖和通知功能"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"顯示開關按鈕選項，即可在上鎖畫面停用 Smart Lock、生物識別解鎖和通知功能"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"「信任代理程式」只能延長解鎖的時間"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"啟用這項功能後，「信任代理程式」會讓您的裝置處於解鎖狀態較長時間，但無法再解鎖已上鎖的裝置。"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"失去信任後，畫面將會上鎖"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"使用「臉容解鎖」即可解鎖裝置、登入應用程式及確認付款。\n\n注意事項：\n即使您不想解鎖手機，但查看手機仍會解鎖。\n\n在您睜開雙眼時，如果其他人將手機舉到您面前，將可解鎖您的手機。\n\n跟您樣貌很相似的人 (例如您的孿生兄弟姊妹) 能夠解鎖您的手機。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"是否刪除臉容資料？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"「臉容解鎖」功能使用的圖片和生物識別資料將以安全方式永久刪除。移除後，您將需使用 PIN、圖案或密碼解鎖手機、登入應用程式及確認付款。"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"使用臉容解鎖功能解鎖手機"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"指紋"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"管理指紋"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"使用指紋"</string>
@@ -1220,13 +1221,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"按環境光線優化亮度。啟用此功能後，您仍可以暫時性地調整亮度。"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"系統會根據您所在的環境和活動自動調校螢幕光暗。您可以移動滑桿，幫助自動調校光暗功能瞭解您偏好的亮度。"</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"顯示屏白平衡"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"螢幕意識"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"保持螢幕亮起"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"啟用 / 假如正您望向螢幕，螢幕將不會關閉"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"關閉"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"需要獲取相機權限"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"輕按以管理「裝置個人化服務」的權限"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"防止螢幕在您望著時關閉"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"「螢幕意識」利用前置鏡頭偵測使用者是否正望向螢幕。此功能只在裝置上使用，同時圖片不會被儲存或傳送至 Google。"</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"「保持螢幕亮起」利用前置鏡頭偵測使用者是否正望向螢幕。此功能只在裝置上使用，同時圖片不會被儲存或傳送至 Google。"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"望著螢幕時保持螢幕開啟"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜燈模式"</string>
     <string name="night_display_text" msgid="1837277457033025056">"「夜燈模式」會將螢幕調校至橙黃色，在光線昏暗的環境下看螢幕或閱讀時就更舒適，並讓您更易入睡。"</string>
@@ -1253,7 +1255,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"開啟 (直至<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"保持關閉狀態，直至<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"目前沒有開啟「夜燈模式」"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"螢幕自動關閉"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"螢幕逾時"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"螢幕關閉時"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"桌布"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"設定個人化螢幕"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"選擇桌布"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"自訂您的 Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"嘗試其他樣式、桌布和時鐘等"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"螢幕保護程式"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"充電或放上插座時"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"任何一個狀態"</string>
@@ -2450,7 +2453,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"閃光燈耗電量"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"相機的電池用量"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"顯示與背光啟動時的耗電量"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"減低螢幕亮度和/或螢幕自動關閉時間"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"減低螢幕亮度和/或螢幕逾時時間"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi-Fi 耗電量"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"不使用或無法使用時即關閉 Wi-Fi"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"藍牙耗電量"</string>
@@ -4150,7 +4153,7 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"已連接至 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"已連接多部裝置"</string>
     <string name="demo_mode" msgid="2798762752209330277">"系統使用者介面示範模式"</string>
-    <string name="dark_ui_mode" msgid="6795784845192720944">"深色主題"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"深色主題背景"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"開啟/由於「省電模式」已開啟，因此切換功能暫時停用"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"由於「省電模式」已關閉，因此切換功能暫時啟用"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"受支援的應用程式也會切換至深色主題背景"</string>
@@ -4417,7 +4420,7 @@
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"暫停響鈴"</string>
     <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"同時按下電源和調高音量按鈕來設定"</string>
-    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"阻止鈴聲的捷徑"</string>
+    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"停止鈴聲的捷徑"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"震動"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"靜音"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"不執行任何操作"</string>

@@ -359,7 +359,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktiveer legstukke"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Gedeaktiveer deur administrateur"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Wys snelsluitopsie"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Wys aan/af-skakelaaropsie wat Smart Lock, vingerafdrukontsluiting en kennisgewings op die sluitskerm afskakel"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Wys aan/af-skakelaaropsie wat Smart Lock, biometriese ontsluiting en kennisgewings op die sluitskerm afskakel"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Vertrouensagente brei net ontsluit uit"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"As dit geaktiveer is, sal vertrouensagente jou toestel langer ontsluit hou, maar kan dit nie meer \'n geslote toestel ontsluit nie."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Sluit skerm wanneer vertroue verloor word"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Gebruik gesigslot om jou toestel te ontsluit, by programme aan te meld en betalings te bevestig.\n\nHou in gedagte:\nAs jy na die foon kyk, sal dit dalk ontsluit wanneer jy nie bedoel om dit te doen nie.\n\nIemand anders kan jou foon ontsluit as dit voor jou gesig gehou word terwyl jou oë oop is.\n\nJou foon kan ontsluit word deur iemand wat baie soos jy lyk, byvoorbeeld \'n identiese broer of suster."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vee gesigdata uit?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Die prente en biometriese data wat gesigslot gebruik, sal permanent en veilig uitgevee word. Nadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord moet hê om jou foon te ontsluit, by programme aan te meld en betalings te bevestig."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Gebruik gesigslot om jou foon te ontsluit"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Vingerafdruk"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Bestuur vingerafdrukke"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Gebruik vingerafdruk vir"</string>
@@ -1220,13 +1221,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimeer helderheidsvlak volgens beskikbare lig. Wanneer dié kenmerk aan is, kan jy steeds helderheid tydelik aanpas."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Jou skermhelderheid sal outomaties by jou omgewing en aktiwiteite aanpas. Jy kan die glyer self skuif om aanpasbare helderheid te help om te leer wat jy verkies."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Wys witbalans"</string>
-    <string name="adaptive_sleep_title" msgid="455088457232472047">"Skerm-aandag"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
+    <string name="adaptive_sleep_title" msgid="455088457232472047">"Skermaandag"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Aan / skerm sal nie afskakel as jy daarna kyk nie"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Af"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kameratoegang is nodig"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tik om toestemmings vir toestelpersonaliseringdienste te bestuur"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Keer dat jou skerm afskakel terwyl jy daarna kyk"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Skerm-aandag gebruik die voorste kamera om te sien of iemand na die skerm kyk. Dit werk op die toestel, en prente word nooit geberg of na Google toe gestuur nie."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Skermaandag gebruik die voorste kamera om te sien of iemand na die skerm kyk. Dit werk op die toestel, en prente word nooit geberg of na Google toe gestuur nie."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Hou skerm aan terwyl jy daarna kyk"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Aandbeligting"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Aandbeligting tint jou skerm geelbruin. Dit maak dit makliker om in dowwe lig te lees of na jou skerm te kyk en sal jou dalk help om makliker aan die slaap te raak."</string>
@@ -1253,7 +1255,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Skakel aan tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Skakel af tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Aandbeligting is nie tans aan nie"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Skerm-uittelling"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Skermuitteltyd"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skerm skakel af"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> se onaktiwiteit"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Muurpapier"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personaliseer jou skerm"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Kies muurpapier uit"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pasmaak jou Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Probeer verskillende style, muurpapiere, horlosies en meer"</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Sluimerskerm"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Terwyl dit laai of gedok is"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Enige een"</string>
@@ -2449,7 +2452,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Battery gebruik deur die flitslig"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Batterykrag deur die kamera gebruik"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Battery gebruik deur skerm en agterlig"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Verminder die skermhelderheid en/of skermuittelling"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Verminder die skermhelderheid en/of skermuitteltyd"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Battery deur Wi-Fi gebruik"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Skakel Wi-Fi af wanneer dit nie gebruik word nie of as dit nie beskikbaar is nie"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Battery deur Bluetooth gebruik"</string>

@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Kiválasztás UTC-eltolódással"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Dátum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Idő"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Zárolás a képernyő elsötétedése után"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Zárolás a képernyő időkorlátja után"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Az időkorlát után azonnal, kivéve ha a következő tartja feloldva: <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, kivéve ha a következő tartja feloldva: <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>; kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Tulajdonosi adatok megjelenítése a lezáró képernyőn"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Képernyőzár üzenete"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Modulengedélyezés"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"A rendszergazda kikapcsolta"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"A zárolás lehetőség megjelenítése"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"A Smart Lock szolgáltatást, az ujjlenyomattal történő feloldást és a zárolási képernyő értesítéseit kikapcsoló gomb megjelenítése."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"A Smart Lock szolgáltatást, a biometrikus feloldást és a zárolási képernyő értesítéseit kikapcsoló gomb megjelenítése"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"A trust agentek kibővítik a feloldást"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Ha engedélyezve van, a trust agent komponensek tovább tartják feloldva az eszközt, de a zárolt eszközt többé nem tudják feloldani."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Képernyő zárolása megbízhatóság nélkül"</string>
@@ -443,6 +443,7 @@
     <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Az arcalapú feloldás segítségével feloldhatja eszköze zárolását, bejelentkezhet alkalmazásokba, illetve megerősíthet fizetéseket.\n\nNe feledje:\nHa a telefonja felé fordul, azzal akkor is feloldhatja az eszköz zárolását, ha nem áll szándékában.\n\nTelefonját más is feloldhatja, ha az Ön arca elé tartja, amikor a szeme nyitva van.\n\nElőfordulhat, hogy telefonja zárolását egy Önre nagyon hasonlító személy, például egypetéjű ikertestvére is feloldhatja."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Törli az arcadatokat?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Az arcalapú feloldáshoz használt képi és biometrikus adatok véglegesen és biztonságosan törlődnek. Az eltávolítás után PIN-kódra, mintára vagy jelszóra lesz szüksége a telefon feloldásához, az alkalmazásokba való bejelentkezéshez és a tranzakciók megerősítéséhez."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"A telefon feloldásához használja az arcalapú feloldást"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Ujjlenyomat"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Ujjlenyomatok kezelése"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Ujjlenyomat ehhez:"</string>
@@ -1220,6 +1221,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"A fényerőt a rendelkezésre álló fényhez optimalizálja. Átmenetileg továbbra is módosíthatja a fényerőt, ha be van kapcsolva a funkció."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"A képernyő fényerőssége automatikusan alkalmazkodik a környezethez és az adott tevékenységhez. A csúszka manuális mozgatásával segít az alkalmazkodó fényerő funkciónak az Ön személyes preferenciáinak megtanulásában."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Kijelző fehéregyensúlya"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Képernyőfigyelő"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Be / A képernyő nem kapcsol majd ki, ha Ön épp azt nézi"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Ki"</string>
@@ -1253,7 +1255,7 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Bekapcsolás eddig: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Kikapcsolás eddig: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Éjszakai fény kikapcsolva"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Képernyő elsötétedése"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Képernyő időkorlátja"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"A kijelző kikapcsol"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktivitás után"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Háttérkép"</string>
@@ -1264,7 +1266,8 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Képernyő személyre szabása"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Válasszon háttérképet"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"A Pixel személyre szabása"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Próbáljon ki más stílusokat, háttérképeket, órákat stb."</string>
+    <!-- no translation found for style_suggestion_summary (1811974280164432649) -->
+    <skip />
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Képernyővédő"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Töltés és dokkolás közben"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Bármelyik"</string>
@@ -1794,7 +1797,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Legyen látható a profilhoz tartozó minta"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Rezgés koppintásra"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Bekapcsológomb azonnal zár"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Kivéve, amikor <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Feloldási minta beállítása"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Feloldási minta módosítása"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Hogyan kell feloldási mintát rajzolni"</string>
@@ -2449,7 +2452,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"A zseblámpa által felhasznált energia"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"A kamera által felhasznált energia"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"A kijelző és a háttérfény által felhasznált energia"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Csökkentse a képernyő fényerejét és kikapcsolási idejét"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Csökkentse a képernyő fényerejét és/vagy a képernyő időkorlátját"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi-Fi által felhasznált energia"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"Kapcsolja ki a Wi-Fit, ha nem használja, vagy amikor nincs elérhető hálózat"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Bluetooth által felhasznált energia"</string>
@@ -3161,11 +3164,11 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"arc"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"ujjlenyomat, ujjlenyomat hozzáadása"</string>
     <string name="keywords_display_auto_brightness" msgid="4561771351118904241">"képernyő halványítása, érintőképernyő, akkumulátor, okos fényerő, dinamikus fényerő, automatikus fényerő"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"képernyő halványítása, alvó mód, akkumulátor, időtúllépés, figyelem, képernyő, kijelző, inaktivitás"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"képernyő halványítása, alvó mód, akkumulátor, időkorlát, figyelem, képernyő, kijelző, inaktivitás, képernyőfigyelő"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"elforgatás, elfordítás, forgatás, álló, fekvő, tájolás, függőleges, vízszintes"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"verziófrissítés, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"ne zavarjanak, ütemezés, értesítések, letiltás, néma, rezgés, alvó mód, munka, fókusz, hang, némítás, nap, hétköznap, hétvége, hétköznap este, esemény"</string>
-    <string name="keywords_screen_timeout" msgid="8161370660970309476">"képernyő, lezárási idő, időtúllépés, lezárási képernyő"</string>
+    <string name="keywords_screen_timeout" msgid="8161370660970309476">"képernyő, lezárási idő, időkorlát, lezárási képernyő"</string>
     <string name="keywords_storage_settings" msgid="297283751968446577">"memória, gyorsítótár, adatok, törlés, eltávolítás, felszabadítás, tárhely"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"csatlakoztatott, eszköz, fejhallgató, headset, hangfal, vezeték nélküli, párosítás, fülhallgató, zene, médiatartalom"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"háttér, képernyő, lezárási képernyő, téma"</string>
@@ -3940,7 +3943,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Belső tárhely: Felhasznált: <xliff:g id="PERCENTAGE">%1$s</xliff:g> – Szabad: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Alvó mód bekapcsolása <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktivitás után"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Háttérkép, Alvó mód, betűméret"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Stílusok, háttérképek, képernyő elsötétedése, betűméret"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Stílusok, háttérképek, képernyő időkorlátja, betűméret"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Alvó mód, betűméret"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Alvó mód bekapcsolása 10 perc inaktivitás után"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Átlagosan <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>/<xliff:g id="USED_MEMORY">%1$s</xliff:g> memória használatban"</string>
