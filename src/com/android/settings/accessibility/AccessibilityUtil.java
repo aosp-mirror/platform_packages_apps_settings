@@ -19,22 +19,18 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
 
-public class CaptioningPreferenceController extends BasePreferenceController {
-
-    public CaptioningPreferenceController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return AccessibilityUtil.getSummary(mContext,
-                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED);
+public class AccessibilityUtil {
+    /**
+     * Return On/Off string according to the setting which specifies the integer value 1 or 0. This
+     * setting is defined in the secure system settings {@link android.provider.Settings.Secure}.
+     */
+    static CharSequence getSummary(Context context, String settingsSecureKey) {
+        final boolean enabled = Settings.Secure.getInt(context.getContentResolver(),
+                settingsSecureKey, 0) == 1;
+        final int resId = enabled ? R.string.accessibility_feature_state_on
+                : R.string.accessibility_feature_state_off;
+        return context.getResources().getText(resId);
     }
 }
