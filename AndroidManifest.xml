@@ -1028,8 +1028,7 @@
 
         <activity
             android:name="Settings$ManageDomainUrlsActivity"
-            android:label="@string/domain_urls_title"
-            android:parentActivityName="Settings">
+            android:label="@string/domain_urls_title">
             <intent-filter>
                 <action android:name="android.settings.MANAGE_DOMAIN_URLS" />
                 <category android:name="android.intent.category.DEFAULT" />
