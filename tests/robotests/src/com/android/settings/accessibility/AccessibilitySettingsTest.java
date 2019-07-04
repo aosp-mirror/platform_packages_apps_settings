@@ -24,6 +24,7 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
@@ -36,7 +37,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowAccessibilityManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -44,12 +48,15 @@ public class AccessibilitySettingsTest {
 
     private Context mContext;
     private AccessibilitySettings mSettings;
+    private ShadowAccessibilityManager mShadowAccessibilityManager;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mSettings = spy(new AccessibilitySettings());
+        mShadowAccessibilityManager = Shadow.extract(AccessibilityManager.getInstance(mContext));
+        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
         doReturn(mContext).when(mSettings).getContext();
     }
 
