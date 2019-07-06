@@ -783,12 +783,12 @@
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Connessione non riuscita. Riprova."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Dettagli dispositivo"</string>
     <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"Indirizzo Bluetooth del dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_title" msgid="38467834196432400">"Ignorare il dispositivo?"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="38467834196432400">"Eliminare il dispositivo?"</string>
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"Il telefono non sarà più accoppiato con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"Il tablet non sarà più accoppiato con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"Il dispositivo non sarà più accoppiato con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="5932168717642676140">"Il dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> non sarà più accoppiato con alcun dispositivo collegato a questo account"</string>
-    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"Ignora dispositivo"</string>
+    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"Elimina dispositivo"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Connessione a…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio multimediale."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio vivavoce."</string>
@@ -1219,6 +1219,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Ottimizza il livello di luminosità per la luce disponibile. Quando questa funzione è attiva, puoi comunque regolare la luminosità temporaneamente."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"La luminosità dello schermo verrà regolata automaticamente in base all\'ambiente e alle attività. Puoi spostare manualmente il dispositivo di scorrimento per far sì che la luminosità adattiva memorizzi le tue preferenze."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Bilanciamento bianco display"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Schermo vigile"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"On/Lo schermo non si spegne se lo stai guardando"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Off"</string>
@@ -1263,7 +1264,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizza lo schermo"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Scegli sfondo da"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personalizza il tuo Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Prova diversi stili, sfondi, orologi e non solo"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Prova diversi stili, sfondi e non solo"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Salvaschermo"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Durante la ricarica o quando inserito nel dock"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Entrambi i casi"</string>
@@ -2816,7 +2817,7 @@
     <string name="vpn_connect" msgid="8469608541746132301">"Connetti"</string>
     <string name="vpn_replace" msgid="5442836256121957861">"Sostituisci"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"Modifica profilo VPN"</string>
-    <string name="vpn_forget" msgid="3684651372749415446">"Ignora"</string>
+    <string name="vpn_forget" msgid="3684651372749415446">"Rimuovi"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Connessione a <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="3743970132487505659">"Disconnettere questa VPN?"</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"Disconnetti"</string>
@@ -3106,7 +3107,8 @@
     <string name="keywords_app_default" msgid="5822717006354487071">"Apri con"</string>
     <string name="keywords_applications_settings" msgid="1268353611121497450">"Applicazioni"</string>
     <string name="keywords_time_zone" msgid="998254736898753085">"fuso orario"</string>
-    <string name="keywords_draw_overlay" msgid="4130899177619041842">"Chat Head"</string>
+    <!-- no translation found for keywords_draw_overlay (1001120206241401007) -->
+    <skip />
     <string name="keywords_flashlight" msgid="6161632177705233710">"Torcia, Luce, Pila"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, attivazione/disattivazione, controllo"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"cellulare, dispositivo mobile, operatore cellulare, wireless, dati, 4g, 3g, 2g, lte"</string>
@@ -3130,7 +3132,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="5426093074031208917">"non disturbare, interrompere, interruzione, pausa"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
     <string name="keywords_location" msgid="4132655528196729043">"nelle vicinanze, posizione, cronologia, segnalazione, GPS"</string>
-    <string name="keywords_accounts" msgid="1957925565953357627">"account"</string>
+    <string name="keywords_accounts" msgid="4479029747403203867">"account, aggiungere un account, profilo di lavoro"</string>
     <string name="keywords_users" msgid="3434190133131387942">"limitazione, limitare, limitato"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"correzione del testo, correggere, suono, vibrazione, auto, lingua, gesto, suggerire, suggerimento, tema, offensivo, parola, digitazione, emoji, internazionale"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"reimpostazione, preferenze, predefinite"</string>
@@ -3168,6 +3170,7 @@
     <string name="keywords_storage_settings" msgid="297283751968446577">"memoria, cache dati, eliminare, cancellare, liberare, spazio"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"connesso, dispositivo, cuffie, auricolari, altoparlante, wireless, accoppiare, musica, contenuti multimediali"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"sfondo, schermo, schermata di blocco, tema"</string>
+    <string name="keywords_styles" msgid="5828725481814049422">"forma delle icone, colore intenso, carattere"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"valore predefinito, assistente"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"pagamenti, predefinita"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"notifica in arrivo"</string>
@@ -3177,7 +3180,6 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"aptica, vibrazione, sensibilità"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"risparmio energetico, fisso, costante, risparmiare batteria, batteria"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"routine, programmazione, risparmio energetico, risparmiare batteria, batteria, automatico, percento"</string>
-    <string name="keywords_add_an_account" msgid="6488139919428902434">"profilo di lavoro"</string>
     <string name="default_sound" msgid="8821684447333687810">"Suono predefinito"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Volume suoneria: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volume, vibrazione, Non disturbare"</string>
@@ -3884,7 +3886,6 @@
     <string name="permit_draw_overlay" msgid="7456536798718633432">"Consenti la visualizzazione sopra altre app"</string>
     <string name="allow_overlay_description" msgid="8961670023925421358">"Consenti a quest\'app di essere mostrata sopra le altre app in uso. Potrebbe interferire con il tuo utilizzo di queste app o modificare il modo in cui vengono mostrate o si comportano."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr realtà virtuale listener stereo helper servizio"</string>
-    <string name="keywords_system_alert_window" msgid="5049498015597864850">"finestra di dialogo avviso sistema mostra sopra altre app"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Mostra sopra altre app"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g> di <xliff:g id="COUNT_1">%2$d</xliff:g> app visualizzabili sopra le altre app"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"App con autorizzazione"</string>
@@ -4120,7 +4121,6 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"nessuno"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Oggetto di ranking mancante."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"L\'oggetto di ranking non contiene questa chiave."</string>
-    <string name="theme_customization_category" msgid="1049181544004163283">"Applicazione tema"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Predefinita dispositivo"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Ritaglio display"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ritaglio display, tacca"</string>

@@ -1219,6 +1219,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"\"Helligkeit an Lichtverhältnisse anpassen\": Ist diese Funktion aktiviert, kannst du die Helligkeit dennoch vorübergehend ändern."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Die Helligkeit des Displays passt sich automatisch an deine Umgebung und deine Aktivitäten an. Mit dem Schieberegler kannst du manuell nachjustieren und \"Automatische Helligkeit\" merkt sich deine Präferenz."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Weißabgleich des Bildschirms"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Aufmerksamkeitserkennung"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"An / Der Bildschirm wird nicht ausgeschaltet, solange du auf ihn blickst"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Aus"</string>
@@ -1263,7 +1264,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Display personalisieren"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Hintergrund auswählen"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pixel personalisieren"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Verschiedene Designs, Hintergründe &amp; Uhren ausprobieren"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Verschiedene Designs und Hintergründe ausprobieren"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Bildschirmschoner"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Beim Aufladen oder wenn in Dockingstation"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"In beiden Fällen"</string>
@@ -1674,7 +1675,7 @@
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"Standortermittlung ist deaktiviert"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="5336807018727349708">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> von <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> Apps haben Zugriff auf den Standort</item>
-      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> von <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> App haben Zugriff auf den Standort</item>
+      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> von <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> Apps hat Zugriff auf den Standort</item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"Letzte Standortzugriffe"</string>
     <string name="location_recent_location_access_view_details" msgid="1955078513330927035">"Details ansehen"</string>
@@ -2086,8 +2087,8 @@
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Wenn du zoomen möchtest"</b>", brauchst du einfach dreimal schnell auf das Display zu tippen.\n"<ul><li>"Zum Scrollen ziehst du mindestens zwei Finger über das Display."</li>\n<li>"Um den Zoom anzupassen, ziehst du einfach mindestens zwei Finger zusammen."</li></ul>\n\n<b>"Wenn du einen Bereich vorübergehend heranzoomen möchtest"</b>", tippe dreimal schnell auf das Display und halte deinen Finger beim dritten Tippen auf das Display gedrückt.\n"<ul><li>"Ziehe den Finger über das Display, um dich auf dem Display hin- und herzubewegen."</li>\n<li>"Um wieder herauszuzoomen, hebe den Finger an."</li></ul>\n\n"Auf der Tastatur und in der Navigationsleiste kann nicht gezoomt werden."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Wenn die Vergrößerung aktiviert ist, kannst du Elemente auf dem Bildschirm heranzoomen.\n\n"<b>"Wenn du zoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm.\n"<ul><li>"• Zum Scrollen ziehe mit zwei oder mehr Fingern"</li>\n<li>"• Zum Anpassen des Zooms ziehe zwei oder mehr Finger zusammen bzw. auseinander"</li></ul>\n\n<b>"Wenn du vorübergehend heranzoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm und halte sie gedrückt.\n"<ul><li>"• Wenn du dich im Bildschirm bewegen möchtest, ziehe den Bildschirm"</li>\n<li>"• Zum Herauszoomen hebe den Finger"</li></ul>\n\n"In die Tastatur oder Navigationsleiste kann nicht hineingezoomt werden."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Zum Öffnen Schaltfläche \"Bedienungshilfen\" nutzen"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Zum Öffnen Bewegung verwenden"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Neue Bewegung für Bedienungshilfen verwenden"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Zum Öffnen Touch-Geste verwenden"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Neue Touch-Geste für Bedienungshilfen verwenden"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Du kannst diesen Dienst aktivieren oder deaktivieren, indem du unten auf dem Bildschirm auf die Schaltfläche \"Bedienungshilfen\" <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> tippst.\n\nWenn du zwischen den Diensten wechseln möchtest, halte die Schaltfläche für die Bedienungshilfen gedrückt."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Du kannst diesen Dienst aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit zwei Fingern nach oben wischst.\n\nWenn du zwischen den Diensten wechseln möchtest, wische mit zwei Fingern über das Display nach oben und halte es gedrückt."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Du kannst diesen Dienst aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit drei Fingern nach oben wischst.\n\nWenn du zwischen den Diensten wechseln möchtest, wische mit drei Fingern über das Display nach oben und halte es gedrückt."</string>
@@ -2095,7 +2096,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Du kannst die Bedienungshilfen aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit drei Fingern nach oben wischst.\n\nWenn du zwischen den Diensten wechseln möchtest, wische mit drei Fingern über das Display nach oben und halte es gedrückt."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Die Schaltfläche für die Bedienungshilfen ist auf <xliff:g id="SERVICE">%1$s</xliff:g> gestellt. Um die Vergrößerung nutzen zu können, tippe &amp; halte die Schaltfläche für die Bedienungshilfen gedrückt und wähle anschließend \"Vergrößerung\" aus."</string>
-    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Die Bewegung für die Bedienungshilfen ist auf den Dienst \"<xliff:g id="SERVICE">%1$s</xliff:g>\" eingestellt. Wenn du die Vergrößerung verwenden möchtest, wische mit zwei Fingern vom unteren Bildschirmrand nach oben und halte den Bildschirm gedrückt. Wähle dann \"Vergrößerung\" aus."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Die Touch-Geste für die Bedienungshilfen ist auf den Dienst \"<xliff:g id="SERVICE">%1$s</xliff:g>\" eingestellt. Wenn du die Vergrößerung verwenden möchtest, wische mit zwei Fingern vom unteren Bildschirmrand nach oben und halte den Bildschirm gedrückt. Wähle dann \"Vergrößerung\" aus."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Verknüpfung für Lautstärketaste"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Verknüpfter Dienst"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Auf dem Sperrbildschirm erlauben"</string>
@@ -2534,7 +2535,7 @@
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 Stunden"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 Stunden"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 Tag"</string>
-    <string name="menu_show_system" msgid="8864603400415567635">"Systemprozesse anzeigen"</string>
+    <string name="menu_show_system" msgid="8864603400415567635">"System-Apps anzeigen"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"Systemprozesse ausblenden"</string>
     <string name="menu_show_percentage" msgid="4717204046118199806">"Prozentangaben anzeigen"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"USS verwenden"</string>
@@ -3106,7 +3107,8 @@
     <string name="keywords_app_default" msgid="5822717006354487071">"Öffnen mit"</string>
     <string name="keywords_applications_settings" msgid="1268353611121497450">"Anwendungen"</string>
     <string name="keywords_time_zone" msgid="998254736898753085">"Zeitzone"</string>
-    <string name="keywords_draw_overlay" msgid="4130899177619041842">"Chat Head"</string>
+    <!-- no translation found for keywords_draw_overlay (1001120206241401007) -->
+    <skip />
     <string name="keywords_flashlight" msgid="6161632177705233710">"Taschenlampe, Licht, Lampe"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wlan, umschalten, steuern"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"mobilfunk, mobil, mobilfunkanbieter, kabellos, drahtlos, daten, 4g, 3g, 2g, lte"</string>
@@ -3130,9 +3132,9 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="5426093074031208917">"bitte nicht stören, unterbrechen, unterbrechung, pause"</string>
     <string name="keywords_app" msgid="6334757056536837791">"ram"</string>
     <string name="keywords_location" msgid="4132655528196729043">"in der nähe, ort, standort, verlauf, berichterstellung, bericht erstellung, bericht erstellen, berichte erstellen, GPS"</string>
-    <string name="keywords_accounts" msgid="1957925565953357627">"konto"</string>
+    <string name="keywords_accounts" msgid="4479029747403203867">"Konto, ein Konto hinzufügen, Arbeitsprofil"</string>
     <string name="keywords_users" msgid="3434190133131387942">"einschränkung, einschränken, eingeschränkt"</string>
-    <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"text korrektur, textkorrektur, korrigieren, sound, ton, vibrieren, automatisch, sprache, bewegung, vorschlagen, vorschlag, design, anstößig, wort, eingeben, emoji, international"</string>
+    <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"text korrektur, textkorrektur, korrigieren, sound, ton, vibrieren, automatisch, sprache, geste, touch-geste, vorschlagen, vorschlag, design, anstößig, wort, eingeben, emoji, international"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"zurücksetzen, einstellungen, standard, standardeinstellung"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"apps, download, anwendungen, system"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"apps, berechtigungen, sicherheit"</string>
@@ -3143,10 +3145,10 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"zum entsperren über das display streichen, zum entsperren wischen, passwort, muster, pin"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"herausforderung bei der arbeit, arbeit, profil"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"arbeitsprofil, verwaltetes profil, gruppieren, gruppierung, arbeit, profil"</string>
-    <string name="keywords_gesture" msgid="3526905012224714078">"Gesten"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"gesten, bewegungen, touch-gesten"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"Bezahlen, tippen, Zahlungen"</string>
     <string name="keywords_backup" msgid="470070289135403022">"Sicherung, sicherung"</string>
-    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"Bewegung"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"Touch-Geste"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"Face, Unlock, Gesichtserkennung, Anmeldung"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl version, imei sv"</string>
     <string name="keywords_sim_status" msgid="6682044233620329507">"netzwerk, status des mobilfunknetzes, servicestatus, signalstärke, typ des mobilfunknetzes, roaming, iccid, eid"</string>
@@ -3168,6 +3170,7 @@
     <string name="keywords_storage_settings" msgid="297283751968446577">"Speicher, Cache, Daten, löschen, entfernen, frei machen, Platz"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"verbunden, gerät, kopfhörer, headset, lautsprecher, drahtlos, koppeln, ohrhörer, musik, medien"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"hintergrund, bildschirm, sperrbildschirm, design"</string>
+    <string name="keywords_styles" msgid="5828725481814049422">"Symbolform, Akzentfarbe, Schriftart"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"standard, assistent"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"zahlung, standard"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"eingehende Benachrichtigung"</string>
@@ -3177,7 +3180,6 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"Haptik, vibrieren, Empfindlichkeit"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"Energiesparmodus, fixiert, nichtflüchtig, Stromsparfunktion, Akku"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"ablauf, zeitplan, energiesparmodus, stromsparfunktion, akku, automatisch, prozent"</string>
-    <string name="keywords_add_an_account" msgid="6488139919428902434">"Arbeitsprofil"</string>
     <string name="default_sound" msgid="8821684447333687810">"Standardton"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Klingeltonlautstärke: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Lautstärke, Vibration, Bitte nicht stören"</string>
@@ -3884,7 +3886,6 @@
     <string name="permit_draw_overlay" msgid="7456536798718633432">"Einblendung über anderen Apps zulassen"</string>
     <string name="allow_overlay_description" msgid="8961670023925421358">"Erlaube, dass diese App über anderen Apps eingeblendet wird. Dies beeinträchtigt möglicherweise deine Nutzung dieser Apps oder ändert deren Darstellung oder Verhalten."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtuelle realität listener stereo hilfe dienst"</string>
-    <string name="keywords_system_alert_window" msgid="5049498015597864850">"systemwarnung fenster dialogfeld einblenden über anderen apps"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Über anderen Apps einblenden"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g> von <xliff:g id="COUNT_1">%2$d</xliff:g> Apps dürfen über anderen eingeblendet werden"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Apps mit Berechtigung"</string>
@@ -4120,7 +4121,6 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"Keine"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Das Rangobjekt fehlt."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Dieser Schlüssel ist in dem Rangobjekt nicht enthalten."</string>
-    <string name="theme_customization_category" msgid="1049181544004163283">"Designs"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Gemäß Standard fürs Gerät"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Display-Aussparung"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"display aussparung, notch"</string>
@@ -4182,7 +4182,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatisch"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuell"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Jetzt Speicherplatz freigeben"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"Gesten"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Gesten und Bewegungen"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gesten zum Steuern deines Smartphones"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gesten zum Steuern deines Tablets"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gesten zum Steuern deines Geräts"</string>
@@ -4196,12 +4196,12 @@
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"2-Schaltflächen-Steuerung"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Wenn du zwischen Apps wechseln möchtest, wische auf der Startbildschirmtaste nach oben. Wische noch einmal nach oben, um alle Apps zu sehen. Tippe auf die Schaltfläche \"Zurück\", um zurückzugehen."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Neue Startbildschirmtaste ausprobieren"</string>
-    <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Neue Bewegung zum Wechseln von Apps aktivieren"</string>
-    <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Bewegungssteuerung"</string>
+    <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Neue Touch-Geste zum Wechseln von Apps aktivieren"</string>
+    <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Gestensteuerung"</string>
     <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Öffne den Startbildschirm, indem du vom unteren Bildschirmrand nach oben wischst. Wenn du zwischen Apps wechseln möchtest, wische von unten nach oben, halte den Finger gedrückt und lass ihn dann los. Wenn du zurückgehen möchtest, wische vom linken oder vom rechten Rand nach innen."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3-Schaltflächen-Steuerung"</string>
     <string name="legacy_navigation_summary" msgid="5631274479304544610">"Mithilfe der Schaltflächen unten auf deinem Bildschirm kannst du zurückgehen, den Startbildschirm aufrufen und zwischen Apps wechseln."</string>
-    <string name="keywords_system_navigation" msgid="5825645072714635357">"Systemsteuerung, 2-Schaltflächen-Steuerung, 3-Schaltflächen-Steuerung, Bewegungssteuerung"</string>
+    <string name="keywords_system_navigation" msgid="5825645072714635357">"Systemsteuerung, 2-Schaltflächen-Steuerung, 3-Schaltflächen-Steuerung, Gestensteuerung"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Wird von deiner Standard-Start-App, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>, nicht unterstützt"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Standard-Home-App wechseln"</string>
     <string name="information_label" msgid="8133109685432913360">"Information"</string>
@@ -4537,7 +4537,7 @@
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Wenn du Informationen zu Preisen erhalten möchtest, wende dich bitte an deinen Netzwerkanbieter."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Datennutzung durch Apps"</string>
     <string name="mobile_network_mode_error" msgid="4784347953600013818">"Ungültiger Netzwerkmodus <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorieren."</string>
-    <string name="mobile_network_apn_title" msgid="7610812642954395440">"Zugriffspunktnamen"</string>
+    <string name="mobile_network_apn_title" msgid="7610812642954395440">"Zugangspunkte (APNs)"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Bei Verbindung mit <xliff:g id="CARRIER">%1$s</xliff:g> nicht verfügbar"</string>
     <string name="emergency_info_contextual_card_summary" msgid="7993926837251874514">"Medizinische Informationen und Notfallkontakte"</string>
     <string name="see_more" msgid="5953815986207345223">"Mehr anzeigen"</string>

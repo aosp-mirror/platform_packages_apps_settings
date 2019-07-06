@@ -953,7 +953,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="4371771604088014396">"Centrez le code QR ci-dessous pour établir la connexion à \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Connectez-vous au Wi-Fi en scannant un code QR."</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Partager le Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="5854392840857123065">"Scannez ce code QR pour vous connecter à \"<xliff:g id="SSID">%1$s</xliff:g>\" et partagez le mot de passe."</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="5854392840857123065">"Scannez ce code QR pour vous connecter à \"<xliff:g id="SSID">%1$s</xliff:g>\" et partager le mot de passe."</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="4436318319178361543">"Scannez ce code QR pour vous connecter à \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Réessayez. Si le problème persiste, contactez le fabricant de l\'appareil"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Un problème est survenu"</string>
@@ -1219,6 +1219,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Adapte la luminosité selon l\'éclairage. Si l\'option est activée, un réglage temporaire est possible."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"La luminosité de l\'écran s\'adapte automatiquement à votre environnement et à vos activités. Vous pouvez déplacer le curseur manuellement pour aider l\'appareil à apprendre vos préférences."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Balance des blancs de l\'écran"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Concentration sur l\'écran"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Activé - L\'écran ne s\'éteint pas pendant que vous le regardez"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Désactivé"</string>
@@ -1229,7 +1230,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Maintient l\'écran allumé lorsque vous le regardez"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Éclairage nocturne"</string>
     <string name="night_display_text" msgid="1837277457033025056">"La fonction Éclairage nocturne colore votre écran en rouge ambré afin de vous permettre de le regarder ou de lire plus facilement lorsque l\'éclairage est faible. Elle peut également vous aider à vous endormir."</string>
-    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Programmer"</string>
+    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Horaires"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Non programmé"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Actif à une heure définie"</string>
     <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Actif toute la nuit"</string>
@@ -1263,7 +1264,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personnaliser votre écran"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Sélect. fond d\'écran"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personnaliser votre Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Essayez différents styles, fonds d\'écran, horloges, etc."</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Essayez différents styles, fonds d\'écran, etc."</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Économiseur d\'écran"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Lorsque l\'appareil est en charge ou connecté à une station d\'accueil"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Dans les deux cas"</string>
@@ -1545,7 +1546,7 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="6239886818487538806">"Le contenu a été déplacé vers la <xliff:g id="NAME_0">^1</xliff:g>. \n\nPour gérer cette <xliff:g id="NAME_1">^2</xliff:g>, accédez à "<b>"Paramètres &gt; Stockage"</b>"."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"État de la batterie"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Niveau de la batterie"</string>
-    <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
+    <string name="apn_settings" msgid="3743170484827528406">"Points d\'accès"</string>
     <string name="apn_edit" msgid="1354715499708424718">"Modifier le point d\'accès"</string>
     <string name="apn_not_set" msgid="4974192007399968164">"Non défini"</string>
     <string name="apn_name" msgid="4115580098369824123">"Nom"</string>
@@ -3106,7 +3107,8 @@
     <string name="keywords_app_default" msgid="5822717006354487071">"Ouvrir avec"</string>
     <string name="keywords_applications_settings" msgid="1268353611121497450">"Applications"</string>
     <string name="keywords_time_zone" msgid="998254736898753085">"fuseau horaire"</string>
-    <string name="keywords_draw_overlay" msgid="4130899177619041842">"Chat Head"</string>
+    <!-- no translation found for keywords_draw_overlay (1001120206241401007) -->
+    <skip />
     <string name="keywords_flashlight" msgid="6161632177705233710">"lampe de poche, lumière, lampe"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, activer/désactiver, contrôle"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"cellulaire, mobile, opérateur mobile, sans fil, données, 4g, 3g, 2g, lte"</string>
@@ -3130,7 +3132,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="5426093074031208917">"ne pas déranger, interrompre, interruption, pause"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
     <string name="keywords_location" msgid="4132655528196729043">"à proximité, historique, position, mise à jour, GPS"</string>
-    <string name="keywords_accounts" msgid="1957925565953357627">"compte"</string>
+    <string name="keywords_accounts" msgid="4479029747403203867">"compte, ajouter un compte, profil professionnel"</string>
     <string name="keywords_users" msgid="3434190133131387942">"limitation, limiter, limité"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"correction de texte, corriger, son, vibreur, automatique, langue, geste, suggérer, suggestion, thème, choquant, mot, saisir, emoji, international"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"réinitialiser, préférences, par défaut"</string>
@@ -3168,6 +3170,7 @@
     <string name="keywords_storage_settings" msgid="297283751968446577">"mémoire, cache, données, supprimer, effacer, libérer, espace"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"associé, appareil, casque audio, casque, enceinte, sans fil, associer, écouteurs, musique, contenu multimédia"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"arrière-plan, écran, écran de verrouillage, thème"</string>
+    <string name="keywords_styles" msgid="5828725481814049422">"forme des icônes, couleur d\'accentuation, police"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"par défaut, assistant"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"paiement, par défaut"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"notification reçue"</string>
@@ -3177,7 +3180,6 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"technologie tactile, vibreur, sensibilité"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"économiseur de batterie, persistant, persistance, économiseur d\'énergie, batterie"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"routine, planning, économiseur de batterie, économiseur d\'énergie, batterie, automatique, pourcentage"</string>
-    <string name="keywords_add_an_account" msgid="6488139919428902434">"profil professionnel"</string>
     <string name="default_sound" msgid="8821684447333687810">"Son par défaut"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Volume de sonnerie à <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volume, vibreur, Ne pas déranger"</string>
@@ -3228,17 +3230,17 @@
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"Aucune interruption"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Aucun son, sauf <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Aucun son, sauf alarmes et médias"</string>
-    <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"Plages horaires"</string>
+    <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"Horaires"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5975522152123354381">"Supprimer des plages horaires"</string>
     <string name="zen_mode_schedule_delete" msgid="5717258786128155695">"Supprimer"</string>
     <string name="zen_mode_rule_name_edit" msgid="812185626159430507">"Modifier"</string>
-    <string name="zen_mode_automation_settings_page_title" msgid="8995524726286378583">"Plages horaires"</string>
-    <string name="zen_mode_automatic_rule_settings_page_title" msgid="4773111805919088437">"Programmer"</string>
+    <string name="zen_mode_automation_settings_page_title" msgid="8995524726286378583">"Horaires"</string>
+    <string name="zen_mode_automatic_rule_settings_page_title" msgid="4773111805919088437">"Horaires"</string>
     <string name="zen_mode_schedule_category_title" msgid="5482757877262584975">"Programme"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="4321254843908888574">"Tél. en silence à certains moments"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="6223252025075862701">"Définir les règles du mode Ne pas déranger"</string>
-    <string name="zen_mode_schedule_title" msgid="8616187805239590649">"Programmer"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="489102635414919052">"Programmer des plages horaires"</string>
+    <string name="zen_mode_schedule_title" msgid="8616187805239590649">"Horaires"</string>
+    <string name="zen_mode_use_automatic_rule" msgid="489102635414919052">"Utiliser ces horaires"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Prioritaires uniquement"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alarmes uniquement"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Aucune interruption"</string>
@@ -3884,7 +3886,6 @@
     <string name="permit_draw_overlay" msgid="7456536798718633432">"Autoriser la superposition d\'applis"</string>
     <string name="allow_overlay_description" msgid="8961670023925421358">"Autorisez cette application à se superposer aux autres applications que vous utilisez. Cette autorisation peut avoir un impact sur votre utilisation de ces dernières, ou modifier leur apparence ou leur comportement."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"rv réalité virtuelle écouteur service de soutien stéréo"</string>
-    <string name="keywords_system_alert_window" msgid="5049498015597864850">"fenêtre alerte système boîte de dialogue superposition autres applis"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Superposer aux autres applis"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g> applis sur <xliff:g id="COUNT_1">%2$d</xliff:g> autorisées à se superposer à d\'autres"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Applications disposant de l\'autorisation"</string>
@@ -4120,7 +4121,6 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"aucune"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Objet de classement manquant."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"L\'objet de classement ne contient pas cette touche."</string>
-    <string name="theme_customization_category" msgid="1049181544004163283">"Personnalisation des thèmes"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Par défaut"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Encoche"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"encoche pour écran, entaille"</string>
@@ -4208,7 +4208,7 @@
     <string name="low_label" msgid="1679136861385616813">"Faible"</string>
     <string name="high_label" msgid="7278863493316447831">"Élevée"</string>
     <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Une sensibilité plus élevée peut entrer en conflit avec les gestes d\'application impliquant les bords de l\'écran."</string>
-    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Sensibilité arrière"</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Sensibilité du retour en arrière"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Appuyer deux fois sur le téléphone pour le consulter"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Appuyez deux fois sur la tablette pour la consulter"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Appuyez deux fois sur l\'appareil pour le consulter"</string>

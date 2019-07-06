@@ -1219,6 +1219,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"I-optimize ang liwanag ayon sa ilaw. Kapag naka-on, pansamantala mo pa ring maisasaayos ang liwanag."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Awtomatikong maa-adjust ang brightness ng iyong screen sa kapaligiran at mga aktibidad mo. Maaari mong manual na galawin ang slider para matulungan ang adaptive brightness na matutunan ang iyong mga kagustuhan."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"White balance ng display"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Atensyon sa screen"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Naka-on / Hindi mag-o-off ang screen kung tinitingnan mo ito"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Naka-off"</string>
@@ -1263,7 +1264,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"I-personalize ang iyong screen"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Pumili ng wallpaper sa"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"I-customize ang iyong Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Sumubok ng iba\'t ibang istilo, wallpaper, orasan, atbp"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Sumubok ng iba\'t ibang istilo, wallpaper, at higit pa"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Habang nagcha-charge o naka-dock"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Alinman"</string>
@@ -3106,7 +3107,8 @@
     <string name="keywords_app_default" msgid="5822717006354487071">"Buksan gamit ang"</string>
     <string name="keywords_applications_settings" msgid="1268353611121497450">"Mga Application"</string>
     <string name="keywords_time_zone" msgid="998254736898753085">"timezone"</string>
-    <string name="keywords_draw_overlay" msgid="4130899177619041842">"Head ng chat"</string>
+    <!-- no translation found for keywords_draw_overlay (1001120206241401007) -->
+    <skip />
     <string name="keywords_flashlight" msgid="6161632177705233710">"Flashlight, Ilaw, Torch"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, i-toggle, pagkontrol"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"cellular, mobile, cell carrier, wireless, data, 4g,3g, 2g, lte"</string>
@@ -3130,7 +3132,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="5426093074031208917">"huwag gambalain, gambalain, pagkagambala, putol"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
     <string name="keywords_location" msgid="4132655528196729043">"kalapit, lokasyon, history, pag-uulat, GPS"</string>
-    <string name="keywords_accounts" msgid="1957925565953357627">"account"</string>
+    <string name="keywords_accounts" msgid="4479029747403203867">"account, magdagdag ng account, profile sa trabaho"</string>
     <string name="keywords_users" msgid="3434190133131387942">"paghihigpit, paghigpitan, pinaghigpitan"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"pagwawasto ng text, iwasto, tunog, i-vibrate, auto, wika, galaw, imungkahi, mungkahi, tema, nakakapanakit, salita, i-type, emoji, international"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"i-reset, mga kagustuhan, default"</string>
@@ -3168,6 +3170,7 @@
     <string name="keywords_storage_settings" msgid="297283751968446577">"memory, cache, data, i-delete, i-clear, bakante, espasyo"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"nakakonekta, device, headphones, headset, speaker, wireless, ipares, earbuds, musika, media"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"background, screen, lockscreen, tema"</string>
+    <string name="keywords_styles" msgid="5828725481814049422">"hugis ng icon, kulay ng accent, font"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"default, assistant"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"pagbabayad, default"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"papasok na notification"</string>
@@ -3177,7 +3180,6 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"haptics, pag-vibrate, pagkasensitibo"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"pangtipid sa baterya, sticky, manatili, pantipid ng baterya, baterya"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"routine, iskedyul, pangtipid sa baterya, pangtipid ng power, baterya, awtomatiko, porsyento"</string>
-    <string name="keywords_add_an_account" msgid="6488139919428902434">"profile sa trabaho"</string>
     <string name="default_sound" msgid="8821684447333687810">"Default na tunog"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Nasa <xliff:g id="PERCENTAGE">%1$s</xliff:g> ang volume ng pag-ring"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volume, pag-vibrate, Huwag Istorbohin"</string>
@@ -3884,7 +3886,6 @@
     <string name="permit_draw_overlay" msgid="7456536798718633432">"Payagang ipakita sa ibabaw ng iba pang app"</string>
     <string name="allow_overlay_description" msgid="8961670023925421358">"Payagan ang app na ito na lumabas sa ibabaw ng iba pang ginagamit mong app. Maaari itong makaapekto sa iyong paggamit sa mga naturang app, o sa hitsura o paggana ng mga ito."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtual reality listener stereo pantulong serbisyo"</string>
-    <string name="keywords_system_alert_window" msgid="5049498015597864850">"lumalabas ang dialog ng window ng alerto sa system sa ibabaw ng iba pang app"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Ipakita sa ibabaw ng ibang app"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"Pinapayagan ang <xliff:g id="COUNT_0">%1$d</xliff:g> sa <xliff:g id="COUNT_1">%2$d</xliff:g> (na) app na lumabas sa ibabaw ng ibang app"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Mga app na may pahintulot"</string>
@@ -4120,7 +4121,6 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"wala"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Walang object sa ranking."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Walang ganitong key ang object sa ranking."</string>
-    <string name="theme_customization_category" msgid="1049181544004163283">"Pagtatakda ng Tema"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Default ng device"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Cutout ng display"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"cutout ng display, notch"</string>
