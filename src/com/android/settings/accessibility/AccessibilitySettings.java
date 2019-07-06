@@ -40,7 +40,6 @@ import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.ContextCompat;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -61,7 +60,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -70,8 +68,7 @@ import java.util.Set;
  * Activity with the accessibility settings.
  */
 @SearchIndexable
-public class AccessibilitySettings extends DashboardFragment implements
-        Preference.OnPreferenceChangeListener {
+public class AccessibilitySettings extends DashboardFragment {
 
     private static final String TAG = "AccessibilitySettings";
 
@@ -97,8 +94,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private static final String TOGGLE_LARGE_POINTER_ICON =
             "toggle_large_pointer_icon";
     private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
-    private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
-            "select_long_press_timeout_preference";
     private static final String HEARING_AID_PREFERENCE =
             "hearing_aid_preference";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
@@ -132,8 +127,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
 
     static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
-
-    private final Map<String, String> mLongPressTimeoutValueToTitleMap = new HashMap<>();
 
     private final Handler mHandler = new Handler();
 
@@ -183,7 +176,6 @@ public class AccessibilitySettings extends DashboardFragment implements
 
     private SwitchPreference mToggleLargePointerIconPreference;
     private SwitchPreference mToggleDisableAnimationsPreference;
-    private ListPreference mSelectLongPressTimeoutPreference;
     private Preference mDisplayMagnificationPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mHearingAidPreference;
@@ -193,8 +185,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     private SwitchPreference mDarkUIModePreference;
     private DarkUIPreferenceController mDarkUIPreferenceController;
     private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
-
-    private int mLongPressTimeoutDefault;
 
     private DevicePolicyManager mDpm;
 
@@ -272,22 +262,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (mSelectLongPressTimeoutPreference == preference) {
-            handleLongPressTimeoutPreferenceChange((String) newValue);
-            return true;
-        }
-        return false;
-    }
-
-    private void handleLongPressTimeoutPreferenceChange(String stringValue) {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.LONG_PRESS_TIMEOUT, Integer.parseInt(stringValue));
-        mSelectLongPressTimeoutPreference.setSummary(
-                mLongPressTimeoutValueToTitleMap.get(stringValue));
-    }
-
-    @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (mHearingAidPreferenceController.handlePreferenceTreeClick(preference)) {
             return true;
@@ -343,22 +317,6 @@ public class AccessibilitySettings extends DashboardFragment implements
 
         mToggleDisableAnimationsPreference =
                 (SwitchPreference) findPreference(TOGGLE_DISABLE_ANIMATIONS);
-
-        // Long press timeout.
-        mSelectLongPressTimeoutPreference =
-                (ListPreference) findPreference(SELECT_LONG_PRESS_TIMEOUT_PREFERENCE);
-        mSelectLongPressTimeoutPreference.setOnPreferenceChangeListener(this);
-        if (mLongPressTimeoutValueToTitleMap.size() == 0) {
-            String[] timeoutValues = getResources().getStringArray(
-                    R.array.long_press_timeout_selector_values);
-            mLongPressTimeoutDefault = Integer.parseInt(timeoutValues[0]);
-            String[] timeoutTitles = getResources().getStringArray(
-                    R.array.long_press_timeout_selector_titles);
-            final int timeoutValueCount = timeoutValues.length;
-            for (int i = 0; i < timeoutValueCount; i++) {
-                mLongPressTimeoutValueToTitleMap.put(timeoutValues[i], timeoutTitles[i]);
-            }
-        }
 
         // Hearing Aid.
         mHearingAidPreference = findPreference(HEARING_AID_PREFERENCE);
@@ -589,13 +547,6 @@ public class AccessibilitySettings extends DashboardFragment implements
 
         // Dark Mode
         mDarkUIPreferenceController.updateState(mDarkUIModePreference);
-
-        // Long press timeout.
-        final int longPressTimeout = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LONG_PRESS_TIMEOUT, mLongPressTimeoutDefault);
-        String value = String.valueOf(longPressTimeout);
-        mSelectLongPressTimeoutPreference.setValue(value);
-        mSelectLongPressTimeoutPreference.setSummary(mLongPressTimeoutValueToTitleMap.get(value));
 
         mHearingAidPreferenceController.updateState(mHearingAidPreference);
 
