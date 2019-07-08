@@ -18,17 +18,12 @@ package com.android.settings.wifi.dpp;
 
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Bundle;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
-import com.android.settings.SetupWizardUtils;
-import com.android.settings.core.InstrumentedActivity;
 
 /**
  * To provision "this" device with specified Wi-Fi network.
@@ -36,14 +31,12 @@ import com.android.settings.core.InstrumentedActivity;
  * To use intent action {@code ACTION_ENROLLEE_QR_CODE_SCANNER}, specify the SSID string of the
  * Wi-Fi network to be provisioned in {@code WifiDppUtils.EXTRA_WIFI_SSID}.
  */
-public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
+public class WifiDppEnrolleeActivity extends WifiDppBaseActivity implements
         WifiDppQrCodeScannerFragment.OnScanWifiDppSuccessListener {
     private static final String TAG = "WifiDppEnrolleeActivity";
 
     public static final String ACTION_ENROLLEE_QR_CODE_SCANNER =
             "android.settings.WIFI_DPP_ENROLLEE_QR_CODE_SCANNER";
-
-    private FragmentManager mFragmentManager;
 
     @Override
     public int getMetricsCategory() {
@@ -51,25 +44,7 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
     }
 
     @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        theme.applyStyle(R.style.SetupWizardPartnerResource, /* force */ true);
-        super.onApplyThemeResource(theme, resid, first);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.wifi_dpp_activity);
-        mFragmentManager = getSupportFragmentManager();
-
-        if (savedInstanceState == null) {
-            handleIntent(getIntent());
-        }
-    }
-
-    private void handleIntent(Intent intent) {
+    protected void handleIntent(Intent intent) {
         switch (intent.getAction()) {
             case ACTION_ENROLLEE_QR_CODE_SCANNER:
                 String ssid = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SSID);

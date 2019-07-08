@@ -18,7 +18,6 @@ package com.android.settings.wifi.dpp;
 
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
@@ -29,12 +28,9 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
-import com.android.settings.SetupWizardUtils;
-import com.android.settings.core.InstrumentedActivity;
 
 import java.util.List;
 
@@ -55,7 +51,7 @@ import java.util.List;
  * For intent action {@link Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_URI}, specify Wi-Fi
  * Easy Connect bootstrapping information string in Intent's data URI.
  */
-public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
+public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
         WifiNetworkConfig.Retriever,
         WifiDppQrCodeGeneratorFragment.OnQrCodeGeneratorFragmentAddButtonClickedListener,
         WifiDppQrCodeScannerFragment.OnScanWifiDppSuccessListener,
@@ -78,8 +74,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     private static final String KEY_WIFI_NETWORK_ID = "key_wifi_network_id";
     private static final String KEY_IS_HOTSPOT = "key_is_hotspot";
 
-    private FragmentManager mFragmentManager;
-
     /** The Wi-Fi network which will be configured */
     private WifiNetworkConfig mWifiNetworkConfig;
 
@@ -95,18 +89,8 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     }
 
     @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        theme.applyStyle(R.style.SetupWizardPartnerResource, /* force */ true);
-        super.onApplyThemeResource(theme, resid, first);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.wifi_dpp_activity);
-        mFragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState != null) {
             String qrCode = savedInstanceState.getString(KEY_QR_CODE);
@@ -122,12 +106,11 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
             mWifiNetworkConfig = WifiNetworkConfig.getValidConfigOrNull(security, ssid,
                     preSharedKey, hiddenSsid, networkId, isHotspot);
-        } else {
-            handleIntent(getIntent());
         }
     }
 
-    private void handleIntent(Intent intent) {
+    @Override
+    protected void handleIntent(Intent intent) {
         boolean cancelActivity = false;
         WifiNetworkConfig config;
         switch (intent.getAction()) {
