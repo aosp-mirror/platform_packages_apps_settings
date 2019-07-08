@@ -33,6 +33,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -86,6 +87,8 @@ public final class AppInfoDashboardFragmentTest {
     private DevicePolicyManager mDevicePolicyManager;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private ActivityManager mActivityManager;
 
     private AppInfoDashboardFragment mFragment;
     private Context mShadowContext;
@@ -93,11 +96,13 @@ public final class AppInfoDashboardFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mShadowContext = RuntimeEnvironment.application;
+        mShadowContext = spy(RuntimeEnvironment.application);
         mFragment = spy(new AppInfoDashboardFragment());
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mShadowContext).when(mFragment).getContext();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
+        doReturn(mShadowContext).when(mActivity).getApplicationContext();
+        doReturn(mActivityManager).when(mActivity).getSystemService(ActivityManager.class);
         when(mUserManager.isAdminUser()).thenReturn(true);
 
         ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
@@ -202,7 +207,6 @@ public final class AppInfoDashboardFragmentTest {
         ShadowAppUtils.addHiddenModule(PACKAGE_NAME);
         ReflectionHelpers.setField(mFragment, "mPackageName", PACKAGE_NAME);
 
-
         assertThat(mFragment.ensureDisplayableModule(mActivity)).isFalse();
     }
 
@@ -212,6 +216,14 @@ public final class AppInfoDashboardFragmentTest {
         ReflectionHelpers.setField(mFragment, "mPackageName", PACKAGE_NAME);
 
         assertThat(mFragment.ensureDisplayableModule(mActivity)).isTrue();
+    }
+
+    @Test
+    public void isLockTaskModePinned_pinned_shouldReturnTrue() {
+        doReturn(ActivityManager.LOCK_TASK_MODE_PINNED).when(
+                mActivityManager).getLockTaskModeState();
+
+        assertThat(mFragment.isLockTaskModePinned(mActivity)).isTrue();
     }
 
     @Test
@@ -267,9 +279,8 @@ public final class AppInfoDashboardFragmentTest {
     public void onActivityResult_uninstalledUpdates_shouldInvalidateOptionsMenu() {
         doReturn(true).when(mFragment).refreshUi();
 
-        mFragment
-                .onActivityResult(AppInfoDashboardFragment.REQUEST_UNINSTALL, 0,
-                        mock(Intent.class));
+        mFragment.onActivityResult(AppInfoDashboardFragment.REQUEST_UNINSTALL, 0,
+                mock(Intent.class));
 
         verify(mActivity).invalidateOptionsMenu();
     }
