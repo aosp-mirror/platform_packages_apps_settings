@@ -57,7 +57,6 @@ import java.util.List;
  */
 public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         WifiNetworkConfig.Retriever,
-        WifiDppQrCodeGeneratorFragment.OnQrCodeGeneratorFragmentAddButtonClickedListener,
         WifiDppQrCodeScannerFragment.OnScanWifiDppSuccessListener,
         WifiDppAddDeviceFragment.OnClickChooseDifferentNetworkListener,
         WifiNetworkListFragment.OnChooseNetworkListener {
@@ -137,7 +136,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     cancelActivity = true;
                 } else {
                     mWifiNetworkConfig = config;
-                    showQrCodeScannerFragment(/* addToBackStack= */ false);
+                    showQrCodeScannerFragment();
                 }
                 break;
             case ACTION_CONFIGURATOR_QR_CODE_GENERATOR:
@@ -180,7 +179,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         }
     }
 
-    private void showQrCodeScannerFragment(boolean addToBackStack) {
+    private void showQrCodeScannerFragment() {
         WifiDppQrCodeScannerFragment fragment =
                 (WifiDppQrCodeScannerFragment) mFragmentManager.findFragmentByTag(
                         WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
@@ -201,9 +200,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
         fragmentTransaction.replace(R.id.fragment_container, fragment,
                 WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
-        if (addToBackStack) {
-            fragmentTransaction.addToBackStack(/* name */ null);
-        }
         fragmentTransaction.commit();
     }
 
@@ -321,11 +317,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
         mWifiDppQrCode = new WifiQrCode(wifiQrCode.getQrCode());
         return true;
-    }
-
-    @Override
-    public void onQrCodeGeneratorFragmentAddButtonClicked() {
-        showQrCodeScannerFragment(/* addToBackStack */ true);
     }
 
     @Override
