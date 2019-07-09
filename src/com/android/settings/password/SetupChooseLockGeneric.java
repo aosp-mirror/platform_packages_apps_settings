@@ -111,7 +111,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
             layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
 
-            int titleResource = mForFingerprint ?
+            int titleResource = isForBiometric() ?
                     R.string.lock_settings_picker_title : R.string.setup_lock_settings_picker_title;
             if (getActivity() != null) {
                 getActivity().setTitle(titleResource);
@@ -125,7 +125,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
         @Override
         protected void addHeaderView() {
-            if (mForFingerprint || mForFace) {
+            if (isForBiometric()) {
                 setHeaderView(R.layout.setup_choose_lock_generic_biometrics_header);
             } else {
                 setHeaderView(R.layout.setup_choose_lock_generic_header);
@@ -183,7 +183,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
         @Override
         protected void addPreferences() {
-            if (mForFingerprint) {
+            if (isForBiometric()) {
                 super.addPreferences();
             } else {
                 addPreferencesFromResource(R.xml.setup_security_settings_picker);
@@ -240,6 +240,10 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }
+
+        private boolean isForBiometric() {
+            return mForFingerprint || mForFace;
+        }
     }
 
     public static class InternalActivity extends ChooseLockGeneric.InternalActivity {
@@ -261,5 +265,4 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             }
         }
     }
-
 }
