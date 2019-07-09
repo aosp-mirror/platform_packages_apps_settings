@@ -212,12 +212,12 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         } else {
             intent.setClass(this, FaceEnrollEnrolling.class);
         }
-        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
+        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
         if (mResultIntent != null) {
             intent.putExtras(mResultIntent);
         }
         mNextClicked = true;
-        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
     }
 
