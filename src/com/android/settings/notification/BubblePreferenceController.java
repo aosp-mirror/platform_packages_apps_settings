@@ -16,7 +16,7 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
 import android.annotation.Nullable;
 import android.content.Context;
@@ -113,7 +113,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
     }
 
     private boolean isGloballyEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
+        return Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF) == SYSTEM_WIDE_ON;
     }
 
@@ -124,7 +124,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
         backend.setAllowBubbles(pkg, uid, false);
         // changing the global settings will cause the observer on the host page to reload
         // correct preference state
-        Settings.Secure.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
     }
 
@@ -134,7 +134,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
         backend.setAllowBubbles(pkg, uid, true);
         // changing the global settings will cause the observer on the host page to reload
         // correct preference state
-        Settings.Secure.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
     }
 }
