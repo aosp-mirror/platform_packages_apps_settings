@@ -16,7 +16,7 @@
 
 package com.android.settings.development;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
 import static com.android.settings.development.BubbleGlobalPreferenceController.OFF;
 import static com.android.settings.development.BubbleGlobalPreferenceController.ON;
@@ -77,7 +77,7 @@ public class BubbleGlobalPreferenceControllerTest {
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, 1 /* enabled */);
         mController.updateState(mPreference);
 
@@ -86,7 +86,7 @@ public class BubbleGlobalPreferenceControllerTest {
 
     @Test
     public void updateState_settingReset_defaultDisabled_preferenceShouldNotBeChecked() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, 0 /* enabled */);
         mController.updateState(mPreference);
 
@@ -104,7 +104,7 @@ public class BubbleGlobalPreferenceControllerTest {
     }
 
     private boolean isSettingEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+        return Settings.Global.getInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 OFF /* default off */) == ON;
     }
 

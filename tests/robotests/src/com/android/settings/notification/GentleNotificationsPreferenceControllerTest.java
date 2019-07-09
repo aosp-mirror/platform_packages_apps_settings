@@ -16,19 +16,10 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
-
-import static com.android.settings.notification.BadgingNotificationPreferenceController.OFF;
-import static com.android.settings.notification.BadgingNotificationPreferenceController.ON;
-
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
