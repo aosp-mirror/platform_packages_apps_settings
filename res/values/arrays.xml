@@ -238,6 +238,18 @@
         <item>AKA\'</item>
     </string-array>
 
+    <!-- Target EAP methods that will have different TTS strings -->
+    <!-- Note that this array length should be same as the wifi_eap_method_tts_strings-->
+    <string-array name="wifi_eap_method_target_strings" translatable="false">
+        <item>AKA\'</item>
+    </string-array>
+
+    <!-- TTS strings for the target EAP methods -->
+    <!-- Note that this array length should be same as the wifi_eap_method_target_strings-->
+    <string-array name="wifi_eap_method_tts_strings" translatable="false">
+        <item>AKA prime</item>
+    </string-array>
+
     <!-- Type of EAP method when EAP SIM, AKA, AKA' are not supported -->
     <string-array name="eap_method_without_sim_auth" translatable="false">
         <item>PEAP</item>

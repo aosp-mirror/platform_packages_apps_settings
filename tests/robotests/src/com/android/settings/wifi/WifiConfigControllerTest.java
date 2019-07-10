@@ -27,6 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.ServiceSpecificException;
@@ -444,5 +445,44 @@ public class WifiConfigControllerTest {
 
         WifiConfiguration config = mController.getConfig();
         assertThat(config.macRandomizationSetting).isEqualTo(WifiConfiguration.RANDOMIZATION_NONE);
+    }
+
+    @Test
+    public void replaceTtsString_whenTargetMatched_shouldSuccess() {
+        final CharSequence[] display = {"PEAP", "AKA1", "AKA2'"};
+        final CharSequence[] target = {"AKA1", "AKA2'"};
+        final CharSequence[] ttsString = {"AKA1_TTS", "AKA2_TTS"};
+
+        final CharSequence[] resultTts = mController.findAndReplaceTargetStrings(display, target,
+            ttsString);
+
+        assertThat(resultTts[0]).isEqualTo("PEAP");
+        assertThat(resultTts[1]).isEqualTo("AKA1_TTS");
+        assertThat(resultTts[2]).isEqualTo("AKA2_TTS");
+    }
+
+    @Test
+    public void replaceTtsString_whenNoTargetStringMatched_originalStringShouldNotChanged() {
+        final CharSequence[] display = {"PEAP", "AKA1", "AKA2"};
+        final CharSequence[] target = {"WEP1", "WEP2'"};
+        final CharSequence[] ttsString = {"WEP1_TTS", "WEP2_TTS"};
+
+        final CharSequence[] resultTts = mController.findAndReplaceTargetStrings(display, target,
+            ttsString);
+
+        assertThat(resultTts[0]).isEqualTo("PEAP");
+        assertThat(resultTts[1]).isEqualTo("AKA1");
+        assertThat(resultTts[2]).isEqualTo("AKA2");
+    }
+
+    @Test
+    public void checktEapMethodTargetAndTtsArraylength_shouldHaveSameCount() {
+        final Resources resources = mContext.getResources();
+        final String[] targetStringArray = resources.getStringArray(
+            R.array.wifi_eap_method_target_strings);
+        final String[] ttsStringArray = resources.getStringArray(
+            R.array.wifi_eap_method_tts_strings);
+
+        assertThat(targetStringArray.length).isEqualTo(ttsStringArray.length);
     }
 }
