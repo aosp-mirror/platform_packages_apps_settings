@@ -108,14 +108,6 @@ public class WifiDppConfiguratorActivityTest {
     }
 
     @Test
-    public void testActivity_shouldImplementsQrCodeGeneratorFragmentCallback() {
-        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
-
-        assertThat(activity instanceof WifiDppQrCodeGeneratorFragment
-                .OnQrCodeGeneratorFragmentAddButtonClickedListener).isTrue();
-    }
-
-    @Test
     public void testActivity_shouldImplementsOnScanWifiDppSuccessCallback() {
         WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
 

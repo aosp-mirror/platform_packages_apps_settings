@@ -52,12 +52,6 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
-    // Container Activity must implement this interface
-    public interface OnQrCodeGeneratorFragmentAddButtonClickedListener {
-        public void onQrCodeGeneratorFragmentAddButtonClicked();
-    }
-    OnQrCodeGeneratorFragmentAddButtonClickedListener mListener;
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -69,20 +63,6 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         } else {
             getActivity().setTitle(R.string.wifi_dpp_share_wifi);
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        mListener = (OnQrCodeGeneratorFragmentAddButtonClickedListener) context;
-    }
-
-    @Override
-    public void onDetach() {
-        mListener = null;
-
-        super.onDetach();
     }
 
     @Override
