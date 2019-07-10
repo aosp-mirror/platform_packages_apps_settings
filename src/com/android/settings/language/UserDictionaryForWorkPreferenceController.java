@@ -18,7 +18,6 @@ package com.android.settings.language;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.view.inputmethod.InputMethodSystemProperty;
 
 import com.android.settings.R;
 import com.android.settings.core.WorkProfilePreferenceController;
@@ -38,14 +37,5 @@ public final class UserDictionaryForWorkPreferenceController
     @Override
     protected int getSourceMetricsCategory() {
         return SettingsEnums.SETTINGS_LANGUAGE_CATEGORY;
-    }
-
-    @AvailabilityStatus
-    @Override
-    public int getAvailabilityStatus() {
-        if (!InputMethodSystemProperty.PER_PROFILE_IME_ENABLED) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-        return super.getAvailabilityStatus();
     }
 }
