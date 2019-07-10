@@ -100,21 +100,24 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     }
 
     private void showErrorUi(int code, boolean isConfigurationChange) {
+        CharSequence summaryCharSequence;
         switch (code) {
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_URI:
-                mSummary.setText(R.string.wifi_dpp_qr_code_is_not_valid_format);
+                summaryCharSequence = getText(R.string.wifi_dpp_qr_code_is_not_valid_format);
                 break;
 
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_AUTHENTICATION:
-                mSummary.setText(R.string.wifi_dpp_failure_authentication_or_configuration);
+                summaryCharSequence = getText(
+                        R.string.wifi_dpp_failure_authentication_or_configuration);
                 break;
 
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_NOT_COMPATIBLE:
-                mSummary.setText(R.string.wifi_dpp_failure_not_compatible);
+                summaryCharSequence = getText(R.string.wifi_dpp_failure_not_compatible);
                 break;
 
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_CONFIGURATION:
-                mSummary.setText(R.string.wifi_dpp_failure_authentication_or_configuration);
+                summaryCharSequence = getText(
+                        R.string.wifi_dpp_failure_authentication_or_configuration);
                 break;
 
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_BUSY:
@@ -135,15 +138,16 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
                 return;
 
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_TIMEOUT:
-                mSummary.setText(R.string.wifi_dpp_failure_timeout);
+                summaryCharSequence = getText(R.string.wifi_dpp_failure_timeout);
                 break;
 
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_GENERIC:
-                mSummary.setText(R.string.wifi_dpp_failure_generic);
+                summaryCharSequence = getText(R.string.wifi_dpp_failure_generic);
                 break;
 
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_NOT_SUPPORTED:
-                mSummary.setText(getString(R.string.wifi_dpp_failure_not_supported, getSsid()));
+                summaryCharSequence = getString(
+                        R.string.wifi_dpp_failure_not_supported, getSsid());
                 break;
 
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_NETWORK:
@@ -155,6 +159,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         }
 
         setHeaderTitle(R.string.wifi_dpp_could_not_add_device);
+        mSummary.setText(summaryCharSequence);
         mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_error);
         mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
         if (hasRetryButton(code)) {

@@ -72,6 +72,9 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
                     .build();
             mGlifLayout.getMixin(FooterBarMixin.class).setPrimaryButton(mRightButton);
         }
+
+        mGlifLayout.getHeaderTextView().setAccessibilityLiveRegion(
+                View.ACCESSIBILITY_LIVE_REGION_POLITE);
     }
 
     protected void setHeaderIconImageResource(@DrawableRes int iconResId) {
