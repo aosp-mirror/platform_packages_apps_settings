@@ -94,17 +94,10 @@ public class AccessibilitySettings extends DashboardFragment {
     private static final String TOGGLE_LARGE_POINTER_ICON =
             "toggle_large_pointer_icon";
     private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
-    private static final String HEARING_AID_PREFERENCE =
-            "hearing_aid_preference";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "magnification_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference";
-    private static final String DARK_UI_MODE_PREFERENCE =
-            "dark_ui_mode_accessibility";
-    private static final String LIVE_CAPTION_PREFERENCE_KEY =
-            "live_caption";
-
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -178,13 +171,7 @@ public class AccessibilitySettings extends DashboardFragment {
     private SwitchPreference mToggleDisableAnimationsPreference;
     private Preference mDisplayMagnificationPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
-    private Preference mHearingAidPreference;
-    private Preference mLiveCaptionPreference;
     private SwitchPreference mToggleInversionPreference;
-    private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
-    private SwitchPreference mDarkUIModePreference;
-    private DarkUIPreferenceController mDarkUIPreferenceController;
-    private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
 
     private DevicePolicyManager mDpm;
 
@@ -236,13 +223,9 @@ public class AccessibilitySettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mHearingAidPreferenceController = new AccessibilityHearingAidPreferenceController
-                (context, HEARING_AID_PREFERENCE);
-        mHearingAidPreferenceController.setFragmentManager(getFragmentManager());
-        getLifecycle().addObserver(mHearingAidPreferenceController);
-
-        mLiveCaptionPreferenceController = new LiveCaptionPreferenceController(context,
-                LIVE_CAPTION_PREFERENCE_KEY);
+        use(DarkUIPreferenceController.class).setParentFragment(this);
+        use(AccessibilityHearingAidPreferenceController.class)
+                .setFragmentManager(getFragmentManager());
     }
 
     @Override
@@ -259,14 +242,6 @@ public class AccessibilitySettings extends DashboardFragment {
         mSettingsPackageMonitor.unregister();
         mSettingsContentObserver.unregister(getContentResolver());
         super.onStop();
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (mHearingAidPreferenceController.handlePreferenceTreeClick(preference)) {
-            return true;
-        }
-        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
@@ -318,27 +293,12 @@ public class AccessibilitySettings extends DashboardFragment {
         mToggleDisableAnimationsPreference =
                 (SwitchPreference) findPreference(TOGGLE_DISABLE_ANIMATIONS);
 
-        // Hearing Aid.
-        mHearingAidPreference = findPreference(HEARING_AID_PREFERENCE);
-        mHearingAidPreferenceController.displayPreference(getPreferenceScreen());
-
-        // Live caption
-        mLiveCaptionPreference = findPreference(LIVE_CAPTION_PREFERENCE_KEY);
-        mLiveCaptionPreferenceController.displayPreference(getPreferenceScreen());
-
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
 
         // Display color adjustments.
         mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
-
-        // Dark Mode.
-        mDarkUIModePreference = findPreference(DARK_UI_MODE_PREFERENCE);
-        mDarkUIPreferenceController = new DarkUIPreferenceController(getContext(),
-                DARK_UI_MODE_PREFERENCE);
-        mDarkUIPreferenceController.setParentFragment(this);
-        mDarkUIPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     private void updateAllPreferences() {
@@ -544,13 +504,6 @@ public class AccessibilitySettings extends DashboardFragment {
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
         }
-
-        // Dark Mode
-        mDarkUIPreferenceController.updateState(mDarkUIModePreference);
-
-        mHearingAidPreferenceController.updateState(mHearingAidPreference);
-
-        mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
