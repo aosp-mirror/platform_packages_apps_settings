@@ -78,6 +78,19 @@ public class FaceSettingsAppPreferenceController extends FaceSettingsPreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        if(mFaceManager == null){
+            return AVAILABLE_UNSEARCHABLE;
+        }
+
+        // By only allowing this preference controller to be searchable when the feature is turned
+        // off, it will give preference to the face setup controller.
+        final boolean hasEnrolledUser = mFaceManager.hasEnrolledTemplates(getUserId());
+        final boolean appUnlockEnabled = Settings.Secure.getIntForUser(
+                mContext.getContentResolver(), FACE_UNLOCK_APP_ENABLED, OFF, getUserId()) == ON;
+        if (hasEnrolledUser && !appUnlockEnabled) {
+            return AVAILABLE;
+        } else {
+            return AVAILABLE_UNSEARCHABLE;
+        }
     }
 }

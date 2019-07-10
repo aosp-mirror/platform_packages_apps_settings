@@ -32,6 +32,13 @@ public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceC
     }
 
     @Override
+    public int getAvailabilityStatus() {
+        // Make the profile unsearchable so the user preference controller gets highlighted
+        // when searched for.
+        return AVAILABLE_UNSEARCHABLE;
+    }
+
+    @Override
     protected boolean isUserSupported() {
         return mProfileChallengeUserId != UserHandle.USER_NULL
                 && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId);
