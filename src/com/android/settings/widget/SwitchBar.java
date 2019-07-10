@@ -249,8 +249,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             mSwitch.setEnabled(false);
             mSwitch.setVisibility(View.GONE);
             mRestrictedIcon.setVisibility(View.VISIBLE);
-            mRestrictedIcon.setFocusable(false);
-            mRestrictedIcon.setClickable(false);
         } else {
             mDisabledByAdmin = false;
             mSwitch.setVisibility(View.VISIBLE);
