@@ -40,6 +40,7 @@ import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -122,9 +123,9 @@ public class WifiConfigController implements TextWatcher,
 
 
     /* Phase2 methods supported by PEAP are limited */
-    private ArrayAdapter<String> mPhase2PeapAdapter;
+    private ArrayAdapter<CharSequence> mPhase2PeapAdapter;
     /* Full list of phase2 methods */
-    private ArrayAdapter<String> mPhase2FullAdapter;
+    private ArrayAdapter<CharSequence> mPhase2FullAdapter;
 
     // e.g. AccessPoint.SECURITY_NONE
     @VisibleForTesting
@@ -145,7 +146,7 @@ public class WifiConfigController implements TextWatcher,
     private TextView mEapDomainView;
     private Spinner mPhase2Spinner;
     // Associated with mPhase2Spinner, one of mPhase2FullAdapter or mPhase2PeapAdapter
-    private ArrayAdapter<String> mPhase2Adapter;
+    private ArrayAdapter<CharSequence> mPhase2Adapter;
     private Spinner mEapUserCertSpinner;
     private TextView mEapIdentityView;
     private TextView mEapAnonymousView;
@@ -218,17 +219,16 @@ public class WifiConfigController implements TextWatcher,
         mLevels = res.getStringArray(R.array.wifi_signal);
         if (Utils.isWifiOnly(mContext) || !mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_eap_sim_based_auth_supported)) {
-            mPhase2PeapAdapter = new ArrayAdapter<String>(
+            mPhase2PeapAdapter = new ArrayAdapter<CharSequence>(
                     mContext, android.R.layout.simple_spinner_item,
                     res.getStringArray(R.array.wifi_peap_phase2_entries));
         } else {
-            mPhase2PeapAdapter = new ArrayAdapter<String>(
-                    mContext, android.R.layout.simple_spinner_item,
-                    res.getStringArray(R.array.wifi_peap_phase2_entries_with_sim_auth));
+            mPhase2PeapAdapter = getSpinnerArrayWithEapMethodsTts(
+                R.array.wifi_peap_phase2_entries_with_sim_auth);
         }
         mPhase2PeapAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        mPhase2FullAdapter = new ArrayAdapter<String>(
+        mPhase2FullAdapter = new ArrayAdapter<CharSequence>(
                 mContext, android.R.layout.simple_spinner_item,
                 res.getStringArray(R.array.wifi_phase2_entries));
         mPhase2FullAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -991,6 +991,12 @@ public class WifiConfigController implements TextWatcher,
                 spinnerAdapter.setDropDownViewResource(
                         android.R.layout.simple_spinner_dropdown_item);
                 mEapMethodSpinner.setAdapter(spinnerAdapter);
+            } else {
+                final ArrayAdapter<CharSequence> wifispinnerAdapter =
+                    getSpinnerArrayWithEapMethodsTts(R.array.wifi_eap_method);
+                wifispinnerAdapter.setDropDownViewResource(
+                    android.R.layout.simple_spinner_dropdown_item);
+                mEapMethodSpinner.setAdapter(wifispinnerAdapter);
             }
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
             mPhase2Spinner.setOnItemSelectedListener(this);
@@ -1578,5 +1584,69 @@ public class WifiConfigController implements TextWatcher,
         mView.findViewById(R.id.hidden_settings_field).setVisibility(View.VISIBLE);
         ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox))
                 .setOnCheckedChangeListener(this);
+    }
+
+    /**
+     * For each target string in {@code targetStringArray} try to find if it appears in {@code
+     * originalStringArray}, if found then use the corresponding string, which have the same index
+     * of the target string in {@code replacementStringArray}, to replace it. And finally return the
+     * whole new string array back to caller.
+     */
+    @VisibleForTesting
+    CharSequence[] findAndReplaceTargetStrings(CharSequence originalStringArray[],
+            CharSequence targetStringArray[], CharSequence replacementStringArray[]) {
+        // The length of the targetStringArray and replacementStringArray should be the same, each
+        // item in the targetStringArray should have a 1:1 mapping to replacementStringArray, so
+        // just return the original string if the lengths are different.
+        if (targetStringArray.length != replacementStringArray.length) {
+            return originalStringArray;
+        }
+
+        final CharSequence[] returnEntries = new CharSequence[originalStringArray.length];
+        for (int i = 0; i < originalStringArray.length; i++) {
+            returnEntries[i] = originalStringArray[i];
+            for (int j = 0; j < targetStringArray.length; j++) {
+                if (TextUtils.equals(originalStringArray[i], targetStringArray[j])) {
+                    returnEntries[i] = replacementStringArray[j];
+                }
+            }
+        }
+        return returnEntries;
+    }
+
+    /**
+     * This function is to span the TTS strings to each EAP method items in the
+     * spinner to have detail TTS content for the TTS engine usage.
+     */
+    private ArrayAdapter<CharSequence> getSpinnerArrayWithEapMethodsTts(int resid) {
+        final Resources res = mContext.getResources();
+        CharSequence[] sourceStrings = res.getStringArray(
+                resid);
+        CharSequence[] targetStrings = res.getStringArray(
+                R.array.wifi_eap_method_target_strings);
+        CharSequence[] ttsStrings = res.getStringArray(
+                R.array.wifi_eap_method_tts_strings);
+
+        // Replace the target strings with tts strings and save all in a new array.
+        final CharSequence[] newTtsSourceStrings = findAndReplaceTargetStrings(
+                sourceStrings, targetStrings, ttsStrings);
+
+        // Build new ttsspan text arrays for talkback.
+        final CharSequence[] accessibilityArray = createAccessibleEntries(
+                sourceStrings, newTtsSourceStrings);
+
+        // Return a new ArrayAdapter with the new talkback array.
+        return new ArrayAdapter<CharSequence>(
+                mContext, android.R.layout.simple_spinner_item, accessibilityArray);
+    }
+
+    private SpannableString[] createAccessibleEntries(CharSequence entries[],
+            CharSequence[] contentDescriptions) {
+        final SpannableString[] accessibleEntries = new SpannableString[entries.length];
+        for (int i = 0; i < entries.length; i++) {
+            accessibleEntries[i] = com.android.settings.Utils.createAccessibleSequence(entries[i],
+                    contentDescriptions[i].toString());
+        }
+        return accessibleEntries;
     }
 }
