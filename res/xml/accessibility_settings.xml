@@ -40,8 +40,7 @@
             android:key="tts_settings_preference"
             android:title="@string/tts_settings_title"
             android:fragment="com.android.settings.tts.TextToSpeechSettings"
-            settings:controller="com.android.settings.language.TtsPreferenceController"
-            settings:searchable="false"/>
+            settings:controller="com.android.settings.language.TtsPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -101,8 +100,7 @@
             android:title="@string/accessibility_power_button_ends_call_prerefence_title"
             android:persistent="false"
             settings:controller="com.android.settings.accessibility.PowerButtonEndsCallPreferenceController"/>
-
-
+        
         <SwitchPreference
             android:key="toggle_lock_screen_rotation_preference"
             android:title="@string/accelerometer_title"
@@ -156,7 +154,8 @@
         <Preference
             android:key="hearing_aid_preference"
             android:summary="@string/accessibility_hearingaid_not_connected_summary"
-            android:title="@string/accessibility_hearingaid_title"/>
+            android:title="@string/accessibility_hearingaid_title"
+            settings:controller="com.android.settings.accessibility.AccessibilityHearingAidPreferenceController"/>
 
         <Preference
             android:key="captioning_preference_screen"

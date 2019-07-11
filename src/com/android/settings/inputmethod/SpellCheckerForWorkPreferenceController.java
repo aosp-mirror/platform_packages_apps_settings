@@ -18,7 +18,6 @@ package com.android.settings.inputmethod;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.view.inputmethod.InputMethodSystemProperty;
 
 import com.android.settings.R;
 import com.android.settings.core.WorkProfilePreferenceController;
@@ -42,8 +41,7 @@ public final class SpellCheckerForWorkPreferenceController extends WorkProfilePr
     @AvailabilityStatus
     @Override
     public int getAvailabilityStatus() {
-        if (!mContext.getResources().getBoolean(R.bool.config_show_spellcheckers_settings)
-                || !InputMethodSystemProperty.PER_PROFILE_IME_ENABLED) {
+        if (!mContext.getResources().getBoolean(R.bool.config_show_spellcheckers_settings)) {
             return UNSUPPORTED_ON_DEVICE;
         }
         return super.getAvailabilityStatus();
