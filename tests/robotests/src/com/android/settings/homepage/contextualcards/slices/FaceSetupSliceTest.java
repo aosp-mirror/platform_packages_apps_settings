@@ -16,19 +16,15 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
-import static android.hardware.biometrics.BiometricConstants.BIOMETRIC_ERROR_NO_BIOMETRICS;
-import static android.hardware.biometrics.BiometricManager.BIOMETRIC_SUCCESS;
-
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.hardware.biometrics.BiometricConstants;
-import android.hardware.biometrics.BiometricManager;
+import android.hardware.face.FaceManager;
+import android.os.UserHandle;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
@@ -46,43 +42,36 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class FaceSetupSliceTest {
 
-    private BiometricManager mBiometricManager;
     private Context mContext;
-    private PackageManager mPackageManager;
 
     @Before
     public void setUp() {
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mContext = spy(RuntimeEnvironment.application);
-        mPackageManager = spy(mContext.getPackageManager());
-        mBiometricManager = spy(mContext.getSystemService(BiometricManager.class));
     }
 
     @Test
-    public void getSlice_noFaceSupported_shouldReturnNull() {
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(false);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+    public void getSlice_noFaceManager_shouldReturnNull() {
+        when(mContext.getSystemService(FaceManager.class)).thenReturn(null);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
         assertThat(setupSlice.getSlice()).isNull();
     }
 
     @Test
-    public void getSlice_faceSupportedUserEnrolled_shouldReturnNull() {
-        when(mBiometricManager.canAuthenticate()).thenReturn(BIOMETRIC_SUCCESS);
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        when(mContext.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
+    public void getSlice_faceEnrolled_shouldReturnNull() {
+        final FaceManager faceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(FaceManager.class)).thenReturn(faceManager);
+        when(faceManager.hasEnrolledTemplates(UserHandle.myUserId())).thenReturn(true);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
         assertThat(setupSlice.getSlice()).isNull();
     }
 
     @Test
-    public void getSlice_faceSupportedUserNotEnrolled_shouldReturnNonNull() {
-        when(mBiometricManager.canAuthenticate()).thenReturn(BIOMETRIC_ERROR_NO_BIOMETRICS);
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        when(mContext.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
+    public void getSlice_faceNotEnrolled_shouldReturnNonNull() {
+        final FaceManager faceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(FaceManager.class)).thenReturn(faceManager);
+        when(faceManager.hasEnrolledTemplates(UserHandle.myUserId())).thenReturn(false);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
         assertThat(setupSlice.getSlice()).isNotNull();
     }

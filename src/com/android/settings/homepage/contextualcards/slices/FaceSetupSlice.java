@@ -25,7 +25,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.biometrics.BiometricManager;
+import android.hardware.face.FaceManager;
 import android.net.Uri;
+import android.os.UserHandle;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -36,7 +38,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
+import com.android.settings.biometrics.face.FaceStatusPreferenceController;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
@@ -52,13 +54,8 @@ public class FaceSetupSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
-        final BiometricManager biometricManager = mContext.getSystemService(BiometricManager.class);
-        final PackageManager packageManager = mContext.getPackageManager();
-        if (!packageManager.hasSystemFeature(PackageManager.FEATURE_FACE)) {
-            // no face hardware
-            return null;
-        } else if (biometricManager.canAuthenticate() == BIOMETRIC_SUCCESS) {
-            // face hardware, and already enrolled
+        final FaceManager faceManager = mContext.getSystemService(FaceManager.class);
+        if (faceManager == null || faceManager.hasEnrolledTemplates(UserHandle.myUserId())) {
             return null;
         }
 
@@ -84,7 +81,7 @@ public class FaceSetupSlice implements CustomSliceable {
     public Intent getIntent() {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 SecuritySettings.class.getName(),
-                FaceProfileStatusPreferenceController.KEY_FACE_SETTINGS,
+                FaceStatusPreferenceController.KEY_FACE_SETTINGS,
                 mContext.getText(R.string.security_settings_face_settings_enroll).toString(),
                 SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName());
