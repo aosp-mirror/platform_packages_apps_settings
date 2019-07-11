@@ -20,10 +20,13 @@ import android.content.Context;
 import android.os.storage.StorageManager;
 import android.text.format.Formatter;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.text.NumberFormat;
 
@@ -44,14 +47,22 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
     }
 
     @Override
-    public CharSequence getSummary() {
-        // TODO: Register listener.
-        final NumberFormat percentageFormat = NumberFormat.getPercentInstance();
-        final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
-                mStorageManagerVolumeProvider);
-        double privateUsedBytes = info.totalBytes - info.freeBytes;
-        return mContext.getString(R.string.storage_summary,
-                percentageFormat.format(privateUsedBytes / info.totalBytes),
-                Formatter.formatFileSize(mContext, info.freeBytes));
+    protected void refreshSummary(Preference preference) {
+        if (preference == null) {
+            return;
+        }
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+            final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
+                    mStorageManagerVolumeProvider);
+            final double privateUsedBytes = info.totalBytes - info.freeBytes;
+
+            ThreadUtils.postOnMainThread(() -> {
+                preference.setSummary(mContext.getString(R.string.storage_summary,
+                        percentageFormat.format(privateUsedBytes / info.totalBytes),
+                        Formatter.formatFileSize(mContext, info.freeBytes)));
+            });
+        });
     }
 }
