@@ -114,15 +114,15 @@ public class FaceSettings extends DashboardFragment {
         super.onCreate(savedInstanceState);
 
         final Context context = getPrefContext();
-        mUserManager = context.getSystemService(UserManager.class);
-        mFaceManager = context.getSystemService(FaceManager.class);
-        mToken = getIntent().getByteArrayExtra(KEY_TOKEN);
-
         if (!isAvailable(context)) {
             Log.w(TAG, "no faceManager, finish this");
             finish();
             return;
         }
+
+        mUserManager = context.getSystemService(UserManager.class);
+        mFaceManager = context.getSystemService(FaceManager.class);
+        mToken = getIntent().getByteArrayExtra(KEY_TOKEN);
 
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
