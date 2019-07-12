@@ -94,6 +94,7 @@
         android:title="@string/sim_status_title"
         settings:keywords="@string/keywords_sim_status"
         android:summary="@string/summary_placeholder"
+        settings:enableCopying="true"
         settings:allowDividerAbove="true"/>
 
     <!-- Model & hardware -->
@@ -101,9 +102,10 @@
         android:key="device_model"
         android:order="31"
         android:title="@string/hardware_info"
-        settings:keywords="@string/keywords_model_and_hardware"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
+        settings:enableCopying="true"
+        settings:keywords="@string/keywords_model_and_hardware"
         settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
 
     <!-- IMEI -->
@@ -111,8 +113,9 @@
         android:key="imei_info"
         android:order="32"
         android:title="@string/status_imei"
-        settings:keywords="@string/keywords_imei_info"
         android:summary="@string/summary_placeholder"
+        settings:keywords="@string/keywords_imei_info"
+        settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController"/>
 
     <!-- Android version -->
