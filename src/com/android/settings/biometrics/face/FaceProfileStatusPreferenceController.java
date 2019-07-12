@@ -25,7 +25,7 @@ import androidx.preference.Preference;
 
 public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceController {
 
-    public static final String KEY_FACE_SETTINGS = "face_settings_profile";
+    private static final String KEY_FACE_SETTINGS = "face_settings_profile";
 
     public FaceProfileStatusPreferenceController(Context context) {
         super(context, KEY_FACE_SETTINGS);
@@ -33,6 +33,11 @@ public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceC
 
     @Override
     public int getAvailabilityStatus() {
+        // Check if Face for Profile is available.
+        final int isAvailable = super.getAvailabilityStatus();
+        if (isAvailable != AVAILABLE) {
+            return isAvailable;
+        }
         // Make the profile unsearchable so the user preference controller gets highlighted
         // when searched for.
         return AVAILABLE_UNSEARCHABLE;
