@@ -54,7 +54,7 @@ public class FaceSetupSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
-        final FaceManager faceManager = mContext.getSystemService(FaceManager.class);
+        final FaceManager faceManager = Utils.getFaceManagerOrNull(mContext);
         if (faceManager == null || faceManager.hasEnrolledTemplates(UserHandle.myUserId())) {
             return null;
         }
