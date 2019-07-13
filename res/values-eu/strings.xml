@@ -1960,7 +1960,7 @@
     <string name="service_manage" msgid="1876642087421959194">"Ezarpenak"</string>
     <string name="service_stop_description" msgid="9146619928198961643">"Zerbitzua bere aplikazioak hasi du. Gelditzen baduzu, agian aplikazioak huts egingo du."</string>
     <string name="heavy_weight_stop_description" msgid="6050413065144035971">"Ezin da aplikazioa modu seguruan gelditu. Geldituz gero, uneko lan batzuk gal ditzakezu."</string>
-    <string name="background_process_stop_description" msgid="3834163804031287685">"Aplikazio-prozesu zaharra da hau, baina geroago behar bada erabiltzeko ari da exekutatzen. Normalean ez dago hori gelditzeko arrazoirik."</string>
+    <string name="background_process_stop_description" msgid="3834163804031287685">"Aplikazio-prozesu hau zaharra da, baina abian da oraindik ere, badaezpada berriro behar bada. Normalean ez dago hura gelditzeko arrazoirik."</string>
     <string name="service_manage_description" msgid="479683614471552426">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: beste norbait ari da erabiltzen. Zuk kontrolatzeko, saka ezazu Ezarpenak."</string>
     <string name="main_running_process_description" msgid="1130702347066340890">"Abian den prozesu nagusia."</string>
     <string name="process_service_in_use_description" msgid="8993335064403217080">"<xliff:g id="COMP_NAME">%1$s</xliff:g> zerbitzua abian da."</string>
@@ -2348,7 +2348,7 @@
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="1040488674178753191">
       <item quantity="other">Aplikazio hauek ezin dira exekutatu atzeko planoan</item>
-      <item quantity="one">Aplikazio hau ezin da exekutatu atzeko planoan</item>
+      <item quantity="one">Aplikazio hau ezin da abiarazi atzeko planoan</item>
     </plurals>
     <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="8130618585820429591">
       <item quantity="other">%1$d aplikazio mugatu nahi dituzu?</item>
@@ -2420,7 +2420,7 @@
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"PUZaren aurreko planoa"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Mantendu aktibo"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
-    <string name="usage_type_wifi_running" msgid="3134357198266380400">"Wi-Fia exekutatzen"</string>
+    <string name="usage_type_wifi_running" msgid="3134357198266380400">"Wifiaren erabilera"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Tableta"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefonoa"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"Bidalitako pakete mugikorrak"</string>
@@ -3460,9 +3460,9 @@
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Desaktibatu"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Utzi"</string>
     <string name="vr_listeners_title" msgid="1318901577754715777">"Errealitate birtualeko laguntza-zerbitzuak"</string>
-    <string name="no_vr_listeners" msgid="2689382881717507390">"Ez dago errealitate birtualeko laguntza-zerbitzu gisa exekutatzea eskatu duen aplikaziorik instalatuta."</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Ez dago errealitate birtualeko laguntza-zerbitzu gisa abiaraztea eskatu duen aplikaziorik instalatuta."</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari errealitate birtualeko zerbitzuak atzitzeko baimena eman nahi diozu?"</string>
-    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"Aplikazioak errealitate birtualean erabiltzen dituzunean exekutatu ahal izango da  <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>."</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"Aplikazioak errealitate birtualean erabiltzen dituzunean abiarazi ahal izango da  <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>."</string>
     <string name="display_vr_pref_title" msgid="8104485269504335481">"Errealitate birtualeko moduan"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Murriztu lausotzea (gomendatua)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Murriztu distira"</string>
@@ -3766,9 +3766,9 @@
     <string name="usage_access_description" msgid="1352111094596416795">"Erabilera-datuek zer beste aplikazio eta zer maiztasunekin erabiltzen dituzun jakiteko baimena ematen die aplikazioei, baita zer operadore duzun, zer hizkuntza-ezarpen dituzun eta beste xehetasun batzuk ere."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Memoria"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Memoriaren xehetasunak"</string>
-    <string name="always_running" msgid="6042448320077429656">"Beti ari da exekutatzen (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
-    <string name="sometimes_running" msgid="6611250683037700864">"Noizbehinka exekutatzen da (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
-    <string name="rarely_running" msgid="348413460168817458">"Ez da ia inoiz exekutatzen (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="always_running" msgid="6042448320077429656">"Beti dago abian (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="sometimes_running" msgid="6611250683037700864">"Noizbehinka abiarazten da (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="rarely_running" msgid="348413460168817458">"Ez da ia inoiz abiarazten (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="memory_max_use" msgid="6874803757715963097">"Gehienekoa"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"Batez besteko erabilera"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"Gehienekoa: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -3792,8 +3792,8 @@
     <string name="high_power_off" msgid="3393904131961263278">"Bateria optimizatu egiten da"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Bateria-optimizazioa ez dago erabilgarri"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Ez aplikatu bateria-optimizazioa. Aukera horrekin, bizkorrago agortuko da bateria."</string>
-    <string name="high_power_prompt_title" msgid="6358673688590282655">"Beti atzeko planoan exekutatzeko baimena eman nahi diozu aplikazioari?"</string>
-    <string name="high_power_prompt_body" msgid="1031422980602565049">"<xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioari atzeko planoan beti exekutatzeko baimena emanez gero, baliteke bateriak gutxiago irautea. \n\nAukera hori aldatzeko, sakatu Ezarpenak &gt; Aplikazioak eta jakinarazpenak."</string>
+    <string name="high_power_prompt_title" msgid="6358673688590282655">"Beti atzeko planoan abiarazteko baimena eman nahi diozu aplikazioari?"</string>
+    <string name="high_power_prompt_body" msgid="1031422980602565049">"<xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioari atzeko planoan beti abiarazteko baimena emanez gero, baliteke bateriak gutxiago irautea. \n\nAukera hori aldatzeko, sakatu Ezarpenak &gt; Aplikazioak eta jakinarazpenak."</string>
     <string name="battery_summary" msgid="8044042095190688654">"Bateriaren <xliff:g id="PERCENTAGE">%1$s</xliff:g> erabili du bateria guztiz kargatu zenetik"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"Bateriaren kudeaketa"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Ez du bateriarik erabili bateria guztiz kargatu zenetik"</string>
