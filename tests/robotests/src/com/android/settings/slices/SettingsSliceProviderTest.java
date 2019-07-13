@@ -122,7 +122,8 @@ public class SettingsSliceProviderTest {
     private static final List<Uri> SPECIAL_CASE_OEM_URIS = Arrays.asList(
             CustomSliceRegistry.ZEN_MODE_SLICE_URI,
             CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
-            CustomSliceRegistry.MOBILE_DATA_SLICE_URI
+            CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+            CustomSliceRegistry.WIFI_CALLING_URI
     );
 
     @Before

@@ -123,6 +123,7 @@ public class SettingsSliceProvider extends SliceProvider {
                     CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
                     CustomSliceRegistry.LOCATION_SLICE_URI,
                     CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+                    CustomSliceRegistry.WIFI_CALLING_URI,
                     CustomSliceRegistry.WIFI_SLICE_URI,
                     CustomSliceRegistry.ZEN_MODE_SLICE_URI
             );
