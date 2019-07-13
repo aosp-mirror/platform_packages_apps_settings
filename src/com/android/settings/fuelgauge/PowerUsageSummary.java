@@ -106,7 +106,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     boolean mNeedUpdateBatteryTip;
     @VisibleForTesting
     BatteryTipPreferenceController mBatteryTipPreferenceController;
-    private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
     @VisibleForTesting
     final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
@@ -290,13 +289,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_STATS_TYPE:
-                if (mStatsType == BatteryStats.STATS_SINCE_CHARGED) {
-                    // TODO: STATS_SINCE_UNPLUGGED is deprecated in Q, so this accomplishes nothing,
-                    // but mStatsType doesn't seem to be hooked up to anything anyway.
-                    mStatsType = BatteryStats.STATS_SINCE_UNPLUGGED;
-                } else {
-                    mStatsType = BatteryStats.STATS_SINCE_CHARGED;
-                }
                 refreshUi(BatteryUpdateType.MANUAL);
                 return true;
             case MENU_ADVANCED_BATTERY:

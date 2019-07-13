@@ -163,7 +163,7 @@ public class MasterClearTest {
         verify(context).startActivity(intent.capture());
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
             .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
-            .isFalse();
+            .isTrue();
     }
 
     @Test
