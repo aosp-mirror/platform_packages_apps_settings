@@ -25,7 +25,7 @@ import androidx.preference.Preference;
 
 public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceController {
 
-    public static final String KEY_FACE_SETTINGS = "face_settings_profile";
+    private static final String KEY_FACE_SETTINGS = "face_settings_profile";
 
     public FaceProfileStatusPreferenceController(Context context) {
         super(context, KEY_FACE_SETTINGS);
