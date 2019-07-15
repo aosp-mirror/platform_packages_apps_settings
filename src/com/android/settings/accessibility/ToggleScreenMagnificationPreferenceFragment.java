@@ -228,6 +228,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
+    protected void updateSwitchBarText(SwitchBar switchBar) {
+        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
+                getString(R.string.accessibility_screen_magnification_title));
+        switchBar.setSwitchBarText(switchBarText, switchBarText);
+    }
+
+    @Override
     protected void onProcessArguments(Bundle arguments) {
         super.onProcessArguments(arguments);
         if (arguments == null) {

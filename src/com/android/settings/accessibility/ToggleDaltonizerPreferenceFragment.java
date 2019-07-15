@@ -105,8 +105,9 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
     @Override
     protected void updateSwitchBarText(SwitchBar switchBar) {
-        switchBar.setSwitchBarText(R.string.accessibility_daltonizer_master_switch_title,
-                R.string.accessibility_daltonizer_master_switch_title);
+        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
+                getString(R.string.accessibility_display_daltonizer_preference_title));
+        switchBar.setSwitchBarText(switchBarText, switchBarText);
     }
 
     private void initPreferences() {
