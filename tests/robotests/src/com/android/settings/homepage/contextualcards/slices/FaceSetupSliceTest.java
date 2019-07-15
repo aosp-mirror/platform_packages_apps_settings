@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.os.UserHandle;
 
@@ -31,6 +32,7 @@ import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,22 +40,24 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-
 @RunWith(RobolectricTestRunner.class)
 public class FaceSetupSliceTest {
 
     private Context mContext;
+    private PackageManager mPackageManager;
 
     @Before
     public void setUp() {
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mContext = spy(RuntimeEnvironment.application);
+        mPackageManager = mock(PackageManager.class);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
     }
 
     @Test
     public void getSlice_noFaceManager_shouldReturnNull() {
-        when(mContext.getSystemService(FaceManager.class)).thenReturn(null);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(false);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
         assertThat(setupSlice.getSlice()).isNull();
     }
@@ -61,8 +65,9 @@ public class FaceSetupSliceTest {
     @Test
     public void getSlice_faceEnrolled_shouldReturnNull() {
         final FaceManager faceManager = mock(FaceManager.class);
-        when(mContext.getSystemService(FaceManager.class)).thenReturn(faceManager);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
         when(faceManager.hasEnrolledTemplates(UserHandle.myUserId())).thenReturn(true);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(faceManager);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
         assertThat(setupSlice.getSlice()).isNull();
     }
@@ -70,8 +75,9 @@ public class FaceSetupSliceTest {
     @Test
     public void getSlice_faceNotEnrolled_shouldReturnNonNull() {
         final FaceManager faceManager = mock(FaceManager.class);
-        when(mContext.getSystemService(FaceManager.class)).thenReturn(faceManager);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
         when(faceManager.hasEnrolledTemplates(UserHandle.myUserId())).thenReturn(false);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(faceManager);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
         assertThat(setupSlice.getSlice()).isNotNull();
     }
