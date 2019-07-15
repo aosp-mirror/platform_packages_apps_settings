@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static com.android.settings.applications.appinfo.AppButtonsPreferenceController.KEY_REMOVE_TASK_WHEN_FINISHING;
+
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
@@ -542,7 +544,12 @@ public class SettingsActivity extends SettingsBaseActivity
      */
     public void finishPreferencePanel(int resultCode, Intent resultData) {
         setResult(resultCode, resultData);
-        finish();
+        if (resultData != null &&
+                resultData.getBooleanExtra(KEY_REMOVE_TASK_WHEN_FINISHING, false)) {
+            finishAndRemoveTask();
+        } else {
+            finish();
+        }
     }
 
     /**

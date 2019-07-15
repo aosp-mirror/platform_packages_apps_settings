@@ -80,6 +80,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         PreferenceControllerMixin, LifecycleObserver, OnResume, OnDestroy,
         ApplicationsState.Callbacks {
     public static final String APP_CHG = "chg";
+    public static final String KEY_REMOVE_TASK_WHEN_FINISHING = "remove_task_when_finishing";
 
     private static final String TAG = "AppButtonsPrefCtl";
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
@@ -196,7 +197,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                     mActivity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
             if (!refreshUi()) {
-                setIntentAndFinish(true);
+                setIntentAndFinish(true, false);
             }
         }
     }
@@ -278,9 +279,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 AsyncTask.execute(new DisableChangerRunnable(mPm, mAppEntry.info.packageName,
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER));
             }
-            refreshAndFinishIfPossible();
+            refreshAndFinishIfPossible(true);
         } else if (requestCode == mRequestRemoveDeviceAdmin) {
-            refreshAndFinishIfPossible();
+            refreshAndFinishIfPossible(false);
         }
     }
 
@@ -466,19 +467,20 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     /**
      * Finish this fragment and return data if possible
      */
-    private void setIntentAndFinish(boolean appChanged) {
+    private void setIntentAndFinish(boolean appChanged, boolean removeTaskWhenFinishing) {
         if (LOCAL_LOGV) {
             Log.i(TAG, "appChanged=" + appChanged);
         }
         Intent intent = new Intent();
         intent.putExtra(APP_CHG, appChanged);
+        intent.putExtra(KEY_REMOVE_TASK_WHEN_FINISHING, removeTaskWhenFinishing);
         mActivity.finishPreferencePanel(Activity.RESULT_OK, intent);
         mFinishing = true;
     }
 
-    private void refreshAndFinishIfPossible() {
+    private void refreshAndFinishIfPossible(boolean removeTaskWhenFinishing) {
         if (!refreshUi()) {
-            setIntentAndFinish(true);
+            setIntentAndFinish(true, removeTaskWhenFinishing);
         } else {
             startListeningToPackageRemove();
         }
