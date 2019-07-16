@@ -17,6 +17,7 @@ package com.android.settings.core;
 
 import android.annotation.LayoutRes;
 import android.annotation.Nullable;
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,6 +63,10 @@ public class SettingsBaseActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isLockTaskModePinned() && !isSettingsRunOnTop()) {
+            Log.w(TAG, "Devices lock task mode pinned.");
+            finish();
+        }
         final long startTime = System.currentTimeMillis();
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
 
@@ -146,6 +152,20 @@ public class SettingsBaseActivity extends FragmentActivity {
         for (int i = 0; i < N; i++) {
             mCategoryListeners.get(i).onCategoriesChanged();
         }
+    }
+
+    private boolean isLockTaskModePinned() {
+        final ActivityManager activityManager =
+            getApplicationContext().getSystemService(ActivityManager.class);
+        return activityManager.getLockTaskModeState() == ActivityManager.LOCK_TASK_MODE_PINNED;
+    }
+
+    private boolean isSettingsRunOnTop() {
+        final ActivityManager activityManager =
+            getApplicationContext().getSystemService(ActivityManager.class);
+        final String taskPkgName = activityManager.getRunningTasks(1 /* maxNum */)
+            .get(0 /* index */).baseActivity.getPackageName();
+        return TextUtils.equals(getPackageName(), taskPkgName);
     }
 
     /**
