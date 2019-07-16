@@ -15,11 +15,17 @@
  */
 package com.android.settings.accounts;
 
+import static android.app.ActivityManager.LOCK_TASK_MODE_PINNED;
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
+import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -40,6 +46,14 @@ public class AccountDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AccountDashboardFrag";
 
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        if (isLockTaskModePinned()) {
+            Log.w(TAG, "Devices lock task mode pinned.");
+            finish();
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -81,6 +95,13 @@ public class AccountDashboardFragment extends DashboardFragment {
         controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent));
         controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
         return controllers;
+    }
+
+    @VisibleForTesting
+    boolean isLockTaskModePinned() {
+        final ActivityManager activityManager =
+                getContext().getSystemService(ActivityManager.class);
+        return activityManager.getLockTaskModeState() == LOCK_TASK_MODE_PINNED;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
