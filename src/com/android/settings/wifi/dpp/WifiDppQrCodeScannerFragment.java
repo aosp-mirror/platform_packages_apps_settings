@@ -19,7 +19,6 @@ package com.android.settings.wifi.dpp;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.Rect;
@@ -57,7 +56,6 @@ import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment implements
@@ -201,7 +199,6 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     break;
 
                 default:
-                    return;
             }
         }
     };
@@ -246,7 +243,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         model.getEnrolleeSuccessNetworkId().observe(this, networkId -> {
             // After configuration change, observe callback will be triggered,
             // do nothing for this case if a handshake does not end
-            if (model.isGoingInitiator()) {
+            if (model.isWifiDppHandshaking()) {
                 return;
             }
 
@@ -256,7 +253,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         model.getStatusCode().observe(this, statusCode -> {
             // After configuration change, observe callback will be triggered,
             // do nothing for this case if a handshake does not end
-            if (model.isGoingInitiator()) {
+            if (model.isWifiDppHandshaking()) {
                 return;
             }
 
@@ -279,7 +276,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public void onResume() {
         super.onResume();
 
-        if (!isGoingInitiator()) {
+        if (!isWifiDppHandshaking()) {
             restartCamera();
         }
     }
@@ -295,9 +292,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     // Container Activity must implement this interface
     public interface OnScanWifiDppSuccessListener {
-        public void onScanWifiDppSuccess(WifiQrCode wifiQrCode);
+        void onScanWifiDppSuccess(WifiQrCode wifiQrCode);
     }
-    OnScanWifiDppSuccessListener mScanWifiDppSuccessListener;
+    private OnScanWifiDppSuccessListener mScanWifiDppSuccessListener;
 
     /**
      * Configurator container activity of the fragment should create instance with this constructor.
@@ -312,7 +309,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
      * Enrollee container activity of the fragment should create instance with this constructor and
      * specify the SSID string of the WI-Fi network to be provisioned.
      */
-    public WifiDppQrCodeScannerFragment(String ssid) {
+    WifiDppQrCodeScannerFragment(String ssid) {
         super();
 
         mIsConfiguratorMode = false;
@@ -326,7 +323,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         mWifiTracker = WifiTrackerFactory.create(getActivity(), /* wifiListener */ this,
                 getSettingsLifecycle(), /* includeSaved */ false, /* includeScans */ true);
 
-        // setTitle for Talkback
+        // setTitle for TalkBack
         if (mIsConfiguratorMode) {
             getActivity().setTitle(R.string.wifi_dpp_add_device_to_network);
         } else {
@@ -359,12 +356,12 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mTextureView = (TextureView) view.findViewById(R.id.preview_view);
+        mTextureView = view.findViewById(R.id.preview_view);
         mTextureView.setSurfaceTextureListener(this);
 
-        mDecorateView = (QrDecorateView) view.findViewById(R.id.decorate_view);
+        mDecorateView = view.findViewById(R.id.decorate_view);
 
-        setProgressBarShown(isGoingInitiator());
+        setProgressBarShown(isWifiDppHandshaking());
 
         if (mIsConfiguratorMode) {
             setHeaderTitle(R.string.wifi_dpp_add_device_to_network);
@@ -490,7 +487,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         if (mCamera == null) {
             mCamera = new QrCamera(getContext(), this);
 
-            if (isGoingInitiator()) {
+            if (isWifiDppHandshaking()) {
                 if (mDecorateView != null) {
                     mDecorateView.setFocused(true);
                 }
@@ -561,7 +558,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         public void onFailure(int code) {
             Log.d(TAG, "EasyConnectEnrolleeStatusCallback.onFailure " + code);
 
-            int errorMessageResId = 0;
+            int errorMessageResId;
             switch (code) {
                 case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_URI:
                     errorMessageResId = R.string.wifi_dpp_qr_code_is_not_valid_format;
@@ -648,11 +645,11 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     // Check is Easy Connect handshaking or not
-    private boolean isGoingInitiator() {
+    private boolean isWifiDppHandshaking() {
         final WifiDppInitiatorViewModel model =
                 ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
 
-        return model.isGoingInitiator();
+        return model.isWifiDppHandshaking();
     }
 
     /**
@@ -677,7 +674,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     private void updateEnrolleeSummary() {
-        if (isGoingInitiator()) {
+        if (isWifiDppHandshaking()) {
             mSummary.setText(R.string.wifi_dpp_connecting);
         } else {
             String description;

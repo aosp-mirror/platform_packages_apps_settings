@@ -29,7 +29,6 @@ import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 
@@ -48,62 +47,62 @@ public class WifiDppUtils {
     /**
      * The fragment tag specified to FragmentManager for container activities to manage fragments.
      */
-    public static final String TAG_FRAGMENT_QR_CODE_SCANNER = "qr_code_scanner_fragment";
+    static final String TAG_FRAGMENT_QR_CODE_SCANNER = "qr_code_scanner_fragment";
 
     /**
      * @see #TAG_FRAGMENT_QR_CODE_SCANNER
      */
-    public static final String TAG_FRAGMENT_QR_CODE_GENERATOR = "qr_code_generator_fragment";
+    static final String TAG_FRAGMENT_QR_CODE_GENERATOR = "qr_code_generator_fragment";
 
     /**
      * @see #TAG_FRAGMENT_QR_CODE_SCANNER
      */
-    public static final String TAG_FRAGMENT_CHOOSE_SAVED_WIFI_NETWORK =
+    static final String TAG_FRAGMENT_CHOOSE_SAVED_WIFI_NETWORK =
             "choose_saved_wifi_network_fragment";
 
     /**
      * @see #TAG_FRAGMENT_QR_CODE_SCANNER
      */
-    public static final String TAG_FRAGMENT_ADD_DEVICE = "add_device_fragment";
+    static final String TAG_FRAGMENT_ADD_DEVICE = "add_device_fragment";
 
     /** The data is from {@code com.android.settingslib.wifi.AccessPoint.securityToString} */
-    public static final String EXTRA_WIFI_SECURITY = "security";
+    static final String EXTRA_WIFI_SECURITY = "security";
 
     /** The data corresponding to {@code WifiConfiguration} SSID */
-    public static final String EXTRA_WIFI_SSID = "ssid";
+    static final String EXTRA_WIFI_SSID = "ssid";
 
     /** The data corresponding to {@code WifiConfiguration} preSharedKey */
-    public static final String EXTRA_WIFI_PRE_SHARED_KEY = "preSharedKey";
+    static final String EXTRA_WIFI_PRE_SHARED_KEY = "preSharedKey";
 
     /** The data corresponding to {@code WifiConfiguration} hiddenSSID */
-    public static final String EXTRA_WIFI_HIDDEN_SSID = "hiddenSsid";
+    static final String EXTRA_WIFI_HIDDEN_SSID = "hiddenSsid";
 
     /** The data corresponding to {@code WifiConfiguration} networkId */
-    public static final String EXTRA_WIFI_NETWORK_ID = "networkId";
+    static final String EXTRA_WIFI_NETWORK_ID = "networkId";
 
     /** The data to recognize if it's a Wi-Fi hotspot for configuration */
-    public static final String EXTRA_IS_HOTSPOT = "isHotspot";
+    static final String EXTRA_IS_HOTSPOT = "isHotspot";
 
     /** Used by {@link android.provider.Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_URI} to
      * indicate test mode UI should be shown. Test UI does not make API calls. Value is a boolean.*/
-    public static final String EXTRA_TEST = "test";
+    static final String EXTRA_TEST = "test";
 
     /**
      * Default status code for Easy Connect
      */
-    public static final int EASY_CONNECT_EVENT_FAILURE_NONE = 0;
+    static final int EASY_CONNECT_EVENT_FAILURE_NONE = 0;
 
     /**
      * Success status code for Easy Connect.
      */
-    public static final int EASY_CONNECT_EVENT_SUCCESS = 1;
+    static final int EASY_CONNECT_EVENT_SUCCESS = 1;
 
     private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
 
     /**
      * Returns whether the device support WiFi DPP.
      */
-    public static boolean isWifiDppEnabled(Context context) {
+    static boolean isWifiDppEnabled(Context context) {
         final WifiManager manager = context.getSystemService(WifiManager.class);
         return manager.isEasyConnectSupported();
     }
@@ -130,10 +129,10 @@ public class WifiDppUtils {
 
     private static String getPresharedKey(WifiManager wifiManager,
             WifiConfiguration wifiConfiguration) {
-        final List<WifiConfiguration> privilegedWifiConfiguratios =
+        final List<WifiConfiguration> privilegedWifiConfigurations =
                 wifiManager.getPrivilegedConfiguredNetworks();
 
-        for (WifiConfiguration privilegedWifiConfiguration : privilegedWifiConfiguratios) {
+        for (WifiConfiguration privilegedWifiConfiguration : privilegedWifiConfigurations) {
             if (privilegedWifiConfiguration.networkId == wifiConfiguration.networkId) {
                 // WEP uses a shared key hence the AuthAlgorithm.SHARED is used
                 // to identify it.

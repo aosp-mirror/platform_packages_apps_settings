@@ -26,13 +26,13 @@ import androidx.lifecycle.AndroidViewModel;
 public class WifiDppInitiatorViewModel extends AndroidViewModel {
     private MutableLiveData<Integer> mEnrolleeSuccessNetworkId;
     private MutableLiveData<Integer> mStatusCode;
-    private boolean mIsGoingInitiator;
+    private boolean mIsWifiDppHandshaking;
 
     public WifiDppInitiatorViewModel(Application application) {
         super(application);
     }
 
-    public MutableLiveData<Integer> getEnrolleeSuccessNetworkId() {
+    MutableLiveData<Integer> getEnrolleeSuccessNetworkId() {
         if (mEnrolleeSuccessNetworkId == null) {
             mEnrolleeSuccessNetworkId = new MutableLiveData<>();
         }
@@ -40,7 +40,7 @@ public class WifiDppInitiatorViewModel extends AndroidViewModel {
         return mEnrolleeSuccessNetworkId;
     }
 
-    public MutableLiveData<Integer> getStatusCode() {
+    MutableLiveData<Integer> getStatusCode() {
         if (mStatusCode == null) {
             mStatusCode = new MutableLiveData<>();
         }
@@ -48,12 +48,12 @@ public class WifiDppInitiatorViewModel extends AndroidViewModel {
         return mStatusCode;
     }
 
-    public boolean isGoingInitiator() {
-        return mIsGoingInitiator;
+    boolean isWifiDppHandshaking() {
+        return mIsWifiDppHandshaking;
     }
 
-    public void startEasyConnectAsConfiguratorInitiator(String qrCode, int networkId) {
-        mIsGoingInitiator = true;
+    void startEasyConnectAsConfiguratorInitiator(String qrCode, int networkId) {
+        mIsWifiDppHandshaking = true;
         final WifiManager wifiManager = getApplication().getSystemService(WifiManager.class);
 
         wifiManager.startEasyConnectAsConfiguratorInitiator(qrCode, networkId,
@@ -61,8 +61,8 @@ public class WifiDppInitiatorViewModel extends AndroidViewModel {
                 new EasyConnectDelegateCallback());
     }
 
-    public void startEasyConnectAsEnrolleeInitiator(String qrCode) {
-        mIsGoingInitiator = true;
+    void startEasyConnectAsEnrolleeInitiator(String qrCode) {
+        mIsWifiDppHandshaking = true;
         final WifiManager wifiManager = getApplication().getSystemService(WifiManager.class);
 
         wifiManager.startEasyConnectAsEnrolleeInitiator(qrCode, getApplication().getMainExecutor(),
@@ -72,19 +72,19 @@ public class WifiDppInitiatorViewModel extends AndroidViewModel {
     private class EasyConnectDelegateCallback extends EasyConnectStatusCallback {
         @Override
         public void onEnrolleeSuccess(int newNetworkId) {
-            mIsGoingInitiator = false;
+            mIsWifiDppHandshaking = false;
             mEnrolleeSuccessNetworkId.setValue(newNetworkId);
         }
 
         @Override
         public void onConfiguratorSuccess(int code) {
-            mIsGoingInitiator = false;
+            mIsWifiDppHandshaking = false;
             mStatusCode.setValue(WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS);
         }
 
         @Override
         public void onFailure(int code) {
-            mIsGoingInitiator = false;
+            mIsWifiDppHandshaking = false;
             mStatusCode.setValue(code);
         }
 

@@ -27,7 +27,6 @@ import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
@@ -59,9 +58,9 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
 
     private static final String TAG = "WifiDppConfiguratorActivity";
 
-    public static final String ACTION_CONFIGURATOR_QR_CODE_SCANNER =
+    static final String ACTION_CONFIGURATOR_QR_CODE_SCANNER =
             "android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_SCANNER";
-    public static final String ACTION_CONFIGURATOR_QR_CODE_GENERATOR =
+    static final String ACTION_CONFIGURATOR_QR_CODE_GENERATOR =
             "android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_GENERATOR";
 
     // Key for Bundle usage
@@ -274,7 +273,7 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
         return mWifiNetworkConfig;
     }
 
-    public WifiQrCode getWifiDppQrCode() {
+    WifiQrCode getWifiDppQrCode() {
         return mWifiDppQrCode;
     }
 

@@ -107,8 +107,6 @@ public class WifiNetworkListFragmentTest {
         intent.setData(Uri.parse(uriString));
         mActivityRule.launchActivity(intent);
 
-        verify(mWifiTracker).getManager();
-
         List<Fragment> fragments =
                 mActivityRule.getActivity().getSupportFragmentManager().getFragments();
         assertThat(fragments.size()).isEqualTo(1);

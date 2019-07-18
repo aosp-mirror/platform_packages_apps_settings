@@ -19,7 +19,6 @@ package com.android.settings.wifi.dpp;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.net.wifi.EasyConnectStatusCallback;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -28,15 +27,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
-
-import java.util.concurrent.Executor;
 
 /**
  * After getting Wi-Fi network information and(or) QR code, this fragment config a device to connect
@@ -51,7 +47,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private int mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE;
 
     // Key for Bundle usage
-    private static final String KEY_LATEST_ERROR_CODE = "key_latest_error_code";
+    private static final String KEY_LATEST_STATUS_CODE = "key_latest_status_code";
 
     private class EasyConnectConfiguratorStatusCallback extends EasyConnectStatusCallback {
         @Override
@@ -80,7 +76,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private void showSuccessUi(boolean isConfigurationChange) {
         setHeaderIconImageResource(R.drawable.ic_devices_check_circle_green_32dp);
         setHeaderTitle(R.string.wifi_dpp_wifi_shared_with_device);
-        setProgressBarShown(isGoingInitiator());
+        setProgressBarShown(isEasyConnectHandshaking());
         mSummary.setVisibility(View.INVISIBLE);
         mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_success);
         mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
@@ -170,12 +166,12 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mLeftButton.setVisibility(View.INVISIBLE);
         }
 
-        if (isGoingInitiator()) {
+        if (isEasyConnectHandshaking()) {
             mSummary.setText(R.string.wifi_dpp_sharing_wifi_with_this_device);
         }
 
-        setProgressBarShown(isGoingInitiator());
-        mRightButton.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
+        setProgressBarShown(isEasyConnectHandshaking());
+        mRightButton.setVisibility(isEasyConnectHandshaking() ? View.INVISIBLE : View.VISIBLE);
 
         if (!isConfigurationChange) {
             mLatestStatusCode = code;
@@ -205,7 +201,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            mLatestStatusCode = savedInstanceState.getInt(KEY_LATEST_ERROR_CODE);
+            mLatestStatusCode = savedInstanceState.getInt(KEY_LATEST_STATUS_CODE);
         }
 
         final WifiDppInitiatorViewModel model =
@@ -214,7 +210,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         model.getStatusCode().observe(this, statusCode -> {
             // After configuration change, observe callback will be triggered,
             // do nothing for this case if a handshake does not end
-            if (model.isGoingInitiator()) {
+            if (model.isWifiDppHandshaking()) {
                 return;
             }
 
@@ -272,8 +268,9 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             if (mLatestStatusCode == WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS) {
                 showSuccessUi(/* isConfigurationChange */ true);
             } else if (mLatestStatusCode == WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE) {
-                setProgressBarShown(isGoingInitiator());
-                mRightButton.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
+                setProgressBarShown(isEasyConnectHandshaking());
+                mRightButton.setVisibility(isEasyConnectHandshaking() ?
+                        View.INVISIBLE : View.VISIBLE);
             } else {
                 showErrorUi(mLatestStatusCode, /* isConfigurationChange */ true);
             }
@@ -282,7 +279,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(KEY_LATEST_ERROR_CODE, mLatestStatusCode);
+        outState.putInt(KEY_LATEST_STATUS_CODE, mLatestStatusCode);
 
         super.onSaveInstanceState(outState);
     }
@@ -310,9 +307,9 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
     // Container Activity must implement this interface
     public interface OnClickChooseDifferentNetworkListener {
-        public void onClickChooseDifferentNetwork();
+        void onClickChooseDifferentNetwork();
     }
-    OnClickChooseDifferentNetworkListener mClickChooseDifferentNetworkListener;
+    private OnClickChooseDifferentNetworkListener mClickChooseDifferentNetworkListener;
 
     @Override
     public void onAttach(Context context) {
@@ -329,32 +326,19 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     }
 
     // Check is Easy Connect handshaking or not
-    private boolean isGoingInitiator() {
+    private boolean isEasyConnectHandshaking() {
         final WifiDppInitiatorViewModel model =
                 ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
 
-        return model.isGoingInitiator();
+        return model.isWifiDppHandshaking();
     }
 
     private void updateSummary() {
-        if (isGoingInitiator()) {
+        if (isEasyConnectHandshaking()) {
             mSummary.setText(R.string.wifi_dpp_sharing_wifi_with_this_device);
         } else {
             mSummary.setText(getString(R.string.wifi_dpp_add_device_to_wifi, getSsid()));
         }
-    }
-
-    /**
-     * This fragment will change UI display and text messages for events. To improve Talkback user
-     * experienience, using this method to focus on a right component and announce a changed text
-     * after an UI changing event.
-     *
-     * @param focusView The UI component which will be focused
-     * @param announceView The UI component's text will be talked
-     */
-    private void changeFocusAndAnnounceChange(View focusView, View announceView) {
-        focusView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
-        announceView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
     }
 
     @Override
