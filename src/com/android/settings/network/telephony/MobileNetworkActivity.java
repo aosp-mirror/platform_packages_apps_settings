@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -79,6 +80,10 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final UserManager userManager = this.getSystemService(UserManager.class);
+        if (!userManager.isAdminUser()) {
+            this.finish();
+        }
 
         if (FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
             setContentView(R.layout.mobile_network_settings_container_v2);
