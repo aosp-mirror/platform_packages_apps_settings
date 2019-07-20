@@ -30,10 +30,9 @@
     <PreferenceCategory
         android:key="standard"
         android:title="@string/captioning_standard_options_title" >
-        <com.android.settings.accessibility.LocalePreference
-            android:key="captioning_locale"
-            android:summary="%s"
-            android:title="@string/captioning_locale" />
+        <SwitchPreference
+            android:key="captioning_preference_switch"
+            android:title="@string/accessibility_caption_master_switch_title" />
 
         <ListPreference
             android:entries="@array/captioning_font_size_selector_titles"
@@ -45,6 +44,11 @@
         <com.android.settings.accessibility.PresetPreference
             android:key="captioning_preset"
             android:title="@string/captioning_preset" />
+
+        <com.android.settings.accessibility.LocalePreference
+            android:key="captioning_locale"
+            android:summary="%s"
+            android:title="@string/captioning_locale" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="custom"
@@ -87,5 +91,9 @@
             android:key="captioning_window_opacity"
             android:title="@string/captioning_window_opacity" />
     </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/accessibility_caption_preference_summary"
+        android:selectable="false" />
 
 </PreferenceScreen>

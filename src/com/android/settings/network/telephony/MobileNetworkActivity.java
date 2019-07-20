@@ -77,6 +77,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     };
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        updateSubscriptions(null);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
