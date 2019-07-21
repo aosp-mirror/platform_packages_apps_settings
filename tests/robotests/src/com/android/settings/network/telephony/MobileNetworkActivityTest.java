@@ -40,6 +40,8 @@ import android.view.View;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.view.menu.ContextMenuBuilder;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.SubscriptionUtil;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -206,5 +208,20 @@ public class MobileNetworkActivityTest {
         mMobileNetworkActivity.saveInstanceState(bundle);
 
         assertThat(bundle.getInt(Settings.EXTRA_SUB_ID)).isEqualTo(PREV_SUB_ID);
+    }
+
+    @Test
+    public void onNewIntent_newSubscriptionId_fragmentReplaced() {
+        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
+
+        mSubscriptionInfos.add(mSubscriptionInfo);
+        mSubscriptionInfos.add(mSubscriptionInfo2);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(mSubscriptionInfos);
+        mMobileNetworkActivity.mCurSubscriptionId = PREV_SUB_ID;
+
+        final Intent newIntent = new Intent();
+        newIntent.putExtra(Settings.EXTRA_SUB_ID, CURRENT_SUB_ID);
+        mMobileNetworkActivity.onNewIntent(newIntent);
+        assertThat(mMobileNetworkActivity.mCurSubscriptionId).isEqualTo(CURRENT_SUB_ID);
     }
 }
