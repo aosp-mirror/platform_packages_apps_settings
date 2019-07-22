@@ -678,6 +678,12 @@ public class WifiConfigController implements TextWatcher,
                 config.enterpriseConfig = new WifiEnterpriseConfig();
                 int eapMethod = mEapMethodSpinner.getSelectedItemPosition();
                 int phase2Method = mPhase2Spinner.getSelectedItemPosition();
+                if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
+                    if (eapMethod != WIFI_EAP_METHOD_TLS) {
+                        Log.e(TAG, "WPA3-Enterprise 192-bit EAP method must be EAP-TLS");
+                        return null;
+                    }
+                }
                 config.enterpriseConfig.setEapMethod(eapMethod);
                 switch (eapMethod) {
                     case Eap.PEAP:
