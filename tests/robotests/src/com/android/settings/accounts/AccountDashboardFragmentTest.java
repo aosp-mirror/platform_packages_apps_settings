@@ -15,8 +15,16 @@
  */
 package com.android.settings.accounts;
 
+import static android.app.ActivityManager.LOCK_TASK_MODE_NONE;
+import static android.app.ActivityManager.LOCK_TASK_MODE_PINNED;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
+import android.app.ActivityManager;
+import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settingslib.drawer.CategoryKey;
@@ -26,6 +34,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivityManager;
 
 import java.util.List;
 
@@ -33,10 +43,12 @@ import java.util.List;
 public class AccountDashboardFragmentTest {
 
     private AccountDashboardFragment mFragment;
+    private Context mContext;
 
     @Before
     public void setUp() {
         mFragment = new AccountDashboardFragment();
+        mContext = RuntimeEnvironment.application;
     }
 
     @Test
@@ -52,5 +64,27 @@ public class AccountDashboardFragmentTest {
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
+    }
+
+    @Test
+    public void isLockTaskModePinned_disableLockTaskMode_shouldReturnFalse() {
+        final AccountDashboardFragment fragment = spy(mFragment);
+        doReturn(mContext).when(fragment).getContext();
+        final ShadowActivityManager activityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setLockTaskModeState(LOCK_TASK_MODE_NONE);
+
+        assertThat(fragment.isLockTaskModePinned()).isFalse();
+    }
+
+    @Test
+    public void isLockTaskModePinned_hasTaskPinned_shouldReturnTrue() {
+        final AccountDashboardFragment fragment = spy(mFragment);
+        doReturn(mContext).when(fragment).getContext();
+        final ShadowActivityManager activityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setLockTaskModeState(LOCK_TASK_MODE_PINNED);
+
+        assertThat(fragment.isLockTaskModePinned()).isTrue();
     }
 }
