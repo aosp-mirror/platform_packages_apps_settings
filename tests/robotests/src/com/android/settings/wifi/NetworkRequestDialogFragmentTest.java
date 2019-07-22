@@ -17,8 +17,6 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -29,25 +27,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
-
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
 import com.android.settingslib.wifi.AccessPoint;
-
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,11 +48,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import com.android.settingslib.wifi.WifiTracker;
-import com.android.settingslib.wifi.WifiTrackerFactory;
-
-import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
@@ -69,14 +57,14 @@ public class NetworkRequestDialogFragmentTest {
     private static final String KEY_SECURITY = "key_security";
     private static final String TEST_APP_NAME = "TestAppName";
 
-    private FragmentActivity mActivity;
+    private NetworkRequestDialogActivity mActivity;
     private NetworkRequestDialogFragment networkRequestDialogFragment;
     private Context mContext;
     private WifiTracker mWifiTracker;
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.buildActivity(FragmentActivity.class,
+        mActivity = Robolectric.buildActivity(NetworkRequestDialogActivity.class,
                 new Intent().putExtra(NetworkRequestDialogFragment.EXTRA_APP_NAME,
                         TEST_APP_NAME)).setup().get();
         networkRequestDialogFragment = spy(NetworkRequestDialogFragment.newInstance());
@@ -116,73 +104,6 @@ public class NetworkRequestDialogFragmentTest {
 
         positiveButton.performClick();
         assertThat(alertDialog.isShowing()).isFalse();
-    }
-
-    @Test
-    public void onResumeAndWaitTimeout_shouldCallTimeoutDialog() {
-        FakeNetworkRequestDialogFragment fakeFragment = new FakeNetworkRequestDialogFragment();
-        FakeNetworkRequestDialogFragment spyFakeFragment = spy(fakeFragment);
-        spyFakeFragment.show(mActivity.getSupportFragmentManager(), null);
-
-        assertThat(fakeFragment.bCalledStopAndPop).isFalse();
-
-        ShadowLooper.getShadowMainLooper().runToEndOfTasks();
-
-        assertThat(fakeFragment.bCalledStopAndPop).isTrue();
-        assertThat(fakeFragment.errorType).isEqualTo(ERROR_DIALOG_TYPE.TIME_OUT);
-    }
-
-    class FakeNetworkRequestDialogFragment extends NetworkRequestDialogFragment {
-        boolean bCalledStopAndPop = false;
-        ERROR_DIALOG_TYPE errorType = null;
-
-        @Override
-        public void stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE type) {
-            bCalledStopAndPop = true;
-            errorType = type;
-        }
-    }
-
-    @Test
-    public void onResume_shouldRegisterCallback() {
-        when(networkRequestDialogFragment.getContext()).thenReturn(mContext);
-        Context applicationContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        when(mContext.getApplicationContext()).thenReturn(applicationContext);
-        WifiManager wifiManager = mock(WifiManager.class);
-        when(applicationContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(wifiManager);
-
-        networkRequestDialogFragment.onResume();
-
-        verify(wifiManager).registerNetworkRequestMatchCallback(any(), any());
-    }
-
-    @Test
-    public void onPause_shouldUnRegisterCallback() {
-        when(networkRequestDialogFragment.getContext()).thenReturn(mContext);
-        Context applicationContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        when(mContext.getApplicationContext()).thenReturn(applicationContext);
-        WifiManager wifiManager = mock(WifiManager.class);
-        when(applicationContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(wifiManager);
-
-        networkRequestDialogFragment.onPause();
-
-        verify(wifiManager).unregisterNetworkRequestMatchCallback(networkRequestDialogFragment);
-    }
-
-    @Test
-    public void updateAccessPointList_onUserSelectionConnectSuccess_shouldFinishActivity() {
-        // Assert
-        final FragmentActivity spyActivity = spy(mActivity);
-        when(networkRequestDialogFragment.getActivity()).thenReturn(spyActivity);
-        networkRequestDialogFragment.show(spyActivity.getSupportFragmentManager(), "onUserSelectionConnectSuccess");
-
-        // Action
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "Test AP 3";
-        networkRequestDialogFragment.onUserSelectionConnectSuccess(config);
-
-        // Check
-        verify(spyActivity).finish();
     }
 
     @Test

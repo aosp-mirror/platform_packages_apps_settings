@@ -17,7 +17,7 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
@@ -25,14 +25,12 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Button;
-
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
-
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
-
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,12 +43,15 @@ import org.robolectric.annotation.Config;
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class NetworkRequestErrorDialogFragmentTest {
 
-    private FragmentActivity mActivity;
+    private NetworkRequestDialogActivity mActivity;
     private NetworkRequestErrorDialogFragment mFragment;
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        WifiTracker wifiTracker = mock(WifiTracker.class);
+        WifiTrackerFactory.setTestingWifiTracker(wifiTracker);
+
+        mActivity = Robolectric.setupActivity(NetworkRequestDialogActivity.class);
         mFragment = spy(NetworkRequestErrorDialogFragment.newInstance());
         mFragment.show(mActivity.getSupportFragmentManager(), null);
     }
@@ -97,7 +98,7 @@ public class NetworkRequestErrorDialogFragmentTest {
         assertThat(positiveButton).isNotNull();
 
         positiveButton.performClick();
-        verify(mFragment, times(1)).startScanningDialog();
+        verify(mFragment, times(1)).onRescanClick();
     }
 
     @Test
