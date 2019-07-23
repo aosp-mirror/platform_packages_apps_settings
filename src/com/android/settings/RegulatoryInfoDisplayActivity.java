@@ -119,7 +119,8 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
         }
     }
 
-    private int getResourceId() {
+    @VisibleForTesting
+    int getResourceId() {
         // Use regulatory_info by default.
         int resId = getResources().getIdentifier(
                 REGULATORY_INFO_RESOURCE, "drawable", getPackageName());
@@ -134,6 +135,18 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
                 resId = id;
             }
         }
+
+        // When hardware coo property exists, use regulatory_info_<sku>_<coo> resource if valid.
+        final String coo = getCoo();
+        if (!TextUtils.isEmpty(coo) && !TextUtils.isEmpty(sku)) {
+            final String regulatory_info_coo_res =
+                    REGULATORY_INFO_RESOURCE + "_" + sku.toLowerCase() + "_" + coo.toLowerCase();
+            final int id = getResources().getIdentifier(
+                    regulatory_info_coo_res, "drawable", getPackageName());
+            if (id != 0) {
+                resId = id;
+            }
+        }
         return resId;
     }
 
@@ -142,13 +155,15 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
         finish();   // close the activity
     }
 
-    @VisibleForTesting
-    public static String getSku() {
+    private String getCoo() {
+        return SystemProperties.get("ro.boot.hardware.coo", "");
+    }
+
+    private String getSku() {
         return SystemProperties.get("ro.boot.hardware.sku", "");
     }
 
-    @VisibleForTesting
-    public static String getRegulatoryInfoImageFileName() {
+    private String getRegulatoryInfoImageFileName() {
         final String sku = getSku();
         if (TextUtils.isEmpty(sku)) {
             return DEFAULT_REGULATORY_INFO_FILEPATH;
