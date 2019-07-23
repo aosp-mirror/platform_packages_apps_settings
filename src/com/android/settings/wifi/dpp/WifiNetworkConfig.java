@@ -81,7 +81,7 @@ public class WifiNetworkConfig {
      * WifiNetworkConfig for configuration
      */
     public interface Retriever {
-        public WifiNetworkConfig getWifiNetworkConfig();
+        WifiNetworkConfig getWifiNetworkConfig();
     }
 
     /**
@@ -90,7 +90,7 @@ public class WifiNetworkConfig {
      * android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_GENERATOR
      * android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_SCANNER
      */
-    public static WifiNetworkConfig getValidConfigOrNull(Intent intent) {
+    static WifiNetworkConfig getValidConfigOrNull(Intent intent) {
         final String security = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SECURITY);
         final String ssid = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SSID);
         final String preSharedKey = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY);
@@ -103,7 +103,7 @@ public class WifiNetworkConfig {
         return getValidConfigOrNull(security, ssid, preSharedKey, hiddenSsid, networkId, isHotspot);
     }
 
-    public static WifiNetworkConfig getValidConfigOrNull(String security, String ssid,
+    static WifiNetworkConfig getValidConfigOrNull(String security, String ssid,
             String preSharedKey, boolean hiddenSsid, int networkId, boolean isHotspot) {
         if (!isValidConfig(security, ssid, preSharedKey, hiddenSsid)) {
             return null;
@@ -113,7 +113,7 @@ public class WifiNetworkConfig {
                 isHotspot);
     }
 
-    public static boolean isValidConfig(WifiNetworkConfig config) {
+    static boolean isValidConfig(WifiNetworkConfig config) {
         if (config == null) {
             return false;
         } else {
@@ -122,7 +122,7 @@ public class WifiNetworkConfig {
         }
     }
 
-    public static boolean isValidConfig(String security, String ssid, String preSharedKey,
+    static boolean isValidConfig(String security, String ssid, String preSharedKey,
             boolean hiddenSsid) {
         if (!TextUtils.isEmpty(security) && !SECURITY_NO_PASSWORD.equals(security)) {
             if (TextUtils.isEmpty(preSharedKey)) {
@@ -162,9 +162,9 @@ public class WifiNetworkConfig {
      * Construct a barcode string for WiFi network login.
      * See https://en.wikipedia.org/wiki/QR_code#WiFi_network_login
      */
-    public String getQrCode() {
+    String getQrCode() {
         final String empty = "";
-        String barcode = new StringBuilder("WIFI:")
+        return new StringBuilder("WIFI:")
                 .append("S:")
                 .append(escapeSpecialCharacters(mSsid))
                 .append(";")
@@ -179,7 +179,6 @@ public class WifiNetworkConfig {
                 .append(mHiddenSsid)
                 .append(";;")
                 .toString();
-        return barcode;
     }
 
     public String getSecurity() {
@@ -232,9 +231,6 @@ public class WifiNetworkConfig {
 
     /**
      * This is a simplified method from {@code WifiConfigController.getConfig()}
-     *
-     * TODO (b/129021867): WifiConfiguration is a deprecated class, should replace it with
-     *       {@code android.net.wifi.WifiNetworkSuggestion}
      *
      * @return When it's a open network, returns 2 WifiConfiguration in the List, the 1st is
      *         open network and the 2nd is enhanced open network. Returns 1 WifiConfiguration in the

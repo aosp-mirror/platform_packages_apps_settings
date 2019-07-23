@@ -17,7 +17,6 @@
 package com.android.settings.wifi.dpp;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -44,7 +43,6 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG = "WifiDppQrCodeGeneratorFragment";
 
     private ImageView mQrCodeView;
-    private TextView mPasswordView;
     private String mQrCode;
 
     @Override
@@ -56,7 +54,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // setTitle for Talkback
+        // setTitle for TalkBack
         final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
         if (wifiNetworkConfig.isHotspot()) {
             getActivity().setTitle(R.string.wifi_dpp_share_hotspot);
@@ -96,21 +94,21 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         }
 
         final String password = wifiNetworkConfig.getPreSharedKey();
-        mPasswordView = view.findViewById(R.id.password);
+        TextView passwordView = view.findViewById(R.id.password);
         if (TextUtils.isEmpty(password)) {
             mSummary.setText(getString(
                     R.string.wifi_dpp_scan_open_network_qr_code_with_another_device,
                     wifiNetworkConfig.getSsid()));
 
-            mPasswordView.setVisibility(View.GONE);
+            passwordView.setVisibility(View.GONE);
         } else {
             mSummary.setText(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
                     wifiNetworkConfig.getSsid()));
 
             if (wifiNetworkConfig.isHotspot()) {
-               mPasswordView.setText(getString(R.string.wifi_dpp_hotspot_password, password));
+                passwordView.setText(getString(R.string.wifi_dpp_hotspot_password, password));
             } else {
-                mPasswordView.setText(getString(R.string.wifi_dpp_wifi_password, password));
+                passwordView.setText(getString(R.string.wifi_dpp_wifi_password, password));
             }
         }
 
@@ -125,11 +123,11 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
             final Bitmap bmp = QrCodeGenerator.encodeQrCode(mQrCode, qrcodeSize);
             mQrCodeView.setImageBitmap(bmp);
         } catch (WriterException e) {
-            Log.e(TAG, "Error generatting QR code bitmap " + e);
+            Log.e(TAG, "Error generating QR code bitmap " + e);
         }
     }
 
-    WifiNetworkConfig getWifiNetworkConfigFromHostActivity() {
+    private WifiNetworkConfig getWifiNetworkConfigFromHostActivity() {
         final WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
                 .getWifiNetworkConfig();
         if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {

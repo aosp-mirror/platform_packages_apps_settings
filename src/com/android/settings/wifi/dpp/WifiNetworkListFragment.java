@@ -40,7 +40,6 @@ import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,7 +50,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
     private static final String WIFI_CONFIG_KEY = "wifi_config_key";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
 
-    static final int ADD_NETWORK_REQUEST = 1;
+    private static final int ADD_NETWORK_REQUEST = 1;
 
     private PreferenceCategory mAccessPointsPreferenceCategory;
     private AccessPointPreference.UserBadgeCache mUserBadgeCache;
@@ -67,10 +66,9 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
 
     // Container Activity must implement this interface
     public interface OnChooseNetworkListener {
-        public void onChooseNetwork(WifiNetworkConfig wifiNetworkConfig);
+        void onChooseNetwork(WifiNetworkConfig wifiNetworkConfig);
     }
-
-    OnChooseNetworkListener mOnChooseNetworkListener;
+    private OnChooseNetworkListener mOnChooseNetworkListener;
 
     @Override
     public int getMetricsCategory() {
@@ -139,8 +137,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.wifi_dpp_network_list);
 
-        mAccessPointsPreferenceCategory = (PreferenceCategory) findPreference(
-                PREF_KEY_ACCESS_POINTS);
+        mAccessPointsPreferenceCategory = findPreference(PREF_KEY_ACCESS_POINTS);
 
         mFakeNetworkPreference = new Preference(getPrefContext());
         mFakeNetworkPreference.setIcon(R.drawable.ic_wifi_signal_0);
@@ -254,12 +251,8 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
     private boolean isValidForDppConfiguration(AccessPoint accessPoint) {
         final int security = accessPoint.getSecurity();
 
-        // DPP 1.0 only support SAE and PSK.
-        if (!(security == AccessPoint.SECURITY_PSK || security == AccessPoint.SECURITY_SAE)) {
-            return false;
-        }
-
-        return true;
+        // DPP 1.0 only support PSK and SAE.
+        return security == AccessPoint.SECURITY_PSK || security == AccessPoint.SECURITY_SAE;
     }
 
     private void launchAddNetworkFragment() {

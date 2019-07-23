@@ -20,7 +20,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.util.Log;
 
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
@@ -35,7 +34,7 @@ public class WifiDppEnrolleeActivity extends WifiDppBaseActivity implements
         WifiDppQrCodeScannerFragment.OnScanWifiDppSuccessListener {
     private static final String TAG = "WifiDppEnrolleeActivity";
 
-    public static final String ACTION_ENROLLEE_QR_CODE_SCANNER =
+    static final String ACTION_ENROLLEE_QR_CODE_SCANNER =
             "android.settings.WIFI_DPP_ENROLLEE_QR_CODE_SCANNER";
 
     @Override
@@ -48,7 +47,7 @@ public class WifiDppEnrolleeActivity extends WifiDppBaseActivity implements
         switch (intent.getAction()) {
             case ACTION_ENROLLEE_QR_CODE_SCANNER:
                 String ssid = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SSID);
-                showQrCodeScannerFragment(/* addToBackStack */ false, ssid);
+                showQrCodeScannerFragment(ssid);
                 break;
             default:
                 Log.e(TAG, "Launch with an invalid action");
@@ -56,7 +55,7 @@ public class WifiDppEnrolleeActivity extends WifiDppBaseActivity implements
         }
     }
 
-    private void showQrCodeScannerFragment(boolean addToBackStack, String ssid) {
+    private void showQrCodeScannerFragment(String ssid) {
         WifiDppQrCodeScannerFragment fragment =
                 (WifiDppQrCodeScannerFragment) mFragmentManager.findFragmentByTag(
                         WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
@@ -77,9 +76,6 @@ public class WifiDppEnrolleeActivity extends WifiDppBaseActivity implements
 
         fragmentTransaction.replace(R.id.fragment_container, fragment,
                 WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
-        if (addToBackStack) {
-            fragmentTransaction.addToBackStack(/* name */ null);
-        }
         fragmentTransaction.commit();
     }
 

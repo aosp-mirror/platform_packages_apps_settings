@@ -68,9 +68,9 @@ public class QrCamera extends Handler {
      * size is 1920x1440, MAX_RATIO_DIFF 0.1 could allow picture size of 720x480 or 352x288 or
      * 176x44 but not 1920x1080.
      */
-    private static double MAX_RATIO_DIFF = 0.1;
+    private static final double MAX_RATIO_DIFF = 0.1;
 
-    private static long AUTOFOCUS_INTERVAL_MS = 1500L;
+    private static final long AUTOFOCUS_INTERVAL_MS = 1500L;
 
     private static Map<DecodeHintType, List<BarcodeFormat>> HINTS = new ArrayMap<>();
     private static List<BarcodeFormat> FORMATS = new ArrayList<>();
@@ -217,7 +217,7 @@ public class QrCamera extends Handler {
         final int rotateDegrees = (mCameraOrientation - degrees + 360) % 360;
         mCamera.setDisplayOrientation(rotateDegrees);
         mCamera.startPreview();
-        if (mParameters.getFocusMode() == Parameters.FOCUS_MODE_AUTO) {
+        if (Parameters.FOCUS_MODE_AUTO.equals(mParameters.getFocusMode())) {
             mCamera.autoFocus(/* Camera.AutoFocusCallback */ null);
             sendMessageDelayed(obtainMessage(MSG_AUTO_FOCUS), AUTOFOCUS_INTERVAL_MS);
         }
@@ -241,7 +241,7 @@ public class QrCamera extends Handler {
             final Semaphore imageGot = new Semaphore(0);
             while (true) {
                 // This loop will try to capture preview image continuously until a valid QR Code
-                // decoded. The caller can also call {@link #stop()} to inturrupts scanning loop.
+                // decoded. The caller can also call {@link #stop()} to interrupts scanning loop.
                 mCamera.setOneShotPreviewCallback(
                         (imageData, camera) -> {
                             mImage = getFrameImage(imageData);
@@ -300,7 +300,7 @@ public class QrCamera extends Handler {
                     return false;
                 }
                 setCameraParameter();
-                setTransformationMatrix(mScannerCallback.getViewSize());
+                setTransformationMatrix();
                 if (!startPreview()) {
                     Log.e(TAG, "Error to init Camera");
                     mCamera = null;
@@ -317,13 +317,10 @@ public class QrCamera extends Handler {
         }
     }
 
-    /** Set transfom matrix to crop and center the preview picture */
-    private void setTransformationMatrix(Size viewSize) {
-        // Check aspect ratio, can only handle square view.
-        final int viewRatio = (int)getRatio(viewSize.getWidth(), viewSize.getHeight());
-
+    /** Set transform matrix to crop and center the preview picture */
+    private void setTransformationMatrix() {
         final boolean isPortrait = mContext.get().getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_PORTRAIT ? true : false;
+                == Configuration.ORIENTATION_PORTRAIT;
 
         final int previewWidth = isPortrait ? mPreviewSize.getWidth() : mPreviewSize.getHeight();
         final int previewHeight = isPortrait ? mPreviewSize.getHeight() : mPreviewSize.getWidth();
@@ -357,7 +354,7 @@ public class QrCamera extends Handler {
         switch (msg.what) {
             case MSG_AUTO_FOCUS:
                 // Calling autoFocus(null) will only trigger the camera to focus once. In order
-                // to make the camera continuously auto focus during scanning, need to periodly
+                // to make the camera continuously auto focus during scanning, need to periodically
                 // trigger it.
                 mCamera.autoFocus(/* Camera.AutoFocusCallback */ null);
                 sendMessageDelayed(obtainMessage(MSG_AUTO_FOCUS), AUTOFOCUS_INTERVAL_MS);
