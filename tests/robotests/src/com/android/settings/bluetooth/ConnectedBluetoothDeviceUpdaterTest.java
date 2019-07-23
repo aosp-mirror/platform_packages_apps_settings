@@ -239,7 +239,8 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @Test
     public void addPreference_addPreference_shouldHideSecondTarget() {
         BluetoothDevicePreference btPreference =
-                new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, true);
+                new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
+                        true, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
         mBluetoothDeviceUpdater.mPreferenceMap.put(mBluetoothDevice, btPreference);
 
         mBluetoothDeviceUpdater.addPreference(mCachedBluetoothDevice);

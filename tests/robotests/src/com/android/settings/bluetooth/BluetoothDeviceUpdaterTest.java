@@ -99,7 +99,8 @@ public class BluetoothDeviceUpdaterTest {
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         when(mSubBluetoothDevice.getAddress()).thenReturn(SUB_MAC_ADDRESS);
 
-        mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
+        mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
+                false, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
         mBluetoothDeviceUpdater =
             new BluetoothDeviceUpdater(mDashboardFragment, mDevicePreferenceCallback,
                     mLocalManager) {
