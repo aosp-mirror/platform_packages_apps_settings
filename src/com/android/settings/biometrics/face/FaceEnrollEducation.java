@@ -134,7 +134,10 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         final AccessibilityManager accessibilityManager = getApplicationContext().getSystemService(
                 AccessibilityManager.class);
         if (accessibilityManager != null) {
-            accessibilityEnabled = accessibilityManager.isEnabled();
+            // Add additional check for touch exploration. This prevents other accessibility
+            // features such as Live Transcribe from defaulting to the accessibility setup.
+            accessibilityEnabled = accessibilityManager.isEnabled()
+                    && accessibilityManager.isTouchExplorationEnabled();
         }
         mFooterBarMixin.setPrimaryButton(footerButton);
         final Context context = getApplicationContext();
