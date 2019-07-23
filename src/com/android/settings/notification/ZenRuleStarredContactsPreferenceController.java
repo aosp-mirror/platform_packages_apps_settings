@@ -83,7 +83,7 @@ public class ZenRuleStarredContactsPreferenceController extends
 
     @Override
     public CharSequence getSummary() {
-        return mBackend.getStarredContactsSummary();
+        return mBackend.getStarredContactsSummary(mContext);
     }
 
     @Override
