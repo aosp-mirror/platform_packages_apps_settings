@@ -20,10 +20,8 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -64,7 +62,7 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
         if (msgType == ERROR_DIALOG_TYPE.TIME_OUT) {
             builder.setMessage(R.string.network_connection_timeout_dialog_message)
                     .setPositiveButton(R.string.network_connection_timeout_dialog_ok,
-                            (dialog, which) -> startScanningDialog())
+                            (dialog, which) -> onRescanClick())
                     .setNegativeButton(R.string.cancel, (dialog, which) -> getActivity().finish());
         } else {
             builder.setMessage(R.string.network_connection_errorstate_dialog_message)
@@ -78,9 +76,10 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
         return SettingsEnums.WIFI_SCANNING_NEEDED_DIALOG;
     }
 
-    protected void startScanningDialog() {
-        final NetworkRequestDialogFragment fragment = NetworkRequestDialogFragment.newInstance();
-        fragment.show(getActivity().getSupportFragmentManager(),
-                NetworkRequestErrorDialogFragment.class.getSimpleName());
+    protected void onRescanClick() {
+        if (getActivity() != null) {
+            dismiss();
+            ((NetworkRequestDialogActivity)getActivity()).onClickRescanButton();
+        }
     }
 }

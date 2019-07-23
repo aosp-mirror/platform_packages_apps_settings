@@ -205,9 +205,13 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private String getMetricsTag() {
-        String tag = getClass().getName();
+        String tag = null;
         if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
             tag = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+        }
+        if (TextUtils.isEmpty(tag)) {
+            Log.w(LOG_TAG, "MetricsTag is invalid " + tag);
+            tag = getClass().getName();
         }
         if (tag.startsWith("com.android.settings.")) {
             tag = tag.replace("com.android.settings.", "");

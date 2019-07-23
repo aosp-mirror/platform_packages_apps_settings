@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -34,6 +36,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.core.OnActivityResultListener;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -80,6 +83,17 @@ public class SettingsActivityTest {
         mActivity.setTaskDescription(mTaskDescription);
 
         verify(mTaskDescription).setIcon(anyInt());
+    }
+
+    @Test
+    public void getSharedPreferences_intentExtraIsNull_shouldNotCrash() {
+        final Intent intent = new Intent();
+        intent.putExtra(EXTRA_SHOW_FRAGMENT, (String)null);
+        doReturn(intent).when(mActivity).getIntent();
+        doReturn(mContext.getPackageName()).when(mActivity).getPackageName();
+        FakeFeatureFactory.setupForTest();
+
+        mActivity.getSharedPreferences(mContext.getPackageName() + "_preferences", 0);
     }
 
     @Test
