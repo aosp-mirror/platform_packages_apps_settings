@@ -22,8 +22,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityEvent;
-import android.widget.ListView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -37,8 +35,6 @@ import com.android.settings.R;
 public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG_FRAGMENT_WIFI_NETWORK_LIST = "wifi_network_list_fragment";
 
-    private ListView mSavedWifiNetworkList;
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
@@ -48,8 +44,8 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        /** Embeded WifiNetworkListFragment as child fragment within
-         * WifiDppChooseSavedWifiNetworkFragment. */
+        // Embedded WifiNetworkListFragment as child fragment within
+        // WifiDppChooseSavedWifiNetworkFragment.
         final FragmentManager fragmentManager = getChildFragmentManager();
         final WifiNetworkListFragment fragment = new WifiNetworkListFragment();
         final Bundle args = getArguments();

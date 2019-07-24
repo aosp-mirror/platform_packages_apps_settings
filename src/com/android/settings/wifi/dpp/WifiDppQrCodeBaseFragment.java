@@ -19,8 +19,8 @@ package com.android.settings.wifi.dpp;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -42,8 +42,9 @@ import com.google.android.setupdesign.GlifLayout;
  * {@code WifiDppAddDeviceFragment}
  */
 public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
+    private static final String TAG = "WifiDppQrCodeBaseFragment";
+
     private GlifLayout mGlifLayout;
-    private ImageView mHeaderIcon;
     protected TextView mSummary;
     protected FooterButton mLeftButton;
     protected FooterButton mRightButton;
@@ -53,13 +54,9 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mGlifLayout = (GlifLayout) view;
-
-        mHeaderIcon = view.findViewById(android.R.id.icon);
         mSummary = view.findViewById(android.R.id.summary);
 
         if (isFooterAvailable()) {
-            FooterBarMixin FooterBarMixin = ((GlifLayout) view).getMixin(FooterBarMixin.class);
-
             mLeftButton = new FooterButton.Builder(getContext())
                     .setButtonType(FooterButton.ButtonType.CANCEL)
                     .setTheme(R.style.SudGlifButton_Secondary)
@@ -87,6 +84,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
         try {
             buttonIcon = getContext().getDrawable(iconResId);
         } catch (Resources.NotFoundException exception) {
+            Log.e(TAG, "Resource does not exist: " + iconResId);
         }
         return buttonIcon;
     }

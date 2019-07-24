@@ -468,14 +468,14 @@ public class ZenModeBackend {
         }
     }
 
-    public String getStarredContactsSummary() {
+    public String getStarredContactsSummary(Context context) {
         List<String> starredContacts = getStarredContacts();
         int numStarredContacts = starredContacts.size();
 
         List<String> displayContacts = new ArrayList<>();
 
         if (numStarredContacts == 0) {
-            displayContacts.add(mContext.getString(R.string.zen_mode_from_none));
+            displayContacts.add(context.getString(R.string.zen_mode_from_none));
         } else {
             for (int i = 0; i < 2 && i < numStarredContacts; i++) {
                 displayContacts.add(starredContacts.get(i));
@@ -484,7 +484,7 @@ public class ZenModeBackend {
             if (numStarredContacts == 3) {
                 displayContacts.add(starredContacts.get(2));
             } else if (numStarredContacts > 2) {
-                displayContacts.add(mContext.getResources().getQuantityString(
+                displayContacts.add(context.getResources().getQuantityString(
                         R.plurals.zen_mode_starred_contacts_summary_additional_contacts,
                         numStarredContacts - 2, numStarredContacts - 2));
             }
