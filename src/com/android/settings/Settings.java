@@ -43,6 +43,7 @@ public class Settings extends SettingsActivity {
     public static class PrivateVolumeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PublicVolumeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class WifiSettings2Activity extends SettingsActivity { /* empty */ }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
