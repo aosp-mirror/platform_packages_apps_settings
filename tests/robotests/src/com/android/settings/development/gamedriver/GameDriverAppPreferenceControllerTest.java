@@ -56,8 +56,7 @@ public class GameDriverAppPreferenceControllerTest {
 
     private static final int DEFAULT = 0;
     private static final int GAME_DRIVER = 1;
-    private static final int PRERELEASE_DRIVER = 2;
-    private static final int SYSTEM = 3;
+    private static final int SYSTEM = 2;
     private static final String TEST_APP_NAME = "testApp";
     private static final String TEST_PKG_NAME = "testPkg";
 
@@ -80,6 +79,7 @@ public class GameDriverAppPreferenceControllerTest {
     private GameDriverAppPreferenceController mController;
     private CharSequence[] mValueList;
     private String mDialogTitle;
+    private String mPreferencePrereleaseDriver;
 
     @Before
     public void setUp() {
@@ -89,6 +89,8 @@ public class GameDriverAppPreferenceControllerTest {
         mValueList =
                 mContext.getResources().getStringArray(R.array.game_driver_app_preference_values);
         mDialogTitle = mContext.getResources().getString(R.string.game_driver_app_preference_title);
+        mPreferencePrereleaseDriver =
+                mContext.getResources().getString(R.string.game_driver_app_preference_prerelease_driver);
     }
 
     @Test
@@ -207,9 +209,7 @@ public class GameDriverAppPreferenceControllerTest {
         assertThat(preference.getDialogTitle()).isEqualTo(mDialogTitle);
         assertThat(preference.getEntries()).isEqualTo(mValueList);
         assertThat(preference.getEntryValues()).isEqualTo(mValueList);
-        assertThat(preference.getEntry()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
-        assertThat(preference.getValue()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
-        assertThat(preference.getSummary()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+        assertThat(preference.getSummary()).isEqualTo(mPreferencePrereleaseDriver);
     }
 
     @Test
