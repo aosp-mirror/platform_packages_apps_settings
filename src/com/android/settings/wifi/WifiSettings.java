@@ -224,6 +224,12 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            getContext().startActivity(new Intent("android.settings.WIFI_SETTINGS2"));
+            finish();
+            return;
+        }
+
         // TODO(b/37429702): Add animations and preference comparator back after initial screen is
         // loaded (ODR).
         setAnimationAllowed(false);
