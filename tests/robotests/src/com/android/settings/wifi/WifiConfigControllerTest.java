@@ -485,4 +485,28 @@ public class WifiConfigControllerTest {
 
         assertThat(targetStringArray.length).isEqualTo(ttsStringArray.length);
     }
+
+    @Test
+    public void selectSecurity_wpa3Eap192bit_eapMethodTls() {
+        final WifiManager wifiManager = mock(WifiManager.class);
+        when(wifiManager.isWpa3SuiteBSupported()).thenReturn(true);
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_MODIFY, wifiManager);
+        final Spinner securitySpinner = mView.findViewById(R.id.security);
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        int wpa3Eap192bitPosition = -1;
+        final int securityCount = mController.mSecurityInPosition.length;
+        for (int i = 0; i < securityCount; i++) {
+            if (mController.mSecurityInPosition[i] != null &&
+                    mController.mSecurityInPosition[i] == AccessPoint.SECURITY_EAP_SUITE_B) {
+                wpa3Eap192bitPosition = i;
+            }
+        }
+
+        mController.onItemSelected(securitySpinner, /* view */ null, wpa3Eap192bitPosition,
+                /* id */ 0);
+
+        final int selectedItemPosition = eapMethodSpinner.getSelectedItemPosition();
+        assertThat(eapMethodSpinner.getSelectedItem().toString()).isEqualTo("TLS");
+    }
 }

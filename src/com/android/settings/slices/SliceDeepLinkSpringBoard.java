@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
@@ -71,6 +72,7 @@ public class SliceDeepLinkSpringBoard extends Activity {
     }
 
     private static Uri parse(Uri uri) {
-        return Uri.parse(uri.getQueryParameter(EXTRA_SLICE));
+        final String sliceParameter = uri.getQueryParameter(EXTRA_SLICE);
+        return TextUtils.isEmpty(sliceParameter) ? null : Uri.parse(sliceParameter);
     }
 }
