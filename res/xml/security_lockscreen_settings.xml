@@ -53,11 +53,12 @@
         android:title="@string/ambient_display_category_triggers"
         android:order="1000">
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="ambient_display_always_on"
             android:title="@string/doze_always_on_title"
             android:summary="@string/doze_always_on_summary"
-            settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController" />
+            settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController"
+            settings:userRestriction="no_ambient_display" />
 
         <Preference
             android:key="ambient_display_tap"
