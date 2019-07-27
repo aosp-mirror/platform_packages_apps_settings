@@ -251,7 +251,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         if (!isChangingConfigurations()) {
             mGoingToBackground = true;
             if (mBiometricFragment != null) {
-                mBiometricFragment.cancel();
+                Log.d(TAG, "Authenticating: " + mBiometricFragment.isAuthenticating());
+                if (mBiometricFragment.isAuthenticating()) {
+                    mBiometricFragment.cancel();
+                }
             }
 
             if (mIsFallback && !mCCLaunched) {
