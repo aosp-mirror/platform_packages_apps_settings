@@ -58,11 +58,13 @@ public class BiometricFragment extends InstrumentedFragment {
     private Bundle mBundle;
     private BiometricPrompt mBiometricPrompt;
     private CancellationSignal mCancellationSignal;
+    private boolean mAuthenticating;
 
     private AuthenticationCallback mAuthenticationCallback =
             new AuthenticationCallback() {
         @Override
         public void onAuthenticationError(int error, @NonNull CharSequence message) {
+            mAuthenticating = false;
             mClientExecutor.execute(() -> {
                 mClientCallback.onAuthenticationError(error, message);
             });
@@ -71,6 +73,7 @@ public class BiometricFragment extends InstrumentedFragment {
 
         @Override
         public void onAuthenticationSucceeded(AuthenticationResult result) {
+            mAuthenticating = false;
             mClientExecutor.execute(() -> {
                 mClientCallback.onAuthenticationSucceeded(result);
             });
@@ -134,6 +137,10 @@ public class BiometricFragment extends InstrumentedFragment {
         }
     }
 
+    boolean isAuthenticating() {
+        return mAuthenticating;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +187,7 @@ public class BiometricFragment extends InstrumentedFragment {
         mCancellationSignal = new CancellationSignal();
 
         // TODO: CC doesn't use crypto for now
+        mAuthenticating = true;
         mBiometricPrompt.authenticateUser(mCancellationSignal, mClientExecutor,
                 mAuthenticationCallback, mUserId, mCancelCallback);
     }
