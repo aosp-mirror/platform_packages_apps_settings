@@ -179,7 +179,7 @@ public class FaceSettings extends DashboardFragment {
             mConfirmingPassword = true;
             if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
                     getString(R.string.security_settings_face_preference_title),
-                    null, null, challenge, mUserId)) {
+                    null, null, challenge, mUserId, true /* foregroundOnly */)) {
                 Log.e(TAG, "Password not set");
                 finish();
             }
