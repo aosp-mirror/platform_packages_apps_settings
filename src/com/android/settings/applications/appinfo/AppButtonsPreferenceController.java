@@ -161,7 +161,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @Override
     public int getAvailabilityStatus() {
         // TODO(b/37313605): Re-enable once this controller supports instant apps
-        return isInstantApp() || isSystemModule() ? DISABLED_FOR_USER : AVAILABLE;
+        return mFinishing || isInstantApp() || isSystemModule() ? DISABLED_FOR_USER : AVAILABLE;
     }
 
     @Override
@@ -190,7 +190,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
 
     @Override
     public void onResume() {
-        if (isAvailable() && !mFinishing) {
+        if (isAvailable()) {
             mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
                     mActivity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
             mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
