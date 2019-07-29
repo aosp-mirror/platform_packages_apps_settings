@@ -72,6 +72,7 @@ public class Enhanced4gLtePreferenceController extends TelephonyTogglePreference
 
     @Override
     public int getAvailabilityStatus(int subId) {
+        init(subId);
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         final boolean isVisible = subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 && mImsManager != null && carrierConfig != null
@@ -105,9 +106,9 @@ public class Enhanced4gLtePreferenceController extends TelephonyTogglePreference
         super.updateState(preference);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
         final boolean show4GForLTE = mCarrierConfig.getBoolean(
-            CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
+                CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
         int variant4glteTitleIndex = mCarrierConfig.getInt(
-            CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT);
+                CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT);
 
         if (variant4glteTitleIndex != VARIANT_TITLE_ADVANCED_CALL) {
             variant4glteTitleIndex = show4GForLTE ? VARIANT_TITLE_4G_CALLING : VARIANT_TITLE_VOLTE;
@@ -135,6 +136,9 @@ public class Enhanced4gLtePreferenceController extends TelephonyTogglePreference
     }
 
     public Enhanced4gLtePreferenceController init(int subId) {
+        if (mSubId == subId) {
+            return this;
+        }
         mSubId = subId;
         mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
         mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
