@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"緊急対応の住所"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Wi‑Fi を使用して緊急通報を行った場合に、現在地として使用されます"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958">"プライベート DNS 機能の"<annotation id="url">"詳細を見る"</annotation></string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"ON"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"この設定は携帯通信会社によって管理されています"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Wi-Fi 通話を有効にしてください"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Wi-Fi 通話を ON にしてください"</string>
@@ -1224,7 +1225,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"ON / 見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"OFF"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"カメラへのアクセス権限が必要です"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"タップすると、デバイス カスタマイズ サービスのアクセス権限を管理できます"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"タップすると、デバイス パーソナライズ サービスのアクセス権限を管理できます"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"スクリーン アテンションは前面カメラを使用して、ユーザーが画面を見ているかどうかを検出します。この検出はデバイスのみで行われ、画像が保存されたり、Google に送信されたりすることはありません。"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"見ている間は画面を ON のままにします"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"ズームするには 3 回タップします"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"ボタンをタップしてズームします"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"ズーム"</b>"するには、画面をすばやく 3 回タップします。\n"<ul><li>"2 本以上の指をドラッグしてスクロール"</li>\n<li>"2 本以上の指でピンチ操作してズームを調整"</li></ul>\n\n<b>"一時的にズーム"</b>"するには、画面をすばやく 3 回タップし、3 回目のタップで指を押し続けます。\n"<ul><li>"ドラッグで画面上を移動"</li>\n<li>"指を放してズームアウト"</li></ul>\n\n"キーボードやナビゲーション バーでは拡大できません。"</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"拡大機能を ON にすると、画面をズームインできます。\n\n"<b>"ズームするには"</b>"、拡大機能を ON にし、画面上のどこかをタップします。\n"<ul><li>"• スクロールするには 2 本以上の指でドラッグします"</li>\n<li>"• ズームレベルを調整するには 2 本以上の指でピンチします"</li></ul>\n\n<b>"一時的にズームするには"</b>"、拡大機能を ON にし、画面上のどこかを長押しします。\n"<ul><li>"• 拡大領域を移動するにはドラッグします"</li>\n<li>"• 拡大を停止するには指を離します"</li></ul>\n\n"キーボードやナビゲーション バーはズームインできません。"</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"[拡大] を ON にすると、画面で拡大操作を行えます。\n\n"<b>"ズーム"</b>"するには、[拡大] を ON にして画面をタップします。\n"<ul><li>"2 本以上の指をドラッグしてスクロール"</li>\n<li>"2 本以上の指でピンチ操作してズームを調整"</li></ul>\n\n<b>"一時的にズーム"</b>"するには、[拡大] を ON にして画面を長押しします。\n"<ul><li>"ドラッグで画面上を移動"</li>\n<li>"指を放してズームアウト"</li></ul>\n\n"キーボードやナビゲーション バーでは拡大操作は行えません。"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"ユーザー補助機能ボタンで開く"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"指の動きで開く"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"新しいユーザー補助操作を使用する"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"サービスの使用"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"色補正の使用"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"字幕を使用する"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"すべてのアプリがこの設定をサポートしているわけではありません。"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"続行"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"補聴器"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"接続されている補聴器なし"</string>
@@ -3146,7 +3146,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"スライドでロック解除、パスワード、パターン、PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ワーク チャレンジ, 仕事用, プロファイル"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"仕事用プロファイル, 管理対象プロファイル, 統合する, 統合, 仕事, プロファイル"</string>
-    <string name="keywords_gesture" msgid="3526905012224714078">"操作"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"ジェスチャー"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"支払い, タップ, ペイメント"</string>
     <string name="keywords_backup" msgid="470070289135403022">"バックアップ, バック アップ"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"操作"</string>
@@ -4183,7 +4183,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自動"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手動"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"今すぐ空き容量を増やす"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"操作"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"ジェスチャー"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"簡単な操作でスマートフォンを管理できます"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"簡単な操作でタブレットを管理できます"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"簡単な操作でデバイスを管理できます"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"システムのグラフィックス ドライバ"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"このスマートフォンでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"このタブレットでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"このデバイスでは設定がサポートされていません"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"エラーが発生しました。アプリはデバイス選択リクエストをキャンセルしました。"</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"接続しました"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"すべて表示"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"デバイスを検索しています…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"デバイスに接続しています…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> 台のデバイスを接続済み</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> 台のデバイスを接続済み</item>

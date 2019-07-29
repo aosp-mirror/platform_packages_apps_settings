@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Adress för nödfall"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Används som din plats om du ringer nödsamtal via Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Läs mer"</annotation>" om privata DNS-funktioner"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"På"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Inställningen hanteras av operatören"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Aktivera Wi-Fi-samtal"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Aktivera Wi-Fi-samtal"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Tryck tre gånger om du vill zooma"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Tryck på en knapp för att zooma"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Zooma"</b>" genom att trycka snabbt tre gånger på skärmen.\n"<ul><li>"Tryck och dra med minst två fingrar om du vill rulla över skärmen"</li>\n<li>"Justera zoomen genom att nypa med minst två fingrar"</li></ul>\n\n<b>"Zooma tillfälligt"</b>" genom att trycka snabbt på skärmen tre gånger och trycka ned fingret på det tredje trycket.\n"<ul><li>"Tryck och dra om du vill flytta runt på skärmen"</li>\n<li>"Lyft fingret när du vill zooma ut"</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"När förstoring har aktiverats kan du zooma in på skärmen.\n\n"<b>"Om du vill zooma"</b>" aktiverar du förstoring och trycker var som helst på skärmen.\n"<ul><li>"• Skrolla genom att dra med minst två fingrar."</li>\n<li>"• Justera zoomen genom att nypa med minst två fingrar."</li></ul>\n\n<b>"Om du vill zooma tillfälligt"</b>" aktiverar du förstoring och trycker länge var som helst på skärmen.\n"<ul><li>"• Flytta runt på skärmen genom att dra."</li>\n<li>"• Zooma ut genom att lyfta fingret."</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"När förstoring har aktiverats kan du zooma in på skärmen.\n\n"<b>"Om du vill zooma"</b>" aktiverar du förstoring och trycker var som helst på skärmen.\n"<ul><li>"Skrolla genom att dra med minst två fingrar."</li>\n<li>"Justera zoomen genom att nypa med minst två fingrar."</li></ul>\n\n<b>"Om du vill zooma tillfälligt"</b>" aktiverar du förstoring och trycker länge var som helst på skärmen.\n"<ul><li>"Flytta runt på skärmen genom att dra."</li>\n<li>"Zooma ut genom att lyfta fingret."</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Öppna med tillgänglighetsknappen"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Öppna med rörelse"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Använd en ny tillgänglighetsrörelse"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Använd tjänsten"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Använd färgkorrigering"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Använd textning"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Alla appar har inte stöd för den här inställningen."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Fortsätt"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Hörapparater"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Inga hörapparater har anslutits"</string>
@@ -4184,9 +4184,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuellt"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Frigör utrymme nu"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Rörelser"</string>
-    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr mobilen med snabba rörelser"</string>
-    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr surfplattan med snabba rörelser"</string>
-    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr enheten med snabba rörelser"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr mobilen med Quick Gestures"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr surfplattan med Quick Gestures"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr enheten med Quick Gestures"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Hoppa till kameran"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Tryck två gånger på strömbrytaren för att snabbt öppna kameran. Du kan göra det på alla skärmar."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Öppna kameran snabbt"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"System för grafikdrivrutin"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Inställningen stöds inte på den här mobilen"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Inställningen stöds inte på den här surfplattan"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Inställningen stöds inte på den här enheten"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Något inträffade. Appen har avbrutit förfrågan om att välja enhet."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Anslutningen har upprättats"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Visa alla"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Söker efter enhet …"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Ansluter till enheten …"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> anslutna enheter</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> ansluten enhet</item>

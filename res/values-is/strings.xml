@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Neyðarheimilisfang"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Notað sem staðsetningin þín þegar þú hringir neyðarsímtöl í gegnum Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Frekari upplýsingar"</annotation>" um eiginleika lokaðs DNS"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Kveikt"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Stillt af símafyrirtæki"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Kveikja á Wi-Fi-símtölum"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Kveikja á Wi-Fi símtölum"</string>
@@ -1224,7 +1225,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Kveikt / Það slokknar ekki á skjánum ef þú horfir á hann"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Slökkt"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Aðgangur að myndavél er nauðsynlegur"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Ýttu til að stjórna heimildum fyrir sérstillingarþjónustu tækja"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Ýttu til að stjórna heimildum fyrir sérstillingaþjónustu tækisins"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Kemur í veg fyrir að það slokkni á skjánum ef þú ert að horfa á hann"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Skjáskynjun notar fremri myndavélina til að sjá hvort einhver sé að horfa á skjáinn. Skjáskynjun virkar í tækinu, en myndir eru aldrei geymdar eða sendar til Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Hafa kveikt á skjá þegar horft er á hann"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Ýtt þrisvar til að auka aðdrátt"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Ýttu á hnapp til að stækka"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Til að stækka"</b>" skaltu ýta snögglega þrisvar sinnum á skjáinn.\n"<ul><li>"Dragðu með tveimur eða fleiri fingrum til að fletta"</li>\n<li>"Færðu tvo eða fleiri fingur saman til að stilla aðdrátt"</li></ul>\n\n<b>"Til að stækka tímabundið"</b>" skaltu ýta snögglega þrisvar sinnum á skjáinn og halda fingrinum á skjánum í þriðja skiptið.\n"<ul><li>"Dragðu til að fara um skjáinn"</li>\n<li>"Lyftu fingri til að minnka aðdrátt"</li></ul>\n\n"Þú getur ekki stækkað á lyklaborði eða yfirlitsstiku."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Þegar kveikt er á stækkun geturðu aukið aðdráttinn á skjánum.\n\n"<b>"Til að stækka"</b>" skaltu hefja stækkun og ýta svo hvar sem er á skjáinn.\n"<ul><li>"• Færðu tvo eða fleiri fingur eftir skjánum til að fletta"</li>\n<li>"• Færðu saman tvo eða fleiri fingur til að breyta aðdrættinum"</li></ul>\n\n<b>"Til að stækka tímabundið"</b>" skaltu hefja stækkun og halda síðan fingri hvar sem er á skjánum.\n"<ul><li>"• Dragðu til að fara um skjáinn"</li>\n<li>"• Lyftu fingrinum til að minnka aðdrátt"</li></ul>\n\n"Þú getur ekki stækkað á lyklaborðinu eða yfirlitsstikunni."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Þegar kveikt er á stækkun geturðu aukið aðdráttinn á skjánum.\n\n"<b>"Til að stækka"</b>" skaltu hefja stækkun og ýta svo hvar sem er á skjáinn.\n"<ul><li>"Dragðu með tveimur eða fleiri fingrum til að fletta"</li>\n<li>"Færðu tvo eða fleiri fingur saman til að stilla aðdrátt"</li></ul>\n\n<b>"Til að stækka tímabundið"</b>" skaltu hefja stækkun og halda síðan fingri hvar sem er á skjánum.\n"<ul><li>"Dragðu til að fara um skjáinn"</li>\n<li>"Lyftu fingrinum til að minnka aðdrátt"</li></ul>\n\n"Þú getur ekki stækkað á lyklaborðinu eða yfirlitsstikunni."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Notaðu aðgengishnappinn til að opna"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Nota bendingu til að opna"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Notaðu nýja aðgengisbendingu"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Nota þjónustu"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Nota litaleiðréttingu"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Nota skjátexta"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Ekki er víst að öll forrit styðji þessa stillingu."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Áfram"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Heyrnartæki"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Engin heyrnartæki eru tengd"</string>
@@ -4221,7 +4221,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Til að sjá hvað klukkan er og sjá tilkynningar og aðrar upplýsingar skaltu taka símann upp."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Til að sjá hvað klukkan er og sjá tilkynningar og aðrar upplýsingar skaltu taka spjaldtölvuna upp."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Til að sjá hvað klukkan er og sjá tilkynningar og aðrar upplýsingar skaltu taka tækið upp."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Ýttu til að athuga síma"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Ýta til að athuga síma"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"Ýttu til að athuga spjaldtölvu"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Ýttu til að athuga tæki"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Til að sjá hvað klukkan er og sjá tilkynningar og aðrar upplýsingar skaltu ýta á skjáinn."</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Myndvinnslurekill kerfis"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Stillingin er ekki studd í þessum síma"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Stillingin er ekki studd í þessari spjaldtölvu"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Stillingin er ekki studd í þessu tæki"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Eitthvað kom upp. Forritið hætti við beiðnina til að velja tæki."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Tenging tókst"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Sýna allar"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Leitar að tæki…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Tengist við tæki…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> tæki tengt</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> tæki tengd</item>
