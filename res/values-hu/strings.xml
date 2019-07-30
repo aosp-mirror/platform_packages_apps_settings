@@ -1226,7 +1226,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Be / A képernyő nem kapcsol majd ki, ha Ön épp azt nézi"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Ki"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kamera-hozzáférés szükséges"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Koppintson ide a Device Personalization Services engedélyeinek kezeléséhez"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Koppintson ide az Eszköz-személyreszabási szolgáltatások engedélyeinek kezeléséhez"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Amíg Ön a képernyőt nézi, megakadályozza annak kikapcsolását"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"A Képernyőfigyelő az előlapi kamerát használja annak ellenőrzésére, hogy nézi-e felhasználó a képernyőt. A funkció az eszközön működik, és a fotókat sosem tárolja vagy küldi tovább a Google-nak."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ne kapcsoljon ki a képernyő, amíg nézem"</string>
@@ -2098,6 +2098,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"A kisegítő szolgáltatás be- vagy kikapcsolásához csúsztasson három ujjával felfelé a képernyő aljáról.\n\nA szolgáltatások közötti váltáshoz csúsztasson felfelé három ujjával, és ne engedje el a képernyőt."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Értem"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"A Kisegítő lehetőségek gomb a következőre van állítva: <xliff:g id="SERVICE">%1$s</xliff:g>. Nagyításhoz tartsa lenyomva a Kisegítő lehetőségek gombot, majd válassza a nagyítás lehetőséget."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"A kisegítő kézmozdulat a következőre van beállítva: <xliff:g id="SERVICE">%1$s</xliff:g>. A nagyítás használatához gyorsan csúsztassa fel két ujját a képernyő aljáról, majd tartsa. Ezután válassza a nagyítás lehetőséget."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Gyorsparancs a hangerőgombokkal"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Gyorsparancs-szolgáltatás"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Engedélyezés a lezárási képernyőn"</string>
@@ -2134,6 +2135,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Szolgáltatás használata"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Színkorrekció használata"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Feliratok használata"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Nem minden alkalmazás támogatja ezt a beállítást."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Tovább"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Hallókészülékek"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nincs csatlakoztatva hallókészülék"</string>
@@ -4223,7 +4225,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Az idő, az értesítések és egyéb információk megtekintéséhez vegye kezébe telefonját."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Az idő, az értesítések és egyéb információk megtekintéséhez vegye a kezébe táblagépét."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Az idő, az értesítések és egyéb információk megtekintéséhez vegye kezébe eszközét."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Koppintson a telefon megtekintéséhez"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Koppintás a telefon megtekintéséhez"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"Koppintson a táblagép megtekintéséhez"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Koppintson az eszköz megtekintéséhez"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Az idő, az értesítések és egyéb információk megtekintéséhez koppintson a képernyőre."</string>
@@ -4387,11 +4389,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Rendszer grafikus drivere"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"A beállítás nem támogatott ezen a telefonon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"A beállítás nem támogatott ezen a táblagépen"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"A beállítás nem támogatott ezen az eszközön"</string>

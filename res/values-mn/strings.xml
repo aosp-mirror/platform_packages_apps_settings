@@ -1226,7 +1226,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Асаалттай / Хэрэв та дэлгэц рүү харж байвал унтрахгүй"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Унтраалттай"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Камерын хандалт шаардлагатай"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Төхөөрөмжийн тохируулгын үйлчилгээний зөвшөөрлийг удирдахын тулд товшино уу"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Төхөөрөмжийг хувийн болгон тохируулах үйлчилгээний зөвшөөрлийг удирдахын тулд товшино уу"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Таныг дэлгэц рүү харж байгаа үед үүнийг унтрахаас сэргийлдэг"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Соргог дэлгэц нь хэн нэгнийг дэлгэц рүү харж байгаа эсэхийг харахын тулд урд талын камерыг ашигладаг. Энэ нь төхөөрөмж дээр ажилладаг бөгөөд зургийг хэзээ ч хадгалдаггүйгээс гадна Google-д илгээдэггүй."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Дэлгэцийг харж байхад асаалттай байлгана"</string>
@@ -2098,6 +2098,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Хандалтын үйлчилгээг асаах эсвэл унтраахын тулд гурван хуруугаараа дэлгэцийн доороос дээш шударна уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд гурван хуруугаараа дээш шудраад удаан дарна уу."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Ойлголоо"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Хүртээмжийн товчлуурыг <xliff:g id="SERVICE">%1$s</xliff:g> болгож тохируулсан. Томруулахын тулд Хүртээмжийн товчлуурыг удаан дараад, томруулахыг сонгоно уу."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Хандалтын зангааг <xliff:g id="SERVICE">%1$s</xliff:g>-д тохирууллаа. Томруулахыг ашиглахын тулд хоёр хуруугаараа дэлгэцийн доороос дээш шудраад удаан дарна уу. Дараа нь томруулахыг сонгоно уу."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Дууны түвшний товчлол"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Товчлолын үйлчилгээ"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Түгжигдсэн дэлгэцээс зөвшөөрөх"</string>
@@ -2134,6 +2135,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Үйлчилгээг ашиглах"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Өнгө тохируулагчийг ашиглах"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Тайлбар ашиглах"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Зарим апп энэ тохиргоог дэмждэггүй."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Үргэлжлүүлэх"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Сонсголын төхөөрөмжүүд"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Холбогдсон сонсголын төхөөрөмжүүд алга"</string>
@@ -4385,11 +4387,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Системийн графикийн драйвер"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Энэ утсанд тохиргоог дэмждэггүй"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Энэ таблетад тохиргоог дэмждэггүй"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Энэ төхөөрөмжид тохиргоог дэмждэггүй"</string>

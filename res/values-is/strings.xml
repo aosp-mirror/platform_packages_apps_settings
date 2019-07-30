@@ -1226,7 +1226,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Kveikt / Það slokknar ekki á skjánum ef þú horfir á hann"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Slökkt"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Aðgangur að myndavél er nauðsynlegur"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Ýttu til að stjórna heimildum fyrir sérstillingarþjónustu tækja"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Ýttu til að stjórna heimildum fyrir sérstillingaþjónustu tækisins"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Kemur í veg fyrir að það slokkni á skjánum ef þú ert að horfa á hann"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Skjáskynjun notar fremri myndavélina til að sjá hvort einhver sé að horfa á skjáinn. Skjáskynjun virkar í tækinu, en myndir eru aldrei geymdar eða sendar til Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Hafa kveikt á skjá þegar horft er á hann"</string>
@@ -2098,6 +2098,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Til að kveikja eða slökkva á aðgengisþjónustu skaltu strjúka upp frá neðri hluta skjásins með þremur fingrum.\n\nTil að skipta á milli þjónusta skaltu strjúka upp með þremur fingrum og halda inni."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Ég skil"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Aðgengishnappurinn er stilltur á <xliff:g id="SERVICE">%1$s</xliff:g>. Til að nota stækkun skaltu halda aðgengishnappnum inni og velja stækkun."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Aðgengisbending er stillt á <xliff:g id="SERVICE">%1$s</xliff:g>. Til að nota stækkun skaltu strjúka upp með tveimur fingrum frá neðri hluta skjásins og halda inni. Síðan skaltu velja stækkun."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Flýtileið með hljóðstyrkstakka"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Flýtileiðarþjónusta"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Leyfa á lásskjá"</string>
@@ -2134,6 +2135,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Nota þjónustu"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Nota litaleiðréttingu"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Nota skjátexta"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Ekki er víst að öll forrit styðji þessa stillingu."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Áfram"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Heyrnartæki"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Engin heyrnartæki eru tengd"</string>
@@ -4223,7 +4225,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Til að sjá hvað klukkan er og sjá tilkynningar og aðrar upplýsingar skaltu taka símann upp."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Til að sjá hvað klukkan er og sjá tilkynningar og aðrar upplýsingar skaltu taka spjaldtölvuna upp."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Til að sjá hvað klukkan er og sjá tilkynningar og aðrar upplýsingar skaltu taka tækið upp."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Ýttu til að athuga síma"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Ýta til að athuga síma"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"Ýttu til að athuga spjaldtölvu"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Ýttu til að athuga tæki"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Til að sjá hvað klukkan er og sjá tilkynningar og aðrar upplýsingar skaltu ýta á skjáinn."</string>
@@ -4387,11 +4389,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Myndvinnslurekill kerfis"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Stillingin er ekki studd í þessum síma"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Stillingin er ekki studd í þessari spjaldtölvu"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Stillingin er ekki studd í þessu tæki"</string>

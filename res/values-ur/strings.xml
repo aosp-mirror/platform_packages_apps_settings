@@ -1226,7 +1226,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"اگر آپ آن اسکرین دیکھ رہے ہیں تو یہ آف نہیں ہوگی"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"آف"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"کیمرے تک رسائی درکار ہے"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"آلہ کی ذاتی نوعیت سازی کی سروسز کی خاطر اجازتوں کو نظم کرنے کے لیے تھپتھپائیں"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"ڈیوائس پرسنلائزیشن سروسز کی خاطر اجازتوں کو نظم کرنے کے لیے تھپتھپائیں"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"اگر آپ اپنی اسکرین دیکھ رہے ہیں تو اسے آف ہونے سے بچاتی ہے"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"‏اسکرین پر توجہ کی خصوصیت یہ دیکھنے کے لیے سامنے والے کیمرے کا استعمال کرتی ہے کہ آیا کوئی اسکرین کو دیکھ تو نہیں رہا ہے۔ یہ آلہ پر کام کرتی ہے اور تصاویر کبھی بھی اسٹور نہیں کی جاتی ہیں اور نہ ہی Google کو بھیجی جاتی ہیں۔"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"جب آپ اسکرین کو دیکھ رہے ہوں گے تو یہ آن رہے گی"</string>
@@ -2098,6 +2098,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"ایکسیسبیلٹی سروس آن یا آف کرنے کے لیے، تین انگلیوں سے اسکرین کے نیچے سے اوپر کی طرف سوائپ کریں۔\n\nسروسز کے مابین سوئچ کرنے کے لیے، تین انگلیوں سے اوپر سوائپ کرکے ہولڈ کریں۔"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"سمجھ آ گئی"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"ایکسیسبیلٹی بٹن <xliff:g id="SERVICE">%1$s</xliff:g> پر سیٹ ہے۔ میگنیفکیشن استعمال کرنے کیلئے، ایکسیسبیلٹی بٹن ٹچ کریں اور دبائے رکھیں، پھر میگنیفکیشن منتخب کریں۔"</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"ایکسیسبیلٹی اشارے کو <xliff:g id="SERVICE">%1$s</xliff:g> پر سیٹ کر دیا گیا۔ میگنیفکیشن استعمال کرنے کے لیے، اسکرین کے نیچے سے دو انگلیوں سے اوپر سوائپ اور ہولڈ کریں۔ پھر میگنیفکیشن منتخب کریں۔"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"والیوم کی کلید کا شارٹ کٹ"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"شارٹ کٹ سروس"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"مقفل اسکرین سے اجازت دیں"</string>
@@ -2134,6 +2135,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"سروس استعمال کریں"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"رنگ کی اصلاح استعمال کریں"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"کیپشنز استعمال کریں"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"اس ترتیب کو سبھی ایپس سپورٹ نہیں کرتی ہیں۔"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"جاری رکھیں"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"سماعتی آلات"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"کوئی سماعتی آلہ منسلک نہیں ہے"</string>
@@ -4385,11 +4387,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"سسٹم گرافکس ڈرائیور"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"ترتیب اس فون پر تعاون یافتہ نہیں ہے"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"ترتیب اس ٹیبلیٹ پر تعاون یافتہ نہیں ہے"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"ترتیب اس آلے پر تعاون یافتہ نہیں ہے"</string>
