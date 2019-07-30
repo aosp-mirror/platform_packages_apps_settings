@@ -16,18 +16,23 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
 import static android.net.ConnectivityManager.TETHERING_USB;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -52,7 +57,7 @@ public class UsbDefaultFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFragment = new UsbDefaultFragment();
+        mFragment = new TestFragment();
         mFragment.mUsbBackend = mUsbBackend;
         mFragment.mConnectivityManager = mConnectivityManager;
     }
@@ -155,5 +160,78 @@ public class UsbDefaultFragmentTest {
         mFragment.mOnStartTetheringCallback.onTetheringStarted();
 
         verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
+    }
+
+    @Test
+    public void onPause_receivedRndis_shouldSetRndis() {
+        mFragment.mIsStartTethering = true;
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        mFragment.onPause();
+
+        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
+        assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_RNDIS);
+    }
+
+    @Test
+    public void onPause_receivedNone_shouldSetNone() {
+        mFragment.mIsStartTethering = true;
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
+                UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        mFragment.onPause();
+
+        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_NONE);
+        assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_NONE);
+    }
+
+    @Test
+    public void onPause_receivedMtp_shouldSetMtp() {
+        mFragment.mIsStartTethering = true;
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
+                UsbManager.FUNCTION_MTP, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        mFragment.onPause();
+
+        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_MTP);
+        assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_MTP);
+    }
+
+    @Test
+    public void onPause_receivedPtp_shouldSetPtp() {
+        mFragment.mIsStartTethering = true;
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
+                UsbManager.FUNCTION_PTP, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        mFragment.onPause();
+
+        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_PTP);
+        assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_PTP);
+    }
+
+    @Test
+    public void onPause_receivedMidi_shouldSetMidi() {
+        mFragment.mIsStartTethering = true;
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
+                UsbManager.FUNCTION_MIDI, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        mFragment.onPause();
+
+        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_MIDI);
+        assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_MIDI);
+    }
+
+    public static class TestFragment extends UsbDefaultFragment {
+        public final PreferenceScreen mScreen;
+
+        public TestFragment() {
+            mScreen = mock(PreferenceScreen.class);
+        }
+
+        @Override
+        public PreferenceScreen getPreferenceScreen() {
+            return mScreen;
+        }
     }
 }

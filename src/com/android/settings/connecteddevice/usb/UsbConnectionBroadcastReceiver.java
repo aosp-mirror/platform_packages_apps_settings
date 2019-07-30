@@ -57,26 +57,24 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
         if (UsbManager.ACTION_USB_STATE.equals(intent.getAction())) {
             mConnected = intent.getExtras().getBoolean(UsbManager.USB_CONNECTED)
                     || intent.getExtras().getBoolean(UsbManager.USB_HOST_CONNECTED);
-            if (mConnected) {
-                long functions = UsbManager.FUNCTION_NONE;
-                if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_MTP)
-                        && intent.getExtras().getBoolean(UsbManager.USB_DATA_UNLOCKED, false)) {
-                    functions |= UsbManager.FUNCTION_MTP;
-                }
-                if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_PTP)
-                        && intent.getExtras().getBoolean(UsbManager.USB_DATA_UNLOCKED, false)) {
-                    functions |= UsbManager.FUNCTION_PTP;
-                }
-                if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_MIDI)) {
-                    functions |= UsbManager.FUNCTION_MIDI;
-                }
-                if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_RNDIS)) {
-                    functions |= UsbManager.FUNCTION_RNDIS;
-                }
-                mFunctions = functions;
-                mDataRole = mUsbBackend.getDataRole();
-                mPowerRole = mUsbBackend.getPowerRole();
+            long functions = UsbManager.FUNCTION_NONE;
+            if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_MTP)
+                    && intent.getExtras().getBoolean(UsbManager.USB_DATA_UNLOCKED, false)) {
+                functions |= UsbManager.FUNCTION_MTP;
             }
+            if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_PTP)
+                    && intent.getExtras().getBoolean(UsbManager.USB_DATA_UNLOCKED, false)) {
+                functions |= UsbManager.FUNCTION_PTP;
+            }
+            if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_MIDI)) {
+                functions |= UsbManager.FUNCTION_MIDI;
+            }
+            if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_RNDIS)) {
+                functions |= UsbManager.FUNCTION_RNDIS;
+            }
+            mFunctions = functions;
+            mDataRole = mUsbBackend.getDataRole();
+            mPowerRole = mUsbBackend.getPowerRole();
         } else if (UsbManager.ACTION_USB_PORT_CHANGED.equals(intent.getAction())) {
             UsbPortStatus portStatus = intent.getExtras()
                     .getParcelable(UsbManager.EXTRA_PORT_STATUS);
