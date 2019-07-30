@@ -128,6 +128,12 @@
             android:fragment="com.android.settings.accessibility.VibrationSettings"
             settings:controller="com.android.settings.accessibility.VibrationPreferenceController"/>
 
+        <Preference
+            android:key="gesture_system_navigation_input_summary_accessibility"
+            android:title="@string/system_navigation_title"
+            android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
+            settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
