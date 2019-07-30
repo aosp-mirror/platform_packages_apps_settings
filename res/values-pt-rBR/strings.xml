@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Endereço de emergência"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Usado como seu local quando você faz uma chamada de emergência usando o Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Saiba mais"</annotation>" sobre recursos de DNS particular"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Ativado"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Configuração gerenciada pela operadora"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Ativar chamada no Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Ativar chamada no Wi-Fi"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Tocar três vezes para ampliar"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Toque em um botão para aplicar zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Para aplicar zoom"</b>", toque três vezes na tela rapidamente.\n"<ul><li>"Arraste dois ou mais dedos para rolar"</li>\n<li>"Faça um gesto de pinça com dois ou mais dedos para ajustar o zoom"</li></ul>\n\n<b>"Para aplicar zoom temporariamente"</b>", toque rapidamente na tela três vezes e mantenha o dedo pressionado no terceiro toque.\n"<ul><li>"Arraste para mover pela tela"</li>\n<li>"Levante o dedo para diminuir o zoom"</li></ul>\n\n"Não é possível aumentar o zoom no teclado e na barra de navegação."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Quando a ampliação está ativada, você pode aumentar o zoom na tela.\n\n"<b>"Para aplicar zoom"</b>", inicie a ampliação e toque em qualquer lugar da tela.\n"<ul><li>"• Arraste com dois ou mais dedos para rolar a tela."</li>\n<li>"• Faça um movimento de pinça com dois ou mais dedos para ajustar o zoom."</li></ul>\n\n<b>"Se quiser aplicar zoom temporariamente"</b>", inicie a ampliação, toque em qualquer parte da tela e mantenha-a pressionada.\n"<ul><li>"• Arraste para mover a visualização."</li>\n<li>"• Levante o dedo para diminuir o zoom."</li></ul>\n\n"Não é possível aumentar o zoom no teclado nem na barra de navegação."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Quando a ampliação está ativada, você pode aumentar o zoom na tela.\n\n"<b>"Para aplicar zoom"</b>", inicie a ampliação e toque em qualquer lugar da tela.\n"<ul><li>"Arraste dois dedos ou mais para rolar a tela."</li>\n<li>"Faça um gesto de pinça com dois ou mais dedos para ajustar o zoom."</li></ul>\n\n<b>"Para aplicar zoom temporariamente"</b>", inicie a ampliação e depois toque em qualquer ponto na tela e mantenha-o pressionado.\n"<ul><li>"Arraste para mover a tela."</li>\n<li>"Levante o dedo para diminuir o zoom."</li></ul>\n\n"Não é possível aumentar o zoom no teclado e na barra de navegação."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Usar o botão de acessibilidade para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Usar gesto para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Usar o novo gesto de acessibilidade"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Usar serviço"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Usar correção de cor"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Usar legendas"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Nem todos os apps são compatíveis com essa configuração."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Aparelhos auditivos"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nenhum aparelho auditivo conectado"</string>
@@ -2974,7 +2974,7 @@
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"Exceto quando outro app de pagamento estiver aberto"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Em um terminal \"Toque e pague\", pagar com:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Como pagar no terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Configure um app de pagamento. Em seguida, basta segurar a parte traseira do seu smartphone em direção a qualquer terminal com o símbolo indicando ausência de contato."</string>
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Configure um app de pagamento. Em seguida, basta segurar a parte traseira do seu smartphone em direção a qualquer terminal com o símbolo indicando pagamento por aproximação."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Entendi"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Mais..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Definir como preferência?"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Driver gráfico do sistema"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"A configuração não está disponível neste smartphone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"A configuração não está disponível neste tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"A configuração não está disponível neste dispositivo"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Algo deu errado. O aplicativo cancelou a solicitação para selecionar um dispositivo."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Conexão realizada"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Mostrar tudo"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Procurando dispositivo…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Conectando ao dispositivo…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dispositivo conectado</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dispositivos conectados</item>

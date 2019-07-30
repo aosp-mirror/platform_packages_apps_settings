@@ -1146,6 +1146,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Ārkārtas adrese"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Tiks izmantota kā jūsu atrašanās vieta, ja zvanīsiet uz ārkārtas numuru, lietojot Wi‑Fi."</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Uzziniet vairāk"</annotation>" par privātām DNS funkcijām"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Ieslēgts"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Iestatījumu pārvalda mobilo sakaru operators"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Aktivizējiet Wi-Fi zvanus"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Ieslēdziet Wi-Fi zvanus"</string>
@@ -2107,7 +2108,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Pieskarieties 3 reizes, lai veiktu tālummaiņu"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Pieskarieties pogai, lai palielinātu"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Lai veiktu tālummaiņu"</b>", trīsreiz ātri pieskarieties ekrānam.\n"<ul><li>"Velciet ar vismaz diviem pirkstiem, lai ritinātu."</li>\n<li>"Savelciet kopā vismaz 2 pirkstus, lai pielāgotu tālummaiņu."</li></ul>\n\n<b>"Lai īslaicīgi veiktu tālummaiņu"</b>", trīsreiz ātri pieskarieties ekrānam un ar trešo pieskārienu turiet pirkstu nospiestu.\n"<ul><li>"Velciet pirkstus, lai pārvietotos ekrānā."</li>\n<li>"Paceliet pirkstu, lai tālinātu."</li></ul>\n\n"Tastatūrā vai navigācijas joslā nevarat veikt tuvināšanu."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Kad ir ieslēgts palielinājums, ekrānā varat izmantot tuvināšanu.\n\n"<b>"Lai izmantotu tālummaiņu"</b>", aktivizējiet palielinājumu un pēc tam pieskarieties jebkur ekrānā.\n"<ul><li>"• Velciet vismaz 2 pirkstus, lai ritinātu saturu."</li>\n<li>"• Savelciet vismaz 2 pirkstus, lai pielāgotu tālummaiņu."</li></ul>\n\n<b>"Lai īslaicīgi izmantotu tālummaiņu"</b>", aktivizējiet palielinājumu, pēc tam pieskarieties jebkur ekrānā un turiet.\n"<ul><li>"• Velciet ar pirkstu, lai pārvietotos ekrānā."</li>\n<li>"• Paceliet pirkstu, lai tālinātu saturu."</li></ul>\n\n"Tuvināšanu nevar izmantot tastatūrā vai navigācijas joslā."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Kad ir ieslēgts palielinājums, ekrānā varat izmantot tuvināšanu.\n\n"<b>"Lai izmantotu tālummaiņu"</b>", aktivizējiet palielinājumu un pēc tam pieskarieties jebkur ekrānā.\n"<ul><li>"Velciet ar vismaz 2 pirkstiem, lai ritinātu."</li>\n<li>"Savelciet kopā vismaz 2 pirkstus, lai pielāgotu tālummaiņu."</li></ul>\n\n<b>"Lai veiktu īslaicīgu tālummaiņu"</b>", aktivizējiet palielinājumu un pēc tam pieskarieties jebkurai vietai ekrānā un turiet to.\n"<ul><li>"Velciet ar pirkstu, lai pārvietotos pa ekrānu."</li>\n<li>"Paceliet pirkstu, lai veiktu tālināšanu."</li></ul>\n\n"Tastatūrā vai navigācijas joslā nevarat veikt tuvināšanu."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Pieejamības pogas izmantošana atvēršanai"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Žesta izmantošana atvēršanai"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Jaunā pieejamības žesta izmantošana"</string>
@@ -2155,8 +2156,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Izmantot pakalpojumu"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Izmantot krāsu korekciju"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Izmantot parakstus"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Ne visās lietotnēs tiek atbalstīts šis iestatījums."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Turpināt"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Dzirdes aparāti"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nav pievienots neviens dzirdes aparāts."</string>
@@ -4465,11 +4465,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Sistēmas grafikas dzinis"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Iestatīšana šajā tālrunī netiek atbalstīta."</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Iestatīšana šajā planšetdatorā netiek atbalstīta."</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Iestatīšana šajā ierīcē netiek atbalstīta."</string>
@@ -4630,6 +4628,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Radās kļūda. Lietojumprogramma atsauca ierīces atlases pieprasījumu."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Savienojums izveidots"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Rādīt visu"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Notiek ierīces meklēšana…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Notiek savienojuma izveide ar ierīci…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="zero">Pievienotas <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ierīces</item>
       <item quantity="one">Pievienota <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ierīce</item>

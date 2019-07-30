@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Larrialdietarako helbidea"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Kokapen gisa erabiliko da larrialdi-zerbitzuetara Wi-Fi bidez deituz gero"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Lortu informazio gehiago"</annotation>" DNS pribatuaren eginbideei buruz"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Aktibatuta"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Operadoreak kudeatzen du ezarpen hau"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Aktibatu Wi-Fi bidezko deiak"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Aktibatu Wi-Fi bidezko deiak"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Zooma aplikatzeko, sakatu hirutan"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Zooma aplikatzeko, sakatu botoi bat"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Zooma aplikatzeko"</b>", sakatu pantaila bizkor hiru aldiz.\n"<ul><li>"Gora edo behera egiteko, arrastatu gutxienez bi hatz."</li>\n<li>"Zooma doitzeko, atximurkatu pantaila gutxienez bi hatzekin."</li></ul>\n\n<b>"Zooma une batez bakarrik aplikatzeko"</b>", sakatu pantaila bizkor hiru aldiz eta, hirugarren aldian, utzi hatza pantailan jarrita.\n"<ul><li>"Pantailan mugitzeko, arrastatu hatza."</li>\n<li>"Zooma aplikatzeari uzteko, altxatu hatza."</li></ul>\n\n"Zooma ezin da aplikatu ez teklatuan ez nabigazio-barran."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Zooma aktibatuta badago, pantailan aplika dezakezu.\n\n"<b>"Handitzeko"</b>", ireki zooma eta sakatu pantailako edozein puntu.\n"<ul><li>"• Arrastatu bi hatz edo gehiago gora eta behera egiteko."</li>\n<li>"• Atximurkatu bi hatz edo gehiago zooma doitzeko."</li></ul>\n\n<b>"Zooma unetxo batez aplikatzeko"</b>", ireki zooma eta eduki sakatuta pantailako edozein puntu.\n"<ul><li>"• Arrastatu hatza toki batetik bestera joateko."</li>\n<li>"• Altxatu hatza txikitzeko."</li></ul>\n\n"Ezin da aplikatu zooma teklatuan edo nabigazio-barran."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Zooma aktibatuta badago, pantailan aplika dezakezu.\n\n"<b>"Handitzeko"</b>", ireki zooma eta sakatu pantailako edozein puntu.\n"<ul><li>"Arrastatu bi hatz edo gehiago gora eta behera egiteko."</li>\n<li>"Atximurkatu bi hatz edo gehiago zooma doitzeko."</li></ul>\n\n<b>"Zooma unetxo batez aplikatzeko"</b>", ireki zooma eta eduki sakatuta pantailako edozein puntu.\n"<ul><li>"Arrastatu hatza toki batetik bestera joateko."</li>\n<li>"Altxatu hatza txikitzeko."</li></ul>\n\n"Ezin da aplikatu zooma teklatuan edo nabigazio-barran."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Erabili Erabilerraztasuna botoia irekitzeko"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Erabili keinua irekitzeko"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Erabili erabilerraztasun-keinu berria"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Erabili zerbitzua"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Erabili koloreen zuzenketa"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Erabili azpitituluak"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Aplikazio batzuek ez dute onartzen ezarpen hau."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Egin aurrera"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Audiofonoak"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Ez dago audiofonorik konektatuta"</string>
@@ -4210,18 +4210,18 @@
     <string name="high_label" msgid="7278863493316447831">"Handia"</string>
     <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Sentikortasun handiagoa ezarriz gero, baliteke gatazkak sortzea pantailaren ertzetan egiten diren aplikazioen keinuekin."</string>
     <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Atzeko planoaren sentikortasuna"</string>
-    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Sakatu birritan telefonoa bertan dagoena ikusteko"</string>
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Sakatu birritan telefonoa pantailako informazioa ikusteko"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Sakatu birritan tableta bertan dagoela ikusteko"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Sakatu birritan gailua bertan dagoela ikusteko"</string>
     <string name="ambient_display_summary" msgid="8534654210539169707">"Ordua, jakinarazpenak eta bestelako informazioa ikusteko, sakatu pantaila birritan."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Jaso telefonoa bertan dagoena ikusteko"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Jaso telefonoa pantailako informazioa ikusteko"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Jaso tableta bertan dagoela ikusteko"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Jaso gailua bertan dagoela ikusteko"</string>
     <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"Esnarazi pantaila"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Ordua, jakinarazpenak eta bestelako informazioa ikusteko, hartu telefonoa."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Ordua, jakinarazpenak eta bestelako informazioa ikusteko, hartu tableta."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Ordua, jakinarazpenak eta bestelako informazioa ikusteko, hartu gailua."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Sakatu telefonoa egiaztatzeko"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Sakatu telefonoa pantailako informazioa ikusteko"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"Sakatu tableta egiaztatzeko"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Sakatu gailua egiaztatzeko"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Ordua, jakinarazpenak eta bestelako informazioa ikusteko, sakatu pantaila."</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Sistemaren grafikoen kontrolatzailea"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Telefono honek ez du ezarpena onartzen"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Tableta honek ez du ezarpena onartzen"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Gailu honek ez du ezarpena onartzen"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Arazoren bat izan da. Aplikazioak bertan behera utzi du gailu bat aukeratzeko eskaera."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Konektatu da"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Erakutsi guztiak"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Gailua bilatzen…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Gailura konektatzen…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> gailu daude konektatuta</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> gailu dago konektatuta</item>

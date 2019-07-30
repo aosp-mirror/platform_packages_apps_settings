@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Enderezo de emerxencia"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Utilízase como a túa localización cando fas unha chamada de emerxencia por wifi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Máis información"</annotation>" sobre as funcións de DNS privado"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Activado"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"O operador xestiona esta opción de configuración"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Activa Chamadas por wifi"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Activa Chamadas por wifi"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Toca 3 veces para achegar o zoom"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Toca un botón para achegar o zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Para achegar o zoom"</b>", toca a pantalla 3 veces rapidamente.\n"<ul><li>"Arrastra 2 ou máis dedos para desprazarte"</li>\n<li>"Belisca con 2 ou máis dedos para axustar o zoom"</li></ul>\n\n<b>"Para achegar o zoom temporalmente"</b>", toca a pantalla 3 veces rapidamente e mantén o dedo sobre a pantalla despois do terceiro toque.\n"<ul><li>"Arrastra o dedo para moverte pola pantalla"</li>\n<li>"Levántao para afastar o zoom"</li></ul>\n\n"Non podes achegar o zoom sobre o teclado nin sobre a barra de navegación."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Ao activar a ampliación, podes achegar o contido da pantalla.\n\n"<b>"Para utilizar o zoom"</b>", inicia a ampliación e toca calquera parte da pantalla.\n"<ul><li>"• Arrastra 2 ou máis dedos para desprazarte."</li>\n<li>"• Belisca con 2 ou máis dedos para axustar o zoom."</li></ul>\n\n<b>"Para utilizar o zoom de forma temporal"</b>", inicia a ampliación e mantén premida calquera parte da pantalla.\n"<ul><li>"• Arrastra o dedo para moverte pola pantalla."</li>\n<li>"• Levanta o dedo para afastar a imaxe ou o texto."</li></ul>\n\n"Ten en conta que non se pode ampliar o teclado nin a barra de navegación."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Ao activar a ampliación, podes achegar o contido da pantalla.\n\n"<b>"Para utilizar o zoom"</b>", inicia a ampliación e toca calquera parte da pantalla.\n"<ul><li>"Arrastra 2 ou máis dedos para desprazarte."</li>\n<li>"Belisca con 2 ou máis dedos para axustar o zoom."</li></ul>\n\n<b>"Para utilizar o zoom de forma temporal"</b>", inicia a ampliación e mantén premida calquera parte da pantalla.\n"<ul><li>"Arrastra o dedo para moverte pola pantalla."</li>\n<li>"Levanta o dedo para afastar a imaxe ou o texto."</li></ul>\n\n"Ten en conta que non se pode ampliar o teclado nin a barra de navegación."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Utilizar o botón de accesibilidade para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Utilizar un xesto para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Usar novo xesto de accesibilidade"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Usar servizo"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Usar corrección da cor"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Usar subtítulos"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Non todas as aplicacións son compatibles con esta opción de configuración."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Audiófonos"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Non hai ningún audiófono conectado"</string>
@@ -4211,18 +4211,18 @@
     <string name="high_label" msgid="7278863493316447831">"Alta"</string>
     <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Unha sensibilidade superior pode provocar conflitos cos xestos da aplicación que se fagan nos bordos da pantalla."</string>
     <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Sensibilidade traseira"</string>
-    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dobre toque para consultar o teléfono"</string>
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dobre toque no teléfono para consultalo"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tocar dúas veces para consultar a tableta"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tocar dúas veces para consultar o dispositivo"</string>
     <string name="ambient_display_summary" msgid="8534654210539169707">"Para consultar a hora, as notificacións e outra información, toca a pantalla dúas veces."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Levantar teléfono para consultalo"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Levantar o teléfono para consultalo"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Levantar a tableta para consultala"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Levantar o dispositivo para consultalo"</string>
     <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"Activar a pantalla de bloqueo"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Para consultar a hora, as notificacións e outros datos, colle o teléfono."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Para consultar a hora, as notificacións e outros datos, colle a tableta."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Para consultar a hora, as notificacións e outros datos, colle o dispositivo."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Tocar para consultar o teléfono"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Toque no teléfono para consultalo"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"Toca para consultar a tableta"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Tocar para consultar o dispositivo"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Para consultar a hora, as notificacións e outra información, toca a pantalla."</string>
@@ -4386,11 +4386,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Controlador de gráficos do sistema"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"A opción de configuración non é compatible con este teléfono"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"A opción de configuración non é compatible con esta tableta"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"A opción de configuración non é compatible con este dispositivo"</string>
@@ -4550,6 +4548,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Produciuse un erro. A aplicación cancelou a solicitude de escoller un dispositivo."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Conexión correcta"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Mostrar todo"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Buscando dispositivo…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Conectando co dispositivo…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dispositivos conectados</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> dispositivo conectado</item>

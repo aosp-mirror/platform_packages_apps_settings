@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Adresse for nødssituasjoner"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Brukes som posisjonen din når du gjør et nødanrop over Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Finn ut mer"</annotation>" om funksjoner for privat DNS"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"På"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Innstillingen administreres av operatøren"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Aktivér Wi-Fi-anrop"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Slå på Wi-Fi-anrop"</string>
@@ -1224,7 +1225,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"På / skjermen slås ikke av hvis du ser på den"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Av"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kameratilgang er nødvendig"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Trykk for å administrere tillatelser for tjenester for personlig tilpasning av enheter"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Trykk for å administrere tillatelser for Personlig tilpasning på enheten"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Forhindrer at skjermen slås av hvis du ser på den"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Skjermoppmerksomhet bruker frontkameraet til å se om noen ser på skjermen. Funksjonen fungerer på enheten, og bilder blir aldri lagret eller sendt til Google."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"La skjermen være på så lenge du ser på den"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Trykk tre ganger for å zoome"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Trykk på en knapp for å zoome"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"For å zoome"</b>", trykk raskt på skjermen tre ganger.\n"<ul><li>"Dra to eller flere fingre for å rulle"</li>\n<li>"Knip to eller flere fingre for å justere zoom"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", trykk raskt på skjermen tre ganger, og hold fingeren nede på det tredje trykket.\n"<ul><li>"Dra for å bevege deg rundt på skjermen"</li>\n<li>"Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet eller navigasjonsraden."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Når forstørring er slått på, kan du zoome inn på skjermen.\n\n"<b>"For å zoome"</b>", start forstørring og trykk hvor som helst på skjermen.\n"<ul><li>"• Dra to eller flere fingre for å rulle"</li>\n<li>"• Klyp to eller flere fingre for å justere zoom"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", start forstørring og trykk og hold hvor som helst på skjermen.\n"<ul><li>"• Dra for å flytte deg rundt på skjermen"</li>\n<li>"• Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet eller navigasjonsraden."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Når forstørrelse er slått på, kan du zoome inn på skjermen.\n\n"<b>"For å zoome"</b>", start forstørring og trykk hvor som helst på skjermen.\n"<ul><li>"Dra to eller flere fingre for å rulle"</li>\n<li>"Knip to eller flere fingre for å justere zoomen"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", start forstørring og trykk og hold hvor som helst på skjermen.\n"<ul><li>"Dra for å bevege deg rundt på skjermen"</li>\n<li>"Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet eller navigasjonsraden."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Bruk Tilgjengelighet-knappen for å åpne"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Bruk bevegelse for å åpne"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Bruk den nye tilgjengelighetsbevegelsen"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Bruk tjenesten"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Bruk fargekorrigering"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Bruk teksting"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Ikke alle apper støtter denne innstillingen."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Fortsett"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Høreapparater"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Ingen høreapparater er tilkoblet"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Systemets grafikkdriver"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Innstillingen støttes ikke på denne telefonen"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Innstillingen støttes ikke på dette nettbrettet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Innstillingen støttes ikke på denne enheten"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Noe dukket opp. Appen har kansellert forespørselen om å velge en enhet."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Tilkoblingen var vellykket"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Vis alle"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Søker etter enheten …"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Kobler til enheten …"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> enheter er tilkoblet</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> enhet er tilkoblet</item>

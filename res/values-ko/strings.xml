@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"긴급 주소"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Wi‑Fi를 통해 긴급 전화를 걸 때 내 위치로 사용됨"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958">"비공개 DNS 기능에 관해 "<annotation id="url">"자세히 알아보기"</annotation></string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"사용"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"이동통신사에서 관리하는 설정"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Wi-Fi 통화 활성화"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Wi-Fi 통화 사용 설정"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"3번 탭하여 확대"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"버튼을 탭하여 확대/축소"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"확대/축소하려면"</b>" 화면을 빠르게 세 번 탭합니다.\n"<ul><li>"스크롤하려면 2개 이상의 손가락으로 드래그합니다."</li>\n<li>"확대/축소 수준을 조정하려면 2개 이상의 손가락을 오므립니다."</li></ul>\n\n<b>"일시적으로 확대/축소하려면"</b>" 화면을 빠르게 세 번 탭하고 세 번째 탭에서 길게 누릅니다.\n"<ul><li>"화면에서 이동하려면 드래그합니다."</li>\n<li>"축소하려면 손가락을 뗍니다."</li></ul>\n\n"키보드나 탐색 메뉴는 확대할 수 없습니다."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"확대 서비스를 사용 설정하면 화면을 확대할 수 있습니다.\n\n"<b>"화면을 확대하려면"</b>" 확대를 시작한 다음 화면에서 아무 곳이나 탭합니다.\n"<ul><li>"• 스크롤하려면 2개 이상의 손가락으로 드래그합니다."</li>\n<li>"• 확대/축소를 조정하려면 2개 이상의 손가락을 모읍니다."</li></ul>\n\n<b>"화면을 일시적으로 확대하려면"</b>" 확대를 시작한 다음 화면에서 아무 곳이나 길게 터치합니다.\n"<ul><li>"• 화면에서 이동하려면 드래그합니다."</li>\n<li>"• 축소하려면 손가락을 뗍니다."</li></ul>\n\n"키보드 또는 탐색 메뉴는 확대할 수 없습니다."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"확대 기능을 사용 설정하면 화면을 확대할 수 있습니다.\n\n"<b>"화면을 확대하려면"</b>" 확대 기능을 시작한 다음 화면에서 아무 곳이나 탭합니다.\n"<ul><li>"스크롤하려면 2개 이상의 손가락으로 드래그합니다."</li>\n<li>"확대/축소 수준을 조정하려면 2개 이상의 손가락을 모읍니다."</li></ul>\n\n<b>"화면을 일시적으로 확대하려면"</b>" 확대를 시작한 다음 화면에서 아무 곳이나 길게 터치합니다.\n"<ul><li>"화면에서 이동하려면 드래그합니다."</li>\n<li>"축소하려면 손가락을 뗍니다."</li></ul>\n\n"키보드 또는 탐색 메뉴는 확대할 수 없습니다."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"접근성 버튼을 사용하여 열기"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"동작을 사용해 열기"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"새로운 접근성 동작 사용"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"서비스 사용"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"색상 보정 사용"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"자막 사용"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"일부 앱에서는 이 설정을 지원하지 않습니다."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"계속"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"보청기"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"연결된 보청기가 없음"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"시스템 그래픽 드라이버"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"휴대전화에서 지원되지 않는 설정"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"태블릿에서 지원되지 않는 설정"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"기기에서 지원되지 않는 설정"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"문제가 발생했습니다. 애플리케이션에서 기기 선택 요청을 취소했습니다."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"연결되었습니다."</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"모두 표시"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"기기 검색 중…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"기기에 연결하는 중…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other">기기 <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>대 연결됨</item>
       <item quantity="one">기기 <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g>대 연결됨</item>

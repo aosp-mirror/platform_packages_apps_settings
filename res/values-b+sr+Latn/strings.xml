@@ -1146,6 +1146,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Adresa za hitne slučajeve"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Koristi se kao vaša lokacija kada uputite hitni poziv pomoću Wi-Fi-ja"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Saznajte više"</annotation>" o funkcijama Privatnog DNS-a"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Uključeno"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Mobilni operater upravlja podešavanjem"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Aktivirajte Pozivanje preko Wi-Fi-ja"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Uključite pozivanje preko Wi-Fi-ja"</string>
@@ -1243,7 +1244,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Uključeno/ekran se neće isključiti ako gledate u njega"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Isključeno"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Potreban je pristup kameri"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Dodirnite da biste upravljali dozvolama za usluge za personalizaciju uređaja"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Dodirnite da biste upravljali dozvolama za usluge personalizacije uređaja"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Sprečava isključivanje ekrana ako gledate u njega"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Pažnja ekrana koristi prednju kameru da bi utvrdila da li neko gleda u ekran. Radi na uređaju, a slike se nikada ne čuvaju niti šalju Google-u."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ekran ostaje uključen dok gledate u njega"</string>
@@ -2107,7 +2108,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Dodirnite 3 puta da biste zumirali"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Dodirnite dugme da biste zumirali"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Da biste zumirali"</b>", brzo dodirnite ekran 3 puta.\n"<ul><li>"Prevucite pomoću 2 ili više prstiju da biste pomerali prikaz"</li>\n<li>"Skupite 2 ili više prstiju da biste prilagodili zumiranje"</li></ul>\n\n<b>"Za privremeno zumiranje"</b>" brzo dodirnite ekran 3 puta i zadržite prst pri trećem dodiru.\n"<ul><li>"Prevlačite prstom da biste se kretali po ekranu"</li>\n<li>"Podignite prst da biste umanjili prikaz"</li></ul>\n\n"Ne možete da zumirate tastaturu ni traku za navigaciju."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Kada je uvećanje uključeno, možete da uvećate ekran.\n\n"<b>"Da biste zumirali"</b>", pokrenite uvećanje, pa dodirnite bilo koji deo ekrana.\n"<ul><li>"• Prevucite pomoću 2 ili više prstiju da biste pomerali prikaz"</li>\n<li>"• Skupite 2 ili više prstiju da biste prilagodili zumiranje"</li></ul>\n\n<b>"Za privremeno zumiranje"</b>" pokrenite uvećanje, pa dodirnite i zadržite bilo koji deo ekrana.\n"<ul><li>"• Prevlačite prstom da biste se kretali po ekranu"</li>\n<li>"• Podignite prst da biste umanjili prikaz"</li></ul>\n\n"Ne možete da uvećavate tastaturu ili traku za navigaciju."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Kada je uvećanje uključeno, možete da uvećate ekran.\n\n"<b>"Da biste zumirali"</b>", pokrenite uvećanje, pa dodirnite bilo koji deo ekrana.\n"<ul><li>"Prevlačite pomoću 2 ili više prstiju da biste pomerali prikaz"</li>\n<li>"Skupite 2 ili više prstiju da biste prilagodili zumiranje"</li></ul>\n\n<b>"Za privremeno zumiranje"</b>" pokrenite uvećanje, pa dodirnite i zadržite bilo koji deo ekrana.\n"<ul><li>"Prevlačite da biste se kretali po ekranu"</li>\n<li>"Podignite prst da biste umanjili prikaz"</li></ul>\n\n"Ne možete da uvećavate tastaturu ili traku za navigaciju."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Otvarajte pomoću dugmeta za pristupačnost"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Otvarajte pomoću pokreta"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Koristite novi pokret za pristupačnost"</string>
@@ -2155,8 +2156,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Koristi uslugu"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Koristi korekciju boja"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Koristi natpise"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Ne podržavaju sve aplikacije ovo podešavanje."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Nastavi"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Slušni aparati"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nije povezan nijedan slušni aparat"</string>
@@ -2938,9 +2938,9 @@
       <item quantity="other">Proveri sertifikate</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"Više korisnika"</string>
-    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"Delite uređaj tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na uređaju za prilagođene početne ekrane, naloge, aplikacije, podešavanja i još mnogo toga."</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"Delite tablet tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na tabletu za prilagođene početne ekrane, naloge, aplikacije, podešavanja i još mnogo toga."</string>
-    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"Delite telefon tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na telefonu za prilagođene početne ekrane, naloge, aplikacije, podešavanja i još mnogo toga."</string>
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"Delite uređaj tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na uređaju za prilagođene početne ekrane, naloge, aplikacije, podešavanja i drugo."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"Delite tablet tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na tabletu za prilagođene početne ekrane, naloge, aplikacije, podešavanja i drugo."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"Delite telefon tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na telefonu za prilagođene početne ekrane, naloge, aplikacije, podešavanja i drugo."</string>
     <string name="user_list_title" msgid="7937158411137563543">"Korisnici i profili"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Dodaj korisnika ili profil"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Dodaj korisnika"</string>
@@ -4465,11 +4465,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Sistemski upravljački program za grafiku"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Podešavanje nije podržano na ovom telefonu"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Podešavanje nije podržano na ovom tabletu"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Podešavanje nije podržano na ovom uređaju"</string>
@@ -4630,6 +4628,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Došlo je do nekog problema. Aplikacija je otkazala zahtev za izbor uređaja."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Povezivanje je uspelo"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Prikaži sve"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Traži se uređaj…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Povezuje se sa uređajem…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one">Povezan je <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> uređaj</item>
       <item quantity="few">Povezana su <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> uređaja</item>

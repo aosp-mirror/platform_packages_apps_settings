@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Adresse d\'urgence"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Cette adresse sera définie comme votre position géographique lorsque vous effectuerez des appels d\'urgence par Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"En savoir plus"</annotation>" sur la fonctionnalité de DNS privé"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Activé"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Ce paramètre est géré par votre fournisseur de services"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Activer les appels Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Activer les appels Wi-Fi"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Touchez trois fois pour zoomer vers l\'avant"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Touchez un bouton pour zoomer"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Pour zoomer,"</b>" touchez rapidement l\'écran trois fois.\n"<ul><li>"Glissez deux doigts ou plus sur l\'écran pour le faire défiler"</li>\n<li>"Pincez deux doigts ou plus pour ajuster le zoom"</li></ul>\n\n<b>"Pour zoomer temporairement,"</b>" touchez rapidement l\'écran trois fois et, au troisième toucher, laissez le doigt sur l\'écran\n"<ul><li>"Glissez votre doigt vous vous déplacer sur l\'écran."</li>\n<li>"Relevez le doigt pour zoomer vers l\'arrière"</li></ul>\n\n"On ne peut pas zoomer sur le clavier ou la barre de navigation."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Lorsque le zoom est activé, vous pouvez agrandir ce qui est affiché sur l\'écran.\n\n"<b>"Pour effectuer un zoom,"</b>" activez cette fonction, puis touchez une zone de l\'écran.\n"<ul><li>"• Glissez deux doigts ou plus pour faire défiler l\'écran"</li>\n<li>"• Pincez deux doigts ou plus pour ajuster le facteur de zoom"</li></ul>\n\n<b>"Pour effectuer un zoom temporaire,"</b>" activez cette fonction, puis laissez le doigt sur une zone de l\'écran.\n"<ul><li>"• Pour vous déplacer dans l\'écran, glissez le doigt"</li>\n<li>"• Pour rétablir le zoom par défaut, retirez le doigt de l\'écran"</li></ul>\n\n"On ne peut pas effectuer de zoom avant sur le clavier ni sur la barre de navigation."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"Pour effectuer un zoom,"</b>", activez cette fonction, puis touchez une zone de l\'écran.\n"<ul><li>"Glissez deux doigts ou plus sur l\'écran pour le faire défiler"</li>\n<li>"Pincez deux doigts ou plus pour ajuster le zoom"</li></ul>\n\n<b>"Pour zoomer temporairement l\'écran"</b>", touchez le bouton d\'accessibilité, puis maintenez le doigt sur ailleurs sur l\'écran.\n"<ul><li>"Glissez votre doigt sur l\'écran à l\'endroit désiré"</li>\n<li>"Relevez le doigt pour zoomer vers l\'arrière"</li></ul>\n\n"On ne peut pas zoomer sur le clavier ou la barre de navigation."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Utiliser le bouton d\'accessibilité pour ouvrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Utiliser un geste pour activer le service"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Utiliser le nouveau geste d\'accessibilité"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utiliser le service"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Utiliser la correction des couleurs"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Utiliser les légendes"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Ce ne sont pas toutes les applications qui prennent en charge ce paramètre."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continuer"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Prothèses auditives"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Aucune prothèse auditive connectée"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Pilote graphique du système"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Le paramètre n\'est pas compatible avec ce téléphone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Le paramètre n\'est pas compatible avec cette tablette"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Le paramètre n\'est pas compatible avec cet appareil"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Une erreur s\'est produite. L\'application a annulé la demande de sélection d\'un appareil."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Connexion réussie"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Tout afficher"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Recherche d\'appareil en cours…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Connexion à l\'appareil en cours…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> appareil connecté</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> appareils connectés</item>
