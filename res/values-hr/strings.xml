@@ -1245,7 +1245,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Uključeno/zaslon se neće isključiti ako ga gledate"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Isključeno"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Potreban je pristup kameri"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Dodirnite da biste upravljali dopuštenjima za Usluge prilagodbe uređaja"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Dodirnite da biste upravljali dopuštenjima za usluge personaliziranja uređaja"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Sprječava isključivanje zaslona ako ga gledate"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Pozornost zaslona koristi prednju kameru da bi saznala gleda li netko zaslon. Funkcionira na uređaju i slike se nikad ne pohranjuju i ne šalju Googleu."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Zaslon ostaje uključen sve dok ga gledate"</string>
@@ -2120,6 +2120,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Da biste uključili ili isključili uslugu pristupačnosti, prijeđite s tri prsta prema gore od dna zaslona.\n\nDa biste se prebacili na neku drugu uslugu, prijeđite s tri prsta prema gore i zadržite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Shvaćam"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Gumb Pristupačnost postavljen je na <xliff:g id="SERVICE">%1$s</xliff:g>. Da biste upotrijebili povećanje, dodirnite i zadržite gumb Pristupačnost i zatim odaberite povećanje."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Pokret pristupačnosti postavljen je na značajku <xliff:g id="SERVICE">%1$s</xliff:g>. Da biste koristili povećanje, s dva prsta prijeđite od dna zaslona prema gore i zadržite. Zatim odaberite povećanje."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Prečac tipki za glasnoću"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Usluga prečaca"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Dopusti sa zaključanog zaslona"</string>
@@ -2156,6 +2157,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Upotreba usluge"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Upotreba korekcije boje"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Upotreba titlova"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Neke aplikacije ne podržavaju tu postavku."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Nastavi"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Slušni aparati"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nije povezan nijedan slušni aparat"</string>
@@ -4259,13 +4261,13 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Priručnik"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Oslobodi prostor odmah"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Pokreti"</string>
-    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Brzi pokreti za upravljanje telefonom"</string>
-    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Brzi pokreti za upravljanje tabletom"</string>
-    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Brzi pokreti za upravljanje uređajem"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Brze kretnje za upravljanje telefonom"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Brze kretnje za upravljanje tabletom"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Brze kretnje za upravljanje uređajem"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Otvaranje fotoaparata"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Da biste brzo otvorili fotoaparat, dvaput pritisnite tipku za uključivanje/isključivanje. Funkcionira na svim zaslonima."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Brzo otvaranje fotoaparata"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Prebacivanje fotoaparata"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Promjena fotoaparata"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Brže snimanje selfieja"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navigacija sustavom"</string>
@@ -4467,11 +4469,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Upravljački program za grafiku sustava"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Postavka nije podržana na telefonu"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Postavka nije podržana na tabletu"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Postavka nije podržana na uređaju"</string>

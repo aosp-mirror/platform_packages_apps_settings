@@ -1226,7 +1226,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"ON / 見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"OFF"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"カメラへのアクセス権限が必要です"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"タップすると、デバイス カスタマイズ サービスのアクセス権限を管理できます"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"タップすると、デバイス パーソナライズ サービスのアクセス権限を管理できます"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"スクリーン アテンションは前面カメラを使用して、ユーザーが画面を見ているかどうかを検出します。この検出はデバイスのみで行われ、画像が保存されたり、Google に送信されたりすることはありません。"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"見ている間は画面を ON のままにします"</string>
@@ -2098,6 +2098,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"ユーザー補助サービスを ON または OFF にするには、3 本の指で画面の下から上にスワイプします。\n\nサービスを切り替えるには、3 本の指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"[ユーザー補助機能] ボタンが [<xliff:g id="SERVICE">%1$s</xliff:g>] に設定されています。拡大を使用するには、[ユーザー補助機能] ボタンを押し続けて [拡大] を選択してください。"</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"ユーザー補助操作は「<xliff:g id="SERVICE">%1$s</xliff:g>」に設定されています。拡大を使用するには、2 本の指で画面の下から上にスワイプして長押しし、拡大を選択してください。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"音量キーのショートカット"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"ショートカット サービス"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"ロック画面から許可"</string>
@@ -2134,6 +2135,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"サービスの使用"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"色補正の使用"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"字幕を使用する"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"すべてのアプリがこの設定をサポートしているわけではありません。"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"続行"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"補聴器"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"接続されている補聴器なし"</string>
@@ -3146,7 +3148,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"スライドでロック解除、パスワード、パターン、PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ワーク チャレンジ, 仕事用, プロファイル"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"仕事用プロファイル, 管理対象プロファイル, 統合する, 統合, 仕事, プロファイル"</string>
-    <string name="keywords_gesture" msgid="3526905012224714078">"操作"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"ジェスチャー"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"支払い, タップ, ペイメント"</string>
     <string name="keywords_backup" msgid="470070289135403022">"バックアップ, バック アップ"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"操作"</string>
@@ -4185,7 +4187,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自動"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手動"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"今すぐ空き容量を増やす"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"操作"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"ジェスチャー"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"簡単な操作でスマートフォンを管理できます"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"簡単な操作でタブレットを管理できます"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"簡単な操作でデバイスを管理できます"</string>
@@ -4387,11 +4389,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"システムのグラフィックス ドライバ"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"このスマートフォンでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"このタブレットでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"このデバイスでは設定がサポートされていません"</string>

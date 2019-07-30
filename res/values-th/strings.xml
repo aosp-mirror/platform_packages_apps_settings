@@ -1226,7 +1226,7 @@
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"เปิด/หน้าจอจะไม่ปิดหากคุณกำลังดูอยู่"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"ปิด"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"ต้องใช้สิทธิ์เข้าถึงกล้อง"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"แตะเพื่อจัดการสิทธิ์สำหรับบริการปรับเปลี่ยนอุปกรณ์ในแบบของคุณ"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"แตะเพื่อจัดการสิทธิ์สำหรับบริการปรับอุปกรณ์ตามการใช้งานของผู้ใช้"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"ป้องกันไม่ให้หน้าจอปิดหากคุณกำลังดูอยู่"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"การจดจ่อที่หน้าจอใช้กล้องหน้าเพื่อดูว่ามีใครกำลังดูหน้าจออยู่หรือไม่ ฟีเจอร์นี้จะทำงานในอุปกรณ์และจะไม่มีการเก็บหรือส่งรูปภาพไปให้ Google"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"เปิดหน้าจอค้างไว้เมื่อดูหน้าจอ"</string>
@@ -2098,6 +2098,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"หากต้องการเปิดหรือปิดบริการช่วยเหลือพิเศษ ให้ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างบริการต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นค้างไว้"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"รับทราบ"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"ปุ่ม \"การเข้าถึง\" ตั้งค่าเป็น <xliff:g id="SERVICE">%1$s</xliff:g> หากต้องการใช้การขยาย ให้แตะปุ่ม \"การเข้าถึง\" ค้างไว้ แล้วเลือกการขยาย"</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"ตั้งค่าท่าทางสัมผัสการช่วยเหลือพิเศษเป็น<xliff:g id="SERVICE">%1$s</xliff:g> หากต้องการใช้การขยาย ให้ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอแล้วหยุดค้างไว้ จากนั้นเลือกการขยาย"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"ทางลัดปุ่มปรับระดับเสียง"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"บริการทางลัด"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"อนุญาตจากหน้าจอล็อก"</string>
@@ -2134,6 +2135,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"ใช้บริการ"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"ใช้การแก้สี"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"ใช้คำบรรยาย"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"แอปบางแอปไม่รองรับการตั้งค่านี้"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"ต่อไป"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"เครื่องช่วยการได้ยิน"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"ไม่ได้เชื่อมต่อเครื่องช่วยการได้ยิน"</string>
@@ -4387,11 +4389,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"ไดรเวอร์กราฟิกของระบบ"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"ไม่รองรับการตั้งค่าในโทรศัพท์นี้"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"ไม่รองรับการตั้งค่าในแท็บเล็ตนี้"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"ไม่รองรับการตั้งค่าในอุปกรณ์นี้"</string>
