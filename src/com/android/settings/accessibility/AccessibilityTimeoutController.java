@@ -27,9 +27,9 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import com.google.common.primitives.Ints;
 
@@ -87,7 +87,7 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
         if (mAccessibilityTimeoutKeyToValueMap.size() == 0) {
 
             String[] timeoutKeys = mResources.getStringArray(
-                        R.array.accessibility_timeout_control_selector_keys);
+                    R.array.accessibility_timeout_control_selector_keys);
 
             int[] timeoutValues = mResources.getIntArray(
                     R.array.accessibility_timeout_selector_values);
@@ -141,7 +141,7 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
     private int getAccessibilityTimeoutValue() {
         // get accessibility control timeout value
         int timeoutValue = getSecureAccessibilityTimeoutValue(mContentResolver,
-                    CONTROL_TIMEOUT_SETTINGS_SECURE);
+                CONTROL_TIMEOUT_SETTINGS_SECURE);
         return timeoutValue;
     }
 
