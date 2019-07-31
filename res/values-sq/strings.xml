@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Adresa e urgjencës"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Përdoret si vendndodhja jote kur kryen një telefonatë urgjence me Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Mëso më shumë"</annotation>" rreth funksioneve të \"DNS-së private\""</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Aktive"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Cilësimi menaxhohet nga operatori celular"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Aktivizo \"Telefonatën me Wi-Fi\""</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Aktivizo \"Telefonatën me Wi-Fi\""</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Trokit 3 herë për ta zmadhuar"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Trokit te një buton për të zmadhuar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Për të zmadhuar"</b>", trokit me shpejtësi tek ekrani 3 herë.\n"<ul><li>"Zvarrit 2 ose më shumë gishta për të lëvizur"</li>\n<li>"Afro 2 ose më shumë gishta për të rregulluar zmadhimin"</li></ul>\n\n<b>"Për të zmadhuar përkohësisht"</b>", trokit me shpejtësi 3 herë tek ekrani dhe mbaj të shtypur gishtin në trokitjen e tretë.\n"<ul><li>"Zvarrite për të zhvendosur ekranin"</li>\n<li>"Ngrije gishtin për ta zvogëluar"</li></ul>\n\n"Nuk mund të zmadhosh te tastiera dhe te shiriti i navigimit."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Kur aktivizohet zmadhimi, mund të zmadhosh mbi ekranin tënd.\n\n"<b>"Për të zmadhuar"</b>", nis zmadhimin, më pas trokit diku në ekran.\n"<ul><li>"• Zvarrit 2 ose më shumë gishta për të lëvizur"</li>\n<li>"• Bashko 2 ose më shumë gishta për të rregulluar zmadhimin"</li></ul>\n\n<b>"Për të zmadhuar përkohësisht"</b>", nis zmadhimin, më pas prek dhe mbaj prekur diku në ekran.\n"<ul><li>"• Zvarrit për të lëvizur rrotull në ekran"</li>\n<li>"• Ngrije gishtin për të vogëluar"</li></ul>\n\n"Nuk mund të zmadhosh mbi tastierë ose shiritin e navigimit."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Kur aktivizohet zmadhimi, mund të zmadhosh mbi ekranin tënd.\n\n"<b>"Për të zmadhuar"</b>", nis zmadhimin, më pas trokit diku në ekran.\n"<ul><li>"Zvarrit 2 ose më shumë gishta për të lëvizur"</li>\n<li>"Afro 2 ose më shumë gishta për të rregulluar zmadhimin"</li></ul>\n\n<b>"Për të zmadhuar përkohësisht"</b>", nis zmadhimin dhe më pas prek dhe mbaj të shtypur diku në ekran.\n"<ul><li>"Zvarrit për të lëvizur nëpër ekran"</li>\n<li>"Ngri gishtin për të zvogëluar"</li></ul>\n\n"Nuk mund të zmadhosh te tastiera ose shiriti i navigimit."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Përdor butonin e qasshmërisë për të hapur"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Përdor gjestin për të hapur"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Përdor gjestin e ri të qasshmërisë"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Përdor shërbimin"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Përdor korrigjimin e ngjyrave"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Përdor titrat"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Jo të gjitha aplikacionet e mbështesin këtë cilësim."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Vazhdo"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Aparatet e dëgjimit"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nuk ka asnjë aparat dëgjimi të lidhur"</string>
@@ -2975,7 +2975,7 @@
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Në terminalin \"Prek dhe paguaj\", paguaj me:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Pagesa në terminal"</string>
     <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Konfiguro një aplikacion pagese. Më pas thjesht mbaj shtypur pjesën e pasme të telefonit me një terminal me simbolin e pagesave pa kontakt."</string>
-    <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"E kuptova!"</string>
+    <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"E kuptova"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Më shumë..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Të caktohet si preferencë?"</string>
     <string name="nfc_payment_set_default" msgid="8532426406310833489">"Të përdoret gjithmonë <xliff:g id="APP">%1$s</xliff:g> për \"Prek dhe paguaj\"?"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Drejtuesi i grafikës së sistemit"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Cilësimi nuk mbështetet në këtë telefon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Cilësimi nuk mbështetet në këtë tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Cilësimi nuk mbështetet në këtë pajisje"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Ndodhi diçka. Aplikacioni ka anuluar kërkesën për të zgjedhur një pajisje."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Lidhja ishte e suksesshme"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Shfaq të gjitha"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Po kërkohet për pajisjen…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Po lidhet me pajisjen…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> pajisje të lidhura</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> pajisje e lidhur</item>

@@ -1165,6 +1165,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Nouzová adresa"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Použije se jako vaše poloha, pokud uskutečníte tísňové volání přes Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Další informace"</annotation>" o funkcích soukromého režimu DNS"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Zapnuto"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Nastavení spravováno operátorem"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Aktivujte volání přes Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Zapněte volání přes Wi-Fi"</string>
@@ -2129,7 +2130,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Trojitým klepnutím aktivujete přiblížení"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Přiblížení zobrazení klepnutím na tlačítko"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Přiblížení"</b>" provedete tak, že třikrát klepnete na obrazovku.\n"<ul><li>"Přetažením dvěma prsty zobrazení posunete."</li>\n<li>"Úroveň přiblížení upravíte stažením nebo roztažením dvou nebo více prstů."</li></ul>\n\n"Chcete-li zobrazení "<b>"přiblížit dočasně"</b>", rychle na obrazovku klepněte třikrát za sebou a při posledním klepnutí prst přidržte.\n"<ul><li>"Přetažením se můžete pohybovat po obrazovce."</li>\n<li>"Zvednutím prstu zobrazení vrátíte do původního stavu."</li></ul>\n\n"Na klávesnici a navigačním panelu přiblížení není k dispozici."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Když je zapnuté zvětšení, můžete přibližovat obsah na obrazovce.\n\n"<b>"Chcete-li obsah přiblížit"</b>", spusťte zvětšení a poté klepněte kamkoliv na obrazovku.\n"<ul><li>"• Přetažením dvěma nebo více prsty můžete obsah posouvat."</li>\n<li>"• Stažením nebo roztažením dvou či více prstů upravíte přiblížení."</li></ul>\n\n<b>"Chcete-li obsah přiblížit dočasně"</b>", spusťte zvětšení a poté se dotkněte libovolného místa na obrazovce a podržte ho.\n"<ul><li>"• Přetažením se můžete pohybovat po obrazovce."</li>\n<li>"• Zvednutím prstu obsah oddálíte."</li></ul>\n\n"Na klávesnici a navigačním panelu přiblížení není k dispozici."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Když je zapnuté zvětšení, můžete přibližovat obsah na obrazovce.\n\n"<b>"Chcete-li obsah přiblížit"</b>", spusťte zvětšení a poté klepněte kamkoliv na obrazovku.\n"<ul><li>"Přetažením dvěma nebo více prsty můžete obsah posouvat."</li>\n<li>"Stažením nebo roztažením dvou či více prstů upravíte přiblížení."</li></ul>\n\n<b>"Chcete-li obsah přiblížit dočasně"</b>", spusťte zvětšení a poté se dotkněte libovolného místa na obrazovce a podržte ho.\n"<ul><li>"Přetažením se můžete pohybovat po obrazovce."</li>\n<li>"Zvednutím prstu zobrazení vrátíte do původního stavu."</li></ul>\n\n"Na klávesnici a navigačním panelu přiblížení není k dispozici."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Otevření pomocí tlačítka přístupnosti"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Otevření gestem"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Použití nového gesta pro usnadnění přístupu"</string>
@@ -2177,8 +2178,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Používat službu"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Používat korekci barev"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Používat titulky"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Toto nastavení podporují jen některé aplikace."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Pokračovat"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Naslouchátka"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nejsou připojena žádná naslouchátka"</string>
@@ -4545,11 +4545,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Systémový ovladač grafiky"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Nastavení v tomto telefonu není podporováno"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Nastavení v tomto tabletu není podporováno"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Nastavení v tomto zařízení není podporováno"</string>
@@ -4711,6 +4709,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Něco se stalo. Aplikace zrušila požadavek na výběr zařízení."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Připojení úspěšně navázáno"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Zobrazit vše"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Vyhledávání zařízení…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Připojování k zařízení…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="few"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> připojená zařízení</item>
       <item quantity="many"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> připojeného zařízení</item>

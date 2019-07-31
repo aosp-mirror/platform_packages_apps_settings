@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Адрес за спешни случаи"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Използва се като вашето местоположение, когато извършвате спешно обаждане през Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Научете повече"</annotation>" за функциите на частния DNS"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Включено"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Настройката се управлява от оператора"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Активиране на функцията за обаждания през Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Включване на функцията за обаждания през Wi-Fi"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Трикратно докосване за промяна на мащаба"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Променяйте мащаба с докосване на бутон"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"За да промените мащаба"</b>", докоснете бързо екрана 3 пъти.\n"<ul><li>"Плъзнете 2 или повече пръсти, за да превъртите."</li>\n<li>"Съберете или разтворете 2 или повече пръсти, за да коригирате мащаба."</li></ul>\n\n<b>"За да промените временно мащаба"</b>", докоснете бързо екрана 3 пъти и задръжте пръста си при третото докосване.\n"<ul><li>"Плъзнете пръста си, за да се придвижите на екрана."</li>\n<li>"Вдигнете пръста си, за да намалите мащаба."</li></ul>\n\n"Не можете да увеличавате мащаба на клавиатурата или лентата за навигация."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Когато функцията за увеличение е включена, можете да увеличавате мащаба на екрана.\n\n"<b>"За да промените мащаба"</b>", стартирайте функцията за увеличение, след което докоснете произволно място на екрана.\n"<ul><li>"• Плъзнете 2 или повече пръсти, за да превъртите."</li>\n<li>"• Съберете или разтворете 2 или повече пръсти, за да коригирате мащаба."</li></ul>\n\n<b>"За да промените временно мащаба"</b>", стартирайте функцията за увеличение, след което докоснете и задръжте произволно място на екрана.\n"<ul><li>"• Плъзнете пръста си, за да се придвижите на екрана."</li>\n<li>"• Вдигнете пръста си, за да намалите мащаба."</li></ul>\n\n"Не можете да увеличавате мащаба на клавиатурата или лентата за навигация."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Когато функцията за увеличение е включена, можете да увеличавате мащаба на екрана.\n\n"<b>"За да промените мащаба"</b>", стартирайте функцията за увеличение, след което докоснете произволно място на екрана.\n"<ul><li>"Плъзнете 2 или повече пръсти, за да превъртите."</li>\n<li>"Съберете или разтворете 2 или повече пръсти, за да коригирате мащаба."</li></ul>\n\n<b>"За да промените временно мащаба"</b>", стартирайте функцията за увеличение, след което докоснете и задръжте произволно място на екрана.\n"<ul><li>"Плъзнете пръста си, за да се придвижите на екрана."</li>\n<li>"Вдигнете пръста си, за да намалите мащаба."</li></ul>\n\n"Не можете да увеличавате мащаба на клавиатурата или лентата за навигация."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Отваряне с бутона за достъпност"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Отваряне с жест"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Използване на новите жестове за достъпност"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Използване на услугата"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Използване на корекция на цветовете"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Използване на надписи"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Не всички приложения поддържат тази настройка."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Напред"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Слухови апарати"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Няма свързани слухови апарати"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Системен графичен драйвер"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Настройката не се поддържа на този телефон"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Настройката не се поддържа на този таблет"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Настройката не се поддържа на това устройство"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Нещо стана. Приложението анулира заявката за избиране на устройство."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Връзката е успешна"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Показване на всички"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Търси се устройство…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Установява се връзка с устройството…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> свързани устройства</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> свързано устройство</item>

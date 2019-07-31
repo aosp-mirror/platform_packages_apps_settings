@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Адреса за итни случаи"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Се користи како ваша локација кога остварувате итен повик преку Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Дознајте повеќе"</annotation>" за функциите на приватен DNS"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Вклучено"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Операторот управува со поставката"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Активирајте ги „Повиците преку Wi-Fi“"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Вклучете ги „Повиците преку Wi-Fi“"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Допрете три пати за да зумирате"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Допрете копче за зумирање"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"За да зумирате"</b>", брзо допрете го екранот трипати.\n"<ul><li>"Повлечете со два или повеќе прсти за да се движите"</li>\n<li>"Штипнете со два или повеќе прсти за да го приспособите зумот"</li></ul>\n\n<b>"За привремено зумирање"</b>", брзо допрете го екранот трипати и задржете го прстот на третиот допир.\n"<ul><li>"Повлечете за да се движите околу екранот"</li>\n<li>"Подигнете го екранот за да одзумирате"</li></ul>\n\n"Не може да зумирате на тастатурата или на лентата за навигација."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Кога е вклучено зумирањето, може да зумирате на екранот.\n\n"<b>"За да зумирате"</b>", стартувајте го зголемувањето, па допрете каде било на екранот.\n"<ul><li>"• Повлечете 2 или повеќе прста за да лизгате"</li>\n<li>"• Штипнете со 2 или повеќе прста за да го приспособите зумирањето"</li></ul>\n\n<b>"За да зумирате привремено"</b>", стартувајте го зголемувањето, а потоа допрете и задржете каде било на екранот.\n"<ul><li>"• Повлечете за да се движите низ екранот"</li>\n<li>"• Подигнете го прстот за да одзумирате"</li></ul>\n\n"Не може да зумирате на тастатурата или навигациската лента."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Кога е вклучено зумирањето, може да зумирате на екранот.\n\n"<b>"За да зумирате"</b>", стартувајте го зголемувањето, па допрете каде било на екранот.\n"<ul><li>"Повлечете со два или повеќе прсти за да лизгате"</li>\n<li>"Штипнете со два или повеќе прсти за да го приспособите зумот"</li></ul>\n\n<b>"За да зумирате привремено"</b>", стартувајте го зголемувањето, а потоа допрете и задржете каде било на екранот.\n"<ul><li>"Повлечете за да се движите околу екранот"</li>\n<li>"Подигнете го прстот за да одзумирате"</li></ul>\n\n"Не може да зумирате на тастатурата или на лентата за навигација."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Користете го копчето за пристапност за да отворите"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Користете движење за да отворите"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Користете го новото движење за пристапност"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Користи ја услугата"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Користи корекција на боите"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Користи титли"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Сите апликации не ја поддржуваат оваа поставка."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Продолжи"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Слушни помагала"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Нема поврзани слушни помагала"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Системски драјвер за графика"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Поставката не е поддржана на телефонов"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Поставката не е поддржана на таблетов"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Поставката не е поддржана на уредов"</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Нешто се случи. Апликацијата го откажа барањето за избор на уред."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Поврзувањето е успешно"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Прикажи ги сите"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Се бара уредот…"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Се поврзува со уредот…"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> поврзан уред</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> поврзани уреди</item>

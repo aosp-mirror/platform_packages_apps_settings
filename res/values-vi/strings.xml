@@ -1127,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Địa chỉ khẩn cấp"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Dùng làm vị trí của bạn khi bạn thực hiện cuộc gọi khẩn cấp qua Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Tìm hiểu thêm"</annotation>" về tính năng DNS riêng"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"Đang bật"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Cài đặt do nhà mạng quản lý"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Kích hoạt tính năng Gọi qua Wi‑Fi"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Bật tính năng Gọi qua Wi‑Fi"</string>
@@ -2085,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Nhấn 3 lần để thu phóng"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Nhấn vào nút để thu phóng"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Để thu phóng"</b>", nhấn nhanh màn hình 3 lần.\n"<ul><li>"Kéo 2 hoặc nhiều ngón tay để cuộn"</li>\n<li>"Chụm 2 hoặc nhiều ngón tay để điều chỉnh mức thu phóng"</li></ul>\n\n<b>"Để thu phóng tạm thời"</b>", nhấn nhanh màn hình 3 lần và giữ ngón tay của bạn vào lần nhấn thứ ba.\n"<ul><li>"Kéo để di chuyển quanh màn hình"</li>\n<li>"Nhấc ngón tay để thu nhỏ"</li></ul>\n\n"Bạn không thể phóng to trên thanh điều hướng."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Khi tính năng phóng to đang bật, bạn có thể phóng to trên màn hình.\n\n"<b>"Để thu phóng"</b>", hãy bắt đầu tính năng phóng to, sau đó nhấn vào vị trí bất kỳ trên màn hình.\n"<ul><li>"• Kéo 2 hoặc nhiều ngón tay để cuộn"</li>\n<li>"• Chụm 2 hoặc nhiều ngón tay để điều chỉnh mức thu phóng"</li></ul>\n\n<b>"Để thu phóng tạm thời"</b>", hãy bắt đầu tính năng phóng to, sau đó chạm và giữ vị trí bất kỳ trên màn hình.\n"<ul><li>"• Kéo để di chuyển xung quanh màn hình"</li>\n<li>"• Nhấc ngón tay lên để thu nhỏ"</li></ul>\n\n"Bạn không thể phóng to trên bàn phím hoặc thanh điều hướng."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"Khi tính năng phóng to đang bật, bạn có thể phóng to trên màn hình.\n\n"<b>"Để thu phóng"</b>", hãy mở tính năng phóng to rồi nhấn vào vị trí bất kỳ trên màn hình.\n"<ul><li>"Kéo 2 hoặc nhiều ngón tay để cuộn"</li>\n<li>"Chụm 2 hoặc nhiều ngón tay để điều chỉnh mức thu phóng"</li></ul>\n\n<b>"Để thu phóng tạm thời"</b>", hãy mở tính năng phóng to rồi chạm và giữ vị trí bất kỳ trên màn hình.\n"<ul><li>"Kéo để di chuyển quanh màn hình"</li>\n<li>"Nhấc ngón tay để thu nhỏ"</li></ul>\n\n"Bạn không thể phóng to trên bàn phím hoặc thanh điều hướng."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Dùng nút hỗ trợ tiếp cận để mở"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Dùng cử chỉ để mở"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Dùng cử chỉ hỗ trợ tiếp cận mới"</string>
@@ -2133,8 +2134,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Sử dụng dịch vụ"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Sử dụng tính năng sửa màu"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Sử dụng phụ đề"</string>
-    <!-- no translation found for accessibility_caption_preference_summary (7898443636143430927) -->
-    <skip />
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Không phải ứng dụng nào cũng hỗ trợ tùy chọn cài đặt này."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Tiếp tục"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Thiết bị trợ thính"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Chưa kết nối thiết bị trợ thính nào"</string>
@@ -4385,11 +4385,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Trình điều khiển đồ họa hệ thống"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Điện thoại này không hỗ trợ cài đặt"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Máy tính bảng này không hỗ trợ cài đặt"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Thiết bị này không hỗ trợ cài đặt."</string>
@@ -4549,6 +4547,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Đã xảy ra lỗi. Ứng dụng đã hủy yêu cầu chọn thiết bị."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Kết nối thành công"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Hiển thị tất cả"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Đang tìm kiếm thiết bị..."</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Đang kết nối với thiết bị..."</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> thiết bị đã kết nối</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> thiết bị đã kết nối</item>
