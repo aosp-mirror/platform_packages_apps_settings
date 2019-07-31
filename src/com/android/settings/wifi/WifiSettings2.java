@@ -24,13 +24,21 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkScoreManager;
 import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.PowerManager;
+import android.os.Process;
+import android.os.SimpleClock;
+import android.os.SystemClock;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
@@ -47,8 +55,8 @@ import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.datausage.DataUsagePreference;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -57,24 +65,29 @@ import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
+import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiTracker2;
 
+import java.time.Clock;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Two types of UI are provided here.
- *
- * The first is for "usual Settings", appearing as any other Setup fragment.
- *
- * The second is for Setup Wizard, with a simplified interface that hides the action bar
- * and menus.
+ * UI for Wi-Fi settings screen
  */
 @SearchIndexable
 public class WifiSettings2 extends RestrictedSettingsFragment
-        implements Indexable {
+        implements Indexable, WifiTracker2.WifiTrackerCallback {
 
     private static final String TAG = "WifiSettings2";
+
+    // Max age of tracked WifiEntries
+    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
+    // Interval between initiating WifiTracker2 scans
+    private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
     @VisibleForTesting
     static final int ADD_NETWORK_REQUEST = 2;
@@ -90,6 +103,10 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     static final String PREF_KEY_DATA_USAGE = "wifi_data_usage";
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
+
+    private static boolean isVerboseLoggingEnabled() {
+        return WifiTracker2.sVerboseLogging || Log.isLoggable(TAG, Log.VERBOSE);
+    }
 
     private final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
         updateWifiEntryPreferences();
@@ -111,6 +128,10 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     private boolean mIsRestricted;
 
     private WifiEnabler mWifiEnabler;
+
+    // Worker thread used for WifiTracker2 work
+    private HandlerThread mWorkerThread;
+    private WifiTracker2 mWifiTracker2;
 
     private WifiDialog mDialog;
 
@@ -136,8 +157,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
      * network once connected.
      */
     private boolean mClickedConnect;
-
-    /* End of "used in Wifi Setup context" */
 
     public WifiSettings2() {
         super(DISALLOW_CONFIG_WIFI);
@@ -190,7 +209,30 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        final Context context = getContext();
+        mWorkerThread = new HandlerThread(TAG +
+                "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
+                Process.THREAD_PRIORITY_BACKGROUND);
+        mWorkerThread.start();
+        final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
+            @Override
+            public long millis() {
+                return SystemClock.elapsedRealtime();
+            }
+        };
+        mWifiTracker2 = new WifiTracker2(getSettingsLifecycle(), context,
+                context.getSystemService(WifiManager.class),
+                context.getSystemService(ConnectivityManager.class),
+                context.getSystemService(NetworkScoreManager.class),
+                new Handler(Looper.getMainLooper()),
+                mWorkerThread.getThreadHandler(),
+                elapsedRealtimeClock,
+                MAX_SCAN_AGE_MILLIS,
+                SCAN_INTERVAL_MILLIS,
+                this);
+
         final Activity activity = getActivity();
+
         if (activity != null) {
             mWifiManager = getActivity().getSystemService(WifiManager.class);
         }
@@ -234,26 +276,23 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
-
         if (mWifiEnabler != null) {
             mWifiEnabler.teardownSwitchController();
         }
+        mWorkerThread.quit();
+        
+        super.onDestroyView();
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        // On/off switch is hidden for Setup Wizard (returns null)
         mWifiEnabler = createWifiEnabler();
 
         if (mIsRestricted) {
             restrictUi();
-            return;
         }
-
-        onWifiStateChanged(mWifiManager.getWifiState());
     }
 
     private void restrictUi() {
@@ -264,7 +303,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     }
 
     /**
-     * @return new WifiEnabler or null (as overridden by WifiSettingsForSetupWizard)
+     * @return new WifiEnabler
      */
     private WifiEnabler createWifiEnabler() {
         final SettingsActivity activity = (SettingsActivity) getActivity();
@@ -367,31 +406,18 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         return true;
     }
 
-    /**
-     * Updates WifiEntries from {@link WifiManager#getScanResults()}. Adds a delay to have
-     * progress bar displayed before starting to modify entries.
-     */
-    private void updateWifiEntryPreferencesDelayed(long delayMillis) {
-        // Safeguard from some delayed event handling
-        if (getActivity() != null && !mIsRestricted && mWifiManager.isWifiEnabled()) {
-            final View view = getView();
-            final Handler handler = view.getHandler();
-            if (handler != null && handler.hasCallbacks(mUpdateWifiEntryPreferencesRunnable)) {
-                return;
-            }
-            setProgressBarVisible(true);
-            view.postDelayed(mUpdateWifiEntryPreferencesRunnable, delayMillis);
-        }
-    }
-
     /** Called when the state of Wifi has changed. */
-    // TODO(b/70983952): Drive this using WifiTracker2 wifi state callback.
-    public void onWifiStateChanged(int state) {
+    @Override
+    public void onWifiStateChanged() {
         if (mIsRestricted) {
             return;
         }
+        final int wifiState = mWifiTracker2.getWifiState();
 
-        final int wifiState = mWifiManager.getWifiState();
+        if (isVerboseLoggingEnabled()) {
+            Log.i(TAG, "onWifiStateChanged called with wifi state: " + wifiState);
+        }
+
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
                 updateWifiEntryPreferences();
@@ -418,9 +444,32 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         }
     }
 
+    @Override
+    public void onWifiEntriesChanged() {
+        updateWifiEntryPreferencesDelayed();
+    }
+
+    /**
+     * Updates WifiEntries from {@link WifiManager#getScanResults()}. Adds a delay to have
+     * progress bar displayed before starting to modify entries.
+     */
+    private void updateWifiEntryPreferencesDelayed() {
+        // Safeguard from some delayed event handling
+        if (getActivity() != null && !mIsRestricted &&
+                mWifiTracker2.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
+            final View view = getView();
+            final Handler handler = view.getHandler();
+            if (handler != null && handler.hasCallbacks(mUpdateWifiEntryPreferencesRunnable)) {
+                return;
+            }
+            setProgressBarVisible(true);
+            view.postDelayed(mUpdateWifiEntryPreferencesRunnable, 300);
+        }
+    }
+
     private void updateWifiEntryPreferences() {
         // in case state has changed
-        if (!mWifiManager.isWifiEnabled()) {
+        if (mWifiTracker2.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
             return;
         }
 
@@ -431,12 +480,25 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         int index = 0;
         cacheRemoveAllPrefs(mWifiEntryPreferenceCategory);
-        // TODO(b/70983952) Add WifiEntryPreference update logic here.
-        removeCachedPrefs(mWifiEntryPreferenceCategory);
+        List<WifiEntry> wifiEntries = mWifiTracker2.getWifiEntries();
+        for (WifiEntry wifiEntry : wifiEntries) {
+            hasAvailableWifiEntries = true;
 
-        mAddWifiNetworkPreference.setOrder(index);
-        mWifiEntryPreferenceCategory.addPreference(mAddWifiNetworkPreference);
-        setAdditionalSettingsSummaries();
+            String key = wifiEntry.getKey();
+            LongPressWifiEntryPreference pref =
+                    (LongPressWifiEntryPreference) getCachedPreference(key);
+            if (pref != null) {
+                pref.setOrder(index++);
+                continue;
+            }
+
+            pref = createLongPressWifiEntryPreference(wifiEntry);
+            pref.setKey(wifiEntry.getKey());
+            pref.setOrder(index++);
+            pref.refresh();
+            mWifiEntryPreferenceCategory.addPreference(pref);
+        }
+        removeCachedPrefs(mWifiEntryPreferenceCategory);
 
         if (!hasAvailableWifiEntries) {
             setProgressBarVisible(true);
@@ -450,6 +512,14 @@ public class WifiSettings2 extends RestrictedSettingsFragment
             // Continuing showing progress bar for an additional delay to overlap with animation
             getView().postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
         }
+
+        mAddWifiNetworkPreference.setOrder(index++);
+        mWifiEntryPreferenceCategory.addPreference(mAddWifiNetworkPreference);
+        setAdditionalSettingsSummaries();
+    }
+
+    private LongPressWifiEntryPreference createLongPressWifiEntryPreference(WifiEntry wifiEntry) {
+        return new LongPressWifiEntryPreference(getPrefContext(), wifiEntry, this);
     }
 
     private void launchAddNetworkFragment() {
