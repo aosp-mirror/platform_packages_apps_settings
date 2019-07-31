@@ -20,9 +20,11 @@
     android:key="mobile_network_list_screen"
     android:title="@string/network_settings_title">
 
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="add_more"
         settings:isPreferenceVisible="false"
+        settings:userRestriction="no_config_mobile_networks"
+        settings:useAdminDisabledSummary="true"
         android:title="@string/mobile_network_list_add_more"
         android:icon="@drawable/ic_menu_add_activated_tint"
         android:order="100" >
@@ -30,6 +32,6 @@
             <extra android:name="android.telephony.euicc.extra.FORCE_PROVISION"
                    android:value="true"/>
         </intent>
-    </Preference>
+    </com.android.settingslib.RestrictedPreference>
 
 </PreferenceScreen>
