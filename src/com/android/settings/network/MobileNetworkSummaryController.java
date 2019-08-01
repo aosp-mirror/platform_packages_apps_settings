@@ -130,7 +130,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     }
 
     private void update() {
-        if (mPreference == null) {
+        if (mPreference == null || mPreference.isDisabledByAdmin()) {
             return;
         }
         refreshSummary(mPreference);
