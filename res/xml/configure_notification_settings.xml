@@ -72,6 +72,13 @@
             android:summary="@string/lock_screen_notifs_redact_work_summary"
             settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
 
+        <SwitchPreference
+            android:key="notification_lockscreen_bypass"
+            android:title="@string/lockscreen_bypass_title"
+            android:summary="@string/lockscreen_bypass_summary"
+            settings:searchable="false"
+            settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenBypassPreferenceController" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

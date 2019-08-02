@@ -149,7 +149,6 @@ public class FaceSettings extends DashboardFragment {
         // Don't show keyguard controller for work profile settings.
         if (mUserManager.isManagedProfile(mUserId)) {
             removePreference(FaceSettingsKeyguardPreferenceController.KEY);
-            removePreference(FaceSettingsLockscreenBypassPreferenceController.KEY);
         }
 
         if (savedInstanceState != null) {
@@ -261,7 +260,6 @@ public class FaceSettings extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new FaceSettingsVideoPreferenceController(context));
         controllers.add(new FaceSettingsKeyguardPreferenceController(context));
-        controllers.add(new FaceSettingsLockscreenBypassPreferenceController(context));
         controllers.add(new FaceSettingsAppPreferenceController(context));
         controllers.add(new FaceSettingsAttentionPreferenceController(context));
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
