@@ -42,18 +42,18 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.SettingsTutorialDialogWrapperActivity;
 import com.android.settings.R;
+import com.android.settings.SettingsTutorialDialogWrapperActivity;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.RadioButtonPickerFragment;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
