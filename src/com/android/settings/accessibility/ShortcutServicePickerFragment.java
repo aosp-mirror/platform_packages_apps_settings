@@ -33,8 +33,8 @@ import android.os.IBinder;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.view.accessibility.AccessibilityManager;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -44,9 +44,9 @@ import com.android.internal.accessibility.AccessibilityShortcutController.Toggle
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.widget.RadioButtonPickerFragment;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -183,7 +183,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
         public void onClick(View view) {
             final Fragment fragment = getTargetFragment();
             if ((view.getId() == R.id.permission_enable_allow_button)
-                && (fragment instanceof ShortcutServicePickerFragment)) {
+                    && (fragment instanceof ShortcutServicePickerFragment)) {
                 final Bundle bundle = getArguments();
                 ((ShortcutServicePickerFragment) fragment).onServiceConfirmed(
                         bundle.getString(EXTRA_KEY));

@@ -27,10 +27,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.JobSchedulerImpl;
+import android.app.job.IJobScheduler;
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
 import android.app.job.JobScheduler;
 import android.content.Context;
+import android.os.Binder;
 
 import com.android.settings.R;
 import com.android.settings.testutils.DatabaseTestUtils;
@@ -67,7 +70,7 @@ public class AnomalyCleanupJobServiceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        mJobScheduler = spy(mContext.getSystemService(JobScheduler.class));
+        mJobScheduler = spy(new JobSchedulerImpl(IJobScheduler.Stub.asInterface(new Binder())));
         when(mContext.getSystemService(JobScheduler.class)).thenReturn(mJobScheduler);
     }
 

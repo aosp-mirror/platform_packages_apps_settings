@@ -38,6 +38,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.xmlpull.v1.XmlPullParserException;
 
