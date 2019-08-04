@@ -55,7 +55,7 @@ public abstract class RingtonePreferenceControllerBase extends AbstractPreferenc
 
         final CharSequence summary;
         if (ringtoneUri == null) {
-            summary = null;
+            summary = mContext.getString(com.android.internal.R.string.ringtone_silent);
         } else {
             summary = Ringtone.getTitle(
                     mContext, ringtoneUri, false /* followSettingsUri */, true /* allowRemote */);
