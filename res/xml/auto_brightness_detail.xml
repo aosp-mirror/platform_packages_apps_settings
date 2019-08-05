@@ -39,4 +39,10 @@
         settings:userRestriction="no_config_brightness"
         settings:allowDividerAbove="true" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="auto_brightness_footer"
+        android:title="@string/auto_brightness_description"
+        android:selectable="false"
+        settings:searchable="false" />
+
 </PreferenceScreen>
