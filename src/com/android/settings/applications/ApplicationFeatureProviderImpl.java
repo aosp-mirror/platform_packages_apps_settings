@@ -33,6 +33,7 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 
 import com.android.internal.telephony.SmsApplication;
+import com.android.internal.telephony.euicc.EuiccConnector;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -139,6 +140,12 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
                 mContext, true /* updateIfNeeded */);
         if (defaultSms != null) {
             keepEnabledPackages.add(defaultSms.getPackageName());
+        }
+
+        // Keep Euicc Service enabled.
+        final ComponentInfo euicc = EuiccConnector.findBestComponent(mPm);
+        if (euicc != null) {
+            keepEnabledPackages.add(euicc.packageName);
         }
 
         keepEnabledPackages.addAll(getEnabledPackageWhitelist());
