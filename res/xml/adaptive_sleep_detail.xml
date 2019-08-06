@@ -45,4 +45,11 @@
         settings:useAdminDisabledSummary="true"
         settings:allowDividerAbove="true" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="adaptive_sleep_footer"
+        android:title="@string/adaptive_sleep_privacy"
+        android:icon="@drawable/ic_privacy_shield_24dp"
+        android:selectable="false"
+        settings:searchable="false" />
+
 </PreferenceScreen>
