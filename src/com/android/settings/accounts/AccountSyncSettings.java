@@ -42,12 +42,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.collect.Lists;
 
@@ -458,8 +460,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             syncPref.setChecked(oneTimeSyncMode || syncEnabled);
         }
         if (syncIsFailing) {
-            mFooterPreferenceMixin.createFooterPreference()
-                    .setTitle(R.string.sync_is_failing);
+            createFooterPreference();
         }
     }
 
@@ -551,5 +552,12 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 DateUtils.FORMAT_SHOW_DATE
                         | DateUtils.FORMAT_SHOW_YEAR
                         | DateUtils.FORMAT_SHOW_TIME);
+    }
+
+    @VisibleForTesting
+    void createFooterPreference() {
+        final FooterPreference footerPreference = new FooterPreference(getActivity());
+        footerPreference.setTitle(R.string.sync_is_failing);
+        getPreferenceScreen().addPreference(footerPreference);
     }
 }
