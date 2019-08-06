@@ -19,7 +19,6 @@ package com.android.settings.applications.appinfo;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -183,10 +182,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         super.onCreate(icicle);
         mFinishing = false;
         final Activity activity = getActivity();
-        if (isLockTaskModePinned(activity)) {
-            finishActivity(activity);
-            return;
-        }
         mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPm = activity.getPackageManager();
@@ -197,6 +192,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
             return;
         }
         startListeningToPackageRemove();
+
         setHasOptionsMenu(true);
     }
 
@@ -318,8 +314,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
     @VisibleForTesting
     boolean ensurePackageInfoAvailable(Activity activity) {
         if (mPackageInfo == null) {
+            mFinishing = true;
             Log.w(TAG, "Package info not available. Is this package already uninstalled?");
-            finishActivity(activity);
+            activity.finishAndRemoveTask();
             return false;
         }
         return true;
@@ -334,26 +331,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
     @VisibleForTesting
     boolean ensureDisplayableModule(Activity activity) {
         if (AppUtils.isHiddenSystemModule(activity.getApplicationContext(), mPackageName)) {
+            mFinishing = true;
             Log.w(TAG, "Package is hidden module, exiting: " + mPackageName);
-            finishActivity(activity);
+            activity.finishAndRemoveTask();
             return false;
         }
         return true;
-    }
-
-    /**
-     * Check the state of device lock task mode.
-     *
-     * @return true if the device lock task mode pinned.
-     */
-    @VisibleForTesting
-    boolean isLockTaskModePinned(Activity activity) {
-        ActivityManager activityManager = activity.getSystemService(ActivityManager.class);
-        if (activityManager.getLockTaskModeState() == ActivityManager.LOCK_TASK_MODE_PINNED) {
-            Log.w(TAG, "Device lock task mode pinned.");
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -652,11 +635,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
         mListeningToPackageRemove = false;
         getContext().unregisterReceiver(mPackageRemovedReceiver);
-    }
-
-    private void finishActivity(Activity activity) {
-        mFinishing = true;
-        activity.finishAndRemoveTask();
     }
 
     @VisibleForTesting
