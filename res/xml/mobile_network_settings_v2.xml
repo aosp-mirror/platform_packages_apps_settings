@@ -21,6 +21,7 @@
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="use_sim_switch"
+        android:title="@string/summary_placeholder"
         android:layout="@layout/styled_switch_bar"
         settings:controller="com.android.settings.network.telephony.MobileNetworkSwitchController"/>
 
@@ -96,6 +97,7 @@
             android:title="@string/enhanced_4g_lte_mode_title"
             android:persistent="false"
             android:summary="@string/enhanced_4g_lte_mode_summary"
+            settings:keywords="@string/keywords_enhance_4g_lte"
             settings:controller="com.android.settings.network.telephony.Enhanced4gLtePreferenceController"/>
 
         <ListPreference
