@@ -44,13 +44,7 @@ public class AdaptiveSleepSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        final FooterPreference footerPreference =
-                mFooterPreferenceMixin.createFooterPreference();
         mContext = getContext();
-
-        footerPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
-        footerPreference.setTitle(R.string.adaptive_sleep_privacy);
-
         Preference permissionPreference = findPreference(
                 AdaptiveSleepPermissionPreferenceController.PREF_NAME);
         if (permissionPreference != null) {
