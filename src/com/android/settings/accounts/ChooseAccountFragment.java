@@ -24,10 +24,6 @@ import android.os.UserManager;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.core.AbstractPreferenceController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Activity asking a user to select an account to be set up.
@@ -55,8 +51,6 @@ public class ChooseAccountFragment extends DashboardFragment {
 
         use(ChooseAccountPreferenceController.class).initialize(authorities, accountTypesFilter,
                 userHandle, getActivity());
-        use(EnterpriseDisclosurePreferenceController.class).setFooterPreferenceMixin(
-                mFooterPreferenceMixin);
     }
 
     @Override
@@ -67,16 +61,5 @@ public class ChooseAccountFragment extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildControllers(context);
-    }
-
-    private static List<AbstractPreferenceController> buildControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new EnterpriseDisclosurePreferenceController(context));
-        return controllers;
     }
 }
