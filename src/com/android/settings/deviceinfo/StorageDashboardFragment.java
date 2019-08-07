@@ -66,7 +66,6 @@ public class StorageDashboardFragment extends DashboardFragment
     private static final int STORAGE_JOB_ID = 0;
     private static final int ICON_JOB_ID = 1;
     private static final int VOLUME_SIZE_JOB_ID = 2;
-    private static final int OPTIONS_MENU_MIGRATE_DATA = 100;
 
     private VolumeInfo mVolume;
     private PrivateStorageInfo mStorageInfo;
@@ -139,6 +138,7 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     private void onReceivedSizes() {
+        boolean stopLoading = false;
         if (mStorageInfo != null) {
             long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
             mSummaryController.updateBytes(privateUsedBytes, mStorageInfo.totalBytes);
@@ -152,18 +152,21 @@ public class StorageDashboardFragment extends DashboardFragment
                     userController.setTotalSize(mStorageInfo.totalBytes);
                 }
             }
+            stopLoading = true;
+
         }
 
-        if (mAppsResult == null) {
-            return;
+        if (mAppsResult != null) {
+            mPreferenceController.onLoadFinished(mAppsResult, UserHandle.myUserId());
+            updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
+            stopLoading = true;
         }
-
-        mPreferenceController.onLoadFinished(mAppsResult, UserHandle.myUserId());
-        updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
 
         // setLoading always causes a flicker, so let's avoid doing it.
-        if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
-            setLoading(false, true);
+        if (stopLoading) {
+            if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
+                setLoading(false, true);
+            }
         }
     }
 
