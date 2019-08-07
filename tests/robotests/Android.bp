@@ -67,6 +67,7 @@ android_robolectric_test {
 
     test_options: {
         timeout: 36000,
+        shards: 10,
     },
 
     coverage_libs: [
