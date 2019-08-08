@@ -118,8 +118,6 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         mEnableDataLimit = (SwitchPreference) findPreference(KEY_SET_DATA_LIMIT);
         mEnableDataLimit.setOnPreferenceChangeListener(this);
         mDataLimit = findPreference(KEY_DATA_LIMIT);
-
-        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.data_warning_footnote);
     }
 
     @Override

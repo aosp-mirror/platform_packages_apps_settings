@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="billing_cycle_settings"
     android:title="@string/billing_cycle">
 
@@ -38,5 +39,11 @@
     <Preference
         android:key="data_limit"
         android:title="@string/data_limit" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="billing_cycle_footer"
+        android:title="@string/data_warning_footnote"
+        android:selectable="false"
+        settings:searchable="false"/>
 
 </PreferenceScreen>
