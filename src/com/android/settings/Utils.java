@@ -92,6 +92,7 @@ import android.widget.ListView;
 import android.widget.TabWidget;
 
 import androidx.annotation.StringRes;
+import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
@@ -105,6 +106,7 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.net.InetAddress;
 import java.util.Iterator;
@@ -139,16 +141,16 @@ public final class Utils extends com.android.settingslib.Utils {
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
      *
-     * @param context The context.
+     * @param context               The context.
      * @param parentPreferenceGroup The preference group that contains the
-     *            preference whose intent is being resolved.
-     * @param preferenceKey The key of the preference whose intent is being
-     *            resolved.
-     * @param flags 0 or one or more of
-     *            {@link #UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY}
-     *            .
+     *                              preference whose intent is being resolved.
+     * @param preferenceKey         The key of the preference whose intent is being
+     *                              resolved.
+     * @param flags                 0 or one or more of
+     *                              {@link #UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY}
+     *                              .
      * @return Whether an activity was found. If false, the preference was
-     *         removed.
+     * removed.
      */
     public static boolean updatePreferenceToSpecificActivityOrRemove(Context context,
             PreferenceGroup parentPreferenceGroup, String preferenceKey, int flags) {
@@ -221,6 +223,7 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Returns the WIFI IP Addresses, if any, taking into account IPv4 and IPv6 style addresses.
+     *
      * @param context the application context
      * @return the formatted and newline-separated IP addresses, or null if none.
      */
@@ -229,7 +232,7 @@ public final class Utils extends com.android.settingslib.Utils {
         Network currentNetwork = wifiManager.getCurrentNetwork();
         if (currentNetwork != null) {
             ConnectivityManager cm = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
             LinkProperties prop = cm.getLinkProperties(currentNetwork);
             return formatIpAddresses(prop);
         }
@@ -257,8 +260,9 @@ public final class Utils extends com.android.settingslib.Utils {
         // many cases, because the constructor takes the only string as the language
         // code. So : new Locale("en", "US").toString() => "en_US"
         // And : new Locale("en_US").toString() => "en_us"
-        if (null == localeStr)
+        if (null == localeStr) {
             return Locale.getDefault();
+        }
         String[] brokenDownLocale = localeStr.split("_", 3);
         // split may not return a 0-length array.
         if (1 == brokenDownLocale.length) {
@@ -329,7 +333,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final long localRowProfileId;
         final Cursor localRawProfile = cr.query(
                 Profile.CONTENT_RAW_CONTACTS_URI,
-                new String[] {RawContacts._ID},
+                new String[]{RawContacts._ID},
                 RawContacts.ACCOUNT_TYPE + " IS NULL AND " +
                         RawContacts.ACCOUNT_NAME + " IS NULL",
                 null, null);
@@ -347,8 +351,8 @@ public final class Utils extends com.android.settingslib.Utils {
         // Find the structured name for the raw contact.
         final Cursor structuredName = cr.query(
                 Profile.CONTENT_URI.buildUpon().appendPath(Contacts.Data.CONTENT_DIRECTORY).build(),
-                new String[] {CommonDataKinds.StructuredName.GIVEN_NAME,
-                    CommonDataKinds.StructuredName.FAMILY_NAME},
+                new String[]{CommonDataKinds.StructuredName.GIVEN_NAME,
+                        CommonDataKinds.StructuredName.FAMILY_NAME},
                 Data.RAW_CONTACT_ID + "=" + localRowProfileId,
                 null, null);
         if (structuredName == null) return null;
@@ -370,7 +374,7 @@ public final class Utils extends com.android.settingslib.Utils {
     private static final String getProfileDisplayName(Context context) {
         final ContentResolver cr = context.getContentResolver();
         final Cursor profile = cr.query(Profile.CONTENT_URI,
-                new String[] {Profile.DISPLAY_NAME}, null, null, null);
+                new String[]{Profile.DISPLAY_NAME}, null, null, null);
         if (profile == null) return null;
 
         try {
@@ -451,7 +455,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * <ul>
      * <li> If this activity is launched from other user, return that user id.
      * <li> If this is launched from the Settings app in same user, return the user contained as an
-     *      extra in the arguments or intent extras.
+     * extra in the arguments or intent extras.
      * <li> Otherwise, return UserHandle.myUserId().
      * </ul>
      * <p>
@@ -500,7 +504,8 @@ public final class Utils extends com.android.settingslib.Utils {
      * Lookup both {@link Intent#EXTRA_USER} and {@link Intent#EXTRA_USER_ID} in the bundle
      * and return the {@link UserHandle} object. Return {@code null} if nothing is found.
      */
-    private static @Nullable UserHandle getUserHandleFromBundle(Bundle bundle) {
+    private static @Nullable
+    UserHandle getUserHandleFromBundle(Bundle bundle) {
         if (bundle == null) {
             return null;
         }
@@ -515,14 +520,14 @@ public final class Utils extends com.android.settingslib.Utils {
         return null;
     }
 
-   /**
-    * Returns true if the user provided is in the same profiles group as the current user.
-    */
-   private static boolean isProfileOf(UserManager um, UserHandle otherUser) {
-       if (um == null || otherUser == null) return false;
-       return (UserHandle.myUserId() == otherUser.getIdentifier())
-               || um.getUserProfiles().contains(otherUser);
-   }
+    /**
+     * Returns true if the user provided is in the same profiles group as the current user.
+     */
+    private static boolean isProfileOf(UserManager um, UserHandle otherUser) {
+        if (um == null || otherUser == null) return false;
+        return (UserHandle.myUserId() == otherUser.getIdentifier())
+                || um.getUserProfiles().contains(otherUser);
+    }
 
     /**
      * Return whether or not the user should have a SIM Cards option in Settings.
@@ -541,8 +546,9 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Queries for the UserInfo of a user. Returns null if the user doesn't exist (was removed).
+     *
      * @param userManager Instance of UserManager
-     * @param checkUser The user to check the existence of.
+     * @param checkUser   The user to check the existence of.
      * @return UserInfo of the user or null for non-existent user.
      */
     public static UserInfo getExistingUser(UserManager userManager, UserHandle checkUser) {
@@ -582,7 +588,7 @@ public final class Utils extends com.android.settingslib.Utils {
             for (IntentFilter filter : filters) {
                 if (filter.hasCategory(Intent.CATEGORY_BROWSABLE)
                         && (filter.hasDataScheme(IntentFilter.SCHEME_HTTP) ||
-                                filter.hasDataScheme(IntentFilter.SCHEME_HTTPS))) {
+                        filter.hasDataScheme(IntentFilter.SCHEME_HTTPS))) {
                     result.addAll(filter.getHostsList());
                 }
             }
@@ -625,7 +631,8 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Returns an accessible SpannableString.
-     * @param displayText the text to display
+     *
+     * @param displayText     the text to display
      * @param accessibileText the text text-to-speech engines should read
      */
     public static SpannableString createAccessibleSequence(CharSequence displayText,
@@ -642,7 +649,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * {@link Intent#EXTRA_USER_ID} if it belongs to the current user.
      *
      * @throws SecurityException if the given userId does not belong to the
-     *             current user group.
+     *                           current user group.
      */
     public static int getUserIdFromBundle(Context context, Bundle bundle) {
         return getUserIdFromBundle(context, bundle, false);
@@ -653,10 +660,10 @@ public final class Utils extends com.android.settingslib.Utils {
      * {@link Intent#EXTRA_USER_ID} if it belongs to the current user.
      *
      * @param isInternal indicating if the caller is "internal" to the system,
-     *            meaning we're willing to trust extras like
-     *            {@link ChooseLockSettingsHelper#EXTRA_ALLOW_ANY_USER}.
+     *                   meaning we're willing to trust extras like
+     *                   {@link ChooseLockSettingsHelper#EXTRA_ALLOW_ANY_USER}.
      * @throws SecurityException if the given userId does not belong to the
-     *             current user group.
+     *                           current user group.
      */
     public static int getUserIdFromBundle(Context context, Bundle bundle, boolean isInternal) {
         if (bundle == null) {
@@ -776,7 +783,7 @@ public final class Utils extends com.android.settingslib.Utils {
             final ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
                     packageName,
                     PackageManager.MATCH_DISABLED_COMPONENTS
-                    | PackageManager.MATCH_ANY_USER);
+                            | PackageManager.MATCH_ANY_USER);
             return appInfo.loadLabel(context.getPackageManager());
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Unable to find info for package: " + packageName);
@@ -835,8 +842,9 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Launches an intent which may optionally have a user id defined.
+     *
      * @param fragment Fragment to use to launch the activity.
-     * @param intent Intent to launch.
+     * @param intent   Intent to launch.
      */
     public static void launchIntent(Fragment fragment, Intent intent) {
         try {
@@ -864,7 +872,8 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Returns if a given user is a profile of another user.
-     * @param user The user whose profiles wibe checked.
+     *
+     * @param user    The user whose profiles wibe checked.
      * @param profile The (potential) profile.
      * @return if the profile is actually a profile
      */
@@ -889,9 +898,10 @@ public final class Utils extends com.android.settingslib.Utils {
     /**
      * Return {@code true} if the supplied package is device owner or profile owner of at
      * least one user.
-     * @param userManager used to get profile owner app for each user
+     *
+     * @param userManager         used to get profile owner app for each user
      * @param devicePolicyManager used to check whether it is device owner app
-     * @param packageName package to check about
+     * @param packageName         package to check about
      */
     public static boolean isProfileOrDeviceOwner(UserManager userManager,
             DevicePolicyManager devicePolicyManager, String packageName) {
@@ -943,8 +953,8 @@ public final class Utils extends com.android.settingslib.Utils {
     /**
      * Gets a drawable with a limited size to avoid crashing Settings if it's too big.
      *
-     * @param original original drawable, typically an app icon.
-     * @param maxWidth maximum width, in pixels.
+     * @param original  original drawable, typically an app icon.
+     * @param maxWidth  maximum width, in pixels.
      * @param maxHeight maximum height, in pixels.
      */
     public static Drawable getSafeDrawable(Drawable original, int maxWidth, int maxHeight) {
@@ -977,7 +987,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static IconCompat createIconWithDrawable(Drawable drawable) {
         Bitmap bitmap;
         if (drawable instanceof BitmapDrawable) {
-            bitmap = ((BitmapDrawable)drawable).getBitmap();
+            bitmap = ((BitmapDrawable) drawable).getBitmap();
         } else {
             final int width = drawable.getIntrinsicWidth();
             final int height = drawable.getIntrinsicHeight();
@@ -1064,5 +1074,25 @@ public final class Utils extends com.android.settingslib.Utils {
         if (lifecycle != null && scrollView != null) {
             ActionBarShadowController.attachToView(activity, lifecycle, scrollView);
         }
+    }
+
+    /**
+     * Add a footer preference into preference group.
+     *
+     * @param group The parent {@link PreferenceGroup} of the footer preference.
+     * @param key   The key value of the footer preference.
+     * @param title The title of the footer preference.
+     */
+    public static void addFooterPreference(@NonNull Context context, @NonNull PreferenceGroup group,
+            String key, CharSequence title) {
+        final FooterPreference footerPreference = new FooterPreference(context);
+        footerPreference.setSelectable(false);
+        if (!TextUtils.isEmpty(key)) {
+            footerPreference.setKey(key);
+        }
+        if (!TextUtils.isEmpty(title)) {
+            footerPreference.setTitle(title);
+        }
+        group.addPreference(footerPreference);
     }
 }

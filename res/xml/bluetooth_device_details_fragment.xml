@@ -47,4 +47,10 @@
     <PreferenceCategory
         android:key="bluetooth_profiles"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="device_details_footer"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.bluetooth.BluetoothDetailsMacAddressController"/>
+
 </PreferenceScreen>
