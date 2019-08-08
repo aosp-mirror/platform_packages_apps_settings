@@ -114,8 +114,8 @@ public class BugreportPreference extends CustomDialogPreferenceCompat {
             // untouched. To switch to the new workflow using Bugreport API run the following
             // commands on the terminal:
             // * adb root
-            // * adb shell setprop settings_call_bugreport_api true
-            if (FeatureFlagUtils.isEnabled(context, FeatureFlags.USE_BUGREPORT_API)) {
+            // * adb shell setprop settings_use_bugreport_api true
+            if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.USE_BUGREPORT_API)) {
                 Intent triggerShellBugreport = new Intent();
                 triggerShellBugreport.setAction(INTENT_BUGREPORT_REQUESTED);
                 triggerShellBugreport.setPackage(SHELL_APP_PACKAGE);
