@@ -110,11 +110,11 @@ public class BugreportPreference extends CustomDialogPreferenceCompat {
         try {
             final Context context = getContext();
             // USE_BUGREPORT_API is a system property flag used to switch back to the old workflow
-            // using dumpstate. By using the default value as false, old workflow remains
-            // untouched. To switch to the new workflow using Bugreport API run the following
-            // commands on the terminal:
+            // using dumpstate. By using the default value as true, new workflow using Bugreport
+            // API is triggered. To switch to the old workflow directly using dumpstate run the
+            // following commands on the terminal:
             // * adb root
-            // * adb shell setprop settings_use_bugreport_api true
+            // * adb shell setprop settings_use_bugreport_api false
             if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.USE_BUGREPORT_API)) {
                 Intent triggerShellBugreport = new Intent();
                 triggerShellBugreport.setAction(INTENT_BUGREPORT_REQUESTED);
