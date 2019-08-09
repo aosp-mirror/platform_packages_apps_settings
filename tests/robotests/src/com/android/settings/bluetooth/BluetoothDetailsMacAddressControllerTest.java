@@ -15,8 +15,11 @@
  */
 package com.android.settings.bluetooth;
 
+import static com.android.settings.bluetooth.BluetoothDetailsMacAddressController.KEY_DEVICE_DETAILS_FOOTER;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import com.android.settings.Utils;
 import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Test;
@@ -25,7 +28,6 @@ import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothDetailsMacAddressControllerTest extends BluetoothDetailsControllerTestBase {
-
   private BluetoothDetailsMacAddressController mController;
 
   @Override
@@ -34,6 +36,7 @@ public class BluetoothDetailsMacAddressControllerTest extends BluetoothDetailsCo
     mController =
         new BluetoothDetailsMacAddressController(mContext, mFragment, mCachedDevice, mLifecycle);
     setupDevice(mDeviceConfig);
+    Utils.addFooterPreference(mContext, mScreen, KEY_DEVICE_DETAILS_FOOTER, null /* title */);
   }
 
   @Test
