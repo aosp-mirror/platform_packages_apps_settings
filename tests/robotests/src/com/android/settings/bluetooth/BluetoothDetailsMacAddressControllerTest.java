@@ -19,7 +19,6 @@ import static com.android.settings.bluetooth.BluetoothDetailsMacAddressControlle
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.Utils;
 import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Test;
@@ -28,22 +27,24 @@ import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothDetailsMacAddressControllerTest extends BluetoothDetailsControllerTestBase {
-  private BluetoothDetailsMacAddressController mController;
+    private BluetoothDetailsMacAddressController mController;
 
-  @Override
-  public void setUp() {
-    super.setUp();
-    mController =
-        new BluetoothDetailsMacAddressController(mContext, mFragment, mCachedDevice, mLifecycle);
-    setupDevice(mDeviceConfig);
-    Utils.addFooterPreference(mContext, mScreen, KEY_DEVICE_DETAILS_FOOTER, null /* title */);
-  }
+    @Override
+    public void setUp() {
+        super.setUp();
+        mController =
+                new BluetoothDetailsMacAddressController(mContext, mFragment, mCachedDevice,
+                        mLifecycle);
+        setupDevice(mDeviceConfig);
+        mScreen.addPreference(new FooterPreference.Builder(mContext).setKey(
+                KEY_DEVICE_DETAILS_FOOTER).build());
+    }
 
-  @Test
-  public void macAddress() {
-    showScreen(mController);
-    FooterPreference footer =
-        (FooterPreference) mScreen.findPreference(mController.getPreferenceKey());
-    assertThat(footer.getTitle().toString()).endsWith(mDeviceConfig.getAddress());
-  }
+    @Test
+    public void macAddress() {
+        showScreen(mController);
+        FooterPreference footer =
+                (FooterPreference) mScreen.findPreference(mController.getPreferenceKey());
+        assertThat(footer.getTitle().toString()).endsWith(mDeviceConfig.getAddress());
+    }
 }

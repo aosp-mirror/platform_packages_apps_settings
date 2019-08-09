@@ -141,56 +141,57 @@ public class FingerprintSettings extends SubSettings {
         private HashMap<Integer, String> mFingerprintsRenaming;
 
         FingerprintAuthenticateSidecar.Listener mAuthenticateListener =
-            new FingerprintAuthenticateSidecar.Listener() {
-                @Override
-                public void onAuthenticationSucceeded(
-                        FingerprintManager.AuthenticationResult result) {
-                    int fingerId = result.getFingerprint().getBiometricId();
-                    mHandler.obtainMessage(MSG_FINGER_AUTH_SUCCESS, fingerId, 0).sendToTarget();
-                }
+                new FingerprintAuthenticateSidecar.Listener() {
+                    @Override
+                    public void onAuthenticationSucceeded(
+                            FingerprintManager.AuthenticationResult result) {
+                        int fingerId = result.getFingerprint().getBiometricId();
+                        mHandler.obtainMessage(MSG_FINGER_AUTH_SUCCESS, fingerId, 0).sendToTarget();
+                    }
 
-                @Override
-                public void onAuthenticationFailed() {
-                    mHandler.obtainMessage(MSG_FINGER_AUTH_FAIL).sendToTarget();
-                }
+                    @Override
+                    public void onAuthenticationFailed() {
+                        mHandler.obtainMessage(MSG_FINGER_AUTH_FAIL).sendToTarget();
+                    }
 
-                @Override
-                public void onAuthenticationError(int errMsgId, CharSequence errString) {
-                    mHandler.obtainMessage(MSG_FINGER_AUTH_ERROR, errMsgId, 0, errString)
-                            .sendToTarget();
-                }
+                    @Override
+                    public void onAuthenticationError(int errMsgId, CharSequence errString) {
+                        mHandler.obtainMessage(MSG_FINGER_AUTH_ERROR, errMsgId, 0, errString)
+                                .sendToTarget();
+                    }
 
-                @Override
-                public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-                    mHandler.obtainMessage(MSG_FINGER_AUTH_HELP, helpMsgId, 0, helpString)
-                            .sendToTarget();
-                }
-            };
+                    @Override
+                    public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
+                        mHandler.obtainMessage(MSG_FINGER_AUTH_HELP, helpMsgId, 0, helpString)
+                                .sendToTarget();
+                    }
+                };
 
         FingerprintRemoveSidecar.Listener mRemovalListener =
                 new FingerprintRemoveSidecar.Listener() {
-            public void onRemovalSucceeded(Fingerprint fingerprint) {
-                mHandler.obtainMessage(MSG_REFRESH_FINGERPRINT_TEMPLATES,
-                        fingerprint.getBiometricId(), 0).sendToTarget();
-                updateDialog();
-            }
+                    public void onRemovalSucceeded(Fingerprint fingerprint) {
+                        mHandler.obtainMessage(MSG_REFRESH_FINGERPRINT_TEMPLATES,
+                                fingerprint.getBiometricId(), 0).sendToTarget();
+                        updateDialog();
+                    }
 
-            public void onRemovalError(Fingerprint fp, int errMsgId, CharSequence errString) {
-                final Activity activity = getActivity();
-                if (activity != null) {
-                    Toast.makeText(activity, errString, Toast.LENGTH_SHORT);
-                }
-                updateDialog();
-            }
+                    public void onRemovalError(Fingerprint fp, int errMsgId,
+                            CharSequence errString) {
+                        final Activity activity = getActivity();
+                        if (activity != null) {
+                            Toast.makeText(activity, errString, Toast.LENGTH_SHORT);
+                        }
+                        updateDialog();
+                    }
 
-            private void updateDialog() {
-                RenameDialog renameDialog = (RenameDialog) getFragmentManager().
-                        findFragmentByTag(RenameDialog.class.getName());
-                if (renameDialog != null) {
-                    renameDialog.enableDelete();
-                }
-            }
-        };
+                    private void updateDialog() {
+                        RenameDialog renameDialog = (RenameDialog) getFragmentManager().
+                                findFragmentByTag(RenameDialog.class.getName());
+                        if (renameDialog != null) {
+                            renameDialog.enableDelete();
+                        }
+                    }
+                };
 
         private final Handler mHandler = new Handler() {
             @Override
@@ -200,17 +201,17 @@ public class FingerprintSettings extends SubSettings {
                         removeFingerprintPreference(msg.arg1);
                         updateAddPreference();
                         retryFingerprint();
-                    break;
+                        break;
                     case MSG_FINGER_AUTH_SUCCESS:
                         highlightFingerprintItem(msg.arg1);
                         retryFingerprint();
-                    break;
+                        break;
                     case MSG_FINGER_AUTH_FAIL:
                         // No action required... fingerprint will allow up to 5 of these
-                    break;
+                        break;
                     case MSG_FINGER_AUTH_ERROR:
-                        handleError(msg.arg1 /* errMsgId */, (CharSequence) msg.obj /* errStr */ );
-                    break;
+                        handleError(msg.arg1 /* errMsgId */, (CharSequence) msg.obj /* errStr */);
+                        break;
                     case MSG_FINGER_AUTH_HELP: {
                         // Not used
                     }
@@ -220,7 +221,7 @@ public class FingerprintSettings extends SubSettings {
         };
 
         /**
-         * @param errMsgId
+         *
          */
         protected void handleError(int errMsgId, CharSequence msg) {
             switch (errMsgId) {
@@ -243,7 +244,7 @@ public class FingerprintSettings extends SubSettings {
                 // Activity can be null on a screen rotation.
                 final Activity activity = getActivity();
                 if (activity != null) {
-                    Toast.makeText(activity, msg , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
                 }
             }
             retryFingerprint(); // start again
@@ -425,11 +426,8 @@ public class FingerprintSettings extends SubSettings {
             if (context == null) {
                 return;
             }
-
-            final FooterPreference footerPreference = new FooterPreference(context);
-            footerPreference.setTitle(mFooterTitle);
-            footerPreference.setSelectable(false);
-            root.addPreference(footerPreference);
+            root.addPreference(new FooterPreference.Builder(context).setTitle(
+                    mFooterTitle).build());
         }
 
         private static String genKey(int id) {
@@ -522,7 +520,8 @@ public class FingerprintSettings extends SubSettings {
             RenameDialog renameDialog = new RenameDialog();
             Bundle args = new Bundle();
             if (mFingerprintsRenaming.containsKey(fp.getBiometricId())) {
-                final Fingerprint f = new Fingerprint(mFingerprintsRenaming.get(fp.getBiometricId()),
+                final Fingerprint f = new Fingerprint(
+                        mFingerprintsRenaming.get(fp.getBiometricId()),
                         fp.getGroupId(), fp.getBiometricId(), fp.getDeviceId());
                 args.putParcelable("fingerprint", f);
             } else {
