@@ -37,7 +37,7 @@ public class BluetoothDetailsMacAddressControllerTest extends BluetoothDetailsCo
                         mLifecycle);
         setupDevice(mDeviceConfig);
         mScreen.addPreference(new FooterPreference.Builder(mContext).setKey(
-                KEY_DEVICE_DETAILS_FOOTER).build());
+                KEY_DEVICE_DETAILS_FOOTER).setTitle(KEY_DEVICE_DETAILS_FOOTER).build());
     }
 
     @Test
