@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.text.Annotation;
 import android.text.Spannable;
@@ -49,7 +48,7 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class BatterySaverSettings extends DashboardFragment {
     private static final String TAG = "BatterySaverSettings";
-    public static final String KEY_FOOTER_PREFERENCE = "footer_preference";
+    private static final String KEY_FOOTER_PREFERENCE = "battery_saver_footer_preference";
     private SpannableStringBuilder mFooterText;
     private String mHelpUri;
 

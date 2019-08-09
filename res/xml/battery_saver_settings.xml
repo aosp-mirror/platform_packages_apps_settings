@@ -39,16 +39,16 @@
         android:title="@string/battery_saver"
         android:selectable="false"
         android:summary="@string/battery_saver_turn_on_summary"
+        settings:allowDividerBelow="true"
         settings:textOn="@string/battery_saver_button_turn_on"
         settings:textOff="@string/battery_saver_button_turn_off"
-        settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverButtonPreferenceController" />
+        settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverButtonPreferenceController"/>
 
-    <PreferenceCategory
-        android:key="battery_saver_footer">
-        <com.android.settingslib.widget.FooterPreference
-            android:key="battery_saver_footer_preference"
-            android:title="@*android:string/battery_saver_description"
-            android:selectable="false" />
-    </PreferenceCategory>
+    <com.android.settingslib.widget.FooterPreference
+        android:key="battery_saver_footer_preference"
+        android:selectable="false"
+        android:title="@*android:string/battery_saver_description"
+        settings:allowDividerAbove="true"
+        settings:searchable="false"/>
 
 </PreferenceScreen>
