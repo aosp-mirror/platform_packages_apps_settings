@@ -15,8 +15,6 @@
  */
 package com.android.settings.accounts;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -26,9 +24,7 @@ import android.content.Context;
 import android.os.UserHandle;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.preference.Preference;
 
-import com.android.settings.testutils.shadow.ShadowAuthenticationHelper;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 
 import org.junit.After;
@@ -37,7 +33,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
@@ -61,19 +56,5 @@ public class AccountSyncSettingsTest {
 
         settings.onPreferenceTreeClick(preference);
         // no crash
-    }
-
-    @Test
-    @Config(shadows = {ShadowAuthenticationHelper.class})
-    public void createFooterPreference_shouldReturnFooter() {
-        final AccountSyncSettings settings = FragmentController.of(new AccountSyncSettings())
-                .create()
-                .get();
-
-        settings.createFooterPreference();
-
-        final Preference footer = settings.getPreferenceScreen().findPreference(
-                "footer_preference");
-        assertThat(footer).isNotNull();
     }
 }
