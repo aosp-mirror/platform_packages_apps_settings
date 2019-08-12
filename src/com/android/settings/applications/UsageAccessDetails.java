@@ -85,6 +85,12 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mUsageBridge.release();
+    }
+
+    @Override
     public boolean onPreferenceClick(Preference preference) {
         return false;
     }

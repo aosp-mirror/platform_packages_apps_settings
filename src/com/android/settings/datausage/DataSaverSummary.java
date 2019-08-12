@@ -94,6 +94,12 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mDataUsageBridge.release();
+    }
+
+    @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         synchronized (this) {
             if (mSwitching) {

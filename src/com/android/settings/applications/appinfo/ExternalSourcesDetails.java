@@ -63,6 +63,12 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mAppBridge.release();
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean checked = (Boolean) newValue;
         if (preference == mSwitchPref) {
