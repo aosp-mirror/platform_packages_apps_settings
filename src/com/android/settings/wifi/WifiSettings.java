@@ -50,10 +50,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
@@ -61,8 +57,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.datausage.DataUsagePreference;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -83,6 +79,10 @@ import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 /**
  * Two types of UI are provided here.
@@ -108,6 +108,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @VisibleForTesting
     static final int ADD_NETWORK_REQUEST = 2;
+
+    static final int CONFIG_NETWORK_REQUEST = 3;
 
     // Instance state keys
     private static final String SAVE_DIALOG_MODE = "dialog_mode";
@@ -427,6 +429,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                 mWifiTracker.resumeScanning();
             }
             return;
+        } else if (requestCode == CONFIG_NETWORK_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                handleConfigNetworkSubmitEvent(data);
+            }
+            return;
         }
 
         final boolean formerlyRestricted = mIsRestricted;
@@ -559,7 +566,10 @@ public class WifiSettings extends RestrictedSettingsFragment
                     break;
 
                 default:
-                    showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
+                    final Bundle bundle = ((LongPressAccessPointPreference) preference).getExtras();
+                    mSelectedAccessPoint.saveWifiState(bundle);
+                    launchConfigNewNetworkFragment(mSelectedAccessPoint,
+                            WifiConfigUiBase.MODE_CONNECT, bundle);
                     break;
             }
         } else if (preference == mAddWifiNetworkPreference) {
@@ -1253,4 +1263,30 @@ public class WifiSettings extends RestrictedSettingsFragment
             return new SummaryProvider(activity, summaryLoader);
         }
     };
+
+    private void handleConfigNetworkSubmitEvent(Intent data) {
+        final WifiConfiguration wifiConfiguration = data.getParcelableExtra(
+                ConfigureAccessPointFragment.NETWORK_CONFIG_KEY);
+        if (wifiConfiguration != null) {
+            mWifiManager.save(wifiConfiguration, mSaveListener);
+
+            if (mSelectedAccessPoint != null) {
+                connect(wifiConfiguration, false /*isSavedNetwork*/);
+            }
+            mWifiTracker.resumeScanning();
+        }
+    }
+
+    private void launchConfigNewNetworkFragment(AccessPoint accessPoint, int dialogMode,
+            Bundle bundleForArguments) {
+        mDialogMode = dialogMode;
+        final CharSequence title = accessPoint.getTitle();
+        new SubSettingLauncher(getContext())
+                .setTitleText(title)
+                .setDestination(ConfigureAccessPointFragment.class.getName())
+                .setArguments(bundleForArguments)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .setResultListener(this, CONFIG_NETWORK_REQUEST)
+                .launch();
+    }
 }
