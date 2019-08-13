@@ -32,6 +32,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.provider.Settings;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
@@ -65,6 +66,7 @@ public class ContextualAdaptiveSleepSliceTest {
         mContext = spy(RuntimeEnvironment.application);
         mContextualAdaptiveSleepSlice = spy(new ContextualAdaptiveSleepSlice(mContext));
 
+        Settings.System.putInt(mContext.getContentResolver(), Settings.System.ADAPTIVE_SLEEP, 0);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mSharedPreferences).when(mContext).getSharedPreferences(eq(PREF), anyInt());
         doReturn(true).when(mContextualAdaptiveSleepSlice).isSettingsAvailable();
@@ -107,6 +109,22 @@ public class ContextualAdaptiveSleepSliceTest {
     public void getSlice_DoNotShowIfRecentlySetup() {
         doReturn(System.currentTimeMillis()).when(mSharedPreferences).getLong(
                 eq(PREF_KEY_SETUP_TIME), anyLong());
+
+        final Slice slice = mContextualAdaptiveSleepSlice.getSlice();
+
+        assertThat(slice).isNull();
+    }
+
+    @Test
+    public void getSlice_ShowIfNotTurnedOn() {
+        final Slice slice = mContextualAdaptiveSleepSlice.getSlice();
+
+        assertThat(slice).isNotNull();
+    }
+
+    @Test
+    public void getSlice_DoNotShowIfTurnedOn() {
+        Settings.System.putInt(mContext.getContentResolver(), Settings.System.ADAPTIVE_SLEEP, 1);
 
         final Slice slice = mContextualAdaptiveSleepSlice.getSlice();
 
