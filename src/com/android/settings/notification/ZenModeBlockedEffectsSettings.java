@@ -45,8 +45,6 @@ public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implement
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mFooterPreferenceMixin.createFooterPreference().setTitle(
-                R.string.zen_mode_blocked_effects_footer);
     }
 
     @Override

@@ -32,8 +32,6 @@ public class ZenCustomRuleBlockedEffectsSettings extends ZenCustomRuleSettingsBa
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        mFooterPreferenceMixin.createFooterPreference().setTitle(
-                R.string.zen_mode_blocked_effects_footer);
     }
 
     @Override
