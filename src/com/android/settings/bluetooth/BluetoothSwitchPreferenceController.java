@@ -46,6 +46,9 @@ public class BluetoothSwitchPreferenceController
     private Context mContext;
     private FooterPreference mFooterPreference;
 
+    @VisibleForTesting
+    AlwaysDiscoverable mAlwaysDiscoverable;
+
     public BluetoothSwitchPreferenceController(Context context,
             SwitchWidgetController switchController,
             FooterPreference footerPreference) {
@@ -69,11 +72,13 @@ public class BluetoothSwitchPreferenceController
                 SettingsEnums.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
                 mRestrictionUtils);
         mBluetoothEnabler.setToggleCallback(this);
+        mAlwaysDiscoverable = new AlwaysDiscoverable(context);
     }
 
     @Override
     public void onStart() {
         mBluetoothEnabler.resume(mContext);
+        mAlwaysDiscoverable.start();
         if (mSwitch != null) {
             updateText(mSwitch.isChecked());
         }
@@ -82,6 +87,7 @@ public class BluetoothSwitchPreferenceController
     @Override
     public void onStop() {
         mBluetoothEnabler.pause();
+        mAlwaysDiscoverable.stop();
     }
 
     @Override
