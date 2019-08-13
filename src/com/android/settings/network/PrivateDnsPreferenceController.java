@@ -119,11 +119,7 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
             case PRIVATE_DNS_MODE_OFF:
                 return res.getString(R.string.private_dns_mode_off);
             case PRIVATE_DNS_MODE_OPPORTUNISTIC:
-                // TODO (b/79122154) : create a string specifically for this, instead of
-                // hijacking a string from notifications. This is necessary at this time
-                // because string freeze is in the past and this string has the right
-                // content at this moment.
-                return dnsesResolved ? res.getString(R.string.switch_on_text)
+                return dnsesResolved ? res.getString(R.string.private_dns_mode_on)
                         : res.getString(R.string.private_dns_mode_opportunistic);
             case PRIVATE_DNS_MODE_PROVIDER_HOSTNAME:
                 return dnsesResolved
