@@ -229,9 +229,12 @@ public class BluetoothDevicePreferenceTest {
         mPreferenceList.add(preference3);
         Collections.sort(mPreferenceList, COMPARATOR);
 
-        assertThat(mPreferenceList.get(0)).isEqualTo(preference3);
-        assertThat(mPreferenceList.get(1)).isEqualTo(preference2);
-        assertThat(mPreferenceList.get(2)).isEqualTo(preference1);
+        assertThat(mPreferenceList.get(0).getCachedDevice().getAddress())
+                .isEqualTo(preference3.getCachedDevice().getAddress());
+        assertThat(mPreferenceList.get(1).getCachedDevice().getAddress())
+                .isEqualTo(preference2.getCachedDevice().getAddress());
+        assertThat(mPreferenceList.get(2).getCachedDevice().getAddress())
+                .isEqualTo(preference1.getCachedDevice().getAddress());
     }
 
     @Test
@@ -251,8 +254,11 @@ public class BluetoothDevicePreferenceTest {
         mPreferenceList.add(preference3);
         Collections.sort(mPreferenceList, COMPARATOR);
 
-        assertThat(mPreferenceList.get(0)).isEqualTo(preference1);
-        assertThat(mPreferenceList.get(1)).isEqualTo(preference2);
-        assertThat(mPreferenceList.get(2)).isEqualTo(preference3);
+        assertThat(mPreferenceList.get(0).getCachedDevice().getAddress())
+                .isEqualTo(preference1.getCachedDevice().getAddress());
+        assertThat(mPreferenceList.get(1).getCachedDevice().getAddress())
+                .isEqualTo(preference2.getCachedDevice().getAddress());
+        assertThat(mPreferenceList.get(2).getCachedDevice().getAddress())
+                .isEqualTo(preference3.getCachedDevice().getAddress());
     }
 }
