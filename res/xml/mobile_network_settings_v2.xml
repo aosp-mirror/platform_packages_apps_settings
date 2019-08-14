@@ -33,7 +33,7 @@
         <com.android.settings.datausage.DataUsageSummaryPreference
             android:key="status_header"
             android:visibility="gone"
-            android:selectable="false" />
+            android:selectable="false"/>
 
         <ListPreference
             android:key="calls_preference"
@@ -209,16 +209,15 @@
         android:key="erase_sim"
         android:persistent="false"
         android:title="@string/mobile_network_erase_sim"
-        settings:controller="com.android.settings.network.telephony.DeleteSimProfilePreferenceController" />
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.network.telephony.DeleteSimProfilePreferenceController"/>
 
-    <PreferenceCategory
-        android:key="footer_container"
-        android:title="@string/summary_placeholder"
-        android:layout="@layout/preference_category_no_label"
-        settings:controller="com.android.settings.network.telephony.DisableSimFooterPreferenceController">
-        <com.android.settingslib.widget.FooterPreference
-            android:key="disable_sim_explanation"
-            android:title="@string/mobile_network_disable_sim_explanation" />
-    </PreferenceCategory>
+    <com.android.settingslib.widget.FooterPreference
+        android:key="disable_sim_explanation"
+        android:title="@string/mobile_network_disable_sim_explanation"
+        android:selectable="false"
+        settings:allowDividerAbove="true"
+        settings:searchable="false"
+        settings:controller="com.android.settings.network.telephony.DisableSimFooterPreferenceController"/>
 
 </PreferenceScreen>
