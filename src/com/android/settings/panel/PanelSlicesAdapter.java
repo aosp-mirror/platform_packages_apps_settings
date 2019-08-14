@@ -109,7 +109,7 @@ public class PanelSlicesAdapter
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
             sliceView.setMode(SliceView.MODE_LARGE);
-            sliceView.showTitleItems(true);
+            sliceView.setShowTitleItems(true);
         }
 
         public void onBind(LiveData<Slice> sliceLiveData) {
