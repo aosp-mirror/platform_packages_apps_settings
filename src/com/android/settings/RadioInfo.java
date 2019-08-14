@@ -1619,13 +1619,14 @@ public class RadioInfo extends Activity {
                     return;
                 }
                 // getSubId says it takes a slotIndex, but it actually takes a phone index
+                int subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
                 int[] subIds = SubscriptionManager.getSubId(phoneIndex);
-                if (subIds == null || subIds.length < 1) {
-                    return;
+                if (subIds != null && subIds.length > 0) {
+                    subId = subIds[0];
                 }
                 mSelectedPhoneIndex = phoneIndex;
 
-                updatePhoneIndex(phoneIndex, subIds[0]);
+                updatePhoneIndex(phoneIndex, subId);
             }
         }
 
