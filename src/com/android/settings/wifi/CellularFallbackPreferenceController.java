@@ -17,8 +17,12 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -49,8 +53,26 @@ public class CellularFallbackPreferenceController extends TogglePreferenceContro
     }
 
     private boolean avoidBadWifiConfig() {
-        return mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_networkAvoidBadWifi) == 1;
+        boolean avoidBadWifiConfig = true;
+        final SubscriptionManager subscriptionManager =
+                mContext.getSystemService(SubscriptionManager.class);
+
+        for (SubscriptionInfo subscriptionInfo :
+                subscriptionManager.getActiveSubscriptionInfoList()) {
+            final Resources resources = getResourcesForSubId(subscriptionInfo.getSubscriptionId());
+            if (resources.getInteger(
+                    com.android.internal.R.integer.config_networkAvoidBadWifi) == 0) {
+                avoidBadWifiConfig = false;
+                break;
+            }
+        }
+        return avoidBadWifiConfig;
+    }
+
+    @VisibleForTesting
+    Resources getResourcesForSubId(int subscriptionId) {
+        return SubscriptionManager.getResourcesForSubId(mContext, subscriptionId,
+                false /* useRootLocale */);
     }
 
     private boolean avoidBadWifiCurrentSettings() {
