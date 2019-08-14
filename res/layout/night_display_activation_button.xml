@@ -15,10 +15,11 @@
   limitations under the License.
   -->
 
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight">
 
     <Button
         android:id="@+id/night_display_turn_on_button"
@@ -26,7 +27,7 @@
         android:layout_marginStart="@dimen/screen_margin_sides"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start" />
+        android:layout_gravity="center_vertical" />
 
     <Button
         android:id="@+id/night_display_turn_off_button"
@@ -34,6 +35,6 @@
         android:layout_marginStart="@dimen/screen_margin_sides"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start" />
+        android:layout_gravity="center_vertical" />
 
-</FrameLayout>
+</LinearLayout>
