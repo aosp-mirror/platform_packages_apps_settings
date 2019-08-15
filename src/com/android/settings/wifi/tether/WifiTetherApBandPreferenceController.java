@@ -90,7 +90,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         mBandIndex = validateSelection(Integer.parseInt((String) newValue));
         Log.d(TAG, "Band preference changed, updating band index to " + mBandIndex);
         preference.setSummary(getConfigSummary());
-        mListener.onTetherConfigUpdated();
+        mListener.onTetherConfigUpdated(this);
         return true;
     }
 
