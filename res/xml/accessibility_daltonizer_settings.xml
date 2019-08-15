@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="daltonizer_preference_screen"
     android:title="@string/accessibility_display_daltonizer_preference_title">
 
@@ -27,4 +28,9 @@
         android:title="@string/daltonizer_type"
         android:icon="@drawable/ic_accessibility_illustration_colorblind" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="daltonizer_footer"
+        android:title="@string/accessibility_display_daltonizer_preference_subtitle"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

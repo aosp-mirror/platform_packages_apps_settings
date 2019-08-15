@@ -77,8 +77,9 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     /**
      * Gets string that should be used as a autoclick preference summary for provided autoclick
      * delay.
+     *
      * @param resources Resources from which string should be retrieved.
-     * @param delay Delay for whose value summary should be retrieved.
+     * @param delay     Delay for whose value summary should be retrieved.
      */
     static CharSequence getAutoclickPreferenceSummary(Resources resources, int delay) {
         int summaryIndex = getAutoclickPreferenceSummaryIndex(delay);
@@ -136,8 +137,6 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
         mDelay.setMax(delayToSeekBarProgress(MAX_AUTOCLICK_DELAY));
         mDelay.setProgress(delayToSeekBarProgress(delay));
         mDelay.setOnPreferenceChangeListener(this);
-        mFooterPreferenceMixin.createFooterPreference()
-                .setTitle(R.string.accessibility_autoclick_description);
     }
 
     @Override
@@ -166,11 +165,11 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mDelay && newValue instanceof Integer) {
             Settings.Secure.putInt(getContentResolver(),
-                   Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
-                   seekBarProgressToDelay((int)newValue));
+                    Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
+                    seekBarProgressToDelay((int) newValue));
             return true;
-         }
-         return false;
+        }
+        return false;
     }
 
     /**

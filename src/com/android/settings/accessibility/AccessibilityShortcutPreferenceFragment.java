@@ -80,8 +80,6 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
                     ((Boolean) o) ? 1 : 0);
             return true;
         });
-        mFooterPreferenceMixin.createFooterPreference()
-                .setTitle(R.string.accessibility_shortcut_description);
     }
 
     @Override
@@ -186,7 +184,8 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         return getServiceInfo(context) != null;
     }
 
-    private static @Nullable ComponentName getShortcutComponent(Context context) {
+    private static @Nullable
+    ComponentName getShortcutComponent(Context context) {
         String componentNameString = AccessibilityUtils.getShortcutTargetServiceComponentNameString(
                 context, UserHandle.myUserId());
         if (componentNameString == null) return null;
