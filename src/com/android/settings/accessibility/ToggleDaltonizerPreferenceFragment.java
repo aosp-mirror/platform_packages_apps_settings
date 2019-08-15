@@ -43,6 +43,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
     private static final String TYPE = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER;
     private static final int DEFAULT_TYPE = AccessibilityManager.DALTONIZER_CORRECT_DEUTERANOMALY;
+    private static final String KEY_DALTONIZER_FOOTER = "daltonizer_footer";
 
     private ListPreference mType;
 
@@ -62,10 +63,8 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
         mType = (ListPreference) findPreference("type");
 
-        if (!ColorDisplayManager.isColorTransformAccelerated(getActivity())) {
-            mFooterPreferenceMixin.createFooterPreference().setTitle(
-                    R.string.accessibility_display_daltonizer_preference_subtitle);
-        }
+        final Preference footer = findPreference(KEY_DALTONIZER_FOOTER);
+        footer.setVisible(!ColorDisplayManager.isColorTransformAccelerated(getActivity()));
         initPreferences();
     }
 
