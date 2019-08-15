@@ -1,0 +1,48 @@
+java_library {
+    name: "settings-logtags",
+
+    srcs: ["src/**/*.logtags"],
+
+}
+
+// Build the Settings APK
+android_app {
+    name: "Settings",
+    defaults: ["SettingsLibDefaults"],
+    platform_apis: true,
+    certificate: "platform",
+    product_specific: true,
+    privileged: true,
+    required: ["privapp_whitelist_com.android.settings"],
+
+    srcs: ["src/**/*.java"],
+
+    static_libs: [
+        "androidx.slice_slice-builders",
+        "androidx.slice_slice-core",
+        "androidx.slice_slice-view",
+        "androidx.core_core",
+        "androidx.legacy_legacy-support-v4",
+        "androidx.legacy_legacy-support-v13",
+        "androidx.appcompat_appcompat",
+        "androidx.cardview_cardview",
+        "androidx.preference_preference",
+        "androidx.recyclerview_recyclerview",
+        "androidx.legacy_legacy-preference-v14",
+        "androidx.lifecycle_lifecycle-runtime",
+        "androidx.lifecycle_lifecycle-extensions",
+        "guava",
+        "jsr305",
+        "settings-logtags",
+        "setup-wizard-lib-gingerbread-compat",
+    ],
+
+    libs: [
+        "telephony-common",
+        "ims-common",
+    ],
+
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+}

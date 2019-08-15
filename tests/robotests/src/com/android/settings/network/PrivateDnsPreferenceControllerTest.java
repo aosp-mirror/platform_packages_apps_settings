@@ -186,7 +186,7 @@ public class PrivateDnsPreferenceControllerTest {
         when(lp.getValidatedPrivateDnsServers()).thenReturn(NON_EMPTY_ADDRESS_LIST);
         updateLinkProperties(lp);
         mController.updateState(mPreference);
-        verify(mPreference).setSummary(getResourceString(R.string.switch_on_text));
+        verify(mPreference).setSummary(getResourceString(R.string.private_dns_mode_on));
 
         reset(mPreference);
         lp = mock(LinkProperties.class);
