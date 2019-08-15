@@ -46,6 +46,7 @@ import java.util.List;
 public class BluetoothDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "BluetoothDashboardFrag";
+    private static final String KEY_BLUETOOTH_SCREEN_FOOTER = "bluetooth_screen_footer";
     public static final String KEY_BLUETOOTH_SCREEN = "bluetooth_switchbar_screen";
 
     private FooterPreference mFooterPreference;
@@ -75,7 +76,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mFooterPreference = mFooterPreferenceMixin.createFooterPreference();
+        mFooterPreference = findPreference(KEY_BLUETOOTH_SCREEN_FOOTER);
     }
 
     @Override
