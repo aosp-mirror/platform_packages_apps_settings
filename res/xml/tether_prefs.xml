@@ -44,4 +44,10 @@
         android:summary="@string/tether_settings_disabled_on_data_saver"
         android:selectable="false"
         settings:allowDividerAbove="true" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="tether_prefs_footer"
+        android:title="@string/tethering_footer_info"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

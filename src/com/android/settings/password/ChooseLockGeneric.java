@@ -74,8 +74,6 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.List;
 
@@ -112,6 +110,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
         public static final String HIDE_DISABLED_PREFS = "hide_disabled_prefs";
         public static final String TAG_FRP_WARNING_DIALOG = "frp_warning_dialog";
+        public static final String KEY_LOCK_SETTINGS_FOOTER ="lock_settings_footer";
 
         /**
          * Boolean extra determining whether a "screen lock options" button should be shown. This
@@ -499,11 +498,12 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected void addPreferences() {
             addPreferencesFromResource(R.xml.security_settings_picker);
 
+            final Preference footer = findPreference(KEY_LOCK_SETTINGS_FOOTER);
             if (!TextUtils.isEmpty(mCallerAppName) && !mIsCallingAppAdmin) {
-                FooterPreferenceMixinCompat footerMixin =
-                        new FooterPreferenceMixinCompat(this, getSettingsLifecycle());
-                FooterPreference footer = footerMixin.createFooterPreference();
+                footer.setVisible(true);
                 footer.setTitle(getFooterString());
+            } else {
+                footer.setVisible(false);
             }
 
             // Used for testing purposes

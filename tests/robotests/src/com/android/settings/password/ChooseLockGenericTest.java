@@ -22,6 +22,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_MEDIUM;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
+import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.KEY_LOCK_SETTINGS_FOOTER;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
@@ -136,7 +137,7 @@ public class ChooseLockGenericTest {
               mActivity.getString(R.string.unlock_footer_high_complexity_requested, "app name");
 
         mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
 
         assertThat(footer.getTitle()).isEqualTo(expectedTitle);
     }
@@ -152,7 +153,7 @@ public class ChooseLockGenericTest {
                 mActivity.getString(R.string.unlock_footer_medium_complexity_requested, "app name");
 
         mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
 
         assertThat(footer.getTitle()).isEqualTo(expectedTitle);
     }
@@ -168,7 +169,7 @@ public class ChooseLockGenericTest {
                 mActivity.getString(R.string.unlock_footer_low_complexity_requested, "app name");
 
         mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
 
         assertThat(footer.getTitle()).isEqualTo(expectedTitle);
     }
@@ -184,19 +185,19 @@ public class ChooseLockGenericTest {
                 mActivity.getString(R.string.unlock_footer_none_complexity_requested, "app name");
 
         mFragment.updatePreferencesOrFinish(/* isRecreatingActivity= */ false);
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
 
         assertThat(footer.getTitle()).isEqualTo(expectedTitle);
     }
 
     @Test
-    public void updatePreferencesOrFinish_callingAppIsAdmin_noFooter() {
+    public void updatePreferencesOrFinish_callingAppIsAdmin_footerInvisible() {
         initActivity(new Intent().putExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, true));
 
         mFragment.updatePreferencesOrFinish(/* isRecreatingActivity= */ false);
 
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
-        assertThat(footer).isNull();
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
+        assertThat(footer.isVisible()).isFalse();
     }
 
     @Test
