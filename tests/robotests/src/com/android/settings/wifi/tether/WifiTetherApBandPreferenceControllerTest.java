@@ -128,19 +128,19 @@ public class WifiTetherApBandPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, "-1");
         assertThat(mController.getBandIndex()).isEqualTo(1);
         assertThat(mPreference.getSummary()).isEqualTo(FIVE_GHZ_STRING);
-        verify(mListener, times(1)).onTetherConfigUpdated();
+        verify(mListener, times(1)).onTetherConfigUpdated(mController);
 
         // set to 5 Ghz
         mController.onPreferenceChange(mPreference, "1");
         assertThat(mController.getBandIndex()).isEqualTo(1);
         assertThat(mPreference.getSummary()).isEqualTo(FIVE_GHZ_STRING);
-        verify(mListener, times(2)).onTetherConfigUpdated();
+        verify(mListener, times(2)).onTetherConfigUpdated(mController);
 
         // set to 2 Ghz
         mController.onPreferenceChange(mPreference, "0");
         assertThat(mController.getBandIndex()).isEqualTo(0);
         assertThat(mPreference.getSummary()).isEqualTo(TWO_GHZ_STRING);
-        verify(mListener, times(3)).onTetherConfigUpdated();
+        verify(mListener, times(3)).onTetherConfigUpdated(mController);
     }
 
     @Test
@@ -155,19 +155,19 @@ public class WifiTetherApBandPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, "-1");
         assertThat(mController.getBandIndex()).isEqualTo(-1);
         assertThat(mPreference.getSummary()).isEqualTo(ALL_BANDS);
-        verify(mListener, times(1)).onTetherConfigUpdated();
+        verify(mListener, times(1)).onTetherConfigUpdated(mController);
 
         // should revert to the default for 5 Ghz only since this is not supported with this config
         mController.onPreferenceChange(mPreference, "1");
         assertThat(mController.getBandIndex()).isEqualTo(-1);
         assertThat(mPreference.getSummary()).isEqualTo(ALL_BANDS);
-        verify(mListener, times(2)).onTetherConfigUpdated();
+        verify(mListener, times(2)).onTetherConfigUpdated(mController);
 
         // set to 2 Ghz
         mController.onPreferenceChange(mPreference, "0");
         assertThat(mController.getBandIndex()).isEqualTo(0);
         assertThat(mPreference.getSummary()).isEqualTo(TWO_GHZ_STRING);
-        verify(mListener, times(3)).onTetherConfigUpdated();
+        verify(mListener, times(3)).onTetherConfigUpdated(mController);
     }
 
     @Test

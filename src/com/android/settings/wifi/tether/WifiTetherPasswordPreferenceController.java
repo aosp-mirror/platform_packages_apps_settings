@@ -65,7 +65,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mPassword = (String) newValue;
         updatePasswordDisplay((EditTextPreference) mPreference);
-        mListener.onTetherConfigUpdated();
+        mListener.onTetherConfigUpdated(this);
         return true;
     }
 
