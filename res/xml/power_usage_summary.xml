@@ -63,4 +63,9 @@
         android:title="@string/device_screen_usage"
         android:selectable="false" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="power_usage_footer"
+        android:title="@string/battery_footer_summary"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>
