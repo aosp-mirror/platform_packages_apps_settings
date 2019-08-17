@@ -68,14 +68,6 @@ public class ManageAssist extends DashboardFragment {
         use(AssistGestureSettingsPreferenceController.class).setAssistOnly(true);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        mFooterPreferenceMixin.createFooterPreference()
-                .setTitle(R.string.assist_footer);
-    }
-
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();

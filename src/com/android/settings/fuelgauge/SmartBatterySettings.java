@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
@@ -39,12 +38,6 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class SmartBatterySettings extends DashboardFragment {
     public static final String TAG = "SmartBatterySettings";
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.smart_battery_footer);
-    }
 
     @Override
     public int getMetricsCategory() {

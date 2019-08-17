@@ -102,7 +102,7 @@ public class WifiTetherSSIDPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, "0");
         assertThat(mController.getSSID()).isEqualTo("0");
 
-        verify(mListener, times(2)).onTetherConfigUpdated();
+        verify(mListener, times(2)).onTetherConfigUpdated(mController);
     }
 
     @Test

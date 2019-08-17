@@ -53,4 +53,10 @@
         android:title="@string/voice_input_settings_title"
         android:fragment="com.android.settings.applications.assist.DefaultVoiceInputPicker" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="manage_assist_footer"
+        android:title="@string/assist_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
+
 </PreferenceScreen>

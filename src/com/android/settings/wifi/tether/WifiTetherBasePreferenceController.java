@@ -30,7 +30,7 @@ public abstract class WifiTetherBasePreferenceController extends AbstractPrefere
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     public interface OnTetherConfigUpdateListener {
-        void onTetherConfigUpdated();
+        void onTetherConfigUpdated(AbstractPreferenceController context);
     }
 
     protected final WifiManager mWifiManager;

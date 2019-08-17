@@ -202,7 +202,7 @@ public class SimSelectNotification extends BroadcastReceiver {
 
         Notification.Builder builder =
                 new Notification.Builder(context, SIM_SELECT_NOTIFICATION_CHANNEL)
-                .setSmallIcon(R.drawable.ic_sim_card_alert_white_48dp)
+                .setSmallIcon(R.drawable.ic_sim_alert)
                 .setColor(context.getColor(R.color.sim_noitification))
                 .setContentTitle(resources.getText(R.string.sim_notification_title))
                 .setContentText(resources.getText(R.string.sim_notification_summary))
@@ -282,7 +282,7 @@ public class SimSelectNotification extends BroadcastReceiver {
 
         Notification.Builder builder =
                 new Notification.Builder(context, SIM_WARNING_NOTIFICATION_CHANNEL)
-                        .setSmallIcon(R.drawable.ic_sim_card_alert_white_48dp)
+                        .setSmallIcon(R.drawable.ic_sim_alert)
                         .setColor(context.getColor(R.color.sim_noitification))
                         .setContentTitle(resources.getText(
                                 R.string.sim_combination_warning_notification_title))

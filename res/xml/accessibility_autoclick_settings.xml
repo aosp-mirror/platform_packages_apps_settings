@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="autoclick_preference_screen"
     android:title="@string/accessibility_autoclick_preference_title">
 
@@ -24,4 +25,9 @@
         android:key="autoclick_delay"
         android:title="@string/accessibility_autoclick_delay_preference_title" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="autoclick_footer"
+        android:title="@string/accessibility_autoclick_description"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

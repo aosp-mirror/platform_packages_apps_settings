@@ -99,7 +99,7 @@ public class WifiTetherPasswordPreferenceControllerTest {
         assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
                 .isEqualTo(VALID_PASS2);
 
-        verify(mListener, times(2)).onTetherConfigUpdated();
+        verify(mListener, times(2)).onTetherConfigUpdated(mController);
     }
 
     @Test

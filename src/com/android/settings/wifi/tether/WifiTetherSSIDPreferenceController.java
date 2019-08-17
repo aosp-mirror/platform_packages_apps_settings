@@ -93,7 +93,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mSSID = (String) newValue;
         updateSsidDisplay((EditTextPreference) preference);
-        mListener.onTetherConfigUpdated();
+        mListener.onTetherConfigUpdated(this);
         return true;
     }
 
