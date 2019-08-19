@@ -26,6 +26,7 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -36,15 +37,18 @@ import org.robolectric.annotation.Config;
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class NetworkRequestDialogActivityTest {
 
-    @Test
-    public void LaunchActivity_shouldShowNetworkRequestDialog() {
+    @Before
+    public void setUp() {
         // Mocks fake WifiTracker, in case of exception in NetworkRequestDialogFragment.onResume().
         WifiTracker wifiTracker = mock(WifiTracker.class);
         WifiTrackerFactory.setTestingWifiTracker(wifiTracker);
+    }
 
+    @Test
+    public void launchActivity_shouldShowNetworkRequestDialog() {
         Robolectric.setupActivity(NetworkRequestDialogActivity.class);
 
-        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
 
         assertThat(alertDialog.isShowing()).isTrue();
     }
