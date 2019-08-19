@@ -16,7 +16,6 @@
 
 package com.android.settings.biometrics.face;
 
-import static android.provider.Settings.Secure.FACE_UNLOCK_EDUCATION_INFO_DISPLAYED;
 import static android.security.KeyStore.getApplicationContext;
 
 import android.app.settings.SettingsEnums;
@@ -50,8 +49,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private static final String TAG = "FaceEducation";
     private static final int ON = 1;
     private static final int OFF = 0;
-    // 8 seconds.
-    private static final long FACE_ENROLL_EDUCATION_DELAY = 3000;
 
     private FaceManager mFaceManager;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
@@ -140,21 +137,9 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                     && accessibilityManager.isTouchExplorationEnabled();
         }
         mFooterBarMixin.setPrimaryButton(footerButton);
-        final Context context = getApplicationContext();
-        final boolean didDisplayEdu = Settings.Secure.getIntForUser(context.getContentResolver(),
-                FACE_UNLOCK_EDUCATION_INFO_DISPLAYED, OFF, mUserId) == ON;
-        if (!didDisplayEdu && !accessibilityEnabled) {
-            Settings.Secure.putIntForUser(context.getContentResolver(),
-                    FACE_UNLOCK_EDUCATION_INFO_DISPLAYED, ON, mUserId);
-            footerButton.setEnabled(false);
-            mHandler.postDelayed(() -> {
-                footerButton.setEnabled(true);
-            }, FACE_ENROLL_EDUCATION_DELAY);
-        }
 
         final Button accessibilityButton = findViewById(R.id.accessibility_button);
         accessibilityButton.setOnClickListener(view -> {
-            footerButton.setEnabled(true);
             mSwitchDiversity.setChecked(true);
             accessibilityButton.setVisibility(View.GONE);
             mSwitchDiversity.setVisibility(View.VISIBLE);
