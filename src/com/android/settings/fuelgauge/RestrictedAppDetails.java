@@ -47,7 +47,6 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.List;
 
@@ -76,8 +75,6 @@ public class RestrictedAppDetails extends DashboardFragment implements
     PackageManager mPackageManager;
     @VisibleForTesting
     BatteryDatabaseManager mBatteryDatabaseManager;
-    private final FooterPreferenceMixinCompat mFooterPreferenceMixin =
-            new FooterPreferenceMixinCompat(this, getSettingsLifecycle());
 
     public static void startRestrictedAppDetails(InstrumentedPreferenceFragment fragment,
             List<AppInfo> appInfos) {
@@ -97,8 +94,6 @@ public class RestrictedAppDetails extends DashboardFragment implements
         super.onCreate(icicle);
         final Context context = getContext();
 
-        mFooterPreferenceMixin.createFooterPreference().setTitle(
-                R.string.restricted_app_detail_footer);
         mRestrictedAppListGroup = (PreferenceGroup) findPreference(KEY_PREF_RESTRICTED_APP_LIST);
         mAppInfos = getArguments().getParcelableArrayList(EXTRA_APP_INFO_LIST);
         mPackageManager = context.getPackageManager();
