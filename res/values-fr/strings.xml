@@ -440,7 +440,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Toujours demander la confirmation pour Face Unlock dans les applis"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Supprimer les données du visage"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Configurer Face Unlock"</string>
-    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Utilisez Face Unlock pour déverrouiller votre appareil, vous connecter à des applications et confirmer des paiements.\n\nÀ savoir :\nSi vous regardez votre téléphone, vous pouvez le déverrouiller sans le vouloir.\n\nUne autre personne peut également déverrouiller votre téléphone en tenant celui-ci devant votre visage quand vous avez les yeux ouverts.\n\nVotre téléphone peut être déverrouillé par quelqu\'un qui vous ressemble beaucoup, comme votre enfant ou votre jumeau/jumelle."</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Utilisez Face Unlock pour déverrouiller votre appareil, vous connecter à des applications et confirmer des paiements.\n\nÀ savoir :\nSi vous regardez votre téléphone, vous pouvez le déverrouiller sans le vouloir.\n\nUne autre personne peut également déverrouiller votre téléphone en tenant celui-ci devant votre visage, même si vous avez les yeux fermés.\n\nVotre téléphone peut être déverrouillé par quelqu\'un qui vous ressemble beaucoup, comme votre enfant ou votre jumeau/jumelle."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Supprimer les données du visage ?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Les images et données biométriques utilisées par Face Unlock seront supprimées définitivement et en toute sécurité. Une fois l\'inscription retirée, vous devrez utiliser votre code, votre motif ou votre mot de passe pour déverrouiller votre téléphone, vous connecter aux applications et confirmer les paiements."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Utilisez Face Unlock pour déverrouiller votre téléphone"</string>
@@ -1285,7 +1285,7 @@
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Activation du mode Veille"</string>
     <string name="doze_title" msgid="2375510714460456687">"Nouvelles notifications"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activer l\'écran lors de la réception de notifications"</string>
-    <string name="doze_always_on_title" msgid="1046222370442629646">"Toujours activé"</string>
+    <string name="doze_always_on_title" msgid="1046222370442629646">"Mode Always-on"</string>
     <string name="doze_always_on_summary" msgid="6978257596231155345">"Afficher l\'heure, les icônes de notification et d\'autres informations. Batterie davantage sollicitée."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Taille de la police"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Agrandir ou réduire le texte"</string>
@@ -1602,7 +1602,7 @@
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Réinitialiser les paramètres"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Réinitialiser ?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"La réinitialisation du réseau n\'est pas disponible pour cet utilisateur."</string>
-    <string name="reset_network_complete_toast" msgid="787829973559541880">"Les paramètres des réseaux ont bien été réinitialisés."</string>
+    <string name="reset_network_complete_toast" msgid="787829973559541880">"Les paramètres réseau ont bien été réinitialisés."</string>
     <string name="reset_esim_error_title" msgid="2679159494023044398">"Impossible d\'effacer les cartes SIM"</string>
     <string name="reset_esim_error_msg" msgid="1356899750645220749">"Une erreur empêche d\'effacer les cartes SIM téléchargées.\n\nRedémarrez votre appareil et réessayez."</string>
     <string name="master_clear_title" msgid="3531267871084279512">"Effacer toutes les données (rétablir la configuration d\'usine)"</string>
@@ -2101,7 +2101,7 @@
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Le geste d\'accessibilité défini sur la <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser la loupe, balayez l\'écran de bas en haut avec deux doigts et maintenez la pression, puis sélectionnez la loupe."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Raccourci (volume)"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Service associé au raccourci"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Autoriser depuis écran verrouillage"</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Autoriser depuis l\'écran verrouillé"</string>
     <string name="accessibility_shortcut_description" msgid="1765853731190717372">"Lorsque le raccourci est activé, vous pouvez appuyer sur les deux touches de volume pendant trois secondes pour lancer une fonctionnalité d\'accessibilité."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Texte avec contraste élevé"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Mise à jour auto de la loupe"</string>
@@ -4279,7 +4279,7 @@
       <item quantity="one">Au moins <xliff:g id="COUNT_1">%d</xliff:g> application</item>
       <item quantity="other">Au moins <xliff:g id="COUNT_1">%d</xliff:g> applications</item>
     </plurals>
-    <string name="enterprise_privacy_location_access" msgid="4158197200885270634">"Autorisations d\'accéder à la position"</string>
+    <string name="enterprise_privacy_location_access" msgid="4158197200885270634">"Autorisations de localisation"</string>
     <string name="enterprise_privacy_microphone_access" msgid="5717375623568864441">"Autorisations d\'accès au micro"</string>
     <string name="enterprise_privacy_camera_access" msgid="4858146118537519375">"Autorisations d\'accès à l\'appareil photo"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3288495615791128724">"Applications par défaut"</string>
@@ -4389,11 +4389,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Pilote graphique du système"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Le paramètre n\'est pas disponible sur ce téléphone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Le paramètre n\'est pas disponible sur cette tablette"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Le paramètre n\'est pas disponible sur cet appareil."</string>
