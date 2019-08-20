@@ -221,7 +221,7 @@ public final class BluetoothDevicePreference extends GearPreference implements
                 return mCachedDevice
                         .compareTo(((BluetoothDevicePreference) another).mCachedDevice);
             case SortType.TYPE_FIFO:
-                return (int)(mCurrentTime - ((BluetoothDevicePreference) another).mCurrentTime);
+                return mCurrentTime > ((BluetoothDevicePreference) another).mCurrentTime ? 1 : -1;
             default:
                 return super.compareTo(another);
         }
