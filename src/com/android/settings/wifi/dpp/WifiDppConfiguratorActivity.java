@@ -357,7 +357,7 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
                     WifiDppUtils.getSecurityString(wifiConfiguration),
                     wifiConfiguration.getPrintableSsid(),
                     wifiConfiguration.preSharedKey,
-                    /* hiddenSsid */ false,
+                    wifiConfiguration.hiddenSSID,
                     wifiConfiguration.networkId,
                     /* isHotspot */ false);
             }
