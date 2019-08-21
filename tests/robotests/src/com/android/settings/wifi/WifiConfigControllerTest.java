@@ -35,7 +35,9 @@ import android.security.KeyStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -51,7 +53,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowInputMethodManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
@@ -508,5 +512,18 @@ public class WifiConfigControllerTest {
 
         final int selectedItemPosition = eapMethodSpinner.getSelectedItemPosition();
         assertThat(eapMethodSpinner.getSelectedItem().toString()).isEqualTo("TLS");
+    }
+
+    @Test
+    public void checkImeStatus_whenAdvancedToggled_shouldBeHide() {
+        final InputMethodManager inputMethodManager = mContext
+                .getSystemService(InputMethodManager.class);
+        final ShadowInputMethodManager shadowImm = Shadows.shadowOf(inputMethodManager);
+        final CheckBox advButton = mView.findViewById(R.id.wifi_advanced_togglebox);
+
+        inputMethodManager.showSoftInput(null /* view */, 0 /* flags */);
+        advButton.performClick();
+
+        assertThat(shadowImm.isSoftInputVisible()).isFalse();
     }
 }
