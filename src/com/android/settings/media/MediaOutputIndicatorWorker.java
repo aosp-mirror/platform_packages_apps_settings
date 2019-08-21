@@ -74,7 +74,8 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
 
     @Override
     public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-        if (bluetoothProfile == BluetoothProfile.A2DP) {
+        if (bluetoothProfile == BluetoothProfile.A2DP ||
+                bluetoothProfile == BluetoothProfile.HEARING_AID) {
             notifySliceChange();
         }
     }
