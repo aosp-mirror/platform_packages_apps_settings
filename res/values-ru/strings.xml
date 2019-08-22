@@ -362,8 +362,8 @@
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Текст на экране"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Включить виджеты"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Отключено администратором"</string>
-    <string name="lockdown_settings_title" msgid="7393790212603280213">"Добавить функцию блокировки входа"</string>
-    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Добавить в меню кнопки питания функцию, которая позволяет отключить Smart Lock, биометрическую разблокировку и уведомления на заблокированном экране"</string>
+    <string name="lockdown_settings_title" msgid="7393790212603280213">"Добавить кнопку блокировки"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Добавить в меню кнопки питания возможность отключения Smart Lock, биометрической разблокировки и уведомлений на заблокированном экране"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Блокировать экран при утрате доверия"</string>
     <string name="trust_lost_locks_screen_summary" msgid="693784434582021206">"Если параметр включен, устройство блокируется, когда последний агент доверия теряет доверие"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Нет текста"</string>
@@ -443,8 +443,8 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Всегда запрашивать подтверждение"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Всегда запрашивать подтверждение фейсконтроля в приложениях"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Удалить данные"</string>
-    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Настроить фейсконтроль"</string>
-    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Используйте фейсконтроль, чтобы разблокировать устройство, входить в приложения и подтверждать платежи.\n\nОбратите внимание!\nПосмотрев на телефон, вы можете случайно разблокировать его.\n\nТелефон может быть разблокирован, если кто-то поднесет его к вашему лицу, когда у вас открыты глаза.\n\nТелефон может разблокировать человек, очень похожий на вас (например, ваш близнец)."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Настройте фейсконтроль"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Используйте фейсконтроль, чтобы разблокировать устройство, входить в приложения и подтверждать платежи.\n\nОбратите внимание!\nПосмотрев на телефон, вы можете случайно разблокировать его.\n\nТелефон может быть разблокирован, если кто-то поднесет его к вашему лицу, даже когда у вас закрыты глаза.\n\nТелефон может разблокировать человек, очень похожий на вас (например, ваш близнец)."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Удалить данные распознавания лица?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Изображения и биометрические данные, которые используются фейсконтролем, будут удалены навсегда. В дальнейшем для разблокировки телефона, входа в приложения и подтверждения платежей устройство будет запрашивать PIN-код, пароль или графический ключ."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Используйте распознавание лица для разблокировки телефона"</string>
@@ -2562,7 +2562,6 @@
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"С последнего отключения <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Всего"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Обновить"</string>
-    <string name="process_kernel_label" msgid="3916858646836739323">"ОС Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Сервер медиа"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Оптимизация приложений"</string>
     <string name="battery_saver" msgid="8172485772238572153">"Режим энергосбережения"</string>
@@ -2693,8 +2692,6 @@
     <string name="no_device_admins" msgid="4846602835339095768">"Нет доступных приложений администратора устройства"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Личный"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Рабочий"</string>
-    <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Ограничение доступа к SMS и списку вызовов"</string>
-    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Доступ к SMS и списку вызовов есть только у приложений для звонков и обмена сообщениями, используемых по умолчанию"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Нет агентов доверия."</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Приложение администратора устройства"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Активировать приложение администратора устройства"</string>
@@ -3265,6 +3262,7 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"осязание, вибрация, чувствительность"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"энергосбережение, постоянная экономия заряда, батарея"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"программа, расписание, режим энергосбережения, экономия заряда, батарея, автоматически, процент"</string>
+    <string name="keywords_enhance_4g_lte" msgid="2273810564244790859">"volte, расширенный вызов, звонки по сети 4g"</string>
     <string name="default_sound" msgid="8821684447333687810">"Мелодия по умолчанию"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Громкость звонка: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Громкость, вибрация, режим \"Не беспокоить\""</string>
