@@ -440,7 +440,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"在應用程式中使用人臉解鎖時，一律必須經過確認"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"刪除臉孔資料"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"設定人臉解鎖功能"</string>
-    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"你可以使用人臉解鎖功能將裝置解鎖、登入應用程式及確認付款。\n\n注意事項：\n查看手機可能會導致手機意外解鎖。\n\n如果有人在你睜開雙眼時將手機置於你面前，手機可能會因此解鎖。\n\n長相與你相似的人可能可以解鎖你的手機，例如長相雷同的兄弟姊妹。"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"你可以使用人臉解鎖功能將裝置解鎖、登入應用程式及確認付款。\n\n注意事項：\n只要看著手機，就可能造成意外解鎖。\n\n如果有人將手機對著你的臉 (無論你是否有睜開雙眼)，手機可能會因此解鎖。\n\n長相與你相似的人可能可以解鎖你的手機，例如長相雷同的兄弟姊妹。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"要刪除臉孔資料嗎？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"系統會安全地將人臉解鎖功能使用的圖片和生理特徵辨識資料永久刪除。資料移除後，當你解鎖手機、登入應用程式及確認付款時，都需要使用 PIN 碼、解鎖圖案或密碼。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"使用人臉解鎖功能將手機解鎖"</string>
@@ -861,7 +861,7 @@
     <string name="wifi_error" msgid="3207971103917128179">"錯誤"</string>
     <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"5 GHz 頻帶在這個國家/地區不受支援"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"處於飛行模式時"</string>
-    <string name="wifi_notify_open_networks" msgid="76298880708051981">"開啟網路通知"</string>
+    <string name="wifi_notify_open_networks" msgid="76298880708051981">"開放式網路通知"</string>
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"有高品質的公用網路時通知我"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"自動開啟 Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"位於已儲存的高品質 Wi‑Fi 網路範圍內 (例如家用網路) 時自動重新開啟 Wi‑Fi"</string>
@@ -1217,7 +1217,7 @@
     <string name="auto_brightness_very_high_title" msgid="8867164854439331022">"非常高"</string>
     <string name="auto_brightness_subtitle" msgid="6454652530864093466">"你偏好的亮度"</string>
     <string name="auto_brightness_off_summary" msgid="7629228736838155268">"不要根據環境光源調整亮度"</string>
-    <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"將增加電池用量"</string>
+    <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"開啟會使耗電量增加。"</string>
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"根據環境光源調整最佳亮度。開啟這項功能之後，你依然可以暫時調整亮度。"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"系統會根據你的所在環境和從事的活動自動調整螢幕亮度。你可以手動移動滑桿協助自動調整亮度功能記憶你偏好的亮度。"</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"螢幕白平衡"</string>
@@ -1286,7 +1286,7 @@
     <string name="doze_title" msgid="2375510714460456687">"新通知"</string>
     <string name="doze_summary" msgid="3846219936142814032">"收到通知時喚醒螢幕"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"一律開啟"</string>
-    <string name="doze_always_on_summary" msgid="6978257596231155345">"顯示時間、通知圖示和其他資訊。將增加電池用量。"</string>
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"顯示時間、通知圖示和其他資訊，開啟會使耗電量增加。"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字型大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"縮小或放大文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡鎖定設定"</string>
@@ -3487,7 +3487,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個類別</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個類別</item>
     </plurals>
-    <string name="no_channels" msgid="3077375508177744586">"這個應用程式未發佈任何通知"</string>
+    <string name="no_channels" msgid="3077375508177744586">"這個應用程式未發布任何通知"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"應用程式中的其他設定"</string>
     <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"已針對所有應用程式開啟這項設定"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
@@ -3843,10 +3843,10 @@
     <string name="background_check_title" msgid="4534254315824525593">"完整背景存取權"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"使用畫面中的文字"</string>
     <string name="assist_access_context_summary" msgid="1991421283142279560">"允許小幫手應用程式存取畫面中的文字內容"</string>
-    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"使用螢幕擷取畫面"</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"使用螢幕截圖"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"允許小幫手應用程式存取畫面擷圖"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"閃爍螢幕"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"小幫手應用程式存取螢幕或螢幕擷取畫面中的文字時，螢幕邊緣會閃爍"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"小幫手應用程式存取螢幕或螢幕截圖中的文字時，螢幕邊緣會閃爍"</string>
     <string name="assist_footer" msgid="1982791172085896864">"小幫手應用程式可根據你目前瀏覽的畫面資訊，為你提供協助。部分應用程式同時支援啟動器和語音輸入服務，為你提供更完善的服務。"</string>
     <string name="average_memory_use" msgid="829566450150198512">"記憶體平均用量"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"記憶體最高用量"</string>
@@ -4389,11 +4389,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"系統繪圖驅動程式"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"這支手機不支援這項設定"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"這台平板電腦不支援這項設定"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"這個裝置不支援這項設定"</string>
@@ -4558,9 +4556,9 @@
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> 個已連線的裝置</item>
     </plurals>
     <string name="no_bluetooth_devices" msgid="861861879657732058">"沒有任何藍牙裝置"</string>
-    <string name="bluetooth_left_name" msgid="2133431890020995442">"左"</string>
-    <string name="bluetooth_right_name" msgid="525578831502355410">"右"</string>
-    <string name="bluetooth_middle_name" msgid="3272836932362043957">"手機殼"</string>
+    <string name="bluetooth_left_name" msgid="2133431890020995442">"左耳機"</string>
+    <string name="bluetooth_right_name" msgid="525578831502355410">"右耳機"</string>
+    <string name="bluetooth_middle_name" msgid="3272836932362043957">"充電盒"</string>
     <string name="settings_panel_title" msgid="4688575606213055744">"設定面板"</string>
     <string name="internet_connectivity_panel_title" msgid="721392242301676444">"網際網路連線"</string>
     <string name="volume_connectivity_panel_title" msgid="9192664643867101356">"音量"</string>
