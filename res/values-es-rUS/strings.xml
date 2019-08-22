@@ -776,7 +776,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opciones…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Config. avanzada"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth avanzado"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Permite conexión con dispositivos cercanos"</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Cuando Bluetooth está activado, permite conectarse con dispositivos cercanos"</string>
     <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Cuando el Bluetooth está activado, tu dispositivo puede usarlo para comunicarse con otros dispositivos cercanos.\n\nPara mejorar la experiencia, las apps y los servicios pueden buscar dispositivos cercanos incluso cuando la conexión Bluetooth esté desactivada. Esta función puede usarse, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación. Puedes cambiar esta opción en "<annotation id="link">"configuración de búsqueda"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema pueden detectar dispositivos Bluetooth. Puedes cambiar esta opción en la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>configuración de búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"No se pudo establecer la conexión. Vuelve a intentarlo."</string>
@@ -1332,7 +1332,7 @@
     <string name="hardware_revision" msgid="8893547686367095527">"Versión de hardware"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID del equipo"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versión de banda base"</string>
-    <string name="kernel_version" msgid="9192574954196167602">"Versión de núcleo"</string>
+    <string name="kernel_version" msgid="9192574954196167602">"Versión de kernel"</string>
     <string name="build_number" msgid="3075795840572241758">"Número de compilación"</string>
     <string name="module_version" msgid="7329118610303805859">"Actualización del sistema de Google Play"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"No disponible"</string>
@@ -1863,7 +1863,7 @@
     <string name="show_running_services" msgid="5736278767975544570">"Mostrar los servicios en ejecución"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Procesos en caché"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplicación de emergencia"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer preferencias de app"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer preferencias de apps"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"¿Restablecer preferencias?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Se restablecerán las preferencias de:\n\n"<li>"Apps inhabilitadas"</li>\n<li>"Notificaciones de apps inhabilitadas"</li>\n<li>"Apps predeterminadas para realizar acciones"</li>\n<li>"Restricciones de datos en segundo plano para apps"</li>\n<li>"Restricciones de permisos"</li>\n\n"No se perderán los datos de las apps."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Restablecer apps"</string>
@@ -3190,7 +3190,7 @@
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Sonido predeterminado"</string>
     <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Sonido que proporcionó la app"</string>
     <string name="notification_sound_default" msgid="565135733949733766">"Sonido de notificaciones predeterminado"</string>
-    <string name="alarm_ringtone_title" msgid="6344025478514311386">"Alarma: sonido predet."</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"Sonido de alarma predeterminado"</string>
     <string name="vibrate_when_ringing_title" msgid="8658910997501323472">"Vibrar para llamadas"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Otros sonidos"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tonos del teclado"</string>
@@ -3211,7 +3211,7 @@
     <string name="live_caption_summary" msgid="3365960379606535783">"Subtitular automáticamente"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Nunca"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>habilitadas</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> habilitadas</item>
       <item quantity="one">1 habilitada</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"No interrumpir"</string>
