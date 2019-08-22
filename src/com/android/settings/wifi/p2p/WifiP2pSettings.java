@@ -42,9 +42,11 @@ import android.os.SystemProperties;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -495,7 +497,9 @@ public class WifiP2pSettings extends DashboardFragment
                 .create();
             return dialog;
         } else if (id == DIALOG_RENAME) {
-            mDeviceNameText = new EditText(getActivity());
+            final LayoutInflater layoutInflater = LayoutInflater.from(getPrefContext());
+            final View root = layoutInflater.inflate(R.layout.dialog_edittext, null /* root */);
+            mDeviceNameText = root.findViewById(R.id.edittext);
             mDeviceNameText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(30)});
             if (mSavedDeviceName != null) {
                 mDeviceNameText.setText(mSavedDeviceName);
@@ -507,7 +511,7 @@ public class WifiP2pSettings extends DashboardFragment
             mSavedDeviceName = null;
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.wifi_p2p_menu_rename)
-                .setView(mDeviceNameText)
+                .setView(root)
                 .setPositiveButton(getActivity().getString(R.string.dlg_ok), mRenameListener)
                 .setNegativeButton(getActivity().getString(R.string.dlg_cancel), null)
                 .create();
