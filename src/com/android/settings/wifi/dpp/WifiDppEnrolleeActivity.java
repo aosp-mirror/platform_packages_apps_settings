@@ -44,7 +44,13 @@ public class WifiDppEnrolleeActivity extends WifiDppBaseActivity implements
 
     @Override
     protected void handleIntent(Intent intent) {
-        switch (intent.getAction()) {
+        String action = intent != null ? intent.getAction() : null;
+        if (action == null) {
+            finish();
+            return;
+        }
+
+        switch (action) {
             case ACTION_ENROLLEE_QR_CODE_SCANNER:
                 String ssid = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SSID);
                 showQrCodeScannerFragment(ssid);

@@ -46,8 +46,8 @@ public class WifiScanModeActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         if (savedInstanceState == null) {
-            if (intent != null && intent.getAction()
-                    .equals(WifiManager.ACTION_REQUEST_SCAN_ALWAYS_AVAILABLE)) {
+            if (intent != null && WifiManager.ACTION_REQUEST_SCAN_ALWAYS_AVAILABLE
+                    .equals(intent.getAction())) {
                 ApplicationInfo ai;
                 mApp = getCallingPackage();
                 try {

@@ -109,9 +109,15 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
 
     @Override
     protected void handleIntent(Intent intent) {
+        String action = intent != null ? intent.getAction() : null;
+        if (action == null) {
+            finish();
+            return;
+        }
+
         boolean cancelActivity = false;
         WifiNetworkConfig config;
-        switch (intent.getAction()) {
+        switch (action) {
             case ACTION_CONFIGURATOR_QR_CODE_SCANNER:
                 config = WifiNetworkConfig.getValidConfigOrNull(intent);
                 if (config == null) {
