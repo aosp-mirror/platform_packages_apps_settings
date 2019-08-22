@@ -363,7 +363,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Увімкнути віджети"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Вимкнено адміністратором"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Показувати опцію блокування"</string>
-    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Показувати опцію кнопки живлення, яка вимикає Smart Lock, біометричне розблокування та сповіщення на заблокованому екрані"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Додати в меню кнопки живлення функцію, яка вимикає Smart Lock, біометричне розблокування та сповіщення на заблокованому екрані"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Блокувати екран, коли втрачено довіру"</string>
     <string name="trust_lost_locks_screen_summary" msgid="693784434582021206">"Якщо цю функцію ввімкнено, пристрій заблокується, коли останній агент утратить довіру"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Немає"</string>
@@ -390,7 +390,7 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Телефон не зашифровано"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Пристрій зашифровано"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Пристрій не зашифровано"</string>
-    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Дисплей заблокованого екрана"</string>
+    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Заблокований екран"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"Що показувати"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Устан. Моє місцезн., розблок. екрана, блок. SIM-карти, сховища обл. даних"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Устан. Моє місцезн., розбл. екрана, блок. схов. обл. даних"</string>
@@ -444,7 +444,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Просити підтвердження під час використання Фейсконтролю в додатках"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Видалити дані про обличчя"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Налаштувати Фейсконтроль"</string>
-    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Використовуйте Фейсконтроль, щоб розблоковувати пристрій, входити в додатки й підтверджувати платежі.\n\nВажливо\nТелефон можна розблокувати поглядом випадково.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя, коли у вас відкриті очі.\n\nТелефон може розблокувати людина, схожа на вас, зокрема ваш близнюк."</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"З функцією фейсконтролю можна розблоковувати пристрій, входити в додатки й підтверджувати платежі.\n\nЗверніть увагу:\nпоглянувши на телефон, ви можете випадково розблокувати його в недоречний момент.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя, навіть коли у вас закриті очі.\n\nТелефон може розблокувати людина, схожа на вас, наприклад, ваш близнюк."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Видалити дані про обличчя?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Зображення й біометричні дані, потрібні для Фейсконтролю, остаточно й безпечно видаляться. Після цього потрібно буде вводити PIN-код, ключ або пароль, щоб розблоковувати телефон, входити в додатки й підтверджувати платежі."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Розблоковуйте телефон за допомогою фейсконтролю"</string>
@@ -2562,7 +2562,6 @@
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"З часу ост. відключ. для <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Заг. використ."</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Оновити"</string>
-    <string name="process_kernel_label" msgid="3916858646836739323">"ОС Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Медіа-сервер"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Оптимізація додатка"</string>
     <string name="battery_saver" msgid="8172485772238572153">"Режим економії заряду акумулятора"</string>
@@ -2693,8 +2692,6 @@
     <string name="no_device_admins" msgid="4846602835339095768">"Немає додатків адміністратора пристрою"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Особисте"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Робота"</string>
-    <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Обмежити доступ до SMS і журналу викликів"</string>
-    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Лише додатки для дзвінків і обміну повідомленнями за умовчанням мають дозволи на доступ до SMS і журналу викликів"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Немає довірчих агентів"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Активувати додаток адміністратора пристрою?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Активувати додаток адміністратора пристрою"</string>
@@ -3265,6 +3262,7 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"тактильна реакція, вібрація, чутливість"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"режим енергозбереження, закріплений, постійний, економія заряду, акумулятор"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"послідовність дій, розклад, режим енергозбереження, економія заряду, акумулятор, автоматично, відсоток"</string>
+    <string name="keywords_enhance_4g_lte" msgid="2273810564244790859">"volte, виклики з розширеними можливостями, виклики в режимі 4G"</string>
     <string name="default_sound" msgid="8821684447333687810">"Звук за умовчанням"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Гучність дзвінка: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Гучність, вібросигнал і режим \"Не турбувати\""</string>
