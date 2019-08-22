@@ -35,6 +35,7 @@ import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.IBinder;
 import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
@@ -48,6 +49,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -59,8 +61,6 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
@@ -75,6 +75,8 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigUiBase} to
@@ -1490,6 +1492,9 @@ public class WifiConfigController implements TextWatcher,
             if (isChecked) {
                 toggleVisibility = View.VISIBLE;
                 stringID = R.string.wifi_advanced_toggle_description_expanded;
+
+                // Hide the SoftKeyboard temporary to let user can see most of the expanded items.
+                hideSoftKeyboard(mView.getWindowToken());
             } else {
                 toggleVisibility = View.GONE;
                 stringID = R.string.wifi_advanced_toggle_description_collapsed;
@@ -1687,5 +1692,11 @@ public class WifiConfigController implements TextWatcher,
                     contentDescriptions[i].toString());
         }
         return accessibleEntries;
+    }
+
+    private void hideSoftKeyboard(IBinder windowToken) {
+        final InputMethodManager inputMethodManager = mContext.getSystemService(
+                InputMethodManager.class);
+        inputMethodManager.hideSoftInputFromWindow(windowToken, 0 /* flags */);
     }
 }
