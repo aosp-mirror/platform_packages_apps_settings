@@ -88,7 +88,7 @@ public class TetherService extends Service {
         String provisionResponse = getResourceForDefaultDataSubId().getString(
                 com.android.internal.R.string.config_mobile_hotspot_provision_response);
         registerReceiver(mReceiver, new IntentFilter(provisionResponse),
-                android.Manifest.permission.CONNECTIVITY_INTERNAL, null);
+                android.Manifest.permission.TETHER_PRIVILEGED, null);
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         mCurrentTethers = stringToTethers(prefs.getString(KEY_TETHERS, ""));
         mCurrentTypeIndex = 0;
