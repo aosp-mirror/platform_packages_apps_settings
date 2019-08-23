@@ -182,8 +182,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
     void showFinalConfirmation() {
         final Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
-        args.putBoolean(ERASE_ESIMS_EXTRA,
-            mEsimStorageContainer.getVisibility() == View.VISIBLE && mEsimStorage.isChecked());
+        args.putBoolean(ERASE_ESIMS_EXTRA, mEsimStorage.isChecked());
         new SubSettingLauncher(getContext())
                 .setDestination(MasterClearConfirm.class.getName())
                 .setArguments(args)
