@@ -45,13 +45,11 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -67,6 +65,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
 
     private static final IntentFilter FILTER = new IntentFilter();
     private static final String TAG = "DeviceAdminListPrefCtrl";
+    private static final String KEY_DEVICE_ADMIN_FOOTER = "device_admin_footer";
 
     private final DevicePolicyManager mDPM;
     private final UserManager mUm;
@@ -91,7 +90,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
     };
 
     private PreferenceGroup mPreferenceGroup;
-    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
+    private FooterPreference mFooterPreference;
 
     static {
         FILTER.addAction(ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED);
@@ -105,12 +104,6 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         mIPackageManager = AppGlobals.getPackageManager();
     }
 
-    public DeviceAdminListPreferenceController setFooterPreferenceMixin(
-            FooterPreferenceMixinCompat mixin) {
-        mFooterPreferenceMixin = mixin;
-        return this;
-    }
-
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
@@ -120,6 +113,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceGroup = screen.findPreference(getPreferenceKey());
+        mFooterPreference = mPreferenceGroup.findPreference(KEY_DEVICE_ADMIN_FOOTER);
     }
 
     @Override
@@ -167,10 +161,8 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         if (mPreferenceGroup == null) {
             return;
         }
-        if (mFooterPreferenceMixin != null) {
-            final FooterPreference footer = mFooterPreferenceMixin.createFooterPreference();
-            footer.setTitle(R.string.no_device_admins);
-            footer.setVisible(mAdmins.isEmpty());
+        if (mFooterPreference != null) {
+            mFooterPreference.setVisible(mAdmins.isEmpty());
         }
         final Map<String, SwitchPreference> preferenceCache = new ArrayMap<>();
         final Context prefContext = mPreferenceGroup.getContext();
