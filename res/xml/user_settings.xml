@@ -40,4 +40,11 @@
         android:order="105"
         settings:allowDividerAbove="true"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="multiuser_footer"
+        android:title="@string/user_settings_footer_text"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.users.MultiUserFooterPreferenceController"/>
+
 </PreferenceScreen>
