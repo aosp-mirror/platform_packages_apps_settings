@@ -31,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -82,6 +83,7 @@ public class InactiveApps extends SettingsPreferenceFragment
         final Context context = getActivity();
         final PackageManager pm = context.getPackageManager();
         final UsageStatsManager usm = context.getSystemService(UsageStatsManager.class);
+        final String settingsPackage = context.getPackageName();
 
         Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
         launcherIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -95,6 +97,10 @@ public class InactiveApps extends SettingsPreferenceFragment
             p.setEntries(SETTABLE_BUCKETS_NAMES);
             p.setEntryValues(SETTABLE_BUCKETS_VALUES);
             updateSummary(p);
+            // Don't allow Settings to change its own standby bucket.
+            if (TextUtils.equals(packageName, settingsPackage)) {
+                p.setEnabled(false);
+            }
             p.setOnPreferenceChangeListener(this);
 
             screen.addPreference(p);

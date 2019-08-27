@@ -43,7 +43,7 @@ public class SlicePreference extends LayoutPreference {
 
     private void init() {
         mSliceView = findViewById(R.id.slice_view);
-        mSliceView.showTitleItems(true);
+        mSliceView.setShowTitleItems(true);
         mSliceView.setScrollable(false);
     }
 

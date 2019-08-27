@@ -438,7 +438,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"При отключване с лице в приложенията винаги да се изисква потвърждение"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Изтриване на лицата"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Настройване на отключването с лице"</string>
-    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Използвайте „Отключване с лице“, за да отключвате устройството си, да влизате в профила си в приложения и да потвърждавате плащания.\n\nИмайте предвид следното:\nМожете да отключите телефона неволно, като го погледнете.\n\nТелефонът ви може да бъде отключен от друг човек, ако бъде приближен до лицето ви, докато очите ви са отворени.\n\nТой би могъл да бъде отключен и от някого, който много прилича на вас, например от ваши брат или сестра близнак."</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Използвайте „Отключване с лице“, за да отключвате устройството си, да влизате в профила си в приложения и да потвърждавате плащания.\n\nИмайте предвид следното:\nМожете да отключите телефона неволно, като го погледнете.\n\nТелефонът ви може да бъде отключен от друг човек, ако бъде приближен до лицето ви дори ако очите ви са затворени.\n\nТой би могъл да бъде отключен и от някого, който много прилича на вас, например от ваши брат или сестра близнак."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Да се изтрият ли данните за лицето?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Изображенията и биометричните данни, използвани от „Отключване с лице“, ще бъдат изтрити надеждно и за постоянно. След премахването ще имате нужда от ПИН кода, фигурата или паролата си, за да отключвате телефона си, да влизате в приложения и да потвърждавате плащания."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Използвайте функцията „Отключване с лице“, за да отключите телефона си"</string>
@@ -2488,7 +2488,6 @@
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"При последното изключване за <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Обща употреба"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Опресняване"</string>
-    <string name="process_kernel_label" msgid="3916858646836739323">"Android (ОС)"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Медиен сървър"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Оптимизиране на приложенията"</string>
     <string name="battery_saver" msgid="8172485772238572153">"Режим за запазване на батерията"</string>
@@ -2619,8 +2618,6 @@
     <string name="no_device_admins" msgid="4846602835339095768">"Няма приложения за администриране на устройството"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Лично"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Служебно"</string>
-    <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Огранич. на достъпа до SMS и списъка с обажданията"</string>
-    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Само стандартните приложения за телефон и съобщения имат разрешения за SMS и списъка с обажданията"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Няма налични trust agents"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Да се активира ли прилож. за администр.?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Активиране на това приложение за администриране на устройството"</string>
@@ -3181,6 +3178,7 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"осезателна обратна връзка, вибриране, чувствителност"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"режим за запазване на батерията, фиксиран, винаги включен, енергоспестяващ режим, батерия"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"поредица, график, режим за запазване на батерията, енергоспестяващ режим, батерия, автоматично, процент"</string>
+    <string name="keywords_enhance_4g_lte" msgid="2273810564244790859">"volte, разширени обаждания, обаждане през 4g"</string>
     <string name="default_sound" msgid="8821684447333687810">"Стандартен звук"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Сила на звука при звънене: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Сила на звука, вибриране, „Не безпокойте“"</string>
@@ -4554,7 +4552,7 @@
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> свързано устройство</item>
     </plurals>
     <string name="no_bluetooth_devices" msgid="861861879657732058">"Няма устройства с Bluetooth"</string>
-    <string name="bluetooth_left_name" msgid="2133431890020995442">"Ляво"</string>
+    <string name="bluetooth_left_name" msgid="2133431890020995442">"Лява"</string>
     <string name="bluetooth_right_name" msgid="525578831502355410">"Дясно"</string>
     <string name="bluetooth_middle_name" msgid="3272836932362043957">"Калъф"</string>
     <string name="settings_panel_title" msgid="4688575606213055744">"Панел за настройки"</string>

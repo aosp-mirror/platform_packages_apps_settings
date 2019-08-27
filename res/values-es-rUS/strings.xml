@@ -438,7 +438,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Solicitar confirmación al usar el desbloqueo facial en apps"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Borrar datos faciales"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Configurar Desbloqueo facial"</string>
-    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Usa el Desbloqueo facial para desbloquear tu dispositivo, acceder a apps y confirmar pagos.\n\nTen en cuenta lo siguiente:\nMirar el teléfono puede desbloquearlo aunque no lo desees.\n\nUn tercero puede desbloquear el teléfono si lo sostiene frente a tu rostro mientras tienes los ojos abiertos.\n\nPor otro lado, también puede desbloquearlo cualquier persona que se parezca a ti, como un hermano gemelo."</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Usa el desbloqueo facial para desbloquear tu dispositivo, acceder a apps y confirmar pagos.\n\nTen en cuenta lo siguiente:\nMirar el teléfono puede desbloquearlo aunque no lo desees.\n\nUn tercero puede desbloquear el teléfono si lo sostiene frente a tu rostro, incluso aunque tengas los ojos cerrados.\n\nPor otro lado, también puede desbloquearlo cualquier persona que se parezca mucho a ti, como un hermano gemelo."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"¿Quieres borrar los datos faciales?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Se borrarán de forma permanente y segura las imágenes y los datos biométricos que utilice el Desbloqueo facial. Luego de la eliminación, deberás ingresar tu PIN, patrón o contraseña para desbloquear el teléfono, acceder a apps y confirmar pagos."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Usa tu rostro para desbloquear el teléfono"</string>
@@ -777,7 +777,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opciones…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Config. avanzada"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth avanzado"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Permite conexión con dispositivos cercanos"</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Cuando Bluetooth está activado, permite conectarse con dispositivos cercanos"</string>
     <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Cuando el Bluetooth está activado, tu dispositivo puede usarlo para comunicarse con otros dispositivos cercanos.\n\nPara mejorar la experiencia, las apps y los servicios pueden buscar dispositivos cercanos incluso cuando la conexión Bluetooth esté desactivada. Esta función puede usarse, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación. Puedes cambiar esta opción en "<annotation id="link">"configuración de búsqueda"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema pueden detectar dispositivos Bluetooth. Puedes cambiar esta opción en la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>configuración de búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"No se pudo establecer la conexión. Vuelve a intentarlo."</string>
@@ -1338,7 +1338,7 @@
     <string name="hardware_revision" msgid="8893547686367095527">"Versión de hardware"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID del equipo"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versión de banda base"</string>
-    <string name="kernel_version" msgid="9192574954196167602">"Versión de núcleo"</string>
+    <string name="kernel_version" msgid="9192574954196167602">"Versión de kernel"</string>
     <string name="build_number" msgid="3075795840572241758">"Número de compilación"</string>
     <string name="module_version" msgid="7329118610303805859">"Actualización del sistema de Google Play"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"No disponible"</string>
@@ -1869,7 +1869,7 @@
     <string name="show_running_services" msgid="5736278767975544570">"Mostrar los servicios en ejecución"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Procesos en caché"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplicación de emergencia"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer preferencias de app"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer preferencias de apps"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"¿Restablecer preferencias?"</string>
     <string name="reset_app_preferences_desc" msgid="731757609326016760">"Se restablecerán todas las preferencias de lo siguiente:\n\n"<li>"Apps inhabilitadas"</li>\n<li>"Notificaciones de apps inhabilitadas"</li>\n<li>"Apps predeterminadas para realizar acciones"</li>\n<li>"Restricciones de datos en segundo plano para apps"</li>\n<li>"Restricciones de permisos"</li>\n\n"No perderás los datos de las apps."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Restablecer apps"</string>
@@ -2488,7 +2488,6 @@
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Durante la última desconexión para <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Total de usos"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Actualizar"</string>
-    <string name="process_kernel_label" msgid="3916858646836739323">"SO Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Servidor de medios"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Optimización de las aplicaciones"</string>
     <string name="battery_saver" msgid="8172485772238572153">"Ahorro de batería"</string>
@@ -2619,8 +2618,6 @@
     <string name="no_device_admins" msgid="4846602835339095768">"No hay apps de administración de dispositivo disponibles"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personal"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Trabajo"</string>
-    <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Restringir acceso a SMS y registro de llamadas"</string>
-    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Solo las apps de teléfono y mensajes predeterminadas tienen permiso de acceso a los SMS y el registro de llamadas"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"No hay agentes de confianza disponibles."</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"¿Activar la app de administración?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Activar la app de administración de este dispositivo"</string>
@@ -3181,6 +3178,7 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"háptica, vibrar, sensibilidad"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"ahorro de batería, fijo, permanente, ahorro de energía, batería"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"rutina, programa, ahorro de batería, ahorro de energía, batería, automático, porcentaje"</string>
+    <string name="keywords_enhance_4g_lte" msgid="2273810564244790859">"volte, llamadas avanzadas, llamadas mediante 4G"</string>
     <string name="default_sound" msgid="8821684447333687810">"Sonido predeterminado"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Volumen de tono: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volumen, vibración, No interrumpir"</string>
@@ -3197,7 +3195,7 @@
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Sonido predeterminado"</string>
     <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Sonido que proporcionó la app"</string>
     <string name="notification_sound_default" msgid="565135733949733766">"Sonido de notificaciones predeterminado"</string>
-    <string name="alarm_ringtone_title" msgid="6344025478514311386">"Alarma: sonido predet."</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"Sonido de alarma predeterminado"</string>
     <string name="vibrate_when_ringing_title" msgid="8658910997501323472">"Vibrar para llamadas"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Otros sonidos"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tonos del teclado"</string>
@@ -3218,7 +3216,7 @@
     <string name="live_caption_summary" msgid="3365960379606535783">"Subtitular automáticamente"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Nunca"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>habilitadas</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> habilitadas</item>
       <item quantity="one">1 habilitada</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"No interrumpir"</string>

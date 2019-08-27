@@ -40,7 +40,7 @@ public class MultiUserFooterPreferenceControllerTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new MultiUserFooterPreferenceController(mContext);
+        mController = new MultiUserFooterPreferenceController(mContext, "footer");
     }
 
     @Test

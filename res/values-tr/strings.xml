@@ -438,7 +438,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Uygulamalarda yüz tanıma kilidi kullanırken daima onay adımı gerektir."</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Yüz verilerini sil"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Yüz tanıma kilidini kur"</string>
-    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Cihazınızın kilidini açmak, uygulamalarda oturum açmak ve ödemeleri onaylamak için yüz tanıma kilidini kullanın.\n\nDikkat edilecek noktalar:\nTelefona bakarsanız, istemediğiniz zamanlarda da telefonunuzun kilidi açılabilir.\n\nTelefonunuz, gözleriniz açıkken yüzünüzün hizasına kaldırılırsa telefonunuzun kilidi başka biri tarafından da açılabilir.\n\nTelefonunuzun kilidi, ikiziniz gibi size çok benzeyen başka biri tarafından da açılabilir."</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Cihazınızın kilidini açmak, uygulamalarda oturum açmak ve ödemeleri onaylamak için yüz tanıma kilidini kullanın.\n\nDikkat edilecek noktalar:\nTelefona bakarsanız, istemediğiniz zamanlarda da telefonunuzun kilidi açılabilir.\n\nGözleriniz kapalıyken bile yüzünüzün hizasına tutulduğunda, telefonunuzun kilidi başka biri tarafından açılabilir.\n\nTelefonunuzun kilidi, ikiziniz gibi size çok benzeyen başka biri tarafından da açılabilir."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Yüz verileri silinsin mi?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Yüz tanıma kilidi tarafından kullanılan resimler ve biyometrik veriler kalıcı olarak, güvenli bir şekilde silinecektir. Kaldırma işleminden sonra, telefonunuzun kilidini açmak, oturumlarda oturum açmak ve ödemeleri onaylamak için PIN\'inize, deseninize veya şifrenize ihtiyacınız olur."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Telefonunuzun kilidini açmak için yüz tanıma kilidini kullanın"</string>
@@ -2488,7 +2488,6 @@
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> için fişten son çekildikten itibaren"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Kullanım toplamı"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Yenile"</string>
-    <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Medya sunucusu"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Optimizasyon ekle"</string>
     <string name="battery_saver" msgid="8172485772238572153">"Pil Tasarrufu"</string>
@@ -2619,8 +2618,6 @@
     <string name="no_device_admins" msgid="4846602835339095768">"Kullanılabilir cihaz yönetimi uygulaması yok"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Kişisel"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"İş"</string>
-    <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"SMS ve çağrı günlüğüne erişimi kısıtla"</string>
-    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Yalnızca varsayılan telefon ve mesajlaşma uygulamalarının SMS ve çağrı günlüğüne erişim izinleri vardır"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Kullanılabilir güven aracısı yok"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"Cihaz yönetimi uygulaması etkinleştirilsin mi?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Bu cihaz yönetimi uygulamasını etkinleştir"</string>
@@ -3181,6 +3178,7 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"dokunma teknolojisi, titreşim, hassasiyet"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"pil tasarrufu, yapışkan, kalıcı, güç tasarrufu, pil"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"rutin, program, pil tasarrufu, güç tasarrufu, pil, otomatik, yüzde"</string>
+    <string name="keywords_enhance_4g_lte" msgid="2273810564244790859">"VoLTE, Gelişmiş Arama, 4G Arama"</string>
     <string name="default_sound" msgid="8821684447333687810">"Varsayılan ses"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Zil sesi seviyesi: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Ses düzeyi, titreşim, Rahatsız Etmeyin"</string>
