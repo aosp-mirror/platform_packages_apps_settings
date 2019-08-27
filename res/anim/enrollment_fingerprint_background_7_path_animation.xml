@@ -23,14 +23,12 @@
             android:propertyName="fillColor"
             android:valueFrom="#000000"
             android:valueTo="#4285F4"
-            android:valueType="intType"
             android:interpolator="@android:interpolator/linear_out_slow_in" />
         <objectAnimator
             android:duration="300"
             android:propertyName="fillAlpha"
-            android:valueFrom="0.07f"
-            android:valueTo="0.65f"
-            android:valueType="floatType" />
+            android:valueFrom="0.07"
+            android:valueTo="0.65" />
     </set>
     <set
         android:ordering="together" >
@@ -39,13 +37,11 @@
             android:propertyName="fillColor"
             android:valueFrom="#4285F4"
             android:valueTo="#000000"
-            android:valueType="intType"
             android:interpolator="@android:interpolator/fast_out_slow_in" />
         <objectAnimator
             android:duration="300"
             android:propertyName="fillAlpha"
-            android:valueFrom="0.65f"
-            android:valueTo="0.07f"
-            android:valueType="floatType" />
+            android:valueFrom="0.65"
+            android:valueTo="0.07" />
     </set>
 </set>
