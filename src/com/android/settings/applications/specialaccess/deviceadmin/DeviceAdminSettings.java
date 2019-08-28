@@ -38,13 +38,6 @@ public class DeviceAdminSettings extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        use(DeviceAdminListPreferenceController.class).setFooterPreferenceMixin(
-                mFooterPreferenceMixin);
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.device_admin_settings;
     }
