@@ -311,6 +311,25 @@
                         style="@style/wifi_item_content"
                         android:text="@string/wifi_show_password" />
             </LinearLayout>
+
+            <LinearLayout android:id="@+id/sae_password_id_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/wifi_item"
+                    android:visibility="gone">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/wifi_item_label"
+                        android:text="@string/wifi_sae_password_id" />
+
+                <EditText android:id="@+id/sae_password_id"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          style="@style/wifi_item_edit_content"
+                          android:singleLine="true"
+                          android:inputType="textNoSuggestions" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout android:id="@+id/wifi_advanced_toggle"
