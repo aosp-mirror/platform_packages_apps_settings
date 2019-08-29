@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.display.DisplayDensityConfiguration;
 import com.android.settingslib.display.DisplayDensityUtils;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -100,9 +101,9 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
     protected void commit() {
         final int densityDpi = mValues[mCurrentIndex];
         if (densityDpi == mDefaultDensity) {
-            DisplayDensityUtils.clearForcedDisplayDensity(Display.DEFAULT_DISPLAY);
+            DisplayDensityConfiguration.clearForcedDisplayDensity(Display.DEFAULT_DISPLAY);
         } else {
-            DisplayDensityUtils.setForcedDisplayDensity(Display.DEFAULT_DISPLAY, densityDpi);
+            DisplayDensityConfiguration.setForcedDisplayDensity(Display.DEFAULT_DISPLAY, densityDpi);
         }
     }
 

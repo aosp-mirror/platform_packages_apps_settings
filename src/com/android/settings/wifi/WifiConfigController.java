@@ -133,6 +133,7 @@ public class WifiConfigController implements TextWatcher,
     @VisibleForTesting
     int mAccessPointSecurity;
     private TextView mPasswordView;
+    private TextView mSaePasswordIdView;
     private ImageButton mSsidScanButton;
 
     private String mUnspecifiedCertString;
@@ -797,6 +798,11 @@ public class WifiConfigController implements TextWatcher,
                     String password = mPasswordView.getText().toString();
                     config.preSharedKey = '"' + password + '"';
                 }
+                if (mSaePasswordIdView.length() != 0) {
+                    config.saePasswordId = mSaePasswordIdView.getText().toString();
+                } else {
+                    config.saePasswordId = null;
+                }
                 break;
 
             case AccessPoint.SECURITY_OWE:
@@ -977,6 +983,23 @@ public class WifiConfigController implements TextWatcher,
             if (mAccessPoint != null && mAccessPoint.isSaved()) {
                 mPasswordView.setHint(R.string.wifi_unchanged);
             }
+        }
+
+        if (mSaePasswordIdView == null) {
+            mSaePasswordIdView = (TextView) mView.findViewById(R.id.sae_password_id);
+            mSaePasswordIdView.setOnEditorActionListener(this);
+            mSaePasswordIdView.setOnKeyListener(this);
+        }
+
+        if (mAccessPointSecurity == AccessPoint.SECURITY_SAE) {
+            mView.findViewById(R.id.sae_password_id_layout).setVisibility(View.VISIBLE);
+            if (mAccessPoint != null && mAccessPoint.isSaved()) {
+                if (!TextUtils.isEmpty(mAccessPoint.getConfig().saePasswordId)) {
+                    mSaePasswordIdView.setText(mAccessPoint.getConfig().saePasswordId);
+                }
+            }
+        } else {
+            setSaePasswordIdInvisible();
         }
 
         if (mAccessPointSecurity != AccessPoint.SECURITY_EAP &&
@@ -1258,6 +1281,11 @@ public class WifiConfigController implements TextWatcher,
         mPasswordView.setText("");
         mView.findViewById(R.id.password_layout).setVisibility(View.GONE);
         mView.findViewById(R.id.show_password_layout).setVisibility(View.GONE);
+    }
+
+    private void setSaePasswordIdInvisible() {
+        mSaePasswordIdView.setText("");
+        mView.findViewById(R.id.sae_password_id_layout).setVisibility(View.GONE);
     }
 
     private void setEapMethodInvisible() {
