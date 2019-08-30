@@ -199,7 +199,8 @@ public class DataSaverBackend {
         }
 
         @Override
-        public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue) {
+        public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue,
+                long networkTypeMask) {
         }
     };
 
