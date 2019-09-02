@@ -24,17 +24,23 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.media.AudioManager;
 import android.net.Uri;
 
+import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +60,15 @@ public class MediaDeviceUpdateWorkerTest {
     private Context mContext;
     private MediaDevice mMediaDevice1;
     private MediaDevice mMediaDevice2;
+    private ShadowApplication mShadowApplication;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI);
         mResolver = mock(ContentResolver.class);
+        mShadowApplication = ShadowApplication.getInstance();
 
         mMediaDevice1 = mock(MediaDevice.class);
         when(mMediaDevice1.getId()).thenReturn(TEST_DEVICE_1_ID);
@@ -128,5 +137,18 @@ public class MediaDeviceUpdateWorkerTest {
         final List<MediaDevice> devices = mMediaDeviceUpdateWorker.getMediaDevices();
 
         assertThat(devices.size()).isEqualTo(newDevices.size());
+    }
+
+    @Test
+    public void onReceive_shouldNotifyChange() {
+        mMediaDeviceUpdateWorker.mLocalMediaManager = mock(LocalMediaManager.class);
+
+        mMediaDeviceUpdateWorker.onSlicePinned();
+        final Intent intent = new Intent(AudioManager.STREAM_DEVICES_CHANGED_ACTION);
+        for (BroadcastReceiver receiver : mShadowApplication.getReceiversForIntent(intent)) {
+            receiver.onReceive(mContext, intent);
+        }
+
+        verify(mResolver).notifyChange(URI, null);
     }
 }

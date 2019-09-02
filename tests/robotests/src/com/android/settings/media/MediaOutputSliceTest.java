@@ -34,7 +34,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.telephony.TelephonyManager;
+import android.media.AudioManager;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -56,13 +56,12 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowTelephonyManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class, ShadowTelephonyManager.class})
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class MediaOutputSliceTest {
 
     private static final String TEST_PACKAGE_NAME = "com.fake.android.music";
@@ -82,21 +81,20 @@ public class MediaOutputSliceTest {
     private MediaOutputSlice mMediaOutputSlice;
     private MediaDeviceUpdateWorker mMediaDeviceUpdateWorker;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
-    private ShadowTelephonyManager mShadowTelephonyManager;
+    private AudioManager mAudioManager;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mShadowTelephonyManager = Shadow.extract(mContext.getSystemService(
-                Context.TELEPHONY_SERVICE));
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         // Setup BluetoothAdapter
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);
-        mShadowTelephonyManager.setCallState(TelephonyManager.CALL_STATE_IDLE);
 
         mMediaOutputSlice = new MediaOutputSlice(mContext);
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, MEDIA_OUTPUT_SLICE_URI);
@@ -131,8 +129,8 @@ public class MediaOutputSliceTest {
     }
 
     @Test
-    public void getSlice_callStateRinging_shouldReturnZeroRow() {
-        mShadowTelephonyManager.setCallState(TelephonyManager.CALL_STATE_RINGING);
+    public void getSlice_audioModeIsOngoingCall_shouldReturnZeroRow() {
+        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
 
         final Slice slice = mMediaOutputSlice.getSlice();
 

@@ -16,11 +16,19 @@
 
 package com.android.settings.media;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.net.Uri;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
@@ -35,6 +43,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothUtils.class})
@@ -47,20 +56,27 @@ public class MediaOutputIndicatorWorkerTest {
     private LocalBluetoothManager mLocalBluetoothManager;
     private Context mContext;
     private MediaOutputIndicatorWorker mMediaDeviceUpdateWorker;
+    private ShadowApplication mShadowApplication;
+    private ContentResolver mResolver;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mShadowApplication = ShadowApplication.getInstance();
         mContext = spy(RuntimeEnvironment.application);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         mMediaDeviceUpdateWorker = new MediaOutputIndicatorWorker(mContext, URI);
+
+        mResolver = mock(ContentResolver.class);
+        doReturn(mResolver).when(mContext).getContentResolver();
     }
 
     @Test
     public void onSlicePinned_registerCallback() {
         mMediaDeviceUpdateWorker.onSlicePinned();
         verify(mBluetoothEventManager).registerCallback(mMediaDeviceUpdateWorker);
+        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
     }
 
     @Test
@@ -68,5 +84,18 @@ public class MediaOutputIndicatorWorkerTest {
         mMediaDeviceUpdateWorker.onSlicePinned();
         mMediaDeviceUpdateWorker.onSliceUnpinned();
         verify(mBluetoothEventManager).unregisterCallback(mMediaDeviceUpdateWorker);
+        verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
+    }
+
+    @Test
+    public void onReceive_shouldNotifyChange() {
+        mMediaDeviceUpdateWorker.onSlicePinned();
+
+        final Intent intent = new Intent(AudioManager.STREAM_DEVICES_CHANGED_ACTION);
+        for (BroadcastReceiver receiver : mShadowApplication.getReceiversForIntent(intent)) {
+            receiver.onReceive(mContext, intent);
+        }
+
+        verify(mResolver).notifyChange(URI, null);
     }
 }

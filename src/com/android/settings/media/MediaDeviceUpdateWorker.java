@@ -16,8 +16,15 @@
 
 package com.android.settings.media;
 
+import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
+
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -37,6 +44,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
 
     private final Context mContext;
     private final List<MediaDevice> mMediaDevices = new ArrayList<>();
+    private final DevicesChangedBroadcastReceiver mReceiver;
 
     private String mPackageName;
 
@@ -46,6 +54,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     public MediaDeviceUpdateWorker(Context context, Uri uri) {
         super(context, uri);
         mContext = context;
+        mReceiver = new DevicesChangedBroadcastReceiver();
     }
 
     public void setPackageName(String packageName) {
@@ -60,12 +69,15 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         }
 
         mLocalMediaManager.registerCallback(this);
+        final IntentFilter intentFilter = new IntentFilter(STREAM_DEVICES_CHANGED_ACTION);
+        mContext.registerReceiver(mReceiver, intentFilter);
         mLocalMediaManager.startScan();
     }
 
     @Override
     protected void onSliceUnpinned() {
         mLocalMediaManager.unregisterCallback(this);
+        mContext.unregisterReceiver(mReceiver);
         mLocalMediaManager.stopScan();
     }
 
@@ -106,5 +118,15 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
 
     public MediaDevice getCurrentConnectedMediaDevice() {
         return mLocalMediaManager.getCurrentConnectedDevice();
+    }
+
+    private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (TextUtils.equals(AudioManager.STREAM_DEVICES_CHANGED_ACTION, action)) {
+                notifySliceChange();
+            }
+        }
     }
 }
