@@ -53,6 +53,22 @@
         settings:keywords="@string/keywords_enhance_4g_lte"
         settings:controller="com.android.settings.network.telephony.Enhanced4gLtePreferenceController"/>
 
+    <SwitchPreference
+        android:key="4g_calling"
+        android:title="@string/enhanced_4g_lte_mode_title_4g_calling"
+        android:persistent="false"
+        android:summary="@string/enhanced_4g_lte_mode_summary_4g_calling"
+        settings:keywords="@string/keywords_enhance_4g_lte"
+        settings:controller="com.android.settings.network.telephony.Enhanced4gCallingPreferenceController"/>
+
+    <SwitchPreference
+        android:key="advance_call"
+        android:title="@string/enhanced_4g_lte_mode_title_advanced_calling"
+        android:persistent="false"
+        android:summary="@string/enhanced_4g_lte_mode_summary"
+        settings:keywords="@string/keywords_enhance_4g_lte"
+        settings:controller="com.android.settings.network.telephony.Enhanced4gAdvancedCallingPreferenceController"/>
+
     <ListPreference
         android:key="preferred_network_mode_key"
         android:title="@string/preferred_network_mode_title"

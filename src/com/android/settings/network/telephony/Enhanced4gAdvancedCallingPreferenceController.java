@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,16 +19,17 @@ package com.android.settings.network.telephony;
 import android.content.Context;
 
 /**
- * Preference controller for "Enhanced 4G LTE"
+ * Preference controller for "Advance Calling"
  */
-public class Enhanced4gLtePreferenceController extends Enhanced4gBasePreferenceController {
+public class Enhanced4gAdvancedCallingPreferenceController extends
+        Enhanced4gBasePreferenceController {
 
-    public Enhanced4gLtePreferenceController(Context context, String key) {
+    public Enhanced4gAdvancedCallingPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
     protected int getMode() {
-        return MODE_VOLTE;
+        return MODE_ADVANCED_CALL;
     }
 }
