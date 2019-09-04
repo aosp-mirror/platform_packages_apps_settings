@@ -24,8 +24,11 @@ import android.content.Intent;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
+import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.Settings.PrivacySettingsActivity;
@@ -33,7 +36,7 @@ import com.android.settings.Settings.PrivacySettingsActivity;
 import java.net.URISyntaxException;
 
 /**
- * Helper class for {@link BackupSettingsActivity} that interacts with {@link IBackupManager}.
+ * Helper class for {@link UserBackupSettingsActivity} that interacts with {@link IBackupManager}.
  */
 public class BackupSettingsHelper {
     private static final String TAG = "BackupSettingsHelper";
@@ -45,6 +48,24 @@ public class BackupSettingsHelper {
 
     public BackupSettingsHelper(Context context) {
         mContext = context;
+    }
+
+    /**
+     * If there is only one profile, show whether the backup is on or off.
+     * Otherwise, show nothing.
+     */
+    String getSummary() {
+        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        if (userManager.getUserProfiles().size() == 1) {
+            try {
+                int resId = mBackupManager.isBackupEnabled() ? R.string.backup_summary_state_on
+                    : R.string.backup_summary_state_off;
+                return mContext.getText(resId).toString();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Error getting isBackupEnabled", e);
+            }
+        }
+        return null;
     }
 
     /**
@@ -71,9 +92,9 @@ public class BackupSettingsHelper {
      *
      * @return Label for the backup settings item.
      */
-    public String getLabelForBackupSettings() {
-        String label = getLabelFromBackupTransport();
-        if (label == null || label.isEmpty()) {
+    public CharSequence getLabelForBackupSettings() {
+        CharSequence label = getLabelFromBackupTransport();
+        if (TextUtils.isEmpty(label)) {
             label = mContext.getString(R.string.privacy_settings_title);
         }
         return label;
@@ -151,7 +172,6 @@ public class BackupSettingsHelper {
     }
 
     private Intent getIntentForDefaultBackupSettings() {
-        // Extra needed by {@link SettingsDrawerActivity} to show the back button navigation.
         return new Intent(mContext, PrivacySettingsActivity.class);
     }
 
@@ -190,7 +210,7 @@ public class BackupSettingsHelper {
     }
 
     /** Checks if backup service is enabled for this user. */
-    private boolean isBackupServiceActive() {
+    public boolean isBackupServiceActive() {
         boolean backupOkay;
         try {
             backupOkay = mBackupManager.isBackupServiceActive(UserHandle.myUserId());
@@ -203,10 +223,11 @@ public class BackupSettingsHelper {
     }
 
     @VisibleForTesting
-    String getLabelFromBackupTransport() {
+    CharSequence getLabelFromBackupTransport() {
         try {
-            String label =
-                    mBackupManager.getDataManagementLabel(mBackupManager.getCurrentTransport());
+            CharSequence label =
+                    mBackupManager.getDataManagementLabelForUser(
+                            UserHandle.myUserId(), mBackupManager.getCurrentTransport());
             if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "Received the backup settings label from backup transport: " + label);
             }

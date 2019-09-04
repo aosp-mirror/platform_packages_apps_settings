@@ -17,8 +17,9 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 

@@ -36,16 +36,17 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.internal.annotations.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -191,12 +192,10 @@ public class AccountPreferenceController extends AbstractPreferenceController
                         data.screenTitle = screenTitle;
                         rawData.add(data);
                     }
-                    {
-                        SearchIndexableRaw data = new SearchIndexableRaw(mContext);
-                        data.title = res.getString(R.string.managed_profile_settings_title);
-                        data.screenTitle = screenTitle;
-                        rawData.add(data);
-                    }
+                    SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+                    data.title = res.getString(R.string.managed_profile_settings_title);
+                    data.screenTitle = screenTitle;
+                    rawData.add(data);
                 }
             }
         }
@@ -250,7 +249,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 new SubSettingLauncher(mContext)
                         .setSourceMetricsCategory(mParent.getMetricsCategory())
                         .setDestination(ManagedProfileSettings.class.getName())
-                        .setTitle(R.string.managed_profile_settings_title)
+                        .setTitleRes(R.string.managed_profile_settings_title)
                         .setArguments(arguments)
                         .launch();
 
@@ -299,6 +298,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         final ProfileData data = mProfiles.get(userInfo.id);
         if (data != null) {
             data.pendingRemoval = false;
+            data.userInfo = userInfo;
             if (userInfo.isEnabled()) {
                 // recreate the authentication helper to refresh the list of enabled accounts
                 data.authenticatorHelper =
@@ -351,7 +351,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         RestrictedPreference preference =
             new RestrictedPreference(mParent.getPreferenceManager().getContext());
         preference.setTitle(R.string.add_account_label);
-        preference.setIcon(R.drawable.ic_menu_add);
+        preference.setIcon(R.drawable.ic_add_24dp);
         preference.setOnPreferenceClickListener(this);
         preference.setOrder(ORDER_NEXT_TO_NEXT_TO_LAST);
         return preference;

@@ -50,5 +50,4 @@ public class FakeIndexProvider implements Indexable {
                     return result;
                 }
             };
-
 }

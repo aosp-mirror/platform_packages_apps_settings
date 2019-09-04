@@ -16,56 +16,61 @@
 
 package com.android.settings.notification;
 
+import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import android.app.Activity;
 import android.app.Application;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
+import android.app.usage.IUsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
+import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ConfigureNotificationSettings extends DashboardFragment {
+@SearchIndexable
+public class ConfigureNotificationSettings extends DashboardFragment implements
+        OnActivityResultListener {
     private static final String TAG = "ConfigNotiSettings";
 
     @VisibleForTesting
-    static final String KEY_LOCKSCREEN = "lock_screen_notifications";
-    @VisibleForTesting
-    static final String KEY_LOCKSCREEN_WORK_PROFILE_HEADER =
-            "lock_screen_notifications_profile_header";
-    @VisibleForTesting
-    static final String KEY_LOCKSCREEN_WORK_PROFILE = "lock_screen_notifications_profile";
-    @VisibleForTesting
     static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
+    static final String KEY_LOCKSCREEN = "lock_screen_notifications";
 
     private static final String KEY_NOTI_DEFAULT_RINGTONE = "notification_default_ringtone";
-    private static final String KEY_ZEN_MODE = "zen_mode_notifications";
-
-    private RingtonePreference mRequestPreference;
     private static final int REQUEST_CODE = 200;
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
+    private static final String KEY_ADVANCED_CATEGORY = "configure_notifications_advanced";
+
+    private RingtonePreference mRequestPreference;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CONFIGURE_NOTIFICATION;
+        return SettingsEnums.CONFIGURE_NOTIFICATION;
     }
 
     @Override
@@ -87,27 +92,18 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         } else {
             app = null;
         }
-        return buildPreferenceControllers(context, getLifecycle(), app, this);
+        return buildPreferenceControllers(context, app, this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, Application app, Fragment host) {
+            Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final PulseNotificationPreferenceController pulseController =
-                new PulseNotificationPreferenceController(context);
-        final LockScreenNotificationPreferenceController lockScreenNotificationController =
-                new LockScreenNotificationPreferenceController(context,
-                        KEY_LOCKSCREEN,
-                        KEY_LOCKSCREEN_WORK_PROFILE_HEADER,
-                        KEY_LOCKSCREEN_WORK_PROFILE);
-        if (lifecycle != null) {
-            lifecycle.addObserver(pulseController);
-            lifecycle.addObserver(lockScreenNotificationController);
-        }
         controllers.add(new RecentNotifyingAppsPreferenceController(
-                context, new NotificationBackend(), app, host));
-        controllers.add(pulseController);
-        controllers.add(lockScreenNotificationController);
+                context, new NotificationBackend(), IUsageStatsManager.Stub.asInterface(
+                        ServiceManager.getService(Context.USAGE_STATS_SERVICE)),
+                context.getSystemService(UserManager.class), app, host));
+        controllers.add(new ShowOnLockScreenNotificationPreferenceController(
+                context, KEY_LOCKSCREEN));
         controllers.add(new NotificationRingtonePreferenceController(context) {
             @Override
             public String getPreferenceKey() {
@@ -115,8 +111,28 @@ public class ConfigureNotificationSettings extends DashboardFragment {
             }
 
         });
-        controllers.add(new ZenModePreferenceController(context, lifecycle, KEY_ZEN_MODE));
         return controllers;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        final PreferenceScreen screen = getPreferenceScreen();
+        final Bundle arguments = getArguments();
+
+        if (screen == null) {
+            return;
+        }
+        if (arguments != null) {
+            final String highlightKey = arguments.getString(EXTRA_FRAGMENT_ARG_KEY);
+            if (!TextUtils.isEmpty(highlightKey)) {
+                final PreferenceCategory advancedCategory =
+                        screen.findPreference(KEY_ADVANCED_CATEGORY);
+                // Has highlight row - expand everything
+                advancedCategory.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
+                scrollToPreference(advancedCategory);
+            }
+        }
     }
 
     @Override
@@ -124,7 +140,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         if (preference instanceof RingtonePreference) {
             mRequestPreference = (RingtonePreference) preference;
             mRequestPreference.onPrepareRingtonePickerIntent(mRequestPreference.getIntent());
-            startActivityForResultAsUser(
+            getActivity().startActivityForResultAsUser(
                     mRequestPreference.getIntent(),
                     REQUEST_CODE,
                     null,
@@ -214,17 +230,13 @@ public class ConfigureNotificationSettings extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null, null, null);
+                    return buildPreferenceControllers(context, null, null);
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
                     keys.add(KEY_SWIPE_DOWN);
-                    keys.add(KEY_LOCKSCREEN);
-                    keys.add(KEY_LOCKSCREEN_WORK_PROFILE);
-                    keys.add(KEY_LOCKSCREEN_WORK_PROFILE_HEADER);
-                    keys.add(KEY_ZEN_MODE);
                     return keys;
                 }
             };

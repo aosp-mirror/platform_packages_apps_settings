@@ -19,19 +19,17 @@ package com.android.settings.deviceinfo.simstatus;
 import static android.content.Context.CARRIER_CONFIG_SERVICE;
 import static android.content.Context.EUICC_SERVICE;
 import static android.content.Context.TELEPHONY_SERVICE;
+import static android.content.Context.TELEPHONY_SUBSCRIPTION_SERVICE;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellBroadcastMessage;
 import android.telephony.PhoneStateListener;
@@ -39,21 +37,23 @@ import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-
-import java.util.List;
 
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
@@ -98,9 +98,21 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             "com.android.cellbroadcastreceiver.GET_LATEST_CB_AREA_INFO";
     private final static String CELL_BROADCAST_RECEIVER_APP = "com.android.cellbroadcastreceiver";
 
+    private final OnSubscriptionsChangedListener mOnSubscriptionsChangedListener =
+            new OnSubscriptionsChangedListener() {
+                @Override
+                public void onSubscriptionsChanged() {
+                    mSubscriptionInfo = mSubscriptionManager.getActiveSubscriptionInfo(
+                            mSubscriptionInfo.getSubscriptionId());
+                    updateNetworkProvider();
+                }
+            };
+
+    private SubscriptionInfo mSubscriptionInfo;
+
     private final SimStatusDialogFragment mDialog;
-    private final SubscriptionInfo mSubscriptionInfo;
     private final TelephonyManager mTelephonyManager;
+    private final SubscriptionManager mSubscriptionManager;
     private final CarrierConfigManager mCarrierConfigManager;
     private final EuiccManager mEuiccManager;
     private final Resources mRes;
@@ -134,11 +146,10 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mDialog = dialog;
         mContext = dialog.getContext();
         mSubscriptionInfo = getPhoneSubscriptionInfo(slotId);
-        mTelephonyManager = (TelephonyManager) mContext.getSystemService(
-                TELEPHONY_SERVICE);
-        mCarrierConfigManager = (CarrierConfigManager) mContext.getSystemService(
-                CARRIER_CONFIG_SERVICE);
-        mEuiccManager = (EuiccManager) mContext.getSystemService(EUICC_SERVICE);
+        mTelephonyManager =  mContext.getSystemService(TelephonyManager.class);
+        mCarrierConfigManager =  mContext.getSystemService(CarrierConfigManager.class);
+        mEuiccManager =  mContext.getSystemService(EuiccManager.class);
+        mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
 
         mRes = mContext.getResources();
 
@@ -155,9 +166,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
 
         mPhoneStateListener = getPhoneStateListener();
+        updateNetworkProvider();
 
         final ServiceState serviceState = getCurrentServiceState();
-        updateNetworkProvider(serviceState);
         updatePhoneNumber();
         updateLatestAreaInfo();
         updateServiceState(serviceState);
@@ -174,10 +185,12 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
-        mTelephonyManager.listen(mPhoneStateListener,
+        mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId())
+                .listen(mPhoneStateListener,
                 PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
                         | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
                         | PhoneStateListener.LISTEN_SERVICE_STATE);
+        mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
 
         if (mShowLatestAreaInfo) {
             mContext.registerReceiver(mAreaInfoReceiver,
@@ -197,16 +210,19 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
-        mTelephonyManager.listen(mPhoneStateListener,
-                PhoneStateListener.LISTEN_NONE);
+        mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
+        mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId())
+                .listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
         if (mShowLatestAreaInfo) {
             mContext.unregisterReceiver(mAreaInfoReceiver);
         }
     }
 
-    private void updateNetworkProvider(ServiceState serviceState) {
-        mDialog.setText(NETWORK_PROVIDER_VALUE_ID, serviceState.getOperatorAlphaLong());
+    private void updateNetworkProvider() {
+        final CharSequence carrierName =
+                mSubscriptionInfo != null ? mSubscriptionInfo.getCarrierName() : null;
+        mDialog.setText(NETWORK_PROVIDER_VALUE_ID, carrierName);
     }
 
     private void updatePhoneNumber() {
@@ -252,8 +268,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateServiceState(ServiceState serviceState) {
-        final int state = serviceState.getState();
-        if (state == ServiceState.STATE_OUT_OF_SERVICE || state == ServiceState.STATE_POWER_OFF) {
+        final int state = Utils.getCombinedServiceState(serviceState);
+        if (!Utils.isInService(serviceState)) {
             resetSignalStrength();
         }
 
@@ -281,6 +297,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateSignalStrength(SignalStrength signalStrength) {
+        if (signalStrength == null) {
+            return;
+        }
         final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
         final PersistableBundle carrierConfig =
                 mCarrierConfigManager.getConfigForSubId(subscriptionId);
@@ -296,10 +315,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
-        final int state = getCurrentServiceState().getState();
-
-        if ((ServiceState.STATE_OUT_OF_SERVICE == state) ||
-                (ServiceState.STATE_POWER_OFF == state)) {
+        ServiceState serviceState = getCurrentServiceState();
+        if (serviceState == null || !Utils.isInService(serviceState)) {
             return;
         }
 
@@ -383,7 +400,11 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateEid() {
-        mDialog.setText(EID_INFO_VALUE_ID, mEuiccManager.getEid());
+        if (mEuiccManager.isEnabled()) {
+            mDialog.setText(EID_INFO_VALUE_ID, mEuiccManager.getEid());
+        } else {
+            mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
+        }
     }
 
     private void updateImsRegistrationState() {
@@ -403,13 +424,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private SubscriptionInfo getPhoneSubscriptionInfo(int slotId) {
-        final List<SubscriptionInfo> subscriptionInfoList = SubscriptionManager.from(
-                mContext).getActiveSubscriptionInfoList();
-        if (subscriptionInfoList != null && subscriptionInfoList.size() > slotId) {
-            return subscriptionInfoList.get(slotId);
-        } else {
-            return null;
-        }
+        return SubscriptionManager.from(mContext).getActiveSubscriptionInfoForSimSlotIndex(slotId);
     }
 
     @VisibleForTesting
@@ -418,20 +433,17 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 mSubscriptionInfo.getSubscriptionId());
     }
 
-    @VisibleForTesting
-    int getDbm(SignalStrength signalStrength) {
+    private int getDbm(SignalStrength signalStrength) {
         return signalStrength.getDbm();
     }
 
-    @VisibleForTesting
-    int getAsuLevel(SignalStrength signalStrength) {
+    private int getAsuLevel(SignalStrength signalStrength) {
         return signalStrength.getAsuLevel();
     }
 
     @VisibleForTesting
     PhoneStateListener getPhoneStateListener() {
-        return new PhoneStateListener(
-                mSubscriptionInfo.getSubscriptionId()) {
+        return new PhoneStateListener() {
             @Override
             public void onDataConnectionStateChanged(int state) {
                 updateDataState(state);
@@ -445,7 +457,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
             @Override
             public void onServiceStateChanged(ServiceState serviceState) {
-                updateNetworkProvider(serviceState);
+                updateNetworkProvider();
                 updateServiceState(serviceState);
                 updateRoamingStatus(serviceState);
             }

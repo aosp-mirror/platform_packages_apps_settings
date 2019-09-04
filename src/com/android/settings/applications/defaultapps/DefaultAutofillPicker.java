@@ -18,6 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,16 +28,17 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
-import androidx.preference.Preference;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.preference.Preference;
+
 import com.android.internal.content.PackageMonitor;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.utils.ThreadUtils;
@@ -72,8 +74,10 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
                 activity.setResult(Activity.RESULT_CANCELED);
                 activity.finish();
             };
+            // If mCancelListener is not null, fragment is started from
+            // ACTION_REQUEST_SET_AUTOFILL_SERVICE and we should always use the calling uid.
+            mUserId = UserHandle.myUserId();
         }
-
         mSettingsPackageMonitor.register(activity, activity.getMainLooper(), false);
         update();
     }
@@ -110,7 +114,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEFAULT_AUTOFILL_PICKER;
+        return SettingsEnums.DEFAULT_AUTOFILL_PICKER;
     }
 
     @Override
@@ -158,18 +162,24 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
      * @return The preference or {@code null} if no service can be added
      */
     private Preference newAddServicePreferenceOrNull() {
-        final String searchUri = Settings.Secure.getString(getActivity().getContentResolver(),
-                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI);
+        final String searchUri = Settings.Secure.getStringForUser(
+                getActivity().getContentResolver(),
+                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
+                mUserId);
         if (TextUtils.isEmpty(searchUri)) {
             return null;
         }
 
         final Intent addNewServiceIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(searchUri));
-        Preference preference = new Preference(getPrefContext());
+        final Context context = getPrefContext();
+        final Preference preference = new Preference(context);
+        preference.setOnPreferenceClickListener(p -> {
+                    context.startActivityAsUser(addNewServiceIntent, UserHandle.of(mUserId));
+                    return true;
+                });
         preference.setTitle(R.string.print_menu_item_add_service);
-        preference.setIcon(R.drawable.ic_menu_add);
+        preference.setIcon(R.drawable.ic_add_24dp);
         preference.setOrder(Integer.MAX_VALUE -1);
-        preference.setIntent(addNewServiceIntent);
         preference.setPersistent(false);
         return preference;
     }
@@ -188,8 +198,8 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
-        final List<ResolveInfo> resolveInfos = mPm.queryIntentServices(
-                AUTOFILL_PROBE, PackageManager.GET_META_DATA);
+        final List<ResolveInfo> resolveInfos = mPm.queryIntentServicesAsUser(
+                AUTOFILL_PROBE, PackageManager.GET_META_DATA, mUserId);
         final Context context = getContext();
         for (ResolveInfo info : resolveInfos) {
             final String permission = info.serviceInfo.permission;
@@ -209,8 +219,9 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
         return candidates;
     }
 
-    public static String getDefaultKey(Context context) {
-        String setting = Settings.Secure.getString(context.getContentResolver(), SETTING);
+    public static String getDefaultKey(Context context, int userId) {
+        String setting = Settings.Secure.getStringForUser(
+                context.getContentResolver(), SETTING, userId);
         if (setting != null) {
             ComponentName componentName = ComponentName.unflattenFromString(setting);
             if (componentName != null) {
@@ -222,7 +233,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
 
     @Override
     protected String getDefaultKey() {
-        return getDefaultKey(getContext());
+        return getDefaultKey(getContext(), mUserId);
     }
 
     @Override
@@ -238,7 +249,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
 
     @Override
     protected boolean setDefaultKey(String key) {
-        Settings.Secure.putString(getContext().getContentResolver(), SETTING, key);
+        Settings.Secure.putStringForUser(getContext().getContentResolver(), SETTING, key, mUserId);
 
         // Check if activity was launched from Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE
         // intent, and set proper result if so...
@@ -262,16 +273,19 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
 
         private final String mSelectedKey;
         private final Context mContext;
+        private final int mUserId;
 
-        public AutofillSettingIntentProvider(Context context, String key) {
+        public AutofillSettingIntentProvider(Context context, int userId, String key) {
             mSelectedKey = key;
             mContext = context;
+            mUserId = userId;
         }
 
         @Override
         public Intent getIntent() {
-            final List<ResolveInfo> resolveInfos = mContext.getPackageManager().queryIntentServices(
-                    AUTOFILL_PROBE, PackageManager.GET_META_DATA);
+            final List<ResolveInfo> resolveInfos = mContext.getPackageManager()
+                    .queryIntentServicesAsUser(
+                            AUTOFILL_PROBE, PackageManager.GET_META_DATA, mUserId);
 
             for (ResolveInfo resolveInfo : resolveInfos) {
                 final ServiceInfo serviceInfo = resolveInfo.serviceInfo;

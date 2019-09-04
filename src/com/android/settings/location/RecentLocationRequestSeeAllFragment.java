@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.settings.location;
-
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -26,21 +28,30 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /** Dashboard Fragment to display all recent location requests, sorted by recency. */
+@SearchIndexable
 public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
-
     private static final String TAG = "RecentLocationReqAll";
-
     public static final String PATH =
             "com.android.settings.location.RecentLocationRequestSeeAllFragment";
 
+    private static final int MENU_SHOW_SYSTEM = Menu.FIRST + 1;
+    private static final int MENU_HIDE_SYSTEM = Menu.FIRST + 2;
+
+    private boolean mShowSystem = false;
+    private MenuItem mShowSystemMenu;
+    private MenuItem mHideSystemMenu;
+    private RecentLocationRequestSeeAllPreferenceController mController;
+
     @Override
     public int getMetricsCategory() {
-      return MetricsEvent.RECENT_LOCATION_REQUESTS_ALL;
+        return MetricsEvent.RECENT_LOCATION_REQUESTS_ALL;
     }
 
     @Override
@@ -50,19 +61,44 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
 
     @Override
     protected String getLogTag() {
-      return TAG;
+        return TAG;
     }
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), this);
+        return buildPreferenceControllers(context, getSettingsLifecycle(), this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case MENU_SHOW_SYSTEM:
+            case MENU_HIDE_SYSTEM:
+                mShowSystem = menuItem.getItemId() == MENU_SHOW_SYSTEM;
+                updateMenu();
+                if (mController != null) {
+                    mController.setShowSystem(mShowSystem);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
+    }
+
+    private void updateMenu() {
+        mShowSystemMenu.setVisible(!mShowSystem);
+        mHideSystemMenu.setVisible(mShowSystem);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle, RecentLocationRequestSeeAllFragment fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(
-                new RecentLocationRequestSeeAllPreferenceController(context, lifecycle, fragment));
+        final RecentLocationRequestSeeAllPreferenceController controller =
+                new RecentLocationRequestSeeAllPreferenceController(context, lifecycle, fragment);
+        controllers.add(controller);
+        if (fragment != null) {
+            fragment.mController = controller;
+        }
         return controllers;
     }
 
@@ -86,4 +122,14 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
                             context, /* lifecycle = */ null, /* fragment = */ null);
                 }
             };
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        mShowSystemMenu = menu.add(Menu.NONE, MENU_SHOW_SYSTEM, Menu.NONE,
+                R.string.menu_show_system);
+        mHideSystemMenu = menu.add(Menu.NONE, MENU_HIDE_SYSTEM, Menu.NONE,
+                R.string.menu_hide_system);
+        updateMenu();
+    }
 }

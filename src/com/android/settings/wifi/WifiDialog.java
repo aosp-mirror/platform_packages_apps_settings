@@ -16,22 +16,35 @@
 
 package com.android.settings.wifi;
 
-import android.app.AlertDialog;
+import android.annotation.StyleRes;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.wifi.AccessPoint;
 
-public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterface.OnClickListener {
+public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
+        DialogInterface.OnClickListener {
 
     public interface WifiDialogListener {
-        void onForget(WifiDialog dialog);
-        void onSubmit(WifiDialog dialog);
+        default void onForget(WifiDialog dialog) {
+        }
+
+        default void onSubmit(WifiDialog dialog) {
+        }
+
+        default void onScan(WifiDialog dialog, String ssid) {
+        }
     }
 
     private static final int BUTTON_SUBMIT = DialogInterface.BUTTON_POSITIVE;
@@ -45,14 +58,6 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogI
     private WifiConfigController mController;
     private boolean mHideSubmitButton;
 
-
-    /** Creates a WifiDialog with fullscreen style. It displays in fullscreen mode. */
-    public static WifiDialog createFullscreen(Context context, WifiDialogListener listener,
-            AccessPoint accessPoint, int mode) {
-        return new WifiDialog(context, listener, accessPoint, mode,
-                R.style.Theme_Settings_NoActionBar, false /* hideSubmitButton */);
-    }
-
     /**
      * Creates a WifiDialog with no additional style. It displays as a dialog above the current
      * view.
@@ -60,11 +65,21 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogI
     public static WifiDialog createModal(Context context, WifiDialogListener listener,
             AccessPoint accessPoint, int mode) {
         return new WifiDialog(context, listener, accessPoint, mode, 0 /* style */,
-                mode == WifiConfigUiBase.MODE_VIEW /* hideSubmitButton*/);
+                mode == WifiConfigUiBase.MODE_VIEW /* hideSubmitButton */);
+    }
+
+    /**
+     * Creates a WifiDialog with customized style. It displays as a dialog above the current
+     * view.
+     */
+    public static WifiDialog createModal(Context context, WifiDialogListener listener,
+        AccessPoint accessPoint, int mode, @StyleRes int style) {
+        return new WifiDialog(context, listener, accessPoint, mode, style,
+                mode == WifiConfigUiBase.MODE_VIEW /* hideSubmitButton */);
     }
 
     /* package */ WifiDialog(Context context, WifiDialogListener listener, AccessPoint accessPoint,
-        int mode, int style, boolean hideSubmitButton) {
+            int mode, @StyleRes int style, boolean hideSubmitButton) {
         super(context, style);
         mMode = mode;
         mListener = listener;
@@ -79,9 +94,8 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogI
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mView = getLayoutInflater().inflate(R.layout.wifi_dialog, null);
+        mView = getLayoutInflater().inflate(R.layout.wifi_dialog, /* root */ null);
         setView(mView);
-        setInverseBackgroundForced(true);
         mController = new WifiConfigController(this, mView, mAccessPoint, mMode);
         super.onCreate(savedInstanceState);
 
@@ -98,9 +112,38 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogI
         }
     }
 
+    @Override
+    protected void onStart() {
+        View.OnClickListener onClickScannerButtonListener = v -> {
+            if (mListener == null) {
+                return;
+            }
+
+            String ssid = null;
+            if (mAccessPoint == null) {
+                final TextView ssidEditText = findViewById(R.id.ssid);
+                ssid = ssidEditText.getText().toString();
+            } else {
+                ssid = mAccessPoint.getSsidStr();
+            }
+            mListener.onScan(/* WifiDialog */ this, ssid);
+        };
+
+        final ImageButton ssidScannerButton = findViewById(R.id.ssid_scanner_button);
+        ssidScannerButton.setOnClickListener(onClickScannerButtonListener);
+
+        final ImageButton passwordScannerButton = findViewById(R.id.password_scanner_button);
+        passwordScannerButton.setOnClickListener(onClickScannerButtonListener);
+
+        if (mHideSubmitButton) {
+            ssidScannerButton.setVisibility(View.GONE);
+            passwordScannerButton.setVisibility(View.GONE);
+        }
+    }
+
     public void onRestoreInstanceState(Bundle savedInstanceState) {
-            super.onRestoreInstanceState(savedInstanceState);
-            mController.updatePassword();
+        super.onRestoreInstanceState(savedInstanceState);
+        mController.updatePassword();
     }
 
     @Override
@@ -121,7 +164,7 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogI
                 case BUTTON_FORGET:
                     if (WifiUtils.isNetworkLockedDown(getContext(), mAccessPoint.getConfig())) {
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
-                                RestrictedLockUtils.getDeviceOwner(getContext()));
+                                RestrictedLockUtilsInternal.getDeviceOwner(getContext()));
                         return;
                     }
                     mListener.onForget(this);

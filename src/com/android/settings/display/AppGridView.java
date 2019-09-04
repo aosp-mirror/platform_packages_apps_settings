@@ -22,7 +22,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.util.IconDrawableFactory;
 import android.view.View;
@@ -30,6 +29,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
@@ -39,26 +40,28 @@ import java.util.List;
 
 public class AppGridView extends GridView {
     public AppGridView(Context context) {
-        this(context, null);
+        super(context);
+        init(context);
     }
 
     public AppGridView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        init(context);
     }
 
     public AppGridView(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        init(context);
     }
 
     public AppGridView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleResId) {
         super(context, attrs, defStyleAttr, defStyleResId);
 
-        setNumColumns(AUTO_FIT);
+        init(context);
 
-        final int columnWidth = getResources().getDimensionPixelSize(
-                R.dimen.screen_zoom_preview_app_icon_width);
-        setColumnWidth(columnWidth);
+    }
 
+    private void init(Context context) {
         setAdapter(new AppsAdapter(context, R.layout.screen_zoom_preview_app_icon,
                 android.R.id.text1, android.R.id.icon1));
     }
@@ -105,6 +108,7 @@ public class AppGridView extends GridView {
         }
 
         private void loadAllApps() {
+            final int needAppCount = 6;
             final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
             mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
@@ -116,6 +120,9 @@ public class AppGridView extends GridView {
                 final CharSequence label = info.loadLabel(pm);
                 if (label != null) {
                     results.add(new ActivityEntry(info, label.toString(), iconFactory));
+                }
+                if (results.size() >= needAppCount) {
+                    break;
                 }
             }
 

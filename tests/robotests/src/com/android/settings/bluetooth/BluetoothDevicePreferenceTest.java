@@ -16,6 +16,7 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -27,25 +28,31 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.UserManager;
+import android.view.ContextThemeWrapper;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowAlertDialogCompat.class})
 public class BluetoothDevicePreferenceTest {
     private static final boolean SHOW_DEVICES_WITHOUT_NAMES = true;
+    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
     private Context mContext;
     @Mock
@@ -58,9 +65,11 @@ public class BluetoothDevicePreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mContext = new ContextThemeWrapper(context, R.style.Theme_Settings);
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                 SHOW_DEVICES_WITHOUT_NAMES);
     }
@@ -72,7 +81,7 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
+                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
     }
 
     @Test
@@ -83,7 +92,7 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
+                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
     }
 
     @Test
@@ -96,9 +105,10 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
         verify(mMetricsFeatureProvider, never())
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
+                .action(mContext,
+                        MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
     }
 
     @Test
@@ -111,9 +121,10 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
+                .action(mContext,
+                        MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
     }
 
     @Test
@@ -155,19 +166,7 @@ public class BluetoothDevicePreferenceTest {
     }
 
     @Test
-    public void imagingDeviceIcon_isICSettingsPrint() {
-        when(mCachedBluetoothDevice.getBatteryLevel())
-            .thenReturn(BluetoothDevice.BATTERY_LEVEL_UNKNOWN);
-        when(mCachedBluetoothDevice.getBtClass())
-            .thenReturn(new BluetoothClass(BluetoothClass.Device.Major.IMAGING));
-
-        mPreference.onDeviceAttributesChanged();
-        assertThat(mPreference.getIcon()).isEqualTo(
-                mContext.getDrawable(R.drawable.ic_settings_print));
-    }
-
-    @Test
-    public void testVisible_showDeviceWithoutNames_visible() {
+    public void isVisible_showDeviceWithoutNames_visible() {
         doReturn(false).when(mCachedBluetoothDevice).hasHumanReadableName();
         BluetoothDevicePreference preference =
                 new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
@@ -177,11 +176,18 @@ public class BluetoothDevicePreferenceTest {
     }
 
     @Test
-    public void testVisible_hideDeviceWithoutNames_invisible() {
+    public void isVisible_hideDeviceWithoutNames_invisible() {
         doReturn(false).when(mCachedBluetoothDevice).hasHumanReadableName();
         BluetoothDevicePreference preference =
                 new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
 
         assertThat(preference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setNeedNotifyHierarchyChanged_updateValue() {
+        mPreference.setNeedNotifyHierarchyChanged(true);
+
+        assertThat(mPreference.mNeedNotifyHierarchyChanged).isTrue();
     }
 }

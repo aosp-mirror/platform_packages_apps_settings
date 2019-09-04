@@ -1,0 +1,37 @@
+syntax = "proto2";
+
+package com.android.settings.intelligence;
+option java_outer_classname = "LogProto";
+
+message SettingsLog {
+  /**
+   * Where this SettingsUIChange event comes from. For example, if
+   * it's a PAGE_VISIBLE event, where the page is opened from.
+   */
+  optional int32 attribution = 1;
+
+  /**
+   * What the UI action is.
+   */
+  optional int32 action = 2;
+
+  /**
+   * Where the action is happening
+   */
+  optional int32 page_id = 3;
+
+  /**
+   * What preference changed in this event.
+   */
+  optional string changed_preference_key = 4;
+
+  /**
+   * The new value of the changed preference.
+   */
+  optional int32 changed_preference_int_value = 5;
+
+  /**
+   * The timestamp of a log event
+   */
+  optional string timestamp = 6;
+}

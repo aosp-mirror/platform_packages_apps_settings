@@ -21,7 +21,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings.Global;
+import android.provider.Settings.Secure;
 import android.provider.Settings.System;
+
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -33,6 +35,7 @@ import com.android.settings.SettingsPreferenceFragment;
 public class SettingPref {
     public static final int TYPE_GLOBAL = 1;
     public static final int TYPE_SYSTEM = 2;
+    public static final int TYPE_SECURE = 3;
 
     protected final int mType;
     private final String mKey;
@@ -131,6 +134,8 @@ public class SettingPref {
                 return Global.getUriFor(setting);
             case TYPE_SYSTEM:
                 return System.getUriFor(setting);
+            case TYPE_SECURE:
+                return Secure.getUriFor(setting);
         }
         throw new IllegalArgumentException();
     }
@@ -141,6 +146,8 @@ public class SettingPref {
                 return Global.putInt(cr, setting, value);
             case TYPE_SYSTEM:
                 return System.putInt(cr, setting, value);
+            case TYPE_SECURE:
+                return Secure.putInt(cr, setting, value);
         }
         throw new IllegalArgumentException();
     }
@@ -151,6 +158,8 @@ public class SettingPref {
                 return Global.getInt(cr, setting, def);
             case TYPE_SYSTEM:
                 return System.getInt(cr, setting, def);
+            case TYPE_SECURE:
+                return Secure.getInt(cr, setting, def);
         }
         throw new IllegalArgumentException();
     }

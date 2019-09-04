@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -24,14 +25,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
@@ -42,17 +44,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowUserManager;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class, ShadowAlertDialogCompat.class})
 public class DevelopmentSettingsDashboardFragmentTest {
 
     private ToggleSwitch mSwitch;
@@ -68,8 +73,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         mSwitch = switchBar.getSwitch();
         mDashboard = spy(new DevelopmentSettingsDashboardFragment());
         ReflectionHelpers.setField(mDashboard, "mSwitchBar", switchBar);
-        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        mShadowUserManager = Shadows.shadowOf(userManager);
+        mShadowUserManager = Shadow.extract(mContext.getSystemService(Context.USER_SERVICE));
         mShadowUserManager.setIsAdminUser(true);
     }
 
@@ -86,7 +90,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Test
     public void shouldLogAsFeatureFlagPage() {
         assertThat(mDashboard.getMetricsCategory())
-            .isEqualTo(MetricsProto.MetricsEvent.DEVELOPMENT);
+                .isEqualTo(MetricsProto.MetricsEvent.DEVELOPMENT);
     }
 
     @Test
@@ -100,7 +104,6 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void searchIndex_pageDisabledBySetting_shouldAddAllKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, false);
@@ -113,7 +116,6 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void searchIndex_pageDisabledForNonAdmin_shouldAddAllKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, true);
@@ -180,10 +182,33 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowDisableDevSettingsDialogFragment.class)
+    public void onSwitchChanged_turnOff_andOffloadIsNotDefaultValue_shouldShowWarningDialog() {
+        final BluetoothA2dpHwOffloadPreferenceController controller =
+                mock(BluetoothA2dpHwOffloadPreferenceController.class);
+        when(mDashboard.getContext()).thenReturn(mContext);
+        when(mDashboard.getDevelopmentOptionsController(
+                BluetoothA2dpHwOffloadPreferenceController.class)).thenReturn(controller);
+        when(controller.isDefaultValue()).thenReturn(false);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+
+        mDashboard.onSwitchChanged(mSwitch, false /* isChecked */);
+
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNotNull();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
+        assertThat(shadowDialog.getTitle()).isEqualTo(
+                mContext.getString(R.string.bluetooth_disable_a2dp_hw_offload_dialog_title));
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                mContext.getString(R.string.bluetooth_disable_a2dp_hw_offload_dialog_message));
+    }
+
+    @Test
     public void onOemUnlockDialogConfirmed_shouldCallControllerOemConfirmed() {
         final OemUnlockPreferenceController controller = mock(OemUnlockPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(OemUnlockPreferenceController.class);
+                .getDevelopmentOptionsController(OemUnlockPreferenceController.class);
         mDashboard.onOemUnlockDialogConfirmed();
         verify(controller).onOemUnlockConfirmed();
     }
@@ -192,7 +217,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     public void onOemUnlockDialogConfirmed_shouldCallControllerOemDismissed() {
         final OemUnlockPreferenceController controller = mock(OemUnlockPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(OemUnlockPreferenceController.class);
+                .getDevelopmentOptionsController(OemUnlockPreferenceController.class);
         mDashboard.onOemUnlockDialogDismissed();
         verify(controller).onOemUnlockDismissed();
     }
@@ -201,7 +226,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     public void onAdbDialogConfirmed_shouldCallControllerDialogConfirmed() {
         final AdbPreferenceController controller = mock(AdbPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(AdbPreferenceController.class);
+                .getDevelopmentOptionsController(AdbPreferenceController.class);
         mDashboard.onEnableAdbDialogConfirmed();
 
         verify(controller).onAdbDialogConfirmed();
@@ -211,7 +236,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     public void onAdbDialogDismissed_shouldCallControllerOemDismissed() {
         final AdbPreferenceController controller = mock(AdbPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(AdbPreferenceController.class);
+                .getDevelopmentOptionsController(AdbPreferenceController.class);
         mDashboard.onEnableAdbDialogDismissed();
 
         verify(controller).onAdbDialogDismissed();
@@ -220,9 +245,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Test
     public void onAdbClearKeysDialogConfirmed_shouldCallControllerDialogConfirmed() {
         final ClearAdbKeysPreferenceController controller =
-            mock(ClearAdbKeysPreferenceController.class);
+                mock(ClearAdbKeysPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(ClearAdbKeysPreferenceController.class);
+                .getDevelopmentOptionsController(ClearAdbKeysPreferenceController.class);
         mDashboard.onAdbClearKeysDialogConfirmed();
 
         verify(controller).onClearAdbKeysConfirmed();
@@ -231,9 +256,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Test
     public void onDisableLogPersistDialogConfirmed_shouldCallControllerDialogConfirmed() {
         final LogPersistPreferenceController controller =
-            mock(LogPersistPreferenceController.class);
+                mock(LogPersistPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(LogPersistPreferenceController.class);
+                .getDevelopmentOptionsController(LogPersistPreferenceController.class);
         mDashboard.onDisableLogPersistDialogConfirmed();
 
         verify(controller).onDisableLogPersistDialogConfirmed();
@@ -242,9 +267,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Test
     public void onDisableLogPersistDialogRejected_shouldCallControllerDialogRejected() {
         final LogPersistPreferenceController controller =
-            mock(LogPersistPreferenceController.class);
+                mock(LogPersistPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(LogPersistPreferenceController.class);
+                .getDevelopmentOptionsController(LogPersistPreferenceController.class);
         mDashboard.onDisableLogPersistDialogRejected();
 
         verify(controller).onDisableLogPersistDialogRejected();
@@ -260,15 +285,27 @@ public class DevelopmentSettingsDashboardFragmentTest {
         }
 
         @Implementation
-        public static void show(DevelopmentSettingsDashboardFragment host) {
+        protected static void show(DevelopmentSettingsDashboardFragment host) {
             mShown = true;
+        }
+    }
+
+    @Implements(DisableDevSettingsDialogFragment.class)
+    public static class ShadowDisableDevSettingsDialogFragment {
+
+        @Implementation
+        public static void show(DevelopmentSettingsDashboardFragment host) {
+            DisableDevSettingsDialogFragment mFragment =
+                    spy(DisableDevSettingsDialogFragment.newInstance());
+            FragmentController.setupFragment(mFragment, FragmentActivity.class,
+                    0 /* containerViewId */, null /* bundle */);
         }
     }
 
     @Implements(PictureColorModePreferenceController.class)
     public static class ShadowPictureColorModePreferenceController {
         @Implementation
-        public boolean isAvailable() {
+        protected boolean isAvailable() {
             return true;
         }
     }
@@ -276,16 +313,15 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Implements(AbstractEnableAdbPreferenceController.class)
     public static class ShadowAdbPreferenceController {
         @Implementation
-        public boolean isAvailable() {
+        protected boolean isAvailable() {
             return true;
         }
     }
 
     @Implements(ClearAdbKeysPreferenceController.class)
     public static class ShadowClearAdbKeysPreferenceController {
-
         @Implementation
-        public boolean isAvailable() {
+        protected boolean isAvailable() {
             return true;
         }
     }

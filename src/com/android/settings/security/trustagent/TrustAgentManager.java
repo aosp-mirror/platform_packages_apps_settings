@@ -29,15 +29,17 @@ import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.UserHandle;
 import android.service.trust.TrustAgentService;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Slog;
 import android.util.Xml;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -51,7 +53,7 @@ import java.util.List;
 public class TrustAgentManager {
 
     // Only allow one trust agent on the platform.
-    private static final boolean ONLY_ONE_TRUST_AGENT = true;
+    private static final boolean ONLY_ONE_TRUST_AGENT = false;
 
     public static class TrustAgentComponentInfo {
         public ComponentName componentName;
@@ -112,7 +114,7 @@ public class TrustAgentManager {
         final List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
                 PackageManager.GET_META_DATA);
         final List<ComponentName> enabledTrustAgents = utils.getEnabledTrustAgents(myUserId);
-        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtils
+        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtilsInternal
                 .checkIfKeyguardFeaturesDisabled(
                         context, DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS, myUserId);
 

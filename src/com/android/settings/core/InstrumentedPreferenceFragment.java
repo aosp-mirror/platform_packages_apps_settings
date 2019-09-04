@@ -18,10 +18,12 @@ package com.android.settings.core;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.XmlRes;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.XmlRes;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;
@@ -52,8 +54,8 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         // Mixin that logs visibility change for activity.
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
                 mMetricsFeatureProvider);
-        getLifecycle().addObserver(mVisibilityLoggerMixin);
-        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
+        getSettingsLifecycle().addObserver(mVisibilityLoggerMixin);
+        getSettingsLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
         super.onAttach(context);
     }
 
@@ -75,6 +77,14 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     public void addPreferencesFromResource(@XmlRes int preferencesResId) {
         super.addPreferencesFromResource(preferencesResId);
         updateActivityTitleWithScreenTitle(getPreferenceScreen());
+    }
+
+    @Override
+    public <T extends Preference> T findPreference(CharSequence key) {
+        if (key == null) {
+            return null;
+        }
+        return super.findPreference(key);
     }
 
     protected final Context getPrefContext() {

@@ -16,12 +16,17 @@
 
 package com.android.settings.notification;
 
+import static android.media.AudioAttributes.USAGE_ALARM;
+import static android.media.AudioAttributes.USAGE_NOTIFICATION_RINGTONE;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -66,13 +71,13 @@ public class SoundPreferenceController extends NotificationPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (NotificationSoundPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     public void updateState(Preference preference) {
         if (mAppRow!= null && mChannel != null) {
             NotificationSoundPreference pref = (NotificationSoundPreference) preference;
-            pref.setEnabled(mAdmin == null && isChannelConfigurable());
+            pref.setEnabled(mAdmin == null);
             pref.setRingtone(mChannel.getSound());
         }
     }
@@ -90,6 +95,16 @@ public class SoundPreferenceController extends NotificationPreferenceController
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_SOUND.equals(preference.getKey()) && mFragment != null) {
             NotificationSoundPreference pref = (NotificationSoundPreference) preference;
+            if (mChannel != null && mChannel.getAudioAttributes() != null) {
+                if (USAGE_ALARM == mChannel.getAudioAttributes().getUsage()) {
+                    pref.setRingtoneType(RingtoneManager.TYPE_ALARM);
+                } else if (USAGE_NOTIFICATION_RINGTONE
+                        == mChannel.getAudioAttributes().getUsage()) {
+                    pref.setRingtoneType(RingtoneManager.TYPE_RINGTONE);
+                } else {
+                    pref.setRingtoneType(RingtoneManager.TYPE_NOTIFICATION);
+                }
+            }
             pref.onPrepareRingtonePickerIntent(pref.getIntent());
             mFragment.startActivityForResult(preference.getIntent(), CODE);
             return true;

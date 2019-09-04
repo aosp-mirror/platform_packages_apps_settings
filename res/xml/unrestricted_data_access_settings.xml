@@ -17,4 +17,8 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/unrestricted_data_saver" />
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="unrestricted_data_screen"
+    android:title="@string/unrestricted_data_saver"
+    settings:controller="com.android.settings.datausage.UnrestrictedDataAccessPreferenceController">
+</PreferenceScreen>

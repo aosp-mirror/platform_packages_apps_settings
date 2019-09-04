@@ -21,9 +21,10 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.text.TextUtils;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -35,6 +36,7 @@ import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -77,14 +79,13 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (RestrictedPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
     public void updateState(Preference preference) {
         if (mPreference != null && mPreference instanceof GearPreference) {
-            if (mLockPatternUtils.isSecure(mUserId)
-                    || !mLockPatternUtils.isLockScreenDisabled(mUserId)) {
+            if (mLockPatternUtils.isSecure(mUserId)) {
                 ((GearPreference) mPreference).setOnGearClickListener(this);
             } else {
                 ((GearPreference) mPreference).setOnGearClickListener(null);
@@ -129,7 +130,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
 
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setTitle(R.string.lock_settings_picker_title)
+                .setTitleRes(R.string.lock_settings_picker_title)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .launch();
         return true;
@@ -170,7 +171,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
      * DO or PO installed in the user may disallow to change password.
      */
     void disableIfPasswordQualityManaged(int userId) {
-        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtils
+        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtilsInternal
                 .checkIfPasswordQualityIsSet(mContext, userId);
         final DevicePolicyManager dpm = (DevicePolicyManager) mContext
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);

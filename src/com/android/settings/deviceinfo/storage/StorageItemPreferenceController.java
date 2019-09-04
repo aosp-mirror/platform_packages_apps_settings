@@ -16,7 +16,7 @@
 
 package com.android.settings.deviceinfo.storage;
 
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -26,13 +26,14 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.applications.manageapplications.ManageApplications;
@@ -76,7 +77,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     static final String FILES_KEY = "pref_files";
 
     private final Fragment mFragment;
-    private final  MetricsFeatureProvider mMetricsFeatureProvider;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final StorageVolumeProvider mSvp;
     private VolumeInfo mVolume;
     private int mUserId;
@@ -154,7 +155,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             case FILES_KEY:
                 intent = getFilesIntent();
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(
-                        mContext, MetricsEvent.STORAGE_FILES);
+                        mContext, SettingsEnums.STORAGE_FILES);
                 break;
             case SYSTEM_KEY:
                 final SystemInfoFragment dialog = new SystemInfoFragment();
@@ -224,7 +225,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private static Drawable applyTint(Context context, Drawable icon) {
         TypedArray array =
-                context.obtainStyledAttributes(new int[] {android.R.attr.colorControlNormal});
+                context.obtainStyledAttributes(new int[]{android.R.attr.colorControlNormal});
         icon = icon.mutate();
         icon.setTint(array.getColor(0, 0));
         array.recycle();
@@ -234,13 +235,13 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mScreen = screen;
-        mPhotoPreference = (StorageItemPreference) screen.findPreference(PHOTO_KEY);
-        mAudioPreference = (StorageItemPreference) screen.findPreference(AUDIO_KEY);
-        mGamePreference = (StorageItemPreference) screen.findPreference(GAME_KEY);
-        mMoviesPreference = (StorageItemPreference) screen.findPreference(MOVIES_KEY);
-        mAppPreference = (StorageItemPreference) screen.findPreference(OTHER_APPS_KEY);
-        mSystemPreference = (StorageItemPreference) screen.findPreference(SYSTEM_KEY);
-        mFilePreference = (StorageItemPreference) screen.findPreference(FILES_KEY);
+        mPhotoPreference = screen.findPreference(PHOTO_KEY);
+        mAudioPreference = screen.findPreference(AUDIO_KEY);
+        mGamePreference = screen.findPreference(GAME_KEY);
+        mMoviesPreference = screen.findPreference(MOVIES_KEY);
+        mAppPreference = screen.findPreference(OTHER_APPS_KEY);
+        mSystemPreference = screen.findPreference(SYSTEM_KEY);
+        mFilePreference = screen.findPreference(FILES_KEY);
 
         setFilesPreferenceVisibility();
     }
@@ -321,7 +322,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 ManageApplications.STORAGE_TYPE_PHOTOS_VIDEOS);
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.storage_photos_videos)
+                .setTitleRes(R.string.storage_photos_videos)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -340,7 +341,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         args.putInt(ManageApplications.EXTRA_STORAGE_TYPE, ManageApplications.STORAGE_TYPE_MUSIC);
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.storage_music_audio)
+                .setTitleRes(R.string.storage_music_audio)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -357,7 +358,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.apps_storage)
+                .setTitleRes(R.string.apps_storage)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -369,7 +370,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 Settings.GamesStorageActivity.class.getName());
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.game_storage_settings)
+                .setTitleRes(R.string.game_storage_settings)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -381,7 +382,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 Settings.MoviesStorageActivity.class.getName());
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.storage_movies_tv)
+                .setTitleRes(R.string.storage_movies_tv)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -402,10 +403,14 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         try {
             final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, -1);
 
+            // b/33117269: Note that launchIntent may launch activity in different task which set
+            // different launchMode (e.g. Files), using startActivityForesult to set task as
+            // source task, and set requestCode as 0 means don't care about returnCode currently.
             if (userId == -1) {
-                mFragment.startActivity(intent);
+                mFragment.startActivityForResult(intent, 0 /* requestCode not used */);
             } else {
-                mFragment.getActivity().startActivityAsUser(intent, new UserHandle(userId));
+                mFragment.getActivity().startActivityForResultAsUser(intent,
+                        0 /* requestCode not used */, new UserHandle(userId));
             }
         } catch (ActivityNotFoundException e) {
             Log.w(TAG, "No activity found for " + intent);

@@ -17,28 +17,29 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import androidx.preference.PreferenceFragment;
+
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 /**
  * This class adds the device MAC address to a footer.
  */
 public class BluetoothDetailsMacAddressController extends BluetoothDetailsController {
-    FooterPreferenceMixin mFooterPreferenceMixin;
+    FooterPreferenceMixinCompat mFooterPreferenceMixin;
     FooterPreference mFooterPreference;
 
     public BluetoothDetailsMacAddressController(Context context,
-            PreferenceFragment fragment,
+            PreferenceFragmentCompat fragment,
             CachedBluetoothDevice device,
             Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
-        mFooterPreferenceMixin = new FooterPreferenceMixin(fragment, lifecycle);
+        mFooterPreferenceMixin = new FooterPreferenceMixinCompat(fragment, lifecycle);
     }
 
     @Override
@@ -50,6 +51,8 @@ public class BluetoothDetailsMacAddressController extends BluetoothDetailsContro
 
     @Override
     protected void refresh() {
+        mFooterPreference.setTitle(mContext.getString(
+                R.string.bluetooth_device_mac_address, mCachedDevice.getAddress()));
     }
 
     @Override

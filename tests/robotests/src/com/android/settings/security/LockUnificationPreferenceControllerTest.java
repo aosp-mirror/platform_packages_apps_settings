@@ -17,29 +17,29 @@
 package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.os.UserManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LockUnificationPreferenceControllerTest {
 
     private static final int FAKE_PROFILE_USER_ID = 1234;
@@ -53,7 +53,6 @@ public class LockUnificationPreferenceControllerTest {
     @Mock
     private SecuritySettings mHost;
 
-    private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
     private LockUnificationPreferenceController mController;
     private Preference mPreference;
@@ -65,10 +64,12 @@ public class LockUnificationPreferenceControllerTest {
         ShadowApplication.getInstance().setSystemService(Context.USER_SERVICE, mUm);
         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {FAKE_PROFILE_USER_ID});
 
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
-        when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
+        final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
+    }
 
+    private void init() {
         mController = new LockUnificationPreferenceController(mContext, mHost);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mPreference = new Preference(mContext);
@@ -76,7 +77,8 @@ public class LockUnificationPreferenceControllerTest {
 
     @Test
     public void isAvailable_noProfile_false() {
-        ReflectionHelpers.setField(mController, "mProfileChallengeUserId", UserHandle.USER_NULL);
+        when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[0]);
+        init();
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -84,6 +86,7 @@ public class LockUnificationPreferenceControllerTest {
     @Test
     public void isAvailable_separateChallengeNotAllowed_false() {
         when(mLockPatternUtils.isSeparateProfileChallengeAllowed(anyInt())).thenReturn(false);
+        init();
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -91,6 +94,7 @@ public class LockUnificationPreferenceControllerTest {
     @Test
     public void isAvailable_separateChallengeAllowed_true() {
         when(mLockPatternUtils.isSeparateProfileChallengeAllowed(anyInt())).thenReturn(true);
+        init();
 
         assertThat(mController.isAvailable()).isTrue();
     }

@@ -15,18 +15,20 @@
  */
 package com.android.settings.bluetooth;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -36,8 +38,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UtilsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -48,11 +51,12 @@ public class UtilsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
         mMetricsFeatureProvider = FakeFeatureFactory.setupForTest().getMetricsFeatureProvider();
     }
 
     @Test
-    public void testShowConnectingError_shouldLogBluetoothConnectError() {
+    public void showConnectingError_shouldLogBluetoothConnectError() {
         when(mContext.getString(anyInt(), anyString())).thenReturn("testMessage");
         Utils.showConnectingError(mContext, "testName", mock(LocalBluetoothManager.class));
 

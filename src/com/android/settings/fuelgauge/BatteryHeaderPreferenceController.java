@@ -21,26 +21,30 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceScreen;
+import android.os.PowerManager;
+import android.text.TextUtils;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.Utils;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.widget.LayoutPreference;
 
 /**
  * Controller that update the battery header view
  */
-public class BatteryHeaderPreferenceController extends AbstractPreferenceController
+public class BatteryHeaderPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart {
     @VisibleForTesting
     static final String KEY_BATTERY_HEADER = "battery_header";
@@ -54,28 +58,35 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
     @VisibleForTesting
     TextView mSummary2;
 
-    private final Activity mActivity;
-    private final PreferenceFragment mHost;
-    private final Lifecycle mLifecycle;
+    private Activity mActivity;
+    private PreferenceFragmentCompat mHost;
+    private Lifecycle mLifecycle;
+    private final PowerManager mPowerManager;
 
     private LayoutPreference mBatteryLayoutPref;
 
-    public BatteryHeaderPreferenceController(Context context, Activity activity,
-            PreferenceFragment host, Lifecycle lifecycle) {
-        super(context);
+    public BatteryHeaderPreferenceController(Context context, String key) {
+        super(context, key);
+        mPowerManager = context.getSystemService(PowerManager.class);
+    }
+
+    public void setActivity(Activity activity) {
         mActivity = activity;
-        mHost = host;
+    }
+
+    public void setFragment(PreferenceFragmentCompat fragment) {
+        mHost = fragment;
+    }
+
+    public void setLifecycle(Lifecycle lifecycle) {
         mLifecycle = lifecycle;
-        if (mLifecycle != null) {
-            mLifecycle.addObserver(this);
-        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mBatteryLayoutPref = (LayoutPreference) screen.findPreference(KEY_BATTERY_HEADER);
-        mBatteryMeterView = (BatteryMeterView) mBatteryLayoutPref
+        mBatteryLayoutPref = screen.findPreference(getPreferenceKey());
+        mBatteryMeterView = mBatteryLayoutPref
                 .findViewById(R.id.battery_header_icon);
         mBatteryPercentText = mBatteryLayoutPref.findViewById(R.id.battery_percent);
         mSummary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
@@ -85,13 +96,8 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_BATTERY_HEADER;
+    public int getAvailabilityStatus() {
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
@@ -103,7 +109,7 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
     }
 
     public void updateHeaderPreference(BatteryInfo info) {
-        mBatteryPercentText.setText(Utils.formatPercentage(info.batteryLevel));
+        mBatteryPercentText.setText(formatBatteryPercentageText(info.batteryLevel));
         if (info.remainingLabel == null) {
             mSummary1.setText(info.statusLabel);
         } else {
@@ -115,6 +121,7 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
 
         mBatteryMeterView.setBatteryLevel(info.batteryLevel);
         mBatteryMeterView.setCharging(!info.discharging);
+        mBatteryMeterView.setPowerSave(mPowerManager.isPowerSaveMode());
     }
 
     public void quickUpdateHeaderPreference() {
@@ -127,10 +134,12 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
         // Set battery level and charging status
         mBatteryMeterView.setBatteryLevel(batteryLevel);
         mBatteryMeterView.setCharging(!discharging);
-        mBatteryPercentText.setText(Utils.formatPercentage(batteryLevel));
+        mBatteryMeterView.setPowerSave(mPowerManager.isPowerSaveMode());
+        mBatteryPercentText.setText(formatBatteryPercentageText(batteryLevel));
+    }
 
-        // clear all the summaries
-        mSummary1.setText("");
-        mSummary2.setText("");
+    private CharSequence formatBatteryPercentageText(int batteryLevel) {
+        return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
+                NumberFormat.getIntegerInstance().format(batteryLevel));
     }
 }

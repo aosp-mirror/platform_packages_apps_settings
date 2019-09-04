@@ -20,32 +20,44 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="apps_and_notification_screen"
     android:title="@string/app_and_notification_dashboard_title"
-    settings:initialExpandedChildrenCount="8">
+    settings:initialExpandedChildrenCount="4">
     <!-- the initial count should include the dynamic tiles -->
 
-    <PreferenceCategory
-        android:key="recent_apps_category"
-        android:title="@string/recent_app_category_title"
-        android:order="-200">
-        <!-- Placeholder for a list of recent apps -->
+    <Preference
+        android:key="all_app_info"
+        android:title="@string/applications_settings"
+        android:order="-999"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:controller="com.android.settings.applications.AllAppsInfoPreferenceController"
+        settings:keywords="@string/keywords_applications_settings"/>
 
-        <!-- See all apps button -->
-        <Preference
-            android:title="@string/applications_settings"
-            android:key="all_app_info"
-            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            android:order="20" />
-    </PreferenceCategory>
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="recent_open_apps"
+        android:title="@string/recent_app_category_title"
+        android:layout="@layout/app_entities_header"
+        android:selectable="false"
+        android:order="-998"
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.applications.RecentAppsPreferenceController"/>
 
     <!-- Empty category to draw divider -->
     <PreferenceCategory
-        android:key="all_app_info_divider"
-        android:order="-190" />
+        android:key="recent_apps_divider"
+        android:layout="@layout/preference_category_no_label"
+        android:order="-997"/>
 
     <!-- Notifications (appears before manage_perms), default apps (appears after) -->
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
-        android:order="10" />
+        android:order="10"/>
+
+    <Preference
+        android:key="default_apps"
+        android:title="@string/app_default_dashboard_title"
+        android:order="11"
+        settings:controller="com.android.settings.applications.DefaultAppsPreferenceController">
+        <intent android:action="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
+    </Preference>
 
     <Preference
         android:key="manage_perms"
@@ -53,7 +65,7 @@
         android:order="12"
         settings:keywords="@string/keywords_app_permissions"
         settings:controller="com.android.settings.applications.AppPermissionsPreferenceController">
-        <intent android:action="android.intent.action.MANAGE_PERMISSIONS" />
+        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
     <com.android.settingslib.RestrictedPreference
@@ -64,13 +76,14 @@
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.android.cellbroadcastreceiver"
-            android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
+            android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
     </com.android.settingslib.RestrictedPreference>
 
     <Preference
         android:key="special_access"
-        android:fragment="com.android.settings.applications.SpecialAccessSettings"
+        android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
         android:title="@string/special_access"
-        android:order="20" />
+        android:order="20"
+        settings:controller="com.android.settings.applications.SpecialAppAccessPreferenceController"/>
 
 </PreferenceScreen>

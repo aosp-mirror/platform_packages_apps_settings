@@ -20,13 +20,15 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
@@ -35,30 +37,28 @@ import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
+
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 import org.robolectric.util.ReflectionHelpers.ClassParameter;
 
 import java.util.Arrays;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-    SettingsShadowResourcesImpl.class,
-    SettingsShadowResources.SettingsShadowTheme.class,
-    ShadowUtils.class
-})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class, ShadowLockPatternUtils.class})
 public class SetupChooseLockPatternTest {
 
     private SetupChooseLockPattern mActivity;
@@ -70,14 +70,13 @@ public class SetupChooseLockPatternTest {
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
 
-        mActivity = Robolectric.buildActivity(
-                SetupChooseLockPattern.class,
+        final Intent intent =
                 SetupChooseLockPattern.modifyIntentForSetup(
                         application,
                         new IntentBuilder(application)
                                 .setUserId(UserHandle.myUserId())
-                                .build()))
-                .setup().get();
+                                .build());
+        mActivity = ActivityController.of(new SetupChooseLockPattern(), intent).setup().get();
     }
 
     @Test
@@ -87,18 +86,21 @@ public class SetupChooseLockPatternTest {
         ShadowPackageManager spm = Shadows.shadowOf(application.getPackageManager());
         ComponentName cname = new ComponentName(application, SetupRedactionInterstitial.class);
         final int componentEnabled = spm.getComponentEnabledSettingFlags(cname)
-            & PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+                & PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
         assertThat(componentEnabled).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
     }
 
     @Test
-    public void selectPattern_shouldHideOptionsButton() {
+    public void optionsButton_whenPatternSelected_shouldBeVisible() {
         Button button = mActivity.findViewById(R.id.screen_lock_options);
         assertThat(button).isNotNull();
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
 
         LockPatternView lockPatternView = mActivity.findViewById(R.id.lockPattern);
         ReflectionHelpers.callInstanceMethod(lockPatternView, "notifyPatternDetected");
+
+        enterPattern();
+        assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     private void verifyScreenLockOptionsShown() {
@@ -107,9 +109,9 @@ public class SetupChooseLockPatternTest {
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
 
         button.performClick();
-        AlertDialog chooserDialog = ShadowAlertDialog.getLatestAlertDialog();
+        AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
-        int count = Shadows.shadowOf(chooserDialog).getAdapter().getCount();
+        int count = chooserDialog.getListView().getCount();
         assertThat(count).named("List items shown").isEqualTo(3);
     }
 
@@ -145,12 +147,14 @@ public class SetupChooseLockPatternTest {
 
     @Test
     public void skipButton_shouldBeVisible_duringNonFingerprintFlow() {
-        Button skipButton = mActivity.findViewById(R.id.skip_button);
-        assertThat(skipButton).isNotNull();
-        assertThat(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
+        assertThat(skipOrClearButton).isNotNull();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        skipButton.performClick();
-        AlertDialog chooserDialog = ShadowAlertDialog.getLatestAlertDialog();
+        skipOrClearButton.performClick();
+        AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
     }
 
@@ -158,33 +162,38 @@ public class SetupChooseLockPatternTest {
     public void clearButton_shouldBeVisible_duringRetryStage() {
         enterPattern();
 
-        Button clearButton = mActivity.findViewById(R.id.footerLeftButton);
-        assertThat(clearButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(clearButton.isEnabled()).isTrue();
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(skipOrClearButton.isEnabled()).isTrue();
 
-        clearButton.performClick();
+        skipOrClearButton.performClick();
         assertThat(findFragment(mActivity).mChosenPattern).isNull();
     }
 
     @Test
-    public void skipButton_shouldNotBeVisible_duringFingerprintFlow() {
-        mActivity = Robolectric.buildActivity(
-                SetupChooseLockPattern.class,
-                SetupChooseLockPattern.modifyIntentForSetup(
-                        application,
-                        new IntentBuilder(application)
-                                .setUserId(UserHandle.myUserId())
-                                .setForFingerprint(true)
-                                .build()))
-                .setup().get();
-        Button skipButton = mActivity.findViewById(R.id.skip_button);
-        assertThat(skipButton).isNotNull();
-        assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
+    public void createActivity_enterPattern_clearButtonShouldBeShown() {
+        ChooseLockPatternFragment fragment = findFragment(mActivity);
+
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
+        assertThat(skipOrClearButton.isEnabled()).isTrue();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(skipOrClearButton.getText())
+                .isEqualTo(application.getString(R.string.skip_label));
+
+        enterPattern();
+        assertThat(skipOrClearButton.isEnabled()).isTrue();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(skipOrClearButton.getText())
+                .isEqualTo(application.getString(R.string.lockpattern_retry_button_text));
     }
 
-    private ChooseLockPatternFragment findFragment(Activity activity) {
+    private ChooseLockPatternFragment findFragment(FragmentActivity activity) {
         return (ChooseLockPatternFragment)
-                activity.getFragmentManager().findFragmentById(R.id.main_content);
+                activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
     }
 
     private void enterPattern() {

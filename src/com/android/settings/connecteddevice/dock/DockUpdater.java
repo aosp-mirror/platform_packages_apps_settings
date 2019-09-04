@@ -15,6 +15,7 @@
  */
 package com.android.settings.connecteddevice.dock;
 
+import android.annotation.NonNull;
 import android.content.Context;
 
 /**
@@ -39,5 +40,11 @@ public interface DockUpdater {
      * Force to update the list of dock devices
      */
     default void forceUpdate() {
+    }
+
+    /**
+     * Set the context to generate the {@link Preference}, so it could get the correct theme.
+     */
+    default void setPreferenceContext(@NonNull Context preferenceContext) {
     }
 }

@@ -17,14 +17,10 @@
 package com.android.settings.applications.appops;
 
 import android.app.AppOpsManager;
-import android.app.ListFragment;
-import android.app.LoaderManager;
-import android.content.AsyncTaskLoader;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -37,6 +33,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.fragment.app.ListFragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
 
 import com.android.settings.R;
 import com.android.settings.applications.appops.AppOpsState.AppOpEntry;

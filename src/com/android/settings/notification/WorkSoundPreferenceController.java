@@ -17,9 +17,8 @@
 package com.android.settings.notification;
 
 import android.annotation.UserIdInt;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,14 +31,16 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -50,6 +51,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import java.util.List;
 
 public class WorkSoundPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnPreferenceChangeListener, LifecycleObserver,
@@ -96,10 +99,8 @@ public class WorkSoundPreferenceController extends AbstractPreferenceController
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mWorkPreferenceCategory = (PreferenceGroup) screen.findPreference(KEY_WORK_CATEGORY);
-        if (mWorkPreferenceCategory != null) {
-            mWorkPreferenceCategory.setVisible(isAvailable());
-        }
+        super.displayPreference(screen);
+        mWorkPreferenceCategory = screen.findPreference(KEY_WORK_CATEGORY);
     }
 
     @Override
@@ -155,6 +156,18 @@ public class WorkSoundPreferenceController extends AbstractPreferenceController
 
         preference.setSummary(updateRingtoneName(getManagedProfileContext(), ringtoneType));
         return true;
+    }
+
+    @Override
+    public void updateNonIndexableKeys(List<String> keys) {
+        if (isAvailable()) {
+            return;
+        }
+        keys.add(KEY_WORK_CATEGORY);
+        keys.add(KEY_WORK_USE_PERSONAL_SOUNDS);
+        keys.add(KEY_WORK_NOTIFICATION_RINGTONE);
+        keys.add(KEY_WORK_PHONE_RINGTONE);
+        keys.add(KEY_WORK_ALARM_RINGTONE);
     }
 
     // === Phone & notification ringtone ===
@@ -318,7 +331,7 @@ public class WorkSoundPreferenceController extends AbstractPreferenceController
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_UNIFY_SOUND_SETTINGS;
+            return SettingsEnums.DIALOG_UNIFY_SOUND_SETTINGS;
         }
 
         @Override

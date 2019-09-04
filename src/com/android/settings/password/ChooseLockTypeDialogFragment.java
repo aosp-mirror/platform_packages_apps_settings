@@ -17,11 +17,9 @@
 package com.android.settings.password;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -34,12 +32,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
-import com.android.setupwizardlib.util.WizardManagerHelper;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.List;
 
@@ -132,13 +133,13 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
         mAdapter = new ScreenLockAdapter(context, locks, mController);
         builder.setAdapter(mAdapter, this);
         builder.setTitle(R.string.setup_lock_settings_options_dialog_title);
-        AlertDialog alertDialog = builder.create();
+        Dialog alertDialog = builder.create();
         return alertDialog;
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_CHOOSE_LOCK_DIALOG;
+        return SettingsEnums.SETTINGS_CHOOSE_LOCK_DIALOG;
     }
 
     private static class ScreenLockAdapter extends ArrayAdapter<ScreenLockType> {

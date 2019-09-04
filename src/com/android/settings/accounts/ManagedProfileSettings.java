@@ -16,76 +16,85 @@
 
 package com.android.settings.accounts;
 
+import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedSwitchPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
 
-import static android.provider.Settings.Secure.MANAGED_PROFILE_CONTACT_REMOTE_SEARCH;
+import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Setting page for managed profile.
  * FIXME: It currently assumes there is only one managed profile.
  */
-public class ManagedProfileSettings extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
-
-    private SwitchPreference mWorkModePreference;
-    private RestrictedSwitchPreference mContactPrefrence;
+@SearchIndexable
+public class ManagedProfileSettings extends DashboardFragment {
 
     private UserManager mUserManager;
     private UserHandle mManagedUser;
-    private Context mContext;
 
     private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver;
-
-    private static final String KEY_WORK_MODE = "work_mode";
-    private static final String KEY_CONTACT = "contacts_search";
 
     private static final String TAG = "ManagedProfileSettings";
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.managed_profile_settings);
-        mWorkModePreference = (SwitchPreference) findPreference(KEY_WORK_MODE);
-        mWorkModePreference.setOnPreferenceChangeListener(this);
-        mContactPrefrence = (RestrictedSwitchPreference) findPreference(KEY_CONTACT);
-        mContactPrefrence.setOnPreferenceChangeListener(this);
-        mContext = getActivity().getApplicationContext();
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.managed_profile_settings;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
         mManagedUser = getManagedUserFromArgument();
         if (mManagedUser == null) {
             getActivity().finish();
         }
+        use(WorkModePreferenceController.class).setManagedUser(mManagedUser);
+        use(ContactSearchPreferenceController.class).setManagedUser(mManagedUser);
+        use(CrossProfileCalendarPreferenceController.class).setManagedUser(mManagedUser);
+        use(CrossProfileCalendarDisabledPreferenceController.class).setManagedUser(mManagedUser);
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
         mManagedProfileBroadcastReceiver = new ManagedProfileBroadcastReceiver();
         mManagedProfileBroadcastReceiver.register(getActivity());
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        loadDataAndPopulateUi();
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
-        mManagedProfileBroadcastReceiver.unregister(getActivity());
+        if (mManagedProfileBroadcastReceiver != null) {
+            mManagedProfileBroadcastReceiver.unregister(getActivity());
+        }
     }
 
     private UserHandle getManagedUserFromArgument() {
@@ -102,59 +111,38 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
         return Utils.getManagedProfile(mUserManager);
     }
 
-    private void loadDataAndPopulateUi() {
-        if (mWorkModePreference != null) {
-            updateWorkModePreference();
-        }
-
-        if (mContactPrefrence != null) {
-            int value = Settings.Secure.getIntForUser(getContentResolver(),
-                    MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 0, mManagedUser.getIdentifier());
-            mContactPrefrence.setChecked(value != 0);
-            RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
-                    RestrictedLockUtils.checkIfRemoteContactSearchDisallowed(
-                            mContext, mManagedUser.getIdentifier());
-            mContactPrefrence.setDisabledByAdmin(enforcedAdmin);
-        }
-    }
-
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.ACCOUNTS_WORK_PROFILE_SETTINGS;
+        return SettingsEnums.ACCOUNTS_WORK_PROFILE_SETTINGS;
     }
 
-    private void updateWorkModePreference() {
-        boolean isWorkModeOn = !mUserManager.isQuietModeEnabled(mManagedUser);
-        mWorkModePreference.setChecked(isWorkModeOn);
-        mWorkModePreference.setSummary(isWorkModeOn
-                ? R.string.work_mode_on_summary
-                : R.string.work_mode_off_summary);
-    }
-
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mWorkModePreference) {
-            boolean quietModeEnabled = !(boolean) newValue;
-            mUserManager.requestQuietModeEnabled(quietModeEnabled, mManagedUser);
-            return true;
-        }
-        if (preference == mContactPrefrence) {
-            int value = ((boolean) newValue == true) ? 1 : 0;
-            Settings.Secure.putIntForUser(getContentResolver(),
-                    MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, value, mManagedUser.getIdentifier());
-            return true;
-        }
-        return false;
-    }
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.managed_profile_settings;
+                    result.add(sir);
+                    return result;
+                }
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return false;
+                }
+            };
 
     private class ManagedProfileBroadcastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (intent == null) {
+                return;
+            }
             final String action = intent.getAction();
             Log.v(TAG, "Received broadcast: " + action);
-            if (action.equals(Intent.ACTION_MANAGED_PROFILE_REMOVED)) {
+            if (Intent.ACTION_MANAGED_PROFILE_REMOVED.equals(action)) {
                 if (intent.getIntExtra(Intent.EXTRA_USER_HANDLE,
                         UserHandle.USER_NULL) == mManagedUser.getIdentifier()) {
                     getActivity().finish();
@@ -162,23 +150,12 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
                 return;
             }
 
-            if (action.equals(Intent.ACTION_MANAGED_PROFILE_AVAILABLE)
-                    || action.equals(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE)) {
-                if (intent.getIntExtra(Intent.EXTRA_USER_HANDLE,
-                        UserHandle.USER_NULL) == mManagedUser.getIdentifier()) {
-                    updateWorkModePreference();
-                }
-                return;
-            }
             Log.w(TAG, "Cannot handle received broadcast: " + intent.getAction());
         }
-
 
         public void register(Context context) {
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_REMOVED);
-            intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
-            intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
             context.registerReceiver(this, intentFilter);
         }
 
@@ -186,5 +163,4 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
             context.unregisterReceiver(this);
         }
     }
-
 }

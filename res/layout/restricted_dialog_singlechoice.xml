@@ -37,9 +37,10 @@
             android:ellipsize="marquee" />
     <ImageView
             android:id="@+id/restricted_lock_icon"
-            android:layout_width="@dimen/restricted_icon_size"
-            android:layout_height="@dimen/restricted_icon_size"
-            android:src="@drawable/ic_info"
+            android:layout_width="@*android:dimen/config_restrictedIconSize"
+            android:layout_height="@*android:dimen/config_restrictedIconSize"
+            android:tint="?android:attr/colorAccent"
+            android:src="@*android:drawable/ic_info"
             android:layout_marginLeft="@dimen/restricted_icon_padding"
             android:baselineAlignBottom="true"
             android:scaleType="centerInside"

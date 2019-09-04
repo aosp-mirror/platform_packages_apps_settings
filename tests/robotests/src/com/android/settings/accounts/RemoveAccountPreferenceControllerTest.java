@@ -15,11 +15,13 @@
  */
 package com.android.settings.accounts;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -28,42 +30,50 @@ import static org.mockito.Mockito.when;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorDescription;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import android.widget.Button;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.widget.LayoutPreference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowUserManager.class,
         ShadowDevicePolicyManager.class
@@ -76,7 +86,7 @@ public class RemoveAccountPreferenceControllerTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private AccountManager mAccountManager;
     @Mock
-    private PreferenceFragment mFragment;
+    private PreferenceFragmentCompat mFragment;
     @Mock
     private PreferenceManager mPreferenceManager;
     @Mock
@@ -107,6 +117,11 @@ public class RemoveAccountPreferenceControllerTest {
                 mFragment);
     }
 
+    @After
+    public void tearDown() {
+        ShadowContentResolver.reset();
+    }
+
     @Test
     public void displayPreference_shouldAddClickListener() {
         when(mScreen.findPreference(KEY_REMOVE_ACCOUNT)).thenReturn(mPreference);
@@ -129,7 +144,7 @@ public class RemoveAccountPreferenceControllerTest {
     }
 
     @Test
-    public void onClick_shouldNotStartConfirmDialogWhenModifyAccountsIsDisallowed() {
+    public void onClick_modifyAccountsIsDisallowed_shouldNotStartConfirmDialog() {
         when(mFragment.isAdded()).thenReturn(true);
 
         final int userId = UserHandle.myUserId();
@@ -155,9 +170,10 @@ public class RemoveAccountPreferenceControllerTest {
 
     @Test
     @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
-    public void confirmRemove_shouldRemoveAccount() {
+    public void confirmRemove_shouldRemoveAccount()
+            throws AuthenticatorException, OperationCanceledException, IOException {
         when(mFragment.isAdded()).thenReturn(true);
-        Activity activity = mock(Activity.class);
+        FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mFragment.getActivity()).thenReturn(activity);
 
@@ -168,7 +184,52 @@ public class RemoveAccountPreferenceControllerTest {
                         mFragment, account, userHandle);
         dialog.onCreate(new Bundle());
         dialog.onClick(null, 0);
+        ArgumentCaptor<AccountManagerCallback<Bundle>> callbackCaptor = ArgumentCaptor.forClass(
+                AccountManagerCallback.class);
         verify(mAccountManager).removeAccountAsUser(eq(account), nullable(Activity.class),
-                nullable(AccountManagerCallback.class), nullable(Handler.class), eq(userHandle));
+                callbackCaptor.capture(), nullable(Handler.class), eq(userHandle));
+
+        AccountManagerCallback<Bundle> callback = callbackCaptor.getValue();
+        assertThat(callback).isNotNull();
+        AccountManagerFuture<Bundle> future = mock(AccountManagerFuture.class);
+        Bundle resultBundle = new Bundle();
+        resultBundle.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, true);
+        when(future.getResult()).thenReturn(resultBundle);
+
+        callback.run(future);
+        verify(activity).finish();
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    public void confirmRemove_activityGone_shouldSilentlyRemoveAccount()
+            throws AuthenticatorException, OperationCanceledException, IOException {
+        final Account account = new Account("Account11", "com.acct1");
+        final UserHandle userHandle = new UserHandle(10);
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(mFragment.isAdded()).thenReturn(true);
+        when(activity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
+        when(mFragment.getActivity()).thenReturn(activity).thenReturn(null);
+
+        final RemoveAccountPreferenceController.ConfirmRemoveAccountDialog dialog =
+                RemoveAccountPreferenceController.ConfirmRemoveAccountDialog.show(
+                        mFragment, account, userHandle);
+        dialog.onCreate(new Bundle());
+        dialog.onClick(null, 0);
+
+        ArgumentCaptor<AccountManagerCallback<Bundle>> callbackCaptor = ArgumentCaptor.forClass(
+                AccountManagerCallback.class);
+        verify(mAccountManager).removeAccountAsUser(eq(account), nullable(Activity.class),
+                callbackCaptor.capture(), nullable(Handler.class), eq(userHandle));
+
+        AccountManagerCallback<Bundle> callback = callbackCaptor.getValue();
+        assertThat(callback).isNotNull();
+        AccountManagerFuture<Bundle> future = mock(AccountManagerFuture.class);
+        Bundle resultBundle = new Bundle();
+        resultBundle.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, true);
+        when(future.getResult()).thenReturn(resultBundle);
+
+        callback.run(future);
+        verify(activity, never()).finish();
     }
 }

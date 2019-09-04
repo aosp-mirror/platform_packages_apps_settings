@@ -18,8 +18,8 @@ package com.android.settings.network;
 
 import static android.content.Context.TELEPHONY_SERVICE;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -28,13 +28,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.provider.Telephony;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.MultiSelectListPreference;
-import androidx.preference.SwitchPreference;
-import androidx.preference.EditTextPreference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
@@ -48,7 +41,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
@@ -230,9 +231,13 @@ public class ApnEditor extends SettingsPreferenceFragment
 
         final Intent intent = getIntent();
         final String action = intent.getAction();
+        if (TextUtils.isEmpty(action)) {
+            finish();
+            return;
+        }
+
         mSubId = intent.getIntExtra(ApnSettings.SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-
         mReadOnlyApn = false;
         mReadOnlyApnTypes = null;
         mReadOnlyApnFields = null;
@@ -478,7 +483,7 @@ public class ApnEditor extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APN_EDITOR;
+        return SettingsEnums.APN_EDITOR;
     }
 
     @VisibleForTesting
@@ -1198,7 +1203,7 @@ public class ApnEditor extends SettingsPreferenceFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_APN_EDITOR_ERROR;
+            return SettingsEnums.DIALOG_APN_EDITOR_ERROR;
         }
     }
 

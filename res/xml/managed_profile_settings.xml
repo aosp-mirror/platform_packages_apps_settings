@@ -16,17 +16,34 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
+                  android:key="managed_profile_settings_screen"
                   android:title="@string/managed_profile_settings_title">
 
     <SwitchPreference
         android:key="work_mode"
         android:title="@string/work_mode_label"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.accounts.WorkModePreferenceController"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="contacts_search"
         android:summary="@string/managed_profile_contact_search_summary"
         android:title="@string/managed_profile_contact_search_title"
-        settings:useAdditionalSummary="true"/>
+        settings:useAdditionalSummary="true"
+        settings:controller="com.android.settings.accounts.ContactSearchPreferenceController"/>
+
+    <!-- Only one of these preferences will be visible at a time, depending on
+         CrossProfileCalendarPreferenceController#isCrossProfileCalendarDisallowedByAdmin -->
+    <SwitchPreference
+        android:key="cross_profile_calendar"
+        android:summary="@string/cross_profile_calendar_summary"
+        android:title="@string/cross_profile_calendar_title"
+        settings:controller="com.android.settings.accounts.CrossProfileCalendarPreferenceController"/>
+    <Preference
+        android:key="cross_profile_calendar_disabled"
+        android:summary="@string/cross_profile_calendar_restricted_summary"
+        android:title="@string/cross_profile_calendar_title"
+        android:enabled="false"
+        settings:controller="com.android.settings.accounts.CrossProfileCalendarDisabledPreferenceController"/>
 
 </PreferenceScreen>

@@ -35,7 +35,7 @@
         android:fontFamily="@*android:string/config_headlineFontFamily"
         android:singleLine="true"
         android:textAlignment="viewStart"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
         android:textColor="?android:attr/colorAccent"
         android:textSize="36sp"/>
 
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="viewStart"
-        android:textAppearance="@android:style/TextAppearance.Material.Body1"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
         android:maxLines="10" />
 
     <ProgressBar

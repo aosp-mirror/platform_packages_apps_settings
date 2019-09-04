@@ -17,18 +17,12 @@
 package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.provider.Settings;
-import android.provider.Settings.Secure;
 
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
@@ -37,10 +31,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSecureSettings.class)
 public class AssistGestureSettingsPreferenceControllerTest {
 
@@ -70,39 +64,6 @@ public class AssistGestureSettingsPreferenceControllerTest {
     public void isAvailable_whenUnsupported_shouldReturnFalse() {
         when(mFactory.assistGestureFeatureProvider.isSupported(mContext)).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void testPreferenceController_ProperResultPayloadType() {
-        final Context context = RuntimeEnvironment.application;
-        AssistGestureSettingsPreferenceController controller =
-                new AssistGestureSettingsPreferenceController(context, KEY_ASSIST);
-        controller.setAssistOnly(false);
-        ResultPayload payload = controller.getResultPayload();
-        assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
-    }
-
-    @Test
-    public void testSetValue_updatesCorrectly() {
-        int newValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Secure.ASSIST_GESTURE_ENABLED, 0);
-
-        ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver, Secure.ASSIST_GESTURE_ENABLED, -1);
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    public void testGetValue_correctValueReturned() {
-        int currentValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.ASSIST_GESTURE_ENABLED, currentValue);
-
-        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
-
-        assertThat(newValue).isEqualTo(currentValue);
     }
 }
 

@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
-import android.app.AppOpsManager;
 import android.content.Context;
 
 import com.android.settings.Utils;
@@ -28,12 +27,20 @@ import java.util.function.Predicate;
  * {@link Predicate} for {@link AppInfo} to check whether it has label
  */
 public class AppLabelPredicate implements Predicate<AppInfo> {
-    private Context mContext;
-    private AppOpsManager mAppOpsManager;
 
-    public AppLabelPredicate(Context context) {
+    private static AppLabelPredicate sInstance;
+    private Context mContext;
+
+    public static AppLabelPredicate getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new AppLabelPredicate(context.getApplicationContext());
+        }
+
+        return sInstance;
+    }
+
+    private AppLabelPredicate(Context context) {
         mContext = context;
-        mAppOpsManager = context.getSystemService(AppOpsManager.class);
     }
 
     @Override

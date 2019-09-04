@@ -22,24 +22,24 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
-public class EmergencyInfoPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class EmergencyInfoPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_EMERGENCY_INFO = "emergency_info";
-    private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENCY_INFO";
-    private static final String PACKAGE_NAME_EMERGENCY = "com.android.emergency";
+    public static String getIntentAction(Context context) {
+        return context.getResources().getString(R.string.config_emergency_intent_action);
+    }
 
-    public EmergencyInfoPreferenceController(Context context) {
-        super(context);
+    public EmergencyInfoPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
@@ -53,16 +53,17 @@ public class EmergencyInfoPreferenceController extends AbstractPreferenceControl
         }
     }
 
+    @Override
     public void updateState(Preference preference) {
         UserInfo info = mContext.getSystemService(UserManager.class).getUserInfo(
-            UserHandle.myUserId());
+                UserHandle.myUserId());
         preference.setSummary(mContext.getString(R.string.emergency_info_summary, info.name));
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_EMERGENCY_INFO.equals(preference.getKey())) {
-            Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO);
+        if (TextUtils.equals(getPreferenceKey(), preference.getKey())) {
+            Intent intent = new Intent(getIntentAction(mContext));
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(intent);
             return true;
@@ -71,14 +72,19 @@ public class EmergencyInfoPreferenceController extends AbstractPreferenceControl
     }
 
     @Override
-    public boolean isAvailable() {
-        Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO).setPackage(PACKAGE_NAME_EMERGENCY);
-        List<ResolveInfo> infos = mContext.getPackageManager().queryIntentActivities(intent, 0);
-        return infos != null && !infos.isEmpty();
+    public int getAvailabilityStatus() {
+        if (!mContext.getResources().getBoolean(R.bool.config_show_emergency_info_in_device_info)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        final Intent intent = new Intent(getIntentAction(mContext)).setPackage(
+                getPackageName(mContext));
+        final List<ResolveInfo> infos = mContext.getPackageManager().queryIntentActivities(intent,
+                0);
+        return infos != null && !infos.isEmpty()
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
-    @Override
-    public String getPreferenceKey() {
-        return KEY_EMERGENCY_INFO;
+    private static String getPackageName(Context context) {
+        return context.getResources().getString(R.string.config_emergency_package_name);
     }
 }

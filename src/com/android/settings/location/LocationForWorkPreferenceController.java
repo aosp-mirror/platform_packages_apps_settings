@@ -17,6 +17,7 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.os.UserManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -56,8 +57,7 @@ public class LocationForWorkPreferenceController extends LocationBasePreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference =
-                (RestrictedSwitchPreference) screen.findPreference(KEY_MANAGED_PROFILE_SWITCH);
+        mPreference = screen.findPreference(KEY_MANAGED_PROFILE_SWITCH);
     }
 
     @Override

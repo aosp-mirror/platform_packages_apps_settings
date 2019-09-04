@@ -17,7 +17,8 @@
 package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
+
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,10 +26,11 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
+
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.ValidatedEditTextPreference;
 
 import org.junit.Before;
@@ -37,9 +39,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiTetherSSIDPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -54,12 +57,12 @@ public class WifiTetherSSIDPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private WifiTetherSSIDPreferenceController mController;
-    private ValidatedEditTextPreference mPreference;
+    private WifiTetherSsidPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mPreference = new ValidatedEditTextPreference(RuntimeEnvironment.application);
+        mPreference = new WifiTetherSsidPreference(RuntimeEnvironment.application);
 
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
@@ -118,5 +121,29 @@ public class WifiTetherSSIDPreferenceControllerTest {
         mController.updateDisplay();
         assertThat(mController.getSSID()).isEqualTo(config.SSID);
         assertThat(mPreference.getSummary()).isEqualTo(config.SSID);
+    }
+
+    @Test
+    public void displayPreference_wifiApDisabled_shouldHideQrCodeIcon() {
+        when(mWifiManager.isWifiApEnabled()).thenReturn(false);
+        final WifiConfiguration config = new WifiConfiguration();
+        config.SSID = "test_1234";
+        config.allowedKeyManagement.set(KeyMgmt.WPA2_PSK);
+        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+
+        mController.displayPreference(mScreen);
+        assertThat(mController.isQrCodeButtonAvailable()).isEqualTo(false);
+    }
+
+    @Test
+    public void displayPreference_wifiApEnabled_shouldShowQrCodeIcon() {
+        when(mWifiManager.isWifiApEnabled()).thenReturn(true);
+        final WifiConfiguration config = new WifiConfiguration();
+        config.SSID = "test_1234";
+        config.allowedKeyManagement.set(KeyMgmt.WPA2_PSK);
+        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+
+        mController.displayPreference(mScreen);
+        assertThat(mController.isQrCodeButtonAvailable()).isEqualTo(true);
     }
 }

@@ -18,18 +18,18 @@ package com.android.settings.bluetooth;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
-import androidx.lifecycle.LifecycleOwner;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -37,9 +37,10 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BluetoothDetailsControllerTestBase {
 
     protected Context mContext;
@@ -57,7 +58,7 @@ public class BluetoothDetailsControllerTestBase {
     @Mock
     protected CachedBluetoothDevice mCachedDevice;
     @Mock
-    protected Activity mActivity;
+    protected FragmentActivity mActivity;
     @Mock
     protected BluetoothClass mBluetoothDeviceClass;
 

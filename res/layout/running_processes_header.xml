@@ -30,7 +30,7 @@
         android:layout_height="48dp"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:textAppearance="@android:style/TextAppearance.Material.Body2"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body2"
         android:textColor="?android:attr/textColorPrimary"
         android:textAlignment="viewStart"
         android:gravity="left|center_vertical"
@@ -63,7 +63,7 @@
             <TextView
                 android:id="@+id/systemSizePrefix"
                 android:text="@string/running_processes_header_system_prefix"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                 android:textColor="?android:attr/textColorSecondary"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                 android:contentDescription="@null" />
             <TextView
                 android:id="@+id/systemSize"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                 android:textColor="?android:attr/textColorSecondary"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
             <TextView
                 android:id="@+id/appsSizePrefix"
                 android:text="@string/running_processes_header_apps_prefix"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                 android:textColor="?android:attr/textColorSecondary"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                 android:contentDescription="@null" />
             <TextView
                 android:id="@+id/appsSize"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                 android:textColor="?android:attr/textColorSecondary"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -153,7 +153,7 @@
             <TextView
                 android:id="@+id/freeSizePrefix"
                 android:text="@string/running_processes_header_free_prefix"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                 android:textColor="?android:attr/textColorSecondary"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -171,7 +171,7 @@
                 android:contentDescription="@null" />
             <TextView
                 android:id="@+id/freeSize"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                 android:textColor="?android:attr/textColorSecondary"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
         android:layout_marginTop="8dp"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:textAppearance="@android:style/TextAppearance.Material.Body2"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body2"
         android:textColor="?android:attr/textColorPrimary"
         android:textAlignment="viewStart"
         android:gravity="left|center_vertical"

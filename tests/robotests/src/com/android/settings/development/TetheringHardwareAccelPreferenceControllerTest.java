@@ -17,24 +17,25 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TetheringHardwareAccelPreferenceControllerTest {
 
     @Mock
@@ -59,7 +60,7 @@ public class TetheringHardwareAccelPreferenceControllerTest {
     public void onPreferenceChanged_settingEnabled_turnOnTetheringAccel() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED, -1 /* default */);
 
         assertThat(mode).isEqualTo(TetheringHardwareAccelPreferenceController.SETTING_VALUE_ON);
@@ -69,7 +70,7 @@ public class TetheringHardwareAccelPreferenceControllerTest {
     public void onPreferenceChanged_settingDisabled_turnOffTetheringAccel() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED, -1 /* default */);
 
         assertThat(mode).isEqualTo(TetheringHardwareAccelPreferenceController.SETTING_VALUE_OFF);
@@ -77,7 +78,7 @@ public class TetheringHardwareAccelPreferenceControllerTest {
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED,
                 TetheringHardwareAccelPreferenceController.SETTING_VALUE_ON);
         mController.updateState(mPreference);
@@ -87,7 +88,7 @@ public class TetheringHardwareAccelPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED,
                 TetheringHardwareAccelPreferenceController.SETTING_VALUE_OFF);
         mController.updateState(mPreference);
@@ -98,7 +99,7 @@ public class TetheringHardwareAccelPreferenceControllerTest {
     @Test
     public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsSwitchDisabled();
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED, -1 /* default */);
 
         assertThat(mode).isEqualTo(TetheringHardwareAccelPreferenceController.SETTING_VALUE_OFF);

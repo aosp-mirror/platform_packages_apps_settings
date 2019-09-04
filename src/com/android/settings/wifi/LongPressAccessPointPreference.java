@@ -15,23 +15,17 @@
  */
 package com.android.settings.wifi;
 
-import android.app.Fragment;
 import android.content.Context;
+
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceViewHolder;
-import android.widget.ImageView;
-import com.android.settings.R;
+
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 
 public class LongPressAccessPointPreference extends AccessPointPreference {
 
     private final Fragment mFragment;
-
-    public LongPressAccessPointPreference(AccessPoint accessPoint, Context context,
-            UserBadgeCache cache, boolean forSavedNetworks, Fragment fragment) {
-        super(accessPoint, context, cache, forSavedNetworks);
-        mFragment = fragment;
-    }
 
     public LongPressAccessPointPreference(AccessPoint accessPoint, Context context,
             UserBadgeCache cache, boolean forSavedNetworks, int iconResId, Fragment fragment) {

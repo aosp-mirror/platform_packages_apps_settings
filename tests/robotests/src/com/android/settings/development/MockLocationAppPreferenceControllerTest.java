@@ -1,7 +1,10 @@
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_MOCK_LOCATION_APP;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
+        .REQUEST_MOCK_LOCATION_APP;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -12,28 +15,29 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.AppOpsManager;
+import android.app.AppOpsManager.OpEntry;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class MockLocationAppPreferenceControllerTest {
 
     @Mock
@@ -41,15 +45,12 @@ public class MockLocationAppPreferenceControllerTest {
     @Mock
     private AppOpsManager mAppOpsManager;
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     @Mock
     private Preference mPreference;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock
-    private AppOpsManager.PackageOps mPackageOps;
-    @Mock
-    private AppOpsManager.OpEntry mOpEntry;
+
     @Mock
     private ApplicationInfo mApplicationInfo;
 
@@ -70,11 +71,12 @@ public class MockLocationAppPreferenceControllerTest {
     @Test
     public void updateState_foobarAppSelected_shouldSetSummaryToFoobar() {
         final String appName = "foobar";
-        when(mAppOpsManager.getPackagesForOps(any())).thenReturn(
-                Collections.singletonList(mPackageOps));
-        when(mPackageOps.getOps()).thenReturn(Collections.singletonList(mOpEntry));
-        when(mOpEntry.getMode()).thenReturn(AppOpsManager.MODE_ALLOWED);
-        when(mPackageOps.getPackageName()).thenReturn(appName);
+
+        final AppOpsManager.PackageOps packageOps =
+                new AppOpsManager.PackageOps(appName, 0,
+                        Collections.singletonList(createOpEntry(AppOpsManager.MODE_ALLOWED)));
+        when(mAppOpsManager.getPackagesForOps(any(int[].class))).thenReturn(
+                Collections.singletonList(packageOps));
 
         mController.updateState(mPreference);
 
@@ -83,7 +85,8 @@ public class MockLocationAppPreferenceControllerTest {
 
     @Test
     public void updateState_noAppSelected_shouldSetSummaryToDefault() {
-        when(mAppOpsManager.getPackagesForOps(any())).thenReturn(Collections.emptyList());
+        when(mAppOpsManager.getPackagesForOps(any(int[].class)))
+                .thenReturn(Collections.emptyList());
 
         mController.updateState(mPreference);
 
@@ -97,16 +100,16 @@ public class MockLocationAppPreferenceControllerTest {
         final String newAppName = "bar";
         final Intent intent = new Intent();
         intent.setAction(newAppName);
-        when(mAppOpsManager.getPackagesForOps(any()))
-            .thenReturn(Collections.singletonList(mPackageOps));
-        when(mPackageOps.getOps()).thenReturn(Collections.singletonList(mOpEntry));
-        when(mOpEntry.getMode()).thenReturn(AppOpsManager.MODE_ALLOWED);
-        when(mPackageOps.getPackageName()).thenReturn(prevAppName);
+        final AppOpsManager.PackageOps packageOps = new AppOpsManager.PackageOps(prevAppName, 0,
+                Collections.singletonList(createOpEntry(AppOpsManager.MODE_ALLOWED)));
+
+        when(mAppOpsManager.getPackagesForOps(any(int[].class)))
+                .thenReturn(Collections.singletonList(packageOps));
         when(mPackageManager.getApplicationInfo(anyString(),
                 eq(PackageManager.MATCH_DISABLED_COMPONENTS))).thenReturn(mApplicationInfo);
 
         final boolean handled =
-            mController.onActivityResult(REQUEST_MOCK_LOCATION_APP, Activity.RESULT_OK, intent);
+                mController.onActivityResult(REQUEST_MOCK_LOCATION_APP, Activity.RESULT_OK, intent);
 
         assertThat(handled).isTrue();
         verify(mAppOpsManager).setMode(anyInt(), anyInt(), eq(newAppName),
@@ -139,5 +142,10 @@ public class MockLocationAppPreferenceControllerTest {
         when(mPreference.getKey()).thenReturn("SomeRandomKey");
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
+    }
+
+    private AppOpsManager.OpEntry createOpEntry(int opMode) {
+        return new OpEntry(0, false, opMode, null /*accessTimes*/, null /*rejectTimes*/,
+            null /*durations*/, null /* proxyUids */, null /* proxyPackages */);
     }
 }

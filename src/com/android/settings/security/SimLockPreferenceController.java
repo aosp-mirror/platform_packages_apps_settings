@@ -19,12 +19,13 @@ package com.android.settings.security;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -76,7 +77,7 @@ public class SimLockPreferenceController extends BasePreferenceController {
      */
     private boolean isSimReady() {
         final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
+                mSubscriptionManager.getActiveSubscriptionInfoList(true);
         if (subInfoList != null) {
             for (SubscriptionInfo subInfo : subInfoList) {
                 final int simState = mTelephonyManager.getSimState(subInfo.getSimSlotIndex());
@@ -94,7 +95,7 @@ public class SimLockPreferenceController extends BasePreferenceController {
      */
     private boolean isSimIccReady() {
         final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
+                mSubscriptionManager.getActiveSubscriptionInfoList(true);
 
         if (subInfoList != null) {
             for (SubscriptionInfo subInfo : subInfoList) {

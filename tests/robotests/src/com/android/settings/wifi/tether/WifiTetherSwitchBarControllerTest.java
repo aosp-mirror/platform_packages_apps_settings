@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -35,7 +34,6 @@ import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 
@@ -44,9 +42,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiTetherSwitchBarControllerTest {
     @Mock
     private WifiManager mWifiManager;
@@ -74,18 +73,7 @@ public class WifiTetherSwitchBarControllerTest {
         mController = new WifiTetherSwitchBarController(mContext,
                 new SwitchBarController(mSwitchBar));
     }
-
-    @Test
-    public void constructor_airplaneModeOn_switchBarDisabled() {
-        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 1);
-
-        final WifiTetherSwitchBarController controller = new WifiTetherSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
-
-        assertThat(mSwitchBar.isEnabled()).isFalse();
-    }
-
+    
     @Test
     public void startTether_fail_resetSwitchBar() {
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(false);

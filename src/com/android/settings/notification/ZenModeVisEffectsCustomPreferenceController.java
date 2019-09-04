@@ -16,12 +16,13 @@
 
 package com.android.settings.notification;
 
-import android.app.NotificationManager.Policy;
+import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -29,18 +30,17 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class ZenModeVisEffectsCustomPreferenceController
         extends AbstractZenModePreferenceController {
 
-    private final String KEY;
     private ZenCustomRadioButtonPreference mPreference;
 
-    protected static final int INTERRUPTIVE_EFFECTS = Policy.SUPPRESSED_EFFECT_AMBIENT
-            | Policy.SUPPRESSED_EFFECT_PEEK
-            | Policy.SUPPRESSED_EFFECT_LIGHTS
-            | Policy.SUPPRESSED_EFFECT_FULL_SCREEN_INTENT;
+    protected static final int INTERRUPTIVE_EFFECTS =
+            NotificationManager.Policy.SUPPRESSED_EFFECT_AMBIENT
+            | NotificationManager.Policy.SUPPRESSED_EFFECT_PEEK
+            | NotificationManager.Policy.SUPPRESSED_EFFECT_LIGHTS
+            | NotificationManager.Policy.SUPPRESSED_EFFECT_FULL_SCREEN_INTENT;
 
     public ZenModeVisEffectsCustomPreferenceController(Context context, Lifecycle lifecycle,
             String key) {
         super(context, key, lifecycle);
-        KEY = key;
     }
 
     @Override
@@ -51,10 +51,11 @@ public class ZenModeVisEffectsCustomPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (ZenCustomRadioButtonPreference) screen.findPreference(KEY);
+        mPreference = screen.findPreference(getPreferenceKey());
 
         mPreference.setOnGearClickListener(p -> {
             launchCustomSettings();
+
         });
 
         mPreference.setOnRadioButtonClickListener(p -> {
@@ -71,7 +72,8 @@ public class ZenModeVisEffectsCustomPreferenceController
 
     protected boolean areCustomOptionsSelected() {
         boolean allEffectsSuppressed =
-                Policy.areAllVisualEffectsSuppressed(mBackend.mPolicy.suppressedVisualEffects);
+                NotificationManager.Policy.areAllVisualEffectsSuppressed(
+                        mBackend.mPolicy.suppressedVisualEffects);
         boolean noEffectsSuppressed = mBackend.mPolicy.suppressedVisualEffects == 0;
 
         return !(allEffectsSuppressed || noEffectsSuppressed);
@@ -79,15 +81,15 @@ public class ZenModeVisEffectsCustomPreferenceController
 
     protected void select() {
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_ZEN_CUSTOM, true);
+                SettingsEnums.ACTION_ZEN_CUSTOM, true);
     }
 
     private void launchCustomSettings() {
         select();
         new SubSettingLauncher(mContext)
                 .setDestination(ZenModeBlockedEffectsSettings.class.getName())
-                .setTitle(R.string.zen_mode_what_to_block_title)
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_ZEN_NOTIFICATIONS)
+                .setTitleRes(R.string.zen_mode_what_to_block_title)
+                .setSourceMetricsCategory(SettingsEnums.SETTINGS_ZEN_NOTIFICATIONS)
                 .launch();
     }
 }

@@ -15,17 +15,15 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="?attr/fingerprint_layout_theme"
-    app:suwFooter="@layout/fingerprint_enroll_enrolling_base_footer">
+    style="?attr/fingerprint_layout_theme">
 
     <LinearLayout
-        style="@style/SuwContentFrame"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -39,15 +37,15 @@
             android:layout_height="wrap_content">
 
             <TextView
-                style="@style/SuwDescription.Glif"
-                android:id="@+id/start_message"
+                style="@style/SudDescription.Glif"
+                android:id="@+id/sud_layout_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="3"
                 android:text="@string/security_settings_fingerprint_enroll_start_message"/>
 
             <TextView
-                style="@style/SuwDescription.Glif"
+                style="@style/SudDescription.Glif"
                 android:id="@+id/repeat_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +62,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="@dimen/fingerprint_progress_bar_max_size"
                 android:layout_height="@dimen/fingerprint_progress_bar_max_size"
                 android:paddingTop="0dp"
@@ -75,10 +73,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center" />
-            </com.android.setupwizardlib.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
             <TextView
-                style="@style/TextAppearance.FingerprintErrorText"
+                style="@style/TextAppearance.ErrorText"
                 android:id="@+id/error_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,4 +89,4 @@
 
     </LinearLayout>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

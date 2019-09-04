@@ -60,14 +60,14 @@ public class GameDriverFooterPreferenceController extends BasePreferenceControll
         return Settings.Global.getInt(
                        mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
                         == GAME_DRIVER_OFF
-                ? AVAILABLE
+                ? AVAILABLE_UNSEARCHABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (FooterPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

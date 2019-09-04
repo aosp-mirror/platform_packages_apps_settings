@@ -17,6 +17,7 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -27,17 +28,17 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
 import com.android.settings.testutils.DatabaseTestUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Locale;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SlicesDatabaseHelperTest {
 
     private Context mContext;
@@ -54,6 +55,7 @@ public class SlicesDatabaseHelperTest {
     @After
     public void cleanUp() {
         DatabaseTestUtils.clearDb(mContext);
+        mDatabase.close();
     }
 
     @Test
@@ -72,6 +74,7 @@ public class SlicesDatabaseHelperTest {
                 IndexColumns.CONTROLLER,
                 IndexColumns.PLATFORM_SLICE,
                 IndexColumns.SLICE_TYPE,
+                IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
         };
 
         assertThat(columnNames).isEqualTo(expectedNames);

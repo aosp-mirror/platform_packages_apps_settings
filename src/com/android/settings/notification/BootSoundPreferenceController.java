@@ -18,10 +18,12 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.os.SystemProperties;
+
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -41,7 +43,7 @@ public class BootSoundPreferenceController extends AbstractPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            SwitchPreference preference = (SwitchPreference) screen.findPreference(KEY_BOOT_SOUNDS);
+            SwitchPreference preference = screen.findPreference(KEY_BOOT_SOUNDS);
             preference.setChecked(SystemProperties.getBoolean(PROPERTY_BOOT_SOUNDS, true));
         }
     }

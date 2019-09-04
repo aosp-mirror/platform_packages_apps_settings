@@ -17,12 +17,13 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.provider.UserDictionary;
-import androidx.annotation.VisibleForTesting;
 import android.util.ArraySet;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.content.CursorLoader;
 
 import java.util.Locale;
 import java.util.Objects;

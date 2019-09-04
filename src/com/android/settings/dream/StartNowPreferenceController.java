@@ -17,14 +17,16 @@
 package com.android.settings.dream;
 
 import android.content.Context;
+import android.widget.Button;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.widget.Button;
+
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class StartNowPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
@@ -52,8 +54,8 @@ public class StartNowPreferenceController extends AbstractPreferenceController i
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        LayoutPreference pref = (LayoutPreference) screen.findPreference(getPreferenceKey());
-        Button startButton = (Button)pref.findViewById(R.id.dream_start_now_button);
+        LayoutPreference pref = screen.findPreference(getPreferenceKey());
+        Button startButton = pref.findViewById(R.id.dream_start_now_button);
         startButton.setOnClickListener(v -> mBackend.startDreaming());
     }
 
@@ -61,7 +63,7 @@ public class StartNowPreferenceController extends AbstractPreferenceController i
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        Button startButton = (Button)((LayoutPreference)preference)
+        Button startButton = ((LayoutPreference) preference)
                 .findViewById(R.id.dream_start_now_button);
         startButton.setEnabled(mBackend.getWhenToDreamSetting() != DreamBackend.NEVER);
     }

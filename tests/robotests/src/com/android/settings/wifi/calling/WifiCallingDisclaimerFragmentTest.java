@@ -35,11 +35,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDisclaimerItemFactory;
 
 import java.util.ArrayList;
@@ -54,13 +54,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowDisclaimerItemFactory.class)
 public class WifiCallingDisclaimerFragmentTest {
 
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private DisclaimerItem mDisclaimerItem;
     @Mock
@@ -89,7 +90,7 @@ public class WifiCallingDisclaimerFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mFragment = spy(new WifiCallingDisclaimerFragment());
 
         doReturn(mActivity).when(mFragment).getActivity();

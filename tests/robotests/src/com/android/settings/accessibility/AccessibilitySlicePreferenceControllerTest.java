@@ -30,23 +30,22 @@ import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowAccessibilityManager;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowAccessibilityManager;
-import org.xmlpull.v1.XmlPullParserException;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AccessibilitySlicePreferenceControllerTest {
 
     private final String PACKAGE_NAME = "com.android.settings.fake";

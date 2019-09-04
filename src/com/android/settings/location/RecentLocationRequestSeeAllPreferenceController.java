@@ -13,28 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.settings.location;
 
 import android.content.Context;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import com.android.settings.widget.AppPreference;
+
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
+import com.android.settingslib.widget.apppreference.AppPreference;
+
 import java.util.List;
+
+import com.android.settings.R;
 
 /** Preference controller for preference category displaying all recent location requests. */
 public class RecentLocationRequestSeeAllPreferenceController
         extends LocationBasePreferenceController {
-
     /** Key for preference category "All recent location requests" */
     private static final String KEY_ALL_RECENT_LOCATION_REQUESTS = "all_recent_location_requests";
     private final RecentLocationRequestSeeAllFragment mFragment;
     private PreferenceCategory mCategoryAllRecentLocationRequests;
     private RecentLocationApps mRecentLocationApps;
+    private boolean mShowSystem = false;
+    private Preference mPreference;
 
     public RecentLocationRequestSeeAllPreferenceController(
             Context context, Lifecycle lifecycle, RecentLocationRequestSeeAllFragment fragment) {
@@ -67,16 +72,25 @@ public class RecentLocationRequestSeeAllPreferenceController
         super.displayPreference(screen);
         mCategoryAllRecentLocationRequests =
                 (PreferenceCategory) screen.findPreference(KEY_ALL_RECENT_LOCATION_REQUESTS);
-
     }
 
     @Override
     public void updateState(Preference preference) {
         mCategoryAllRecentLocationRequests.removeAll();
-        List<RecentLocationApps.Request> requests = mRecentLocationApps.getAppListSorted();
-        for (RecentLocationApps.Request request : requests) {
-            Preference appPreference = createAppPreference(preference.getContext(), request);
-            mCategoryAllRecentLocationRequests.addPreference(appPreference);
+        mPreference = preference;
+        List<RecentLocationApps.Request> requests = mRecentLocationApps.getAppListSorted(
+                mShowSystem);
+        if (requests.isEmpty()) {
+            // If there's no item to display, add a "No recent apps" item.
+            final Preference banner = new AppPreference(mContext);
+            banner.setTitle(R.string.location_no_recent_apps);
+            banner.setSelectable(false);
+            mCategoryAllRecentLocationRequests.addPreference(banner);
+        } else {
+            for (RecentLocationApps.Request request : requests) {
+                Preference appPreference = createAppPreference(preference.getContext(), request);
+                mCategoryAllRecentLocationRequests.addPreference(appPreference);
+            }
         }
     }
 
@@ -91,5 +105,12 @@ public class RecentLocationRequestSeeAllPreferenceController
                 new RecentLocationRequestPreferenceController.PackageEntryClickedListener(
                         mFragment, request.packageName, request.userHandle));
         return pref;
+    }
+
+    public void setShowSystem(boolean showSystem) {
+        mShowSystem = showSystem;
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 }

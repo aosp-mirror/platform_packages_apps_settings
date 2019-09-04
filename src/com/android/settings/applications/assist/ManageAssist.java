@@ -16,10 +16,10 @@
 
 package com.android.settings.applications.assist;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.AssistGestureSettingsPreferenceController;
@@ -27,6 +27,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ import java.util.List;
 /**
  * Settings screen to manage everything about assist.
  */
+@SearchIndexable
 public class ManageAssist extends DashboardFragment {
 
     private static final String TAG = "ManageAssist";
@@ -52,12 +54,12 @@ public class ManageAssist extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_MANAGE_ASSIST;
+        return SettingsEnums.APPLICATIONS_MANAGE_ASSIST;
     }
 
     @Override

@@ -16,27 +16,31 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
+import android.widget.Toast;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhoneNumberPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     private final static String KEY_PHONE_NUMBER = "phone_number";
 
@@ -44,21 +48,20 @@ public class PhoneNumberPreferenceController extends AbstractPreferenceControlle
     private final SubscriptionManager mSubscriptionManager;
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
-    public PhoneNumberPreferenceController(Context context) {
-        super(context);
-        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        mSubscriptionManager = (SubscriptionManager) context.getSystemService(
-                Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+    public PhoneNumberPreferenceController(Context context, String key) {
+        super(context, key);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_PHONE_NUMBER;
+    public int getAvailabilityStatus() {
+        return mTelephonyManager.isVoiceCapable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
-    public boolean isAvailable() {
-        return mTelephonyManager.isVoiceCapable();
+    public CharSequence getSummary() {
+        return getFirstPhoneNumber();
     }
 
     @Override
@@ -88,10 +91,47 @@ public class PhoneNumberPreferenceController extends AbstractPreferenceControlle
         }
     }
 
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public boolean isCopyableSlice() {
+        return true;
+    }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
+    public void copy() {
+        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
+                CLIPBOARD_SERVICE);
+        clipboard.setPrimaryClip(ClipData.newPlainText("text", getFirstPhoneNumber()));
+
+        final String toast = mContext.getString(R.string.copyable_slice_toast,
+                mContext.getText(R.string.status_number));
+        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+    }
+
+    private CharSequence getFirstPhoneNumber() {
+        final List<SubscriptionInfo> subscriptionInfoList =
+                mSubscriptionManager.getActiveSubscriptionInfoList(true);
+        if (subscriptionInfoList == null || subscriptionInfoList.isEmpty()) {
+            return mContext.getText(R.string.device_info_default);
+        }
+
+        // For now, We only return first result for slice view.
+        return getFormattedPhoneNumber(subscriptionInfoList.get(0));
+    }
+
     private CharSequence getPhoneNumber(int simSlot) {
         final SubscriptionInfo subscriptionInfo = getSubscriptionInfo(simSlot);
         if (subscriptionInfo == null) {
-            return mContext.getString(R.string.device_info_default);
+            return mContext.getText(R.string.device_info_default);
         }
 
         return getFormattedPhoneNumber(subscriptionInfo);
@@ -106,7 +146,7 @@ public class PhoneNumberPreferenceController extends AbstractPreferenceControlle
     @VisibleForTesting
     SubscriptionInfo getSubscriptionInfo(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
+                mSubscriptionManager.getActiveSubscriptionInfoList(true);
         if (subscriptionInfoList != null) {
             for (SubscriptionInfo info : subscriptionInfoList) {
                 if (info.getSimSlotIndex() == simSlot) {

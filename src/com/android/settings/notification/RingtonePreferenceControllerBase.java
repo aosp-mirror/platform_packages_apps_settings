@@ -20,10 +20,12 @@ import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.ThreadUtils;
 
 public abstract class RingtonePreferenceControllerBase extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -44,11 +46,22 @@ public abstract class RingtonePreferenceControllerBase extends AbstractPreferenc
 
     @Override
     public void updateState(Preference preference) {
-        Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(mContext, getRingtoneType());
-        final CharSequence summary = Ringtone.getTitle(
-            mContext, ringtoneUri, false /* followSettingsUri */, true /* allowRemote */);
+        ThreadUtils.postOnBackgroundThread(() -> updateSummary(preference));
+    }
+
+    private void updateSummary(Preference preference) {
+        final Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(
+                mContext, getRingtoneType());
+
+        final CharSequence summary;
+        if (ringtoneUri == null) {
+            summary = null;
+        } else {
+            summary = Ringtone.getTitle(
+                    mContext, ringtoneUri, false /* followSettingsUri */, true /* allowRemote */);
+        }
         if (summary != null) {
-            preference.setSummary(summary);
+            ThreadUtils.postOnMainThread(() -> preference.setSummary(summary));
         }
     }
 

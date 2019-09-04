@@ -16,21 +16,20 @@
 
 package com.android.settings.datetime.timezone;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.app.Activity;
 import android.content.Context;
-import androidx.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.Preference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.RobolectricTestRunner;
 
-import static com.google.common.truth.Truth.assertThat;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BaseTimeZonePreferenceControllerTest {
 
     private Activity mActivity;
@@ -68,7 +67,7 @@ public class BaseTimeZonePreferenceControllerTest {
 
         private final Preference mTestPreference;
 
-        public TestPreferenceController(Context context, String preferenceKey) {
+        private TestPreferenceController(Context context, String preferenceKey) {
             super(context, preferenceKey);
             mTestPreference = new Preference(context);
             mTestPreference.setKey(preferenceKey);
@@ -76,7 +75,7 @@ public class BaseTimeZonePreferenceControllerTest {
     }
 
     private static class TestPreference extends Preference {
-        public TestPreference(Context context, String preferenceKey) {
+        private TestPreference(Context context, String preferenceKey) {
             super(context);
             setKey(preferenceKey);
         }
@@ -91,9 +90,8 @@ public class BaseTimeZonePreferenceControllerTest {
             isClicked = true;
         }
 
-        public boolean isClicked() {
+        private boolean isClicked() {
             return isClicked;
         }
-
     }
 }

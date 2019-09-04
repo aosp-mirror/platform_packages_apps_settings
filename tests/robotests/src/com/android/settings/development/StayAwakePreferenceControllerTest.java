@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -26,9 +27,9 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
+
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -39,9 +40,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class StayAwakePreferenceControllerTest {
 
     @Mock
@@ -70,7 +72,7 @@ public class StayAwakePreferenceControllerTest {
     public void onPreferenceChanged_turnOnStayAwake() {
         mController.onPreferenceChange(null, true);
 
-        final int mode = Settings.System.getInt(mContentResolver,
+        final int mode = Settings.Global.getInt(mContentResolver,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, -1);
 
         assertThat(mode).isEqualTo(StayAwakePreferenceController.SETTING_VALUE_ON);
@@ -80,7 +82,7 @@ public class StayAwakePreferenceControllerTest {
     public void onPreferenceChanged_turnOffStayAwake() {
         mController.onPreferenceChange(null, false);
 
-        final int mode = Settings.System.getInt(mContentResolver,
+        final int mode = Settings.Global.getInt(mContentResolver,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, -1);
 
         assertThat(mode).isEqualTo(StayAwakePreferenceController.SETTING_VALUE_OFF);
@@ -88,7 +90,7 @@ public class StayAwakePreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
-        Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+        Settings.Global.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
         mController.updateState(mPreference);
 
@@ -97,7 +99,7 @@ public class StayAwakePreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+        Settings.Global.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_OFF);
         mController.updateState(mPreference);
 
@@ -117,7 +119,7 @@ public class StayAwakePreferenceControllerTest {
 
     @Test
     public void observerOnChangeCalledWithSameUri_preferenceShouldBeUpdated() {
-        Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+        Settings.Global.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
         mController.onResume();
         mController.mSettingsObserver.onChange(false,
@@ -128,7 +130,7 @@ public class StayAwakePreferenceControllerTest {
 
     @Test
     public void observerOnChangeCalledWithDifferentUri_preferenceShouldNotBeUpdated() {
-        Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+        Settings.Global.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
         mController.onResume();
         mController.mSettingsObserver.onChange(false, null);

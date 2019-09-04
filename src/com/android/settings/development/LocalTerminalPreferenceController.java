@@ -3,14 +3,14 @@ package com.android.settings.development;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
+
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public class LocalTerminalPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
@@ -20,7 +20,7 @@ public class LocalTerminalPreferenceController extends DeveloperOptionsPreferenc
     @VisibleForTesting
     static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     private UserManager mUserManager;
 
     public LocalTerminalPreferenceController(Context context) {
@@ -43,7 +43,7 @@ public class LocalTerminalPreferenceController extends DeveloperOptionsPreferenc
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPackageManager = getPackageManagerWrapper();
+        mPackageManager = getPackageManager();
 
         if (isAvailable() && !isEnabled()) {
             mPreference.setEnabled(false);
@@ -82,8 +82,8 @@ public class LocalTerminalPreferenceController extends DeveloperOptionsPreferenc
     }
 
     @VisibleForTesting
-    PackageManagerWrapper getPackageManagerWrapper() {
-        return new PackageManagerWrapper(mContext.getPackageManager());
+    PackageManager getPackageManager() {
+        return mContext.getPackageManager();
     }
 
     private boolean isPackageInstalled(String packageName) {

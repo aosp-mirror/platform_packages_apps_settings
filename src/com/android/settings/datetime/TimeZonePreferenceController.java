@@ -17,9 +17,9 @@
 package com.android.settings.datetime;
 
 import android.content.Context;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedPreference;

@@ -19,7 +19,6 @@ package com.android.settings.ui;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.RemoteException;
-import android.platform.test.annotations.Presubmit;
 import android.provider.Settings;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.BySelector;

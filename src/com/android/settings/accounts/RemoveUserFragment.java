@@ -17,12 +17,12 @@
 package com.android.settings.accounts;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.UserManager;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.users.UserDialogs;
 
@@ -53,6 +53,6 @@ public class RemoveUserFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DIALOG_REMOVE_USER;
+        return SettingsEnums.DIALOG_REMOVE_USER;
     }
 }

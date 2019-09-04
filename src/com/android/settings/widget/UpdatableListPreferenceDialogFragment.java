@@ -15,22 +15,24 @@
  */
 package com.android.settings.widget;
 
-import android.app.AlertDialog;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceDialogFragment;
-import androidx.preference.ListPreference;
 import android.widget.ArrayAdapter;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceDialogFragmentCompat;
+
 import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.ArrayList;
 
 /**
- * {@link PreferenceDialogFragment} that updates the available options
+ * {@link PreferenceDialogFragmentCompat} that updates the available options
  * when {@code onListPreferenceUpdated} is called."
  */
-public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragment implements
+public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragmentCompat implements
         Instrumentable {
 
     private static final String SAVE_STATE_INDEX = "UpdatableListPreferenceDialogFragment.index";
@@ -82,8 +84,8 @@ public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragm
 
     @Override
     public void onDialogClosed(boolean positiveResult) {
-        final ListPreference preference = getListPreference();
         if (positiveResult && mClickedDialogEntryIndex >= 0) {
+            final ListPreference preference = getListPreference();
             final String value = mEntryValues[mClickedDialogEntryIndex].toString();
             if (preference.callChangeListener(value)) {
                 preference.setValue(value);
@@ -113,7 +115,7 @@ public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragm
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
+    protected void onPrepareDialogBuilder(Builder builder) {
         super.onPrepareDialogBuilder(builder);
         final TypedArray a = getContext().obtainStyledAttributes(
                 null,
@@ -142,7 +144,8 @@ public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragm
         return mMetricsCategory;
     }
 
-    private ListPreference getListPreference() {
+    @VisibleForTesting
+    ListPreference getListPreference() {
         return (ListPreference) getPreference();
     }
 

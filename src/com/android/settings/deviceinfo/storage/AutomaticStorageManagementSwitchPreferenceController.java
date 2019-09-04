@@ -17,58 +17,56 @@
 package com.android.settings.deviceinfo.storage;
 
 import android.app.ActivityManager;
-import android.app.FragmentManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.MasterSwitchController;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.Utils;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class AutomaticStorageManagementSwitchPreferenceController extends
-        AbstractPreferenceController implements PreferenceControllerMixin, LifecycleObserver,
-        OnResume, SwitchWidgetController.OnSwitchChangeListener {
-    private static final String KEY_TOGGLE_ASM = "toggle_asm";
+        BasePreferenceController implements LifecycleObserver, OnResume,
+        SwitchWidgetController.OnSwitchChangeListener {
     @VisibleForTesting
     static final String STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY = "ro.storage_manager.enabled";
-
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private MasterSwitchPreference mSwitch;
     private MasterSwitchController mSwitchController;
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private final FragmentManager mFragmentManager;
+    private FragmentManager mFragmentManager;
 
-    public AutomaticStorageManagementSwitchPreferenceController(Context context,
-            MetricsFeatureProvider metricsFeatureProvider, FragmentManager fragmentManager) {
-        super(context);
-        mMetricsFeatureProvider = metricsFeatureProvider;
+    public AutomaticStorageManagementSwitchPreferenceController(Context context, String key) {
+        super(context, key);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+    }
+
+    public AutomaticStorageManagementSwitchPreferenceController setFragmentManager(
+            FragmentManager fragmentManager) {
         mFragmentManager = fragmentManager;
+        return this;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSwitch = (MasterSwitchPreference) screen.findPreference(KEY_TOGGLE_ASM);
+        mSwitch = screen.findPreference(getPreferenceKey());
     }
 
     @Override
-    public boolean isAvailable() {
-        return !ActivityManager.isLowRamDeviceStatic();
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_TOGGLE_ASM;
+    public int getAvailabilityStatus() {
+        return !ActivityManager.isLowRamDeviceStatic() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -88,7 +86,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
         mMetricsFeatureProvider.action(mContext,
-                MetricsEvent.ACTION_TOGGLE_STORAGE_MANAGER, isChecked);
+                SettingsEnums.ACTION_TOGGLE_STORAGE_MANAGER, isChecked);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
                 isChecked ? 1 : 0);
@@ -103,7 +101,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
                         != 0;
         // Show warning if it is disabled by default and turning it on or if it was disabled by
         // policy and we're turning it on.
-        if ((isChecked && (!storageManagerEnabledByDefault || storageManagerDisabledByPolicy))) {
+        if (isChecked && (!storageManagerEnabledByDefault || storageManagerDisabledByPolicy)) {
             ActivationWarningFragment fragment = ActivationWarningFragment.newInstance();
             fragment.show(mFragmentManager, ActivationWarningFragment.TAG);
         }

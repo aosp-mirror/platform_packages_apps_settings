@@ -34,10 +34,10 @@ import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.Context;
+
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -46,10 +46,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenFooterPreferenceControllerTest {
     private ZenFooterPreferenceController mController;
 
@@ -60,7 +62,8 @@ public class ZenFooterPreferenceControllerTest {
     private Context mContext;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock NotificationManager mNotificationManager;
+    @Mock
+    NotificationManager mNotificationManager;
 
     private static final String PREF_KEY = "main_pref";
 
@@ -68,7 +71,7 @@ public class ZenFooterPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(
                 mock(NotificationManager.Policy.class));

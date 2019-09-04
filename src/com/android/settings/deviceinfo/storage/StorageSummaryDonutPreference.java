@@ -16,31 +16,23 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.storage.StorageManager;
-import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextPaint;
-import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
-import android.util.MathUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.DonutView;
-
-import java.text.NumberFormat;
-import java.util.Locale;
 
 /**
  * StorageSummaryDonutPreference is a preference which summarizes the used and remaining storage left
@@ -89,7 +81,7 @@ public class StorageSummaryDonutPreference extends Preference implements View.On
         if (v != null && R.id.deletion_helper_button == v.getId()) {
             Context context = getContext();
             FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(
-                    context, MetricsEvent.STORAGE_FREE_UP_SPACE_NOW);
+                    context, SettingsEnums.STORAGE_FREE_UP_SPACE_NOW);
             Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
             getContext().startActivity(intent);
         }

@@ -17,6 +17,7 @@
 package com.android.settings.applications.manageapplications;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 
 import android.content.Context;
@@ -26,15 +27,15 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ApplicationViewHolderTest {
 
     private Context mContext;
@@ -45,7 +46,7 @@ public class ApplicationViewHolderTest {
     public void seUp() {
         mContext = RuntimeEnvironment.application;
         mView = ApplicationViewHolder.newView(new FrameLayout(mContext));
-        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
+        mHolder = new ApplicationViewHolder(mView);
     }
 
     @Test
@@ -66,10 +67,6 @@ public class ApplicationViewHolderTest {
 
         mHolder.setSummary(R.string.disabled);
         assertThat(mHolder.mSummary.getText()).isEqualTo(mContext.getText(R.string.disabled));
-        assertThat(mHolder.mSummaryContainer.getVisibility()).isEqualTo(View.VISIBLE);
-
-        mHolder.setSummary(null);
-        assertThat(mHolder.mSummaryContainer.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -103,7 +100,7 @@ public class ApplicationViewHolderTest {
     @Test
     public void twoTouchTarget() {
         mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
-        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
+        mHolder = new ApplicationViewHolder(mView);
         assertThat(mHolder.mSwitch).isNotNull();
         assertThat(mHolder.mWidgetContainer.getChildCount()).isEqualTo(1);
     }
@@ -111,8 +108,9 @@ public class ApplicationViewHolderTest {
     @Test
     public void updateSwitch() {
         mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
-        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
-        mHolder.updateSwitch(v -> {}, true, true);
+        mHolder = new ApplicationViewHolder(mView);
+        mHolder.updateSwitch(v -> {
+        } /* listener */, true, true);
 
         assertThat(mHolder.mSwitch.isChecked()).isTrue();
         assertThat(mHolder.mSwitch.isEnabled()).isTrue();

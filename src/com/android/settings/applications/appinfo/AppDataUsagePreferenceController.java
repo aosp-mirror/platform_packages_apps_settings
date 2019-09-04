@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,41 +16,39 @@
 
 package com.android.settings.applications.appinfo;
 
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Loader;
-import android.net.INetworkStatsService;
-import android.net.INetworkStatsSession;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.datausage.AppDataUsage;
-import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-import com.android.settingslib.net.ChartData;
-import com.android.settingslib.net.ChartDataLoader;
+import com.android.settingslib.net.NetworkCycleDataForUid;
+import com.android.settingslib.net.NetworkCycleDataForUidLoader;
+
+import java.util.List;
 
 public class AppDataUsagePreferenceController extends AppInfoPreferenceControllerBase
-        implements LoaderManager.LoaderCallbacks<ChartData>, LifecycleObserver, OnResume, OnPause {
+        implements LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>>, LifecycleObserver,
+        OnResume, OnPause {
 
-    private ChartData mChartData;
-    private INetworkStatsSession mStatsSession;
+    private List<NetworkCycleDataForUid> mAppUsageData;
 
-    public AppDataUsagePreferenceController(Context context,String key) {
+    public AppDataUsagePreferenceController(Context context, String key) {
         super(context, key);
     }
 
@@ -62,15 +60,6 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (isAvailable()) {
-            final INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
-                    ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
-            try {
-                mStatsSession = statsService.openSession();
-            } catch (RemoteException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     @Override
@@ -80,34 +69,41 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
 
     @Override
     public void onResume() {
-        if (mStatsSession != null) {
+        if (isAvailable()) {
             final int uid = mParent.getAppEntry().info.uid;
             final AppItem app = new AppItem(uid);
             app.addUid(uid);
-            mParent.getLoaderManager().restartLoader(mParent.LOADER_CHART_DATA,
-                    ChartDataLoader.buildArgs(getTemplate(mContext), app),
+            mParent.getLoaderManager().restartLoader(mParent.LOADER_CHART_DATA, null /* args */,
                     this);
         }
     }
 
     @Override
     public void onPause() {
-        mParent.getLoaderManager().destroyLoader(mParent.LOADER_CHART_DATA);
+        if (isAvailable()) {
+            mParent.getLoaderManager().destroyLoader(mParent.LOADER_CHART_DATA);
+        }
     }
 
     @Override
-    public Loader<ChartData> onCreateLoader(int id, Bundle args) {
-        return new ChartDataLoader(mContext, mStatsSession, args);
+    public Loader<List<NetworkCycleDataForUid>> onCreateLoader(int id, Bundle args) {
+        final NetworkTemplate template = getTemplate(mContext);
+        return NetworkCycleDataForUidLoader.builder(mContext)
+            .addUid(mParent.getAppEntry().info.uid)
+            .setRetrieveDetail(false)
+            .setNetworkTemplate(template)
+            .build();
     }
 
     @Override
-    public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
-        mChartData = data;
+    public void onLoadFinished(Loader<List<NetworkCycleDataForUid>> loader,
+            List<NetworkCycleDataForUid> data) {
+        mAppUsageData = data;
         updateState(mPreference);
     }
 
     @Override
-    public void onLoaderReset(Loader<ChartData> loader) {
+    public void onLoaderReset(Loader<List<NetworkCycleDataForUid>> loader) {
         // Leave last result.
     }
 
@@ -117,21 +113,29 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
     }
 
     private CharSequence getDataSummary() {
-        if (mChartData != null) {
-            final long totalBytes = mChartData.detail.getTotalBytes();
+        if (mAppUsageData != null) {
+            long totalBytes = 0;
+            long startTime = System.currentTimeMillis();
+            for (NetworkCycleDataForUid data : mAppUsageData) {
+                totalBytes += data.getTotalUsage();
+                final long cycleStart = data.getStartTime();
+                if (cycleStart < startTime) {
+                    startTime = cycleStart;
+                }
+            }
             if (totalBytes == 0) {
                 return mContext.getString(R.string.no_data_usage);
             }
             return mContext.getString(R.string.data_summary_format,
                     Formatter.formatFileSize(mContext, totalBytes),
-                    DateUtils.formatDateTime(mContext, mChartData.detail.getStart(),
+                    DateUtils.formatDateTime(mContext, startTime,
                             DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH));
         }
         return mContext.getString(R.string.computing_size);
     }
 
     private static NetworkTemplate getTemplate(Context context) {
-        if (DataUsageList.hasReadyMobileRadio(context)) {
+        if (DataUsageUtils.hasReadyMobileRadio(context)) {
             return NetworkTemplate.buildTemplateMobileWildcard();
         }
         if (DataUsageUtils.hasWifiRadio(context)) {

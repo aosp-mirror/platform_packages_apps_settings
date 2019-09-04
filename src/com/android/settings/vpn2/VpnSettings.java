@@ -16,10 +16,13 @@
 
 package com.android.settings.vpn2;
 
+import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
+
 import android.annotation.UiThread;
 import android.annotation.WorkerThread;
 import android.app.Activity;
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -40,8 +43,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -49,9 +50,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.annotations.GuardedBy;
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
@@ -60,7 +63,7 @@ import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.GearPreference.OnGearClickListener;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.collect.Lists;
 
@@ -70,8 +73,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
 /**
  * Settings screen listing VPNs. Configured VPNs and networks managed by apps
@@ -113,7 +114,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.VPN;
+        return SettingsEnums.VPN;
     }
 
     @Override
@@ -142,7 +143,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         // Disable all actions if VPN configuration has been disallowed
         for (int i = 0; i < menu.size(); i++) {
             if (isUiRestrictedByOnlyAdmin()) {
-                RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
+                RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getPrefContext(),
                         menu.getItem(i), getRestrictionEnforcedAdmin());
             } else {
                 menu.getItem(i).setEnabled(!mUnavailable);
@@ -152,17 +153,15 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.vpn_create: {
-                // Generate a new key. Here we just use the current time.
-                long millis = System.currentTimeMillis();
-                while (mLegacyVpnPreferences.containsKey(Long.toHexString(millis))) {
-                    ++millis;
-                }
-                VpnProfile profile = new VpnProfile(Long.toHexString(millis));
-                ConfigDialogFragment.show(this, profile, true /* editing */, false /* exists */);
-                return true;
+        // Generate a new key. Here we just use the current time.
+        if (item.getItemId() == R.id.vpn_create) {
+            long millis = System.currentTimeMillis();
+            while (mLegacyVpnPreferences.containsKey(Long.toHexString(millis))) {
+                ++millis;
             }
+            VpnProfile profile = new VpnProfile(Long.toHexString(millis));
+            ConfigDialogFragment.show(this, profile, true /* editing */, false /* exists */);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

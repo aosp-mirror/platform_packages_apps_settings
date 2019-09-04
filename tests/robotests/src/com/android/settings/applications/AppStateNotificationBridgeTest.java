@@ -19,6 +19,8 @@ package com.android.settings.applications;
 import static android.text.format.DateUtils.DAY_IN_MILLIS;
 
 import static com.android.settings.applications.AppStateNotificationBridge
+        .FILTER_APP_NOTIFICATION_BLOCKED;
+import static com.android.settings.applications.AppStateNotificationBridge
         .FILTER_APP_NOTIFICATION_FREQUENCY;
 import static com.android.settings.applications.AppStateNotificationBridge
         .FILTER_APP_NOTIFICATION_RECENCY;
@@ -29,9 +31,8 @@ import static com.android.settings.applications.AppStateNotificationBridge
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -57,7 +58,6 @@ import android.widget.Switch;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateNotificationBridge.NotificationsSentState;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -66,13 +66,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppStateNotificationBridgeTest {
 
     private static String PKG1 = "pkg1";
@@ -149,7 +150,7 @@ public class AppStateNotificationBridgeTest {
                 .thenReturn(usageEvents);
 
         Map<String, NotificationsSentState> map = mBridge.getAggregatedUsageEvents();
-        assertThat(map.get(mBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
     }
 
     @Test
@@ -171,8 +172,8 @@ public class AppStateNotificationBridgeTest {
                 .thenReturn(usageEvents);
 
         Map<String, NotificationsSentState> map  = mBridge.getAggregatedUsageEvents();
-        assertThat(map.get(mBridge.getKey(0, PKG1)).sentCount).isEqualTo(2);
-        assertThat(map.get(mBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).sentCount).isEqualTo(2);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
     }
 
     @Test
@@ -195,10 +196,10 @@ public class AppStateNotificationBridgeTest {
 
         Map<String, NotificationsSentState> map
                 = mBridge.getAggregatedUsageEvents();
-        assertThat(map.get(mBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
-        assertThat(map.get(mBridge.getKey(0, PKG2)).sentCount).isEqualTo(1);
-        assertThat(map.get(mBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
-        assertThat(map.get(mBridge.getKey(0, PKG2)).lastSent).isEqualTo(1);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG2)).sentCount).isEqualTo(1);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG2)).lastSent).isEqualTo(1);
     }
 
     @Test
@@ -379,10 +380,11 @@ public class AppStateNotificationBridgeTest {
         NotificationsSentState sent = new NotificationsSentState();
         sent.lastSent = System.currentTimeMillis() - (2 * DAY_IN_MILLIS);
 
-        assertThat(AppStateNotificationBridge.getSummary(mContext, neverSent, true)).isEqualTo(
-                mContext.getString(R.string.notifications_sent_never));
-        assertThat(AppStateNotificationBridge.getSummary(mContext, sent, true).toString())
-                .contains("2");
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, neverSent, R.id.sort_order_recent_notification)).isEqualTo(
+                        mContext.getString(R.string.notifications_sent_never));
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sent, R.id.sort_order_recent_notification).toString()).contains("2");
     }
 
     @Test
@@ -392,10 +394,33 @@ public class AppStateNotificationBridgeTest {
         NotificationsSentState sentOften = new NotificationsSentState();
         sentOften.avgSentDaily = 8;
 
-        assertThat(AppStateNotificationBridge.getSummary(mContext, sentRarely, false).toString())
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentRarely, R.id.sort_order_frequent_notification).toString())
                 .contains("1");
-        assertThat(AppStateNotificationBridge.getSummary(mContext, sentOften, false).toString())
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentRarely, R.id.sort_order_frequent_notification).toString())
+                .contains("notification ");
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentRarely, R.id.sort_order_frequent_notification).toString())
+                .contains("week");
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentOften, R.id.sort_order_frequent_notification).toString())
                 .contains("8");
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentOften, R.id.sort_order_frequent_notification).toString())
+                .contains("notifications");
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentOften, R.id.sort_order_frequent_notification).toString())
+                .contains("day");
+    }
+
+    @Test
+    public void testSummary_alpha() {
+        NotificationsSentState sentRarely = new NotificationsSentState();
+        sentRarely.avgSentWeekly = 1;
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentRarely, R.id.sort_order_alpha).toString())
+                .isEqualTo("");
     }
 
     @Test
@@ -404,6 +429,7 @@ public class AppStateNotificationBridgeTest {
         allowState.lastSent = 1;
         AppEntry allow = mock(AppEntry.class);
         allow.extraInfo = allowState;
+
 
         assertTrue(FILTER_APP_NOTIFICATION_RECENCY.filterApp(allow));
 
@@ -430,6 +456,23 @@ public class AppStateNotificationBridgeTest {
         deny.extraInfo = denyState;
 
         assertFalse(FILTER_APP_NOTIFICATION_FREQUENCY.filterApp(deny));
+    }
+
+    @Test
+    public void testFilterBlocked() {
+        NotificationsSentState allowState = new NotificationsSentState();
+        allowState.blocked = true;
+        AppEntry allow = mock(AppEntry.class);
+        allow.extraInfo = allowState;
+
+        assertTrue(FILTER_APP_NOTIFICATION_BLOCKED.filterApp(allow));
+
+        NotificationsSentState denyState = new NotificationsSentState();
+        denyState.blocked = false;
+        AppEntry deny = mock(AppEntry.class);
+        deny.extraInfo = denyState;
+
+        assertFalse(FILTER_APP_NOTIFICATION_BLOCKED.filterApp(deny));
     }
 
     @Test
@@ -526,7 +569,7 @@ public class AppStateNotificationBridgeTest {
 
     @Test
     public void testSwitchViews_nullDoesNotCrash() {
-        mBridge.enableSwitch(null);
-        mBridge.checkSwitch(null);
+        AppStateNotificationBridge.enableSwitch(null);
+        AppStateNotificationBridge.checkSwitch(null);
     }
 }

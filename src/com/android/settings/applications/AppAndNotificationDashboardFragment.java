@@ -16,30 +16,43 @@
 
 package com.android.settings.applications;
 
-import android.app.Activity;
-import android.app.Application;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
+import android.app.usage.UsageStats;
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.NonNull;
+
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.AppEntitiesHeaderController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AppAndNotificationDashboardFragment extends DashboardFragment {
+@SearchIndexable
+public class AppAndNotificationDashboardFragment extends DashboardFragment
+        implements RecentAppStatsMixin.RecentAppStatsListener {
 
     private static final String TAG = "AppAndNotifDashboard";
 
+    private View mProgressHeader;
+    private View mProgressAnimation;
+    private RecentAppStatsMixin mRecentAppStatsMixin;
+    private RecentAppsPreferenceController mRecentAppsPreferenceController;
+    private AllAppsInfoPreferenceController mAllAppsInfoPreferenceController;
+
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY;
+        return SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY;
     }
 
     @Override
@@ -58,24 +71,63 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final Activity activity = getActivity();
-        final Application app;
-        if (activity != null) {
-            app = activity.getApplication();
-        } else {
-            app = null;
-        }
-        return buildPreferenceControllers(context, app, this);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        use(SpecialAppAccessPreferenceController.class).setSession(getSettingsLifecycle());
+
+        mRecentAppStatsMixin = new RecentAppStatsMixin(context,
+                AppEntitiesHeaderController.MAXIMUM_APPS);
+        getSettingsLifecycle().addObserver(mRecentAppStatsMixin);
+        mRecentAppStatsMixin.addListener(this);
+
+        mRecentAppsPreferenceController = use(RecentAppsPreferenceController.class);
+        mRecentAppsPreferenceController.setFragment(this /* fragment */);
+        mRecentAppStatsMixin.addListener(mRecentAppsPreferenceController);
+
+        mAllAppsInfoPreferenceController = use(AllAppsInfoPreferenceController.class);
+        mRecentAppStatsMixin.addListener(mAllAppsInfoPreferenceController);
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Application app, Fragment host) {
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mProgressHeader = setPinnedHeaderView(R.layout.progress_header);
+        mProgressAnimation = mProgressHeader.findViewById(R.id.progress_bar_animation);
+        setLoadingEnabled(false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        setLoadingEnabled(true);
+    }
+
+    @Override
+    public void onReloadDataCompleted(@NonNull List<UsageStats> recentApps) {
+        setLoadingEnabled(false);
+        if (!recentApps.isEmpty()) {
+            Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(),
+                    getListView());
+        }
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    private void setLoadingEnabled(boolean enabled) {
+        if (mProgressHeader != null && mProgressAnimation != null) {
+            mProgressHeader.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+            mProgressAnimation.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+        }
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyBroadcastPreferenceController(context,
                 "app_and_notif_cell_broadcast_settings"));
-        controllers.add(new SpecialAppAccessPreferenceController(context));
-        controllers.add(new RecentAppsPreferenceController(context, app, host));
         return controllers;
     }
 
@@ -92,15 +144,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null, null /* host */);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add((new SpecialAppAccessPreferenceController(context))
-                            .getPreferenceKey());
-                    return keys;
+                    return buildPreferenceControllers(context);
                 }
             };
 }

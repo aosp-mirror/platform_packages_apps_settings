@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi.calling;
 
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -31,7 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AlertDialog.Builder;
 import com.android.settings.CustomListPreference;
 import com.android.settings.R;
 

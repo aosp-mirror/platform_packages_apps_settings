@@ -15,13 +15,10 @@
  */
 package com.android.settings.fuelgauge.batterytip.actions;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import android.app.AppOpsManager;
-import android.content.Context;
-import android.util.Pair;
+import android.app.settings.SettingsEnums;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -30,7 +27,6 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,12 +34,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RestrictAppActionTest {
 
     private static final int UID_1 = 12345;
@@ -94,16 +91,13 @@ public class RestrictAppActionTest {
                 .setForceAppStandby(UID_1, PACKAGE_NAME_1, AppOpsManager.MODE_IGNORED);
         verify(mBatteryUtils)
                 .setForceAppStandby(UID_2, PACKAGE_NAME_2, AppOpsManager.MODE_IGNORED);
-        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
-                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_1, Pair.create(
-                        MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY));
-        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
-                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_2,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_WAKEUP));
-        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
-                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_2,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_BT));
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, METRICS_KEY, PACKAGE_NAME_1, 0);
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, METRICS_KEY, PACKAGE_NAME_2,
+                ANOMALY_WAKEUP);
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, METRICS_KEY, PACKAGE_NAME_2,
+                ANOMALY_BT);
     }
 }

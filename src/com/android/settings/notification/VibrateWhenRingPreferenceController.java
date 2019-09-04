@@ -23,10 +23,12 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
+import android.text.TextUtils;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
 
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
@@ -37,6 +39,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 public class VibrateWhenRingPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
+    /** Flag for whether or not to apply ramping ringer on incoming phone calls. */
+    private static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
     private final int DEFAULT_VALUE = 0;
     private final int NOTIFICATION_VIBRATE_WHEN_RINGING = 1;
@@ -61,7 +65,11 @@ public class VibrateWhenRingPreferenceController extends TogglePreferenceControl
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return Utils.isVoiceCapable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        // If ramping ringer is enabled then this setting will be injected
+        // with additional options.
+        return Utils.isVoiceCapable(mContext) && !isRampingRingerEnabled()
+            ? AVAILABLE
+            : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -122,4 +130,10 @@ public class VibrateWhenRingPreferenceController extends TogglePreferenceControl
             }
         }
     }
+
+    private boolean isRampingRingerEnabled() {
+        return DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_TELEPHONY, RAMPING_RINGER_ENABLED, false);
+    }
+
 }

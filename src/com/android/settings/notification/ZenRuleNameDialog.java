@@ -16,9 +16,8 @@
 
 package com.android.settings.notification;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -29,7 +28,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -41,7 +42,7 @@ public class ZenRuleNameDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.NOTIFICATION_ZEN_MODE_RULE_NAME_DIALOG;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_RULE_NAME_DIALOG;
     }
 
     /**

@@ -17,20 +17,21 @@
 package com.android.settings.bluetooth;
 
 import android.annotation.Nullable;
-import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * BluetoothPairingDialog asks the user to enter a PIN / Passkey / simple confirmation
  * for pairing with a remote Bluetooth device. It is an activity that appears as a dialog.
  */
-public class BluetoothPairingDialog extends Activity {
+public class BluetoothPairingDialog extends FragmentActivity {
     public static final String FRAGMENT_TAG = "bluetooth.pairing.fragment";
 
     private BluetoothPairingController mBluetoothPairingController;
@@ -69,7 +70,8 @@ public class BluetoothPairingDialog extends Activity {
         boolean fragmentFound = true;
         // check if the fragment has been preloaded
         BluetoothPairingDialogFragment bluetoothFragment =
-            (BluetoothPairingDialogFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG);
+            (BluetoothPairingDialogFragment) getSupportFragmentManager().
+                    findFragmentByTag(FRAGMENT_TAG);
         // dismiss the fragment if it is already used
         if (bluetoothFragment != null && (bluetoothFragment.isPairingControllerSet()
             || bluetoothFragment.isPairingDialogActivitySet())) {
@@ -85,7 +87,7 @@ public class BluetoothPairingDialog extends Activity {
         bluetoothFragment.setPairingDialogActivity(this);
         // pass the fragment to the manager when it is created from scratch
         if (!fragmentFound) {
-            bluetoothFragment.show(getFragmentManager(), FRAGMENT_TAG);
+            bluetoothFragment.show(getSupportFragmentManager(), FRAGMENT_TAG);
         }
         /*
          * Leave this registered through pause/resume since we still want to

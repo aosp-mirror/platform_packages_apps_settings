@@ -19,8 +19,10 @@ package com.android.settings.testutils.shadow;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowInputMethodManager;
 
 import java.util.Collections;
@@ -40,12 +42,17 @@ public class ShadowInputMethodManagerWithMethodList extends ShadowInputMethodMan
     }
 
     @Implementation
-    public List<InputMethodInfo> getInputMethodList() {
+    protected List<InputMethodInfo> getInputMethodList() {
         return mInputMethodInfos;
     }
 
     // Non-Android setter.
     public void setInputMethodList(List<InputMethodInfo> inputMethodInfos) {
         mInputMethodInfos = inputMethodInfos;
+    }
+
+    public static ShadowInputMethodManagerWithMethodList getShadow() {
+        return (ShadowInputMethodManagerWithMethodList) Shadow.extract(
+                RuntimeEnvironment.application.getSystemService(InputMethodManager.class));
     }
 }

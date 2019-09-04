@@ -22,8 +22,9 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.NotificationChannel;
 import android.content.Context;
-import androidx.preference.Preference;
 import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -61,7 +62,7 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
         if (mChannel != null) {
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setDisabledByAdmin(mAdmin);
-            pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
+            pref.setEnabled(!pref.isDisabledByAdmin());
             pref.setChecked(mChannel.getImportance() >= IMPORTANCE_DEFAULT
                     || mChannel.getImportance() == IMPORTANCE_UNSPECIFIED);
         } else { Log.i(TAG, "tried to updatestate on a null channel?!"); }

@@ -18,16 +18,19 @@ package com.android.settings.applications.appinfo;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-import android.app.AlertDialog;
+import android.app.ActivityManager;
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -43,6 +46,7 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
 
     private AppStateInstallAppsBridge mAppBridge;
     private AppOpsManager mAppOpsManager;
+    private ActivityManager mActivityManager;
     private UserManager mUserManager;
     private RestrictedSwitchPreference mSwitchPref;
     private InstallAppsState mInstallAppsState;
@@ -54,6 +58,7 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         final Context context = getActivity();
         mAppBridge = new AppStateInstallAppsBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        mActivityManager = context.getSystemService(ActivityManager.class);
         mUserManager = UserManager.get(context);
 
         addPreferencesFromResource(R.xml.external_sources_details);
@@ -79,30 +84,40 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     }
 
     public static CharSequence getPreferenceSummary(Context context, AppEntry entry) {
+        final UserHandle userHandle = UserHandle.getUserHandleForUid(entry.info.uid);
         final UserManager um = UserManager.get(context);
         final int userRestrictionSource = um.getUserRestrictionSource(
-                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
-                UserHandle.getUserHandleForUid(entry.info.uid));
-        switch (userRestrictionSource) {
-            case UserManager.RESTRICTION_SOURCE_DEVICE_OWNER:
-            case UserManager.RESTRICTION_SOURCE_PROFILE_OWNER:
-                return context.getString(R.string.disabled_by_admin);
-            case UserManager.RESTRICTION_SOURCE_SYSTEM:
-                return context.getString(R.string.disabled);
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)
+                | um.getUserRestrictionSource(
+                        UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
+                        userHandle);
+        if ((userRestrictionSource & UserManager.RESTRICTION_SOURCE_SYSTEM) != 0) {
+            return context.getString(R.string.disabled_by_admin);
+        } else if (userRestrictionSource != 0) {
+            return context.getString(R.string.disabled);
         }
-
         final InstallAppsState appsState = new AppStateInstallAppsBridge(context, null, null)
                 .createInstallAppsStateFor(entry.info.packageName, entry.info.uid);
-
         return context.getString(appsState.canInstallApps()
                 ? R.string.app_permission_summary_allowed
                 : R.string.app_permission_summary_not_allowed);
     }
 
-    private void setCanInstallApps(boolean newState) {
+    @VisibleForTesting
+    void setCanInstallApps(boolean newState) {
         mAppOpsManager.setMode(AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
                 mPackageInfo.applicationInfo.uid, mPackageName,
                 newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
+        if (!newState) {
+            killApp(mPackageInfo.applicationInfo.uid);
+        }
+    }
+
+    private void killApp(int uid) {
+        if (UserHandle.isCore(uid)) {
+            return;
+        }
+        mActivityManager.killUid(uid, "User denied OP_REQUEST_INSTALL_PACKAGES");
     }
 
     @Override
@@ -118,6 +133,10 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
             return true;
         }
         mSwitchPref.checkRestrictionAndSetDisabled(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
+        if (!mSwitchPref.isDisabledByAdmin()) {
+            mSwitchPref.checkRestrictionAndSetDisabled(
+                    UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY);
+        }
         if (mSwitchPref.isDisabledByAdmin()) {
             return true;
         }
@@ -139,6 +158,6 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.MANAGE_EXTERNAL_SOURCES;
+        return SettingsEnums.MANAGE_EXTERNAL_SOURCES;
     }
 }

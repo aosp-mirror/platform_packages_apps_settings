@@ -15,36 +15,32 @@
  */
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController
-        .PREF_KEY_ENCRYPTION_SECURITY_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_SECURITY_PAGE;
 
-import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.fingerprint.FingerprintManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
+import com.android.settings.biometrics.face.FaceStatusPreferenceController;
+import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
+import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
-import com.android.settings.enterprise.ManageDeviceAdminPreferenceController;
-import com.android.settings.fingerprint.FingerprintProfileStatusPreferenceController;
-import com.android.settings.fingerprint.FingerprintStatusPreferenceController;
-import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.security.screenlock.LockScreenPreferenceController;
 import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class SecuritySettings extends DashboardFragment {
 
     private static final String TAG = "SecuritySettings";
@@ -58,7 +54,7 @@ public class SecuritySettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SECURITY;
+        return SettingsEnums.SECURITY;
     }
 
     @Override
@@ -78,7 +74,7 @@ public class SecuritySettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), this /* host*/);
+        return buildPreferenceControllers(context, getSettingsLifecycle(), this /* host*/);
     }
 
     /**
@@ -97,13 +93,8 @@ public class SecuritySettings extends DashboardFragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    void launchConfirmDeviceLockForUnification() {
-        use(LockUnificationPreferenceController.class)
-                .launchConfirmDeviceLockForUnification();
-    }
-
-    void unifyUncompliantLocks() {
-        use(LockUnificationPreferenceController.class).unifyUncompliantLocks();
+    void startUnification() {
+        use(LockUnificationPreferenceController.class).startUnification();
     }
 
     void updateUnificationPreference() {
@@ -113,20 +104,17 @@ public class SecuritySettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, SecuritySettings host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new LocationPreferenceController(context, lifecycle));
-        controllers.add(new ManageDeviceAdminPreferenceController(context));
         controllers.add(new EnterprisePrivacyPreferenceController(context));
         controllers.add(new ManageTrustAgentsPreferenceController(context));
         controllers.add(new ScreenPinningPreferenceController(context));
         controllers.add(new SimLockPreferenceController(context));
-        controllers.add(new ShowPasswordPreferenceController(context));
         controllers.add(new EncryptionStatusPreferenceController(context,
                 PREF_KEY_ENCRYPTION_SECURITY_PAGE));
         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
 
         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
+        securityPreferenceControllers.add(new FaceStatusPreferenceController(context));
         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
-        securityPreferenceControllers.add(new LockScreenPreferenceController(context, lifecycle));
         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
                 .setChildren(securityPreferenceControllers));
@@ -138,6 +126,7 @@ public class SecuritySettings extends DashboardFragment {
         profileSecurityControllers.add(new LockUnificationPreferenceController(context, host));
         profileSecurityControllers.add(new VisiblePatternProfilePreferenceController(
                 context, lifecycle));
+        profileSecurityControllers.add(new FaceProfileStatusPreferenceController(context));
         profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(context));
         controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY)
                 .setChildren(profileSecurityControllers));
@@ -168,41 +157,6 @@ public class SecuritySettings extends DashboardFragment {
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */,
                             null /* host*/);
-                }
-            };
-
-    static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                final FingerprintManager fpm =
-                        Utils.getFingerprintManagerOrNull(mContext);
-                if (fpm != null && fpm.isHardwareDetected()) {
-                    mSummaryLoader.setSummary(this,
-                            mContext.getString(R.string.security_dashboard_summary));
-                } else {
-                    mSummaryLoader.setSummary(this, mContext.getString(
-                            R.string.security_dashboard_summary_no_fingerprint));
-                }
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
-            new SummaryLoader.SummaryProviderFactory() {
-                @Override
-                public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                        SummaryLoader summaryLoader) {
-                    return new SummaryProvider(activity, summaryLoader);
                 }
             };
 }

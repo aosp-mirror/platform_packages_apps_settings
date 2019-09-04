@@ -15,6 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/legal_information"
                   android:key="legal_screen">
 
@@ -26,35 +27,39 @@
     <!-- Copyright information -->
     <Preference
         android:key="copyright"
-        android:title="@string/copyright_title">
-        <intent android:action="android.settings.COPYRIGHT"/>
-    </Preference>
+        android:title="@string/copyright_title"
+        settings:controller="com.android.settings.deviceinfo.legal.CopyrightPreferenceController" />
 
     <!-- License information -->
     <Preference
         android:key="license"
-        android:title="@string/license_title">
-        <intent android:action="android.settings.LICENSE"/>
-    </Preference>
+        android:title="@string/license_title"
+        settings:controller="com.android.settings.deviceinfo.legal.LicensePreferenceController" />
 
     <!-- Terms and conditions -->
     <Preference
         android:key="terms"
-        android:title="@string/terms_title">
-        <intent android:action="android.settings.TERMS"/>
-    </Preference>
+        android:title="@string/terms_title"
+        settings:controller="com.android.settings.deviceinfo.legal.TermsPreferenceController" />
+
+    <!-- Mainline Module License information -->
+    <Preference
+        android:key="module_license"
+        android:title="@string/module_license_title"
+        android:fragment="com.android.settings.deviceinfo.legal.ModuleLicensesDashboard"
+        settings:controller="com.android.settings.deviceinfo.legal.ModuleLicensesListPreferenceController" />
 
     <!-- System WebView License information -->
     <Preference
         android:key="webview_license"
-        android:title="@string/webview_license_title">
-        <intent android:action="android.settings.WEBVIEW_LICENSE"/>
-    </Preference>
+        android:title="@string/webview_license_title"
+        settings:controller="com.android.settings.deviceinfo.legal.WebViewLicensePreferenceController" />
 
     <Preference
         android:key="wallpaper_attributions"
         android:title="@string/wallpaper_attributions"
-        android:summary="@string/wallpaper_attributions_values"/>
+        android:summary="@string/wallpaper_attributions_values"
+        settings:controller="com.android.settings.deviceinfo.legal.WallpaperAttributionsPreferenceController" />
 
 </PreferenceScreen>
 

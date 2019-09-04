@@ -6,7 +6,7 @@ android_test {
     libs: ["android.test.runner"],
 
     static_libs: [
-        "android-support-test",
+        "androidx.test.rules",
         "mockito-target",
         "ub-uiautomator",
         "truth-prebuilt",

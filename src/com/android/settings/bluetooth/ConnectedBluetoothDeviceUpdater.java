@@ -19,14 +19,13 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.media.AudioManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * Controller to maintain connected bluetooth devices
@@ -44,37 +43,9 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
-    @VisibleForTesting
-    ConnectedBluetoothDeviceUpdater(DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback,
-            LocalBluetoothManager localBluetoothManager) {
-        super(fragment, devicePreferenceCallback, localBluetoothManager);
-        mAudioManager = (AudioManager) fragment.getContext().
-                getSystemService(Context.AUDIO_SERVICE);
-    }
-
     @Override
     public void onAudioModeChanged() {
         forceUpdate();
-    }
-
-    @Override
-    public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
-            int bluetoothProfile) {
-        if (DBG) {
-            Log.d(TAG, "onProfileConnectionStateChanged() device: " +
-                    cachedDevice.getName() + ", state: " + state + ", bluetoothProfile: "
-                    + bluetoothProfile);
-        }
-        if (state == BluetoothProfile.STATE_CONNECTED) {
-            if (isFilterMatched(cachedDevice)) {
-                addPreference(cachedDevice);
-            } else {
-                removePreference(cachedDevice);
-            }
-        } else if (state == BluetoothProfile.STATE_DISCONNECTED) {
-            removePreference(cachedDevice);
-        }
     }
 
     @Override
@@ -111,10 +82,10 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
             // show the bluetooth device that doesn't have headset profile.
             switch (currentAudioProfile) {
                 case BluetoothProfile.A2DP:
-                    isFilterMatched = !cachedDevice.isA2dpDevice();
+                    isFilterMatched = !cachedDevice.isConnectedA2dpDevice();
                     break;
                 case BluetoothProfile.HEADSET:
-                    isFilterMatched = !cachedDevice.isHfpDevice();
+                    isFilterMatched = !cachedDevice.isConnectedHfpDevice();
                     break;
             }
             if (DBG) {

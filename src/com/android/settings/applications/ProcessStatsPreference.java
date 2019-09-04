@@ -20,9 +20,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.text.format.Formatter;
-
 import android.util.Log;
-import com.android.settings.widget.AppPreference;
+
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 public class ProcessStatsPreference extends AppPreference {
     static final String TAG = "ProcessStatsPreference";

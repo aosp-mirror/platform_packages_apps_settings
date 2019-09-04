@@ -15,28 +15,34 @@
  */
 package com.android.settings.system;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.backup.BackupSettingsActivityPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class SystemDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "SystemDashboardFrag";
 
     private static final String KEY_RESET = "reset_dashboard";
+
+    public static final String EXTRA_SHOW_AWARE_DISABLED = "show_aware_dialog_disabled";
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -47,11 +53,22 @@ public class SystemDashboardFragment extends DashboardFragment {
         if (getVisiblePreferenceCount(screen) == screen.getInitialExpandedChildrenCount() + 1) {
             screen.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
         }
+
+        showRestrictionDialog();
+    }
+
+    @VisibleForTesting
+    public void showRestrictionDialog() {
+        final Bundle args = getArguments();
+        if (args != null && args.getBoolean(EXTRA_SHOW_AWARE_DISABLED, false)) {
+            FeatureFactory.getFactory(getContext()).getAwareFeatureProvider()
+                    .showRestrictionDialog(this);
+        }
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_SYSTEM_CATEGORY;
+        return SettingsEnums.SETTINGS_SYSTEM_CATEGORY;
     }
 
     @Override
@@ -93,15 +110,6 @@ public class SystemDashboardFragment extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.system_dashboard_fragment;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add((new BackupSettingsActivityPreferenceController(
-                            context).getPreferenceKey()));
-                    keys.add(KEY_RESET);
-                    return keys;
                 }
             };
 }

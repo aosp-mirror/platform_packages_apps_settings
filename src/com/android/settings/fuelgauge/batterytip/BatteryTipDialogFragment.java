@@ -16,31 +16,29 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.fuelgauge.Estimate;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController.BatteryTipListener;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
-import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
-import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 
@@ -147,7 +145,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FUELGAUGE_BATTERY_TIP_DIALOG;
+        return SettingsEnums.FUELGAUGE_BATTERY_TIP_DIALOG;
     }
 
     @Override

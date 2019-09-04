@@ -17,10 +17,8 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+
 import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceViewHolder;
-import android.text.TextUtils;
-import android.view.View;
 
 import com.android.settings.R;
 
@@ -29,13 +27,5 @@ public class AppSwitchPreference extends SwitchPreference {
     public AppSwitchPreference(Context context) {
         super(context);
         setLayoutResource(R.layout.preference_app);
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
-        super.onBindViewHolder(view);
-
-        view.findViewById(R.id.summary_container)
-                .setVisibility(TextUtils.isEmpty(getSummary()) ? View.GONE : View.VISIBLE);
     }
 }

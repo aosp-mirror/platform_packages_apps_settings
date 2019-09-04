@@ -16,14 +16,14 @@
 package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.SystemProperties;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +31,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FccEquipmentIdPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

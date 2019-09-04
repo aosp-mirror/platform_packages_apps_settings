@@ -14,18 +14,22 @@
 
 package com.android.settings.applications.appinfo;
 
+import android.app.role.RoleControllerManager;
+import android.app.role.RoleManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.SubSettingLauncher;
+
+import java.util.concurrent.Executor;
 
 /*
  * Abstract base controller for the default app shortcut preferences that launches the default app
@@ -33,56 +37,91 @@ import com.android.settings.core.SubSettingLauncher;
  */
 public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePreferenceController {
 
+    private final String mRoleName;
+
     protected final String mPackageName;
 
+    private final RoleManager mRoleManager;
+
+    private boolean mRoleVisible;
+
+    private boolean mAppQualified;
+
+    private PreferenceScreen mPreferenceScreen;
+
     public DefaultAppShortcutPreferenceControllerBase(Context context, String preferenceKey,
-            String packageName) {
+            String roleName, String packageName) {
         super(context, preferenceKey);
+
+        mRoleName = roleName;
         mPackageName = packageName;
+
+        mRoleManager = context.getSystemService(RoleManager.class);
+
+        final RoleControllerManager roleControllerManager =
+                mContext.getSystemService(RoleControllerManager.class);
+        final Executor executor = mContext.getMainExecutor();
+        roleControllerManager.isRoleVisible(mRoleName, executor, visible -> {
+            mRoleVisible = visible;
+            refreshAvailability();
+        });
+        roleControllerManager.isApplicationQualifiedForRole(mRoleName, mPackageName, executor,
+                qualified -> {
+                    mAppQualified = qualified;
+                    refreshAvailability();
+                });
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        mPreferenceScreen = screen;
+    }
+
+    private void refreshAvailability() {
+        if (mPreferenceScreen != null) {
+            final Preference preference = mPreferenceScreen.findPreference(getPreferenceKey());
+            if (preference != null) {
+                preference.setVisible(isAvailable());
+                updateState(preference);
+            }
+        }
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (UserManager.get(mContext).isManagedProfile()) {
+        if (mContext.getSystemService(UserManager.class).isManagedProfile()) {
             return DISABLED_FOR_USER;
         }
-        return hasAppCapability() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return mRoleVisible && mAppQualified ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public CharSequence getSummary() {
-        int summaryResId = isDefaultApp() ? R.string.yes : R.string.no;
+        final int summaryResId = isDefaultApp() ? R.string.yes : R.string.no;
         return mContext.getText(summaryResId);
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(mPreferenceKey, preference.getKey())) {
-            final Bundle bundle = new Bundle();
-            bundle.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, mPreferenceKey);
-            new SubSettingLauncher(mContext)
-                    .setDestination(DefaultAppSettings.class.getName())
-                    .setArguments(bundle)
-                    .setTitle(R.string.configure_apps)
-                    .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN)
-                    .launch();
-            return true;
+        if (!TextUtils.equals(mPreferenceKey, preference.getKey())) {
+            return false;
         }
-        return false;
+        final Intent intent = new Intent(Intent.ACTION_MANAGE_DEFAULT_APP)
+                .putExtra(Intent.EXTRA_ROLE_NAME, mRoleName);
+        mContext.startActivity(intent);
+        return true;
     }
-
-    /**
-     * Check whether the app has the default app capability
-     *
-     * @return true if the app has the default app capability
-     */
-    protected abstract boolean hasAppCapability();
 
     /**
      * Check whether the app is the default app
      *
      * @return true if the app is the default app
      */
-    protected abstract boolean isDefaultApp();
-
+    private boolean isDefaultApp() {
+        final String packageName = CollectionUtils.firstOrNull(mRoleManager.getRoleHolders(
+                mRoleName));
+        return TextUtils.equals(mPackageName, packageName);
+    }
 }

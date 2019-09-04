@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -24,8 +25,8 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.UserManager;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -33,7 +34,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ProcStatsData;
 import com.android.settings.applications.ProcessStatsDetail;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,12 +42,13 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class})
 public class AppMemoryPreferenceControllerTest {
 
     @Mock
@@ -65,8 +67,7 @@ public class AppMemoryPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        Shadows.shadowOf(userManager).setIsAdminUser(true);
+        ShadowUserManager.getShadow().setIsAdminUser(true);
         mController =
                 spy(new AppMemoryPreferenceController(mContext, mFragment, null /* lifecycle */));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -76,35 +77,35 @@ public class AppMemoryPreferenceControllerTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_developmentSettingsEnabled_shouldReturnAvailable() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.AVAILABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_devSettingsEnabled_butNotVisible_shouldReturnUnsupported() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_devSettingsDisabled_butNotVisible_shouldReturnUnsupported() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_developmentSettingsDisabled_shouldReturnDisabled() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);

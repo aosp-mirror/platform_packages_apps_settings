@@ -23,29 +23,34 @@ import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_I
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_MEID_NUMBER_VALUE;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_MIN_NUMBER_VALUE;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_PRL_VERSION_VALUE;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowSubscriptionManager;
+import org.robolectric.shadows.ShadowTelephonyManager;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ImeiInfoDialogControllerTest {
 
     private static final String PRL_VERSION = "some_prl_version";
@@ -53,6 +58,8 @@ public class ImeiInfoDialogControllerTest {
     private static final String IMEI_NUMBER = "2341982751254";
     private static final String MIN_NUMBER = "123417851315";
     private static final String IMEI_SV_NUMBER = "12";
+    private static final int SLOT_ID = 0;
+    private static final int SUB_ID = 0;
 
     @Mock
     private ImeiInfoDialogFragment mDialog;
@@ -68,16 +75,31 @@ public class ImeiInfoDialogControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
+        final ShadowSubscriptionManager ssm = Shadow.extract(mContext.getSystemService(
+                SubscriptionManager.class));
+        ssm.setActiveSubscriptionInfos(mSubscriptionInfo);
+        when(mSubscriptionInfo.getSubscriptionId()).thenReturn(SUB_ID);
+        final ShadowTelephonyManager stm = Shadow.extract(mContext.getSystemService(
+                TelephonyManager.class));
+        stm.setTelephonyManagerForSubscriptionId(SUB_ID, mTelephonyManager);
         when(mDialog.getContext()).thenReturn(mContext);
-        mController = spy(new ImeiInfoDialogController(mDialog, 0 /* phone id */));
-        ReflectionHelpers.setField(mController, "mSubscriptionInfo", mSubscriptionInfo);
 
-        doReturn(PRL_VERSION).when(mController).getCdmaPrlVersion();
-        doReturn(MEID_NUMBER).when(mController).getMeid();
+        mController = spy(new ImeiInfoDialogController(mDialog, SLOT_ID));
+
+        when(mTelephonyManager.getCdmaPrlVersion()).thenReturn(PRL_VERSION);
+        when(mTelephonyManager.getMeid(anyInt())).thenReturn(MEID_NUMBER);
         when(mTelephonyManager.getCdmaMin(anyInt())).thenReturn(MIN_NUMBER);
         when(mTelephonyManager.getDeviceSoftwareVersion(anyInt())).thenReturn(IMEI_SV_NUMBER);
         when(mTelephonyManager.getImei(anyInt())).thenReturn(IMEI_NUMBER);
+    }
+
+    @Test
+    public void populateImeiInfo_invalidSlot_shouldSetNothing() {
+        mController = spy(new ImeiInfoDialogController(mDialog, SLOT_ID + 1));
+
+        mController.populateImeiInfo();
+
+        verify(mDialog, never()).setText(anyInt(), any());
     }
 
     @Test
@@ -108,14 +130,28 @@ public class ImeiInfoDialogControllerTest {
     }
 
     @Test
-    public void populateImeiInfo_cdmaSimDisabled_shouldRemoveImeiInfoAndSetMinToEmpty() {
+    public void populateImeiInfo_cdmaSimDisabled_shouldRemoveImeiInfoAndSetMinPrlToEmpty() {
         ReflectionHelpers.setField(mController, "mSubscriptionInfo", null);
         when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_CDMA);
 
         mController.populateImeiInfo();
 
+        verify(mDialog).setText(ID_MEID_NUMBER_VALUE, MEID_NUMBER);
         verify(mDialog).setText(ID_MIN_NUMBER_VALUE, "");
+        verify(mDialog).setText(ID_PRL_VERSION_VALUE, "");
         verify(mDialog).removeViewFromScreen(ID_GSM_SETTINGS);
+    }
+
+    @Test
+    public void populateImeiInfo_gsmSimDisabled_shouldSetImeiAndRemoveCdmaSettings() {
+        ReflectionHelpers.setField(mController, "mSubscriptionInfo", null);
+        when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_GSM);
+
+        mController.populateImeiInfo();
+
+        verify(mDialog).setText(eq(ID_IMEI_VALUE), any());
+        verify(mDialog).setText(eq(ID_IMEI_SV_VALUE), any());
+        verify(mDialog).removeViewFromScreen(ID_CDMA_SETTINGS);
     }
 
     @Test
@@ -127,5 +163,20 @@ public class ImeiInfoDialogControllerTest {
         verify(mDialog).setText(eq(ID_IMEI_VALUE), any());
         verify(mDialog).setText(eq(ID_IMEI_SV_VALUE), any());
         verify(mDialog).removeViewFromScreen(ID_CDMA_SETTINGS);
+    }
+
+    @Test
+    public void populateImeiInfo_emptyImei_shouldSetMeid_imeiSetToEmptyString() {
+        doReturn(true).when(mController).isCdmaLteEnabled();
+        when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_CDMA);
+        when(mTelephonyManager.getImei(anyInt())).thenReturn(null);
+
+        mController.populateImeiInfo();
+
+        verify(mDialog).setText(ID_MEID_NUMBER_VALUE, MEID_NUMBER);
+        verify(mDialog).setText(ID_MIN_NUMBER_VALUE, MIN_NUMBER);
+        verify(mDialog).setText(ID_PRL_VERSION_VALUE, PRL_VERSION);
+        verify(mDialog).setText(eq(ID_IMEI_VALUE), eq(""));
+        verify(mDialog).setText(eq(ID_IMEI_SV_VALUE), any());
     }
 }

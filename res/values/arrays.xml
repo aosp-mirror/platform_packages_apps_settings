@@ -210,31 +210,6 @@
         <item>Temporarily avoiding poor connection</item>
     </string-array>
 
-    <!-- Match this with the constants in AccessPoint. --> <skip />
-    <!-- Wi-Fi security choices used when manually added a Wi-Fi network -->
-    <string-array name="wifi_security">
-        <!-- The Wi-Fi network does not have any security. -->
-        <item>@string/wifi_security_none</item>
-        <!-- Do not translate. -->
-        <item>@string/wifi_security_wep</item>
-        <!-- Do not translate. -->
-        <item>@string/wifi_security_psk_generic</item>
-        <!-- Do not translate. -->
-        <item>@string/wifi_security_eap</item>
-
-    </string-array>
-
-    <!-- Match this with the constants in AccessPoint. --> <skip />
-    <!-- Wi-Fi security types for New User Dialog. EAP is not configurable. -->
-    <string-array name="wifi_security_no_eap">
-        <!-- The Wi-Fi network does not have any security. -->
-        <item>@string/wifi_security_none</item>
-        <!-- Do not translate. -->
-        <item>@string/wifi_security_wep</item>
-        <!-- Do not translate. -->
-        <item>@string/wifi_security_psk_generic</item>
-    </string-array>
-
     <!-- Security types for wireless tether -->
     <string-array name="wifi_tether_security">
         <!-- Do not translate. -->
@@ -244,7 +219,7 @@
     </string-array>
 
     <!-- Values for security type for wireless tether -->
-    <string-array name="wifi_tether_security_values">
+    <string-array name="wifi_tether_security_values" translatable="false">
         <!-- Do not translate. -->
         <item>4</item>
         <!-- Do not translate. -->
@@ -253,32 +228,21 @@
 
     <!-- Match this with the constants in WifiDialog. --> <skip />
     <!-- Wi-Fi settings.  The type of EAP method a Wi-Fi network has. -->
-    <string-array name="wifi_eap_method">
-        <!-- Do not translate. -->
+    <string-array name="wifi_eap_method" translatable="false">
         <item>PEAP</item>
-        <!-- Do not translate. -->
         <item>TLS</item>
-        <!-- Do not translate. -->
         <item>TTLS</item>
-        <!-- Do not translate. -->
         <item>PWD</item>
-        <!-- Do not translate. -->
         <item>SIM</item>
-        <!-- Do not translate. -->
         <item>AKA</item>
-        <!-- Do not translate. -->
         <item>AKA\'</item>
     </string-array>
 
     <!-- Type of EAP method when EAP SIM, AKA, AKA' are not supported -->
-    <string-array name="eap_method_without_sim_auth">
-        <!-- Do not translate. -->
+    <string-array name="eap_method_without_sim_auth" translatable="false">
         <item>PEAP</item>
-        <!-- Do not translate. -->
         <item>TLS</item>
-        <!-- Do not translate. -->
         <item>TTLS</item>
-        <!-- Do not translate. -->
         <item>PWD</item>
     </string-array>
 
@@ -404,16 +368,11 @@
     <!-- Type of EAP method when EAP SIM, AKA, AKA' are supported -->
     <string-array name="wifi_peap_phase2_entries_with_sim_auth">
         <item>None</item>
-        <!-- Do not translate. -->
-        <item>MSCHAPV2</item>
-        <!-- Do not translate. -->
-        <item>GTC</item>
-        <!-- Do not translate. -->
-        <item>SIM</item>
-        <!-- Do not translate. -->
-        <item>AKA</item>
-        <!-- Do not translate. -->
-        <item>AKA\'</item>
+        <item translatable="false">MSCHAPV2</item>
+        <item translatable="false">GTC</item>
+        <item translatable="false">SIM</item>
+        <item translatable="false">AKA</item>
+        <item translatable="false">AKA\'</item>
     </string-array>
 
     <!-- Phase 2 options for rest of EAP methods -->
@@ -538,12 +497,9 @@
     <!-- MVNO Info used in APN editor -->
     <string-array name="mvno_type_entries">
         <item>None</item>
-        <!-- Do not translate. -->
-        <item>SPN</item>
-        <!-- Do not translate. -->
-        <item>IMSI</item>
-        <!-- Do not translate. -->
-        <item>GID</item>
+        <item translatable="false">SPN</item>
+        <item translatable="false">IMSI</item>
+        <item translatable="false">GID</item>
     </string-array>
 
     <string-array translatable="false" name="mvno_type_values">
@@ -716,6 +672,33 @@
         <item>Get accounts</item>
         <item>Run in background</item>
         <item>Accessibility volume</item>
+    </string-array>
+
+    <!-- Keys for the list of accessibility timeouts xml. -->
+    <string-array name="accessibility_timeout_control_selector_keys" translatable="false">
+        <item>accessibility_control_timeout_default</item>
+        <item>accessibility_control_timeout_10secs</item>
+        <item>accessibility_control_timeout_30secs</item>
+        <item>accessibility_control_timeout_1min</item>
+        <item>accessibility_control_timeout_2mins</item>
+    </string-array>
+
+    <!-- Values for the list of accessibility timeouts, pairs to Keys . -->
+    <integer-array name="accessibility_timeout_selector_values" translatable="false">
+        <item>0</item>
+        <item>10000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+    </integer-array>
+
+    <!-- Summaries of accessibility timeout, pairs to Values -->
+    <string-array name="accessibility_timeout_summaries" translatable="false">
+        <item>@string/accessibility_timeout_default</item>
+        <item>@string/accessibility_timeout_10secs</item>
+        <item>@string/accessibility_timeout_30secs</item>
+        <item>@string/accessibility_timeout_1min</item>
+        <item>@string/accessibility_timeout_2mins</item>
     </string-array>
 
     <!-- Titles for the list of long press timeout options. -->
@@ -1093,11 +1076,18 @@
         <item>never</item>
     </string-array>
 
-    <string-array name="zen_mode_contacts_entries" translatable="false">
+    <string-array name="zen_mode_contacts_messages_entries" translatable="false">
         <item>@string/zen_mode_from_anyone</item>
         <item>@string/zen_mode_from_contacts</item>
         <item>@string/zen_mode_from_starred</item>
-        <item>@string/zen_mode_from_none</item>
+        <item>@string/zen_mode_from_none_messages</item>
+    </string-array>
+
+    <string-array name="zen_mode_contacts_calls_entries" translatable="false">
+        <item>@string/zen_mode_from_anyone</item>
+        <item>@string/zen_mode_from_contacts</item>
+        <item>@string/zen_mode_from_starred</item>
+        <item>@string/zen_mode_from_none_calls</item>
     </string-array>
 
     <string-array name="zen_mode_contacts_values" translatable="false">
@@ -1107,10 +1097,26 @@
         <item>zen_mode_from_none</item>
     </string-array>
 
+    <!--String arrays for notification swipe direction -->
+    <string-array name="swipe_direction_titles">
+        <item>@string/swipe_direction_rtl</item>
+        <item>@string/swipe_direction_ltr</item>
+    </string-array>
+
+    <string-array name="swipe_direction_values">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
     <string-array name="wifi_metered_entries">
         <item>Detect automatically</item>
         <item>Treat as metered</item>
         <item>Treat as unmetered</item>
+    </string-array>
+
+    <string-array name="wifi_privacy_entries">
+        <item>Use randomized MAC (default)</item>
+        <item>Use device MAC</item>
     </string-array>
 
     <string-array name="wifi_hidden_entries">
@@ -1124,32 +1130,21 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="wifi_privacy_values" translatable="false">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
     <!-- Titles for ui dark mode preference. -->
     <string-array name="dark_ui_mode_entries" >
-        <item>Automatic (based on time of day)</item>
-        <item>Always on</item>
-        <item>Always off</item>
+        <item>Dark</item>
+        <item>Light</item>
     </string-array>
 
     <!-- Values for ui dark mode preference. -->
     <string-array name="dark_ui_mode_values" translatable="false" >
-        <item>auto</item>
         <item>yes</item>
         <item>no</item>
-    </string-array>
-
-    <!-- Titles for SystemUI theme preference. -->
-    <string-array name="systemui_theme_entries" >
-        <item>@string/systemui_theme_wallpaper</item>
-        <item>@string/systemui_theme_light</item>
-        <item>@string/systemui_theme_dark</item>
-    </string-array>
-
-    <!-- Values for SystemUI theme preference. -->
-    <string-array name="systemui_theme_values" translatable="false" >
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
     </string-array>
 
     <string-array name="gesture_prevent_ringing_entries" translatable="false">
@@ -1165,6 +1160,202 @@
         <item>0</item>
     </string-array>
 
+    <!-- Titles for autofill logging level preference. [CHAR LIMIT=50] -->
+    <string-array name="autofill_logging_level_entries">
+        <item>Off</item>
+        <item>Debug</item>
+        <item>Verbose</item>
+    </string-array>
+
+    <!-- Values for autofill logging level preference. -->
+    <string-array name="autofill_logging_level_values" translatable="false" >
+        <item>0</item> <!-- AutofillManager.NO_LOGGING -->
+        <item>2</item> <!-- AutofillManager.FLAG_ADD_CLIENT_DEBUG -->
+        <item>4</item> <!-- AutofillManager.FLAG_ADD_CLIENT_VERBOSE -->
+    </string-array>
+
+    <string-array name="enabled_networks_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_3G</item>
+        <item>@string/network_2G</item>
+    </string-array>
+    <string-array name="enabled_networks_4g_choices" translatable="false">
+        <item>@string/network_4G</item>
+        <item>@string/network_3G</item>
+        <item>@string/network_2G</item>
+    </string-array>
+    <string-array name="enabled_networks_values" translatable="false">
+        <item>"9"</item>
+        <item>"0"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <string-array name="cdma_system_select_choices">
+        <!-- System select dialog screen, setting option name -->
+        <item>Home only</item>
+        <!-- Remove the following option "Affiliated Networks" from the option list -->
+        <!-- <item>Affiliated Networks</item> -->
+        <!-- System select dialog screen, setting option name -->
+        <item>Automatic</item>
+    </string-array>
+    <string-array name="cdma_system_select_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>"0"</item>
+        <!-- Remove the following value "1" which corresponds to "Affiliated Networks" above -->
+        <!-- <item>"1"</item>  -->
+        <!-- Do not translate. -->
+        <item>"2"</item>
+    </string-array>
+
+    <!-- The preferred network modes in Mobile network settings -->
+    <string-array name="preferred_network_mode_choices">
+        <item>GSM/WCDMA preferred</item>
+        <item>GSM only</item>
+        <item>WCDMA only</item>
+        <item>GSM/WCDMA auto</item>
+        <item>CDMA/EvDo auto</item>
+        <item>CDMA w/o EvDo</item>
+        <item>EvDo only</item>
+        <item>CDMA/EvDo/GSM/WCDMA</item>
+        <item>CDMA + LTE/EvDo</item>
+        <item>GSM/WCDMA/LTE</item>
+        <item>Global</item>
+        <item>LTE</item>
+        <item>LTE / WCDMA</item>
+        <item>TDSCDMA only</item>
+        <item>TDSCDMA/WCDMA</item>
+        <item>LTE/TDSCDMA</item>
+        <item>TDSCDMA/GSM</item>
+        <item>LTE/TDSCDMA/GSM</item>
+        <item>TDSCDMA/GSM/WCDMA</item>
+        <item>LTE/TDSCDMA/WCDMA</item>
+        <item>LTE/TDSCDMA/GSM/WCDMA</item>
+        <item>TDSCDMA/CDMA/EVDO/GSM/WCDMA </item>
+        <item>LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA</item>
+    </string-array>
+    <!-- The preferred network modes RIL constants, in order of the modes above,
+         e.g. the choice "GSM/WCDMA preferred" has the corresponding value "0" -->
+    <string-array name="preferred_network_mode_values"  translatable="false">
+        <item>"0"</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+        <item>"6"</item>
+        <item>"7"</item>
+        <item>"8"</item>
+        <item>"9"</item>
+        <item>"10"</item>
+        <item>"11"</item>
+        <item>"12"</item>
+        <item>"13"</item>
+        <item>"14"</item>
+        <item>"15"</item>
+        <item>"16"</item>
+        <item>"17"</item>
+        <item>"18"</item>
+        <item>"19"</item>
+        <item>"20"</item>
+        <item>"21"</item>
+        <item>"22"</item>
+    </string-array>
+
+    <!-- Choices for CDMA subscription-->
+    <string-array name="cdma_subscription_choices">
+        <item>RUIM/SIM</item>
+        <item>NV</item>
+    </string-array>
+    <!-- Values for CDMA subscription-->
+    <string-array name="cdma_subscription_values" translatable="false">
+        <item>"0"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_except_gsm_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_3G</item>
+    </string-array>
+    <string-array name="enabled_networks_except_gsm_4g_choices" translatable="false">
+        <item>@string/network_4G</item>
+        <item>@string/network_3G</item>
+    </string-array>
+    <string-array name="enabled_networks_except_gsm_values" translatable="false">
+        <item>"9"</item>
+        <item>"0"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_except_lte_choices" translatable="false">
+        <item>@string/network_3G</item>
+        <item>@string/network_2G</item>
+    </string-array>
+    <string-array name="enabled_networks_except_lte_values" translatable="false">
+        <item>"0"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_except_gsm_lte_choices" translatable="false">
+        <item>@string/network_3G</item>
+    </string-array>
+    <string-array name="enabled_networks_except_gsm_lte_values" translatable="false">
+        <item>"0"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_cdma_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_3G</item>
+        <item>@string/network_1x</item>
+        <item>@string/network_global</item>
+    </string-array>
+    <string-array name="enabled_networks_cdma_values" translatable="false">
+        <item>"8"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+        <item>"10"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_cdma_no_lte_choices" translatable="false">
+        <item>@string/network_3G</item>
+        <item>@string/network_1x</item>
+    </string-array>
+    <string-array name="enabled_networks_cdma_no_lte_values" translatable="false">
+        <item>"4"</item>
+        <item>"5"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_cdma_only_lte_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_global</item>
+    </string-array>
+    <string-array name="enabled_networks_cdma_only_lte_values" translatable="false">
+        <item>"8"</item>
+        <item>"10"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_tdscdma_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_3G</item>
+        <item>@string/network_2G</item>
+    </string-array>
+    <string-array name="enabled_networks_tdscdma_values" translatable="false">
+        <item>"22"</item>
+        <item>"18"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <!--String arrays for World preferred netwrok modes -->
+    <string-array name="preferred_network_mode_choices_world_mode">
+        <item>Global</item>
+        <item>LTE / CDMA</item>
+        <item>LTE / GSM / UMTS</item>
+    </string-array>
+
+    <string-array name="preferred_network_mode_values_world_mode" translatable="false">
+        <item>"10"</item>
+        <item>"8"</item>
+        <item>"9"</item>
+    </string-array>
+
     <!-- WiFi calling mode array -->
     <string-array name="wifi_calling_mode_summaries" translatable="false">
          <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
@@ -1176,6 +1367,26 @@
     <string-array name="wifi_calling_mode_summaries_without_wifi_only" translatable="false">
          <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
          <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
+    </string-array>
+
+    <!-- Carrier variant of Enhaced 4G LTE Mode title.  [CHAR LIMIT=NONE] -->
+    <string-array name="enhanced_4g_lte_mode_title_variant">
+        <!-- 0: Default -->
+        <item>@string/enhanced_4g_lte_mode_title</item>
+        <!-- 1: Verizon -->
+        <item>@string/enhanced_4g_lte_mode_title_advanced_calling</item>
+        <!-- 2: All carriers who want 4G -->
+        <item>@string/enhanced_4g_lte_mode_title_4g_calling</item>
+    </string-array>
+
+    <!-- Carrier variant of Enhaced 4G LTE Mode summary.  [CHAR LIMIT=NONE] -->
+    <string-array name="enhanced_4g_lte_mode_sumary_variant">
+        <!-- 0: Default -->
+        <item>@string/enhanced_4g_lte_mode_summary</item>
+        <!-- 1: Verizon -->
+        <item>@string/enhanced_4g_lte_mode_summary</item>
+        <!-- 2: All carriers who want 4G -->
+        <item>@string/enhanced_4g_lte_mode_summary_4g_calling</item>
     </string-array>
 
 </resources>

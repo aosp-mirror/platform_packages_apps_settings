@@ -20,12 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.AppOpsManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppStateInstallAppsBridgeTest {
 
     @Test
@@ -34,8 +33,10 @@ public class AppStateInstallAppsBridgeTest {
             new AppStateInstallAppsBridge.InstallAppsState();
         assertThat(appState.canInstallApps()).isFalse();
 
-        appState.permissionGranted = true;
         appState.permissionRequested = true;
+        assertThat(appState.canInstallApps()).isFalse();
+
+        appState.appOpMode = AppOpsManager.MODE_ALLOWED;
         assertThat(appState.canInstallApps()).isTrue();
 
         appState.appOpMode = AppOpsManager.MODE_ERRORED;

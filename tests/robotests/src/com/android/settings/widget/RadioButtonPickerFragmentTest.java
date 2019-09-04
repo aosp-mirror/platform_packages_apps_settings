@@ -17,6 +17,8 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -25,26 +27,28 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
+
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.DefaultAppInfo;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RadioButtonPickerFragmentTest {
-
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
@@ -94,6 +98,26 @@ public class RadioButtonPickerFragmentTest {
         mFragment.onRadioButtonClicked(pref);
 
         assertThat(mFragment.setDefaultKeyCalled).isTrue();
+    }
+
+    @Test
+    public void staticPreferencesPrepended_addedFirst() {
+        mFragment.mAppendStaticPreferences = false;
+        mFragment.updateCandidates();
+
+        InOrder inOrder = Mockito.inOrder(mFragment);
+        inOrder.verify(mFragment).addStaticPreferences(any());
+        inOrder.verify(mFragment).getRadioButtonPreferenceCustomLayoutResId();
+    }
+
+    @Test
+    public void staticPreferencesAppended_addedLast() {
+        mFragment.mAppendStaticPreferences = true;
+        mFragment.updateCandidates();
+
+        InOrder inOrder = Mockito.inOrder(mFragment);
+        inOrder.verify(mFragment).mayCheckOnlyRadioButton();
+        inOrder.verify(mFragment).addStaticPreferences(any());
     }
 
     @Test

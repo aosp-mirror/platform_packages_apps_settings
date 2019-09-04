@@ -18,7 +18,7 @@ package com.android.settings.development.gamedriver;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.internal.logging.nano.MetricsProto;
+import android.app.settings.SettingsEnums;
 
 import com.android.settings.R;
 
@@ -45,7 +45,7 @@ public class GameDriverDashboardTest {
     @Test
     public void getMetricesCategory_shouldReturnGameDriverDashboard() {
         assertThat(mDashboard.getMetricsCategory())
-                .isEqualTo(MetricsProto.MetricsEvent.SETTINGS_GAME_DRIVER_DASHBOARD);
+                .isEqualTo(SettingsEnums.SETTINGS_GAME_DRIVER_DASHBOARD);
     }
 
     @Test

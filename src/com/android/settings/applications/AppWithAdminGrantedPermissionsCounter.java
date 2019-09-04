@@ -23,8 +23,6 @@ import android.os.Build;
 import android.os.RemoteException;
 import android.os.UserHandle;
 
-import com.android.settingslib.wrapper.PackageManagerWrapper;
-
 /**
  * Counts installed apps across all users that have been granted one or more specific permissions by
  * the admin.
@@ -36,7 +34,7 @@ public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
     private final DevicePolicyManager mDevicePolicyManager;
 
     public AppWithAdminGrantedPermissionsCounter(Context context, String[] permissions,
-            PackageManagerWrapper packageManager, IPackageManager packageManagerService,
+            PackageManager packageManager, IPackageManager packageManagerService,
             DevicePolicyManager devicePolicyManager) {
         super(context, packageManager);
         mPermissions = permissions;
@@ -51,7 +49,7 @@ public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
     }
 
     public static boolean includeInCount(String[] permissions,
-            DevicePolicyManager devicePolicyManager, PackageManagerWrapper packageManager,
+            DevicePolicyManager devicePolicyManager, PackageManager packageManager,
             IPackageManager packageManagerService, ApplicationInfo info) {
         if (info.targetSdkVersion >= Build.VERSION_CODES.M) {
             // The app uses run-time permissions. Check whether one or more of the permissions were

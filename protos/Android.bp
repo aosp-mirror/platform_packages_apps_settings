@@ -1,0 +1,17 @@
+java_library_static {
+    name: "settings-contextual-card-protos-lite",
+    host_supported: true,
+    proto: {
+        type: "lite",
+    },
+    srcs: ["contextual_card_list.proto"],
+}
+
+java_library_static {
+    name: "settings-log-bridge-protos-lite",
+    host_supported: true,
+    proto: {
+        type: "lite",
+    },
+    srcs: ["settings_log_bridge.proto"],
+}
