@@ -39,9 +39,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
-import androidx.slice.Slice;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
 import androidx.slice.widget.SliceLiveData;
 
@@ -50,9 +50,11 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.panel.PanelLoggingContract.PanelClosedKeys;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
 import com.google.android.setupdesign.DividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PanelFragment extends Fragment {
@@ -222,8 +224,9 @@ public class PanelFragment extends Fragment {
                 /**
                  * Watching for the {@link Slice} to load.
                  * <p>
-                 *     If the Slice comes back {@code null} or with the Error attribute, remove the
-                 *     Slice data from the list, and mark the Slice as loaded.
+                 *     If the Slice comes back {@code null} or with the Error attribute, if slice
+                 *     uri is not in the whitelist, remove the Slice data from the list, otherwise
+                 *     keep the Slice data.
                  * <p>
                  *     If the Slice has come back fully loaded, then mark the Slice as loaded.  No
                  *     other actions required since we already have the Slice data in the list.
@@ -235,7 +238,12 @@ public class PanelFragment extends Fragment {
                  */
                 final SliceMetadata metadata = SliceMetadata.from(getActivity(), slice);
                 if (slice == null || metadata.isErrorSlice()) {
-                    mSliceLiveData.remove(sliceLiveData);
+                    final List<String> whiteList = Arrays.asList(
+                            getResources().getStringArray(
+                                    R.array.config_panel_keep_observe_uri));
+                    if (!whiteList.contains(uri.toString())) {
+                        mSliceLiveData.remove(sliceLiveData);
+                    }
                     mPanelSlicesLoaderCountdownLatch.markSliceLoaded(uri);
                 } else if (metadata.getLoadingState() == SliceMetadata.LOADED_ALL) {
                     mPanelSlicesLoaderCountdownLatch.markSliceLoaded(uri);

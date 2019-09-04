@@ -117,7 +117,7 @@ public class PanelSlicesAdapter
 
             // Do not show the divider above media devices switcher slice per request
             final Slice slice = sliceLiveData.getValue();
-            if (slice != null && slice.getUri().equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
+            if (slice == null || slice.getUri().equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
                 mDividerAllowedAbove = false;
             }
 
