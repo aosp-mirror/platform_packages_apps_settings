@@ -57,7 +57,7 @@ public class PowerUsageBaseTest {
 
         mFragment = spy(new TestFragment());
         mFragment.setBatteryStatsHelper(mBatteryStatsHelper);
-        doReturn(mLoaderManager).when(mFragment).getLoaderManager();
+        doReturn(mLoaderManager).when(LoaderManager.getInstance(any()));
     }
 
     @Test
