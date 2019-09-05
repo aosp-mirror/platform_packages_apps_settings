@@ -67,17 +67,12 @@ public abstract class PowerUsageBase extends DashboardFragment {
     @Override
     public void onStart() {
         super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         mBatteryBroadcastReceiver.register();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         mBatteryBroadcastReceiver.unRegister();
     }
 
@@ -85,7 +80,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
 
-        getLoaderManager().restartLoader(0, bundle, new PowerLoaderCallback());
+        LoaderManager.getInstance(this).restartLoader(0, bundle, new PowerLoaderCallback());
     }
 
     protected abstract void refreshUi(@BatteryUpdateType int refreshType);
