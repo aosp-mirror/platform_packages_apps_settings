@@ -987,7 +987,9 @@ public class WifiConfigController implements TextWatcher,
         }
         mView.findViewById(R.id.eap).setVisibility(View.VISIBLE);
 
+        boolean initiateEnterpriseNetworkUi = false;
         if (mEapMethodSpinner == null) {
+            initiateEnterpriseNetworkUi = true;
             mEapMethodSpinner = (Spinner) mView.findViewById(R.id.method);
             mEapMethodSpinner.setOnItemSelectedListener(this);
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
@@ -1045,7 +1047,7 @@ public class WifiConfigController implements TextWatcher,
         }
 
         // Modifying an existing network
-        if (mAccessPoint != null && mAccessPoint.isSaved()) {
+        if (initiateEnterpriseNetworkUi && mAccessPoint != null && mAccessPoint.isSaved()) {
             final WifiEnterpriseConfig enterpriseConfig = mAccessPoint.getConfig().enterpriseConfig;
             final int eapMethod = enterpriseConfig.getEapMethod();
             final int phase2Method = enterpriseConfig.getPhase2Method();
