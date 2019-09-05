@@ -19,8 +19,11 @@ package com.android.settings.wifi;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
+import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -34,6 +37,8 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
     public static final String DIALOG_TYPE = "DIALOG_ERROR_TYPE";
 
     public enum ERROR_DIALOG_TYPE {TIME_OUT, ABORT}
+    @Nullable
+    private NetworkRequestUserSelectionCallback mRejectCallback;
 
     public static NetworkRequestErrorDialogFragment newInstance() {
         return new NetworkRequestErrorDialogFragment();
@@ -47,7 +52,7 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
         // Wants to finish the activity when user clicks back key or outside of the dialog.
-        getActivity().finish();
+        rejectNetworkRequestAndFinish();
     }
 
     @Override
@@ -63,10 +68,12 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
             builder.setMessage(R.string.network_connection_timeout_dialog_message)
                     .setPositiveButton(R.string.network_connection_timeout_dialog_ok,
                             (dialog, which) -> onRescanClick())
-                    .setNegativeButton(R.string.cancel, (dialog, which) -> getActivity().finish());
+                    .setNegativeButton(R.string.cancel,
+                            (dialog, which) -> rejectNetworkRequestAndFinish());
         } else {
             builder.setMessage(R.string.network_connection_errorstate_dialog_message)
-                    .setPositiveButton(R.string.okay, (dialog, which) -> getActivity().finish());
+                    .setPositiveButton(R.string.okay,
+                            (dialog, which) -> rejectNetworkRequestAndFinish());
         }
         return builder.create();
     }
@@ -76,10 +83,24 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
         return SettingsEnums.WIFI_SCANNING_NEEDED_DIALOG;
     }
 
+    // Sets the callback for fragment to reject this request.
+    public void setRejectCallback(NetworkRequestUserSelectionCallback rejectCallback) {
+        mRejectCallback = rejectCallback;
+    }
+
     protected void onRescanClick() {
         if (getActivity() != null) {
             dismiss();
             ((NetworkRequestDialogActivity)getActivity()).onClickRescanButton();
+        }
+    }
+
+    private void rejectNetworkRequestAndFinish() {
+        if (getActivity() != null) {
+            if (mRejectCallback != null) {
+                mRejectCallback.reject();
+            }
+            getActivity().finish();
         }
     }
 }
