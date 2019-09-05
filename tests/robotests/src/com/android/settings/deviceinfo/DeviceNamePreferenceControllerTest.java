@@ -16,43 +16,43 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
+
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.widget.ValidatedEditTextPreference;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class DeviceNamePreferenceControllerTest {
     private static final String TESTING_STRING = "Testing";
 
-    @Mock
-    private LocalBluetoothAdapter mBluetoothAdapter;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private LocalBluetoothManager mBluetoothManager;
     @Mock
     private WifiManager mWifiManager;
     @Mock
@@ -60,6 +60,7 @@ public class DeviceNamePreferenceControllerTest {
     private ValidatedEditTextPreference mPreference;
     private DeviceNamePreferenceController mController;
     private Context mContext;
+    private BluetoothAdapter mBluetoothAdapter;
 
 
     @Before
@@ -67,16 +68,26 @@ public class DeviceNamePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.WIFI_SERVICE, mWifiManager);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mPreference = new ValidatedEditTextPreference(mContext);
-        when(mBluetoothManager.getBluetoothAdapter()).thenReturn(mBluetoothAdapter);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         final WifiConfiguration configuration = new WifiConfiguration();
         configuration.SSID = "test-ap";
         when(mWifiManager.getWifiApConfiguration()).thenReturn(configuration);
 
-        mController = new DeviceNamePreferenceController(mContext);
-        mController.setLocalBluetoothManager(mBluetoothManager);
+        mController = new DeviceNamePreferenceController(mContext, "test_key");
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    }
+
+    @Test
+    public void getAvailibilityStatus_availableByDefault() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getAvailabilityStatus_unsupportedWhenSet() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -88,24 +99,23 @@ public class DeviceNamePreferenceControllerTest {
     public void constructor_deviceNameLoadedIfSet() {
         Settings.Global.putString(
                 mContext.getContentResolver(), Settings.Global.DEVICE_NAME, "Test");
-        mController = new DeviceNamePreferenceController(mContext);
-        mController.setLocalBluetoothManager(mBluetoothManager);
+        mController = new DeviceNamePreferenceController(mContext, "test_key");
         assertThat(mController.getSummary()).isEqualTo("Test");
     }
 
     @Test
-    public void isTextValid_nameUnder33CharactersIsValid() {
+    public void isTextValid_nameUnder33Characters_isValid() {
         assertThat(mController.isTextValid("12345678901234567890123456789012")).isTrue();
     }
 
     @Test
-    public void isTextValid_nameTooLongIsInvalid() {
+    public void isTextValid_nameTooLong_isInvalid() {
         assertThat(mController.isTextValid("123456789012345678901234567890123")).isFalse();
     }
 
     @Test
     public void setDeviceName_preferenceUpdatedWhenDeviceNameUpdated() {
-        forceAcceptDeviceName();
+        acceptDeviceName(true);
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
@@ -114,16 +124,16 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void setDeviceName_bluetoothNameUpdatedWhenDeviceNameUpdated() {
-        forceAcceptDeviceName();
+        acceptDeviceName(true);
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
-        verify(mBluetoothAdapter).setName(eq(TESTING_STRING));
+        assertThat(mBluetoothAdapter.getName()).isEqualTo(TESTING_STRING);
     }
 
     @Test
     public void setDeviceName_wifiTetherNameUpdatedWhenDeviceNameUpdated() {
-        forceAcceptDeviceName();
+        acceptDeviceName(true);
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
@@ -141,20 +151,33 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void setDeviceName_ignoresIfCancelPressed() {
+        acceptDeviceName(true);
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
-        verify(mBluetoothAdapter, never()).setName(eq(TESTING_STRING));
+        assertThat(mBluetoothAdapter.getName()).isEqualTo(TESTING_STRING);
     }
 
-    private void forceAcceptDeviceName() {
-        mController.setHost(
-                new DeviceNamePreferenceController.DeviceNamePreferenceHost() {
-                    @Override
-                    public void showDeviceNameWarningDialog(String deviceName) {
-                        mController.confirmDeviceName();
-                    }
-                });
+    @Test
+    public void setDeviceName_okInDeviceNameWarningDialog_shouldChangePreferenceText() {
+        acceptDeviceName(true);
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, TESTING_STRING);
+
+        assertThat(mPreference.getSummary()).isEqualTo(TESTING_STRING);
     }
 
+    @Test
+    public void setDeviceName_cancelInDeviceNameWarningDialog_shouldNotChangePreferenceText() {
+        acceptDeviceName(false);
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, TESTING_STRING);
+
+        assertThat(mPreference.getSummary()).isNotEqualTo(TESTING_STRING);
+        assertThat(mPreference.getText()).isEqualTo(mPreference.getSummary());
+    }
+
+    private void acceptDeviceName(boolean accept) {
+        mController.setHost(deviceName -> mController.updateDeviceName(accept));
+    }
 }

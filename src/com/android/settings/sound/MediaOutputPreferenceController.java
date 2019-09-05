@@ -16,27 +16,28 @@
 
 package com.android.settings.sound;
 
-import static android.bluetooth.IBluetoothHearingAid.HI_SYNC_ID_INVALID;
-import static android.media.AudioManager.STREAM_MUSIC;
-import static android.media.AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
-import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
-
-import com.android.settingslib.Utils;
-
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
+import android.text.TextUtils;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.media.MediaOutputSliceConstants;
+
+import java.util.List;
 
 /**
- * This class which allows switching between A2dp-connected & HAP-connected BT devices.
- * A few conditions will disable this switcher:
- * - No available BT device(s)
- * - Media stream captured by cast device
+ * This class allows launching MediaOutputSlice to switch output device.
+ * Preference would hide only when
+ * - Bluetooth = OFF
+ * - Bluetooth = ON and Connected Devices = 0 and Previously Connected = 0
+ * - Media stream captured by remote device
  * - During a call.
  */
 public class MediaOutputPreferenceController extends AudioSwitchPreferenceController {
@@ -52,13 +53,6 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        if (isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_REMOTE_SUBMIX)) {
-            // In cast mode, disable switch entry.
-            mPreference.setVisible(false);
-            preference.setSummary(mContext.getText(R.string.media_output_summary_unavailable));
-            return;
-        }
-
         if (Utils.isAudioModeOngoingCall(mContext)) {
             // Ongoing call status, switch entry for media will be disabled.
             mPreference.setVisible(false);
@@ -67,55 +61,62 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        mConnectedDevices.clear();
-        // Otherwise, list all of the A2DP connected device and display the active device.
-        if (mAudioManager.getMode() == AudioManager.MODE_NORMAL) {
-            mConnectedDevices.addAll(getConnectedA2dpDevices());
-            mConnectedDevices.addAll(getConnectedHearingAidDevices());
+        boolean deviceConnected = false;
+        BluetoothDevice activeDevice = null;
+        // Show preference if there is connected or previously connected device
+        // Find active device and set its name as the preference's summary
+        List<BluetoothDevice> connectedA2dpDevices = getConnectedA2dpDevices();
+        List<BluetoothDevice> connectedHADevices = getConnectedHearingAidDevices();
+        if (mAudioManager.getMode() == AudioManager.MODE_NORMAL
+                && ((connectedA2dpDevices != null && !connectedA2dpDevices.isEmpty())
+                || (connectedHADevices != null && !connectedHADevices.isEmpty()))) {
+            deviceConnected = true;
+            activeDevice = findActiveDevice();
         }
-
-        final int numDevices = mConnectedDevices.size();
-        if (numDevices == 0) {
-            // Disable switch entry if there is no connected devices.
-            mPreference.setVisible(false);
-            final CharSequence summary = mContext.getText(R.string.media_output_default_summary);
-            final CharSequence[] defaultMediaOutput = new CharSequence[]{summary};
-            mSelectedIndex = getDefaultDeviceIndex();
-            preference.setSummary(summary);
-            setPreference(defaultMediaOutput, defaultMediaOutput, preference);
-            return;
-        }
-
-        mPreference.setVisible(true);
-        CharSequence[] mediaOutputs = new CharSequence[numDevices + 1];
-        CharSequence[] mediaValues = new CharSequence[numDevices + 1];
-
-        // Setup devices entries, select active connected device
-        setupPreferenceEntries(mediaOutputs, mediaValues, findActiveDevice(STREAM_MUSIC));
-
-        if (isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_USB_HEADSET)) {
-            // If wired headset is plugged in and active, select to default device.
-            mSelectedIndex = getDefaultDeviceIndex();
-        }
-
-        // Display connected devices, default device and show the active device
-        setPreference(mediaOutputs, mediaValues, preference);
+        mPreference.setVisible(deviceConnected);
+        mPreference.setSummary((activeDevice == null) ?
+                mContext.getText(R.string.media_output_default_summary) :
+                activeDevice.getAliasName());
     }
 
     @Override
-    public void setActiveBluetoothDevice(BluetoothDevice device) {
-        if (mAudioManager.getMode() != AudioManager.MODE_NORMAL) {
-            return;
-        }
-        final HearingAidProfile hapProfile = mProfileManager.getHearingAidProfile();
+    public BluetoothDevice findActiveDevice() {
+        BluetoothDevice activeDevice = findActiveHearingAidDevice();
         final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
-        if (hapProfile != null && a2dpProfile != null && device == null) {
-            hapProfile.setActiveDevice(null);
-            a2dpProfile.setActiveDevice(null);
-        } else if (hapProfile != null && hapProfile.getHiSyncId(device) != HI_SYNC_ID_INVALID) {
-            hapProfile.setActiveDevice(device);
-        } else if (a2dpProfile != null) {
-            a2dpProfile.setActiveDevice(device);
+
+        if (activeDevice == null && a2dpProfile != null) {
+            activeDevice = a2dpProfile.getActiveDevice();
         }
+        return activeDevice;
+    }
+
+    /**
+     * Find active hearing aid device
+     */
+    @Override
+    protected BluetoothDevice findActiveHearingAidDevice() {
+        final HearingAidProfile hearingAidProfile = mProfileManager.getHearingAidProfile();
+
+        if (hearingAidProfile != null) {
+            List<BluetoothDevice> activeDevices = hearingAidProfile.getActiveDevices();
+            for (BluetoothDevice btDevice : activeDevices) {
+                if (btDevice != null) {
+                    return btDevice;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            final Intent intent = new Intent()
+                    .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+            return true;
+        }
+        return false;
     }
 }

@@ -23,9 +23,10 @@ import static android.app.NotificationManager.IMPORTANCE_MIN;
 import static android.app.NotificationManager.VISIBILITY_NO_OVERRIDE;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -46,7 +47,6 @@ import android.provider.Settings;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.RestrictedListPreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRestrictionUtils;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -57,13 +57,15 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowRestrictionUtils.class)
 public class VisibilityPreferenceControllerTest {
 
@@ -89,7 +91,7 @@ public class VisibilityPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         shadowApplication.setSystemService(Context.DEVICE_POLICY_SERVICE, mDm);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = spy(new VisibilityPreferenceController(mContext, mLockUtils, mBackend));
 
         // by default the lockscreen is secure
@@ -200,7 +202,7 @@ public class VisibilityPreferenceControllerTest {
         mController.updateState(pref);
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
-            ArgumentCaptor.forClass(CharSequence[].class);
+                ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
         assertFalse(toStringList(argumentCaptor.getValue())
                 .contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));
@@ -248,7 +250,7 @@ public class VisibilityPreferenceControllerTest {
         mController.updateState(pref);
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
-            ArgumentCaptor.forClass(CharSequence[].class);
+                ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
         assertEquals(2, toStringList(argumentCaptor.getValue()).size());
         assertFalse(toStringList(argumentCaptor.getValue())
@@ -265,7 +267,7 @@ public class VisibilityPreferenceControllerTest {
         mController.updateState(pref);
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
-            ArgumentCaptor.forClass(CharSequence[].class);
+                ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
         List<String> values = toStringList(argumentCaptor.getValue());
         assertEquals(3, values.size());

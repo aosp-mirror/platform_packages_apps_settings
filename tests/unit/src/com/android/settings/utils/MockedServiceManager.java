@@ -18,7 +18,6 @@ package com.android.settings.testutils;
 
 import android.os.IBinder;
 import android.os.ServiceManager;
-import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

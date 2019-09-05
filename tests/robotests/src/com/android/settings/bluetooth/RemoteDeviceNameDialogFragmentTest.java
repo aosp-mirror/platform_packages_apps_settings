@@ -17,22 +17,24 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
@@ -41,10 +43,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowDialog;
-import org.robolectric.util.FragmentTestUtil;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RemoteDeviceNameDialogFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -71,7 +74,8 @@ public class RemoteDeviceNameDialogFragmentTest {
      */
     AlertDialog startDialog(String deviceName) {
         when(mCachedDevice.getName()).thenReturn(deviceName);
-        FragmentTestUtil.startFragment(mFragment);
+        FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
         return (AlertDialog) ShadowDialog.getLatestDialog();
     }
 

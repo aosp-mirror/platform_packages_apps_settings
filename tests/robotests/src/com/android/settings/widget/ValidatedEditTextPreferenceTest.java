@@ -18,31 +18,30 @@ package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.preference.PreferenceViewHolder;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceViewHolder;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ValidatedEditTextPreferenceTest {
 
     @Mock
@@ -131,5 +130,17 @@ public class ValidatedEditTextPreferenceTest {
         assertThat(textView.getInputType()
                 & (InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT))
                 .isNotEqualTo(0);
+    }
+
+    @Test
+    public void bindViewHolder_isNotPassword_shouldNotAutoCorrectText() {
+        final TextView textView = spy(new TextView(RuntimeEnvironment.application));
+        when(mViewHolder.findViewById(android.R.id.summary)).thenReturn(textView);
+
+        mPreference.setIsSummaryPassword(false);
+        mPreference.onBindViewHolder(mViewHolder);
+
+        assertThat(textView.getInputType()).isEqualTo(
+                InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
     }
 }

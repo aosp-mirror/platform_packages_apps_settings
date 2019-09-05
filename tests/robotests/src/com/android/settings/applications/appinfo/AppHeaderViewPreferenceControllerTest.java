@@ -17,7 +17,9 @@
 package com.android.settings.applications.appinfo;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -27,22 +29,22 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.graphics.drawable.Drawable;
-import androidx.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,9 +52,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppHeaderViewPreferenceControllerTest {
 
     @Mock
@@ -64,7 +67,7 @@ public class AppHeaderViewPreferenceControllerTest {
     private LayoutPreference mPreference;
 
     private Context mContext;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private View mHeader;
@@ -74,7 +77,7 @@ public class AppHeaderViewPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mHeader = LayoutInflater.from(mContext).inflate(R.layout.settings_entity_header, null);
@@ -103,15 +106,12 @@ public class AppHeaderViewPreferenceControllerTest {
 
 
         final TextView title = mHeader.findViewById(R.id.entity_header_title);
-        final TextView summary = mHeader.findViewById(R.id.entity_header_summary);
 
         mController.displayPreference(mScreen);
         mController.refreshUi();
 
         assertThat(title).isNotNull();
         assertThat(title.getText()).isEqualTo(appLabel);
-        assertThat(summary).isNotNull();
-        assertThat(summary.getText()).isEqualTo(mContext.getString(R.string.installed));
     }
 
     @Test

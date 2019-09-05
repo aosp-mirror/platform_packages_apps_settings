@@ -17,13 +17,13 @@
 package com.android.settings.datausage;
 
 import android.annotation.AttrRes;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -35,11 +35,14 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.Utils;
+import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Objects;
@@ -66,13 +69,15 @@ public class DataUsageSummaryPreference extends Preference {
     private boolean mDefaultTextColorSet;
     private int mDefaultTextColor;
     private int mNumPlans;
+    /** The specified un-initialized value for cycle time */
+    private final long CYCLE_TIME_UNINITIAL_VALUE = 0;
     /** The ending time of the billing cycle in milliseconds since epoch. */
     private long mCycleEndTimeMs;
     /** The time of the last update in standard milliseconds since the epoch */
     private long mSnapshotTimeMs;
     /** Name of carrier, or null if not available */
     private CharSequence mCarrierName;
-    private String mLimitInfoText;
+    private CharSequence mLimitInfoText;
     private Intent mLaunchIntent;
 
     /** Progress to display on ProgressBar */
@@ -91,13 +96,14 @@ public class DataUsageSummaryPreference extends Preference {
     /** WiFi only mode */
     private boolean mWifiMode;
     private String mUsagePeriod;
+    private boolean mSingleWifi;    // Shows only one specified WiFi network usage
 
     public DataUsageSummaryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.data_usage_summary_preference);
     }
 
-    public void setLimitInfo(String text) {
+    public void setLimitInfo(CharSequence text) {
         if (!Objects.equals(text, mLimitInfoText)) {
             mLimitInfoText = text;
             notifyChanged();
@@ -139,9 +145,10 @@ public class DataUsageSummaryPreference extends Preference {
         notifyChanged();
     }
 
-    void setWifiMode(boolean isWifiMode, String usagePeriod) {
+    void setWifiMode(boolean isWifiMode, String usagePeriod, boolean isSingleWifi) {
         mWifiMode = isWifiMode;
         mUsagePeriod = usagePeriod;
+        mSingleWifi = isSingleWifi;
         notifyChanged();
     }
 
@@ -168,7 +175,16 @@ public class DataUsageSummaryPreference extends Preference {
         Button launchButton = (Button) holder.findViewById(R.id.launch_mdp_app_button);
         TextView limitInfo = (TextView) holder.findViewById(R.id.data_limits);
 
-        if (mWifiMode) {
+        if (mWifiMode && mSingleWifi) {
+            updateCycleTimeText(holder);
+
+            usageTitle.setVisibility(View.GONE);
+            launchButton.setVisibility(View.GONE);
+            carrierInfo.setVisibility(View.GONE);
+
+            limitInfo.setVisibility(TextUtils.isEmpty(mLimitInfoText) ? View.GONE : View.VISIBLE);
+            limitInfo.setText(mLimitInfoText);
+        } else if (mWifiMode) {
             usageTitle.setText(R.string.data_usage_wifi_title);
             usageTitle.setVisibility(View.VISIBLE);
             TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
@@ -176,9 +192,14 @@ public class DataUsageSummaryPreference extends Preference {
             carrierInfo.setVisibility(View.GONE);
             limitInfo.setVisibility(View.GONE);
 
-            launchButton.setOnClickListener((view) -> {
-                launchWifiDataUsage(getContext());
-            });
+            final long usageLevel = getHistoricalUsageLevel();
+            if (usageLevel > 0L) {
+                launchButton.setOnClickListener((view) -> {
+                    launchWifiDataUsage(getContext());
+                });
+            } else {
+                launchButton.setEnabled(false);
+            }
             launchButton.setText(R.string.launch_wifi_text);
             launchButton.setVisibility(View.VISIBLE);
         } else {
@@ -199,15 +220,17 @@ public class DataUsageSummaryPreference extends Preference {
         }
     }
 
-    private static void launchWifiDataUsage(Context context) {
+    @VisibleForTesting
+    static void launchWifiDataUsage(Context context) {
         final Bundle args = new Bundle(1);
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE,
                 NetworkTemplate.buildTemplateWifiWildcard());
+        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_WIFI);
         final SubSettingLauncher launcher = new SubSettingLauncher(context)
                 .setArguments(args)
                 .setDestination(DataUsageList.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
-        launcher.setTitle(context.getString(R.string.wifi_data_usage));
+                .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN);
+        launcher.setTitleRes(R.string.wifi_data_usage);
         launcher.launch();
     }
 
@@ -255,6 +278,13 @@ public class DataUsageSummaryPreference extends Preference {
     private void updateCycleTimeText(PreferenceViewHolder holder) {
         TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
 
+        // Takes zero as a special case which value is never set.
+        if (mCycleEndTimeMs == CYCLE_TIME_UNINITIAL_VALUE) {
+            cycleTime.setVisibility(View.GONE);
+            return;
+        }
+
+        cycleTime.setVisibility(View.VISIBLE);
         long millisLeft = mCycleEndTimeMs - System.currentTimeMillis();
         if (millisLeft <= 0) {
             cycleTime.setText(getContext().getString(R.string.billing_cycle_none_left));
@@ -330,4 +360,11 @@ public class DataUsageSummaryPreference extends Preference {
         carrierInfo.setTextColor(Utils.getColorAttr(getContext(), colorId));
         carrierInfo.setTypeface(typeface);
     }
+
+    @VisibleForTesting
+    long getHistoricalUsageLevel() {
+        final DataUsageController controller = new DataUsageController(getContext());
+        return controller.getHistoricalUsageLevel(NetworkTemplate.buildTemplateWifiWildcard());
+    }
+
 }

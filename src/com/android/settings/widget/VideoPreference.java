@@ -22,15 +22,18 @@ import android.content.res.TypedArray;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
@@ -47,35 +50,53 @@ public class VideoPreference extends Preference {
     MediaPlayer mMediaPlayer;
     @VisibleForTesting
     boolean mAnimationAvailable;
-    private boolean mVideoReady;
+    @VisibleForTesting
+    boolean mVideoReady;
     private boolean mVideoPaused;
-    private float mAspectRadio = 1.0f;
+    private float mAspectRatio = 1.0f;
     private int mPreviewResource;
+    private boolean mViewVisible;
+    private Surface mSurface;
+    private int mAnimationId;
+    private int mHeight = LinearLayout.LayoutParams.MATCH_PARENT - 1; // video height in pixels
+
+    public VideoPreference(Context context) {
+        super(context);
+        mContext = context;
+        initialize(context, null);
+    }
 
     public VideoPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+        initialize(context, attrs);
+    }
+
+    private void initialize(Context context, AttributeSet attrs) {
         TypedArray attributes = context.getTheme().obtainStyledAttributes(
                 attrs,
-                com.android.settings.R.styleable.VideoPreference,
+                R.styleable.VideoPreference,
                 0, 0);
         try {
-            int animation = attributes.getResourceId(R.styleable.VideoPreference_animation, 0);
+            // if these are already set that means they were set dynamically and don't need
+            // to be loaded from xml
+            mAnimationId = mAnimationId == 0
+                ? attributes.getResourceId(R.styleable.VideoPreference_animation, 0)
+                : mAnimationId;
             mVideoPath = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                     .authority(context.getPackageName())
-                    .appendPath(String.valueOf(animation))
+                    .appendPath(String.valueOf(mAnimationId))
                     .build();
-            mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
+            mPreviewResource = mPreviewResource == 0
+                ? attributes.getResourceId(R.styleable.VideoPreference_preview, 0)
+                : mPreviewResource;
+            if (mPreviewResource == 0 && mAnimationId == 0) {
+                return;
+            }
+            initMediaPlayer();
             if (mMediaPlayer != null && mMediaPlayer.getDuration() > 0) {
                 setVisible(true);
                 setLayoutResource(R.layout.video_preference);
-
-                mPreviewResource = attributes.getResourceId(
-                        R.styleable.VideoPreference_preview, 0);
-
-                mMediaPlayer.setOnSeekCompleteListener(mp -> mVideoReady = true);
-
-                mMediaPlayer.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
                 mAnimationAvailable = true;
                 updateAspectRatio();
             } else {
@@ -103,30 +124,22 @@ public class VideoPreference extends Preference {
                 R.id.video_container);
 
         imageView.setImageResource(mPreviewResource);
-        layout.setAspectRatio(mAspectRadio);
+        layout.setAspectRatio(mAspectRatio);
+        if (mHeight >= LinearLayout.LayoutParams.MATCH_PARENT) {
+            layout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, mHeight));
+        }
+        updateViewStates(imageView, playButton);
 
-        video.setOnClickListener(v -> {
-            if (mMediaPlayer != null) {
-                if (mMediaPlayer.isPlaying()) {
-                    mMediaPlayer.pause();
-                    playButton.setVisibility(View.VISIBLE);
-                    mVideoPaused = true;
-                } else {
-                    mMediaPlayer.start();
-                    playButton.setVisibility(View.GONE);
-                    mVideoPaused = false;
-                }
-            }
-        });
+        video.setOnClickListener(v -> updateViewStates(imageView, playButton));
 
         video.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
                     int height) {
                 if (mMediaPlayer != null) {
-                    mMediaPlayer.setSurface(new Surface(surfaceTexture));
-                    mVideoReady = false;
-                    mMediaPlayer.seekTo(0);
+                    mSurface = new Surface(surfaceTexture);
+                    mMediaPlayer.setSurface(mSurface);
                 }
             }
 
@@ -143,6 +156,9 @@ public class VideoPreference extends Preference {
 
             @Override
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
+                if (!mViewVisible) {
+                    return;
+                }
                 if (mVideoReady) {
                     if (imageView.getVisibility() == View.VISIBLE) {
                         imageView.setVisibility(View.GONE);
@@ -160,26 +176,77 @@ public class VideoPreference extends Preference {
         });
     }
 
+    @VisibleForTesting
+    void updateViewStates(ImageView imageView, ImageView playButton) {
+        if (mMediaPlayer != null) {
+            if (mMediaPlayer.isPlaying()) {
+                mMediaPlayer.pause();
+                playButton.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.VISIBLE);
+                mVideoPaused = true;
+            } else {
+                imageView.setVisibility(View.GONE);
+                playButton.setVisibility(View.GONE);
+                mMediaPlayer.start();
+                mVideoPaused = false;
+            }
+        }
+    }
+
     @Override
     public void onDetached() {
-        if (mMediaPlayer != null) {
-            mMediaPlayer.stop();
-            mMediaPlayer.reset();
-            mMediaPlayer.release();
-        }
+        releaseMediaPlayer();
         super.onDetached();
     }
 
     public void onViewVisible(boolean videoPaused) {
+        mViewVisible = true;
         mVideoPaused = videoPaused;
-        if (mVideoReady && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
-            mMediaPlayer.seekTo(0);
-        }
+        initMediaPlayer();
     }
 
     public void onViewInvisible() {
-        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
-            mMediaPlayer.pause();
+        mViewVisible = false;
+        releaseMediaPlayer();
+    }
+
+    /**
+     * Sets the video for this preference. If a previous video was set this one will override it
+     * and properly release any resources and re-initialize the preference to play the new video.
+     *
+     * @param videoId The raw res id of the video
+     * @param previewId The drawable res id of the preview image to use if the video fails to load.
+     */
+    public void setVideo(int videoId, int previewId) {
+        mAnimationId = videoId;
+        mPreviewResource = previewId;
+        releaseMediaPlayer();
+        initialize(mContext, null);
+    }
+
+    private void initMediaPlayer() {
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
+            // when the playback res is invalid or others, MediaPlayer create may fail
+            // and return null, so need add the null judgement.
+            if (mMediaPlayer != null) {
+                mMediaPlayer.seekTo(0);
+                mMediaPlayer.setOnSeekCompleteListener(mp -> mVideoReady = true);
+                mMediaPlayer.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
+                if (mSurface != null) {
+                    mMediaPlayer.setSurface(mSurface);
+                }
+            }
+        }
+    }
+
+    private void releaseMediaPlayer() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.stop();
+            mMediaPlayer.reset();
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+            mVideoReady = false;
         }
     }
 
@@ -187,9 +254,17 @@ public class VideoPreference extends Preference {
         return mVideoPaused;
     }
 
-    @VisibleForTesting
-    void updateAspectRatio() {
-        mAspectRadio = mMediaPlayer.getVideoWidth() / (float)mMediaPlayer.getVideoHeight();
+    /**
+     * sets the height of the video preference
+     * @param height in dp
+     */
+    public void setHeight(float height) {
+        mHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height,
+                mContext.getResources().getDisplayMetrics());
     }
 
+    @VisibleForTesting
+    void updateAspectRatio() {
+        mAspectRatio = mMediaPlayer.getVideoWidth() / (float) mMediaPlayer.getVideoHeight();
+    }
 }

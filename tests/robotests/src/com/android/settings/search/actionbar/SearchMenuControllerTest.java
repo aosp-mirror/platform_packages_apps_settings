@@ -17,11 +17,11 @@
 package com.android.settings.search.actionbar;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings.Global;
@@ -29,32 +29,44 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.ObservableFragment;
-import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUtils.class)
 public class SearchMenuControllerTest {
 
     @Mock
     private Menu mMenu;
     private TestPreferenceFragment mPreferenceHost;
-    private ObservableFragment mHost;
+    private InstrumentedFragment mHost;
     private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mHost = spy(new ObservableFragment());
-        when(mHost.getContext()).thenReturn(mContext);
+        mHost = new InstrumentedFragment() {
+            @Override
+            public Context getContext() {
+                return mContext;
+            }
+
+            @Override
+            public int getMetricsCategory() {
+                return SettingsEnums.TESTING;
+            }
+        };
         mPreferenceHost = new TestPreferenceFragment();
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
 
@@ -65,7 +77,7 @@ public class SearchMenuControllerTest {
     @Test
     public void init_prefFragment_shouldAddMenu() {
         SearchMenuController.init(mPreferenceHost);
-        mPreferenceHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
+        mPreferenceHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
         verify(mMenu).add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu);
     }
@@ -73,7 +85,7 @@ public class SearchMenuControllerTest {
     @Test
     public void init_observableFragment_shouldAddMenu() {
         SearchMenuController.init(mHost);
-        mHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
+        mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
         verify(mMenu).add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu);
     }
@@ -85,7 +97,7 @@ public class SearchMenuControllerTest {
         mHost.setArguments(args);
 
         SearchMenuController.init(mHost);
-        mHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
+        mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
         verifyZeroInteractions(mMenu);
     }
 
@@ -93,12 +105,12 @@ public class SearchMenuControllerTest {
     public void init_deviceNotProvisioned_shouldNotAddMenu() {
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
         SearchMenuController.init(mHost);
-        mHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
+        mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
         verifyZeroInteractions(mMenu);
     }
 
-    private static class TestPreferenceFragment extends ObservablePreferenceFragment {
+    private static class TestPreferenceFragment extends InstrumentedPreferenceFragment {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         }
@@ -106,6 +118,11 @@ public class SearchMenuControllerTest {
         @Override
         public Context getContext() {
             return RuntimeEnvironment.application;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return SettingsEnums.TESTING;
         }
     }
 }

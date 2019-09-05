@@ -16,24 +16,30 @@
 
 package com.android.settings.development.featureflags;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class FeatureFlagsDashboard extends DashboardFragment {
 
     private static final String TAG = "FeatureFlagsDashboard";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_FEATURE_FLAGS_DASHBOARD;
+        return SettingsEnums.SETTINGS_FEATURE_FLAGS_DASHBOARD;
     }
 
     @Override
@@ -59,13 +65,43 @@ public class FeatureFlagsDashboard extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPrefControllers(context, getSettingsLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPrefControllers(Context context,
+            Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final Lifecycle lifecycle = getLifecycle();
         final FeatureFlagFooterPreferenceController footerController =
                 new FeatureFlagFooterPreferenceController(context);
-        controllers.add(new FeatureFlagsPreferenceController(context, lifecycle));
+        if (lifecycle != null) {
+            lifecycle.addObserver(footerController);
+        }
         controllers.add(footerController);
-        lifecycle.addObserver(footerController);
         return controllers;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.feature_flags_settings;
+                    result.add(sir);
+                    return result;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPrefControllers(context, null /* lifecycle */);
+                }
+            };
 }

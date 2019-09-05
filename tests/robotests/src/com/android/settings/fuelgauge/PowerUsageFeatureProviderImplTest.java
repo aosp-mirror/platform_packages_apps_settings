@@ -25,7 +25,6 @@ import android.content.pm.PackageManager;
 import android.os.Process;
 
 import com.android.internal.os.BatterySipper;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,8 +32,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PowerUsageFeatureProviderImplTest {
 
     private static final int UID_OTHER = Process.FIRST_APPLICATION_UID + 2;

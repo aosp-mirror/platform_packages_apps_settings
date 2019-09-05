@@ -19,16 +19,17 @@ package com.android.settings.accounts;
 import static android.content.Intent.EXTRA_USER;
 
 import android.accounts.Account;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncAdapterType;
 import android.os.Bundle;
 import android.os.UserHandle;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
@@ -65,8 +66,8 @@ public class AccountSyncPreferenceController extends AbstractPreferenceControlle
         new SubSettingLauncher(mContext)
                 .setDestination(AccountSyncSettings.class.getName())
                 .setArguments(args)
-                .setSourceMetricsCategory( MetricsProto.MetricsEvent.ACCOUNT)
-                .setTitle( R.string.account_sync_title)
+                .setSourceMetricsCategory( SettingsEnums.ACCOUNT)
+                .setTitleRes( R.string.account_sync_title)
                 .launch();
 
         return true;

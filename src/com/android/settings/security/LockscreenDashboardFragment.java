@@ -16,18 +16,25 @@
 
 package com.android.settings.security;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.provider.SearchIndexableResource;
+
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
+import com.android.settings.display.AmbientDisplayNotificationsPreferenceController;
+import com.android.settings.gestures.DoubleTapScreenPreferenceController;
+import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.users.AddUserWhenLockedPreferenceController;
+import com.android.settings.security.screenlock.LockScreenPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +43,11 @@ import java.util.List;
 /**
  * Settings screen for lock screen preference
  */
+@SearchIndexable
 public class LockscreenDashboardFragment extends DashboardFragment
         implements OwnerInfoPreferenceController.OwnerInfoCallback {
+
+    public static final String KEY_AMBIENT_DISPLAY_ALWAYS_ON = "ambient_display_always_on";
 
     private static final String TAG = "LockscreenDashboardFragment";
 
@@ -53,11 +63,13 @@ public class LockscreenDashboardFragment extends DashboardFragment
     static final String KEY_ADD_USER_FROM_LOCK_SCREEN =
             "security_lockscreen_add_users_when_locked";
 
+
+    private AmbientDisplayConfiguration mConfig;
     private OwnerInfoPreferenceController mOwnerInfoPreferenceController;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_LOCK_SCREEN_PREFERENCES;
+        return SettingsEnums.SETTINGS_LOCK_SCREEN_PREFERENCES;
     }
 
     @Override
@@ -76,9 +88,20 @@ public class LockscreenDashboardFragment extends DashboardFragment
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AmbientDisplayAlwaysOnPreferenceController.class)
+                .setConfig(getConfig(context))
+                .setCallback(this::updatePreferenceStates);
+        use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
+        use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
+        use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
+    }
+
+    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final Lifecycle lifecycle = getLifecycle();
+        final Lifecycle lifecycle = getSettingsLifecycle();
         final LockScreenNotificationPreferenceController notificationController =
                 new LockScreenNotificationPreferenceController(context,
                         KEY_LOCK_SCREEN_NOTIFICATON,
@@ -86,12 +109,9 @@ public class LockscreenDashboardFragment extends DashboardFragment
                         KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
         lifecycle.addObserver(notificationController);
         controllers.add(notificationController);
-        controllers.add(new AddUserWhenLockedPreferenceController(
-                context, KEY_ADD_USER_FROM_LOCK_SCREEN, lifecycle));
         mOwnerInfoPreferenceController =
                 new OwnerInfoPreferenceController(context, this, lifecycle);
         controllers.add(mOwnerInfoPreferenceController);
-        controllers.add(new LockdownButtonPreferenceController(context));
 
         return controllers;
     }
@@ -101,6 +121,13 @@ public class LockscreenDashboardFragment extends DashboardFragment
         if (mOwnerInfoPreferenceController != null) {
             mOwnerInfoPreferenceController.updateSummary();
         }
+    }
+
+    private AmbientDisplayConfiguration getConfig(Context context) {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(context);
+        }
+        return mConfig;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -118,11 +145,8 @@ public class LockscreenDashboardFragment extends DashboardFragment
                         Context context) {
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new LockScreenNotificationPreferenceController(context));
-                    controllers.add(new AddUserWhenLockedPreferenceController(context,
-                            KEY_ADD_USER_FROM_LOCK_SCREEN, null /* lifecycle */));
                     controllers.add(new OwnerInfoPreferenceController(
                             context, null /* fragment */, null /* lifecycle */));
-                    controllers.add(new LockdownButtonPreferenceController(context));
                     return controllers;
                 }
 
@@ -130,8 +154,13 @@ public class LockscreenDashboardFragment extends DashboardFragment
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> niks = super.getNonIndexableKeys(context);
                     niks.add(KEY_ADD_USER_FROM_LOCK_SCREEN);
-                    niks.add(KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
                     return niks;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return new LockScreenPreferenceController(context, "anykey")
+                            .isAvailable();
                 }
             };
 }

@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Vibrator;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -38,20 +39,29 @@ public abstract class VibrationIntensityPreferenceController extends BasePrefere
     protected final Vibrator mVibrator;
     private final SettingObserver mSettingsContentObserver;
     private final String mSettingKey;
+    private final String mEnabledKey;
+    private final boolean mSupportRampingRinger;
 
     private Preference mPreference;
 
     public VibrationIntensityPreferenceController(Context context, String prefkey,
-            String settingKey) {
+            String settingKey, String enabledKey, boolean supportRampingRinger) {
         super(context, prefkey);
         mVibrator = mContext.getSystemService(Vibrator.class);
         mSettingKey = settingKey;
+        mEnabledKey = enabledKey;
+        mSupportRampingRinger= supportRampingRinger;
         mSettingsContentObserver = new SettingObserver(settingKey) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
                 updateState(mPreference);
             }
         };
+    }
+
+    public VibrationIntensityPreferenceController(Context context, String prefkey,
+            String settingKey, String enabledKey) {
+        this(context, prefkey, settingKey, enabledKey, /* supportRampingRinger= */ false);
     }
 
     @Override
@@ -77,8 +87,11 @@ public abstract class VibrationIntensityPreferenceController extends BasePrefere
     public CharSequence getSummary() {
         final int intensity = Settings.System.getInt(mContext.getContentResolver(),
                 mSettingKey, getDefaultIntensity());
-        return getIntensityString(mContext, intensity);
-   }
+        final boolean enabled = (Settings.System.getInt(mContext.getContentResolver(),
+                mEnabledKey, 1) == 1) ||
+                (mSupportRampingRinger && AccessibilitySettings.isRampingRingerEnabled(mContext));
+        return getIntensityString(mContext, enabled ? intensity : Vibrator.VIBRATION_INTENSITY_OFF);
+    }
 
     public static CharSequence getIntensityString(Context context, int intensity) {
         final boolean supportsMultipleIntensities = context.getResources().getBoolean(

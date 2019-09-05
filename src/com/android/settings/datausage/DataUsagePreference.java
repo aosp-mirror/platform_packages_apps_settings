@@ -14,19 +14,20 @@
 
 package com.android.settings.datausage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.util.AttributeSet;
+
+import androidx.annotation.VisibleForTesting;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
-import android.util.AttributeSet;
-import android.util.FeatureFlagUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.net.DataUsageController;
 
@@ -48,52 +49,51 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
     }
 
     @Override
-    public void setTemplate(NetworkTemplate template, int subId,
-            NetworkServices services) {
+    public void setTemplate(NetworkTemplate template, int subId, NetworkServices services) {
         mTemplate = template;
         mSubId = subId;
-        DataUsageController controller = new DataUsageController(getContext());
-        DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-            if (mTemplate.isMatchRuleMobile()) {
-                setTitle(R.string.app_cellular_data_usage);
-            } else {
-                setTitle(mTitleRes);
-                setSummary(getContext().getString(R.string.data_usage_template,
-                        DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
-                                usageInfo.period));
-            }
+        final DataUsageController controller = getDataUsageController();
+        if (mTemplate.isMatchRuleMobile()) {
+            setTitle(R.string.app_cellular_data_usage);
         } else {
+            final DataUsageController.DataUsageInfo usageInfo =
+                    controller.getDataUsageInfo(mTemplate);
             setTitle(mTitleRes);
             setSummary(getContext().getString(R.string.data_usage_template,
                     DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
-                            usageInfo.period));
+                    usageInfo.period));
         }
-        setIntent(getIntent());
+        final long usageLevel = controller.getHistoricalUsageLevel(template);
+        if (usageLevel > 0L) {
+            setIntent(getIntent());
+        } else {
+            setIntent(null);
+            setEnabled(false);
+        }
     }
 
     @Override
     public Intent getIntent() {
         final Bundle args = new Bundle();
+        final SubSettingLauncher launcher;
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
         args.putInt(DataUsageList.EXTRA_SUB_ID, mSubId);
-        final SubSettingLauncher launcher = new SubSettingLauncher(getContext())
-                .setArguments(args)
-                .setDestination(DataUsageList.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-            if (mTemplate.isMatchRuleMobile()) {
-                launcher.setTitle(R.string.app_cellular_data_usage);
-            } else {
-                launcher.setTitle(mTitleRes);
-            }
+        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, mTemplate.isMatchRuleMobile()
+            ? ConnectivityManager.TYPE_MOBILE : ConnectivityManager.TYPE_WIFI);
+        launcher = new SubSettingLauncher(getContext())
+            .setArguments(args)
+            .setDestination(DataUsageList.class.getName())
+            .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN);
+        if (mTemplate.isMatchRuleMobile()) {
+            launcher.setTitleRes(R.string.app_cellular_data_usage);
         } else {
-            if (mTitleRes > 0) {
-                launcher.setTitle(mTitleRes);
-            } else {
-                launcher.setTitle(getTitle());
-            }
+            launcher.setTitleRes(mTitleRes);
         }
         return launcher.toIntent();
+    }
+
+    @VisibleForTesting
+    DataUsageController getDataUsageController() {
+        return new DataUsageController(getContext());
     }
 }

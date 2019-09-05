@@ -16,14 +16,15 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+
 import com.android.settings.R;
 import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
@@ -101,7 +102,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.PROCESS_STATS_SUMMARY;
+        return SettingsEnums.PROCESS_STATS_SUMMARY;
     }
 
     @Override
@@ -118,7 +119,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
             mStatsManager.xferStats();
             new SubSettingLauncher(getContext())
                     .setDestination(ProcessStatsUi.class.getName())
-                    .setTitle(R.string.memory_usage_apps)
+                    .setTitleRes(R.string.memory_usage_apps)
                     .setArguments(args)
                     .setSourceMetricsCategory(getMetricsCategory())
                     .launch();

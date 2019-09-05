@@ -16,15 +16,15 @@
 
 package com.android.settings.development;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
-import android.content.Context;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.PowerManager;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -35,7 +35,7 @@ public class BluetoothA2dpHwOffloadRebootDialog extends InstrumentedDialogFragme
 
     public static void show(DevelopmentSettingsDashboardFragment host,
             BluetoothA2dpHwOffloadPreferenceController controller) {
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final BluetoothA2dpHwOffloadRebootDialog dialog =
                     new BluetoothA2dpHwOffloadRebootDialog();
@@ -46,7 +46,7 @@ public class BluetoothA2dpHwOffloadRebootDialog extends InstrumentedDialogFragme
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_BLUETOOTH_DISABLE_A2DP_HW_OFFLOAD;
+        return SettingsEnums.DIALOG_BLUETOOTH_DISABLE_A2DP_HW_OFFLOAD;
     }
 
     @Override

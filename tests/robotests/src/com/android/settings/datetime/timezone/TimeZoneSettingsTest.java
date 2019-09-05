@@ -17,28 +17,23 @@
 package com.android.settings.datetime.timezone;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.android.settings.datetime.timezone.model.TimeZoneData;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class,
-        })
+@RunWith(RobolectricTestRunner.class)
 public class TimeZoneSettingsTest {
 
     @Test

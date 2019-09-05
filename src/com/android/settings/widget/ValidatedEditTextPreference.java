@@ -16,26 +16,26 @@
 
 package com.android.settings.widget;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceViewHolder;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.settingslib.CustomEditTextPreference;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.PreferenceViewHolder;
+
+import com.android.settingslib.CustomEditTextPreferenceCompat;
 
 /**
  * {@code EditTextPreference} that supports input validation.
  */
-public class ValidatedEditTextPreference extends CustomEditTextPreference {
+public class ValidatedEditTextPreference extends CustomEditTextPreferenceCompat {
 
     public interface Validator {
         boolean isTextValid(String value);
@@ -93,7 +93,8 @@ public class ValidatedEditTextPreference extends CustomEditTextPreference {
             textView.setInputType(
                     InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         } else {
-            textView.setInputType(InputType.TYPE_CLASS_TEXT);
+            textView.setInputType(
+                    InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         }
     }
 

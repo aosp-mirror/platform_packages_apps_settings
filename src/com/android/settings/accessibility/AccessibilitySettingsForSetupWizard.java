@@ -17,17 +17,24 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
+import com.google.android.setupdesign.GlifPreferenceLayout;
 
 import java.util.List;
 
@@ -59,7 +66,24 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SUW_ACCESSIBILITY;
+        return SettingsEnums.SUW_ACCESSIBILITY;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+        layout.setDividerInsets(Integer.MAX_VALUE, 0);
+
+        layout.setHeaderText(R.string.vision_settings_title);
+    }
+
+    @Override
+    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
+        Bundle savedInstanceState) {
+        GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
+        return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
     @Override

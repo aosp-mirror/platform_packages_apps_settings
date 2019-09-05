@@ -18,10 +18,11 @@ package com.android.settings.deviceinfo.storage;
 
 import android.content.Context;
 import android.os.storage.VolumeInfo;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -42,9 +43,22 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
         super(context);
     }
 
+    /**
+     * Converts a used storage amount to a formatted text.
+     *
+     * @param usedBytes used bytes of storage
+     * @return a formatted text.
+     */
+    public static CharSequence convertUsedBytesToFormattedText(Context context, long usedBytes) {
+        final Formatter.BytesResult result = Formatter.formatBytes(context.getResources(),
+                usedBytes, 0);
+        return TextUtils.expandTemplate(context.getText(R.string.storage_size_large_alternate),
+                result.value, result.units);
+    }
+
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mSummary = (StorageSummaryDonutPreference) screen.findPreference("pref_summary");
+        mSummary = screen.findPreference("pref_summary");
         mSummary.setEnabled(true);
     }
 
@@ -52,11 +66,7 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
     public void updateState(Preference preference) {
         super.updateState(preference);
         StorageSummaryDonutPreference summary = (StorageSummaryDonutPreference) preference;
-        final Formatter.BytesResult result = Formatter.formatBytes(mContext.getResources(),
-                mUsedBytes, 0);
-        summary.setTitle(TextUtils.expandTemplate(
-                mContext.getText(R.string.storage_size_large_alternate), result.value,
-                result.units));
+        summary.setTitle(convertUsedBytesToFormattedText(mContext, mUsedBytes));
         summary.setSummary(mContext.getString(R.string.storage_volume_total,
                 Formatter.formatShortFileSize(mContext, mTotalBytes)));
         summary.setPercent(mUsedBytes, mTotalBytes);
@@ -82,7 +92,8 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
 
     /**
      * Updates the state of the donut preference for the next update.
-     * @param used Total number of used bytes on the summarized volume.
+     *
+     * @param used  Total number of used bytes on the summarized volume.
      * @param total Total number of bytes on the summarized volume.
      */
     public void updateBytes(long used, long total) {
@@ -93,6 +104,7 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
 
     /**
      * Updates the state of the donut preference for the next update using volume to summarize.
+     *
      * @param volume VolumeInfo to use to populate the informayion.
      */
     public void updateSizes(StorageVolumeProvider svp, VolumeInfo volume) {

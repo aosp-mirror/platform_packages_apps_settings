@@ -16,8 +16,8 @@
 
 package com.android.settings.applications;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import android.Manifest;
@@ -27,7 +27,6 @@ import android.content.pm.IPackageManager;
 import android.os.RemoteException;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import org.junit.Before;
@@ -35,8 +34,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class AppStateAppOpsBridgeTest {
 
     @Mock private Context mContext;
@@ -61,7 +61,7 @@ public final class AppStateAppOpsBridgeTest {
     }
 
     private class TestAppStateAppOpsBridge extends AppStateAppOpsBridge {
-        public TestAppStateAppOpsBridge() {
+        private TestAppStateAppOpsBridge() {
             super(mContext, null, null, AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
                 new String[] {Manifest.permission.SYSTEM_ALERT_WINDOW},
                 mPackageManagerService);

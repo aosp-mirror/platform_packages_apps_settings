@@ -22,14 +22,12 @@ import android.text.TextUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.List;
 
 /**
  * Data class representing a slice stored by {@link SlicesIndexer}.
  * Note that {@link #mKey} is treated as a primary key for this class and determines equality.
  */
 public class SliceData {
-
     /**
      * Flags indicating the UI type of the Slice.
      */
@@ -75,6 +73,8 @@ public class SliceData {
 
     private final boolean mIsPlatformDefined;
 
+    private final String mUnavailableSliceSubtitle;
+
     public String getKey() {
         return mKey;
     }
@@ -119,6 +119,10 @@ public class SliceData {
         return mIsPlatformDefined;
     }
 
+    public String getUnavailableSliceSubtitle() {
+        return mUnavailableSliceSubtitle;
+    }
+
     private SliceData(Builder builder) {
         mKey = builder.mKey;
         mTitle = builder.mTitle;
@@ -131,6 +135,7 @@ public class SliceData {
         mPreferenceController = builder.mPrefControllerClassName;
         mSliceType = builder.mSliceType;
         mIsPlatformDefined = builder.mIsPlatformDefined;
+        mUnavailableSliceSubtitle = builder.mUnavailableSliceSubtitle;
     }
 
     @Override
@@ -169,6 +174,8 @@ public class SliceData {
         private int mSliceType;
 
         private boolean mIsPlatformDefined;
+
+        private String mUnavailableSliceSubtitle;
 
         public Builder setKey(String key) {
             mKey = key;
@@ -222,6 +229,12 @@ public class SliceData {
 
         public Builder setPlatformDefined(boolean isPlatformDefined) {
             mIsPlatformDefined = isPlatformDefined;
+            return this;
+        }
+
+        public Builder setUnavailableSliceSubtitle(
+                String unavailableSliceSubtitle) {
+            mUnavailableSliceSubtitle = unavailableSliceSubtitle;
             return this;
         }
 

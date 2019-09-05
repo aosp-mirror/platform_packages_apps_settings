@@ -18,7 +18,6 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 
-import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 

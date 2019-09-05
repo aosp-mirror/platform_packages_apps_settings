@@ -58,20 +58,27 @@ public class BasePreferenceControllerSignatureInspector extends CodeInspector {
             if (constructors == null || constructors.length == 0) {
                 badClasses.append(c.getName()).append(",");
             }
+
+            boolean hasValidConstructor = false;
             for (Constructor constructor : constructors) {
-                if (!hasValidConstructorSignature(constructor)) {
-                    badClasses.append(className).append(",");
-                    continue;
+                if (hasValidConstructorSignature(constructor)) {
+                    hasValidConstructor = true;
+                    break;
                 }
+            }
+            if (!hasValidConstructor) {
+                badClasses.append(className).append(",");
             }
         }
 
         assertWithMessage("All BasePreferenceController (and subclasses) constructor must either"
-                + "only take Context, or (Context, String). No other types are allowed")
+                + " only take Context, or (Context, String). No other types are allowed")
                 .that(badClasses.toString())
                 .isEmpty();
 
-        assertWithMessage("Something in the grandfather list is no longer relevant. Please remove")
+        assertWithMessage("Something in the grandfather list is no longer relevant. Please remove"
+            + "it from packages/apps/Settings/tests/robotests/assets/"
+            + "grandfather_invalid_base_preference_controller_constructor")
                 .that(grandfather)
                 .isEmpty();
     }

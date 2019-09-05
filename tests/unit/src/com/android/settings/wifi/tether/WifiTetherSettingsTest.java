@@ -16,15 +16,21 @@
 
 package com.android.settings.wifi.tether;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
 import android.app.Instrumentation;
 import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.SmallTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.SmallTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings;
 
@@ -32,11 +38,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -55,7 +56,8 @@ public class WifiTetherSettingsTest {
         mTetherActivityIntent = new Intent()
                 .setClassName(mInstrumentation.getTargetContext().getPackageName(),
                         Settings.TetherSettingsActivity.class.getName())
-                .setPackage(mInstrumentation.getTargetContext().getPackageName());
+                .setPackage(mInstrumentation.getTargetContext().getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @After
@@ -68,7 +70,6 @@ public class WifiTetherSettingsTest {
         launchWifiTetherActivity();
         onView(withText("Hotspot name")).check(matches(isDisplayed()));
         onView(withText("Hotspot password")).check(matches(isDisplayed()));
-        onView(withText("AP Band")).check(matches(isDisplayed()));
     }
 
     private void launchWifiTetherActivity() {

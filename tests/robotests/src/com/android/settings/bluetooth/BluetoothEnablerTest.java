@@ -17,8 +17,8 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -31,21 +31,18 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.PreferenceViewHolder;
 import android.view.View;
-import android.widget.Switch;
 
-import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
+import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -55,11 +52,13 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowBluetoothAdapter.class)
 public class BluetoothEnablerTest {
 
     private static EnforcedAdmin sFakeEnforcedAdmin;
@@ -68,7 +67,8 @@ public class BluetoothEnablerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        sFakeEnforcedAdmin = new EnforcedAdmin(new ComponentName("test.package", "test.Class"), 10);
+        sFakeEnforcedAdmin = new EnforcedAdmin(new ComponentName("test.package", "test.Class"),
+                UserHandle.of(10));
     }
 
     @Mock
@@ -76,21 +76,17 @@ public class BluetoothEnablerTest {
     @Mock
     private RestrictionUtils mRestrictionUtils;
     @Mock
-    private LocalBluetoothManager mBluetoothManager;
-    @Mock
-    private LocalBluetoothAdapter mBluetoothAdapter;
-    @Mock
     private SwitchWidgetController.OnSwitchChangeListener mCallback;
 
     private Context mContext;
     private SwitchWidgetController mSwitchController;
     private BluetoothEnabler mBluetoothEnabler;
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mBluetoothManager.getBluetoothAdapter()).thenReturn(mBluetoothAdapter);
 
         mRestrictedSwitchPreference = new RestrictedSwitchPreference(mContext);
         mSwitchController = spy(new SwitchBarController(new SwitchBar(mContext)));
@@ -98,12 +94,12 @@ public class BluetoothEnablerTest {
                 mContext,
                 mSwitchController,
                 mMetricsFeatureProvider,
-                mBluetoothManager,
                 123,
                 mRestrictionUtils);
         mHolder = PreferenceViewHolder.createInstanceForTests(mock(View.class));
         mRestrictedSwitchPreference.onBindViewHolder(mHolder);
         mBluetoothEnabler.setToggleCallback(mCallback);
+        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
     }
 
     @Test
@@ -193,7 +189,7 @@ public class BluetoothEnablerTest {
 
     @Test
     public void startWithBluetoothOff_switchIsOff() {
-        when(mBluetoothAdapter.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_OFF);
+        mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_OFF);
         verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
         verify(mSwitchController, never()).setChecked(true);
@@ -201,7 +197,7 @@ public class BluetoothEnablerTest {
 
     @Test
     public void startWithBluetoothOn_switchIsOn() {
-        when(mBluetoothAdapter.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_ON);
+        mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_ON);
         verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
         verify(mSwitchController, never()).setChecked(false);
@@ -213,7 +209,7 @@ public class BluetoothEnablerTest {
         // Start up with bluetooth turned on. The switch should get turned on.
         ArgumentCaptor<BroadcastReceiver> captor = ArgumentCaptor.forClass(BroadcastReceiver.class);
         when(mContext.registerReceiver(captor.capture(), any(IntentFilter.class))).thenReturn(null);
-        when(mBluetoothAdapter.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_ON);
+        mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_ON);
         verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
         verify(mSwitchController, never()).setChecked(false);
@@ -237,7 +233,7 @@ public class BluetoothEnablerTest {
         // Start up with bluetooth turned on. The switch should be left off.
         ArgumentCaptor<BroadcastReceiver> captor = ArgumentCaptor.forClass(BroadcastReceiver.class);
         when(mContext.registerReceiver(captor.capture(), any(IntentFilter.class))).thenReturn(null);
-        when(mBluetoothAdapter.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_OFF);
+        mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_OFF);
         verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
         verify(mSwitchController, never()).setChecked(anyBoolean());

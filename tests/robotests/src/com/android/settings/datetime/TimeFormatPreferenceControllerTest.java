@@ -17,31 +17,28 @@
 package com.android.settings.datetime;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TimeFormatPreferenceControllerTest {
 
-    @Mock(answer = RETURNS_DEEP_STUBS)
-    private PreferenceScreen mScreen;
     @Mock
     private UpdateTimeAndDateCallback mCallback;
 

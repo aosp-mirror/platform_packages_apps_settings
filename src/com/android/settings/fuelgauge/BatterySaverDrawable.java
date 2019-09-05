@@ -37,7 +37,7 @@ public class BatterySaverDrawable extends BatteryMeterDrawableBase {
         setPowerSave(true);
         setCharging(false);
         setPowerSaveAsColorError(false);
-        final int tintColor = Utils.getColorAttr(context, android.R.attr.colorAccent);
+        final int tintColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
         setColorFilter(new PorterDuffColorFilter(tintColor, PorterDuff.Mode.SRC_IN));
     }
 }

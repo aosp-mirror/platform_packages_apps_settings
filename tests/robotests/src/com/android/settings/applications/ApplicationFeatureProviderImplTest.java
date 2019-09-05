@@ -17,6 +17,8 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
@@ -29,21 +31,22 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import com.android.settings.R;
 import com.android.settings.testutils.ApplicationTestUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowDefaultDialerManager;
-import com.android.settings.testutils.shadow.ShadowSmsApplication;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
+import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
@@ -57,7 +60,7 @@ import java.util.Set;
 /**
  * Tests for {@link ApplicationFeatureProviderImpl}.
  */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class ApplicationFeatureProviderImplTest {
 
     private final int MAIN_USER_ID = 0;
@@ -77,11 +80,13 @@ public final class ApplicationFeatureProviderImplTest {
     @Mock
     private Context mContext;
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     @Mock
     private IPackageManager mPackageManagerService;
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
+    @Mock
+    private LocationManager mLocationManager;
 
     private ApplicationFeatureProvider mProvider;
 
@@ -94,6 +99,7 @@ public final class ApplicationFeatureProviderImplTest {
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
 
         mProvider = new ApplicationFeatureProviderImpl(mContext, mPackageManager,
                 mPackageManagerService, mDevicePolicyManager);
@@ -108,8 +114,7 @@ public final class ApplicationFeatureProviderImplTest {
                 .thenReturn(PackageManager.INSTALL_REASON_POLICY);
 
         mAppCount = -1;
-        mProvider.calculateNumberOfPolicyInstalledApps(async,
-                (num) -> mAppCount = num);
+        mProvider.calculateNumberOfPolicyInstalledApps(async, (num) -> mAppCount = num);
         if (async) {
             ShadowApplication.runBackgroundTasks();
         }
@@ -255,17 +260,70 @@ public final class ApplicationFeatureProviderImplTest {
 
     @Test
     @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
-    public void getKeepEnabledPackages_shouldContainDefaultPhoneAndSms() {
+    public void getKeepEnabledPackages_shouldContainDefaultPhoneAndSmsAndLocationHistory() {
         final String testDialer = "com.android.test.defaultdialer";
         final String testSms = "com.android.test.defaultsms";
+        final String testLocationHistory = "com.android.test.location.history";
+
         ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
         ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
-        ReflectionHelpers.setField(mProvider, "mContext", RuntimeEnvironment.application);
+
+        // Spy the real context to mock LocationManager.
+        Context spyContext = spy(RuntimeEnvironment.application);
+        when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(testLocationHistory);
+        when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+
+        ReflectionHelpers.setField(mProvider, "mContext", spyContext);
 
         final Set<String> keepEnabledPackages = mProvider.getKeepEnabledPackages();
 
-        final List<String> expectedPackages = Arrays.asList(testDialer, testSms);
-        assertThat(keepEnabledPackages).containsExactlyElementsIn(expectedPackages);
+        final List<String> expectedPackages = Arrays.asList(testDialer, testSms,
+                testLocationHistory);
+        assertThat(keepEnabledPackages).containsAllIn(expectedPackages);
+    }
+
+    @Test
+    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    public void getKeepEnabledPackages_shouldContainSettingsIntelligence() {
+        final String testDialer = "com.android.test.defaultdialer";
+        final String testSms = "com.android.test.defaultsms";
+        final String testLocationHistory = "com.android.test.location.history";
+
+        ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
+        ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
+
+        // Spy the real context to mock LocationManager.
+        Context spyContext = spy(RuntimeEnvironment.application);
+        when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(testLocationHistory);
+        when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+
+        ReflectionHelpers.setField(mProvider, "mContext", spyContext);
+
+        final Set<String> whitelist = mProvider.getKeepEnabledPackages();
+
+        assertThat(whitelist).contains("com.android.settings.intelligence");
+    }
+
+    @Test
+    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    public void getKeepEnabledPackages_shouldContainPackageInstaller() {
+        final String testDialer = "com.android.test.defaultdialer";
+        final String testSms = "com.android.test.defaultsms";
+        final String testLocationHistory = "com.android.test.location.history";
+
+        ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
+        ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
+
+        // Spy the real context to mock LocationManager.
+        Context spyContext = spy(RuntimeEnvironment.application);
+        when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(testLocationHistory);
+        when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+
+        ReflectionHelpers.setField(mProvider, "mContext", spyContext);
+
+        final Set<String> whitelist = mProvider.getKeepEnabledPackages();
+
+        assertThat(whitelist).contains("com.android.packageinstaller");
     }
 
     private void setUpUsersAndInstalledApps() {

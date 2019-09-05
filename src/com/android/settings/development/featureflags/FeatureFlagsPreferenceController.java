@@ -17,58 +17,50 @@
 package com.android.settings.development.featureflags;
 
 import android.content.Context;
-import androidx.preference.PreferenceScreen;
+import android.os.Build;
 import android.util.FeatureFlagUtils;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import java.util.Map;
 
-public class FeatureFlagsPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnStart {
+public class FeatureFlagsPreferenceController extends BasePreferenceController
+        implements LifecycleObserver, OnStart {
 
-    private PreferenceScreen mScreen;
+    private PreferenceGroup mGroup;
 
-    public FeatureFlagsPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
+    public FeatureFlagsPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return null;
+    public int getAvailabilityStatus() {
+        return Build.IS_DEBUGGABLE ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mScreen = screen;
+        mGroup = screen.findPreference(getPreferenceKey());
     }
 
     @Override
     public void onStart() {
-        if (mScreen == null) {
+        if (mGroup == null) {
             return;
         }
         final Map<String, String> featureMap = FeatureFlagUtils.getAllFeatureFlags();
         if (featureMap == null) {
             return;
         }
-        mScreen.removeAll();
-        final Context prefContext = mScreen.getContext();
-        for (String feature : featureMap.keySet()) {
-            mScreen.addPreference(new FeatureFlagPreference(prefContext, feature));
-        }
+        mGroup.removeAll();
+        final Context prefContext = mGroup.getContext();
+        featureMap.keySet().stream().sorted().forEach(feature ->
+                mGroup.addPreference(new FeatureFlagPreference(prefContext, feature)));
     }
 }

@@ -17,10 +17,11 @@
 package com.android.settings.applications.appinfo;
 
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.ARG_PACKAGE_NAME;
-import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
-        .UNINSTALL_ALL_USERS_MENU;
+import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_ALL_USERS_MENU;
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_UPDATES;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
@@ -41,17 +42,18 @@ import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.ArraySet;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,14 +61,19 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class AppInfoDashboardFragmentTest {
 
     private static final String PACKAGE_NAME = "test_package_name";
@@ -91,10 +98,17 @@ public final class AppInfoDashboardFragmentTest {
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mShadowContext).when(mFragment).getContext();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
+        when(mUserManager.isAdminUser()).thenReturn(true);
 
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         // Default to not considering any apps to be instant (individual tests can override this).
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (i -> false));
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAppUtils.reset();
     }
 
     @Test
@@ -102,7 +116,7 @@ public final class AppInfoDashboardFragmentTest {
         when(mDevicePolicyManager.packageHasActiveAdmins(nullable(String.class))).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
         ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+
         final ApplicationInfo info = new ApplicationInfo();
         info.enabled = true;
         final AppEntry appEntry = mock(AppEntry.class);
@@ -118,7 +132,6 @@ public final class AppInfoDashboardFragmentTest {
         when(mDevicePolicyManager.packageHasActiveAdmins(nullable(String.class))).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
         ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = true;
@@ -184,6 +197,24 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowAppUtils.class)
+    public void ensureDisplayableModule_hiddenModule_shouldReturnFalse() {
+        ShadowAppUtils.addHiddenModule(PACKAGE_NAME);
+        ReflectionHelpers.setField(mFragment, "mPackageName", PACKAGE_NAME);
+
+
+        assertThat(mFragment.ensureDisplayableModule(mActivity)).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowAppUtils.class)
+    public void ensureDisplayableModule_regularApp_shouldReturnTrue() {
+        ReflectionHelpers.setField(mFragment, "mPackageName", PACKAGE_NAME);
+
+        assertThat(mFragment.ensureDisplayableModule(mActivity)).isTrue();
+    }
+
+    @Test
     public void createPreference_hasNoPackageInfo_shouldSkip() {
         ReflectionHelpers.setField(mFragment, "mPackageInfo", null);
 
@@ -227,7 +258,6 @@ public final class AppInfoDashboardFragmentTest {
         final PackageInfo packageInfo = mock(PackageInfo.class);
 
         ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
         assertThat(mFragment.shouldShowUninstallForAll(appEntry)).isFalse();
@@ -237,23 +267,23 @@ public final class AppInfoDashboardFragmentTest {
     public void onActivityResult_uninstalledUpdates_shouldInvalidateOptionsMenu() {
         doReturn(true).when(mFragment).refreshUi();
 
-        mFragment.onActivityResult(mFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
+        mFragment
+                .onActivityResult(AppInfoDashboardFragment.REQUEST_UNINSTALL, 0,
+                        mock(Intent.class));
 
         verify(mActivity).invalidateOptionsMenu();
     }
 
     @Test
-    public void onActivityResult_packageUninstalled_shouldFinishAndRemoveTask() {
-        doReturn(false).when(mFragment).refreshUi();
+    public void getPreferenceControllers_noPackageInfo_shouldReturnNull() {
+        doNothing().when(mFragment).retrieveAppEntry();
 
-        mFragment.onActivityResult(mFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
-
-        verify(mActivity).finishAndRemoveTask();
+        assertThat(mFragment.createPreferenceControllers(mShadowContext)).isNull();
     }
 
     @Test
-    public void getPreferenceControllers_noPackageInfo_shouldReturnNull() {
-        doNothing().when(mFragment).retrieveAppEntry();
+    public void getPreferenceControllers_exiting_shouldReturnNull() {
+        mFragment.mFinishing = true;
 
         assertThat(mFragment.createPreferenceControllers(mShadowContext)).isNull();
     }
@@ -268,7 +298,6 @@ public final class AppInfoDashboardFragmentTest {
         userInfos.add(new UserInfo(userID1, "User1", UserInfo.FLAG_PRIMARY));
         userInfos.add(new UserInfo(userID2, "yue", UserInfo.FLAG_GUEST));
         when(mUserManager.getUsers(true)).thenReturn(userInfos);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         final ApplicationInfo appInfo = new ApplicationInfo();
         appInfo.flags = ApplicationInfo.FLAG_INSTALLED;
         when(mPackageManager.getApplicationInfoAsUser(
@@ -292,7 +321,6 @@ public final class AppInfoDashboardFragmentTest {
         userInfos.add(new UserInfo(userID1, "User1", UserInfo.FLAG_PRIMARY));
         userInfos.add(new UserInfo(userID2, "yue", UserInfo.FLAG_GUEST));
         when(mUserManager.getUsers(true)).thenReturn(userInfos);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         final ApplicationInfo appInfo = new ApplicationInfo();
         appInfo.flags = ApplicationInfo.FLAG_INSTALLED;
         when(mPackageManager.getApplicationInfoAsUser(
@@ -311,7 +339,6 @@ public final class AppInfoDashboardFragmentTest {
         final Context context = mock(Context.class);
         doReturn(context).when(mFragment).getContext();
         ReflectionHelpers.setField(mFragment, "mLifecycle", mock(Lifecycle.class));
-        ReflectionHelpers.setField(mFragment, "mCheckedForLoaderManager", true);
         mFragment.startListeningToPackageRemove();
 
         mFragment.onDestroy();
@@ -355,5 +382,25 @@ public final class AppInfoDashboardFragmentTest {
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
                 .containsKey(ARG_PACKAGE_NAME))
                 .isTrue();
+    }
+
+    @Implements(AppUtils.class)
+    public static class ShadowAppUtils {
+
+        public static Set<String> sHiddenModules = new ArraySet<>();
+
+        @Resetter
+        public static void reset() {
+            sHiddenModules.clear();
+        }
+
+        public static void addHiddenModule(String pkg) {
+            sHiddenModules.add(pkg);
+        }
+
+        @Implementation
+        protected static boolean isHiddenSystemModule(Context context, String packageName) {
+            return sHiddenModules.contains(packageName);
+        }
     }
 }

@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -57,7 +58,7 @@ public class BluetoothPairingPreferenceController extends AbstractPreferenceCont
         if (KEY_PAIRING.equals(preference.getKey())) {
             new SubSettingLauncher(mContext)
                     .setDestination(BluetoothPairingDetail.class.getName())
-                    .setTitle(R.string.bluetooth_pairing_page_title)
+                    .setTitleRes(R.string.bluetooth_pairing_page_title)
                     .setSourceMetricsCategory(mFragment.getMetricsCategory())
                     .launch();
 
@@ -75,7 +76,7 @@ public class BluetoothPairingPreferenceController extends AbstractPreferenceCont
     public Preference createBluetoothPairingPreference(int order) {
         mPreference = new Preference(mFragment.getPreferenceScreen().getContext());
         mPreference.setKey(KEY_PAIRING);
-        mPreference.setIcon(R.drawable.ic_menu_add);
+        mPreference.setIcon(R.drawable.ic_add_24dp);
         mPreference.setOrder(order);
         mPreference.setTitle(R.string.bluetooth_pairing_pref_title);
 

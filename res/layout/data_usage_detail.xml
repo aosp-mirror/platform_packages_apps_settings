@@ -64,14 +64,14 @@
                     android:singleLine="true"
                     android:ellipsize="marquee"
                     android:text="@string/data_usage_label_foreground"
-                    android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textAlignment="viewStart" />
                 <TextView
                     android:id="@+id/app_foreground"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
@@ -87,14 +87,14 @@
                     android:singleLine="true"
                     android:ellipsize="marquee"
                     android:text="@string/data_usage_label_background"
-                    android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textAlignment="viewStart" />
                 <TextView
                     android:id="@+id/app_background"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textAlignment="viewEnd" />
             </LinearLayout>

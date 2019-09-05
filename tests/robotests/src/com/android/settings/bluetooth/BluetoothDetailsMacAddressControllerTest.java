@@ -17,16 +17,13 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowBluetoothDevice.class)
+@RunWith(RobolectricTestRunner.class)
 public class BluetoothDetailsMacAddressControllerTest extends BluetoothDetailsControllerTestBase {
 
   private BluetoothDetailsMacAddressController mController;

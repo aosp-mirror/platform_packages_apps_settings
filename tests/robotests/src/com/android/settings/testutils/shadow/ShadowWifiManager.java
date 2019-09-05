@@ -20,27 +20,64 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.net.wifi.hotspot2.PasspointConfiguration;
 
 import org.robolectric.annotation.HiddenApi;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 
-@Implements(WifiManager.class)
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+@Implements(value = WifiManager.class)
 public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager {
 
+    private List<PasspointConfiguration> mPasspointConfiguration;
+
     public WifiConfiguration savedWifiConfig;
+    private WifiConfiguration mSavedApConfig;
+
+    @Implementation
+    protected WifiConfiguration getWifiApConfiguration() {
+        return mSavedApConfig;
+    }
+
+    @Implementation
+    protected boolean setWifiApConfiguration(WifiConfiguration wifiConfig) {
+        mSavedApConfig = wifiConfig;
+        return true;
+    }
 
     @HiddenApi // @SystemApi
     @Implementation
-    public void connect(WifiConfiguration config, WifiManager.ActionListener listener) {
+    protected void connect(WifiConfiguration config, WifiManager.ActionListener listener) {
         savedWifiConfig = config;
     }
 
     @HiddenApi
     @Implementation
-    public void save(WifiConfiguration config, WifiManager.ActionListener listener) {
+    protected void save(WifiConfiguration config, WifiManager.ActionListener listener) {
         savedWifiConfig = config;
+    }
+
+    @Implementation
+    protected List<PasspointConfiguration> getPasspointConfigurations() {
+        return mPasspointConfiguration == null ? Collections.emptyList() : mPasspointConfiguration;
+    }
+
+    @Implementation
+    protected void addOrUpdatePasspointConfiguration(PasspointConfiguration config) {
+        if (mPasspointConfiguration == null) {
+            mPasspointConfiguration = new ArrayList<>();
+        }
+        mPasspointConfiguration.add(config);
+    }
+
+    @Implementation
+    protected boolean isDualModeSupported() {
+        return false;
     }
 
     public static ShadowWifiManager get() {

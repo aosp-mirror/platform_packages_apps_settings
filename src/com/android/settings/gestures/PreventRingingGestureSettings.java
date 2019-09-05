@@ -16,25 +16,25 @@
 
 package com.android.settings.gestures;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class PreventRingingGestureSettings extends DashboardFragment {
 
     private static final String TAG = "RingingGestureSettings";
-    private static final String KEY_PREVENT_RINGING = "gesture_prevent_ringing";
 
     @Override
     public void onAttach(Context context) {
@@ -42,8 +42,21 @@ public class PreventRingingGestureSettings extends DashboardFragment {
     }
 
     @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getSettingsLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new PreventRingingGesturePreferenceController(context, lifecycle));
+        controllers.add(new PreventRingingSwitchPreferenceController(context));
+        return controllers;
+    }
+
+    @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_PREVENT_RINGING;
+        return SettingsEnums.SETTINGS_PREVENT_RINGING;
     }
 
     @Override
@@ -69,6 +82,12 @@ public class PreventRingingGestureSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.prevent_ringing_gesture_settings;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context, null);
                 }
             };
 

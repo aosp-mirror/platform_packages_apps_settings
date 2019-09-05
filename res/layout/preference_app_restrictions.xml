@@ -39,11 +39,11 @@
             android:orientation="horizontal">
             <ImageView
                 android:id="@android:id/icon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/secondary_app_icon_size"
+                android:layout_height="@dimen/secondary_app_icon_size"
                 android:layout_gravity="center"
-                android:minWidth="48dp"
-                android:scaleType="centerInside"
+                android:minWidth="@dimen/secondary_app_icon_size"
+                android:scaleType="fitCenter"
                 android:layout_marginEnd="@*android:dimen/preference_item_padding_inner"
                  />
         </LinearLayout>
@@ -83,7 +83,7 @@
         android:layout_height="fill_parent"
         android:paddingStart="12dip"
         android:paddingEnd="12dp"
-        android:src="@drawable/ic_settings"
+        android:src="@drawable/ic_settings_accent"
         android:contentDescription="@string/apps_with_restrictions_settings_button"
         android:layout_gravity="center"
         android:clickable="true"

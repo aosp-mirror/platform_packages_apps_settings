@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
@@ -23,7 +24,6 @@ import android.os.storage.VolumeInfo;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -58,7 +58,7 @@ public class StorageWizardFormatSlow extends StorageWizardBase {
     @Override
     public void onNavigateBack(View view) {
         FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
-                MetricsEvent.ACTION_STORAGE_BENCHMARK_SLOW_ABORT);
+                SettingsEnums.ACTION_STORAGE_BENCHMARK_SLOW_ABORT);
 
         final Intent intent = new Intent(this, StorageWizardInit.class);
         startActivity(intent);
@@ -70,11 +70,11 @@ public class StorageWizardFormatSlow extends StorageWizardBase {
         if (view != null) {
             // User made an explicit choice to continue when slow
             FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
-                    MetricsEvent.ACTION_STORAGE_BENCHMARK_SLOW_CONTINUE);
+                    SettingsEnums.ACTION_STORAGE_BENCHMARK_SLOW_CONTINUE);
         } else {
             // User made an implicit choice to continue when fast
             FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
-                    MetricsEvent.ACTION_STORAGE_BENCHMARK_FAST_CONTINUE);
+                    SettingsEnums.ACTION_STORAGE_BENCHMARK_FAST_CONTINUE);
         }
 
         final String forgetUuid = getIntent().getStringExtra(EXTRA_FORMAT_FORGET_UUID);

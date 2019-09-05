@@ -17,4 +17,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/manage_notification_access_title" />
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="notification_access_screen"
+    android:title="@string/manage_notification_access_title"
+    settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessScreenPreferenceController" />

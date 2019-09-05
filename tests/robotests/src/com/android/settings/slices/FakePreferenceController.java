@@ -40,4 +40,9 @@ public class FakePreferenceController extends BasePreferenceController {
     public boolean isSliceable() {
         return true;
     }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
 }

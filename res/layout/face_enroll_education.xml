@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:FaceEnrollAccessibilitySwitch="http://schemas.android.com/apk/res/com.android.settings"
+    style="?attr/face_layout_theme"
+    android:id="@+id/setup_wizard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/SudContentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical">
+
+        <com.google.android.setupdesign.view.RichTextView
+            android:id="@+id/sud_layout_description"
+            style="@style/SudDescription.Glif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/security_settings_face_enroll_education_message"/>
+
+        <Space android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="1"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp">
+
+            <com.google.android.setupdesign.view.IllustrationVideoView
+                android:id="@+id/illustration_normal"
+                style="@style/SudContentIllustration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:sudVideo="@raw/face_education"/>
+
+            <ImageView
+                android:id="@+id/illustration_accessibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                android:background="@drawable/face_enroll_introduction"/>
+
+        </FrameLayout>
+
+        <Space android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="1"/>
+
+        <!-- Contains the buttons and extra information text at the bottom -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal|bottom">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/accessibility_button"
+                    style="@style/SudGlifButton.Secondary"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_settings_face_enroll_introduction_accessibility"/>
+
+                <com.android.settings.biometrics.face.FaceEnrollAccessibilityToggle
+                    android:id="@+id/toggle_diversity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    FaceEnrollAccessibilitySwitch:messageText="@string/security_settings_face_enroll_introduction_accessibility_diversity"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.setupdesign.GlifLayout>

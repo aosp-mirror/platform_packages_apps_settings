@@ -16,32 +16,36 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
+import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.drawer.TileUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -51,8 +55,9 @@ import java.util.Set;
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
  */
 public abstract class DashboardFragment extends SettingsPreferenceFragment
-        implements SettingsDrawerActivity.CategoryListener, Indexable,
-        SummaryLoader.SummaryConsumer {
+        implements SettingsBaseActivity.CategoryListener, Indexable,
+        SummaryLoader.SummaryConsumer, PreferenceGroup.OnExpandButtonClickListener,
+        BasePreferenceController.UiBlockListener {
     private static final String TAG = "DashboardFragment";
 
     private final Map<Class, List<AbstractPreferenceController>> mPreferenceControllers =
@@ -63,10 +68,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private SummaryLoader mSummaryLoader;
+    private List<String> mSuppressInjectedTileKeys;
+    @VisibleForTesting
+    UiBlockerController mBlockerController;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mSuppressInjectedTileKeys = Arrays.asList(context.getResources().getStringArray(
+                R.array.config_suppress_injected_tile_keys));
         mDashboardFeatureProvider = FeatureFactory.getFactory(context).
                 getDashboardFeatureProvider(context);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
@@ -88,7 +98,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         controllers.addAll(uniqueControllerFromXml);
 
         // And wire up with lifecycle.
-        final Lifecycle lifecycle = getLifecycle();
+        final Lifecycle lifecycle = getSettingsLifecycle();
         uniqueControllerFromXml
                 .stream()
                 .filter(controller -> controller instanceof LifecycleObserver)
@@ -100,6 +110,25 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         controllers.add(mPlaceholderPreferenceController);
         for (AbstractPreferenceController controller : controllers) {
             addPreferenceController(controller);
+        }
+
+        checkUiBlocker(controllers);
+    }
+
+    @VisibleForTesting
+    void checkUiBlocker(List<AbstractPreferenceController> controllers) {
+        final List<String> keys = new ArrayList<>();
+        controllers
+                .stream()
+                .filter(controller -> controller instanceof BasePreferenceController.UiBlocker)
+                .forEach(controller -> {
+                    ((BasePreferenceController) controller).setUiBlockListener(this);
+                    keys.add(controller.getPreferenceKey());
+                });
+
+        if (!keys.isEmpty()) {
+            mBlockerController = new UiBlockerController(keys);
+            mBlockerController.start(()->updatePreferenceVisibility(mPreferenceControllers));
         }
     }
 
@@ -144,9 +173,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mSummaryLoader.setListening(true);
         }
         final Activity activity = getActivity();
-        if (activity instanceof SettingsDrawerActivity) {
+        if (activity instanceof SettingsBaseActivity) {
             mListeningToCategoryChange = true;
-            ((SettingsDrawerActivity) activity).addCategoryListener(this);
+            ((SettingsBaseActivity) activity).addCategoryListener(this);
         }
     }
 
@@ -155,12 +184,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
         final Preference pref = getPreferenceScreen().findPreference(key);
         if (pref == null) {
-            Log.d(getLogTag(),
-                    String.format("Can't find pref by key %s, skipping update summary %s/%s",
-                            key, tile.title, tile.summary));
+            Log.d(getLogTag(), String.format(
+                    "Can't find pref by key %s, skipping update summary %s",
+                    key, tile.getDescription()));
             return;
         }
-        pref.setSummary(tile.summary);
+        pref.setSummary(tile.getSummary(pref.getContext()));
     }
 
     @Override
@@ -196,8 +225,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         if (mListeningToCategoryChange) {
             final Activity activity = getActivity();
-            if (activity instanceof SettingsDrawerActivity) {
-                ((SettingsDrawerActivity) activity).remCategoryListener(this);
+            if (activity instanceof SettingsBaseActivity) {
+                ((SettingsBaseActivity) activity).remCategoryListener(this);
             }
             mListeningToCategoryChange = false;
         }
@@ -205,6 +234,17 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     protected abstract int getPreferenceScreenResId();
+
+    @Override
+    public void onExpandButtonClick() {
+        mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND,
+                getMetricsCategory(), null, 0);
+    }
+
+    protected boolean shouldForceRoundedIcon() {
+        return false;
+    }
 
     protected <T extends AbstractPreferenceController> T use(Class<T> clazz) {
         List<AbstractPreferenceController> controllerList = mPreferenceControllers.get(clazz);
@@ -249,25 +289,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Returns true if this tile should be displayed
      */
+    @CallSuper
     protected boolean displayTile(Tile tile) {
+        if (mSuppressInjectedTileKeys != null && tile.hasKey()) {
+            // For suppressing injected tiles for OEMs.
+            return !mSuppressInjectedTileKeys.contains(tile.getKey(getContext()));
+        }
         return true;
-    }
-
-    @VisibleForTesting
-    boolean tintTileIcon(Tile tile) {
-        if (tile.icon == null) {
-            return false;
-        }
-        // First check if the tile has set the icon tintable metadata.
-        final Bundle metadata = tile.metaData;
-        if (metadata != null
-                && metadata.containsKey(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE)) {
-            return metadata.getBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE);
-        }
-        final String pkgName = getContext().getPackageName();
-        // If this drawable is coming from outside Settings, tint it to match the color.
-        return pkgName != null && tile.intent != null
-                && !pkgName.equals(tile.intent.getComponent().getPackageName());
     }
 
     /**
@@ -280,6 +308,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         addPreferencesFromResource(resId);
         final PreferenceScreen screen = getPreferenceScreen();
+        screen.setOnExpandButtonClickListener(this);
         mPreferenceControllers.values().stream().flatMap(Collection::stream).forEach(
                 controller -> controller.displayPreference(screen));
     }
@@ -296,7 +325,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 if (!controller.isAvailable()) {
                     continue;
                 }
+
                 final String key = controller.getPreferenceKey();
+                if (TextUtils.isEmpty(key)) {
+                    Log.d(TAG, String.format("Preference key is %s in Controller %s",
+                            key, controller.getClass().getSimpleName()));
+                    continue;
+                }
 
                 final Preference preference = screen.findPreference(key);
                 if (preference == null) {
@@ -314,22 +349,52 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
      * DashboardCategory.
      */
     private void refreshAllPreferences(final String TAG) {
+        final PreferenceScreen screen = getPreferenceScreen();
         // First remove old preferences.
-        if (getPreferenceScreen() != null) {
+        if (screen != null) {
             // Intentionally do not cache PreferenceScreen because it will be recreated later.
-            getPreferenceScreen().removeAll();
+            screen.removeAll();
         }
 
         // Add resource based tiles.
         displayResourceTiles();
 
         refreshDashboardTiles(TAG);
+
+        final Activity activity = getActivity();
+        if (activity != null) {
+            Log.d(TAG, "All preferences added, reporting fully drawn");
+            activity.reportFullyDrawn();
+        }
+
+        updatePreferenceVisibility(mPreferenceControllers);
+    }
+
+    @VisibleForTesting
+    void updatePreferenceVisibility(
+            Map<Class, List<AbstractPreferenceController>> preferenceControllers) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null || preferenceControllers == null || mBlockerController == null) {
+            return;
+        }
+
+        final boolean visible = mBlockerController.isBlockerFinished();
+        for (List<AbstractPreferenceController> controllerList :
+                preferenceControllers.values()) {
+            for (AbstractPreferenceController controller : controllerList) {
+                final String key = controller.getPreferenceKey();
+                final Preference preference = findPreference(key);
+                if (preference != null) {
+                    preference.setVisible(visible && controller.isAvailable());
+                }
+            }
+        }
     }
 
     /**
      * Refresh preference items backed by DashboardCategory.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void refreshDashboardTiles(final String TAG) {
         final PreferenceScreen screen = getPreferenceScreen();
 
@@ -341,7 +406,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         final List<Tile> tiles = category.getTiles();
         if (tiles == null) {
-            Log.d(TAG, "tile list is empty, skipping category " + category.title);
+            Log.d(TAG, "tile list is empty, skipping category " + category.key);
             return;
         }
         // Create a list to track which tiles are to be removed.
@@ -354,11 +419,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         final Context context = getContext();
         mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
         mSummaryLoader.setSummaryConsumer(this);
-        final TypedArray a = context.obtainStyledAttributes(new int[] {
-                android.R.attr.colorControlNormal});
-        final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
-        a.recycle();
         // Install dashboard tiles.
+        final boolean forceRoundedIcons = shouldForceRoundedIcon();
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {
@@ -368,19 +430,18 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (!displayTile(tile)) {
                 continue;
             }
-            if (tintTileIcon(tile)) {
-                tile.icon.setTint(tintColor);
-            }
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.
                 final Preference preference = screen.findPreference(key);
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), getMetricsCategory(),
-                        preference, tile, key, mPlaceholderPreferenceController.getOrder());
+                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), forceRoundedIcons,
+                        getMetricsCategory(), preference, tile, key,
+                        mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
                 final Preference pref = new Preference(getPrefContext());
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), getMetricsCategory(),
-                        pref, tile, key, mPlaceholderPreferenceController.getOrder());
+                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), forceRoundedIcons,
+                        getMetricsCategory(), pref, tile, key,
+                        mPlaceholderPreferenceController.getOrder());
                 screen.addPreference(pref);
                 mDashboardTilePrefKeys.add(key);
             }
@@ -395,5 +456,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
         }
         mSummaryLoader.setListening(true);
+    }
+
+    @Override
+    public void onBlockerWorkFinished(BasePreferenceController controller) {
+        mBlockerController.countDown(controller.getPreferenceKey());
     }
 }

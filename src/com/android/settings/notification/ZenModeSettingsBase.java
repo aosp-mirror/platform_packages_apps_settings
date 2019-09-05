@@ -26,7 +26,11 @@ import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.util.Log;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 abstract public class ZenModeSettingsBase extends RestrictedDashboardFragment {
     protected static final String TAG = "ZenModeSettings";
@@ -52,9 +56,14 @@ abstract public class ZenModeSettingsBase extends RestrictedDashboardFragment {
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        mContext = getActivity();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
         mBackend = ZenModeBackend.getInstance(mContext);
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         updateZenMode(false /*fireChanged*/);
     }
@@ -115,5 +124,21 @@ abstract public class ZenModeSettingsBase extends RestrictedDashboardFragment {
                 onZenModeConfigChanged();
             }
         }
+    }
+
+    void updatePreference(AbstractPreferenceController controller) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (!controller.isAvailable()) {
+            return;
+        }
+        final String key = controller.getPreferenceKey();
+
+        final Preference preference = screen.findPreference(key);
+        if (preference == null) {
+            Log.d(TAG, String.format("Cannot find preference with key %s in Controller %s",
+                    key, controller.getClass().getSimpleName()));
+            return;
+        }
+        controller.updateState(preference);
     }
 }

@@ -17,15 +17,17 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.graph.UsageView;
+import com.android.settings.widget.UsageView;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on the left for the
@@ -52,7 +54,7 @@ public class BatteryHistoryPreference extends Preference {
         BatteryInfo.getBatteryInfo(getContext(), info -> {
             mBatteryInfo = info;
             notifyChanged();
-        }, batteryStats.getStats(), false);
+        }, batteryStats, false);
     }
 
     public void setBottomSummary(CharSequence text) {

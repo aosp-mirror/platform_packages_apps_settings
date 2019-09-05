@@ -16,15 +16,19 @@
 
 package com.android.settings.dashboard;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -34,13 +38,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SummaryLoaderTest {
 
     private static final String SUMMARY_1 = "summary1";
     private static final String SUMMARY_2 = "summary2";
 
+    private Context mContext;
     private SummaryLoader mSummaryLoader;
     private boolean mCallbackInvoked;
     private Tile mTile;
@@ -49,10 +56,13 @@ public class SummaryLoaderTest {
     @Before
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-
-        mTile = new Tile();
-        mTile.summary = SUMMARY_1;
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "class";
+        mTile = new Tile(activityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mTile.overrideSummary(SUMMARY_1);
         mCallbackInvoked = false;
 
         final Activity activity = Robolectric.buildActivity(Activity.class).get();
@@ -68,14 +78,14 @@ public class SummaryLoaderTest {
 
     @Test
     public void testUpdateSummaryIfNeeded_SummaryIdentical_NoCallback() {
-        mSummaryLoader.updateSummaryIfNeeded(mTile, SUMMARY_1);
+        mSummaryLoader.updateSummaryIfNeeded(mContext, mTile, SUMMARY_1);
 
         assertThat(mCallbackInvoked).isFalse();
     }
 
     @Test
     public void testUpdateSummaryIfNeeded_SummaryChanged_HasCallback() {
-        mSummaryLoader.updateSummaryIfNeeded(mTile, SUMMARY_2);
+        mSummaryLoader.updateSummaryIfNeeded(mContext, mTile, SUMMARY_2);
 
         assertThat(mCallbackInvoked).isTrue();
     }
@@ -83,18 +93,22 @@ public class SummaryLoaderTest {
     @Test
     public void testUpdateSummaryToCache_hasCache_shouldUpdate() {
         final String testSummary = "test_summary";
-        final DashboardCategory category = new DashboardCategory();
-        final Tile tile = new Tile();
-        tile.key = "123";
-        tile.intent = new Intent();
+        final DashboardCategory category = new DashboardCategory(CategoryKey.CATEGORY_HOMEPAGE);
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "cls";
+        activityInfo.metaData = new Bundle();
+        activityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "123");
+        final Tile tile = new Tile(activityInfo, category.key);
+
         category.addTile(tile);
         when(mFeatureFactory.dashboardFeatureProvider.getDashboardKeyForTile(tile))
-                .thenReturn(tile.key);
+                .thenReturn(tile.getKey(RuntimeEnvironment.application));
 
-        mSummaryLoader.updateSummaryIfNeeded(tile, testSummary);
-        tile.summary = null;
+        mSummaryLoader.updateSummaryIfNeeded(mContext, tile, testSummary);
+        tile.overrideSummary(null);
         mSummaryLoader.updateSummaryToCache(category);
 
-        assertThat(tile.summary).isEqualTo(testSummary);
+        assertThat(tile.getSummary(mContext)).isEqualTo(testSummary);
     }
 }

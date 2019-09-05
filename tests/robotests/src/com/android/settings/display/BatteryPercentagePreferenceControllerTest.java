@@ -17,20 +17,22 @@
 package com.android.settings.display;
 
 import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryPercentagePreferenceControllerTest {
+
+    private static final String PREF_KEY = "battery_percentage";
 
     private Context mContext;
     private BatteryPercentagePreferenceController mController;
@@ -38,7 +40,7 @@ public class BatteryPercentagePreferenceControllerTest {
     @Before
     public void setup() {
         mContext = RuntimeEnvironment.application;
-        mController = new BatteryPercentagePreferenceController(mContext);
+        mController = new BatteryPercentagePreferenceController(mContext, PREF_KEY);
     }
 
     private int getPercentageSetting() {

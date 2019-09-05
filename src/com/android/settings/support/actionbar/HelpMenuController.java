@@ -20,10 +20,11 @@ import static com.android.settings.support.actionbar.HelpResourceProvider.HELP_U
 
 import android.annotation.NonNull;
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+
+import androidx.fragment.app.Fragment;
 
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -39,11 +40,11 @@ public class HelpMenuController implements LifecycleObserver, OnCreateOptionsMen
     private final Fragment mHost;
 
     public static void init(@NonNull ObservablePreferenceFragment host) {
-        host.getLifecycle().addObserver(new HelpMenuController(host));
+        host.getSettingsLifecycle().addObserver(new HelpMenuController(host));
     }
 
     public static void init(@NonNull ObservableFragment host) {
-        host.getLifecycle().addObserver(new HelpMenuController(host));
+        host.getSettingsLifecycle().addObserver(new HelpMenuController(host));
     }
 
     private HelpMenuController(@NonNull Fragment host) {

@@ -19,21 +19,21 @@ package com.android.settings.webview;
 import static android.provider.Settings.ACTION_WEBVIEW_SETTINGS;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.webkit.UserPackage;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,21 +114,20 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WEBVIEW_IMPLEMENTATION;
+        return SettingsEnums.WEBVIEW_IMPLEMENTATION;
     }
 
     private static class WebViewAppInfo extends DefaultAppInfo {
-        public WebViewAppInfo(Context context, PackageManagerWrapper pm,
+        public WebViewAppInfo(Context context, PackageManager pm, int userId,
                 PackageItemInfo packageItemInfo, String summary, boolean enabled) {
-            super(context, pm, packageItemInfo, summary, enabled);
+            super(context, pm, userId, packageItemInfo, summary, enabled);
         }
 
         @Override
         public CharSequence loadLabel() {
             String versionName = "";
             try {
-                versionName = mPm.getPackageManager().
-                        getPackageInfo(packageItemInfo.packageName, 0).versionName;
+                versionName = mPm.getPackageInfo(packageItemInfo.packageName, 0).versionName;
             } catch (PackageManager.NameNotFoundException e) {
             }
             return String.format("%s %s", super.loadLabel(), versionName);
@@ -137,9 +136,9 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
 
 
     @VisibleForTesting
-    DefaultAppInfo createDefaultAppInfo(Context context, PackageManagerWrapper pm,
+    DefaultAppInfo createDefaultAppInfo(Context context, PackageManager pm,
             PackageItemInfo packageItemInfo, String disabledReason) {
-        return new WebViewAppInfo(context, pm, packageItemInfo, disabledReason,
+        return new WebViewAppInfo(context, pm, mUserId, packageItemInfo, disabledReason,
                 TextUtils.isEmpty(disabledReason) /* enabled */);
     }
 

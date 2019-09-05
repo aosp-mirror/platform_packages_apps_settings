@@ -16,29 +16,33 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.AlertDialog;
+import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
+
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.ImageView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
-import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 /**
  * BluetoothDevicePreference is the preference type used to display each remote
@@ -57,6 +61,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
     private AlertDialog mDisconnectDialog;
     private String contentDescription = null;
     private boolean mHideSecondTarget = false;
+    @VisibleForTesting
+    boolean mNeedNotifyHierarchyChanged = false;
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
 
@@ -79,8 +85,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         onDeviceAttributesChanged();
     }
 
-    void rebind() {
-        notifyChanged();
+    public void setNeedNotifyHierarchyChanged(boolean needNotifyHierarchyChanged) {
+        mNeedNotifyHierarchyChanged = needNotifyHierarchyChanged;
     }
 
     @Override
@@ -128,8 +134,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         // Null check is done at the framework
         setSummary(mCachedDevice.getConnectionSummary());
 
-        final Pair<Drawable, String> pair = com.android.settingslib.bluetooth.Utils
-                .getBtClassDrawableWithDescription(getContext(), mCachedDevice);
+        final Pair<Drawable, String> pair =
+                BluetoothUtils.getBtRainbowDrawableWithDescription(getContext(), mCachedDevice);
         if (pair.first != null) {
             setIcon(pair.first);
             contentDescription = pair.second;
@@ -143,7 +149,9 @@ public final class BluetoothDevicePreference extends GearPreference implements
         setVisible(mShowDevicesWithoutNames || mCachedDevice.hasHumanReadableName());
 
         // This could affect ordering, so notify that
-        notifyHierarchyChanged();
+        if (mNeedNotifyHierarchyChanged) {
+            notifyHierarchyChanged();
+        }
     }
 
     @Override
@@ -163,6 +171,10 @@ public final class BluetoothDevicePreference extends GearPreference implements
         final ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
         if (imageView != null) {
             imageView.setContentDescription(contentDescription);
+            // Set property to prevent Talkback from reading out.
+            imageView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+            imageView.setElevation(
+                    getContext().getResources().getDimension(R.dimen.bt_icon_elevation));
         }
         super.onBindViewHolder(view);
     }
@@ -201,18 +213,18 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
         if (mCachedDevice.isConnected()) {
             metricsFeatureProvider.action(context,
-                    MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
+                    SettingsEnums.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
             askDisconnect();
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
             metricsFeatureProvider.action(context,
-                    MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
+                    SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT);
             mCachedDevice.connect(true);
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             metricsFeatureProvider.action(context,
-                    MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+                    SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR);
             if (!mCachedDevice.hasHumanReadableName()) {
                 metricsFeatureProvider.action(context,
-                        MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
+                        SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
             }
             pair();
         }
@@ -244,5 +256,4 @@ public final class BluetoothDevicePreference extends GearPreference implements
                     R.string.bluetooth_pairing_error_message);
         }
     }
-
 }

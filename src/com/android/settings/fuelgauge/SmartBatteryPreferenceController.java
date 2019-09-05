@@ -19,9 +19,10 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;

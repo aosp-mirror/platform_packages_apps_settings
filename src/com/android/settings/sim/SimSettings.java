@@ -16,6 +16,7 @@
 
 package com.android.settings.sim;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -23,8 +24,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
@@ -35,17 +34,21 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class SimSettings extends RestrictedSettingsFragment implements Indexable {
     private static final String TAG = "SimSettings";
     private static final boolean DBG = false;
@@ -81,7 +84,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SIM;
+        return SettingsEnums.SIM;
     }
 
     @Override
@@ -98,7 +101,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         mSimCards = (PreferenceScreen)findPreference(SIM_CARD_CATEGORY);
         mAvailableSubInfos = new ArrayList<SubscriptionInfo>(mNumSlots);
         mSelectableSubInfos = new ArrayList<SubscriptionInfo>();
-        SimSelectNotification.cancelNotification(getActivity());
+        SimSelectNotification.cancelSimSelectNotification(getActivity());
     }
 
     private final SubscriptionManager.OnSubscriptionsChangedListener mOnSubscriptionsChangeListener
@@ -111,7 +114,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     };
 
     private void updateSubscriptions() {
-        mSubInfoList = mSubscriptionManager.getActiveSubscriptionInfoList();
+        mSubInfoList = mSubscriptionManager.getActiveSubscriptionInfoList(true);
         for (int i = 0; i < mNumSlots; ++i) {
             Preference pref = mSimCards.findPreference("sim" + i);
             if (pref instanceof SimPreference) {
@@ -217,7 +220,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             Log.d(TAG, "Register for call state change");
             for (int i = 0; i < mPhoneCount; i++) {
                 int subId = mSelectableSubInfos.get(i).getSubscriptionId();
-                tm.listen(getPhoneStateListener(i, subId),
+                tm.createForSubscriptionId(subId).listen(getPhoneStateListener(i),
                         PhoneStateListener.LISTEN_CALL_STATE);
             }
         }
@@ -236,13 +239,13 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         }
     }
 
-    private PhoneStateListener getPhoneStateListener(int phoneId, int subId) {
+    private PhoneStateListener getPhoneStateListener(int phoneId) {
         // Disable Sim selection for Data when voice call is going on as changing the default data
         // sim causes a modem reset currently and call gets disconnected
         // ToDo : Add subtext on disabled preference to let user know that default data sim cannot
         // be changed while call is going on
         final int i = phoneId;
-        mPhoneStateListener[phoneId]  = new PhoneStateListener(subId) {
+        mPhoneStateListener[phoneId]  = new PhoneStateListener() {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
                 if (DBG) log("PhoneStateListener.onCallStateChanged: state=" + state);

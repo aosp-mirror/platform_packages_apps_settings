@@ -34,7 +34,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +43,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DisclaimerItemListAdapterTest {
 
     private static final int ITEM_POSITION = 0;

@@ -16,28 +16,30 @@
 
 package com.android.settings.enterprise;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class EnterprisePrivacySettings extends DashboardFragment {
 
     static final String TAG = "EnterprisePrivacySettings";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ENTERPRISE_PRIVACY_SETTINGS;
+        return SettingsEnums.ENTERPRISE_PRIVACY_SETTINGS;
     }
 
     @Override
@@ -82,7 +84,6 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         exposureChangesCategoryControllers.add(new CaCertsCurrentUserPreferenceController(context));
         exposureChangesCategoryControllers.add(new CaCertsManagedProfilePreferenceController(
                 context));
-        exposureChangesCategoryControllers.add(new BackupsEnabledPreferenceController(context));
         controllers.addAll(exposureChangesCategoryControllers);
         controllers.add(new PreferenceCategoryController(context, "exposure_changes_category")
                 .setChildren(exposureChangesCategoryControllers));

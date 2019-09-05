@@ -19,9 +19,10 @@ package com.android.settings.network;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
+
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class NetworkResetRestrictionChecker {
 
@@ -35,13 +36,13 @@ public class NetworkResetRestrictionChecker {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     boolean hasUserBaseRestriction() {
-        return RestrictedLockUtils.hasBaseUserRestriction(mContext,
+        return RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     boolean isRestrictionEnforcedByAdmin() {
-        return RestrictedLockUtils.checkIfRestrictionEnforced(
+        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId()) != null;
     }
 

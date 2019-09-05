@@ -18,7 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.MagnificationPreferenceFragment.OFF;
 import static com.android.settings.accessibility.MagnificationPreferenceFragment.ON;
-import static com.android.settings.search.ResultPayload.Availability.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -27,23 +27,24 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class MagnificationNavbarPreferenceControllerTest {
 
     private Context mContext;
@@ -84,13 +85,13 @@ public class MagnificationNavbarPreferenceControllerTest {
 
     @Test
     public void updateState_shouldRefreshSummary() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, ON);
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getText(R.string.accessibility_feature_state_on));
 
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, OFF);
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
@@ -108,7 +109,7 @@ public class MagnificationNavbarPreferenceControllerTest {
 
     @Test
     public void isChecked_enabled() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, ON);
 
         assertThat(mController.isChecked()).isTrue();
@@ -116,7 +117,7 @@ public class MagnificationNavbarPreferenceControllerTest {
 
     @Test
     public void isChecked_disabled() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, OFF);
 
         assertThat(mController.isChecked()).isFalse();
@@ -150,7 +151,7 @@ public class MagnificationNavbarPreferenceControllerTest {
         }
 
         @Implementation
-        static boolean isApplicable(Resources res) {
+        protected static boolean isApplicable(Resources res) {
             return sIsApplicable;
         }
 

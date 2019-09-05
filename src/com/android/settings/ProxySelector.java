@@ -17,9 +17,9 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -39,7 +39,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 import com.android.settings.core.InstrumentedFragment;
 
@@ -105,15 +106,15 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
 
     @Override
     public int getDialogMetricsCategory(int dialogId) {
-        return MetricsEvent.DIALOG_PROXY_SELECTOR_ERROR;
+        return SettingsEnums.DIALOG_PROXY_SELECTOR_ERROR;
     }
 
     private void showDialog(int dialogId) {
         if (mDialogFragment != null) {
             Log.e(TAG, "Old dialog fragment not null!");
         }
-        mDialogFragment = new SettingsDialogFragment(this, dialogId);
-        mDialogFragment.show(getActivity().getFragmentManager(), Integer.toString(dialogId));
+        mDialogFragment = SettingsDialogFragment.newInstance(this, dialogId);
+        mDialogFragment.show(getActivity().getSupportFragmentManager(), Integer.toString(dialogId));
     }
 
     private void initView(View view) {
@@ -276,6 +277,6 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.PROXY_SELECTOR;
+        return SettingsEnums.PROXY_SELECTOR;
     }
 }

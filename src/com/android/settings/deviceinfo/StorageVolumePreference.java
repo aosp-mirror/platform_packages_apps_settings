@@ -23,8 +23,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
@@ -32,12 +30,15 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 import com.android.settingslib.Utils;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Preference line representing a single {@link VolumeInfo}, possibly including
@@ -49,16 +50,16 @@ public class StorageVolumePreference extends Preference {
     private final StorageManager mStorageManager;
     private final VolumeInfo mVolume;
 
-    private int mColor;
     private int mUsedPercent = -1;
+    private ColorStateList mColorTintList;
 
     // TODO: ideally, VolumeInfo should have a total physical size.
-    public StorageVolumePreference(Context context, VolumeInfo volume, int color, long totalBytes) {
+    public StorageVolumePreference(Context context, VolumeInfo volume, long totalBytes) {
         super(context);
 
         mStorageManager = context.getSystemService(StorageManager.class);
         mVolume = volume;
-        mColor = color;
+        mColorTintList = Utils.getColorAttr(context, android.R.attr.colorControlNormal);
 
         setLayoutResource(R.layout.storage_volume);
 
@@ -106,8 +107,10 @@ public class StorageVolumePreference extends Preference {
             }
 
             if (freeBytes < mStorageManager.getStorageLowBytes(path)) {
-                mColor = Utils.getColorAttr(context, android.R.attr.colorError);
+                mColorTintList = Utils.getColorAttr(context, android.R.attr.colorError);
                 icon = context.getDrawable(R.drawable.ic_warning_24dp);
+                icon.mutate();
+                icon.setTintList(mColorTintList);
             }
 
         } else {
@@ -115,8 +118,6 @@ public class StorageVolumePreference extends Preference {
             mUsedPercent = -1;
         }
 
-        icon.mutate();
-        icon.setTint(mColor);
         setIcon(icon);
 
         if (volume.getType() == VolumeInfo.TYPE_PUBLIC
@@ -129,7 +130,6 @@ public class StorageVolumePreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder view) {
         final ImageView unmount = (ImageView) view.findViewById(R.id.unmount);
         if (unmount != null) {
-            unmount.setImageTintList(ColorStateList.valueOf(Color.parseColor("#8a000000")));
             unmount.setOnClickListener(mUnmountListener);
         }
 
@@ -137,7 +137,7 @@ public class StorageVolumePreference extends Preference {
         if (mVolume.getType() == VolumeInfo.TYPE_PRIVATE && mUsedPercent != -1) {
             progress.setVisibility(View.VISIBLE);
             progress.setProgress(mUsedPercent);
-            progress.setProgressTintList(ColorStateList.valueOf(mColor));
+            progress.setProgressTintList(mColorTintList);
         } else {
             progress.setVisibility(View.GONE);
         }

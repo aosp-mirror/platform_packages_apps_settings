@@ -132,7 +132,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="#000000" />
+            android:background="?android:attr/listDivider" />
 
         <!-- Preferred Network Type -->
         <TextView
@@ -151,7 +151,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="#000000" />
+            android:background="?android:attr/listDivider" />
 
         <!-- Radio Power -->
         <Switch android:id="@+id/radio_power"
@@ -197,7 +197,29 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="#000000" />
+            android:background="?android:attr/listDivider" />
+
+        <!-- Enable/Disable CBRS data -->
+        <Switch android:id="@+id/cbrs_data_switch"
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cbrs_data_switch_string" />
+
+        <!-- Switch between SSSS(single sim single standby) and DSDS(dual sim dual standby). -->
+        <Switch android:id="@+id/dsds_switch"
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dsds_switch_string" />
+
+        <!-- Horizontal Rule -->
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="?android:attr/listDivider" />
 
         <!-- Ping stats -->
         <Button android:id="@+id/ping_test"
@@ -227,7 +249,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="#000000" />
+            android:background="?android:attr/listDivider" />
 
         <!-- PPP Sent -->
         <LinearLayout style="@style/entry_layout">
@@ -254,7 +276,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="#000000" />
+            android:background="?android:attr/listDivider" />
 
         <!-- Call Status -->
         <LinearLayout style="@style/entry_layout">
@@ -278,7 +300,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="#000000" />
+            android:background="?android:attr/listDivider" />
 
         <!-- CellInfoListRate Selection -->
         <!-- Location -->
@@ -315,7 +337,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="#000000" />
+            android:background="?android:attr/listDivider" />
 
         <!-- Launch OEM-specific Info/Settings Activity (if any) -->
         <!-- Carrier Provisioning -->

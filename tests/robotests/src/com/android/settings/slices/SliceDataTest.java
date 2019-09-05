@@ -20,12 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.net.Uri;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SliceDataTest {
 
     private final String KEY = "KEY";
@@ -39,6 +38,7 @@ public class SliceDataTest {
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
     private final int SLICE_TYPE = SliceData.SliceType.SWITCH;
     private final boolean IS_PLATFORM_DEFINED = true;
+    private final String UNAVAILABLE_SLICE_SUBTITLE = "subtitleOfUnavailableSlice";
 
     @Test
     public void testBuilder_buildsMatchingObject() {
@@ -53,7 +53,8 @@ public class SliceDataTest {
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
                 .setSliceType(SLICE_TYPE)
-                .setPlatformDefined(IS_PLATFORM_DEFINED);
+                .setPlatformDefined(IS_PLATFORM_DEFINED)
+                .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE);
 
         SliceData data = builder.build();
 
@@ -68,6 +69,7 @@ public class SliceDataTest {
         assertThat(data.getPreferenceController()).isEqualTo(PREF_CONTROLLER);
         assertThat(data.getSliceType()).isEqualTo(SLICE_TYPE);
         assertThat(data.isPlatformDefined()).isEqualTo(IS_PLATFORM_DEFINED);
+        assertThat(data.getUnavailableSliceSubtitle()).isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
     }
 
     @Test(expected = SliceData.InvalidSliceDataException.class)

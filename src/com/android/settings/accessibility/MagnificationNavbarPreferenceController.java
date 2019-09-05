@@ -16,8 +16,9 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;

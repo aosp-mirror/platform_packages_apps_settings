@@ -21,15 +21,15 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.preference.SeekBarVolumizer;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.widget.SeekBarPreference;
@@ -40,8 +40,8 @@ import java.util.Objects;
 public class VolumeSeekBarPreference extends SeekBarPreference {
     private static final String TAG = "VolumeSeekBarPreference";
 
+    protected SeekBar mSeekBar;
     private int mStream;
-    private SeekBar mSeekBar;
     private SeekBarVolumizer mVolumizer;
     private Callback mCallback;
     private ImageView mIconView;
@@ -116,7 +116,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         init();
     }
 
-    private void init() {
+    protected void init() {
         if (mSeekBar == null) return;
         final SeekBarVolumizer.Callback sbvc = new SeekBarVolumizer.Callback() {
             @Override
@@ -153,7 +153,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         }
     }
 
-    private void updateIconView() {
+    protected void updateIconView() {
         if (mIconView == null) return;
         if (mIconResId != 0) {
             mIconView.setImageResource(mIconResId);
@@ -190,7 +190,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         updateSuppressionText();
     }
 
-    private void updateSuppressionText() {
+    protected void updateSuppressionText() {
         if (mSuppressionTextView != null && mSeekBar != null) {
             mSuppressionTextView.setText(mSuppressionText);
             final boolean showSuppression = !TextUtils.isEmpty(mSuppressionText);

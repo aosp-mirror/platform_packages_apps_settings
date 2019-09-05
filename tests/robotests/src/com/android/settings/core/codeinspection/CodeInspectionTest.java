@@ -22,12 +22,11 @@ import com.android.settings.core.BasePreferenceControllerSignatureInspector;
 import com.android.settings.core.instrumentation.InstrumentableFragmentCodeInspector;
 import com.android.settings.search.SearchIndexProviderCodeInspector;
 import com.android.settings.slices.SliceControllerInXmlCodeInspector;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ import java.util.List;
  * Test suite that scans all classes in app package, and performs different types of code inspection
  * for conformance.
  */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CodeInspectionTest {
 
     private List<Class<?>> mClasses;
@@ -61,9 +60,13 @@ public class CodeInspectionTest {
         new BasePreferenceControllerSignatureInspector(mClasses).run();
     }
 
-    @Ignore("b/73960706")
     @Test
     public void runSearchIndexProviderCodeInspection() {
         new SearchIndexProviderCodeInspector(mClasses).run();
+    }
+
+    @Test
+    public void runLifecycleObserverInspection() {
+        new LifecycleObserverCodeInspector(mClasses).run();
     }
 }

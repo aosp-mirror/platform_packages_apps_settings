@@ -16,8 +16,9 @@
 
 package com.android.settings.dashboard;
 
-import android.app.Fragment;
 import android.content.Context;
+
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;

@@ -21,9 +21,8 @@ import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_FORGET_UUID;
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_PRIVATE;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,26 +30,28 @@ import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
     private static final String TAG_FORMAT_WARNING = "format_warning";
 
-    public static void showPublic(Activity activity, String diskId) {
+    public static void showPublic(FragmentActivity activity, String diskId) {
         show(activity, diskId, null, false);
     }
 
-    public static void showPublic(Activity activity, String diskId, String forgetUuid) {
+    public static void showPublic(FragmentActivity activity, String diskId, String forgetUuid) {
         show(activity, diskId, forgetUuid, false);
     }
 
-    public static void showPrivate(Activity activity, String diskId) {
+    public static void showPrivate(FragmentActivity activity, String diskId) {
         show(activity, diskId, null, true);
     }
 
-    private static void show(Activity activity, String diskId, String formatForgetUuid,
+    private static void show(FragmentActivity activity, String diskId, String formatForgetUuid,
             boolean formatPrivate) {
         final Bundle args = new Bundle();
         args.putString(EXTRA_DISK_ID, diskId);
@@ -59,12 +60,12 @@ public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
 
         final StorageWizardFormatConfirm fragment = new StorageWizardFormatConfirm();
         fragment.setArguments(args);
-        fragment.showAllowingStateLoss(activity.getFragmentManager(), TAG_FORMAT_WARNING);
+        fragment.show(activity.getSupportFragmentManager(), TAG_FORMAT_WARNING);
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_VOLUME_FORMAT;
+        return SettingsEnums.DIALOG_VOLUME_FORMAT;
     }
 
     @Override

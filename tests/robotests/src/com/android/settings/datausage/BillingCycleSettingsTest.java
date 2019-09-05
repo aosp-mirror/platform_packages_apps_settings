@@ -16,12 +16,17 @@
 package com.android.settings.datausage;
 
 import static android.net.NetworkPolicy.CYCLE_NONE;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyObject;
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -30,35 +35,45 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkPolicyManager;
 import android.os.Bundle;
+
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
-import android.util.FeatureFlagUtils;
 
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.NetworkPolicyEditor;
+import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BillingCycleSettingsTest {
 
     private static final int LIMIT_BYTES = 123;
 
     @Mock
-    BillingCycleSettings mMockBillingCycleSettings;
-    BillingCycleSettings.ConfirmLimitFragment mConfirmLimitFragment;
+    private BillingCycleSettings mMockBillingCycleSettings;
+    private BillingCycleSettings.ConfirmLimitFragment mConfirmLimitFragment;
     @Mock
-    PreferenceManager mMockPreferenceManager;
+    private PreferenceManager mMockPreferenceManager;
     @Mock
     private NetworkPolicyEditor mNetworkPolicyEditor;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
+    @Mock
+    private NetworkPolicyManager mNetworkPolicyManager;
 
     private Context mContext;
     @Mock
@@ -72,7 +87,7 @@ public class BillingCycleSettingsTest {
     @Mock
     private SwitchPreference mEnableDataLimit;
 
-    SharedPreferences mSharedPreferences;
+    private SharedPreferences mSharedPreferences;
 
     @Before
     public void setUp() {
@@ -95,7 +110,8 @@ public class BillingCycleSettingsTest {
     public void testDataUsageLimit_shouldNotBeSetOnCancel() {
         mConfirmLimitFragment.onClick(null, DialogInterface.BUTTON_NEGATIVE);
 
-        assertFalse(mSharedPreferences.getBoolean(BillingCycleSettings.KEY_SET_DATA_LIMIT, true));
+        assertThat(mSharedPreferences.getBoolean(BillingCycleSettings.KEY_SET_DATA_LIMIT, true))
+            .isFalse();
         verify(mMockBillingCycleSettings, never()).setPolicyLimitBytes(anyLong());
     }
 
@@ -103,18 +119,17 @@ public class BillingCycleSettingsTest {
     public void testDataUsageLimit_shouldBeSetOnConfirmation() {
         mConfirmLimitFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
 
-        assertTrue(mSharedPreferences.getBoolean(BillingCycleSettings.KEY_SET_DATA_LIMIT, false));
+        assertThat(mSharedPreferences.getBoolean(BillingCycleSettings.KEY_SET_DATA_LIMIT, false))
+            .isTrue();
         verify(mMockBillingCycleSettings).setPolicyLimitBytes(LIMIT_BYTES);
     }
 
     @Test
-    public void testDataUsageSummary_shouldBeNullWithV2() {
+    public void testDataUsageSummary_shouldBeNull() {
         final BillingCycleSettings billingCycleSettings = spy(new BillingCycleSettings());
         when(billingCycleSettings.getContext()).thenReturn(mContext);
         billingCycleSettings.setUpForTest(mNetworkPolicyEditor, mBillingCycle,
                 mDataLimit, mDataWarning, mEnableDataLimit, mEnableDataWarning);
-
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DATA_USAGE_SETTINGS_V2, true);
 
         doReturn("some-string").when(billingCycleSettings).getString(anyInt(), anyInt());
         when(mNetworkPolicyEditor.getPolicyCycleDay(anyObject())).thenReturn(CYCLE_NONE + 1);
@@ -124,5 +139,32 @@ public class BillingCycleSettingsTest {
         billingCycleSettings.updatePrefs();
 
         verify(mBillingCycle).setSummary(null);
+    }
+
+    @Test
+    public void onCreate_emptyArguments_shouldSetDefaultNetworkTemplate() {
+        final BillingCycleSettings billingCycleSettings = spy(new BillingCycleSettings());
+        when(billingCycleSettings.getContext()).thenReturn(mContext);
+        when(billingCycleSettings.getArguments()).thenReturn(Bundle.EMPTY);
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(billingCycleSettings.getActivity()).thenReturn(activity);
+        final Resources.Theme theme = mContext.getTheme();
+        when(activity.getTheme()).thenReturn(theme);
+        doNothing().when(billingCycleSettings)
+            .onCreatePreferences(any(Bundle.class), nullable(String.class));
+        when(mContext.getSystemService(Context.NETWORK_POLICY_SERVICE))
+            .thenReturn(mNetworkPolicyManager);
+        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
+            .thenReturn(mConnectivityManager);
+        when(mConnectivityManager.isNetworkSupported(anyInt())).thenReturn(true);
+        final SwitchPreference preference = mock(SwitchPreference.class);
+        when(billingCycleSettings.findPreference(anyString())).thenReturn(preference);
+        final FooterPreferenceMixinCompat footer = mock(FooterPreferenceMixinCompat.class);
+        ReflectionHelpers.setField(billingCycleSettings, "mFooterPreferenceMixin", footer);
+        when(footer.createFooterPreference()).thenReturn(mock(FooterPreference.class));
+
+        billingCycleSettings.onCreate(Bundle.EMPTY);
+
+        assertThat(billingCycleSettings.mNetworkTemplate).isNotNull();
     }
 }

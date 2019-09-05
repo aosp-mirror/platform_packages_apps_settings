@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,35 +26,35 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
 import android.provider.SearchIndexableResource;
+import android.text.TextUtils;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
+import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.sound.HandsFreeProfileOutputPreferenceController;
-import com.android.settings.sound.MediaOutputPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settings.widget.UpdatableListPreferenceDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SoundSettings extends DashboardFragment {
+@SearchIndexable
+public class SoundSettings extends DashboardFragment implements OnActivityResultListener {
     private static final String TAG = "SoundSettings";
 
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
     private static final int REQUEST_CODE = 200;
-    private static final String KEY_ZEN_MODE = "zen_mode";
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
     @VisibleForTesting
@@ -75,12 +76,11 @@ public class SoundSettings extends DashboardFragment {
 
     private RingtonePreference mRequestPreference;
     private UpdatableListPreferenceDialogFragment mDialogFragment;
-    private String mMediaOutputControllerKey;
     private String mHfpOutputControllerKey;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SOUND;
+        return SettingsEnums.SOUND;
     }
 
     @Override
@@ -115,7 +115,7 @@ public class SoundSettings extends DashboardFragment {
         if (preference instanceof RingtonePreference) {
             mRequestPreference = (RingtonePreference) preference;
             mRequestPreference.onPrepareRingtonePickerIntent(mRequestPreference.getIntent());
-            startActivityForResultAsUser(
+            getActivity().startActivityForResultAsUser(
                     mRequestPreference.getIntent(),
                     REQUEST_CODE,
                     null,
@@ -129,9 +129,7 @@ public class SoundSettings extends DashboardFragment {
     public void onDisplayPreferenceDialog(Preference preference) {
         final int metricsCategory;
         if (mHfpOutputControllerKey.equals(preference.getKey())) {
-            metricsCategory = MetricsProto.MetricsEvent.DIALOG_SWITCH_HFP_DEVICES;
-        } else if (mMediaOutputControllerKey.equals(preference.getKey())) {
-            metricsCategory = MetricsProto.MetricsEvent.DIALOG_SWITCH_A2DP_DEVICES;
+            metricsCategory = SettingsEnums.DIALOG_SWITCH_HFP_DEVICES;
         } else {
             metricsCategory = Instrumentable.METRICS_CATEGORY_UNKNOWN;
         }
@@ -154,7 +152,7 @@ public class SoundSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, this, getLifecycle());
+        return buildPreferenceControllers(context, this, getSettingsLifecycle());
     }
 
     @Override
@@ -182,18 +180,16 @@ public class SoundSettings extends DashboardFragment {
         volumeControllers.add(use(RingVolumePreferenceController.class));
         volumeControllers.add(use(NotificationVolumePreferenceController.class));
         volumeControllers.add(use(CallVolumePreferenceController.class));
+        volumeControllers.add(use(RemoteVolumePreferenceController.class));
 
-        use(MediaOutputPreferenceController.class).setCallback(listPreference ->
-                onPreferenceDataChanged(listPreference));
-        mMediaOutputControllerKey = use(MediaOutputPreferenceController.class).getPreferenceKey();
         use(HandsFreeProfileOutputPreferenceController.class).setCallback(listPreference ->
-            onPreferenceDataChanged(listPreference));
+                onPreferenceDataChanged(listPreference));
         mHfpOutputControllerKey =
                 use(HandsFreeProfileOutputPreferenceController.class).getPreferenceKey();
 
         for (VolumeSeekBarPreferenceController controller : volumeControllers) {
             controller.setCallback(mVolumeCallback);
-            getLifecycle().addObserver(controller);
+            getSettingsLifecycle().addObserver(controller);
         }
     }
 
@@ -232,7 +228,6 @@ public class SoundSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             SoundSettings fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModePreferenceController(context, lifecycle, KEY_ZEN_MODE));
 
         // Volumes are added via xml
 
@@ -305,15 +300,6 @@ public class SoundSettings extends DashboardFragment {
                         Context context) {
                     return buildPreferenceControllers(context, null /* fragment */,
                             null /* lifecycle */);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Duplicate results
-                    keys.add((new ZenModePreferenceController(context, null, KEY_ZEN_MODE))
-                            .getPreferenceKey());
-                    return keys;
                 }
             };
 

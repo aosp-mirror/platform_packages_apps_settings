@@ -18,32 +18,37 @@ package com.android.settings.slices;
 
 import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
 
+import android.app.PendingIntent;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
-import android.util.ArraySet;
+import android.util.ArrayMap;
 import android.util.KeyValueListParser;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.collection.ArraySet;
+import androidx.slice.Slice;
+import androidx.slice.SliceProvider;
+
+import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.WifiSliceBuilder;
-import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,10 +57,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
-import java.util.concurrent.ConcurrentHashMap;
-
-import androidx.slice.Slice;
-import androidx.slice.SliceProvider;
 
 /**
  * A {@link SliceProvider} for Settings to enabled inline results in system apps.
@@ -101,6 +102,12 @@ public class SettingsSliceProvider extends SliceProvider {
             "com.android.settings.slice.action.SLIDER_CHANGED";
 
     /**
+     * Action passed for copy data for the Copyable Slices.
+     */
+    public static final String ACTION_COPY =
+            "com.android.settings.slice.action.COPY";
+
+    /**
      * Intent Extra passed for the key identifying the Setting Slice.
      */
     public static final String EXTRA_SLICE_KEY = "com.android.settings.slice.extra.key";
@@ -111,51 +118,45 @@ public class SettingsSliceProvider extends SliceProvider {
     public static final String EXTRA_SLICE_PLATFORM_DEFINED =
             "com.android.settings.slice.extra.platform";
 
+    private static final KeyValueListParser KEY_VALUE_LIST_PARSER = new KeyValueListParser(',');
+
     @VisibleForTesting
     SlicesDatabaseAccessor mSlicesDatabaseAccessor;
 
     @VisibleForTesting
     Map<Uri, SliceData> mSliceWeakDataCache;
-    @VisibleForTesting
-    Map<Uri, SliceData> mSliceDataCache;
 
-    private final KeyValueListParser mParser;
-
-    final Set<Uri> mRegisteredUris = new ArraySet<>();
+    final Map<Uri, SliceBackgroundWorker> mPinnedWorkers = new ArrayMap<>();
 
     public SettingsSliceProvider() {
         super(READ_SEARCH_INDEXABLES);
-        mParser = new KeyValueListParser(',');
     }
 
     @Override
     public boolean onCreateSliceProvider() {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
-        mSliceDataCache = new ConcurrentHashMap<>();
         mSliceWeakDataCache = new WeakHashMap<>();
         return true;
     }
 
     @Override
-    public Uri onMapIntentToUri(Intent intent) {
-        try {
-            return getContext().getSystemService(SliceManager.class).mapIntentToUri(
-                    SliceDeepLinkSpringBoard.parse(
-                            intent.getData(), getContext().getPackageName()));
-        } catch (URISyntaxException e) {
-            return null;
-        }
-    }
-
-    @Override
     public void onSlicePinned(Uri sliceUri) {
-        if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
-            registerIntentToUri(WifiSliceBuilder.INTENT_FILTER, sliceUri);
+        if (CustomSliceRegistry.isValidUri(sliceUri)) {
+            final Context context = getContext();
+            final CustomSliceable sliceable = FeatureFactory.getFactory(context)
+                    .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri);
+            final IntentFilter filter = sliceable.getIntentFilter();
+            if (filter != null) {
+                registerIntentToUri(filter, sliceUri);
+            }
+            ThreadUtils.postOnMainThread(() -> startBackgroundWorker(sliceable, sliceUri));
             return;
-        } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
+        }
+
+        if (CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
             registerIntentToUri(ZenModeSliceBuilder.INTENT_FILTER, sliceUri);
             return;
-        } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
+        } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
             registerIntentToUri(BluetoothSliceBuilder.INTENT_FILTER, sliceUri);
             return;
         }
@@ -166,12 +167,8 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSliceUnpinned(Uri sliceUri) {
-        if (mRegisteredUris.contains(sliceUri)) {
-            Log.d(TAG, "Unregistering uri broadcast relay: " + sliceUri);
-            SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
-            mRegisteredUris.remove(sliceUri);
-        }
-        mSliceDataCache.remove(sliceUri);
+        SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
+        ThreadUtils.postOnMainThread(() -> stopBackgroundWorker(sliceUri));
     }
 
     @Override
@@ -190,21 +187,34 @@ public class SettingsSliceProvider extends SliceProvider {
                 return null;
             }
 
-            // If adding a new Slice, do not directly match Slice URIs.
-            // Use {@link SlicesDatabaseAccessor}.
-            if (WifiCallingSliceHelper.WIFI_CALLING_URI.equals(sliceUri)) {
+            // Before adding a slice to {@link CustomSliceManager}, please get approval
+            // from the Settings team.
+            if (CustomSliceRegistry.isValidUri(sliceUri)) {
+                final Context context = getContext();
+                return FeatureFactory.getFactory(context)
+                        .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri)
+                        .getSlice();
+            }
+
+            if (CustomSliceRegistry.WIFI_CALLING_URI.equals(sliceUri)) {
                 return FeatureFactory.getFactory(getContext())
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingSlice(sliceUri);
-            } else if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
-                return WifiSliceBuilder.getSlice(getContext());
-            } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
+            } else if (CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
                 return ZenModeSliceBuilder.getSlice(getContext());
-            } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
+            } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                 return BluetoothSliceBuilder.getSlice(getContext());
-            } else if (LocationSliceBuilder.LOCATION_URI.equals(sliceUri)) {
-                return LocationSliceBuilder.getSlice(getContext());
+            } else if (CustomSliceRegistry.ENHANCED_4G_SLICE_URI.equals(sliceUri)) {
+                return FeatureFactory.getFactory(getContext())
+                        .getSlicesFeatureProvider()
+                        .getNewEnhanced4gLteSliceHelper(getContext())
+                        .createEnhanced4gLteSlice(sliceUri);
+            } else if (CustomSliceRegistry.WIFI_CALLING_PREFERENCE_URI.equals(sliceUri)) {
+                return FeatureFactory.getFactory(getContext())
+                        .getSlicesFeatureProvider()
+                        .getNewWifiCallingSliceHelper(getContext())
+                        .createWifiCallingPreferenceSlice(sliceUri);
             }
 
             SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
@@ -214,7 +224,7 @@ public class SettingsSliceProvider extends SliceProvider {
             }
 
             // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
-            if (!mSliceDataCache.containsKey(sliceUri)) {
+            if (!getPinnedSlices().contains(sliceUri)) {
                 mSliceWeakDataCache.remove(sliceUri);
             }
             return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
@@ -285,7 +295,74 @@ public class SettingsSliceProvider extends SliceProvider {
         final List<String> keys = mSlicesDatabaseAccessor.getSliceKeys(isPlatformUri);
         descendants.addAll(buildUrisFromKeys(keys, authority));
         descendants.addAll(getSpecialCaseUris(isPlatformUri));
+        grantWhitelistedPackagePermissions(getContext(), descendants);
         return descendants;
+    }
+
+    @Nullable
+    @Override
+    public PendingIntent onCreatePermissionRequest(@NonNull Uri sliceUri,
+            @NonNull String callingPackage) {
+        final Intent settingsIntent = new Intent(Settings.ACTION_SETTINGS);
+        final PendingIntent noOpIntent = PendingIntent.getActivity(getContext(),
+                0 /* requestCode */, settingsIntent, 0 /* flags */);
+        return noOpIntent;
+    }
+
+    @VisibleForTesting
+    static void grantWhitelistedPackagePermissions(Context context, List<Uri> descendants) {
+        if (descendants == null) {
+            Log.d(TAG, "No descendants to grant permission with, skipping.");
+        }
+        final String[] whitelistPackages =
+                context.getResources().getStringArray(R.array.slice_whitelist_package_names);
+        if (whitelistPackages == null || whitelistPackages.length == 0) {
+            Log.d(TAG, "No packages to whitelist, skipping.");
+            return;
+        } else {
+            Log.d(TAG, String.format(
+                    "Whitelisting %d uris to %d pkgs.",
+                    descendants.size(), whitelistPackages.length));
+        }
+        final SliceManager sliceManager = context.getSystemService(SliceManager.class);
+        for (Uri descendant : descendants) {
+            for (String toPackage : whitelistPackages) {
+                sliceManager.grantSlicePermission(toPackage, descendant);
+            }
+        }
+    }
+
+    private void startBackgroundWorker(Sliceable sliceable, Uri uri) {
+        final Class workerClass = sliceable.getBackgroundWorkerClass();
+        if (workerClass == null) {
+            return;
+        }
+
+        if (mPinnedWorkers.containsKey(uri)) {
+            return;
+        }
+
+        Log.d(TAG, "Starting background worker for: " + uri);
+        final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(
+                getContext(), sliceable, uri);
+        mPinnedWorkers.put(uri, worker);
+        worker.onSlicePinned();
+    }
+
+    private void stopBackgroundWorker(Uri uri) {
+        final SliceBackgroundWorker worker = mPinnedWorkers.get(uri);
+        if (worker != null) {
+            Log.d(TAG, "Stopping background worker for: " + uri);
+            worker.onSliceUnpinned();
+            mPinnedWorkers.remove(uri);
+        }
+    }
+
+    @Override
+    public void shutdown() {
+        ThreadUtils.postOnMainThread(() -> {
+            SliceBackgroundWorker.shutdown();
+        });
     }
 
     private List<Uri> buildUrisFromKeys(List<String> keys, String authority) {
@@ -313,7 +390,7 @@ public class SettingsSliceProvider extends SliceProvider {
         try {
             sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
         } catch (IllegalStateException e) {
-            Log.e(TAG, "Could not get slice data for uri: " + uri, e);
+            Log.d(TAG, "Could not create slicedata for uri: " + uri, e);
             return;
         }
 
@@ -325,11 +402,8 @@ public class SettingsSliceProvider extends SliceProvider {
             registerIntentToUri(filter, uri);
         }
 
-        final List<Uri> pinnedSlices = getContext().getSystemService(
-                SliceManager.class).getPinnedSlices();
-        if (pinnedSlices.contains(uri)) {
-            mSliceDataCache.put(uri, sliceData);
-        }
+        ThreadUtils.postOnMainThread(() -> startBackgroundWorker(controller, uri));
+
         mSliceWeakDataCache.put(uri, sliceData);
         getContext().getContentResolver().notifyChange(uri, null /* content observer */);
 
@@ -339,9 +413,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     void loadSliceInBackground(Uri uri) {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            loadSlice(uri);
-        });
+        ThreadUtils.postOnBackgroundThread(() -> loadSlice(uri));
     }
 
     /**
@@ -362,15 +434,17 @@ public class SettingsSliceProvider extends SliceProvider {
 
     private List<Uri> getSpecialCasePlatformUris() {
         return Arrays.asList(
-                WifiSliceBuilder.WIFI_URI,
-                BluetoothSliceBuilder.BLUETOOTH_URI,
-                LocationSliceBuilder.LOCATION_URI
+                CustomSliceRegistry.WIFI_SLICE_URI,
+                CustomSliceRegistry.BLUETOOTH_URI,
+                CustomSliceRegistry.LOCATION_SLICE_URI
         );
     }
 
     private List<Uri> getSpecialCaseOemUris() {
         return Arrays.asList(
-                ZenModeSliceBuilder.ZEN_MODE_URI
+                CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
+                CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+                CustomSliceRegistry.ZEN_MODE_SLICE_URI
         );
     }
 
@@ -380,8 +454,6 @@ public class SettingsSliceProvider extends SliceProvider {
      * {@param intentFilter} happen.
      */
     void registerIntentToUri(IntentFilter intentFilter, Uri sliceUri) {
-        Log.d(TAG, "Registering Uri for broadcast relay: " + sliceUri);
-        mRegisteredUris.add(sliceUri);
         SliceBroadcastRelay.registerReceiver(getContext(), sliceUri, SliceRelayReceiver.class,
                 intentFilter);
     }
@@ -393,7 +465,7 @@ public class SettingsSliceProvider extends SliceProvider {
         final Set<String> set = new ArraySet<>();
 
         try {
-            mParser.setString(value);
+            KEY_VALUE_LIST_PARSER.setString(value);
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Bad Settings Slices Whitelist flags", e);
             return set;

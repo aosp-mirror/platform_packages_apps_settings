@@ -16,8 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
-        .REQUEST_MOCK_LOCATION_APP;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_MOCK_LOCATION_APP;
 
 import android.Manifest;
 import android.app.Activity;
@@ -26,13 +25,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class MockLocationAppPreferenceController extends DeveloperOptionsPrefere
 
     private final DevelopmentSettingsDashboardFragment mFragment;
     private final AppOpsManager mAppsOpsManager;
-    private final PackageManagerWrapper mPackageManager;
+    private final PackageManager mPackageManager;
 
     public MockLocationAppPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment) {
@@ -52,7 +51,7 @@ public class MockLocationAppPreferenceController extends DeveloperOptionsPrefere
 
         mFragment = fragment;
         mAppsOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
+        mPackageManager = context.getPackageManager();
     }
 
     @Override

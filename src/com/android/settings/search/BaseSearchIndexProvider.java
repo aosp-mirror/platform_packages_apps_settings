@@ -16,16 +16,20 @@
 
 package com.android.settings.search;
 
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SEARCHABLE;
+import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_INCLUDE_PREF_SCREEN;
+import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_NEED_KEY;
+import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_NEED_SEARCHABLE;
+
 import android.annotation.XmlRes;
 import android.content.Context;
-import android.content.res.XmlResourceParser;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.util.Log;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.VisibleForTesting;
-import android.text.TextUtils;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.util.Xml;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
@@ -33,7 +37,6 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -65,11 +68,12 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     public List<String> getNonIndexableKeys(Context context) {
         if (!isPageSearchEnabled(context)) {
             // Entire page should be suppressed, mark all keys from this page as non-indexable.
-            return getNonIndexableKeysFromXml(context);
+            return getNonIndexableKeysFromXml(context, true /* suppressAllPage */);
         }
+        final List<String> nonIndexableKeys = new ArrayList<>();
+        nonIndexableKeys.addAll(getNonIndexableKeysFromXml(context, false /* suppressAllPage */));
         final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
         if (controllers != null && !controllers.isEmpty()) {
-            final List<String> nonIndexableKeys = new ArrayList<>();
             for (AbstractPreferenceController controller : controllers) {
                 if (controller instanceof PreferenceControllerMixin) {
                     ((PreferenceControllerMixin) controller)
@@ -84,10 +88,8 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
                     nonIndexableKeys.add(controller.getPreferenceKey());
                 }
             }
-            return nonIndexableKeys;
-        } else {
-            return new ArrayList<>();
         }
+        return nonIndexableKeys;
     }
 
     @Override
@@ -130,7 +132,11 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         return true;
     }
 
-    private List<String> getNonIndexableKeysFromXml(Context context) {
+    /**
+     * Get all non-indexable keys from xml. If {@param suppressAllPage} is set, all keys are
+     * considered non-indexable. Otherwise, only keys with searchable="false" are included.
+     */
+    private List<String> getNonIndexableKeysFromXml(Context context, boolean suppressAllPage) {
         final List<SearchIndexableResource> resources = getXmlResourcesToIndex(
                 context, true /* not used*/);
         if (resources == null || resources.isEmpty()) {
@@ -138,27 +144,32 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         }
         final List<String> nonIndexableKeys = new ArrayList<>();
         for (SearchIndexableResource res : resources) {
-            nonIndexableKeys.addAll(getNonIndexableKeysFromXml(context, res.xmlResId));
+            nonIndexableKeys.addAll(
+                    getNonIndexableKeysFromXml(context, res.xmlResId, suppressAllPage));
         }
         return nonIndexableKeys;
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    public List<String> getNonIndexableKeysFromXml(Context context, @XmlRes int xmlResId) {
-        final List<String> nonIndexableKeys = new ArrayList<>();
-        final XmlResourceParser parser = context.getResources().getXml(xmlResId);
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
+    public List<String> getNonIndexableKeysFromXml(Context context, @XmlRes int xmlResId,
+            boolean suppressAllPage) {
+        return getKeysFromXml(context, xmlResId, suppressAllPage);
+    }
+
+    private List<String> getKeysFromXml(Context context, @XmlRes int xmlResId,
+            boolean suppressAllPage) {
+        final List<String> keys = new ArrayList<>();
         try {
-            while (parser.next() != XmlPullParser.END_DOCUMENT) {
-                final String key = PreferenceXmlParserUtils.getDataKey(context, attrs);
-                if (!TextUtils.isEmpty(key)) {
-                    nonIndexableKeys.add(key);
+            final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(context,
+                    xmlResId, FLAG_NEED_KEY | FLAG_INCLUDE_PREF_SCREEN | FLAG_NEED_SEARCHABLE);
+            for (Bundle bundle : metadata) {
+                if (suppressAllPage || !bundle.getBoolean(METADATA_SEARCHABLE, true)) {
+                    keys.add(bundle.getString(METADATA_KEY));
                 }
             }
         } catch (IOException | XmlPullParserException e) {
             Log.w(TAG, "Error parsing non-indexable from xml " + xmlResId);
         }
-        return nonIndexableKeys;
+        return keys;
     }
-
 }

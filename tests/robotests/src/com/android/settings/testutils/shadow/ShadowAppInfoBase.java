@@ -17,6 +17,7 @@
 package com.android.settings.testutils.shadow;
 
 import com.android.settings.applications.AppInfoBase;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
@@ -24,12 +25,12 @@ import org.robolectric.annotation.Implements;
 public class ShadowAppInfoBase {
 
     @Implementation
-    public void onResume() {
+    protected void onResume() {
         // No-op.
     }
 
     @Implementation
-    public void onPause() {
+    protected void onPause() {
         // No-op.
     }
 }

@@ -16,7 +16,7 @@
 
 package com.android.settings.development.gamedriver;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
@@ -70,7 +70,7 @@ public class GameDriverFooterPreferenceControllerTest {
     public void getAvailabilityStatus_gameDriverOff_availableUnsearchable() {
         Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class GameDriverFooterPreferenceControllerTest {
 
     @Test
     public void updateState_available_visible() {
-        when(mController.getAvailabilityStatus()).thenReturn(AVAILABLE);
+        when(mController.getAvailabilityStatus()).thenReturn(AVAILABLE_UNSEARCHABLE);
         mController.updateState(mPreference);
 
         verify(mPreference).setVisible(true);

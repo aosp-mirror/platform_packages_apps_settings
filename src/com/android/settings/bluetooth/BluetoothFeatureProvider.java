@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,18 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothDevice;
+import android.net.Uri;
+
 /**
- * Feature provider for bluetooth feature
+ * Provider for bluetooth related feature
  */
 public interface BluetoothFeatureProvider {
-    /**
-     * @return whether additional pairing page is enabled
-     */
-    boolean isPairingPageEnabled();
 
     /**
-     * @return whether device details should be shown as a separate page (true) or a dialog (false)
+     * Get the {@link Uri} that represents extra settings for a specific bluetooth device
+     * @param bluetoothDevice bluetooth device
+     * @return {@link Uri} for extra settings
      */
-    boolean isDeviceDetailPageEnabled();
+    Uri getBluetoothDeviceSettingsUri(BluetoothDevice bluetoothDevice);
 }

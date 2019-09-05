@@ -19,18 +19,19 @@ import static android.net.ConnectivityManager.PRIVATE_DNS_DEFAULT_MODE_FALLBACK;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
-import static android.system.OsConstants.AF_INET;
-import static android.system.OsConstants.AF_INET6;
 
-import android.app.AlertDialog;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.NetworkUtils;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
@@ -42,21 +43,25 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
-import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.HelpUtils;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
-import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Dialog to set the Private DNS
  */
-public class PrivateDnsModeDialogPreference extends CustomDialogPreference implements
+public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat implements
         DialogInterface.OnClickListener, RadioGroup.OnCheckedChangeListener, TextWatcher {
 
     public static final String ANNOTATION_URL = "url";
@@ -71,8 +76,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_OPPORTUNISTIC, R.id.private_dns_mode_opportunistic);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME, R.id.private_dns_mode_provider);
     }
-
-    private static final int[] ADDRESS_FAMILIES = new int[]{AF_INET, AF_INET6};
 
     @VisibleForTesting
     static final String MODE_KEY = Settings.Global.PRIVATE_DNS_MODE;
@@ -100,19 +103,23 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
 
     public PrivateDnsModeDialogPreference(Context context) {
         super(context);
+        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        initialize();
     }
 
     private final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
@@ -129,6 +136,30 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
             }
         }
     });
+
+    private void initialize() {
+        // Add the "Restricted" icon resource so that if the preference is disabled by the
+        // admin, an information button will be shown.
+        setWidgetLayoutResource(R.layout.restricted_icon);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        if (isDisabledByAdmin()) {
+            // If the preference is disabled by the admin, set the inner item as enabled so
+            // it could act as a click target. The preference itself will have been disabled
+            // by the controller.
+            holder.itemView.setEnabled(true);
+        }
+
+        final View restrictedIcon = holder.findViewById(R.id.restricted_icon);
+        if (restrictedIcon != null) {
+            // Show the "Restricted" icon if, and only if, the preference was disabled by
+            // the admin.
+            restrictedIcon.setVisibility(isDisabledByAdmin() ? View.VISIBLE : View.GONE);
+        }
+    }
 
     @Override
     protected void onBindDialogView(View view) {
@@ -169,23 +200,19 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
             }
 
             FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
-                    MetricsProto.MetricsEvent.ACTION_PRIVATE_DNS_MODE, mMode);
+                    SettingsEnums.ACTION_PRIVATE_DNS_MODE, mMode);
             Settings.Global.putString(context.getContentResolver(), MODE_KEY, mMode);
         }
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId) {
-            case R.id.private_dns_mode_off:
-                mMode = PRIVATE_DNS_MODE_OFF;
-                break;
-            case R.id.private_dns_mode_opportunistic:
-                mMode = PRIVATE_DNS_MODE_OPPORTUNISTIC;
-                break;
-            case R.id.private_dns_mode_provider:
-                mMode = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
-                break;
+        if (checkedId == R.id.private_dns_mode_off) {
+            mMode = PRIVATE_DNS_MODE_OFF;
+        } else if (checkedId == R.id.private_dns_mode_opportunistic) {
+            mMode = PRIVATE_DNS_MODE_OPPORTUNISTIC;
+        } else if (checkedId == R.id.private_dns_mode_provider) {
+            mMode = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
         }
         updateDialogInfo();
     }
@@ -203,21 +230,26 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
         updateDialogInfo();
     }
 
-    private boolean isWeaklyValidatedHostname(String hostname) {
-        // TODO(b/34953048): Use a validation method that permits more accurate,
-        // but still inexpensive, checking of likely valid DNS hostnames.
-        final String WEAK_HOSTNAME_REGEX = "^[a-zA-Z0-9_.-]+$";
-        if (!hostname.matches(WEAK_HOSTNAME_REGEX)) {
-            return false;
-        }
+    @Override
+    public void performClick() {
+        EnforcedAdmin enforcedAdmin = getEnforcedAdmin();
 
-        for (int address_family : ADDRESS_FAMILIES) {
-            if (Os.inet_pton(address_family, hostname) != null) {
-                return false;
-            }
+        if (enforcedAdmin == null) {
+            // If the restriction is not restricted by admin, continue as usual.
+            super.performClick();
+        } else {
+            // Show a dialog explaining to the user why they cannot change the preference.
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), enforcedAdmin);
         }
+    }
 
-        return true;
+    private EnforcedAdmin getEnforcedAdmin() {
+        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                getContext(), UserManager.DISALLOW_CONFIG_PRIVATE_DNS, UserHandle.myUserId());
+    }
+
+    private boolean isDisabledByAdmin() {
+        return getEnforcedAdmin() != null;
     }
 
     private Button getSaveButton() {
@@ -236,7 +268,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
         final Button saveButton = getSaveButton();
         if (saveButton != null) {
             saveButton.setEnabled(modeProvider
-                    ? isWeaklyValidatedHostname(mEditText.getText().toString())
+                    ? NetworkUtils.isWeaklyValidatedHostname(mEditText.getText().toString())
                     : true);
         }
     }

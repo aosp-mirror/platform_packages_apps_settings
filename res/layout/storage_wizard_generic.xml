@@ -14,16 +14,14 @@
      limitations under the License.
 -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:suwFooter="@layout/storage_wizard_footer">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        style="@style/SuwContentFrame"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -32,8 +30,8 @@
             android:id="@+id/storage_wizard_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/suw_description_margin_top"
-            android:lineSpacingExtra="@dimen/suw_description_line_spacing_extra"
+            android:layout_marginTop="@dimen/sud_description_margin_top"
+            android:lineSpacingExtra="@dimen/sud_description_line_spacing_extra"
             android:textColor="?android:attr/textColorPrimary" />
 
         <FrameLayout
@@ -44,4 +42,4 @@
 
     </LinearLayout>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

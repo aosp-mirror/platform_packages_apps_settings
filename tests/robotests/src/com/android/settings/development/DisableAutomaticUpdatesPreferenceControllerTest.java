@@ -17,24 +17,25 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DisableAutomaticUpdatesPreferenceControllerTest {
 
     @Mock
@@ -59,7 +60,7 @@ public class DisableAutomaticUpdatesPreferenceControllerTest {
     public void onPreferenceChanged_turnOnAutomaticUpdates() {
         mController.onPreferenceChange(null, true);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE, -1);
 
         assertThat(mode).isEqualTo(
@@ -70,7 +71,7 @@ public class DisableAutomaticUpdatesPreferenceControllerTest {
     public void onPreferenceChanged_turnOffAutomaticUpdates() {
         mController.onPreferenceChange(null, false);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE, -1);
 
         assertThat(mode).isEqualTo(
@@ -79,7 +80,7 @@ public class DisableAutomaticUpdatesPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
-        Settings.System
+        Settings.Global
                 .putInt(mContext.getContentResolver(), Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE,
                         DisableAutomaticUpdatesPreferenceController.ENABLE_UPDATES_SETTING);
         mController.updateState(mPreference);
@@ -89,14 +90,13 @@ public class DisableAutomaticUpdatesPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
-        Settings.System
+        Settings.Global
                 .putInt(mContext.getContentResolver(), Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE,
                         DisableAutomaticUpdatesPreferenceController.DISABLE_UPDATES_SETTING);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
     }
-
 
     @Test
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {

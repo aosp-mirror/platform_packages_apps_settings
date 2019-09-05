@@ -16,8 +16,9 @@
 
 package com.android.settings;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,15 +28,15 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settingslib.RestrictedLockUtils;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /**
  * Base class for settings screens that should be pin protected when in restricted mode or
@@ -218,10 +219,10 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     }
 
     public EnforcedAdmin getRestrictionEnforcedAdmin() {
-        mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
+        mEnforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(getActivity(),
                 mRestrictionKey, UserHandle.myUserId());
-        if (mEnforcedAdmin != null && mEnforcedAdmin.userId == UserHandle.USER_NULL) {
-            mEnforcedAdmin.userId = UserHandle.myUserId();
+        if (mEnforcedAdmin != null && mEnforcedAdmin.user == null) {
+            mEnforcedAdmin.user = UserHandle.of(UserHandle.myUserId());
         }
         return mEnforcedAdmin;
     }

@@ -16,18 +16,23 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.net.ConnectivityManager.TETHERING_USB;
+
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.hardware.usb.UsbManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import com.google.android.collect.Lists;
 
@@ -39,24 +44,32 @@ import java.util.List;
 public class UsbDefaultFragment extends RadioButtonPickerFragment {
     @VisibleForTesting
     UsbBackend mUsbBackend;
+    @VisibleForTesting
+    ConnectivityManager mConnectivityManager;
+    @VisibleForTesting
+    OnStartTetheringCallback mOnStartTetheringCallback = new OnStartTetheringCallback();
+    @VisibleForTesting
+    long mPreviousFunctions;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mUsbBackend = new UsbBackend(context);
+        mConnectivityManager = context.getSystemService(ConnectivityManager.class);
     }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        FooterPreferenceMixin footer = new FooterPreferenceMixin(this, this.getLifecycle());
+        FooterPreferenceMixinCompat footer = new FooterPreferenceMixinCompat(this,
+                this.getSettingsLifecycle());
         FooterPreference pref = footer.createFooterPreference();
         pref.setTitle(R.string.usb_default_info);
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.USB_DEFAULT;
+        return SettingsEnums.USB_DEFAULT;
     }
 
     @Override
@@ -103,9 +116,37 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
     @Override
     protected boolean setDefaultKey(String key) {
         long functions = UsbBackend.usbFunctionsFromString(key);
+        mPreviousFunctions = mUsbBackend.getCurrentFunctions();
         if (!Utils.isMonkeyRunning()) {
-            mUsbBackend.setDefaultUsbFunctions(functions);
+            if (functions == UsbManager.FUNCTION_RNDIS) {
+                // We need to have entitlement check for usb tethering, so use API in
+                // ConnectivityManager.
+                mConnectivityManager.startTethering(TETHERING_USB, true /* showProvisioningUi */,
+                        mOnStartTetheringCallback);
+            } else {
+                mUsbBackend.setDefaultUsbFunctions(functions);
+            }
+
         }
         return true;
+    }
+
+    @VisibleForTesting
+    final class OnStartTetheringCallback extends
+            ConnectivityManager.OnStartTetheringCallback {
+
+        @Override
+        public void onTetheringStarted() {
+            super.onTetheringStarted();
+            // Set default usb functions again to make internal data persistent
+            mUsbBackend.setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
+        }
+
+        @Override
+        public void onTetheringFailed() {
+            super.onTetheringFailed();
+            mUsbBackend.setDefaultUsbFunctions(mPreviousFunctions);
+            updateCandidates();
+        }
     }
 }

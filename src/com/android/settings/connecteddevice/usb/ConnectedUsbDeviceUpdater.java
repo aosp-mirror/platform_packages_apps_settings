@@ -15,9 +15,13 @@
  */
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SOURCE;
+
 import android.content.Context;
 import android.hardware.usb.UsbManager;
-import android.hardware.usb.UsbPort;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -42,8 +46,8 @@ public class ConnectedUsbDeviceUpdater {
     UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
             (connected, functions, powerRole, dataRole) -> {
                 if (connected) {
-                    mUsbPreference.setSummary(getSummary(mUsbBackend.getCurrentFunctions(),
-                            mUsbBackend.getPowerRole()));
+                    mUsbPreference.setSummary(getSummary(dataRole == DATA_ROLE_DEVICE
+                                    ? functions : UsbManager.FUNCTION_NONE, powerRole));
                     mDevicePreferenceCallback.onDeviceAdded(mUsbPreference);
                 } else {
                     mDevicePreferenceCallback.onDeviceRemoved(mUsbPreference);
@@ -82,7 +86,7 @@ public class ConnectedUsbDeviceUpdater {
             // New version - uses a separate screen.
             new SubSettingLauncher(mFragment.getContext())
                     .setDestination(UsbDetailsFragment.class.getName())
-                    .setTitle(R.string.device_details_title)
+                    .setTitleRes(R.string.device_details_title)
                     .setSourceMetricsCategory(mFragment.getMetricsCategory())
                     .launch();
             return true;
@@ -99,7 +103,7 @@ public class ConnectedUsbDeviceUpdater {
 
     public static int getSummary(long functions, int power) {
         switch (power) {
-            case UsbPort.POWER_ROLE_SINK:
+            case POWER_ROLE_SINK:
                 if (functions == UsbManager.FUNCTION_MTP) {
                     return R.string.usb_summary_file_transfers;
                 } else if (functions == UsbManager.FUNCTION_RNDIS) {
@@ -111,7 +115,7 @@ public class ConnectedUsbDeviceUpdater {
                 } else {
                     return R.string.usb_summary_charging_only;
                 }
-            case UsbPort.POWER_ROLE_SOURCE:
+            case POWER_ROLE_SOURCE:
                 if (functions == UsbManager.FUNCTION_MTP) {
                     return R.string.usb_summary_file_transfers_power;
                 } else if (functions == UsbManager.FUNCTION_RNDIS) {

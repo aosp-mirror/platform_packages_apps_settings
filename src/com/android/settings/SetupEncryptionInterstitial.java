@@ -18,8 +18,6 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.widget.LinearLayout;
 
 /**
  * Setup Wizard's version of EncryptionInterstitial screen. It inherits the logic and basic
@@ -51,13 +49,6 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial {
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return SetupEncryptionInterstitialFragment.class.getName().equals(fragmentName);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstance) {
-        super.onCreate(savedInstance);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
     }
 
     public static class SetupEncryptionInterstitialFragment extends EncryptionInterstitialFragment {

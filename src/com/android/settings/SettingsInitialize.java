@@ -16,6 +16,13 @@
 
 package com.android.settings;
 
+import static android.content.pm.PackageManager.GET_ACTIVITIES;
+import static android.content.pm.PackageManager.GET_META_DATA;
+import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
+import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
+
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -27,18 +34,14 @@ import android.content.pm.ShortcutManager;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.Settings.CreateShortcutActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.pm.PackageManager.GET_ACTIVITIES;
-import static android.content.pm.PackageManager.GET_META_DATA;
-import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
-import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
-
-import com.android.settings.shortcut.CreateShortcut;
 
 /**
  * Listens to {@link Intent.ACTION_PRE_BOOT_COMPLETED} and {@link Intent.ACTION_USER_INITIALIZED}
@@ -50,14 +53,13 @@ public class SettingsInitialize extends BroadcastReceiver {
     private static final String TAG = "Settings";
     private static final String PRIMARY_PROFILE_SETTING =
             "com.android.settings.PRIMARY_PROFILE_CONTROLLED";
-    private static final String SETTINGS_PACKAGE = "com.android.settings";
     private static final String WEBVIEW_IMPLEMENTATION_ACTIVITY = ".WebViewImplementation";
 
     @Override
     public void onReceive(Context context, Intent broadcast) {
         final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
         UserInfo userInfo = um.getUserInfo(UserHandle.myUserId());
-        final PackageManager pm  = context.getPackageManager();
+        final PackageManager pm = context.getPackageManager();
         managedProfileSetup(context, pm, broadcast, userInfo);
         webviewSettingSetup(context, pm, userInfo);
         refreshExistingShortcuts(context);
@@ -90,7 +92,7 @@ public class SettingsInitialize extends BroadcastReceiver {
                         PRIMARY_PROFILE_SETTING);
                 if (shouldForward) {
                     pm.addCrossProfileIntentFilter(info.filter, userInfo.id,
-                        userInfo.profileGroupId, PackageManager.SKIP_CURRENT_PROFILE);
+                            userInfo.profileGroupId, PackageManager.SKIP_CURRENT_PROFILE);
                 }
             }
         }
@@ -100,7 +102,8 @@ public class SettingsInitialize extends BroadcastReceiver {
         pm.setComponentEnabledSetting(settingsComponentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
         // Disable shortcut picker.
-        ComponentName shortcutComponentName = new ComponentName(context, CreateShortcut.class);
+        ComponentName shortcutComponentName = new ComponentName(
+                context, CreateShortcutActivity.class);
         pm.setComponentEnabledSetting(shortcutComponentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
@@ -111,7 +114,8 @@ public class SettingsInitialize extends BroadcastReceiver {
             return;
         }
         ComponentName settingsComponentName =
-            new ComponentName(SETTINGS_PACKAGE, SETTINGS_PACKAGE + WEBVIEW_IMPLEMENTATION_ACTIVITY);
+                new ComponentName(SETTINGS_PACKAGE_NAME,
+                        SETTINGS_PACKAGE_NAME + WEBVIEW_IMPLEMENTATION_ACTIVITY);
         pm.setComponentEnabledSetting(settingsComponentName,
                 userInfo.isAdmin() ?
                         PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
@@ -126,6 +130,9 @@ public class SettingsInitialize extends BroadcastReceiver {
         final List<ShortcutInfo> pinnedShortcuts = shortcutManager.getPinnedShortcuts();
         final List<ShortcutInfo> updates = new ArrayList<>();
         for (ShortcutInfo info : pinnedShortcuts) {
+            if (info.isImmutable()) {
+                continue;
+            }
             final Intent shortcutIntent = info.getIntent();
             shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             final ShortcutInfo updatedInfo = new ShortcutInfo.Builder(context, info.getId())

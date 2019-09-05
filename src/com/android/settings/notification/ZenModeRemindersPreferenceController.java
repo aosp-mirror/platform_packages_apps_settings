@@ -17,13 +17,14 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeRemindersPreferenceController extends AbstractZenModePreferenceController
@@ -70,7 +71,7 @@ public class ZenModeRemindersPreferenceController extends AbstractZenModePrefere
             Log.d(TAG, "onPrefChange allowReminders=" + allowReminders);
         }
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_ZEN_ALLOW_REMINDERS, allowReminders);
+                SettingsEnums.ACTION_ZEN_ALLOW_REMINDERS, allowReminders);
         mBackend.saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS,
                 allowReminders);
         return true;

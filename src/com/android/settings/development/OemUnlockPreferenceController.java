@@ -16,20 +16,21 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
-        .REQUEST_CODE_ENABLE_OEM_UNLOCK;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_ENABLE_OEM_UNLOCK;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
+import android.telephony.TelephonyManager;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -41,6 +42,7 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
         Preference.OnPreferenceChangeListener, PreferenceControllerMixin, OnActivityResultListener {
 
     private static final String PREFERENCE_KEY = "oem_unlock_enable";
+    private static final String TAG = "OemUnlockPreferenceController";
 
     private final OemLockManager mOemLockManager;
     private final UserManager mUserManager;
@@ -52,7 +54,12 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     public OemUnlockPreferenceController(Context context, Activity activity,
             DevelopmentSettingsDashboardFragment fragment) {
         super(context);
-        mOemLockManager = (OemLockManager) context.getSystemService(Context.OEM_LOCK_SERVICE);
+
+        if (Build.IS_EMULATOR && Build.IS_ENG) {
+            mOemLockManager = null;
+        } else {
+            mOemLockManager = (OemLockManager) context.getSystemService(Context.OEM_LOCK_SERVICE);
+        }
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mFragment = fragment;
@@ -77,7 +84,7 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (RestrictedSwitchPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

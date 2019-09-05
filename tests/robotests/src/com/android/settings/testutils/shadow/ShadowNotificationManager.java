@@ -18,24 +18,46 @@ package com.android.settings.testutils.shadow;
 
 import android.app.NotificationManager;
 import android.net.Uri;
+import android.service.notification.ZenModeConfig;
+import android.util.ArraySet;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+
+import java.util.Set;
 
 @Implements(NotificationManager.class)
 public class ShadowNotificationManager {
 
     private int mZenMode;
-
+    private ZenModeConfig mZenModeConfig;
+    private Set<String> mNotificationPolicyGrantedPackages = new ArraySet<>();
 
     @Implementation
-    public void setZenMode(int mode, Uri conditionId, String reason) {
+    protected void setZenMode(int mode, Uri conditionId, String reason) {
         mZenMode = mode;
     }
 
     @Implementation
-    public int getZenMode() {
+    protected int getZenMode() {
         return mZenMode;
     }
-}
 
+    @Implementation
+    protected boolean isNotificationPolicyAccessGrantedForPackage(String pkg) {
+        return mNotificationPolicyGrantedPackages.contains(pkg);
+    }
+
+    @Implementation
+    public ZenModeConfig getZenModeConfig() {
+        return mZenModeConfig;
+    }
+
+    public void setZenModeConfig(ZenModeConfig config) {
+        mZenModeConfig = config;
+    }
+
+    public void setNotificationPolicyAccessGrantedForPackage(String pkg) {
+        mNotificationPolicyGrantedPackages.add(pkg);
+    }
+}

@@ -15,17 +15,14 @@
  */
 package com.android.settings.accessibility;
 
-import static android.content.DialogInterface.BUTTON_POSITIVE;
 import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -37,9 +34,12 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
+import android.view.View;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.accessibility.AccessibilityShortcutController.ToggleableFrameworkFeatureInfo;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -47,7 +47,6 @@ import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.CandidateInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +59,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
+        return SettingsEnums.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
     }
 
     @Override
@@ -132,10 +131,11 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
                 // This is a framework feature. It doesn't need to be confirmed.
                 onRadioButtonConfirmed(selectedKey);
             } else {
-                final Activity activity = getActivity();
+                final FragmentActivity activity = getActivity();
                 if (activity != null) {
                     ConfirmationDialogFragment.newInstance(this, selectedKey)
-                            .show(activity.getFragmentManager(), ConfirmationDialogFragment.TAG);
+                            .show(activity.getSupportFragmentManager(),
+                                    ConfirmationDialogFragment.TAG);
                 }
             }
         }
@@ -146,7 +146,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
     }
 
     public static class ConfirmationDialogFragment extends InstrumentedDialogFragment
-            implements DialogInterface.OnClickListener {
+            implements View.OnClickListener {
         private static final String EXTRA_KEY = "extra_key";
         private static final String TAG = "ConfirmationDialogFragment";
         private IBinder mToken;
@@ -164,7 +164,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
+            return SettingsEnums.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
         }
 
         @Override
@@ -180,13 +180,15 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
         }
 
         @Override
-        public void onClick(DialogInterface dialog, int which) {
+        public void onClick(View view) {
             final Fragment fragment = getTargetFragment();
-            if ((which == BUTTON_POSITIVE) && (fragment instanceof ShortcutServicePickerFragment)) {
+            if ((view.getId() == R.id.permission_enable_allow_button)
+                && (fragment instanceof ShortcutServicePickerFragment)) {
                 final Bundle bundle = getArguments();
                 ((ShortcutServicePickerFragment) fragment).onServiceConfirmed(
                         bundle.getString(EXTRA_KEY));
             }
+            dismiss();
         }
     }
 
@@ -229,10 +231,9 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
 
         @Override
         public CharSequence loadLabel() {
-            final PackageManagerWrapper pmw =
-                    new PackageManagerWrapper(getContext().getPackageManager());
+            final PackageManager pmw = getContext().getPackageManager();
             final CharSequence label =
-                    mServiceInfo.getResolveInfo().serviceInfo.loadLabel(pmw.getPackageManager());
+                    mServiceInfo.getResolveInfo().serviceInfo.loadLabel(pmw);
             if (label != null) {
                 return label;
             }
@@ -242,7 +243,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
                 try {
                     final ApplicationInfo appInfo = pmw.getApplicationInfoAsUser(
                             componentName.getPackageName(), 0, UserHandle.myUserId());
-                    return appInfo.loadLabel(pmw.getPackageManager());
+                    return appInfo.loadLabel(pmw);
                 } catch (PackageManager.NameNotFoundException e) {
                     return null;
                 }
@@ -254,7 +255,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
         public Drawable loadIcon() {
             final ResolveInfo resolveInfo = mServiceInfo.getResolveInfo();
             return (resolveInfo.getIconResource() == 0)
-                    ? getContext().getDrawable(R.mipmap.ic_accessibility_generic)
+                    ? getContext().getDrawable(R.drawable.ic_accessibility_generic)
                     : resolveInfo.loadIcon(getContext().getPackageManager());
         }
 

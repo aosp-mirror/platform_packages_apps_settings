@@ -18,19 +18,20 @@ package com.android.settings.development;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
 
@@ -56,7 +57,8 @@ public class VerifyAppsOverUsbPreferenceController extends DeveloperOptionsPrefe
     class RestrictedLockUtilsDelegate {
         public EnforcedAdmin checkIfRestrictionEnforced(
                 Context context, String userRestriction, int userId) {
-            return RestrictedLockUtils.checkIfRestrictionEnforced(context, userRestriction, userId);
+            return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context, userRestriction,
+                    userId);
         }
     }
 
@@ -65,12 +67,12 @@ public class VerifyAppsOverUsbPreferenceController extends DeveloperOptionsPrefe
             new RestrictedLockUtilsDelegate();
 
     // This field is accessed using reflection in the test, please keep name in sync.
-    private final PackageManagerWrapper mPackageManager;
+    private final PackageManager mPackageManager;
 
     public VerifyAppsOverUsbPreferenceController(Context context) {
         super(context);
 
-        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
+        mPackageManager = context.getPackageManager();
     }
 
     @Override

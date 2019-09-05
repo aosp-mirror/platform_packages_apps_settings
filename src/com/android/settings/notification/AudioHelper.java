@@ -22,6 +22,8 @@ import android.media.AudioManager;
 import android.media.AudioSystem;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
+
 import com.android.settings.Utils;
 
 /**
@@ -29,6 +31,7 @@ import com.android.settings.Utils;
  */
 public class AudioHelper {
 
+    private static final String TAG = "AudioHelper";
     private Context mContext;
     private AudioManager mAudioManager;
 
@@ -72,5 +75,18 @@ public class AudioHelper {
 
     public int getMaxVolume(int stream) {
         return mAudioManager.getStreamMaxVolume(stream);
+    }
+
+    public int getMinVolume(int stream) {
+        int minVolume;
+        try {
+            minVolume = mAudioManager.getStreamMinVolume(stream);
+        } catch (IllegalArgumentException e) {
+            Log.w(TAG, "Invalid stream type " + stream);
+            // Fallback to STREAM_VOICE_CALL because CallVolumePreferenceController.java default
+            // return STREAM_VOICE_CALL in getAudioStream
+            minVolume = mAudioManager.getStreamMinVolume(AudioManager.STREAM_VOICE_CALL);
+        }
+        return minVolume;
     }
 }

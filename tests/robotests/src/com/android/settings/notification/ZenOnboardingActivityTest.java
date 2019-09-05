@@ -41,7 +41,6 @@ import android.provider.Settings;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,18 +49,19 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenOnboardingActivityTest {
 
     @Mock
-    MetricsLogger mMetricsLogger;
+    private MetricsLogger mMetricsLogger;
     @Mock
-    NotificationManager mNm;
+    private NotificationManager mNm;
 
-    ZenOnboardingActivity mActivity;
+    private ZenOnboardingActivity mActivity;
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
@@ -180,16 +180,16 @@ public class ZenOnboardingActivityTest {
         setShowSettingsSuggestion(true);
         setWithinTimeThreshold(true);
         assertThat(isSuggestionComplete(mContext)).isTrue();
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, -1)).isEqualTo(1);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_UPDATED, -1)).isEqualTo(1);
     }
 
 
     private void setZenUpdated(boolean updated) {
         int zenUpdated = updated ? 1 : 0;
 
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, zenUpdated);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_UPDATED, zenUpdated);
     }
 
     private void setWithinTimeThreshold(boolean withinTime) {
@@ -211,8 +211,8 @@ public class ZenOnboardingActivityTest {
             showZenSuggestion = 1;
         }
 
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.SHOW_ZEN_SETTINGS_SUGGESTION, showZenSuggestion);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.SHOW_ZEN_SETTINGS_SUGGESTION, showZenSuggestion);
     }
 
     private SharedPreferences getSharedPreferences() {

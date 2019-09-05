@@ -29,10 +29,11 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.ScheduleCalendar;
 import android.service.notification.ZenModeConfig;
+
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -49,7 +50,7 @@ abstract public class AbstractZenModePreferenceController extends
     @VisibleForTesting
     protected SettingObserver mSettingObserver;
 
-    private final String KEY;
+    final String KEY;
     final private NotificationManager mNotificationManager;
     protected static ZenModeConfigWrapper mZenModeConfigWrapper;
     protected MetricsFeatureProvider mMetricsFeatureProvider;
@@ -116,7 +117,7 @@ abstract public class AbstractZenModePreferenceController extends
     }
 
     protected int getZenDuration() {
-        return Settings.Global.getInt(mContext.getContentResolver(), Settings.Global.ZEN_DURATION,
+        return Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.ZEN_DURATION,
                 0);
     }
 
@@ -124,8 +125,8 @@ abstract public class AbstractZenModePreferenceController extends
         private final Uri ZEN_MODE_URI = Settings.Global.getUriFor(Settings.Global.ZEN_MODE);
         private final Uri ZEN_MODE_CONFIG_ETAG_URI = Settings.Global.getUriFor(
                 Settings.Global.ZEN_MODE_CONFIG_ETAG);
-        private final Uri ZEN_MODE_DURATION_URI = Settings.Global.getUriFor(
-                Settings.Global.ZEN_DURATION);
+        private final Uri ZEN_MODE_DURATION_URI = Settings.Secure.getUriFor(
+                Settings.Secure.ZEN_DURATION);
 
         private final Preference mPreference;
 

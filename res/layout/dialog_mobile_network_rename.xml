@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/sim_content_padding"
+            android:paddingStart="@dimen/sim_content_padding">
+
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/sim_label_padding"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="@string/mobile_network_sim_name_label"/>
+
+            <EditText
+                android:id="@+id/name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:paddingTop="@dimen/sim_label_padding"
+                android:maxLength="50"
+                android:singleLine="true"/>
+
+            <TextView
+                android:id="@+id/color_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/sim_label_padding"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="@string/mobile_network_sim_color_label"/>
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/color_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/sim_color_spinner_padding"
+            android:layout_marginEnd="@dimen/sim_color_spinner_padding"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/sim_content_padding"
+            android:paddingStart="@dimen/sim_content_padding">
+
+            <TextView
+                android:id="@+id/operator_name_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/sim_label_padding"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="@string/status_operator"/>
+
+            <TextView
+                android:id="@+id/operator_name_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/device_info_not_available"/>
+
+            <TextView
+                android:id="@+id/number_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/sim_label_padding"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="@string/status_number_sim_status"/>
+
+            <TextView
+                android:id="@+id/number_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/device_info_not_available"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

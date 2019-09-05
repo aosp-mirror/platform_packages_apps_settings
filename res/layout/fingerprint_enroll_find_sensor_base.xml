@@ -15,14 +15,12 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     style="?attr/fingerprint_layout_theme"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:suwFooter="@layout/fingerprint_enroll_find_sensor_base_footer">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +30,7 @@
         android:clipChildren="false">
 
         <LinearLayout
-            style="@style/SuwContentFrame"
+            style="@style/SudContentFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -40,10 +38,11 @@
             android:clipChildren="false">
 
             <TextView
-                style="@style/SuwDescription.Glif"
+                style="@style/SudDescription.Glif"
+                android:id="@+id/sud_layout_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/suw_description_glif_margin_top"
+                android:layout_marginTop="@dimen/sud_description_glif_margin_top"
                 android:text="@string/security_settings_fingerprint_enroll_find_sensor_message"/>
         </LinearLayout>
 
@@ -59,4 +58,4 @@
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

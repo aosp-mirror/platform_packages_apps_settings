@@ -17,7 +17,9 @@
 package com.android.settings.security.screenlock;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -30,10 +32,9 @@ import android.os.UserManager;
 import android.provider.Settings;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TimeoutListPreference;
+import com.android.settings.display.TimeoutListPreference;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 
 import org.junit.Before;
@@ -41,12 +42,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.Collections;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowDevicePolicyManager.class)
 public class LockAfterTimeoutPreferenceControllerTest {
 

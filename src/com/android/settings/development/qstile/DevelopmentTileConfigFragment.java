@@ -16,16 +16,21 @@
 
 package com.android.settings.development.qstile;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class DevelopmentTileConfigFragment extends DashboardFragment {
     private static final String TAG = "DevelopmentTileConfig";
 
@@ -40,14 +45,26 @@ public class DevelopmentTileConfigFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DevelopmentTilePreferenceController(context));
-        return controllers;
+    public int getMetricsCategory() {
+        return SettingsEnums.DEVELOPMENT_QS_TILE_CONFIG;
     }
 
-    @Override
-    public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEVELOPMENT_QS_TILE_CONFIG;
-    }
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.development_tile_settings;
+                    result.add(sir);
+                    return result;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
+                }
+            };
 }

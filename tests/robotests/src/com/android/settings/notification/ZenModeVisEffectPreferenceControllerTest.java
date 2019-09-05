@@ -21,10 +21,8 @@ import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_LIGHTS;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_NOTIFICATION_LIST;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_PEEK;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
@@ -36,23 +34,24 @@ import static org.mockito.Mockito.when;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.res.Resources;
-import androidx.preference.CheckBoxPreference;
+
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settings.widget.DisabledCheckBoxPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeVisEffectPreferenceControllerTest {
     private ZenModeVisEffectPreferenceController mController;
 
@@ -64,7 +63,8 @@ public class ZenModeVisEffectPreferenceControllerTest {
     private FakeFeatureFactory mFeatureFactory;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock NotificationManager mNotificationManager;
+    @Mock
+    NotificationManager mNotificationManager;
 
     private static final String PREF_KEY = "main_pref";
     private static final int PREF_METRICS = 1;
@@ -75,7 +75,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(
@@ -131,7 +131,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
     public void updateState_checkedFalse_parentChecked() {
         mController = new ZenModeVisEffectPreferenceController(mContext, mock(Lifecycle.class),
                 PREF_KEY, SUPPRESSED_EFFECT_PEEK, PREF_METRICS,
-                new int[] {PARENT_EFFECT1, PARENT_EFFECT2});
+                new int[]{PARENT_EFFECT1, PARENT_EFFECT2});
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mBackend.isVisualEffectSuppressed(SUPPRESSED_EFFECT_PEEK)).thenReturn(false);
         when(mBackend.isVisualEffectSuppressed(PARENT_EFFECT1)).thenReturn(false);
@@ -147,7 +147,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
     public void updateState_checkedFalse_parentNotChecked() {
         mController = new ZenModeVisEffectPreferenceController(mContext, mock(Lifecycle.class),
                 PREF_KEY, SUPPRESSED_EFFECT_PEEK, PREF_METRICS,
-                new int[] {PARENT_EFFECT1, PARENT_EFFECT2});
+                new int[]{PARENT_EFFECT1, PARENT_EFFECT2});
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mBackend.isVisualEffectSuppressed(SUPPRESSED_EFFECT_PEEK)).thenReturn(false);
         when(mBackend.isVisualEffectSuppressed(PARENT_EFFECT1)).thenReturn(false);

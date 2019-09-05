@@ -17,16 +17,15 @@ package com.android.settings.network;
 
 import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.SystemProperties;
-import android.provider.SettingsSlicesContract;
-import androidx.preference.SwitchPreference;
+
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
@@ -82,7 +81,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mAirplaneModePreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
+            mAirplaneModePreference = screen.findPreference(getPreferenceKey());
         }
     }
 
@@ -93,7 +92,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "toggle_airplane");
+        return true;
     }
 
     @Override

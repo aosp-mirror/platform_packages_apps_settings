@@ -15,13 +15,6 @@
 -->
 
 <resources>
-    <color name="black">#000</color>
-    <color name="red">#F00</color>
-    <color name="blue">#00F</color>
-
-    <color name="material_empty_color_light">#FFCED7DB</color>
-
-    <color name="bluetooth_dialog_text_color">#8a000000</color>
 
     <color name="crypt_keeper_clock_background">#ff9a9a9a</color>
     <color name="crypt_keeper_clock_foreground">#ff666666</color>
@@ -30,10 +23,11 @@
 
     <color name="divider_color">#20ffffff</color>
     <color name="title_color">@android:color/holo_blue_light</color>
-    <color name="setup_lock_pattern_view_regular_color_dark">#ffbdbdbd</color>
-    <color name="setup_lock_pattern_view_regular_color_light">@color/lock_pattern_view_regular_color</color>
+    <color name="setup_lock_pattern_view_regular_color_light">
+        @color/lock_pattern_view_regular_color
+    </color>
     <color name="setup_lock_pattern_view_success_color_dark">#ff84ffff</color>
-    <color name="setup_lock_pattern_view_success_color_light">@color/suw_color_accent_light</color>
+    <color name="setup_lock_pattern_view_success_color_light">@color/sud_color_accent_light</color>
     <color name="setup_lock_pattern_view_error_color_dark">#fff44336</color>
     <color name="setup_wizard_wifi_color_dark">#89ffffff</color>
     <color name="setup_wizard_wifi_color_light">#89000000</color>
@@ -52,32 +46,18 @@
     <color name="running_processes_system_ram">#ff384248</color>
     <color name="running_processes_free_ram">#ffced7db</color>
 
-    <color name="wifi_divider">#ffe0e0e0</color>
     <color name="sim_noitification">@*android:color/accent_device_default_light</color>
 
     <color name="confirm_device_credential_transparent_black">#60000000</color>
-    <color name="voice_interaction_highlight">#33b5e5</color>
-
-    <color name="memory_normal">#ff009587</color>
-    <color name="memory_moderate">#ffF3B300</color>
-    <color name="memory_low">#ffff9700</color>
-    <color name="memory_critical">#ffff5621</color>
-
-    <color name="memory_avg_use">#ff384248</color>
 
     <!-- Accent color that matches the settings launcher icon -->
     <color name="icon_accent">#ffabffec</color>
-
-    <color name="importance_icon_tint">#8a000000</color>
-    <color name="importance_disabled_tint">#4d000000</color>
 
     <!-- Accessibility SUW colors -->
     <color name="material_blue_500">#4285F4</color>
     <color name="material_blue_700">#3367D6</color>
     <color name="material_grey_100">#f5f5f5</color>
     <color name="material_grey_200">#ffffff</color>
-    <color name="switch_bar_background">#ff80868B</color>
-
 
     <color name="message_text_incoming">#ffffffff</color>
     <color name="message_text_outgoing">#ff323232</color>
@@ -85,7 +65,6 @@
     <color name="timestamp_text_incoming">#99ffffff</color>
     <color name="message_bubble_incoming">#689f38</color>
     <color name="message_bubble_outgoing">#ffffffff</color>
-    <color name="conversation_background">#eeeeee</color>
     <color name="message_icon_background_incoming">#689f38</color>
     <color name="message_icon_text_incoming">#ffffffff</color>
     <color name="message_icon_background_outgoing">#4285f4</color>
@@ -96,20 +75,11 @@
     <!-- Gestures settings -->
     <color name="gestures_setting_background_color">#ffffff</color>
 
-    <color name="status_bar_color">#3c3c3c</color>
-
     <!-- Color for the background of the shortcut icons.-->
     <color name="shortcut_background">#fff5f5f5</color>
 
-    <!-- Color for preference icons on the Wifi Network Details page -->
-    <color name="wifi_details_icon_color">#8A000000</color>
-
     <!-- The fallback color for tinting icons. Only used when colorControlNormal is unavailable -->
     <color name="fallback_tintColor">#89000000</color>
-
-    <!-- Suggestion/condition colors -->
-    <color name="suggestion_condition_background">#f2f2f2</color>
-    <color name="condition_card_background">#f8f8f8</color>
 
     <!-- Dashboard/homepage icon background colors -->
     <color name="homepage_network_background">#2196F3</color>
@@ -123,10 +93,20 @@
     <color name="homepage_accounts_background">#F15B8D</color>
     <color name="homepage_accessibility_background">#5011C1</color>
     <color name="homepage_system_background">#9E9E9E</color>
-    <color name="homepage_about_background">#9FA8DA</color>
     <color name="homepage_support_background">#26459C</color>
     <color name="homepage_generic_icon_background">#1A73E8</color>
+    <color name="homepage_location_background">#2EC7DC</color>
+    <color name="homepage_about_background">#6F86DA</color>
+    <color name="homepage_privacy_background">#5E97F6</color>
+
+    <color name="contextual_card_stroke_color">#1f000000</color>
+    <color name="contextual_card_dismissal_background">@*android:color/material_grey_100</color>
+    <color name="contextual_card_background">@*android:color/background_device_default_light</color>
     <!-- End of dashboard/homepage icon background colors -->
+
+    <color name="switchbar_background_color">@*android:color/material_grey_600</color>
+    <color name="switchbar_switch_track_tint">#BFFFFFFF</color>
+    <color name="switchbar_switch_thumb_tint">@android:color/white</color>
 
     <color name="glif_error_color">@*android:color/material_red_A700</color>
 
@@ -137,5 +117,34 @@
     <color name="battery_maybe_color_dark">#fdd835</color> <!-- Material Yellow 600 -->
     <color name="battery_bad_color_dark">#f44336</color> <!-- Material Red 500 -->
 
-</resources>
+    <!-- TODO: Figure out colors -->
+    <color name="face_anim_particle_color_1">#ff00bcd4</color> <!-- Material Cyan 500 -->
+    <color name="face_anim_particle_color_2">#ffef6c00</color> <!-- Material Orange 800 -->
+    <color name="face_anim_particle_color_3">#ff4caf50</color> <!-- Material Green 500 -->
+    <color name="face_anim_particle_color_4">#fffdd835</color> <!-- Material Yellow 600 -->
+    <color name="face_anim_particle_error">#ff9e9e9e</color> <!-- Material Gray 500 -->
 
+    <!-- notification settings -->
+    <color name="notification_block_color">#ffff0000</color>
+    <color name="notification_silence_color">#FF32c1de</color>
+    <color name="notification_alert_color">#FFF87B2B</color>
+    <color name="notification_importance_button_unselected">#DADCE0</color>
+    <color name="notification_importance_button_selected">#1967D2</color> <!-- material blue 700 -->
+    <color name="notification_importance_selection_bg">#FFFFFF</color>
+
+    <!-- launcher icon color -->
+    <color name="icon_launcher_setting_color">@*android:color/accent_device_default_light</color>
+
+    <!-- QR code scanner colors -->
+    <color name="qr_corner_line_color">#ffdadce0</color>
+    <color name="qr_focused_corner_line_color">#ff1a73e8</color>
+    <color name="qr_background_color">#b3ffffff</color> <!-- 70% white transparency -->
+    <!-- End of QR code scanner colors -->
+
+    <!-- Search bar background color -->
+    <color name="search_bar_background">@android:color/white</color>
+
+    <!-- Dialog background color -->
+    <color name="dialog_background">@*android:color/background_device_default_light</color>
+
+</resources>

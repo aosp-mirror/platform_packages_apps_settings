@@ -17,8 +17,11 @@
 package com.android.settings.search;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
+
 import static com.google.common.truth.Truth.assertThat;
-import static junit.framework.Assert.fail;
+
+import static org.junit.Assert.fail;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -28,16 +31,16 @@ import android.text.TextUtils;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeIndexProvider;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiSettings;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SearchIndexableResourcesTest {
 
     private SearchFeatureProviderImpl mSearchProvider;
@@ -63,8 +66,7 @@ public class SearchIndexableResourcesTest {
         final int beforeCount =
                 mSearchProvider.getSearchIndexableResources().getProviderValues().size();
 
-        ((SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
-                .addIndex(String.class);
+        mSearchProvider.getSearchIndexableResources().addIndex(String.class);
 
         assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
                 .contains(String.class);
@@ -82,8 +84,7 @@ public class SearchIndexableResourcesTest {
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
         mSearchProvider.getSearchIndexableResources().getProviderValues().clear();
-        ((SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
-                .addIndex(FakeIndexProvider.class);
+        mSearchProvider.getSearchIndexableResources().addIndex(FakeIndexProvider.class);
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
 

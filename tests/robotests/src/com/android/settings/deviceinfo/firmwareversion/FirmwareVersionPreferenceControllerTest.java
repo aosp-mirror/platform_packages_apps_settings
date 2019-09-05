@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,74 +17,54 @@
 package com.android.settings.deviceinfo.firmwareversion;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
+
 import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FirmwareVersionPreferenceControllerTest {
 
-    @Mock
-    private Preference mPreference;
-    @Mock
-    private PreferenceScreen mScreen;
-    @Mock
-    private Fragment mFragment;
+    private static final String KEY = "firmware_version";
 
-    private Context mContext;
+    private Preference mPreference;
+    private PreferenceScreen mScreen;
     private FirmwareVersionPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new FirmwareVersionPreferenceController(mContext, mFragment);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        final Context context = RuntimeEnvironment.application;
+        final PreferenceManager preferenceManager = new PreferenceManager(context);
+        mController = new FirmwareVersionPreferenceController(context, KEY);
+        mPreference = new Preference(context);
+        mPreference.setKey(KEY);
+        mScreen = preferenceManager.createPreferenceScreen(context);
+        mScreen.addPreference(mPreference);
     }
 
     @Test
-    public void displayPreference_shouldSetSummaryToBuildNumber() {
-        mController.displayPreference(mScreen);
-
-        verify(mPreference).setSummary(Build.VERSION.RELEASE);
+    public void firmwareVersion_shouldAlwaysBeShown() {
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    public void handlePreferenceTreeClick_samePreferenceKey_shouldStartDialogFragment() {
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
-        when(mFragment.getChildFragmentManager()).thenReturn(
-                mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
+    public void updatePreference_shouldSetSummaryToBuildNumber() {
+        mController.updateState(mPreference);
 
-        mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mFragment).getChildFragmentManager();
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_unknownPreferenceKey_shouldDoNothingAndReturnFalse() {
-        when(mPreference.getKey()).thenReturn("foobar");
-
-        final boolean result = mController.handlePreferenceTreeClick(mPreference);
-
-        assertThat(result).isFalse();
-        verify(mFragment, never()).getChildFragmentManager();
+        assertThat(mPreference.getSummary()).isEqualTo(Build.VERSION.RELEASE);
     }
 }

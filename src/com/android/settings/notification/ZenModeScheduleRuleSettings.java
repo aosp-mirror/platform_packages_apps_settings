@@ -16,11 +16,10 @@
 
 package com.android.settings.notification;
 
-import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.app.TimePickerDialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -28,15 +27,17 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.TimePicker;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -62,7 +63,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
     private SwitchPreference mExitAtAlarm;
-
+    private AlertDialog mDayDialog;
     private ScheduleInfo mSchedule;
 
     @Override
@@ -184,7 +185,6 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         final int summaryFormat = nextDay ? R.string.zen_mode_end_time_next_day_summary_format : 0;
         mEnd.setSummaryFormat(summaryFormat);
     }
-
     @Override
     protected void updateControlsInternal() {
         updateDays();
@@ -194,36 +194,47 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         updateEndSummary();
     }
 
-
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         mHeader = new ZenAutomaticRuleHeaderPreferenceController(context, this,
-                getLifecycle());
-        mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this, getLifecycle());
-
+                getSettingsLifecycle());
+        mActionButtons = new ZenRuleButtonsPreferenceController(context, this,
+                getSettingsLifecycle());
+        mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this,
+                getSettingsLifecycle());
         controllers.add(mHeader);
+        controllers.add(mActionButtons);
         controllers.add(mSwitch);
         return controllers;
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_SCHEDULE_RULE;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_SCHEDULE_RULE;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDayDialog != null && mDayDialog.isShowing()) {
+            mDayDialog.dismiss();
+            mDayDialog = null;
+        }
     }
 
     private void showDaysDialog() {
-        new AlertDialog.Builder(mContext)
+        mDayDialog = new AlertDialog.Builder(mContext)
                 .setTitle(R.string.zen_mode_schedule_rule_days)
                 .setView(new ZenModeScheduleDaysSelection(mContext, mSchedule.days) {
-                      @Override
-                      protected void onChanged(final int[] days) {
-                          if (mDisableListeners) return;
-                          if (Arrays.equals(days, mSchedule.days)) return;
-                          if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.asList(days));
-                          mSchedule.days = days;
-                          updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
-                      }
+                    @Override
+                    protected void onChanged(final int[] days) {
+                        if (mDisableListeners) return;
+                        if (Arrays.equals(days, mSchedule.days)) return;
+                        if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.asList(days));
+                        mSchedule.days = days;
+                        updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                    }
                 })
                 .setOnDismissListener(new OnDismissListener() {
                     @Override
@@ -247,7 +258,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
             super(context);
             mContext = context;
             setPersistent(false);
-            setOnPreferenceClickListener(new OnPreferenceClickListener(){
+            setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     final TimePickerFragment frag = new TimePickerFragment();
@@ -291,7 +302,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
 
             @Override
             public int getMetricsCategory() {
-                return MetricsEvent.DIALOG_ZEN_TIMEPICKER;
+                return SettingsEnums.DIALOG_ZEN_TIMEPICKER;
             }
 
             @Override

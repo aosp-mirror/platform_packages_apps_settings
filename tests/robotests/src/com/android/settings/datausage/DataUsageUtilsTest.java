@@ -17,39 +17,48 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
+
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
 import android.util.DataUnit;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class DataUsageUtilsTest {
 
     @Mock
     private ConnectivityManager mManager;
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private NetworkStatsManager mNetworkStatsManager;
+
     private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowContext = ShadowApplication.getInstance();
-        mContext = shadowContext.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         shadowContext.setSystemService(Context.CONNECTIVITY_SERVICE, mManager);
         shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
+        shadowContext.setSystemService(Context.NETWORK_STATS_SERVICE, mNetworkStatsManager);
     }
 
     @Test
@@ -86,5 +95,17 @@ public final class DataUsageUtilsTest {
                 mContext, DataUnit.GIBIBYTES.toBytes(1));
 
         assertThat(formattedDataUsage).isEqualTo("1.00 GB");
+    }
+
+    @Test
+    public void hasEthernet_shouldQueryEthernetSummaryForUser() throws Exception {
+        when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
+        final String subscriber = "TestSub";
+        when(mTelephonyManager.getSubscriberId()).thenReturn(subscriber);
+
+        DataUsageUtils.hasEthernet(mContext);
+
+        verify(mNetworkStatsManager).querySummaryForUser(eq(ConnectivityManager.TYPE_ETHERNET),
+                eq(subscriber), anyLong() /* startTime */, anyLong() /* endTime */);
     }
 }

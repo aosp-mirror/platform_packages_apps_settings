@@ -18,10 +18,9 @@ package com.android.settings.utils;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageItemInfo;
@@ -30,18 +29,20 @@ import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.notification.EmptyTextSettings;
 import com.android.settings.widget.AppSwitchPreference;
+import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ServiceListing;
 
 import java.util.List;
@@ -116,11 +117,12 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             CharSequence title = null;
             try {
                 title = mPm.getApplicationInfoAsUser(
-                        service.packageName, 0, getCurrentUser(managedProfileId)).loadLabel(mPm);
+                        service.packageName, 0, UserHandle.myUserId()).loadLabel(mPm);
             } catch (PackageManager.NameNotFoundException e) {
                 // unlikely, as we are iterating over live services.
                 Log.e(TAG, "can't find package name", e);
             }
+            final CharSequence finalTitle = title;
             final String summary = service.loadLabel(mPm).toString();
             final SwitchPreference pref = new AppSwitchPreference(getPrefContext());
             pref.setPersistent(false);
@@ -141,7 +143,11 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             }
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 final boolean enable = (boolean) newValue;
-                return setEnabled(cn, summary, enable);
+                if (finalTitle != null) {
+                    return setEnabled(cn, finalTitle.toString(), enable);
+                } else {
+                    return setEnabled(cn, null, enable);
+                }
             });
             pref.setKey(cn.flattenToString());
             screen.addPreference(pref);
@@ -187,7 +193,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_SERVICE_ACCESS_WARNING;
+            return SettingsEnums.DIALOG_SERVICE_ACCESS_WARNING;
         }
 
         public ScaryWarningDialogFragment setServiceInfo(ComponentName cn, String label,
@@ -234,9 +240,11 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         public final int warningDialogTitle;
         public final int warningDialogSummary;
         public final int emptyText;
+        public final String configIntentAction;
 
-        private Config(String tag, String setting, String intentAction, String permission,
-                String noun, int warningDialogTitle, int warningDialogSummary, int emptyText) {
+        private Config(String tag, String setting, String intentAction, String configIntentAction,
+                String permission, String noun, int warningDialogTitle, int warningDialogSummary,
+                int emptyText) {
             this.tag = tag;
             this.setting = setting;
             this.intentAction = intentAction;
@@ -245,6 +253,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             this.warningDialogTitle = warningDialogTitle;
             this.warningDialogSummary = warningDialogSummary;
             this.emptyText = emptyText;
+            this.configIntentAction = configIntentAction;
         }
 
         public static class Builder{
@@ -256,6 +265,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             private int mWarningDialogTitle;
             private int mWarningDialogSummary;
             private int mEmptyText;
+            private String mConfigIntentAction;
 
             public Builder setTag(String tag) {
                 mTag = tag;
@@ -269,6 +279,11 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
 
             public Builder setIntentAction(String intentAction) {
                 mIntentAction = intentAction;
+                return this;
+            }
+
+            public Builder setConfigurationIntentAction(String action) {
+                mConfigIntentAction = action;
                 return this;
             }
 
@@ -298,8 +313,8 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             }
 
             public Config build() {
-                return new Config(mTag, mSetting, mIntentAction, mPermission, mNoun,
-                        mWarningDialogTitle, mWarningDialogSummary, mEmptyText);
+                return new Config(mTag, mSetting, mIntentAction, mConfigIntentAction, mPermission,
+                        mNoun, mWarningDialogTitle, mWarningDialogSummary, mEmptyText);
             }
         }
     }

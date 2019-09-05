@@ -16,18 +16,19 @@
 
 package com.android.settings.deletionhelper;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -36,6 +37,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,7 @@ import java.util.List;
  * AutomaticStorageManagerSettings is the Settings screen for configuration and management of the
  * automatic storage manager.
  */
+@SearchIndexable
 public class AutomaticStorageManagerSettings extends DashboardFragment
         implements OnPreferenceChangeListener {
     private static final String KEY_DAYS = "days";
@@ -135,7 +138,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.STORAGE_MANAGER_SETTINGS;
+        return SettingsEnums.STORAGE_MANAGER_SETTINGS;
     }
 
     @Override

@@ -38,11 +38,11 @@
             android:text="@*android:string/android_start_title"/>
 
         <ProgressBar
-            android:theme="@style/FallbackHomeProgressBar"
             style="@android:style/Widget.Material.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12.75dp"
+            android:colorControlActivated="?android:attr/textColorPrimary"
             android:indeterminate="true"/>
 
     </LinearLayout>

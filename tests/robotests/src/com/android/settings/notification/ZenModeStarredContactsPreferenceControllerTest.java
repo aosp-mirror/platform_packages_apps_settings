@@ -21,7 +21,8 @@ import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,10 +30,10 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import androidx.preference.ListPreference;
+
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -40,10 +41,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeStarredContactsPreferenceControllerTest {
 
     private ZenModeStarredContactsPreferenceController mCallsController;
@@ -54,7 +60,7 @@ public class ZenModeStarredContactsPreferenceControllerTest {
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private ListPreference mockPref;
+    private Preference mockPref;
     @Mock
     private NotificationManager.Policy mPolicy;
     @Mock
@@ -71,12 +77,13 @@ public class ZenModeStarredContactsPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         when(testIntent.resolveActivity(any())).thenReturn(mComponentName);
 
         mCallsController = new ZenModeStarredContactsPreferenceController(
-                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_CALLS);
+                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_CALLS,
+                "zen_mode_starred_contacts_callers");
         ReflectionHelpers.setField(mCallsController, "mBackend", mBackend);
         ReflectionHelpers.setField(mCallsController, "mStarredContactsIntent", testIntent);
         when(mPreferenceScreen.findPreference(mCallsController.getPreferenceKey()))
@@ -84,7 +91,8 @@ public class ZenModeStarredContactsPreferenceControllerTest {
         mCallsController.displayPreference(mPreferenceScreen);
 
         mMessagesController = new ZenModeStarredContactsPreferenceController(
-                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_MESSAGES);
+                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_MESSAGES,
+                "zen_mode_starred_contacts_messages");
         ReflectionHelpers.setField(mMessagesController, "mBackend", mBackend);
         ReflectionHelpers.setField(mMessagesController, "mStarredContactsIntent", testIntent);
         when(mPreferenceScreen.findPreference(mMessagesController.getPreferenceKey()))
@@ -105,7 +113,6 @@ public class ZenModeStarredContactsPreferenceControllerTest {
                 .thenReturn(true);
         when(mBackend.getPriorityCallSenders())
                 .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_ANY);
-
 
         assertThat(mCallsController.isAvailable()).isFalse();
     }
@@ -145,5 +152,14 @@ public class ZenModeStarredContactsPreferenceControllerTest {
                 .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
 
         assertThat(mMessagesController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void nullPreference_displayPreference() {
+        when(mPreferenceScreen.findPreference(mMessagesController.getPreferenceKey()))
+                .thenReturn(null);
+
+        // should not throw a null pointer
+        mMessagesController.displayPreference(mPreferenceScreen);
     }
 }

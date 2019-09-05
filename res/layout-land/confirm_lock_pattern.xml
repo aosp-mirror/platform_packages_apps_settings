@@ -37,7 +37,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@android:style/TextAppearance.Material.Headline"
+                style="@*android:style/TextAppearance.DeviceDefault.Headline"
                 android:id="@+id/headerText"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
@@ -46,8 +46,8 @@
                 android:textColor="?android:attr/colorAccent"/>
 
             <TextView
-                style="@android:style/TextAppearance.Material.Body1"
-                android:id="@+id/detailsText"
+                style="@*android:style/TextAppearance.DeviceDefault.Body1"
+                android:id="@+id/sud_layout_description"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginTop="12dp"
@@ -87,14 +87,12 @@
 
                 <com.android.internal.widget.LockPatternView
                     android:id="@+id/lockPattern"
-                    android:layout_width="288dp"
-                    android:layout_height="288dp"
-                    android:layout_marginStart="-42dp"
-                    android:layout_marginEnd="-42dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"/>
 
                 <TextView
-                    style="@style/TextAppearance.ConfirmDeviceCredentialsErrorText"
+                    style="@style/TextAppearance.ErrorText"
                     android:accessibilityLiveRegion="polite"
                     android:id="@+id/errorText"
                     android:layout_width="wrap_content"
@@ -108,14 +106,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
-
-            <ImageView
-                android:id="@+id/fingerprintIcon"
-                android:layout_gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
         </LinearLayout>
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>

@@ -231,49 +231,48 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
             bluetoothManager.getCachedDeviceManager();
         CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
         if (cachedDevice == null) {
-            cachedDevice = cachedDeviceManager.addDevice(bluetoothManager.getBluetoothAdapter(),
-                bluetoothManager.getProfileManager(), mDevice);
+            cachedDevice = cachedDeviceManager.addDevice(mDevice);
         }
 
         String intentName = BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY;
 
         if (mRequestType == BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS) {
-            int phonebookPermission = cachedDevice.getPhonebookPermissionChoice();
+            int phonebookPermission = mDevice.getPhonebookAccessPermission();
 
-            if (phonebookPermission == CachedBluetoothDevice.ACCESS_UNKNOWN) {
+            if (phonebookPermission == BluetoothDevice.ACCESS_UNKNOWN) {
                 // Leave 'processed' as false.
-            } else if (phonebookPermission == CachedBluetoothDevice.ACCESS_ALLOWED) {
+            } else if (phonebookPermission == BluetoothDevice.ACCESS_ALLOWED) {
                 sendReplyIntentToReceiver(true);
                 processed = true;
-            } else if (phonebookPermission == CachedBluetoothDevice.ACCESS_REJECTED) {
+            } else if (phonebookPermission == BluetoothDevice.ACCESS_REJECTED) {
                 sendReplyIntentToReceiver(false);
                 processed = true;
             } else {
                 Log.e(TAG, "Bad phonebookPermission: " + phonebookPermission);
             }
         } else if (mRequestType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
-            int messagePermission = cachedDevice.getMessagePermissionChoice();
+            int messagePermission = mDevice.getMessageAccessPermission();
 
-            if (messagePermission == CachedBluetoothDevice.ACCESS_UNKNOWN) {
+            if (messagePermission == BluetoothDevice.ACCESS_UNKNOWN) {
                 // Leave 'processed' as false.
-            } else if (messagePermission == CachedBluetoothDevice.ACCESS_ALLOWED) {
+            } else if (messagePermission == BluetoothDevice.ACCESS_ALLOWED) {
                 sendReplyIntentToReceiver(true);
                 processed = true;
-            } else if (messagePermission == CachedBluetoothDevice.ACCESS_REJECTED) {
+            } else if (messagePermission == BluetoothDevice.ACCESS_REJECTED) {
                 sendReplyIntentToReceiver(false);
                 processed = true;
             } else {
                 Log.e(TAG, "Bad messagePermission: " + messagePermission);
             }
         } else if(mRequestType == BluetoothDevice.REQUEST_TYPE_SIM_ACCESS) {
-            int simPermission = cachedDevice.getSimPermissionChoice();
+            int simPermission = mDevice.getSimAccessPermission();
 
-            if (simPermission == CachedBluetoothDevice.ACCESS_UNKNOWN) {
+            if (simPermission == BluetoothDevice.ACCESS_UNKNOWN) {
                 // Leave 'processed' as false.
-            } else if (simPermission == CachedBluetoothDevice.ACCESS_ALLOWED) {
+            } else if (simPermission == BluetoothDevice.ACCESS_ALLOWED) {
                 sendReplyIntentToReceiver(true);
                 processed = true;
-            } else if (simPermission == CachedBluetoothDevice.ACCESS_REJECTED) {
+            } else if (simPermission == BluetoothDevice.ACCESS_REJECTED) {
                 sendReplyIntentToReceiver(false);
                 processed = true;
             } else {

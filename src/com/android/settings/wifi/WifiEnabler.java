@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,14 +29,14 @@ import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.widget.SwitchWidgetController;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -161,12 +162,12 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
                 mSwitchWidget.setEnabled(true);
         }
 
-        if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
+        if (RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
             mSwitchWidget.setEnabled(false);
         } else {
-            final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
-                UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
+            final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
             mSwitchWidget.setDisabledByAdmin(admin);
         }
     }
@@ -208,10 +209,10 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
         }
 
         if (isChecked) {
-            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_WIFI_ON);
+            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_WIFI_ON);
         } else {
             // Log if user was connected at the time of switching off.
-            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_WIFI_OFF,
+            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_WIFI_OFF,
                     mConnected.get());
         }
         if (!mWifiManager.setWifiEnabled(isChecked)) {

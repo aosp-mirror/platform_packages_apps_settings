@@ -1,24 +1,77 @@
-//############################################
-// Settings Robolectric test target.         #
-//############################################
+//############################################################
+// Build SettingsRoboTestStub.apk which includes test-only resources.#
+//############################################################
 
+android_app {
+    name: "SettingsRoboTestStub",
+    defaults: [
+        "SettingsLibDefaults",
+        "SettingsLib-search-defaults",
+    ],
+    platform_apis: true,
+    certificate: "platform",
+    privileged: true,
+
+    resource_dirs: ["res"],
+
+    static_libs: [
+        "Settings-core",
+        "androidx-constraintlayout_constraintlayout",
+        "androidx.slice_slice-builders",
+        "androidx.slice_slice-core",
+        "androidx.slice_slice-view",
+        "androidx.core_core",
+        "androidx.appcompat_appcompat",
+        "androidx.cardview_cardview",
+        "androidx.preference_preference",
+        "androidx.recyclerview_recyclerview",
+        "com.google.android.material_material",
+        "setupcompat",
+        "setupdesign",
+        "androidx-constraintlayout_constraintlayout-solver",
+        "androidx.lifecycle_lifecycle-runtime",
+        "androidx.lifecycle_lifecycle-extensions",
+        "guava",
+        "jsr305",
+        "settings-contextual-card-protos-lite",
+        "settings-log-bridge-protos-lite",
+        "contextualcards",
+        "settings-logtags",
+        "zxing-core-1.7",
+    ],
+
+    aaptflags: ["--extra-packages com.android.settings"],
+
+    libs: [
+        "telephony-common",
+        "ims-common",
+    ],
+}
+
+//############################################################
+// Settings Robolectric test target.                         #
+//############################################################
 android_robolectric_test {
     name: "SettingsRoboTests",
+    srcs: [
+        "src/**/*.java",
+    ],
 
-    srcs: ["src/**/*.java"],
+    static_libs: [
+        "SettingsLib-robo-testutils",
+    ],
 
     java_resource_dirs: ["config"],
 
-    libs: [
-        "robolectric_android-all-stub",
-        "Robolectric_all-target",
-        "mockito-robolectric-prebuilt",
-        "truth-prebuilt",
-    ],
-
-    instrumentation_for: "Settings",
+    instrumentation_for: "SettingsRoboTestStub",
 
     test_options: {
         timeout: 36000,
     },
+
+    coverage_libs: [
+        "Settings-core",
+        "SettingsLib",
+        "SettingsLib-search",
+    ],
 }

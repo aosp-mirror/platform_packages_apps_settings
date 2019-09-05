@@ -16,15 +16,16 @@
 
 package com.android.settings.location;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,12 +34,13 @@ import java.util.List;
 /**
  * A page that configures the background scanning settings for Wi-Fi and Bluetooth.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ScanningSettings extends DashboardFragment {
     private static final String TAG = "ScanningSettings";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.LOCATION_SCANNING;
+        return SettingsEnums.LOCATION_SCANNING;
     }
 
     @Override

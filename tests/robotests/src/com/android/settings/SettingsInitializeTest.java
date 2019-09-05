@@ -21,24 +21,25 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowShortcutManager;
-import java.util.ArrayList;
-import java.util.List;
+
+import android.content.pm.ShortcutManager;
+
+import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowShortcutManager.class})
+import java.util.List;
+
+@RunWith(RobolectricTestRunner.class)
 public class SettingsInitializeTest {
 
     private Context mContext;
     private SettingsInitialize mSettingsInitialize;
+    private ShortcutManager mShortcutManager;
 
     @Before
     public void setUp() {
@@ -46,6 +47,7 @@ public class SettingsInitializeTest {
 
         mContext = RuntimeEnvironment.application;
         mSettingsInitialize = new SettingsInitialize();
+        mShortcutManager = (ShortcutManager) mContext.getSystemService(Context.SHORTCUT_SERVICE);
     }
 
     @Test
@@ -57,14 +59,13 @@ public class SettingsInitializeTest {
                 .setShortLabel("test123")
                 .setIntent(intent)
                 .build();
-        final List<ShortcutInfo> shortcuts = new ArrayList<>();
-        shortcuts.add(info);
-        ShadowShortcutManager.get().setPinnedShortcuts(shortcuts);
+
+        mShortcutManager.addDynamicShortcuts(Collections.singletonList(info));
+        mShortcutManager.requestPinShortcut(info, null);
 
         mSettingsInitialize.refreshExistingShortcuts(mContext);
 
-        final List<ShortcutInfo> updatedShortcuts =
-                ShadowShortcutManager.get().getLastUpdatedShortcuts();
+        final List<ShortcutInfo> updatedShortcuts = mShortcutManager.getPinnedShortcuts();
         assertThat(updatedShortcuts).hasSize(1);
         final ShortcutInfo updateInfo = updatedShortcuts.get(0);
         assertThat(updateInfo.getId()).isEqualTo(id);
@@ -75,5 +76,24 @@ public class SettingsInitializeTest {
         assertThat(flags & Intent.FLAG_ACTIVITY_NEW_TASK).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
         assertThat(flags & Intent.FLAG_ACTIVITY_CLEAR_TOP).isEqualTo(
                 Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    }
+
+    @Test
+    public void refreshExistingShortcuts_shouldNotUpdateImmutableShortcut() {
+        final String id = "test_shortcut_id";
+        final ShortcutInfo info = new ShortcutInfo.Builder(mContext, id)
+            .setShortLabel("test123")
+            .setIntent(new Intent(Intent.ACTION_DEFAULT))
+            .build();
+        info.addFlags(ShortcutInfo.FLAG_IMMUTABLE);
+
+        mShortcutManager.addDynamicShortcuts(Collections.singletonList(info));
+        mShortcutManager.requestPinShortcut(info, null);
+
+        mSettingsInitialize.refreshExistingShortcuts(mContext);
+
+        final List<ShortcutInfo> updatedShortcuts = mShortcutManager.getPinnedShortcuts();
+        assertThat(updatedShortcuts).hasSize(1);
+        assertThat(updatedShortcuts.get(0)).isSameAs(info);
     }
 }

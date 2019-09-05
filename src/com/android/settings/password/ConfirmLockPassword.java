@@ -16,8 +16,8 @@
 
 package com.android.settings.password;
 
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -40,7 +40,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.TextViewInputDisabler;
@@ -84,7 +85,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.main_content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_content);
         if (fragment != null && fragment instanceof ConfirmLockPasswordFragment) {
             ((ConfirmLockPasswordFragment)fragment).onWindowFocusChanged(hasFocus);
         }
@@ -104,7 +105,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private CountDownTimer mCountdownTimer;
         private boolean mIsAlpha;
         private InputMethodManager mImm;
-        private boolean mUsingFingerprint = false;
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
 
@@ -135,9 +135,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
             mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
             if (mHeaderTextView == null) {
-                mHeaderTextView = view.findViewById(R.id.suw_layout_title);
+                mHeaderTextView = view.findViewById(R.id.suc_layout_title);
             }
-            mDetailsTextView = (TextView) view.findViewById(R.id.detailsText);
+            mDetailsTextView = (TextView) view.findViewById(R.id.sud_layout_description);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             mIsAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == storedQuality
@@ -242,7 +242,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mCancelButton.setAlpha(0f);
             mPasswordEntry.setAlpha(0f);
             mErrorTextView.setAlpha(0f);
-            mFingerprintIcon.setAlpha(0f);
         }
 
         private View[] getActiveViews() {
@@ -254,9 +253,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
             result.add(mPasswordEntry);
             result.add(mErrorTextView);
-            if (mFingerprintIcon.getVisibility() == View.VISIBLE) {
-                result.add(mFingerprintIcon);
-            }
             return result.toArray(new View[] {});
         }
 
@@ -278,7 +274,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.CONFIRM_LOCK_PASSWORD;
+            return SettingsEnums.CONFIRM_LOCK_PASSWORD;
         }
 
         @Override
@@ -302,17 +298,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mCredentialCheckResultTracker.setResult(true, new Intent(), 0, mEffectiveUserId);
         }
 
-        @Override
-        public void onFingerprintIconVisibilityChanged(boolean visible) {
-            mUsingFingerprint = visible;
-        }
-
         private void updatePasswordEntry() {
             final boolean isLockedOut =
                     mLockPatternUtils.getLockoutAttemptDeadline(mEffectiveUserId) != 0;
             mPasswordEntry.setEnabled(!isLockedOut);
             mPasswordEntryInputDisabler.setInputEnabled(!isLockedOut);
-            if (isLockedOut || mUsingFingerprint) {
+            if (isLockedOut) {
                 mImm.hideSoftInputFromWindow(mPasswordEntry.getWindowToken(), 0 /*flags*/);
             } else {
                 mPasswordEntry.scheduleShowSoftInput();
@@ -332,8 +323,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return;
             }
 
-            final String pin = mPasswordEntry.getText().toString();
-            if (TextUtils.isEmpty(pin)) {
+            // TODO(b/120484642): This is a point of entry for passwords from the UI
+            final byte[] pin = LockPatternUtils.charSequenceToByteArray(mPasswordEntry.getText());
+            if (pin == null || pin.length == 0) {
                 return;
             }
 
@@ -359,7 +351,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             return getActivity() instanceof ConfirmLockPassword.InternalActivity;
         }
 
-        private void startVerifyPassword(final String pin, final Intent intent) {
+        private void startVerifyPassword(final byte[] pin, final Intent intent) {
             long challenge = getActivity().getIntent().getLongExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
             final int localEffectiveUserId = mEffectiveUserId;
@@ -390,7 +382,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             onVerifyCallback);
         }
 
-        private void startCheckPassword(final String pin, final Intent intent) {
+        private void startCheckPassword(final byte[] pin, final Intent intent) {
             final int localEffectiveUserId = mEffectiveUserId;
             mPendingLockCheck = LockPatternChecker.checkPassword(
                     mLockPatternUtils,
@@ -443,10 +435,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mPasswordEntryInputDisabler.setInputEnabled(true);
             if (matched) {
                 if (newResult) {
-                    reportSuccessfulAttempt();
+                    ConfirmDeviceCredentialUtils.reportSuccessfulAttempt(mLockPatternUtils,
+                            mUserManager, mEffectiveUserId);
                 }
+                mBiometricManager.onConfirmDeviceCredentialSuccess();
                 startDisappearAnimation(intent);
-                checkForPendingIntent();
+                ConfirmDeviceCredentialUtils.checkForPendingIntent(getActivity());
             } else {
                 if (timeoutMs > 0) {
                     refreshLockScreen();
@@ -498,15 +492,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.next_button:
-                    handleNext();
-                    break;
-
-                case R.id.cancel_button:
-                    getActivity().setResult(RESULT_CANCELED);
-                    getActivity().finish();
-                    break;
+            if (v.getId() == R.id.next_button) {
+                handleNext();
+            } else if (v.getId() == R.id.cancel_button) {
+                getActivity().setResult(RESULT_CANCELED);
+                getActivity().finish();
             }
         }
 

@@ -19,25 +19,27 @@ package com.android.settings.dashboard;
 import android.util.ArrayMap;
 
 import com.android.settings.DisplaySettings;
+import com.android.settings.LegalSettings;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
-import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
-import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
+import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.display.NightDisplaySettings;
-import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
+import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.gestures.GestureSettings;
+import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.language.LanguageAndInputSettings;
-import com.android.settings.LegalSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeSettings;
+import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.system.SystemDashboardFragment;
@@ -64,6 +66,8 @@ public class DashboardFragmentRegistry {
 
     static {
         PARENT_TO_CATEGORY_KEY_MAP = new ArrayMap<>();
+        PARENT_TO_CATEGORY_KEY_MAP.put(TopLevelSettings.class.getName(),
+                CategoryKey.CATEGORY_HOMEPAGE);
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 NetworkDashboardFragment.class.getName(), CategoryKey.CATEGORY_NETWORK);
         PARENT_TO_CATEGORY_KEY_MAP.put(ConnectedDeviceDashboardFragment.class.getName(),
@@ -74,8 +78,6 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_APPS);
         PARENT_TO_CATEGORY_KEY_MAP.put(PowerUsageSummary.class.getName(),
                 CategoryKey.CATEGORY_BATTERY);
-        PARENT_TO_CATEGORY_KEY_MAP.put(DefaultAppSettings.class.getName(),
-                CategoryKey.CATEGORY_APPS_DEFAULT);
         PARENT_TO_CATEGORY_KEY_MAP.put(DisplaySettings.class.getName(),
                 CategoryKey.CATEGORY_DISPLAY);
         PARENT_TO_CATEGORY_KEY_MAP.put(SoundSettings.class.getName(),
@@ -101,9 +103,13 @@ public class DashboardFragmentRegistry {
         PARENT_TO_CATEGORY_KEY_MAP.put(ZenModeSettings.class.getName(),
                 CategoryKey.CATEGORY_DO_NOT_DISTURB);
         PARENT_TO_CATEGORY_KEY_MAP.put(GestureSettings.class.getName(),
-            CategoryKey.CATEGORY_GESTURES);
+                CategoryKey.CATEGORY_GESTURES);
         PARENT_TO_CATEGORY_KEY_MAP.put(NightDisplaySettings.class.getName(),
-            CategoryKey.CATEGORY_NIGHT_DISPLAY);
+                CategoryKey.CATEGORY_NIGHT_DISPLAY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(PrivacyDashboardFragment.class.getName(),
+                CategoryKey.CATEGORY_PRIVACY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(EnterprisePrivacySettings.class.getName(),
+                CategoryKey.CATEGORY_ENTERPRISE_PRIVACY);
         PARENT_TO_CATEGORY_KEY_MAP.put(LegalSettings.class.getName(),
                 CategoryKey.CATEGORY_ABOUT_LEGAL);
         PARENT_TO_CATEGORY_KEY_MAP.put(MyDeviceInfoFragment.class.getName(),

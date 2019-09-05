@@ -17,9 +17,10 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -28,24 +29,25 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.telephony.TelephonyManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
-import android.telephony.TelephonyManager;
 
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WorkSoundPreferenceControllerTest {
 
     private static final String KEY_WORK_CATEGORY = "sound_work_settings_section";
@@ -164,7 +166,6 @@ public class WorkSoundPreferenceControllerTest {
         verify(mWorkCategory).setVisible(false);
     }
 
-
     @Test
     public void displayPreference_isAvailable_shouldShowPreferenceCategory() {
         when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
@@ -217,7 +218,8 @@ public class WorkSoundPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.onResume();
 
-        verify(mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE)).setVisible(false);
+        verify((Preference) mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE))
+                .setVisible(false);
     }
 
     @Test
@@ -241,11 +243,11 @@ public class WorkSoundPreferenceControllerTest {
         verify(mWorkCategory, times(2)).setVisible(true);
 
         // Sound preferences should explain that the profile isn't available yet.
-        verify(mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE))
+        verify((Preference) mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE))
                 .setSummary(eq(notAvailable));
-        verify(mWorkCategory.findPreference(KEY_WORK_NOTIFICATION_RINGTONE))
+        verify((Preference) mWorkCategory.findPreference(KEY_WORK_NOTIFICATION_RINGTONE))
                 .setSummary(eq(notAvailable));
-        verify(mWorkCategory.findPreference(KEY_WORK_ALARM_RINGTONE))
+        verify((Preference) mWorkCategory.findPreference(KEY_WORK_ALARM_RINGTONE))
                 .setSummary(eq(notAvailable));
     }
 

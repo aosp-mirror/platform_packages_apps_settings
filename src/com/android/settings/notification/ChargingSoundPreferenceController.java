@@ -16,11 +16,11 @@
 
 package com.android.settings.notification;
 
-import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
+import static com.android.settings.notification.SettingPref.TYPE_SECURE;
 
 import android.content.Context;
+import android.provider.Settings.Secure;
 
-import android.provider.Settings.Global;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -33,7 +33,7 @@ public class ChargingSoundPreferenceController extends SettingPrefController {
             Lifecycle lifecycle) {
         super(context, parent, lifecycle);
         mPreference = new SettingPref(
-            TYPE_GLOBAL, KEY_CHARGING_SOUNDS, Global.CHARGING_SOUNDS_ENABLED, DEFAULT_ON);
+            TYPE_SECURE, KEY_CHARGING_SOUNDS, Secure.CHARGING_SOUNDS_ENABLED, DEFAULT_ON);
     }
 
     @Override

@@ -17,7 +17,7 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
+
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -28,7 +28,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -44,12 +43,12 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
@@ -59,10 +58,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
 public class MasterClearTest {
 
@@ -83,22 +84,22 @@ public class MasterClearTest {
     private AccountManager mAccountManager;
 
     @Mock
-    private Activity mMockActivity;
+    private FragmentActivity mMockActivity;
 
     @Mock
     private Intent mMockIntent;
 
     private MasterClear mMasterClear;
     private ShadowActivity mShadowActivity;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private View mContentView;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mMasterClear = spy(new MasterClear());
-        mActivity = Robolectric.setupActivity(Activity.class);
-        mShadowActivity = shadowOf(mActivity);
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mShadowActivity = Shadows.shadowOf(mActivity);
         mContentView = LayoutInflater.from(mActivity).inflate(R.layout.master_clear, null);
 
         // Make scrollView only have one child
@@ -107,12 +108,53 @@ public class MasterClearTest {
     }
 
     @Test
-    public void testShowFinalConfirmation_eraseEsimChecked() {
+    public void testShowFinalConfirmation_eraseEsimVisible_eraseEsimChecked() {
         final Context context = mock(Context.class);
         when(mMasterClear.getContext()).thenReturn(context);
 
         mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
         mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMasterClear.mEsimStorageContainer.setVisibility(View.VISIBLE);
+        mMasterClear.mEsimStorage.setChecked(true);
+        mMasterClear.showFinalConfirmation();
+
+        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
+
+        verify(context).startActivity(intent.capture());
+        assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+                .isTrue();
+    }
+
+    @Test
+    public void testShowFinalConfirmation_eraseEsimVisible_eraseEsimUnchecked() {
+        final Context context = mock(Context.class);
+        when(mMasterClear.getContext()).thenReturn(context);
+
+        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMasterClear.mEsimStorageContainer.setVisibility(View.VISIBLE);
+        mMasterClear.mEsimStorage.setChecked(false);
+        mMasterClear.showFinalConfirmation();
+        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
+
+        verify(context).startActivity(intent.capture());
+        assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+                .isFalse();
+    }
+
+    @Test
+    public void testShowFinalConfirmation_eraseEsimGone_eraseEsimChecked() {
+        final Context context = mock(Context.class);
+        when(mMasterClear.getContext()).thenReturn(context);
+
+        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMasterClear.mEsimStorageContainer.setVisibility(View.GONE);
         mMasterClear.mEsimStorage.setChecked(true);
         mMasterClear.showFinalConfirmation();
 
@@ -125,12 +167,14 @@ public class MasterClearTest {
     }
 
     @Test
-    public void testShowFinalConfirmation_eraseEsimUnchecked() {
+    public void testShowFinalConfirmation_eraseEsimGone_eraseEsimUnchecked() {
         final Context context = mock(Context.class);
         when(mMasterClear.getContext()).thenReturn(context);
 
         mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
         mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMasterClear.mEsimStorageContainer.setVisibility(View.GONE);
         mMasterClear.mEsimStorage.setChecked(false);
         mMasterClear.showFinalConfirmation();
         final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
@@ -208,11 +252,10 @@ public class MasterClearTest {
         ShadowUtils.setIsDemoUser(true);
 
         final ComponentName componentName =
-            ComponentName.unflattenFromString("com.android.retaildemo/.DeviceAdminReceiver");
+                ComponentName.unflattenFromString("com.android.retaildemo/.DeviceAdminReceiver");
         ShadowUtils.setDeviceOwnerComponent(componentName);
 
-        mMasterClear.mInitiateListener
-            .onClick(mContentView.findViewById(R.id.initiate_master_clear));
+        mMasterClear.mInitiateListener.onClick(mContentView);
         final Intent intent = mShadowActivity.getNextStartedActivity();
         assertThat(Intent.ACTION_FACTORY_RESET).isEqualTo(intent.getAction());
         assertThat(componentName).isNotNull();
@@ -238,7 +281,8 @@ public class MasterClearTest {
         doNothing().when(mMasterClear).establishInitialState();
 
         mMasterClear
-            .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_CANCELED, null);
+                .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_CANCELED,
+                        null);
 
         verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         verify(mMasterClear, times(1)).establishInitialState();
@@ -253,7 +297,7 @@ public class MasterClearTest {
         doNothing().when(mMasterClear).showAccountCredentialConfirmation(eq(mMockIntent));
 
         mMasterClear
-            .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+                .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
 
         verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         verify(mMasterClear, times(0)).establishInitialState();
@@ -268,7 +312,7 @@ public class MasterClearTest {
         doNothing().when(mMasterClear).showFinalConfirmation();
 
         mMasterClear
-            .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+                .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
 
         verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         verify(mMasterClear, times(0)).establishInitialState();
@@ -279,14 +323,14 @@ public class MasterClearTest {
     @Test
     public void testOnActivityResultInternal_confirmRequestTriggeringShowFinal() {
         doReturn(true).when(mMasterClear)
-            .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+                .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
         doNothing().when(mMasterClear).showFinalConfirmation();
 
         mMasterClear.onActivityResultInternal(
-            MasterClear.CREDENTIAL_CONFIRM_REQUEST, Activity.RESULT_OK, null);
+                MasterClear.CREDENTIAL_CONFIRM_REQUEST, Activity.RESULT_OK, null);
 
         verify(mMasterClear, times(1))
-            .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+                .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
         verify(mMasterClear, times(0)).establishInitialState();
         verify(mMasterClear, times(0)).getAccountConfirmationIntent();
         verify(mMasterClear, times(1)).showFinalConfirmation();
@@ -304,9 +348,9 @@ public class MasterClearTest {
         when(mMasterClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package))
-            .thenReturn(TEST_CONFIRMATION_PACKAGE);
+                .thenReturn(TEST_CONFIRMATION_PACKAGE);
         when(mMockActivity.getString(R.string.account_confirmation_class))
-            .thenReturn(TEST_CONFIRMATION_CLASS);
+                .thenReturn(TEST_CONFIRMATION_CLASS);
 
         Account[] accounts = new Account[0];
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
@@ -319,10 +363,10 @@ public class MasterClearTest {
         when(mMasterClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package))
-            .thenReturn(TEST_CONFIRMATION_PACKAGE);
+                .thenReturn(TEST_CONFIRMATION_PACKAGE);
         when(mMockActivity.getString(R.string.account_confirmation_class))
-            .thenReturn(TEST_CONFIRMATION_CLASS);
-        Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
+                .thenReturn(TEST_CONFIRMATION_CLASS);
+        Account[] accounts = new Account[]{new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE)};
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
         // The package manager should not resolve the confirmation intent targeting the non-existent
@@ -337,11 +381,11 @@ public class MasterClearTest {
         // Only try to show account confirmation if the appropriate resource overlays are available.
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package))
-            .thenReturn(TEST_CONFIRMATION_PACKAGE);
+                .thenReturn(TEST_CONFIRMATION_PACKAGE);
         when(mMockActivity.getString(R.string.account_confirmation_class))
-            .thenReturn(TEST_CONFIRMATION_CLASS);
+                .thenReturn(TEST_CONFIRMATION_CLASS);
         // Add accounts to trigger the search for a resolving intent.
-        Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
+        Account[] accounts = new Account[]{new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE)};
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
         // The package manager should not resolve the confirmation intent targeting the non-existent
@@ -355,25 +399,28 @@ public class MasterClearTest {
         when(mPackageManager.resolveActivity(any(), eq(0))).thenReturn(resolveInfo);
 
         Intent actualIntent = mMasterClear.getAccountConfirmationIntent();
-        assertEquals(TEST_CONFIRMATION_PACKAGE, actualIntent.getComponent().getPackageName());
-        assertEquals(TEST_CONFIRMATION_CLASS, actualIntent.getComponent().getClassName());
+        assertThat(TEST_CONFIRMATION_PACKAGE).isEqualTo(
+                actualIntent.getComponent().getPackageName());
+        assertThat(TEST_CONFIRMATION_CLASS).isEqualTo(actualIntent.getComponent().getClassName());
     }
 
     @Test
     public void testShowAccountCredentialConfirmation() {
         // Finally mock out the startActivityForResultCall
         doNothing().when(mMasterClear)
-            .startActivityForResult(eq(mMockIntent), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+                .startActivityForResult(eq(mMockIntent),
+                        eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
         mMasterClear.showAccountCredentialConfirmation(mMockIntent);
         verify(mMasterClear, times(1))
-            .startActivityForResult(eq(mMockIntent), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+                .startActivityForResult(eq(mMockIntent),
+                        eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
     }
 
     @Test
     public void testIsValidRequestCode() {
         assertThat(mMasterClear.isValidRequestCode(MasterClear.KEYGUARD_REQUEST)).isTrue();
         assertThat(mMasterClear.isValidRequestCode(MasterClear.CREDENTIAL_CONFIRM_REQUEST))
-            .isTrue();
+                .isTrue();
         assertThat(mMasterClear.isValidRequestCode(0)).isFalse();
     }
 
@@ -381,7 +428,7 @@ public class MasterClearTest {
     public void testOnGlobalLayout_shouldNotRemoveListener() {
         final ViewTreeObserver viewTreeObserver = mock(ViewTreeObserver.class);
         mMasterClear.mScrollView = mScrollView;
-        mMasterClear.mInitiateButton = mock(Button.class);
+        doNothing().when(mMasterClear).onGlobalLayout();
         doReturn(true).when(mMasterClear).hasReachedBottom(any());
         when(mScrollView.getViewTreeObserver()).thenReturn(viewTreeObserver);
 
