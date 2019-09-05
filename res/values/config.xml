@@ -422,4 +422,9 @@
     <string-array name="config_reset_app_package_name" translatable="false">
         <item>com.android.systemui</item>
     </string-array>
+
+    <!-- Settings panel keeps observe this uri -->
+    <string-array name="config_panel_keep_observe_uri" translatable="false">
+        <item>content://com.android.settings.slices/intent/media_output_indicator</item>
+    </string-array>
 </resources>

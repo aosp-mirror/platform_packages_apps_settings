@@ -32,7 +32,7 @@ import com.android.settingslib.widget.FooterPreference;
 public class BluetoothDetailsMacAddressController extends BluetoothDetailsController {
     public static final String KEY_DEVICE_DETAILS_FOOTER = "device_details_footer";
 
-    FooterPreference mFooterPreference;
+    private FooterPreference mFooterPreference;
 
     public BluetoothDetailsMacAddressController(Context context,
             PreferenceFragmentCompat fragment,
