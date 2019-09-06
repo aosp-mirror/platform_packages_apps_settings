@@ -163,8 +163,16 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 mDetailsTextView.setText(detailsMessage);
             }
             int currentType = mPasswordEntry.getInputType();
-            mPasswordEntry.setInputType(mIsAlpha ? currentType
-                    : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD));
+            if (mIsAlpha) {
+                mPasswordEntry.setInputType(currentType);
+                mPasswordEntry.setContentDescription(
+                        getContext().getString(R.string.unlock_set_unlock_password_title));
+            } else {
+                mPasswordEntry.setInputType(
+                        InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                mPasswordEntry.setContentDescription(
+                        getContext().getString(R.string.unlock_set_unlock_pin_title));
+            }
             // Can't set via XML since setInputType resets the fontFamily to null
             mPasswordEntry.setTypeface(Typeface.create(
                     getContext().getString(com.android.internal.R.string.config_headlineFontFamily),
