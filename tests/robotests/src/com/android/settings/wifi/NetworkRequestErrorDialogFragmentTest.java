@@ -23,6 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 import android.content.DialogInterface;
+import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AlertDialog;
@@ -111,5 +112,18 @@ public class NetworkRequestErrorDialogFragmentTest {
 
         negativeButton.performClick();
         assertThat(alertDialog.isShowing()).isFalse();
+    }
+
+    @Test
+    public void clickNegativeButton_shouldCallReject() {
+        final NetworkRequestUserSelectionCallback rejectCallback =
+                mock(NetworkRequestUserSelectionCallback.class);
+        mFragment.setRejectCallback(rejectCallback);
+
+        final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        final Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        negativeButton.performClick();
+
+        verify(rejectCallback, times(1)).reject();
     }
 }

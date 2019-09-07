@@ -1228,8 +1228,7 @@
             android:name="Settings$LocationSettingsActivity"
             android:label="@string/location_settings_title"
             android:icon="@drawable/ic_homepage_location"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />

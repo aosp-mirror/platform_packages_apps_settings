@@ -29,7 +29,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
@@ -152,7 +151,9 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
         dismissDialogs();
 
         // Throws error dialog.
-        final DialogFragment dialogFragment = NetworkRequestErrorDialogFragment.newInstance();
+        final NetworkRequestErrorDialogFragment dialogFragment =
+                NetworkRequestErrorDialogFragment.newInstance();
+        dialogFragment.setRejectCallback(mUserSelectionCallback);
         final Bundle bundle = new Bundle();
         bundle.putSerializable(NetworkRequestErrorDialogFragment.DIALOG_TYPE, type);
         dialogFragment.setArguments(bundle);
