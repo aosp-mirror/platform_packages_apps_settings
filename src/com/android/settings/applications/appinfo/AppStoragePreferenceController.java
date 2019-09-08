@@ -31,6 +31,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.FetchPackageStorageAsyncLoader;
+import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -48,9 +49,12 @@ public class AppStoragePreferenceController extends AppInfoPreferenceControllerB
 
     @Override
     public void updateState(Preference preference) {
-        final boolean isExternal =
-                (mParent.getAppEntry().info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0;
-        preference.setSummary(getStorageSummary(mLastResult, isExternal));
+        final ApplicationsState.AppEntry entry = mParent.getAppEntry();
+        if (entry != null && entry.info != null) {
+            final boolean isExternal =
+                    (entry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0;
+            preference.setSummary(getStorageSummary(mLastResult, isExternal));
+        }
     }
 
     @Override

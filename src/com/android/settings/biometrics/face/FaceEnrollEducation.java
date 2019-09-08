@@ -16,7 +16,6 @@
 
 package com.android.settings.biometrics.face;
 
-import static android.provider.Settings.Secure.FACE_UNLOCK_EDUCATION_INFO_DISPLAYED;
 import static android.security.KeyStore.getApplicationContext;
 
 import android.app.settings.SettingsEnums;
@@ -50,8 +49,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private static final String TAG = "FaceEducation";
     private static final int ON = 1;
     private static final int OFF = 0;
-    // 8 seconds.
-    private static final long FACE_ENROLL_EDUCATION_DELAY = 8000;
 
     private FaceManager mFaceManager;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
@@ -61,6 +58,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private Handler mHandler;
     private Intent mResultIntent;
     private TextView mDescriptionText;
+    private boolean mNextClicked;
 
     private CompoundButton.OnCheckedChangeListener mSwitchDiversityListener =
             new CompoundButton.OnCheckedChangeListener() {
@@ -101,14 +99,26 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         mDescriptionText = findViewById(R.id.sud_layout_description);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-        mFooterBarMixin.setSecondaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.security_settings_face_enroll_enrolling_skip)
-                        .setListener(this::onSkipButtonClick)
-                        .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
-        );
+
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            mFooterBarMixin.setSecondaryButton(
+                    new FooterButton.Builder(this)
+                            .setText(R.string.skip_label)
+                            .setListener(this::onSkipButtonClick)
+                            .setButtonType(FooterButton.ButtonType.SKIP)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+        } else {
+            mFooterBarMixin.setSecondaryButton(
+                    new FooterButton.Builder(this)
+                            .setText(R.string.security_settings_face_enroll_introduction_cancel)
+                            .setListener(this::onSkipButtonClick)
+                            .setButtonType(FooterButton.ButtonType.CANCEL)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+        }
 
         final FooterButton footerButton = new FooterButton.Builder(this)
                 .setText(R.string.security_settings_face_enroll_education_start)
@@ -121,24 +131,15 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         final AccessibilityManager accessibilityManager = getApplicationContext().getSystemService(
                 AccessibilityManager.class);
         if (accessibilityManager != null) {
-            accessibilityEnabled = accessibilityManager.isEnabled();
+            // Add additional check for touch exploration. This prevents other accessibility
+            // features such as Live Transcribe from defaulting to the accessibility setup.
+            accessibilityEnabled = accessibilityManager.isEnabled()
+                    && accessibilityManager.isTouchExplorationEnabled();
         }
         mFooterBarMixin.setPrimaryButton(footerButton);
-        final Context context = getApplicationContext();
-        final boolean didDisplayEdu = Settings.Secure.getIntForUser(context.getContentResolver(),
-                FACE_UNLOCK_EDUCATION_INFO_DISPLAYED, OFF, mUserId) == ON;
-        if (!didDisplayEdu && !accessibilityEnabled) {
-            Settings.Secure.putIntForUser(context.getContentResolver(),
-                    FACE_UNLOCK_EDUCATION_INFO_DISPLAYED, ON, mUserId);
-            footerButton.setEnabled(false);
-            mHandler.postDelayed(() -> {
-                footerButton.setEnabled(true);
-            }, FACE_ENROLL_EDUCATION_DELAY);
-        }
 
         final Button accessibilityButton = findViewById(R.id.accessibility_button);
         accessibilityButton.setOnClickListener(view -> {
-            footerButton.setEnabled(true);
             mSwitchDiversity.setChecked(true);
             accessibilityButton.setVisibility(View.GONE);
             mSwitchDiversity.setVisibility(View.VISIBLE);
@@ -146,6 +147,9 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
         mSwitchDiversity = findViewById(R.id.toggle_diversity);
         mSwitchDiversity.setListener(mSwitchDiversityListener);
+        mSwitchDiversity.setOnClickListener(v -> {
+            mSwitchDiversity.getSwitch().toggle();
+        });
 
         if (accessibilityEnabled) {
             accessibilityButton.callOnClick();
@@ -157,6 +161,26 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         super.onResume();
         mSwitchDiversityListener.onCheckedChanged(mSwitchDiversity.getSwitch(),
                 mSwitchDiversity.isChecked());
+
+        // If the user goes back after enrollment, we should send them back to the intro page
+        // if they've met the max limit.
+        final int max = getResources().getInteger(
+                com.android.internal.R.integer.config_faceMaxTemplatesPerUser);
+        final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
+        if (numEnrolledFaces >= max) {
+            finish();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (!isChangingConfigurations() && !WizardManagerHelper.isAnySetupWizard(getIntent())
+                && !mNextClicked) {
+            setResult(RESULT_SKIP);
+            finish();
+        }
     }
 
     @Override
@@ -168,6 +192,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
+        intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         final String flattenedString = getString(R.string.config_face_enroll);
         if (!TextUtils.isEmpty(flattenedString)) {
             ComponentName componentName = ComponentName.unflattenFromString(flattenedString);
@@ -175,11 +200,12 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         } else {
             intent.setClass(this, FaceEnrollEnrolling.class);
         }
-        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
+        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
         if (mResultIntent != null) {
             intent.putExtras(mResultIntent);
         }
-        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+        mNextClicked = true;
+        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
     }
 
