@@ -54,8 +54,9 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
             ((TwoStatePreference) preference).setChecked(isChecked());
         } else if (preference instanceof MasterSwitchPreference) {
             ((MasterSwitchPreference) preference).setChecked(isChecked());
+        } else {
+            refreshSummary(preference);
         }
-        refreshSummary(preference);
     }
 
     @Override
