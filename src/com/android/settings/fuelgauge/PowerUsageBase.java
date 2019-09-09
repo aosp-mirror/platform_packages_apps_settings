@@ -80,7 +80,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
 
-        LoaderManager.getInstance(this).restartLoader(0, bundle, new PowerLoaderCallback());
+        getLoaderManager().restartLoader(0, bundle, new PowerLoaderCallback());
     }
 
     protected abstract void refreshUi(@BatteryUpdateType int refreshType);

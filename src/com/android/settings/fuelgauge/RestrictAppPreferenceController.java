@@ -63,10 +63,15 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     }
 
     @Override
-    public CharSequence getSummary() {
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        mAppInfos = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager);
         final int num = mAppInfos.size();
-        return mContext.getResources().getQuantityString(R.plurals.restricted_app_summary, num,
-                        num);
+        // Fragment change RestrictedAppsList after onPause(), UI needs to be updated in onResume()
+        preference.setVisible(num > 0);
+        preference.setSummary(
+                mContext.getResources().getQuantityString(R.plurals.restricted_app_summary, num,
+                        num));
     }
 
     @Override
