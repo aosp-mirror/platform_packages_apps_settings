@@ -26,7 +26,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
-import android.telephony.TelephonyManager;
+import android.media.AudioManager;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -48,15 +48,12 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowTelephonyManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothUtils.class,
-        ShadowTelephonyManager.class})
+@Config(shadows = {ShadowBluetoothUtils.class})
 public class MediaOutputIndicatorSliceTest {
 
     private static final String TEST_A2DP_DEVICE_NAME = "Test_A2DP_BT_Device_NAME";
@@ -80,14 +77,14 @@ public class MediaOutputIndicatorSliceTest {
     private Context mContext;
     private List<BluetoothDevice> mDevicesList;
     private MediaOutputIndicatorSlice mMediaOutputIndicatorSlice;
-    private ShadowTelephonyManager mShadowTelephonyManager;
+    private AudioManager mAudioManager;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mShadowTelephonyManager = Shadow.extract(mContext.getSystemService(
-                Context.TELEPHONY_SERVICE));
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
@@ -160,28 +157,28 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
-    public void getSlice_callStateIdle_available() {
+    public void getSlice_audioModeIsInCommunication_returnNull() {
         mDevicesList.add(mA2dpDevice);
         when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
-        mShadowTelephonyManager.setCallState(TelephonyManager.CALL_STATE_IDLE);
-
-        assertThat(mMediaOutputIndicatorSlice.getSlice()).isNotNull();
-    }
-
-    @Test
-    public void getSlice_callStateRinging_returnNull() {
-        mDevicesList.add(mA2dpDevice);
-        when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
-        mShadowTelephonyManager.setCallState(TelephonyManager.CALL_STATE_RINGING);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 
         assertThat(mMediaOutputIndicatorSlice.getSlice()).isNull();
     }
 
     @Test
-    public void getSlice_callStateOffHook_returnNull() {
+    public void getSlice_audioModeIsRingtone_returnNull() {
         mDevicesList.add(mA2dpDevice);
         when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
-        mShadowTelephonyManager.setCallState(TelephonyManager.CALL_STATE_OFFHOOK);
+        mAudioManager.setMode(AudioManager.MODE_RINGTONE);
+
+        assertThat(mMediaOutputIndicatorSlice.getSlice()).isNull();
+    }
+
+    @Test
+    public void getSlice_audioModeIsInCall_returnNull() {
+        mDevicesList.add(mA2dpDevice);
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
+        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
 
         assertThat(mMediaOutputIndicatorSlice.getSlice()).isNull();
     }

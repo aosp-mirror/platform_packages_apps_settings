@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -197,15 +196,13 @@ public class MediaOutputSlice implements CustomSliceable {
     private boolean isVisible() {
         // To decide Slice's visibility.
         // Return true if
-        // 1. phone is not in ongoing call mode
+        // 1. AudioMode is not in on-going call
         // 2. worker is not null
         // 3. Bluetooth is enabled
-        final TelephonyManager telephonyManager =
-                (TelephonyManager)mContext.getSystemService(Context.TELEPHONY_SERVICE);
         final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 
-        return telephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE
-                && adapter.isEnabled()
+        return adapter.isEnabled()
+                && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext)
                 && getWorker() != null;
     }
 }

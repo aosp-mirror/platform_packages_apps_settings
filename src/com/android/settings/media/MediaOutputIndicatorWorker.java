@@ -16,9 +16,16 @@
 
 package com.android.settings.media;
 
+import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
+
 import android.bluetooth.BluetoothProfile;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.bluetooth.Utils;
@@ -36,10 +43,15 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
 
     private static final String TAG = "MediaOutputIndicatorWorker";
 
+    private final DevicesChangedBroadcastReceiver mReceiver;
+    private final Context mContext;
+
     private LocalBluetoothManager mLocalBluetoothManager;
 
     public MediaOutputIndicatorWorker(Context context, Uri uri) {
         super(context, uri);
+        mReceiver = new DevicesChangedBroadcastReceiver();
+        mContext = context;
     }
 
     @Override
@@ -49,6 +61,8 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
             Log.e(TAG, "Bluetooth is not supported on this device");
             return;
         }
+        final IntentFilter intentFilter = new IntentFilter(STREAM_DEVICES_CHANGED_ACTION);
+        mContext.registerReceiver(mReceiver, intentFilter);
         mLocalBluetoothManager.getEventManager().registerCallback(this);
     }
 
@@ -59,10 +73,11 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
             return;
         }
         mLocalBluetoothManager.getEventManager().unregisterCallback(this);
+        mContext.unregisterReceiver(mReceiver);
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         mLocalBluetoothManager = null;
     }
 
@@ -83,5 +98,15 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
     @Override
     public void onAudioModeChanged() {
         notifySliceChange();
+    }
+
+    private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (TextUtils.equals(AudioManager.STREAM_DEVICES_CHANGED_ACTION, action)) {
+                notifySliceChange();
+            }
+        }
     }
 }
