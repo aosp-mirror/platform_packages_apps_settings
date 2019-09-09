@@ -535,4 +535,60 @@ public class MobileNetworkUtils {
         icons.setTintList(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
         return icons;
     }
+
+    /**
+     * This method is migrated from
+     * {@link android.telephony.TelephonyManager.getNetworkOperatorName}. Which provides
+     *
+     * 1. Better support under multi-SIM environment.
+     * 2. Similar design which aligned with operator name displayed in status bar
+     */
+    public static CharSequence getCurrentCarrierNameForDisplay(Context context, int subId) {
+        SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
+        if (sm != null) {
+            SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
+            if (subInfo != null) {
+                return subInfo.getCarrierName();
+            }
+        }
+        return getOperatorNameFromTelephonyManager(context);
+    }
+
+    public static CharSequence getCurrentCarrierNameForDisplay(Context context) {
+        SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
+        if (sm != null) {
+            int subId = sm.getDefaultSubscriptionId();
+            SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
+            if (subInfo != null) {
+                return subInfo.getCarrierName();
+            }
+        }
+        return getOperatorNameFromTelephonyManager(context);
+    }
+
+    private static SubscriptionInfo getSubscriptionInfo(SubscriptionManager subManager,
+            int subId) {
+        List<SubscriptionInfo> subInfos = subManager.getAccessibleSubscriptionInfoList();
+        if (subInfos == null) {
+            subInfos = subManager.getActiveSubscriptionInfoList();
+        }
+        if (subInfos == null) {
+            return null;
+        }
+        for (SubscriptionInfo subInfo : subInfos) {
+            if (subInfo.getSubscriptionId() == subId) {
+                return subInfo;
+            }
+        }
+        return null;
+    }
+
+    private static String getOperatorNameFromTelephonyManager(Context context) {
+        TelephonyManager tm =
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
+        if (tm == null) {
+            return null;
+        }
+        return tm.getNetworkOperatorName();
+    }
 }
