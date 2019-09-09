@@ -75,7 +75,7 @@ public class OpenNetworkSelectPagePreferenceController extends
     public CharSequence getSummary() {
         final ServiceState ss = mTelephonyManager.getServiceState();
         if (ss != null && ss.getState() == ServiceState.STATE_IN_SERVICE) {
-            return mTelephonyManager.getNetworkOperatorName();
+            return MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId);
         } else {
             return mContext.getString(R.string.network_disconnected);
         }
