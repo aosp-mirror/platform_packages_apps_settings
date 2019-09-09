@@ -258,6 +258,14 @@
         <item>PWD</item>
     </string-array>
 
+    <!-- Type of OCSP -->
+    <string-array name="eap_ocsp_type" translatable="true">
+        <item>Do not validate</item>
+        <item>Request certificate status</item>
+        <item>Require certificate status</item>
+        <item>Require all non-trusted certificate statuses</item>
+    </string-array>
+
    <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array translatable="false" name="wifi_ap_band_config_full">
