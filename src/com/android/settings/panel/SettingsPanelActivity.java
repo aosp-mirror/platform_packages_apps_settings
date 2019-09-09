@@ -59,6 +59,8 @@ public class SettingsPanelActivity extends FragmentActivity {
      */
     public static final String KEY_MEDIA_PACKAGE_NAME = "PANEL_MEDIA_PACKAGE_NAME";
 
+    private boolean mForceCreation = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,19 @@ public class SettingsPanelActivity extends FragmentActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        createOrUpdatePanel(false /* shouldForceCreation */);
+        createOrUpdatePanel(mForceCreation);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mForceCreation = false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mForceCreation = true;
     }
 
     private void createOrUpdatePanel(boolean shouldForceCreation) {
@@ -91,7 +105,7 @@ public class SettingsPanelActivity extends FragmentActivity {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final Fragment fragment = fragmentManager.findFragmentById(R.id.main_content);
 
-        // If fragment already exists, we will need to update panel with animation.
+        // If fragment already exists and visible, we will need to update panel with animation.
         if (!shouldForceCreation && fragment != null && fragment instanceof PanelFragment) {
             final PanelFragment panelFragment = (PanelFragment) fragment;
             panelFragment.setArguments(mBundle);
