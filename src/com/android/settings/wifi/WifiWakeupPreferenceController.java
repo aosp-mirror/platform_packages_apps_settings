@@ -116,6 +116,12 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
     }
 
     @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        refreshSummary(mPreference);
+    }
+
+    @Override
     public CharSequence getSummary() {
         if (!mLocationManager.isLocationEnabled()) {
             return getNoLocationSummary();
