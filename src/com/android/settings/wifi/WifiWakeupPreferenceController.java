@@ -118,7 +118,7 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        refreshSummary(mPreference);
+        refreshSummary(preference);
     }
 
     @Override
