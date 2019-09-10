@@ -1070,17 +1070,17 @@ public class WifiConfigController implements TextWatcher,
                     mDoNotValidateEapServerString,
                     false,
                     true);
-            // To avoid the user connects to a non-secure network unexpectedly,
-            // request using system trusted certificates by default
-            // unless the user explicitly chooses "Do not validate" or other
-            // CA certificates.
-            setSelection(mEapCaCertSpinner, mUseSystemCertsString);
             loadCertificates(
                     mEapUserCertSpinner,
                     Credentials.USER_PRIVATE_KEY,
                     mDoNotProvideEapUserCertString,
                     false,
                     false);
+            // To avoid the user connects to a non-secure network unexpectedly,
+            // request using system trusted certificates by default
+            // unless the user explicitly chooses "Do not validate" or other
+            // CA certificates.
+            setSelection(mEapCaCertSpinner, mUseSystemCertsString);
         }
 
         // Modifying an existing network
