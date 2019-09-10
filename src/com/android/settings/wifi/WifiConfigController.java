@@ -146,6 +146,7 @@ public class WifiConfigController implements TextWatcher,
     private Spinner mSecuritySpinner;
     private Spinner mEapMethodSpinner;
     private Spinner mEapCaCertSpinner;
+    private Spinner mEapOcspSpinner;
     private TextView mEapDomainView;
     private Spinner mPhase2Spinner;
     // Associated with mPhase2Spinner, one of mPhase2FullAdapter or mPhase2PeapAdapter
@@ -760,6 +761,14 @@ public class WifiConfigController implements TextWatcher,
                             + ") should not both be non-null");
                 }
 
+                // Only set OCSP option if there is a valid CA certificate.
+                if (caCert.equals(mUnspecifiedCertString)
+                        || caCert.equals(mDoNotValidateEapServerString)) {
+                    config.enterpriseConfig.setOcsp(WifiEnterpriseConfig.OCSP_NONE);
+                } else {
+                    config.enterpriseConfig.setOcsp(mEapOcspSpinner.getSelectedItemPosition());
+                }
+
                 String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
                 if (clientCert.equals(mUnspecifiedCertString)
                         || clientCert.equals(mDoNotProvideEapUserCertString)) {
@@ -1019,6 +1028,7 @@ public class WifiConfigController implements TextWatcher,
             mPhase2Spinner.setOnItemSelectedListener(this);
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
             mEapCaCertSpinner.setOnItemSelectedListener(this);
+            mEapOcspSpinner = (Spinner) mView.findViewById(R.id.ocsp);
             mEapDomainView = (TextView) mView.findViewById(R.id.domain);
             mEapDomainView.addTextChangedListener(this);
             mEapUserCertSpinner = (Spinner) mView.findViewById(R.id.user_cert);
@@ -1060,6 +1070,11 @@ public class WifiConfigController implements TextWatcher,
                     mDoNotValidateEapServerString,
                     false,
                     true);
+            // To avoid the user connects to a non-secure network unexpectedly,
+            // request using system trusted certificates by default
+            // unless the user explicitly chooses "Do not validate" or other
+            // CA certificates.
+            setSelection(mEapCaCertSpinner, mUseSystemCertsString);
             loadCertificates(
                     mEapUserCertSpinner,
                     Credentials.USER_PRIVATE_KEY,
@@ -1124,6 +1139,7 @@ public class WifiConfigController implements TextWatcher,
                     setSelection(mEapCaCertSpinner, mMultipleCertSetString);
                 }
             }
+            mEapOcspSpinner.setSelection(enterpriseConfig.getOcsp());
             mEapDomainView.setText(enterpriseConfig.getDomainSuffixMatch());
             String userCert = enterpriseConfig.getClientCertificateAlias();
             if (TextUtils.isEmpty(userCert)) {
@@ -1169,6 +1185,7 @@ public class WifiConfigController implements TextWatcher,
         // Defaults for most of the EAP methods and over-riden by
         // by certain EAP methods
         mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
+        mView.findViewById(R.id.l_ocsp).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.password_layout).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.show_password_layout).setVisibility(View.VISIBLE);
 
@@ -1177,6 +1194,7 @@ public class WifiConfigController implements TextWatcher,
             case WIFI_EAP_METHOD_PWD:
                 setPhase2Invisible();
                 setCaCertInvisible();
+                setOcspInvisible();
                 setDomainInvisible();
                 setAnonymousIdentInvisible();
                 setUserCertInvisible();
@@ -1214,6 +1232,7 @@ public class WifiConfigController implements TextWatcher,
                 setPhase2Invisible();
                 setAnonymousIdentInvisible();
                 setCaCertInvisible();
+                setOcspInvisible();
                 setDomainInvisible();
                 setUserCertInvisible();
                 setPasswordInvisible();
@@ -1231,6 +1250,10 @@ public class WifiConfigController implements TextWatcher,
                 // Domain suffix matching is not relevant if the user hasn't chosen a CA
                 // certificate yet, or chooses not to validate the EAP server.
                 setDomainInvisible();
+                // Ocsp is an additional validation step for a server certifidate.
+                // This field is not relevant if the user hasn't chosen a valid
+                // CA certificate yet.
+                setOcspInvisible();
             }
         }
     }
@@ -1263,6 +1286,11 @@ public class WifiConfigController implements TextWatcher,
     private void setCaCertInvisible() {
         mView.findViewById(R.id.l_ca_cert).setVisibility(View.GONE);
         setSelection(mEapCaCertSpinner, mUnspecifiedCertString);
+    }
+
+    private void setOcspInvisible() {
+        mView.findViewById(R.id.l_ocsp).setVisibility(View.GONE);
+        mEapOcspSpinner.setSelection(WifiEnterpriseConfig.OCSP_NONE);
     }
 
     private void setDomainInvisible() {

@@ -18,33 +18,16 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 
 import android.content.Context;
-import android.database.ContentObserver;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class AutoBrightnessPreferenceController extends TogglePreferenceController implements
-        LifecycleObserver, OnStart, OnStop {
+
+public class AutoBrightnessPreferenceController extends TogglePreferenceController {
+
     private final String SYSTEM_KEY = SCREEN_BRIGHTNESS_MODE;
     private final int DEFAULT_VALUE = SCREEN_BRIGHTNESS_MODE_MANUAL;
-
-    private Preference mPreference;
-    private ContentObserver mContentObserver =
-            new ContentObserver(new Handler(Looper.getMainLooper())) {
-                @Override
-                public void onChange(boolean selfChange) {
-                    refreshSummary(mPreference);
-                }
-            };
 
     public AutoBrightnessPreferenceController(Context context, String key) {
         super(context, key);
@@ -73,27 +56,9 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public CharSequence getSummary() {
         return mContext.getText(isChecked()
                 ? R.string.auto_brightness_summary_on
                 : R.string.auto_brightness_summary_off);
-    }
-
-    @Override
-    public void onStart() {
-        mContext.getContentResolver().registerContentObserver(
-                Settings.System.getUriFor(SYSTEM_KEY), false /* notifyForDescendants */,
-                mContentObserver);
-    }
-
-    @Override
-    public void onStop() {
-        mContext.getContentResolver().unregisterContentObserver(mContentObserver);
     }
 }
