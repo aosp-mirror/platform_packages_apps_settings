@@ -47,15 +47,25 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         mFaceManager = Utils.getFaceManagerOrNull(this);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-
-        mFooterBarMixin.setSecondaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
-                        .setListener(this::onCancelButtonClick)
-                        .setButtonType(FooterButton.ButtonType.CANCEL)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
-        );
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            mFooterBarMixin.setSecondaryButton(
+                    new FooterButton.Builder(this)
+                            .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
+                            .setListener(this::onSkipButtonClick)
+                            .setButtonType(FooterButton.ButtonType.SKIP)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+        } else {
+            mFooterBarMixin.setSecondaryButton(
+                    new FooterButton.Builder(this)
+                            .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
+                            .setListener(this::onCancelButtonClick)
+                            .setButtonType(FooterButton.ButtonType.CANCEL)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+        }
 
         mFooterBarMixin.setPrimaryButton(
                 new FooterButton.Builder(this)
