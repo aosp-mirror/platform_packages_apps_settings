@@ -65,7 +65,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:singleLine="true"
-                  android:textAppearance="@style/TextAppearance.TileTitle"
+                  android:textAppearance="?android:attr/textAppearanceListItem"
                   android:ellipsize="marquee"
                   android:fadingEdge="horizontal" />
 
@@ -73,7 +73,7 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
-                  android:textAppearance="@style/TextAppearance.Small"
+                  android:textAppearance="?android:attr/textAppearanceSmall"
                   android:textAlignment="viewStart"
                   android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
