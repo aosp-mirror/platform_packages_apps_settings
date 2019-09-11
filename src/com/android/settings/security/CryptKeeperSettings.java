@@ -37,6 +37,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
+import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.CryptKeeperConfirm;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -193,9 +194,10 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
         // confirmation prompt; otherwise, go back to the initial state.
         if (resultCode == Activity.RESULT_OK && data != null) {
             int type = data.getIntExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE, -1);
-            byte[] password = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-            if (!(password == null || password.length == 0)) {
-                showFinalConfirmation(type, password);
+            LockscreenCredential password = data.getParcelableExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            if (password != null && !password.isNone()) {
+                showFinalConfirmation(type, password.getCredential());
             }
         }
     }
