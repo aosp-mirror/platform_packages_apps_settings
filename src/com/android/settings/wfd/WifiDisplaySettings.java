@@ -67,6 +67,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -661,7 +662,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
         }
     };
 
-    private class RoutePreference extends Preference
+    private class RoutePreference extends TwoTargetPreference
             implements Preference.OnPreferenceClickListener {
         private final MediaRouter.RouteInfo mRoute;
 
@@ -705,27 +706,30 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
             implements View.OnClickListener {
         private final WifiDisplay mDisplay;
 
+        @Override
+        protected int getSecondTargetResId() {
+            return R.layout.preference_widget_gear;
+        }
+
         public WifiDisplayRoutePreference(Context context, MediaRouter.RouteInfo route,
                 WifiDisplay display) {
             super(context, route);
-
             mDisplay = display;
-            setWidgetLayoutResource(R.layout.wifi_display_preference);
         }
 
         @Override
-        public void onBindViewHolder(PreferenceViewHolder view) {
-            super.onBindViewHolder(view);
+        public void onBindViewHolder(PreferenceViewHolder holder) {
+            super.onBindViewHolder(holder);
 
-            ImageView deviceDetails = (ImageView) view.findViewById(R.id.deviceDetails);
-            if (deviceDetails != null) {
-                deviceDetails.setOnClickListener(this);
+            final ImageView gear = (ImageView) holder.findViewById(R.id.settings_button);
+            if (gear != null) {
+                gear.setOnClickListener(this);
                 if (!isEnabled()) {
                     TypedValue value = new TypedValue();
                     getContext().getTheme().resolveAttribute(android.R.attr.disabledAlpha,
                             value, true);
-                    deviceDetails.setImageAlpha((int) (value.getFloat() * 255));
-                    deviceDetails.setEnabled(true); // always allow button to be pressed
+                    gear.setImageAlpha((int) (value.getFloat() * 255));
+                    gear.setEnabled(true); // always allow button to be pressed
                 }
             }
         }
