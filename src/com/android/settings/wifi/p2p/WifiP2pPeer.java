@@ -58,7 +58,7 @@ public class WifiP2pPeer extends Preference {
         if (mRssi == Integer.MAX_VALUE) {
             mSignal.setImageDrawable(null);
         } else {
-            mSignal.setImageResource(R.drawable.wifi_signal_dark);
+            mSignal.setImageResource(R.drawable.wifi_signal);
             mSignal.setImageState(STATE_SECURED,  true);
         }
         mSignal.setImageLevel(getLevel());
