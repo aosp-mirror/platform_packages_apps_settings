@@ -286,14 +286,7 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     // === Indexing ===
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.sound_settings;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.sound_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

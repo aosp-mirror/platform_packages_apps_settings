@@ -68,17 +68,7 @@ public class ResetDashboardFragment extends DashboardFragment {
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.reset_dashboard_fragment;
-                    result.add(sir);
-                    return result;
-                }
+            new BaseSearchIndexProvider(R.xml.reset_dashboard_fragment) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

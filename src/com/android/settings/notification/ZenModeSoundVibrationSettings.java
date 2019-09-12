@@ -71,18 +71,7 @@ public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implement
      * For Search.
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.zen_mode_sound_vibration_settings;
-                    result.add(sir);
-                    return result;
-                }
+            new BaseSearchIndexProvider(R.xml.zen_mode_sound_vibration_settings) {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {

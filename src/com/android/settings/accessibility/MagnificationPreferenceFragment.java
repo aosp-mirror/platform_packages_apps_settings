@@ -168,14 +168,7 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.accessibility_magnification_settings;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.accessibility_magnification_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

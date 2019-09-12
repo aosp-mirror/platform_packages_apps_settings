@@ -359,14 +359,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.system_navigation_gesture_settings;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.system_navigation_gesture_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

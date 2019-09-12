@@ -139,18 +139,7 @@ public class SecuritySettings extends DashboardFragment {
      * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final List<SearchIndexableResource> index = new ArrayList<>();
-                    // Append the rest of the settings
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.security_dashboard_settings;
-                    index.add(sir);
-                    return index;
-                }
+            new BaseSearchIndexProvider(R.xml.security_dashboard_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context

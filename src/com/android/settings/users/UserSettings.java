@@ -1222,23 +1222,12 @@ public class UserSettings extends SettingsPreferenceFragment
             (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
+            new BaseSearchIndexProvider(R.xml.user_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     final UserCapabilities userCaps = UserCapabilities.create(context);
                     return userCaps.mEnabled;
-                }
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableResource> index = new ArrayList<>();
-                    // Append the rest of the settings
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.user_settings;
-                    index.add(sir);
-                    return index;
                 }
 
                 @Override

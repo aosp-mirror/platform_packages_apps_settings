@@ -76,18 +76,7 @@ public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
      * For Search.
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.zen_mode_bypassing_apps;
-                    result.add(sir);
-                    return result;
-                }
+            new BaseSearchIndexProvider(R.xml.zen_mode_bypassing_apps) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

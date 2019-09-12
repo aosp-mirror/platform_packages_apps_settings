@@ -105,20 +105,7 @@ public final class AccessibilityControlTimeoutPreferenceFragment extends Dashboa
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.accessibility_control_timeout_settings;
-                    return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
-                }
+            new BaseSearchIndexProvider(R.xml.accessibility_control_timeout_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

@@ -396,13 +396,5 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.power_usage_summary;
-                    return Collections.singletonList(sir);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.power_usage_summary);
 }

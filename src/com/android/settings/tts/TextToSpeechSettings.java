@@ -796,14 +796,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.tts_settings;
-                    return Arrays.asList(sir);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.tts_settings);
 
 }
