@@ -271,14 +271,7 @@ public class FaceSettings extends DashboardFragment {
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.security_settings_face;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.security_settings_face) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

@@ -49,7 +49,7 @@ public class DoubleTapScreenSettings extends DashboardFragment {
         prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
 
         use(DoubleTapScreenPreferenceController.class)
-            .setConfig(new AmbientDisplayConfiguration(context));
+                .setConfig(new AmbientDisplayConfiguration(context));
     }
 
     @Override
@@ -73,13 +73,5 @@ public class DoubleTapScreenSettings extends DashboardFragment {
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.double_tap_screen_settings;
-                    return Arrays.asList(sir);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.double_tap_screen_settings);
 }

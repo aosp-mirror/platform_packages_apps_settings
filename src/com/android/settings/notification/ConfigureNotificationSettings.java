@@ -218,14 +218,7 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
      * For Search.
      */
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.configure_notification_settings;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.configure_notification_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

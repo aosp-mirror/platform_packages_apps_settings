@@ -78,17 +78,7 @@ public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase im
      * For Search.
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.zen_mode_restrict_notifications_settings;
-                    result.add(sir);
-                    return result;
-                }
+            new BaseSearchIndexProvider(R.xml.zen_mode_restrict_notifications_settings) {
 
             @Override
             public List<AbstractPreferenceController> createPreferenceControllers(Context context) {

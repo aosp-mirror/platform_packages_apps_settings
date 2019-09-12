@@ -237,14 +237,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.wifi_tether_settings;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.wifi_tether_settings) {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {

@@ -54,15 +54,5 @@ public class TrustAgentSettings extends DashboardFragment {
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final List<SearchIndexableResource> result = new ArrayList<>();
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.trust_agent_settings;
-                    result.add(sir);
-                    return result;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.trust_agent_settings);
 }

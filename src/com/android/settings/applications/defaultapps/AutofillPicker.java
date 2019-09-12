@@ -55,15 +55,7 @@ public class AutofillPicker extends DashboardFragment {
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    SearchIndexableResource searchIndexableResource =
-                            new SearchIndexableResource(context);
-                    searchIndexableResource.xmlResId = R.xml.default_autofill_picker_settings;
-                    return Arrays.asList(searchIndexableResource);
-                }
+            new BaseSearchIndexProvider(R.xml.default_autofill_picker_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(Context

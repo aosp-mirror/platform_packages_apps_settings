@@ -138,14 +138,7 @@ public class DreamSettings extends DashboardFragment {
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER
-            = new BaseSearchIndexProvider() {
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(
-                Context context, boolean enabled) {
-            final SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.dream_fragment_overview;
-            return Arrays.asList(sir);
-        }
+            = new BaseSearchIndexProvider(R.xml.dream_fragment_overview) {
 
         @Override
         public List<AbstractPreferenceController> createPreferenceControllers(Context context) {

@@ -522,20 +522,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
      * For Search.
      */
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
+            new BaseSearchIndexProvider(R.xml.development_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
-                }
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.development_settings;
-                    return Arrays.asList(sir);
                 }
 
                 @Override

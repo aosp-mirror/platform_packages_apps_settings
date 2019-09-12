@@ -48,16 +48,5 @@ public class DeviceAdminSettings extends DashboardFragment {
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.device_admin_settings;
-                    result.add(sir);
-                    return result;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.device_admin_settings);
 }

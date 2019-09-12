@@ -41,6 +41,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,12 +50,22 @@ import java.util.List;
 public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
 
     private static final String TAG = "BaseSearchIndex";
+    private int mXmlRes = 0;
 
     public BaseSearchIndexProvider() {
     }
 
+    public BaseSearchIndexProvider(int xmlRes) {
+        mXmlRes = xmlRes;
+    }
+
     @Override
     public List<SearchIndexableResource> getXmlResourcesToIndex(Context context, boolean enabled) {
+        if (mXmlRes != 0) {
+            final SearchIndexableResource sir = new SearchIndexableResource(context);
+            sir.xmlResId = mXmlRes;
+            return Arrays.asList(sir);
+        }
         return null;
     }
 

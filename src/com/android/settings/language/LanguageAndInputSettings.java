@@ -162,14 +162,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
             = (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.language_and_input;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.language_and_input) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
