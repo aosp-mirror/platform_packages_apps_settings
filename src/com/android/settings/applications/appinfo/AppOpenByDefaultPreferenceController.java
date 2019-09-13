@@ -22,6 +22,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.usb.IUsbManager;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -35,11 +36,18 @@ public class AppOpenByDefaultPreferenceController extends AppInfoPreferenceContr
 
     private IUsbManager mUsbManager;
     private PackageManager mPackageManager;
+    private String mPackageName;
 
     public AppOpenByDefaultPreferenceController(Context context, String key) {
         super(context, key);
         mUsbManager = IUsbManager.Stub.asInterface(ServiceManager.getService(Context.USB_SERVICE));
         mPackageManager = context.getPackageManager();
+    }
+
+    /** Set a package name for this controller. */
+    public AppOpenByDefaultPreferenceController setPackageName(String packageName) {
+        mPackageName = packageName;
+        return this;
     }
 
     @Override
@@ -57,7 +65,9 @@ public class AppOpenByDefaultPreferenceController extends AppInfoPreferenceContr
     @Override
     public void updateState(Preference preference) {
         final PackageInfo packageInfo = mParent.getPackageInfo();
-        if (packageInfo != null && !AppUtils.isInstant(packageInfo.applicationInfo)) {
+        if (packageInfo != null && !AppUtils.isInstant(packageInfo.applicationInfo)
+                && !AppUtils.isBrowserApp(mContext, packageInfo.packageName,
+                UserHandle.myUserId())) {
             preference.setVisible(true);
             preference.setSummary(AppUtils.getLaunchByDefaultSummary(mParent.getAppEntry(),
                     mUsbManager, mPackageManager, mContext));
@@ -70,5 +80,4 @@ public class AppOpenByDefaultPreferenceController extends AppInfoPreferenceContr
     protected Class<? extends SettingsPreferenceFragment> getDetailFragmentClass() {
         return AppLaunchSettings.class;
     }
-
 }

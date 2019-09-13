@@ -20,11 +20,8 @@ import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATIO
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
 
 import android.app.settings.SettingsEnums;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.ArraySet;
@@ -37,8 +34,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
-
-import java.util.List;
+import com.android.settingslib.applications.AppUtils;
 
 public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListener,
         Preference.OnPreferenceChangeListener {
@@ -48,15 +44,6 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
     private static final String KEY_CLEAR_DEFAULTS = "app_launch_clear_defaults";
     private static final String FRAGMENT_OPEN_SUPPORTED_LINKS =
             "com.android.settings.applications.OpenSupportedLinks";
-
-    private static final Intent sBrowserIntent;
-
-    static {
-        sBrowserIntent = new Intent()
-                .setAction(Intent.ACTION_VIEW)
-                .addCategory(Intent.CATEGORY_BROWSABLE)
-                .setData(Uri.parse("http:"));
-    }
 
     private PackageManager mPm;
 
@@ -90,7 +77,7 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
 
         mPm = getActivity().getPackageManager();
 
-        mIsBrowser = isBrowserApp(mPackageName);
+        mIsBrowser = AppUtils.isBrowserApp(this.getContext(), mPackageName, UserHandle.myUserId());
         mHasDomainUrls =
                 (mAppEntry.info.privateFlags & ApplicationInfo.PRIVATE_FLAG_HAS_DOMAIN_URLS) != 0;
 
@@ -106,22 +93,6 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
             mAppDomainUrls.setShouldDisableView(true);
             mAppDomainUrls.setEnabled(false);
         }
-    }
-
-    // An app is a "browser" if it has an activity resolution that wound up
-    // marked with the 'handleAllWebDataURI' flag.
-    private boolean isBrowserApp(String packageName) {
-        sBrowserIntent.setPackage(packageName);
-        List<ResolveInfo> list = mPm.queryIntentActivitiesAsUser(sBrowserIntent,
-                PackageManager.MATCH_ALL, UserHandle.myUserId());
-        final int count = list.size();
-        for (int i = 0; i < count; i++) {
-            ResolveInfo info = list.get(i);
-            if (info.activityInfo != null && info.handleAllWebDataURI) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private int linkStateToResourceId(int state) {
