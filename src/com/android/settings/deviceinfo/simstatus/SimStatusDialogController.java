@@ -35,12 +35,14 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
+import android.telephony.UiccCardInfo;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.Utils;
@@ -50,6 +52,7 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
+import java.util.Map;
 
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
@@ -82,6 +85,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     @VisibleForTesting
     final static int ICCID_INFO_VALUE_ID = R.id.icc_id_value;
     @VisibleForTesting
+    final static int EID_INFO_LABEL_ID = R.id.esim_id_label;
+    @VisibleForTesting
     final static int EID_INFO_VALUE_ID = R.id.esim_id_value;
     @VisibleForTesting
     final static int IMS_REGISTRATION_STATE_LABEL_ID = R.id.ims_reg_state_label;
@@ -105,7 +110,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             };
 
     private SubscriptionInfo mSubscriptionInfo;
-    private int mSlotIndex;
+    private final int mSlotIndex;
 
     private final SimStatusDialogFragment mDialog;
     private final TelephonyManager mTelephonyManager;
@@ -398,10 +403,43 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateEid() {
-        if (mEuiccManager.isEnabled()) {
-            mDialog.setText(EID_INFO_VALUE_ID, mEuiccManager.getEid());
-        } else {
+        boolean shouldHaveEid = false;
+        String eid = null;
+
+        if (mTelephonyManager.getPhoneCount() > PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM) {
+            // Get EID per-SIM in multi-SIM mode
+            Map<Integer, Integer> mapping = mTelephonyManager.getLogicalToPhysicalSlotMapping();
+            int pSlotId = mapping.getOrDefault(mSlotIndex,
+                    SubscriptionManager.INVALID_SIM_SLOT_INDEX);
+
+            if (pSlotId != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
+                List<UiccCardInfo> infos = mTelephonyManager.getUiccCardsInfo();
+
+                for (UiccCardInfo info : infos) {
+                    if (info.getSlotIndex() == pSlotId) {
+                        if (info.isEuicc()) {
+                            shouldHaveEid = true;
+                            eid = info.getEid();
+
+                            if (TextUtils.isEmpty(eid)) {
+                                eid = mEuiccManager.createForCardId(info.getCardId()).getEid();
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        } else if (mEuiccManager.isEnabled()) {
+            // Get EID of default eSIM in single-SIM mode
+            shouldHaveEid = true;
+            eid = mEuiccManager.getEid();
+        }
+
+        if (!shouldHaveEid) {
+            mDialog.removeSettingFromScreen(EID_INFO_LABEL_ID);
             mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
+        } else if (!TextUtils.isEmpty(eid)) {
+            mDialog.setText(EID_INFO_VALUE_ID, eid);
         }
     }
 
