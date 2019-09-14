@@ -191,16 +191,5 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.notification_access_settings;
-                    result.add(sir);
-                    return result;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.notification_access_settings);
 }

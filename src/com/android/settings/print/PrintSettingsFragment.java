@@ -492,16 +492,5 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    List<SearchIndexableResource> indexables = new ArrayList<>();
-                    SearchIndexableResource indexable = new SearchIndexableResource(context);
-                    indexable.xmlResId = R.xml.print_settings;
-                    indexables.add(indexable);
-                    return indexables;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.print_settings);
 }

@@ -94,14 +94,7 @@ public class UsbDetailsFragment extends DashboardFragment {
      * For Search.
      */
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    SearchIndexableResource res = new SearchIndexableResource(context);
-                    res.xmlResId = R.xml.usb_details_fragment;
-                    return Lists.newArrayList(res);
-                }
+            new BaseSearchIndexProvider(R.xml.usb_details_fragment) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

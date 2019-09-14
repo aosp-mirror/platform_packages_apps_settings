@@ -69,14 +69,7 @@ public class ScanningSettings extends DashboardFragment {
      * For Search.
      */
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.location_scanning;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.location_scanning) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context

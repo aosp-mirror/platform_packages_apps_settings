@@ -64,14 +64,7 @@ public class SwipeToNotificationSettings extends DashboardFragment {
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.swipe_to_notification_settings;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.swipe_to_notification_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

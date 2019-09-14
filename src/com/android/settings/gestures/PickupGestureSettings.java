@@ -73,14 +73,6 @@ public class PickupGestureSettings extends DashboardFragment {
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.pick_up_gesture_settings;
-                    return Arrays.asList(sir);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.pick_up_gesture_settings);
 
 }

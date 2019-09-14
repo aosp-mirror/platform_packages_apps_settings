@@ -160,16 +160,5 @@ public class ZenAccessSettings extends EmptyTextSettings implements
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.zen_access_settings;
-                    result.add(sir);
-                    return result;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.zen_access_settings);
 }
