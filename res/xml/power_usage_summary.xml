@@ -64,6 +64,11 @@
         android:summary="@string/battery_percentage_description"
         settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
 
+    <com.android.settings.fuelgauge.PowerGaugePreference
+        android:key="battery_temperature"
+        android:title="@string/battery_temperature"
+        android:selectable="false" />
+
     <com.android.settingslib.widget.FooterPreference
         android:key="power_usage_footer"
         android:title="@string/battery_footer_summary"
