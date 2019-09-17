@@ -65,7 +65,9 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     @Override
     public Slice getSlice() {
         if (!isVisible()) {
-            return null;
+            return new ListBuilder(mContext, MEDIA_OUTPUT_INDICATOR_SLICE_URI, ListBuilder.INFINITY)
+                    .setIsError(true)
+                    .build();
         }
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);

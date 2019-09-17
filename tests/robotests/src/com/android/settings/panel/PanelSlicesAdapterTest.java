@@ -49,7 +49,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 public class PanelSlicesAdapterTest {
@@ -61,7 +63,7 @@ public class PanelSlicesAdapterTest {
     private PanelFeatureProvider mPanelFeatureProvider;
     private FakeFeatureFactory mFakeFeatureFactory;
     private FakePanelContent mFakePanelContent;
-    private List<LiveData<Slice>> mData = new ArrayList<>();
+    private Map<Uri, LiveData<Slice>> mData = new LinkedHashMap<>();
 
     @Before
     public void setUp() {
@@ -93,7 +95,7 @@ public class PanelSlicesAdapterTest {
         doReturn(uri).when(slice).getUri();
         final LiveData<Slice> liveData = mock(LiveData.class);
         when(liveData.getValue()).thenReturn(slice);
-        mData.add(liveData);
+        mData.put(uri, liveData);
     }
 
     @Test
@@ -111,7 +113,7 @@ public class PanelSlicesAdapterTest {
     @Test
     public void sizeOfAdapter_shouldNotExceedMaxNum() {
         for (int i = 0; i < MAX_NUM_OF_SLICES + 2; i++) {
-            addTestLiveData(DATA_URI);
+            addTestLiveData(Uri.parse("uri" + i));
         }
 
         assertThat(mData.size()).isEqualTo(MAX_NUM_OF_SLICES + 2);
