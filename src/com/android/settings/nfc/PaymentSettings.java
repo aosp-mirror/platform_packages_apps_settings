@@ -74,11 +74,10 @@ public class PaymentSettings extends DashboardFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ViewGroup contentRoot = (ViewGroup) getListView().getParent();
+
         View emptyView = getActivity().getLayoutInflater().inflate(
-                R.layout.nfc_payment_empty, contentRoot, false);
-        contentRoot.addView(emptyView);
-        setEmptyView(emptyView);
+                R.layout.nfc_payment_empty, null, false);
+        ((ViewGroup) view.findViewById(android.R.id.list_container)).addView(emptyView);
     }
 
     @Override
