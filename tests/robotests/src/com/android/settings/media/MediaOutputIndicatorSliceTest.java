@@ -17,6 +17,8 @@
 
 package com.android.settings.media;
 
+import static android.app.slice.Slice.HINT_ERROR;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -110,11 +112,13 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
-    public void getSlice_noConnectedDevice_returnNull() {
+    public void getSlice_noConnectedDevice_returnErrorSlice() {
         mDevicesList.clear();
         when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
 
-        assertThat(mMediaOutputIndicatorSlice.getSlice()).isNull();
+        final Slice mediaSlice = mMediaOutputIndicatorSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
+        assertThat(metadata.isErrorSlice()).isTrue();
     }
 
     @Test
@@ -129,6 +133,7 @@ public class MediaOutputIndicatorSliceTest {
         assertThat(metadata.getTitle()).isEqualTo(mContext.getText(R.string.media_output_title));
         assertThat(metadata.getSubtitle()).isEqualTo(mContext.getText(
                 R.string.media_output_default_summary));
+        assertThat(metadata.isErrorSlice()).isFalse();
     }
 
     @Test
@@ -141,6 +146,7 @@ public class MediaOutputIndicatorSliceTest {
         final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
         assertThat(metadata.getTitle()).isEqualTo(mContext.getText(R.string.media_output_title));
         assertThat(metadata.getSubtitle()).isEqualTo(TEST_A2DP_DEVICE_NAME);
+        assertThat(metadata.isErrorSlice()).isFalse();
     }
 
     @Test
@@ -154,32 +160,39 @@ public class MediaOutputIndicatorSliceTest {
         final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
         assertThat(metadata.getTitle()).isEqualTo(mContext.getText(R.string.media_output_title));
         assertThat(metadata.getSubtitle()).isEqualTo(TEST_HAP_DEVICE_NAME);
+        assertThat(metadata.isErrorSlice()).isFalse();
     }
 
     @Test
-    public void getSlice_audioModeIsInCommunication_returnNull() {
+    public void getSlice_audioModeIsInCommunication_returnErrorSlice() {
         mDevicesList.add(mA2dpDevice);
         when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
         mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 
-        assertThat(mMediaOutputIndicatorSlice.getSlice()).isNull();
+        final Slice mediaSlice = mMediaOutputIndicatorSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
+        assertThat(metadata.isErrorSlice()).isTrue();
     }
 
     @Test
-    public void getSlice_audioModeIsRingtone_returnNull() {
+    public void getSlice_audioModeIsRingtone_returnErrorSlice() {
         mDevicesList.add(mA2dpDevice);
         when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
         mAudioManager.setMode(AudioManager.MODE_RINGTONE);
 
-        assertThat(mMediaOutputIndicatorSlice.getSlice()).isNull();
+        final Slice mediaSlice = mMediaOutputIndicatorSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
+        assertThat(metadata.isErrorSlice()).isTrue();
     }
 
     @Test
-    public void getSlice_audioModeIsInCall_returnNull() {
+    public void getSlice_audioModeIsInCall_returnErrorSlice() {
         mDevicesList.add(mA2dpDevice);
         when(mA2dpProfile.getConnectedDevices()).thenReturn(mDevicesList);
         mAudioManager.setMode(AudioManager.MODE_IN_CALL);
 
-        assertThat(mMediaOutputIndicatorSlice.getSlice()).isNull();
+        final Slice mediaSlice = mMediaOutputIndicatorSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
+        assertThat(metadata.isErrorSlice()).isTrue();
     }
 }

@@ -187,8 +187,6 @@ public class OwnerInfoPreferenceControllerTest {
 
         preference.performClick();
 
-        // Called once in setTargetFragment, and a second time to display the fragment.
-        verify(mFragment, times(2)).getFragmentManager();
         verify(mFragment.getFragmentManager().beginTransaction())
                 .add(any(OwnerInfoSettings.class), anyString());
     }
