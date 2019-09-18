@@ -15,24 +15,22 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center"
+              android:gravity="center"
+              android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/nfc_payment_tap_image"
-            android:layout_width="288dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tapandpay_emptystate"/>
-        <TextView
-            android:id="@+id/nfc_payment_empty_text"
-            android:layout_width="264dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="?android:attr/textColorSecondary"
-            android:paddingTop="36dp"
-            android:text="@string/nfc_payment_no_apps"/>
+    <ImageView
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tapandpay_emptystate"/>
+    <TextView
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="?android:attr/textColorSecondary"
+        android:paddingTop="36dp"
+        android:text="@string/nfc_payment_no_apps"/>
 </LinearLayout>
