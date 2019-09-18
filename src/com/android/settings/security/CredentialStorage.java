@@ -31,6 +31,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.security.Credentials;
+import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyStore;
@@ -42,17 +43,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.org.bouncycastle.asn1.ASN1InputStream;
-import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.vpn2.VpnUtils;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-
-import sun.security.util.ObjectIdentifier;
-import sun.security.x509.AlgorithmId;
 
 /**
  * CredentialStorage handles resetting and installing keys into KeyStore.
@@ -118,20 +111,6 @@ public final class CredentialStorage extends FragmentActivity {
         }
     }
 
-    private boolean isHardwareBackedKey(byte[] keyData) {
-        try {
-            final ASN1InputStream bIn = new ASN1InputStream(new ByteArrayInputStream(keyData));
-            final PrivateKeyInfo pki = PrivateKeyInfo.getInstance(bIn.readObject());
-            final String algOid = pki.getPrivateKeyAlgorithm().getAlgorithm().getId();
-            final String algName = new AlgorithmId(new ObjectIdentifier(algOid)).getName();
-
-            return KeyChain.isBoundKeyAlgorithm(algName);
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to parse key data");
-            return false;
-        }
-    }
-
     /**
      * Install credentials if available, otherwise do nothing.
      *
@@ -165,56 +144,18 @@ public final class CredentialStorage extends FragmentActivity {
             return true;
         }
 
-        boolean shouldFinish = true;
-        if (bundle.containsKey(Credentials.EXTRA_USER_PRIVATE_KEY_NAME)) {
-            final String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
-            final byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
-
-            if (!mKeyStore.importKey(key, value, uid, KeyStore.FLAG_NONE)) {
-                Log.e(TAG, "Failed to install " + key + " as uid " + uid);
-                return true;
-            }
-            // The key was prepended USER_PRIVATE_KEY by the CredentialHelper. However,
-            // KeyChain internally uses the raw alias name and only prepends USER_PRIVATE_KEY
-            // to the key name when interfacing with KeyStore.
-            // This is generally a symptom of CredentialStorage and CredentialHelper relying
-            // on internal implementation details of KeyChain and imitating its functionality
-            // rather than delegating to KeyChain for the certificate installation.
-            if (uid == Process.SYSTEM_UID || uid == KeyStore.UID_SELF) {
-                new MarkKeyAsUserSelectable(
-                        key.replaceFirst("^" + Credentials.USER_PRIVATE_KEY, "")).execute();
-                shouldFinish = false;
-            }
+        String alias = bundle.getString(Credentials.EXTRA_USER_KEY_ALIAS, null);
+        if (TextUtils.isEmpty(alias)) {
+            Log.e(TAG, "Cannot install key without an alias");
+            return true;
         }
 
-        final int flags = KeyStore.FLAG_NONE;
+        final byte[] privateKeyData = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
+        final byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
+        final byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
+        new InstallKeyInKeyChain(alias, privateKeyData, certData, caListData, uid).execute();
 
-        if (bundle.containsKey(Credentials.EXTRA_USER_CERTIFICATE_NAME)) {
-            final String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
-            final byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
-
-            if (!mKeyStore.put(certName, certData, uid, flags)) {
-                Log.e(TAG, "Failed to install " + certName + " as uid " + uid);
-                return shouldFinish;
-            }
-        }
-
-        if (bundle.containsKey(Credentials.EXTRA_CA_CERTIFICATES_NAME)) {
-            final String caListName = bundle.getString(Credentials.EXTRA_CA_CERTIFICATES_NAME);
-            final byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
-
-            if (!mKeyStore.put(caListName, caListData, uid, flags)) {
-                Log.e(TAG, "Failed to install " + caListName + " as uid " + uid);
-                return shouldFinish;
-            }
-        }
-
-        // Send the broadcast.
-        final Intent broadcast = new Intent(KeyChain.ACTION_KEYCHAIN_CHANGED);
-        sendBroadcast(broadcast);
-
-        setResult(RESULT_OK);
-        return shouldFinish;
+        return false;
     }
 
     /**
@@ -308,26 +249,45 @@ public final class CredentialStorage extends FragmentActivity {
     }
 
     /**
-     * Background task to mark a given key alias as user-selectable, so that
-     * it can be selected by users from the Certificate Selection prompt.
+     * Background task to install a certificate into KeyChain or the WiFi Keystore.
      */
-    private class MarkKeyAsUserSelectable extends AsyncTask<Void, Void, Boolean> {
+    private class InstallKeyInKeyChain extends AsyncTask<Void, Void, Boolean> {
         final String mAlias;
+        private final byte[] mKeyData;
+        private final byte[] mCertData;
+        private final byte[] mCaListData;
+        private final int mUid;
 
-        MarkKeyAsUserSelectable(String alias) {
+        InstallKeyInKeyChain(String alias, byte[] keyData, byte[] certData, byte[] caListData,
+                int uid) {
             mAlias = alias;
+            mKeyData = keyData;
+            mCertData = certData;
+            mCaListData = caListData;
+            mUid = uid;
         }
 
         @Override
         protected Boolean doInBackground(Void... unused) {
             try (KeyChainConnection keyChainConnection = KeyChain.bind(CredentialStorage.this)) {
-                keyChainConnection.getService().setUserSelectable(mAlias, true);
+                IKeyChainService service = keyChainConnection.getService();
+                if (!service.installKeyPair(mKeyData, mCertData, mCaListData, mAlias, mUid)) {
+                    Log.w(TAG, String.format("Failed installing key %s", mAlias));
+                    return false;
+                }
+
+                // If this is not a WiFi key, mark  it as user-selectable, so that it can be
+                // selected by users from the Certificate Selection prompt.
+                if (mUid == Process.SYSTEM_UID || mUid == KeyStore.UID_SELF) {
+                    service.setUserSelectable(mAlias, true);
+                }
+
                 return true;
             } catch (RemoteException e) {
-                Log.w(TAG, "Failed to mark key " + mAlias + " as user-selectable.");
+                Log.w(TAG, String.format("Failed to install key %s to uid %d", mAlias, mUid), e);
                 return false;
             } catch (InterruptedException e) {
-                Log.w(TAG, "Failed to mark key " + mAlias + " as user-selectable.");
+                Log.w(TAG, String.format("Interrupted while installing key %s", mAlias), e);
                 Thread.currentThread().interrupt();
                 return false;
             }
@@ -335,10 +295,26 @@ public final class CredentialStorage extends FragmentActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            Log.i(TAG, String.format("Marked alias %s as selectable, success? %s",
-                        mAlias, result));
-            CredentialStorage.this.finish();
+            CredentialStorage.this.onKeyInstalled(mAlias, mUid, result);
         }
+    }
+
+    private void onKeyInstalled(String alias, int uid, boolean result) {
+        if (!result) {
+            Log.w(TAG, String.format("Error installing alias %s for uid %d", alias, uid));
+            finish();
+            return;
+        }
+
+        Log.i(TAG, String.format("Successfully installed alias %s to uid %d.",
+                alias, uid));
+
+        // Send the broadcast.
+        final Intent broadcast = new Intent(KeyChain.ACTION_KEYCHAIN_CHANGED);
+        sendBroadcast(broadcast);
+        setResult(RESULT_OK);
+
+        finish();
     }
 
     /**
