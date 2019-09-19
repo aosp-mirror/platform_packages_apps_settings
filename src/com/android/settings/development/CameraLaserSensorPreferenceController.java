@@ -75,12 +75,9 @@ public class CameraLaserSensorPreferenceController extends DeveloperOptionsPrefe
         ((SwitchPreference) mPreference).setChecked(enabled);
     }
 
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        super.onDeveloperOptionsSwitchDisabled();
-        SystemProperties.set(PROPERTY_CAMERA_LASER_SENSOR, Integer.toString(DISABLED));
-        ((SwitchPreference) mPreference).setChecked(false);
-    }
+    // There should be no impact on the current
+    // laser sensor settings in case the developer
+    // settings switch is turned on or off!
 
     private boolean isLaserSensorEnabled() {
         final String prop = SystemProperties.get(PROPERTY_CAMERA_LASER_SENSOR,
