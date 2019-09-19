@@ -28,7 +28,6 @@ import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -94,7 +93,7 @@ public class FaceSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.security_settings_face;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -270,7 +269,7 @@ public class FaceSettings extends DashboardFragment {
         return controllers;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.security_settings_face) {
 
                 @Override

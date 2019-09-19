@@ -103,7 +103,6 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         return nonIndexableKeys;
     }
 
-    @Override
     public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllersFromCode =
                 createPreferenceControllers(context);
@@ -133,6 +132,13 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
      */
     public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
+    }
+
+    /**
+     * Returns the xml resource Id.
+     */
+    public int getXmlResourceId() {
+        return mXmlRes;
     }
 
     /**

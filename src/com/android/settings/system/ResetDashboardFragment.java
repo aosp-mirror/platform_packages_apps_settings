@@ -67,7 +67,7 @@ public class ResetDashboardFragment extends DashboardFragment {
         return controllers;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.reset_dashboard_fragment) {
 
                 @Override

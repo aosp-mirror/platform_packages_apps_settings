@@ -192,7 +192,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         return ComponentName.unflattenFromString(componentNameString);
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 // This fragment is for details of the shortcut. Only the shortcut itself needs
                 // to be indexed.

@@ -67,6 +67,6 @@ public class TapScreenGestureSettings extends DashboardFragment {
         return R.xml.tap_screen_gesture_settings;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.tap_screen_gesture_settings);
 }

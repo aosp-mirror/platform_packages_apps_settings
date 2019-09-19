@@ -19,7 +19,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
 import android.provider.DeviceConfig;
-import android.provider.SearchIndexableResource;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -29,9 +28,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
@@ -60,7 +56,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.connected_devices;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -79,6 +75,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     /**
      * For Search.
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.connected_devices);
 }

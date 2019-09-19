@@ -197,7 +197,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.data_saver) {
 
                 @Override

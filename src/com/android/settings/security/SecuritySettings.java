@@ -138,7 +138,7 @@ public class SecuritySettings extends DashboardFragment {
     /**
      * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.security_dashboard_settings) {
 
                 @Override

@@ -118,7 +118,7 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
     }
 
     /** Index provider used to expose this fragment in search. */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,

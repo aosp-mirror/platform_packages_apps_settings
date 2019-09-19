@@ -187,6 +187,6 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
         return (delay - MIN_AUTOCLICK_DELAY) / AUTOCLICK_DELAY_STEP;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_autoclick_settings);
 }

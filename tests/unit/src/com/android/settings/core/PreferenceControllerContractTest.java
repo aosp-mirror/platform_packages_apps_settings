@@ -28,8 +28,8 @@ import androidx.test.filters.MediumTest;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexableResources;
 
@@ -62,8 +62,8 @@ public class PreferenceControllerContractTest {
                         .getSearchIndexableResources();
         for (Class<?> clazz : resources.getProviderValues()) {
 
-            final Indexable.SearchIndexProvider provider =
-                    DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+            final BaseSearchIndexProvider provider =
+                    (BaseSearchIndexProvider) DatabaseIndexingUtils.getSearchIndexProvider(clazz);
             if (provider == null) {
                 continue;
             }

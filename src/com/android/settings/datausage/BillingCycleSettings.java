@@ -25,7 +25,6 @@ import android.content.res.Resources;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,13 +41,10 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.TimeZone;
 
 @SearchIndexable
@@ -196,7 +192,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.billing_cycle;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -472,7 +468,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         }
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.billing_cycle) {
 
                 @Override

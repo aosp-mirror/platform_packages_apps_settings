@@ -216,7 +216,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     /**
      * For search
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {
 
             @Override

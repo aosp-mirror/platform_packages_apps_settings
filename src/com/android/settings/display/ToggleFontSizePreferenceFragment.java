@@ -115,7 +115,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         return indices.length - 1;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,

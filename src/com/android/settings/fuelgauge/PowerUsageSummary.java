@@ -24,7 +24,6 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings.Global;
 import android.text.format.Formatter;
 import android.view.Menu;
@@ -54,7 +53,6 @@ import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -254,7 +252,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.power_usage_summary;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -395,6 +393,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     }
 
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.power_usage_summary);
 }

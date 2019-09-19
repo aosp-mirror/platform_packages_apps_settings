@@ -23,7 +23,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.service.notification.ConditionProviderService;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,7 +32,6 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -81,7 +79,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_mode_automation_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -148,7 +146,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     /**
      * For Search.
      */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.zen_mode_automation_settings) {
 
                 @Override

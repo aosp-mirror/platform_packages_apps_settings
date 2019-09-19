@@ -23,19 +23,15 @@ import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.hardware.display.NightDisplayListener;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Settings screen for Night display.
@@ -157,7 +153,7 @@ public class NightDisplaySettings extends DashboardFragment
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.night_display_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -175,7 +171,7 @@ public class NightDisplaySettings extends DashboardFragment
         return TAG;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.night_display_settings) {
 
                 @Override

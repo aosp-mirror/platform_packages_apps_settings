@@ -29,7 +29,7 @@ public class FakeIndexProvider implements Indexable {
 
     public static final String KEY = "TestKey";
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.location_settings) {
 
                 @Override

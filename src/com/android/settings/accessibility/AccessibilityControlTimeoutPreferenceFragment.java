@@ -104,7 +104,7 @@ public final class AccessibilityControlTimeoutPreferenceFragment extends Dashboa
         return sControllers;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_control_timeout_settings) {
 
                 @Override

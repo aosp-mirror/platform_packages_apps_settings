@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import androidx.fragment.app.Fragment;
 
@@ -59,7 +58,7 @@ public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_mode_bypassing_apps;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -75,7 +74,7 @@ public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
     /**
      * For Search.
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.zen_mode_bypassing_apps) {
 
                 @Override
