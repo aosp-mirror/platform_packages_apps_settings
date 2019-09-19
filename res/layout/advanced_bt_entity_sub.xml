@@ -38,10 +38,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:singleLine="false"
         android:ellipsize="marquee"
         android:textDirection="locale"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="24dp"
+        android:textSize="@dimen/advanced_bluetooth_header_title_text_size"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
