@@ -31,7 +31,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
-import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.SearchIndexableResource;
@@ -48,6 +47,7 @@ import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.utils.CandidateInfoExtra;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
@@ -150,12 +150,12 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
     @Override
     public void bindPreferenceExtra(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
-        if (!(info instanceof NavModeCandidateInfo)
+        if (!(info instanceof CandidateInfoExtra)
                 || !(pref instanceof RadioButtonPreferenceWithExtraWidget)) {
             return;
         }
 
-        pref.setSummary(((NavModeCandidateInfo) info).loadSummary());
+        pref.setSummary(((CandidateInfoExtra) info).loadSummary());
 
         RadioButtonPreferenceWithExtraWidget p = (RadioButtonPreferenceWithExtraWidget) pref;
         if (info.getKey() == KEY_SYSTEM_NAV_GESTURAL) {
@@ -175,25 +175,25 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
     @Override
     protected List<? extends CandidateInfo> getCandidates() {
         final Context c = getContext();
-        List<NavModeCandidateInfo> candidates = new ArrayList<>();
+        List<CandidateInfoExtra> candidates = new ArrayList<>();
 
         if (SystemNavigationPreferenceController.isOverlayPackageAvailable(c,
                 NAV_BAR_MODE_GESTURAL_OVERLAY)) {
-            candidates.add(new NavModeCandidateInfo(
+            candidates.add(new CandidateInfoExtra(
                     c.getText(R.string.edge_to_edge_navigation_title),
                     c.getText(R.string.edge_to_edge_navigation_summary),
                     KEY_SYSTEM_NAV_GESTURAL, true /* enabled */));
         }
         if (SystemNavigationPreferenceController.isOverlayPackageAvailable(c,
                 NAV_BAR_MODE_2BUTTON_OVERLAY)) {
-            candidates.add(new NavModeCandidateInfo(
+            candidates.add(new CandidateInfoExtra(
                     c.getText(R.string.swipe_up_to_switch_apps_title),
                     c.getText(R.string.swipe_up_to_switch_apps_summary),
                     KEY_SYSTEM_NAV_2BUTTONS, true /* enabled */));
         }
         if (SystemNavigationPreferenceController.isOverlayPackageAvailable(c,
                 NAV_BAR_MODE_3BUTTON_OVERLAY)) {
-            candidates.add(new NavModeCandidateInfo(
+            candidates.add(new CandidateInfoExtra(
                     c.getText(R.string.legacy_navigation_title),
                     c.getText(R.string.legacy_navigation_summary),
                     KEY_SYSTEM_NAV_3BUTTONS, true /* enabled */));
@@ -323,39 +323,6 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
     private boolean isNavBarMagnificationEnabled() {
         return Settings.Secure.getInt(getContext().getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, 0) == 1;
-    }
-
-    static class NavModeCandidateInfo extends CandidateInfo {
-        private final CharSequence mLabel;
-        private final CharSequence mSummary;
-        private final String mKey;
-
-        NavModeCandidateInfo(CharSequence label, CharSequence summary, String key,
-                boolean enabled) {
-            super(enabled);
-            mLabel = label;
-            mSummary = summary;
-            mKey = key;
-        }
-
-        @Override
-        public CharSequence loadLabel() {
-            return mLabel;
-        }
-
-        public CharSequence loadSummary() {
-            return mSummary;
-        }
-
-        @Override
-        public Drawable loadIcon() {
-            return null;
-        }
-
-        @Override
-        public String getKey() {
-            return mKey;
-        }
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
