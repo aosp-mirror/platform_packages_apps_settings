@@ -25,6 +25,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -49,8 +50,7 @@ import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
 
-public class ToggleAccessibilityServicePreferenceFragment
-        extends ToggleFeaturePreferenceFragment implements View.OnClickListener {
+public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final int DIALOG_ID_ENABLE_WARNING = 1;
     private static final int DIALOG_ID_DISABLE_WARNING = 2;
@@ -71,6 +71,42 @@ public class ToggleAccessibilityServicePreferenceFragment
     private ComponentName mComponentName;
 
     private Dialog mDialog;
+
+    private final View.OnClickListener mViewOnClickListener =
+            (View view) -> {
+                if (view.getId() == R.id.permission_enable_allow_button) {
+                    if (isFullDiskEncrypted()) {
+                        String title = createConfirmCredentialReasonMessage();
+                        Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
+                        startActivityForResult(intent,
+                                ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
+                    } else {
+                        handleConfirmServiceEnabled(true);
+                        if (isServiceSupportAccessibilityButton()) {
+                            showDialog(DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL);
+                        }
+                    }
+                } else if (view.getId() == R.id.permission_enable_deny_button) {
+                    handleConfirmServiceEnabled(false);
+                } else {
+                    throw new IllegalArgumentException();
+                }
+                mDialog.dismiss();
+            };
+
+    private final DialogInterface.OnClickListener mDialogInterfaceOnClickListener =
+            (DialogInterface dialog, int which) -> {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        handleConfirmServiceEnabled(false);
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        handleConfirmServiceEnabled(true);
+                        break;
+                    default:
+                        throw new IllegalArgumentException();
+                }
+            };
 
     @Override
     public int getMetricsCategory() {
@@ -137,7 +173,7 @@ public class ToggleAccessibilityServicePreferenceFragment
                     return null;
                 }
                 mDialog = AccessibilityServiceWarning
-                        .createCapabilitiesDialog(getActivity(), info, this);
+                        .createCapabilitiesDialog(getActivity(), info, mViewOnClickListener);
                 break;
             }
             case DIALOG_ID_DISABLE_WARNING: {
@@ -146,7 +182,7 @@ public class ToggleAccessibilityServicePreferenceFragment
                     return null;
                 }
                 mDialog = AccessibilityServiceWarning
-                        .createDisableDialog(getActivity(), info, this);
+                        .createDisableDialog(getActivity(), info, mDialogInterfaceOnClickListener);
                 break;
             }
             case DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL: {
@@ -208,32 +244,6 @@ public class ToggleAccessibilityServicePreferenceFragment
                 handleConfirmServiceEnabled(false);
             }
         }
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.permission_enable_allow_button) {
-            if (isFullDiskEncrypted()) {
-                String title = createConfirmCredentialReasonMessage();
-                Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
-                startActivityForResult(intent,
-                        ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
-            } else {
-                handleConfirmServiceEnabled(true);
-                if (isServiceSupportAccessibilityButton()) {
-                    showDialog(DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL);
-                }
-            }
-        } else if (view.getId() == R.id.permission_enable_deny_button) {
-            handleConfirmServiceEnabled(false);
-        } else if (view.getId() == R.id.permission_disable_stop_button) {
-            handleConfirmServiceEnabled(false);
-        } else if (view.getId() == R.id.permission_disable_cancel_button) {
-            handleConfirmServiceEnabled(true);
-        } else {
-            throw new IllegalArgumentException();
-        }
-        mDialog.dismiss();
     }
 
     private boolean isGestureNavigateEnabled() {
