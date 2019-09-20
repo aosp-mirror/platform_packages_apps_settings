@@ -43,7 +43,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
  */
 public class VideoCallingPreferenceController extends TelephonyTogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop,
-        Enhanced4gLtePreferenceController.On4gLteUpdateListener {
+        Enhanced4gBasePreferenceController.On4gLteUpdateListener {
 
     private Preference mPreference;
     private TelephonyManager mTelephonyManager;

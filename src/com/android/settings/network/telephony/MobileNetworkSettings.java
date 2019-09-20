@@ -32,6 +32,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
@@ -52,9 +55,6 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends RestrictedDashboardFragment {
@@ -174,6 +174,10 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class).init(mSubId);
         use(Enhanced4gLtePreferenceController.class).init(mSubId)
+                .addListener(videoCallingPreferenceController);
+        use(Enhanced4gCallingPreferenceController.class).init(mSubId)
+                .addListener(videoCallingPreferenceController);
+        use(Enhanced4gAdvancedCallingPreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
     }
 
