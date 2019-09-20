@@ -50,7 +50,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
             mFooterBarMixin.setSecondaryButton(
                     new FooterButton.Builder(this)
-                            .setText(R.string.skip_label)
+                            .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
                             .setListener(this::onSkipButtonClick)
                             .setButtonType(FooterButton.ButtonType.SKIP)
                             .setTheme(R.style.SudGlifButton_Secondary)
@@ -59,7 +59,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         } else {
             mFooterBarMixin.setSecondaryButton(
                     new FooterButton.Builder(this)
-                            .setText(R.string.security_settings_face_enroll_introduction_cancel)
+                            .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
                             .setListener(this::onCancelButtonClick)
                             .setButtonType(FooterButton.ButtonType.CANCEL)
                             .setTheme(R.style.SudGlifButton_Secondary)
@@ -69,7 +69,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
         mFooterBarMixin.setPrimaryButton(
                 new FooterButton.Builder(this)
-                        .setText(R.string.wizard_next)
+                        .setText(R.string.security_settings_face_enroll_introduction_agree)
                         .setListener(this::onNextButtonClick)
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(R.style.SudGlifButton_Primary)
