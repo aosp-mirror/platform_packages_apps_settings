@@ -29,17 +29,28 @@ import com.android.settings.core.BasePreferenceController;
 import java.util.List;
 
 
-public class AccessibilityUsagePreferenceController extends BasePreferenceController  {
+public class AccessibilityUsagePreferenceController extends BasePreferenceController {
 
-    private final @NonNull List<AccessibilityServiceInfo> mEnabledServiceInfos;
+    private final AccessibilityManager mAccessibilityManager;
+    @NonNull
+    private List<AccessibilityServiceInfo> mEnabledServiceInfos;
 
     public AccessibilityUsagePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-
-        final AccessibilityManager accessibilityManager = context.getSystemService(
-                AccessibilityManager.class);
-        mEnabledServiceInfos = accessibilityManager.getEnabledAccessibilityServiceList(
+        mAccessibilityManager = mContext.getSystemService(AccessibilityManager.class);
+        mEnabledServiceInfos = mAccessibilityManager.getEnabledAccessibilityServiceList(
                 AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        mEnabledServiceInfos = mAccessibilityManager.getEnabledAccessibilityServiceList(
+                AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+
+        if (mEnabledServiceInfos.isEmpty()) {
+            preference.setVisible(false);
+        }
     }
 
     @Override
