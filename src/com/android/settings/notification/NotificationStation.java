@@ -16,7 +16,8 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
+import static android.provider.Settings.EXTRA_APP_PACKAGE;
+import static android.provider.Settings.EXTRA_CHANNEL_ID;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -27,18 +28,19 @@ import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.service.notification.NotificationListenerService.RankingMap;
@@ -49,6 +51,7 @@ import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.DateTimeView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -62,8 +65,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class NotificationStation extends SettingsPreferenceFragment {
@@ -72,33 +75,44 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private static final boolean DEBUG = false;
     private static final boolean DUMP_EXTRAS = true;
     private static final boolean DUMP_PARCEL = true;
-    private Handler mHandler;
 
     private static class HistoricalNotificationInfo {
         public String key;
-        public String channel;
+        public NotificationChannel channel;
         public String pkg;
         public Drawable pkgicon;
         public CharSequence pkgname;
         public Drawable icon;
         public CharSequence title;
+        public CharSequence text;
         public int priority;
         public int user;
         public long timestamp;
         public boolean active;
-        public CharSequence extra;
+        public CharSequence notificationExtra;
+        public CharSequence rankingExtra;
+        public boolean alerted;
+        public boolean visuallyInterruptive;
+
+        public void updateFrom(HistoricalNotificationInfo updatedInfo) {
+            this.channel = updatedInfo.channel;
+            this.icon = updatedInfo.icon;
+            this.title = updatedInfo.title;
+            this.text = updatedInfo.text;
+            this.priority = updatedInfo.priority;
+            this.timestamp = updatedInfo.timestamp;
+            this.active = updatedInfo.active;
+            this.alerted = updatedInfo.alerted;
+            this.visuallyInterruptive = updatedInfo.visuallyInterruptive;
+            this.notificationExtra = updatedInfo.notificationExtra;
+            this.rankingExtra = updatedInfo.rankingExtra;
+        }
     }
 
     private PackageManager mPm;
     private INotificationManager mNoMan;
     private RankingMap mRanking;
-
-    private Runnable mRefreshListRunnable = new Runnable() {
-        @Override
-        public void run() {
-            refreshList();
-        }
-    };
+    private LinkedList<HistoricalNotificationInfo> mNotificationInfos;
 
     private final NotificationListenerService mListener = new NotificationListenerService() {
         @Override
@@ -106,15 +120,21 @@ public class NotificationStation extends SettingsPreferenceFragment {
             logd("onNotificationPosted: %s, with update for %d", sbn.getNotification(),
                     ranking == null ? 0 : ranking.getOrderedKeys().length);
             mRanking = ranking;
-            scheduleRefreshList();
+            if (sbn.getNotification().isGroupSummary()) {
+                return;
+            }
+            addOrUpdateNotification(sbn);
         }
 
         @Override
-        public void onNotificationRemoved(StatusBarNotification notification, RankingMap ranking) {
+        public void onNotificationRemoved(StatusBarNotification sbn, RankingMap ranking) {
             logd("onNotificationRankingUpdate with update for %d",
                     ranking == null ? 0 : ranking.getOrderedKeys().length);
             mRanking = ranking;
-            scheduleRefreshList();
+            if (sbn.getNotification().isGroupSummary()) {
+                return;
+            }
+            markNotificationAsDismissed(sbn);
         }
 
         @Override
@@ -122,7 +142,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
             logd("onNotificationRankingUpdate with update for %d",
                     ranking == null ? 0 : ranking.getOrderedKeys().length);
             mRanking = ranking;
-            scheduleRefreshList();
+            updateNotificationsFromRanking();
         }
 
         @Override
@@ -130,44 +150,29 @@ public class NotificationStation extends SettingsPreferenceFragment {
             mRanking = getCurrentRanking();
             logd("onListenerConnected with update for %d",
                     mRanking == null ? 0 : mRanking.getOrderedKeys().length);
-            scheduleRefreshList();
+            populateNotifications();
         }
     };
-
-    private void scheduleRefreshList() {
-        if (mHandler != null) {
-            mHandler.removeCallbacks(mRefreshListRunnable);
-            mHandler.postDelayed(mRefreshListRunnable, 100);
-        }
-    }
 
     private Context mContext;
 
     private final Comparator<HistoricalNotificationInfo> mNotificationSorter
-            = new Comparator<HistoricalNotificationInfo>() {
-                @Override
-                public int compare(HistoricalNotificationInfo lhs,
-                                   HistoricalNotificationInfo rhs) {
-                    return Long.compare(rhs.timestamp, lhs.timestamp);
-                }
-            };
+            = (lhs, rhs) -> Long.compare(rhs.timestamp, lhs.timestamp);
 
     @Override
     public void onAttach(Activity activity) {
         logd("onAttach(%s)", activity.getClass().getSimpleName());
         super.onAttach(activity);
-        mHandler = new Handler(activity.getMainLooper());
         mContext = activity;
         mPm = mContext.getPackageManager();
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+        mNotificationInfos = new LinkedList<>();
     }
 
     @Override
     public void onDetach() {
         logd("onDetach()");
-        mHandler.removeCallbacks(mRefreshListRunnable);
-        mHandler = null;
         super.onDetach();
     }
 
@@ -205,23 +210,83 @@ public class NotificationStation extends SettingsPreferenceFragment {
         } catch (RemoteException e) {
             Log.e(TAG, "Cannot register listener", e);
         }
-        refreshList();
     }
 
-    private void refreshList() {
-        List<HistoricalNotificationInfo> infos = loadNotifications();
-        if (infos != null) {
-            final int N = infos.size();
-            logd("adding %d infos", N);
-            Collections.sort(infos, mNotificationSorter);
-            if (getPreferenceScreen() == null) {
-                setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+    /**
+     * Adds all current and historical notifications when the NLS connects.
+     */
+    private void populateNotifications() {
+        loadNotifications();
+        final int N = mNotificationInfos.size();
+        logd("adding %d infos", N);
+        if (getPreferenceScreen() == null) {
+            setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+        }
+        getPreferenceScreen().removeAll();
+        for (int i = 0; i < N; i++) {
+            getPreferenceScreen().addPreference(new HistoricalNotificationPreference(
+                    getPrefContext(), mNotificationInfos.get(i), i));
+        }
+    }
+
+    /**
+     * Finds and dims the given notification in the preferences list.
+     */
+    private void markNotificationAsDismissed(StatusBarNotification sbn) {
+        final int N = mNotificationInfos.size();
+        for (int i = 0; i < N; i++) {
+            final HistoricalNotificationInfo info = mNotificationInfos.get(i);
+            if (TextUtils.equals(info.key, sbn.getKey())) {
+                info.active = false;
+                ((HistoricalNotificationPreference) getPreferenceScreen().findPreference(
+                        sbn.getKey())).updatePreference(info);
+               break;
             }
-            getPreferenceScreen().removeAll();
-            for (int i = 0; i < N; i++) {
-                getPreferenceScreen().addPreference(
-                        new HistoricalNotificationPreference(getPrefContext(), infos.get(i)));
+        }
+    }
+
+    /**
+     * Either updates a notification with its latest information or (if it's something the user
+     * would consider a new notification) adds a new entry at the start of the list.
+     */
+    private void addOrUpdateNotification(StatusBarNotification sbn) {
+        HistoricalNotificationInfo newInfo = createFromSbn(sbn, true);
+        boolean needsAdd = true;
+        final int N = mNotificationInfos.size();
+        for (int i = 0; i < N; i++) {
+            final HistoricalNotificationInfo info = mNotificationInfos.get(i);
+            if (TextUtils.equals(info.key, sbn.getKey()) && info.active
+                    && !newInfo.alerted && !newInfo.visuallyInterruptive) {
+                info.updateFrom(newInfo);
+
+                ((HistoricalNotificationPreference) getPreferenceScreen().findPreference(
+                        sbn.getKey())).updatePreference(info);
+                needsAdd = false;
+                break;
             }
+        }
+        if (needsAdd) {
+            mNotificationInfos.addFirst(newInfo);
+            getPreferenceScreen().addPreference(new HistoricalNotificationPreference(
+                    getPrefContext(),
+                    mNotificationInfos.peekFirst(), -1 * mNotificationInfos.size()));
+        }
+    }
+
+    /**
+     * Updates all notifications in the list based on new information in the ranking.
+     */
+    private void updateNotificationsFromRanking() {
+        Ranking rank = new Ranking();
+        for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
+            final HistoricalNotificationPreference p =
+                    (HistoricalNotificationPreference) getPreferenceScreen().getPreference(i);
+            final HistoricalNotificationInfo info = mNotificationInfos.get(i);
+            mRanking.getRanking(p.getKey(), rank);
+
+            updateFromRanking(info);
+            ((HistoricalNotificationPreference) getPreferenceScreen().findPreference(
+                    info.key)).updatePreference(info);
         }
     }
 
@@ -242,14 +307,46 @@ public class NotificationStation extends SettingsPreferenceFragment {
         CharSequence title = null;
         if (n.extras != null) {
             title = n.extras.getCharSequence(Notification.EXTRA_TITLE);
-            if (TextUtils.isEmpty(title)) {
-                title = n.extras.getCharSequence(Notification.EXTRA_TEXT);
+        }
+        return title == null? null : String.valueOf(title);
+    }
+
+    /**
+     * Returns the appropriate substring for this notification based on the style of notification.
+     */
+    private static String getTextString(Context appContext, Notification n) {
+        CharSequence text = null;
+        if (n.extras != null) {
+            text = n.extras.getCharSequence(Notification.EXTRA_TEXT);
+
+            Notification.Builder nb = Notification.Builder.recoverBuilder(appContext, n);
+
+            if (nb.getStyle() instanceof Notification.BigTextStyle) {
+                text = ((Notification.BigTextStyle) nb.getStyle()).getBigText();
+            } else if (nb.getStyle() instanceof Notification.MessagingStyle) {
+                Notification.MessagingStyle ms = (Notification.MessagingStyle) nb.getStyle();
+                final List<Notification.MessagingStyle.Message> messages = ms.getMessages();
+                if (messages != null && messages.size() > 0) {
+                    text = messages.get(messages.size() - 1).getText();
+                }
+            }
+
+            if (TextUtils.isEmpty(text)) {
+                text = n.extras.getCharSequence(Notification.EXTRA_TEXT);
             }
         }
-        if (TextUtils.isEmpty(title) && !TextUtils.isEmpty(n.tickerText)) {
-            title = n.tickerText;
+        return text == null ? null : String.valueOf(text);
+    }
+
+    private static Drawable loadIcon(Context context, StatusBarNotification sbn) {
+        Drawable draw = sbn.getNotification().getSmallIcon().loadDrawableAsUser(
+                sbn.getPackageContext(context), sbn.getUserId());
+        if (draw == null) {
+            return null;
         }
-        return String.valueOf(title);
+        draw.mutate();
+        draw.setColorFilter(sbn.getNotification().color, PorterDuff.Mode.SRC_ATOP);
+        return draw;
     }
 
     private static String formatPendingIntent(PendingIntent pi) {
@@ -265,7 +362,11 @@ public class NotificationStation extends SettingsPreferenceFragment {
         return sb.toString();
     }
 
-    private List<HistoricalNotificationInfo> loadNotifications() {
+    /**
+     * Reads all current and past notifications (up to the system limit, since the device was
+     * booted), stores the data we need to present them, and sorts them chronologically for display.
+     */
+    private void loadNotifications() {
         final int currentUserId = ActivityManager.getCurrentUser();
         try {
             StatusBarNotification[] active = mNoMan.getActiveNotifications(
@@ -274,51 +375,125 @@ public class NotificationStation extends SettingsPreferenceFragment {
                     mContext.getPackageName(), 50);
 
             List<HistoricalNotificationInfo> list
-                    = new ArrayList<HistoricalNotificationInfo>(active.length + dismissed.length);
+                    = new ArrayList<>(active.length + dismissed.length);
 
-            for (StatusBarNotification[] resultset
+            for (StatusBarNotification[] resultSet
                     : new StatusBarNotification[][] { active, dismissed }) {
-                for (StatusBarNotification sbn : resultset) {
+                for (StatusBarNotification sbn : resultSet) {
                     if (sbn.getUserId() != UserHandle.USER_ALL & sbn.getUserId() != currentUserId) {
                         continue;
                     }
-
-                    final Notification n = sbn.getNotification();
-                    final HistoricalNotificationInfo info = new HistoricalNotificationInfo();
-                    info.pkg = sbn.getPackageName();
-                    info.user = sbn.getUserId();
-                    info.icon = loadIconDrawable(info.pkg, info.user, n.icon);
-                    info.pkgicon = loadPackageIconDrawable(info.pkg, info.user);
-                    info.pkgname = loadPackageName(info.pkg);
-                    info.title = getTitleString(n);
-                    if (TextUtils.isEmpty(info.title)) {
-                        info.title = getString(R.string.notification_log_no_title);
+                    if (sbn.getNotification().isGroupSummary()) {
+                        continue;
                     }
-                    info.timestamp = sbn.getPostTime();
-                    info.priority = n.priority;
-                    info.channel = n.getChannelId();
-                    info.key = sbn.getKey();
-
-                    info.active = (resultset == active);
-
-                    info.extra = generateExtraText(sbn, info);
-
+                    final HistoricalNotificationInfo info = createFromSbn(sbn, resultSet == active);
                     logd("   [%d] %s: %s", info.timestamp, info.pkg, info.title);
                     list.add(info);
                 }
             }
 
-            return list;
+            // notifications are given to us in the same order as the shade; sorted by inferred
+            // priority. Resort chronologically for our display.
+            list.sort(mNotificationSorter);
+            mNotificationInfos = new LinkedList<>(list);
+
         } catch (RemoteException e) {
             Log.e(TAG, "Cannot load Notifications: ", e);
         }
-        return null;
     }
 
+    private HistoricalNotificationInfo createFromSbn(StatusBarNotification sbn, boolean active) {
+        final Notification n = sbn.getNotification();
+        final HistoricalNotificationInfo info = new HistoricalNotificationInfo();
+        info.pkg = sbn.getPackageName();
+        info.user = sbn.getUserId();
+        info.icon = loadIcon(mContext, sbn);
+        if (info.icon == null) {
+            info.icon = loadPackageIconDrawable(info.pkg, info.user);
+        }
+        info.pkgname = loadPackageName(info.pkg);
+        info.title = getTitleString(n);
+        info.text = getTextString(sbn.getPackageContext(mContext), n);
+        info.timestamp = sbn.getPostTime();
+        info.priority = n.priority;
+        info.key = sbn.getKey();
+
+        info.active = active;
+        info.notificationExtra = generateExtraText(sbn, info);
+
+        updateFromRanking(info);
+
+        return info;
+    }
+
+    private void updateFromRanking(HistoricalNotificationInfo info) {
+        Ranking rank = new Ranking();
+        if (mRanking == null) {
+            return;
+        }
+        mRanking.getRanking(info.key, rank);
+        info.alerted = rank.getLastAudiblyAlertedMillis() > 0;
+        info.visuallyInterruptive = rank.visuallyInterruptive();
+        info.channel = rank.getChannel();
+        info.rankingExtra = generateRankingExtraText(info);
+    }
+
+    /**
+     * Generates a string of debug information for this notification based on the RankingMap
+     */
+    private CharSequence generateRankingExtraText(HistoricalNotificationInfo info) {
+        final SpannableStringBuilder sb = new SpannableStringBuilder();
+        final String delim = getString(R.string.notification_log_details_delimiter);
+
+        Ranking rank = new Ranking();
+        if (mRanking != null && mRanking.getRanking(info.key, rank)) {
+            if (info.active && info.alerted) {
+                sb.append("\n")
+                        .append(bold(getString(R.string.notification_log_details_alerted)));
+            }
+            sb.append("\n")
+                    .append(bold(getString(R.string.notification_log_channel)))
+                    .append(delim)
+                    .append(info.channel.toString());
+            if (info.active) {
+                sb.append("\n")
+                        .append(bold(getString(
+                                R.string.notification_log_details_importance)))
+                        .append(delim)
+                        .append(Ranking.importanceToString(rank.getImportance()));
+                if (rank.getImportanceExplanation() != null) {
+                    sb.append("\n")
+                            .append(bold(getString(
+                                    R.string.notification_log_details_explanation)))
+                            .append(delim)
+                            .append(rank.getImportanceExplanation());
+                }
+                sb.append("\n")
+                        .append(bold(getString(
+                                R.string.notification_log_details_badge)))
+                        .append(delim)
+                        .append(Boolean.toString(rank.canShowBadge()));
+            }
+        } else {
+            if (mRanking == null) {
+                sb.append("\n")
+                        .append(bold(getString(
+                                R.string.notification_log_details_ranking_null)));
+            } else {
+                sb.append("\n")
+                        .append(bold(getString(
+                                R.string.notification_log_details_ranking_none)));
+            }
+        }
+
+        return sb;
+    }
+
+    /**
+     * Generates a string of debug information for this notification
+     */
     private CharSequence generateExtraText(StatusBarNotification sbn,
                                            HistoricalNotificationInfo info) {
-        final Ranking rank = new Ranking();
-
         final Notification n = sbn.getNotification();
         final SpannableStringBuilder sb = new SpannableStringBuilder();
         final String delim = getString(R.string.notification_log_details_delimiter);
@@ -333,10 +508,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
                 .append(bold(getString(R.string.notification_log_details_icon)))
                 .append(delim)
                 .append(String.valueOf(n.getSmallIcon()));
-        sb.append("\n")
-                .append(bold("channelId"))
-                .append(delim)
-                .append(String.valueOf(n.getChannelId()));
         sb.append("\n")
                 .append(bold("postTime"))
                 .append(delim)
@@ -357,58 +528,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
                         getString(R.string.notification_log_details_group_summary)));
             }
         }
-        if (info.active) {
-            // mRanking only applies to active notifications
-            if (mRanking != null && mRanking.getRanking(sbn.getKey(), rank)) {
-                if (rank.getLastAudiblyAlertedMillis() > 0) {
-                    sb.append("\n")
-                            .append(bold(getString(R.string.notification_log_details_alerted)));
-                }
-            }
-        }
-        try {
-            NotificationChannel channel = mNoMan.getNotificationChannelForPackage(
-                    sbn.getPackageName(), sbn.getUid(), n.getChannelId(), false);
-            sb.append("\n")
-                    .append(bold(getString(R.string.notification_log_details_sound)))
-                    .append(delim);
-            if (channel == null || channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
-
-                if (0 != (n.defaults & Notification.DEFAULT_SOUND)) {
-                    sb.append(getString(R.string.notification_log_details_default));
-                } else if (n.sound != null) {
-                    sb.append(n.sound.toString());
-                } else {
-                    sb.append(getString(R.string.notification_log_details_none));
-                }
-            } else {
-                sb.append(String.valueOf(channel.getSound()));
-            }
-            sb.append("\n")
-                    .append(bold(getString(R.string.notification_log_details_vibrate)))
-                    .append(delim);
-            if (channel == null || channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
-                if (0 != (n.defaults & Notification.DEFAULT_VIBRATE)) {
-                    sb.append(getString(R.string.notification_log_details_default));
-                } else if (n.vibrate != null) {
-                    sb.append(getString(R.string.notification_log_details_vibrate_pattern));
-                } else {
-                    sb.append(getString(R.string.notification_log_details_none));
-                }
-            } else {
-                if (channel.getVibrationPattern() != null) {
-                    sb.append(getString(R.string.notification_log_details_vibrate_pattern));
-                } else {
-                    sb.append(getString(R.string.notification_log_details_none));
-                }
-            }
-        } catch (RemoteException e) {
-            Log.d(TAG, "cannot read channel info", e);
-        }
-        sb.append("\n")
-                .append(bold(getString(R.string.notification_log_details_visibility)))
-                .append(delim)
-                .append(Notification.visibilityToString(n.visibility));
         if (n.publicVersion != null) {
             sb.append("\n")
                     .append(bold(getString(
@@ -416,42 +535,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
                     .append(delim)
                     .append(getTitleString(n.publicVersion));
         }
-        sb.append("\n")
-                .append(bold(getString(R.string.notification_log_details_priority)))
-                .append(delim)
-                .append(Notification.priorityToString(n.priority));
-        if (info.active) {
-            // mRanking only applies to active notifications
-            if (mRanking != null && mRanking.getRanking(sbn.getKey(), rank)) {
-                sb.append("\n")
-                        .append(bold(getString(
-                                R.string.notification_log_details_importance)))
-                        .append(delim)
-                        .append(Ranking.importanceToString(rank.getImportance()));
-                if (rank.getImportanceExplanation() != null) {
-                    sb.append("\n")
-                            .append(bold(getString(
-                                    R.string.notification_log_details_explanation)))
-                            .append(delim)
-                            .append(rank.getImportanceExplanation());
-                }
-                sb.append("\n")
-                        .append(bold(getString(
-                                R.string.notification_log_details_badge)))
-                        .append(delim)
-                        .append(Boolean.toString(rank.canShowBadge()));
-            } else {
-                if (mRanking == null) {
-                    sb.append("\n")
-                            .append(bold(getString(
-                                    R.string.notification_log_details_ranking_null)));
-                } else {
-                    sb.append("\n")
-                            .append(bold(getString(
-                                    R.string.notification_log_details_ranking_none)));
-                }
-            }
-        }
+
         if (n.contentIntent != null) {
             sb.append("\n")
                     .append(bold(getString(
@@ -535,25 +619,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
         return sb;
     }
 
-    private Resources getResourcesForUserPackage(String pkg, int userId) {
-        Resources r = null;
-
-        if (pkg != null) {
-            try {
-                if (userId == UserHandle.USER_ALL) {
-                    userId = UserHandle.USER_SYSTEM;
-                }
-                r = mPm.getResourcesForApplicationAsUser(pkg, userId);
-            } catch (PackageManager.NameNotFoundException ex) {
-                Log.e(TAG, "Icon package not found: " + pkg, ex);
-                return null;
-            }
-        } else {
-            r = mContext.getResources();
-        }
-        return r;
-    }
-
     private Drawable loadPackageIconDrawable(String pkg, int userId) {
         Drawable icon = null;
         try {
@@ -576,31 +641,17 @@ public class NotificationStation extends SettingsPreferenceFragment {
         return pkg;
     }
 
-    private Drawable loadIconDrawable(String pkg, int userId, int resId) {
-        Resources r = getResourcesForUserPackage(pkg, userId);
-
-        if (resId == 0) {
-            return null;
-        }
-
-        try {
-            return r.getDrawable(resId, null);
-        } catch (RuntimeException e) {
-            Log.w(TAG, "Icon not found in "
-                    + (pkg != null ? resId : "<system>")
-                    + ": " + Integer.toHexString(resId), e);
-        }
-
-        return null;
-    }
-
     private static class HistoricalNotificationPreference extends Preference {
         private final HistoricalNotificationInfo mInfo;
         private static long sLastExpandedTimestamp; // quick hack to keep things from collapsing
+        public ViewGroup mItemView; // hack to update prefs fast;
 
-        public HistoricalNotificationPreference(Context context, HistoricalNotificationInfo info) {
+        public HistoricalNotificationPreference(Context context, HistoricalNotificationInfo info,
+                int order) {
             super(context);
             setLayoutResource(R.layout.notification_log_row);
+            setOrder(order);
+            setKey(info.key);
             mInfo = info;
         }
 
@@ -608,41 +659,67 @@ public class NotificationStation extends SettingsPreferenceFragment {
         public void onBindViewHolder(PreferenceViewHolder row) {
             super.onBindViewHolder(row);
 
-            if (mInfo.icon != null) {
-                ((ImageView) row.findViewById(R.id.icon)).setImageDrawable(mInfo.icon);
+            mItemView = (ViewGroup) row.itemView;
+
+            updatePreference(mInfo);
+
+            row.findViewById(R.id.timestamp).setOnLongClickListener(v -> {
+                final View extras = row.findViewById(R.id.extra);
+                extras.setVisibility(extras.getVisibility() == View.VISIBLE
+                        ? View.GONE : View.VISIBLE);
+                sLastExpandedTimestamp = mInfo.timestamp;
+                return false;
+            });
+        }
+
+        public void updatePreference(HistoricalNotificationInfo info) {
+            if (mItemView == null) {
+                return;
             }
-            if (mInfo.pkgicon != null) {
-                ((ImageView) row.findViewById(R.id.pkgicon)).setImageDrawable(mInfo.pkgicon);
+            if (info.icon != null) {
+                ((ImageView) mItemView.findViewById(R.id.icon)).setImageDrawable(mInfo.icon);
+            }
+            ((TextView) mItemView.findViewById(R.id.pkgname)).setText(mInfo.pkgname);
+            ((DateTimeView) mItemView.findViewById(R.id.timestamp)).setTime(info.timestamp);
+            if (!TextUtils.isEmpty(info.title)) {
+                ((TextView) mItemView.findViewById(R.id.title)).setText(info.title);
+                mItemView.findViewById(R.id.title).setVisibility(View.VISIBLE);
+            } else {
+                mItemView.findViewById(R.id.title).setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(info.text)) {
+                ((TextView) mItemView.findViewById(R.id.text)).setText(info.text);
+                mItemView.findViewById(R.id.text).setVisibility(View.VISIBLE);
+            } else {
+                mItemView.findViewById(R.id.text).setVisibility(View.GONE);
+            }
+            if (info.icon != null) {
+                ((ImageView) mItemView.findViewById(R.id.icon)).setImageDrawable(info.icon);
             }
 
-            ((DateTimeView) row.findViewById(R.id.timestamp)).setTime(mInfo.timestamp);
-            ((TextView) row.findViewById(R.id.title)).setText(mInfo.title);
-            ((TextView) row.findViewById(R.id.pkgname)).setText(mInfo.pkgname);
+            ((DateTimeView) mItemView.findViewById(R.id.timestamp)).setTime(mInfo.timestamp);
 
-            final TextView extra = (TextView) row.findViewById(R.id.extra);
-            extra.setText(mInfo.extra);
-            extra.setVisibility(mInfo.timestamp == sLastExpandedTimestamp
-                    ? View.VISIBLE : View.GONE);
+            ((TextView) mItemView.findViewById(R.id.notification_extra))
+                    .setText(mInfo.notificationExtra);
+            ((TextView) mItemView.findViewById(R.id.ranking_extra))
+                    .setText(mInfo.rankingExtra);
 
-            row.itemView.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            extra.setVisibility(extra.getVisibility() == View.VISIBLE
-                                    ? View.GONE : View.VISIBLE);
-                            sLastExpandedTimestamp = mInfo.timestamp;
-                        }
-                    });
+            mItemView.findViewById(R.id.extra).setVisibility(
+                    mInfo.timestamp == sLastExpandedTimestamp ? View.VISIBLE : View.GONE);
 
-            row.itemView.setAlpha(mInfo.active ? 1.0f : 0.5f);
+            mItemView.setAlpha(mInfo.active ? 1.0f : 0.5f);
+
+            mItemView.findViewById(R.id.alerted_icon).setVisibility(
+                    mInfo.alerted ? View.VISIBLE : View.GONE);
         }
 
         @Override
         public void performClick() {
-//            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-//                    Uri.fromParts("package", mInfo.pkg, null));
-//            intent.setComponent(intent.resolveActivity(getContext().getPackageManager()));
-//            getContext().startActivity(intent);
+            Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                    .putExtra(EXTRA_APP_PACKAGE, mInfo.pkg)
+                    .putExtra(EXTRA_CHANNEL_ID, mInfo.channel.getId());
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(intent);
         }
     }
 }
