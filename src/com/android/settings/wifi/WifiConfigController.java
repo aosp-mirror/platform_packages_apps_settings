@@ -555,6 +555,7 @@ public class WifiConfigController implements TextWatcher,
 
     void showWarningMessagesIfAppropriate() {
         mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.GONE);
+        mView.findViewById(R.id.no_user_cert_warning).setVisibility(View.GONE);
         mView.findViewById(R.id.no_domain_warning).setVisibility(View.GONE);
         mView.findViewById(R.id.ssid_too_long_warning).setVisibility(View.GONE);
 
@@ -580,6 +581,14 @@ public class WifiConfigController implements TextWatcher,
                 // without restricting the server domain that these certificates can be used to
                 // validate.
                 mView.findViewById(R.id.no_domain_warning).setVisibility(View.VISIBLE);
+            }
+        }
+
+        if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B &&
+                mEapMethodSpinner.getSelectedItemPosition() == WIFI_EAP_METHOD_TLS) {
+            String userCertSelection = (String) mEapUserCertSpinner.getSelectedItem();
+            if (userCertSelection.equals(mUnspecifiedCertString)) {
+                mView.findViewById(R.id.no_user_cert_warning).setVisibility(View.VISIBLE);
             }
         }
     }
