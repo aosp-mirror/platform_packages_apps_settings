@@ -40,6 +40,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -545,5 +546,15 @@ public class WifiConfigControllerTest {
         eapMethodSpinner.setSelection(Eap.TLS);
 
         assertThat(eapMethodSpinner.getSelectedItemPosition()).isEqualTo(Eap.TLS);
+    }
+
+    @Test
+    public void getHiddenSettingsPosition_whenAdvancedToggled_shouldBeFirst() {
+        final LinearLayout advancedFieldsLayout = mView.findViewById(R.id.wifi_advanced_fields);
+        final LinearLayout hiddenSettingLayout = mView.findViewById(R.id.hidden_settings_field);
+
+        final LinearLayout firstChild = (LinearLayout) advancedFieldsLayout.getChildAt(0);
+
+        assertThat(firstChild).isEqualTo(hiddenSettingLayout);
     }
 }
