@@ -447,7 +447,7 @@
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Postavite otključavanje licem"</string>
     <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Otključavanje licem možete koristiti za otključavanje uređaja, prijavu u aplikacije i potvrđivanje plaćanja.\n\nNapomena:\nTelefon možete otključati čak i kada vam to nije namjera ako pogledate u njega.\n\nVaš telefon je moguće otključati ako ga neko prinese vašem licu čak i dok su vam oči zatvorene.\n\nVaš telefon može otključati osoba koja mnogo liči na vas, kao što je naprimjer identični blizanac."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Izbrisati podatke o licu?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="4820545735354901641">"Slike i model lica koji se koriste za otključavanje licem izbrisat će se trajno i sigurno. Nakon uklanjanja, trebat će vam PIN, uzorak ili lozinka za otključavanje telefona, prijavu u aplikacije i potvrdu plaćanja."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Podaci o licu koje je koristila funkcija otključavanja licem će se trajno i sigurno izbrisati. Nakon uklanjanja, trebat će vam PIN, uzorak ili lozinka za otključavanje telefona, prijavu u aplikacije i potvrdu plaćanja."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Otključajte telefon pomoću funkcije Otključavanje licem"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Otisak prsta"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Upravljanje otiscima prstiju"</string>
@@ -749,7 +749,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aktivnih aplikacija</item>
     </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Pouzdani agenti"</string>
-    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Da biste koristili, prvo postavite zaključavanje ekrana"</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Da ovo koristite, prvo postavite zaključavanje ekrana"</string>
     <string name="manage_trust_agents_summary" msgid="1475819820389620546">"Nema"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="3935182396726101824">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> aktivni pouzdani agent</item>
@@ -866,9 +866,9 @@
     <string name="nfc_disabled_summary" msgid="3507017304297395467">"Nedostupno jer je NFC isključen"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
     <string name="android_beam_explained" msgid="1810540319385192758">"Kada je uključena ova funkcija, možete emitirati sadržaj aplikacije na drugi uređaj koji podržava NFC približavanjem uređaja jedan drugome. Naprimjer, možete emitirati web stranice, videozapise s YouTubea, kontakte i drugo.\n\nSamo približite uređaje jedan drugome (u pravilu, poleđinu uz poleđinu) a zatim dodirnite svoj ekran. Aplikacija će sama prepoznati šta treba emitirati."</string>
-    <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi‑Fi"</string>
+    <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"WiFi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Uključite Wi‑Fi"</string>
-    <string name="wifi_settings" msgid="29722149822540994">"Wi‑Fi"</string>
+    <string name="wifi_settings" msgid="29722149822540994">"WiFi"</string>
     <string name="wifi_settings_master_switch_title" msgid="4746267967669683259">"Koristi WiFi"</string>
     <string name="wifi_settings_category" msgid="8719175790520448014">"WiFi postavke"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"WiFi"</string>
@@ -909,7 +909,7 @@
     <string name="wifi_cellular_data_fallback_summary" msgid="1403505355490119307">"Korištenje prijenosa podataka na mobilnoj mreži kada WiFi mreža nema pristup internetu. Mogu nastati troškovi prijenosa podataka."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Dodaj mrežu"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"Postavke za WiFi"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"Wi‑Fi veza se uključuje ponovo automatski"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"WiFi veza se uključuje ponovo automatski"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="2782566279864356713">"WiFi se ne uključuje ponovo automatski"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"WiFi mreže"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"Više opcija"</string>
@@ -1244,11 +1244,11 @@
     <string name="display_white_balance_title" msgid="4093966473741329340">"Balans bijele boje prikaza"</string>
     <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Svjesni ekran"</string>
-    <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Uključeno/Ekran se neće isključiti ako gledate u njega"</string>
+    <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Uključeno / ekran se neće isključiti ako gledate u njega"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Isključeno"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Potreban je pristup kameri"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Dodirnite da upravljate odobrenjima za Usluge personalizacije uređaja"</string>
-    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Sprječava isključivanje ekrana ako gledate u njega"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Sprečava isključivanje ekrana ako gledate u njega"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Funkcija Svjesni ekran koristi prednju kameru da utvrdi gleda li neko u ekran. Funkcionira na uređaju, a slike se nikada ne arhiviraju niti šalju Googleu."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Neka ekran ostane uključen dok ga gledate"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Noćno svjetlo"</string>
@@ -2011,7 +2011,7 @@
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Postavke fizičke tastature"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Pritisnite tipku za razmak dva puta kako biste umetnuli \".\""</string>
     <string name="show_password" msgid="4837897357002495384">"Prikaži lozinke"</string>
-    <string name="show_password_summary" msgid="3365397574784829969">"Kratko prikazivanje znakova dok se upisuju"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"Kratko prikazivanje znakova dok pišete"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Ovaj alat za provjeru pravopisa u mogućnosti je da prikuplja sav tekst koji upišete, uključujući lične podatke kao što su lozinke i brojevi kreditnih kartica. Alat je omogućila aplikacija <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Da li želite koristiti ovaj alat za provjeru pravopisa?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Postavke"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Jezik"</string>
@@ -2096,7 +2096,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Zvuk i tekst na ekranu"</string>
     <string name="display_category_title" msgid="685461049938269166">"Prikaz"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Kontrole za interakciju"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Preuzeti servisi"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Preuzete usluge"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimentalno"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Oznake funkcija"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2111,7 +2111,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Dodirnite tri puta da zumirate"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Dodirnite dugme da zumirate"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Da zumirate "</b>", brzo dodirnite ekran 3 puta.\n"<ul><li>"Povlačite s 2 ili više prstiju da pomjerate prikaz"</li>\n<li>"Sastavite 2 ili više prstiju da podesite zumiranje"</li></ul>\n\n<b>"Da privremeno zumirate prikaz"</b>", brzo dodirnite ekran 3 puta i zadržite prst na trećem dodiru.\n"<ul><li>"Povlačite prstom da pregledate ekran"</li>\n<li>"Podignite prst da umanjite prikaz"</li></ul>\n\n"Ne možete uvećati prikaz na tastaturi i navigacionoj traci."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Kada je uvećavanje uključeno, možete uvećavati sadržaj na ekranu.\n\n"<b>"Da zumirate"</b>", pokrenite uvećavanje, a zatim dodirnite ekran bilo gdje.\n"<ul><li>"• Prevucite dva ili više prstiju za klizanje"</li>\n<li>"• Uhvatite s dva ili više prstiju za podešavanje zumiranja"</li></ul>\n\n<b>"Za privremeno zumiranje,"</b>" pokrenite uvećanje, a zatim dodirnite ekran bilo gdje i zadržite.\n"<ul><li>"• Prevucite za kretanje po ekranu"</li>\n<li>"• Podignite prst za umanjivanje"</li></ul>\n\n"Nije moguće uvećati na tastaturi ili traci za navigaciju."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Kada je uvećavanje uključeno, možete uvećavati sadržaj na ekranu.\n\n"<b>"Da zumirate"</b>", pokrenite uvećavanje, a zatim dodirnite ekran bilo gdje.\n"<ul><li>"• Prevucite s dva ili više prstiju za klizanje"</li>\n<li>"• Uhvatite s dva ili više prstiju za podešavanje zumiranja"</li></ul>\n\n<b>"Za privremeno zumiranje,"</b>" pokrenite uvećanje, a zatim dodirnite ekran bilo gdje i zadržite.\n"<ul><li>"• Prevucite za kretanje po ekranu"</li>\n<li>"• Podignite prst za umanjivanje"</li></ul>\n\n"Nije moguće uvećati na tastaturi ili traci za navigaciju."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Otvorite pomoću dugmeta za pristupačnost"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Otvorite pokretom"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Koristite novi pokret za pristupačnost"</string>
@@ -2158,7 +2158,7 @@
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Povratne informacije na dodir"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Koristi uslugu"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Koristi ispravku boje"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Koristi natpise"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Koristi titlove"</string>
     <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Neke aplikacije ne podržavaju ovu postavku."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Nastavi"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Slušni aparat"</string>
@@ -2449,7 +2449,7 @@
     <string name="power_screen" msgid="3023346080675904613">"Ekran"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Svjetiljka"</string>
     <string name="power_camera" msgid="4976286950934622605">"Fotoaparat"</string>
-    <string name="power_wifi" msgid="1135085252964054957">"Wi‑Fi"</string>
+    <string name="power_wifi" msgid="1135085252964054957">"WiFi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="3392999761958982492">"Mobilna mreža u stanju mirovanja"</string>
     <string name="power_phone" msgid="5392641106474567277">"Glasovni pozivi"</string>
@@ -2772,7 +2772,7 @@
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Postavi ograničenje za 4G podatke"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Ograničenje 2G-3G podataka"</string>
     <string name="data_usage_disable_wifi_limit" msgid="1394901415264660888">"Ograniči WiFi podatke"</string>
-    <string name="data_usage_tab_wifi" msgid="481146038146585749">"Wi‑Fi"</string>
+    <string name="data_usage_tab_wifi" msgid="481146038146585749">"WiFi"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"Ethernet"</string>
     <string name="data_usage_tab_mobile" msgid="454140350007299045">"Mobilni"</string>
     <string name="data_usage_tab_4g" msgid="1301978716067512235">"4G"</string>
@@ -3439,14 +3439,14 @@
     <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"zaključaj ekran, zaljučavanje ekrana, preskoči, zaobilaženje"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kada je radni profil zaključan"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Obavještenja na zaključanom ekranu"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Prikazuj zvučna i tiha obavještenja"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Prikaz zvučnih i tihih obavještenja"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Prikazuj samo zvučna obavještenja"</string>
     <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Ne prikazuj obavještenja"</string>
     <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Obavještenja o osjetljivom sadržaju"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Prikazuj osjetljivi sadržaj kada je uređaj zaključan"</string>
     <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Obavještenja o osjetljivom sadržaju radnog profila"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Prikazuj osjetljivi sadržaj radnog profila kada je uređaj zaključan"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Prikaži sav sadržaj obavještenja"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Prikaz cijelog sadržaja obavještenja"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Prikaži osjetljivi sadržaj samo kada je otključano"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Uopće ne prikazuj obavještenja"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="3143593517597479937">"Kako želite da se obavještenja prikazuju na zaključanom ekranu?"</string>
@@ -3826,7 +3826,7 @@
     <string name="usage_access" msgid="5479504953931038165">"Pristup korištenju"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"Dopusti pristup korištenju"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Postavke upotrebe aplikacija"</string>
-    <string name="time_spent_in_app_pref_title" msgid="9124796405314626532">"Vrijeme upotrebe"</string>
+    <string name="time_spent_in_app_pref_title" msgid="9124796405314626532">"Vrijeme korištenja"</string>
     <string name="usage_access_description" msgid="1352111094596416795">"Pristup korištenju omogućava praćenje drugih aplikacija koje koristite i učestalosti korištenja, kao i praćenje vašeg operatera, postavke jezika i drugo."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Memorija"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Detalji o memoriji"</string>
