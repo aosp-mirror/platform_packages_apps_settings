@@ -350,10 +350,10 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"按世界协调时间 (UTC) 偏移量选择"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"时间"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"设备空闲多长时间后锁屏"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"设备空闲多久后锁定"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"空闲 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"一空闲就立即锁定（除非 <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> 让屏幕保持解锁状态）"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"空闲<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（除非 <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> 让屏幕保持解锁状态）"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"空闲后立即锁定（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> 让屏幕保持解锁状态时除外）"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"空闲<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> 让屏幕保持解锁状态时除外）"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在锁定屏幕上显示机主信息"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"锁定屏幕消息"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"启用微件"</string>
@@ -373,7 +373,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"帐号"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"位置信息"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"使用位置信息"</string>
-    <string name="location_settings_summary_location_off" msgid="794370259612167176">"已关闭"</string>
+    <string name="location_settings_summary_location_off" msgid="794370259612167176">"关闭"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="5513447650619485188">
       <item quantity="other">已开启 - <xliff:g id="COUNT_1">%1$d</xliff:g> 个应用有权访问位置信息</item>
       <item quantity="one">已开启 - <xliff:g id="COUNT_0">%1$d</xliff:g> 个应用有权访问位置信息</item>
@@ -1225,11 +1225,11 @@
     <string name="display_white_balance_title" msgid="4093966473741329340">"显示屏白平衡"</string>
     <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"屏幕感知"</string>
-    <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"已开启/屏幕将不会在您查看它时关闭"</string>
+    <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"开启 / 您看着屏幕时，它将不会关闭"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"关闭"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"需要相机访问权限"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"点按即可管理“设备个性化服务”的权限"</string>
-    <string name="adaptive_sleep_description" msgid="3741651460279997459">"避免屏幕在您查看它时关闭"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"在您看着屏幕时，它将不会关闭。"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"屏幕感知功能会通过前置摄像头来确定是否有人正在看屏幕。这个功能只会在设备上运行，系统绝对不会存储图片或将图片发送给 Google。"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"直视屏幕时让屏幕保持开启"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜间模式"</string>
@@ -1798,7 +1798,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"显示资料解锁图案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"点按时振动"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"按下电源按钮即时锁定"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>让屏幕保持解锁状态时除外"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> 让屏幕保持解锁状态时除外"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"设置解锁图案"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"更改解锁图案"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"如何绘制解锁图案"</string>
@@ -2384,8 +2384,8 @@
     <string name="restricted_app_detail_footer" msgid="6739863162364046859">"这些应用一直在后台消耗电量。受限应用可能无法正常运行，且相关通知可能也会有所延迟。"</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"使用电池管理器"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"检测应用何时使用电量"</string>
-    <string name="battery_manager_on" msgid="8643310865054362396">"已开启/正在检测应用何时使用电量"</string>
-    <string name="battery_manager_off" msgid="5473135235710343576">"已关闭"</string>
+    <string name="battery_manager_on" msgid="8643310865054362396">"开启 / 正在检测应用何时使用电量"</string>
+    <string name="battery_manager_off" msgid="5473135235710343576">"关闭"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="1026141135861471129">
       <item quantity="other">%1$d 个应用受到限制</item>
       <item quantity="one">%1$d 个应用受到限制</item>
@@ -2935,7 +2935,7 @@
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"受限个人资料无法添加帐号"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"将<xliff:g id="USER_NAME">%1$s</xliff:g>从此设备中删除"</string>
     <string name="user_lockscreen_settings" msgid="4965661345247084878">"锁定屏幕设置"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="9072312646546364619">"允许屏幕处于锁定状态时添加用户"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="9072312646546364619">"从锁定屏幕中添加用户"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"新用户"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"新的个人资料"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"是否删除自己？"</string>
@@ -3160,7 +3160,7 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"序列号, 硬件版本"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android 安全补丁程序级别, 基带版本, 内核版本"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"主题背景, 光亮, 暗黑, 模式"</string>
-    <string name="keywords_systemui_theme" msgid="9112852512550404882">"深色主题背景"</string>
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"深色主题"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"错误"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"主动显示, 锁定屏幕显示"</string>
     <string name="keywords_lock_screen_notif" msgid="6716392855813576197">"锁定屏幕通知, 通知"</string>
@@ -3298,8 +3298,8 @@
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="7555742240858292255"><annotation id="link">"查看自定义设置"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"仅限优先事项"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>。<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"开启/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"关闭/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"开启 / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"关闭 / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"关闭"</string>
     <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"开启"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="3483258992533158479">"每次都询问"</string>
@@ -3549,7 +3549,7 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"“参加”或“可能参加”"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"“参加”"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"找不到规则。"</string>
-    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"开启/<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"开启 / <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"星期几"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"无"</string>
@@ -3689,7 +3689,7 @@
     <string name="change_storage" msgid="600475265207060436">"更改存储空间"</string>
     <string name="notifications_label" msgid="2872668710589600731">"通知"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"开启"</string>
-    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g>/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"关闭"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"已关闭 <xliff:g id="COUNT_0">%1$d</xliff:g> 个（共 <xliff:g id="COUNT_1">%2$d</xliff:g> 个）类别的通知"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"不发出提示音"</string>
@@ -4155,10 +4155,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"已连接到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"已连接到多部设备"</string>
     <string name="demo_mode" msgid="2798762752209330277">"系统界面演示模式"</string>
-    <string name="dark_ui_mode" msgid="6795784845192720944">"深色主题背景"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"深色主题"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"开启/由于省电模式已开启，切换功能已暂时停用"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"由于省电模式已关闭，切换功能已暂时启用"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"受支持的应用还会切换到深色主题背景"</string>
+    <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"受支持的应用还会切换到深色主题"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"知道了"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"快捷设置开发者图块"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope 跟踪"</string>
@@ -4216,7 +4216,7 @@
     <string name="high_label" msgid="7278863493316447831">"高"</string>
     <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"较高的敏感度可能会与沿屏幕边缘执行的任何应用手势存在冲突。"</string>
     <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"“返回”手势的敏感度"</string>
-    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"点按两次即可查看手机"</string>
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"点按两次即显示"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"点按两次即可查看平板电脑"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"点按两次即可查看设备"</string>
     <string name="ambient_display_summary" msgid="8534654210539169707">"点按两次屏幕即可查看时间、通知和其他信息。"</string>
@@ -4500,10 +4500,10 @@
     <string name="mobile_network_in_range" msgid="8212440637838603215">"在范围内"</string>
     <string name="mobile_network_not_in_range" msgid="5287596455212313284">"不在范围内"</string>
     <string name="mobile_network_list_add_more" msgid="4000806369124701679">"添加更多"</string>
-    <string name="mobile_network_active_sim" msgid="2375956837678169169">"已启用/SIM 卡"</string>
-    <string name="mobile_network_inactive_sim" msgid="291768076436646044">"未启用/SIM 卡"</string>
-    <string name="mobile_network_active_esim" msgid="4914509039134228659">"已启用/已下载的 SIM 卡"</string>
-    <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"未启用/已下载的 SIM 卡"</string>
+    <string name="mobile_network_active_sim" msgid="2375956837678169169">"已激活 / SIM 卡"</string>
+    <string name="mobile_network_inactive_sim" msgid="291768076436646044">"未激活 / SIM 卡"</string>
+    <string name="mobile_network_active_esim" msgid="4914509039134228659">"已激活 / 下载的 SIM 卡"</string>
+    <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"未激活 / 下载的 SIM 卡"</string>
     <string name="mobile_network_sim_name" msgid="6026120971523242277">"SIM 卡名称和颜色"</string>
     <string name="mobile_network_sim_name_label" msgid="281403463781467324">"名称"</string>
     <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"颜色（由兼容应用使用）"</string>

@@ -353,7 +353,7 @@
     <string name="lock_after_timeout" msgid="3041497579354520533">"ล็อกหลังจากระยะหมดเวลาหน้าจอ"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> หลังหมดเวลาหน้าจอ"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"ทันทีหลังหมดเวลาหน้าจอ ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> สั่งไม่ให้ล็อก"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> หลังจากหมดเวลาหน้าจอ ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> สั่งไม่ให้ล็อก"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>หลังจากหมดเวลาหน้าจอ ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> สั่งไม่ให้ล็อก"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"แสดงข้อมูลเจ้าของเมื่อล็อกหน้าจอ"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"ข้อความบนหน้าจอล็อก"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"เปิดใช้งานวิดเจ็ต"</string>
@@ -444,7 +444,7 @@
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"ตั้งค่าปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"ใช้ฟีเจอร์ปลดล็อกด้วยใบหน้าเพื่อปลดล็อกอุปกรณ์ ลงชื่อเข้าใช้แอป และยืนยันการชำระเงิน\n\nโปรดทราบว่า\nการดูโทรศัพท์อาจปลดล็อกเครื่องโดยไม่ได้ตั้งใจ\n\nคนอื่นอาจปลดล็อกโทรศัพท์ได้หากถือโทรศัพท์ไว้ตรงหน้าของคุณ แม้ว่าคุณจะหลับตาอยู่ก็ตาม\n\nคนที่หน้าคล้ายคุณมากๆ เช่น แฝดของคุณอาจปลดล็อกโทรศัพท์ได้"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"ลบข้อมูลใบหน้าไหม"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="4820545735354901641">"รูปภาพและรูปแบบใบหน้าที่ใช้ในการปลดล็อกด้วยใบหน้าจะถูกลบออกถาวรอย่างปลอดภัย หลังจากที่นำออกแล้ว คุณจะต้องใช้ PIN รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์ ลงชื่อเข้าใช้แอป และยืนยันการชำระเงิน"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="4820545735354901641">"รูปภาพและรูปแบบใบหน้าที่ใช้ในการปลดล็อกด้วยใบหน้าจะถูกลบออกอย่างถาวรและปลอดภัย หลังจากที่นำออกแล้ว คุณจะต้องใช้ PIN, รูปแบบ หรือรหัสผ่าน เพื่อปลดล็อกโทรศัพท์ ลงชื่อเข้าใช้แอป และยืนยันการชำระเงิน"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"ปลดล็อกโทรศัพท์ด้วยฟีเจอร์ปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"ลายนิ้วมือ"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"จัดการลายนิ้วมือ"</string>
@@ -727,7 +727,7 @@
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"ยกเลิก"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"ถัดไป"</string>
     <string name="lock_setup" msgid="3355847066343753943">"การตั้งค่าเสร็จสมบูรณ์"</string>
-    <string name="manage_device_admin" msgid="537804979483211453">"แอปดูแลอุปกรณ์"</string>
+    <string name="manage_device_admin" msgid="537804979483211453">"แอปผู้ดูแลอุปกรณ์"</string>
     <string name="number_of_device_admins_none" msgid="7185056721919496069">"ไม่มีแอปที่ใช้งานอยู่"</string>
     <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
       <item quantity="other">มี <xliff:g id="COUNT_1">%d</xliff:g> แอปที่ใช้งานอยู่</item>
@@ -1284,11 +1284,11 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"ยกขึ้นเพื่อเวก"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"หน้าจอแอมเบียนท์"</string>
-    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"แสดงเมื่อใด"</string>
+    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"เวลาที่แสดง"</string>
     <string name="doze_title" msgid="2375510714460456687">"การแจ้งเตือนใหม่"</string>
     <string name="doze_summary" msgid="3846219936142814032">"เปิดหน้าจอเมื่อได้รับการแจ้งเตือน"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"เปิดใช้เสมอ"</string>
-    <string name="doze_always_on_summary" msgid="6978257596231155345">"แสดงเวลา ไอคอนการแจ้งเตือน และข้อมูลอื่นๆ การใช้งานแบตเตอรี่จะเพิ่มขึ้น"</string>
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"แสดงเวลา ไอคอนการแจ้งเตือน และข้อมูลอื่นๆ แต่จะใช้แบตเตอรี่จะเพิ่มขึ้น"</string>
     <string name="title_font_size" msgid="4405544325522105222">"ขนาดอักษร"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"ทำให้ข้อความมีขนาดใหญ่ขึ้นหรือเล็กลง"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"การตั้งค่าการล็อกซิมการ์ด"</string>
@@ -1638,7 +1638,7 @@
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"ฮอตสปอตแบบพกพาได้"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"ปล่อยสัญญาณบลูทูธ"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"การปล่อยสัญญาณ"</string>
-    <string name="tether_settings_title_all" msgid="3058586928118801157">"ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ"</string>
+    <string name="tether_settings_title_all" msgid="3058586928118801157">"ฮอตสปอตและการเชื่อมต่อเน็ตผ่านมือถือ"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"ฮอตสปอตเปิดอยู่ กำลังเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"ฮอตสปอตเปิดอยู่"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"การเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ"</string>
@@ -2137,7 +2137,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"ใช้บริการ"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"ใช้การแก้สี"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"ใช้คำบรรยาย"</string>
-    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"แอปบางแอปไม่รองรับการตั้งค่านี้"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"บางแอปไม่รองรับการตั้งค่านี้"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"ต่อไป"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"เครื่องช่วยการได้ยิน"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"ไม่ได้เชื่อมต่อเครื่องช่วยการได้ยิน"</string>
@@ -3849,7 +3849,7 @@
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงรูปภาพของหน้าจอ"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"กะพริบหน้าจอ"</string>
     <string name="assist_flash_summary" msgid="9160668468824099262">"กะพริบขอบของหน้าจอเมื่อแอปผู้ช่วยเข้าถึงข้อความจากหน้าจอหรือภาพหน้าจอ"</string>
-    <string name="assist_footer" msgid="1982791172085896864">"แอปผู้ช่วยสามารถช่วยเหลือคุณโดยใช้ข้อมูลจากหน้าจอที่คุณกำลังดูอยู่ แอปบางแอปจะสนับสนุนทั้ง Launcher และบริการป้อนข้อมูลด้วยเสียงเพื่อให้ความช่วยเหลือแบบบูรณาการแก่คุณ"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"แอปผู้ช่วยจะช่วยเหลือคุณโดยใช้ข้อมูลจากหน้าจอที่กำลังดูอยู่ บางแอปจะสนับสนุนทั้ง Launcher และบริการป้อนข้อมูลด้วยเสียงเพื่อให้ความช่วยเหลือแบบรอบด้านแก่คุณ"</string>
     <string name="average_memory_use" msgid="829566450150198512">"การใช้หน่วยความจำโดยเฉลี่ย"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"การใช้หน่วยความจำสูงสุด"</string>
     <string name="memory_usage" msgid="1781358557214390033">"การใช้หน่วยความจำ"</string>
@@ -3946,7 +3946,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"พื้นที่เก็บข้อมูลภายใน: ใช้ไป <xliff:g id="PERCENTAGE">%1$s</xliff:g> - เหลือ <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"เข้าสู่โหมดสลีปหลังจากไม่มีการใช้งาน <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"วอลเปเปอร์ สลีป ขนาดตัวอักษร"</string>
-    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"รูปแบบ วอลเปเปอร์ ระยะหมดเวลาหน้าจอ ขนาดแบบอักษร"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"รูปแบบ, วอลเปเปอร์, ระยะหมดเวลาหน้าจอ, ขนาดแบบอักษร"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"สลีป ขนาดอักษร"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"เข้าโหมดสลีปหลังจากไม่มีการใช้งาน 10 นาที"</string>
     <string name="memory_summary" msgid="8080825904671961872">"ใช้หน่วยความจำไป <xliff:g id="USED_MEMORY">%1$s</xliff:g> จาก <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> โดยเฉลี่ย"</string>
