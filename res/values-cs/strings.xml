@@ -354,12 +354,12 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Vybrat podle posunu od UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Čas"</string>
-    <string name="lock_after_timeout" msgid="3041497579354520533">"Zamknout po vypršení intervalu vypnutí obrazovky"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Interval zamčení obrazovky"</string>
     <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po vypršení časového limitu"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Okamžitě po vypršení časového limitu, pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po vypršení časového limitu, pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Zobrazovat vlastníka na zamčené obrazovce"</string>
-    <string name="owner_info_settings_title" msgid="5530285568897386122">"Zpráva na zamčené obrazovce"</string>
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"Zpráva na obr.uzamčení"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktivovat widgety"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Zakázáno administrátorem"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Zobrazit možnost uzamčení"</string>
@@ -392,7 +392,7 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Telefon není šifrován"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Zařízení je zašifrováno"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Zařízení není šifrováno"</string>
-    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Displej zámku obrazovky"</string>
+    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Vzhled obrazovky uzamčení"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"Co zobrazit"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Moje poloha, odemknutí obrazovky, zámek SIM, zámek úložiště pověření"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Nastavení funkce Moje poloha, odemknutí obrazovky a zamknutí úložiště pověření"</string>
@@ -450,7 +450,7 @@
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Nastavit odemknutí obličejem"</string>
     <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Pomocí odemknutí obličejem můžete odemykat zařízení, přihlašovat se do aplikací a potvrzovat platby.\n\nPřipomínáme:\nTelefon můžete odemknout pohledem, i když zrovna nechcete.\n\nTelefon může odemknout i někdo jiný, když ho namíří na váš obličej (i když budete mít zavřené oči).\n\nTelefon by mohla odemknout i osoba, která je vám hodně podobná, například vaše dvojče."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Smazat data o obličeji?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="4820545735354901641">"Snímky a model obličeje používané k odemknutí obličejem budou trvale a bezpečně smazány. Po odstranění budete k odemknutí telefonu, přihlášení do aplikace nebo potvrzení platby muset zadat PIN, gesto nebo heslo."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Údaje o obličeji používané k odemknutí obličejem budou trvale a bezpečně smazány. Po odstranění budete k odemknutí telefonu, přihlášení do aplikace nebo potvrzení platby muset zadat PIN, gesto nebo heslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Odemykejte telefon pomocí obličeje"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Otisk prstu"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Správa otisků prstů"</string>
@@ -2377,9 +2377,9 @@
     <string name="controls_subtitle" msgid="390468421138288702">"Upravit spotřebu energie"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Zahrnuté balíčky"</string>
     <string name="battery_tip_summary_title" msgid="368729969313047399">"Aplikace běží normálně"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"V telefonu dochází k běžnému využití baterie na pozadí"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"V tabletu dochází k běžnému využití baterie na pozadí"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"V zařízení dochází k běžnému využití baterie na pozadí"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"V telefonu dochází k běžnému využívání baterie na pozadí"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"V tabletu dochází k běžnému využívání baterie na pozadí"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"V zařízení dochází k běžnému využívání baterie na pozadí"</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Nízká kapacita baterie"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"Baterie není schopna zajistit dobrou výdrž"</string>
     <string name="battery_tip_smart_battery_title" product="default" msgid="2542822112725248683">"Zvyšte životnost baterie telefonu"</string>
@@ -3246,7 +3246,7 @@
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"motiv, světlý, tmavý, režim"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"tmavý motiv"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"chyba"</string>
-    <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ambientní displej, displej zámku obrazovky"</string>
+    <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ambientní displej, vzhled obrazovky uzamčení"</string>
     <string name="keywords_lock_screen_notif" msgid="6716392855813576197">"oznámení na obrazovce uzamčení, oznámení"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"obličej"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"otisk prstu, přidat otisk prstu"</string>
@@ -3972,7 +3972,7 @@
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Použití snímku obrazovky"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Asistenční aplikace bude mít přístup k obrazu na obrazovce"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Zablikání obrazovky"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"Když asistenční aplikace na obrazovce nebo snímku obrazovky narazí na text, okraje obrazovky zablikají"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"Když asistenční aplikace z obrazovky nebo snímku obrazovky získá text, okraje obrazovky zablikají"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Asistenční aplikace vám může pomoci na základě informací na zobrazené obrazovce. Některé aplikace podporují Launcher i hlasový vstup a nabízejí integrovanou asistenci."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Průměrné využití paměti"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maximální využití paměti"</string>
