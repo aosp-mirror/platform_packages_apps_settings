@@ -37,6 +37,7 @@ import com.google.common.util.concurrent.SettableFuture;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
@@ -177,6 +178,9 @@ public class NetworkScanHelper {
 
                 @Override
                 public void onFailure(Throwable t) {
+                    if (t instanceof CancellationException) {
+                        return;
+                    }
                     int errCode = Integer.parseInt(t.getMessage());
                     onError(errCode);
                 }
@@ -184,10 +188,16 @@ public class NetworkScanHelper {
             mExecutor.execute(new NetworkScanSyncTask(
                     mTelephonyManager, (SettableFuture) mNetworkScanFuture));
         } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS) {
+            if (mNetworkScanRequester != null) {
+                return;
+            }
             mNetworkScanRequester = mTelephonyManager.requestNetworkScan(
                     NETWORK_SCAN_REQUEST,
                     mExecutor,
                     mInternalNetworkScanCallback);
+            if (mNetworkScanRequester == null) {
+                onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
+            }
         }
     }
 
@@ -199,7 +209,7 @@ public class NetworkScanHelper {
     public void stopNetworkQuery() {
         if (mNetworkScanRequester != null) {
             mNetworkScanRequester.stopScan();
-            mNetworkScanFuture = null;
+            mNetworkScanRequester = null;
         }
 
         if (mNetworkScanFuture != null) {
