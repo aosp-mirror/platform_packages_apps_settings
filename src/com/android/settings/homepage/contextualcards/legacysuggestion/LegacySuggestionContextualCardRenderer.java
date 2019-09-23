@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
+import com.android.settings.homepage.contextualcards.ContextualCardController;
 import com.android.settings.homepage.contextualcards.ContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.ControllerRendererPool;
 
@@ -51,12 +52,13 @@ public class LegacySuggestionContextualCardRenderer implements ContextualCardRen
     @Override
     public void bindView(RecyclerView.ViewHolder holder, ContextualCard card) {
         final LegacySuggestionViewHolder vh = (LegacySuggestionViewHolder) holder;
+        final ContextualCardController controller = mControllerRendererPool
+                .getController(mContext, card.getCardType());
         vh.icon.setImageDrawable(card.getIconDrawable());
         vh.title.setText(card.getTitleText());
         vh.summary.setText(card.getSummaryText());
-        vh.itemView.setOnClickListener(v ->
-                mControllerRendererPool.getController(mContext,
-                        card.getCardType()).onPrimaryClick(card));
+        vh.itemView.setOnClickListener(v -> controller.onPrimaryClick(card));
+        vh.closeButton.setOnClickListener(v -> controller.onDismissed(card));
     }
 
     private static class LegacySuggestionViewHolder extends RecyclerView.ViewHolder {
@@ -64,12 +66,14 @@ public class LegacySuggestionContextualCardRenderer implements ContextualCardRen
         public final ImageView icon;
         public final TextView title;
         public final TextView summary;
+        public final View closeButton;
 
         public LegacySuggestionViewHolder(View itemView) {
             super(itemView);
             icon = itemView.findViewById(android.R.id.icon);
             title = itemView.findViewById(android.R.id.title);
             summary = itemView.findViewById(android.R.id.summary);
+            closeButton = itemView.findViewById(R.id.close_button);
         }
     }
 }
