@@ -83,6 +83,25 @@ public class LegacySuggestionContextualCardRendererTest {
     }
 
     @Test
+    public void bindView_closeButton_shouldSetListener() {
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final ContextualCard card = buildContextualCard();
+        final View cardView = LayoutInflater.from(mActivity).inflate(card.getViewType(),
+                recyclerView, false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(cardView,
+                card.getViewType());
+        final View closeButton = viewHolder.itemView.findViewById(R.id.close_button);
+        when(mControllerRendererPool.getController(mActivity,
+                ContextualCard.CardType.LEGACY_SUGGESTION)).thenReturn(mController);
+
+        mRenderer.bindView(viewHolder, buildContextualCard());
+
+        assertThat(closeButton).isNotNull();
+        assertThat(closeButton.hasOnClickListeners()).isTrue();
+    }
+
+    @Test
     public void viewClick_shouldInvokeControllerPrimaryClick() {
         final RecyclerView recyclerView = new RecyclerView(mActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
@@ -100,6 +119,27 @@ public class LegacySuggestionContextualCardRendererTest {
         cardView.performClick();
 
         verify(mController).onPrimaryClick(any(ContextualCard.class));
+    }
+
+    @Test
+    public void viewClick_closeButton_shouldInvokeControllerDismissClick() {
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final ContextualCard card = buildContextualCard();
+        final View cardView = LayoutInflater.from(mActivity).inflate(card.getViewType(),
+                recyclerView, false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(cardView,
+                card.getViewType());
+        final View closeButton = viewHolder.itemView.findViewById(R.id.close_button);
+        when(mControllerRendererPool.getController(mActivity,
+                ContextualCard.CardType.LEGACY_SUGGESTION)).thenReturn(mController);
+
+        mRenderer.bindView(viewHolder, buildContextualCard());
+
+        assertThat(closeButton).isNotNull();
+        closeButton.performClick();
+
+        verify(mController).onDismissed(any(ContextualCard.class));
     }
 
     private ContextualCard buildContextualCard() {
