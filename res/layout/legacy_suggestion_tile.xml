@@ -42,6 +42,23 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"/>
 
+            <FrameLayout
+                android:id="@+id/close_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:orientation="horizontal"
+                android:contentDescription="@string/suggestion_button_close">
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="end|top"
+                    android:alpha="0.54"
+                    android:src="@drawable/ic_suggestion_close_button"/>
+            </FrameLayout>
+
         </RelativeLayout>
 
         <TextView
