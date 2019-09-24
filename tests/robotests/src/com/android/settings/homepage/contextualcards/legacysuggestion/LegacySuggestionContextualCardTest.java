@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 
 import android.app.PendingIntent;
+import android.service.settings.suggestions.Suggestion;
 
 import com.android.settings.homepage.contextualcards.ContextualCard;
 
@@ -50,5 +51,13 @@ public class LegacySuggestionContextualCardTest {
                 .setPendingIntent(mock(PendingIntent.class))
                 .build()
                 .getPendingIntent()).isNotNull();
+    }
+
+    @Test
+    public void build_shouldSetSuggestion() {
+        assertThat(new LegacySuggestionContextualCard.Builder()
+                .setSuggestion(mock(Suggestion.class))
+                .build()
+                .getSuggestion()).isNotNull();
     }
 }

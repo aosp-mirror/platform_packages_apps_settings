@@ -17,16 +17,19 @@
 package com.android.settings.homepage.contextualcards.legacysuggestion;
 
 import android.app.PendingIntent;
+import android.service.settings.suggestions.Suggestion;
 
 import com.android.settings.homepage.contextualcards.ContextualCard;
 
 public class LegacySuggestionContextualCard extends ContextualCard {
 
     private final PendingIntent mPendingIntent;
+    private final Suggestion mSuggestion;
 
     public LegacySuggestionContextualCard(Builder builder) {
         super(builder);
         mPendingIntent = builder.mPendingIntent;
+        mSuggestion = builder.mSuggestion;
     }
 
     @Override
@@ -38,12 +41,22 @@ public class LegacySuggestionContextualCard extends ContextualCard {
         return mPendingIntent;
     }
 
+    public Suggestion getSuggestion() {
+        return mSuggestion;
+    }
+
     public static class Builder extends ContextualCard.Builder {
 
         private PendingIntent mPendingIntent;
+        private Suggestion mSuggestion;
 
         public Builder setPendingIntent(PendingIntent pendingIntent) {
             mPendingIntent = pendingIntent;
+            return this;
+        }
+
+        public Builder setSuggestion(Suggestion suggestion) {
+            mSuggestion = suggestion;
             return this;
         }
 
