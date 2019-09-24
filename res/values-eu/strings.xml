@@ -351,9 +351,9 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ordua"</string>
     <string name="lock_after_timeout" msgid="3041497579354520533">"Blokeatu pantailaren denbora-mugara iritsitakoan"</string>
-    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> denbora-mugara iritsitakoan"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"Denbora-mugara iritsi eta <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ondoren"</string>
     <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Denbora-mugara iritsitakoan, <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> fidagarritasun-agenteak desblokeatuta duenean izan ezik"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> denbora-mugara iritsitakoan, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> fidagarritasun-agenteak desblokeatuta duenean izan ezik"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"Denbora-mugara iritsi eta <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ondoren, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> fidagarritasun-agenteak desblokeatuta duenean izan ezik"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Erakutsi jabearen informazioa pantaila blokeatuan"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Pantaila blokeatuaren mezua"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Gaitu widgetak"</string>
@@ -444,7 +444,7 @@
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfiguratu aurpegiaren bidez desblokeatzeko aukera"</string>
     <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Erabili aurpegiaren bidez desblokeatzeko eginbidea gailua desblokeatzeko, aplikazioetan saioa hasteko eta ordainketak berresteko.\n\nGogoan izan:\ntelefonoari begiratuz gero, desblokeatu egin daiteke, halako asmorik ez baduzu ere.\n\nBeste norbaitek ere desblokea dezake telefonoa zuri begira jartzen badu, baita begiak itxita badituzu ere.\n\nZure antz handia dutenek ere desblokea dezakete telefonoa; esate baterako, bikiek."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Aurpegiari buruzko datuak ezabatu?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="4820545735354901641">"Aurpegiaren bidez desblokeatzeko aukerak erabiltzen dituen irudiak eta aurpegiaren eredua modu seguruan eta betiko ezabatuko dira. Horren ondoren, PIN kodea, eredua edo pasahitza beharko duzu telefonoa desblokeatzeko, aplikazioetan saioa hasteko eta ordainketak berresteko."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Aurpegiaren bidez desblokeatzeko eginbideak erabiltzen dituen aurpegiari buruzko datuak behin betiko ezabatuko dira modu seguruan. Horren ondoren, PIN kodea, eredua edo pasahitza beharko duzu telefonoa desblokeatzeko, aplikazioetan saioa hasteko eta ordainketak berresteko."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Erabili telefonoa aurpegiaren bidez desblokeatzeko aukera"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Hatz-marka digitala"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Kudeatu hatz-markak"</string>
@@ -462,7 +462,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="1550756694054944874">"Erabili hatz-marka telefonoa desblokeatzeko eta erosketak onartzeko.\n\nOharra: ezin duzu erabili hatz-marka gailu hau desblokeatzeko. Informazio gehiago lortzeko, jarri zure erakundearen administratzailearekin harremanetan."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"Erabili hatz-marka telefonoa desblokeatzeko eta erosketak onartzeko.\n\nOharra: baliteke hatz-markak ez izatea eredu edo PIN kode konplexuak bezain seguruak."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Utzi"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Jarraitu"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Egin aurrera"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Saltatu"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Hurrengoa"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Saltatu hatz-marka?"</string>
@@ -1192,7 +1192,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturalak"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Nabarmenduak"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturatuak"</string>
-    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Doigarria"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Doigarriak"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Erabili kolore errealistak soilik"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Doitu kolore bizi eta errealisten artean"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Aldatu orientazioa automatikoki tableta biratzean"</string>
@@ -1230,7 +1230,7 @@
     <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kamera erabiltzeko baimena behar da"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Sakatu Gailua pertsonalizatzeko zerbitzuen baimenak kudeatzeko"</string>
     <string name="adaptive_sleep_description" msgid="3741651460279997459">"Pantaila itzaltzea eragozten du hari begira zauden bitartean"</string>
-    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Pantaila kontzienteak aurreko kamera erabiltzen du inor pantailari begira dagoen jakiteko. Gailuko eginbidea da, eta irudiak ez dira inoiz gordetzen, ez eta Google-ra bidaltzen ere."</string>
+    <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Pantaila kontzientea eginbideak aurreko kamera erabiltzen du inor pantailari begira dagoen jakiteko. Gailuko eginbidea da, eta irudiak ez dira inoiz gordetzen, ez eta Google-ra bidaltzen ere."</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Mantendu pantaila piztuta hari begira zaudenean"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Gaueko argia"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Gaueko argiak tindu horikaraz janzten du pantaila. Horrela, ez zaizu horren nekagarria egingo argi gutxirekin pantailari begira egotea eta errazago hartuko duzu lo, gainera."</string>
@@ -2094,13 +2094,13 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Erabili keinua irekitzeko"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Erabili erabilerraztasun-keinu berria"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Zerbitzua aktibatzeko edo desaktibatzeko, sakatu pantailaren behealdean dagoen Erabilerraztasuna botoia <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nZerbitzu batetik bestera aldatzeko, eduki sakatuta Erabilerraztasuna botoia."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Zerbitzua aktibatzeko edo desaktibatzeko, pasatu bi hatz pantailaren behealdetik gorantz.\n\nZerbitzu batetik bestera aldatzeko, pasatu bi hatz gorantz eta eduki pantaila ukituta."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Zerbitzua aktibatzeko edo desaktibatzeko, pasatu hiru hatz pantailaren behealdetik gorantz.\n\nZerbitzu batetik bestera aldatzeko, pasatu hiru hatz gorantz eta eduki pantaila ukituta."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Erabilerraztasun-zerbitzu bat aktibatzeko edo desaktibatzeko, pasatu bi hatz pantailaren behealdetik gorantz.\n\nZerbitzu batetik bestera aldatzeko, pasatu bi hatz gorantz eta eduki pantaila ukituta."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Erabilerraztasun-zerbitzu bat aktibatzeko edo desaktibatzeko, pasatu hiru hatz pantailaren behealdetik gorantz.\n\nZerbitzu batetik bestera aldatzeko, pasatu hiru hatz gorantz eta eduki pantaila ukituta."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Zerbitzua aktibatzeko edo desaktibatzeko, pasatu bi hatz pantailaren behealdetik gorantz.\n\nZerbitzu batetik bestera aldatzeko, pasatu bi hatz gorantz eta eduki sakatuta."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Zerbitzua aktibatzeko edo desaktibatzeko, pasatu hiru hatz pantailaren behealdetik gorantz.\n\nZerbitzu batetik bestera aldatzeko, pasatu hiru hatz gorantz eta eduki sakatuta."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Erabilerraztasun-zerbitzu bat aktibatzeko edo desaktibatzeko, pasatu bi hatz pantailaren behealdetik gorantz.\n\nZerbitzu batetik bestera aldatzeko, pasatu bi hatz gorantz eta eduki sakatuta."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Erabilerraztasun-zerbitzu bat aktibatzeko edo desaktibatzeko, pasatu hiru hatz pantailaren behealdetik gorantz.\n\nZerbitzu batetik bestera aldatzeko, pasatu hiru hatz gorantz eta eduki sakatuta."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Ados"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Erabilerraztasuna botoia labur sakatuta \"<xliff:g id="SERVICE">%1$s</xliff:g>\" aukera aktibatzen da. Lupa aplikatzeko, eduki sakatuta Erabilerraztasuna botoia eta, ondoren, hautatu lupa."</string>
-    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Hau egiteko konfiguratu da erabilerraztasun-keinua: <xliff:g id="SERVICE">%1$s</xliff:g>. Lupa erabili nahi baduzu, pasatu bi hatz pantailaren behealdetik gora eta eduki sakatuta une batez. Ondoren, hautatu lupa."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"<xliff:g id="SERVICE">%1$s</xliff:g> erabiltzeko konfiguratu da erabilerraztasun-keinua. Lupa erabili nahi baduzu, pasatu bi hatz pantailaren behealdetik gora eta eduki sakatuta une batez. Ondoren, hautatu lupa."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Bolumen-teklen lasterbidea"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Lasterbideari esleitutako zerbitzua"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Baimendu pantaila blokeatuan"</string>
