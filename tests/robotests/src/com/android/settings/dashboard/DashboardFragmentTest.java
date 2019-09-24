@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
@@ -240,14 +241,28 @@ public class DashboardFragmentTest {
     }
 
     @Test
-    public void checkUiBlocker_hasUiBlocker_controllerNotNull() {
+    public void checkUiBlocker_hasUiBlockerAndControllerIsAvailable_controllerNotNull() {
+        final BlockingSlicePrefController controller =
+                new BlockingSlicePrefController(mContext, "pref_key");
+        controller.setSliceUri(Uri.parse("testUri"));
+        mTestFragment.mBlockerController = null;
+        mControllers.add(new TestPreferenceController(mContext));
+        mControllers.add(controller);
+
+        mTestFragment.checkUiBlocker(mControllers);
+
+        assertThat(mTestFragment.mBlockerController).isNotNull();
+    }
+
+    @Test
+    public void checkUiBlocker_hasUiBlockerAndControllerIsNotAvailable_controllerIsNull() {
         mTestFragment.mBlockerController = null;
         mControllers.add(new TestPreferenceController(mContext));
         mControllers.add(new BlockingSlicePrefController(mContext, "pref_key"));
 
         mTestFragment.checkUiBlocker(mControllers);
 
-        assertThat(mTestFragment.mBlockerController).isNotNull();
+        assertThat(mTestFragment.mBlockerController).isNull();
     }
 
     public static class TestPreferenceController extends AbstractPreferenceController

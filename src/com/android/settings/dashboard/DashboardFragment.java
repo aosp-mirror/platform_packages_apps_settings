@@ -63,6 +63,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private final Map<Class, List<AbstractPreferenceController>> mPreferenceControllers =
             new ArrayMap<>();
     private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
+    private final List<AbstractPreferenceController> mControllers = new ArrayList<>();
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
@@ -79,7 +80,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 R.array.config_suppress_injected_tile_keys));
         mDashboardFeatureProvider = FeatureFactory.getFactory(context).
                 getDashboardFeatureProvider(context);
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         // Load preference controllers from code
         final List<AbstractPreferenceController> controllersFromCode =
                 createPreferenceControllers(context);
@@ -93,9 +93,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
         // Add unique controllers to list.
         if (controllersFromCode != null) {
-            controllers.addAll(controllersFromCode);
+            mControllers.addAll(controllersFromCode);
         }
-        controllers.addAll(uniqueControllerFromXml);
+        mControllers.addAll(uniqueControllerFromXml);
 
         // And wire up with lifecycle.
         final Lifecycle lifecycle = getSettingsLifecycle();
@@ -107,12 +107,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
         mPlaceholderPreferenceController =
                 new DashboardTilePlaceholderPreferenceController(context);
-        controllers.add(mPlaceholderPreferenceController);
-        for (AbstractPreferenceController controller : controllers) {
+        mControllers.add(mPlaceholderPreferenceController);
+        for (AbstractPreferenceController controller : mControllers) {
             addPreferenceController(controller);
         }
-
-        checkUiBlocker(controllers);
     }
 
     @VisibleForTesting
@@ -122,8 +120,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 .stream()
                 .filter(controller -> controller instanceof BasePreferenceController.UiBlocker)
                 .forEach(controller -> {
-                    ((BasePreferenceController) controller).setUiBlockListener(this);
-                    keys.add(controller.getPreferenceKey());
+                    if (controller.isAvailable()) {
+                        ((BasePreferenceController) controller).setUiBlockListener(this);
+                        keys.add(controller.getPreferenceKey());
+                    }
                 });
 
         if (!keys.isEmpty()) {
@@ -157,6 +157,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        checkUiBlocker(mControllers);
         refreshAllPreferences(getLogTag());
     }
 
