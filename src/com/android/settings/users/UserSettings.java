@@ -1221,7 +1221,7 @@ public class UserSettings extends SettingsPreferenceFragment
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
             (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.user_settings) {
 
                 @Override

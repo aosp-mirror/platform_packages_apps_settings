@@ -28,7 +28,6 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.util.IconDrawableFactory;
 import android.util.Pair;
 import android.view.View;
@@ -41,7 +40,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.apppreference.AppPreference;
@@ -187,7 +185,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.picture_in_picture_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -219,6 +217,6 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         return pipApps;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.picture_in_picture_settings);
 }

@@ -28,7 +28,6 @@ import android.os.Bundle;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -43,13 +42,10 @@ import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -80,7 +76,7 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.configure_notification_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -217,7 +213,7 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     /**
      * For Search.
      */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.configure_notification_settings) {
 
                 @Override

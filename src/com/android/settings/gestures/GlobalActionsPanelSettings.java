@@ -17,16 +17,11 @@
 package com.android.settings.gestures;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable
 public class GlobalActionsPanelSettings extends DashboardFragment {
@@ -45,9 +40,9 @@ public class GlobalActionsPanelSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.global_actions_panel_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider(R.xml.global_actions_panel_settings);
 }

@@ -19,7 +19,6 @@ package com.android.settings.network;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -36,7 +35,7 @@ public class MobileNetworkListFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.mobile_network_list;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -56,7 +55,7 @@ public class MobileNetworkListFragment extends DashboardFragment {
         return controllers;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.mobile_network_list) {
 
                 @Override

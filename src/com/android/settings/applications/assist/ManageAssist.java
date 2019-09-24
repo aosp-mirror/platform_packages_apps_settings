@@ -18,19 +18,16 @@ package com.android.settings.applications.assist;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.AssistGestureSettingsPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,7 +46,7 @@ public class ManageAssist extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.manage_assist;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -80,15 +77,8 @@ public class ManageAssist extends DashboardFragment {
         return controllers;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.manage_assist;
-                    return Arrays.asList(sir);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.manage_assist) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

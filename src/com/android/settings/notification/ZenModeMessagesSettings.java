@@ -20,7 +20,6 @@ import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -53,7 +52,7 @@ public class ZenModeMessagesSettings extends ZenModeSettingsBase implements Inde
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_mode_messages_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -64,7 +63,7 @@ public class ZenModeMessagesSettings extends ZenModeSettingsBase implements Inde
     /**
      * For Search.
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.zen_mode_messages_settings) {
 
                 @Override

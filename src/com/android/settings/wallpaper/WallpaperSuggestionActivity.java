@@ -53,7 +53,7 @@ public class WallpaperSuggestionActivity extends StyleSuggestionActivityBase imp
         return manager.getWallpaperId(WallpaperManager.FLAG_SYSTEM) > 0;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 private static final String SUPPORT_SEARCH_INDEX_KEY = "wallpaper_type";
 

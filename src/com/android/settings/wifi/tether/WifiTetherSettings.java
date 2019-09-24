@@ -236,7 +236,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 .updateDisplay();
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_tether_settings) {
 
                 @Override

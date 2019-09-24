@@ -70,12 +70,5 @@ public interface Indexable {
          */
         @Keep
         List<String> getNonIndexableKeys(Context context);
-
-        /**
-         * @return a list of {@link AbstractPreferenceController} for ResultPayload data during
-         * Indexing.
-         */
-        @Keep
-        List<AbstractPreferenceController> getPreferenceControllers(Context context);
     }
 }

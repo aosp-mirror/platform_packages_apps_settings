@@ -25,7 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.util.ArraySet;
 import android.view.View;
 
@@ -37,7 +36,6 @@ import com.android.settings.applications.specialaccess.zenaccess.ZenAccessContro
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails;
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessSettingObserverMixin;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.apppreference.AppPreference;
@@ -80,7 +78,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_access_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -159,6 +157,6 @@ public class ZenAccessSettings extends EmptyTextSettings implements
                 : R.string.app_permission_summary_not_allowed;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.zen_access_settings);
 }

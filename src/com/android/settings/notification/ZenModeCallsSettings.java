@@ -67,7 +67,7 @@ public class ZenModeCallsSettings extends ZenModeSettingsBase implements Indexab
     /**
      * For Search.
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.zen_mode_calls_settings) {
 
                 @Override

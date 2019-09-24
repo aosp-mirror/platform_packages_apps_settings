@@ -53,6 +53,6 @@ public class TrustAgentSettings extends DashboardFragment {
         return R.xml.trust_agent_settings;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.trust_agent_settings);
 }

@@ -70,7 +70,7 @@ public class BackupSettingsFragment extends DashboardFragment {
 
     // The intention is to index {@link UserBackupSettingsActivity} instead of the fragments,
     // therefore leaving this index provider empty.
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider();
 
     @Override
