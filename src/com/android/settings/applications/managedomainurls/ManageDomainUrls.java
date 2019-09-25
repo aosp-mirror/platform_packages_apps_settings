@@ -20,16 +20,11 @@ import static com.android.settingslib.search.SearchIndexable.MOBILE;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Activity to manage how Android handles URL resolution. Includes both per-app
@@ -53,7 +48,7 @@ public class ManageDomainUrls extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.manage_domain_url_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -61,6 +56,6 @@ public class ManageDomainUrls extends DashboardFragment {
         return SettingsEnums.MANAGE_DOMAIN_URLS;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.manage_domain_url_settings);
 }

@@ -22,7 +22,6 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
@@ -81,7 +80,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.language_and_input;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -161,7 +160,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
             = (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.language_and_input) {
 
                 @Override

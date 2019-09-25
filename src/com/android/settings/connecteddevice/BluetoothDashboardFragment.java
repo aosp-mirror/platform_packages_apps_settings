@@ -101,7 +101,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     /**
      * For Search.
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,

@@ -18,15 +18,11 @@ package com.android.settings.backup;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable
 public class PrivacySettings extends DashboardFragment {
@@ -44,7 +40,7 @@ public class PrivacySettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.privacy_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -71,7 +67,7 @@ public class PrivacySettings extends DashboardFragment {
         }
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.privacy_settings) {
 
                 @Override

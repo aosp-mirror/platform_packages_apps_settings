@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
@@ -17,13 +16,11 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,7 +138,7 @@ public class TtsEnginePreferenceFragment extends RadioButtonPickerFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.tts_engine_picker;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     private boolean shouldDisplayDataAlert(EngineCandidateInfo info) {
@@ -221,6 +218,6 @@ public class TtsEnginePreferenceFragment extends RadioButtonPickerFragment {
         }
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.tts_engine_picker);
 }

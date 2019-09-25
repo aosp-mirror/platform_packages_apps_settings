@@ -22,7 +22,6 @@ import static com.android.settings.homepage.contextualcards.slices.ContextualAda
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 
 import androidx.preference.Preference;
 
@@ -30,10 +29,6 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.FooterPreference;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AdaptiveSleepSettings extends DashboardFragment {
@@ -59,7 +54,7 @@ public class AdaptiveSleepSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.adaptive_sleep_detail;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -77,6 +72,6 @@ public class AdaptiveSleepSettings extends DashboardFragment {
         return R.string.help_url_adaptive_sleep;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.adaptive_sleep_detail);
 }

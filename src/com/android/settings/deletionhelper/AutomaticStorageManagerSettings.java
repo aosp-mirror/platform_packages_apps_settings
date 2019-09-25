@@ -163,7 +163,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
     }
 
     /** For Search. */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

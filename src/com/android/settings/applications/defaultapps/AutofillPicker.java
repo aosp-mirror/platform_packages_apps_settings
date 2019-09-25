@@ -54,7 +54,7 @@ public class AutofillPicker extends DashboardFragment {
         return buildPreferenceControllers(context);
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.default_autofill_picker_settings) {
 
                 @Override

@@ -167,7 +167,7 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
                 == NAV_BAR_MODE_GESTURAL;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_magnification_settings) {
 
                 @Override

@@ -19,13 +19,11 @@ package com.android.settings.privacy;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -105,18 +103,8 @@ public class PrivacyDashboardFragment extends DashboardFragment {
 
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.privacy_dashboard_settings;
-                    result.add(sir);
-                    return result;
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.privacy_dashboard_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

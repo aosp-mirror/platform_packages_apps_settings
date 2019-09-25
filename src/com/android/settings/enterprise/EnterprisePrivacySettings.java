@@ -98,7 +98,7 @@ public class EnterprisePrivacySettings extends DashboardFragment {
                 .hasDeviceOwner();
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.enterprise_privacy_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

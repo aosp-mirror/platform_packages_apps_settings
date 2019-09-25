@@ -96,7 +96,7 @@ public class UserBackupSettingsActivity extends FragmentActivity implements Inde
     /**
      * For Search.
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 private static final String BACKUP_SEARCH_INDEX_KEY = "Backup";
 

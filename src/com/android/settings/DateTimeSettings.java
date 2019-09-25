@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
@@ -34,7 +33,6 @@ import com.android.settings.datetime.TimeFormatPreferenceController;
 import com.android.settings.datetime.TimePreferenceController;
 import com.android.settings.datetime.TimeZonePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.datetime.ZoneGetter;
 import com.android.settingslib.search.SearchIndexable;
@@ -64,7 +62,7 @@ public class DateTimeSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.date_time_prefs;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -176,21 +174,6 @@ public class DateTimeSettings extends DashboardFragment implements
     };
 
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new DateTimeSearchIndexProvider();
-
-    private static class DateTimeSearchIndexProvider extends BaseSearchIndexProvider {
-
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(
-                Context context, boolean enabled) {
-            List<SearchIndexableResource> result = new ArrayList<>();
-
-            SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.date_time_prefs;
-            result.add(sir);
-
-            return result;
-        }
-    }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.date_time_prefs);
 }

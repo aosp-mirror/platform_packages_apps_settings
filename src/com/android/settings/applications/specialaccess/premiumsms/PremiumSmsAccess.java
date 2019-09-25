@@ -21,7 +21,6 @@ import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -38,7 +37,6 @@ import com.android.settings.applications.AppStateSmsPremBridge;
 import com.android.settings.applications.AppStateSmsPremBridge.SmsState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -49,7 +47,6 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @SearchIndexable
 public class PremiumSmsAccess extends EmptyTextSettings
@@ -94,7 +91,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.premium_sms_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -252,6 +249,6 @@ public class PremiumSmsAccess extends EmptyTextSettings
         }
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.premium_sms_settings);
 }

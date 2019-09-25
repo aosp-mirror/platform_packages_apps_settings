@@ -27,7 +27,6 @@ import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_STATUS_BA
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -82,7 +81,7 @@ public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implement
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_mode_block_settings;
+        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
     }
 
     @Override
@@ -93,7 +92,7 @@ public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implement
     /**
      * For Search.
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.zen_mode_block_settings) {
 
             @Override
