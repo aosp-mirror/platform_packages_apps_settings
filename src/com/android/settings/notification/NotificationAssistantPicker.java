@@ -74,7 +74,7 @@ public class NotificationAssistantPicker extends DefaultAppPickerFragment implem
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.notification_assistant_settings;
     }
 
     @Override

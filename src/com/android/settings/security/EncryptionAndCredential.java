@@ -59,7 +59,7 @@ public class EncryptionAndCredential extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.encryption_and_credential;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,

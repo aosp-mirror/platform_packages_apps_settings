@@ -19,6 +19,8 @@ package com.android.settings.search;
 
 import android.util.Log;
 
+import com.android.settingslib.search.Indexable;
+
 import java.lang.reflect.Field;
 
 /**

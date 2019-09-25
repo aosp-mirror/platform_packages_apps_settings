@@ -96,7 +96,7 @@ public class DreamSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.dream_fragment_overview;
     }
 
     @Override

@@ -42,7 +42,7 @@ public class ScanningSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.location_scanning;
     }
 
     @Override

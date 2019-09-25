@@ -33,7 +33,6 @@ import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
@@ -46,7 +45,6 @@ import com.android.settings.SettingsTutorialDialogWrapperActivity;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.utils.CandidateInfoExtra;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
@@ -56,7 +54,6 @@ import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable

@@ -28,11 +28,11 @@ import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;

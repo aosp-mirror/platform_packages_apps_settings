@@ -54,7 +54,7 @@ import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable.SearchIndexProvider;
+import com.android.settingslib.search.Indexable.SearchIndexProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.xmlpull.v1.XmlPullParser;

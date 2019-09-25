@@ -39,7 +39,7 @@ public class LegalSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.about_legal;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

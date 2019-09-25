@@ -66,7 +66,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.search.SearchIndexable;
 

@@ -30,9 +30,9 @@ import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implement
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.zen_mode_block_settings;
     }
 
     @Override

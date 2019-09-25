@@ -54,7 +54,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.AbstractPreferenceController;

@@ -79,7 +79,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.zen_mode_automation_settings;
     }
 
     @Override

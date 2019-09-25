@@ -24,11 +24,11 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceData;
 import com.android.settings.slices.Sliceable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

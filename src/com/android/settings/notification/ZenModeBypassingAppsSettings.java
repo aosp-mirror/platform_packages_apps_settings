@@ -25,8 +25,8 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.zen_mode_bypassing_apps;
     }
 
     @Override

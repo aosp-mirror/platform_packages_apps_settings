@@ -44,7 +44,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.search.Indexable;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
@@ -53,6 +52,7 @@ import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.UUID;
