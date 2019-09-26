@@ -39,6 +39,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,9 @@ import android.widget.ScrollView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,6 +65,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
@@ -92,6 +96,7 @@ public class MasterClearTest {
     private MasterClear mMasterClear;
     private ShadowActivity mShadowActivity;
     private FragmentActivity mActivity;
+    private ShadowUserManager mShadowUserManager;
     private View mContentView;
 
     @Before
@@ -100,11 +105,19 @@ public class MasterClearTest {
         mMasterClear = spy(new MasterClear());
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mShadowActivity = Shadows.shadowOf(mActivity);
+        UserManager userManager = mActivity.getSystemService(UserManager.class);
+        mShadowUserManager = Shadows.shadowOf(userManager);
+        mShadowUserManager.setIsAdminUser(true);
         mContentView = LayoutInflater.from(mActivity).inflate(R.layout.master_clear, null);
 
         // Make scrollView only have one child
         when(mScrollView.getChildAt(0)).thenReturn(mLinearLayout);
         when(mScrollView.getChildCount()).thenReturn(1);
+    }
+
+    @After
+    public void tearDown() {
+        mShadowUserManager.setIsAdminUser(false);
     }
 
     @Test
@@ -443,8 +456,7 @@ public class MasterClearTest {
         doReturn(isEuiccEnabled).when(mMasterClear).isEuiccEnabled(any());
         ContentResolver cr = mActivity.getContentResolver();
         Settings.Global.putInt(cr, Settings.Global.EUICC_PROVISIONED, isEuiccProvisioned ? 1 : 0);
-        Settings.Global.putInt(
-                cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, isDeveloper ? 1 : 0);
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(mActivity, isDeveloper);
     }
 
     private void initScrollView(int height, int scrollY, int childBottom) {
