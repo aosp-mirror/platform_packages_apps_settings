@@ -64,6 +64,7 @@ import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -382,8 +383,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         }
         ContentResolver cr = context.getContentResolver();
         return Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0
-                || Settings.Global.getInt(
-                cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+                || DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
     }
 
     @VisibleForTesting

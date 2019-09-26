@@ -53,6 +53,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
 
 import java.util.Arrays;
@@ -224,7 +225,7 @@ public class MobileNetworkUtils {
         final boolean euiccProvisioned =
                 Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0;
         final boolean inDeveloperMode =
-                Settings.Global.getInt(cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+                DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
 
         return (inDeveloperMode || euiccProvisioned
                 || (!esimIgnoredDevice && enabledEsimUiByDefault && inEsimSupportedCountries));
