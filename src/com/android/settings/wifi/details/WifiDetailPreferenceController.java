@@ -235,14 +235,28 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             return mNetworkCapabilities.hasCapability(cap) != nc.hasCapability(cap);
         }
 
+        private boolean hasPrivateDnsStatusChanged(NetworkCapabilities nc) {
+            // If this is the first time that WifiDetailPreferenceController gets
+            // NetworkCapabilities, report that something has changed and assign nc to
+            // mNetworkCapabilities in onCapabilitiesChanged. Note that the NetworkCapabilities
+            // from onCapabilitiesChanged() will never be null, so calling
+            // mNetworkCapabilities.isPrivateDnsBroken() would be safe next time.
+            if (mNetworkCapabilities == null) {
+                return true;
+            }
+
+            return mNetworkCapabilities.isPrivateDnsBroken() != nc.isPrivateDnsBroken();
+        }
+
         @Override
         public void onCapabilitiesChanged(Network network, NetworkCapabilities nc) {
             // If the network just validated or lost Internet access or detected partial internet
-            // connectivity, refresh network state. Don't do this on every NetworkCapabilities
-            // change because refreshNetworkState sends IPCs to the system server from the UI
-            // thread, which can cause jank.
+            // connectivity or private dns was broken, refresh network state. Don't do this on
+            // every NetworkCapabilities change because refreshEntityHeader sends IPCs to the
+            // system server from the UI thread, which can cause jank.
             if (network.equals(mNetwork) && !nc.equals(mNetworkCapabilities)) {
-                if (hasCapabilityChanged(nc, NET_CAPABILITY_VALIDATED)
+                if (hasPrivateDnsStatusChanged(nc)
+                        || hasCapabilityChanged(nc, NET_CAPABILITY_VALIDATED)
                         || hasCapabilityChanged(nc, NET_CAPABILITY_CAPTIVE_PORTAL)
                         || hasCapabilityChanged(nc, NET_CAPABILITY_PARTIAL_CONNECTIVITY)) {
                     mAccessPoint.update(mWifiConfig, mWifiInfo, mNetworkInfo);
