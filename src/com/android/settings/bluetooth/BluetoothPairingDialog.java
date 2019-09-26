@@ -65,6 +65,11 @@ public class BluetoothPairingDialog extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
+        if (intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) == null) {
+            // Error handler for the case that dialog is started from adb command.
+            finish();
+            return;
+        }
         mBluetoothPairingController = new BluetoothPairingController(intent, this);
         // build the dialog fragment
         boolean fragmentFound = true;
