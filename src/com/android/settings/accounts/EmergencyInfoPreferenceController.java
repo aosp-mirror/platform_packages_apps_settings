@@ -28,7 +28,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.List;
 

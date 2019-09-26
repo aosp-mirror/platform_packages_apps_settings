@@ -90,7 +90,7 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.color_mode_settings;
     }
 
     @VisibleForTesting

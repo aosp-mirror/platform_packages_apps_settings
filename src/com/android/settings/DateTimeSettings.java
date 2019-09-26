@@ -62,7 +62,7 @@ public class DateTimeSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.date_time_prefs;
     }
 
     @Override

@@ -36,6 +36,8 @@ import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -132,13 +134,6 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
      */
     public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
-    }
-
-    /**
-     * Returns the xml resource Id.
-     */
-    public int getXmlResourceId() {
-        return mXmlRes;
     }
 
     /**

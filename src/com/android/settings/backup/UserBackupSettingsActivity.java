@@ -28,8 +28,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;

@@ -40,21 +40,20 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
-
 import android.view.ContextMenu;
 import android.view.View;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 
-import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,6 +63,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)

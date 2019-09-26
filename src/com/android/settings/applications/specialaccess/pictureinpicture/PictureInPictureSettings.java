@@ -185,7 +185,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.picture_in_picture_settings;
     }
 
     @Override

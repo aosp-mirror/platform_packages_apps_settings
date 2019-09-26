@@ -24,7 +24,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import com.android.settings.R;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Test;

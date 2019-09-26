@@ -11,11 +11,11 @@ import android.util.Xml;
 
 import com.android.settings.R;
 import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.search.Indexable;
 
 import org.junit.Before;
 import org.junit.Test;

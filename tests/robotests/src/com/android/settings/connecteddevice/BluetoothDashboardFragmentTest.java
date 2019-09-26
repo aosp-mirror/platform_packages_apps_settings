@@ -22,7 +22,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Test;

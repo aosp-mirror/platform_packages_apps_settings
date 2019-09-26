@@ -19,20 +19,15 @@ package com.android.settings.development.gamedriver;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Dashboard for Game Driver preferences.

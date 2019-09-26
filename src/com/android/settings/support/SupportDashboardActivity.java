@@ -24,8 +24,8 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;

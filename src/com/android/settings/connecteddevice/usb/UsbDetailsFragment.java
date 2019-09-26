@@ -62,7 +62,7 @@ public class UsbDetailsFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.usb_details_fragment;
     }
 
     @Override

@@ -18,7 +18,6 @@ import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.telephony.SubscriptionManager;
 import android.widget.Switch;
 
@@ -30,7 +29,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.datausage.DataSaverBackend.Listener;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
 import com.android.settingslib.applications.ApplicationsState;
@@ -40,7 +38,6 @@ import com.android.settingslib.applications.ApplicationsState.Session;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @SearchIndexable
 public class DataSaverSummary extends SettingsPreferenceFragment

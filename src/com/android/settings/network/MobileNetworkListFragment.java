@@ -35,7 +35,7 @@ public class MobileNetworkListFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.mobile_network_list;
     }
 
     @Override

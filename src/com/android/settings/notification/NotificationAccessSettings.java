@@ -24,7 +24,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.widget.Toast;
@@ -37,12 +36,8 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Settings screen for managing notification listener permissions
