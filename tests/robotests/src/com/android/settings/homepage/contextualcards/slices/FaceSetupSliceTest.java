@@ -108,8 +108,8 @@ public class FaceSetupSliceTest {
         when(faceManager.hasEnrolledTemplates(UserHandle.myUserId())).thenReturn(true);
         when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(faceManager);
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.FACE_UNLOCK_MUST_RE_ENROLL,
-                1);
+                Settings.Secure.FACE_UNLOCK_RE_ENROLL,
+                3);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
 
         assertThat(setupSlice.getSlice()).isNotNull();
