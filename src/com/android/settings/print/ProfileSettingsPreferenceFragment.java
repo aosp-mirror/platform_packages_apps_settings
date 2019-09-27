@@ -16,6 +16,7 @@
 
 package com.android.settings.print;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,12 +50,14 @@ public abstract class ProfileSettingsPreferenceFragment extends SettingsPreferen
                         long id) {
                     final UserHandle selectedUser = profileSpinnerAdapter.getUserHandle(position);
                     if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
+                        final Activity activity = getActivity();
                         Intent intent = new Intent(getIntentActionString());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        getActivity().startActivityAsUser(intent, selectedUser);
+                        activity.startActivityAsUser(intent, selectedUser);
                         // Go back to default selection, which is the first one
                         spinner.setSelection(0);
+                        activity.finish();
                     }
                 }
 
