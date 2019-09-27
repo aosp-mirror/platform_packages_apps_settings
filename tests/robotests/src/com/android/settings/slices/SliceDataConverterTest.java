@@ -37,6 +37,7 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeIndexProvider;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.After;
 import org.junit.Before;
@@ -92,7 +93,8 @@ public class SliceDataConverterTest {
     public void testFakeProvider_convertsFakeData() {
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues()
-                .add(FakeIndexProvider.class);
+                .add(new SearchIndexableData(FakeIndexProvider.class,
+                        FakeIndexProvider.SEARCH_INDEX_DATA_PROVIDER));
 
         doReturn(getFakeService()).when(mSliceDataConverter).getAccessibilityServiceInfoList();
 
