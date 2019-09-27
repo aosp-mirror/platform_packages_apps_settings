@@ -2352,8 +2352,7 @@
         </activity>
         <activity
             android:name="Settings$MobileDataUsageListActivity"
-            android:label="@string/cellular_data_usage"
-            android:parentActivityName="Settings">
+            android:label="@string/cellular_data_usage">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MOBILE_DATA_USAGE" />
                 <category android:name="android.intent.category.DEFAULT" />
