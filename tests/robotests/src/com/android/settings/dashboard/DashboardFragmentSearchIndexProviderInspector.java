@@ -24,7 +24,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.robolectric.RuntimeEnvironment;

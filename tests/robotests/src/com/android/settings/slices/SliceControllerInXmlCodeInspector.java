@@ -32,10 +32,10 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.search.Indexable;
 
 import org.robolectric.RuntimeEnvironment;
 import org.xmlpull.v1.XmlPullParserException;

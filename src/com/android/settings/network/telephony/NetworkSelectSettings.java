@@ -135,6 +135,9 @@ public class NetworkSelectSettings extends DashboardFragment {
         super.onStart();
 
         updateForbiddenPlmns();
+        if (isProgressBarVisible()) {
+            return;
+        }
         setProgressBarVisible(true);
 
         mNetworkScanHelper.startNetworkScan(
@@ -157,7 +160,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     @Override
     public void onStop() {
         super.onStop();
-        stopNetworkQuery();
     }
 
     @Override
@@ -377,6 +379,13 @@ public class NetworkSelectSettings extends DashboardFragment {
         mConnectedPreferenceCategory.setVisible(true);
     }
 
+    private boolean isProgressBarVisible() {
+        if (mProgressHeader == null) {
+            return false;
+        }
+        return (mProgressHeader.getVisibility() == View.VISIBLE);
+    }
+
     protected void setProgressBarVisible(boolean visible) {
         if (mProgressHeader != null) {
             mProgressHeader.setVisibility(visible ? View.VISIBLE : View.GONE);
@@ -425,6 +434,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @Override
     public void onDestroy() {
+        stopNetworkQuery();
         mNetworkScanExecutor.shutdown();
         super.onDestroy();
     }

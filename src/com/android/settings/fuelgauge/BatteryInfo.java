@@ -160,7 +160,7 @@ public class BatteryInfo {
                 callback.onBatteryInfoLoaded(batteryInfo);
                 BatteryUtils.logRuntime(LOG_TAG, "time for callback", startTime);
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public static BatteryInfo getBatteryInfo(final Context context,

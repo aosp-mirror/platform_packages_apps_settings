@@ -138,7 +138,7 @@ public class TtsEnginePreferenceFragment extends RadioButtonPickerFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.tts_engine_picker;
     }
 
     private boolean shouldDisplayDataAlert(EngineCandidateInfo info) {

@@ -18,7 +18,7 @@ package com.android.settings.core;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;

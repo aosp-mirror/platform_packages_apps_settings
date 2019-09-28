@@ -78,7 +78,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return SEARCH_INDEX_DATA_PROVIDER.getXmlResourceId();
+        return R.xml.zen_access_settings;
     }
 
     @Override
