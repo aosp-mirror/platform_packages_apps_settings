@@ -21,7 +21,6 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.SubscriptionPlan;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -34,11 +33,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.net.DataUsageController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -250,77 +246,4 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         updateState();
         mSummaryController.updateState(mSummaryPreference);
     }
-
-    private static class SummaryProvider
-            implements SummaryLoader.SummaryProvider {
-
-        private final Activity mActivity;
-        private final SummaryLoader mSummaryLoader;
-        private final DataUsageController mDataController;
-
-        public SummaryProvider(Activity activity, SummaryLoader summaryLoader) {
-            mActivity = activity;
-            mSummaryLoader = summaryLoader;
-            mDataController = new DataUsageController(activity);
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                if (DataUsageUtils.hasSim(mActivity)) {
-                    mSummaryLoader.setSummary(this,
-                            mActivity.getString(R.string.data_usage_summary_format,
-                                    formatUsedData()));
-                } else {
-                    final DataUsageController.DataUsageInfo info =
-                            mDataController.getWifiDataUsageInfo();
-
-                    if (info == null) {
-                        mSummaryLoader.setSummary(this, null);
-                    } else {
-                        final CharSequence wifiFormat = mActivity
-                                .getText(R.string.data_usage_wifi_format);
-                        final CharSequence sizeText =
-                                DataUsageUtils.formatDataUsage(mActivity, info.usageLevel);
-                        mSummaryLoader.setSummary(this,
-                                TextUtils.expandTemplate(wifiFormat, sizeText));
-                    }
-                }
-            }
-        }
-
-        private CharSequence formatUsedData() {
-            SubscriptionManager subscriptionManager = (SubscriptionManager) mActivity
-                .getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
-            int defaultSubId = subscriptionManager.getDefaultSubscriptionId();
-            if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                return formatFallbackData();
-            }
-            SubscriptionPlan dfltPlan = DataUsageSummaryPreferenceController
-                    .getPrimaryPlan(subscriptionManager, defaultSubId);
-            if (dfltPlan == null) {
-                return formatFallbackData();
-            }
-            if (DataUsageSummaryPreferenceController.unlimited(dfltPlan.getDataLimitBytes())) {
-                return DataUsageUtils.formatDataUsage(mActivity, dfltPlan.getDataUsageBytes());
-            } else {
-                return Utils.formatPercentage(dfltPlan.getDataUsageBytes(),
-                    dfltPlan.getDataLimitBytes());
-            }
-        }
-
-        private CharSequence formatFallbackData() {
-            DataUsageController.DataUsageInfo info = mDataController.getDataUsageInfo();
-            if (info == null) {
-                return DataUsageUtils.formatDataUsage(mActivity, 0);
-            } else if (info.limitLevel <= 0) {
-                return DataUsageUtils.formatDataUsage(mActivity, info.usageLevel);
-            } else {
-                return Utils.formatPercentage(info.usageLevel, info.limitLevel);
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-        = SummaryProvider::new;
 }

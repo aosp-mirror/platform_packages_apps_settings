@@ -60,12 +60,10 @@ import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
@@ -1227,42 +1225,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                     return result;
                 }
             };
-
-    private static class SummaryProvider
-            implements SummaryLoader.SummaryProvider, OnSummaryChangeListener {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        @VisibleForTesting
-        WifiSummaryUpdater mSummaryHelper;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-            mSummaryHelper = new WifiSummaryUpdater(mContext, this);
-        }
-
-
-        @Override
-        public void setListening(boolean listening) {
-            mSummaryHelper.register(listening);
-        }
-
-        @Override
-        public void onSummaryChanged(String summary) {
-            mSummaryLoader.setSummary(this, summary);
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 
     private void handleConfigNetworkSubmitEvent(Intent data) {
         final WifiConfiguration wifiConfiguration = data.getParcelableExtra(
