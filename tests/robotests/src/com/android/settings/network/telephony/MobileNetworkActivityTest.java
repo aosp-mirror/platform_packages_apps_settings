@@ -164,7 +164,7 @@ public class MobileNetworkActivityTest {
 
     @Test
     public void phoneChangeReceiver_ignoresStickyBroadcastFromBeforeRegistering() {
-        Activity activity = Robolectric.setupActivity(Activity.class);
+        Context activity = mContext;
         MobileNetworkActivity.PhoneChangeReceiver.Client client = mock(
                 MobileNetworkActivity.PhoneChangeReceiver.Client.class);
         MobileNetworkActivity.PhoneChangeReceiver receiver =
@@ -181,7 +181,7 @@ public class MobileNetworkActivityTest {
 
     @Test
     public void phoneChangeReceiver_ignoresCarrierConfigChangeForWrongSubscriptionId() {
-        Activity activity = Robolectric.setupActivity(Activity.class);
+        Context activity = mContext;
 
         MobileNetworkActivity.PhoneChangeReceiver.Client client = mock(
                 MobileNetworkActivity.PhoneChangeReceiver.Client.class);
@@ -200,7 +200,7 @@ public class MobileNetworkActivityTest {
 
     @Test
     public void phoneChangeReceiver_dispatchesCarrierConfigChangeForCorrectSubscriptionId() {
-        Activity activity = Robolectric.setupActivity(Activity.class);
+        Context activity = mContext;
 
         MobileNetworkActivity.PhoneChangeReceiver.Client client = mock(
                 MobileNetworkActivity.PhoneChangeReceiver.Client.class);

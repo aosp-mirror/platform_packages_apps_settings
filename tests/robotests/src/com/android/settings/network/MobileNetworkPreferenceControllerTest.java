@@ -23,6 +23,7 @@ import static com.android.settings.network.MobileNetworkPreferenceController.MOB
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -61,6 +62,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -81,7 +83,7 @@ public class MobileNetworkPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
@@ -190,10 +192,10 @@ public class MobileNetworkPreferenceControllerTest {
         mController = new MobileNetworkPreferenceController(mContext);
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2, false);
         ArgumentCaptor<Intent> argument = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(argument.capture());
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mContext).startActivity(argument.capture());
         final ComponentName componentName = argument.getValue().getComponent();
         assertThat(componentName.getPackageName()).isEqualTo(MOBILE_NETWORK_PACKAGE);
         assertThat(componentName.getClassName()).isEqualTo(MOBILE_NETWORK_CLASS);

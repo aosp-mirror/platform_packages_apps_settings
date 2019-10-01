@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -40,6 +41,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowTelephonyManager;
 import org.robolectric.util.ReflectionHelpers;
@@ -58,7 +60,7 @@ public class DataUsagePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(RuntimeEnvironment.application);
 
         final TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
         final ShadowTelephonyManager shadowTelephonyManager = Shadows.shadowOf(telephonyManager);
@@ -91,9 +93,10 @@ public class DataUsagePreferenceControllerTest {
     @Test
     public void handlePreferenceTreeClick_needDialog_showDialog() {
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(captor.capture());
+
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mContext).startActivity(captor.capture());
         final Intent intent = captor.getValue();
 
         assertThat(intent.getAction()).isEqualTo(Settings.ACTION_MOBILE_DATA_USAGE);
