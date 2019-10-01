@@ -22,12 +22,28 @@
     settings:initialExpandedChildrenCount="4">
 
     <Preference
+        android:key="language_input_settings"
+        android:title="@string/language_settings"
+        android:icon="@drawable/ic_settings_language"
+        android:order="-260"
+        android:fragment="com.android.settings.language.LanguageAndInputSettings"
+        settings:controller="com.android.settings.language.LanguageAndInputPreferenceController"/>
+
+    <Preference
         android:key="gesture_settings"
         android:title="@string/gesture_preference_title"
         android:icon="@drawable/ic_settings_gestures"
         android:order="-250"
         android:fragment="com.android.settings.gestures.GestureSettings"
         settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
+
+    <Preference
+        android:key="date_time_settings"
+        android:title="@string/date_and_time"
+        android:icon="@drawable/ic_settings_date_time"
+        android:order="-240"
+        android:fragment="com.android.settings.datetime.DateTimeSettings"
+        settings:controller="com.android.settings.datetime.DateTimePreferenceController"/>
 
     <Preference
         android:key="reset_dashboard"
@@ -47,7 +63,7 @@
         android:order="-30"
         settings:keywords="@string/keywords_system_update_settings"
         settings:controller="com.android.settings.system.SystemUpdatePreferenceController">
-        <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
+        <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS"/>
     </Preference>
 
     <Preference
@@ -57,7 +73,7 @@
         settings:controller="com.android.settings.system.AdditionalSystemUpdatePreferenceController">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="@string/additional_system_update"
-                android:targetClass="@string/additional_system_update_menu" />
+                android:targetClass="@string/additional_system_update_menu"/>
     </Preference>
 
 </PreferenceScreen>

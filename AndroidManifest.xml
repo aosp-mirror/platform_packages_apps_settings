@@ -592,14 +592,8 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.order" android:value="-240"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DateTimeSettings" />
+                android:value="com.android.settings.datetime.DateTimeSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -640,12 +634,6 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-260"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.language.LanguageAndInputSettings"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2387,11 +2375,11 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.order" android:value="-45"/>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.system" />
+                       android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.users.UserSettings" />
+                       android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
+                       android:value="true" />
         </activity>
 
         <activity
