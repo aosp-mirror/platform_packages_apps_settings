@@ -81,7 +81,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             final RequireScrollMixin requireScrollMixin = getLayout().getMixin(
                     RequireScrollMixin.class);
             requireScrollMixin.requireScrollWithButton(this, agreeButton,
-                    R.string.wifi_more,
+                    R.string.security_settings_face_enroll_introduction_more,
                     button -> {
                         onNextButtonClick(button);
                     });
