@@ -32,7 +32,7 @@ import com.android.settings.Utils;
 /**
  * Activity which acts as a proxy to the tether provisioning app for sanity checks and permission
  * restrictions. Specifically, the provisioning apps require
- * {@link android.permission.CONNECTIVITY_INTERNAL}, while this activity can be started by a caller
+ * {@link android.permission.TETHER_PRIVILEGED}, while this activity can be started by a caller
  * with {@link android.permission.TETHER_PRIVILEGED}.
  */
 public class TetherProvisioningActivity extends Activity {
