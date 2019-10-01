@@ -45,6 +45,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -86,7 +87,7 @@ public class DashboardFragmentTest {
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key");
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mDashboardCategory = new DashboardCategory("key");
-        mDashboardCategory.addTile(new Tile(mActivityInfo, mDashboardCategory.key));
+        mDashboardCategory.addTile(new ActivityTile(mActivityInfo, mDashboardCategory.key));
         mTestFragment = new TestFragment(RuntimeEnvironment.application);
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))

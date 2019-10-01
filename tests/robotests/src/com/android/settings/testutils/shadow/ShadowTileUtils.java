@@ -18,6 +18,7 @@ package com.android.settings.testutils.shadow;
 
 import android.content.Context;
 import android.content.IContentProvider;
+import android.net.Uri;
 import android.util.Pair;
 
 import com.android.settings.R;
@@ -35,14 +36,14 @@ public class ShadowTileUtils {
     public static final String MOCK_SUMMARY = "summary";
 
     @Implementation
-    protected static String getTextFromUri(Context context, String uriString,
+    protected static String getTextFromUri(Context context, Uri uri,
             Map<String, IContentProvider> providerMap, String key) {
         return MOCK_SUMMARY;
     }
 
     @Implementation
     protected static Pair<String, Integer> getIconFromUri(Context context, String packageName,
-            String uriString, Map<String, IContentProvider> providerMap) {
+            Uri uri, Map<String, IContentProvider> providerMap) {
         return Pair.create(RuntimeEnvironment.application.getPackageName(), R.drawable.ic_settings_accent);
     }
 }

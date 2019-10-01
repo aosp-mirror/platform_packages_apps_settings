@@ -27,6 +27,7 @@ import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.util.Pair;
 
+import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -68,8 +69,8 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldNotChangeCategoryForNewKeys() {
-        final Tile tile1 = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
-        final Tile tile2 = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
+        final Tile tile1 = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
+        final Tile tile2 = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
         final DashboardCategory category = new DashboardCategory(CategoryKey.CATEGORY_ACCOUNT);
         category.addTile(tile1);
         category.addTile(tile2);
@@ -85,9 +86,9 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldNotChangeCategoryForMixedKeys() {
-        final Tile tile1 = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
+        final Tile tile1 = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
         final String oldCategory = "com.android.settings.category.wireless";
-        final Tile tile2 = new Tile(mActivityInfo, oldCategory);
+        final Tile tile2 = new ActivityTile(mActivityInfo, oldCategory);
         final DashboardCategory category1 = new DashboardCategory(CategoryKey.CATEGORY_ACCOUNT);
         category1.addTile(tile1);
         final DashboardCategory category2 = new DashboardCategory(oldCategory);
@@ -108,7 +109,7 @@ public class CategoryManagerTest {
     @Test
     public void backwardCompatCleanupForCategory_shouldChangeCategoryForOldKeys() {
         final String oldCategory = "com.android.settings.category.wireless";
-        final Tile tile1 = new Tile(mActivityInfo, oldCategory);
+        final Tile tile1 = new ActivityTile(mActivityInfo, oldCategory);
         tile1.setCategory(oldCategory);
         final DashboardCategory category1 = new DashboardCategory(oldCategory);
         category1.addTile(tile1);
@@ -146,9 +147,9 @@ public class CategoryManagerTest {
         activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 200);
         activityInfo3.packageName = testPackage;
         activityInfo3.name = "class3";
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = new ActivityTile(activityInfo1, category.key);
+        final Tile tile2 = new ActivityTile(activityInfo2, category.key);
+        final Tile tile3 = new ActivityTile(activityInfo3, category.key);
 
         category.addTile(tile1);
         category.addTile(tile2);
@@ -186,9 +187,9 @@ public class CategoryManagerTest {
         activityInfo3.packageName = testPackage1;
         activityInfo3.name = "class3";
 
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = new ActivityTile(activityInfo1, category.key);
+        final Tile tile2 = new ActivityTile(activityInfo2, category.key);
+        final Tile tile3 = new ActivityTile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -223,9 +224,9 @@ public class CategoryManagerTest {
         activityInfo3.name = "class3";
         activityInfo3.metaData = new Bundle();
         activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = new ActivityTile(activityInfo1, category.key);
+        final Tile tile2 = new ActivityTile(activityInfo2, category.key);
+        final Tile tile3 = new ActivityTile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -268,10 +269,10 @@ public class CategoryManagerTest {
         activityInfo4.metaData = new Bundle();
         activityInfo4.metaData.putInt(META_DATA_KEY_ORDER, -1);
 
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile4 = new Tile(activityInfo4, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = new ActivityTile(activityInfo1, category.key);
+        final Tile tile2 = new ActivityTile(activityInfo2, category.key);
+        final Tile tile4 = new ActivityTile(activityInfo4, category.key);
+        final Tile tile3 = new ActivityTile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -310,9 +311,9 @@ public class CategoryManagerTest {
         activityInfo3.name = "class3";
         activityInfo3.metaData = new Bundle();
         activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 1);
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = new ActivityTile(activityInfo1, category.key);
+        final Tile tile2 = new ActivityTile(activityInfo2, category.key);
+        final Tile tile3 = new ActivityTile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -347,9 +348,9 @@ public class CategoryManagerTest {
         activityInfo3.name = "class3";
         activityInfo3.metaData = new Bundle();
         activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = new ActivityTile(activityInfo1, category.key);
+        final Tile tile2 = new ActivityTile(activityInfo2, category.key);
+        final Tile tile3 = new ActivityTile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -381,9 +382,9 @@ public class CategoryManagerTest {
         activityInfo3.metaData = new Bundle();
         activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
 
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = new ActivityTile(activityInfo1, category.key);
+        final Tile tile2 = new ActivityTile(activityInfo2, category.key);
+        final Tile tile3 = new ActivityTile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);

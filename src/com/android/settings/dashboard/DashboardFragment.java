@@ -98,11 +98,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
         // And wire up with lifecycle.
         final Lifecycle lifecycle = getSettingsLifecycle();
-        uniqueControllerFromXml
-                .stream()
-                .filter(controller -> controller instanceof LifecycleObserver)
-                .forEach(
-                        controller -> lifecycle.addObserver((LifecycleObserver) controller));
+        uniqueControllerFromXml.forEach(controller -> {
+            if (controller instanceof LifecycleObserver) {
+                lifecycle.addObserver((LifecycleObserver) controller);
+            }
+        });
 
         mPlaceholderPreferenceController =
                 new DashboardTilePlaceholderPreferenceController(context);
@@ -115,15 +115,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @VisibleForTesting
     void checkUiBlocker(List<AbstractPreferenceController> controllers) {
         final List<String> keys = new ArrayList<>();
-        controllers
-                .stream()
-                .filter(controller -> controller instanceof BasePreferenceController.UiBlocker)
-                .forEach(controller -> {
-                    if (controller.isAvailable()) {
-                        ((BasePreferenceController) controller).setUiBlockListener(this);
-                        keys.add(controller.getPreferenceKey());
-                    }
-                });
+        controllers.forEach(controller -> {
+            if (controller instanceof BasePreferenceController.UiBlocker
+                    && controller.isAvailable()) {
+                ((BasePreferenceController) controller).setUiBlockListener(this);
+                keys.add(controller.getPreferenceKey());
+            }
+        });
 
         if (!keys.isEmpty()) {
             mBlockerController = new UiBlockerController(keys);

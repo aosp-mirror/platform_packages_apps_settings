@@ -32,6 +32,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -118,10 +119,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         bindTitle(pref, tile);
         bindSummary(pref, tile);
         bindIcon(pref, tile, forceRoundedIcon);
+
         final Bundle metadata = tile.getMetaData();
         String clsName = null;
         String action = null;
-
         if (metadata != null) {
             clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
             action = metadata.getString(META_DATA_KEY_INTENT_ACTION);
@@ -140,10 +141,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 return true;
             });
         }
-        final String skipOffsetPackageName = activity.getPackageName();
-
 
         if (tile.hasOrder()) {
+            final String skipOffsetPackageName = activity.getPackageName();
             final int order = tile.getOrder();
             boolean shouldSkipBaseOrderOffset = TextUtils.equals(
                     skipOffsetPackageName, tile.getIntent().getComponent().getPackageName());
@@ -182,14 +182,18 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             // to avoid preference height change.
             preference.setTitle(R.string.summary_placeholder);
 
-            ThreadUtils.postOnBackgroundThread(() -> {
-                final Map<String, IContentProvider> providerMap = new ArrayMap<>();
-                final String uri = tile.getMetaData().getString(META_DATA_PREFERENCE_TITLE_URI);
-                final String titleFromUri = TileUtils.getTextFromUri(
-                        mContext, uri, providerMap, META_DATA_PREFERENCE_TITLE);
-                ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
-            });
+            final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_TITLE_URI);
+            refreshTitle(uri, preference);
         }
+    }
+
+    private void refreshTitle(Uri uri, Preference preference) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final Map<String, IContentProvider> providerMap = new ArrayMap<>();
+            final String titleFromUri = TileUtils.getTextFromUri(
+                    mContext, uri, providerMap, META_DATA_PREFERENCE_TITLE);
+            ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
+        });
     }
 
     private void bindSummary(Preference preference, Tile tile) {
@@ -202,22 +206,26 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             // to avoid preference height change.
             preference.setSummary(R.string.summary_placeholder);
 
-            ThreadUtils.postOnBackgroundThread(() -> {
-                final Map<String, IContentProvider> providerMap = new ArrayMap<>();
-                final String uri = tile.getMetaData().getString(META_DATA_PREFERENCE_SUMMARY_URI);
-                final String summaryFromUri = TileUtils.getTextFromUri(
-                        mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
-                ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
-            });
+            final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_SUMMARY_URI);
+            refreshSummary(uri, preference);
         } else {
             preference.setSummary(R.string.summary_placeholder);
         }
     }
 
+    private void refreshSummary(Uri uri, Preference preference) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final Map<String, IContentProvider> providerMap = new ArrayMap<>();
+            final String summaryFromUri = TileUtils.getTextFromUri(
+                    mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
+            ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
+        });
+    }
+
     @VisibleForTesting
     void bindIcon(Preference preference, Tile tile, boolean forceRoundedIcon) {
         // Use preference context instead here when get icon from Tile, as we are using the context
-        // to get the style to tint the icon.  Using mContext here won't get the correct style.
+        // to get the style to tint the icon. Using mContext here won't get the correct style.
         final Icon tileIcon = tile.getIcon(preference.getContext());
         if (tileIcon != null) {
             Drawable iconDrawable = tileIcon.loadDrawable(preference.getContext());
@@ -238,7 +246,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     packageName = intent.getComponent().getPackageName();
                 }
                 final Map<String, IContentProvider> providerMap = new ArrayMap<>();
-                final String uri = tile.getMetaData().getString(META_DATA_PREFERENCE_ICON_URI);
+                final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_ICON_URI);
                 final Pair<String, Integer> iconInfo = TileUtils.getIconFromUri(
                         mContext, packageName, uri, providerMap);
                 if (iconInfo == null) {
