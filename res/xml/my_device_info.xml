@@ -139,9 +139,18 @@
 
     <!-- Wi-Fi MAC address -->
     <Preference
-        android:key="wifi_mac_address"
+        android:key="saved_accesspoints_wifi_mac_address"
         android:order="45"
         android:title="@string/status_wifi_mac_address"
+        android:summary="@string/view_saved_network"
+        android:fragment="com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings"
+        settings:enableCopying="false"/>
+
+    <!-- Factory Wi-Fi MAC address -->
+    <Preference
+        android:key="wifi_mac_address"
+        android:order="46"
+        android:title="@string/status_factory_wifi_mac_address"
         android:summary="@string/summary_placeholder"
         android:selectable="false"
         settings:enableCopying="true"/>
@@ -149,7 +158,7 @@
     <!-- Bluetooth address -->
     <Preference
         android:key="bt_address"
-        android:order="46"
+        android:order="47"
         android:title="@string/status_bt_address"
         android:summary="@string/summary_placeholder"
         android:selectable="false"
@@ -158,7 +167,7 @@
     <!-- Device up time -->
     <Preference
         android:key="up_time"
-        android:order="47"
+        android:order="48"
         android:title="@string/status_up_time"
         android:summary="@string/summary_placeholder"
         android:selectable="false"/>
