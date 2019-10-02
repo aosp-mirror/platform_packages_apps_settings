@@ -2103,12 +2103,6 @@
                 <action android:name="android.settings.CAST_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-6"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.device" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
         </activity>
@@ -2376,6 +2370,8 @@
             <meta-data android:name="com.android.settings.order" android:value="-45"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.summary_uri"
+                       android:value="content://com.android.settings.dashboard.SummaryProvider/user" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2522,14 +2518,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-440"/>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.apps"/>
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.ConfigureNotificationSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2895,9 +2883,8 @@
         </activity-alias>
 
         <provider
-            android:name=".backup.BackupSettingsContentProvider"
-            android:authorities="com.android.settings.backup.BackupSettingsContentProvider"
-	    android:exported="true">
+            android:name=".dashboard.SummaryProvider"
+            android:authorities="com.android.settings.dashboard.SummaryProvider">
         </provider>
 
         <activity android:name=".backup.UserBackupSettingsActivity"
@@ -2916,7 +2903,7 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.summary_uri"
-		       android:value="content://com.android.settings.backup.BackupSettingsContentProvider/summary" />
+		       android:value="content://com.android.settings.dashboard.SummaryProvider/backup" />
             <meta-data android:name="com.android.settings.order" android:value="-60"/>
         </activity>
 

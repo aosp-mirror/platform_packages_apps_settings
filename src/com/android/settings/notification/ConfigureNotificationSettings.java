@@ -40,7 +40,6 @@ import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -161,54 +160,6 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
             outState.putString(SELECTED_PREFERENCE_KEY, mRequestPreference.getKey());
         }
     }
-
-    /**
-     * For summary
-     */
-    static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-        private NotificationBackend mBackend;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-            mBackend = new NotificationBackend();
-        }
-
-        @VisibleForTesting
-        protected void setBackend(NotificationBackend backend) {
-            mBackend = backend;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (!listening) {
-                return;
-            }
-            int blockedAppCount = mBackend.getBlockedAppCount();
-            if (blockedAppCount == 0) {
-                mSummaryLoader.setSummary(this,
-                        mContext.getText(R.string.app_notification_listing_summary_zero));
-            } else {
-                mSummaryLoader.setSummary(this,
-                        mContext.getResources().getQuantityString(
-                                R.plurals.app_notification_listing_summary_others,
-                                blockedAppCount, blockedAppCount));
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
-            new SummaryLoader.SummaryProviderFactory() {
-                @Override
-                public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                        SummaryLoader summaryLoader) {
-                    return new ConfigureNotificationSettings.SummaryProvider(
-                            activity, summaryLoader);
-                }
-            };
 
     /**
      * For Search.

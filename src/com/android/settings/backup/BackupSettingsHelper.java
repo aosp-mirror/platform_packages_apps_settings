@@ -54,7 +54,7 @@ public class BackupSettingsHelper {
      * If there is only one profile, show whether the backup is on or off.
      * Otherwise, show nothing.
      */
-    String getSummary() {
+    public String getSummary() {
         UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         if (userManager.getUserProfiles().size() == 1) {
             try {

@@ -46,6 +46,13 @@
         android:layout="@layout/preference_category_no_label"
         android:order="-997"/>
 
+    <Preference
+        android:key="configure_notification_settings"
+        android:title="@string/configure_notification_settings"
+        android:order="-440"
+        android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
+        settings:controller="com.android.settings.notification.ConfigureNotificationPreferenceController"/>
+
     <!-- Notifications (appears before manage_perms), default apps (appears after) -->
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"

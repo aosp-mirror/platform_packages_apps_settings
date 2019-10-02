@@ -19,9 +19,7 @@ package com.android.settings.datausage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.endsWith;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -36,7 +34,6 @@ import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -65,8 +62,6 @@ import org.robolectric.shadows.ShadowTelephonyManager;
 @RunWith(RobolectricTestRunner.class)
 public class DataUsageSummaryTest {
 
-    @Mock
-    private SummaryLoader mSummaryLoader;
     @Mock
     private NetworkPolicyManager mNetworkPolicyManager;
     @Mock

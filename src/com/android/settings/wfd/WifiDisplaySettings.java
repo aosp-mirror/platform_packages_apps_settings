@@ -37,7 +37,6 @@ import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Slog;
 import android.util.TypedValue;
@@ -64,14 +63,10 @@ import androidx.preference.SwitchPreference;
 import com.android.internal.app.MediaRouteDialogPresenter;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.TwoTargetPreference;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Settings screen for WifiDisplay configuration and connection management.
@@ -766,74 +761,6 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
             return true;
         }
     }
-
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-        private final MediaRouter mRouter;
-        private final MediaRouter.Callback mRouterCallback = new MediaRouter.SimpleCallback() {
-            @Override
-            public void onRouteSelected(MediaRouter router, int type, RouteInfo info) {
-                updateSummary();
-            }
-
-            @Override
-            public void onRouteUnselected(MediaRouter router, int type, RouteInfo info) {
-                updateSummary();
-            }
-
-            @Override
-            public void onRouteAdded(MediaRouter router, RouteInfo info) {
-                updateSummary();
-            }
-
-            @Override
-            public void onRouteRemoved(MediaRouter router, RouteInfo info) {
-                updateSummary();
-            }
-
-            @Override
-            public void onRouteChanged(MediaRouter router, RouteInfo info) {
-                updateSummary();
-            }
-        };
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-            mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
-            mRouter.setRouterGroupId(MediaRouter.MIRRORING_GROUP_ID);
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                mRouter.addCallback(MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY, mRouterCallback);
-                updateSummary();
-            } else {
-                mRouter.removeCallback(mRouterCallback);
-            }
-        }
-
-        private void updateSummary() {
-            String summary = mContext.getString(R.string.disconnected);
-
-            final int routeCount = mRouter.getRouteCount();
-            for (int i = 0; i < routeCount; i++) {
-                final MediaRouter.RouteInfo route = mRouter.getRouteAt(i);
-                if (route.matchesTypes(MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY)
-                        && route.isSelected() && !route.isConnecting()) {
-                    summary = mContext.getString(R.string.wifi_display_status_connected);
-                    break;
-                }
-            }
-            mSummaryLoader.setSummary(this, summary);
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_display_settings);

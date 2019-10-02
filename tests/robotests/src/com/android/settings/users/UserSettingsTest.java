@@ -32,7 +32,6 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -49,8 +48,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
@@ -86,14 +83,11 @@ public class UserSettingsTest {
     private UserPreference mMePreference;
     @Mock
     private UserManager mUserManager;
-    @Mock
-    private SummaryLoader mSummaryLoader;
 
     private FragmentActivity mActivity;
     private Context mContext;
     private UserSettings mFragment;
     private UserCapabilities mUserCapabilities;
-    private SummaryLoader.SummaryProvider mSummaryProvider;
 
     @Before
     public void setUp() {
@@ -123,28 +117,12 @@ public class UserSettingsTest {
         final SharedPreferences prefs = mock(SharedPreferences .class);
         when(mMockPreferenceManager.getSharedPreferences()).thenReturn(prefs);
         when(mMockPreferenceManager.getContext()).thenReturn(mContext);
-
-        mSummaryProvider =
-            UserSettings.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(mActivity, mSummaryLoader);
     }
 
     @After
     public void tearDown() {
         Settings.Global.putInt(mContext.getContentResolver(),
             Settings.Global.DEVICE_PROVISIONED, mProvisioned);
-    }
-
-    @Test
-    public void setListening_shouldSetSummaryWithUserName() {
-        final String name = "John";
-        final UserInfo userInfo = new UserInfo();
-        userInfo.name = name;
-        when(mUserManager.getUserInfo(anyInt())).thenReturn(userInfo);
-
-        mSummaryProvider.setListening(true);
-
-        verify(mSummaryLoader)
-            .setSummary(mSummaryProvider, mActivity.getString(R.string.users_summary, name));
     }
 
     @Test
