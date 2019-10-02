@@ -22,6 +22,7 @@ import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -47,6 +48,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 
@@ -76,7 +78,7 @@ public class MobileNetworkListControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
@@ -137,9 +139,9 @@ public class MobileNetworkListControllerTest {
 
         // Check that the onclick listeners are setup to fire with the right subscription id.
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
         pref1.getOnPreferenceClickListener().onPreferenceClick(pref1);
         pref2.getOnPreferenceClickListener().onPreferenceClick(pref2);
-        verify(mContext, times(2)).startActivity(intentCaptor.capture());
         final Intent intent1 = intentCaptor.getAllValues().get(0);
         final Intent intent2 = intentCaptor.getAllValues().get(1);
         assertThat(intent1.getIntExtra(EXTRA_SUB_ID, INVALID_SUBSCRIPTION_ID)).isEqualTo(1);

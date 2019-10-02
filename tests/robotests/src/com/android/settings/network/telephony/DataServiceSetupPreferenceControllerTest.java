@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -49,6 +50,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class DataServiceSetupPreferenceControllerTest {
@@ -72,7 +74,7 @@ public class DataServiceSetupPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(RuntimeEnvironment.application);
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
@@ -125,10 +127,9 @@ public class DataServiceSetupPreferenceControllerTest {
     @Test
     public void handlePreferenceTreeClick_startActivity() {
         ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(captor.capture());
 
         mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mContext).startActivity(captor.capture());
 
         final Intent intent = captor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);

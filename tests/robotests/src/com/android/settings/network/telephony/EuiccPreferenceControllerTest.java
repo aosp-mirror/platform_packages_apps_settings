@@ -38,6 +38,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class EuiccPreferenceControllerTest {
@@ -45,6 +46,9 @@ public class EuiccPreferenceControllerTest {
 
     @Mock
     private TelephonyManager mTelephonyManager;
+
+    @Mock
+    private Activity mActivity;
 
     private EuiccPreferenceController mController;
     private Preference mPreference;
@@ -54,12 +58,12 @@ public class EuiccPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(Robolectric.setupActivity(Activity.class));
-        doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mTelephonyManager).when(mActivity).getSystemService(Context.TELEPHONY_SERVICE);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
 
         mPreference = new Preference(mContext);
-        mController = new EuiccPreferenceController(mContext, "euicc");
+        mController = new EuiccPreferenceController(mActivity, "euicc");
         mController.init(SUB_ID);
         mPreference.setKey(mController.getPreferenceKey());
     }
@@ -70,7 +74,7 @@ public class EuiccPreferenceControllerTest {
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mContext).startActivity(captor.capture());
+        verify(mActivity).startActivity(captor.capture());
         assertThat(captor.getValue().getAction()).isEqualTo(
                 EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
     }

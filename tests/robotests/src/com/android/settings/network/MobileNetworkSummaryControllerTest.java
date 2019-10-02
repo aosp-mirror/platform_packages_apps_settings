@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -53,6 +54,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 
@@ -81,7 +83,7 @@ public class MobileNetworkSummaryControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
@@ -130,9 +132,9 @@ public class MobileNetworkSummaryControllerTest {
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("Add a network");
 
-        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).startActivity(intentCaptor.capture());
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
+        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         assertThat(intentCaptor.getValue().getAction()).isEqualTo(
                 EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION);
     }
@@ -155,9 +157,9 @@ public class MobileNetworkSummaryControllerTest {
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("sub1");
         assertThat(mPreference.getFragment()).isNull();
-        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).startActivity(intentCaptor.capture());
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
+        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         Intent intent = intentCaptor.getValue();
         assertThat(intent.getComponent().getClassName()).isEqualTo(
                 MobileNetworkActivity.class.getName());
@@ -218,9 +220,9 @@ public class MobileNetworkSummaryControllerTest {
         mController.onSubscriptionsChanged();
         assertThat(mController.getSummary()).isEqualTo("sub1");
         assertThat(mPreference.getFragment()).isNull();
-        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).startActivity(intentCaptor.capture());
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
+        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
                 MobileNetworkActivity.class.getName());
     }
@@ -239,9 +241,9 @@ public class MobileNetworkSummaryControllerTest {
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("sub1");
         assertThat(mPreference.getFragment()).isNull();
-        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).startActivity(intentCaptor.capture());
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
+        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
                 MobileNetworkActivity.class.getName());
 
