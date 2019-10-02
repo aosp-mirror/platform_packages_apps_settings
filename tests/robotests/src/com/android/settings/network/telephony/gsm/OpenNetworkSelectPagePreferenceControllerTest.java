@@ -17,7 +17,7 @@
 package com.android.settings.network.telephony.gsm;
 
 import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -26,12 +26,15 @@ import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.network.telephony.MobileNetworkUtils;
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +57,8 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
     private CarrierConfigManager mCarrierConfigManager;
     @Mock
     private ServiceState mServiceState;
+    @Mock
+    private SubscriptionInfo mSubscriptionInfo;
 
     private PersistableBundle mCarrierConfig;
     private OpenNetworkSelectPagePreferenceController mController;
@@ -75,6 +80,16 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
         mCarrierConfig = new PersistableBundle();
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
 
+        when(mSubscriptionInfo.getSubscriptionId()).thenReturn(SUB_ID);
+        when(mSubscriptionInfo.getCarrierName()).thenReturn(OPERATOR_NAME);
+
+        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(
+                Arrays.asList(mSubscriptionInfo));
+        when(mSubscriptionManager.getAccessibleSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo));
+
+        when(mTelephonyManager.getNetworkOperatorName()).thenReturn(OPERATOR_NAME);
+
         mPreference = new Preference(mContext);
         mController = new OpenNetworkSelectPagePreferenceController(mContext,
                 "open_network_select");
@@ -94,7 +109,6 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
     @Test
     public void getSummary_inService_returnOperatorName() {
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
-        doReturn(OPERATOR_NAME).when(mTelephonyManager).getNetworkOperatorName();
 
         assertThat(mController.getSummary()).isEqualTo(OPERATOR_NAME);
     }
@@ -102,7 +116,6 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
     @Test
     public void getSummary_notInService_returnDisconnect() {
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
-        doReturn(OPERATOR_NAME).when(mTelephonyManager).getNetworkOperatorName();
 
         assertThat(mController.getSummary()).isEqualTo(
                 mContext.getString(R.string.network_disconnected));
