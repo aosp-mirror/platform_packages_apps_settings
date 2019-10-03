@@ -36,14 +36,6 @@
         settings:controller="com.android.settings.nfc.NfcPreferenceController"
         android:order="-7"/>
 
-    <com.android.settingslib.RestrictedPreference
-        android:fragment="com.android.settings.nfc.AndroidBeam"
-        android:key="android_beam_settings"
-        android:title="@string/android_beam_settings_title"
-        settings:controller="com.android.settings.nfc.AndroidBeamPreferenceController"
-        android:icon="@drawable/ic_android"
-        android:order="-6"/>
-
     <SwitchPreference
         android:key="nfc_secure_settings"
         android:title="@string/nfc_secure_settings_title"
@@ -51,6 +43,23 @@
         android:icon="@drawable/ic_nfc"
         android:summary="@string/nfc_secure_toggle_summary"
         android:order="-7"/>
+
+    <Preference
+        android:fragment="com.android.settings.wfd.WifiDisplaySettings"
+        android:key="wifi_display_settings"
+        android:title="@string/wifi_display_settings_title"
+        android:icon="@drawable/ic_cast_24dp"
+        android:order="-6"
+        settings:searchable="false"
+        settings:controller="com.android.settings.wfd.WifiDisplayPreferenceController"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.nfc.AndroidBeam"
+        android:key="android_beam_settings"
+        android:title="@string/android_beam_settings_title"
+        settings:controller="com.android.settings.nfc.AndroidBeamPreferenceController"
+        android:icon="@drawable/ic_android"
+        android:order="-5"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="connected_device_printing"
