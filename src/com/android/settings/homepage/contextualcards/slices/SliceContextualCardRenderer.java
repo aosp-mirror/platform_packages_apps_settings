@@ -43,6 +43,7 @@ import com.android.settings.homepage.contextualcards.CardContentProvider;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.ControllerRendererPool;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Map;
 import java.util.Set;
@@ -104,7 +105,15 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         LiveData<Slice> sliceLiveData = mSliceLiveDataMap.get(uri);
 
         if (sliceLiveData == null) {
-            sliceLiveData = SliceLiveData.fromUri(mContext, uri);
+            sliceLiveData = SliceLiveData.fromUri(mContext, uri,
+                    (int type, Throwable source) -> {
+                        // onSliceError doesn't handle error Slices.
+                        Log.w(TAG, "Slice may be null. uri = " + uri + ", error = " + type);
+                        ThreadUtils.postOnMainThread(
+                                () -> mSliceLiveDataMap.get(uri).removeObservers(mLifecycleOwner));
+                        mContext.getContentResolver()
+                                .notifyChange(CardContentProvider.REFRESH_CARD_URI, null);
+                    });
             mSliceLiveDataMap.put(uri, sliceLiveData);
         }
 
@@ -115,13 +124,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
             swipeBackground.setVisibility(View.GONE);
         }
         sliceLiveData.observe(mLifecycleOwner, slice -> {
-            if (slice == null) {
-                Log.w(TAG, "Slice is null");
-                mContext.getContentResolver().notifyChange(CardContentProvider.REFRESH_CARD_URI,
-                        null);
-                return;
-            }
-
             if (slice.hasHint(HINT_ERROR)) {
                 Log.w(TAG, "Slice has HINT_ERROR, skipping rendering. uri=" + slice.getUri());
                 mSliceLiveDataMap.get(slice.getUri()).removeObservers(mLifecycleOwner);
