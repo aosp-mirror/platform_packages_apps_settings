@@ -725,30 +725,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         /**
-         * Keeps track of the biometric removal status. When all biometrics (including managed
-         * profiles) are removed, finishes the activity. Otherwise, it's possible the UI still
-         * shows enrolled biometrics due to the async remove.
-         */
-        private class RemovalTracker {
-            boolean mFingerprintDone;
-            boolean mFaceDone;
-
-            void onFingerprintDone() {
-                mFingerprintDone = true;
-                if (mFingerprintDone && mFaceDone) {
-                    finish();
-                }
-            }
-
-            void onFaceDone() {
-                mFaceDone = true;
-                if (mFingerprintDone && mFaceDone) {
-                    finish();
-                }
-            }
-        }
-
-        /**
          * Invokes an activity to change the user's pattern, password or PIN based on given quality
          * and minimum quality specified by DevicePolicyManager. If quality is
          * {@link DevicePolicyManager#PASSWORD_QUALITY_UNSPECIFIED}, password is cleared.
@@ -781,19 +757,13 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
 
             if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
+                // Clearing of user biometrics when screen lock is cleared is done at
+                // LockSettingsService.removeBiometricsForUser().
                 mChooseLockSettingsHelper.utils().clearLock(mUserPassword, mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
-                removeAllBiometricsForUserAndFinish(mUserId);
-            } else {
-                removeAllBiometricsForUserAndFinish(mUserId);
+                finish();
             }
-        }
-
-        private void removeAllBiometricsForUserAndFinish(final int userId) {
-            final RemovalTracker tracker = new RemovalTracker();
-            removeAllFingerprintForUserAndFinish(userId, tracker);
-            removeAllFaceForUserAndFinish(userId, tracker);
         }
 
         private Intent getIntentForUnlockMethod(int quality) {
@@ -806,128 +776,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                 intent = getLockPatternIntent();
             }
             return intent;
-        }
-
-        private void removeAllFingerprintForUserAndFinish(final int userId,
-                RemovalTracker tracker) {
-            if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
-                if (mFingerprintManager.hasEnrolledFingerprints(userId)) {
-                    mFingerprintManager.setActiveUser(userId);
-                    // For the purposes of M and N, groupId is the same as userId.
-                    final int groupId = userId;
-                    Fingerprint finger = new Fingerprint(null, groupId, 0, 0);
-                    mFingerprintManager.remove(finger, userId,
-                            new RemovalCallback() {
-                                @Override
-                                public void onRemovalError(Fingerprint fp, int errMsgId,
-                                        CharSequence errString) {
-                                    Log.e(TAG, String.format(
-                                            "Can't remove fingerprint %d in group %d. Reason: %s",
-                                            fp.getBiometricId(), fp.getGroupId(), errString));
-                                    // TODO: need to proceed with the removal of managed profile
-                                    // fingerprints and finish() gracefully.
-                                }
-
-                                @Override
-                                public void onRemovalSucceeded(Fingerprint fp, int remaining) {
-                                    if (remaining == 0) {
-                                        removeManagedProfileFingerprintsAndFinishIfNecessary(userId,
-                                                tracker);
-                                    }
-                                }
-                            });
-                } else {
-                    // No fingerprints in this user, we may also want to delete managed profile
-                    // fingerprints
-                    removeManagedProfileFingerprintsAndFinishIfNecessary(userId, tracker);
-                }
-            } else {
-                // The removal callback will call finish, once all fingerprints are removed.
-                // We need to wait for that to occur, otherwise, the UI will still show that
-                // fingerprints exist even though they are (about to) be removed depending on
-                // the race condition.
-                tracker.onFingerprintDone();
-            }
-        }
-
-        private void removeManagedProfileFingerprintsAndFinishIfNecessary(final int parentUserId,
-                RemovalTracker tracker) {
-            if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
-                mFingerprintManager.setActiveUser(UserHandle.myUserId());
-            }
-            boolean hasChildProfile = false;
-            if (!mUserManager.getUserInfo(parentUserId).isManagedProfile()) {
-                // Current user is primary profile, remove work profile fingerprints if necessary
-                final List<UserInfo> profiles = mUserManager.getProfiles(parentUserId);
-                final int profilesSize = profiles.size();
-                for (int i = 0; i < profilesSize; i++) {
-                    final UserInfo userInfo = profiles.get(i);
-                    if (userInfo.isManagedProfile() && !mLockPatternUtils
-                            .isSeparateProfileChallengeEnabled(userInfo.id)) {
-                        removeAllFingerprintForUserAndFinish(userInfo.id, tracker);
-                        hasChildProfile = true;
-                        break;
-                    }
-                }
-            }
-            if (!hasChildProfile) {
-                tracker.onFingerprintDone();
-            }
-        }
-
-        // TODO: figure out how to eliminate duplicated code. It's a bit hard due to the async-ness
-        private void removeAllFaceForUserAndFinish(final int userId, RemovalTracker tracker) {
-            if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
-                if (mFaceManager.hasEnrolledTemplates(userId)) {
-                    mFaceManager.setActiveUser(userId);
-                    Face face = new Face(null, 0, 0);
-                    mFaceManager.remove(face, userId,
-                            new FaceManager.RemovalCallback() {
-                        @Override
-                        public void onRemovalError(Face face, int errMsgId, CharSequence err) {
-                            Log.e(TAG, String.format("Can't remove face %d. Reason: %s",
-                                    face.getBiometricId(), err));
-                        }
-                        @Override
-                        public void onRemovalSucceeded(Face face, int remaining) {
-                            if (remaining == 0) {
-                                removeManagedProfileFacesAndFinishIfNecessary(userId, tracker);
-                            }
-                        }
-                    });
-                } else {
-                    // No faces in this user, we may also want to delete managed profile faces
-                    removeManagedProfileFacesAndFinishIfNecessary(userId, tracker);
-                }
-            } else {
-                tracker.onFaceDone();
-            }
-        }
-
-        // TODO: figure out how to eliminate duplicated code. It's a bit hard due to the async-ness
-        private void removeManagedProfileFacesAndFinishIfNecessary(final int parentUserId,
-                RemovalTracker tracker) {
-            if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
-                mFaceManager.setActiveUser(UserHandle.myUserId());
-            }
-            boolean hasChildProfile = false;
-            if (!mUserManager.getUserInfo(parentUserId).isManagedProfile()) {
-                // Current user is primary profile, remove work profile faces if necessary
-                final List<UserInfo> profiles = mUserManager.getProfiles(parentUserId);
-                final int profilesSize = profiles.size();
-                for (int i = 0; i < profilesSize; i++) {
-                    final UserInfo userInfo = profiles.get(i);
-                    if (userInfo.isManagedProfile() && !mLockPatternUtils
-                            .isSeparateProfileChallengeEnabled(userInfo.id)) {
-                        removeAllFaceForUserAndFinish(userInfo.id, tracker);
-                        hasChildProfile = true;
-                        break;
-                    }
-                }
-            }
-            if (!hasChildProfile) {
-                tracker.onFaceDone();
-            }
         }
 
         @Override
