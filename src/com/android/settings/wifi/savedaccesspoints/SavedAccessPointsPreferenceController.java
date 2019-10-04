@@ -27,7 +27,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.utils.PreferenceGroupChildrenCache;
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -50,7 +49,6 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
     private static final String TAG = "SavedAPPrefCtrl";
 
     private final WifiManager mWifiManager;
-    private final PreferenceGroupChildrenCache mChildrenCache;
 
     private final UserBadgeCache mUserBadgeCache;
     private PreferenceGroup mPreferenceGroup;
@@ -61,7 +59,6 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
         super(context, preferenceKey);
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(context.getPackageManager());
         mWifiManager = context.getSystemService(WifiManager.class);
-        mChildrenCache = new PreferenceGroupChildrenCache();
     }
 
     public SavedAccessPointsPreferenceController setHost(SavedAccessPointsWifiSettings host) {
@@ -91,8 +88,9 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        final Preference preferenceInGroup = mPreferenceGroup.findPreference(preference.getKey());
         if (mHost != null) {
-            mHost.showWifiPage((AccessPointPreference) preference);
+            mHost.showWifiPage((AccessPointPreference) preferenceInGroup);
         }
         return false;
     }
@@ -118,7 +116,7 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
         final List<AccessPoint> accessPoints =
                 WifiSavedConfigUtils.getAllConfigs(mContext, mWifiManager);
         Collections.sort(accessPoints, SavedNetworkComparator.INSTANCE);
-        mChildrenCache.cacheRemoveAllPrefs(mPreferenceGroup);
+        mPreferenceGroup.removeAll();
 
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i) {
@@ -130,19 +128,14 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
             }
 
             String key = ap.getKey();
-            AccessPointPreference preference =
-                    (AccessPointPreference) mChildrenCache.getCachedPreference(key);
-            if (preference == null) {
-                preference = new AccessPointPreference(ap, prefContext, mUserBadgeCache, true);
-                preference.setKey(key);
-                preference.setIcon(null);
-                preference.setOnPreferenceClickListener(this);
-                mPreferenceGroup.addPreference(preference);
-            }
+            AccessPointPreference preference = new AccessPointPreference(ap, prefContext,
+                    mUserBadgeCache, true);
+            preference.setKey(key);
+            preference.setIcon(null);
+            preference.setOnPreferenceClickListener(this);
+            mPreferenceGroup.addPreference(preference);
             preference.setOrder(i);
         }
-
-        mChildrenCache.removeCachedPrefs(mPreferenceGroup);
 
         if (mPreferenceGroup.getPreferenceCount() < 1) {
             Log.w(TAG, "Saved networks activity loaded, but there are no saved networks!");
