@@ -86,13 +86,16 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                    <ImageView android:id="@+id/add_msg_expander"
+                    <ImageView
+                        android:id="@+id/add_msg_expander"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:importantForAccessibility="no"
                         android:gravity="center_vertical"
                         android:contentDescription="@null" />
 
-                    <TextView android:id="@+id/add_msg"
+                    <TextView
+                        android:id="@+id/add_msg"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
