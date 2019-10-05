@@ -60,6 +60,7 @@ import java.util.Map;
 public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, OnDestroy, CachedBluetoothDevice.Callback {
     private static final String TAG = "AdvancedBtHeaderCtrl";
+    private static final int LOW_BATTERY_LEVEL = 20;
 
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
@@ -182,9 +183,11 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 new BatteryMeterView.BatteryMeterDrawable(context,
                         context.getColor(R.color.meter_background_color));
         drawable.setBatteryLevel(level);
+        final int attr = level > LOW_BATTERY_LEVEL || charging
+                ? android.R.attr.colorControlNormal
+                : android.R.attr.colorError;
         drawable.setColorFilter(new PorterDuffColorFilter(
-                com.android.settings.Utils.getColorAttrDefaultColor(context,
-                        android.R.attr.colorControlNormal),
+                com.android.settings.Utils.getColorAttrDefaultColor(context, attr),
                 PorterDuff.Mode.SRC_IN));
         drawable.setCharging(charging);
 

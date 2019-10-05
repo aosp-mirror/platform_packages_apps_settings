@@ -1845,6 +1845,31 @@ public class WifiDetailPreferenceControllerTest {
         assertThat(icon).isNotNull();
     }
 
+    @Test
+    public void checkMacTitle_whenPrivacyRandomizedMac_shouldBeRandom() {
+        setUpForDisconnectedNetwork();
+        mockWifiConfig.macRandomizationSetting = WifiConfiguration.RANDOMIZATION_PERSISTENT;
+        when(mockWifiConfig.getRandomizedMacAddress()).thenReturn(mockMacAddress);
+        when(mockMacAddress.toString()).thenReturn(RANDOMIZED_MAC_ADDRESS);
+
+        displayAndResume();
+
+        verify(mockMacAddressPref).setTitle(R.string.wifi_advanced_randomized_mac_address_title);
+    }
+
+    @Test
+    public void checkMacTitle_whenPrivacyDeviceMac_shouldBeFactory() {
+        setUpForDisconnectedNetwork();
+        mockWifiConfig.macRandomizationSetting = WifiConfiguration.RANDOMIZATION_NONE;
+        when(mockWifiConfig.getRandomizedMacAddress()).thenReturn(mockMacAddress);
+        when(mockWifiManager.getFactoryMacAddresses())
+                .thenReturn(new String[]{FACTORY_MAC_ADDRESS});
+
+        displayAndResume();
+
+        verify(mockMacAddressPref).setTitle(R.string.wifi_advanced_factory_mac_address_title);
+    }
+
     private ActionButtonsPreference createMock() {
         final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
         when(pref.setButton1Text(anyInt())).thenReturn(pref);

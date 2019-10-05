@@ -20,8 +20,6 @@ import static android.content.Context.WIFI_SERVICE;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 
 import com.android.settings.R;
@@ -39,7 +37,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
 
-    public static final String KEY_IP_ADDRESS = "current_ip_address";
     public static final int WIFI_WAKEUP_REQUEST_CODE = 600;
 
     private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
@@ -73,8 +70,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new WifiInfoPreferenceController(context, getSettingsLifecycle(),
-                wifiManager));
         controllers.add(new WifiP2pPreferenceController(context, getSettingsLifecycle(),
                 wifiManager));
         return controllers;
@@ -107,24 +102,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_configure_settings) {
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-
-                    // If connected to WiFi, this IP address will be the same as the Status IP.
-                    // Or, if there is no connection they will say unavailable.
-                    ConnectivityManager cm = (ConnectivityManager)
-                            context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo info = cm.getActiveNetworkInfo();
-                    if (info == null
-                            || info.getType() == ConnectivityManager.TYPE_WIFI) {
-                        keys.add(KEY_IP_ADDRESS);
-                    }
-
-                    return keys;
-                }
-
                 protected boolean isPageSearchEnabled(Context context) {
                     return context.getResources()
                             .getBoolean(R.bool.config_show_wifi_settings);

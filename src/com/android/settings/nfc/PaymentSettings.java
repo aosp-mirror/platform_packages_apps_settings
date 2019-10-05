@@ -30,6 +30,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -70,10 +74,11 @@ public class PaymentSettings extends DashboardFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        View emptyView = getActivity().getLayoutInflater().inflate(
-                R.layout.nfc_payment_empty, null, false);
-        ((ViewGroup) view.findViewById(android.R.id.list_container)).addView(emptyView);
+        if (isShowEmptyImage(getPreferenceScreen())) {
+            View emptyView = getActivity().getLayoutInflater().inflate(
+                    R.layout.nfc_payment_empty, null, false);
+            ((ViewGroup) view.findViewById(android.R.id.list_container)).addView(emptyView);
+        }
     }
 
     @Override
@@ -95,6 +100,17 @@ public class PaymentSettings extends DashboardFragment {
         Intent howItWorksIntent = new Intent(getActivity(), HowItWorks.class);
         menuItem.setIntent(howItWorksIntent);
         menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
+    }
+
+    @VisibleForTesting
+    boolean isShowEmptyImage(PreferenceScreen screen) {
+        for (int i = 0; i < screen.getPreferenceCount(); i++) {
+            final Preference preference = screen.getPreference(i);
+            if(preference.isVisible()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

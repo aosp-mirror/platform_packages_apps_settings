@@ -67,7 +67,7 @@
             android:visibility="gone" />
     </com.android.settings.notification.NotificationButtonRelativeLayout>
 
-    <RelativeLayout
+    <com.android.settings.notification.NotificationButtonRelativeLayout
         android:id="@+id/silence"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -109,6 +109,6 @@
             android:layout_below="@id/silence_icon"
             android:textAppearance="@style/TextAppearance.NotificationImportanceDetail"
             android:visibility="gone" />
-    </RelativeLayout>
+    </com.android.settings.notification.NotificationButtonRelativeLayout>
 
 </LinearLayout>

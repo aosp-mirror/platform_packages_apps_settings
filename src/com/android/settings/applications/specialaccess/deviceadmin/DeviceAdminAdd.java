@@ -347,7 +347,6 @@ public class DeviceAdminAdd extends Activity {
             }
         };
         mAddMsgExpander.setOnClickListener(onClickListener);
-        mAddMsg.setOnClickListener(onClickListener);
 
         // Determine whether the message can be collapsed - getLineCount() gives the correct
         // number of lines only after a layout pass.
@@ -360,7 +359,6 @@ public class DeviceAdminAdd extends Activity {
                         boolean hideMsgExpander = mAddMsg.getLineCount() <= maxLines;
                         mAddMsgExpander.setVisibility(hideMsgExpander ? View.GONE : View.VISIBLE);
                         if (hideMsgExpander) {
-                            mAddMsg.setOnClickListener(null);
                             ((View)mAddMsgExpander.getParent()).invalidate();
                         }
                         mAddMsg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
