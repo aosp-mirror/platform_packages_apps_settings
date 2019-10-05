@@ -90,8 +90,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private TrustManager mTrustManager;
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private Handler mHandler = new Handler(Looper.getMainLooper());
-    private boolean mIsFallback; // BiometricPrompt fallback
-    private boolean mCCLaunched;
 
     private String mTitle;
     private String mDetails;
@@ -108,10 +106,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             if (!mGoingToBackground) {
                 if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED
                         || errorCode == BiometricPrompt.BIOMETRIC_ERROR_CANCELED) {
-                    if (mIsFallback) {
-                        mBiometricManager.onConfirmDeviceCredentialError(
-                                errorCode, getStringForError(errorCode));
-                    }
                     finish();
                 } else {
                     // All other errors go to some version of CC
@@ -127,10 +121,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     mUserId);
             ConfirmDeviceCredentialUtils.checkForPendingIntent(
                     ConfirmDeviceCredentialActivity.this);
-
-            if (mIsFallback) {
-                mBiometricManager.onConfirmDeviceCredentialSuccess();
-            }
 
             setResult(Activity.RESULT_OK);
             finish();
@@ -183,17 +173,11 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
 
-        Bundle bpBundle =
-                intent.getBundleExtra(KeyguardManager.EXTRA_BIOMETRIC_PROMPT_BUNDLE);
-        if (bpBundle != null) {
-            mIsFallback = true;
-            mTitle = bpBundle.getString(BiometricPrompt.KEY_TITLE);
-            mDetails = bpBundle.getString(BiometricPrompt.KEY_SUBTITLE);
-        } else {
-            bpBundle = new Bundle();
-            bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
-            bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
-        }
+        final Bundle bpBundle = new Bundle();
+        mTitle = bpBundle.getString(BiometricPrompt.KEY_TITLE);
+        mDetails = bpBundle.getString(BiometricPrompt.KEY_SUBTITLE);
+        bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
+        bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
 
         boolean launchedBiometric = false;
         boolean launchedCDC = false;
@@ -257,12 +241,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 }
             }
 
-            if (mIsFallback && !mCCLaunched) {
-                mBiometricManager.onConfirmDeviceCredentialError(
-                        BiometricConstants.BIOMETRIC_ERROR_CANCELED,
-                        getString(com.android.internal.R.string.biometric_error_user_canceled));
-            }
-
             finish();
         } else {
             mGoingToBackground = false;
@@ -314,7 +292,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
      * Shows ConfirmDeviceCredentials for normal apps.
      */
     private void showConfirmCredentials() {
-        mCCLaunched = true;
         boolean launched = false;
         // The only difference between CREDENTIAL_MANAGED and CREDENTIAL_NORMAL is that for
         // CREDENTIAL_MANAGED, we launch the real confirm credential activity with an explicit

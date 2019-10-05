@@ -24,7 +24,6 @@ import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationResult;
-import android.hardware.biometrics.IBiometricConfirmDeviceCredentialCallback;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
@@ -91,20 +90,6 @@ public class BiometricFragment extends InstrumentedFragment {
         }
     };
 
-    // TODO(b/123378871): Remove when moved.
-    private final IBiometricConfirmDeviceCredentialCallback mCancelCallback
-        = new IBiometricConfirmDeviceCredentialCallback.Stub() {
-        @Override
-        public void cancel() {
-            final Activity activity = getActivity();
-            if (activity != null) {
-                activity.finish();
-            } else {
-                Log.e(TAG, "Activity null!");
-            }
-        }
-    };
-
     /**
      * @param bundle Bundle passed from {@link BiometricPrompt.Builder#buildIntent()}
      * @return
@@ -150,38 +135,11 @@ public class BiometricFragment extends InstrumentedFragment {
         final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(getContext())
                 .setTitle(mBundle.getString(BiometricPrompt.KEY_TITLE))
                 .setUseDefaultTitle() // use default title if title is null/empty
-                .setFromConfirmDeviceCredential()
+                .setDeviceCredentialAllowed(true)
                 .setSubtitle(mBundle.getString(BiometricPrompt.KEY_SUBTITLE))
                 .setDescription(mBundle.getString(BiometricPrompt.KEY_DESCRIPTION))
                 .setConfirmationRequired(
                         mBundle.getBoolean(BiometricPrompt.KEY_REQUIRE_CONFIRMATION, true));
-
-        final LockPatternUtils lockPatternUtils = FeatureFactory.getFactory(
-                getContext())
-                .getSecurityFeatureProvider()
-                .getLockPatternUtils(getContext());
-
-        switch (lockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
-            case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                builder.setNegativeButton(getResources().getString(
-                        R.string.confirm_device_credential_pattern),
-                        mClientExecutor, mNegativeButtonListener);
-                break;
-            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
-            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                builder.setNegativeButton(getResources().getString(
-                        R.string.confirm_device_credential_pin),
-                        mClientExecutor, mNegativeButtonListener);
-                break;
-            case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
-            case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
-            case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
-            case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
-                builder.setNegativeButton(getResources().getString(
-                        R.string.confirm_device_credential_password),
-                        mClientExecutor, mNegativeButtonListener);
-                break;
-        }
 
         mBiometricPrompt = builder.build();
         mCancellationSignal = new CancellationSignal();
@@ -189,7 +147,7 @@ public class BiometricFragment extends InstrumentedFragment {
         // TODO: CC doesn't use crypto for now
         mAuthenticating = true;
         mBiometricPrompt.authenticateUser(mCancellationSignal, mClientExecutor,
-                mAuthenticationCallback, mUserId, mCancelCallback);
+                mAuthenticationCallback, mUserId);
     }
 
     @Override
