@@ -27,6 +27,7 @@
         android:key="os_firmware_version"
         android:title="@string/firmware_version"
         android:summary="@string/summary_placeholder"
+        android:selectable="false"
         settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController"/>
 
@@ -42,6 +43,7 @@
         android:key="module_version"
         android:title="@string/module_version"
         android:summary="@string/summary_placeholder"
+        android:selectable="false"
         settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController"/>
 
@@ -50,6 +52,7 @@
         android:key="base_band"
         android:title="@string/baseband_version"
         android:summary="@string/summary_placeholder"
+        android:selectable="false"
         settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.BasebandVersionPreferenceController"/>
 
@@ -58,6 +61,7 @@
         android:key="kernel_version"
         android:title="@string/kernel_version"
         android:summary="@string/summary_placeholder"
+        android:selectable="false"
         settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.KernelVersionPreferenceController"/>
 
@@ -66,6 +70,7 @@
         android:key="os_build_number"
         android:title="@string/build_number"
         android:summary="@string/summary_placeholder"
+        android:selectable="false"
         settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.SimpleBuildNumberPreferenceController"/>
 
