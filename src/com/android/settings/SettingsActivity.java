@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,11 +53,13 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -565,7 +568,15 @@ public class SettingsActivity extends SettingsBaseActivity
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
         }
-        Fragment f = Fragment.instantiate(this, fragmentName, args);
+        Fragment f = null;
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.PERSONAL_WORK_PROFILE)
+                && UserManager.get(this).getUserProfiles().size() > 1
+                && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null) {
+            f = Fragment.instantiate(this, ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName),
+                    args);
+        } else {
+            f = Fragment.instantiate(this, fragmentName, args);
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
         if (titleResId > 0) {

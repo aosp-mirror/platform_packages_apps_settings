@@ -46,6 +46,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 import com.android.settingslib.search.SearchIndexableRaw;
@@ -96,7 +97,8 @@ public class AccountPreferenceControllerTest {
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt()))
             .thenReturn(new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
-        mController = new AccountPreferenceController(mContext, mFragment, null, mAccountHelper);
+        mController = new AccountPreferenceController(mContext, mFragment, null, mAccountHelper,
+                ProfileSelectFragment.ALL);
     }
 
     @After
