@@ -46,69 +46,6 @@
     <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
     <string name="header_category_system">System</string>
 
-    <!-- Data Connection Enable. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="radio_info_data_connection_enable">Enable Data Connection</string>
-    <!-- Data Connection Disable. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="radio_info_data_connection_disable">Disable Data Connection</string>
-
-    <!-- VoLTE provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="volte_provisioned_switch_string">VoLTE Provisioned</string>
-
-    <!-- Video calling provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="vt_provisioned_switch_string">Video Calling Provisioned</string>
-
-    <!-- Wifi Calling provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="wfc_provisioned_switch_string">Wifi Calling Provisioned</string>
-
-    <!-- EAB provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="eab_provisioned_switch_string">EAB/Presence Provisioned</string>
-
-    <!-- Cbrs enable disable flag. Only shown in diagnostic screen, so precise translation is not needed -->
-    <string name="cbrs_data_switch_string">Cbrs Data</string>
-
-    <!-- Dsds enable/disable flag. Only shown in diagnostic screen, so precise translation is not needed, [CHAR LIMIT=none] -->
-    <string name="dsds_switch_string">Enable DSDS</string>
-
-    <!-- UI debug setting: Enable/Disable DSDS [CHAR LIMIT=none] -->
-    <string name="dsds_dialog_title">Restart Device?</string>
-
-    <!-- UI debug setting: Enable/Disable DSDS [CHAR LIMIT=none] -->
-    <string name="dsds_dialog_message">You need to restart your device to change this setting.</string>
-
-    <!-- UI debug setting: Enable/Disable DSDS [CHAR LIMIT=none] -->
-    <string name="dsds_dialog_confirm">Restart</string>
-
-    <!-- UI debug setting: Enable/Disable DSDS [CHAR LIMIT=none] -->
-    <string name="dsds_dialog_cancel">Cancel</string>
-
-    <!-- Title for controlling on/off for Mobile phone's radio power. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="radio_info_radio_power">Mobile Radio Power</string>
-
-    <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_menu_viewADN">View SIM Address Book</string>
-    <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_menu_viewFDN">View Fixed Dialing Numbers</string>
-    <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_menu_viewSDN">View Service Dialing Numbers</string>
-    <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_menu_getIMS">IMS Service Status</string>
-
-    <!-- Phone Info screen. IMS Registration Title.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_reg_status_title">IMS Status</string>
-
-    <!-- Phone Info screen. IMS Status - Registered.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_reg_status_registered">Registered</string>
-    <!-- Phone Info screen. Ims Status - Unregistered.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_reg_status_not_registered">Not Registered</string>
-
-    <!-- Phone Info screen. Ims Feature Status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_feature_status_available">Available</string>
-    <!-- Phone Info screen. Ims Feature status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_feature_status_unavailable">Unavailable</string>
-
-    <!-- Phone Info screen. IMS Registration.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_reg_status">IMS Registration: <xliff:g id="status" example="registered">%1$s</xliff:g>\u000AVoice over LTE: <xliff:g id="availability" example="available">%2$s</xliff:g>\u000AVoice over WiFi: <xliff:g id="availability" example="available">%3$s</xliff:g>\u000AVideo Calling: <xliff:g id="availability" example="available">%4$s</xliff:g>\u000AUT Interface: <xliff:g id="availability" example="available">%5$s</xliff:g></string>
-
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_service_in">In Service</string>
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -124,13 +61,6 @@
     <string name="radioInfo_roaming_not">Not Roaming</string>
 
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_phone_idle">Idle</string>
-    <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_phone_ringing">Ringing</string>
-    <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_phone_offhook">Call in Progress</string>
-
-    <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_data_disconnected">Disconnected</string>
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_data_connecting">Connecting</string>
@@ -141,18 +71,6 @@
 
     <!-- Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_unknown">Unknown</string>
-    <!-- Phone Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_display_packets">pkts</string>
-    <!-- Phone Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_display_bytes">bytes</string>
-    <!-- Phone Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_display_dbm">dBm</string>
-    <!-- Phone Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_display_asu">asu</string>
-    <!-- Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_lac">LAC</string>
-    <!-- Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_cid">CID</string>
 
     <!-- Used for diagnostic info screens, precise translation isn't needed. Unmounts the SD card from the phone, meaning it will become available for an attached computer  [CHAR LIMIT=25] -->
     <string name="sdcard_unmount" product="nosdcard">Unmount USB storage</string>
@@ -485,60 +403,6 @@
     <string name="proxy_url_title">"PAC URL: "</string>
 
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_subid">Current subId:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_dds">SubId of default data SIM:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_dl_kbps">DL Bandwidth (kbps):</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ul_kbps">UL Bandwidth (kbps):</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_signal_location_label">Cell Location Info (deprecated):</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_phy_chan_config">LTE Physical Channel Configuration:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_cell_info_refresh_rate">Cell Info Refresh Rate:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_cellinfo_label">All Cell Measurement Info:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_gprs_service_label">Data Service:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_roaming_label">Roaming:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_imei_label">IMEI:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, DO NOT TRANSLATE. -->
-    <string name="radio_info_imsi_label">IMSI:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_call_redirect_label">Call Redirect:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ppp_resets_label">Number of PPP Reset Since Boot:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_current_network_label">Current Network:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ppp_received_label">Data Received:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_gsm_service_label">Voice Service:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_signal_strength_label">Signal Strength:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_call_status_label">Voice Call Status:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ppp_sent_label">Data Sent:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_message_waiting_label">Message Waiting:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_phone_number_label">Phone Number:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_band_mode_label">Select Radio Band</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_voice_network_type_label">Voice Network Type:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_data_network_type_label">Data Network Type:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="phone_index_label">Select phone index</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_set_perferred_label">Set Preferred Network Type:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_ping_hostname_v4">Ping Hostname(www.google.com) IPv4:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_ping_hostname_v6">Ping Hostname(www.google.com) IPv6:</string>
@@ -546,28 +410,6 @@
     <string name="radio_info_http_client_test">HTTP Client Test:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="ping_test_label">Run Ping Test</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_smsc_label">SMSC:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_smsc_update_label">Update</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_smsc_refresh_label">Refresh</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_toggle_dns_check_label">Toggle DNS Check</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="oem_radio_info_label">OEM-specific Info/Settings</string>
-
-    <!-- Band Mode Selection -->
-    <!-- Band mode screen.  Title of activity. -->
-    <string name="band_mode_title">Set Radio Band Mode</string>
-    <!-- Band mode screen.  Loading message. -->
-    <string name="band_mode_loading">Loading Band List\u2026</string>
-    <!-- Band mode screen. Button caption to set the bandmode. -->
-    <string name="band_mode_set">Set</string>
-    <!-- Band mode screen. Status message when unsuccessful. -->
-    <string name="band_mode_failed">Unsuccessful</string>
-    <!-- Band mode screen. Statusm essage when successful. -->
-    <string name="band_mode_succeeded">Successful</string>
 
     <!-- Instructions after the user changes the mass storage settings -->
     <string name="sdcard_changes_instructions">Changes take effect when USB cable is reconnected.</string>
@@ -654,10 +496,6 @@
     <string name="device_info_label">Device info</string>
     <!-- The title of the activity to adjust display settings -->
     <string name="display_label">Screen</string>
-    <!-- The title of the activity to see phone info -->
-    <string name="phone_info_label" product="tablet">Tablet info</string>
-    <!-- The title of the activity to see phone info -->
-    <string name="phone_info_label" product="default">Phone info</string>
     <!-- The title of the activity to adjust SD card settings [CHAR LIMIT=25] -->
     <string name="sd_card_settings_label" product="nosdcard">USB storage</string>
     <!-- The title of the activity to adjust SD card settings-->
