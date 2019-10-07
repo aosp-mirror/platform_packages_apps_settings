@@ -332,8 +332,6 @@ public class AccessibilitySettings extends DashboardFragment {
 
         List<AccessibilityServiceInfo> installedServices =
                 accessibilityManager.getInstalledAccessibilityServiceList();
-        List<AccessibilityServiceInfo> enabledServiceInfos = accessibilityManager
-                .getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
         Set<ComponentName> enabledServices = AccessibilityUtils.getEnabledServicesFromSettings(
                 getActivity());
         List<String> permittedServices = mDpm.getPermittedAccessibilityServices(
@@ -376,8 +374,7 @@ public class AccessibilitySettings extends DashboardFragment {
                 description = getString(R.string.accessibility_service_default_description);
             }
 
-            if (serviceEnabled && AccessibilityUtils.hasServiceCrashed(
-                    packageName, serviceInfo.name, enabledServiceInfos)) {
+            if (serviceEnabled && info.crashed) {
                 // Update the summaries for services that have crashed.
                 preference.setSummary(R.string.accessibility_summary_state_stopped);
                 description = getString(R.string.accessibility_description_state_stopped);
