@@ -173,7 +173,7 @@ public class SliceBuilderUtils {
                 .putExtra(EXTRA_SLICE_KEY, data.getKey())
                 .putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     /**
