@@ -145,7 +145,7 @@ public class BatteryEntry {
                 break;
             case CELL:
                 name = context.getResources().getString(R.string.power_cell);
-                iconId = R.drawable.ic_settings_cell_standby;
+                iconId = R.drawable.ic_cellular_1_bar;
                 break;
             case PHONE:
                 name = context.getResources().getString(R.string.power_phone);
@@ -157,7 +157,7 @@ public class BatteryEntry {
                 break;
             case BLUETOOTH:
                 name = context.getResources().getString(R.string.power_bluetooth);
-                iconId = R.drawable.ic_settings_bluetooth;
+                iconId = com.android.internal.R.drawable.ic_settings_bluetooth;
                 break;
             case SCREEN:
                 name = context.getResources().getString(R.string.power_screen);
@@ -199,11 +199,11 @@ public class BatteryEntry {
             } break;
             case UNACCOUNTED:
                 name = context.getResources().getString(R.string.power_unaccounted);
-                iconId = R.drawable.ic_power_system;
+                iconId = R.drawable.ic_android;
                 break;
             case OVERCOUNTED:
                 name = context.getResources().getString(R.string.power_overcounted);
-                iconId = R.drawable.ic_power_system;
+                iconId = R.drawable.ic_android;
                 break;
             case CAMERA:
                 name = context.getResources().getString(R.string.power_camera);

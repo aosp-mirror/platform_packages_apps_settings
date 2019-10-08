@@ -45,17 +45,16 @@
             settings:keywords="@string/keywords_lockscreen" />
 
         <Preference
-            android:key="lockscreen_preferences"
-            android:title="@string/lockscreen_settings_title"
-            android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.security.LockscreenDashboardFragment" />
-
-        <Preference
             android:key="fingerprint_settings"
             android:title="@string/security_settings_fingerprint_preference_title"
             android:summary="@string/summary_placeholder"
-            settings:keywords="@string/keywords_fingerprint_settings"/>
+            settings:keywords="@string/keywords_fingerprint_settings" />
 
+        <Preference
+            android:key="face_settings"
+            android:title="@string/security_settings_face_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:keywords="@string/keywords_face_settings" />
     </PreferenceCategory>
 
     <!-- work profile security section -->
@@ -81,44 +80,31 @@
             android:key="visiblepattern_profile"
             android:summary="@string/summary_placeholder"
             android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
-            settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController"/>
+            settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
 
         <Preference
             android:key="fingerprint_settings_profile"
             android:title="@string/security_settings_fingerprint_preference_title"
             android:summary="@string/summary_placeholder" />
 
-    </PreferenceCategory>
-
-    <!-- security_settings_misc.xml -->
-    <PreferenceCategory
-        android:order="30"
-        android:key="security_settings_misc_category"
-        android:title="@string/security_passwords_title">
-
         <Preference
-            android:key="location"
-            android:title="@string/location_settings_title"
-            android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.location.LocationSettings" />
-
-        <SwitchPreference
-            android:key="show_password"
-            android:title="@string/show_password"
-            android:summary="@string/show_password_summary"
-            settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
+            android:key="face_settings_profile"
+            android:title="@string/security_settings_face_preference_title"
+            android:summary="@string/summary_placeholder" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:order="40"
-        android:key="security_settings_device_admin_category">
+        android:key="security_settings_device_admin_category"
+        android:layout="@layout/preference_category_no_label">
 
         <Preference
             android:key="manage_device_admin"
             android:title="@string/manage_device_admin"
             android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.DeviceAdminSettings" />
+            android:fragment="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
+            settings:controller="com.android.settings.enterprise.ManageDeviceAdminPreferenceController" />
 
         <Preference
             android:key="enterprise_privacy"

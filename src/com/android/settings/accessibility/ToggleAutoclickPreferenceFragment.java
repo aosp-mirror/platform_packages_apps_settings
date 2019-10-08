@@ -16,22 +16,32 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment for preference screen for settings related to Automatically click after mouse stops
  * feature.
  */
+@SearchIndexable
 public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements SwitchBar.OnSwitchChangeListener, Preference.OnPreferenceChangeListener {
 
@@ -99,7 +109,7 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_TOGGLE_AUTOCLICK;
+        return SettingsEnums.ACCESSIBILITY_TOGGLE_AUTOCLICK;
     }
 
     @Override
@@ -177,4 +187,18 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     private int delayToSeekBarProgress(int delay) {
         return (delay - MIN_AUTOCLICK_DELAY) / AUTOCLICK_DELAY_STEP;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.accessibility_autoclick_settings;
+                    result.add(sir);
+                    return result;
+                }
+            };
 }

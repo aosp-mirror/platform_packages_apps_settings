@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/suggestion_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/ContextualCardStyle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="112dp"
+        android:paddingBottom="8dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@android:id/icon"
+                android:layout_width="@dimen/contextual_card_icon_size"
+                android:layout_height="@dimen/contextual_card_icon_size"
+                style="@style/SuggestionCardIcon"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"/>
+
+            <FrameLayout
+                android:id="@+id/close_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:orientation="horizontal"
+                android:contentDescription="@string/suggestion_button_close">
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="end|top"
+                    android:alpha="0.54"
+                    android:src="@drawable/ic_suggestion_close_button"/>
+            </FrameLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/SuggestionCardText"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.SuggestionTitle"
+            android:fadingEdge="horizontal"/>
+
+        <TextView
+            android:id="@android:id/summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/SuggestionCardText"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.SuggestionSummary"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

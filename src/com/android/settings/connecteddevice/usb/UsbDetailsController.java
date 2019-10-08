@@ -18,9 +18,10 @@ package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
 import android.os.Handler;
-import androidx.annotation.UiThread;
 
-import com.android.internal.annotations.VisibleForTesting;
+import androidx.annotation.UiThread;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 

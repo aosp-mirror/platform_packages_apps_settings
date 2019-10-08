@@ -23,10 +23,11 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
+import android.text.TextUtils;
+
 import androidx.core.text.BidiFormatter;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -97,15 +98,15 @@ public class WifiInfoPreferenceController extends AbstractPreferenceController
     public void updateWifiInfo() {
         if (mWifiMacAddressPref != null) {
             final WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
-            final int macRandomizationMode = Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
+            final boolean macRandomizationSupported = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported);
             final String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
 
-            if (TextUtils.isEmpty(macAddress)) {
-                mWifiMacAddressPref.setSummary(R.string.status_unavailable);
-            } else if (macRandomizationMode == 1
-                    && WifiInfo.DEFAULT_MAC_ADDRESS.equals(macAddress)) {
+            if (macRandomizationSupported && WifiInfo.DEFAULT_MAC_ADDRESS.equals(macAddress)) {
                 mWifiMacAddressPref.setSummary(R.string.wifi_status_mac_randomized);
+            } else if (TextUtils.isEmpty(macAddress)
+                    || WifiInfo.DEFAULT_MAC_ADDRESS.equals(macAddress)) {
+                mWifiMacAddressPref.setSummary(R.string.status_unavailable);
             } else {
                 mWifiMacAddressPref.setSummary(macAddress);
             }

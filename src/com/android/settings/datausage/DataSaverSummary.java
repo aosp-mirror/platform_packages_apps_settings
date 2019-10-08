@@ -15,25 +15,34 @@
 package com.android.settings.datausage;
 
 import android.app.Application;
+import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.Preference;
+import android.provider.SearchIndexableResource;
+import android.telephony.SubscriptionManager;
 import android.widget.Switch;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.datausage.DataSaverBackend.Listener;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.ApplicationsState.Session;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
+import java.util.List;
 
+@SearchIndexable
 public class DataSaverSummary extends SettingsPreferenceFragment
         implements OnSwitchChangeListener, Listener, Callback, Callbacks {
 
@@ -61,7 +70,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
                 (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
         mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
-        mSession = mApplicationsState.newSession(this, getLifecycle());
+        mSession = mApplicationsState.newSession(this, getSettingsLifecycle());
     }
 
     @Override
@@ -93,7 +102,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        synchronized(this) {
+        synchronized (this) {
             if (mSwitching) {
                 return;
             }
@@ -104,7 +113,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DATA_SAVER_SUMMARY;
+        return SettingsEnums.DATA_SAVER_SUMMARY;
     }
 
     @Override
@@ -114,7 +123,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
-        synchronized(this) {
+        synchronized (this) {
             mSwitchBar.setChecked(isDataSaving);
             mSwitching = false;
         }
@@ -189,4 +198,25 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     public void onLoadEntriesCompleted() {
 
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.data_saver;
+                    result.add(sir);
+                    return result;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return DataUsageUtils.hasMobileData(context)
+                            && DataUsageUtils.getDefaultSubscriptionId(context)
+                            != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+                }
+            };
 }

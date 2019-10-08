@@ -16,6 +16,11 @@
 
 package com.android.settings.nfc;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
+import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -25,18 +30,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settingslib.HelpUtils;
-import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.RestrictedLockUtils;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.HelpUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class AndroidBeam extends InstrumentedFragment
         implements SwitchBar.OnSwitchChangeListener {
@@ -50,7 +54,11 @@ public class AndroidBeam extends InstrumentedFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
+        final Context context = getActivity();
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(context);
+        final PackageManager pm = context.getPackageManager();
+        if (mNfcAdapter == null || !pm.hasSystemFeature(PackageManager.FEATURE_NFC_BEAM))
+            getActivity().finish();
         setHasOptionsMenu(true);
     }
 
@@ -64,10 +72,10 @@ public class AndroidBeam extends InstrumentedFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 getActivity(), UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId());
         final UserManager um = UserManager.get(getActivity());
-        mBeamDisallowedByBase = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+        mBeamDisallowedByBase = RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId());
         if (!mBeamDisallowedByBase && admin != null) {
             new ActionDisabledByAdminDialogHelper(getActivity())
@@ -75,14 +83,19 @@ public class AndroidBeam extends InstrumentedFragment
             mBeamDisallowedByOnlyAdmin = true;
             return new View(getContext());
         }
-        mView = inflater.inflate(R.layout.android_beam, container, false);
+        mView = inflater.inflate(R.layout.preference_footer, container, false);
+
+        ImageView iconInfo = mView.findViewById(android.R.id.icon);
+        iconInfo.setImageResource(R.drawable.ic_info_outline_24dp);
+        TextView textInfo = mView.findViewById(android.R.id.title);
+        textInfo.setText(R.string.android_beam_explained);
+
         return mView;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         SettingsActivity activity = (SettingsActivity) getActivity();
 
         mOldActivityTitle = activity.getActionBar().getTitle();
@@ -129,6 +142,6 @@ public class AndroidBeam extends InstrumentedFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NFC_BEAM;
+        return SettingsEnums.NFC_BEAM;
     }
 }

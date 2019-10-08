@@ -18,6 +18,7 @@ package com.android.settings.network;
 import android.content.Context;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;

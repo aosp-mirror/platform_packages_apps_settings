@@ -16,50 +16,44 @@
 
 package com.android.settings.wifi.tether;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
-import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
+
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
     WifiTetherPreferenceControllerTest.ShadowWifiTetherSettings.class,
-    WifiTetherPreferenceControllerTest.ShadowWifiTetherSwitchBarController.class,
     WifiTetherPreferenceControllerTest.ShadowWifiTetherSoftApManager.class
 })
 public class WifiTetherPreferenceControllerTest {
@@ -103,11 +97,6 @@ public class WifiTetherPreferenceControllerTest {
         mController.displayPreference(mScreen);
     }
 
-    @After
-    public void tearDown() {
-        ShadowWifiTetherSwitchBarController.reset();
-    }
-
     @Test
     public void isAvailable_noTetherRegex_shouldReturnFalse() {
         when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{});
@@ -120,36 +109,6 @@ public class WifiTetherPreferenceControllerTest {
     @Test
     public void isAvailable_hasTetherRegex_shouldReturnTrue() {
         assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void testReceiver_turnOnAirplaneMode_clearPreferenceSummary() {
-        final ContentResolver cr = mock(ContentResolver.class);
-        when(mContext.getContentResolver()).thenReturn(cr);
-        Settings.Global.putInt(cr, Settings.Global.AIRPLANE_MODE_ON, 1);
-        mController.displayPreference(mScreen);
-        final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
-        final Intent broadcast = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-
-        receiver.onReceive(RuntimeEnvironment.application, broadcast);
-
-        assertThat(mPreference.getSummary().toString()).isEqualTo(
-                "Unavailable because airplane mode is turned on");
-    }
-
-    @Test
-    public void testReceiver_turnOffAirplaneMode_displayOffSummary() {
-        final ContentResolver cr = mock(ContentResolver.class);
-        when(mContext.getContentResolver()).thenReturn(cr);
-        Settings.Global.putInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0);
-        mController.displayPreference(mScreen);
-        final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
-        final Intent broadcast = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-
-        receiver.onReceive(RuntimeEnvironment.application, broadcast);
-
-        assertThat(mPreference.getSummary().toString()).isEqualTo(
-                "Not sharing internet or content with other devices");
     }
 
     @Test
@@ -185,7 +144,7 @@ public class WifiTetherPreferenceControllerTest {
     public static final class ShadowWifiTetherSettings {
 
         @Implementation
-        public static boolean isTetherSettingPageEnabled() {
+        protected static boolean isTetherSettingPageEnabled() {
             return true;
         }
     }
@@ -193,35 +152,13 @@ public class WifiTetherPreferenceControllerTest {
     @Implements(WifiTetherSoftApManager.class)
     public static final class ShadowWifiTetherSoftApManager {
         @Implementation
-        public void registerSoftApCallback() {
+        protected void registerSoftApCallback() {
             // do nothing
         }
 
         @Implementation
-        public void unRegisterSoftApCallback() {
+        protected void unRegisterSoftApCallback() {
             // do nothing
-        }
-    }
-
-    @Implements(WifiTetherSwitchBarController.class)
-    public static final class ShadowWifiTetherSwitchBarController {
-
-        private static boolean onStartCalled;
-        private static boolean onStopCalled;
-
-        public static void reset() {
-            onStartCalled = false;
-            onStopCalled = false;
-        }
-
-        @Implementation
-        public void onStart() {
-            onStartCalled = true;
-        }
-
-        @Implementation
-        public void onStop() {
-            onStopCalled = true;
         }
     }
 }

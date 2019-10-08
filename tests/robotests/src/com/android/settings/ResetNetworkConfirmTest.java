@@ -17,12 +17,15 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
 
-import android.app.Activity;
+import android.view.LayoutInflater;
+import android.widget.TextView;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.fragment.app.FragmentActivity;
+
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowRecoverySystem;
+import com.android.settings.testutils.shadow.ShadowWifiP2pManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,48 +34,86 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowRecoverySystem.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowRecoverySystem.class,
+        ShadowWifiP2pManager.class, ShadowBluetoothAdapter.class
+})
 public class ResetNetworkConfirmTest {
 
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private ResetNetworkConfirm mResetNetworkConfirm;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mResetNetworkConfirm = spy(new ResetNetworkConfirm());
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mResetNetworkConfirm = new ResetNetworkConfirm();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mResetNetworkConfirm.mActivity = mActivity;
     }
 
     @After
     public void tearDown() {
         ShadowRecoverySystem.reset();
+        ShadowWifiP2pManager.reset();
     }
 
     @Test
     public void testResetNetworkData_resetEsim() {
         mResetNetworkConfirm.mEraseEsim = true;
 
-        mResetNetworkConfirm.esimFactoryReset(mActivity, "" /* packageName */);
+        mResetNetworkConfirm.mFinalClickListener.onClick(null /* View */);
         Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();
 
-        assertThat(mResetNetworkConfirm.mEraseEsimTask).isNotNull();
-        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount())
-                .isEqualTo(1);
+        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount()).isEqualTo(1);
     }
 
     @Test
     public void testResetNetworkData_notResetEsim() {
         mResetNetworkConfirm.mEraseEsim = false;
 
-        mResetNetworkConfirm.esimFactoryReset(mActivity, "" /* packageName */);
+        mResetNetworkConfirm.mFinalClickListener.onClick(null /* View */);
+        Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();
 
-        assertThat(mResetNetworkConfirm.mEraseEsimTask).isNull();
-        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount())
-                .isEqualTo(0);
+        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount()).isEqualTo(0);
+    }
+
+    /**
+     * Test for WifiP2pManager factoryReset method.
+     */
+    @Test
+    public void testResetNetworkData_resetP2p() {
+        mResetNetworkConfirm.p2pFactoryReset(mActivity);
+
+        assertThat(ShadowWifiP2pManager.getFactoryResetCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void setSubtitle_eraseEsim() {
+        mResetNetworkConfirm.mEraseEsim = true;
+        mResetNetworkConfirm.mContentView =
+                LayoutInflater.from(mActivity).inflate(R.layout.reset_network_confirm, null);
+
+        mResetNetworkConfirm.setSubtitle();
+
+        assertThat(((TextView) mResetNetworkConfirm.mContentView
+                .findViewById(R.id.reset_network_confirm)).getText())
+                .isEqualTo(mActivity.getString(R.string.reset_network_final_desc_esim));
+    }
+
+    @Test
+    public void setSubtitle_notEraseEsim() {
+        mResetNetworkConfirm.mEraseEsim = false;
+        mResetNetworkConfirm.mContentView =
+                LayoutInflater.from(mActivity).inflate(R.layout.reset_network_confirm, null);
+
+        mResetNetworkConfirm.setSubtitle();
+
+        assertThat(((TextView) mResetNetworkConfirm.mContentView
+                .findViewById(R.id.reset_network_confirm)).getText())
+                .isEqualTo(mActivity.getString(R.string.reset_network_final_desc));
     }
 }

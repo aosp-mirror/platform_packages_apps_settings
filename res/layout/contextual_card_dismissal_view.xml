@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dismissal_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/contextual_card_dismissal_background"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/contextual_card_dismissal_side_margin"
+        android:layout_marginTop="@dimen/contextual_card_dismissal_margin_top"
+        android:text="@string/contextual_card_dismiss_confirm_message"
+        android:textAppearance="@style/TextAppearance.ContextualCardDismissalText"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|end">
+
+        <Button
+            android:id="@+id/keep"
+            style="@style/ContextualCardDismissalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contextual_card_dismiss_keep"/>
+
+        <Button
+            android:id="@+id/remove"
+            style="@style/ContextualCardDismissalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/contextual_card_dismissal_button_margin_start"
+            android:layout_marginEnd="@dimen/contextual_card_dismissal_button_margin_end"
+            android:text="@string/contextual_card_dismiss_remove"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -15,12 +15,10 @@
  */
 package com.android.settings.fuelgauge.batterytip.actions;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import android.app.AppOpsManager;
-import android.util.Pair;
+import android.app.settings.SettingsEnums;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -29,7 +27,6 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -37,9 +34,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UnrestrictAppActionTest {
 
     private static final int UID_1 = 12345;
@@ -77,8 +75,11 @@ public class UnrestrictAppActionTest {
 
         verify(mBatteryUtils)
                 .setForceAppStandby(UID_1, PACKAGE_NAME_1, AppOpsManager.MODE_ALLOWED);
-        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
-                MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP, PACKAGE_NAME_1, Pair.create(
-                        MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP,
+                METRICS_KEY,
+                PACKAGE_NAME_1,
+                0);
     }
 }

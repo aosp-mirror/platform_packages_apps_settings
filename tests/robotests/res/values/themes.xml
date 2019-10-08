@@ -1,7 +1,31 @@
 <resources>
-    <style name="Theme.Settings" parent="@android:style/Theme.DeviceDefault.Settings" />
+    <style name="Theme.Settings" parent="@android:style/Theme.DeviceDefault.Settings">
+        <!-- For AndroidX AlertDialogs -->
+        <item name="alertDialogTheme">@style/Theme.AppCompat.DayNight.Dialog.Alert</item>
+    </style>
 
     <!-- Override the main app's style for ActionPrimaryButton to get around lack of new style
          support in robolectric  -->
-    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button" />
+    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button"/>
+
+    <!-- Test version of Theme.Settings.Home. Needed to build homepage activity in Robolectric -->
+    <style name="Theme.Settings.Home" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#ffffff</item>
+        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="colorAccent">#ffffff</item>
+        <item name="preferenceTheme">@style/PreferenceTheme</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Define this color for material design -->
+        <item name="colorPrimaryVariant">@android:color/white</item>
+    </style>
+
+    <style name="ThemeOverlay.SwitchBar.Settings" parent="@android:style/ThemeOverlay.Material.ActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
+        <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
+        <item name="switchBarBackgroundColor">?android:attr/textColorSecondary</item>
+        <item name="switchBarBackgroundActivatedColor">?android:attr/colorAccent</item>
+        <item name="switchBarRestrictionIcon">@drawable/ic_help</item>
+    </style>
+
 </resources>

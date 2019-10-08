@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.IconDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +26,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
-
 import com.android.settingslib.utils.StringUtil;
+
 import java.util.List;
 
 /**
@@ -78,9 +79,6 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
                 Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, app.packageName,
                         UserHandle.getUserId(app.uid)));
         holder.appName.setText(Utils.getApplicationLabel(mContext, app.packageName));
-        if (app.screenOnTimeMs != 0) {
-            holder.appTime.setText(StringUtil.formatElapsedTime(mContext, app.screenOnTimeMs, false));
-        }
     }
 
     @Override

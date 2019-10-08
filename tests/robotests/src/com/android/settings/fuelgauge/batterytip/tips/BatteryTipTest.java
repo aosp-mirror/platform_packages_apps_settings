@@ -20,22 +20,24 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.annotation.IdRes;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryTipTest {
 
     private static final String TITLE = "title";
@@ -54,11 +56,12 @@ public class BatteryTipTest {
 
     @Test
     public void buildPreference() {
-        final Preference preference = mBatteryTip.buildPreference(mContext);
+        final Preference preference = new Preference(mContext);
+        mBatteryTip.updatePreference(preference);
 
         assertThat(preference.getTitle()).isEqualTo(TITLE);
         assertThat(preference.getSummary()).isEqualTo(SUMMARY);
-        assertThat(preference.getIcon()).isEqualTo(mContext.getDrawable(ICON_ID));
+        DrawableTestHelper.assertDrawableResId(preference.getIcon(), ICON_ID);
     }
 
     @Test

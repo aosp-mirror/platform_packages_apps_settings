@@ -16,20 +16,20 @@
 
 package com.android.settings.datetime.timezone;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.app.Activity;
 import android.icu.util.TimeZone;
-import androidx.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.Preference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-import static com.google.common.truth.Truth.assertThat;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FixedOffsetPreferenceControllerTest {
 
     private Activity mActivity;

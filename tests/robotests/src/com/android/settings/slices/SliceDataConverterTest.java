@@ -33,23 +33,23 @@ import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
-import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.FakeIndexProvider;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SliceDataConverterTest {
 
     private static final String FAKE_KEY = "key";
@@ -124,6 +124,8 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
         assertThat(fakeSlice.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER);
         assertThat(fakeSlice.isPlatformDefined()).isTrue(); // from XML
+        assertThat(fakeSlice.getUnavailableSliceSubtitle()).isEqualTo(
+                "subtitleOfUnavailableSlice"); // from XML
     }
 
     private void assertFakeA11ySlice(SliceData fakeSlice) {

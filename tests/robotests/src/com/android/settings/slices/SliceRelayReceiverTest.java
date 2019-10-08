@@ -25,18 +25,19 @@ import static org.mockito.Mockito.verify;
 
 import android.content.ContentResolver;
 import android.content.Context;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import com.android.settingslib.SliceBroadcastRelay;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SliceRelayReceiverTest {
 
   private Context mContext;
@@ -67,6 +68,5 @@ public class SliceRelayReceiverTest {
     mSliceRelayReceiver.onReceive(mContext, intent);
 
     verify(resolver).notifyChange(eq(uri), any());
-
   }
 }

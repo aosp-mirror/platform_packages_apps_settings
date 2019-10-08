@@ -25,10 +25,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -74,31 +73,15 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         if (mAppRow.banned) {
             return false;
         }
+        if (mChannelGroup != null) {
+            if (mChannelGroup.isBlocked()) {
+                return false;
+            }
+        }
         if (mChannel != null) {
             return mChannel.getImportance() != IMPORTANCE_NONE;
         }
-        if (mChannelGroup != null) {
-            return !mChannelGroup.isBlocked();
-        }
         return true;
-    }
-
-    // finds the preference recursively and removes it from its parent
-    private void findAndRemovePreference(PreferenceGroup prefGroup, String key) {
-        final int preferenceCount = prefGroup.getPreferenceCount();
-        for (int i = preferenceCount - 1; i >= 0; i--) {
-            final Preference preference = prefGroup.getPreference(i);
-            final String curKey = preference.getKey();
-
-            if (curKey != null && curKey.equals(key)) {
-                mPreference = preference;
-                prefGroup.removePreference(preference);
-            }
-
-            if (preference instanceof PreferenceGroup) {
-                findAndRemovePreference((PreferenceGroup) preference, key);
-            }
-        }
     }
 
     protected void onResume(NotificationBackend.AppRow appRow,
@@ -129,20 +112,14 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         }
     }
 
-    protected boolean isChannelConfigurable() {
-        if (mChannel != null && mAppRow != null) {
-            return !Objects.equals(mChannel.getId(), mAppRow.lockedChannelId);
-        }
-        return false;
-    }
-
     protected boolean isChannelBlockable() {
         if (mChannel != null && mAppRow != null) {
-            if (!mAppRow.systemApp) {
-                return true;
+            if (mChannel.isImportanceLockedByCriticalDeviceFunction()
+                    || mChannel.isImportanceLockedByOEM()) {
+                return mChannel.getImportance() == IMPORTANCE_NONE;
             }
 
-            return mChannel.isBlockableSystem()
+            return mChannel.isBlockableSystem() || !mAppRow.systemApp
                     || mChannel.getImportance() == IMPORTANCE_NONE;
         }
         return false;

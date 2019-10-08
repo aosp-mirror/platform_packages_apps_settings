@@ -15,28 +15,25 @@
  */
 package com.android.settings.wifi;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.Visibility.VISIBLE;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.Visibility.VISIBLE;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
-import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -46,9 +43,11 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
 import android.provider.Settings;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.fragment.app.Fragment;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settingslib.utils.ThreadUtils;
@@ -148,7 +147,7 @@ public class WifiSettingsUiTest {
                 resourceString(WIFI_DISPLAY_STATUS_CONNECTED));
 
         when(mWifiTracker.getAccessPoints()).thenReturn(
-                Lists.asList(accessPoint, new AccessPoint[]{}));
+                Lists.asList(accessPoint, new AccessPoint[] {}));
     }
 
     /** Launch the activity via an Intent with a String extra. */
@@ -161,7 +160,8 @@ public class WifiSettingsUiTest {
 
         verify(mWifiTracker).getManager();
 
-        List<Fragment> fragments = mActivityRule.getActivity().getFragmentManager().getFragments();
+        List<Fragment> fragments =
+                mActivityRule.getActivity().getSupportFragmentManager().getFragments();
         assertThat(fragments.size()).isEqualTo(1);
         mWifiListener = (WifiSettings) fragments.get(0);
         assertThat(mWifiListener).isNotNull();
@@ -193,17 +193,6 @@ public class WifiSettingsUiTest {
 
         onView(withText(resourceId(STRING, WIFI_CONFIGURE_SETTINGS_PREFERENCE_TITLE))).check(
                 matches(isDisplayed()));
-    }
-
-    @Test
-    public void noSavedNetworks_wifiEnabled_shouldNotShowSavedNetworksButton() {
-        setWifiState(WifiManager.WIFI_STATE_ENABLED);
-        when(mWifiTracker.getNumSavedNetworks()).thenReturn(0);
-
-        launchActivity();
-
-        onView(withText(resourceId(STRING, WIFI_SAVED_ACCESS_POINTS_LABEL))).check(
-                matches(not(isDisplayed())));
     }
 
     @Test
@@ -341,25 +330,5 @@ public class WifiSettingsUiTest {
         onView(withText(resourceId(STRING, WIFI_SHOW_PASSWORD))).check(matches(isDisplayed()));
         onView(withId(resourceId(ID, PASSWORD_LAYOUT))).check(matches(isDisplayed()));
         onView(withId(resourceId(ID, PASSWORD))).check(matches(isDisplayed()));
-    }
-
-    @Ignore("b/73796195")
-    @Test
-    public void onConnectedChanged_shouldNotFetchAPs() {
-        setWifiState(WifiManager.WIFI_STATE_ENABLED);
-        when(mWifiTracker.isConnected()).thenReturn(true);
-
-        launchActivity();
-
-        verify(mWifiTracker, times(1)).getAccessPoints();
-        onView(withText(WIFI_DISPLAY_STATUS_CONNECTED)).check(matches(isDisplayed()));
-
-        // Invoke onConnectedChanged
-        when(mWifiTracker.isConnected()).thenReturn(false);
-        mWifiListener.onConnectedChanged();
-
-        // Verify no additional call to getAccessPoints
-        getInstrumentation().waitForIdleSync();
-        verify(mWifiTracker, times(1)).getAccessPoints();
     }
 }

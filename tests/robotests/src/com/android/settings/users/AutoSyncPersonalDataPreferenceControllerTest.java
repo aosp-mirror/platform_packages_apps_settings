@@ -16,30 +16,32 @@
 package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
+
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AutoSyncPersonalDataPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -56,9 +58,9 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         ShadowApplication shadowContext = ShadowApplication.getInstance();
         shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
-        mContext = shadowContext.getApplicationContext();
         mController = new AutoSyncPersonalDataPreferenceController(mContext, mFragment);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());

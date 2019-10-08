@@ -17,7 +17,11 @@
 package com.android.settings.applications.appinfo;
 
 import static android.content.Intent.EXTRA_PACKAGE_NAME;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -25,22 +29,24 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TimeSpentInAppPreferenceControllerTest {
 
     private static final String TEST_KEY = "test_tey";
@@ -55,10 +61,12 @@ public class TimeSpentInAppPreferenceControllerTest {
     private ShadowPackageManager mPackageManager;
     private TimeSpentInAppPreferenceController mController;
     private Preference mPreference;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = RuntimeEnvironment.application;
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
         mController = new TimeSpentInAppPreferenceController(mContext, TEST_KEY);
@@ -89,7 +97,6 @@ public class TimeSpentInAppPreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
-
     }
 
     @Test
@@ -109,5 +116,13 @@ public class TimeSpentInAppPreferenceControllerTest {
         assertThat(intent.getAction()).isEqualTo(TEST_INTENT.getAction());
         assertThat(intent.getStringExtra(EXTRA_PACKAGE_NAME))
                 .isEqualTo(TEST_INTENT.getStringExtra(EXTRA_PACKAGE_NAME));
+    }
+
+    @Test
+    public void getSummary_shouldQueryAppFeatureProvider() {
+        mController.getSummary();
+
+        verify(mFeatureFactory.applicationFeatureProvider).getTimeSpentInApp(
+                nullable(String.class));
     }
 }

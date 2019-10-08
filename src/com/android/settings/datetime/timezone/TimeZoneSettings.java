@@ -18,19 +18,20 @@ package com.android.settings.datetime.timezone;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.TimeZone;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceCategory;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceCategory;
+
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -68,13 +69,14 @@ public class TimeZoneSettings extends DashboardFragment {
     private Locale mLocale;
     private boolean mSelectByRegion;
     private TimeZoneData mTimeZoneData;
+    private Intent mPendingZonePickerRequestResult;
 
     private String mSelectedTimeZoneId;
     private TimeZoneInfo.Formatter mTimeZoneInfoFormatter;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.ZONE_PICKER;
+        return SettingsEnums.ZONE_PICKER;
     }
 
     @Override
@@ -135,12 +137,10 @@ public class TimeZoneSettings extends DashboardFragment {
         switch (requestCode) {
             case REQUEST_CODE_REGION_PICKER:
             case REQUEST_CODE_ZONE_PICKER: {
-                String regionId = data.getStringExtra(RegionSearchPicker.EXTRA_RESULT_REGION_ID);
-                String tzId = data.getStringExtra(RegionZonePicker.EXTRA_RESULT_TIME_ZONE_ID);
-                // Ignore the result if user didn't change the region or time zone.
-                if (!Objects.equals(regionId, use(RegionPreferenceController.class).getRegionId())
-                        || !Objects.equals(tzId, mSelectedTimeZoneId)) {
-                    onRegionZoneChanged(regionId, tzId);
+                if (mTimeZoneData == null) {
+                    mPendingZonePickerRequestResult = data;
+                } else {
+                    onZonePickerRequestResult(mTimeZoneData, data);
                 }
                 break;
             }
@@ -165,8 +165,11 @@ public class TimeZoneSettings extends DashboardFragment {
             mTimeZoneData = timeZoneData;
             setupForCurrentTimeZone();
             getActivity().invalidateOptionsMenu();
+            if (mPendingZonePickerRequestResult != null) {
+                onZonePickerRequestResult(timeZoneData, mPendingZonePickerRequestResult);
+                mPendingZonePickerRequestResult = null;
+            }
         }
-
     }
 
     private void startRegionPicker() {
@@ -225,9 +228,17 @@ public class TimeZoneSettings extends DashboardFragment {
         updatePreferenceStates();
     }
 
-    private void onRegionZoneChanged(String regionId, String tzId) {
+    private void onZonePickerRequestResult(TimeZoneData timeZoneData, Intent data) {
+        String regionId = data.getStringExtra(RegionSearchPicker.EXTRA_RESULT_REGION_ID);
+        String tzId = data.getStringExtra(RegionZonePicker.EXTRA_RESULT_TIME_ZONE_ID);
+        // Ignore the result if user didn't change the region or time zone.
+        if (Objects.equals(regionId, use(RegionPreferenceController.class).getRegionId())
+            && Objects.equals(tzId, mSelectedTimeZoneId)) {
+            return;
+        }
+
         FilteredCountryTimeZones countryTimeZones =
-                mTimeZoneData.lookupCountryTimeZones(regionId);
+                timeZoneData.lookupCountryTimeZones(regionId);
         if (countryTimeZones == null || !countryTimeZones.getTimeZoneIds().contains(tzId)) {
             Log.e(TAG, "Unknown time zone id is selected: " + tzId);
             return;

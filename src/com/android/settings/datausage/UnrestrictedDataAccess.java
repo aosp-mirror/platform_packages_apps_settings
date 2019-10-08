@@ -14,64 +14,43 @@
 
 package com.android.settings.datausage;
 
-import static com.android.settingslib.RestrictedLockUtils.checkIfMeteredDataRestricted;
-
-import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.UserHandle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
+import android.provider.SearchIndexableResource;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.AppStateBaseBridge;
-import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
-import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.AppSwitchPreference;
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class UnrestrictedDataAccess extends SettingsPreferenceFragment
-        implements ApplicationsState.Callbacks, AppStateBaseBridge.Callback,
-        Preference.OnPreferenceChangeListener {
+@SearchIndexable
+public class UnrestrictedDataAccess extends DashboardFragment {
+
+    private static final String TAG = "UnrestrictedDataAccess";
 
     private static final int MENU_SHOW_SYSTEM = Menu.FIRST + 42;
     private static final String EXTRA_SHOW_SYSTEM = "show_system";
 
-    private ApplicationsState mApplicationsState;
-    private AppStateDataUsageBridge mDataUsageBridge;
-    private ApplicationsState.Session mSession;
-    private DataSaverBackend mDataSaverBackend;
     private boolean mShowSystem;
-    private boolean mExtraLoaded;
     private AppFilter mFilter;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setAnimationAllowed(true);
-        mApplicationsState = ApplicationsState.getInstance(
-                (Application) getContext().getApplicationContext());
-        mDataSaverBackend = new DataSaverBackend(getContext());
-        mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
-        mSession = mApplicationsState.newSession(this, getLifecycle());
         mShowSystem = icicle != null && icicle.getBoolean(EXTRA_SHOW_SYSTEM);
-        mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
-                : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
-        setHasOptionsMenu(true);
+
+        use(UnrestrictedDataAccessPreferenceController.class).setParentFragment(this);
     }
 
     @Override
@@ -89,9 +68,10 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
                 item.setTitle(mShowSystem ? R.string.menu_hide_system : R.string.menu_show_system);
                 mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
                         : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
-                if (mExtraLoaded) {
-                    rebuild();
-                }
+
+                use(UnrestrictedDataAccessPreferenceController.class).setFilter(mFilter);
+                use(UnrestrictedDataAccessPreferenceController.class).rebuild();
+
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -106,31 +86,15 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setLoading(true, false);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mDataUsageBridge.resume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mDataUsageBridge.pause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mDataUsageBridge.release();
-    }
-
-    @Override
-    public void onExtraInfoUpdated() {
-        mExtraLoaded = true;
-        rebuild();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
+                : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
+        use(UnrestrictedDataAccessPreferenceController.class).setSession(getSettingsLifecycle());
+        use(UnrestrictedDataAccessPreferenceController.class).setFilter(mFilter);
     }
 
     @Override
@@ -138,79 +102,14 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         return R.string.help_url_unrestricted_data_access;
     }
 
-    private void rebuild() {
-        ArrayList<AppEntry> apps = mSession.rebuild(mFilter, ApplicationsState.ALPHA_COMPARATOR);
-        if (apps != null) {
-            onRebuildComplete(apps);
-        }
-    }
-
     @Override
-    public void onRunningStateChanged(boolean running) {
-
-    }
-
-    @Override
-    public void onPackageListChanged() {
-
-    }
-
-    @Override
-    public void onRebuildComplete(ArrayList<AppEntry> apps) {
-        if (getContext() == null) return;
-        cacheRemoveAllPrefs(getPreferenceScreen());
-        final int N = apps.size();
-        for (int i = 0; i < N; i++) {
-            AppEntry entry = apps.get(i);
-            if (!shouldAddPreference(entry)) {
-                continue;
-            }
-            String key = entry.info.packageName + "|" + entry.info.uid;
-            AccessPreference preference = (AccessPreference) getCachedPreference(key);
-            if (preference == null) {
-                preference = new AccessPreference(getPrefContext(), entry);
-                preference.setKey(key);
-                preference.setOnPreferenceChangeListener(this);
-                getPreferenceScreen().addPreference(preference);
-            } else {
-                preference.setDisabledByAdmin(checkIfMeteredDataRestricted(getContext(),
-                        entry.info.packageName, UserHandle.getUserId(entry.info.uid)));
-                preference.reuse();
-            }
-            preference.setOrder(i);
-        }
-        setLoading(false, true);
-        removeCachedPrefs(getPreferenceScreen());
-    }
-
-    @Override
-    public void onPackageIconChanged() {
-
-    }
-
-    @Override
-    public void onPackageSizeChanged(String packageName) {
-
-    }
-
-    @Override
-    public void onAllSizesComputed() {
-
-    }
-
-    @Override
-    public void onLauncherInfoChanged() {
-
-    }
-
-    @Override
-    public void onLoadEntriesCompleted() {
-
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DATA_USAGE_UNRESTRICTED_ACCESS;
+        return SettingsEnums.DATA_USAGE_UNRESTRICTED_ACCESS;
     }
 
     @Override
@@ -218,172 +117,17 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         return R.xml.unrestricted_data_access_settings;
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference instanceof AccessPreference) {
-            AccessPreference accessPreference = (AccessPreference) preference;
-            boolean whitelisted = newValue == Boolean.TRUE;
-            logSpecialPermissionChange(whitelisted, accessPreference.mEntry.info.packageName);
-            mDataSaverBackend.setIsWhitelisted(accessPreference.mEntry.info.uid,
-                    accessPreference.mEntry.info.packageName, whitelisted);
-            accessPreference.mState.isDataSaverWhitelisted = whitelisted;
-            return true;
-        }
-        return false;
-    }
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
-    @VisibleForTesting
-    void logSpecialPermissionChange(boolean whitelisted, String packageName) {
-        int logCategory = whitelisted ? MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW
-                : MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_DENY;
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
-                logCategory, packageName);
-    }
-
-    @VisibleForTesting
-    boolean shouldAddPreference(AppEntry app) {
-        return app != null && UserHandle.isApp(app.info.uid);
-    }
-
-    @VisibleForTesting
-    class AccessPreference extends AppSwitchPreference
-            implements DataSaverBackend.Listener {
-        private final AppEntry mEntry;
-        private final DataUsageState mState;
-        private final RestrictedPreferenceHelper mHelper;
-
-        public AccessPreference(final Context context, AppEntry entry) {
-            super(context);
-            setWidgetLayoutResource(R.layout.restricted_switch_widget);
-            mHelper = new RestrictedPreferenceHelper(context, this, null);
-            mEntry = entry;
-            mState = (DataUsageState) mEntry.extraInfo;
-            mEntry.ensureLabel(getContext());
-            setDisabledByAdmin(checkIfMeteredDataRestricted(context, entry.info.packageName,
-                    UserHandle.getUserId(entry.info.uid)));
-            setState();
-            if (mEntry.icon != null) {
-                setIcon(mEntry.icon);
-            }
-        }
-
-        @Override
-        public void onAttached() {
-            super.onAttached();
-            mDataSaverBackend.addListener(this);
-        }
-
-        @Override
-        public void onDetached() {
-            mDataSaverBackend.remListener(this);
-            super.onDetached();
-        }
-
-        @Override
-        protected void onClick() {
-            if (mState.isDataSaverBlacklisted) {
-                // app is blacklisted, launch App Data Usage screen
-                AppInfoDashboardFragment.startAppInfoFragment(AppDataUsage.class,
-                    R.string.app_data_usage,
-                    null /* arguments */,
-                    UnrestrictedDataAccess.this,
-                    mEntry);
-            } else {
-                // app is not blacklisted, let superclass handle toggle switch
-                super.onClick();
-            }
-        }
-
-        @Override
-        public void performClick() {
-            if (!mHelper.performClick()) {
-                super.performClick();
-            }
-        }
-
-        // Sets UI state based on whitelist/blacklist status.
-        private void setState() {
-            setTitle(mEntry.label);
-            if (mState != null) {
-                setChecked(mState.isDataSaverWhitelisted);
-                if (isDisabledByAdmin()) {
-                    setSummary(R.string.disabled_by_admin);
-                } else if (mState.isDataSaverBlacklisted) {
-                    setSummary(R.string.restrict_background_blacklisted);
-                } else {
-                    setSummary("");
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.unrestricted_data_access_settings;
+                    result.add(sir);
+                    return result;
                 }
-            }
-        }
-
-        public void reuse() {
-            setState();
-            notifyChanged();
-        }
-
-        @Override
-        public void onBindViewHolder(PreferenceViewHolder holder) {
-            if (mEntry.icon == null) {
-                holder.itemView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Ensure we have an icon before binding.
-                        mApplicationsState.ensureIcon(mEntry);
-                        // This might trigger us to bind again, but it gives an easy way to only
-                        // load the icon once its needed, so its probably worth it.
-                        setIcon(mEntry.icon);
-                    }
-                });
-            }
-            final boolean disabledByAdmin = isDisabledByAdmin();
-            final View widgetFrame = holder.findViewById(android.R.id.widget_frame);
-            if (disabledByAdmin) {
-                widgetFrame.setVisibility(View.VISIBLE);
-            } else {
-                widgetFrame.setVisibility(mState != null && mState.isDataSaverBlacklisted
-                        ? View.INVISIBLE : View.VISIBLE);
-            }
-            super.onBindViewHolder(holder);
-
-            mHelper.onBindViewHolder(holder);
-            holder.findViewById(R.id.restricted_icon).setVisibility(
-                    disabledByAdmin ? View.VISIBLE : View.GONE);
-            holder.findViewById(android.R.id.switch_widget).setVisibility(
-                    disabledByAdmin ? View.GONE : View.VISIBLE);
-        }
-
-        @Override
-        public void onDataSaverChanged(boolean isDataSaving) {
-        }
-
-        @Override
-        public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
-            if (mState != null && mEntry.info.uid == uid) {
-                mState.isDataSaverWhitelisted = isWhitelisted;
-                reuse();
-            }
-        }
-
-        @Override
-        public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
-            if (mState != null && mEntry.info.uid == uid) {
-                mState.isDataSaverBlacklisted = isBlacklisted;
-                reuse();
-            }
-        }
-
-        public void setDisabledByAdmin(EnforcedAdmin admin) {
-            mHelper.setDisabledByAdmin(admin);
-        }
-
-        public boolean isDisabledByAdmin() {
-            return mHelper.isDisabledByAdmin();
-        }
-
-        @VisibleForTesting
-        public AppEntry getEntryForTest() {
-            return mEntry;
-        }
-    }
-
+            };
 }

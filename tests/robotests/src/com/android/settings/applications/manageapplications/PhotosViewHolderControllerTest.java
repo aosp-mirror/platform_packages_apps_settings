@@ -17,11 +17,11 @@
 package com.android.settings.applications.manageapplications;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.nullable;
+
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -30,7 +30,8 @@ import android.text.format.Formatter;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.fragment.app.Fragment;
+
 import com.android.settingslib.applications.StorageStatsSource;
 
 import org.junit.Before;
@@ -40,9 +41,10 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PhotosViewHolderControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;
@@ -61,7 +63,7 @@ public class PhotosViewHolderControllerTest {
         mController = new PhotosViewHolderController(mContext, mSource, fsUuid, new UserHandle(0));
 
         final View view = ApplicationViewHolder.newView(new FrameLayout(mContext));
-        mHolder = new ApplicationViewHolder(view, false /* useStableHeight */);
+        mHolder = new ApplicationViewHolder(view);
     }
 
     @Test
@@ -69,19 +71,19 @@ public class PhotosViewHolderControllerTest {
         mController.setupView(mHolder);
 
         assertThat(mHolder.mSummary.getText().toString())
-            .isEqualTo(Formatter.formatFileSize(mContext, 0));
+                .isEqualTo(Formatter.formatFileSize(mContext, 0));
     }
 
     @Test
     public void storageShouldRepresentStorageStatsQuery() throws Exception {
         when(mSource.getExternalStorageStats(nullable(String.class), nullable(UserHandle.class)))
-            .thenReturn(new StorageStatsSource.ExternalStorageStats(1, 0, 1, 10, 0));
+                .thenReturn(new StorageStatsSource.ExternalStorageStats(1, 0, 1, 10, 0));
 
         mController.queryStats();
         mController.setupView(mHolder);
 
         assertThat(mHolder.mSummary.getText().toString())
-            .isEqualTo(Formatter.formatFileSize(mContext, 11));
+                .isEqualTo(Formatter.formatFileSize(mContext, 11));
     }
 
     @Test

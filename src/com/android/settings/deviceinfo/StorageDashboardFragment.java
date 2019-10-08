@@ -17,10 +17,9 @@
 package com.android.settings.deviceinfo;
 
 import android.app.Activity;
-import android.app.LoaderManager;
+import android.app.settings.SettingsEnums;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
-import android.content.Loader;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -28,11 +27,13 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
 import android.util.SparseArray;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -51,18 +52,21 @@ import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StorageDashboardFragment extends DashboardFragment implements
+@SearchIndexable
+public class StorageDashboardFragment extends DashboardFragment
+        implements
         LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private static final String TAG = "StorageDashboardFrag";
     private static final int STORAGE_JOB_ID = 0;
     private static final int ICON_JOB_ID = 1;
     private static final int VOLUME_SIZE_JOB_ID = 2;
+    private static final int OPTIONS_MENU_MIGRATE_DATA = 100;
 
     private VolumeInfo mVolume;
     private PrivateStorageInfo mStorageInfo;
@@ -90,11 +94,18 @@ public class StorageDashboardFragment extends DashboardFragment implements
         initializeOptionsMenu(activity);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AutomaticStorageManagementSwitchPreferenceController.class).setFragmentManager(
+                getFragmentManager());
+    }
+
     @VisibleForTesting
     void initializeOptionsMenu(Activity activity) {
         mOptionMenuController = new PrivateVolumeOptionMenuController(
-                activity, mVolume, new PackageManagerWrapper(activity.getPackageManager()));
-        getLifecycle().addObserver(mOptionMenuController);
+                activity, mVolume, activity.getPackageManager());
+        getSettingsLifecycle().addObserver(mOptionMenuController);
         setHasOptionsMenu(true);
         activity.invalidateOptionsMenu();
     }
@@ -108,7 +119,7 @@ public class StorageDashboardFragment extends DashboardFragment implements
         final Activity activity = getActivity();
         EntityHeaderController.newInstance(activity, this /*fragment*/,
                 null /* header view */)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .styleActionBar(activity);
 
     }
@@ -158,7 +169,7 @@ public class StorageDashboardFragment extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_STORAGE_CATEGORY;
+        return SettingsEnums.SETTINGS_STORAGE_CATEGORY;
     }
 
     @Override
@@ -186,11 +197,6 @@ public class StorageDashboardFragment extends DashboardFragment implements
         mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context, userManager);
         controllers.addAll(mSecondaryUsers);
 
-        final AutomaticStorageManagementSwitchPreferenceController asmController =
-                new AutomaticStorageManagementSwitchPreferenceController(
-                        context, mMetricsFeatureProvider, getFragmentManager());
-        getLifecycle().addObserver(asmController);
-        controllers.add(asmController);
         return controllers;
     }
 
@@ -250,7 +256,7 @@ public class StorageDashboardFragment extends DashboardFragment implements
         return new StorageAsyncLoader(context, context.getSystemService(UserManager.class),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
-                new PackageManagerWrapper(context.getPackageManager()));
+                context.getPackageManager());
     }
 
     @Override

@@ -15,24 +15,28 @@
  */
 package com.android.settings.connecteddevice;
 
-import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.net.Uri;
+import android.provider.DeviceConfig;
 import android.provider.SearchIndexableResource;
+
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ConnectedDeviceFrag";
@@ -44,7 +48,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY;
+        return SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
@@ -84,40 +88,16 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        final boolean nearbyEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_NEAR_BY_SUGGESTION_ENABLED, true);
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
         use(DiscoverableFooterPreferenceController.class).init(this);
+        use(SlicePreferenceController.class).setSliceUri(nearbyEnabled
+                ? Uri.parse(getString(R.string.config_nearby_devices_slice_uri))
+                : null);
     }
-
-    @VisibleForTesting
-    static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                mSummaryLoader.setSummary(this, mContext.getText(AdvancedConnectedDeviceController.
-                        getConnectedDevicesSummaryResourceId(mContext)));
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 
     /**
      * For Search.
@@ -136,15 +116,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Disable because they show dynamic data
-                    keys.add(KEY_AVAILABLE_DEVICES);
-                    keys.add(KEY_CONNECTED_DEVICES);
-                    return keys;
                 }
             };
 }

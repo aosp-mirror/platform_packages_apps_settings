@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -29,6 +28,8 @@ import android.os.UserHandle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.CheckBox;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;

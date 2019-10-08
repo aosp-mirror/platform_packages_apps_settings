@@ -17,17 +17,20 @@ package com.android.settings.display;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings.Secure;
-import com.android.internal.app.ColorDisplayController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class NightDisplayAutoModePreferenceControllerTest {
 
@@ -39,6 +42,11 @@ public class NightDisplayAutoModePreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = new NightDisplayAutoModePreferenceController(mContext,
             "night_display_auto_mode");
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -58,8 +66,8 @@ public class NightDisplayAutoModePreferenceControllerTest {
     @Test
     public void onPreferenceChange_changesAutoMode() {
         mController.onPreferenceChange(null,
-                String.valueOf(ColorDisplayController.AUTO_MODE_TWILIGHT));
-        assertThat(Secure.getInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, -1))
-                .isEqualTo(ColorDisplayController.AUTO_MODE_TWILIGHT);
+                String.valueOf(ColorDisplayManager.AUTO_MODE_TWILIGHT));
+        assertThat(mContext.getSystemService(ColorDisplayManager.class).getNightDisplayAutoMode())
+                .isEqualTo(ColorDisplayManager.AUTO_MODE_TWILIGHT);
     }
 }

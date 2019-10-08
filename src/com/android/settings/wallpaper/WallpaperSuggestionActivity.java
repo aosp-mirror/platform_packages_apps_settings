@@ -16,46 +16,31 @@
 
 package com.android.settings.wallpaper;
 
-import android.app.Activity;
 import android.app.WallpaperManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
+
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
-import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.display.WallpaperPreferenceController;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexable;
 
-public class WallpaperSuggestionActivity extends Activity {
+import java.util.ArrayList;
+import java.util.List;
+
+@SearchIndexable
+public class WallpaperSuggestionActivity extends StyleSuggestionActivityBase implements Indexable {
+
+    private static final String WALLPAPER_FLAVOR_EXTRA = "com.android.launcher3.WALLPAPER_FLAVOR";
+    private static final String WALLPAPER_FOCUS = "focus_wallpaper";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        final PackageManager pm = getPackageManager();
-        final Intent intent = new Intent()
-                .setClassName(getString(R.string.config_wallpaper_picker_package),
-                        getString(R.string.config_wallpaper_picker_class))
-                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        if (pm.resolveActivity(intent, 0) != null) {
-            startActivity(intent);
-        } else {
-            startFallbackSuggestion();
-        }
-
-        finish();
-    }
-
-    @VisibleForTesting
-    void startFallbackSuggestion() {
-        // fall back to default wallpaper picker
-        new SubSettingLauncher(this)
-                .setDestination(WallpaperTypeSettings.class.getName())
-                .setTitle(R.string.wallpaper_suggestion_title)
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.DASHBOARD_SUMMARY)
-                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
-                .launch();
+    protected void addExtras(Intent intent) {
+        intent.putExtra(WALLPAPER_FLAVOR_EXTRA, WALLPAPER_FOCUS);
     }
 
     @VisibleForTesting
@@ -68,8 +53,27 @@ public class WallpaperSuggestionActivity extends Activity {
         return manager.getWallpaperId(WallpaperManager.FLAG_SYSTEM) > 0;
     }
 
-    private static boolean isWallpaperServiceEnabled(Context context) {
-        return context.getResources().getBoolean(
-                com.android.internal.R.bool.config_enableWallpaperService);
-    }
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                private static final String SUPPORT_SEARCH_INDEX_KEY = "wallpaper_type";
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableRaw> result = new ArrayList<>();
+                    WallpaperPreferenceController controller =
+                            new WallpaperPreferenceController(context, "dummy key");
+                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data.title = controller.getTitle();
+                    data.screenTitle = data.title;
+                    ComponentName component = controller.getComponentName();
+                    data.intentTargetPackage = component.getPackageName();
+                    data.intentTargetClass = component.getClassName();
+                    data.intentAction = Intent.ACTION_MAIN;
+                    data.key = SUPPORT_SEARCH_INDEX_KEY;
+                    data.keywords = controller.getKeywords();
+                    result.add(data);
+                    return result;
+                }
+            };
 }

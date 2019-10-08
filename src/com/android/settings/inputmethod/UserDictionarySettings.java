@@ -18,12 +18,10 @@ package com.android.settings.inputmethod;
 
 import android.annotation.Nullable;
 import android.app.ActionBar;
-import android.app.ListFragment;
-import android.app.LoaderManager;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
@@ -41,7 +39,10 @@ import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.fragment.app.ListFragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
@@ -67,7 +68,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.USER_DICTIONARY_SETTINGS;
+        return SettingsEnums.USER_DICTIONARY_SETTINGS;
     }
 
     @Override
@@ -153,7 +154,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem actionItem =
                 menu.add(0, OPTIONS_MENU_ADD, 0, R.string.user_dict_settings_add_menu_title)
-                        .setIcon(R.drawable.ic_menu_add_white);
+                        .setIcon(R.drawable.ic_add_24dp);
         actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
@@ -191,7 +192,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
         new SubSettingLauncher(getContext())
                 .setDestination(UserDictionaryAddWordFragment.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.user_dict_settings_add_dialog_title)
+                .setTitleRes(R.string.user_dict_settings_add_dialog_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
 

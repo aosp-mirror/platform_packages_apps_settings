@@ -15,19 +15,20 @@
  */
 package com.android.settings.network;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.widget.RadioButtonPreference;
@@ -44,7 +45,7 @@ public class NetworkScorerPicker extends InstrumentedPreferenceFragment implemen
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_NETWORK_SCORER;
+        return SettingsEnums.SETTINGS_NETWORK_SCORER;
     }
 
     @Override

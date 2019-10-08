@@ -19,38 +19,31 @@ package com.android.settings.fuelgauge;
 import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.LoaderManager;
-import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.applications.LayoutPreference;
+import com.android.settings.applications.appinfo.AppButtonsPreferenceController;
+import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
-import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
-import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
-import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.widget.EntityHeaderController;
@@ -58,6 +51,7 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,8 +64,6 @@ import java.util.List;
  */
 public class AdvancedPowerUsageDetail extends DashboardFragment implements
         ButtonActionDialogFragment.AppButtonsDialogListener,
-        AnomalyDialogFragment.AnomalyDialogListener,
-        LoaderManager.LoaderCallbacks<List<Anomaly>>,
         BatteryTipPreferenceController.BatteryTipListener {
 
     public static final String TAG = "AdvancedPowerDetail";
@@ -83,7 +75,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public static final String EXTRA_ICON_ID = "extra_icon_id";
     public static final String EXTRA_POWER_USAGE_PERCENT = "extra_power_usage_percent";
     public static final String EXTRA_POWER_USAGE_AMOUNT = "extra_power_usage_amount";
-    public static final String EXTRA_ANOMALY_LIST = "extra_anomaly_list";
 
     private static final String KEY_PREF_FOREGROUND = "app_usage_foreground";
     private static final String KEY_PREF_BACKGROUND = "app_usage_background";
@@ -91,8 +82,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
-
-    private static final int ANOMALY_LOADER = 0;
 
     @VisibleForTesting
     LayoutPreference mHeaderPreference;
@@ -107,21 +96,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     Preference mForegroundPreference;
     @VisibleForTesting
     Preference mBackgroundPreference;
-    @VisibleForTesting
-    AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
     private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
 
-    private DevicePolicyManager mDpm;
-    private UserManager mUserManager;
-    private PackageManager mPackageManager;
-    private List<Anomaly> mAnomalies;
     private String mPackageName;
 
     @VisibleForTesting
     static void startBatteryDetailPage(Activity caller, BatteryUtils batteryUtils,
             InstrumentedPreferenceFragment fragment, BatteryStatsHelper helper, int which,
-            BatteryEntry entry, String usagePercent, List<Anomaly> anomalies) {
+            BatteryEntry entry, String usagePercent) {
         // Initialize mStats if necessary.
         helper.getStats();
 
@@ -152,11 +135,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putLong(EXTRA_FOREGROUND_TIME, foregroundTimeMs);
         args.putString(EXTRA_POWER_USAGE_PERCENT, usagePercent);
         args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) sipper.totalPowerMah);
-        args.putParcelableList(EXTRA_ANOMALY_LIST, anomalies);
 
         new SubSettingLauncher(caller)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
-                .setTitle(R.string.battery_details_title)
+                .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
                 .setUserHandle(new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(sipper)))
@@ -173,9 +155,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     public static void startBatteryDetailPage(Activity caller,
             InstrumentedPreferenceFragment fragment, BatteryStatsHelper helper, int which,
-            BatteryEntry entry, String usagePercent, List<Anomaly> anomalies) {
+            BatteryEntry entry, String usagePercent) {
         startBatteryDetailPage(caller, BatteryUtils.getInstance(caller), fragment, helper, which,
-                entry, usagePercent, anomalies);
+                entry, usagePercent);
     }
 
     public static void startBatteryDetailPage(Activity caller,
@@ -187,12 +169,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         try {
             args.putInt(EXTRA_UID, packageManager.getPackageUid(packageName, 0 /* no flag */));
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Cannot find package: " + packageName, e);
+            Log.w(TAG, "Cannot find package: " + packageName, e);
         }
 
         new SubSettingLauncher(caller)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
-                .setTitle(R.string.battery_details_title)
+                .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
                 .launch();
@@ -203,9 +185,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onAttach(activity);
 
         mState = ApplicationsState.getInstance(getActivity().getApplication());
-        mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
-        mPackageManager = activity.getPackageManager();
         mBatteryUtils = BatteryUtils.getInstance(getContext());
     }
 
@@ -214,15 +193,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onCreate(icicle);
 
         mPackageName = getArguments().getString(EXTRA_PACKAGE_NAME);
-        mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
-                (SettingsActivity) getActivity(), this);
         mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
         mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
         mHeaderPreference = (LayoutPreference) findPreference(KEY_PREF_HEADER);
 
         if (mPackageName != null) {
             mAppEntry = mState.getEntry(mPackageName, UserHandle.myUserId());
-            initAnomalyInfo();
         }
     }
 
@@ -235,23 +211,13 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     @VisibleForTesting
-    void initAnomalyInfo() {
-        mAnomalies = getArguments().getParcelableArrayList(EXTRA_ANOMALY_LIST);
-        if (mAnomalies == null) {
-            getLoaderManager().initLoader(ANOMALY_LOADER, Bundle.EMPTY, this);
-        } else if (mAnomalies != null) {
-            mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(mAnomalies);
-        }
-    }
-
-    @VisibleForTesting
     void initHeader() {
         final View appSnippet = mHeaderPreference.findViewById(R.id.entity_header);
         final Activity context = getActivity();
         final Bundle bundle = getArguments();
         EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, appSnippet)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 
@@ -269,10 +235,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             controller.setLabel(mAppEntry);
             controller.setIcon(mAppEntry);
             boolean isInstantApp = AppUtils.isInstant(mAppEntry.info);
-            CharSequence summary = isInstantApp
-                    ? null : getString(Utils.getInstallationStatus(mAppEntry.info));
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
-            controller.setSummary(summary);
         }
 
         controller.done(context, true /* rebindActions */);
@@ -285,8 +248,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        final String usagePercent = bundle.getString(EXTRA_POWER_USAGE_PERCENT);
-        final int powerMah = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
         mForegroundPreference.setSummary(
                 TextUtils.expandTemplate(getText(R.string.battery_used_for),
                         StringUtil.formatElapsedTime(context, foregroundTimeMs, false)));
@@ -296,17 +257,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(preference.getKey(), AnomalySummaryPreferenceController.ANOMALY_KEY)) {
-            mAnomalySummaryPreferenceController.onPreferenceTreeClick(preference);
-            return true;
-        }
-        return super.onPreferenceTreeClick(preference);
-    }
-
-    @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FUELGAUGE_POWER_USAGE_DETAIL;
+        return SettingsEnums.FUELGAUGE_POWER_USAGE_DETAIL;
     }
 
     @Override
@@ -332,8 +284,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         controllers.add(new BatteryOptimizationPreferenceController(
                 (SettingsActivity) getActivity(), this, packageName));
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
-                (SettingsActivity) getActivity(), this, getLifecycle(), packageName, mState, mDpm,
-                mUserManager, mPackageManager, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
+                (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName, mState,
+                REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
 
         return controllers;
@@ -352,29 +304,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         if (mAppButtonsPreferenceController != null) {
             mAppButtonsPreferenceController.handleDialogClick(id);
         }
-    }
-
-    @Override
-    public void onAnomalyHandled(Anomaly anomaly) {
-        mAnomalySummaryPreferenceController.hideHighUsagePreference();
-    }
-
-    @Override
-    public Loader<List<Anomaly>> onCreateLoader(int id, Bundle args) {
-        return new AnomalyLoader(getContext(), mPackageName);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<Anomaly>> loader, List<Anomaly> data) {
-        final AnomalyUtils anomalyUtils = AnomalyUtils.getInstance(getContext());
-        anomalyUtils.logAnomalies(mMetricsFeatureProvider, data,
-                MetricsEvent.FUELGAUGE_POWER_USAGE_DETAIL);
-        mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Anomaly>> loader) {
-
     }
 
     @Override

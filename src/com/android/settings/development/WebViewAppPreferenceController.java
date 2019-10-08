@@ -18,17 +18,19 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
+import android.content.pm.PackageManager;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public class WebViewAppPreferenceController extends DeveloperOptionsPreferenceController implements
         PreferenceControllerMixin {
@@ -36,13 +38,13 @@ public class WebViewAppPreferenceController extends DeveloperOptionsPreferenceCo
     private static final String TAG = "WebViewAppPrefCtrl";
     private static final String WEBVIEW_APP_KEY = "select_webview_provider";
 
-    private final PackageManagerWrapper mPackageManager;
+    private final PackageManager mPackageManager;
     private final WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
 
     public WebViewAppPreferenceController(Context context) {
         super(context);
 
-        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
+        mPackageManager = context.getPackageManager();
         mWebViewUpdateServiceWrapper = new WebViewUpdateServiceWrapper();
     }
 
@@ -65,7 +67,7 @@ public class WebViewAppPreferenceController extends DeveloperOptionsPreferenceCo
     @VisibleForTesting
     DefaultAppInfo getDefaultAppInfo() {
         final PackageInfo currentPackage = mWebViewUpdateServiceWrapper.getCurrentWebViewPackage();
-        return new DefaultAppInfo(mContext, mPackageManager,
+        return new DefaultAppInfo(mContext, mPackageManager, UserHandle.myUserId(),
                 currentPackage == null ? null : currentPackage.applicationInfo);
     }
 

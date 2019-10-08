@@ -1,10 +1,11 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -15,20 +16,22 @@ import android.content.Intent;
 import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.setupwizardlib.util.WizardManagerHelper;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class, ShadowUtils.class})
 public class ChooseLockSettingsHelperTest {
 
@@ -58,16 +61,12 @@ public class ChooseLockSettingsHelperTest {
                 ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false));
         assertEquals(10000L, startedIntent.getLongExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L));
-        assertEquals(
-                true,
-                (startedIntent.getFlags() & Intent.FLAG_ACTIVITY_FORWARD_RESULT) != 0);
-        assertEquals(true, startedIntent.getBooleanExtra(
-                ConfirmDeviceCredentialBaseFragment.ALLOW_FP_AUTHENTICATION, false));
+        assertTrue((startedIntent.getFlags() & Intent.FLAG_ACTIVITY_FORWARD_RESULT) != 0);
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false));
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_CANCEL_BUTTON, false));
-        assertEquals(true, startedIntent.getBooleanExtra(
+        assertTrue(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, false));
     }
 
@@ -96,23 +95,19 @@ public class ChooseLockSettingsHelperTest {
                 ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false));
         assertEquals(10000L, startedIntent.getLongExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L));
-        assertEquals(
-                false,
-                (startedIntent.getFlags() & Intent.FLAG_ACTIVITY_FORWARD_RESULT) != 0);
-        assertEquals(false, startedIntent.getBooleanExtra(
-                ConfirmDeviceCredentialBaseFragment.ALLOW_FP_AUTHENTICATION, false));
+        assertFalse((startedIntent.getFlags() & Intent.FLAG_ACTIVITY_FORWARD_RESULT) != 0);
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false));
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_CANCEL_BUTTON, false));
-        assertEquals(false, startedIntent.getBooleanExtra(
+        assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, false));
     }
 
     @Test
     public void testLaunchConfirmationActivity_internal_shouldPropagateTheme() {
         Intent intent = new Intent()
-                .putExtra(WizardManagerHelper.EXTRA_THEME, WizardManagerHelper.THEME_GLIF_V2);
+                .putExtra(WizardManagerHelper.EXTRA_THEME, ThemeHelper.THEME_GLIF_V2);
         Activity activity = Robolectric.buildActivity(Activity.class, intent).get();
         ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(activity);
         helper.launchConfirmationActivity(123, "test title", true, 0 /* userId */);
@@ -121,7 +116,7 @@ public class ChooseLockSettingsHelperTest {
         IntentForResult startedActivity = shadowActivity.getNextStartedActivityForResult();
         assertThat(startedActivity.requestCode).isEqualTo(123);
         assertThat(startedActivity.intent.getStringExtra(WizardManagerHelper.EXTRA_THEME))
-                .isEqualTo(WizardManagerHelper.THEME_GLIF_V2);
+                .isEqualTo(ThemeHelper.THEME_GLIF_V2);
     }
 
     private ChooseLockSettingsHelper getChooseLockSettingsHelper(Activity activity) {

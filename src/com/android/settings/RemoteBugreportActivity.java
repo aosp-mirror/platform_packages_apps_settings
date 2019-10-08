@@ -17,16 +17,14 @@ package com.android.settings;
 
 import android.annotation.Nullable;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
-import android.widget.LinearLayout;
 
-import com.android.settings.R;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * UI for the remote bugreport dialog. Shows one of 3 possible dialogs:

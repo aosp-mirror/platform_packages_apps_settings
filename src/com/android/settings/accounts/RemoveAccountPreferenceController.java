@@ -17,33 +17,34 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.PreferenceScreen;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.io.IOException;
 
@@ -64,8 +65,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference removeAccountPreference =
-                (LayoutPreference) screen.findPreference(KEY_REMOVE_ACCOUNT);
+        final LayoutPreference removeAccountPreference = screen.findPreference(KEY_REMOVE_ACCOUNT);
         Button removeAccountButton = (Button) removeAccountPreference.findViewById(R.id.button);
         removeAccountButton.setOnClickListener(this);
     }
@@ -83,8 +83,8 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
     @Override
     public void onClick(View v) {
         if (mUserHandle != null) {
-            final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
-                    UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier());
+            final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier());
             if (admin != null) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, admin);
                 return;
@@ -145,39 +145,34 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_ACCOUNT_SYNC_REMOVE;
+            return SettingsEnums.DIALOG_ACCOUNT_SYNC_REMOVE;
         }
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
             Activity activity = getTargetFragment().getActivity();
             AccountManager.get(activity).removeAccountAsUser(mAccount, activity,
-                    new AccountManagerCallback<Bundle>() {
-                        @Override
-                        public void run(AccountManagerFuture<Bundle> future) {
-                            // If already out of this screen, don't proceed.
-                            if (!getTargetFragment().isResumed()) {
-                                return;
+                    future -> {
+                        final Activity targetActivity = getTargetFragment().getActivity();
+                        if (targetActivity == null || targetActivity.isFinishing()) {
+                            Log.w(TAG, "Activity is no longer alive, skipping results");
+                            return;
+                        }
+                        boolean failed = true;
+                        try {
+                            if (future.getResult()
+                                    .getBoolean(AccountManager.KEY_BOOLEAN_RESULT)) {
+                                failed = false;
                             }
-                            boolean failed = true;
-                            try {
-                                if (future.getResult()
-                                        .getBoolean(AccountManager.KEY_BOOLEAN_RESULT)) {
-                                    failed = false;
-                                }
-                            } catch (OperationCanceledException e) {
-                                // handled below
-                            } catch (IOException e) {
-                                // handled below
-                            } catch (AuthenticatorException e) {
-                                // handled below
-                            }
-                            final Activity activity = getTargetFragment().getActivity();
-                            if (failed && activity != null && !activity.isFinishing()) {
-                                RemoveAccountFailureDialog.show(getTargetFragment());
-                            } else {
-                                activity.finish();
-                            }
+                        } catch (OperationCanceledException
+                                | IOException
+                                | AuthenticatorException e) {
+                            // handled below
+                        }
+                        if (failed) {
+                            RemoveAccountFailureDialog.show(getTargetFragment());
+                        } else {
+                            targetActivity.finish();
                         }
                     }, null, mUserHandle);
         }
@@ -196,7 +191,11 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
             }
             final RemoveAccountFailureDialog dialog = new RemoveAccountFailureDialog();
             dialog.setTargetFragment(parent, 0);
-            dialog.show(parent.getFragmentManager(), FAILED_REMOVAL_DIALOG);
+            try {
+                dialog.show(parent.getFragmentManager(), FAILED_REMOVAL_DIALOG);
+            } catch (IllegalStateException e) {
+                Log.w(TAG, "Can't show RemoveAccountFailureDialog. " +  e.getMessage());
+            }
         }
 
         @Override
@@ -212,7 +211,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_ACCOUNT_SYNC_FAILED_REMOVAL;
+            return SettingsEnums.DIALOG_ACCOUNT_SYNC_FAILED_REMOVAL;
         }
 
     }

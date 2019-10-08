@@ -17,18 +17,20 @@
 package com.android.settings.core;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.platform.test.annotations.Presubmit;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.SmallTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.SmallTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.development.featureflags.FeatureFlagsDashboard;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -48,8 +50,10 @@ public class LifecycleEventHandlingTest {
     private UiDevice mDevice;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        mDevice.wakeUp();
+        mDevice.executeShellCommand("wm dismiss-keyguard");
         mContext = InstrumentationRegistry.getTargetContext();
         mTargetPackage = mContext.getPackageName();
     }

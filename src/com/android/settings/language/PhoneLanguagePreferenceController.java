@@ -16,10 +16,11 @@
 
 package com.android.settings.language;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
@@ -73,8 +74,8 @@ public class PhoneLanguagePreferenceController extends AbstractPreferenceControl
         }
         new SubSettingLauncher(mContext)
                 .setDestination(LocaleListEditor.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY)
-                .setTitle(R.string.pref_title_lang_selection)
+                .setSourceMetricsCategory(SettingsEnums.SETTINGS_LANGUAGE_CATEGORY)
+                .setTitleRes(R.string.language_picker_title)
                 .launch();
         return true;
     }

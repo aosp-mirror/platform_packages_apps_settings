@@ -15,43 +15,32 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/preview_viewport"
+    android:clipToPadding="true"
+    android:clipChildren="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content">
 
-    <FrameLayout
-        android:id="@+id/preview_viewport"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/captioning_preview_height"
-        android:paddingStart="@dimen/settings_side_margin"
-        android:paddingEnd="@dimen/settings_side_margin" >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/caption_background" />
-
-        <FrameLayout
-            android:id="@+id/preview_window"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:padding="16dp" >
-
-            <com.android.internal.widget.SubtitleView
-                android:id="@+id/preview_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/captioning_preview_text" />
-        </FrameLayout>
-    </FrameLayout>
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/caption_background"/>
 
     <FrameLayout
-        android:id="@+id/properties_fragment"
+        android:id="@+id/preview_window"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:padding="16dp">
 
-</LinearLayout>
+        <com.android.internal.widget.SubtitleView
+            android:id="@+id/preview_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/captioning_preview_text"/>
+    </FrameLayout>
+</FrameLayout>

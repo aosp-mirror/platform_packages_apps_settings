@@ -12,6 +12,7 @@ import static org.robolectric.Robolectric.buildActivity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.RadioButton;
@@ -19,28 +20,23 @@ import android.widget.RadioButton;
 import com.android.settings.R;
 import com.android.settings.RestrictedRadioButton;
 import com.android.settings.notification.RedactionInterstitial.RedactionInterstitialFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
-import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
-import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowUserManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
-        SettingsShadowResources.class,
-        SettingsShadowResourcesImpl.class,
-        SettingsShadowResources.SettingsShadowTheme.class,
         ShadowUtils.class,
-        ShadowRestrictedLockUtils.class,
-        ShadowUserManager.class,
+        ShadowRestrictedLockUtilsInternal.class,
 })
 public class RedactionInterstitialTest {
     private RedactionInterstitial mActivity;
@@ -48,8 +44,7 @@ public class RedactionInterstitialTest {
 
     @After
     public void tearDown() {
-        ShadowUserManager.getShadow().reset();
-        ShadowRestrictedLockUtils.reset();
+        ShadowRestrictedLockUtilsInternal.reset();
     }
 
     @Test
@@ -85,7 +80,7 @@ public class RedactionInterstitialTest {
     @Test
     public void primaryUserUnredactedRestrictionTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
-        ShadowRestrictedLockUtils.setKeyguardDisabledFeatures(
+        ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
         setupActivity();
 
@@ -97,7 +92,7 @@ public class RedactionInterstitialTest {
     @Test
     public void primaryUserNotificationRestrictionTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
-        ShadowRestrictedLockUtils.setKeyguardDisabledFeatures(
+        ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         setupActivity();
 
@@ -109,7 +104,9 @@ public class RedactionInterstitialTest {
     @Test
     public void managedProfileNoRestrictionsTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
-        ShadowUserManager.getShadow().addManagedProfile(UserHandle.myUserId());
+        final ShadowUserManager sum =
+                Shadow.extract(RuntimeEnvironment.application.getSystemService(UserManager.class));
+        sum.setManagedProfile(true);
         setupActivity();
 
         assertHideAllVisible(false);
@@ -120,8 +117,10 @@ public class RedactionInterstitialTest {
     @Test
     public void managedProfileUnredactedRestrictionTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
-        ShadowUserManager.getShadow().addManagedProfile(UserHandle.myUserId());
-        ShadowRestrictedLockUtils.setKeyguardDisabledFeatures(
+        final ShadowUserManager sum =
+                Shadow.extract(RuntimeEnvironment.application.getSystemService(UserManager.class));
+        sum.setManagedProfile(true);
+        ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
         setupActivity();
 
@@ -133,7 +132,7 @@ public class RedactionInterstitialTest {
     private void setupActivity() {
         mActivity = buildActivity(RedactionInterstitial.class, new Intent()).setup().get();
         mFragment = (RedactionInterstitialFragment)
-                mActivity.getFragmentManager().findFragmentById(R.id.main_content);
+                mActivity.getSupportFragmentManager().findFragmentById(R.id.main_content);
         assertThat(mActivity).isNotNull();
         assertThat(mFragment).isNotNull();
     }

@@ -17,14 +17,19 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_schedule_rule_settings"
     android:title="@string/zen_mode_automatic_rule_settings_page_title">
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="pref_app_header"
-        android:layout="@layout/settings_entity_header" />
+        android:layout="@layout/settings_entity_header"
+        settings:allowDividerBelow="true"/>
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.ActionButtonsPreference
+        android:key="zen_action_buttons"/>
+
+    <com.android.settingslib.widget.LayoutPreference
         android:key="zen_automatic_rule_switch"
         android:layout="@layout/styled_switch_bar" />
 
@@ -42,5 +47,11 @@
         android:title="@string/zen_mode_schedule_alarm_title"
         android:summary="@string/zen_mode_schedule_alarm_summary"
         android:order="99" />
+
+    <!-- Custom Do Not Disturb Setting-->
+    <Preference
+        android:key="zen_custom_setting"
+        android:title="@string/zen_mode_custom_behavior_title"
+        android:order="100" />
 
 </PreferenceScreen>

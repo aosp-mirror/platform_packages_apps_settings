@@ -21,8 +21,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -77,7 +78,7 @@ public class ChangeProfileScreenLockPreferenceController extends
         extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setTitle(R.string.lock_settings_picker_title_profile)
+                .setTitleRes(R.string.lock_settings_picker_title_profile)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .setArguments(extras)
                 .launch();

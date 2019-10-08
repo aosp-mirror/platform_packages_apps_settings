@@ -15,65 +15,22 @@
  */
 package com.android.settings.testutils.shadow;
 
-import android.annotation.UserIdInt;
 import android.content.Context;
 
-import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 
 @Implements(RestrictedLockUtils.class)
 public class ShadowRestrictedLockUtils {
-    private static boolean sIsRestricted;
-    private static String[] sRestrictedPkgs;
+
     private static boolean sAdminSupportDetailsIntentLaunched;
-    private static int sKeyguardDisabledFeatures;
-
-    @Resetter
-    public static void reset() {
-        sIsRestricted = false;
-        sRestrictedPkgs = null;
-        sAdminSupportDetailsIntentLaunched = false;
-        sKeyguardDisabledFeatures = 0;
-    }
 
     @Implementation
-    public static EnforcedAdmin checkIfMeteredDataRestricted(Context context,
-            String packageName, int userId) {
-        if (sIsRestricted) {
-            return new EnforcedAdmin();
-        }
-        if (ArrayUtils.contains(sRestrictedPkgs, packageName)) {
-            return new EnforcedAdmin();
-        }
-        return null;
-    }
-
-    @Implementation
-    public static void sendShowAdminSupportDetailsIntent(Context context, EnforcedAdmin admin) {
+    protected static void sendShowAdminSupportDetailsIntent(Context context, EnforcedAdmin admin) {
         sAdminSupportDetailsIntentLaunched = true;
-    }
-
-    @Implementation
-    public static EnforcedAdmin checkIfKeyguardFeaturesDisabled(Context context,
-            int features, final @UserIdInt int userId) {
-        return (sKeyguardDisabledFeatures & features) == 0 ? null : new EnforcedAdmin();
-    }
-
-    @Implementation
-    public static boolean hasBaseUserRestriction(Context context,
-            String userRestriction, int userId) {
-        return sIsRestricted;
-    }
-
-    @Implementation
-    public static EnforcedAdmin checkIfRestrictionEnforced(Context context,
-            String userRestriction, int userId) {
-        return sIsRestricted ? new EnforcedAdmin() : null;
     }
 
     public static boolean hasAdminSupportDetailsIntentLaunched() {
@@ -82,17 +39,5 @@ public class ShadowRestrictedLockUtils {
 
     public static void clearAdminSupportDetailsIntentLaunch() {
         sAdminSupportDetailsIntentLaunched = false;
-    }
-
-    public static void setRestricted(boolean restricted) {
-        sIsRestricted = restricted;
-    }
-
-    public static void setRestrictedPkgs(String... pkgs) {
-        sRestrictedPkgs = pkgs;
-    }
-
-    public static void setKeyguardDisabledFeatures(int features) {
-        sKeyguardDisabledFeatures = features;
     }
 }

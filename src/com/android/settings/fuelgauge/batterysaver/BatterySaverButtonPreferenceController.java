@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
 import android.os.PowerManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -71,7 +72,7 @@ public class BatterySaverButtonPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (TwoStateButtonPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

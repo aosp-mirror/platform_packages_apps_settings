@@ -17,34 +17,37 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.PreferenceFragment;
 import android.view.View;
 
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.fragment.app.FragmentActivity;
+
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class HeaderPreferenceControllerTest {
 
     private Context mContext;
@@ -65,10 +68,10 @@ public class HeaderPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
-        mContext = shadowApplication.getApplicationContext();
-        PreferenceFragment fragment = mock(PreferenceFragment.class);
+        mContext = RuntimeEnvironment.application;
+        DashboardFragment fragment = mock(DashboardFragment.class);
         when(fragment.getContext()).thenReturn(mContext);
-        Activity activity = mock(Activity.class);
+        FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getApplicationContext()).thenReturn(mContext);
         when(fragment.getActivity()).thenReturn(activity);
         mController = spy(new HeaderPreferenceController(mContext, fragment));

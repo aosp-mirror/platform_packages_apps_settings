@@ -20,34 +20,25 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.service.settings.suggestions.Suggestion;
-import androidx.annotation.NonNull;
-import android.util.Log;
-import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.NonNull;
+
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionActivity;
+import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.display.NightDisplayPreferenceController;
-import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
-import com.android.settings.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.notification.ZenOnboardingActivity;
 import com.android.settings.notification.ZenSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ScreenLockSuggestionActivity;
-import com.android.settings.support.NewDeviceIntroSuggestionActivity;
+import com.android.settings.wallpaper.StyleSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
-
-import java.util.List;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
 
     private static final String TAG = "SuggestionFeature";
-    private static final int EXCLUSIVE_SUGGESTION_MAX_COUNT = 3;
 
     private static final String SHARED_PREF_FILENAME = "suggestions";
 
@@ -68,15 +59,12 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
-    public boolean isSmartSuggestionEnabled(Context context) {
-        return false;
-    }
-
-    @Override
     public boolean isSuggestionComplete(Context context, @NonNull ComponentName component) {
         final String className = component.getClassName();
         if (className.equals(WallpaperSuggestionActivity.class.getName())) {
             return WallpaperSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(StyleSuggestionActivity.class.getName())) {
+            return StyleSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(FingerprintSuggestionActivity.class.getName())) {
             return FingerprintSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(FingerprintEnrollSuggestionActivity.class.getName())) {
@@ -87,8 +75,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
             return WifiCallingSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
             return NightDisplayPreferenceController.isSuggestionComplete(context);
-        } else if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
-            return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(ZenSuggestionActivity.class.getName())) {
             return ZenOnboardingActivity.isSuggestionComplete(context);
         }
@@ -104,36 +90,5 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         final Context appContext = context.getApplicationContext();
         mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
                 .getMetricsFeatureProvider();
-    }
-
-    @Override
-    public void filterExclusiveSuggestions(List<Tile> suggestions) {
-        if (suggestions == null) {
-            return;
-        }
-        for (int i = suggestions.size() - 1; i >= EXCLUSIVE_SUGGESTION_MAX_COUNT; i--) {
-            Log.d(TAG, "Removing exclusive suggestion");
-            suggestions.remove(i);
-        }
-    }
-
-    @Override
-    public void dismissSuggestion(Context context, SuggestionControllerMixin mixin,
-            Suggestion suggestion) {
-        if (mixin == null || suggestion == null || context == null) {
-            return;
-        }
-        mMetricsFeatureProvider.action(
-                context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
-                suggestion.getId());
-        mixin.dismissSuggestion(suggestion);
-    }
-
-    @Override
-    public Pair<Integer, Object>[] getLoggingTaggedData(Context context) {
-        final boolean isSmartSuggestionEnabled = isSmartSuggestionEnabled(context);
-        return new Pair[] {Pair.create(
-                MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED,
-                isSmartSuggestionEnabled ? 1 : 0)};
     }
 }

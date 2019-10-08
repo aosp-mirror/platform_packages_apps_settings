@@ -16,11 +16,11 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.xmlpull.v1.XmlPullParser;
 
@@ -32,7 +32,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class XmlControllerAttributeTest {
 
     // List of classes that are too hard to mock in order to retrieve xml information.
@@ -53,8 +53,8 @@ public class XmlControllerAttributeTest {
     private static final String BAD_CLASSNAME_ERROR =
             "The following controllers set in the XML did not have valid class names:\n";
 
-    Context mContext;
-    SearchFeatureProvider mSearchProvider;
+    private Context mContext;
+    private SearchFeatureProvider mSearchProvider;
 
     @Before
     public void setUp() {
@@ -64,7 +64,7 @@ public class XmlControllerAttributeTest {
     }
 
     @Test
-    public void testAllIndexableXML_onlyValidBasePreferenceControllersAdded() {
+    public void testAllIndexableXML_onlyValidBasePreferenceControllersAdded() throws Exception {
         Set<Integer> xmlSet = getIndexableXml();
         xmlSet.addAll(whitelistXml);
 
@@ -140,37 +140,34 @@ public class XmlControllerAttributeTest {
         return xmlResSet;
     }
 
-    private List<String> getXmlControllers(int xmlResId) {
+    private List<String> getXmlControllers(int xmlResId) throws Exception {
         List<String> xmlControllers = new ArrayList<>();
 
         XmlResourceParser parser;
-        try {
-            parser = mContext.getResources().getXml(xmlResId);
+        parser = mContext.getResources().getXml(xmlResId);
 
-            int type;
-            while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
-                    && type != XmlPullParser.START_TAG) {
-                // Parse next until start tag is found
-            }
-
-            final int outerDepth = parser.getDepth();
-            final AttributeSet attrs = Xml.asAttributeSet(parser);
-            String controllerClassName;
-            while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
-                    && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
-                if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
-                    continue;
-                }
-
-                controllerClassName = PreferenceXmlParserUtils.getController(mContext, attrs);
-                // If controller is not indexed, then it is not compatible with
-                if (!TextUtils.isEmpty(controllerClassName)) {
-                    xmlControllers.add(controllerClassName);
-                }
-            }
-        } catch (Exception e) {
-            // Assume an issue with robolectric resources
+        int type;
+        while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
+                && type != XmlPullParser.START_TAG) {
+            // Parse next until start tag is found
         }
+
+        final int outerDepth = parser.getDepth();
+        final AttributeSet attrs = Xml.asAttributeSet(parser);
+        String controllerClassName;
+        while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
+                && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
+            if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
+                continue;
+            }
+
+            controllerClassName = PreferenceXmlParserUtils.getController(mContext, attrs);
+            // If controller is not indexed, then it is not compatible with
+            if (!TextUtils.isEmpty(controllerClassName)) {
+                xmlControllers.add(controllerClassName);
+            }
+        }
+
         return xmlControllers;
     }
 

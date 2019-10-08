@@ -23,13 +23,12 @@ import com.android.settings.testutils.CustomActivity;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.shadows.ShadowApplication;
 
 @Implements(CustomActivity.class)
 public class ShadowActivity extends org.robolectric.shadows.ShadowActivity {
 
     @Implementation
-    public void startActivityAsUser(Intent intent, UserHandle user) {
-        ShadowApplication.getInstance().startActivity(intent);
+    protected void startActivityAsUser(Intent intent, UserHandle user) {
+        realActivity.startActivity(intent);
     }
 }

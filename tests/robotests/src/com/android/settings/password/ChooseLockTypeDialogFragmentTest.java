@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Google Inc.
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,36 +16,35 @@
 
 package com.android.settings.password;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockTypeDialogFragment.OnLockTypeSelectedListener;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowUserManager;
-import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.shadows.ShadowDialog;
-import org.robolectric.util.FragmentTestUtil;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowUtils.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowAlertDialogCompat.class, ShadowLockPatternUtils.class})
 public class ChooseLockTypeDialogFragmentTest {
 
     private Context mContext;
@@ -55,16 +54,19 @@ public class ChooseLockTypeDialogFragmentTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mFragment = new TestFragment();
-        FragmentTestUtil.startFragment(mFragment);
+        FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
     }
 
     @Test
     public void testThatDialog_IsShown() {
         AlertDialog latestDialog = startLockFragment();
-        assertNotNull(latestDialog);
-        ShadowDialog shadowDialog = Shadows.shadowOf(latestDialog);
+        ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(latestDialog);
+
+        assertThat(latestDialog).isNotNull();
+        assertThat(latestDialog.isShowing()).isTrue();
         // verify that we are looking at the expected dialog.
-        assertEquals(shadowDialog.getTitle(),
+        assertThat(shadowAlertDialog.getTitle()).isEqualTo(
                 mContext.getString(R.string.setup_lock_settings_options_dialog_title));
     }
 
@@ -72,8 +74,10 @@ public class ChooseLockTypeDialogFragmentTest {
     public void testThat_OnClickListener_IsCalled() {
         mFragment.mDelegate = mock(OnLockTypeSelectedListener.class);
         AlertDialog lockDialog = startLockFragment();
-        ShadowAlertDialog shadowAlertDialog = Shadows.shadowOf(lockDialog);
+        ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(lockDialog);
+
         shadowAlertDialog.clickOnItem(0);
+
         verify(mFragment.mDelegate, times(1)).onLockTypeSelected(any(ScreenLockType.class));
     }
 
@@ -81,16 +85,17 @@ public class ChooseLockTypeDialogFragmentTest {
     public void testThat_OnClickListener_IsNotCalledWhenCancelled() {
         mFragment.mDelegate = mock(OnLockTypeSelectedListener.class);
         AlertDialog lockDialog = startLockFragment();
+
         lockDialog.dismiss();
+
         verify(mFragment.mDelegate, never()).onLockTypeSelected(any(ScreenLockType.class));
     }
-
 
     private AlertDialog startLockFragment() {
         ChooseLockTypeDialogFragment chooseLockTypeDialogFragment =
                 ChooseLockTypeDialogFragment.newInstance(1234);
         chooseLockTypeDialogFragment.show(mFragment.getChildFragmentManager(), null);
-        return ShadowAlertDialog.getLatestAlertDialog();
+        return ShadowAlertDialogCompat.getLatestAlertDialog();
     }
 
     public static class TestFragment extends Fragment implements OnLockTypeSelectedListener {

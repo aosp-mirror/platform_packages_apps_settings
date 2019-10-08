@@ -18,6 +18,7 @@ import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserManager;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -30,6 +31,7 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipDialogFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
@@ -75,6 +77,11 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
 
     @Override
     public void updateState(Preference preference) {
+        final RestrictedPreference restrictedPreference = (RestrictedPreference) preference;
+        if (restrictedPreference.isDisabledByAdmin()) {
+            // If disabled, let RestrictedPreference handle it and do nothing here
+            return;
+        }
         final int mode = mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mTargetPackage);
         final boolean whitelisted = mPowerWhitelistBackend.isWhitelisted(mTargetPackage);

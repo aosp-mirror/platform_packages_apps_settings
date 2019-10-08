@@ -21,14 +21,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
+
 import androidx.annotation.VisibleForTesting;
-import android.util.Log;
-
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /** Helper class, intended to be used by an Activity, to keep the local Bluetooth adapter in
  *  discoverable mode indefinitely. By default setting the scan mode to
@@ -39,15 +33,15 @@ public class AlwaysDiscoverable extends BroadcastReceiver {
     private static final String TAG = "AlwaysDiscoverable";
 
     private Context mContext;
-    private LocalBluetoothAdapter mLocalAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
     private IntentFilter mIntentFilter;
 
     @VisibleForTesting
     boolean mStarted;
 
-    public AlwaysDiscoverable(Context context, LocalBluetoothAdapter localAdapter) {
+    public AlwaysDiscoverable(Context context) {
         mContext = context;
-        mLocalAdapter = localAdapter;
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
     }
@@ -60,8 +54,9 @@ public class AlwaysDiscoverable extends BroadcastReceiver {
         }
         mContext.registerReceiver(this, mIntentFilter);
         mStarted = true;
-        if (mLocalAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-            mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+        if (mBluetoothAdapter.getScanMode()
+                != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+            mBluetoothAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
         }
     }
 
@@ -71,7 +66,7 @@ public class AlwaysDiscoverable extends BroadcastReceiver {
         }
         mContext.unregisterReceiver(this);
         mStarted = false;
-        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
+        mBluetoothAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
     }
 
     @Override
@@ -80,8 +75,9 @@ public class AlwaysDiscoverable extends BroadcastReceiver {
         if (action != BluetoothAdapter.ACTION_SCAN_MODE_CHANGED) {
             return;
         }
-        if (mLocalAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-            mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+        if (mBluetoothAdapter.getScanMode()
+                != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+            mBluetoothAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
         }
     }
 }

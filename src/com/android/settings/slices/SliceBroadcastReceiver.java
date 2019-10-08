@@ -17,14 +17,19 @@
 package com.android.settings.slices;
 
 import static com.android.settings.bluetooth.BluetoothSliceBuilder.ACTION_BLUETOOTH_SLICE_CHANGED;
+import static com.android.settings.network.telephony.Enhanced4gLteSliceHelper.ACTION_ENHANCED_4G_LTE_CHANGED;
 import static com.android.settings.notification.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
+import static com.android.settings.slices.SettingsSliceProvider.ACTION_COPY;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
-import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED;
 
+import android.app.settings.SettingsEnums;
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -34,16 +39,13 @@ import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.WifiSliceBuilder;
 
 /**
  * Responds to actions performed on slices and notifies slices of updates in state changes.
@@ -59,6 +61,14 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final boolean isPlatformSlice = intent.getBooleanExtra(EXTRA_SLICE_PLATFORM_DEFINED,
                 false /* default */);
 
+        if (CustomSliceRegistry.isValidAction(action)) {
+            final CustomSliceable sliceable =
+                    CustomSliceable.createInstance(context,
+                            CustomSliceRegistry.getSliceClassByUri(Uri.parse(action)));
+            sliceable.onNotifyChange(intent);
+            return;
+        }
+
         switch (action) {
             case ACTION_TOGGLE_CHANGED:
                 final boolean isChecked = intent.getBooleanExtra(Slice.EXTRA_TOGGLE_STATE, false);
@@ -71,9 +81,6 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             case ACTION_BLUETOOTH_SLICE_CHANGED:
                 BluetoothSliceBuilder.handleUriChange(context, intent);
                 break;
-            case ACTION_WIFI_SLICE_CHANGED:
-                WifiSliceBuilder.handleUriChange(context, intent);
-                break;
             case ACTION_WIFI_CALLING_CHANGED:
                 FeatureFactory.getFactory(context)
                         .getSlicesFeatureProvider()
@@ -82,6 +89,23 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 break;
             case ACTION_ZEN_MODE_SLICE_CHANGED:
                 ZenModeSliceBuilder.handleUriChange(context, intent);
+                break;
+            case ACTION_ENHANCED_4G_LTE_CHANGED:
+                FeatureFactory.getFactory(context)
+                        .getSlicesFeatureProvider()
+                        .getNewEnhanced4gLteSliceHelper(context)
+                        .handleEnhanced4gLteChanged(intent);
+                break;
+            case ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY:
+            case ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED:
+            case ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED:
+                FeatureFactory.getFactory(context)
+                        .getSlicesFeatureProvider()
+                        .getNewWifiCallingSliceHelper(context)
+                        .handleWifiCallingPreferenceChanged(intent);
+                break;
+            case ACTION_COPY:
+                handleCopyAction(context, key, isPlatformSlice);
                 break;
         }
     }
@@ -140,11 +164,12 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         }
 
         final SliderPreferenceController sliderController = (SliderPreferenceController) controller;
-        final int maxSteps = sliderController.getMaxSteps();
-        if (newPosition < 0 || newPosition > maxSteps) {
+        final int minValue = sliderController.getMin();
+        final int maxValue = sliderController.getMax();
+        if (newPosition < minValue || newPosition > maxValue) {
             throw new IllegalArgumentException(
-                    "Invalid position passed to Slider controller. Expected between 0 and "
-                            + maxSteps + " but found " + newPosition);
+                    "Invalid position passed to Slider controller. Expected between " + minValue
+                            + " and " + maxValue + " but found " + newPosition);
         }
 
         sliderController.setSliderPosition(newPosition);
@@ -152,17 +177,39 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         updateUri(context, key, isPlatformSlice);
     }
 
+    private void handleCopyAction(Context context, String key, boolean isPlatformSlice) {
+        if (TextUtils.isEmpty(key)) {
+            throw new IllegalArgumentException("No key passed to Intent for controller");
+        }
+
+        final BasePreferenceController controller = getPreferenceController(context, key);
+
+        if (!(controller instanceof Sliceable)) {
+            throw new IllegalArgumentException(
+                    "Copyable action passed for a non-copyable key:" + key);
+        }
+
+        if (!controller.isAvailable()) {
+            Log.w(TAG, "Can't update " + key + " since the setting is unavailable");
+            if (!controller.hasAsyncUpdate()) {
+                updateUri(context, key, isPlatformSlice);
+            }
+            return;
+        }
+
+        controller.copy();
+    }
+
     /**
      * Log Slice value update events into MetricsFeatureProvider. The logging schema generally
      * follows the pattern in SharedPreferenceLogger.
      */
     private void logSliceValueChange(Context context, String sliceKey, int newValue) {
-        final Pair<Integer, Object> namePair = Pair.create(
-                MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, sliceKey);
-        final Pair<Integer, Object> valuePair = Pair.create(
-                MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE, newValue);
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                .action(context, MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED, namePair, valuePair);
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        SettingsEnums.ACTION_SETTINGS_SLICE_CHANGED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        sliceKey, newValue);
     }
 
     private BasePreferenceController getPreferenceController(Context context, String key) {

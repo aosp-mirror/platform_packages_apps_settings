@@ -16,11 +16,12 @@
 
 package com.android.settings.datetime.timezone;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.icu.text.Collator;
 
 import com.android.settings.datetime.timezone.RegionZonePicker.TimeZoneInfoComparator;
 import com.android.settings.datetime.timezone.TimeZoneInfo.Formatter;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,10 +31,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import org.robolectric.RobolectricTestRunner;
 
-import static com.google.common.truth.Truth.assertThat;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RegionZonePickerTest {
 
     @Test
@@ -53,5 +53,4 @@ public class RegionZonePickerTest {
         Collections.sort(list, comparator);
         assertThat(list).isEqualTo(Arrays.asList(timeZone1, timeZone2, timeZone3, timeZone4));
     }
-
 }

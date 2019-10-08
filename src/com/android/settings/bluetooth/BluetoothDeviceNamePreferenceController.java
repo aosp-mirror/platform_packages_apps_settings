@@ -21,17 +21,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -45,8 +44,7 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
 
     @VisibleForTesting
     Preference mPreference;
-    private LocalBluetoothManager mLocalManager;
-    protected LocalBluetoothAdapter mLocalAdapter;
+    protected BluetoothAdapter mBluetoothAdapter;
 
     /**
      * Constructor exclusively used for Slice.
@@ -54,19 +52,11 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
     public BluetoothDeviceNamePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
 
-        mLocalManager = Utils.getLocalBtManager(context);
-        if (mLocalManager == null) {
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
             Log.e(TAG, "Bluetooth is not supported on this device");
             return;
         }
-        mLocalAdapter = mLocalManager.getBluetoothAdapter();
-    }
-
-    @VisibleForTesting
-    BluetoothDeviceNamePreferenceController(Context context, LocalBluetoothAdapter localAdapter,
-            String preferenceKey) {
-        super(context, preferenceKey);
-        mLocalAdapter = localAdapter;
     }
 
     @Override
@@ -90,7 +80,7 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return mLocalAdapter != null ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return mBluetoothAdapter != null ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -137,7 +127,7 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
     }
 
     protected String getDeviceName() {
-        return mLocalAdapter.getName();
+        return mBluetoothAdapter.getName();
     }
 
     /**
@@ -151,7 +141,8 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
             final String action = intent.getAction();
 
             if (TextUtils.equals(action, BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
-                if (mPreference != null && mLocalAdapter != null && mLocalAdapter.isEnabled()) {
+                if (mPreference != null && mBluetoothAdapter != null
+                        && mBluetoothAdapter.isEnabled()) {
                     updatePreferenceState(mPreference);
                 }
             } else if (TextUtils.equals(action, BluetoothAdapter.ACTION_STATE_CHANGED)) {

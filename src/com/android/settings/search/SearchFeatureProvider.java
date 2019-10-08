@@ -16,21 +16,30 @@
  */
 package com.android.settings.search;
 
+import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
+
 import android.annotation.NonNull;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toolbar;
 
+import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.search.SearchIndexableResources;
 
 /**
  * FeatureProvider for Settings Search
  */
 public interface SearchFeatureProvider {
 
-    Intent SEARCH_UI_INTENT = new Intent("com.android.settings.action.SETTINGS_SEARCH");
+    int REQUEST_CODE = 501;
 
     /**
      * Ensures the caller has necessary privilege to launch search result page.
@@ -42,36 +51,55 @@ public interface SearchFeatureProvider {
             throws SecurityException, IllegalArgumentException;
 
     /**
-     * Synchronously updates the Settings database.
-     */
-    void updateIndex(Context context);
-
-    DatabaseIndexingManager getIndexingManager(Context context);
-
-    /**
      * @return a {@link SearchIndexableResources} to be used for indexing search results.
      */
     SearchIndexableResources getSearchIndexableResources();
 
-    default String getSettingsIntelligencePkgName() {
-        return "com.android.settings.intelligence";
+    default String getSettingsIntelligencePkgName(Context context) {
+        return context.getString(R.string.config_settingsintelligence_package_name);
     }
 
     /**
      * Initializes the search toolbar.
      */
-    default void initSearchToolbar(Activity activity, Toolbar toolbar) {
+    default void initSearchToolbar(Activity activity, Toolbar toolbar, int pageId) {
         if (activity == null || toolbar == null) {
             return;
         }
-        toolbar.setOnClickListener(tb -> {
-            final Intent intent = SEARCH_UI_INTENT;
-            intent.setPackage(getSettingsIntelligencePkgName());
 
-            FeatureFactory.getFactory(
-                    activity.getApplicationContext()).getSlicesFeatureProvider()
-                    .indexSliceDataAsync(activity.getApplicationContext());
-            activity.startActivityForResult(intent, 0 /* requestCode */);
+        if (!Utils.isDeviceProvisioned(activity) ||
+                !Utils.isPackageEnabled(activity, getSettingsIntelligencePkgName(activity))) {
+            final ViewGroup parent = (ViewGroup) toolbar.getParent();
+            if (parent != null) {
+                parent.setVisibility(View.GONE);
+            }
+            return;
+        }
+        // Please forgive me for what I am about to do.
+        //
+        // Need to make the navigation icon non-clickable so that the entire card is clickable
+        // and goes to the search UI. Also set the background to null so there's no ripple.
+        final View navView = toolbar.getNavigationView();
+        navView.setClickable(false);
+        navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+        navView.setBackground(null);
+
+        toolbar.setOnClickListener(tb -> {
+            final Context context = activity.getApplicationContext();
+            final Intent intent = buildSearchIntent(context, pageId);
+
+            if (activity.getPackageManager().queryIntentActivities(intent,
+                    PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
+                return;
+            }
+
+            FeatureFactory.getFactory(context).getSlicesFeatureProvider()
+                    .indexSliceDataAsync(context);
+            FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                    .action(context, SettingsEnums.ACTION_SEARCH_RESULTS);
+            activity.startActivityForResult(intent, REQUEST_CODE);
         });
     }
+
+    Intent buildSearchIntent(Context context, int pageId);
 }

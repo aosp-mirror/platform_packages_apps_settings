@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -25,12 +26,10 @@ import android.os.storage.VolumeInfo;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 
 public class StorageWizardInit extends StorageWizardBase {
-    private Button mExternal;
     private Button mInternal;
 
     private boolean mIsPermittedToAdopt;
@@ -49,13 +48,13 @@ public class StorageWizardInit extends StorageWizardBase {
 
         setHeaderText(R.string.storage_wizard_init_v2_title, getDiskShortDescription());
 
-        mExternal = requireViewById(R.id.storage_wizard_init_external);
         mInternal = requireViewById(R.id.storage_wizard_init_internal);
 
         setBackButtonText(R.string.storage_wizard_init_v2_later);
-
+        setNextButtonVisibility(View.INVISIBLE);
         if (!mDisk.isAdoptable()) {
             // If not adoptable, we only have one choice
+            mInternal.setEnabled(false);
             onNavigateExternal(null);
         } else if (!mIsPermittedToAdopt) {
             // TODO: Show a message about why this is disabled for guest and
@@ -73,7 +72,7 @@ public class StorageWizardInit extends StorageWizardBase {
         if (view != null) {
             // User made an explicit choice for external
             FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
-                    MetricsEvent.ACTION_STORAGE_INIT_EXTERNAL);
+                    SettingsEnums.ACTION_STORAGE_INIT_EXTERNAL);
         }
 
         if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
@@ -96,7 +95,7 @@ public class StorageWizardInit extends StorageWizardBase {
         if (view != null) {
             // User made an explicit choice for internal
             FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
-                    MetricsEvent.ACTION_STORAGE_INIT_INTERNAL);
+                    SettingsEnums.ACTION_STORAGE_INIT_INTERNAL);
         }
 
         StorageWizardFormatConfirm.showPrivate(this, mDisk.getId());

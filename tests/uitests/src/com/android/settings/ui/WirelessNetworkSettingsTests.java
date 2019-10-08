@@ -24,8 +24,6 @@ import android.net.wifi.WifiManager;
 import android.os.RemoteException;
 import android.platform.test.annotations.Presubmit;
 import android.provider.Settings;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.Until;
@@ -33,6 +31,9 @@ import android.system.helpers.CommandsHelper;
 import android.system.helpers.SettingsHelper;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.util.Log;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;

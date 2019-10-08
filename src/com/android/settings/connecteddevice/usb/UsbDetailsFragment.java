@@ -16,16 +16,18 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import com.google.android.collect.Lists;
 
@@ -35,6 +37,7 @@ import java.util.List;
 /**
  * Controls the USB device details and provides updates to individual controllers.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class UsbDetailsFragment extends DashboardFragment {
     private static final String TAG = UsbDetailsFragment.class.getSimpleName();
 
@@ -53,7 +56,7 @@ public class UsbDetailsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.USB_DEVICE_DETAILS;
+        return SettingsEnums.USB_DEVICE_DETAILS;
     }
 
     @Override
@@ -72,7 +75,7 @@ public class UsbDetailsFragment extends DashboardFragment {
         mControllers = createControllerList(context, mUsbBackend, this);
         mUsbReceiver = new UsbConnectionBroadcastReceiver(context, mUsbConnectionListener,
                 mUsbBackend);
-        this.getLifecycle().addObserver(mUsbReceiver);
+        this.getSettingsLifecycle().addObserver(mUsbReceiver);
 
         return new ArrayList<>(mControllers);
     }
@@ -98,11 +101,6 @@ public class UsbDetailsFragment extends DashboardFragment {
                     SearchIndexableResource res = new SearchIndexableResource(context);
                     res.xmlResId = R.xml.usb_details_fragment;
                     return Lists.newArrayList(res);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    return super.getNonIndexableKeys(context);
                 }
 
                 @Override

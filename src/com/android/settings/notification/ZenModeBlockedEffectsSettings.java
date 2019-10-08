@@ -24,21 +24,22 @@ import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_NOTIFICAT
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_PEEK;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_STATUS_BAR;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import androidx.preference.CheckBoxPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
@@ -50,7 +51,7 @@ public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implement
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
@@ -58,26 +59,26 @@ public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implement
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeVisEffectPreferenceController(context, lifecycle,
                 "zen_effect_intent", SUPPRESSED_EFFECT_FULL_SCREEN_INTENT,
-                MetricsEvent.ACTION_ZEN_BLOCK_FULL_SCREEN_INTENTS, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_FULL_SCREEN_INTENTS, null));
         controllers.add(new ZenModeVisEffectPreferenceController(context, lifecycle,
                 "zen_effect_light", SUPPRESSED_EFFECT_LIGHTS,
-                MetricsEvent.ACTION_ZEN_BLOCK_LIGHT, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_LIGHT, null));
         controllers.add(new ZenModeVisEffectPreferenceController(context, lifecycle,
                 "zen_effect_peek", SUPPRESSED_EFFECT_PEEK,
-                MetricsEvent.ACTION_ZEN_BLOCK_PEEK, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_PEEK, null));
         controllers.add(new ZenModeVisEffectPreferenceController(context, lifecycle,
                 "zen_effect_status", SUPPRESSED_EFFECT_STATUS_BAR,
-                MetricsEvent.ACTION_ZEN_BLOCK_STATUS,
+                SettingsEnums.ACTION_ZEN_BLOCK_STATUS,
                 new int[] {SUPPRESSED_EFFECT_NOTIFICATION_LIST}));
         controllers.add(new ZenModeVisEffectPreferenceController(context, lifecycle,
                 "zen_effect_badge", SUPPRESSED_EFFECT_BADGE,
-                MetricsEvent.ACTION_ZEN_BLOCK_BADGE, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_BADGE, null));
         controllers.add(new ZenModeVisEffectPreferenceController(context, lifecycle,
                 "zen_effect_ambient", SUPPRESSED_EFFECT_AMBIENT,
-                MetricsEvent.ACTION_ZEN_BLOCK_AMBIENT, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_AMBIENT, null));
         controllers.add(new ZenModeVisEffectPreferenceController(context, lifecycle,
                 "zen_effect_list", SUPPRESSED_EFFECT_NOTIFICATION_LIST,
-                MetricsEvent.ACTION_ZEN_BLOCK_NOTIFICATION_LIST, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_NOTIFICATION_LIST, null));
         return controllers;
     }
 
@@ -88,7 +89,7 @@ public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implement
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ZEN_WHAT_TO_BLOCK;
+        return SettingsEnums.ZEN_WHAT_TO_BLOCK;
     }
 
     /**
@@ -105,12 +106,6 @@ public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implement
                     sir.xmlResId = R.xml.zen_mode_block_settings;
                     result.add(sir);
                     return result;
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
                 }
 
             @Override

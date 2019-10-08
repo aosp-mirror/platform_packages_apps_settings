@@ -20,22 +20,23 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.LocaleList;
-import androidx.core.view.MotionEventCompat;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+
+import androidx.core.view.MotionEventCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
-
-import com.android.settings.shortcut.CreateShortcut;
 import com.android.settings.R;
+import com.android.settings.shortcut.ShortcutsUpdateTask;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -159,10 +160,13 @@ class LocaleDragAndDropAdapter
         dragCell.setShowCheckbox(mRemoveMode);
         dragCell.setShowMiniLabel(!mRemoveMode);
         dragCell.setShowHandle(!mRemoveMode && mDragEnabled);
-        dragCell.setChecked(mRemoveMode ? feedItem.getChecked() : false);
         dragCell.setTag(feedItem);
-        dragCell.getCheckbox()
-                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        CheckBox checkbox = dragCell.getCheckbox();
+        // clear listener before setChecked() in case another item already bind to
+        // current ViewHolder and checked event is triggered on stale listener mistakenly.
+        checkbox.setOnCheckedChangeListener(null);
+        checkbox.setChecked(mRemoveMode ? feedItem.getChecked() : false);
+        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         LocaleStore.LocaleInfo feedItem =
@@ -290,7 +294,7 @@ class LocaleDragAndDropAdapter
 
                 LocalePicker.updateLocales(mLocalesToSetNext);
                 mLocalesSetLast = mLocalesToSetNext;
-                new CreateShortcut.ShortcutsUpdateTask(mContext).execute();
+                new ShortcutsUpdateTask(mContext).execute();
 
                 mLocalesToSetNext = null;
 

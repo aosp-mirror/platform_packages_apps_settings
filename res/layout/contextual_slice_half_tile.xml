@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/ContextualCardStyle">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/dismissal_swipe_background"/>
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingEnd="@dimen/contextual_card_padding_end"
+            android:paddingTop="@dimen/contextual_half_card_padding_top"
+            android:paddingBottom="@dimen/contextual_half_card_padding_bottom"
+            android:background="@drawable/contextual_card_background"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@android:id/icon"
+                android:layout_width="@dimen/contextual_card_icon_size"
+                android:layout_height="@dimen/contextual_card_icon_size"
+                android:layout_marginStart="@dimen/contextual_card_icon_padding_start"/>
+
+            <TextView
+                android:id="@android:id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:minLines="1"
+                android:ellipsize="end"
+                android:layout_marginStart="@dimen/contextual_card_text_padding_start"
+                android:layout_marginTop="@dimen/contextual_half_card_title_margin_top"
+                android:textAppearance="@style/TextAppearance.ConditionCardTitle"/>
+
+        </LinearLayout>
+
+        <!--dismissal view-->
+        <include layout="@layout/contextual_card_dismissal_view"/>
+
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>

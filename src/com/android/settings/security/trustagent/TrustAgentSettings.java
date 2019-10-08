@@ -16,66 +16,26 @@
 
 package com.android.settings.security.trustagent;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.UserHandle;
-import android.service.trust.TrustAgentService;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import android.util.ArrayMap;
-import android.util.ArraySet;
+import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TrustAgentSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
-    private static final String SERVICE_INTERFACE = TrustAgentService.SERVICE_INTERFACE;
-
-    private ArrayMap<ComponentName, AgentInfo> mAvailableAgents;
-    private final ArraySet<ComponentName> mActiveAgents = new ArraySet<ComponentName>();
-    private LockPatternUtils mLockPatternUtils;
-    private DevicePolicyManager mDpm;
-    private TrustAgentManager mTrustAgentManager;
-
-    public static final class AgentInfo {
-        CharSequence label;
-        ComponentName component; // service that implements ITrustAgent
-        SwitchPreference preference;
-        public Drawable icon;
-
-        @Override
-        public boolean equals(Object other) {
-            if (other instanceof AgentInfo) {
-                return component.equals(((AgentInfo)other).component);
-            }
-            return true;
-        }
-
-        public int compareTo(AgentInfo other) {
-            return component.compareTo(other.component);
-        }
-    }
+@SearchIndexable
+public class TrustAgentSettings extends DashboardFragment {
+    private static final String TAG = "TrustAgentSettings";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TRUST_AGENT;
+        return SettingsEnums.TRUST_AGENT;
     }
 
     @Override
@@ -84,122 +44,25 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        mDpm = getActivity().getSystemService(DevicePolicyManager.class);
-        mTrustAgentManager =
-            FeatureFactory.getFactory(getActivity()).getSecurityFeatureProvider()
-                .getTrustAgentManager();
-
-        addPreferencesFromResource(R.xml.trust_agent_settings);
-    }
-
-    public void onResume() {
-        super.onResume();
-        removePreference("dummy_preference");
-        updateAgents();
-    }
-
-    private void updateAgents() {
-        final Context context = getActivity();
-        if (mAvailableAgents == null) {
-            mAvailableAgents = findAvailableTrustAgents();
-        }
-        if (mLockPatternUtils == null) {
-            mLockPatternUtils = new LockPatternUtils(getActivity());
-        }
-        loadActiveAgents();
-        PreferenceGroup category =
-                (PreferenceGroup) getPreferenceScreen().findPreference("trust_agents");
-        category.removeAll();
-
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(context,
-                DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS, UserHandle.myUserId());
-
-        final int count = mAvailableAgents.size();
-        for (int i = 0; i < count; i++) {
-            AgentInfo agent = mAvailableAgents.valueAt(i);
-            final RestrictedSwitchPreference preference =
-                    new RestrictedSwitchPreference(getPrefContext());
-            preference.useAdminDisabledSummary(true);
-            agent.preference = preference;
-            preference.setPersistent(false);
-            preference.setTitle(agent.label);
-            preference.setIcon(agent.icon);
-            preference.setPersistent(false);
-            preference.setOnPreferenceChangeListener(this);
-            preference.setChecked(mActiveAgents.contains(agent.component));
-
-            if (admin != null
-                    && mDpm.getTrustAgentConfiguration(null, agent.component) == null) {
-                preference.setChecked(false);
-                preference.setDisabledByAdmin(admin);
-            }
-
-            category.addPreference(agent.preference);
-        }
-    }
-
-    private void loadActiveAgents() {
-        List<ComponentName> activeTrustAgents = mLockPatternUtils.getEnabledTrustAgents(
-                UserHandle.myUserId());
-        if (activeTrustAgents != null) {
-            mActiveAgents.addAll(activeTrustAgents);
-        }
-    }
-
-    private void saveActiveAgents() {
-        mLockPatternUtils.setEnabledTrustAgents(mActiveAgents,
-                UserHandle.myUserId());
-    }
-
-    private ArrayMap<ComponentName, AgentInfo> findAvailableTrustAgents() {
-        PackageManager pm = getActivity().getPackageManager();
-        Intent trustAgentIntent = new Intent(SERVICE_INTERFACE);
-        List<ResolveInfo> resolveInfos = pm.queryIntentServices(trustAgentIntent,
-                PackageManager.GET_META_DATA);
-
-        ArrayMap<ComponentName, AgentInfo> agents = new ArrayMap<ComponentName, AgentInfo>();
-        final int count = resolveInfos.size();
-        agents.ensureCapacity(count);
-        for (int i = 0; i < count; i++ ) {
-            ResolveInfo resolveInfo = resolveInfos.get(i);
-            if (resolveInfo.serviceInfo == null) {
-                continue;
-            }
-            if (!mTrustAgentManager.shouldProvideTrust(resolveInfo, pm)) {
-                continue;
-            }
-            ComponentName name = mTrustAgentManager.getComponentName(resolveInfo);
-            AgentInfo agentInfo = new AgentInfo();
-            agentInfo.label = resolveInfo.loadLabel(pm);
-            agentInfo.icon = resolveInfo.loadIcon(pm);
-            agentInfo.component = name;
-            agents.put(name, agentInfo);
-        }
-        return agents;
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference instanceof SwitchPreference) {
-            final int count = mAvailableAgents.size();
-            for (int i = 0; i < count; i++) {
-                AgentInfo agent = mAvailableAgents.valueAt(i);
-                if (agent.preference == preference) {
-                    if ((Boolean) newValue) {
-                        if (!mActiveAgents.contains(agent.component)) {
-                            mActiveAgents.add(agent.component);
-                        }
-                    } else {
-                        mActiveAgents.remove(agent.component);
-                    }
-                    saveActiveAgents();
-                    return true;
-                }
-            }
-        }
-        return false;
+    protected int getPreferenceScreenResId() {
+        return R.xml.trust_agent_settings;
     }
 
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final List<SearchIndexableResource> result = new ArrayList<>();
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.trust_agent_settings;
+                    result.add(sir);
+                    return result;
+                }
+            };
 }

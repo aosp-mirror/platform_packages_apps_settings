@@ -17,6 +17,7 @@
 package com.android.settings.backup;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
@@ -33,26 +34,26 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.os.UserHandle;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowUserManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = BackupSettingsHelperTest.ShadowBackupManagerStub.class)
 public class BackupSettingsHelperTest {
-
-    private static final String DEFAULT_SETTINGS_CLASSNAME =
-            "com.android.settings.Settings$PrivacySettingsActivity";
 
     private static final int DEFAULT_SUMMARY_RESOURCE =
             R.string.backup_configure_account_default_summary;
@@ -71,12 +72,46 @@ public class BackupSettingsHelperTest {
     @Mock
     private static IBackupManager mBackupManager;
 
+    private ShadowUserManager mUserManager;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         when(mBackupManager.getCurrentTransport()).thenReturn("test_transport");
         mBackupSettingsHelper = new BackupSettingsHelper(mContext);
+        mUserManager = Shadow.extract(mContext.getSystemService(Context.USER_SERVICE));
+    }
+
+    @Test
+    public void testGetSummary_backupEnabledOnlyOneProfile_showsOn() throws Exception {
+        mUserManager.addUserProfile(new UserHandle(0));
+        when(mBackupManager.isBackupEnabled()).thenReturn(true);
+
+        String backupSummary = mBackupSettingsHelper.getSummary();
+
+        assertThat(backupSummary).isEqualTo(mContext.getString(R.string.backup_summary_state_on));
+    }
+
+    @Test
+    public void testGetSummary_backupDisabledOnlyOneProfile_showsOff() throws Exception {
+        mUserManager.addUserProfile(new UserHandle(0));
+        when(mBackupManager.isBackupEnabled()).thenReturn(false);
+
+        String backupSummary = mBackupSettingsHelper.getSummary();
+
+        assertThat(backupSummary).isEqualTo(mContext.getString(R.string.backup_summary_state_off));
+    }
+
+    @Test
+    public void testGetSummary_TwoProfiles_returnsNull() throws Exception {
+        mUserManager.addUserProfile(new UserHandle(0));
+        mUserManager.addUserProfile(new UserHandle(10));
+        when(mBackupManager.isBackupEnabled()).thenReturn(true);
+
+        String backupSummary = mBackupSettingsHelper.getSummary();
+
+        assertThat(backupSummary).isNull();
     }
 
     @Test
@@ -221,20 +256,21 @@ public class BackupSettingsHelperTest {
 
     @Test
     public void testGetLabelBackupTransport() throws Exception {
-        String label = "test_label";
+        CharSequence label = "test_label";
 
-        when(mBackupManager.getDataManagementLabel(anyString())).thenReturn(label);
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString())).thenReturn(label);
 
-        String backupLabel = mBackupSettingsHelper.getLabelFromBackupTransport();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelFromBackupTransport();
 
         assertThat(backupLabel).isEqualTo(label);
     }
 
     @Test
     public void testGetLabelBackupTransport_RemoteException() throws Exception {
-        when(mBackupManager.getDataManagementLabel(anyString())).thenThrow(new RemoteException());
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString()))
+                .thenThrow(new RemoteException());
 
-        String backupLabel = mBackupSettingsHelper.getLabelFromBackupTransport();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelFromBackupTransport();
 
         assertThat(backupLabel).isNull();
     }
@@ -255,42 +291,32 @@ public class BackupSettingsHelperTest {
     }
 
     @Test
-    public void testGetIntentForBackupSettings_WithoutIntentFromTransport() throws Exception {
-        when(mBackupManager.getDataManagementIntent(anyString())).thenReturn(null);
-
-        Intent backupIntent = mBackupSettingsHelper.getIntentForBackupSettings();
-
-        assertThat(backupIntent.getComponent().getClassName())
-            .isEqualTo(DEFAULT_SETTINGS_CLASSNAME);
-    }
-
-    @Test
     public void testGetLabelForBackupSettings_WithLabelFromTransport() throws Exception {
-        String label = "test_label";
+        CharSequence label = "test_label";
 
-        when(mBackupManager.getDataManagementLabel(anyString())).thenReturn(label);
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString())).thenReturn(label);
 
-        String backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
 
         assertThat(backupLabel).isEqualTo(label);
     }
 
     @Test
     public void testGetLabelForBackupSettings_WithEmptyLabelFromTransport() throws Exception {
-        String label = "";
+        CharSequence label = "";
 
-        when(mBackupManager.getDataManagementLabel(anyString())).thenReturn(label);
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString())).thenReturn(label);
 
-        String backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
 
         assertThat(backupLabel).isEqualTo(mContext.getString(DEFAULT_LABEL_RESOURCE));
     }
 
     @Test
     public void testGetLabelForBackupSettings_WithoutLabelFromTransport() throws Exception {
-        when(mBackupManager.getDataManagementLabel(anyString())).thenReturn(null);
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString())).thenReturn(null);
 
-        String backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
 
         assertThat(backupLabel).isEqualTo(mContext.getString(DEFAULT_LABEL_RESOURCE));
     }
@@ -316,7 +342,7 @@ public class BackupSettingsHelperTest {
     }
 
     @Test
-    public void testIsBackupProvidedByManufacturer_WithIntent() throws Exception {
+    public void testIsBackupProvidedByManufacturer_WithIntent() {
         String intent = "test_intent";
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
@@ -331,7 +357,7 @@ public class BackupSettingsHelperTest {
     }
 
     @Test
-    public void testIsBackupProvidedByManufacturer_WithoutIntent() throws Exception {
+    public void testIsBackupProvidedByManufacturer_WithoutIntent() {
         String intent = "";
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
@@ -346,7 +372,7 @@ public class BackupSettingsHelperTest {
     }
 
     @Test
-    public void testGetLabelProvidedByManufacturer() throws Exception {
+    public void testGetLabelProvidedByManufacturer() {
         String label = "test_label";
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
@@ -361,7 +387,7 @@ public class BackupSettingsHelperTest {
     }
 
     @Test
-    public void testGetIntentProvidedByManufacturer() throws Exception {
+    public void testGetIntentProvidedByManufacturer() {
         String intent = "test_intent";
 
         when(mContext.getApplicationContext()).thenReturn(mContext);

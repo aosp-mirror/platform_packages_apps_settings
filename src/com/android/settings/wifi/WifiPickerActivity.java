@@ -16,12 +16,14 @@
 package com.android.settings.wifi;
 
 import android.content.Intent;
-import androidx.preference.PreferenceFragment;
+
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.settings.ButtonBarHandler;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
+import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
 
 public class WifiPickerActivity extends SettingsActivity implements ButtonBarHandler {
 
@@ -45,7 +47,7 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
         return false;
     }
 
-    /* package */ Class<? extends PreferenceFragment> getWifiSettingsClass() {
+    /* package */ Class<? extends PreferenceFragmentCompat> getWifiSettingsClass() {
         return WifiSettings.class;
     }
 }

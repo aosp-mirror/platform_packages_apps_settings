@@ -17,11 +17,9 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
-
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
 
@@ -35,7 +33,7 @@ public abstract class InstalledAppCounter extends AppCounter {
     private final int mInstallReason;
 
     public InstalledAppCounter(Context context, int installReason,
-            PackageManagerWrapper packageManager) {
+            PackageManager packageManager) {
         super(context, packageManager);
         mInstallReason = installReason;
     }
@@ -45,7 +43,7 @@ public abstract class InstalledAppCounter extends AppCounter {
         return includeInCount(mInstallReason, mPm, info);
     }
 
-    public static boolean includeInCount(int installReason, PackageManagerWrapper pm,
+    public static boolean includeInCount(int installReason, PackageManager pm,
             ApplicationInfo info) {
         final int userId = UserHandle.getUserId(info.uid);
         if (installReason != IGNORE_INSTALL_REASON

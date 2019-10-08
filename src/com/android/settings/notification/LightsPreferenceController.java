@@ -16,17 +16,14 @@
 
 package com.android.settings.notification;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class LightsPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
@@ -59,7 +56,7 @@ public class LightsPreferenceController extends NotificationPreferenceController
         if (mChannel != null) {
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setDisabledByAdmin(mAdmin);
-            pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
+            pref.setEnabled(!pref.isDisabledByAdmin());
             pref.setChecked(mChannel.shouldShowLights());
         }
     }

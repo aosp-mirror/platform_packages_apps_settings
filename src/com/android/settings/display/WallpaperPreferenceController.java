@@ -13,61 +13,77 @@
  */
 package com.android.settings.display;
 
+import static android.os.UserManager.DISALLOW_SET_WALLPAPER;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
-import static android.os.UserManager.DISALLOW_SET_WALLPAPER;
+import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedPreference;
 
 import java.util.List;
 
-public class WallpaperPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
-
+public class WallpaperPreferenceController extends BasePreferenceController {
     private static final String TAG = "WallpaperPrefController";
-
-    public static final String KEY_WALLPAPER = "wallpaper";
 
     private final String mWallpaperPackage;
     private final String mWallpaperClass;
+    private final String mStylesAndWallpaperClass;
 
-    public WallpaperPreferenceController(Context context) {
-        super(context);
+    public WallpaperPreferenceController(Context context, String key) {
+        super(context, key);
         mWallpaperPackage = mContext.getString(R.string.config_wallpaper_picker_package);
         mWallpaperClass = mContext.getString(R.string.config_wallpaper_picker_class);
+        mStylesAndWallpaperClass =
+                mContext.getString(R.string.config_styles_and_wallpaper_picker_class);
     }
 
     @Override
-    public boolean isAvailable() {
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        preference.setTitle(getTitle());
+    }
+
+    public String getTitle() {
+        return mContext.getString(areStylesAvailable()
+                ? R.string.style_and_wallpaper_settings_title : R.string.wallpaper_settings_title);
+    }
+
+    public ComponentName getComponentName() {
+        return new ComponentName(mWallpaperPackage,
+                areStylesAvailable() ? mStylesAndWallpaperClass : mWallpaperClass);
+    }
+
+    public String getKeywords() {
+        StringBuilder sb = new StringBuilder(mContext.getString(R.string.keywords_wallpaper));
+        if (areStylesAvailable()) {
+            // TODO(b/130759285): Create a new string keywords_styles_and_wallpaper
+            sb.append(", ").append(mContext.getString(R.string.theme_customization_category))
+                    .append(", ").append(mContext.getString(R.string.keywords_dark_ui_mode));
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
         if (TextUtils.isEmpty(mWallpaperPackage) || TextUtils.isEmpty(mWallpaperClass)) {
             Log.e(TAG, "No Wallpaper picker specified!");
-            return false;
+            return UNSUPPORTED_ON_DEVICE;
         }
-        final ComponentName componentName =
-                new ComponentName(mWallpaperPackage, mWallpaperClass);
-        final PackageManager pm = mContext.getPackageManager();
-        final Intent intent = new Intent();
-        intent.setComponent(componentName);
-        final List<ResolveInfo> resolveInfos =
-                pm.queryIntentActivities(intent, 0 /* flags */);
-        return resolveInfos != null && resolveInfos.size() != 0;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_WALLPAPER;
+        return canResolveWallpaperComponent(mWallpaperClass)
+                ? AVAILABLE_UNSEARCHABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -75,11 +91,34 @@ public class WallpaperPreferenceController extends AbstractPreferenceController 
         disablePreferenceIfManaged((RestrictedPreference) preference);
     }
 
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (getPreferenceKey().equals(preference.getKey())) {
+            preference.getContext().startActivity(new Intent().setComponent(getComponentName()));
+            return true;
+        }
+        return super.handlePreferenceTreeClick(preference);
+    }
+
+    /** Returns whether Styles & Wallpaper is enabled and available. */
+    public boolean areStylesAvailable() {
+        return !TextUtils.isEmpty(mStylesAndWallpaperClass)
+                && canResolveWallpaperComponent(mStylesAndWallpaperClass);
+    }
+
+    private boolean canResolveWallpaperComponent(String className) {
+        final ComponentName componentName = new ComponentName(mWallpaperPackage, className);
+        final PackageManager pm = mContext.getPackageManager();
+        final Intent intent = new Intent().setComponent(componentName);
+        final List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0 /* flags */);
+        return resolveInfos != null && !resolveInfos.isEmpty();
+    }
+
     private void disablePreferenceIfManaged(RestrictedPreference pref) {
         final String restriction = DISALLOW_SET_WALLPAPER;
         if (pref != null) {
             pref.setDisabledByAdmin(null);
-            if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
+            if (RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                     restriction, UserHandle.myUserId())) {
                 pref.setEnabled(false);
             } else {

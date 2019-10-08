@@ -17,35 +17,33 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AdbPreferenceControllerTest {
 
     @Mock
     private SwitchPreference mPreference;
     @Mock
     private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private UserManager mUserManager;
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
 
@@ -66,7 +64,7 @@ public class AdbPreferenceControllerTest {
     @Test
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ADB_ENABLED, -1);
 
         assertThat(mode).isEqualTo(AdbPreferenceController.ADB_SETTING_OFF);
@@ -77,7 +75,7 @@ public class AdbPreferenceControllerTest {
     @Test
     public void onAdbDialogConfirmed_shouldEnableAdbSetting() {
         mController.onAdbDialogConfirmed();
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ADB_ENABLED, -1);
 
         assertThat(mode).isEqualTo(AdbPreferenceController.ADB_SETTING_ON);
@@ -85,7 +83,7 @@ public class AdbPreferenceControllerTest {
 
     @Test
     public void onAdbDialogDismissed_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.Global.ADB_ENABLED,
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.ADB_ENABLED,
                 AdbPreferenceController.ADB_SETTING_OFF);
         mController.onAdbDialogDismissed();
 

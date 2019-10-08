@@ -15,7 +15,11 @@
  */
 package com.android.settings.dashboard;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.DASHBOARD_CONTAINER;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -24,57 +28,71 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ComponentName;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Icon;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.drawer.TileUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DashboardFragmentTest {
 
     @Mock
     private FakeFeatureFactory mFakeFeatureFactory;
+    private ActivityInfo mActivityInfo;
     private DashboardCategory mDashboardCategory;
     private Context mContext;
     private TestFragment mTestFragment;
+    private List<AbstractPreferenceController> mControllers;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = "pkg";
+        mActivityInfo.name = "class";
+        mActivityInfo.metaData = new Bundle();
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key");
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mDashboardCategory = new DashboardCategory();
-        mDashboardCategory.addTile(new Tile());
+        mDashboardCategory = new DashboardCategory("key");
+        mDashboardCategory.addTile(new Tile(mActivityInfo, mDashboardCategory.key));
         mTestFragment = new TestFragment(RuntimeEnvironment.application);
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
                 .thenReturn(mDashboardCategory);
         mTestFragment.onAttach(RuntimeEnvironment.application);
         when(mContext.getPackageName()).thenReturn("TestPackage");
+        mControllers = new ArrayList<>();
     }
 
     @Test
@@ -130,6 +148,20 @@ public class DashboardFragmentTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void displayTilesAsPreference_shouldNotAddSuppressedTiles() {
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getTilesForCategory(nullable(String.class)))
+                .thenReturn(mDashboardCategory);
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getDashboardKeyForTile(nullable(Tile.class)))
+                .thenReturn("test_key");
+        mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
+
+        verify(mTestFragment.mScreen, never()).addPreference(nullable(Preference.class));
+    }
+
+    @Test
     public void onAttach_shouldCreatePlaceholderPreferenceController() {
         final AbstractPreferenceController controller = mTestFragment.use(
                 DashboardTilePlaceholderPreferenceController.class);
@@ -175,39 +207,47 @@ public class DashboardFragmentTest {
     }
 
     @Test
-    public void tintTileIcon_hasMetadata_shouldReturnIconTintableMetadata() {
-        final Tile tile = new Tile();
-        tile.icon = mock(Icon.class);
-        final Bundle metaData = new Bundle();
-        tile.metaData = metaData;
+    public void onExpandButtonClick_shouldLogAdvancedButtonExpand() {
+        final MetricsFeatureProvider metricsFeatureProvider
+                = mFakeFeatureFactory.getMetricsFeatureProvider();
+        mTestFragment.onExpandButtonClick();
 
-        metaData.putBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE, false);
-        assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
-
-        metaData.putBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE, true);
-        assertThat(mTestFragment.tintTileIcon(tile)).isTrue();
+        verify(metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsEvent.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND,
+                DASHBOARD_CONTAINER, null, 0);
     }
 
     @Test
-    public void tintTileIcon_noIcon_shouldReturnFalse() {
-        final Tile tile = new Tile();
-        tile.metaData = new Bundle();
+    public void updatePreferenceVisibility_prefKeyNull_shouldNotCrash() {
+        final Map<Class, List<AbstractPreferenceController>> prefControllers = new HashMap<>();
+        final List<AbstractPreferenceController> controllerList = new ArrayList<>();
+        controllerList.add(new TestPreferenceController(mContext));
+        prefControllers.put(TestPreferenceController.class, controllerList);
+        mTestFragment.mBlockerController = new UiBlockerController(Arrays.asList("pref_key"));
 
-        assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
+        // Should not crash
+        mTestFragment.updatePreferenceVisibility(prefControllers);
     }
 
     @Test
-    public void tintTileIcon_noMetadata_shouldReturnPackageNameCheck() {
-        final Tile tile = new Tile();
-        tile.icon = mock(Icon.class);
-        final Intent intent = new Intent();
-        tile.intent = intent;
-        intent.setComponent(
-            new ComponentName(RuntimeEnvironment.application.getPackageName(), "TestClass"));
-        assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
+    public void checkUiBlocker_noUiBlocker_controllerIsNull() {
+        mTestFragment.mBlockerController = null;
+        mControllers.add(new TestPreferenceController(mContext));
 
-        intent.setComponent(new ComponentName("OtherPackage", "TestClass"));
-        assertThat(mTestFragment.tintTileIcon(tile)).isTrue();
+        mTestFragment.checkUiBlocker(mControllers);
+
+        assertThat(mTestFragment.mBlockerController).isNull();
+    }
+
+    @Test
+    public void checkUiBlocker_hasUiBlocker_controllerNotNull() {
+        mTestFragment.mBlockerController = null;
+        mControllers.add(new TestPreferenceController(mContext));
+        mControllers.add(new BlockingSlicePrefController(mContext, "pref_key"));
+
+        mTestFragment.checkUiBlocker(mControllers);
+
+        assertThat(mTestFragment.mBlockerController).isNotNull();
     }
 
     public static class TestPreferenceController extends AbstractPreferenceController
@@ -263,7 +303,7 @@ public class DashboardFragmentTest {
 
         @Override
         public int getMetricsCategory() {
-            return 0;
+            return DASHBOARD_CONTAINER;
         }
 
         @Override

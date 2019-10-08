@@ -17,8 +17,8 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.anyInt;
+
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -26,37 +26,33 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.provider.Settings.Global;
-import android.view.View;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.android.settings.core.OnActivityResultListener;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+import java.util.ArrayList;
+import java.util.List;
+
+@RunWith(RobolectricTestRunner.class)
 public class SettingsActivityTest {
 
     @Mock
     private FragmentManager mFragmentManager;
     @Mock
     private ActivityManager.TaskDescription mTaskDescription;
-    @Mock
-    private Bitmap mBitmap;
     private SettingsActivity mActivity;
     private Context mContext;
 
@@ -66,52 +62,48 @@ public class SettingsActivityTest {
 
         mContext = RuntimeEnvironment.application;
         mActivity = spy(new SettingsActivity());
-        doReturn(mBitmap).when(mActivity).getBitmapFromXmlResource(anyInt());
-    }
-
-    @Test
-    @Config(shadows = {
-        SettingsShadowResourcesImpl.class,
-        SettingsShadowResources.SettingsShadowTheme.class,
-    })
-    public void onCreate_deviceNotProvisioned_shouldDisableSearch() {
-        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
-        final Intent intent = new Intent(mContext, Settings.class);
-        final SettingsActivity activity =
-            Robolectric.buildActivity(SettingsActivity.class, intent).create(Bundle.EMPTY).get();
-
-        assertThat(activity.findViewById(R.id.search_bar).getVisibility())
-            .isEqualTo(View.INVISIBLE);
-    }
-
-    @Test
-    @Config(shadows = {
-        SettingsShadowResourcesImpl.class,
-        SettingsShadowResources.SettingsShadowTheme.class,
-    })
-    public void onCreate_deviceProvisioned_shouldEnableSearch() {
-        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
-        final Intent intent = new Intent(mContext, Settings.class);
-        final SettingsActivity activity =
-            Robolectric.buildActivity(SettingsActivity.class, intent).create(Bundle.EMPTY).get();
-
-        assertThat(activity.findViewById(R.id.search_bar).getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
     public void launchSettingFragment_nullExtraShowFragment_shouldNotCrash() {
-        when(mActivity.getFragmentManager()).thenReturn(mFragmentManager);
+        when(mActivity.getSupportFragmentManager()).thenReturn(mFragmentManager);
+        doReturn(mContext.getContentResolver()).when(mActivity).getContentResolver();
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
 
         doReturn(RuntimeEnvironment.application.getClassLoader()).when(mActivity).getClassLoader();
 
-        mActivity.launchSettingFragment(null, true, mock(Intent.class));
+        mActivity.launchSettingFragment(null, mock(Intent.class));
     }
 
     @Test
-    public void testSetTaskDescription_IconChanged() {
+    public void setTaskDescription_shouldUpdateIcon() {
         mActivity.setTaskDescription(mTaskDescription);
 
-        verify(mTaskDescription).setIcon(nullable(Bitmap.class));
+        verify(mTaskDescription).setIcon(anyInt());
+    }
+
+    @Test
+    public void onActivityResult_shouldDelegateToListener() {
+        final List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new Fragment());
+        fragments.add(new ListenerFragment());
+
+        final FragmentManager manager = mock(FragmentManager.class);
+        when(mActivity.getSupportFragmentManager()).thenReturn(manager);
+        when(manager.getFragments()).thenReturn(fragments);
+
+        mActivity.onActivityResult(0, 0, new Intent());
+
+        assertThat(((ListenerFragment) fragments.get(1)).mOnActivityResultCalled).isTrue();
+    }
+
+    public static class ListenerFragment extends Fragment implements OnActivityResultListener {
+
+        private boolean mOnActivityResultCalled;
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            mOnActivityResultCalled = true;
+        }
     }
 }

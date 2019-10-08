@@ -17,24 +17,27 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
+import android.util.SparseArray;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.util.SparseArray;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.deviceinfo.StorageProfileFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.drawable.UserIconDrawable;
 
@@ -44,9 +47,10 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UserProfileControllerTest {
 
     private static final String TEST_NAME = "Fred";
@@ -61,7 +65,7 @@ public class UserProfileControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(Robolectric.setupActivity(Activity.class));
         mPrimaryProfile = new UserInfo();
         mController = new UserProfileController(mContext, mPrimaryProfile, 0);
         when(mScreen.getContext()).thenReturn(mContext);
@@ -71,7 +75,7 @@ public class UserProfileControllerTest {
     }
 
     @Test
-    public void controllerAddsPrimaryProfilePreference() throws Exception {
+    public void controllerAddsPrimaryProfilePreference() {
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mScreen).addPreference(argumentCaptor.capture());
         final Preference preference = argumentCaptor.getValue();
@@ -81,7 +85,7 @@ public class UserProfileControllerTest {
     }
 
     @Test
-    public void tappingProfilePreferenceSendsToStorageProfileFragment() throws Exception {
+    public void tappingProfilePreferenceSendsToStorageProfileFragment() {
 
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mScreen).addPreference(argumentCaptor.capture());
@@ -97,7 +101,7 @@ public class UserProfileControllerTest {
     }
 
     @Test
-    public void acceptingResultUpdatesPreferenceSize() throws Exception {
+    public void acceptingResultUpdatesPreferenceSize() {
         final SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
         final StorageAsyncLoader.AppsStorageResult userResult =
                 new StorageAsyncLoader.AppsStorageResult();
@@ -118,7 +122,7 @@ public class UserProfileControllerTest {
     }
 
     @Test
-    public void iconCallbackChangesPreferenceIcon() throws Exception {
+    public void iconCallbackChangesPreferenceIcon() {
         final SparseArray<Drawable> icons = new SparseArray<>();
         final UserIconDrawable drawable = mock(UserIconDrawable.class);
         when(drawable.mutate()).thenReturn(drawable);

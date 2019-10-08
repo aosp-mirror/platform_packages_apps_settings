@@ -15,33 +15,36 @@
  */
 package com.android.settings.bluetooth;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class SavedBluetoothDeviceUpdaterTest {
+
+    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -51,10 +54,6 @@ public class SavedBluetoothDeviceUpdaterTest {
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
     private BluetoothDevice mBluetoothDevice;
-    @Mock
-    private LocalBluetoothManager mLocalManager;
-    @Mock
-    private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
 
     private Context mContext;
     private SavedBluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -67,10 +66,11 @@ public class SavedBluetoothDeviceUpdaterTest {
         mContext = RuntimeEnvironment.application;
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
-        when(mLocalManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
+        when(mBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
 
-        mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mDashboardFragment,
-                mDevicePreferenceCallback, mLocalManager));
+        mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mContext, mDashboardFragment,
+                mDevicePreferenceCallback));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
@@ -99,6 +99,8 @@ public class SavedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_deviceConnected_removePreference() {
+        when(mBluetoothDevice.isConnected()).thenReturn(true);
+
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.STATE_CONNECTED, BluetoothProfile.A2DP);
 
@@ -107,6 +109,8 @@ public class SavedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_deviceDisconnected_addPreference() {
+        when(mBluetoothDevice.isConnected()).thenReturn(false);
+
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.STATE_DISCONNECTED, BluetoothProfile.A2DP);
 

@@ -27,16 +27,16 @@ import android.os.Message;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
+import android.text.format.DateUtils;
+import android.util.ArrayMap;
+import android.util.Log;
+import android.util.SparseArray;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
-import android.text.format.DateUtils;
-import android.util.ArrayMap;
-import android.util.FeatureFlagUtils;
-import android.util.Log;
-import android.util.SparseArray;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -44,10 +44,9 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.PowerProfile;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -65,7 +64,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnDestroy {
     @VisibleForTesting
     static final boolean USE_FAKE_DATA = false;
-    private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
+    private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 20;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final int STATS_TYPE = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -80,7 +79,6 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     private SettingsActivity mActivity;
     private InstrumentedPreferenceFragment mFragment;
     private Context mPrefContext;
-    SparseArray<List<Anomaly>> mAnomalySparseArray;
 
     private Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -145,7 +143,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPrefContext = screen.getContext();
-        mAppListGroup = (PreferenceGroup) screen.findPreference(mPreferenceKey);
+        mAppListGroup = screen.findPreference(mPreferenceKey);
     }
 
     @Override
@@ -163,28 +161,11 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         if (preference instanceof PowerGaugePreference) {
             PowerGaugePreference pgp = (PowerGaugePreference) preference;
             BatteryEntry entry = pgp.getInfo();
-            AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity,
-                    mFragment, mBatteryStatsHelper, STATS_TYPE, entry, pgp.getPercent(),
-                    mAnomalySparseArray != null ? mAnomalySparseArray.get(entry.sipper.getUid())
-                            : null);
+            AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils,
+                    mFragment, mBatteryStatsHelper, STATS_TYPE, entry, pgp.getPercent());
             return true;
         }
         return false;
-    }
-
-    public void refreshAnomalyIcon(final SparseArray<List<Anomaly>> anomalySparseArray) {
-        if (!isAvailable()) {
-            return;
-        }
-        mAnomalySparseArray = anomalySparseArray;
-        for (int i = 0, size = anomalySparseArray.size(); i < size; i++) {
-            final String key = extractKeyFromUid(anomalySparseArray.keyAt(i));
-            final PowerGaugePreference pref = (PowerGaugePreference) mAppListGroup.findPreference(
-                    key);
-            if (pref != null) {
-                pref.shouldShowAnomalyIcon(true);
-            }
-        }
     }
 
     public void refreshAppListGroup(BatteryStatsHelper statsHelper, boolean showAllApps) {
@@ -371,9 +352,10 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
     @VisibleForTesting
     boolean shouldHideSipper(BatterySipper sipper) {
-        // Don't show over-counted and unaccounted in any condition
+        // Don't show over-counted, unaccounted and hidden system module in any condition
         return sipper.drainType == BatterySipper.DrainType.OVERCOUNTED
-                || sipper.drainType == BatterySipper.DrainType.UNACCOUNTED;
+                || sipper.drainType == BatterySipper.DrainType.UNACCOUNTED
+                || mBatteryUtils.isHiddenSystemModule(sipper);
     }
 
     @VisibleForTesting

@@ -18,25 +18,17 @@ package com.android.settings.testutils;
 
 import static android.app.slice.Slice.HINT_TITLE;
 import static android.app.slice.Slice.SUBTYPE_COLOR;
+import static android.app.slice.SliceItem.FORMAT_IMAGE;
 import static android.app.slice.SliceItem.FORMAT_INT;
 import static android.app.slice.SliceItem.FORMAT_TEXT;
-
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
-import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
-import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.text.TextUtils;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
@@ -45,12 +37,15 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.EventInfo;
 
-import androidx.core.graphics.drawable.IconCompat;
-
 import com.android.settings.Utils;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.slices.SliceData;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Testing utility class to verify the contents of the different Settings Slices.
@@ -76,7 +71,7 @@ public class SliceTester {
 
         final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
         final int color = colorItem.getInt();
-        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).isEmpty();
@@ -85,8 +80,7 @@ public class SliceTester {
         assertThat(primaryPendingIntent).isEqualTo(
                 SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, sliceData.getTitle());
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
 
         assertKeywords(metadata, sliceData);
     }
@@ -106,7 +100,7 @@ public class SliceTester {
 
         final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
         final int color = colorItem.getInt();
-        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
@@ -116,8 +110,6 @@ public class SliceTester {
 
         final SliceAction mainToggleAction = toggles.get(0);
 
-        final IconCompat expectedToggleIcon = IconCompat.createWithResource(context,
-                sliceData.getIconResource());
         assertThat(mainToggleAction.getIcon()).isNull();
 
         // Check intent in Toggle Action
@@ -130,8 +122,7 @@ public class SliceTester {
         assertThat(primaryPendingIntent).isEqualTo(
                 SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, sliceData.getTitle());
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
 
         assertKeywords(metadata, sliceData);
     }
@@ -149,7 +140,7 @@ public class SliceTester {
 
         final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
         final int color = colorItem.getInt();
-        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
 
         final SliceAction primaryAction = metadata.getPrimaryAction();
 
@@ -168,8 +159,43 @@ public class SliceTester {
         assertThat(primaryPendingIntent).isEqualTo(
                 SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, sliceData.getTitle());
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
+
+        assertKeywords(metadata, sliceData);
+    }
+
+    /**
+     * Test the copyable slice, including:
+     * - No intent
+     * - Correct title
+     * - Correct intent
+     * - Correct keywords
+     * - TTL
+     * - Color
+     */
+    public static void testSettingsCopyableSlice(Context context, Slice slice,
+            SliceData sliceData) {
+        final SliceMetadata metadata = SliceMetadata.from(context, slice);
+
+        final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
+        final int color = colorItem.getInt();
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+
+        final IconCompat expectedIcon = IconCompat.createWithResource(context,
+                sliceData.getIconResource());
+        assertThat(expectedIcon.toString()).isEqualTo(primaryAction.getIcon().toString());
+
+        final long sliceTTL = metadata.getExpiry();
+        assertThat(sliceTTL).isEqualTo(ListBuilder.INFINITY);
+
+        // Check primary intent
+        final PendingIntent primaryPendingIntent = primaryAction.getAction();
+        assertThat(primaryPendingIntent).isEqualTo(
+                SliceBuilderUtils.getContentPendingIntent(context, sliceData));
+
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
 
         assertKeywords(metadata, sliceData);
     }
@@ -192,7 +218,7 @@ public class SliceTester {
 
         final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
         final int color = colorItem.getInt();
-        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).isEmpty();
@@ -201,27 +227,87 @@ public class SliceTester {
         assertThat(primaryPendingIntent).isEqualTo(SliceBuilderUtils.getContentPendingIntent(
                 context, sliceData));
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, sliceData.getTitle());
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
 
         assertKeywords(metadata, sliceData);
     }
 
-    public static void assertTitle(List<SliceItem> sliceItems, String title) {
-        boolean hasTitle = false;
+    /**
+     * Assert any slice item contains title.
+     *
+     * @param sliceItems All slice items of a Slice.
+     * @param title Title for asserting.
+     */
+    public static void assertAnySliceItemContainsTitle(List<SliceItem> sliceItems, String title) {
+        assertThat(hasText(sliceItems, title, HINT_TITLE)).isTrue();
+    }
+
+    /**
+     * Assert any slice item contains subtitle.
+     *
+     * @param sliceItems All slice items of a Slice.
+     * @param subtitle Subtitle for asserting.
+     */
+    public static void assertAnySliceItemContainsSubtitle(List<SliceItem> sliceItems,
+            String subtitle) {
+        // Subtitle has no hints
+        assertThat(hasText(sliceItems, subtitle, null /* hints */)).isTrue();
+    }
+
+    /**
+     * Assert no slice item contains subtitle.
+     *
+     * @param sliceItems All slice items of a Slice.
+     * @param subtitle Subtitle for asserting.
+     */
+    public static void assertNoSliceItemContainsSubtitle(List<SliceItem> sliceItems,
+            String subtitle) {
+        // Subtitle has no hints
+        assertThat(hasText(sliceItems, subtitle, null /* hints */)).isFalse();
+    }
+
+    private static boolean hasText(List<SliceItem> sliceItems, String text, String hints) {
+        boolean hasText = false;
         for (SliceItem item : sliceItems) {
-            List<SliceItem> titleItems = SliceQuery.findAll(item, FORMAT_TEXT, HINT_TITLE,
+            List<SliceItem> textItems = SliceQuery.findAll(item, FORMAT_TEXT, hints,
                     null /* non-hints */);
-            if (titleItems == null) {
+            if (textItems == null) {
                 continue;
             }
 
-            hasTitle = true;
-            for (SliceItem subTitleItem : titleItems) {
-                assertThat(subTitleItem.getText()).isEqualTo(title);
+            for (SliceItem textItem : textItems) {
+                if (TextUtils.equals(textItem.getText(), text)) {
+                    hasText = true;
+                    break;
+                }
             }
         }
-        assertThat(hasTitle).isTrue();
+        return hasText;
+    }
+
+    /**
+     * Assert any slice item contains icon.
+     *
+     * @param sliceItems All slice items of a Slice.
+     * @param icon Icon for asserting.
+     */
+    public static void assertAnySliceItemContainsIcon(List<SliceItem> sliceItems, IconCompat icon) {
+        boolean hasIcon = false;
+        for (SliceItem item : sliceItems) {
+            List<SliceItem> iconItems = SliceQuery.findAll(item, FORMAT_IMAGE,
+                    (String) null /* hints */, null /* non-hints */);
+            if (iconItems == null) {
+                continue;
+            }
+
+            for (SliceItem iconItem : iconItems) {
+                if (icon.toString().equals(iconItem.getIcon().toString())) {
+                    hasIcon = true;
+                    break;
+                }
+            }
+        }
+        assertThat(hasIcon).isTrue();
     }
 
     private static void assertKeywords(SliceMetadata metadata, SliceData data) {

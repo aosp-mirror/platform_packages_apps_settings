@@ -17,10 +17,10 @@
 package com.android.settings.display;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
 import static com.google.common.truth.Truth.assertThat;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
+
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -31,17 +31,19 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import com.android.settings.TimeoutListPreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -49,12 +51,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowDevicePolicyManager.class)
 public class TimeoutPreferenceControllerTest {
 
     private static final int TIMEOUT = 30;
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
+    private static final String DEFAULT_TIMEOUT = "300000"; // 5 minutes
 
     private Context mContext;
     @Mock
@@ -69,7 +72,13 @@ public class TimeoutPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mPreference.getValue()).thenReturn(DEFAULT_TIMEOUT);
         mController = new TimeoutPreferenceController(mContext, KEY_SCREEN_TIMEOUT);
+    }
+
+    @After
+    public void tearDown() {
+          ShadowRestrictedLockUtilsInternal.reset();
     }
 
     @Test
@@ -125,7 +134,28 @@ public class TimeoutPreferenceControllerTest {
 
         verify(mPreference, times(2))
                 .removeUnusableTimeouts(longCaptor.capture(), adminCaptor.capture());
-        assertEquals(0, (long) longCaptor.getValue());
-        assertTrue(adminCaptor.getValue() != null);
+        assertThat(longCaptor.getValue()).isEqualTo(0);
+        assertThat(adminCaptor.getValue()).isNotNull();
+    }
+
+    @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+    public void updateState_selectedTimeoutLargerThanAdminMax_shouldSetSummaryToUpdatedPrefValue() {
+        final int profileUserId = UserHandle.myUserId();
+        final long allowedTimeout = 480000L; // 8 minutes
+        when(mUserManager.getProfiles(profileUserId)).thenReturn(Collections.emptyList());
+        ShadowDevicePolicyManager.getShadow().setMaximumTimeToLock(profileUserId, allowedTimeout);
+        ShadowRestrictedLockUtilsInternal.setMaximumTimeToLockIsSet(true);
+        final CharSequence[] timeouts = {"15000", "30000", "60000", "120000", "300000", "600000"};
+        final CharSequence[] summaries = {"15s", "30s", "1m", "2m", "5m", "10m"};
+        // set current timeout to be 10 minutes, which is longer than the allowed 8 minutes
+        Settings.System.putLong(mContext.getContentResolver(), SCREEN_OFF_TIMEOUT, 600000L);
+        when(mPreference.getEntries()).thenReturn(summaries);
+        when(mPreference.getEntryValues()).thenReturn(timeouts);
+        when(mPreference.getValue()).thenReturn("300000");
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setSummary(mContext.getString(R.string.screen_timeout_summary, "5m"));
     }
 }

@@ -16,20 +16,21 @@
 
 package com.android.settings.tts;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.speech.tts.TextToSpeech.EngineInfo;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.util.Log;
 import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
+
+import androidx.annotation.VisibleForTesting;
 
 
 public class TtsEnginePreference extends Preference {
@@ -46,6 +47,7 @@ public class TtsEnginePreference extends Preference {
      * The shared radio button state, which button is checked etc.
      */
     private final RadioButtonGroupState mSharedState;
+    private RadioButton mRadioButton;
 
     /**
      * When true, the change callbacks on the radio button will not
@@ -53,21 +55,20 @@ public class TtsEnginePreference extends Preference {
      */
     private volatile boolean mPreventRadioButtonCallbacks;
 
-    private RadioButton mRadioButton;
-    private Intent mVoiceCheckData;
-
     private final CompoundButton.OnCheckedChangeListener mRadioChangeListener =
-        new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onRadioButtonClicked(buttonView, isChecked);
-            }
-        };
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    onRadioButtonClicked(buttonView, isChecked);
+                }
+            };
 
-    public TtsEnginePreference(Context context, EngineInfo info, RadioButtonGroupState state,
-            SettingsActivity prefActivity) {
+    public TtsEnginePreference(Context context, EngineInfo info, RadioButtonGroupState state) {
         super(context);
-        setLayoutResource(R.layout.preference_tts_engine);
+
+        setWidgetLayoutResource(R.layout.preference_widget_radiobutton);
+        setLayoutResource(R.layout.preference_radio);
+        setIconSpaceReserved(false);
 
         mSharedState = state;
         mEngineInfo = info;
@@ -86,9 +87,8 @@ public class TtsEnginePreference extends Preference {
                     "setSharedState()");
         }
 
-        final RadioButton rb = (RadioButton) view.findViewById(R.id.tts_engine_radiobutton);
+        final RadioButton rb = view.itemView.findViewById(android.R.id.checkbox);
         rb.setOnCheckedChangeListener(mRadioChangeListener);
-        rb.setText(mEngineInfo.label);
 
         boolean isChecked = getKey().equals(mSharedState.getCurrentKey());
         if (isChecked) {
@@ -98,12 +98,12 @@ public class TtsEnginePreference extends Preference {
         mPreventRadioButtonCallbacks = true;
         rb.setChecked(isChecked);
         mPreventRadioButtonCallbacks = false;
-
         mRadioButton = rb;
     }
 
-    public void setVoiceDataDetails(Intent data) {
-        mVoiceCheckData = data;
+    @Override
+    public void onClick() {
+        mRadioButton.setChecked(true);
     }
 
     private boolean shouldDisplayDataAlert() {
@@ -144,7 +144,7 @@ public class TtsEnginePreference extends Preference {
                     public void onClick(DialogInterface dialog, int which) {
                         makeCurrentEngine(buttonView);
                     }
-                },new DialogInterface.OnClickListener() {
+                }, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Undo the click.
@@ -175,9 +175,11 @@ public class TtsEnginePreference extends Preference {
      */
     public interface RadioButtonGroupState {
         String getCurrentKey();
+
         Checkable getCurrentChecked();
 
         void setCurrentKey(String key);
+
         void setCurrentChecked(Checkable current);
     }
 

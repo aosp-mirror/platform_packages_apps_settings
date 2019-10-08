@@ -18,10 +18,9 @@ package com.android.settings.vpn2;
 import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
 import android.annotation.NonNull;
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -34,12 +33,14 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.preference.Preference;
+
 import com.android.internal.net.VpnConfig;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
@@ -105,7 +106,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         new SubSettingLauncher(context)
                 .setDestination(AppManagementFragment.class.getName())
                 .setArguments(args)
-                .setTitle(pref.getLabel())
+                .setTitleText(pref.getLabel())
                 .setSourceMetricsCategory(sourceMetricsCategory)
                 .setUserHandle(new UserHandle(pref.getUserId()))
                 .launch();
@@ -172,7 +173,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.VPN;
+        return SettingsEnums.VPN;
     }
 
     private boolean onForgetVpnClick() {
@@ -334,7 +335,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_VPN_CANNOT_CONNECT;
+            return SettingsEnums.DIALOG_VPN_CANNOT_CONNECT;
         }
 
         public static void show(AppManagementFragment parent, String vpnLabel) {

@@ -17,6 +17,7 @@
 package com.android.settings.dream;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -24,7 +25,6 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
@@ -36,12 +36,13 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CurrentDreamPreferenceControllerTest {
 
     private CurrentDreamPreferenceController mController;
@@ -56,7 +57,7 @@ public class CurrentDreamPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mController = new CurrentDreamPreferenceController(mContext);
+        mController = new CurrentDreamPreferenceController(mContext, "test");
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
     }
 

@@ -17,7 +17,8 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import androidx.preference.PreferenceFragment;
+
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
@@ -37,10 +38,10 @@ public abstract class BluetoothDetailsController extends AbstractPreferenceContr
         OnPause, OnResume {
 
     protected final Context mContext;
-    protected final PreferenceFragment mFragment;
+    protected final PreferenceFragmentCompat mFragment;
     protected final CachedBluetoothDevice mCachedDevice;
 
-    public BluetoothDetailsController(Context context, PreferenceFragment fragment,
+    public BluetoothDetailsController(Context context, PreferenceFragmentCompat fragment,
             CachedBluetoothDevice device, Lifecycle lifecycle) {
         super(context);
         mContext = context;

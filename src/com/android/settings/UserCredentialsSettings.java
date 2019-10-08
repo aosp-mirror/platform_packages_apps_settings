@@ -18,10 +18,8 @@ package com.android.settings;
 
 import android.annotation.LayoutRes;
 import android.annotation.Nullable;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -39,7 +37,6 @@ import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyStore;
 import android.security.keymaster.KeyCharacteristics;
 import android.security.keymaster.KeymasterDefs;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -47,11 +44,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+
 import java.security.UnrecoverableKeyException;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -65,7 +68,7 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.USER_CREDENTIALS;
+        return SettingsEnums.USER_CREDENTIALS;
     }
 
     @Override
@@ -135,11 +138,12 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
             final String restriction = UserManager.DISALLOW_CONFIG_CREDENTIALS;
             final int myUserId = UserHandle.myUserId();
-            if (!RestrictedLockUtils.hasBaseUserRestriction(getContext(), restriction, myUserId)) {
+            if (!RestrictedLockUtilsInternal.hasBaseUserRestriction(getContext(), restriction,
+                    myUserId)) {
                 DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface dialog, int id) {
-                        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                                getContext(), restriction, myUserId);
+                        final EnforcedAdmin admin = RestrictedLockUtilsInternal
+                                .checkIfRestrictionEnforced(getContext(), restriction, myUserId);
                         if (admin != null) {
                             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
                                     admin);
@@ -150,25 +154,30 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
                         dialog.dismiss();
                     }
                 };
-                if (item.isSystem()) {
-                    // TODO: a safe means of clearing wifi certificates. Configs refer to aliases
-                    //       directly so deleting certs will break dependent access points.
-                    builder.setNegativeButton(R.string.trusted_credentials_remove_label, listener);
-                }
+                // TODO: b/127865361
+                //       a safe means of clearing wifi certificates. Configs refer to aliases
+                //       directly so deleting certs will break dependent access points.
+                //       However, Wi-Fi used to remove this certificate from storage if the network
+                //       was removed, regardless if it is used in more than one network.
+                //       It has been decided to allow removing certificates from this menu, as we
+                //       assume that the user who manually adds certificates must have a way to
+                //       manually remove them.
+                builder.setNegativeButton(R.string.trusted_credentials_remove_label, listener);
             }
             return builder.create();
         }
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_USER_CREDENTIAL;
+            return SettingsEnums.DIALOG_USER_CREDENTIAL;
         }
 
         /**
          * Deletes all certificates and keys under a given alias.
          *
          * If the {@link Credential} is for a system alias, all active grants to the alias will be
-         * removed using {@link KeyChain}.
+         * removed using {@link KeyChain}. If the {@link Credential} is for Wi-Fi alias, all
+         * credentials and keys will be removed using {@link KeyStore}.
          */
         private class RemoveCredentialsTask extends AsyncTask<Credential, Void, Credential[]> {
             private Context context;
@@ -184,12 +193,30 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
                 for (final Credential credential : credentials) {
                     if (credential.isSystem()) {
                         removeGrantsAndDelete(credential);
-                        continue;
+                    } else {
+                        deleteWifiCredential(credential);
                     }
-                    throw new UnsupportedOperationException(
-                            "Not implemented for wifi certificates. This should not be reachable.");
                 }
                 return credentials;
+            }
+
+            private void deleteWifiCredential(final Credential credential) {
+                final KeyStore keyStore = KeyStore.getInstance();
+                final EnumSet<Credential.Type> storedTypes = credential.getStoredTypes();
+
+                // Remove all Wi-Fi credentials
+                if (storedTypes.contains(Credential.Type.USER_KEY)) {
+                    keyStore.delete(Credentials.USER_PRIVATE_KEY + credential.getAlias(),
+                            Process.WIFI_UID);
+                }
+                if (storedTypes.contains(Credential.Type.USER_CERTIFICATE)) {
+                    keyStore.delete(Credentials.USER_CERTIFICATE + credential.getAlias(),
+                            Process.WIFI_UID);
+                }
+                if (storedTypes.contains(Credential.Type.CA_CERTIFICATE)) {
+                    keyStore.delete(Credentials.CA_CERTIFICATE + credential.getAlias(),
+                            Process.WIFI_UID);
+                }
             }
 
             private void removeGrantsAndDelete(final Credential credential) {
@@ -483,6 +510,12 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
         public boolean isSystem() {
             return UserHandle.getAppId(uid) == Process.SYSTEM_UID;
+        }
+
+        public String getAlias() { return alias; }
+
+        public EnumSet<Type> getStoredTypes() {
+            return storedTypes;
         }
     }
 }

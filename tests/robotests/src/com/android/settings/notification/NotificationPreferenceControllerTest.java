@@ -22,9 +22,10 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_MIN;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
@@ -37,9 +38,9 @@ import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
+
 import androidx.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
@@ -48,9 +49,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class NotificationPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -70,7 +73,7 @@ public class NotificationPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = new TestPreferenceController(mContext, mBackend);
     }
 
@@ -80,7 +83,6 @@ public class NotificationPreferenceControllerTest {
         mController.updateState(mock(Preference.class));
         assertFalse(mController.checkCanBeVisible(IMPORTANCE_UNSPECIFIED));
         mController.saveChannel();
-        assertFalse(mController.isChannelConfigurable());
         assertFalse(mController.isChannelBlockable());
         assertFalse(mController.isChannelGroupBlockable());
     }
@@ -103,10 +105,12 @@ public class NotificationPreferenceControllerTest {
     @Test
     public void isAvailable_notIfChannelBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
+        when(group.isBlocked()).thenReturn(false);
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
 
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, group, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -114,6 +118,7 @@ public class NotificationPreferenceControllerTest {
     public void isAvailable_notIfChannelGroupBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
 
         mController.onResume(appRow, channel, group, null);
@@ -200,19 +205,29 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void testIsConfigurable() {
-        String sameId = "bananas";
+    public void testIsBlockable_oemWhitelist() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = sameId;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn(sameId);
+        when(channel.isImportanceLockedByOEM()).thenReturn(true);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
 
         mController.onResume(appRow, channel, null, null);
-        assertFalse(mController.isChannelConfigurable());
+        assertFalse(mController.isChannelBlockable());
 
-        when(channel.getId()).thenReturn("something new");
+        when(channel.isImportanceLockedByOEM()).thenReturn(false);
         mController.onResume(appRow, channel, null, null);
-        assertTrue(mController.isChannelConfigurable());
+        assertTrue(mController.isChannelBlockable());
+    }
+
+    @Test
+    public void testIsBlockable_defaultApp() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
+        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
+
+        mController.onResume(appRow, channel, null, null);
+        assertFalse(mController.isChannelBlockable());
     }
 
     @Test
@@ -270,6 +285,30 @@ public class NotificationPreferenceControllerTest {
 
         mController.onResume(appRow, null, group, null);
         assertTrue(mController.isChannelGroupBlockable());
+    }
+
+    @Test
+    public void testIsChannelBlockable_oemLocked() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = false;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.isImportanceLockedByOEM()).thenReturn(true);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
+
+        mController.onResume(appRow, channel, null, null);
+        assertFalse(mController.isChannelBlockable());
+    }
+
+    @Test
+    public void testIsChannelBlockable_criticalDeviceFunction() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = false;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
+
+        mController.onResume(appRow, channel, null, null);
+        assertFalse(mController.isChannelBlockable());
     }
 
     @Test

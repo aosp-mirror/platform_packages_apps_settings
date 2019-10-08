@@ -16,12 +16,6 @@
 
 package com.android.settings.notification;
 
-import com.android.settings.R;
-import com.android.settings.RestrictedListPreference;
-import com.android.settings.Utils;
-import com.android.settingslib.RestrictedLockUtils;
-
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,9 +27,15 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
+
+import com.android.settings.R;
+import com.android.settings.RestrictedListPreference;
+import com.android.settings.Utils;
+import com.android.settingslib.RestrictedLockUtils;
 
 public class NotificationLockscreenPreference extends RestrictedListPreference {
 
@@ -73,11 +73,12 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener innerListener) {
 
         mListener = new Listener(innerListener);
-        builder.setSingleChoiceItems(createListAdapter(), getSelectedValuePos(), mListener);
+        builder.setSingleChoiceItems(createListAdapter(builder.getContext()), getSelectedValuePos(),
+                mListener);
         mShowRemoteInput = getEntryValues().length == 3;
         mAllowRemoteInput = Settings.Secure.getInt(getContext().getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_ALLOW_REMOTE_INPUT, 0) != 0;
@@ -113,11 +114,6 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
         panel.setVisibility(checkboxVisibilityForSelectedIndex(selectedPosition,
                 mShowRemoteInput));
         mListener.setView(panel);
-    }
-
-    @Override
-    protected ListAdapter createListAdapter() {
-        return new RestrictedArrayAdapter(getContext(), getEntries(), -1);
     }
 
     @Override

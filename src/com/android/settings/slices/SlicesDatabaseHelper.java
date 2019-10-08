@@ -17,12 +17,12 @@
 package com.android.settings.slices;
 
 import android.content.Context;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import java.util.Locale;
 
@@ -36,7 +36,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "slices_index.db";
     private static final String SHARED_PREFS_TAG = "slices_shared_prefs";
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 5;
 
     public interface Tables {
         String TABLE_SLICES_INDEX = "slices_index";
@@ -93,6 +93,11 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
          * {@link SliceData.SliceType} representing the inline type of the result.
          */
         String SLICE_TYPE = "slice_type";
+
+        /**
+         * Customized subtitle if it's a unavailable slice
+         */
+        String UNAVAILABLE_SLICE_SUBTITLE = "unavailable_slice_subtitle";
     }
 
     private static final String CREATE_SLICES_TABLE =
@@ -117,6 +122,8 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.PLATFORM_SLICE +
                     ", " +
                     IndexColumns.SLICE_TYPE +
+                    ", " +
+                    IndexColumns.UNAVAILABLE_SLICE_SUBTITLE +
                     ");";
 
     private final Context mContext;
@@ -143,7 +150,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < DATABASE_VERSION) {
-            Log.d(TAG, "Reconstructing DB from " + oldVersion + "to " + newVersion);
+            Log.d(TAG, "Reconstructing DB from " + oldVersion + " to " + newVersion);
             reconstruct(db);
         }
     }

@@ -18,21 +18,22 @@ package com.android.settings.notification;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.preference.SwitchPreference;
+import android.text.TextUtils;
+import android.util.Log;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
-import android.util.Log;
+import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.widget.MasterCheckBoxPreference;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -50,12 +51,14 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static String KEY_ADVANCED_CATEGORY = "app_advanced";
     private static String KEY_BADGE = "badge";
     private static String KEY_APP_LINK = "app_link";
+    private static String KEY_BUBBLE = "bubble_link_pref";
+    private static String[] LEGACY_NON_ADVANCED_KEYS = {KEY_BADGE, KEY_APP_LINK, KEY_BUBBLE};
 
     private List<NotificationChannelGroup> mChannelGroupList;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_APP_NOTIFICATION;
+        return SettingsEnums.NOTIFICATION_APP_NOTIFICATION;
     }
 
     @Override
@@ -64,15 +67,16 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         final PreferenceScreen screen = getPreferenceScreen();
         if (mShowLegacyChannelConfig && screen != null) {
             // if showing legacy settings, pull advanced settings out of the advanced category
-            Preference badge = findPreference(KEY_BADGE);
-            Preference appLink = findPreference(KEY_APP_LINK);
+            PreferenceGroup advanced = (PreferenceGroup) findPreference(KEY_ADVANCED_CATEGORY);
             removePreference(KEY_ADVANCED_CATEGORY);
-            if (badge != null) {
-                screen.addPreference(badge);
-
-            }
-            if (appLink != null) {
-                screen.addPreference(appLink);
+            if (advanced != null) {
+                for (String key : LEGACY_NON_ADVANCED_KEYS) {
+                    Preference pref = advanced.findPreference(key);
+                    advanced.removePreference(pref);
+                    if (pref != null) {
+                        screen.addPreference(pref);
+                    }
+                }
             }
         }
     }
@@ -134,6 +138,10 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 context, mImportanceListener, mBackend));
         mControllers.add(new ImportancePreferenceController(
                 context, mImportanceListener, mBackend));
+        mControllers.add(new MinImportancePreferenceController(
+                context, mImportanceListener, mBackend));
+        mControllers.add(new HighImportancePreferenceController(
+                context, mImportanceListener, mBackend));
         mControllers.add(new SoundPreferenceController(context, this,
                 mImportanceListener, mBackend));
         mControllers.add(new LightsPreferenceController(context, mBackend));
@@ -145,6 +153,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mControllers.add(new DescriptionPreferenceController(context));
         mControllers.add(new NotificationsOffPreferenceController(context));
         mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
+        mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 
@@ -247,7 +256,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 int childCount = groupGroup.getPreferenceCount();
                 for (int i = 0; i < childCount; i++) {
                     Preference pref = groupGroup.getPreference(i);
-                    if (pref instanceof MasterCheckBoxPreference) {
+                    if (pref instanceof MasterSwitchPreference) {
                         toRemove.add(pref);
                     }
                 }

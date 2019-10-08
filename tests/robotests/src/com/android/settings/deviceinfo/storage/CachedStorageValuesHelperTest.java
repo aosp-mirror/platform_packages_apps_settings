@@ -18,28 +18,34 @@ package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.CACHE_APPS_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_APP_BYTES;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_AUDIO_BYTES;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_IMAGE_BYTES;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_TOTAL_BYTES;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_VIDEO_BYTES;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
+        .EXTERNAL_AUDIO_BYTES;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
+        .EXTERNAL_IMAGE_BYTES;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
+        .EXTERNAL_TOTAL_BYTES;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
+        .EXTERNAL_VIDEO_BYTES;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.FREE_BYTES_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.GAME_APPS_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.MUSIC_APPS_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.OTHER_APPS_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.PHOTO_APPS_SIZE_KEY;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.SHARED_PREFERENCES_NAME;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
+        .SHARED_PREFERENCES_NAME;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.TIMESTAMP_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.TOTAL_BYTES_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.USER_ID_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.VIDEO_APPS_SIZE_KEY;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.SparseArray;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 
@@ -48,9 +54,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CachedStorageValuesHelperTest {
 
     private Context mContext;
@@ -69,7 +76,7 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedPrivateStorageInfo_cachedValuesAreLoaded() throws Exception {
+    public void getCachedPrivateStorageInfo_cachedValuesAreLoaded() {
         when(mMockClock.getCurrentTime()).thenReturn(10001L);
         mSharedPreferences
                 .edit()
@@ -97,7 +104,7 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedAppsStorageResult_cachedValuesAreLoaded() throws Exception {
+    public void getCachedAppsStorageResult_cachedValuesAreLoaded() {
         when(mMockClock.getCurrentTime()).thenReturn(10001L);
         mSharedPreferences
                 .edit()
@@ -136,7 +143,7 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedPrivateStorageInfo_nullIfDataIsStale() throws Exception {
+    public void getCachedPrivateStorageInfo_nullIfDataIsStale() {
         when(mMockClock.getCurrentTime()).thenReturn(10000000L);
         mSharedPreferences
                 .edit()
@@ -162,7 +169,7 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedAppsStorageResult_nullIfDataIsStale() throws Exception {
+    public void getCachedAppsStorageResult_nullIfDataIsStale() {
         when(mMockClock.getCurrentTime()).thenReturn(10000000L);
         mSharedPreferences
                 .edit()
@@ -189,7 +196,7 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedPrivateStorageInfo_nullIfWrongUser() throws Exception {
+    public void getCachedPrivateStorageInfo_nullIfWrongUser() {
         when(mMockClock.getCurrentTime()).thenReturn(10001L);
         mSharedPreferences
                 .edit()
@@ -215,7 +222,7 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedAppsStorageResult_nullIfWrongUser() throws Exception {
+    public void getCachedAppsStorageResult_nullIfWrongUser() {
         when(mMockClock.getCurrentTime()).thenReturn(10001L);
         mSharedPreferences
                 .edit()
@@ -242,20 +249,20 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedPrivateStorageInfo_nullIfEmpty() throws Exception {
+    public void getCachedPrivateStorageInfo_nullIfEmpty() {
         final PrivateStorageInfo info = mCachedValuesHelper.getCachedPrivateStorageInfo();
         assertThat(info).isNull();
     }
 
     @Test
-    public void getCachedAppsStorageResult_nullIfEmpty() throws Exception {
+    public void getCachedAppsStorageResult_nullIfEmpty() {
         final SparseArray<StorageAsyncLoader.AppsStorageResult> result =
                 mCachedValuesHelper.getCachedAppsStorageResult();
         assertThat(result).isNull();
     }
 
     @Test
-    public void cacheResult_succeeds() throws Exception {
+    public void cacheResult_succeeds() {
         when(mMockClock.getCurrentTime()).thenReturn(10000L);
         final StorageStatsSource.ExternalStorageStats externalStats =
                 new StorageStatsSource.ExternalStorageStats(22222L, 2L, 20L, 200L, 2000L);
@@ -287,5 +294,5 @@ public class CachedStorageValuesHelperTest {
         assertThat(mSharedPreferences.getLong(TOTAL_BYTES_KEY, -1)).isEqualTo(6000L);
         assertThat(mSharedPreferences.getInt(USER_ID_KEY, -1)).isEqualTo(0);
         assertThat(mSharedPreferences.getLong(TIMESTAMP_KEY, -1)).isEqualTo(10000L);
-    };
+    }
 }

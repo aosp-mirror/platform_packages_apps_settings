@@ -25,7 +25,9 @@ import android.nfc.NfcAdapter;
 import android.nfc.cardemulation.ApduServiceInfo;
 import android.nfc.cardemulation.CardEmulation;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 
@@ -44,7 +46,6 @@ public class PaymentBackend {
     public static class PaymentAppInfo {
         public CharSequence label;
         CharSequence description;
-        Drawable banner;
         boolean isDefault;
         public ComponentName componentName;
         public ComponentName settingsComponent;
@@ -57,7 +58,7 @@ public class PaymentBackend {
     // Fields below only modified on UI thread
     private ArrayList<PaymentAppInfo> mAppInfos;
     private PaymentAppInfo mDefaultAppInfo;
-    private ArrayList<Callback> mCallbacks = new ArrayList<Callback>();
+    private ArrayList<Callback> mCallbacks = new ArrayList<>();
 
     public PaymentBackend(Context context) {
         mContext = context;
@@ -102,13 +103,13 @@ public class PaymentBackend {
             appInfo.componentName = service.getComponent();
             String settingsActivity = service.getSettingsActivityName();
             if (settingsActivity != null) {
-                appInfo.settingsComponent = new ComponentName(appInfo.componentName.getPackageName(),
+                appInfo.settingsComponent = new ComponentName(
+                        appInfo.componentName.getPackageName(),
                         settingsActivity);
             } else {
                 appInfo.settingsComponent = null;
             }
             appInfo.description = service.getDescription();
-            appInfo.banner = service.loadBanner(pm);
             appInfos.add(appInfo);
         }
         mAppInfos = appInfos;
@@ -138,19 +139,6 @@ public class PaymentBackend {
         }
     }
 
-    Drawable loadDrawableForPackage(String pkgName, int drawableResId) {
-        PackageManager pm = mContext.getPackageManager();
-        try {
-            Resources res = pm.getResourcesForApplication(pkgName);
-            Drawable banner = res.getDrawable(drawableResId);
-            return banner;
-        } catch (Resources.NotFoundException e) {
-            return null;
-        } catch (PackageManager.NameNotFoundException e) {
-            return null;
-        }
-    }
-
     boolean isForegroundMode() {
         try {
             return Settings.Secure.getInt(mContext.getContentResolver(),
@@ -162,7 +150,7 @@ public class PaymentBackend {
 
     void setForegroundMode(boolean foreground) {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.NFC_PAYMENT_FOREGROUND, foreground ? 1 : 0) ;
+                Settings.Secure.NFC_PAYMENT_FOREGROUND, foreground ? 1 : 0);
     }
 
     ComponentName getDefaultPaymentApp() {
@@ -182,14 +170,23 @@ public class PaymentBackend {
         refresh();
     }
 
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void dispatchMessage(Message msg) {
-            refresh();
-        }
-    };
-
     private class SettingsPackageMonitor extends PackageMonitor {
+        private Handler mHandler;
+
+        @Override
+        public void register(Context context, Looper thread, UserHandle user,
+                boolean externalStorage) {
+            if (mHandler == null) {
+                mHandler = new Handler(thread) {
+                    @Override
+                    public void dispatchMessage(Message msg) {
+                        refresh();
+                    }
+                };
+            }
+            super.register(context, thread, user, externalStorage);
+        }
+
         @Override
         public void onPackageAdded(String packageName, int uid) {
             mHandler.obtainMessage().sendToTarget();

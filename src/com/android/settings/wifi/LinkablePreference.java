@@ -17,15 +17,19 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
-import androidx.annotation.Nullable;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.LinkifyUtils;
+import com.android.settingslib.R;
 
 /**
  * A preference with a title that can have linkable content on click.
@@ -36,19 +40,20 @@ public class LinkablePreference extends Preference {
     private CharSequence mContentTitle;
     private CharSequence mContentDescription;
 
+
     public LinkablePreference(Context ctx, AttributeSet attrs, int defStyle) {
         super(ctx, attrs, defStyle);
+        setIcon(R.drawable.ic_info_outline_24dp);
         setSelectable(false);
     }
 
     public LinkablePreference(Context ctx, AttributeSet attrs) {
-        super(ctx, attrs);
-        setSelectable(false);
+        this(ctx, attrs, TypedArrayUtils.getAttr(
+                ctx, R.attr.footerPreferenceStyle, android.R.attr.preferenceStyle));
     }
 
     public LinkablePreference(Context ctx) {
-        super(ctx);
-        setSelectable(false);
+        this(ctx, null);
     }
 
     @Override
@@ -73,21 +78,20 @@ public class LinkablePreference extends Preference {
 
         boolean linked = LinkifyUtils.linkify(textView, contentBuilder, mClickListener);
         if (linked && mContentTitle != null) {
-            // Embolden and enlarge the title.
-            Spannable boldSpan = (Spannable) textView.getText();
-            boldSpan.setSpan(
-                    new TextAppearanceSpan(
-                            getContext(), android.R.style.TextAppearance_Medium),
+            Spannable spannableContent = (Spannable) textView.getText();
+            spannableContent.setSpan(
+                    new TextAppearanceSpan(getContext(), android.R.style.TextAppearance_Small),
                     0,
                     mContentTitle.length(),
                     Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-            textView.setText(boldSpan);
+            textView.setText(spannableContent);
             textView.setMovementMethod(new LinkMovementMethod());
         }
     }
 
     /**
      * Sets the linkable text for the Preference title.
+     *
      * @param contentTitle text to set the Preference title.
      * @param contentDescription description text to append underneath title, can be null.
      * @param clickListener OnClickListener for the link portion of the text.

@@ -1,8 +1,12 @@
 # This is a configuration file for ProGuard.
 # http://proguard.sourceforge.net/index.html#manual/usage.html
 
+# Some tests use thenThrow from Mockito which require information on
+# checked exceptions.
+-keepattributes Exceptions
+
 # Keep all Fragments in this package, which are used by reflection.
--keep public class com.android.settings.** extends android.app.Fragment
+-keep public class com.android.settings.** extends androidx.fragment.app.Fragment
 
 # Keep all preference controllers needed by slice and DashboardFragment.
 -keep class * extends com.android.settings.core.BasePreferenceController {
@@ -52,3 +56,13 @@
     public static ** SUMMARY_PROVIDER_FACTORY;
 }
 -keep class androidx.core.app.CoreComponentFactory
+
+# Keep classes that implements CustomSliceable, which are used by reflection.
+-keepclasseswithmembers class * implements com.android.settings.slices.CustomSliceable {
+    public <init>(android.content.Context);
+}
+
+# Keep classes that extends SliceBackgroundWorker, which are used by reflection.
+-keepclasseswithmembers class * extends com.android.settings.slices.SliceBackgroundWorker {
+    public <init>(android.content.Context, android.net.Uri);
+}

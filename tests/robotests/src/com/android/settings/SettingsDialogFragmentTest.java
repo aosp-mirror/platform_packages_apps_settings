@@ -21,18 +21,18 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Dialog;
-import android.app.Fragment;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.fragment.app.Fragment;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingsDialogFragmentTest {
 
     private static final int DIALOG_ID = 15;
@@ -50,8 +50,8 @@ public class SettingsDialogFragmentTest {
     public void testGetMetrics_shouldGetMetricFromDialogCreatable() {
         when(mDialogCreatable.getDialogMetricsCategory(DIALOG_ID)).thenReturn(1);
 
-        mDialogFragment =
-                new SettingsPreferenceFragment.SettingsDialogFragment(mDialogCreatable, DIALOG_ID);
+        mDialogFragment = SettingsPreferenceFragment.SettingsDialogFragment.newInstance(
+                mDialogCreatable, DIALOG_ID);
         mDialogFragment.onAttach(RuntimeEnvironment.application);
         mDialogFragment.getMetricsCategory();
 
@@ -64,14 +64,13 @@ public class SettingsDialogFragmentTest {
         when(mDialogCreatable.getDialogMetricsCategory(DIALOG_ID)).thenReturn(-1);
 
         try {
-            mDialogFragment =
-                new SettingsPreferenceFragment.SettingsDialogFragment(mDialogCreatable, DIALOG_ID);
+            mDialogFragment = SettingsPreferenceFragment.SettingsDialogFragment.newInstance(
+                    mDialogCreatable, DIALOG_ID);
             mDialogFragment.onAttach(RuntimeEnvironment.application);
             fail("Should fail with IllegalStateException");
         } catch (IllegalStateException e) {
             // getDialogMetricsCategory called in constructor
             verify(mDialogCreatable).getDialogMetricsCategory(DIALOG_ID);
-            return;
         }
     }
 

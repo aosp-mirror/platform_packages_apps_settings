@@ -16,10 +16,9 @@
 
 package com.android.settings.fuelgauge;
 
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -30,8 +29,10 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.TextView;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -61,7 +62,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_HIGH_POWER_DETAILS;
+        return SettingsEnums.DIALOG_HIGH_POWER_DETAILS;
     }
 
     @Override
@@ -152,8 +153,8 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
 
     @VisibleForTesting
     static void logSpecialPermissionChange(boolean whitelist, String packageName, Context context) {
-        int logCategory = whitelist ? MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_DENY
-                : MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_ALLOW;
+        int logCategory = whitelist ? SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_DENY
+                : SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_ALLOW;
         FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context, logCategory,
                 packageName);
     }
@@ -172,10 +173,18 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     }
 
     public static CharSequence getSummary(Context context, String pkg) {
-        PowerWhitelistBackend powerWhitelist = PowerWhitelistBackend.getInstance(context);
-        return context.getString(powerWhitelist.isSysWhitelisted(pkg) ? R.string.high_power_system
-                : powerWhitelist.isWhitelisted(pkg) ? R.string.high_power_on
-                        : R.string.high_power_off);
+        return getSummary(context, PowerWhitelistBackend.getInstance(context), pkg);
+    }
+
+    @VisibleForTesting
+    static CharSequence getSummary(Context context, PowerWhitelistBackend powerWhitelist,
+            String pkg) {
+        return context.getString(
+                powerWhitelist.isSysWhitelisted(pkg) || powerWhitelist.isDefaultActiveApp(pkg)
+                        ? R.string.high_power_system
+                        : powerWhitelist.isWhitelisted(pkg)
+                                ? R.string.high_power_on
+                                : R.string.high_power_off);
     }
 
     public static void show(Fragment caller, int uid, String packageName, int requestCode) {

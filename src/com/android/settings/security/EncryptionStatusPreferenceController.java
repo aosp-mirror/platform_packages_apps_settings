@@ -18,8 +18,9 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;

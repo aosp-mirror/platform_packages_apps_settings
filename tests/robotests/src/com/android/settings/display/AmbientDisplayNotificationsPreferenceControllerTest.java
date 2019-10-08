@@ -17,24 +17,24 @@
 package com.android.settings.display;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
+
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -43,11 +43,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSecureSettings.class)
 public class AmbientDisplayNotificationsPreferenceControllerTest {
 
@@ -98,7 +99,7 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
         mController.onPreferenceChange(mSwitchPreference, true);
 
         assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ENABLED, -1))
-            .isEqualTo(1);
+                .isEqualTo(1);
     }
 
     @Test
@@ -106,7 +107,7 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
         mController.onPreferenceChange(mSwitchPreference, false);
 
         assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ENABLED, -1))
-            .isEqualTo(0);
+                .isEqualTo(0);
     }
 
     @Test
@@ -154,33 +155,6 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mSwitchPreference);
 
         verifyNoMoreInteractions(mMetricsFeatureProvider);
-    }
-
-    @Test
-    public void testPreferenceController_ProperResultPayloadType() {
-        assertThat(mController.getResultPayload()).isInstanceOf(InlineSwitchPayload.class);
-    }
-
-    @Test
-    public void testSetValue_updatesCorrectly() {
-        int newValue = 1;
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ENABLED, 0);
-
-        ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue =
-            Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ENABLED, 1);
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    public void testGetValue_correctValueReturned() {
-        int currentValue = 1;
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ENABLED, currentValue);
-
-        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
-
-        assertThat(newValue).isEqualTo(currentValue);
     }
 
     @Test

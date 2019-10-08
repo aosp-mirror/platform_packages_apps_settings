@@ -17,16 +17,19 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
+
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PowerManager;
-import androidx.preference.PreferenceScreen;
 import android.widget.Button;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.widget.TwoStateButtonPreference;
 
 import org.junit.Before;
@@ -34,22 +37,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowPowerManager;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowPowerManager.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatterySaverButtonPreferenceControllerTest {
 
     private BatterySaverButtonPreferenceController mController;
     private Context mContext;
     private Button mButtonOn;
     private Button mButtonOff;
-    private PowerManager mPowerManager;
     private TwoStateButtonPreference mPreference;
 
+    @Mock
+    private PowerManager mPowerManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
@@ -59,10 +61,11 @@ public class BatterySaverButtonPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mButtonOn = new Button(mContext);
         mButtonOff = new Button(mContext);
-        mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mPreference = spy(new TwoStateButtonPreference(mContext, null /* AttributeSet */));
         ReflectionHelpers.setField(mPreference, "mButtonOn", mButtonOn);
         ReflectionHelpers.setField(mPreference, "mButtonOff", mButtonOff);
+
+        doReturn(mPowerManager).when(mContext).getSystemService(Context.POWER_SERVICE);
         doReturn(mPreference).when(mPreferenceScreen).findPreference(anyString());
 
         mController = new BatterySaverButtonPreferenceController(mContext, "test_key");
@@ -71,7 +74,7 @@ public class BatterySaverButtonPreferenceControllerTest {
 
     @Test
     public void updateState_lowPowerOn_preferenceIsChecked() {
-        mPowerManager.setPowerSaveMode(true);
+        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
         mController.updateState(mPreference);
 
@@ -80,7 +83,7 @@ public class BatterySaverButtonPreferenceControllerTest {
 
     @Test
     public void testUpdateState_lowPowerOff_preferenceIsUnchecked() {
-        mPowerManager.setPowerSaveMode(false);
+        when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
         mController.updateState(mPreference);
 
@@ -91,13 +94,13 @@ public class BatterySaverButtonPreferenceControllerTest {
     public void setChecked_on_setPowerSaveMode() {
         mController.setChecked(true);
 
-        assertThat(mPowerManager.isPowerSaveMode()).isTrue();
+        verify(mPowerManager).setPowerSaveModeEnabled(true);
     }
 
     @Test
     public void setChecked_off_unsetPowerSaveMode() {
         mController.setChecked(false);
 
-        assertThat(mPowerManager.isPowerSaveMode()).isFalse();
+        verify(mPowerManager).setPowerSaveModeEnabled(false);
     }
 }

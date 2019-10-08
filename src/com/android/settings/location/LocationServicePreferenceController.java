@@ -19,12 +19,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.SettingInjectorService;
 import android.os.UserHandle;
+import android.util.Log;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import android.util.Log;
 
+import com.android.settings.Utils;
 import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -32,6 +34,7 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
+import java.util.Map;
 
 public class LocationServicePreferenceController extends LocationBasePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
@@ -39,25 +42,28 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
     private static final String TAG = "LocationServicePrefCtrl";
     /** Key for preference category "Location services" */
     private static final String KEY_LOCATION_SERVICES = "location_services";
+    /** Key for preference category "Location services for work" */
+    private static final String KEY_LOCATION_SERVICES_MANAGED = "location_services_managed_profile";
     @VisibleForTesting
     static final IntentFilter INTENT_FILTER_INJECTED_SETTING_CHANGED =
             new IntentFilter(SettingInjectorService.ACTION_INJECTED_SETTING_CHANGED);
 
     private PreferenceCategory mCategoryLocationServices;
+    private PreferenceCategory mCategoryLocationServicesManaged;
     private final LocationSettings mFragment;
-    private final SettingsInjector mInjector;
-    /** Receives UPDATE_INTENT  */
+    private final AppSettingsInjector mInjector;
+    /** Receives UPDATE_INTENT */
     @VisibleForTesting
     BroadcastReceiver mInjectedSettingsReceiver;
 
     public LocationServicePreferenceController(Context context, LocationSettings fragment,
             Lifecycle lifecycle) {
-        this(context, fragment, lifecycle, new SettingsInjector(context));
+        this(context, fragment, lifecycle, new AppSettingsInjector(context));
     }
 
     @VisibleForTesting
     LocationServicePreferenceController(Context context, LocationSettings fragment,
-            Lifecycle lifecycle, SettingsInjector injector) {
+            Lifecycle lifecycle, AppSettingsInjector injector) {
         super(context, lifecycle);
         mFragment = fragment;
         mInjector = injector;
@@ -72,30 +78,36 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
     }
 
     @Override
-    public boolean isAvailable() {
-        // If managed profile has lock-down on location access then its injected location services
-        // must not be shown.
-        return mInjector.hasInjectedSettings(mLocationEnabler.isManagedProfileRestrictedByBase()
-                ? UserHandle.myUserId() : UserHandle.USER_CURRENT);
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mCategoryLocationServices =
-                (PreferenceCategory) screen.findPreference(KEY_LOCATION_SERVICES);
+        mCategoryLocationServices = screen.findPreference(KEY_LOCATION_SERVICES);
+        mCategoryLocationServicesManaged = screen.findPreference(KEY_LOCATION_SERVICES_MANAGED);
     }
 
     @Override
     public void updateState(Preference preference) {
         mCategoryLocationServices.removeAll();
-        final List<Preference> prefs = getLocationServices();
-        for (Preference pref : prefs) {
-            if (pref instanceof RestrictedAppPreference) {
-                ((RestrictedAppPreference) pref).checkRestrictionAndSetDisabled();
+        mCategoryLocationServicesManaged.removeAll();
+        final Map<Integer, List<Preference>> prefs = getLocationServices();
+        boolean showPrimary = false;
+        boolean showManaged = false;
+        for (Map.Entry<Integer, List<Preference>> entry : prefs.entrySet()) {
+            for (Preference pref : entry.getValue()) {
+                if (pref instanceof RestrictedAppPreference) {
+                    ((RestrictedAppPreference) pref).checkRestrictionAndSetDisabled();
+                }
+            }
+            if (entry.getKey() == UserHandle.myUserId()) {
+                LocationSettings.addPreferencesSorted(entry.getValue(), mCategoryLocationServices);
+                showPrimary = true;
+            } else {
+                LocationSettings.addPreferencesSorted(entry.getValue(),
+                        mCategoryLocationServicesManaged);
+                showManaged = true;
             }
         }
-        LocationSettings.addPreferencesSorted(prefs, mCategoryLocationServices);
+        mCategoryLocationServices.setVisible(showPrimary);
+        mCategoryLocationServicesManaged.setVisible(showManaged);
     }
 
     @Override
@@ -127,11 +139,14 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
         mContext.unregisterReceiver(mInjectedSettingsReceiver);
     }
 
-    private List<Preference> getLocationServices() {
+    private Map<Integer, List<Preference>> getLocationServices() {
         // If location access is locked down by device policy then we only show injected settings
         // for the primary profile.
+        final int profileUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+
         return mInjector.getInjectedSettings(mFragment.getPreferenceManager().getContext(),
-                mLocationEnabler.isManagedProfileRestrictedByBase()
+                (profileUserId != UserHandle.USER_NULL
+                        && mLocationEnabler.getShareLocationEnforcedAdmin(profileUserId) != null)
                         ? UserHandle.myUserId() : UserHandle.USER_CURRENT);
     }
 }

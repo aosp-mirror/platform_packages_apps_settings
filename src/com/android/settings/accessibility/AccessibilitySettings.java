@@ -18,48 +18,58 @@ package com.android.settings.accessibility;
 
 import static android.os.Vibrator.VibrationIntensity;
 
+import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.hardware.display.ColorDisplayManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.Vibrator;
+import android.provider.DeviceConfig;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
-import androidx.core.content.ContextCompat;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.ContextCompat;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.content.PackageMonitor;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.display.DarkUIPreferenceController;
+import com.android.settings.display.ToggleFontSizePreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.search.SearchIndexable;
+
+import com.google.common.primitives.Ints;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -71,8 +81,9 @@ import java.util.Set;
 /**
  * Activity with the accessibility settings.
  */
+@SearchIndexable
 public class AccessibilitySettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, Indexable {
+        Preference.OnPreferenceChangeListener {
 
     // Index of the first preference in a preference category.
     private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
@@ -108,20 +119,27 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "select_long_press_timeout_preference";
     private static final String ACCESSIBILITY_SHORTCUT_PREFERENCE =
             "accessibility_shortcut_preference";
+    private static final String HEARING_AID_PREFERENCE =
+            "hearing_aid_preference";
     private static final String CAPTIONING_PREFERENCE_SCREEN =
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "magnification_preference_screen";
     private static final String FONT_SIZE_PREFERENCE_SCREEN =
             "font_size_preference_screen";
-    private static final String TTS_SETTINGS_PREFERENCE =
-            "tts_settings_preference";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
-            "autoclick_preference_screen";
+            "autoclick_preference";
     private static final String VIBRATION_PREFERENCE_SCREEN =
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
-            "daltonizer_preference_screen";
+            "daltonizer_preference";
+    private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
+            "accessibility_control_timeout_preference_fragment";
+    private static final String DARK_UI_MODE_PREFERENCE =
+            "dark_ui_mode_accessibility";
+    private static final String LIVE_CAPTION_PREFERENCE_KEY =
+            "live_caption";
+
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -150,6 +168,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     };
     private static final String ANIMATION_ON_VALUE = "1";
     private static final String ANIMATION_OFF_VALUE = "0";
+
+    static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
 
     private final Map<String, String> mLongPressTimeoutValueToTitleMap = new HashMap<>();
 
@@ -219,8 +239,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mAutoclickPreferenceScreen;
     private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
+    private Preference mHearingAidPreference;
     private Preference mVibrationPreferenceScreen;
+    private Preference mLiveCaptionPreference;
     private SwitchPreference mToggleInversionPreference;
+    private ColorInversionPreferenceController mInversionPreferenceController;
+    private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
+    private SwitchPreference mDarkUIModePreference;
+    private DarkUIPreferenceController mDarkUIPreferenceController;
+    private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -255,7 +282,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY;
+        return SettingsEnums.ACCESSIBILITY;
     }
 
     @Override
@@ -270,6 +297,18 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         initializeAllPreferences();
         mDpm = (DevicePolicyManager) (getActivity()
                 .getSystemService(Context.DEVICE_POLICY_SERVICE));
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mHearingAidPreferenceController = new AccessibilityHearingAidPreferenceController
+                (context, HEARING_AID_PREFERENCE);
+        mHearingAidPreferenceController.setFragmentManager(getFragmentManager());
+        getLifecycle().addObserver(mHearingAidPreferenceController);
+
+        mLiveCaptionPreferenceController = new LiveCaptionPreferenceController(context,
+                LIVE_CAPTION_PREFERENCE_KEY);
     }
 
     @Override
@@ -301,9 +340,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (mSelectLongPressTimeoutPreference == preference) {
             handleLongPressTimeoutPreferenceChange((String) newValue);
             return true;
-        } else if (mToggleInversionPreference == preference) {
-            handleToggleInversionPreferenceChange((Boolean) newValue);
-            return true;
         }
         return false;
     }
@@ -313,11 +349,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 Settings.Secure.LONG_PRESS_TIMEOUT, Integer.parseInt(stringValue));
         mSelectLongPressTimeoutPreference.setSummary(
                 mLongPressTimeoutValueToTitleMap.get(stringValue));
-    }
-
-    private void handleToggleInversionPreferenceChange(boolean checked) {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, (checked ? 1 : 0));
     }
 
     @Override
@@ -340,6 +371,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } else if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
             return true;
+        } else if (mHearingAidPreferenceController.handlePreferenceTreeClick(preference)) {
+            return true;
         }
         return super.onPreferenceTreeClick(preference);
     }
@@ -357,6 +390,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         return (TextUtils.isEmpty(serviceSummary))
                 ? serviceState
                 : stateSummaryCombo;
+    }
+
+    @VisibleForTesting
+    static boolean isRampingRingerEnabled(final Context context) {
+        return (Settings.Global.getInt(
+                        context.getContentResolver(),
+                        Settings.Global.APPLY_RAMPING_RINGER, 0) == 1)
+                && DeviceConfig.getBoolean(
+                        DeviceConfig.NAMESPACE_TELEPHONY, RAMPING_RINGER_ENABLED, false);
     }
 
     private void handleToggleTextContrastPreferenceClick() {
@@ -409,7 +451,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         // Display inversion.
         mToggleInversionPreference = (SwitchPreference) findPreference(TOGGLE_INVERSION_PREFERENCE);
-        mToggleInversionPreference.setOnPreferenceChangeListener(this);
+        mInversionPreferenceController =
+                new ColorInversionPreferenceController(getContext(), TOGGLE_INVERSION_PREFERENCE);
+        mInversionPreferenceController.displayPreference(getPreferenceScreen());
 
         // Power button ends calls.
         mTogglePowerButtonEndsCallPreference =
@@ -455,8 +499,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             }
         }
 
+        // Hearing Aid.
+        mHearingAidPreference = findPreference(HEARING_AID_PREFERENCE);
+        mHearingAidPreferenceController.displayPreference(getPreferenceScreen());
+
         // Captioning.
         mCaptioningPreferenceScreen = findPreference(CAPTIONING_PREFERENCE_SCREEN);
+
+        // Live caption
+        mLiveCaptionPreference = findPreference(LIVE_CAPTION_PREFERENCE_KEY);
+        mLiveCaptionPreferenceController.displayPreference(getPreferenceScreen());
 
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
@@ -477,6 +529,13 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         // Vibrations.
         mVibrationPreferenceScreen = findPreference(VIBRATION_PREFERENCE_SCREEN);
+
+        // Dark Mode.
+        mDarkUIModePreference = findPreference(DARK_UI_MODE_PREFERENCE);
+        mDarkUIPreferenceController = new DarkUIPreferenceController(getContext(),
+                DARK_UI_MODE_PREFERENCE);
+        mDarkUIPreferenceController.setParentFragment(this);
+        mDarkUIPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     private void updateAllPreferences() {
@@ -535,7 +594,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
             Drawable icon;
             if (resolveInfo.getIconResource() == 0) {
-                icon = ContextCompat.getDrawable(getContext(), R.mipmap.ic_accessibility_generic);
+                icon = ContextCompat.getDrawable(getContext(), R.drawable.ic_accessibility_generic);
             } else {
                 icon = resolveInfo.loadIcon(getPackageManager());
             }
@@ -547,6 +606,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             preference.setKey(componentName.flattenToString());
 
             preference.setTitle(title);
+            preference.setIconSize(ICON_SIZE_MEDIUM);
             Utils.setSafeIcon(preference, icon);
             final boolean serviceEnabled = enabledServices.contains(componentName);
             String description = info.loadDescription(getPackageManager());
@@ -570,7 +630,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     permittedServices == null || permittedServices.contains(packageName);
             if (!serviceAllowed && !serviceEnabled) {
                 final EnforcedAdmin admin =
-                        RestrictedLockUtils.checkIfAccessibilityServiceDisallowed(
+                        RestrictedLockUtilsInternal.checkIfAccessibilityServiceDisallowed(
                                 getActivity(), packageName, UserHandle.myUserId());
                 if (admin != null) {
                     preference.setDisabledByAdmin(admin);
@@ -610,6 +670,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mServicePreferenceToPreferenceCategoryMap.put(preference, prefCategory);
         }
 
+        // Update the order of all the category according to the order defined in xml file.
+        updateCategoryOrderFromArray(CATEGORY_SCREEN_READER,
+            R.array.config_order_screen_reader_services);
+        updateCategoryOrderFromArray(CATEGORY_AUDIO_AND_CAPTIONS,
+            R.array.config_order_audio_and_caption_services);
+        updateCategoryOrderFromArray(CATEGORY_INTERACTION_CONTROL,
+            R.array.config_order_interaction_control_services);
+        updateCategoryOrderFromArray(CATEGORY_DISPLAY,
+            R.array.config_order_display_services);
+
         // If the user has not installed any additional services, hide the category.
         if (downloadedServicesCategory.getPreferenceCount() == 0) {
             final PreferenceScreen screen = getPreferenceScreen();
@@ -626,18 +696,47 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     }
 
+    /**
+     * Update the order of perferences in the category by matching their preference
+     * key with the string array of preference order which is defined in the xml.
+     *
+     * @param categoryKey The key of the category need to update the order
+     * @param key The key of the string array which defines the order of category
+     */
+    private void updateCategoryOrderFromArray(String categoryKey, int key) {
+        String[] services = getResources().getStringArray(key);
+        PreferenceCategory category = mCategoryToPrefCategoryMap.get(categoryKey);
+        int preferenceCount = category.getPreferenceCount();
+        int serviceLength = services.length;
+        for (int preferenceIndex = 0; preferenceIndex < preferenceCount; preferenceIndex++) {
+            for (int serviceIndex = 0; serviceIndex < serviceLength; serviceIndex++) {
+                if (category.getPreference(preferenceIndex).getKey()
+                        .equals(services[serviceIndex])) {
+                    category.getPreference(preferenceIndex).setOrder(serviceIndex);
+                    break;
+                }
+            }
+        }
+    }
+
     protected void updateSystemPreferences() {
         // Move color inversion and color correction preferences to Display category if device
         // supports HWC hardware-accelerated color transform.
-        if (isColorTransformAccelerated(getContext())) {
+        if (ColorDisplayManager.isColorTransformAccelerated(getContext())) {
             PreferenceCategory experimentalCategory =
                     mCategoryToPrefCategoryMap.get(CATEGORY_EXPERIMENTAL);
             PreferenceCategory displayCategory =
                     mCategoryToPrefCategoryMap.get(CATEGORY_DISPLAY);
             experimentalCategory.removePreference(mToggleInversionPreference);
             experimentalCategory.removePreference(mDisplayDaltonizerPreferenceScreen);
-            mToggleInversionPreference.setOrder(mToggleLargePointerIconPreference.getOrder());
-            mDisplayDaltonizerPreferenceScreen.setOrder(mToggleInversionPreference.getOrder());
+            mDisplayDaltonizerPreferenceScreen.setOrder(
+                    mDisplayMagnificationPreferenceScreen.getOrder() + 1);
+            mToggleInversionPreference.setOrder(
+                    mDisplayDaltonizerPreferenceScreen.getOrder() + 1);
+            mToggleLargePointerIconPreference.setOrder(
+                    mToggleInversionPreference.getOrder() + 1);
+            mToggleDisableAnimationsPreference.setOrder(
+                    mToggleLargePointerIconPreference.getOrder() + 1);
             mToggleInversionPreference.setSummary(R.string.summary_empty);
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
@@ -649,8 +748,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                         Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0) == 1);
 
         // If the quick setting is enabled, the preference MUST be enabled.
-        mToggleInversionPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, 0) == 1);
+        mInversionPreferenceController.updateState(mToggleInversionPreference);
+
+        // Dark Mode
+        mDarkUIPreferenceController.updateState(mDarkUIModePreference);
 
         // Power button ends calls.
         if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
@@ -684,6 +785,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         updateVibrationSummary(mVibrationPreferenceScreen);
 
+        mHearingAidPreferenceController.updateState(mHearingAidPreference);
+
+        mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
+
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
                 mCaptioningPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
@@ -696,6 +801,22 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
+
+        updateAccessibilityTimeoutSummary(getContentResolver(),
+                findPreference(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE));
+    }
+
+    void updateAccessibilityTimeoutSummary(ContentResolver resolver, Preference pref) {
+        String[] timeoutSummarys = getResources().getStringArray(
+                R.array.accessibility_timeout_summaries);
+        int[] timeoutValues = getResources().getIntArray(
+                R.array.accessibility_timeout_selector_values);
+
+        int timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
+                    resolver, AccessibilityTimeoutController.CONTROL_TIMEOUT_SETTINGS_SECURE);
+
+        int idx = Ints.indexOf(timeoutValues, timeoutValue);
+        pref.setSummary(timeoutSummarys[idx == -1 ? 0 : idx]);
     }
 
     private void updateMagnificationSummary(Preference pref) {
@@ -748,20 +869,35 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         pref.setSummary(entries[index]);
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void updateVibrationSummary(Preference pref) {
         final Context context = getContext();
         final Vibrator vibrator = context.getSystemService(Vibrator.class);
 
-        final int ringIntensity = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                vibrator.getDefaultNotificationVibrationIntensity());
+        int ringIntensity = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.RING_VIBRATION_INTENSITY,
+                vibrator.getDefaultRingVibrationIntensity());
+        if (Settings.System.getInt(context.getContentResolver(),
+                Settings.System.VIBRATE_WHEN_RINGING, 0) == 0 && !isRampingRingerEnabled(context)) {
+            ringIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
+        }
         CharSequence ringIntensityString =
                 VibrationIntensityPreferenceController.getIntensityString(context, ringIntensity);
 
-        final int touchIntensity = Settings.System.getInt(context.getContentResolver(),
+        int notificationIntensity = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
+                vibrator.getDefaultNotificationVibrationIntensity());
+        CharSequence notificationIntensityString =
+                VibrationIntensityPreferenceController.getIntensityString(context,
+                        notificationIntensity);
+
+        int touchIntensity = Settings.System.getInt(context.getContentResolver(),
                 Settings.System.HAPTIC_FEEDBACK_INTENSITY,
                 vibrator.getDefaultHapticFeedbackIntensity());
+        if (Settings.System.getInt(context.getContentResolver(),
+                Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) == 0) {
+            touchIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
+        }
         CharSequence touchIntensityString =
                 VibrationIntensityPreferenceController.getIntensityString(context, touchIntensity);
 
@@ -769,12 +905,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mVibrationPreferenceScreen = findPreference(VIBRATION_PREFERENCE_SCREEN);
         }
 
-        if (ringIntensity == touchIntensity) {
+        if (ringIntensity == touchIntensity && ringIntensity == notificationIntensity) {
             mVibrationPreferenceScreen.setSummary(ringIntensityString);
         } else {
             mVibrationPreferenceScreen.setSummary(
                     getString(R.string.accessibility_vibration_summary,
-                            ringIntensityString, touchIntensityString));
+                            ringIntensityString,
+                            notificationIntensityString,
+                            touchIntensityString));
         }
     }
 
@@ -864,8 +1002,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
 
-                public static final String KEY_DISPLAY_SIZE = "accessibility_settings_screen_zoom";
-
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
@@ -874,19 +1010,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     indexable.xmlResId = R.xml.accessibility_settings;
                     indexables.add(indexable);
                     return indexables;
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Duplicates in Display
-                    keys.add(FONT_SIZE_PREFERENCE_SCREEN);
-                    keys.add(KEY_DISPLAY_SIZE);
-
-                    // Duplicates in Language & Input
-                    keys.add(TTS_SETTINGS_PREFERENCE);
-
-                    return keys;
                 }
             };
 }

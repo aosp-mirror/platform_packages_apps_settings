@@ -17,13 +17,14 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import androidx.preference.PreferenceFragment;
+
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.ActionButtonsPreference;
 
 /**
  * This class adds two buttons: one to connect/disconnect from a device (depending on the current
@@ -34,9 +35,9 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
     private boolean mIsConnected;
 
     private boolean mConnectButtonInitialized;
-    private ActionButtonPreference mActionButtons;
+    private ActionButtonsPreference mActionButtons;
 
-    public BluetoothDetailsButtonsController(Context context, PreferenceFragment fragment,
+    public BluetoothDetailsButtonsController(Context context, PreferenceFragmentCompat fragment,
             CachedBluetoothDevice device, Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
         mIsConnected = device.isConnected();
@@ -50,10 +51,11 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
 
     @Override
     protected void init(PreferenceScreen screen) {
-        mActionButtons = ((ActionButtonPreference) screen.findPreference(getPreferenceKey()))
+        mActionButtons = ((ActionButtonsPreference) screen.findPreference(
+                getPreferenceKey()))
                 .setButton1Text(R.string.forget)
+                .setButton1Icon(R.drawable.ic_settings_delete)
                 .setButton1OnClickListener((view) -> onForgetButtonPressed())
-                .setButton1Positive(false)
                 .setButton1Enabled(true);
     }
 
@@ -67,17 +69,17 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
             if (!mConnectButtonInitialized || !previouslyConnected) {
                 mActionButtons
                         .setButton2Text(R.string.bluetooth_device_context_disconnect)
-                        .setButton2OnClickListener(view -> mCachedDevice.disconnect())
-                        .setButton2Positive(false);
+                        .setButton2Icon(R.drawable.ic_settings_close)
+                        .setButton2OnClickListener(view -> mCachedDevice.disconnect());
                 mConnectButtonInitialized = true;
             }
         } else {
             if (!mConnectButtonInitialized || previouslyConnected) {
                 mActionButtons
                         .setButton2Text(R.string.bluetooth_device_context_connect)
+                        .setButton2Icon(R.drawable.ic_add_24dp)
                         .setButton2OnClickListener(
-                                view -> mCachedDevice.connect(true /* connectAllProfiles */))
-                        .setButton2Positive(true);
+                                view -> mCachedDevice.connect(true /* connectAllProfiles */));
                 mConnectButtonInitialized = true;
             }
         }

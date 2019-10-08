@@ -20,7 +20,7 @@ import android.util.KeyValueListParser;
 import android.util.Log;
 
 /**
- * Model class to parse and store anomaly info from westworld
+ * Model class to parse and store anomaly info from statsd.
  */
 public class AnomalyInfo {
     private static final String TAG = "AnomalyInfo";

@@ -23,19 +23,20 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class MagnificationGesturesPreferenceControllerTest {
 
     private Context mContext;
@@ -59,13 +60,13 @@ public class MagnificationGesturesPreferenceControllerTest {
 
     @Test
     public void updateState_shouldRefreshSummary() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, ON);
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.accessibility_feature_state_on));
 
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF);
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
@@ -83,7 +84,7 @@ public class MagnificationGesturesPreferenceControllerTest {
 
     @Test
     public void isChecked_enabled() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, ON);
 
         assertThat(mController.isChecked()).isTrue();
@@ -91,7 +92,7 @@ public class MagnificationGesturesPreferenceControllerTest {
 
     @Test
     public void isChecked_disabled() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF);
 
         assertThat(mController.isChecked()).isFalse();

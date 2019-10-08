@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 
 import android.annotation.NonNull;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -27,28 +26,29 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * RequestPermissionActivity asks the user whether to enable discovery. This is
  * usually started by an application wanted to start bluetooth and or discovery
  */
 public class RequestPermissionActivity extends Activity implements
-        DialogInterface.OnClickListener {
+        DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
     // Command line to test this
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_ENABLE
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_DISCOVERABLE
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_DISABLE
 
-    private static final String TAG = "RequestPermissionActivity";
+    private static final String TAG = "BtRequestPermission";
 
     private static final int MAX_DISCOVERABLE_TIMEOUT = 3600; // 1 hr
 
@@ -56,7 +56,7 @@ public class RequestPermissionActivity extends Activity implements
     static final int REQUEST_ENABLE_DISCOVERABLE = 2;
     static final int REQUEST_DISABLE = 3;
 
-    private LocalBluetoothAdapter mLocalAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
 
     private int mTimeout = BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT;
 
@@ -74,13 +74,13 @@ public class RequestPermissionActivity extends Activity implements
 
         setResult(Activity.RESULT_CANCELED);
 
-        // Note: initializes mLocalAdapter and returns true on error
+        // Note: initializes mBluetoothAdapter and returns true on error
         if (parseIntent()) {
             finish();
             return;
         }
 
-        int btState = mLocalAdapter.getState();
+        int btState = mBluetoothAdapter.getState();
 
         if (mRequest == REQUEST_DISABLE) {
             switch (btState) {
@@ -188,6 +188,7 @@ public class RequestPermissionActivity extends Activity implements
             builder.setNegativeButton(getString(R.string.deny), this);
         }
 
+        builder.setOnDismissListener(this);
         mDialog = builder.create();
         mDialog.show();
     }
@@ -202,7 +203,7 @@ public class RequestPermissionActivity extends Activity implements
         switch (mRequest) {
             case REQUEST_ENABLE:
             case REQUEST_ENABLE_DISCOVERABLE: {
-                if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON) {
+                if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
                     proceedAndFinish();
                 } else {
                     // If BT is not up yet, show "Turning on Bluetooth..."
@@ -214,7 +215,7 @@ public class RequestPermissionActivity extends Activity implements
             } break;
 
             case REQUEST_DISABLE: {
-                if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_OFF) {
+                if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_OFF) {
                     proceedAndFinish();
                 } else {
                     // If BT is not up yet, show "Turning off Bluetooth..."
@@ -238,10 +239,14 @@ public class RequestPermissionActivity extends Activity implements
                 break;
 
             case DialogInterface.BUTTON_NEGATIVE:
-                setResult(RESULT_CANCELED);
-                finish();
+                cancelAndFinish();
                 break;
         }
+    }
+
+    @Override
+    public void onDismiss(final DialogInterface dialog) {
+        cancelAndFinish();
     }
 
     private void proceedAndFinish() {
@@ -250,7 +255,7 @@ public class RequestPermissionActivity extends Activity implements
         if (mRequest == REQUEST_ENABLE || mRequest == REQUEST_DISABLE) {
             // BT toggled. Done
             returnCode = RESULT_OK;
-        } else if (mLocalAdapter.setScanMode(
+        } else if (mBluetoothAdapter.setScanMode(
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, mTimeout)) {
             // If already in discoverable mode, this will extend the timeout.
             long endTime = System.currentTimeMillis() + (long) mTimeout * 1000;
@@ -282,7 +287,7 @@ public class RequestPermissionActivity extends Activity implements
     }
 
     /**
-     * Parse the received Intent and initialize mLocalBluetoothAdapter.
+     * Parse the received Intent and initialize mBluetoothAdapter.
      * @return true if an error occurred; false otherwise
      */
     private boolean parseIntent() {
@@ -312,13 +317,6 @@ public class RequestPermissionActivity extends Activity implements
             return true;
         }
 
-        LocalBluetoothManager manager = Utils.getLocalBtManager(this);
-        if (manager == null) {
-            Log.e(TAG, "Error: there's a problem starting Bluetooth");
-            setResult(RESULT_CANCELED);
-            return true;
-        }
-
         String packageName = getCallingPackage();
         if (TextUtils.isEmpty(packageName)) {
             packageName = getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME);
@@ -327,7 +325,10 @@ public class RequestPermissionActivity extends Activity implements
             try {
                 ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(
                         packageName, 0);
-                mAppLabel = applicationInfo.loadSafeLabel(getPackageManager());
+                mAppLabel = applicationInfo.loadSafeLabel(getPackageManager(),
+                        PackageItemInfo.DEFAULT_MAX_LABEL_SIZE_PX,
+                        PackageItemInfo.SAFE_LABEL_FLAG_TRIM
+                                | PackageItemInfo.SAFE_LABEL_FLAG_FIRST_LINE);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "Couldn't find app with package name " + packageName);
                 setResult(RESULT_CANCELED);
@@ -335,7 +336,12 @@ public class RequestPermissionActivity extends Activity implements
             }
         }
 
-        mLocalAdapter = manager.getBluetoothAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            Log.e(TAG, "Error: there's a problem starting Bluetooth");
+            setResult(RESULT_CANCELED);
+            return true;
+        }
 
         return false;
     }
