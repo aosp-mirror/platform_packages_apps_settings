@@ -111,7 +111,7 @@ public class SettingsBaseActivity extends FragmentActivity {
         filter.addDataScheme(DATA_SCHEME_PKG);
         registerReceiver(mPackageReceiver, filter);
 
-        new CategoriesUpdateTask().execute();
+        updateCategories();
     }
 
     @Override
@@ -153,7 +153,6 @@ public class SettingsBaseActivity extends FragmentActivity {
             mCategoryListeners.get(i).onCategoriesChanged();
         }
     }
-
 
     private boolean isLockTaskModePinned() {
         final ActivityManager activityManager =
@@ -226,7 +225,7 @@ public class SettingsBaseActivity extends FragmentActivity {
     private class PackageReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            new CategoriesUpdateTask().execute();
+            updateCategories();
         }
     }
 }
