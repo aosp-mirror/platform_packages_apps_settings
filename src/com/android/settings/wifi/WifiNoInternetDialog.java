@@ -16,6 +16,11 @@
 
 package com.android.settings.wifi;
 
+import static android.net.ConnectivityManager.ACTION_PROMPT_LOST_VALIDATION;
+import static android.net.ConnectivityManager.ACTION_PROMPT_PARTIAL_CONNECTIVITY;
+import static android.net.ConnectivityManager.ACTION_PROMPT_UNVALIDATED;
+import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,11 +42,6 @@ import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 
-import static android.net.ConnectivityManager.ACTION_PROMPT_LOST_VALIDATION;
-import static android.net.ConnectivityManager.ACTION_PROMPT_PARTIAL_CONNECTIVITY;
-import static android.net.ConnectivityManager.ACTION_PROMPT_UNVALIDATED;
-import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
-
 public final class WifiNoInternetDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
     private static final String TAG = "WifiNoInternetDialog";
@@ -52,6 +52,7 @@ public final class WifiNoInternetDialog extends AlertActivity implements
     private ConnectivityManager.NetworkCallback mNetworkCallback;
     private CheckBox mAlwaysAllow;
     private String mAction;
+    private boolean mButtonClicked;
 
     private boolean isKnownAction(Intent intent) {
         return intent.getAction().equals(ACTION_PROMPT_UNVALIDATED)
@@ -169,13 +170,30 @@ public final class WifiNoInternetDialog extends AlertActivity implements
             mCM.unregisterNetworkCallback(mNetworkCallback);
             mNetworkCallback = null;
         }
+
+        // If the user exits the no Internet or partial connectivity dialog without taking any
+        // action, disconnect the network, because once the dialog has been dismissed there is no
+        // way to use the network.
+        //
+        // Unfortunately, AlertDialog does not seem to offer any good way to get an onCancel or
+        // onDismiss callback. So we implement this ourselves.
+        if (isFinishing() && !mButtonClicked) {
+            if (ACTION_PROMPT_PARTIAL_CONNECTIVITY.equals(mAction)) {
+                mCM.setAcceptPartialConnectivity(mNetwork, false /* accept */, false /* always */);
+            } else if (ACTION_PROMPT_UNVALIDATED.equals(mAction)) {
+                mCM.setAcceptUnvalidated(mNetwork, false /* accept */, false /* always */);
+            }
+        }
         super.onDestroy();
     }
 
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         if (which != BUTTON_NEGATIVE && which != BUTTON_POSITIVE) return;
         final boolean always = mAlwaysAllow.isChecked();
         final String what, action;
+
+        mButtonClicked = true;
 
         if (ACTION_PROMPT_UNVALIDATED.equals(mAction)) {
             what = "NO_INTERNET";

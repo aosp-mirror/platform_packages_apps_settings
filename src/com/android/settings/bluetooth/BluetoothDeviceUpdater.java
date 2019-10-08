@@ -15,13 +15,14 @@
  */
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.SystemProperties;
+import android.util.Log;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -49,17 +50,15 @@ import java.util.Map;
 public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         LocalBluetoothProfileManager.ServiceListener {
     private static final String TAG = "BluetoothDeviceUpdater";
-    private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
-            "persist.bluetooth.showdeviceswithoutnames";
+    private static final boolean DBG = false;
 
-    protected final LocalBluetoothManager mLocalManager;
     protected final DevicePreferenceCallback mDevicePreferenceCallback;
     protected final Map<BluetoothDevice, Preference> mPreferenceMap;
     protected Context mPrefContext;
     protected DashboardFragment mFragment;
+    @VisibleForTesting
+    protected LocalBluetoothManager mLocalManager;
 
-    private final boolean mShowDeviceWithoutNames;
-    
     @VisibleForTesting
     final GearPreference.OnGearClickListener mDeviceProfilesListener = pref -> {
         launchDeviceDetails(pref);
@@ -75,8 +74,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             DevicePreferenceCallback devicePreferenceCallback, LocalBluetoothManager localManager) {
         mFragment = fragment;
         mDevicePreferenceCallback = devicePreferenceCallback;
-        mShowDeviceWithoutNames = SystemProperties.getBoolean(
-                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
         mPreferenceMap = new HashMap<>();
         mLocalManager = localManager;
     }
@@ -85,6 +82,10 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * Register the bluetooth event callback and update the list
      */
     public void registerCallback() {
+        if (mLocalManager == null) {
+            Log.e(TAG, "registerCallback() Bluetooth is not supported on this device");
+            return;
+        }
         mLocalManager.setForegroundActivity(mFragment.getContext());
         mLocalManager.getEventManager().registerCallback(this);
         mLocalManager.getProfileManager().addServiceListener(this);
@@ -95,6 +96,10 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * Unregister the bluetooth event callback
      */
     public void unregisterCallback() {
+        if (mLocalManager == null) {
+            Log.e(TAG, "unregisterCallback() Bluetooth is not supported on this device");
+            return;
+        }
         mLocalManager.setForegroundActivity(null);
         mLocalManager.getEventManager().unregisterCallback(this);
         mLocalManager.getProfileManager().removeServiceListener(this);
@@ -104,20 +109,41 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * Force to update the list of bluetooth devices
      */
     public void forceUpdate() {
-        Collection<CachedBluetoothDevice> cachedDevices =
+        if (mLocalManager == null) {
+            Log.e(TAG, "forceUpdate() Bluetooth is not supported on this device");
+            return;
+        }
+        if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+            final Collection<CachedBluetoothDevice> cachedDevices =
+                    mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
+            for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
+                update(cachedBluetoothDevice);
+            }
+        } else {
+          removeAllDevicesFromPreference();
+        }
+    }
+
+    public void removeAllDevicesFromPreference() {
+        if (mLocalManager == null) {
+            Log.e(TAG, "removeAllDevicesFromPreference() BT is not supported on this device");
+            return;
+        }
+        final Collection<CachedBluetoothDevice> cachedDevices =
                 mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
         for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
-            update(cachedBluetoothDevice);
+            removePreference(cachedBluetoothDevice);
         }
     }
 
     @Override
     public void onBluetoothStateChanged(int bluetoothState) {
-        forceUpdate();
+        if (BluetoothAdapter.STATE_ON == bluetoothState) {
+            forceUpdate();
+        } else if (BluetoothAdapter.STATE_OFF == bluetoothState) {
+            removeAllDevicesFromPreference();
+        }
     }
-
-    @Override
-    public void onScanningStateChanged(boolean started) {}
 
     @Override
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
@@ -138,19 +164,22 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     }
 
     @Override
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {}
-
-    @Override
-    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-    }
-
-    @Override
-    public void onAudioModeChanged() {
-    }
-
-    @Override
     public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
             int bluetoothProfile) {
+        if (DBG) {
+            Log.d(TAG, "onProfileConnectionStateChanged() device: " + cachedDevice.getName()
+                    + ", state: " + state + ", bluetoothProfile: " + bluetoothProfile);
+        }
+        update(cachedDevice);
+    }
+
+    @Override
+    public void onAclConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
+        if (DBG) {
+            Log.d(TAG, "onAclConnectionStateChanged() device: " + cachedDevice.getName()
+                    + ", state: " + state);
+        }
+        update(cachedDevice);
     }
 
     @Override
@@ -197,7 +226,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         if (!mPreferenceMap.containsKey(device)) {
             BluetoothDevicePreference btPreference =
                     new BluetoothDevicePreference(mPrefContext, cachedDevice,
-                            mShowDeviceWithoutNames);
+                            true /* showDeviceWithoutNames */);
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
             if (this instanceof Preference.OnPreferenceClickListener) {
                 btPreference.setOnPreferenceClickListener(
@@ -213,9 +242,19 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      */
     protected void removePreference(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
+        final CachedBluetoothDevice subCachedDevice = cachedDevice.getSubDevice();
         if (mPreferenceMap.containsKey(device)) {
             mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(device));
             mPreferenceMap.remove(device);
+        } else if (subCachedDevice != null) {
+            // When doing remove, to check if preference maps to sub device.
+            // This would happen when connection state is changed in detail page that there is no
+            // callback from SettingsLib.
+            final BluetoothDevice subDevice = subCachedDevice.getDevice();
+            if (mPreferenceMap.containsKey(subDevice)) {
+                mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(subDevice));
+                mPreferenceMap.remove(subDevice);
+            }
         }
     }
 
@@ -236,7 +275,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         new SubSettingLauncher(mFragment.getContext())
                 .setDestination(BluetoothDeviceDetailsFragment.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.device_details_title)
+                .setTitleRes(R.string.device_details_title)
                 .setSourceMetricsCategory(mFragment.getMetricsCategory())
                 .launch();
     }
@@ -250,6 +289,11 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             return false;
         }
         final BluetoothDevice device = cachedDevice.getDevice();
+        if (DBG) {
+            Log.d(TAG, "isDeviceConnected() device name : " + cachedDevice.getName() +
+                    ", is connected : " + device.isConnected() + " , is profile connected : "
+                    + cachedDevice.isConnected());
+        }
         return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
     }
 }

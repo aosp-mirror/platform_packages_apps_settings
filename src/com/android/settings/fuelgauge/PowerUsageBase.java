@@ -15,16 +15,17 @@
  */
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.*;
+import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Loader;
 import android.os.Bundle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.view.Menu;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.dashboard.DashboardFragment;
@@ -71,8 +72,6 @@ public abstract class PowerUsageBase extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        BatteryStatsHelper.dropFile(getActivity(), BatteryHistoryDetail.BATTERY_HISTORY_FILE);
         mBatteryBroadcastReceiver.register();
     }
 

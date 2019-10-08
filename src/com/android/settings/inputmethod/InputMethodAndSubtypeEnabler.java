@@ -16,26 +16,37 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settingslib.inputmethod.InputMethodAndSubtypeEnablerManager;
+import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 
-public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
-    private InputMethodAndSubtypeEnablerManager mManager;
+public class InputMethodAndSubtypeEnabler extends DashboardFragment {
+
+    private static final String TAG = "InputMethodAndSubtypeEnabler";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.INPUTMETHOD_SUBTYPE_ENABLER;
+        return SettingsEnums.INPUTMETHOD_SUBTYPE_ENABLER;
     }
 
     @Override
-    public void onCreate(final Bundle icicle) {
-        super.onCreate(icicle);
+    protected int getPreferenceScreenResId() {
+        return R.xml.input_methods_subtype;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         // Input method id should be available from an Intent when this preference is launched as a
         // single Activity (see InputMethodAndSubtypeEnablerActivity). It should be available
@@ -44,11 +55,8 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         final String targetImi = getStringExtraFromIntentOrArguments(
                 android.provider.Settings.EXTRA_INPUT_METHOD_ID);
 
-        final PreferenceScreen root =
-                getPreferenceManager().createPreferenceScreen(getPrefContext());
-        mManager = new InputMethodAndSubtypeEnablerManager(this);
-        mManager.init(this, targetImi, root);
-        setPreferenceScreen(root);
+        use(InputMethodAndSubtypePreferenceController.class).initialize(this /* fragment */,
+                targetImi);
     }
 
     private String getStringExtraFromIntentOrArguments(final String name) {
@@ -68,17 +76,5 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         if (!TextUtils.isEmpty(title)) {
             getActivity().setTitle(title);
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mManager.refresh(getContext(), this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mManager.save(getContext(), this);
     }
 }

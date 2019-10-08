@@ -16,7 +16,11 @@
 
 package com.android.settings.applications;
 
-import android.app.AlertDialog;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS_ASK;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
+
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
@@ -26,24 +30,20 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 
 import java.util.List;
-
-import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS;
-import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS_ASK;
-import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
-import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED;
 
 public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListener,
         Preference.OnPreferenceChangeListener {
@@ -123,6 +123,8 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
             // * always
             // * ask
             // * never
+            //
+            // Make sure to update linkStateToIndex() if this presentation order is changed.
             mAppLinkState.setEntries(new CharSequence[] {
                     getString(R.string.app_link_open_always),
                     getString(R.string.app_link_open_ask),
@@ -140,10 +142,7 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
                 // purposes of the UI (and does the right thing around pending domain
                 // verifications that might arrive after the user chooses 'ask' in this UI).
                 final int state = mPm.getIntentVerificationStatusAsUser(mPackageName, UserHandle.myUserId());
-                mAppLinkState.setValue(
-                        Integer.toString((state == INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED)
-                                ? INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS_ASK
-                                        : state));
+                mAppLinkState.setValueIndex(linkStateToIndex(state));
 
                 // Set the callback only after setting the initial selected item
                 mAppLinkState.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -153,6 +152,17 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
                     }
                 });
             }
+        }
+    }
+
+    private int linkStateToIndex(final int state) {
+        switch (state) {
+            case INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS:
+                return 0; // Always
+            case INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER:
+                return 2; // Never
+            default:
+                return 1; // Ask
         }
     }
 
@@ -213,6 +223,6 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_APP_LAUNCH;
+        return SettingsEnums.APPLICATIONS_APP_LAUNCH;
     }
 }

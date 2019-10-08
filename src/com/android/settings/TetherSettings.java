@@ -20,6 +20,7 @@ import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
 import static android.net.ConnectivityManager.TETHERING_USB;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
@@ -34,27 +35,41 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.UserManager;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
+import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.datausage.DataSaverBackend;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
 import com.android.settingslib.TetherUtil;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /*
  * Displays preferences for Tethering.
  */
+@SearchIndexable
 public class TetherSettings extends RestrictedSettingsFragment
         implements DataSaverBackend.Listener {
 
-    private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
-    private static final String ENABLE_BLUETOOTH_TETHERING = "enable_bluetooth_tethering";
-    private static final String DATA_SAVER_FOOTER = "disabled_on_data_saver";
+    @VisibleForTesting
+    static final String KEY_TETHER_PREFS_SCREEN = "tether_prefs_screen";
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER = "wifi_tether";
+    @VisibleForTesting
+    static final String KEY_USB_TETHER_SETTINGS = "usb_tether_settings";
+    @VisibleForTesting
+    static final String KEY_ENABLE_BLUETOOTH_TETHERING = "enable_bluetooth_tethering";
+    private static final String KEY_DATA_SAVER_FOOTER = "disabled_on_data_saver";
 
     private static final String TAG = "TetheringSettings";
 
@@ -86,7 +101,7 @@ public class TetherSettings extends RestrictedSettingsFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TETHER;
+        return SettingsEnums.TETHER;
     }
 
     public TetherSettings() {
@@ -97,7 +112,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         mWifiTetherPreferenceController =
-                new WifiTetherPreferenceController(context, getLifecycle());
+                new WifiTetherPreferenceController(context, getSettingsLifecycle());
     }
 
     @Override
@@ -110,7 +125,7 @@ public class TetherSettings extends RestrictedSettingsFragment
 
         mDataSaverBackend = new DataSaverBackend(getContext());
         mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
-        mDataSaverFooter = findPreference(DATA_SAVER_FOOTER);
+        mDataSaverFooter = findPreference(KEY_DATA_SAVER_FOOTER);
 
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted()) {
@@ -126,8 +141,8 @@ public class TetherSettings extends RestrictedSettingsFragment
                     BluetoothProfile.PAN);
         }
 
-        mUsbTether = (SwitchPreference) findPreference(USB_TETHER_SETTINGS);
-        mBluetoothTether = (SwitchPreference) findPreference(ENABLE_BLUETOOTH_TETHERING);
+        mUsbTether = (SwitchPreference) findPreference(KEY_USB_TETHER_SETTINGS);
+        mBluetoothTether = (SwitchPreference) findPreference(KEY_ENABLE_BLUETOOTH_TETHERING);
 
         mDataSaverBackend.addListener(this);
 
@@ -408,9 +423,6 @@ public class TetherSettings extends RestrictedSettingsFragment
                 startTethering(TETHERING_BLUETOOTH);
             } else {
                 mCm.stopTethering(TETHERING_BLUETOOTH);
-                // No ACTION_TETHER_STATE_CHANGED is fired or bluetooth unless a device is
-                // connected. Need to update state manually.
-                updateState();
             }
         }
 
@@ -430,6 +442,42 @@ public class TetherSettings extends RestrictedSettingsFragment
         public void onServiceDisconnected(int profile) {
             mBluetoothPan.set(null);
         }
+    };
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.tether_prefs;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    final ConnectivityManager cm =
+                            context.getSystemService(ConnectivityManager.class);
+
+                    if (!TetherUtil.isTetherAvailable(context)) {
+                        keys.add(KEY_TETHER_PREFS_SCREEN);
+                        keys.add(KEY_WIFI_TETHER);
+                    }
+
+                    final boolean usbAvailable =
+                            cm.getTetherableUsbRegexs().length != 0;
+                    if (!usbAvailable || Utils.isMonkeyRunning()) {
+                        keys.add(KEY_USB_TETHER_SETTINGS);
+                    }
+
+                    final boolean bluetoothAvailable =
+                            cm.getTetherableBluetoothRegexs().length != 0;
+                    if (!bluetoothAvailable) {
+                        keys.add(KEY_ENABLE_BLUETOOTH_TETHERING);
+                    }
+                    return keys;
+                }
     };
 
     private static final class OnStartTetheringCallback extends

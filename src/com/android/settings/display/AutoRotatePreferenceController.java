@@ -13,11 +13,12 @@
  */
 package com.android.settings.display;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.preference.Preference;
+
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.TogglePreferenceController;
@@ -88,7 +89,7 @@ public class AutoRotatePreferenceController extends TogglePreferenceController i
     @Override
     public boolean setChecked(boolean isChecked) {
         final boolean isLocked = !isChecked;
-        mMetricsFeatureProvider.action(mContext, MetricsProto.MetricsEvent.ACTION_ROTATION_LOCK,
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATION_LOCK,
                 isLocked);
         RotationPolicy.setRotationLock(mContext, isLocked);
         return true;

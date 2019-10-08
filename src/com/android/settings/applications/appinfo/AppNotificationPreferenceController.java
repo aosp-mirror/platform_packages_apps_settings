@@ -20,6 +20,7 @@ import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -84,14 +85,15 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
         if (appRow.banned) {
             return context.getText(R.string.notifications_disabled);
         } else if (appRow.channelCount == 0) {
-            return context.getText(R.string.notifications_enabled);
+            return NotificationBackend.getSentSummary(context, appRow.sentByApp, false);
         } else if (appRow.channelCount == appRow.blockedChannelCount) {
             return context.getText(R.string.notifications_disabled);
         } else {
             if (appRow.blockedChannelCount == 0) {
-                return context.getText(R.string.notifications_enabled);
+                return NotificationBackend.getSentSummary(context, appRow.sentByApp, false);
             }
             return context.getString(R.string.notifications_enabled_with_info,
+                    NotificationBackend.getSentSummary(context, appRow.sentByApp, false),
                     context.getResources().getQuantityString(R.plurals.notifications_categories_off,
                             appRow.blockedChannelCount, appRow.blockedChannelCount));
         }

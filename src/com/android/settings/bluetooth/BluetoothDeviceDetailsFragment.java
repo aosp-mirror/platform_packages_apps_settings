@@ -18,17 +18,22 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
+import android.provider.DeviceConfig;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -60,9 +65,12 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     @VisibleForTesting
     static TestDataFactory sTestDataFactory;
 
-    private String mDeviceAddress;
-    private LocalBluetoothManager mManager;
-    private CachedBluetoothDevice mCachedDevice;
+    @VisibleForTesting
+    String mDeviceAddress;
+    @VisibleForTesting
+    LocalBluetoothManager mManager;
+    @VisibleForTesting
+    CachedBluetoothDevice mCachedDevice;
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
@@ -99,12 +107,27 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mDeviceAddress = getArguments().getString(KEY_DEVICE_ADDRESS);
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
+        if (mCachedDevice == null) {
+            // Close this page if device is null with invalid device mac address
+            finish();
+            return;
+        }
         super.onAttach(context);
+        use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
+
+        final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
+                context).getBluetoothFeatureProvider(context);
+        final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
+
+        use(BlockingSlicePrefController.class).setSliceUri(sliceEnabled
+                ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
+                : null);
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.BLUETOOTH_DEVICE_DETAILS;
+        return SettingsEnums.BLUETOOTH_DEVICE_DETAILS;
     }
 
     @Override
@@ -120,7 +143,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0, R.string.bluetooth_rename_button);
-        item.setIcon(R.drawable.ic_mode_edit);
+        item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -140,7 +163,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
 
         if (mCachedDevice != null) {
-            Lifecycle lifecycle = getLifecycle();
+            Lifecycle lifecycle = getSettingsLifecycle();
             controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
                     lifecycle, mManager));
             controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,

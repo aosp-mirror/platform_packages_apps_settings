@@ -16,7 +16,7 @@
 
 package com.android.settings.wfd;
 
-import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -39,14 +39,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
 import android.util.Slog;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -59,13 +51,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.app.MediaRouteDialogPresenter;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +80,7 @@ import java.util.List;
  * on the system.  In that case, the enable option will not be shown but other
  * remote display routes will continue to be made available.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public final class WifiDisplaySettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "WifiDisplaySettings";
     private static final boolean DEBUG = false;
@@ -124,7 +127,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WFD_WIFI_DISPLAY;
+        return SettingsEnums.WFD_WIFI_DISPLAY;
     }
 
     @Override
@@ -133,6 +136,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
 
         final Context context = getActivity();
         mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
+        mRouter.setRouterGroupId(MediaRouter.MIRRORING_GROUP_ID);
         mDisplayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
         mWifiP2pManager = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
         mWifiP2pChannel = mWifiP2pManager.initialize(context, Looper.getMainLooper(), null);
@@ -795,6 +799,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
             mContext = context;
             mSummaryLoader = summaryLoader;
             mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
+            mRouter.setRouterGroupId(MediaRouter.MIRRORING_GROUP_ID);
         }
 
         @Override

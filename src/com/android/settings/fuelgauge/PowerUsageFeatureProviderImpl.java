@@ -24,6 +24,7 @@ import android.util.SparseIntArray;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
+import com.android.settingslib.fuelgauge.Estimate;
 
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
 

@@ -17,6 +17,7 @@
 package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -24,11 +25,11 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.hardware.input.InputManager;
-import androidx.preference.Preference;
 import android.view.InputDevice;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 
 import org.junit.After;
@@ -37,10 +38,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PhysicalKeyboardPreferenceControllerTest {
 
     @Mock
@@ -87,7 +89,7 @@ public class PhysicalKeyboardPreferenceControllerTest {
         ShadowInputDevice.sDeviceIds = new int[0];
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(R.string.disconnected);
+        verify(mPreference).setSummary(R.string.keyboard_disconnected);
     }
 
     @Test

@@ -16,21 +16,23 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
@@ -40,7 +42,7 @@ public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase im
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     @Override
@@ -69,7 +71,7 @@ public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase im
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_ZEN_NOTIFICATIONS;
+        return SettingsEnums.SETTINGS_ZEN_NOTIFICATIONS;
     }
 
     /**
@@ -86,12 +88,6 @@ public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase im
                     sir.xmlResId = R.xml.zen_mode_restrict_notifications_settings;
                     result.add(sir);
                     return result;
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
                 }
 
             @Override

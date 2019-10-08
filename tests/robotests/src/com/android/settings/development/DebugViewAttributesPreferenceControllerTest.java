@@ -17,24 +17,25 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DebugViewAttributesPreferenceControllerTest {
 
     @Mock
@@ -59,7 +60,7 @@ public class DebugViewAttributesPreferenceControllerTest {
     public void onPreferenceChanged_turnOnViewAttributes() {
         mController.onPreferenceChange(null, true);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, -1);
 
         assertThat(mode).isEqualTo(DebugViewAttributesPreferenceController.SETTING_VALUE_ON);
@@ -69,7 +70,7 @@ public class DebugViewAttributesPreferenceControllerTest {
     public void onPreferenceChanged_turnOffViewAttributes() {
         mController.onPreferenceChange(null, false);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, -1);
 
         assertThat(mode).isEqualTo(DebugViewAttributesPreferenceController.SETTING_VALUE_OFF);
@@ -77,7 +78,7 @@ public class DebugViewAttributesPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.Global.DEBUG_VIEW_ATTRIBUTES,
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEBUG_VIEW_ATTRIBUTES,
                 DebugViewAttributesPreferenceController.SETTING_VALUE_ON);
         mController.updateState(mPreference);
 
@@ -86,7 +87,7 @@ public class DebugViewAttributesPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.Global.DEBUG_VIEW_ATTRIBUTES,
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEBUG_VIEW_ATTRIBUTES,
                 DebugViewAttributesPreferenceController.SETTING_VALUE_OFF);
         mController.updateState(mPreference);
 
@@ -96,12 +97,11 @@ public class DebugViewAttributesPreferenceControllerTest {
     @Test
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, -1);
 
         assertThat(mode).isEqualTo(DebugViewAttributesPreferenceController.SETTING_VALUE_OFF);
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
     }
-
 }

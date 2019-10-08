@@ -18,23 +18,24 @@ package com.android.settings.core;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.slices.SliceData;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TogglePreferenceControllerTest {
 
-    FakeToggle mToggleController;
+    private FakeToggle mToggleController;
 
-    Context mContext;
-    SwitchPreference mPreference;
+    private Context mContext;
+    private SwitchPreference mPreference;
 
     @Before
     public void setUp() {
@@ -93,7 +94,7 @@ public class TogglePreferenceControllerTest {
 
         private boolean checkedFlag;
 
-        public FakeToggle(Context context, String preferenceKey) {
+        private FakeToggle(Context context, String preferenceKey) {
             super(context, preferenceKey);
         }
 

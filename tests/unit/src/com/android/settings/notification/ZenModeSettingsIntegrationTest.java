@@ -1,21 +1,20 @@
 package com.android.settings;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.LargeTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiDevice;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.LargeTest;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,27 +37,29 @@ public class ZenModeSettingsIntegrationTest {
     @Test
     public void testZenModeSettingsPreferences() {
         launchZenSettings();
-        onView(withText("Behavior")).check(matches(isDisplayed()));
-        onView(withText("Turn on automatically")).check(matches(isDisplayed()));
+        onView(withText("Calls")).check(matches(isDisplayed()));
+        onView(withText("SMS, MMS, and messaging apps")).check(matches(isDisplayed()));
+        onView(withText("Restrict notifications")).check(matches(isDisplayed()));
+        onView(withText("Duration")).check(matches(isDisplayed()));
+        onView(withText("Schedules")).check(matches(isDisplayed()));
     }
 
     @Test
     public void testZenModeBehaviorPreferences() {
         launchZenBehaviorSettings();
-        onView(withText("Alarms")).check(matches(isDisplayed()));
-        onView(withText("Media and system feedback")).check(matches(isDisplayed()));
-        onView(withText("Reminders")).check(matches(isDisplayed()));
-        onView(withText("Events")).check(matches(isDisplayed()));
-        onView(withText("Messages")).check(matches(isDisplayed()));
         onView(withText("Calls")).check(matches(isDisplayed()));
-        onView(withText("Repeat callers")).check(matches(isDisplayed()));
+        onView(withText("SMS, MMS, and messaging apps")).check(matches(isDisplayed()));
+        onView(withText("Restrict notifications")).check(matches(isDisplayed()));
+        onView(withText("Duration")).check(matches(isDisplayed()));
+        onView(withText("Schedules")).check(matches(isDisplayed()));
     }
 
     @Test
     public void testZenModeAutomationPreferences() {
         launchZenAutomationSettings();
-        onView(withText("Weekend")).check(matches(isDisplayed()));
-        onView(withText("Add rule")).check(matches(isDisplayed()));
+        onView(withText("Sleeping")).check(matches(isDisplayed()));
+        onView(withText("Event")).check(matches(isDisplayed()));
+        onView(withText("Add more")).check(matches(isDisplayed()));
     }
 
     private void launchZenSettings() {

@@ -29,18 +29,18 @@ import android.net.Uri;
 
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
 import com.android.settings.testutils.DatabaseTestUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SlicesIndexerTest {
 
     private final String[] KEYS = new String[]{"key1", "key2", "key3"};
@@ -54,18 +54,17 @@ public class SlicesIndexerTest {
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
     private final boolean PLATFORM_DEFINED = true;
     private final int SLICE_TYPE = SliceData.SliceType.SLIDER;
+    private final String UNAVAILABLE_SLICE_SUBTITLE = "subtitleOfUnavailableSlice";
 
     private Context mContext;
 
     private SlicesIndexer mManager;
 
-    private SQLiteDatabase mDb;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mManager = spy(new SlicesIndexer(mContext));
-        mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
     }
 
     @After
@@ -83,11 +82,16 @@ public class SlicesIndexerTest {
         // Attempt indexing - should not do anything.
         mManager.run();
 
-        Cursor cursor = mDb.rawQuery("SELECT * FROM slices_index", null);
-        cursor.moveToFirst();
-        assertThat(cursor.getCount()).isEqualTo(1);
-        assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEY))).isEqualTo(newKey);
-        assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE))).isEqualTo(newTitle);
+        final SQLiteDatabase db = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
+        try (final Cursor cursor = db.rawQuery("SELECT * FROM slices_index", null)) {
+            cursor.moveToFirst();
+            assertThat(cursor.getCount()).isEqualTo(1);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEY))).isEqualTo(newKey);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE)))
+                    .isEqualTo(newTitle);
+        } finally {
+            db.close();
+        }
     }
 
     @Test
@@ -108,30 +112,42 @@ public class SlicesIndexerTest {
 
         mManager.run();
 
-        final Cursor cursor = mDb.rawQuery("SELECT * FROM slices_index", null);
-        assertThat(cursor.getCount()).isEqualTo(sliceData.size());
+        final SQLiteDatabase db = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
+        try (final Cursor cursor = db.rawQuery("SELECT * FROM slices_index", null)) {
+            assertThat(cursor.getCount()).isEqualTo(sliceData.size());
 
-        cursor.moveToFirst();
-        for (int i = 0; i < sliceData.size(); i++) {
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEY))).isEqualTo(
-                    KEYS[i]);
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE))).isEqualTo(
-                    TITLES[i]);
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.FRAGMENT))).isEqualTo(
-                    FRAGMENT_NAME);
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.SCREENTITLE))).isEqualTo(
-                    SCREEN_TITLE);
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEYWORDS))).isEqualTo(
-                    KEYWORDS);
-            assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.ICON_RESOURCE))).isEqualTo(
-                    ICON);
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.CONTROLLER))).isEqualTo(
-                    PREF_CONTROLLER);
-            assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.PLATFORM_SLICE))).isEqualTo(
-                    1 /* true */);
-            assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.SLICE_TYPE))).isEqualTo(
-                    SLICE_TYPE);
-            cursor.moveToNext();
+            cursor.moveToFirst();
+            for (int i = 0; i < sliceData.size(); i++) {
+                assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEY)))
+                        .isEqualTo(KEYS[i]);
+                assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE)))
+                        .isEqualTo(TITLES[i]);
+                assertThat(
+                        cursor.getString(cursor.getColumnIndex(IndexColumns.FRAGMENT)))
+                        .isEqualTo(FRAGMENT_NAME);
+                assertThat(cursor.getString(
+                        cursor.getColumnIndex(IndexColumns.SCREENTITLE))).isEqualTo(SCREEN_TITLE);
+                assertThat(
+                        cursor.getString(cursor.getColumnIndex(IndexColumns.KEYWORDS)))
+                        .isEqualTo(KEYWORDS);
+                assertThat(
+                        cursor.getInt(cursor.getColumnIndex(IndexColumns.ICON_RESOURCE)))
+                        .isEqualTo(ICON);
+                assertThat(
+                        cursor.getString(cursor.getColumnIndex(IndexColumns.CONTROLLER)))
+                        .isEqualTo(PREF_CONTROLLER);
+                assertThat(cursor.getInt(
+                        cursor.getColumnIndex(IndexColumns.PLATFORM_SLICE)))
+                        .isEqualTo(1 /* true */);
+                assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.SLICE_TYPE)))
+                        .isEqualTo(SLICE_TYPE);
+                assertThat(cursor.getString(
+                        cursor.getColumnIndex(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE)))
+                        .isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
+                cursor.moveToNext();
+            }
+        } finally {
+            db.close();
         }
     }
 
@@ -139,8 +155,15 @@ public class SlicesIndexerTest {
         final ContentValues values = new ContentValues();
         values.put(IndexColumns.KEY, key);
         values.put(IndexColumns.TITLE, title);
-
-        mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
+        final SQLiteDatabase db = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        db.close();
     }
 
     private List<SliceData> getDummyIndexableData() {
@@ -154,7 +177,8 @@ public class SlicesIndexerTest {
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
                 .setPlatformDefined(PLATFORM_DEFINED)
-                .setSliceType(SLICE_TYPE);
+                .setSliceType(SLICE_TYPE)
+                .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE);
 
         for (int i = 0; i < KEYS.length; i++) {
             builder.setKey(KEYS[i]).setTitle(TITLES[i]);

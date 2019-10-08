@@ -14,86 +14,49 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.os.IBinder;
-import android.os.Parcel;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.util.Log;
+import android.hardware.display.ColorDisplayManager;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.app.ColorDisplayController;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class ColorModePreferenceController extends BasePreferenceController {
-    private static final String TAG = "ColorModePreference";
-    private static final String KEY_COLOR_MODE = "color_mode";
 
-    private static final int SURFACE_FLINGER_TRANSACTION_QUERY_WIDE_COLOR = 1024;
+    private ColorDisplayManager mColorDisplayManager;
 
-    private final ConfigurationWrapper mConfigWrapper;
-    private ColorDisplayController mColorDisplayController;
-
-    public ColorModePreferenceController(Context context) {
-        super(context, KEY_COLOR_MODE);
-        mConfigWrapper = new ConfigurationWrapper();
+    public ColorModePreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mConfigWrapper.isScreenWideColorGamut()
-                && !getColorDisplayController().getAccessibilityTransformActivated() ?
-                AVAILABLE : DISABLED_FOR_USER;
+        return mContext.getSystemService(ColorDisplayManager.class)
+                .isDeviceColorManaged()
+                && !ColorDisplayManager.areAccessibilityTransformsEnabled(mContext) ?
+                AVAILABLE_UNSEARCHABLE : DISABLED_FOR_USER;
     }
 
     @Override
     public CharSequence getSummary() {
-        final int colorMode = getColorDisplayController().getColorMode();
-        if (colorMode == ColorDisplayController.COLOR_MODE_AUTOMATIC) {
+        final int colorMode = getColorDisplayManager().getColorMode();
+        if (colorMode == ColorDisplayManager.COLOR_MODE_AUTOMATIC) {
             return mContext.getText(R.string.color_mode_option_automatic);
         }
-        if (colorMode == ColorDisplayController.COLOR_MODE_SATURATED) {
+        if (colorMode == ColorDisplayManager.COLOR_MODE_SATURATED) {
             return mContext.getText(R.string.color_mode_option_saturated);
         }
-        if (colorMode == ColorDisplayController.COLOR_MODE_BOOSTED) {
+        if (colorMode == ColorDisplayManager.COLOR_MODE_BOOSTED) {
             return mContext.getText(R.string.color_mode_option_boosted);
         }
         return mContext.getText(R.string.color_mode_option_natural);
     }
 
     @VisibleForTesting
-    ColorDisplayController getColorDisplayController() {
-        if (mColorDisplayController == null) {
-            mColorDisplayController = new ColorDisplayController(mContext);
+    ColorDisplayManager getColorDisplayManager() {
+        if (mColorDisplayManager == null) {
+            mColorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
         }
-        return mColorDisplayController;
-    }
-
-    @VisibleForTesting
-    static class ConfigurationWrapper {
-        private final IBinder mSurfaceFlinger;
-
-        ConfigurationWrapper() {
-            mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
-        }
-
-        boolean isScreenWideColorGamut() {
-            if (mSurfaceFlinger != null) {
-                final Parcel data = Parcel.obtain();
-                final Parcel reply = Parcel.obtain();
-                data.writeInterfaceToken("android.ui.ISurfaceComposer");
-                try {
-                    mSurfaceFlinger.transact(SURFACE_FLINGER_TRANSACTION_QUERY_WIDE_COLOR,
-                            data, reply, 0);
-                    return reply.readBoolean();
-                } catch (RemoteException ex) {
-                    Log.e(TAG, "Failed to query wide color support", ex);
-                } finally {
-                    data.recycle();
-                    reply.recycle();
-                }
-            }
-            return false;
-        }
+        return mColorDisplayManager;
     }
 }

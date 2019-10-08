@@ -21,29 +21,34 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.provider.Settings;
+import android.text.TextUtils;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
 
+import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
 
 public class TimeSpentInAppPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
-    static final Intent SEE_TIME_IN_APP_TEMPLATE =
-            new Intent("com.android.settings.action.TIME_SPENT_IN_APP");
+    static final Intent SEE_TIME_IN_APP_TEMPLATE = new Intent(Settings.ACTION_APP_USAGE_SETTINGS);
 
     private final PackageManager mPackageManager;
-
+    private final ApplicationFeatureProvider mAppFeatureProvider;
     private Intent mIntent;
     private String mPackageName;
 
     public TimeSpentInAppPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mPackageManager = context.getPackageManager();
+        mAppFeatureProvider = FeatureFactory.getFactory(context)
+                .getApplicationFeatureProvider(context);
     }
 
     public void setPackageName(String packageName) {
@@ -77,6 +82,11 @@ public class TimeSpentInAppPreferenceController extends BasePreferenceController
         if (pref != null) {
             pref.setIntent(mIntent);
         }
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mAppFeatureProvider.getTimeSpentInApp(mPackageName);
     }
 
     private boolean isSystemApp(ResolveInfo info) {

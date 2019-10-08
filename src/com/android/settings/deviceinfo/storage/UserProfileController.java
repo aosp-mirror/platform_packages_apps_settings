@@ -16,16 +16,17 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.SparseArray;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.util.Preconditions;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -82,8 +83,8 @@ public class UserProfileController extends AbstractPreferenceController implemen
             new SubSettingLauncher(mContext)
                     .setDestination(StorageProfileFragment.class.getName())
                     .setArguments(args)
-                    .setTitle(mUser.name)
-                    .setSourceMetricsCategory(MetricsProto.MetricsEvent.DEVICEINFO_STORAGE)
+                    .setTitleText(mUser.name)
+                    .setSourceMetricsCategory(SettingsEnums.DEVICEINFO_STORAGE)
                     .launch();
             return true;
         }
@@ -130,7 +131,7 @@ public class UserProfileController extends AbstractPreferenceController implemen
 
     private static Drawable applyTint(Context context, Drawable icon) {
         icon = icon.mutate();
-        icon.setTint(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
+        icon.setTintList(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
         return icon;
     }
 

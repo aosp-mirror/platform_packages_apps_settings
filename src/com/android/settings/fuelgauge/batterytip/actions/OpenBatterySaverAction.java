@@ -16,20 +16,11 @@
 
 package com.android.settings.fuelgauge.batterytip.actions;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.fuelgauge.RestrictedAppDetails;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
-import com.android.settings.fuelgauge.batterytip.AppInfo;
-import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
-
-import java.util.List;
 
 /**
  *
@@ -47,7 +38,7 @@ public class OpenBatterySaverAction extends BatteryTipAction {
     @Override
     public void handlePositiveAction(int metricsKey) {
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_TIP_OPEN_BATTERY_SAVER_PAGE, metricsKey);
+                SettingsEnums.ACTION_TIP_OPEN_BATTERY_SAVER_PAGE, metricsKey);
         new SubSettingLauncher(mContext)
                 .setDestination(BatterySaverSettings.class.getName())
                 .setSourceMetricsCategory(metricsKey)

@@ -22,14 +22,13 @@ import android.accounts.Account;
 import android.content.Context;
 import android.os.UserHandle;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SyncStateSwitchPreferenceTest {
 
     private Context mContext;

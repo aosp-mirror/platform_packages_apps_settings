@@ -32,7 +32,7 @@ public abstract class InstrumentedActivity extends ObservableActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Mixin that logs visibility change for activity.
-        getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory(),
+        getSettingsLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory(),
                 FeatureFactory.getFactory(this).getMetricsFeatureProvider()));
     }
 }

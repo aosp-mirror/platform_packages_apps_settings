@@ -16,24 +16,29 @@
 
 package com.android.settings.fuelgauge;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.IconDrawableFactory;
+import android.util.Log;
+import android.util.SparseLongArray;
+
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
-import android.util.IconDrawableFactory;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.BatteryTipDialogFragment;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -41,7 +46,8 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.List;
 
@@ -56,6 +62,7 @@ public class RestrictedAppDetails extends DashboardFragment implements
     @VisibleForTesting
     static final String EXTRA_APP_INFO_LIST = "app_info_list";
     private static final String KEY_PREF_RESTRICTED_APP_LIST = "restrict_app_list";
+    private static final long TIME_NULL = -1;
 
     @VisibleForTesting
     List<AppInfo> mAppInfos;
@@ -67,8 +74,10 @@ public class RestrictedAppDetails extends DashboardFragment implements
     BatteryUtils mBatteryUtils;
     @VisibleForTesting
     PackageManager mPackageManager;
-    private final FooterPreferenceMixin mFooterPreferenceMixin =
-            new FooterPreferenceMixin(this, getLifecycle());
+    @VisibleForTesting
+    BatteryDatabaseManager mBatteryDatabaseManager;
+    private final FooterPreferenceMixinCompat mFooterPreferenceMixin =
+            new FooterPreferenceMixinCompat(this, getSettingsLifecycle());
 
     public static void startRestrictedAppDetails(InstrumentedPreferenceFragment fragment,
             List<AppInfo> appInfos) {
@@ -78,7 +87,7 @@ public class RestrictedAppDetails extends DashboardFragment implements
         new SubSettingLauncher(fragment.getContext())
                 .setDestination(RestrictedAppDetails.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.restricted_app_title)
+                .setTitleRes(R.string.restricted_app_title)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
                 .launch();
     }
@@ -95,6 +104,7 @@ public class RestrictedAppDetails extends DashboardFragment implements
         mPackageManager = context.getPackageManager();
         mIconDrawableFactory = IconDrawableFactory.newInstance(context);
         mBatteryUtils = BatteryUtils.getInstance(context);
+        mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
 
         refreshUi();
     }
@@ -122,7 +132,7 @@ public class RestrictedAppDetails extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FUELGAUGE_RESTRICTED_APP_DETAILS;
+        return SettingsEnums.FUELGAUGE_RESTRICTED_APP_DETAILS;
     }
 
     @Override
@@ -134,6 +144,9 @@ public class RestrictedAppDetails extends DashboardFragment implements
     void refreshUi() {
         mRestrictedAppListGroup.removeAll();
         final Context context = getPrefContext();
+        final SparseLongArray timestampArray = mBatteryDatabaseManager
+                .queryActionTime(AnomalyDatabaseHelper.ActionType.RESTRICTION);
+        final long now = System.currentTimeMillis();
 
         for (int i = 0, size = mAppInfos.size(); i < size; i++) {
             final CheckBoxPreference checkBoxPreference = new AppCheckBoxPreference(context);
@@ -157,9 +170,16 @@ public class RestrictedAppDetails extends DashboardFragment implements
 
                     return false;
                 });
+
+                final long timestamp = timestampArray.get(appInfo.uid, TIME_NULL);
+                if (timestamp != TIME_NULL) {
+                    checkBoxPreference.setSummary(getString(R.string.restricted_app_time_summary,
+                            StringUtil.formatRelativeTime(context, now - timestamp, false)));
+                }
+                final CharSequence test = checkBoxPreference.getSummaryOn();
                 mRestrictedAppListGroup.addPreference(checkBoxPreference);
             } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
+                Log.e(TAG, "Can't find package: " + appInfo.packageName);
             }
         }
     }

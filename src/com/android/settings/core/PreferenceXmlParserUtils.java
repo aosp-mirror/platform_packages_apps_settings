@@ -23,13 +23,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
-import androidx.annotation.IntDef;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.util.Xml;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
@@ -52,7 +53,10 @@ public class PreferenceXmlParserUtils {
     @VisibleForTesting
     static final String PREF_SCREEN_TAG = "PreferenceScreen";
     private static final List<String> SUPPORTED_PREF_TYPES = Arrays.asList(
-            "Preference", "PreferenceCategory", "PreferenceScreen");
+            "Preference", "PreferenceCategory", "PreferenceScreen",
+            "com.android.settings.widget.WorkOnlyCategory");
+    public static final int PREPEND_VALUE = 0;
+    public static final int APPEND_VALUE = 1;
 
     /**
      * Flag definition to indicate which metadata should be extracted when
@@ -66,9 +70,12 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_PREF_CONTROLLER,
             MetadataFlag.FLAG_NEED_PREF_TITLE,
             MetadataFlag.FLAG_NEED_PREF_SUMMARY,
-            MetadataFlag.FLAG_NEED_PREF_ICON})
+            MetadataFlag.FLAG_NEED_PREF_ICON,
+            MetadataFlag.FLAG_NEED_SEARCHABLE,
+            MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MetadataFlag {
+
         int FLAG_INCLUDE_PREF_SCREEN = 1;
         int FLAG_NEED_KEY = 1 << 1;
         int FLAG_NEED_PREF_TYPE = 1 << 2;
@@ -78,6 +85,9 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PREF_ICON = 1 << 6;
         int FLAG_NEED_PLATFORM_SLICE_FLAG = 1 << 7;
         int FLAG_NEED_KEYWORDS = 1 << 8;
+        int FLAG_NEED_SEARCHABLE = 1 << 9;
+        int FLAG_NEED_PREF_APPEND = 1 << 10;
+        int FLAG_UNAVAILABLE_SLICE_SUBTITLE = 1 << 11;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -88,6 +98,10 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_ICON = "icon";
     public static final String METADATA_PLATFORM_SLICE_FLAG = "platform_slice";
     public static final String METADATA_KEYWORDS = "keywords";
+    public static final String METADATA_SEARCHABLE = "searchable";
+    public static final String METADATA_APPEND = "staticPreferenceLocation";
+    public static final String METADATA_UNAVAILABLE_SLICE_SUBTITLE =
+            "unavailable_slice_subtitle";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -154,18 +168,6 @@ public class PreferenceXmlParserUtils {
     }
 
     /**
-     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_ICON} instead.
-     */
-    @Deprecated
-    public static int getDataIcon(Context context, AttributeSet attrs) {
-        final TypedArray ta = context.obtainStyledAttributes(attrs,
-                com.android.internal.R.styleable.Preference);
-        final int dataIcon = ta.getResourceId(com.android.internal.R.styleable.Icon_icon, 0);
-        ta.recycle();
-        return dataIcon;
-    }
-
-    /**
      * Extracts metadata from preference xml and put them into a {@link Bundle}.
      *
      * @param xmlResId xml res id of a preference screen
@@ -187,14 +189,13 @@ public class PreferenceXmlParserUtils {
             // Parse next until start tag is found
         }
         final int outerDepth = parser.getDepth();
-
+        final boolean hasPrefScreenFlag = hasFlag(flags, MetadataFlag.FLAG_INCLUDE_PREF_SCREEN);
         do {
             if (type != XmlPullParser.START_TAG) {
                 continue;
             }
             final String nodeName = parser.getName();
-            if (!hasFlag(flags, MetadataFlag.FLAG_INCLUDE_PREF_SCREEN)
-                    && TextUtils.equals(PREF_SCREEN_TAG, nodeName)) {
+            if (!hasPrefScreenFlag && TextUtils.equals(PREF_SCREEN_TAG, nodeName)) {
                 continue;
             }
             if (!SUPPORTED_PREF_TYPES.contains(nodeName) && !nodeName.endsWith("Preference")) {
@@ -202,8 +203,14 @@ public class PreferenceXmlParserUtils {
             }
             final Bundle preferenceMetadata = new Bundle();
             final AttributeSet attrs = Xml.asAttributeSet(parser);
+
             final TypedArray preferenceAttributes = context.obtainStyledAttributes(attrs,
                     R.styleable.Preference);
+            TypedArray preferenceScreenAttributes = null;
+            if (hasPrefScreenFlag) {
+                preferenceScreenAttributes = context.obtainStyledAttributes(
+                        attrs, R.styleable.PreferenceScreen);
+            }
 
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_TYPE)) {
                 preferenceMetadata.putString(METADATA_PREF_TYPE, nodeName);
@@ -231,6 +238,18 @@ public class PreferenceXmlParserUtils {
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_KEYWORDS)) {
                 preferenceMetadata.putString(METADATA_KEYWORDS, getKeywords(preferenceAttributes));
             }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_SEARCHABLE)) {
+                preferenceMetadata.putBoolean(METADATA_SEARCHABLE,
+                        isSearchable(preferenceAttributes));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_APPEND) && hasPrefScreenFlag) {
+                preferenceMetadata.putBoolean(METADATA_APPEND,
+                        isAppended(preferenceScreenAttributes));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE)) {
+                preferenceMetadata.putString(METADATA_UNAVAILABLE_SLICE_SUBTITLE,
+                        getUnavailableSliceSubtitle(preferenceAttributes));
+            }
             metadata.add(preferenceMetadata);
 
             preferenceAttributes.recycle();
@@ -238,14 +257,6 @@ public class PreferenceXmlParserUtils {
                 && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth));
         parser.close();
         return metadata;
-    }
-
-    /**
-     * Returns the fragment name if this preference launches a child fragment.
-     */
-    public static String getDataChildFragment(Context context, AttributeSet attrs) {
-        return getStringData(context, attrs, R.styleable.Preference,
-                R.styleable.Preference_android_fragment);
     }
 
     /**
@@ -311,7 +322,21 @@ public class PreferenceXmlParserUtils {
         return styledAttributes.getBoolean(R.styleable.Preference_platform_slice, false /* def */);
     }
 
-    private static String getKeywords(TypedArray styleAttributes) {
-        return styleAttributes.getString(R.styleable.Preference_keywords);
+    private static boolean isSearchable(TypedArray styledAttributes) {
+        return styledAttributes.getBoolean(R.styleable.Preference_searchable, true /* default */);
+    }
+
+    private static String getKeywords(TypedArray styledAttributes) {
+        return styledAttributes.getString(R.styleable.Preference_keywords);
+    }
+
+    private static boolean isAppended(TypedArray styledAttributes) {
+        return styledAttributes.getInt(R.styleable.PreferenceScreen_staticPreferenceLocation,
+                PREPEND_VALUE) == APPEND_VALUE;
+    }
+
+    private static String getUnavailableSliceSubtitle(TypedArray styledAttributes) {
+        return styledAttributes.getString(
+                R.styleable.Preference_unavailableSliceSubtitle);
     }
 }

@@ -16,14 +16,17 @@
 
 package com.android.settings.fuelgauge.batterytip.detectors;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.Context;
+
 import androidx.annotation.VisibleForTesting;
-import android.text.format.DateUtils;
 
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.BatteryTipUtils;
 import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.AppRestrictionPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -31,6 +34,7 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Detector whether to show summary tip. This detector should be executed as the last
@@ -51,8 +55,8 @@ public class RestrictAppDetector implements BatteryTipDetector {
         mContext = context;
         mPolicy = policy;
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
-        mAppRestrictionPredicate = new AppRestrictionPredicate(context);
-        mAppLabelPredicate = new AppLabelPredicate(context);
+        mAppRestrictionPredicate = AppRestrictionPredicate.getInstance(context);
+        mAppLabelPredicate = AppLabelPredicate.getInstance(context);
     }
 
     @Override
@@ -61,12 +65,10 @@ public class RestrictAppDetector implements BatteryTipDetector {
             return getFakeData();
         }
         if (mPolicy.appRestrictionEnabled) {
-            // TODO(b/72385333): hook up the query timestamp to server side
-            final long oneDayBeforeMs = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS;
-            final List<AppInfo> highUsageApps = mBatteryDatabaseManager.queryAllAnomalies(
-                    oneDayBeforeMs, AnomalyDatabaseHelper.State.NEW);
-            // Remove it if it doesn't have label or been restricted
-            highUsageApps.removeIf(mAppLabelPredicate.or(mAppRestrictionPredicate));
+            final long oneDayBeforeMs = System.currentTimeMillis()
+                    - TimeUnit.HOURS.toMillis(mPolicy.appRestrictionActiveHour);
+            final List<AppInfo> highUsageApps = BatteryTipUtils.detectAnomalies(mContext,
+                    oneDayBeforeMs);
             if (!highUsageApps.isEmpty()) {
                 // If there are new anomalies, show them
                 return new RestrictAppTip(BatteryTip.StateType.NEW, highUsageApps);
@@ -87,7 +89,7 @@ public class RestrictAppDetector implements BatteryTipDetector {
     private BatteryTip getFakeData() {
         final List<AppInfo> highUsageApps = new ArrayList<>();
         highUsageApps.add(new AppInfo.Builder()
-                .setPackageName("com.android.settings")
+                .setPackageName(SETTINGS_PACKAGE_NAME)
                 .build());
         return new RestrictAppTip(BatteryTip.StateType.NEW, highUsageApps);
     }

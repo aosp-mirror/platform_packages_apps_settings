@@ -19,13 +19,14 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.text.TextUtils;
+
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
+import androidx.preference.SwitchPreference;
 
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -44,7 +45,8 @@ import java.util.List;
  * supports, such as "Phone audio", "Media audio", "Contact sharing", etc.
  */
 public class BluetoothDetailsProfilesController extends BluetoothDetailsController
-        implements Preference.OnPreferenceClickListener {
+        implements Preference.OnPreferenceClickListener,
+        LocalBluetoothProfileManager.ServiceListener {
     private static final String KEY_PROFILES_GROUP = "bluetooth_profiles";
 
     @VisibleForTesting
@@ -55,7 +57,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private CachedBluetoothDevice mCachedDevice;
     private PreferenceCategory mProfilesContainer;
 
-    public BluetoothDetailsProfilesController(Context context, PreferenceFragment fragment,
+    public BluetoothDetailsProfilesController(Context context, PreferenceFragmentCompat fragment,
             LocalBluetoothManager manager, CachedBluetoothDevice device, Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
         mManager = manager;
@@ -86,6 +88,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         pref.setKey(profile.toString());
         pref.setTitle(profile.getNameResource(mCachedDevice.getDevice()));
         pref.setOnPreferenceClickListener(this);
+        pref.setOrder(profile.getOrdinal());
         return pref;
     }
 
@@ -97,11 +100,11 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         BluetoothDevice device = mCachedDevice.getDevice();
         profilePref.setEnabled(!mCachedDevice.isBusy());
         if (profile instanceof MapProfile) {
-            profilePref.setChecked(mCachedDevice.getMessagePermissionChoice()
-                    == CachedBluetoothDevice.ACCESS_ALLOWED);
+            profilePref.setChecked(device.getMessageAccessPermission()
+                    == BluetoothDevice.ACCESS_ALLOWED);
         } else if (profile instanceof PbapServerProfile) {
-            profilePref.setChecked(mCachedDevice.getPhonebookPermissionChoice()
-                    == CachedBluetoothDevice.ACCESS_ALLOWED);
+            profilePref.setChecked(device.getPhonebookAccessPermission()
+                    == BluetoothDevice.ACCESS_ALLOWED);
         } else if (profile instanceof PanProfile) {
             profilePref.setChecked(profile.getConnectionStatus(device) ==
                     BluetoothProfile.STATE_CONNECTED);
@@ -129,31 +132,31 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     /**
      * Helper method to enable a profile for a device.
      */
-    private void enableProfile(LocalBluetoothProfile profile, BluetoothDevice device,
-            SwitchPreference profilePref) {
+    private void enableProfile(LocalBluetoothProfile profile) {
+        final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         if (profile instanceof PbapServerProfile) {
-            mCachedDevice.setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_ALLOWED);
+            bluetoothDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
             // We don't need to do the additional steps below for this profile.
             return;
         }
         if (profile instanceof MapProfile) {
-            mCachedDevice.setMessagePermissionChoice(BluetoothDevice.ACCESS_ALLOWED);
+            bluetoothDevice.setMessageAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
         }
-        profile.setPreferred(device, true);
+        profile.setPreferred(bluetoothDevice, true);
         mCachedDevice.connectProfile(profile);
     }
 
     /**
      * Helper method to disable a profile for a device
      */
-    private void disableProfile(LocalBluetoothProfile profile, BluetoothDevice device,
-            SwitchPreference profilePref) {
+    private void disableProfile(LocalBluetoothProfile profile) {
+        final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         mCachedDevice.disconnect(profile);
-        profile.setPreferred(device, false);
+        profile.setPreferred(bluetoothDevice, false);
         if (profile instanceof MapProfile) {
-            mCachedDevice.setMessagePermissionChoice(BluetoothDevice.ACCESS_REJECTED);
+            bluetoothDevice.setMessageAccessPermission(BluetoothDevice.ACCESS_REJECTED);
         } else if (profile instanceof PbapServerProfile) {
-            mCachedDevice.setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_REJECTED);
+            bluetoothDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_REJECTED);
         }
     }
 
@@ -174,11 +177,10 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             }
         }
         SwitchPreference profilePref = (SwitchPreference) preference;
-        BluetoothDevice device = mCachedDevice.getDevice();
         if (profilePref.isChecked()) {
-            enableProfile(profile, device, profilePref);
+            enableProfile(profile);
         } else {
-            disableProfile(profile, device, profilePref);
+            disableProfile(profile);
         }
         refreshProfilePreference(profilePref, profile);
         return true;
@@ -190,17 +192,18 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
      */
     private List<LocalBluetoothProfile> getProfiles() {
         List<LocalBluetoothProfile> result = mCachedDevice.getConnectableProfiles();
+        final BluetoothDevice device = mCachedDevice.getDevice();
 
-        final int pbapPermission = mCachedDevice.getPhonebookPermissionChoice();
+        final int pbapPermission = device.getPhonebookAccessPermission();
         // Only provide PBAP cabability if the client device has requested PBAP.
-        if (pbapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN) {
+        if (pbapPermission != BluetoothDevice.ACCESS_UNKNOWN) {
             final PbapServerProfile psp = mManager.getProfileManager().getPbapProfile();
             result.add(psp);
         }
 
         final MapProfile mapProfile = mManager.getProfileManager().getMapProfile();
-        final int mapPermission = mCachedDevice.getMessagePermissionChoice();
-        if (mapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN) {
+        final int mapPermission = device.getMessageAccessPermission();
+        if (mapPermission != BluetoothDevice.ACCESS_UNKNOWN) {
             result.add(mapProfile);
         }
 
@@ -220,7 +223,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         }
         BluetoothDevice device = mCachedDevice.getDevice();
         A2dpProfile a2dp = (A2dpProfile) profile;
-        if (a2dp.supportsHighQualityAudio(device)) {
+        if (a2dp.isProfileReady() && a2dp.supportsHighQualityAudio(device)) {
             SwitchPreference highQualityAudioPref = new SwitchPreference(
                     mProfilesContainer.getContext());
             highQualityAudioPref.setKey(HIGH_QUALITY_AUDIO_PREF_TAG);
@@ -234,6 +237,28 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mProfileManager.removeServiceListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mProfileManager.addServiceListener(this);
+    }
+
+    @Override
+    public void onServiceConnected() {
+        refresh();
+    }
+
+    @Override
+    public void onServiceDisconnected() {
+        refresh();
+    }
+
     /**
      * Refreshes the state of the switches for all profiles, possibly adding or removing switches as
      * needed.
@@ -241,7 +266,10 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     @Override
     protected void refresh() {
         for (LocalBluetoothProfile profile : getProfiles()) {
-            SwitchPreference pref = (SwitchPreference) mProfilesContainer.findPreference(
+            if (!profile.isProfileReady()) {
+                continue;
+            }
+            SwitchPreference pref = mProfilesContainer.findPreference(
                     profile.toString());
             if (pref == null) {
                 pref = createProfilePreference(mProfilesContainer.getContext(), profile);
@@ -251,7 +279,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             refreshProfilePreference(pref, profile);
         }
         for (LocalBluetoothProfile removedProfile : mCachedDevice.getRemovedProfiles()) {
-            SwitchPreference pref = (SwitchPreference) mProfilesContainer.findPreference(
+            final SwitchPreference pref = mProfilesContainer.findPreference(
                     removedProfile.toString());
             if (pref != null) {
                 mProfilesContainer.removePreference(pref);

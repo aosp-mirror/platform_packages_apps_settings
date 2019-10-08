@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.anyInt;
@@ -26,17 +27,20 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.ServiceSpecificException;
 import android.security.KeyStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
@@ -44,10 +48,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
 public class WifiConfigControllerTest {
 
@@ -56,11 +61,10 @@ public class WifiConfigControllerTest {
     @Mock
     private Context mContext;
     @Mock
-    private View mView;
-    @Mock
     private AccessPoint mAccessPoint;
     @Mock
     private KeyStore mKeyStore;
+    private View mView;
     private Spinner mHiddenSettingsSpinner;
 
     public WifiConfigController mController;
@@ -73,6 +77,7 @@ public class WifiConfigControllerTest {
     private static final String SHORT_PSK = "abcdefg";
     // Valid PSK pass phrase
     private static final String GOOD_PSK = "abcdefghijklmnopqrstuvwxyz";
+    private static final String GOOD_SSID = "abc";
     private static final int DHCP = 0;
 
     @Before
@@ -137,7 +142,6 @@ public class WifiConfigControllerTest {
         assertThat(password).isNotNull();
         password.setText(LONG_PSK);
         assertThat(mController.isSubmittable()).isFalse();
-
     }
 
     @Test
@@ -154,7 +158,6 @@ public class WifiConfigControllerTest {
         assertThat(password).isNotNull();
         password.setText(GOOD_PSK);
         assertThat(mController.isSubmittable()).isTrue();
-
     }
 
     @Test
@@ -163,7 +166,6 @@ public class WifiConfigControllerTest {
         assertThat(password).isNotNull();
         password.setText(HEX_PSK);
         assertThat(mController.isSubmittable()).isTrue();
-
     }
 
     @Test
@@ -180,6 +182,35 @@ public class WifiConfigControllerTest {
         mController =
             new TestWifiConfigController(mConfigUiBase, mView, null, WifiConfigUiBase.MODE_CONNECT);
         mController.isSubmittable();
+    }
+
+    @Test
+    public void isSubmittable_EapToPskWithValidPassword_shouldReturnTrue() {
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null,
+                WifiConfigUiBase.MODE_CONNECT);
+        final TextView ssid = mView.findViewById(R.id.ssid);
+        final TextView password = mView.findViewById(R.id.password);
+        final Spinner securitySpinner = mView.findViewById(R.id.security);
+        assertThat(password).isNotNull();
+        assertThat(securitySpinner).isNotNull();
+        when(mAccessPoint.isSaved()).thenReturn(true);
+
+        // Change it from EAP to PSK
+        mController.onItemSelected(securitySpinner, null, AccessPoint.SECURITY_EAP, 0);
+        mController.onItemSelected(securitySpinner, null, AccessPoint.SECURITY_PSK, 0);
+        password.setText(GOOD_PSK);
+        ssid.setText(GOOD_SSID);
+
+        assertThat(mController.isSubmittable()).isTrue();
+    }
+
+    @Test
+    public void isSubmittable_EapWithAkaMethod_shouldReturnTrue() {
+        when(mAccessPoint.isSaved()).thenReturn(true);
+        mController.mAccessPointSecurity = AccessPoint.SECURITY_EAP;
+        mView.findViewById(R.id.l_ca_cert).setVisibility(View.GONE);
+
+        assertThat(mController.isSubmittable()).isTrue();
     }
 
     @Test
@@ -268,11 +299,85 @@ public class WifiConfigControllerTest {
         assertThat(hiddenField.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
+    @Test
+    public void securitySpinner_saeSuitebAndOweNotVisible() {
+        securitySpinnerTestHelper(false, false, false);
+    }
+
+    @Test
+    public void securitySpinner_saeSuitebAndOweVisible() {
+        securitySpinnerTestHelper(true, true, true);
+    }
+
+    @Test
+    public void securitySpinner_saeVisible_suitebAndOweNotVisible() {
+        securitySpinnerTestHelper(true, false, false);
+    }
+
+    @Test
+    public void securitySpinner_oweVisible_suitebAndSaeNotVisible() {
+        securitySpinnerTestHelper(false, false, true);
+    }
+
+    private void securitySpinnerTestHelper(boolean saeVisible, boolean suitebVisible,
+            boolean oweVisible) {
+        WifiManager wifiManager = mock(WifiManager.class);
+        when(wifiManager.isWpa3SaeSupported()).thenReturn(saeVisible);
+        when(wifiManager.isWpa3SuiteBSupported()).thenReturn(suitebVisible);
+        when(wifiManager.isEnhancedOpenSupported()).thenReturn(oweVisible);
+
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_MODIFY, wifiManager);
+
+        final Spinner securitySpinner = mView.findViewById(R.id.security);
+        final ArrayAdapter<String> adapter = (ArrayAdapter) securitySpinner.getAdapter();
+        boolean saeFound = false;
+        boolean suitebFound = false;
+        boolean oweFound = false;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            String val = adapter.getItem(i);
+
+            if (val.compareTo(mContext.getString(R.string.wifi_security_sae)) == 0) {
+                saeFound = true;
+            }
+
+            if (val.compareTo(mContext.getString(R.string.wifi_security_eap_suiteb)) == 0) {
+                suitebFound = true;
+            }
+
+            if (val.compareTo(mContext.getString(R.string.wifi_security_owe)) == 0) {
+                oweFound = true;
+            }
+        }
+
+        if (saeVisible) {
+            assertThat(saeFound).isTrue();
+        } else {
+            assertThat(saeFound).isFalse();
+        }
+        if (suitebVisible) {
+            assertThat(suitebFound).isTrue();
+        } else {
+            assertThat(suitebFound).isFalse();
+        }
+        if (oweVisible) {
+            assertThat(oweFound).isTrue();
+        } else {
+            assertThat(oweFound).isFalse();
+        }
+    }
+
     public class TestWifiConfigController extends WifiConfigController {
 
         private TestWifiConfigController(
             WifiConfigUiBase parent, View view, AccessPoint accessPoint, int mode) {
             super(parent, view, accessPoint, mode);
+        }
+
+        private TestWifiConfigController(
+                WifiConfigUiBase parent, View view, AccessPoint accessPoint, int mode,
+                    WifiManager wifiManager) {
+            super(parent, view, accessPoint, mode, wifiManager);
         }
 
         @Override
@@ -282,5 +387,62 @@ public class WifiConfigControllerTest {
 
         @Override
         KeyStore getKeyStore() { return mKeyStore; }
+    }
+
+    @Test
+    public void loadMacRandomizedValue_shouldPersistentAsDefault() {
+        final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
+        final int prefPersist =
+                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                        WifiConfiguration.RANDOMIZATION_PERSISTENT);
+
+        assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(prefPersist);
+    }
+
+    @Test
+    public void loadSavedMacRandomizedPersistentValue_shouldCorrectMacValue() {
+        checkSavedMacRandomizedValue(WifiConfiguration.RANDOMIZATION_PERSISTENT);
+    }
+
+    @Test
+    public void loadSavedMacRandomizedNoneValue_shouldCorrectMacValue() {
+        checkSavedMacRandomizedValue(WifiConfiguration.RANDOMIZATION_NONE);
+    }
+
+    private void checkSavedMacRandomizedValue(int macRandomizedValue) {
+        when(mAccessPoint.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        when(mAccessPoint.getConfig()).thenReturn(mockWifiConfig);
+        mockWifiConfig.macRandomizationSetting = macRandomizedValue;
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT);
+
+        final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
+        final int expectedPrefValue =
+                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                        macRandomizedValue);
+
+        assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(expectedPrefValue);
+    }
+
+    @Test
+    public void saveMacRandomizedValue_noChanged_shouldPersistentAsDefault() {
+        WifiConfiguration config = mController.getConfig();
+        assertThat(config.macRandomizationSetting).isEqualTo(
+                WifiConfiguration.RANDOMIZATION_PERSISTENT);
+    }
+
+    @Test
+    public void saveMacRandomizedValue_ChangedToNone_shouldGetNone() {
+        final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
+        final int prefMacNone =
+                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                        WifiConfiguration.RANDOMIZATION_NONE);
+        privacySetting.setSelection(prefMacNone);
+
+        WifiConfiguration config = mController.getConfig();
+        assertThat(config.macRandomizationSetting).isEqualTo(WifiConfiguration.RANDOMIZATION_NONE);
     }
 }

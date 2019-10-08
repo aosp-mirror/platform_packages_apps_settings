@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCodecStatus;
@@ -28,19 +29,21 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.development.autofill.AutofillLoggingLevelPreferenceController;
+import com.android.settings.development.autofill.AutofillResetOptionsPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
@@ -49,11 +52,13 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
         implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
@@ -163,7 +168,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // Set up master switch
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
         mSwitchBarController = new DevelopmentSwitchBarController(
-                this /* DevelopmentSettings */, mSwitchBar, mIsAvailable, getLifecycle());
+                this /* DevelopmentSettings */, mSwitchBar, mIsAvailable,
+                getSettingsLifecycle());
         mSwitchBar.show();
 
         // Restore UI state based on whether developer options is enabled
@@ -201,7 +207,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEVELOPMENT;
+        return SettingsEnums.DEVELOPMENT;
     }
 
     @Override
@@ -215,7 +221,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             if (isChecked) {
                 EnableDevelopmentSettingWarningDialog.show(this /* host */);
             } else {
-                disableDeveloperOptions();
+                final BluetoothA2dpHwOffloadPreferenceController controller =
+                        getDevelopmentOptionsController(
+                                BluetoothA2dpHwOffloadPreferenceController.class);
+                // If A2DP hardware offload isn't default value, we must reboot after disable
+                // developer options. Show a dialog for the user to confirm.
+                if (controller == null || controller.isDefaultValue()) {
+                    disableDeveloperOptions();
+                } else {
+                    DisableDevSettingsDialogFragment.show(this /* host */);
+                }
             }
         }
     }
@@ -315,8 +330,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             mPreferenceControllers = new ArrayList<>();
             return null;
         }
-        mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
-                this /* devOptionsDashboardFragment */,
+        mPreferenceControllers = buildPreferenceControllers(context, getActivity(),
+                getSettingsLifecycle(), this /* devOptionsDashboardFragment */,
                 new BluetoothA2dpConfigStore());
         return mPreferenceControllers;
     }
@@ -374,16 +389,25 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         mSwitchBar.setChecked(false);
     }
 
+    void onDisableDevelopmentOptionsConfirmed() {
+        disableDeveloperOptions();
+    }
+
+    void onDisableDevelopmentOptionsRejected() {
+        // Reset the toggle
+        mSwitchBar.setChecked(true);
+    }
+
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
             BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new MemoryUsagePreferenceController(context));
         controllers.add(new BugReportPreferenceController(context));
+        controllers.add(new SystemServerHeapDumpPreferenceController(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         controllers.add(new HdcpCheckingPreferenceController(context));
-        controllers.add(new DarkUIPreferenceController(context));
         controllers.add(new BluetoothSnoopLogPreferenceController(context));
         controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         controllers.add(new FileEncryptionPreferenceController(context));
@@ -395,18 +419,20 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ClearAdbKeysPreferenceController(context, fragment));
         controllers.add(new LocalTerminalPreferenceController(context));
         controllers.add(new BugReportInPowerPreferenceController(context));
+        controllers.add(new AutomaticSystemServerHeapDumpPreferenceController(context));
         controllers.add(new MockLocationAppPreferenceController(context, fragment));
         controllers.add(new DebugViewAttributesPreferenceController(context));
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));
         controllers.add(new WaitForDebuggerPreferenceController(context));
         controllers.add(new EnableGpuDebugLayersPreferenceController(context));
         controllers.add(new VerifyAppsOverUsbPreferenceController(context));
+        controllers.add(new ArtVerifierPreferenceController(context));
         controllers.add(new LogdSizePreferenceController(context));
         controllers.add(new LogPersistPreferenceController(context, fragment, lifecycle));
         controllers.add(new CameraLaserSensorPreferenceController(context));
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
         controllers.add(new WifiVerboseLoggingPreferenceController(context));
-        controllers.add(new WifiConnectedMacRandomizationPreferenceController(context));
+        controllers.add(new WifiScanThrottlingPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
         controllers.add(new TetheringHardwareAccelPreferenceController(context));
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
@@ -434,11 +460,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new TransitionAnimationScalePreferenceController(context));
         controllers.add(new AnimatorDurationScalePreferenceController(context));
         controllers.add(new SecondaryDisplayPreferenceController(context));
-        controllers.add(new ForceGpuRenderingPreferenceController(context));
         controllers.add(new GpuViewUpdatesPreferenceController(context));
         controllers.add(new HardwareLayersUpdatesPreferenceController(context));
         controllers.add(new DebugGpuOverdrawPreferenceController(context));
         controllers.add(new DebugNonRectClipOperationsPreferenceController(context));
+        controllers.add(new ForceDarkPreferenceController(context));
         controllers.add(new ForceMSAAPreferenceController(context));
         controllers.add(new HardwareOverlaysPreferenceController(context));
         controllers.add(new SimulateColorSpacePreferenceController(context));
@@ -453,7 +479,9 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
         controllers.add(new ResizableActivityPreferenceController(context));
         controllers.add(new FreeformWindowsPreferenceController(context));
+        controllers.add(new DesktopModePreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
+        controllers.add(new BubbleGlobalPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
         controllers.add(new DefaultLaunchPreferenceController(context, "running_apps"));
         controllers.add(new DefaultLaunchPreferenceController(context, "demo_mode"));
@@ -464,6 +492,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
+        controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
+        controllers.add(new AutofillResetOptionsPreferenceController(context));
+        controllers.add(new OverlayCategoryPreferenceController(context,
+                "android.theme.customization.accent_color"));
+        controllers.add(new OverlayCategoryPreferenceController(context,
+                "android.theme.customization.font"));
+        controllers.add(new OverlayCategoryPreferenceController(context,
+                "android.theme.customization.adaptive_icon_shape"));
+        controllers.add(new TrustAgentsExtendUnlockPreferenceController(context));
+        controllers.add(new TrustLostLocksScreenPreferenceController(context));
         return controllers;
     }
 

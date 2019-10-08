@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,14 +37,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.MultiSelectListPreference;
-import androidx.preference.SwitchPreference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceViewHolder;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,7 +45,15 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -243,7 +244,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.USERS_APP_RESTRICTIONS;
+        return SettingsEnums.USERS_APP_RESTRICTIONS;
     }
 
     @Override
@@ -449,7 +450,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private void addLocationAppRestrictionsPreference(AppRestrictionsHelper.SelectableAppInfo app,
             AppRestrictionsPreference p) {
         String packageName = app.packageName;
-        p.setIcon(R.drawable.ic_settings_location);
+        p.setIcon(R.drawable.ic_preference_location);
         p.setKey(getKeyForPackage(packageName));
         ArrayList<RestrictionEntry> restrictions = RestrictionUtils.getRestrictions(
                 getActivity(), mUser);

@@ -17,21 +17,22 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.hardware.usb.IUsbManager;
+import android.debug.IAdbManager;
 import android.os.RemoteException;
 import android.sysprop.AdbProperties;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
@@ -40,13 +41,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
 public class ClearAdbKeysPreferenceControllerTest {
 
@@ -55,7 +57,7 @@ public class ClearAdbKeysPreferenceControllerTest {
     @Mock
     private SwitchPreference mPreference;
     @Mock
-    private IUsbManager mUsbManager;
+    private IAdbManager mAdbManager;
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
 
@@ -66,7 +68,7 @@ public class ClearAdbKeysPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         final Context context = RuntimeEnvironment.application;
         mController = spy(new ClearAdbKeysPreferenceController(context, mFragment));
-        ReflectionHelpers.setField(mController, "mUsbManager", mUsbManager);
+        ReflectionHelpers.setField(mController, "mAdbManager", mAdbManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
@@ -163,7 +165,7 @@ public class ClearAdbKeysPreferenceControllerTest {
     public void onClearAdbKeysConfirmed_shouldClearKeys() throws RemoteException {
         mController.onClearAdbKeysConfirmed();
 
-        verify(mUsbManager).clearUsbDebuggingKeys();
+        verify(mAdbManager).clearDebuggingKeys();
     }
 
     @Implements(ClearAdbKeysWarningDialog.class)

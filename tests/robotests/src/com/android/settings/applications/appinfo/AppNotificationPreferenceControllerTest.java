@@ -17,23 +17,26 @@
 package com.android.settings.applications.appinfo;
 
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
+import android.app.usage.IUsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -41,10 +44,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppNotificationPreferenceControllerTest {
 
     @Mock
@@ -78,6 +82,8 @@ public class AppNotificationPreferenceControllerTest {
         final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
         appEntry.info = new ApplicationInfo();
         when(mFragment.getAppEntry()).thenReturn(appEntry);
+        NotificationBackend backend = new NotificationBackend();
+        ReflectionHelpers.setField(backend, "sUsageStatsManager", mock(IUsageStatsManager.class));
         ReflectionHelpers.setField(mController, "mBackend", new NotificationBackend());
         mController.displayPreference(mScreen);
 
@@ -93,7 +99,7 @@ public class AppNotificationPreferenceControllerTest {
 
     @Test
     public void getArguments_containsChannelId() {
-        Activity activity = mock(Activity.class);
+        FragmentActivity activity = mock(FragmentActivity.class);
         Intent intent = new Intent();
         intent.putExtra(EXTRA_FRAGMENT_ARG_KEY, "test");
         when(mFragment.getActivity()).thenReturn(activity);
@@ -108,7 +114,7 @@ public class AppNotificationPreferenceControllerTest {
 
     @Test
     public void getNotificationSummary_noCrashOnNull() {
-        mController.getNotificationSummary(null, mContext);
+        AppNotificationPreferenceController.getNotificationSummary(null, mContext);
     }
 
     @Test
@@ -116,8 +122,9 @@ public class AppNotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         appRow.blockedChannelCount = 30;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString())
-                .isEqualTo("Off");
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString())
+            .isEqualTo("Off");
     }
 
     @Test
@@ -126,8 +133,9 @@ public class AppNotificationPreferenceControllerTest {
         appRow.banned = false;
         appRow.blockedChannelCount = 30;
         appRow.channelCount = 30;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString())
-                .isEqualTo("Off");
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString())
+            .isEqualTo("Off");
     }
 
     @Test
@@ -136,10 +144,15 @@ public class AppNotificationPreferenceControllerTest {
         appRow.banned = false;
         appRow.blockedChannelCount = 30;
         appRow.channelCount = 60;
-        assertThat(mController.getNotificationSummary(
+        appRow.sentByApp = new NotificationBackend.NotificationsSentState();
+        appRow.sentByApp.avgSentWeekly = 4;
+        assertThat(AppNotificationPreferenceController.getNotificationSummary(
                 appRow, mContext).toString().contains("30")).isTrue();
-        assertThat(mController.getNotificationSummary(
-                appRow, mContext).toString().contains("On")).isTrue();
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString()
+                .contains(
+                    NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false)))
+            .isTrue();
     }
 
     @Test
@@ -148,7 +161,12 @@ public class AppNotificationPreferenceControllerTest {
         appRow.banned = false;
         appRow.blockedChannelCount = 0;
         appRow.channelCount = 10;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo("On");
+        appRow.sentByApp = new NotificationBackend.NotificationsSentState();
+        appRow.sentByApp.avgSentDaily = 4;
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString())
+            .isEqualTo(
+                NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false));
     }
 
     @Test
@@ -157,6 +175,11 @@ public class AppNotificationPreferenceControllerTest {
         appRow.banned = false;
         appRow.blockedChannelCount = 0;
         appRow.channelCount = 0;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo("On");
+        appRow.sentByApp = new NotificationBackend.NotificationsSentState();
+        appRow.sentByApp.avgSentDaily = 7;
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString())
+            .isEqualTo(
+                NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false));
     }
 }

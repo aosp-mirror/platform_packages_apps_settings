@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
 
@@ -27,11 +25,11 @@ import android.os.UserManager;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UtilsTest extends AndroidTestCase {
     private static final int TEST_PRIMARY_USER_ID = 10;

@@ -16,11 +16,15 @@
 
 package com.android.settings.notification;
 
+import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.INotificationManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentSender;
@@ -39,9 +43,6 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.service.notification.NotificationListenerService.RankingMap;
 import android.service.notification.StatusBarNotification;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -52,7 +53,10 @@ import android.widget.DateTimeView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -60,13 +64,12 @@ import com.android.settings.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class NotificationStation extends SettingsPreferenceFragment {
     private static final String TAG = NotificationStation.class.getSimpleName();
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private static final boolean DUMP_EXTRAS = true;
     private static final boolean DUMP_PARCEL = true;
     private Handler mHandler;
@@ -180,7 +183,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_STATION;
+        return SettingsEnums.NOTIFICATION_STATION;
     }
 
     @Override
@@ -354,28 +357,53 @@ public class NotificationStation extends SettingsPreferenceFragment {
                         getString(R.string.notification_log_details_group_summary)));
             }
         }
-        sb.append("\n")
-                .append(bold(getString(R.string.notification_log_details_sound)))
-                .append(delim);
-        if (0 != (n.defaults & Notification.DEFAULT_SOUND)) {
-            sb.append(getString(R.string.notification_log_details_default));
-        } else if (n.sound != null) {
-            sb.append(n.sound.toString());
-        } else {
-            sb.append(getString(R.string.notification_log_details_none));
-        }
-        sb.append("\n")
-                .append(bold(getString(R.string.notification_log_details_vibrate)))
-                .append(delim);
-        if (0 != (n.defaults & Notification.DEFAULT_VIBRATE)) {
-            sb.append(getString(R.string.notification_log_details_default));
-        } else if (n.vibrate != null) {
-            for (int vi=0;vi<n.vibrate.length;vi++) {
-                if (vi > 0) sb.append(',');
-                sb.append(String.valueOf(n.vibrate[vi]));
+        if (info.active) {
+            // mRanking only applies to active notifications
+            if (mRanking != null && mRanking.getRanking(sbn.getKey(), rank)) {
+                if (rank.getLastAudiblyAlertedMillis() > 0) {
+                    sb.append("\n")
+                            .append(bold(getString(R.string.notification_log_details_alerted)));
+                }
             }
-        } else {
-            sb.append(getString(R.string.notification_log_details_none));
+        }
+        try {
+            NotificationChannel channel = mNoMan.getNotificationChannelForPackage(
+                    sbn.getPackageName(), sbn.getUid(), n.getChannelId(), false);
+            sb.append("\n")
+                    .append(bold(getString(R.string.notification_log_details_sound)))
+                    .append(delim);
+            if (channel == null || channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
+
+                if (0 != (n.defaults & Notification.DEFAULT_SOUND)) {
+                    sb.append(getString(R.string.notification_log_details_default));
+                } else if (n.sound != null) {
+                    sb.append(n.sound.toString());
+                } else {
+                    sb.append(getString(R.string.notification_log_details_none));
+                }
+            } else {
+                sb.append(String.valueOf(channel.getSound()));
+            }
+            sb.append("\n")
+                    .append(bold(getString(R.string.notification_log_details_vibrate)))
+                    .append(delim);
+            if (channel == null || channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
+                if (0 != (n.defaults & Notification.DEFAULT_VIBRATE)) {
+                    sb.append(getString(R.string.notification_log_details_default));
+                } else if (n.vibrate != null) {
+                    sb.append(getString(R.string.notification_log_details_vibrate_pattern));
+                } else {
+                    sb.append(getString(R.string.notification_log_details_none));
+                }
+            } else {
+                if (channel.getVibrationPattern() != null) {
+                    sb.append(getString(R.string.notification_log_details_vibrate_pattern));
+                } else {
+                    sb.append(getString(R.string.notification_log_details_none));
+                }
+            }
+        } catch (RemoteException e) {
+            Log.d(TAG, "cannot read channel info", e);
         }
         sb.append("\n")
                 .append(bold(getString(R.string.notification_log_details_visibility)))

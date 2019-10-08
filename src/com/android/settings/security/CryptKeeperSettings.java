@@ -17,8 +17,8 @@
 package com.android.settings.security;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,14 +28,15 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+
 import com.android.settings.CryptKeeperConfirm;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -122,7 +123,7 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CRYPT_KEEPER;
+        return SettingsEnums.CRYPT_KEEPER;
     }
 
     @Override
@@ -172,7 +173,7 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
 
         if (helper.utils().getKeyguardStoredPasswordQuality(UserHandle.myUserId())
                 == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
-            showFinalConfirmation(StorageManager.CRYPT_TYPE_DEFAULT, "");
+            showFinalConfirmation(StorageManager.CRYPT_TYPE_DEFAULT, "".getBytes());
             return true;
         }
 
@@ -192,14 +193,14 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
         // confirmation prompt; otherwise, go back to the initial state.
         if (resultCode == Activity.RESULT_OK && data != null) {
             int type = data.getIntExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE, -1);
-            String password = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-            if (!TextUtils.isEmpty(password)) {
+            byte[] password = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            if (!(password == null || password.length == 0)) {
                 showFinalConfirmation(type, password);
             }
         }
     }
 
-    private void showFinalConfirmation(int type, String password) {
+    private void showFinalConfirmation(int type, byte[] password) {
         Preference preference = new Preference(getPreferenceManager().getContext());
         preference.setFragment(CryptKeeperConfirm.class.getName());
         preference.setTitle(R.string.crypt_keeper_confirm_title);
@@ -207,16 +208,16 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
         ((SettingsActivity) getActivity()).onPreferenceStartFragment(null, preference);
     }
 
-    private void addEncryptionInfoToPreference(Preference preference, int type, String password) {
+    private void addEncryptionInfoToPreference(Preference preference, int type, byte[] password) {
         Activity activity = getActivity();
         DevicePolicyManager dpm = (DevicePolicyManager)
                 activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         if (dpm.getDoNotAskCredentialsOnBoot()) {
             preference.getExtras().putInt(TYPE, StorageManager.CRYPT_TYPE_DEFAULT);
-            preference.getExtras().putString(PASSWORD, "");
+            preference.getExtras().putByteArray(PASSWORD, "".getBytes());
         } else {
             preference.getExtras().putInt(TYPE, type);
-            preference.getExtras().putString(PASSWORD, password);
+            preference.getExtras().putByteArray(PASSWORD, password);
         }
     }
 }

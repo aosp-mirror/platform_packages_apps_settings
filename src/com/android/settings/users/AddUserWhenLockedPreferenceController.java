@@ -16,72 +16,57 @@
 package com.android.settings.users;
 
 import android.content.Context;
-import android.provider.Settings.Global;
+import android.provider.Settings;
+
 import androidx.preference.Preference;
 
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class AddUserWhenLockedPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnPause, OnResume {
+public class AddUserWhenLockedPreferenceController extends TogglePreferenceController {
 
-    private final String mPrefKey;
     private final UserCapabilities mUserCaps;
-    private boolean mShouldUpdateUserList;
 
-    public AddUserWhenLockedPreferenceController(Context context, String key, Lifecycle lifecycle) {
-        super(context);
-        mPrefKey = key;
+    public AddUserWhenLockedPreferenceController(Context context, String key) {
+        super(context, key);
         mUserCaps = UserCapabilities.create(context);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
     @Override
     public void updateState(Preference preference) {
-        RestrictedSwitchPreference restrictedSwitchPreference =
+        super.updateState(preference);
+        mUserCaps.updateAddUserCapabilities(mContext);
+        final RestrictedSwitchPreference restrictedSwitchPreference =
                 (RestrictedSwitchPreference) preference;
-        int value = Global.getInt(mContext.getContentResolver(), Global.ADD_USERS_WHEN_LOCKED, 0);
-        restrictedSwitchPreference.setChecked(value == 1);
-        restrictedSwitchPreference.setDisabledByAdmin(
-                mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Boolean value = (Boolean) newValue;
-        Global.putInt(mContext.getContentResolver(),
-                Global.ADD_USERS_WHEN_LOCKED, value != null && value ? 1 : 0);
-        return true;
-    }
-
-    @Override
-    public void onPause() {
-        mShouldUpdateUserList = true;
-    }
-
-    @Override
-    public void onResume() {
-        if (mShouldUpdateUserList) {
-            mUserCaps.updateAddUserCapabilities(mContext);
+        if (!isAvailable()) {
+            restrictedSwitchPreference.setVisible(false);
+        } else {
+            restrictedSwitchPreference.setDisabledByAdmin(
+                    mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
+            restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled);
         }
     }
 
     @Override
-    public boolean isAvailable() {
-        return mUserCaps.isAdmin() &&
-                (!mUserCaps.disallowAddUser() || mUserCaps.disallowAddUserSetByAdmin());
+    public int getAvailabilityStatus() {
+        if (!mUserCaps.isAdmin()) {
+            return DISABLED_FOR_USER;
+        } else if (mUserCaps.disallowAddUser() || mUserCaps.disallowAddUserSetByAdmin()) {
+            return DISABLED_FOR_USER;
+        } else {
+            return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        }
     }
 
     @Override
-    public String getPreferenceKey() {
-        return mPrefKey;
+    public boolean isChecked() {
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        return Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.ADD_USERS_WHEN_LOCKED, isChecked ? 1 : 0);
     }
 }

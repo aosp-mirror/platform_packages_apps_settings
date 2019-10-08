@@ -17,9 +17,8 @@ package com.android.settings.datetime.timezone.model;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.SmallTest;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.filters.SmallTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,9 +55,6 @@ public class TimeZoneDataTest {
         2) because it's the same as Moscow after Oct 2014.
         */
         assertThat(mTimeZoneData.lookupCountryCodesForZoneId("Europe/Simferopol").isEmpty())
-                .isTrue();
-        // Metlakatla has the same time as Anchorage after 2015
-        assertThat(mTimeZoneData.lookupCountryCodesForZoneId("America/Metlakatla").isEmpty())
                 .isTrue();
         assertThat(mTimeZoneData.lookupCountryCodesForZoneId("Europe/London").isEmpty())
                 .isFalse();

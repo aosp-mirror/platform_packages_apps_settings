@@ -15,28 +15,31 @@ package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
     private static final String KEY_BATTERY_GRAPH = "battery_graph";
@@ -78,7 +81,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FUELGAUGE_BATTERY_HISTORY_DETAIL;
+        return SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL;
     }
 
     @Override
@@ -105,7 +108,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 mShowAllApps = !mShowAllApps;
                 item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
                 mMetricsFeatureProvider.action(getContext(),
-                        MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE,
+                        SettingsEnums.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE,
                         mShowAllApps);
                 restartBatteryStatsLoader(BatteryUpdateType.MANUAL);
                 return true;
@@ -132,7 +135,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
         mBatteryAppListPreferenceController = new BatteryAppListPreferenceController(context,
-                KEY_APP_LIST, getLifecycle(), (SettingsActivity) getActivity(), this);
+                KEY_APP_LIST, getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
         controllers.add(mBatteryAppListPreferenceController);
 
         return controllers;

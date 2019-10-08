@@ -16,14 +16,17 @@
 
 package com.android.settings.backup;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.SmallTest;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.SmallTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,17 +34,12 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class BackupIntentTest {
-
     private static final String INTENT_PRIVACY_SETTINGS = "android.settings.PRIVACY_SETTINGS";
-    private static final String INTENT_BACKUP_SETTINGS =
-            "android.settings.BACKUP_AND_RESET_SETTINGS";
     private static final String BACKUP_SETTINGS_ACTIVITY =
-            "com.android.settings.backup.BackupSettingsActivity";
+            "com.android.settings.Settings$PrivacyDashboardActivity";
 
     private Context mContext;
 
@@ -49,17 +47,6 @@ public class BackupIntentTest {
     public void setUp() throws Exception {
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         mContext = instrumentation.getTargetContext();
-    }
-
-    @Test
-    public void testBackupSettingsIntentResolvesToOnlyOneActivity(){
-        PackageManager pm = mContext.getPackageManager();
-        Intent intent = new Intent(INTENT_BACKUP_SETTINGS);
-        List<ResolveInfo> activities = pm.queryIntentActivities(intent, 0);
-        assertThat(activities).isNotNull();
-        assertThat(activities.size()).isEqualTo(1);
-        assertThat(activities.get(0).activityInfo.getComponentName().getClassName()).
-                isEqualTo(BACKUP_SETTINGS_ACTIVITY);
     }
 
     @Test
@@ -72,5 +59,4 @@ public class BackupIntentTest {
         assertThat(activities.get(0).activityInfo.getComponentName().getClassName()).
                 isEqualTo(BACKUP_SETTINGS_ACTIVITY);
     }
-
 }

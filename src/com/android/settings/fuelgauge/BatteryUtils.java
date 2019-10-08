@@ -30,28 +30,34 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.IntDef;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.util.SparseLongArray;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.R;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.StatsManagerConfig;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.fuelgauge.Estimate;
+import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.PowerUtil;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -101,8 +107,8 @@ public class BatteryUtils {
         mContext = context;
         mPackageManager = context.getPackageManager();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(
-                context).getPowerUsageFeatureProvider(context);
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context);
     }
 
     public long getProcessTimeMs(@StatusType int type, @Nullable BatteryStats.Uid uid,
@@ -184,8 +190,10 @@ public class BatteryUtils {
                         && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED
                         && sipper.drainType != BatterySipper.DrainType.BLUETOOTH
                         && sipper.drainType != BatterySipper.DrainType.WIFI
-                        && sipper.drainType != BatterySipper.DrainType.IDLE) {
-                    // Don't add it if it is overcounted, unaccounted, wifi, bluetooth, or screen
+                        && sipper.drainType != BatterySipper.DrainType.IDLE
+                        && !isHiddenSystemModule(sipper)) {
+                    // Don't add it if it is overcounted, unaccounted, wifi, bluetooth, screen
+                    // or hidden system modules
                     proportionalSmearPowerMah += sipper.totalPowerMah;
                 }
             }
@@ -248,7 +256,27 @@ public class BatteryUtils {
                 || drainType == BatterySipper.DrainType.WIFI
                 || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
                 || mPowerUsageFeatureProvider.isTypeService(sipper)
-                || mPowerUsageFeatureProvider.isTypeSystem(sipper);
+                || mPowerUsageFeatureProvider.isTypeSystem(sipper)
+                || isHiddenSystemModule(sipper);
+    }
+
+    /**
+     * Return {@code true} if one of packages in {@code sipper} is hidden system modules
+     */
+    public boolean isHiddenSystemModule(BatterySipper sipper) {
+        if (sipper.uidObj == null) {
+            return false;
+        }
+        sipper.mPackages = mPackageManager.getPackagesForUid(sipper.getUid());
+        if (sipper.mPackages != null) {
+            for (int i = 0, length = sipper.mPackages.length; i < length; i++) {
+                if (AppUtils.isHiddenSystemModule(mContext, sipper.mPackages[i])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -391,20 +419,6 @@ public class BatteryUtils {
         }
     }
 
-    @StringRes
-    public int getSummaryResIdFromAnomalyType(@Anomaly.AnomalyType int type) {
-        switch (type) {
-            case Anomaly.AnomalyType.WAKE_LOCK:
-                return R.string.battery_abnormal_wakelock_summary;
-            case Anomaly.AnomalyType.WAKEUP_ALARM:
-                return R.string.battery_abnormal_wakeup_alarm_summary;
-            case Anomaly.AnomalyType.BLUETOOTH_SCAN:
-                return R.string.battery_abnormal_location_summary;
-            default:
-                throw new IllegalArgumentException("Incorrect anomaly type: " + type);
-        }
-    }
-
     public void setForceAppStandby(int uid, String packageName,
             int mode) {
         final boolean isPreOApp = isPreOApp(packageName);
@@ -414,11 +428,33 @@ public class BatteryUtils {
         }
         // Control whether app could run jobs in the background
         mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName, mode);
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final BatteryDatabaseManager batteryDatabaseManager = BatteryDatabaseManager
+                    .getInstance(mContext);
+            if (mode == AppOpsManager.MODE_IGNORED) {
+                batteryDatabaseManager.insertAction(AnomalyDatabaseHelper.ActionType.RESTRICTION,
+                        uid, packageName, System.currentTimeMillis());
+            } else if (mode == AppOpsManager.MODE_ALLOWED) {
+                batteryDatabaseManager.deleteAction(AnomalyDatabaseHelper.ActionType.RESTRICTION,
+                        uid, packageName);
+            }
+        });
     }
 
     public boolean isForceAppStandbyEnabled(int uid, String packageName) {
         return mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid,
                 packageName) == AppOpsManager.MODE_IGNORED;
+    }
+
+    public boolean clearForceAppStandby(String packageName) {
+        final int uid = getPackageUid(packageName);
+        if (uid != UID_NULL && isForceAppStandbyEnabled(uid, packageName)) {
+            setForceAppStandby(uid, packageName, AppOpsManager.MODE_ALLOWED);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
@@ -439,17 +475,14 @@ public class BatteryUtils {
                 SystemClock.elapsedRealtime());
         final BatteryStats stats = statsHelper.getStats();
         BatteryInfo batteryInfo;
+        Estimate estimate = getEnhancedEstimate();
 
-        final Estimate estimate;
-        // Get enhanced prediction if available
-        if (mPowerUsageFeatureProvider != null &&
-                mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(mContext)) {
-            estimate = mPowerUsageFeatureProvider.getEnhancedBatteryPrediction(mContext);
-        } else {
+        // couldn't get estimate from cache or provider, use fallback
+        if (estimate == null) {
             estimate = new Estimate(
                     PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
                     false /* isBasedOnUsage */,
-                    Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+                    EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
 
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader post query", startTime);
@@ -458,6 +491,23 @@ public class BatteryUtils {
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 
         return batteryInfo;
+    }
+
+    @VisibleForTesting
+    Estimate getEnhancedEstimate() {
+        Estimate estimate = null;
+        // Get enhanced prediction if available
+        if (Duration.between(Estimate.getLastCacheUpdateTime(mContext), Instant.now())
+                .compareTo(Duration.ofSeconds(10)) < 0) {
+            estimate = Estimate.getCachedEstimateIfAvailable(mContext);
+        } else if (mPowerUsageFeatureProvider != null &&
+                mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(mContext)) {
+            estimate = mPowerUsageFeatureProvider.getEnhancedBatteryPrediction(mContext);
+            if (estimate != null) {
+                Estimate.storeCachedEstimate(mContext, estimate);
+            }
+        }
+        return estimate;
     }
 
     /**

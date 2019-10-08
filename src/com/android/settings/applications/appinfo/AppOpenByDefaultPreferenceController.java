@@ -22,6 +22,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.usb.IUsbManager;
 import android.os.ServiceManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

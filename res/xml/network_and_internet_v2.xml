@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="network_and_internet_screen"
+    android:title="@string/network_dashboard_title"
+    settings:initialExpandedChildrenCount="5">
+
+    <PreferenceCategory
+        android:key="multi_network_header"
+        android:title="@string/summary_placeholder"
+        android:layout="@layout/preference_category_no_label"
+        settings:allowDividerBelow="true"
+        android:order="-40"
+        settings:controller="com.android.settings.network.MultiNetworkHeaderController"/>
+
+    <com.android.settings.widget.MasterSwitchPreference
+        android:fragment="com.android.settings.wifi.WifiSettings"
+        android:key="toggle_wifi"
+        android:title="@string/wifi_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_settings_wireless"
+        android:order="-30"
+        settings:allowDividerAbove="true">
+        <intent
+            android:action="android.settings.WIFI_SETTINGS"
+            android:targetClass="Settings$WifiSettingsActivity" />
+    </com.android.settings.widget.MasterSwitchPreference>
+
+    <com.android.settings.widget.AddPreference
+        android:key="mobile_network_list"
+        android:title="@string/network_settings_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_network_cell"
+        android:order="-15"
+        settings:keywords="@string/keywords_more_mobile_networks"
+        settings:userRestriction="no_config_mobile_networks"
+        settings:useAdminDisabledSummary="true" />
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="airplane_mode"
+        android:title="@string/airplane_mode"
+        android:icon="@drawable/ic_airplanemode_active"
+        android:disableDependentsState="true"
+        android:order="-5"
+        settings:controller="com.android.settings.network.AirplaneModePreferenceController"
+        settings:platform_slice="true"
+        settings:userRestriction="no_airplane_mode"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="manage_mobile_plan"
+        android:title="@string/manage_mobile_plan_title"
+        android:persistent="false"
+        android:order="0"
+        settings:userRestriction="no_config_mobile_networks"
+        settings:useAdminDisabledSummary="true" />
+
+    <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.TetherSettings"
+        android:key="tether_settings"
+        android:title="@string/tether_settings_title_all"
+        android:icon="@drawable/ic_wifi_tethering"
+        android:order="5"
+        android:summary="@string/summary_placeholder"
+        settings:keywords="@string/keywords_hotspot_tethering"
+        settings:userRestriction="no_config_tethering"
+        settings:useAdminDisabledSummary="true" />
+
+    <com.android.settings.datausage.DataSaverPreference
+        android:key="restrict_background_parent_entry"
+        android:title="@string/data_saver_title"
+        android:icon="@drawable/ic_settings_data_usage"
+        android:order="10"
+        android:fragment="com.android.settings.datausage.DataSaverSummary"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.vpn2.VpnSettings"
+        android:key="vpn_settings"
+        android:title="@string/vpn_settings_title"
+        android:icon="@drawable/ic_vpn_key"
+        android:order="15"
+        android:summary="@string/summary_placeholder"
+        settings:userRestriction="no_config_vpn"
+        settings:useAdminDisabledSummary="true" />
+
+    <com.android.settings.network.PrivateDnsModeDialogPreference
+        android:key="private_dns_settings"
+        android:title="@string/select_private_dns_configuration_title"
+        android:order="20"
+        android:dialogTitle="@string/select_private_dns_configuration_dialog_title"
+        android:dialogLayout="@layout/private_dns_mode_dialog"
+        android:positiveButtonText="@string/save"
+        android:negativeButtonText="@android:string/cancel" />
+
+</PreferenceScreen>

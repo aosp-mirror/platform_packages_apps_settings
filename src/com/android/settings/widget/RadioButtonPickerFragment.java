@@ -20,34 +20,47 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.PreferenceXmlParserUtils;
+import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.widget.CandidateInfo;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFragment implements
         RadioButtonPreference.OnClickListener {
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     static final String EXTRA_FOR_WORK = "for_work";
+    private static final String TAG = "RadioButtonPckrFrgmt";
+    @VisibleForTesting
+    boolean mAppendStaticPreferences = false;
 
     private final Map<String, CandidateInfo> mCandidates = new ArrayMap<>();
 
     protected UserManager mUserManager;
     protected int mUserId;
+    private int mIllustrationId;
+    private int mIllustrationPreviewId;
+    private VideoPreference mVideoPreference;
 
     @Override
     public void onAttach(Context context) {
@@ -68,6 +81,19 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
+        try {
+            // Check if the xml specifies if static preferences should go on the top or bottom
+            final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(getContext(),
+                getPreferenceScreenResId(),
+                MetadataFlag.FLAG_INCLUDE_PREF_SCREEN |
+                MetadataFlag.FLAG_NEED_PREF_APPEND);
+            mAppendStaticPreferences = metadata.get(0)
+                    .getBoolean(PreferenceXmlParserUtils.METADATA_APPEND);
+        } catch (IOException e) {
+            Log.e(TAG, "Error trying to open xml file", e);
+        } catch (XmlPullParserException e) {
+            Log.e(TAG, "Error parsing xml", e);
+        }
         updateCandidates();
     }
 
@@ -141,7 +167,12 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         final String systemDefaultKey = getSystemDefaultKey();
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
-        addStaticPreferences(screen);
+        if (mIllustrationId != 0) {
+            addIllustration(screen);
+        }
+        if (!mAppendStaticPreferences) {
+            addStaticPreferences(screen);
+        }
 
         final int customLayoutResId = getRadioButtonPreferenceCustomLayoutResId();
         if (shouldShowItemNone()) {
@@ -167,6 +198,9 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
             }
         }
         mayCheckOnlyRadioButton();
+        if (mAppendStaticPreferences) {
+            addStaticPreferences(screen);
+        }
     }
 
     @VisibleForTesting
@@ -211,6 +245,23 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
                 ((RadioButtonPreference) onlyPref).setChecked(true);
             }
         }
+    }
+
+    /**
+     * Allows you to set an illustration at the top of this screen. Set the illustration id to 0
+     * if you want to remove the illustration.
+     * @param illustrationId The res id for the raw of the illustration.
+     * @param previewId The res id for the drawable of the illustration
+     */
+    protected void setIllustration(int illustrationId, int previewId) {
+        mIllustrationId = illustrationId;
+        mIllustrationPreviewId = previewId;
+    }
+
+    private void addIllustration(PreferenceScreen screen) {
+        mVideoPreference = new VideoPreference(getContext());
+        mVideoPreference.setVideo(mIllustrationId, mIllustrationPreviewId);
+        screen.addPreference(mVideoPreference);
     }
 
     protected abstract List<? extends CandidateInfo> getCandidates();

@@ -16,30 +16,18 @@
 
 package com.android.settings.wallpaper;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+import android.app.settings.SettingsEnums;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.dashboard.DashboardFragment;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class WallpaperTypeSettings extends SettingsPreferenceFragment implements Indexable {
+public class WallpaperTypeSettings extends DashboardFragment {
+    private static final String TAG = "WallpaperTypeSettings";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WALLPAPER_TYPE;
+        return SettingsEnums.WALLPAPER_TYPE;
     }
 
     @Override
@@ -48,81 +36,12 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.wallpaper_settings);
-        populateWallpaperTypes();
-    }
-
-    private void populateWallpaperTypes() {
-        // Search for activities that satisfy the ACTION_SET_WALLPAPER action
-        final Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-        final PackageManager pm = getPackageManager();
-        final List<ResolveInfo> rList = pm.queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
-
-        final PreferenceScreen parent = getPreferenceScreen();
-        parent.setOrderingAsAdded(false);
-        // Add Preference items for each of the matching activities
-        for (ResolveInfo info : rList) {
-            Preference pref = new Preference(getPrefContext());
-            Intent prefIntent = new Intent(intent).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            prefIntent.setComponent(new ComponentName(
-                    info.activityInfo.packageName, info.activityInfo.name));
-            pref.setIntent(prefIntent);
-            CharSequence label = info.loadLabel(pm);
-            if (label == null) label = info.activityInfo.packageName;
-            pref.setTitle(label);
-            pref.setIcon(info.loadIcon(pm));
-            parent.addPreference(pref);
-        }
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference.getIntent() == null) {
-            return super.onPreferenceTreeClick(preference);
-        }
-        startActivity(preference.getIntent());
-        finish();
-        return true;
+    protected int getPreferenceScreenResId() {
+        return R.xml.wallpaper_settings;
     }
-
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-
-                final Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-                final PackageManager pm = context.getPackageManager();
-                final List<ResolveInfo> rList = pm.queryIntentActivities(intent,
-                        PackageManager.MATCH_DEFAULT_ONLY);
-
-                // Add indexable data for package that is in config_wallpaper_picker_package
-                final String wallpaperPickerPackage =
-                        context.getString(R.string.config_wallpaper_picker_package);
-                for (ResolveInfo info : rList) {
-                    if (!wallpaperPickerPackage.equals(info.activityInfo.packageName)) {
-                        continue;
-                    }
-                    CharSequence label = info.loadLabel(pm);
-                    if (label == null) label = info.activityInfo.packageName;
-
-                    SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.title = label.toString();
-                    data.key = "wallpaper_type_settings";
-                    data.screenTitle = context.getResources().getString(
-                            R.string.wallpaper_settings_fragment_title);
-                    data.intentAction = Intent.ACTION_SET_WALLPAPER;
-                    data.intentTargetPackage = info.activityInfo.packageName;
-                    data.intentTargetClass = info.activityInfo.name;
-                    data.keywords = context.getString(R.string.keywords_wallpaper);
-                    result.add(data);
-                }
-
-                return result;
-            }
-        };
 }

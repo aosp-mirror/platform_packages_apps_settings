@@ -22,18 +22,18 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 public class FeatureFlagFooterPreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart {
 
-    private FooterPreferenceMixin mFooterMixin;
+    private FooterPreferenceMixinCompat mFooterMixin;
 
     public FeatureFlagFooterPreferenceController(Context context) {
         super(context, "feature_flag_footer_pref");
     }
 
-    public void setFooterMixin(FooterPreferenceMixin mixin) {
+    public void setFooterMixin(FooterPreferenceMixinCompat mixin) {
         mFooterMixin = mixin;
     }
 

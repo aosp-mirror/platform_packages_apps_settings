@@ -15,12 +15,13 @@
  */
 package com.android.settings.connecteddevice;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
@@ -36,28 +38,27 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowAudioManager.class,
-        ShadowBluetoothUtils.class}
-)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowAudioManager.class, ShadowBluetoothUtils.class})
 public class AvailableMediaDeviceGroupControllerTest {
 
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
@@ -82,7 +83,7 @@ public class AvailableMediaDeviceGroupControllerTest {
     private Preference mPreference;
     private AvailableMediaDeviceGroupController mAvailableMediaDeviceGroupController;
     private LocalBluetoothManager mLocalBluetoothManager;
-    private ShadowAudioManager mShadowAudioManager;
+    private AudioManager mAudioManager;
 
     @Before
     public void setUp() {
@@ -98,8 +99,8 @@ public class AvailableMediaDeviceGroupControllerTest {
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
-        mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
-        mShadowAudioManager = ShadowAudioManager.getShadow();
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
+        mAudioManager = mContext.getSystemService(AudioManager.class);
         doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
 
         mAvailableMediaDeviceGroupController = new AvailableMediaDeviceGroupController(mContext);
@@ -108,12 +109,18 @@ public class AvailableMediaDeviceGroupControllerTest {
         mAvailableMediaDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
     }
 
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
+    }
+
     @Test
     public void onDeviceAdded_firstAdd_becomeVisibleAndPreferenceAdded() {
         mAvailableMediaDeviceGroupController.onDeviceAdded(mPreference);
 
         assertThat(mPreferenceGroup.isVisible()).isTrue();
-        assertThat(mPreferenceGroup.findPreference(PREFERENCE_KEY_1)).isEqualTo(mPreference);
+        assertThat((Preference) mPreferenceGroup.findPreference(PREFERENCE_KEY_1))
+                .isEqualTo(mPreference);
     }
 
     @Test
@@ -177,12 +184,12 @@ public class AvailableMediaDeviceGroupControllerTest {
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
         assertThat(mAvailableMediaDeviceGroupController.getAvailabilityStatus()).isEqualTo(
-                AVAILABLE);
+                AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
     public void setTitle_inCallState_showCallStateTitle() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
         mAvailableMediaDeviceGroupController.onAudioModeChanged();
 
         assertThat(mPreferenceGroup.getTitle()).isEqualTo(
@@ -191,10 +198,26 @@ public class AvailableMediaDeviceGroupControllerTest {
 
     @Test
     public void setTitle_notInCallState_showMediaStateTitle() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mAvailableMediaDeviceGroupController.onAudioModeChanged();
 
         assertThat(mPreferenceGroup.getTitle()).isEqualTo(
                 mContext.getText(R.string.connected_device_available_media_title));
+    }
+
+    @Test
+    public void onStart_localBluetoothManagerNull_shouldNotCrash() {
+        mAvailableMediaDeviceGroupController.mLocalBluetoothManager = null;
+
+        // Shouldn't crash
+        mAvailableMediaDeviceGroupController.onStart();
+    }
+
+    @Test
+    public void onStop_localBluetoothManagerNull_shouldNotCrash() {
+        mAvailableMediaDeviceGroupController.mLocalBluetoothManager = null;
+
+        // Shouldn't crash
+        mAvailableMediaDeviceGroupController.onStop();
     }
 }

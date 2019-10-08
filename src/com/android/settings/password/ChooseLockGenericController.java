@@ -16,12 +16,18 @@
 
 package com.android.settings.password;
 
+import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
+
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyManager.PasswordComplexity;
+import android.app.admin.PasswordMetrics;
 import android.content.Context;
 import android.os.UserHandle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -35,51 +41,82 @@ public class ChooseLockGenericController {
 
     private final Context mContext;
     private final int mUserId;
+    @PasswordComplexity private final int mRequestedMinComplexity;
     private ManagedLockPasswordProvider mManagedPasswordProvider;
     private DevicePolicyManager mDpm;
+    private final LockPatternUtils mLockPatternUtils;
 
     public ChooseLockGenericController(Context context, int userId) {
         this(
                 context,
                 userId,
+                PASSWORD_COMPLEXITY_NONE,
+                new LockPatternUtils(context));
+    }
+
+    /**
+     * @param requestedMinComplexity specifies the min password complexity to be taken into account
+     *                               when determining the available screen lock types
+     */
+    public ChooseLockGenericController(Context context, int userId,
+            @PasswordComplexity int requestedMinComplexity, LockPatternUtils lockPatternUtils) {
+        this(
+                context,
+                userId,
+                requestedMinComplexity,
                 context.getSystemService(DevicePolicyManager.class),
-                ManagedLockPasswordProvider.get(context, userId));
+                ManagedLockPasswordProvider.get(context, userId),
+                lockPatternUtils);
     }
 
     @VisibleForTesting
     ChooseLockGenericController(
             Context context,
             int userId,
+            @PasswordComplexity int requestedMinComplexity,
             DevicePolicyManager dpm,
-            ManagedLockPasswordProvider managedLockPasswordProvider) {
+            ManagedLockPasswordProvider managedLockPasswordProvider,
+            LockPatternUtils lockPatternUtils) {
         mContext = context;
         mUserId = userId;
+        mRequestedMinComplexity = requestedMinComplexity;
         mManagedPasswordProvider = managedLockPasswordProvider;
         mDpm = dpm;
+        mLockPatternUtils = lockPatternUtils;
     }
 
     /**
-     * @return The higher quality of either the specified {@code quality} or the quality required
-     *         by {@link DevicePolicyManager#getPasswordQuality}.
+     * Returns the highest quality among the specified {@code quality}, the quality required by
+     * {@link DevicePolicyManager#getPasswordQuality}, and the quality required by min password
+     * complexity.
      */
     public int upgradeQuality(int quality) {
-        // Compare min allowed password quality
-        return Math.max(quality, mDpm.getPasswordQuality(null, mUserId));
+        // Compare specified quality and dpm quality
+        int dpmUpgradedQuality = Math.max(quality, mDpm.getPasswordQuality(null, mUserId));
+        return Math.max(dpmUpgradedQuality,
+                PasswordMetrics.complexityLevelToMinQuality(mRequestedMinComplexity));
     }
 
     /**
      * Whether the given screen lock type should be visible in the given context.
      */
     public boolean isScreenLockVisible(ScreenLockType type) {
+        final boolean managedProfile = mUserId != UserHandle.myUserId();
         switch (type) {
             case NONE:
-                return !mContext.getResources().getBoolean(R.bool.config_hide_none_security_option);
+                return !mContext.getResources().getBoolean(R.bool.config_hide_none_security_option)
+                    && !managedProfile; // Profiles should use unified challenge instead.
             case SWIPE:
                 return !mContext.getResources().getBoolean(R.bool.config_hide_swipe_security_option)
-                    // Swipe doesn't make sense for profiles.
-                    && mUserId == UserHandle.myUserId();
+                    && !managedProfile; // Swipe doesn't make sense for profiles.
             case MANAGED:
                 return mManagedPasswordProvider.isManagedPasswordChoosable();
+            case PIN:
+            case PATTERN:
+            case PASSWORD:
+                // Hide the secure lock screen options if the device doesn't support the secure lock
+                // screen feature.
+                return mLockPatternUtils.hasSecureLockScreen();
         }
         return true;
     }

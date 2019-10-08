@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
@@ -28,18 +29,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
+import com.android.settings.search.actionbar.SearchMenuController;
 
-public class PrivateVolumeUnmount extends SettingsPreferenceFragment {
+public class PrivateVolumeUnmount extends InstrumentedFragment {
     private VolumeInfo mVolume;
     private DiskInfo mDisk;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DEVICEINFO_STORAGE;
+        return SettingsEnums.DEVICEINFO_STORAGE;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        setHasOptionsMenu(true);
+        SearchMenuController.init(this /* host */);
     }
 
     @Override

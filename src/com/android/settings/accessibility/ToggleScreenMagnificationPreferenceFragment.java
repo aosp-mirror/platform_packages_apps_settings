@@ -16,6 +16,10 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
+
+import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,9 +29,8 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager;
@@ -36,12 +39,19 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Switch;
 import android.widget.VideoView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.widget.SwitchBar;
 
 public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment implements SwitchBar.OnSwitchChangeListener {
+
+    private static final int DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL = 1;
+
+    private Dialog mDialog;
 
     protected class VideoPreference extends Preference {
         private ImageView mVideoBackgroundView;
@@ -161,9 +171,29 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
+    public Dialog onCreateDialog(int dialogId) {
+        if (dialogId == DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL) {
+            if (isGestureNavigateEnabled()) {
+                mDialog = AccessibilityGestureNavigationTutorial
+                        .showGestureNavigationTutorialDialog(getActivity());
+            } else {
+                mDialog = AccessibilityGestureNavigationTutorial
+                        .showAccessibilityButtonTutorialDialog(getActivity());
+            }
+        }
+
+        return mDialog;
+    }
+
+    @Override
     public int getMetricsCategory() {
         // TODO: Distinguish between magnification modes
-        return MetricsEvent.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
+        return SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        return SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
     }
 
     @Override
@@ -173,6 +203,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        if (enabled && TextUtils.equals(
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
+                preferenceKey)) {
+            showDialog(DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL);
+        }
         MagnificationPreferenceFragment.setChecked(getContentResolver(), preferenceKey, enabled);
         updateConfigurationWarningIfNeeded();
     }
@@ -221,6 +256,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getActivity().setTitle(titleRes);
             }
         }
+    }
+
+    private boolean isGestureNavigateEnabled() {
+        return getContext().getResources().getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode)
+                == NAV_BAR_MODE_GESTURAL;
     }
 
     private void updateConfigurationWarningIfNeeded() {

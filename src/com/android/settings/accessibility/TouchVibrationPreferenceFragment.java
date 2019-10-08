@@ -15,13 +15,11 @@
  */
 package com.android.settings.accessibility;
 
-import android.graphics.drawable.Drawable;
+import android.app.settings.SettingsEnums;
 import android.media.AudioAttributes;
 import android.os.Vibrator;
-import android.os.VibrationEffect;
 import android.provider.Settings;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 /**
@@ -30,7 +28,7 @@ import com.android.settings.R;
 public class TouchVibrationPreferenceFragment extends VibrationPreferenceFragment {
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_VIBRATION_TOUCH;
+        return SettingsEnums.ACCESSIBILITY_VIBRATION_TOUCH;
     }
 
     @Override
@@ -47,6 +45,11 @@ public class TouchVibrationPreferenceFragment extends VibrationPreferenceFragmen
     }
 
     @Override
+    protected String getVibrationEnabledSetting() {
+        return Settings.System.HAPTIC_FEEDBACK_ENABLED;
+    }
+
+    @Override
     protected int getDefaultVibrationIntensity() {
         Vibrator vibrator = getContext().getSystemService(Vibrator.class);
         return vibrator.getDefaultHapticFeedbackIntensity();
@@ -55,14 +58,5 @@ public class TouchVibrationPreferenceFragment extends VibrationPreferenceFragmen
     @Override
     protected int getPreviewVibrationAudioAttributesUsage() {
         return AudioAttributes.USAGE_ASSISTANCE_SONIFICATION;
-    }
-
-    @Override
-    public void onVibrationIntensitySelected(int intensity) {
-        // We want to keep HAPTIC_FEEDBACK_ENABLED consistent with this setting since some
-        // applications check it directly before triggering their own haptic feedback.
-        final boolean hapticFeedbackEnabled = !(intensity == Vibrator.VIBRATION_INTENSITY_OFF);
-        Settings.System.putInt(getContext().getContentResolver(),
-                Settings.System.HAPTIC_FEEDBACK_ENABLED, hapticFeedbackEnabled ? 1 : 0);
     }
 }

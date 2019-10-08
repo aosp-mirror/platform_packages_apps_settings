@@ -17,20 +17,22 @@
 package com.android.settings.notification;
 
 import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings.Global;
+
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -38,12 +40,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingPrefControllerTest {
 
     @Mock
@@ -51,7 +54,7 @@ public class SettingPrefControllerTest {
     @Mock
     private SoundSettings mSetting;
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private ContentResolver mContentResolver;
 

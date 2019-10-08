@@ -57,7 +57,7 @@
 
         </LinearLayout>
 
-        <com.android.settings.graph.UsageGraph
+        <com.android.settings.widget.UsageGraph
             android:id="@+id/usage_graph"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -76,12 +76,11 @@
             android:id="@+id/bottom_label_space"
             android:layout_width="@dimen/usage_graph_labels_width"
             android:layout_height="wrap_content"/>
-        <com.android.settings.graph.BottomLabelLayout
+        <com.android.settings.widget.BottomLabelLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:orientation="horizontal">
             <include android:id="@+id/label_start"
                      layout="@layout/usage_side_label" />
 
@@ -93,7 +92,7 @@
 
             <include android:id="@+id/label_end"
                      layout="@layout/usage_side_label" />
-        </com.android.settings.graph.BottomLabelLayout>
+        </com.android.settings.widget.BottomLabelLayout>
     </LinearLayout>
 
 </LinearLayout>

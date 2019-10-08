@@ -23,17 +23,16 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BluetoothDashboardFragmentTest {
 
     private Context mContext;
@@ -53,8 +52,6 @@ public class BluetoothDashboardFragmentTest {
                 raw -> TextUtils.equals(raw.title,
                         mContext.getString(R.string.bluetooth_settings))).findFirst().get();
 
-
         assertThat(fragmentResult).isNotNull();
     }
-
 }

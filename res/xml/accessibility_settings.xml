@@ -14,7 +14,9 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:key="accessibility_settings_screen"
         android:title="@string/accessibility_settings"
         android:persistent="true">
@@ -36,7 +38,8 @@
         <Preference
                 android:key="tts_settings_preference"
                 android:fragment="com.android.settings.tts.TextToSpeechSettings"
-                android:title="@string/tts_settings_title"/>
+                android:title="@string/tts_settings_title"
+                settings:searchable="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -44,20 +47,27 @@
             android:title="@string/display_category_title">
 
         <Preference
-            android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+            android:fragment="com.android.settings.display.ToggleFontSizePreferenceFragment"
             android:key="font_size_preference_screen"
-            android:title="@string/title_font_size" />
+            android:title="@string/title_font_size"
+            settings:searchable="false"/>
 
         <com.android.settings.display.ScreenZoomPreference
             android:key="accessibility_settings_screen_zoom"
             android:fragment="com.android.settings.display.ScreenZoomSettings"
-            android:title="@string/screen_zoom_title" />
+            android:title="@string/screen_zoom_title"
+            settings:searchable="false"/>
+
+        <SwitchPreference
+            android:key="dark_ui_mode_accessibility"
+            android:title="@string/dark_ui_mode"
+            settings:searchable="false"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
             android:title="@string/accessibility_screen_magnification_title"
-            android:icon="@mipmap/ic_accessibility_magnification" />
+            android:icon="@drawable/ic_accessibility_magnification" />
 
         <SwitchPreference
                 android:key="toggle_large_pointer_icon"
@@ -66,6 +76,7 @@
         <SwitchPreference
             android:key="toggle_disable_animations"
             android:title="@string/accessibility_disable_animations" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -74,8 +85,9 @@
 
         <Preference
                 android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
-                android:key="autoclick_preference_screen"
-                android:title="@string/accessibility_autoclick_preference_title"/>
+                android:key="autoclick_preference"
+                android:title="@string/accessibility_autoclick_preference_title"
+                settings:searchable="false"/>
 
         <SwitchPreference
                 android:key="toggle_power_button_ends_call_preference"
@@ -95,6 +107,12 @@
                 android:persistent="false"/>
 
         <Preference
+            android:fragment="com.android.settings.accessibility.AccessibilityControlTimeoutPreferenceFragment"
+            android:key="accessibility_control_timeout_preference_fragment"
+            android:title="@string/accessibility_setting_item_control_timeout_title"
+            android:persistent="false" />
+
+        <Preference
             android:fragment="com.android.settings.accessibility.VibrationSettings"
             android:key="vibration_preference_screen"
             android:title="@string/accessibility_vibration_settings_title" />
@@ -105,11 +123,26 @@
             android:key="audio_and_captions_category"
             android:title="@string/audio_and_captions_category_title">
 
+        <Preference
+            android:key="live_caption"
+            android:title="@string/live_caption_title"
+            android:summary="@string/live_caption_summary"
+            settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
+
         <SwitchPreference
                 android:key="toggle_master_mono"
                 android:title="@string/accessibility_toggle_master_mono_title"
                 android:summary="@string/accessibility_toggle_master_mono_summary"
                 android:persistent="false"/>
+
+        <com.android.settings.accessibility.BalanceSeekBarPreference
+                android:key="seekbar_master_balance"
+                android:title="@string/accessibility_toggle_master_balance_title" />
+
+        <Preference
+            android:key="hearing_aid_preference"
+            android:summary="@string/accessibility_hearingaid_not_connected_summary"
+            android:title="@string/accessibility_hearingaid_title"/>
 
         <Preference
                 android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
@@ -127,15 +160,17 @@
 
         <Preference
                 android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
-                android:key="daltonizer_preference_screen"
+                android:key="daltonizer_preference"
                 android:title="@string/accessibility_display_daltonizer_preference_title"
-                android:icon="@drawable/ic_daltonizer"/>
+                android:icon="@drawable/ic_daltonizer"
+                settings:searchable="false"/>
 
         <SwitchPreference
                 android:key="toggle_inversion_preference"
                 android:title="@string/accessibility_display_inversion_preference_title"
                 android:summary="@string/accessibility_display_inversion_preference_subtitle"
                 android:persistent="false"
-                android:icon="@drawable/ic_color_inversion"/>
+                android:icon="@drawable/ic_color_inversion"
+                settings:controller="com.android.settings.accessibility.ColorInversionPreferenceController"/>
     </PreferenceCategory>
 </PreferenceScreen>

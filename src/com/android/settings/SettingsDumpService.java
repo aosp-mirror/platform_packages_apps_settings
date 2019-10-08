@@ -30,7 +30,8 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.annotations.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.applications.ProcStatsData;
 import com.android.settings.fuelgauge.batterytip.AnomalyConfigJobService;
 import com.android.settingslib.net.DataUsageController;

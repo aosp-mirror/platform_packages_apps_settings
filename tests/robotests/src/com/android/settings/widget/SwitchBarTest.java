@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Context;
@@ -24,16 +25,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SwitchBarTest {
 
     private static final int COLOR_BACKGROUND = 1;
@@ -59,11 +60,10 @@ public class SwitchBarTest {
 
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(defaultOffText));
-        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND));
 
         mBar.setChecked(true);
 
-        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND_ACTIVATED));
+        assertThat(mBar.getBackground()).isInstanceOf(ColorDrawable.class);
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(defaultOnText));
     }
@@ -74,12 +74,12 @@ public class SwitchBarTest {
         final int offText = R.string.manage_space_text;
 
         mBar.setSwitchBarText(onText, offText);
-        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND));
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(offText));
 
         mBar.setChecked(true);
-        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND_ACTIVATED));
+        assertThat(mBar.getBackground()).isInstanceOf(ColorDrawable.class);
+
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(onText));
     }
@@ -94,5 +94,12 @@ public class SwitchBarTest {
     public void notDisabledByAdmin_shouldDelegateToSwitch() {
         mBar.setDisabledByAdmin(null);
         assertThat(mBar.getDelegatingView().getId()).isEqualTo(R.id.switch_widget);
+    }
+
+    @Test
+    public void performClick_shouldIsCheckedValueChange() {
+        boolean isChecked = mBar.isChecked();
+        mBar.performClick();
+        assertThat(mBar.isChecked()).isEqualTo(!isChecked);
     }
 }

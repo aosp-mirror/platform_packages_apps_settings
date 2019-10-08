@@ -16,60 +16,64 @@
 
 package com.android.settings.applications.defaultapps;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.CandidateInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * A generic app picker fragment that shows a list of app as radio button group.
  */
 public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment {
 
-    protected PackageManagerWrapper mPm;
+    protected PackageManager mPm;
+    protected BatteryUtils mBatteryUtils;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mPm = new PackageManagerWrapper(context.getPackageManager());
+        mPm = context.getPackageManager();
+        mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
         final String selectedKey = selected.getKey();
         final CharSequence confirmationMessage = getConfirmationMessage(getCandidate(selectedKey));
-        final Activity activity = getActivity();
+        final FragmentActivity activity = getActivity();
         if (TextUtils.isEmpty(confirmationMessage)) {
             super.onRadioButtonClicked(selected);
         } else if (activity != null) {
             final DialogFragment fragment =
                     newConfirmationDialogFragment(selectedKey, confirmationMessage);
-            fragment.show(activity.getFragmentManager(), ConfirmationDialogFragment.TAG);
+            fragment.show(activity.getSupportFragmentManager(), ConfirmationDialogFragment.TAG);
         }
     }
 
     @Override
     protected void onRadioButtonConfirmed(String selectedKey) {
-        mMetricsFeatureProvider.action(getContext(),
-                MetricsEvent.ACTION_SETTINGS_UPDATE_DEFAULT_APP,
+        mMetricsFeatureProvider.action(
+                mMetricsFeatureProvider.getAttribution(getActivity()),
+                SettingsEnums.ACTION_SETTINGS_UPDATE_DEFAULT_APP,
+                getMetricsCategory(),
                 selectedKey,
-                Pair.create(MetricsEvent.FIELD_CONTEXT, getMetricsCategory()));
-
+                 0 /* value */);
         super.onRadioButtonConfirmed(selectedKey);
     }
 
@@ -108,7 +112,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DEFAULT_APP_PICKER_CONFIRMATION_DIALOG;
+            return SettingsEnums.DEFAULT_APP_PICKER_CONFIRMATION_DIALOG;
         }
 
         /**

@@ -16,40 +16,41 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
-import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreferenceHelper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowKeyguardManager;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        shadows = {
-            ShadowUserManager.class,
-            ShadowKeyguardManager.class,
-        })
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class, ShadowKeyguardManager.class})
 public class RestrictedListPreferenceTest {
     private static final int PROFILE_USER_ID = 11;
     // From UnlaunchableAppActivity
     private static final int UNLAUNCHABLE_REASON_QUIET_MODE = 1;
     private static final String EXTRA_UNLAUNCHABLE_REASON = "unlaunchable_reason";
 
+    private Activity mActivity;
     private ShadowUserManager mShadowUserManager;
     private ShadowKeyguardManager mShadowKeyguardManager;
     private RestrictedListPreference mPreference;
@@ -57,11 +58,14 @@ public class RestrictedListPreferenceTest {
 
     @Before
     public void setUp() {
+        mActivity = Robolectric.setupActivity(Activity.class);
         mShadowKeyguardManager =
                 Shadows.shadowOf(application.getSystemService(KeyguardManager.class));
         mMockHelper = mock(RestrictedPreferenceHelper.class);
         mShadowUserManager = ShadowUserManager.getShadow();
-        mPreference = new RestrictedListPreference(application, mock(AttributeSet.class));
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        mPreference = new RestrictedListPreference(mActivity, attributeSet);
         mPreference.setProfileUserId(PROFILE_USER_ID);
         ReflectionHelpers.setField(mPreference, "mHelper", mMockHelper);
     }
@@ -78,7 +82,7 @@ public class RestrictedListPreferenceTest {
         // Make sure that the performClick method on the helper is never reached.
         verify(mMockHelper, never()).performClick();
         // Assert that a CONFIRM_DEVICE_CREDENTIAL intent has been started.
-        Intent started = shadowOf(application).getNextStartedActivity();
+        Intent started = Shadows.shadowOf(mActivity).getNextStartedActivity();
         assertThat(started.getExtras().getInt(Intent.EXTRA_USER_ID)).isEqualTo(PROFILE_USER_ID);
         assertThat(started.getAction())
                 .isEqualTo(KeyguardManager.ACTION_CONFIRM_DEVICE_CREDENTIAL_WITH_USER);
@@ -93,7 +97,7 @@ public class RestrictedListPreferenceTest {
         // Make sure that the performClick method on the helper is never reached.
         verify(mMockHelper, never()).performClick();
         // Assert that a new intent for enabling the work profile is started.
-        Intent started = shadowOf(application).getNextStartedActivity();
+        Intent started = Shadows.shadowOf(mActivity).getNextStartedActivity();
         Bundle extras = started.getExtras();
         int reason = extras.getInt(EXTRA_UNLAUNCHABLE_REASON);
         assertThat(reason).isEqualTo(UNLAUNCHABLE_REASON_QUIET_MODE);

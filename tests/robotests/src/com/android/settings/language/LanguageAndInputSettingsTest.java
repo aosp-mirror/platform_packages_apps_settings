@@ -17,7 +17,8 @@
 package com.android.settings.language;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -27,7 +28,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
-import androidx.lifecycle.LifecycleObserver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -41,9 +41,10 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.textservice.TextServicesManager;
 
+import androidx.lifecycle.LifecycleObserver;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -54,12 +55,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LanguageAndInputSettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -109,7 +111,7 @@ public class LanguageAndInputSettingsTest {
                 lifecycleObserverCount++;
             }
         }
-        verify(mFragment.getLifecycle(), times(lifecycleObserverCount))
+        verify(mFragment.getSettingsLifecycle(), times(lifecycleObserverCount))
                 .addObserver(any(LifecycleObserver.class));
     }
 
@@ -206,9 +208,9 @@ public class LanguageAndInputSettingsTest {
         }
 
         @Override
-        public Lifecycle getLifecycle() {
+        public Lifecycle getSettingsLifecycle() {
             if (mLifecycle == null) {
-                return super.getLifecycle();
+                return super.getSettingsLifecycle();
             }
             return mLifecycle;
         }

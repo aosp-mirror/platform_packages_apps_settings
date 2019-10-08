@@ -16,62 +16,94 @@
 
 package com.android.settings;
 
-import android.content.Intent;
-import android.os.SystemProperties;
-import androidx.annotation.VisibleForTesting;
+import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_FIRST_RUN;
+import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW;
 
-import com.android.setupwizardlib.util.WizardManagerHelper;
+import android.content.Intent;
+import android.os.Bundle;
+import android.sysprop.SetupWizardProperties;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
+
+import java.util.Arrays;
+
 
 public class SetupWizardUtils {
 
-    @VisibleForTesting
-    static final String SYSTEM_PROP_SETUPWIZARD_THEME = "setupwizard.theme";
-
-    public static int getTheme(Intent intent) {
+    public static String getThemeString(Intent intent) {
         String theme = intent.getStringExtra(WizardManagerHelper.EXTRA_THEME);
         if (theme == null) {
-            theme = SystemProperties.get(SYSTEM_PROP_SETUPWIZARD_THEME);
+            theme = SetupWizardProperties.theme().orElse("");
         }
+        return theme;
+    }
+
+    public static int getTheme(Intent intent) {
+        String theme = getThemeString(intent);
+        // TODO(yukl): Move to ThemeResolver and add any additional required attributes in
+        // onApplyThemeResource using Theme overlays
         if (theme != null) {
-            switch (theme) {
-                case WizardManagerHelper.THEME_GLIF_V3_LIGHT:
-                    return R.style.GlifV3Theme_Light;
-                case WizardManagerHelper.THEME_GLIF_V3:
-                    return R.style.GlifV3Theme;
-                case WizardManagerHelper.THEME_GLIF_V2_LIGHT:
-                    return R.style.GlifV2Theme_Light;
-                case WizardManagerHelper.THEME_GLIF_V2:
-                    return R.style.GlifV2Theme;
-                case WizardManagerHelper.THEME_GLIF_LIGHT:
-                    return R.style.GlifTheme_Light;
-                case WizardManagerHelper.THEME_GLIF:
-                    return R.style.GlifTheme;
+            if (WizardManagerHelper.isAnySetupWizard(intent)) {
+                switch (theme) {
+                    case ThemeHelper.THEME_GLIF_V3_LIGHT:
+                        return R.style.GlifV3Theme_Light;
+                    case ThemeHelper.THEME_GLIF_V3:
+                        return R.style.GlifV3Theme;
+                    case ThemeHelper.THEME_GLIF_V2_LIGHT:
+                        return R.style.GlifV2Theme_Light;
+                    case ThemeHelper.THEME_GLIF_V2:
+                        return R.style.GlifV2Theme;
+                    case ThemeHelper.THEME_GLIF_LIGHT:
+                        return R.style.GlifTheme_Light;
+                    case ThemeHelper.THEME_GLIF:
+                        return R.style.GlifTheme;
+                }
+            } else {
+                switch (theme) {
+                    case ThemeHelper.THEME_GLIF_V3_LIGHT:
+                    case ThemeHelper.THEME_GLIF_V3:
+                        return R.style.GlifV3Theme;
+                    case ThemeHelper.THEME_GLIF_V2_LIGHT:
+                    case ThemeHelper.THEME_GLIF_V2:
+                        return R.style.GlifV2Theme;
+                    case ThemeHelper.THEME_GLIF_LIGHT:
+                    case ThemeHelper.THEME_GLIF:
+                        return R.style.GlifTheme;
+                }
             }
         }
-        return R.style.GlifTheme_Light;
+        return R.style.GlifTheme;
     }
 
     public static int getTransparentTheme(Intent intent) {
         final int suwTheme = getTheme(intent);
-        int wifiDialogTheme = R.style.GlifV2Theme_Light_Transparent;
+        int transparentTheme = R.style.GlifV2Theme_Light_Transparent;
         if (suwTheme == R.style.GlifV3Theme) {
-            wifiDialogTheme = R.style.GlifV3Theme_Transparent;
+            transparentTheme = R.style.GlifV3Theme_Transparent;
         } else if (suwTheme == R.style.GlifV3Theme_Light) {
-            wifiDialogTheme = R.style.GlifV3Theme_Light_Transparent;
+            transparentTheme = R.style.GlifV3Theme_Light_Transparent;
         } else if (suwTheme == R.style.GlifV2Theme) {
-            wifiDialogTheme = R.style.GlifV2Theme_Transparent;
+            transparentTheme = R.style.GlifV2Theme_Transparent;
         } else if (suwTheme == R.style.GlifTheme_Light) {
-            wifiDialogTheme = R.style.SetupWizardTheme_Light_Transparent;
+            transparentTheme = R.style.SetupWizardTheme_Light_Transparent;
         } else if (suwTheme == R.style.GlifTheme) {
-            wifiDialogTheme = R.style.SetupWizardTheme_Transparent;
+            transparentTheme = R.style.SetupWizardTheme_Transparent;
         }
-        return wifiDialogTheme;
+        return transparentTheme;
     }
 
     public static void copySetupExtras(Intent fromIntent, Intent toIntent) {
-        toIntent.putExtra(WizardManagerHelper.EXTRA_THEME,
-                fromIntent.getStringExtra(WizardManagerHelper.EXTRA_THEME));
-        toIntent.putExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE,
-                fromIntent.getBooleanExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, false));
+        WizardManagerHelper.copyWizardManagerExtras(fromIntent, toIntent);
+    }
+
+    public static Bundle copyLifecycleExtra(Bundle srcBundle, Bundle dstBundle) {
+        for (String key :
+                Arrays.asList(
+                        EXTRA_IS_FIRST_RUN,
+                        EXTRA_IS_SETUP_FLOW)) {
+            dstBundle.putBoolean(key, srcBundle.getBoolean(key, false));
+        }
+        return dstBundle;
     }
 }

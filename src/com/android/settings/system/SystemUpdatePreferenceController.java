@@ -25,11 +25,12 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.SystemUpdateManager;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -138,6 +139,7 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
             }
             Log.d(TAG, "ciActionOnSysUpdate: broadcasting intent " + intentStr +
                     " with extra " + extra + ", " + extraVal);
+            intent.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
             mContext.getApplicationContext().sendBroadcast(intent);
         }
     }

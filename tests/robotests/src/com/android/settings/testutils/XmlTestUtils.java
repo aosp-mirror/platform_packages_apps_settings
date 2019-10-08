@@ -1,14 +1,16 @@
 package com.android.settings.testutils;
 
-import android.content.res.Resources;
-import android.content.res.XmlResourceParser;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
+import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag
+        .FLAG_INCLUDE_PREF_SCREEN;
+import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_NEED_KEY;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.AttributeSet;
-import android.util.Xml;
+
 import com.android.settings.core.PreferenceXmlParserUtils;
-import org.xmlpull.v1.XmlPullParser;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.util.ArrayList;
@@ -24,30 +26,21 @@ public class XmlTestUtils {
      * on the screen.
      *
      * @param context of the preference screen.
-     * @param xmlId of the Preference Xml to be parsed.
+     * @param xmlId   of the Preference Xml to be parsed.
      * @return List of all keys in the preference Xml
      */
     public static List<String> getKeysFromPreferenceXml(Context context, int xmlId) {
-        final XmlResourceParser parser = context.getResources().getXml(xmlId);
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
         final List<String> keys = new ArrayList<>();
-        String key;
         try {
-            while (parser.next() != XmlPullParser.END_DOCUMENT) {
-                try {
-                    key = PreferenceXmlParserUtils.getDataKey(context, attrs);
-                    if (!TextUtils.isEmpty(key)) {
-                        keys.add(key);
-                    }
-                } catch (NullPointerException e) {
-                    continue;
-                } catch (Resources.NotFoundException e) {
-                    continue;
+            List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(context, xmlId,
+                    FLAG_NEED_KEY | FLAG_INCLUDE_PREF_SCREEN);
+            for (Bundle bundle : metadata) {
+                final String key = bundle.getString(METADATA_KEY);
+                if (!TextUtils.isEmpty(key)) {
+                    keys.add(key);
                 }
             }
-        } catch (java.io.IOException e) {
-            return null;
-        } catch (XmlPullParserException e) {
+        } catch (java.io.IOException | XmlPullParserException e) {
             return null;
         }
 

@@ -20,14 +20,15 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.Comparator;
@@ -39,18 +40,22 @@ public class UserPreference extends RestrictedPreference {
     public static final int USERID_UNKNOWN = -10;
     public static final int USERID_GUEST_DEFAULTS = -11;
     public static final Comparator<UserPreference> SERIAL_NUMBER_COMPARATOR =
-            new Comparator<UserPreference>() {
-                @Override
-                public int compare(UserPreference p1, UserPreference p2) {
-                    int sn1 = p1.getSerialNumber();
-                    int sn2 = p2.getSerialNumber();
-                    if (sn1 < sn2) {
-                        return -1;
-                    } else if (sn1 > sn2) {
-                        return 1;
-                    }
-                    return 0;
+            (p1, p2) -> {
+
+                if (p1 == null) {
+                    return -1;
                 }
+                else if (p2 == null) {
+                    return 1;
+                }
+                int sn1 = p1.getSerialNumber();
+                int sn2 = p2.getSerialNumber();
+                if (sn1 < sn2) {
+                    return -1;
+                } else if (sn1 > sn2) {
+                    return 1;
+                }
+                return 0;
             };
 
     private OnClickListener mDeleteClickListener;
@@ -141,7 +146,7 @@ public class UserPreference extends RestrictedPreference {
 
     private boolean canDeleteUser() {
         return mDeleteClickListener != null
-                && !RestrictedLockUtils.hasBaseUserRestriction(getContext(),
+                && !RestrictedLockUtilsInternal.hasBaseUserRestriction(getContext(),
                 UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
     }
 

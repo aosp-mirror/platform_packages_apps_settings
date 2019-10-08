@@ -20,11 +20,14 @@ import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND_SERVICE;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP_SLEEPING;
+
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -36,7 +39,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -51,12 +57,12 @@ import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.R;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
-import com.android.settings.fuelgauge.batterytip.StatsManagerConfig;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
+import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
@@ -65,13 +71,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryUtilsTest {
+
+    private static final String TAG = "BatteryUtilsTest";
 
     // unit that used to converted ms to us
     private static final long UNIT = 1000;
@@ -151,11 +160,14 @@ public class BatteryUtilsTest {
     private ApplicationInfo mLowApplicationInfo;
     @Mock
     private PowerWhitelistBackend mPowerWhitelistBackend;
+    @Mock
+    private BatteryDatabaseManager mBatteryDatabaseManager;
     private AnomalyInfo mAnomalyInfo;
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mProvider;
     private List<BatterySipper> mUsageList;
+    private Context mContext;
 
     @Before
     public void setUp() throws PackageManager.NameNotFoundException {
@@ -210,10 +222,10 @@ public class BatteryUtilsTest {
         mIdleBatterySipper.drainType = BatterySipper.DrainType.IDLE;
         mIdleBatterySipper.totalPowerMah = BATTERY_IDLE_USAGE;
 
-        final Context shadowContext = spy(RuntimeEnvironment.application);
-        doReturn(mPackageManager).when(shadowContext).getPackageManager();
-        doReturn(mAppOpsManager).when(shadowContext).getSystemService(Context.APP_OPS_SERVICE);
-        mBatteryUtils = spy(new BatteryUtils(shadowContext));
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
+        mBatteryUtils = spy(new BatteryUtils(mContext));
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
         doReturn(0L).when(mBatteryUtils)
             .getForegroundServiceTotalTimeUs(any(BatteryStats.Uid.class), anyLong());
@@ -228,6 +240,8 @@ public class BatteryUtilsTest {
             .thenReturn(TOTAL_BATTERY_USAGE + BATTERY_SCREEN_USAGE);
         when(mBatteryStatsHelper.getStats().getDischargeAmount(anyInt()))
             .thenReturn(DISCHARGE_AMOUNT);
+        BatteryDatabaseManager.setUpForTest(mBatteryDatabaseManager);
+        ShadowThreadUtils.setIsMainThread(true);
     }
 
     @Test
@@ -355,6 +369,15 @@ public class BatteryUtilsTest {
     }
 
     @Test
+    public void testShouldHideSipper_hiddenSystemModule_ReturnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mNormalBatterySipper.getUid()).thenReturn(UID);
+        when(mBatteryUtils.isHiddenSystemModule(mNormalBatterySipper)).thenReturn(true);
+
+        assertThat(mBatteryUtils.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
     public void testCalculateBatteryPercent() {
         assertThat(mBatteryUtils.calculateBatteryPercent(BATTERY_SYSTEM_USAGE, TOTAL_BATTERY_USAGE,
                 HIDDEN_USAGE, DISCHARGE_AMOUNT))
@@ -427,16 +450,6 @@ public class BatteryUtilsTest {
 
         assertThat(mBatteryUtils.calculateLastFullChargeTime(
                 mBatteryStatsHelper, currentTimeMs)).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
-    }
-
-    @Test
-    public void testGetSummaryResIdFromAnomalyType() {
-        assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.WAKE_LOCK))
-                .isEqualTo(R.string.battery_abnormal_wakelock_summary);
-        assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.WAKEUP_ALARM))
-                .isEqualTo(R.string.battery_abnormal_wakeup_alarm_summary);
-        assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.BLUETOOTH_SCAN))
-                .isEqualTo(R.string.battery_abnormal_location_summary);
     }
 
     @Test
@@ -583,6 +596,23 @@ public class BatteryUtilsTest {
     }
 
     @Test
+    public void testSetForceAppStandby_restrictApp_recordTime() {
+        mBatteryUtils.setForceAppStandby(UID, HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
+
+        verify(mBatteryDatabaseManager).insertAction(
+                eq(AnomalyDatabaseHelper.ActionType.RESTRICTION), eq(UID),
+                eq(HIGH_SDK_PACKAGE), anyLong());
+    }
+
+    @Test
+    public void testSetForceAppStandby_unrestrictApp_deleteTime() {
+        mBatteryUtils.setForceAppStandby(UID, HIGH_SDK_PACKAGE, AppOpsManager.MODE_ALLOWED);
+
+        verify(mBatteryDatabaseManager).deleteAction(AnomalyDatabaseHelper.ActionType.RESTRICTION,
+                UID, HIGH_SDK_PACKAGE);
+    }
+
+    @Test
     public void testIsForceAppStandbyEnabled_enabled_returnTrue() {
         when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
                 PACKAGE_NAME)).thenReturn(AppOpsManager.MODE_IGNORED);
@@ -665,5 +695,60 @@ public class BatteryUtilsTest {
 
         assertThat(mBatteryUtils.shouldHideAnomaly(mPowerWhitelistBackend, UID,
                 mAnomalyInfo)).isTrue();
+    }
+
+    @Test
+    public void clearForceAppStandby_appRestricted_clearAndReturnTrue() {
+        when(mBatteryUtils.getPackageUid(HIGH_SDK_PACKAGE)).thenReturn(UID);
+        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                HIGH_SDK_PACKAGE)).thenReturn(AppOpsManager.MODE_IGNORED);
+
+        assertThat(mBatteryUtils.clearForceAppStandby(HIGH_SDK_PACKAGE)).isTrue();
+        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                HIGH_SDK_PACKAGE, AppOpsManager.MODE_ALLOWED);
+    }
+
+    @Test
+    public void clearForceAppStandby_appInvalid_returnFalse() {
+        when(mBatteryUtils.getPackageUid(PACKAGE_NAME)).thenReturn(BatteryUtils.UID_NULL);
+
+        assertThat(mBatteryUtils.clearForceAppStandby(PACKAGE_NAME)).isFalse();
+        verify(mAppOpsManager, never()).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+    }
+
+    @Test
+    public void clearForceAppStandby_appUnrestricted_returnFalse() {
+        when(mBatteryUtils.getPackageUid(PACKAGE_NAME)).thenReturn(UID);
+        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                PACKAGE_NAME)).thenReturn(AppOpsManager.MODE_ALLOWED);
+
+        assertThat(mBatteryUtils.clearForceAppStandby(PACKAGE_NAME)).isFalse();
+        verify(mAppOpsManager, never()).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+    }
+
+    @Test
+    public void getBatteryInfo_providerNull_shouldNotCrash() {
+        when(mProvider.isEnhancedBatteryPredictionEnabled(mContext)).thenReturn(true);
+        when(mProvider.getEnhancedBatteryPrediction(mContext)).thenReturn(null);
+        when(mContext.registerReceiver(nullable(BroadcastReceiver.class),
+                any(IntentFilter.class))).thenReturn(new Intent());
+
+        //Should not crash
+        assertThat(mBatteryUtils.getBatteryInfo(mBatteryStatsHelper, TAG)).isNotNull();
+    }
+
+    @Test
+    public void getEnhancedEstimate_doesNotUpdateCache_ifEstimateFresh() {
+        Estimate estimate = new Estimate(1000, true, 1000);
+        Estimate.storeCachedEstimate(mContext, estimate);
+
+        estimate = mBatteryUtils.getEnhancedEstimate();
+
+        // only pass if estimate has not changed
+        assertThat(estimate).isNotNull();
+        assertThat(estimate.isBasedOnUsage()).isTrue();
+        assertThat(estimate.getAverageDischargeTime()).isEqualTo(1000);
     }
 }

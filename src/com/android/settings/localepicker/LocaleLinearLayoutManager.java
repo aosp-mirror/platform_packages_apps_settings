@@ -18,10 +18,11 @@ package com.android.settings.localepicker;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
 
 import com.android.settings.R;
 
@@ -116,39 +117,33 @@ public class LocaleLinearLayoutManager extends LinearLayoutManager {
         final int position = this.getPosition(host);
         boolean result = false;
 
-        switch (action) {
-            case R.id.action_drag_move_up:
-                if (position > 0) {
-                    mAdapter.onItemMove(position, position - 1);
-                    result = true;
-                }
-                break;
-            case R.id.action_drag_move_down:
-                if (position + 1 < itemCount) {
-                    mAdapter.onItemMove(position, position + 1);
-                    result = true;
-                }
-                break;
-            case R.id.action_drag_move_top:
-                if (position != 0) {
-                    mAdapter.onItemMove(position, 0);
-                    result = true;
-                }
-                break;
-            case R.id.action_drag_move_bottom:
-                if (position != itemCount - 1) {
-                    mAdapter.onItemMove(position, itemCount - 1);
-                    result = true;
-                }
-                break;
-            case R.id.action_drag_remove:
-                if (itemCount > 1) {
-                    mAdapter.removeItem(position);
-                    result = true;
-                }
-                break;
-            default:
-                return super.performAccessibilityActionForItem(recycler, state, host, action, args);
+        if (action == R.id.action_drag_move_up) {
+            if (position > 0) {
+                mAdapter.onItemMove(position, position - 1);
+                result = true;
+            }
+        } else if (action == R.id.action_drag_move_down) {
+            if (position + 1 < itemCount) {
+                mAdapter.onItemMove(position, position + 1);
+                result = true;
+            }
+        } else if (action == R.id.action_drag_move_top) {
+            if (position != 0) {
+                mAdapter.onItemMove(position, 0);
+                result = true;
+            }
+        } else if (action == R.id.action_drag_move_bottom) {
+            if (position != itemCount - 1) {
+                mAdapter.onItemMove(position, itemCount - 1);
+                result = true;
+            }
+        } else if (action == R.id.action_drag_remove) {
+            if (itemCount > 1) {
+                mAdapter.removeItem(position);
+                result = true;
+            }
+        } else {
+            return super.performAccessibilityActionForItem(recycler, state, host, action, args);
         }
 
         if (result) {

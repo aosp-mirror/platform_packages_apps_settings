@@ -17,22 +17,24 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager.Policy;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeAlarmsPreferenceController extends
         AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener {
 
-    protected static final String KEY = "zen_mode_alarms";
+    private final String KEY;
 
-    public ZenModeAlarmsPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, KEY, lifecycle);
+    public ZenModeAlarmsPreferenceController(Context context, Lifecycle lifecycle, String key) {
+        super(context, key, lifecycle);
+        KEY = key;
     }
 
     @Override
@@ -73,9 +75,10 @@ public class ZenModeAlarmsPreferenceController extends
             Log.d(TAG, "onPrefChange allowAlarms=" + allowAlarms);
         }
 
-        mMetricsFeatureProvider.action(mContext, MetricsProto.MetricsEvent.ACTION_ZEN_ALLOW_ALARMS,
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ZEN_ALLOW_ALARMS,
                 allowAlarms);
         mBackend.saveSoundPolicy(Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
+
         return true;
     }
 }

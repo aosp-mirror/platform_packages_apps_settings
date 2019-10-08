@@ -125,8 +125,16 @@ public interface EnterprisePrivacyFeatureProvider {
      */
     int getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile();
 
-    /*
-     * Returns whether backups are mandatory.
+    /**
+     * Returns {@code true} if it is possilbe to resolve an Intent to launch the "Your work policy
+     * info" page provided by the active Device Owner or Profile Owner app if it exists, {@code
+     * false} otherwise.
      */
-    boolean areBackupsMandatory();
+    boolean hasWorkPolicyInfo();
+
+    /**
+     * Launches the Device Owner or Profile Owner's activity that displays the "Your work policy
+     * info" page. Returns {@code true} if the activity has indeed been launched.
+     */
+    boolean showWorkPolicyInfo();
 }

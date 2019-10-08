@@ -15,12 +15,11 @@
  */
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.media.AudioAttributes;
 import android.os.Vibrator;
-import android.os.VibrationEffect;
 import android.provider.Settings;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 /**
@@ -29,7 +28,7 @@ import com.android.settings.R;
 public class NotificationVibrationPreferenceFragment extends VibrationPreferenceFragment {
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_VIBRATION_NOTIFICATION;
+        return SettingsEnums.ACCESSIBILITY_VIBRATION_NOTIFICATION;
     }
 
     @Override
@@ -43,6 +42,11 @@ public class NotificationVibrationPreferenceFragment extends VibrationPreference
     @Override
     protected String getVibrationIntensitySetting() {
         return Settings.System.NOTIFICATION_VIBRATION_INTENSITY;
+    }
+
+    @Override
+    protected String getVibrationEnabledSetting() {
+        return "";
     }
 
     @Override

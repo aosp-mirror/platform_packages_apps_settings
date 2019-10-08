@@ -22,8 +22,7 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 
-public class MediaVolumePreferenceController extends
-    VolumeSeekBarPreferenceController {
+public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceController {
 
     private static final String KEY_MEDIA_VOLUME = "media_volume";
 
@@ -41,6 +40,11 @@ public class MediaVolumePreferenceController extends
     @Override
     public boolean isSliceable() {
         return TextUtils.equals(getPreferenceKey(), KEY_MEDIA_VOLUME);
+    }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
     }
 
     @Override

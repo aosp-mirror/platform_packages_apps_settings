@@ -21,22 +21,25 @@ import static com.android.settingslib.dream.DreamBackend.NEVER;
 import static com.android.settingslib.dream.DreamBackend.WHILE_CHARGING;
 import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class DreamSettings extends DashboardFragment {
 
     private static final String TAG = "DreamSettings";
@@ -90,7 +93,7 @@ public class DreamSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DREAM;
+        return SettingsEnums.DREAM;
     }
 
     @Override
@@ -129,7 +132,6 @@ public class DreamSettings extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new CurrentDreamPreferenceController(context));
         controllers.add(new WhenToDreamPreferenceController(context));
         controllers.add(new StartNowPreferenceController(context));
         return controllers;

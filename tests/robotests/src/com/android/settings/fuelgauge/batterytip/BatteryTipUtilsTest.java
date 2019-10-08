@@ -17,7 +17,7 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -32,18 +32,18 @@ import com.android.settings.fuelgauge.batterytip.tips.EarlyWarningTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryTipUtilsTest {
 
     @Mock
@@ -59,7 +59,8 @@ public class BatteryTipUtilsTest {
         MockitoAnnotations.initMocks(this);
 
         FakeFeatureFactory.setupForTest();
-        doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
+        when(mSettingsActivity.getApplicationContext()).thenReturn(RuntimeEnvironment.application);
+        when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
         mRestrictAppTip = spy(new RestrictAppTip(BatteryTip.StateType.NEW, new ArrayList<>()));
         mEarlyWarningTip = spy(
                 new EarlyWarningTip(BatteryTip.StateType.NEW, true /* powerSaveModeOn */));

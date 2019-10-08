@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
@@ -31,7 +32,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -83,7 +83,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
     @Override
     public void onNavigateBack(View view) {
         FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
-                MetricsEvent.ACTION_STORAGE_MIGRATE_LATER);
+                SettingsEnums.ACTION_STORAGE_MIGRATE_LATER);
 
         if (mDisk != null) {
             final Intent intent = new Intent(this, StorageWizardReady.class);
@@ -137,7 +137,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
         }
 
         FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
-                MetricsEvent.ACTION_STORAGE_MIGRATE_NOW);
+                SettingsEnums.ACTION_STORAGE_MIGRATE_NOW);
 
         final Intent intent = new Intent(this, StorageWizardMigrateProgress.class);
         intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());

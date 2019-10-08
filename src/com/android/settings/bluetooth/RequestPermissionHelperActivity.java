@@ -21,21 +21,13 @@ import android.app.admin.DevicePolicyManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserManager;
-import androidx.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
-import com.android.internal.util.ArrayUtils;
-import com.android.internal.util.CharSequences;
 import com.android.settings.R;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * RequestPermissionHelperActivity asks the user whether to toggle Bluetooth.
@@ -55,7 +47,7 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
     public static final String EXTRA_APP_LABEL =
             "com.android.settings.bluetooth.extra.APP_LABEL";
 
-    private LocalBluetoothAdapter mLocalAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
 
     private CharSequence mAppLabel;
 
@@ -69,7 +61,7 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
 
         setResult(RESULT_CANCELED);
 
-        // Note: initializes mLocalAdapter and returns true on error
+        // Note: initializes mBluetoothAdapter and returns true on error
         if (!parseIntent()) {
             finish();
             return;
@@ -137,20 +129,20 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
                         startActivity(intent);
                     }
                 } else {
-                    mLocalAdapter.enable();
+                    mBluetoothAdapter.enable();
                     setResult(Activity.RESULT_OK);
                 }
             } break;
 
             case RequestPermissionActivity.REQUEST_DISABLE: {
-                mLocalAdapter.disable();
+                mBluetoothAdapter.disable();
                 setResult(Activity.RESULT_OK);
             } break;
         }
     }
 
     /**
-     * Parse the received Intent and initialize mLocalBluetoothAdapter.
+     * Parse the received Intent and initialize mBluetoothAdapter.
      * @return true if an error occurred; false otherwise
      */
     private boolean parseIntent() {
@@ -173,15 +165,13 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
             return false;
         }
 
-        LocalBluetoothManager manager = Utils.getLocalBtManager(this);
-        if (manager == null) {
+        mAppLabel = getIntent().getCharSequenceExtra(EXTRA_APP_LABEL);
+
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
             Log.e(TAG, "Error: there's a problem starting Bluetooth");
             return false;
         }
-
-        mAppLabel = getIntent().getCharSequenceExtra(EXTRA_APP_LABEL);
-
-        mLocalAdapter = manager.getBluetoothAdapter();
 
         return true;
     }

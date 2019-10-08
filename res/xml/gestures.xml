@@ -46,10 +46,16 @@
         settings:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 
     <Preference
-        android:key="gesture_swipe_up_input_summary"
-        android:title="@string/swipe_up_to_switch_apps_title"
-        android:fragment="com.android.settings.gestures.SwipeUpGestureSettings"
-        settings:controller="com.android.settings.gestures.SwipeUpPreferenceController" />
+        android:key="gesture_system_navigation_input_summary"
+        android:title="@string/system_navigation_title"
+        android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
+        settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController" />
+
+    <Preference
+        android:key="gesture_tap_screen_input_summary"
+        android:title="@string/ambient_display_tap_screen_title"
+        android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
+        settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
 
     <Preference
         android:key="gesture_double_tap_screen_input_summary"
@@ -67,6 +73,12 @@
         android:key="gesture_prevent_ringing_summary"
         android:title="@string/gesture_prevent_ringing_screen_title"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
-        settings:controller="com.android.settings.gestures.PreventRingingPreferenceController" />
+        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
+
+    <Preference
+        android:key="gesture_global_actions_panel_summary"
+        android:title="@string/global_actions_panel_short_title"
+        android:fragment="com.android.settings.gestures.GlobalActionsPanelSettings"
+        settings:controller="com.android.settings.gestures.GlobalActionsPanelPreferenceController" />
 
 </PreferenceScreen>

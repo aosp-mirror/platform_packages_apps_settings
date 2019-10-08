@@ -18,8 +18,6 @@ package com.android.settings.deviceinfo.imei;
 
 import android.content.Context;
 import android.content.res.Resources;
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -28,13 +26,17 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 
-import java.util.List;
-
 public class ImeiInfoDialogController {
+
+    private static final String TAG = "ImeiInfoDialog";
 
     @VisibleForTesting
     static final int ID_PRL_VERSION_VALUE = R.id.prl_version_value;
@@ -53,6 +55,9 @@ public class ImeiInfoDialogController {
     static final int ID_GSM_SETTINGS = R.id.gsm_settings;
 
     private static CharSequence getTextAsDigits(CharSequence text) {
+        if (TextUtils.isEmpty(text)) {
+            return "";
+        }
         if (TextUtils.isDigitsOnly(text)) {
             final Spannable spannable = new SpannableStringBuilder(text);
             final TtsSpan span = new TtsSpan.DigitsBuilder(text.toString()).build();
@@ -71,15 +76,27 @@ public class ImeiInfoDialogController {
         mDialog = dialog;
         mSlotId = slotId;
         final Context context = dialog.getContext();
-        mTelephonyManager = (TelephonyManager) context.getSystemService(
-                Context.TELEPHONY_SERVICE);
-        mSubscriptionInfo = getSubscriptionInfo(context, slotId);
+        mSubscriptionInfo = context.getSystemService(SubscriptionManager.class)
+                .getActiveSubscriptionInfoForSimSlotIndex(slotId);
+        TelephonyManager tm = context.getSystemService(TelephonyManager.class);
+        if (mSubscriptionInfo != null) {
+            mTelephonyManager = context.getSystemService(TelephonyManager.class)
+                    .createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
+        } else if(isValidSlotIndex(slotId, tm)) {
+            mTelephonyManager = tm;
+        } else {
+            mTelephonyManager = null;
+        }
     }
 
     /**
      * Sets IMEI/MEID information based on whether the device is CDMA or GSM.
      */
     public void populateImeiInfo() {
+        if (mTelephonyManager == null) {
+            Log.w(TAG, "TelephonyManager for this slot is null. Invalid slot? id=" + mSlotId);
+            return;
+        }
         if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
             updateDialogForCdmaPhone();
         } else {
@@ -90,9 +107,10 @@ public class ImeiInfoDialogController {
     private void updateDialogForCdmaPhone() {
         final Resources res = mDialog.getContext().getResources();
         mDialog.setText(ID_MEID_NUMBER_VALUE, getMeid());
-        mDialog.setText(ID_MIN_NUMBER_VALUE,
-                mSubscriptionInfo != null ? mTelephonyManager.getCdmaMin(
-                        mSubscriptionInfo.getSubscriptionId()) : "");
+        // MIN needs to read from SIM. So if no SIM, we should not show MIN on UI
+        mDialog.setText(ID_MIN_NUMBER_VALUE, mSubscriptionInfo != null
+                ? mTelephonyManager.getCdmaMin(mSubscriptionInfo.getSubscriptionId())
+                : "");
 
         if (res.getBoolean(R.bool.config_msid_enable)) {
             mDialog.setText(ID_MIN_NUMBER_LABEL,
@@ -121,19 +139,10 @@ public class ImeiInfoDialogController {
         mDialog.removeViewFromScreen(ID_CDMA_SETTINGS);
     }
 
-    private SubscriptionInfo getSubscriptionInfo(Context context, int slotId) {
-        final List<SubscriptionInfo> subscriptionInfoList = SubscriptionManager.from(context)
-                .getActiveSubscriptionInfoList();
-        if (subscriptionInfoList == null) {
-            return null;
-        }
-
-        return subscriptionInfoList.get(slotId);
-    }
-
     @VisibleForTesting
     String getCdmaPrlVersion() {
-        return mTelephonyManager.getCdmaPrlVersion();
+        // PRL needs to read from SIM. So if no SIM, return empty
+        return mSubscriptionInfo != null ? mTelephonyManager.getCdmaPrlVersion() : "";
     }
 
     @VisibleForTesting
@@ -145,5 +154,10 @@ public class ImeiInfoDialogController {
     @VisibleForTesting
     String getMeid() {
         return mTelephonyManager.getMeid(mSlotId);
+    }
+
+    @VisibleForTesting
+    private boolean isValidSlotIndex(int slotIndex, TelephonyManager telephonyManager) {
+        return slotIndex >= 0 && slotIndex < telephonyManager.getPhoneCount();
     }
 }

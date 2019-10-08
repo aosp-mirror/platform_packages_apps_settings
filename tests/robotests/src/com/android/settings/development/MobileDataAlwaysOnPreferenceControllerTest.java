@@ -17,24 +17,25 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class MobileDataAlwaysOnPreferenceControllerTest {
 
     @Mock
@@ -59,7 +60,7 @@ public class MobileDataAlwaysOnPreferenceControllerTest {
     public void onPreferenceChanged_turnOnPreference_shouldEnableMobileDataAlwaysOn() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.MOBILE_DATA_ALWAYS_ON, -1 /* default */);
 
         assertThat(mode).isEqualTo(MobileDataAlwaysOnPreferenceController.SETTING_VALUE_ON);
@@ -69,7 +70,7 @@ public class MobileDataAlwaysOnPreferenceControllerTest {
     public void onPreferenceChanged_turnOffPreference_shouldDisableMobileDataAlwaysOn() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.MOBILE_DATA_ALWAYS_ON, -1 /* default */);
 
         assertThat(mode).isEqualTo(MobileDataAlwaysOnPreferenceController.SETTING_VALUE_OFF);
@@ -77,7 +78,7 @@ public class MobileDataAlwaysOnPreferenceControllerTest {
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.Global.MOBILE_DATA_ALWAYS_ON,
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.MOBILE_DATA_ALWAYS_ON,
                 MobileDataAlwaysOnPreferenceController.SETTING_VALUE_ON);
         mController.updateState(mPreference);
 
@@ -86,7 +87,7 @@ public class MobileDataAlwaysOnPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.Global.MOBILE_DATA_ALWAYS_ON,
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.MOBILE_DATA_ALWAYS_ON,
                 MobileDataAlwaysOnPreferenceController.SETTING_VALUE_OFF);
         mController.updateState(mPreference);
 
@@ -94,13 +95,13 @@ public class MobileDataAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeDisabled() {
+    public void onDeveloperOptionsSwitchDisabled_shouldDisableMobileDataAlwaysOn() {
         mController.onDeveloperOptionsSwitchDisabled();
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.MOBILE_DATA_ALWAYS_ON, -1 /* default */);
 
-        assertThat(mode).isEqualTo(MobileDataAlwaysOnPreferenceController.SETTING_VALUE_OFF);
+        assertThat(mode).isEqualTo(MobileDataAlwaysOnPreferenceController.SETTING_VALUE_ON);
         verify(mPreference).setEnabled(false);
-        verify(mPreference).setChecked(false);
+        verify(mPreference).setChecked(true);
     }
 }

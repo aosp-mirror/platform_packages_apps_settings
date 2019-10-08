@@ -16,8 +16,8 @@
 package com.android.settings.network;
 
 import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
-import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
+
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfRestrictionEnforced;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
@@ -33,6 +33,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -40,6 +41,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -112,11 +114,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
     @Override
     public boolean isAvailable() {
-        final boolean isBlocked =
-                (!mConnectivityManager.isTetheringSupported() && !mAdminDisallowedTetherConfig)
-                        || hasBaseUserRestriction(mContext, DISALLOW_CONFIG_TETHERING,
-                        UserHandle.myUserId());
-        return !isBlocked;
+        return TetherUtil.isTetherAvailable(mContext);
     }
 
     @Override

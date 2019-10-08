@@ -24,15 +24,18 @@ import android.os.BatteryStats;
 import android.os.BatteryStats.HistoryItem;
 import android.os.Bundle;
 import android.os.SystemClock;
-import androidx.annotation.WorkerThread;
 import android.text.format.Formatter;
 import android.util.SparseIntArray;
 
+import androidx.annotation.WorkerThread;
+
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.Utils;
-import com.android.settings.graph.UsageView;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.UsageView;
 import com.android.settingslib.R;
+import com.android.settingslib.fuelgauge.Estimate;
+import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 
@@ -43,9 +46,10 @@ public class BatteryInfo {
     public int batteryLevel;
     public boolean discharging = true;
     public long remainingTimeUs = 0;
-    public long averageTimeToDischarge = Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
+    public long averageTimeToDischarge = EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
     public String batteryPercentString;
     public String statusLabel;
+    public String suggestionLabel;
     private boolean mCharging;
     private BatteryStats mStats;
     private static final String LOG_TAG = "BatteryInfo";
@@ -129,66 +133,25 @@ public class BatteryInfo {
             remaining = context.getString(R.string.remaining_length_format,
                     Formatter.formatShortElapsedTime(context, remainingTimeUs / 1000));
         }
-        view.setBottomLabels(new CharSequence[]{timeString, remaining});
+        view.setBottomLabels(new CharSequence[] {timeString, remaining});
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback) {
-        BatteryInfo.getBatteryInfo(context, callback, false /* shortString */);
+        BatteryInfo.getBatteryInfo(context, callback, null /* statsHelper */,
+                false /* shortString */);
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback,
             boolean shortString) {
-        final long startTime = System.currentTimeMillis();
-        BatteryStatsHelper statsHelper = new BatteryStatsHelper(context, true);
-        statsHelper.create((Bundle) null);
-        BatteryUtils.logRuntime(LOG_TAG, "time to make batteryStatsHelper", startTime);
-        BatteryInfo.getBatteryInfo(context, callback, statsHelper, shortString);
+        BatteryInfo.getBatteryInfo(context, callback, null /* statsHelper */, shortString);
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback,
-            BatteryStatsHelper statsHelper, boolean shortString) {
-        final long startTime = System.currentTimeMillis();
-        BatteryStats stats = statsHelper.getStats();
-        BatteryUtils.logRuntime(LOG_TAG, "time for getStats", startTime);
-        getBatteryInfo(context, callback, stats, shortString);
-    }
-
-    public static void getBatteryInfo(final Context context, final Callback callback,
-            BatteryStats stats, boolean shortString) {
+            final BatteryStatsHelper statsHelper, boolean shortString) {
         new AsyncTask<Void, Void, BatteryInfo>() {
             @Override
             protected BatteryInfo doInBackground(Void... params) {
-                final long startTime = System.currentTimeMillis();
-                PowerUsageFeatureProvider provider =
-                        FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
-                final long elapsedRealtimeUs =
-                        PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
-
-                Intent batteryBroadcast = context.registerReceiver(null,
-                        new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                // 0 means we are discharging, anything else means charging
-                boolean discharging =
-                        batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
-
-                if (discharging && provider != null
-                        && provider.isEnhancedBatteryPredictionEnabled(context)) {
-                    Estimate estimate = provider.getEnhancedBatteryPrediction(context);
-                    if(estimate != null) {
-                        BatteryUtils
-                                .logRuntime(LOG_TAG, "time for enhanced BatteryInfo", startTime);
-                        return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
-                                estimate, elapsedRealtimeUs, shortString);
-                    }
-                }
-                long prediction = discharging
-                        ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0;
-                Estimate estimate = new Estimate(
-                        PowerUtil.convertUsToMs(prediction),
-                        false, /* isBasedOnUsage */
-                        Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
-                BatteryUtils.logRuntime(LOG_TAG, "time for regular BatteryInfo", startTime);
-                return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
-                        estimate, elapsedRealtimeUs, shortString);
+                return getBatteryInfo(context, statsHelper, shortString);
             }
 
             @Override
@@ -200,13 +163,61 @@ public class BatteryInfo {
         }.execute();
     }
 
+    public static BatteryInfo getBatteryInfo(final Context context,
+            final BatteryStatsHelper statsHelper, boolean shortString) {
+        final BatteryStats stats;
+        final long batteryStatsTime = System.currentTimeMillis();
+        if (statsHelper == null) {
+            final BatteryStatsHelper localStatsHelper = new BatteryStatsHelper(context,
+                    true);
+            localStatsHelper.create((Bundle) null);
+            stats = localStatsHelper.getStats();
+        } else {
+            stats = statsHelper.getStats();
+        }
+        BatteryUtils.logRuntime(LOG_TAG, "time for getStats", batteryStatsTime);
+
+        final long startTime = System.currentTimeMillis();
+        PowerUsageFeatureProvider provider =
+                FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
+        final long elapsedRealtimeUs =
+                PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
+
+        final Intent batteryBroadcast = context.registerReceiver(null,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        // 0 means we are discharging, anything else means charging
+        final boolean discharging =
+                batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+
+        if (discharging && provider != null
+                && provider.isEnhancedBatteryPredictionEnabled(context)) {
+            Estimate estimate = provider.getEnhancedBatteryPrediction(context);
+            if (estimate != null) {
+                Estimate.storeCachedEstimate(context, estimate);
+                BatteryUtils
+                        .logRuntime(LOG_TAG, "time for enhanced BatteryInfo", startTime);
+                return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
+                        estimate, elapsedRealtimeUs, shortString);
+            }
+        }
+        final long prediction = discharging
+                ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0;
+        final Estimate estimate = new Estimate(
+                PowerUtil.convertUsToMs(prediction),
+                false, /* isBasedOnUsage */
+                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+        BatteryUtils.logRuntime(LOG_TAG, "time for regular BatteryInfo", startTime);
+        return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
+                estimate, elapsedRealtimeUs, shortString);
+    }
+
     @WorkerThread
     public static BatteryInfo getBatteryInfoOld(Context context, Intent batteryBroadcast,
             BatteryStats stats, long elapsedRealtimeUs, boolean shortString) {
         Estimate estimate = new Estimate(
                 PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
                 false,
-                Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         return getBatteryInfo(context, batteryBroadcast, stats, estimate, elapsedRealtimeUs,
                 shortString);
     }
@@ -220,7 +231,7 @@ public class BatteryInfo {
         info.batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
         info.batteryPercentString = Utils.formatPercentage(info.batteryLevel);
         info.mCharging = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
-        info.averageTimeToDischarge = estimate.averageDischargeTime;
+        info.averageTimeToDischarge = estimate.getAverageDischargeTime();
         final Resources resources = context.getResources();
 
         info.statusLabel = Utils.getBatteryStatus(resources, batteryBroadcast);
@@ -240,6 +251,7 @@ public class BatteryInfo {
         final int status = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
                 BatteryManager.BATTERY_STATUS_UNKNOWN);
         info.discharging = false;
+        info.suggestionLabel = null;
         if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
             info.remainingTimeUs = chargeTime;
             CharSequence timeString = StringUtil.formatElapsedTime(context,
@@ -260,23 +272,26 @@ public class BatteryInfo {
 
     private static void updateBatteryInfoDischarging(Context context, boolean shortString,
             Estimate estimate, BatteryInfo info) {
-        final long drainTimeUs = PowerUtil.convertMsToUs(estimate.estimateMillis);
+        final long drainTimeUs = PowerUtil.convertMsToUs(estimate.getEstimateMillis());
         if (drainTimeUs > 0) {
             info.remainingTimeUs = drainTimeUs;
             info.remainingLabel = PowerUtil.getBatteryRemainingStringFormatted(
                     context,
                     PowerUtil.convertUsToMs(drainTimeUs),
                     null /* percentageString */,
-                    estimate.isBasedOnUsage && !shortString
+                    estimate.isBasedOnUsage() && !shortString
             );
             info.chargeLabel = PowerUtil.getBatteryRemainingStringFormatted(
                     context,
                     PowerUtil.convertUsToMs(drainTimeUs),
                     info.batteryPercentString,
-                    estimate.isBasedOnUsage && !shortString
+                    estimate.isBasedOnUsage() && !shortString
             );
+            info.suggestionLabel = PowerUtil.getBatteryTipStringFormatted(
+                    context, PowerUtil.convertUsToMs(drainTimeUs));
         } else {
             info.remainingLabel = null;
+            info.suggestionLabel = null;
             info.chargeLabel = info.batteryPercentString;
         }
     }

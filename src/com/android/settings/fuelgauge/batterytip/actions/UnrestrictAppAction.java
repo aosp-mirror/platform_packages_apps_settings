@@ -17,11 +17,11 @@
 package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
@@ -49,8 +49,11 @@ public class UnrestrictAppAction extends BatteryTipAction {
         // Clear force app standby, then app can run in the background
         mBatteryUtils.setForceAppStandby(appInfo.uid, appInfo.packageName,
                 AppOpsManager.MODE_ALLOWED);
-        mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP, appInfo.packageName,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
+        mMetricsFeatureProvider.action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_TIP_UNRESTRICT_APP,
+                metricsKey,
+                appInfo.packageName,
+                0);
     }
 }

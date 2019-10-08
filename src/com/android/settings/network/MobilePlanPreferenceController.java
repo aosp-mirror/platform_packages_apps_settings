@@ -20,7 +20,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
+import static com.android.settingslib.RestrictedLockUtilsInternal.hasBaseUserRestriction;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -31,10 +31,11 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

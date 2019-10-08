@@ -17,56 +17,52 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
-import android.app.Application;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
-import androidx.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.Preference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppSettingPreferenceControllerTest {
 
     private static final String TEST_PKG_NAME = "test_pkg";
     private static final String TEST_CLASS_NAME = "name";
     private static final Intent TEST_INTENT =
-        new Intent(Intent.ACTION_APPLICATION_PREFERENCES)
-            .setClassName(TEST_PKG_NAME, TEST_CLASS_NAME);
+            new Intent(Intent.ACTION_APPLICATION_PREFERENCES)
+                    .setClassName(TEST_PKG_NAME, TEST_CLASS_NAME);
     private static final Intent RESOLVED_INTENT =
-        new Intent(Intent.ACTION_APPLICATION_PREFERENCES)
-            .setPackage(TEST_PKG_NAME);
+            new Intent(Intent.ACTION_APPLICATION_PREFERENCES)
+                    .setPackage(TEST_PKG_NAME);
 
     @Mock
     private AppInfoDashboardFragment mParent;
-    private Application mApplication;
     private ShadowPackageManager mPackageManager;
     private AppSettingPreferenceController mController;
     private Preference mPreference;
+    private Activity mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mApplication = RuntimeEnvironment.application;
-        mPackageManager = shadowOf(mApplication.getPackageManager());
-        mController = new AppSettingPreferenceController(mApplication, "test_key");
+        mActivity = Robolectric.setupActivity(Activity.class);
+        mPackageManager = Shadows.shadowOf(RuntimeEnvironment.application.getPackageManager());
+        mController = new AppSettingPreferenceController(mActivity, "test_key");
         mController.setPackageName(TEST_PKG_NAME).setParentFragment(mParent);
-        mPreference = new Preference(mApplication);
+        mPreference = new Preference(mActivity);
         mPreference.setKey(mController.getPreferenceKey());
     }
 
@@ -112,7 +108,7 @@ public class AppSettingPreferenceControllerTest {
         mPackageManager.addResolveInfoForIntent(RESOLVED_INTENT, info);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
-        assertThat(shadowOf(mApplication).getNextStartedActivity().getComponent())
-            .isEqualTo(TEST_INTENT.getComponent());
+        assertThat(Shadows.shadowOf(mActivity).getNextStartedActivity().getComponent())
+                .isEqualTo(TEST_INTENT.getComponent());
     }
 }

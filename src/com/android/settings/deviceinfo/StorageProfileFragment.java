@@ -16,18 +16,19 @@
 
 package com.android.settings.deviceinfo;
 
-import android.app.LoaderManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Loader;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import androidx.annotation.VisibleForTesting;
 import android.util.SparseArray;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -37,7 +38,6 @@ import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +83,7 @@ public class StorageProfileFragment extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_STORAGE_PROFILE;
+        return SettingsEnums.SETTINGS_STORAGE_PROFILE;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class StorageProfileFragment extends DashboardFragment
                 context.getSystemService(UserManager.class),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
-                new PackageManagerWrapper(context.getPackageManager()));
+                context.getPackageManager());
     }
 
     @Override

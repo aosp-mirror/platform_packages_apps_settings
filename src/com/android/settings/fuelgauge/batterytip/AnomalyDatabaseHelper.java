@@ -19,10 +19,9 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import androidx.annotation.IntDef;
 import android.util.Log;
 
-import com.android.settings.fuelgauge.anomaly.Anomaly;
+import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -34,7 +33,7 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "BatteryDatabaseHelper";
 
     private static final String DATABASE_NAME = "battery_settings.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({State.NEW,
@@ -46,8 +45,15 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
         int AUTO_HANDLED = 2;
     }
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({ActionType.RESTRICTION})
+    public @interface ActionType {
+        int RESTRICTION = 0;
+    }
+
     public interface Tables {
         String TABLE_ANOMALY = "anomaly";
+        String TABLE_ACTION = "action";
     }
 
     public interface AnomalyColumns {
@@ -61,7 +67,7 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
         String UID = "uid";
         /**
          * The type of the anomaly app
-         * @see Anomaly.AnomalyType
+         * @see StatsManagerConfig.AnomalyType
          */
         String ANOMALY_TYPE = "anomaly_type";
         /**
@@ -92,6 +98,42 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
                     + AnomalyColumns.ANOMALY_STATE + "," + AnomalyColumns.TIME_STAMP_MS + ")"
                     + ")";
 
+
+    public interface ActionColumns {
+        /**
+         * The package name of an app been performed an action
+         */
+        String PACKAGE_NAME = "package_name";
+        /**
+         * The uid of an app been performed an action
+         */
+        String UID = "uid";
+        /**
+         * The type of user action
+         * @see ActionType
+         */
+        String ACTION_TYPE = "action_type";
+        /**
+         * The time when action been performed
+         */
+        String TIME_STAMP_MS = "time_stamp_ms";
+    }
+
+    private static final String CREATE_ACTION_TABLE =
+            "CREATE TABLE " + Tables.TABLE_ACTION +
+                    "(" +
+                    ActionColumns.UID +
+                    " INTEGER NOT NULL, " +
+                    ActionColumns.PACKAGE_NAME +
+                    " TEXT, " +
+                    ActionColumns.ACTION_TYPE +
+                    " INTEGER NOT NULL, " +
+                    ActionColumns.TIME_STAMP_MS +
+                    " INTEGER NOT NULL, " +
+                    " PRIMARY KEY (" + ActionColumns.ACTION_TYPE + "," + ActionColumns.UID + ","
+                    + ActionColumns.PACKAGE_NAME + ")"
+                    + ")";
+
     private static AnomalyDatabaseHelper sSingleton;
 
     public static synchronized AnomalyDatabaseHelper getInstance(Context context) {
@@ -108,11 +150,6 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         bootstrapDB(db);
-    }
-
-    private void bootstrapDB(SQLiteDatabase db) {
-        db.execSQL(CREATE_ANOMALY_TABLE);
-        Log.i(TAG, "Bootstrapped database");
     }
 
     @Override
@@ -138,7 +175,14 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
         bootstrapDB(db);
     }
 
+    private void bootstrapDB(SQLiteDatabase db) {
+        db.execSQL(CREATE_ANOMALY_TABLE);
+        db.execSQL(CREATE_ACTION_TABLE);
+        Log.i(TAG, "Bootstrapped database");
+    }
+
     private void dropTables(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_ANOMALY);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_ACTION);
     }
 }

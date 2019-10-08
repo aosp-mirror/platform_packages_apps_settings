@@ -24,12 +24,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.widget.AppPreference;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 public class AccountTypePreference extends AppPreference implements OnPreferenceClickListener {
     /**
@@ -107,7 +108,7 @@ public class AccountTypePreference extends AppPreference implements OnPreference
             new SubSettingLauncher(getContext())
                     .setDestination(mFragment)
                     .setArguments(mFragmentArguments)
-                    .setTitle(mTitleResPackageName, mTitleResId)
+                    .setTitleRes(mTitleResPackageName, mTitleResId)
                     .setSourceMetricsCategory(mMetricsCategory)
                     .launch();
             return true;

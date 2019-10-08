@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
@@ -26,26 +27,19 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.setupwizardlib.GlifLayout;
+import com.android.settingslib.testutils.DrawableTestHelper;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.Shadows;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowDrawable;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-    SettingsShadowResources.class,
-    SettingsShadowResourcesImpl.class,
-    SettingsShadowResources.SettingsShadowTheme.class,
-    ShadowUtils.class
-})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUtils.class)
 public class ChooseLockPatternTest {
 
     @Test
@@ -58,7 +52,7 @@ public class ChooseLockPatternTest {
     @Test
     public void intentBuilder_setPattern_shouldAddExtras() {
         Intent intent = new IntentBuilder(application)
-                .setPattern("pattern")
+                .setPattern("pattern".getBytes())
                 .setUserId(123)
                 .build();
 
@@ -67,9 +61,9 @@ public class ChooseLockPatternTest {
                 .named("EXTRA_KEY_HAS_CHALLENGE")
                 .isFalse();
         assertThat(intent
-                .getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
+                .getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
                 .named("EXTRA_KEY_PASSWORD")
-                .isEqualTo("pattern");
+                .isEqualTo("pattern".getBytes());
         assertThat(intent.getIntExtra(Intent.EXTRA_USER_ID, 0))
                 .named("EXTRA_USER_ID")
                 .isEqualTo(123);
@@ -101,10 +95,9 @@ public class ChooseLockPatternTest {
     public void fingerprintExtraSet_shouldDisplayFingerprintIcon() {
         ChooseLockPattern activity = createActivity(true);
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
-                activity.getFragmentManager().findFragmentById(R.id.main_content);
-
-        ShadowDrawable drawable = Shadows.shadowOf(((GlifLayout) fragment.getView()).getIcon());
-        assertThat(drawable.getCreatedFromResId()).isEqualTo(R.drawable.ic_fingerprint_header);
+                activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
+        DrawableTestHelper.assertDrawableResId(((GlifLayout) fragment.getView()).getIcon(),
+                R.drawable.ic_fingerprint_header);
     }
 
     @Config(qualifiers = "sw300dp")
@@ -112,9 +105,9 @@ public class ChooseLockPatternTest {
     public void smallScreens_shouldHideIcon() {
         ChooseLockPattern activity = createActivity(true);
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
-                activity.getFragmentManager().findFragmentById(R.id.main_content);
+                activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
 
-        View iconView = fragment.getView().findViewById(R.id.suw_layout_icon);
+        View iconView = fragment.getView().findViewById(R.id.sud_layout_icon);
         assertThat(iconView.getVisibility()).isEqualTo(View.GONE);
     }
 

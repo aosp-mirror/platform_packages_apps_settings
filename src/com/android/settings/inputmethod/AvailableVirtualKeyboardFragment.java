@@ -16,39 +16,31 @@
 
 package com.android.settings.inputmethod;
 
-import android.annotation.DrawableRes;
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtilCompat;
 import com.android.settingslib.inputmethod.InputMethodPreference;
 import com.android.settingslib.inputmethod.InputMethodSettingValuesWrapper;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFragment
-        implements InputMethodPreference.OnSavePreferenceListener, Indexable {
+        implements InputMethodPreference.OnSavePreferenceListener {
 
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
     private InputMethodSettingValuesWrapper mInputMethodSettingValues;
@@ -78,7 +70,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
     public void onSaveInputMethodPreference(final InputMethodPreference pref) {
         final boolean hasHardwareKeyboard = getResources().getConfiguration().keyboard
                 == Configuration.KEYBOARD_QWERTY;
-        InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
+        InputMethodAndSubtypeUtilCompat.saveInputMethodSubtypeList(this, getContentResolver(),
                 mImm.getInputMethodList(), hasHardwareKeyboard);
         // Update input method settings and preference list.
         mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
@@ -89,53 +81,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ENABLE_VIRTUAL_KEYBOARDS;
-    }
-
-    @Nullable
-    private static Drawable loadDrawable(@NonNull final PackageManager packageManager,
-            @NonNull final String packageName, @DrawableRes final int resId,
-            @NonNull final ApplicationInfo applicationInfo) {
-        if (resId == 0) {
-            return null;
-        }
-        try {
-            return packageManager.getDrawable(packageName, resId, applicationInfo);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    @NonNull
-    private static Drawable getInputMethodIcon(@NonNull final PackageManager packageManager,
-            @NonNull final InputMethodInfo imi) {
-        final ServiceInfo si = imi.getServiceInfo();
-        final ApplicationInfo ai = si != null ? si.applicationInfo : null;
-        final String packageName = imi.getPackageName();
-        if (si == null || ai == null || packageName == null) {
-            return new ColorDrawable(Color.TRANSPARENT);
-        }
-        // We do not use ServiceInfo#loadLogo() and ServiceInfo#loadIcon here since those methods
-        // internally have some fallback rules, which we want to do manually.
-        Drawable drawable = loadDrawable(packageManager, packageName, si.logo, ai);
-        if (drawable != null) {
-            return drawable;
-        }
-        drawable = loadDrawable(packageManager, packageName, si.icon, ai);
-        if (drawable != null) {
-            return drawable;
-        }
-        // We do not use ApplicationInfo#loadLogo() and ApplicationInfo#loadIcon here since those
-        // methods internally have some fallback rules, which we want to do manually.
-        drawable = loadDrawable(packageManager, packageName, ai.logo, ai);
-        if (drawable != null) {
-            return drawable;
-        }
-        drawable = loadDrawable(packageManager, packageName, ai.icon, ai);
-        if (drawable != null) {
-            return drawable;
-        }
-        return new ColorDrawable(Color.TRANSPARENT);
+        return SettingsEnums.ENABLE_VIRTUAL_KEYBOARDS;
     }
 
     private void updateInputMethodPreferenceViews() {
@@ -144,7 +90,6 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
         mInputMethodPreferenceList.clear();
         List<String> permittedList = mDpm.getPermittedInputMethodsForCurrentUser();
         final Context context = getPrefContext();
-        final PackageManager packageManager = getActivity().getPackageManager();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
         final int numImis = (imis == null ? 0 : imis.size());
         for (int i = 0; i < numImis; ++i) {
@@ -153,7 +98,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
                     || permittedList.contains(imi.getPackageName());
             final InputMethodPreference pref = new InputMethodPreference(
                     context, imi, true, isAllowedByOrganization, this);
-            pref.setIcon(getInputMethodIcon(packageManager, imi));
+            pref.setIcon(imi.loadIcon(context.getPackageManager()));
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();
@@ -163,7 +108,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
             final InputMethodPreference pref = mInputMethodPreferenceList.get(i);
             pref.setOrder(i);
             getPreferenceScreen().addPreference(pref);
-            InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
+            InputMethodAndSubtypeUtilCompat.removeUnnecessaryNonPersistentPreference(pref);
             pref.updatePreferenceViews();
         }
     }

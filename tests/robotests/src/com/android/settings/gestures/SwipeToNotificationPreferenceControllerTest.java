@@ -17,7 +17,9 @@
 package com.android.settings.gestures;
 
 import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -27,7 +29,6 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
 
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,9 +36,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SwipeToNotificationPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -98,7 +100,7 @@ public class SwipeToNotificationPreferenceControllerTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be enabled.
         final Context context = RuntimeEnvironment.application;
-        Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
+        Settings.Secure.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
         mController = new SwipeToNotificationPreferenceController(context, KEY_SWIPE_DOWN);
 
         assertThat(mController.isChecked()).isTrue();
@@ -110,7 +112,7 @@ public class SwipeToNotificationPreferenceControllerTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be disabled.
         final Context context = RuntimeEnvironment.application;
-        Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
+        Settings.Secure.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
         mController = new SwipeToNotificationPreferenceController(context, KEY_SWIPE_DOWN);
 
         assertThat(mController.isChecked()).isFalse();

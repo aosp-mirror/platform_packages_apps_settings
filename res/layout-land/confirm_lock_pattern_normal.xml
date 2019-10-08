@@ -13,13 +13,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:icon="@drawable/ic_lock"
-    android:layout="@layout/suw_glif_blank_template">
+    android:layout="@layout/sud_glif_blank_template">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
@@ -40,34 +40,34 @@
                 android:paddingBottom="24dp">
 
                 <ImageView
-                    android:id="@+id/suw_layout_icon"
-                    style="@style/SuwGlifIcon"
+                    android:id="@+id/sud_layout_icon"
+                    style="@style/SudGlifIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="?attr/suwGlifHeaderGravity"
+                    android:layout_gravity="?attr/sudGlifHeaderGravity"
                     android:src="@drawable/ic_lock" />
 
                 <TextView
                     android:id="@+id/headerText"
-                    style="@style/SuwGlifHeaderTitle"
+                    style="@style/SudGlifHeaderTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    style="@style/SuwDescription.Glif"
-                    android:id="@+id/detailsText"
+                    style="@style/SudDescription.Glif"
+                    android:id="@+id/sud_layout_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/suwMarginSides"
-                    android:layout_marginEnd="?attr/suwMarginSides" />
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides" />
 
                 <Button
                     android:id="@+id/cancelButton"
                     style="@style/SetupWizardButton.Negative"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/suwMarginSides"
-                    android:layout_marginEnd="?attr/suwMarginSides"
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides"
                     android:text="@string/cancel" />
 
                 <Space
@@ -76,28 +76,20 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    style="@style/TextAppearance.ConfirmDeviceCredentialsErrorText"
+                    style="@style/TextAppearance.ErrorText"
                     android:accessibilityLiveRegion="polite"
                     android:id="@+id/errorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/suwMarginSides"
-                    android:layout_marginEnd="?attr/suwMarginSides"
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides"
                     android:layout_marginBottom="24dp"
                     android:gravity="center_vertical"/>
-
-                <ImageView
-                    android:id="@+id/fingerprintIcon"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/confirm_fingerprint_icon_content_description"
-                    android:visibility="gone"/>
             </LinearLayout>
 
         </ScrollView>
 
-        <com.android.setupwizardlib.view.FillContentLayout
+        <com.google.android.setupdesign.view.FillContentLayout
             style="@style/LockPatternContainerStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -110,7 +102,7 @@
                 android:layout_gravity="center"
                 android:background="@color/lock_pattern_background" />
 
-        </com.android.setupwizardlib.view.FillContentLayout>
+        </com.google.android.setupdesign.view.FillContentLayout>
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

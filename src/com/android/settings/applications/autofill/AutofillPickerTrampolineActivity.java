@@ -14,6 +14,7 @@
 package com.android.settings.applications.autofill;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.autofill.AutofillManager;
@@ -33,22 +34,23 @@ public class AutofillPickerTrampolineActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // First check if the current user's service already belongs to the app...
-        final Intent intent = getIntent();
-        final String packageName = intent.getData().getSchemeSpecificPart();
-        final String currentService = DefaultAutofillPicker.getDefaultKey(this);
-        if (currentService != null && currentService.startsWith(packageName)) {
-            // ...and succeed right away if it does.
-            setResult(RESULT_OK);
+        final AutofillManager afm = getSystemService(AutofillManager.class);
+
+        // First check if the Autofill is available for the current user...
+        if (afm == null || !afm.hasAutofillFeature() || !afm.isAutofillSupported()) {
+            // ... and fail right away if it is not.
+            setResult(RESULT_CANCELED);
             finish();
             return;
         }
 
-        // Then check if the Autofill is available for the current user...
-        final AutofillManager afm = getSystemService(AutofillManager.class);
-        if (afm == null || !afm.hasAutofillFeature() || !afm.isAutofillSupported()) {
-            // ... and fail right away if it is not.
-            setResult(RESULT_CANCELED);
+        // Then check if the current user's service already belongs to the app...
+        final Intent intent = getIntent();
+        final String packageName = intent.getData().getSchemeSpecificPart();
+        final ComponentName currentService = afm.getAutofillServiceComponentName();
+        if (currentService != null && currentService.getPackageName().equals(packageName)) {
+            // ...and succeed right away if it does.
+            setResult(RESULT_OK);
             finish();
             return;
         }

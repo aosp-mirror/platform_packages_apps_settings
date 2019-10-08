@@ -416,7 +416,7 @@ public class RunningProcessesView extends FrameLayout
             new SubSettingLauncher(getContext())
                     .setDestination(RunningServiceDetails.class.getName())
                     .setArguments(args)
-                    .setTitle(R.string.runningservicedetails_settings_title)
+                    .setTitleRes(R.string.runningservicedetails_settings_title)
                     .setSourceMetricsCategory(mOwner.getMetricsCategory())
                     .launch();
         }
@@ -452,8 +452,7 @@ public class RunningProcessesView extends FrameLayout
         final Context context = getContext();
         mColorBar.setProgressTintList(
                 ColorStateList.valueOf(context.getColor(R.color.running_processes_system_ram)));
-        mColorBar.setSecondaryProgressTintList(
-                ColorStateList.valueOf(Utils.getColorAccent(context)));
+        mColorBar.setSecondaryProgressTintList(Utils.getColorAccent(context));
         mColorBar.setSecondaryProgressTintMode(PorterDuff.Mode.SRC);
         mColorBar.setProgressBackgroundTintList(
                 ColorStateList.valueOf(context.getColor(R.color.running_processes_free_ram)));

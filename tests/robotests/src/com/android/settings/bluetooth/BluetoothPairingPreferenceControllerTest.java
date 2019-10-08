@@ -17,7 +17,8 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -25,11 +26,12 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,9 +39,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BluetoothPairingPreferenceControllerTest {
 
     private static final int ORDER = 1;
@@ -70,10 +73,10 @@ public class BluetoothPairingPreferenceControllerTest {
         Preference pref = mController.createBluetoothPairingPreference(ORDER);
 
         assertThat(pref.getKey()).isEqualTo(BluetoothPairingPreferenceController.KEY_PAIRING);
-        assertThat(pref.getIcon()).isEqualTo(mContext.getDrawable(R.drawable.ic_menu_add));
+        DrawableTestHelper.assertDrawableResId(pref.getIcon(), R.drawable.ic_add_24dp);
         assertThat(pref.getOrder()).isEqualTo(ORDER);
         assertThat(pref.getTitle())
-            .isEqualTo(mContext.getString(R.string.bluetooth_pairing_pref_title));
+                .isEqualTo(mContext.getString(R.string.bluetooth_pairing_pref_title));
     }
 
     @Test

@@ -16,27 +16,29 @@
 
 package com.android.settings.notification;
 
-import android.app.FragmentManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {
 
+    public static final String KEY = "zen_mode_toggle";
+
     private static final String TAG = "EnableZenModeButton";
-    protected static final String KEY = "zen_mode_settings_button_container";
+    private final FragmentManager mFragment;
     private Button mZenButtonOn;
     private Button mZenButtonOff;
-    private FragmentManager mFragment;
 
     public ZenModeButtonPreferenceController(Context context, Lifecycle lifecycle, FragmentManager
             fragment) {
@@ -59,17 +61,17 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
         super.updateState(preference);
 
         if (null == mZenButtonOn) {
-            mZenButtonOn = (Button) ((LayoutPreference) preference)
+            mZenButtonOn = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_on_button);
             updateZenButtonOnClickListener();
         }
 
         if (null == mZenButtonOff) {
-            mZenButtonOff = (Button) ((LayoutPreference) preference)
+            mZenButtonOff = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_off_button);
             mZenButtonOff.setOnClickListener(v -> {
                 mMetricsFeatureProvider.action(mContext,
-                        MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                        SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
                 mBackend.setZenMode(Settings.Global.ZEN_MODE_OFF);
             });
         }
@@ -96,24 +98,24 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
     private void updateZenButtonOnClickListener() {
         int zenDuration = getZenDuration();
         switch (zenDuration) {
-            case Settings.Global.ZEN_DURATION_PROMPT:
+            case Settings.Secure.ZEN_DURATION_PROMPT:
                 mZenButtonOn.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
-                            MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                            SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
                     new SettingsEnableZenModeDialog().show(mFragment, TAG);
                 });
                 break;
-            case Settings.Global.ZEN_DURATION_FOREVER:
+            case Settings.Secure.ZEN_DURATION_FOREVER:
                 mZenButtonOn.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
-                            MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                            SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
                     mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
                 });
                 break;
             default:
                 mZenButtonOn.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
-                            MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                            SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
                     mBackend.setZenModeForDuration(zenDuration);
                 });
         }

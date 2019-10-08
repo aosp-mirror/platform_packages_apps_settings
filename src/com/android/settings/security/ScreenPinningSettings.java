@@ -16,30 +16,31 @@
 package com.android.settings.security;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,8 +48,9 @@ import java.util.List;
 /**
  * Screen pinning settings.
  */
+@SearchIndexable
 public class ScreenPinningSettings extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener, Indexable {
+        implements SwitchBar.OnSwitchChangeListener {
 
     private static final CharSequence KEY_USE_SCREEN_LOCK = "use_screen_lock";
     private static final int CHANGE_LOCK_METHOD_REQUEST = 43;
@@ -59,7 +61,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SCREEN_PINNING;
+        return SettingsEnums.SCREEN_PINNING;
     }
 
     @Override
@@ -115,9 +117,13 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     }
 
     private boolean isScreenLockUsed() {
-        int def = getCurrentSecurityTitle() != R.string.screen_pinning_unlock_none ? 1 : 0;
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_TO_APP_EXIT_LOCKED, def) != 0;
+        // This functionality should be kept consistent with
+        // com.android.server.wm.LockTaskController (see b/127605586)
+        int defaultValueIfSettingNull = mLockPatternUtils.isSecure(UserHandle.myUserId()) ? 1 : 0;
+        return Settings.Secure.getInt(
+                getContentResolver(),
+                Settings.Secure.LOCK_TO_APP_EXIT_LOCKED,
+                defaultValueIfSettingNull) != 0;
     }
 
     private boolean setScreenLockUsed(boolean isEnabled) {

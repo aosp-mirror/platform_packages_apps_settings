@@ -22,7 +22,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.R;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 /**
@@ -36,7 +36,7 @@ public class AndroidBeamEnabler extends BaseNfcEnabler {
     public AndroidBeamEnabler(Context context, RestrictedPreference preference) {
         super(context);
         mPreference = preference;
-        mBeamDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(context,
+        mBeamDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId());
         if (!isNfcAvailable()) {
             // NFC is not supported
@@ -53,7 +53,7 @@ public class AndroidBeamEnabler extends BaseNfcEnabler {
         switch (newState) {
             case NfcAdapter.STATE_OFF:
                 mPreference.setEnabled(false);
-                mPreference.setSummary(R.string.android_beam_disabled_summary);
+                mPreference.setSummary(R.string.nfc_disabled_summary);
                 break;
             case NfcAdapter.STATE_ON:
                 if (mBeamDisallowedBySystem) {

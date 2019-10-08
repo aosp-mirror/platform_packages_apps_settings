@@ -17,4 +17,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/premium_sms_access" />
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="premium_sms_screen"
+    android:title="@string/premium_sms_access"
+    settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsScreenPreferenceController" />

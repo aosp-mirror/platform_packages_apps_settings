@@ -19,22 +19,26 @@ package com.android.settings.testutils;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.slices.SliceBackgroundWorker;
+
+import java.io.IOException;
 
 public class FakeToggleController extends TogglePreferenceController {
-
-    private String settingKey = "toggle_key";
 
     public static final String AVAILABILITY_KEY = "fake_toggle_availability_key";
 
     public static final IntentFilter INTENT_FILTER = new IntentFilter(
             WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
 
-    private final int ON = 1;
-    private final int OFF = 0;
+    private static final String SETTING_KEY = "toggle_key";
+
+    private static final int ON = 1;
+    private static final int OFF = 0;
 
     private boolean mIsAsyncUpdate = false;
 
@@ -45,12 +49,12 @@ public class FakeToggleController extends TogglePreferenceController {
     @Override
     public boolean isChecked() {
         return Settings.System.getInt(mContext.getContentResolver(),
-                settingKey, OFF) == ON;
+            SETTING_KEY, OFF) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.System.putInt(mContext.getContentResolver(), settingKey,
+        return Settings.System.putInt(mContext.getContentResolver(), SETTING_KEY,
                 isChecked ? ON : OFF);
     }
 
@@ -71,11 +75,35 @@ public class FakeToggleController extends TogglePreferenceController {
     }
 
     @Override
+    public Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
+        return TestWorker.class;
+    }
+
+    @Override
     public boolean hasAsyncUpdate() {
         return mIsAsyncUpdate;
     }
 
     public void setAsyncUpdate(boolean isAsyncUpdate) {
         mIsAsyncUpdate = isAsyncUpdate;
+    }
+
+    public static class TestWorker extends SliceBackgroundWorker<Void> {
+
+        public TestWorker(Context context, Uri uri) {
+            super(context, uri);
+        }
+
+        @Override
+        protected void onSlicePinned() {
+        }
+
+        @Override
+        protected void onSliceUnpinned() {
+        }
+
+        @Override
+        public void close() throws IOException {
+        }
     }
 }

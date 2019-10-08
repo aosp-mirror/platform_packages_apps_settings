@@ -14,8 +14,10 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="privacy_settings_screen"
     android:title="@string/privacy_settings_title">
 
     <!-- Backup settings -->
@@ -23,31 +25,34 @@
         android:key="backup_data"
         android:title="@string/backup_data_title"
         android:persistent="false"
-        android:fragment="com.android.settings.backup.ToggleBackupSettingFragment"/>
+        android:fragment="com.android.settings.backup.ToggleBackupSettingFragment"
+        settings:controller="com.android.settings.backup.BackupDataPreferenceController" />
 
     <Preference
         android:key="configure_account"
         android:title="@string/backup_configure_account_title"
-        android:persistent="false">
+        android:persistent="false"
+        settings:controller="com.android.settings.backup.ConfigureAccountPreferenceController">
         <!-- the Intent declared here is always overwritten by a real one -->
         <intent android:action="dummy" />
     </Preference>
 
     <Preference
         android:key="data_management"
-        android:persistent="false">
-    </Preference>
+        android:title="@string/backup_data_management_title"
+        settings:controller="com.android.settings.backup.DataManagementPreferenceController" />
 
     <SwitchPreference
         android:key="auto_restore"
         android:title="@string/auto_restore_title"
-        android:summary="@string/auto_restore_summary" />
+        android:summary="@string/auto_restore_summary"
+        settings:controller="com.android.settings.backup.AutoRestorePreferenceController" />
 
     <Preference
         android:key="backup_inactive"
-        android:title="@string/backup_inactive_title"
-        android:persistent="false"
+        android:title="@string/disabled_by_administrator_summary"
         android:enabled="false"
-        android:selectable="false" />
+        android:selectable="false"
+        settings:controller="com.android.settings.backup.BackupInactivePreferenceController" />
 
 </PreferenceScreen>

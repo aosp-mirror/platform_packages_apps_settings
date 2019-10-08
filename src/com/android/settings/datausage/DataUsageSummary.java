@@ -15,15 +15,10 @@
 package com.android.settings.datausage;
 
 import android.app.Activity;
-import android.content.ComponentName;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
@@ -33,14 +28,14 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.style.RelativeSizeSpan;
-import android.view.MenuItem;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.DataUsageController;
@@ -51,8 +46,7 @@ import java.util.List;
 /**
  * Settings preference fragment that displays data usage summary.
  */
-public class DataUsageSummary extends DataUsageBaseFragment implements Indexable,
-        DataUsageEditController {
+public class DataUsageSummary extends DataUsageBaseFragment implements DataUsageEditController {
 
     private static final String TAG = "DataUsageSummary";
 
@@ -88,12 +82,12 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
 
-        int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(context);
+        final int defaultSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             hasMobileData = false;
         }
         mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, defaultSubId);
-        mSummaryPreference = (DataUsageSummaryPreference) findPreference(KEY_STATUS_HEADER);
+        mSummaryPreference = findPreference(KEY_STATUS_HEADER);
 
         if (!hasMobileData || !isAdmin()) {
             removePreference(KEY_RESTRICT_BACKGROUND);
@@ -116,20 +110,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
             addEthernetSection();
         }
         setHasOptionsMenu(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.data_usage_menu_cellular_networks: {
-                final Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setComponent(new ComponentName("com.android.phone",
-                        "com.android.phone.MobileNetworkSettings"));
-                startActivity(intent);
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -156,9 +136,10 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
         final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController =
-                new DataUsageSummaryPreferenceController(activity, getLifecycle(), this);
+                new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this,
+                        DataUsageUtils.getDefaultSubscriptionId(activity));
         controllers.add(mSummaryController);
-        getLifecycle().addObserver(mSummaryController);
+        getSettingsLifecycle().addObserver(mSummaryController);
         return controllers;
     }
 
@@ -170,7 +151,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_cellular);
-        category.setTemplate(getNetworkTemplate(subId), subId, services);
+        category.setTemplate(DataUsageUtils.getMobileTemplate(getContext(), subId),
+                subId, services);
         category.pushTemplates(services);
         if (subInfo != null && !TextUtils.isEmpty(subInfo.getDisplayName())) {
             Preference title  = category.findPreference(KEY_MOBILE_USAGE_TITLE);
@@ -202,13 +184,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
         screen.addPreference(pref);
 
         return pref;
-    }
-
-    private NetworkTemplate getNetworkTemplate(int subscriptionId) {
-        NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
-                services.mTelephonyManager.getSubscriberId(subscriptionId));
-        return NetworkTemplate.normalize(mobileAll,
-                services.mTelephonyManager.getMergedSubscriberIds());
     }
 
     @Override
@@ -257,7 +232,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DATA_USAGE_SUMMARY;
+        return SettingsEnums.DATA_USAGE_SUMMARY;
     }
 
     @Override
@@ -298,8 +273,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
                                     formatUsedData()));
                 } else {
                     final DataUsageController.DataUsageInfo info =
-                            mDataController
-                                    .getDataUsageInfo(NetworkTemplate.buildTemplateWifiWildcard());
+                            mDataController.getWifiDataUsageInfo();
 
                     if (info == null) {
                         mSummaryLoader.setSummary(this, null);
@@ -349,51 +323,4 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
         = SummaryProvider::new;
-
-    /**
-     * For search
-     */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                    boolean enabled) {
-                List<SearchIndexableResource> resources = new ArrayList<>();
-                SearchIndexableResource resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage;
-                resources.add(resource);
-
-                resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage_cellular;
-                resources.add(resource);
-
-                resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage_wifi;
-                resources.add(resource);
-
-                return resources;
-            }
-
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                List<String> keys = super.getNonIndexableKeys(context);
-
-                if (!DataUsageUtils.hasMobileData(context)) {
-                    keys.add(KEY_MOBILE_USAGE_TITLE);
-                    keys.add(KEY_MOBILE_DATA_USAGE_TOGGLE);
-                    keys.add(KEY_MOBILE_DATA_USAGE);
-                    keys.add(KEY_MOBILE_BILLING_CYCLE);
-                }
-
-                if (!DataUsageUtils.hasWifiRadio(context)) {
-                    keys.add(KEY_WIFI_DATA_USAGE);
-                }
-
-                // This title is named Wifi, and will confuse users.
-                keys.add(KEY_WIFI_USAGE_TITLE);
-
-                return keys;
-            }
-        };
 }

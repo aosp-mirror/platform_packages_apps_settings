@@ -16,35 +16,28 @@
 
 package com.android.settings.language;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.inputmethod.UserDictionaryListPreferenceController;
 import com.android.settings.inputmethod.UserDictionarySettings;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.TreeSet;
 
-public class UserDictionaryPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class UserDictionaryPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
-
-    public UserDictionaryPreferenceController(Context context) {
-        super(context);
+    public UserDictionaryPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_USER_DICTIONARY_SETTINGS;
+    public int getAvailabilityStatus() {
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
@@ -61,10 +54,10 @@ public class UserDictionaryPreferenceController extends AbstractPreferenceContro
                 // parameter in the extras. This will be interpreted by the
                 // UserDictionarySettings class as meaning
                 // "the current locale". Note that with the current code for
-                // UserDictionaryList#getUserDictionaryLocalesSet()
+                // UserDictionaryListPreferenceController#getUserDictionaryLocalesSet()
                 // the locale list always has at least one element, since it
                 // always includes the current locale explicitly.
-                // @see UserDictionaryList.getUserDictionaryLocalesSet().
+                // @see UserDictionaryListPreferenceController.getUserDictionaryLocalesSet().
                 extras.putString("locale", localeSet.first());
             }
             targetFragment = UserDictionarySettings.class;
@@ -75,6 +68,6 @@ public class UserDictionaryPreferenceController extends AbstractPreferenceContro
     }
 
     protected TreeSet<String> getDictionaryLocales() {
-        return UserDictionaryList.getUserDictionaryLocalesSet(mContext);
+        return UserDictionaryListPreferenceController.getUserDictionaryLocalesSet(mContext);
     }
 }

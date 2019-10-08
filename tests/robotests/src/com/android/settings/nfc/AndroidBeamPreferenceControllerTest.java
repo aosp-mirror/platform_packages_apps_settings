@@ -28,10 +28,10 @@ import android.nfc.NfcManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -39,13 +39,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AndroidBeamPreferenceControllerTest {
 
     Context mContext;
@@ -71,7 +72,7 @@ public class AndroidBeamPreferenceControllerTest {
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.NFC_SERVICE)).thenReturn(mManager);
-        when(RestrictedLockUtils.hasBaseUserRestriction(mContext,
+        when(RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId())).thenReturn(false);
         when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
 
@@ -115,7 +116,7 @@ public class AndroidBeamPreferenceControllerTest {
     public void isBeamEnable_disAllowBeam_shouldReturnFalse() {
         when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_OFF);
 
-        when(RestrictedLockUtils.hasBaseUserRestriction(mContext,
+        when(RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId())).thenReturn(true);
         mAndroidBeamController.displayPreference(mScreen);
 
