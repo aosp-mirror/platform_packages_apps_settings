@@ -17,11 +17,11 @@
 package com.android.settings.wifi.savedaccesspoints;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -32,15 +32,18 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.hotspot2.PasspointConfiguration;
 import android.net.wifi.hotspot2.pps.HomeSp;
+import android.os.Bundle;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.testutils.shadow.ShadowAccessPoint;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
+import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -78,49 +81,21 @@ public class SubscribedAccessPointsPreferenceControllerTest {
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
                 .thenReturn(mPreferenceCategory);
         when(mPreferenceCategory.getContext()).thenReturn(mContext);
-
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
     }
 
     @Test
-    public void getAvailability_alwaysAvailable() {
+    public void getAvailability_noSavedAccessPoint_shouldNotAvailable() {
+        mController.mAccessPoints = new ArrayList<>();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailability_oneSavedAccessPoint_shouldAvailable() {
+        final AccessPoint accessPoint = new AccessPoint(mContext, new Bundle() /* savedState */);
+        mController.mAccessPoints = new ArrayList<AccessPoint>(Arrays.asList(accessPoint));
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void onStart_shouldRefreshApList() {
-        doNothing().when(mController).refreshSubscribedAccessPoints();
-
-        mController.onStart();
-
-        verify(mController).refreshSubscribedAccessPoints();
-    }
-
-    @Test
-    public void postRefresh_shouldRefreshApList() {
-        doNothing().when(mController).refreshSubscribedAccessPoints();
-
-        mController.postRefreshSubscribedAccessPoints();
-
-        verify(mController).refreshSubscribedAccessPoints();
-    }
-
-    @Test
-    public void forget_onSuccess_shouldRefreshApList() {
-        doNothing().when(mController).refreshSubscribedAccessPoints();
-
-        mController.onSuccess();
-
-        verify(mController).refreshSubscribedAccessPoints();
-    }
-
-    @Test
-    public void forget_onFailure_shouldRefreshApList() {
-        doNothing().when(mController).refreshSubscribedAccessPoints();
-
-        mController.onFailure(0 /* reason */);
-
-        verify(mController).refreshSubscribedAccessPoints();
     }
 
     @Test
@@ -133,7 +108,6 @@ public class SubscribedAccessPointsPreferenceControllerTest {
         mWifiManager.addNetwork(config);
 
         mController.displayPreference(mPreferenceScreen);
-        mController.refreshSubscribedAccessPoints();
 
         verify(mPreferenceCategory, never()).addPreference(any(AccessPointPreference.class));
     }
@@ -144,7 +118,6 @@ public class SubscribedAccessPointsPreferenceControllerTest {
         mWifiManager.addOrUpdatePasspointConfiguration(createMockPasspointConfiguration());
 
         mController.displayPreference(mPreferenceScreen);
-        mController.refreshSubscribedAccessPoints();
 
         final ArgumentCaptor<AccessPointPreference> captor =
                 ArgumentCaptor.forClass(AccessPointPreference.class);
