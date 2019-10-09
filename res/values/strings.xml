@@ -9690,6 +9690,12 @@
     <!-- Optional part of data usage showing the remaining amount [CHAR LIMIT=13] -->
     <string name="data_remaining"><xliff:g name="bytes" example="2 GB">^1</xliff:g> left</string>
 
+    <!-- Brief content description for data usage chart [CHAR LIMIT=NONE] -->
+    <string name="data_usage_chart_brief_content_description">Graph showing data usage between <xliff:g id="start_date" example="August 19">%1$s</xliff:g> and <xliff:g id="end_date" example="September 16">%2$s</xliff:g>.</string>
+
+    <!-- Content description for data usage chart when data is not available [CHAR LIMIT=NONE] -->
+    <string name="data_usage_chart_no_data_content_description">No data in this date range</string>
+
     <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
     <plurals name="billing_cycle_days_left">
         <item quantity="one">%d day left</item>
