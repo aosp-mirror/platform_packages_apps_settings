@@ -17,11 +17,11 @@
 package com.android.settings.wifi.savedaccesspoints;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -30,15 +30,18 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.testutils.shadow.ShadowAccessPoint;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
+import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -79,44 +82,18 @@ public class SavedAccessPointsPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailability_alwaysAvailable() {
+    public void getAvailability_noSavedAccessPoint_shouldNotAvailable() {
+        mController.mAccessPoints = new ArrayList<>();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailability_oneSavedAccessPoint_shouldAvailable() {
+        final AccessPoint accessPoint = new AccessPoint(mContext, new Bundle() /* savedState */);
+        mController.mAccessPoints = new ArrayList<AccessPoint>(Arrays.asList(accessPoint));
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void onStart_shouldRefreshApList() {
-        doNothing().when(mController).refreshSavedAccessPoints();
-
-        mController.onStart();
-
-        verify(mController).refreshSavedAccessPoints();
-    }
-
-    @Test
-    public void postRefresh_shouldRefreshApList() {
-        doNothing().when(mController).refreshSavedAccessPoints();
-
-        mController.postRefreshSavedAccessPoints();
-
-        verify(mController).refreshSavedAccessPoints();
-    }
-
-    @Test
-    public void forget_onSuccess_shouldRefreshApList() {
-        doNothing().when(mController).refreshSavedAccessPoints();
-
-        mController.onSuccess();
-
-        verify(mController).refreshSavedAccessPoints();
-    }
-
-    @Test
-    public void forget_onFailure_shouldRefreshApList() {
-        doNothing().when(mController).refreshSavedAccessPoints();
-
-        mController.onFailure(0 /* reason */);
-
-        verify(mController).refreshSavedAccessPoints();
     }
 
     @Test
@@ -131,7 +108,6 @@ public class SavedAccessPointsPreferenceControllerTest {
         final ArgumentCaptor<AccessPointPreference> captor =
                 ArgumentCaptor.forClass(AccessPointPreference.class);
         mController.displayPreference(mPreferenceScreen);
-        mController.refreshSavedAccessPoints();
 
         verify(mPreferenceCategory).addPreference(captor.capture());
 
@@ -142,13 +118,10 @@ public class SavedAccessPointsPreferenceControllerTest {
     @Test
     @Config(shadows = ShadowAccessPoint.class)
     public void refreshSavedAccessPoints_shouldNotListSubscribedAPs() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
-
         mWifiManager.addOrUpdatePasspointConfiguration(
                 SubscribedAccessPointsPreferenceControllerTest.createMockPasspointConfiguration());
 
         mController.displayPreference(mPreferenceScreen);
-        mController.refreshSavedAccessPoints();
 
         verify(mPreferenceCategory, never()).addPreference(any(AccessPointPreference.class));
     }

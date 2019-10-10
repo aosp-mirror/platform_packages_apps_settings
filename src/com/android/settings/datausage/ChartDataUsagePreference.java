@@ -15,10 +15,12 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.NetworkPolicy;
 import android.net.TrafficStats;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
@@ -34,7 +36,11 @@ import com.android.settings.widget.UsageView;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleData;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ChartDataUsagePreference extends Preference {
 
@@ -45,6 +51,7 @@ public class ChartDataUsagePreference extends Preference {
     private final int mWarningColor;
     private final int mLimitColor;
 
+    private Resources mResources;
     private NetworkPolicy mPolicy;
     private long mStart;
     private long mEnd;
@@ -54,6 +61,7 @@ public class ChartDataUsagePreference extends Preference {
 
     public ChartDataUsagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mResources = context.getResources();
         setSelectable(false);
         mLimitColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorError);
         mWarningColor = Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
@@ -72,6 +80,7 @@ public class ChartDataUsagePreference extends Preference {
         chart.clearPaths();
         chart.configureGraph(toInt(mEnd - mStart), top);
         calcPoints(chart, mNetworkCycleChartData.getUsageBuckets());
+        setupContentDescription(chart, mNetworkCycleChartData.getUsageBuckets());
         chart.setBottomLabels(new CharSequence[] {
                 Utils.formatDateRange(getContext(), mStart, mStart),
                 Utils.formatDateRange(getContext(), mEnd, mEnd),
@@ -118,6 +127,130 @@ public class ChartDataUsagePreference extends Preference {
         }
     }
 
+    private void setupContentDescription(UsageView chart, List<NetworkCycleData> usageSummary) {
+        final Context context = getContext();
+        final StringBuilder contentDescription = new StringBuilder();
+        final int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH;
+
+        // Setup a brief content description.
+        final String startDate = DateUtils.formatDateTime(context, mStart, flags);
+        final String endDate = DateUtils.formatDateTime(context, mEnd, flags);
+        final String briefContentDescription = mResources
+                .getString(R.string.data_usage_chart_brief_content_description, startDate, endDate);
+        contentDescription.append(briefContentDescription);
+
+        if (usageSummary == null || usageSummary.isEmpty()) {
+            final String noDataContentDescription = mResources
+                    .getString(R.string.data_usage_chart_no_data_content_description);
+            contentDescription.append(noDataContentDescription);
+            chart.setContentDescription(contentDescription);
+            return;
+        }
+
+        // Append more detailed stats.
+        String nodeDate;
+        String nodeContentDescription;
+        final List<DataUsageSummaryNode> densedStatsData = getDensedStatsData(usageSummary);
+        for (DataUsageSummaryNode data : densedStatsData) {
+            final int dataUsagePercentage = data.getDataUsagePercentage();
+            if (!data.isFromMultiNode() || dataUsagePercentage == 100) {
+                nodeDate = DateUtils.formatDateTime(context, data.getStartTime(), flags);
+            } else {
+                nodeDate = DateUtils.formatDateRange(context, data.getStartTime(),
+                        data.getEndTime(), flags);
+            }
+            nodeContentDescription = String.format(";%s %d%%", nodeDate, dataUsagePercentage);
+
+            contentDescription.append(nodeContentDescription);
+        }
+
+        chart.setContentDescription(contentDescription);
+    }
+
+    /**
+     * To avoid wordy data, e.g., Aug 2: 0%; Aug 3: 0%;...Aug 22: 0%; Aug 23: 2%.
+     * Collect the date of the same percentage, e.g., Aug 2 to Aug 22: 0%; Aug 23: 2%.
+     */
+    @VisibleForTesting
+    List<DataUsageSummaryNode> getDensedStatsData(List<NetworkCycleData> usageSummary) {
+        final List<DataUsageSummaryNode> dataUsageSummaryNodes = new ArrayList<>();
+        final long overallDataUsage = usageSummary.stream()
+                .mapToLong(NetworkCycleData::getTotalUsage).sum();
+        long cumulatedDataUsage = 0L;
+        int cumulatedDataUsagePercentage = 0;
+
+        // Collect List of DataUsageSummaryNode for data usage percentage information.
+        for (NetworkCycleData data : usageSummary) {
+            cumulatedDataUsage += data.getTotalUsage();
+            cumulatedDataUsagePercentage = (int) ((cumulatedDataUsage * 100) / overallDataUsage);
+
+            final DataUsageSummaryNode node = new DataUsageSummaryNode(data.getStartTime(),
+                    data.getEndTime(), cumulatedDataUsagePercentage);
+            dataUsageSummaryNodes.add(node);
+        }
+
+        // Group nodes of the same data usage percentage.
+        final Map<Integer, List<DataUsageSummaryNode>> nodesByDataUsagePercentage
+                = dataUsageSummaryNodes.stream().collect(
+                        Collectors.groupingBy(DataUsageSummaryNode::getDataUsagePercentage));
+
+        // Collect densed nodes from collection of the same  data usage percentage
+        final List<DataUsageSummaryNode> densedNodes = new ArrayList<>();
+        nodesByDataUsagePercentage.forEach((percentage, nodes) -> {
+            final long startTime = nodes.stream().mapToLong(DataUsageSummaryNode::getStartTime)
+                    .min().getAsLong();
+            final long endTime = nodes.stream().mapToLong(DataUsageSummaryNode::getEndTime)
+                    .max().getAsLong();
+
+            final DataUsageSummaryNode densedNode = new DataUsageSummaryNode(
+                    startTime, endTime, percentage);
+            if (nodes.size() > 1) {
+                densedNode.setFromMultiNode(true /* isFromMultiNode */);
+            }
+
+            densedNodes.add(densedNode);
+        });
+
+        return densedNodes.stream()
+                .sorted(Comparator.comparingInt(DataUsageSummaryNode::getDataUsagePercentage))
+                .collect(Collectors.toList());
+    }
+
+    @VisibleForTesting
+    class DataUsageSummaryNode {
+        private long mStartTime;
+        private long mEndTime;
+        private int mDataUsagePercentage;
+        private boolean mIsFromMultiNode;
+
+        public DataUsageSummaryNode(long startTime, long endTime, int dataUsagePercentage) {
+            mStartTime = startTime;
+            mEndTime = endTime;
+            mDataUsagePercentage = dataUsagePercentage;
+            mIsFromMultiNode = false;
+        }
+
+        public long getStartTime() {
+            return mStartTime;
+        }
+
+        public long getEndTime() {
+            return mEndTime;
+        }
+
+        public int getDataUsagePercentage() {
+            return mDataUsagePercentage;
+        }
+
+        public void setFromMultiNode(boolean isFromMultiNode) {
+            mIsFromMultiNode = isFromMultiNode;
+        }
+
+        public boolean isFromMultiNode() {
+            return mIsFromMultiNode;
+        }
+    }
+
     private int toInt(long l) {
         // Don't need that much resolution on these times.
         return (int) (l / (1000 * 60));
@@ -151,8 +284,8 @@ public class ChartDataUsagePreference extends Preference {
     }
 
     private CharSequence getLabel(long bytes, int str, int mLimitColor) {
-        Formatter.BytesResult result = Formatter.formatBytes(getContext().getResources(),
-                bytes, Formatter.FLAG_SHORTER | Formatter.FLAG_IEC_UNITS);
+        Formatter.BytesResult result = Formatter.formatBytes(mResources, bytes,
+                Formatter.FLAG_SHORTER | Formatter.FLAG_IEC_UNITS);
         CharSequence label = TextUtils.expandTemplate(getContext().getText(str),
                 result.value, result.units);
         return new SpannableStringBuilder().append(label, new ForegroundColorSpan(mLimitColor), 0);

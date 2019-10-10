@@ -16,10 +16,8 @@
 
 package com.android.settings.wifi.savedaccesspoints;
 
-
 import android.content.Context;
 import android.net.wifi.WifiManager;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -27,10 +25,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.AccessPointPreference.UserBadgeCache;
@@ -38,21 +32,22 @@ import com.android.settingslib.wifi.WifiSavedConfigUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Controller that manages a PreferenceGroup, which contains a list of saved access points.
  */
 public class SavedAccessPointsPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, OnStart, Preference.OnPreferenceClickListener,
-        WifiManager.ActionListener {
+        Preference.OnPreferenceClickListener {
 
-    private static final String TAG = "SavedAPPrefCtrl";
+    private static final String TAG = "SavedApPrefCtrl";
 
     private final WifiManager mWifiManager;
-
     private final UserBadgeCache mUserBadgeCache;
     private PreferenceGroup mPreferenceGroup;
     private SavedAccessPointsWifiSettings mHost;
+    @VisibleForTesting
+    List<AccessPoint> mAccessPoints;
 
     public SavedAccessPointsPreferenceController(Context context,
             String preferenceKey) {
@@ -68,86 +63,46 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mAccessPoints.size() > 0 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
         mPreferenceGroup = screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
-    public void onStart() {
         refreshSavedAccessPoints();
-    }
-
-    public void postRefreshSavedAccessPoints() {
-        ThreadUtils.postOnMainThread(() -> refreshSavedAccessPoints());
+        updatePreference();
+        super.displayPreference(screen);
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        final Preference preferenceInGroup = mPreferenceGroup.findPreference(preference.getKey());
         if (mHost != null) {
+            final Preference preferenceInGroup =
+                    mPreferenceGroup.findPreference(preference.getKey());
             mHost.showWifiPage((AccessPointPreference) preferenceInGroup);
         }
         return false;
     }
 
-    @Override
-    public void onSuccess() {
-        postRefreshSavedAccessPoints();
+    private void refreshSavedAccessPoints() {
+        mAccessPoints = WifiSavedConfigUtils.getAllConfigs(mContext, mWifiManager).stream()
+                .filter(accessPoint -> !accessPoint.isPasspointConfig())
+                .sorted(SavedNetworkComparator.INSTANCE)
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public void onFailure(int reason) {
-        postRefreshSavedAccessPoints();
-    }
-
-    @VisibleForTesting
-    void refreshSavedAccessPoints() {
-        if (mPreferenceGroup == null) {
-            Log.w(TAG, "PreferenceGroup is null, skipping.");
-            return;
-        }
-        final Context prefContext = mPreferenceGroup.getContext();
-
-        final List<AccessPoint> accessPoints =
-                WifiSavedConfigUtils.getAllConfigs(mContext, mWifiManager);
-        Collections.sort(accessPoints, SavedNetworkComparator.INSTANCE);
+    private void updatePreference() {
         mPreferenceGroup.removeAll();
+        for (AccessPoint accessPoint : mAccessPoints) {
+            final String key = accessPoint.getKey();
 
-        final int accessPointsSize = accessPoints.size();
-        for (int i = 0; i < accessPointsSize; ++i) {
-            AccessPoint ap = accessPoints.get(i);
-
-            if (mHost != null && mHost.isSubscriptionsFeatureEnabled()
-                    && ap.isPasspointConfig()) {
-                continue;
-            }
-
-            String key = ap.getKey();
-            AccessPointPreference preference = new AccessPointPreference(ap, prefContext,
-                    mUserBadgeCache, true);
+            final AccessPointPreference preference = new AccessPointPreference(accessPoint,
+                    mContext, mUserBadgeCache, true /* forSavedNetworks */);
             preference.setKey(key);
             preference.setIcon(null);
             preference.setOnPreferenceClickListener(this);
+
             mPreferenceGroup.addPreference(preference);
-            preference.setOrder(i);
-        }
-
-        if (mPreferenceGroup.getPreferenceCount() < 1) {
-            Log.w(TAG, "Saved networks activity loaded, but there are no saved networks!");
-            mPreferenceGroup.setVisible(false);
-        } else {
-            mPreferenceGroup.setVisible(true);
-        }
-
-        if (mHost != null && !mHost.isSubscriptionsFeatureEnabled()) {
-            mPreferenceGroup.setVisible(true);
-            mPreferenceGroup.setTitle(null);
-            mPreferenceGroup.setLayoutResource(R.layout.preference_category_no_label);
         }
     }
 }
