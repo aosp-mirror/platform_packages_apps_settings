@@ -34,7 +34,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 /** These settings are per app, so should not be returned in global search results. */
-public class AppNotificationSettings extends NotificationSettingsBase {
+public class AppNotificationSettings extends NotificationSettings {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 

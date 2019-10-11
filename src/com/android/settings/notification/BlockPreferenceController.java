@@ -35,10 +35,10 @@ public class BlockPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {
 
     private static final String KEY_BLOCK = "block";
-    private NotificationSettingsBase.ImportanceListener mImportanceListener;
+    private NotificationSettings.ImportanceListener mImportanceListener;
 
     public BlockPreferenceController(Context context,
-            NotificationSettingsBase.ImportanceListener importanceListener,
+            NotificationSettings.ImportanceListener importanceListener,
             NotificationBackend backend) {
         super(context, backend);
         mImportanceListener = importanceListener;

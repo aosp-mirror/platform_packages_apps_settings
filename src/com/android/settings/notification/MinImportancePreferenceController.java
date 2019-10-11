@@ -31,10 +31,10 @@ public class MinImportancePreferenceController extends NotificationPreferenceCon
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {
 
     private static final String KEY_IMPORTANCE = "min_importance";
-    private NotificationSettingsBase.ImportanceListener mImportanceListener;
+    private NotificationSettings.ImportanceListener mImportanceListener;
 
     public MinImportancePreferenceController(Context context,
-            NotificationSettingsBase.ImportanceListener importanceListener,
+            NotificationSettings.ImportanceListener importanceListener,
             NotificationBackend backend) {
         super(context, backend);
         mImportanceListener = importanceListener;

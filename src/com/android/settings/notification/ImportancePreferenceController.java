@@ -32,10 +32,10 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {
 
     private static final String KEY_IMPORTANCE = "importance";
-    private NotificationSettingsBase.ImportanceListener mImportanceListener;
+    private NotificationSettings.ImportanceListener mImportanceListener;
 
     public ImportancePreferenceController(Context context,
-            NotificationSettingsBase.ImportanceListener importanceListener,
+            NotificationSettings.ImportanceListener importanceListener,
             NotificationBackend backend) {
         super(context, backend);
         mImportanceListener = importanceListener;

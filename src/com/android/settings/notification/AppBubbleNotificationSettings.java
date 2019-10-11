@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class AppBubbleNotificationSettings extends NotificationSettingsBase implements
+public class AppBubbleNotificationSettings extends NotificationSettings implements
         GlobalBubblePermissionObserverMixin.Listener {
     private static final String TAG = "AppBubNotiSettings";
     private GlobalBubblePermissionObserverMixin mObserverMixin;

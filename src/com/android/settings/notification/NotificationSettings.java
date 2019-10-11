@@ -64,7 +64,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-abstract public class NotificationSettingsBase extends DashboardFragment {
+abstract public class NotificationSettings extends DashboardFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
