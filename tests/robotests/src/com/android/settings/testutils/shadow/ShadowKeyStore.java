@@ -33,7 +33,7 @@ public class ShadowKeyStore {
     }
 
     @Implementation
-    public boolean isHardwareBacked() {
+    protected boolean isHardwareBacked() {
         return sIsHardwareBacked;
     }
 

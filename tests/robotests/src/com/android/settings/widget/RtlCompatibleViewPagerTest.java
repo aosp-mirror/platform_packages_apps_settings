@@ -19,21 +19,21 @@ package com.android.settings.widget;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.os.Parcelable;
-import androidx.viewpager.widget.PagerAdapter;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.viewpager.widget.PagerAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Locale;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RtlCompatibleViewPagerTest {
 
     private Locale mLocaleEn;
@@ -80,7 +80,7 @@ public class RtlCompatibleViewPagerTest {
 
         private static final int ITEM_COUNT = 2;
 
-        public ViewPagerAdapter() {
+        private ViewPagerAdapter() {
         }
 
         @Override

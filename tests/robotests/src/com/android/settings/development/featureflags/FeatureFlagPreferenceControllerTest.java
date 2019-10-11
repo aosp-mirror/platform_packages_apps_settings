@@ -16,59 +16,70 @@
 
 package com.android.settings.development.featureflags;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
-import androidx.preference.PreferenceScreen;
+import android.os.Build;
+import android.os.SystemProperties;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FeatureFlagPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private PreferenceCategory mCategory;
     private Context mContext;
-    private LifecycleOwner mLifecycleOwner;
-    private Lifecycle mLifecycle;
     private FeatureFlagsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = new FeatureFlagsPreferenceController(mContext, mLifecycle);
-        when(mScreen.getContext()).thenReturn(mContext);
+        mController = new FeatureFlagsPreferenceController(mContext, "test_key");
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mCategory);
+        when(mCategory.getContext()).thenReturn(mContext);
         mController.displayPreference(mScreen);
     }
 
     @Test
-    public void verifyConstants() {
-        assertThat(mController.isAvailable()).isTrue();
-        assertThat(mController.getPreferenceKey()).isNull();
+    public void getAvailability_debug_available() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+
+    @Test
+    public void getAvailability_user_unavailable() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void onStart_shouldRefreshFeatureFlags() {
-        mLifecycle.handleLifecycleEvent(ON_START);
+        mController.onStart();
 
-        verify(mScreen).removeAll();
-        verify(mScreen, atLeastOnce()).addPreference(any(FeatureFlagPreference.class));
+        verify(mCategory).removeAll();
+        verify(mCategory, atLeastOnce()).addPreference(any(FeatureFlagPreference.class));
     }
 }

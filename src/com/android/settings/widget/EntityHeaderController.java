@@ -16,14 +16,11 @@
 
 package com.android.settings.widget;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .ACTION_OPEN_APP_NOTIFICATION_SETTING;
-
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -31,9 +28,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.annotation.IntDef;
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -43,14 +37,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.ActionBarShadowController;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -59,12 +59,12 @@ public class EntityHeaderController {
 
     @IntDef({ActionType.ACTION_NONE,
             ActionType.ACTION_NOTIF_PREFERENCE,
-            ActionType.ACTION_DND_RULE_PREFERENCE,})
+            ActionType.ACTION_EDIT_PREFERENCE,})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ActionType {
         int ACTION_NONE = 0;
         int ACTION_NOTIF_PREFERENCE = 1;
-        int ACTION_DND_RULE_PREFERENCE = 2;
+        int ACTION_EDIT_PREFERENCE = 2;
     }
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
@@ -97,7 +97,7 @@ public class EntityHeaderController {
 
     private boolean mIsInstantApp;
 
-    private View.OnClickListener mEditRuleNameOnClickListener;
+    private View.OnClickListener mEditOnClickListener;
 
     /**
      * Creates a new instance of the controller.
@@ -222,8 +222,8 @@ public class EntityHeaderController {
         return this;
     }
 
-    public EntityHeaderController setEditZenRuleNameListener(View.OnClickListener listener) {
-        this.mEditRuleNameOnClickListener = listener;
+    public EntityHeaderController setEditListener(View.OnClickListener listener) {
+        this.mEditOnClickListener = listener;
         return this;
     }
 
@@ -236,6 +236,7 @@ public class EntityHeaderController {
         pref.setOrder(-1000);
         pref.setSelectable(false);
         pref.setKey(PREF_KEY_APP_HEADER);
+        pref.setAllowDividerBelow(true);
         return pref;
     }
 
@@ -317,10 +318,11 @@ public class EntityHeaderController {
             return this;
         }
         actionBar.setBackgroundDrawable(
-                new ColorDrawable(Utils.getColorAttr(activity, android.R.attr.colorPrimary)));
+                new ColorDrawable(
+                        Utils.getColorAttrDefaultColor(activity, android.R.attr.colorPrimaryDark)));
         actionBar.setElevation(0);
         if (mRecyclerView != null && mLifecycle != null) {
-            ActionBarShadowController.attachToRecyclerView(mActivity, mLifecycle, mRecyclerView);
+            ActionBarShadowController.attachToView(mActivity, mLifecycle, mRecyclerView);
         }
 
         return this;
@@ -339,13 +341,13 @@ public class EntityHeaderController {
             return;
         }
         switch (action) {
-            case ActionType.ACTION_DND_RULE_PREFERENCE: {
-                if (mEditRuleNameOnClickListener == null) {
+            case ActionType.ACTION_EDIT_PREFERENCE: {
+                if (mEditOnClickListener == null) {
                     button.setVisibility(View.GONE);
                 } else {
-                    button.setImageResource(R.drawable.ic_mode_edit);
+                    button.setImageResource(com.android.internal.R.drawable.ic_mode_edit);
                     button.setVisibility(View.VISIBLE);
-                    button.setOnClickListener(mEditRuleNameOnClickListener);
+                    button.setOnClickListener(mEditOnClickListener);
                 }
                 return;
             }
@@ -353,14 +355,13 @@ public class EntityHeaderController {
                 if (mAppNotifPrefIntent == null) {
                     button.setVisibility(View.GONE);
                 } else {
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
-                                    .actionWithSource(mAppContext, mMetricsCategory,
-                                            ACTION_OPEN_APP_NOTIFICATION_SETTING);
-                            mFragment.startActivity(mAppNotifPrefIntent);
-                        }
+                    button.setOnClickListener(v -> {
+                        FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
+                                .action(SettingsEnums.PAGE_UNKNOWN,
+                                        SettingsEnums.ACTION_OPEN_APP_NOTIFICATION_SETTING,
+                                        mMetricsCategory,
+                                        null, 0);
+                        mFragment.startActivity(mAppNotifPrefIntent);
                     });
                     button.setVisibility(View.VISIBLE);
                 }

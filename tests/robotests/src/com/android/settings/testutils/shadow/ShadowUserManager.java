@@ -21,66 +21,67 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.UserManager.EnforcingUser;
-import android.util.SparseArray;
+
+import com.google.android.collect.Maps;
 
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.annotation.Resetter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Implements(value = UserManager.class, inheritImplementationMethods = true)
+@Implements(value = UserManager.class)
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
-    private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
+    private static boolean sIsSupportsMultipleUsers;
+
     private final List<String> mRestrictions = new ArrayList<>();
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
     private final Set<Integer> mManagedProfiles = new HashSet<>();
     private boolean mIsQuietModeEnabled = false;
-
-    @Resetter
-    public void reset() {
-        mUserInfos.clear();
-        mRestrictions.clear();
-        mUserProfileInfos.clear();
-        mRestrictionSources.clear();
-        mManagedProfiles.clear();
-        mIsQuietModeEnabled = false;
-    }
-
-    public void setUserInfo(int userHandle, UserInfo userInfo) {
-        mUserInfos.put(userHandle, userInfo);
-    }
-
-    @Implementation
-    public UserInfo getUserInfo(int userHandle) {
-        return mUserInfos.get(userHandle);
-    }
+    private int[] profileIdsForUser = new int[0];
+    private boolean mUserSwitchEnabled;
+    private final Map<Integer, Integer> mSameProfileGroupIds = Maps.newHashMap();
 
     public void addProfile(UserInfo userInfo) {
         mUserProfileInfos.add(userInfo);
     }
 
+    @Resetter
+    public static void reset() {
+        sIsSupportsMultipleUsers = false;
+    }
+
     @Implementation
-    public List<UserInfo> getProfiles(@UserIdInt int userHandle) {
+    protected List<UserInfo> getProfiles(@UserIdInt int userHandle) {
         return mUserProfileInfos;
     }
 
     @Implementation
-    public int getCredentialOwnerProfile(@UserIdInt int userHandle) {
+    protected int[] getProfileIds(@UserIdInt int userHandle, boolean enabledOnly) {
+        int[] ids = new int[mUserProfileInfos.size()];
+        for (int i = 0; i < mUserProfileInfos.size(); i++) {
+            ids[i] = mUserProfileInfos.get(i).id;
+        }
+        return ids;
+    }
+
+    @Implementation
+    protected int getCredentialOwnerProfile(@UserIdInt int userHandle) {
         return userHandle;
     }
 
     @Implementation
-    public boolean hasBaseUserRestriction(String restrictionKey, UserHandle userHandle) {
+    protected boolean hasBaseUserRestriction(String restrictionKey, UserHandle userHandle) {
         return mRestrictions.contains(restrictionKey);
     }
 
@@ -94,9 +95,13 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public List<EnforcingUser> getUserRestrictionSources(
+    protected List<EnforcingUser> getUserRestrictionSources(
             String restrictionKey, UserHandle userHandle) {
-        return mRestrictionSources.get(restrictionKey + userHandle.getIdentifier());
+        // Return empty list when there is no enforcing user, otherwise might trigger
+        // NullPointer Exception in RestrictedLockUtils.checkIfRestrictionEnforced.
+        List<EnforcingUser> enforcingUsers =
+                mRestrictionSources.get(restrictionKey + userHandle.getIdentifier());
+        return enforcingUsers == null ? Collections.emptyList() : enforcingUsers;
     }
 
     public void setUserRestrictionSources(
@@ -105,20 +110,50 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public boolean isManagedProfile(@UserIdInt int userId) {
-        return mManagedProfiles.contains(userId);
-    }
-
-    public void addManagedProfile(int userId) {
-        mManagedProfiles.add(userId);
-    }
-
-    @Implementation
-    public boolean isQuietModeEnabled(UserHandle userHandle) {
+    protected boolean isQuietModeEnabled(UserHandle userHandle) {
         return mIsQuietModeEnabled;
     }
 
     public void setQuietModeEnabled(boolean enabled) {
         mIsQuietModeEnabled = enabled;
+    }
+
+    @Implementation
+    protected int[] getProfileIdsWithDisabled(@UserIdInt int userId) {
+        return profileIdsForUser;
+    }
+
+    public void setProfileIdsWithDisabled(int[] profileIds) {
+        profileIdsForUser = profileIds;
+    }
+
+    @Implementation
+    protected boolean isUserSwitcherEnabled() {
+        return mUserSwitchEnabled;
+    }
+
+    public void setUserSwitcherEnabled(boolean userSwitchEnabled) {
+        mUserSwitchEnabled = userSwitchEnabled;
+    }
+
+    @Implementation
+    protected static boolean supportsMultipleUsers() {
+        return sIsSupportsMultipleUsers;
+    }
+
+    @Implementation
+    protected boolean isSameProfileGroup(@UserIdInt int userId, int otherUserId) {
+        return mSameProfileGroupIds.containsKey(userId)
+                && mSameProfileGroupIds.get(userId) == otherUserId
+                || mSameProfileGroupIds.containsKey(otherUserId)
+                && mSameProfileGroupIds.get(otherUserId) == userId;
+    }
+
+    public Map<Integer, Integer> getSameProfileGroupIds() {
+        return mSameProfileGroupIds;
+    }
+
+    public void setSupportsMultipleUsers(boolean supports) {
+        sIsSupportsMultipleUsers = supports;
     }
 }

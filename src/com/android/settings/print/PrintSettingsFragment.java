@@ -18,13 +18,11 @@ package com.android.settings.print;
 
 import static com.android.settings.print.PrintSettingPreferenceController.shouldShowToUser;
 
-import android.app.LoaderManager.LoaderCallbacks;
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
-import android.content.AsyncTaskLoader;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -35,12 +33,9 @@ import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.print.PrintManager.PrintJobStateChangeListener;
-import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -51,11 +46,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.utils.ProfileSettingsPreferenceFragment;
+import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ import java.util.List;
 /**
  * Fragment with the top level print settings.
  */
+@SearchIndexable
 public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         implements Indexable, OnClickListener {
     public static final String TAG = "PrintSettingsFragment";
@@ -94,7 +96,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.PRINT_SETTINGS;
+        return SettingsEnums.PRINT_SETTINGS;
     }
 
     @Override
@@ -165,7 +167,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
             PrintManager printManager =
                     (PrintManager) getContext().getSystemService(Context.PRINT_SERVICE);
             if (printManager != null) {
-                return new PrintServicesLoader(printManager, getContext(),
+                return new SettingsPrintServicesLoader(printManager, getContext(),
                         PrintManager.ALL_SERVICES);
             } else {
                 return null;
@@ -191,7 +193,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
             }
 
             for (PrintServiceInfo service : services) {
-                Preference preference = new Preference(context);
+                AppPreference preference = new AppPreference(context);
 
                 String title = service.getResolveInfo().loadLabel(pm).toString();
                 preference.setTitle(title);
@@ -240,7 +242,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         }
         Preference preference = new Preference(getPrefContext());
         preference.setTitle(R.string.print_menu_item_add_service);
-        preference.setIcon(R.drawable.ic_menu_add);
+        preference.setIcon(R.drawable.ic_add_24dp);
         preference.setOrder(ORDER_LAST);
         preference.setIntent(addNewServiceIntent);
         preference.setPersistent(false);
@@ -354,7 +356,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                                     printJob.getCreationTime(), printJob.getCreationTime(),
                                     DateFormat.SHORT, DateFormat.SHORT)));
 
-                    TypedArray a = getActivity().obtainStyledAttributes(new int[] {
+                    TypedArray a = getActivity().obtainStyledAttributes(new int[]{
                             android.R.attr.colorControlNormal});
                     int tintColor = a.getColor(0, 0);
                     a.recycle();

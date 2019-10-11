@@ -16,27 +16,30 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.CoolColorTemperaturePreferenceController.COLOR_TEMPERATURE_PROPERTY;
+import static com.android.settings.development.CoolColorTemperaturePreferenceController
+        .COLOR_TEMPERATURE_PROPERTY;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CoolColorTemperaturePreferenceControllerTest {
 
     private Context mContext;

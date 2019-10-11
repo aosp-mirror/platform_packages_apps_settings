@@ -16,13 +16,15 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="dream_overview_screen"
-    android:title="@string/screensaver_settings_title" >
+    android:title="@string/screensaver_settings_title">
 
     <com.android.settings.widget.GearPreference
         android:key="current_screensaver"
         android:title="@string/screensaver_settings_current"
-        android:fragment="com.android.settings.dream.CurrentDreamPicker" />
+        android:fragment="com.android.settings.dream.CurrentDreamPicker"
+        settings:controller="com.android.settings.dream.CurrentDreamPreferenceController" />
 
     <Preference
         android:key="when_to_start"
@@ -33,7 +35,7 @@
     <!-- Layout preference doesn't obey allowDividerAbove, so put it in a PreferenceCategory -->
     <PreferenceCategory
         android:key="dream_start_now_category">
-        <com.android.settings.applications.LayoutPreference
+        <com.android.settingslib.widget.LayoutPreference
             android:key="dream_start_now_button_container"
             android:selectable="false"
             android:layout="@layout/dream_start_button" />

@@ -18,17 +18,17 @@ package com.android.settings.fuelgauge;
 
 import android.annotation.Nullable;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.graph.BatteryMeterDrawableBase;
+import com.android.settingslib.graph.ThemedBatteryDrawable;
 
 public class BatteryMeterView extends ImageView {
     @VisibleForTesting
@@ -37,6 +37,8 @@ public class BatteryMeterView extends ImageView {
     ColorFilter mErrorColorFilter;
     @VisibleForTesting
     ColorFilter mAccentColorFilter;
+    @VisibleForTesting
+    ColorFilter mForegroundColorFilter;
 
     public BatteryMeterView(Context context) {
         this(context, null, 0);
@@ -51,25 +53,30 @@ public class BatteryMeterView extends ImageView {
 
         final int frameColor = context.getColor(R.color.meter_background_color);
         mAccentColorFilter = new PorterDuffColorFilter(
-                Utils.getColorAttr(context, android.R.attr.colorAccent), PorterDuff.Mode.SRC_IN);
+                Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent),
+                PorterDuff.Mode.SRC);
         mErrorColorFilter = new PorterDuffColorFilter(
                 context.getColor(R.color.battery_icon_color_error), PorterDuff.Mode.SRC_IN);
-
+        mForegroundColorFilter =new PorterDuffColorFilter(
+                Utils.getColorAttrDefaultColor(context, android.R.attr.colorForeground),
+                PorterDuff.Mode.SRC);
         mDrawable = new BatteryMeterDrawable(context, frameColor);
-        mDrawable.setShowPercent(false);
-        mDrawable.setBatteryColorFilter(mAccentColorFilter);
-        mDrawable.setWarningColorFilter(
-                new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
+        mDrawable.setColorFilter(mAccentColorFilter);
         setImageDrawable(mDrawable);
     }
 
     public void setBatteryLevel(int level) {
         mDrawable.setBatteryLevel(level);
-        if (level < mDrawable.getCriticalLevel()) {
-            mDrawable.setBatteryColorFilter(mErrorColorFilter);
-        } else {
-            mDrawable.setBatteryColorFilter(mAccentColorFilter);
-        }
+        updateColorFilter();
+    }
+
+    public void setPowerSave(boolean powerSave) {
+        mDrawable.setPowerSaveEnabled(powerSave);
+        updateColorFilter();
+    }
+
+    public boolean getPowerSave() {
+        return mDrawable.getPowerSaveEnabled();
     }
 
     public int getBatteryLevel() {
@@ -85,7 +92,19 @@ public class BatteryMeterView extends ImageView {
         return mDrawable.getCharging();
     }
 
-    public static class BatteryMeterDrawable extends BatteryMeterDrawableBase {
+    private void updateColorFilter() {
+        final boolean powerSaveEnabled = mDrawable.getPowerSaveEnabled();
+        final int level = mDrawable.getBatteryLevel();
+        if (powerSaveEnabled) {
+            mDrawable.setColorFilter(mForegroundColorFilter);
+        } else if (level < mDrawable.getCriticalLevel()) {
+            mDrawable.setColorFilter(mErrorColorFilter);
+        } else {
+            mDrawable.setColorFilter(mAccentColorFilter);
+        }
+    }
+
+    public static class BatteryMeterDrawable extends ThemedBatteryDrawable {
         private final int mIntrinsicWidth;
         private final int mIntrinsicHeight;
 
@@ -107,16 +126,5 @@ public class BatteryMeterView extends ImageView {
         public int getIntrinsicHeight() {
             return mIntrinsicHeight;
         }
-
-        public void setWarningColorFilter(@Nullable ColorFilter colorFilter) {
-            mWarningTextPaint.setColorFilter(colorFilter);
-        }
-
-        public void setBatteryColorFilter(@Nullable ColorFilter colorFilter) {
-            mFramePaint.setColorFilter(colorFilter);
-            mBatteryPaint.setColorFilter(colorFilter);
-            mBoltPaint.setColorFilter(colorFilter);
-        }
     }
-
 }

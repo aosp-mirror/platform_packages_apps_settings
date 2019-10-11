@@ -16,12 +16,14 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -58,6 +60,11 @@ public class SummaryTip extends BatteryTip {
     }
 
     @Override
+    public int getIconTintColorId() {
+        return R.color.battery_good_color_light;
+    }
+
+    @Override
     public void updateState(BatteryTip tip) {
         mState = tip.mState;
     }
@@ -70,7 +77,7 @@ public class SummaryTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_SUMMARY_TIP,
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_SUMMARY_TIP,
                 mState);
     }
 

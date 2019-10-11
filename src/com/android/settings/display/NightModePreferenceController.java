@@ -17,10 +17,11 @@ import static android.content.Context.UI_MODE_SERVICE;
 
 import android.app.UiModeManager;
 import android.content.Context;
+import android.util.Log;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -51,8 +52,7 @@ public class NightModePreferenceController extends AbstractPreferenceController 
             setVisible(screen, KEY_NIGHT_MODE, false /* visible */);
             return;
         }
-        ListPreference mNightModePreference = (ListPreference) screen.findPreference(
-                KEY_NIGHT_MODE);
+        final ListPreference mNightModePreference = screen.findPreference(KEY_NIGHT_MODE);
         if (mNightModePreference != null) {
             final UiModeManager uiManager =
                     (UiModeManager) mContext.getSystemService(UI_MODE_SERVICE);

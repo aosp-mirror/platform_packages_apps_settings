@@ -16,13 +16,13 @@
 
 package com.android.settings.applications.appinfo;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_OPEN_APP_SETTING;
-
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
 
 import com.android.settings.overlay.FeatureFactory;
 
@@ -60,8 +60,10 @@ public class AppSettingPreferenceController extends AppInfoPreferenceControllerB
             return false;
         }
         FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
-                .actionWithSource(mContext, mParent.getMetricsCategory(),
-                        ACTION_OPEN_APP_SETTING);
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        SettingsEnums.ACTION_OPEN_APP_SETTING,
+                        mParent.getMetricsCategory(),
+                        null, 0);
         mContext.startActivity(intent);
         return true;
     }

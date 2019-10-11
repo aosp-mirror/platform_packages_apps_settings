@@ -16,8 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
-        .REQUEST_CODE_DEBUG_APP;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_DEBUG_APP;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,13 +24,13 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferenceController
         implements PreferenceControllerMixin, OnActivityResultListener {
@@ -39,13 +38,13 @@ public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferen
     private static final String DEBUG_APP_KEY = "debug_app";
 
     private final DevelopmentSettingsDashboardFragment mFragment;
-    private final PackageManagerWrapper mPackageManager;
+    private final PackageManager mPackageManager;
 
     public SelectDebugAppPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
-        mPackageManager = new PackageManagerWrapper(mContext.getPackageManager());
+        mPackageManager = mContext.getPackageManager();
     }
 
     @Override

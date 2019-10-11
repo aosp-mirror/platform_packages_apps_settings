@@ -22,7 +22,7 @@ import org.robolectric.annotation.Implements;
 
 @Implements(PowerWhitelistBackend.class)
 public class ShadowPowerWhitelistBackend {
-    public void __constructor__() {
+    protected void __constructor__() {
         // Do nothing
     }
 }

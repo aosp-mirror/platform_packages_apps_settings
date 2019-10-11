@@ -16,22 +16,24 @@
 package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.os.UserHandle;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 
@@ -41,36 +43,36 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
 public class AccountSyncPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
     private AccountManager mAccountManager;
 
-    private Context mContext;
+    private Activity mActivity;
     private AccountSyncPreferenceController mController;
     private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mActivity = Robolectric.setupActivity(Activity.class);
         ShadowApplication.getInstance().setSystemService(Context.ACCOUNT_SERVICE, mAccountManager);
 
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(
                 new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
 
-        mPreference = new Preference(mContext);
+        mPreference = new Preference(mActivity);
         mPreference.setKey("account_sync");
 
-        mController = new AccountSyncPreferenceController(mContext);
+        mController = new AccountSyncPreferenceController(mActivity);
         mController.init(new Account("acct1", "type1"), new UserHandle(3));
     }
 
@@ -101,7 +103,7 @@ public class AccountSyncPreferenceControllerTest {
         mController.updateSummary(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.account_sync_summary_all_off));
+                .isEqualTo(mActivity.getString(R.string.account_sync_summary_all_off));
     }
 
     @Test
@@ -114,7 +116,7 @@ public class AccountSyncPreferenceControllerTest {
         mController.updateSummary(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.account_sync_summary_all_off));
+                .isEqualTo(mActivity.getString(R.string.account_sync_summary_all_off));
     }
 
     @Test
@@ -128,7 +130,7 @@ public class AccountSyncPreferenceControllerTest {
         mController.updateSummary(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.account_sync_summary_all_off));
+                .isEqualTo(mActivity.getString(R.string.account_sync_summary_all_off));
     }
 
     @Test
@@ -143,7 +145,7 @@ public class AccountSyncPreferenceControllerTest {
         mController.updateSummary(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.account_sync_summary_all_off));
+                .isEqualTo(mActivity.getString(R.string.account_sync_summary_all_off));
     }
 
     @Test
@@ -156,7 +158,7 @@ public class AccountSyncPreferenceControllerTest {
         mController.updateSummary(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.account_sync_summary_all_on));
+                .isEqualTo(mActivity.getString(R.string.account_sync_summary_all_on));
     }
 
     @Test
@@ -178,6 +180,6 @@ public class AccountSyncPreferenceControllerTest {
         mController.updateSummary(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.account_sync_summary_some_on, 3, 4));
+                .isEqualTo(mActivity.getString(R.string.account_sync_summary_some_on, 3, 4));
     }
 }

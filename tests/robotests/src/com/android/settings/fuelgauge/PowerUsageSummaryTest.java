@@ -15,13 +15,15 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.PowerUsageSummary.BATTERY_INFO_LOADER;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADVANCED_BATTERY;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -32,32 +34,30 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.LoaderManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.SparseArray;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.display.BatteryPercentagePreferenceController;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -70,18 +70,15 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // TODO: Improve this test class so that it starts up the real activity and fragment.
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-    SettingsShadowResources.class,
-    SettingsShadowResources.SettingsShadowTheme.class,
-})
+@RunWith(RobolectricTestRunner.class)
 public class PowerUsageSummaryTest {
 
     private static final int UID = 123;
@@ -119,8 +116,6 @@ public class PowerUsageSummaryTest {
     private SettingsActivity mSettingsActivity;
     @Mock
     private LoaderManager mLoaderManager;
-    @Mock
-    private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Menu mMenu;
     @Mock
@@ -129,6 +124,14 @@ public class PowerUsageSummaryTest {
     private MenuItem mAdvancedPageMenu;
     @Mock
     private BatteryInfo mBatteryInfo;
+    @Mock
+    private ContentResolver mContentResolver;
+    @Mock
+    private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
+    @Mock
+    private VisibilityLoggerMixin mVisibilityLoggerMixin;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -160,7 +163,7 @@ public class PowerUsageSummaryTest {
                 .thenReturn(sAdditionalBatteryInfoIntent);
         when(mBatteryHelper.getTotalPower()).thenReturn(TOTAL_POWER);
         when(mBatteryHelper.getStats().computeBatteryRealtime(anyLong(), anyInt()))
-            .thenReturn(TIME_SINCE_LAST_FULL_CHARGE_US);
+                .thenReturn(TIME_SINCE_LAST_FULL_CHARGE_US);
 
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
         mNormalBatterySipper.totalPowerMah = POWER_MAH;
@@ -188,6 +191,11 @@ public class PowerUsageSummaryTest {
         mFragment.mScreenUsagePref = mScreenUsagePref;
         mFragment.mLastFullChargePref = mLastFullChargePref;
         mFragment.mBatteryUtils = spy(new BatteryUtils(mRealContext));
+        ReflectionHelpers.setField(mFragment, "mVisibilityLoggerMixin", mVisibilityLoggerMixin);
+        ReflectionHelpers.setField(mFragment, "mBatteryBroadcastReceiver",
+                mBatteryBroadcastReceiver);
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+        when(mFragment.getContentResolver()).thenReturn(mContentResolver);
     }
 
     @Test
@@ -219,44 +227,12 @@ public class PowerUsageSummaryTest {
     public void nonIndexableKeys_MatchPreferenceKeys() {
         final Context context = RuntimeEnvironment.application;
         final List<String> niks =
-            PowerUsageSummary.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(context);
+                PowerUsageSummary.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(context);
 
         final List<String> keys =
-            XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.power_usage_summary);
+                XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.power_usage_summary);
 
         assertThat(keys).containsAllIn(niks);
-    }
-
-    @Test
-    public void preferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
-        final Context context = RuntimeEnvironment.application;
-        final PowerUsageSummary fragment = new PowerUsageSummary();
-        final List<String> preferenceScreenKeys =
-            XmlTestUtils.getKeysFromPreferenceXml(context, fragment.getPreferenceScreenResId());
-        final List<String> preferenceKeys = new ArrayList<>();
-
-        for (AbstractPreferenceController controller : fragment.createPreferenceControllers(context)) {
-            preferenceKeys.add(controller.getPreferenceKey());
-        }
-
-        assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
-    }
-
-    @Test
-    public void updateAnomalySparseArray() {
-        mFragment.mAnomalySparseArray = new SparseArray<>();
-        final List<Anomaly> anomalies = new ArrayList<>();
-        final Anomaly anomaly1 = new Anomaly.Builder().setUid(UID).build();
-        final Anomaly anomaly2 = new Anomaly.Builder().setUid(UID).build();
-        final Anomaly anomaly3 = new Anomaly.Builder().setUid(UID_2).build();
-        anomalies.add(anomaly1);
-        anomalies.add(anomaly2);
-        anomalies.add(anomaly3);
-
-        mFragment.updateAnomalySparseArray(anomalies);
-
-        assertThat(mFragment.mAnomalySparseArray.get(UID)).containsExactly(anomaly1, anomaly2);
-        assertThat(mFragment.mAnomalySparseArray.get(UID_2)).containsExactly(anomaly3);
     }
 
     @Test
@@ -267,25 +243,25 @@ public class PowerUsageSummaryTest {
         mFragment.restartBatteryTipLoader();
 
         verify(mLoaderManager)
-            .restartLoader(eq(PowerUsageSummary.BATTERY_TIP_LOADER), eq(Bundle.EMPTY), any());
+                .restartLoader(eq(PowerUsageSummary.BATTERY_TIP_LOADER), eq(Bundle.EMPTY), any());
     }
 
     @Test
     public void showBothEstimates_summariesAreBothModified() {
         when(mFeatureFactory.powerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(any()))
-            .thenReturn(true);
+                .thenReturn(true);
         doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) {
                 return mRealContext.getString(
-                    R.string.power_usage_old_debug, invocation.getArguments()[0]);
+                        R.string.power_usage_old_debug, invocation.getArguments()[0]);
             }
         }).when(mFeatureFactory.powerUsageFeatureProvider).getOldEstimateDebugString(any());
         doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) {
                 return mRealContext.getString(
-                    R.string.power_usage_enhanced_debug, invocation.getArguments()[0]);
+                        R.string.power_usage_enhanced_debug, invocation.getArguments()[0]);
             }
         }).when(mFeatureFactory.powerUsageFeatureProvider).getEnhancedEstimateDebugString(any());
 
@@ -381,43 +357,32 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void getDashboardLabel_returnsCorrectLabel() {
-        BatteryInfo info = new BatteryInfo();
-        info.batteryPercentString = "3%";
-        assertThat(PowerUsageSummary.getDashboardLabel(mRealContext, info))
-                .isEqualTo(info.batteryPercentString);
+    public void onResume_registerContentObserver() {
+        mFragment.onResume();
 
-        info.remainingLabel = "Phone will shut down soon";
-        assertThat(PowerUsageSummary.getDashboardLabel(mRealContext, info))
-                .isEqualTo("3% - Phone will shut down soon");
+        verify(mContentResolver).registerContentObserver(
+                Settings.Global.getUriFor(Settings.Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
+                false,
+                mFragment.mSettingsObserver);
     }
 
     @Test
-    public void percentageSettingAvailable_shouldNotBeHiddenInSearch() {
-        final Resources resources = spy(mRealContext.getResources());
-        doReturn(true).when(resources).getBoolean(anyInt());
-        doReturn(resources).when(mRealContext).getResources();
-        final String prefKey = new BatteryPercentagePreferenceController(mRealContext)
-                .getPreferenceKey();
+    public void onPause_unregisterContentObserver() {
+        mFragment.onPause();
 
-        final List<String> nonIndexableKeys =
-                PowerUsageSummary.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mRealContext);
-
-        assertThat(nonIndexableKeys).doesNotContain(prefKey);
+        verify(mContentResolver).unregisterContentObserver(
+                mFragment.mSettingsObserver);
     }
 
     @Test
-    public void percentageSettingNotAvailable_shouldBeHiddenInSearch() {
-        final Resources resources = spy(mRealContext.getResources());
-        doReturn(false).when(resources).getBoolean(anyInt());
-        doReturn(resources).when(mRealContext).getResources();
-        final String prefKey = new BatteryPercentagePreferenceController(mRealContext)
-                .getPreferenceKey();
+    public void restartBatteryInfoLoader_contextNull_doNothing() {
+        when(mFragment.getContext()).thenReturn(null);
+        when(mFragment.getLoaderManager()).thenReturn(mLoaderManager);
 
-        final List<String> nonIndexableKeys =
-                PowerUsageSummary.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mRealContext);
+        mFragment.restartBatteryInfoLoader();
 
-        assertThat(nonIndexableKeys).contains(prefKey);
+        verify(mLoaderManager, never()).restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
+                mFragment.mBatteryInfoLoaderCallbacks);
     }
 
     public static class TestFragment extends PowerUsageSummary {
@@ -430,6 +395,12 @@ public class PowerUsageSummaryTest {
         @Override
         public Context getContext() {
             return mContext;
+        }
+
+        @Override
+        protected ContentResolver getContentResolver() {
+            // Override it so we can access this method in test
+            return super.getContentResolver();
         }
 
         @Override

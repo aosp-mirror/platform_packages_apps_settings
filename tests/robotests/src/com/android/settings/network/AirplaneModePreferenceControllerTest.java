@@ -17,34 +17,36 @@
 package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
+
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AirplaneModePreferenceControllerTest {
 
     private static final int ON = 1;
@@ -184,12 +186,5 @@ public class AirplaneModePreferenceControllerTest {
         final AirplaneModePreferenceController controller =
                 new AirplaneModePreferenceController(mContext,"toggle_airplane");
         assertThat(controller.isSliceable()).isTrue();
-    }
-
-    @Test
-    public void isSliceableIncorrectKey_returnsFalse() {
-        final AirplaneModePreferenceController controller =
-                new AirplaneModePreferenceController(mContext, "bad_key");
-        assertThat(controller.isSliceable()).isFalse();
     }
 }

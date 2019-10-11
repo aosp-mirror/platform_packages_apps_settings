@@ -15,20 +15,18 @@
  */
 package com.android.settings.bluetooth;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.View;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.widget.SwitchWidgetController;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -42,10 +40,6 @@ public class BluetoothSwitchPreferenceController
         implements LifecycleObserver, OnStart, OnStop,
         SwitchWidgetController.OnSwitchChangeListener, View.OnClickListener {
 
-    @VisibleForTesting
-    LocalBluetoothAdapter mBluetoothAdapter;
-
-    private LocalBluetoothManager mBluetoothManager;
     private BluetoothEnabler mBluetoothEnabler;
     private RestrictionUtils mRestrictionUtils;
     private SwitchWidgetController mSwitch;
@@ -55,15 +49,12 @@ public class BluetoothSwitchPreferenceController
     public BluetoothSwitchPreferenceController(Context context,
             SwitchWidgetController switchController,
             FooterPreference footerPreference) {
-        this(context, Utils.getLocalBtManager(context), new RestrictionUtils(), switchController,
-                footerPreference);
+        this(context, new RestrictionUtils(), switchController, footerPreference);
     }
 
     @VisibleForTesting
-    public BluetoothSwitchPreferenceController(Context context,
-            LocalBluetoothManager bluetoothManager, RestrictionUtils restrictionUtils,
+    public BluetoothSwitchPreferenceController(Context context, RestrictionUtils restrictionUtils,
             SwitchWidgetController switchController, FooterPreference footerPreference) {
-        mBluetoothManager = bluetoothManager;
         mRestrictionUtils = restrictionUtils;
         mSwitch = switchController;
         mContext = context;
@@ -72,13 +63,10 @@ public class BluetoothSwitchPreferenceController
         mSwitch.setupView();
         updateText(mSwitch.isChecked());
 
-        if (mBluetoothManager != null) {
-            mBluetoothAdapter = mBluetoothManager.getBluetoothAdapter();
-        }
         mBluetoothEnabler = new BluetoothEnabler(context,
                 switchController,
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider(), mBluetoothManager,
-                MetricsEvent.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider(),
+                SettingsEnums.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
                 mRestrictionUtils);
         mBluetoothEnabler.setToggleCallback(this);
     }
@@ -107,7 +95,7 @@ public class BluetoothSwitchPreferenceController
         // send users to scanning settings if they click on the link in the summary text
         new SubSettingLauncher(mContext)
                 .setDestination(ScanningSettings.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.BLUETOOTH_FRAGMENT)
+                .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_FRAGMENT)
                 .launch();
     }
 

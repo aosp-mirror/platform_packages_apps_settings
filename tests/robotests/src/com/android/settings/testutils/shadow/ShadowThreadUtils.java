@@ -33,22 +33,21 @@ public class ShadowThreadUtils {
     }
 
     @Implementation
-    public static void postOnBackgroundThread(Runnable runnable) {
+    protected static void postOnBackgroundThread(Runnable runnable) {
         runnable.run();
     }
 
     @Implementation
-    public static void postOnMainThread(Runnable runnable) {
+    protected static void postOnMainThread(Runnable runnable) {
         runnable.run();
     }
 
     @Implementation
-    public static boolean isMainThread() {
+    protected static boolean isMainThread() {
         return sIsMainThread;
     }
 
     public static void setIsMainThread(boolean isMainThread) {
         sIsMainThread = isMainThread;
     }
-
 }

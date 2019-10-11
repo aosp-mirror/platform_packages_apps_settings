@@ -17,26 +17,28 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
-import androidx.annotation.DrawableRes;
-import androidx.preference.PreferenceViewHolder;
 import android.view.View;
+
+import androidx.annotation.DrawableRes;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
-import com.android.settingslib.wifi.AccessPointPreference;
 
 /**
  * An AP preference for the currently connected AP
  */
-public class ConnectedAccessPointPreference extends AccessPointPreference implements
+public class ConnectedAccessPointPreference extends LongPressAccessPointPreference implements
         View.OnClickListener {
 
     private OnGearClickListener mOnGearClickListener;
     private boolean mIsCaptivePortal;
 
     public ConnectedAccessPointPreference(AccessPoint accessPoint, Context context,
-            UserBadgeCache cache, @DrawableRes int iconResId, boolean forSavedNetworks) {
-        super(accessPoint, context, cache, iconResId, forSavedNetworks);
+            UserBadgeCache cache, @DrawableRes int iconResId, boolean forSavedNetworks,
+            Fragment fragment) {
+        super(accessPoint, context, cache, forSavedNetworks, iconResId, fragment);
     }
 
     @Override

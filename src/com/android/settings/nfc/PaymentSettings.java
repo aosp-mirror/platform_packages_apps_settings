@@ -16,39 +16,44 @@
 
 package com.android.settings.nfc;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class PaymentSettings extends SettingsPreferenceFragment implements Indexable {
-    public static final String TAG = "PaymentSettings";
 
-    static final String PAYMENT_KEY = "payment";
+@SearchIndexable
+public class PaymentSettings extends DashboardFragment {
+    public static final String TAG = "PaymentSettings";
 
     private PaymentBackend mPaymentBackend;
 
     @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NFC_PAYMENT;
+        return SettingsEnums.NFC_PAYMENT;
     }
 
     @Override
@@ -57,24 +62,13 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
+    public void onAttach(Context context) {
+        super.onAttach(context);
         mPaymentBackend = new PaymentBackend(getActivity());
         setHasOptionsMenu(true);
 
-        final PreferenceScreen screen = getPreferenceScreen();
-
-        List<PaymentBackend.PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
-        if (appInfos != null && appInfos.size() > 0) {
-            NfcPaymentPreference preference =
-                    new NfcPaymentPreference(getPrefContext(), mPaymentBackend);
-            preference.setKey(PAYMENT_KEY);
-            screen.addPreference(preference);
-            NfcForegroundPreference foreground = new NfcForegroundPreference(getPrefContext(),
-                    mPaymentBackend);
-            screen.addPreference(foreground);
-        }
+        use(NfcPaymentPreferenceController.class).setPaymentBackend(mPaymentBackend);
+        use(NfcForegroundPreferenceController.class).setPaymentBackend(mPaymentBackend);
     }
 
     @Override
@@ -109,31 +103,24 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-                final Resources res = context.getResources();
-
-                // Add fragment title
-                SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.key = PAYMENT_KEY;
-                data.title = res.getString(R.string.nfc_payment_settings_title);
-                data.screenTitle = res.getString(R.string.nfc_payment_settings_title);
-                data.keywords = res.getString(R.string.keywords_payment_settings);
-                result.add(data);
-                return result;
-            }
-
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                final List<String> nonVisibleKeys = super.getNonIndexableKeys(context);
-                final PackageManager pm = context.getPackageManager();
-                if (pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
-                    return nonVisibleKeys;
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.nfc_payment_settings;
+                    return Arrays.asList(sir);
                 }
-                nonVisibleKeys.add(PAYMENT_KEY);
-                return nonVisibleKeys;
-            }
-        };
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    final UserManager userManager = context.getSystemService(UserManager.class);
+                    final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
+                    if (myUserInfo.isGuest()) {
+                        return false;
+                    }
+                    final PackageManager pm = context.getPackageManager();
+                    return pm.hasSystemFeature(PackageManager.FEATURE_NFC);
+                }
+            };
 }

@@ -19,10 +19,12 @@ package com.android.settings.wifi.p2p;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pDevice;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.widget.ImageView;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 
 public class WifiP2pPeer extends Preference {

@@ -17,10 +17,12 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.util.SparseLongArray;
 
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
@@ -87,7 +89,7 @@ public class BatteryDatabaseManagerTest {
     }
 
     @Test
-    public void testAllFunctions() {
+    public void allAnomalyFunctions() {
         mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW,
                 AnomalyDatabaseHelper.State.NEW, NOW);
         mBatteryDatabaseManager.insertAnomaly(UID_OLD, PACKAGE_NAME_OLD, TYPE_OLD,
@@ -112,7 +114,7 @@ public class BatteryDatabaseManagerTest {
     }
 
     @Test
-    public void testUpdateAnomalies_updateSuccessfully() {
+    public void updateAnomalies_updateSuccessfully() {
         mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW,
                 AnomalyDatabaseHelper.State.NEW, NOW);
         mBatteryDatabaseManager.insertAnomaly(UID_OLD, PACKAGE_NAME_OLD, TYPE_OLD,
@@ -137,7 +139,7 @@ public class BatteryDatabaseManagerTest {
     }
 
     @Test
-    public void testQueryAnomalies_removeDuplicateByUid() {
+    public void queryAnomalies_removeDuplicateByUid() {
         mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW,
                 AnomalyDatabaseHelper.State.NEW, NOW);
         mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_OLD,
@@ -147,5 +149,29 @@ public class BatteryDatabaseManagerTest {
         List<AppInfo> newAppInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
                 AnomalyDatabaseHelper.State.NEW);
         assertThat(newAppInfos).containsExactly(mCombinedAppInfo);
+    }
+
+    @Test
+    public void allActionFunctions() {
+        final long timestamp = System.currentTimeMillis();
+        mBatteryDatabaseManager.insertAction(AnomalyDatabaseHelper.ActionType.RESTRICTION, UID_OLD,
+                PACKAGE_NAME_OLD, 0);
+        mBatteryDatabaseManager.insertAction(AnomalyDatabaseHelper.ActionType.RESTRICTION, UID_OLD,
+                PACKAGE_NAME_OLD, 1);
+        mBatteryDatabaseManager.insertAction(AnomalyDatabaseHelper.ActionType.RESTRICTION, UID_NEW,
+                PACKAGE_NAME_NEW, timestamp);
+
+        final SparseLongArray timeArray = mBatteryDatabaseManager.queryActionTime(
+                AnomalyDatabaseHelper.ActionType.RESTRICTION);
+        assertThat(timeArray.size()).isEqualTo(2);
+        assertThat(timeArray.get(UID_OLD)).isEqualTo(1);
+        assertThat(timeArray.get(UID_NEW)).isEqualTo(timestamp);
+
+        mBatteryDatabaseManager.deleteAction(AnomalyDatabaseHelper.ActionType.RESTRICTION, UID_NEW,
+                PACKAGE_NAME_NEW);
+        final SparseLongArray recentTimeArray = mBatteryDatabaseManager.queryActionTime(
+                AnomalyDatabaseHelper.ActionType.RESTRICTION);
+        assertThat(recentTimeArray.size()).isEqualTo(1);
+        assertThat(timeArray.get(UID_OLD)).isEqualTo(1);
     }
 }

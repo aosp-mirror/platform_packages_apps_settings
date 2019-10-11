@@ -22,9 +22,10 @@ import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 import android.annotation.Nullable;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AppGlobals;
-import android.app.Fragment;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
@@ -49,12 +50,14 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
@@ -71,9 +74,6 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
-import androidx.annotation.StringRes;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
@@ -91,10 +91,20 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import androidx.annotation.StringRes;
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settingslib.widget.ActionBarShadowController;
 
 import java.net.InetAddress;
 import java.util.Iterator;
@@ -110,18 +120,15 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static final int UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY = 1;
 
-    /**
-     * Color spectrum to use to indicate badness.  0 is completely transparent (no data),
-     * 1 is most bad (red), the last value is least bad (green).
-     */
-    public static final int[] BADNESS_COLORS = new int[] {
-            0x00000000, 0xffc43828, 0xffe54918, 0xfff47b00,
-            0xfffabf2c, 0xff679e37, 0xff0a7f42
-    };
-
-    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
+    public static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
     public static final String OS_PKG = "os";
+
+    /**
+     * Whether to disable the new device identifier access restrictions.
+     */
+    public static final String PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED =
+            "device_identifier_access_restrictions_disabled";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -276,27 +283,21 @@ public final class Utils extends com.android.settingslib.Utils {
         final boolean movePadding = list.getScrollBarStyle() == View.SCROLLBARS_OUTSIDE_OVERLAY;
         if (movePadding) {
             final Resources res = list.getResources();
-            final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
             final int paddingBottom = res.getDimensionPixelSize(
                     com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
             if (parent instanceof PreferenceFrameLayout) {
                 ((PreferenceFrameLayout.LayoutParams) child.getLayoutParams()).removeBorders = true;
-
-                final int effectivePaddingSide = ignoreSidePadding ? 0 : paddingSide;
-                list.setPaddingRelative(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
-            } else {
-                list.setPaddingRelative(paddingSide, 0, paddingSide, paddingBottom);
             }
+            list.setPaddingRelative(0 /* start */, 0 /* top */, 0 /* end */, paddingBottom);
         }
     }
 
     public static void forceCustomPadding(View view, boolean additive) {
         final Resources res = view.getResources();
-        final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
 
-        final int paddingStart = paddingSide + (additive ? view.getPaddingStart() : 0);
-        final int paddingEnd = paddingSide + (additive ? view.getPaddingEnd() : 0);
+        final int paddingStart = additive ? view.getPaddingStart() : 0;
+        final int paddingEnd = additive ? view.getPaddingEnd() : 0;
         final int paddingBottom = res.getDimensionPixelSize(
                 com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
@@ -388,9 +389,7 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static UserHandle getManagedProfile(UserManager userManager) {
         List<UserHandle> userProfiles = userManager.getUserProfiles();
-        final int count = userProfiles.size();
-        for (int i = 0; i < count; i++) {
-            final UserHandle profile = userProfiles.get(i);
+        for (UserHandle profile : userProfiles) {
             if (profile.getIdentifier() == userManager.getUserHandle()) {
                 continue;
             }
@@ -526,6 +525,9 @@ public final class Utils extends com.android.settingslib.Utils {
      * TODO: See bug 16533525.
      */
     public static boolean showSimCardTile(Context context) {
+        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            return false;
+        }
         final TelephonyManager tm =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
@@ -813,6 +815,19 @@ public final class Utils extends com.android.settingslib.Utils {
         return fingerprintManager != null && fingerprintManager.isHardwareDetected();
     }
 
+    public static FaceManager getFaceManagerOrNull(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
+            return (FaceManager) context.getSystemService(Context.FACE_SERVICE);
+        } else {
+            return null;
+        }
+    }
+
+    public static boolean hasFaceHardware(Context context) {
+        FaceManager faceManager = getFaceManagerOrNull(context);
+        return faceManager != null && faceManager.isHardwareDetected();
+    }
+
     /**
      * Launches an intent which may optionally have a user id defined.
      * @param fragment Fragment to use to launch the activity.
@@ -946,12 +961,37 @@ public final class Utils extends com.android.settingslib.Utils {
             bitmap = Bitmap.createScaledBitmap(((BitmapDrawable) original).getBitmap(), width,
                     height, false);
         } else {
-            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            final Canvas canvas = new Canvas(bitmap);
-            original.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            original.draw(canvas);
+            bitmap = createBitmap(original, width, height);
         }
         return new BitmapDrawable(null, bitmap);
+    }
+
+    /**
+     * Create an Icon pointing to a drawable.
+     */
+    public static IconCompat createIconWithDrawable(Drawable drawable) {
+        Bitmap bitmap;
+        if (drawable instanceof BitmapDrawable) {
+            bitmap = ((BitmapDrawable)drawable).getBitmap();
+        } else {
+            final int width = drawable.getIntrinsicWidth();
+            final int height = drawable.getIntrinsicHeight();
+            bitmap = createBitmap(drawable,
+                    width > 0 ? width : 1,
+                    height > 0 ? height : 1);
+        }
+        return IconCompat.createWithBitmap(bitmap);
+    }
+
+    /**
+     * Creates a drawable with specified width and height.
+     */
+    public static Bitmap createBitmap(Drawable drawable, int width, int height) {
+        final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 
     /**
@@ -968,12 +1008,56 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
+    /** Returns true if the current package is installed & enabled. */
+    public static boolean isPackageEnabled(Context context, String packageName) {
+        try {
+            return context.getPackageManager().getApplicationInfo(packageName, 0).enabled;
+        } catch (Exception e) {
+            Log.e(TAG, "Error while retrieving application info for package " + packageName, e);
+        }
+        return false;
+    }
+
     /** Get {@link Resources} by subscription id if subscription id is valid. */
     public static Resources getResourcesForSubId(Context context, int subId) {
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return SubscriptionManager.getResourcesForSubId(context, subId);
         } else {
             return context.getResources();
+        }
+    }
+
+    /**
+     * Returns true if SYSTEM_ALERT_WINDOW permission is available.
+     * Starting from Q, SYSTEM_ALERT_WINDOW is disabled on low ram phones.
+     */
+    public static boolean isSystemAlertWindowEnabled(Context context) {
+        // SYSTEM_ALERT_WINDOW is disabled on on low ram devices starting from Q
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        return !(am.isLowRamDevice() && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q));
+    }
+
+    /**
+     * Adds a shadow appear/disappear animation to action bar scroll.
+     *
+     * <p/>
+     * This method must be called after {@link Fragment#onCreate(Bundle)}.
+     */
+    public static void setActionBarShadowAnimation(Activity activity, Lifecycle lifecycle,
+            View scrollView) {
+        if (activity == null) {
+            Log.w(TAG, "No activity, cannot style actionbar.");
+            return;
+        }
+        final ActionBar actionBar = activity.getActionBar();
+        if (actionBar == null) {
+            Log.w(TAG, "No actionbar, cannot style actionbar.");
+            return;
+        }
+        actionBar.setElevation(0);
+
+        if (lifecycle != null && scrollView != null) {
+            ActionBarShadowController.attachToView(activity, lifecycle, scrollView);
         }
     }
 }

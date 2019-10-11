@@ -21,15 +21,19 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.UserManager;
+
 import androidx.annotation.Keep;
 
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.aware.AwareFeatureProvider;
+import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
+import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -40,10 +44,12 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProviderImpl;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProviderImpl;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProviderImpl;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
-import com.android.settings.search.DeviceIndexFeatureProvider;
-import com.android.settings.search.DeviceIndexFeatureProviderImpl;
+import com.android.settings.panel.PanelFeatureProvider;
+import com.android.settings.panel.PanelFeatureProviderImpl;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
@@ -53,7 +59,6 @@ import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
@@ -73,10 +78,12 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
     private UserFeatureProvider mUserFeatureProvider;
-    private BluetoothFeatureProvider mBluetoothFeatureProvider;
     private SlicesFeatureProvider mSlicesFeatureProvider;
     private AccountFeatureProvider mAccountFeatureProvider;
-    private DeviceIndexFeatureProviderImpl mDeviceIndexFeatureProvider;
+    private PanelFeatureProvider mPanelFeatureProvider;
+    private ContextualCardFeatureProvider mContextualCardFeatureProvider;
+    private BluetoothFeatureProvider mBluetoothFeatureProvider;
+    private AwareFeatureProvider mAwareFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -86,7 +93,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public MetricsFeatureProvider getMetricsFeatureProvider() {
         if (mMetricsFeatureProvider == null) {
-            mMetricsFeatureProvider = new MetricsFeatureProvider();
+            mMetricsFeatureProvider = new SettingsMetricsFeatureProvider();
         }
         return mMetricsFeatureProvider;
     }
@@ -122,7 +129,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
         if (mApplicationFeatureProvider == null) {
             final Context appContext = context.getApplicationContext();
             mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(appContext,
-                    new PackageManagerWrapper(appContext.getPackageManager()),
+                    appContext.getPackageManager(),
                     AppGlobals.getPackageManager(),
                     (DevicePolicyManager) appContext
                             .getSystemService(Context.DEVICE_POLICY_SERVICE));
@@ -143,9 +150,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
         if (mEnterprisePrivacyFeatureProvider == null) {
             final Context appContext = context.getApplicationContext();
             mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(appContext,
-                    (DevicePolicyManager) appContext
-                            .getSystemService(Context.DEVICE_POLICY_SERVICE),
-                    new PackageManagerWrapper(appContext.getPackageManager()),
+                    (DevicePolicyManager) appContext.getSystemService(
+                            Context.DEVICE_POLICY_SERVICE),
+                    appContext.getPackageManager(),
                     UserManager.get(appContext),
                     (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE),
                     appContext.getResources());
@@ -192,14 +199,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
-        if (mBluetoothFeatureProvider == null) {
-            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl();
-        }
-        return mBluetoothFeatureProvider;
-    }
-
-    @Override
     public AssistGestureFeatureProvider getAssistGestureFeatureProvider() {
         if (mAssistGestureFeatureProvider == null) {
             mAssistGestureFeatureProvider = new AssistGestureFeatureProviderImpl();
@@ -224,10 +223,36 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public DeviceIndexFeatureProvider getDeviceIndexFeatureProvider() {
-        if (mDeviceIndexFeatureProvider == null) {
-            mDeviceIndexFeatureProvider = new DeviceIndexFeatureProviderImpl();
+    public PanelFeatureProvider getPanelFeatureProvider() {
+        if (mPanelFeatureProvider == null) {
+            mPanelFeatureProvider = new PanelFeatureProviderImpl();
         }
-        return mDeviceIndexFeatureProvider;
+        return mPanelFeatureProvider;
+    }
+
+    @Override
+    public ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context) {
+        if (mContextualCardFeatureProvider == null) {
+            mContextualCardFeatureProvider = new ContextualCardFeatureProviderImpl(
+                    context.getApplicationContext());
+        }
+        return mContextualCardFeatureProvider;
+    }
+
+    @Override
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+        if (mBluetoothFeatureProvider == null) {
+            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(
+                    context.getApplicationContext());
+        }
+        return mBluetoothFeatureProvider;
+    }
+
+    @Override
+    public AwareFeatureProvider getAwareFeatureProvider() {
+        if (mAwareFeatureProvider == null) {
+            mAwareFeatureProvider = new AwareFeatureProviderImpl();
+        }
+        return mAwareFeatureProvider;
     }
 }

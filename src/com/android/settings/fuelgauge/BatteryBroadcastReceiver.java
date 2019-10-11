@@ -21,11 +21,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.PowerManager;
+
 import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.Utils;
-import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -115,6 +116,6 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
                 mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_SAVER);
             }
         }
+        BatteryFixSlice.updateBatteryTipAvailabilityCache(mContext);
     }
-
 }

@@ -17,21 +17,23 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,16 +41,18 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothDeviceRenamePreferenceControllerTest {
 
     private static final String DEVICE_NAME = "Nightshade";
     private static final String PREF_KEY = "bt_rename_devices";
 
-    @Mock
-    private LocalBluetoothAdapter mLocalAdapter;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;
     @Mock
@@ -58,6 +62,8 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
     private Context mContext;
     private Preference mPreference;
     private BluetoothDeviceRenamePreferenceController mController;
+    private BluetoothAdapter mBluetoothAdapter;
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
@@ -66,9 +72,10 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mPreference = new Preference(mContext);
         mPreference.setKey(PREF_KEY);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
 
-        mController = spy(new BluetoothDeviceRenamePreferenceController(mContext, mLocalAdapter,
-                PREF_KEY));
+        mController = spy(new BluetoothDeviceRenamePreferenceController(mContext, PREF_KEY));
         mController.setFragment(mFragment);
         doReturn(DEVICE_NAME).when(mController).getDeviceName();
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -101,7 +108,7 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
 
     @Test
     public void updatePreferenceState_whenBTisOnPreferenceShouldBeVisible() {
-        when(mLocalAdapter.isEnabled()).thenReturn(true);
+        mShadowBluetoothAdapter.setEnabled(true);
 
         mController.updatePreferenceState(mPreference);
 
@@ -110,7 +117,7 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
 
     @Test
     public void updatePreferenceState_whenBTisOffPreferenceShouldBeHide() {
-        when(mLocalAdapter.isEnabled()).thenReturn(false);
+        mShadowBluetoothAdapter.setEnabled(false);
 
         mController.updatePreferenceState(mPreference);
 

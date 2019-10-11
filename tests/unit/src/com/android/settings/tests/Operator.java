@@ -18,6 +18,7 @@ package com.android.settings.tests;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import com.android.settings.tests.unit.R;
 
 public class Operator extends Activity {

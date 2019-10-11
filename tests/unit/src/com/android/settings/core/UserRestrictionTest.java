@@ -23,19 +23,19 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.UserManager;
-import android.platform.test.annotations.Presubmit;
 import android.provider.SearchIndexableResource;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.MediumTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.MediumTest;
+import androidx.test.runner.AndroidJUnit4;
+
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableResources;
+import com.android.settingslib.search.SearchIndexableResources;
 
 import com.google.android.collect.Sets;
 

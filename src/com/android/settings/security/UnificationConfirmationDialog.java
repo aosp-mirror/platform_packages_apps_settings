@@ -16,13 +16,14 @@
 
 package com.android.settings.security;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -59,15 +60,8 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
                 .setPositiveButton(
                         compliant ? R.string.lock_settings_profile_unification_dialog_confirm
                                 : R.string
-                                        .lock_settings_profile_unification_dialog_uncompliant_confirm,
-                        (dialog, whichButton) -> {
-                            if (compliant) {
-                                parentFragment.launchConfirmDeviceLockForUnification();
-                            } else {
-                                parentFragment.unifyUncompliantLocks();
-                            }
-                        }
-                )
+                                      .lock_settings_profile_unification_dialog_uncompliant_confirm,
+                        (dialog, whichButton) -> parentFragment.startUnification())
                 .setNegativeButton(R.string.cancel, null)
                 .create();
     }
@@ -80,6 +74,6 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_UNIFICATION_CONFIRMATION;
+        return SettingsEnums.DIALOG_UNIFICATION_CONFIRMATION;
     }
 }

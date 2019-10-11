@@ -16,27 +16,28 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import androidx.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceViewHolder;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CellDataPreferenceTest {
 
     @Mock
@@ -70,8 +71,7 @@ public class CellDataPreferenceTest {
         mListener.onSubscriptionsChanged();
         assertThat(mPreference.isEnabled()).isFalse();
 
-        when(mSubscriptionManager.getActiveSubscriptionInfo(anyInt()))
-                .thenReturn(mSubInfo);
+        when(mSubscriptionManager.getActiveSubscriptionInfo(anyInt())).thenReturn(mSubInfo);
         mListener.onSubscriptionsChanged();
         assertThat(mPreference.isEnabled()).isTrue();
     }

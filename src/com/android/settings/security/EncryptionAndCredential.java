@@ -16,20 +16,20 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController
-        .PREF_KEY_ENCRYPTION_DETAIL_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_DETAIL_PAGE;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,13 +38,14 @@ import java.util.List;
 /**
  * Encryption and Credential settings.
  */
+@SearchIndexable
 public class EncryptionAndCredential extends DashboardFragment {
 
     private static final String TAG = "EncryptionAndCredential";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ENCRYPTION_AND_CREDENTIAL;
+        return SettingsEnums.ENCRYPTION_AND_CREDENTIAL;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class EncryptionAndCredential extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     @Override

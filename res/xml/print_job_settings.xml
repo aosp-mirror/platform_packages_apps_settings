@@ -19,13 +19,16 @@
         android:title="@string/print_print_job">
 
     <Preference
-            android:key="print_job_preference">
+            android:key="print_job_preference"
+            android:title="@string/print_print_job"
+            settings:controller="com.android.settings.print.PrintJobPreferenceController">
     </Preference>
 
     <Preference
             android:key="print_job_message_preference"
             android:layout="@layout/print_job_summary"
-            android:selectable="false">
+            android:selectable="false"
+            settings:controller="com.android.settings.print.PrintJobMessagePreferenceController">
     </Preference>
 
 </PreferenceScreen>

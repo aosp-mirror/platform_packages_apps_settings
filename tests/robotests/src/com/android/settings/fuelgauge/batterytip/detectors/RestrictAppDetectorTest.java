@@ -18,10 +18,10 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.spy;
@@ -35,10 +35,12 @@ import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
+import com.android.settings.fuelgauge.batterytip.tips.AppRestrictionPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.DatabaseTestUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -46,12 +48,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RestrictAppDetectorTest {
 
     private static final int RESTRICTED_UID = 222;
@@ -79,14 +83,13 @@ public class RestrictAppDetectorTest {
         MockitoAnnotations.initMocks(this);
 
         mAppInfoList = new ArrayList<>();
-        mAppInfo = new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME)
-                .build();
+        mAppInfo = new AppInfo.Builder().setPackageName(PACKAGE_NAME).build();
         mAppInfoList.add(mAppInfo);
 
         mContext = spy(RuntimeEnvironment.application);
         mPolicy = spy(new BatteryTipPolicy(mContext));
 
+        doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mAppOpsManager).when(mContext).getSystemService(AppOpsManager.class);
         doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager).checkOpNoThrow(
                 AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, RESTRICTED_UID, RESTRICTED_PACKAGE_NAME);
@@ -94,6 +97,7 @@ public class RestrictAppDetectorTest {
                 AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UNRESTRICTED_UID,
                 UNRESTRICTED_PACKAGE_NAME);
 
+        BatteryDatabaseManager.setUpForTest(mBatteryDatabaseManager);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(any(),
                 anyInt());
@@ -103,7 +107,12 @@ public class RestrictAppDetectorTest {
 
         mRestrictAppDetector = new RestrictAppDetector(mContext, mPolicy);
         mRestrictAppDetector.mBatteryDatabaseManager = mBatteryDatabaseManager;
+    }
 
+    @After
+    public void tearDown() {
+        ReflectionHelpers.setStaticField(AppLabelPredicate.class, "sInstance", null);
+        ReflectionHelpers.setStaticField(AppRestrictionPredicate.class, "sInstance", null);
     }
 
     @After

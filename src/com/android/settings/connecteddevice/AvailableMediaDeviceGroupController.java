@@ -19,18 +19,20 @@ import static com.android.settingslib.Utils.isAudioModeOngoingCall;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Log;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothCallback;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -44,12 +46,14 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class AvailableMediaDeviceGroupController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, DevicePreferenceCallback, BluetoothCallback {
 
+    private static final String TAG = "AvailableMediaDeviceGroupController";
     private static final String KEY = "available_device_list";
 
     @VisibleForTesting
     PreferenceGroup mPreferenceGroup;
+    @VisibleForTesting
+    LocalBluetoothManager mLocalBluetoothManager;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
-    private final LocalBluetoothManager mLocalBluetoothManager;
 
     public AvailableMediaDeviceGroupController(Context context) {
         super(context, KEY);
@@ -58,12 +62,20 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
 
     @Override
     public void onStart() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "onStart() Bluetooth is not supported on this device");
+            return;
+        }
         mBluetoothDeviceUpdater.registerCallback();
         mLocalBluetoothManager.getEventManager().registerCallback(this);
     }
 
     @Override
     public void onStop() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "onStop() Bluetooth is not supported on this device");
+            return;
+        }
         mBluetoothDeviceUpdater.unregisterCallback();
         mLocalBluetoothManager.getEventManager().unregisterCallback(this);
     }
@@ -71,9 +83,11 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+
+        mPreferenceGroup = screen.findPreference(KEY);
+        mPreferenceGroup.setVisible(false);
+
         if (isAvailable()) {
-            mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
-            mPreferenceGroup.setVisible(false);
             updateTitle();
             mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
             mBluetoothDeviceUpdater.forceUpdate();
@@ -83,7 +97,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     @Override
     public int getAvailabilityStatus() {
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
-                ? AVAILABLE
+                ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -115,42 +129,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
 
     @VisibleForTesting
     public void setBluetoothDeviceUpdater(BluetoothDeviceUpdater bluetoothDeviceUpdater) {
-        mBluetoothDeviceUpdater  = bluetoothDeviceUpdater;
-    }
-
-    @Override
-    public void onBluetoothStateChanged(int bluetoothState) {
-        // do nothing
-    }
-
-    @Override
-    public void onScanningStateChanged(boolean started) {
-        // do nothing
-    }
-
-    @Override
-    public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
-        // do nothing
-    }
-
-    @Override
-    public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
-        // do nothing
-    }
-
-    @Override
-    public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
-        // do nothing
-    }
-
-    @Override
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
-        // do nothing
-    }
-
-    @Override
-    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-        // do nothing
+        mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
     }
 
     @Override

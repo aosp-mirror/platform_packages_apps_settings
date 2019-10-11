@@ -18,7 +18,7 @@ package com.android.settings.display;
 
 import android.content.Context;
 
-import com.android.internal.app.ColorDisplayController;
+import android.hardware.display.ColorDisplayManager;
 import com.android.settings.R;
 
 import java.text.DateFormat;
@@ -45,24 +45,25 @@ public class NightDisplayTimeFormatter {
         return mTimeFormatter.format(c.getTime());
     }
 
-    public String getAutoModeTimeSummary(Context context, ColorDisplayController controller) {
-        final int summaryFormatResId = controller.isActivated() ? R.string.night_display_summary_on
-                : R.string.night_display_summary_off;
-        return context.getString(summaryFormatResId, getAutoModeSummary(context, controller));
+    public String getAutoModeTimeSummary(Context context, ColorDisplayManager manager) {
+        final int summaryFormatResId =
+                manager.isNightDisplayActivated() ? R.string.night_display_summary_on
+                        : R.string.night_display_summary_off;
+        return context.getString(summaryFormatResId, getAutoModeSummary(context, manager));
     }
 
-    private String getAutoModeSummary(Context context, ColorDisplayController controller) {
-        final boolean isActivated = controller.isActivated();
-        final int autoMode = controller.getAutoMode();
-        if (autoMode == ColorDisplayController.AUTO_MODE_CUSTOM) {
+    public String getAutoModeSummary(Context context, ColorDisplayManager manager) {
+        final boolean isActivated = manager.isNightDisplayActivated();
+        final int autoMode = manager.getNightDisplayAutoMode();
+        if (autoMode == ColorDisplayManager.AUTO_MODE_CUSTOM_TIME) {
             if (isActivated) {
                 return context.getString(R.string.night_display_summary_on_auto_mode_custom,
-                        getFormattedTimeString(controller.getCustomEndTime()));
+                        getFormattedTimeString(manager.getNightDisplayCustomEndTime()));
             } else {
                 return context.getString(R.string.night_display_summary_off_auto_mode_custom,
-                        getFormattedTimeString(controller.getCustomStartTime()));
+                        getFormattedTimeString(manager.getNightDisplayCustomStartTime()));
             }
-        } else if (autoMode == ColorDisplayController.AUTO_MODE_TWILIGHT) {
+        } else if (autoMode == ColorDisplayManager.AUTO_MODE_TWILIGHT) {
             return context.getString(isActivated
                     ? R.string.night_display_summary_on_auto_mode_twilight
                     : R.string.night_display_summary_off_auto_mode_twilight);

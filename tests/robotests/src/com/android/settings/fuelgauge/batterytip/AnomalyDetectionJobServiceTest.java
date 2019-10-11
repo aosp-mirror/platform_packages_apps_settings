@@ -22,12 +22,12 @@ import static android.os.StatsDimensionsValue.TUPLE_VALUE_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -43,23 +43,21 @@ import android.app.job.JobInfo;
 import android.app.job.JobParameters;
 import android.app.job.JobScheduler;
 import android.app.job.JobWorkItem;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.StatsDimensionsValue;
 import android.os.UserManager;
-import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settings.testutils.shadow.ShadowPowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,17 +65,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.android.controller.ServiceController;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowJobScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowConnectivityManager.class, ShadowPowerWhitelistBackend.class})
 public class AnomalyDetectionJobServiceTest {
     private static final int UID = 12345;
@@ -130,9 +127,8 @@ public class AnomalyDetectionJobServiceTest {
     public void scheduleCleanUp() {
         AnomalyDetectionJobService.scheduleAnomalyDetection(application, new Intent());
 
-        ShadowJobScheduler shadowJobScheduler =
-                Shadows.shadowOf(application.getSystemService(JobScheduler.class));
-        List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
+        JobScheduler jobScheduler = application.getSystemService(JobScheduler.class);
+        List<JobInfo> pendingJobs = jobScheduler.getAllPendingJobs();
         assertThat(pendingJobs).hasSize(1);
 
         JobInfo pendingJob = pendingJobs.get(0);
@@ -175,11 +171,11 @@ public class AnomalyDetectionJobServiceTest {
 
         verify(mBatteryDatabaseManager, never()).insertAnomaly(anyInt(), anyString(), anyInt(),
                 anyInt(), anyLong());
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
-                SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
+                SettingsEnums.PAGE_UNKNOWN,
+                SYSTEM_PACKAGE + "/" + VERSION_CODE,
+                 ANOMALY_TYPE);
     }
 
     @Test
@@ -230,11 +226,11 @@ public class AnomalyDetectionJobServiceTest {
 
         verify(mBatteryDatabaseManager).insertAnomaly(anyInt(), anyString(), eq(6),
                 eq(AnomalyDatabaseHelper.State.AUTO_HANDLED), anyLong());
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
-                SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
+                SettingsEnums.PAGE_UNKNOWN,
+                SYSTEM_PACKAGE + "/" + VERSION_CODE,
+                ANOMALY_TYPE);
     }
 
     @Test
@@ -255,11 +251,11 @@ public class AnomalyDetectionJobServiceTest {
 
         verify(mBatteryDatabaseManager).insertAnomaly(anyInt(), anyString(), eq(6),
                 eq(AnomalyDatabaseHelper.State.NEW), anyLong());
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
-                SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
+                SettingsEnums.PAGE_UNKNOWN,
+                SYSTEM_PACKAGE + "/" + VERSION_CODE,
+                ANOMALY_TYPE);
     }
 
     @Test

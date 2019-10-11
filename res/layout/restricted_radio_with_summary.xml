@@ -41,10 +41,11 @@
             android:ellipsize="marquee" />
         <ImageView
             android:id="@+id/restricted_icon"
-            android:layout_width="@dimen/restricted_icon_size"
+            android:layout_width="@*android:dimen/config_restrictedIconSize"
             android:layout_height="match_parent"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_info"
+            android:tint="?android:attr/colorAccent"
+            android:src="@*android:drawable/ic_info"
             android:layout_marginLeft="@dimen/restricted_icon_padding"
             android:visibility="gone" />
     </com.android.settings.CheckableLinearLayout>

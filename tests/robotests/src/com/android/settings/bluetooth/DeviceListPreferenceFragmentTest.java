@@ -17,22 +17,23 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.eq;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.res.Resources;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -40,11 +41,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class DeviceListPreferenceFragmentTest {
 
     private static final String FOOTAGE_MAC_STRING = "Bluetooth mac: xxxx";
@@ -53,8 +57,7 @@ public class DeviceListPreferenceFragmentTest {
     private Resources mResource;
     @Mock
     private Context mContext;
-    @Mock
-    private LocalBluetoothAdapter mLocalAdapter;
+
     private TestFragment mFragment;
     private Preference mMyDevicePreference;
 
@@ -65,7 +68,7 @@ public class DeviceListPreferenceFragmentTest {
         mFragment = spy(new TestFragment());
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mResource).when(mFragment).getResources();
-        mFragment.mLocalAdapter = mLocalAdapter;
+        mFragment.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         mMyDevicePreference = new Preference(RuntimeEnvironment.application);
     }
@@ -83,11 +86,11 @@ public class DeviceListPreferenceFragmentTest {
     @Test
     public void testEnableDisableScanning_testStateAfterEanbleDisable() {
         mFragment.enableScanning();
-        verify(mLocalAdapter).startScanning(true);
+        verify(mFragment).startScanning();
         assertThat(mFragment.mScanEnabled).isTrue();
 
         mFragment.disableScanning();
-        verify(mLocalAdapter).stopScanning();
+        verify(mFragment).stopScanning();
         assertThat(mFragment.mScanEnabled).isFalse();
     }
 
@@ -95,21 +98,21 @@ public class DeviceListPreferenceFragmentTest {
     public void testScanningStateChanged_testScanStarted() {
         mFragment.enableScanning();
         assertThat(mFragment.mScanEnabled).isTrue();
-        verify(mLocalAdapter).startScanning(true);
+        verify(mFragment).startScanning();
 
         mFragment.onScanningStateChanged(true);
-        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+        verify(mFragment, times(1)).startScanning();
     }
 
     @Test
     public void testScanningStateChanged_testScanFinished() {
         // Could happen when last scanning not done while current scan gets enabled
         mFragment.enableScanning();
-        verify(mLocalAdapter).startScanning(true);
+        verify(mFragment).startScanning();
         assertThat(mFragment.mScanEnabled).isTrue();
 
         mFragment.onScanningStateChanged(false);
-        verify(mLocalAdapter, times(2)).startScanning(true);
+        verify(mFragment, times(2)).startScanning();
     }
 
     @Test
@@ -117,53 +120,53 @@ public class DeviceListPreferenceFragmentTest {
         // Could happen when last scanning not done while current scan gets enabled
         mFragment.enableScanning();
         assertThat(mFragment.mScanEnabled).isTrue();
-        verify(mLocalAdapter).startScanning(true);
+        verify(mFragment).startScanning();
 
         mFragment.onScanningStateChanged(true);
-        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+        verify(mFragment, times(1)).startScanning();
 
         mFragment.onScanningStateChanged(false);
-        verify(mLocalAdapter, times(2)).startScanning(true);
+        verify(mFragment, times(2)).startScanning();
 
         mFragment.onScanningStateChanged(true);
-        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
+        verify(mFragment, times(2)).startScanning();
 
         mFragment.disableScanning();
-        verify(mLocalAdapter).stopScanning();
+        verify(mFragment).stopScanning();
 
         mFragment.onScanningStateChanged(false);
-        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
+        verify(mFragment, times(2)).startScanning();
 
         mFragment.onScanningStateChanged(true);
-        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
+        verify(mFragment, times(2)).startScanning();
     }
 
     @Test
     public void testScanningStateChanged_testScanFinishedAfterDisable() {
         mFragment.enableScanning();
-        verify(mLocalAdapter).startScanning(true);
+        verify(mFragment).startScanning();
         assertThat(mFragment.mScanEnabled).isTrue();
 
         mFragment.disableScanning();
-        verify(mLocalAdapter).stopScanning();
+        verify(mFragment).stopScanning();
         assertThat(mFragment.mScanEnabled).isFalse();
 
         mFragment.onScanningStateChanged(false);
-        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+        verify(mFragment, times(1)).startScanning();
     }
 
     @Test
     public void testScanningStateChanged_testScanStartedAfterDisable() {
         mFragment.enableScanning();
-        verify(mLocalAdapter).startScanning(true);
+        verify(mFragment).startScanning();
         assertThat(mFragment.mScanEnabled).isTrue();
 
         mFragment.disableScanning();
-        verify(mLocalAdapter).stopScanning();
+        verify(mFragment).stopScanning();
         assertThat(mFragment.mScanEnabled).isFalse();
 
         mFragment.onScanningStateChanged(true);
-        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+        verify(mFragment, times(1)).startScanning();
     }
 
     /**

@@ -15,13 +15,15 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Spinner;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
+import com.android.settingslib.widget.settingsspinner.SettingsSpinner;
 
 public class SpinnerPreference extends Preference implements CycleAdapter.SpinnerInterface {
 
@@ -61,7 +63,7 @@ public class SpinnerPreference extends Preference implements CycleAdapter.Spinne
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        Spinner spinner = (Spinner) holder.findViewById(R.id.cycles_spinner);
+        SettingsSpinner spinner = (SettingsSpinner) holder.findViewById(R.id.cycles_spinner);
         spinner.setAdapter(mAdapter);
         spinner.setSelection(mPosition);
         spinner.setOnItemSelectedListener(mOnSelectedListener);

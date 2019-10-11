@@ -17,17 +17,17 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 
-import com.android.internal.os.BatteryStatsHelper;
-import com.android.settingslib.utils.AsyncLoader;
+import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.os.BatteryStatsHelper;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 /**
  * Loader that can be used by classes to load BatteryInfo in a background thread. This loader will
  * automatically grab enhanced battery estimates if available or fall back to the system estimate
  * when not available.
  */
-public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
+public class BatteryInfoLoader extends AsyncLoaderCompat<BatteryInfo>{
 
     BatteryStatsHelper mStatsHelper;
     private static final String LOG_TAG = "BatteryInfoLoader";

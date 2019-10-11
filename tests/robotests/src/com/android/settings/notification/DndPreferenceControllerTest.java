@@ -17,12 +17,13 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
-import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_MIN;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -35,13 +36,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,10 +49,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DndPreferenceControllerTest {
 
     private Context mContext;
@@ -109,18 +110,16 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notConfigurable() {
-        String lockedId = "locked";
+    public void testUpdateState_notBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = lockedId;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn(lockedId);
+        when(channel.isImportanceLockedByOEM()).thenReturn(true);
         mController.onResume(appRow, channel, null, null);
 
         Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
         mController.updateState(pref);
 
-        assertFalse(pref.isEnabled());
+        assertTrue(pref.isEnabled());
     }
 
     @Test

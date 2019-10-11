@@ -15,14 +15,14 @@
  */
 package com.android.settings.vpn2;
 
-import android.app.Fragment;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -36,7 +36,7 @@ public class ConfirmLockdownFragment extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DIALOG_VPN_REPLACE_EXISTING;
+        return SettingsEnums.DIALOG_VPN_REPLACE_EXISTING;
     }
 
     private static final String ARG_REPLACING = "replacing";

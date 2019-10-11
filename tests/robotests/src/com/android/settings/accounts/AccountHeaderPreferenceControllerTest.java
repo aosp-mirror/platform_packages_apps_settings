@@ -17,45 +17,48 @@
 package com.android.settings.accounts;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
+
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
+
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
 import android.app.Activity;
-import androidx.lifecycle.LifecycleOwner;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceScreen;
 import android.widget.TextView;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = AccountHeaderPreferenceControllerTest.ShadowAuthenticatorHelper.class)
 public class AccountHeaderPreferenceControllerTest {
 
     @Mock
     private Activity mActivity;
     @Mock
-    private PreferenceFragment mFragment;
+    private PreferenceFragmentCompat mFragment;
     @Mock
     private PreferenceScreen mScreen;
 
@@ -110,7 +113,7 @@ public class AccountHeaderPreferenceControllerTest {
     @Implements(AuthenticatorHelper.class)
     public static class ShadowAuthenticatorHelper {
         @Implementation
-        public void onAccountsUpdated(Account[] accounts) {
+        protected void onAccountsUpdated(Account[] accounts) {
 
         }
     }

@@ -30,10 +30,14 @@ public class Settings extends SettingsActivity {
     */
     public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
+    public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SimSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class DataSaverSummaryActivity extends SettingsActivity{ /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeForgetActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -51,8 +55,8 @@ public class Settings extends SettingsActivity {
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySuggestionActivity extends NightDisplaySettingsActivity { /* empty */ }
-    public static class DeviceInfoSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MyDeviceInfoActivity extends SettingsActivity { /* empty */ }
+    public static class ModuleLicensesActivity extends SettingsActivity { /* empty */ }
     public static class ApplicationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageApplicationsActivity extends SettingsActivity { /* empty */ }
     public static class ManageAssistActivity extends SettingsActivity { /* empty */ }
@@ -61,24 +65,27 @@ public class Settings extends SettingsActivity {
     public static class StorageUseActivity extends SettingsActivity { /* empty */ }
     public static class DevelopmentSettingsDashboardActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilitySettingsActivity extends SettingsActivity { /* empty */ }
+    public static class AccessibilityDetailsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CaptioningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityContrastSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SecurityDashboardActivity extends SettingsActivity { /* empty */ }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ScanningSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class PrivacyDashboardActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class FactoryResetActivity extends SettingsActivity { /* empty */ }
     public static class RunningServicesActivity extends SettingsActivity { /* empty */ }
     public static class BatterySaverSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class BatterySaverScheduleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsInAddAccountActivity extends SettingsActivity { /* empty */ }
     public static class CryptKeeperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeviceAdminSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataUsageSummaryActivity extends SettingsActivity { /* empty */ }
-    public static class DataUsageSummaryLegacyActivity extends SettingsActivity { /* empty */ }
     public static class MobileDataUsageListActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureWifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SavedAccessPointsSettingsActivity extends SettingsActivity { /* empty */ }
@@ -93,6 +100,7 @@ public class Settings extends SettingsActivity {
     public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppPictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ZenAccessDetailSettingsActivity extends SettingsActivity {}
     public static class ConditionProviderSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UsbSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UsbDetailsActivity extends SettingsActivity { /* empty */ }
@@ -108,6 +116,8 @@ public class Settings extends SettingsActivity {
     public static class ZenModeEventRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureNotificationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -119,9 +129,7 @@ public class Settings extends SettingsActivity {
     public static class PhotosStorageActivity extends SettingsActivity {
         /* empty */
     }
-    public static class DirectoryAccessSettingsActivity extends SettingsActivity { /* empty */ }
 
-    public static class TopLevelSettings extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MemorySettingsActivity extends SettingsActivity { /* empty */ }
@@ -131,7 +139,6 @@ public class Settings extends SettingsActivity {
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class AdvancedAppsActivity extends SettingsActivity { /* empty */ }
 
     public static class ManageExternalSourcesActivity extends SettingsActivity {/* empty */ }
     public static class ManageAppExternalSourcesActivity extends SettingsActivity { /* empty */ }
@@ -156,7 +163,10 @@ public class Settings extends SettingsActivity {
     }
     public static class WebViewAppPickerActivity extends SettingsActivity { /* empty */ }
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
+    public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
+    public static class MobileNetworkListActivity extends SettingsActivity {}
+    public static class GlobalActionsPanelSettingsActivity extends SettingsActivity {}
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}

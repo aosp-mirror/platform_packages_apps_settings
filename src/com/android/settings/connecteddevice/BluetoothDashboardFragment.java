@@ -15,26 +15,24 @@
  */
 package com.android.settings.connecteddevice;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
-import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
@@ -44,6 +42,7 @@ import java.util.List;
  * Dedicated screen for allowing the user to toggle bluetooth which displays relevant information to
  * the user based on related settings such as bluetooth scanning.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL)
 public class BluetoothDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "BluetoothDashboardFrag";
@@ -55,7 +54,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.BLUETOOTH_FRAGMENT;
+        return SettingsEnums.BLUETOOTH_FRAGMENT;
     }
 
     @Override
@@ -93,7 +92,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         mSwitchBar = activity.getSwitchBar();
         mController = new BluetoothSwitchPreferenceController(activity,
                 new SwitchBarController(mSwitchBar), mFooterPreference);
-        Lifecycle lifecycle = getLifecycle();
+        Lifecycle lifecycle = getSettingsLifecycle();
         if (lifecycle != null) {
             lifecycle.addObserver(mController);
         }

@@ -19,11 +19,10 @@ package com.android.settings.applications.appinfo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
+
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
@@ -31,6 +30,7 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class AppHeaderViewPreferenceController extends BasePreferenceController
         implements AppInfoDashboardFragment.Callback, LifecycleObserver, OnStart {
@@ -63,7 +63,7 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mHeader = (LayoutPreference) screen.findPreference(KEY_HEADER);
+        mHeader = screen.findPreference(KEY_HEADER);
         final Activity activity = mParent.getActivity();
         mEntityHeaderController = EntityHeaderController
                 .newInstance(activity, mParent, mHeader.findViewById(R.id.entity_header))
@@ -89,12 +89,9 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
     private void setAppLabelAndIcon(PackageInfo pkgInfo, AppEntry appEntry) {
         final Activity activity = mParent.getActivity();
         final boolean isInstantApp = AppUtils.isInstant(pkgInfo.applicationInfo);
-        final CharSequence summary = isInstantApp
-                ? null : mContext.getString(Utils.getInstallationStatus(appEntry.info));
         mEntityHeaderController
                 .setLabel(appEntry)
                 .setIcon(appEntry)
-                .setSummary(summary)
                 .setIsInstantApp(isInstantApp)
                 .done(activity, false /* rebindActions */);
     }

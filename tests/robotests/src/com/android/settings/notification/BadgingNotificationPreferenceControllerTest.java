@@ -22,20 +22,17 @@ import static com.android.settings.notification.BadgingNotificationPreferenceCon
 import static com.android.settings.notification.BadgingNotificationPreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
-
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +42,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class BadgingNotificationPreferenceControllerTest {
@@ -115,37 +111,6 @@ public class BadgingNotificationPreferenceControllerTest {
         mController.updateState(preference);
 
         verify(preference).setChecked(false);
-    }
-
-    @Test
-    public void testPreferenceController_ProperResultPayloadType() {
-        assertThat(mController.getResultPayload()).isInstanceOf(InlineSwitchPayload.class);
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void testSetValue_updatesCorrectly() {
-        final int newValue = 0;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.NOTIFICATION_BADGING, ON);
-
-        ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        final int updatedValue =
-            Settings.Secure.getInt(resolver, Settings.Secure.NOTIFICATION_BADGING, ON);
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void testGetValue_correctValueReturned() {
-        final int currentValue = 1;
-        final ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.NOTIFICATION_BADGING, currentValue);
-
-        final int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
-
-        assertThat(newValue).isEqualTo(currentValue);
     }
 
     @Test

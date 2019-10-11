@@ -19,14 +19,14 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.os.Bundle;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class InstrumentedDialogFragmentTest {
 
     public static class TestDialogFragment extends InstrumentedDialogFragment {
@@ -56,7 +56,7 @@ public class InstrumentedDialogFragmentTest {
         // Precondition: no metrics feature
         assertThat(fragment.getMetricsFeatureProvider()).isNull();
 
-        fragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
+        fragment.onAttach(RuntimeEnvironment.application);
 
         // Verify: has metrics feature
         assertThat(fragment.getMetricsFeatureProvider()).isNotNull();

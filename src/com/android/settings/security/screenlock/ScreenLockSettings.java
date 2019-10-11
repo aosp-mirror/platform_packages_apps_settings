@@ -16,12 +16,13 @@
 
 package com.android.settings.security.screenlock;
 
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -30,23 +31,23 @@ import com.android.settings.search.Indexable;
 import com.android.settings.security.OwnerInfoPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class ScreenLockSettings extends DashboardFragment
         implements OwnerInfoPreferenceController.OwnerInfoCallback {
 
     private static final String TAG = "ScreenLockSettings";
-
-    private static final String KEY_LOCK_SCREEN_TITLE = "security_settings_password_sub_screen";
 
     private static final int MY_USER_ID = UserHandle.myUserId();
     private LockPatternUtils mLockPatternUtils;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SCREEN_LOCK_SETTINGS;
+        return SettingsEnums.SCREEN_LOCK_SETTINGS;
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ScreenLockSettings extends DashboardFragment
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mLockPatternUtils = new LockPatternUtils(context);
-        return buildPreferenceControllers(context, this /* parent */, getLifecycle(),
+        return buildPreferenceControllers(context, this /* parent */, getSettingsLifecycle(),
                 mLockPatternUtils);
     }
 
@@ -103,13 +104,6 @@ public class ScreenLockSettings extends DashboardFragment
                         Context context) {
                     return buildPreferenceControllers(context, null /* parent */,
                             null /* lifecycle */, new LockPatternUtils(context));
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(KEY_LOCK_SCREEN_TITLE);
-                    return keys;
                 }
             };
 }

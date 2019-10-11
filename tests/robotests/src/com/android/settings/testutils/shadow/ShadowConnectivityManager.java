@@ -19,10 +19,12 @@ package com.android.settings.testutils.shadow;
 import android.net.ConnectivityManager;
 import android.util.SparseBooleanArray;
 
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadow.api.Shadow;
 
-@Implements(value = ConnectivityManager.class, inheritImplementationMethods = true)
+@Implements(value = ConnectivityManager.class)
 public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowConnectivityManager {
 
     private final SparseBooleanArray mSupportedNetworkTypes = new SparseBooleanArray();
@@ -33,7 +35,7 @@ public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowCon
     }
 
     @Implementation
-    public boolean isNetworkSupported(int networkType) {
+    protected boolean isNetworkSupported(int networkType) {
         return mSupportedNetworkTypes.get(networkType);
     }
 
@@ -42,7 +44,12 @@ public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowCon
     }
 
     @Implementation
-    public boolean isTetheringSupported() {
+    protected boolean isTetheringSupported() {
         return mTetheringSupported;
+    }
+
+    public static ShadowConnectivityManager getShadow() {
+        return Shadow.extract(
+                RuntimeEnvironment.application.getSystemService(ConnectivityManager.class));
     }
 }

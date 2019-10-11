@@ -22,14 +22,13 @@ import android.content.Context;
 import android.provider.Settings;
 import android.text.format.DateUtils;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryTipPolicyTest {
 
     private static final String BATTERY_TIP_CONSTANTS_VALUE = "battery_tip_enabled=true"
@@ -49,7 +48,8 @@ public class BatteryTipPolicyTest {
             + ",test_battery_saver_tip=true"
             + ",test_high_usage_tip=false"
             + ",test_smart_battery_tip=true"
-            + ",test_low_battery_tip=true";
+            + ",test_low_battery_tip=true"
+            + ",app_restriction_active_hour=6";
     private Context mContext;
 
     @Before
@@ -72,6 +72,7 @@ public class BatteryTipPolicyTest {
         assertThat(batteryTipPolicy.highUsagePeriodMs).isEqualTo(2000);
         assertThat(batteryTipPolicy.highUsageBatteryDraining).isEqualTo(30);
         assertThat(batteryTipPolicy.appRestrictionEnabled).isTrue();
+        assertThat(batteryTipPolicy.appRestrictionActiveHour).isEqualTo(6);
         assertThat(batteryTipPolicy.reducedBatteryEnabled).isTrue();
         assertThat(batteryTipPolicy.reducedBatteryPercent).isEqualTo(30);
         assertThat(batteryTipPolicy.lowBatteryEnabled).isFalse();
@@ -99,6 +100,7 @@ public class BatteryTipPolicyTest {
         assertThat(batteryTipPolicy.highUsagePeriodMs).isEqualTo(2 * DateUtils.HOUR_IN_MILLIS);
         assertThat(batteryTipPolicy.highUsageBatteryDraining).isEqualTo(25);
         assertThat(batteryTipPolicy.appRestrictionEnabled).isTrue();
+        assertThat(batteryTipPolicy.appRestrictionActiveHour).isEqualTo(24);
         assertThat(batteryTipPolicy.reducedBatteryEnabled).isFalse();
         assertThat(batteryTipPolicy.reducedBatteryPercent).isEqualTo(50);
         assertThat(batteryTipPolicy.lowBatteryEnabled).isTrue();

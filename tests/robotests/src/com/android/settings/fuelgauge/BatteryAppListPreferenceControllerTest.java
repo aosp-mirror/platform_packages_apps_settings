@@ -17,25 +17,30 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import androidx.preference.PreferenceGroup;
+import android.content.pm.ModuleInfo;
+import android.content.pm.PackageManager;
+import android.os.BatteryStats;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.util.FeatureFlagUtils;
-import android.util.SparseArray;
+
+import androidx.preference.PreferenceGroup;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +49,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -64,6 +71,10 @@ public class BatteryAppListPreferenceControllerTest {
     private InstrumentedPreferenceFragment mFragment;
     @Mock
     private BatteryUtils mBatteryUtils;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private UserManager mUserManager;
 
     private Context mContext;
     private PowerGaugePreference mPreference;
@@ -74,12 +85,18 @@ public class BatteryAppListPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getApplicationContext()).thenReturn(mContext);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {});
+
         FakeFeatureFactory.setupForTest();
 
         mPreference = new PowerGaugePreference(mContext);
         when(mNormalBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
+        mNormalBatterySipper.uidObj = mock(BatteryStats.Uid.class);
 
         mPreferenceController = new BatteryAppListPreferenceController(mContext, KEY_APP_LIST, null,
                 mSettingsActivity, mFragment);
@@ -167,21 +184,6 @@ public class BatteryAppListPreferenceControllerTest {
     }
 
     @Test
-    public void testRefreshAnomalyIcon_containsAnomaly_showAnomalyIcon() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.BATTERY_DISPLAY_APP_LIST, true);
-        PowerGaugePreference preference = new PowerGaugePreference(mContext);
-        final String key = mPreferenceController.extractKeyFromUid(UID);
-        final SparseArray<List<Anomaly>> anomalySparseArray = new SparseArray<>();
-        anomalySparseArray.append(UID, null);
-        preference.setKey(key);
-        doReturn(preference).when(mAppListGroup).findPreference(key);
-
-        mPreferenceController.refreshAnomalyIcon(anomalySparseArray);
-
-        assertThat(preference.showAnomalyIcon()).isTrue();
-    }
-
-    @Test
     public void testShouldHideSipper_typeOvercounted_returnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.OVERCOUNTED;
 
@@ -200,6 +202,13 @@ public class BatteryAppListPreferenceControllerTest {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isFalse();
+    }
+
+    @Test
+    public void testShouldHideSipper_hiddenSystemModule_returnTrue() {
+        when(mBatteryUtils.isHiddenSystemModule(mNormalBatterySipper)).thenReturn(true);
+
+        assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test

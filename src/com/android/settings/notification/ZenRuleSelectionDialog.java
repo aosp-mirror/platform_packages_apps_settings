@@ -16,17 +16,14 @@
 
 package com.android.settings.notification;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,6 +34,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -70,7 +70,7 @@ public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_RULE_SELECTION_DIALOG;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_RULE_SELECTION_DIALOG;
     }
 
     public static void show(Context context, Fragment parent, PositiveClickListener
@@ -169,7 +169,8 @@ public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
 
     private ZenRuleInfo defaultNewEvent() {
         final ZenModeConfig.EventInfo event = new ZenModeConfig.EventInfo();
-        event.calendar = null; // any calendar
+        event.calName = null; // any calendar
+        event.calendarId = null;
         event.reply = ZenModeConfig.EventInfo.REPLY_ANY_EXCEPT_NO;
         final ZenRuleInfo rt = new ZenRuleInfo();
         rt.settingsAction = ZenModeEventRuleSettings.ACTION;
@@ -190,16 +191,17 @@ public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
     private final ZenServiceListing.Callback mServiceListingCallback = new
             ZenServiceListing.Callback() {
         @Override
-        public void onServicesReloaded(Set<ServiceInfo> services) {
-            if (DEBUG) Log.d(TAG, "Services reloaded: count=" + services.size());
+        public void onComponentsReloaded(Set<ComponentInfo> componentInfos) {
+            if (DEBUG) Log.d(TAG, "Reloaded: count=" + componentInfos.size());
+
             Set<ZenRuleInfo> externalRuleTypes = new TreeSet<>(RULE_TYPE_COMPARATOR);
-            for (ServiceInfo serviceInfo : services) {
+            for (ComponentInfo ci : componentInfos) {
                 final ZenRuleInfo ri = AbstractZenModeAutomaticRulePreferenceController.
-                        getRuleInfo(mPm, serviceInfo);
+                        getRuleInfo(mPm, ci);
                 if (ri != null && ri.configurationActivity != null
                         && mNm.isNotificationPolicyAccessGrantedForPackage(ri.packageName)
                         && (ri.ruleInstanceLimit <= 0 || ri.ruleInstanceLimit
-                        >= (mNm.getRuleInstanceCount(serviceInfo.getComponentName()) + 1))) {
+                        >= (mNm.getRuleInstanceCount(ci.getComponentName()) + 1))) {
                     externalRuleTypes.add(ri);
                 }
             }

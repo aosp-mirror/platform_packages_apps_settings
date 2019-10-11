@@ -16,10 +16,10 @@
 
 package com.android.settings.wifi.calling;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.settings.SettingsEnums;
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.legacy.app.FragmentPagerAdapter;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
@@ -27,11 +27,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
 import com.android.ims.ImsManager;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
@@ -73,7 +78,7 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WIFI_CALLING;
+        return SettingsEnums.WIFI_CALLING;
     }
 
     @Override
@@ -87,8 +92,28 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         mPagerAdapter = new WifiCallingViewPagerAdapter(getChildFragmentManager(), mViewPager);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new InternalViewPagerListener());
-
+        maybeSetViewForSubId();
         return view;
+    }
+
+    private void maybeSetViewForSubId() {
+        if (mSil == null) {
+            return;
+        }
+        Intent intent = getActivity().getIntent();
+        if (intent == null) {
+            return;
+        }
+        int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        if (SubscriptionManager.isValidSubscriptionId(subId)) {
+            for (SubscriptionInfo subInfo : mSil) {
+                if (subId == subInfo.getSubscriptionId()) {
+                    mViewPager.setCurrentItem(mSil.indexOf(subInfo));
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -121,7 +146,8 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         return R.string.help_uri_wifi_calling;
     }
 
-    private final class WifiCallingViewPagerAdapter extends FragmentPagerAdapter {
+    @VisibleForTesting
+    final class WifiCallingViewPagerAdapter extends FragmentPagerAdapter {
         private final RtlCompatibleViewPager mViewPager;
 
         public WifiCallingViewPagerAdapter(FragmentManager fragmentManager,
@@ -167,17 +193,29 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         }
     }
 
+    @VisibleForTesting
+    boolean isWfcEnabledByPlatform(SubscriptionInfo info) {
+        ImsManager imsManager = ImsManager.getInstance(getActivity(), info.getSimSlotIndex());
+        return imsManager.isWfcEnabledByPlatform();
+    }
+
+    @VisibleForTesting
+    boolean isWfcProvisionedOnDevice(SubscriptionInfo info) {
+        ImsManager imsManager = ImsManager.getInstance(getActivity(), info.getSimSlotIndex());
+        return imsManager.isWfcProvisionedOnDevice();
+    }
+
     private void updateSubList() {
-        mSil = SubscriptionManager.from(getActivity()).getActiveSubscriptionInfoList();
+        mSil = SubscriptionUtil.getActiveSubscriptions(
+                getContext().getSystemService(SubscriptionManager.class));
 
         // Only config Wfc if it's enabled by platform.
         if (mSil == null) {
             return;
         }
         for (int i = 0; i < mSil.size(); ) {
-            ImsManager imsManager = ImsManager.getInstance(getActivity(),
-                    mSil.get(i).getSimSlotIndex());
-            if (!imsManager.isWfcEnabledByPlatform()) {
+            final SubscriptionInfo info = mSil.get(i);
+            if (!isWfcEnabledByPlatform(info) || !isWfcProvisionedOnDevice(info)) {
                 mSil.remove(i);
             } else {
                 i++;

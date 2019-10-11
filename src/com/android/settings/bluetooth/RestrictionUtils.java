@@ -19,8 +19,8 @@ package com.android.settings.bluetooth;
 import android.content.Context;
 import android.os.UserHandle;
 
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /**
  * A utility class to aid testing.
@@ -36,7 +36,7 @@ public class RestrictionUtils {
      * API.
      */
     public EnforcedAdmin checkIfRestrictionEnforced(Context context, String restriction) {
-        return RestrictedLockUtils.checkIfRestrictionEnforced(
+        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 context, restriction, UserHandle.myUserId());
     }
 

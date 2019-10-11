@@ -18,28 +18,31 @@ package com.android.settings.wifi;
 
 import static android.content.Context.NETWORK_SCORE_SERVICE;
 import static android.provider.Settings.Global.USE_OPEN_WIFI_PACKAGE;
+
 import static com.android.settings.wifi.UseOpenWifiPreferenceController
         .REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY;
+
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.eq;
+
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.annotation.NonNull;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
+
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.google.common.collect.Lists;
@@ -52,13 +55,14 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UseOpenWifiPreferenceControllerTest {
 
     private static ComponentName sEnableActivityComponent;

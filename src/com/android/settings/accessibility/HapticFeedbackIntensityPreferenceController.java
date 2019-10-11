@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
 
 public class HapticFeedbackIntensityPreferenceController
@@ -27,7 +28,8 @@ public class HapticFeedbackIntensityPreferenceController
     static final String PREF_KEY = "touch_vibration_preference_screen";
 
     public HapticFeedbackIntensityPreferenceController(Context context) {
-        super(context, PREF_KEY, Settings.System.HAPTIC_FEEDBACK_INTENSITY);
+        super(context, PREF_KEY, Settings.System.HAPTIC_FEEDBACK_INTENSITY,
+                Settings.System.HAPTIC_FEEDBACK_ENABLED);
     }
 
     @Override

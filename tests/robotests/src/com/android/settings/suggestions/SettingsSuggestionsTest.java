@@ -24,64 +24,61 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Resources;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
-import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
-import com.android.settings.fingerprint.FingerprintSuggestionActivity;
-import com.android.settings.notification.ZenOnboardingActivity;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionActivity;
+import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.notification.ZenSuggestionActivity;
-import com.android.settings.support.NewDeviceIntroSuggestionActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingsSuggestionsTest {
 
     @Test
     public void wallpaperSuggestion_isValid() {
         assertSuggestionEquals(
-            WallpaperSuggestionActivity.class.getName(),
-            R.string.wallpaper_suggestion_title,
-            R.string.wallpaper_suggestion_summary);
+                WallpaperSuggestionActivity.class.getName(),
+                R.string.wallpaper_suggestion_title,
+                R.string.wallpaper_suggestion_summary);
     }
 
     @Test
     public void fingerprintSuggestion_isValid() {
         assertSuggestionEquals(
-            FingerprintSuggestionActivity.class.getName(),
-            R.string.suggestion_additional_fingerprints,
-            R.string.suggestion_additional_fingerprints_summary);
+                FingerprintSuggestionActivity.class.getName(),
+                R.string.suggestion_additional_fingerprints,
+                R.string.suggestion_additional_fingerprints_summary);
     }
 
     @Test
     public void fingerprintEnrollSuggestion_isValid() {
         assertSuggestionEquals(
-            FingerprintEnrollSuggestionActivity.class.getName(),
-            R.string.suggested_fingerprint_lock_settings_title,
-            R.string.suggested_fingerprint_lock_settings_summary);
+                FingerprintEnrollSuggestionActivity.class.getName(),
+                R.string.suggested_fingerprint_lock_settings_title,
+                R.string.suggested_fingerprint_lock_settings_summary);
     }
 
     @Test
     public void wifiCallingSuggestion_isValid() {
         assertSuggestionEquals(
-            WifiCallingSuggestionActivity.class.getName(),
-            R.string.wifi_calling_suggestion_title,
-            R.string.wifi_calling_suggestion_summary);
+                WifiCallingSuggestionActivity.class.getName(),
+                R.string.wifi_calling_suggestion_title,
+                R.string.wifi_calling_suggestion_summary);
     }
 
     @Test
     public void nightDisplaySuggestion_isValid() {
         assertSuggestionEquals(
-            Settings.NightDisplaySuggestionActivity.class.getName(),
-            R.string.night_display_suggestion_title,
-            R.string.night_display_suggestion_summary);
+                Settings.NightDisplaySuggestionActivity.class.getName(),
+                R.string.night_display_suggestion_title,
+                R.string.night_display_suggestion_summary);
     }
 
     @Test
@@ -92,16 +89,8 @@ public class SettingsSuggestionsTest {
                 R.string.zen_suggestion_summary);
     }
 
-    @Test
-    public void newDeviceIntroSuggestion_isValid() {
-        assertSuggestionEquals(
-            NewDeviceIntroSuggestionActivity.class.getName(),
-            R.string.new_device_suggestion_title,
-            R.string.new_device_suggestion_summary);
-    }
-
     private void assertSuggestionEquals(String activityName, @StringRes int titleRes,
-        @StringRes int summaryRes) {
+            @StringRes int summaryRes) {
 
         final Context context = RuntimeEnvironment.application;
         final PackageManager pm = context.getPackageManager();
@@ -113,19 +102,10 @@ public class SettingsSuggestionsTest {
             throw new RuntimeException(e);
         }
 
-        final String pName = context.getPackageName();
-        final Resources resources = context.getResources();
+        final int titleResourceId = (int) info.metaData.get("com.android.settings.title");
+        assertThat(titleResourceId).isEqualTo(titleRes);
 
-        final String title = (String) info.metaData.get("com.android.settings.title");
-        final String actualTitle =
-            context.getString(resources.getIdentifier(title.substring(8), "string", pName));
-        final String expectedTitle = context.getString(titleRes);
-        assertThat(actualTitle).isEqualTo(expectedTitle);
-
-        final String summary = (String) info.metaData.get("com.android.settings.summary");
-        final String actualSummary =
-            context.getString(resources.getIdentifier(summary.substring(8), "string", pName));
-        final String expectedSummary = context.getString(summaryRes);
-        assertThat(actualSummary).isEqualTo(expectedSummary);
+        final int summaryResourceId = (int) info.metaData.get("com.android.settings.summary");
+        assertThat(summaryResourceId).isEqualTo(summaryRes);
     }
 }

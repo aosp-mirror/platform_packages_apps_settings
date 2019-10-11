@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2019 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/app_entities_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="@dimen/notification_importance_toggle_marginTop"
+    android:orientation="vertical">
+
+    <com.android.settings.notification.NotificationButtonRelativeLayout
+        android:id="@+id/alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/notification_importance_button_padding"
+        android:clickable="true"
+        android:focusable="true">
+        <ImageView
+            android:id="@+id/alert_icon"
+            android:src="@drawable/ic_notifications_alert"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"/>
+        <TextView
+            android:id="@+id/alert_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_toEndOf="@id/alert_icon"
+            android:layout_marginStart="@dimen/notification_importance_drawable_padding"
+            android:textAppearance="@style/TextAppearance.NotificationImportanceButton.Unselected"
+            android:text="@string/notification_alert_title"/>
+        <TextView
+            android:id="@+id/alert_summary"
+            android:paddingTop="@dimen/notification_importance_button_padding"
+            android:text="@string/notification_channel_summary_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:layout_below="@id/alert_icon"
+            android:textAppearance="@style/TextAppearance.NotificationImportanceDetail"
+            android:visibility="gone" />
+    </com.android.settings.notification.NotificationButtonRelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/silence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/notification_importance_button_padding"
+        android:layout_marginTop="@dimen/notification_importance_button_separation"
+        android:clickable="true"
+        android:focusable="true">
+        <ImageView
+            android:id="@+id/silence_icon"
+            android:src="@drawable/ic_notifications_off_24dp"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"/>
+        <TextView
+            android:id="@+id/silence_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_toEndOf="@id/silence_icon"
+            android:layout_marginStart="@dimen/notification_importance_drawable_padding"
+            android:textAppearance="@style/TextAppearance.NotificationImportanceButton.Unselected"
+            android:text="@string/notification_silence_title"/>
+        <TextView
+            android:id="@+id/silence_summary"
+            android:paddingTop="@dimen/notification_importance_button_padding"
+            android:text="@string/notification_channel_summary_low"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:layout_below="@id/silence_icon"
+            android:textAppearance="@style/TextAppearance.NotificationImportanceDetail"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

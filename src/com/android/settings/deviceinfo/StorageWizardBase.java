@@ -23,8 +23,8 @@ import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.annotation.LayoutRes;
 import android.annotation.NonNull;
-import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -36,20 +36,24 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settingslib.Utils;
-import com.android.setupwizardlib.GlifLayout;
+
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupdesign.GlifLayout;
 
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class StorageWizardBase extends Activity {
+public abstract class StorageWizardBase extends FragmentActivity {
     protected static final String EXTRA_FORMAT_FORGET_UUID = "format_forget_uuid";
     protected static final String EXTRA_FORMAT_PRIVATE = "format_private";
     protected static final String EXTRA_FORMAT_SLOW = "format_slow";
@@ -60,8 +64,9 @@ public abstract class StorageWizardBase extends Activity {
     protected VolumeInfo mVolume;
     protected DiskInfo mDisk;
 
-    private Button mBack;
-    private Button mNext;
+    private FooterBarMixin mFooterBarMixin;
+    private FooterButton mBack;
+    private FooterButton mNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +95,25 @@ public abstract class StorageWizardBase extends Activity {
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
 
-        mBack = requireViewById(R.id.storage_back_button);
-        mNext = requireViewById(R.id.storage_next_button);
+        mFooterBarMixin = getGlifLayout().getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setSecondaryButton(
+                new FooterButton.Builder(this)
+                        .setText(R.string.wizard_back)
+                        .setListener(this::onNavigateBack)
+                        .setButtonType(FooterButton.ButtonType.OTHER)
+                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .build()
+        );
+        mFooterBarMixin.setPrimaryButton(
+                new FooterButton.Builder(this)
+                        .setText(R.string.wizard_next)
+                        .setListener(this::onNavigateNext)
+                        .setButtonType(FooterButton.ButtonType.NEXT)
+                        .setTheme(R.style.SudGlifButton_Primary)
+                        .build()
+        );
+        mBack = mFooterBarMixin.getSecondaryButton();
+        mNext = mFooterBarMixin.getPrimaryButton();
 
         setIcon(com.android.internal.R.drawable.ic_sd_card_48dp);
     }
@@ -102,11 +124,17 @@ public abstract class StorageWizardBase extends Activity {
         super.onDestroy();
     }
 
-    protected Button getBackButton() {
+    @Override
+    protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, resid, first);
+    }
+
+    protected FooterButton getBackButton() {
         return mBack;
     }
 
-    protected Button getNextButton() {
+    protected FooterButton getNextButton() {
         return mNext;
     }
 
@@ -159,10 +187,18 @@ public abstract class StorageWizardBase extends Activity {
         mNext.setVisibility(View.VISIBLE);
     }
 
+    protected void setBackButtonVisibility(int visible) {
+        mBack.setVisibility(visible);
+    }
+
+    protected void setNextButtonVisibility(int visible) {
+        mNext.setVisibility(visible);
+    }
+
     protected void setIcon(int resId) {
         final GlifLayout layout = getGlifLayout();
         final Drawable icon = getDrawable(resId).mutate();
-        icon.setTint(Utils.getColorAccent(layout.getContext()));
+        icon.setTintList(Utils.getColorAccent(layout.getContext()));
         layout.setIcon(icon);
     }
 

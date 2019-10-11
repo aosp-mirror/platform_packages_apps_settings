@@ -20,7 +20,7 @@ import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
 import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
-import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -31,26 +31,27 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
 import android.speech.tts.UtteranceProgressListener;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.ActionButtonsPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -58,9 +59,10 @@ import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
 
+@SearchIndexable
 public class TextToSpeechSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener,
-        GearPreference.OnGearClickListener, Indexable {
+        GearPreference.OnGearClickListener {
 
     private static final String STATE_KEY_LOCALE_ENTRIES = "locale_entries";
     private static final String STATE_KEY_LOCALE_ENTRY_VALUES = "locale_entry_values";
@@ -110,7 +112,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
     private SeekBarPreference mDefaultPitchPref;
     private SeekBarPreference mDefaultRatePref;
-    private ActionButtonPreference mActionButtons;
+    private ActionButtonsPreference mActionButtons;
 
     private int mDefaultPitch = TextToSpeech.Engine.DEFAULT_PITCH;
     private int mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
@@ -144,16 +146,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
      * screen for the first time (as opposed to when a user changes his choice
      * of engine).
      */
-    private final TextToSpeech.OnInitListener mInitListener = new TextToSpeech.OnInitListener() {
-        @Override
-        public void onInit(int status) {
-            onInitEngine(status);
-        }
-    };
+    private final TextToSpeech.OnInitListener mInitListener = this::onInitEngine;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TTS_TEXT_TO_SPEECH;
+        return SettingsEnums.TTS_TEXT_TO_SPEECH;
     }
 
     @Override
@@ -171,13 +168,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         mDefaultPitchPref = (SeekBarPreference) findPreference(KEY_DEFAULT_PITCH);
         mDefaultRatePref = (SeekBarPreference) findPreference(KEY_DEFAULT_RATE);
 
-        mActionButtons = ((ActionButtonPreference) findPreference(KEY_ACTION_BUTTONS))
+        mActionButtons = ((ActionButtonsPreference) findPreference(KEY_ACTION_BUTTONS))
                 .setButton1Text(R.string.tts_play)
-                .setButton1Positive(true)
                 .setButton1OnClickListener(v -> speakSampleText())
                 .setButton1Enabled(false)
                 .setButton2Text(R.string.tts_reset)
-                .setButton2Positive(false)
                 .setButton2OnClickListener(v -> resetTts())
                 .setButton1Enabled(true);
 
@@ -212,6 +207,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+        // We tend to change the summary contents of our widgets, which at higher text sizes causes
+        // them to resize, which results in the recyclerview smoothly animating them at inopportune
+        // times. Disable the animation so widgets snap to their positions rather than sliding
+        // around while the user is interacting with it.
+        getListView().getItemAnimator().setMoveDuration(0);
 
         if (mTts == null || mCurrentDefaultLocale == null) {
             return;
@@ -248,15 +248,20 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         mTts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String utteranceId) {
+                updateWidgetState(false);
             }
 
             @Override
             public void onDone(String utteranceId) {
+                updateWidgetState(true);
             }
 
             @Override
             public void onError(String utteranceId) {
                 Log.e(TAG, "Error while trying to synthesize sample text");
+                // Re-enable just in case, although there isn't much hope that following synthesis
+                // requests are going to succeed.
+                updateWidgetState(true);
             }
         });
     }
@@ -320,7 +325,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         if (mCurrentEngine != null) {
             EngineInfo info = mEnginesHelper.getEngineInfo(mCurrentEngine);
 
-
             Preference mEnginePreference = findPreference(KEY_TTS_ENGINE_PREFERENCE);
             ((GearPreference) mEnginePreference).setOnGearClickListener(this);
             mEnginePreference.setSummary(info.label);
@@ -362,14 +366,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         if (status == TextToSpeech.SUCCESS) {
             if (DBG) Log.d(TAG, "TTS engine for settings screen initialized.");
             checkDefaultLocale();
-            getActivity()
-                    .runOnUiThread(
-                            new Runnable() {
-                                @Override
-                                public void run() {
-                                    mLocalePreference.setEnabled(true);
-                                }
-                            });
+            getActivity().runOnUiThread(() -> mLocalePreference.setEnabled(true));
         } else {
             if (DBG) {
                 Log.d(TAG,
@@ -513,14 +510,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         }
 
         // Sort it
-        Collections.sort(
-                entryPairs,
-                new Comparator<Pair<String, Locale>>() {
-                    @Override
-                    public int compare(Pair<String, Locale> lhs, Pair<String, Locale> rhs) {
-                        return lhs.first.compareToIgnoreCase(rhs.first);
-                    }
-                });
+        Collections.sort(entryPairs, (lhs, rhs) -> lhs.first.compareToIgnoreCase(rhs.first));
 
         // Get two arrays out of one of pairs
         mSelectedLocaleIndex = 0; // Will point to the R.string.tts_lang_use_system value
@@ -708,9 +698,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     }
 
     private void updateWidgetState(boolean enable) {
-        mActionButtons.setButton1Enabled(enable);
-        mDefaultRatePref.setEnabled(enable);
-        mDefaultPitchPref.setEnabled(enable);
+        getActivity().runOnUiThread(() -> {
+            mActionButtons.setButton1Enabled(enable);
+            mDefaultRatePref.setEnabled(enable);
+            mDefaultPitchPref.setEnabled(enable);
+        });
     }
 
     private void displayNetworkAlert() {
@@ -786,13 +778,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.tts_settings;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add("tts_engine_preference");
-                    return keys;
                 }
             };
 

@@ -45,9 +45,11 @@ public class AppPicker extends ListActivity {
     public static final String EXTRA_REQUESTIING_PERMISSION
             = "com.android.settings.extra.REQUESTIING_PERMISSION";
     public static final String EXTRA_DEBUGGABLE = "com.android.settings.extra.DEBUGGABLE";
+    public static final String EXTRA_NON_SYSTEM = "com.android.settings.extra.NON_SYSTEM";
 
     private String mPermissionName;
     private boolean mDebuggableOnly;
+    private boolean mNonSystemOnly;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -55,6 +57,7 @@ public class AppPicker extends ListActivity {
 
         mPermissionName = getIntent().getStringExtra(EXTRA_REQUESTIING_PERMISSION);
         mDebuggableOnly = getIntent().getBooleanExtra(EXTRA_DEBUGGABLE, false);
+        mNonSystemOnly = getIntent().getBooleanExtra(EXTRA_NON_SYSTEM, false);
 
         mAdapter = new AppListAdapter(this);
         if (mAdapter.getCount() <= 0) {
@@ -111,6 +114,11 @@ public class AppPicker extends ListActivity {
                             && "user".equals(Build.TYPE)) {
                         continue;
                     }
+                }
+
+                // Filter out apps that are system apps if requested
+                if (mNonSystemOnly && ai.isSystemApp()) {
+                    continue;
                 }
 
                 // Filter out apps that do not request the permission if required.

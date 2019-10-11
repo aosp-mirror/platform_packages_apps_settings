@@ -19,6 +19,7 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;

@@ -21,47 +21,50 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.robolectric.Shadows.shadowOf;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.IconDrawableFactory;
+import android.util.SparseLongArray;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.CheckBoxPreference;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
-import android.util.IconDrawableFactory;
-import android.widget.CheckBox;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.BatteryTipDialogFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.shadows.ShadowDialog;
-import org.robolectric.util.FragmentTestUtil;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowAlertDialogCompat.class)
 public class RestrictedAppDetailsTest {
 
     private static final String PACKAGE_NAME = "com.android.app";
@@ -78,6 +81,8 @@ public class RestrictedAppDetailsTest {
     private IconDrawableFactory mIconDrawableFactory;
     @Mock
     private InstrumentedPreferenceFragment mFragment;
+    @Mock
+    private BatteryDatabaseManager mBatteryDatabaseManager;
     private PreferenceManager mPreferenceManager;
     private RestrictedAppDetails mRestrictedAppDetails;
     private Context mContext;
@@ -100,12 +105,14 @@ public class RestrictedAppDetailsTest {
 
         doReturn(mPreferenceManager).when(mRestrictedAppDetails).getPreferenceManager();
         doReturn(mContext).when(mFragment).getContext();
+        doReturn(mContext).when(mRestrictedAppDetails).getContext();
         mRestrictedAppDetails.mPackageManager = mPackageManager;
         mRestrictedAppDetails.mIconDrawableFactory = mIconDrawableFactory;
         mRestrictedAppDetails.mAppInfos = new ArrayList<>();
         mRestrictedAppDetails.mAppInfos.add(mAppInfo);
         mRestrictedAppDetails.mRestrictedAppListGroup = spy(new PreferenceCategory(mContext));
         mRestrictedAppDetails.mBatteryUtils = spy(new BatteryUtils(mContext));
+        mRestrictedAppDetails.mBatteryDatabaseManager = mBatteryDatabaseManager;
         doReturn(mPreferenceManager).when(
                 mRestrictedAppDetails.mRestrictedAppListGroup).getPreferenceManager();
 
@@ -120,6 +127,10 @@ public class RestrictedAppDetailsTest {
         doReturn(APP_NAME).when(mPackageManager).getApplicationLabel(mApplicationInfo);
         doReturn(true).when(mRestrictedAppDetails.mBatteryUtils).isForceAppStandbyEnabled(UID,
                 PACKAGE_NAME);
+        final SparseLongArray timestampArray = new SparseLongArray();
+        timestampArray.put(UID, System.currentTimeMillis() - TimeUnit.HOURS.toMillis(5));
+        doReturn(timestampArray).when(mBatteryDatabaseManager)
+                .queryActionTime(AnomalyDatabaseHelper.ActionType.RESTRICTION);
 
         mRestrictedAppDetails.refreshUi();
 
@@ -128,6 +139,7 @@ public class RestrictedAppDetailsTest {
                 (CheckBoxPreference) mRestrictedAppDetails.mRestrictedAppListGroup.getPreference(0);
         assertThat(preference.getTitle()).isEqualTo(APP_NAME);
         assertThat(preference.isChecked()).isTrue();
+        assertThat(preference.getSummary()).isEqualTo("Restricted 5 hours ago");
     }
 
     @Test
@@ -155,10 +167,11 @@ public class RestrictedAppDetailsTest {
         final BatteryTipDialogFragment dialogFragment = mRestrictedAppDetails.createDialogFragment(
                 mAppInfo, true);
 
-        FragmentTestUtil.startFragment(dialogFragment);
+        FragmentController.setupFragment(dialogFragment, FragmentActivity.class,
+                0 /* containerViewId */, null /* bundle */);
 
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
         assertThat(shadowDialog.getTitle()).isEqualTo("Restrict app?");
     }
 
@@ -167,10 +180,11 @@ public class RestrictedAppDetailsTest {
         final BatteryTipDialogFragment dialogFragment = mRestrictedAppDetails.createDialogFragment(
                 mAppInfo, false);
 
-        FragmentTestUtil.startFragment(dialogFragment);
+        FragmentController.setupFragment(dialogFragment, FragmentActivity.class,
+                0 /* containerViewId */, null /* bundle */);
 
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
         assertThat(shadowDialog.getTitle()).isEqualTo("Remove restriction?");
     }
 

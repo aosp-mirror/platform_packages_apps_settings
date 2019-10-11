@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import static com.android.settings.development.KeepActivitiesPreferenceController.SETTING_VALUE_OFF;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -26,19 +27,19 @@ import android.app.IActivityManager;
 import android.content.Context;
 import android.os.RemoteException;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class KeepActivitiesPreferenceControllerTest {
 
     private static final int SETTING_VALUE_ON = 1;
@@ -82,7 +83,7 @@ public class KeepActivitiesPreferenceControllerTest {
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ALWAYS_FINISH_ACTIVITIES, SETTING_VALUE_ON);
         mController.updateState(mPreference);
 
@@ -91,7 +92,7 @@ public class KeepActivitiesPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ALWAYS_FINISH_ACTIVITIES, SETTING_VALUE_OFF);
         mController.updateState(mPreference);
 

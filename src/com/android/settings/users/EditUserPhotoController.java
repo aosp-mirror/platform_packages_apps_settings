@@ -17,7 +17,6 @@
 package com.android.settings.users;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -38,7 +37,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract.DisplayPhoto;
 import android.provider.MediaStore;
-import androidx.core.content.FileProvider;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -50,8 +48,12 @@ import android.widget.ImageView;
 import android.widget.ListPopupWindow;
 import android.widget.TextView;
 
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import libcore.io.Streams;
@@ -418,9 +420,9 @@ public class EditUserPhotoController {
             mAction = action;
 
             final int myUserId = UserHandle.myUserId();
-            mAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+            mAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
                     restriction, myUserId);
-            mIsRestrictedByBase = RestrictedLockUtils.hasBaseUserRestriction(mContext,
+            mIsRestrictedByBase = RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                     restriction, myUserId);
         }
 

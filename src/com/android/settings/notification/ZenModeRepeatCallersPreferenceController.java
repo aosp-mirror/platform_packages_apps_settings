@@ -17,14 +17,15 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager.Policy;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -94,7 +95,7 @@ public class ZenModeRepeatCallersPreferenceController extends AbstractZenModePre
             Log.d(TAG, "onPrefChange allowRepeatCallers=" + allowRepeatCallers);
         }
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_ZEN_ALLOW_REPEAT_CALLS, allowRepeatCallers);
+                SettingsEnums.ACTION_ZEN_ALLOW_REPEAT_CALLS, allowRepeatCallers);
         mBackend.saveSoundPolicy(Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, allowRepeatCallers);
         return true;
     }

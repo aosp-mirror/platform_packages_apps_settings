@@ -17,7 +17,7 @@
 package com.android.settings;
 
 import android.app.ActivityManager;
-import android.app.AlertDialog.Builder;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.RemoteException;
@@ -27,11 +27,12 @@ import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.CustomDialogPreference;
+import androidx.appcompat.app.AlertDialog.Builder;
 
-public class BugreportPreference extends CustomDialogPreference {
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.CustomDialogPreferenceCompat;
+
+public class BugreportPreference extends CustomDialogPreferenceCompat {
 
     private static final String TAG = "BugreportPreference";
 
@@ -84,12 +85,12 @@ public class BugreportPreference extends CustomDialogPreference {
             if (mFullTitle.isChecked()) {
                 Log.v(TAG, "Taking full bugreport right away");
                 FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
-                        MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
+                        SettingsEnums.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
                 takeBugreport(ActivityManager.BUGREPORT_OPTION_FULL);
             } else {
                 Log.v(TAG, "Taking interactive bugreport right away");
                 FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
-                        MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
+                        SettingsEnums.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
                 takeBugreport(ActivityManager.BUGREPORT_OPTION_INTERACTIVE);
             }
         }

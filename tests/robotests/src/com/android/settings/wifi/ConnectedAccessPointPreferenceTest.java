@@ -26,7 +26,6 @@ import android.content.Context;
 import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
@@ -34,9 +33,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ConnectedAccessPointPreferenceTest {
 
     @Mock
@@ -54,7 +54,7 @@ public class ConnectedAccessPointPreferenceTest {
 
         mContext = RuntimeEnvironment.application;
         mConnectedAccessPointPreference = new ConnectedAccessPointPreference(mAccessPoint, mContext,
-                null, 0 /* iconResId */, false /* forSavedNetworks */);
+                null, 0 /* iconResId */, false /* forSavedNetworks */, null /* fragment */);
         mConnectedAccessPointPreference.setOnGearClickListener(mOnGearClickListener);
     }
 

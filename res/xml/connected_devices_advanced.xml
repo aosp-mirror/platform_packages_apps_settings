@@ -24,8 +24,9 @@
         android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
         android:key="bluetooth_settings"
         android:title="@string/bluetooth_settings_title"
-        android:icon="@drawable/ic_settings_bluetooth"
-        android:order="-9"/>
+        android:icon="@*android:drawable/ic_settings_bluetooth"
+        android:order="-9"
+        settings:searchable="false"/>
 
     <SwitchPreference
         android:key="toggle_nfc"
@@ -44,25 +45,26 @@
         android:order="-6"/>
 
     <SwitchPreference
-        android:key="bluetooth_on_while_driving"
-        android:title="@string/bluetooth_on_while_driving_pref"
-        android:icon="@drawable/ic_settings_bluetooth"
-        android:summary="@string/bluetooth_on_while_driving_summary"
-        settings:controller="com.android.settings.connecteddevice.BluetoothOnWhileDrivingPreferenceController"
-        android:order="-4"/>
+        android:key="nfc_secure_settings"
+        android:title="@string/nfc_secure_settings_title"
+        settings:controller="com.android.settings.nfc.SecureNfcPreferenceController"
+        android:icon="@drawable/ic_nfc"
+        android:summary="@string/nfc_secure_toggle_summary"
+        android:order="-7"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="connected_device_printing"
         android:title="@string/print_settings"
         android:summary="@string/summary_placeholder"
-        android:icon="@drawable/ic_settings_print"
+        android:icon="@*android:drawable/ic_settings_print"
         android:fragment="com.android.settings.print.PrintSettingsFragment"
-        android:order="-3"/>
+        android:order="-3"
+        settings:searchable="false"/>
 
     <Preference
         android:key="bt_received_files"
         android:icon="@drawable/ic_folder_vd_theme_24"
-        android:title="@string/bluetooth_show_received_files"/>
+        android:title="@string/bluetooth_show_files_received_via_bluetooth"/>
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"

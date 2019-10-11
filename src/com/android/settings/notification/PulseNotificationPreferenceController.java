@@ -16,41 +16,38 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.System.NOTIFICATION_LIGHT_PULSE;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
-import android.util.Log;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import static android.provider.Settings.System.NOTIFICATION_LIGHT_PULSE;
+public class PulseNotificationPreferenceController extends TogglePreferenceController
+        implements LifecycleObserver, OnResume, OnPause {
 
-public class PulseNotificationPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnResume, OnPause {
-
-    private static final String TAG = "PulseNotifPrefContr";
-    private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
+    private static final int ON = 1;
+    private static final int OFF = 0;
     private SettingObserver mSettingObserver;
 
-    public PulseNotificationPreferenceController(Context context) {
-        super(context);
+    public PulseNotificationPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        Preference preference = screen.findPreference(KEY_NOTIFICATION_PULSE);
+        Preference preference = screen.findPreference(getPreferenceKey());
         if (preference != null) {
             mSettingObserver = new SettingObserver(preference);
         }
@@ -71,32 +68,22 @@ public class PulseNotificationPreferenceController extends AbstractPreferenceCon
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_NOTIFICATION_PULSE;
+    public int getAvailabilityStatus() {
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_intrusiveNotificationLed) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
-    public boolean isAvailable() {
-        return mContext.getResources()
-                .getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed);
+    public boolean isChecked() {
+        return Settings.System.getInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, OFF)
+                == ON;
     }
 
     @Override
-    public void updateState(Preference preference) {
-        try {
-            final boolean checked = Settings.System.getInt(mContext.getContentResolver(),
-                    NOTIFICATION_LIGHT_PULSE) == 1;
-            ((TwoStatePreference) preference).setChecked(checked);
-        } catch (Settings.SettingNotFoundException snfe) {
-            Log.e(TAG, NOTIFICATION_LIGHT_PULSE + " not found");
-        }
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean val = (Boolean) newValue;
-        return Settings.System.putInt(mContext.getContentResolver(),
-                NOTIFICATION_LIGHT_PULSE, val ? 1 : 0);
+    public boolean setChecked(boolean isChecked) {
+        return Settings.System.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE,
+                isChecked ? ON : OFF);
     }
 
     class SettingObserver extends ContentObserver {

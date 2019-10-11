@@ -20,7 +20,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.PowerManager;
 import android.os.UserHandle;
 

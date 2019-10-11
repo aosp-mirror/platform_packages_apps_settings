@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -29,38 +30,39 @@ import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class InstantAppButtonsPreferenceControllerTest {
 
     private static final String TEST_INSTALLER_PACKAGE_NAME = "com.installer";
@@ -85,7 +87,7 @@ public class InstantAppButtonsPreferenceControllerTest {
     private InstantAppButtonsPreferenceController mController;
 
     @Before
-    public void setUp() throws PackageManager.NameNotFoundException {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
@@ -288,13 +290,16 @@ public class InstantAppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void onClick_shouldDeleteApp() {
-        PackageManagerWrapper packageManagerWrapper = mock(PackageManagerWrapper.class);
-        ReflectionHelpers.setField(mController, "mPackageManagerWrapper", packageManagerWrapper);
+    public void clickClearAppButton_shouldLaunchInstantAppButtonDialogFragment() {
+        final FragmentManager fragmentManager = mock(FragmentManager.class);
+        final FragmentTransaction fragmentTransaction = mock(FragmentTransaction.class);
+        when(mFragment.getFragmentManager()).thenReturn(fragmentManager);
+        when(fragmentManager.beginTransaction()).thenReturn(fragmentTransaction);
+        mController.displayPreference(mScreen);
 
-        mController.onClick(mock(DialogInterface.class), DialogInterface.BUTTON_POSITIVE);
+        mClearAppButton.callOnClick();
 
-        verify(packageManagerWrapper)
-            .deletePackageAsUser(eq(TEST_AIA_PACKAGE_NAME), any(), anyInt(),anyInt());
+        verify(fragmentTransaction).add(any(InstantAppButtonDialogFragment.class),
+            eq("instant_app_buttons"));
     }
 }

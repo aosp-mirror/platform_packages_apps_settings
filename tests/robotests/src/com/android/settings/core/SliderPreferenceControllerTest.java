@@ -17,17 +17,18 @@ package com.android.settings.core;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+
 import androidx.preference.SeekBarPreference;
 
 import com.android.settings.slices.SliceData;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SliderPreferenceControllerTest {
 
     private FakeSlider mSliderController;
@@ -63,8 +64,7 @@ public class SliderPreferenceControllerTest {
 
     @Test
     public void testSliceType_returnsSliceType() {
-        assertThat(mSliderController.getSliceType()).isEqualTo(
-                SliceData.SliceType.SLIDER);
+        assertThat(mSliderController.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER);
     }
 
     private class FakeSlider extends SliderPreferenceController {
@@ -72,7 +72,7 @@ public class SliderPreferenceControllerTest {
         private final int MAX_STEPS = 2112;
         private int mPosition;
 
-        public FakeSlider(Context context, String key) {
+        private FakeSlider(Context context, String key) {
             super(context, key);
         }
 
@@ -88,8 +88,13 @@ public class SliderPreferenceControllerTest {
         }
 
         @Override
-        public int getMaxSteps() {
+        public int getMax() {
             return MAX_STEPS;
+        }
+
+        @Override
+        public int getMin() {
+            return 0;
         }
 
         @Override

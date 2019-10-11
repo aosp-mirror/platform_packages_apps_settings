@@ -82,6 +82,14 @@ public interface ApplicationFeatureProvider {
     Set<String> getKeepEnabledPackages();
 
     /**
+     * Returns a user readable text explaining how much time user has spent in an app at a
+     * pre-specified duration.
+     */
+    default CharSequence getTimeSpentInApp(String packageName) {
+        return null;
+    }
+
+    /**
      * Callback that receives the number of packages installed on the device.
      */
     interface NumberOfAppsCallback {

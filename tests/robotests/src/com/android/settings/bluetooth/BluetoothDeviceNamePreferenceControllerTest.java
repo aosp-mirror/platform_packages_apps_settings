@@ -17,28 +17,32 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothDeviceNamePreferenceControllerTest {
 
     private static final String DEVICE_NAME = "Nightshade";
@@ -46,8 +50,6 @@ public class BluetoothDeviceNamePreferenceControllerTest {
     private static final String KEY_DEVICE_NAME = "test_key_name";
 
     private Context mContext;
-    @Mock
-    private LocalBluetoothAdapter mLocalAdapter;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     private Preference mPreference;
@@ -63,8 +65,7 @@ public class BluetoothDeviceNamePreferenceControllerTest {
         when(mPreferenceScreen.getContext()).thenReturn(mContext);
         mPreference = new Preference(mContext);
         mPreference.setKey(KEY_DEVICE_NAME);
-        mController = spy(new BluetoothDeviceNamePreferenceController(mContext, mLocalAdapter,
-                KEY_DEVICE_NAME));
+        mController = spy(new BluetoothDeviceNamePreferenceController(mContext, KEY_DEVICE_NAME));
         doReturn(DEVICE_NAME).when(mController).getDeviceName();
     }
 

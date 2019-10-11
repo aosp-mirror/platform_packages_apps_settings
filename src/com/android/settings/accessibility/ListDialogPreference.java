@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,12 +30,14 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
-import com.android.settingslib.CustomDialogPreference;
+import androidx.appcompat.app.AlertDialog.Builder;
+
+import com.android.settingslib.CustomDialogPreferenceCompat;
 
 /**
  * Abstract dialog preference that displays a set of values and optional titles.
  */
-public abstract class ListDialogPreference extends CustomDialogPreference {
+public abstract class ListDialogPreference extends CustomDialogPreferenceCompat {
     private CharSequence[] mEntryTitles;
     private int[] mEntryValues;
 
@@ -138,7 +139,7 @@ public abstract class ListDialogPreference extends CustomDialogPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         super.onPrepareDialogBuilder(builder, listener);
 

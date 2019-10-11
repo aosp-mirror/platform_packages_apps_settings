@@ -17,37 +17,37 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowToast;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeScheduleRuleSettingsTest {
 
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     @Mock
     private Intent mIntent;
@@ -64,7 +64,7 @@ public class ZenModeScheduleRuleSettingsTest {
 
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
 
         mFragment = spy(new TestFragment());
         mFragment.onAttach(application);

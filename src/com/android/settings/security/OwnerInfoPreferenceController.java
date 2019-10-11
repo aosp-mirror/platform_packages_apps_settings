@@ -15,10 +15,11 @@
  */
 package com.android.settings.security;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.UserHandle;
+
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
@@ -26,8 +27,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.users.OwnerInfoSettings;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -60,7 +61,7 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mOwnerInfoPref  = (RestrictedPreference) screen.findPreference(KEY_OWNER_INFO);
+        mOwnerInfoPref  = screen.findPreference(KEY_OWNER_INFO);
     }
 
     @Override
@@ -139,6 +140,6 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
 
     @VisibleForTesting
     EnforcedAdmin getDeviceOwner() {
-        return RestrictedLockUtils.getDeviceOwner(mContext);
+        return RestrictedLockUtilsInternal.getDeviceOwner(mContext);
     }
 }

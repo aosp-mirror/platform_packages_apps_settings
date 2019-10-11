@@ -19,31 +19,26 @@ package com.android.settings.language;
 import android.content.Context;
 import android.speech.tts.TtsEngines;
 
-import com.android.settings.core.PreferenceControllerMixin;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
-public class TtsPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class TtsPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_VOICE_CATEGORY = "voice_category";
-    private static final String KEY_TTS_SETTINGS = "tts_settings_summary";
+    @VisibleForTesting
+    TtsEngines mTtsEngines;
 
-    private final TtsEngines mTtsEngines;
-
-    public TtsPreferenceController(Context context, TtsEngines ttsEngines) {
-        super(context);
-        mTtsEngines = ttsEngines;
+    public TtsPreferenceController(Context context, String key) {
+        super(context, key);
+        mTtsEngines = new TtsEngines(context);
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         return !mTtsEngines.getEngines().isEmpty() &&
-                mContext.getResources().getBoolean(R.bool.config_show_tts_settings_summary);
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_TTS_SETTINGS;
+                mContext.getResources().getBoolean(R.bool.config_show_tts_settings_summary)
+                ? AVAILABLE_UNSEARCHABLE
+                : CONDITIONALLY_UNAVAILABLE;
     }
 }

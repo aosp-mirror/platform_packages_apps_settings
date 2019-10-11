@@ -24,11 +24,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.PreferenceFragment;
+
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.accounts.AuthenticatorHelper;
@@ -36,6 +36,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class AccountHeaderPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume {
@@ -43,14 +44,14 @@ public class AccountHeaderPreferenceController extends AbstractPreferenceControl
     private static final String KEY_ACCOUNT_HEADER = "account_header";
 
     private final Activity mActivity;
-    private final PreferenceFragment mHost;
+    private final PreferenceFragmentCompat mHost;
     private final Account mAccount;
     private final UserHandle mUserHandle;
 
     private LayoutPreference mHeaderPreference;
 
     public AccountHeaderPreferenceController(Context context, Lifecycle lifecycle,
-            Activity activity, PreferenceFragment host, Bundle args) {
+            Activity activity, PreferenceFragmentCompat host, Bundle args) {
         super(context);
         mActivity = activity;
         mHost = host;
@@ -83,7 +84,7 @@ public class AccountHeaderPreferenceController extends AbstractPreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mHeaderPreference = (LayoutPreference) screen.findPreference(KEY_ACCOUNT_HEADER);
+        mHeaderPreference = screen.findPreference(KEY_ACCOUNT_HEADER);
     }
 
     @Override

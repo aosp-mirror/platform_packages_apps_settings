@@ -73,6 +73,7 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
         setBodyText(R.string.storage_wizard_move_confirm_body, appName, volumeName);
 
         setNextButtonText(R.string.move_app);
+        setBackButtonVisibility(View.INVISIBLE);
     }
 
     @Override

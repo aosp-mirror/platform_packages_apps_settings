@@ -16,30 +16,41 @@
 
 package com.android.settings.notification;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
+import android.widget.Toast;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
+import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Settings screen for managing notification listener permissions
  */
+@SearchIndexable
 public class NotificationAccessSettings extends ManagedServiceSettings {
-    private static final String TAG = NotificationAccessSettings.class.getSimpleName();
-    private static final Config CONFIG =  new Config.Builder()
+    private static final String TAG = "NotificationAccessSettings";
+    private static final Config CONFIG = new Config.Builder()
             .setTag(TAG)
             .setSetting(Settings.Secure.ENABLED_NOTIFICATION_LISTENERS)
             .setIntentAction(NotificationListenerService.SERVICE_INTERFACE)
@@ -53,8 +64,20 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
     private NotificationManager mNm;
 
     @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        final Context ctx = getContext();
+        if (UserManager.get(ctx).isManagedProfile()) {
+            // Apps in the work profile do not support notification listeners.
+            Toast.makeText(ctx, R.string.notification_settings_work_profile, Toast.LENGTH_SHORT)
+                .show();
+            finish();
+        }
+    }
+
+    @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ACCESS;
+        return SettingsEnums.NOTIFICATION_ACCESS;
     }
 
     @Override
@@ -109,8 +132,8 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
 
     @VisibleForTesting
     void logSpecialPermissionChange(boolean enable, String packageName) {
-        int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW
-                : MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY;
+        int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW
+                : SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY;
         FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
                 logCategory, packageName);
     }
@@ -141,7 +164,7 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_DISABLE_NOTIFICATION_ACCESS;
+            return SettingsEnums.DIALOG_DISABLE_NOTIFICATION_ACCESS;
         }
 
         @Override
@@ -166,4 +189,18 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
                     .create();
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.notification_access_settings;
+                    result.add(sir);
+                    return result;
+                }
+            };
 }

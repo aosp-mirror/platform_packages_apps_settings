@@ -20,14 +20,18 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryStats;
 import android.os.SystemClock;
+
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.fuelgauge.Estimate;
+import com.android.settingslib.fuelgauge.EstimateKt;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 import com.android.settingslib.utils.PowerUtil;
-import com.android.settingslib.utils.AsyncLoader;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class DebugEstimatesLoader extends AsyncLoader<List<BatteryInfo>> {
+public class DebugEstimatesLoader extends AsyncLoaderCompat<List<BatteryInfo>> {
     private BatteryStatsHelper mStatsHelper;
 
     public DebugEstimatesLoader(Context context, BatteryStatsHelper statsHelper) {
@@ -58,7 +62,7 @@ public class DebugEstimatesLoader extends AsyncLoader<List<BatteryInfo>> {
 
         Estimate estimate = powerUsageFeatureProvider.getEnhancedBatteryPrediction(context);
         if (estimate == null) {
-            estimate = new Estimate(0, false, Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+            estimate = new Estimate(0, false, EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
         BatteryInfo newInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast, stats,
                 estimate, elapsedRealtimeUs, false);

@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -27,12 +28,12 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -40,11 +41,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppPermissionPreferenceControllerTest {
 
     @Mock
@@ -75,15 +77,15 @@ public class AppPermissionPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_isAlwaysAvailable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(AppPermissionPreferenceController.AVAILABLE);
     }
 
     @Test
     public void onPermissionSummaryResult_noRequestedPermission_shouldDisablePreference() {
         mController.displayPreference(mScreen);
 
-        mController.mPermissionCallback.onPermissionSummaryResult(
-                1, 0, 1, new ArrayList<CharSequence>());
+        mController.mPermissionCallback.onPermissionSummaryResult(1, 0, 1, new ArrayList<>());
 
         verify(mPreference).setEnabled(false);
         verify(mPreference).setSummary(mContext.getString(
@@ -94,8 +96,7 @@ public class AppPermissionPreferenceControllerTest {
     public void onPermissionSummaryResult_noGrantedPermission_shouldSetNoPermissionSummary() {
         mController.displayPreference(mScreen);
 
-        mController.mPermissionCallback.onPermissionSummaryResult(
-                1, 5, 0, new ArrayList<CharSequence>());
+        mController.mPermissionCallback.onPermissionSummaryResult(1, 5, 0, new ArrayList<>());
 
         verify(mPreference).setEnabled(true);
         verify(mPreference).setSummary(mContext.getString(
