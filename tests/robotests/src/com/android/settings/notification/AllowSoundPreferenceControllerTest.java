@@ -67,7 +67,7 @@ public class AllowSoundPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     @Mock
-    private NotificationSettingsBase.ImportanceListener mImportanceListener;
+    private NotificationSettings.ImportanceListener mImportanceListener;
 
     private AllowSoundPreferenceController mController;
 

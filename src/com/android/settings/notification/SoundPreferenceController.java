@@ -39,12 +39,12 @@ public class SoundPreferenceController extends NotificationPreferenceController
 
     private static final String KEY_SOUND = "ringtone";
     private final SettingsPreferenceFragment mFragment;
-    private final NotificationSettingsBase.ImportanceListener mListener;
+    private final NotificationSettings.ImportanceListener mListener;
     private NotificationSoundPreference mPreference;
     protected static final int CODE = 200;
 
     public SoundPreferenceController(Context context, SettingsPreferenceFragment hostFragment,
-            NotificationSettingsBase.ImportanceListener importanceListener,
+            NotificationSettings.ImportanceListener importanceListener,
             NotificationBackend backend) {
         super(context, backend);
         mFragment = hostFragment;

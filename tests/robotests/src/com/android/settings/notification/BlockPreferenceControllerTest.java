@@ -68,7 +68,7 @@ public class BlockPreferenceControllerTest {
     private UserManager mUm;
 
     @Mock
-    private NotificationSettingsBase.ImportanceListener mImportanceListener;
+    private NotificationSettings.ImportanceListener mImportanceListener;
 
     private BlockPreferenceController mController;
     @Mock
