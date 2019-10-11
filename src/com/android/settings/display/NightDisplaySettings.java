@@ -18,18 +18,21 @@ package com.android.settings.display;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
+import android.hardware.display.NightDisplayListener;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+
 import androidx.preference.Preference;
 
-import com.android.internal.app.ColorDisplayController;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -38,22 +41,25 @@ import java.util.List;
 /**
  * Settings screen for Night display.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class NightDisplaySettings extends DashboardFragment
-        implements ColorDisplayController.Callback, Indexable {
+        implements NightDisplayListener.Callback {
 
     private static final String TAG = "NightDisplaySettings";
 
     private static final int DIALOG_START_TIME = 0;
     private static final int DIALOG_END_TIME = 1;
 
-    private ColorDisplayController mController;
+    private ColorDisplayManager mColorDisplayManager;
+    private NightDisplayListener mNightDisplayListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final Context context = getContext();
-        mController = new ColorDisplayController(context);
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
+        mNightDisplayListener = new NightDisplayListener(context);
     }
 
     @Override
@@ -61,7 +67,7 @@ public class NightDisplaySettings extends DashboardFragment
         super.onStart();
 
         // Listen for changes only while visible.
-        mController.setListener(this);
+        mNightDisplayListener.setCallback(this);
     }
 
     @Override
@@ -69,7 +75,7 @@ public class NightDisplaySettings extends DashboardFragment
         super.onStop();
 
         // Stop listening for state changes.
-        mController.setListener(null);
+        mNightDisplayListener.setCallback(null);
     }
 
     @Override
@@ -89,9 +95,9 @@ public class NightDisplaySettings extends DashboardFragment
         if (dialogId == DIALOG_START_TIME || dialogId == DIALOG_END_TIME) {
             final LocalTime initialTime;
             if (dialogId == DIALOG_START_TIME) {
-                initialTime = mController.getCustomStartTime();
+                initialTime = mColorDisplayManager.getNightDisplayCustomStartTime();
             } else {
-                initialTime = mController.getCustomEndTime();
+                initialTime = mColorDisplayManager.getNightDisplayCustomEndTime();
             }
 
             final Context context = getContext();
@@ -99,9 +105,9 @@ public class NightDisplaySettings extends DashboardFragment
             return new TimePickerDialog(context, (view, hourOfDay, minute) -> {
                 final LocalTime time = LocalTime.of(hourOfDay, minute);
                 if (dialogId == DIALOG_START_TIME) {
-                    mController.setCustomStartTime(time);
+                    mColorDisplayManager.setNightDisplayCustomStartTime(time);
                 } else {
-                    mController.setCustomEndTime(time);
+                    mColorDisplayManager.setNightDisplayCustomEndTime(time);
                 }
             }, initialTime.getHour(), initialTime.getMinute(), use24HourFormat);
         }
@@ -112,9 +118,9 @@ public class NightDisplaySettings extends DashboardFragment
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DIALOG_START_TIME:
-                return MetricsEvent.DIALOG_NIGHT_DISPLAY_SET_START_TIME;
+                return SettingsEnums.DIALOG_NIGHT_DISPLAY_SET_START_TIME;
             case DIALOG_END_TIME:
-                return MetricsEvent.DIALOG_NIGHT_DISPLAY_SET_END_TIME;
+                return SettingsEnums.DIALOG_NIGHT_DISPLAY_SET_END_TIME;
             default:
                 return 0;
         }
@@ -157,7 +163,7 @@ public class NightDisplaySettings extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NIGHT_DISPLAY_SETTINGS;
+        return SettingsEnums.NIGHT_DISPLAY_SETTINGS;
     }
 
     @Override
@@ -175,7 +181,7 @@ public class NightDisplaySettings extends DashboardFragment
         return buildPreferenceControllers(context);
     }
 
-    private static List <AbstractPreferenceController> buildPreferenceControllers(Context context) {
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>(1);
         controllers.add(new NightDisplayFooterPreferenceController(context));
         return controllers;
@@ -195,12 +201,12 @@ public class NightDisplaySettings extends DashboardFragment
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return ColorDisplayController.isAvailable(context);
+                    return ColorDisplayManager.isNightDisplayAvailable(context);
                 }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
-                    Context context) {
+                        Context context) {
                     return buildPreferenceControllers(context);
                 }
             };

@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
@@ -105,7 +105,7 @@ public class UserDictionaryAddWordFragment extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.INPUTMETHOD_USER_DICTIONARY_ADD_WORD;
+        return SettingsEnums.INPUTMETHOD_USER_DICTIONARY_ADD_WORD;
     }
 
     @Override

@@ -41,16 +41,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.TelephonyManager;
 import android.telephony.ims.ProvisioningManager;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
-import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -67,11 +66,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
 public class WifiCallingSettingsForSubTest {
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
     private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
@@ -86,6 +83,7 @@ public class WifiCallingSettingsForSubTest {
     @Mock private static CarrierConfigManager sCarrierConfigManager;
     @Mock private CarrierConfigManager mMockConfigManager;
     @Mock private ImsManager mImsManager;
+    @Mock private TelephonyManager mTelephonyManager;
     @Mock private PreferenceScreen mPreferenceScreen;
     @Mock private SettingsActivity mActivity;
     @Mock private SwitchBar mSwitchBar;
@@ -97,22 +95,23 @@ public class WifiCallingSettingsForSubTest {
     @Mock private Preference mUpdateAddress;
 
     @Before
-    public void setUp() throws NoSuchFieldException, ImsException {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest();
 
         mContext = RuntimeEnvironment.application;
         doReturn(mContext.getTheme()).when(mActivity).getTheme();
 
         mFragment = spy(new TestFragment());
         doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mContext).when(mFragment).getContext();
         doReturn(mock(Intent.class)).when(mActivity).getIntent();
         doReturn(mContext.getResources()).when(mFragment).getResources();
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+        doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(anyInt());
         final Bundle bundle = new Bundle();
         when(mFragment.getArguments()).thenReturn(bundle);
         doNothing().when(mFragment).addPreferencesFromResource(anyInt());
-        doReturn(mock(ListPreference.class)).when(mFragment).findPreference(any());
+        doReturn(mock(ListWithEntrySummaryPreference.class)).when(mFragment).findPreference(any());
         doReturn(mButtonWfcMode).when(mFragment).findPreference(BUTTON_WFC_MODE);
         doReturn(mButtonWfcRoamingMode).when(mFragment).findPreference(BUTTON_WFC_ROAMING_MODE);
         doNothing().when(mFragment).finish();
@@ -161,7 +160,7 @@ public class WifiCallingSettingsForSubTest {
     }
 
     @Test
-    public void onResume_provisioningAllowed_shouldNotFinish() throws ImsException {
+    public void onResume_provisioningAllowed_shouldNotFinish() {
         // Call onResume while provisioning is allowed.
         mFragment.onResume();
 
@@ -180,7 +179,7 @@ public class WifiCallingSettingsForSubTest {
     }
 
     @Test
-    public void onResumeOnPause_provisioningCallbackRegistration() throws ImsException {
+    public void onResumeOnPause_provisioningCallbackRegistration() throws Exception {
         // Verify that provisioning callback is registered after call to onResume().
         mFragment.onResume();
         verify(mImsConfig).addConfigCallback(any(ProvisioningManager.Callback.class));
@@ -336,10 +335,12 @@ public class WifiCallingSettingsForSubTest {
         verify(mFragment, never()).startActivityForResult(any(Intent.class), anyInt());
     }
 
-    protected static class TestFragment extends WifiCallingSettingsForSub {
+    protected class TestFragment extends WifiCallingSettingsForSub {
         @Override
         protected Object getSystemService(final String name) {
             switch (name) {
+                case Context.TELEPHONY_SERVICE:
+                    return mTelephonyManager;
                 case Context.CARRIER_CONFIG_SERVICE:
                     return sCarrierConfigManager;
                 default:

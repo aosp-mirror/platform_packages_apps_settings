@@ -17,15 +17,25 @@
 package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -36,14 +46,16 @@ import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
@@ -51,7 +63,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EnterprisePrivacyFeatureProviderImplTest {
 
     private final ComponentName OWNER = new ComponentName("dummy", "component");
@@ -69,7 +81,6 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
     private @Mock Context mContext;
     private @Mock DevicePolicyManager mDevicePolicyManager;
-    private @Mock PackageManagerWrapper mPackageManagerWrapper;
     private @Mock PackageManager mPackageManager;
     private @Mock UserManager mUserManager;
     private @Mock ConnectivityManager mConnectivityManger;
@@ -82,13 +93,13 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         MockitoAnnotations.initMocks(this);
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
-        resetAndInitializePackageManagerWrapper();
+        resetAndInitializePackageManager();
         when(mUserManager.getProfiles(MY_USER_ID)).thenReturn(mProfiles);
         mProfiles.add(new UserInfo(MY_USER_ID, "", "", 0 /* flags */));
         mResources = RuntimeEnvironment.application.getResources();
 
         mProvider = new EnterprisePrivacyFeatureProviderImpl(mContext, mDevicePolicyManager,
-                mPackageManagerWrapper, mUserManager, mConnectivityManger, mResources);
+                mPackageManager, mUserManager, mConnectivityManger, mResources);
     }
 
     @Test
@@ -256,7 +267,7 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         when(applicationInfo.loadLabel(mPackageManager)).thenReturn(IME_PACKAGE_LABEL);
 
         Settings.Secure.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD, IME_PACKAGE_ID);
-        when(mPackageManagerWrapper.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
+        when(mPackageManager.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
                 .thenReturn(applicationInfo);
 
         // IME not set by Device Owner.
@@ -270,13 +281,13 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
         // Device Owner set IME to nonexistent package.
         Settings.Secure.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD, IME_PACKAGE_ID);
-        when(mPackageManagerWrapper.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
+        when(mPackageManager.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
                 .thenThrow(new PackageManager.NameNotFoundException());
         assertThat(mProvider.getImeLabelIfOwnerSet()).isNull();
 
         // Device Owner set IME to existent package.
-        resetAndInitializePackageManagerWrapper();
-        when(mPackageManagerWrapper.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
+        resetAndInitializePackageManager();
+        when(mPackageManager.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
                 .thenReturn(applicationInfo);
         assertThat(mProvider.getImeLabelIfOwnerSet()).isEqualTo(IME_PACKAGE_LABEL);
     }
@@ -348,18 +359,113 @@ public class EnterprisePrivacyFeatureProviderImplTest {
     }
 
     @Test
-    public void testAreBackupsMandatory() {
-        assertThat(mProvider.areBackupsMandatory()).isFalse();
-        ComponentName transportComponent = new ComponentName("test", "test");
-        when(mDevicePolicyManager.getMandatoryBackupTransport())
-                .thenReturn(transportComponent);
-        assertThat(mProvider.areBackupsMandatory()).isTrue();
+    public void workPolicyInfo_unmanagedDevice_shouldDoNothing() {
+        // Even if we have the intent resolved, don't show it if there's no DO or PO
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
+        addWorkPolicyInfoIntent(OWNER.getPackageName(), true, false);
+        assertThat(mProvider.hasWorkPolicyInfo()).isFalse();
+
+        assertThat(mProvider.showWorkPolicyInfo()).isFalse();
+        verify(mContext, never()).startActivity(any());
     }
 
-    private void resetAndInitializePackageManagerWrapper() {
-        reset(mPackageManagerWrapper);
-        when(mPackageManagerWrapper.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
+    @Test
+    public void workPolicyInfo_deviceOwner_shouldResolveIntent() {
+        // If the intent is not resolved, then there's no info to show for DO
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
+        assertThat(mProvider.hasWorkPolicyInfo()).isFalse();
+        assertThat(mProvider.showWorkPolicyInfo()).isFalse();
+
+        // If the intent is resolved, then we can use it to launch the activity
+        Intent intent = addWorkPolicyInfoIntent(OWNER.getPackageName(), true, false);
+        assertThat(mProvider.hasWorkPolicyInfo()).isTrue();
+        assertThat(mProvider.showWorkPolicyInfo()).isTrue();
+        verify(mContext).startActivity(intentEquals(intent));
+    }
+
+    @Test
+    public void workPolicyInfo_profileOwner_shouldResolveIntent() {
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
+        mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
+        when(mDevicePolicyManager.getProfileOwnerAsUser(MANAGED_PROFILE_USER_ID)).thenReturn(OWNER);
+
+        // If the intent is not resolved, then there's no info to show for PO
+        assertThat(mProvider.hasWorkPolicyInfo()).isFalse();
+        assertThat(mProvider.showWorkPolicyInfo()).isFalse();
+
+        // If the intent is resolved, then we can use it to launch the activity in managed profile
+        Intent intent = addWorkPolicyInfoIntent(OWNER.getPackageName(), false, true);
+        assertThat(mProvider.hasWorkPolicyInfo()).isTrue();
+        assertThat(mProvider.showWorkPolicyInfo()).isTrue();
+        verify(mContext)
+                .startActivityAsUser(
+                        intentEquals(intent),
+                        argThat(handle -> handle.getIdentifier() == MANAGED_PROFILE_USER_ID));
+    }
+
+    @Test
+    public void workPolicyInfo_comp_shouldUseDeviceOwnerIntent() {
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
+        mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
+        when(mDevicePolicyManager.getProfileOwnerAsUser(MY_USER_ID)).thenReturn(OWNER);
+
+        // If the intent is not resolved, then there's no info to show for COMP
+        assertThat(mProvider.hasWorkPolicyInfo()).isFalse();
+        assertThat(mProvider.showWorkPolicyInfo()).isFalse();
+
+        // If the intent is resolved, then we can use it to launch the activity for device owner
+        Intent intent = addWorkPolicyInfoIntent(OWNER.getPackageName(), true, true);
+        assertThat(mProvider.hasWorkPolicyInfo()).isTrue();
+        assertThat(mProvider.showWorkPolicyInfo()).isTrue();
+        verify(mContext).startActivity(intentEquals(intent));
+    }
+
+    private Intent addWorkPolicyInfoIntent(
+            String packageName, boolean deviceOwner, boolean profileOwner) {
+        Intent intent =
+                new Intent(mResources.getString(R.string.config_work_policy_info_intent_action));
+        intent.setPackage(packageName);
+        ResolveInfo resolveInfo = new ResolveInfo();
+        resolveInfo.resolvePackageName = packageName;
+        resolveInfo.activityInfo = new ActivityInfo();
+        resolveInfo.activityInfo.name = "activityName";
+        resolveInfo.activityInfo.packageName = packageName;
+
+        List<ResolveInfo> activities = ImmutableList.of(resolveInfo);
+        if (deviceOwner) {
+            when(mPackageManager.queryIntentActivities(intentEquals(intent), anyInt()))
+                    .thenReturn(activities);
+        }
+        if (profileOwner) {
+            when(mPackageManager.queryIntentActivitiesAsUser(
+                            intentEquals(intent), anyInt(), eq(MANAGED_PROFILE_USER_ID)))
+                    .thenReturn(activities);
+        }
+
+        return intent;
+    }
+
+    private static class IntentMatcher implements ArgumentMatcher<Intent> {
+        private final Intent mExpectedIntent;
+
+        public IntentMatcher(Intent expectedIntent) {
+            mExpectedIntent = expectedIntent;
+        }
+
+        @Override
+        public boolean matches(Intent actualIntent) {
+            // filterEquals() compares only the action, data, type, class, and categories.
+            return actualIntent != null && mExpectedIntent.filterEquals(actualIntent);
+        }
+    }
+
+    private static Intent intentEquals(Intent intent) {
+        return argThat(new IntentMatcher(intent));
+    }
+
+    private void resetAndInitializePackageManager() {
+        reset(mPackageManager);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
                 .thenReturn(true);
-        when(mPackageManagerWrapper.getPackageManager()).thenReturn(mPackageManager);
     }
 }

@@ -16,10 +16,11 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Parcel;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -63,6 +64,13 @@ public class EarlyWarningTip extends BatteryTip {
     }
 
     @Override
+    public int getIconTintColorId() {
+        return mState == StateType.HANDLED
+                ? R.color.battery_maybe_color_light
+                : R.color.battery_bad_color_light;
+    }
+
+    @Override
     public void updateState(BatteryTip tip) {
         final EarlyWarningTip earlyWarningTip = (EarlyWarningTip) tip;
         if (earlyWarningTip.mState == StateType.NEW) {
@@ -79,7 +87,7 @@ public class EarlyWarningTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_EARLY_WARNING_TIP,
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_EARLY_WARNING_TIP,
                 mState);
     }
 

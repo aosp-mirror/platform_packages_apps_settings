@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -26,7 +27,6 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settingslib.WirelessUtils;
@@ -129,7 +129,7 @@ public class AirplaneModeEnabler {
                 SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
             // In ECM mode, do not update database at this point
         } else {
-            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_AIRPLANE_TOGGLE,
+            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AIRPLANE_TOGGLE,
                     isAirplaneModeOn);
             setAirplaneModeOn(isAirplaneModeOn);
         }

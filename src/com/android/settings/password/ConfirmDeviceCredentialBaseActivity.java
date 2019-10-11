@@ -16,13 +16,18 @@
 
 package com.android.settings.password;
 
-import android.app.Fragment;
 import android.app.KeyguardManager;
+import android.hardware.biometrics.BiometricConstants;
+import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.IBiometricConfirmDeviceCredentialCallback;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -32,6 +37,7 @@ import com.android.settings.Utils;
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 
     private static final String STATE_IS_KEYGUARD_LOCKED = "STATE_IS_KEYGUARD_LOCKED";
+    private static final String TAG = "ConfirmDeviceCredentialBaseActivity";
 
     enum ConfirmCredentialTheme {
         NORMAL,
@@ -44,6 +50,16 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     private boolean mFirstTimeVisible = true;
     private boolean mIsKeyguardLocked = false;
     private ConfirmCredentialTheme mConfirmCredentialTheme;
+    private BiometricManager mBiometricManager;
+
+    // TODO(b/123378871): Remove when moved.
+    private final IBiometricConfirmDeviceCredentialCallback mCancelCallback
+            = new IBiometricConfirmDeviceCredentialCallback.Stub() {
+        @Override
+        public void cancel() {
+            finish();
+        }
+    };
 
     private boolean isInternalActivity() {
         return (this instanceof ConfirmLockPassword.InternalActivity)
@@ -52,8 +68,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
 
     @Override
     protected void onCreate(Bundle savedState) {
-        int credentialOwnerUserId = Utils.getCredentialOwnerUserId(this,
-                Utils.getUserIdFromBundle(this, getIntent().getExtras(), isInternalActivity()));
+        final int credentialOwnerUserId;
+        try {
+            credentialOwnerUserId = Utils.getCredentialOwnerUserId(this,
+                    Utils.getUserIdFromBundle(this, getIntent().getExtras(), isInternalActivity()));
+        } catch (SecurityException e) {
+            Log.e(TAG, "Invalid user Id supplied", e);
+            finish();
+            return;
+        }
         if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsWork);
             mConfirmCredentialTheme = ConfirmCredentialTheme.WORK;
@@ -67,11 +90,13 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
         }
         super.onCreate(savedState);
 
+        mBiometricManager = getSystemService(BiometricManager.class);
+        mBiometricManager.registerCancellationCallback(mCancelCallback);
+
         if (mConfirmCredentialTheme == ConfirmCredentialTheme.NORMAL) {
             // Prevent the content parent from consuming the window insets because GlifLayout uses
             // it to show the status bar background.
-            LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-            layout.setFitsSystemWindows(false);
+            findViewById(R.id.content_parent).setFitsSystemWindows(false);
         }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         mIsKeyguardLocked = savedState == null
@@ -123,7 +148,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     }
 
     private ConfirmDeviceCredentialBaseFragment getFragment() {
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.main_content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_content);
         if (fragment != null && fragment instanceof ConfirmDeviceCredentialBaseFragment) {
             return (ConfirmDeviceCredentialBaseFragment) fragment;
         }
@@ -136,6 +161,26 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
         if (mEnterAnimationPending) {
             startEnterAnimation();
             mEnterAnimationPending = false;
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        // TODO(b/123378871): Remove when moved.
+        if (!isChangingConfigurations()) {
+            mBiometricManager.onConfirmDeviceCredentialError(
+                    BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED,
+                    getString(com.android.internal.R.string.biometric_error_user_canceled));
+        }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        if (getIntent().getBooleanExtra(
+                ConfirmDeviceCredentialBaseFragment.USE_FADE_ANIMATION, false)) {
+            overridePendingTransition(0, R.anim.confirm_credential_biometric_transition_exit);
         }
     }
 

@@ -15,204 +15,59 @@
  */
 package com.android.settings.nfc;
 
-import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.util.AttributeSet;
+
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.PreferenceViewHolder;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.RadioButton;
 
-import com.android.settings.R;
-import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
-import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
 
-import java.util.List;
+public class NfcPaymentPreference extends CustomDialogPreferenceCompat {
 
-public class NfcPaymentPreference extends CustomDialogPreference implements
-        PaymentBackend.Callback, View.OnClickListener {
+    private Listener mListener;
 
-    private static final String TAG = "NfcPaymentPreference";
+    interface Listener {
+        void onBindViewHolder(PreferenceViewHolder view);
 
-    private final NfcPaymentAdapter mAdapter;
-    private final Context mContext;
-    private final LayoutInflater mLayoutInflater;
-    private final PaymentBackend mPaymentBackend;
+        void onPrepareDialogBuilder(Builder builder,
+                DialogInterface.OnClickListener listener);
+    }
 
-    // Fields below only modified on UI thread
-    private ImageView mSettingsButtonView;
+    public NfcPaymentPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
 
-    public NfcPaymentPreference(Context context, PaymentBackend backend) {
-        super(context, null);
-        mPaymentBackend = backend;
-        mContext = context;
-        backend.registerCallback(this);
-        mAdapter = new NfcPaymentAdapter();
-        setDialogTitle(context.getString(R.string.nfc_payment_pay_with));
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        setWidgetLayoutResource(R.layout.preference_widget_gear);
+    public NfcPaymentPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
 
-        refresh();
+    public NfcPaymentPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    void initialize(Listener listener) {
+        mListener = listener;
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
 
-        mSettingsButtonView = (ImageView) view.findViewById(R.id.settings_button);
-        mSettingsButtonView.setOnClickListener(this);
-
-        updateSettingsVisibility();
-    }
-
-    /**
-     * MUST be called on UI thread.
-     */
-    public void refresh() {
-        List<PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
-        PaymentAppInfo defaultApp = mPaymentBackend.getDefaultApp();
-        if (appInfos != null) {
-            PaymentAppInfo[] apps = appInfos.toArray(new PaymentAppInfo[appInfos.size()]);
-            mAdapter.updateApps(apps, defaultApp);
+        if (mListener != null) {
+            mListener.onBindViewHolder(view);
         }
-        setTitle(R.string.nfc_payment_default);
-        if (defaultApp != null) {
-            setSummary(defaultApp.label);
-        } else {
-            setSummary(mContext.getString(R.string.nfc_payment_default_not_set));
-        }
-        updateSettingsVisibility();
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         super.onPrepareDialogBuilder(builder, listener);
 
-        builder.setSingleChoiceItems(mAdapter, 0, listener);
-    }
-
-    @Override
-    public void onPaymentAppsChanged() {
-        refresh();
-    }
-
-    @Override
-    public void onClick(View view) {
-        PaymentAppInfo defaultAppInfo = mPaymentBackend.getDefaultApp();
-        if (defaultAppInfo != null && defaultAppInfo.settingsComponent != null) {
-            Intent settingsIntent = new Intent(Intent.ACTION_MAIN);
-            settingsIntent.setComponent(defaultAppInfo.settingsComponent);
-            settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            try {
-                mContext.startActivity(settingsIntent);
-            } catch (ActivityNotFoundException e) {
-                Log.e(TAG, "Settings activity not found.");
-            }
-        }
-    }
-
-    void updateSettingsVisibility() {
-        if (mSettingsButtonView != null) {
-            PaymentAppInfo defaultApp = mPaymentBackend.getDefaultApp();
-            if (defaultApp == null || defaultApp.settingsComponent == null) {
-                mSettingsButtonView.setVisibility(View.GONE);
-            } else {
-                mSettingsButtonView.setVisibility(View.VISIBLE);
-
-            }
-        }
-    }
-
-    class NfcPaymentAdapter extends BaseAdapter implements CompoundButton.OnCheckedChangeListener,
-            View.OnClickListener {
-        // Only modified on UI thread
-        private PaymentAppInfo[] appInfos;
-
-        public NfcPaymentAdapter() {
-        }
-
-        public void updateApps(PaymentAppInfo[] appInfos, PaymentAppInfo currentDefault) {
-            // Clone app infos, only add those with a banner
-            this.appInfos = appInfos;
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public int getCount() {
-            return appInfos.length;
-        }
-
-        @Override
-        public PaymentAppInfo getItem(int i) {
-            return appInfos[i];
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return appInfos[i].componentName.hashCode();
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-            PaymentAppInfo appInfo = appInfos[position];
-            if (convertView == null) {
-                convertView = mLayoutInflater.inflate(
-                        R.layout.nfc_payment_option, parent, false);
-                holder = new ViewHolder();
-                holder.imageView = (ImageView) convertView.findViewById(R.id.banner);
-                holder.radioButton = (RadioButton) convertView.findViewById(R.id.button);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            holder.imageView.setImageDrawable(appInfo.banner);
-            holder.imageView.setTag(appInfo);
-            holder.imageView.setContentDescription(appInfo.label);
-            holder.imageView.setOnClickListener(this);
-
-            // Prevent checked callback getting called on recycled views
-            holder.radioButton.setOnCheckedChangeListener(null);
-            holder.radioButton.setChecked(appInfo.isDefault);
-            holder.radioButton.setContentDescription(appInfo.label);
-            holder.radioButton.setOnCheckedChangeListener(this);
-            holder.radioButton.setTag(appInfo);
-            return convertView;
-        }
-
-        public class ViewHolder {
-            public ImageView imageView;
-            public RadioButton radioButton;
-        }
-
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            PaymentAppInfo appInfo = (PaymentAppInfo) compoundButton.getTag();
-            makeDefault(appInfo);
-        }
-
-        @Override
-        public void onClick(View view) {
-            PaymentAppInfo appInfo = (PaymentAppInfo) view.getTag();
-            makeDefault(appInfo);
-        }
-
-        void makeDefault(PaymentAppInfo appInfo) {
-            if (!appInfo.isDefault) {
-                mPaymentBackend.setDefaultPaymentApp(appInfo.componentName);
-            }
-            Dialog dialog = getDialog();
-            if (dialog != null)
-                dialog.dismiss();
+        if (mListener != null) {
+            mListener.onPrepareDialogBuilder(builder, listener);
         }
     }
 }

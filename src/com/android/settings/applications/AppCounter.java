@@ -22,16 +22,14 @@ import android.os.AsyncTask;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settingslib.wrapper.PackageManagerWrapper;
-
 import java.util.List;
 
 public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
 
-    protected final PackageManagerWrapper mPm;
+    protected final PackageManager mPm;
     protected final UserManager mUm;
 
-    public AppCounter(Context context, PackageManagerWrapper packageManager) {
+    public AppCounter(Context context, PackageManager packageManager) {
         mPm = packageManager;
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }

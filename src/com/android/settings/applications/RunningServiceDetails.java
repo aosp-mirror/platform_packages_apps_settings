@@ -2,11 +2,10 @@ package com.android.settings.applications;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.ApplicationErrorReport;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,7 +30,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
@@ -534,7 +535,7 @@ public class RunningServiceDetails extends InstrumentedFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.RUNNING_SERVICE_DETAILS;
+        return SettingsEnums.RUNNING_SERVICE_DETAILS;
     }
 
     @Override
@@ -607,7 +608,7 @@ public class RunningServiceDetails extends InstrumentedFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_RUNNIGN_SERVICE;
+            return SettingsEnums.DIALOG_RUNNIGN_SERVICE;
         }
     }
 

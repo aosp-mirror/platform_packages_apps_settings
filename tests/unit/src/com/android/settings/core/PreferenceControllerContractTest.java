@@ -19,17 +19,19 @@ package com.android.settings.core;
 import static junit.framework.Assert.fail;
 
 import android.content.Context;
+import android.os.Looper;
 import android.platform.test.annotations.Presubmit;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.MediumTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.util.ArraySet;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.MediumTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableResources;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexableResources;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +54,7 @@ public class PreferenceControllerContractTest {
     @Test
     @Presubmit
     public void controllersInSearchShouldImplementPreferenceControllerMixin() {
+        Looper.prepare(); // Required by AutofillLoggingLevelPreferenceController
         final Set<String> errorClasses = new ArraySet<>();
 
         final SearchIndexableResources resources =

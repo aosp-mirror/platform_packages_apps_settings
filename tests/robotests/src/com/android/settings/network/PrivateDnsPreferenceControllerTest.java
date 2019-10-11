@@ -16,44 +16,52 @@
 
 package com.android.settings.network;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
-import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
 import static android.provider.Settings.Global.PRIVATE_DNS_DEFAULT_MODE;
 import static android.provider.Settings.Global.PRIVATE_DNS_MODE;
 import static android.provider.Settings.Global.PRIVATE_DNS_SPECIFIER;
+
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.withSettings;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.withSettings;
 
-import androidx.lifecycle.LifecycleOwner;
-import android.content.Context;
+import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.database.ContentObserver;
+import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.os.Handler;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
+
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -63,10 +71,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowContentResolver;
-import org.robolectric.shadows.ShadowServiceManager;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -74,7 +83,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+    ShadowUserManager.class,
+    ShadowDevicePolicyManager.class
+})
 public class PrivateDnsPreferenceControllerTest {
 
     private final static String HOSTNAME = "dns.example.com";
@@ -104,6 +117,7 @@ public class PrivateDnsPreferenceControllerTest {
     private ShadowContentResolver mShadowContentResolver;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
+    private ShadowUserManager mShadowUserManager;
 
     @Before
     public void setUp() {
@@ -123,6 +137,8 @@ public class PrivateDnsPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mLifecycle.addObserver(mController);
+
+        mShadowUserManager = ShadowUserManager.getShadow();
     }
 
     private void updateLinkProperties(LinkProperties lp) {
@@ -144,6 +160,17 @@ public class PrivateDnsPreferenceControllerTest {
         nc = mock(nc.getClass(), withSettings().useConstructor().outerInstance(mController)
                 .defaultAnswer(CALLS_REAL_METHODS));
         nc.onLinkPropertiesChanged(mNetwork, lp);
+    }
+
+    @Test
+    public void getAvailibilityStatus_availableByDefault() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getAvailabilityStatus_unsupportedWhenSet() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -247,6 +274,31 @@ public class PrivateDnsPreferenceControllerTest {
         mController.updateState(mPreference);
         verify(mController, atLeastOnce()).getSummary();
         verify(mPreference).setSummary(getResourceString(R.string.private_dns_mode_opportunistic));
+    }
+
+    @Test
+    public void isEnabled_canBeDisabledByAdmin() {
+        final int userId = UserHandle.myUserId();
+        final List<UserManager.EnforcingUser> enforcingUsers = Collections.singletonList(
+                new UserManager.EnforcingUser(userId,
+                        UserManager.RESTRICTION_SOURCE_DEVICE_OWNER)
+        );
+        mShadowUserManager.setUserRestrictionSources(
+                UserManager.DISALLOW_CONFIG_PRIVATE_DNS,
+                UserHandle.of(userId),
+                enforcingUsers);
+
+        ShadowDevicePolicyManager.getShadow().setDeviceOwnerComponentOnAnyUser(
+                new ComponentName("test", "test"));
+
+        mController.updateState(mPreference);
+        verify(mPreference).setEnabled(false);
+    }
+
+    @Test
+    public void isEnabled_isEnabledByDefault() {
+        mController.updateState(mPreference);
+        verify(mPreference).setEnabled(true);
     }
 
     private void setPrivateDnsMode(String mode) {

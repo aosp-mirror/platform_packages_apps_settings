@@ -19,6 +19,7 @@ package com.android.settings.network;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -36,8 +37,6 @@ import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -50,7 +49,9 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.uicc.UiccController;
@@ -112,6 +113,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     private HandlerThread mRestoreDefaultApnThread;
     private SubscriptionInfo mSubscriptionInfo;
     private int mSubId;
+    private int mPhoneId;
     private UiccController mUiccController;
     private String mMvnoType;
     private String mMvnoMatchData;
@@ -150,7 +152,9 @@ public class ApnSettings extends RestrictedSettingsFragment
                 if (!mRestoreDefaultApnMode) {
                     int extraSubId = intent.getIntExtra(TelephonyManager.EXTRA_SUBSCRIPTION_ID,
                             SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-                    if (extraSubId != mSubId) {
+                    if (SubscriptionManager.isValidSubscriptionId(extraSubId) &&
+                            mPhoneId == SubscriptionManager.getPhoneId(extraSubId) &&
+                            extraSubId != mSubId) {
                         // subscription has changed
                         mSubId = extraSubId;
                         mSubscriptionInfo = getSubscriptionInfo(mSubId);
@@ -172,7 +176,7 @@ public class ApnSettings extends RestrictedSettingsFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APN;
+        return SettingsEnums.APN;
     }
 
     @Override
@@ -181,7 +185,7 @@ public class ApnSettings extends RestrictedSettingsFragment
         final Activity activity = getActivity();
         mSubId = activity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-
+        mPhoneId = SubscriptionManager.getPhoneId(mSubId);
         mIntentFilter = new IntentFilter(
                 TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
         mIntentFilter.addAction(TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
@@ -350,7 +354,7 @@ public class ApnSettings extends RestrictedSettingsFragment
             if (mAllowAddingApns) {
                 menu.add(0, MENU_NEW, 0,
                         getResources().getString(R.string.menu_new))
-                        .setIcon(R.drawable.ic_menu_add_white)
+                        .setIcon(R.drawable.ic_add_24dp)
                         .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             }
             menu.add(0, MENU_RESTORE, 0,
@@ -517,7 +521,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         if (dialogId == DIALOG_RESTORE_DEFAULTAPN) {
-            return MetricsEvent.DIALOG_APN_RESTORE_DEFAULT;
+            return SettingsEnums.DIALOG_APN_RESTORE_DEFAULT;
         }
         return 0;
     }

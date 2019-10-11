@@ -19,41 +19,33 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
-import androidx.core.graphics.drawable.IconCompat;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
+import androidx.slice.builders.SliceAction;
+
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.connecteddevice.BluetoothDashboardFragment;
-import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settings.slices.SliceBuilderUtils;
 
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
-
+/**
+ * Utility class to build a Bluetooth Slice, and handle all associated actions.
+ */
 public class BluetoothSliceBuilder {
 
     private static final String TAG = "BluetoothSliceBuilder";
-
-    /**
-     * Backing Uri for the Bluetooth Slice.
-     */
-    public static final Uri BLUETOOTH_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSlicesContract.AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(SettingsSlicesContract.KEY_BLUETOOTH)
-            .build();
 
     /**
      * Action notifying a change on the BluetoothSlice.
@@ -72,7 +64,7 @@ public class BluetoothSliceBuilder {
     }
 
     /**
-     * Return a Bluetooth Slice bound to {@link #BLUETOOTH_URI}.
+     * Return a Bluetooth Slice bound to {@link CustomSliceRegistry#BLUETOOTH_URI}.
      * <p>
      * Note that you should register a listener for {@link #INTENT_FILTER} to get changes for
      * Bluetooth.
@@ -81,17 +73,19 @@ public class BluetoothSliceBuilder {
         final boolean isBluetoothEnabled = isBluetoothEnabled();
         final CharSequence title = context.getText(R.string.bluetooth_settings);
         final IconCompat icon = IconCompat.createWithResource(context,
-                R.drawable.ic_settings_bluetooth);
-        @ColorInt final int color = com.android.settings.Utils.getColorAccent(context);
+                com.android.internal.R.drawable.ic_settings_bluetooth);
+        @ColorInt final int color = com.android.settings.Utils.getColorAccent(
+                context).getDefaultColor();
         final PendingIntent toggleAction = getBroadcastIntent(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
-        final SliceAction primarySliceAction = new SliceAction(primaryAction, icon, title);
-        final SliceAction toggleSliceAction = new SliceAction(toggleAction, null /* actionTitle */,
-                isBluetoothEnabled);
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
+                ListBuilder.ICON_IMAGE, title);
+        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
+                null /* actionTitle */, isBluetoothEnabled);
 
-        return new ListBuilder(context, BLUETOOTH_URI, ListBuilder.INFINITY)
+        return new ListBuilder(context, CustomSliceRegistry.BLUETOOTH_URI, ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(b -> b
+                .addRow(new RowBuilder()
                         .setTitle(title)
                         .addEndItem(toggleSliceAction)
                         .setPrimaryAction(primarySliceAction))
@@ -102,9 +96,9 @@ public class BluetoothSliceBuilder {
         final String screenTitle = context.getText(R.string.bluetooth_settings_title).toString();
         final Uri contentUri = new Uri.Builder().appendPath(
                 SettingsSlicesContract.KEY_BLUETOOTH).build();
-        return DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+        return SliceBuilderUtils.buildSearchResultPageIntent(context,
                 BluetoothDashboardFragment.class.getName(), null /* key */, screenTitle,
-                MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY)
+                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }
@@ -115,10 +109,13 @@ public class BluetoothSliceBuilder {
      */
     public static void handleUriChange(Context context, Intent intent) {
         final boolean newBluetoothState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE, false);
-        final LocalBluetoothAdapter adapter = LocalBluetoothManager.getInstance(context,
-                null /* callback */).getBluetoothAdapter();
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 
-        adapter.setBluetoothEnabled(newBluetoothState);
+        if (newBluetoothState) {
+            adapter.enable();
+        } else {
+            adapter.disable();
+        }
         // Do not notifyChange on Uri. The service takes longer to update the current value than it
         // does for the Slice to check the current value again. Let {@link SliceBroadcastRelay}
         // handle it.

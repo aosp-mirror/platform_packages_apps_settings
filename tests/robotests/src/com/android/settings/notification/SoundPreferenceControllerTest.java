@@ -20,8 +20,10 @@ import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -37,30 +39,32 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.AttributeSet;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.RestrictedLockUtils;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResources.class)
+@RunWith(RobolectricTestRunner.class)
 public class SoundPreferenceControllerTest {
 
     private Context mContext;
@@ -85,20 +89,13 @@ public class SoundPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
-        SettingsShadowResources.overrideResource(com.android.internal.R.string.ringtone_silent,
-                "silent");
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = spy(new SoundPreferenceController(
                 mContext, mFragment, mImportanceListener, mBackend));
     }
 
-    @After
-    public void tearDown() {
-        SettingsShadowResources.reset();
-    }
-
     @Test
-    public void testNoCrashIfNoOnResume() throws Exception {
+    public void testNoCrashIfNoOnResume() {
         mController.isAvailable();
         mController.updateState(mock(NotificationSoundPreference.class));
         mController.onPreferenceChange(mock(NotificationSoundPreference.class), Uri.EMPTY);
@@ -108,14 +105,14 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfChannelNull() throws Exception {
+    public void testIsAvailable_notIfChannelNull() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         mController.onResume(appRow, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void testIsAvailable_notIfNotImportant() throws Exception {
+    public void testIsAvailable_notIfNotImportant() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_LOW);
         mController.onResume(appRow, channel, null, null);
@@ -123,7 +120,7 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfDefaultChannel() throws Exception {
+    public void testIsAvailable_notIfDefaultChannel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "", IMPORTANCE_DEFAULT);
@@ -132,7 +129,7 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable() throws Exception {
+    public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
         mController.onResume(appRow, channel, null, null);
@@ -140,7 +137,7 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_savesPreference() throws Exception {
+    public void testDisplayPreference_savesPreference() {
         NotificationSoundPreference pref = mock(NotificationSoundPreference.class);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
         mController.displayPreference(mScreen);
@@ -150,35 +147,35 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_disabledByAdmin() throws Exception {
+    public void testUpdateState_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
         mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
-        Preference pref = new NotificationSoundPreference(mContext, mock(AttributeSet.class));
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        Preference pref = new NotificationSoundPreference(mContext, attributeSet);
         mController.updateState(pref);
 
         assertFalse(pref.isEnabled());
     }
 
     @Test
-    public void testUpdateState_notConfigurable() throws Exception {
-        String lockedId = "locked";
+    public void testUpdateState_notBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = lockedId;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn(lockedId);
+        when(channel.isImportanceLockedByOEM()).thenReturn(true);
         mController.onResume(appRow, channel, null, null);
 
-        Preference pref = new NotificationSoundPreference(mContext, mock(AttributeSet.class));
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        Preference pref = new NotificationSoundPreference(mContext, attributeSet);
         mController.updateState(pref);
 
-        assertFalse(pref.isEnabled());
+        assertTrue(pref.isEnabled());
     }
 
     @Test
-    public void testUpdateState_configurable() throws Exception {
+    public void testUpdateState_configurable() {
         Uri sound = Settings.System.DEFAULT_ALARM_ALERT_URI;
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
@@ -186,8 +183,8 @@ public class SoundPreferenceControllerTest {
         when(channel.getSound()).thenReturn(sound);
         mController.onResume(appRow, channel, null, null);
 
-        NotificationSoundPreference pref =
-                new NotificationSoundPreference(mContext, mock(AttributeSet.class));
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        NotificationSoundPreference pref = new NotificationSoundPreference(mContext, attributeSet);
         mController.updateState(pref);
 
         assertEquals(sound, pref.onRestoreRingtone());
@@ -195,15 +192,16 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testOnPreferenceChange() throws Exception {
+    public void testOnPreferenceChange() {
         Uri sound = Settings.System.DEFAULT_ALARM_ALERT_URI;
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
         channel.setSound(sound, Notification.AUDIO_ATTRIBUTES_DEFAULT);
         mController.onResume(appRow, channel, null, null);
 
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         NotificationSoundPreference pref =
-                new NotificationSoundPreference(mContext, mock(AttributeSet.class));
+                new NotificationSoundPreference(mContext, attributeSet);
         mController.updateState(pref);
 
         mController.onPreferenceChange(pref, Uri.EMPTY);
@@ -213,7 +211,7 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testOnPreferenceTreeClick_incorrectPref() throws Exception {
+    public void testOnPreferenceTreeClick_incorrectPref() {
         NotificationSoundPreference pref = mock(NotificationSoundPreference.class);
         mController.handlePreferenceTreeClick(pref);
 
@@ -222,14 +220,78 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testOnPreferenceTreeClick_correctPref() throws Exception {
+    public void testOnPreferenceTreeClick_correctPref() {
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         NotificationSoundPreference pref =
-                spy(new NotificationSoundPreference(mContext, mock(AttributeSet.class)));
+                spy(new NotificationSoundPreference(mContext, attributeSet));
         pref.setKey(mController.getPreferenceKey());
         mController.handlePreferenceTreeClick(pref);
 
         verify(pref, times(1)).onPrepareRingtonePickerIntent(any());
         verify(mFragment, times(1)).startActivityForResult(any(), anyInt());
+    }
+
+    @Test
+    public void testOnPreferenceTreeClick_alarmSound() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
+        channel.setSound(null, new AudioAttributes.Builder().setUsage(
+                AudioAttributes.USAGE_ALARM).build());
+        mController.onResume(appRow, channel, null, null);
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        NotificationSoundPreference pref =
+                spy(new NotificationSoundPreference(mContext, attributeSet));
+        pref.setKey(mController.getPreferenceKey());
+        mController.handlePreferenceTreeClick(pref);
+
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(pref, times(1)).onPrepareRingtonePickerIntent(intentArgumentCaptor.capture());
+        assertEquals(RingtoneManager.TYPE_ALARM,
+                intentArgumentCaptor.getValue().getIntExtra(
+                        RingtoneManager.EXTRA_RINGTONE_TYPE, 0));
+    }
+
+    @Test
+    public void testOnPreferenceTreeClick_ringtoneSound() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
+        channel.setSound(null, new AudioAttributes.Builder().setUsage(
+                AudioAttributes.USAGE_NOTIFICATION_RINGTONE).build());
+        mController.onResume(appRow, channel, null, null);
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        NotificationSoundPreference pref =
+                spy(new NotificationSoundPreference(mContext, attributeSet));
+        pref.setKey(mController.getPreferenceKey());
+        mController.handlePreferenceTreeClick(pref);
+
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(pref, times(1)).onPrepareRingtonePickerIntent(intentArgumentCaptor.capture());
+        assertEquals(RingtoneManager.TYPE_RINGTONE,
+                intentArgumentCaptor.getValue().getIntExtra(
+                        RingtoneManager.EXTRA_RINGTONE_TYPE, 0));
+    }
+
+    @Test
+    public void testOnPreferenceTreeClick_otherSound() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
+        channel.setSound(null, new AudioAttributes.Builder().setUsage(
+                AudioAttributes.USAGE_UNKNOWN).build());
+        mController.onResume(appRow, channel, null, null);
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        NotificationSoundPreference pref =
+                spy(new NotificationSoundPreference(mContext, attributeSet));
+        pref.setKey(mController.getPreferenceKey());
+        mController.handlePreferenceTreeClick(pref);
+
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(pref, times(1)).onPrepareRingtonePickerIntent(intentArgumentCaptor.capture());
+        assertEquals(RingtoneManager.TYPE_NOTIFICATION,
+                intentArgumentCaptor.getValue().getIntExtra(
+                        RingtoneManager.EXTRA_RINGTONE_TYPE, 0));
     }
 
     @Test

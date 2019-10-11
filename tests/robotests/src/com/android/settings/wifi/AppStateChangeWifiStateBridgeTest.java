@@ -16,12 +16,12 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 
-import android.content.pm.PackageInfo;
 import android.Manifest;
+import android.content.pm.PackageInfo;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
@@ -30,8 +30,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppStateChangeWifiStateBridgeTest {
 
     @Mock
@@ -76,7 +77,7 @@ public class AppStateChangeWifiStateBridgeTest {
         mState.permissionDeclared = true;
         mState.packageInfo = mock(PackageInfo.class);
         mState.packageInfo.requestedPermissions
-                = new String[]{ Manifest.permission.NETWORK_SETTINGS };
+                = new String[] { Manifest.permission.NETWORK_SETTINGS };
         mEntry.extraInfo = mState;
         assertThat(mFilter.filterApp(mEntry)).isFalse();
     }

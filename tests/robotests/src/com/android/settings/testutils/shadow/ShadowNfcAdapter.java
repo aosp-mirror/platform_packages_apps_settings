@@ -36,30 +36,30 @@ public class ShadowNfcAdapter {
     private boolean mIsNfcEnabled = false;
 
     @Implementation
-    public void enableReaderMode(Activity activity, NfcAdapter.ReaderCallback callback, int flags,
-            Bundle extras) {
+    protected void enableReaderMode(Activity activity, NfcAdapter.ReaderCallback callback,
+            int flags, Bundle extras) {
         sReaderModeEnabled = true;
     }
 
     @Implementation
-    public static NfcAdapter getDefaultAdapter(Context context) {
+    protected static NfcAdapter getDefaultAdapter(Context context) {
         return ReflectionHelpers.callConstructor(
                 NfcAdapter.class, ClassParameter.from(Context.class, context));
     }
 
     @Implementation
-    public boolean isEnabled() {
+    protected boolean isEnabled() {
         return mIsNfcEnabled;
     }
 
     @Implementation
-    public boolean enable() {
+    protected boolean enable() {
         mIsNfcEnabled = true;
         return true;
     }
 
     @Implementation
-    public boolean disable() {
+    protected boolean disable() {
         mIsNfcEnabled = false;
         return true;
     }

@@ -15,11 +15,11 @@
  */
 package com.android.settings.connecteddevice;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -28,6 +28,7 @@ import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +37,7 @@ import java.util.List;
 /**
  * This fragment contains all the advanced connection preferences(i.e, Bluetooth, NFC, USB..)
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AdvancedConnectedDeviceFrag";
@@ -44,7 +46,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.CONNECTION_DEVICE_ADVANCED;
+        return SettingsEnums.CONNECTION_DEVICE_ADVANCED;
     }
 
     @Override
@@ -64,7 +66,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildControllers(context, getLifecycle());
+        return buildControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildControllers(Context context,
@@ -72,7 +74,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
         controllers.add(new BluetoothFilesPreferenceController(context));
-        controllers.add(new BluetoothOnWhileDrivingPreferenceController(context));
 
         final PrintSettingPreferenceController printerController =
                 new PrintSettingPreferenceController(context);
@@ -105,9 +106,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                     if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
                         keys.add(AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
                     }
-
-                    // Parent duplicate
-                    keys.add(KEY_BLUETOOTH);
 
                     return keys;
                 }

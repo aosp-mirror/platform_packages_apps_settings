@@ -16,36 +16,43 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
+
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
-import androidx.preference.PreferenceFragment;
+import android.graphics.drawable.Drawable;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.testutils.DrawableTestHelper;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)
 public class UsbDetailsHeaderControllerTest {
 
@@ -62,7 +69,7 @@ public class UsbDetailsHeaderControllerTest {
     @Mock
     private UsbDetailsFragment mFragment;
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
 
@@ -97,10 +104,13 @@ public class UsbDetailsHeaderControllerTest {
     @Test
     public void displayRefresh_charging_shouldSetHeader() {
         mDetailsHeaderController.displayPreference(mScreen);
-        mDetailsHeaderController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsHeaderController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         verify(mHeaderController).setLabel(mContext.getString(R.string.usb_pref));
-        verify(mHeaderController).setIcon(mContext.getDrawable(R.drawable.ic_usb));
+        verify(mHeaderController).setIcon(argThat((ArgumentMatcher<Drawable>) t -> {
+            DrawableTestHelper.assertDrawableResId(t, R.drawable.ic_usb);
+            return true;
+        }));
         verify(mHeaderController).done(mActivity, true);
     }
 }

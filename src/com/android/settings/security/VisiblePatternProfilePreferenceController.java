@@ -16,14 +16,16 @@
 
 package com.android.settings.security;
 
+
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;

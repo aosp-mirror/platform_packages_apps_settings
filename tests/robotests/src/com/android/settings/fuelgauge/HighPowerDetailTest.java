@@ -16,8 +16,11 @@
 
 package com.android.settings.fuelgauge;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,8 +30,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
@@ -36,9 +39,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class HighPowerDetailTest {
     private static final int TEST_UID = 12000;
     private static final String TEST_PACKAGE = "com.test.package";
@@ -46,6 +50,7 @@ public class HighPowerDetailTest {
     private FakeFeatureFactory mFeatureFactory;
     private HighPowerDetail mFragment;
 
+    private Context mContext;
     @Mock
     private PowerWhitelistBackend mPowerWhitelistBackend;
     @Mock
@@ -56,6 +61,7 @@ public class HighPowerDetailTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mFragment = spy(new HighPowerDetail());
         mFragment.mBackend = mPowerWhitelistBackend;
         mFragment.mBatteryUtils = mBatteryUtils;
@@ -83,5 +89,13 @@ public class HighPowerDetailTest {
         mFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
         verify(mBatteryUtils).setForceAppStandby(TEST_UID, TEST_PACKAGE,
                 AppOpsManager.MODE_ALLOWED);
+    }
+
+    @Test
+    public void getSummary_defaultActivePackage_returnUnavailable() {
+        doReturn(true).when(mPowerWhitelistBackend).isDefaultActiveApp(TEST_PACKAGE);
+
+        assertThat(HighPowerDetail.getSummary(mContext, mPowerWhitelistBackend, TEST_PACKAGE))
+                .isEqualTo(mContext.getString(R.string.high_power_system));
     }
 }

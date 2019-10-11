@@ -17,6 +17,7 @@ package com.android.settings.wifi;
 
 import static android.content.Context.WIFI_SERVICE;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -24,18 +25,19 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.wifi.p2p.WifiP2pPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
@@ -48,7 +50,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CONFIGURE_WIFI;
+        return SettingsEnums.CONFIGURE_WIFI;
     }
 
     @Override
@@ -72,17 +74,20 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context, this);
+        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context, this,
+                getSettingsLifecycle());
         mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
-                getLifecycle());
+                getSettingsLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(mWifiWakeupPreferenceController);
-        controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
+        controllers.add(new NotifyOpenNetworksPreferenceController(context,
+                getSettingsLifecycle()));
         controllers.add(mUseOpenWifiPreferenceController);
-        controllers.add(new WifiInfoPreferenceController(context, getLifecycle(), wifiManager));
-        controllers.add(new CellularFallbackPreferenceController(context));
-        controllers.add(new WifiP2pPreferenceController(context, getLifecycle(), wifiManager));
+        controllers.add(new WifiInfoPreferenceController(context, getSettingsLifecycle(),
+                wifiManager));
+        controllers.add(new WifiP2pPreferenceController(context, getSettingsLifecycle(),
+                wifiManager));
         return controllers;
     }
 

@@ -17,22 +17,22 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Intent;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowHelpUtils;
 
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowHelpUtils.class)
 public class HelpTrampolineTest {
 
@@ -56,8 +56,8 @@ public class HelpTrampolineTest {
         final Intent intent = new Intent().setClassName(
                 RuntimeEnvironment.application.getPackageName(), HelpTrampoline.class.getName())
                 .putExtra(Intent.EXTRA_TEXT, "help_url_upgrading");
-        final ShadowActivity shadow =
-            shadowOf(Robolectric.buildActivity(HelpTrampoline.class, intent).create().get());
+        final ShadowActivity shadow = Shadows.
+                shadowOf(Robolectric.buildActivity(HelpTrampoline.class, intent).create().get());
         final Intent launchedIntent = shadow.getNextStartedActivity();
 
         assertThat(ShadowHelpUtils.isGetHelpIntentCalled()).isTrue();

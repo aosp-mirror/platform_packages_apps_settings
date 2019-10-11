@@ -22,15 +22,15 @@ import android.content.Context;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.security.trustagent.TrustAgentManager;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SecurityFeatureProviderImplTest {
 
     private Context mContext;

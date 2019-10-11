@@ -21,6 +21,10 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.role.RoleManager;
+import android.app.usage.IUsageStatsManager;
+import android.app.usage.UsageEvents;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -28,21 +32,31 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.service.notification.NotifyingApp;
+import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
-import com.android.internal.annotations.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settingslib.R;
 import com.android.settingslib.Utils;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
 
+    static IUsageStatsManager sUsageStatsManager = IUsageStatsManager.Stub.asInterface(
+            ServiceManager.getService(Context.USAGE_STATS_SERVICE));
+    private static final int DAYS_TO_CHECK = 7;
     static INotificationManager sINM = INotificationManager.Stub.asInterface(
             ServiceManager.getService(Context.NOTIFICATION_SERVICE));
 
@@ -59,20 +73,35 @@ public class NotificationBackend {
         row.icon = IconDrawableFactory.newInstance(context).getBadgedIcon(app);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
         row.showBadge = canShowBadge(row.pkg, row.uid);
+        row.allowBubbles = canBubble(row.pkg, row.uid);
         row.userId = UserHandle.getUserId(row.uid);
         row.blockedChannelCount = getBlockedChannelCount(row.pkg, row.uid);
         row.channelCount = getChannelCount(row.pkg, row.uid);
+        recordAggregatedUsageEvents(context, row);
         return row;
     }
 
-    public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
+    public boolean isBlockable(Context context, ApplicationInfo info) {
+        final boolean blocked = getNotificationsBanned(info.packageName, info.uid);
+        final boolean systemApp = isSystemApp(context, info);
+        return !systemApp || (systemApp && blocked);
+    }
+
+    public AppRow loadAppRow(Context context, PackageManager pm,
+            RoleManager roleManager, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
-        recordCanBeBlocked(context, pm, app, row);
+        recordCanBeBlocked(context, pm, roleManager, app, row);
         return row;
     }
 
-    void recordCanBeBlocked(Context context, PackageManager pm, PackageInfo app, AppRow row) {
+    void recordCanBeBlocked(Context context, PackageManager pm, RoleManager rm, PackageInfo app,
+            AppRow row) {
         row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
+        List<String> roles = rm.getHeldRolesFromController(app.packageName);
+        if (roles.contains(RoleManager.ROLE_DIALER)
+                || roles.contains(RoleManager.ROLE_EMERGENCY)) {
+            row.systemApp = true;
+        }
         final String[] nonBlockablePkgs = context.getResources().getStringArray(
                 com.android.internal.R.array.config_nonBlockableNotificationPackages);
         markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
@@ -87,10 +116,8 @@ public class NotificationBackend {
                 if (pkg == null) {
                     continue;
                 } else if (pkg.contains(":")) {
-                    // Interpret as channel; lock only this channel for this app.
-                    if (packageName.equals(pkg.split(":", 2)[0])) {
-                        row.lockedChannelId = pkg.split(":", 2 )[1];
-                    }
+                    // handled by NotificationChannel.isImportanceLockedByOEM()
+                    continue;
                 } else if (packageName.equals(nonBlockablePkgs[i])) {
                     row.systemApp = row.lockedImportance = true;
                 }
@@ -102,8 +129,9 @@ public class NotificationBackend {
         try {
             PackageInfo info = context.getPackageManager().getPackageInfo(
                     app.packageName, PackageManager.GET_SIGNATURES);
+            RoleManager rm = context.getSystemService(RoleManager.class);
             final AppRow row = new AppRow();
-            recordCanBeBlocked(context,  context.getPackageManager(), info, row);
+            recordCanBeBlocked(context, context.getPackageManager(), rm, info, row);
             return row.systemApp;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -156,6 +184,26 @@ public class NotificationBackend {
         }
     }
 
+    public boolean canBubble(String pkg, int uid) {
+        try {
+            return sINM.areBubblesAllowedForPackage(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public boolean setAllowBubbles(String pkg, int uid, boolean allow) {
+        try {
+            sINM.setBubblesAllowed(pkg, uid, allow);
+            return true;
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+
     public NotificationChannel getChannel(String pkg, int uid, String channelId) {
         if (channelId == null) {
             return null;
@@ -183,6 +231,19 @@ public class NotificationBackend {
     public ParceledListSlice<NotificationChannelGroup> getGroups(String pkg, int uid) {
         try {
             return sINM.getNotificationChannelGroupsForPackage(pkg, uid, false);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return ParceledListSlice.emptyList();
+        }
+    }
+
+    /**
+     * Returns all notification channels associated with the package and uid that will bypass DND
+     */
+    public ParceledListSlice<NotificationChannel> getNotificationChannelsBypassingDnd(String pkg,
+            int uid) {
+        try {
+            return sINM.getNotificationChannelsBypassingDnd(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return ParceledListSlice.emptyList();
@@ -241,12 +302,12 @@ public class NotificationBackend {
         }
     }
 
-    public List<NotifyingApp> getRecentApps() {
+    public int getNumAppsBypassingDnd(int uid) {
         try {
-            return sINM.getRecentNotifyingAppsForUser(UserHandle.myUserId()).getList();
+            return sINM.getAppsBypassingDndCount(uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return new ArrayList<>();
+            return 0;
         }
     }
 
@@ -257,6 +318,161 @@ public class NotificationBackend {
             Log.w(TAG, "Error calling NoMan", e);
             return 0;
         }
+    }
+
+    public boolean shouldHideSilentStatusBarIcons(Context context) {
+        try {
+            return sINM.shouldHideSilentStatusIcons(context.getPackageName());
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public void setHideSilentStatusIcons(boolean hide) {
+        try {
+            sINM.setHideSilentStatusIcons(hide);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public void allowAssistantAdjustment(String capability, boolean allowed) {
+        try {
+            if (allowed) {
+                sINM.allowAssistantAdjustment(capability);
+            } else {
+                sINM.disallowAssistantAdjustment(capability);
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public List<String> getAssistantAdjustments(String pkg) {
+        try {
+            return sINM.getAllowedAssistantAdjustments(pkg);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return new ArrayList<>();
+    }
+
+    public boolean showSilentInStatusBar(String pkg) {
+        try {
+            return !sINM.shouldHideSilentStatusIcons(pkg);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
+    }
+
+    protected void recordAggregatedUsageEvents(Context context, AppRow appRow) {
+        long now = System.currentTimeMillis();
+        long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);
+        UsageEvents events = null;
+        try {
+            events = sUsageStatsManager.queryEventsForPackageForUser(
+                    startTime, now, appRow.userId, appRow.pkg, context.getPackageName());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        recordAggregatedUsageEvents(events, appRow);
+    }
+
+    protected void recordAggregatedUsageEvents(UsageEvents events, AppRow appRow) {
+        appRow.sentByChannel = new HashMap<>();
+        appRow.sentByApp = new NotificationsSentState();
+        if (events != null) {
+            UsageEvents.Event event = new UsageEvents.Event();
+            while (events.hasNextEvent()) {
+                events.getNextEvent(event);
+
+                if (event.getEventType() == UsageEvents.Event.NOTIFICATION_INTERRUPTION) {
+                    String channelId = event.mNotificationChannelId;
+                    if (channelId != null) {
+                        NotificationsSentState stats = appRow.sentByChannel.get(channelId);
+                        if (stats == null) {
+                            stats = new NotificationsSentState();
+                            appRow.sentByChannel.put(channelId, stats);
+                        }
+                        if (event.getTimeStamp() > stats.lastSent) {
+                            stats.lastSent = event.getTimeStamp();
+                            appRow.sentByApp.lastSent = event.getTimeStamp();
+                        }
+                        stats.sentCount++;
+                        appRow.sentByApp.sentCount++;
+                        calculateAvgSentCounts(stats);
+                    }
+                }
+
+            }
+            calculateAvgSentCounts(appRow.sentByApp);
+        }
+    }
+
+    public static CharSequence getSentSummary(Context context, NotificationsSentState state,
+            boolean sortByRecency) {
+        if (state == null) {
+            return null;
+        }
+        if (sortByRecency) {
+            if (state.lastSent == 0) {
+                return context.getString(R.string.notifications_sent_never);
+            }
+            return StringUtil.formatRelativeTime(
+                    context, System.currentTimeMillis() - state.lastSent, true);
+        } else {
+            if (state.avgSentDaily > 0) {
+                return context.getResources().getQuantityString(R.plurals.notifications_sent_daily,
+                        state.avgSentDaily, state.avgSentDaily);
+            }
+            return context.getResources().getQuantityString(R.plurals.notifications_sent_weekly,
+                    state.avgSentWeekly, state.avgSentWeekly);
+        }
+    }
+
+    private void calculateAvgSentCounts(NotificationsSentState stats) {
+        if (stats != null) {
+            stats.avgSentDaily = Math.round((float) stats.sentCount / DAYS_TO_CHECK);
+            if (stats.sentCount < DAYS_TO_CHECK) {
+                stats.avgSentWeekly = stats.sentCount;
+            }
+        }
+    }
+
+    public ComponentName getAllowedNotificationAssistant() {
+        try {
+            return sINM.getAllowedNotificationAssistant();
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return null;
+        }
+    }
+
+    public boolean setNotificationAssistantGranted(ComponentName cn) {
+        try {
+            sINM.setNotificationAssistantAccessGranted(cn, true);
+            if (cn == null) {
+                return sINM.getAllowedNotificationAssistant() == null;
+            } else {
+                return cn.equals(sINM.getAllowedNotificationAssistant());
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    /**
+     * NotificationsSentState contains how often an app sends notifications and how recently it sent
+     * one.
+     */
+    public static class NotificationsSentState {
+        public int avgSentDaily = 0;
+        public int avgSentWeekly = 0;
+        public long lastSent = 0;
+        public int sentCount = 0;
     }
 
     static class Row {
@@ -273,10 +489,12 @@ public class NotificationBackend {
         public boolean first;  // first app in section
         public boolean systemApp;
         public boolean lockedImportance;
-        public String lockedChannelId;
         public boolean showBadge;
+        public boolean allowBubbles;
         public int userId;
         public int blockedChannelCount;
         public int channelCount;
+        public Map<String, NotificationsSentState> sentByChannel;
+        public NotificationsSentState sentByApp;
     }
 }

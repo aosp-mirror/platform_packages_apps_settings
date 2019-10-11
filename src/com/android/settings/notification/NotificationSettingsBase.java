@@ -18,13 +18,14 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
+
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
+import android.app.role.RoleManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -34,23 +35,30 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.graphics.BlendMode;
+import android.graphics.BlendModeColorFilter;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.MasterCheckBoxPreference;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -59,11 +67,12 @@ import java.util.List;
 abstract public class NotificationSettingsBase extends DashboardFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    protected static final String ARG_FROM_SETTINGS = "fromSettings";
+    public static final String ARG_FROM_SETTINGS = "fromSettings";
 
     protected PackageManager mPm;
     protected NotificationBackend mBackend = new NotificationBackend();
     protected NotificationManager mNm;
+    protected RoleManager mRm;
     protected Context mContext;
 
     protected int mUid;
@@ -94,6 +103,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
 
         mPm = getPackageManager();
         mNm = NotificationManager.from(mContext);
+        mRm = mContext.getSystemService(RoleManager.class);
 
         mPkg = mArgs != null && mArgs.containsKey(AppInfoBase.ARG_PACKAGE_NAME)
                 ? mArgs.getString(AppInfoBase.ARG_PACKAGE_NAME)
@@ -111,19 +121,22 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
 
         mPkgInfo = findPackageInfo(mPkg, mUid);
 
-        mUserId = UserHandle.getUserId(mUid);
-        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
-                mContext, mPkg, mUserId);
+        if (mPkgInfo != null) {
+            mUserId = UserHandle.getUserId(mUid);
+            mSuspendedAppsAdmin = RestrictedLockUtilsInternal.checkIfApplicationIsSuspended(
+                    mContext, mPkg, mUserId);
 
-        loadChannel();
-        loadAppRow();
-        loadChannelGroup();
-        collectConfigActivities();
 
-        getLifecycle().addObserver(use(HeaderPreferenceController.class));
+            loadChannel();
+            loadAppRow();
+            loadChannelGroup();
+            collectConfigActivities();
 
-        for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            getSettingsLifecycle().addObserver(use(HeaderPreferenceController.class));
+
+            for (NotificationPreferenceController controller : mControllers) {
+                controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            }
         }
     }
 
@@ -185,7 +198,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
     }
 
     private void loadAppRow() {
-        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
+        mAppRow = mBackend.loadAppRow(mContext, mPm, mRm, mPkgInfo);
     }
 
     private void loadChannelGroup() {
@@ -267,16 +280,28 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         return null;
     }
 
+    private Drawable getAlertingIcon() {
+        Drawable icon = getContext().getDrawable(R.drawable.ic_notifications_alert);
+        icon.setTintList(Utils.getColorAccent(getContext()));
+        return icon;
+    }
+
     protected Preference populateSingleChannelPrefs(PreferenceGroup parent,
             final NotificationChannel channel, final boolean groupBlocked) {
-        MasterCheckBoxPreference channelPref = new MasterCheckBoxPreference(
-                getPrefContext());
-        channelPref.setCheckBoxEnabled(mSuspendedAppsAdmin == null
+        MasterSwitchPreference channelPref = new MasterSwitchPreference(getPrefContext());
+        channelPref.setSwitchEnabled(mSuspendedAppsAdmin == null
                 && isChannelBlockable(channel)
                 && isChannelConfigurable(channel)
                 && !groupBlocked);
+        channelPref.setIcon(null);
+        if (channel.getImportance() > IMPORTANCE_LOW) {
+            channelPref.setIcon(getAlertingIcon());
+        }
+        channelPref.setIconSize(MasterSwitchPreference.ICON_SIZE_SMALL);
         channelPref.setKey(channel.getId());
         channelPref.setTitle(channel.getName());
+        channelPref.setSummary(NotificationBackend.getSentSummary(
+                mContext, mAppRow.sentByChannel.get(channel.getId()), false));
         channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
         Bundle channelArgs = new Bundle();
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
@@ -286,32 +311,55 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         channelPref.setIntent(new SubSettingLauncher(getActivity())
                 .setDestination(ChannelNotificationSettings.class.getName())
                 .setArguments(channelArgs)
-                .setTitle(R.string.notification_channel_title)
+                .setTitleRes(R.string.notification_channel_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .toIntent());
 
         channelPref.setOnPreferenceChangeListener(
-                new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference,
-                            Object o) {
-                        boolean value = (Boolean) o;
-                        int importance = value ? IMPORTANCE_LOW : IMPORTANCE_NONE;
-                        channel.setImportance(importance);
-                        channel.lockFields(
-                                NotificationChannel.USER_LOCKED_IMPORTANCE);
-                        mBackend.updateChannel(mPkg, mUid, channel);
-
-                        return true;
+                (preference, o) -> {
+                    boolean value = (Boolean) o;
+                    int importance = value ? IMPORTANCE_LOW : IMPORTANCE_NONE;
+                    channel.setImportance(importance);
+                    channel.lockFields(
+                            NotificationChannel.USER_LOCKED_IMPORTANCE);
+                    MasterSwitchPreference channelPref1 = (MasterSwitchPreference) preference;
+                    channelPref1.setIcon(null);
+                    if (channel.getImportance() > IMPORTANCE_LOW) {
+                        channelPref1.setIcon(getAlertingIcon());
                     }
+                    toggleBehaviorIconState(channelPref1.getIcon(),
+                            importance != IMPORTANCE_NONE);
+                    mBackend.updateChannel(mPkg, mUid, channel);
+
+                    return true;
                 });
-        parent.addPreference(channelPref);
+        if (parent.findPreference(channelPref.getKey()) == null) {
+            parent.addPreference(channelPref);
+        }
         return channelPref;
+    }
+
+    private void toggleBehaviorIconState(Drawable icon, boolean enabled) {
+        if (icon == null) return;
+
+        LayerDrawable layerDrawable = (LayerDrawable) icon;
+        GradientDrawable background =
+                (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.back);
+
+        if (background == null) return;
+
+        if (enabled) {
+            background.clearColorFilter();
+        } else {
+            background.setColorFilter(new BlendModeColorFilter(
+                    mContext.getColor(R.color.material_grey_300),
+                    BlendMode.SRC_IN));
+        }
     }
 
     protected boolean isChannelConfigurable(NotificationChannel channel) {
         if (channel != null && mAppRow != null) {
-            return !channel.getId().equals(mAppRow.lockedChannelId);
+            return !channel.isImportanceLockedByOEM();
         }
         return false;
     }
@@ -320,6 +368,14 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         if (channel != null && mAppRow != null) {
             if (!mAppRow.systemApp) {
                 return true;
+            }
+
+            if (channel.isImportanceLockedByCriticalDeviceFunction()) {
+                return false;
+            }
+
+            if (channel.isImportanceLockedByOEM()) {
+                return false;
             }
 
             return channel.isBlockableSystem()

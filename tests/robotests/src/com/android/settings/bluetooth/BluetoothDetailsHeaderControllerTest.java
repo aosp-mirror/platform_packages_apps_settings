@@ -17,24 +17,24 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothDevice;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
-
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Test;
@@ -42,11 +42,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-
-@Config(shadows = {SettingsShadowBluetoothDevice.class, ShadowEntityHeaderController.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowEntityHeaderController.class, ShadowDeviceConfig.class})
 public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsControllerTestBase {
 
     private BluetoothDetailsHeaderController mController;
@@ -58,6 +58,8 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
     private LocalBluetoothManager mBluetoothManager;
     @Mock
     private CachedBluetoothDeviceManager mCachedDeviceManager;
+    @Mock
+    private BluetoothDevice mBluetoothDevice;
 
     @Override
     public void setUp() {
@@ -65,7 +67,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         FakeFeatureFactory.setupForTest();
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         when(mBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
-        when(mCachedDeviceManager.getHearingAidPairDeviceSummary(mCachedDevice)).thenReturn("abc");
+        when(mCachedDeviceManager.getSubDeviceSummary(mCachedDevice)).thenReturn("abc");
         mController =
             new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice, mLifecycle,
                 mBluetoothManager);
@@ -73,6 +75,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         mPreference.setKey(mController.getPreferenceKey());
         mScreen.addPreference(mPreference);
         setupDevice(mDeviceConfig);
+        when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
     }
 
     @After
@@ -97,7 +100,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         verify(mHeaderController).setIcon(any(Drawable.class));
         verify(mHeaderController).setIconContentDescription(any(String.class));
         verify(mHeaderController).setSummary(any(String.class));
-        verify(mHeaderController, never()).setSecondSummary(any(String.class));
+        verify(mHeaderController).setSecondSummary(any(String.class));
         verify(mHeaderController).done(mActivity, true);
     }
 
@@ -122,10 +125,24 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
     }
 
     @Test
-    public void testSecondSummary_isHearingAidDevice_showSecondSummary() {
-        when(mCachedDevice.isHearingAidDevice()).thenReturn(true);
-        showScreen(mController);
+    public void isAvailable_untetheredHeadsetWithConfigOn_returnFalse() {
+        android.provider.DeviceConfig.setProperty(
+                android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn("true".getBytes());
 
-        verify(mHeaderController).setSecondSummary(any(String.class));
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_untetheredHeadsetWithConfigOff_returnTrue() {
+        android.provider.DeviceConfig.setProperty(
+                android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "false", true);
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn("true".getBytes());
+
+        assertThat(mController.isAvailable()).isTrue();
     }
 }

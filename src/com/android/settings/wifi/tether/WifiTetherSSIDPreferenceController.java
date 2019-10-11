@@ -16,15 +16,23 @@
 
 package com.android.settings.wifi.tether;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
+import android.util.Log;
+import android.view.View;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
-import android.util.Log;
 
+import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
-import com.android.settings.wifi.WifiUtils;
+import com.android.settings.wifi.dpp.WifiDppUtils;
+
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {
@@ -37,10 +45,14 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     private String mSSID;
     private WifiDeviceNameTextValidator mWifiDeviceNameTextValidator;
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+
     public WifiTetherSSIDPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
+
         mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -53,12 +65,27 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
         final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
         if (config != null) {
             mSSID = config.SSID;
-            Log.d(TAG, "Updating SSID in Preference, " + mSSID);
         } else {
             mSSID = DEFAULT_SSID;
-            Log.d(TAG, "Updating to default SSID in Preference, " + mSSID);
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
+
+        if (mWifiManager.isWifiApEnabled() && config != null) {
+            final Intent intent = WifiDppUtils.getHotspotConfiguratorIntentOrNull(mContext,
+                    mWifiManager, config);
+
+            if (intent == null) {
+                Log.e(TAG, "Invalid security to share hotspot");
+                ((WifiTetherSsidPreference) mPreference).setButtonVisible(false);
+            } else {
+                ((WifiTetherSsidPreference) mPreference).setButtonOnClickListener(
+                        view -> shareHotspotNetwork(intent));
+                ((WifiTetherSsidPreference) mPreference).setButtonVisible(true);
+            }
+        } else {
+            ((WifiTetherSsidPreference) mPreference).setButtonVisible(false);
+        }
+
         updateSsidDisplay((EditTextPreference) mPreference);
     }
 
@@ -82,5 +109,22 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     private void updateSsidDisplay(EditTextPreference preference) {
         preference.setText(mSSID);
         preference.setSummary(mSSID);
+    }
+
+    private void shareHotspotNetwork(Intent intent) {
+        WifiDppUtils.showLockScreen(mContext, () -> {
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_SETTINGS_SHARE_WIFI_HOTSPOT_QR_CODE,
+                    SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR,
+                    /* key */ null,
+                    /* value */ Integer.MIN_VALUE);
+
+            mContext.startActivity(intent);
+        });
+    }
+
+    @VisibleForTesting
+    boolean isQrCodeButtonAvailable() {
+        return ((WifiTetherSsidPreference) mPreference).isQrCodeButtonAvailable();
     }
 }

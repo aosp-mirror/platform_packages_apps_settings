@@ -15,15 +15,16 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
-import androidx.preference.PreferenceViewHolder;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.android.settings.widget.AppPreference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 public class AppDataUsagePreference extends AppPreference {
 

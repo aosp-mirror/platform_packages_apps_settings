@@ -16,15 +16,16 @@
 
 package com.android.settings.password;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
@@ -53,11 +54,23 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         return SetupChooseLockPatternFragment.class;
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Show generic pattern title when pattern lock screen launch in Setup wizard flow before
+        // fingerprint and face setup.
+        setTitle(R.string.lockpassword_choose_your_screen_lock_header);
+    }
+
     public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment
             implements ChooseLockTypeDialogFragment.OnLockTypeSelectedListener {
 
+        private static final String TAG_SKIP_SCREEN_LOCK_DIALOG = "skip_screen_lock_dialog";
+
         @Nullable
         private Button mOptionsButton;
+        private boolean mLeftButtonIsSkip;
 
         @Override
         public View onCreateView(
@@ -67,20 +80,32 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                 mOptionsButton = view.findViewById(R.id.screen_lock_options);
                 mOptionsButton.setOnClickListener((btn) ->
                         ChooseLockTypeDialogFragment.newInstance(mUserId)
-                                .show(getChildFragmentManager(), null));
+                                .show(getChildFragmentManager(), TAG_SKIP_SCREEN_LOCK_DIALOG));
             }
-            // enable skip button only during setup wizard and not with fingerprint flow.
-            if (!mForFingerprint) {
-                Button skipButton = view.findViewById(R.id.skip_button);
-                skipButton.setVisibility(View.VISIBLE);
-                skipButton.setOnClickListener(v -> {
-                    SetupSkipDialog dialog = SetupSkipDialog.newInstance(
-                            getActivity().getIntent()
-                                    .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
-                    dialog.show(getFragmentManager());
-                });
-            }
+            // Show the skip button during SUW but not during Settings > Biometric Enrollment
+            mSkipOrClearButton.setOnClickListener(this::onSkipOrClearButtonClick);
             return view;
+        }
+
+        @Override
+        protected void onSkipOrClearButtonClick(View view) {
+            if (mLeftButtonIsSkip) {
+                SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                        getActivity().getIntent()
+                                .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
+                        /* isPatternMode= */ true,
+                        /* isAlphaMode= */ false,
+                        getActivity().getIntent()
+                                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
+                                false),
+                        getActivity().getIntent()
+                                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false)
+
+                );
+                dialog.show(getFragmentManager());
+                return;
+            }
+            super.onSkipOrClearButtonClick(view);
         }
 
         @Override
@@ -97,7 +122,25 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)
                     && mOptionsButton != null) {
                 mOptionsButton.setVisibility(
-                        stage == Stage.Introduction ? View.VISIBLE : View.INVISIBLE);
+                        (stage == Stage.Introduction || stage == Stage.HelpScreen ||
+                                stage == Stage.ChoiceTooShort || stage == Stage.FirstChoiceValid)
+                                ? View.VISIBLE : View.INVISIBLE);
+            }
+
+            if (stage.leftMode == LeftButtonMode.Gone && stage == Stage.Introduction) {
+                mSkipOrClearButton.setVisibility(View.VISIBLE);
+                mSkipOrClearButton.setText(getActivity(), R.string.skip_label);
+                mLeftButtonIsSkip = true;
+            } else {
+                mLeftButtonIsSkip = false;
+            }
+
+            // Show generic pattern message when pattern lock screen launch in Setup wizard flow
+            // before fingerprint and face setup.
+            if (stage.message == ID_EMPTY_MESSAGE) {
+                mMessageText.setText("");
+            } else {
+                mMessageText.setText(stage.message);
             }
         }
 

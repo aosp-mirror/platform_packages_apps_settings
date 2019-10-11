@@ -20,6 +20,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED
 
 import android.content.Context;
 import android.os.UserHandle;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -27,26 +28,20 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class LockScreenPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnResume {
 
-    static final String KEY_LOCKSCREEN_PREFERENCES = "lockscreen_preferences";
-
     private static final int MY_USER_ID = UserHandle.myUserId();
     private final LockPatternUtils mLockPatternUtils;
     private Preference mPreference;
 
-    public LockScreenPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, KEY_LOCKSCREEN_PREFERENCES);
+    public LockScreenPreferenceController(Context context, String key) {
+        super(context, key);
         mLockPatternUtils = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider().getLockPatternUtils(context);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
     @Override
@@ -59,11 +54,11 @@ public class LockScreenPreferenceController extends BasePreferenceController imp
     public int getAvailabilityStatus() {
         if (!mLockPatternUtils.isSecure(MY_USER_ID)) {
             return mLockPatternUtils.isLockScreenDisabled(MY_USER_ID)
-                    ? DISABLED_FOR_USER : AVAILABLE;
+                    ? DISABLED_FOR_USER : AVAILABLE_UNSEARCHABLE;
         } else {
             return mLockPatternUtils.getKeyguardStoredPasswordQuality(MY_USER_ID)
                     == PASSWORD_QUALITY_UNSPECIFIED
-                    ? DISABLED_FOR_USER : AVAILABLE;
+                    ? DISABLED_FOR_USER : AVAILABLE_UNSEARCHABLE;
         }
     }
 

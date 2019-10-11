@@ -45,9 +45,6 @@ public enum ScreenLockType {
             DevicePolicyManager.PASSWORD_QUALITY_MANAGED,
             "unlock_set_managed");
 
-    private static final ScreenLockType MIN_QUALITY = ScreenLockType.NONE;
-    private static final ScreenLockType MAX_QUALITY = ScreenLockType.MANAGED;
-
     /**
      * The default quality of the type of lock used. For example, in the case of PIN, the default
      * quality if PASSWORD_QUALITY_NUMERIC, while the highest quality is

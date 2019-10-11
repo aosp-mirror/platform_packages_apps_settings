@@ -16,24 +16,26 @@
 
 package com.android.settings.location;
 
-import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
+import com.android.settingslib.search.SearchIndexable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,6 +60,7 @@ import java.util.List;
  * other things, this simplifies integration with future changes to the default (AOSP)
  * implementation.
  */
+@SearchIndexable
 public class LocationSettings extends DashboardFragment {
 
     private static final String TAG = "LocationSettings";
@@ -66,7 +69,7 @@ public class LocationSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.LOCATION;
+        return SettingsEnums.LOCATION;
     }
 
     @Override
@@ -76,7 +79,8 @@ public class LocationSettings extends DashboardFragment {
         final SwitchBar switchBar = activity.getSwitchBar();
         switchBar.setSwitchBarText(R.string.location_settings_master_switch_title,
                 R.string.location_settings_master_switch_title);
-        mSwitchBarController = new LocationSwitchBarController(activity, switchBar, getLifecycle());
+        mSwitchBarController = new LocationSwitchBarController(activity, switchBar,
+                getSettingsLifecycle());
         switchBar.show();
     }
 
@@ -92,17 +96,13 @@ public class LocationSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, this, getLifecycle());
+        return buildPreferenceControllers(context, this, getSettingsLifecycle());
     }
 
     static void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {
         // If there's some items to display, sort the items and add them to the container.
-        Collections.sort(prefs, new Comparator<Preference>() {
-            @Override
-            public int compare(Preference lhs, Preference rhs) {
-                return lhs.getTitle().toString().compareTo(rhs.getTitle().toString());
-            }
-        });
+        Collections.sort(prefs,
+                Comparator.comparing(lhs -> lhs.getTitle().toString()));
         for (Preference entry : prefs) {
             container.addPreference(entry);
         }
@@ -116,44 +116,14 @@ public class LocationSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, LocationSettings fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AppLocationPermissionPreferenceController(context));
+        controllers.add(new AppLocationPermissionPreferenceController(context, lifecycle));
         controllers.add(new LocationForWorkPreferenceController(context, lifecycle));
-        controllers.add(
-                new RecentLocationRequestPreferenceController(context, fragment, lifecycle));
+        controllers.add(new RecentLocationRequestPreferenceController(context, fragment, lifecycle));
         controllers.add(new LocationScanningPreferenceController(context));
-        controllers.add(
-                new LocationServicePreferenceController(context, fragment, lifecycle));
+        controllers.add(new LocationServicePreferenceController(context, fragment, lifecycle));
         controllers.add(new LocationFooterPreferenceController(context, lifecycle));
         return controllers;
     }
-
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                mSummaryLoader.setSummary(
-                    this, LocationPreferenceController.getLocationSummary(mContext));
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 
     /**
      * For Search.

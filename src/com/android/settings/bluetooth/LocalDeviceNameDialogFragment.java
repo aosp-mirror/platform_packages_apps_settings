@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,19 +24,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /** Provides a dialog for changing the advertised name of the local bluetooth adapter. */
 public class LocalDeviceNameDialogFragment extends BluetoothNameDialogFragment {
     public static final String TAG = "LocalAdapterName";
-    private LocalBluetoothAdapter mLocalAdapter;
-
-    public static LocalDeviceNameDialogFragment newInstance() {
-        return new LocalDeviceNameDialogFragment();
-    }
+    private BluetoothAdapter mBluetoothAdapter;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -53,8 +47,7 @@ public class LocalDeviceNameDialogFragment extends BluetoothNameDialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LocalBluetoothManager localManager = Utils.getLocalBtManager(getActivity());
-        mLocalAdapter = localManager.getBluetoothAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
     @Override
@@ -74,7 +67,7 @@ public class LocalDeviceNameDialogFragment extends BluetoothNameDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_BLUETOOTH_RENAME;
+        return SettingsEnums.DIALOG_BLUETOOTH_RENAME;
     }
 
     @Override
@@ -84,14 +77,14 @@ public class LocalDeviceNameDialogFragment extends BluetoothNameDialogFragment {
 
     @Override
     protected String getDeviceName() {
-        if (mLocalAdapter != null && mLocalAdapter.isEnabled()) {
-            return mLocalAdapter.getName();
+        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
+            return mBluetoothAdapter.getName();
         }
         return null;
     }
 
     @Override
     protected void setDeviceName(String deviceName) {
-        mLocalAdapter.setName(deviceName);
+        mBluetoothAdapter.setName(deviceName);
     }
 }

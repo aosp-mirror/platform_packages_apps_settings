@@ -17,22 +17,21 @@
 package com.android.settings.language;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.speech.tts.TtsEngines;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.settings.R;
-import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.inputmethod.PhysicalKeyboardPreferenceController;
@@ -42,11 +41,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class LanguageAndInputSettings extends DashboardFragment {
 
     private static final String TAG = "LangAndInputSettings";
@@ -54,12 +55,10 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
     private static final String KEY_POINTER_AND_TTS_CATEGORY = "pointer_and_tts_category";
-    private static final String KEY_GAME_CONTROLLER_CATEGORY = "game_controller_settings_category";
-    private static final String KEY_PHYSICAL_KEYBOARD = "physical_keyboard_pref";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY;
+        return SettingsEnums.SETTINGS_LANGUAGE_CATEGORY;
     }
 
     @Override
@@ -87,7 +86,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
@@ -110,7 +109,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         // Pointer and Tts
         final TtsPreferenceController ttsPreferenceController =
-                new TtsPreferenceController(context, new TtsEngines(context));
+                new TtsPreferenceController(context, KEY_TEXT_TO_SPEECH);
         controllers.add(ttsPreferenceController);
         final PointerSpeedController pointerController = new PointerSpeedController(context);
         controllers.add(pointerController);
@@ -120,8 +119,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         // Input Assistance
         controllers.add(new SpellCheckerPreferenceController(context));
-        controllers.add(new DefaultAutofillPreferenceController(context));
-        controllers.add(new UserDictionaryPreferenceController(context));
 
         return controllers;
     }
@@ -178,15 +175,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Duplicates in summary and details pages.
-                    keys.add(KEY_TEXT_TO_SPEECH);
-                    keys.add(KEY_PHYSICAL_KEYBOARD);
-                    return keys;
                 }
             };
 }

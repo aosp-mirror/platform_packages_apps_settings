@@ -20,17 +20,21 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.android.settings.R;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
-import com.android.settings.search.DeviceIndexFeatureProvider;
+import com.android.settings.panel.PanelFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
@@ -48,6 +52,7 @@ public abstract class FeatureFactory {
     private static final boolean DEBUG = false;
 
     protected static FeatureFactory sFactory;
+    protected static Context sAppContext;
 
     /**
      * Returns a factory for creating feature controllers. Creates the factory if it does not
@@ -57,6 +62,9 @@ public abstract class FeatureFactory {
     public static FeatureFactory getFactory(Context context) {
         if (sFactory != null) {
             return sFactory;
+        }
+        if (sAppContext == null) {
+            sAppContext = context.getApplicationContext();
         }
 
         if (DEBUG) Log.d(LOG_TAG, "getFactory");
@@ -72,6 +80,16 @@ public abstract class FeatureFactory {
 
         if (DEBUG) Log.d(LOG_TAG, "started " + sFactory.getClass().getSimpleName());
         return sFactory;
+    }
+
+    /**
+     * Returns an application {@link Context} used to create this {@link FeatureFactory}. If the
+     * factory has not been properly created yet (aka {@link #getFactory} has not been called), this
+     * will return null.
+     */
+    @Nullable
+    public static Context getAppContext() {
+        return sAppContext;
     }
 
     public abstract AssistGestureFeatureProvider getAssistGestureFeatureProvider();
@@ -103,13 +121,17 @@ public abstract class FeatureFactory {
 
     public abstract UserFeatureProvider getUserFeatureProvider(Context context);
 
-    public abstract BluetoothFeatureProvider getBluetoothFeatureProvider(Context context);
-
     public abstract SlicesFeatureProvider getSlicesFeatureProvider();
 
     public abstract AccountFeatureProvider getAccountFeatureProvider();
 
-    public abstract DeviceIndexFeatureProvider getDeviceIndexFeatureProvider();
+    public abstract PanelFeatureProvider getPanelFeatureProvider();
+
+    public abstract ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context);
+
+    public abstract BluetoothFeatureProvider getBluetoothFeatureProvider(Context context);
+
+    public abstract AwareFeatureProvider getAwareFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

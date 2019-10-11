@@ -17,49 +17,61 @@
 package com.android.settings.testutils.shadow;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 
 import com.android.internal.widget.LockPatternUtils;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.List;
+
 @Implements(LockPatternUtils.class)
 public class ShadowLockPatternUtils {
 
-    private int mPasswordQuality = 1;
     private static boolean sDeviceEncryptionEnabled;
 
     @Implementation
-    public boolean isSecure(int id) {
+    protected boolean hasSecureLockScreen() {
         return true;
     }
 
     @Implementation
-    public int getActivePasswordQuality(int userId) {
+    protected boolean isSecure(int id) {
+        return true;
+    }
+
+    @Implementation
+    protected int getActivePasswordQuality(int userId) {
         return DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
     }
 
     @Implementation
-    public int getKeyguardStoredPasswordQuality(int userHandle) {
-        return mPasswordQuality;
+    protected int getKeyguardStoredPasswordQuality(int userHandle) {
+        return 1;
     }
 
     @Implementation
-    public static boolean isDeviceEncryptionEnabled() {
+    protected static boolean isDeviceEncryptionEnabled() {
         return sDeviceEncryptionEnabled;
+    }
+
+    @Implementation
+    protected List<ComponentName> getEnabledTrustAgents(int userId) {
+        return null;
     }
 
     public static void setDeviceEncryptionEnabled(boolean deviceEncryptionEnabled) {
         sDeviceEncryptionEnabled = deviceEncryptionEnabled;
     }
 
-    // Non-Android accessor.
-    public int getPasswordQuality() {
-        return mPasswordQuality;
+    @Implementation
+    protected byte[] getPasswordHistoryHashFactor(byte[] currentPassword, int userId) {
+        return null;
     }
 
-    // Non-Android accessor.
-    public void setPasswordQuality(int passwordQuality) {
-        mPasswordQuality = passwordQuality;
+    @Implementation
+    protected boolean checkPasswordHistory(byte[] passwordToCheck, byte[] hashFactor, int userId) {
+        return false;
     }
 }

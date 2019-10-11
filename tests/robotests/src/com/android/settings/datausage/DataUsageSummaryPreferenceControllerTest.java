@@ -17,11 +17,13 @@
 package com.android.settings.datausage;
 
 import static android.net.ConnectivityManager.TYPE_WIFI;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -32,15 +34,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
-import androidx.recyclerview.widget.RecyclerView;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.NetworkPolicyEditor;
@@ -52,15 +55,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)
 public class DataUsageSummaryPreferenceControllerTest {
 
@@ -87,7 +92,7 @@ public class DataUsageSummaryPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
     @Mock
-    private DataUsageSummary mDataUsageSummary;
+    private PreferenceFragmentCompat mPreferenceFragment;
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -96,9 +101,10 @@ public class DataUsageSummaryPreferenceControllerTest {
     private DataUsageInfoController mDataInfoController;
 
     private FakeFeatureFactory mFactory;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private Context mContext;
     private DataUsageSummaryPreferenceController mController;
+    private int mDefaultSubscriptionId;
 
     @Before
     public void setUp() {
@@ -114,12 +120,13 @@ public class DataUsageSummaryPreferenceControllerTest {
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         mDataInfoController = new DataUsageInfoController();
 
-        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mActivity.getSystemService(ConnectivityManager.class))
+        when(mActivity.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
         when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_READY);
         when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(false);
+        mDefaultSubscriptionId = 1234;
         mController = new DataUsageSummaryPreferenceController(
                 mDataUsageController,
                 mDataInfoController,
@@ -128,7 +135,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 R.string.cell_data_template,
                 true,
                 null,
-                mActivity, null, null, null);
+                mActivity, null, null, null, mDefaultSubscriptionId);
     }
 
     @After
@@ -148,11 +155,17 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("512 MB data warning / 1.00 GB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 1 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
-        verify(mSummaryPreference).setWifiMode(false, null);
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -167,11 +180,17 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("512 MB data warning / 1.00 GB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 0 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
-        verify(mSummaryPreference).setWifiMode(false, null);
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -185,7 +204,11 @@ public class DataUsageSummaryPreferenceControllerTest {
                 info.cycleEnd, null /* intent */);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setLimitInfo("512 MB data warning / 1.00 GB data limit");
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
                 -1L /* snapshotTime */,
@@ -193,7 +216,8 @@ public class DataUsageSummaryPreferenceControllerTest {
                 0 /* numPlans */,
                 null /* launchIntent */);
         verify(mSummaryPreference).setChartEnabled(true);
-        verify(mSummaryPreference).setWifiMode(false, null);
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -208,7 +232,10 @@ public class DataUsageSummaryPreferenceControllerTest {
                 info.cycleEnd, null /* intent */);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setLimitInfo("512 MB data warning / 1.00 GB data limit");
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
                 -1L /* snapshotTime */,
@@ -216,7 +243,8 @@ public class DataUsageSummaryPreferenceControllerTest {
                 0 /* numPlans */,
                 null /* launchIntent */);
         verify(mSummaryPreference).setChartEnabled(false);
-        verify(mSummaryPreference).setWifiMode(false, null);
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -250,7 +278,11 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("1.00 MB data warning");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("1.00 MB data warning");
     }
 
     @Test
@@ -267,7 +299,11 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("1.00 MB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("1.00 MB data limit");
     }
 
     @Test
@@ -284,8 +320,13 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("1.00 MB data warning / 1.00 MB data limit");
-        verify(mSummaryPreference).setWifiMode(false, null);
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("1.00 MB data warning / 1.00 MB data limit");
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -304,7 +345,8 @@ public class DataUsageSummaryPreferenceControllerTest {
         when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setWifiMode(true, info.period);
+        verify(mSummaryPreference).setWifiMode(true /* isWifiMode */, info.period /* usagePeriod */,
+                false /* isSingleWifi */);
         verify(mSummaryPreference).setLimitInfo(null);
         verify(mSummaryPreference).setUsageNumbers(info.usageLevel, -1L, true);
         verify(mSummaryPreference).setChartEnabled(false);
@@ -321,11 +363,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 R.string.cell_data_template,
                 true,
                 mSubscriptionManager,
-                mActivity, null, null, null);
-
-        final SubscriptionInfo subInfo = new SubscriptionInfo(0, "123456", 0, "name", "carrier",
-                0, 0, "number", 0, null, "123", "456", "ZX", false, null, null);
-        when(mSubscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(subInfo);
+                mActivity, null, null, null, mDefaultSubscriptionId);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
@@ -339,7 +377,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 R.string.cell_data_template,
                 true,
                 mSubscriptionManager,
-                mActivity, null, null, null);
+                mActivity, null, null, null, mDefaultSubscriptionId);
 
         when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
         when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(false);
@@ -356,7 +394,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 R.string.cell_data_template,
                 true,
                 mSubscriptionManager,
-                mActivity, null, null, null);
+                mActivity, null, null, null, mDefaultSubscriptionId);
 
         when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
         when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(true);
@@ -375,9 +413,10 @@ public class DataUsageSummaryPreferenceControllerTest {
                 R.string.cell_data_template,
                 true,
                 mSubscriptionManager,
-                mActivity, mLifecycle, mHeaderController, mDataUsageSummary);
+                mActivity, mLifecycle, mHeaderController, mPreferenceFragment,
+                mDefaultSubscriptionId);
 
-        when(mDataUsageSummary.getListView()).thenReturn(recyclerView);
+        when(mPreferenceFragment.getListView()).thenReturn(recyclerView);
 
         mController.onStart();
 

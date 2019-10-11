@@ -17,11 +17,12 @@
 package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
+
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.widget.LayoutPreference;
 
 /**
  * This class adds a header with device name.
@@ -39,8 +40,7 @@ public class UsbDetailsHeaderController extends UsbDetailsController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference headerPreference =
-                (LayoutPreference) screen.findPreference(KEY_DEVICE_HEADER);
+        final LayoutPreference headerPreference = screen.findPreference(KEY_DEVICE_HEADER);
         mHeaderController = EntityHeaderController.newInstance(mFragment.getActivity(), mFragment,
                 headerPreference.findViewById(R.id.entity_header));
     }

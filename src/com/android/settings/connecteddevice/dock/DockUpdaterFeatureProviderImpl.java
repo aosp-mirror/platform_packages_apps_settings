@@ -3,7 +3,6 @@ package com.android.settings.connecteddevice.dock;
 import android.content.Context;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 
 /**

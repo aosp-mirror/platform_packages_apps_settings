@@ -1,5 +1,7 @@
 package com.android.settings.testutils.shadow;
 
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.UserIdInt;
@@ -21,37 +23,40 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     private final Map<Integer, Long> mProfileTimeouts = new HashMap<>();
     private Map<Integer, CharSequence> mSupportMessagesMap = new HashMap<>();
     private boolean mIsAdminActiveAsUser = false;
-    ComponentName mDeviceOwnerComponentName;
+    private ComponentName mDeviceOwnerComponentName;
     private int mDeviceOwnerUserId = -1;
+    private int mPasswordMinQuality = PASSWORD_QUALITY_UNSPECIFIED;
+    private int mPasswordMaxLength = 16;
+    private int mPasswordMinLength = 0;
+    private int mPasswordMinSymbols = 0;
 
     public void setShortSupportMessageForUser(ComponentName admin, int userHandle, String message) {
         mSupportMessagesMap.put(Objects.hash(admin, userHandle), message);
     }
 
     @Implementation
-    public @Nullable
-    CharSequence getShortSupportMessageForUser(@NonNull ComponentName admin,
+    protected @Nullable CharSequence getShortSupportMessageForUser(@NonNull ComponentName admin,
             int userHandle) {
         return mSupportMessagesMap.get(Objects.hash(admin, userHandle));
     }
 
     @Implementation
-    public boolean isAdminActiveAsUser(@NonNull ComponentName admin, int userId) {
+    protected boolean isAdminActiveAsUser(@NonNull ComponentName admin, int userId) {
         return mIsAdminActiveAsUser;
     }
 
     @Implementation
-    public int getDeviceOwnerUserId() {
+    protected int getDeviceOwnerUserId() {
         return mDeviceOwnerUserId;
     }
 
     @Implementation
-    public long getMaximumTimeToLock(ComponentName admin, @UserIdInt int userHandle) {
+    protected long getMaximumTimeToLock(ComponentName admin, @UserIdInt int userHandle) {
         return mProfileTimeouts.getOrDefault(userHandle, 0L);
     }
 
     @Implementation
-    public ComponentName getDeviceOwnerComponentOnAnyUser() {
+    protected ComponentName getDeviceOwnerComponentOnAnyUser() {
         return mDeviceOwnerComponentName;
     }
 
@@ -69,6 +74,42 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
 
     public void setDeviceOwnerComponentOnAnyUser(ComponentName admin) {
         mDeviceOwnerComponentName = admin;
+    }
+
+    @Implementation
+    public int getPasswordQuality(ComponentName admin, int userHandle) {
+        return mPasswordMinQuality;
+    }
+
+    public void setPasswordQuality(int quality) {
+        mPasswordMinQuality = quality;
+    }
+
+    @Implementation
+    public int getPasswordMinimumLength(ComponentName admin, int userHandle) {
+        return mPasswordMinLength;
+    }
+
+    public void setPasswordMinimumLength(int length) {
+        mPasswordMinLength = length;
+    }
+
+    @Implementation
+    public int getPasswordMinimumSymbols(ComponentName admin, int userHandle) {
+        return mPasswordMinSymbols;
+    }
+
+    public void setPasswordMinimumSymbols(int numOfSymbols) {
+        mPasswordMinSymbols = numOfSymbols;
+    }
+
+    @Implementation
+    public int getPasswordMaximumLength(int quality) {
+        return mPasswordMaxLength;
+    }
+
+    public void setPasswordMaximumLength(int length) {
+        mPasswordMaxLength = length;
     }
 
     public static ShadowDevicePolicyManager getShadow() {

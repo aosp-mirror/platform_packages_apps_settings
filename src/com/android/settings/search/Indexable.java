@@ -19,6 +19,8 @@ package com.android.settings.search;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import androidx.annotation.Keep;
+
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
@@ -46,6 +48,7 @@ public interface Indexable {
          * @return a list of {@link android.provider.SearchIndexableResource} references.
          * Can be null.
          */
+        @Keep
         List<SearchIndexableResource> getXmlResourcesToIndex(Context context, boolean enabled);
 
         /**
@@ -56,6 +59,7 @@ public interface Indexable {
          *                or not.
          * @return a list of {@link SearchIndexableRaw} references. Can be null.
          */
+        @Keep
         List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled);
 
         /**
@@ -64,12 +68,14 @@ public interface Indexable {
          * @param context the context.
          * @return a list of {@link SearchIndexableRaw} references. Can be null.
          */
+        @Keep
         List<String> getNonIndexableKeys(Context context);
 
         /**
          * @return a list of {@link AbstractPreferenceController} for ResultPayload data during
          * Indexing.
          */
+        @Keep
         List<AbstractPreferenceController> getPreferenceControllers(Context context);
     }
 }

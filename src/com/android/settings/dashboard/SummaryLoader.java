@@ -18,6 +18,8 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,11 +27,12 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
@@ -41,7 +44,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class SummaryLoader {
-    private static final boolean DEBUG = DashboardSummary.DEBUG;
+    private static final boolean DEBUG = false;
     private static final String TAG = "SummaryLoader";
 
     public static final String SUMMARY_PROVIDER_FACTORY = "SUMMARY_PROVIDER_FACTORY";
@@ -94,29 +97,30 @@ public class SummaryLoader {
                 return;
             }
             if (DEBUG) {
-                Log.d(TAG, "setSummary " + tile.title + " - " + summary);
+                Log.d(TAG, "setSummary " + tile.getDescription() + " - " + summary);
             }
 
-            updateSummaryIfNeeded(tile, summary);
+            updateSummaryIfNeeded(mActivity.getApplicationContext(), tile, summary);
         });
     }
 
     @VisibleForTesting
-    void updateSummaryIfNeeded(Tile tile, CharSequence summary) {
-        if (TextUtils.equals(tile.summary, summary)) {
+    void updateSummaryIfNeeded(Context context, Tile tile, CharSequence summary) {
+        if (TextUtils.equals(tile.getSummary(context), summary)) {
             if (DEBUG) {
-                Log.d(TAG, "Summary doesn't change, skipping summary update for " + tile.title);
+                Log.d(TAG, "Summary doesn't change, skipping summary update for "
+                        + tile.getDescription());
             }
             return;
         }
         mSummaryTextMap.put(mDashboardFeatureProvider.getDashboardKeyForTile(tile), summary);
-        tile.summary = summary;
+        tile.overrideSummary(summary);
         if (mSummaryConsumer != null) {
             mSummaryConsumer.notifySummaryChanged(tile);
         } else {
             if (DEBUG) {
                 Log.d(TAG, "SummaryConsumer is null, skipping summary update for "
-                        + tile.title);
+                        + tile.getDescription());
             }
         }
     }
@@ -154,19 +158,20 @@ public class SummaryLoader {
     }
 
     private SummaryProvider getSummaryProvider(Tile tile) {
-        if (!mActivity.getPackageName().equals(tile.intent.getComponent().getPackageName())) {
+        if (!mActivity.getPackageName().equals(tile.getPackageName())) {
             // Not within Settings, can't load Summary directly.
             // TODO: Load summary indirectly.
             return null;
         }
-        Bundle metaData = getMetaData(tile);
+        final Bundle metaData = tile.getMetaData();
+        final Intent intent = tile.getIntent();
         if (metaData == null) {
-            if (DEBUG) Log.d(TAG, "No metadata specified for " + tile.intent.getComponent());
+            Log.d(TAG, "No metadata specified for " + intent.getComponent());
             return null;
         }
-        String clsName = metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
+        final String clsName = metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
         if (clsName == null) {
-            if (DEBUG) Log.d(TAG, "No fragment specified for " + tile.intent.getComponent());
+            Log.d(TAG, "No fragment specified for " + intent.getComponent());
             return null;
         }
         try {
@@ -186,25 +191,18 @@ public class SummaryLoader {
         return null;
     }
 
-    private Bundle getMetaData(Tile tile) {
-        return tile.metaData;
-    }
-
     /**
      * Registers a receiver and automatically unregisters it when the activity is stopping.
      * This ensures that the receivers are unregistered immediately, since most summary loader
      * operations are asynchronous.
      */
     public void registerReceiver(final BroadcastReceiver receiver, final IntentFilter filter) {
-        mActivity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (!mListening) {
-                    return;
-                }
-                mReceivers.add(receiver);
-                mActivity.registerReceiver(receiver, filter);
+        mActivity.runOnUiThread(() -> {
+            if (!mListening) {
+                return;
             }
+            mReceivers.add(receiver);
+            mActivity.registerReceiver(receiver, filter);
         });
     }
 
@@ -219,7 +217,7 @@ public class SummaryLoader {
         for (Tile tile : category.getTiles()) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (mSummaryTextMap.containsKey(key)) {
-                tile.summary = mSummaryTextMap.get(key);
+                tile.overrideSummary(mSummaryTextMap.get(key));
             }
         }
     }
@@ -245,7 +243,7 @@ public class SummaryLoader {
         SummaryProvider provider = getSummaryProvider(tile);
         if (provider != null) {
             if (DEBUG) Log.d(TAG, "Creating " + tile);
-            mSummaryProviderMap.put(provider, tile.intent.getComponent());
+            mSummaryProviderMap.put(provider, tile.getIntent().getComponent());
         }
     }
 
@@ -257,7 +255,7 @@ public class SummaryLoader {
         final int tileCount = tiles.size();
         for (int j = 0; j < tileCount; j++) {
             final Tile tile = tiles.get(j);
-            if (component.equals(tile.intent.getComponent())) {
+            if (component.equals(tile.getIntent().getComponent())) {
                 return tile;
             }
         }

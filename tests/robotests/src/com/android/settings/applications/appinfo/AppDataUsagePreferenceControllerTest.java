@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,11 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -27,28 +29,28 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.net.ConnectivityManager;
-import android.net.INetworkStatsSession;
 import android.os.Bundle;
-import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.datausage.AppDataUsage;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+
+import androidx.loader.app.LoaderManager;
+import androidx.preference.Preference;
+
+@RunWith(RobolectricTestRunner.class)
 public class AppDataUsagePreferenceControllerTest {
 
     @Mock
@@ -84,8 +86,9 @@ public class AppDataUsagePreferenceControllerTest {
     }
 
     @Test
-    public void onResume_noSession_shouldNotRestartDataLoader() {
+    public void onResume_notAvailable_shouldNotRestartDataLoader() {
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
+        doReturn(BasePreferenceController.CONDITIONALLY_UNAVAILABLE).when(mController).getAvailabilityStatus();
 
         mController.onResume();
 
@@ -94,25 +97,26 @@ public class AppDataUsagePreferenceControllerTest {
     }
 
     @Test
-    public void onResume_hasSession_shouldRestartDataLoader() {
+    public void onResume_isAvailable_shouldRestartDataLoader() {
         final ConnectivityManager connectivityManager = mock(ConnectivityManager.class);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(connectivityManager);
         when(connectivityManager.isNetworkSupported(anyInt())).thenReturn(true);
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
-        ReflectionHelpers.setField(mController, "mStatsSession", mock(INetworkStatsSession.class));
+        doReturn(BasePreferenceController.AVAILABLE).when(mController).getAvailabilityStatus();
         final AppEntry appEntry = mock(AppEntry.class);
         appEntry.info = new ApplicationInfo();
         when(mFragment.getAppEntry()).thenReturn(appEntry);
 
         mController.onResume();
 
-        verify(mLoaderManager).restartLoader(
-                eq(AppInfoDashboardFragment.LOADER_CHART_DATA), any(Bundle.class), eq(mController));
+        verify(mLoaderManager).restartLoader(eq(AppInfoDashboardFragment.LOADER_CHART_DATA),
+                nullable(Bundle.class), eq(mController));
     }
 
     @Test
     public void onPause_shouldDestroyDataLoader() {
+        doReturn(BasePreferenceController.AVAILABLE).when(mController).getAvailabilityStatus();
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
 
         mController.onPause();

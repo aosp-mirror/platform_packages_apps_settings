@@ -16,12 +16,13 @@
 
 package com.android.settings.notification;
 
+import android.content.Context;
+
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
-import android.content.Context;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.notification.VolumeSeekBarPreference.Callback;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -53,7 +54,7 @@ public abstract class VolumeSeekBarPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mPreference = (VolumeSeekBarPreference) screen.findPreference(getPreferenceKey());
+            mPreference = screen.findPreference(getPreferenceKey());
             mPreference.setCallback(mVolumePreferenceCallback);
             mPreference.setStream(getAudioStream());
             mPreference.setMuteIcon(getMuteIcon());
@@ -91,11 +92,19 @@ public abstract class VolumeSeekBarPreferenceController extends
     }
 
     @Override
-    public int getMaxSteps() {
+    public int getMax() {
         if (mPreference != null) {
             return mPreference.getMax();
         }
         return mHelper.getMaxVolume(getAudioStream());
+    }
+
+    @Override
+    public int getMin() {
+        if (mPreference != null) {
+            return mPreference.getMin();
+        }
+        return mHelper.getMinVolume(getAudioStream());
     }
 
     protected abstract int getAudioStream();

@@ -17,13 +17,14 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager.Policy;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeSystemPreferenceController extends
@@ -73,7 +74,7 @@ public class ZenModeSystemPreferenceController extends
             Log.d(TAG, "onPrefChange allowSystem=" + allowSystem);
         }
 
-        mMetricsFeatureProvider.action(mContext, MetricsProto.MetricsEvent.ACTION_ZEN_ALLOW_SYSTEM,
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ZEN_ALLOW_SYSTEM,
                 allowSystem);
         mBackend.saveSoundPolicy(Policy.PRIORITY_CATEGORY_SYSTEM, allowSystem);
         return true;

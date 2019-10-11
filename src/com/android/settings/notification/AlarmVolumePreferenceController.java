@@ -22,8 +22,7 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 
-public class AlarmVolumePreferenceController extends
-    VolumeSeekBarPreferenceController {
+public class AlarmVolumePreferenceController extends VolumeSeekBarPreferenceController {
 
     private static final String KEY_ALARM_VOLUME = "alarm_volume";
 
@@ -40,6 +39,11 @@ public class AlarmVolumePreferenceController extends
     @Override
     public boolean isSliceable() {
         return TextUtils.equals(getPreferenceKey(), "alarm_volume");
+    }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
     }
 
     @Override

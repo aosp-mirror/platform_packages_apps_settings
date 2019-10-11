@@ -16,15 +16,15 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class BluetoothDeviceRenamePreferenceController extends
@@ -41,13 +41,6 @@ public class BluetoothDeviceRenamePreferenceController extends
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
-    @VisibleForTesting
-    BluetoothDeviceRenamePreferenceController(Context context, LocalBluetoothAdapter localAdapter,
-            String preferenceKey) {
-        super(context, localAdapter, preferenceKey);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-    }
-
     /**
      * Set the {@link Fragment} that used to show {@link LocalDeviceNameDialogFragment}
      * in {@code handlePreferenceTreeClick}
@@ -60,7 +53,7 @@ public class BluetoothDeviceRenamePreferenceController extends
     @Override
     protected void updatePreferenceState(final Preference preference) {
         preference.setSummary(getSummary());
-        preference.setVisible(mLocalAdapter != null && mLocalAdapter.isEnabled());
+        preference.setVisible(mBluetoothAdapter != null && mBluetoothAdapter.isEnabled());
     }
 
     @Override
@@ -72,8 +65,8 @@ public class BluetoothDeviceRenamePreferenceController extends
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(getPreferenceKey(), preference.getKey()) && mFragment != null) {
             mMetricsFeatureProvider.action(mContext,
-                    MetricsProto.MetricsEvent.ACTION_BLUETOOTH_RENAME);
-            LocalDeviceNameDialogFragment.newInstance()
+                    SettingsEnums.ACTION_BLUETOOTH_RENAME);
+            new LocalDeviceNameDialogFragment()
                     .show(mFragment.getFragmentManager(), LocalDeviceNameDialogFragment.TAG);
             return true;
         }

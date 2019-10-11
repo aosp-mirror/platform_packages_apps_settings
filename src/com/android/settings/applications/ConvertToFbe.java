@@ -17,6 +17,7 @@ package com.android.settings.applications;
 
 import android.annotation.Nullable;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
@@ -83,13 +83,13 @@ public class ConvertToFbe extends InstrumentedFragment {
     private void convert() {
         new SubSettingLauncher(getContext())
                 .setDestination(ConfirmConvertToFbe.class.getName())
-                .setTitle(R.string.convert_to_file_encryption)
+                .setTitleRes(R.string.convert_to_file_encryption)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CONVERT_FBE;
+        return SettingsEnums.CONVERT_FBE;
     }
 }

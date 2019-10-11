@@ -17,6 +17,7 @@
 package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -26,13 +27,13 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BaseSearchIndexProviderTest {
 
     private static final String TEST_PREF_KEY = "test_pref_key";
@@ -168,5 +169,25 @@ public class BaseSearchIndexProviderTest {
             provider.getNonIndexableKeys(RuntimeEnvironment.application);
 
         assertThat(nonIndexableKeys).contains("status_header");
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getNonIndexableKeys_hasSearchableAttributeInXml_shouldSuppressUnsearchable() {
+        final BaseSearchIndexProvider provider = new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                    boolean enabled) {
+                final SearchIndexableResource sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.display_settings;
+                return Collections.singletonList(sir);
+            }
+
+        };
+
+        final List<String> nonIndexableKeys =
+                provider.getNonIndexableKeys(RuntimeEnvironment.application);
+
+        assertThat(nonIndexableKeys).contains("pref_key_5");
     }
 }

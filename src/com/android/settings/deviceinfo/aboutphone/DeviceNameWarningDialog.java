@@ -16,13 +16,14 @@
 
 package com.android.settings.deviceinfo.aboutphone;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -35,7 +36,7 @@ public class DeviceNameWarningDialog extends InstrumentedDialogFragment
     public static final String TAG = "DeviceNameWarningDlg";
 
     public static void show(MyDeviceInfoFragment host) {
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) != null) {
             return;
         }
@@ -47,7 +48,7 @@ public class DeviceNameWarningDialog extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_ENABLE_DEVELOPMENT_OPTIONS;
+        return SettingsEnums.DIALOG_ENABLE_DEVELOPMENT_OPTIONS;
     }
 
     @Override
@@ -65,7 +66,9 @@ public class DeviceNameWarningDialog extends InstrumentedDialogFragment
     public void onClick(DialogInterface dialog, int which) {
         final MyDeviceInfoFragment host = (MyDeviceInfoFragment) getTargetFragment();
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            host.onSetDeviceNameConfirm();
+            host.onSetDeviceNameConfirm(true);
+        } else {
+            host.onSetDeviceNameConfirm(false);
         }
     }
 }

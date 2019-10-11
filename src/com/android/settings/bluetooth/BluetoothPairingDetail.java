@@ -18,14 +18,16 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
@@ -61,7 +63,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mInitialScanStarted = false;
-        mAlwaysDiscoverable = new AlwaysDiscoverable(getContext(), mLocalAdapter);
+        mAlwaysDiscoverable = new AlwaysDiscoverable(getContext());
     }
 
     @Override
@@ -72,7 +74,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
             return;
         }
         updateBluetooth();
-        mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
+        mAvailableDevicesCategory.setProgress(mBluetoothAdapter.isDiscovering());
     }
 
     @Override
@@ -83,11 +85,11 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
 
     @VisibleForTesting
     void updateBluetooth() {
-        if (mLocalAdapter.isEnabled()) {
-            updateContent(mLocalAdapter.getBluetoothState());
+        if (mBluetoothAdapter.isEnabled()) {
+            updateContent(mBluetoothAdapter.getState());
         } else {
             // Turn on bluetooth if it is disabled
-            mLocalAdapter.enable();
+            mBluetoothAdapter.enable();
         }
     }
 
@@ -112,7 +114,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.BLUETOOTH_PAIRING;
+        return SettingsEnums.BLUETOOTH_PAIRING;
     }
 
     @Override
@@ -146,11 +148,11 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
         switch (bluetoothState) {
             case BluetoothAdapter.STATE_ON:
                 mDevicePreferenceMap.clear();
-                mLocalAdapter.setBluetoothEnabled(true);
+                mBluetoothAdapter.enable();
 
                 addDeviceCategory(mAvailableDevicesCategory,
                         R.string.bluetooth_preference_found_media_devices,
-                        BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
+                        BluetoothDeviceFilter.ALL_FILTER, mInitialScanStarted);
                 updateFooterPreference(mFooterPreference);
                 mAlwaysDiscoverable.start();
                 enableScanning();
@@ -166,6 +168,9 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     public void onBluetoothStateChanged(int bluetoothState) {
         super.onBluetoothStateChanged(bluetoothState);
         updateContent(bluetoothState);
+        if (bluetoothState == BluetoothAdapter.STATE_ON) {
+            showBluetoothTurnedOnToast();
+        }
     }
 
     @Override
@@ -181,6 +186,17 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
                     && bondState == BluetoothDevice.BOND_NONE) {
                 // If currently selected device failed to bond, restart scanning
                 enableScanning();
+            }
+        }
+    }
+
+    @Override
+    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
+        if (mSelectedDevice != null) {
+            BluetoothDevice device = cachedDevice.getDevice();
+            if (device != null && mSelectedDevice.equals(device)
+                && state == BluetoothAdapter.STATE_CONNECTED) {
+                finish();
             }
         }
     }
@@ -205,4 +221,9 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
         return KEY_AVAIL_DEVICES;
     }
 
+    @VisibleForTesting
+    void showBluetoothTurnedOnToast() {
+        Toast.makeText(getContext(), R.string.connected_device_bluetooth_turned_on_toast,
+                Toast.LENGTH_SHORT).show();
+    }
 }

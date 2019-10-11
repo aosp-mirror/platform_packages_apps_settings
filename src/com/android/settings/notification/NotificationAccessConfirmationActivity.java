@@ -17,12 +17,9 @@
 
 package com.android.settings.notification;
 
-import static com.android.internal.notification.NotificationAccessConfirmationActivityContract
-        .EXTRA_COMPONENT_NAME;
-import static com.android.internal.notification.NotificationAccessConfirmationActivityContract
-        .EXTRA_PACKAGE_TITLE;
-import static com.android.internal.notification.NotificationAccessConfirmationActivityContract
-        .EXTRA_USER_ID;
+import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_COMPONENT_NAME;
+import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_PACKAGE_TITLE;
+import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_USER_ID;
 
 import android.Manifest;
 import android.annotation.Nullable;
@@ -87,13 +84,13 @@ public class NotificationAccessConfirmationActivity extends Activity
     public void onResume() {
         super.onResume();
         getWindow().addFlags(
-                WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+                WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
     }
 
     @Override
     public void onPause() {
         getWindow().clearFlags(
-                WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+                WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         super.onPause();
     }
 

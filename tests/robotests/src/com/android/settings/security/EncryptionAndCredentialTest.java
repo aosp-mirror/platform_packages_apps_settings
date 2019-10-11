@@ -17,7 +17,9 @@
 package com.android.settings.security;
 
 import static com.android.settings.security.EncryptionAndCredential.SEARCH_INDEX_DATA_PROVIDER;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
@@ -27,19 +29,20 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EncryptionAndCredentialTest {
 
     @Mock
@@ -55,7 +58,7 @@ public class EncryptionAndCredentialTest {
         ShadowApplication application = ShadowApplication.getInstance();
         application.setSystemService(Context.DEVICE_POLICY_SERVICE, mDevicePolicyManager);
         application.setSystemService(Context.USER_SERVICE, mUserManager);
-        mContext = application.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
     }
 
     @Test
@@ -73,7 +76,7 @@ public class EncryptionAndCredentialTest {
         final List<String> expectedKeys = new ArrayList<>();
         for (SearchIndexableResource res : index) {
             expectedKeys.addAll(((BaseSearchIndexProvider) SEARCH_INDEX_DATA_PROVIDER)
-                    .getNonIndexableKeysFromXml(mContext, res.xmlResId));
+                    .getNonIndexableKeysFromXml(mContext, res.xmlResId, true /* suppressAll */));
         }
         final List<String> keys = SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 

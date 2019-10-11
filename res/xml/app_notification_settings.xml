@@ -18,11 +18,11 @@
         xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:key="app_notifications">
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="pref_app_header"
         android:layout="@layout/settings_entity_header" />
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="block"
         android:layout="@layout/styled_switch_bar" />
 
@@ -61,8 +61,12 @@
             android:order="1001"
             settings:restrictedSwitchSummary="@string/enabled_by_admin" />
         <Preference
+            android:key="bubble_link_pref"
+            android:title="@string/notification_bubbles_title"
+            android:order="1002" />
+        <Preference
             android:key="app_link"
-            android:order="1002"
+            android:order="1003"
             android:title="@string/app_settings_link" />
 
     </PreferenceCategory>

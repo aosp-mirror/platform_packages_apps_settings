@@ -17,6 +17,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:clipChildren ="true"
             android:orientation="horizontal">
 
     <LinearLayout
@@ -56,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:padding="6dp"
-                android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView"
                 android:elevation="2dp" />
 
             <com.android.settings.widget.LabeledSeekBar
@@ -102,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/screen_zoom_summary"
                 android:layout_marginBottom="16dp"
-                android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

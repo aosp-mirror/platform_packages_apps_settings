@@ -41,16 +41,14 @@
     <!-- Whether to show Camera laser sensor switch in Developer Options -->
     <bool name="config_show_camera_laser_sensor">false</bool>
 
-    <!-- Whether to show Connected MAC Randomization in Developer Options
-         as not all devices can support dynamic MAC address change.  -->
-    <bool name="config_wifi_support_connected_mac_randomization">false</bool>
-
     <!-- Fully-qualified class name for the implementation of the FeatureFactory to be instantiated. -->
     <string name="config_featureFactory" translatable="false">com.android.settings.overlay.FeatureFactoryImpl</string>
 
     <!-- Package name and fully-qualified class name for the wallpaper picker activity. -->
     <string name="config_wallpaper_picker_package" translatable="false">com.android.settings</string>
     <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
+    <!-- Fully-qualified class name for the styles & wallpaper picker activity. -->
+    <string name="config_styles_and_wallpaper_picker_class" translatable="false"></string>
 
     <!-- Manufacturer backup settings to launch -->
     <string name="config_backup_settings_intent" translatable="false"></string>
@@ -106,8 +104,56 @@
         -->
     </string-array>
 
-    <!-- Whether or not we should tint the icon color on setting pages. -->
-    <bool name="config_tintSettingIcon">true</bool>
+    <!-- List containing the order of services in screen reader category by componentname.
+         All componentnames in a category need to be specified to guarantee correct behavior.-->
+    <string-array name="config_order_screen_reader_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        -->
+    </string-array>
+
+    <!-- List containing the order of services in audio and caption category by preference key
+         or componentname. All preference keys in a category need to be specified to guarantee
+         correct behavior.-->
+    <string-array name="config_order_audio_and_caption_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        <item>toggle_master_mono</item>
+        <item>seekbar_master_balance</item>
+        <item>...</item>
+        -->
+    </string-array>
+
+    <!-- List containing the order of services in display category by preference key
+         or componentname. All preference keys in a category need to be specified to guarantee
+         correct behavior.-->
+    <string-array name="config_order_display_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        <item>font_size_preference_screen</item>
+        <item>dark_ui_mode_accessibility</item>
+        <item>...</item>
+        -->
+    </string-array>
+
+    <!-- List containing the order of services in interaction control category by preference key
+         or componentname. All preference keys in a category need to be specified to guarantee
+         correct behavior.-->
+    <string-array name="config_order_interaction_control_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        <item>autoclick_preference</item>
+        <item>toggle_power_button_ends_call_preference</item>
+        <item>...</item>
+        -->
+    </string-array>
+
+    <!-- List of packages that should be whitelisted for slice uri access. Do not translate -->
+    <string-array name="slice_whitelist_package_names" translatable="false"/>
 
     <!-- Whether or not App & Notification screen should display recently used apps -->
     <bool name="config_display_recent_apps">true</bool>
@@ -116,9 +162,6 @@
     <string name="config_deletion_helper_package" translatable="false">com.android.storagemanager</string>
     <!-- Class name for the storage manager's deletion helper class. -->
     <string name="config_deletion_helper_class" translatable="false">com.android.storagemanager.deletionhelper.DeletionHelperActivity</string>
-
-    <!-- Whether or not new device intro suggestion is supported for this device -->
-    <bool name="config_new_device_intro_suggestion_supported">false</bool>
 
     <!-- Whether to use a UI variant that minimizes the number of UI elements on screen. This is
          typically used when there is not enough space to display everything, because pattern view
@@ -136,4 +179,242 @@
          devices will be able to vary their amplitude but do not possess enough dynamic range to
          have distinct intensity levels -->
     <bool name="config_vibration_supports_multiple_intensities">false</bool>
+
+    <!--
+        Whether or not the homepage should be powered by legacy suggestion (versus contextual cards)
+        Default to true as not all devices support contextual cards.
+    -->
+    <bool name="config_use_legacy_suggestion">true</bool>
+
+    <!-- Whether or not homepage should display user's account avatar -->
+    <bool name="config_show_avatar_in_homepage">false</bool>
+
+    <!-- Whether or not emergency info tile should display in device info page -->
+    <bool name="config_show_emergency_info_in_device_info">true</bool>
+
+    <!-- Whether or not branded account info tile should display in device info page -->
+    <bool name="config_show_branded_account_in_device_info">true</bool>
+
+    <!-- Whether or not device header widget tile should display in device info page -->
+    <bool name="config_show_device_header_in_device_info">true</bool>
+
+    <!-- Whether or not TopLevelSettings should force rounded icon for injected tiles -->
+    <bool name="config_force_rounded_icon_TopLevelSettings">true</bool>
+
+    <!-- Settings intelligence package name -->
+    <string name="config_settingsintelligence_package_name" translatable="false">
+        com.android.settings.intelligence
+    </string>
+
+    <!-- Package Installer package name -->
+    <string name="config_package_installer_package_name" translatable="false">
+        com.android.packageinstaller
+    </string>
+
+    <!-- Settings intelligence interaction log intent action -->
+    <string name="config_settingsintelligence_log_action" translatable="false"></string>
+
+    <!-- Emergency app package name -->
+    <string name="config_emergency_package_name" translatable="false">
+        com.android.emergency
+    </string>
+    <!-- Emergency app intent action -->
+    <string name="config_emergency_intent_action" translatable="false">
+        android.settings.EDIT_EMERGENCY_INFO
+    </string>
+
+    <!-- Email address for the homepage contextual cards feedback -->
+    <string name="config_contextual_card_feedback_email" translatable="false"></string>
+
+    <!-- ComponentName to launch a vendor-specific enrollment activity if available -->
+    <string name="config_face_enroll" translatable="false"></string>
+
+    <!-- App intent -->
+    <string name="config_account_intent_uri" translatable="false"></string>
+
+    <!-- Whether or not the dock settings are to be displayed for this device when docked -->
+    <bool name="has_dock_settings">false</bool>
+    <!-- Whether there is a boot sounds checkbox -->
+    <bool name="has_boot_sounds">false</bool>
+    <!-- Whether there is a silent mode checkbox  -->
+    <bool name="has_silent_mode">true</bool>
+
+    <!-- Display additional System Update menu if true -->
+    <bool name="config_additional_system_update_setting_enable">false</bool>
+
+    <!-- Whether the bluetooth activation confirmation dialogs should be auto dismissed.
+         Can be overridden for specific product builds. -->
+    <bool name="auto_confirm_bluetooth_activation_dialog">false</bool>
+
+    <!-- Whether the device name is shown in About device or not -->
+    <bool name="config_show_device_name">true</bool>
+
+    <!-- Whether to show a preference item for the manual in About phone -->
+    <bool name="config_show_manual">false</bool>
+    <!-- Whether to show a preference item for regulatory information in About phone -->
+    <bool name="config_show_regulatory_info">false</bool>
+
+    <!-- Whether to show a preference item for mobile plan -->
+    <bool name="config_show_mobile_plan">true</bool>
+
+    <!-- Whether none security option is hide or not  (country specific). -->
+    <bool name="config_hide_none_security_option">false</bool>
+
+    <!-- Whether swipe security option is hidden or not -->
+    <bool name="config_hide_swipe_security_option">false</bool>
+
+    <!--Whether help links are defined. -->
+    <bool name="config_has_help">false</bool>
+
+    <!-- Whether Wi-Fi settings should be shown or not.
+    This also controls whether Wi-fi related sub-settings (e.g. Wi-Fi preferences) will
+    surface in search results or not.-->
+    <bool name="config_show_wifi_settings">true</bool>
+
+    <!-- Whether toggle_airplane is available or not. -->
+    <bool name="config_show_toggle_airplane">true</bool>
+
+    <!-- Whether private_dns_settings is available or not. -->
+    <bool name="config_show_private_dns_settings">true</bool>
+
+    <!-- Whether memory from app_info_settings is available or not. -->
+    <bool name="config_show_app_info_settings_memory">false</bool>
+
+    <!-- Whether battery from app_info_settings is available or not. -->
+    <bool name="config_show_app_info_settings_battery">true</bool>
+
+    <!-- Whether location mode is available or not. -->
+    <bool name="config_location_mode_available">true</bool>
+
+    <!-- Whether location scanning is available or not. -->
+    <bool name="config_show_location_scanning">true</bool>
+
+    <!-- Whether high_power_apps should be shown or not. -->
+    <bool name="config_show_high_power_apps">true</bool>
+
+    <!-- Whether media_volume should be shown or not. -->
+    <bool name="config_show_media_volume">true</bool>
+
+    <!-- Whether alarm_volume should be shown or not. -->
+    <bool name="config_show_alarm_volume">true</bool>
+
+    <!-- Whether call_volume should be shown or not. -->
+    <bool name="config_show_call_volume">true</bool>
+
+    <!-- Whether notification_volume should be shown or not. -->
+    <bool name="config_show_notification_volume">true</bool>
+
+    <!-- Whether notification_ringtone should be shown or not. -->
+    <bool name="config_show_notification_ringtone">true</bool>
+
+    <!-- Whether screen_locking_sounds should be shown or not. -->
+    <bool name="config_show_screen_locking_sounds">true</bool>
+
+    <!-- Whether charging_sounds should be shown or not. -->
+    <bool name="config_show_charging_sounds">true</bool>
+
+    <!-- Whether touch_sounds should be shown or not. -->
+    <bool name="config_show_touch_sounds">true</bool>
+
+    <!-- Whether encryption_and_credentials_encryption_status should be shown or not. -->
+    <bool name="config_show_encryption_and_credentials_encryption_status">true</bool>
+
+    <!-- Whether premium_sms should be shown or not. -->
+    <bool name="config_show_premium_sms">true</bool>
+
+    <!-- Whether data_saver should be shown or not. -->
+    <bool name="config_show_data_saver">true</bool>
+
+    <!-- Whether enabled_vr_listeners should be shown or not. -->
+    <bool name="config_show_enabled_vr_listeners">true</bool>
+
+    <!-- Whether phone_language should be shown or not. -->
+    <bool name="config_show_phone_language">true</bool>
+
+    <!-- Whether virtual_keyboard_pref should be shown or not. -->
+    <bool name="config_show_virtual_keyboard_pref">true</bool>
+
+    <!-- Whether physical_keyboard_pref should be shown or not. -->
+    <bool name="config_show_physical_keyboard_pref">true</bool>
+
+    <!-- Whether spellcheckers_settings should be shown or not. -->
+    <bool name="config_show_spellcheckers_settings">true</bool>
+
+    <!-- Whether tts_settings_summary should be shown or not. -->
+    <bool name="config_show_tts_settings_summary">true</bool>
+
+    <!-- Whether pointer_speed should be shown or not. -->
+    <bool name="config_show_pointer_speed">true</bool>
+
+    <!-- Whether vibrate_input_devices should be shown or not. -->
+    <bool name="config_show_vibrate_input_devices">true</bool>
+
+    <!-- Whether manage_device_admin should be shown or not. -->
+    <bool name="config_show_manage_device_admin">true</bool>
+
+    <!-- Whether unlock_set_or_change should be shown or not. -->
+    <bool name="config_show_unlock_set_or_change">true</bool>
+
+    <!-- Whether screen_pinning_settings should be shown or not. -->
+    <bool name="config_show_screen_pinning_settings">true</bool>
+
+    <!-- Whether manage_trust_agents should be shown or not. -->
+    <bool name="config_show_manage_trust_agents">true</bool>
+
+    <!-- Whether show_password should be shown or not. -->
+    <bool name="config_show_show_password">true</bool>
+
+    <!-- Whether trust_agent_click_intent should be shown or not. -->
+    <bool name="config_show_trust_agent_click_intent">true</bool>
+
+    <!-- Whether wallpaper attribution should be shown or not. -->
+    <bool name="config_show_wallpaper_attribution">true</bool>
+
+    <!-- Whether assist_and_voice_input should be shown or not. -->
+    <bool name="config_show_assist_and_voice_input">true</bool>
+
+    <!-- Whether reset_dashboard should be shown or not. -->
+    <bool name="config_show_reset_dashboard">true</bool>
+
+    <!-- Whether system_update_settings should be shown or not. -->
+    <bool name="config_show_system_update_settings">true</bool>
+
+    <!-- Whether device_model should be shown or not. -->
+    <bool name="config_show_device_model">true</bool>
+
+    <!-- Whether top_level_accessibility should be shown or not. -->
+    <bool name="config_show_top_level_accessibility">true</bool>
+
+    <!-- Whether top_level_battery should be shown or not. -->
+    <bool name="config_show_top_level_battery">true</bool>
+
+    <!-- Whether top_level_connected_devices should be shown or not. -->
+    <bool name="config_show_top_level_connected_devices">true</bool>
+
+    <!-- Whether top_level_display should be shown or not. -->
+    <bool name="config_show_top_level_display">true</bool>
+
+    <!-- Whether wifi_ip_address should be shown or not. -->
+    <bool name="config_show_wifi_ip_address">true</bool>
+
+    <!-- Whether wifi_mac_address should be shown or not. -->
+    <bool name="config_show_wifi_mac_address">true</bool>
+
+    <!-- Whether to disable "Uninstall Updates" menu item for System apps or not. -->
+    <bool name="config_disable_uninstall_update">false</bool>
+
+    <!-- Whether or not extra preview panels should be used for screen zoom setting. -->
+    <bool name="config_enable_extra_screen_zoom_preview">true</bool>
+
+    <!-- Slice Uri to query nearby devices. -->
+    <string name="config_nearby_devices_slice_uri" translatable="false">content://com.google.android.gms.nearby.fastpair/device_status_list_item</string>
+
+    <!-- Grayscale settings intent -->
+    <string name="config_grayscale_settings_intent" translate="false"></string>
+
+    <!-- List containing the injected tile keys which are suppressed. -->
+    <string-array name="config_suppress_injected_tile_keys" translatable="false"/>
+
+    <!-- "Show work policy info" intent action. TODO(b/134391103): Replace with final SystemAPI intent when it's available. -->
+    <string name="config_work_policy_info_intent_action" translatable="false"/>
 </resources>

@@ -18,31 +18,37 @@ package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
-import androidx.preference.ListPreference;
 import android.widget.ArrayAdapter;
+
+import androidx.preference.ListPreference;
+
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.spy;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowBluetoothUtils.class)
 public class UpdatableListPreferenceDialogFragmentTest {
 
-    private Context mContext;
-    private UpdatableListPreferenceDialogFragment mUpdatableListPrefDlgFragment;
     private static final String KEY = "Test_Key";
+    @Mock
+    private UpdatableListPreferenceDialogFragment mUpdatableListPrefDlgFragment;
+    private Context mContext;
     private ArrayAdapter mAdapter;
     private ArrayList<CharSequence> mEntries;
 
@@ -51,8 +57,8 @@ public class UpdatableListPreferenceDialogFragmentTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
 
-        mUpdatableListPrefDlgFragment = UpdatableListPreferenceDialogFragment
-                .newInstance(KEY, MetricsProto.MetricsEvent.DIALOG_SWITCH_A2DP_DEVICES);
+        mUpdatableListPrefDlgFragment = spy(UpdatableListPreferenceDialogFragment
+                .newInstance(KEY, MetricsProto.MetricsEvent.DIALOG_SWITCH_A2DP_DEVICES));
         mEntries = spy(new ArrayList<>());
         mUpdatableListPrefDlgFragment.setEntries(mEntries);
         mUpdatableListPrefDlgFragment.
@@ -76,15 +82,20 @@ public class UpdatableListPreferenceDialogFragmentTest {
 
     @Test
     public void onListPreferenceUpdated_verifyAdapterCanBeUpdate() {
-        assertThat(mUpdatableListPrefDlgFragment.getAdapter().getCount()).
-                isEqualTo(0);
+        assertThat(mUpdatableListPrefDlgFragment.getAdapter().getCount()).isEqualTo(0);
 
         ListPreference listPreference = new ListPreference(mContext);
         final CharSequence[] charSequences = {"Test_DEVICE_1", "Test_DEVICE_2"};
         listPreference.setEntries(charSequences);
         mUpdatableListPrefDlgFragment.onListPreferenceUpdated(listPreference);
 
-        assertThat(mUpdatableListPrefDlgFragment.getAdapter().getCount()).
-                isEqualTo(2);
+        assertThat(mUpdatableListPrefDlgFragment.getAdapter().getCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void onDialogClosed_emptyPreference() {
+        mUpdatableListPrefDlgFragment.onDialogClosed(false);
+
+        verify(mUpdatableListPrefDlgFragment, never()).getListPreference();
     }
 }

@@ -18,21 +18,20 @@ package com.android.settings.slices;
 
 import static com.android.settings.slices.SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-
-import android.content.Context;
 import android.os.Binder;
 import android.util.Pair;
+
+import androidx.slice.Slice;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.slice.Slice;
 
 /**
  * Class used to map a {@link Uri} from {@link SettingsSliceProvider} to a Slice.
@@ -50,6 +49,7 @@ public class SlicesDatabaseAccessor {
             IndexColumns.CONTROLLER,
             IndexColumns.PLATFORM_SLICE,
             IndexColumns.SLICE_TYPE,
+            IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
     };
 
     // Cursor value for boolean true
@@ -71,8 +71,12 @@ public class SlicesDatabaseAccessor {
      */
     public SliceData getSliceDataFromUri(Uri uri) {
         Pair<Boolean, String> pathData = SliceBuilderUtils.getPathData(uri);
-        Cursor cursor = getIndexedSliceData(pathData.second /* key */);
-        return buildSliceData(cursor, uri, pathData.first /* isIntentOnly */);
+        if (pathData == null) {
+            throw new IllegalStateException("Invalid Slices uri: " + uri);
+        }
+        try (Cursor cursor = getIndexedSliceData(pathData.second /* key */)) {
+            return buildSliceData(cursor, uri, pathData.first /* isIntentOnly */);
+        }
     }
 
     /**
@@ -81,8 +85,9 @@ public class SlicesDatabaseAccessor {
      * Used when handling the action of the {@link Slice}.
      */
     public SliceData getSliceDataFromKey(String key) {
-        Cursor cursor = getIndexedSliceData(key);
-        return buildSliceData(cursor, null /* uri */, false /* isIntentOnly */);
+        try (Cursor cursor = getIndexedSliceData(key)) {
+            return buildSliceData(cursor, null /* uri */, false /* isIntentOnly */);
+        }
     }
 
     /**
@@ -162,6 +167,8 @@ public class SlicesDatabaseAccessor {
                 cursor.getColumnIndex(IndexColumns.PLATFORM_SLICE)) == TRUE;
         int sliceType = cursor.getInt(
                 cursor.getColumnIndex(IndexColumns.SLICE_TYPE));
+        final String unavailableSliceSubtitle = cursor.getString(
+                cursor.getColumnIndex(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE));
 
         if (isIntentOnly) {
             sliceType = SliceData.SliceType.INTENT;
@@ -179,6 +186,7 @@ public class SlicesDatabaseAccessor {
                 .setUri(uri)
                 .setPlatformDefined(isPlatformDefined)
                 .setSliceType(sliceType)
+                .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                 .build();
     }
 

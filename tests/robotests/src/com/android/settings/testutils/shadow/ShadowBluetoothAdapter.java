@@ -24,13 +24,36 @@ import org.robolectric.annotation.Implements;
 import java.util.ArrayList;
 import java.util.List;
 
-@Implements(value = BluetoothAdapter.class, inheritImplementationMethods = true)
+@Implements(value = BluetoothAdapter.class)
 public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBluetoothAdapter {
-    /**
-     * Do nothing, implement it to avoid null pointer error inside BluetoothAdapter
-     */
+
+    private int mState;
+    private List<Integer> mSupportedProfiles = new ArrayList<>();
+
     @Implementation
-    public List<Integer> getSupportedProfiles() {
-        return new ArrayList<Integer>();
+    protected List<Integer> getSupportedProfiles() {
+        return mSupportedProfiles;
+    }
+
+    public void addSupportedProfiles(int profile) {
+        mSupportedProfiles.add(profile);
+    }
+
+    public void clearSupportedProfiles() {
+        mSupportedProfiles.clear();
+    }
+
+    @Implementation
+    protected int getConnectionState() {
+        return mState;
+    }
+
+    public void setConnectionState(int state) {
+        mState = state;
+    }
+
+    @Implementation
+    protected boolean factoryReset() {
+        return true;
     }
 }

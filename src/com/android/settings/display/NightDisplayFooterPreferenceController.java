@@ -17,8 +17,10 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
+
 import androidx.preference.Preference;
-import com.android.internal.app.ColorDisplayController;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.FooterPreference;
@@ -31,7 +33,8 @@ public class NightDisplayFooterPreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayController.isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return ColorDisplayManager.isNightDisplayAvailable(mContext) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

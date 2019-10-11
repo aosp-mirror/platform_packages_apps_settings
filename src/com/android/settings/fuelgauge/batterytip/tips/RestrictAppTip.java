@@ -16,15 +16,14 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.os.Parcel;
-import android.text.TextUtils;
-import android.util.Pair;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
@@ -108,19 +107,30 @@ public class RestrictAppTip extends BatteryTip {
     }
 
     @Override
+    public void sanityCheck(Context context) {
+        super.sanityCheck(context);
+
+        // Set it invisible if there is no valid app
+        mRestrictAppList.removeIf(AppLabelPredicate.getInstance(context));
+        if (mRestrictAppList.isEmpty()) {
+            mState = StateType.INVISIBLE;
+        }
+    }
+
+    @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP,
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_APP_RESTRICTION_TIP,
                 mState);
         if (mState == StateType.NEW) {
             for (int i = 0, size = mRestrictAppList.size(); i < size; i++) {
                 final AppInfo appInfo = mRestrictAppList.get(i);
                 for (Integer anomalyType : appInfo.anomalyTypes) {
-                    metricsFeatureProvider.action(context,
-                            MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
+                    metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                            SettingsEnums.ACTION_APP_RESTRICTION_TIP_LIST,
+                            SettingsEnums.PAGE_UNKNOWN,
                             appInfo.packageName,
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, anomalyType));
+                            anomalyType);
                 }
-
             }
         }
     }

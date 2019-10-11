@@ -18,16 +18,21 @@ package com.android.settings.deviceinfo.imei;
 
 import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 
-import android.app.Fragment;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+import android.os.UserManager;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.slices.Sliceable;
+import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,39 +40,30 @@ import java.util.List;
 /**
  * Controller that manages preference for single and multi sim devices.
  */
-public class ImeiInfoPreferenceController extends
-        AbstractSimStatusImeiInfoPreferenceController implements PreferenceControllerMixin {
-
-    private static final String KEY_IMEI_INFO = "imei_info";
+public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     private final boolean mIsMultiSim;
     private final TelephonyManager mTelephonyManager;
     private final List<Preference> mPreferenceList = new ArrayList<>();
-    private final Fragment mFragment;
+    private Fragment mFragment;
 
-    public ImeiInfoPreferenceController(Context context, Fragment fragment) {
-        super(context);
-
-        mFragment = fragment;
+    public ImeiInfoPreferenceController(Context context, String key) {
+        super(context, key);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mIsMultiSim = mTelephonyManager.getPhoneCount() > 1;
     }
 
-    @Override
-    public String getPreferenceKey() {
-        return KEY_IMEI_INFO;
+    public void setHost(Fragment fragment) {
+        mFragment = fragment;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
-        if (!isAvailable() || preference == null || !preference.isVisible()) {
-            return;
-        }
 
         mPreferenceList.add(preference);
-        updatePreference(preference, 0 /* sim slot */);
+        updatePreference(preference, 0 /* simSlot */);
 
         final int imeiPreferenceOrder = preference.getOrder();
         // Add additional preferences for each sim in the device
@@ -75,11 +71,34 @@ public class ImeiInfoPreferenceController extends
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
             multiSimPreference.setOrder(imeiPreferenceOrder + simSlotNumber);
-            multiSimPreference.setKey(KEY_IMEI_INFO + simSlotNumber);
+            multiSimPreference.setKey(getPreferenceKey() + simSlotNumber);
             screen.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
             updatePreference(multiSimPreference, simSlotNumber);
         }
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        if (preference == null) {
+            return;
+        }
+        int size = mPreferenceList.size();
+        for (int i = 0; i < size; i++) {
+            Preference pref = mPreferenceList.get(i);
+            updatePreference(pref, i);
+        }
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return getSummary(0);
+    }
+
+    private CharSequence getSummary(int simSlot) {
+        final int phoneType = getPhoneType(simSlot);
+        return phoneType == PHONE_TYPE_CDMA ? mTelephonyManager.getMeid(simSlot)
+                : mTelephonyManager.getImei(simSlot);
     }
 
     @Override
@@ -93,16 +112,35 @@ public class ImeiInfoPreferenceController extends
         return true;
     }
 
+    @Override
+    public int getAvailabilityStatus() {
+        return mContext.getSystemService(UserManager.class).isAdminUser()
+                && !Utils.isWifiOnly(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public boolean isCopyableSlice() {
+        return true;
+    }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
+    public void copy() {
+        Sliceable.setCopyContent(mContext, getSummary(0), getTitle(0));
+    }
+
     private void updatePreference(Preference preference, int simSlot) {
-        final int phoneType = mTelephonyManager.getPhoneType();
-        if (phoneType == PHONE_TYPE_CDMA) {
-            preference.setTitle(getTitleForCdmaPhone(simSlot));
-            preference.setSummary(getMeid(simSlot));
-        } else {
-            // GSM phone
-            preference.setTitle(getTitleForGsmPhone(simSlot));
-            preference.setSummary(mTelephonyManager.getImei(simSlot));
-        }
+        preference.setTitle(getTitle(simSlot));
+        preference.setSummary(getSummary(simSlot));
     }
 
     private CharSequence getTitleForGsmPhone(int simSlot) {
@@ -115,9 +153,17 @@ public class ImeiInfoPreferenceController extends
                 : mContext.getString(R.string.status_meid_number);
     }
 
-    @VisibleForTesting
-    String getMeid(int simSlot) {
-        return mTelephonyManager.getMeid(simSlot);
+    private CharSequence getTitle(int simSlot) {
+        final int phoneType = getPhoneType(simSlot);
+        return phoneType == PHONE_TYPE_CDMA ? getTitleForCdmaPhone(simSlot)
+                : getTitleForGsmPhone(simSlot);
+    }
+
+    private int getPhoneType(int slotIndex) {
+        SubscriptionInfo subInfo = SubscriptionManager.from(mContext)
+            .getActiveSubscriptionInfoForSimSlotIndex(slotIndex);
+        return mTelephonyManager.getCurrentPhoneType(subInfo != null ? subInfo.getSubscriptionId()
+                : SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
     }
 
     @VisibleForTesting

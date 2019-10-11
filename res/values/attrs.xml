@@ -15,35 +15,6 @@
 -->
 
 <resources>
-    <declare-styleable name="BatteryHistoryChart">
-        <!-- Base text color, typeface, size, and style. -->
-        <attr name="android:textAppearance" />
-        <!-- Text color. -->
-        <attr name="android:textColor" />
-        <!-- Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). -->
-        <attr name="android:textSize" />
-        <!-- Typeface (normal, sans, serif, monospace) for the text. -->
-        <attr name="android:typeface" />
-        <!-- Style (bold, italic, bolditalic) for the text. -->
-        <attr name="android:textStyle" />
-        <!-- Place a shadow of the specified color behind the text. -->
-        <attr name="android:shadowColor" />
-        <!-- Horizontal offset of the shadow. -->
-        <attr name="android:shadowDx" />
-        <!-- Vertical offset of the shadow. -->
-        <attr name="android:shadowDy" />
-        <!-- Radius of the shadow. -->
-        <attr name="android:shadowRadius" />
-        <!-- Text color, typeface, size, and style of header. -->
-        <attr name="headerAppearance" format="reference" />
-        <!-- Primary color of chart. -->
-        <attr name="barPrimaryColor" format="color|reference" />
-        <!-- Color of predicted future use part of chart. -->
-        <attr name="barPredictionColor" format="color|reference" />
-        <!-- Minimum height of the chart itself. -->
-        <attr name="chartMinHeight" format="dimension|reference" />
-    </declare-styleable>
-
     <declare-styleable name="PercentageBarChart">
         <!-- Background color -->
         <attr name="emptyColor" format="color" />
@@ -79,14 +50,11 @@
         <attr name="android:textAppearance" />
     </declare-styleable>
 
-    <declare-styleable name="ChartNetworkSeriesView">
-        <attr name="strokeColor" format="color" />
-        <attr name="fillColor" format="color" />
-        <attr name="fillColorSecondary" format="color" />
-        <attr name="safeRegion" />
-    </declare-styleable>
-
     <attr name="apnPreferenceStyle" format="reference" />
+
+    <attr name="slicePreferenceStyle" format="reference" />
+
+    <attr name="cardPreferenceStyle" format="reference" />
 
     <attr name="footerPreferenceStyle" format="reference" />
 
@@ -98,10 +66,22 @@
     <declare-styleable name="Preference">
         <!-- Synonyms for search results -->
         <attr name="keywords" format="string" />
+        <!-- Whether or not the preference is searchable, by default it's true. -->
+        <attr name="searchable" format="boolean" />
         <!-- Classname of a PreferenceController corresponding to the preference -->
         <attr name="controller" format="string" />
         <!-- {@code true} when the controller declared represents a slice from {@link android.app.SettingsSliceContract} -->
         <attr name="platform_slice" format="boolean" />
+        <!-- customized subtitle if it's an unavailable slice -->
+        <attr name="unavailableSliceSubtitle" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="PreferenceScreen">
+        <!-- Determines if static preferences defined in addStaticPreferences are added before or after the radio buttons -->
+        <attr name="staticPreferenceLocation">
+            <enum name="prepend" value="0" />
+            <enum name="append" value="1" />
+        </attr>
     </declare-styleable>
 
     <!-- For DotsPageIndicator -->
@@ -128,6 +108,7 @@
     <attr name="switchBarMarginEnd" format="dimension" />
     <attr name="switchBarBackgroundColor" format="color" />
     <attr name="switchBarBackgroundActivatedColor" format="color" />
+    <attr name="switchBarRestrictionIcon" format="reference" />
 
     <attr name="preferenceBackgroundColor" format="color" />
 
@@ -172,16 +153,27 @@
         <attr name="thickness" format="dimension" />
     </declare-styleable>
 
+    <!-- For Face enroll accessibility toggle -->
+    <declare-styleable name="FaceEnrollAccessibilityToggle">
+        <attr name="messageText" format="reference" />
+    </declare-styleable>
+
     <!-- For TwoStatesButtonPreference -->
     <declare-styleable name="TwoStateButtonPreference">
         <attr name="textOn" format="reference" />
         <attr name="textOff" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="TintDrawable">
+        <attr name="android:tint" />
+        <attr name="android:drawable" />
+    </declare-styleable>
+
     <attr name="twoStateButtonPreferenceStyle" format="reference" />
 
-    <attr name="batteryGoodColor" format="color" />
-    <attr name="batteryBadColor" format="color" />
-    <attr name="batteryMaybeColor" format="color" />
-
+    <attr name="fingerprint_layout_theme" format="reference" />
+    <attr name="face_layout_theme" format="reference" />
+    <attr name="ic_menu_moreoverflow" format="reference" />
+    <attr name="side_margin" format="reference|dimension" />
+    <attr name="wifi_signal_color" format="reference" />
 </resources>

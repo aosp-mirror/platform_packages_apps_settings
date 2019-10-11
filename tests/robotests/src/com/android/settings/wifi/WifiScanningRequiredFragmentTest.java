@@ -28,35 +28,34 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.provider.Settings;
 
-import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
-import org.junit.After;
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiScanningRequiredFragmentTest {
 
     private WifiScanningRequiredFragment mFragment;
     private Context mContext;
     private ContentResolver mResolver;
     @Mock
-    Fragment mCallbackFragment;
+    private Fragment mCallbackFragment;
     @Mock
-    AlertDialog.Builder mBuilder;
+    private AlertDialog.Builder mBuilder;
 
     @Before
     public void setUp() {
@@ -68,11 +67,6 @@ public class WifiScanningRequiredFragmentTest {
         doReturn(mContext).when(mFragment).getContext();
         mFragment.setTargetFragment(mCallbackFragment, 1000);
         Settings.Global.putInt(mResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0);
-    }
-
-    @After
-    public void tearDown() {
-        SettingsShadowResources.reset();
     }
 
     @Test

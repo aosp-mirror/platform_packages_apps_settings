@@ -1,7 +1,6 @@
 android_test {
     name: "SettingsUnitTests",
 
-    // We only want this apk build for tests.
     certificate: "platform",
 
     libs: [
@@ -13,10 +12,10 @@ android_test {
     ],
 
     static_libs: [
-        "android-support-test",
-        "espresso-core",
-        "espresso-contrib-nodep",
-        "espresso-intents-nodep",
+        "androidx.test.rules",
+        "androidx.test.espresso.core",
+        "androidx.test.espresso.contrib-nodeps",
+        "androidx.test.espresso.intents-nodeps",
         "mockito-target-minus-junit4",
         "platform-test-annotations",
         "truth-prebuilt",

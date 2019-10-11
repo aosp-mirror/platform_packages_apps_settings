@@ -16,20 +16,22 @@
 
 package com.android.settings.gestures;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class SwipeToNotificationSettings extends DashboardFragment {
 
     private static final String TAG = "SwipeToNotifSettings";
@@ -48,7 +50,7 @@ public class SwipeToNotificationSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_GESTURE_SWIPE_TO_NOTIFICATION;
+        return SettingsEnums.SETTINGS_GESTURE_SWIPE_TO_NOTIFICATION;
     }
 
     @Override
@@ -69,6 +71,11 @@ public class SwipeToNotificationSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.swipe_to_notification_settings;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return SwipeToNotificationPreferenceController.isAvailable(context);
                 }
             };
 }

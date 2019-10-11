@@ -16,24 +16,27 @@
 
 package com.android.settings.localepicker;
 
-import android.app.AlertDialog;
-import android.app.FragmentTransaction;
+import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
+
+import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.LocaleList;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.app.LocalePicker;
-import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 
@@ -41,17 +44,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
-
 /**
  * Drag-and-drop editor for the user-ordered locale lists.
  */
-public class LocaleListEditor extends RestrictedSettingsFragment
-        implements LocalePickerWithRegion.LocaleSelectedListener {
+public class LocaleListEditor extends RestrictedSettingsFragment {
 
+    protected static final String INTENT_LOCALE_KEY = "localeInfo";
     private static final String CFGKEY_REMOVE_MODE = "localeRemoveMode";
     private static final String CFGKEY_REMOVE_DIALOG = "showingLocaleRemoveDialog";
     private static final int MENU_ID_REMOVE = Menu.FIRST + 1;
+    private static final int REQUEST_LOCALE_PICKER = 0;
 
     private LocaleDragAndDropAdapter mAdapter;
     private Menu mMenu;
@@ -66,7 +68,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.USER_LOCALE_LIST;
+        return SettingsEnums.USER_LOCALE_LIST;
     }
 
     @Override
@@ -148,6 +150,19 @@ public class LocaleListEditor extends RestrictedSettingsFragment
                 break;
         }
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_LOCALE_PICKER && resultCode == Activity.RESULT_OK
+                && data != null) {
+            final LocaleStore.LocaleInfo locale =
+                    (LocaleStore.LocaleInfo) data.getSerializableExtra(
+                            INTENT_LOCALE_KEY);
+            mAdapter.addLocale(locale);
+            updateVisibilityOfRemoveMenu();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setRemoveMode(boolean mRemoveMode) {
@@ -267,22 +282,11 @@ public class LocaleListEditor extends RestrictedSettingsFragment
         mAddLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final LocalePickerWithRegion selector = LocalePickerWithRegion.createLanguagePicker(
-                        getContext(), LocaleListEditor.this, false /* translate only */);
-                getFragmentManager()
-                        .beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .replace(getId(), selector)
-                        .addToBackStack("localeListEditor")
-                        .commit();
+                final Intent intent = new Intent(getActivity(),
+                        LocalePickerWithRegionActivity.class);
+                startActivityForResult(intent, REQUEST_LOCALE_PICKER);
             }
         });
-    }
-
-    @Override
-    public void onLocaleSelected(LocaleStore.LocaleInfo locale) {
-        mAdapter.addLocale(locale);
-        updateVisibilityOfRemoveMenu();
     }
 
     // Hide the "Remove" menu if there is only one locale in the list, show it otherwise

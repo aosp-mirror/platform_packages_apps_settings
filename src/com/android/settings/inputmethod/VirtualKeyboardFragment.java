@@ -18,34 +18,34 @@ package com.android.settings.inputmethod;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import androidx.preference.Preference;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.preference.Preference;
+
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtilCompat;
 import com.android.settingslib.inputmethod.InputMethodPreference;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public final class VirtualKeyboardFragment extends SettingsPreferenceFragment implements Indexable {
 
     private static final String ADD_VIRTUAL_KEYBOARD_SCREEN = "add_virtual_keyboard_screen";
-    private static final Drawable NO_ICON = new ColorDrawable(Color.TRANSPARENT);
 
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
     private InputMethodManager mImm;
@@ -72,7 +72,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment im
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.VIRTUAL_KEYBOARDS;
+        return SettingsEnums.VIRTUAL_KEYBOARDS;
     }
 
     private void updateInputMethodPreferenceViews() {
@@ -86,14 +86,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment im
             final InputMethodInfo imi = imis.get(i);
             final boolean isAllowedByOrganization = permittedList == null
                     || permittedList.contains(imi.getPackageName());
-            Drawable icon;
-            try {
-                // TODO: Consider other ways to retrieve an icon to show here.
-                icon = getActivity().getPackageManager().getApplicationIcon(imi.getPackageName());
-            } catch (Exception e) {
-                // TODO: Consider handling the error differently perhaps by showing default icons.
-                icon = NO_ICON;
-            }
+            final Drawable icon = imi.loadIcon(context.getPackageManager());
             final InputMethodPreference pref = new InputMethodPreference(
                     context,
                     imi,
@@ -110,7 +103,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment im
             final InputMethodPreference pref = mInputMethodPreferenceList.get(i);
             pref.setOrder(i);
             getPreferenceScreen().addPreference(pref);
-            InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
+            InputMethodAndSubtypeUtilCompat.removeUnnecessaryNonPersistentPreference(pref);
             pref.updatePreferenceViews();
         }
         mAddVirtualKeyboardScreen.setIcon(R.drawable.ic_add_24dp);
@@ -126,13 +119,6 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment im
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.virtual_keyboard_settings;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add("add_virtual_keyboard_screen");
-                    return keys;
                 }
             };
 }

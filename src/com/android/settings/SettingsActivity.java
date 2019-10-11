@@ -16,13 +16,8 @@
 
 package com.android.settings;
 
-import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
-
 import android.app.ActionBar;
 import android.app.ActivityManager;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,54 +27,53 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
+import android.content.res.Resources.Theme;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceFragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.transition.TransitionManager;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toolbar;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.backup.BackupSettingsActivity;
-import com.android.settings.core.FeatureFlags;
+import com.android.settings.backup.UserBackupSettingsActivity;
+import com.android.settings.core.OnActivityResultListener;
+import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.dashboard.DashboardSummary;
+import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DeviceIndexFeatureProvider;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
-import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsActivity extends SettingsDrawerActivity
+
+public class SettingsActivity extends SettingsBaseActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
-        PreferenceFragment.OnPreferenceStartFragmentCallback,
+        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
         ButtonBarHandler, FragmentManager.OnBackStackChangedListener {
 
     private static final String LOG_TAG = "SettingsActivity";
@@ -109,8 +103,6 @@ public class SettingsActivity extends SettingsDrawerActivity
      */
     public static final String EXTRA_FRAGMENT_ARG_KEY = ":settings:fragment_args_key";
 
-    public static final String BACK_STACK_PREFS = ":settings:prefs";
-
     // extras that allow any preference activity to be launched as part of a wizard
 
     // show Back and Next buttons? takes boolean parameter
@@ -138,14 +130,9 @@ public class SettingsActivity extends SettingsDrawerActivity
             ":settings:show_fragment_title_res_package_name";
     public static final String EXTRA_SHOW_FRAGMENT_TITLE_RESID =
             ":settings:show_fragment_title_resid";
-    public static final String EXTRA_SHOW_FRAGMENT_AS_SHORTCUT =
-            ":settings:show_fragment_as_shortcut";
 
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
-
-    @Deprecated
-    public static final String EXTRA_HIDE_DRAWER = ":settings:hide_drawer";
 
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
             "com.android.settings.FRAGMENT_CLASS";
@@ -179,10 +166,6 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private Button mNextButton;
 
-    private boolean mIsShowingDashboard;
-
-    private ViewGroup mContent;
-
     // Categories
     private ArrayList<DashboardCategory> mCategories = new ArrayList<>();
 
@@ -193,14 +176,14 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     @Override
-    public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
+    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
         new SubSettingLauncher(this)
                 .setDestination(pref.getFragment())
                 .setArguments(pref.getExtras())
                 .setSourceMetricsCategory(caller instanceof Instrumentable
                         ? ((Instrumentable) caller).getMetricsCategory()
                         : Instrumentable.METRICS_CATEGORY_UNKNOWN)
-                .setTitle(-1)
+                .setTitleRes(-1)
                 .launch();
         return true;
     }
@@ -251,11 +234,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
 
-        final ComponentName cn = intent.getComponent();
-        final String className = cn.getClassName();
-
-        mIsShowingDashboard = className.equals(Settings.class.getName());
-
         // This is a "Sub Settings" when:
         // - this is a real SubSettings
         // - or :settings:show_fragment_as_subsetting is passed to the Intent
@@ -263,17 +241,16 @@ public class SettingsActivity extends SettingsDrawerActivity
                 intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
 
         // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content
-        // insets
-        if (isSubSettings) {
+        // insets.
+        // If this is in setup flow, don't apply theme. Because light theme needs to be applied
+        // in SettingsBaseActivity#onCreate().
+        if (isSubSettings && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
             setTheme(R.style.Theme_SubSettings);
         }
 
-        setContentView(mIsShowingDashboard ?
-                R.layout.settings_main_dashboard : R.layout.settings_main_prefs);
+        setContentView(R.layout.settings_main_prefs);
 
-        mContent = findViewById(R.id.main_content);
-
-        getFragmentManager().addOnBackStackChangedListener(this);
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         if (savedState != null) {
             // We are restarting from a previous saved state; used that to initialize, instead
@@ -288,34 +265,16 @@ public class SettingsActivity extends SettingsDrawerActivity
                 setTitleFromBackStack();
             }
         } else {
-            launchSettingFragment(initialFragmentName, isSubSettings, intent);
+            launchSettingFragment(initialFragmentName, intent);
         }
 
         final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
-        if (mIsShowingDashboard) {
-            findViewById(R.id.search_bar).setVisibility(
-                    deviceProvisioned ? View.VISIBLE : View.INVISIBLE);
-            findViewById(R.id.action_bar).setVisibility(View.GONE);
-            final Toolbar toolbar = findViewById(R.id.search_action_bar);
-            FeatureFactory.getFactory(this).getSearchFeatureProvider()
-                    .initSearchToolbar(this, toolbar);
-            setActionBar(toolbar);
 
-            // Please forgive me for what I am about to do.
-            //
-            // Need to make the navigation icon non-clickable so that the entire card is clickable
-            // and goes to the search UI. Also set the background to null so there's no ripple.
-            View navView = toolbar.getNavigationView();
-            navView.setClickable(false);
-            navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
-            navView.setBackground(null);
-        }
-
-        ActionBar actionBar = getActionBar();
+        final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
             actionBar.setHomeButtonEnabled(deviceProvisioned);
-            actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);
+            actionBar.setDisplayShowTitleEnabled(true);
         }
         mSwitchBar = findViewById(R.id.switch_bar);
         if (mSwitchBar != null) {
@@ -329,26 +288,20 @@ public class SettingsActivity extends SettingsDrawerActivity
             if (buttonBar != null) {
                 buttonBar.setVisibility(View.VISIBLE);
 
-                Button backButton = (Button) findViewById(R.id.back_button);
-                backButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        setResult(RESULT_CANCELED, null);
-                        finish();
-                    }
+                Button backButton = findViewById(R.id.back_button);
+                backButton.setOnClickListener(v -> {
+                    setResult(RESULT_CANCELED, null);
+                    finish();
                 });
-                Button skipButton = (Button) findViewById(R.id.skip_button);
-                skipButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        setResult(RESULT_OK, null);
-                        finish();
-                    }
+                Button skipButton = findViewById(R.id.skip_button);
+                skipButton.setOnClickListener(v -> {
+                    setResult(RESULT_OK, null);
+                    finish();
                 });
-                mNextButton = (Button) findViewById(R.id.next_button);
-                mNextButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        setResult(RESULT_OK, null);
-                        finish();
-                    }
+                mNextButton = findViewById(R.id.next_button);
+                mNextButton.setOnClickListener(v -> {
+                    setResult(RESULT_OK, null);
+                    finish();
                 });
 
                 // set our various button parameters
@@ -379,20 +332,38 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
     }
 
+    @Override
+    protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, resid, first);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        final List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                if (fragment instanceof OnActivityResultListener) {
+                    fragment.onActivityResult(requestCode, resultCode, data);
+                }
+            }
+        }
+    }
+
     @VisibleForTesting
-    void launchSettingFragment(String initialFragmentName, boolean isSubSettings, Intent intent) {
-        if (!mIsShowingDashboard && initialFragmentName != null) {
+    void launchSettingFragment(String initialFragmentName, Intent intent) {
+        if (initialFragmentName != null) {
             setTitleFromIntent(intent);
 
             Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-            switchToFragment(initialFragmentName, initialArguments, true, false,
-                    mInitialTitleResId, mInitialTitle, false);
+            switchToFragment(initialFragmentName, initialArguments, true,
+                    mInitialTitleResId, mInitialTitle);
         } else {
             // Show search icon as up affordance if we are displaying the main Dashboard
             mInitialTitleResId = R.string.dashboard_title;
-
-            switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
-                    mInitialTitleResId, mInitialTitle, false);
+            switchToFragment(TopLevelSettings.class.getName(), null /* args */, false,
+                    mInitialTitleResId, mInitialTitle);
         }
     }
 
@@ -434,7 +405,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     private void setTitleFromBackStack() {
-        final int count = getFragmentManager().getBackStackEntryCount();
+        final int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
             if (mInitialTitleResId > 0) {
@@ -445,7 +416,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             return;
         }
 
-        FragmentManager.BackStackEntry bse = getFragmentManager().getBackStackEntryAt(count - 1);
+        FragmentManager.BackStackEntry bse = getSupportFragmentManager().
+                getBackStackEntryAt(count - 1);
         setTitleFromBackStackEntry(bse);
     }
 
@@ -494,7 +466,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         updateTilesList();
-        updateDeviceIndex();
     }
 
     @Override
@@ -507,8 +478,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     @Override
     public void setTaskDescription(ActivityManager.TaskDescription taskDescription) {
-        final Bitmap icon = getBitmapFromXmlResource(R.drawable.ic_launcher_settings);
-        taskDescription.setIcon(icon);
+        taskDescription.setIcon(R.drawable.ic_launcher_settings);
         super.setTaskDescription(taskDescription);
     }
 
@@ -579,28 +549,22 @@ public class SettingsActivity extends SettingsDrawerActivity
      * Switch to a specific Fragment with taking care of validation, Title and BackStack
      */
     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
-            boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
+            int titleResId, CharSequence title) {
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
         }
         Fragment f = Fragment.instantiate(this, fragmentName, args);
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
-        if (withTransition) {
-            TransitionManager.beginDelayedTransition(mContent);
-        }
-        if (addToBackStack) {
-            transaction.addToBackStack(SettingsActivity.BACK_STACK_PREFS);
-        }
         if (titleResId > 0) {
             transaction.setBreadCrumbTitle(titleResId);
         } else if (title != null) {
             transaction.setBreadCrumbTitle(title);
         }
         transaction.commitAllowingStateLoss();
-        getFragmentManager().executePendingTransactions();
+        getSupportFragmentManager().executePendingTransactions();
         Log.d(LOG_TAG, "Executed frag manager pendingTransactions");
         return f;
     }
@@ -608,7 +572,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     private void updateTilesList() {
         // Generally the items that are will be changing from these updates will
         // not be in the top list of tiles, so run it in the background and the
-        // SettingsDrawerActivity will pick up on the updates automatically.
+        // SettingsBaseActivity will pick up on the updates automatically.
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -617,19 +581,10 @@ public class SettingsActivity extends SettingsDrawerActivity
         });
     }
 
-    private void updateDeviceIndex() {
-        DeviceIndexFeatureProvider indexProvider = FeatureFactory.getFactory(
-                this).getDeviceIndexFeatureProvider();
-
-        ThreadUtils.postOnBackgroundThread(
-                () -> indexProvider.updateIndex(SettingsActivity.this, false /* force */));
-    }
-
     private void doUpdateTilesList() {
         PackageManager pm = getPackageManager();
         final UserManager um = UserManager.get(this);
         final boolean isAdmin = um.isAdminUser();
-        final FeatureFactory featureFactory = FeatureFactory.getFactory(this);
         boolean somethingChanged = false;
         final String packageName = getPackageName();
         final StringBuilder changedList = new StringBuilder();
@@ -641,7 +596,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                         Settings.BluetoothSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin)
                 || somethingChanged;
-
 
         // Enable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
         // enable DataPlanUsageSummaryActivity.
@@ -657,25 +611,12 @@ public class SettingsActivity extends SettingsDrawerActivity
                 isAdmin) || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.SimSettingsActivity.class.getName()),
-                Utils.showSimCardTile(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.PowerUsageSummaryActivity.class.getName()),
                 mBatteryPresent, isAdmin) || somethingChanged;
 
-        final boolean isDataUsageSettingsV2Enabled =
-                FeatureFlagUtils.isEnabled(this, FeatureFlags.DATA_USAGE_SETTINGS_V2);
-        // Enable new data usage page if v2 enabled
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DataUsageSummaryActivity.class.getName()),
-                Utils.isBandwidthControlEnabled() && isDataUsageSettingsV2Enabled, isAdmin)
-                || somethingChanged;
-        // Enable legacy data usage page if v2 disabled
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.DataUsageSummaryLegacyActivity.class.getName()),
-                Utils.isBandwidthControlEnabled() && !isDataUsageSettingsV2Enabled, isAdmin)
+                Utils.isBandwidthControlEnabled(), isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
@@ -684,45 +625,20 @@ public class SettingsActivity extends SettingsDrawerActivity
                         && !Utils.isMonkeyRunning(), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.NetworkDashboardActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.DateTimeSettingsActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin)
-                || somethingChanged;
-
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !Utils.isMonkeyRunning();
-        final boolean isAdminOrDemo = um.isAdminUser() || um.isDemoUser();
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
-                showDev, isAdminOrDemo)
+                showDev, isAdmin)
                 || somethingChanged;
 
-        // Enable/disable backup settings depending on whether the user is admin.
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                BackupSettingsActivity.class.getName()), true, isAdmin)
+                UserBackupSettingsActivity.class.getName()), true, isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.WifiDisplaySettingsActivity.class.getName()),
                 WifiDisplaySettings.isAvailable(this), isAdmin)
-                || somethingChanged;
-
-        // Enable/disable the Me Card page.
-        final boolean aboutPhoneV2Enabled = featureFactory
-                .getAccountFeatureProvider()
-                .isAboutPhoneV2Enabled(this);
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.MyDeviceInfoActivity.class.getName()),
-                aboutPhoneV2Enabled, isAdmin)
-                || somethingChanged;
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.DeviceInfoSettingsActivity.class.getName()),
-                !aboutPhoneV2Enabled, isAdmin)
                 || somethingChanged;
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
@@ -733,12 +649,11 @@ public class SettingsActivity extends SettingsDrawerActivity
                 for (DashboardCategory category : categories) {
                     final int tileCount = category.getTilesCount();
                     for (int i = 0; i < tileCount; i++) {
-                        final ComponentName component = category.getTile(i).intent.getComponent();
+                        final ComponentName component = category.getTile(i)
+                                .getIntent().getComponent();
                         final String name = component.getClassName();
                         final boolean isEnabledForRestricted = ArrayUtils.contains(
-                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name) || (isAdminOrDemo
-                                && Settings.DevelopmentSettingsDashboardActivity.class.getName()
-                                .equals(name));
+                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
                         if (packageName.equals(component.getPackageName())
                                 && !isEnabledForRestricted) {
                             somethingChanged =
@@ -796,18 +711,5 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     public Button getNextButton() {
         return mNextButton;
-    }
-
-    @VisibleForTesting
-    Bitmap getBitmapFromXmlResource(int drawableRes) {
-        Drawable drawable = getResources().getDrawable(drawableRes, getTheme());
-        Canvas canvas = new Canvas();
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        canvas.setBitmap(bitmap);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        drawable.draw(canvas);
-
-        return bitmap;
     }
 }

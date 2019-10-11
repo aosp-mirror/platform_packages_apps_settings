@@ -20,6 +20,7 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.UserManager;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -48,7 +49,7 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override

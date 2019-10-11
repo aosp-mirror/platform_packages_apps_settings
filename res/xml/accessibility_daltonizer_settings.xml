@@ -14,14 +14,17 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/accessibility_display_daltonizer_preference_title" >
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="daltonizer_preference_screen"
+    android:title="@string/accessibility_display_daltonizer_preference_title">
 
     <ListPreference
         android:entries="@array/daltonizer_type_entries"
         android:entryValues="@array/daltonizer_type_values"
         android:key="type"
         android:summary="%s"
-        android:title="@string/daltonizer_type" />
+        android:title="@string/daltonizer_type"
+        android:icon="@drawable/ic_accessibility_illustration_colorblind" />
 
 </PreferenceScreen>

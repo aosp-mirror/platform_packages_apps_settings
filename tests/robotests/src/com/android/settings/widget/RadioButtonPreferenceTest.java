@@ -17,24 +17,27 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
-import static junit.framework.Assert.assertEquals;
+
+import static org.junit.Assert.assertEquals;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.app.Application;
-import androidx.preference.PreferenceViewHolder;
+import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RadioButtonPreferenceTest {
 
     private Application mContext;
@@ -90,5 +93,14 @@ public class RadioButtonPreferenceTest {
                 PreferenceViewHolder.createInstanceForTests(view);
         mPreference.onBindViewHolder(preferenceViewHolder);
         assertEquals(View.GONE, summaryContainer.getVisibility());
+    }
+
+    @Test
+    public void hideAppendix_shouldBeGone() {
+        mPreference.setAppendixVisibility(View.GONE);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.preference_radio, null);
+        PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
+        mPreference.onBindViewHolder(holder);
+        assertThat(holder.findViewById(R.id.appendix).getVisibility()).isEqualTo(View.GONE);
     }
 }

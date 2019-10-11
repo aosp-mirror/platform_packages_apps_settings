@@ -17,6 +17,7 @@
 package com.android.settings.wifi.p2p;
 
 import android.content.Context;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
@@ -41,7 +42,7 @@ public abstract class P2pCategoryPreferenceController extends AbstractPreference
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mCategory = (PreferenceGroup) screen.findPreference(getPreferenceKey());
+        mCategory = screen.findPreference(getPreferenceKey());
     }
 
     public void removeAllChildren() {

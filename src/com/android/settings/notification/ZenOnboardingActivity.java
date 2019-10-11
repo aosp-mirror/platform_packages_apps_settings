@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,9 +30,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 
-import com.android.internal.annotations.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -61,8 +62,8 @@ public class ZenOnboardingActivity extends Activity {
         setMetricsLogger(new MetricsLogger());
 
         Context context = getApplicationContext();
-        Settings.Global.putInt(context.getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_SUGGESTION_VIEWED, 1);
+        Settings.Secure.putInt(context.getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_SUGGESTION_VIEWED, 1);
 
         setupUI();
     }
@@ -99,7 +100,7 @@ public class ZenOnboardingActivity extends Activity {
         mKeepCurrentSettingButton.setOnClickListener(currentSettingClickListener);
 
         mKeepCurrentSettingButton.setChecked(true);
-        mMetrics.visible(MetricsEvent.SETTINGS_ZEN_ONBOARDING);
+        mMetrics.visible(SettingsEnums.SETTINGS_ZEN_ONBOARDING);
     }
 
     @VisibleForTesting
@@ -113,7 +114,7 @@ public class ZenOnboardingActivity extends Activity {
     }
 
     public void launchSettings(View button) {
-        mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_SETTINGS);
+        mMetrics.action(SettingsEnums.ACTION_ZEN_ONBOARDING_SETTINGS);
         Intent settings = new Intent(Settings.ACTION_ZEN_MODE_SETTINGS);
         settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(settings);
@@ -129,13 +130,13 @@ public class ZenOnboardingActivity extends Activity {
                     policy.priorityMessageSenders,
                     NotificationManager.Policy.getAllSuppressedVisualEffects());
             mNm.setNotificationPolicy(newPolicy);
-            mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
+            mMetrics.action(SettingsEnums.ACTION_ZEN_ONBOARDING_OK);
         } else {
-            mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
+            mMetrics.action(SettingsEnums.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
         }
 
-        Settings.Global.putInt(getApplicationContext().getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, 1);
+        Settings.Secure.putInt(getApplicationContext().getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_UPDATED, 1);
 
         finishAndRemoveTask();
     }
@@ -159,11 +160,11 @@ public class ZenOnboardingActivity extends Activity {
         NotificationManager nm = context.getSystemService(NotificationManager.class);
         if (NotificationManager.Policy.areAllVisualEffectsSuppressed(
                 nm.getNotificationPolicy().suppressedVisualEffects)) {
-            Settings.Global.putInt(context.getContentResolver(),
-                    Settings.Global.ZEN_SETTINGS_UPDATED, 1);
+            Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.ZEN_SETTINGS_UPDATED, 1);
         }
-        return Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, 0) != 0;
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_UPDATED, 0) != 0;
     }
 
     private static boolean showSuggestion(Context context) {
@@ -172,8 +173,8 @@ public class ZenOnboardingActivity extends Activity {
 
         // SHOW_ZEN_SETTINGS_SUGGESTION is also true when:
         // - automatic rule has started DND and user has not seen the first use dialog
-        return Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.SHOW_ZEN_SETTINGS_SUGGESTION, 0) != 0;
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.SHOW_ZEN_SETTINGS_SUGGESTION, 0) != 0;
 
     }
 
@@ -194,7 +195,8 @@ public class ZenOnboardingActivity extends Activity {
         final long showTimeMs = firstDisplayTimeMs + ALWAYS_SHOW_THRESHOLD;
         final boolean stillShow = currentTimeMs < showTimeMs;
 
-        Log.d(TAG, "still show zen suggestion based on time: " + stillShow);
+        Log.d(TAG, "still show zen suggestion based on time: " + stillShow + " showTimeMs="
+            + showTimeMs);
         return stillShow;
     }
 }

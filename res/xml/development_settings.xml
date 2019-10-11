@@ -36,6 +36,10 @@
             android:dialogTitle="@*android:string/bugreport_title" />
 
         <Preference
+            android:key="system_server_heap_dump"
+            android:title="@string/capture_system_heap_dump_title" />
+
+        <Preference
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
             android:summary="@string/local_backup_password_summary_none"
@@ -59,10 +63,12 @@
             android:entries="@array/hdcp_checking_titles"
             android:entryValues="@array/hdcp_checking_values" />
 
-        <SwitchPreference
+        <ListPreference
             android:key="bt_hci_snoop_log"
             android:title="@string/bt_hci_snoop_log"
-            android:summary="@string/bt_hci_snoop_log_summary" />
+            android:dialogTitle="@string/bt_hci_snoop_log_summary"
+            android:entries="@array/bt_hci_snoop_log_entries"
+            android:entryValues="@array/bt_hci_snoop_log_values" />
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="oem_unlock_enable"
@@ -108,17 +114,22 @@
             <intent android:action="com.android.settings.action.DEMO_MODE" />
         </Preference>
 
-        <ListPreference
-            android:key="dark_ui_mode"
-            android:title="@string/dark_ui_mode"
-            android:dialogTitle="@string/dark_ui_mode_title"
-            android:entries="@array/dark_ui_mode_entries"
-            android:entryValues="@array/dark_ui_mode_values" />
-
         <Preference
             android:key="quick_settings_tiles"
             android:title="@string/quick_settings_developer_tiles"
-            android:fragment="com.android.settings.development.qstile.DevelopmentTileConfigFragment" />
+            android:fragment="com.android.settings.development.qstile.DevelopmentTileConfigFragment"
+            settings:searchable="false" />
+
+    <!-- Configure trust agent behavior -->
+    <SwitchPreference
+        android:key="security_setting_trust_agents_extend_unlock"
+        android:title="@string/trust_agents_extend_unlock_title"
+        android:summary="@string/trust_agents_extend_unlock_summary" />
+
+    <SwitchPreference
+        android:key="security_setting_trust_lost_locks_screen"
+        android:title="@string/trust_lost_locks_screen_title"
+        android:summary="@string/trust_lost_locks_screen_summary" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -143,6 +154,11 @@
             android:key="bugreport_in_power"
             android:title="@string/bugreport_in_power"
             android:summary="@string/bugreport_in_power_summary" />
+
+        <SwitchPreference
+            android:key="automatic_system_server_heap_dumps"
+            android:title="@string/automatic_system_heap_dump_title"
+            android:summary="@string/automatic_system_heap_dump_summary" />
 
         <Preference android:key="mock_location_app"
                     android:title="@string/mock_location_app" />
@@ -169,6 +185,11 @@
             android:title="@string/verify_apps_over_usb_title"
             android:summary="@string/verify_apps_over_usb_summary" />
 
+        <SwitchPreference
+            android:key="art_verifier_for_debuggable"
+            android:title="@string/art_verifier_for_debuggable_title"
+            android:summary="@string/art_verifier_for_debuggable_summary" />
+
         <ListPreference
             android:key="select_logd_size"
             android:title="@string/select_logd_size_title"
@@ -190,7 +211,8 @@
         <Preference
             android:key="feature_flags_dashboard"
             android:title="@string/feature_flags_dashboard_title"
-            android:fragment="com.android.settings.development.featureflags.FeatureFlagsDashboard" />
+            android:fragment="com.android.settings.development.featureflags.FeatureFlagsDashboard"
+            settings:searchable="false" />
 
         <SwitchPreference
             android:key="enable_gpu_debug_layers"
@@ -201,7 +223,8 @@
             android:key="game_driver_dashboard"
             android:title="@string/game_driver_dashboard_title"
             android:summary="@string/game_driver_dashboard_summary"
-            android:fragment="com.android.settings.development.gamedriver.GameDriverDashboard" />
+            android:fragment="com.android.settings.development.gamedriver.GameDriverDashboard"
+            settings:searchable="false" />
 
     </PreferenceCategory>
 
@@ -225,9 +248,9 @@
             android:summary="@string/wifi_verbose_logging_summary" />
 
         <SwitchPreference
-            android:key="wifi_connected_mac_randomization"
-            android:title="@string/wifi_connected_mac_randomization"
-            android:summary="@string/wifi_connected_mac_randomization_summary" />
+            android:key="wifi_scan_throttling"
+            android:title="@string/wifi_scan_throttling"
+            android:summary="@string/wifi_scan_throttling_summary" />
 
         <SwitchPreference
             android:key="mobile_data_always_on"
@@ -388,11 +411,6 @@
         android:order="700">
 
         <SwitchPreference
-            android:key="force_hw_ui"
-            android:title="@string/force_hw_ui"
-            android:summary="@string/force_hw_ui_summary" />
-
-        <SwitchPreference
             android:key="show_hw_screen_updates"
             android:title="@string/show_hw_screen_updates"
             android:summary="@string/show_hw_screen_updates_summary" />
@@ -413,6 +431,11 @@
             android:title="@string/show_non_rect_clip"
             android:entries="@array/show_non_rect_clip_entries"
             android:entryValues="@array/show_non_rect_clip_values" />
+
+        <SwitchPreference
+            android:key="hwui_force_dark"
+            android:title="@string/hwui_force_dark_title"
+            android:summary="@string/hwui_force_dark_summary" />
 
         <SwitchPreference
             android:key="force_msaa"
@@ -499,6 +522,11 @@
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
 
+        <SwitchPreference
+            android:key="asst_capability_prioritizer"
+            android:title="@string/asst_capability_prioritizer_title"
+            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+
         <Preference
             android:key="inactive_apps"
             android:title="@string/inactive_apps_title"
@@ -519,9 +547,65 @@
             android:title="@string/enable_freeform_support"
             android:summary="@string/enable_freeform_support_summary" />
 
+        <SwitchPreference
+            android:key="force_desktop_mode_on_external_displays"
+            android:title="@string/force_desktop_mode"
+            android:summary="@string/force_desktop_mode_summary" />
+
         <Preference
             android:key="reset_shortcut_manager_throttling"
             android:title="@string/reset_shortcut_manager_throttling" />
+
+        <SwitchPreference
+            android:key="sms_access_restriction_enabled"
+            android:title="@string/sms_access_restriction_enabled"
+            android:summary="@string/sms_access_restriction_enabled_summary" />
+
+        <SwitchPreference
+            android:key="notification_bubbles"
+            android:title="@string/notification_bubbles_title"
+            android:summary="@string/notification_bubbles_developer_setting_summary"/>
+
     </PreferenceCategory>
 
+    <com.android.settings.development.autofill.AutofillPreferenceCategory
+        android:key="debug_autofill_category"
+        android:title="@string/debug_autofill_category"
+        android:order="1100">
+
+        <ListPreference
+            android:key="autofill_logging_level"
+            android:title="@string/autofill_logging_level_title"
+            android:entries="@array/autofill_logging_level_entries"
+            android:entryValues="@array/autofill_logging_level_values" />
+
+        <com.android.settings.development.autofill.AutofillMaxPartitionsPreference
+            android:key="autofill_max_partitions"
+            android:title="@string/autofill_max_partitions" />
+
+        <com.android.settings.development.autofill.AutofillVisibleDatasetsPreference
+            android:key="autofill_visible_datasets"
+            android:title="@string/autofill_max_visible_datasets" />
+
+        <Preference
+            android:key="autofill_reset_developer_options"
+            android:title="@string/autofill_reset_developer_options" />
+
+    </com.android.settings.development.autofill.AutofillPreferenceCategory>
+
+    <PreferenceCategory
+        android:key="theme_customization_category"
+        android:title="@string/theme_customization_category"
+        android:order="1200"> <!-- Incremented by 100 from last order (i.e. 1100) -->
+
+        <ListPreference
+            android:key="android.theme.customization.accent_color"
+            android:title="@string/theme_customization_accent_color_title"/>
+        <ListPreference
+            android:key="android.theme.customization.font"
+            android:title="@string/theme_customization_font_title"/>
+        <ListPreference
+            android:key="android.theme.customization.adaptive_icon_shape"
+            android:title="@string/theme_customization_icon_shape_title"/>
+    </PreferenceCategory>
 </PreferenceScreen>

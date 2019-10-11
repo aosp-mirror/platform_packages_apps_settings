@@ -16,20 +16,20 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import androidx.preference.Preference;
 import android.widget.Switch;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class BlockPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {
@@ -54,17 +54,12 @@ public class BlockPreferenceController extends NotificationPreferenceController
         if (mAppRow == null) {
             return false;
         }
-        if (mChannel != null) {
-            return isChannelBlockable();
-        } else if (mChannelGroup != null) {
-            return isChannelGroupBlockable();
-        } else {
-            return !mAppRow.systemApp || (mAppRow.systemApp && mAppRow.banned);
-        }
+        return true;
     }
 
     public void updateState(Preference preference) {
         LayoutPreference pref = (LayoutPreference) preference;
+        pref.setSelectable(false);
         SwitchBar bar = pref.findViewById(R.id.switch_bar);
         if (bar != null) {
             bar.setSwitchBarText(R.string.notification_switch_label,
@@ -76,6 +71,19 @@ public class BlockPreferenceController extends NotificationPreferenceController
                 // an exception is thrown if you try to add the listener twice
             }
             bar.setDisabledByAdmin(mAdmin);
+
+            if (mChannel != null && !isChannelBlockable()) {
+                bar.setEnabled(false);
+            }
+
+            if (mChannelGroup != null && !isChannelGroupBlockable()) {
+                bar.setEnabled(false);
+            }
+
+            if (mChannel == null && mAppRow.systemApp
+                    && (!mAppRow.banned || mAppRow.lockedImportance)) {
+                bar.setEnabled(false);
+            }
 
             if (mChannel != null) {
                 bar.setChecked(!mAppRow.banned

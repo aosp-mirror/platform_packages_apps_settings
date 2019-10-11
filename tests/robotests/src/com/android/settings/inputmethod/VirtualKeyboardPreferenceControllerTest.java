@@ -17,8 +17,7 @@
 package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -28,26 +27,27 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import androidx.core.text.BidiFormatter;
-import androidx.preference.Preference;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.core.text.BidiFormatter;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class VirtualKeyboardPreferenceControllerTest {
 
     @Mock
@@ -125,18 +125,9 @@ public class VirtualKeyboardPreferenceControllerTest {
         when(imis.get(0).loadLabel(mPm)).thenReturn(label1);
         when(imis.get(1).getPackageName()).thenReturn(componentName.getPackageName());
         when(imis.get(1).loadLabel(mPm)).thenReturn(label2);
-        when(mContext.getString(eq(R.string.join_many_items_middle), anyString(), anyString()))
-                .thenAnswer(invocation -> {
-                    final Object[] args = invocation.getArguments();
-                    final String str1 = (String) args[1];
-                    final String str2 = (String) args[2];
-                    return RuntimeEnvironment.application.getString(R.string.join_many_items_middle,
-                            str1, str2);
-                });
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(
-                formatter.unicodeWrap(label1) + ", " + formatter.unicodeWrap(label2));
+        verify(mPreference).setSummary(formatter.unicodeWrap(label1) + " and " + formatter.unicodeWrap(label2));
     }
 }

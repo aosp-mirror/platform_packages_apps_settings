@@ -15,7 +15,7 @@
  */
 package com.android.settings.testutils;
 
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,18 +23,20 @@ import android.content.Context;
 
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
-import com.android.settings.search.DeviceIndexFeatureProvider;
+import com.android.settings.panel.PanelFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
@@ -62,10 +64,12 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final SuggestionFeatureProvider suggestionsFeatureProvider;
     public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
-    public final BluetoothFeatureProvider bluetoothFeatureProvider;
     public final AccountFeatureProvider mAccountFeatureProvider;
-    public final DeviceIndexFeatureProvider deviceIndexFeatureProvider;
+    public final ContextualCardFeatureProvider mContextualCardFeatureProvider;
+    public final BluetoothFeatureProvider mBluetoothFeatureProvider;
+    public final AwareFeatureProvider mAwareFeatureProvider;
 
+    public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
     public SearchFeatureProvider searchFeatureProvider;
 
@@ -104,10 +108,12 @@ public class FakeFeatureFactory extends FeatureFactory {
         suggestionsFeatureProvider = mock(SuggestionFeatureProvider.class);
         userFeatureProvider = mock(UserFeatureProvider.class);
         assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
-        bluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         slicesFeatureProvider = mock(SlicesFeatureProvider.class);
         mAccountFeatureProvider = mock(AccountFeatureProvider.class);
-        deviceIndexFeatureProvider = mock(DeviceIndexFeatureProvider.class);
+        mContextualCardFeatureProvider = mock(ContextualCardFeatureProvider.class);
+        panelFeatureProvider = mock(PanelFeatureProvider.class);
+        mBluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
+        mAwareFeatureProvider = mock(AwareFeatureProvider.class);
     }
 
     @Override
@@ -176,11 +182,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
-        return bluetoothFeatureProvider;
-    }
-
-    @Override
     public AssistGestureFeatureProvider getAssistGestureFeatureProvider() {
         return assistGestureFeatureProvider;
     }
@@ -196,7 +197,22 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public DeviceIndexFeatureProvider getDeviceIndexFeatureProvider() {
-        return deviceIndexFeatureProvider;
+    public PanelFeatureProvider getPanelFeatureProvider() {
+        return panelFeatureProvider;
+    }
+
+    @Override
+    public ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context) {
+        return mContextualCardFeatureProvider;
+    }
+
+    @Override
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+        return mBluetoothFeatureProvider;
+    }
+
+    @Override
+    public AwareFeatureProvider getAwareFeatureProvider() {
+        return mAwareFeatureProvider;
     }
 }

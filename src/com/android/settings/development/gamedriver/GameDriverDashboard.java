@@ -16,28 +16,35 @@
 
 package com.android.settings.development.gamedriver;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Dashboard for Game Driver preferences.
  */
+@SearchIndexable
 public class GameDriverDashboard extends DashboardFragment {
 
     private static final String TAG = "GameDriverDashboard";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_GAME_DRIVER_DASHBOARD;
+        return SettingsEnums.SETTINGS_GAME_DRIVER_DASHBOARD;
     }
 
     @Override
@@ -64,7 +71,25 @@ public class GameDriverDashboard extends DashboardFragment {
         final GameDriverGlobalSwitchBarController switchBarController =
                 new GameDriverGlobalSwitchBarController(
                         activity, new SwitchBarController(switchBar));
-        getLifecycle().addObserver(switchBarController);
+        getSettingsLifecycle().addObserver(switchBarController);
         switchBar.show();
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final List<SearchIndexableResource> result = new ArrayList<>();
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.game_driver_settings;
+                    result.add(sir);
+                    return result;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
+                }
+            };
 }

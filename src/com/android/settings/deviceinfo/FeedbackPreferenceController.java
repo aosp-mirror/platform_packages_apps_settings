@@ -15,11 +15,12 @@
  */
 package com.android.settings.deviceinfo;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;

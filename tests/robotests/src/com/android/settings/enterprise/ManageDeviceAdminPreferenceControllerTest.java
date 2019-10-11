@@ -17,26 +17,28 @@
 package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ManageDeviceAdminPreferenceControllerTest {
 
     @Mock
@@ -51,7 +53,7 @@ public class ManageDeviceAdminPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mController = new ManageDeviceAdminPreferenceController(mContext);
+        mController = new ManageDeviceAdminPreferenceController(mContext, "testkey");
     }
 
     @Test
@@ -60,7 +62,7 @@ public class ManageDeviceAdminPreferenceControllerTest {
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider
                 .getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile()).thenReturn(0);
-        when (mContext.getResources()).thenReturn(mResources);
+        when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getString(R.string.number_of_device_admins_none))
                 .thenReturn("no apps");
         mController.updateState(preference);
@@ -83,16 +85,5 @@ public class ManageDeviceAdminPreferenceControllerTest {
     @Config(qualifiers = "mcc999")
     public void isAvailable_whenNotVisible_isFalse() {
         assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void testHandlePreferenceTreeClick() {
-        assertThat(mController.handlePreferenceTreeClick(new Preference(mContext, null, 0, 0)))
-                .isFalse();
-    }
-
-    @Test
-    public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("manage_device_admin");
     }
 }

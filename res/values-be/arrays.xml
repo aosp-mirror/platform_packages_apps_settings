@@ -93,33 +93,8 @@
     <item msgid="5660739516542454527">"Заблакiравана"</item>
     <item msgid="1805837518286731242">"Дрэнная сувязь часова пазбегнута"</item>
   </string-array>
-    <!-- no translation found for wifi_security:0 (8491993170197127709) -->
-    <!-- no translation found for wifi_security:1 (6524315248437318854) -->
-    <!-- no translation found for wifi_security:2 (1532568756571457140) -->
-    <!-- no translation found for wifi_security:3 (3620707702811709779) -->
-    <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
-    <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
-    <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
-  <string-array name="wifi_eap_method">
-    <item msgid="1160193392455075561">"PEAP"</item>
-    <item msgid="7981731051382306293">"TLS"</item>
-    <item msgid="2892994535305020162">"TTLS"</item>
-    <item msgid="435667726254379514">"PWD"</item>
-    <item msgid="8549485714107012129">"SIM"</item>
-    <item msgid="1023893786681286517">"AKA"</item>
-    <item msgid="3030483188676375009">"AKA\'"</item>
-  </string-array>
-  <string-array name="eap_method_without_sim_auth">
-    <item msgid="4047867891913819797">"PEAP"</item>
-    <item msgid="641030570679578504">"TLS"</item>
-    <item msgid="3079489731769553856">"TTLS"</item>
-    <item msgid="35269224158638258">"PWD"</item>
-  </string-array>
-    <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
-    <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
-    <!-- no translation found for wifi_ap_band_config_full:2 (3580217704310339410) -->
-    <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
-    <!-- no translation found for wifi_ap_band_config_2G_only:1 (8904289885593822837) -->
+    <!-- no translation found for wifi_tether_security:0 (1748357338693290598) -->
+    <!-- no translation found for wifi_tether_security:1 (4760482622566629462) -->
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"Націсніце кнопку"</item>
     <item msgid="1624323946324499595">"PIN-код ад пірынгавай прылады"</item>
@@ -138,12 +113,14 @@
     <item msgid="477015974247590543">"1 гадзіна"</item>
     <item msgid="5198271470953124739">"Ніколі не ўключаць тайм-аўт"</item>
   </string-array>
-    <!-- no translation found for bluetooth_max_connected_audio_devices:0 (834764606877643762) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:1 (4428462068012149533) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:2 (2620881722754455257) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:3 (402831176731135702) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:4 (4923580285404888038) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:5 (3643103044864989283) -->
+  <string-array name="bluetooth_max_connected_audio_devices">
+    <item msgid="834764606877643762">"Выкарыстоўваць стандартныя налады сістэмы: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
+    <item msgid="4428462068012149533">"1"</item>
+    <item msgid="2620881722754455257">"2"</item>
+    <item msgid="402831176731135702">"3"</item>
+    <item msgid="4923580285404888038">"4"</item>
+    <item msgid="3643103044864989283">"5"</item>
+  </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"Дрэнная"</item>
     <item msgid="2042505933058940139">"Дрэнны"</item>
@@ -429,6 +406,8 @@
     <item msgid="8064740940687465039">"IPSec VPN з сертыфікатамі і аўтэнтыфікацыяй Xauth"</item>
     <item msgid="4946199982372391490">"IPSec VPN з сертыфікатамі і гібрыднай аўтэнтыфікацыяй"</item>
   </string-array>
+    <!-- no translation found for vpn_proxy_settings:0 (4474139132577932676) -->
+    <!-- no translation found for vpn_proxy_settings:1 (2943781954264525815) -->
   <string-array name="vpn_states">
     <item msgid="8621078286418985762">"Адключана"</item>
     <item msgid="6692305604213080515">"Ініцыялізацыя..."</item>
@@ -484,14 +463,70 @@
     <item msgid="2900554746706302178">"Старэйшыя за 60 дзён"</item>
     <item msgid="5692284879054004388">"Старэйшыя за 90 дзён"</item>
   </string-array>
+    <!-- no translation found for swipe_direction_titles:0 (58569659116542716) -->
+    <!-- no translation found for swipe_direction_titles:1 (1878704357761948043) -->
+  <string-array name="swipe_direction_values">
+    <item msgid="8800082277840833437">"1"</item>
+    <item msgid="7485508823396511299">"0"</item>
+  </string-array>
   <string-array name="wifi_metered_entries">
-    <item msgid="2975784243692054526">"Выкарыстоўваць параметры сеткі"</item>
+    <item msgid="5200910605264415911">"Вызначаць аўтаматычна"</item>
     <item msgid="8745603368609022803">"Лімітная"</item>
     <item msgid="2266114985518865625">"Безлімітная"</item>
   </string-array>
+  <string-array name="wifi_privacy_entries">
+    <item msgid="4393731261966785418">"Выкарыстоўваць выпадковы MAC-адрас (стандартна)"</item>
+    <item msgid="3237870460973179943">"Выкарыстоўваць MAC-адрас прылады"</item>
+  </string-array>
+  <string-array name="wifi_hidden_entries">
+    <item msgid="234221371123852300">"Не"</item>
+    <item msgid="3863157480502955888">"Так"</item>
+  </string-array>
   <string-array name="dark_ui_mode_entries">
-    <item msgid="146804192658443142">"Аўтаматычна (у залежнасці ад часу сутак)"</item>
-    <item msgid="6620560879508595181">"Заўсёды ўключана"</item>
-    <item msgid="6385301106124765323">"Заўсёды выключана"</item>
+    <item msgid="4047603501491142527">"Цёмная"</item>
+    <item msgid="2291969684082074001">"Светлая"</item>
+  </string-array>
+  <string-array name="autofill_logging_level_entries">
+    <item msgid="1036676483322832067">"Адключана"</item>
+    <item msgid="2182686878828390312">"Наладзіць"</item>
+    <item msgid="5286514712714822064">"Падрабязна"</item>
+  </string-array>
+  <string-array name="cdma_system_select_choices">
+    <item msgid="8727887686723706826">"Толькі дамашнія сеткі"</item>
+    <item msgid="5034813753274486448">"Аўтаматычна"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_choices">
+    <item msgid="4168919392737496563">"Прыярытэт GSM/WCDMA"</item>
+    <item msgid="807926878589867564">"Толькі GSM"</item>
+    <item msgid="488474605709912156">"Толькі WCDMA"</item>
+    <item msgid="1912421096218750039">"Аўтаматычны выбар GSM/WCDMA"</item>
+    <item msgid="5072198667819683600">"Аўтаматычны выбар CDMA/EvDo"</item>
+    <item msgid="370391313511477301">"CDMA без EvDo"</item>
+    <item msgid="4678789463133969294">"Толькі EvDo"</item>
+    <item msgid="3960210542349075517">"CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="2961817320209454599">"CDMA + LTE/EvDo"</item>
+    <item msgid="8008611169788556519">"GSM/WCDMA/LTE"</item>
+    <item msgid="4486851520863433847">"Глабальная"</item>
+    <item msgid="8516691658640163073">"LTE"</item>
+    <item msgid="3108828968591899719">"LTE/WCDMA"</item>
+    <item msgid="1879225673847443662">"Толькі TDSCDMA"</item>
+    <item msgid="8373504428469988469">"TDSCDMA/WCDMA"</item>
+    <item msgid="8097271911945758303">"LTE/TDSCDMA"</item>
+    <item msgid="2272560096982726294">"TDSCDMA/GSM"</item>
+    <item msgid="131738018826229696">"LTE/TDSCDMA/GSM"</item>
+    <item msgid="629422387044789699">"TDSCDMA/GSM/WCDMA"</item>
+    <item msgid="5686260911275077041">"LTE/TDSCDMA/WCDMA"</item>
+    <item msgid="4545655348143499596">"LTE/TDSCDMA/GSM/WCDMA"</item>
+    <item msgid="4107769721462339672">"TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
+    <item msgid="8811683254058088466">"LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
+  </string-array>
+  <string-array name="cdma_subscription_choices">
+    <item msgid="8753271080005095725">"R-UIM/SIM"</item>
+    <item msgid="2214656470548320124">"NV"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_choices_world_mode">
+    <item msgid="1054992858056320116">"Глабальная"</item>
+    <item msgid="817971827645657949">"LTE / CDMA"</item>
+    <item msgid="519208953133334357">"LTE / GSM / UMTS"</item>
   </string-array>
 </resources>

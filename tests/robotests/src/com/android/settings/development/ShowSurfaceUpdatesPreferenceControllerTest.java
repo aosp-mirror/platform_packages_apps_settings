@@ -16,7 +16,9 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.ShowSurfaceUpdatesPreferenceController.SURFACE_FLINGER_READ_CODE;
+import static com.android.settings.development.ShowSurfaceUpdatesPreferenceController
+        .SURFACE_FLINGER_READ_CODE;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
@@ -30,10 +32,10 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.IBinder;
 import android.os.RemoteException;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.testutils.shadow.ShadowParcel;
 
 import org.junit.Before;
@@ -41,10 +43,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ShowSurfaceUpdatesPreferenceControllerTest {
 
     @Mock

@@ -15,34 +15,34 @@
  */
 package com.android.settings.network;
 
-import static com.android.settings.network.MobilePlanPreferenceController
-        .MANAGE_MOBILE_PLAN_DIALOG_ID;
+import static com.android.settings.network.MobilePlanPreferenceController.MANAGE_MOBILE_PLAN_DIALOG_ID;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
-import android.text.BidiFormatter;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class NetworkDashboardFragment extends DashboardFragment implements
         MobilePlanPreferenceHost {
 
@@ -50,7 +50,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY;
+        return SettingsEnums.SETTINGS_NETWORK_CATEGORY;
     }
 
     @Override
@@ -60,13 +60,20 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.network_and_internet;
+        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
+            return R.xml.network_and_internet_v2;
+        } else {
+            return R.xml.network_and_internet;
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
+        }
         use(AirplaneModePreferenceController.class).setFragment(this);
     }
 
@@ -77,9 +84,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), mMetricsFeatureProvider, this
-                /* fragment */,
-                this /* mobilePlanHost */);
+        return buildPreferenceControllers(context, getSettingsLifecycle(), mMetricsFeatureProvider,
+                this /* fragment */, this /* mobilePlanHost */);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
@@ -89,8 +95,11 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final WifiMasterSwitchPreferenceController wifiPreferenceController =
                 new WifiMasterSwitchPreferenceController(context, metricsFeatureProvider);
-        final MobileNetworkPreferenceController mobileNetworkPreferenceController =
-                new MobileNetworkPreferenceController(context);
+        MobileNetworkPreferenceController mobileNetworkPreferenceController = null;
+        if (!FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            mobileNetworkPreferenceController = new MobileNetworkPreferenceController(context);
+        }
+
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
         final PrivateDnsPreferenceController privateDnsPreferenceController =
@@ -99,13 +108,21 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         if (lifecycle != null) {
             lifecycle.addObserver(mobilePlanPreferenceController);
             lifecycle.addObserver(wifiPreferenceController);
-            lifecycle.addObserver(mobileNetworkPreferenceController);
+            if (mobileNetworkPreferenceController != null) {
+                lifecycle.addObserver(mobileNetworkPreferenceController);
+            }
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
         }
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(mobileNetworkPreferenceController);
+
+        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            controllers.add(new MobileNetworkSummaryController(context, lifecycle));
+        }
+        if (mobileNetworkPreferenceController != null) {
+            controllers.add(mobileNetworkPreferenceController);
+        }
         controllers.add(new TetherPreferenceController(context, lifecycle));
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
@@ -140,71 +157,10 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         if (MANAGE_MOBILE_PLAN_DIALOG_ID == dialogId) {
-            return MetricsProto.MetricsEvent.DIALOG_MANAGE_MOBILE_PLAN;
+            return SettingsEnums.DIALOG_MANAGE_MOBILE_PLAN;
         }
         return 0;
     }
-
-    @VisibleForTesting
-    static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-        private final MobileNetworkPreferenceController mMobileNetworkPreferenceController;
-        private final TetherPreferenceController mTetherPreferenceController;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            this(context, summaryLoader,
-                    new MobileNetworkPreferenceController(context),
-                    new TetherPreferenceController(context, null /* lifecycle */));
-        }
-
-        @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-        SummaryProvider(Context context, SummaryLoader summaryLoader,
-                MobileNetworkPreferenceController mobileNetworkPreferenceController,
-                TetherPreferenceController tetherPreferenceController) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-            mMobileNetworkPreferenceController = mobileNetworkPreferenceController;
-            mTetherPreferenceController = tetherPreferenceController;
-        }
-
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                String summary = BidiFormatter.getInstance()
-                        .unicodeWrap(mContext.getString(R.string.wifi_settings_title));
-                if (mMobileNetworkPreferenceController.isAvailable()) {
-                    final String mobileSettingSummary = mContext.getString(
-                            R.string.network_dashboard_summary_mobile);
-                    summary = mContext.getString(R.string.join_many_items_middle, summary,
-                            mobileSettingSummary);
-                }
-                final String dataUsageSettingSummary = mContext.getString(
-                        R.string.network_dashboard_summary_data_usage);
-                summary = mContext.getString(R.string.join_many_items_middle, summary,
-                        dataUsageSettingSummary);
-                if (mTetherPreferenceController.isAvailable()) {
-                    final String hotspotSettingSummary = mContext.getString(
-                            R.string.network_dashboard_summary_hotspot);
-                    summary = mContext.getString(R.string.join_many_items_middle, summary,
-                            hotspotSettingSummary);
-                }
-                mSummaryLoader.setSummary(this, summary);
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
-
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
@@ -212,7 +168,12 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.network_and_internet;
+                    if (FeatureFlagPersistent.isEnabled(context,
+                            FeatureFlags.NETWORK_INTERNET_V2)) {
+                        sir.xmlResId = R.xml.network_and_internet_v2;
+                    } else {
+                        sir.xmlResId = R.xml.network_and_internet;
+                    }
                     return Arrays.asList(sir);
                 }
 

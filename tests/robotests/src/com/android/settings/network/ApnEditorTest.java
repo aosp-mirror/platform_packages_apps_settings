@@ -19,31 +19,33 @@ package com.android.settings.network;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import androidx.preference.MultiSelectListPreference;
-import androidx.preference.SwitchPreference;
-import androidx.preference.EditTextPreference;
-import androidx.preference.ListPreference;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.network.ApnEditor.ApnData;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,11 +56,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ApnEditorTest {
 
-    private static final Object[] APN_DATA = new Object[] {
+    private static final Object[] APN_DATA = {
             0, /* ID */
             "apn_name" /* apn name */,
             "apn.com" /* apn */,
@@ -96,13 +100,13 @@ public class ApnEditorTest {
     private ArgumentCaptor<Uri> mUriCaptor;
 
     private ApnEditor mApnEditorUT;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private Resources mResources;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy(Robolectric.setupActivity(Activity.class));
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
         mResources = mActivity.getResources();
         mApnEditorUT = spy(new ApnEditor());
 
@@ -110,6 +114,7 @@ public class ApnEditorTest {
         doReturn(mResources).when(mApnEditorUT).getResources();
         doNothing().when(mApnEditorUT).finish();
         doNothing().when(mApnEditorUT).showError();
+        when(mApnEditorUT.getContext()).thenReturn(RuntimeEnvironment.application);
 
         setMockPreference(mActivity);
         mApnEditorUT.mApnData = new FakeApnData(APN_DATA);
@@ -132,7 +137,7 @@ public class ApnEditorTest {
                 any(String.class),
                 any(String[].class),
                 any(String.class));
-  }
+    }
 
     @Test
     public void testSetStringValue_valueChanged_shouldSetValue() {
@@ -449,9 +454,18 @@ public class ApnEditorTest {
         assertThat(ApnEditor.formatInteger("not an int")).isEqualTo("not an int");
     }
 
+    @Test
+    public void onCreate_noAction_shouldFinishAndNoCrash() {
+        doNothing().when(mApnEditorUT).addPreferencesFromResource(anyInt());
+
+        mApnEditorUT.onCreate(null);
+
+        verify(mApnEditorUT).finish();
+    }
+
     private void initCursor() {
         doReturn(2).when(mCursor).getColumnCount();
-        doReturn(Integer.valueOf(2)).when(mCursor).getInt(CURSOR_INTEGER_INDEX);
+        doReturn(2).when(mCursor).getInt(CURSOR_INTEGER_INDEX);
         doReturn("str").when(mCursor).getString(CURSOR_STRING_INDEX);
         doReturn(Cursor.FIELD_TYPE_INTEGER).when(mCursor).getType(CURSOR_INTEGER_INDEX);
         doReturn(Cursor.FIELD_TYPE_STRING).when(mCursor).getType(CURSOR_STRING_INDEX);

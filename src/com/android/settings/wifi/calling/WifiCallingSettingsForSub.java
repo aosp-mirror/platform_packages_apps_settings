@@ -17,7 +17,7 @@
 package com.android.settings.wifi.calling;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,10 +26,6 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
@@ -43,11 +39,15 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceScreen;
+
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -98,6 +98,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ImsManager mImsManager;
+    private TelephonyManager mTelephonyManager;
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         /*
@@ -145,20 +146,17 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         }
     };
 
+    /*
+     * Launch carrier emergency address managemnent activity
+     */
     private final OnPreferenceClickListener mUpdateAddressListener =
-            new OnPreferenceClickListener() {
-                /*
-                 * Launch carrier emergency address managemnent activity
-                 */
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    Intent carrierAppIntent = getCarrierActivityIntent();
-                    if (carrierAppIntent != null) {
-                        carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_UPDATE);
-                        startActivity(carrierAppIntent);
-                    }
-                    return true;
+            preference -> {
+                Intent carrierAppIntent = getCarrierActivityIntent();
+                if (carrierAppIntent != null) {
+                    carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_UPDATE);
+                    startActivity(carrierAppIntent);
                 }
+                return true;
             };
 
     private final ProvisioningManager.Callback mProvisioningCallback =
@@ -177,8 +175,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mEmptyView = getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
@@ -235,7 +231,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WIFI_CALLING_FOR_SUB;
+        return SettingsEnums.WIFI_CALLING_FOR_SUB;
     }
 
     @Override
@@ -266,14 +262,16 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         mImsManager = getImsManager();
 
-        mButtonWfcMode = (ListWithEntrySummaryPreference) findPreference(BUTTON_WFC_MODE);
+        mTelephonyManager = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
+                .createForSubscriptionId(mSubId);
+
+        mButtonWfcMode = findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
-        mButtonWfcRoamingMode = (ListWithEntrySummaryPreference) findPreference(
-                BUTTON_WFC_ROAMING_MODE);
+        mButtonWfcRoamingMode =  findPreference(BUTTON_WFC_ROAMING_MODE);
         mButtonWfcRoamingMode.setOnPreferenceChangeListener(this);
 
-        mUpdateAddress = (Preference) findPreference(PREFERENCE_EMERGENCY_ADDRESS);
+        mUpdateAddress = findPreference(PREFERENCE_EMERGENCY_ADDRESS);
         mUpdateAddress.setOnPreferenceClickListener(mUpdateAddressListener);
 
         mIntentFilter = new IntentFilter();
@@ -362,9 +360,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         updateBody();
 
         if (mImsManager.isWfcEnabledByPlatform()) {
-            TelephonyManager tm =
-                    (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
             mSwitchBar.addOnSwitchChangeListener(this);
 
@@ -433,7 +429,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         new SubSettingLauncher(context)
                 .setDestination(WifiCallingDisclaimerFragment.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.wifi_calling_settings_title)
+                .setTitleRes(R.string.wifi_calling_settings_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .setResultListener(this, REQUEST_CHECK_WFC_DISCLAIMER)
                 .launch();
@@ -602,6 +598,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     @VisibleForTesting
     Resources getResourcesForSubId() {
-        return SubscriptionManager.getResourcesForSubId(getActivity(), mSubId, false);
+        return SubscriptionManager.getResourcesForSubId(getContext(), mSubId, false);
     }
 }

@@ -20,11 +20,11 @@ package com.android.settings.core;
  * This class keeps track of all feature flags in Settings.
  */
 public class FeatureFlags {
-    public static final String BATTERY_DISPLAY_APP_LIST = "settings_battery_display_app_list";
-    public static final String ZONE_PICKER_V2 = "settings_zone_picker_v2";
-    public static final String ABOUT_PHONE_V2 = "settings_about_phone_v2";
-    public static final String BLUETOOTH_WHILE_DRIVING = "settings_bluetooth_while_driving";
-    public static final String DATA_USAGE_SETTINGS_V2 = "settings_data_usage_v2";
     public static final String AUDIO_SWITCHER_SETTINGS = "settings_audio_switcher";
+    public static final String DYNAMIC_SYSTEM = "settings_dynamic_system";
     public static final String HEARING_AID_SETTINGS = "settings_bluetooth_hearing_aid";
+    public static final String MOBILE_NETWORK_V2 = "settings_mobile_network_v2";
+    public static final String NETWORK_INTERNET_V2 = "settings_network_and_internet_v2";
+    public static final String WIFI_DETAILS_DATAUSAGE_HEADER =
+            "settings_wifi_details_datausage_header";
 }

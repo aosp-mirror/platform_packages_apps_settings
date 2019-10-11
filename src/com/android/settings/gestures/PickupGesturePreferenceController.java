@@ -16,32 +16,25 @@
 
 package com.android.settings.gestures;
 
-import static android.provider.Settings.Secure.DOZE_PULSE_ON_PICK_UP;
+import static android.provider.Settings.Secure.DOZE_PICK_UP_GESTURE;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
-
-import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.R;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 
 public class PickupGesturePreferenceController extends GesturePreferenceController {
 
-    private final int ON = 1;
-    private final int OFF = 0;
+    private static final int ON = 1;
+    private static final int OFF = 0;
 
     private static final String PREF_KEY_VIDEO = "gesture_pick_up_video";
     private final String mPickUpPrefKey;
 
-    private final String SECURE_KEY = DOZE_PULSE_ON_PICK_UP;
+    private final String SECURE_KEY = DOZE_PICK_UP_GESTURE;
 
     private AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
@@ -61,23 +54,14 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
         AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
         return prefs.getBoolean(PickupGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, false)
-                || !ambientConfig.pulseOnPickupAvailable();
+                || !ambientConfig.dozePickupSensorAvailable();
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (mAmbientConfig == null) {
-            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
-        }
-
         // No hardware support for Pickup Gesture
-        if (!mAmbientConfig.dozePulsePickupSensorAvailable()) {
+        if (!getAmbientConfig().dozePickupSensorAvailable()) {
             return UNSUPPORTED_ON_DEVICE;
-        }
-
-        // Can't change Pickup Gesture when AOD is enabled.
-        if (!mAmbientConfig.ambientDisplayAvailable()) {
-            return DISABLED_DEPENDENT_SETTING;
         }
 
         return AVAILABLE;
@@ -95,7 +79,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     @Override
     public boolean isChecked() {
-        return mAmbientConfig.pulseOnPickupEnabled(mUserId);
+        return getAmbientConfig().pickupGestureEnabled(mUserId);
     }
 
     @Override
@@ -109,23 +93,11 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
                 isChecked ? ON : OFF);
     }
 
-    @Override
-    public boolean canHandleClicks() {
-        return pulseOnPickupCanBeModified();
-    }
+    private AmbientDisplayConfiguration getAmbientConfig() {
+        if (mAmbientConfig == null) {
+            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
+        }
 
-    @Override
-    public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                PickupGestureSettings.class.getName(), mPickUpPrefKey,
-                mContext.getString(R.string.display_settings));
-
-        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
-                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
-    }
-
-    @VisibleForTesting
-    boolean pulseOnPickupCanBeModified() {
-        return mAmbientConfig.pulseOnPickupCanBeModified(mUserId);
+        return mAmbientConfig;
     }
 }

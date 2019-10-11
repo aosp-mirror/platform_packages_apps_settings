@@ -18,49 +18,34 @@ package com.android.settings.notification;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
-import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
-
 import android.annotation.ColorInt;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.Settings;
-import android.provider.SettingsSlicesContract;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
+import androidx.slice.builders.SliceAction;
+
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.slices.SettingsSliceProvider;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
-
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
-
-import androidx.core.graphics.drawable.IconCompat;
 
 public class ZenModeSliceBuilder {
 
     private static final String TAG = "ZenModeSliceBuilder";
 
-    private static final String ZEN_MODE_KEY = "zen_mode";
-
-    /**
-     * Backing Uri for the Zen Mode Slice.
-     */
-    public static final Uri ZEN_MODE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(ZEN_MODE_KEY)
-            .build();
+    private static final String ZEN_MODE_SLICE_KEY = ZenModeButtonPreferenceController.KEY;
 
     /**
      * Action notifying a change on the Zen Mode Slice.
@@ -80,7 +65,7 @@ public class ZenModeSliceBuilder {
     }
 
     /**
-     * Return a ZenMode Slice bound to {@link #ZEN_MODE_URI}.
+     * Return a ZenMode Slice bound to {@link CustomSliceRegistry#ZEN_MODE_URI}.
      * <p>
      * Note that you should register a listener for {@link #INTENT_FILTER} to get changes for
      * ZenMode.
@@ -88,18 +73,22 @@ public class ZenModeSliceBuilder {
     public static Slice getSlice(Context context) {
         final boolean isZenModeEnabled = isZenModeEnabled(context);
         final CharSequence title = context.getText(R.string.zen_mode_settings_title);
-        @ColorInt final int color = Utils.getColorAccent(context);
+        final CharSequence subtitle = context.getText(R.string.zen_mode_slice_subtitle);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final PendingIntent toggleAction = getBroadcastIntent(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
-        final SliceAction primarySliceAction = new SliceAction(primaryAction,
-                (IconCompat) null /* icon */, title);
-        final SliceAction toggleSliceAction = new SliceAction(toggleAction, null /* actionTitle */,
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction,
+                (IconCompat) null /* icon */, ListBuilder.ICON_IMAGE, title);
+        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
+                null /* actionTitle */,
                 isZenModeEnabled);
 
-        return new ListBuilder(context, ZEN_MODE_URI, ListBuilder.INFINITY)
+        return new ListBuilder(context, CustomSliceRegistry.ZEN_MODE_SLICE_URI,
+                ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(b -> b
+                .addRow(new RowBuilder()
                         .setTitle(title)
+                        .setSubtitle(subtitle)
                         .addEndItem(toggleSliceAction)
                         .setPrimaryAction(primarySliceAction))
                 .build();
@@ -124,11 +113,11 @@ public class ZenModeSliceBuilder {
     }
 
     public static Intent getIntent(Context context) {
-        final Uri contentUri = new Uri.Builder().appendPath(ZEN_MODE_KEY).build();
+        final Uri contentUri = new Uri.Builder().appendPath(ZEN_MODE_SLICE_KEY).build();
         final String screenTitle = context.getText(R.string.zen_mode_settings_title).toString();
-        return DatabaseIndexingUtils.buildSearchResultPageIntent(context,
-                ZenModeSettings.class.getName(), ZEN_MODE_KEY, screenTitle,
-                MetricsEvent.NOTIFICATION_ZEN_MODE)
+        return SliceBuilderUtils.buildSearchResultPageIntent(context,
+                ZenModeSettings.class.getName(), ZEN_MODE_SLICE_KEY, screenTitle,
+                SettingsEnums.NOTIFICATION_ZEN_MODE)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }

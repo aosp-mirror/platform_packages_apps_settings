@@ -42,7 +42,11 @@ public final class PaymentDefaultDialog extends AlertActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBackend = new PaymentBackend(this);
+        try {
+            mBackend = new PaymentBackend(this);
+        } catch (NullPointerException e) {
+            finish();
+        }
         Intent intent = getIntent();
         ComponentName component = intent.getParcelableExtra(
                 CardEmulation.EXTRA_SERVICE_COMPONENT);

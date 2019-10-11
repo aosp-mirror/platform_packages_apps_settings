@@ -25,6 +25,7 @@ import android.util.Log;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.dashboard.DashboardFragmentSearchIndexProviderInspector;
+import com.android.settingslib.search.SearchIndexableResources;
 
 import org.robolectric.RuntimeEnvironment;
 
@@ -39,8 +40,6 @@ import java.util.Set;
 public class SearchIndexProviderCodeInspector extends CodeInspector {
     private static final String TAG = "SearchCodeInspector";
 
-    private static final String NOT_IMPLEMENTING_INDEXABLE_ERROR =
-            "SettingsPreferenceFragment should implement Indexable, but these do not:\n";
     private static final String NOT_CONTAINING_PROVIDER_OBJECT_ERROR =
             "Indexable should have public field "
                     + DatabaseIndexingUtils.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
@@ -56,19 +55,15 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             "SearchIndexableProvider must either provide no resource to index, or valid ones. "
             + "But the followings contain resource with xml id = 0\n";
 
-    private final List<String> notImplementingIndexableGrandfatherList;
     private final List<String> notImplementingIndexProviderGrandfatherList;
     private final List<String> notInSearchIndexableRegistryGrandfatherList;
     private final List<String> notSharingPrefControllersGrandfatherList;
 
     public SearchIndexProviderCodeInspector(List<Class<?>> classes) {
         super(classes);
-        notImplementingIndexableGrandfatherList = new ArrayList<>();
         notImplementingIndexProviderGrandfatherList = new ArrayList<>();
         notInSearchIndexableRegistryGrandfatherList = new ArrayList<>();
         notSharingPrefControllersGrandfatherList = new ArrayList<>();
-        initializeGrandfatherList(notImplementingIndexableGrandfatherList,
-                "grandfather_not_implementing_indexable");
         initializeGrandfatherList(notImplementingIndexProviderGrandfatherList,
                 "grandfather_not_implementing_index_provider");
         initializeGrandfatherList(notInSearchIndexableRegistryGrandfatherList,
@@ -79,7 +74,6 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
 
     @Override
     public void run() {
-        final Set<String> notImplementingIndexable = new ArraySet<>();
         final Set<String> notImplementingIndexProvider = new ArraySet<>();
         final Set<String> notInSearchProviderRegistry = new ArraySet<>();
         final Set<String> notSharingPreferenceControllers = new ArraySet<>();
@@ -92,14 +86,6 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             final String className = clazz.getName();
             // Skip fragments if it's not SettingsPreferenceFragment.
             if (!SettingsPreferenceFragment.class.isAssignableFrom(clazz)) {
-                continue;
-            }
-            // If it's a SettingsPreferenceFragment, it must also be Indexable.
-            final boolean implementsIndexable = Indexable.class.isAssignableFrom(clazz);
-            if (!implementsIndexable) {
-                if (!notImplementingIndexableGrandfatherList.remove(className)) {
-                    notImplementingIndexable.add(className);
-                }
                 continue;
             }
             final boolean hasSearchIndexProvider = hasSearchIndexProvider(clazz);
@@ -134,8 +120,6 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
         }
 
         // Build error messages
-        final String indexableError = buildErrorMessage(NOT_IMPLEMENTING_INDEXABLE_ERROR,
-                notImplementingIndexable);
         final String indexProviderError = buildErrorMessage(NOT_CONTAINING_PROVIDER_OBJECT_ERROR,
                 notImplementingIndexProvider);
         final String notSharingPrefControllerError = buildErrorMessage(
@@ -145,9 +129,6 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                 buildErrorMessage(NOT_IN_INDEXABLE_PROVIDER_REGISTRY, notInSearchProviderRegistry);
         final String notProvidingValidResourceError = buildErrorMessage(
                 NOT_PROVIDING_VALID_RESOURCE_ERROR, notProvidingValidResource);
-        assertWithMessage(indexableError)
-                .that(notImplementingIndexable)
-                .isEmpty();
         assertWithMessage(indexProviderError)
                 .that(notImplementingIndexProvider)
                 .isEmpty();
@@ -160,8 +141,6 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
         assertWithMessage(notProvidingValidResourceError)
                 .that(notProvidingValidResource)
                 .isEmpty();
-        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_indexable",
-                notImplementingIndexableGrandfatherList);
         assertNoObsoleteInGrandfatherList("grandfather_not_implementing_index_provider",
                 notImplementingIndexProviderGrandfatherList);
         assertNoObsoleteInGrandfatherList("grandfather_not_in_search_index_provider_registry",

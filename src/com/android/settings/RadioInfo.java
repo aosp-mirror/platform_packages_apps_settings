@@ -20,11 +20,10 @@ import static android.net.ConnectivityManager.NetworkCallback;
 import static android.provider.Settings.Global.PREFERRED_NETWORK_MODE;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.QueuedWork;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -41,25 +40,26 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
+import android.telephony.CellIdentityCdma;
+import android.telephony.CellIdentityGsm;
+import android.telephony.CellIdentityLte;
+import android.telephony.CellIdentityWcdma;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoCdma;
 import android.telephony.CellInfoGsm;
 import android.telephony.CellInfoLte;
 import android.telephony.CellInfoWcdma;
-import android.telephony.CellIdentityCdma;
-import android.telephony.CellIdentityGsm;
-import android.telephony.CellIdentityLte;
-import android.telephony.CellIdentityWcdma;
 import android.telephony.CellLocation;
 import android.telephony.CellSignalStrengthCdma;
 import android.telephony.CellSignalStrengthGsm;
 import android.telephony.CellSignalStrengthLte;
 import android.telephony.CellSignalStrengthWcdma;
-import android.telephony.PreciseCallState;
 import android.telephony.PhoneStateListener;
 import android.telephony.PhysicalChannelConfig;
+import android.telephony.PreciseCallState;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionManager;
@@ -82,22 +82,21 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
+
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
-import com.android.internal.telephony.RILConstants;
-import com.android.internal.telephony.TelephonyProperties;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 
+// TODO(b/123598192) consider to move this activity to telephony package.
 public class RadioInfo extends Activity {
     private static final String TAG = "RadioInfo";
 
@@ -132,6 +131,13 @@ public class RadioInfo extends Activity {
     private static final int CELL_INFO_LIST_RATE_DISABLED = Integer.MAX_VALUE;
     private static final int CELL_INFO_LIST_RATE_MAX = 0;
 
+    private static final String DSDS_MODE_PROPERTY = "ro.boot.hardware.dsds";
+
+    /**
+     * A value indicates the device is always on dsds mode.
+     * @see {@link #DSDS_MODE_PROPERTY}
+     */
+    private static final int ALWAYS_ON_DSDS_MODE = 1;
 
     private static final int IMS_VOLTE_PROVISIONED_CONFIG_ID =
         ImsConfig.ConfigConstants.VLT_SETTING_ENABLED;
@@ -221,6 +227,8 @@ public class RadioInfo extends Activity {
     private Switch imsVtProvisionedSwitch;
     private Switch imsWfcProvisionedSwitch;
     private Switch eabProvisionedSwitch;
+    private Switch cbrsDataSwitch;
+    private Switch dsdsSwitch;
     private Spinner preferredNetworkType;
     private Spinner mSelectPhoneIndex;
     private Spinner cellInfoRefreshRateSpinner;
@@ -493,6 +501,26 @@ public class RadioInfo extends Activity {
             eabProvisionedSwitch.setVisibility(View.GONE);
         }
 
+        cbrsDataSwitch = (Switch) findViewById(R.id.cbrs_data_switch);
+        cbrsDataSwitch.setVisibility(isCbrsSupported() ? View.VISIBLE : View.GONE);
+
+        dsdsSwitch = findViewById(R.id.dsds_switch);
+        if (isDsdsSupported() && !dsdsModeOnly()) {
+            dsdsSwitch.setVisibility(View.VISIBLE);
+            dsdsSwitch.setOnClickListener(v -> {
+                if (mTelephonyManager.doesSwitchMultiSimConfigTriggerReboot()) {
+                    // Undo the click action until user clicks the confirm dialog.
+                    dsdsSwitch.toggle();
+                    showDsdsChangeDialog();
+                } else {
+                    performDsdsSwitch();
+                }
+            });
+            dsdsSwitch.setChecked(isDsdsEnabled());
+        } else {
+            dsdsSwitch.setVisibility(View.GONE);
+        }
+
         radioPowerOnSwitch = (Switch) findViewById(R.id.radio_power);
 
         mDownlinkKbps = (TextView) findViewById(R.id.dl_kbps);
@@ -578,6 +606,11 @@ public class RadioInfo extends Activity {
         imsVtProvisionedSwitch.setOnCheckedChangeListener(mImsVtCheckedChangeListener);
         imsWfcProvisionedSwitch.setOnCheckedChangeListener(mImsWfcCheckedChangeListener);
         eabProvisionedSwitch.setOnCheckedChangeListener(mEabCheckedChangeListener);
+
+        if (isCbrsSupported()) {
+            cbrsDataSwitch.setChecked(getCbrsDataState());
+            cbrsDataSwitch.setOnCheckedChangeListener(mCbrsDataSwitchChangeListener);
+        }
 
         unregisterPhoneStateListener();
         registerPhoneStateListener();
@@ -1616,4 +1649,78 @@ public class RadioInfo extends Activity {
         }
     };
 
+    boolean isCbrsSupported() {
+        return getResources().getBoolean(
+              com.android.internal.R.bool.config_cbrs_supported);
+    }
+
+    void updateCbrsDataState(boolean state) {
+        Log.d(TAG, "setCbrsDataSwitchState() state:" + ((state)? "on":"off"));
+        if (mTelephonyManager != null) {
+            QueuedWork.queue(new Runnable() {
+                public void run() {
+                  mTelephonyManager.setOpportunisticNetworkState(state);
+                  cbrsDataSwitch.setChecked(getCbrsDataState());
+                }
+            }, false);
+        }
+    }
+
+    boolean getCbrsDataState() {
+        boolean state = false;
+        if (mTelephonyManager != null) {
+            state = mTelephonyManager.isOpportunisticNetworkEnabled();
+        }
+        Log.d(TAG, "getCbrsDataState() state:" +((state)? "on":"off"));
+        return state;
+    }
+
+    OnCheckedChangeListener mCbrsDataSwitchChangeListener = new OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            updateCbrsDataState(isChecked);
+        }
+    };
+
+    private void showDsdsChangeDialog() {
+        final AlertDialog confirmDialog = new Builder(RadioInfo.this)
+                .setTitle(R.string.dsds_dialog_title)
+                .setMessage(R.string.dsds_dialog_message)
+                .setPositiveButton(R.string.dsds_dialog_confirm, mOnDsdsDialogConfirmedListener)
+                .setNegativeButton(R.string.dsds_dialog_cancel, mOnDsdsDialogConfirmedListener)
+                .create();
+        confirmDialog.show();
+    }
+
+    private static boolean isDsdsSupported() {
+        return (TelephonyManager.getDefault().isMultiSimSupported()
+            == TelephonyManager.MULTISIM_ALLOWED);
+    }
+
+    private static boolean isDsdsEnabled() {
+        return TelephonyManager.getDefault().getPhoneCount() > 1;
+    }
+
+    private void performDsdsSwitch() {
+        mTelephonyManager.switchMultiSimConfig(dsdsSwitch.isChecked() ? 2 : 1);
+    }
+
+    /**
+     * @return {@code True} if the device is only supported dsds mode.
+     */
+    private boolean dsdsModeOnly() {
+        String dsdsMode = SystemProperties.get(DSDS_MODE_PROPERTY);
+        return !TextUtils.isEmpty(dsdsMode) && Integer.parseInt(dsdsMode) == ALWAYS_ON_DSDS_MODE;
+    }
+
+    DialogInterface.OnClickListener mOnDsdsDialogConfirmedListener =
+            new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                dsdsSwitch.toggle();
+                performDsdsSwitch();
+            }
+        }
+    };
 }

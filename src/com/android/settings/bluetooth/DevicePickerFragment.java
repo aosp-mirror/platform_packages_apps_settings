@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
@@ -25,11 +26,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuInflater;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -74,7 +75,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.BLUETOOTH_DEVICE_PICKER;
+        return SettingsEnums.BLUETOOTH_DEVICE_PICKER;
     }
 
     @Override
@@ -93,7 +94,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         mSelectedDevice = null;
         if (mScanAllowed) {
             enableScanning();
-            mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
+            mAvailableDevicesCategory.setProgress(mBluetoothAdapter.isDiscovering());
         }
     }
 
@@ -148,6 +149,12 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             enableScanning();
         }
+    }
+
+    @Override
+    protected void initDevicePreference(BluetoothDevicePreference preference) {
+        super.initDevicePreference(preference);
+        preference.setNeedNotifyHierarchyChanged(true);
     }
 
     @Override
