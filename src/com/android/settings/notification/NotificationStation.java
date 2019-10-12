@@ -79,6 +79,9 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private static class HistoricalNotificationInfo {
         public String key;
         public NotificationChannel channel;
+        // Historical notifications don't have Ranking information. for most fields that's ok
+        // but we need channel id to launch settings.
+        public String channelId;
         public String pkg;
         public Drawable pkgicon;
         public CharSequence pkgname;
@@ -416,6 +419,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         info.timestamp = sbn.getPostTime();
         info.priority = n.priority;
         info.key = sbn.getKey();
+        info.channelId = sbn.getNotification().getChannelId();
 
         info.active = active;
         info.notificationExtra = generateExtraText(sbn, info);
@@ -724,7 +728,8 @@ public class NotificationStation extends SettingsPreferenceFragment {
         public void performClick() {
             Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                     .putExtra(EXTRA_APP_PACKAGE, mInfo.pkg)
-                    .putExtra(EXTRA_CHANNEL_ID, mInfo.channel.getId());
+                    .putExtra(EXTRA_CHANNEL_ID,
+                            mInfo.channel != null ? mInfo.channel.getId() : mInfo.channelId);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
         }

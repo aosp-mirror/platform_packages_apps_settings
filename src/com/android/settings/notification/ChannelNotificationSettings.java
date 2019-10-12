@@ -35,7 +35,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChannelNotificationSettings extends NotificationSettingsBase {
+public class ChannelNotificationSettings extends NotificationSettings {
     private static final String TAG = "ChannelSettings";
 
     @Override

@@ -79,7 +79,7 @@ public class SoundPreferenceControllerTest {
     @Mock
     private SettingsPreferenceFragment mFragment;
     @Mock
-    private NotificationSettingsBase.ImportanceListener mImportanceListener;
+    private NotificationSettings.ImportanceListener mImportanceListener;
 
     private SoundPreferenceController mController;
 

@@ -34,10 +34,10 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
 
     private static final String TAG = "AllowSoundPrefContr";
     private static final String KEY_IMPORTANCE = "allow_sound";
-    private NotificationSettingsBase.ImportanceListener mImportanceListener;
+    private NotificationSettings.ImportanceListener mImportanceListener;
 
     public AllowSoundPreferenceController(Context context,
-            NotificationSettingsBase.ImportanceListener importanceListener,
+            NotificationSettings.ImportanceListener importanceListener,
             NotificationBackend backend) {
         super(context, backend);
         mImportanceListener = importanceListener;
