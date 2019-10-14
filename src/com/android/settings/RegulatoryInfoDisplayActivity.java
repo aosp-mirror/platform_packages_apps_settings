@@ -60,12 +60,6 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Resources resources = getResources();
-
-        if (!resources.getBoolean(R.bool.config_show_regulatory_info)) {
-            finish();   // no regulatory info to display for this device
-        }
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(R.string.regulatory_labels)
                 .setOnDismissListener(this);
@@ -95,7 +89,8 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
             }
         }
 
-        CharSequence regulatoryText = resources.getText(R.string.regulatory_info_text);
+        CharSequence regulatoryText = getResources()
+                .getText(R.string.regulatory_info_text);
 
         if (regulatoryInfoDrawableExists) {
             View view = getLayoutInflater().inflate(R.layout.regulatory_info, null);
