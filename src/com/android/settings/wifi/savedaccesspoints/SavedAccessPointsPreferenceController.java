@@ -30,7 +30,6 @@ import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.AccessPointPreference.UserBadgeCache;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,17 +39,14 @@ import java.util.stream.Collectors;
 public class SavedAccessPointsPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceClickListener {
 
-    private static final String TAG = "SavedApPrefCtrl";
-
-    private final WifiManager mWifiManager;
+    protected final WifiManager mWifiManager;
     private final UserBadgeCache mUserBadgeCache;
     private PreferenceGroup mPreferenceGroup;
     private SavedAccessPointsWifiSettings mHost;
     @VisibleForTesting
     List<AccessPoint> mAccessPoints;
 
-    public SavedAccessPointsPreferenceController(Context context,
-            String preferenceKey) {
+    public SavedAccessPointsPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(context.getPackageManager());
         mWifiManager = context.getSystemService(WifiManager.class);
@@ -84,7 +80,7 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
         return false;
     }
 
-    private void refreshSavedAccessPoints() {
+    protected void refreshSavedAccessPoints() {
         mAccessPoints = WifiSavedConfigUtils.getAllConfigs(mContext, mWifiManager).stream()
                 .filter(accessPoint -> !accessPoint.isPasspointConfig())
                 .sorted(SavedNetworkComparator.INSTANCE)

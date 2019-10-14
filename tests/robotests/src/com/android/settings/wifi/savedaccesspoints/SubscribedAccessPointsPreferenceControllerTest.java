@@ -16,9 +16,6 @@
 
 package com.android.settings.wifi.savedaccesspoints;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -32,7 +29,6 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.hotspot2.PasspointConfiguration;
 import android.net.wifi.hotspot2.pps.HomeSp;
-import android.os.Bundle;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -41,9 +37,6 @@ import com.android.settings.testutils.shadow.ShadowAccessPoint;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -84,23 +77,8 @@ public class SubscribedAccessPointsPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailability_noSavedAccessPoint_shouldNotAvailable() {
-        mController.mAccessPoints = new ArrayList<>();
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    public void getAvailability_oneSavedAccessPoint_shouldAvailable() {
-        final AccessPoint accessPoint = new AccessPoint(mContext, new Bundle() /* savedState */);
-        mController.mAccessPoints = new ArrayList<AccessPoint>(Arrays.asList(accessPoint));
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
     @Config(shadows = ShadowAccessPoint.class)
-    public void refreshSubscribedAccessPoints_shouldNotListNonSubscribedAPs() {
+    public void displayPreference_oneAccessPoint_shouldNotListNonSubscribedAPs() {
         final WifiConfiguration config = new WifiConfiguration();
         config.SSID = "SSID";
         config.BSSID = "BSSID";
@@ -114,7 +92,7 @@ public class SubscribedAccessPointsPreferenceControllerTest {
 
     @Test
     @Config(shadows = ShadowAccessPoint.class)
-    public void refreshSubscribedAccessPoints_shouldListSubscribedAPs() {
+    public void displayPreference_onePasspoint_shouldListSubscribedAPs() {
         mWifiManager.addOrUpdatePasspointConfiguration(createMockPasspointConfiguration());
 
         mController.displayPreference(mPreferenceScreen);
