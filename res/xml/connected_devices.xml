@@ -28,12 +28,12 @@
 
     <PreferenceCategory
         android:key="available_device_list"
-        android:title="@string/connected_device_available_media_title"
+        android:title="@string/connected_device_media_device_title"
         settings:controller="com.android.settings.connecteddevice.AvailableMediaDeviceGroupController"/>
 
     <PreferenceCategory
         android:key="connected_device_list"
-        android:title="@string/connected_device_connected_title"
+        android:title="@string/connected_device_other_device_title"
         settings:controller="com.android.settings.connecteddevice.ConnectedDeviceGroupController"/>
 
     <com.android.settingslib.RestrictedPreference
