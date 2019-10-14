@@ -27,6 +27,7 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -44,6 +45,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.R;
 import com.android.settings.widget.ImeAwareEditText;
@@ -332,10 +334,13 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
 
             // TODO(b/120484642): This is a point of entry for passwords from the UI
-            final byte[] pin = LockPatternUtils.charSequenceToByteArray(mPasswordEntry.getText());
-            if (pin == null || pin.length == 0) {
+            final Editable passwordText = mPasswordEntry.getText();
+            if (TextUtils.isEmpty(passwordText)) {
                 return;
             }
+            final LockscreenCredential credential =
+                    mIsAlpha ? LockscreenCredential.createPassword(passwordText)
+                    : LockscreenCredential.createPin(passwordText);
 
             mPasswordEntryInputDisabler.setInputEnabled(false);
             final boolean verifyChallenge = getActivity().getIntent().getBooleanExtra(
@@ -344,11 +349,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             Intent intent = new Intent();
             if (verifyChallenge)  {
                 if (isInternalActivity()) {
-                    startVerifyPassword(pin, intent);
+                    startVerifyPassword(credential, intent);
                     return;
                 }
             } else {
-                startCheckPassword(pin, intent);
+                startCheckPassword(credential, intent);
                 return;
             }
 
@@ -359,7 +364,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             return getActivity() instanceof ConfirmLockPassword.InternalActivity;
         }
 
-        private void startVerifyPassword(final byte[] pin, final Intent intent) {
+        private void startVerifyPassword(LockscreenCredential credential, final Intent intent) {
             long challenge = getActivity().getIntent().getLongExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
             final int localEffectiveUserId = mEffectiveUserId;
@@ -383,29 +388,32 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         }
             };
             mPendingLockCheck = (localEffectiveUserId == localUserId)
-                    ? LockPatternChecker.verifyPassword(
-                            mLockPatternUtils, pin, challenge, localUserId, onVerifyCallback)
+                    ? LockPatternChecker.verifyCredential(
+                            mLockPatternUtils, credential, challenge, localUserId, onVerifyCallback)
                     : LockPatternChecker.verifyTiedProfileChallenge(
-                            mLockPatternUtils, pin, false, challenge, localUserId,
+                            mLockPatternUtils, credential, challenge, localUserId,
                             onVerifyCallback);
         }
 
-        private void startCheckPassword(final byte[] pin, final Intent intent) {
+        private void startCheckPassword(final LockscreenCredential credential,
+                final Intent intent) {
             final int localEffectiveUserId = mEffectiveUserId;
-            mPendingLockCheck = LockPatternChecker.checkPassword(
+            mPendingLockCheck = LockPatternChecker.checkCredential(
                     mLockPatternUtils,
-                    pin,
+                    credential,
                     localEffectiveUserId,
                     new LockPatternChecker.OnCheckCallback() {
                         @Override
                         public void onChecked(boolean matched, int timeoutMs) {
                             mPendingLockCheck = null;
                             if (matched && isInternalActivity() && mReturnCredentials) {
+                                // TODO: get rid of EXTRA_KEY_TYPE, since EXTRA_KEY_PASSWORD already
+                                // distinguishes beteween PIN and password.
                                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
                                                 mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
                                                          : StorageManager.CRYPT_TYPE_PIN);
                                 intent.putExtra(
-                                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
+                                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, credential);
                             }
                             mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
                                     localEffectiveUserId);

@@ -24,6 +24,8 @@ import android.content.Intent;
 import android.os.UserHandle;
 import android.view.View;
 
+import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
@@ -52,7 +54,7 @@ public class ChooseLockPatternTest {
     @Test
     public void intentBuilder_setPattern_shouldAddExtras() {
         Intent intent = new IntentBuilder(application)
-                .setPattern("pattern".getBytes())
+                .setPattern(createPattern("1234"))
                 .setUserId(123)
                 .build();
 
@@ -60,10 +62,10 @@ public class ChooseLockPatternTest {
                 .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true))
                 .named("EXTRA_KEY_HAS_CHALLENGE")
                 .isFalse();
-        assertThat(intent
-                .getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
+        assertThat((LockscreenCredential) intent
+                .getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
                 .named("EXTRA_KEY_PASSWORD")
-                .isEqualTo("pattern".getBytes());
+                .isEqualTo(createPattern("1234"));
         assertThat(intent.getIntExtra(Intent.EXTRA_USER_ID, 0))
                 .named("EXTRA_USER_ID")
                 .isEqualTo(123);
@@ -119,5 +121,10 @@ public class ChooseLockPatternTest {
                         .setForFingerprint(addFingerprintExtra)
                         .build())
                 .setup().get();
+    }
+
+    private LockscreenCredential createPattern(String patternString) {
+        return LockscreenCredential.createPattern(LockPatternUtils.byteArrayToPattern(
+                patternString.getBytes()));
     }
 }

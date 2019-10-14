@@ -61,6 +61,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.EncryptionInterstitial;
 import com.android.settings.EventLogTags;
 import com.android.settings.R;
@@ -151,7 +152,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mPasswordConfirmed = false;
         private boolean mWaitingForConfirmation = false;
         private boolean mForChangeCredRequiredForBoot = false;
-        private byte[] mUserPassword;
+        private LockscreenCredential mUserPassword;
         private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
         private FaceManager mFaceManager;
@@ -207,7 +208,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 .getBooleanExtra(CONFIRM_CREDENTIALS, true);
             if (getActivity() instanceof ChooseLockGeneric.InternalActivity) {
                 mPasswordConfirmed = !confirmCredentials;
-                mUserPassword = getActivity().getIntent().getByteArrayExtra(
+                mUserPassword = getActivity().getIntent().getParcelableExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             }
 
@@ -233,7 +234,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
                 mWaitingForConfirmation = savedInstanceState.getBoolean(WAITING_FOR_CONFIRMATION);
                 if (mUserPassword == null) {
-                    mUserPassword = savedInstanceState.getByteArray(
+                    mUserPassword = savedInstanceState.getParcelable(
                             ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 }
             }
@@ -392,11 +393,11 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
                 mUserPassword = data != null
-                    ? data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD)
+                    ? data.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD)
                     : null;
                 updatePreferencesOrFinish(false /* isRecreatingActivity */);
                 if (mForChangeCredRequiredForBoot) {
-                    if (!(mUserPassword == null || mUserPassword.length == 0)) {
+                    if (mUserPassword != null && !mUserPassword.isNone()) {
                         maybeEnableEncryption(
                                 mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId), false);
                     } else {
@@ -459,7 +460,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             outState.putBoolean(PASSWORD_CONFIRMED, mPasswordConfirmed);
             outState.putBoolean(WAITING_FOR_CONFIRMATION, mWaitingForConfirmation);
             if (mUserPassword != null) {
-                outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, mUserPassword);
+                outState.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, mUserPassword);
             }
         }
 
@@ -682,7 +683,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             setPreferenceSummary(ScreenLockType.MANAGED, R.string.secure_lock_encryption_warning);
         }
 
-        protected Intent getLockManagedPasswordIntent(byte[] password) {
+        protected Intent getLockManagedPasswordIntent(LockscreenCredential password) {
             return mManagedPasswordProvider.createIntent(false, password);
         }
 
@@ -759,7 +760,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 // Clearing of user biometrics when screen lock is cleared is done at
                 // LockSettingsService.removeBiometricsForUser().
-                mChooseLockSettingsHelper.utils().clearLock(mUserPassword, mUserId);
+                mChooseLockSettingsHelper.utils().setLockCredential(
+                        LockscreenCredential.createNone(), mUserPassword, mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
                 finish();
