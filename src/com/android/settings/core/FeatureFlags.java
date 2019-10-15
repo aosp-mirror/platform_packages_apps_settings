@@ -27,4 +27,5 @@ public class FeatureFlags {
     public static final String NETWORK_INTERNET_V2 = "settings_network_and_internet_v2";
     public static final String WIFI_DETAILS_DATAUSAGE_HEADER =
             "settings_wifi_details_datausage_header";
+    public static final String PERSONAL_WORK_PROFILE = "settings_work_profile";
 }
