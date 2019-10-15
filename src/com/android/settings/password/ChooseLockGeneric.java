@@ -760,8 +760,12 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 // Clearing of user biometrics when screen lock is cleared is done at
                 // LockSettingsService.removeBiometricsForUser().
-                mChooseLockSettingsHelper.utils().setLockCredential(
-                        LockscreenCredential.createNone(), mUserPassword, mUserId);
+                if (mUserPassword != null) {
+                    // No need to call setLockCredential if the user currently doesn't
+                    // have a password
+                    mChooseLockSettingsHelper.utils().setLockCredential(
+                            LockscreenCredential.createNone(), mUserPassword, mUserId);
+                }
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
                 finish();
