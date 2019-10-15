@@ -46,6 +46,7 @@ public class SlicePreference extends LayoutPreference {
         mSliceView = findViewById(R.id.slice_view);
         mSliceView.setShowTitleItems(true);
         mSliceView.setScrollable(false);
+        mSliceView.setVisibility(View.GONE);
     }
 
     public void onSliceUpdated(Slice slice) {

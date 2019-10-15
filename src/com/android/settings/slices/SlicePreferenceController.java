@@ -32,7 +32,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.utils.ThreadUtils;
 
 /**
  * Default {@link BasePreferenceController} for {@link SliceView}. It will take {@link Uri} for
@@ -66,9 +65,6 @@ public class SlicePreferenceController extends BasePreferenceController implemen
         mUri = uri;
         mLiveData = SliceLiveData.fromUri(mContext, mUri, (int type, Throwable source) -> {
             Log.w(TAG, "Slice may be null. uri = " + uri + ", error = " + type);
-            ThreadUtils.postOnMainThread(() -> {
-                onChanged(null);
-            });
         });
 
         //TODO(b/120803703): figure out why we need to remove observer first
