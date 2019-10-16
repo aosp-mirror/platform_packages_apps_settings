@@ -98,7 +98,7 @@ public class SavedAccessPointsPreferenceControllerTest {
 
     @Test
     @Config(shadows = ShadowAccessPoint.class)
-    public void refreshSavedAccessPoints_shouldListNonSubscribedAPs() {
+    public void displayPreference_oneAccessPoint_shouldListNonSubscribedAPs() {
         final WifiConfiguration config = new WifiConfiguration();
         config.SSID = "SSID";
         config.BSSID = "BSSID";
@@ -117,7 +117,7 @@ public class SavedAccessPointsPreferenceControllerTest {
 
     @Test
     @Config(shadows = ShadowAccessPoint.class)
-    public void refreshSavedAccessPoints_shouldNotListSubscribedAPs() {
+    public void displayPreference_onePasspoint_shouldNotListSubscribedAPs() {
         mWifiManager.addOrUpdatePasspointConfiguration(
                 SubscribedAccessPointsPreferenceControllerTest.createMockPasspointConfiguration());
 
