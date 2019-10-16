@@ -56,13 +56,14 @@ public class SimPreferenceDialog extends Activity {
     View mDialogLayout;
     private final String SIM_NAME = "sim_name";
     private final String TINT_POS = "tint_pos";
+    private static final String EXTRA_SLOT_ID = "slot_id";
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         mContext = this;
         final Bundle extras = getIntent().getExtras();
-        mSlotId = extras.getInt(SimSettings.EXTRA_SLOT_ID, -1);
+        mSlotId = extras.getInt(EXTRA_SLOT_ID, -1);
         mSubscriptionManager = SubscriptionManager.from(mContext);
         mSubInfoRecord = mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(mSlotId);
         mTintArr = mContext.getResources().getIntArray(com.android.internal.R.array.sim_colors);
