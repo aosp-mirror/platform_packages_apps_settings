@@ -191,6 +191,13 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     private final IconInjector mIconInjector;
     private final IntentFilter mFilter;
+
+    // Passpoint information - cache it in case of losing these information after
+    // updateAccessPointFromScannedList(). For R2, we should update these data from
+    // WifiManager#getPasspointConfigurations() after users manage the passpoint profile.
+    private boolean mIsExpired;
+    private boolean mIsPasspointConfigurationR1;
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -358,6 +365,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 updateConnectingState(STATE_FAILED);
             }
         };
+
+        mIsExpired = mAccessPoint.isExpired();
+        mIsPasspointConfigurationR1 = mAccessPoint.isPasspointConfigurationR1();
     }
 
     @Override
@@ -391,6 +401,11 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton4Text(R.string.share)
                 .setButton4Icon(R.drawable.ic_qrcode_24dp)
                 .setButton4OnClickListener(view -> shareNetwork());
+
+        if (isPasspointConfigurationR1Expired()) {
+            // Hide Connect button.
+            mButtonsPref.setButton3Visible(false);
+        }
 
         mSignalStrengthPref = screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
         mTxLinkSpeedPref = screen.findPreference(KEY_TX_LINK_SPEED);
@@ -440,9 +455,18 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         if (usingDataUsageHeader(mContext)) {
             mSummaryHeaderController.updateState(mDataUsageSummaryPref);
         } else {
+            String summary;
+            if (isPasspointConfigurationR1Expired()) {
+                // Not able to get summary from AccessPoint because we may lost
+                // PasspointConfiguration information after updateAccessPointFromScannedList().
+                summary = mContext.getResources().getString(
+                        com.android.settingslib.R.string.wifi_passpoint_expired);
+            } else {
+                summary = mAccessPoint.getSettingsSummary(true /* convertSavedAsDisconnected */);
+            }
+
             mEntityHeaderController
-                    .setSummary(
-                            mAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                    .setSummary(summary)
                     .setRecyclerView(mFragment.getListView(), mLifecycle)
                     .done(mFragment.getActivity(), true /* rebind */);
         }
@@ -730,7 +754,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         boolean canForgetNetwork = canForgetNetwork();
         boolean canSignIntoNetwork = canSignIntoNetwork();
-        boolean canConnectNetwork = canConnectNetwork();
+        boolean canConnectNetwork = canConnectNetwork() && !isPasspointConfigurationR1Expired();
         boolean canShareNetwork = canShareNetwork();
 
         mButtonsPref.setButton1Visible(canForgetNetwork);
@@ -746,6 +770,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private boolean canConnectNetwork() {
         // Display connect button for disconnected AP even not in the range.
         return !mAccessPoint.isActive();
+    }
+
+    private boolean isPasspointConfigurationR1Expired() {
+        return mIsPasspointConfigurationR1 && mIsExpired;
     }
 
     private void refreshIpLayerInfo() {
@@ -1095,10 +1123,15 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             case STATE_NOT_IN_RANGE:
             case STATE_FAILED:
             case STATE_ENABLE_WIFI_FAILED:
-                mButtonsPref.setButton3Text(R.string.wifi_connect)
-                        .setButton3Icon(R.drawable.ic_settings_wireless)
-                        .setButton3Enabled(true)
-                        .setButton3Visible(true);
+                if (isPasspointConfigurationR1Expired()) {
+                    // Hide Connect button.
+                    mButtonsPref.setButton3Visible(false);
+                } else {
+                    mButtonsPref.setButton3Text(R.string.wifi_connect)
+                            .setButton3Icon(R.drawable.ic_settings_wireless)
+                            .setButton3Enabled(true)
+                            .setButton3Visible(true);
+                }
                 break;
             default:
                 Log.e(TAG, "Invalid connect button state : " + state);
