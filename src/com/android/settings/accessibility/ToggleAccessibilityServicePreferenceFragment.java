@@ -44,6 +44,7 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
+import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 import com.android.settingslib.accessibility.AccessibilityUtils;
@@ -209,6 +210,15 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
         } else {
             return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
         }
+    }
+
+    @Override
+    protected void updateSwitchBarText(SwitchBar switchBar) {
+        final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+        final String switchBarText = (info == null) ? "" :
+                getString(R.string.accessibility_service_master_switch_title,
+                info.getResolveInfo().loadLabel(getPackageManager()));
+        switchBar.setSwitchBarText(switchBarText, switchBarText);
     }
 
     private void updateSwitchBarToggleSwitch() {

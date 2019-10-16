@@ -34,6 +34,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
+import com.android.settings.widget.SwitchBar;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.accessibility.AccessibilityUtils;
@@ -124,6 +125,13 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
         Settings.Secure.putInt(getContentResolver(), preferenceKey, enabled ? 1 : 0);
         updatePreferences();
+    }
+
+    @Override
+    protected void updateSwitchBarText(SwitchBar switchBar) {
+        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
+                getString(R.string.accessibility_global_gesture_preference_title));
+        switchBar.setSwitchBarText(switchBarText, switchBarText);
     }
 
     private void updatePreferences() {

@@ -172,6 +172,13 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
         return false;
     }
 
+    @Override
+    protected void updateSwitchBarText(SwitchBar switchBar) {
+        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
+                getString(R.string.accessibility_autoclick_preference_title));
+        switchBar.setSwitchBarText(switchBarText, switchBarText);
+    }
+
     /**
      * Converts seek bar preference progress value to autoclick delay associated with it.
      */
