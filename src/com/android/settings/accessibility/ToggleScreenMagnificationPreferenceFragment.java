@@ -50,6 +50,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment implements SwitchBar.OnSwitchChangeListener {
 
     private static final int DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL = 1;
+    private static final int DIALOG_ID_ACCESSIBILITY_BUTTON_TUTORIAL = 2;
 
     private Dialog mDialog;
 
@@ -172,14 +173,17 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
-        if (dialogId == DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL) {
-            if (isGestureNavigateEnabled()) {
+        switch (dialogId) {
+            case DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL:
                 mDialog = AccessibilityGestureNavigationTutorial
                         .showGestureNavigationTutorialDialog(getActivity());
-            } else {
+                break;
+            case DIALOG_ID_ACCESSIBILITY_BUTTON_TUTORIAL:
                 mDialog = AccessibilityGestureNavigationTutorial
                         .showAccessibilityButtonTutorialDialog(getActivity());
-            }
+                break;
+            default:
+                throw new IllegalArgumentException();
         }
 
         return mDialog;
@@ -193,7 +197,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public int getDialogMetricsCategory(int dialogId) {
-        return SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
+        switch (dialogId) {
+            case DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL:
+                return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_GESTURE_NAVIGATION;
+            case DIALOG_ID_ACCESSIBILITY_BUTTON_TUTORIAL:
+                return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_ACCESSIBILITY_BUTTON;
+            default:
+                return 0;
+        }
     }
 
     @Override
@@ -206,7 +217,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (enabled && TextUtils.equals(
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
                 preferenceKey)) {
-            showDialog(DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL);
+            showDialog(isGestureNavigateEnabled() ? DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL
+                    : DIALOG_ID_ACCESSIBILITY_BUTTON_TUTORIAL);
         }
         MagnificationPreferenceFragment.setChecked(getContentResolver(), preferenceKey, enabled);
         updateConfigurationWarningIfNeeded();
