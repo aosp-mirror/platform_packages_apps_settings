@@ -1410,9 +1410,6 @@
         <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits</item>
     </plurals>
 
-    <!-- Error shown when in PIN mode and user enters a non-digit -->
-    <string name="lockpassword_pin_contains_non_digits">Must contain only digits 0-9</string>
-
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
     <string name="lockpassword_pin_recently_used">Device admin doesn\'t allow using a recent PIN</string>
 
@@ -1465,6 +1462,11 @@
     <plurals name="lockpassword_password_requires_nonletter">
         <item quantity="one">Must contain at least 1 non-letter character</item>
         <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-letter characters</item>
+    </plurals>
+
+    <plurals name="lockpassword_password_requires_nonnumerical">
+        <item quantity="one">Must contain at least 1 non-numerical character</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-numerical characters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
