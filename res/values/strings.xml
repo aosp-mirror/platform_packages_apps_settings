@@ -329,11 +329,11 @@
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel">Cancel</string>
 
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
-    <string name="connected_device_available_media_title">Available media devices</string>
+    <string name="connected_device_media_device_title">Media devices</string>
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
-    <string name="connected_device_available_call_title">Available call devices</string>
+    <string name="connected_device_call_device_title">Call devices</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
-    <string name="connected_device_connected_title">Currently connected</string>
+    <string name="connected_device_other_device_title">Other devices</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
     <string name="connected_device_saved_title">Saved devices</string>
     <!-- Summary for preference to add a device [CHAR LIMIT=none]-->
@@ -1410,9 +1410,6 @@
         <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits</item>
     </plurals>
 
-    <!-- Error shown when in PIN mode and user enters a non-digit -->
-    <string name="lockpassword_pin_contains_non_digits">Must contain only digits 0-9</string>
-
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
     <string name="lockpassword_pin_recently_used">Device admin doesn\'t allow using a recent PIN</string>
 
@@ -1465,6 +1462,11 @@
     <plurals name="lockpassword_password_requires_nonletter">
         <item quantity="one">Must contain at least 1 non-letter character</item>
         <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-letter characters</item>
+    </plurals>
+
+    <plurals name="lockpassword_password_requires_nonnumerical">
+        <item quantity="one">Must contain at least 1 non-numerical character</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-numerical characters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
@@ -4685,7 +4687,7 @@
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
-    <string name="user_installed_services_category_title">Downloaded services</string>
+    <string name="user_installed_services_category_title">Downloaded apps</string>
     <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->
     <string name="experimental_category_title">Experimental</string>
     <!-- Title for feature flags dashboard where developers can turn on experimental features [CHAR LIMIT=50] -->
@@ -4809,7 +4811,7 @@
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
-    <string name="accessibility_service_master_switch_title">Use service</string>
+    <string name="accessibility_service_master_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->

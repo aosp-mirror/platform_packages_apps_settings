@@ -77,7 +77,6 @@ public class ChooseLockPasswordTest {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_headlineFontFamily, "");
         mShadowDpm = ShadowDevicePolicyManager.getShadow();
-        mShadowDpm.setPasswordMaximumLength(16);
     }
 
     @After
@@ -157,7 +156,7 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createNone(),
-                "Must contain at least 1 letter",
+                "Must contain at least 1 non-numerical character",
                 "Must be at least 10 characters");
     }
 
@@ -180,7 +179,7 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_MEDIUM,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createNone(),
-                "Must contain at least 1 letter",
+                "Must contain at least 1 non-numerical character",
                 "Must be at least 4 characters");
     }
 
@@ -193,7 +192,7 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_LOW,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createNone(),
-                "Must contain at least 1 letter",
+                "Must contain at least 1 non-numerical character",
                 "Must contain at least 1 numerical digit",
                 "Must be at least 9 characters");
     }
@@ -220,7 +219,9 @@ public class ChooseLockPasswordTest {
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createNone(),
                 "Must contain at least 2 special symbols",
-                "Must be at least 6 characters");
+                "Must be at least 6 characters",
+                "Must contain at least 1 letter",
+                "Must contain at least 1 numerical digit");
     }
 
     @Test
@@ -280,7 +281,7 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_LOW,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createPassword("12345678"),
-                "Must contain at least 1 letter");
+                "Ascending, descending, or repeated sequence of digits isn't allowed");
     }
 
     @Test
@@ -291,8 +292,8 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createNone(),
-                "Must contain at least 1 letter",
-                "Must be at least 6 characters");
+                "Must be at least 6 characters",
+                "Must contain at least 1 non-numerical character");
     }
 
     @Test
@@ -303,8 +304,8 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createPassword("1"),
-                "Must contain at least 1 letter",
-                "Must be at least 6 characters");
+                "Must be at least 6 characters",
+                "Must contain at least 1 non-numerical character");
     }
 
     @Test
@@ -327,6 +328,28 @@ public class ChooseLockPasswordTest {
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createPassword("b1"),
                 "Must be at least 6 characters");
+    }
+
+    @Test
+    public void processAndValidatePasswordRequirements_defaultPinMinimumLength() {
+        mShadowDpm.setPasswordQuality(PASSWORD_QUALITY_UNSPECIFIED);
+
+        assertPasswordValidationResult(
+                /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
+                /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
+                /* userEnteredPassword= */ LockscreenCredential.createPassword("11"),
+                "PIN must be at least 4 digits");
+    }
+
+    @Test
+    public void processAndValidatePasswordRequirements_maximumLength() {
+        mShadowDpm.setPasswordQuality(PASSWORD_QUALITY_UNSPECIFIED);
+
+        assertPasswordValidationResult(
+                /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
+                /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
+                LockscreenCredential.createPassword("01234567890123456789"),
+                "Must be fewer than 17 characters");
     }
 
     @Test
@@ -369,9 +392,8 @@ public class ChooseLockPasswordTest {
         intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, minComplexity);
         ChooseLockPassword activity = buildChooseLockPasswordActivity(intent);
         ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(activity);
-        int validateResult = fragment.validatePassword(userEnteredPassword);
-        String[] messages = fragment.convertErrorCodeToMessages(validateResult);
-
+        fragment.validatePassword(userEnteredPassword);
+        String[] messages = fragment.convertErrorCodeToMessages();
         assertThat(messages).asList().containsExactly((Object[]) expectedValidationResult);
     }
 }

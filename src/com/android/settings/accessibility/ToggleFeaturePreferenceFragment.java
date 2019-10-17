@@ -58,10 +58,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
-        updateSwitchBarText(mSwitchBar);
         mToggleSwitch = mSwitchBar.getSwitch();
 
         onProcessArguments(getArguments());
+        updateSwitchBarText(mSwitchBar);
 
         // Show the "Settings" menu as if it were a preference screen
         if (mSettingsTitle != null && mSettingsIntent != null) {
