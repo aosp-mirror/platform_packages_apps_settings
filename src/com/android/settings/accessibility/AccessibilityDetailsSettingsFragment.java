@@ -135,9 +135,6 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         final String packageName = serviceInfo.packageName;
         final ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
 
-        final List<AccessibilityServiceInfo> enabledServiceInfos = AccessibilityManager.getInstance(
-                getActivity()).getEnabledAccessibilityServiceList(
-                AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
         final Set<ComponentName> enabledServices =
                 AccessibilityUtils.getEnabledServicesFromSettings(getActivity());
         final boolean serviceEnabled = enabledServices.contains(componentName);
@@ -146,8 +143,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             description = getString(R.string.accessibility_service_default_description);
         }
 
-        if (serviceEnabled && AccessibilityUtils.hasServiceCrashed(
-                packageName, serviceInfo.name, enabledServiceInfos)) {
+        if (serviceEnabled && info.crashed) {
             // Update the summaries for services that have crashed.
             description = getString(R.string.accessibility_description_state_stopped);
         }
