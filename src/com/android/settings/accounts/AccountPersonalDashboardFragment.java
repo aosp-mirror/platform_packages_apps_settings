@@ -28,7 +28,6 @@ import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,6 @@ import java.util.List;
 /**
  * Account Setting page for personal profile.
  */
-@SearchIndexable
 public class AccountPersonalDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AccountPersonalFrag";
