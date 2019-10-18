@@ -34,16 +34,19 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.internal.PreferenceImageView;
+
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +66,8 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
     private boolean mShowLimitedItem = true;
 
     private List<AccessPoint> mAccessPointList;
-    private FilterWifiTracker mFilterWifiTracker;
+    @VisibleForTesting
+    FilterWifiTracker mFilterWifiTracker;
     private AccessPointAdapter mDialogAdapter;
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
 
@@ -115,7 +119,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
             neutralBtn.setVisibility(View.GONE);
             neutralBtn.setOnClickListener(v -> {
                 mShowLimitedItem = false;
-                renewAccessPointList(null /* List<ScanResult> */);
+                renewAccessPointList(null /* scanResults */);
                 notifyAdapterRefresh();
                 neutralBtn.setVisibility(View.GONE);
             });
@@ -323,7 +327,8 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
         // Do nothing when selection is failed, let user could try again easily.
     }
 
-    private final class FilterWifiTracker {
+    @VisibleForTesting
+    final class FilterWifiTracker {
         private final List<String> mAccessPointKeys;
         private final WifiTracker mWifiTracker;
 
@@ -381,7 +386,8 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
             return result;
         }
 
-        private WifiTracker.WifiListener mWifiListener = new WifiTracker.WifiListener() {
+        @VisibleForTesting
+        WifiTracker.WifiListener mWifiListener = new WifiTracker.WifiListener() {
 
             @Override
             public void onWifiStateChanged(int state) {
@@ -395,6 +401,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
             @Override
             public void onAccessPointsChanged() {
+                renewAccessPointList(null /* scanResults */);
                 notifyAdapterRefresh();
             }
         };
