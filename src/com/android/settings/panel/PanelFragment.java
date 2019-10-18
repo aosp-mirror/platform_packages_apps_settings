@@ -161,17 +161,12 @@ public class PanelFragment extends Fragment {
         mPanelSlices.setVisibility(View.GONE);
 
         final Bundle arguments = getArguments();
-        final String panelType =
-                arguments.getString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT);
         final String callingPackageName =
                 arguments.getString(SettingsPanelActivity.KEY_CALLING_PACKAGE_NAME);
-        final String mediaPackageName =
-                arguments.getString(SettingsPanelActivity.KEY_MEDIA_PACKAGE_NAME);
 
-        // TODO (b/124399577) transform interface to take a context and bundle.
         mPanel = FeatureFactory.getFactory(activity)
                 .getPanelFeatureProvider()
-                .getPanel(activity, panelType, mediaPackageName);
+                .getPanel(activity, arguments);
 
         if (mPanel == null) {
             activity.finish();
