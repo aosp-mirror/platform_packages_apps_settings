@@ -36,12 +36,8 @@ import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.UserInfo;
-import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
-import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
-import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -76,7 +72,7 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
-import java.util.List;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 public class ChooseLockGeneric extends SettingsActivity {
     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
@@ -188,7 +184,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             final Activity activity = getActivity();
-            if (!Utils.isDeviceProvisioned(activity) && !canRunBeforeDeviceProvisioned()) {
+            if (!WizardManagerHelper.isDeviceProvisioned(activity)
+                    && !canRunBeforeDeviceProvisioned()) {
                 Log.i(TAG, "Refusing to start because device is not provisioned");
                 activity.finish();
                 return;

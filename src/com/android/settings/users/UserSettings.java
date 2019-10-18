@@ -74,6 +74,8 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -224,7 +226,7 @@ public class UserSettings extends SettingsPreferenceFragment
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.user_settings);
         final Activity activity = getActivity();
-        if (!Utils.isDeviceProvisioned(activity)) {
+        if (!WizardManagerHelper.isDeviceProvisioned(activity)) {
             activity.finish();
             return;
         }
@@ -977,7 +979,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUser(Context context) {
         if ((mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin)
-                && Utils.isDeviceProvisioned(context) && mUserCaps.mUserSwitcherEnabled) {
+                && WizardManagerHelper.isDeviceProvisioned(context)
+                && mUserCaps.mUserSwitcherEnabled) {
             mAddUser.setVisible(true);
             final boolean moreUsers = mUserManager.canAddMoreUsers();
             mAddUser.setEnabled(moreUsers && !mAddingUser && mUserManager.canSwitchUsers());

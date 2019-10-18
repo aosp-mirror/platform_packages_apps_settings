@@ -276,7 +276,7 @@ public class SettingsActivity extends SettingsBaseActivity
             launchSettingFragment(initialFragmentName, intent);
         }
 
-        final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
+        final boolean deviceProvisioned = WizardManagerHelper.isDeviceProvisioned(this);
 
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
