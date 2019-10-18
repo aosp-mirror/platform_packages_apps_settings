@@ -5880,6 +5880,16 @@
     <string name="user_certificate">VPN &amp; app user certificate</string>
     <!-- Title of Wi-Fi certificate [CHAR LIMIT=30] -->
     <string name="wifi_certificate">Wi\u2011Fi certificate</string>
+    <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
+    <string name="ca_certificate_warning_title">Your privacy is at risk</string>
+    <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
+    <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\n If you install a CA certificate, the certificate owner could access your information, such as passwords, messages, or credit card details, from websites you visit or apps you use - even if that information is encrypted.</string>
+    <!-- Label for button to not install a CA certificate [CHAR_LIMIT=50] -->
+    <string name="ca_certificate_warning_dont_install">Don\u2019t install</string>
+    <!-- Label for button to continue installing a CA certificate [CHAR_LIMIT=50] -->
+    <string name="ca_certificate_warning_install_anyway">Install anyways</string>
+    <!-- Toast message that a certificate was not installed -->
+    <string name="cert_not_installed">Certificate not installed</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>

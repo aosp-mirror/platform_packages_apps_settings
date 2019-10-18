@@ -1342,6 +1342,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".security.InstallCaCertificateWarning"
+                  android:theme="@style/GlifV3Theme.Light"
+                  android:exported="false">
+        </activity>
+
         <activity
             android:name="Settings$DeviceAdminSettingsActivity"
             android:label="@string/device_admin_settings_title"
