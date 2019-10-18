@@ -73,7 +73,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
-import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
@@ -727,11 +726,6 @@ public final class Utils extends com.android.settingslib.Utils {
             return DateUtils.formatDateRange(context, sFormatter, start, end, flags, null)
                     .toString();
         }
-    }
-
-    public static boolean isDeviceProvisioned(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.DEVICE_PROVISIONED, 0) != 0;
     }
 
     public static boolean startQuietModeDialogIfNecessary(Context context, UserManager um,
