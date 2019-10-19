@@ -1790,7 +1790,7 @@
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"כדי להשתמש בטביעת אצבע, הגדר סיסמה"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"לטביעת האצבע נדרש קו ביטול נעילה"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"לשיפור האבטחה, מומלץ להגדיר קוד גישה"</string>
-    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"כאמצעי גיבוי, הגדר קוד גישה"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"כדי להשתמש בטביעת אצבע, יש להגדיר קוד גישה"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"לשיפור האבטחה, מומלץ להגדיר קו ביטול נעילה"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"יש להזין את הסיסמה שוב"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"אשר את הקו לביטול נעילה"</string>
@@ -3579,7 +3579,7 @@
     <string name="picture_in_picture_empty_text" msgid="685224245260197779">"אין אפליקציות מותקנות שתומכות ב\'תמונה בתוך תמונה\'"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"תמונה בתוך תמונה"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"תמונה בתוך תמונה"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"אפשר תמונה בתוך תמונה"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"עם תמונה בתוך תמונה"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="1264019085827708920">"אפליקציה זו תוכל ליצור חלון מסוג תמונה-בתוך-תמונה בזמן שהיא תהיה פתוחה או לאחר היציאה ממנה (למשל, כדי להמשיך לצפות בסרטון). חלון זה מוצג מעל אפליקציות אחרות שנמצאות בשימוש."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"גישה אל \'נא לא להפריע\'"</string>
     <string name="zen_access_detail_switch" msgid="1188754646317450926">"הפעלת ההרשאה \'נא לא להפריע\'"</string>
@@ -4037,8 +4037,8 @@
     <string name="keywords_write_settings" msgid="6415597272561105138">"שינוי הגדרות המערכת באמצעות כתיבה"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_0">%1$d</xliff:g> מתוך <xliff:g id="COUNT_1">%2$d</xliff:g> אפליקציות מורשות לשנות את הגדרות המערכת"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"יכולה להתקין אפליקציות אחרות"</string>
-    <string name="filter_write_settings_apps" msgid="2914615026197322551">"יכולות לשנות את הגדרות המערכת"</string>
-    <string name="write_settings_title" msgid="4232152481902542284">"יכולות לשנות את הגדרות המערכת"</string>
+    <string name="filter_write_settings_apps" msgid="2914615026197322551">"שינוי הגדרות המערכת"</string>
+    <string name="write_settings_title" msgid="4232152481902542284">"שינוי הגדרות המערכת"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"שינוי הגדרות המערכת"</string>
     <string name="permit_write_settings" msgid="658555006453212691">"הרשאה לשנות את הגדרות המערכת"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"ההרשאה הזו מתירה לאפליקציה לשנות את הגדרות המערכת."</string>
@@ -4622,6 +4622,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"‏מצב רשת מועדפת: LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"‏מצב רשת מועדפת: GSM/WCDMA/LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"‏מצב רשת מועדפת: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"‏מצב רשת מועדפת: LTE‏/CDMA‏/EvDo‏/GSM‏/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"מצב רשת מועדפת: גלובלי"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"‏מצב רשת מועדפת: LTE / WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"‏מצב רשת מועדפת: LTE / GSM / UMTS"</string>
@@ -4636,6 +4637,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"‏מצב רשת מועדפת: LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"‏מצב רשת מועדפת: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"‏מצב רשת מועדפת: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"‏מצב רשת מועדפת: NR בלבד"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"‏מצב רשת מועדפת: NR ‏/ LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"‏מצב רשת מועדפת: NR‏/LTE‏/CDMA‏/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"‏מצב רשת מועדפת: NR‏/LTE‏/GSM‏/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"‏מצב רשת מועדפת: NR‏/LTE‏/CDMA‏/EvDo‏/GSM‏/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"‏מצב רשת מועדפת: NR‏/LTE‏/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"‏מצב רשת מועדפת: NR‏/LTE‏/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"‏מצב רשת מועדפת: NR‏/LTE‏/TDSCDMA‏/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"‏מצב רשת מועדפת: NR‏/LTE‏/TDSCDMA‏/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"‏מצב רשת מועדפת: NR‏/LTE‏/TDSCDMA‏/GSM‏/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"‏מצב רשת מועדפת: NR‏/LTE‏/TDSCDMA‏/CDMA‏/EvDo‏/GSM‏/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (מומלץ)"</string>
     <string name="network_lte" msgid="1287709529829131860">"‏LTE (מומלץ)"</string>
     <string name="network_4G" msgid="8611758013994499559">"‏4G (מומלץ)"</string>
     <string name="network_global" msgid="959947774831178632">"כללי"</string>

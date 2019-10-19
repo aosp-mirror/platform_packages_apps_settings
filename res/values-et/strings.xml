@@ -208,7 +208,7 @@
     <string name="proxy_error_empty_port" msgid="5539106187558215246">"Peate täitma pordi välja."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Pordi väli peab olema tühi, kui hosti väli on tühi."</string>
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Sisestatud port on kehtetu."</string>
-    <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Brauser kasutab HTTP-puhverserverit, kuid muud rakendused ei tohi seda kasutada."</string>
+    <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Brauser kasutab HTTP-puhverserverit, kuid muud rakendused ei pruugi seda kasutada."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
     <string name="radio_info_subid" msgid="204582608052503412">"Praegune alam-ID:"</string>
     <string name="radio_info_dds" msgid="5471937791273237508">"Andmete vaike-SIM-kaardi alam-ID:"</string>
@@ -604,7 +604,7 @@
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Sõrmejälg + muster"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Sõrmejälg + PIN-kood"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Sõrmejälg + parool"</string>
-    <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Jätkamine ilma salvestusruumita"</string>
+    <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Jätkamine ilma sõrmejäljeta"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Telefoni saate avada oma sõrmejäljega. Turvalisuse tagamiseks nõuab see valik varuekraanilukku."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Face Unlock + muster"</string>
     <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Face Unlock + PIN-kood"</string>
@@ -2669,7 +2669,7 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Sünkroonim. on SEES"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Sünkroonimine VÄLJAS"</string>
     <string name="sync_error" msgid="5060969083117872149">"Sünkroonimise viga"</string>
-    <string name="last_synced" msgid="4242919465367022234">"Viimati sünkroonitud <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
+    <string name="last_synced" msgid="4242919465367022234">"Viimati sünkroonitud: <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
     <string name="sync_in_progress" msgid="5151314196536070569">"Sünkroonimine ..."</string>
     <string name="settings_backup" msgid="2274732978260797031">"Varunda seaded"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Minu seadete varundamine"</string>
@@ -3722,7 +3722,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> täiendavat luba</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> täiendav luba</item>
     </plurals>
-    <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Lube ei antud"</string>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Lube pole antud"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Lube ei taotletud"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Kõik rakendused"</string>
     <string name="filter_enabled_apps" msgid="5395727306799456250">"Installitud rakendused"</string>
@@ -4460,6 +4460,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Eelistatud võrgurežiim: LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Eelistatud võrgurežiim: GSM/WCDMA/LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Eelistatud võrgurežiim: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"Eelistatud võrgurežiim: LTE/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Eelistatud võrgurežiim: üldine"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Eelistatud võrgurežiim: LTE/WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Eelistatud võrgurežiim: LTE/GSM/UMTS"</string>
@@ -4474,6 +4475,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Eelistatud võrgurežiim: LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Eelistatud võrgurežiim: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Eelistatud võrgurežiim: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"Eelistatud võrgurežiim: ainult NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"Eelistatud võrgurežiim: NR/LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"Eelistatud võrgurežiim: NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"Eelistatud võrgurežiim: NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"Eelistatud võrgurežiim: NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"Eelistatud võrgurežiim: NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"Eelistatud võrgurežiim: NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"Eelistatud võrgurežiim: NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"Eelistatud võrgurežiim: NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"Eelistatud võrgurežiim: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"Eelistatud võrgurežiim: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (soovitatud)"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE (soovitatav)"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G (soovitatav)"</string>
     <string name="network_global" msgid="959947774831178632">"Üldine"</string>

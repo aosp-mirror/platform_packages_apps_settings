@@ -2969,7 +2969,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"La cronologia chiamate verrà condivisa con questo utente."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vuoi attivare chiamate e SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"La cronologia chiamate e SMS verrà condivisa con questo utente."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Informazioni per emergenze"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Informazioni per le emergenze"</string>
     <string name="emergency_info_summary" msgid="5062945162967838521">"Dati e contatti di <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Consenti app e contenuti"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applicazioni con limitazioni"</string>
@@ -4035,7 +4035,7 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"Dati Ethernet: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"Limite dati e avviso"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Ciclo di utilizzo dati delle app"</string>
-    <string name="cell_data_warning" msgid="1985956818884847057">"Avviso relativo ai dati: <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <string name="cell_data_warning" msgid="1985956818884847057">"Avviso sui dati: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Limite dati: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="6888825370687743208">"Avviso relativo ai dati: <xliff:g id="ID_1">^1</xliff:g>/Limite dati: <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"Il giorno <xliff:g id="ID_1">%1$s</xliff:g> di ogni mese"</string>
@@ -4460,6 +4460,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Modalità di rete preferita: LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Modalità di rete preferita: GSM/WCDMA/LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Modalità di rete preferita: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"Modalità di rete preferita: LTE/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Modalità di rete preferita: globale"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Modalità di rete preferita: LTE/WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Modalità di rete preferita: LTE/GSM/UMTS"</string>
@@ -4474,6 +4475,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Modalità di rete preferita: LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Modalità di rete preferita: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Modalità di rete preferita: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"Modalità di rete preferita: solo NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"Modalità di rete preferita: NR/LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"Modalità di rete preferita: NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"Modalità di rete preferita: NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"Modalità di rete preferita: NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"Modalità di rete preferita: NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"Modalità di rete preferita: NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"Modalità di rete preferita: NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"Modalità di rete preferita: NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"Modalità di rete preferita: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"Modalità di rete preferita: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (consigliata)"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE (opzione consigliata)"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G (opzione consigliata)"</string>
     <string name="network_global" msgid="959947774831178632">"Globale"</string>

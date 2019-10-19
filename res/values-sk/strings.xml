@@ -4021,8 +4021,8 @@
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Zobrazenie cez iné aplikácie"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Aplikácie"</string>
     <string name="system_alert_window_access_title" msgid="6297115362542361241">"Zobrazenie cez iné aplikácie"</string>
-    <string name="permit_draw_overlay" msgid="7456536798718633432">"Povoliť zobrazenie cez iné aplikácie"</string>
-    <string name="allow_overlay_description" msgid="8961670023925421358">"Umožní tejto aplikácií zobrazovať sa nad inými aplikáciami, ktoré používate. Môže tak narušiť používanie týchto aplikácií alebo zmeniť ich vzhľad či správanie."</string>
+    <string name="permit_draw_overlay" msgid="7456536798718633432">"Povoliť zobrazenie nad ostatnými aplikáciami"</string>
+    <string name="allow_overlay_description" msgid="8961670023925421358">"Umožní tejto aplikácii zobrazovať sa nad ostatnými aplikáciami, ktoré používate. Môže tak narušiť vašu prácu s týmito aplikáciami alebo zmeniť ich vzhľad či správanie."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtuálna realita prijímač stereo pomocné zariadenie"</string>
     <string name="keywords_system_alert_window" msgid="5049498015597864850">"zobrazenie dialógového okna s upozornením systému nad inými aplikáciami"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Zobrazenie cez iné aplikácie"</string>
@@ -4035,11 +4035,11 @@
     <string name="keywords_write_settings" msgid="6415597272561105138">"zápis a úprava nastavení systému"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"Úprava nastavení systému je povolená pre <xliff:g id="COUNT_0">%1$d</xliff:g> z <xliff:g id="COUNT_1">%2$d</xliff:g> aplikácií"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"Môže inštalovať ďalšie aplikácie"</string>
-    <string name="filter_write_settings_apps" msgid="2914615026197322551">"Môže upravovať nastavenia systému"</string>
-    <string name="write_settings_title" msgid="4232152481902542284">"Môže upravovať nastavenia systému"</string>
+    <string name="filter_write_settings_apps" msgid="2914615026197322551">"Môže meniť nastavenia systému"</string>
+    <string name="write_settings_title" msgid="4232152481902542284">"Môže meniť nastavenia systému"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"Úprava nastavení systému"</string>
     <string name="permit_write_settings" msgid="658555006453212691">"Povoliť úpravy nastavení systému"</string>
-    <string name="write_settings_description" msgid="6868293938839954623">"Toto povolenie umožňuje aplikácii upravovať nastavenia systému."</string>
+    <string name="write_settings_description" msgid="6868293938839954623">"Toto povolenie umožňuje aplikácii meniť nastavenia systému."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Áno"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Nie"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"Povoliť z tohto zdroja"</string>
@@ -4620,6 +4620,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Preferovaný režim siete: LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Preferovaný režim siete: GSM / WCDMA / LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Preferovaný režim siete: CDMA + LTE / EvDo"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"Preferovaný režim siete: LTE/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Preferovaný režim siete: globálny"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Preferovaný režim siete: LTE / WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Uprednostňovaný režim siete: LTE / GSM / UMTS"</string>
@@ -4634,6 +4635,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Preferovaný režim siete: LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Preferovaný režim siete: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Preferovaný režim siete: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"Preferovaný režim siete: iba NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"Preferovaný režim siete: NR/LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"Preferovaný režim siete: NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"Preferovaný režim siete NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"Preferovaný režim siete: NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"Preferovaný režim siete: NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"Preferovaný režim siete: NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"Preferovaný režim siete: NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"Preferovaný režim siete: NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"Preferovaný režim siete: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"Preferovaný režim siete: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (odporúčané)"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE (odporúčané)"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G (odporúčané)"</string>
     <string name="network_global" msgid="959947774831178632">"Globálne"</string>

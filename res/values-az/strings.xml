@@ -514,7 +514,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ups, bu sensor deyil"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="2989019978041986175">"Telefonun arxasındakı sensora toxunun."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Qeydiyyat tamamlanmadı"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Barmaq izi qeydiyyatı üçün vaxt limiti ba çatdı. Yenidən cəhd edin."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Barmaq izi qeydiyyatı üçün vaxt limiti başa çatdı. Yenidən cəhd edin."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Barmaq izi qeydiyyatı işləmədi. Yenidən cəhd edin və ya başqa barmaq istifadə edin."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Başqasını əlavə edin"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Növbəti"</string>
@@ -4238,11 +4238,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"Planşeti yoxlamaq üçün klikləyin"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Cihazı yoxlamaq üçün klikləyin"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Vaxt, bildiriş və digər məlumatı yoxlamaq üçün ekrana klikləyin."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Bildirişlər üçün barmağınızı sürüşdürün"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Barmağınızı sürüşdürün"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Bildirişləri yoxlamaq üçün, barmaq sensorunda aşağı sürüşdürün."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Bildirişləri yoxlamaq üçün, planşetin arxasındakı barmaq sensorunda aşağı sürüşdürün."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Bildirişləri yoxlamaq üçün, cihazın arxasındakı barmaq sensorunda aşağı sürüşdürün."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Bildirişlər üçün barmaq izinizi sürüşdürün"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Barmaq izini sürüşdürün"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Bildirişləri yoxlamaq üçün, barmaq izi sensorunda aşağı sürüşdürün."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Bildirişləri yoxlamaq üçün, planşetin arxasındakı barmaq izi sensorunda aşağı sürüşdürün."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Bildirişləri yoxlamaq üçün, cihazın arxasındakı barmaq izi sensorunda aşağı sürüşdürün."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Bildirişlərə cəld baxın"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Aktiv"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Deaktiv"</string>
@@ -4460,6 +4460,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Tərcih edilmiş şəbəkə rejimi: LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Tərcih edilmiş şəbəkə rejimi: GSM/WCDMA/LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Tərcih edilmiş şəbəkə rejimi: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"Tərcih edilən şəbəkə rejimi: LTE/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Tərcih edilmiş şəbəkə rejimi: Qlobal"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Tərcih edilmiş şəbəkə rejimi: LTE / WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Tərcih edilmiş şəbəkə rejimi: LTE / GSM / UMTS"</string>
@@ -4474,6 +4475,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Tərcih edilmiş şəbəkə rejimi: LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Tərcih edilmiş şəbəkə rejimi: CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Tərcih edilmiş şəbəkə rejimi: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"Tərcih edilən şəbəkə rejimi: Yalnız NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"Tərcih edilən şəbəkə rejimi: NR / LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"Tərcih edilən şəbəkə rejimi: NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"Tərcih edilən şəbəkə rejimi: NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"Tərcih edilən şəbəkə rejimi: NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"Tərcih edilən şəbəkə rejimi: NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"Tərcih edilən şəbəkə rejimi: NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"Tərcih edilən şəbəkə rejimi: NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"Tərcih edilən şəbəkə rejimi: NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"Tərcih edilən şəbəkə rejimi: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"Tərcih edilən şəbəkə rejimi: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (tövsiyə edilir)"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE (məsləhətlidir)"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G (məsləhətlidir)"</string>
     <string name="network_global" msgid="959947774831178632">"Qlobal"</string>
