@@ -49,6 +49,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.template.FooterButton.ButtonType;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
 
 /**
@@ -86,7 +87,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
                     getActivity().getSystemService(Context.OEM_LOCK_SERVICE);
 
             if (pdbManager != null && !oemLockManager.isOemUnlockAllowed() &&
-                    Utils.isDeviceProvisioned(getActivity())) {
+                    WizardManagerHelper.isDeviceProvisioned(getActivity())) {
                 // if OEM unlock is allowed, the persistent data block will be wiped during FR
                 // process. If disabled, it will be wiped here, unless the device is still being
                 // provisioned, in which case the persistent data block will be preserved.

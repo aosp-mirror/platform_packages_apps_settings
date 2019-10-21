@@ -17,12 +17,12 @@
 package com.android.settings.panel;
 
 import android.content.Context;
+import android.os.Bundle;
 
 public interface PanelFeatureProvider {
 
     /**
-     * Returns {@link PanelContent} as specified by the {@param panelType}, and
-     * {@param mediaPackageName}.
+     * Returns {@link PanelContent} as specified by the {@param bundle}
      */
-    PanelContent getPanel(Context context, String panelType, String mediaPackageName);
+    PanelContent getPanel(Context context, Bundle bundle);
 }

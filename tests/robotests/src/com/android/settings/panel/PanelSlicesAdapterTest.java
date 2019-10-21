@@ -40,17 +40,15 @@ import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
@@ -74,7 +72,7 @@ public class PanelSlicesAdapterTest {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
         mFakePanelContent = new FakePanelContent();
-        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any(), any());
+        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
 
         ActivityController<FakeSettingsPanelActivity> activityController =
                 Robolectric.buildActivity(FakeSettingsPanelActivity.class);

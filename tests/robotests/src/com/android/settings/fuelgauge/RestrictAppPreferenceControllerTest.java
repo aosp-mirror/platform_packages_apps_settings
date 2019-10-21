@@ -34,6 +34,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Pair;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -83,14 +84,10 @@ public class RestrictAppPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         final List<AppOpsManager.OpEntry> allowOps = new ArrayList<>();
         allowOps.add(new AppOpsManager.OpEntry(
-                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, false, AppOpsManager.MODE_ALLOWED,
-                null /*accessTimes*/, null /*rejectTimes*/, null /*durations*/,
-                null /* proxyUids */, null /* proxyPackages */));
+                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_ALLOWED, new Pair[0]));
         final List<AppOpsManager.OpEntry> restrictedOps = new ArrayList<>();
         restrictedOps.add(new AppOpsManager.OpEntry(
-                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, false, AppOpsManager.MODE_IGNORED,
-                null /*accessTimes*/, null /*rejectTimes*/, null /*durations*/,
-                null /* proxyUids */, null /* proxyPackages */));
+                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_IGNORED, new Pair[0]));
         mAllowedPackageOps = new AppOpsManager.PackageOps(
                 ALLOWED_PACKAGE_NAME, ALLOWED_UID, allowOps);
         mRestrictedPackageOps = new AppOpsManager.PackageOps(

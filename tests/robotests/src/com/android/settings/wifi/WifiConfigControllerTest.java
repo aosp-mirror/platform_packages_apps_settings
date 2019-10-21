@@ -557,4 +557,12 @@ public class WifiConfigControllerTest {
 
         assertThat(firstChild).isEqualTo(hiddenSettingLayout);
     }
+
+    @Test
+    public void getAdvancedOptionContentDescription_whenViewInitialed_shouldBeCorrect() {
+        final CheckBox advButton = mView.findViewById(R.id.wifi_advanced_togglebox);
+
+        assertThat(advButton.getContentDescription()).isEqualTo(
+                mContext.getString(R.string.wifi_advanced_toggle_description));
+    }
 }

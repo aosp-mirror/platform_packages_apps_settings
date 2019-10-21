@@ -38,7 +38,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -63,7 +62,7 @@ public class PanelFragmentTest {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
         mFakePanelContent = new FakePanelContent();
-        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any(), any());
+        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
 
         mActivity = spy(Robolectric.buildActivity(FakeSettingsPanelActivity.class).setup().get());
 
@@ -83,7 +82,7 @@ public class PanelFragmentTest {
                 new LinearLayout(mContext), null);
         PanelSlicesLoaderCountdownLatch countdownLatch =
                 mPanelFragment.mPanelSlicesLoaderCountdownLatch;
-        for (Uri sliecUri: mFakePanelContent.getSlices()) {
+        for (Uri sliecUri : mFakePanelContent.getSlices()) {
             countdownLatch.markSliceLoaded(sliecUri);
         }
 

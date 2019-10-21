@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.util.Pair;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -145,7 +146,6 @@ public class MockLocationAppPreferenceControllerTest {
     }
 
     private AppOpsManager.OpEntry createOpEntry(int opMode) {
-        return new OpEntry(0, false, opMode, null /*accessTimes*/, null /*rejectTimes*/,
-            null /*durations*/, null /* proxyUids */, null /* proxyPackages */);
+        return new OpEntry(0, opMode, new Pair[0]);
     }
 }

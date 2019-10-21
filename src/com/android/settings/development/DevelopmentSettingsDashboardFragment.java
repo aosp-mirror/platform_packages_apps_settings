@@ -53,6 +53,8 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,7 +168,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         super.onActivityCreated(icicle);
         // Apply page-level restrictions
         setIfOnlyAvailableForAdmins(true);
-        if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
+        if (isUiRestricted() || !WizardManagerHelper.isDeviceProvisioned(getActivity())) {
             // Block access to developer options if the user is not the owner, if user policy
             // restricts it, or if the device has not been provisioned
             mIsAvailable = false;
