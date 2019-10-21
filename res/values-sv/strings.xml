@@ -455,7 +455,7 @@
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Lås upp telefonen med Ansiktslås"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingeravtryck"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Hantera fingeravtryck"</string>
-    <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Använd avtryck för"</string>
+    <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Använd fingeravtryck för"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Lägg till fingeravtryck"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"skärmlås"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
@@ -4222,7 +4222,7 @@
     <string name="low_label" msgid="1679136861385616813">"Låg"</string>
     <string name="high_label" msgid="7278863493316447831">"Hög"</string>
     <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Om känsligheten höjs kan konflikter med apprörelser längs skärmens kant uppstå."</string>
-    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Känslighet för baksidan"</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Känslighet för tillbaka-rörelsen"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Tryck snabbt två gånger för att kolla mobilen"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tryck snabbt två gånger för att kolla surfplattan"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tryck snabbt två gånger för att kolla enheten"</string>
@@ -4460,6 +4460,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Föredraget nätverksläge: LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Föredraget nätverksläge: GSM/WCDMA/LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Föredraget nätverksläge: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"Föredraget nätverksläge: LTE/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Föredraget nätverksläge: globalt"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Föredraget nätverksläge: LTE/WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Föredraget nätverksläge: LTE/GSM/UMTS"</string>
@@ -4474,6 +4475,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Föredraget nätverksläge: LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Föredraget nätverksläge: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Föredraget nätverksläge: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"Föredraget nätverksläge: endast NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"Föredraget nätverksläge: NR/LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"Föredraget nätverksläge: NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"Föredraget nätverksläge: NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"Föredraget nätverksläge: NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"Föredraget nätverksläge: NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"Föredraget nätverksläge: NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"Föredraget nätverksläge: NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"Föredraget nätverksläge: NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"Föredraget nätverksläge: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"Föredraget nätverksläge: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (rekommenderas)"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE (rekommenderas)"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G (rekommenderas)"</string>
     <string name="network_global" msgid="959947774831178632">"Globalt"</string>

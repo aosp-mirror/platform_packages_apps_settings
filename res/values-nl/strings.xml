@@ -2969,7 +2969,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"De gespreksgeschiedenis wordt met deze gebruiker gedeeld."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Telefoonoproepen en sms inschakelen?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"De gespreks- en sms-geschiedenis wordt gedeeld met deze gebruiker."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Informatie bij nood"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Noodinformatie"</string>
     <string name="emergency_info_summary" msgid="5062945162967838521">"Informatie en contacten voor <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Apps en content toestaan"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Apps met beperkingen"</string>
@@ -4239,7 +4239,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Tik om apparaat te controleren"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Tik op je scherm om de tijd, meldingen en andere informatie te bekijken."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Over vingerafdruksensor vegen voor meldingen"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Over sensor vegen"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Over vingerafdruk vegen"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Als je je meldingen wilt bekijken, veeg je omlaag over de vingerafdruksensor achter op je telefoon."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Als je je meldingen wilt bekijken, veeg je omlaag over de vingerafdruksensor achter op je tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Als je je meldingen wilt bekijken, veeg je omlaag over de vingerafdruksensor achter op je apparaat."</string>
@@ -4460,6 +4460,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Voorkeursnetwerkmodus: LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Voorkeursnetwerkmodus: GSM/WCDMA/LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Voorkeursnetwerkmodus: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"Voorkeursnetwerkmodus: LTE/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Voorkeursnetwerkmodus: Wereldwijd"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Voorkeursnetwerkmodus: LTE / WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Voorkeursmodus voor netwerk: LTE/GSM/UMTS"</string>
@@ -4474,6 +4475,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Voorkeursnetwerkmodus: LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Voorkeursnetwerkmodus: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Voorkeursnetwerkmodus: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"Voorkeursnetwerkmodus: alleen NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"Voorkeursnetwerkmodus: NR/LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"Voorkeursnetwerkmodus: NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"Voorkeursnetwerkmodus: NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"Voorkeursnetwerkmodus: NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"Voorkeursnetwerkmodus: NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"Voorkeursnetwerkmodus: NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"Voorkeursnetwerkmodus: NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"Voorkeursnetwerkmodus: NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"Voorkeursnetwerkmodus: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"Voorkeursnetwerkmodus: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (aanbevolen)"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE (aanbevolen)"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G (aanbevolen)"</string>
     <string name="network_global" msgid="959947774831178632">"Algemeen"</string>
