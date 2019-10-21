@@ -288,32 +288,43 @@ public class QrCamera extends Handler {
                 for (int i = 0; i < numberOfCameras; ++i) {
                     Camera.getCameraInfo(i, cameraInfo);
                     if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
+                        releaseCamera();
                         mCamera = Camera.open(i);
-                        mCamera.setPreviewTexture(surface);
                         mCameraOrientation = cameraInfo.orientation;
                         break;
                     }
                 }
-                if (mCamera == null) {
-                    Log.e(TAG, "Cannot find available back camera.");
-                    mScannerCallback.handleCameraFailure();
-                    return false;
-                }
-                setCameraParameter();
-                setTransformationMatrix();
-                if (!startPreview()) {
-                    Log.e(TAG, "Error to init Camera");
-                    mCamera = null;
-                    mScannerCallback.handleCameraFailure();
-                    return false;
-                }
-                return true;
-            } catch (IOException e) {
-                Log.e(TAG, "Error to init Camera");
+            } catch (RuntimeException e) {
+                Log.e(TAG, "Fail to open camera: " + e);
                 mCamera = null;
                 mScannerCallback.handleCameraFailure();
                 return false;
             }
+
+            try {
+                if (mCamera == null) {
+                    throw new IOException("Cannot find available back camera");
+                }
+                mCamera.setPreviewTexture(surface);
+                setCameraParameter();
+                setTransformationMatrix();
+                if (!startPreview()) {
+                    throw new IOException("Lost contex");
+                }
+            } catch (IOException ioe) {
+                Log.e(TAG, "Fail to startPreview camera: " + ioe);
+                mCamera = null;
+                mScannerCallback.handleCameraFailure();
+                return false;
+            }
+            return true;
+        }
+    }
+
+    private void releaseCamera() {
+        if (mCamera != null) {
+            mCamera.release();
+            mCamera = null;
         }
     }
 
