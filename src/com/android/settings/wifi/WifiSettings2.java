@@ -66,7 +66,7 @@ import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
-import com.android.wifitrackerlib.WifiTracker2;
+import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.time.Clock;
 import java.time.ZoneOffset;
@@ -78,13 +78,13 @@ import java.util.List;
  */
 @SearchIndexable
 public class WifiSettings2 extends RestrictedSettingsFragment
-        implements Indexable, WifiTracker2.WifiTrackerCallback {
+        implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback {
 
     private static final String TAG = "WifiSettings2";
 
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;
-    // Interval between initiating WifiTracker2 scans
+    // Interval between initiating WifiPickerTracker scans
     private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
     @VisibleForTesting
@@ -103,7 +103,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
     private static boolean isVerboseLoggingEnabled() {
-        return WifiTracker2.sVerboseLogging || Log.isLoggable(TAG, Log.VERBOSE);
+        return WifiPickerTracker.isVerboseLoggingEnabled();
     }
 
     private final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
@@ -127,9 +127,9 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     private WifiEnabler mWifiEnabler;
 
-    // Worker thread used for WifiTracker2 work
+    // Worker thread used for WifiPickerTracker work
     private HandlerThread mWorkerThread;
-    private WifiTracker2 mWifiTracker2;
+    private WifiPickerTracker mWifiPickerTracker;
 
     private WifiDialog mDialog;
 
@@ -218,7 +218,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 return SystemClock.elapsedRealtime();
             }
         };
-        mWifiTracker2 = new WifiTracker2(getSettingsLifecycle(), context,
+        mWifiPickerTracker = new WifiPickerTracker(getSettingsLifecycle(), context,
                 context.getSystemService(WifiManager.class),
                 context.getSystemService(ConnectivityManager.class),
                 context.getSystemService(NetworkScoreManager.class),
@@ -410,7 +410,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         if (mIsRestricted) {
             return;
         }
-        final int wifiState = mWifiTracker2.getWifiState();
+        final int wifiState = mWifiPickerTracker.getWifiState();
 
         if (isVerboseLoggingEnabled()) {
             Log.i(TAG, "onWifiStateChanged called with wifi state: " + wifiState);
@@ -447,14 +447,24 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         updateWifiEntryPreferencesDelayed();
     }
 
+    @Override
+    public void onNumSavedNetworksChanged() {
+        // TODO(b/70983952): Update the num saved networks preference text here
+    }
+
+    @Override
+    public void onNumSavedSubscriptionsChanged() {
+        // TODO(b/70983952): Update the num saved networks preference text here
+    }
+
     /**
-     * Updates WifiEntries from {@link WifiManager#getScanResults()}. Adds a delay to have
+     * Updates WifiEntries from {@link WifiPickerTracker#getWifiEntries()}. Adds a delay to have
      * progress bar displayed before starting to modify entries.
      */
     private void updateWifiEntryPreferencesDelayed() {
         // Safeguard from some delayed event handling
         if (getActivity() != null && !mIsRestricted &&
-                mWifiTracker2.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
+                mWifiPickerTracker.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
             final View view = getView();
             final Handler handler = view.getHandler();
             if (handler != null && handler.hasCallbacks(mUpdateWifiEntryPreferencesRunnable)) {
@@ -467,7 +477,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     private void updateWifiEntryPreferences() {
         // in case state has changed
-        if (mWifiTracker2.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
+        if (mWifiPickerTracker.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
             return;
         }
 
@@ -478,7 +488,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         int index = 0;
         cacheRemoveAllPrefs(mWifiEntryPreferenceCategory);
-        List<WifiEntry> wifiEntries = mWifiTracker2.getWifiEntries();
+        List<WifiEntry> wifiEntries = mWifiPickerTracker.getWifiEntries();
         for (WifiEntry wifiEntry : wifiEntries) {
             hasAvailableWifiEntries = true;
 
