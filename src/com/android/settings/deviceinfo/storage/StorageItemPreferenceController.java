@@ -26,6 +26,7 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -37,6 +38,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.deviceinfo.PrivateVolumeSettings.SystemInfoFragment;
@@ -389,10 +391,18 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     }
 
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
-        final Bundle args = new Bundle(2 + additionalCapacity);
-        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
-        args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
-        return args;
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE)) {
+            final Bundle args = new Bundle(3 + additionalCapacity);
+            args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
+            args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
+            args.putBoolean(ManageApplications.EXTRA_PERSONAL_ONLY, !mIsWorkProfile);
+            return args;
+        } else {
+            final Bundle args = new Bundle(2 + additionalCapacity);
+            args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
+            args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
+            return args;
+        }
     }
 
     private Intent getFilesIntent() {

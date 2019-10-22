@@ -21,6 +21,9 @@ import static android.content.Intent.EXTRA_USER_ID;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
+import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_PERSONAL_ONLY;
+import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ONLY;
+
 import android.annotation.Nullable;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -81,6 +84,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,6 +105,7 @@ import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
@@ -1058,5 +1063,28 @@ public final class Utils extends com.android.settingslib.Utils {
         if (lifecycle != null && scrollView != null) {
             ActionBarShadowController.attachToView(activity, lifecycle, scrollView);
         }
+    }
+
+    /**
+     * Return correct target fragment based on argument
+     *
+     * @param activity     the activity target fragment will be launched.
+     * @param fragmentName initial target fragment name.
+     * @param args         fragment launch arguments.
+     */
+    public static Fragment getTargetFragment(Activity activity, String fragmentName, Bundle args) {
+        Fragment f = null;
+        final boolean isWorkOnly = args == null ? false : args.getBoolean(EXTRA_WORK_ONLY);
+        final boolean isPersonalOnly = args == null ? false : args.getBoolean(EXTRA_PERSONAL_ONLY);
+        if (FeatureFlagUtils.isEnabled(activity, FeatureFlags.PERSONAL_WORK_PROFILE)
+                && UserManager.get(activity).getUserProfiles().size() > 1
+                && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
+                && !isWorkOnly && !isPersonalOnly) {
+            f = Fragment.instantiate(activity, ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName),
+                    args);
+        } else {
+            f = Fragment.instantiate(activity, fragmentName, args);
+        }
+        return f;
     }
 }
