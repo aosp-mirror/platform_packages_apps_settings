@@ -992,6 +992,14 @@ public class WifiDetailPreferenceControllerTest {
         updateNetworkCapabilities(nc);
         inOrder.verify(mockHeaderController).setSummary(summary);
 
+        // UI will be refreshed when private DNS is broken.
+        summary = "Private DNS server cannot be accessed";
+        when(mockAccessPoint.getSettingsSummary(true /* convertSavedAsDisconnected */))
+                .thenReturn(summary);
+        nc.setPrivateDnsBroken(true);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockHeaderController).setSummary(summary);
+
         // UI will be refreshed when device connects to a partial connectivity network.
         summary = "Limited connection";
         when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
