@@ -1161,7 +1161,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 (mWifiConfig.macRandomizationSetting
                         == WifiConfiguration.RANDOMIZATION_PERSISTENT)
                         ? R.string.wifi_advanced_randomized_mac_address_title
-                        : R.string.wifi_advanced_factory_mac_address_title);
+                        : R.string.wifi_advanced_device_mac_address_title);
 
     }
 }
