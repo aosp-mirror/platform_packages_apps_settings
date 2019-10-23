@@ -159,7 +159,7 @@ public class SliceBuilderUtils {
                 .setClass(context, SliceBroadcastReceiver.class)
                 .putExtra(EXTRA_SLICE_KEY, data.getKey());
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     /**

@@ -58,9 +58,11 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.slice.SliceViewManager;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -118,6 +120,9 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         return cursor;
     }
 
+    /**
+     * Gets a Cursor of RawData. We use those data in search indexing time
+     */
     @Override
     public Cursor queryRawData(String[] projection) {
         MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
@@ -158,6 +163,38 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             cursor.addRow(ref);
         }
 
+        return cursor;
+    }
+
+    /**
+     * Gets a Cursor of dynamic Raw data similar to queryRawData. We use those data in search query
+     * time
+     */
+    @Nullable
+    @Override
+    public Cursor queryDynamicRawData(String[] projection) {
+        final Context context = getContext();
+        final DashboardFeatureProvider dashboardFeatureProvider =
+                FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
+
+        final MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
+        for (DashboardCategory category : dashboardFeatureProvider.getAllCategories()) {
+            for (Tile tile : category.getTiles()) {
+                final String packageName = tile.getPackageName();
+                if (!context.getPackageName().equals(packageName)) {
+                    continue;
+                }
+                final Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];
+                ref[COLUMN_INDEX_RAW_TITLE] = tile.getTitle(context);
+                ref[COLUMN_INDEX_RAW_SUMMARY_ON] = tile.getSummary(context);
+                ref[COLUMN_INDEX_RAW_SUMMARY_OFF] = tile.getSummary(context);
+                ref[COLUMN_INDEX_RAW_KEY] = dashboardFeatureProvider.getDashboardKeyForTile(
+                        tile);
+                ref[COLUMN_INDEX_RAW_CLASS_NAME] = CATEGORY_KEY_TO_PARENT_MAP.get(
+                        tile.getCategory());
+                cursor.addRow(ref);
+            }
+        }
         return cursor;
     }
 
