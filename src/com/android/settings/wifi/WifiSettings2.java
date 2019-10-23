@@ -62,9 +62,7 @@ import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
-import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
-import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -129,7 +127,9 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     // Worker thread used for WifiPickerTracker work
     private HandlerThread mWorkerThread;
-    private WifiPickerTracker mWifiPickerTracker;
+
+    @VisibleForTesting
+    WifiPickerTracker mWifiPickerTracker;
 
     private WifiDialog mDialog;
 
@@ -449,12 +449,12 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     @Override
     public void onNumSavedNetworksChanged() {
-        // TODO(b/70983952): Update the num saved networks preference text here
+        setAdditionalSettingsSummaries();
     }
 
     @Override
     public void onNumSavedSubscriptionsChanged() {
-        // TODO(b/70983952): Update the num saved networks preference text here
+        setAdditionalSettingsSummaries();
     }
 
     /**
@@ -557,36 +557,30 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                         ? R.string.wifi_configure_settings_preference_summary_wakeup_on
                         : R.string.wifi_configure_settings_preference_summary_wakeup_off));
 
-        final List<AccessPoint> savedNetworks =
-                WifiSavedConfigUtils.getAllConfigs(getContext(), mWifiManager);
-        final int numSavedNetworks = (savedNetworks != null) ? savedNetworks.size() : 0;
-        mSavedNetworksPreference.setVisible(numSavedNetworks > 0);
-        if (numSavedNetworks > 0) {
+        final int numSavedNetworks = mWifiPickerTracker.getNumSavedNetworks();
+        final int numSavedSubscriptions = mWifiPickerTracker.getNumSavedSubscriptions();
+        if (numSavedNetworks + numSavedSubscriptions > 0) {
+            mSavedNetworksPreference.setVisible(true);
             mSavedNetworksPreference.setSummary(
-                    getSavedNetworkSettingsSummaryText(savedNetworks, numSavedNetworks));
+                    getSavedNetworkSettingsSummaryText(numSavedNetworks, numSavedSubscriptions));
+        } else {
+            mSavedNetworksPreference.setVisible(false);
         }
     }
 
     private String getSavedNetworkSettingsSummaryText(
-            List<AccessPoint> savedNetworks, int numSavedNetworks) {
-        int numSavedPasspointNetworks = 0;
-        for (AccessPoint savedNetwork : savedNetworks) {
-            if (savedNetwork.isPasspointConfig() || savedNetwork.isPasspoint()) {
-                numSavedPasspointNetworks++;
-            }
-        }
-        final int numSavedNormalNetworks = numSavedNetworks - numSavedPasspointNetworks;
-
-        if (numSavedNetworks == numSavedNormalNetworks) {
+            int numSavedNetworks, int numSavedSubscriptions) {
+        if (numSavedSubscriptions == 0) {
             return getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
-                    numSavedNormalNetworks, numSavedNormalNetworks);
-        } else if (numSavedNetworks == numSavedPasspointNetworks) {
+                    numSavedNetworks, numSavedNetworks);
+        } else if (numSavedNetworks == 0) {
             return getResources().getQuantityString(
                     R.plurals.wifi_saved_passpoint_access_points_summary,
-                    numSavedPasspointNetworks, numSavedPasspointNetworks);
+                    numSavedSubscriptions, numSavedSubscriptions);
         } else {
+            final int numTotalEntries = numSavedNetworks + numSavedSubscriptions;
             return getResources().getQuantityString(R.plurals.wifi_saved_all_access_points_summary,
-                    numSavedNetworks, numSavedNetworks);
+                    numTotalEntries, numTotalEntries);
         }
     }
 
