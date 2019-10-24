@@ -40,9 +40,12 @@ public class RestrictedEncryptionPreferenceControllerTest {
     private Context mContext;
     private ShadowUserManager mUserManager;
     private CredentialStoragePreferenceController mCredentialStoragePreferenceController;
-    private InstallCredentialsPreferenceController mInstallCredentialsPreferenceController;
+    private InstallCertificatePreferenceController mInstallCertificatePreferenceController;
     private ResetCredentialsPreferenceController mResetCredentialsPreferenceController;
     private UserCredentialsPreferenceController mUserCredentialsPreferenceController;
+    private InstallCaCertificatePreferenceController mInstallCaCertificatePreferenceController;
+    private InstallUserCertificatePreferenceController mInstallUserCertificatePreferenceController;
+    private InstallWifiCertificatePreferenceController mInstallWifiCertificatePreferenceController;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
 
@@ -53,21 +56,30 @@ public class RestrictedEncryptionPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mCredentialStoragePreferenceController =
                 new CredentialStoragePreferenceController(mContext);
-        mInstallCredentialsPreferenceController =
-                new InstallCredentialsPreferenceController(mContext);
+        mInstallCertificatePreferenceController =
+                new InstallCertificatePreferenceController(mContext);
         mResetCredentialsPreferenceController =
                 new ResetCredentialsPreferenceController(mContext, mLifecycle);
         mUserCredentialsPreferenceController =
                 new UserCredentialsPreferenceController(mContext);
+        mInstallCaCertificatePreferenceController =
+                new InstallCaCertificatePreferenceController(mContext);
+        mInstallUserCertificatePreferenceController =
+                new InstallUserCertificatePreferenceController(mContext);
+        mInstallWifiCertificatePreferenceController =
+                new InstallWifiCertificatePreferenceController(mContext);
         mUserManager = ShadowUserManager.getShadow();
     }
 
     @Test
     public void isAvailable_noRestriction_shouldReturnTrue() {
         assertThat(mCredentialStoragePreferenceController.isAvailable()).isTrue();
-        assertThat(mInstallCredentialsPreferenceController.isAvailable()).isTrue();
+        assertThat(mInstallCertificatePreferenceController.isAvailable()).isTrue();
         assertThat(mResetCredentialsPreferenceController.isAvailable()).isTrue();
         assertThat(mUserCredentialsPreferenceController.isAvailable()).isTrue();
+        assertThat(mInstallCaCertificatePreferenceController.isAvailable()).isTrue();
+        assertThat(mInstallUserCertificatePreferenceController.isAvailable()).isTrue();
+        assertThat(mInstallWifiCertificatePreferenceController.isAvailable()).isTrue();
     }
 
     @Test
@@ -75,8 +87,11 @@ public class RestrictedEncryptionPreferenceControllerTest {
         mUserManager.addBaseUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS);
 
         assertThat(mCredentialStoragePreferenceController.isAvailable()).isFalse();
-        assertThat(mInstallCredentialsPreferenceController.isAvailable()).isFalse();
+        assertThat(mInstallCertificatePreferenceController.isAvailable()).isFalse();
         assertThat(mResetCredentialsPreferenceController.isAvailable()).isFalse();
         assertThat(mUserCredentialsPreferenceController.isAvailable()).isFalse();
+        assertThat(mInstallCaCertificatePreferenceController.isAvailable()).isFalse();
+        assertThat(mInstallUserCertificatePreferenceController.isAvailable()).isFalse();
+        assertThat(mInstallWifiCertificatePreferenceController.isAvailable()).isFalse();
     }
 }
