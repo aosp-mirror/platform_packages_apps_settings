@@ -92,7 +92,8 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     public int getAvailabilityStatus() {
         final boolean advancedEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, true);
-        final boolean untetheredHeadset = BluetoothUtils.getBooleanMetaData(
+        final boolean untetheredHeadset = mCachedDevice != null
+                && BluetoothUtils.getBooleanMetaData(
                 mCachedDevice.getDevice(), BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
         return advancedEnabled && untetheredHeadset ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }

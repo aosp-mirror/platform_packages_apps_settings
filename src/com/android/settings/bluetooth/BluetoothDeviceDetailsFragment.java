@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.DeviceConfig;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -107,12 +108,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mDeviceAddress = getArguments().getString(KEY_DEVICE_ADDRESS);
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
+        super.onAttach(context);
         if (mCachedDevice == null) {
             // Close this page if device is null with invalid device mac address
+            Log.w(TAG, "onAttach() CachedDevice is null!");
             finish();
             return;
         }
-        super.onAttach(context);
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
