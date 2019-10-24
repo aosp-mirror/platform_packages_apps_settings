@@ -19,6 +19,7 @@ package com.android.settings.testutils.shadow;
 import android.content.Context;
 import android.content.IContentProvider;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Pair;
 
 import com.android.settings.R;
@@ -35,6 +36,9 @@ public class ShadowTileUtils {
 
     public static final String MOCK_SUMMARY = "summary";
 
+    private static boolean sChecked;
+    private static Bundle sResult;
+
     @Implementation
     protected static String getTextFromUri(Context context, Uri uri,
             Map<String, IContentProvider> providerMap, String key) {
@@ -45,5 +49,30 @@ public class ShadowTileUtils {
     protected static Pair<String, Integer> getIconFromUri(Context context, String packageName,
             Uri uri, Map<String, IContentProvider> providerMap) {
         return Pair.create(RuntimeEnvironment.application.getPackageName(), R.drawable.ic_settings_accent);
+    }
+
+    @Implementation
+    public static boolean getBooleanFromUri(Context context, Uri uri,
+            Map<String, IContentProvider> providerMap, String key) {
+        return sChecked;
+    }
+
+    @Implementation
+    public static Bundle putBooleanToUri(Context context, Uri uri,
+            Map<String, IContentProvider> providerMap, String key, boolean value) {
+        sChecked = value;
+        return sResult;
+    }
+
+    public static boolean getProviderChecked() {
+        return sChecked;
+    }
+
+    public static void setProviderChecked(boolean value) {
+        sChecked = value;
+    }
+
+    public static void setResultBundle(Bundle result) {
+        sResult = result;
     }
 }
