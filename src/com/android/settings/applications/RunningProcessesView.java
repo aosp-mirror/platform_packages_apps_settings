@@ -164,11 +164,11 @@ public class RunningProcessesView extends FrameLayout
 
         public ViewHolder(View v) {
             rootView = v;
-            icon = (ImageView)v.findViewById(R.id.icon);
-            name = (TextView)v.findViewById(R.id.name);
-            description = (TextView)v.findViewById(R.id.description);
-            size = (TextView)v.findViewById(R.id.size);
-            uptime = (TextView)v.findViewById(R.id.uptime);
+            icon = v.findViewById(android.R.id.icon);
+            name = v.findViewById(android.R.id.title);
+            description = v.findViewById(android.R.id.summary);
+            size = v.findViewById(R.id.widget_summary1);
+            uptime = v.findViewById(R.id.widget_summary2);
             v.setTag(this);
         }
 
