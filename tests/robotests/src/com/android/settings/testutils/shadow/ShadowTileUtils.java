@@ -58,7 +58,7 @@ public class ShadowTileUtils {
     }
 
     @Implementation
-    public static Bundle putBooleanToUri(Context context, Uri uri,
+    public static Bundle putBooleanToUriAndGetResult(Context context, Uri uri,
             Map<String, IContentProvider> providerMap, String key, boolean value) {
         sChecked = value;
         return sResult;

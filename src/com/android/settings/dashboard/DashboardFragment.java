@@ -38,6 +38,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -453,7 +454,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     Preference createPreference(Tile tile) {
         return tile instanceof ProviderTile
                 ? new SwitchPreference(getPrefContext())
-                : new Preference(getPrefContext());
+                : tile.hasSwitch()
+                        ? new MasterSwitchPreference(getPrefContext())
+                        : new Preference(getPrefContext());
     }
 
     @VisibleForTesting
