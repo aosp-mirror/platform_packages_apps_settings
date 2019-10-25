@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package com.android.settings.accounts;
+package com.android.settings.dashboard.profileselector;
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.accounts.AccountPersonalDashboardFragment;
+import com.android.settings.accounts.AccountWorkProfileDashboardFragment;
 
 /**
  * Account Setting page for personal/managed profile.
  */
-public class AccountProfileSelectFragment extends ProfileSelectFragment {
+public class ProfileSelectAccountFragment extends ProfileSelectFragment {
 
     @Override
     public Fragment[] getFragments() {
