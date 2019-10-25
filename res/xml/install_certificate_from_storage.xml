@@ -28,11 +28,8 @@
             android:title="@string/ca_certificate">
 
             <intent
-                android:action="android.credentials.INSTALL"
-                android:targetPackage="com.android.certinstaller"
-                android:targetClass="com.android.certinstaller.CertInstallerMain">
-                <!-- Same value as CERTIFICATE_USAGE_CA in keystore/java/android/security/Credentials.java -->
-                <extra android:name="certificate_install_usage" android:value="ca"/>
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.security.InstallCaCertificateWarning">
             </intent>
 
         </Preference>
