@@ -22,21 +22,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.google.android.material.tabs.TabLayout
+        android:background="@android:color/transparent"
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorColor="@*android:color/accent_device_default"
+        app:tabSelectedTextColor="@*android:color/accent_device_default"
+        app:tabTextColor="?android:attr/textColorSecondary" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"/>
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.tabs.TabLayout
-            android:background="@android:color/transparent"
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabMaxWidth="0dp"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
-            app:tabIndicatorColor="@*android:color/accent_device_default"
-            app:tabSelectedTextColor="@*android:color/accent_device_default"
-            app:tabTextColor="?android:attr/textColorSecondary" />
     </androidx.viewpager.widget.ViewPager>
 </LinearLayout>

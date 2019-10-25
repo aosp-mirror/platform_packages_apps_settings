@@ -19,9 +19,8 @@ package com.android.settings.dashboard.profileselector;
 import android.util.ArrayMap;
 
 import com.android.settings.accounts.AccountDashboardFragment;
-import com.android.settings.accounts.AccountProfileSelectFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.applications.manageapplications.ProfileSelectManageApplications;
+import com.android.settings.deviceinfo.StorageDashboardFragment;
 
 import java.util.Map;
 
@@ -39,8 +38,10 @@ public class ProfileFragmentBridge {
     static {
         FRAGMENT_MAP = new ArrayMap<>();
         FRAGMENT_MAP.put(AccountDashboardFragment.class.getName(),
-                AccountProfileSelectFragment.class.getName());
+                ProfileSelectAccountFragment.class.getName());
         FRAGMENT_MAP.put(ManageApplications.class.getName(),
                 ProfileSelectManageApplications.class.getName());
+        FRAGMENT_MAP.put(StorageDashboardFragment.class.getName(),
+                ProfileSelectStorageFragment.class.getName());
     }
 }
