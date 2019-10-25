@@ -1367,7 +1367,7 @@ public class WifiConfigController implements TextWatcher,
                         mIpAddressView.setText(
                                 staticConfig.ipAddress.getAddress().getHostAddress());
                         mNetworkPrefixLengthView.setText(Integer.toString(staticConfig.ipAddress
-                                .getNetworkPrefixLength()));
+                                .getPrefixLength()));
                     }
 
                     if (staticConfig.gateway != null) {
