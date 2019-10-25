@@ -18,14 +18,19 @@ package com.android.settings.wifi.qrcode;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
-import android.util.Size;
+import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
+import android.hardware.Camera.Size;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
@@ -33,15 +38,18 @@ import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.HybridBinarizer;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
 public class QrCameraTest {
@@ -58,12 +66,12 @@ public class QrCameraTest {
 
     private class ScannerTestCallback implements QrCamera.ScannerCallback {
         @Override
-        public Size getViewSize() {
-            return new Size(0, 0);
+        public android.util.Size getViewSize() {
+            return new android.util.Size(0, 0);
         }
 
         @Override
-        public Rect getFramePosition(Size previewSize, int cameraOrientation) {
+        public Rect getFramePosition(android.util.Size previewSize, int cameraOrientation) {
             return new Rect(0,0,0,0);
         }
 
@@ -146,5 +154,23 @@ public class QrCameraTest {
         }
 
         assertThat(mQrCode).isEqualTo(unicodeTest);
+    }
+
+    @Test
+    public void setCameraParameter_shouldSetParameters() {
+        mCamera.mCamera = mock(Camera.class);
+        Parameters parameters = mock(Camera.Parameters.class);
+        Size size = mCamera.mCamera.new Size(1920, 1440);
+        List<Camera.Size> sizes = new ArrayList<>(Arrays.asList(size));
+        when(parameters.getPreviewSize()).thenReturn(size);
+        when(parameters.getSupportedPreviewSizes()).thenReturn(sizes);
+        when(parameters.getSupportedPictureSizes()).thenReturn(sizes);
+        when(mCamera.mCamera.getParameters()).thenReturn(parameters);
+
+        mCamera.setCameraParameter();
+
+        verify(mCamera.mParameters).setPreviewSize(anyInt(), anyInt());
+        verify(mCamera.mParameters).setPictureSize(anyInt(), anyInt());
+        verify(mCamera.mCamera).setParameters(mCamera.mParameters);
     }
 }
