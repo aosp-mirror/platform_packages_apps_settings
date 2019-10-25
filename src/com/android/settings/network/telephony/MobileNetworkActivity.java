@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.view.Menu;
@@ -77,6 +78,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     };
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        updateSubscriptions(null);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -86,12 +94,17 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
             setContentView(R.layout.mobile_network_settings_container);
         }
         setActionBar(findViewById(R.id.mobile_action_bar));
-        mPhoneChangeReceiver = new PhoneChangeReceiver(this, () -> {
-            if (mCurSubscriptionId != SUB_ID_NULL) {
-                // When the radio changes (ex: CDMA->GSM), refresh the fragment.
-                // This is very rare.
+        mPhoneChangeReceiver = new PhoneChangeReceiver(this, new PhoneChangeReceiver.Client() {
+            @Override
+            public void onPhoneChange() {
+                // When the radio or carrier config changes (ex: CDMA->GSM), refresh the fragment.
                 switchFragment(new MobileNetworkSettings(), mCurSubscriptionId,
                         true /* forceUpdate */);
+            }
+
+            @Override
+            public int getSubscriptionId() {
+                return mCurSubscriptionId;
             }
         });
         mSubscriptionManager = getSystemService(SubscriptionManager.class);
@@ -243,14 +256,12 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
 
     @VisibleForTesting
     static class PhoneChangeReceiver extends BroadcastReceiver {
-        private static final IntentFilter RADIO_TECHNOLOGY_CHANGED_FILTER = new IntentFilter(
-                TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
-
         private Context mContext;
         private Client mClient;
 
         interface Client {
             void onPhoneChange();
+            int getSubscriptionId();
         }
 
         public PhoneChangeReceiver(Context context, Client client) {
@@ -259,7 +270,10 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         }
 
         public void register() {
-            mContext.registerReceiver(this, RADIO_TECHNOLOGY_CHANGED_FILTER);
+            final IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
+            intentFilter.addAction(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
+            mContext.registerReceiver(this, intentFilter);
         }
 
         public void unregister() {
@@ -268,9 +282,17 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (!isInitialStickyBroadcast()) {
-                mClient.onPhoneChange();
+            if (isInitialStickyBroadcast()) {
+                return;
             }
+            if (intent.getAction().equals(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED)) {
+                if (!intent.hasExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX) ||
+                        intent.getIntExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX, -1)
+                                != mClient.getSubscriptionId()) {
+                    return;
+                }
+            }
+            mClient.onPhoneChange();
         }
     }
 }

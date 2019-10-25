@@ -22,7 +22,10 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -31,6 +34,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -40,6 +44,8 @@ import android.view.View;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.view.menu.ContextMenuBuilder;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.SubscriptionUtil;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -159,19 +165,56 @@ public class MobileNetworkActivityTest {
     @Test
     public void phoneChangeReceiver_ignoresStickyBroadcastFromBeforeRegistering() {
         Activity activity = Robolectric.setupActivity(Activity.class);
-        final int[] onChangeCallbackCount = {0};
+        MobileNetworkActivity.PhoneChangeReceiver.Client client = mock(
+                MobileNetworkActivity.PhoneChangeReceiver.Client.class);
         MobileNetworkActivity.PhoneChangeReceiver receiver =
-                new MobileNetworkActivity.PhoneChangeReceiver(activity, () -> {
-                    onChangeCallbackCount[0]++;
-                });
+                new MobileNetworkActivity.PhoneChangeReceiver(activity, client);
         Intent intent = new Intent(TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
         activity.sendStickyBroadcast(intent);
 
         receiver.register();
-        assertThat(onChangeCallbackCount[0]).isEqualTo(0);
+        verify(client, never()).onPhoneChange();
 
         activity.sendStickyBroadcast(intent);
-        assertThat(onChangeCallbackCount[0]).isEqualTo(1);
+        verify(client, times(1)).onPhoneChange();
+    }
+
+    @Test
+    public void phoneChangeReceiver_ignoresCarrierConfigChangeForWrongSubscriptionId() {
+        Activity activity = Robolectric.setupActivity(Activity.class);
+
+        MobileNetworkActivity.PhoneChangeReceiver.Client client = mock(
+                MobileNetworkActivity.PhoneChangeReceiver.Client.class);
+        doReturn(2).when(client).getSubscriptionId();
+
+        MobileNetworkActivity.PhoneChangeReceiver receiver =
+                new MobileNetworkActivity.PhoneChangeReceiver(activity, client);
+
+        receiver.register();
+
+        Intent intent = new Intent(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
+        intent.putExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX, 3);
+        activity.sendBroadcast(intent);
+        verify(client, never()).onPhoneChange();
+    }
+
+    @Test
+    public void phoneChangeReceiver_dispatchesCarrierConfigChangeForCorrectSubscriptionId() {
+        Activity activity = Robolectric.setupActivity(Activity.class);
+
+        MobileNetworkActivity.PhoneChangeReceiver.Client client = mock(
+                MobileNetworkActivity.PhoneChangeReceiver.Client.class);
+        doReturn(2).when(client).getSubscriptionId();
+
+        MobileNetworkActivity.PhoneChangeReceiver receiver =
+                new MobileNetworkActivity.PhoneChangeReceiver(activity, client);
+
+        receiver.register();
+
+        Intent intent = new Intent(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
+        intent.putExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX, 2);
+        activity.sendBroadcast(intent);
+        verify(client).onPhoneChange();
     }
 
 
@@ -206,5 +249,20 @@ public class MobileNetworkActivityTest {
         mMobileNetworkActivity.saveInstanceState(bundle);
 
         assertThat(bundle.getInt(Settings.EXTRA_SUB_ID)).isEqualTo(PREV_SUB_ID);
+    }
+
+    @Test
+    public void onNewIntent_newSubscriptionId_fragmentReplaced() {
+        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
+
+        mSubscriptionInfos.add(mSubscriptionInfo);
+        mSubscriptionInfos.add(mSubscriptionInfo2);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(mSubscriptionInfos);
+        mMobileNetworkActivity.mCurSubscriptionId = PREV_SUB_ID;
+
+        final Intent newIntent = new Intent();
+        newIntent.putExtra(Settings.EXTRA_SUB_ID, CURRENT_SUB_ID);
+        mMobileNetworkActivity.onNewIntent(newIntent);
+        assertThat(mMobileNetworkActivity.mCurSubscriptionId).isEqualTo(CURRENT_SUB_ID);
     }
 }

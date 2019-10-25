@@ -18,16 +18,13 @@ package com.android.settings.biometrics.face;
 
 import static android.provider.Settings.Secure.FACE_UNLOCK_KEYGUARD_ENABLED;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.hardware.face.FaceManager;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 
 import com.android.settings.Utils;
-import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Preference controller for Face settings page controlling the ability to unlock the phone
@@ -86,14 +83,5 @@ public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPrefer
         } else {
             preference.setEnabled(true);
         }
-    }
-
-    private boolean adminDisabled() {
-        DevicePolicyManager dpm =
-                (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        return dpm != null &&
-                (dpm.getKeyguardDisabledFeatures(null, UserHandle.myUserId())
-                        & DevicePolicyManager.KEYGUARD_DISABLE_FACE)
-                        != 0;
     }
 }

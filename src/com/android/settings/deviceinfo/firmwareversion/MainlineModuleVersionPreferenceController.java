@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -28,9 +29,20 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.TimeZone;
+
 public class MainlineModuleVersionPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "MainlineModuleControl";
+    private static final List<String> VERSION_NAME_DATE_PATTERNS = Arrays.asList("yyyy-MM-dd",
+            "yyyy-MM");
 
     @VisibleForTesting
     static final Intent MODULE_UPDATE_INTENT =
@@ -81,6 +93,30 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
 
     @Override
     public CharSequence getSummary() {
-        return mModuleVersion;
+        if (TextUtils.isEmpty(mModuleVersion)) {
+            return mModuleVersion;
+        }
+
+        final Optional<Date> parsedDate = parseDateFromVersionName(mModuleVersion);
+        if (!parsedDate.isPresent()) {
+            Log.w("Could not parse mainline versionName (%s) as date.", mModuleVersion);
+            return mModuleVersion;
+        }
+
+        return DateFormat.getLongDateFormat(mContext).format(parsedDate.get());
+    }
+
+    private Optional<Date> parseDateFromVersionName(String text) {
+        for (String pattern : VERSION_NAME_DATE_PATTERNS) {
+            try {
+                final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern,
+                        Locale.getDefault());
+                simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return Optional.of(simpleDateFormat.parse(text));
+            } catch (ParseException e) {
+                // ignore and try next pattern
+            }
+        }
+        return Optional.empty();
     }
 }
