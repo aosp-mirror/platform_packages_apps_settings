@@ -1746,7 +1746,7 @@
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Displaysperre einrichten"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Richte zur Sicherheit ein Passwort ein"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Passwort festlegen, um Fingerabdruck zu verwenden"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Muster festlegen, um Fingerabdruck zu verwenden"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Fingerabdruck-Muster festlegen"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"Richte zur Sicherheit eine PIN ein"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"PIN festlegen, um Fingerabdruck zu verwenden"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"Richte zur Sicherheit ein Muster ein"</string>
@@ -4448,32 +4448,45 @@
     <string name="network_query_error" msgid="7487714485362598410">"Netzwerke nicht gefunden. Bitte versuch es noch einmal."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(nicht zulässig)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"Keine SIM-Karte"</string>
-    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Bevorzugter Netzwerkmodus: WCDMA"</string>
-    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Bevorzugter Netzwerkmodus: nur GSM"</string>
-    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Bevorzugter Netzwerkmodus: nur WCDMA"</string>
-    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Bevorzugter Netzwerkmodus: GSM/WCDMA"</string>
-    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Bevorzugter Netzwerkmodus: CDMA"</string>
-    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Bevorzugter Netzwerkmodus: CDMA/EvDo"</string>
-    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Bevorzugter Netzwerkmodus: nur CDMA"</string>
-    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Bevorzugter Netzwerkmodus: nur EvDo"</string>
-    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Bevorzugter Netzwerkmodus: CDMA/EvDo/GSM/WCDMA"</string>
-    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Bevorzugter Netzwerkmodus: LTE"</string>
-    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Bevorzugter Netzwerkmodus: GSM/WCDMA/LTE"</string>
-    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Bevorzugter Netzwerkmodus: CDMA+LTE/EVDO"</string>
-    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Bevorzugter Netzwerkmodus: global"</string>
-    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Bevorzugter Netzwerkmodus: LTE/WCDMA"</string>
-    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Bevorzugter Netzwerkmodus: LTE/GSM/UMTS"</string>
-    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Bevorzugter Netzwerkmodus: LTE/CDMA"</string>
-    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Bevorzugter Netzwerkmodus: TD-SCDMA"</string>
-    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Bevorzugter Netzwerkmodus: TD-SCDMA/WCDMA"</string>
-    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Bevorzugter Netzwerkmodus: LTE/TD-SCDMA"</string>
-    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Bevorzugter Netzwerkmodus: TD-SCDMA/GSM"</string>
-    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Bevorzugter Netzwerkmodus: LTE/GSM/TD-SCDMA"</string>
-    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Bevorzugter Netzwerkmodus: TD-SCDMA/GSM/WCDMA"</string>
-    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Bevorzugter Netzwerkmodus: LTE/TD-SCDMA/WCDMA"</string>
-    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Bevorzugter Netzwerkmodus: LTE/TD-SCDMA/GSM/WCDMA"</string>
-    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Bevorzugter Netzwerkmodus: TD-SCDMA/CDMA/EvDo/GSM/WCDMA"</string>
-    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Bevorzugter Netzwerkmodus: LTE/TD-SCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Bevorzugter Netzmodus: WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Bevorzugter Netzmodus: nur GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Bevorzugter Netzmodus: nur WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Bevorzugter Netzmodus: GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Bevorzugter Netzmodus: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Bevorzugter Netzmodus: CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Bevorzugter Netzmodus: nur CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Bevorzugter Netzmodus: nur EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Bevorzugter Netzmodus: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Bevorzugter Netzmodus: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Bevorzugter Netzmodus: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Bevorzugter Netzmodus: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"Bevorzugter Netzmodus: LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Bevorzugter Netzmodus: global"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Bevorzugter Netzmodus: LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Bevorzugter Netzmodus: LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Bevorzugter Netzmodus: LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Bevorzugter Netzmodus: TD-SCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Bevorzugter Netzmodus: TD-SCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Bevorzugter Netzmodus: LTE/TD-SCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Bevorzugter Netzmodus: TD-SCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Bevorzugter Netzmodus: LTE/GSM/TD-SCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Bevorzugter Netzmodus: TD-SCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Bevorzugter Netzmodus: LTE/TD-SCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Bevorzugter Netzmodus: LTE/TD-SCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Bevorzugter Netzmodus: TD-SCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Bevorzugter Netzmodus: LTE/TD-SCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"Bevorzugter Netzmodus: nur NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"Bevorzugter Netzmodus: NR/LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"Bevorzugter Netzmodus: NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"Bevorzugter Netzmodus: NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"Bevorzugter Netzmodus: NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"Bevorzugter Netzmodus: NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"Bevorzugter Netzmodus: NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"Bevorzugter Netzmodus: NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"Bevorzugter Netzmodus: NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"Bevorzugter Netzmodus: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"Bevorzugter Netzmodus: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (empfohlen)"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE (empfohlen)"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G (empfohlen)"</string>
     <string name="network_global" msgid="959947774831178632">"Global"</string>
@@ -4530,7 +4543,7 @@
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="730767308428197756">"SIM kann nicht gelöscht werden"</string>
     <string name="mobile_network_erase_sim_error_dialog_body" msgid="6835262809290075813">"Diese SIM kann aufgrund eines Fehlers nicht gelöscht werden.\n\nStarte dein Gerät neu und versuche es noch einmal."</string>
     <string name="preferred_network_mode_title" msgid="6505630109389684100">"Bevorzugter Netztyp"</string>
-    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Netzwerkmodus ändern"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Netzmodus ändern"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Bevorzugter Netztyp"</string>
     <string name="carrier_settings_euicc" msgid="8658562169133242581">"Mobilfunkanbieter"</string>
     <string name="carrier_settings_version" msgid="3469507893844448432">"Einstellungen-Version"</string>
@@ -4548,7 +4561,7 @@
     <string name="roaming_alert_title" msgid="7458177294163751484">"Daten-Roaming zulassen?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Wenn du Informationen zu Preisen erhalten möchtest, wende dich bitte an deinen Netzwerkanbieter."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Datennutzung durch Apps"</string>
-    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Ungültiger Netzwerkmodus <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorieren."</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Ungültiger Netzmodus <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorieren."</string>
     <string name="mobile_network_apn_title" msgid="7610812642954395440">"Zugangspunkte (APNs)"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Bei Verbindung mit <xliff:g id="CARRIER">%1$s</xliff:g> nicht verfügbar"</string>
     <string name="emergency_info_contextual_card_summary" msgid="7993926837251874514">"Medizinische Informationen und Notfallkontakte"</string>

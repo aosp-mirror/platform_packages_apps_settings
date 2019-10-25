@@ -1391,7 +1391,7 @@
     <string name="status_wifi_mac_address" msgid="2202206684020765378">"WLAN MAC 地址"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"蓝牙地址"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"序列号"</string>
-    <string name="status_up_time" msgid="7294859476816760399">"已开机时间"</string>
+    <string name="status_up_time" msgid="7294859476816760399">"开机累计时长"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"唤醒时间"</string>
     <string name="internal_memory" msgid="9129595691484260784">"内部存储空间"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB存储设备"</string>
@@ -3166,7 +3166,7 @@
     <string name="keywords_sim_status" msgid="6682044233620329507">"网络, 移动网络状态, 服务状态, 信号强度, 移动网络类型, 漫游, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"序列号, 硬件版本"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android 安全补丁程序级别, 基带版本, 内核版本"</string>
-    <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"主题背景, 光亮, 暗黑, 模式"</string>
+    <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"主题背景, 光亮, 深色, 模式"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"深色主题"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"错误"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"主动显示, 锁定屏幕显示"</string>
@@ -4460,6 +4460,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"首选网络模式：LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"首选网络模式：GSM/WCDMA/LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"首选网络模式：CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"首选网络模式：LTE/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"首选网络模式：通用"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"首选网络模式：LTE/WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"首选网络模式：LTE/GSM/UMTS"</string>
@@ -4474,6 +4475,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"首选网络模式：LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"首选网络模式：TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"首选网络模式：LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"首选网络模式：仅限 NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"首选网络模式：NR/LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"首选网络模式：NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"首选网络模式：NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"首选网络模式：NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"首选网络模式：NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"首选网络模式：NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"首选网络模式：NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"首选网络模式：NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"首选网络模式：NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"首选网络模式：NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" （推荐）"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE（推荐）"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G（推荐）"</string>
     <string name="network_global" msgid="959947774831178632">"通用"</string>
