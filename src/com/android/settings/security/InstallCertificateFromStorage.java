@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,6 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_DETAIL_PAGE;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
@@ -25,26 +23,29 @@ import android.os.UserManager;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
- * Encryption and Credential settings.
+ * Install certificate from storage settings.
  */
 @SearchIndexable
-public class EncryptionAndCredential extends DashboardFragment {
+public class InstallCertificateFromStorage extends DashboardFragment {
 
-    private static final String TAG = "EncryptionAndCredential";
+    private static final String TAG = "InstallCertificateFromStorage";
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ENCRYPTION_AND_CREDENTIAL;
+        return SettingsEnums.INSTALL_CERTIFICATE_FROM_STORAGE;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.install_certificate_from_storage;
     }
 
     @Override
@@ -54,41 +55,28 @@ public class EncryptionAndCredential extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
-    }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.encryption_and_credential;
+        return new ArrayList<AbstractPreferenceController>();
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final EncryptionStatusPreferenceController encryptStatusController =
-                new EncryptionStatusPreferenceController(context,
-                        PREF_KEY_ENCRYPTION_DETAIL_PAGE);
-        controllers.add(encryptStatusController);
-        controllers.add(new PreferenceCategoryController(context,
-                "encryption_and_credentials_status_category").setChildren(
-                Arrays.asList(encryptStatusController)));
-        controllers.add(new CredentialStoragePreferenceController(context));
-        controllers.add(new UserCredentialsPreferenceController(context));
-        controllers.add(new ResetCredentialsPreferenceController(context, lifecycle));
-        controllers.add(new InstallCertificatePreferenceController(context));
+        controllers.add(new InstallCaCertificatePreferenceController(context));
+        controllers.add(new InstallUserCertificatePreferenceController(context));
+        controllers.add(new InstallWifiCertificatePreferenceController(context));
         return controllers;
     }
 
     @Override
     public int getHelpResource() {
-        return R.string.help_url_encryption;
+        return R.string.help_url_install_certificate;
     }
 
     /**
      * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.encryption_and_credential) {
+            new BaseSearchIndexProvider(R.xml.install_certificate_from_storage) {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {

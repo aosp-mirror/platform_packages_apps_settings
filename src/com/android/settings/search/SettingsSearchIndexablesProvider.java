@@ -181,7 +181,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         for (DashboardCategory category : dashboardFeatureProvider.getAllCategories()) {
             for (Tile tile : category.getTiles()) {
                 final String packageName = tile.getPackageName();
-                if (!context.getPackageName().equals(packageName)) {
+                if (context.getPackageName().equals(packageName)) {
                     continue;
                 }
                 final Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];

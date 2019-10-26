@@ -30,6 +30,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -69,6 +71,8 @@ public abstract class ProfileSelectFragment extends InstrumentedFragment {
         mContentView = inflater.inflate(R.layout.profile_select_tablayout, null /* root */);
         final ViewPager viewPager = mContentView.findViewById(R.id.view_pager);
         viewPager.setAdapter(new ViewPagerAdapter(this));
+        final TabLayout tabs = mContentView.findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
         return mContentView;
     }
 

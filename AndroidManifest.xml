@@ -213,7 +213,7 @@
         <activity
             android:name=".Settings$ConnectedDeviceDashboardActivity"
             android:label="@string/connected_devices_dashboard_title"
-            android:icon="@drawable/ic_homepage_connected_device"
+            android:icon="@drawable/ic_devices_other"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
@@ -1340,6 +1340,11 @@
                 <action android:name="com.android.credentials.RESET" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".security.InstallCaCertificateWarning"
+                  android:theme="@style/GlifV3Theme.Light"
+                  android:exported="false">
         </activity>
 
         <activity

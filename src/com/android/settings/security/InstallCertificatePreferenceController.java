@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package com.android.settings.accounts;
-import androidx.fragment.app.Fragment;
+package com.android.settings.security;
 
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import android.content.Context;
+import android.os.UserManager;
 
-/**
- * Account Setting page for personal/managed profile.
- */
-public class AccountProfileSelectFragment extends ProfileSelectFragment {
+public class InstallCertificatePreferenceController extends
+        RestrictedEncryptionPreferenceController {
+
+    private static final String KEY_INSTALL_CERTIFICATE = "install_certificate";
+
+    public InstallCertificatePreferenceController(Context context) {
+        super(context, UserManager.DISALLOW_CONFIG_CREDENTIALS);
+    }
 
     @Override
-    public Fragment[] getFragments() {
-        return new Fragment[] {
-                new AccountPersonalDashboardFragment(),
-                new AccountWorkProfileDashboardFragment()
-        };
+    public String getPreferenceKey() {
+        return KEY_INSTALL_CERTIFICATE;
     }
 }

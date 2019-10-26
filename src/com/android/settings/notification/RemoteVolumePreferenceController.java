@@ -23,6 +23,7 @@ import android.media.session.MediaSessionManager;
 import android.net.Uri;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -40,6 +41,7 @@ import java.util.Objects;
 public class RemoteVolumePreferenceController extends VolumeSeekBarPreferenceController {
 
     private static final String KEY_REMOTE_VOLUME = "remote_volume";
+    private static final String TAG = "RemoteVolumePrefCtr";
     @VisibleForTesting
     static final int REMOTE_VOLUME = 100;
 
@@ -75,10 +77,20 @@ public class RemoteVolumePreferenceController extends VolumeSeekBarPreferenceCon
         @Override
         public void onRemoteVolumeChanged(MediaSession.Token token, int flags) {
             if (Objects.equals(mActiveToken, token)) {
-                final MediaController.PlaybackInfo pi = mMediaController.getPlaybackInfo();
-                if (pi != null) {
-                    setSliderPosition(pi.getCurrentVolume());
+                if (mPreference == null) {
+                    Log.e(TAG,"Preference is null");
+                    return;
                 }
+                if (mMediaController == null) {
+                    Log.e(TAG,"MediaController is null");
+                    return;
+                }
+                final MediaController.PlaybackInfo pi = mMediaController.getPlaybackInfo();
+                if (pi == null) {
+                    Log.e(TAG,"PlaybackInfo is null");
+                    return;
+                }
+                mPreference.setProgress(pi.getCurrentVolume());
             }
         }
     };

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.manageapplications;
+package com.android.settings.dashboard.profileselector;
 
 import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_PERSONAL_ONLY;
 import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ONLY;
@@ -23,10 +23,10 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.applications.manageapplications.ManageApplications;
 
 /**
- * Application Setting page for work profile.
+ * Application Setting page for personal/managed profile.
  */
 public class ProfileSelectManageApplications extends ProfileSelectFragment {
 
@@ -41,7 +41,7 @@ public class ProfileSelectManageApplications extends ProfileSelectFragment {
         personalOnly.putBoolean(EXTRA_PERSONAL_ONLY, true);
         final Fragment personalFragment = new ManageApplications();
         personalFragment.setArguments(personalOnly);
-        return new Fragment[] {
+        return new Fragment[]{
                 personalFragment, //0
                 workFragment
         };
