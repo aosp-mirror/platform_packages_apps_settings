@@ -31,49 +31,17 @@
     <string name="dev_settings_disabled_warning" msgid="4909448907673974370">"Aktivera utvecklaralternativ först"</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Trådlöst och nätverk"</string>
     <string name="header_category_system" msgid="2816866961183068977">"System"</string>
-    <string name="radio_info_data_connection_enable" msgid="8656750679353982712">"Aktivera dataanslutning"</string>
-    <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"Inaktivera dataanslutning"</string>
-    <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE-administrerad"</string>
-    <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"Videosamtal tillhandahålls"</string>
-    <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Wi-Fi-samtal tillhandahålls"</string>
-    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Presence tillhandahålls"</string>
-    <string name="cbrs_data_switch_string" msgid="2811485394350106691">"Data via CBRS"</string>
-    <string name="dsds_switch_string" msgid="4832797810509029243">"Aktivera DSDS"</string>
-    <string name="dsds_dialog_title" msgid="4031918551366689574">"Vill du starta om enheten?"</string>
-    <string name="dsds_dialog_message" msgid="8593083316067158412">"Du måste starta om enheten för att ändra den här inställningen."</string>
-    <string name="dsds_dialog_confirm" msgid="2853118984344309612">"Starta om"</string>
-    <string name="dsds_dialog_cancel" msgid="654653450305828711">"Avbryt"</string>
-    <string name="radio_info_radio_power" msgid="7187666084867419643">"Strömförsörjning för mobilradio"</string>
-    <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Visa SIM-adressbok"</string>
-    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Visa Fasta nummer"</string>
-    <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Visa tjänstenummer"</string>
-    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"Status för IMS-tjänst"</string>
-    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS-status"</string>
-    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Registrerad"</string>
-    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"Ej registrerad"</string>
-    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Tillgänglig"</string>
-    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"Inte tillgänglig"</string>
-    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS-registrering: <xliff:g id="STATUS">%1$s</xliff:g>\nRöst via LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nRöst via Wi-Fi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideosamtal: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT-gränssnitt: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"I tjänst"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Ur funktion"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Endast nödsamtal"</string>
     <string name="radioInfo_service_off" msgid="7536423790014501173">"Avstängd radio"</string>
     <string name="radioInfo_roaming_in" msgid="9045363884600341051">"Roaming"</string>
     <string name="radioInfo_roaming_not" msgid="4849214885629672819">"Ingen roaming"</string>
-    <string name="radioInfo_phone_idle" msgid="7489244938838742820">"Inaktiv"</string>
-    <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"Ringer"</string>
-    <string name="radioInfo_phone_offhook" msgid="5873835692449118954">"Pågående samtal"</string>
     <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"Frånkopplad"</string>
     <string name="radioInfo_data_connecting" msgid="8404571440697917823">"Ansluter"</string>
     <string name="radioInfo_data_connected" msgid="7074301157399238697">"Ansluten"</string>
     <string name="radioInfo_data_suspended" msgid="5315325487890334196">"Pausad"</string>
     <string name="radioInfo_unknown" msgid="1476509178755955088">"Ingen uppgift"</string>
-    <string name="radioInfo_display_packets" msgid="8654359809877290639">"paket"</string>
-    <string name="radioInfo_display_bytes" msgid="4018206969492931883">"bytes"</string>
-    <string name="radioInfo_display_dbm" msgid="3621221793699882781">"dBm"</string>
-    <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
-    <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
-    <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
     <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Avmontera USB-enhet"</string>
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Avmontera SD-kort"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Radera USB-lagring"</string>
@@ -175,9 +143,9 @@
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"Du måste starta om enheten för att ändra den här inställningen."</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"Starta om"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"Avbryt"</string>
-    <string name="connected_device_available_media_title" msgid="2560067541413280645">"Tillgängliga mediaenheter"</string>
-    <string name="connected_device_available_call_title" msgid="697154660967595684">"Tillgängliga telefonenheter"</string>
-    <string name="connected_device_connected_title" msgid="5871712271201945606">"Anslutna just nu"</string>
+    <string name="connected_device_media_device_title" msgid="8331454834986628737">"Medieenheter"</string>
+    <string name="connected_device_call_device_title" msgid="1590585593165835804">"Telefonenheter"</string>
+    <string name="connected_device_other_device_title" msgid="4060005313213013235">"Andra enheter"</string>
     <string name="connected_device_saved_title" msgid="688364359746674536">"Sparade enheter"</string>
     <string name="connected_device_add_device_summary" msgid="4041865900298680338">"Bluetooth aktiveras för parkoppling"</string>
     <string name="connected_device_connections_title" msgid="5988939345181466770">"Anslutningsinställningar"</string>
@@ -210,46 +178,10 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Porten som du har angett är inte giltig."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP-proxyn används av webbläsaren men får inte användas av de andra apparna."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC-webbadress: "</string>
-    <string name="radio_info_subid" msgid="204582608052503412">"Nuvarande subId:"</string>
-    <string name="radio_info_dds" msgid="5471937791273237508">"SubId för standarddata på SIM-kortet:"</string>
-    <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Bandbredd för nedladdning (kbps):"</string>
-    <string name="radio_info_ul_kbps" msgid="946464073571185678">"Bandbredd för uppladdning (kbps):"</string>
-    <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Platsinformation för mast (utfasad):"</string>
-    <string name="radio_info_phy_chan_config" msgid="7133247058801474028">"Fysisk kanalkonfiguration för LTE:"</string>
-    <string name="radio_info_cell_info_refresh_rate" msgid="7062777594049622128">"Frekvens för uppdatering av mastinformation:"</string>
-    <string name="radio_info_cellinfo_label" msgid="6213223844927623098">"Alla information om mastmätning:"</string>
-    <string name="radio_info_gprs_service_label" msgid="4209624131644060517">"Datatjänst:"</string>
-    <string name="radio_info_roaming_label" msgid="6141505430275138647">"Roaming:"</string>
-    <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI-kod:"</string>
-    <string name="radio_info_call_redirect_label" msgid="2743797189722106231">"Vidarekoppling av samtal:"</string>
-    <string name="radio_info_ppp_resets_label" msgid="3587319503902576102">"Antal återställningar av köpkraftsparitet sedan start:"</string>
-    <string name="radio_info_current_network_label" msgid="9151285540639134945">"Aktuellt nätverk:"</string>
-    <string name="radio_info_ppp_received_label" msgid="363579470428151850">"Mottagen data:"</string>
-    <string name="radio_info_gsm_service_label" msgid="1370863866816125489">"Rösttjänst:"</string>
-    <string name="radio_info_signal_strength_label" msgid="5155734002519307416">"Signalstyrka:"</string>
-    <string name="radio_info_call_status_label" msgid="2611065018172747413">"Status på videosamtal:"</string>
-    <string name="radio_info_ppp_sent_label" msgid="7748668735880404586">"Skickad data:"</string>
-    <string name="radio_info_message_waiting_label" msgid="1037302619943328273">"Meddelande väntar:"</string>
-    <string name="radio_info_phone_number_label" msgid="7942153178953255231">"Telefonnummer:"</string>
-    <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Välj radioband"</string>
-    <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Nätverkstyp för röst:"</string>
-    <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Typ av datanätverk:"</string>
-    <string name="phone_index_label" msgid="1934407597576454430">"Välj telefonindex"</string>
-    <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Ställ in önskad nätverkstyp:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Pinga värdnamn(www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Pinga värdnamn(www.google.com) IPv6:"</string>
     <string name="radio_info_http_client_test" msgid="2382286093023138339">"Test av HTTP-klient:"</string>
     <string name="ping_test_label" msgid="579228584343892613">"Köra pingtest"</string>
-    <string name="radio_info_smsc_label" msgid="6399460520126501354">"SMSC:"</string>
-    <string name="radio_info_smsc_update_label" msgid="7258686760358791539">"Uppdatera"</string>
-    <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"Uppdatera"</string>
-    <string name="radio_info_toggle_dns_check_label" msgid="6625185764803245075">"Aktivera och inaktivera DNS-kontroll"</string>
-    <string name="oem_radio_info_label" msgid="6163141792477958941">"OEM-specifik information/inställningar"</string>
-    <string name="band_mode_title" msgid="4071411679019296568">"Konfigurera radiobandsläget"</string>
-    <string name="band_mode_loading" msgid="3555063585133586152">"Läser in bandlista …"</string>
-    <string name="band_mode_set" msgid="5730560180249458484">"Ställ in"</string>
-    <string name="band_mode_failed" msgid="1495968863884716379">"Misslyckades"</string>
-    <string name="band_mode_succeeded" msgid="2701016190055887575">"Lyckades"</string>
     <string name="sdcard_changes_instructions" msgid="4482324130377280131">"Ändringarna börjar gälla när USB-kabeln har anslutits igen."</string>
     <string name="sdcard_settings_screen_mass_storage_text" msgid="3741220147296482474">"Aktivera USB-masslagring"</string>
     <string name="sdcard_settings_total_bytes_label" msgid="9184160745785062144">"Totalt antal bytes:"</string>
@@ -288,8 +220,6 @@
     <string name="activity_picker_label" msgid="6295660302548177109">"Välj aktivitet"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Enhetsinfo"</string>
     <string name="display_label" msgid="8074070940506840792">"Skärm"</string>
-    <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Information om surfplattan"</string>
-    <string name="phone_info_label" product="default" msgid="2127552523124277664">"Telefoninformation"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"USB-lagring"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD-kort"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"Proxy-inställningar"</string>
@@ -307,9 +237,6 @@
     <string name="airplane_mode" msgid="8837269988154128601">"Flygplansläge"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Trådlöst och nätverk"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Hantera Wi-Fi, Bluetooth, flygplansläge, mobilnät och VPN"</string>
-    <string name="cellular_data_title" msgid="6835451574385496662">"Mobildata"</string>
-    <string name="calls_title" msgid="1262096900483238572">"Tillåt samtal"</string>
-    <string name="sms_messages_title" msgid="1778636286080572535">"Sms"</string>
     <string name="cellular_data_summary" msgid="4660351864416939504">"Tillåt dataanvändning via mobilnätverk"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Tillåt dataanv. vid roaming"</string>
     <string name="roaming" msgid="2619521775007402005">"Roaming"</string>
@@ -317,9 +244,9 @@
     <string name="roaming_disable" msgid="1295279574370898378">"Anslut till datatjänster vid roaming"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Du förlorade dataanslutningen eftersom du lämnade ditt hemnätverk utan att aktivera dataroaming."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Aktivera"</string>
-    <string name="roaming_warning" msgid="4275443317524544705">"Detta kan leda till höga kostnader."</string>
-    <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Om du tillåter dataroaming kan det leda till höga kostnader.\n\nDen här inställningen påverkar samtliga användare."</string>
-    <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Om du tillåter dataroaming kan det leda till höga kostnader.\n\nDen här inställningen påverkar samtliga användare."</string>
+    <string name="roaming_warning" msgid="3870346331826608200">"Roamingavgifter kan tillkomma."</string>
+    <string name="roaming_warning_multiuser" product="tablet" msgid="8811150468291996810">"Om du tillåter dataroaming kan roamingavgifter tillkomma.\n\nAlla användare på surfplattan påverkas av den här inställningen."</string>
+    <string name="roaming_warning_multiuser" product="default" msgid="6874916898392266210">"Om du tillåter dataroaming kan roamingavgifter tillkomma.\n\nAlla användare på telefonen påverkas av den här inställningen."</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"Vill du tillåta dataroaming?"</string>
     <string name="networks" msgid="6333316876545927039">"Val av operatör"</string>
     <string name="sum_carrier_select" msgid="3616956422251879163">"Välj en nätverksoperatör"</string>
@@ -408,6 +335,9 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Avbryt"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Nej tack"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Jag godkänner"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Mer"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Lås upp med ansiktet"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Autentisera med hjälp av ditt ansikte"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Lås upp mobilen, godkänn köp eller logga in i appar med ditt ansikte."</string>
@@ -428,6 +358,12 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Det gick inte att registrera ansiktet."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Nu är det klart."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Klar"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Förbättra prestandan för ansiktslåset"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Konfigurera ansiktslåset på nytt"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Konfigurera ansiktslåset på nytt"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Förbättra säkerheten och prestandan"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Konfigurera ansiktslås"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Radera din nuvarande ansiktsdata och konfigurera om ansiktslåset.\n\nAnsiktsdatan som används för ansiktslåset tas bort permanent på ett säkert sätt. Efter borttagningen låser du upp telefonen, loggar in i appar och bekräftar betalningar med hjälp av pinkoden, det grafiska lösenordet eller lösenordet."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Använd ansiktslås för att"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Låsa upp telefonen"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Logga in och göra köp i appar"</string>
@@ -440,11 +376,11 @@
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfigurera ansiktslås"</string>
     <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Med hjälp av ansiktslås kan du låsa upp enheten, logga in i appar och bekräfta betalningar.\n\nTänk på detta:\nOm du tittar på mobilen kan du oavsiktligt låsa upp den.\n\nAndra kan låsa upp din mobil om de håller upp den mot ditt ansikte, även om du inte har ögonen öppna.\n\nMobilen kan låsas upp av någon som är mycket lik dig, till exempel ett syskon."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vill du radera ansiktsdata?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Bilder och biometrisk data som används till ansiktslåset raderas permanent på ett säkert sätt. Efter borttagningen låser du upp mobilen, loggar in i appar och bekräftar betalningar med hjälp av pinkoden, det grafiska lösenordet eller lösenordet."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Ansiktsdatan som används för ansiktslåset tas bort permanent på ett säkert sätt. Efter borttagningen använder du pinkoden, det grafiska lösenordet eller lösenordet för att låsa upp telefonen, logga in i appar och bekräfta betalningar ."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Lås upp telefonen med Ansiktslås"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingeravtryck"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Hantera fingeravtryck"</string>
-    <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Använd avtryck för"</string>
+    <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Använd fingeravtryck för"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Lägg till fingeravtryck"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"skärmlås"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
@@ -682,7 +618,6 @@
       <item quantity="other">Får inte innehålla fler än <xliff:g id="NUMBER_1">%d</xliff:g> siffror</item>
       <item quantity="one">Får inte innehålla fler än <xliff:g id="NUMBER_0">%d</xliff:g> siffra</item>
     </plurals>
-    <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Får endast innehålla siffrorna 0–9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Enhetsadministratören tillåter inte att en pinkod som använts nyligen används igen"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IT-adminstratören har blockerat de vanligaste pinkoderna. Testa en annan pinkod."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Får inte innehålla ogiltiga tecken"</string>
@@ -712,6 +647,10 @@
     <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4440596998172043055">
       <item quantity="other">Lösenordet måste innehålla minst <xliff:g id="COUNT">%d</xliff:g> tecken som inte är bokstäver</item>
       <item quantity="one">Lösenordet måste innehålla minst ett tecken som inte är en bokstav</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="6757290776066481213">
+      <item quantity="other">Lösenordet måste innehålla minst <xliff:g id="COUNT">%d</xliff:g> tecken som inte är en siffra</item>
+      <item quantity="one">Lösenordet måste innehålla minst ett tecken som inte är en siffra</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Enhetsadministratören tillåter inte att ett lösenord som använts nyligen används igen"</string>
     <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"IT-adminstratören har blockerat de vanligaste lösenorden. Testa ett annat lösenord."</string>
@@ -912,8 +851,9 @@
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"Aktivera"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"Wi‑Fi-sökning har aktiverats"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Avancerade alternativ"</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"Rullgardinslista för Avancerade alternativ. Komprimera genom att trycka snabbt två gånger."</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="1463812308429197263">"Rullgardinslista för Avancerade alternativ. Utöka genom att trycka snabbt två gånger."</string>
+    <string name="wifi_advanced_toggle_description" msgid="3762491945239543838">"Rullgardinsmenyn Avancerade alternativ"</string>
+    <string name="wifi_advanced_toggle_description_expanded" msgid="3324123720283981249">"komprimera"</string>
+    <string name="wifi_advanced_toggle_description_collapsed" msgid="7724637216368775220">"utöka"</string>
     <string name="wifi_ssid" msgid="5519636102673067319">"Nätverksnamn"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Ange SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Säkerhet"</string>
@@ -930,6 +870,7 @@
     <string name="wifi_eap_method" msgid="8529436133640730382">"EAP-metod"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"Autentisering för fas 2"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA-certifikat"</string>
+    <string name="wifi_eap_ocsp" msgid="6926120423072916179">"Certifikatstatus online"</string>
     <string name="wifi_eap_domain" msgid="8471124344218082064">"Domän"</string>
     <string name="wifi_eap_user_cert" msgid="1291089413368160789">"Användarcertifikat"</string>
     <string name="wifi_eap_identity" msgid="4359453783379679103">"Identitet"</string>
@@ -990,6 +931,7 @@
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Inget certifikat är specificerat. Anslutningen blir inte privat."</string>
     <string name="wifi_ssid_too_long" msgid="3474753269579895244">"Nätverkets namn är för långt."</string>
     <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Domän måste specificeras."</string>
+    <string name="wifi_no_user_cert_warning" msgid="3489537324337001045">"För det här alternativet krävs ett användarcertifikat."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS tillgängligt"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS tillgängligt)"</string>
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Wi‑Fi-nätverk från operatör"</string>
@@ -1041,7 +983,8 @@
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Avancerat för Wi-Fi"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
-    <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC-adress"</string>
+    <string name="wifi_advanced_device_mac_address_title" msgid="4486538933329213769">"Enhetens MAC-adress"</string>
+    <string name="wifi_advanced_randomized_mac_address_title" msgid="1528136478606735549">"Slumpgenererad MAC-adress"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP-adress"</string>
     <string name="wifi_details_title" msgid="8954667664081737098">"Nätverksinformation"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Nätmask"</string>
@@ -1138,7 +1081,7 @@
     <string name="sound_settings" msgid="5534671337768745343">"Ljud"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volymer"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Musikeffekter"</string>
-    <string name="ring_volume_title" msgid="5592466070832128777">"Ringvolym"</string>
+    <string name="ring_volume_title" msgid="5484483840151391206">"Samtals och aviseringsvolym"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrera vid tyst"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Standardljud för meddelanden"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Ringsignal"</string>
@@ -1354,6 +1297,7 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Avmontera USB-lagringsenheten och visa tillgängligt lagringsutrymme"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Avmontera SD-kort, visa tillgängligt lagringsutrymme"</string>
     <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI-kod (SIM-kortsplats %1$d)"</string>
+    <string name="view_saved_network" msgid="1763578480942445750">"Välj ett sparat nätverk för att visa"</string>
     <string name="status_number" product="tablet" msgid="1138837891091222272">"Mobilnummer (MDN)"</string>
     <string name="status_number" product="default" msgid="5948892105546651296">"Telefonnummer"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (SIM-kortsplats %1$d)"</string>
@@ -1380,6 +1324,7 @@
     <string name="status_roaming" msgid="2638800467430913403">"Roaming"</string>
     <string name="status_operator" msgid="2274875196954742087">"Nätverk"</string>
     <string name="status_wifi_mac_address" msgid="2202206684020765378">"Wi-Fi MAC-adress"</string>
+    <string name="status_device_wifi_mac_address" msgid="308853557862261400">"Enhetens MAC-adress för Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Bluetooth-adress"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"Serienummer"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Tid sedan systemstart"</string>
@@ -1731,9 +1676,6 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Säkerhetsinformation"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Du har inte någon dataanslutning. Besök %s på en dator som är ansluten till internet om du vill visa informationen nu."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Läser in …"</string>
-    <string name="confirm_device_credential_pin" msgid="5308435093406166355">"Använd pinkod"</string>
-    <string name="confirm_device_credential_pattern" msgid="1350321840134412900">"Använd grafiskt lösenord"</string>
-    <string name="confirm_device_credential_password" msgid="2195705238498478704">"Använd lösenord"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Konfigurera skärmlås"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Ange ett lösenord som skydd"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Lösenord krävs för fingeravtryck"</string>
@@ -2072,7 +2014,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Ljud och text på skärmen"</string>
     <string name="display_category_title" msgid="685461049938269166">"Skärm"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktionsinställningar"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Nedladdade tjänster"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Nedladdade appar"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentella"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Funktionsflaggor"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2091,7 +2033,7 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Öppna med tillgänglighetsknappen"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Öppna med rörelse"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Använd en ny tillgänglighetsrörelse"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Aktivera och inaktivera tjänsten genom att trycka på tillgänglighetsknappen <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nByt mellan tjänster genom att trycka länge på tillgänglighetsknappen."</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="3420437393939817001">"Aktivera och inaktivera tjänsten genom att trycka på tillgänglighetsknappen <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> längst ned på skärmen.\n\nByt mellan tjänster genom att trycka länge på tillgänglighetsknappen."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Aktivera och inaktivera tjänsten genom att svepa uppåt med två fingrar från skärmens nederkant.\n\nByt mellan tjänster genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Aktivera och inaktivera tjänsten genom att svepa uppåt med tre fingrar från skärmens nederkant.\n\nByt mellan tjänster genom att svepa uppåt med tre fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Aktivera och inaktivera tillgänglighetstjänster genom att svepa uppåt med två fingrar från skärmens nederkant.\n\nByt mellan tjänster genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
@@ -2132,7 +2074,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Vibration för aviseringar"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Vibration för ringsignal"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Tryckåterkoppling"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Använd tjänsten"</string>
+    <string name="accessibility_service_master_switch_title" msgid="8858008399519048630">"Använd <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Använd färgkorrigering"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Använd textning"</string>
     <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Alla appar har inte stöd för den här inställningen."</string>
@@ -2473,7 +2415,7 @@
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> har använts av <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> av den totala batterianvändningen"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Fördelning sedan senaste fulladdningen"</string>
-    <string name="battery_last_full_charge" msgid="7151251641099019361">"Sedan senaste fulladdning"</string>
+    <string name="battery_last_full_charge" msgid="7151251641099019361">"Senaste fulladdning"</string>
     <string name="battery_full_charge_last" msgid="8892335687734288031">"Fulladdat batteri räcker i ungefär"</string>
     <string name="battery_footer_summary" msgid="67169726550144016">"Informationen om batterianvändning är en uppskattning och kan ändras utifrån användning"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Under aktiv användning"</string>
@@ -2569,8 +2511,8 @@
     <string name="tts_play" msgid="2628469503798633884">"Spela upp"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Uppgiftslagring"</string>
-    <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Installera från lagringsenhet"</string>
-    <string name="credentials_install" product="default" msgid="953914549998062317">"Installera från SD-kort"</string>
+    <!-- no translation found for credentials_install (1114035438930132516) -->
+    <skip />
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Installera certifikat från lagringsenhet"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Installera certifikat från SD-kort"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Rensa användaruppgifter"</string>
@@ -2590,6 +2532,22 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Uppgiftslagringen raderades."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Uppgiftslagringen kunde inte raderas."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Appar med åtkomst"</string>
+    <!-- no translation found for ca_certificate (6476827739385637528) -->
+    <skip />
+    <!-- no translation found for user_certificate (1245239718062428612) -->
+    <skip />
+    <!-- no translation found for wifi_certificate (4599070907834877135) -->
+    <skip />
+    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
+    <skip />
+    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
+    <skip />
+    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
+    <skip />
+    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
+    <skip />
+    <!-- no translation found for cert_not_installed (6088612710464676185) -->
+    <skip />
     <string name="emergency_tone_title" msgid="254495218194925271">"Ringsignal vid nödsituationer"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Ange beteende vid nödsamtal"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Säkerhetskopiering"</string>
@@ -2956,7 +2914,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Samtalshistoriken delas med den här användaren."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vill du aktivera telefonsamtal och sms?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Samtals- och sms-historiken delas med den här användaren."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Krisinformation"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Nödinformation"</string>
     <string name="emergency_info_summary" msgid="5062945162967838521">"Information och kontakter för <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Tillåt appar och innehåll"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Appar med begränsningar"</string>
@@ -3050,7 +3008,6 @@
     <string name="select_sim_for_calls" msgid="3503094771801109334">"Ring med"</string>
     <string name="sim_select_card" msgid="211285163525563293">"Välj ett SIM-kort"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM-kort <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <string name="sim_slot_empty" msgid="8964505511911854688">"SIM-kortet är tomt"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Namn på SIM-kort"</string>
     <string name="sim_name_hint" msgid="7038643345238968930">"Ange SIM-namn"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"SIM-kortsplats %1$d"</string>
@@ -3073,7 +3030,6 @@
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6272913297433198340">"SIM-korten har ändrats."</string>
     <string name="sim_notification_summary" msgid="8858043655706669772">"Tryck för att konfigurera"</string>
-    <string name="sim_pref_divider" msgid="6778907671867621874">"Primärt SIM-kort för"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Fråga varje gång"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Du måste välja något"</string>
     <string name="sim_selection_channel_title" msgid="2760909074892782589">"Val av SIM"</string>
@@ -3181,16 +3137,16 @@
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"rutin, schema, batterisparläge, energisparläge, batteri, automatiskt, procent"</string>
     <string name="keywords_enhance_4g_lte" msgid="2273810564244790859">"volte, avancerade samtal, 4g-samtal"</string>
     <string name="default_sound" msgid="8821684447333687810">"Standardsignal"</string>
-    <string name="sound_settings_summary" msgid="4100853606668287965">"Ringvolym på <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_summary" msgid="5240115521517647828">"Volymen för samtal och aviseringar är inställd på <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volym, vibrera, stör ej"</string>
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"Enheten är inställd på att vibrera som ringsignal"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Ringsignalen är avstängd"</string>
-    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Ringvolym på 80 %"</string>
+    <string name="sound_settings_example_summary" msgid="1938547658378334638">"Volymen för samtal och aviseringar är inställd på 80 %"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Medievolym"</string>
     <string name="remote_media_volume_option_title" msgid="7602586327091007461">"Castvolym"</string>
     <string name="call_volume_option_title" msgid="1265865226974255384">"Samtalsvolym"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Alarmvolym"</string>
-    <string name="ring_volume_option_title" msgid="6767101703671248309">"Ringvolym"</string>
+    <string name="ring_volume_option_title" msgid="6659119472990510738">"Samtals och aviseringsvolym"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Aviseringsvolym"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ringsignal"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Standardljud för aviseringar"</string>
@@ -3631,6 +3587,7 @@
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"Tillåt att skärmen slås på för aviseringar som tystats via Stör ej"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Aviseringsinställningar"</string>
     <string name="suggestion_button_text" msgid="3275010948381252006">"OK"</string>
+    <string name="suggestion_button_close" msgid="7986874185095660314">"Stäng"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Skicka feedback om den här enheten"</string>
     <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"Ange administratörens pinkod:"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"På"</string>
@@ -3841,7 +3798,7 @@
     <string name="assist_access_context_title" msgid="2269032346698890257">"Använda text från skärmen"</string>
     <string name="assist_access_context_summary" msgid="1991421283142279560">"Tillåt att assistentappen får åtkomst till innehåll på skärmen, till exempel text"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Använda skärmdump"</string>
-    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Tillåt att assistenappen får åtkomst till en bild på skärmen"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Tillåt att assistentappen får åtkomst till en bild på skärmen"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Lys upp skärmen"</string>
     <string name="assist_flash_summary" msgid="9160668468824099262">"Lys upp skärmens kanter när assistentappen har tillgång till text på skärmen eller på en skärmdump"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Med assistentappar kan du få hjälp som baseras på den information som visas på den aktuella skärmen. Vissa appar har stöd för både översikts- och röstinmatningstjänster som hjälper dig."</string>
@@ -4051,6 +4008,8 @@
     <string name="data_used_formatted" msgid="2989129931961311051">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> använt"</string>
     <string name="data_overusage" msgid="1134445012475270295">"<xliff:g id="ID_1">^1</xliff:g> över"</string>
     <string name="data_remaining" msgid="8998091725895502181">"<xliff:g id="ID_1">^1</xliff:g> kvar"</string>
+    <string name="data_usage_chart_brief_content_description" msgid="5858525181664415594">"Diagram som visar dataanvändningen mellan <xliff:g id="START_DATE">%1$s</xliff:g> och <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
+    <string name="data_usage_chart_no_data_content_description" msgid="915650394628158899">"Ingen data inom det här datumintervallet"</string>
     <plurals name="billing_cycle_days_left" formatted="false" msgid="456503215317213651">
       <item quantity="other">%d dagar kvar</item>
       <item quantity="one">%d dag kvar</item>
@@ -4114,10 +4073,7 @@
     <string name="notification_log_details_parcel" msgid="243148037601903212">"paketstorlek"</string>
     <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
     <string name="notification_log_details_alerted" msgid="6622944771989529320">"avisering har skickats"</string>
-    <string name="notification_log_details_sound" msgid="5506232879598808099">"ljud"</string>
-    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibration"</string>
-    <string name="notification_log_details_vibrate_pattern" msgid="6076984056201975221">"grafiskt lösenord"</string>
-    <string name="notification_log_details_default" msgid="2345249399796730861">"standardinställning"</string>
+    <string name="notification_log_channel" msgid="7387736481469421664">"kanal"</string>
     <string name="notification_log_details_none" msgid="184131801230614059">"ingen"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Det finns inget rankningsobjekt."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Rankningsobjektet innehåller inte den här nyckeln."</string>
@@ -4208,7 +4164,7 @@
     <string name="low_label" msgid="1679136861385616813">"Låg"</string>
     <string name="high_label" msgid="7278863493316447831">"Hög"</string>
     <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Om känsligheten höjs kan konflikter med apprörelser längs skärmens kant uppstå."</string>
-    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Känslighet för baksidan"</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Känslighet för tillbaka-rörelsen"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Tryck snabbt två gånger för att kolla mobilen"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tryck snabbt två gånger för att kolla surfplattan"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tryck snabbt två gånger för att kolla enheten"</string>
@@ -4446,6 +4402,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Föredraget nätverksläge: LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Föredraget nätverksläge: GSM/WCDMA/LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Föredraget nätverksläge: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"Föredraget nätverksläge: LTE/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Föredraget nätverksläge: globalt"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Föredraget nätverksläge: LTE/WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Föredraget nätverksläge: LTE/GSM/UMTS"</string>
@@ -4460,6 +4417,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Föredraget nätverksläge: LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Föredraget nätverksläge: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Föredraget nätverksläge: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"Föredraget nätverksläge: endast NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"Föredraget nätverksläge: NR/LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"Föredraget nätverksläge: NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"Föredraget nätverksläge: NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"Föredraget nätverksläge: NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"Föredraget nätverksläge: NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"Föredraget nätverksläge: NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"Föredraget nätverksläge: NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"Föredraget nätverksläge: NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"Föredraget nätverksläge: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"Föredraget nätverksläge: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (rekommenderas)"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE (rekommenderas)"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G (rekommenderas)"</string>
     <string name="network_global" msgid="959947774831178632">"Globalt"</string>
@@ -4625,4 +4594,5 @@
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"SIM-kombination"</string>
     <string name="work_policy_privacy_settings" msgid="2348992644755730215">"Information om jobbpolicy"</string>
     <string name="work_policy_privacy_settings_summary" msgid="2236899807429121767">"Inställningar som hanteras av IT-administratören"</string>
+    <string name="track_frame_time_keywords" msgid="6955970288195095624">"Grafikprocessor"</string>
 </resources>
