@@ -31,6 +31,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -70,14 +72,15 @@ public class AppPermissionsPreferenceControllerTest {
     }
 
     @Test
-    public void updateSummary_noGrantedPermission_shouldSetNullSummary() {
+    public void updateSummary_noGrantedPermission_shouldSetNoPermissionGrantedSummary() {
         doNothing().when(mController).queryPermissionSummary();
         mController.updateState(mPreference);
         mController.mNumPackageChecked = 2;
 
         mController.updateSummary(new ArrayList<>());
 
-        assertThat(mPreference.getSummary()).isNull();
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(R.string.runtime_permissions_summary_no_permissions_granted));
     }
 
     @Test
