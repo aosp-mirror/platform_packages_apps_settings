@@ -80,14 +80,16 @@ public class QrCamera extends Handler {
         HINTS.put(DecodeHintType.POSSIBLE_FORMATS, FORMATS);
     }
 
-    private Camera mCamera;
+    @VisibleForTesting
+    Camera mCamera;
     private Size mPreviewSize;
     private WeakReference<Context> mContext;
     private ScannerCallback mScannerCallback;
     private MultiFormatReader mReader;
     private DecodingTask mDecodeTask;
     private int mCameraOrientation;
-    private Camera.Parameters mParameters;
+    @VisibleForTesting
+    Camera.Parameters mParameters;
 
     public QrCamera(Context context, ScannerCallback callback) {
         mContext =  new WeakReference<Context>(context);
@@ -171,12 +173,13 @@ public class QrCamera extends Handler {
         boolean isValid(String qrCode);
     }
 
-    private void setCameraParameter() {
+    @VisibleForTesting
+    void setCameraParameter() {
         mParameters = mCamera.getParameters();
         mPreviewSize = getBestPreviewSize(mParameters);
         mParameters.setPreviewSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
         Size pictureSize = getBestPictureSize(mParameters);
-        mParameters.setPreviewSize(pictureSize.getWidth(), pictureSize.getHeight());
+        mParameters.setPictureSize(pictureSize.getWidth(), pictureSize.getHeight());
 
         if (mParameters.getSupportedFlashModes().contains(Parameters.FLASH_MODE_OFF)) {
             mParameters.setFlashMode(Parameters.FLASH_MODE_OFF);
