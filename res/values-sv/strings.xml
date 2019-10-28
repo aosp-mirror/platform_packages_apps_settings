@@ -412,6 +412,7 @@
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Avbryt"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Nej tack"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Jag godkänner"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Mer"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Lås upp med ansiktet"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Autentisera med hjälp av ditt ansikte"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Lås upp mobilen, godkänn köp eller logga in i appar med ditt ansikte."</string>
@@ -432,6 +433,12 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Det gick inte att registrera ansiktet."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Nu är det klart."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Klar"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Förbättra prestandan för ansiktslåset"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Konfigurera ansiktslåset på nytt"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Konfigurera ansiktslåset på nytt"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Förbättra säkerheten och prestandan"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Konfigurera ansiktslås"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Radera din nuvarande ansiktsdata och konfigurera om ansiktslåset.\n\nAnsiktsdatan som används för ansiktslåset tas bort permanent på ett säkert sätt. Efter borttagningen låser du upp telefonen, loggar in i appar och bekräftar betalningar med hjälp av pinkoden, det grafiska lösenordet eller lösenordet."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Använd ansiktslås för att"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Låsa upp telefonen"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Logga in och göra köp i appar"</string>
@@ -444,11 +451,11 @@
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfigurera ansiktslås"</string>
     <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Med hjälp av ansiktslås kan du låsa upp enheten, logga in i appar och bekräfta betalningar.\n\nTänk på detta:\nOm du tittar på mobilen kan du oavsiktligt låsa upp den.\n\nAndra kan låsa upp din mobil om de håller upp den mot ditt ansikte, även om du inte har ögonen öppna.\n\nMobilen kan låsas upp av någon som är mycket lik dig, till exempel ett syskon."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vill du radera ansiktsdata?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="4820545735354901641">"Bilderna och ansiktsmodellen som används till ansiktslåset raderas permanent på ett säkert sätt. Efter borttagningen låser du upp telefonen, loggar in i appar och bekräftar betalningar med hjälp av pinkoden, det grafiska lösenordet eller lösenordet."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Ansiktsdatan som används för ansiktslåset tas bort permanent på ett säkert sätt. Efter borttagningen använder du pinkoden, det grafiska lösenordet eller lösenordet för att låsa upp telefonen, logga in i appar och bekräfta betalningar ."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Lås upp telefonen med Ansiktslås"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingeravtryck"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Hantera fingeravtryck"</string>
-    <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Använd avtryck för"</string>
+    <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Använd fingeravtryck för"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Lägg till fingeravtryck"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"skärmlås"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
@@ -2476,7 +2483,7 @@
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> har använts av <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> av den totala batterianvändningen"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Fördelning sedan senaste fulladdningen"</string>
-    <string name="battery_last_full_charge" msgid="7151251641099019361">"Sedan senaste fulladdning"</string>
+    <string name="battery_last_full_charge" msgid="7151251641099019361">"Senaste fulladdning"</string>
     <string name="battery_full_charge_last" msgid="8892335687734288031">"Fulladdat batteri räcker i ungefär"</string>
     <string name="battery_footer_summary" msgid="67169726550144016">"Informationen om batterianvändning är en uppskattning och kan ändras utifrån användning"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Under aktiv användning"</string>
@@ -2962,7 +2969,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Samtalshistoriken delas med den här användaren."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vill du aktivera telefonsamtal och sms?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Samtals- och sms-historiken delas med den här användaren."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Krisinformation"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Nödinformation"</string>
     <string name="emergency_info_summary" msgid="5062945162967838521">"Information och kontakter för <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Tillåt appar och innehåll"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Appar med begränsningar"</string>
@@ -3846,7 +3853,7 @@
     <string name="assist_access_context_title" msgid="2269032346698890257">"Använda text från skärmen"</string>
     <string name="assist_access_context_summary" msgid="1991421283142279560">"Tillåt att assistentappen får åtkomst till innehåll på skärmen, till exempel text"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Använda skärmdump"</string>
-    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Tillåt att assistenappen får åtkomst till en bild på skärmen"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Tillåt att assistentappen får åtkomst till en bild på skärmen"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Lys upp skärmen"</string>
     <string name="assist_flash_summary" msgid="9160668468824099262">"Lys upp skärmens kanter när assistentappen har tillgång till text på skärmen eller på en skärmdump"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Med assistentappar kan du få hjälp som baseras på den information som visas på den aktuella skärmen. Vissa appar har stöd för både översikts- och röstinmatningstjänster som hjälper dig."</string>
@@ -4215,7 +4222,7 @@
     <string name="low_label" msgid="1679136861385616813">"Låg"</string>
     <string name="high_label" msgid="7278863493316447831">"Hög"</string>
     <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"Om känsligheten höjs kan konflikter med apprörelser längs skärmens kant uppstå."</string>
-    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Känslighet för baksidan"</string>
+    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"Känslighet för tillbaka-rörelsen"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Tryck snabbt två gånger för att kolla mobilen"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tryck snabbt två gånger för att kolla surfplattan"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tryck snabbt två gånger för att kolla enheten"</string>
@@ -4453,6 +4460,7 @@
     <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Föredraget nätverksläge: LTE"</string>
     <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Föredraget nätverksläge: GSM/WCDMA/LTE"</string>
     <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Föredraget nätverksläge: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6913114475299255963">"Föredraget nätverksläge: LTE/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Föredraget nätverksläge: globalt"</string>
     <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Föredraget nätverksläge: LTE/WCDMA"</string>
     <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Föredraget nätverksläge: LTE/GSM/UMTS"</string>
@@ -4467,6 +4475,18 @@
     <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Föredraget nätverksläge: LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Föredraget nätverksläge: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Föredraget nätverksläge: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="4524235599148361105">"Föredraget nätverksläge: endast NR"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="151878192069492980">"Föredraget nätverksläge: NR/LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="2369339319850463224">"Föredraget nätverksläge: NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2042970995597991196">"Föredraget nätverksläge: NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="4632023827764601170">"Föredraget nätverksläge: NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="2656741883411137075">"Föredraget nätverksläge: NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="6325246921320946048">"Föredraget nätverksläge: NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="3549366387723477088">"Föredraget nätverksläge: NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="7966891263049141737">"Föredraget nätverksläge: NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4596299694549390985">"Föredraget nätverksläge: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3833273961642857950">"Föredraget nätverksläge: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_recommended" msgid="8192583433546212130">" (rekommenderas)"</string>
     <string name="network_lte" msgid="1287709529829131860">"LTE (rekommenderas)"</string>
     <string name="network_4G" msgid="8611758013994499559">"4G (rekommenderas)"</string>
     <string name="network_global" msgid="959947774831178632">"Globalt"</string>

@@ -18,11 +18,13 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 import android.content.DialogInterface;
+import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -32,6 +34,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,12 +51,17 @@ public class NetworkRequestErrorDialogFragmentTest {
 
     private FragmentActivity mActivity;
     private NetworkRequestErrorDialogFragment mFragment;
+    private WifiTracker mWifiTracker;
 
     @Before
     public void setUp() {
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mFragment = spy(NetworkRequestErrorDialogFragment.newInstance());
         mFragment.show(mActivity.getSupportFragmentManager(), null);
+
+        // Prevents NPE when calling up NetworkRequestDialogFragment.
+        mWifiTracker = mock(WifiTracker.class);
+        WifiTrackerFactory.setTestingWifiTracker(mWifiTracker);
     }
 
     @Test
@@ -110,5 +119,18 @@ public class NetworkRequestErrorDialogFragmentTest {
 
         negativeButton.performClick();
         assertThat(alertDialog.isShowing()).isFalse();
+    }
+
+    @Test
+    public void clickNegativeButton_shouldCallReject() {
+        final NetworkRequestUserSelectionCallback rejectCallback =
+                mock(NetworkRequestUserSelectionCallback.class);
+        mFragment.setRejectCallback(rejectCallback);
+
+        final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        final Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        negativeButton.performClick();
+
+        verify(rejectCallback, times(1)).reject();
     }
 }

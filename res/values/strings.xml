@@ -914,6 +914,8 @@
     <string name="security_settings_face_enroll_introduction_no_thanks">No thanks</string>
     <!-- Button text to start enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_face_enroll_introduction_agree">Agree</string>
+    <!-- Button text to scroll to the end of a scrollview. [CHAR LIMIT=30] -->
+    <string name="security_settings_face_enroll_introduction_more">More</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_introduction_title">Unlock with your face</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
@@ -954,6 +956,18 @@
     <string name="security_settings_face_enroll_finish_title">All set. Looking good.</string>
     <!-- Button text to exit face wizard after everything is done [CHAR LIMIT=15] -->
     <string name="security_settings_face_enroll_done">Done</string>
+    <!-- Settings suggestion title text for re-enrolling a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_should_re_enroll_title">Improve face unlock performance</string>
+    <!-- Settings suggestion subtitle text for re-enrolling a face. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle">Set up face unlock again</string>
+    <!-- Settings suggestion title text for mandatory re-enrolling of a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_must_re_enroll_title">Set up face unlock again</string>
+    <!-- Settings suggestion subtitle text for mandatory re-enrolling of a face. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle">Improve security and performance</string>
+    <!-- Settings suggestion alert body title for re-enrolling a face. [CHAR LIMIT=60] -->
+    <string name="security_settings_face_enroll_improve_face_alert_title">Set up face unlock</string>
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">Delete your current face data to set up face unlock again.\n\nThe face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
     <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_use_face_category">Use face unlock for</string>
     <!-- Text shown on a toggle which allows or disallows the device to use face for unlocking the device. [CHAR LIMIT=20] -->
@@ -979,7 +993,7 @@
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_remove_dialog_details">The images and face model used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
+    <string name="security_settings_face_settings_remove_dialog_details">The face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
     <!-- Subtitle shown for contextual setting face enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_context_subtitle">Use face unlock to unlock your phone</string>
 
@@ -10857,6 +10871,8 @@
     <string name="preferred_network_mode_lte_gsm_wcdma_summary">Preferred network mode: GSM/WCDMA/LTE</string>
     <!-- CDMA+LTE/EVDO [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_lte_cdma_evdo_summary">Preferred network mode: CDMA+LTE/EVDO</string>
+    <!-- LTE/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary">Preferred network mode: LTE/CDMA/EvDo/GSM/WCDMA</string>
     <!-- Global [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_global_summary">Preferred network mode: Global</string>
     <!-- LTE / WCDMA [CHAR LIMIT=NONE] -->
@@ -10885,7 +10901,37 @@
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary">Preferred network mode: TDSCDMA/CDMA/EvDo/GSM/WCDMA</string>
     <!-- LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary">Preferred network mode: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA</string>
+    <!-- NR only [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_only_summary">Preferred network mode: NR only</string>
+    <!-- NR / LTE [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_summary">Preferred network mode: NR / LTE</string>
+    <!-- NR/LTE/CDMA/EvDo [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary">Preferred network mode: NR/LTE/CDMA/EvDo</string>
+    <!-- NR/LTE/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary">Preferred network mode: NR/LTE/GSM/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary">Preferred network mode: NR/LTE/CDMA/EvDo/GSM/WCDMA</string>
+    <!-- NR/LTE/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_wcdma_summary">Preferred network mode: NR/LTE/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary">Preferred network mode: NR/LTE/TDSCDMA</string>
+    <!-- NR/LTE/TDSCDMA/GSM [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary">Preferred network mode: NR/LTE/TDSCDMA/GSM</string>
+    <!-- NR/LTE/TDSCDMA/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary">Preferred network mode: NR/LTE/TDSCDMA/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary">Preferred network mode: NR/LTE/TDSCDMA/GSM/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary">Preferred network mode: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA</string>
 
+    <!-- Text for Network mode recommended [CHAR LIMIT=NONE] -->
+    <string name="network_recommended">\u0020(recommended)</string>
+    <!-- Text for Network 5g [CHAR LIMIT=NONE] -->
+    <string name="network_5G" translatable="false">5G</string>
+    <!-- Text for Network lte [CHAR LIMIT=NONE] -->
+    <string name="network_lte_pure" translatable="false">LTE</string>
+    <!-- Text for Network 4g [CHAR LIMIT=NONE] -->
+    <string name="network_4G_pure" translatable="false">4G</string>
     <!-- Text for Network lte [CHAR LIMIT=NONE] -->
     <string name="network_lte">LTE (recommended)</string>
     <!-- Text for Network 4g [CHAR LIMIT=NONE] -->

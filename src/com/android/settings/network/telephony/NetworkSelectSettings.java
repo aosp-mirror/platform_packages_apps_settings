@@ -310,9 +310,8 @@ public class NetworkSelectSettings extends DashboardFragment {
      * 1. use {@code ServiceState#getNetworkRegistrationInfoList()} to get the currently
      * registered cellIdentity, wrap it into a CellInfo;
      * 2. set the signal strength level as strong;
-     * 3. use {@link TelephonyManager#getNetworkOperatorName()} to get the title of the
-     * previously connected network operator, since the CellIdentity got from step 1 only has
-     * PLMN.
+     * 3. get the title of the previously connected network operator, since the CellIdentity
+     * got from step 1 only has PLMN.
      * - If the device has no data, we will remove the connected network operators list from the
      * screen.
      */
@@ -333,7 +332,8 @@ public class NetworkSelectSettings extends DashboardFragment {
             if (cellInfo != null) {
                 NetworkOperatorPreference pref = new NetworkOperatorPreference(
                         cellInfo, getPrefContext(), mForbiddenPlmns, mShow4GForLTE);
-                pref.setTitle(mTelephonyManager.getNetworkOperatorName());
+                pref.setTitle(MobileNetworkUtils.getCurrentCarrierNameForDisplay(
+                        getPrefContext(), mSubId));
                 pref.setSummary(R.string.network_connected);
                 // Update the signal strength icon, since the default signalStrength value would be
                 // zero (it would be quite confusing why the connected network has no signal)
