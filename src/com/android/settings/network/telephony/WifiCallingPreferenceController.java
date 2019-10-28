@@ -49,9 +49,6 @@ import java.util.List;
 public class WifiCallingPreferenceController extends TelephonyBasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
-    @VisibleForTesting
-    static final String KEY_PREFERENCE_CATEGORY = "calling_category";
-
     private TelephonyManager mTelephonyManager;
     @VisibleForTesting
     CarrierConfigManager mCarrierConfigManager;
@@ -94,13 +91,6 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
         Intent intent = mPreference.getIntent();
         if (intent != null) {
             intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
-        }
-        if (!isAvailable()) {
-            // Set category as invisible
-            final Preference preferenceCateogry = screen.findPreference(KEY_PREFERENCE_CATEGORY);
-            if (preferenceCateogry != null) {
-                preferenceCateogry.setVisible(false);
-            }
         }
     }
 
@@ -158,12 +148,14 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
                 mTelephonyManager.getCallState(mSubId) == TelephonyManager.CALL_STATE_IDLE);
     }
 
-    public void init(int subId) {
+    public WifiCallingPreferenceController init(int subId) {
         mSubId = subId;
         mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
         mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
         mSimCallManager = mContext.getSystemService(TelecomManager.class)
                 .getSimCallManagerForSubscription(mSubId);
+
+        return this;
     }
 
     private class PhoneCallStateListener extends PhoneStateListener {
