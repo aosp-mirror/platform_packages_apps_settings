@@ -60,7 +60,7 @@ public class NetworkOperatorPreferenceTest {
         when(mResources.getBoolean(com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI))
                 .thenReturn(false);
         final NetworkOperatorPreference preference = spy(
-                new NetworkOperatorPreference(mCellInfo, mContext,
+                new NetworkOperatorPreference(mContext, mCellInfo,
                         new ArrayList<>() /* forbiddenPlmns */, false /* show4GForLTE */));
 
         preference.setIcon(LEVEL);
