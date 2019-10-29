@@ -105,7 +105,7 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
         final CharSequence summary = !permissionsToShow.isEmpty()
                 ? mContext.getString(R.string.app_permissions_summary,
                 ListFormatter.getInstance().format(permissionsToShow).toLowerCase())
-                : null;
+                : mContext.getString(R.string.runtime_permissions_summary_no_permissions_granted);
         mPreference.setSummary(summary);
     }
 }
