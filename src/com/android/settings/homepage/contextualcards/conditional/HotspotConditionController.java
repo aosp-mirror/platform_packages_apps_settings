@@ -116,8 +116,8 @@ public class HotspotConditionController implements ConditionalCardController {
     private CharSequence getSsid() {
         WifiConfiguration wifiConfig = mWifiManager.getWifiApConfiguration();
         if (wifiConfig == null) {
-            return mAppContext.getText(
-                    com.android.internal.R.string.wifi_tether_configure_ssid_default);
+            // Should never happen.
+            return "";
         } else {
             return wifiConfig.SSID;
         }
