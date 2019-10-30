@@ -32,10 +32,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
-import android.net.wifi.hotspot2.PasspointConfiguration;
-import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
@@ -49,6 +45,7 @@ import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +56,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -71,10 +67,10 @@ public class WifiSettings2Test {
     private PowerManager mPowerManager;
     @Mock
     private DataUsagePreference mDataUsagePreference;
-    @Mock
-    private WifiManager mWifiManager;
     private Context mContext;
     private WifiSettings2 mWifiSettings2;
+    @Mock
+    private WifiPickerTracker mMockWifiPickerTracker;
 
     @Before
     public void setUp() {
@@ -87,7 +83,7 @@ public class WifiSettings2Test {
         mWifiSettings2.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
         mWifiSettings2.mSavedNetworksPreference = new Preference(mContext);
         mWifiSettings2.mConfigureWifiSettingsPreference = new Preference(mContext);
-        mWifiSettings2.mWifiManager = mWifiManager;
+        mWifiSettings2.mWifiPickerTracker = mMockWifiPickerTracker;
     }
 
     @Test
@@ -121,30 +117,10 @@ public class WifiSettings2Test {
         verify(wifiSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
     }
 
-    private List<WifiConfiguration> createMockWifiConfigurations(int count) {
-        final List<WifiConfiguration> mockConfigs = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            mockConfigs.add(new WifiConfiguration());
-        }
-        return mockConfigs;
-    }
-
-    private List<PasspointConfiguration> createMockPasspointConfigurations(int count) {
-        final List<PasspointConfiguration> mockConfigs = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            final HomeSp sp = new HomeSp();
-            sp.setFqdn("fqdn");
-            final PasspointConfiguration config = new PasspointConfiguration();
-            config.setHomeSp(sp);
-            mockConfigs.add(config);
-        }
-        return mockConfigs;
-    }
-
     @Test
     public void setAdditionalSettingsSummaries_hasSavedNetwork_preferenceVisible() {
-        when(mWifiManager.getConfiguredNetworks())
-                .thenReturn(createMockWifiConfigurations(NUM_NETWORKS));
+        when(mMockWifiPickerTracker.getNumSavedNetworks()).thenReturn(NUM_NETWORKS);
+        when(mMockWifiPickerTracker.getNumSavedSubscriptions()).thenReturn(0 /* count */);
 
         mWifiSettings2.setAdditionalSettingsSummaries();
 
@@ -157,8 +133,8 @@ public class WifiSettings2Test {
 
     @Test
     public void setAdditionalSettingsSummaries_hasSavedPasspointNetwork_preferenceVisible() {
-        when(mWifiManager.getPasspointConfigurations())
-                .thenReturn(createMockPasspointConfigurations(NUM_NETWORKS));
+        when(mMockWifiPickerTracker.getNumSavedNetworks()).thenReturn(0 /* count */);
+        when(mMockWifiPickerTracker.getNumSavedSubscriptions()).thenReturn(NUM_NETWORKS);
 
         mWifiSettings2.setAdditionalSettingsSummaries();
 
@@ -171,10 +147,8 @@ public class WifiSettings2Test {
 
     @Test
     public void setAdditionalSettingsSummaries_hasTwoKindsSavedNetwork_preferenceVisible() {
-        when(mWifiManager.getConfiguredNetworks())
-                .thenReturn(createMockWifiConfigurations(NUM_NETWORKS));
-        when(mWifiManager.getPasspointConfigurations())
-                .thenReturn(createMockPasspointConfigurations(NUM_NETWORKS));
+        when(mMockWifiPickerTracker.getNumSavedNetworks()).thenReturn(NUM_NETWORKS);
+        when(mMockWifiPickerTracker.getNumSavedSubscriptions()).thenReturn(NUM_NETWORKS);
 
         mWifiSettings2.setAdditionalSettingsSummaries();
 
@@ -187,8 +161,8 @@ public class WifiSettings2Test {
 
     @Test
     public void setAdditionalSettingsSummaries_noSavedNetwork_preferenceInvisible() {
-        when(mWifiManager.getConfiguredNetworks())
-                .thenReturn(createMockWifiConfigurations(0 /* count */));
+        when(mMockWifiPickerTracker.getNumSavedNetworks()).thenReturn(0 /* count */);
+        when(mMockWifiPickerTracker.getNumSavedSubscriptions()).thenReturn(0 /* count */);
 
         mWifiSettings2.setAdditionalSettingsSummaries();
 
