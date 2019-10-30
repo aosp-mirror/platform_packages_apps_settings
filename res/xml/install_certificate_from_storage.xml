@@ -62,6 +62,18 @@
 
         </Preference>
 
+        <Preference
+            android:key="install_app_src_certificate"
+            android:title="@string/app_src_certificate"
+            settings:controller="com.android.settings.security.InstallAppSourceCertificatePreferenceController">
+
+            <intent
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.security.InstallAppSourceCertificateWarning">
+            </intent>
+
+        </Preference>
+
     </PreferenceCategory>
 
 </PreferenceScreen>
