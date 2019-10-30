@@ -1877,6 +1877,21 @@ public class WifiDetailPreferenceControllerTest {
         verify(mockMacAddressPref).setTitle(R.string.wifi_advanced_device_mac_address_title);
     }
 
+    @Test
+    public void entityHeader_expiredPasspointR1_shouldHandleExpiration() {
+        setUpForDisconnectedNetwork();
+        when(mockAccessPoint.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.isPasspointConfigurationR1()).thenReturn(true);
+        when(mockAccessPoint.isExpired()).thenReturn(true);
+        String expireSummary = mContext.getResources().getString(
+                com.android.settingslib.R.string.wifi_passpoint_expired);
+
+        displayAndResume();
+
+        verify(mockButtonsPref).setButton3Visible(false);
+        verify(mockHeaderController).setSummary(expireSummary);
+    }
+
     private ActionButtonsPreference createMock() {
         final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
         when(pref.setButton1Text(anyInt())).thenReturn(pref);

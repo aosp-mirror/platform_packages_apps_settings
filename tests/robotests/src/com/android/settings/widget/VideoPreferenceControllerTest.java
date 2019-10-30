@@ -17,10 +17,13 @@
 package com.android.settings.widget;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -33,6 +36,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class VideoPreferenceControllerTest {
@@ -52,8 +56,25 @@ public class VideoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_isAlwaysAvailable() {
+    public void getAvailabilityStatus_isAvailableUnsearchable() {
+        final VideoPreference videoPreference = mock(VideoPreference.class);
+
+        // Assign mock object to mVideoPreference in controller
+        ReflectionHelpers.setField(mController, "mVideoPreference", videoPreference);
+        doReturn(true).when(videoPreference).isAnimationAvailable();
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_isUnsupportedOnDevice() {
+        final VideoPreference videoPreference = mock(VideoPreference.class);
+
+        // Assign mock object to mVideoPreference in controller
+        ReflectionHelpers.setField(mController, "mVideoPreference", videoPreference);
+        doReturn(false).when(videoPreference).isAnimationAvailable();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
