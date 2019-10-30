@@ -16,8 +16,6 @@
 
 package com.android.settings.development;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
-
 import android.content.Context;
 import android.provider.Settings;
 
@@ -42,7 +40,7 @@ public class BubbleGlobalPreferenceController extends DeveloperOptionsPreference
 
     @Override
     public String getPreferenceKey() {
-        return NOTIFICATION_BUBBLES;
+        return Settings.Global.NOTIFICATION_BUBBLES;
     }
 
     @Override
@@ -64,12 +62,12 @@ public class BubbleGlobalPreferenceController extends DeveloperOptionsPreference
     }
 
     private boolean isEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, OFF) == ON;
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.NOTIFICATION_BUBBLES, OFF) == ON;
     }
 
     private void writeSetting(boolean isEnabled) {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, isEnabled ? ON : OFF);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.NOTIFICATION_BUBBLES, isEnabled ? ON : OFF);
     }
 }

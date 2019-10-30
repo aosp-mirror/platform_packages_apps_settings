@@ -910,6 +910,12 @@
     <string name="security_settings_face_enroll_introduction_accessibility_vision"></string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
+    <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
+    <string name="security_settings_face_enroll_introduction_no_thanks">No thanks</string>
+    <!-- Button text to start enrollment [CHAR LIMIT=30] -->
+    <string name="security_settings_face_enroll_introduction_agree">Agree</string>
+    <!-- Button text to scroll to the end of a scrollview. [CHAR LIMIT=30] -->
+    <string name="security_settings_face_enroll_introduction_more">More</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_introduction_title">Unlock with your face</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
@@ -950,6 +956,18 @@
     <string name="security_settings_face_enroll_finish_title">All set. Looking good.</string>
     <!-- Button text to exit face wizard after everything is done [CHAR LIMIT=15] -->
     <string name="security_settings_face_enroll_done">Done</string>
+    <!-- Settings suggestion title text for re-enrolling a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_should_re_enroll_title">Improve face unlock performance</string>
+    <!-- Settings suggestion subtitle text for re-enrolling a face. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle">Set up face unlock again</string>
+    <!-- Settings suggestion title text for mandatory re-enrolling of a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_must_re_enroll_title">Set up face unlock again</string>
+    <!-- Settings suggestion subtitle text for mandatory re-enrolling of a face. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle">Improve security and performance</string>
+    <!-- Settings suggestion alert body title for re-enrolling a face. [CHAR LIMIT=60] -->
+    <string name="security_settings_face_enroll_improve_face_alert_title">Set up face unlock</string>
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">Delete your current face data to set up face unlock again.\n\nThe face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
     <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_use_face_category">Use face unlock for</string>
     <!-- Text shown on a toggle which allows or disallows the device to use face for unlocking the device. [CHAR LIMIT=20] -->
@@ -975,7 +993,7 @@
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_remove_dialog_details">The images and biometric data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
+    <string name="security_settings_face_settings_remove_dialog_details">The face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
     <!-- Subtitle shown for contextual setting face enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_context_subtitle">Use face unlock to unlock your phone</string>
 
