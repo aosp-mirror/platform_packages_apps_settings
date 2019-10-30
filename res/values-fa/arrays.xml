@@ -95,6 +95,12 @@
   </string-array>
     <!-- no translation found for wifi_tether_security:0 (1748357338693290598) -->
     <!-- no translation found for wifi_tether_security:1 (4760482622566629462) -->
+  <string-array name="eap_ocsp_type">
+    <item msgid="8881498697533203946">"راستی‌آزمایی نشود"</item>
+    <item msgid="9021261861568672183">"درخواست وضعیت گواهی"</item>
+    <item msgid="3045064686174157194">"نیاز به وضعیت گواهی"</item>
+    <item msgid="5558350282814532343">"نیاز به همه وضعیت‌های گواهی غیرقابل‌اطمینان"</item>
+  </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"فشار دکمه"</item>
     <item msgid="1624323946324499595">"پین از دستگاه مرتبط شده"</item>
@@ -144,12 +150,12 @@
     <item msgid="2318274046749286642">"PWD"</item>
   </string-array>
   <string-array name="wifi_peap_phase2_entries">
-    <item msgid="2577747762745812488">"هیچ‌کدام"</item>
+    <item msgid="2577747762745812488">"خالی"</item>
     <item msgid="937786527870979616">"MSCHAPV2"</item>
     <item msgid="5302613883318643629">"GTC"</item>
   </string-array>
   <string-array name="wifi_peap_phase2_entries_with_sim_auth">
-    <item msgid="5760470455461128892">"هیچ‌کدام"</item>
+    <item msgid="5760470455461128892">"خالی"</item>
     <item msgid="7480272092408291086">"MSCHAPV2"</item>
     <item msgid="5881794903338319324">"GTC"</item>
     <item msgid="5610607665198791980">"سیم کارت"</item>
@@ -157,7 +163,7 @@
     <item msgid="8926455723452645935">"AKA\'"</item>
   </string-array>
   <string-array name="wifi_phase2_entries">
-    <item msgid="1818786254010764570">"هیچ‌کدام"</item>
+    <item msgid="1818786254010764570">"خالی"</item>
     <item msgid="6189918678874123056">"PAP"</item>
     <item msgid="1524112260493662517">"MSCHAP"</item>
     <item msgid="5923246669412752932">"MSCHAPV2"</item>
@@ -168,12 +174,12 @@
     <item msgid="628395202971532382">"ثابت"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
-    <item msgid="4473276491748503377">"هیچ‌کدام"</item>
+    <item msgid="4473276491748503377">"خالی"</item>
     <item msgid="8673874894887358090">"دستی"</item>
     <item msgid="168893341855953140">"پیکربندی خودکار پروکسی"</item>
   </string-array>
   <string-array name="apn_auth_entries">
-    <item msgid="3856896061242872146">"هیچ‌کدام"</item>
+    <item msgid="3856896061242872146">"خالی"</item>
     <item msgid="5756844015743664882">"PAP"</item>
     <item msgid="535934025797984365">"CHAP"</item>
     <item msgid="8383098660619805783">"‏PAP یا CHAP"</item>
@@ -202,7 +208,7 @@
     <item msgid="7471182818083460781">"IS95A"</item>
   </string-array>
   <string-array name="mvno_type_entries">
-    <item msgid="4367119357633573465">"هیچ‌کدام"</item>
+    <item msgid="4367119357633573465">"خالی"</item>
     <item msgid="6062567900587138000">"SPN"</item>
     <item msgid="2454085083342423481">"IMSI"</item>
     <item msgid="2681427309183221543">"GID"</item>
@@ -378,7 +384,7 @@
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="4733815704128258753">"پیش‌فرض"</item>
-    <item msgid="3217099060748617005">"هیچ‌کدام"</item>
+    <item msgid="3217099060748617005">"خالی"</item>
     <item msgid="7467615139904599420">"نمای کلی"</item>
     <item msgid="5623165557468608975">"سایه‌دار"</item>
     <item msgid="8088451174058214588">"برآمده"</item>
@@ -407,7 +413,7 @@
     <item msgid="4946199982372391490">"‏IPSec VPN دارای گواهی و احراز هویت دوگانه"</item>
   </string-array>
   <string-array name="vpn_proxy_settings">
-    <item msgid="4474139132577932676">"هیچ‌کدام"</item>
+    <item msgid="4474139132577932676">"خالی"</item>
     <item msgid="2943781954264525815">"دستی"</item>
   </string-array>
   <string-array name="vpn_states">
@@ -521,6 +527,17 @@
     <item msgid="4545655348143499596">"LTE/TDSCDMA/GSM/WCDMA"</item>
     <item msgid="4107769721462339672">"TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
     <item msgid="8811683254058088466">"LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
+    <item msgid="6061166209300391104">"‏فقط NR"</item>
+    <item msgid="8142355442615397697">"NR/LTE"</item>
+    <item msgid="7683305473771959137">"NR/LTE/CDMA/EvDo"</item>
+    <item msgid="6482306971035989036">"NR/LTE/GSM/WCDMA"</item>
+    <item msgid="3402825851443463856">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="2884589831554418322">"NR/LTE/WCDMA"</item>
+    <item msgid="3443646431544924587">"NR/LTE/TDSCDMA"</item>
+    <item msgid="2721178995051412827">"NR/LTE/TDSCDMA/GSM"</item>
+    <item msgid="3080103852090116623">"NR/LTE/TDSCDMA/WCDMA"</item>
+    <item msgid="3657656937909438787">"NR/LTE/TDSCDMA/GSM/WCDMA"</item>
+    <item msgid="2791089485704180063">"NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</item>
   </string-array>
   <string-array name="cdma_subscription_choices">
     <item msgid="8753271080005095725">"RUIM/SIM"</item>
