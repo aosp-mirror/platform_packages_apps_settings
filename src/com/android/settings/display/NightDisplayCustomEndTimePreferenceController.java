@@ -18,7 +18,10 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
 
 public class NightDisplayCustomEndTimePreferenceController extends BasePreferenceController {
@@ -37,6 +40,13 @@ public class NightDisplayCustomEndTimePreferenceController extends BasePreferenc
     public int getAvailabilityStatus() {
         return ColorDisplayManager.isNightDisplayAvailable(mContext) ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference preference = screen.findPreference(getPreferenceKey());
+        updateState(preference);
     }
 
     @Override
