@@ -1201,13 +1201,13 @@
     <string name="screen_timeout" msgid="4882669461447531301">"وقفه زمانی صفحه"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"صفحه نمایش خاموش می‌شود"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> پس از غیرفعال بودن"</string>
-    <string name="wallpaper_settings_title" msgid="5449180116365824625">"تصویرزمینه"</string>
+    <string name="wallpaper_settings_title" msgid="5449180116365824625">"کاغذدیواری"</string>
     <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"سبک و کاغذدیواری"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"پیش‌فرض"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"سفارشی"</string>
-    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"تغییر تصویرزمینه"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"تغییر کاغذدیواری"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"شخصی‌سازی صفحه‌نمایش"</string>
-    <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"انتخاب تصویرزمینه از"</string>
+    <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"انتخاب کاغذدیواری از"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"‏شخصی‌سازی Pixel"</string>
     <string name="style_suggestion_summary" msgid="1811974280164432649">"انواع سبک‌ها، کاغذدیواری‌ها، و موارد دیگر را امتحان کنید"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"محافظ صفحه"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"پخش"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"حافظه اطلاعات کاربری"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"نصب گواهینامه"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"نصب گواهی‌ها از حافظه"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"‏نصب گواهی‌ها از کارت SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"پاک کردن اطلاعات کاربری"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"حافظه اطلاعات کاربری پاک شد."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"حافظه اطلاعات کاربری پاک نمی‌شود."</string>
     <string name="usage_access_title" msgid="332333405495457839">"برنامه‌های مجاز به دسترسی"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"گواهینامه مرکز صدور گواهی"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"‏گواهینامه کاربر برنامه و VPN"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"‏گواهینامه Wi-Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"حریم‌خصوصی درمعرض خطر است"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"‏وب‌سایت‌ها، برنامه‌ها، و شبکه‌های VPN از «گواهینامه‌های مرکز صدور گواهی» برای رمزگذاری استفاده می‌کنند. «گواهینامه‌های مرکز صدور گواهی» را فقط از سازمان‌هایی که مورداعتمادتان هستند نصب کنید. \n\n اگر یک «گواهینامه مرکز صدور گواهی» نصب کنید، مالک گواهینامه می‌تواند ازطریق وب‌سایت‌هایی که بازدید می‌کنید یا برنامه‌هایی که استفاده می‌کنید، به اطلاعات شما (ازجمله گذرواژه‌ها، پیام‌ها، یا جزئیات کارت اعتباری) دسترسی پیدا کند، حتی اگر این اطلاعات رمزگذاری شده باشند."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"نصب نشود"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"در هرصورت نصب شود"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"گواهینامه نصب نشد"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"سیگنال شماره‌گیری اضطراری"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"واکنش موجود در هنگام برقراری تماس اضطراری را تنظیم کنید"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"پشتیبان‌گیری"</string>
@@ -2875,7 +2866,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"کاربر"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"نمایه محدود شده"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"کاربر جدیدی اضافه می‌کنید؟"</string>
-    <string name="user_add_user_message_long" msgid="6768718238082929201">"‏با ایجاد کاربران دیگر، می‌توانید این دستگاه را با دیگران به‌اشتراک بگذارید. هر کاربر فضای مخصوص به خودش را دارد که می‌تواند آن را با برنامه‌ها، تصویرزمینه و موارد دیگر سفارشی کند. کهمچنین کاربران می‌توانند تنظیماتی در دستگاه ایجاد کنند، مانند تنظیمات Wi-Fi، که بر تنظیمات بقیه اثر دارد.\n\nوقتی کاربر جدیدی اضافه می‌کنید، آن شخص باید فضای خودش را تنظیم کند.\n\nهر کاربر می‌تواند برنامه‌ها را برای سایر کاربران به‌روزرسانی کند. دسترس‌پذیری، تنظیمات و سرویس‌ها قابل‌انتقال به کاربر جدید نیستند."</string>
+    <string name="user_add_user_message_long" msgid="6768718238082929201">"‏با ایجاد کاربران بیشتر، می‌توانید این دستگاه را با دیگران به‌اشتراک بگذارید. هر کاربر فضای مخصوص به خودش را دارد که می‌تواند آن را با برنامه‌ها، کاغذدیواری و موارد دیگر سفارشی کند. همچنین کاربران می‌توانند تنظیماتی در دستگاه ایجاد کنند، مانند تنظیمات Wi-Fi، که بر تنظیمات بقیه اثر دارد.\n\nوقتی کاربر جدیدی اضافه می‌کنید، آن شخص باید فضای خودش را تنظیم کند.\n\nهر کاربر می‌تواند برنامه‌ها را برای سایر کاربران به‌روزرسانی کند. دسترس‌پذیری، تنظیمات، و سرویس‌ها قابل‌انتقال به کاربر جدید نیستند."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"وقتی کاربر جدیدی اضافه می‌کنید آن فرد باید فضای خودش را تنظیم کند.\n\nهر کاربری می‌تواند برنامه‌ها را برای همه کاربران دیگر به‌روزرسانی کند."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"هم اکنون کاربر تنظیم شود؟"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"مطمئن شوید شخص در دسترس است تا دستگاه را بگیرد و فضایش را تنظیم کند"</string>
@@ -3896,7 +3887,7 @@
     <string name="storage_summary" msgid="3801281635351732202">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> استفاده‌شده - <xliff:g id="FREE_SPACE">%2$s</xliff:g> آزاد"</string>
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"فضای ذخیره‌سازی داخلی: <xliff:g id="PERCENTAGE">%1$s</xliff:g> استفاده‌شده - <xliff:g id="FREE_SPACE">%2$s</xliff:g> آزاد"</string>
     <string name="display_summary" msgid="6737806235882127328">"خواب پس از <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> عدم فعالیت"</string>
-    <string name="display_dashboard_summary" msgid="4145888780290131488">"تصویرزمینه، حالت خواب، اندازه قلم"</string>
+    <string name="display_dashboard_summary" msgid="4145888780290131488">"کاغذدیواری، حالت خواب، اندازه قلم"</string>
     <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"سبک، کاغذدیواری، وقفه زمانی صفحه، اندازه قلم"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"حالت خواب، اندازه قلم"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"خواب پس از ۱۰ دقیقه عدم فعالیت"</string>

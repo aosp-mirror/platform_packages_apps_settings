@@ -270,7 +270,7 @@
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer" msgid="4192803402331390389">"Menggunakan <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> dimulai pada <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Menggunakan <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Tidak ada waktu musim panas."</string>
+    <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Menggunakan <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Tidak ada waktu daylight saving."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Waktu musim panas"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Waktu standar"</string>
     <string name="zone_menu_by_region" msgid="8370437123807764346">"Pilih menurut wilayah"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Putar"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Penyimpanan kredensial"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Menginstal sertifikat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instal sertifikat dari penyimpanan"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instal sertifikat dari kartu SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Hapus kredensial"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Penyimpanan kredensial dihapus."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Penyimpanan kredensial tidak dapat dihapus."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apl dengan akses penggunaan"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Sertifikat CA"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Sertifikat pengguna apl &amp; VPN"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Sertifikat Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Privasi Anda berisiko"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Sertifikat CA digunakan oleh situs, aplikasi, dan VPN untuk enkripsi. Hanya instal sertifikat CA dari organisasi yang Anda percaya. \n\n Jika Anda menginstal sertifikat CA, pemilik sertifikat dapat mengakses informasi Anda, seperti sandi, pesan, atau detail kartu kredit, dari situs yang Anda kunjungi atau aplikasi yang Anda gunakan, meskipun informasi tersebut dienkripsi."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Jangan instal"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Instal"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Sertifikat tidak diinstal"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Sinyal panggilan darurat"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Setel perilaku ketika panggilan darurat dilakukan"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Cadangan"</string>
@@ -3264,7 +3255,7 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> jadwal dapat aktif otomatis</item>
       <item quantity="one">1 jadwal dapat aktif otomatis</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="554277240833452070">"Matikan suara perangkat, namun izinkan pengecualian"</string>
+    <string name="zen_category_behavior" msgid="554277240833452070">"Nonaktifkan suara perangkat, namun izinkan pengecualian"</string>
     <string name="zen_category_exceptions" msgid="7601136604273265629">"Pengecualian"</string>
     <string name="zen_category_schedule" msgid="9000447592251450453">"Jadwal"</string>
     <string name="zen_sound_title" msgid="4461494611692749446">"Lihat semua pengecualian"</string>
