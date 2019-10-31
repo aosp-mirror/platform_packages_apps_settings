@@ -169,6 +169,9 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
             description = getString(R.string.accessibility_service_default_description);
         }
         extras.putString(AccessibilitySettings.EXTRA_SUMMARY, description);
+
+        final String htmlDescription = info.loadHtmlDescription(getPackageManager());
+        extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
     }
 
     private static void configureMagnificationPreferenceIfNeeded(Preference preference) {

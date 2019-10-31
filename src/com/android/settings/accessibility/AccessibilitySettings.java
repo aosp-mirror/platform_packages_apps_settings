@@ -111,6 +111,8 @@ public class AccessibilitySettings extends DashboardFragment {
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
     static final String EXTRA_VIDEO_RAW_RESOURCE_ID = "video_resource";
     static final String EXTRA_LAUNCHED_FROM_SUW = "from_suw";
+    static final String EXTRA_ANIMATED_IMAGE_RES = "animated_image_res";
+    static final String EXTRA_HTML_DESCRIPTION = "html_description";
 
     // Timeout before we update the services if packages are added/removed
     // since the AccessibilityManagerService has to do that processing first
@@ -409,6 +411,10 @@ public class AccessibilitySettings extends DashboardFragment {
             extras.putString(EXTRA_TITLE, title);
             extras.putParcelable(EXTRA_RESOLVE_INFO, resolveInfo);
             extras.putString(EXTRA_SUMMARY, description);
+            extras.putInt(EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
+
+            final String htmlDescription = info.loadHtmlDescription(getPackageManager());
+            extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
 
             final String settingsClassName = info.getSettingsActivityName();
             if (!TextUtils.isEmpty(settingsClassName)) {

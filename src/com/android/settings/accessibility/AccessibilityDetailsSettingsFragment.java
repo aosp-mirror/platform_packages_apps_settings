@@ -164,7 +164,10 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                     new ComponentName(packageName, settingsClassName).flattenToString());
         }
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
+        extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
 
+        final String htmlDescription = info.loadHtmlDescription(getActivity().getPackageManager());
+        extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
         return extras;
     }
 

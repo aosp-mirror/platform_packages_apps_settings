@@ -16,10 +16,16 @@
 
 package com.android.settings.accessibility;
 
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -29,7 +35,9 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
-import com.android.settingslib.widget.FooterPreference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment {
 
@@ -40,6 +48,30 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     protected CharSequence mSettingsTitle;
     protected Intent mSettingsIntent;
+    protected ComponentName mComponentName;
+    protected Uri mImageUri;
+    protected CharSequence mStaticDescription;
+    protected CharSequence mHtmlDescription;
+    private static final String ANCHOR_TAG = "a";
+    private static final String DRAWABLE_FOLDER = "drawable";
+
+    // For html description of accessibility service, third party developer must follow the rule,
+    // such as <img src="R.drawable.fileName"/>, a11y settings will get third party resources
+    // by this.
+    private static final String IMG_PREFIX = "R.drawable.";
+
+    private ImageView mImageGetterCacheView;
+
+    private final Html.ImageGetter mImageGetter = (String str) -> {
+        if (str != null && str.startsWith(IMG_PREFIX)) {
+            final String fileName = str.substring(IMG_PREFIX.length());
+            return getDrawableFromUri(Uri.parse(
+                    ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
+                            + mComponentName.getPackageName() + "/" + DRAWABLE_FOLDER + "/"
+                            + fileName));
+        }
+        return null;
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,14 +95,44 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         onProcessArguments(getArguments());
         updateSwitchBarText(mSwitchBar);
 
+        PreferenceScreen preferenceScreen = getPreferenceScreen();
+
         // Show the "Settings" menu as if it were a preference screen
         if (mSettingsTitle != null && mSettingsIntent != null) {
-            PreferenceScreen preferenceScreen = getPreferenceScreen();
             Preference settingsPref = new Preference(preferenceScreen.getContext());
             settingsPref.setTitle(mSettingsTitle);
             settingsPref.setIconSpaceReserved(true);
             settingsPref.setIntent(mSettingsIntent);
             preferenceScreen.addPreference(settingsPref);
+        }
+
+        if (mImageUri != null) {
+            final AnimatedImagePreference animatedImagePreference = new AnimatedImagePreference(
+                    preferenceScreen.getContext());
+            animatedImagePreference.setImageUri(mImageUri);
+            animatedImagePreference.setDividerAllowedAbove(true);
+            preferenceScreen.addPreference(animatedImagePreference);
+        }
+
+        if (mStaticDescription != null) {
+            final StaticTextPreference staticTextPreference = new StaticTextPreference(
+                    preferenceScreen.getContext());
+            staticTextPreference.setSummary(mStaticDescription);
+            preferenceScreen.addPreference(staticTextPreference);
+        }
+
+        if (mHtmlDescription != null) {
+            // For accessibility service, avoid malicious links made by third party developer
+            final List<String> unsupportedTagList = new ArrayList<>();
+            unsupportedTagList.add(ANCHOR_TAG);
+
+            final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(
+                    preferenceScreen.getContext());
+            htmlTextPreference.setSummary(mHtmlDescription);
+            htmlTextPreference.setImageGetter(mImageGetter);
+            htmlTextPreference.setUnsupportedTagList(unsupportedTagList);
+            htmlTextPreference.setDividerAllowedAbove(true);
+            preferenceScreen.addPreference(htmlTextPreference);
         }
     }
 
@@ -139,17 +201,30 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         // Summary.
         if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY_RES)) {
             final int summary = arguments.getInt(AccessibilitySettings.EXTRA_SUMMARY_RES);
-            createFooterPreference(getText(summary));
+            mStaticDescription = getText(summary);
         } else if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY)) {
             final CharSequence summary = arguments.getCharSequence(
                     AccessibilitySettings.EXTRA_SUMMARY);
-            createFooterPreference(summary);
+            mStaticDescription = summary;
         }
     }
 
-    private void createFooterPreference(CharSequence title) {
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        preferenceScreen.addPreference(new FooterPreference.Builder(getActivity()).setTitle(
-                title).build());
+    private Drawable getDrawableFromUri(Uri imageUri) {
+        if (mImageGetterCacheView == null) {
+            mImageGetterCacheView = new ImageView(getContext());
+        }
+
+        mImageGetterCacheView.setAdjustViewBounds(true);
+        mImageGetterCacheView.setImageURI(imageUri);
+
+        final Drawable drawable = mImageGetterCacheView.getDrawable().mutate();
+        if (drawable != null) {
+            drawable.setBounds(/* left= */0, /* top= */0, drawable.getIntrinsicWidth(),
+                    drawable.getIntrinsicHeight());
+        }
+
+        mImageGetterCacheView.setImageURI(null);
+        mImageGetterCacheView.setImageDrawable(null);
+        return drawable;
     }
 }
