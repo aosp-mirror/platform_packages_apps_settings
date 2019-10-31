@@ -18,10 +18,6 @@ package com.android.settings.privacy;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
-import android.view.View;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -66,24 +62,6 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getSettingsLifecycle());
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        use(PermissionBarChartPreferenceController.class).setFragment(this /* fragment */);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initLoadingBar();
-    }
-
-    @VisibleForTesting
-    void initLoadingBar() {
-        setPinnedHeaderView(R.layout.progress_header);
-        showPinnedHeader(false);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
