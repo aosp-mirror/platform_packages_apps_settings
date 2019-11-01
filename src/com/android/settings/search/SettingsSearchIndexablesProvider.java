@@ -102,7 +102,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
 
     @Override
     public Cursor queryXmlResources(String[] projection) {
-        MatrixCursor cursor = new MatrixCursor(INDEXABLES_XML_RES_COLUMNS);
+        final MatrixCursor cursor = new MatrixCursor(INDEXABLES_XML_RES_COLUMNS);
         final List<SearchIndexableResource> resources =
                 getSearchIndexableResourcesFromProvider(getContext());
         for (SearchIndexableResource val : resources) {
@@ -125,7 +125,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
      */
     @Override
     public Cursor queryRawData(String[] projection) {
-        MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
+        final MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
         final List<SearchIndexableRaw> raws = getSearchIndexableRawFromProvider(getContext());
         for (SearchIndexableRaw val : raws) {
             Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];
@@ -155,7 +155,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
      */
     @Override
     public Cursor queryNonIndexableKeys(String[] projection) {
-        MatrixCursor cursor = new MatrixCursor(NON_INDEXABLES_KEYS_COLUMNS);
+        final MatrixCursor cursor = new MatrixCursor(NON_INDEXABLES_KEYS_COLUMNS);
         final List<String> nonIndexableKeys = getNonIndexableKeysFromProvider(getContext());
         for (String nik : nonIndexableKeys) {
             final Object[] ref = new Object[NON_INDEXABLES_KEYS_COLUMNS.length];
@@ -174,27 +174,29 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     @Override
     public Cursor queryDynamicRawData(String[] projection) {
         final Context context = getContext();
-        final DashboardFeatureProvider dashboardFeatureProvider =
-                FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
+        final List<SearchIndexableRaw> rawList = new ArrayList<>();
+        rawList.addAll(getDynamicSearchIndexableRawFromProvider(context));
+        rawList.addAll(getInjectionIndexableRawData(context));
 
         final MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
-        for (DashboardCategory category : dashboardFeatureProvider.getAllCategories()) {
-            for (Tile tile : category.getTiles()) {
-                final String packageName = tile.getPackageName();
-                if (context.getPackageName().equals(packageName)) {
-                    continue;
-                }
-                final Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];
-                ref[COLUMN_INDEX_RAW_TITLE] = tile.getTitle(context);
-                ref[COLUMN_INDEX_RAW_SUMMARY_ON] = tile.getSummary(context);
-                ref[COLUMN_INDEX_RAW_SUMMARY_OFF] = tile.getSummary(context);
-                ref[COLUMN_INDEX_RAW_KEY] = dashboardFeatureProvider.getDashboardKeyForTile(
-                        tile);
-                ref[COLUMN_INDEX_RAW_CLASS_NAME] = CATEGORY_KEY_TO_PARENT_MAP.get(
-                        tile.getCategory());
-                cursor.addRow(ref);
-            }
+        for (SearchIndexableRaw raw : rawList) {
+            Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];
+            ref[COLUMN_INDEX_RAW_TITLE] = raw.title;
+            ref[COLUMN_INDEX_RAW_SUMMARY_ON] = raw.summaryOn;
+            ref[COLUMN_INDEX_RAW_SUMMARY_OFF] = raw.summaryOff;
+            ref[COLUMN_INDEX_RAW_ENTRIES] = raw.entries;
+            ref[COLUMN_INDEX_RAW_KEYWORDS] = raw.keywords;
+            ref[COLUMN_INDEX_RAW_SCREEN_TITLE] = raw.screenTitle;
+            ref[COLUMN_INDEX_RAW_CLASS_NAME] = raw.className;
+            ref[COLUMN_INDEX_RAW_ICON_RESID] = raw.iconResId;
+            ref[COLUMN_INDEX_RAW_INTENT_ACTION] = raw.intentAction;
+            ref[COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE] = raw.intentTargetPackage;
+            ref[COLUMN_INDEX_RAW_INTENT_TARGET_CLASS] = raw.intentTargetClass;
+            ref[COLUMN_INDEX_RAW_KEY] = raw.key;
+            ref[COLUMN_INDEX_RAW_USER_ID] = raw.userId;
+            cursor.addRow(ref);
         }
+
         return cursor;
     }
 
@@ -258,14 +260,13 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     }
 
     private List<String> getNonIndexableKeysFromProvider(Context context) {
-        final Collection<Class> values = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
+        final Collection<Class> values = getIndexableProviderValues(context);
         final List<String> nonIndexableKeys = new ArrayList<>();
 
         for (Class<?> clazz : values) {
             final long startTime = System.currentTimeMillis();
-            Indexable.SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
-                    clazz);
+            final Indexable.SearchIndexProvider provider =
+                    DatabaseIndexingUtils.getSearchIndexProvider(clazz);
 
             List<String> providerNonIndexableKeys;
             try {
@@ -309,14 +310,12 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     }
 
     private List<SearchIndexableResource> getSearchIndexableResourcesFromProvider(Context context) {
-        Collection<Class> values = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
-        List<SearchIndexableResource> resourceList = new ArrayList<>();
+        final Collection<Class> values = getIndexableProviderValues(context);
+        final List<SearchIndexableResource> resourceList = new ArrayList<>();
 
         for (Class<?> clazz : values) {
-            Indexable.SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
-                    clazz);
-
+            final Indexable.SearchIndexProvider provider =
+                    DatabaseIndexingUtils.getSearchIndexProvider(clazz);
             final List<SearchIndexableResource> resList =
                     provider.getXmlResourcesToIndex(context, true);
 
@@ -337,15 +336,14 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     }
 
     private List<SearchIndexableRaw> getSearchIndexableRawFromProvider(Context context) {
-        final Collection<Class> values = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
+        final Collection<Class> values = getIndexableProviderValues(context);
         final List<SearchIndexableRaw> rawList = new ArrayList<>();
 
         for (Class<?> clazz : values) {
-            Indexable.SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
-                    clazz);
-            final List<SearchIndexableRaw> providerRaws = provider.getRawDataToIndex(context,
-                    true /* enabled */);
+            final Indexable.SearchIndexProvider provider =
+                    DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+            final List<SearchIndexableRaw> providerRaws =
+                    provider.getRawDataToIndex(context, true /* enabled */);
 
             if (providerRaws == null) {
                 continue;
@@ -361,5 +359,60 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         }
 
         return rawList;
+    }
+
+    private List<SearchIndexableRaw> getDynamicSearchIndexableRawFromProvider(Context context) {
+        final Collection<Class> values = getIndexableProviderValues(context);
+        final List<SearchIndexableRaw> rawList = new ArrayList<>();
+
+        for (Class<?> clazz : values) {
+            final Indexable.SearchIndexProvider provider =
+                    DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+            final List<SearchIndexableRaw> providerRaws =
+                    provider.getDynamicRawDataToIndex(context, true /* enabled */);
+
+            if (providerRaws == null) {
+                continue;
+            }
+
+            for (SearchIndexableRaw raw : providerRaws) {
+                // The classname and intent information comes from the PreIndexData
+                // This will be more clear when provider conversion is done at PreIndex time.
+                raw.className = clazz.getName();
+
+            }
+            rawList.addAll(providerRaws);
+        }
+
+        return rawList;
+    }
+
+    private List<SearchIndexableRaw> getInjectionIndexableRawData(Context context) {
+        final DashboardFeatureProvider dashboardFeatureProvider =
+                FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
+
+        final List<SearchIndexableRaw> rawList = new ArrayList<>();
+        for (DashboardCategory category : dashboardFeatureProvider.getAllCategories()) {
+            for (Tile tile : category.getTiles()) {
+                final String packageName = tile.getPackageName();
+                if (context.getPackageName().equals(packageName)) {
+                    continue;
+                }
+                final SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                raw.title = tile.getTitle(context).toString();
+                raw.summaryOn = tile.getSummary(context).toString();
+                raw.summaryOff = tile.getSummary(context).toString();
+                raw.keywords = dashboardFeatureProvider.getDashboardKeyForTile(tile);
+                raw.className = CATEGORY_KEY_TO_PARENT_MAP.get(tile.getCategory());
+                rawList.add(raw);
+            }
+        }
+
+        return rawList;
+    }
+
+    private Collection<Class> getIndexableProviderValues(Context context) {
+        return FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
     }
 }
