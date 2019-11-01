@@ -45,7 +45,6 @@ public class VideoPreference extends Preference {
     AnimationController mAnimationController;
     @VisibleForTesting
     boolean mAnimationAvailable;
-    private boolean mVideoPaused;
     private float mAspectRatio = 1.0f;
     private int mPreviewId;
     private int mAnimationId;
@@ -130,11 +129,16 @@ public class VideoPreference extends Preference {
         super.onDetached();
     }
 
-    public void onViewVisible(boolean videoPaused) {
-        mVideoPaused = videoPaused;
+    /**
+     * Called from {@link VideoPreferenceController} when the view is onResume
+     */
+    public void onViewVisible() {
         initAnimationController();
     }
 
+    /**
+     * Called from {@link VideoPreferenceController} when the view is onPause
+     */
     public void onViewInvisible() {
         releaseAnimationController();
     }
@@ -172,10 +176,6 @@ public class VideoPreference extends Preference {
 
     public boolean isAnimationAvailable() {
         return mAnimationAvailable;
-    }
-
-    public boolean isVideoPaused() {
-        return mVideoPaused;
     }
 
     /**

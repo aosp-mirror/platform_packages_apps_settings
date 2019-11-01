@@ -259,7 +259,6 @@ public class FaceSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new FaceSettingsVideoPreferenceController(context));
         controllers.add(new FaceSettingsKeyguardPreferenceController(context));
         controllers.add(new FaceSettingsAppPreferenceController(context));
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));

@@ -107,8 +107,6 @@ public class VideoPreferenceTest {
 
     @Test
     public void onViewInvisible_shouldReleaseMediaplayer() {
-        mVideoPreference.onViewVisible(false);
-
         mVideoPreference.onViewInvisible();
 
         verify(mAnimationController).release();
