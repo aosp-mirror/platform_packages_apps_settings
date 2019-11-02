@@ -29,7 +29,6 @@ public class VideoPreferenceController extends BasePreferenceController implemen
         LifecycleObserver, OnResume, OnPause {
 
     private VideoPreference mVideoPreference;
-    private boolean mVideoPaused;
 
     public VideoPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -50,7 +49,6 @@ public class VideoPreferenceController extends BasePreferenceController implemen
     @Override
     public void onPause() {
         if (mVideoPreference != null) {
-            mVideoPaused = mVideoPreference.isVideoPaused();
             mVideoPreference.onViewInvisible();
         }
     }
@@ -58,7 +56,7 @@ public class VideoPreferenceController extends BasePreferenceController implemen
     @Override
     public void onResume() {
         if (mVideoPreference != null) {
-            mVideoPreference.onViewVisible(mVideoPaused);
+            mVideoPreference.onViewVisible();
         }
     }
 

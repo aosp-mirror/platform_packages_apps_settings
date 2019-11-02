@@ -21,7 +21,6 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -92,6 +91,6 @@ public class VideoPreferenceControllerTest {
 
         mController.onResume();
 
-        verify(mPreference).onViewVisible(anyBoolean());
+        verify(mPreference).onViewVisible();
     }
 }

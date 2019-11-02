@@ -17,9 +17,7 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
-import android.os.Bundle;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -27,21 +25,14 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 public abstract class GesturePreferenceController extends TogglePreferenceController
         implements Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnResume, OnPause, OnCreate, OnSaveInstanceState {
-
-    @VisibleForTesting
-    static final String KEY_VIDEO_PAUSED = "key_video_paused";
+        LifecycleObserver, OnResume, OnPause {
 
     private VideoPreference mVideoPreference;
-    @VisibleForTesting
-    boolean mVideoPaused;
 
     public GesturePreferenceController(Context context, String key) {
         super(context, key);
@@ -71,21 +62,8 @@ public abstract class GesturePreferenceController extends TogglePreferenceContro
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            mVideoPaused = savedInstanceState.getBoolean(KEY_VIDEO_PAUSED, false);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean(KEY_VIDEO_PAUSED, mVideoPaused);
-    }
-
-    @Override
     public void onPause() {
         if (mVideoPreference != null) {
-            mVideoPaused = mVideoPreference.isVideoPaused();
             mVideoPreference.onViewInvisible();
         }
     }
@@ -93,7 +71,7 @@ public abstract class GesturePreferenceController extends TogglePreferenceContro
     @Override
     public void onResume() {
         if (mVideoPreference != null) {
-            mVideoPreference.onViewVisible(mVideoPaused);
+            mVideoPreference.onViewVisible();
         }
     }
 

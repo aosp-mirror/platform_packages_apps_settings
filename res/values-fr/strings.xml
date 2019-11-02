@@ -372,10 +372,10 @@
     <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Vous devez ouvrir les yeux pour déverrouiller le téléphone"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Toujours demander confirmation"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Toujours demander la confirmation pour Face Unlock dans les applis"</string>
-    <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Supprimer les données du visage"</string>
+    <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Supprimer les données de reconnaissance faciale"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Configurer Face Unlock"</string>
     <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Utilisez Face Unlock pour déverrouiller votre appareil, vous connecter à des applications et confirmer des paiements.\n\nÀ savoir :\nVous pouvez déverrouiller votre téléphone sans le vouloir, simplement en le regardant.\n\nQuelqu\'un d\'autre peut également le déverrouiller en le tenant devant votre visage, même si vous avez les yeux fermés.\n\nEnfin, quelqu\'un qui vous ressemble beaucoup, comme votre jumeau/jumelle peut également déverrouiller votre téléphone."</string>
-    <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Supprimer les données du visage ?"</string>
+    <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Supprimer les données de reconnaissance faciale ?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Les données faciales utilisées par Face Unlock seront supprimées définitivement et en toute sécurité. Après quoi, vous devrez utiliser votre code, votre schéma ou votre mot de passe pour déverrouiller votre téléphone, vous connecter aux applications et confirmer les paiements."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Utilisez Face Unlock pour déverrouiller votre téléphone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Empreinte digitale"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Lecture"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Stockage des identifiants"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Installer un certificat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Installer les certificats depuis la mémoire de stockage"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Installer les certificats depuis la carte SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Effacer les identifiants"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Les identifiants sont effacés."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Impossible eff. stockage identifiants."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Applis avec accès données conso"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Certificat CA"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Certificat utilisateur VPN et appli"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Certificat Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Votre confidentialité est compromise"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Les certificats CA sont utilisés pour le chiffrement de sites Web, d\'applications et de VPN. Installez uniquement les certificats CA provenant d\'organisations en qui vous avez confiance. \n\n Si vous installez un certificat CA, son propriétaire peut accéder à vos informations (mots de passe, messages ou informations relatives à votre carte de crédit) depuis les sites Web que vous consultez ou les applications que vous utilisez, même si ces informations sont chiffrées."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Ne pas installer"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Installer quand même"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Certificat non installé"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Signal de numérotation d\'urgence"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Définir le comportement en cas d\'appel d\'urgence"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Sauvegarde"</string>

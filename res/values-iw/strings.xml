@@ -1023,8 +1023,7 @@
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"‏Wi-Fi מתקדם"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
-    <!-- no translation found for wifi_advanced_device_mac_address_title (4486538933329213769) -->
-    <skip />
+    <string name="wifi_advanced_device_mac_address_title" msgid="4486538933329213769">"‏כתובת MAC של המכשיר"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="1528136478606735549">"‏כתובת MAC אקראית"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"‏כתובת IP"</string>
     <string name="wifi_details_title" msgid="8954667664081737098">"פרטי הרשת"</string>
@@ -1032,7 +1031,7 @@
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"‏כתובות IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"רשתות שנשמרו"</string>
-    <string name="wifi_subscribed_access_points_tab" msgid="6480224551765489055">"מנויים"</string>
+    <string name="wifi_subscribed_access_points_tab" msgid="6480224551765489055">"מינויים"</string>
     <!-- no translation found for wifi_saved_access_points_tab (2659675386657663705) -->
     <skip />
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"‏הגדרות IP"</string>
@@ -1367,8 +1366,7 @@
     <string name="status_roaming" msgid="2638800467430913403">"נדידה"</string>
     <string name="status_operator" msgid="2274875196954742087">"רשת"</string>
     <string name="status_wifi_mac_address" msgid="2202206684020765378">"‏כתובת MAC של Wi-Fi"</string>
-    <!-- no translation found for status_device_wifi_mac_address (308853557862261400) -->
-    <skip />
+    <string name="status_device_wifi_mac_address" msgid="308853557862261400">"‏כתובת MAC של Wi-Fi של המכשיר"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"‏כתובת Bluetooth"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"מספר סידורי"</string>
     <string name="status_up_time" msgid="7294859476816760399">"זמן פעולה"</string>
@@ -2589,8 +2587,7 @@
     <string name="tts_play" msgid="2628469503798633884">"הפעלה"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"אחסון אישורים"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"התקנת אישור"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"התקנת אישורים מאמצעי אחסון"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"‏התקנת אישורים מכרטיס SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"ניקוי פרטי כניסה"</string>
@@ -2610,22 +2607,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"אחסון האישורים נמחק."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"לא ניתן למחוק את האמצעי לאחסון אישורים."</string>
     <string name="usage_access_title" msgid="332333405495457839">"גישה לנתוני שימוש"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"‏אישור CA"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"‏אישור משתמש לאפליקציה ול-VPN"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"‏אישור Wi-Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"הפרטיות שלך בסיכון"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"‏אישורי CA משמשים אתרים, אפליקציות ורשתות VPN לצורך הצפנה. יש להתקין אישורי CA רק מארגונים מהימנים. \n\n לאחר התקנת אישור CA, לבעל האישור תהיה גישה לפרטים שלך, כמו סיסמאות, הודעות או פרטי כרטיס אשראי, מאתרים שביקרת בהם או אפליקציות שבשימוש - אפילו אם הפרטים האלו מוצפנים."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"לא להתקין"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"התקנה בכל זאת"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"לא הותקן אישור"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"אות לחיוג חירום"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"הגדרת אופן פעולה בעת ביצוע שיחת חירום"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"גיבוי"</string>

@@ -77,6 +77,11 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     }
 
     @Override
+    public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context, boolean enabled) {
+        return null;
+    }
+
+    @Override
     @CallSuper
     public List<String> getNonIndexableKeys(Context context) {
         if (!isPageSearchEnabled(context)) {
