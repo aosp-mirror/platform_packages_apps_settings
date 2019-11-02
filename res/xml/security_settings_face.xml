@@ -52,6 +52,13 @@
         android:key="security_settings_face_manage_category"
         android:title="@string/security_settings_face_settings_require_category">
         <SwitchPreference
+            android:key="security_settings_face_require_attention"
+            android:title="@string/security_settings_face_settings_require_attention"
+            android:summary="@string/security_settings_face_settings_require_attention_details"
+            app:keywords="@string/keywords_face_unlock"
+            app:controller="com.android.settings.biometrics.face.FaceSettingsAttentionPreferenceController"/>
+
+        <SwitchPreference
             android:key="security_settings_face_require_confirmation"
             android:title="@string/security_settings_face_settings_require_confirmation"
             android:summary="@string/security_settings_face_settings_require_confirmation_details"
