@@ -31,6 +31,9 @@ android_app {
         "androidx-constraintlayout_constraintlayout-solver",
         "androidx.lifecycle_lifecycle-runtime",
         "androidx.lifecycle_lifecycle-extensions",
+        "androidx.test.core",
+        "androidx.test.runner",
+        "androidx.test.ext.junit",
         "guava",
         "jsr305",
         "settings-contextual-card-protos-lite",
@@ -61,7 +64,7 @@ android_robolectric_test {
         "SettingsLib-robo-testutils",
     ],
 
-    java_resource_dirs: ["config"],
+    java_resource_dirs: ["config", "resources"],
 
     instrumentation_for: "SettingsRoboTestStub",
 
