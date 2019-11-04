@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"अॅप्समध्ये फेस अनलॉक वापरताना, नेहमी खात्री करणे आवश्यक आहे"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"फेस डेटा हटवा"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"फेस अनलॉक सेट करा"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"तुमचे डिव्हाइस अनलॉक करण्यासाठी, अ‍ॅप्समध्ये साइन इन करण्यासाठी आणि पेमेंटची खात्री करण्यासाठी फेस अनलॉक वापरा. \n\n लक्षात ठेवा:\nतुम्हाला फोन अनलॉक करायचा नसताना देखील तुम्ही फोनकडे पाहिल्यामुळे तो अनलॉक होऊ शकतो.\n\nतुमचे डोळे बंद असताना देखील दुसऱ्या कोणीतरी तुमचा फोन तुमच्या चेहऱ्यासमोर धरल्यास, तुमचा फोन अनलॉक केला जाऊ शकतो.\n\nअगदी तुमच्यासारख्या दिसणाऱ्या व्यक्तीकडून उदा. जुळ्या भावंडाकडून तुमचा फोन अनलॉक केला जाऊ शकतो."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"तुमचे डिव्हाइस अनलॉक करण्यासाठी, अ‍ॅप्समध्ये साइन इन करण्यासाठी आणि पेमेंटची खात्री करण्यासाठी फेस अनलॉक वापरा. \n\n लक्षात ठेवा:\nतुमचा हेतू नसताना देखील फोनकडे पाहिल्यास तो अनलॉक होऊ शकतो.\n\nतुमचे डोळे उघडे असताना एखाद्या व्यक्तीने तुमचा फोन तुमच्या चेहऱ्याकडे धरल्यास तुमचा फोन अनलॉक केला जाऊ शकतो\n\nतुमच्यासारखी दिसणारी व्यक्ती तुमचा फोन संभाव्यत: अनलॉक करू शकते, जसे की, तुमचे भावंड."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"फेस डेटा हटवायचा?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"फेस अनलॉकद्वारे वापरला जाणारा फेस डेटा कायमचा आणि सुरक्षितपणे हटवला जाईल. काढून टाकल्यानंतर, तुमचा फोन अनलॉक करण्यासाठी, अ‍ॅप्समध्ये साइन इन करण्यासाठी आणि पेमेंट निश्चित करण्यासाठी तुम्हाला तुमचा पिन, पॅटर्न किंवा पासवर्ड लागेल."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"तुमचा फोन अनलॉक करण्यासाठी फेस अनलॉक वापरा"</string>
@@ -2512,8 +2512,7 @@
     <string name="tts_play" msgid="2628469503798633884">"प्ले करा"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"क्रेडेन्शियल स्टोरेज"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"एक प्रमाणपत्र इंस्टॉल करा"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"स्टोरेजमधील प्रमाणपत्रे इंस्टॉल करा"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"SD कार्डमधील प्रमाणपत्रे इंस्टॉल करा"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"क्रेडेंशियल साफ करा"</string>
@@ -2533,22 +2532,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"क्रेडेन्शियल स्टोरेज मिटवले आहे."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"क्रेडेन्शियल स्टोरेज मिटवता आले नाही."</string>
     <string name="usage_access_title" msgid="332333405495457839">"वापर प्रवेश असलेले अ‍ॅप्स"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"CA प्रमाणपत्र"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"VPN व ॲप वापरकर्ता प्रमाणपत्र"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"वाय-फाय प्रमाणपत्र"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"तुमची गोपनीयता धोक्यात आहे"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"वेबसाइट, अॅप्स आणि VPN एंक्रिप्शनसाठी CA प्रमाणपत्रे वापरली जातात. फक्त तुमचा विश्वास असलेल्या संस्थांकडून CA प्रमाणपत्रे इंस्टॉल करा. \n\n तुम्ही CA प्रमाणपत्र इंस्टॉल केल्यास, प्रमाणपत्र मालक तुम्ही भेट दिलेल्या वेबसाइटवरून किंवा तुम्ही वापरत असलेल्या अ‍ॅप्‍सवरील माहिती, जसे की पासवर्ड, मेसेज किंवा क्रेडिट कार्ड तपशील अॅक्सेस करू शकतात - ती माहिती एंक्रिप्ट केलेली असली तरीही."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"इंस्टॉल करू नका"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"तरीही इंस्टॉल करा"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"प्रमाणपत्र इंस्टॉल केलेले नाही"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"आणीबाणी डायलिंग सिग्नल"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"आणीबाणी कॉल केला जातो तेव्हा वर्तन सेट करा"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"बॅकअप"</string>
