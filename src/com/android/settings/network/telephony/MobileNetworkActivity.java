@@ -36,7 +36,7 @@ import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
-import com.android.settings.network.ActiveSubsciptionsListener;
+import com.android.settings.network.ProxySubscriptionManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -45,7 +45,8 @@ import java.util.List;
 /**
  * Activity for displaying MobileNetworkSettings
  */
-public class MobileNetworkActivity extends SettingsBaseActivity {
+public class MobileNetworkActivity extends SettingsBaseActivity
+        implements ProxySubscriptionManager.OnActiveSubscriptionChangedListener {
 
     private static final String TAG = "MobileNetworkActivity";
     @VisibleForTesting
@@ -53,7 +54,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     @VisibleForTesting
     static final int SUB_ID_NULL = Integer.MIN_VALUE;
 
-    private ActiveSubsciptionsListener mSubscriptionAccess;
+    private ProxySubscriptionManager mProxySubscriptionMgr;
     private int mCurSubscriptionId;
 
     @Override
@@ -86,11 +87,9 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         }
         setActionBar(findViewById(R.id.mobile_action_bar));
 
-        mSubscriptionAccess = new ActiveSubsciptionsListener(this) {
-            public void onChanged() {
-                updateSubscriptions(getSubscription());
-            }
-        };
+        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
+        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+        mProxySubscriptionMgr.addActiveSubscriptionsListener(this);
 
         mCurSubscriptionId = savedInstanceState != null
                 ? savedInstanceState.getInt(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
@@ -105,17 +104,23 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         updateTitleAndNavigation(subscription);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mSubscriptionAccess.start();
+    /**
+     * Implementation of ProxySubscriptionManager.OnActiveSubscriptionChangedListener
+     */
+    public void onChanged() {
         updateSubscriptions(getSubscription());
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        mSubscriptionAccess.stop();
+    protected void onStart() {
+        super.onStart();
+        updateSubscriptions(getSubscription());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mProxySubscriptionMgr.removeActiveSubscriptionsListener(this);
     }
 
     @Override
@@ -164,12 +169,12 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     SubscriptionInfo getSubscription() {
         if (mCurSubscriptionId != SUB_ID_NULL) {
             final SubscriptionInfo subInfo =
-                    mSubscriptionAccess.getActiveSubscriptionInfo(mCurSubscriptionId);
+                    mProxySubscriptionMgr.getActiveSubscriptionInfo(mCurSubscriptionId);
             if (subInfo != null) {
                 return subInfo;
             }
         }
-        final List<SubscriptionInfo> subInfos = mSubscriptionAccess.getActiveSubscriptionsInfo();
+        final List<SubscriptionInfo> subInfos = mProxySubscriptionMgr.getActiveSubscriptionsInfo();
         if (CollectionUtils.isEmpty(subInfos)) {
             return null;
         }
@@ -179,7 +184,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     private void updateBottomNavigationView() {
         final BottomNavigationView navigation = findViewById(R.id.bottom_nav);
 
-        final List<SubscriptionInfo> subInfos = mSubscriptionAccess.getActiveSubscriptionsInfo();
+        final List<SubscriptionInfo> subInfos = mProxySubscriptionMgr.getActiveSubscriptionsInfo();
         if (CollectionUtils.size(subInfos) <= 1) {
             navigation.setVisibility(View.GONE);
         } else {
@@ -196,7 +201,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
                 if (!isSubscriptionChanged(subId)) {
                     return true;
                 }
-                final SubscriptionInfo subscriptionInfo = mSubscriptionAccess
+                final SubscriptionInfo subscriptionInfo = mProxySubscriptionMgr
                         .getActiveSubscriptionInfo(subId);
                 if (subscriptionInfo == null) {
                     return true;
