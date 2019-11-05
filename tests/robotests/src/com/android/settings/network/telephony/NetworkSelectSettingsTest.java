@@ -23,7 +23,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.telephony.CellInfo;
+import android.content.SharedPreferences;
+import android.telephony.CellIdentityLte;
+import android.telephony.CellIdentityWcdma;
+import android.telephony.CellInfoLte;
+import android.telephony.CellInfoWcdma;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -43,20 +47,27 @@ import java.util.Arrays;
 @RunWith(RobolectricTestRunner.class)
 public class NetworkSelectSettingsTest {
     private static final int SUB_ID = 2;
+    private static final String CARRIER_NAME1 = "CarrierName1";
+    private static final String CARRIER_NAME2 = "CarrierName2";
 
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
-    private CellInfo mCellInfo1;
+    private CellInfoWcdma mCellInfo1;
     @Mock
-    private CellInfo mCellInfo2;
+    private CellIdentityWcdma mCellId1;
+    @Mock
+    private CellInfoLte mCellInfo2;
+    @Mock
+    private CellIdentityLte mCellId2;
     @Mock
     private PreferenceManager mPreferenceManager;
+    @Mock
+    private SharedPreferences mSharedPreferences;
     private Context mContext;
 
-    private PreferenceCategory mConnectedPreferenceCategory;
     private PreferenceCategory mPreferenceCategory;
 
     private NetworkSelectSettings mNetworkSelectSettings;
@@ -71,10 +82,13 @@ public class NetworkSelectSettingsTest {
         when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
 
         when(mCellInfo1.isRegistered()).thenReturn(true);
+        when(mCellInfo1.getCellIdentity()).thenReturn(mCellId1);
+        when(mCellId1.getOperatorAlphaLong()).thenReturn(CARRIER_NAME1);
         when(mCellInfo2.isRegistered()).thenReturn(false);
+        when(mCellInfo2.getCellIdentity()).thenReturn(mCellId2);
+        when(mCellId2.getOperatorAlphaLong()).thenReturn(CARRIER_NAME2);
 
-        mConnectedPreferenceCategory = spy(new PreferenceCategory(mContext));
-        doReturn(mPreferenceManager).when(mConnectedPreferenceCategory).getPreferenceManager();
+        doReturn(mSharedPreferences).when(mPreferenceManager).getSharedPreferences();
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         doReturn(mPreferenceManager).when(mPreferenceCategory).getPreferenceManager();
 
@@ -84,23 +98,18 @@ public class NetworkSelectSettingsTest {
         doReturn(mContext).when(mPreferenceManager).getContext();
 
         mNetworkSelectSettings.mTelephonyManager = mTelephonyManager;
-        mNetworkSelectSettings.mConnectedPreferenceCategory = mConnectedPreferenceCategory;
         mNetworkSelectSettings.mPreferenceCategory = mPreferenceCategory;
         mNetworkSelectSettings.mCellInfoList = Arrays.asList(mCellInfo1, mCellInfo2);
     }
 
     @Test
-    public void updateAllPreferenceCategory_containCorrectPreference() {
+    public void updateAllPreferenceCategory_correctOrderingPreference() {
         mNetworkSelectSettings.updateAllPreferenceCategory();
 
-        assertThat(mConnectedPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-        final NetworkOperatorPreference connectedPreference =
-                (NetworkOperatorPreference) mConnectedPreferenceCategory.getPreference(0);
-        assertThat(connectedPreference.getCellInfo()).isEqualTo(mCellInfo1);
-        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
+        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(2);
         final NetworkOperatorPreference preference =
-                (NetworkOperatorPreference) mPreferenceCategory.getPreference(0);
-        assertThat(preference.getCellInfo()).isEqualTo(mCellInfo2);
+                (NetworkOperatorPreference) mPreferenceCategory.getPreference(1);
+        assertThat(preference.getOperatorName()).isEqualTo(mCellId2.getOperatorAlphaLong());
     }
 
     @Test
