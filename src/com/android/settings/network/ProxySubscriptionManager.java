@@ -1,0 +1,197 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.network;
+
+import static androidx.lifecycle.Lifecycle.Event.ON_DESTROY;
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
+import android.content.Context;
+import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A proxy to the subscription manager
+ */
+public class ProxySubscriptionManager extends SubscriptionManager.OnSubscriptionsChangedListener
+        implements LifecycleObserver {
+
+    /**
+     * Interface for monitor active subscriptions list changing
+     */
+    public interface OnActiveSubscriptionChangedListener {
+        /**
+         * When active subscriptions list get changed
+         */
+        void onChanged();
+    }
+
+    /**
+     * Get proxy instance to subscription manager
+     *
+     * @return proxy to subscription manager
+     */
+    public static ProxySubscriptionManager getInstance(Context context) {
+        if (sSingleton != null) {
+            return sSingleton;
+        }
+        sSingleton = new ProxySubscriptionManager(context);
+        return sSingleton;
+    }
+
+    private static ProxySubscriptionManager sSingleton;
+
+    private ProxySubscriptionManager(Context context) {
+        mContext = context;
+
+        mActiveSubscriptionsListeners =
+                new ArrayList<OnActiveSubscriptionChangedListener>();
+
+        mSubsciptionsMonitor = new ActiveSubsciptionsListener(context) {
+            public void onChanged() {
+                notifyAllListeners();
+            }
+        };
+        mAirplaneModeMonitor = new GlobalSettingsChangeListener(context,
+                Settings.Global.AIRPLANE_MODE_ON) {
+            public void onChanged(String field) {
+                mSubsciptionsMonitor.clearCache();
+                notifyAllListeners();
+            }
+        };
+
+        mKeepCacheWhenOnStart = true;
+        mSubsciptionsMonitor.start();
+    }
+
+    private Lifecycle mLifecycle;
+    private Context mContext;
+    private ActiveSubsciptionsListener mSubsciptionsMonitor;
+    private GlobalSettingsChangeListener mAirplaneModeMonitor;
+    private boolean mKeepCacheWhenOnStart;
+
+    private List<OnActiveSubscriptionChangedListener> mActiveSubscriptionsListeners;
+
+    private void notifyAllListeners() {
+        for (OnActiveSubscriptionChangedListener listener : mActiveSubscriptionsListeners) {
+            listener.onChanged();
+        }
+    }
+
+    /**
+     * Lifecycle for data within proxy
+     *
+     * @param lifecycle life cycle to reference
+     */
+    public void setLifecycle(Lifecycle lifecycle) {
+        if (mLifecycle != null) {
+            mLifecycle.removeObserver(this);
+        }
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+        mLifecycle = lifecycle;
+        mAirplaneModeMonitor.notifyChangeBasedOn(lifecycle);
+    }
+
+    @OnLifecycleEvent(ON_START)
+    void onStart() {
+        if (!mKeepCacheWhenOnStart) {
+            mSubsciptionsMonitor.clearCache();
+        }
+        mSubsciptionsMonitor.start();
+    }
+
+    @OnLifecycleEvent(ON_STOP)
+    void onStop() {
+        mKeepCacheWhenOnStart = false;
+        mSubsciptionsMonitor.stop();
+    }
+
+    @OnLifecycleEvent(ON_DESTROY)
+    void onDestroy() {
+        mSubsciptionsMonitor.stop();
+
+        if (mLifecycle != null) {
+            mLifecycle.removeObserver(this);
+            mLifecycle = null;
+
+            sSingleton = null;
+        }
+    }
+
+    /**
+     * Get SubscriptionManager
+     *
+     * @return a SubscriptionManager
+     */
+    public SubscriptionManager get() {
+        return mSubsciptionsMonitor.getSubscriptionManager();
+    }
+
+    /**
+     * Get a list of active subscription info
+     *
+     * @return A list of active subscription info
+     */
+    public List<SubscriptionInfo> getActiveSubscriptionsInfo() {
+        return mSubsciptionsMonitor.getActiveSubscriptionsInfo();
+    }
+
+    /**
+     * Get an active subscription info with given subscription ID
+     *
+     * @param subId target subscription ID
+     * @return A subscription info which is active list
+     */
+    public SubscriptionInfo getActiveSubscriptionInfo(int subId) {
+        return mSubsciptionsMonitor.getActiveSubscriptionInfo(subId);
+    }
+
+    /**
+     * Clear data cached within proxy
+     */
+    public void clearCache() {
+        mSubsciptionsMonitor.clearCache();
+    }
+
+    /**
+     * Add listener to active subscriptions monitor list
+     *
+     * @param listener listener to active subscriptions change
+     */
+    public void addActiveSubscriptionsListener(OnActiveSubscriptionChangedListener listener) {
+        mActiveSubscriptionsListeners.add(listener);
+    }
+
+    /**
+     * Remove listener from active subscriptions monitor list
+     *
+     * @param listener listener to active subscriptions change
+     */
+    public void removeActiveSubscriptionsListener(OnActiveSubscriptionChangedListener listener) {
+        mActiveSubscriptionsListeners.remove(listener);
+    }
+}

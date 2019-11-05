@@ -54,6 +54,7 @@ import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class AccountSyncSettings extends AccountPreferenceBase {
@@ -62,9 +63,11 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private static final int MENU_SYNC_NOW_ID = Menu.FIRST;
     private static final int MENU_SYNC_CANCEL_ID = Menu.FIRST + 1;
     private static final int CANT_DO_ONETIME_SYNC_DIALOG = 102;
+    private static final String UID_REQUEST_KEY = "uid_request_code";
 
     private Account mAccount;
     private ArrayList<SyncAdapterType> mInvisibleAdapters = Lists.newArrayList();
+    private HashMap<Integer, Integer> mUidRequestCodeMap = new HashMap<>();
 
     @Override
     public Dialog onCreateDialog(final int id) {
@@ -103,6 +106,14 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (!mUidRequestCodeMap.isEmpty()) {
+            outState.putSerializable(UID_REQUEST_KEY, mUidRequestCodeMap);
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -131,6 +142,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 .done(activity, getPrefContext());
         pref.setOrder(0);
         getPreferenceScreen().addPreference(pref);
+        if (savedInstanceState != null && savedInstanceState.containsKey(UID_REQUEST_KEY)) {
+            mUidRequestCodeMap = (HashMap<Integer, Integer>) savedInstanceState.getSerializable(
+                    UID_REQUEST_KEY);
+        }
     }
 
     private void setAccessibilityTitle() {
@@ -227,13 +242,12 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            final int uid = requestCode;
             final int count = getPreferenceScreen().getPreferenceCount();
             for (int i = 0; i < count; i++) {
                 Preference preference = getPreferenceScreen().getPreference(i);
                 if (preference instanceof SyncStateSwitchPreference) {
                     SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) preference;
-                    if (syncPref.getUid() == uid) {
+                    if (getRequestCodeByUid(syncPref.getUid()) == requestCode) {
                         onPreferenceTreeClick(syncPref);
                         return;
                     }
@@ -314,7 +328,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                     mAccount, packageName, mUserHandle);
             if (intent != null) {
                 try {
-                    startIntentSenderForResult(intent, uid, null, 0, 0, 0, null);
+                    final int requestCode = addUidAndGenerateRequestCode(uid);
+                    startIntentSenderForResult(intent, requestCode, null /* fillInIntent */, 0, 0,
+                            0, null /* options */);
                     return true;
                 } catch (IntentSender.SendIntentException e) {
                     Log.e(TAG, "Error requesting account access", e);
@@ -551,5 +567,21 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 DateUtils.FORMAT_SHOW_DATE
                         | DateUtils.FORMAT_SHOW_YEAR
                         | DateUtils.FORMAT_SHOW_TIME);
+    }
+
+    private int addUidAndGenerateRequestCode(int uid) {
+        if (mUidRequestCodeMap.containsKey(uid)) {
+            return mUidRequestCodeMap.get(uid);
+        }
+        final int requestCode = mUidRequestCodeMap.size() + 1;
+        mUidRequestCodeMap.put(uid, requestCode);
+        return requestCode;
+    }
+
+    private int getRequestCodeByUid(int uid) {
+        if (!mUidRequestCodeMap.containsKey(uid)) {
+            return -1;
+        }
+        return mUidRequestCodeMap.get(uid);
     }
 }
