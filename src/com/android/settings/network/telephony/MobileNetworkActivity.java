@@ -22,8 +22,6 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
-import android.view.Menu;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -33,12 +31,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.ProxySubscriptionManager;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -80,11 +74,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
             return;
         }
 
-        if (FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
-            setContentView(R.layout.mobile_network_settings_container_v2);
-        } else {
-            setContentView(R.layout.mobile_network_settings_container);
-        }
+        setContentView(R.layout.mobile_network_settings_container_v2);
         setActionBar(findViewById(R.id.mobile_action_bar));
 
         mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
@@ -141,10 +131,6 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         if (subscription != null) {
             setTitle(subscription.getDisplayName());
         }
-
-        if (!FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
-            updateBottomNavigationView();
-        }
     }
 
     @VisibleForTesting
@@ -179,38 +165,6 @@ public class MobileNetworkActivity extends SettingsBaseActivity
             return null;
         }
         return subInfos.get(0);
-    }
-
-    private void updateBottomNavigationView() {
-        final BottomNavigationView navigation = findViewById(R.id.bottom_nav);
-
-        final List<SubscriptionInfo> subInfos = mProxySubscriptionMgr.getActiveSubscriptionsInfo();
-        if (CollectionUtils.size(subInfos) <= 1) {
-            navigation.setVisibility(View.GONE);
-        } else {
-            final Menu menu = navigation.getMenu();
-            menu.clear();
-            for (int i = 0, size = subInfos.size(); i < size; i++) {
-                final SubscriptionInfo subscriptionInfo = subInfos.get(i);
-                menu.add(0, subscriptionInfo.getSubscriptionId(), i,
-                        subscriptionInfo.getDisplayName())
-                        .setIcon(R.drawable.ic_settings_sim);
-            }
-            navigation.setOnNavigationItemSelectedListener(item -> {
-                final int subId = item.getItemId();
-                if (!isSubscriptionChanged(subId)) {
-                    return true;
-                }
-                final SubscriptionInfo subscriptionInfo = mProxySubscriptionMgr
-                        .getActiveSubscriptionInfo(subId);
-                if (subscriptionInfo == null) {
-                    return true;
-                }
-                updateSubscriptions(subscriptionInfo);
-                return true;
-            });
-            navigation.setVisibility(View.VISIBLE);
-        }
     }
 
     @VisibleForTesting

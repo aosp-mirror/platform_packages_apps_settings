@@ -33,19 +33,12 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.view.Menu;
-import android.view.View;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -124,23 +117,7 @@ public class MobileNetworkActivityTest {
 
     private ActivityScenario<MobileNetworkActivity> createTargetActivity(Intent activityIntent,
             boolean isInternetV2) {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, isInternetV2);
         return ActivityScenario.launch(activityIntent);
-    }
-
-    @Test
-    public void updateBottomNavigationView_oneSubscription_shouldBeGone() {
-        mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1);
-
-        mMobileNetworkActivity = createTargetActivity(mTestIntent, false);
-
-        mMobileNetworkActivity.moveToState(State.STARTED);
-
-        mMobileNetworkActivity.onActivity(activity -> {
-            final BottomNavigationView bottomNavigationView =
-                    activity.findViewById(R.id.bottom_nav);
-            assertThat(bottomNavigationView.getVisibility()).isEqualTo(View.GONE);
-        });
     }
 
     @Test
@@ -150,22 +127,6 @@ public class MobileNetworkActivityTest {
         mMobileNetworkActivity = createTargetActivity(mTestIntent, true);
 
         mMobileNetworkActivity.moveToState(State.STARTED);
-    }
-
-    @Test
-    public void updateBottomNavigationView_twoSubscription_updateMenu() {
-        mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
-
-        mMobileNetworkActivity = createTargetActivity(mTestIntent, false);
-
-        mMobileNetworkActivity.moveToState(State.STARTED);
-
-        mMobileNetworkActivity.onActivity(activity -> {
-            final BottomNavigationView bottomNavigationView =
-                    activity.findViewById(R.id.bottom_nav);
-            final Menu menu = bottomNavigationView.getMenu();
-            assertThat(menu.size()).isEqualTo(2);
-        });
     }
 
     @Test
@@ -188,14 +149,6 @@ public class MobileNetworkActivityTest {
 
         mMobileNetworkActivity.onActivity(activity -> {
             final MockMobileNetworkActivity mockActivity = (MockMobileNetworkActivity) activity;
-            assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo1);
-
-            final BottomNavigationView bottomNavigationView =
-                    mockActivity.findViewById(R.id.bottom_nav);
-            bottomNavigationView.setSelectedItemId(CURRENT_SUB_ID);
-            assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo2);
-
-            bottomNavigationView.setSelectedItemId(PREV_SUB_ID);
             assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo1);
         });
     }

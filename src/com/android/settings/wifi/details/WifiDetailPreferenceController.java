@@ -64,7 +64,6 @@ import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.datausage.WifiDataUsageSummaryPreferenceController;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
@@ -892,17 +891,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             mWifiManager.disableEphemeralNetwork(mWifiInfo.getSSID());
         } else if (mAccessPoint.isPasspoint() || mAccessPoint.isPasspointConfig()) {
             // Post a dialog to confirm if user really want to forget the passpoint network.
-            if (FeatureFlagPersistent.isEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2)) {
-                showConfirmForgetDialog();
-                return;
-            }
-
-            try {
-                mWifiManager.removePasspointConfiguration(mAccessPoint.getPasspointFqdn());
-            } catch (RuntimeException e) {
-                Log.e(TAG, "Failed to remove Passpoint configuration for "
-                        + mAccessPoint.getPasspointFqdn());
-            }
+            showConfirmForgetDialog();
+            return;
         } else if (mWifiConfig != null) {
             mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
         }
