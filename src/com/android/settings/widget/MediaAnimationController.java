@@ -33,6 +33,7 @@ import android.view.View;
 class MediaAnimationController implements VideoPreference.AnimationController {
     private MediaPlayer mMediaPlayer;
     private boolean mVideoReady;
+    private Surface mSurface;
 
     MediaAnimationController(Context context, int videoId) {
         final Uri videoPath = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
@@ -86,10 +87,7 @@ class MediaAnimationController implements VideoPreference.AnimationController {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
                     int height) {
-                if (mMediaPlayer != null) {
-                    final Surface surface = new Surface(surfaceTexture);
-                    mMediaPlayer.setSurface(surface);
-                }
+                setSurface(surfaceTexture);
             }
 
             @Override
@@ -105,6 +103,7 @@ class MediaAnimationController implements VideoPreference.AnimationController {
 
             @Override
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
+                setSurface(surfaceTexture);
                 if (mVideoReady) {
                     if (preview.getVisibility() == View.VISIBLE) {
                         preview.setVisibility(View.GONE);
@@ -144,6 +143,13 @@ class MediaAnimationController implements VideoPreference.AnimationController {
             imageView.setVisibility(View.GONE);
             playButton.setVisibility(View.GONE);
             mMediaPlayer.start();
+        }
+    }
+
+    private void setSurface(SurfaceTexture surfaceTexture) {
+        if (mMediaPlayer != null && mSurface == null) {
+            mSurface = new Surface(surfaceTexture);
+            mMediaPlayer.setSurface(mSurface);
         }
     }
 }
