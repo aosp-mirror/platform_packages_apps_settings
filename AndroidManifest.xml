@@ -160,8 +160,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".SubSettings"
-                android:parentActivityName="Settings"/>
+        <activity android:name=".SubSettings"/>
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:label="@string/settings_shortcut">
@@ -178,8 +177,7 @@
         <activity
             android:name=".Settings$NetworkDashboardActivity"
             android:label="@string/network_dashboard_title"
-            android:icon="@drawable/ic_homepage_network"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_homepage_network">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
                 <action android:name="android.settings.AIRPLANE_MODE_SETTINGS" />
@@ -198,8 +196,7 @@
         </activity>
 
         <activity android:name=".Settings$MobileNetworkListActivity"
-                  android:label="@string/network_settings_title"
-                  android:parentActivityName="Settings$NetworkDashboardActivity">
+                  android:label="@string/network_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MOBILE_NETWORK_LIST" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -213,8 +210,7 @@
         <activity
             android:name=".Settings$ConnectedDeviceDashboardActivity"
             android:label="@string/connected_devices_dashboard_title"
-            android:icon="@drawable/ic_devices_other"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_devices_other">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -250,8 +246,7 @@
             android:name="Settings$WifiSettingsActivity"
             android:label="@string/wifi_settings"
             android:icon="@drawable/ic_settings_wireless"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIFI_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -270,8 +265,7 @@
             android:name="Settings$WifiSettings2Activity"
             android:label="@string/wifi_settings"
             android:icon="@drawable/ic_settings_wireless"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIFI_SETTINGS2" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -287,8 +281,7 @@
         </activity>
 
         <activity
-            android:name=".wifi.WifiPickerActivity"
-            android:parentActivityName="Settings">
+            android:name=".wifi.WifiPickerActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -301,8 +294,7 @@
             android:name="Settings$ConfigureWifiSettingsActivity"
             android:label="@string/wifi_configure_settings_preference_title"
             android:icon="@drawable/ic_settings_wireless"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIFI_IP_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -322,8 +314,7 @@
             android:name="Settings$SavedAccessPointsSettingsActivity"
             android:label="@string/wifi_saved_access_points_label"
             android:icon="@drawable/ic_settings_wireless"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIFI_SAVED_NETWORK_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -393,7 +384,6 @@
                 android:label="@string/apn_settings"
                 android:launchMode="singleTask"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:parentActivityName="Settings$NetworkDashboardActivity"
                 android:process="com.android.phone">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APN_SETTINGS" />
@@ -495,8 +485,7 @@
         <activity
             android:name="Settings$TetherSettingsActivity"
             android:label="@string/tether_settings_title_all"
-            android:icon="@drawable/ic_settings_wireless"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_wireless">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -509,8 +498,7 @@
         <activity
             android:name="Settings$WifiTetherSettingsActivity"
             android:label="@string/wifi_hotspot_checkbox_text"
-            android:icon="@drawable/ic_wifi_tethering"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_wifi_tethering">
             <intent-filter>
                 <action android:name="com.android.settings.WIFI_TETHER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -534,8 +522,7 @@
                 android:value="com.android.settings.TetherSettings" />
         </activity-alias>
 
-        <activity android:name="Settings$WifiP2pSettingsActivity"
-                  android:parentActivityName="Settings">
+        <activity android:name="Settings$WifiP2pSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -548,8 +535,7 @@
         <activity
             android:name="Settings$VpnSettingsActivity"
             android:label="@string/vpn_settings_title"
-            android:icon="@drawable/ic_settings_wireless"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_wireless">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VPN_SETTINGS" />
                 <action android:name="android.net.vpn.SETTINGS" />
@@ -567,8 +553,7 @@
 
         <activity
             android:name="Settings$DataSaverSummaryActivity"
-            android:label="@string/data_saver_title"
-            android:parentActivityName="Settings">
+            android:label="@string/data_saver_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DATA_SAVER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -580,8 +565,7 @@
         <activity
             android:name="Settings$DateTimeSettingsActivity"
             android:label="@string/date_and_time"
-            android:icon="@drawable/ic_settings_date_time"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_date_time">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DATE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -601,8 +585,7 @@
         <activity
             android:name="Settings$LocalePickerActivity"
             android:label="@string/language_picker_title"
-            android:icon="@drawable/ic_settings_language"
-            android:parentActivityName="Settings$LanguageAndInputSettingsActivity">
+            android:icon="@drawable/ic_settings_language">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.LOCALE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -627,8 +610,7 @@
         <activity
             android:name=".Settings$LanguageAndInputSettingsActivity"
             android:label="@string/language_settings"
-            android:icon="@drawable/ic_settings_language"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_language">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
@@ -692,8 +674,7 @@
 
         <activity
             android:name="Settings$SpellCheckersSettingsActivity"
-            android:label="@string/spellcheckers_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/spellcheckers_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
@@ -719,8 +700,7 @@
 
         <activity
             android:name="Settings$UserDictionarySettingsActivity"
-            android:label="@string/user_dict_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/user_dict_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.USER_DICTIONARY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -797,8 +777,7 @@
             android:label="@string/zen_onboarding_dnd_visual_disturbances_header"
             android:icon="@drawable/ic_notifications"
             android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
-            android:exported="true"
-            android:parentActivityName="Settings">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_ONBOARDING" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -808,8 +787,7 @@
             android:name="Settings$ZenModeAutomationSettingsActivity"
             android:label="@string/zen_mode_automation_settings_title"
             android:icon="@drawable/ic_notifications"
-            android:exported="true"
-            android:parentActivityName="Settings$ZenModeSettingsActivity">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_AUTOMATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -872,8 +850,7 @@
 
         <activity
             android:name="Settings$ZenModeScheduleRuleSettingsActivity"
-            android:exported="true"
-            android:parentActivityName="Settings$ZenModeAutomationSettingsActivity">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_SCHEDULE_RULE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -890,8 +867,7 @@
 
         <activity
             android:name="Settings$ZenModeEventRuleSettingsActivity"
-            android:exported="true"
-            android:parentActivityName="Settings$ZenModeAutomationSettingsActivity">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_EVENT_RULE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -905,8 +881,7 @@
         <activity
             android:name="Settings$DisplaySettingsActivity"
             android:label="@string/display_settings"
-            android:icon="@drawable/ic_homepage_display"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_homepage_display">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.DISPLAY_SETTINGS" />
                 <action android:name="android.settings.DISPLAY_SETTINGS" />
@@ -982,8 +957,7 @@
         <activity
             android:name="SettingsLicenseActivity"
             android:label="@string/settings_license_activity_title"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.LICENSE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1056,8 +1030,7 @@
 
         <activity
             android:name="Settings$HighPowerApplicationsActivity"
-            android:label="@string/high_power_apps"
-            android:parentActivityName="Settings">
+            android:label="@string/high_power_apps">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1155,8 +1128,7 @@
 
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity android:name="Settings$RunningServicesActivity"
-                android:label="@string/runningservices_settings_title"
-                android:parentActivityName="Settings">
+                android:label="@string/runningservices_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1172,8 +1144,7 @@
         <!-- Provide direct entry into manage apps showing storage usage of apps. -->
         <activity
             android:name="Settings$StorageUseActivity"
-            android:label="@string/storageuse_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/storageuse_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1192,8 +1163,7 @@
 
         <activity
             android:name="Settings$NotificationStationActivity"
-            android:label="@string/notification_log_title"
-            android:parentActivityName="Settings">
+            android:label="@string/notification_log_title">
             <intent-filter android:priority="22">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -1234,8 +1204,7 @@
             android:name="Settings$ScanningSettingsActivity"
             android:label="@string/location_scanning_screen_title"
             android:icon="@drawable/ic_homepage_location"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.LOCATION_SCANNING_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1250,8 +1219,7 @@
             android:name=".Settings$SecurityDashboardActivity"
             android:label="@string/security_settings_title"
             android:icon="@drawable/ic_homepage_security"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SECURITY_SETTINGS" />
                 <action android:name="android.credentials.UNLOCK" />
@@ -1281,8 +1249,7 @@
         <activity
             android:name="Settings$TrustedCredentialsSettingsActivity"
             android:label="@string/trusted_credentials"
-            android:icon="@drawable/ic_settings_security"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_security">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.TRUSTED_CREDENTIALS" />
                 <action android:name="com.android.settings.TRUSTED_CREDENTIALS_USER" />
@@ -1297,8 +1264,7 @@
         <activity android:name="Settings$PrivacySettingsActivity"
                 android:label="@string/privacy_settings_title"
                 android:icon="@drawable/ic_settings_backup"
-                android:configChanges="orientation|keyboardHidden|screenSize"
-                android:parentActivityName="Settings">
+                android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1349,8 +1315,7 @@
 
         <activity
             android:name="Settings$DeviceAdminSettingsActivity"
-            android:label="@string/device_admin_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/device_admin_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1401,8 +1366,7 @@
 
         <activity
             android:name="Settings$AppUsageAccessSettingsActivity"
-            android:label="@string/usage_access_title"
-            android:parentActivityName="Settings">
+            android:label="@string/usage_access_title">
             <intent-filter>
                 <action android:name="android.settings.USAGE_ACCESS_SETTINGS"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -1429,8 +1393,7 @@
             android:name="Settings$AccessibilitySettingsActivity"
             android:label="@string/accessibility_settings"
             android:icon="@drawable/ic_homepage_accessibility"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1491,8 +1454,7 @@
 
         <activity
             android:name="Settings$AccessibilityDaltonizerSettingsActivity"
-            android:label="@string/accessibility_display_daltonizer_preference_title"
-            android:parentActivityName="Settings">
+            android:label="@string/accessibility_display_daltonizer_preference_title">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.ACCESSIBILITY_COLOR_SPACE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1509,8 +1471,7 @@
 
         <activity
             android:name="Settings$CaptioningSettingsActivity"
-            android:label="@string/accessibility_captioning_title"
-            android:parentActivityName="Settings">
+            android:label="@string/accessibility_captioning_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.CAPTIONING_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1541,8 +1502,7 @@
 
         <activity
             android:name="Settings$EnterprisePrivacySettingsActivity"
-            android:label="@string/enterprise_privacy_settings"
-            android:parentActivityName="Settings">
+            android:label="@string/enterprise_privacy_settings">
             <intent-filter>
                 <action android:name="android.settings.ENTERPRISE_PRIVACY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1807,8 +1767,7 @@
         <activity
             android:name=".Settings$StorageDashboardActivity"
             android:label="@string/storage_settings"
-            android:icon="@drawable/ic_homepage_storage"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_homepage_storage">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.INTERNAL_STORAGE_SETTINGS" />
                 <action android:name="android.settings.MEMORY_CARD_SETTINGS" />
@@ -1833,8 +1792,7 @@
 
         <activity
             android:name="Settings$PublicVolumeSettingsActivity"
-            android:label="@string/storage_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/storage_settings_title">
             <intent-filter>
                 <action android:name="android.provider.action.DOCUMENT_ROOT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1915,7 +1873,6 @@
             android:name="Settings$DevelopmentSettingsDashboardActivity"
             android:label="@string/development_settings_title"
             android:icon="@drawable/ic_settings_development"
-            android:parentActivityName="Settings"
             android:enabled="false">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
@@ -1954,8 +1911,7 @@
         <activity
             android:name="Settings$PrintSettingsActivity"
             android:label="@string/print_settings"
-            android:icon="@drawable/ic_settings_print"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_print">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACTION_PRINT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1970,8 +1926,7 @@
         </activity>
 
         <activity android:name="Settings$PrintJobSettingsActivity"
-                android:label="@string/print_print_job"
-                android:parentActivityName="Settings$PrintSettingsActivity">
+                android:label="@string/print_print_job">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACTION_PRINT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2087,8 +2042,7 @@
         <!-- NFC settings -->
         <activity
             android:name="Settings$AndroidBeamSettingsActivity"
-            android:label="@string/android_beam_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/android_beam_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NFCSHARING_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2102,8 +2056,7 @@
         <activity
             android:name="Settings$WifiDisplaySettingsActivity"
             android:label="@string/wifi_display_settings_title"
-            android:icon="@drawable/ic_cast_24dp"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_cast_24dp">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.CAST_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2146,8 +2099,7 @@
         </activity>
 
         <activity android:name="UsageStatsActivity"
-                  android:label="@string/usage_stats_label"
-                  android:parentActivityName="Settings">
+                  android:label="@string/usage_stats_label">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
@@ -2157,8 +2109,7 @@
         <activity
             android:name="Settings$PowerUsageSummaryActivity"
             android:label="@string/power_usage_summary_title"
-            android:icon="@drawable/ic_settings_battery"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_battery">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2174,8 +2125,7 @@
         <activity
             android:name="Settings$BatterySaverSettingsActivity"
             android:label="@string/battery_saver"
-            android:icon="@drawable/ic_settings_battery"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_battery">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.BATTERY_SAVER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2199,8 +2149,7 @@
 
         <activity
             android:name="Settings$AccountSyncSettingsActivity"
-            android:label="@string/account_sync_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/account_sync_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCOUNT_SYNC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2213,7 +2162,6 @@
         <activity
             android:name="Settings$ManagedProfileSettingsActivity"
             android:label="@string/managed_profile_settings_title"
-            android:parentActivityName="Settings"
             android:permission="android.permission.MANAGE_USERS">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGED_PROFILE_SETTINGS" />
@@ -2227,8 +2175,7 @@
             android:name="com.android.settings.accounts.AddAccountSettings"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/header_add_an_account"
-            android:parentActivityName="Settings">
+            android:label="@string/header_add_an_account">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ADD_ACCOUNT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2301,8 +2248,7 @@
         <activity
             android:name="Settings$DataUsageSummaryActivity"
             android:label="@string/data_usage_summary_title"
-            android:icon="@drawable/ic_settings_data_usage"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_data_usage">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DATA_USAGE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2328,8 +2274,7 @@
         <activity
             android:name="Settings$DreamSettingsActivity"
             android:label="@string/screensaver_settings_title"
-            android:icon="@drawable/ic_settings_display"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_display">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DREAM_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2343,8 +2288,7 @@
         <activity
             android:name="Settings$UserSettingsActivity"
             android:label="@string/user_settings_title"
-            android:icon="@drawable/ic_settings_multiuser"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_multiuser">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.USER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2366,8 +2310,7 @@
         <activity
             android:name="Settings$PaymentSettingsActivity"
             android:label="@string/nfc_payment_settings_title"
-            android:icon="@drawable/ic_settings_nfc_payment"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_nfc_payment">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NFC_PAYMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2396,14 +2339,12 @@
 
         <activity android:name=".nfc.HowItWorks"
                   android:label="@string/nfc_payment_settings_title"
-                  android:parentActivityName="Settings$PaymentSettingsActivity"
                   android:excludeFromRecents="true">
         </activity>
 
         <activity
             android:name="Settings$NotificationAccessSettingsActivity"
-            android:label="@string/manage_notification_access_title"
-            android:parentActivityName="Settings">
+            android:label="@string/manage_notification_access_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2414,8 +2355,7 @@
 
         <activity
             android:name="Settings$NotificationAssistantSettingsActivity"
-            android:label="@string/notification_assistant_title"
-            android:parentActivityName="Settings">
+            android:label="@string/notification_assistant_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_ASSISTANT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2426,8 +2366,7 @@
 
         <activity
             android:name="Settings$VrListenersSettingsActivity"
-            android:label="@string/vr_listeners_title"
-            android:parentActivityName="Settings">
+            android:label="@string/vr_listeners_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VR_LISTENER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2438,8 +2377,7 @@
 
         <activity
             android:name="Settings$PictureInPictureSettingsActivity"
-            android:label="@string/picture_in_picture_title"
-            android:parentActivityName="Settings">
+            android:label="@string/picture_in_picture_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.PICTURE_IN_PICTURE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2454,8 +2392,7 @@
 
         <activity
             android:name="Settings$AppPictureInPictureSettingsActivity"
-            android:label="@string/picture_in_picture_title"
-            android:parentActivityName="Settings">
+            android:label="@string/picture_in_picture_title">
             <intent-filter>
                 <action android:name="android.settings.PICTURE_IN_PICTURE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2480,8 +2417,7 @@
 
         <activity
             android:name="Settings$ZenAccessSettingsActivity"
-            android:label="@string/manage_zen_access_title"
-            android:parentActivityName="Settings">
+            android:label="@string/manage_zen_access_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_POLICY_ACCESS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2493,8 +2429,7 @@
         <activity
             android:name="Settings$ConfigureNotificationSettingsActivity"
             android:label="@string/configure_notification_settings"
-            android:exported="true"
-            android:parentActivityName="Settings">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2511,8 +2446,7 @@
 
         <activity
             android:name="Settings$AppBubbleNotificationSettingsActivity"
-            android:label="@string/bubbles_app_toggle_title"
-            android:parentActivityName="Settings$NotificationAppListActivity">
+            android:label="@string/bubbles_app_toggle_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APP_NOTIFICATION_BUBBLE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2525,8 +2459,7 @@
             android:name="Settings$SoundSettingsActivity"
             android:label="@string/sound_settings"
             android:icon="@drawable/ic_homepage_sound"
-            android:exported="true"
-            android:parentActivityName="Settings">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
                 <action android:name="android.settings.SOUND_SETTINGS" />
@@ -2583,7 +2516,6 @@
         <activity
             android:name="ManualDisplayActivity"
             android:label="@string/manual"
-            android:parentActivityName="Settings"
             android:enabled="@bool/config_show_manual">
             <intent-filter>
                 <action android:name="android.settings.SHOW_MANUAL" />
@@ -2597,7 +2529,6 @@
         <activity
             android:name="RegulatoryInfoDisplayActivity"
             android:label="@string/regulatory_labels"
-            android:parentActivityName="Settings"
             android:enabled="@bool/config_show_regulatory_info">
             <intent-filter>
                 <action android:name="android.settings.SHOW_REGULATORY_INFO" />
@@ -2765,8 +2696,7 @@
 
         <activity
             android:name="Settings$OverlaySettingsActivity"
-            android:label="@string/draw_overlay"
-            android:parentActivityName="Settings">
+            android:label="@string/draw_overlay">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2777,8 +2707,7 @@
 
         <activity
             android:name="Settings$AppDrawOverlaySettingsActivity"
-            android:label="@string/draw_overlay"
-            android:parentActivityName="Settings">
+            android:label="@string/draw_overlay">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2790,8 +2719,7 @@
 
         <activity
             android:name="Settings$WriteSettingsActivity"
-            android:label="@string/write_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/write_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_WRITE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2802,8 +2730,7 @@
 
         <activity
             android:name="Settings$AppWriteSettingsActivity"
-            android:label="@string/write_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/write_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_WRITE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2815,8 +2742,7 @@
 
         <activity
             android:name="Settings$ManageExternalSourcesActivity"
-            android:label="@string/install_other_apps"
-            android:parentActivityName="Settings">
+            android:label="@string/install_other_apps">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2884,15 +2810,14 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.summary_uri"
-		       android:value="content://com.android.settings.dashboard.SummaryProvider/backup" />
+                       android:value="content://com.android.settings.dashboard.SummaryProvider/backup" />
             <meta-data android:name="com.android.settings.order" android:value="-60"/>
         </activity>
 
         <activity
             android:name="Settings$AutomaticStorageManagerSettingsActivity"
             android:exported="@bool/config_storage_manager_settings_enabled"
-            android:label="@string/automatic_storage_manager_settings"
-            android:parentActivityName="Settings">
+            android:label="@string/automatic_storage_manager_settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.STORAGE_MANAGER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2918,7 +2843,6 @@
             android:name=".Settings$AppAndNotificationDashboardActivity"
             android:label="@string/app_and_notification_dashboard_title"
             android:icon="@drawable/ic_homepage_apps"
-            android:parentActivityName="Settings"
             android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
@@ -2927,8 +2851,7 @@
         <activity
             android:name=".Settings$AccountDashboardActivity"
             android:label="@string/account_dashboard_title"
-            android:icon="@drawable/ic_homepage_accounts"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_homepage_accounts">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SYNC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2946,8 +2869,7 @@
         <activity
             android:name=".Settings$SystemDashboardActivity"
             android:label="@string/header_category_system"
-            android:icon="@drawable/ic_homepage_system_dashboard"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_homepage_system_dashboard">
             <intent-filter android:priority="70">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -3075,8 +2997,7 @@
         </activity>
 
         <activity android:name="Settings$AdvancedConnectedDeviceActivity"
-                  android:label="@string/connected_device_connections_title"
-                  android:parentActivityName="Settings$ConnectedDeviceDashboardActivity">
+                  android:label="@string/connected_device_connections_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NFC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3093,8 +3014,7 @@
 
         <activity android:name="Settings$BluetoothDeviceDetailActivity"
                   android:label="@string/device_details_title"
-                  android:permission="android.permission.BLUETOOTH_PRIVILEGED"
-                  android:parentActivityName="Settings$ConnectedDeviceDashboardActivity">
+                  android:permission="android.permission.BLUETOOTH_PRIVILEGED">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3232,8 +3152,7 @@
         </activity>
 
         <activity android:name="Settings$BatterySaverScheduleSettingsActivity"
-            android:label="@string/battery_saver_schedule_settings_title"
-            android:parentActivityName="Settings">
+            android:label="@string/battery_saver_schedule_settings_title">
             <intent-filter>
                 <action android:name="com.android.settings.BATTERY_SAVER_SCHEDULE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
