@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
@@ -115,10 +114,10 @@ public class MasterSwitchPreferenceTest {
         final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
         preference.onBindViewHolder(holder);
 
-        widgetView.performClick();
+        toggle.performClick();
         assertThat(toggle.isChecked()).isTrue();
 
-        widgetView.performClick();
+        toggle.performClick();
         assertThat(toggle.isChecked()).isFalse();
     }
 
@@ -143,19 +142,23 @@ public class MasterSwitchPreferenceTest {
     @Test
     public void clickWidgetView_shouldNotifyPreferenceChanged() {
         final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(mContext).inflate(R.layout.preference_two_target, null));
-        final View widgetView = holder.findViewById(android.R.id.widget_frame);
+        final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
+        inflater.inflate(R.layout.preference_widget_master_switch, widgetView, true);
+        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
+
         final OnPreferenceChangeListener listener = mock(OnPreferenceChangeListener.class);
         preference.setOnPreferenceChangeListener(listener);
         preference.onBindViewHolder(holder);
 
         preference.setChecked(false);
-        widgetView.performClick();
+        toggle.performClick();
         verify(listener).onPreferenceChange(preference, true);
 
         preference.setChecked(true);
-        widgetView.performClick();
+        toggle.performClick();
         verify(listener).onPreferenceChange(preference, false);
     }
 
