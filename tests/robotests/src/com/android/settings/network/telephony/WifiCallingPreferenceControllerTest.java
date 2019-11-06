@@ -64,7 +64,6 @@ public class WifiCallingPreferenceControllerTest {
 
     private WifiCallingPreferenceController mController;
     private Preference mPreference;
-    private PreferenceCategory mPreferenceCategory;
     private Context mContext;
     private PersistableBundle mCarrierConfig;
 
@@ -87,10 +86,6 @@ public class WifiCallingPreferenceControllerTest {
         mCarrierConfig = new PersistableBundle();
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
 
-        mPreferenceCategory = new PreferenceCategory(mContext);
-        when(mPreferenceScreen.findPreference(
-                WifiCallingPreferenceController.KEY_PREFERENCE_CATEGORY)).thenReturn(
-                mPreferenceCategory);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mPreference);
     }
@@ -127,10 +122,10 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_wfcNonRoaming() {
+    public void updateState_wfcNonRoamingByConfig() {
         assertNull(mController.mSimCallManager);
-        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, false);
-        // update the config value by calling init again.
+        mCarrierConfig.putBoolean(
+                CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, true);
         mController.init(SUB_ID);
         mController.mImsManager = mImsManager;
 
@@ -147,9 +142,10 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_wfcRoaming() {
+    public void updateState_wfcRoamingByConfig() {
         assertNull(mController.mSimCallManager);
-
+        // useWfcHomeModeForRoaming is false by default. In order to check wfc in roaming mode. We
+        // need the device roaming, and not using home mode in roaming network.
         when(mImsManager.getWfcMode(true)).thenReturn(
                 ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED);
         when(mImsManager.getWfcMode(false)).thenReturn(
@@ -163,12 +159,12 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_notAvailable_setCategoryInvisible() {
+    public void displayPreference_notAvailable_setPreferenceInvisible() {
         mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mPreferenceCategory.isVisible()).isFalse();
+        assertThat(mPreferenceScreen.isVisible()).isFalse();
     }
 
     @Test
