@@ -36,9 +36,7 @@ import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -92,32 +90,13 @@ public class MobileNetworkSettingsTest {
     }
 
     @Test
-    public void onAttach_noV2Flag_noCrash() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
+    public void onAttach_noCrash() {
         mFragment.onAttach(mContext);
     }
 
-    @Test
-    public void onAttach_v2Flag_noCrash() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
-        mFragment.onAttach(mContext);
-    }
 
     @Test
-    public void createPreferenceControllers_noV2Flag_noDataUsageSummaryController() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
-        final List<AbstractPreferenceController> controllers =
-                mFragment.createPreferenceControllers(mContext);
-        assertThat(controllers.stream().filter(
-                c -> c.getClass().equals(DataUsageSummaryPreferenceController.class))
-                .count())
-                .isEqualTo(0);
-    }
-
-    @Test
-    public void createPreferenceControllers_v2Flag_createsDataUsageSummaryController() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
-
+    public void createPreferenceControllers_createsDataUsageSummaryController() {
         final List<AbstractPreferenceController> controllers =
                 mFragment.createPreferenceControllers(mContext);
         assertThat(controllers.stream().filter(
