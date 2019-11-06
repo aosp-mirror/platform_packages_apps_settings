@@ -64,12 +64,28 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .setCardName(contextualNotificationChannelSliceUri)
                         .setCardCategory(ContextualCard.Category.POSSIBLE)
                         .build();
+        final String contextualAdaptiveSleepSliceUri =
+                CustomSliceRegistry.CONTEXTUAL_ADAPTIVE_SLEEP_URI.toString();
+        final ContextualCard contextualAdaptiveSleepCard =
+                ContextualCard.newBuilder()
+                        .setSliceUri(contextualAdaptiveSleepSliceUri)
+                        .setCardName(contextualAdaptiveSleepSliceUri)
+                        .setCardCategory(ContextualCard.Category.DEFAULT)
+                        .build();
+        final ContextualCard contextualFaceSettingsCard =
+                ContextualCard.newBuilder()
+                        .setSliceUri(CustomSliceRegistry.FACE_ENROLL_SLICE_URI.toString())
+                        .setCardName(CustomSliceRegistry.FACE_ENROLL_SLICE_URI.toString())
+                        .setCardCategory(ContextualCard.Category.DEFAULT)
+                        .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
                 .addCard(wifiCard)
                 .addCard(connectedDeviceCard)
                 .addCard(lowStorageCard)
                 .addCard(batteryFixCard)
                 .addCard(notificationChannelCard)
+                .addCard(contextualAdaptiveSleepCard)
+                .addCard(contextualFaceSettingsCard)
                 .build();
 
         return cards;

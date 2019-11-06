@@ -22,7 +22,6 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVE
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY;
 
 import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_GONE;
-import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_INFO;
 import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_SETTING;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -160,17 +159,9 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
 
         RadioButtonPreferenceWithExtraWidget p = (RadioButtonPreferenceWithExtraWidget) pref;
         if (info.getKey() == KEY_SYSTEM_NAV_GESTURAL) {
-            if (SystemNavigationPreferenceController.isGestureNavSupportedByDefaultLauncher(
-                    getContext())) {
-                p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
-                p.setExtraWidgetOnClickListener((v) -> GestureNavigationBackSensitivityDialog
-                        .show(this, getBackSensitivity(getContext(), mOverlayManager)));
-            } else {
-                p.setEnabled(false);
-                p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_INFO);
-                p.setExtraWidgetOnClickListener((v) ->
-                        GestureNavigationNotAvailableDialog.show(this));
-            }
+            p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
+            p.setExtraWidgetOnClickListener((v) -> GestureNavigationBackSensitivityDialog
+                    .show(this, getBackSensitivity(getContext(), mOverlayManager)));
         } else {
             p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_GONE);
         }
@@ -219,12 +210,6 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
     @Override
     protected boolean setDefaultKey(String key) {
         final Context c = getContext();
-        if (key == KEY_SYSTEM_NAV_GESTURAL &&
-                !SystemNavigationPreferenceController.isGestureNavSupportedByDefaultLauncher(c)) {
-            // This should not happen since the preference is disabled. Return to be safe.
-            return false;
-        }
-
         setCurrentSystemNavigationMode(c, mOverlayManager, key);
         setIllustrationVideo(mVideoPreference, key);
         if (TextUtils.equals(KEY_SYSTEM_NAV_GESTURAL, key) && (

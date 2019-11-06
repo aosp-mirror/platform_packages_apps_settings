@@ -25,27 +25,19 @@ import com.android.settings.core.TogglePreferenceController;
 
 
 public class AdaptiveSleepPreferenceController extends TogglePreferenceController {
-
-    private final String SYSTEM_KEY = ADAPTIVE_SLEEP;
-    private final int DEFAULT_VALUE = 0;
-
-    final boolean hasSufficientPermissions;
+    public static final String PREF_NAME = "adaptive_sleep";
+    private static final String SYSTEM_KEY = ADAPTIVE_SLEEP;
+    private static final int DEFAULT_VALUE = 0;
 
     public AdaptiveSleepPreferenceController(Context context, String key) {
         super(context, key);
-
-        final PackageManager packageManager = mContext.getPackageManager();
-        final String attentionPackage = packageManager.getAttentionServicePackageName();
-        hasSufficientPermissions = attentionPackage != null && packageManager.checkPermission(
-                Manifest.permission.CAMERA, attentionPackage) == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
     public boolean isChecked() {
-        return hasSufficientPermissions && Settings.System.getInt(mContext.getContentResolver(),
-                SYSTEM_KEY, DEFAULT_VALUE) != DEFAULT_VALUE;
+        return hasSufficientPermission(mContext.getPackageManager()) && Settings.System.getInt(
+                mContext.getContentResolver(), SYSTEM_KEY, DEFAULT_VALUE) != DEFAULT_VALUE;
     }
-
 
     @Override
     public boolean setChecked(boolean isChecked) {
@@ -57,10 +49,7 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_adaptive_sleep_available)
-                ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return isControllerAvailable(mContext);
     }
 
     @Override
@@ -68,5 +57,18 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
         return mContext.getText(isChecked()
                 ? R.string.adaptive_sleep_summary_on
                 : R.string.adaptive_sleep_summary_off);
+    }
+
+    public static int isControllerAvailable(Context context) {
+        return context.getResources().getBoolean(
+                com.android.internal.R.bool.config_adaptive_sleep_available)
+                ? AVAILABLE_UNSEARCHABLE
+                : UNSUPPORTED_ON_DEVICE;
+    }
+
+    static boolean hasSufficientPermission(PackageManager packageManager) {
+        final String attentionPackage = packageManager.getAttentionServicePackageName();
+        return attentionPackage != null && packageManager.checkPermission(
+                Manifest.permission.CAMERA, attentionPackage) == PackageManager.PERMISSION_GRANTED;
     }
 }

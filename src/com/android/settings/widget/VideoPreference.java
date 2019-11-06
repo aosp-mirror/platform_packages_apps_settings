@@ -80,6 +80,7 @@ public class VideoPreference extends Preference {
         try {
             // if these are already set that means they were set dynamically and don't need
             // to be loaded from xml
+            mAnimationAvailable = false;
             mAnimationId = mAnimationId == 0
                 ? attributes.getResourceId(R.styleable.VideoPreference_animation, 0)
                 : mAnimationId;
@@ -91,6 +92,7 @@ public class VideoPreference extends Preference {
                 ? attributes.getResourceId(R.styleable.VideoPreference_preview, 0)
                 : mPreviewResource;
             if (mPreviewResource == 0 && mAnimationId == 0) {
+                setVisible(false);
                 return;
             }
             initMediaPlayer();
@@ -248,6 +250,10 @@ public class VideoPreference extends Preference {
             mMediaPlayer = null;
             mVideoReady = false;
         }
+    }
+
+    public boolean isAnimationAvailable() {
+        return mAnimationAvailable;
     }
 
     public boolean isVideoPaused() {

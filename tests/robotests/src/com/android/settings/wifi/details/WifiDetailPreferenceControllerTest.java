@@ -114,7 +114,7 @@ public class WifiDetailPreferenceControllerTest {
     private static final int TX_LINK_SPEED = 123;
     private static final int RX_LINK_SPEED = 54;
     private static final String SSID = "ssid";
-    private static final String MAC_ADDRESS = WifiInfo.DEFAULT_MAC_ADDRESS;
+    private static final String MAC_ADDRESS = "01:23:45:67:89:ab";
     private static final String RANDOMIZED_MAC_ADDRESS = "RANDOMIZED_MAC_ADDRESS";
     private static final String FACTORY_MAC_ADDRESS = "FACTORY_MAC_ADDRESS";
     private static final String SECURITY = "None";
@@ -990,6 +990,14 @@ public class WifiDetailPreferenceControllerTest {
 
         // ... but if the network is no longer validated, then we display "connected, no Internet".
         nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockHeaderController).setSummary(summary);
+
+        // UI will be refreshed when private DNS is broken.
+        summary = "Private DNS server cannot be accessed";
+        when(mockAccessPoint.getSettingsSummary(true /* convertSavedAsDisconnected */))
+                .thenReturn(summary);
+        nc.setPrivateDnsBroken(true);
         updateNetworkCapabilities(nc);
         inOrder.verify(mockHeaderController).setSummary(summary);
 

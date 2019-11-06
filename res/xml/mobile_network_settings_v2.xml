@@ -124,7 +124,8 @@
 
         <PreferenceCategory
             android:key="calling_category"
-            android:title="@string/call_category">
+            android:title="@string/call_category"
+            settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
 
             <PreferenceScreen
                 android:key="wifi_calling_key"
