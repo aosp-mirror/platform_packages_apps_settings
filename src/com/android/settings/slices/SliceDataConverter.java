@@ -53,9 +53,9 @@ import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settingslib.search.Indexable.SearchIndexProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.search.Indexable.SearchIndexProvider;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -101,14 +101,13 @@ class SliceDataConverter {
     public List<SliceData> getSliceData() {
         List<SliceData> sliceData = new ArrayList<>();
 
-        final Collection<Class> indexableClasses = FeatureFactory.getFactory(mContext)
+        final Collection<SearchIndexableData> bundles = FeatureFactory.getFactory(mContext)
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
 
-        for (Class clazz : indexableClasses) {
-            final String fragmentName = clazz.getName();
+        for (SearchIndexableData bundle : bundles) {
+            final String fragmentName = bundle.getTargetClass().getName();
 
-            final SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
-                    clazz);
+            final SearchIndexProvider provider = bundle.getSearchIndexProvider();
 
             // CodeInspection test guards against the null check. Keep check in case of bad actors.
             if (provider == null) {

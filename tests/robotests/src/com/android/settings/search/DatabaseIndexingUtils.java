@@ -12,7 +12,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 package com.android.settings.search;
@@ -41,13 +40,13 @@ public class DatabaseIndexingUtils {
         } catch (NoSuchFieldException e) {
             Log.d(TAG, "Cannot find field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         } catch (SecurityException se) {
-            Log.d(TAG, "Security exception for field '" +
-                    FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
+            Log.d(TAG,
+                    "Security exception for field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         } catch (IllegalAccessException e) {
             Log.d(TAG, "Illegal access to field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         } catch (IllegalArgumentException e) {
-            Log.d(TAG, "Illegal argument when accessing field '" +
-                    FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
+            Log.d(TAG, "Illegal argument when accessing field '"
+                    + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         }
         return null;
     }

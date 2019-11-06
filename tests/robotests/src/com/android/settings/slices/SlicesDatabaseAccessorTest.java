@@ -24,9 +24,7 @@ import static org.mockito.Mockito.spy;
 import android.app.ApplicationPackageManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 import android.view.accessibility.AccessibilityManager;
@@ -40,6 +38,7 @@ import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.After;
 import org.junit.Before;
@@ -217,7 +216,8 @@ public class SlicesDatabaseAccessorTest {
         // Fake the indexable list.
         provider.getSearchIndexableResources().getProviderValues().clear();
         provider.getSearchIndexableResources().getProviderValues().add(
-                FakeIndexProvider.class);
+                new SearchIndexableData(FakeIndexProvider.class,
+                        FakeIndexProvider.SEARCH_INDEX_DATA_PROVIDER));
 
         final SlicesDatabaseAccessor accessor = new SlicesDatabaseAccessor(mContext);
         final List<Uri> keys = accessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY);

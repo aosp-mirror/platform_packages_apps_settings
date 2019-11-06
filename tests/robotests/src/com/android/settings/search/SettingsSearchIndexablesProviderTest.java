@@ -13,6 +13,7 @@ import android.provider.SearchIndexablesContract;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.After;
 import org.junit.Before;
@@ -46,7 +47,8 @@ public class SettingsSearchIndexablesProviderTest {
         final SearchFeatureProvider featureProvider = new SearchFeatureProviderImpl();
         featureProvider.getSearchIndexableResources().getProviderValues().clear();
         featureProvider.getSearchIndexableResources().getProviderValues()
-                .add(FakeSettingsFragment.class);
+                .add(new SearchIndexableData(FakeSettingsFragment.class,
+                        FakeSettingsFragment.SEARCH_INDEX_DATA_PROVIDER));
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = featureProvider;
     }
