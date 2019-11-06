@@ -29,8 +29,8 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexableData;
 import com.android.settingslib.search.SearchIndexableResources;
 
 import org.junit.Before;
@@ -60,10 +60,10 @@ public class PreferenceControllerContractTest {
         final SearchIndexableResources resources =
                 FeatureFactory.getFactory(mContext).getSearchFeatureProvider()
                         .getSearchIndexableResources();
-        for (Class<?> clazz : resources.getProviderValues()) {
+        for (SearchIndexableData bundle : resources.getProviderValues()) {
 
             final BaseSearchIndexProvider provider =
-                    (BaseSearchIndexProvider) DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+                    (BaseSearchIndexProvider) bundle.getSearchIndexProvider();
             if (provider == null) {
                 continue;
             }

@@ -45,6 +45,8 @@ import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
@@ -290,5 +292,14 @@ public class WifiSettingsTest {
         mWifiSettings.onCreateContextMenu(menu, view, null /* info */);
 
         verify(menu).add(anyInt(), eq(WifiSettings.MENU_ID_FORGET), anyInt(), anyInt());
+    }
+
+    @Test
+    public void onCreateAdapter_hasStableIdsTrue() {
+        final PreferenceScreen preferenceScreen = mock(PreferenceScreen.class);
+
+        RecyclerView.Adapter adapter = mWifiSettings.onCreateAdapter(preferenceScreen);
+
+        assertThat(adapter.hasStableIds()).isTrue();
     }
 }

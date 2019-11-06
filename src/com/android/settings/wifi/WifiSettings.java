@@ -53,6 +53,8 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
@@ -441,6 +443,13 @@ public class WifiSettings extends RestrictedSettingsFragment
             // De-restrict the ui
             addPreferences();
         }
+    }
+
+    @Override
+    protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+        final RecyclerView.Adapter adapter = super.onCreateAdapter(preferenceScreen);
+        adapter.setHasStableIds(true);
+        return adapter;
     }
 
     @Override
