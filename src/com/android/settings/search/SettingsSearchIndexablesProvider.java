@@ -107,7 +107,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         final List<SearchIndexableResource> resources =
                 getSearchIndexableResourcesFromProvider(getContext());
         for (SearchIndexableResource val : resources) {
-            Object[] ref = new Object[INDEXABLES_XML_RES_COLUMNS.length];
+            final Object[] ref = new Object[INDEXABLES_XML_RES_COLUMNS.length];
             ref[COLUMN_INDEX_XML_RES_RANK] = val.rank;
             ref[COLUMN_INDEX_XML_RES_RESID] = val.xmlResId;
             ref[COLUMN_INDEX_XML_RES_CLASS_NAME] = val.className;
@@ -129,21 +129,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         final MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
         final List<SearchIndexableRaw> raws = getSearchIndexableRawFromProvider(getContext());
         for (SearchIndexableRaw val : raws) {
-            Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];
-            ref[COLUMN_INDEX_RAW_TITLE] = val.title;
-            ref[COLUMN_INDEX_RAW_SUMMARY_ON] = val.summaryOn;
-            ref[COLUMN_INDEX_RAW_SUMMARY_OFF] = val.summaryOff;
-            ref[COLUMN_INDEX_RAW_ENTRIES] = val.entries;
-            ref[COLUMN_INDEX_RAW_KEYWORDS] = val.keywords;
-            ref[COLUMN_INDEX_RAW_SCREEN_TITLE] = val.screenTitle;
-            ref[COLUMN_INDEX_RAW_CLASS_NAME] = val.className;
-            ref[COLUMN_INDEX_RAW_ICON_RESID] = val.iconResId;
-            ref[COLUMN_INDEX_RAW_INTENT_ACTION] = val.intentAction;
-            ref[COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE] = val.intentTargetPackage;
-            ref[COLUMN_INDEX_RAW_INTENT_TARGET_CLASS] = val.intentTargetClass;
-            ref[COLUMN_INDEX_RAW_KEY] = val.key;
-            ref[COLUMN_INDEX_RAW_USER_ID] = val.userId;
-            cursor.addRow(ref);
+            cursor.addRow(createIndexableRawColumnObjects(val));
         }
 
         return cursor;
@@ -181,21 +167,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
 
         final MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
         for (SearchIndexableRaw raw : rawList) {
-            Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];
-            ref[COLUMN_INDEX_RAW_TITLE] = raw.title;
-            ref[COLUMN_INDEX_RAW_SUMMARY_ON] = raw.summaryOn;
-            ref[COLUMN_INDEX_RAW_SUMMARY_OFF] = raw.summaryOff;
-            ref[COLUMN_INDEX_RAW_ENTRIES] = raw.entries;
-            ref[COLUMN_INDEX_RAW_KEYWORDS] = raw.keywords;
-            ref[COLUMN_INDEX_RAW_SCREEN_TITLE] = raw.screenTitle;
-            ref[COLUMN_INDEX_RAW_CLASS_NAME] = raw.className;
-            ref[COLUMN_INDEX_RAW_ICON_RESID] = raw.iconResId;
-            ref[COLUMN_INDEX_RAW_INTENT_ACTION] = raw.intentAction;
-            ref[COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE] = raw.intentTargetPackage;
-            ref[COLUMN_INDEX_RAW_INTENT_TARGET_CLASS] = raw.intentTargetClass;
-            ref[COLUMN_INDEX_RAW_KEY] = raw.key;
-            ref[COLUMN_INDEX_RAW_USER_ID] = raw.userId;
-            cursor.addRow(ref);
+            cursor.addRow(createIndexableRawColumnObjects(raw));
         }
 
         return cursor;
@@ -394,22 +366,40 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
                 FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
 
         final List<SearchIndexableRaw> rawList = new ArrayList<>();
+        final String currentPackageName = context.getPackageName();
         for (DashboardCategory category : dashboardFeatureProvider.getAllCategories()) {
             for (Tile tile : category.getTiles()) {
-                final String packageName = tile.getPackageName();
-                if (context.getPackageName().equals(packageName)) {
+                if (currentPackageName.equals(tile.getPackageName())) {
                     continue;
                 }
                 final SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                raw.key = dashboardFeatureProvider.getDashboardKeyForTile(tile);
                 raw.title = tile.getTitle(context).toString();
-                raw.summaryOn = tile.getSummary(context).toString();
-                raw.summaryOff = tile.getSummary(context).toString();
-                raw.keywords = dashboardFeatureProvider.getDashboardKeyForTile(tile);
+                CharSequence summary = tile.getSummary(context);
+                raw.summaryOn = TextUtils.isEmpty(summary) ? null : summary.toString();
+                raw.summaryOff = raw.summaryOn;
                 raw.className = CATEGORY_KEY_TO_PARENT_MAP.get(tile.getCategory());
                 rawList.add(raw);
             }
         }
 
-        return rawList;
+        return rawList;    }
+
+    private static Object[] createIndexableRawColumnObjects(SearchIndexableRaw raw) {
+        final Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];
+        ref[COLUMN_INDEX_RAW_TITLE] = raw.title;
+        ref[COLUMN_INDEX_RAW_SUMMARY_ON] = raw.summaryOn;
+        ref[COLUMN_INDEX_RAW_SUMMARY_OFF] = raw.summaryOff;
+        ref[COLUMN_INDEX_RAW_ENTRIES] = raw.entries;
+        ref[COLUMN_INDEX_RAW_KEYWORDS] = raw.keywords;
+        ref[COLUMN_INDEX_RAW_SCREEN_TITLE] = raw.screenTitle;
+        ref[COLUMN_INDEX_RAW_CLASS_NAME] = raw.className;
+        ref[COLUMN_INDEX_RAW_ICON_RESID] = raw.iconResId;
+        ref[COLUMN_INDEX_RAW_INTENT_ACTION] = raw.intentAction;
+        ref[COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE] = raw.intentTargetPackage;
+        ref[COLUMN_INDEX_RAW_INTENT_TARGET_CLASS] = raw.intentTargetClass;
+        ref[COLUMN_INDEX_RAW_KEY] = raw.key;
+        ref[COLUMN_INDEX_RAW_USER_ID] = raw.userId;
+        return ref;
     }
 }
