@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -49,7 +48,6 @@ import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -261,17 +259,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.mobile_network_settings_v2;
-                    result.add(sir);
-                    return result;
-                }
+            new BaseSearchIndexProvider(R.xml.mobile_network_settings_v2) {
 
                 /** suppress full page if user is not admin */
                 @Override
