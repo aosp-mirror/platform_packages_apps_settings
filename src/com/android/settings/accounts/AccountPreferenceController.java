@@ -329,19 +329,23 @@ public class AccountPreferenceController extends AbstractPreferenceController
             preferenceGroup.setContentDescription(
                     mContext.getString(R.string.account_settings));
         } else if (userInfo.isManagedProfile()) {
-            preferenceGroup.setTitle(R.string.category_work);
-            String workGroupSummary = getWorkGroupSummary(context, userInfo);
-            preferenceGroup.setSummary(workGroupSummary);
-            preferenceGroup.setContentDescription(
-                    mContext.getString(R.string.accessibility_category_work, workGroupSummary));
+            if (mType == ProfileSelectFragment.ALL) {
+                preferenceGroup.setTitle(R.string.category_work);
+                final String workGroupSummary = getWorkGroupSummary(context, userInfo);
+                preferenceGroup.setSummary(workGroupSummary);
+                preferenceGroup.setContentDescription(
+                        mContext.getString(R.string.accessibility_category_work, workGroupSummary));
+            }
             profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference();
             mHelper.enforceRestrictionOnPreference(profileData.removeWorkProfilePreference,
                     DISALLOW_REMOVE_MANAGED_PROFILE, UserHandle.myUserId());
             profileData.managedProfilePreference = newManagedProfileSettings();
         } else {
-            preferenceGroup.setTitle(R.string.category_personal);
-            preferenceGroup.setContentDescription(
-                    mContext.getString(R.string.accessibility_category_personal));
+            if (mType == ProfileSelectFragment.ALL) {
+                preferenceGroup.setTitle(R.string.category_personal);
+                preferenceGroup.setContentDescription(
+                        mContext.getString(R.string.accessibility_category_personal));
+            }
         }
         final PreferenceScreen screen = mParent.getPreferenceScreen();
         if (screen != null) {
