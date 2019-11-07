@@ -50,6 +50,9 @@ public class VideoPreference extends Preference {
     private int mAnimationId;
     private int mVectorAnimationId;
     private int mHeight = LinearLayout.LayoutParams.MATCH_PARENT - 1; // video height in pixels
+    private TextureView mVideo;
+    private ImageView mPreviewImage;
+    private ImageView mPlayButton;
 
     public VideoPreference(Context context) {
         super(context);
@@ -108,19 +111,19 @@ public class VideoPreference extends Preference {
             return;
         }
 
-        final TextureView video = (TextureView) holder.findViewById(R.id.video_texture_view);
-        final ImageView previewImage = (ImageView) holder.findViewById(R.id.video_preview_image);
-        final ImageView playButton = (ImageView) holder.findViewById(R.id.video_play_button);
+        mVideo = (TextureView) holder.findViewById(R.id.video_texture_view);
+        mPreviewImage = (ImageView) holder.findViewById(R.id.video_preview_image);
+        mPlayButton = (ImageView) holder.findViewById(R.id.video_play_button);
         final AspectRatioFrameLayout layout = (AspectRatioFrameLayout) holder.findViewById(
                 R.id.video_container);
 
-        previewImage.setImageResource(mPreviewId);
+        mPreviewImage.setImageResource(mPreviewId);
         layout.setAspectRatio(mAspectRatio);
         if (mHeight >= LinearLayout.LayoutParams.MATCH_PARENT) {
             layout.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, mHeight));
         }
-        mAnimationController.attachView(video, previewImage, playButton);
+        mAnimationController.attachView(mVideo, mPreviewImage, mPlayButton);
     }
 
     @Override
@@ -164,6 +167,9 @@ public class VideoPreference extends Preference {
         }
         if (mAnimationId != 0) {
             mAnimationController = new MediaAnimationController(mContext, mAnimationId);
+            if (mVideo != null) {
+                mAnimationController.attachView(mVideo, mPreviewImage, mPlayButton);
+            }
         }
     }
 

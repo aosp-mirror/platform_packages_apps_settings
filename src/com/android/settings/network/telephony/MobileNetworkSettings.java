@@ -37,11 +37,9 @@ import androidx.preference.Preference;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
@@ -117,8 +115,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                 MobileNetworkUtils.getSearchableSubscriptionId(context));
 
-        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
-                mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return Arrays.asList(
                     new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
                             this, mSubId));
@@ -130,19 +127,17 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
-            use(CallsDefaultSubscriptionController.class).init(getLifecycle());
-            use(SmsDefaultSubscriptionController.class).init(getLifecycle());
-            use(MobileNetworkSwitchController.class).init(getLifecycle(), mSubId);
-            use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
-            use(BillingCyclePreferenceController.class).init(mSubId);
-            use(MmsMessagePreferenceController.class).init(mSubId);
-            use(DataDuringCallsPreferenceController.class).init(getLifecycle(), mSubId);
-            use(DisabledSubscriptionController.class).init(getLifecycle(), mSubId);
-            use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
-                    REQUEST_CODE_DELETE_SUBSCRIPTION);
-            use(DisableSimFooterPreferenceController.class).init(mSubId);
-        }
+        use(CallsDefaultSubscriptionController.class).init(getLifecycle());
+        use(SmsDefaultSubscriptionController.class).init(getLifecycle());
+        use(MobileNetworkSwitchController.class).init(getLifecycle(), mSubId);
+        use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
+        use(BillingCyclePreferenceController.class).init(mSubId);
+        use(MmsMessagePreferenceController.class).init(mSubId);
+        use(DataDuringCallsPreferenceController.class).init(getLifecycle(), mSubId);
+        use(DisabledSubscriptionController.class).init(getLifecycle(), mSubId);
+        use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
+                REQUEST_CODE_DELETE_SUBSCRIPTION);
+        use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
         use(ApnPreferenceController.class).init(mSubId);
@@ -151,9 +146,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
         use(EnabledNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
-        if (!FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
-            use(EuiccPreferenceController.class).init(mSubId);
-        }
+
         final WifiCallingPreferenceController wifiCallingPreferenceController =
                 use(WifiCallingPreferenceController.class).init(mSubId);
 
@@ -204,11 +197,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
-            return R.xml.mobile_network_settings_v2;
-        } else {
-            return R.xml.mobile_network_settings;
-        }
+        return R.xml.mobile_network_settings_v2;
     }
 
     @Override
@@ -250,8 +239,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
-                mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final MenuItem item = menu.add(Menu.NONE, R.id.edit_sim_name, Menu.NONE,
                     R.string.mobile_network_sim_name);
             item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
@@ -262,8 +250,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
-                mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             if (menuItem.getItemId() == R.id.edit_sim_name) {
                 RenameMobileNetworkDialogFragment.newInstance(mSubId).show(
                         getFragmentManager(), RenameMobileNetworkDialogFragment.TAG);
@@ -281,10 +268,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = FeatureFlagPersistent.isEnabled(context,
-                            FeatureFlags.NETWORK_INTERNET_V2)
-                            ? R.xml.mobile_network_settings_v2
-                            : R.xml.mobile_network_settings;
+                    sir.xmlResId = R.xml.mobile_network_settings_v2;
                     result.add(sir);
                     return result;
                 }

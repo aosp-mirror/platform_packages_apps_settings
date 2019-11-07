@@ -27,11 +27,13 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -45,6 +47,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSettingsMediaPlayer.class)
@@ -134,5 +137,30 @@ public class VideoPreferenceTest {
         verify(fakePlayButton).setVisibility(eq(View.GONE));
         verify(fakePreview).setVisibility(eq(View.GONE));
         assertThat(mAnimationController.isPlaying()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void onViewVisible_createAnimationController() {
+        final PreferenceFragmentCompat fragment = FragmentController.of(
+                new VideoPreferenceTest.TestFragment(),
+                new Bundle())
+                .create()
+                .start()
+                .resume()
+                .get();
+
+        final VideoPreference vp1 = fragment.findPreference("video1");
+        final VideoPreference vp2 = fragment.findPreference("video2");
+
+        assertThat(vp1.mAnimationController instanceof MediaAnimationController).isTrue();
+        assertThat(vp2.mAnimationController instanceof VectorAnimationController).isTrue();
+    }
+
+    public static class TestFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            addPreferencesFromResource(R.xml.video_preference);
+        }
     }
 }
