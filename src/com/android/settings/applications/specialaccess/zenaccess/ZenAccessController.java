@@ -70,7 +70,9 @@ public class ZenAccessController extends BasePreferenceController {
             final List<PackageInfo> pkgs = list.getList();
             if (pkgs != null) {
                 for (PackageInfo info : pkgs) {
-                    requestingPackages.add(info.packageName);
+                    if (info.applicationInfo.enabled) {
+                        requestingPackages.add(info.packageName);
+                    }
                 }
             }
         } catch (RemoteException e) {
