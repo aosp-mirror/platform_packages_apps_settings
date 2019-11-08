@@ -195,7 +195,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.mobile_network_settings_v2;
+        return R.xml.mobile_network_settings;
     }
 
     @Override
@@ -259,7 +259,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.mobile_network_settings_v2) {
+            new BaseSearchIndexProvider(R.xml.mobile_network_settings) {
 
                 /** suppress full page if user is not admin */
                 @Override

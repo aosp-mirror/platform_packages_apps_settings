@@ -56,7 +56,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.network_and_internet_v2;
+        return R.xml.network_and_internet;
     }
 
     @Override
@@ -141,7 +141,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.network_and_internet_v2) {
+            new BaseSearchIndexProvider(R.xml.network_and_internet) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
