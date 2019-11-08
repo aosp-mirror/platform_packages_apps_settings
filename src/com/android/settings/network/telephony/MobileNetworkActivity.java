@@ -22,6 +22,8 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
+import android.view.View;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -74,8 +76,14 @@ public class MobileNetworkActivity extends SettingsBaseActivity
             return;
         }
 
-        setContentView(R.layout.mobile_network_settings_container_v2);
-        setActionBar(findViewById(R.id.mobile_action_bar));
+        final Toolbar toolbar = findViewById(R.id.action_bar);
+        toolbar.setVisibility(View.VISIBLE);
+        setActionBar(toolbar);
+
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
         mProxySubscriptionMgr.setLifecycle(getLifecycle());
@@ -84,11 +92,6 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         mCurSubscriptionId = savedInstanceState != null
                 ? savedInstanceState.getInt(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
                 : SUB_ID_NULL;
-
-        final ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
 
         final SubscriptionInfo subscription = getSubscription();
         updateTitleAndNavigation(subscription);
@@ -178,7 +181,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
         final Fragment fragment = new MobileNetworkSettings();
         fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.main_content, fragment, buildFragmentTag(subId));
+        fragmentTransaction.replace(R.id.content_frame, fragment, buildFragmentTag(subId));
         fragmentTransaction.commit();
     }
 
