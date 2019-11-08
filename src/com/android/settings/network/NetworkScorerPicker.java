@@ -31,6 +31,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.List;
@@ -38,6 +40,7 @@ import java.util.List;
 /**
  * Fragment for choosing default network scorer.
  */
+@SearchIndexable
 public class NetworkScorerPicker extends InstrumentedPreferenceFragment implements
         RadioButtonPreference.OnClickListener {
 
@@ -142,4 +145,7 @@ public class NetworkScorerPicker extends InstrumentedPreferenceFragment implemen
     NetworkScoreManager createNetworkScorerManager(Context context) {
         return (NetworkScoreManager) context.getSystemService(Context.NETWORK_SCORE_SERVICE);
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.network_scorer_picker_prefs);
 }

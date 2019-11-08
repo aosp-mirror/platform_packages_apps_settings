@@ -27,14 +27,17 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 
 /**
  * UI to manage saved networks/access points.
  */
+@SearchIndexable
 public class SavedAccessPointsWifiSettings extends DashboardFragment {
 
     private static final String TAG = "SavedAccessPoints";
@@ -130,4 +133,7 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment {
             outState.putBundle(SAVE_DIALOG_ACCESS_POINT_STATE, mAccessPointSavedState);
         }
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.wifi_display_saved_access_points);
 }

@@ -39,7 +39,9 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.datetime.timezone.model.FilteredCountryTimeZones;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 import com.android.settings.datetime.timezone.model.TimeZoneDataLoader;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,6 +53,7 @@ import java.util.Set;
 /**
  * The class displays a time zone picker either by regions or fixed offset time zones.
  */
+@SearchIndexable
 public class TimeZoneSettings extends DashboardFragment {
 
     private static final String TAG = "TimeZoneSettings";
@@ -387,4 +390,7 @@ public class TimeZoneSettings extends DashboardFragment {
     private String getLocaleRegionId() {
         return mLocale.getCountry().toUpperCase(Locale.US);
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.time_zone_prefs);
 }
