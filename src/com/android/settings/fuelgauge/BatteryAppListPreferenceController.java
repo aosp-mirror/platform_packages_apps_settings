@@ -46,7 +46,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -355,7 +354,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         // Don't show over-counted, unaccounted and hidden system module in any condition
         return sipper.drainType == BatterySipper.DrainType.OVERCOUNTED
                 || sipper.drainType == BatterySipper.DrainType.UNACCOUNTED
-                || mBatteryUtils.isHiddenSystemModule(sipper);
+                || mBatteryUtils.isHiddenSystemModule(sipper) || sipper.getUid() < 0;
     }
 
     @VisibleForTesting
