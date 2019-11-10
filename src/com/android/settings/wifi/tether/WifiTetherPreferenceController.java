@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi.tether;
 
+import android.annotation.NonNull;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiClient;
@@ -164,12 +165,12 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         }
     }
 
-    private void updateConfigSummary(WifiConfiguration wifiConfig) {
-        final String s = mContext.getString(
-                com.android.internal.R.string.wifi_tether_configure_ssid_default);
-
+    private void updateConfigSummary(@NonNull WifiConfiguration wifiConfig) {
+        if (wifiConfig == null) {
+            // Should never happen.
+            return;
+        }
         mPreference.setSummary(mContext.getString(R.string.wifi_tether_enabled_subtext,
-                BidiFormatter.getInstance().unicodeWrap(
-                        (wifiConfig == null) ? s : wifiConfig.SSID)));
+                BidiFormatter.getInstance().unicodeWrap(wifiConfig.SSID)));
     }
 }

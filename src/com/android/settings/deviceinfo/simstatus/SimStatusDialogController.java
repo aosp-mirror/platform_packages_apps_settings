@@ -26,17 +26,15 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.telephony.CarrierConfigManager;
-import android.telephony.SmsCbMessage;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
+import android.telephony.SmsCbMessage;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
-import android.text.BidiFormatter;
-import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -143,9 +141,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mSlotIndex = slotId;
         mSubscriptionInfo = getPhoneSubscriptionInfo(slotId);
 
-        mTelephonyManager =  mContext.getSystemService(TelephonyManager.class);
-        mCarrierConfigManager =  mContext.getSystemService(CarrierConfigManager.class);
-        mEuiccManager =  mContext.getSystemService(EuiccManager.class);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
+        mEuiccManager = mContext.getSystemService(EuiccManager.class);
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
 
         mRes = mContext.getResources();
@@ -184,9 +182,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
         mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId())
                 .listen(mPhoneStateListener,
-                PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
-                        | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
-                        | PhoneStateListener.LISTEN_SERVICE_STATE);
+                        PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
+                                | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
+                                | PhoneStateListener.LISTEN_SERVICE_STATE);
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
 
         if (mShowLatestAreaInfo) {
@@ -224,8 +222,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
     private void updatePhoneNumber() {
         // If formattedNumber is null or empty, it'll display as "Unknown".
-        mDialog.setText(PHONE_NUMBER_VALUE_ID, BidiFormatter.getInstance().unicodeWrap(
-                getPhoneNumber(), TextDirectionHeuristics.LTR));
+        mDialog.setText(PHONE_NUMBER_VALUE_ID,
+                DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext, mSubscriptionInfo));
     }
 
     private void updateDataState(int state) {
@@ -407,13 +405,14 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private void updateImsRegistrationState() {
         final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
         final PersistableBundle carrierConfig =
-            mCarrierConfigManager.getConfigForSubId(subscriptionId);
+                mCarrierConfigManager.getConfigForSubId(subscriptionId);
         final boolean showImsRegState = carrierConfig == null ? false :
-            carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL);
+                carrierConfig.getBoolean(
+                        CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL);
         if (showImsRegState) {
             final boolean isImsRegistered = mTelephonyManager.isImsRegistered(subscriptionId);
             mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(isImsRegistered ?
-                R.string.ims_reg_status_registered : R.string.ims_reg_status_not_registered));
+                    R.string.ims_reg_status_registered : R.string.ims_reg_status_not_registered));
         } else {
             mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
             mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
@@ -459,11 +458,6 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 updateRoamingStatus(serviceState);
             }
         };
-    }
-
-    @VisibleForTesting
-    String getPhoneNumber() {
-        return DeviceInfoUtils.getFormattedPhoneNumber(mContext, mSubscriptionInfo);
     }
 
     @VisibleForTesting

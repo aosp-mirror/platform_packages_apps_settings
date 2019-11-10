@@ -65,9 +65,8 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported) ?
-                AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return mWifiManager.isConnectedMacRandomizationSupported()
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

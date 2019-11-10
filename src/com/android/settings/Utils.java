@@ -528,15 +528,6 @@ public final class Utils extends com.android.settingslib.Utils {
    }
 
     /**
-     * Return whether or not the user should have a SIM Cards option in Settings.
-     * TODO: Change back to returning true if count is greater than one after testing.
-     * TODO: See bug 16533525.
-     */
-    public static boolean showSimCardTile(Context context) {
-        return false;
-    }
-
-    /**
      * Queries for the UserInfo of a user. Returns null if the user doesn't exist (was removed).
      * @param userManager Instance of UserManager
      * @param checkUser The user to check the existence of.

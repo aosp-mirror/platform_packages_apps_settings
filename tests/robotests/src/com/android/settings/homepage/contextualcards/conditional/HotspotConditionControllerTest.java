@@ -61,11 +61,10 @@ public class HotspotConditionControllerTest {
     }
 
     @Test
-    public void buildContextualCard_noWifiAp_shouldHaveDefaultSsid() {
+    public void buildContextualCard_noWifiAp_shouldHaveEmptySsid() {
         final ContextualCard card = mController.buildContextualCard();
 
-        assertThat(card.getSummaryText()).isEqualTo(
-                mContext.getText(com.android.internal.R.string.wifi_tether_configure_ssid_default));
+        assertThat(card.getSummaryText()).isEqualTo("");
     }
 
     private void setupWifiApConfiguration() {

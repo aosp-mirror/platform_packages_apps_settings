@@ -24,8 +24,6 @@ import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.text.BidiFormatter;
-import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -160,10 +158,10 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
     CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
-        final String phoneNumber = DeviceInfoUtils.getFormattedPhoneNumber(mContext,
+        final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext,
                 subscriptionInfo);
         return TextUtils.isEmpty(phoneNumber) ? mContext.getString(R.string.device_info_default)
-                : BidiFormatter.getInstance().unicodeWrap(phoneNumber, TextDirectionHeuristics.LTR);
+                : phoneNumber;
     }
 
     @VisibleForTesting

@@ -114,7 +114,6 @@ public class ZenAccessSettings extends EmptyTextSettings implements
         }
         ArraySet<String> autoApproved = new ArraySet<>();
         autoApproved.addAll(mNoMan.getEnabledNotificationListenerPackages());
-        requesting.addAll(autoApproved);
         Collections.sort(apps, new PackageItemInfo.DisplayNameComparator(mPkgMan));
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;

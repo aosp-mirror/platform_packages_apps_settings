@@ -123,7 +123,9 @@ public class VideoPreference extends Preference {
             layout.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, mHeight));
         }
-        mAnimationController.attachView(mVideo, mPreviewImage, mPlayButton);
+        if (mAnimationController != null) {
+            mAnimationController.attachView(mVideo, mPreviewImage, mPlayButton);
+        }
     }
 
     @Override
