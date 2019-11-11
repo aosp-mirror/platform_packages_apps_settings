@@ -15,8 +15,6 @@
  */
 package com.android.settings.bluetooth;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -24,7 +22,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -61,6 +58,6 @@ public class UtilsTest {
         Utils.showConnectingError(mContext, "testName", mock(LocalBluetoothManager.class));
 
         verify(mMetricsFeatureProvider).visible(eq(mContext), anyInt(),
-                eq(MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR));
+                eq(MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR), anyInt());
     }
 }

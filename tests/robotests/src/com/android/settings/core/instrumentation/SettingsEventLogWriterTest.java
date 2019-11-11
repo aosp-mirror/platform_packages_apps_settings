@@ -62,7 +62,7 @@ public class SettingsEventLogWriterTest {
                 SettingsUIDeviceConfig.GENERIC_EVENT_LOGGING_ENABLED, "true", true);
 
         mWriter.visible(RuntimeEnvironment.application, SettingsEnums.PAGE_UNKNOWN,
-                SettingsEnums.SETTINGS_HOMEPAGE);
+                SettingsEnums.SETTINGS_HOMEPAGE, 0);
 
         assertThat(ShadowMetricsLogger.sActionLoggedCount).isEqualTo(1);
     }
@@ -83,7 +83,7 @@ public class SettingsEventLogWriterTest {
                 SettingsUIDeviceConfig.GENERIC_EVENT_LOGGING_ENABLED, "false", true);
 
         mWriter.visible(RuntimeEnvironment.application, SettingsEnums.PAGE_UNKNOWN,
-                SettingsEnums.SETTINGS_HOMEPAGE);
+                SettingsEnums.SETTINGS_HOMEPAGE, 0);
 
         assertThat(ShadowMetricsLogger.sActionLoggedCount).isEqualTo(0);
     }

@@ -91,10 +91,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         return getPreferenceManager().getContext();
     }
 
-    protected final VisibilityLoggerMixin getVisibilityLogger() {
-        return mVisibilityLoggerMixin;
-    }
-
     /**
      * Get the res id for static preference xml for this fragment.
      */
