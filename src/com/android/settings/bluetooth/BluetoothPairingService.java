@@ -141,7 +141,7 @@ public final class BluetoothPairingService extends Service {
         String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
         if (TextUtils.isEmpty(name)) {
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-            name = device != null ? device.getAliasName() : res.getString(android.R.string.unknownName);
+            name = device != null ? device.getAlias() : res.getString(android.R.string.unknownName);
         }
 
         Log.d(TAG, "Show pairing notification for " + mDevice.getAddress() + " (" + name + ")");
