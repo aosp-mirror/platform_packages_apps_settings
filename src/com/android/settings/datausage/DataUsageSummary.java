@@ -33,6 +33,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -65,6 +66,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     private DataUsageSummaryPreference mSummaryPreference;
     private DataUsageSummaryPreferenceController mSummaryController;
     private NetworkTemplate mDefaultTemplate;
+    private ProxySubscriptionManager mProxySubscriptionMgr;
 
     @Override
     public int getHelpResource() {
@@ -75,6 +77,11 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Context context = getContext();
+
+        // enable ProxySubscriptionMgr with Lifecycle support for all controllers
+        // live within this fragment
+        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
+        mProxySubscriptionMgr.setLifecycle(getLifecycle());
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
 

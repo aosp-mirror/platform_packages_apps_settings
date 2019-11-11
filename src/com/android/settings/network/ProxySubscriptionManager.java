@@ -82,7 +82,6 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
             }
         };
 
-        mKeepCacheWhenOnStart = true;
         mSubsciptionsMonitor.start();
     }
 
@@ -90,7 +89,6 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
     private Context mContext;
     private ActiveSubsciptionsListener mSubsciptionsMonitor;
     private GlobalSettingsChangeListener mAirplaneModeMonitor;
-    private boolean mKeepCacheWhenOnStart;
 
     private List<OnActiveSubscriptionChangedListener> mActiveSubscriptionsListeners;
 
@@ -98,6 +96,12 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
         for (OnActiveSubscriptionChangedListener listener : mActiveSubscriptionsListeners) {
             listener.onChanged();
         }
+    }
+
+    @Override
+    public void onSubscriptionsChanged() {
+        clearCache();
+        notifyAllListeners();
     }
 
     /**
@@ -118,15 +122,11 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
 
     @OnLifecycleEvent(ON_START)
     void onStart() {
-        if (!mKeepCacheWhenOnStart) {
-            mSubsciptionsMonitor.clearCache();
-        }
         mSubsciptionsMonitor.start();
     }
 
     @OnLifecycleEvent(ON_STOP)
     void onStop() {
-        mKeepCacheWhenOnStart = false;
         mSubsciptionsMonitor.stop();
     }
 
@@ -149,6 +149,15 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
      */
     public SubscriptionManager get() {
         return mSubsciptionsMonitor.getSubscriptionManager();
+    }
+
+    /**
+     * Get current max. number active subscription info(s) been setup within device
+     *
+     * @return max. number of active subscription info(s)
+     */
+    public int getActiveSubscriptionInfoCountMax() {
+        return mSubsciptionsMonitor.getActiveSubscriptionInfoCountMax();
     }
 
     /**
@@ -183,6 +192,9 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
      * @param listener listener to active subscriptions change
      */
     public void addActiveSubscriptionsListener(OnActiveSubscriptionChangedListener listener) {
+        if (mActiveSubscriptionsListeners.contains(listener)) {
+            return;
+        }
         mActiveSubscriptionsListeners.add(listener);
     }
 
