@@ -125,7 +125,7 @@ public final class Utils {
     }
 
     public static String createRemoteName(Context context, BluetoothDevice device) {
-        String mRemoteName = device != null ? device.getAliasName() : null;
+        String mRemoteName = device != null ? device.getAlias() : null;
 
         if (mRemoteName == null) {
             mRemoteName = context.getString(R.string.unknown);

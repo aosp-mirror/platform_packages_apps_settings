@@ -85,7 +85,6 @@ public class BatteryHeaderPreferenceControllerTest {
     private BatteryMeterView mBatteryMeterView;
     private TextView mBatteryPercentText;
     private TextView mSummary;
-    private TextView mSummary2;
     private LayoutPreference mBatteryLayoutPref;
     private Intent mBatteryIntent;
     private LifecycleOwner mLifecycleOwner;
@@ -102,7 +101,6 @@ public class BatteryHeaderPreferenceControllerTest {
         mBatteryPercentText = new TextView(mContext);
         mSummary = new TextView(mContext);
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
-        mSummary2 = new TextView(mContext);
 
         mBatteryIntent = new Intent();
         mBatteryIntent.putExtra(BatteryManager.EXTRA_LEVEL, BATTERY_LEVEL);
@@ -126,7 +124,6 @@ public class BatteryHeaderPreferenceControllerTest {
         mController.mBatteryMeterView = mBatteryMeterView;
         mController.mBatteryPercentText = mBatteryPercentText;
         mController.mSummary1 = mSummary;
-        mController.mSummary2 = mSummary2;
     }
 
     @After
@@ -190,7 +187,6 @@ public class BatteryHeaderPreferenceControllerTest {
     @Test
     public void quickUpdateHeaderPreference_onlyUpdateBatteryLevelAndChargingState() {
         mSummary.setText(BATTERY_STATUS);
-        mSummary2.setText(BATTERY_STATUS);
 
         mController.quickUpdateHeaderPreference();
 
@@ -198,7 +194,6 @@ public class BatteryHeaderPreferenceControllerTest {
         assertThat(mBatteryMeterView.getCharging()).isTrue();
         assertThat(mBatteryPercentText.getText().toString()).isEqualTo("60 %");
         assertThat(mSummary.getText()).isEqualTo(BATTERY_STATUS);
-        assertThat(mSummary2.getText()).isEqualTo(BATTERY_STATUS);
     }
 
     @Test

@@ -22,11 +22,8 @@ import android.os.Looper;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.data.ApnSetting;
-import android.util.Log;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -41,14 +38,14 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager;
     private MobileDataContentObserver mMobileDataContentObserver;
-    private SwitchPreference mPreference;
+    private PreferenceScreen mScreen;
 
     public MmsMessagePreferenceController(Context context, String key) {
         super(context, key);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mMobileDataContentObserver = new MobileDataContentObserver(
                 new Handler(Looper.getMainLooper()));
-        mMobileDataContentObserver.setOnMobileDataChangedListener(()->updateState(mPreference));
+        mMobileDataContentObserver.setOnMobileDataChangedListener(()->refreshPreference());
     }
 
     @Override
@@ -79,15 +76,9 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
+        mScreen = screen;
     }
 
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        preference.setVisible(isAvailable());
-        ((SwitchPreference) preference).setChecked(isChecked());
-    }
 
     public void init(int subId) {
         mSubId = subId;
@@ -102,5 +93,11 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public boolean isChecked() {
         return mTelephonyManager.isDataEnabledForApn(ApnSetting.TYPE_MMS);
+    }
+
+    private void refreshPreference() {
+        if (mScreen != null) {
+            super.displayPreference(mScreen);
+        }
     }
 }

@@ -16,11 +16,6 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import static android.content.Context.CARRIER_CONFIG_SERVICE;
-import static android.content.Context.EUICC_SERVICE;
-import static android.content.Context.TELEPHONY_SERVICE;
-import static android.content.Context.TELEPHONY_SUBSCRIPTION_SERVICE;
-
 import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,7 +26,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.telephony.CarrierConfigManager;
-import android.telephony.CellBroadcastMessage;
+import android.telephony.SmsCbMessage;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -109,6 +104,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             };
 
     private SubscriptionInfo mSubscriptionInfo;
+    private int mSlotIndex;
 
     private final SimStatusDialogFragment mDialog;
     private final TelephonyManager mTelephonyManager;
@@ -129,9 +125,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 if (extras == null) {
                     return;
                 }
-                final CellBroadcastMessage cbMessage = (CellBroadcastMessage) extras.get("message");
-                if (cbMessage != null
-                        && mSubscriptionInfo.getSubscriptionId() == cbMessage.getSubId()) {
+                final SmsCbMessage cbMessage = (SmsCbMessage) extras.get("message");
+                if (cbMessage != null && mSlotIndex == cbMessage.getSlotIndex()) {
                     final String latestAreaInfo = cbMessage.getMessageBody();
                     mDialog.setText(OPERATOR_INFO_VALUE_ID, latestAreaInfo);
                 }
@@ -145,7 +140,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             int slotId) {
         mDialog = dialog;
         mContext = dialog.getContext();
+        mSlotIndex = slotId;
         mSubscriptionInfo = getPhoneSubscriptionInfo(slotId);
+
         mTelephonyManager =  mContext.getSystemService(TelephonyManager.class);
         mCarrierConfigManager =  mContext.getSystemService(CarrierConfigManager.class);
         mEuiccManager =  mContext.getSystemService(EuiccManager.class);
