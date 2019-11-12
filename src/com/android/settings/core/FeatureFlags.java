@@ -26,4 +26,5 @@ public class FeatureFlags {
     public static final String WIFI_DETAILS_DATAUSAGE_HEADER =
             "settings_wifi_details_datausage_header";
     public static final String PERSONAL_WORK_PROFILE = "settings_work_profile";
+    public static final String CONTROLLER_ENHANCEMENT = "settings_controller_loading_enhancement";
 }
