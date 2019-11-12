@@ -97,7 +97,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
                 app == null ? null : ApplicationsState.getInstance(app), host);
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     RecentNotifyingAppsPreferenceController(Context context, NotificationBackend backend,
             IUsageStatsManager usageStatsManager, UserManager userManager,
             ApplicationsState appState, Fragment host) {
@@ -118,7 +118,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mApplicationsState != null;
     }
 
     @Override
@@ -307,9 +307,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             if (appEntry == null) {
                 continue;
             }
-            if (!shouldIncludePkgInRecents(app.getPackage(), app.getUserId())) {
-                continue;
-            }
             displayableApps.add(app);
             count++;
             if (count >= SHOW_RECENT_APP_COUNT) {
@@ -317,25 +314,5 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             }
         }
         return displayableApps;
-    }
-
-
-    /**
-     * Whether or not the app should be included in recent list.
-     */
-    private boolean shouldIncludePkgInRecents(String pkgName, int userId) {
-        final Intent launchIntent = new Intent().addCategory(Intent.CATEGORY_LAUNCHER)
-                .setPackage(pkgName);
-
-        if (mPm.resolveActivity(launchIntent, 0) == null) {
-            // Not visible on launcher -> likely not a user visible app, skip if non-instant.
-            final ApplicationsState.AppEntry appEntry =
-                    mApplicationsState.getEntry(pkgName, userId);
-            if (appEntry == null || appEntry.info == null || !AppUtils.isInstant(appEntry.info)) {
-                Log.d(TAG, "Not a user visible or instant app, skipping " + pkgName);
-                return false;
-            }
-        }
-        return true;
     }
 }

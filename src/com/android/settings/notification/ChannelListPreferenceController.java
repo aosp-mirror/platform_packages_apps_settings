@@ -156,7 +156,8 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             NotificationChannelGroup group) {
         RestrictedSwitchPreference preference =
                 new RestrictedSwitchPreference(mContext);
-        preference.setTitle(R.string.notification_switch_label);
+        preference.setTitle(mContext.getString(
+                R.string.notification_switch_label, group.getName()));
         preference.setEnabled(mAdmin == null
                 && isChannelGroupBlockable(group));
         preference.setChecked(!group.isBlocked());

@@ -26,27 +26,39 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.datausage.CellDataPreference.DataStateListener;
+import com.android.settings.network.MobileDataEnabledListener;
 
-public class BillingCyclePreference extends Preference implements TemplatePreference {
+/**
+ * Preference which displays billing cycle of subscription
+ */
+public class BillingCyclePreference extends Preference
+        implements TemplatePreference, MobileDataEnabledListener.Client {
 
     private NetworkTemplate mTemplate;
     private NetworkServices mServices;
     private int mSubId;
+    private MobileDataEnabledListener mListener;
 
+    /**
+     * Preference constructor
+     *
+     * @param context Context of preference
+     * @param arrts The attributes of the XML tag that is inflating the preference
+     */
     public BillingCyclePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mListener = new MobileDataEnabledListener(context, this);
     }
 
     @Override
     public void onAttached() {
         super.onAttached();
-        mListener.setListener(true, mSubId, getContext());
+        mListener.start(mSubId);
     }
 
     @Override
     public void onDetached() {
-        mListener.setListener(false, mSubId, getContext());
+        mListener.stop();
         super.onDetached();
     }
 
@@ -73,7 +85,7 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
 
     @Override
     public Intent getIntent() {
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
         return new SubSettingLauncher(getContext())
                 .setDestination(BillingCycleSettings.class.getName())
@@ -83,10 +95,10 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
                 .toIntent();
     }
 
-    private final DataStateListener mListener = new DataStateListener() {
-        @Override
-        public void onChange(boolean selfChange) {
-            updateEnabled();
-        }
-    };
+    /**
+     * Implementation of MobileDataEnabledListener.Client
+     */
+    public void onMobileDataEnabledChange() {
+        updateEnabled();
+    }
 }

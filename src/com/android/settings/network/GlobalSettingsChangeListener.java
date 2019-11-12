@@ -33,7 +33,8 @@ import androidx.lifecycle.OnLifecycleEvent;
 /**
  * A listener for Settings.Global configuration change, with support of Lifecycle
  */
-abstract class GlobalSettingsChangeListener extends ContentObserver implements LifecycleObserver {
+public abstract class GlobalSettingsChangeListener extends ContentObserver
+        implements LifecycleObserver, AutoCloseable {
 
     /**
      * Constructor
@@ -41,7 +42,7 @@ abstract class GlobalSettingsChangeListener extends ContentObserver implements L
      * @param context of this listener
      * @param field field of Global Settings
      */
-    GlobalSettingsChangeListener(Context context, String field) {
+    public GlobalSettingsChangeListener(Context context, String field) {
         super(new Handler());
         mContext = context;
         mField = field;
@@ -92,6 +93,13 @@ abstract class GlobalSettingsChangeListener extends ContentObserver implements L
 
     @OnLifecycleEvent(ON_DESTROY)
     void onDestroy() {
+        close();
+    }
+
+    /**
+     * Implementation of AutoCloseable
+     */
+    public void close() {
         monitorUri(false);
         notifyChangeBasedOn(null);
     }

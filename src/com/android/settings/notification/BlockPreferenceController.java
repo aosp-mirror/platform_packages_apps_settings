@@ -62,8 +62,8 @@ public class BlockPreferenceController extends NotificationPreferenceController
         pref.setSelectable(false);
         SwitchBar bar = pref.findViewById(R.id.switch_bar);
         if (bar != null) {
-            bar.setSwitchBarText(R.string.notification_switch_label,
-                    R.string.notification_switch_label);
+            String switchBarText = getSwitchBarText();
+            bar.setSwitchBarText(switchBarText, switchBarText);
             bar.show();
             try {
                 bar.addOnSwitchChangeListener(this);
@@ -124,5 +124,19 @@ public class BlockPreferenceController extends NotificationPreferenceController
             mBackend.setNotificationsEnabledForPackage(mAppRow.pkg, mAppRow.uid, !blocked);
         }
         mImportanceListener.onImportanceChanged();
+    }
+
+    String getSwitchBarText() {
+        if (mChannel != null) {
+            return mContext.getString(R.string.notification_content_block_title);
+        } else  {
+            CharSequence fieldContextName;
+            if (mChannelGroup != null) {
+                fieldContextName = mChannelGroup.getName();
+            } else {
+                fieldContextName = mAppRow.label;
+            }
+            return mContext.getString(R.string.notification_switch_label, fieldContextName);
+        }
     }
 }

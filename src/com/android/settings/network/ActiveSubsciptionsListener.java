@@ -85,6 +85,7 @@ public abstract class ActiveSubsciptionsListener
     @VisibleForTesting
     BroadcastReceiver mSubscriptionChangeReceiver;
 
+    private Integer mMaxActiveSubscriptionInfos;
     private List<SubscriptionInfo> mCachedActiveSubscriptionInfo;
 
     /**
@@ -126,6 +127,24 @@ public abstract class ActiveSubsciptionsListener
     }
 
     /**
+     * Get current max. number active subscription info(s) been setup within device
+     *
+     * @return max. number of active subscription info(s)
+     */
+    public int getActiveSubscriptionInfoCountMax() {
+        int count = 0;
+        if (mMaxActiveSubscriptionInfos == null) {
+            count = getSubscriptionManager().getActiveSubscriptionInfoCountMax();
+            if (mIsMonitoringDataChange) {
+                mMaxActiveSubscriptionInfos = count;
+            }
+        } else {
+            count = mMaxActiveSubscriptionInfos.intValue();
+        }
+        return count;
+    }
+
+    /**
      * Get a list of active subscription info
      *
      * @return A list of active subscription info
@@ -134,7 +153,7 @@ public abstract class ActiveSubsciptionsListener
         if (mIsCachedDataAvailable) {
             return mCachedActiveSubscriptionInfo;
         }
-        mIsCachedDataAvailable = true;
+        mIsCachedDataAvailable = mIsMonitoringDataChange;
         mCachedActiveSubscriptionInfo = getSubscriptionManager().getActiveSubscriptionInfoList();
         return mCachedActiveSubscriptionInfo;
     }
@@ -163,6 +182,7 @@ public abstract class ActiveSubsciptionsListener
      */
     public void clearCache() {
         mIsCachedDataAvailable = false;
+        mMaxActiveSubscriptionInfos = null;
         mCachedActiveSubscriptionInfo = null;
     }
 
