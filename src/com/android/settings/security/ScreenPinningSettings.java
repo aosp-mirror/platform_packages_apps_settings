@@ -23,9 +23,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Switch;
 
 import androidx.preference.Preference;
@@ -41,6 +38,7 @@ import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,11 +50,13 @@ import java.util.List;
 public class ScreenPinningSettings extends SettingsPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener {
 
-    private static final CharSequence KEY_USE_SCREEN_LOCK = "use_screen_lock";
+    private static final String KEY_USE_SCREEN_LOCK = "use_screen_lock";
+    private static final String KEY_FOOTER = "screen_pinning_settings_screen_footer";
     private static final int CHANGE_LOCK_METHOD_REQUEST = 43;
 
     private SwitchBar mSwitchBar;
     private SwitchPreference mUseScreenLock;
+    private FooterPreference mFooterPreference;
     private LockPatternUtils mLockPatternUtils;
 
     @Override
@@ -77,21 +77,18 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
         mSwitchBar.setChecked(isLockToAppEnabled(getActivity()));
+
+        addPreferencesFromResource(R.xml.screen_pinning_settings);
+
+        final PreferenceScreen root = getPreferenceScreen();
+        mUseScreenLock = root.findPreference(KEY_USE_SCREEN_LOCK);
+        mFooterPreference = root.findPreference(KEY_FOOTER);
+        updateDisplay();
     }
 
     @Override
     public int getHelpResource() {
         return R.string.help_url_screen_pinning;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ViewGroup parent = (ViewGroup) view.findViewById(android.R.id.list_container);
-        View emptyView = LayoutInflater.from(getContext())
-                .inflate(R.layout.screen_pinning_instructions, parent, false);
-        parent.addView(emptyView);
-        setEmptyView(emptyView);
     }
 
     @Override
@@ -192,16 +189,10 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         updateDisplay();
     }
 
-    public void updateDisplay() {
-        PreferenceScreen root = getPreferenceScreen();
-        if (root != null) {
-            root.removeAll();
-        }
+    private void updateDisplay() {
         if (isLockToAppEnabled(getActivity())) {
-            addPreferencesFromResource(R.xml.screen_pinning_settings);
-            root = getPreferenceScreen();
-
-            mUseScreenLock = (SwitchPreference) root.findPreference(KEY_USE_SCREEN_LOCK);
+            mFooterPreference.setVisible(false);
+            mUseScreenLock.setVisible(true);
             mUseScreenLock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -210,6 +201,9 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
             });
             mUseScreenLock.setChecked(isScreenLockUsed());
             mUseScreenLock.setTitle(getCurrentSecurityTitle());
+        } else {
+            mFooterPreference.setVisible(true);
+            mUseScreenLock.setVisible(false);
         }
     }
 
