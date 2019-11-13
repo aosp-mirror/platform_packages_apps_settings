@@ -110,7 +110,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     @VisibleForTesting
     ViewGroup mPinnedHeaderFrameLayout;
-    private ViewGroup mButtonBar;
 
     private LayoutPreference mHeader;
 
@@ -141,7 +140,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             Bundle savedInstanceState) {
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         mPinnedHeaderFrameLayout = root.findViewById(R.id.pinned_header);
-        mButtonBar = root.findViewById(R.id.button_bar);
         return root;
     }
 
@@ -163,10 +161,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                 checkAvailablePrefs((PreferenceGroup) pref);
             }
         }
-    }
-
-    public ViewGroup getButtonBar() {
-        return mButtonBar;
     }
 
     public View setPinnedHeaderView(int layoutResId) {
