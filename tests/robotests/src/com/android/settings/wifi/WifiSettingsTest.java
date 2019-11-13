@@ -57,6 +57,7 @@ import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -295,6 +296,7 @@ public class WifiSettingsTest {
     }
 
     @Test
+    @Ignore
     public void onCreateAdapter_hasStableIdsTrue() {
         final PreferenceScreen preferenceScreen = mock(PreferenceScreen.class);
 
