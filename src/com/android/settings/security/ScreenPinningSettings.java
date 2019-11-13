@@ -72,17 +72,16 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         activity.setTitle(R.string.screen_pinning_title);
         mLockPatternUtils = new LockPatternUtils(activity);
 
+        addPreferencesFromResource(R.xml.screen_pinning_settings);
+        final PreferenceScreen root = getPreferenceScreen();
+        mUseScreenLock = root.findPreference(KEY_USE_SCREEN_LOCK);
+        mFooterPreference = root.findPreference(KEY_FOOTER);
 
         mSwitchBar = activity.getSwitchBar();
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
         mSwitchBar.setChecked(isLockToAppEnabled(getActivity()));
 
-        addPreferencesFromResource(R.xml.screen_pinning_settings);
-
-        final PreferenceScreen root = getPreferenceScreen();
-        mUseScreenLock = root.findPreference(KEY_USE_SCREEN_LOCK);
-        mFooterPreference = root.findPreference(KEY_FOOTER);
         updateDisplay();
     }
 
