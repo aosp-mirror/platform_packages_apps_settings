@@ -2701,20 +2701,13 @@
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-        </activity>
-
-        <activity
-            android:name="Settings$AppDrawOverlaySettingsActivity"
-            android:label="@string/draw_overlay">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.appinfo.DrawOverlayDetails" />
+                android:value="com.android.settings.applications.manageapplications.ManageApplications" />
         </activity>
 
         <activity

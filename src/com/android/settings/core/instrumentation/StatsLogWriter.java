@@ -26,13 +26,13 @@ import com.android.settingslib.core.instrumentation.LogWriter;
 public class StatsLogWriter implements LogWriter {
 
     @Override
-    public void visible(Context context, int attribution, int pageId) {
+    public void visible(Context context, int attribution, int pageId, int latency) {
         StatsLog.write(StatsLog.SETTINGS_UI_CHANGED /* Atom name */,
-                attribution,
+                attribution, /* from pageId */
                 SettingsEnums.PAGE_VISIBLE /* action */,
-                pageId,
+                pageId, /* target pageId */
                 null /* changedPreferenceKey */,
-                0 /* changedPreferenceIntValue */);
+                latency /* changedPreferenceIntValue */);
     }
 
     @Override
