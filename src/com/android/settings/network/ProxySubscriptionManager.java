@@ -46,6 +46,14 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
          * When active subscriptions list get changed
          */
         void onChanged();
+        /**
+         * get Lifecycle of listener
+         *
+         * @return Returns Lifecycle.
+         */
+        default Lifecycle getLifecycle() {
+            return null;
+        }
     }
 
     /**
@@ -94,7 +102,11 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
 
     private void notifyAllListeners() {
         for (OnActiveSubscriptionChangedListener listener : mActiveSubscriptionsListeners) {
-            listener.onChanged();
+            final Lifecycle lifecycle = listener.getLifecycle();
+            if ((lifecycle == null)
+                    || (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.STARTED))) {
+                listener.onChanged();
+            }
         }
     }
 
@@ -110,6 +122,9 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
      * @param lifecycle life cycle to reference
      */
     public void setLifecycle(Lifecycle lifecycle) {
+        if (mLifecycle == lifecycle) {
+            return;
+        }
         if (mLifecycle != null) {
             mLifecycle.removeObserver(this);
         }
@@ -177,6 +192,25 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
      */
     public SubscriptionInfo getActiveSubscriptionInfo(int subId) {
         return mSubsciptionsMonitor.getActiveSubscriptionInfo(subId);
+    }
+
+    /**
+     * Get a list of accessible subscription info
+     *
+     * @return A list of accessible subscription info
+     */
+    public List<SubscriptionInfo> getAccessibleSubscriptionsInfo() {
+        return mSubsciptionsMonitor.getAccessibleSubscriptionsInfo();
+    }
+
+    /**
+     * Get an accessible subscription info with given subscription ID
+     *
+     * @param subId target subscription ID
+     * @return A subscription info which is accessible list
+     */
+    public SubscriptionInfo getAccessibleSubscriptionInfo(int subId) {
+        return mSubsciptionsMonitor.getAccessibleSubscriptionInfo(subId);
     }
 
     /**

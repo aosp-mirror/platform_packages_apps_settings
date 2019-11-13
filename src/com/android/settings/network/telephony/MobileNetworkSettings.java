@@ -112,6 +112,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                 MobileNetworkUtils.getSearchableSubscriptionId(context));
+        Log.i(LOG_TAG, "display subId: " + mSubId);
 
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return Arrays.asList(
