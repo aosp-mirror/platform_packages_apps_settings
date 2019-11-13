@@ -2354,6 +2354,17 @@
         </activity>
 
         <activity
+            android:name="Settings$NotificationAccessDetailsActivity"
+            android:label="@string/manage_notification_access_title" >
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NOTIFICATION_LISTENER_DETAIL_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessDetails" />
+        </activity>
+
+        <activity
             android:name="Settings$NotificationAssistantSettingsActivity"
             android:label="@string/notification_assistant_title">
             <intent-filter android:priority="1">
