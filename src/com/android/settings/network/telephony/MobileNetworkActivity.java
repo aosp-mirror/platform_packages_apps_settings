@@ -106,6 +106,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
     @Override
     protected void onStart() {
+        mProxySubscriptionMgr.setLifecycle(getLifecycle());
         super.onStart();
         updateSubscriptions(getSubscription());
     }
