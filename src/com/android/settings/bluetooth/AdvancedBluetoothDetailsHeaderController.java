@@ -112,7 +112,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         if (!isAvailable()) {
             return;
         }
-        mCachedDevice.registerCallback(this::onDeviceAttributesChanged);
+        mCachedDevice.registerCallback(this);
         mBluetoothAdapter.addOnMetadataChangedListener(mCachedDevice.getDevice(),
                 mContext.getMainExecutor(), mMetadataListener);
     }
@@ -122,7 +122,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         if (!isAvailable()) {
             return;
         }
-        mCachedDevice.unregisterCallback(this::onDeviceAttributesChanged);
+        mCachedDevice.unregisterCallback(this);
         mBluetoothAdapter.removeOnMetadataChangedListener(mCachedDevice.getDevice(),
                 mMetadataListener);
     }
@@ -153,7 +153,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             final TextView summary = mLayoutPreference.findViewById(R.id.entity_header_summary);
             summary.setText(mCachedDevice.getConnectionSummary(true /* shortSummary */));
 
-            if (!mCachedDevice.isConnected()) {
+            if (!mCachedDevice.isConnected() || mCachedDevice.isBusy()) {
                 updateDisconnectLayout();
                 return;
             }
