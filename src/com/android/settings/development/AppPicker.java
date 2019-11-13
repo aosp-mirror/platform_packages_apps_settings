@@ -68,16 +68,6 @@ public class AppPicker extends ListActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         MyApplicationInfo app = mAdapter.getItem(position);
         Intent intent = new Intent();
