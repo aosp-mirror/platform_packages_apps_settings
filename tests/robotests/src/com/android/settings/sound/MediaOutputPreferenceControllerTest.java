@@ -19,7 +19,6 @@ package com.android.settings.sound;
 import static android.media.AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP;
 import static android.media.AudioSystem.DEVICE_OUT_EARPIECE;
 import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
-import static android.media.AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -53,6 +52,7 @@ import com.android.settingslib.media.MediaOutputSliceConstants;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -232,6 +232,7 @@ public class MediaOutputPreferenceControllerTest {
      * Preference summary should be device's name
      */
     @Test
+    @Ignore
     public void updateState_withActiveBtDevice_setActivatedDeviceName() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
@@ -275,6 +276,7 @@ public class MediaOutputPreferenceControllerTest {
      * Preference summary should be device's name
      */
     @Test
+    @Ignore
     public void updateState_withActiveHADevice_setActivatedDeviceName() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
