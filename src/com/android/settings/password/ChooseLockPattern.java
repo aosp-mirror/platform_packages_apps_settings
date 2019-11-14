@@ -30,7 +30,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -57,8 +56,6 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -608,8 +605,10 @@ public class ChooseLockPattern extends SettingsActivity {
 
         public void handleLeftButton() {
             if (mUiStage.leftMode == LeftButtonMode.Retry) {
-                mChosenPattern.zeroize();
-                mChosenPattern = null;
+                if (mChosenPattern != null) {
+                    mChosenPattern.zeroize();
+                    mChosenPattern = null;
+                }
                 mLockPatternView.clearPattern();
                 updateStage(Stage.Introduction);
             } else {
