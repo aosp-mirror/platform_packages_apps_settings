@@ -34,7 +34,6 @@ import android.telephony.SubscriptionManager;
 import com.android.internal.telephony.TelephonyIntents;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -115,13 +114,14 @@ public class ActiveSubsciptionsListenerTest {
     }
 
     @Test
-    @Ignore
-    public void constructor_alwaysFetchAndCacheResult() {
+    public void start_alwaysFetchAndCacheResult() {
         mListener = spy(new ActiveSubsciptionsListener(mContext) {
             public void onChanged() {}
         });
         mActiveSubscriptions.add(mSubscriptionInfo1);
         mActiveSubscriptions.add(mSubscriptionInfo2);
+
+        mListener.start();
 
         List<SubscriptionInfo> subInfoList = null;
         int numberOfAccess = 0;
