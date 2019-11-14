@@ -35,8 +35,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
-import android.text.BidiFormatter;
-import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -224,8 +222,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
     private void updatePhoneNumber() {
         // If formattedNumber is null or empty, it'll display as "Unknown".
-        mDialog.setText(PHONE_NUMBER_VALUE_ID, BidiFormatter.getInstance().unicodeWrap(
-                getPhoneNumber(), TextDirectionHeuristics.LTR));
+        mDialog.setText(PHONE_NUMBER_VALUE_ID,
+                DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext, mSubscriptionInfo));
     }
 
     private void updateDataState(int state) {
@@ -459,11 +457,6 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 updateRoamingStatus(serviceState);
             }
         };
-    }
-
-    @VisibleForTesting
-    String getPhoneNumber() {
-        return DeviceInfoUtils.getFormattedPhoneNumber(mContext, mSubscriptionInfo);
     }
 
     @VisibleForTesting
