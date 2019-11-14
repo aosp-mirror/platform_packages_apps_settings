@@ -737,7 +737,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
                     .setMessage(getContext().getString(R.string.storage_detail_dialog_system,
-                            Build.VERSION.RELEASE_OR_CODENAME))
+                            Build.VERSION.RELEASE))
                     .setPositiveButton(android.R.string.ok, null)
                     .create();
         }
