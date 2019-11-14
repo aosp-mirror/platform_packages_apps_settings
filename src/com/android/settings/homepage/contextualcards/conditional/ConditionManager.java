@@ -23,13 +23,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.homepage.contextualcards.ContextualCard;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -42,7 +41,6 @@ public class ConditionManager {
 
     private static final long DISPLAYABLE_CHECKER_TIMEOUT_MS = 20;
 
-    private final ExecutorService mExecutorService;
     private final Context mAppContext;
     private final ConditionListener mListener;
 
@@ -50,7 +48,6 @@ public class ConditionManager {
 
     public ConditionManager(Context context, ConditionListener listener) {
         mAppContext = context.getApplicationContext();
-        mExecutorService = Executors.newCachedThreadPool();
         mCardControllers = new ArrayList<>();
         mListener = listener;
         initCandidates();
@@ -64,8 +61,8 @@ public class ConditionManager {
         final List<Future<ContextualCard>> displayableCards = new ArrayList<>();
         // Check displayable future
         for (ConditionalCardController card : mCardControllers) {
-            final DisplayableChecker future = new DisplayableChecker(getController(card.getId()));
-            displayableCards.add(mExecutorService.submit(future));
+            final DisplayableChecker checker = new DisplayableChecker(getController(card.getId()));
+            displayableCards.add(ThreadUtils.postOnBackgroundThread(checker));
         }
         // Collect future and add displayable cards
         for (Future<ContextualCard> cardFuture : displayableCards) {
