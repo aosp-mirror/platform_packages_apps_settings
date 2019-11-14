@@ -65,6 +65,6 @@ public class FirmwareVersionPreferenceControllerTest {
     public void updatePreference_shouldSetSummaryToBuildNumber() {
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo(Build.VERSION.RELEASE_OR_CODENAME);
+        assertThat(mPreference.getSummary()).isEqualTo(Build.VERSION.RELEASE);
     }
 }
