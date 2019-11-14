@@ -89,7 +89,7 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
     @Override
     public CharSequence getSummary() {
         CharSequence summary = mContext.getString(R.string.android_version_summary,
-                Build.VERSION.RELEASE_OR_CODENAME);
+                Build.VERSION.RELEASE);
         final FutureTask<Bundle> bundleFutureTask = new FutureTask<>(
                 // Put the API call in a future to avoid StrictMode violation.
                 () -> mUpdateManager.retrieveSystemUpdateInfo());

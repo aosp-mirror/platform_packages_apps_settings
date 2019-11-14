@@ -139,7 +139,7 @@ public class SystemUpdatePreferenceControllerTest {
 
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.android_version_summary,
-                        Build.VERSION.RELEASE_OR_CODENAME));
+                        Build.VERSION.RELEASE));
     }
 
     @Test
