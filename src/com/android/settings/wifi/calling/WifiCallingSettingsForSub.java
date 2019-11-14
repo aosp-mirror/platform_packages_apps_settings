@@ -55,6 +55,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.widget.SwitchBar;
 
 /**
@@ -307,8 +308,13 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         return view;
     }
 
+    @VisibleForTesting
+    boolean isWfcProvisionedOnDevice() {
+        return MobileNetworkUtils.isWfcProvisionedOnDevice(mSubId);
+    }
+
     private void updateBody() {
-        if (!mImsManager.isWfcProvisionedOnDevice()) {
+        if (!isWfcProvisionedOnDevice()) {
             // This screen is not allowed to be shown due to provisioning policy and should
             // therefore be closed.
             finish();

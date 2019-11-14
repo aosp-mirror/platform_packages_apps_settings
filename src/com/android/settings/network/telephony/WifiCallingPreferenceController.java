@@ -179,7 +179,7 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
         }
 
         public void register(int subId) {
-            mSubId = subId;
+            WifiCallingPreferenceController.this.mSubId = subId;
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
         }
 

@@ -38,7 +38,10 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
+import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.feature.ImsFeature;
+import android.telephony.ims.feature.MmTelFeature;
+import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -96,7 +99,7 @@ public class MobileNetworkUtils {
      * Returns true if Wifi calling is enabled for at least one subscription.
      */
     public static boolean isWifiCallingEnabled(Context context) {
-        SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
+        final SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
         if (subManager == null) {
             Log.e(TAG, "isWifiCallingEnabled: couldn't get system service.");
             return false;
@@ -110,6 +113,22 @@ public class MobileNetworkUtils {
     }
 
     /**
+     * Returns true if Wifi calling is provisioned for the specific subscription with id
+     * {@code subId}.
+     */
+    @VisibleForTesting
+    public static boolean isWfcProvisionedOnDevice(int subId) {
+        final ProvisioningManager provisioningMgr =
+                ProvisioningManager.createForSubscriptionId(subId);
+        if (provisioningMgr == null) {
+            return true;
+        }
+        return provisioningMgr.getProvisioningStatusForCapability(
+                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                ImsRegistrationImplBase.REGISTRATION_TECH_IWLAN);
+    }
+
+    /**
      * Returns true if Wifi calling is enabled for the specific subscription with id {@code subId}.
      */
     public static boolean isWifiCallingEnabled(Context context, int subId) {
@@ -119,15 +138,15 @@ public class MobileNetworkUtils {
 
         boolean isWifiCallingEnabled;
         if (simCallManager != null) {
-            Intent intent = buildPhoneAccountConfigureIntent(
+            final Intent intent = buildPhoneAccountConfigureIntent(
                     context, simCallManager);
 
             isWifiCallingEnabled = intent != null;
         } else {
-            ImsManager imsMgr = ImsManager.getInstance(context, phoneId);
+            final ImsManager imsMgr = ImsManager.getInstance(context, phoneId);
             isWifiCallingEnabled = imsMgr != null
                     && imsMgr.isWfcEnabledByPlatform()
-                    && imsMgr.isWfcProvisionedOnDevice()
+                    && isWfcProvisionedOnDevice(subId)
                     && isImsServiceStateReady(imsMgr);
         }
 
@@ -162,8 +181,8 @@ public class MobileNetworkUtils {
         intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, accountHandle);
 
         // Check to see that the phone account package can handle the setting intent.
-        PackageManager pm = context.getPackageManager();
-        List<ResolveInfo> resolutions = pm.queryIntentActivities(intent, 0);
+        final PackageManager pm = context.getPackageManager();
+        final List<ResolveInfo> resolutions = pm.queryIntentActivities(intent, 0);
         if (resolutions.size() == 0) {
             intent = null;  // set no intent if the package cannot handle it.
         }
@@ -194,7 +213,7 @@ public class MobileNetworkUtils {
      * the user has enabled development mode.
      */
     public static boolean showEuiccSettings(Context context) {
-        EuiccManager euiccManager =
+        final EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(EuiccManager.class);
         if (!euiccManager.isEnabled()) {
             return false;
@@ -202,16 +221,16 @@ public class MobileNetworkUtils {
 
         final ContentResolver cr = context.getContentResolver();
 
-        TelephonyManager tm =
+        final TelephonyManager tm =
                 (TelephonyManager) context.getSystemService(TelephonyManager.class);
-        String currentCountry = tm.getNetworkCountryIso().toLowerCase();
-        String supportedCountries =
+        final String currentCountry = tm.getNetworkCountryIso().toLowerCase();
+        final String supportedCountries =
                 Settings.Global.getString(cr, Settings.Global.EUICC_SUPPORTED_COUNTRIES);
         boolean inEsimSupportedCountries = false;
         if (TextUtils.isEmpty(currentCountry)) {
             inEsimSupportedCountries = true;
         } else if (!TextUtils.isEmpty(supportedCountries)) {
-            List<String> supportedCountryList =
+            final List<String> supportedCountryList =
                     Arrays.asList(TextUtils.split(supportedCountries.toLowerCase(), ","));
             if (supportedCountryList.contains(currentCountry)) {
                 inEsimSupportedCountries = true;
@@ -244,7 +263,7 @@ public class MobileNetworkUtils {
         telephonyManager.setDataEnabled(enabled);
 
         if (disableOtherSubscriptions) {
-            List<SubscriptionInfo> subInfoList =
+            final List<SubscriptionInfo> subInfoList =
                     subscriptionManager.getActiveSubscriptionInfoList(true);
             if (subInfoList != null) {
                 for (SubscriptionInfo subInfo : subInfoList) {
@@ -358,7 +377,7 @@ public class MobileNetworkUtils {
      * Return {@code true} if we need show settings for network selection(i.e. Verizon)
      */
     public static boolean shouldDisplayNetworkSelectOptions(Context context, int subId) {
-        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         final PersistableBundle carrierConfig = context.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(subId);
@@ -419,8 +438,8 @@ public class MobileNetworkUtils {
             return true;
         }
 
-        String operatorNumeric = telephonyManager.getServiceState().getOperatorNumeric();
-        String[] numericArray = carrierConfig.getStringArray(
+        final String operatorNumeric = telephonyManager.getServiceState().getOperatorNumeric();
+        final String[] numericArray = carrierConfig.getStringArray(
                 CarrierConfigManager.KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY);
         if (numericArray == null || operatorNumeric == null) {
             return false;
@@ -511,12 +530,12 @@ public class MobileNetworkUtils {
 
     public static Drawable getSignalStrengthIcon(Context context, int level, int numLevels,
             int iconType, boolean cutOut) {
-        SignalDrawable signalDrawable = new SignalDrawable(context);
+        final SignalDrawable signalDrawable = new SignalDrawable(context);
         signalDrawable.setLevel(
                 SignalDrawable.getState(level, numLevels, cutOut));
 
         // Make the network type drawable
-        Drawable networkDrawable =
+        final Drawable networkDrawable =
                 iconType == NO_CELL_DATA_TYPE_ICON
                         ? EMPTY_DRAWABLE
                         : context
@@ -527,7 +546,7 @@ public class MobileNetworkUtils {
         final int iconSize =
                 context.getResources().getDimensionPixelSize(R.dimen.signal_strength_icon_size);
 
-        LayerDrawable icons = new LayerDrawable(layers);
+        final LayerDrawable icons = new LayerDrawable(layers);
         // Set the network type icon at the top left
         icons.setLayerGravity(0 /* index of networkDrawable */, Gravity.TOP | Gravity.LEFT);
         // Set the signal strength icon at the bottom right
@@ -545,9 +564,9 @@ public class MobileNetworkUtils {
      * 2. Similar design which aligned with operator name displayed in status bar
      */
     public static CharSequence getCurrentCarrierNameForDisplay(Context context, int subId) {
-        SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
+        final SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
         if (sm != null) {
-            SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
+            final SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
             if (subInfo != null) {
                 return subInfo.getCarrierName();
             }
@@ -556,10 +575,10 @@ public class MobileNetworkUtils {
     }
 
     public static CharSequence getCurrentCarrierNameForDisplay(Context context) {
-        SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
+        final SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
         if (sm != null) {
-            int subId = sm.getDefaultSubscriptionId();
-            SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
+            final int subId = sm.getDefaultSubscriptionId();
+            final SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
             if (subInfo != null) {
                 return subInfo.getCarrierName();
             }
@@ -585,7 +604,7 @@ public class MobileNetworkUtils {
     }
 
     private static String getOperatorNameFromTelephonyManager(Context context) {
-        TelephonyManager tm =
+        final TelephonyManager tm =
                 (TelephonyManager) context.getSystemService(TelephonyManager.class);
         if (tm == null) {
             return null;
