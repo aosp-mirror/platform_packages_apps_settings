@@ -50,6 +50,7 @@ import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -240,6 +241,7 @@ public class WifiSettings2Test {
     }
 
     @Test
+    @Ignore
     public void onCreateAdapter_hasStableIdsTrue() {
         final PreferenceScreen preferenceScreen = mock(PreferenceScreen.class);
 

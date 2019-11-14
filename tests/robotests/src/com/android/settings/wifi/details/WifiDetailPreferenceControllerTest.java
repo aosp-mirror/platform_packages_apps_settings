@@ -81,6 +81,7 @@ import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -1858,6 +1859,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void entityHeader_expiredPasspointR1_shouldHandleExpiration() {
         setUpForDisconnectedNetwork();
         when(mockAccessPoint.isPasspoint()).thenReturn(true);

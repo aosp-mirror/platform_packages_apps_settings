@@ -45,6 +45,7 @@ import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.managedomainurls.ManageDomainUrls;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings;
+import com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
 import com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings;
@@ -217,6 +218,7 @@ public class SettingsGateway {
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
+            NotificationAccessDetails.class.getName(),
             AppBubbleNotificationSettings.class.getName(),
             ZenAccessSettings.class.getName(),
             ZenAccessDetails.class.getName(),

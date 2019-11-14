@@ -178,6 +178,41 @@ public abstract class ActiveSubsciptionsListener
     }
 
     /**
+     * Get a list of accessible subscription info
+     *
+     * @return A list of accessible subscription info
+     */
+    public List<SubscriptionInfo> getAccessibleSubscriptionsInfo() {
+        return getSubscriptionManager().getAccessibleSubscriptionInfoList();
+    }
+
+    /**
+     * Get an accessible subscription info with given subscription ID
+     *
+     * @param subId target subscription ID
+     * @return A subscription info which is accessible list
+     */
+    public SubscriptionInfo getAccessibleSubscriptionInfo(int subId) {
+        if (mIsCachedDataAvailable) {
+            final SubscriptionInfo activeSubInfo = getActiveSubscriptionInfo(subId);
+            if (activeSubInfo != null) {
+                return activeSubInfo;
+            }
+        }
+
+        final List<SubscriptionInfo> subInfoList = getAccessibleSubscriptionsInfo();
+        if (subInfoList == null) {
+            return null;
+        }
+        for (SubscriptionInfo subInfo : subInfoList) {
+            if (subInfo.getSubscriptionId() == subId) {
+                return subInfo;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Clear data cached within listener
      */
     public void clearCache() {
