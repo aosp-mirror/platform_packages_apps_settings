@@ -45,6 +45,7 @@ import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.slices.SliceBroadcastReceiver;
 
 import java.util.concurrent.Callable;
@@ -139,7 +140,7 @@ public class WifiCallingSliceHelper {
         final ImsManager imsManager = getImsManager(subId);
 
         if (!imsManager.isWfcEnabledByPlatform()
-                || !imsManager.isWfcProvisionedOnDevice()) {
+                || !isWfcProvisionedOnDevice(subId)) {
             Log.d(TAG, "Wifi calling is either not provisioned or not enabled by Platform");
             return null;
         }
@@ -237,7 +238,7 @@ public class WifiCallingSliceHelper {
         final ImsMmTelManager imsMmTelManager = getImsMmTelManager(subId);
 
         if (!imsManager.isWfcEnabledByPlatform()
-                || !imsManager.isWfcProvisionedOnDevice()) {
+                || !isWfcProvisionedOnDevice(subId)) {
             Log.d(TAG, "Wifi calling is either not provisioned or not enabled by platform");
             return null;
         }
@@ -386,7 +387,7 @@ public class WifiCallingSliceHelper {
         if (subId > SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final ImsManager imsManager = getImsManager(subId);
             if (imsManager.isWfcEnabledByPlatform()
-                    && imsManager.isWfcProvisionedOnDevice()) {
+                    && isWfcProvisionedOnDevice(subId)) {
                 final boolean currentValue = imsManager.isWfcEnabledByUser()
                         && imsManager.isNonTtyOrTtyOnVolteEnabled();
                 final boolean newValue = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
@@ -429,7 +430,7 @@ public class WifiCallingSliceHelper {
             final ImsManager imsManager = getImsManager(subId);
             if (isWifiCallingPrefEditable
                     && imsManager.isWfcEnabledByPlatform()
-                    && imsManager.isWfcProvisionedOnDevice()
+                    && isWfcProvisionedOnDevice(subId)
                     && imsManager.isWfcEnabledByUser()
                     && imsManager.isNonTtyOrTtyOnVolteEnabled()) {
                 // Change the preference only when wifi calling is enabled
@@ -510,6 +511,11 @@ public class WifiCallingSliceHelper {
      */
     protected int getDefaultVoiceSubId() {
         return SubscriptionManager.getDefaultVoiceSubscriptionId();
+    }
+
+    @VisibleForTesting
+    boolean isWfcProvisionedOnDevice(int subId) {
+        return MobileNetworkUtils.isWfcProvisionedOnDevice(subId);
     }
 
     /**
