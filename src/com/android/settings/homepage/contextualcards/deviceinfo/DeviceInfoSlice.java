@@ -23,8 +23,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.text.BidiFormatter;
-import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -100,10 +98,10 @@ public class DeviceInfoSlice implements CustomSliceable {
         if (subscriptionInfo == null) {
             return mContext.getString(R.string.device_info_default);
         }
-        final String phoneNumber = DeviceInfoUtils.getFormattedPhoneNumber(mContext,
+        final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext,
                 subscriptionInfo);
         return TextUtils.isEmpty(phoneNumber) ? mContext.getString(R.string.device_info_default)
-                : BidiFormatter.getInstance().unicodeWrap(phoneNumber, TextDirectionHeuristics.LTR);
+                : phoneNumber;
     }
 
     private CharSequence getDeviceModel() {
