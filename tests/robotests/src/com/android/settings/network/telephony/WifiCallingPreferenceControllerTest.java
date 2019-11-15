@@ -72,21 +72,21 @@ public class WifiCallingPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
-        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
 
         mPreference = new Preference(mContext);
-        mController = new WifiCallingPreferenceController(mContext, "wifi_calling") {
+        mController = spy(new WifiCallingPreferenceController(mContext, "wifi_calling") {
             @Override
             protected ImsMmTelManager getImsMmTelManager(int subId) {
                 return mImsMmTelManager;
             }
-        };
+        });
         mController.mCarrierConfigManager = mCarrierConfigManager;
         mController.init(SUB_ID);
         mController.mImsManager = mImsManager;
+        mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
         mPreference.setKey(mController.getPreferenceKey());
+
+        when(mController.getTelephonyManager(mContext, SUB_ID)).thenReturn(mTelephonyManager);
 
         mCarrierConfig = new PersistableBundle();
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
@@ -112,8 +112,7 @@ public class WifiCallingPreferenceControllerTest {
 
     @Test
     public void updateState_notCallIdle_disable() {
-        when(mTelephonyManager.getCallState(SUB_ID)).thenReturn(
-                TelephonyManager.CALL_STATE_RINGING);
+        mController.mCallState = TelephonyManager.CALL_STATE_RINGING;
 
         mController.updateState(mPreference);
 

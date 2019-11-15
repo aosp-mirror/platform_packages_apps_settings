@@ -17,7 +17,6 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
@@ -47,7 +46,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         implements LifecycleObserver, OnStart, OnStop {
 
     private Preference mPreference;
-    private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
     private PersistableBundle mCarrierConfig;
     @VisibleForTesting
@@ -67,7 +65,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         m4gLteListeners = new ArrayList<>();
-        mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
+        mPhoneStateListener = new PhoneCallStateListener();
     }
 
     public Enhanced4gBasePreferenceController init(int subId) {
@@ -75,8 +73,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             return this;
         }
         mSubId = subId;
-        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
-                .createForSubscriptionId(mSubId);
         mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
@@ -123,7 +119,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public void onStart() {
-        mPhoneStateListener.register(mSubId);
+        mPhoneStateListener.register(mContext, mSubId);
     }
 
     @Override
@@ -192,9 +188,11 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     private class PhoneCallStateListener extends PhoneStateListener {
 
-        public PhoneCallStateListener(Looper looper) {
-            super(looper);
+        PhoneCallStateListener() {
+            super();
         }
+
+        private TelephonyManager mTelephonyManager;
 
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
@@ -202,8 +200,11 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             updateState(mPreference);
         }
 
-        public void register(int subId) {
-            Enhanced4gBasePreferenceController.this.mSubId = subId;
+        public void register(Context context, int subId) {
+            mTelephonyManager = context.getSystemService(TelephonyManager.class);
+            if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
+            }
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
         }
 
