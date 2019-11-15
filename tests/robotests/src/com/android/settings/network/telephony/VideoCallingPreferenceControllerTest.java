@@ -18,14 +18,18 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.feature.ImsFeature;
+import android.telephony.ims.feature.MmTelFeature;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -49,6 +53,8 @@ public class VideoCallingPreferenceControllerTest {
     @Mock
     private ImsManager mImsManager;
     @Mock
+    private ProvisioningManager mProvisioningManager;
+    @Mock
     private CarrierConfigManager mCarrierConfigManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -65,7 +71,8 @@ public class VideoCallingPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
         doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
-        doReturn(mCarrierConfigManager).when(mContext).getSystemService(CarrierConfigManager.class);
+        doReturn(mCarrierConfigManager).when(mContext)
+                .getSystemService(CarrierConfigManager.class);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
 
         mCarrierConfig = new PersistableBundle();
@@ -74,13 +81,20 @@ public class VideoCallingPreferenceControllerTest {
         doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         mPreference = new SwitchPreference(mContext);
-        mController = new VideoCallingPreferenceController(mContext, "wifi_calling");
+        mController = new VideoCallingPreferenceController(mContext, "wifi_calling") {
+            @Override
+            ProvisioningManager getProvisioningManager(int subId) {
+                return mProvisioningManager;
+            }
+        };
         mController.init(SUB_ID);
         mController.mImsManager = mImsManager;
         mPreference.setKey(mController.getPreferenceKey());
 
         doReturn(true).when(mImsManager).isVtEnabledByPlatform();
-        doReturn(true).when(mImsManager).isVtProvisionedOnDevice();
+        doReturn(true).when(mProvisioningManager)
+                .getProvisioningStatusForCapability(
+                eq(MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VIDEO), anyInt());
         doReturn(ImsFeature.STATE_READY).when(mImsManager).getImsServiceState();
         doReturn(true).when(mTelephonyManager).isDataEnabled();
 
@@ -123,7 +137,7 @@ public class VideoCallingPreferenceControllerTest {
         doReturn(true).when(mImsManager).isVtEnabledByUser();
         doReturn(true).when(mImsManager).isEnhanced4gLteModeSettingEnabledByUser();
         doReturn(true).when(mImsManager).isNonTtyOrTtyOnVolteEnabled();
-        doReturn(TelephonyManager.CALL_STATE_IDLE).when(mTelephonyManager).getCallState(SUB_ID);
+        mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
 
         mController.updateState(mPreference);
 

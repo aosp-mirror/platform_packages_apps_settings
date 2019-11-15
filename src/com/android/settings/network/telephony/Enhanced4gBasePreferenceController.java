@@ -23,6 +23,9 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ProvisioningManager;
+import android.telephony.ims.feature.MmTelFeature;
+import android.telephony.ims.stub.ImsRegistrationImplBase;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -50,6 +53,8 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     @VisibleForTesting
     ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
+    @VisibleForTesting
+    Integer mCallState;
     private final List<On4gLteUpdateListener> m4gLteListeners;
 
     protected static final int MODE_NONE = -1;
@@ -70,7 +75,8 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             return this;
         }
         mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
         mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
@@ -86,6 +92,11 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         return this;
     }
 
+    @VisibleForTesting
+    ProvisioningManager getProvisioningManager(int subId) {
+        return ProvisioningManager.createForSubscriptionId(subId);
+    }
+
     @Override
     public int getAvailabilityStatus(int subId) {
         init(subId);
@@ -96,7 +107,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         final boolean isVisible = subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 && mImsManager != null && carrierConfig != null
                 && mImsManager.isVolteEnabledByPlatform()
-                && mImsManager.isVolteProvisionedOnDevice()
+                && isVolteProvisionedOnDevice(mSubId)
                 && MobileNetworkUtils.isImsServiceStateReady(mImsManager)
                 && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL);
         return isVisible
@@ -159,11 +170,24 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     private boolean isPrefEnabled() {
         return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
-                && mTelephonyManager.getCallState(mSubId) == TelephonyManager.CALL_STATE_IDLE
+                && (mCallState != null) && (mCallState == TelephonyManager.CALL_STATE_IDLE)
                 && mImsManager != null
                 && mImsManager.isNonTtyOrTtyOnVolteEnabled()
                 && mCarrierConfig.getBoolean(
                 CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL);
+    }
+
+    private boolean isVolteProvisionedOnDevice(int subId) {
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return true;
+        }
+        final ProvisioningManager provisioningMgr = getProvisioningManager(subId);
+        if (provisioningMgr == null) {
+            return true;
+        }
+        return provisioningMgr.getProvisioningStatusForCapability(
+                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                ImsRegistrationImplBase.REGISTRATION_TECH_LTE);
     }
 
     private class PhoneCallStateListener extends PhoneStateListener {
@@ -174,15 +198,17 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
+            mCallState = state;
             updateState(mPreference);
         }
 
         public void register(int subId) {
-            mSubId = subId;
+            Enhanced4gBasePreferenceController.this.mSubId = subId;
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
         }
 
         public void unregister() {
+            mCallState = null;
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
         }
     }

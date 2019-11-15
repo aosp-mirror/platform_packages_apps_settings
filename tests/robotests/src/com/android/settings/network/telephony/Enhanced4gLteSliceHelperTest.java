@@ -31,6 +31,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ims.ProvisioningManager;
+import android.telephony.ims.feature.MmTelFeature;
+import android.telephony.ims.stub.ImsRegistrationImplBase;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
@@ -67,6 +70,8 @@ public class Enhanced4gLteSliceHelperTest {
 
     @Mock
     private ImsManager mMockImsManager;
+    @Mock
+    private ProvisioningManager mProvisioningManager;
 
     private Context mContext;
     private FakeEnhanced4gLteSliceHelper mEnhanced4gLteSliceHelper;
@@ -121,7 +126,9 @@ public class Enhanced4gLteSliceHelperTest {
     @Test
     public void test_CreateEnhanced4gLteSlice_success() {
         when(mMockImsManager.isVolteEnabledByPlatform()).thenReturn(true);
-        when(mMockImsManager.isVolteProvisionedOnDevice()).thenReturn(true);
+        when(mProvisioningManager.getProvisioningStatusForCapability(
+                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                ImsRegistrationImplBase.REGISTRATION_TECH_LTE)).thenReturn(true);
         when(mMockImsManager.isEnhanced4gLteModeSettingEnabledByUser()).thenReturn(true);
         when(mMockImsManager.isNonTtyOrTtyOnVolteEnabled()).thenReturn(true);
         when(mMockCarrierConfigManager.getConfigForSubId(1)).thenReturn(null);
@@ -136,7 +143,9 @@ public class Enhanced4gLteSliceHelperTest {
     @Test
     public void test_SettingSliceProvider_getsRightSliceEnhanced4gLte() {
         when(mMockImsManager.isVolteEnabledByPlatform()).thenReturn(true);
-        when(mMockImsManager.isVolteProvisionedOnDevice()).thenReturn(true);
+        when(mProvisioningManager.getProvisioningStatusForCapability(
+                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                ImsRegistrationImplBase.REGISTRATION_TECH_LTE)).thenReturn(true);
         when(mMockImsManager.isEnhanced4gLteModeSettingEnabledByUser()).thenReturn(true);
         when(mMockImsManager.isNonTtyOrTtyOnVolteEnabled()).thenReturn(true);
         when(mMockCarrierConfigManager.getConfigForSubId(1)).thenReturn(null);
@@ -152,17 +161,19 @@ public class Enhanced4gLteSliceHelperTest {
     @Test
     public void test_SliceBroadcastReceiver_toggleOffEnhanced4gLte() {
         when(mMockImsManager.isVolteEnabledByPlatform()).thenReturn(true);
-        when(mMockImsManager.isVolteProvisionedOnDevice()).thenReturn(true);
+        when(mProvisioningManager.getProvisioningStatusForCapability(
+                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                ImsRegistrationImplBase.REGISTRATION_TECH_LTE)).thenReturn(true);
         when(mMockImsManager.isEnhanced4gLteModeSettingEnabledByUser()).thenReturn(false);
         when(mMockImsManager.isNonTtyOrTtyOnVolteEnabled()).thenReturn(true);
         when(mSlicesFeatureProvider.getNewEnhanced4gLteSliceHelper(mContext))
                 .thenReturn(mEnhanced4gLteSliceHelper);
 
-        ArgumentCaptor<Boolean> mEnhanced4gLteSettingCaptor = ArgumentCaptor.forClass(
+        final ArgumentCaptor<Boolean> mEnhanced4gLteSettingCaptor = ArgumentCaptor.forClass(
                 Boolean.class);
 
         // turn on Enhanced4gLte setting
-        Intent intent = new Intent(Enhanced4gLteSliceHelper.ACTION_ENHANCED_4G_LTE_CHANGED);
+        final Intent intent = new Intent(Enhanced4gLteSliceHelper.ACTION_ENHANCED_4G_LTE_CHANGED);
         intent.putExtra(EXTRA_TOGGLE_STATE, true);
 
         // change the setting
@@ -234,7 +245,7 @@ public class Enhanced4gLteSliceHelperTest {
     private void assertTitle(List<SliceItem> sliceItems, String title) {
         boolean hasTitle = false;
         for (SliceItem item : sliceItems) {
-            List<SliceItem> titleItems = SliceQuery.findAll(item, FORMAT_TEXT, HINT_TITLE,
+            final List<SliceItem> titleItems = SliceQuery.findAll(item, FORMAT_TEXT, HINT_TITLE,
                     null /* non-hints */);
             if (titleItems == null) {
                 continue;
@@ -263,6 +274,11 @@ public class Enhanced4gLteSliceHelperTest {
         @Override
         protected ImsManager getImsManager(int subId) {
             return mMockImsManager;
+        }
+
+        @Override
+        ProvisioningManager getProvisioningManager(int subId) {
+            return mProvisioningManager;
         }
 
         protected int getDefaultVoiceSubId() {

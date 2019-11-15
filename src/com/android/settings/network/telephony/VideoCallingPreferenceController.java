@@ -23,6 +23,9 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ProvisioningManager;
+import android.telephony.ims.feature.MmTelFeature;
+import android.telephony.ims.stub.ImsRegistrationImplBase;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -134,6 +137,24 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     }
 
     @VisibleForTesting
+    ProvisioningManager getProvisioningManager(int subId) {
+        return ProvisioningManager.createForSubscriptionId(subId);
+    }
+
+    private boolean isVtProvisionedOnDevice(int subId) {
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return true;
+        }
+        final ProvisioningManager provisioningMgr = getProvisioningManager(subId);
+        if (provisioningMgr == null) {
+            return true;
+        }
+        return provisioningMgr.getProvisioningStatusForCapability(
+                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VIDEO,
+                ImsRegistrationImplBase.REGISTRATION_TECH_LTE);
+    }
+
+    @VisibleForTesting
     boolean isVideoCallEnabled(int subId, ImsManager imsManager) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
@@ -142,7 +163,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         }
         return carrierConfig != null && imsManager != null
                 && imsManager.isVtEnabledByPlatform()
-                && imsManager.isVtProvisionedOnDevice()
+                && isVtProvisionedOnDevice(subId)
                 && MobileNetworkUtils.isImsServiceStateReady(imsManager)
                 && (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS)
@@ -167,7 +188,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         }
 
         public void register(int subId) {
-            mSubId = subId;
+            VideoCallingPreferenceController.this.mSubId = subId;
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
         }
 
