@@ -183,14 +183,18 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     Drawable createBtBatteryIcon(Context context, int level, boolean charging) {
         final BatteryMeterView.BatteryMeterDrawable drawable =
                 new BatteryMeterView.BatteryMeterDrawable(context,
-                        context.getColor(R.color.meter_background_color));
+                        context.getColor(R.color.meter_background_color),
+                        context.getResources().getDimensionPixelSize(
+                                R.dimen.advanced_bluetooth_battery_meter_width),
+                        context.getResources().getDimensionPixelSize(
+                                R.dimen.advanced_bluetooth_battery_meter_height));
         drawable.setBatteryLevel(level);
         final int attr = level > LOW_BATTERY_LEVEL || charging
                 ? android.R.attr.colorControlNormal
                 : android.R.attr.colorError;
         drawable.setColorFilter(new PorterDuffColorFilter(
                 com.android.settings.Utils.getColorAttrDefaultColor(context, attr),
-                PorterDuff.Mode.SRC_IN));
+                PorterDuff.Mode.SRC));
         drawable.setCharging(charging);
 
         return drawable;
