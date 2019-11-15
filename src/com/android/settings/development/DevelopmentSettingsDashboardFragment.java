@@ -495,6 +495,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ResizableActivityPreferenceController(context));
         controllers.add(new FreeformWindowsPreferenceController(context));
         controllers.add(new DesktopModePreferenceController(context));
+        controllers.add(new SizeCompatFreeformPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new BubbleGlobalPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
