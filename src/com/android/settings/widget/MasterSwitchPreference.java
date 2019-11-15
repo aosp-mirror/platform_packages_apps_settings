@@ -63,9 +63,9 @@ public class MasterSwitchPreference extends TwoTargetPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        final View widgetView = holder.findViewById(android.R.id.widget_frame);
-        if (widgetView != null) {
-            widgetView.setOnClickListener(new OnClickListener() {
+        final View switchWidget = holder.findViewById(R.id.switchWidget);
+        if (switchWidget != null) {
+            switchWidget.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mSwitch != null && !mSwitch.isEnabled()) {
