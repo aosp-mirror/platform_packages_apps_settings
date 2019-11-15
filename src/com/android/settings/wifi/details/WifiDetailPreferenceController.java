@@ -781,6 +781,11 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     }
 
     private boolean canConnectNetwork() {
+        // Do not allow a cloned network to connect when out of range
+        // Otherwise it may create inconsistencies in the UI
+        if (mAccessPoint.isCloned() && mIsOutOfRange) {
+            return false;
+        }
         // Display connect button for disconnected AP even not in the range.
         return !mAccessPoint.isActive();
     }
