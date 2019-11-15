@@ -29,6 +29,7 @@ import static org.hamcrest.CoreMatchers.anything;
 import static org.junit.Assert.assertEquals;
 import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
 
 import android.app.Activity;
@@ -109,7 +110,8 @@ public class WifiCallingSettingUiTest {
                 .when(mSubscriptionController).queryLocalInterface(anyString());
         mImsManagerInstances.put(0, mImsManager0);
         mImsManagerInstances.put(1, mImsManager1);
-        doReturn(mSils).when(mSubscriptionController).getActiveSubscriptionInfoList(anyString());
+        doReturn(mSils).when(mSubscriptionController).getActiveSubscriptionInfoList(anyString(),
+                nullable(String.class));
         doReturn(0).when(mSubscriptionController).getPhoneId(0);
         doReturn(1).when(mSubscriptionController).getPhoneId(1);
         doReturn(0).when(mSubscriptionInfo0).getSubscriptionId();
