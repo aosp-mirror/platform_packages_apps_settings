@@ -16,6 +16,8 @@
 
 package com.android.settings.search.actionbar;
 
+import static com.android.settings.search.actionbar.SearchMenuController.MENU_SEARCH;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -69,7 +71,7 @@ public class SearchMenuControllerTest {
         Global.putInt(mActivity.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
 
         when(mHost.getActivity()).thenReturn(mActivity);
-        when(mMenu.add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu))
+        when(mMenu.add(Menu.NONE, MENU_SEARCH, 0 /* order */, R.string.search_menu))
                 .thenReturn(mock(MenuItem.class));
     }
 
@@ -78,7 +80,7 @@ public class SearchMenuControllerTest {
         SearchMenuController.init(mHost);
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
-        verify(mMenu).add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu);
+        verify(mMenu).add(Menu.NONE, MENU_SEARCH, 0 /* order */, R.string.search_menu);
     }
 
     @Test

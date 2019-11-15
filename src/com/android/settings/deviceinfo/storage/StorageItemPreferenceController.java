@@ -41,6 +41,7 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.PrivateVolumeSettings.SystemInfoFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.overlay.FeatureFactory;
@@ -392,14 +393,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
         if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE)) {
-            final Bundle args = new Bundle(3 + additionalCapacity);
-            args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
+            final Bundle args = new Bundle(2 + additionalCapacity);
+            args.putInt(ProfileSelectFragment.EXTRA_PROFILE,
+                    mIsWorkProfile ? ProfileSelectFragment.WORK : ProfileSelectFragment.PERSONAL);
             args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
-            args.putBoolean(ManageApplications.EXTRA_PERSONAL_ONLY, !mIsWorkProfile);
             return args;
         } else {
             final Bundle args = new Bundle(2 + additionalCapacity);
-            args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
+            args.putInt(ProfileSelectFragment.EXTRA_PROFILE,
+                    mIsWorkProfile ? ProfileSelectFragment.WORK : ProfileSelectFragment.ALL);
             args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
             return args;
         }

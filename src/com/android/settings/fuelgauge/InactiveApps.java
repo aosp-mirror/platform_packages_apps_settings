@@ -67,7 +67,8 @@ public class InactiveApps extends SettingsPreferenceFragment
         super.onCreate(icicle);
 
         mUsageStats = getActivity().getSystemService(UsageStatsManager.class);
-        addPreferencesFromResource(R.xml.inactive_apps);
+        addPreferencesFromResource(R.xml.dummy_preference_screen);
+        getActivity().setTitle(R.string.inactive_apps_title);
     }
 
     @Override

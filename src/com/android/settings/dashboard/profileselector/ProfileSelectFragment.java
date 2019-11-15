@@ -22,13 +22,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.settings.R;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.dashboard.DashboardFragment;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -38,7 +40,9 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * Base fragment class for profile settings.
  */
-public abstract class ProfileSelectFragment extends InstrumentedFragment {
+public abstract class ProfileSelectFragment extends DashboardFragment {
+
+    private static final String TAG = "ProfileSelectFragment";
 
     /**
      * Denotes the profile type.
@@ -63,16 +67,29 @@ public abstract class ProfileSelectFragment extends InstrumentedFragment {
      */
     public static final int ALL = PERSONAL | WORK;
 
-    private View mContentView;
+    /**
+     * Used in fragment argument and pass {@link ProfileType} to it
+     */
+    public static final String EXTRA_PROFILE = "profile";
+
+    private ViewGroup mContentView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mContentView = inflater.inflate(R.layout.profile_select_tablayout, null /* root */);
-        final ViewPager viewPager = mContentView.findViewById(R.id.view_pager);
-        viewPager.setAdapter(new ViewPagerAdapter(this));
-        final TabLayout tabs = mContentView.findViewById(R.id.tabs);
+        mContentView = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
+
+        final View tabContainer = mContentView.findViewById(R.id.tab_container);
+        final ViewPager viewPager = tabContainer.findViewById(R.id.view_pager);
+        viewPager.setAdapter(new ProfileSelectFragment.ViewPagerAdapter(this));
+        final TabLayout tabs = tabContainer.findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+        tabContainer.setVisibility(View.VISIBLE);
+
+        final FrameLayout listContainer = mContentView.findViewById(android.R.id.list_container);
+        listContainer.setLayoutParams(new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
         return mContentView;
     }
 
@@ -87,13 +104,23 @@ public abstract class ProfileSelectFragment extends InstrumentedFragment {
      */
     public abstract Fragment[] getFragments();
 
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.dummy_preference_screen;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
     static class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         private final Fragment[] mChildFragments;
         private final Context mContext;
 
         ViewPagerAdapter(ProfileSelectFragment fragment) {
-            super(fragment.getActivity().getSupportFragmentManager());
+            super(fragment.getChildFragmentManager());
             mContext = fragment.getContext();
             mChildFragments = fragment.getFragments();
         }

@@ -22,7 +22,9 @@
     android:orderingFromXml="false">
     <com.android.settings.deviceinfo.storage.StorageSummaryDonutPreference
         android:key="pref_summary"
-        android:order="0" />
+        android:order="0"
+        settings:searchable="false"
+        settings:controller="com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController"/>
     <com.android.settings.widget.MasterSwitchPreference
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
         android:key="toggle_asm"
