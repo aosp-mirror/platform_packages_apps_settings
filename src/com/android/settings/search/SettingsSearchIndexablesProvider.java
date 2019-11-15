@@ -189,16 +189,22 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             // Build parent-child class pairs for all children listed under this key.
             for (Tile tile : category.getTiles()) {
                 String childClass = null;
+                CharSequence childTitle = "";
                 if (tile.getMetaData() != null) {
                     childClass = tile.getMetaData().getString(
                             SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
+                }
+                if (childClass == null) {
+                    childClass = tile.getComponentName();
+                    childTitle = tile.getTitle(getContext());
                 }
                 if (childClass == null) {
                     continue;
                 }
                 cursor.newRow()
                         .add(SearchIndexablesContract.SiteMapColumns.PARENT_CLASS, parentClass)
-                        .add(SearchIndexablesContract.SiteMapColumns.CHILD_CLASS, childClass);
+                        .add(SearchIndexablesContract.SiteMapColumns.CHILD_CLASS, childClass)
+                        .add(SearchIndexablesContract.SiteMapColumns.CHILD_TITLE, childTitle);
             }
         }
         // Done.
@@ -383,7 +389,8 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             }
         }
 
-        return rawList;    }
+        return rawList;
+    }
 
     private static Object[] createIndexableRawColumnObjects(SearchIndexableRaw raw) {
         final Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];
