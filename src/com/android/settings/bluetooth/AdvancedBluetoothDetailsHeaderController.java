@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -260,15 +261,21 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         }
 
         ThreadUtils.postOnBackgroundThread(() -> {
+            final Uri uri = Uri.parse(iconUri);
             try {
+                mContext.getContentResolver().takePersistableUriPermission(uri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
                 final Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                        mContext.getContentResolver(), Uri.parse(iconUri));
+                        mContext.getContentResolver(), uri);
                 ThreadUtils.postOnMainThread(() -> {
                     mIconCache.put(iconUri, bitmap);
                     imageView.setImageBitmap(bitmap);
                 });
             } catch (IOException e) {
-                Log.e(TAG, "Failed to get bitmap for: " + iconUri);
+                Log.e(TAG, "Failed to get bitmap for: " + iconUri, e);
+            } catch (SecurityException e) {
+                Log.e(TAG, "Failed to take persistable permission for: " + uri, e);
             }
         });
     }
