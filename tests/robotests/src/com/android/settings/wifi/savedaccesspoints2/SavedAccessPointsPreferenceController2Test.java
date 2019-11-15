@@ -21,24 +21,18 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
-import android.os.Bundle;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.shadow.ShadowAccessPoint;
-import com.android.settings.testutils.shadow.ShadowWifiManager;
-import com.android.settingslib.wifi.AccessPoint;
-import com.android.settingslib.wifi.AccessPointPreference;
+import com.android.settingslib.wifi.WifiEntryPreference;
+import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,13 +42,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowWifiManager.class})
 public class SavedAccessPointsPreferenceController2Test {
 
     @Mock
@@ -63,7 +56,6 @@ public class SavedAccessPointsPreferenceController2Test {
     private PreferenceCategory mPreferenceCategory;
 
     private Context mContext;
-    private WifiManager mWifiManager;
     private SavedAccessPointsWifiSettings2 mSettings;
     private SavedAccessPointsPreferenceController2 mController;
 
@@ -71,7 +63,6 @@ public class SavedAccessPointsPreferenceController2Test {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mWifiManager = mContext.getSystemService(WifiManager.class);
         mSettings = spy(new SavedAccessPointsWifiSettings2());
         mController = spy(new SavedAccessPointsPreferenceController2(mContext, "test_key"));
         mController.setHost(mSettings);
@@ -83,46 +74,33 @@ public class SavedAccessPointsPreferenceController2Test {
 
     @Test
     public void getAvailability_noSavedAccessPoint_shouldNotAvailable() {
-        mController.mAccessPoints = new ArrayList<>();
+        mController.mWifiEntries = new ArrayList<>();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void getAvailability_oneSavedAccessPoint_shouldAvailable() {
-        final AccessPoint accessPoint = new AccessPoint(mContext, new Bundle() /* savedState */);
-        mController.mAccessPoints = new ArrayList<AccessPoint>(Arrays.asList(accessPoint));
+        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
+        mController.mWifiEntries = Arrays.asList(mockWifiEntry);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    @Config(shadows = ShadowAccessPoint.class)
-    public void displayPreference_oneAccessPoint_shouldListNonSubscribedAPs() {
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "SSID";
-        config.BSSID = "BSSID";
-        config.networkId = 2;
-        mWifiManager.addNetwork(config);
+    public void displayPreference_oneAccessPoint_shouldListIt() {
+        final String title = "ssid_title";
+        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
+        when(mockWifiEntry.getTitle()).thenReturn(title);
+        final ArgumentCaptor<WifiEntryPreference> captor =
+                ArgumentCaptor.forClass(WifiEntryPreference.class);
 
-        final ArgumentCaptor<AccessPointPreference> captor =
-                ArgumentCaptor.forClass(AccessPointPreference.class);
-        mController.displayPreference(mPreferenceScreen);
+        mController.displayPreference(mPreferenceScreen, Arrays.asList(mockWifiEntry));
 
         verify(mPreferenceCategory).addPreference(captor.capture());
 
-        final AccessPointPreference pref = captor.getValue();
-        assertThat(pref.getTitle()).isEqualTo(config.SSID);
-    }
-
-    @Test
-    @Config(shadows = ShadowAccessPoint.class)
-    public void displayPreference_onePasspoint_shouldNotListSubscribedAPs() {
-        mWifiManager.addOrUpdatePasspointConfiguration(
-                SubscribedAccessPointsPreferenceController2Test.createMockPasspointConfiguration());
-
-        mController.displayPreference(mPreferenceScreen);
-
-        verify(mPreferenceCategory, never()).addPreference(any(AccessPointPreference.class));
+        final List<WifiEntryPreference> prefs = captor.getAllValues();
+        assertThat(prefs.size()).isEqualTo(1);
+        assertThat(prefs.get(0).getTitle()).isEqualTo(title);
     }
 }

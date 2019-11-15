@@ -16,12 +16,22 @@
 
 package com.android.settings.wifi.savedaccesspoints2;
 
-import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkScoreManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Process;
+import android.os.SimpleClock;
+import android.os.SystemClock;
+import android.text.TextUtils;
+import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -29,22 +39,29 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
-import com.android.settingslib.wifi.AccessPoint;
-import com.android.settingslib.wifi.AccessPointPreference;
+import com.android.wifitrackerlib.SavedNetworkTracker;
+
+import java.time.Clock;
+import java.time.ZoneOffset;
 
 /**
  * UI to manage saved networks/access points.
  */
-public class SavedAccessPointsWifiSettings2 extends DashboardFragment {
+public class SavedAccessPointsWifiSettings2 extends DashboardFragment
+        implements SavedNetworkTracker.SavedNetworkTrackerCallback {
 
     private static final String TAG = "SavedAccessPoints2";
 
-    @VisibleForTesting
-    Bundle mAccessPointSavedState;
-    private AccessPoint mSelectedAccessPoint;
+    // Key of a Bundle to save/restore the selected WifiEntry
+    static final String KEY_KEY = "key_key";
 
-    // Instance state key
-    private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
+    // Max age of tracked WifiEntries
+    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
+    // Interval between initiating SavedNetworkTracker scans
+    private static final long SCAN_INTERVAL_MILLIS = 10_000;
+
+    private SavedNetworkTracker mSavedNetworkTracker;
+    private HandlerThread mWorkerThread;
 
     @Override
     public int getMetricsCategory() {
@@ -64,73 +81,90 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(SavedAccessPointsPreferenceController2.class)
-                .setHost(this);
-        use(SubscribedAccessPointsPreferenceController2.class)
-                .setHost(this);
+        use(SavedAccessPointsPreferenceController2.class).setHost(this);
+        use(SubscribedAccessPointsPreferenceController2.class).setHost(this);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
-                mAccessPointSavedState =
-                        savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
-            } else {
-                mAccessPointSavedState = null;
+
+        final Context context = getContext();
+        mWorkerThread = new HandlerThread(TAG
+                + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
+                Process.THREAD_PRIORITY_BACKGROUND);
+        mWorkerThread.start();
+        final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
+            @Override
+            public long millis() {
+                return SystemClock.elapsedRealtime();
             }
-        }
+        };
+        mSavedNetworkTracker = new SavedNetworkTracker(getSettingsLifecycle(), context,
+                context.getSystemService(WifiManager.class),
+                context.getSystemService(ConnectivityManager.class),
+                context.getSystemService(NetworkScoreManager.class),
+                new Handler(Looper.getMainLooper()),
+                mWorkerThread.getThreadHandler(),
+                elapsedRealtimeClock,
+                MAX_SCAN_AGE_MILLIS,
+                SCAN_INTERVAL_MILLIS,
+                this);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (mAccessPointSavedState != null) {
-            final PreferenceScreen screen = getPreferenceScreen();
-            use(SavedAccessPointsPreferenceController2.class).displayPreference(screen);
-            use(SubscribedAccessPointsPreferenceController2.class).displayPreference(screen);
-        }
+
+        onSavedWifiEntriesChanged();
+        onSubscriptionWifiEntriesChanged();
+    }
+
+    @Override
+    public void onDestroy() {
+        mWorkerThread.quit();
+
+        super.onDestroy();
     }
 
     /**
-     * Shows {@link WifiNetworkDetailsFragment2} for assigned {@link AccessPointPreference}.
+     * Shows {@link WifiNetworkDetailsFragment2} for assigned key of {@link WifiEntry}.
      */
-    public void showWifiPage(@Nullable AccessPointPreference accessPoint) {
+    public void showWifiPage(@NonNull String key, CharSequence title) {
         removeDialog(WifiSettings.WIFI_DIALOG_ID);
 
-        if (accessPoint != null) {
-            // Save the access point and edit mode
-            mSelectedAccessPoint = accessPoint.getAccessPoint();
-        } else {
-            // No access point is selected. Clear saved state.
-            mSelectedAccessPoint = null;
-            mAccessPointSavedState = null;
+        if (TextUtils.isEmpty(key)) {
+            Log.e(TAG, "Not able to show WifiEntry of an empty key");
+            return;
         }
 
-        if (mSelectedAccessPoint == null) {
-            mSelectedAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
-        }
-        final Bundle savedState = new Bundle();
-        mSelectedAccessPoint.saveWifiState(savedState);
+        final Bundle bundle = new Bundle();
+        bundle.putString(KEY_KEY, key);
 
         new SubSettingLauncher(getContext())
-                .setTitleText(mSelectedAccessPoint.getTitle())
+                .setTitleText(title)
                 .setDestination(WifiNetworkDetailsFragment2.class.getName())
-                .setArguments(savedState)
+                .setArguments(bundle)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        // If the dialog is showing (indicated by the existence of mSelectedAccessPoint), then we
-        // save its state.
-        if (mSelectedAccessPoint != null) {
-            mAccessPointSavedState = new Bundle();
-            mSelectedAccessPoint.saveWifiState(mAccessPointSavedState);
-            outState.putBundle(SAVE_DIALOG_ACCESS_POINT_STATE, mAccessPointSavedState);
-        }
+    public void onWifiStateChanged() {
+        // Do nothing.
+    }
+
+    @Override
+    public void onSavedWifiEntriesChanged() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        use(SavedAccessPointsPreferenceController2.class)
+                .displayPreference(screen, mSavedNetworkTracker.getSavedWifiEntries());
+    }
+
+    @Override
+    public void onSubscriptionWifiEntriesChanged() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        use(SubscribedAccessPointsPreferenceController2.class)
+                .displayPreference(screen, mSavedNetworkTracker.getSubscriptionWifiEntries());
     }
 }

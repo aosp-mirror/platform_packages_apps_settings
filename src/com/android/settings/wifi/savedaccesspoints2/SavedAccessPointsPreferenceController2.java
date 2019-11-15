@@ -17,7 +17,6 @@
 package com.android.settings.wifi.savedaccesspoints2;
 
 import android.content.Context;
-import android.net.wifi.WifiManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -25,13 +24,11 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.wifi.AccessPoint;
-import com.android.settingslib.wifi.AccessPointPreference;
-import com.android.settingslib.wifi.AccessPointPreference.UserBadgeCache;
-import com.android.settingslib.wifi.WifiSavedConfigUtils;
+import com.android.settingslib.wifi.WifiEntryPreference;
+import com.android.wifitrackerlib.WifiEntry;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Controller that manages a PreferenceGroup, which contains a list of saved access points.
@@ -39,17 +36,13 @@ import java.util.stream.Collectors;
 public class SavedAccessPointsPreferenceController2 extends BasePreferenceController implements
         Preference.OnPreferenceClickListener {
 
-    protected final WifiManager mWifiManager;
-    private final UserBadgeCache mUserBadgeCache;
     private PreferenceGroup mPreferenceGroup;
     private SavedAccessPointsWifiSettings2 mHost;
     @VisibleForTesting
-    List<AccessPoint> mAccessPoints;
+    List<WifiEntry> mWifiEntries = new ArrayList<>();
 
     public SavedAccessPointsPreferenceController2(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mUserBadgeCache = new AccessPointPreference.UserBadgeCache(context.getPackageManager());
-        mWifiManager = context.getSystemService(WifiManager.class);
     }
 
     /**
@@ -62,43 +55,39 @@ public class SavedAccessPointsPreferenceController2 extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return mAccessPoints.size() > 0 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return mWifiEntries.size() > 0 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mPreferenceGroup = screen.findPreference(getPreferenceKey());
-        refreshSavedAccessPoints();
         updatePreference();
         super.displayPreference(screen);
+    }
+
+    void displayPreference(PreferenceScreen screen, List<WifiEntry> wifiEntries) {
+        if (wifiEntries == null || wifiEntries.isEmpty()) {
+            mWifiEntries.clear();
+        } else {
+            mWifiEntries = wifiEntries;
+        }
+
+        displayPreference(screen);
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (mHost != null) {
-            final Preference preferenceInGroup =
-                    mPreferenceGroup.findPreference(preference.getKey());
-            mHost.showWifiPage((AccessPointPreference) preferenceInGroup);
+            mHost.showWifiPage(preference.getKey(), preference.getTitle());
         }
         return false;
     }
 
-    protected void refreshSavedAccessPoints() {
-        mAccessPoints = WifiSavedConfigUtils.getAllConfigs(mContext, mWifiManager).stream()
-                .filter(accessPoint -> !accessPoint.isPasspointConfig())
-                .sorted(SavedNetworkComparator2.INSTANCE)
-                .collect(Collectors.toList());
-    }
-
     private void updatePreference() {
         mPreferenceGroup.removeAll();
-        for (AccessPoint accessPoint : mAccessPoints) {
-            final String key = accessPoint.getKey();
-
-            final AccessPointPreference preference = new AccessPointPreference(accessPoint,
-                    mContext, mUserBadgeCache, true /* forSavedNetworks */);
-            preference.setKey(key);
-            preference.setIcon(null);
+        for (WifiEntry wifiEntry : mWifiEntries) {
+            final WifiEntryPreference preference = new WifiEntryPreference(mContext, wifiEntry);
+            preference.setKey(wifiEntry.getKey());
             preference.setOnPreferenceClickListener(this);
 
             mPreferenceGroup.addPreference(preference);
