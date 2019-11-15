@@ -74,9 +74,7 @@ public class SettingsSearchResultRegressionTest {
     private static final String ERROR_RERUN_TEST =
             "Please re-run the test \"generate_search_result_list\" by removing the '@Ignore' "
                     + "annotation above 'generate_search_result_list' test, and run: \n"
-                    + "$ runtest --path "
-                    + "packages/apps/Settings/tests/uitests/src/com/android/settings/search"
-                    + "/SettingsSearchResultRegressionTest.java \n"
+                    + "$ atest SettingsSearchResultRegressionTest.java \n"
                     + "and copy the output into "
                     + "'packages/apps/Settings/tests/uitests/assets/search_result_list'\n";
 
