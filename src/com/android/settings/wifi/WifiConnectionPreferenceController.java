@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
@@ -25,6 +26,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
+import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.wifi.AccessPoint;
@@ -128,17 +130,31 @@ public class WifiConnectionPreferenceController extends AbstractPreferenceContro
             mPreference.refresh();
             mPreference.setOrder(order);
 
-            mPreference.setOnPreferenceClickListener(pref -> {
-                Bundle args = new Bundle();
-                mPreference.getAccessPoint().saveWifiState(args);
-                new SubSettingLauncher(mPrefContext)
-                        .setTitleRes(R.string.pref_title_network_details)
-                        .setDestination(WifiNetworkDetailsFragment.class.getName())
-                        .setArguments(args)
-                        .setSourceMetricsCategory(mMetricsCategory)
-                        .launch();
-                return true;
-            });
+            if (FeatureFlagUtils.isEnabled(mPrefContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+                mPreference.setOnPreferenceClickListener(pref -> {
+                    Bundle args = new Bundle();
+                    mPreference.getAccessPoint().saveWifiState(args);
+                    new SubSettingLauncher(mPrefContext)
+                            .setTitleRes(R.string.pref_title_network_details)
+                            .setDestination(WifiNetworkDetailsFragment2.class.getName())
+                            .setArguments(args)
+                            .setSourceMetricsCategory(mMetricsCategory)
+                            .launch();
+                    return true;
+                });
+            } else {
+                mPreference.setOnPreferenceClickListener(pref -> {
+                    Bundle args = new Bundle();
+                    mPreference.getAccessPoint().saveWifiState(args);
+                    new SubSettingLauncher(mPrefContext)
+                            .setTitleRes(R.string.pref_title_network_details)
+                            .setDestination(WifiNetworkDetailsFragment.class.getName())
+                            .setArguments(args)
+                            .setSourceMetricsCategory(mMetricsCategory)
+                            .launch();
+                    return true;
+                });
+            }
             mPreferenceGroup.addPreference(mPreference);
         }
     }

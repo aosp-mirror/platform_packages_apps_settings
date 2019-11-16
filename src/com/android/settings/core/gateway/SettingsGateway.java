@@ -146,6 +146,7 @@ import com.android.settings.wifi.calling.WifiCallingDisclaimerFragment;
 import com.android.settings.wifi.calling.WifiCallingSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
+import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settings.wifi.tether.WifiTetherSettings;
 
 public class SettingsGateway {
@@ -161,6 +162,7 @@ public class SettingsGateway {
             WifiSettings2.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings.class.getName(),
+            SavedAccessPointsWifiSettings2.class.getName(),
             TetherSettings.class.getName(),
             WifiP2pSettings.class.getName(),
             WifiTetherSettings.class.getName(),
