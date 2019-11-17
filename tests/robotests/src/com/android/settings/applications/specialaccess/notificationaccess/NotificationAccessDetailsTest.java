@@ -16,16 +16,13 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
-import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.settings.SettingsEnums;
-import android.content.pm.ActivityInfo;
+import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
-import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -33,10 +30,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class NotificationAccessDetailsTest {
 
+    private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
     private NotificationAccessDetails mFragment;
 
@@ -44,25 +43,24 @@ public class NotificationAccessDetailsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFragment = new NotificationAccessDetails();
+        mFragment = spy(new NotificationAccessDetails());
+        mContext = RuntimeEnvironment.application;
+        doReturn(mContext).when(mFragment).getContext();
+
     }
 
     @Test
     public void logSpecialPermissionChange() {
         mFragment.logSpecialPermissionChange(true, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(
-                SettingsEnums.PAGE_UNKNOWN,
+                mContext,
                 MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW,
-                mFragment.getMetricsCategory(),
-                "app",
-                0);
+                "app");
 
         mFragment.logSpecialPermissionChange(false, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(
-                SettingsEnums.PAGE_UNKNOWN,
+                mContext,
                 MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY,
-                mFragment.getMetricsCategory(),
-                "app",
-                0);
+                "app");
     }
 }

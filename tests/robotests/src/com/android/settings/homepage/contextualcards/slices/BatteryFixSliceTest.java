@@ -40,7 +40,6 @@ import com.android.settings.slices.SliceBackgroundWorker;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -82,7 +81,6 @@ public class BatteryFixSliceTest {
     }
 
     @Test
-    @Ignore
     public void updateBatteryTipAvailabilityCache_hasImportantTip_shouldReturnTrue() {
         final List<BatteryTip> tips = new ArrayList<>();
         tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false, ""));
@@ -108,7 +106,6 @@ public class BatteryFixSliceTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = {
             BatteryFixSliceTest.ShadowEarlyWarningTip.class,
             BatteryFixSliceTest.ShadowSliceBackgroundWorker.class

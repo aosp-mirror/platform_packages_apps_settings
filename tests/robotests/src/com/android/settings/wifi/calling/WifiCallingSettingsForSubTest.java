@@ -130,7 +130,7 @@ public class WifiCallingSettingsForSubTest {
         doReturn(mImsManager).when(mFragment).getImsManager();
         doReturn(mImsMmTelManager).when(mFragment).getImsMmTelManager();
         doReturn(mImsConfig).when(mImsManager).getConfigInterface();
-        doReturn(true).when(mImsManager).isWfcProvisionedOnDevice();
+        doReturn(true).when(mFragment).isWfcProvisionedOnDevice();
         doReturn(true).when(mImsManager).isWfcEnabledByUser();
         doReturn(true).when(mImsManager).isNonTtyOrTtyOnVolteEnabled();
         doReturn(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
@@ -178,7 +178,7 @@ public class WifiCallingSettingsForSubTest {
     @Test
     public void onResume_provisioningDisallowed_shouldFinish() {
         // Call onResume while provisioning is disallowed.
-        doReturn(false).when(mImsManager).isWfcProvisionedOnDevice();
+        doReturn(false).when(mFragment).isWfcProvisionedOnDevice();
         mFragment.onResume();
 
         // Verify that finish() is called

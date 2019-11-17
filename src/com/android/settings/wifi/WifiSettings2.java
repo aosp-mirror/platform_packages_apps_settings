@@ -190,7 +190,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     }
 
     private void addPreferences() {
-        addPreferencesFromResource(R.xml.wifi_settings);
+        addPreferencesFromResource(R.xml.wifi_settings2);
 
         mConnectedWifiEntryPreferenceCategory = findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
         mWifiEntryPreferenceCategory = findPreference(PREF_KEY_ACCESS_POINTS);

@@ -36,7 +36,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Base fragment class for per profile settings.
+ * Base fragment class for profile settings.
  */
 public abstract class ProfileSelectFragment extends InstrumentedFragment {
 
