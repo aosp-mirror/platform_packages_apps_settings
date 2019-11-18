@@ -201,7 +201,8 @@ public class BatteryFixSlice implements CustomSliceable {
     }
 
     @WorkerThread
-    private static List<BatteryTip> refreshBatteryTips(Context context) {
+    @VisibleForTesting
+    static List<BatteryTip> refreshBatteryTips(Context context) {
         final BatteryStatsHelperLoader statsLoader = new BatteryStatsHelperLoader(context);
         final BatteryStatsHelper statsHelper = statsLoader.loadInBackground();
         final BatteryTipLoader loader = new BatteryTipLoader(context, statsHelper);
