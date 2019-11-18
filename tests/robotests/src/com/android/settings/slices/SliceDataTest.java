@@ -52,7 +52,8 @@ public class SliceDataTest {
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
                 .setSliceType(SLICE_TYPE)
-                .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE);
+                .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE)
+                .setIsPublicSlice(true);
 
         SliceData data = builder.build();
 
@@ -67,6 +68,7 @@ public class SliceDataTest {
         assertThat(data.getPreferenceController()).isEqualTo(PREF_CONTROLLER);
         assertThat(data.getSliceType()).isEqualTo(SLICE_TYPE);
         assertThat(data.getUnavailableSliceSubtitle()).isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
+        assertThat(data.isPublicSlice()).isEqualTo(true);
     }
 
     @Test(expected = SliceData.InvalidSliceDataException.class)

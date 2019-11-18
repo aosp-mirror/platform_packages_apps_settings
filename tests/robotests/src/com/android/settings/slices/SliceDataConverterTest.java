@@ -128,6 +128,7 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER);
         assertThat(fakeSlice.getUnavailableSliceSubtitle()).isEqualTo(
                 "subtitleOfUnavailableSlice"); // from XML
+        assertThat(fakeSlice.isPublicSlice()).isTrue();
     }
 
     private void assertFakeA11ySlice(SliceData fakeSlice) {
