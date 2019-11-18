@@ -42,6 +42,7 @@ import com.android.internal.telephony.TelephonyIntents;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -130,6 +131,7 @@ public class MobileNetworkActivityTest {
     }
 
     @Test
+    @Ignore
     public void updateBottomNavigationViewV2_twoSubscription_shouldNotCrash() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
@@ -139,6 +141,7 @@ public class MobileNetworkActivityTest {
     }
 
     @Test
+    @Ignore
     public void switchFragment_switchBetweenTwoSubscriptions() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
@@ -154,6 +157,7 @@ public class MobileNetworkActivityTest {
     }
 
     @Test
+    @Ignore
     public void switchFragment_subscriptionsUpdate_notifyByIntent() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
@@ -181,6 +185,7 @@ public class MobileNetworkActivityTest {
     }
 
     @Test
+    @Ignore
     public void onSaveInstanceState_saveCurrentSubId() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
