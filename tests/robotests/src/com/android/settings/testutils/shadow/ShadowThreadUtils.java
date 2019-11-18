@@ -16,15 +16,11 @@
 
 package com.android.settings.testutils.shadow;
 
-import android.util.Log;
-
 import com.android.settingslib.utils.ThreadUtils;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
-
-import java.util.concurrent.Callable;
 
 @Implements(ThreadUtils.class)
 public class ShadowThreadUtils {
@@ -40,15 +36,6 @@ public class ShadowThreadUtils {
     @Implementation
     protected static void postOnBackgroundThread(Runnable runnable) {
         runnable.run();
-    }
-
-    @Implementation
-    protected static void postOnBackgroundThread(Callable callable) {
-        try {
-            callable.call();
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage(), e);
-        }
     }
 
     @Implementation
