@@ -16,9 +16,6 @@
 
 package com.android.settings.dashboard.profileselector;
 
-import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_PERSONAL_ONLY;
-import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ONLY;
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -33,12 +30,12 @@ public class ProfileSelectManageApplications extends ProfileSelectFragment {
     @Override
     public Fragment[] getFragments() {
         final Bundle workOnly = new Bundle();
-        workOnly.putBoolean(EXTRA_WORK_ONLY, true);
+        workOnly.putInt(EXTRA_PROFILE, ProfileSelectFragment.WORK);
         final Fragment workFragment = new ManageApplications();
         workFragment.setArguments(workOnly);
 
         final Bundle personalOnly = new Bundle();
-        personalOnly.putBoolean(EXTRA_PERSONAL_ONLY, true);
+        personalOnly.putInt(EXTRA_PROFILE, ProfileSelectFragment.PERSONAL);
         final Fragment personalFragment = new ManageApplications();
         personalFragment.setArguments(personalOnly);
         return new Fragment[]{

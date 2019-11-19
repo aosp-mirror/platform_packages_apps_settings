@@ -28,8 +28,8 @@ import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowPrivateStorageInfo;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
-import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,9 +38,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 
 @RunWith(RobolectricTestRunner.class)
 public class LowStorageSliceTest {
@@ -103,27 +100,5 @@ public class LowStorageSliceTest {
         final Slice slice = mLowStorageSlice.getSlice();
 
         assertThat(slice.hasHint(HINT_ERROR)).isTrue();
-    }
-
-    @Implements(PrivateStorageInfo.class)
-    public static class ShadowPrivateStorageInfo {
-
-        private static PrivateStorageInfo sPrivateStorageInfo = null;
-
-        @Resetter
-        public static void reset() {
-            sPrivateStorageInfo = null;
-        }
-
-        @Implementation
-        public static PrivateStorageInfo getPrivateStorageInfo(
-                StorageVolumeProvider storageVolumeProvider) {
-            return sPrivateStorageInfo;
-        }
-
-        private static void setPrivateStorageInfo(
-                PrivateStorageInfo privateStorageInfo) {
-            sPrivateStorageInfo = privateStorageInfo;
-        }
     }
 }

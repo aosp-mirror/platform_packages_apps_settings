@@ -29,6 +29,7 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_WHITELIST_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_RECENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WORK;
+import static com.android.settings.search.actionbar.SearchMenuController.MENU_SEARCH;
 
 import android.annotation.Nullable;
 import android.annotation.StringRes;
@@ -99,6 +100,7 @@ import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
@@ -141,9 +143,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final String EXTRA_VOLUME_UUID = "volumeUuid";
     public static final String EXTRA_VOLUME_NAME = "volumeName";
     public static final String EXTRA_STORAGE_TYPE = "storageType";
-    public static final String EXTRA_WORK_ONLY = "workProfileOnly";
     public static final String EXTRA_WORK_ID = "workId";
-    public static final String EXTRA_PERSONAL_ONLY = "personalOnly";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
@@ -310,8 +310,10 @@ public class ManageApplications extends InstrumentedFragment
         }
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
         mFilter = appFilterRegistry.get(appFilterRegistry.getDefaultFilterType(mListType));
-        mIsPersonalOnly = args != null ? args.getBoolean(EXTRA_PERSONAL_ONLY) : false;
-        mIsWorkOnly = args != null ? args.getBoolean(EXTRA_WORK_ONLY) : false;
+        mIsPersonalOnly = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
+                == ProfileSelectFragment.PERSONAL : false;
+        mIsWorkOnly = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
+                == ProfileSelectFragment.WORK : false;
         mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : NO_USER_SPECIFIED;
         mExpandSearch = activity.getIntent().getBooleanExtra(EXTRA_EXPAND_SEARCH_VIEW, false);
 
@@ -696,6 +698,10 @@ public class ManageApplications extends InstrumentedFragment
         // Hide notification menu items, because sorting happens when filtering
         mOptionsMenu.findItem(R.id.sort_order_recent_notification).setVisible(false);
         mOptionsMenu.findItem(R.id.sort_order_frequent_notification).setVisible(false);
+        final MenuItem searchItem = mOptionsMenu.findItem(MENU_SEARCH);
+        if (searchItem != null) {
+            searchItem.setVisible(false);
+        }
     }
 
     @Override
