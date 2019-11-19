@@ -2731,7 +2731,7 @@
             android:launchMode="singleTop"
             android:taskAffinity=".wifi.NetworkRequestDialogActivity"
             android:exported="true"
-            android:permission="android.permission.MAINLINE_WIFI_STACK">
+            android:permission="android.permission.NETWORK_SETTINGS">
             <intent-filter>
                 <action android:name="com.android.settings.wifi.action.NETWORK_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
