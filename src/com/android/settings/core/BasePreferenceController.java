@@ -275,6 +275,14 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     }
 
     /**
+     * Updates dynamic raw data for search provider.
+     *
+     * Called by SearchIndexProvider#getDynamicRawDataToIndex
+     */
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+    }
+
+    /**
      * Set {@link UiBlockListener}
      *
      * @param uiBlockListener listener to set
