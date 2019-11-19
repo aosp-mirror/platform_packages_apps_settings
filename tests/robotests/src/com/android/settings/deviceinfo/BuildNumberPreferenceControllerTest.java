@@ -28,7 +28,9 @@ import static org.mockito.Mockito.verify;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.Process;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
@@ -120,7 +122,7 @@ public class BuildNumberPreferenceControllerTest {
     @Test
     public void handlePrefTreeClick_notAdminUser_isDemoUser_handleBuildNumberPref() {
         mShadowUserManager.setIsAdminUser(false);
-        mShadowUserManager.setIsDemoUser(true);
+        mShadowUserManager.addUser(UserHandle.myUserId(), "test", UserInfo.FLAG_DEMO);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
     }

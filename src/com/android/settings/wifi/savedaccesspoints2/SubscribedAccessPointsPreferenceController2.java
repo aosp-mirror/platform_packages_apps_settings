@@ -18,10 +18,6 @@ package com.android.settings.wifi.savedaccesspoints2;
 
 import android.content.Context;
 
-import com.android.settingslib.wifi.WifiSavedConfigUtils;
-
-import java.util.stream.Collectors;
-
 /**
  * Controller that manages a PreferenceGroup, which contains a list of subscribed access points.
  */
@@ -30,13 +26,5 @@ public class SubscribedAccessPointsPreferenceController2 extends
 
     public SubscribedAccessPointsPreferenceController2(Context context, String preferenceKey) {
         super(context, preferenceKey);
-    }
-
-    @Override
-    protected void refreshSavedAccessPoints() {
-        mAccessPoints = WifiSavedConfigUtils.getAllConfigs(mContext, mWifiManager).stream()
-                .filter(accessPoint -> accessPoint.isPasspointConfig())
-                .sorted(SavedNetworkComparator2.INSTANCE)
-                .collect(Collectors.toList());
     }
 }

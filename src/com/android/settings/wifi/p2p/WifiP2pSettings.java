@@ -152,7 +152,7 @@ public class WifiP2pSettings extends DashboardFragment
                 } else {
                     updateSearchMenu(false);
                 }
-            } else if (WifiP2pManager.WIFI_P2P_PERSISTENT_GROUPS_CHANGED_ACTION.equals(action)) {
+            } else if (WifiP2pManager.ACTION_WIFI_P2P_PERSISTENT_GROUPS_CHANGED.equals(action)) {
                 if (mWifiP2pManager != null) {
                     mWifiP2pManager.requestPersistentGroupInfo(mChannel, WifiP2pSettings.this);
                 }
@@ -339,7 +339,7 @@ public class WifiP2pSettings extends DashboardFragment
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PERSISTENT_GROUPS_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiP2pManager.ACTION_WIFI_P2P_PERSISTENT_GROUPS_CHANGED);
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
 
         getActivity().registerReceiver(mReceiver, mIntentFilter);

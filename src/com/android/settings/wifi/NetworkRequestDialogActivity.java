@@ -26,12 +26,16 @@ import android.net.wifi.WifiManager.NetworkRequestMatchCallback;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerExecutor;
 import android.os.Message;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
+
 import java.util.List;
 
 /**
@@ -115,7 +119,7 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
 
         final WifiManager wifiManager = getSystemService(WifiManager.class);
         if (wifiManager != null) {
-            wifiManager.registerNetworkRequestMatchCallback(this, mHandler);
+            wifiManager.registerNetworkRequestMatchCallback(new HandlerExecutor(mHandler), this);
         }
         // Sets time-out to stop scanning.
         mHandler.sendEmptyMessageDelayed(MESSAGE_STOP_SCAN_WIFI_LIST, DELAY_TIME_STOP_SCAN_MS);
