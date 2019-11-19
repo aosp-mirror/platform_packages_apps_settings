@@ -121,18 +121,22 @@ public class WifiConfigController implements TextWatcher,
     public static final int WIFI_EAP_METHOD_AKA_PRIME  = 6;
 
     /* These values come from "wifi_peap_phase2_entries" resource array */
-    public static final int WIFI_PEAP_PHASE2_NONE       = 0;
-    public static final int WIFI_PEAP_PHASE2_MSCHAPV2   = 1;
-    public static final int WIFI_PEAP_PHASE2_GTC        = 2;
-    public static final int WIFI_PEAP_PHASE2_SIM        = 3;
-    public static final int WIFI_PEAP_PHASE2_AKA        = 4;
-    public static final int WIFI_PEAP_PHASE2_AKA_PRIME  = 5;
+    public static final int WIFI_PEAP_PHASE2_MSCHAPV2   = 0;
+    public static final int WIFI_PEAP_PHASE2_GTC        = 1;
+    public static final int WIFI_PEAP_PHASE2_SIM        = 2;
+    public static final int WIFI_PEAP_PHASE2_AKA        = 3;
+    public static final int WIFI_PEAP_PHASE2_AKA_PRIME  = 4;
 
+    /* These values come from "wifi_ttls_phase2_entries" resource array */
+    public static final int WIFI_TTLS_PHASE2_PAP       = 0;
+    public static final int WIFI_TTLS_PHASE2_MSCHAP    = 1;
+    public static final int WIFI_TTLS_PHASE2_MSCHAPV2  = 2;
+    public static final int WIFI_TTLS_PHASE2_GTC       = 3;
 
     /* Phase2 methods supported by PEAP are limited */
     private ArrayAdapter<CharSequence> mPhase2PeapAdapter;
-    /* Full list of phase2 methods */
-    private ArrayAdapter<CharSequence> mPhase2FullAdapter;
+    /* Phase2 methods supported by TTLS are limited */
+    private ArrayAdapter<CharSequence> mPhase2TtlsAdapter;
 
     // e.g. AccessPoint.SECURITY_NONE
     @VisibleForTesting
@@ -154,7 +158,7 @@ public class WifiConfigController implements TextWatcher,
     private Spinner mEapOcspSpinner;
     private TextView mEapDomainView;
     private Spinner mPhase2Spinner;
-    // Associated with mPhase2Spinner, one of mPhase2FullAdapter or mPhase2PeapAdapter
+    // Associated with mPhase2Spinner, one of mPhase2TtlsAdapter or mPhase2PeapAdapter
     private ArrayAdapter<CharSequence> mPhase2Adapter;
     private Spinner mEapUserCertSpinner;
     private TextView mEapIdentityView;
@@ -243,7 +247,7 @@ public class WifiConfigController implements TextWatcher,
                 R.array.wifi_peap_phase2_entries_with_sim_auth);
         }
 
-        mPhase2FullAdapter = getSpinnerAdapter(R.array.wifi_phase2_entries);
+        mPhase2TtlsAdapter = getSpinnerAdapter(R.array.wifi_ttls_phase2_entries);
 
         mUnspecifiedCertString = mContext.getString(R.string.wifi_unspecified);
         mMultipleCertSetString = mContext.getString(R.string.wifi_multiple_cert_added);
@@ -713,9 +717,6 @@ public class WifiConfigController implements TextWatcher,
                         // Map the index from the mPhase2PeapAdapter to the one used
                         // by the API which has the full list of PEAP methods.
                         switch(phase2Method) {
-                            case WIFI_PEAP_PHASE2_NONE:
-                                config.enterpriseConfig.setPhase2Method(Phase2.NONE);
-                                break;
                             case WIFI_PEAP_PHASE2_MSCHAPV2:
                                 config.enterpriseConfig.setPhase2Method(Phase2.MSCHAPV2);
                                 break;
@@ -736,9 +737,27 @@ public class WifiConfigController implements TextWatcher,
                                 break;
                         }
                         break;
+                    case Eap.TTLS:
+                        // The default index from mPhase2TtlsAdapter maps to the API
+                        switch(phase2Method) {
+                            case WIFI_TTLS_PHASE2_PAP:
+                                config.enterpriseConfig.setPhase2Method(Phase2.PAP);
+                                break;
+                            case WIFI_TTLS_PHASE2_MSCHAP:
+                                config.enterpriseConfig.setPhase2Method(Phase2.MSCHAP);
+                                break;
+                            case WIFI_TTLS_PHASE2_MSCHAPV2:
+                                config.enterpriseConfig.setPhase2Method(Phase2.MSCHAPV2);
+                                break;
+                            case WIFI_TTLS_PHASE2_GTC:
+                                config.enterpriseConfig.setPhase2Method(Phase2.GTC);
+                                break;
+                            default:
+                                Log.e(TAG, "Unknown phase2 method" + phase2Method);
+                                break;
+                        }
+                        break;
                     default:
-                        // The default index from mPhase2FullAdapter maps to the API
-                        config.enterpriseConfig.setPhase2Method(phase2Method);
                         break;
                 }
 
@@ -1117,9 +1136,6 @@ public class WifiConfigController implements TextWatcher,
             switch (eapMethod) {
                 case Eap.PEAP:
                     switch (phase2Method) {
-                        case Phase2.NONE:
-                        mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_NONE);
-                            break;
                         case Phase2.MSCHAPV2:
                             mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_MSCHAPV2);
                             break;
@@ -1140,8 +1156,26 @@ public class WifiConfigController implements TextWatcher,
                             break;
                     }
                     break;
+                case Eap.TTLS:
+                    switch (phase2Method) {
+                        case Phase2.PAP:
+                            mPhase2Spinner.setSelection(WIFI_TTLS_PHASE2_PAP);
+                            break;
+                        case Phase2.MSCHAP:
+                            mPhase2Spinner.setSelection(WIFI_TTLS_PHASE2_MSCHAP);
+                            break;
+                        case Phase2.MSCHAPV2:
+                            mPhase2Spinner.setSelection(WIFI_TTLS_PHASE2_MSCHAPV2);
+                            break;
+                        case Phase2.GTC:
+                            mPhase2Spinner.setSelection(WIFI_TTLS_PHASE2_GTC);
+                            break;
+                        default:
+                            Log.e(TAG, "Invalid phase 2 method " + phase2Method);
+                            break;
+                    }
+                    break;
                 default:
-                    mPhase2Spinner.setSelection(phase2Method);
                     break;
             }
             if (!TextUtils.isEmpty(enterpriseConfig.getCaPath())) {
@@ -1242,8 +1276,8 @@ public class WifiConfigController implements TextWatcher,
                 break;
             case WIFI_EAP_METHOD_TTLS:
                 // Reset adapter if needed
-                if (mPhase2Adapter != mPhase2FullAdapter) {
-                    mPhase2Adapter = mPhase2FullAdapter;
+                if (mPhase2Adapter != mPhase2TtlsAdapter) {
+                    mPhase2Adapter = mPhase2TtlsAdapter;
                     mPhase2Spinner.setAdapter(mPhase2Adapter);
                 }
                 mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
@@ -1299,12 +1333,10 @@ public class WifiConfigController implements TextWatcher,
 
     private void setIdentityInvisible() {
         mView.findViewById(R.id.l_identity).setVisibility(View.GONE);
-        mPhase2Spinner.setSelection(Phase2.NONE);
     }
 
     private void setPhase2Invisible() {
         mView.findViewById(R.id.l_phase2).setVisibility(View.GONE);
-        mPhase2Spinner.setSelection(Phase2.NONE);
     }
 
     private void setCaCertInvisible() {
