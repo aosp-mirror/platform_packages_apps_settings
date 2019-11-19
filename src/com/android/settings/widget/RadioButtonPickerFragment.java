@@ -150,12 +150,10 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     /**
      * A chance for subclasses to bind additional things to the preference.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     public void bindPreferenceExtra(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
     }
 
-    @VisibleForTesting
     public void updateCandidates() {
         mCandidates.clear();
         final List<? extends CandidateInfo> candidateList = getCandidates();
@@ -204,7 +202,6 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         }
     }
 
-    @VisibleForTesting
     public RadioButtonPreference bindPreference(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey) {
         pref.setTitle(info.loadLabel());
@@ -218,7 +215,6 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         return pref;
     }
 
-    @VisibleForTesting
     public void updateCheckedState(String selectedKey) {
         final PreferenceScreen screen = getPreferenceScreen();
         if (screen != null) {
@@ -236,7 +232,6 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         }
     }
 
-    @VisibleForTesting
     public void mayCheckOnlyRadioButton() {
         final PreferenceScreen screen = getPreferenceScreen();
         // If there is only 1 thing on screen, select it.
