@@ -24,6 +24,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -36,6 +37,8 @@ import java.util.List;
  */
 public abstract class ActiveSubsciptionsListener
         extends SubscriptionManager.OnSubscriptionsChangedListener {
+
+    private static final String TAG = "ActiveSubsciptions";
 
     /**
      * Constructor
@@ -155,6 +158,18 @@ public abstract class ActiveSubsciptionsListener
         }
         mIsCachedDataAvailable = mIsMonitoringDataChange;
         mCachedActiveSubscriptionInfo = getSubscriptionManager().getActiveSubscriptionInfoList();
+
+        if ((mCachedActiveSubscriptionInfo == null)
+                || (mCachedActiveSubscriptionInfo.size() <= 0)) {
+            Log.d(TAG, "active subscriptions: " + mCachedActiveSubscriptionInfo);
+        } else {
+            final StringBuilder logString = new StringBuilder("active subscriptions:");
+            for (SubscriptionInfo subInfo : mCachedActiveSubscriptionInfo) {
+                logString.append(" " + subInfo.getSubscriptionId());
+            }
+            Log.d(TAG, logString.toString());
+        }
+
         return mCachedActiveSubscriptionInfo;
     }
 
@@ -246,7 +261,10 @@ public abstract class ActiveSubsciptionsListener
     }
 
     private boolean clearCachedSubId(int subId) {
-        if ((!mIsCachedDataAvailable) || (mCachedActiveSubscriptionInfo == null)) {
+        if (!mIsCachedDataAvailable) {
+            return false;
+        }
+        if (mCachedActiveSubscriptionInfo == null) {
             return false;
         }
         for (SubscriptionInfo subInfo : mCachedActiveSubscriptionInfo) {
