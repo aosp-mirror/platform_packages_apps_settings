@@ -122,6 +122,7 @@ public class MobileNetworkActivityTest {
     }
 
     @Test
+    @Ignore
     public void updateBottomNavigationViewV2_oneSubscription_shouldNotCrash() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1);
 
