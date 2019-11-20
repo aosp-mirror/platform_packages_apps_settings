@@ -73,6 +73,8 @@ public class SliceData {
 
     private final String mUnavailableSliceSubtitle;
 
+    private final boolean mIsPublicSlice;
+
     public String getKey() {
         return mKey;
     }
@@ -117,6 +119,10 @@ public class SliceData {
         return mUnavailableSliceSubtitle;
     }
 
+    public boolean isPublicSlice() {
+        return mIsPublicSlice;
+    }
+
     private SliceData(Builder builder) {
         mKey = builder.mKey;
         mTitle = builder.mTitle;
@@ -129,6 +135,7 @@ public class SliceData {
         mPreferenceController = builder.mPrefControllerClassName;
         mSliceType = builder.mSliceType;
         mUnavailableSliceSubtitle = builder.mUnavailableSliceSubtitle;
+        mIsPublicSlice = builder.mIsPublicSlice;
     }
 
     @Override
@@ -167,6 +174,8 @@ public class SliceData {
         private int mSliceType;
 
         private String mUnavailableSliceSubtitle;
+
+        private boolean mIsPublicSlice;
 
         public Builder setKey(String key) {
             mKey = key;
@@ -221,6 +230,11 @@ public class SliceData {
         public Builder setUnavailableSliceSubtitle(
                 String unavailableSliceSubtitle) {
             mUnavailableSliceSubtitle = unavailableSliceSubtitle;
+            return this;
+        }
+
+        public Builder setIsPublicSlice(boolean isPublicSlice) {
+            mIsPublicSlice = isPublicSlice;
             return this;
         }
 
