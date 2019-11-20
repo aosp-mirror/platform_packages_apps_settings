@@ -23,6 +23,7 @@ import android.os.storage.VolumeInfo;
 
 import androidx.fragment.app.Fragment;
 
+import com.android.settings.R;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageProfileFragment;
 
@@ -35,6 +36,7 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
 
         final Bundle storageBundle = new Bundle();
         storageBundle.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
+        storageBundle.putInt(EXTRA_PROFILE, ProfileSelectFragment.PERSONAL);
 
         final Fragment storageDashboardFragment = new StorageDashboardFragment();
         storageDashboardFragment.setArguments(storageBundle);
@@ -46,7 +48,6 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
                 break;
             }
         }
-        // TODO(b/143330969): Need to think about more profile users case
         if (targetUser != null) {
             storageBundle.putInt(StorageProfileFragment.USER_ID_EXTRA, targetUser.id);
         }
@@ -57,6 +58,11 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
                 storageDashboardFragment,
                 storageProfileFragment
         };
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.storage_summary_donut;
     }
 }
 

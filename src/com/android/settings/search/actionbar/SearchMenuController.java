@@ -42,6 +42,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 public class SearchMenuController implements LifecycleObserver, OnCreateOptionsMenu {
 
     public static final String NEED_SEARCH_ICON_IN_ACTION_BAR = "need_search_icon_in_action_bar";
+    public static final int MENU_SEARCH = Menu.FIRST + 10;
 
     private final Fragment mHost;
     private final int mPageId;
@@ -80,7 +81,11 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
         if (arguments != null && !arguments.getBoolean(NEED_SEARCH_ICON_IN_ACTION_BAR, true)) {
             return;
         }
-        final MenuItem searchItem = menu.add(Menu.NONE, Menu.NONE, 0 /* order */,
+        // menu contains search item, skip it
+        if (menu.findItem(MENU_SEARCH) != null) {
+            return;
+        }
+        final MenuItem searchItem = menu.add(Menu.NONE, MENU_SEARCH, 0 /* order */,
                 R.string.search_menu);
         searchItem.setIcon(R.drawable.ic_search_24dp);
         searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);

@@ -77,8 +77,25 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     }
 
     @Override
+    @CallSuper
     public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context, boolean enabled) {
-        return null;
+        final List<SearchIndexableRaw> dynamicRaws = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
+        if (controllers == null || controllers.isEmpty()) {
+            return dynamicRaws;
+        }
+        for (AbstractPreferenceController controller : controllers) {
+            if (controller instanceof PreferenceControllerMixin) {
+                ((PreferenceControllerMixin) controller).updateDynamicRawDataToIndex(dynamicRaws);
+            } else if (controller instanceof BasePreferenceController) {
+                ((BasePreferenceController) controller).updateDynamicRawDataToIndex(dynamicRaws);
+            } else {
+                Log.e(TAG, controller.getClass().getName()
+                        + " must implement " + PreferenceControllerMixin.class.getName()
+                        + " treating the dynamic indexable");
+            }
+        }
+        return dynamicRaws;
     }
 
     @Override
