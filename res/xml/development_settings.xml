@@ -222,6 +222,11 @@
             android:fragment="com.android.settings.development.compat.PlatformCompatDashboard"
             />
 
+        <SwitchPreference
+            android:key="show_refresh_rate"
+            android:title="@string/show_refresh_rate"
+            android:summary="@string/show_refresh_rate_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
