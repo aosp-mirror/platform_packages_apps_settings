@@ -21,7 +21,6 @@ import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.net.wifi.WifiSsid;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -72,12 +71,12 @@ public class ContextualWifiSlice extends WifiSlice {
     }
 
     private boolean hasWorkingNetwork() {
-        return !TextUtils.equals(getActiveSSID(), WifiSsid.NONE) && hasInternetAccess();
+        return !TextUtils.equals(getActiveSSID(), WifiManager.UNKNOWN_SSID) && hasInternetAccess();
     }
 
     private String getActiveSSID() {
         if (mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
-            return WifiSsid.NONE;
+            return WifiManager.UNKNOWN_SSID;
         }
         return WifiInfo.removeDoubleQuotes(mWifiManager.getConnectionInfo().getSSID());
     }
