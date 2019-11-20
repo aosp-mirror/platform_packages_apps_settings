@@ -36,6 +36,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets.Type;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -544,6 +545,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         params.format = PixelFormat.TRANSLUCENT;
         params.windowAnimations = com.android.internal.R.style.Animation_Toast;
         params.type = WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL;
+        params.setFitWindowInsetsTypes(params.getFitWindowInsetsTypes() & ~Type.statusBars());
         params.setTitle(errorMessage);
         params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
