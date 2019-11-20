@@ -89,9 +89,12 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         mProxySubscriptionMgr.setLifecycle(getLifecycle());
         mProxySubscriptionMgr.addActiveSubscriptionsListener(this);
 
+        final Intent startIntent = getIntent();
         mCurSubscriptionId = savedInstanceState != null
                 ? savedInstanceState.getInt(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
-                : SUB_ID_NULL;
+                : ((startIntent != null)
+                ? startIntent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
+                : SUB_ID_NULL);
 
         final SubscriptionInfo subscription = getSubscription();
         updateTitleAndNavigation(subscription);

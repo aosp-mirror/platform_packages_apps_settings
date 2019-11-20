@@ -35,8 +35,7 @@ import java.util.List;
 /**
  * A proxy to the subscription manager
  */
-public class ProxySubscriptionManager extends SubscriptionManager.OnSubscriptionsChangedListener
-        implements LifecycleObserver {
+public class ProxySubscriptionManager implements LifecycleObserver {
 
     /**
      * Interface for monitor active subscriptions list changing
@@ -65,7 +64,7 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
         if (sSingleton != null) {
             return sSingleton;
         }
-        sSingleton = new ProxySubscriptionManager(context);
+        sSingleton = new ProxySubscriptionManager(context.getApplicationContext());
         return sSingleton;
     }
 
@@ -108,12 +107,6 @@ public class ProxySubscriptionManager extends SubscriptionManager.OnSubscription
                 listener.onChanged();
             }
         }
-    }
-
-    @Override
-    public void onSubscriptionsChanged() {
-        clearCache();
-        notifyAllListeners();
     }
 
     /**
