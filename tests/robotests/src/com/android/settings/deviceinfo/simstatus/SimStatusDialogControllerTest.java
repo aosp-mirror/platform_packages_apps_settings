@@ -70,8 +70,11 @@ import android.telephony.euicc.EuiccManager;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowDeviceInfoUtils;
+import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,10 +83,12 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDeviceInfoUtils.class})
 public class SimStatusDialogControllerTest {
 
     @Mock
@@ -120,11 +125,11 @@ public class SimStatusDialogControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new SimStatusDialogController(mDialog, mLifecycle, 0 /* phone id */));
+        ShadowDeviceInfoUtils.setPhoneNumber("");
         doReturn(mServiceState).when(mController).getCurrentServiceState();
         doReturn(0).when(mSignalStrength).getDbm();
         doReturn(0).when(mSignalStrength).getAsuLevel();
         doReturn(mPhoneStateListener).when(mController).getPhoneStateListener();
-        doReturn("").when(mController).getPhoneNumber();
         doReturn(mSignalStrength).when(mController).getSignalStrength();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(anyInt());
 
@@ -147,6 +152,11 @@ public class SimStatusDialogControllerTest {
         shadowPackageManager.addPackage(sysUIPackageInfo);
     }
 
+    @After
+    public void tearDown() {
+        ShadowDeviceInfoUtils.reset();
+    }
+
     @Test
     public void initialize_updateNetworkProviderWithFoobarCarrier_shouldUpdateCarrierWithFoobar() {
         final CharSequence carrierName = "foobar";
@@ -159,8 +169,10 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updatePhoneNumberWith1111111111_shouldUpdatePhoneNumber() {
-        final String phoneNumber = "1111111111";
-        doReturn(phoneNumber).when(mController).getPhoneNumber();
+        ShadowDeviceInfoUtils.setPhoneNumber("1111111111");
+
+        final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext,
+                mSubscriptionInfo);
 
         mController.initialize();
 
