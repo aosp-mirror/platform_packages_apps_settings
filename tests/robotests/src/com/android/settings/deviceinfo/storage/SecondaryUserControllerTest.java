@@ -29,12 +29,14 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
+import android.util.FeatureFlagUtils;
 import android.util.SparseArray;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawable.UserIconDrawable;
@@ -78,6 +80,8 @@ public class SecondaryUserControllerTest {
         when(mScreen.getContext()).thenReturn(mContext);
         when(mScreen.findPreference(anyString())).thenReturn(mGroup);
         when(mGroup.getKey()).thenReturn(TARGET_PREFERENCE_GROUP_KEY);
+
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE, false);
     }
 
     @Test
@@ -119,7 +123,8 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void secondaryUserAddedIfHasDistinctId() {
+    public void getSecondaryUserControllers_notWorkProfile_addSecondaryUserController() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE, false);
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = 10;
@@ -133,6 +138,25 @@ public class SecondaryUserControllerTest {
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
+    }
+
+    @Test
+    public void getSecondaryUserControllers_workProfile_addNoSecondaryUserController() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE, true);
+        final ArrayList<UserInfo> userInfos = new ArrayList<>();
+        final UserInfo secondaryUser = new UserInfo();
+        secondaryUser.id = 10;
+        secondaryUser.profileGroupId = 101010; // this just has to be something not 0
+        userInfos.add(mPrimaryUser);
+        userInfos.add(secondaryUser);
+        when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
+        when(mUserManager.getUsers()).thenReturn(userInfos);
+        final List<AbstractPreferenceController> controllers =
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
+
+        assertThat(controllers).hasSize(1);
+        assertThat(controllers.get(
+                0) instanceof SecondaryUserController.NoSecondaryUserController).isTrue();
     }
 
     @Test
