@@ -16,14 +16,15 @@
 
 package com.android.settings.dashboard.profileselector;
 
-import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.VolumeInfo;
 
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageProfileFragment;
 
@@ -41,16 +42,11 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
         final Fragment storageDashboardFragment = new StorageDashboardFragment();
         storageDashboardFragment.setArguments(storageBundle);
 
-        UserInfo targetUser = null;
-        for (UserInfo info : UserManager.get(getActivity()).getUsers()) {
-            if (!info.isPrimary()) {
-                targetUser = info;
-                break;
-            }
+        final UserHandle userHandle = Utils.getManagedProfile(UserManager.get(getActivity()));
+        if (userHandle != null) {
+            storageBundle.putInt(StorageProfileFragment.USER_ID_EXTRA, userHandle.getIdentifier());
         }
-        if (targetUser != null) {
-            storageBundle.putInt(StorageProfileFragment.USER_ID_EXTRA, targetUser.id);
-        }
+
         final Fragment storageProfileFragment = new StorageProfileFragment();
         storageProfileFragment.setArguments(storageBundle);
 
