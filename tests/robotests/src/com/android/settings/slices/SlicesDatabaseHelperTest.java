@@ -75,6 +75,7 @@ public class SlicesDatabaseHelperTest {
                 IndexColumns.CONTROLLER,
                 IndexColumns.SLICE_TYPE,
                 IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
+                IndexColumns.PUBLIC_SLICE
         };
 
         assertThat(columnNames).isEqualTo(expectedNames);

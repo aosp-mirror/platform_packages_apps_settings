@@ -190,7 +190,8 @@ public class SecondaryUserController extends AbstractPreferenceController implem
         }
     }
 
-    private static class NoSecondaryUserController extends AbstractPreferenceController implements
+    @VisibleForTesting
+    static class NoSecondaryUserController extends AbstractPreferenceController implements
             PreferenceControllerMixin {
         public NoSecondaryUserController(Context context) {
             super(context);
@@ -214,6 +215,5 @@ public class SecondaryUserController extends AbstractPreferenceController implem
         public String getPreferenceKey() {
             return null;
         }
-
     }
 }

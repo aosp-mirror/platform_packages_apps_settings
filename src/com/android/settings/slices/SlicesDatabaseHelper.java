@@ -36,7 +36,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "slices_index.db";
     private static final String SHARED_PREFS_TAG = "slices_shared_prefs";
 
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
     public interface Tables {
         String TABLE_SLICES_INDEX = "slices_index";
@@ -98,6 +98,11 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
          * The uri of slice.
          */
         String SLICE_URI = "slice_uri";
+
+        /**
+         * Whether the slice should be exposed publicly.
+         */
+        String PUBLIC_SLICE = "public_slice";
     }
 
     private static final String CREATE_SLICES_TABLE =
@@ -124,6 +129,12 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.SLICE_TYPE +
                     ", " +
                     IndexColumns.UNAVAILABLE_SLICE_SUBTITLE +
+                    ", "
+                    +
+                    IndexColumns.PUBLIC_SLICE
+                    +
+                    " INTEGER DEFAULT 0 "
+                    +
                     ");";
 
     private final Context mContext;
