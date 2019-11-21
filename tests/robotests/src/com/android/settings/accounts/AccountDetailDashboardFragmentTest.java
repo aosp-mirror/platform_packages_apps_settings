@@ -151,9 +151,9 @@ public class AccountDetailDashboardFragmentTest {
 
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final Preference preference = new Preference(mContext);
-        dashboardFeatureProvider.bindPreferenceToTile(activity, false /* forceRoundedIcon */,
-                MetricsProto.MetricsEvent.DASHBOARD_SUMMARY, preference, tile, null /* key */,
-                Preference.DEFAULT_ORDER);
+        dashboardFeatureProvider.bindPreferenceToTileAndGetObservers(activity,
+                false /* forceRoundedIcon */, MetricsProto.MetricsEvent.DASHBOARD_SUMMARY,
+                preference, tile, null /* key */, Preference.DEFAULT_ORDER);
 
         assertThat(preference.getKey()).isEqualTo(tile.getKey(mContext));
         preference.performClick();

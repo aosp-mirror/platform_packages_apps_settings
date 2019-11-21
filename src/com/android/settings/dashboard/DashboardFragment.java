@@ -17,11 +17,11 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.CallSuper;
@@ -30,6 +30,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -41,6 +42,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.Indexable;
 
@@ -49,7 +51,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Objects;
 
 /**
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
@@ -60,9 +62,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         BasePreferenceController.UiBlockListener {
     private static final String TAG = "DashboardFragment";
 
+    @VisibleForTesting
+    final ArrayMap<String, List<DynamicDataObserver>> mDashboardTilePrefKeys = new ArrayMap<>();
     private final Map<Class, List<AbstractPreferenceController>> mPreferenceControllers =
             new ArrayMap<>();
-    private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
+    private final List<DynamicDataObserver> mRegisteredObservers = new ArrayList<>();
     private final List<AbstractPreferenceController> mControllers = new ArrayList<>();
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
@@ -171,6 +175,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mListeningToCategoryChange = true;
             ((SettingsBaseActivity) activity).addCategoryListener(this);
         }
+        final ContentResolver resolver = getContentResolver();
+        mDashboardTilePrefKeys.values().stream()
+                .filter(Objects::nonNull)
+                .flatMap(List::stream)
+                .forEach(observer -> {
+                    if (!mRegisteredObservers.contains(observer)) {
+                        registerDynamicDataObserver(resolver, observer);
+                    }
+                });
     }
 
     @Override
@@ -200,6 +213,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onStop() {
         super.onStop();
+        unregisterDynamicDataObservers(new ArrayList<>(mRegisteredObservers));
         if (mListeningToCategoryChange) {
             final Activity activity = getActivity();
             if (activity instanceof SettingsBaseActivity) {
@@ -325,7 +339,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
      * Refresh all preference items, including both static prefs from xml, and dynamic items from
      * DashboardCategory.
      */
-    private void refreshAllPreferences(final String TAG) {
+    private void refreshAllPreferences(final String tag) {
         final PreferenceScreen screen = getPreferenceScreen();
         // First remove old preferences.
         if (screen != null) {
@@ -336,11 +350,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         // Add resource based tiles.
         displayResourceTiles();
 
-        refreshDashboardTiles(TAG);
+        refreshDashboardTiles(tag);
 
         final Activity activity = getActivity();
         if (activity != null) {
-            Log.d(TAG, "All preferences added, reporting fully drawn");
+            Log.d(tag, "All preferences added, reporting fully drawn");
             activity.reportFullyDrawn();
         }
 
@@ -371,64 +385,104 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Refresh preference items backed by DashboardCategory.
      */
-    @VisibleForTesting
-    void refreshDashboardTiles(final String TAG) {
+    private void refreshDashboardTiles(final String tag) {
         final PreferenceScreen screen = getPreferenceScreen();
 
         final DashboardCategory category =
                 mDashboardFeatureProvider.getTilesForCategory(getCategoryKey());
         if (category == null) {
-            Log.d(TAG, "NO dashboard tiles for " + TAG);
+            Log.d(tag, "NO dashboard tiles for " + tag);
             return;
         }
         final List<Tile> tiles = category.getTiles();
         if (tiles == null) {
-            Log.d(TAG, "tile list is empty, skipping category " + category.key);
+            Log.d(tag, "tile list is empty, skipping category " + category.key);
             return;
         }
         // Create a list to track which tiles are to be removed.
-        final List<String> remove = new ArrayList<>(mDashboardTilePrefKeys);
+        final Map<String, List<DynamicDataObserver>> remove = new ArrayMap(mDashboardTilePrefKeys);
 
         // Install dashboard tiles.
         final boolean forceRoundedIcons = shouldForceRoundedIcon();
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {
-                Log.d(TAG, "tile does not contain a key, skipping " + tile);
+                Log.d(tag, "tile does not contain a key, skipping " + tile);
                 continue;
             }
             if (!displayTile(tile)) {
                 continue;
             }
-            if (mDashboardTilePrefKeys.contains(key)) {
+            if (mDashboardTilePrefKeys.containsKey(key)) {
                 // Have the key already, will rebind.
                 final Preference preference = screen.findPreference(key);
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), forceRoundedIcons,
-                        getMetricsCategory(), preference, tile, key,
+                mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(),
+                        forceRoundedIcons, getMetricsCategory(), preference, tile, key,
                         mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
-                final Preference pref = new Preference(getPrefContext());
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), forceRoundedIcons,
-                        getMetricsCategory(), pref, tile, key,
-                        mPlaceholderPreferenceController.getOrder());
+                final Preference pref = createPreference(tile);
+                final List<DynamicDataObserver> observers =
+                        mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(),
+                                forceRoundedIcons, getMetricsCategory(), pref, tile, key,
+                                mPlaceholderPreferenceController.getOrder());
                 screen.addPreference(pref);
-                mDashboardTilePrefKeys.add(key);
+                registerDynamicDataObservers(observers);
+                mDashboardTilePrefKeys.put(key, observers);
             }
             remove.remove(key);
         }
         // Finally remove tiles that are gone.
-        for (String key : remove) {
+        for (Map.Entry<String, List<DynamicDataObserver>> entry : remove.entrySet()) {
+            final String key = entry.getKey();
             mDashboardTilePrefKeys.remove(key);
             final Preference preference = screen.findPreference(key);
             if (preference != null) {
                 screen.removePreference(preference);
             }
+            unregisterDynamicDataObservers(entry.getValue());
         }
     }
 
     @Override
     public void onBlockerWorkFinished(BasePreferenceController controller) {
         mBlockerController.countDown(controller.getPreferenceKey());
+    }
+
+    @VisibleForTesting
+    Preference createPreference(Tile tile) {
+        return tile instanceof ProviderTile
+                ? new SwitchPreference(getPrefContext())
+                : new Preference(getPrefContext());
+    }
+
+    @VisibleForTesting
+    void registerDynamicDataObservers(List<DynamicDataObserver> observers) {
+        if (observers == null || observers.isEmpty()) {
+            return;
+        }
+        final ContentResolver resolver = getContentResolver();
+        observers.forEach(observer -> registerDynamicDataObserver(resolver, observer));
+    }
+
+    private void registerDynamicDataObserver(ContentResolver resolver,
+            DynamicDataObserver observer) {
+        Log.d(TAG, "register observer: @" + Integer.toHexString(observer.hashCode())
+                + ", uri: " + observer.getUri());
+        resolver.registerContentObserver(observer.getUri(), false, observer);
+        mRegisteredObservers.add(observer);
+    }
+
+    private void unregisterDynamicDataObservers(List<DynamicDataObserver> observers) {
+        if (observers == null || observers.isEmpty()) {
+            return;
+        }
+        final ContentResolver resolver = getContentResolver();
+        observers.forEach(observer -> {
+            Log.d(TAG, "unregister observer: @" + Integer.toHexString(observer.hashCode())
+                    + ", uri: " + observer.getUri());
+            mRegisteredObservers.remove(observer);
+            resolver.unregisterContentObserver(observer);
+        });
     }
 }
