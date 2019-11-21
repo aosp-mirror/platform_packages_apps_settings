@@ -206,16 +206,23 @@ public class MobileNetworkUtils {
         String currentCountry = tm.getNetworkCountryIso().toLowerCase();
         String supportedCountries =
                 Settings.Global.getString(cr, Settings.Global.EUICC_SUPPORTED_COUNTRIES);
+        final String unsupportedCountries =
+                Settings.Global.getString(cr, Settings.Global.EUICC_UNSUPPORTED_COUNTRIES);
+
         boolean inEsimSupportedCountries = false;
-        if (TextUtils.isEmpty(currentCountry)) {
-            inEsimSupportedCountries = true;
-        } else if (!TextUtils.isEmpty(supportedCountries)) {
-            List<String> supportedCountryList =
-                    Arrays.asList(TextUtils.split(supportedCountries.toLowerCase(), ","));
-            if (supportedCountryList.contains(currentCountry)) {
-                inEsimSupportedCountries = true;
-            }
+
+        if (TextUtils.isEmpty(supportedCountries)) {
+            // White list is empty, use blacklist.
+            Log.d(TAG, "Using blacklist unsupportedCountries=" + unsupportedCountries);
+            inEsimSupportedCountries = !isEsimUnsupportedCountry(currentCountry,
+                    unsupportedCountries);
+        } else {
+            Log.d(TAG, "Using whitelist supportedCountries=" + supportedCountries);
+            inEsimSupportedCountries = isEsimSupportedCountry(currentCountry, supportedCountries);
         }
+
+        Log.d(TAG, "inEsimSupportedCountries=" + inEsimSupportedCountries);
+
         final boolean esimIgnoredDevice =
                 Arrays.asList(TextUtils.split(SystemProperties.get(KEY_ESIM_CID_IGNORE, ""), ","))
                         .contains(SystemProperties.get(KEY_CID, null));
@@ -590,5 +597,25 @@ public class MobileNetworkUtils {
             return null;
         }
         return tm.getNetworkOperatorName();
+    }
+
+    private static boolean isEsimSupportedCountry(String country, String countriesListString) {
+        if (TextUtils.isEmpty(country)) {
+            return true;
+        } else if (TextUtils.isEmpty(countriesListString)) {
+            return false;
+        }
+        final List<String> supportedCountries =
+                Arrays.asList(TextUtils.split(countriesListString.toLowerCase(), ","));
+        return supportedCountries.contains(country);
+    }
+
+    private static boolean isEsimUnsupportedCountry(String country, String countriesListString) {
+        if (TextUtils.isEmpty(country) || TextUtils.isEmpty(countriesListString)) {
+            return false;
+        }
+        final List<String> unsupportedCountries =
+                Arrays.asList(TextUtils.split(countriesListString.toLowerCase(), ","));
+        return unsupportedCountries.contains(country);
     }
 }
