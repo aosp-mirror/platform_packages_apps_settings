@@ -32,7 +32,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.display.darkmode.DarkModePreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -99,7 +98,7 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
 
     private void showDarkModeDialog() {
         final DarkUIInfoDialogFragment frag = new DarkUIInfoDialogFragment();
-        if (mFragment.getFragmentManager() != null) {
+        if (mFragment != null && mFragment.getFragmentManager() != null) {
             frag.show(mFragment.getFragmentManager(), getClass().getName());
         }
     }
