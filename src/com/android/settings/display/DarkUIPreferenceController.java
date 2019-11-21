@@ -99,7 +99,7 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
 
     private void showDarkModeDialog() {
         final DarkUIInfoDialogFragment frag = new DarkUIInfoDialogFragment();
-        if (mFragment.getFragmentManager() != null) {
+        if (mFragment != null && mFragment.getFragmentManager() != null) {
             frag.show(mFragment.getFragmentManager(), getClass().getName());
         }
     }
