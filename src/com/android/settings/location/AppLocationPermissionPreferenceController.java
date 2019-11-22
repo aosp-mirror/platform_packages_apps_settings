@@ -16,7 +16,6 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +24,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AppLocationPermissionPreferenceController extends
         LocationBasePreferenceController implements PreferenceControllerMixin {
 
-    private static final String KEY_APP_LEVEL_PERMISSIONS = "app_level_permissions";
     /** Total number of apps that has location permission. */
     @VisibleForTesting
     int mNumTotal = -1;
@@ -40,20 +38,16 @@ public class AppLocationPermissionPreferenceController extends
     private final LocationManager mLocationManager;
     private Preference mPreference;
 
-    public AppLocationPermissionPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, lifecycle);
+    public AppLocationPermissionPreferenceController(Context context, String key) {
+        super(context, key);
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_APP_LEVEL_PERMISSIONS;
-    }
-
-    @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED, 1) == 1;
+                Settings.Global.LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED, 1) == 1 ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

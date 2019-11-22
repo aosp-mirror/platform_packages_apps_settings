@@ -17,6 +17,7 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.os.UserManager;
+import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -25,25 +26,18 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class LocationForWorkPreferenceController extends LocationBasePreferenceController {
 
-    /**
-     * Key for managed profile location switch preference. Shown only
-     * if there is a managed profile.
-     */
-    private static final String KEY_MANAGED_PROFILE_SWITCH = "managed_profile_location_switch";
-
     private RestrictedSwitchPreference mPreference;
 
-    public LocationForWorkPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, lifecycle);
+    public LocationForWorkPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_MANAGED_PROFILE_SWITCH.equals(preference.getKey())) {
+        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             final boolean switchState = mPreference.isChecked();
             mUserManager.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, !switchState,
                     Utils.getManagedProfile(mUserManager));
@@ -57,19 +51,14 @@ public class LocationForWorkPreferenceController extends LocationBasePreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY_MANAGED_PROFILE_SWITCH);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         // Looking for a managed profile. If there are no managed profiles then we are removing the
         // managed profile category.
-        return Utils.getManagedProfile(mUserManager) != null;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_MANAGED_PROFILE_SWITCH;
+        return Utils.getManagedProfile(mUserManager) != null ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

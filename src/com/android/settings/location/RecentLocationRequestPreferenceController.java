@@ -26,18 +26,13 @@ import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.List;
 
 public class RecentLocationRequestPreferenceController extends LocationBasePreferenceController {
-    /** Key for preference category "Recent location requests" */
-    private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
-    @VisibleForTesting
-    static final String KEY_SEE_ALL_BUTTON = "recent_location_requests_see_all_button";
-    private final LocationSettings mFragment;
+
     private final RecentLocationApps mRecentLocationApps;
     private PreferenceCategory mCategoryRecentLocationRequests;
 
@@ -70,29 +65,15 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
         }
     }
 
-    public RecentLocationRequestPreferenceController(Context context, LocationSettings fragment,
-            Lifecycle lifecycle) {
-        this(context, fragment, lifecycle, new RecentLocationApps(context));
-    }
-
-    @VisibleForTesting
-    RecentLocationRequestPreferenceController(Context context, LocationSettings fragment,
-            Lifecycle lifecycle, RecentLocationApps recentApps) {
-        super(context, lifecycle);
-        mFragment = fragment;
-        mRecentLocationApps = recentApps;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_RECENT_LOCATION_REQUESTS;
+    public RecentLocationRequestPreferenceController(Context context, String key) {
+        super(context, key);
+        mRecentLocationApps = new RecentLocationApps(context);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mCategoryRecentLocationRequests =
-                (PreferenceCategory) screen.findPreference(KEY_RECENT_LOCATION_REQUESTS);
+        mCategoryRecentLocationRequests = screen.findPreference(getPreferenceKey());
     }
 
     @Override

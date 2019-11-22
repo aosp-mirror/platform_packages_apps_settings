@@ -70,7 +70,7 @@ public class LocationFooterPreferenceControllerTest {
         Context context = spy(RuntimeEnvironment.application);
         when(context.getPackageManager()).thenReturn(mPackageManager);
         when(mPreferenceCategory.getContext()).thenReturn(context);
-        mController = spy(new LocationFooterPreferenceController(context));
+        mController = spy(new LocationFooterPreferenceController(context, "key"));
         when(mPackageManager.getResourcesForApplication(any(ApplicationInfo.class)))
                 .thenReturn(mResources);
         when(mResources.getString(TEST_RES_ID)).thenReturn(TEST_TEXT);

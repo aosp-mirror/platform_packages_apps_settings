@@ -38,7 +38,7 @@ public class LocationScanningPreferenceControllerTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new LocationScanningPreferenceController(mContext);
+        mController = new LocationScanningPreferenceController(mContext, "key");
     }
 
     @Test

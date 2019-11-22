@@ -15,6 +15,9 @@
  */
 package com.android.settings.location;
 
+import static com.android.settings.location.LocationServicePreferenceController.KEY_LOCATION_SERVICES;
+import static com.android.settings.location.LocationServicePreferenceController.KEY_LOCATION_SERVICES_MANAGED;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -59,8 +62,6 @@ import java.util.Map;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)
 public class LocationServicePreferenceControllerTest {
-    private static final String LOCATION_SERVICES_MANAGED_PROFILE_KEY =
-            "location_services_managed_profile";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocationSettings mFragment;
@@ -86,14 +87,16 @@ public class LocationServicePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = spy(new LocationServicePreferenceController(
-                mContext, mFragment, mLifecycle, mSettingsInjector));
+        mController = spy(new LocationServicePreferenceController(mContext, KEY_LOCATION_SERVICES));
+        when(mFragment.getSettingsLifecycle()).thenReturn(mLifecycle);
+        mController.init(mFragment);
+        mController.mInjector = mSettingsInjector;
         final String key = mController.getPreferenceKey();
         when(mScreen.findPreference(key)).thenReturn(mCategoryPrimary);
-        when(mScreen.findPreference(LOCATION_SERVICES_MANAGED_PROFILE_KEY)).thenReturn(
+        when(mScreen.findPreference(KEY_LOCATION_SERVICES_MANAGED)).thenReturn(
                 mCategoryManaged);
         when(mCategoryPrimary.getKey()).thenReturn(key);
-        when(mCategoryManaged.getKey()).thenReturn(LOCATION_SERVICES_MANAGED_PROFILE_KEY);
+        when(mCategoryManaged.getKey()).thenReturn(KEY_LOCATION_SERVICES_MANAGED);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
     }

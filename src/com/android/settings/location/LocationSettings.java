@@ -29,12 +29,9 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -82,6 +79,17 @@ public class LocationSettings extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        use(AppLocationPermissionPreferenceController.class).init(this);
+        use(RecentLocationRequestPreferenceController.class).init(this);
+        use(LocationServicePreferenceController.class).init(this);
+        use(LocationFooterPreferenceController.class).init(this);
+        use(LocationForWorkPreferenceController.class).init(this);
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.location_settings;
     }
@@ -89,11 +97,6 @@ public class LocationSettings extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, this, getSettingsLifecycle());
     }
 
     static void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {
@@ -110,29 +113,9 @@ public class LocationSettings extends DashboardFragment {
         return R.string.help_url_location_access;
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context, LocationSettings fragment, Lifecycle lifecycle) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AppLocationPermissionPreferenceController(context, lifecycle));
-        controllers.add(new LocationForWorkPreferenceController(context, lifecycle));
-        controllers.add(new RecentLocationRequestPreferenceController(context, fragment, lifecycle));
-        controllers.add(new LocationScanningPreferenceController(context));
-        controllers.add(new LocationServicePreferenceController(context, fragment, lifecycle));
-        controllers.add(new LocationFooterPreferenceController(context));
-        return controllers;
-    }
-
     /**
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.location_settings) {
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(Context
-                        context) {
-                    return buildPreferenceControllers(context, null /* fragment */,
-                            null /* lifecycle */);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.location_settings);
 }

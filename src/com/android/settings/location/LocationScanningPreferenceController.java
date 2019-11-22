@@ -19,19 +19,14 @@ package com.android.settings.location;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 
 public class LocationScanningPreferenceController extends BasePreferenceController {
-    @VisibleForTesting static final String KEY_LOCATION_SCANNING = "location_scanning";
-    private final Context mContext;
 
-    public LocationScanningPreferenceController(Context context) {
-        super(context, KEY_LOCATION_SCANNING);
-        mContext = context;
+    public LocationScanningPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
