@@ -22,6 +22,9 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.ProvisioningManager;
+import android.telephony.ims.feature.MmTelFeature;
+import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,11 +103,11 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         if (mSil == null) {
             return;
         }
-        Intent intent = getActivity().getIntent();
+        final Intent intent = getActivity().getIntent();
         if (intent == null) {
             return;
         }
-        int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+        final int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         if (SubscriptionManager.isValidSubscriptionId(subId)) {
             for (SubscriptionInfo subInfo : mSil) {
@@ -168,7 +171,7 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
             args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
             args.putInt(WifiCallingSettingsForSub.FRAGMENT_BUNDLE_SUBID,
                     mSil.get(position).getSubscriptionId());
-            WifiCallingSettingsForSub fragment = new WifiCallingSettingsForSub();
+            final WifiCallingSettingsForSub fragment = new WifiCallingSettingsForSub();
             fragment.setArguments(args);
 
             return fragment;
@@ -195,14 +198,21 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
 
     @VisibleForTesting
     boolean isWfcEnabledByPlatform(SubscriptionInfo info) {
-        ImsManager imsManager = ImsManager.getInstance(getActivity(), info.getSimSlotIndex());
+        final ImsManager imsManager = ImsManager.getInstance(getActivity(),
+                info.getSimSlotIndex());
         return imsManager.isWfcEnabledByPlatform();
     }
 
     @VisibleForTesting
     boolean isWfcProvisionedOnDevice(SubscriptionInfo info) {
-        ImsManager imsManager = ImsManager.getInstance(getActivity(), info.getSimSlotIndex());
-        return imsManager.isWfcProvisionedOnDevice();
+        final ProvisioningManager provisioningMgr =
+                ProvisioningManager.createForSubscriptionId(info.getSubscriptionId());
+        if (provisioningMgr == null) {
+            return true;
+        }
+        return provisioningMgr.getProvisioningStatusForCapability(
+                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                ImsRegistrationImplBase.REGISTRATION_TECH_IWLAN);
     }
 
     private void updateSubList() {
