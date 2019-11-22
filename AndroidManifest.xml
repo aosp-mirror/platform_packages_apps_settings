@@ -3053,6 +3053,18 @@
                 </intent-filter>
         </activity>
 
+        <activity android:name=".wifi.addappnetworks.AddAppNetworksActivity"
+                  android:label="@string/settings_panel_title"
+                  android:theme="@style/Theme.Panel"
+                  android:launchMode="singleInstance"
+                  android:excludeFromRecents="true"
+                  android:permission="android.permission.CHANGE_WIFI_STATE">
+            <intent-filter>
+                <action android:name="android.settings.WIFI_ADD_NETWORKS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity-alias
             android:name="MediaOutputSlice"
             android:label="@string/media_output_panel_title"
