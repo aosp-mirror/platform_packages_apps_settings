@@ -2917,6 +2917,40 @@
     <!-- Night display slice screen, subtitle of intensity setting when night light is off. [CHAR LIMIT=30] -->
     <string name="night_display_not_currently_on">Night Light not currently on</string>
 
+    <!--    Dark ui screen-->
+    <!-- Display settings screen, activation button action for manual mode. [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_on_manual">Turn on now</string>
+    <!-- Display settings screen, deactivation button action for manual mode. [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_off_manual">Turn off now</string>
+    <!-- Display settings screen, activation button action for sunset-to-sunrise schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_on_auto">Turn on until sunrise</string>
+    <!-- Display settings screen, deactivation button action for sunset-to-sunrise schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_off_auto">Turn off until sunset</string>
+    <!-- Dark UI screen, setting option name to enable Dark UI [CHAR LIMIT=30] -->
+    <string name="dark_ui_title">Dark Mode</string>
+    <!-- Dark UI screen, setting option name to configure whether Dark UI turn on/off automatically. [CHAR LIMIT=30] -->
+    <string name="dark_ui_auto_mode_title">Schedule</string>
+    <!-- Dark UI screen, setting option value for Dark UI to *never* turn on/off automatically. [CHAR LIMIT=30] -->
+    <string name="dark_ui_auto_mode_never">None</string>
+    <!-- Dark UIscreen, setting option value for Dark UI to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=32] -->
+    <string name="dark_ui_auto_mode_auto">Turns on from sunset to sunrise</string>
+    <!-- Dark UIscreen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
+    <string name="dark_ui_status_title">Status</string>
+    <!-- Display settings screen, summary format of Dark UI when off. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of Dark UI when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_never">Will never turn on automatically</string>
+    <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
+    <!-- Display settings screen, summary format of Dark UI when on. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
+    <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_auto">Will turn off automatically at sunrise</string>
+    <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_text">Dark theme uses true black to help keep your battery alive longer. Dark theme schedules wait to turn on until your screen is off.</string>
+
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Screen timeout</string>
     <!-- Sound & display settings screen, setting option name to change screen timeout [CHAR LIMIT=30] -->
@@ -7040,6 +7074,7 @@
     <string name="help_url_connected_devices" translatable="false"></string>
     <string name="help_url_apps_and_notifications" translatable="false"></string>
     <string name="help_url_night_display" translatable="false"></string>
+    <string name="help_url_dark_theme" translatable="false"></string>
     <string name="help_url_screen_saver" translatable="false"></string>
     <string name="help_url_pickup_gesture" translatable="false"></string>
     <string name="help_url_storage_dashboard" translatable="false"></string>
