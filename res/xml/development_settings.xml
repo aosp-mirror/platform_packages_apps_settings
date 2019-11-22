@@ -226,6 +226,13 @@
             android:fragment="com.android.settings.development.gamedriver.GameDriverDashboard"
             settings:searchable="false" />
 
+        <Preference
+            android:key="platform_compat_dashboard"
+            android:title="@string/platform_compat_dashboard_title"
+            android:summary="@string/platform_compat_dashboard_summary"
+            android:fragment="com.android.settings.development.compat.PlatformCompatDashboard"
+            />
+
     </PreferenceCategory>
 
     <PreferenceCategory
