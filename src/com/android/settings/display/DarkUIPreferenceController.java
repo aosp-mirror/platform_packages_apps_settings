@@ -21,6 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.os.PowerManager;
 import android.provider.Settings;
 
@@ -28,10 +29,10 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.display.darkmode.DarkModePreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -44,7 +45,7 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
     public static final int DIALOG_SEEN = 1;
 
     @VisibleForTesting
-    SwitchPreference mPreference;
+    Preference mPreference;
 
     private UiModeManager mUiModeManager;
     private PowerManager mPowerManager;
@@ -68,7 +69,8 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
 
     @Override
     public boolean isChecked() {
-        return mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES;
+         return (mContext.getResources().getConfiguration().uiMode
+                 & Configuration.UI_MODE_NIGHT_YES) != 0;
     }
 
     @Override
@@ -92,10 +94,7 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
             showDarkModeDialog();
             return false;
         }
-        mUiModeManager.setNightMode(isChecked
-                ? UiModeManager.MODE_NIGHT_YES
-                : UiModeManager.MODE_NIGHT_NO);
-        return true;
+        return mUiModeManager.setNightModeActivated(isChecked);
     }
 
     private void showDarkModeDialog() {
@@ -113,12 +112,10 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
         boolean isBatterySaver = isPowerSaveMode();
         mPreference.setEnabled(!isBatterySaver);
         if (isBatterySaver) {
-            int stringId = mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES
+            int stringId = isChecked()
                     ? R.string.dark_ui_mode_disabled_summary_dark_theme_on
                     : R.string.dark_ui_mode_disabled_summary_dark_theme_off;
             mPreference.setSummary(mContext.getString(stringId));
-        } else {
-            mPreference.setSummary(null);
         }
     }
 
@@ -127,20 +124,15 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
         return mPowerManager.isPowerSaveMode();
     }
 
-
-    @VisibleForTesting
-    void setUiModeManager(UiModeManager uiModeManager) {
-        mUiModeManager = uiModeManager;
-    }
-
-    public void setParentFragment(Fragment fragment) {
-        mFragment = fragment;
-    }
-
     @Override
     public void onStart() {
         mContext.registerReceiver(mReceiver,
                 new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+    }
+
+    // used by AccessibilitySettings
+    public void setParentFragment(Fragment fragment) {
+        mFragment = fragment;
     }
 
     @Override
