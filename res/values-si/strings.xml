@@ -1197,6 +1197,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> තෙක් ක්‍රියාත්මක කරන්න"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> තෙක් ක්‍රියාවිරහිත කරන්න"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"දැනට රාත්‍රී ආලෝකය සක්‍රීය නැත"</string>
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"දැන් ක්‍රියාත්මක කරන්න"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"දැන් ක්‍රියාවිරහිත කරන්න"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"හිරු බැස යන තෙක් ක්‍රියාත්මක කරන්න"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"හිරු බැස යන තෙක් ක්‍රියාවිරහිත කරන්න"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"අඳුරු ප්‍රකාරය"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"කාලසටහන්ගත කරන්න"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"කිසිවක් නැත"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"හිරු බැසීම සිට නැගීම තෙක් ක්‍රි."</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"තත්ත්වය"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"ක්‍රියාවිරහිතයි / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"කිසි විටෙක ස්වයංක්‍රියව ක්‍රියාත්මක නොකරනු ඇත"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"හිරු බැස යාමේදී ස්වයංක්‍රියව ක්‍රියාත්මක කරනු ඇත"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"ක්‍රියාත්මකයි / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"කිසි විටෙක ස්වයංක්‍රියව ක්‍රියාවිරහිත නොකරනු ඇත"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"හිරු නැගීමේදී ස්වයංක්‍රියව ක්‍රියාවිරහිත කරනු ඇත"</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"අඳුරු තේමාව ඔබේ බැටරිය දිගු කාලයක් පවත්වා ගැනීමට සැබෑ කලු භාවිත කරයි. අඳුරු තේමා කාල සටහන් ක්‍රියාත්මක වීමට ඔබගේ තිරය ක්‍රියාවිරහිත වන තෙක් රැඳී සිටී."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"තිර කල් ඉකුත්වීම"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"තිරය අක්‍රිය කරන්න"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"අක්‍රියතාවයෙන් <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> පසු"</string>
@@ -4099,6 +4115,8 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"බැටරි සුරැකුම හේතුවෙන් තාවකාලිකව සක්‍රීය කළා"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"සහය දැක්වෙන යෙදුම් අඳුරු තේමාවට ද මාරු වෙති"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"තේරුණා"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"අඳුරු තේමාව උත්සාහ කරන්න"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"බැටරි ආයු කාලය දීර්ඝ කිරීමට උදව් වේ"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"ඉක්මන් සැකසීම් සංවර්ධක ටයිල්"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope හෝඩුවාව"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"සංවේදක අක්‍රියයි"</string>
@@ -4521,10 +4539,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"ගුවන් යානා ප්‍රකාරයේදී නොලැබේ"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"වැඩතල ප්‍රකාරය බල කරන්න"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"ද්විතීයික සංදර්ශන කෙරෙහි අත්හදා බැලීමේ වැඩතල ප්‍රකාරය බල කරන්න"</string>
-    <!-- no translation found for enable_sizecompat_freeform (3799755160777404309) -->
-    <skip />
-    <!-- no translation found for enable_sizecompat_freeform_summary (1484050174538201499) -->
-    <skip />
+    <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"නිදහස් ආකෘති සංගත තරම සබල කරන්න"</string>
+    <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"sizecompat යෙදුම්වලට නිදහස් ආකෘතියෙන් තිබීමට ඉඩ දෙන්න"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"force-dark ප්‍රතික්ෂේප කරන්න"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"force-dark විශේෂාංගය සැම විට ක්‍රියාත්මකව තිබීමට ප්‍රතික්ෂේප කරයි"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"රහස්‍යතාව"</string>

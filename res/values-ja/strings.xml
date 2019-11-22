@@ -51,8 +51,7 @@
     <string name="font_size_summary" msgid="1296835853522566260">"画面上のテキストのサイズを変更します。"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"拡大"</string>
-    <!-- no translation found for font_size_preview_text (5578792111916168343) -->
-    <skip />
+    <string name="font_size_preview_text" msgid="5578792111916168343">"Servez à ce monsieur une bière et des kiwis."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"サンプル テキスト"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"オズの魔法使い"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"第 11 章: オズの不思議なエメラルド シティ"</string>
@@ -1198,6 +1197,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> まで ON にする"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> まで OFF にする"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"夜間モードは現在 OFF です"</string>
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"今すぐ ON にする"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"OFF にする"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"日の出まで ON"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"日の入りまで OFF"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"ダークモード"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"スケジュール"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"なし"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"日の入りから日の出まで ON"</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"ステータス"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"OFF / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"自動で ON にしない"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"日の入りに自動的に ON"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"ON / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"自動で OFF にしない"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"日の出に自動的に OFF"</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"ダークテーマではトゥルー ブラックを使用するため、電池が長持ちします。画面が OFF になるまでダークテーマが ON にならないように設定できます。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面消灯"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"画面がOFFになったとき"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
@@ -3397,8 +3412,7 @@
     <string name="notification_assistant_title" msgid="6983941403582134437">"通知の自動調整"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"なし"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"通知へのアクセスをリクエストしたインストール済みアプリはありません。"</string>
-    <!-- no translation found for notification_access_detail_switch (46386786409608330) -->
-    <skip />
+    <string name="notification_access_detail_switch" msgid="46386786409608330">"通知へのアクセスを許可"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"通知へのアクセスを<xliff:g id="SERVICE">%1$s</xliff:g>に許可しますか？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="3119843404577399036">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>はすべての通知を読み取ることができます。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を変更または非表示にしたり、通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g>での通知へのアクセスを許可しますか？"</string>
@@ -4101,6 +4115,8 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"バッテリー セーバーにより一時的に有効になりました"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"サポートされているアプリもダークテーマに切り替わります"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"ダークテーマをお試しください"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"電池が長持ちします"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"クイック設定開発者用タイル"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"ウィンスコープ トレース"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"センサー OFF"</string>
@@ -4523,10 +4539,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"機内モードの間は使用できません"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"デスクトップ モードに強制的に切り替え"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"セカンダリ ディスプレイで試験運用版デスクトップ モードに強制的に切り替えます"</string>
-    <!-- no translation found for enable_sizecompat_freeform (3799755160777404309) -->
-    <skip />
-    <!-- no translation found for enable_sizecompat_freeform_summary (1484050174538201499) -->
-    <skip />
+    <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"サイズが小さいアプリのフリーフォームを有効にする"</string>
+    <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"サイズが小さいアプリの表示をフリーフォームで許可"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"フォースダークのオーバーライド"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"フォースダーク機能をオーバーライドして常に ON にする"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"プライバシー"</string>
