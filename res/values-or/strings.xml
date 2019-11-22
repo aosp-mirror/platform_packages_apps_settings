@@ -1197,6 +1197,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> ପର୍ଯ୍ୟନ୍ତ ଚାଲୁ ରଖନ୍ତୁ"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> ପର୍ଯ୍ୟନ୍ତ ବନ୍ଦ ରଖନ୍ତୁ"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"ରାତି ଆଲୋକ ବର୍ତ୍ତମାନ ଚାଲୁ ନାହିଁ"</string>
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"ବର୍ତ୍ତମାନ ଚାଲୁ କରନ୍ତୁ"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"ବର୍ତ୍ତମାନ ବନ୍ଦ କରନ୍ତୁ"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"ସକାଳ ପର୍ଯ୍ୟନ୍ତ ଚାଲୁ ରଖନ୍ତୁ"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"ସନ୍ଧ୍ୟା ପର୍ଯ୍ୟନ୍ତ ବନ୍ଦ ରଖନ୍ତୁ"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"ଡାର୍କ ମୋଡ୍"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"ସମୟ ନିର୍ଦ୍ଧାରଣ କରନ୍ତୁ"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"କିଛି ନାହିଁ"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"ସନ୍ଧ୍ୟାରୁ ସକାଳ ଯାଏଁ ଚାଲୁ ରହେ"</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"ସ୍ଥିତି"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"ବନ୍ଦ ଅଛି / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"କେବେ ବି ସ୍ୱଚାଳିତ ଭାବେ ଚାଲୁ ହେବ ନାହିଁ"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"ସନ୍ଧ୍ୟାରେ ସ୍ୱଚାଳିତ ଭାବେ ଚାଲୁ ହେବ"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"ଚାଲୁ ଅଛି / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"କେବେ ବି ସ୍ୱଚାଳିତ ଭାବେ ବନ୍ଦ ହେବନାହିଁ"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"ସକାଳେ ସ୍ୱଚାଳିତ ଭାବେ ବନ୍ଦ ହେବ"</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"ଆପଣଙ୍କ ବ୍ୟାଟେରୀକୁ ଅଧିକ ସମୟ ସକ୍ରିୟ ରଖିବାକୁ ଗାଢ଼ା ଥିମ୍, କଳା ରଙ୍ଗ ବ୍ୟବହାର କରିଥାଏ। ଆପଣଙ୍କ ସ୍କ୍ରିନ୍ ବନ୍ଦ ହେବା ପରେ ଗାଢ଼ା ଥିମ୍ ଚାଲୁ ହେବା ପାଇଁ ସମୟ ନିର୍ଦ୍ଧାରିତ ହୋଇଥାଏ।"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ସ୍କ୍ରିନ୍ ସମୟ ସମାପ୍ତିର ଅବଧି"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"ସ୍କ୍ରୀନ୍‌ ବନ୍ଦ‌ ହୁଏ"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"ନିଷ୍କ୍ରିୟତାର <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ପରେ"</string>
@@ -3375,8 +3391,7 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"ବିନା ସାଉଣ୍ଡ କିମ୍ବା ଭାଇବ୍ରେସନ୍‌ରେ ଆପଣଙ୍କୁ ଫୋକସ୍ କରିବାରେ ସାହାଯ୍ୟ କରେ"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"ସାଉଣ୍ଡ କିମ୍ବା ଭାଇବ୍ରେସନ୍ ମାଧ୍ୟମରେ ଆପଣଙ୍କର ଧ୍ୟାନ ଆକର୍ଷିତ କରିଥାଏ"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"ଡିଭାଇସ୍ ଅନ୍‌ଲକ୍ ଥିବା ବେଳେ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ ସ୍କ୍ରିନ୍‌ର ଉପର ପାର୍ଶ୍ୱରେ ବ୍ୟାନର୍ ଭଳି ଦେଖାଯିବ"</string>
-    <!-- no translation found for notification_switch_label (6022236996552304892) -->
-    <skip />
+    <string name="notification_switch_label" msgid="6022236996552304892">"ସମସ୍ତ <xliff:g id="APP_NAME">%1$s</xliff:g> ବିଜ୍ଞପ୍ତି"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ଆଡେପ୍ଟିଭ୍ ନୋଟିଫିକେସନ୍"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">ପ୍ରତି ବିଜ୍ଞପ୍ତି ~<xliff:g id="NUMBER_1">%d</xliff:g>ଟି ବିଜ୍ଞପ୍ତି</item>
@@ -3397,8 +3412,7 @@
     <string name="notification_assistant_title" msgid="6983941403582134437">"ଆଡେପ୍ଟିଭ୍ ନୋଟିଫିକେସନ୍"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"କିଛିନାହିଁ"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"ଇନ୍‌ଷ୍ଟଲ୍‌ କରାଯାଇଥିବା କୌଣସି ଆପ୍‌ ବିଜ୍ଞପ୍ତି ଆକସେସ୍‌ କରିବାର ଅନୁରୋଧ କରିନାହିଁ।"</string>
-    <!-- no translation found for notification_access_detail_switch (46386786409608330) -->
-    <skip />
+    <string name="notification_access_detail_switch" msgid="46386786409608330">"ବିଜ୍ଞପ୍ତି ଆକ୍ସେସ୍ କରିବା ପାଇଁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> ପାଇଁ ବିଜ୍ଞପ୍ତି ଆକ୍ସେସ୍‌ର ଅନୁମତି ଦେବେ?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="3119843404577399036">"ଯୋଗାଯୋଗ ନାମଗୁଡ଼ିକ ଏବଂ ଆପଣ ପ୍ରାପ୍ତ କରୁଥିବା ମେସେଜର ଟେକ୍ସଟ୍‌ ସାମିଲ୍‌ କରି <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> ସମସ୍ତ ବିଜ୍ଞପ୍ତି ପଢ଼ିପାରିବ। ଏହା ସେଥିରେ ଥିବା ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ କିମ୍ବା ଟ୍ରିଗର୍‌ କାର୍ଯ୍ୟ ବଟନ୍‌‌ଗୁଡ଼ିକ ମଧ୍ୟ ପରିବର୍ତ୍ତନ ବା ଖାରଜ କରିପାରିବ। \n\nବିରକ୍ତ କରନ୍ତୁ ନାହିଁ ଚାଲୁ କିମ୍ବା ବନ୍ଦ କରିବା ଏବଂ ଏହା ସମ୍ବନ୍ଧୀୟ ସେଟିଙ୍ଗ ପରିବର୍ତ୍ତନ କରିବାର କ୍ଷମତା ମଧ୍ୟ ଆପକୁ ଦେବ।"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> ପାଇଁ ବିଜ୍ଞପ୍ତି ଆକ୍ସେସ୍‌ର ଅନୁମତି ଦେବେ?"</string>
@@ -4101,6 +4115,8 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"ବ୍ୟାଟେରୀ ସେଭର୍ ଯୋଗୁଁ ଅସ୍ଥାୟୀରୂପେ ଚାଲୁ କରାଯାଇଛି"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"ସମର୍ଥିତ ଆପ୍ସରେ ମଧ୍ୟ ଗାଢ଼ା ଥିମ୍ ବ୍ୟବହାର ହେବ"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"ବୁଝିଗଲି"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"ଗାଢ଼ ଥିମ୍ ବ୍ୟବହାର କରି ଦେଖନ୍ତୁ"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ବ୍ୟାଟେରୀ ଲାଇଫ୍ ବଢ଼ାଇବାରେ ସାହାଯ୍ୟ କରିଥାଏ"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"ତ୍ୱରିତ ସେଟିଙ୍ଗ ଡେଭେଲପର୍‌ ଟାଇଲ୍ସ"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope ଟ୍ରେସ୍"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"ସେନ୍ସର୍‍ଗୁଡ଼ିକ ବନ୍ଦ ଅଛି"</string>
@@ -4523,10 +4539,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"ଏୟାରପ୍ଲେନ୍‌ ମୋଡ୍‌ ସମୟରେ ଉପଲବ୍ଧ ନୁହେଁ"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"ଫୋର୍ସ ଡେସ୍କଟପ୍‍ ମୋଡ୍‍"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"ଦ୍ବିତୀୟ ପ୍ରଦର୍ଶନରେ ଫୋର୍ସ ପରୀକ୍ଷାମୂଳକ ମୋଡ୍‍"</string>
-    <!-- no translation found for enable_sizecompat_freeform (3799755160777404309) -->
-    <skip />
-    <!-- no translation found for enable_sizecompat_freeform_summary (1484050174538201499) -->
-    <skip />
+    <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"ଫ୍ରିଫର୍ମ ସାଇଜ୍‍କମ୍ପାଟ୍ ସକ୍ଷମ କରନ୍ତୁ"</string>
+    <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"ଫ୍ରିଫର୍ମ‍ରେ ରଖିବା ପାଇଁ ସାଇଜ୍‍କମ୍ପାଟ୍ ଆପ୍ସ ଅନୁମତି କରିଥାଏ"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"ଫୋର୍ସ୍-ଡାର୍କ୍ ଓଭର୍‍ରାଇଡ୍ କରନ୍ତୁ"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"ଫୋର୍ସ-ଡାର୍କ ଫିଚର୍‍ ସଦାବେଳେ ଚାଲୁ ରହିବା ଓଭର୍‍ରାଇଡ୍ କରିଥାଏ"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"ଗୋପନୀୟତା"</string>

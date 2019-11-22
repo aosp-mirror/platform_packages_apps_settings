@@ -1197,6 +1197,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> чейин күйгүзүлсүн"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> чейин өчүрүлсүн"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Түнкү режим учурда өчүк"</string>
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Азыр күйгүзүү"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Азыр өчүрүү"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Күн чыкканга чейин күйгүзүлсүн"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"Күн батканга чейин өчүрүлсүн"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"Түнкү режим"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"График"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Жок"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Күн баткандан чыкканга чейин"</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"Абалы"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"Өчүк / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Эч качан автоматтык түрдө күйбөйт"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Күн батканда автоматтык түрдө күйөт"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"Күйүк / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Эч качан автоматтык түрдө өчпөйт"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Күн чыкканда автоматтык түрдө өчөт"</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"Түнкү режим батареяңызды көпкө жеткирүү үчүн кара түстү колдонот. Түнкү режим экран өчкөндө күйөт."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Экранды автоөчүрүү"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Экран өчөт"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> колдонулбагандан кийин"</string>
@@ -3396,8 +3412,7 @@
     <string name="notification_assistant_title" msgid="6983941403582134437">"Ыңгайлаштырылуучу билдирмелер"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Жок"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Орнотулган колдонмолор үчүн эскертме мүмкүнчүлүгү талап кылынбайт"</string>
-    <!-- no translation found for notification_access_detail_switch (46386786409608330) -->
-    <skip />
+    <string name="notification_access_detail_switch" msgid="46386786409608330">"Билдирмелерге кирүү мүмкүнчүлүгүн берүү"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> кызматына билдирмелерди пайдаланууга уруксат бересизби?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="3119843404577399036">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> колдонмосу билдирмелердин баарын, ошону менен катар байланыштардын аты-жөнү жана алынган билдирүүлөр сыяктуу жеке маалыматты окуй алат. Мындан тышкары, ал бул билдирмелерди өзгөртүп, жок кылып же алар сунуштаган аракеттерди аткара алат. \n\nУшуну менен колдонмо \"Тынчымды алба\" режимин иштетип же өчүрүү, ошондой эле анын жөндөөлөрүн өзгөртүү мүмкүнчүлүгүнө ээ болот."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> колдонмосу үчүн билдирмелерди иштетесизби?"</string>
@@ -4100,6 +4115,8 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Батареяны үнөмдөгүч режиминде убактылуу күйгүзүлдү"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Колдоого алынган колдонмолор да Түнкү режимге которулат"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Түшүндүм"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Түнкү режимди колдонуп көрүү"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батареянын кубатынын мөөнөтүн узартууга көмөктөшөт"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Иштеп чыгуучунун ыкчам жөндөөлөр такталары"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope көз салуусу"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Сенсорлорду өчүрүү"</string>
@@ -4522,10 +4539,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Учак режиминде жеткиликсиз"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Иш такта режимин күйгүзүү"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Тажрыйбалык иш такта режимин көмөкчү экрандарда иштетүү"</string>
-    <!-- no translation found for enable_sizecompat_freeform (3799755160777404309) -->
-    <skip />
-    <!-- no translation found for enable_sizecompat_freeform_summary (1484050174538201499) -->
-    <skip />
+    <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"Эркин формадагы шайкеш өлчөмдөрдү иштетүү"</string>
+    <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"Өлчөмү шайкеш келген колдонмолорго эркин формадагы терезелерде ачылууга мүмкүнчүлүк берет"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Түнкү режимди мажбурлап иштетүү функциясын өзгөртүп коюу"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Түнкү режимди мажбурлап иштетүү функциясы ар дайым күйүк болгондой кылып өзгөртүп коёт"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Купуялык"</string>
