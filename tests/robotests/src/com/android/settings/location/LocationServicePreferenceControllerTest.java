@@ -15,9 +15,6 @@
  */
 package com.android.settings.location;
 
-import static com.android.settings.location.LocationServicePreferenceController.KEY_LOCATION_SERVICES;
-import static com.android.settings.location.LocationServicePreferenceController.KEY_LOCATION_SERVICES_MANAGED;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -63,6 +60,8 @@ import java.util.Map;
 @Config(shadows = ShadowUserManager.class)
 public class LocationServicePreferenceControllerTest {
 
+    private static final String KEY_LOCATION_SERVICES = "location_service";
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocationSettings mFragment;
     @Mock
@@ -93,10 +92,7 @@ public class LocationServicePreferenceControllerTest {
         mController.mInjector = mSettingsInjector;
         final String key = mController.getPreferenceKey();
         when(mScreen.findPreference(key)).thenReturn(mCategoryPrimary);
-        when(mScreen.findPreference(KEY_LOCATION_SERVICES_MANAGED)).thenReturn(
-                mCategoryManaged);
         when(mCategoryPrimary.getKey()).thenReturn(key);
-        when(mCategoryManaged.getKey()).thenReturn(KEY_LOCATION_SERVICES_MANAGED);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
     }
