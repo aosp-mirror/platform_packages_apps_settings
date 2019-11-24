@@ -583,12 +583,7 @@ public class SettingsActivity extends SettingsBaseActivity
         // Generally the items that are will be changing from these updates will
         // not be in the top list of tiles, so run it in the background and the
         // SettingsBaseActivity will pick up on the updates automatically.
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                doUpdateTilesList();
-            }
-        });
+        AsyncTask.execute(() -> doUpdateTilesList());
     }
 
     private void doUpdateTilesList() {
@@ -648,7 +643,6 @@ public class SettingsActivity extends SettingsBaseActivity
                 || somethingChanged;
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
-
             // When on restricted users, disable all extra categories (but only the settings ones).
             final List<DashboardCategory> categories = mDashboardFeatureProvider.getAllCategories();
             synchronized (categories) {

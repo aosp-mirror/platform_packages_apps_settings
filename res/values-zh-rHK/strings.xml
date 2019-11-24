@@ -51,8 +51,7 @@
     <string name="font_size_summary" msgid="1296835853522566260">"縮小或放大畫面上的文字。"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"放大"</string>
-    <!-- no translation found for font_size_preview_text (5578792111916168343) -->
-    <skip />
+    <string name="font_size_preview_text" msgid="5578792111916168343">"Servez à ce monsieur une bière et des kiwis."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"範例文字"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"《綠野仙蹤》"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"第 11 章：奧茲國的奇妙翡翠城"</string>
@@ -1198,6 +1197,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"開啟 (直至<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"保持關閉狀態，直至<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"目前沒有開啟「夜燈模式」"</string>
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即開啟"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"立即關閉"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"保持開啟狀態，直至日出"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"保持關閉狀態，直至日落"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"暗光模式"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"時間表"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"無"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"由日落至日出期間開啟"</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"狀態"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"關閉/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"永遠不會自動開啟"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"將會在日落時自動開啟"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"開啟/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"永遠不會自動關閉"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"將會在日出時自動關閉"</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"「深色主題背景」使用純黑色背景，可延長電池壽命。「深色主題背景」時間表會等待啟動，直至螢幕關閉。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"螢幕逾時"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"螢幕關閉時"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
@@ -3398,8 +3413,7 @@
     <string name="notification_assistant_title" msgid="6983941403582134437">"自動調節通知"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"無"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"沒有已安裝的應用程式要求通知存取權。"</string>
-    <!-- no translation found for notification_access_detail_switch (46386786409608330) -->
-    <skip />
+    <string name="notification_access_detail_switch" msgid="46386786409608330">"允許存取通知"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="3119843404577399036">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>將能夠讀取所有通知 (包括個人資料，例如聯絡人姓名和訊息內容)，亦能修改或關閉通知，或者觸發通知內的操作按鈕。\n\n此外，該應用程式還能開啟或關閉「請勿騷擾」模式及變更相關設定。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"授權 <xliff:g id="SERVICE">%1$s</xliff:g> 存取通知 ？"</string>
@@ -4102,6 +4116,8 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"由於「省電模式」已關閉，因此切換功能暫時啟用"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"受支援的應用程式也會切換至深色主題背景"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"知道了"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"試用深色主題背景"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"有助延長電池壽命"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"快速設定開發人員圖塊"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope 追蹤"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"感應器已關閉"</string>
@@ -4524,10 +4540,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"飛行模式啟用期間無法使用"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"強制執行桌面模式"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"在次要顯示屏強制執行實驗版桌面模式"</string>
-    <!-- no translation found for enable_sizecompat_freeform (3799755160777404309) -->
-    <skip />
-    <!-- no translation found for enable_sizecompat_freeform_summary (1484050174538201499) -->
-    <skip />
+    <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"啟用可自由移動的尺寸兼容應用程式"</string>
+    <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"允許尺寸兼容應用程式處於可自由移動狀態"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"蓋過強制深色模式"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"蓋過永遠啟用強制深色模式的設定"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"私隱"</string>

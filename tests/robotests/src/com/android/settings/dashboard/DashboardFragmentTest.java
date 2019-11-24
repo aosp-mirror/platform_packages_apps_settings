@@ -17,9 +17,11 @@ package com.android.settings.dashboard;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.DASHBOARD_CONTAINER;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SWITCH_URI;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -29,14 +31,18 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -47,7 +53,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.ProviderTile;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,6 +63,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -70,24 +78,37 @@ public class DashboardFragmentTest {
 
     @Mock
     private FakeFeatureFactory mFakeFeatureFactory;
-    private ActivityInfo mActivityInfo;
     private DashboardCategory mDashboardCategory;
     private Context mContext;
     private TestFragment mTestFragment;
     private List<AbstractPreferenceController> mControllers;
+    private ActivityTile mActivityTile;
+    private ProviderTile mProviderTile;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mActivityInfo = new ActivityInfo();
-        mActivityInfo.packageName = "pkg";
-        mActivityInfo.name = "class";
-        mActivityInfo.metaData = new Bundle();
-        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key");
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "class";
+        activityInfo.metaData = new Bundle();
+        activityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key");
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mDashboardCategory = new DashboardCategory("key");
-        mDashboardCategory.addTile(new ActivityTile(mActivityInfo, mDashboardCategory.key));
+        mActivityTile = new ActivityTile(activityInfo, mDashboardCategory.key);
+        mDashboardCategory.addTile(mActivityTile);
+
+        final ProviderInfo providerInfo = new ProviderInfo();
+        providerInfo.packageName = "pkg";
+        providerInfo.name = "provider";
+        providerInfo.authority = "authority";
+        final Bundle metaData = new Bundle();
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key2");
+        metaData.putString(META_DATA_PREFERENCE_SWITCH_URI, "uri");
+        mProviderTile = new ProviderTile(providerInfo, mDashboardCategory.key, metaData);
+        mDashboardCategory.addTile(mProviderTile);
+
         mTestFragment = new TestFragment(RuntimeEnvironment.application);
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
@@ -127,11 +148,14 @@ public class DashboardFragmentTest {
                 .getTilesForCategory(nullable(String.class)))
                 .thenReturn(mDashboardCategory);
         when(mFakeFeatureFactory.dashboardFeatureProvider
-                .getDashboardKeyForTile(nullable(Tile.class)))
+                .getDashboardKeyForTile(any(ActivityTile.class)))
                 .thenReturn("test_key");
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getDashboardKeyForTile(any(ProviderTile.class)))
+                .thenReturn("test_key2");
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mTestFragment.mScreen).addPreference(nullable(Preference.class));
+        verify(mTestFragment.mScreen, times(2)).addPreference(nullable(Preference.class));
     }
 
     @Test
@@ -156,8 +180,11 @@ public class DashboardFragmentTest {
                 .getTilesForCategory(nullable(String.class)))
                 .thenReturn(mDashboardCategory);
         when(mFakeFeatureFactory.dashboardFeatureProvider
-                .getDashboardKeyForTile(nullable(Tile.class)))
+                .getDashboardKeyForTile(any(ActivityTile.class)))
                 .thenReturn("test_key");
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getDashboardKeyForTile(any(ProviderTile.class)))
+                .thenReturn("test_key2");
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
         verify(mTestFragment.mScreen, never()).addPreference(nullable(Preference.class));
@@ -169,6 +196,29 @@ public class DashboardFragmentTest {
                 DashboardTilePlaceholderPreferenceController.class);
 
         assertThat(controller).isNotNull();
+    }
+
+    @Test
+    @Config(shadows = ShadowPreferenceFragmentCompat.class)
+    public void onStart_shouldRegisterDynamicDataObservers() {
+        final DynamicDataObserver observer = new TestDynamicDataObserver();
+        mTestFragment.mDashboardTilePrefKeys.put("key", Arrays.asList(observer));
+
+        mTestFragment.onStart();
+
+        verify(mTestFragment.getContentResolver()).registerContentObserver(observer.getUri(), false,
+                observer);
+    }
+
+    @Test
+    @Config(shadows = ShadowPreferenceFragmentCompat.class)
+    public void onStop_shouldUnregisterDynamicDataObservers() {
+        final DynamicDataObserver observer = new TestDynamicDataObserver();
+        mTestFragment.registerDynamicDataObservers(Arrays.asList(observer));
+
+        mTestFragment.onStop();
+
+        verify(mTestFragment.getContentResolver()).unregisterContentObserver(observer);
     }
 
     @Test
@@ -266,7 +316,14 @@ public class DashboardFragmentTest {
         assertThat(mTestFragment.mBlockerController).isNull();
     }
 
-    public static class TestPreferenceController extends AbstractPreferenceController
+    @Test
+    public void createPreference_isProviderTile_returnSwitchPreference() {
+        final Preference pref = mTestFragment.createPreference(mProviderTile);
+
+        assertThat(pref).isInstanceOf(SwitchPreference.class);
+    }
+
+    private static class TestPreferenceController extends AbstractPreferenceController
             implements PreferenceControllerMixin {
 
         private TestPreferenceController(Context context) {
@@ -293,18 +350,20 @@ public class DashboardFragmentTest {
         }
     }
 
-    public static class TestFragment extends DashboardFragment {
+    private static class TestFragment extends DashboardFragment {
+
+        public final PreferenceScreen mScreen;
 
         private final PreferenceManager mPreferenceManager;
         private final Context mContext;
         private final List<AbstractPreferenceController> mControllers;
-
-        public final PreferenceScreen mScreen;
+        private final ContentResolver mContentResolver;
 
         public TestFragment(Context context) {
             mContext = context;
             mPreferenceManager = mock(PreferenceManager.class);
             mScreen = mock(PreferenceScreen.class);
+            mContentResolver = mock(ContentResolver.class);
             mControllers = new ArrayList<>();
 
             when(mPreferenceManager.getContext()).thenReturn(mContext);
@@ -345,6 +404,37 @@ public class DashboardFragmentTest {
         @Override
         public PreferenceManager getPreferenceManager() {
             return mPreferenceManager;
+        }
+
+        @Override
+        protected ContentResolver getContentResolver() {
+            return mContentResolver;
+        }
+    }
+
+    private static class TestDynamicDataObserver extends DynamicDataObserver {
+
+        @Override
+        public Uri getUri() {
+            return Uri.parse("content://abc");
+        }
+
+        @Override
+        public void onDataChanged() {
+        }
+    }
+
+    @Implements(PreferenceFragmentCompat.class)
+    public static class ShadowPreferenceFragmentCompat {
+
+        @Implementation
+        public void onStart() {
+            // do nothing
+        }
+
+        @Implementation
+        public void onStop() {
+            // do nothing
         }
     }
 }

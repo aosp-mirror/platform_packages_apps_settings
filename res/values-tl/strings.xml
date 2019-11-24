@@ -51,8 +51,7 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Gawing mas maliit o mas malaki ang text sa screen."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Paliitin"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Palakihin"</string>
-    <!-- no translation found for font_size_preview_text (5578792111916168343) -->
-    <skip />
+    <string name="font_size_preview_text" msgid="5578792111916168343">"Servez à ce monsieur une bière et des kiwis."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Sample na text"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"The Wonderful Wizard of Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kabanata 11: The Wonderful Emerald City of Oz"</string>
@@ -1198,6 +1197,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"I-on hanggang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"I-off hanggang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Hindi naka-on ang Night Light"</string>
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"I-on ngayon"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"I-off ngayon"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"I-on hanggang sunrise"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"I-off hanggang sunset"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"Dark Mode"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Iskedyul"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Wala"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Ma-on sa sunset hanggang sunrise"</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"Naka-off / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Hindi awtomatikong mao-on kailanman"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Awtomatikong mao-on sa sunset"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"Naka-on / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Hindi awtomatikong mao-off kailanman"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Awtomatikong mao-off sa sunrise"</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"Gumagamit ng true black sa madilim na tema para makatulong na mas tumagal ang iyong baterya. Naghihintay ang mga iskedyul ng madilim na tema na ma-off ang iyong screen bago ma-on ang mga ito."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout ng screen"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Pag-off ng screen"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Pagkatapos ng <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ng kawalan ng aktibidad"</string>
@@ -3397,8 +3412,7 @@
     <string name="notification_assistant_title" msgid="6983941403582134437">"Mga Adaptive na Notification"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Wala"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Walang mga naka-install na app ang humiling ng access sa notification."</string>
-    <!-- no translation found for notification_access_detail_switch (46386786409608330) -->
-    <skip />
+    <string name="notification_access_detail_switch" msgid="46386786409608330">"Payagan ang pag-access sa notification"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Payagan ang pag-access sa notification para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="3119843404577399036">"Mababasa ng <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> ang lahat ng notification, kasama ang personal na impormasyon gaya ng mga pangalan ng contact at text ng mga mensaheng iyong matatanggap. Magagawa rin nitong magbago o mag-dismiss ng mga notification o mag-trigger ng mga action button sa mga ito. \n\nDahil dito, mabibigyan din ng kakayahan ang app na i-on o i-off ang Huwag Istorbohin at baguhin ang mga nauugnay na setting."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Payagan ang pag-access sa notification para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4101,6 +4115,8 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Pansamantalang na-on dahil sa Pangtipid sa Baterya"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Lilipat din sa madilim na tema ang mga sinusuportahang app"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Subukan ang Madilim na tema"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Tumutulong na patagalin ang baterya"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Mga tile ng developer para sa mga mabilisang setting"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Trace ng Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"I-Off ang Mga Sensor"</string>
@@ -4523,10 +4539,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Hindi available sa airplane mode"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Force desktop mode"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Force experimental desktop mode sa mga pangalawang display"</string>
-    <!-- no translation found for enable_sizecompat_freeform (3799755160777404309) -->
-    <skip />
-    <!-- no translation found for enable_sizecompat_freeform_summary (1484050174538201499) -->
-    <skip />
+    <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"I-enable ang freeform sizecompat"</string>
+    <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"Pinapayagan ang mga sizecompat app sa freeform"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"I-override ang force-dark"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Ino-override ang force-dark feature para maging palaging naka-on"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privacy"</string>
