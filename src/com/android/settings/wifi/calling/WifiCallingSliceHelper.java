@@ -30,6 +30,7 @@ import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.ImsMmTelManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -44,6 +45,7 @@ import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.slices.SliceBroadcastReceiver;
 
 import java.util.concurrent.Callable;
@@ -138,7 +140,7 @@ public class WifiCallingSliceHelper {
         final ImsManager imsManager = getImsManager(subId);
 
         if (!imsManager.isWfcEnabledByPlatform()
-                || !imsManager.isWfcProvisionedOnDevice()) {
+                || !isWfcProvisionedOnDevice(subId)) {
             Log.d(TAG, "Wifi calling is either not provisioned or not enabled by Platform");
             return null;
         }
@@ -233,9 +235,10 @@ public class WifiCallingSliceHelper {
         final boolean isWifiOnlySupported = isCarrierConfigManagerKeyEnabled(
                 CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, subId, true);
         final ImsManager imsManager = getImsManager(subId);
+        final ImsMmTelManager imsMmTelManager = getImsMmTelManager(subId);
 
         if (!imsManager.isWfcEnabledByPlatform()
-                || !imsManager.isWfcProvisionedOnDevice()) {
+                || !isWfcProvisionedOnDevice(subId)) {
             Log.d(TAG, "Wifi calling is either not provisioned or not enabled by platform");
             return null;
         }
@@ -249,7 +252,7 @@ public class WifiCallingSliceHelper {
         int wfcMode = -1;
         try {
             isWifiCallingEnabled = isWifiCallingEnabled(imsManager);
-            wfcMode = getWfcMode(imsManager);
+            wfcMode = getWfcMode(imsMmTelManager);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             Log.e(TAG, "Unable to get wifi calling preferred mode", e);
             return null;
@@ -279,7 +282,7 @@ public class WifiCallingSliceHelper {
             Uri sliceUri) {
         final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.wifi_signal);
         // Top row shows information on current preference state
-        ListBuilder listBuilder = new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
+        final ListBuilder listBuilder = new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext));
         listBuilder.setHeader(new ListBuilder.HeaderBuilder()
                 .setTitle(mContext.getText(R.string.wifi_calling_mode_title))
@@ -294,18 +297,18 @@ public class WifiCallingSliceHelper {
             listBuilder.addRow(wifiPreferenceRowBuilder(listBuilder,
                     com.android.internal.R.string.wfc_mode_wifi_only_summary,
                     ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY,
-                    currentWfcPref == ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY));
+                    currentWfcPref == ImsMmTelManager.WIFI_MODE_WIFI_ONLY));
         }
 
         listBuilder.addRow(wifiPreferenceRowBuilder(listBuilder,
                 com.android.internal.R.string.wfc_mode_wifi_preferred_summary,
                 ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED,
-                currentWfcPref == ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED));
+                currentWfcPref == ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED));
 
         listBuilder.addRow(wifiPreferenceRowBuilder(listBuilder,
                 com.android.internal.R.string.wfc_mode_cellular_preferred_summary,
                 ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED,
-                currentWfcPref == ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED));
+                currentWfcPref == ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED));
 
         return listBuilder.build();
     }
@@ -337,13 +340,13 @@ public class WifiCallingSliceHelper {
      */
     private CharSequence getWifiCallingPreferenceSummary(int wfcMode) {
         switch (wfcMode) {
-            case ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY:
+            case ImsMmTelManager.WIFI_MODE_WIFI_ONLY:
                 return mContext.getText(
                         com.android.internal.R.string.wfc_mode_wifi_only_summary);
-            case ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED:
+            case ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED:
                 return mContext.getText(
                         com.android.internal.R.string.wfc_mode_wifi_preferred_summary);
-            case ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED:
+            case ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED:
                 return mContext.getText(
                         com.android.internal.R.string.wfc_mode_cellular_preferred_summary);
             default:
@@ -355,15 +358,19 @@ public class WifiCallingSliceHelper {
         return ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(subId));
     }
 
-    private int getWfcMode(ImsManager imsManager)
+    protected ImsMmTelManager getImsMmTelManager(int subId) {
+        return ImsMmTelManager.createForSubscriptionId(subId);
+    }
+
+    private int getWfcMode(ImsMmTelManager imsMmTelManager)
             throws InterruptedException, ExecutionException, TimeoutException {
-        FutureTask<Integer> wfcModeTask = new FutureTask<>(new Callable<Integer>() {
+        final FutureTask<Integer> wfcModeTask = new FutureTask<>(new Callable<Integer>() {
             @Override
             public Integer call() {
-                return imsManager.getWfcMode(false);
+                return imsMmTelManager.getVoWiFiModeSetting();
             }
         });
-        ExecutorService executor = Executors.newSingleThreadExecutor();
+        final ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(wfcModeTask);
         return wfcModeTask.get(TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
     }
@@ -380,7 +387,7 @@ public class WifiCallingSliceHelper {
         if (subId > SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final ImsManager imsManager = getImsManager(subId);
             if (imsManager.isWfcEnabledByPlatform()
-                    && imsManager.isWfcProvisionedOnDevice()) {
+                    && isWfcProvisionedOnDevice(subId)) {
                 final boolean currentValue = imsManager.isWfcEnabledByUser()
                         && imsManager.isNonTtyOrTtyOnVolteEnabled();
                 final boolean newValue = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
@@ -420,33 +427,34 @@ public class WifiCallingSliceHelper {
             final boolean isWifiOnlySupported = isCarrierConfigManagerKeyEnabled(
                     CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, subId, true);
 
-            ImsManager imsManager = getImsManager(subId);
+            final ImsManager imsManager = getImsManager(subId);
             if (isWifiCallingPrefEditable
                     && imsManager.isWfcEnabledByPlatform()
-                    && imsManager.isWfcProvisionedOnDevice()
+                    && isWfcProvisionedOnDevice(subId)
                     && imsManager.isWfcEnabledByUser()
                     && imsManager.isNonTtyOrTtyOnVolteEnabled()) {
                 // Change the preference only when wifi calling is enabled
                 // And when wifi calling preference is editable for the current carrier
-                final int currentValue = imsManager.getWfcMode(false);
+                final ImsMmTelManager imsMmTelManager = getImsMmTelManager(subId);
+                final int currentValue = imsMmTelManager.getVoWiFiModeSetting();
                 int newValue = errorValue;
                 switch (intent.getAction()) {
                     case ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY:
                         if (isWifiOnlySupported) {
                             // change to wifi_only when wifi_only is enabled.
-                            newValue = ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY;
+                            newValue = ImsMmTelManager.WIFI_MODE_WIFI_ONLY;
                         }
                         break;
                     case ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED:
-                        newValue = ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED;
+                        newValue = ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED;
                         break;
                     case ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED:
-                        newValue = ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED;
+                        newValue = ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED;
                         break;
                 }
                 if (newValue != errorValue && newValue != currentValue) {
                     // Update the setting only when there is a valid update
-                    imsManager.setWfcMode(newValue, false);
+                    imsMmTelManager.setVoWiFiModeSetting(newValue);
                 }
             }
         }
@@ -503,6 +511,11 @@ public class WifiCallingSliceHelper {
      */
     protected int getDefaultVoiceSubId() {
         return SubscriptionManager.getDefaultVoiceSubscriptionId();
+    }
+
+    @VisibleForTesting
+    boolean isWfcProvisionedOnDevice(int subId) {
+        return MobileNetworkUtils.isWfcProvisionedOnDevice(subId);
     }
 
     /**
