@@ -146,19 +146,11 @@ public class VerifyAppsOverUsbPreferenceController extends DeveloperOptionsPrefe
                 == AdbPreferenceController.ADB_SETTING_OFF) {
             return false;
         }
-        if (Settings.Global.getInt(cr, Settings.Global.PACKAGE_VERIFIER_ENABLE, SETTING_VALUE_ON)
-                == SETTING_VALUE_OFF) {
-            return false;
-        } else {
-            final Intent verification = new Intent(Intent.ACTION_PACKAGE_NEEDS_VERIFICATION);
-            verification.setType(PACKAGE_MIME_TYPE);
-            verification.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            final List<ResolveInfo> receivers = mPackageManager.queryBroadcastReceivers(
-                    verification, 0 /* flags */);
-            if (receivers.size() == 0) {
-                return false;
-            }
-        }
-        return true;
+        final Intent verification = new Intent(Intent.ACTION_PACKAGE_NEEDS_VERIFICATION);
+        verification.setType(PACKAGE_MIME_TYPE);
+        verification.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        final List<ResolveInfo> receivers = mPackageManager.queryBroadcastReceivers(
+                verification, 0 /* flags */);
+        return receivers.size() != 0;
     }
 }
