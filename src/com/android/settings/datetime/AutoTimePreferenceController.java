@@ -17,6 +17,8 @@
 package com.android.settings.datetime;
 
 import android.content.Context;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -75,6 +77,8 @@ public class AutoTimePreferenceController extends AbstractPreferenceController
     }
 
     private RestrictedLockUtils.EnforcedAdmin getEnforcedAdminProperty() {
-        return RestrictedLockUtilsInternal.checkIfAutoTimeRequired(mContext);
+        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_DATE_TIME,
+                UserHandle.myUserId());
     }
 }
