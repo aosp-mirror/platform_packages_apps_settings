@@ -36,6 +36,7 @@ public class MasterSwitchPreference extends TwoTargetPreference {
 
     private Switch mSwitch;
     private boolean mChecked;
+    private boolean mCheckedSet;
     private boolean mEnableSwitch = true;
 
     public MasterSwitchPreference(Context context, AttributeSet attrs,
@@ -94,9 +95,14 @@ public class MasterSwitchPreference extends TwoTargetPreference {
     }
 
     public void setChecked(boolean checked) {
-        mChecked = checked;
-        if (mSwitch != null) {
-            mSwitch.setChecked(checked);
+        // Always set checked the first time; don't assume the field's default of false.
+        final boolean changed = mChecked != checked;
+        if (changed || !mCheckedSet) {
+            mChecked = checked;
+            mCheckedSet = true;
+            if (mSwitch != null) {
+                mSwitch.setChecked(checked);
+            }
         }
     }
 
