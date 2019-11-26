@@ -27,9 +27,11 @@ import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 
 import com.google.android.material.tabs.TabLayout;
@@ -90,6 +92,10 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         listContainer.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        final RecyclerView recyclerView = getListView();
+        recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(), recyclerView);
         return mContentView;
     }
 
