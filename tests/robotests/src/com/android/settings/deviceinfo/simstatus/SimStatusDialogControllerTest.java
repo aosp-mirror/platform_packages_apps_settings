@@ -16,35 +16,21 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .CELL_DATA_NETWORK_TYPE_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .CELL_VOICE_NETWORK_TYPE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_DATA_NETWORK_TYPE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_VOICE_NETWORK_TYPE_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.EID_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .ICCID_INFO_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .ICCID_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .IMS_REGISTRATION_STATE_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .IMS_REGISTRATION_STATE_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .NETWORK_PROVIDER_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .OPERATOR_INFO_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .OPERATOR_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .PHONE_NUMBER_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .ROAMING_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .SERVICE_STATE_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .SIGNAL_STRENGTH_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .SIGNAL_STRENGTH_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.IMS_REGISTRATION_STATE_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.IMS_REGISTRATION_STATE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.NETWORK_PROVIDER_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.PHONE_NUMBER_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ROAMING_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SERVICE_STATE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_VALUE_ID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -146,7 +132,7 @@ public class SimStatusDialogControllerTest {
                 .thenReturn(true);
 
         final ShadowPackageManager shadowPackageManager =
-            Shadows.shadowOf(RuntimeEnvironment.application.getPackageManager());
+                Shadows.shadowOf(RuntimeEnvironment.application.getPackageManager());
         final PackageInfo sysUIPackageInfo = new PackageInfo();
         sysUIPackageInfo.packageName = "com.android.systemui";
         shadowPackageManager.addPackage(sysUIPackageInfo);
@@ -251,7 +237,7 @@ public class SimStatusDialogControllerTest {
         mController.initialize();
 
         final String signalStrengthString =
-            mContext.getString(R.string.sim_signal_strength, signalDbm, signalAsu);
+                mContext.getString(R.string.sim_signal_strength, signalDbm, signalAsu);
         verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
     }
 
@@ -333,7 +319,7 @@ public class SimStatusDialogControllerTest {
     public void initialize_doNotShowSignalStrength_shouldRemoveSignalStrengthSetting() {
         when(mPersistableBundle.getBoolean(
                 CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL))
-            .thenReturn(false);
+                .thenReturn(false);
 
         mController.initialize();
 
@@ -389,31 +375,31 @@ public class SimStatusDialogControllerTest {
     @Test
     public void initialize_imsRegistered_shouldSetImsRegistrationStateSummaryToRegisterd() {
         when(mPersistableBundle.getBoolean(
-            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
+                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
         when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(true);
 
         mController.initialize();
 
         verify(mDialog).setText(IMS_REGISTRATION_STATE_VALUE_ID,
-            mContext.getString(R.string.ims_reg_status_registered));
+                mContext.getString(R.string.ims_reg_status_registered));
     }
 
     @Test
     public void initialize_imsNotRegistered_shouldSetImsRegistrationStateSummaryToNotRegisterd() {
         when(mPersistableBundle.getBoolean(
-            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
+                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
         when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(false);
 
         mController.initialize();
 
         verify(mDialog).setText(IMS_REGISTRATION_STATE_VALUE_ID,
-            mContext.getString(R.string.ims_reg_status_not_registered));
+                mContext.getString(R.string.ims_reg_status_not_registered));
     }
 
     @Test
     public void initialize_showImsRegistration_shouldNotRemoveImsRegistrationStateSetting() {
         when(mPersistableBundle.getBoolean(
-            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
+                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
 
         mController.initialize();
 
@@ -423,7 +409,7 @@ public class SimStatusDialogControllerTest {
     @Test
     public void initialize_doNotShowImsRegistration_shouldRemoveImsRegistrationStateSetting() {
         when(mPersistableBundle.getBoolean(
-            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(false);
+                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(false);
 
         mController.initialize();
 
