@@ -37,6 +37,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -45,6 +46,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -333,7 +335,38 @@ public class DashboardFragmentTest {
         assertThat(pref).isInstanceOf(MasterSwitchPreference.class);
     }
 
-    private static class TestPreferenceController extends AbstractPreferenceController
+    @Test
+    public void isFeatureFlagAndIsParalleled_runParalleledUpdatePreferenceStates() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTROLLER_ENHANCEMENT, true);
+        final TestFragment testFragment = spy(new TestFragment(RuntimeEnvironment.application));
+
+        testFragment.updatePreferenceStates();
+
+        verify(testFragment).updatePreferenceStatesInParallel();
+    }
+
+    @Test
+    public void notFeatureFlagAndIsParalleled_notRunParalleledUpdatePreferenceStates() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTROLLER_ENHANCEMENT, false);
+        final TestFragment testFragment = spy(new TestFragment(RuntimeEnvironment.application));
+
+        testFragment.updatePreferenceStates();
+
+        verify(testFragment, never()).updatePreferenceStatesInParallel();
+    }
+
+    @Test
+    public void isFeatureFlagAndNotParalleled_notRunParalleledUpdatePreferenceStates() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTROLLER_ENHANCEMENT, true);
+        final TestFragment testFragment = spy(new TestFragment(RuntimeEnvironment.application));
+        testFragment.setUsingControllerEnhancement(false);
+
+        testFragment.updatePreferenceStates();
+
+        verify(testFragment, never()).updatePreferenceStatesInParallel();
+    }
+
+    public static class TestPreferenceController extends AbstractPreferenceController
             implements PreferenceControllerMixin {
 
         private TestPreferenceController(Context context) {
@@ -362,12 +395,13 @@ public class DashboardFragmentTest {
 
     private static class TestFragment extends DashboardFragment {
 
-        public final PreferenceScreen mScreen;
-
         private final PreferenceManager mPreferenceManager;
         private final Context mContext;
         private final List<AbstractPreferenceController> mControllers;
         private final ContentResolver mContentResolver;
+
+        public final PreferenceScreen mScreen;
+        private boolean mIsParalleled;
 
         public TestFragment(Context context) {
             mContext = context;
@@ -375,6 +409,7 @@ public class DashboardFragmentTest {
             mScreen = mock(PreferenceScreen.class);
             mContentResolver = mock(ContentResolver.class);
             mControllers = new ArrayList<>();
+            mIsParalleled = true;
 
             when(mPreferenceManager.getContext()).thenReturn(mContext);
             ReflectionHelpers.setField(
@@ -419,6 +454,14 @@ public class DashboardFragmentTest {
         @Override
         protected ContentResolver getContentResolver() {
             return mContentResolver;
+        }
+
+        protected boolean isParalleledControllers() {
+            return mIsParalleled;
+        }
+
+        public void setUsingControllerEnhancement(boolean isParalleled) {
+            mIsParalleled = isParalleled;
         }
     }
 

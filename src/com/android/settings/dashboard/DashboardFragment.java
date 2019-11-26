@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.CallSuper;
@@ -35,6 +36,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
@@ -46,6 +48,7 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.Indexable;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +56,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
@@ -306,9 +310,22 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     /**
+     * @return {@code true} if the underlying controllers should be executed in parallel.
+     * Override this function to enable/disable the behavior.
+     */
+    protected boolean isParalleledControllers() {
+        return false;
+    }
+
+    /**
      * Update state of each preference managed by PreferenceController.
      */
     protected void updatePreferenceStates() {
+        if (isParalleledControllers() && FeatureFlagUtils.isEnabled(getContext(),
+                FeatureFlags.CONTROLLER_ENHANCEMENT)) {
+            updatePreferenceStatesInParallel();
+            return;
+        }
         final PreferenceScreen screen = getPreferenceScreen();
         Collection<List<AbstractPreferenceController>> controllerLists =
                 mPreferenceControllers.values();
@@ -332,6 +349,34 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                     continue;
                 }
                 controller.updateState(preference);
+            }
+        }
+    }
+
+    /**
+     * Use parallel method to update state of each preference managed by PreferenceController.
+     */
+    @VisibleForTesting
+    void updatePreferenceStatesInParallel() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        final Collection<List<AbstractPreferenceController>> controllerLists =
+                mPreferenceControllers.values();
+        final List<ControllerFutureTask> taskList = new ArrayList<>();
+        for (List<AbstractPreferenceController> controllerList : controllerLists) {
+            for (AbstractPreferenceController controller : controllerList) {
+                final ControllerFutureTask task = new ControllerFutureTask(
+                        new ControllerTask(controller, screen, mMetricsFeatureProvider,
+                                getMetricsCategory()), null /* result */);
+                taskList.add(task);
+                ThreadUtils.postOnBackgroundThread(task);
+            }
+        }
+
+        for (ControllerFutureTask task : taskList) {
+            try {
+                task.get();
+            } catch (InterruptedException | ExecutionException e) {
+                Log.w(TAG, task.getController().getPreferenceKey() + " " + e.getMessage());
             }
         }
     }
