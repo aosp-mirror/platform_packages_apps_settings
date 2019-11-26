@@ -49,10 +49,11 @@ import com.android.settings.Utils;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.notification.AppNotificationSettings;
-import com.android.settings.notification.ChannelNotificationSettings;
+import com.android.settings.notification.app.AppNotificationSettings;
+import com.android.settings.notification.app.ChannelNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.NotificationsSentState;
+import com.android.settings.notification.app.ChannelListPreferenceController;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBroadcastReceiver;
@@ -107,7 +108,7 @@ public class NotificationChannelSlice implements CustomSliceable {
      *
      * Note:
      * When the sent count of notification channels is the same, follow the sorting mechanism from
-     * {@link com.android.settings.notification.ChannelListPreferenceController}.
+     * {@link ChannelListPreferenceController}.
      * Since slice view only shows displayable notification channels, so those deleted ones are
      * excluded from the comparison here.
      */
