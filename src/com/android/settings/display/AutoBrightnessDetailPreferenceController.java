@@ -33,7 +33,7 @@ public class AutoBrightnessDetailPreferenceController extends AutoBrightnessPref
     }
 
     @Override
-    public boolean isSliceable() {
+    public boolean isPublicSlice() {
         return true;
     }
 }

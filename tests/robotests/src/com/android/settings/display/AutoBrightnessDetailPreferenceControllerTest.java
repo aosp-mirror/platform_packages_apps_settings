@@ -52,6 +52,11 @@ public class AutoBrightnessDetailPreferenceControllerTest {
     }
 
     @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
+
+    @Test
     public void getAvailabilityStatus_configTrueSet_shouldReturnAvailable() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_automatic_brightness_available, true);

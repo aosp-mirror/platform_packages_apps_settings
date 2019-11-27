@@ -64,6 +64,11 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 

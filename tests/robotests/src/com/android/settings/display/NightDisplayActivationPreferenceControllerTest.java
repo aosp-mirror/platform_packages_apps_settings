@@ -15,6 +15,7 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -57,7 +58,7 @@ public class NightDisplayActivationPreferenceControllerTest {
         mPreference = new LayoutPreference(mContext, R.layout.night_display_activation_button);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mPreferenceController = new NightDisplayActivationPreferenceController(mContext,
-            "night_display_activation");
+                "night_display_activation");
         mPreferenceController.displayPreference(mScreen);
     }
 
@@ -83,7 +84,7 @@ public class NightDisplayActivationPreferenceControllerTest {
     @Test
     public void isSliceableCorrectKey_returnsTrue() {
         final NightDisplayActivationPreferenceController controller =
-                new NightDisplayActivationPreferenceController(mContext,"night_display_activated");
+                new NightDisplayActivationPreferenceController(mContext, "night_display_activated");
         assertThat(controller.isSliceable()).isTrue();
     }
 
@@ -92,6 +93,11 @@ public class NightDisplayActivationPreferenceControllerTest {
         final NightDisplayActivationPreferenceController controller =
                 new NightDisplayActivationPreferenceController(mContext, "bad_key");
         assertThat(controller.isSliceable()).isFalse();
+    }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mPreferenceController.isPublicSlice()).isTrue();
     }
 
     @Test
