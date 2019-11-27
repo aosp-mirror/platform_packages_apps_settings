@@ -132,7 +132,7 @@ public class LockScreenPreferenceControllerTest {
     }
 
     @Test
-    public void onResume_unavailable_shouldHide() {
+    public void onResume_unavailable_shouldShow() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
         when(mLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
                 .thenReturn(PASSWORD_QUALITY_UNSPECIFIED);
@@ -140,6 +140,6 @@ public class LockScreenPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mLifecycle.handleLifecycleEvent(ON_RESUME);
 
-        assertThat(mPreference.isVisible()).isFalse();
+        assertThat(mPreference.isVisible()).isTrue();
     }
 }

@@ -24,12 +24,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /** Dashboard Fragment to display all recent location requests, sorted by recency. */
 @SearchIndexable
@@ -52,6 +47,14 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mController = use(RecentLocationRequestSeeAllPreferenceController.class);
+        mController.init(this);
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.location_recent_requests_see_all;
     }
@@ -59,11 +62,6 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle(), this);
     }
 
     @Override
@@ -87,32 +85,6 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
         mHideSystemMenu.setVisible(mShowSystem);
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context, Lifecycle lifecycle, RecentLocationRequestSeeAllFragment fragment) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final RecentLocationRequestSeeAllPreferenceController controller =
-                new RecentLocationRequestSeeAllPreferenceController(context, lifecycle, fragment);
-        controllers.add(controller);
-        if (fragment != null) {
-            fragment.mController = controller;
-        }
-        return controllers;
-    }
-
-    /**
-     * For Search.
-     */
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.location_recent_requests_see_all) {
-
-                @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context
-                        context) {
-                    return buildPreferenceControllers(
-                            context, /* lifecycle = */ null, /* fragment = */ null);
-                }
-            };
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -122,4 +94,10 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
                 R.string.menu_hide_system);
         updateMenu();
     }
+
+    /**
+     * For Search.
+     */
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.location_recent_requests_see_all);
 }

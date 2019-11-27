@@ -95,8 +95,6 @@
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
     <string name="font_size_make_larger_desc">Make larger</string>
 
-    <!-- Sample text for font size preview. -->
-    <string name="font_size_preview_text">Servez à ce monsieur une bière et des kiwis.</string>
     <string name="font_size_preview_text_headline">Sample text</string>
     <string name="font_size_preview_text_title"
             translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
@@ -10590,6 +10588,17 @@
         <item>@string/game_driver_app_preference_game_driver</item>
         <item>@string/game_driver_app_preference_system</item>
     </string-array>
+
+    <!-- Title for App Compatibility Changes dashboard where developers can configure per-app overrides for compatibility changes [CHAR LIMIT=50] -->
+    <string name="platform_compat_dashboard_title">App Compatibility Changes</string>
+    <!-- Summary for App Compatibility Changes dashboard [CHAR LIMIT=NONE] -->
+    <string name="platform_compat_dashboard_summary">Modify app compatibility change overrides</string>
+    <!-- Title for default enabled app compat changes category [CHAR LIMIT=50] -->
+    <string name="platform_compat_default_enabled_title">Default enabled changes</string>
+    <!-- Title for default disabled app compat changes category [CHAR LIMIT=50] -->
+    <string name="platform_compat_default_disabled_title">Default disabled changes</string>
+    <!-- Title for target SDK gated app compat changes category [CHAR LIMIT=50] -->
+    <string name="platform_compat_target_sdk_title">Enabled after SDK <xliff:g id="number" example="29">%d</xliff:g></string>
 
     <!-- Slices Strings -->
 

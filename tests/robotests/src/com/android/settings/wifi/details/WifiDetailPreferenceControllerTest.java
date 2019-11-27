@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
@@ -81,7 +82,6 @@ import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -1859,18 +1859,17 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void entityHeader_expiredPasspointR1_shouldHandleExpiration() {
-        setUpForDisconnectedNetwork();
         when(mockAccessPoint.isPasspoint()).thenReturn(true);
         when(mockAccessPoint.isPasspointConfigurationR1()).thenReturn(true);
         when(mockAccessPoint.isExpired()).thenReturn(true);
+        setUpForDisconnectedNetwork();
         String expireSummary = mContext.getResources().getString(
                 com.android.settingslib.R.string.wifi_passpoint_expired);
 
         displayAndResume();
 
-        verify(mockButtonsPref).setButton3Visible(false);
+        verify(mockButtonsPref, atLeastOnce()).setButton3Visible(false);
         verify(mockHeaderController).setSummary(expireSummary);
     }
 

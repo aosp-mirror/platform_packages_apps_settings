@@ -69,6 +69,7 @@ public class LocationForWorkPreferenceControllerTest {
     private LocationForWorkPreferenceController mController;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
+    private LocationSettings mLocationSettings;
 
     @Before
     public void setUp() {
@@ -77,10 +78,13 @@ public class LocationForWorkPreferenceControllerTest {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = spy(new LocationForWorkPreferenceController(mContext, mLifecycle));
+        mLocationSettings = spy(new LocationSettings());
+        when(mLocationSettings.getSettingsLifecycle()).thenReturn(mLifecycle);
+        mController = spy(new LocationForWorkPreferenceController(mContext, "key"));
+        mController.init(mLocationSettings);
         mockManagedProfile();
         ReflectionHelpers.setField(mController, "mLocationEnabler", mEnabler);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        when(mScreen.findPreference(any())).thenReturn(mPreference);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
         when(mPreference.isVisible()).thenReturn(true);

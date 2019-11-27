@@ -13,7 +13,6 @@
  */
 package com.android.settings.location;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -24,7 +23,6 @@ import android.content.pm.ResolveInfo;
 import android.location.LocationManager;
 import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
@@ -41,21 +39,14 @@ import java.util.List;
 public class LocationFooterPreferenceController extends LocationBasePreferenceController {
 
     private static final String TAG = "LocationFooter";
-    private static final String KEY_LOCATION_FOOTER = "location_footer";
     private static final Intent INJECT_INTENT =
             new Intent(LocationManager.SETTINGS_FOOTER_DISPLAYED_ACTION);
 
     private final PackageManager mPackageManager;
 
-    public LocationFooterPreferenceController(Context context) {
-        // we don't care location mode changes, so pass in a null lifecycle to disable listening
-        super(context, null);
+    public LocationFooterPreferenceController(Context context, String key) {
+        super(context, key);
         mPackageManager = context.getPackageManager();
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_LOCATION_FOOTER;
     }
 
     /**
@@ -97,8 +88,8 @@ public class LocationFooterPreferenceController extends LocationBasePreferenceCo
      * inject.
      */
     @Override
-    public boolean isAvailable() {
-        return !getFooterData().isEmpty();
+    public int getAvailabilityStatus() {
+        return !getFooterData().isEmpty() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     /**

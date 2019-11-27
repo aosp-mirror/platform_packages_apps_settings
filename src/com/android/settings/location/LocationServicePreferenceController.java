@@ -27,8 +27,8 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.Utils;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.RestrictedAppPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -41,40 +41,31 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
 
     private static final String TAG = "LocationServicePrefCtrl";
     /** Key for preference category "Location services" */
-    private static final String KEY_LOCATION_SERVICES = "location_services";
+    @VisibleForTesting
+    static final String KEY_LOCATION_SERVICES = "location_services";
     /** Key for preference category "Location services for work" */
-    private static final String KEY_LOCATION_SERVICES_MANAGED = "location_services_managed_profile";
+    @VisibleForTesting
+    static final String KEY_LOCATION_SERVICES_MANAGED = "location_services_managed_profile";
     @VisibleForTesting
     static final IntentFilter INTENT_FILTER_INJECTED_SETTING_CHANGED =
             new IntentFilter(SettingInjectorService.ACTION_INJECTED_SETTING_CHANGED);
 
     private PreferenceCategory mCategoryLocationServices;
     private PreferenceCategory mCategoryLocationServicesManaged;
-    private final LocationSettings mFragment;
-    private final AppSettingsInjector mInjector;
+    @VisibleForTesting
+    AppSettingsInjector mInjector;
     /** Receives UPDATE_INTENT */
     @VisibleForTesting
     BroadcastReceiver mInjectedSettingsReceiver;
 
-    public LocationServicePreferenceController(Context context, LocationSettings fragment,
-            Lifecycle lifecycle) {
-        this(context, fragment, lifecycle, new AppSettingsInjector(context));
-    }
-
-    @VisibleForTesting
-    LocationServicePreferenceController(Context context, LocationSettings fragment,
-            Lifecycle lifecycle, AppSettingsInjector injector) {
-        super(context, lifecycle);
-        mFragment = fragment;
-        mInjector = injector;
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
+    public LocationServicePreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_LOCATION_SERVICES;
+    public void init(DashboardFragment fragment) {
+        super.init(fragment);
+        mInjector = new AppSettingsInjector(mContext);
     }
 
     @Override
@@ -86,8 +77,12 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
 
     @Override
     public void updateState(Preference preference) {
-        mCategoryLocationServices.removeAll();
-        mCategoryLocationServicesManaged.removeAll();
+        if (mCategoryLocationServices != null) {
+            mCategoryLocationServices.removeAll();
+        }
+        if (mCategoryLocationServicesManaged != null) {
+            mCategoryLocationServicesManaged.removeAll();
+        }
         final Map<Integer, List<Preference>> prefs = getLocationServices();
         boolean showPrimary = false;
         boolean showManaged = false;
@@ -98,16 +93,25 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
                 }
             }
             if (entry.getKey() == UserHandle.myUserId()) {
-                LocationSettings.addPreferencesSorted(entry.getValue(), mCategoryLocationServices);
+                if (mCategoryLocationServices != null) {
+                    LocationSettings.addPreferencesSorted(entry.getValue(),
+                            mCategoryLocationServices);
+                }
                 showPrimary = true;
             } else {
-                LocationSettings.addPreferencesSorted(entry.getValue(),
-                        mCategoryLocationServicesManaged);
+                if (mCategoryLocationServicesManaged != null) {
+                    LocationSettings.addPreferencesSorted(entry.getValue(),
+                            mCategoryLocationServicesManaged);
+                }
                 showManaged = true;
             }
         }
-        mCategoryLocationServices.setVisible(showPrimary);
-        mCategoryLocationServicesManaged.setVisible(showManaged);
+        if (mCategoryLocationServices != null) {
+            mCategoryLocationServices.setVisible(showPrimary);
+        }
+        if (mCategoryLocationServicesManaged != null) {
+            mCategoryLocationServicesManaged.setVisible(showManaged);
+        }
     }
 
     @Override

@@ -1185,7 +1185,7 @@
         <activity
             android:name="Settings$LocationSettingsActivity"
             android:label="@string/location_settings_title"
-            android:icon="@drawable/ic_homepage_location"
+            android:icon="@drawable/ic_settings_location"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
@@ -2623,7 +2623,7 @@
             android:launchMode="singleTop"
             android:taskAffinity=".wifi.NetworkRequestDialogActivity"
             android:exported="true"
-            android:permission="android.permission.MAINLINE_WIFI_STACK">
+            android:permission="android.permission.NETWORK_SETTINGS">
             <intent-filter>
                 <action android:name="com.android.settings.wifi.action.NETWORK_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />

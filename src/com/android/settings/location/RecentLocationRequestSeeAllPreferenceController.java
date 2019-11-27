@@ -22,44 +22,24 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.R;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.List;
 
-import com.android.settings.R;
-
 /** Preference controller for preference category displaying all recent location requests. */
 public class RecentLocationRequestSeeAllPreferenceController
         extends LocationBasePreferenceController {
-    /** Key for preference category "All recent location requests" */
-    private static final String KEY_ALL_RECENT_LOCATION_REQUESTS = "all_recent_location_requests";
-    private final RecentLocationRequestSeeAllFragment mFragment;
+
     private PreferenceCategory mCategoryAllRecentLocationRequests;
     private RecentLocationApps mRecentLocationApps;
     private boolean mShowSystem = false;
     private Preference mPreference;
 
-    public RecentLocationRequestSeeAllPreferenceController(
-            Context context, Lifecycle lifecycle, RecentLocationRequestSeeAllFragment fragment) {
-        this(context, lifecycle, fragment, new RecentLocationApps(context));
-    }
-
-    @VisibleForTesting
-    RecentLocationRequestSeeAllPreferenceController(
-            Context context,
-            Lifecycle lifecycle,
-            RecentLocationRequestSeeAllFragment fragment,
-            RecentLocationApps recentLocationApps) {
-        super(context, lifecycle);
-        mFragment = fragment;
-        mRecentLocationApps = recentLocationApps;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_ALL_RECENT_LOCATION_REQUESTS;
+    public RecentLocationRequestSeeAllPreferenceController(Context context, String key) {
+        super(context, key);
+        mRecentLocationApps = new RecentLocationApps(context);
     }
 
     @Override
@@ -70,8 +50,7 @@ public class RecentLocationRequestSeeAllPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mCategoryAllRecentLocationRequests =
-                (PreferenceCategory) screen.findPreference(KEY_ALL_RECENT_LOCATION_REQUESTS);
+        mCategoryAllRecentLocationRequests = screen.findPreference(getPreferenceKey());
     }
 
     @Override
