@@ -44,9 +44,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowContentResolver;
 
@@ -225,4 +225,8 @@ public class VibrateWhenRingPreferenceControllerTest {
         assertThat(controller.isSliceable()).isFalse();
     }
 
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

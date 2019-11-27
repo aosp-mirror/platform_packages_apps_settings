@@ -45,6 +45,11 @@ public class NotificationVolumePreferenceController extends
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY_NOTIFICATION_VOLUME;
     }

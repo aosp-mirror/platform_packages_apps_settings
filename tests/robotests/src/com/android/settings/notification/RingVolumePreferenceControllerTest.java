@@ -104,4 +104,9 @@ public class RingVolumePreferenceControllerTest {
                 new RingVolumePreferenceController(mContext);
         assertThat(controller.isSliceable()).isTrue();
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }
