@@ -39,19 +39,12 @@ import java.util.Map;
 public class LocationServicePreferenceController extends LocationBasePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
-    private static final String TAG = "LocationServicePrefCtrl";
-    /** Key for preference category "Location services" */
-    @VisibleForTesting
-    static final String KEY_LOCATION_SERVICES = "location_services";
-    /** Key for preference category "Location services for work" */
-    @VisibleForTesting
-    static final String KEY_LOCATION_SERVICES_MANAGED = "location_services_managed_profile";
+    private static final String TAG = "LocationPrefCtrl";
     @VisibleForTesting
     static final IntentFilter INTENT_FILTER_INJECTED_SETTING_CHANGED =
             new IntentFilter(SettingInjectorService.ACTION_INJECTED_SETTING_CHANGED);
 
-    private PreferenceCategory mCategoryLocationServices;
-    private PreferenceCategory mCategoryLocationServicesManaged;
+    protected PreferenceCategory mCategoryLocationServices;
     @VisibleForTesting
     AppSettingsInjector mInjector;
     /** Receives UPDATE_INTENT */
@@ -71,21 +64,14 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mCategoryLocationServices = screen.findPreference(KEY_LOCATION_SERVICES);
-        mCategoryLocationServicesManaged = screen.findPreference(KEY_LOCATION_SERVICES_MANAGED);
+        mCategoryLocationServices = screen.findPreference(getPreferenceKey());
     }
 
     @Override
     public void updateState(Preference preference) {
-        if (mCategoryLocationServices != null) {
-            mCategoryLocationServices.removeAll();
-        }
-        if (mCategoryLocationServicesManaged != null) {
-            mCategoryLocationServicesManaged.removeAll();
-        }
+        mCategoryLocationServices.removeAll();
         final Map<Integer, List<Preference>> prefs = getLocationServices();
-        boolean showPrimary = false;
-        boolean showManaged = false;
+        boolean show = false;
         for (Map.Entry<Integer, List<Preference>> entry : prefs.entrySet()) {
             for (Preference pref : entry.getValue()) {
                 if (pref instanceof RestrictedAppPreference) {
@@ -97,21 +83,10 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
                     LocationSettings.addPreferencesSorted(entry.getValue(),
                             mCategoryLocationServices);
                 }
-                showPrimary = true;
-            } else {
-                if (mCategoryLocationServicesManaged != null) {
-                    LocationSettings.addPreferencesSorted(entry.getValue(),
-                            mCategoryLocationServicesManaged);
-                }
-                showManaged = true;
+                show = true;
             }
         }
-        if (mCategoryLocationServices != null) {
-            mCategoryLocationServices.setVisible(showPrimary);
-        }
-        if (mCategoryLocationServicesManaged != null) {
-            mCategoryLocationServicesManaged.setVisible(showManaged);
-        }
+        mCategoryLocationServices.setVisible(show);
     }
 
     @Override
@@ -143,7 +118,7 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
         mContext.unregisterReceiver(mInjectedSettingsReceiver);
     }
 
-    private Map<Integer, List<Preference>> getLocationServices() {
+    protected Map<Integer, List<Preference>> getLocationServices() {
         // If location access is locked down by device policy then we only show injected settings
         // for the primary profile.
         final int profileUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());

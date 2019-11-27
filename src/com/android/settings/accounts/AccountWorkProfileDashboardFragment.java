@@ -41,7 +41,7 @@ public class AccountWorkProfileDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACCOUNT;
+        return SettingsEnums.ACCOUNT_WORK;
     }
 
     @Override
