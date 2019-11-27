@@ -78,6 +78,11 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
                 isChecked ? ON : OFF);

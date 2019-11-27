@@ -170,4 +170,9 @@ public class DoubleTwistPreferenceControllerTest {
         new DoubleTwistPreferenceController(mContext, "bad_key");
         assertThat(controller.isSliceable()).isFalse();
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }
