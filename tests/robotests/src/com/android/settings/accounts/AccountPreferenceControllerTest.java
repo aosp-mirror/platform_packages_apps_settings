@@ -274,33 +274,33 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    public void updateRawDataToIndex_EnabledUser_shouldAddOne() {
+    public void updateDynamicRawDataToIndex_enabledUser_notManagedUser_shouldNotUpdate() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
 
-        mController.updateRawDataToIndex(data);
+        mController.updateDynamicRawDataToIndex(data);
 
-        assertThat(data.size()).isEqualTo(1);
+        assertThat(data.size()).isEqualTo(0);
     }
 
     @Test
-    public void updateRawDataToIndex_ManagedUser_shouldAddThree() {
+    public void updateDynamicRawDataToIndex_managedUser_shouldAddTwo() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
 
-        mController.updateRawDataToIndex(data);
+        mController.updateDynamicRawDataToIndex(data);
 
-        assertThat(data.size()).isEqualTo(3);
+        assertThat(data.size()).isEqualTo(2);
     }
 
     @Test
-    public void updateRawDataToIndex_DisallowRemove_shouldAddTwo() {
+    public void updateDynamicRawDataToIndex_disallowRemove_shouldAddOne() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
@@ -310,13 +310,13 @@ public class AccountPreferenceControllerTest {
                 eq(UserManager.DISALLOW_REMOVE_MANAGED_PROFILE), anyInt()))
                 .thenReturn(true);
 
-        mController.updateRawDataToIndex(data);
+        mController.updateDynamicRawDataToIndex(data);
 
-        assertThat(data.size()).isEqualTo(2);
+        assertThat(data.size()).isEqualTo(1);
     }
 
     @Test
-    public void updateRawDataToIndex_DisallowModify_shouldAddTwo() {
+    public void updateDynamicRawDataToIndex_disallowModify_shouldAddTwo() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
@@ -325,7 +325,7 @@ public class AccountPreferenceControllerTest {
         when(mAccountHelper.hasBaseUserRestriction(
                 eq(UserManager.DISALLOW_MODIFY_ACCOUNTS), anyInt())).thenReturn(true);
 
-        mController.updateRawDataToIndex(data);
+        mController.updateDynamicRawDataToIndex(data);
 
         assertThat(data.size()).isEqualTo(2);
     }

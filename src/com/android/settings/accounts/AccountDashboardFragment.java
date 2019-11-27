@@ -30,6 +30,7 @@ import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
 import com.android.settings.users.AutoSyncWorkDataPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +92,12 @@ public class AccountDashboardFragment extends DashboardFragment {
                         Context context) {
                     return buildPreferenceControllers(
                             context, null /* parent */, null /* authorities*/);
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context,
+                        boolean enabled) {
+                    return null;
                 }
             };
 }
