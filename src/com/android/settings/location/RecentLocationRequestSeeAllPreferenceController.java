@@ -19,7 +19,6 @@ import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -32,7 +31,7 @@ import java.util.List;
 public class RecentLocationRequestSeeAllPreferenceController
         extends LocationBasePreferenceController {
 
-    private PreferenceCategory mCategoryAllRecentLocationRequests;
+    private PreferenceScreen mCategoryAllRecentLocationRequests;
     private RecentLocationApps mRecentLocationApps;
     private boolean mShowSystem = false;
     private Preference mPreference;
