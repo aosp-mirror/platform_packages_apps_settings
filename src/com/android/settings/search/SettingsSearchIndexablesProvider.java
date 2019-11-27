@@ -61,6 +61,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.slice.SliceViewManager;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -216,11 +217,13 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     public Cursor querySliceUriPairs() {
         final SliceViewManager manager = SliceViewManager.getInstance(getContext());
         final MatrixCursor cursor = new MatrixCursor(SLICE_URI_PAIRS_COLUMNS);
-        final Uri baseUri =
-                new Uri.Builder()
+        final String queryUri = getContext().getString(R.string.config_non_public_slice_query_uri);
+        final Uri baseUri = !TextUtils.isEmpty(queryUri) ? Uri.parse(queryUri)
+                : new Uri.Builder()
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                         .build();
+
         final Uri platformBaseUri =
                 new Uri.Builder()
                         .scheme(ContentResolver.SCHEME_CONTENT)

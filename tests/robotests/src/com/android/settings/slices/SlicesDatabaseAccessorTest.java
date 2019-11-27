@@ -17,6 +17,8 @@
 
 package com.android.settings.slices;
 
+import static android.content.ContentResolver.SCHEME_CONTENT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -168,8 +170,10 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void getDescendantUris_platformSlice_doesNotReturnOEMSlice() {
         final String key = "oem_key";
-        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */);
-        final List<Uri> keys = mAccessor.getSliceUris(SettingsSlicesContract.AUTHORITY);
+        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
+        final List<Uri> keys = mAccessor.getSliceUris(SettingsSlicesContract.AUTHORITY,
+                true /* isPublicSlice */);
 
         assertThat(keys).isEmpty();
     }
@@ -177,8 +181,10 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void getDescendantUris_oemSlice_doesNotReturnPlatformSlice() {
         final String key = "platform_key";
-        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
-        final List<Uri> keys = mAccessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
+        final List<Uri> keys = mAccessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY,
+                true /* isPublicSlice */);
 
         assertThat(keys).isEmpty();
     }
@@ -186,8 +192,10 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void getDescendantUris_oemSlice_returnsOEMUriDescendant() {
         final String key = "oem_key";
-        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */);
-        final List<Uri> keys = mAccessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY);
+        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
+        final List<Uri> keys = mAccessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY,
+                true /* isPublicSlice */);
 
         assertThat(keys).containsExactly(
                 Uri.parse("content://com.android.settings.slices/action/oem_key"));
@@ -196,11 +204,49 @@ public class SlicesDatabaseAccessorTest {
     @Test
     public void getDescendantUris_platformSlice_returnsPlatformUriDescendant() {
         final String key = "platform_key";
-        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
-        final List<Uri> keys = mAccessor.getSliceUris(SettingsSlicesContract.AUTHORITY);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
+        final List<Uri> keys = mAccessor.getSliceUris(SettingsSlicesContract.AUTHORITY,
+                true /* isPublicSlice */);
 
         assertThat(keys).containsExactly(
                 Uri.parse("content://android.settings.slices/action/platform_key"));
+    }
+
+    @Test
+    public void getSliceUris_publicSlice_returnPublicUri() {
+        SliceTestUtils.insertSliceToDb(mContext, "test_public", false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, "test_private", false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, false /* isPublicSlice */);
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath("test_public")
+                .build();
+
+        final List<Uri> uri = mAccessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY, true);
+
+        assertThat(uri).containsExactly(expectedUri);
+    }
+
+    @Test
+    public void getSliceUris_nonPublicSlice_returnNonPublicUri() {
+        SliceTestUtils.insertSliceToDb(mContext, "test_public", false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, "test_private", false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, false /* isPublicSlice */);
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath("test_private")
+                .build();
+
+        final List<Uri> uri = mAccessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY, false);
+
+        assertThat(uri).containsExactly(expectedUri);
     }
 
     @Test
@@ -220,7 +266,8 @@ public class SlicesDatabaseAccessorTest {
                         FakeIndexProvider.SEARCH_INDEX_DATA_PROVIDER));
 
         final SlicesDatabaseAccessor accessor = new SlicesDatabaseAccessor(mContext);
-        final List<Uri> keys = accessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY);
+        final List<Uri> keys = accessor.getSliceUris(SettingsSliceProvider.SLICE_AUTHORITY,
+                true /* isPublicSlice */);
 
         assertThat(keys).isNotEmpty();
     }

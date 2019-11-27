@@ -20,10 +20,13 @@ import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
 
 import android.app.PendingIntent;
 import android.app.slice.SliceManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
@@ -265,16 +268,29 @@ public class SettingsSliceProvider extends SliceProvider {
     @Override
     public Collection<Uri> onGetSliceDescendants(Uri uri) {
         final List<Uri> descendants = new ArrayList<>();
-        final Pair<Boolean, String> pathData = SliceBuilderUtils.getPathData(uri);
+        Uri finalUri = uri;
+
+        if (isPrivateSlicesNeeded(finalUri)) {
+            descendants.addAll(
+                    mSlicesDatabaseAccessor.getSliceUris(finalUri.getAuthority(),
+                            false /* isPublicSlice */));
+            Log.d(TAG, "provide " + descendants.size() + " non-public slices");
+            finalUri = new Uri.Builder()
+                    .scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(finalUri.getAuthority())
+                    .build();
+        }
+
+        final Pair<Boolean, String> pathData = SliceBuilderUtils.getPathData(finalUri);
 
         if (pathData != null) {
             // Uri has a full path and will not have any descendants.
-            descendants.add(uri);
+            descendants.add(finalUri);
             return descendants;
         }
 
-        final String authority = uri.getAuthority();
-        final String path = uri.getPath();
+        final String authority = finalUri.getAuthority();
+        final String path = finalUri.getPath();
         final boolean isPathEmpty = path.isEmpty();
 
         // Path is anything but empty, "action", or "intent". Return empty list.
@@ -286,7 +302,7 @@ public class SettingsSliceProvider extends SliceProvider {
         }
 
         // Add all descendants from db with matching authority.
-        descendants.addAll(mSlicesDatabaseAccessor.getSliceUris(authority));
+        descendants.addAll(mSlicesDatabaseAccessor.getSliceUris(authority, true /*isPublicSlice*/));
 
         if (isPathEmpty && TextUtils.isEmpty(authority)) {
             // No path nor authority. Return all possible Uris by adding all special slice uri
@@ -402,6 +418,24 @@ public class SettingsSliceProvider extends SliceProvider {
         final String[] parsedValues = parseStringArray(value);
         Collections.addAll(set, parsedValues);
         return set;
+    }
+
+    @VisibleForTesting
+    boolean isPrivateSlicesNeeded(Uri uri) {
+        final String queryUri = getContext().getString(R.string.config_non_public_slice_query_uri);
+
+        if (!TextUtils.isEmpty(queryUri) && TextUtils.equals(uri.toString(), queryUri)) {
+            // check if the calling package is eligible for private slices
+            final int callingUid = Binder.getCallingUid();
+            final boolean hasPermission = getContext().checkPermission(
+                    android.Manifest.permission.READ_SEARCH_INDEXABLES, Binder.getCallingPid(),
+                    callingUid) == PackageManager.PERMISSION_GRANTED;
+            final String callingPackage = getContext().getPackageManager()
+                    .getPackagesForUid(callingUid)[0];
+            return hasPermission && TextUtils.equals(callingPackage,
+                    getContext().getString(R.string.config_settingsintelligence_package_name));
+        }
+        return false;
     }
 
     private void startBackgroundWorker(Sliceable sliceable, Uri uri) {
