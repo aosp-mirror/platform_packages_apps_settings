@@ -151,6 +151,6 @@ public class VerifyAppsOverUsbPreferenceController extends DeveloperOptionsPrefe
         verification.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         final List<ResolveInfo> receivers = mPackageManager.queryBroadcastReceivers(
                 verification, 0 /* flags */);
-        return receivers.size() != 0;
+        return !receivers.isEmpty();
     }
 }
