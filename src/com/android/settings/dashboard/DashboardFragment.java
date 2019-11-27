@@ -73,13 +73,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             new ArrayMap<>();
     private final List<DynamicDataObserver> mRegisteredObservers = new ArrayList<>();
     private final List<AbstractPreferenceController> mControllers = new ArrayList<>();
-
+    @VisibleForTesting
+    UiBlockerController mBlockerController;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private List<String> mSuppressInjectedTileKeys;
-    @VisibleForTesting
-    UiBlockerController mBlockerController;
 
     @Override
     public void onAttach(Context context) {
@@ -195,6 +194,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         updatePreferenceStates();
+        writeElapsedTimeMetric(SettingsEnums.ACTION_DASHBOARD_VISIBLE_TIME,
+                "isParalleledControllers:" + isParalleledControllers());
     }
 
     @Override

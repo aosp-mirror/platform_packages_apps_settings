@@ -98,6 +98,10 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         return -1;
     }
 
+    protected void writeElapsedTimeMetric(int action, String key) {
+        mVisibilityLoggerMixin.writeElapsedTimeMetric(action, key);
+    }
+
     private void updateActivityTitleWithScreenTitle(PreferenceScreen screen) {
         if (screen != null) {
             final CharSequence title = screen.getTitle();
