@@ -116,8 +116,9 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             final boolean isNonTtyOrTtyOnVolteEnabled = mImsManager.isNonTtyOrTtyOnVolteEnabled();
             final boolean isWfcEnabled = mSwitchBar.isChecked()
                     && isNonTtyOrTtyOnVolteEnabled;
-
-            mSwitchBar.setEnabled((state == TelephonyManager.CALL_STATE_IDLE)
+            boolean isCallStateIdle =
+                    mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE;
+            mSwitchBar.setEnabled(isCallStateIdle
                     && isNonTtyOrTtyOnVolteEnabled);
 
             boolean isWfcModeEditable = true;
@@ -138,13 +139,13 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             final Preference pref = getPreferenceScreen().findPreference(BUTTON_WFC_MODE);
             if (pref != null) {
                 pref.setEnabled(isWfcEnabled && isWfcModeEditable
-                        && (state == TelephonyManager.CALL_STATE_IDLE));
+                        && isCallStateIdle);
             }
             final Preference pref_roam =
                     getPreferenceScreen().findPreference(BUTTON_WFC_ROAMING_MODE);
             if (pref_roam != null) {
                 pref_roam.setEnabled(isWfcEnabled && isWfcRoamingModeEditable
-                        && (state == TelephonyManager.CALL_STATE_IDLE));
+                        && isCallStateIdle);
             }
         }
     };
@@ -271,8 +272,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mImsManager = getImsManager();
         mImsMmTelManager = getImsMmTelManager();
 
-        mTelephonyManager = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
-                .createForSubscriptionId(mSubId);
+        mTelephonyManager = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE));
 
         mButtonWfcMode = findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
@@ -406,9 +406,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         if (mValidListener) {
             mValidListener = false;
 
-            final TelephonyManager tm = (TelephonyManager)
-                    getSystemService(Context.TELEPHONY_SERVICE);
-            tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
             mSwitchBar.removeOnSwitchChangeListener(this);
         }
