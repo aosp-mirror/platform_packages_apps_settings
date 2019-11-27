@@ -21,11 +21,11 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
 
 import androidx.preference.DropDownPreference;
 
 import com.android.settings.R;
+import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class WifiMeteredPreferenceController2Test {
     private static final int METERED_OVERRIDE_NOT_METERED = 2;
 
     @Mock
-    private WifiConfiguration mWifiConfiguration;
+    private WifiEntry mWifiEntry;
 
     private WifiMeteredPreferenceController2 mPreferenceController;
     private Context mContext;
@@ -53,7 +53,7 @@ public class WifiMeteredPreferenceController2Test {
         mContext = RuntimeEnvironment.application;
 
         mPreferenceController = spy(
-                new WifiMeteredPreferenceController2(mContext, mWifiConfiguration));
+                new WifiMeteredPreferenceController2(mContext, mWifiEntry));
         mDropDownPreference = new DropDownPreference(mContext);
         mDropDownPreference.setEntries(R.array.wifi_metered_entries);
         mDropDownPreference.setEntryValues(R.array.wifi_metered_values);

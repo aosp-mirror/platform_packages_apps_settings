@@ -53,7 +53,7 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
     private static final String TAG = "SavedAccessPoints2";
 
     // Key of a Bundle to save/restore the selected WifiEntry
-    static final String KEY_KEY = "key_key";
+    public static final String KEY_KEY = "key_key";
 
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;

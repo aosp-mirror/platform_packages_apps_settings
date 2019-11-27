@@ -20,13 +20,14 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
 
 import androidx.preference.DropDownPreference;
 
 import com.android.settings.R;
+import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,11 +39,11 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class WifiPrivacyPreferenceController2Test {
 
-    private static final int PRIVACY_RANDOMIZED = WifiConfiguration.RANDOMIZATION_PERSISTENT;
-    private static final int PRIVACY_TRUSTED = WifiConfiguration.RANDOMIZATION_NONE;
+    private static final int PRIVACY_RANDOMIZED = WifiEntry.PRIVACY_RANDOMIZED_MAC;
+    private static final int PRIVACY_TRUSTED = WifiEntry.PRIVACY_DEVICE_MAC;
 
     @Mock
-    private WifiConfiguration mWifiConfiguration;
+    private WifiEntry mWifiEntry;
 
     private WifiPrivacyPreferenceController2 mPreferenceController;
     private Context mContext;
@@ -55,7 +56,7 @@ public class WifiPrivacyPreferenceController2Test {
 
         WifiPrivacyPreferenceController2 preferenceController =
                 new WifiPrivacyPreferenceController2(mContext);
-        preferenceController.setWifiConfiguration(mWifiConfiguration);
+        preferenceController.setWifiEntry(mWifiEntry);
         mPreferenceController = spy(preferenceController);
         mDropDownPreference = new DropDownPreference(mContext);
         mDropDownPreference.setEntries(R.array.wifi_privacy_entries);
@@ -89,38 +90,23 @@ public class WifiPrivacyPreferenceController2Test {
     @Test
     public void testController_resilientToNullConfig() {
         mPreferenceController = spy(new WifiPrivacyPreferenceController2(mContext));
+        mPreferenceController.setWifiEntry(mWifiEntry);
 
         mPreferenceController.getRandomizationValue();
         mPreferenceController.onPreferenceChange(mDropDownPreference, "1");
     }
 
     @Test
-    public void testUpdateState_isNotEphemeralNetwork_shouldBeSelectable() {
-        mPreferenceController.setIsEphemeral(false);
+    public void testUpdateState_canSetPrivacy_shouldBeSelectable() {
+        when(mWifiEntry.canSetPrivacy()).thenReturn(true);
         mPreferenceController.updateState(mDropDownPreference);
 
         assertThat(mDropDownPreference.isSelectable()).isTrue();
     }
 
     @Test
-    public void testUpdateState_isEphemeralNetwork_shouldNotSelectable() {
-        mPreferenceController.setIsEphemeral(true);
-        mPreferenceController.updateState(mDropDownPreference);
-
-        assertThat(mDropDownPreference.isSelectable()).isFalse();
-    }
-
-    @Test
-    public void testUpdateState_isNotPasspointNetwork_shouldBeSelectable() {
-        mPreferenceController.setIsPasspoint(false);
-        mPreferenceController.updateState(mDropDownPreference);
-
-        assertThat(mDropDownPreference.isSelectable()).isTrue();
-    }
-
-    @Test
-    public void testUpdateState_isPasspointNetwork_shouldNotSelectable() {
-        mPreferenceController.setIsPasspoint(true);
+    public void testUpdateState_canNotSetPrivacy_shouldNotSelectable() {
+        when(mWifiEntry.canSetPrivacy()).thenReturn(false);
         mPreferenceController.updateState(mDropDownPreference);
 
         assertThat(mDropDownPreference.isSelectable()).isFalse();
