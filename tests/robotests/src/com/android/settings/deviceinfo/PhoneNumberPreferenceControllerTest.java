@@ -179,4 +179,9 @@ public class PhoneNumberPreferenceControllerTest {
         final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
         assertThat(phoneNumber.contentEquals(data)).isTrue();
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }
