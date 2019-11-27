@@ -65,6 +65,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SettingsSliceProvider;
+import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.Indexable;
@@ -375,13 +376,19 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         final String currentPackageName = context.getPackageName();
         for (DashboardCategory category : dashboardFeatureProvider.getAllCategories()) {
             for (Tile tile : category.getTiles()) {
-                if (currentPackageName.equals(tile.getPackageName())) {
+                if (currentPackageName.equals(tile.getPackageName())
+                        && tile instanceof ActivityTile) {
+                    // Skip Settings injected items because they should be indexed in the sub-pages.
                     continue;
                 }
                 final SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                final CharSequence title = tile.getTitle(context);
+                raw.title = TextUtils.isEmpty(title) ? null : title.toString();
+                if (TextUtils.isEmpty(raw.title)) {
+                    continue;
+                }
                 raw.key = dashboardFeatureProvider.getDashboardKeyForTile(tile);
-                raw.title = tile.getTitle(context).toString();
-                CharSequence summary = tile.getSummary(context);
+                final CharSequence summary = tile.getSummary(context);
                 raw.summaryOn = TextUtils.isEmpty(summary) ? null : summary.toString();
                 raw.summaryOff = raw.summaryOn;
                 raw.className = CATEGORY_KEY_TO_PARENT_MAP.get(tile.getCategory());
