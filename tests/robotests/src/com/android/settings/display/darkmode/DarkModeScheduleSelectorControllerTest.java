@@ -16,6 +16,7 @@ package com.android.settings.display.darkmode;
 
 import android.app.UiModeManager;
 import android.content.Context;
+import android.os.PowerManager;
 import androidx.preference.DropDownPreference;
 import androidx.preference.PreferenceScreen;
 import org.junit.Before;
@@ -31,6 +32,7 @@ import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -45,24 +47,27 @@ public class DarkModeScheduleSelectorControllerTest {
     private PreferenceScreen mScreen;
     private Context mContext;
     @Mock
-    private UiModeManager mService;
+    private UiModeManager mUiService;
+    @Mock
+    private PowerManager mPM;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(UiModeManager.class)).thenReturn(mService);
+        when(mContext.getSystemService(UiModeManager.class)).thenReturn(mUiService);
+        when(mContext.getSystemService(PowerManager.class)).thenReturn(mPM);
         when(mContext.getString(R.string.dark_ui_auto_mode_never)).thenReturn("never");
         when(mContext.getString(R.string.dark_ui_auto_mode_auto)).thenReturn("auto");
         mPreference = spy(new DropDownPreference(mContext));
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        when(mService.setNightModeActivated(anyBoolean())).thenReturn(true);
+        when(mUiService.setNightModeActivated(anyBoolean())).thenReturn(true);
         mController = new DarkModeScheduleSelectorController(mContext, mPreferenceKey);
     }
 
     @Test
     public void nightMode_preferenceChange_preferenceChangeTrueWhenChangedOnly() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
+        when(mUiService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
         mController.displayPreference(mScreen);
         boolean changed = mController
                 .onPreferenceChange(mScreen, mContext.getString(R.string.dark_ui_auto_mode_auto));
@@ -74,7 +79,7 @@ public class DarkModeScheduleSelectorControllerTest {
 
     @Test
     public void nightMode_updateStateNone_dropDownValueChangedToNone() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
+        when(mUiService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
         mController.displayPreference(mScreen);
         mController.updateState(mPreference);
         verify(mPreference).setValue(mContext.getString(R.string.dark_ui_auto_mode_never));
@@ -82,9 +87,17 @@ public class DarkModeScheduleSelectorControllerTest {
 
     @Test
     public void nightMode_updateStateNone_dropDownValueChangedToAuto() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_AUTO);
+        when(mUiService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_AUTO);
         mController.displayPreference(mScreen);
         mController.updateState(mPreference);
         verify(mPreference).setValue(mContext.getString(R.string.dark_ui_auto_mode_auto));
+    }
+
+    @Test
+    public void batterySaver_dropDown_disabledSelector() {
+        when(mPM.isPowerSaveMode()).thenReturn(true);
+        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
+        verify(mPreference).setEnabled(eq(false));
     }
 }

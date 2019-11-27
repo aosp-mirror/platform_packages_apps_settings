@@ -17,6 +17,7 @@ package com.android.settings.display.darkmode;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.PowerManager;
 import android.util.AttributeSet;
 import com.android.settings.R;
 import com.android.settings.widget.MasterSwitchPreference;
@@ -27,14 +28,20 @@ public class DarkModePreference extends MasterSwitchPreference {
 
     private UiModeManager mUiModeManager;
     private DarkModeObserver mDarkModeObserver;
+    private PowerManager mPowerManager;
     private Runnable mCallback;
 
     public DarkModePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDarkModeObserver = new DarkModeObserver(context);
         mUiModeManager = context.getSystemService(UiModeManager.class);
+        mPowerManager = context.getSystemService(PowerManager.class);
         mCallback = () -> {
-            updateSummary();
+            final boolean batterySaver = mPowerManager.isPowerSaveMode();
+            final boolean active = (getContext().getResources().getConfiguration().uiMode
+                    & Configuration.UI_MODE_NIGHT_YES) != 0;
+            setSwitchEnabled(!batterySaver);
+            updateSummary(batterySaver, active);
         };
         mDarkModeObserver.subscribe(mCallback);
     }
@@ -51,9 +58,13 @@ public class DarkModePreference extends MasterSwitchPreference {
         mDarkModeObserver.unsubscribe();
     }
 
-    private void updateSummary() {
-        final boolean active = (getContext().getResources().getConfiguration().uiMode
-                & Configuration.UI_MODE_NIGHT_YES) != 0;
+    private void updateSummary(boolean batterySaver, boolean active) {
+        if (batterySaver) {
+            final int stringId = active ? R.string.dark_ui_mode_disabled_summary_dark_theme_on
+                    : R.string.dark_ui_mode_disabled_summary_dark_theme_off;
+            setSummary(getContext().getString(stringId));
+            return;
+        }
         final boolean auto = mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_AUTO;
 
         String detail;
