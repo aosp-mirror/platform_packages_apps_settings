@@ -120,4 +120,9 @@ public class SmartBatteryPreferenceControllerTest {
                 new SmartBatteryPreferenceController(null);
         assertThat(controller.isSliceable()).isTrue();
     }
+
+    @Test
+    public void isPublicSlice_returnsTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

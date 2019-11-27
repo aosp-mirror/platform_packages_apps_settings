@@ -25,7 +25,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.UserManager;
@@ -36,7 +35,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker;
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker.NfcUpdateReceiver;
-import com.android.settings.slices.SliceBuilderUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -285,5 +283,10 @@ public class NfcPreferenceControllerTest {
         receiver.onReceive(mContext, triggerIntent);
 
         verify(worker).updateSlice();
+    }
+
+    @Test
+    public void isPublicSlice_returnsTrue() {
+        assertThat(mNfcController.isPublicSlice()).isTrue();
     }
 }

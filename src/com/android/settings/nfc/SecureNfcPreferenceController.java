@@ -77,7 +77,7 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public boolean isSliceable() {
+    public boolean isPublicSlice() {
         return true;
     }
 

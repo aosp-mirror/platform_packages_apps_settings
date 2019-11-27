@@ -23,7 +23,7 @@ import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
 import android.util.Log;
-import androidx.annotation.VisibleForTesting;
+
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
@@ -90,7 +90,7 @@ public class NfcPreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public boolean isSliceable() {
+    public boolean isPublicSlice() {
         return true;
     }
 
