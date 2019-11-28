@@ -66,6 +66,11 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean setChecked(boolean isChecked) {
         setSwipeToNotification(mContext, isChecked);
         return true;
