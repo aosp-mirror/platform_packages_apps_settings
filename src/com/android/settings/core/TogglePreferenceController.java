@@ -70,4 +70,13 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
         return SliceData.SliceType.SWITCH;
     }
 
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public boolean isPublicSlice() {
+        return false;
+    }
 }

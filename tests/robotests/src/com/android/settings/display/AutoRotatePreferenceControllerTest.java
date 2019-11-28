@@ -35,7 +35,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowRotationPolicy;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -151,6 +150,11 @@ public class AutoRotatePreferenceControllerTest {
         final AutoRotatePreferenceController controller =
                 new AutoRotatePreferenceController(mContext, "bad_key");
         assertThat(controller.isSliceable()).isFalse();
+    }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
     }
 
     private void enableAutoRotationPreference() {
