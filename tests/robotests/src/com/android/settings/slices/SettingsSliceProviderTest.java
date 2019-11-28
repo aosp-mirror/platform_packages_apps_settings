@@ -18,10 +18,13 @@
 package com.android.settings.slices;
 
 import static android.content.ContentResolver.SCHEME_CONTENT;
+import static android.content.pm.PackageManager.PERMISSION_DENIED;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -66,12 +69,15 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
+import org.robolectric.shadows.ShadowBinder;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -110,6 +116,7 @@ public class SettingsSliceProviderTest {
 
     private Context mContext;
     private SettingsSliceProvider mProvider;
+    private ShadowPackageManager mPackageManager;
     @Mock
     private SliceManager mManager;
 
@@ -145,6 +152,8 @@ public class SettingsSliceProviderTest {
 
         doReturn(mManager).when(mContext).getSystemService(SliceManager.class);
         when(mManager.getPinnedSlices()).thenReturn(Collections.emptyList());
+
+        mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
 
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
     }
@@ -284,7 +293,8 @@ public class SettingsSliceProviderTest {
     @Test
     public void getDescendantUris_invalidPath_returnsEmpty() {
         final String key = "platform_key";
-        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
@@ -299,7 +309,8 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void getDescendantUris_platformSlice_doesNotReturnOEMSlice() {
-        SliceTestUtils.insertSliceToDb(mContext, "oem_key", false /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, "oem_key", false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
@@ -313,7 +324,8 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void getDescendantUris_oemSlice_doesNotReturnPlatformSlice() {
-        SliceTestUtils.insertSliceToDb(mContext, "platform_key", true /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, "platform_key", true /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
@@ -328,7 +340,8 @@ public class SettingsSliceProviderTest {
     @Test
     public void getDescendantUris_oemSlice_returnsOEMUriDescendant() {
         final String key = "oem_key";
-        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
@@ -351,7 +364,8 @@ public class SettingsSliceProviderTest {
     @Test
     public void getDescendantUris_oemSliceNoPath_returnsOEMUriDescendant() {
         final String key = "oem_key";
-        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
@@ -371,9 +385,31 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    public void getDescendantUris_oemSliceNoPath_notContainPrivateUri() {
+        final String key = "oem_key";
+        SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, false /* isPublicSlice */);
+        final Uri uri = new Uri.Builder()
+                .scheme(SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .build();
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
+
+        final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
+
+        assertThat(descendants).doesNotContain(expectedUri);
+    }
+
+    @Test
     public void getDescendantUris_platformSlice_returnsPlatformUriDescendant() {
         final String key = "platform_key";
-        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
@@ -396,7 +432,8 @@ public class SettingsSliceProviderTest {
     @Test
     public void getDescendantUris_platformSliceNoPath_returnsPlatformUriDescendant() {
         final String key = "platform_key";
-        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
@@ -419,8 +456,10 @@ public class SettingsSliceProviderTest {
     public void getDescendantUris_noAuthorityNorPath_returnsAllUris() {
         final String platformKey = "platform_key";
         final String oemKey = "oemKey";
-        SliceTestUtils.insertSliceToDb(mContext, platformKey, true /* isPlatformSlice */);
-        SliceTestUtils.insertSliceToDb(mContext, oemKey, false /* isPlatformSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, platformKey, true /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
+        SliceTestUtils.insertSliceToDb(mContext, oemKey, false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .build();
@@ -443,6 +482,48 @@ public class SettingsSliceProviderTest {
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 
         assertThat(descendants).containsExactlyElementsIn(expectedUris);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getDescendantUris_privateSlicesNeeded_containsPrivateSliceUri() {
+        final String privateKey = "test_private";
+        final Uri specialUri = Uri.parse("content://com.android.settings.slices/test");
+        doReturn(true).when(mProvider).isPrivateSlicesNeeded(specialUri);
+        SliceTestUtils.insertSliceToDb(mContext, privateKey /* key */, false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, false /* isPublicSlice */);
+        final Collection<Uri> expectedUris = new HashSet<>();
+        expectedUris.addAll(SPECIAL_CASE_OEM_URIS);
+        expectedUris.add(new Uri.Builder()
+                .scheme(SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(privateKey)
+                .build());
+
+        final Collection<Uri> descendants = mProvider.onGetSliceDescendants(specialUri);
+
+        assertThat(descendants).containsExactlyElementsIn(expectedUris);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getDescendantUris_privateSlicesNotNeeded_notContainPrivateSliceUri() {
+        final Uri specialUri = Uri.parse("content://com.android.settings.slices/test");
+        doReturn(false).when(mProvider).isPrivateSlicesNeeded(specialUri);
+        SliceTestUtils.insertSliceToDb(mContext,
+                "test_private" /* key */, false /* isPlatformSlice */,
+                null /* customizedUnavailableSliceSubtitle */, false /* isPublicSlice */);
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath("test_private")
+                .build();
+
+        final Collection<Uri> descendants = mProvider.onGetSliceDescendants(specialUri);
+
+        assertThat(descendants).doesNotContain(expectedUri);
     }
 
     @Test
@@ -529,6 +610,56 @@ public class SettingsSliceProviderTest {
 
         verify(mManager)
                 .grantSlicePermission("com.android.settings.slice_whitelist_package", uris.get(0));
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isPrivateSlicesNeeded_incorrectUri_returnFalse() {
+        final Uri uri = Uri.parse("content://com.android.settings.slices/test123");
+
+        assertThat(mProvider.isPrivateSlicesNeeded(uri)).isFalse();
+    }
+
+    @Test
+    public void isPrivateSlicesNeeded_noUri_returnFalse() {
+        final Uri uri = Uri.parse("content://com.android.settings.slices/test");
+
+        assertThat(mProvider.isPrivateSlicesNeeded(uri)).isFalse();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isPrivateSlicesNeeded_correctUriWithPermissionAndIsSI_returnTrue() {
+        final Uri uri = Uri.parse("content://com.android.settings.slices/test");
+        ShadowBinder.setCallingUid(123);
+        doReturn(PERMISSION_GRANTED)
+                .when(mContext).checkPermission(anyString(), anyInt(), anyInt());
+        mPackageManager.setPackagesForUid(123, new String[]{"com.android.settings.intelligence"});
+
+        assertThat(mProvider.isPrivateSlicesNeeded(uri)).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isPrivateSlicesNeeded_correctUriWithPermissionNotSI_returnFalse() {
+        final Uri uri = Uri.parse("content://com.android.settings.slices/test");
+        ShadowBinder.setCallingUid(123);
+        doReturn(PERMISSION_GRANTED)
+                .when(mContext).checkPermission(anyString(), anyInt(), anyInt());
+        mPackageManager.setPackagesForUid(123, new String[]{"com.android.settings.test"});
+
+        assertThat(mProvider.isPrivateSlicesNeeded(uri)).isFalse();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isPrivateSlicesNeeded_correctUriNoPermission_returnFalse() {
+        final Uri uri = Uri.parse("content://com.android.settings.slices/test");
+        ShadowBinder.setCallingUid(123);
+        doReturn(PERMISSION_DENIED).when(mContext).checkPermission(anyString(), anyInt(), anyInt());
+        mPackageManager.setPackagesForUid(123, new String[]{"com.android.settings.intelligence"});
+
+        assertThat(mProvider.isPrivateSlicesNeeded(uri)).isFalse();
     }
 
     private static SliceData getDummyData() {

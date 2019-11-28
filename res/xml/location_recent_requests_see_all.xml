@@ -14,9 +14,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/location_category_recent_location_requests"
-    android:key="recent_location_requests_see_all">
-    <PreferenceCategory
-        android:key="all_recent_location_requests"
-        settings:controller="com.android.settings.location.RecentLocationRequestSeeAllPreferenceController"/>
+    android:key="all_recent_location_requests"
+    settings:controller="com.android.settings.location.RecentLocationRequestSeeAllPreferenceController">
 
 </PreferenceScreen>

@@ -47,6 +47,11 @@ class SliceTestUtils {
 
     public static void insertSliceToDb(Context context, String key, boolean isPlatformSlice,
             String customizedUnavailableSliceSubtitle) {
+        insertSliceToDb(context, key, isPlatformSlice, customizedUnavailableSliceSubtitle, false);
+    }
+
+    public static void insertSliceToDb(Context context, String key, boolean isPlatformSlice,
+            String customizedUnavailableSliceSubtitle, boolean isPublicSlice) {
         final SQLiteDatabase db = SlicesDatabaseHelper.getInstance(context).getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(SlicesDatabaseHelper.IndexColumns.KEY, key);
@@ -69,6 +74,7 @@ class SliceTestUtils {
         values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
         values.put(SlicesDatabaseHelper.IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
                 customizedUnavailableSliceSubtitle);
+        values.put(SlicesDatabaseHelper.IndexColumns.PUBLIC_SLICE, isPublicSlice);
 
         db.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
         db.close();

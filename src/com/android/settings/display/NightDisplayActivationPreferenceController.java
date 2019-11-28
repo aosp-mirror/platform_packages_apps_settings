@@ -126,10 +126,12 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
             mTurnOnButton.setVisibility(View.GONE);
             mTurnOffButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setText(buttonText);
+            mTurnOffButton.requestFocus();
         } else {
             mTurnOnButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setVisibility(View.GONE);
             mTurnOnButton.setText(buttonText);
+            mTurnOnButton.requestFocus();
         }
     }
 }

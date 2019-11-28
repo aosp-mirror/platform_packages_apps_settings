@@ -88,16 +88,18 @@ public class SlicesDatabaseAccessor {
     }
 
     /**
-     * @return a list of Slice {@link Uri}s matching {@param authority}.
+     * @return a list of Slice {@link Uri}s based on their visibility {@param isPublicSlice } and
+     * {@param authority}.
      */
-    public List<Uri> getSliceUris(String authority) {
+    public List<Uri> getSliceUris(String authority, boolean isPublicSlice) {
         verifyIndexing();
         final List<Uri> uris = new ArrayList<>();
+        final String whereClause = IndexColumns.PUBLIC_SLICE + (isPublicSlice ? "=1" : "=0");
         final SQLiteDatabase database = mHelper.getReadableDatabase();
         final String[] columns = new String[]{IndexColumns.SLICE_URI};
-        try (final Cursor resultCursor = database.query(TABLE_SLICES_INDEX, columns,
-                null /* where */, null /* selection */, null /* groupBy */, null /* having */,
-                null /* orderBy */)) {
+        try (Cursor resultCursor = database.query(TABLE_SLICES_INDEX, columns,
+                whereClause /* where */, null /* selection */, null /* groupBy */,
+                null /* having */, null /* orderBy */)) {
             if (!resultCursor.moveToFirst()) {
                 return uris;
             }

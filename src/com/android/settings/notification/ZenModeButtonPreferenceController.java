@@ -63,6 +63,7 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
         if (null == mZenButtonOn) {
             mZenButtonOn = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_on_button);
+            mZenButtonOn.setFocusableInTouchMode(true);
             updateZenButtonOnClickListener();
         }
 
@@ -86,12 +87,14 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
                 mZenButtonOff.setVisibility(View.VISIBLE);
                 mZenButtonOn.setVisibility(View.GONE);
+                mZenButtonOff.requestFocus();
                 break;
             case Settings.Global.ZEN_MODE_OFF:
             default:
                 mZenButtonOff.setVisibility(View.GONE);
                 updateZenButtonOnClickListener();
                 mZenButtonOn.setVisibility(View.VISIBLE);
+                mZenButtonOn.requestFocus();
         }
     }
 

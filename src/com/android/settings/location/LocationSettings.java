@@ -87,6 +87,7 @@ public class LocationSettings extends DashboardFragment {
         use(LocationServicePreferenceController.class).init(this);
         use(LocationFooterPreferenceController.class).init(this);
         use(LocationForWorkPreferenceController.class).init(this);
+        use(LocationServiceForWorkPreferenceController.class).init(this);
     }
 
     @Override

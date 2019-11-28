@@ -17,8 +17,9 @@
 package com.android.settings.datetime;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.TimePickerDialog;
+import android.app.timedetector.ManualTimeSuggestion;
+import android.app.timedetector.TimeDetector;
 import android.content.Context;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -117,7 +118,10 @@ public class TimePreferenceController extends AbstractPreferenceController
         long when = Math.max(c.getTimeInMillis(), TimePreferenceHost.MIN_DATE);
 
         if (when / 1000 < Integer.MAX_VALUE) {
-            ((AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE)).setTime(when);
+            TimeDetector timeDetector = mContext.getSystemService(TimeDetector.class);
+            ManualTimeSuggestion manualTimeSuggestion =
+                    TimeDetector.createManualTimeSuggestion(when, "Settings: Set time");
+            timeDetector.suggestManualTime(manualTimeSuggestion);
         }
     }
 }
