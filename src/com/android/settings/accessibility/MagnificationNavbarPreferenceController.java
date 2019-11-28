@@ -77,6 +77,11 @@ public class MagnificationNavbarPreferenceController extends TogglePreferenceCon
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public CharSequence getSummary() {
         int resId = 0;
         if (mIsFromSUW) {
