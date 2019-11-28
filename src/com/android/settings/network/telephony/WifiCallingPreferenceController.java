@@ -148,7 +148,8 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
                         break;
                 }
             }
-            preference.setSummary(resId);
+            preference.setSummary(
+                    SubscriptionManager.getResourcesForSubId(mContext, mSubId).getText(resId));
         }
         preference.setEnabled(mCallState == TelephonyManager.CALL_STATE_IDLE);
     }
