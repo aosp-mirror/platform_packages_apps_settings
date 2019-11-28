@@ -21,7 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AlarmManager;
+import android.app.timedetector.TimeDetector;
 import android.content.Context;
 
 import com.android.settingslib.RestrictedPreference;
@@ -40,7 +40,7 @@ public class DatePreferenceControllerTest {
     @Mock
     private Context mContext;
     @Mock
-    private AlarmManager mAlarmManager;
+    private TimeDetector mTimeDetector;
     @Mock
     private DatePreferenceController.DatePreferenceHost mHost;
     @Mock
@@ -52,7 +52,7 @@ public class DatePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.ALARM_SERVICE)).thenReturn(mAlarmManager);
+        when(mContext.getSystemService(TimeDetector.class)).thenReturn(mTimeDetector);
         mPreference = new RestrictedPreference(RuntimeEnvironment.application);
         mController = new DatePreferenceController(mContext, mHost, mAutoTimePreferenceController);
     }
