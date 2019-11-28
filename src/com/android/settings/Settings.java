@@ -169,6 +169,10 @@ public class Settings extends SettingsActivity {
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class GlobalActionsPanelSettingsActivity extends SettingsActivity {}
+    /**
+     * Activity for BugReportHandlerPicker.
+     */
+    public static class BugReportHandlerPickerActivity extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}

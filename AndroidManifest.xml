@@ -1974,6 +1974,18 @@
         <activity android:name="Settings$WebViewAppPickerActivity"
                   android:label="@string/select_webview_provider_dialog_title" />
 
+        <activity android:name="Settings$BugReportHandlerPickerActivity"
+            android:label="@string/bug_report_handler_title"
+            android:exported="true"
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.settings.BUGREPORT_HANDLER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.bugreporthandler.BugReportHandlerPicker" />
+        </activity>
+
         <activity android:name=".bluetooth.BluetoothPairingDialog"
                   android:excludeFromRecents="true"
                   android:windowSoftInputMode="stateVisible|adjustResize"

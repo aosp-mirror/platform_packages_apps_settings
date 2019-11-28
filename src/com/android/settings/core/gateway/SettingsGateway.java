@@ -56,6 +56,7 @@ import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
+import com.android.settings.bugreporthandler.BugReportHandlerPicker;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
@@ -106,14 +107,14 @@ import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
-import com.android.settings.notification.app.AppBubbleNotificationSettings;
-import com.android.settings.notification.app.AppNotificationSettings;
-import com.android.settings.notification.app.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationAssistantPicker;
-import com.android.settings.notification.history.NotificationStation;
 import com.android.settings.notification.SoundSettings;
+import com.android.settings.notification.app.AppBubbleNotificationSettings;
+import com.android.settings.notification.app.AppNotificationSettings;
+import com.android.settings.notification.app.ChannelNotificationSettings;
+import com.android.settings.notification.history.NotificationStation;
 import com.android.settings.notification.zen.ZenAccessSettings;
 import com.android.settings.notification.zen.ZenModeAutomationSettings;
 import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
@@ -287,7 +288,8 @@ public class SettingsGateway {
             BatterySaverScheduleSettings.class.getName(),
             MobileNetworkListFragment.class.getName(),
             GlobalActionsPanelSettings.class.getName(),
-            DarkModeSettingsFragment.class.getName()
+            DarkModeSettingsFragment.class.getName(),
+            BugReportHandlerPicker.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
