@@ -191,4 +191,9 @@ public class AirplaneModePreferenceControllerTest {
     public void isSliceable_returnsTrue() {
         assertThat(mController.isSliceable()).isTrue();
     }
+
+    @Test
+    public void isPublicSlice_returnsTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

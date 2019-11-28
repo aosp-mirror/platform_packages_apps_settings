@@ -103,7 +103,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public boolean isSliceable() {
+    public boolean isPublicSlice() {
         return true;
     }
 
