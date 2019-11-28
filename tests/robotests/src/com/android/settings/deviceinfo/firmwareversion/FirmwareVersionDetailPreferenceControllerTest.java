@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo.firmwareversion;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -87,6 +86,11 @@ public class FirmwareVersionDetailPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         verify(mContext).startActivity(any());
+    }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
     }
 
     private static class TestController extends FirmwareVersionDetailPreferenceController {

@@ -205,4 +205,9 @@ public class BuildNumberPreferenceControllerTest {
         final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
         assertThat(data.toString()).isEqualTo(mController.getSummary());
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

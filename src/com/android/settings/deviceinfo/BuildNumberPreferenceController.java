@@ -103,6 +103,11 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean isCopyableSlice() {
         return true;
     }

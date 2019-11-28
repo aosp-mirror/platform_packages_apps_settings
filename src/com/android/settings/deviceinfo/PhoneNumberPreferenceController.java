@@ -96,6 +96,11 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean isCopyableSlice() {
         return true;
     }
