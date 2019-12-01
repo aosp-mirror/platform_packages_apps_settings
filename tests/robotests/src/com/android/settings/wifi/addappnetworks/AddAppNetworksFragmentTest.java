@@ -22,49 +22,112 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
+import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.provider.Settings;
+import android.widget.TextView;
 
-import androidx.fragment.app.FragmentActivity;
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class AddAppNetworksFragmentTest {
     private static final String FAKE_APP_NAME = "fake_app_name";
-    private FragmentActivity mActivity;
+    private static final String FAKE_SSID = "fake_ssid";
     private AddAppNetworksFragment mAddAppNetworksFragment;
     private Context mContext;
 
     @Before
     public void setUp() {
         mAddAppNetworksFragment = spy(new AddAppNetworksFragment());
-        MockitoAnnotations.initMocks(this);
-
-        // Set up bundle
-        final Bundle bundle = new Bundle();
-        bundle.putString(AddAppNetworksActivity.KEY_CALLING_PACKAGE_NAME, FAKE_APP_NAME);
-        doReturn(bundle).when(mAddAppNetworksFragment).getArguments();
-
-        FragmentController.setupFragment(mAddAppNetworksFragment);
     }
 
     @Test
     public void callingPackageName_onCreateView_shouldBeCorrect() {
+        setUpOneNetworkBundle();
+        setupFragment();
+
         assertThat(mAddAppNetworksFragment.mCallingPackageName).isEqualTo(FAKE_APP_NAME);
     }
 
     @Test
     public void launchFragment_shouldShowSaveButton() {
+        setUpOneNetworkBundle();
+        setupFragment();
+
         assertThat(mAddAppNetworksFragment.mSaveButton).isNotNull();
     }
 
     @Test
     public void launchFragment_shouldShowCancelButton() {
+        setUpOneNetworkBundle();
+        setupFragment();
+
         assertThat(mAddAppNetworksFragment.mCancelButton).isNotNull();
     }
+
+    @Test
+    public void requestOneNetwork_shouldShowCorrectSSID() {
+        setUpOneNetworkBundle();
+        setupFragment();
+        TextView ssidView = (TextView) mAddAppNetworksFragment.mLayoutView.findViewById(
+                R.id.single_ssid);
+
+        assertThat(ssidView.getText()).isEqualTo(FAKE_SSID);
+    }
+
+    @Test
+    public void withNoExtra_requestNetwork_shouldFinished() {
+        setUpNoNetworkBundle();
+        setupFragment();
+
+        assertThat(mAddAppNetworksFragment.mActivity.isFinishing()).isTrue();
+    }
+
+    private void setUpOneNetworkBundle() {
+        // Setup one network.
+        List<WifiConfiguration> wifiConfigurationList = new ArrayList<>();
+        wifiConfigurationList.add(
+                generateWifiConfig(FAKE_SSID, WifiConfiguration.KeyMgmt.WPA_PSK, "\"1234567890\""));
+        // Set up bundle.
+        final Bundle bundle = new Bundle();
+        bundle.putString(AddAppNetworksActivity.KEY_CALLING_PACKAGE_NAME, FAKE_APP_NAME);
+        bundle.putParcelableArrayList(Settings.EXTRA_WIFI_CONFIGURATION_LIST,
+                (ArrayList<? extends Parcelable>) wifiConfigurationList);
+        doReturn(bundle).when(mAddAppNetworksFragment).getArguments();
+    }
+
+    private void setUpNoNetworkBundle() {
+        // Set up bundle.
+        final Bundle bundle = new Bundle();
+        bundle.putString(AddAppNetworksActivity.KEY_CALLING_PACKAGE_NAME, FAKE_APP_NAME);
+        bundle.putParcelableArrayList(Settings.EXTRA_WIFI_CONFIGURATION_LIST, null);
+        doReturn(bundle).when(mAddAppNetworksFragment).getArguments();
+    }
+
+    private void setupFragment() {
+        FragmentController.setupFragment(mAddAppNetworksFragment);
+    }
+
+    private static WifiConfiguration generateWifiConfig(String ssid, int securityType,
+            String password) {
+        final WifiConfiguration config = new WifiConfiguration();
+        config.SSID = ssid;
+        config.allowedKeyManagement.set(securityType);
+
+        if (password != null) {
+            config.preSharedKey = password;
+        }
+        return config;
+    }
+
 }

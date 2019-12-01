@@ -51,6 +51,11 @@ public class HardwareRevisionPreferenceControllerTest {
     }
 
     @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
+
+    @Test
     public void isCopyableSlice_shouldBeCopyableSlice() {
         assertThat(mController.isCopyableSlice()).isTrue();
     }

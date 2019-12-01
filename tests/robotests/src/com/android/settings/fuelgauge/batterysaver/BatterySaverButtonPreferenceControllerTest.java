@@ -110,4 +110,9 @@ public class BatterySaverButtonPreferenceControllerTest {
 
         verify(mPowerManager).setPowerSaveModeEnabled(false);
     }
+
+    @Test
+    public void isPublicSlice_returnsTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

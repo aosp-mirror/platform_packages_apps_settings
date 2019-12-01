@@ -80,6 +80,9 @@ public class AccountPreferenceController extends AbstractPreferenceController
     private static final int ORDER_NEXT_TO_LAST = 1001;
     private static final int ORDER_NEXT_TO_NEXT_TO_LAST = 1000;
 
+    private static final String PREF_KEY_REMOVE_PROFILE = "remove_profile";
+    private static final String PREF_KEY_WORK_PROFILE_SETTING = "work_profile_setting";
+
     private UserManager mUm;
     private SparseArray<ProfileData> mProfiles = new SparseArray<ProfileData>();
     private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver =
@@ -170,7 +173,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
     }
 
     @Override
-    public void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
         if (!isAvailable()) {
             return;
         }
@@ -178,29 +181,21 @@ public class AccountPreferenceController extends AbstractPreferenceController
         final String screenTitle = res.getString(R.string.account_settings_title);
 
         List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
-        final int profilesCount = profiles.size();
-        for (int i = 0; i < profilesCount; i++) {
-            UserInfo userInfo = profiles.get(i);
-            if (userInfo.isEnabled()) {
-                if (!mHelper.hasBaseUserRestriction(DISALLOW_MODIFY_ACCOUNTS, userInfo.id)) {
-                    SearchIndexableRaw data = new SearchIndexableRaw(mContext);
-                    data.title = res.getString(R.string.add_account_label);
+        for (final UserInfo userInfo : profiles) {
+            if (userInfo.isEnabled() && userInfo.isManagedProfile()) {
+                if (!mHelper.hasBaseUserRestriction(DISALLOW_REMOVE_MANAGED_PROFILE,
+                        UserHandle.myUserId())) {
+                    final SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+                    data.key = PREF_KEY_REMOVE_PROFILE;
+                    data.title = res.getString(R.string.remove_managed_profile_label);
                     data.screenTitle = screenTitle;
                     rawData.add(data);
                 }
-                if (userInfo.isManagedProfile()) {
-                    if (!mHelper.hasBaseUserRestriction(DISALLOW_REMOVE_MANAGED_PROFILE,
-                            UserHandle.myUserId())) {
-                        SearchIndexableRaw data = new SearchIndexableRaw(mContext);
-                        data.title = res.getString(R.string.remove_managed_profile_label);
-                        data.screenTitle = screenTitle;
-                        rawData.add(data);
-                    }
-                    SearchIndexableRaw data = new SearchIndexableRaw(mContext);
-                    data.title = res.getString(R.string.managed_profile_settings_title);
-                    data.screenTitle = screenTitle;
-                    rawData.add(data);
-                }
+                final SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+                data.key = PREF_KEY_WORK_PROFILE_SETTING;
+                data.title = res.getString(R.string.managed_profile_settings_title);
+                data.screenTitle = screenTitle;
+                rawData.add(data);
             }
         }
     }
@@ -375,6 +370,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
     private RestrictedPreference newRemoveWorkProfilePreference() {
         RestrictedPreference preference = new RestrictedPreference(
                 mParent.getPreferenceManager().getContext());
+        preference.setKey(PREF_KEY_REMOVE_PROFILE);
         preference.setTitle(R.string.remove_managed_profile_label);
         preference.setIcon(R.drawable.ic_delete);
         preference.setOnPreferenceClickListener(this);
@@ -385,6 +381,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
 
     private Preference newManagedProfileSettings() {
         Preference preference = new Preference(mParent.getPreferenceManager().getContext());
+        preference.setKey(PREF_KEY_WORK_PROFILE_SETTING);
         preference.setTitle(R.string.managed_profile_settings_title);
         preference.setIcon(R.drawable.ic_settings_24dp);
         preference.setOnPreferenceClickListener(this);

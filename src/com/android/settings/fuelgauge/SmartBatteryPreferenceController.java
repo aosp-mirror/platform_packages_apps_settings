@@ -56,6 +56,11 @@ public class SmartBatteryPreferenceController extends BasePreferenceController i
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         final boolean smartBatteryOn = Settings.Global.getInt(mContext.getContentResolver(),

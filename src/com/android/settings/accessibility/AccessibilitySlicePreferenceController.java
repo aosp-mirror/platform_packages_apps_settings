@@ -91,7 +91,7 @@ public class AccessibilitySlicePreferenceController extends TogglePreferenceCont
     }
 
     @Override
-    public boolean isSliceable() {
+    public boolean isPublicSlice() {
         return true;
     }
 

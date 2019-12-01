@@ -59,7 +59,7 @@ public class BatterySaverButtonPreferenceController extends
     }
 
     @Override
-    public boolean isSliceable() {
+    public boolean isPublicSlice() {
         return true;
     }
 

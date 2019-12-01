@@ -18,6 +18,7 @@ package com.android.settings.wifi.addappnetworks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -53,6 +54,12 @@ public class AddAppNetworksActivity extends FragmentActivity {
         setContentView(R.layout.settings_panel);
         showAddNetworksFragment();
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
+
+        // Move the window to the bottom of screen, and make it take up the entire screen width.
+        final Window window = getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
     @Override
@@ -64,14 +71,11 @@ public class AddAppNetworksActivity extends FragmentActivity {
 
     @VisibleForTesting
     void showAddNetworksFragment() {
-        // Move the window to the bottom of screen, and make it take up the entire screen width.
-        final Window window = getWindow();
-        window.setGravity(Gravity.BOTTOM);
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT);
-
-        // TODO: check the new intent status
+        // TODO: Check the new intent status.
         mBundle.putString(KEY_CALLING_PACKAGE_NAME, getCallingPackage());
+        mBundle.putParcelableArrayList(Settings.EXTRA_WIFI_CONFIGURATION_LIST,
+                getIntent().getParcelableArrayListExtra(Settings.EXTRA_WIFI_CONFIGURATION_LIST));
+
         final FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(TAG) == null) {
             final AddAppNetworksFragment fragment = new AddAppNetworksFragment();

@@ -14,56 +14,32 @@
  * limitations under the License.
  */
 
-package com.android.settings.deviceinfo.hardwareinfo;
+package com.android.settings.nfc;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
-import com.android.settings.core.BasePreferenceController;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-public class DeviceModelPreferenceControllerTest {
+public class SecureNfcPreferenceControllerTest {
 
     private Context mContext;
-    private DeviceModelPreferenceController mController;
-
+    private SecureNfcPreferenceController mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new DeviceModelPreferenceController(mContext, "test_key");
+        mController = new SecureNfcPreferenceController(mContext, "nfc_secure_settings");
     }
 
     @Test
-    public void getAvailabilityStatus_configAllowed_available() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void getAvailabilityStatus_configDisallowed_unavailable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    public void isAlwaysSliceable() {
-        assertThat(mController.isSliceable()).isTrue();
-    }
-
-    @Test
-    public void isPublicSlice_returnTrue() {
+    public void isPublicSlice_returnsTrue() {
         assertThat(mController.isPublicSlice()).isTrue();
     }
 }
