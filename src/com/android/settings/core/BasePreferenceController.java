@@ -13,17 +13,24 @@
  */
 package com.android.settings.core;
 
+import static com.android.settings.dashboard.DashboardFragment.CATEGORY;
+
 import android.annotation.IntDef;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.Utils;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceData;
 import com.android.settings.slices.Sliceable;
@@ -109,9 +116,11 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      */
     public static final int DISABLED_DEPENDENT_SETTING = 5;
 
-
     protected final String mPreferenceKey;
     protected UiBlockListener mUiBlockListener;
+    private boolean mIsForWork;
+    @Nullable
+    private UserHandle mWorkProfileUser;
 
     /**
      * Instantiate a controller as specified controller type and user-defined key.
@@ -151,6 +160,34 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
         }
     }
 
+    /**
+     * Instantiate a controller as specified controller type and work profile
+     * <p/>
+     * This is done through reflection. Do not use this method unless you know what you are doing.
+     *
+     * @param context        application context
+     * @param controllerName class name of the {@link BasePreferenceController}
+     * @param key            attribute android:key of the {@link Preference}
+     * @param isWorkProfile  is this controller only for work profile user?
+     */
+    public static BasePreferenceController createInstance(Context context, String controllerName,
+            String key, boolean isWorkProfile) {
+        try {
+            final Class<?> clazz = Class.forName(controllerName);
+            final Constructor<?> preferenceConstructor =
+                    clazz.getConstructor(Context.class, String.class);
+            final Object[] params = new Object[]{context, key};
+            final BasePreferenceController controller =
+                    (BasePreferenceController) preferenceConstructor.newInstance(params);
+            controller.setForWork(isWorkProfile);
+            return controller;
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+                | IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            throw new IllegalStateException(
+                    "Invalid preference controller: " + controllerName, e);
+        }
+    }
+
     public BasePreferenceController(Context context, String preferenceKey) {
         super(context);
         mPreferenceKey = preferenceKey;
@@ -166,6 +203,9 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * </p>
      * The status is used for the convenience methods: {@link #isAvailable()},
      * {@link #isSupported()}
+     * </p>
+     * The inherited class doesn't need to check work profile is existed or not if
+     * android:forWork="true" is set in preference xml.
      */
     @AvailabilityStatus
     public abstract int getAvailabilityStatus();
@@ -198,12 +238,18 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * {@link #DISABLED_DEPENDENT_SETTING}, then the setting will be disabled by default in the
      * DashboardFragment, and it is up to the {@link BasePreferenceController} to enable the
      * preference at the right time.
-     *
+     * <p>
+     * This function also check if work profile is existed when android:forWork="true" is set for
+     * the controller in preference xml.
      * TODO (mfritze) Build a dependency mechanism to allow a controller to easily define the
      * dependent setting.
      */
     @Override
     public final boolean isAvailable() {
+        if (mIsForWork && mWorkProfileUser == null) {
+            return false;
+        }
+
         final int availabilityStatus = getAvailabilityStatus();
         return (availabilityStatus == AVAILABLE
                 || availabilityStatus == AVAILABLE_UNSEARCHABLE
@@ -267,6 +313,41 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     }
 
     /**
+     * Indicates this controller is only for work profile user
+     */
+    void setForWork(boolean forWork) {
+        mIsForWork = forWork;
+        if (mIsForWork) {
+            mWorkProfileUser = Utils.getManagedProfile(UserManager.get(mContext));
+        }
+    }
+
+    /**
+     * Launches the specified fragment for the work profile user if the associated
+     * {@link Preference} is clicked.  Otherwise just forward it to the super class.
+     *
+     * @param preference the preference being clicked.
+     * @return {@code true} if handled.
+     */
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return super.handlePreferenceTreeClick(preference);
+        }
+        if (!mIsForWork || mWorkProfileUser == null) {
+            return super.handlePreferenceTreeClick(preference);
+        }
+        new SubSettingLauncher(preference.getContext())
+                .setDestination(preference.getFragment())
+                .setSourceMetricsCategory(preference.getExtras().getInt(CATEGORY,
+                        SettingsEnums.PAGE_UNKNOWN))
+                .setArguments(preference.getExtras())
+                .setUserHandle(mWorkProfileUser)
+                .launch();
+        return true;
+    }
+
+    /**
      * Updates raw data for search provider.
      *
      * Called by SearchIndexProvider#getRawDataToIndex
@@ -315,5 +396,14 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * This music be used in {@link BasePreferenceController}
      */
     public interface UiBlocker {
+    }
+
+    /**
+     * @return Non-{@code null} {@link UserHandle} when a work profile is enabled.
+     * Otherwise {@code null}.
+     */
+    @Nullable
+    protected UserHandle getWorkProfileUser() {
+        return mWorkProfileUser;
     }
 }

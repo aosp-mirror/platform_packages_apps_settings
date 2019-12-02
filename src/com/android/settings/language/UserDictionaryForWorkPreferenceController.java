@@ -16,11 +16,9 @@
 
 package com.android.settings.language;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import com.android.settings.R;
-import com.android.settings.core.WorkProfilePreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 /**
  * Preference controller for "UserDictionary for work".
@@ -28,14 +26,15 @@ import com.android.settings.core.WorkProfilePreferenceController;
  * @see UserDictionaryPreferenceController
  */
 public final class UserDictionaryForWorkPreferenceController
-        extends WorkProfilePreferenceController {
+        extends BasePreferenceController {
 
     public UserDictionaryForWorkPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
+    @AvailabilityStatus
     @Override
-    protected int getSourceMetricsCategory() {
-        return SettingsEnums.SETTINGS_LANGUAGE_CATEGORY;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 }

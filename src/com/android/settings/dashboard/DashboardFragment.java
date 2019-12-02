@@ -65,6 +65,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         implements SettingsBaseActivity.CategoryListener, Indexable,
         PreferenceGroup.OnExpandButtonClickListener,
         BasePreferenceController.UiBlockListener {
+    public static final String CATEGORY = "category";
     private static final String TAG = "DashboardFragment";
 
     @VisibleForTesting
@@ -206,6 +207,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mMetricsFeatureProvider.logDashboardStartIntent(
                 getContext(), preference.getIntent(), getMetricsCategory());
         // Give all controllers a chance to handle click.
+        preference.getExtras().putInt(CATEGORY, getMetricsCategory());
         for (List<AbstractPreferenceController> controllerList : controllers) {
             for (AbstractPreferenceController controller : controllerList) {
                 if (controller.handlePreferenceTreeClick(preference)) {
