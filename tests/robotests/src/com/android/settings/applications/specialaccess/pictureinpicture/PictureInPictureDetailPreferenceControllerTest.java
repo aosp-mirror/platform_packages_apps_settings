@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 
 import androidx.preference.Preference;
 
@@ -46,6 +47,8 @@ public class PictureInPictureDetailPreferenceControllerTest {
     private AppInfoDashboardFragment mFragment;
     @Mock
     private Preference mPreference;
+    @Mock
+    private PackageManager mManager;
 
     private Context mContext;
     private PictureInPictureDetailPreferenceController mController;
@@ -61,6 +64,8 @@ public class PictureInPictureDetailPreferenceControllerTest {
 
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
+        when(mContext.getPackageManager()).thenReturn(mManager);
+        when(mManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)).thenReturn(true);
     }
 
     @Test
@@ -77,6 +82,15 @@ public class PictureInPictureDetailPreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_noPictureInPictureFeature_shouldReturnUnSupported() {
+        when(mManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)).thenReturn(
+                false);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
