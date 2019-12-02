@@ -22,17 +22,9 @@
     android:title="@string/location_settings_title"
     settings:keywords="@string/keywords_location">
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="managed_profile_location_switch"
-        android:title="@string/managed_profile_location_switch_title"
-        settings:useAdminDisabledSummary="true"
-        settings:controller="com.android.settings.location.LocationForWorkPreferenceController"
-        android:enabled="false"
-        android:selectable="true"/>
-
     <PreferenceCategory
         android:key="recent_location_requests"
-        android:title="@string/location_category_recent_location_work_requests"
+        android:title="@string/location_category_recent_location_requests"
         settings:controller="com.android.settings.location.RecentLocationRequestPreferenceController"/>
 
     <Preference
@@ -42,29 +34,29 @@
         android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"
         settings:searchable="false"/>
 
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="managed_profile_location_switch"
+        android:title="@string/managed_profile_location_switch_title"
+        settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.location.LocationForWorkPreferenceController"
+        android:selectable="true"/>
+
+    <!-- This preference category gets removed if new_recent_location_ui is disabled -->
+    <Preference
+        android:key="app_level_permissions"
+        android:title="@string/location_app_level_permissions"
+        settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController">
+        <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
+            <extra android:name="android.intent.extra.PERMISSION_NAME"
+                   android:value="android.permission-group.LOCATION"/>
+        </intent>
+    </Preference>
+
     <PreferenceCategory
-        android:key="location_advanced_settings"
+        android:title="@string/managed_profile_location_services"
         android:layout="@layout/preference_category_no_label"
-        settings:initialExpandedChildrenCount="2">
-
-        <!-- This preference category gets removed if new_recent_location_ui is disabled -->
-        <Preference
-            android:key="app_level_permissions"
-            android:title="@string/location_app_level_permissions"
-            settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController">
-            <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
-                <extra android:name="android.intent.extra.PERMISSION_NAME"
-                       android:value="android.permission-group.LOCATION"/>
-            </intent>
-        </Preference>
-
-        <PreferenceCategory
-            android:title="@string/managed_profile_location_services"
-            android:layout="@layout/preference_category_no_label"
-            android:key="location_services_managed_profile"
-            settings:controller="com.android.settings.location.LocationServiceForWorkPreferenceController"/>
-
-    </PreferenceCategory>
+        android:key="location_services_managed_profile"
+        settings:controller="com.android.settings.location.LocationServiceForWorkPreferenceController"/>
 
     <PreferenceCategory
         android:key="location_footer"
