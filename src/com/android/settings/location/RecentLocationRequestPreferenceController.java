@@ -74,12 +74,7 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCategoryRecentLocationRequests = screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        mCategoryRecentLocationRequests.removeAll();
-        final Context prefContext = preference.getContext();
+        final Context prefContext = mCategoryRecentLocationRequests.getContext();
         final List<RecentLocationApps.Request> recentLocationRequests =
                 mRecentLocationApps.getAppListSorted(false);
         if (recentLocationRequests.size() > 3) {

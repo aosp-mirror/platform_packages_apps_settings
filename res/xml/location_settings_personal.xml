@@ -34,34 +34,27 @@
         android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"
         settings:searchable="false"/>
 
-    <PreferenceCategory
-        android:key="location_advanced_settings"
-        android:layout="@layout/preference_category_no_label"
-        settings:initialExpandedChildrenCount="2">
-
-        <!-- This preference category gets removed if new_recent_location_ui is disabled -->
-        <Preference
-            android:key="app_level_permissions"
-            android:title="@string/location_app_level_permissions"
-            settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController">
+    <!-- This preference category gets removed if new_recent_location_ui is disabled -->
+    <Preference
+        android:key="app_level_permissions"
+        android:title="@string/location_app_level_permissions"
+        settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController">
         <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
-                <extra android:name="android.intent.extra.PERMISSION_NAME"
-                       android:value="android.permission-group.LOCATION"/>
-            </intent>
-        </Preference>
+            <extra android:name="android.intent.extra.PERMISSION_NAME"
+                   android:value="android.permission-group.LOCATION"/>
+        </intent>
+    </Preference>
 
-        <Preference
-            android:key="location_scanning"
-            android:title="@string/location_scanning_screen_title"
-            android:fragment="com.android.settings.location.ScanningSettings"
-            settings:controller="com.android.settings.location.LocationScanningPreferenceController"/>
+    <Preference
+        android:key="location_scanning"
+        android:title="@string/location_scanning_screen_title"
+        android:fragment="com.android.settings.location.ScanningSettings"
+        settings:controller="com.android.settings.location.LocationScanningPreferenceController"/>
 
-        <PreferenceCategory
-            android:key="location_services"
-            android:layout="@layout/preference_category_no_label"
-            settings:controller="com.android.settings.location.LocationServicePreferenceController"/>
-
-    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="location_services"
+        android:layout="@layout/preference_category_no_label"
+        settings:controller="com.android.settings.location.LocationServicePreferenceController"/>
 
     <PreferenceCategory
         android:key="location_footer"
