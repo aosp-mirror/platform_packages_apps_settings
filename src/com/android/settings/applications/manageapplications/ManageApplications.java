@@ -102,7 +102,7 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.fuelgauge.HighPowerDetail;
-import com.android.settings.notification.AppNotificationSettings;
+import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.LoadingViewController;

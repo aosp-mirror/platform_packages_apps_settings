@@ -38,7 +38,7 @@
         android:summary="@string/allow_interruption_summary" />
 
     <!-- Importance -->
-    <com.android.settings.notification.ImportancePreference
+    <com.android.settings.notification.app.ImportancePreference
         android:key="importance"
         android:order="4"
         android:title="@string/notification_importance_title"
@@ -64,7 +64,7 @@
         settings:initialExpandedChildrenCount="0">
 
         <!-- Default ringtone -->
-        <com.android.settings.notification.NotificationSoundPreference
+        <com.android.settings.notification.app.NotificationSoundPreference
             android:key="ringtone"
             android:title="@string/notification_channel_sound_title"
             android:dialogTitle="@string/notification_channel_sound_title"
@@ -121,11 +121,11 @@
             settings:allowDividerAbove="true"/>
     </PreferenceCategory>
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="desc"
         android:order="100"/>
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="block_desc"
         android:order="110"
         settings:allowDividerAbove="false"/>

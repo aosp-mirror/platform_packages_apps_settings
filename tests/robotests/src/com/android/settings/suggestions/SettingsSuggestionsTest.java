@@ -29,7 +29,7 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity;
-import com.android.settings.notification.ZenSuggestionActivity;
+import com.android.settings.notification.zen.ZenSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 

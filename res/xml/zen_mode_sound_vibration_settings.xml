@@ -28,13 +28,13 @@
         <Preference
             android:key="zen_mode_calls_settings"
             android:title="@string/zen_mode_calls"
-            android:fragment="com.android.settings.notification.ZenModeCallsSettings" />
+            android:fragment="com.android.settings.notification.zen.ZenModeCallsSettings" />
 
         <!-- Messages -->
         <Preference
             android:key="zen_mode_messages_settings"
             android:title="@string/zen_mode_messages"
-            android:fragment="com.android.settings.notification.ZenModeMessagesSettings" />
+            android:fragment="com.android.settings.notification.zen.ZenModeMessagesSettings" />
 
         <!-- Alarms -->
         <SwitchPreference
@@ -65,7 +65,7 @@
         <Preference
             android:key="zen_mode_bypassing_apps"
             android:title="@string/zen_mode_bypassing_apps"
-            android:fragment="com.android.settings.notification.ZenModeBypassingAppsSettings"/>
+            android:fragment="com.android.settings.notification.zen.ZenModeBypassingAppsSettings"/>
 
     </PreferenceCategory>
 

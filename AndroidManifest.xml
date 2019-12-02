@@ -745,13 +745,13 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.ZenModeSettings" />
+                android:value="com.android.settings.notification.zen.ZenModeSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
 
         <activity
-            android:name=".notification.ZenSuggestionActivity"
+            android:name=".notification.zen.ZenSuggestionActivity"
             android:label="@string/zen_mode_settings_title"
             android:icon="@drawable/ic_suggestion_dnd"
             android:theme="@android:style/Theme.NoDisplay">
@@ -773,7 +773,7 @@
         </activity>
 
         <activity
-            android:name=".notification.ZenOnboardingActivity"
+            android:name=".notification.zen.ZenOnboardingActivity"
             android:label="@string/zen_onboarding_dnd_visual_disturbances_header"
             android:icon="@drawable/ic_notifications"
             android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
@@ -797,7 +797,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ZenModeAutomationSettings" />
+                       android:value="com.android.settings.notification.zen.ZenModeAutomationSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -860,7 +860,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.ZenModeScheduleRuleSettings" />
+                android:value="com.android.settings.notification.zen.ZenModeScheduleRuleSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -873,7 +873,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.ZenModeEventRuleSettings" />
+                android:value="com.android.settings.notification.zen.ZenModeEventRuleSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1169,10 +1169,10 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.NotificationStation" />
+                android:value="com.android.settings.notification.history.NotificationStation" />
         </activity>
 
-        <activity android:name=".notification.ZenModeVoiceActivity"
+        <activity android:name=".notification.zen.ZenModeVoiceActivity"
                 android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
                 android:label="@string/zen_mode_settings_title">
             <intent-filter>
@@ -2434,7 +2434,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ZenAccessSettings" />
+                       android:value="com.android.settings.notification.zen.ZenAccessSettings" />
         </activity>
 
         <activity
@@ -2463,7 +2463,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.AppBubbleNotificationSettings" />
+                       android:value="com.android.settings.notification.app.AppBubbleNotificationSettings" />
         </activity>
 
         <activity
@@ -2508,7 +2508,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.AppNotificationSettings" />
+                android:value="com.android.settings.notification.app.AppNotificationSettings" />
         </activity>
 
         <!-- Show channel-level notification settings (channel passed in as extras) -->
@@ -2520,7 +2520,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ChannelNotificationSettings" />
+                       android:value="com.android.settings.notification.app.ChannelNotificationSettings" />
         </activity>
 
         <!-- Show Manual (from settings item) -->
