@@ -36,13 +36,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.internal.PreferenceImageView;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -67,10 +70,12 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
 
     // Possible result values in each item of the returned result list, which is used
     // to inform the caller APP the processed result of each specified network.
-    private static final int RESULT_NETWORK_INITIAL = -1;  //initial value
+    @VisibleForTesting
+    static final int RESULT_NETWORK_INITIAL = -1;  //initial value
     private static final int RESULT_NETWORK_SUCCESS = 0;
     private static final int RESULT_NETWORK_ADD_ERROR = 1;
-    private static final int RESULT_NETWORK_ALREADY_EXISTS = 2;
+    @VisibleForTesting
+    static final int RESULT_NETWORK_ALREADY_EXISTS = 2;
 
     // Handler messages for controlling different state and delay showing the status message.
     private static final int MESSAGE_START_SAVING_NETWORK = 1;
@@ -80,6 +85,8 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
 
     // Signal level for the constant signal icon.
     private static final int MAX_RSSI_SIGNAL_LEVEL = 4;
+    // Max networks count within one request
+    private static final int MAX_SPECIFIC_NETWORKS_COUNT = 5;
 
     // Duration for showing different status message.
     private static final long SHOW_SAVING_INTERVAL_MILLIS = 500L;
@@ -95,51 +102,44 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     Button mSaveButton;
     @VisibleForTesting
     String mCallingPackageName;
+    @VisibleForTesting
+    List<WifiConfiguration> mAllSpecifiedNetworksList;
+    @VisibleForTesting
+    List<UiConfigurationItem> mUiToRequestedList;
+    @VisibleForTesting
+    List<Integer> mResultCodeArrayList;
 
+    private boolean mIsSingleNetwork;
+    private boolean mAnyNetworkSavedSuccess;
     private TextView mSummaryView;
     private TextView mSingleNetworkProcessingStatusView;
     private int mSavingIndex;
-    private List<WifiConfiguration> mAllSpecifiedNetworksList;
-    private ArrayList<Integer> mResultCodeArrayList;
+    private UiConfigurationItemAdapter mUiConfigurationItemAdapter;
     private WifiManager.ActionListener mSaveListener;
     private WifiManager mWifiManager;
 
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            showSaveStatusByState(msg.what);
+
             switch (msg.what) {
                 case MESSAGE_START_SAVING_NETWORK:
                     mSaveButton.setEnabled(false);
-                    // Set the initial text color for status message.
-                    mSingleNetworkProcessingStatusView.setTextColor(
-                            com.android.settingslib.Utils.getColorAttr(mActivity,
-                                    android.R.attr.textColorSecondary));
-                    mSingleNetworkProcessingStatusView.setText(
-                            getString(R.string.wifi_add_app_single_network_saving_summary));
-                    mSingleNetworkProcessingStatusView.setVisibility(View.VISIBLE);
-
-                    // Save the proposed network.
-                    saveNetworks();
+                    // Save the proposed networks, start from first one.
+                    saveNetwork(0);
                     break;
 
                 case MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK:
-                    mSingleNetworkProcessingStatusView.setText(
-                            getString(R.string.wifi_add_app_single_network_saved_summary));
-
                     // For the single network case, we need to call connection after saved.
-                    connectNetwork();
-
+                    if (mIsSingleNetwork) {
+                        connectNetwork(0);
+                    }
                     sendEmptyMessageDelayed(MESSAGE_FINISH,
                             SHOW_SAVED_INTERVAL_MILLIS);
                     break;
 
                 case MESSAGE_SHOW_SAVE_FAILED:
-                    mSingleNetworkProcessingStatusView.setText(
-                            getString(R.string.wifi_add_app_single_network_save_failed_summary));
-                    // Error message need to use colorError attribute to show.
-                    mSingleNetworkProcessingStatusView.setTextColor(
-                            com.android.settingslib.Utils.getColorAttr(mActivity,
-                                    android.R.attr.colorError));
                     mSaveButton.setEnabled(true);
                     break;
 
@@ -169,15 +169,15 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Initial UI variable.
+        // Initial UI variables.
         mLayoutView = view;
         mCancelButton = view.findViewById(R.id.cancel);
         mSaveButton = view.findViewById(R.id.save);
         mSummaryView = view.findViewById(R.id.app_summary);
         mSingleNetworkProcessingStatusView = view.findViewById(R.id.single_status);
         // Assigns button listeners and network save listener.
-        mCancelButton.setOnClickListener(getCancelListener());
-        mSaveButton.setOnClickListener(getSaveListener());
+        mCancelButton.setOnClickListener(getCancelClickListener());
+        mSaveButton.setOnClickListener(getSaveClickListener());
         prepareSaveResultListener();
 
         // Prepare the non-UI variables.
@@ -189,25 +189,29 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         mAllSpecifiedNetworksList =
                 bundle.getParcelableArrayList(Settings.EXTRA_WIFI_CONFIGURATION_LIST);
 
-        // If there is no networks in the request intent, then just finish activity.
-        if (mAllSpecifiedNetworksList == null || mAllSpecifiedNetworksList.isEmpty()) {
+        // If there is no network in the request intent or the requested networks exceed the
+        // maximum limit, then just finish activity.
+        if (mAllSpecifiedNetworksList == null || mAllSpecifiedNetworksList.isEmpty()
+                || mAllSpecifiedNetworksList.size() > MAX_SPECIFIC_NETWORKS_COUNT) {
             finishWithResult(RESULT_CANCELED, null /* resultArrayList */);
             return;
         }
 
         // Initial the result arry.
         initializeResultCodeArray();
+        // Filter the saved networks, and prepare a not saved networks list for UI to present.
+        mUiToRequestedList = filterSavedNetworks(mWifiManager.getPrivilegedConfiguredNetworks());
 
-        // Filter out the saved networks, don't show saved networks to user.
-        checkSavedNetworks();
+        // If all the specific networks are all exist, we just need to finish with result.
+        if (mUiToRequestedList.size() == 0) {
+            finishWithResult(RESULT_OK, mResultCodeArrayList);
+            return;
+        }
 
         if (mAllSpecifiedNetworksList.size() == 1) {
-            // If the only one requested network is already saved, just return with existence.
-            if (mResultCodeArrayList.get(0) == RESULT_NETWORK_ALREADY_EXISTS) {
-                finishWithResult(RESULT_OK, mResultCodeArrayList);
-                return;
-            }
-
+            mIsSingleNetwork = true;
+            // Set the multiple networks related layout as GONE.
+            mLayoutView.findViewById(R.id.multiple_networks).setVisibility(View.GONE);
             // Show signal icon for single network case.
             setSingleNetworkSignalIcon();
             // Show the SSID of the proposed network.
@@ -216,7 +220,15 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
             // Set the status view as gone when UI is initialized.
             mSingleNetworkProcessingStatusView.setVisibility(View.GONE);
         } else {
-            // TODO: Add code for processing multiple networks case.
+            // Multiple networks request case.
+            mIsSingleNetwork = false;
+            // Set the single network related layout as GONE.
+            mLayoutView.findViewById(R.id.single_network).setVisibility(View.GONE);
+            // Prepare a UI adapter and set to UI listview.
+            final ListView uiNetworkListView = mLayoutView.findViewById(R.id.config_list);
+            mUiConfigurationItemAdapter = new UiConfigurationItemAdapter(mActivity,
+                    com.android.settingslib.R.layout.preference_access_point, mUiToRequestedList);
+            uiNetworkListView.setAdapter(mUiConfigurationItemAdapter);
         }
 
         // Assigns caller app icon, title, and summary.
@@ -257,23 +269,28 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     }
 
     /**
-     * For the APP specified networks, need to filter out those saved ones and mark them as existed.
+     * For the APP specified networks, filter saved ones and mark those saved as existed. And
+     * finally return a new UiConfigurationItem list, which contains those new or need to be
+     * updated networks, back to caller for creating UI to user.
      */
-    private void checkSavedNetworks() {
-        final List<WifiConfiguration> privilegedWifiConfigurations =
-                mWifiManager.getPrivilegedConfiguredNetworks();
+    @VisibleForTesting
+    ArrayList<UiConfigurationItem> filterSavedNetworks(
+            List<WifiConfiguration> savedWifiConfigurations) {
+        ArrayList<UiConfigurationItem> uiToRequestedList = new ArrayList<>();
+
         boolean foundInSavedList;
         int networkPositionInBundle = 0;
         for (WifiConfiguration specifiecConfig : mAllSpecifiedNetworksList) {
             foundInSavedList = false;
+            final String displayedSsid = removeDoubleQuotes(specifiecConfig.SSID);
             final String ssidWithQuotation = addQuotationIfNeeded(specifiecConfig.SSID);
             final String securityType = getSecurityType(specifiecConfig);
 
-            for (WifiConfiguration privilegedWifiConfiguration : privilegedWifiConfigurations) {
+            for (WifiConfiguration privilegedWifiConfiguration : savedWifiConfigurations) {
                 final String savedSecurityType = getSecurityType(privilegedWifiConfiguration);
 
-                // If SSID or security type is different, should be new network or need to updated
-                // network.
+                // If SSID or security type is different, should be new network or need to be
+                // updated network.
                 if (!ssidWithQuotation.equals(privilegedWifiConfiguration.SSID)
                         || !securityType.equals(savedSecurityType)) {
                     continue;
@@ -308,10 +325,15 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
                 // result code list as existed.
                 mResultCodeArrayList.set(networkPositionInBundle, RESULT_NETWORK_ALREADY_EXISTS);
             } else {
-                // TODO: for multiple networks case, need to add to adapter for present list to user
+                // Prepare to add to UI list to show to user
+                UiConfigurationItem uiConfigurationIcon = new UiConfigurationItem(displayedSsid,
+                        specifiecConfig, networkPositionInBundle);
+                uiToRequestedList.add(uiConfigurationIcon);
             }
             networkPositionInBundle++;
         }
+
+        return uiToRequestedList;
     }
 
     private void setSingleNetworkSignalIcon() {
@@ -335,7 +357,20 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
 
         StringBuilder sb = new StringBuilder();
         sb.append("\"").append(input).append("\"");
+
         return sb.toString();
+    }
+
+    static String removeDoubleQuotes(String string) {
+        if (TextUtils.isEmpty(string)) {
+            return "";
+        }
+        int length = string.length();
+        if ((length > 1) && (string.charAt(0) == '"')
+                && (string.charAt(length - 1) == '"')) {
+            return string.substring(1, length - 1);
+        }
+        return string;
     }
 
     private void assignAppIcon(Context context, String callingPackageName) {
@@ -364,21 +399,23 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     }
 
     private CharSequence getAddNetworkRequesterSummary(CharSequence appName) {
-        return getString(R.string.wifi_add_app_single_network_summary, appName);
+        return getString(mIsSingleNetwork ? R.string.wifi_add_app_single_network_summary
+                : R.string.wifi_add_app_networks_summary, appName);
     }
 
     private CharSequence getTitle() {
-        return getString(R.string.wifi_add_app_single_network_title);
+        return getString(mIsSingleNetwork ? R.string.wifi_add_app_single_network_title
+                : R.string.wifi_add_app_networks_title);
     }
 
-    View.OnClickListener getCancelListener() {
+    View.OnClickListener getCancelClickListener() {
         return (v) -> {
             Log.d(TAG, "User rejected to add network");
             finishWithResult(RESULT_CANCELED, null /* resultArrayList */);
         };
     }
 
-    View.OnClickListener getSaveListener() {
+    View.OnClickListener getSaveClickListener() {
         return (v) -> {
             Log.d(TAG, "User agree to add networks");
             // Start to process saving networks.
@@ -387,44 +424,160 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         };
     }
 
+    /**
+     * This class used to show network items to user, each item contains one specific (@Code
+     * WifiConfiguration} and one index to mapping this UI item to the item in the APP request
+     * network list.
+     */
+    @VisibleForTesting
+    static class UiConfigurationItem {
+        public final String mDisplayedSsid;
+        public final WifiConfiguration mWifiConfiguration;
+        public final int mIndex;
+
+        UiConfigurationItem(String displayedSsid, WifiConfiguration wifiConfiguration, int index) {
+            mDisplayedSsid = displayedSsid;
+            mWifiConfiguration = wifiConfiguration;
+            mIndex = index;
+        }
+    }
+
+    private class UiConfigurationItemAdapter extends ArrayAdapter<UiConfigurationItem> {
+        private final int mResourceId;
+        private final LayoutInflater mInflater;
+
+        UiConfigurationItemAdapter(Context context, int resourceId,
+                List<UiConfigurationItem> objects) {
+            super(context, resourceId, objects);
+            mResourceId = resourceId;
+            mInflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public View getView(int position, View view, ViewGroup parent) {
+            if (view == null) {
+                view = mInflater.inflate(mResourceId, parent, false /* attachToRoot */);
+            }
+
+            final View divider = view.findViewById(
+                    com.android.settingslib.R.id.two_target_divider);
+            if (divider != null) {
+                divider.setVisibility(View.GONE);
+            }
+
+            final UiConfigurationItem uiConfigurationItem = getItem(position);
+            final TextView titleView = view.findViewById(android.R.id.title);
+            if (titleView != null) {
+                // Shows whole SSID for better UX.
+                titleView.setSingleLine(false);
+                titleView.setText(uiConfigurationItem.mDisplayedSsid);
+            }
+
+            final PreferenceImageView imageView = view.findViewById(android.R.id.icon);
+            if (imageView != null) {
+                final Drawable drawable = getContext().getDrawable(
+                        com.android.settingslib.Utils.getWifiIconResource(MAX_RSSI_SIGNAL_LEVEL));
+                drawable.setTintList(
+                        com.android.settingslib.Utils.getColorAttr(getContext(),
+                                android.R.attr.colorControlNormal));
+                imageView.setImageDrawable(drawable);
+            }
+
+            final TextView summaryView = view.findViewById(android.R.id.summary);
+            if (summaryView != null) {
+                summaryView.setVisibility(View.GONE);
+            }
+
+            return view;
+        }
+    }
+
     private void prepareSaveResultListener() {
         mSaveListener = new WifiManager.ActionListener() {
             @Override
             public void onSuccess() {
-                mResultCodeArrayList.set(mSavingIndex, RESULT_NETWORK_SUCCESS);
-                Message nextState_Message = mHandler.obtainMessage(
-                        MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK);
-                // Delay to change to next state for showing saving mesage for a period.
-                mHandler.sendMessageDelayed(nextState_Message, SHOW_SAVING_INTERVAL_MILLIS);
+                // Set success into result list.
+                mResultCodeArrayList.set(mUiToRequestedList.get(mSavingIndex).mIndex,
+                        RESULT_NETWORK_SUCCESS);
+                mAnyNetworkSavedSuccess = true;
+
+                if (saveNextNetwork()) {
+                    return;
+                }
+
+                // Show saved or failed according to all results
+                showSavedOrFail();
             }
 
             @Override
             public void onFailure(int reason) {
-                mResultCodeArrayList.set(mSavingIndex, RESULT_NETWORK_ADD_ERROR);
-                Message nextState_Message = mHandler.obtainMessage(MESSAGE_SHOW_SAVE_FAILED);
-                // Delay to change to next state for showing saving mesage for a period.
-                mHandler.sendMessageDelayed(nextState_Message, SHOW_SAVING_INTERVAL_MILLIS);
+                // Set result code of this network to be failed in the return list.
+                mResultCodeArrayList.set(mUiToRequestedList.get(mSavingIndex).mIndex,
+                        RESULT_NETWORK_ADD_ERROR);
+
+                if (saveNextNetwork()) {
+                    return;
+                }
+
+                // Show saved or failed according to all results
+                showSavedOrFail();
             }
         };
     }
 
-    private void saveNetworks() {
-        final WifiConfiguration wifiConfiguration = mAllSpecifiedNetworksList.get(0);
+    /**
+     * For multiple networks case, we need to check if there is other network need to save.
+     */
+    private boolean saveNextNetwork() {
+        // Save the next network if have.
+        if (!mIsSingleNetwork && mSavingIndex < (mUiToRequestedList.size() - 1)) {
+            mSavingIndex++;
+            saveNetwork(mSavingIndex);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * If any one of the specified networks is success, then we show saved and return all results
+     * list back to caller APP, otherwise we show failed to indicate all networks saved failed.
+     */
+    private void showSavedOrFail() {
+        Message nextStateMessage;
+        if (mAnyNetworkSavedSuccess) {
+            // Enter next state after all networks are saved.
+            nextStateMessage = mHandler.obtainMessage(
+                    MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK);
+        } else {
+            nextStateMessage = mHandler.obtainMessage(MESSAGE_SHOW_SAVE_FAILED);
+        }
+        // Delay to change to next state for showing saving mesage for a period.
+        mHandler.sendMessageDelayed(nextStateMessage, SHOW_SAVING_INTERVAL_MILLIS);
+    }
+
+    /**
+     * Call framework API to save single network.
+     */
+    private void saveNetwork(int index) {
+        final WifiConfiguration wifiConfiguration = mUiToRequestedList.get(
+                index).mWifiConfiguration;
         wifiConfiguration.SSID = addQuotationIfNeeded(wifiConfiguration.SSID);
+        mSavingIndex = index;
         mWifiManager.save(wifiConfiguration, mSaveListener);
     }
 
-    private void connectNetwork() {
-        final WifiConfiguration wifiConfiguration = mAllSpecifiedNetworksList.get(0);
-        // Don't need to handle the connect result.
+    private void connectNetwork(int index) {
+        final WifiConfiguration wifiConfiguration = mUiToRequestedList.get(
+                index).mWifiConfiguration;
         mWifiManager.connect(wifiConfiguration, null /* ActionListener */);
     }
 
-    private void finishWithResult(int resultCode, ArrayList<Integer> resultArrayList) {
+    private void finishWithResult(int resultCode, List<Integer> resultArrayList) {
         if (resultArrayList != null) {
             Intent intent = new Intent();
             intent.putIntegerArrayListExtra(Settings.EXTRA_WIFI_CONFIGURATION_RESULT_LIST,
-                    resultArrayList);
+                    (ArrayList<Integer>) resultArrayList);
             mActivity.setResult(resultCode, intent);
         }
         mActivity.finish();
@@ -434,5 +587,60 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     public int getMetricsCategory() {
         // TODO(b/144891278): Need to define a new metric for this page, use the WIFI item first.
         return SettingsEnums.WIFI;
+    }
+
+    private void showSaveStatusByState(int status) {
+        switch (status) {
+            case MESSAGE_START_SAVING_NETWORK:
+                if (mIsSingleNetwork) {
+                    // Set the initial text color for status message.
+                    mSingleNetworkProcessingStatusView.setTextColor(
+                            com.android.settingslib.Utils.getColorAttr(mActivity,
+                                    android.R.attr.textColorSecondary));
+                    mSingleNetworkProcessingStatusView.setText(
+                            getString(R.string.wifi_add_app_single_network_saving_summary));
+                    mSingleNetworkProcessingStatusView.setVisibility(View.VISIBLE);
+                } else {
+                    mSummaryView.setTextColor(
+                            com.android.settingslib.Utils.getColorAttr(mActivity,
+                                    android.R.attr.textColorSecondary));
+                    mSummaryView.setText(
+                            getString(R.string.wifi_add_app_networks_saving_summary,
+                                    mUiToRequestedList.size()));
+                }
+                break;
+
+            case MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK:
+                if (mIsSingleNetwork) {
+                    mSingleNetworkProcessingStatusView.setText(
+                            getString(R.string.wifi_add_app_single_network_saved_summary));
+                } else {
+                    mSummaryView.setText(
+                            getString(R.string.wifi_add_app_networks_saved_summary));
+                }
+                break;
+
+            case MESSAGE_SHOW_SAVE_FAILED:
+                if (mIsSingleNetwork) {
+                    // Error message need to use colorError attribute to show.
+                    mSingleNetworkProcessingStatusView.setTextColor(
+                            com.android.settingslib.Utils.getColorAttr(mActivity,
+                                    android.R.attr.colorError));
+                    mSingleNetworkProcessingStatusView.setText(
+                            getString(R.string.wifi_add_app_network_save_failed_summary));
+                } else {
+                    // Error message need to use colorError attribute to show.
+                    mSummaryView.setTextColor(
+                            com.android.settingslib.Utils.getColorAttr(mActivity,
+                                    android.R.attr.colorError));
+                    mSummaryView.setText(
+                            getString(R.string.wifi_add_app_network_save_failed_summary));
+                }
+                break;
+
+            default:
+                // Do nothing.
+                break;
+        }
     }
 }
