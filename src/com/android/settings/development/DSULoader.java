@@ -195,6 +195,7 @@ public class DSULoader extends ListActivity {
         private static final String OS_VERSION = "os_version";
         private static final String VNDK = "vndk";
         private static final String PUBKEY = "pubkey";
+        private static final String TOS = "tos";
 
         String mName = null;
         String mDetails = null;
@@ -202,6 +203,7 @@ public class DSULoader extends ListActivity {
         int mOsVersion = -1;
         int[] mVndk = null;
         String mPubKey = "";
+        URL mTosUrl = null;
         URL mUri;
 
         DSUPackage(JSONObject jsn) throws JSONException, MalformedURLException {
@@ -222,6 +224,9 @@ public class DSULoader extends ListActivity {
             }
             if (jsn.has(PUBKEY)) {
                 mPubKey = jsn.getString(PUBKEY);
+            }
+            if (jsn.has(TOS)) {
+                mTosUrl = new URL(jsn.getString(TOS));
             }
         }
 
@@ -318,10 +323,10 @@ public class DSULoader extends ListActivity {
             Slog.e(TAG, e.toString());
             return;
         }
-        new Thread(new Fetcher(url)).start();
         mAdapter = new DSUPackageListAdapter(this);
         setListAdapter(mAdapter);
         mAdapter.add(getResources().getString(R.string.dsu_loader_loading));
+        new Thread(new Fetcher(url)).start();
     }
 
     @Override
@@ -329,12 +334,25 @@ public class DSULoader extends ListActivity {
         Object selected = mAdapter.getItem(position);
         if (selected instanceof DSUPackage) {
             DSUPackage dsu = (DSUPackage) selected;
-            Intent intent = new Intent();
-            intent.setClassName(
-                    "com.android.dynsystem", "com.android.dynsystem.VerificationActivity");
-            intent.setData(Uri.parse(dsu.mUri.toString()));
-            intent.putExtra("KEY_PUBKEY", dsu.mPubKey);
-            startActivity(intent);
+            mAdapter.clear();
+            mAdapter.add(getResources().getString(R.string.dsu_loader_loading));
+            new Thread(new Runnable() {
+                public void run() {
+                    String termsOfService = "";
+                    if (dsu.mTosUrl != null) {
+                        try {
+                            termsOfService = readAll(dsu.mTosUrl);
+                        } catch (IOException e) {
+                            Slog.e(TAG, e.toString());
+                        }
+                    }
+                    Intent intent = new Intent(DSULoader.this, DSUTermsOfServiceActivity.class);
+                    intent.putExtra(DSUTermsOfServiceActivity.KEY_TOS, termsOfService);
+                    intent.setData(Uri.parse(dsu.mUri.toString()));
+                    intent.putExtra("KEY_PUBKEY", dsu.mPubKey);
+                    startActivity(intent);
+                }
+            }).start();
         }
         finish();
     }
