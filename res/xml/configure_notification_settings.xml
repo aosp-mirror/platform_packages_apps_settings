@@ -128,8 +128,8 @@
             android:key="zen_mode_notifications"
             android:title="@string/zen_mode_settings_title"
             settings:useAdminDisabledSummary="true"
-            android:fragment="com.android.settings.notification.ZenModeSettings"
-            settings:controller="com.android.settings.notification.ZenModePreferenceController"
+            android:fragment="com.android.settings.notification.zen.ZenModeSettings"
+            settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"
             settings:allowDividerAbove="false"/>
     </PreferenceCategory>
 </PreferenceScreen>

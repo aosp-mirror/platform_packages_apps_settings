@@ -39,6 +39,7 @@ public abstract class LocationBasePreferenceController extends BasePreferenceCon
      */
     public LocationBasePreferenceController(Context context, String key) {
         super(context, key);
+        mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
     }
 
     /**
@@ -48,7 +49,6 @@ public abstract class LocationBasePreferenceController extends BasePreferenceCon
      */
     public void init(DashboardFragment fragment) {
         mFragment = fragment;
-        mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         mLifecycle = mFragment.getSettingsLifecycle();
         mLocationEnabler = new LocationEnabler(mContext, this /* listener */, mLifecycle);
     }

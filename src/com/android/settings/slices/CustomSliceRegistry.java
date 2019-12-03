@@ -45,7 +45,7 @@ import com.android.settings.location.LocationSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
 import com.android.settings.media.MediaOutputSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
-import com.android.settings.notification.ZenModeButtonPreferenceController;
+import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 import com.android.settings.wifi.slice.WifiSlice;

@@ -29,19 +29,19 @@
         <Preference
             android:key="zen_mode_behavior_calls"
             android:title="@string/zen_mode_calls_title"
-            android:fragment="com.android.settings.notification.ZenModeCallsSettings" />
+            android:fragment="com.android.settings.notification.zen.ZenModeCallsSettings" />
 
         <!-- Messages -->
         <Preference
             android:key="zen_mode_behavior_messages"
             android:title="@string/zen_mode_messages_title"
-            android:fragment="com.android.settings.notification.ZenModeMessagesSettings" />
+            android:fragment="com.android.settings.notification.zen.ZenModeMessagesSettings" />
 
         <!-- All sounds -->
         <Preference
             android:key="zen_sound_vibration_settings"
             android:title="@string/zen_sound_title"
-            android:fragment="com.android.settings.notification.ZenModeSoundVibrationSettings"
+            android:fragment="com.android.settings.notification.zen.ZenModeSoundVibrationSettings"
             android:icon="@drawable/ic_chevron_right_24dp"/>
     </PreferenceCategory>
 
@@ -49,11 +49,11 @@
     <Preference
         android:key="zen_mode_block_effects_settings"
         android:title="@string/zen_mode_restrict_notifications_title"
-        android:fragment="com.android.settings.notification.ZenModeRestrictNotificationsSettings"
+        android:fragment="com.android.settings.notification.zen.ZenModeRestrictNotificationsSettings"
         settings:allowDividerAbove="true"/>
 
     <!-- DND duration settings -->
-    <com.android.settings.notification.ZenDurationDialogPreference
+    <com.android.settings.notification.zen.ZenDurationDialogPreference
         android:key="zen_mode_duration_settings"
         android:title="@string/zen_mode_duration_settings_title"
         android:widgetLayout="@null"/>
@@ -62,7 +62,7 @@
     <Preference
         android:key="zen_mode_automation_settings"
         android:title="@string/zen_mode_automation_settings_title"
-        android:fragment="com.android.settings.notification.ZenModeAutomationSettings"/>
+        android:fragment="com.android.settings.notification.zen.ZenModeAutomationSettings"/>
 
     <!-- Turn on DND button -->
     <com.android.settingslib.widget.LayoutPreference

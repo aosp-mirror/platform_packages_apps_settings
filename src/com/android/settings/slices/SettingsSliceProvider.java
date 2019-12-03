@@ -46,7 +46,7 @@ import androidx.slice.SliceProvider;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.notification.ZenModeSliceBuilder;
+import com.android.settings.notification.zen.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
