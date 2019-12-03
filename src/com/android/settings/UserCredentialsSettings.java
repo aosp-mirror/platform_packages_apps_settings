@@ -193,6 +193,8 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
                 for (final Credential credential : credentials) {
                     if (credential.isSystem()) {
                         removeGrantsAndDelete(credential);
+                    } else if (credential.isFsverity()) {
+                        deleteAppSourceCredential(credential);
                     } else {
                         deleteWifiCredential(credential);
                     }
@@ -219,6 +221,16 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
                 }
             }
 
+            private void deleteAppSourceCredential(final Credential credential) {
+                final KeyStore keyStore = KeyStore.getInstance();
+                final EnumSet<Credential.Type> storedTypes = credential.getStoredTypes();
+
+                if (storedTypes.contains(Credential.Type.APP_SOURCE_CERTIFICATE)) {
+                    keyStore.delete(Credentials.APP_SOURCE_CERTIFICATE + credential.getAlias(),
+                            Process.FSVERITY_CERT_UID);
+                }
+            }
+
             private void removeGrantsAndDelete(final Credential credential) {
                 final KeyChainConnection conn;
                 try {
@@ -242,10 +254,21 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
             protected void onPostExecute(Credential... credentials) {
                 if (targetFragment instanceof UserCredentialsSettings && targetFragment.isAdded()) {
                     final UserCredentialsSettings target = (UserCredentialsSettings) targetFragment;
+                    boolean includeFsverity = false;
                     for (final Credential credential : credentials) {
                         target.announceRemoval(credential.alias);
+                        if (credential.isFsverity()) {
+                            includeFsverity = true;
+                        }
                     }
                     target.refreshItems();
+                    if (includeFsverity) {
+                        new RebootDialog(
+                                getActivity(),
+                                R.string.app_src_cert_reboot_dialog_uninstall_title,
+                                R.string.app_src_cert_reboot_dialog_uninstall_message,
+                                "Reboot to make new fsverity cert effective").show();
+                    }
                 }
             }
         }
@@ -272,10 +295,12 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
             final int myUserId = UserHandle.myUserId();
             final int systemUid = UserHandle.getUid(myUserId, Process.SYSTEM_UID);
             final int wifiUid = UserHandle.getUid(myUserId, Process.WIFI_UID);
+            final int fsverityUid = UserHandle.getUid(myUserId, Process.FSVERITY_CERT_UID);
 
             List<Credential> credentials = new ArrayList<>();
             credentials.addAll(getCredentialsForUid(keyStore, systemUid).values());
             credentials.addAll(getCredentialsForUid(keyStore, wifiUid).values());
+            credentials.addAll(getCredentialsForUid(keyStore, fsverityUid).values());
             return credentials;
         }
 
@@ -402,6 +427,7 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
         credentialViewTypes.put(R.id.contents_userkey, Credential.Type.USER_KEY);
         credentialViewTypes.put(R.id.contents_usercrt, Credential.Type.USER_CERTIFICATE);
         credentialViewTypes.put(R.id.contents_cacrt, Credential.Type.CA_CERTIFICATE);
+        credentialViewTypes.put(R.id.contents_appsrccrt, Credential.Type.APP_SOURCE_CERTIFICATE);
     }
 
     protected static View getCredentialView(Credential item, @LayoutRes int layoutResource,
@@ -411,9 +437,15 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
         }
 
         ((TextView) view.findViewById(R.id.alias)).setText(item.alias);
-        ((TextView) view.findViewById(R.id.purpose)).setText(item.isSystem()
-                ? R.string.credential_for_vpn_and_apps
-                : R.string.credential_for_wifi);
+        int purpose;
+        if (item.isSystem()) {
+            purpose = R.string.credential_for_vpn_and_apps;
+        } else if (item.isFsverity()) {
+            purpose = R.string.credential_for_fsverity;
+        } else {
+            purpose = R.string.credential_for_wifi;
+        }
+        ((TextView) view.findViewById(R.id.purpose)).setText(purpose);
 
         view.findViewById(R.id.contents).setVisibility(expanded ? View.VISIBLE : View.GONE);
         if (expanded) {
@@ -435,7 +467,8 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
         static enum Type {
             CA_CERTIFICATE (Credentials.CA_CERTIFICATE),
             USER_CERTIFICATE (Credentials.USER_CERTIFICATE),
-            USER_KEY(Credentials.USER_PRIVATE_KEY, Credentials.USER_SECRET_KEY);
+            USER_KEY(Credentials.USER_PRIVATE_KEY, Credentials.USER_SECRET_KEY),
+            APP_SOURCE_CERTIFICATE(Credentials.APP_SOURCE_CERTIFICATE);
 
             final String[] prefix;
 
@@ -452,7 +485,8 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
         /**
          * UID under which this credential is stored. Typically {@link Process#SYSTEM_UID} but can
-         * also be {@link Process#WIFI_UID} for credentials installed as wifi certificates.
+         * also be {@link Process#WIFI_UID} for credentials installed as wifi certificates, or
+         * {@link Process#FSVERITY_CERT_UID} for app source certificates.
          */
         final int uid;
 
@@ -462,6 +496,7 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
          *   <li>{@link Credentials.CA_CERTIFICATE}</li>
          *   <li>{@link Credentials.USER_CERTIFICATE}</li>
          *   <li>{@link Credentials.USER_KEY}</li>
+         *   <li>{@link Credentials.APP_SOURCE_CERTIFICATE}</li>
          * </ul>
          */
         final EnumSet<Type> storedTypes = EnumSet.noneOf(Type.class);
@@ -510,6 +545,10 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
         public boolean isSystem() {
             return UserHandle.getAppId(uid) == Process.SYSTEM_UID;
+        }
+
+        public boolean isFsverity() {
+            return UserHandle.getAppId(uid) == Process.FSVERITY_CERT_UID;
         }
 
         public String getAlias() { return alias; }
