@@ -19,6 +19,7 @@ import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
 import androidx.preference.PreferenceScreen;
@@ -57,6 +58,8 @@ public class DarkModeActivationPreferenceControllerTest {
     private Button mTurnOffButton;
     @Mock
     private Button mTurnOnButton;
+    @Mock
+    private PowerManager mPM;
 
     private Configuration configNightYes = new Configuration();
     private Configuration configNightNo = new Configuration();;
@@ -67,6 +70,7 @@ public class DarkModeActivationPreferenceControllerTest {
         mService = mock(UiModeManager.class);
         when(mContext.getResources()).thenReturn(res);
         when(mContext.getSystemService(UiModeManager.class)).thenReturn(mService);
+        when(mContext.getSystemService(PowerManager.class)).thenReturn(mPM);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         when(mPreference.findViewById(
                 eq(R.id.dark_ui_turn_on_button))).thenReturn(mTurnOnButton);
@@ -151,5 +155,13 @@ public class DarkModeActivationPreferenceControllerTest {
 
         assertEquals(mController.getSummary(), mContext.getString(
                 R.string.dark_ui_summary_off_auto_mode_auto));
+    }
+
+    @Test
+    public void buttonVisisbility_hideButton_offWhenInPowerSaveMode() {
+        when(mPM.isPowerSaveMode()).thenReturn(true);
+        mController.updateState(mPreference);
+        verify(mTurnOffButton).setVisibility(eq(View.GONE));
+        verify(mTurnOnButton).setVisibility(eq(View.GONE));
     }
 }
