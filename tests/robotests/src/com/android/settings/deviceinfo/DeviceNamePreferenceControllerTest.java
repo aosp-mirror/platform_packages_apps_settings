@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
@@ -71,9 +71,9 @@ public class DeviceNamePreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mPreference = new ValidatedEditTextPreference(mContext);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        final WifiConfiguration configuration = new WifiConfiguration();
-        configuration.SSID = "test-ap";
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(configuration);
+        final SoftApConfiguration configuration =
+                new SoftApConfiguration.Builder().setSsid("test-ap").build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(configuration);
 
         mController = new DeviceNamePreferenceController(mContext, "test_key");
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -137,9 +137,10 @@ public class DeviceNamePreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
-        ArgumentCaptor<WifiConfiguration> captor = ArgumentCaptor.forClass(WifiConfiguration.class);
-        verify(mWifiManager).setWifiApConfiguration(captor.capture());
-        assertThat(captor.getValue().SSID).isEqualTo(TESTING_STRING);
+        ArgumentCaptor<SoftApConfiguration> captor =
+                ArgumentCaptor.forClass(SoftApConfiguration.class);
+        verify(mWifiManager).setSoftApConfiguration(captor.capture());
+        assertThat(captor.getValue().getSsid()).isEqualTo(TESTING_STRING);
     }
 
     @Test
