@@ -20,7 +20,7 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
-import static com.android.settings.notification.NotificationSettingsBase.ARG_FROM_SETTINGS;
+import static com.android.settings.notification.ChannelListPreferenceController.ARG_FROM_SETTINGS;
 
 import android.app.Application;
 import android.app.NotificationChannel;
@@ -110,7 +110,7 @@ public class NotificationChannelSlice implements CustomSliceable {
      *
      * Note:
      * When the sent count of notification channels is the same, follow the sorting mechanism from
-     * {@link com.android.settings.notification.NotificationSettingsBase#mChannelComparator}.
+     * {@link com.android.settings.notification.ChannelListPreferenceController}.
      * Since slice view only shows displayable notification channels, so those deleted ones are
      * excluded from the comparison here.
      */
@@ -257,7 +257,6 @@ public class NotificationChannelSlice implements CustomSliceable {
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPackageName);
         channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
-        channelArgs.putBoolean(ARG_FROM_SETTINGS, true);
 
         final Intent channelIntent = new SubSettingLauncher(mContext)
                 .setDestination(ChannelNotificationSettings.class.getName())

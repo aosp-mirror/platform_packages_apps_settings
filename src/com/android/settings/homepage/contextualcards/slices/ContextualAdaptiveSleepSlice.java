@@ -26,6 +26,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -72,11 +73,12 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
             return null;
         }
 
-        // Display the contextual card only if all the following 3 conditions hold:
-        // 1. The Screen Attention is enabled in Settings.
+        // Display the contextual card only if all the following 4 conditions hold:
+        // 1. The Screen Attention is available in Settings.
         // 2. The device is not recently set up.
         // 3. Current user hasn't opened Screen Attention's settings page before.
-        if (isSettingsAvailable() && !isUserInteracted() && !isRecentlySetup()) {
+        // 4. Screen Attention is off.
+        if (isSettingsAvailable() && !isUserInteracted() && !isRecentlySetup() && !isTurnedOn()) {
             final IconCompat icon = IconCompat.createWithResource(mContext,
                     R.drawable.ic_settings_adaptive_sleep);
             final CharSequence title = mContext.getText(R.string.adaptive_sleep_title);
@@ -120,6 +122,14 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
         return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent, 0  /* flags */);
+    }
+
+    /**
+     * @return {@code true} if the feature is turned on for the device, otherwise {@code false}
+     */
+    private boolean isTurnedOn() {
+        return Settings.System.getInt(
+                mContext.getContentResolver(), Settings.System.ADAPTIVE_SLEEP, 0) != 0;
     }
 
     /**
