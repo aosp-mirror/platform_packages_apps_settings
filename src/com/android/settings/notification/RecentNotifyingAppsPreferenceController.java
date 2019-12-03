@@ -266,14 +266,17 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             Bundle args = new Bundle();
             args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkgName);
             args.putInt(AppInfoBase.ARG_PACKAGE_UID, appEntry.info.uid);
-            pref.setIntent(new SubSettingLauncher(mHost.getActivity())
-                    .setDestination(AppNotificationSettings.class.getName())
-                    .setTitleRes(R.string.notifications_title)
-                    .setArguments(args)
-                    .setUserHandle(new UserHandle(UserHandle.getUserId(appEntry.info.uid)))
-                    .setSourceMetricsCategory(
-                            SettingsEnums.MANAGE_APPLICATIONS_NOTIFICATIONS)
-                    .toIntent());
+            pref.setOnPreferenceClickListener(preference -> {
+                new SubSettingLauncher(mHost.getActivity())
+                        .setDestination(AppNotificationSettings.class.getName())
+                        .setTitleRes(R.string.notifications_title)
+                        .setArguments(args)
+                        .setUserHandle(new UserHandle(UserHandle.getUserId(appEntry.info.uid)))
+                        .setSourceMetricsCategory(
+                                SettingsEnums.MANAGE_APPLICATIONS_NOTIFICATIONS)
+                        .launch();
+                return true;
+            });
             pref.setSwitchEnabled(mNotificationBackend.isBlockable(mContext, appEntry.info));
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean blocked = !(Boolean) newValue;

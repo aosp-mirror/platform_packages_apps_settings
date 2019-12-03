@@ -46,6 +46,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.HelpTrampoline;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkActivity;
@@ -292,10 +293,9 @@ public class SimSelectNotification extends BroadcastReceiver {
                         .setAutoCancel(true);
 
         // Create the pending intent that will lead to the helper page.
-        Intent resultIntent = HelpUtils.getHelpIntent(
-                context,
-                context.getString(R.string.help_uri_sim_combination_warning),
-                context.getClass().getName());
+        Intent resultIntent = new Intent(context, HelpTrampoline.class);
+        resultIntent.putExtra(Intent.EXTRA_TEXT, "help_uri_sim_combination_warning");
+
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
         builder.setContentIntent(resultPendingIntent);
