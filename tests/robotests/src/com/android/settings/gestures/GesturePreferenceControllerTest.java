@@ -81,25 +81,25 @@ public class GesturePreferenceControllerTest {
     }
 
     @Test
-    public void onResume_shouldStartVideoPreference() {
+    public void onStart_shouldStartVideoPreference() {
         final VideoPreference videoPreference = mock(VideoPreference.class);
         when(mScreen.findPreference(mController.getVideoPrefKey())).thenReturn(videoPreference);
         mController.mIsPrefAvailable = true;
         mController.displayPreference(mScreen);
 
-        mController.onResume();
+        mController.onStart();
 
         verify(videoPreference).onViewVisible();
     }
 
     @Test
-    public void onPause_shouldStopVideoPreference() {
+    public void onStop_shouldStopVideoPreference() {
         final VideoPreference videoPreference = mock(VideoPreference.class);
         when(mScreen.findPreference(mController.getVideoPrefKey())).thenReturn(videoPreference);
         mController.mIsPrefAvailable = true;
 
         mController.displayPreference(mScreen);
-        mController.onPause();
+        mController.onStop();
 
         verify(videoPreference).onViewInvisible();
     }
