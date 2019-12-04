@@ -14,18 +14,30 @@
 
 package com.android.settings.display.darkmode;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.PowerManager;
 import android.provider.Settings;
+import android.util.Log;
 import com.android.internal.annotations.VisibleForTesting;
 
 /**
  * Observes changes for dark night settings*/
 public class DarkModeObserver {
+    private static final String TAG = "DarkModeObserver";
     private ContentObserver mContentObserver;
+    private final BroadcastReceiver mBatterySaverReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mCallback.run();
+        }
+    };
     private Runnable mCallback;
     private Context mContext;
 
@@ -58,6 +70,10 @@ public class DarkModeObserver {
         mCallback = callback;
         final Uri uri = Settings.Secure.getUriFor(Settings.Secure.UI_NIGHT_MODE);
         mContext.getContentResolver().registerContentObserver(uri, false, mContentObserver);
+        final IntentFilter batteryFilter = new IntentFilter();
+        batteryFilter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
+        mContext.registerReceiver(
+                mBatterySaverReceiver, batteryFilter);
     }
 
     /**
@@ -65,6 +81,13 @@ public class DarkModeObserver {
      */
     public void unsubscribe() {
         mContext.getContentResolver().unregisterContentObserver(mContentObserver);
+        try {
+            mContext.unregisterReceiver(mBatterySaverReceiver);
+        } catch (IllegalArgumentException e) {
+            /* Ignore: unregistering an unregistered receiver */
+            Log.w(TAG, e.getMessage());
+        }
+        // NO-OP
         mCallback = null;
     }
 

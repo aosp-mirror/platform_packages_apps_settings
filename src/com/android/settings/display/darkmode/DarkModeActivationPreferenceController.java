@@ -17,6 +17,7 @@ package com.android.settings.display.darkmode;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
 import androidx.preference.Preference;
@@ -30,18 +31,27 @@ import com.android.settingslib.widget.LayoutPreference;
  */
 public class DarkModeActivationPreferenceController extends BasePreferenceController {
     private final UiModeManager mUiModeManager;
+    private PowerManager mPowerManager;
     private Button mTurnOffButton;
     private Button mTurnOnButton;
 
     public DarkModeActivationPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
-
+        mPowerManager = context.getSystemService(PowerManager.class);
         mUiModeManager = context.getSystemService(UiModeManager.class);
     }
 
     @Override
     public final void updateState(Preference preference) {
+
+        final boolean batterySaver = mPowerManager.isPowerSaveMode();
+        if (batterySaver) {
+            mTurnOnButton.setVisibility(View.GONE);
+            mTurnOffButton.setVisibility(View.GONE);
+            return;
+        }
+
         final boolean active = (mContext.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_YES) != 0;
         updateNightMode(active);
