@@ -32,7 +32,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.display.darkmode.DarkModePreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -92,7 +91,6 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
                         Settings.Secure.DARK_MODE_DIALOG_SEEN, 0) == DIALOG_SEEN;
         if (!dialogSeen && isChecked) {
             showDarkModeDialog();
-            return false;
         }
         return mUiModeManager.setNightModeActivated(isChecked);
     }
