@@ -404,8 +404,11 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         // TODO(b/70983952) Add WifiEntry click logic. This should be as simple as calling
         // WifiEntry.connect().
-
-        if (preference == mAddWifiNetworkPreference) {
+        if (preference instanceof LongPressWifiEntryPreference) {
+            final WifiEntry selectedEntry =
+                    ((LongPressWifiEntryPreference) preference).getWifiEntry();
+            selectedEntry.connect();
+        } else if (preference == mAddWifiNetworkPreference) {
             onAddNetworkPressed();
         } else {
             return super.onPreferenceTreeClick(preference);
