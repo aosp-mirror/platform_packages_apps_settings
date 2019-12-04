@@ -16,6 +16,9 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.PERSONAL_TAB;
+import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.WORK_TAB;
+
 import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -37,6 +40,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.SettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -394,8 +398,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
         if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE)) {
             final Bundle args = new Bundle(2 + additionalCapacity);
-            args.putInt(ProfileSelectFragment.EXTRA_PROFILE,
-                    mIsWorkProfile ? ProfileSelectFragment.WORK : ProfileSelectFragment.PERSONAL);
+            args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB,
+                    mIsWorkProfile ? WORK_TAB : PERSONAL_TAB);
             args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
             return args;
         } else {
