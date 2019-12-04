@@ -68,7 +68,7 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (mWasAvailable != isAvailable()) {
             // Only update the preference visibility if the availability has changed -- otherwise
             // the preference may be incorrectly added to screens with collapsed sections.
