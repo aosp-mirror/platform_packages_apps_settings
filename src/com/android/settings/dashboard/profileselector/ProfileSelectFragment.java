@@ -17,8 +17,10 @@
 package com.android.settings.dashboard.profileselector;
 
 import android.annotation.IntDef;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,7 +93,22 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mContentView = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
-        final int selected = getArguments().getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, 0);
+        final Activity activity = getActivity();
+        final int intentUser = activity.getIntent().getContentUserHint();
+        int selectedTab = 0;
+
+        // Start intent from a specific user eg: adb shell --user 10
+        if (intentUser > 0 && Utils.getManagedProfile(UserManager.get(activity)).getIdentifier()
+                == intentUser) {
+            selectedTab = WORK_TAB;
+        }
+
+        // Set selected tab using fragment argument
+        final int extraTab = getArguments() != null ? getArguments().getInt(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, -1) : -1;
+        if (extraTab != -1) {
+            selectedTab = extraTab;
+        }
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
         final ViewPager viewPager = tabContainer.findViewById(R.id.view_pager);
@@ -99,7 +116,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         final TabLayout tabs = tabContainer.findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         tabContainer.setVisibility(View.VISIBLE);
-        final TabLayout.Tab tab = tabs.getTabAt(selected);
+        final TabLayout.Tab tab = tabs.getTabAt(selectedTab);
         tab.select();
 
         final FrameLayout listContainer = mContentView.findViewById(android.R.id.list_container);
@@ -109,7 +126,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
         final RecyclerView recyclerView = getListView();
         recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(), recyclerView);
+        Utils.setActionBarShadowAnimation(activity, getSettingsLifecycle(), recyclerView);
 
         return mContentView;
     }
