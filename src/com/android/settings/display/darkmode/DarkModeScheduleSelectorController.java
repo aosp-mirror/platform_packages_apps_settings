@@ -17,6 +17,7 @@ package com.android.settings.display.darkmode;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.PowerManager;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -30,13 +31,14 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
     private final UiModeManager mUiModeManager;
-    private boolean mPreferenceSet = false;
+    private PowerManager mPowerManager;
     private DropDownPreference mPreference;
     private String mCurrentMode;
 
     public DarkModeScheduleSelectorController(Context context, String key) {
         super(context, key);
         mUiModeManager = context.getSystemService(UiModeManager.class);
+        mPowerManager = context.getSystemService(PowerManager.class);
     }
 
     @Override
@@ -53,6 +55,8 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
 
     @Override
     public final void updateState(Preference preference) {
+        final boolean batterySaver = mPowerManager.isPowerSaveMode();
+        mPreference.setEnabled(!batterySaver);
         mCurrentMode =
                 mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_AUTO
                 ? mContext.getString(R.string.dark_ui_auto_mode_auto)

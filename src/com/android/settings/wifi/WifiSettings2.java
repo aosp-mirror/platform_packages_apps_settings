@@ -495,6 +495,22 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         mConnectedWifiEntryPreferenceCategory.setVisible(true);
         mWifiEntryPreferenceCategory.setVisible(true);
 
+        final WifiEntry connectedEntry = mWifiPickerTracker.getConnectedWifiEntry();
+        if (connectedEntry != null) {
+            final LongPressWifiEntryPreference connectedPref =
+                    mConnectedWifiEntryPreferenceCategory.findPreference(connectedEntry.getKey());
+            if (connectedPref == null || connectedPref.getWifiEntry() != connectedEntry) {
+                mConnectedWifiEntryPreferenceCategory.removeAll();
+                final LongPressWifiEntryPreference pref =
+                        createLongPressWifiEntryPreference(connectedEntry);
+                pref.setKey(connectedEntry.getKey());
+                pref.refresh();
+                mConnectedWifiEntryPreferenceCategory.addPreference(pref);
+            }
+        } else {
+            mConnectedWifiEntryPreferenceCategory.removeAll();
+        }
+
         int index = 0;
         cacheRemoveAllPrefs(mWifiEntryPreferenceCategory);
         List<WifiEntry> wifiEntries = mWifiPickerTracker.getWifiEntries();

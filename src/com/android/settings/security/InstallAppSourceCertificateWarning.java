@@ -31,23 +31,22 @@ import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 /**
- * Creates a warning dialog explaining the consequences of installing a CA certificate
- * This is displayed before a CA certificate can be installed from Settings.
+ * Creates a warning dialog explaining the consequences of installing a certificate
+ * This is displayed before an app source certificate can be installed from Settings.
  */
-public class InstallCaCertificateWarning extends Activity {
-
+public class InstallAppSourceCertificateWarning extends Activity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.ca_certificate_warning_dialog);
+        setContentView(R.layout.app_source_certificate_warning_dialog);
         final GlifLayout layout = findViewById(R.id.setup_wizard_layout);
 
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
         mixin.setSecondaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.certificate_warning_install_anyway)
-                        .setListener(installCaCertificate())
+                        .setListener(installCertificate())
                         .setButtonType(FooterButton.ButtonType.OTHER)
                         .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
@@ -63,11 +62,12 @@ public class InstallCaCertificateWarning extends Activity {
         );
     }
 
-    private View.OnClickListener installCaCertificate() {
+    private View.OnClickListener installCertificate() {
         return v -> {
             final Intent intent = new Intent();
             intent.setAction(Credentials.INSTALL_ACTION);
-            intent.putExtra(Credentials.EXTRA_CERTIFICATE_USAGE, Credentials.CERTIFICATE_USAGE_CA);
+            intent.putExtra(Credentials.EXTRA_CERTIFICATE_USAGE,
+                    Credentials.CERTIFICATE_USAGE_APP_SOURCE);
             startActivity(intent);
             finish();
         };
