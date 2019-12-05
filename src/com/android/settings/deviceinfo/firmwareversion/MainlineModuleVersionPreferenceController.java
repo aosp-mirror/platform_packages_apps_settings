@@ -111,7 +111,7 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
             try {
                 final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern,
                         Locale.getDefault());
-                simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+                simpleDateFormat.setTimeZone(TimeZone.getDefault());
                 return Optional.of(simpleDateFormat.parse(text));
             } catch (ParseException e) {
                 // ignore and try next pattern
