@@ -135,6 +135,14 @@ public class SettingsActivity extends SettingsBaseActivity
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
 
+    /**
+     * Personal or Work profile tab of {@link ProfileSelectFragment}
+     * <p>0: Personal tab.
+     * <p>1: Work profile tab.
+     */
+    public static final String EXTRA_SHOW_FRAGMENT_TAB =
+            ":settings:show_fragment_tab";
+
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
             "com.android.settings.FRAGMENT_CLASS";
 

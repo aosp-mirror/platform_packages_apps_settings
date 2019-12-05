@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 
@@ -74,12 +75,23 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      */
     public static final String EXTRA_PROFILE = "profile";
 
+    /**
+     * Used in fragment argument with Extra key {@link SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB}
+     */
+    public static final int PERSONAL_TAB = 0;
+
+    /**
+     * Used in fragment argument with Extra key {@link SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB}
+     */
+    public static final int WORK_TAB = 1;
+
     private ViewGroup mContentView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mContentView = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
+        final int selected = getArguments().getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, 0);
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
         final ViewPager viewPager = tabContainer.findViewById(R.id.view_pager);
@@ -87,6 +99,8 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         final TabLayout tabs = tabContainer.findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         tabContainer.setVisibility(View.VISIBLE);
+        final TabLayout.Tab tab = tabs.getTabAt(selected);
+        tab.select();
 
         final FrameLayout listContainer = mContentView.findViewById(android.R.id.list_container);
         listContainer.setLayoutParams(new LinearLayout.LayoutParams(
@@ -96,6 +110,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         final RecyclerView recyclerView = getListView();
         recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(), recyclerView);
+
         return mContentView;
     }
 

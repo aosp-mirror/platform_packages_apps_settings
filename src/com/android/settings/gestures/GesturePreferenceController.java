@@ -25,12 +25,12 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public abstract class GesturePreferenceController extends TogglePreferenceController
         implements Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnResume, OnPause {
+        LifecycleObserver, OnStart, OnStop {
 
     private VideoPreference mVideoPreference;
 
@@ -62,16 +62,16 @@ public abstract class GesturePreferenceController extends TogglePreferenceContro
     }
 
     @Override
-    public void onPause() {
+    public void onStart() {
         if (mVideoPreference != null) {
-            mVideoPreference.onViewInvisible();
+            mVideoPreference.onViewVisible();
         }
     }
 
     @Override
-    public void onResume() {
+    public void onStop() {
         if (mVideoPreference != null) {
-            mVideoPreference.onViewVisible();
+            mVideoPreference.onViewInvisible();
         }
     }
 

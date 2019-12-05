@@ -77,19 +77,19 @@ public class VideoPreferenceControllerTest {
     }
 
     @Test
-    public void onPause_shouldCallOnViewInvisibleOnPrefernece() {
+    public void onStop_shouldCallOnViewInvisibleOnPrefernece() {
         mController.displayPreference(mScreen);
 
-        mController.onPause();
+        mController.onStop();
 
         verify(mPreference).onViewInvisible();
     }
 
     @Test
-    public void onResume_shouldCallOnViewVisibleOnPrefernece() {
+    public void onStart_shouldCallOnViewVisibleOnPrefernece() {
         mController.displayPreference(mScreen);
 
-        mController.onResume();
+        mController.onStart();
 
         verify(mPreference).onViewVisible();
     }
