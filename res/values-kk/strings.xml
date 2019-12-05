@@ -51,7 +51,6 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Экрандағы мәтінді кішірейтеді немесе үлкейтеді."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Кішірек ету"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Үлкенірек ету"</string>
-    <string name="font_size_preview_text" msgid="5578792111916168343">"Servez à ce monsieur une bière et des kiwis."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Мәтін үлгісі"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Оз қаласының ғажап сиқыршысы"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11-тарау: Ғажайып жасыл қала Оз"</string>
@@ -1044,6 +1043,11 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"Wi‑Fi хотспотын реттеу"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"AndroidAP WPA2 PSK хотспоты"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"Android хот-споты"</string>
+    <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Бұл желі сақталсын ба?"</string>
+    <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> қолданбасы желіні телефоныңызға сақтағысы келеді."</string>
+    <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Сақталуда…"</string>
+    <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Сақталды"</string>
+    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"Сақталмады. Қайталап көріңіз."</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Wi-Fi қоңыраулары"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Wi‑Fi арқылы қоңыраулар аясын кеңейтіңіз"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"Аумақты кеңейту үшін Wi‑Fi қоңырауларын қосыңыз"</string>
@@ -1631,6 +1635,7 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Соңғы орынды анықтау сұраулары"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Барлығын көру"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Орын қызметтері"</string>
+    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"Жұмыс қолданбасының соңғы геодерек сұраулары"</string>
     <string name="location_title" msgid="5819154746934945021">"Mенің аймағым"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Жұмыс профилінің орны"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"Қолданба рұқсаты"</string>
@@ -3092,7 +3097,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"мазаламау үзу, үзу, үзіліс"</string>
     <string name="keywords_app" msgid="7983814237980258061">"ЖЖҚ"</string>
     <string name="keywords_location" msgid="8016374808099706213">"маңай, орын, тарих, есеп жіберу, GPS"</string>
-    <string name="keywords_accounts" msgid="1030474336927817800">"есептік жазба, есептік жазбаны енгізу, жұмыс профилі"</string>
+    <string name="keywords_accounts" msgid="3482052586502133909">"есептік жазба, есептік жазбаны енгізу, жұмыс профилі, есептік жазбаны енгізу"</string>
     <string name="keywords_users" msgid="3497517660077620843">"шектеу, шектелген"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"мәтінді түзету, түзету, дыбыс, дірілдету, авто, тіл, қимыл, ұсыну, ұсыныс, тақырып, тіл тигізетін, сөз, түрі, эмодзи, халықаралық"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"ысыру, параметрлер, әдепкі"</string>
@@ -4351,6 +4356,11 @@
     <!-- no translation found for game_driver_app_preference_values:0 (2432393448266016546) -->
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
+    <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Қолданба үйлесімділігінің өзгерістері"</string>
+    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Қолданба үйлесімділігі өзгерістерінің қайта анықталуын жаңарту"</string>
+    <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Қосылған әдепкі өзгерістер"</string>
+    <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Өшірілген әдепкі өзгерістер"</string>
+    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"SDK <xliff:g id="NUMBER">%d</xliff:g> қолданбасынан кейін қосылды"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Бұл телефонда параметрге қолдау көрсетілмейді"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Бұл планшетте параметрге қолдау көрсетілмейді"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Бұл құрылғыда параметрге қолдау көрсетілмейді"</string>

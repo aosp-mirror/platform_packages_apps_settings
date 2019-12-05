@@ -51,7 +51,6 @@
     <string name="font_size_summary" msgid="1296835853522566260">"ਸਕ੍ਰੀਨ \'ਤੇ ਦਿਖਦੀ ਲਿਖਤ ਨੂੰ ਛੋਟਾ ਜਾਂ ਵੱਡਾ ਕਰੋ।"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"ਛੋਟਾ ਕਰੋ"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ਵੱਡਾ ਕਰੋ"</string>
-    <string name="font_size_preview_text" msgid="5578792111916168343">"Servez à ce monsieur une bière et des kiwis."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"ਨਮੂਨਾ ਲਿਖਤ"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"ਔਜ਼ ਦਾ ਨਿਰਾਲਾ ਵਿਜ਼ਾਰਡ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"ਪਾਠ 11: ਔਜ਼ ਦਾ ਹੀਰਿਆਂ-ਪੰਨਿਆਂ ਵਾਲਾ ਨਿਰਾਲਾ ਸ਼ਹਿਰ"</string>
@@ -1044,6 +1043,11 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"ਵਾਈ‑ਫਾਈ ਹੌਟਸਪੌਟ ਸੈੱਟਅੱਪ"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"AndroidAP WPA2 PSK ਹੌਟਸਪੌਟ"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
+    <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"ਕੀ ਇਸ ਨੈੱਟਵਰਕ ਨੂੰ ਰੱਖਿਅਤ ਕਰਨਾ ਹੈ?"</string>
+    <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> ਐਪ ਤੁਹਾਡੇ ਫ਼ੋਨ ਵਿੱਚ ਨੈੱਟਵਰਕ ਰੱਖਿਅਤ ਕਰਨਾ ਚਾਹੁੰਦੀ ਹੈ"</string>
+    <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"ਰੱਖਿਅਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"</string>
+    <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"ਰੱਖਿਅਤ ਕੀਤਾ"</string>
+    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"ਰੱਖਿਅਤ ਨਹੀਂ ਹੋ ਸਕਿਆ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"ਵਾਈ-ਫਾਈ ਕਾਲਿੰਗ"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"ਵਾਈ-ਫਾਈ ਰਾਹੀਂ ਕਾਲਾਂ ਦਾ ਕਵਰੇਜ ਵਧਾਓ"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"ਕਵਰੇਜ ਵਧਾਉਣ ਲਈ ਵਾਈ-ਫਾਈ ਕਾਲਿੰਗ ਚਾਲੂ ਕਰੋ"</string>
@@ -1197,38 +1201,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> ਤੱਕ ਚਾਲੂ ਕਰੋ"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> ਤੱਕ ਬੰਦ ਕਰੋ"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"ਰਾਤ ਦੀ ਰੋਸ਼ਨੀ ਫਿਲਹਾਲ ਚਾਲੂ ਨਹੀਂ"</string>
-    <!-- no translation found for dark_ui_activation_on_manual (1541006734577325234) -->
-    <skip />
-    <!-- no translation found for dark_ui_activation_off_manual (2395333709291250065) -->
-    <skip />
-    <!-- no translation found for dark_ui_activation_on_auto (4824339634784765049) -->
-    <skip />
-    <!-- no translation found for dark_ui_activation_off_auto (9136717444658505208) -->
-    <skip />
-    <!-- no translation found for dark_ui_title (3373976268671557416) -->
-    <skip />
-    <!-- no translation found for dark_ui_auto_mode_title (9027528859262295099) -->
-    <skip />
-    <!-- no translation found for dark_ui_auto_mode_never (3980412582267787662) -->
-    <skip />
-    <!-- no translation found for dark_ui_auto_mode_auto (6658909029498623375) -->
-    <skip />
-    <!-- no translation found for dark_ui_status_title (3505119141437774329) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_off (3897438633224959099) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_off_auto_mode_never (5828281549475697398) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_off_auto_mode_auto (6766831395970887213) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_on (3886998135388176000) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_on_auto_mode_never (2468597062391435521) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_on_auto_mode_auto (5553376115092648636) -->
-    <skip />
-    <!-- no translation found for dark_ui_text (3691323174656626778) -->
-    <skip />
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"ਹੁਣੇ ਚਾਲੂ ਕਰੋ"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"ਹੁਣੇ ਬੰਦ ਕਰੋ"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"ਸੂਰਜ ਚੜ੍ਹਨ ਤੱਕ ਚਾਲੂ ਕਰੋ"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"ਸੂਰਜ ਡੁੱਬਣ ਤੱਕ ਬੰਦ ਕਰੋ"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"ਗੂੜ੍ਹਾ ਮੋਡ"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"ਸਮਾਂ-ਸੂਚੀ"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"ਕੋਈ ਨਹੀਂ"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"ਸੂਰਜ ਡੁੱਬਣ ਤੋਂ ਚੜ੍ਹਨ ਤੱਕ ਚਾਲੂ ਹੈ"</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"ਸਥਿਤੀ"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"ਬੰਦ / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"ਆਪਣੇ ਆਪ ਕਦੇ ਵੀ ਚਾਲੂ ਨਹੀਂ ਹੋਵੇਗਾ"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"ਸੂਰਜ ਡੁੱਬਣ ਸਮੇਂ ਆਪਣੇ ਆਪ ਚਾਲੂ ਹੋ ਜਾਵੇਗਾ"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"ਚਾਲੂ / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"ਆਪਣੇ ਆਪ ਕਦੇ ਵੀ ਬੰਦ ਨਹੀਂ ਹੋਵੇਗਾ"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"ਸੂਰਜ ਚੜ੍ਹਨ ਸਮੇਂ ਆਪਣੇ ਆਪ ਬੰਦ ਹੋ ਜਾਵੇਗਾ"</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"ਗੂੜ੍ਹਾ ਥੀਮ ਬੈਟਰੀ ਨੂੰ ਲੰਬੇ ਸਮੇਂ ਤੱਕ ਬਚਾਈ ਰੱਖਣ ਵਿੱਚ ਮਦਦ ਲਈ ਕਾਲੇ ਰੰਗ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ। ਗੂੜ੍ਹੇ ਥੀਮ ਨੂੰ ਸਕ੍ਰੀਨ ਬੰਦ ਹੋਣ ਤੱਕ ਚਾਲੂ ਰੱਖਿਆ ਜਾਂਦਾ ਹੈ।"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ਸਕ੍ਰੀਨ ਦੇ ਬੰਦ ਹੋਣ ਦਾ ਸਮਾਂ"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"ਸਕ੍ਰੀਨ ਬੰਦ ਹੈ"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ਤੱਕ ਕੋਈ ਸਰਗਰਮੀ ਨਾ ਹੋਣ \'ਤੇ"</string>
@@ -1647,6 +1635,7 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"ਹਾਲੀਆ ਟਿਕਾਣਾ ਬੇਨਤੀਆਂ"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"ਸਭ ਦੇਖੋ"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"ਟਿਕਾਣਾ ਸੇਵਾਵਾਂ"</string>
+    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"ਹਾਲੀਆ ਕਾਰਜ-ਸਥਾਨ ਐਪ ਟਿਕਾਣਾ ਬੇਨਤੀਆਂ"</string>
     <string name="location_title" msgid="5819154746934945021">"ਮੇਰਾ ਟਿਕਾਣਾ"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"ਕਾਰਜ ਪ੍ਰੋਫਾਈਲ ਲਈ ਟਿਕਾਣਾ"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"ਐਪ ਇਜਾਜ਼ਤ"</string>
@@ -3108,7 +3097,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"ਨਾ ਕਰੋ ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ, ਰੋਕੋ, ਰੁਕਾਵਟ, ਬ੍ਰੇਕ"</string>
     <string name="keywords_app" msgid="7983814237980258061">"ਰੈਮ"</string>
     <string name="keywords_location" msgid="8016374808099706213">"ਨਜ਼ਦੀਕੀ, ਟਿਕਾਣਾ, ਇਤਿਹਾਸ, ਰਿਪੋਰਟਿੰਗ, GPS"</string>
-    <string name="keywords_accounts" msgid="1030474336927817800">"ਖਾਤਾ, ਖਾਤਾ ਸ਼ਾਮਲ ਕਰੋ, ਕਾਰਜ ਪ੍ਰੋਫਾਈਲ"</string>
+    <string name="keywords_accounts" msgid="3482052586502133909">"ਖਾਤਾ, ਇੱਕ ਖਾਤਾ ਸ਼ਾਮਲ ਕਰੋ, ਕਾਰਜ ਪ੍ਰੋਫਾਈਲ, ਖਾਤਾ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="keywords_users" msgid="3497517660077620843">"ਪਾਬੰਦੀ, ਪਾਬੰਦੀ ਲਗਾਓ, ਪਾਬੰਦੀ ਲਗਾਈ"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"ਲਿਖਤ ਸੁਧਾਈ, ਸਹੀ, ਧੁਨੀ, ਕੰਬਣਾ, ਸਵੈ, ਭਾਸ਼ਾ, ਸੰਕੇਤ, ਸੁਝਾਓ, ਸੁਝਾਅ, ਥੀਮ, ਅਪਮਾਨਜਨਕ, ਸ਼ਬਦ, ਕਿਸਮ, ਇਮੋਜੀ, ਅੰਤਰਰਾਸ਼ਟਰੀ"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"ਮੁੜ-ਸੈੱਟ ਕਰੋ, ਤਰਜੀਹਾਂ, ਪੂਰਵ-ਨਿਰਧਾਰਤ"</string>
@@ -4367,6 +4356,11 @@
     <!-- no translation found for game_driver_app_preference_values:0 (2432393448266016546) -->
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
+    <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"ਐਪ ਅਨੁਰੂਪਤਾ ਸੰਬੰਧੀ ਤਬਦੀਲੀਆਂ"</string>
+    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"ਐਪ ਅਨੁਰੂਪਤਾ ਤਬਦੀਲੀ ਓਵਰਰਾਈਡ ਨੂੰ ਸੋਧੋ"</string>
+    <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ \'ਤੇ ਚਾਲੂ ਕੀਤੀਆਂ ਤਬਦੀਲੀਆਂ"</string>
+    <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"ਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਤ \'ਤੇ ਬੰਦ ਕੀਤੀਆਂ ਤਬਦੀਲੀਆਂ"</string>
+    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"SDK <xliff:g id="NUMBER">%d</xliff:g> ਤੋਂ ਬਾਅਦ ਚਾਲੂ ਕੀਤਾ ਗਿਆ"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ਸੈਟਿੰਗ ਇਸ ਫ਼ੋਨ \'ਤੇ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ਸੈਟਿੰਗ ਇਸ ਟੈਬਲੈੱਟ \'ਤੇ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ਸੈਟਿੰਗ ਇਸ ਡੀਵਾਈਸ \'ਤੇ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ"</string>

@@ -53,7 +53,6 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Сделайте текст на экране мельче или крупнее."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Уменьшить"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увеличить"</string>
-    <string name="font_size_preview_text" msgid="5578792111916168343">"Принесите мне, пожалуйста, чашку кофе."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Пример текста"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Удивительный волшебник из страны Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11. Изумрудный город страны Оз"</string>
@@ -1084,6 +1083,11 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"Настройка точки доступа Wi‑Fi"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"Точка доступа AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"Хот-спот Android"</string>
+    <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Сохранить эту сеть?"</string>
+    <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"Приложение \"<xliff:g id="APPNAME">%1$s</xliff:g>\" запрашивает разрешение на сохранение сети на телефоне"</string>
+    <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Сохранение…"</string>
+    <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Сохранено"</string>
+    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"Ошибка при сохранении. Повторите попытку."</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Звонки по Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Звонки по Wi-Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"Звоните по Wi-Fi, когда нет сигнала сотовой связи."</string>
@@ -1673,6 +1677,7 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Последние геозапросы"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Показать все"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Мое местоположение"</string>
+    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"Недавние запросы от рабочего приложения о получении геоданных"</string>
     <string name="location_title" msgid="5819154746934945021">"Мое местоположение"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Место для рабочего профиля"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"Разрешения для приложений"</string>
@@ -3178,7 +3183,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"не беспокоить, режим оповещения, оповещение, прерывание"</string>
     <string name="keywords_app" msgid="7983814237980258061">"ОЗУ"</string>
     <string name="keywords_location" msgid="8016374808099706213">"поблизости, местоположение, история, отчеты, GPS"</string>
-    <string name="keywords_accounts" msgid="1030474336927817800">"аккаунт, добавить аккаунт, рабочий профиль"</string>
+    <string name="keywords_accounts" msgid="3482052586502133909">"аккаунт, добавить аккаунт, рабочий профиль, добавление аккаунта"</string>
     <string name="keywords_users" msgid="3497517660077620843">"ограничение, ограничить, ограничено"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"исправление текста, автозамена, звук, вибрация, авто, язык, жест, подсказка, тема, неприемлемый, слово, ввод, эмодзи, смайлик, международный"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"сбросить, настройки, по умолчанию"</string>
@@ -4513,6 +4518,11 @@
     <!-- no translation found for game_driver_app_preference_values:0 (2432393448266016546) -->
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
+    <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Изменение настроек совместимости приложений"</string>
+    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Здесь вы можете изменить параметры переопределения для настроек совместимости приложений"</string>
+    <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Изменения, включенные по умолчанию"</string>
+    <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Изменения, отключенные по умолчанию"</string>
+    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"Включено в SDK <xliff:g id="NUMBER">%d</xliff:g> и более поздних версий"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Настройка не поддерживается на этом телефоне."</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Настройка не поддерживается на этом планшете."</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Настройка не поддерживается на этом устройстве."</string>

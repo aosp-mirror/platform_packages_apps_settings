@@ -51,7 +51,6 @@
     <string name="font_size_summary" msgid="1296835853522566260">"സ്ക്രീനിലെ ടെക്സ്റ്റ് ചെറുതോ വലുതോ ആക്കുക."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"ചെറുതാക്കുക"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"വലുതാക്കുക"</string>
-    <string name="font_size_preview_text" msgid="5578792111916168343">"Servez à ce monsieur une bière et des kiwis."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"സാമ്പിൾ ടെക്‌സ്റ്റ്"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"ഓസ് നഗരത്തിലെ അതിശയിപ്പിക്കുന്ന മന്ത്രവാദി"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"അധ്യായം 11: ഓസ് എന്ന അത്ഭുതകരമായ മരതകനഗരം"</string>
@@ -1044,6 +1043,14 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"വൈഫൈ ഹോട്ട്‌സ്‌പോട്ട് സജ്ജീകരണം"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"AndroidAP WPA2 PSK ഹോട്ട്‌സ്‌പോട്ട്"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
+    <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"ഈ നെറ്റ്‌വർക്ക് സംരക്ഷിക്കണോ?"</string>
+    <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"നിങ്ങളുടെ ഫോണിലേക്ക് ഒരു നെറ്റ്‌വർക്ക് സംരക്ഷിക്കാൻ <xliff:g id="APPNAME">%1$s</xliff:g> താൽപ്പര്യപ്പെടുന്നു"</string>
+    <!-- no translation found for wifi_add_app_single_network_saving_summary (7366337245410388895) -->
+    <skip />
+    <!-- no translation found for wifi_add_app_single_network_saved_summary (7135016314713158289) -->
+    <skip />
+    <!-- no translation found for wifi_add_app_single_network_save_failed_summary (9191107423724341586) -->
+    <skip />
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"വൈഫൈ കോളിംഗ്"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"വൈഫൈയിലൂടെ കോളുകൾ ദീർഘിപ്പിക്കുക"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"കവറേജ് വർദ്ധിപ്പിക്കാൻ വൈഫൈ കോളിംഗ് ഓണാക്കുക"</string>
@@ -1197,38 +1204,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> വരെ ഓണാക്കുക"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> വരെ ഓഫാക്കുക"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"നൈറ്റ് ലൈറ്റ് നിലവിൽ ഓണല്ല"</string>
-    <!-- no translation found for dark_ui_activation_on_manual (1541006734577325234) -->
-    <skip />
-    <!-- no translation found for dark_ui_activation_off_manual (2395333709291250065) -->
-    <skip />
-    <!-- no translation found for dark_ui_activation_on_auto (4824339634784765049) -->
-    <skip />
-    <!-- no translation found for dark_ui_activation_off_auto (9136717444658505208) -->
-    <skip />
-    <!-- no translation found for dark_ui_title (3373976268671557416) -->
-    <skip />
-    <!-- no translation found for dark_ui_auto_mode_title (9027528859262295099) -->
-    <skip />
-    <!-- no translation found for dark_ui_auto_mode_never (3980412582267787662) -->
-    <skip />
-    <!-- no translation found for dark_ui_auto_mode_auto (6658909029498623375) -->
-    <skip />
-    <!-- no translation found for dark_ui_status_title (3505119141437774329) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_off (3897438633224959099) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_off_auto_mode_never (5828281549475697398) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_off_auto_mode_auto (6766831395970887213) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_on (3886998135388176000) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_on_auto_mode_never (2468597062391435521) -->
-    <skip />
-    <!-- no translation found for dark_ui_summary_on_auto_mode_auto (5553376115092648636) -->
-    <skip />
-    <!-- no translation found for dark_ui_text (3691323174656626778) -->
-    <skip />
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"ഇപ്പോൾ ഓണാക്കുക"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"ഇപ്പോൾ ഓഫാക്കുക"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"സൂര്യോദയം വരെ ഓണാക്കുക"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"സൂര്യാസ്‌തമയം വരെ ഓഫാക്കുക"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"ഡാർക്ക് മോഡ്"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"ഷെഡ്യൂൾ ചെയ്യുക"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"ഒന്നും ചെയ്യേണ്ട"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"അസ്തമയം മുതൽ ഉദയം വരെ ഓണാക്കുന്നു"</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"നില"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"ഓഫാക്കുക / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"ഒരിക്കലും സ്വയമേവ ഓണാകില്ല"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"സൂര്യാസ്തമയ സമയത്ത് സ്വയമേവ ഓണാക്കും"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"ഓണാക്കുക / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"ഒരിക്കലും സ്വയമേവ ഓഫാകില്ല"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"സൂര്യോദയ സമയത്ത് സ്വമേധയാ ഓഫാകും"</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"ബാറ്ററി കൂടുതൽ സമയം നിൽക്കാനായി ഡാർക്ക് തീം, യഥാർത്ഥ കറുപ്പ് നിറം ഉപയോഗിക്കുന്നു. സ്ക്രീൻ ഓഫാകുന്നത് വരെ ഓണാകുന്നതിന് കാത്തിരിക്കാൻ ഡാർക്ക് തീം ഷെഡ്യൂൾ ചെയ്യുന്നു."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"സ്ക്രീൻ ടൈംഔട്ട്"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"സ്ക്രീൻ ഓഫാക്കുന്നു"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> നിഷ്ക്രിയത്വത്തിന് ശേഷം"</string>
@@ -1647,6 +1638,7 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"പുതിയ ലൊക്കേഷൻ അഭ്യർത്ഥനകൾ"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"എല്ലാം കാണുക"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"ലൊക്കേഷൻ സേവനങ്ങൾ"</string>
+    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"സമീപകാല ഔദ്യോഗിക ആപ്പ് ലൊക്കേഷൻ അഭ്യർത്ഥനകൾ"</string>
     <string name="location_title" msgid="5819154746934945021">"എന്റെ ലൊക്കേഷൻ"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"ഔദ്യോഗിക പ്രൊഫൈലിനായുള്ള ലൊക്കേഷൻ"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"ആപ്പ് അനുമതി"</string>
@@ -3108,7 +3100,8 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"അരുത് ശല്യപ്പെടുത്തരുത്, തടസപ്പെടുത്തുക, തടസം, ബ്രേക്ക്"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"സമീപമുള്ളവ, ലൊക്കേഷന്‍, ചരിത്രം, റിപ്പോര്‍ട്ട് ചെയ്യൽ, GPS"</string>
-    <string name="keywords_accounts" msgid="1030474336927817800">"അക്കൗണ്ട്, അക്കൗണ്ട് ചേർക്കുക, ഔദ്യോഗിക പ്രൊഫൈൽ"</string>
+    <!-- no translation found for keywords_accounts (3482052586502133909) -->
+    <skip />
     <string name="keywords_users" msgid="3497517660077620843">"നിയന്ത്രണം, നിയന്ത്രിക്കുക, നിയന്ത്രിച്ചു"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"ടെക്‌സ്‌റ്റ് ചെയ്യൽ തിരുത്തൽ, തിരുത്തുക, ശബ്‌ദം, വൈബ്രേറ്റ് ചെയ്യുക, സ്വമേധയാ, ഭാഷ, വിരൽചലനം, നിർദ്ദേശിക്കുക, നിർദ്ദേശം, തീം, നിന്ദ്യം, പദം, ടൈപ്പുചെയ്യുക, ഇമോജി, അന്തർദ്ദേശീയം"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"പുനഃക്രമീകരിക്കുക, മുൻഗണനകൾ, ഡിഫോൾട്ട്"</string>
@@ -4367,6 +4360,11 @@
     <!-- no translation found for game_driver_app_preference_values:0 (2432393448266016546) -->
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
+    <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"ആപ്പ് അനുയോജ്യമാക്കുന്നതിനുള്ള മാറ്റങ്ങൾ"</string>
+    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"ആപ്പ് അനുയോജ്യമാക്കുന്നതിന് വരുത്തിയ മാറ്റങ്ങളിലെ ആധിക്യം പരിഷ്‌കരിക്കുക"</string>
+    <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ഡിഫോൾട്ട് ആയ, പ്രവർത്തനക്ഷമമാക്കിയ മാറ്റങ്ങൾ"</string>
+    <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"ഡിഫോൾട്ട് ആയ, പ്രവർത്തനരഹിതമാക്കിയ മാറ്റങ്ങൾ"</string>
+    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"SDK <xliff:g id="NUMBER">%d</xliff:g>-ന് ശേഷം പ്രവർത്തനക്ഷമമാക്കിയത്"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ക്രമീകരണം ഈ ഫോണിൽ പിന്തുണക്കുന്നില്ല"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ക്രമീകരണം ഈ ടാബ്‌ലെറ്റിൽ പിന്തുണക്കുന്നില്ല"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ഈ ഉപകരണത്തിൽ ക്രമീകരണം പിന്തുണയ്‌ക്കുന്നില്ല"</string>
