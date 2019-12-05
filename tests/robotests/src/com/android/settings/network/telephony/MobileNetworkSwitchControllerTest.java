@@ -105,6 +105,10 @@ public class MobileNetworkSwitchControllerTest {
         when(mSubscription.isEmbedded()).thenReturn(false);
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isFalse();
+
+        when(mSubscriptionManager.canDisablePhysicalSubscription()).thenReturn(true);
+        mController.displayPreference(mScreen);
+        assertThat(mSwitchBar.isShowing()).isTrue();
     }
 
     @Test

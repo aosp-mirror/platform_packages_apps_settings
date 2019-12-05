@@ -19,7 +19,6 @@ package com.android.settings.network.telephony;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
@@ -41,9 +40,11 @@ public class DisableSimFooterPreferenceController extends BasePreferenceControll
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+
+        SubscriptionManager subManager = mContext.getSystemService(SubscriptionManager.class);
         for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mContext)) {
             if (info.getSubscriptionId() == mSubId) {
-                if (info.isEmbedded()) {
+                if (info.isEmbedded() || SubscriptionUtil.showToggleForPhysicalSim(subManager)) {
                     return CONDITIONALLY_UNAVAILABLE;
                 }
                 break;
