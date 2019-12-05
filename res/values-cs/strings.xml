@@ -53,7 +53,6 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Umožňuje zvětšit nebo zmenšit text na obrazovce."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Zmenšit"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Zvětšit"</string>
-    <string name="font_size_preview_text" msgid="5578792111916168343">"Příliš žluťoučký kůň úpěl ďábelské ódy."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Ukázkový text"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Čaroděj ze země Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kapitola 11: Smaragdové město v zemi Oz"</string>
@@ -792,7 +791,7 @@
     <string name="wifi_display_status_not_available" msgid="8463750208946968594">"Není k dispozici"</string>
     <string name="wifi_display_details" msgid="2351632307998142920">"Nastavení displeje"</string>
     <string name="wifi_display_options_title" msgid="7584326966240865043">"Možnosti bezdrátového displeje"</string>
-    <string name="wifi_display_options_forget" msgid="3140558691112356024">"Odstranit"</string>
+    <string name="wifi_display_options_forget" msgid="3140558691112356024">"Zapomenout"</string>
     <string name="wifi_display_options_done" msgid="7608851767701954020">"Hotovo"</string>
     <string name="wifi_display_options_name" msgid="8181334945680312228">"Název"</string>
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2,4 GHz"</string>
@@ -871,7 +870,7 @@
     <string name="wifi_menu_configure" msgid="352423980467311427">"Konfigurovat"</string>
     <string name="wifi_menu_connect" msgid="7824796427932811078">"Připojit k síti"</string>
     <string name="wifi_menu_remember" msgid="8639523871321603112">"Zapamatovat síť"</string>
-    <string name="wifi_menu_forget" msgid="6557142984528657361">"Odstranit záznam sítě"</string>
+    <string name="wifi_menu_forget" msgid="6557142984528657361">"Zapomenout záznam sítě"</string>
     <string name="wifi_menu_modify" msgid="7246143391161038875">"Upravit síť"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Chcete-li zobrazit dostupné sítě, zapněte Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"Vyhledávání sítí Wi-Fi…"</string>
@@ -994,9 +993,9 @@
     <skip />
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Připojení k síti se nezdařilo."</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Síť není v dosahu"</string>
-    <string name="wifi_forget" msgid="3485573280364015620">"Odstranit"</string>
+    <string name="wifi_forget" msgid="3485573280364015620">"Zapomenout"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"Upravit"</string>
-    <string name="wifi_failed_forget_message" msgid="8272732599235525880">"Odstranění záznamu sítě se nezdařilo."</string>
+    <string name="wifi_failed_forget_message" msgid="8272732599235525880">"Zapomenutí sítě se nezdařilo."</string>
     <string name="wifi_save" msgid="2312643132472226807">"Uložit"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Uložení sítě se nezdařilo."</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Zrušit"</string>
@@ -1060,7 +1059,7 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="4490648217799144078">"Pokud se odpojíte, bude spojení se zařízením <xliff:g id="PEER_NAME">%1$s</xliff:g> a s <xliff:g id="PEER_COUNT">%2$s</xliff:g> dalšími zařízeními přerušeno."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="8476985132989357041">"Zrušit pozvánku?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"Chcete zrušit pozvánku ke spojení s klientem <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
-    <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"Odstranit tuto skupinu?"</string>
+    <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"Zapomenout tuto skupinu?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Wi‑Fi hotspot"</string>
     <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Internet ani obsah není sdílen s dalšími zařízeními"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"Internetové připojení tohoto tabletu je sdíleno pomocí hotspotu"</string>
@@ -1084,6 +1083,11 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"Nastavení Wi‑Fi hotspotu"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"Hotspot AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
+    <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Uložit tuto síť?"</string>
+    <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"Aplikace <xliff:g id="APPNAME">%1$s</xliff:g> chce do telefonu uložit síť"</string>
+    <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Ukládání…"</string>
+    <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Uloženo"</string>
+    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"Uložení se nezdařilo. Zkuste to znovu."</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Volání přes Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Rozšiřte volání pomocí Wi-Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"Chcete-li rozšířit pokrytí, zapněte volání přes Wi-Fi"</string>
@@ -1673,6 +1677,7 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nedávné žádosti o určení polohy"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Zobrazit vše"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Služby určování polohy"</string>
+    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"Nedávné žádosti pracovní aplikace o určení polohy"</string>
     <string name="location_title" msgid="5819154746934945021">"Moje poloha"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Umístění pracovního profilu"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"Oprávnění aplikací"</string>
@@ -3178,7 +3183,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"nerušit, vyrušit, vyrušení, pauza"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"okolí, poloha, historie, hlášení, GPS"</string>
-    <string name="keywords_accounts" msgid="1030474336927817800">"účet, přidání účtu, pracovní profil"</string>
+    <string name="keywords_accounts" msgid="3482052586502133909">"účet, přidání účtu, pracovní profil, přidat účet"</string>
     <string name="keywords_users" msgid="3497517660077620843">"omezení, omezit, omezeno"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"oprava textu, opravit, zvuk, vibrace, auto, jazyk, gesto, navrhnout, návrh, motiv, nevhodné, slovo, typ, emodži, mezinárodní"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"resetování, předvolby, výchozí"</string>
@@ -4513,6 +4518,11 @@
     <!-- no translation found for game_driver_app_preference_values:0 (2432393448266016546) -->
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
+    <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Změny kompatibility aplikací"</string>
+    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Úprava přepsání změn kompatibility aplikace"</string>
+    <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Změny, které jsou ve výchozím nastavení povoleny"</string>
+    <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Změny, které jsou ve výchozím nastavení zakázány"</string>
+    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"Povoleno po sadě SDK <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Nastavení v tomto telefonu není podporováno"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Nastavení v tomto tabletu není podporováno"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Nastavení v tomto zařízení není podporováno"</string>

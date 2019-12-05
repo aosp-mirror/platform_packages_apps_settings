@@ -51,7 +51,6 @@
     <string name="font_size_summary" msgid="1296835853522566260">"نوشتار روی صفحه‌نمایش را بزرگ‌تر یا کوچک‌تر کنید."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"کوچک‌تر کردن"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"بزرگ‌تر کردن"</string>
-    <string name="font_size_preview_text" msgid="5578792111916168343">"برای این آقا آبجو و کیوی سرو کنید."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"نوشتار نمونه"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"جادوگر شهر اوز"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"فصل ۱۱: شهر زمردی شگفت‌انگیز اوز"</string>
@@ -1044,6 +1043,11 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"‏راه‌اندازی نقطه اتصال Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"‏نقطه اتصال AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
+    <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"این شبکه ذخیره شود؟"</string>
+    <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> می‌خواهد شبکه‌ای را در تلفن شما ذخیره کند"</string>
+    <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"درحال ذخیره کردن…"</string>
+    <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"ذخیره‌ شد"</string>
+    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"ذخیره نشد. دوباره امتحان کنید."</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"‏تماس از طریق Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"‏با Wi-Fi تماس‌ها را گسترش دهید"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"‏با روشن کردن تماس ازطریق Wi-Fi، پوشش را افزایش دهید"</string>
@@ -1631,6 +1635,7 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"درخواست‌های اخیر موقعیت مکانی"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"مشاهده همه"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"خدمات موقعیت مکانی"</string>
+    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"درخواست‌های مکان برنامه کاری اخیر"</string>
     <string name="location_title" msgid="5819154746934945021">"موقعیت مکانی شما"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"محل نمایه کارتان"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"مجوز برنامه"</string>
@@ -1836,7 +1841,7 @@
     <string name="filter_dlg_title" msgid="3086282431958601338">"انتخاب گزینه‌های فیلتر"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"همه برنامه‌ها"</string>
     <string name="filter_apps_disabled" msgid="5068011814871004105">"برنامه‌های غیرفعال‌شده"</string>
-    <string name="filter_apps_third_party" msgid="9049447784849114843">"دانلودشده"</string>
+    <string name="filter_apps_third_party" msgid="9049447784849114843">"بارگیری‌شده"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"در حال اجرا"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="5140211657134608469">"‏حافظهٔ USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1774499644768369891">"‏در کارت SD"</string>
@@ -3092,7 +3097,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"مزاحم نشوید، قطع، وقفه، توقف"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"‏اطراف، مکان، سابقه، گزارش، GPS"</string>
-    <string name="keywords_accounts" msgid="1030474336927817800">"حساب، افزودن حساب، نمایه کاری"</string>
+    <string name="keywords_accounts" msgid="3482052586502133909">"حساب، افزودن حساب، نمایه کاری، افزودن حساب"</string>
     <string name="keywords_users" msgid="3497517660077620843">"محدودیت، محدود، محدودشده"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"تصحیح نوشتار، تصحیح، صدا، لرزش، خودکار، زبان، اشاره، پیشنهاد دادن، پیشنهاد، طرح زمینه، توهین‌آمیز، کلمه، نوع، اموجی، بین‌المللی"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"بازنشانی، اولویت‌ها، پیش‌فرض"</string>
@@ -3530,7 +3535,7 @@
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> نفر دیگر</item>
     </plurals>
     <string name="zen_mode_messages" msgid="7835537207069585861">"اجازه دادن به پیام‌ها"</string>
-    <string name="zen_mode_messages_footer" msgid="6996375319078720643">"برای اینکه ببینید پیام‌های مجاز صدا دارند، ببینید دستگاهتان روی زنگ زدن، یا لرزش، یا حالت بی‌صدا تنظیم کرده‌اید یا نه."</string>
+    <string name="zen_mode_messages_footer" msgid="6996375319078720643">"برای اینکه ببینید پیام‌های مجاز صدا دارند، ببینید دستگاهتان را برای زنگ زدن، یا حالت بی‌صدا، یا روی لرزش تنظیم کرده‌اید یا نه."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"پیام‌های ورودی برای «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>» مسدود شده‌اند. برای اینکه به دوستان و خانواده و سایر مخاطبین امکان دهید به شما دسترسی داشته باشند، می‌توانید تنظیمات را تغییر دهید."</string>
     <string name="zen_mode_messages_title" msgid="1894654645929324997">"برنامه‌های پیام‌رسان، پیامک و فراپیام"</string>
     <string name="zen_mode_from_anyone" msgid="7484461089733953376">"از هر کسی"</string>
@@ -4351,6 +4356,11 @@
     <!-- no translation found for game_driver_app_preference_values:0 (2432393448266016546) -->
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
+    <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"تغییرات در سازگاری برنامه"</string>
+    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"اصلاح موارد لغو تغییر سازگاری برنامه"</string>
+    <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"تغییرات فعال پیش‌فرض"</string>
+    <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"تغییرات غیرفعال پیش‌فرض"</string>
+    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"‏فعال‌شده بعد از کیت توسعه نرم‌افزار (SDK) <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"تنظیم در این تلفن پشتیبانی نمی‌شود"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"تنظیم در این رایانه لوحی پشتیبانی نمی‌شود"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"تنظیم در این دستگاه پشتیبانی نمی‌شود"</string>
