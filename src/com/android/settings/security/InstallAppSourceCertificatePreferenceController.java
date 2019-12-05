@@ -22,13 +22,16 @@ import android.os.SystemProperties;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.BasePreferenceController;
 
-class InstallAppSourceCertificatePreferenceController extends
+/**
+ *  This controller decides the verification result of the installed app.
+ */
+public class InstallAppSourceCertificatePreferenceController extends
         BasePreferenceController {
 
     private static final String APK_VERITY_PROPERTY = "ro.apk_verity.mode";
     private static final int APK_VERITY_MODE_ENABLED = 2;
 
-    InstallAppSourceCertificatePreferenceController(Context context, String key) {
+    public InstallAppSourceCertificatePreferenceController(Context context, String key) {
         super(context, key);
     }
 
