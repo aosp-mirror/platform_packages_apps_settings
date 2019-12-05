@@ -85,7 +85,7 @@ public final class BluetoothPairingService extends Service {
             } else if (action.equals(ACTION_DISMISS_PAIRING)) {
                 Log.d(TAG, "Notification cancel " + mDevice.getAddress() + " (" +
                         mDevice.getName() + ")");
-                mDevice.cancelPairingUserInput();
+                mDevice.cancelPairing();
             } else {
                 int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
                         BluetoothDevice.ERROR);

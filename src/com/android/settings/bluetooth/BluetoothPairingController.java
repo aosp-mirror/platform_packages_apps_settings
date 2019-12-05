@@ -294,8 +294,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
             mDevice.setPairingConfirmation(true);
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {
-            byte[] pinBytes = BluetoothDevice.convertPinToBytes(mPasskeyFormatted);
-            mDevice.setPin(pinBytes);
+            mDevice.setPin(mPasskeyFormatted);
         }
     }
 
@@ -391,17 +390,9 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN:
             case BluetoothDevice.PAIRING_VARIANT_PIN_16_DIGITS:
-                byte[] pinBytes = BluetoothDevice.convertPinToBytes(passkey);
-                if (pinBytes == null) {
-                    return;
-                }
-                mDevice.setPin(pinBytes);
+                mDevice.setPin(passkey);
                 break;
 
-            case BluetoothDevice.PAIRING_VARIANT_PASSKEY:
-                int pass = Integer.parseInt(passkey);
-                mDevice.setPasskey(pass);
-                break;
 
             case BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION:
             case BluetoothDevice.PAIRING_VARIANT_CONSENT:
@@ -410,11 +401,9 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY:
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN:
-                // Do nothing.
-                break;
-
             case BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT:
-                mDevice.setRemoteOutOfBandData();
+            case BluetoothDevice.PAIRING_VARIANT_PASSKEY:
+                // Do nothing.
                 break;
 
             default:
@@ -428,7 +417,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      */
     public void onCancel() {
         Log.d(TAG, "Pairing dialog canceled");
-        mDevice.cancelPairingUserInput();
+        mDevice.cancelPairing();
     }
 
     /**
