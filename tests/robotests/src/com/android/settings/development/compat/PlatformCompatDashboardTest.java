@@ -75,11 +75,11 @@ public class PlatformCompatDashboardTest {
     public void setUp() throws RemoteException, NameNotFoundException {
         MockitoAnnotations.initMocks(this);
         mChanges = new CompatibilityChangeInfo[5];
-        mChanges[0] = new CompatibilityChangeInfo(1L, "Default_Enabled", 0, false);
-        mChanges[1] = new CompatibilityChangeInfo(2L, "Default_Disabled", 0, true);
-        mChanges[2] = new CompatibilityChangeInfo(3L, "Enabled_After_SDK_1_1", 1, false);
-        mChanges[3] = new CompatibilityChangeInfo(4L, "Enabled_After_SDK_1_2", 1, false);
-        mChanges[4] = new CompatibilityChangeInfo(5L, "Enabled_After_SDK_2", 2, false);
+        mChanges[0] = new CompatibilityChangeInfo(1L, "Default_Enabled", 0, false, "");
+        mChanges[1] = new CompatibilityChangeInfo(2L, "Default_Disabled", 0, true, "");
+        mChanges[2] = new CompatibilityChangeInfo(3L, "Enabled_After_SDK_1_1", 1, false, "");
+        mChanges[3] = new CompatibilityChangeInfo(4L, "Enabled_After_SDK_1_2", 1, false, "");
+        mChanges[4] = new CompatibilityChangeInfo(5L, "Enabled_After_SDK_2", 2, false, "");
         when(mPlatformCompat.listAllChanges()).thenReturn(mChanges);
         mContext = RuntimeEnvironment.application;
         mPreferenceManager = new PreferenceManager(mContext);
@@ -158,9 +158,9 @@ public class PlatformCompatDashboardTest {
                 new ChangeConfig(enabledChanges, disabledChanges));
         List<CompatibilityChangeInfo> changesToAdd = new ArrayList<>();
         for (int i = 0; i < mChanges.length; ++i) {
-            changesToAdd.add(new CompatibilityChangeInfo(mChanges[i].getId(), mChanges[i]
-            .getName(),
-                    mChanges[i].getEnableAfterTargetSdk(), mChanges[i].getDisabled()));
+            changesToAdd.add(new CompatibilityChangeInfo(mChanges[i].getId(), mChanges[i].getName(),
+                    mChanges[i].getEnableAfterTargetSdk(), mChanges[i].getDisabled(),
+                    mChanges[i].getDescription()));
         }
 
         PreferenceCategory category = mDashboard.createChangeCategoryPreference(changesToAdd,
