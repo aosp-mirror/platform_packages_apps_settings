@@ -132,7 +132,12 @@ public class NetworkScanHelper {
                             new RadioAccessSpecifier(
                                     AccessNetworkType.UTRAN,
                                     null /* bands */,
-                                    null /* channels */)
+                                    null /* channels */),
+                            // NR
+                            new RadioAccessSpecifier(
+                                    AccessNetworkType.NGRAN,
+                                    null /* bands */,
+                                    null /* channels */),
                     },
                     SEARCH_PERIODICITY_SEC,
                     MAX_SEARCH_TIME_SEC,
