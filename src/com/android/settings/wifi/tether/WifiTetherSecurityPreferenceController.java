@@ -1,7 +1,7 @@
 package com.android.settings.wifi.tether;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -28,12 +28,11 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
 
     @Override
     public void updateDisplay() {
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
-        if (config != null && config.getAuthType() == WifiConfiguration.KeyMgmt.NONE) {
-            mSecurityValue = WifiConfiguration.KeyMgmt.NONE;
-
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+        if (config != null && config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OPEN) {
+            mSecurityValue = SoftApConfiguration.SECURITY_TYPE_OPEN;
         } else {
-            mSecurityValue = WifiConfiguration.KeyMgmt.WPA2_PSK;
+            mSecurityValue = SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
         }
 
         final ListPreference preference = (ListPreference) mPreference;
@@ -54,7 +53,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     }
 
     private String getSummaryForSecurityType(int securityType) {
-        if (securityType == WifiConfiguration.KeyMgmt.NONE) {
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN) {
             return mSecurityEntries[1];
         }
         // WPA2 PSK

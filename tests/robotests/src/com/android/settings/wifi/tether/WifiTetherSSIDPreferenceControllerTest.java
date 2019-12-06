@@ -25,13 +25,10 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.KeyMgmt;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.widget.ValidatedEditTextPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +73,7 @@ public class WifiTetherSSIDPreferenceControllerTest {
 
     @Test
     public void displayPreference_noWifiConfig_shouldDisplayDefaultSSID() {
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(null);
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(null);
 
         mController.displayPreference(mScreen);
         assertThat(mController.getSSID())
@@ -85,12 +82,12 @@ public class WifiTetherSSIDPreferenceControllerTest {
 
     @Test
     public void displayPreference_hasCustomWifiConfig_shouldDisplayCustomSSID() {
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "test_1234";
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+        final SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setSsid("test_1234").build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         mController.displayPreference(mScreen);
-        assertThat(mController.getSSID()).isEqualTo(config.SSID);
+        assertThat(mController.getSSID()).isEqualTo(config.getSsid());
     }
 
     @Test
@@ -113,23 +110,22 @@ public class WifiTetherSSIDPreferenceControllerTest {
         assertThat(mController.getSSID()).isEqualTo("1");
 
         // Create a new config using different SSID
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "test_1234";
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+        final SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setSsid("test_1234").build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         // Call updateDisplay and verify it's changed.
         mController.updateDisplay();
-        assertThat(mController.getSSID()).isEqualTo(config.SSID);
-        assertThat(mPreference.getSummary()).isEqualTo(config.SSID);
+        assertThat(mController.getSSID()).isEqualTo(config.getSsid());
+        assertThat(mPreference.getSummary()).isEqualTo(config.getSsid());
     }
 
     @Test
     public void displayPreference_wifiApDisabled_shouldHideQrCodeIcon() {
         when(mWifiManager.isWifiApEnabled()).thenReturn(false);
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "test_1234";
-        config.allowedKeyManagement.set(KeyMgmt.WPA2_PSK);
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+        final SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setSsid("test_1234").setWpa2Passphrase("test_password").build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         mController.displayPreference(mScreen);
         assertThat(mController.isQrCodeButtonAvailable()).isEqualTo(false);
@@ -138,10 +134,9 @@ public class WifiTetherSSIDPreferenceControllerTest {
     @Test
     public void displayPreference_wifiApEnabled_shouldShowQrCodeIcon() {
         when(mWifiManager.isWifiApEnabled()).thenReturn(true);
-        final WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "test_1234";
-        config.allowedKeyManagement.set(KeyMgmt.WPA2_PSK);
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+        final SoftApConfiguration config = new SoftApConfiguration.Builder()
+                .setSsid("test_1234").setWpa2Passphrase("test_password").build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         mController.displayPreference(mScreen);
         assertThat(mController.isQrCodeButtonAvailable()).isEqualTo(true);

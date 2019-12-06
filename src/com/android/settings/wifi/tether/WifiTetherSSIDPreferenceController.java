@@ -19,19 +19,16 @@ package com.android.settings.wifi.tether;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
@@ -62,9 +59,9 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
 
     @Override
     public void updateDisplay() {
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         if (config != null) {
-            mSSID = config.SSID;
+            mSSID = config.getSsid();
         } else {
             mSSID = DEFAULT_SSID;
         }
