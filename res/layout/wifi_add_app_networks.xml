@@ -118,6 +118,19 @@
                 android:textColor="?android:attr/textColorSecondary"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/multiple_networks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ListView
+                android:id="@+id/config_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                android:scrollbarStyle="insideOverlay"/>
+        </LinearLayout>
+
         <include layout="@layout/horizontal_divider"/>
 
         <LinearLayout
