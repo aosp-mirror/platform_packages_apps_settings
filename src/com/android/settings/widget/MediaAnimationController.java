@@ -98,6 +98,7 @@ class MediaAnimationController implements VideoPreference.AnimationController {
             @Override
             public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
                 preview.setVisibility(View.VISIBLE);
+                mSurface = null;
                 return false;
             }
 

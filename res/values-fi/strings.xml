@@ -51,7 +51,6 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Suurenna tai pienennä tekstiä näytöllä."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Pienennä"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Suurenna"</string>
-    <string name="font_size_preview_text" msgid="5578792111916168343">"Servez à ce monsieur une bière et des kiwis."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Esimerkkiteksti"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Ihmemaa Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Luku 11: Ozin ihastuttava smaragdikaupunki"</string>
@@ -897,7 +896,7 @@
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Yhdistä <xliff:g id="SSID">%1$s</xliff:g> ja jaa salasana lukemalla tämä QR-koodi."</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Yhdistä <xliff:g id="SSID">%1$s</xliff:g> skannaamalla tämä QR-koodi"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Yritä uudelleen. Jos ongelma ei ratkea, ota yhteyttä laitteen valmistajaan"</string>
-    <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Jokin meni pieleen"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Jotain meni pieleen"</string>
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Varmista, että laite on liitetty virtalähteeseen, ladattu ja päällä"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Varmista, että laite on liitetty virtalähteeseen, ladattu ja päällä. Jos ongelma ei ratkea, ota yhteyttä laitteen valmistajaan"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Tämä laite ei tue <xliff:g id="SSID">%1$s</xliff:g>:n lisäämistä"</string>
@@ -1044,6 +1043,11 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"Wi‑Fi-hotspotin määritys"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"Hotspot: AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
+    <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Tallennetaanko tämä verkko?"</string>
+    <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> haluaa tallentaa verkon puhelimeesi"</string>
+    <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Tallennetaan…"</string>
+    <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Tallennettu"</string>
+    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"Tallennus ei onnistu. Yritä uudelleen."</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Wi-Fi-puhelut"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Laajenna puhelumahdollisuuksia Wi‑Fillä"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"Paranna tavoittavuutta ottamalla Wi-Fi-puhelut käyttöön"</string>
@@ -1631,6 +1635,7 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Viimeisimmät sijaintipyynnöt"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Näytä kaikki"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Sijaintipalvelut"</string>
+    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"Viimeisimmän työsovelluksen sijaintipyynnöt"</string>
     <string name="location_title" msgid="5819154746934945021">"Oma sijainti"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Työprofiilin sijainti"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"Sovelluksen käyttöoikeus"</string>
@@ -3092,7 +3097,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"älä häiritse, keskeytä, keskeytys, tauko"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"nearby, sijaintihistoria, sijainnin ilmoittaminen, GPS"</string>
-    <string name="keywords_accounts" msgid="1030474336927817800">"tili, lisää tili, työprofiili"</string>
+    <string name="keywords_accounts" msgid="3482052586502133909">"tili, lisää tili, työprofiili, tilin lisääminen"</string>
     <string name="keywords_users" msgid="3497517660077620843">"rajoitus, rajoittaa, rajoitettu"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"tekstin korjaus, korjaa, ääni, värinä, automaattinen, kieli, ele, ehdottaa, ehdotus, teema, loukkaava, sana, kirjoita, emoji, kansainvälinen"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"nollaa, asetukset, oletus"</string>
@@ -4351,6 +4356,11 @@
     <!-- no translation found for game_driver_app_preference_values:0 (2432393448266016546) -->
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
+    <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Sovelluksen yhteensopivuuden muutokset"</string>
+    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Muokkaa sovellusten yhteensopivuuden muutosten ohituksia"</string>
+    <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Oletusarvoisesti käyttöön otettujen muutokset"</string>
+    <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Oletusarvoisesti käytöstä poistettujen muutokset"</string>
+    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"Otettu käyttöön SDK <xliff:g id="NUMBER">%d</xliff:g>:n jälkeen"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Asetusta ei tueta tällä puhelimella."</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Asetusta ei tueta tällä tabletilla"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Asetusta ei tueta tällä laitteella"</string>

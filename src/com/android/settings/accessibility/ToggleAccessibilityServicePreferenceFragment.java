@@ -24,6 +24,7 @@ import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -68,8 +69,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
                     updateSwitchBarToggleSwitch();
                 }
             };
-
-    private ComponentName mComponentName;
 
     private Dialog mDialog;
 
@@ -341,5 +340,15 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
         }
 
         mComponentName = arguments.getParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME);
+
+        // Settings animated image.
+        int animatedImageRes = arguments.getInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES);
+        mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(mComponentName.getPackageName())
+                .appendPath(String.valueOf(animatedImageRes))
+                .build();
+
+        // Settings html description.
+        mHtmlDescription = arguments.getCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION);
     }
 }
