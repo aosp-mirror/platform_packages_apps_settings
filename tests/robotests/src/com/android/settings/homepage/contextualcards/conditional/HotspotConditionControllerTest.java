@@ -19,7 +19,7 @@ package com.android.settings.homepage.contextualcards.conditional;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
 import com.android.settings.homepage.contextualcards.ContextualCard;
@@ -53,7 +53,7 @@ public class HotspotConditionControllerTest {
 
     @Test
     public void buildContextualCard_hasWifiAp_shouldHaveWifiApSsid() {
-        setupWifiApConfiguration();
+        setupSoftApConfiguration();
 
         final ContextualCard card = mController.buildContextualCard();
 
@@ -67,9 +67,9 @@ public class HotspotConditionControllerTest {
         assertThat(card.getSummaryText()).isEqualTo("");
     }
 
-    private void setupWifiApConfiguration() {
-        final WifiConfiguration wifiApConfig = new WifiConfiguration();
-        wifiApConfig.SSID = WIFI_AP_SSID;
-        mContext.getSystemService(WifiManager.class).setWifiApConfiguration(wifiApConfig);
+    private void setupSoftApConfiguration() {
+        final SoftApConfiguration wifiApConfig = new SoftApConfiguration.Builder()
+                .setSsid(WIFI_AP_SSID).build();
+        mContext.getSystemService(WifiManager.class).setSoftApConfiguration(wifiApConfig);
     }
 }

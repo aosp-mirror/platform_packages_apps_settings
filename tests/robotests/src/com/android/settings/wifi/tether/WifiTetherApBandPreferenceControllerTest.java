@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
 import androidx.preference.ListPreference;
@@ -72,9 +72,8 @@ public class WifiTetherApBandPreferenceControllerTest {
         when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         when(mContext.getResources()).thenReturn(RuntimeEnvironment.application.getResources());
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        WifiConfiguration config = new WifiConfiguration();
-        config.apBand = WifiConfiguration.AP_BAND_ANY;
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(new WifiConfiguration());
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(
+                new SoftApConfiguration.Builder().build());
         when(mWifiManager.isDualModeSupported()).thenReturn(false);
 
         mController = new WifiTetherApBandPreferenceController(mContext, mListener);
@@ -123,7 +122,7 @@ public class WifiTetherApBandPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        // -1 is WifiConfiguration.AP_BAND_ANY, for 'Auto' option. This should be prevented from
+        // -1 is SoftApConfiguration.BAND_ANY, for 'Auto' option. This should be prevented from
         // being set since it is invalid for this configuration
         mController.onPreferenceChange(mPreference, "-1");
         assertThat(mController.getBandIndex()).isEqualTo(1);
@@ -151,7 +150,7 @@ public class WifiTetherApBandPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        // -1 is WifiConfiguration.AP_BAND_ANY, for 'Auto' option.
+        // -1 is SoftApConfiguration.BAND_ANY, for 'Auto' option.
         mController.onPreferenceChange(mPreference, "-1");
         assertThat(mController.getBandIndex()).isEqualTo(-1);
         assertThat(mPreference.getSummary()).isEqualTo(ALL_BANDS);

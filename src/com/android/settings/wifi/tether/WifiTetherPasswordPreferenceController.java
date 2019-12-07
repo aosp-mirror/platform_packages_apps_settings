@@ -17,7 +17,7 @@
 package com.android.settings.wifi.tether;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.text.TextUtils;
 
 import androidx.preference.EditTextPreference;
@@ -48,12 +48,13 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
 
     @Override
     public void updateDisplay() {
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
-        if (config == null || (config.getAuthType() == WifiConfiguration.KeyMgmt.WPA2_PSK
-                && TextUtils.isEmpty(config.preSharedKey))) {
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+        if (config == null
+                || (config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                && TextUtils.isEmpty(config.getWpa2Passphrase()))) {
             mPassword = generateRandomPassword();
         } else {
-            mPassword = config.preSharedKey;
+            mPassword = config.getWpa2Passphrase();
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         ((ValidatedEditTextPreference) mPreference).setIsPassword(true);
@@ -79,7 +80,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
      */
     public String getPasswordValidated(int securityType) {
         // don't actually overwrite unless we get a new config in case it was accidentally toggled.
-        if (securityType == WifiConfiguration.KeyMgmt.NONE) {
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN) {
             return "";
         } else if (!isTextValid(mPassword)) {
             mPassword = generateRandomPassword();
@@ -89,7 +90,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     }
 
     public void updateVisibility(int securityType) {
-        mPreference.setVisible(securityType != WifiConfiguration.KeyMgmt.NONE);
+        mPreference.setVisible(securityType != SoftApConfiguration.SECURITY_TYPE_OPEN);
     }
 
     @Override
