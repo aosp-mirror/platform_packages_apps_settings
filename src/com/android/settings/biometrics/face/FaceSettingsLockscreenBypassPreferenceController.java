@@ -36,6 +36,10 @@ public class FaceSettingsLockscreenBypassPreferenceController
     protected FaceManager mFaceManager;
     private UserManager mUserManager;
 
+    public FaceSettingsLockscreenBypassPreferenceController(Context context) {
+        this(context, KEY);
+    }
+
     public FaceSettingsLockscreenBypassPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
