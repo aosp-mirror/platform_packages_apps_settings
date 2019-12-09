@@ -268,8 +268,7 @@ public class WifiUtils {
         if (accessPoint.isOsuProvider()) {
             return CONNECT_TYPE_OSU_PROVISION;
         } else if ((accessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
-                (accessPoint.getSecurity() == AccessPoint.SECURITY_OWE) ||
-                (accessPoint.getSecurity() == AccessPoint.SECURITY_OWE_TRANSITION)) {
+                (accessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
             return CONNECT_TYPE_OPEN_NETWORK;
         } else if (accessPoint.isSaved() && config != null
                 && config.getNetworkSelectionStatus() != null
