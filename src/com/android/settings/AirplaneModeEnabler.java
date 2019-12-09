@@ -97,7 +97,7 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         mServiceStateListeners.add(new ServiceStateListener(mTelephonyManager,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID, this));
 
-        if (subInfoList == null) {
+        if (subInfoList != null) {
             for (SubscriptionInfo subInfo : subInfoList) {
                 mServiceStateListeners.add(new ServiceStateListener(mTelephonyManager,
                         subInfo.getSubscriptionId(), this));
