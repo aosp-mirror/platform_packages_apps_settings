@@ -140,9 +140,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                 Utils.getUserIdFromBundle(
                         getActivity(),
                         getActivity().getIntent().getExtras(), isInternalActivity()));
-        if (mUserManager.isManagedProfile(credentialOwnerUserId)) {
-            setWorkChallengeBackground(view, credentialOwnerUserId);
-        }
     }
 
     // User could be locked while Effective user is unlocked even though the effective owns the

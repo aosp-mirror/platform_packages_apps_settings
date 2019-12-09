@@ -90,8 +90,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private TextView mHeaderTextView;
         private TextView mDetailsTextView;
-        private View mLeftSpacerLandscape;
-        private View mRightSpacerLandscape;
 
         // caller-supplied text for various prompts
         private CharSequence mHeaderText;
@@ -99,6 +97,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
+
+        private boolean mIsManagedProfile;
 
         // required constructor for fragments
         public ConfirmLockPatternFragment() {
@@ -119,8 +119,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mDetailsTextView = (TextView) view.findViewById(R.id.sud_layout_description);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
-            mLeftSpacerLandscape = view.findViewById(R.id.leftSpacer);
-            mRightSpacerLandscape = view.findViewById(R.id.rightSpacer);
+
+            mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
 
             // make it so unhandled touch events within the unlock screen go to the
             // lock pattern view.
@@ -325,7 +325,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultHeader() {
-            return mFrp ? R.string.lockpassword_confirm_your_pattern_header_frp
+            if (mFrp) return R.string.lockpassword_confirm_your_pattern_header_frp;
+            return mIsManagedProfile
+                    ? R.string.lockpassword_confirm_your_work_pattern_header
                     : R.string.lockpassword_confirm_your_pattern_header;
         }
 
