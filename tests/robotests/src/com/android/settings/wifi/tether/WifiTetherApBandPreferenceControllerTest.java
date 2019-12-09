@@ -82,7 +82,7 @@ public class WifiTetherApBandPreferenceControllerTest {
     @Test
     public void display_5GhzSupported_shouldDisplayFullList() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
-        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
         when(mWifiManager.isDualModeSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
@@ -94,7 +94,7 @@ public class WifiTetherApBandPreferenceControllerTest {
     @Test
     public void display_noCountryCode_shouldDisable() {
         when(mWifiManager.getCountryCode()).thenReturn(null);
-        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
 
@@ -106,7 +106,7 @@ public class WifiTetherApBandPreferenceControllerTest {
     @Test
     public void display_5GhzNotSupported_shouldDisable() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
-        when(mWifiManager.isDualBandSupported()).thenReturn(false);
+        when(mWifiManager.is5GHzBandSupported()).thenReturn(false);
 
         mController.displayPreference(mScreen);
 
@@ -118,7 +118,7 @@ public class WifiTetherApBandPreferenceControllerTest {
     @Test
     public void changePreference_noDualModeWith5G_shouldUpdateValue() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
-        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
 
@@ -145,7 +145,7 @@ public class WifiTetherApBandPreferenceControllerTest {
     @Test
     public void changePreference_dualModeWith5G_shouldUpdateValue() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
-        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
         when(mWifiManager.isDualModeSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
@@ -172,7 +172,7 @@ public class WifiTetherApBandPreferenceControllerTest {
     @Test
     public void updateDisplay_shouldUpdateValue() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
-        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
 
         // Set controller band index to 1 and verify is set.
         mController.displayPreference(mScreen);
@@ -180,7 +180,7 @@ public class WifiTetherApBandPreferenceControllerTest {
         assertThat(mController.getBandIndex()).isEqualTo(1);
 
         // Disable 5Ghz band
-        when(mWifiManager.isDualBandSupported()).thenReturn(false);
+        when(mWifiManager.is5GHzBandSupported()).thenReturn(false);
 
         // Call updateDisplay and verify it's changed.
         mController.updateDisplay();
