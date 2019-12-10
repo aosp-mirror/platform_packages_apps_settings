@@ -113,4 +113,11 @@ public class SubscriptionUtil {
         }
         return "";
     }
+
+    /**
+     * Whether Settings should show a "Use SIM" toggle in pSIM detailed page.
+     */
+    public static boolean showToggleForPhysicalSim(SubscriptionManager subMgr) {
+        return subMgr.canDisablePhysicalSubscription();
+    }
 }

@@ -110,7 +110,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         } else if (subs.size() == 1) {
             final SubscriptionInfo info = subs.get(0);
             final int subId = info.getSubscriptionId();
-            if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)) {
+            if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
+                    && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                 return mContext.getString(R.string.mobile_network_tap_to_activate,
                         SubscriptionUtil.getDisplayName(info));
             } else {
@@ -163,7 +164,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                 mPreference.setOnPreferenceClickListener((Preference pref) -> {
                     final SubscriptionInfo info = subs.get(0);
                     final int subId = info.getSubscriptionId();
-                    if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)) {
+                    if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
+                            && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                         mSubscriptionManager.setSubscriptionEnabled(subId, true);
                     } else {
                         final Intent intent = new Intent(mContext, MobileNetworkActivity.class);

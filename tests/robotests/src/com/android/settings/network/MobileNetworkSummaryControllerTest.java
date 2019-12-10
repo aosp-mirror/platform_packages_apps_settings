@@ -29,7 +29,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -52,7 +51,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -168,7 +166,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
-    public void getSummary_oneInactivePSim_correctSummaryAndClickHandler() {
+    public void getSummary_oneInactivePSim_cannotDisablePsim_correctSummaryAndClickHandler() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub1.getDisplayName()).thenReturn("sub1");
@@ -183,6 +181,30 @@ public class MobileNetworkSummaryControllerTest {
         assertThat(mPreference.getFragment()).isNull();
         mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         verify(mSubscriptionManager).setSubscriptionEnabled(eq(sub1.getSubscriptionId()), eq(true));
+    }
+
+    @Test
+    public void getSummary_oneInactivePSim_canDisablePsim_correctSummaryAndClickHandler() {
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        when(sub1.getSubscriptionId()).thenReturn(1);
+        when(sub1.getDisplayName()).thenReturn("sub1");
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        when(mSubscriptionManager.isActiveSubscriptionId(eq(1))).thenReturn(false);
+        when(mSubscriptionManager.canDisablePhysicalSubscription()).thenReturn(true);
+
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+
+        assertThat(mController.getSummary()).isEqualTo("sub1");
+
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
+        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
+        Intent intent = intentCaptor.getValue();
+        assertThat(intent.getComponent().getClassName()).isEqualTo(
+                MobileNetworkActivity.class.getName());
+        assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(sub1.getSubscriptionId());
     }
 
     @Test

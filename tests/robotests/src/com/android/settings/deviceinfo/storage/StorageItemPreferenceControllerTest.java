@@ -194,8 +194,8 @@ public class StorageItemPreferenceControllerTest {
                 .isEqualTo(R.string.apps_storage);
         assertThat(
                 intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                        .getInt(ProfileSelectFragment.EXTRA_PROFILE))
-                .isEqualTo(ProfileSelectFragment.WORK);
+                        .getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB))
+                .isEqualTo(ProfileSelectFragment.WORK_TAB);
         assertThat(
                 intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
                         .getInt(EXTRA_WORK_ID))

@@ -22,6 +22,7 @@ import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -30,7 +31,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -46,7 +46,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -155,6 +154,7 @@ public class MobileNetworkListControllerTest {
         when(sub1.isEmbedded()).thenReturn(true);
         doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(eq(1));
         doReturn(false).when(mSubscriptionManager).isActiveSubscriptionId(eq(2));
+        doReturn(false).when(mSubscriptionManager).canDisablePhysicalSubscription();
 
         when(sub2.isEmbedded()).thenReturn(false);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
@@ -166,13 +166,21 @@ public class MobileNetworkListControllerTest {
         final ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(
                 Preference.class);
         verify(mPreferenceScreen, times(2)).addPreference(preferenceCaptor.capture());
-        final Preference pref1 = preferenceCaptor.getAllValues().get(0);
-        final Preference pref2 = preferenceCaptor.getAllValues().get(1);
+        Preference pref1 = preferenceCaptor.getAllValues().get(0);
+        Preference pref2 = preferenceCaptor.getAllValues().get(1);
         assertThat(pref1.getSummary()).isEqualTo("Active / Downloaded SIM");
         assertThat(pref2.getSummary()).isEqualTo("Tap to activate sub2");
 
         pref2.getOnPreferenceClickListener().onPreferenceClick(pref2);
         verify(mSubscriptionManager).setSubscriptionEnabled(eq(2), eq(true));
+
+        // If disabling pSIM is allowed, summary of inactive pSIM should be different.
+        clearInvocations(mPreferenceScreen);
+        clearInvocations(mSubscriptionManager);
+        doReturn(true).when(mSubscriptionManager).canDisablePhysicalSubscription();
+        mController.onResume();
+        pref2 = preferenceCaptor.getAllValues().get(1);
+        assertThat(pref2.getSummary()).isEqualTo("Inactive / SIM");
     }
 
     @Test

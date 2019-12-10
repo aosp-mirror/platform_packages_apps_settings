@@ -99,14 +99,13 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             }
         }
 
-        // For eSIM, we always want the toggle. The telephony stack doesn't currently support
-        // disabling a pSIM directly (b/133379187), so we for now we don't include this on pSIM.
-        if (subInfo == null || !subInfo.isEmbedded()) {
+        // For eSIM, we always want the toggle. If telephony stack support disabling a pSIM
+        // directly, we show the toggle.
+        if (subInfo == null || (!subInfo.isEmbedded() && !SubscriptionUtil.showToggleForPhysicalSim(
+                mSubscriptionManager))) {
             mSwitchBar.hide();
         } else {
             mSwitchBar.show();
-            // TODO b/135222940: re-evaluate whether to use
-            // mSubscriptionManager#isSubscriptionEnabled
             mSwitchBar.setChecked(mSubscriptionManager.isActiveSubId(mSubId));
         }
     }
