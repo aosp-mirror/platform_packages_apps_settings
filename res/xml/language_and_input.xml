@@ -101,18 +101,21 @@
             android:key="virtual_keyboards_for_work_pref"
             android:title="@string/virtual_keyboards_for_work_title"
             android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:forWork="true"
             settings:controller="com.android.settings.inputmethod.VirtualKeyboardForWorkPreferenceController" />
 
         <Preference
             android:key="spellcheckers_settings_for_work_pref"
             android:title="@string/spellcheckers_settings_for_work_title"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
+            settings:forWork="true"
             settings:controller="com.android.settings.language.UserDictionaryForWorkPreferenceController" />
 
         <Preference
             android:key="user_dictionary_settings_for_work_pref"
             android:title="@string/user_dict_settings_for_work_title"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
+            settings:forWork="true"
             settings:controller="com.android.settings.inputmethod.SpellCheckerForWorkPreferenceController" />
     </com.android.settings.widget.WorkOnlyCategory>
 

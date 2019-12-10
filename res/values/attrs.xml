@@ -68,8 +68,10 @@
         <attr name="searchable" format="boolean" />
         <!-- Classname of a PreferenceController corresponding to the preference -->
         <attr name="controller" format="string" />
-        <!-- customized subtitle if it's an unavailable slice -->
+        <!-- Customized subtitle if it's an unavailable slice -->
         <attr name="unavailableSliceSubtitle" format="string" />
+        <!-- Whether or not the preference is for work profile, by default it's false. -->
+        <attr name="forWork" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="PreferenceScreen">
@@ -111,10 +113,6 @@
     <!-- Confirm device credentials screen -->
     <attr name="confirmDeviceCredentialsSideMargin" format="dimension" />
     <attr name="confirmDeviceCredentialsTopMargin" format="dimension" />
-
-    <declare-styleable name="WorkPreference">
-        <attr name="forWork" format="boolean" />
-    </declare-styleable>
 
     <declare-styleable name="VideoPreference">
         <attr name="animation" format="reference" />
