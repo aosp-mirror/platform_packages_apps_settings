@@ -143,7 +143,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         @Override
         public int getPreferred(BluetoothDevice device) {
             return isPreferred(device) ?
-                    BluetoothProfile.PRIORITY_ON : BluetoothProfile.PRIORITY_OFF;
+                    BluetoothProfile.CONNECTION_POLICY_ALLOWED
+                    : BluetoothProfile.CONNECTION_POLICY_FORBIDDEN;
         }
 
         @Override
