@@ -21,6 +21,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.Settings;
+import android.util.Log;
 
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.face.FaceEnrollIntroduction;
@@ -49,6 +51,9 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG, "Min strength: " + getIntent()
+                .getIntExtra(Settings.EXTRA_BIOMETRIC_MINIMUM_STRENGTH_REQUIRED, 0));
 
         final PackageManager pm = getApplicationContext().getPackageManager();
         Intent intent = null;
