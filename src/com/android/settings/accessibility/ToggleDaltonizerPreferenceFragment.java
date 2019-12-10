@@ -18,34 +18,56 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.hardware.display.ColorDisplayManager;
-import android.os.Bundle;
-import android.provider.SearchIndexableResource;
+import android.content.res.Resources;
 import android.provider.Settings;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
-        implements Preference.OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener {
-    private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
-    private static final String TYPE = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER;
-    private static final int DEFAULT_TYPE = AccessibilityManager.DALTONIZER_CORRECT_DEUTERANOMALY;
-    private static final String KEY_DALTONIZER_FOOTER = "daltonizer_footer";
+public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
+        implements DaltonizerPreferenceController.OnChangeListener,
+        SwitchBar.OnSwitchChangeListener {
 
-    private ListPreference mType;
+    private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
+
+    private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
+
+    @Override
+    public void onCheckedChanged(Preference preference) {
+        for (AbstractPreferenceController controller : sControllers) {
+            controller.updateState(preference);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        for (AbstractPreferenceController controller :
+                buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
+            ((DaltonizerPreferenceController) controller).setOnChangeListener(this);
+            ((DaltonizerPreferenceController) controller).displayPreference(getPreferenceScreen());
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        for (AbstractPreferenceController controller :
+                buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
+            ((DaltonizerPreferenceController) controller).setOnChangeListener(null);
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -57,16 +79,6 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         return R.string.help_url_color_correction;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mType = (ListPreference) findPreference("type");
-
-        final Preference footer = findPreference(KEY_DALTONIZER_FOOTER);
-        footer.setVisible(!ColorDisplayManager.isColorTransformAccelerated(getActivity()));
-        initPreferences();
-    }
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -75,26 +87,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? 1 : 0);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mType) {
-            Settings.Secure.putInt(getContentResolver(), TYPE, Integer.parseInt((String) newValue));
-            preference.setSummary("%s");
-        }
-
-        return true;
-    }
-
-    @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
-
-        mSwitchBar.setCheckedInternal(
-                Settings.Secure.getInt(getContentResolver(), ENABLED, 0) == 1);
-        mSwitchBar.addOnSwitchChangeListener(this);
+        Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? 0 : 1);
     }
 
     @Override
@@ -110,25 +103,34 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         switchBar.setSwitchBarText(switchBarText, switchBarText);
     }
 
-    private void initPreferences() {
-        final String value = Integer.toString(
-                Settings.Secure.getInt(getContentResolver(), TYPE, DEFAULT_TYPE));
-        mType.setValue(value);
-        mType.setOnPreferenceChangeListener(this);
-        final int index = mType.findIndexOfValue(value);
-        if (index < 0) {
-            // We're using a mode controlled by developer preferences.
-            mType.setSummary(getString(R.string.daltonizer_type_overridden,
-                    getString(R.string.simulate_color_space)));
-        }
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        Settings.Secure.putInt(getContentResolver(), ENABLED, isChecked ? 1 : 0);
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        onPreferenceToggled(mPreferenceKey, isChecked);
+    protected void onInstallSwitchBarToggleSwitch() {
+        super.onInstallSwitchBarToggleSwitch();
+        mSwitchBar.setCheckedInternal(
+                Settings.Secure.getInt(getContentResolver(), ENABLED, 0) == 1);
+        mSwitchBar.addOnSwitchChangeListener(this);
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        if (sControllers.size() == 0) {
+            final Resources resources = context.getResources();
+            final String[] daltonizerKeys = resources.getStringArray(
+                    R.array.daltonizer_mode_keys);
+
+            for (int i = 0; i < daltonizerKeys.length; i++) {
+                sControllers.add(new DaltonizerPreferenceController(
+                        context, lifecycle, daltonizerKeys[i]));
+            }
+        }
+        return sControllers;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_daltonizer_settings);
-
 }

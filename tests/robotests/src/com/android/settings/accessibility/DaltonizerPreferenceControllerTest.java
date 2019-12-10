@@ -18,53 +18,100 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class DaltonizerPreferenceControllerTest {
-    private static final int ON = 1;
-    private static final int OFF = 0;
+public class DaltonizerPreferenceControllerTest implements
+        DaltonizerPreferenceController.OnChangeListener {
+    private static final String PREF_KEY = "daltonizer_mode_protanomaly";
+    private static final String PREF_VALUE = "11";
+    private static final String PREF_FAKE_VALUE = "-1";
 
-    private Context mContext;
     private DaltonizerPreferenceController mController;
+
+    @Mock
+    private RadioButtonPreference mMockPref;
+    private Context mContext;
+    private ContentResolver mContentResolver;
+
+    @Mock
+    private PreferenceScreen mScreen;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new DaltonizerPreferenceController(mContext, "color_correction");
+        mController = new DaltonizerPreferenceController(mContext, mock(Lifecycle.class), PREF_KEY);
+        mController.setOnChangeListener(this);
+        mContentResolver = mContext.getContentResolver();
+
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mMockPref);
+        when(mMockPref.getKey()).thenReturn(PREF_KEY);
+        mController.displayPreference(mScreen);
+    }
+
+    @Override
+    public void onCheckedChanged(Preference preference) {
+        mController.updateState(preference);
     }
 
     @Test
-    public void getAvailabilityStatus_shouldReturnAvailableUnsearchable() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+    public void isAvailable() {
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void getSummary_enabledColorCorrection_shouldReturnOnSummary() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, ON);
+    public void updateState_notChecked() {
+        Settings.Secure.putString(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, PREF_FAKE_VALUE);
 
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_on));
+        mController.updateState(mMockPref);
+
+        // the first checked state is set to false by control
+        verify(mMockPref, atLeastOnce()).setChecked(false);
+        verify(mMockPref, never()).setChecked(true);
     }
 
     @Test
-    public void getSummary_disabledColorCorrection_shouldReturnOffSummary() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, OFF);
+    public void updateState_checked() {
+        Settings.Secure.putString(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, PREF_VALUE);
 
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_off));
+        mController.updateState(mMockPref);
+
+        // the first checked state is set to false by control
+        verify(mMockPref, atLeastOnce()).setChecked(false);
+        verify(mMockPref, atLeastOnce()).setChecked(true);
+    }
+
+    @Test
+    public void onRadioButtonClick_shouldReturnDaltonizerValue() {
+        mController.onRadioButtonClicked(mMockPref);
+        final String accessibilityDaltonizerValue = Settings.Secure.getString(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER);
+
+        assertThat(accessibilityDaltonizerValue).isEqualTo(PREF_VALUE);
     }
 }
