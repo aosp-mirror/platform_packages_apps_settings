@@ -338,7 +338,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     void setUsageSummary(Preference preference, BatterySipper sipper) {
         // Only show summary when usage time is longer than one minute
         final long usageTimeMs = sipper.usageTimeMs;
-        if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
+        if (shouldShowSummary(sipper) && usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
             final CharSequence timeSequence =
                     StringUtil.formatElapsedTime(mContext, usageTimeMs, false);
             preference.setSummary(
@@ -388,6 +388,19 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
             mPreferenceCache.put(p.getKey(), p);
         }
+    }
+
+    private boolean shouldShowSummary(BatterySipper sipper) {
+        final CharSequence[] whitelistPackages = mContext.getResources()
+                .getTextArray(R.array.whitelist_hide_summary_in_battery_usage);
+        final String target = sipper.packageWithHighestDrain;
+
+        for (CharSequence packageName: whitelistPackages) {
+            if (TextUtils.equals(target, packageName)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean isSharedGid(int uid) {

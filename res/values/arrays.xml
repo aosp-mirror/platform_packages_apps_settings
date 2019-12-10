@@ -1436,4 +1436,10 @@
         <item>@string/enhanced_4g_lte_mode_summary_4g_calling</item>
     </string-array>
 
+    <!-- A whitelist which packages won't show summary in battery usage screen.  [CHAR LIMIT=NONE] -->
+    <string-array name="whitelist_hide_summary_in_battery_usage" translatable="false">
+        <!-- Google -->
+        <item>"com.google.android.googlequicksearchbox"</item>
+    </string-array>
+
 </resources>

@@ -25,7 +25,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.pm.ModuleInfo;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.UserManager;
@@ -40,7 +39,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,10 +47,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryAppListPreferenceControllerTest {
@@ -159,6 +153,19 @@ public class BatteryAppListPreferenceControllerTest {
         mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo("Used for 2 min");
+    }
+
+    @Test
+    public void testSetUsageSummary_timeMoreThanOneMinute_GoogleApp_shouldNotSetScreenSummary() {
+        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+        mNormalBatterySipper.packageWithHighestDrain = "com.google.android.googlequicksearchbox";
+        doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
+                R.string.battery_used_for);
+        doReturn(mContext).when(mFragment).getContext();
+
+        mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
+
+        assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test
