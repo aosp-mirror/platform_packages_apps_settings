@@ -45,6 +45,9 @@ import com.android.settings.SettingsTutorialDialogWrapperActivity;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.support.actionbar.HelpMenuController;
+import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.utils.CandidateInfoExtra;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
@@ -57,7 +60,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
+public class SystemNavigationGestureSettings extends RadioButtonPickerFragment implements
+        HelpResourceProvider {
 
     private static final String TAG = "SystemNavigationGesture";
 
@@ -102,6 +106,9 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        SearchMenuController.init(this /* host */);
+        HelpMenuController.init(this /* host */);
+
         SuggestionFeatureProvider suggestionFeatureProvider = FeatureFactory.getFactory(context)
                 .getSuggestionFeatureProvider(context);
         SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
@@ -330,4 +337,11 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
                     return SystemNavigationPreferenceController.isGestureAvailable(context);
                 }
             };
+
+    // From HelpResourceProvider
+    @Override
+    public int getHelpResource() {
+        // TODO(b/146001201): Replace with system navigation help page when ready.
+        return R.string.help_uri_default;
+    }
 }

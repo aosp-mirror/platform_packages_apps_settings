@@ -15,8 +15,6 @@
  */
 package com.android.settings.location;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -112,17 +110,6 @@ public class LocationForWorkPreferenceControllerTest {
         verify(mUserManager)
             .setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true, mUserHandle);
         verify(mPreference).setSummary(R.string.switch_off_text);
-    }
-
-    @Test
-    public void isAvailable_noManagedProfile_shouldReturnFalse() {
-        when(mUserManager.getUserProfiles()).thenReturn(new ArrayList<>());
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_hasManagedProfile_shouldReturnTrue() {
-        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test

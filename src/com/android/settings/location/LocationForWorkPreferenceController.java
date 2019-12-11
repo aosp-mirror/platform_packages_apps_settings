@@ -56,9 +56,7 @@ public class LocationForWorkPreferenceController extends LocationBasePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        // Looking for a managed profile. If there are no managed profiles then we are removing the
-        // managed profile category.
-        return Utils.getManagedProfile(mUserManager) != null ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 
     @Override

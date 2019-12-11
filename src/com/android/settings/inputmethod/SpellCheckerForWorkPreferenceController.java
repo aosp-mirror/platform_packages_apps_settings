@@ -16,26 +16,20 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.core.WorkProfilePreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 /**
  * Preference controller for "Spell checker for work".
  *
  * @see SpellCheckerPreferenceController
  */
-public final class SpellCheckerForWorkPreferenceController extends WorkProfilePreferenceController {
+public final class SpellCheckerForWorkPreferenceController extends BasePreferenceController {
 
     public SpellCheckerForWorkPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-    }
-
-    @Override
-    protected int getSourceMetricsCategory() {
-        return SettingsEnums.SETTINGS_LANGUAGE_CATEGORY;
     }
 
     @AvailabilityStatus
@@ -44,6 +38,6 @@ public final class SpellCheckerForWorkPreferenceController extends WorkProfilePr
         if (!mContext.getResources().getBoolean(R.bool.config_show_spellcheckers_settings)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return super.getAvailabilityStatus();
+        return AVAILABLE;
     }
 }
