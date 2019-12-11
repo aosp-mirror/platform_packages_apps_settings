@@ -44,6 +44,14 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.development.autofill.AutofillLoggingLevelPreferenceController;
 import com.android.settings.development.autofill.AutofillResetOptionsPreferenceController;
+import com.android.settings.development.bluetooth.AbstractBluetoothDialogPreferenceController;
+import com.android.settings.development.bluetooth.AbstractBluetoothPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothBitPerSampleDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothChannelModeDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothCodecDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -62,7 +70,8 @@ import java.util.List;
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
         implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
-        BluetoothA2dpHwOffloadRebootDialog.OnA2dpHwDialogConfirmedListener {
+        BluetoothA2dpHwOffloadRebootDialog.OnA2dpHwDialogConfirmedListener,
+        AbstractBluetoothPreferenceController.Callback {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -455,16 +464,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
-        controllers.add(new BluetoothAudioCodecPreferenceController(context, lifecycle,
-                bluetoothA2dpConfigStore));
-        controllers.add(new BluetoothAudioSampleRatePreferenceController(context, lifecycle,
-                bluetoothA2dpConfigStore));
-        controllers.add(new BluetoothAudioBitsPerSamplePreferenceController(context, lifecycle,
-                bluetoothA2dpConfigStore));
-        controllers.add(new BluetoothAudioChannelModePreferenceController(context, lifecycle,
-                bluetoothA2dpConfigStore));
-        controllers.add(new BluetoothAudioQualityPreferenceController(context, lifecycle,
-                bluetoothA2dpConfigStore));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
@@ -511,12 +510,46 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
         controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));
+        controllers.add(new BluetoothCodecDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore, fragment));
+        controllers.add(new BluetoothSampleRateDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothBitPerSampleDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothQualityDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothChannelModeDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothHDAudioPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore, fragment));
+
         return controllers;
     }
 
     @VisibleForTesting
     <T extends AbstractPreferenceController> T getDevelopmentOptionsController(Class<T> clazz) {
         return use(clazz);
+    }
+
+    @Override
+    public void onBluetoothCodecChanged() {
+        for (AbstractPreferenceController controller : mPreferenceControllers) {
+            if (controller instanceof AbstractBluetoothDialogPreferenceController
+                    && !(controller instanceof BluetoothCodecDialogPreferenceController)) {
+                ((AbstractBluetoothDialogPreferenceController) controller)
+                        .onBluetoothCodecUpdated();
+            }
+        }
+    }
+
+    @Override
+    public void onBluetoothHDAudioEnabled(boolean enabled) {
+        for (AbstractPreferenceController controller : mPreferenceControllers) {
+            if (controller instanceof AbstractBluetoothDialogPreferenceController) {
+                ((AbstractBluetoothDialogPreferenceController) controller).onHDAudioEnabled(
+                        enabled);
+            }
+        }
     }
 
     /**
