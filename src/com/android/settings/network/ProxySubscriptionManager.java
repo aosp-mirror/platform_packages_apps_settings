@@ -21,6 +21,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.content.Context;
+import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -71,18 +72,18 @@ public class ProxySubscriptionManager implements LifecycleObserver {
     private static ProxySubscriptionManager sSingleton;
 
     private ProxySubscriptionManager(Context context) {
-        mContext = context;
+        final Looper looper = Looper.getMainLooper();
 
         mActiveSubscriptionsListeners =
                 new ArrayList<OnActiveSubscriptionChangedListener>();
 
-        mSubsciptionsMonitor = new ActiveSubsciptionsListener(context) {
+        mSubsciptionsMonitor = new ActiveSubsciptionsListener(looper, context) {
             public void onChanged() {
                 notifyAllListeners();
             }
         };
-        mAirplaneModeMonitor = new GlobalSettingsChangeListener(context,
-                Settings.Global.AIRPLANE_MODE_ON) {
+        mAirplaneModeMonitor = new GlobalSettingsChangeListener(looper,
+                context, Settings.Global.AIRPLANE_MODE_ON) {
             public void onChanged(String field) {
                 mSubsciptionsMonitor.clearCache();
                 notifyAllListeners();
@@ -93,7 +94,6 @@ public class ProxySubscriptionManager implements LifecycleObserver {
     }
 
     private Lifecycle mLifecycle;
-    private Context mContext;
     private ActiveSubsciptionsListener mSubsciptionsMonitor;
     private GlobalSettingsChangeListener mAirplaneModeMonitor;
 
@@ -140,7 +140,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
 
     @OnLifecycleEvent(ON_DESTROY)
     void onDestroy() {
-        mSubsciptionsMonitor.stop();
+        mAirplaneModeMonitor.close();
 
         if (mLifecycle != null) {
             mLifecycle.removeObserver(this);

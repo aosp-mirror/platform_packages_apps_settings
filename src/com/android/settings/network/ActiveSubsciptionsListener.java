@@ -20,6 +20,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
+import android.os.Looper;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -31,6 +33,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.internal.telephony.TelephonyIntents;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * A listener for active subscription change
@@ -43,18 +46,26 @@ public abstract class ActiveSubsciptionsListener
     /**
      * Constructor
      *
-     * @param context of this listener
+     * @param looper {@code Looper} of this listener
+     * @param context {@code Context} of this listener
      */
-    public ActiveSubsciptionsListener(Context context) {
+    public ActiveSubsciptionsListener(Looper looper, Context context) {
+        mLooper = looper;
         mContext = context;
+
+        mCacheState = new AtomicInteger(STATE_NOT_LISTENING);
+        mMaxActiveSubscriptionInfos = new AtomicInteger(MAX_SUBSCRIPTION_UNKNOWN);
 
         mSubscriptionChangeIntentFilter = new IntentFilter();
         mSubscriptionChangeIntentFilter.addAction(
                 CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
         mSubscriptionChangeIntentFilter.addAction(
                 TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
+    }
 
-        mSubscriptionChangeReceiver = new BroadcastReceiver() {
+    @VisibleForTesting
+    BroadcastReceiver getSubscriptionChangeReceiver() {
+        return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (isInitialStickyBroadcast()) {
@@ -77,18 +88,24 @@ public abstract class ActiveSubsciptionsListener
         };
     }
 
+    private Looper mLooper;
     private Context mContext;
 
-    private boolean mIsMonitoringDataChange;
-    private boolean mIsCachedDataAvailable;
+    private static final int STATE_NOT_LISTENING = 0;
+    private static final int STATE_STOPPING      = 1;
+    private static final int STATE_PREPARING     = 2;
+    private static final int STATE_LISTENING     = 3;
+    private static final int STATE_DATA_CACHED   = 4;
+
+    private AtomicInteger mCacheState;
     private SubscriptionManager mSubscriptionManager;
 
     private IntentFilter mSubscriptionChangeIntentFilter;
+    private BroadcastReceiver mSubscriptionChangeReceiver;
 
-    @VisibleForTesting
-    BroadcastReceiver mSubscriptionChangeReceiver;
+    private static final int MAX_SUBSCRIPTION_UNKNOWN = -1;
 
-    private Integer mMaxActiveSubscriptionInfos;
+    private AtomicInteger mMaxActiveSubscriptionInfos;
     private List<SubscriptionInfo> mCachedActiveSubscriptionInfo;
 
     /**
@@ -135,16 +152,14 @@ public abstract class ActiveSubsciptionsListener
      * @return max. number of active subscription info(s)
      */
     public int getActiveSubscriptionInfoCountMax() {
-        int count = 0;
-        if (mMaxActiveSubscriptionInfos == null) {
-            count = getSubscriptionManager().getActiveSubscriptionInfoCountMax();
-            if (mIsMonitoringDataChange) {
-                mMaxActiveSubscriptionInfos = count;
-            }
-        } else {
-            count = mMaxActiveSubscriptionInfos.intValue();
+        int cacheState = mCacheState.get();
+        if (cacheState < STATE_LISTENING) {
+            return getSubscriptionManager().getActiveSubscriptionInfoCountMax();
         }
-        return count;
+
+        mMaxActiveSubscriptionInfos.compareAndSet(MAX_SUBSCRIPTION_UNKNOWN,
+                getSubscriptionManager().getActiveSubscriptionInfoCountMax());
+        return mMaxActiveSubscriptionInfos.get();
     }
 
     /**
@@ -153,11 +168,11 @@ public abstract class ActiveSubsciptionsListener
      * @return A list of active subscription info
      */
     public List<SubscriptionInfo> getActiveSubscriptionsInfo() {
-        if (mIsCachedDataAvailable) {
+        if (mCacheState.get() >= STATE_DATA_CACHED) {
             return mCachedActiveSubscriptionInfo;
         }
-        mIsCachedDataAvailable = mIsMonitoringDataChange;
         mCachedActiveSubscriptionInfo = getSubscriptionManager().getActiveSubscriptionInfoList();
+        mCacheState.compareAndSet(STATE_LISTENING, STATE_DATA_CACHED);
 
         if ((mCachedActiveSubscriptionInfo == null)
                 || (mCachedActiveSubscriptionInfo.size() <= 0)) {
@@ -208,7 +223,7 @@ public abstract class ActiveSubsciptionsListener
      * @return A subscription info which is accessible list
      */
     public SubscriptionInfo getAccessibleSubscriptionInfo(int subId) {
-        if (mIsCachedDataAvailable) {
+        if (mCacheState.get() >= STATE_DATA_CACHED) {
             final SubscriptionInfo activeSubInfo = getActiveSubscriptionInfo(subId);
             if (activeSubInfo != null) {
                 return activeSubInfo;
@@ -231,37 +246,49 @@ public abstract class ActiveSubsciptionsListener
      * Clear data cached within listener
      */
     public void clearCache() {
-        mIsCachedDataAvailable = false;
-        mMaxActiveSubscriptionInfos = null;
+        mMaxActiveSubscriptionInfos.set(MAX_SUBSCRIPTION_UNKNOWN);
+        mCacheState.compareAndSet(STATE_DATA_CACHED, STATE_LISTENING);
         mCachedActiveSubscriptionInfo = null;
     }
 
     private void monitorSubscriptionsChange(boolean on) {
-        if (mIsMonitoringDataChange == on) {
+        if (on) {
+            if (!mCacheState.compareAndSet(STATE_NOT_LISTENING, STATE_PREPARING)) {
+                return;
+            }
+
+            if (mSubscriptionChangeReceiver == null) {
+                mSubscriptionChangeReceiver = getSubscriptionChangeReceiver();
+            }
+            mContext.registerReceiver(mSubscriptionChangeReceiver,
+                    mSubscriptionChangeIntentFilter, null, new Handler(mLooper));
+            getSubscriptionManager().addOnSubscriptionsChangedListener(this);
+            mCacheState.compareAndSet(STATE_PREPARING, STATE_LISTENING);
             return;
         }
-        mIsMonitoringDataChange = on;
-        if (on) {
-            mContext.registerReceiver(mSubscriptionChangeReceiver,
-                    mSubscriptionChangeIntentFilter);
-            getSubscriptionManager().addOnSubscriptionsChangedListener(this);
-            listenerNotify();
-        } else {
-            mContext.unregisterReceiver(mSubscriptionChangeReceiver);
-            getSubscriptionManager().removeOnSubscriptionsChangedListener(this);
-            clearCache();
+
+        final int currentState = mCacheState.getAndSet(STATE_STOPPING);
+        if (currentState <= STATE_STOPPING) {
+            mCacheState.compareAndSet(STATE_STOPPING, currentState);
+            return;
         }
+        if (mSubscriptionChangeReceiver != null) {
+            mContext.unregisterReceiver(mSubscriptionChangeReceiver);
+        }
+        getSubscriptionManager().removeOnSubscriptionsChangedListener(this);
+        clearCache();
+        mCacheState.compareAndSet(STATE_STOPPING, STATE_NOT_LISTENING);
     }
 
     private void listenerNotify() {
-        if (!mIsMonitoringDataChange) {
+        if (mCacheState.get() < STATE_LISTENING) {
             return;
         }
         onChanged();
     }
 
     private boolean clearCachedSubId(int subId) {
-        if (!mIsCachedDataAvailable) {
+        if (mCacheState.get() < STATE_DATA_CACHED) {
             return false;
         }
         if (mCachedActiveSubscriptionInfo == null) {
