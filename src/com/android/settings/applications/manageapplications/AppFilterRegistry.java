@@ -136,13 +136,13 @@ public class AppFilterRegistry {
         mFilters[FILTER_APPS_PERSONAL] = new AppFilterItem(
                 ApplicationsState.FILTER_PERSONAL,
                 FILTER_APPS_PERSONAL,
-                R.string.filter_personal_apps);
+                R.string.category_personal);
 
         // Work
         mFilters[FILTER_APPS_WORK] = new AppFilterItem(
                 ApplicationsState.FILTER_WORK,
                 FILTER_APPS_WORK,
-                R.string.filter_work_apps);
+                R.string.category_work);
 
         // Usage access screen, never displayed.
         mFilters[FILTER_APPS_USAGE_ACCESS] = new AppFilterItem(
