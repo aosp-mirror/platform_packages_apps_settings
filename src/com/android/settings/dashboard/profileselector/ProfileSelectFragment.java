@@ -53,24 +53,27 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      * Denotes the profile type.
      */
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({PERSONAL, WORK, ALL})
+    @IntDef({
+            ProfileType.PERSONAL,
+            ProfileType.WORK,
+            ProfileType.ALL
+    })
     public @interface ProfileType {
+        /**
+         * It is personal work profile.
+         */
+        int PERSONAL = 1;
+
+        /**
+         * It is work profile
+         */
+        int WORK = 1 << 1;
+
+        /**
+         * It is personal and work profile
+         */
+        int ALL = PERSONAL | WORK;
     }
-
-    /**
-     * It is personal work profile.
-     */
-    public static final int PERSONAL = 1;
-
-    /**
-     * It is work profile
-     */
-    public static final int WORK = 1 << 1;
-
-    /**
-     * It is personal and work profile
-     */
-    public static final int ALL = PERSONAL | WORK;
 
     /**
      * Used in fragment argument and pass {@link ProfileType} to it

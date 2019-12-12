@@ -71,7 +71,7 @@ public class AccountWorkProfileDashboardFragment extends DashboardFragment {
 
         final AccountPreferenceController accountPrefController =
                 new AccountPreferenceController(context, parent, authorities,
-                        ProfileSelectFragment.WORK);
+                        ProfileSelectFragment.ProfileType.WORK);
         if (parent != null) {
             parent.getSettingsLifecycle().addObserver(accountPrefController);
         }

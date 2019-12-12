@@ -87,7 +87,7 @@ public class StorageDashboardFragment extends DashboardFragment
         StorageManager sm = activity.getSystemService(StorageManager.class);
         mVolume = Utils.maybeInitializeVolume(sm, getArguments());
         mPersonalOnly = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE)
-                == ProfileSelectFragment.PERSONAL;
+                == ProfileSelectFragment.ProfileType.PERSONAL;
         if (mVolume == null) {
             activity.finish();
             return;

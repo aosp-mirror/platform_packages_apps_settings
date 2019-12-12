@@ -277,10 +277,10 @@ public class AccountPreferenceController extends AbstractPreferenceController
             final int profilesCount = profiles.size();
             for (int i = 0; i < profilesCount; i++) {
                 if (profiles.get(i).isManagedProfile()
-                        && (mType & ProfileSelectFragment.WORK) != 0) {
+                        && (mType & ProfileSelectFragment.ProfileType.WORK) != 0) {
                     updateProfileUi(profiles.get(i));
                 } else if (!profiles.get(i).isManagedProfile()
-                        && (mType & ProfileSelectFragment.PERSONAL) != 0) {
+                        && (mType & ProfileSelectFragment.ProfileType.PERSONAL) != 0) {
                     updateProfileUi(profiles.get(i));
                 }
             }
@@ -324,7 +324,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
             preferenceGroup.setContentDescription(
                     mContext.getString(R.string.account_settings));
         } else if (userInfo.isManagedProfile()) {
-            if (mType == ProfileSelectFragment.ALL) {
+            if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 preferenceGroup.setTitle(R.string.category_work);
                 final String workGroupSummary = getWorkGroupSummary(context, userInfo);
                 preferenceGroup.setSummary(workGroupSummary);
@@ -336,7 +336,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
                     DISALLOW_REMOVE_MANAGED_PROFILE, UserHandle.myUserId());
             profileData.managedProfilePreference = newManagedProfileSettings();
         } else {
-            if (mType == ProfileSelectFragment.ALL) {
+            if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 preferenceGroup.setTitle(R.string.category_personal);
                 preferenceGroup.setContentDescription(
                         mContext.getString(R.string.accessibility_category_personal));
