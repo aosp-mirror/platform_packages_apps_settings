@@ -21,6 +21,7 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.NotificationHistory;
 import android.app.role.RoleManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
@@ -365,6 +366,15 @@ public class NotificationBackend {
             Log.w(TAG, "Error calling NoMan", e);
         }
         return false;
+    }
+
+    public NotificationHistory getNotificationHistory(String pkg) {
+        try {
+            return sINM.getNotificationHistory(pkg);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return new NotificationHistory();
     }
 
     protected void recordAggregatedUsageEvents(Context context, AppRow appRow) {

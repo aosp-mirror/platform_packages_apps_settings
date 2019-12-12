@@ -1193,6 +1193,15 @@
                 android:value="com.android.settings.notification.history.NotificationStation" />
         </activity>
 
+        <activity
+            android:name=".notification.history.NotificationHistoryActivity"
+            android:label="@string/notification_history_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".notification.zen.ZenModeVoiceActivity"
                 android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
                 android:label="@string/zen_mode_settings_title">
