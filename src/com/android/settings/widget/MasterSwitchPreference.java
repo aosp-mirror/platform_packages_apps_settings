@@ -26,13 +26,13 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.TwoTargetPreference;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * A custom preference that provides inline switch toggle. It has a mandatory field for title, and
- * optional fields for icon and sub-text.
+ * optional fields for icon and sub-text. And it can be restricted by admin state.
  */
-public class MasterSwitchPreference extends TwoTargetPreference {
+public class MasterSwitchPreference extends RestrictedPreference {
 
     private Switch mSwitch;
     private boolean mChecked;
@@ -58,7 +58,7 @@ public class MasterSwitchPreference extends TwoTargetPreference {
 
     @Override
     protected int getSecondTargetResId() {
-        return R.layout.preference_widget_master_switch;
+        return R.layout.restricted_preference_widget_master_switch;
     }
 
     @Override
@@ -66,6 +66,7 @@ public class MasterSwitchPreference extends TwoTargetPreference {
         super.onBindViewHolder(holder);
         final View switchWidget = holder.findViewById(R.id.switchWidget);
         if (switchWidget != null) {
+            switchWidget.setVisibility(isDisabledByAdmin() ? View.GONE : View.VISIBLE);
             switchWidget.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -118,10 +119,16 @@ public class MasterSwitchPreference extends TwoTargetPreference {
      * Otherwise, keep it enabled.
      */
     public void setDisabledByAdmin(EnforcedAdmin admin) {
+        super.setDisabledByAdmin(admin);
         setSwitchEnabled(admin == null);
     }
 
     public Switch getSwitch() {
         return mSwitch;
+    }
+
+    @Override
+    protected boolean shouldHideSecondTarget() {
+        return getSecondTargetResId() == 0;
     }
 }
