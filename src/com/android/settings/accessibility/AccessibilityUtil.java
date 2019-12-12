@@ -16,12 +16,44 @@
 
 package com.android.settings.accessibility;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
+import android.os.Build;
 import android.provider.Settings;
+
+import androidx.annotation.IntDef;
 
 import com.android.settings.R;
 
-public class AccessibilityUtil {
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+/** Provides utility methods to accessibility settings only. */
+final class AccessibilityUtil {
+
+    private AccessibilityUtil(){}
+
+    /**
+     * Annotation for different accessibilityService fragment UI type.
+     *
+     * {@code LEGACY} for displaying appearance aligned with sdk version Q accessibility service
+     * page, but only hardware shortcut allowed.
+     * {@code HEADLESS} for displaying appearance without switch bar.
+     * {@code INTUITIVE} for displaying appearance with new design.
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+            AccessibilityServiceFragmentType.LEGACY,
+            AccessibilityServiceFragmentType.HEADLESS,
+            AccessibilityServiceFragmentType.INTUITIVE,
+    })
+
+    public @interface AccessibilityServiceFragmentType {
+        int LEGACY = 0;
+        int HEADLESS = 1;
+        int INTUITIVE = 2;
+    }
+
     /**
      * Return On/Off string according to the setting which specifies the integer value 1 or 0. This
      * setting is defined in the secure system settings {@link android.provider.Settings.Secure}.
@@ -32,5 +64,26 @@ public class AccessibilityUtil {
         final int resId = enabled ? R.string.accessibility_feature_state_on
                 : R.string.accessibility_feature_state_off;
         return context.getResources().getText(resId);
+    }
+
+    /**
+     * Gets the corresponding fragment type of a given accessibility service
+     *
+     * @param accessibilityServiceInfo The accessibilityService's info
+     * @return int from {@link AccessibilityServiceFragmentType}
+     */
+    static @AccessibilityServiceFragmentType int getAccessibilityServiceFragmentType(
+            AccessibilityServiceInfo accessibilityServiceInfo) {
+        final int targetSdk = accessibilityServiceInfo.getResolveInfo()
+                .serviceInfo.applicationInfo.targetSdkVersion;
+        final boolean requestA11yButton = (accessibilityServiceInfo.flags
+                & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0;
+
+        if (targetSdk <= Build.VERSION_CODES.Q) {
+            return AccessibilityServiceFragmentType.LEGACY;
+        }
+        return requestA11yButton
+                ? AccessibilityServiceFragmentType.HEADLESS
+                : AccessibilityServiceFragmentType.INTUITIVE;
     }
 }
