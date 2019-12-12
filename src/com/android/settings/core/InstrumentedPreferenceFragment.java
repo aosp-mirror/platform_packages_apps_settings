@@ -87,6 +87,12 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         return super.findPreference(key);
     }
 
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        writePreferenceClickMetric(preference);
+        return super.onPreferenceTreeClick(preference);
+    }
+
     protected final Context getPrefContext() {
         return getPreferenceManager().getContext();
     }
@@ -100,6 +106,10 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
 
     protected void writeElapsedTimeMetric(int action, String key) {
         mVisibilityLoggerMixin.writeElapsedTimeMetric(action, key);
+    }
+
+    protected void writePreferenceClickMetric(Preference preference) {
+        mMetricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
     }
 
     private void updateActivityTitleWithScreenTitle(PreferenceScreen screen) {
