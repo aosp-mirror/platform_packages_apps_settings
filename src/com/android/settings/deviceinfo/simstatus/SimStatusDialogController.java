@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.CellSignalStrength;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -47,6 +48,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import java.util.List;
 
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
@@ -430,11 +433,37 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private int getDbm(SignalStrength signalStrength) {
-        return signalStrength.getDbm();
+        List<CellSignalStrength> cellSignalStrengthList = signalStrength.getCellSignalStrengths();
+        int dbm = -1;
+        if (cellSignalStrengthList == null) {
+            return dbm;
+        }
+
+        for (CellSignalStrength cell : cellSignalStrengthList) {
+            if (cell.getDbm() != -1) {
+                dbm = cell.getDbm();
+                break;
+            }
+        }
+
+        return dbm;
     }
 
     private int getAsuLevel(SignalStrength signalStrength) {
-        return signalStrength.getAsuLevel();
+        List<CellSignalStrength> cellSignalStrengthList = signalStrength.getCellSignalStrengths();
+        int asu = -1;
+        if (cellSignalStrengthList == null) {
+            return asu;
+        }
+
+        for (CellSignalStrength cell : cellSignalStrengthList) {
+            if (cell.getAsuLevel() != -1) {
+                asu = cell.getAsuLevel();
+                break;
+            }
+        }
+
+        return asu;
     }
 
     @VisibleForTesting

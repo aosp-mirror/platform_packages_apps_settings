@@ -45,6 +45,10 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.CellSignalStrength;
+import android.telephony.CellSignalStrengthCdma;
+import android.telephony.CellSignalStrengthLte;
+import android.telephony.CellSignalStrengthWcdma;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -73,6 +77,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDeviceInfoUtils.class})
 public class SimStatusDialogControllerTest {
@@ -89,6 +96,12 @@ public class SimStatusDialogControllerTest {
     private PhoneStateListener mPhoneStateListener;
     @Mock
     private SignalStrength mSignalStrength;
+    @Mock
+    private CellSignalStrengthCdma mCellSignalStrengthCdma;
+    @Mock
+    private CellSignalStrengthLte mCellSignalStrengthLte;
+    @Mock
+    private CellSignalStrengthWcdma mCellSignalStrengthWcdma;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
     @Mock
@@ -113,8 +126,15 @@ public class SimStatusDialogControllerTest {
         mController = spy(new SimStatusDialogController(mDialog, mLifecycle, 0 /* phone id */));
         ShadowDeviceInfoUtils.setPhoneNumber("");
         doReturn(mServiceState).when(mController).getCurrentServiceState();
-        doReturn(0).when(mSignalStrength).getDbm();
-        doReturn(0).when(mSignalStrength).getAsuLevel();
+        //CellSignalStrength setup
+        doReturn(0).when(mCellSignalStrengthCdma).getDbm();
+        doReturn(0).when(mCellSignalStrengthCdma).getAsuLevel();
+        doReturn(0).when(mCellSignalStrengthLte).getDbm();
+        doReturn(0).when(mCellSignalStrengthLte).getAsuLevel();
+        doReturn(0).when(mCellSignalStrengthWcdma).getDbm();
+        doReturn(0).when(mCellSignalStrengthWcdma).getAsuLevel();
+
+        doReturn(null).when(mSignalStrength).getCellSignalStrengths();
         doReturn(mPhoneStateListener).when(mController).getPhoneStateListener();
         doReturn(mSignalStrength).when(mController).getSignalStrength();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(anyInt());
@@ -226,18 +246,36 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
-    public void initialize_updateSignalStrengthWith50_shouldUpdateSignalStrengthTo50() {
-        final int signalDbm = 50;
-        final int signalAsu = 50;
-        doReturn(signalDbm).when(mSignalStrength).getDbm();
-        doReturn(signalAsu).when(mSignalStrength).getAsuLevel();
+    public void initialize_updateSignalStrengthWithLte50Wcdma40_shouldUpdateSignalStrengthTo50() {
+        final int lteDbm = 50;
+        final int lteAsu = 50;
+        final int wcdmaDbm = 40;
+        final int wcdmaAsu = 40;
+        setupCellSignalStrength_lteWcdma(lteDbm, lteAsu, wcdmaDbm, wcdmaAsu);
         when(mPersistableBundle.getBoolean(
                 CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
 
         mController.initialize();
 
         final String signalStrengthString =
-                mContext.getString(R.string.sim_signal_strength, signalDbm, signalAsu);
+                mContext.getString(R.string.sim_signal_strength, lteDbm, lteAsu);
+        verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
+    }
+
+    @Test
+    public void initialize_updateSignalStrengthWithLte50Cdma30_shouldUpdateSignalStrengthTo50() {
+        final int lteDbm = 50;
+        final int lteAsu = 50;
+        final int cdmaDbm = 30;
+        final int cdmaAsu = 30;
+        setupCellSignalStrength_lteCdma(lteDbm, lteAsu, cdmaDbm, cdmaAsu);
+        when(mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
+
+        mController.initialize();
+
+        final String signalStrengthString =
+                mContext.getString(R.string.sim_signal_strength, lteDbm, lteAsu);
         verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
     }
 
@@ -248,17 +286,16 @@ public class SimStatusDialogControllerTest {
         when(mPersistableBundle.getBoolean(
                 CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
 
-        final int signalDbm = 50;
-        final int signalAsu = 50;
-        doReturn(signalDbm).when(mSignalStrength).getDbm();
-        doReturn(signalAsu).when(mSignalStrength).getAsuLevel();
+        final int lteDbm = 50;
+        final int lteAsu = 50;
+        setupCellSignalStrength_lteOnly(lteDbm, lteAsu);
         when(mPersistableBundle.getBoolean(
                 CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
 
         mController.initialize();
 
         final String signalStrengthString =
-                mContext.getString(R.string.sim_signal_strength, signalDbm, signalAsu);
+                mContext.getString(R.string.sim_signal_strength, lteDbm, lteAsu);
         verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
     }
 
@@ -422,5 +459,42 @@ public class SimStatusDialogControllerTest {
         doReturn(null).when(mController).getSignalStrength();
         // we should not crash when running the following line
         mController.initialize();
+    }
+
+    private void setupCellSignalStrength_lteWcdma(int lteDbm, int lteAsu, int wcdmaDbm,
+            int wcdmaAsu) {
+        doReturn(lteDbm).when(mCellSignalStrengthLte).getDbm();
+        doReturn(lteAsu).when(mCellSignalStrengthLte).getAsuLevel();
+        doReturn(wcdmaDbm).when(mCellSignalStrengthWcdma).getDbm();
+        doReturn(wcdmaAsu).when(mCellSignalStrengthWcdma).getAsuLevel();
+
+        List<CellSignalStrength> cellSignalStrengthList = new ArrayList<>(2);
+        cellSignalStrengthList.add(mCellSignalStrengthLte);
+        cellSignalStrengthList.add(mCellSignalStrengthWcdma);
+
+        doReturn(cellSignalStrengthList).when(mSignalStrength).getCellSignalStrengths();
+    }
+
+    private void setupCellSignalStrength_lteCdma(int lteDbm, int lteAsu, int cdmaDbm, int cdmaAsu) {
+        doReturn(lteDbm).when(mCellSignalStrengthLte).getDbm();
+        doReturn(lteAsu).when(mCellSignalStrengthLte).getAsuLevel();
+        doReturn(cdmaDbm).when(mCellSignalStrengthCdma).getDbm();
+        doReturn(cdmaAsu).when(mCellSignalStrengthCdma).getAsuLevel();
+
+        List<CellSignalStrength> cellSignalStrengthList = new ArrayList<>(2);
+        cellSignalStrengthList.add(mCellSignalStrengthLte);
+        cellSignalStrengthList.add(mCellSignalStrengthCdma);
+
+        doReturn(cellSignalStrengthList).when(mSignalStrength).getCellSignalStrengths();
+    }
+
+    private void setupCellSignalStrength_lteOnly(int lteDbm, int lteAsu) {
+        doReturn(lteDbm).when(mCellSignalStrengthLte).getDbm();
+        doReturn(lteAsu).when(mCellSignalStrengthLte).getAsuLevel();
+
+        List<CellSignalStrength> cellSignalStrengthList = new ArrayList<>(2);
+        cellSignalStrengthList.add(mCellSignalStrengthLte);
+
+        doReturn(cellSignalStrengthList).when(mSignalStrength).getCellSignalStrengths();
     }
 }
