@@ -73,7 +73,7 @@ public class AccountDashboardFragment extends DashboardFragment {
 
         final AccountPreferenceController accountPrefController =
                 new AccountPreferenceController(context, parent, authorities,
-                        ProfileSelectFragment.ALL);
+                        ProfileSelectFragment.ProfileType.ALL);
         if (parent != null) {
             parent.getSettingsLifecycle().addObserver(accountPrefController);
         }

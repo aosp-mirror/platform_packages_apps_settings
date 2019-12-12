@@ -98,7 +98,7 @@ public class AccountPreferenceControllerTest {
             .thenReturn(new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
         mController = new AccountPreferenceController(mContext, mFragment, null, mAccountHelper,
-                ProfileSelectFragment.ALL);
+                ProfileSelectFragment.ProfileType.ALL);
     }
 
     @After

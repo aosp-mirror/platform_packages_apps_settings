@@ -102,9 +102,9 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.fuelgauge.HighPowerDetail;
-import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
@@ -311,9 +311,9 @@ public class ManageApplications extends InstrumentedFragment
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
         mFilter = appFilterRegistry.get(appFilterRegistry.getDefaultFilterType(mListType));
         mIsPersonalOnly = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
-                == ProfileSelectFragment.PERSONAL : false;
+                == ProfileSelectFragment.ProfileType.PERSONAL : false;
         mIsWorkOnly = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
-                == ProfileSelectFragment.WORK : false;
+                == ProfileSelectFragment.ProfileType.WORK : false;
         mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : NO_USER_SPECIFIED;
         mExpandSearch = activity.getIntent().getBooleanExtra(EXTRA_EXPAND_SEARCH_VIEW, false);
 
