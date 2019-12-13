@@ -25,6 +25,7 @@ import android.os.Looper;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -39,9 +40,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * A listener for active subscription change
  */
 public abstract class ActiveSubsciptionsListener
-        extends SubscriptionManager.OnSubscriptionsChangedListener {
+        extends SubscriptionManager.OnSubscriptionsChangedListener
+        implements AutoCloseable {
 
     private static final String TAG = "ActiveSubsciptions";
+    private static final boolean DEBUG = false;
 
     /**
      * Constructor
@@ -61,6 +64,8 @@ public abstract class ActiveSubsciptionsListener
                 CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
         mSubscriptionChangeIntentFilter.addAction(
                 TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
+        mSubscriptionChangeIntentFilter.addAction(
+                TelephonyManager.ACTION_MULTI_SIM_CONFIG_CHANGED);
     }
 
     @VisibleForTesting
@@ -135,6 +140,13 @@ public abstract class ActiveSubsciptionsListener
     }
 
     /**
+     * Implementation of {@code AutoCloseable}
+     */
+    public void close() {
+        stop();
+    }
+
+    /**
      * Get SubscriptionManager
      *
      * @return a SubscriptionManager
@@ -174,15 +186,17 @@ public abstract class ActiveSubsciptionsListener
         mCachedActiveSubscriptionInfo = getSubscriptionManager().getActiveSubscriptionInfoList();
         mCacheState.compareAndSet(STATE_LISTENING, STATE_DATA_CACHED);
 
-        if ((mCachedActiveSubscriptionInfo == null)
-                || (mCachedActiveSubscriptionInfo.size() <= 0)) {
-            Log.d(TAG, "active subscriptions: " + mCachedActiveSubscriptionInfo);
-        } else {
-            final StringBuilder logString = new StringBuilder("active subscriptions:");
-            for (SubscriptionInfo subInfo : mCachedActiveSubscriptionInfo) {
-                logString.append(" " + subInfo.getSubscriptionId());
+        if (DEBUG) {
+            if ((mCachedActiveSubscriptionInfo == null)
+                    || (mCachedActiveSubscriptionInfo.size() <= 0)) {
+                Log.d(TAG, "active subscriptions: " + mCachedActiveSubscriptionInfo);
+            } else {
+                final StringBuilder logString = new StringBuilder("active subscriptions:");
+                for (SubscriptionInfo subInfo : mCachedActiveSubscriptionInfo) {
+                    logString.append(" " + subInfo.getSubscriptionId());
+                }
+                Log.d(TAG, logString.toString());
             }
-            Log.d(TAG, logString.toString());
         }
 
         return mCachedActiveSubscriptionInfo;
@@ -208,12 +222,12 @@ public abstract class ActiveSubsciptionsListener
     }
 
     /**
-     * Get a list of accessible subscription info
+     * Get a list of all subscription info which accessible by Settings app
      *
      * @return A list of accessible subscription info
      */
     public List<SubscriptionInfo> getAccessibleSubscriptionsInfo() {
-        return getSubscriptionManager().getAccessibleSubscriptionInfoList();
+        return getSubscriptionManager().getAvailableSubscriptionInfoList();
     }
 
     /**
@@ -223,11 +237,12 @@ public abstract class ActiveSubsciptionsListener
      * @return A subscription info which is accessible list
      */
     public SubscriptionInfo getAccessibleSubscriptionInfo(int subId) {
-        if (mCacheState.get() >= STATE_DATA_CACHED) {
-            final SubscriptionInfo activeSubInfo = getActiveSubscriptionInfo(subId);
-            if (activeSubInfo != null) {
-                return activeSubInfo;
-            }
+        // Always check if subId is part of activeSubscriptions
+        // since there's cache design within SubscriptionManager.
+        // That give us a chance to avoid from querying ContentProvider.
+        final SubscriptionInfo activeSubInfo = getActiveSubscriptionInfo(subId);
+        if (activeSubInfo != null) {
+            return activeSubInfo;
         }
 
         final List<SubscriptionInfo> subInfoList = getAccessibleSubscriptionsInfo();
