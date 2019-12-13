@@ -37,7 +37,7 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
 
         final Bundle storageBundle = new Bundle();
         storageBundle.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
-        storageBundle.putInt(EXTRA_PROFILE, ProfileSelectFragment.PERSONAL);
+        storageBundle.putInt(EXTRA_PROFILE, ProfileSelectFragment.ProfileType.PERSONAL);
 
         final Fragment storageDashboardFragment = new StorageDashboardFragment();
         storageDashboardFragment.setArguments(storageBundle);

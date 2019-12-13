@@ -16,25 +16,143 @@
 
 package com.android.settings.accessibility;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
 
+import androidx.lifecycle.LifecycleObserver;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
-public class DaltonizerPreferenceController extends BasePreferenceController {
+import com.google.common.primitives.Ints;
 
-    public DaltonizerPreferenceController(Context context, String preferenceKey) {
+import java.util.HashMap;
+import java.util.Map;
+
+/** Controller class that control accessibility daltonizer settings. */
+public class DaltonizerPreferenceController extends BasePreferenceController implements
+        LifecycleObserver, RadioButtonPreference.OnClickListener {
+    private static final String TYPE = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER;
+
+    // pair the preference key and daltonizer value.
+    private final Map<String, Integer> mAccessibilityDaltonizerKeyToValueMap = new HashMap<>();
+
+    // RadioButtonPreference key, each preference represent a daltonizer value.
+    private final ContentResolver mContentResolver;
+    private final Resources mResources;
+    private DaltonizerPreferenceController.OnChangeListener mOnChangeListener;
+    private RadioButtonPreference mPreference;
+    private int mAccessibilityDaltonizerValue;
+
+    public DaltonizerPreferenceController(Context context, Lifecycle lifecycle,
+            String preferenceKey) {
         super(context, preferenceKey);
+
+        mContentResolver = context.getContentResolver();
+        mResources = context.getResources();
+
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+    }
+
+    protected static int getSecureAccessibilityDaltonizerValue(ContentResolver resolver,
+            String name) {
+        final String daltonizerStringValue = Settings.Secure.getString(resolver, name);
+        if (daltonizerStringValue == null) {
+            return AccessibilityManager.DALTONIZER_CORRECT_DEUTERANOMALY;
+        }
+        final Integer daltonizerIntValue = Ints.tryParse(daltonizerStringValue);
+        return daltonizerIntValue == null ? AccessibilityManager.DALTONIZER_CORRECT_DEUTERANOMALY
+                : daltonizerIntValue;
+    }
+
+    public void setOnChangeListener(DaltonizerPreferenceController.OnChangeListener listener) {
+        mOnChangeListener = listener;
+    }
+
+    private Map<String, Integer> getDaltonizerValueToKeyMap() {
+        if (mAccessibilityDaltonizerKeyToValueMap.size() == 0) {
+
+            final String[] daltonizerKeys = mResources.getStringArray(
+                    R.array.daltonizer_mode_keys);
+
+            final int[] daltonizerValues = mResources.getIntArray(
+                    R.array.daltonizer_type_values);
+
+            final int daltonizerValueCount = daltonizerValues.length;
+            for (int i = 0; i < daltonizerValueCount; i++) {
+                mAccessibilityDaltonizerKeyToValueMap.put(daltonizerKeys[i], daltonizerValues[i]);
+            }
+        }
+        return mAccessibilityDaltonizerKeyToValueMap;
+    }
+
+    private void putSecureString(String name, String value) {
+        Settings.Secure.putString(mContentResolver, name, value);
+    }
+
+    private void handlePreferenceChange(String value) {
+        putSecureString(TYPE, value);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return AVAILABLE;
     }
 
     @Override
-    public CharSequence getSummary() {
-        return AccessibilityUtil.getSummary(mContext,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED);
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = (RadioButtonPreference)
+                screen.findPreference(getPreferenceKey());
+        mPreference.setOnClickListener(this);
+        updateState(mPreference);
     }
+
+    @Override
+    public void onRadioButtonClicked(RadioButtonPreference preference) {
+        final int value = getDaltonizerValueToKeyMap().get(mPreferenceKey);
+        handlePreferenceChange(String.valueOf(value));
+        if (mOnChangeListener != null) {
+            mOnChangeListener.onCheckedChanged(mPreference);
+        }
+    }
+
+    private int getAccessibilityDaltonizerValue() {
+        final int daltonizerValue = getSecureAccessibilityDaltonizerValue(mContentResolver,
+                TYPE);
+        return daltonizerValue;
+    }
+
+    protected void updatePreferenceCheckedState(int value) {
+        if (mAccessibilityDaltonizerValue == value) {
+            mPreference.setChecked(true);
+        }
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        mAccessibilityDaltonizerValue = getAccessibilityDaltonizerValue();
+
+        // reset RadioButton
+        mPreference.setChecked(false);
+        final int preferenceValue = getDaltonizerValueToKeyMap().get(mPreference.getKey());
+        updatePreferenceCheckedState(preferenceValue);
+    }
+
+    /** Listener interface handles checked event. */
+    public interface OnChangeListener {
+        /** A hook that is called when preference checked.*/
+        void onCheckedChanged(Preference preference);
+    }
+
 }

@@ -1014,19 +1014,19 @@
         <item>\?</item>
     </string-array>
 
-    <!-- Display color space adjustment modes for accessibility -->
-    <string-array name="daltonizer_type_entries" translatable="false">
-        <item>@string/daltonizer_mode_deuteranomaly</item>
-        <item>@string/daltonizer_mode_protanomaly</item>
-        <item>@string/daltonizer_mode_tritanomaly</item>
+    <!-- Keys for color space adjustment modes for accessibility -->
+    <string-array name="daltonizer_mode_keys" translatable="false">
+        <item>daltonizer_mode_deuteranomaly</item>
+        <item>daltonizer_mode_protanomaly</item>
+        <item>daltonizer_mode_tritanomaly</item>
     </string-array>
 
     <!-- Values for display color space adjustment modes for accessibility -->
-    <string-array name="daltonizer_type_values" translatable="false">
+    <integer-array name="daltonizer_type_values" translatable="false">
         <item>12</item>
         <item>11</item>
         <item>13</item>
-    </string-array>
+    </integer-array>
 
     <!-- Battery saver mode: allowable trigger threshold levels. -->
     <integer-array name="battery_saver_trigger_values" translatable="false" >

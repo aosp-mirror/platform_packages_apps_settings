@@ -405,7 +405,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         } else {
             final Bundle args = new Bundle(2 + additionalCapacity);
             args.putInt(ProfileSelectFragment.EXTRA_PROFILE,
-                    mIsWorkProfile ? ProfileSelectFragment.WORK : ProfileSelectFragment.ALL);
+                    mIsWorkProfile ? ProfileSelectFragment.ProfileType.WORK
+                            : ProfileSelectFragment.ProfileType.ALL);
             args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
             return args;
         }

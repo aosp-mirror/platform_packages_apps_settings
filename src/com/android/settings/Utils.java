@@ -1060,9 +1060,9 @@ public final class Utils extends com.android.settingslib.Utils {
     public static Fragment getTargetFragment(Activity activity, String fragmentName, Bundle args) {
         Fragment f = null;
         final boolean isPersonal = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
-                == ProfileSelectFragment.PERSONAL : false;
+                == ProfileSelectFragment.ProfileType.PERSONAL : false;
         final boolean isWork = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
-                == ProfileSelectFragment.WORK : false;
+                == ProfileSelectFragment.ProfileType.WORK : false;
         if (FeatureFlagUtils.isEnabled(activity, FeatureFlags.PERSONAL_WORK_PROFILE)
                 && UserManager.get(activity).getUserProfiles().size() > 1
                 && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
