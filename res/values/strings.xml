@@ -695,6 +695,12 @@
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
     <string name="radio_controls_summary">Manage Wi\u2011Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs</string>
 
+    <!-- check box cellular data title [CHAR LIMIT=30] -->
+    <string name="cellular_data_title">Mobile data</string>
+    <!-- check box Calls title [CHAR LIMIT=30] -->
+    <string name="calls_title">Allow calls</string>
+    <!-- check box SMS Messges title [CHAR LIMIT=30] -->
+    <string name="sms_messages_title">SMS messages</string>
     <!-- check box cellular data summary [CHAR LIMIT=85] -->
     <string name="cellular_data_summary">Allow data usage over mobile network</string>
     <!-- check box to allow data usage when roaming [CHAR LIMIT=41] -->
@@ -7211,6 +7217,8 @@
     <string name="sim_select_card">Select a SIM card</string>
     <!-- Label for a numbered SIM card.  [CHAR LIMIT=40] -->
     <string name="sim_card_number_title">SIM <xliff:g id="card_number">%1$d</xliff:g></string>
+    <!-- Name label of Sim card that is empty.  [CHAR LIMIT=40] -->
+    <string name="sim_slot_empty">SIM empty</string>
     <!-- Name label of Sim Editor.  [CHAR LIMIT=40] -->
     <string name="sim_editor_name">SIM name</string>
     <!-- Hint for SIM name in sim name editor dialog.  [CHAR LIMIT=40] -->
@@ -7256,6 +7264,8 @@
     <!-- Message under title informing the user to touch to go to SIM Cards in Settings.  [CHAR LIMIT=40] -->
     <string name="sim_notification_summary">Tap to set up</string>
 
+    <!-- This is a divider in the SIM cards preferences that is the header of various settings where the user chooses which SIM to use for phone calls, data, and SMS messages [CHAR LIMIT=50] -->
+    <string name="sim_pref_divider">Preferred SIM for</string>
     <!-- When a user chooses this "Ask first" preference for the SIM to use for phone calls, they'll be prompted to choose a SIM every time they initiate a call [CHAR LIMIT=50] -->
     <string name="sim_calls_ask_first_prefs_title">Ask every time</string>
     <!-- When a SIM preference hasn't been selected yet, this string is displayed as the pref summary until the user chooses a SIM subscription from the preference list [CHAR LIMIT=50] -->
