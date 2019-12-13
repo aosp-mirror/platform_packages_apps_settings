@@ -63,6 +63,7 @@ public class FaceSettings extends DashboardFragment {
     private FaceSettingsAttentionPreferenceController mAttentionController;
     private FaceSettingsRemoveButtonPreferenceController mRemoveController;
     private FaceSettingsEnrollButtonPreferenceController mEnrollController;
+    private FaceSettingsLockscreenBypassPreferenceController mLockscreenController;
     private List<AbstractPreferenceController> mControllers;
 
     private List<Preference> mTogglePreferences;
@@ -129,7 +130,7 @@ public class FaceSettings extends DashboardFragment {
         Preference attentionPref = findPreference(FaceSettingsAttentionPreferenceController.KEY);
         Preference confirmPref = findPreference(FaceSettingsConfirmPreferenceController.KEY);
         Preference bypassPref =
-                findPreference(FaceSettingsLockscreenBypassPreferenceController.KEY);
+                findPreference(mLockscreenController.getPreferenceKey());
         mTogglePreferences = new ArrayList<>(
                 Arrays.asList(keyguardPref, appPref, attentionPref, confirmPref, bypassPref));
 
@@ -138,12 +139,10 @@ public class FaceSettings extends DashboardFragment {
 
         // There is no better way to do this :/
         for (AbstractPreferenceController controller : mControllers) {
-            if (controller instanceof  FaceSettingsPreferenceController) {
+            if (controller instanceof FaceSettingsPreferenceController) {
                 ((FaceSettingsPreferenceController) controller).setUserId(mUserId);
             } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
                 ((FaceSettingsEnrollButtonPreferenceController) controller).setUserId(mUserId);
-            } else if (controller instanceof FaceSettingsLockscreenBypassPreferenceController) {
-                ((FaceSettingsLockscreenBypassPreferenceController) controller).setUserId(mUserId);
             }
         }
         mRemoveController.setUserId(mUserId);
@@ -151,12 +150,20 @@ public class FaceSettings extends DashboardFragment {
         // Don't show keyguard controller for work profile settings.
         if (mUserManager.isManagedProfile(mUserId)) {
             removePreference(FaceSettingsKeyguardPreferenceController.KEY);
-            removePreference(FaceSettingsLockscreenBypassPreferenceController.KEY);
+            removePreference(mLockscreenController.getPreferenceKey());
         }
 
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mLockscreenController = use(FaceSettingsLockscreenBypassPreferenceController.class);
+        mLockscreenController.setUserId(mUserId);
     }
 
     @Override
@@ -263,7 +270,6 @@ public class FaceSettings extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new FaceSettingsVideoPreferenceController(context));
         controllers.add(new FaceSettingsKeyguardPreferenceController(context));
-        controllers.add(new FaceSettingsLockscreenBypassPreferenceController(context));
         controllers.add(new FaceSettingsAppPreferenceController(context));
         controllers.add(new FaceSettingsAttentionPreferenceController(context));
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
