@@ -55,6 +55,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.widget.SwitchBar;
 
@@ -246,7 +247,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     @VisibleForTesting
     ImsManager getImsManager() {
-        return ImsManager.getInstance(getActivity(), SubscriptionManager.getPhoneId(mSubId));
+        return ImsManager.getInstance(getActivity(),
+                SubscriptionUtil.getPhoneId(getActivity(), mSubId));
     }
 
     @VisibleForTesting

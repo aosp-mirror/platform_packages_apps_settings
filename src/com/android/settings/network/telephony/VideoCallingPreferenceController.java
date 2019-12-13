@@ -33,6 +33,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
 import com.android.settings.network.MobileDataEnabledListener;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -119,7 +120,8 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     public VideoCallingPreferenceController init(int subId) {
         mSubId = subId;
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
+            mImsManager = ImsManager.getInstance(mContext,
+                    SubscriptionUtil.getPhoneId(mContext, mSubId));
         }
 
         return this;
@@ -127,7 +129,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     private boolean isVideoCallEnabled(int subId) {
         final ImsManager imsManager = subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
-                ? ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(subId))
+                ? ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(mContext, subId))
                 : null;
         return isVideoCallEnabled(subId, imsManager);
     }

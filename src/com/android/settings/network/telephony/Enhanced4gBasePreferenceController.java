@@ -32,6 +32,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -75,7 +76,8 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         mSubId = subId;
         mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
+            mImsManager = ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(
+                    mContext, mSubId));
         }
 
         final boolean show4GForLTE = mCarrierConfig.getBoolean(

@@ -52,6 +52,7 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.network.ApnSettings;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /**
@@ -126,7 +127,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             ImsManager.getInstance(mContext,
-                    SubscriptionManager.getPhoneId(mSubId)).factoryReset();
+                    SubscriptionUtil.getPhoneId(mContext, mSubId)).factoryReset();
             restoreDefaultApn(mContext);
             if (mEraseEsim) {
                 return RecoverySystem.wipeEuiccData(mContext, mPackageName);
