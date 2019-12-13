@@ -24,11 +24,14 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * A listener for Settings.Global configuration change, with support of Lifecycle
@@ -39,19 +42,33 @@ public abstract class GlobalSettingsChangeListener extends ContentObserver
     /**
      * Constructor
      *
-     * @param context of this listener
+     * @param context {@code Context} of this listener
      * @param field field of Global Settings
      */
     public GlobalSettingsChangeListener(Context context, String field) {
-        super(new Handler());
+        this(Looper.getMainLooper(), context, field);
+    }
+
+    /**
+     * Constructor
+     *
+     * @param looper {@code Looper} for processing callback
+     * @param context {@code Context} of this listener
+     * @param field field of Global Settings
+     */
+    public GlobalSettingsChangeListener(Looper looper, Context context, String field) {
+        super(new Handler(looper));
         mContext = context;
         mField = field;
+        mUri = Settings.Global.getUriFor(field);
+        mListening = new AtomicBoolean(false);
         monitorUri(true);
     }
 
     private Context mContext;
     private String mField;
     private Uri mUri;
+    private AtomicBoolean mListening;
     private Lifecycle mLifecycle;
 
     /**
@@ -75,7 +92,7 @@ public abstract class GlobalSettingsChangeListener extends ContentObserver
     }
 
     public void onChange(boolean selfChange) {
-        if (!isMonitoring()) {
+        if (!mListening.get()) {
             return;
         }
         onChanged(mField);
@@ -104,20 +121,16 @@ public abstract class GlobalSettingsChangeListener extends ContentObserver
         notifyChangeBasedOn(null);
     }
 
-    private boolean isMonitoring() {
-        return (mUri != null);
-    }
-
     private void monitorUri(boolean on) {
-        if (isMonitoring() == on) {
+        if (!mListening.compareAndSet(!on, on)) {
             return;
         }
-        if (mUri == null) {
-            mUri = Settings.Global.getUriFor(mField);
+
+        if (on) {
             mContext.getContentResolver().registerContentObserver(mUri, false, this);
             return;
         }
-        mUri = null;
+
         mContext.getContentResolver().unregisterContentObserver(this);
     }
 }
