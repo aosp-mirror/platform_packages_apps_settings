@@ -170,7 +170,8 @@ public class AccessibilityEditDialogUtils {
         final String summary = context.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_hardware);
         setupShortcutWidget(dialogView, title, summary,
-                R.drawable.illustration_accessibility_button);
+                R.drawable.accessibility_shortcut_type_hardware);
+        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
     }
 
     private static void initMagnifyShortcut(Context context, View view) {
@@ -180,7 +181,8 @@ public class AccessibilityEditDialogUtils {
         final String summary = context.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_triple_tap);
         setupShortcutWidget(dialogView, title, summary,
-                R.drawable.illustration_accessibility_button);
+                R.drawable.accessibility_shortcut_type_triple_tap);
+        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
     }
 
     private static void initAdvancedWidget(View view) {
@@ -213,8 +215,9 @@ public class AccessibilityEditDialogUtils {
 
     private static int retrieveImageResId(Context context) {
         return isGestureNavigateEnabled(context)
-                ? R.drawable.illustration_accessibility_button
-                : R.drawable.illustration_accessibility_button;
+                ? R.drawable.accessibility_shortcut_type_software_gesture
+                : R.drawable.accessibility_shortcut_type_software;
+        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
     }
 
     private static SpannableString getSummaryStringWithIcon(Context context, int lineHeight) {

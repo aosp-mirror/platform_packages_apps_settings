@@ -22,6 +22,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.media.AudioManager;
@@ -32,8 +33,12 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Switch;
@@ -51,6 +56,26 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private static final int DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL = 1;
     private static final int DIALOG_ID_ACCESSIBILITY_BUTTON_TUTORIAL = 2;
+    private static final int DIALOG_ID_EDIT_SHORTCUT = 3;
+
+    private final DialogInterface.OnClickListener mDialogListener =
+            (DialogInterface dialog, int id) -> {
+                if (id == DialogInterface.BUTTON_POSITIVE) {
+                    // TODO(b/142531156): Save the shortcut type preference.
+                }
+            };
+
+    private final View.OnClickListener mSettingButtonListener =
+            (View view) -> showDialog(DIALOG_ID_EDIT_SHORTCUT);
+
+    private final View.OnClickListener mCheckBoxListener = (View view) -> {
+        CheckBox checkBox = (CheckBox) view;
+        if (checkBox.isChecked()) {
+            // TODO(b/142530063): Enable shortcut when checkbox is checked.
+        } else {
+            // TODO(b/142530063): Disable shortcut when checkbox is unchecked.
+        }
+    };
 
     private Dialog mDialog;
 
@@ -160,6 +185,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        initShortcutPreference();
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -182,6 +214,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 mDialog = AccessibilityGestureNavigationTutorial
                         .showAccessibilityButtonTutorialDialog(getActivity());
                 break;
+            case DIALOG_ID_EDIT_SHORTCUT:
+                final CharSequence dialogTitle = getActivity().getString(
+                        R.string.accessibility_shortcut_edit_dialog_title_magnification);
+                mDialog = AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
+                        getActivity(), dialogTitle, mDialogListener);
+                break;
             default:
                 throw new IllegalArgumentException();
         }
@@ -202,6 +240,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_GESTURE_NAVIGATION;
             case DIALOG_ID_ACCESSIBILITY_BUTTON_TUTORIAL:
                 return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_ACCESSIBILITY_BUTTON;
+            case DIALOG_ID_EDIT_SHORTCUT:
+                return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_ACCESSIBILITY_BUTTON;
+                // TODO(b/142531156): Create a settings enum to replace it.
             default:
                 return 0;
         }
@@ -275,6 +316,21 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getActivity().setTitle(titleRes);
             }
         }
+    }
+
+    private void initShortcutPreference() {
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(
+                preferenceScreen.getContext(), null);
+        // Put the shortcutPreference before videoPreference.
+        shortcutPreference.setOrder(mVideoPreference.getOrder() - 1);
+        shortcutPreference.setTitle(R.string.accessibility_magnification_shortcut_title);
+        // TODO(b/142530063): Check the new setting key to decide which summary should be shown.
+        // TODO(b/142530063): Check if gesture mode is on to decide which summary should be shown.
+        // TODO(b/142530063): Check the new key to decide whether checkbox should be checked.
+        shortcutPreference.setSettingButtonListener(mSettingButtonListener);
+        shortcutPreference.setCheckBoxListener(mCheckBoxListener);
+        preferenceScreen.addPreference(shortcutPreference);
     }
 
     private boolean isGestureNavigateEnabled() {
