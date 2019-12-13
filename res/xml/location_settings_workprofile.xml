@@ -32,6 +32,8 @@
         android:title="@string/location_recent_location_requests_see_all"
         android:icon="@drawable/ic_chevron_right_24dp"
         android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"
+        settings:controller="com.android.settings.core.WorkPreferenceController"
+        settings:forWork="true"
         settings:searchable="false"/>
 
     <com.android.settingslib.RestrictedSwitchPreference

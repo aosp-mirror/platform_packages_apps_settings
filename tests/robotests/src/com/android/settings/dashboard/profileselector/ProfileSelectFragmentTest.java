@@ -16,6 +16,8 @@
 
 package com.android.settings.dashboard.profileselector;
 
+import static android.content.Intent.EXTRA_USER_ID;
+
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.PERSONAL_TAB;
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.WORK_TAB;
 
@@ -27,22 +29,13 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragmentTest;
-
-import com.google.android.material.tabs.TabLayout;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,16 +45,18 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
-import org.robolectric.shadows.androidx.fragment.FragmentController;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class})
 public class ProfileSelectFragmentTest {
 
     private Context mContext;
     private TestProfileSelectFragment mFragment;
     private FragmentActivity mActivity;
+    private ShadowUserManager mUserManager;
 
     @Before
     public void setUp() {
@@ -71,30 +66,51 @@ public class ProfileSelectFragmentTest {
         mFragment = spy(new TestProfileSelectFragment());
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getActivity()).thenReturn(mActivity);
+        mUserManager = ShadowUserManager.getShadow();
     }
 
     @Test
-    @Config(shadows = ShadowPreferenceFragmentCompat.class)
-    public void onCreateView_no_setCorrectTab() {
-        FragmentController.of(mFragment, new Intent()).create(0 /* containerViewId*/,
-                null /* bundle */).start().resume().visible().get();
-        final TabLayout tabs = mFragment.getView().findViewById(R.id.tabs);
-
-        assertThat(tabs.getSelectedTabPosition()).isEqualTo(PERSONAL_TAB);
+    public void getTabId_no_setCorrectTab() {
+        assertThat(mFragment.getTabId(mActivity, null)).isEqualTo(PERSONAL_TAB);
     }
 
     @Test
-    @Config(shadows = ShadowPreferenceFragmentCompat.class)
-    public void onCreateView_setArgument_setCorrectTab() {
+    public void getTabId_setArgument_setCorrectTab() {
         final Bundle bundle = new Bundle();
         bundle.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, WORK_TAB);
-        mFragment.setArguments(bundle);
 
-        FragmentController.of(mFragment, new Intent()).create(0 /* containerViewId*/,
-                bundle).start().resume().visible().get();
-        final TabLayout tabs = mFragment.getView().findViewById(R.id.tabs);
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(WORK_TAB);
+    }
 
-        assertThat(tabs.getSelectedTabPosition()).isEqualTo(WORK_TAB);
+    @Test
+    public void getTabId_setWorkId_getCorrectTab() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(EXTRA_USER_ID, 10);
+        final Set<Integer> profileIds = new HashSet<>();
+        profileIds.add(10);
+        mUserManager.setManagedProfiles(profileIds);
+
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(WORK_TAB);
+    }
+
+    @Test
+    public void getTabId_setPersonalId_getCorrectTab() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(EXTRA_USER_ID, 0);
+
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(PERSONAL_TAB);
+    }
+
+    @Test
+    public void getTabId_setPersonalIdByIntent_getCorrectTab() {
+        final Set<Integer> profileIds = new HashSet<>();
+        profileIds.add(10);
+        mUserManager.setManagedProfiles(profileIds);
+        final Intent intent = spy(new Intent());
+        when(intent.getContentUserHint()).thenReturn(10);
+        when(mActivity.getIntent()).thenReturn(intent);
+
+        assertThat(mFragment.getTabId(mActivity, null)).isEqualTo(WORK_TAB);
     }
 
     public static class TestProfileSelectFragment extends ProfileSelectFragment {
@@ -105,43 +121,6 @@ public class ProfileSelectFragmentTest {
                     new SettingsPreferenceFragmentTest.TestFragment(), //0
                     new SettingsPreferenceFragmentTest.TestFragment()
             };
-        }
-    }
-
-    @Implements(PreferenceFragmentCompat.class)
-    public static class ShadowPreferenceFragmentCompat {
-
-        private Context mContext;
-
-        @Implementation
-        protected View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                @Nullable Bundle savedInstanceState) {
-            mContext = inflater.getContext();
-            return inflater.inflate(R.layout.preference_list_fragment, container);
-        }
-
-        @Implementation
-        protected RecyclerView getListView() {
-            final RecyclerView recyclerView = new RecyclerView(mContext);
-            recyclerView.setAdapter(new RecyclerView.Adapter() {
-                @NonNull
-                @Override
-                public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,
-                        int i) {
-                    return null;
-                }
-
-                @Override
-                public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-                }
-
-                @Override
-                public int getItemCount() {
-                    return 0;
-                }
-            });
-            return recyclerView;
         }
     }
 }

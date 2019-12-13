@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package com.android.settings.language;
+package com.android.settings.core;
 
 import android.content.Context;
 
-import com.android.settings.core.BasePreferenceController;
+import androidx.annotation.CallSuper;
 
 /**
- * Preference controller for "UserDictionary for work".
- *
- * @see UserDictionaryPreferenceController
+ * Base class to be used directly in Xml with settings:forWork="true" attribute.
+ * It is used specifically for work profile only preference
  */
-public final class UserDictionaryForWorkPreferenceController
-        extends BasePreferenceController {
+public class WorkPreferenceController extends BasePreferenceController {
 
-    public UserDictionaryForWorkPreferenceController(Context context, String preferenceKey) {
+    public WorkPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
-    @AvailabilityStatus
-    @Override
+    /**
+     * Only available when work profile user is existed
+     */
+    @CallSuper
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return getWorkProfileUser() != null ? AVAILABLE : DISABLED_FOR_USER;
     }
 }

@@ -13,6 +13,8 @@
  */
 package com.android.settings.core;
 
+import static android.content.Intent.EXTRA_USER_ID;
+
 import static com.android.settings.dashboard.DashboardFragment.CATEGORY;
 
 import android.annotation.IntDef;
@@ -20,6 +22,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SettingsSlicesContract;
@@ -204,7 +207,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * The status is used for the convenience methods: {@link #isAvailable()},
      * {@link #isSupported()}
      * </p>
-     * The inherited class doesn't need to check work profile is existed or not if
+     * The inherited class doesn't need to check work profile if
      * android:forWork="true" is set in preference xml.
      */
     @AvailabilityStatus
@@ -337,6 +340,8 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
         if (!mIsForWork || mWorkProfileUser == null) {
             return super.handlePreferenceTreeClick(preference);
         }
+        final Bundle extra = preference.getExtras();
+        extra.putInt(EXTRA_USER_ID, mWorkProfileUser.getIdentifier());
         new SubSettingLauncher(preference.getContext())
                 .setDestination(preference.getFragment())
                 .setSourceMetricsCategory(preference.getExtras().getInt(CATEGORY,

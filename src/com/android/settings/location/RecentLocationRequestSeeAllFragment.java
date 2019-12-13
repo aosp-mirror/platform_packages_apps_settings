@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -49,9 +50,11 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
 
         mController = use(RecentLocationRequestSeeAllPreferenceController.class);
         mController.init(this);
+        mController.setProfileType(profileType);
     }
 
     @Override
