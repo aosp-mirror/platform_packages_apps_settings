@@ -218,4 +218,9 @@ public class RemoteVolumePreferenceControllerTest {
 
         assertThat(mController.mPreference.getProgress()).isEqualTo(CURRENT_POS);
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

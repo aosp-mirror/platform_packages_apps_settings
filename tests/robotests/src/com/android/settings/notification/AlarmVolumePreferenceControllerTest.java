@@ -78,4 +78,9 @@ public class AlarmVolumePreferenceControllerTest {
     public void isSliceableCorrectKey_returnsTrue() {
         assertThat(mController.isSliceable()).isTrue();
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }
