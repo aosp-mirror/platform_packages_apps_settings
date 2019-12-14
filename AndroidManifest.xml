@@ -2127,26 +2127,6 @@
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
         </activity>
 
-        <activity
-            android:name="RadioInfo"
-            android:label="@string/phone_info_label"
-            android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="BandMode"
-                  android:label="@string/band_mode_title"
-                  android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Settings$TestingSettingsActivity" android:label="@string/testing">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.TestingSettings" />
