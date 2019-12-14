@@ -78,6 +78,11 @@ public class VibrateWhenRingPreferenceController extends TogglePreferenceControl
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         Preference preference = screen.findPreference(KEY_VIBRATE_WHEN_RINGING);

@@ -102,4 +102,9 @@ public class NotificationVolumePreferenceControllerTest {
                 new NotificationVolumePreferenceController(mContext);
         assertThat(controller.isSliceable()).isTrue();
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

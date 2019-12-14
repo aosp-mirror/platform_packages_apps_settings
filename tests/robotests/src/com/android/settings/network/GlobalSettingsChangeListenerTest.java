@@ -22,6 +22,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.lifecycle.Lifecycle;
@@ -49,7 +50,8 @@ public class GlobalSettingsChangeListenerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mListener = spy(new GlobalSettingsChangeListener(mContext, SETTINGS_FIELD) {
+        mListener = spy(new GlobalSettingsChangeListener(Looper.getMainLooper(),
+                mContext, SETTINGS_FIELD) {
             public void onChanged(String field) {}
         });
 

@@ -197,6 +197,11 @@ public class RemoteVolumePreferenceController extends VolumeSeekBarPreferenceCon
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean useDynamicSliceSummary() {
         return true;
     }
