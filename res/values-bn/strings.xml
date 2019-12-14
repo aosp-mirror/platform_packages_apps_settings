@@ -1047,7 +1047,11 @@
     <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> আপনার ফোনের নেটওয়ার্ক পরিবর্তন করতে সাজেস্ট করছে"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"সেভ করা হচ্ছে…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"সেভ করা হয়েছে"</string>
-    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"সেভ করা যায়নি। আবার চেষ্টা করুন।"</string>
+    <string name="wifi_add_app_network_save_failed_summary" msgid="7821331512722319798">"সেভ করা যায়নি। আবার চেষ্টা করুন।"</string>
+    <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"নেটওয়ার্ক সেভ করতে চান?"</string>
+    <string name="wifi_add_app_networks_summary" msgid="747367503016917096">"আপনার ফোনে <xliff:g id="APPNAME">%1$s</xliff:g> এই নেটওয়ার্কগুলি সেভ করতে চায়"</string>
+    <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g>টি নেটওয়ার্ক সেভ করা হচ্ছে…"</string>
+    <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"নেটওয়ার্ক সেভ করা হয়েছে"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"ওয়াই-ফাই কলিং"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"ওয়াই-ফাই ব্যবহার করে আরও ভালভাবে কথা বলুন"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"আরও বেশি কভারেজ পেতে ওয়াই-ফাই কলিং চালু করুন"</string>
@@ -1146,7 +1150,7 @@
     <string name="brightness" msgid="6216871641021779698">"উজ্জ্বলতার স্তর"</string>
     <string name="brightness_title" msgid="5457874893085305155">"উজ্জ্বলতা"</string>
     <string name="brightness_summary" msgid="6309641759293018049">"স্ক্রীনের উজ্জ্বলতা সামঞ্জস্য করুন"</string>
-    <string name="auto_brightness_title" msgid="4239324728760986697">"অ্যাডাপ্টিভ উজ্জ্বলতা"</string>
+    <string name="auto_brightness_title" msgid="4239324728760986697">"অভিযোজিত উজ্জ্বলতা"</string>
     <string name="auto_brightness_summary" msgid="1737148869232725883">"পরিবেশের উপর নির্ভর করে স্ক্রিনের উজ্জ্বলতার পরিবর্তন হয়"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"চালু আছে"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"বন্ধ আছে"</string>
@@ -1216,7 +1220,7 @@
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"চালু / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"কখনই নিজে থেকে বন্ধ হবে না"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"সূর্যোদয়ের সময় নিজে থেকে বন্ধ হবে"</string>
-    <string name="dark_ui_text" msgid="3691323174656626778">"\'গাঢ় থিম\' ফিচারটি একদম কালো রঙ ব্যবহার করে যাতে আপনার ব্যাটারি দীর্ঘদিন সক্রিয় থাকতে পারে। গাঢ় থিমের সময়সূচি আপনার স্ক্রিনটি বন্ধ না হওয়া পর্যন্ত চালু হওয়ার জন্য অপেক্ষা করে।"</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"\'গাঢ় থিম\' ফিচারটি একদম কালো রঙ ব্যবহার করে যাতে আপনার ব্যাটারি অনেক্ষণ চলতে পারে। স্ক্রিন বন্ধ না হওয়া পর্যন্ত গাঢ় থিমের সময়সূচি চালু হওয়ার জন্য অপেক্ষা করে।"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"স্ক্রিন টাইম-আউট"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"স্ক্রিন বন্ধ হয়"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ধরে নিষ্ক্রিয়তার পরে"</string>
@@ -1635,7 +1639,6 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"সাম্প্রতিক লোকেশন অনুরোধগুলি"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"সবগুলি দেখুন"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"লোকেশন পরিষেবা"</string>
-    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"সাম্প্রতিক অফিস অ্যাপ লোকেশনের অনুরোধ"</string>
     <string name="location_title" msgid="5819154746934945021">"আমার লোকেশন"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"কাজের প্রোফাইলের জন্য লোকেশন"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"অ্যাপের অনুমতি"</string>
@@ -2059,6 +2062,15 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"অ্যাক্সেসিবিলিটি পরিষেবা চালু বা বন্ধ করতে, স্ক্রিনের নিচে থেকে উপরের দিকে দুটি আঙ্গুল দিয়ে সোয়াইপ করুন।\n\nএকটি পরিষেবা থেকে অন্যটিতে যেতে, দুটি আঙ্গুল দিয়ে উপরের দিকে সোয়াইপ করে ধরে থাকুন।"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"অ্যাক্সেসিবিলিটি পরিষেবা চালু বা বন্ধ করতে, স্ক্রিনের নিচে থেকে উপরের দিকে তিনটি আঙ্গুল দিয়ে সোয়াইপ করুন।\n\nএকটি পরিষেবা থেকে অন্যটিতে যেতে, তিনটি আঙ্গুল দিয়ে উপরের দিকে সোয়াইপ করে ধরে থাকুন।"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"বুঝেছি"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"অ্যাক্সেসিবিলিটি বোতাম"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"২টি আঙুল দিয়ে নিচ থেকে উপরের দিকে সোয়াইপ করুন"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"স্ক্রিনের একদম নিচে <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> বোতামে ট্যাপ করুন"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"স্ক্রিনের সাইড থেকে ২টি আঙ্গুল দিয়ে উপরের দিকে সোয়াইপ করুন"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"ভলিউম কী কিছু সময় প্রেস করে রাখুন"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"১ সেকেন্ডের জন্য ভলিউম কী প্রেস করে ধরে রাখুন"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"ট্রিপল ট্যাপ স্ক্রিন"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2132280626458501422">"চটপট ৩ বার স্ক্রিন ট্যাপ করুন (এর ফলে আপনার ডিভাইস ধীরে হয়ে যেতে পারে)"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"উন্নত"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"অ্যাক্সেসযোগ্যতা বোতামটি <xliff:g id="SERVICE">%1$s</xliff:g> এর সাথে সেট করা আছে। ম্যাগনিফিকেশন ব্যবহার করার জন্য অ্যাক্সেসযোগ্যতা বোতামটি স্পর্শ করে টিপে ধরুন, তারপর ম্যাগনিফিকেশন বেছে নিন।"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"অ্যাক্সেসিবিলিটি জেসচার <xliff:g id="SERVICE">%1$s</xliff:g>-এ সেট করা আছে। ম্যাগনিফিকেশন ব্যবহার করার জন্য, স্ক্রিনের নিচ থেকে দুটি আঙুল দিয়ে উপরের দিকে সোয়াইপ করুন এবং ধরে থাকুন। তার পরে ম্যাগনিফিকেশন বেছে নিন।"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"ভলিউম কী শর্টকাট"</string>
@@ -2098,6 +2110,10 @@
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"কালার কারেকশন ব্যবহার করুন"</string>
     <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"ক্যাপশন ব্যবহার করুন"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"সমস্ত অ্যাপে এই সেটিংস কাজ করে না।"</string>
+    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"অ্যাক্সেসিবিলিটি বোতাম"</string>
+    <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"২টি আঙুল দিয়ে নিচের দিক থেকে সোয়াইপ করুন"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"ভলিউম কী ধরে থাকুন"</string>
+    <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"ট্রিপল ট্যাপ স্ক্রিন"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"এগিয়ে যান"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"হিয়ারিং এড"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"কোনও হিয়ারিং এড কানেক্ট করা নেই"</string>
@@ -2114,6 +2130,18 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"এই পরিষেবাটি ঠিকভাবে কাজ করছে না।"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"দ্রুত সেটিংসে দেখান"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"সংশোধন মোড"</string>
+    <!-- no translation found for daltonizer_mode_deuteranomaly_title (4210949400493358650) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_protanomaly_title (2929354940552262472) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_tritanomaly_title (2278786218762602022) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_deuteranomaly_summary (391621040826073327) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_protanomaly_summary (877971556622350648) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_tritanomaly_summary (2428218320118180070) -->
+    <skip />
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
       <item quantity="one">অত্যন্ত কম সময়ের ব্যবধানে (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> মিলি-সেকেন্ড)</item>
       <item quantity="other">অত্যন্ত কম সময়ের ব্যবধানে (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> মিলি-সেকেন্ড)</item>
@@ -2547,6 +2575,7 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"এই ব্যবহারকারীর জন্য প্রমাণপ্রত্রাদি উপলব্ধ নয়"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN এবং অ্যাপ্সের জন্য ইনস্টল করা হয়েছে"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"ওয়াই-ফাই এর জন্য ইনস্টল করা হয়েছে"</string>
+    <string name="credential_for_fsverity" msgid="8733384639764901293">"অ্যাপ ইনস্টল সংক্রান্ত সোর্স যাচাইকরণের জন্য ইনস্টল করা হয়েছে"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"সমস্ত কন্টেন্ট সরাবেন?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"ক্রেডেনশিয়াল স্টোরেজ মুছে ফেলা হয়েছে।"</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"ক্রেডেনশিয়াল স্টোরেজ মুছে ফেলা যাবে না।"</string>
@@ -2554,10 +2583,13 @@
     <string name="ca_certificate" msgid="3076484307693855611">"CA সার্টিফিকেট"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN ও অ্যাপ ব্যবহারকারী সার্টিফিকেট"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"ওয়াই-ফাই সার্টিফিকেট"</string>
+    <string name="app_src_certificate" msgid="436410009047766408">"অ্যাপ সোর্স সার্টিফিকেট"</string>
     <string name="ca_certificate_warning_title" msgid="8229107396555793427">"আপনার গোপনীয়তা সুরক্ষিত নেই"</string>
     <string name="ca_certificate_warning_description" msgid="1592953815964406032">"এনক্রিপশনের জন্য ওয়েবসাইট, অ্যাপ ও VPN CA সার্টিফিকেট ব্যবহার করে। শুধুমাত্র বিশ্বস্ত প্রতিষ্ঠান থেকেই CA সার্টিফিকেট ইনস্টল করুন। \n\nCA সার্টিফিকেট ইনস্টল করলে, সার্টিফিকেটের মালিক আপনার ভিজিট করা ওয়েবসাইট বা ব্যবহার করা অ্যাপ থেকে পাসওয়ার্ড, মেসেজ বা ক্রেডিট কার্ডের বিবরণ অ্যাক্সেস করতে পারবে - এমনকি সেই তথ্য এনক্রিপ্ট করা থাকলেও।"</string>
-    <string name="ca_certificate_warning_dont_install" msgid="5330662108111984911">"ইনস্টল করবেন না"</string>
-    <string name="ca_certificate_warning_install_anyway" msgid="8460064866116466075">"তবে চাইলে ইনস্টল করুন"</string>
+    <string name="certificate_warning_dont_install" msgid="3794366420884560605">"ইনস্টল করবেন না"</string>
+    <string name="certificate_warning_install_anyway" msgid="6411936058579648212">"তবে চাইলে ইনস্টল করুন"</string>
+    <string name="app_src_certificate_warning_title" msgid="3581334802881767289">"নিজের দায়িত্বে এই সার্টিফিকেট ইনস্টল করুন"</string>
+    <string name="app_src_certificate_warning_description" msgid="4891599919584400969">"আপনার ডিভাইসের জন্য অ্যাপ নিরাপদ কিনা তা অ্যাপ সোর্স সার্টিফিকেট যাচাই করে। শুধুমাত্র বিশ্বস্ত প্রতিষ্ঠান থেকেই সার্টিফিকেট ইনস্টল করুন।"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"সার্টিফিকেট ইনস্টল করা হয়নি"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"আপদকালীন ডায়ালিং সিগন্যাল"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"জরুরি কল স্থাপন করা সময় কি ধরণের অ্যাক্টিভিটি করবে তা সেট করুন"</string>
@@ -2586,8 +2618,6 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"নিস্ক্রিয় করুন এবং আনইনস্টল করুন"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"ডিভাইস প্রশাসক অ্যাপ"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"কোনো ডিভাইস প্রশাসক অ্যাপ উপলব্ধ নেই"</string>
-    <string name="personal_device_admin_title" msgid="3760026556728177389">"ব্যক্তিগত"</string>
-    <string name="managed_device_admin_title" msgid="5995937968962501866">"কর্মস্থল"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"কোনো বিশ্বস্ত এজেন্ট উপলব্ধ নেই"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"ডিভাইস প্রশাসক অ্যাপটি সক্রিয় করবেন?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"এই ডিভাইস প্রশাসক অ্যাপটি সক্রিয় করুন"</string>
@@ -2833,9 +2863,16 @@
     <string name="one_usercrt" msgid="1865069301105101370">"একটি ব্যবহারকারী সার্টিফিকেট"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"একটি CA সার্টিফিকেট"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%dটি CA সার্টিফিকেট"</string>
+    <string name="one_appsrccrt" msgid="8129657605195214337">"একটি অ্যাপ সোর্স সার্টিফিকেট"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"শংসাপত্রের বিশদ বিবরণ"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"সরানো সার্টিফিকেট: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"কোনও ব্যবহারকারীর সার্টিফিকেট ইনস্টল করা নেই"</string>
+    <string name="app_src_cert_reboot_dialog_install_title" msgid="8054342796523969318">"সার্টিফিকেট ব্যবহার করতে রিস্টার্ট করুন"</string>
+    <string name="app_src_cert_reboot_dialog_install_message" msgid="3047145226539355739">"এই অ্যাপ সোর্স সার্টিফিকেট ব্যবহার করতে আপনার ডিভাইস রিস্টার্ট করতে হবে"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_title" msgid="1122954693175643166">"আনইনস্টল প্রক্রিয়া শেষ করতে রিস্টার্ট করুন"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_message" msgid="5733844651545039464">"এই অ্যাপ সোর্স সার্টিফিকেট আনইনস্টল করতে আপনার ডিভাইস রিস্টার্ট করতে হবে"</string>
+    <string name="app_src_cert_reboot_dialog_button_restart" msgid="3222022868040265930">"রিস্টার্ট করুন"</string>
+    <string name="app_src_cert_reboot_dialog_button_not_now" msgid="3582913410301349048">"এখন না"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"বানান পরিক্ষক"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"অফিসের স্পেল চেকার"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"এখানে আপনার বর্তমান সম্পূর্ণ ব্যাকআপ পাসওয়ার্ড টাইপ করুন"</string>
@@ -3146,9 +3183,10 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ব্যাটারি সেভার, স্টিকি, লেগে থাকা, পাওয়ার সেভার, ব্যাটারি"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"রুটিন, সময়সূচি, ব্যাটারি সেভার, পাওয়ার সেভার, ব্যাটারি, অটোমেটিক, শতাংশ"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, উন্নত কলিং, 4G কলিং"</string>
+    <string name="keywords_add_language" msgid="1882751300359939436">"ভাষা যোগ করুন, কোনও একটি ভাষা যোগ করুন"</string>
     <string name="default_sound" msgid="6604374495015245195">"ডিফল্ট সাউন্ড"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"রিং ও বিজ্ঞপ্তির ভলিউম <xliff:g id="PERCENTAGE">%1$s</xliff:g>-এ সেট করা আছে"</string>
-    <string name="sound_dashboard_summary" msgid="6574444810552643312">"ভলিউম, কম্পন, বিরক্ত করবে না"</string>
+    <string name="sound_dashboard_summary" msgid="6574444810552643312">"ভলিউম, ভাইব্রেশন, বিরক্ত করবে না"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"রিঙ্গারকে ভাইব্রেট অবস্থায় সেট করা হয়েছে"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"রিঙ্গারকে নীরব অবস্থায় সেট করা হয়েছে"</string>
     <string name="sound_settings_example_summary" msgid="8125110691864707925">"রিং ও বিজ্ঞপ্তির ভলিউম ৮০%-এ সেট করা আছে"</string>
@@ -3683,8 +3721,6 @@
     <string name="filter_all_apps" msgid="6645539744080251371">"সমস্ত অ্যাপ্লিকেশন"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ইনস্টল করা অ্যাপগুলি"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ঝটপট অ্যাপ"</string>
-    <string name="filter_personal_apps" msgid="6381137559116555485">"ব্যক্তিগত"</string>
-    <string name="filter_work_apps" msgid="5080158572515936510">"কাজ"</string>
     <string name="filter_notif_all_apps" msgid="2764590815789208306">"অ্যাপ: সমস্ত"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"বন্ধ করা আছে"</string>
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"বিভাগগুলি: জরুরী গুরুত্বের"</string>
@@ -4121,7 +4157,7 @@
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"কাজ করে এমন সব অ্যাপ গাঢ় থিমে পাল্টে যাবে"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"বুঝেছি"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"গাঢ় থিম ব্যবহার করে দেখুন"</string>
-    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ব্যাটারির লাইফ বাড়িয়ে তুলতে সাহায্য করে"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ব্যাটারি বেশিক্ষণ চলবে"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"দ্রুত সেটিংস ডেভেলপার টাইলস"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"উইনস্কোপ ট্রেস"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"সেন্সর বন্ধ করা আছে"</string>

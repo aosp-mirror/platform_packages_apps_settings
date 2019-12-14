@@ -1067,7 +1067,11 @@
     <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> жели да сачува мрежу на телефону"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Чува се…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Сачувано"</string>
-    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"Чување није успело. Пробајте поново."</string>
+    <string name="wifi_add_app_network_save_failed_summary" msgid="7821331512722319798">"Чување није успело. Пробајте поново."</string>
+    <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Желите ли да сачувате мреже?"</string>
+    <string name="wifi_add_app_networks_summary" msgid="747367503016917096">"<xliff:g id="APPNAME">%1$s</xliff:g> жели да сачува ове мреже на телефону"</string>
+    <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"Чувају се мреже (<xliff:g id="NUMBER">%d</xliff:g>)…"</string>
+    <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"Мреже су сачуване"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Позивање преко Wi-Fi-ја"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Продужите позиве помоћу Wi‑Fi-ја"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"Укљ. позивање преко Wi‑Fi-ја да проширите покривеност"</string>
@@ -1228,7 +1232,7 @@
     <string name="dark_ui_title" msgid="3373976268671557416">"Тамни режим"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Закажите"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Ништа"</string>
-    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Укључује се од сумрака до зоре"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Укључује се од сумрака до свитања"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Статус"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"Искључено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Никада се не укључује аутоматски"</string>
@@ -1656,7 +1660,6 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Недавни захтеви за локацију"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Прикажи све"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Услуге локације"</string>
-    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"Недавни захтеви за локацију пословних апликација"</string>
     <string name="location_title" msgid="5819154746934945021">"Мојa локацијa"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Локација за пословни профил"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"Дозвола за апликацију"</string>
@@ -2082,6 +2085,15 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Да бисте укључили или искључили услугу приступачности, превлачите нагоре од дна екрана помоћу два прста.\n\nДа бисте прелазили са једне услуге на другу, превлачите нагоре помоћу два прста и задржите."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Да бисте укључили или искључили услугу приступачности, превлачите нагоре од дна екрана помоћу три прста.\n\nДа бисте прелазили са једне услуге на другу, превлачите нагоре помоћу три прста и задржите."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Важи"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Дугме Приступачност"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Превуците нагоре од доњег дела екрана помоћу 2 прста"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Додирните дугме <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> у дну екрана"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"Превуците нагоре од ивице екрана помоћу 2 прста"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Задржите тастере за јачину звука"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Притисните и задржите оба тастера за јачину звука 1 секунду"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"Додирните екран трипут"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2132280626458501422">"Брзо додирните екран 3 пута (ово ће успорити уређај)"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Напредно"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Дугме за приступачност је подешено на <xliff:g id="SERVICE">%1$s</xliff:g>. Да бисте користили увећање, додирните и задржите дугме за приступачност, па изаберите увећање."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Покрет за приступачност је подешен на функцију <xliff:g id="SERVICE">%1$s</xliff:g>. Да бисте користили увећање, превлачите нагоре од дна екрана помоћу два прста и задржите. Затим одаберите увећање."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Тастер јачине звука као пречица"</string>
@@ -2121,6 +2133,10 @@
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Користи корекцију боја"</string>
     <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Користи натписе"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Не подржавају све апликације ово подешавање."</string>
+    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"дугме Приступачност"</string>
+    <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Превуците нагоре од доњег дела екрана помоћу 2 прста"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Задржите тастере за јачину звука"</string>
+    <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Додирните екран трипут"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Настави"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Слушни апарати"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Није повезан ниједан слушни апарат"</string>
@@ -2138,6 +2154,12 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ова услуга није исправна."</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Прикажи у Брзим подешавањима"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Режим исправљања"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Црвено-зелено"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2929354940552262472">"Зелено-црвено"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Плаво-жуто"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Деутераномалија"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Протаномалија"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Тританомалија"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
       <item quantity="one">Изузетно кратак период (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="few">Изузетно кратак период (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
@@ -2585,6 +2607,7 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Акредитиви нису доступни за овог корисника"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Инсталирано за VPN и апликације"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Инсталирано за Wi-Fi"</string>
+    <string name="credential_for_fsverity" msgid="8733384639764901293">"Инсталирано за потврду извора инсталације апликације"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Желите ли да уклоните сав садржај?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Складиште акредитива је избрисано."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Није могуће oбрисати складиште акредитива."</string>
@@ -2592,10 +2615,13 @@
     <string name="ca_certificate" msgid="3076484307693855611">"CA сертификат"</string>
     <string name="user_certificate" msgid="6897024598058566466">"Кориснички сертификат за VPN и апликацију"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Сертификат за Wi‑Fi"</string>
+    <string name="app_src_certificate" msgid="436410009047766408">"Сертификат за извор апликације"</string>
     <string name="ca_certificate_warning_title" msgid="8229107396555793427">"Ваша приватност је угрожена"</string>
     <string name="ca_certificate_warning_description" msgid="1592953815964406032">"Веб-сајтови, апликације и VPN-ови користе CA сертификате за шифровање. Инсталирајте CA сертификате само из организација у које имате поверења. \n\n Ако инсталирате CA сертификат, власник сертификата би могао да приступи информацијама, попут лозинки, порука или података о кредитној картици, са веб-сајтова које посећујете или из апликација које користите – чак и ако су те информације шифроване."</string>
-    <string name="ca_certificate_warning_dont_install" msgid="5330662108111984911">"Не инсталирај"</string>
-    <string name="ca_certificate_warning_install_anyway" msgid="8460064866116466075">"Ипак инсталирај"</string>
+    <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Не инсталирај"</string>
+    <string name="certificate_warning_install_anyway" msgid="6411936058579648212">"Ипак инсталирај"</string>
+    <string name="app_src_certificate_warning_title" msgid="3581334802881767289">"Инсталирајте овај сертификат на сопствени ризик"</string>
+    <string name="app_src_certificate_warning_description" msgid="4891599919584400969">"Сертификати за изворе апликација потврђују да су апликације безбедне за уређај. Инсталирајте сертификате само из организација у које имате поверења."</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Сертификат није инсталиран"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Сигнал за хитне позиве"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Подешавање понашања када се успоставља хитан позив"</string>
@@ -2624,8 +2650,6 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Деактивирај и деинсталирај"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Апликације за администратора"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Нема доступних апликација за администратора уређаја"</string>
-    <string name="personal_device_admin_title" msgid="3760026556728177389">"Лични"</string>
-    <string name="managed_device_admin_title" msgid="5995937968962501866">"Посао"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Нема доступних поузданих агената"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Активирај апликацију за администраторе?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Активирај ову апликацију за администраторе уређаја"</string>
@@ -2871,9 +2895,16 @@
     <string name="one_usercrt" msgid="1865069301105101370">"један сертификат корисника"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"један CA сертификат"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d CA сертификата"</string>
+    <string name="one_appsrccrt" msgid="8129657605195214337">"један сертификат за извор апликације"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Детаљи акредитива"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Уклоњен је акредитив: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"Нема инсталираних корисничких акредитива"</string>
+    <string name="app_src_cert_reboot_dialog_install_title" msgid="8054342796523969318">"Рестартујте да бисте користили сертификат"</string>
+    <string name="app_src_cert_reboot_dialog_install_message" msgid="3047145226539355739">"Да бисте користили сертификат за извор апликације, морате да рестартујете уређај"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_title" msgid="1122954693175643166">"Рестартујте да бисте довршили деинсталирање"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_message" msgid="5733844651545039464">"Да бисте деинсталирали овај сертификат за извор апликације, морате да рестартујете уређај"</string>
+    <string name="app_src_cert_reboot_dialog_button_restart" msgid="3222022868040265930">"Рестартуј"</string>
+    <string name="app_src_cert_reboot_dialog_button_not_now" msgid="3582913410301349048">"Не сада"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Провера правописа"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Провера правописа за посао"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Овде унесите тренутну лозинку за прављење резервне копије читавог система"</string>
@@ -3189,6 +3220,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"уштеда батерије, лепљиво, трајно, уштеда енергије, батерија"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"рутина, распоред, уштеда батерије, уштеда енергије, батерија, аутоматско, проценат"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, напредно позивање, 4g позивање"</string>
+    <string name="keywords_add_language" msgid="1882751300359939436">"додај језик, додајте језик"</string>
     <string name="default_sound" msgid="6604374495015245195">"Подразумевани звук"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Јачина звука за звоно и обавештења је на <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Јачина звука, вибрација, Не узнемиравај"</string>
@@ -3743,8 +3775,6 @@
     <string name="filter_all_apps" msgid="6645539744080251371">"Све апликације"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Инсталиране апликације"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Инстант апликације"</string>
-    <string name="filter_personal_apps" msgid="6381137559116555485">"Личне"</string>
-    <string name="filter_work_apps" msgid="5080158572515936510">"Посао"</string>
     <string name="filter_notif_all_apps" msgid="2764590815789208306">"Апликације: све"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Искључено"</string>
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"Категорије: висок приоритет"</string>

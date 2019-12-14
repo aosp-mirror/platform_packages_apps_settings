@@ -772,7 +772,7 @@
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"ડીબગ કરવા યોગ્ય ઍપ માટે બાઇટકોડને ચકાસવા ARTને મંજૂરી આપો"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"જ્યારે ટેબ્લેટ બીજા ઉપકરણને ટચ કરે ત્યારે ડેટા વિનિમયની મંજૂરી આપો"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"જ્યારે ફોન બીજા ઉપકરણને ટચ કરે ત્યારે ડેટા વિનિમયની મંજૂરી આપો"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"જ્યારે ફોન બીજા ડિવાઇસને ટચ કરે ત્યારે ડેટા વિનિમયની મંજૂરી આપો"</string>
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"NFC ચાલુ કરો"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC આ ઉપકરણ અને અન્ય નજીકના ઉપકરણો અથવા લક્ષ્યો વચ્ચે ડેટાની આપ-લે કરે છે, જેમ કે ચુકવણી ટર્મિનલ્સ, અ‍ૅક્સેસ રીડર્સ અને ક્રિયા-પ્રતિક્રિયાત્મક જાહેરાતો અથવા ટૅગ્સ."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"NFCને સુરક્ષિત કરો"</string>
@@ -1047,7 +1047,11 @@
     <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> તમારા ફોનમાં નેટવર્ક સાચવવા માગે છે"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"સાચવી રહ્યાં છીએ…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"સાચવ્યું"</string>
-    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"સાચવી શકાયું નથી. ફરી પ્રયાસ કરો."</string>
+    <string name="wifi_add_app_network_save_failed_summary" msgid="7821331512722319798">"સાચવી શકાયું નથી. ફરી પ્રયાસ કરો."</string>
+    <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"નેટવર્કને સાચવીએ?"</string>
+    <string name="wifi_add_app_networks_summary" msgid="747367503016917096">"<xliff:g id="APPNAME">%1$s</xliff:g>, તમારા ફોનમાં આ નેટવર્ક સાચવવા માગે છે"</string>
+    <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> નેટવર્ક સાચવી રહ્યાં છીએ…"</string>
+    <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"નેટવર્ક સાચવ્યાં"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"વાઇ-ફાઇ કૉલિંગ"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"વાઇ-ફાઇ વડે કૉલ વધારો"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"કવરેજ વધારવા માટે વાઇ-ફાઇ કૉલિંગ ચાલુ કરો"</string>
@@ -1131,7 +1135,7 @@
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"વ્યક્તિગત એકાઉન્ટ - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"શોધો"</string>
     <string name="display_settings" msgid="7197750639709493852">"ડિસ્પ્લે"</string>
-    <string name="accelerometer_title" msgid="7745991950833748909">"સ્ક્રીનને આપમેળે ફેરવો"</string>
+    <string name="accelerometer_title" msgid="7745991950833748909">"ઑટો રોટેટ સ્ક્રીન"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"રંગો"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"કુદરતી"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"બુસ્ટ કરેલ"</string>
@@ -1187,7 +1191,7 @@
     <string name="night_display_status_title" msgid="9006282950657941820">"સ્થિતિ"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"તીવ્રતા"</string>
     <string name="night_display_summary_off" msgid="4676320734342206009">"બંધ / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"આપમેળે ક્યારેય ચાલુ નહીં થાય"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"ક્યારેય ઑટોમૅટિક રીતે ચાલુ નહીં થાય"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"<xliff:g id="ID_1">%1$s</xliff:g> વાગ્યે આપમેળે ચાલુ થઈ જશે"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"સૂર્યાસ્ત સમયે આપમેળે ચાલુ થઈ જશે"</string>
     <string name="night_display_summary_on" msgid="8932395375143965229">"ચાલુ / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -1635,7 +1639,6 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"તાજેતરની સ્થાન વિનંતિ"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"બધી જુઓ"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"સ્થાન સેવાઓ"</string>
-    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"કાર્યાલય પ્રોફાઇલ ઍપના સ્થાન માટે તાજેતરની વિનંતીઓ"</string>
     <string name="location_title" msgid="5819154746934945021">"મારું સ્થાન"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"કાર્યાલયની પ્રોફાઇલ માટે સ્થાન"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"ઍપ પરવાનગી"</string>
@@ -2059,6 +2062,24 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"ઍક્સેસિબિલિટી સેવાને ચાલુ કે બંધ કરવા માટે, બે આંગળીઓ વડે સ્ક્રીનની નીચેના ભાગથી ઉપરની તરફ સ્વાઇપ કરો.\n\nકોઈ એક સેવાથી બીજી સેવા પર સ્વિચ કરવા માટે, બે આંગળીઓ વડે સ્ક્રીનની ઉપરની તરફ સ્વાઇપ કરીને દબાવી રાખો."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"ઍક્સેસિબિલિટી સેવાને ચાલુ કે બંધ કરવા માટે, ત્રણ આંગળીઓ વડે સ્ક્રીનની નીચેના ભાગથી ઉપરની તરફ સ્વાઇપ કરો.\n\nકોઈ એક સેવાથી બીજી સેવા પર સ્વિચ કરવા માટે, ત્રણ આંગળીઓ વડે સ્ક્રીનની ઉપરની તરફ સ્વાઇપ કરીને દબાવી રાખો."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"સમજાઈ ગયું"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (2920806427635233043) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_gesture (6906653331086992721) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (3917444742336634202) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (391987875251799972) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_hardware (2356853121810443026) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_hardware (6508972075712224951) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_triple_tap (6543084611445441109) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_triple_tap (2132280626458501422) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_advance (4567868630655591506) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"ઍક્સેસિબિલિટી બટનને <xliff:g id="SERVICE">%1$s</xliff:g> પર સેટ કરેલું છે. વિસ્તૃતીકરણનો ઉપયોગ કરવા માટે, ઍક્સેસિબિલિટી બટનને દબાવી રાખો, પછી વિસ્તૃતીકરણ પસંદ કરો."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"ઍક્સેસિબિલિટી સંકેત <xliff:g id="SERVICE">%1$s</xliff:g>.પર સેટ કરવામાં આવ્યો છે. વિસ્તૃતીકરણનો ઉપયોગ કરવા માટે, સ્ક્રીનના નીચેના ભાગથી બે આંગળી વડે ઉપર સ્વાઇપ કરો અને હોલ્ડ કરી રાખો. ત્યાર બાદ વિસ્તૃતીકરણ પસંદ કરો."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"વૉલ્યૂમ કી શૉર્ટકટ"</string>
@@ -2098,6 +2119,10 @@
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"રંગ સુધારણાનો ઉપયોગ કરો"</string>
     <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"કૅપ્શનનો ઉપયોગ કરો"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"બધી ઍપ પર આ સેટિંગની સુવિધા નથી."</string>
+    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"ઍક્સેસિબિલિટી બટન"</string>
+    <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"નીચેથી 2 આંગળી વડે ઉપર સ્વાઇપ કરો"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"વૉલ્યૂમ કીને દબાવી રાખો"</string>
+    <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"સ્ક્રીનને ત્રણ વાર ટૅપ કરો"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"આગળ ચાલુ રાખો"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"શ્રવણ યંત્રો"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"કોઈ શ્રવણ યંત્ર કનેક્ટ કરેલ નથી"</string>
@@ -2114,6 +2139,18 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"આ સેવા કાર્ય કરતી નથી."</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"ઝડપી સેટિંગ્સમાં બતાવો"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"સુધારણા મોડ"</string>
+    <!-- no translation found for daltonizer_mode_deuteranomaly_title (4210949400493358650) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_protanomaly_title (2929354940552262472) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_tritanomaly_title (2278786218762602022) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_deuteranomaly_summary (391621040826073327) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_protanomaly_summary (877971556622350648) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_tritanomaly_summary (2428218320118180070) -->
+    <skip />
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
       <item quantity="one">અત્યંત ટૂંકો વિલંબ (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> મિલિસેકંડ)</item>
       <item quantity="other">અત્યંત ટૂંકો વિલંબ (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> મિલિસેકંડ)</item>
@@ -2547,6 +2584,7 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"આ વપરાશકર્તા માટે ઓળખપત્રો ઉપલબ્ધ નથી"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN અને ઍપ્લિકેશનો માટે ઇન્સ્ટૉલ કરેલ"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"વાઇ-ફાઇ માટે ઇન્સ્ટૉલ કરેલ"</string>
+    <string name="credential_for_fsverity" msgid="8733384639764901293">"ઇન્સ્ટૉલ ઍપ સ્રોતની ચકાસણી માટે લૉગ ઇન વિગતો ઇન્સ્ટૉલ કરી"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"તમામ કન્ટેન્ટ દૂર કરીએ?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"ઓળખપત્ર સ્ટોરેજ ભૂસી નાખ્યું છે."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"ઓળખપત્ર સ્ટોરેજ ભૂસી શકાયો નથી."</string>
@@ -2554,10 +2592,13 @@
     <string name="ca_certificate" msgid="3076484307693855611">"CA પ્રમાણપત્ર"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN &amp; ઍપ વપરાશકર્તા પ્રમાણપત્ર"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"વાઇફાઇ પ્રમાણપત્ર"</string>
+    <string name="app_src_certificate" msgid="436410009047766408">"ઍપ સ્રોતનું પ્રમાણપત્ર"</string>
     <string name="ca_certificate_warning_title" msgid="8229107396555793427">"તમારી પ્રાઇવસી જોખમમાં છે"</string>
     <string name="ca_certificate_warning_description" msgid="1592953815964406032">"એન્ક્રિપ્શન માટે CA પ્રમાણપત્રનો ઉપયોગ વેબસાઇટ, ઍપ અને VPNs દ્વારા કરવામાં આવે છે. તમે વિશ્વાસ કરો છો તે સંસ્થાઓના જ CA પ્રમાણપત્ર ઇન્સ્ટૉલ કરો. \n\n જો તમે CA પ્રમાણપત્ર ઇન્સ્ટૉલ કરો છો, તો પ્રમાણપત્રના માલિક તમે મુલાકાત લો છો તે વેબસાઇટની અથવા તમે ઉપયોગમાં લો છો તે ઍપ પરથી પાસવર્ડ, સંદેશા અથવા ક્રેડિટ કાર્ડની વિગતો જેવી તમારી માહિતીને ઍક્સેસ કરી શકે છે - પછી ભલેને તે માહિતી એન્ક્રિપ્ટેડ હોય."</string>
-    <string name="ca_certificate_warning_dont_install" msgid="5330662108111984911">"ઇન્સ્ટૉલ કરશો નહીં"</string>
-    <string name="ca_certificate_warning_install_anyway" msgid="8460064866116466075">"કોઈપણ રીતે ઇન્સ્ટૉલ કરો"</string>
+    <string name="certificate_warning_dont_install" msgid="3794366420884560605">"ઇન્સ્ટૉલ કરશો નહીં"</string>
+    <string name="certificate_warning_install_anyway" msgid="6411936058579648212">"કોઈપણ રીતે ઇન્સ્ટૉલ કરો"</string>
+    <string name="app_src_certificate_warning_title" msgid="3581334802881767289">"તમારા પોતાના જોખમે આ પ્રમાણપત્ર ઇન્સ્ટૉલ કરો"</string>
+    <string name="app_src_certificate_warning_description" msgid="4891599919584400969">"ઍપ સ્રોતનું પ્રમાણપત્ર ચકાસે છે કે તમારા ડિવાઇસ માટે ઍપ સુરક્ષિત છે. તમે વિશ્વાસ કરતા હો ફક્ત તે સંસ્થાઓના પ્રમાણપત્ર ઇન્સ્ટૉલ કરો."</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"પ્રમાણપત્ર ઇન્સ્ટૉલ નથી કર્યું"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"કટોકટી સમયે ડાયલનું સિગ્નલ"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"જ્યારે કટોકટીનો કૉલ કરવામાં આવે ત્યારે વર્તન સેટ કરો"</string>
@@ -2586,8 +2627,6 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"નિષ્ક્રિય અને અનઇન્સ્ટૉલ કરો"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"ડિવાઇસ વ્યવસ્થાપક ઍપ્લિકેશનો"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"કોઈ ઉપકરણ વ્યવસ્થાપક ઍપ્લિકેશનો ઉપલબ્ધ નથી"</string>
-    <string name="personal_device_admin_title" msgid="3760026556728177389">"વ્યક્તિગત"</string>
-    <string name="managed_device_admin_title" msgid="5995937968962501866">"કાર્યાલય"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"કોઈ ઉપલબ્ધ ટ્રસ્ટ એજન્ટ્સ નથી"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"ઉપકરણ વ્યવસ્થાપક ઍપ્લિકેશન સક્રિય કરીએ?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"આ ઉપકરણ વ્યવસ્થાપક ઍપ્લિકેશન સક્રિય કરો"</string>
@@ -2833,9 +2872,16 @@
     <string name="one_usercrt" msgid="1865069301105101370">"એક વપરાશકર્તા પ્રમાણપત્ર"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"એક CA પ્રમાણપત્ર"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d CA પ્રમાણપત્રો"</string>
+    <string name="one_appsrccrt" msgid="8129657605195214337">"ઍપ સ્રોતનું એક પ્રમાણપત્ર"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"ઓળખપત્રની વિગતો"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"ઓળખપત્ર દૂર કર્યા: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"કોઈ વપરાશકર્તા ઓળખપત્રો ઇન્સ્ટૉલ કર્યા નથી"</string>
+    <string name="app_src_cert_reboot_dialog_install_title" msgid="8054342796523969318">"પ્રમાણપત્રનો ઉપયોગ કરવા માટે ફરી શરુ કરો"</string>
+    <string name="app_src_cert_reboot_dialog_install_message" msgid="3047145226539355739">"આ ઍપ સ્રોત પ્રમાણપત્રનો ઉપયોગ કરવા માટે, તમારે તમારું ડિવાઇસ ફરી શરુ કરવું જરૂરી છે"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_title" msgid="1122954693175643166">"અનઇન્સ્ટૉલ કરવાનું પૂર્ણ કરવા ફરીથી શરુ કરો"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_message" msgid="5733844651545039464">"આ ઍપ સ્રોતનું પ્રમાણપત્ર અનઇન્સ્ટૉલ કરવા માટે, તમારે તમારું ડિવાઇસ ફરી શરુ કરવું જરૂરી છે"</string>
+    <string name="app_src_cert_reboot_dialog_button_restart" msgid="3222022868040265930">"ફરી શરૂ કરો"</string>
+    <string name="app_src_cert_reboot_dialog_button_not_now" msgid="3582913410301349048">"હમણાં નહીં"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"જોડણીકોશ"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"કાર્ય માટે જોડણી તપાસનાર"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"તમારો વર્તમાન પૂર્ણ બેકઅપ પાસવર્ડ અહીં દાખલ કરો"</string>
@@ -2994,7 +3040,7 @@
     <string name="restriction_nfc_enable_title" msgid="525512312298242911">"NFC"</string>
     <string name="restriction_nfc_enable_summary_config" msgid="8065688740509581028">"જ્યારે આ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> બીજા NFC ઉપકરણને ટચ કરે ત્યારે ડેટા ફેરબદલીની મંજૂરી આપો"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="6397567147629410131">"જ્યારે ટેબ્લેટ બીજા ઉપકરણને ટચ કરે ત્યારે ડેટા વિનિમયની મંજૂરી આપો"</string>
-    <string name="restriction_nfc_enable_summary" product="default" msgid="3331800894734678808">"જ્યારે ફોન બીજા ઉપકરણને ટચ કરે ત્યારે ડેટા વિનિમયની મંજૂરી આપો"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="3331800894734678808">"જ્યારે ફોન બીજા ડિવાઇસને ટચ કરે ત્યારે ડેટા વિનિમયની મંજૂરી આપો"</string>
     <string name="restriction_location_enable_title" msgid="4872281754836538066">"સ્થાન"</string>
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"એપ્લિકેશન્સને તમારી સ્થાન માહિતીનો ઉપયોગ કરવા દો"</string>
     <string name="wizard_back" msgid="8257697435061870191">"પાછળ"</string>
@@ -3146,6 +3192,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"બૅટરી સેવર, સ્ટિકી, ચાલુ રહેવું, પાવર સેવર, બૅટરી"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"રૂટિન, શેડ્યૂલ, બૅટરી સેવર, પાવર સેવર, બૅટરી, ઑટોમૅટિક, ટકા"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, વિગતવાર કૉલિંગ, 4g કૉલિંગ"</string>
+    <string name="keywords_add_language" msgid="1882751300359939436">"ભાષા ઉમેરો, ભાષા ઉમેરો"</string>
     <string name="default_sound" msgid="6604374495015245195">"ડિફોલ્ટ ધ્વનિ"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"રિંગ અને નોટિફિકેશનનું વૉલ્યુમ <xliff:g id="PERCENTAGE">%1$s</xliff:g> છે"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"વૉલ્યૂમ, વાઇબ્રેશન, ખલેલ પાડશો નહીં"</string>
@@ -3683,8 +3730,6 @@
     <string name="filter_all_apps" msgid="6645539744080251371">"બધી ઍપ્લિકેશનો"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ઇન્સ્ટૉલ કરેલી ઍપ્લિકેશનો"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ઝટપટ ઍપ્લિકેશનો"</string>
-    <string name="filter_personal_apps" msgid="6381137559116555485">"વ્યક્તિગત"</string>
-    <string name="filter_work_apps" msgid="5080158572515936510">"કાર્યાલય"</string>
     <string name="filter_notif_all_apps" msgid="2764590815789208306">"ઍપ્લિકેશનો: તમામ"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"બંધ કરેલી છે"</string>
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"કૅટેગરી: તાત્કાલિક મહત્વની"</string>

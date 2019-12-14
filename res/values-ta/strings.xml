@@ -1047,7 +1047,11 @@
     <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> ஆப்ஸ் உங்கள் மொபைலில் ஒரு நெட்வொர்க்கை சேமிக்க விரும்பலாம்"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"சேமிக்கிறது…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"சேமித்தது"</string>
-    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"சேமிக்க முடியவில்லை. மீண்டும் முயலவும்."</string>
+    <string name="wifi_add_app_network_save_failed_summary" msgid="7821331512722319798">"சேமிக்க முடியவில்லை. மீண்டும் முயலவும்."</string>
+    <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"நெட்வொர்க்குகளைச் சேமிக்கவா?"</string>
+    <string name="wifi_add_app_networks_summary" msgid="747367503016917096">"<xliff:g id="APPNAME">%1$s</xliff:g> ஆப்ஸ் இந்த நெட்வொர்க்குகளை உங்கள் மொபைலில் சேமிக்க விரும்புகிறது"</string>
+    <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> நெட்வொர்க்குகள் சேமிக்கப்படுகின்றன…"</string>
+    <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"நெட்வொர்க்குகள் சேமிக்கப்பட்டன"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"வைஃபை அழைப்பு"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"வைஃபை மூலம் அழைப்புகளைத் தடையின்றிச் செய்யவும்"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"கவரேஜை அதிகரிக்க, வைஃபை அழைப்பை ஆன் செய்யவும்"</string>
@@ -1136,7 +1140,7 @@
     <string name="color_mode_option_natural" msgid="6192875655101283303">"இயற்கை வண்ணம்"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"பூஸ்ட் செய்யப்பட்டது"</string>
     <string name="color_mode_option_saturated" msgid="3413853820158447300">"சாச்சுரேட் ஆனது"</string>
-    <string name="color_mode_option_automatic" msgid="2281217686509980870">"அடாப்டிவ்"</string>
+    <string name="color_mode_option_automatic" msgid="2281217686509980870">"சூழலுக்கேற்றது"</string>
     <string name="color_mode_summary_natural" msgid="8298840714001791628">"துல்லியமான வண்ணங்களை மட்டும் பயன்படுத்து"</string>
     <string name="color_mode_summary_automatic" msgid="8157885594041700275">"பளிச்சென்ற மற்றும் துல்லியமான வண்ணங்களுக்கு இடையே சரிசெய்யும்"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="6413384391658481700">"டேப்லெட்டைச் சுழற்றும்போது திசையமைவையும் தானாக மாற்று"</string>
@@ -1216,7 +1220,7 @@
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"ஆன் / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"ஒருபோதும் தானாக முடக்கப்படாது"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"சூரிய உதயத்தின் போது தானாக முடக்கப்படும்"</string>
-    <string name="dark_ui_text" msgid="3691323174656626778">"உங்கள் பேட்டரி நீண்ட காலம் நீடித்திருக்கும் பொருட்டு கருப்பு நிறத்தை டார்க் தீம் பயன்படுத்துகிறது. உங்கள் திரை ஆஃப் ஆகும் வரை டார்க் தீம் ஆனில் இருக்குமாறு அமைக்கப்பட்டிருக்கும்."</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"உங்கள் பேட்டரி நீண்ட காலம் நீடித்திருக்கும் பொருட்டு கருப்பு நிறத்தை டார்க் தீம் பயன்படுத்துகிறது. திரை ஒருமுறை ஆஃப் ஆகும்வரை டார்க் தீம் இயக்கப்படாமல் காத்திருப்பு நிலையில் இருக்கும், அதன்பிறகு இயக்கப்படும்."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"திரை அணைவு நேரம்"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"திரை முடக்கப்படும்"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> செயல்படாமல் இருப்பின்"</string>
@@ -1635,7 +1639,6 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"சமீபத்திய இருப்பிடக் கோரிக்கைகள்"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"எல்லாம் காட்டு"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"இருப்பிடச் சேவைகள்"</string>
-    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"பணி ஆப்ஸின் சமீபத்திய இருப்பிடக் கோரிக்கைகள்"</string>
     <string name="location_title" msgid="5819154746934945021">"எனது இருப்பிடம்"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"பணி சுயவிவரத்திற்கான இருப்பிடம்"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"ஆப்ஸ் அனுமதி"</string>
@@ -2059,6 +2062,15 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"அணுகல்தன்மை சேவையை ஆன் அல்லது ஆஃப் செய்ய இரண்டு விரல்களால் திரையின் கீழிருந்து மேலாக ஸ்வைப் செய்யவும்.\n\nசேவைகளுக்கு இடையே மாற இரண்டு விரல்களால் மேல்நோக்கி ஸ்வைப் செய்து பிடிக்கவும்."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"அணுகல்தன்மை சேவையை ஆன் அல்லது ஆஃப் செய்ய மூன்று விரல்களால் திரையின் கீழிருந்து மேலாக ஸ்வைப் செய்யவும்.\n\nசேவைகளுக்கு இடையே மாற மூன்று விரல்களால் மேல்நோக்கி ஸ்வைப் செய்து பிடிக்கவும்."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"புரிந்தது"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"அணுகல்தன்மை பட்டன்"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"கீழிருந்து 2 விரல்கள் மூலம் மேல்நோக்கி ஸ்வைப் செய்யவும்"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"உங்கள் திரையின் கீழே இருக்கும் <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> பட்டனைத் தட்டவும்"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"திரையின் முனையில் இருந்து இரண்டு விரல்களால் மேல்நோக்கி ஸ்வைப் செய்யவும்"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"ஒலியளவுக்கான விசைகளைப் பிடிக்கவும்"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"ஒலியளவு பட்டன்கள் இரண்டையும் 1 வினாடிக்கு அழுத்திப் பிடித்திருக்கவும்"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"திரையில் மூன்று முறை தட்டவும்"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2132280626458501422">"திரையை விரைவாக 3 முறை தட்டவும் (இதனால் உங்கள் சாதனம் மெதுவாகலாம்)"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"மேம்பட்டவை"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"அணுகல்தன்மை பட்டன், <xliff:g id="SERVICE">%1$s</xliff:g> என்பதற்கு அமைக்கப்பட்டுள்ளது. பெரிதாக்குதலைப் பயன்படுத்த, அணுகல்தன்மை பட்டனைத் தொட்டுப் பிடித்து, பெரிதாக்குதலைத் தேர்ந்தெடுக்கவும்."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"இந்த அணுகல்தன்மை சைகை <xliff:g id="SERVICE">%1$s</xliff:g> சேவைக்கு அமைக்கப்பட்டுள்ளது. பெரிதாக்க திரையின் கீழிருந்து மேலே இரண்டு விரல்களால் ஸ்வைப் செய்துப் பிடிக்கவும். பிறகு \'பெரிதாக்குதல்\' என்பதைத் தேர்வுசெய்யவும்."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"ஒலியளவு விசைக்கான ஷார்ட்கட்"</string>
@@ -2098,6 +2110,10 @@
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"வண்ணத் திருத்தத்தைப் பயன்படுத்து"</string>
     <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"தலைப்புகளைப் பயன்படுத்து"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"இந்த அமைப்பு அனைத்து ஆப்ஸிலும் ஆதரிக்கப்படுவதில்லை."</string>
+    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"அணுகல்தன்மை பட்டன்"</string>
+    <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"கீழிருந்து 2 விரல்கள் மூலம் மேல்நோக்கி ஸ்வைப் செய்யவும்"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"ஒலியளவுக்கான விசைகளைப் பிடிக்கவும்"</string>
+    <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"திரையில் மூன்று முறை தட்டவும்"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"தொடர்க"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"செவித்துணைக் கருவிகள்"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"இணைக்கப்பட்ட செவித்துணைக் கருவிகள் இல்லை"</string>
@@ -2114,6 +2130,18 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"இந்தச் சேவை சரியாகச் செயல்படவில்லை."</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"விரைவு அமைப்புகளில் காட்டு"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"சரிப்படுத்தும் முறை"</string>
+    <!-- no translation found for daltonizer_mode_deuteranomaly_title (4210949400493358650) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_protanomaly_title (2929354940552262472) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_tritanomaly_title (2278786218762602022) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_deuteranomaly_summary (391621040826073327) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_protanomaly_summary (877971556622350648) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_tritanomaly_summary (2428218320118180070) -->
+    <skip />
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
       <item quantity="other">மிகவும் குறுகிய தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> மிவி)</item>
       <item quantity="one">மிகவும் குறுகிய தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> மிவி)</item>
@@ -2547,6 +2575,7 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"இவருக்கு நற்சான்றுகளை அணுக அனுமதியில்லை"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN மற்றும் பயன்பாடுகளுக்காக நிறுவியது"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"வைஃபைக்காக நிறுவியது"</string>
+    <string name="credential_for_fsverity" msgid="8733384639764901293">"நிறுவப்பட்ட ஆப்ஸின் மூலத்தைச் சரிபார்க்க நிறுவப்பட்டுள்ளது"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"எல்லா உள்ளடக்கத்தையும் அகற்றவா?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"நற்சான்றிதழ் சேமிப்பிடம் அழிக்கப்பட்டது."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"நற்சான்று சேமிப்பிடத்தை அழிக்க முடியாது."</string>
@@ -2554,10 +2583,13 @@
     <string name="ca_certificate" msgid="3076484307693855611">"CA சான்றிதழ்"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN &amp; ஆப்ஸ் பயனர் சான்றிதழ்"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"வைஃபை சான்றிதழ்"</string>
+    <string name="app_src_certificate" msgid="436410009047766408">"App Source சான்றிதழ்"</string>
     <string name="ca_certificate_warning_title" msgid="8229107396555793427">"உங்கள் தனியுரிமை ஆபத்தில் உள்ளது"</string>
     <string name="ca_certificate_warning_description" msgid="1592953815964406032">"வலைதளங்கள், ஆப்ஸ் ஆகியவற்றாலும் என்க்ரிப்ஷன் செய்வதற்காக VPNகளாலும் CA சான்றிதழ்கள் பயன்படுத்தப்படுகின்றன. நீங்கள் நம்பும் நிறுவனங்களால் வழங்கப்படும் CA சான்றிதழ்களை மட்டும் நிறுவவும். \n\nCA சான்றிதழை நிறுவினால் நீங்கள் பார்க்கும் வலைதளங்களில் இருந்தோ பயன்படுத்தும் ஆப்ஸில் இருந்தோ உங்கள் கடவுச்சொற்கள், மெசேஜ்கள் அல்லது கிரெடிட் கார்டு விவரங்கள் போன்ற தகவல்களை அவை என்க்ரிப்ஷன் செய்யப்பட்டிருந்தாலும்கூட, சான்றிதழ் உரிமையாளரால் அணுக முடியும்."</string>
-    <string name="ca_certificate_warning_dont_install" msgid="5330662108111984911">"நிறுவ வேண்டாம்"</string>
-    <string name="ca_certificate_warning_install_anyway" msgid="8460064866116466075">"பரவாயில்லை, நிறுவு"</string>
+    <string name="certificate_warning_dont_install" msgid="3794366420884560605">"நிறுவ வேண்டாம்"</string>
+    <string name="certificate_warning_install_anyway" msgid="6411936058579648212">"பரவாயில்லை, நிறுவு"</string>
+    <string name="app_src_certificate_warning_title" msgid="3581334802881767289">"உங்கள் சொந்த பொறுப்பில் இந்தச் சான்றிதழ்"</string>
+    <string name="app_src_certificate_warning_description" msgid="4891599919584400969">"உங்கள் சாதனத்திற்கு பாதுகாப்பான சான்றிதழ்கள்தான் என்பதை ஆப்ஸ் மூலச் சான்றிதழ்கள் சரிபார்க்கும். நீங்கள் நம்பும் நிறுவனங்களால் வழங்கப்படும் சான்றிதழ்களை மட்டும் நிறுவவும்."</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"சான்றிதழ் நிறுவப்படவில்லை"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"அவசரகால டயலிங் சிக்னல்"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"அவசர அழைப்பு இயக்கப்பட்டிருக்கும்போது நடத்தையை அமை"</string>
@@ -2586,8 +2618,6 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"செயலற்றதாக்கி, நிறுவல் நீக்கு"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"சாதனநிர்வாகி ஆப்ஸ்"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"சாதன நிர்வாகிப் ஆப்ஸ் எதுவுமில்லை"</string>
-    <string name="personal_device_admin_title" msgid="3760026556728177389">"தனிப்பட்டவை"</string>
-    <string name="managed_device_admin_title" msgid="5995937968962501866">"பணியிடம்"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"நம்பகமான ஏஜென்ட்கள் இல்லை"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"இந்த ஆப்ஸை செயல்படுத்தவா?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"இந்தச் சாதன நிர்வாகி ஆப்ஸைச் செயல்படுத்து"</string>
@@ -2833,9 +2863,16 @@
     <string name="one_usercrt" msgid="1865069301105101370">"ஒரு பயனர் சான்றிதழ்"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"ஒரு CA சான்றிதழ்"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d CA சான்றிதழ்கள்"</string>
+    <string name="one_appsrccrt" msgid="8129657605195214337">"ஒரு App Source சான்றிதழ்"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"அனுமதிச் சான்றின் விவரங்கள்"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"அகற்றிய அனுமதிச்சான்றிதழ்: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"பயனர் அனுமதிச் சான்றுகள் எதுவும் நிறுவப்படவில்லை"</string>
+    <string name="app_src_cert_reboot_dialog_install_title" msgid="8054342796523969318">"சான்றிதழை பயன்படுத்த மீண்டும் தொடங்க வேண்டும்"</string>
+    <string name="app_src_cert_reboot_dialog_install_message" msgid="3047145226539355739">"இந்த ஆப்ஸ் மூலத்தின் சான்றிதழைப் பயன்படுத்த உங்கள் சாதனத்தை மீண்டும் தொடங்கவும்"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_title" msgid="1122954693175643166">"நிறுவல் நீக்க மீண்டும் தொடங்கவும்"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_message" msgid="5733844651545039464">"இந்த ஆப்ஸ் மூலச் சான்றிதழை நிறுவல்நீக்க உங்கள் சாதனத்தை மீண்டும் தொடங்க வேண்டும்"</string>
+    <string name="app_src_cert_reboot_dialog_button_restart" msgid="3222022868040265930">"மீண்டும் தொடங்கு"</string>
+    <string name="app_src_cert_reboot_dialog_button_not_now" msgid="3582913410301349048">"இப்போது வேண்டாம்"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"பிழைத்திருத்தி"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"பணிக்கான பிழைதிருத்தி"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"உங்கள் தற்போதைய முழு காப்புப்பிரதி கடவுச்சொல்லை இங்கே உள்ளிடவும்"</string>
@@ -3146,6 +3183,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"பேட்டரி சேமிப்பான், ஸ்டிக்கி, பெர்சிஸ்ட், மின்சக்தி சேமிப்பான், பேட்டரி"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"வழக்கமான செயல்பாடு, கால அட்டவணை, பேட்டரி சேமிப்பான், மின்சக்தி சேமிப்பான், பேட்டரி, தானியங்கு, சதவீதம்"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, மேம்பட்ட அழைப்பு, 4g அழைப்பு"</string>
+    <string name="keywords_add_language" msgid="1882751300359939436">"மொழியைச் சேர்க்கவும், ஒரு மொழியைச் சேர்க்கவும்"</string>
     <string name="default_sound" msgid="6604374495015245195">"இயல்பு ஒலி"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"ஒலி &amp; அறிவிப்பு ஒலியளவு: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ஒலியளவு, அதிர்வு, தொந்தரவு செய்யாதே"</string>
@@ -3683,8 +3721,6 @@
     <string name="filter_all_apps" msgid="6645539744080251371">"எல்லா பயன்பாடுகளும்"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"நிறுவிய ஆப்ஸ்"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"இன்ஸ்டண்ட் ஆப்ஸ்"</string>
-    <string name="filter_personal_apps" msgid="6381137559116555485">"தனிப்பட்டவை"</string>
-    <string name="filter_work_apps" msgid="5080158572515936510">"பணியிடம்"</string>
     <string name="filter_notif_all_apps" msgid="2764590815789208306">"ஆப்ஸ்: எல்லாம்"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"ஆஃப் செய்யப்பட்டவை"</string>
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"வகைகள்: அதிக முக்கியத்துவம்"</string>
