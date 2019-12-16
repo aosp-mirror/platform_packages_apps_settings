@@ -34,14 +34,19 @@ import static com.android.settings.search.actionbar.SearchMenuController.MENU_SE
 import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
+import android.compat.annotation.ChangeId;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -69,6 +74,7 @@ import androidx.annotation.WorkerThread;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.compat.IPlatformCompat;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Settings.GamesStorageActivity;
@@ -171,6 +177,15 @@ public class ManageApplications extends InstrumentedFragment
     public static final int STORAGE_TYPE_PHOTOS_VIDEOS = 3;
 
     private static final int NO_USER_SPECIFIED = -1;
+
+    /**
+     * Intents with action {@link android.provider.Settings#ACTION_MANAGE_APP_OVERLAY_PERMISSION}
+     * and data URI scheme "package" don't go to the app-specific screen for managing the permission
+     * anymore. Instead, they redirect to this screen for managing all the apps that have requested
+     * such permission.
+     */
+    @ChangeId
+    private static final long CHANGE_RESTRICT_SAW_INTENT = 135920175L;
 
     // sort order
     @VisibleForTesting
@@ -275,6 +290,8 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(OverlaySettingsActivity.class.getName())) {
             mListType = LIST_TYPE_OVERLAY;
             screenTitle = R.string.system_alert_window_settings;
+
+            reportIfRestrictedSawIntent(intent);
         } else if (className.equals(WriteSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_WRITE_SETTINGS;
             screenTitle = R.string.write_settings;
@@ -331,6 +348,31 @@ public class ManageApplications extends InstrumentedFragment
 
         if (screenTitle > 0) {
             activity.setTitle(screenTitle);
+        }
+    }
+
+    private void reportIfRestrictedSawIntent(Intent intent) {
+        try {
+            Uri data = intent.getData();
+            if (data == null || !TextUtils.equals("package", data.getScheme())) {
+                // Not a restricted intent
+                return;
+            }
+            IBinder activityToken = getActivity().getActivityToken();
+            int callingUid = ActivityManager.getService().getLaunchedFromUid(activityToken);
+            if (callingUid == -1) {
+                Log.w(TAG, "Error obtaining calling uid");
+                return;
+            }
+            IPlatformCompat platformCompat = IPlatformCompat.Stub.asInterface(
+                    ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
+            if (platformCompat == null) {
+                Log.w(TAG, "Error obtaining IPlatformCompat service");
+                return;
+            }
+            platformCompat.reportChangeByUid(CHANGE_RESTRICT_SAW_INTENT, callingUid);
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error reporting SAW intent restriction", e);
         }
     }
 
