@@ -133,7 +133,8 @@ public class MobileNetworkUtils {
      */
     public static boolean isWifiCallingEnabled(Context context, int subId) {
         final PhoneAccountHandle simCallManager =
-                TelecomManager.from(context).getSimCallManagerForSubscription(subId);
+                context.getSystemService(TelecomManager.class)
+                       .getSimCallManagerForSubscription(subId);
         final int phoneId = SubscriptionManager.getSlotIndex(subId);
 
         boolean isWifiCallingEnabled;
