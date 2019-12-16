@@ -107,7 +107,7 @@ public class SimStatusPreferenceController extends
 
     private CharSequence getCarrierName(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList(true);
+                mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList != null) {
             for (SubscriptionInfo info : subscriptionInfoList) {
                 if (info.getSimSlotIndex() == simSlot) {
