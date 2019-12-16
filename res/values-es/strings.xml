@@ -1047,7 +1047,11 @@
     <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> quiere guardar una red en tu teléfono"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Guardando…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Guardada"</string>
-    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"No se ha podido guardar Inténtalo de nuevo."</string>
+    <string name="wifi_add_app_network_save_failed_summary" msgid="7821331512722319798">"No se ha podido guardar Inténtalo de nuevo."</string>
+    <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"¿Quieres guardar las redes?"</string>
+    <string name="wifi_add_app_networks_summary" msgid="747367503016917096">"<xliff:g id="APPNAME">%1$s</xliff:g> quiere guardar estas redes en tu teléfono"</string>
+    <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"Guardando <xliff:g id="NUMBER">%d</xliff:g> redes…"</string>
+    <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"Se han guardado las redes"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Llamada por Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Recibe más llamadas gracias a la red Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"Activa la llamada por Wi‑Fi para tener más cobertura"</string>
@@ -1216,7 +1220,7 @@
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Activado/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"No se desactivará nunca automáticamente"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Se desactivará automáticamente al amanecer"</string>
-    <string name="dark_ui_text" msgid="3691323174656626778">"El tema oscuro utiliza el color negro intenso para que la batería dure más y espera a que la pantalla esté apagada para activarse."</string>
+    <string name="dark_ui_text" msgid="3691323174656626778">"El tema oscuro utiliza un negro puro para que la batería dure más. Si lo programas, se esperará a que la pantalla se apague para activarse."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tiempo de espera para suspender la pantalla"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"La pantalla se apaga"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
@@ -1635,7 +1639,6 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Solicitudes de ubicación recientes"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Ver todo"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Servicios de ubicación"</string>
-    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"Solicitudes de ubicación recientes hechas por aplicaciones de trabajo"</string>
     <string name="location_title" msgid="5819154746934945021">"Mi ubicación"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Ubicación para el perfil de trabajo"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"Permiso de las aplicaciones"</string>
@@ -2059,6 +2062,15 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Para activar o desactivar el servicio de accesibilidad, desliza dos dedos hacia arriba desde la parte inferior de la pantalla.\n\nPara cambiar de servicio, desliza dos dedos hacia arriba y mantén pulsada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Para activar o desactivar un servicio de accesibilidad, desliza tres dedos hacia arriba desde la parte inferior de la pantalla.\n\nPara cambiar de servicio, desliza tres dedos hacia arriba y mantén pulsada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Botón Accesibilidad"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Desliza dos dedos hacia arriba desde la parte inferior"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Toca el botón <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> situado en la parte inferior de la pantalla"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"Desliza dos dedos hacia arriba desde el borde de la pantalla"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantén pulsadas las teclas de volumen"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Mantén pulsadas ambas teclas de volumen durante 1 segundo"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"Toca tres veces la pantalla"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2132280626458501422">"Toca rápidamente la pantalla 3 veces (esta acción puede hacer que tu dispositivo funcione más lento)"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avanzadas"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Se ha definido <xliff:g id="SERVICE">%1$s</xliff:g> como preferencia de Accesibilidad. Para utilizar la ampliación, mantén pulsado el botón Accesibilidad y selecciona esa opción."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Se ha definido el gesto de accesibilidad para <xliff:g id="SERVICE">%1$s</xliff:g>. Para usar la función de ampliación, desliza dos dedos hacia arriba desde la parte inferior de la pantalla y mantenla pulsada. A continuación, selecciona la ampliación."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Función de las teclas de volumen"</string>
@@ -2098,6 +2110,10 @@
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Utilizar la corrección de color"</string>
     <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Utilizar subtítulos"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Algunas aplicaciones no admiten este ajuste."</string>
+    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Botón Accesibilidad"</string>
+    <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Desliza dos dedos hacia arriba desde la parte inferior"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Mantén pulsadas las teclas de volumen"</string>
+    <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Toca tres veces la pantalla"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Audífonos"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"No hay audífonos conectados"</string>
@@ -2114,6 +2130,12 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Este servicio no funciona correctamente."</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Mostrar en ajustes rápidos"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Modo de corrección"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Rojo-verde"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2929354940552262472">"Verde-rojo"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Azul-amarillo"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteronomalía"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalía"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalía"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
       <item quantity="other">Retraso demasiado corto (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="one">Retraso demasiado corto (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
@@ -2547,6 +2569,7 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Las credenciales no están disponibles para este usuario"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Instalada para redes VPN y aplicaciones"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Instalada para redes Wi-Fi"</string>
+    <string name="credential_for_fsverity" msgid="8733384639764901293">"Se ha instalado para verificar la fuente de instalación de aplicaciones"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"¿Seguro que quieres quitar todos los contenidos?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Almacenamiento de credenciales borrado"</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"No se ha podido borrar el almacenamiento de credenciales."</string>
@@ -2554,10 +2577,13 @@
     <string name="ca_certificate" msgid="3076484307693855611">"Certificado de CA"</string>
     <string name="user_certificate" msgid="6897024598058566466">"Certificado de usuario"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certificado de Wi‑Fi"</string>
+    <string name="app_src_certificate" msgid="436410009047766408">"Certificado de fuente de app."</string>
     <string name="ca_certificate_warning_title" msgid="8229107396555793427">"Tu privacidad está en riesgo"</string>
     <string name="ca_certificate_warning_description" msgid="1592953815964406032">"Los sitios web, las aplicaciones y las VPN utilizan los certificados de CA para cifrar datos. Instala solo certificados de CA de organizaciones de confianza. \n\n Si instalas un certificado de CA, el propietario del certificado podrá acceder a la información que tengas en los sitios web que visitas o las aplicaciones que usas, aunque esté cifrada. Por ejemplo, puede tener acceso a contraseñas, mensajes o datos de tarjetas de crédito."</string>
-    <string name="ca_certificate_warning_dont_install" msgid="5330662108111984911">"No instalar"</string>
-    <string name="ca_certificate_warning_install_anyway" msgid="8460064866116466075">"Instalar de todos modos"</string>
+    <string name="certificate_warning_dont_install" msgid="3794366420884560605">"No instalar"</string>
+    <string name="certificate_warning_install_anyway" msgid="6411936058579648212">"Instalar de todos modos"</string>
+    <string name="app_src_certificate_warning_title" msgid="3581334802881767289">"Instalar este certificado bajo tu responsabilidad"</string>
+    <string name="app_src_certificate_warning_description" msgid="4891599919584400969">"Los certificados de fuente de aplicación comprueban si las aplicaciones son seguras para el dispositivo. Instala solo certificados de organizaciones de confianza."</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"No se ha instalado el certificado"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Señal de llamada de emergencia"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Establecer comportamiento al realizar una llamada de emergencia"</string>
@@ -2586,8 +2612,6 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Desactivar y desinstalar"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Aplicaciones de admin. de dispositivos"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"No hay aplicaciones de administrador de dispositivos disponibles"</string>
-    <string name="personal_device_admin_title" msgid="3760026556728177389">"Personal"</string>
-    <string name="managed_device_admin_title" msgid="5995937968962501866">"Trabajo"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"No hay agentes de confianza disponibles"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"¿Activar administrador de dispositivos?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Activar esta aplicación de administrador de dispositivos"</string>
@@ -2833,9 +2857,16 @@
     <string name="one_usercrt" msgid="1865069301105101370">"un certificado de usuario"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"un certificado de CA"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d certificados de CA"</string>
+    <string name="one_appsrccrt" msgid="8129657605195214337">"un certificado de fuente de aplicación"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Detalles de credenciales"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Quitar credencial: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"No hay credenciales de usuario instaladas"</string>
+    <string name="app_src_cert_reboot_dialog_install_title" msgid="8054342796523969318">"Reiniciar para utilizar el certificado"</string>
+    <string name="app_src_cert_reboot_dialog_install_message" msgid="3047145226539355739">"Para utilizar este certificado de fuente de aplicación, tienes que reiniciar el dispositivo"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_title" msgid="1122954693175643166">"Reiniciar para terminar de desinstalar"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_message" msgid="5733844651545039464">"Para desinstalar este certificado de fuente de aplicación, tienes que reiniciar el dispositivo"</string>
+    <string name="app_src_cert_reboot_dialog_button_restart" msgid="3222022868040265930">"Reiniciar"</string>
+    <string name="app_src_cert_reboot_dialog_button_not_now" msgid="3582913410301349048">"Ahora no"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Corrector ortográfico"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Corrector ortográfico para el trabajo"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Introduce aquí la contraseña actual de la copia de seguridad completa."</string>
@@ -3146,6 +3177,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ahorro de batería, batería fija, duradera, ahorro de batería, batería"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, horario, ahorro de batería, ahorro de corriente, batería, automático, porcentaje"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, llamadas avanzadas, llamadas 4g"</string>
+    <string name="keywords_add_language" msgid="1882751300359939436">"añadir idioma, añadir un idioma, añadir lengua, añadir una lengua"</string>
     <string name="default_sound" msgid="6604374495015245195">"Sonido predeterminado"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"El volumen del tono de llamada y de las notificaciones está al <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volumen, vibración y No molestar"</string>
@@ -3326,7 +3358,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir que se pospongan las notificaciones"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ocultar iconos de las notificaciones discretas"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Los iconos de las notificaciones discretas no se muestran la barra de estado."</string>
-    <string name="notification_badging_title" msgid="3149547223586336353">"Permitir puntos de notificación"</string>
+    <string name="notification_badging_title" msgid="3149547223586336353">"Permitir burbujas de notificación"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Burbujas"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Algunas notificaciones pueden aparecer como burbujas en la pantalla"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Algunas notificaciones y otro tipo de contenido aparecerá como burbujas en la pantalla. Para abrir una burbuja, tócala. Para cerrarla, arrástrala hacia la parte de abajo de la pantalla."</string>
@@ -3683,8 +3715,6 @@
     <string name="filter_all_apps" msgid="6645539744080251371">"Todas las aplicaciones"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicaciones instaladas"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Aplicaciones instantáneas"</string>
-    <string name="filter_personal_apps" msgid="6381137559116555485">"Personales"</string>
-    <string name="filter_work_apps" msgid="5080158572515936510">"Trabajo"</string>
     <string name="filter_notif_all_apps" msgid="2764590815789208306">"Aplicaciones: todas"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desactivadas"</string>
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"Categorías: urgente"</string>
@@ -4176,8 +4206,8 @@
     <string name="information_label" msgid="6939310810756569298">"Información"</string>
     <string name="low_label" msgid="6525629096999711220">"Baja"</string>
     <string name="high_label" msgid="357503396626018487">"Alta"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"La sensibilidad alta puede entrar en conflicto con los gestos de la aplicación que se hagan en los extremos de la pantalla."</string>
-    <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilidad trasera"</string>
+    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"Una mayor sensibilidad podría entrar en conflicto con los gestos de otras aplicaciones que se hagan en los bordes de la pantalla."</string>
+    <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilidad del gesto Atrás"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tocar el teléfono dos veces para consultarlo"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tocar el tablet dos veces para comprobar notificaciones"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tocar el dispositivo dos veces para comprobar notificaciones"</string>
