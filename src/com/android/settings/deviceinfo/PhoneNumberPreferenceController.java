@@ -123,7 +123,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     private CharSequence getFirstPhoneNumber() {
         final List<SubscriptionInfo> subscriptionInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList(true);
+                mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList == null || subscriptionInfoList.isEmpty()) {
             return mContext.getText(R.string.device_info_default);
         }
@@ -150,7 +150,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     @VisibleForTesting
     SubscriptionInfo getSubscriptionInfo(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList(true);
+                mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList != null) {
             for (SubscriptionInfo info : subscriptionInfoList) {
                 if (info.getSimSlotIndex() == simSlot) {

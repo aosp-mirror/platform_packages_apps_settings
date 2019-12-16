@@ -50,7 +50,7 @@ public class SubscriptionUtil {
         if (sActiveResultsForTesting != null) {
             return sActiveResultsForTesting;
         }
-        final List<SubscriptionInfo> subscriptions = manager.getActiveSubscriptionInfoList(true);
+        final List<SubscriptionInfo> subscriptions = manager.getActiveSubscriptionInfoList();
         if (subscriptions == null) {
             return new ArrayList<>();
         }

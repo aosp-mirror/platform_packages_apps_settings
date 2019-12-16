@@ -17,7 +17,6 @@
 package com.android.settings.network.telephony.gsm;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -83,7 +82,7 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
         when(mSubscriptionInfo.getSubscriptionId()).thenReturn(SUB_ID);
         when(mSubscriptionInfo.getCarrierName()).thenReturn(OPERATOR_NAME);
 
-        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo));
         when(mSubscriptionManager.getAccessibleSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo));
