@@ -39,7 +39,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.ArrayMap;
+import android.util.FeatureFlagUtils;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.contextualcards.conditional.ConditionFooterContextualCard;
 import com.android.settings.homepage.contextualcards.conditional.ConditionHeaderContextualCard;
@@ -83,6 +85,7 @@ public class ContextualCardManagerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONDITIONAL_CARDS, true);
         mManager = new ContextualCardManager(mContext, mLifecycle, null /* bundle */);
     }
 
@@ -122,6 +125,27 @@ public class ContextualCardManagerTest {
         final List<Integer> expected = Arrays.asList(ContextualCard.CardType.CONDITIONAL,
                 ContextualCard.CardType.LEGACY_SUGGESTION);
         assertThat(actual).containsExactlyElementsIn(expected);
+    }
+
+    @Test
+    public void getSettingsCards_conditionalsEnabled_shouldContainLegacyAndConditionals() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONDITIONAL_CARDS, true);
+        final int[] expected = {ContextualCard.CardType.CONDITIONAL,
+                ContextualCard.CardType.LEGACY_SUGGESTION};
+
+        final int[] actual = mManager.getSettingsCards();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void getSettingsCards_conditionalsDisabled_shouldContainLegacy() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONDITIONAL_CARDS, false);
+        final int[] expected = {ContextualCard.CardType.LEGACY_SUGGESTION};
+
+        final int[] actual = mManager.getSettingsCards();
+
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
