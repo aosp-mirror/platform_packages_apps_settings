@@ -94,7 +94,7 @@ public class SimListDialogFragment extends SimDialogFragment implements
     protected List<SubscriptionInfo> getCurrentSubscriptions() {
         final SubscriptionManager manager = getContext().getSystemService(
                 SubscriptionManager.class);
-        return manager.getActiveSubscriptionInfoList(true);
+        return manager.getActiveSubscriptionInfoList();
     }
 
     @Override
