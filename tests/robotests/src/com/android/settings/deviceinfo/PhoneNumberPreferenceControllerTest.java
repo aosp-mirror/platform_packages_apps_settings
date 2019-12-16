@@ -21,7 +21,6 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -141,7 +140,7 @@ public class PhoneNumberPreferenceControllerTest {
 
     @Test
     public void getSummary_cannotGetActiveSubscriptionInfo_shouldShowUnknown() {
-        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(null);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(null);
 
         CharSequence primaryNumber = mController.getSummary();
 
@@ -152,7 +151,7 @@ public class PhoneNumberPreferenceControllerTest {
     @Test
     public void getSummary_getEmptySubscriptionInfo_shouldShowUnknown() {
         List<SubscriptionInfo> infos = new ArrayList<>();
-        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(infos);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(infos);
 
         CharSequence primaryNumber = mController.getSummary();
 
@@ -168,7 +167,7 @@ public class PhoneNumberPreferenceControllerTest {
     public void copy_shouldCopyPhoneNumberToClipboard() {
         final List<SubscriptionInfo> list = new ArrayList<>();
         list.add(mSubscriptionInfo);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(list);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(list);
         final String phoneNumber = "1111111111";
         doReturn(phoneNumber).when(mController).getFormattedPhoneNumber(mSubscriptionInfo);
 
