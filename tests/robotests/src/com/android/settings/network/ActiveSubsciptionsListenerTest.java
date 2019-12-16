@@ -101,7 +101,7 @@ public class ActiveSubsciptionsListenerTest {
 
     @After
     public void cleanUp() {
-        mListener.stop();
+        mListener.close();
     }
 
     private class ActiveSubsciptionsListenerImpl extends ActiveSubsciptionsListener {
