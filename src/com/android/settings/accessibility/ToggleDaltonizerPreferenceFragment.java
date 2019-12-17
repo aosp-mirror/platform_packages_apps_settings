@@ -36,12 +36,28 @@ import java.util.List;
 
 @SearchIndexable
 public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
-        implements DaltonizerPreferenceController.OnChangeListener,
+        implements DaltonizerRadioButtonPreferenceController.OnChangeListener,
         SwitchBar.OnSwitchChangeListener {
 
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.accessibility_daltonizer_settings);
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
-
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        if (sControllers.size() == 0) {
+            final Resources resources = context.getResources();
+            final String[] daltonizerKeys = resources.getStringArray(
+                    R.array.daltonizer_mode_keys);
+
+            for (int i = 0; i < daltonizerKeys.length; i++) {
+                sControllers.add(new DaltonizerRadioButtonPreferenceController(
+                        context, lifecycle, daltonizerKeys[i]));
+            }
+        }
+        return sControllers;
+    }
 
     @Override
     public void onCheckedChanged(Preference preference) {
@@ -55,8 +71,9 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         super.onResume();
         for (AbstractPreferenceController controller :
                 buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
-            ((DaltonizerPreferenceController) controller).setOnChangeListener(this);
-            ((DaltonizerPreferenceController) controller).displayPreference(getPreferenceScreen());
+            ((DaltonizerRadioButtonPreferenceController) controller).setOnChangeListener(this);
+            ((DaltonizerRadioButtonPreferenceController) controller).displayPreference(
+                    getPreferenceScreen());
         }
     }
 
@@ -65,7 +82,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         super.onPause();
         for (AbstractPreferenceController controller :
                 buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
-            ((DaltonizerPreferenceController) controller).setOnChangeListener(null);
+            ((DaltonizerRadioButtonPreferenceController) controller).setOnChangeListener(null);
         }
     }
 
@@ -78,7 +95,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     public int getHelpResource() {
         return R.string.help_url_color_correction;
     }
-
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -115,22 +131,4 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
                 Settings.Secure.getInt(getContentResolver(), ENABLED, 0) == 1);
         mSwitchBar.addOnSwitchChangeListener(this);
     }
-
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
-        if (sControllers.size() == 0) {
-            final Resources resources = context.getResources();
-            final String[] daltonizerKeys = resources.getStringArray(
-                    R.array.daltonizer_mode_keys);
-
-            for (int i = 0; i < daltonizerKeys.length; i++) {
-                sControllers.add(new DaltonizerPreferenceController(
-                        context, lifecycle, daltonizerKeys[i]));
-            }
-        }
-        return sControllers;
-    }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_daltonizer_settings);
 }
