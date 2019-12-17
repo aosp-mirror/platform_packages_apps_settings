@@ -16,6 +16,7 @@
 
 package com.android.settings.network;
 
+import static android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX;
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
@@ -119,5 +120,21 @@ public class SubscriptionUtil {
      */
     public static boolean showToggleForPhysicalSim(SubscriptionManager subMgr) {
         return subMgr.canDisablePhysicalSubscription();
+    }
+
+    /**
+     * Get phoneId or logical slot index for a subId if active, or INVALID_PHONE_INDEX if inactive.
+     */
+    public static int getPhoneId(Context context, int subId) {
+        SubscriptionManager subManager = (SubscriptionManager)
+                context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+        if (subManager == null) {
+            return INVALID_SIM_SLOT_INDEX;
+        }
+        SubscriptionInfo info = subManager.getActiveSubscriptionInfo(subId);
+        if (info == null) {
+            return INVALID_SIM_SLOT_INDEX;
+        }
+        return info.getSimSlotIndex();
     }
 }

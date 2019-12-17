@@ -46,6 +46,7 @@ import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.slices.SliceBroadcastReceiver;
 
@@ -364,7 +365,7 @@ public class WifiCallingSliceHelper {
     }
 
     protected ImsManager getImsManager(int subId) {
-        return ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(subId));
+        return ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(mContext, subId));
     }
 
     protected ImsMmTelManager getImsMmTelManager(int subId) {
