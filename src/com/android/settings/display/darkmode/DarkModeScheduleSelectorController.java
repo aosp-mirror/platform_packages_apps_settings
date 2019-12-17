@@ -18,9 +18,11 @@ import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
+
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
@@ -33,7 +35,7 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
     private final UiModeManager mUiModeManager;
     private PowerManager mPowerManager;
     private DropDownPreference mPreference;
-    private String mCurrentMode;
+    private int mCurrentMode;
 
     public DarkModeScheduleSelectorController(Context context, String key) {
         super(context, key);
@@ -44,8 +46,8 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-
         mPreference = screen.findPreference(getPreferenceKey());
+        init();
     }
 
     @Override
@@ -53,32 +55,35 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
         return BasePreferenceController.AVAILABLE;
     }
 
-    @Override
-    public final void updateState(Preference preference) {
+    private void init() {
         final boolean batterySaver = mPowerManager.isPowerSaveMode();
         mPreference.setEnabled(!batterySaver);
-        mCurrentMode =
-                mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_AUTO
-                ? mContext.getString(R.string.dark_ui_auto_mode_auto)
-                : mContext.getString(R.string.dark_ui_auto_mode_never);
-        mPreference.setValue(mCurrentMode);
+        mCurrentMode = getCurrentMode();
+        mPreference.setValueIndex(mCurrentMode);
     }
+
+    private int getCurrentMode() {
+        final int resId = mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_AUTO
+                ? R.string.dark_ui_auto_mode_auto : R.string.dark_ui_auto_mode_never;
+        return mPreference.findIndexOfValue(mContext.getString(resId));
+    }
+
     @Override
     public final boolean onPreferenceChange(Preference preference, Object newValue) {
-        String newMode = (String) newValue;
+        final int newMode = mPreference.findIndexOfValue((String) newValue);
         if (newMode == mCurrentMode) {
             return false;
         }
         mCurrentMode = newMode;
-        if (mCurrentMode == mContext.getString(R.string.dark_ui_auto_mode_never)) {
+        if (mCurrentMode == mPreference.findIndexOfValue(
+                mContext.getString(R.string.dark_ui_auto_mode_never))) {
             boolean active = (mContext.getResources().getConfiguration().uiMode
                     & Configuration.UI_MODE_NIGHT_YES) != 0;
             int mode = active ? UiModeManager.MODE_NIGHT_YES
                     : UiModeManager.MODE_NIGHT_NO;
             mUiModeManager.setNightMode(mode);
-
-        } else if (mCurrentMode ==
-                mContext.getString(R.string.dark_ui_auto_mode_auto)) {
+        } else if (mCurrentMode == mPreference.findIndexOfValue(
+                mContext.getString(R.string.dark_ui_auto_mode_auto))) {
             mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_AUTO);
         }
         return true;
