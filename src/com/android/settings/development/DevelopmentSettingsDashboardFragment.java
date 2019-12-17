@@ -428,6 +428,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new MemoryUsagePreferenceController(context));
         controllers.add(new BugReportPreferenceController(context));
+        controllers.add(new BugReportHandlerPreferenceController(context));
         controllers.add(new SystemServerHeapDumpPreferenceController(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
