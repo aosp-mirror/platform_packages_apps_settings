@@ -546,6 +546,11 @@
             android:title="@string/asst_capability_prioritizer_title"
             settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
 
+        <SwitchPreference
+            android:key="asst_capability_ranking"
+            android:title="@string/asst_capability_ranking_title"
+            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+
         <Preference
             android:key="inactive_apps"
             android:title="@string/inactive_apps_title"
