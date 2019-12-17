@@ -38,6 +38,7 @@ import android.os.Process;
 import android.os.SimpleClock;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -55,12 +56,14 @@ import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBarController;
+import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
@@ -509,6 +512,14 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 pref.setKey(connectedEntry.getKey());
                 pref.refresh();
                 mConnectedWifiEntryPreferenceCategory.addPreference(pref);
+                pref.setOnPreferenceClickListener(preference -> {
+                    if (connectedEntry.canSignIn()) {
+                        connectedEntry.signIn();
+                    } else {
+                        launchNetworkDetailsFragment(pref);
+                    }
+                    return true;
+                });
             }
         } else {
             mConnectedWifiEntryPreferenceCategory.removeAll();
@@ -552,6 +563,25 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         mAddWifiNetworkPreference.setOrder(index++);
         mWifiEntryPreferenceCategory.addPreference(mAddWifiNetworkPreference);
         setAdditionalSettingsSummaries();
+    }
+
+    private void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
+        final WifiEntry wifiEntry = pref.getWifiEntry();
+        final Context context = getContext();
+        final CharSequence title =
+                FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_DATAUSAGE_HEADER)
+                        ? wifiEntry.getTitle()
+                        : context.getText(R.string.pref_title_network_details);
+
+        final Bundle bundle = new Bundle();
+        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
+
+        new SubSettingLauncher(context)
+                .setTitleText(title)
+                .setDestination(WifiNetworkDetailsFragment2.class.getName())
+                .setArguments(bundle)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     private LongPressWifiEntryPreference createLongPressWifiEntryPreference(WifiEntry wifiEntry) {
