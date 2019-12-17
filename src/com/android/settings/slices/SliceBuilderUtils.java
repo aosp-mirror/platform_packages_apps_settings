@@ -75,6 +75,8 @@ public class SliceBuilderUtils {
      * {@param sliceData} is an inline controller.
      */
     public static Slice buildSlice(Context context, SliceData sliceData) {
+        // Reload theme for switching dark mode on/off
+        context.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
         Log.d(TAG, "Creating slice for: " + sliceData.getPreferenceController());
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
