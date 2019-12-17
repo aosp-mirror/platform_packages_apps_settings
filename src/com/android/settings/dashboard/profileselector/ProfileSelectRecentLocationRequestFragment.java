@@ -20,44 +20,26 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.location.LocationPersonalSettings;
-import com.android.settings.location.LocationSwitchBarController;
-import com.android.settings.location.LocationWorkProfileSettings;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.location.RecentLocationRequestSeeAllFragment;
 
 /**
- * Location Setting page for personal/managed profile.
+ * Recent location request page for personal/managed profile.
  */
-public class ProfileSelectLocationFragment extends ProfileSelectFragment {
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
-        switchBar.setSwitchBarText(R.string.location_settings_master_switch_title,
-                R.string.location_settings_master_switch_title);
-        final LocationSwitchBarController switchBarController = new LocationSwitchBarController(
-                activity, switchBar, getSettingsLifecycle());
-        switchBar.show();
-    }
+public class ProfileSelectRecentLocationRequestFragment extends ProfileSelectFragment {
 
     @Override
     public Fragment[] getFragments() {
-
         final Bundle workOnly = new Bundle();
         workOnly.putInt(EXTRA_PROFILE, ProfileSelectFragment.ProfileType.WORK);
-        final Fragment workFragment = new LocationWorkProfileSettings();
+        final Fragment workFragment = new RecentLocationRequestSeeAllFragment();
         workFragment.setArguments(workOnly);
 
         final Bundle personalOnly = new Bundle();
         personalOnly.putInt(EXTRA_PROFILE, ProfileSelectFragment.ProfileType.PERSONAL);
-        final Fragment personalFragment = new LocationPersonalSettings();
+        final Fragment personalFragment = new RecentLocationRequestSeeAllFragment();
         personalFragment.setArguments(personalOnly);
         return new Fragment[]{
-                personalFragment,
+                personalFragment, //0
                 workFragment
         };
     }

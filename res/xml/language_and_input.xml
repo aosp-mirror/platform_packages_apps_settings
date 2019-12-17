@@ -109,7 +109,7 @@
             android:title="@string/spellcheckers_settings_for_work_title"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
             settings:forWork="true"
-            settings:controller="com.android.settings.language.UserDictionaryForWorkPreferenceController" />
+            settings:controller="com.android.settings.core.WorkPreferenceController" />
 
         <Preference
             android:key="user_dictionary_settings_for_work_pref"

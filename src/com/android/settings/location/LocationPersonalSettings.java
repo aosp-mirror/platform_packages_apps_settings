@@ -21,6 +21,7 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 
 /**
  * Location Setting page for personal profile.
@@ -49,9 +50,14 @@ public class LocationPersonalSettings extends DashboardFragment {
         super.onAttach(context);
 
         use(AppLocationPermissionPreferenceController.class).init(this);
-        use(RecentLocationRequestPreferenceController.class).init(this);
         use(LocationServicePreferenceController.class).init(this);
         use(LocationFooterPreferenceController.class).init(this);
+
+        final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
+        final RecentLocationRequestPreferenceController controller = use(
+                RecentLocationRequestPreferenceController.class);
+        controller.init(this);
+        controller.setProfileType(profileType);
     }
 
     @Override

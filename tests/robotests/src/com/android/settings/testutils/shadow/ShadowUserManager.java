@@ -27,8 +27,8 @@ import com.google.android.collect.Maps;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.shadow.api.Shadow;
 import org.robolectric.annotation.Resetter;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -130,6 +130,16 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     @Implementation
     protected boolean isUserSwitcherEnabled() {
         return mUserSwitchEnabled;
+    }
+
+    @Implementation
+    protected boolean isManagedProfile(int userId) {
+        return mManagedProfiles.contains(userId);
+    }
+
+    public void setManagedProfiles(Set<Integer> profileIds) {
+        mManagedProfiles.clear();
+        mManagedProfiles.addAll(profileIds);
     }
 
     public void setUserSwitcherEnabled(boolean userSwitchEnabled) {
