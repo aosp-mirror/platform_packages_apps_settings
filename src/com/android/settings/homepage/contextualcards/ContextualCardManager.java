@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.widget.BaseAdapter;
 
@@ -38,6 +39,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.conditional.ConditionalCardController;
 import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
@@ -80,10 +82,6 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     private static final String TAG = "ContextualCardManager";
 
-    //The list for Settings Custom Card
-    private static final int[] SETTINGS_CARDS =
-            {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
-
     private final Context mContext;
     private final Lifecycle mLifecycle;
     private final List<LifecycleObserver> mLifecycleObservers;
@@ -114,7 +112,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
             mSavedCards = savedInstanceState.getStringArrayList(KEY_CONTEXTUAL_CARDS);
         }
         //for data provided by Settings
-        for (@ContextualCard.CardType int cardType : SETTINGS_CARDS) {
+        for (@ContextualCard.CardType int cardType : getSettingsCards()) {
             setupController(cardType);
         }
     }
@@ -137,6 +135,15 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         for (ContextualCard card : mContextualCards) {
             setupController(card.getCardType());
         }
+    }
+
+    @VisibleForTesting
+    int[] getSettingsCards() {
+        if (!FeatureFlagUtils.isEnabled(mContext, FeatureFlags.CONDITIONAL_CARDS)) {
+            return new int[]{ContextualCard.CardType.LEGACY_SUGGESTION};
+        }
+        return new int[]
+                {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
     }
 
     @VisibleForTesting

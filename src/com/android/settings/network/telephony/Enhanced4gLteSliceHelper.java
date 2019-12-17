@@ -42,6 +42,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
 
@@ -188,7 +189,7 @@ public class Enhanced4gLteSliceHelper {
     }
 
     protected ImsManager getImsManager(int subId) {
-        return ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(subId));
+        return ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(mContext, subId));
     }
 
     @VisibleForTesting

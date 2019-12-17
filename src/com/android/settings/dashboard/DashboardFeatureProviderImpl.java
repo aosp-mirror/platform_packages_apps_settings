@@ -400,16 +400,15 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
 
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
-            mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
+            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             activity.startActivityForResult(intent, 0);
         } else if (tile.userHandle.size() == 1) {
-            mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
+            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
-                mMetricsFeatureProvider.logDashboardStartIntent(
-                        mContext, intent, sourceMetricCategory);
+                mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
                 activity.startActivityForResultAsUser(intent, 0, userHandle);
             } else {
                 ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile);

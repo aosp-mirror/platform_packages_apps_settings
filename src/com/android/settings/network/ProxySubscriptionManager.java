@@ -140,6 +140,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
 
     @OnLifecycleEvent(ON_DESTROY)
     void onDestroy() {
+        mSubsciptionsMonitor.close();
         mAirplaneModeMonitor.close();
 
         if (mLifecycle != null) {

@@ -133,7 +133,8 @@ public class MobileNetworkUtils {
      */
     public static boolean isWifiCallingEnabled(Context context, int subId) {
         final PhoneAccountHandle simCallManager =
-                TelecomManager.from(context).getSimCallManagerForSubscription(subId);
+                context.getSystemService(TelecomManager.class)
+                       .getSimCallManagerForSubscription(subId);
         final int phoneId = SubscriptionManager.getSlotIndex(subId);
 
         boolean isWifiCallingEnabled;
@@ -271,7 +272,7 @@ public class MobileNetworkUtils {
 
         if (disableOtherSubscriptions) {
             final List<SubscriptionInfo> subInfoList =
-                    subscriptionManager.getActiveSubscriptionInfoList(true);
+                    subscriptionManager.getActiveSubscriptionInfoList();
             if (subInfoList != null) {
                 for (SubscriptionInfo subInfo : subInfoList) {
                     // We never disable mobile data for opportunistic subscriptions.

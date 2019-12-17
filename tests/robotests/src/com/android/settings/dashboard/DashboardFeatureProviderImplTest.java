@@ -230,8 +230,7 @@ public class DashboardFeatureProviderImplTest {
                 MetricsEvent.SETTINGS_GESTURES, preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
 
-        verify(mFeatureFactory.metricsFeatureProvider).logDashboardStartIntent(
-                any(Context.class),
+        verify(mFeatureFactory.metricsFeatureProvider).logStartedIntent(
                 any(Intent.class),
                 eq(MetricsEvent.SETTINGS_GESTURES));
         verify(mActivity)
@@ -249,8 +248,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
                 MetricsEvent.SETTINGS_GESTURES, preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
-        verify(mFeatureFactory.metricsFeatureProvider).logDashboardStartIntent(
-                any(Context.class),
+        verify(mFeatureFactory.metricsFeatureProvider).logStartedIntent(
                 any(Intent.class),
                 anyInt());
         verify(mActivity)

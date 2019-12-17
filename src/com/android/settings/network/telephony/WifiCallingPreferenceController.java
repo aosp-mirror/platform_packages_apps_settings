@@ -36,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsManager;
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -156,7 +157,8 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
 
     public WifiCallingPreferenceController init(int subId) {
         mSubId = subId;
-        mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
+        mImsManager = ImsManager.getInstance(mContext,
+                SubscriptionUtil.getPhoneId(mContext, mSubId));
         mImsMmTelManager = getImsMmTelManager(mSubId);
         mSimCallManager = mContext.getSystemService(TelecomManager.class)
                 .getSimCallManagerForSubscription(mSubId);

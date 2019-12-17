@@ -152,9 +152,9 @@ public class ApnSettings extends RestrictedSettingsFragment
                 if (!mRestoreDefaultApnMode) {
                     int extraSubId = intent.getIntExtra(TelephonyManager.EXTRA_SUBSCRIPTION_ID,
                             SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-                    if (SubscriptionManager.isValidSubscriptionId(extraSubId) &&
-                            mPhoneId == SubscriptionManager.getPhoneId(extraSubId) &&
-                            extraSubId != mSubId) {
+                    if (SubscriptionManager.isValidSubscriptionId(extraSubId)
+                            && mPhoneId == SubscriptionUtil.getPhoneId(context, extraSubId)
+                            && extraSubId != mSubId) {
                         // subscription has changed
                         mSubId = extraSubId;
                         mSubscriptionInfo = getSubscriptionInfo(mSubId);
@@ -185,7 +185,7 @@ public class ApnSettings extends RestrictedSettingsFragment
         final Activity activity = getActivity();
         mSubId = activity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        mPhoneId = SubscriptionManager.getPhoneId(mSubId);
+        mPhoneId = SubscriptionUtil.getPhoneId(activity, mSubId);
         mIntentFilter = new IntentFilter(
                 TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
         mIntentFilter.addAction(TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
