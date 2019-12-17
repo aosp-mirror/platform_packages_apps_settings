@@ -26,10 +26,11 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.telephony.CarrierConfigManager;
-import android.telephony.SmsCbMessage;
+import android.telephony.CellSignalStrength;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
+import android.telephony.SmsCbMessage;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
@@ -47,6 +48,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import java.util.List;
 
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
@@ -141,9 +144,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mSlotIndex = slotId;
         mSubscriptionInfo = getPhoneSubscriptionInfo(slotId);
 
-        mTelephonyManager =  mContext.getSystemService(TelephonyManager.class);
-        mCarrierConfigManager =  mContext.getSystemService(CarrierConfigManager.class);
-        mEuiccManager =  mContext.getSystemService(EuiccManager.class);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
+        mEuiccManager = mContext.getSystemService(EuiccManager.class);
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
 
         mRes = mContext.getResources();
@@ -182,9 +185,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
         mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId())
                 .listen(mPhoneStateListener,
-                PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
-                        | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
-                        | PhoneStateListener.LISTEN_SERVICE_STATE);
+                        PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
+                                | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
+                                | PhoneStateListener.LISTEN_SERVICE_STATE);
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
 
         if (mShowLatestAreaInfo) {
@@ -405,13 +408,14 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private void updateImsRegistrationState() {
         final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
         final PersistableBundle carrierConfig =
-            mCarrierConfigManager.getConfigForSubId(subscriptionId);
+                mCarrierConfigManager.getConfigForSubId(subscriptionId);
         final boolean showImsRegState = carrierConfig == null ? false :
-            carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL);
+                carrierConfig.getBoolean(
+                        CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL);
         if (showImsRegState) {
             final boolean isImsRegistered = mTelephonyManager.isImsRegistered(subscriptionId);
             mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(isImsRegistered ?
-                R.string.ims_reg_status_registered : R.string.ims_reg_status_not_registered));
+                    R.string.ims_reg_status_registered : R.string.ims_reg_status_not_registered));
         } else {
             mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
             mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
@@ -429,11 +433,37 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private int getDbm(SignalStrength signalStrength) {
-        return signalStrength.getDbm();
+        List<CellSignalStrength> cellSignalStrengthList = signalStrength.getCellSignalStrengths();
+        int dbm = -1;
+        if (cellSignalStrengthList == null) {
+            return dbm;
+        }
+
+        for (CellSignalStrength cell : cellSignalStrengthList) {
+            if (cell.getDbm() != -1) {
+                dbm = cell.getDbm();
+                break;
+            }
+        }
+
+        return dbm;
     }
 
     private int getAsuLevel(SignalStrength signalStrength) {
-        return signalStrength.getAsuLevel();
+        List<CellSignalStrength> cellSignalStrengthList = signalStrength.getCellSignalStrengths();
+        int asu = -1;
+        if (cellSignalStrengthList == null) {
+            return asu;
+        }
+
+        for (CellSignalStrength cell : cellSignalStrengthList) {
+            if (cell.getAsuLevel() != -1) {
+                asu = cell.getAsuLevel();
+                break;
+            }
+        }
+
+        return asu;
     }
 
     @VisibleForTesting

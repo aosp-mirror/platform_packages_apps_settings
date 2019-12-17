@@ -172,22 +172,25 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
                     // Adds all Wi-Fi networks in QR code to the set of configured networks and
                     // connects to it if it's reachable.
-                    boolean hasReachableWifiNetwork = false;
+                    boolean hasHiddenOrReachableWifiNetwork = false;
                     for (WifiConfiguration qrCodeWifiConfiguration : qrCodeWifiConfigurations) {
                         final int id = wifiManager.addNetwork(qrCodeWifiConfiguration);
                         if (id == -1) {
                             continue;
                         }
                         wifiManager.enableNetwork(id, /* attemptConnect */ false);
-                        if (isReachableWifiNetwork(qrCodeWifiConfiguration)) {
-                            hasReachableWifiNetwork = true;
+                        // WifiTracker only contains a hidden SSID Wi-Fi network if it's saved.
+                        // We can't check if a hidden SSID Wi-Fi network is reachable in advance.
+                        if (qrCodeWifiConfiguration.hiddenSSID ||
+                                isReachableWifiNetwork(qrCodeWifiConfiguration)) {
+                            hasHiddenOrReachableWifiNetwork = true;
                             mEnrolleeWifiConfiguration = qrCodeWifiConfiguration;
                             wifiManager.connect(id,
                                     /* listener */ WifiDppQrCodeScannerFragment.this);
                         }
                     }
 
-                    if (hasReachableWifiNetwork == false) {
+                    if (!hasHiddenOrReachableWifiNetwork) {
                         showErrorMessageAndRestartCamera(
                                 R.string.wifi_dpp_check_connection_try_again);
                         return;

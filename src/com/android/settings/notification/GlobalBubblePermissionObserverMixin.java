@@ -47,8 +47,8 @@ public class GlobalBubblePermissionObserverMixin extends ContentObserver {
 
     public void onStart() {
         mContext.getContentResolver().registerContentObserver(
-                Settings.Secure.getUriFor(
-                        Settings.Secure.NOTIFICATION_BUBBLES),
+                Settings.Global.getUriFor(
+                        Settings.Global.NOTIFICATION_BUBBLES),
                 false /* notifyForDescendants */,
                 this /* observer */);
     }
