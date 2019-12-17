@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.os.UserHandle;
+import android.provider.Settings;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
@@ -59,26 +60,58 @@ public class FaceSetupSliceTest {
     public void getSlice_noFaceManager_shouldReturnNull() {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(false);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
+
         assertThat(setupSlice.getSlice()).isNull();
     }
 
     @Test
-    public void getSlice_faceEnrolled_shouldReturnNull() {
+    public void getSlice_faceEnrolled_noReEnroll_shouldReturnNull() {
         final FaceManager faceManager = mock(FaceManager.class);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
         when(faceManager.hasEnrolledTemplates(UserHandle.myUserId())).thenReturn(true);
         when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(faceManager);
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.FACE_UNLOCK_RE_ENROLL,
+                0);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
+
         assertThat(setupSlice.getSlice()).isNull();
     }
 
     @Test
-    public void getSlice_faceNotEnrolled_shouldReturnNonNull() {
+    public void getSlice_faceNotEnrolled_shouldReturnSlice() {
         final FaceManager faceManager = mock(FaceManager.class);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
         when(faceManager.hasEnrolledTemplates(UserHandle.myUserId())).thenReturn(false);
         when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(faceManager);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
+
+        assertThat(setupSlice.getSlice()).isNotNull();
+    }
+
+    @Test
+    public void getSlice_faceEnrolled_shouldReEnroll_shouldReturnSlice() {
+        final FaceManager faceManager = mock(FaceManager.class);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
+        when(faceManager.hasEnrolledTemplates(UserHandle.myUserId())).thenReturn(true);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(faceManager);
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.FACE_UNLOCK_RE_ENROLL,
+                1);
+        final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
+
+        assertThat(setupSlice.getSlice()).isNotNull();
+    }
+
+    @Test
+    public void getSlice_faceEnrolled_musteEnroll_shouldReturnSlice() {
+        final FaceManager faceManager = mock(FaceManager.class);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
+        when(faceManager.hasEnrolledTemplates(UserHandle.myUserId())).thenReturn(true);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(faceManager);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.FACE_UNLOCK_RE_ENROLL,
+                3);
+        final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
+
         assertThat(setupSlice.getSlice()).isNotNull();
     }
 }

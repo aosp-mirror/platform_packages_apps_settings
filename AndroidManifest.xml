@@ -2109,26 +2109,6 @@
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
         </activity>
 
-        <activity
-            android:name="RadioInfo"
-            android:label="@string/phone_info_label"
-            android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="BandMode"
-                  android:label="@string/band_mode_title"
-                  android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Settings$TestingSettingsActivity" android:label="@string/testing">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.TestingSettings" />
@@ -2594,13 +2574,6 @@
                 android:value="com.android.settings.notification.AppNotificationSettings" />
         </activity>
 
-        <!-- Show channel group-level notification settings (group passed in as extras) -->
-        <activity android:name="Settings$ChannelGroupNotificationSettingsActivity"
-                  android:exported="true">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ChannelGroupNotificationSettings" />
-        </activity>
-
         <!-- Show channel-level notification settings (channel passed in as extras) -->
         <activity android:name="Settings$ChannelNotificationSettingsActivity"
                   android:label="@string/notification_channel_title"
@@ -2714,7 +2687,7 @@
 
         <activity
             android:name=".wifi.NetworkRequestDialogActivity"
-            android:theme="@style/Transparent"
+            android:theme="@style/Theme.AlertDialog"
             android:excludeFromRecents="true"
             android:launchMode="singleTop"
             android:taskAffinity=".wifi.NetworkRequestDialogActivity"
@@ -3239,6 +3212,9 @@
         </activity>
 
         <activity android:name=".homepage.contextualcards.ContextualCardFeedbackDialog"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
+
+        <activity android:name=".homepage.contextualcards.FaceReEnrollDialog"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
 
         <activity

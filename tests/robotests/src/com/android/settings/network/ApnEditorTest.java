@@ -463,6 +463,43 @@ public class ApnEditorTest {
         verify(mApnEditorUT).finish();
     }
 
+    @Test
+    public void getUserEnteredApnType_emptyApnType_shouldReturnDefault() {
+        // case 1
+        // GIVEN read only APN types with DUN
+        String[] readOnlyApnTypes = {"dun"};
+        mApnEditorUT.mReadOnlyApnTypes = readOnlyApnTypes;
+        // GIVEN read specificApnTypeForEmptyInput with DEFAULT,DUN
+        String[] defaultApnTypes = {"default", "dun"};
+        mApnEditorUT.mDefaultApnTypes = defaultApnTypes;
+
+        // Input empty in TYPE
+        final FakeApnData apnData = new FakeApnData(APN_DATA);
+        apnData.mData[ApnEditor.TYPE_INDEX] = "";
+        mApnEditorUT.mApnData = apnData;
+        mApnEditorUT.fillUI(true /* firstTime */);
+
+        // THEN APN type should be default
+        assertThat(mApnEditorUT.getUserEnteredApnType()).isEqualTo("default");
+
+        // case 2
+        // GIVEN read only APN types with DUN
+        String[] readOnlyApnTypesCase2 = {"dun"};
+        mApnEditorUT.mReadOnlyApnTypes = readOnlyApnTypesCase2;
+        // GIVEN read specificApnTypeForEmptyInput with DEFAULT
+        String[] defaultApnTypesCase2 = {"default"};
+        mApnEditorUT.mDefaultApnTypes = defaultApnTypesCase2;
+
+        // Input empty in TYPE
+        final FakeApnData apnDataCase2 = new FakeApnData(APN_DATA);
+        apnDataCase2.mData[ApnEditor.TYPE_INDEX] = "";
+        mApnEditorUT.mApnData = apnDataCase2;
+        mApnEditorUT.fillUI(true /* firstTime */);
+
+        // THEN APN type should be default
+        assertThat(mApnEditorUT.getUserEnteredApnType()).isEqualTo("default");
+    }
+
     private void initCursor() {
         doReturn(2).when(mCursor).getColumnCount();
         doReturn(2).when(mCursor).getInt(CURSOR_INTEGER_INDEX);

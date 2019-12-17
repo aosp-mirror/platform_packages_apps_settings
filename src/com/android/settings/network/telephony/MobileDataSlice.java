@@ -38,11 +38,11 @@ import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settingslib.WirelessUtils;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -184,10 +184,7 @@ public class MobileDataSlice implements CustomSliceable {
 
     @VisibleForTesting
     boolean isAirplaneModeEnabled() {
-        // Generic key since we only want the method check - no UI.
-        AirplaneModePreferenceController controller = new AirplaneModePreferenceController(mContext,
-                "key" /* Key */);
-        return controller.isChecked();
+        return WirelessUtils.isAirplaneModeOn(mContext);
     }
 
     @VisibleForTesting

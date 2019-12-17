@@ -220,7 +220,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             }
             final WifiNetworkConfig networkConfig = WifiNetworkConfig.getValidConfigOrNull(
                     selectedAccessPoint.getSecurityString(/* concise */ true),
-                    wifiConfig.getPrintableSsid(), wifiConfig.preSharedKey, /* hiddenSsid */ false,
+                    wifiConfig.getPrintableSsid(), wifiConfig.preSharedKey, wifiConfig.hiddenSSID,
                     wifiConfig.networkId, /* isHotspot */ false);
             if (mOnChooseNetworkListener != null) {
                 mOnChooseNetworkListener.onChooseNetwork(networkConfig);

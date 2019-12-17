@@ -47,10 +47,10 @@ public class FaceSettingsLockscreenBypassPreferenceController
 
     @Override
     public boolean isChecked() {
-        boolean defaultValue = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_faceAuthDismissesKeyguard);
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD, defaultValue ? 1 : 0) != 0;
+        int defaultValue = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_faceAuthDismissesKeyguard) ? 1 : 0;
+        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD, defaultValue, getUserId()) != 0;
     }
 
     @Override
@@ -81,7 +81,8 @@ public class FaceSettingsLockscreenBypassPreferenceController
         }
 
         if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
-            return mFaceManager.hasEnrolledTemplates() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+            return mFaceManager.hasEnrolledTemplates(getUserId())
+                    ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
         } else {
             return UNSUPPORTED_ON_DEVICE;
         }

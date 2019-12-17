@@ -340,6 +340,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         // Throws error dialog.
         final NetworkRequestErrorDialogFragment fragment = NetworkRequestErrorDialogFragment
                 .newInstance();
+        fragment.setRejectCallback(mUserSelectionCallback);
         final Bundle bundle = new Bundle();
         bundle.putSerializable(NetworkRequestErrorDialogFragment.DIALOG_TYPE, type);
         fragment.setArguments(bundle);

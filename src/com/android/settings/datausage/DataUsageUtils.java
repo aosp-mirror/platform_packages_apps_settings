@@ -107,7 +107,7 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
         }
         final List<SubscriptionInfo> subInfoList =
-                SubscriptionManager.from(context).getActiveSubscriptionInfoList(true);
+                SubscriptionManager.from(context).getActiveSubscriptionInfoList();
         // No activated Subscriptions
         if (subInfoList == null) {
             if (LOGD) {

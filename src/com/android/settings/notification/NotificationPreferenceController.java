@@ -113,25 +113,40 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     }
 
     protected boolean isChannelBlockable() {
-        if (mChannel != null && mAppRow != null) {
-            if (mChannel.isImportanceLockedByCriticalDeviceFunction()
-                    || mChannel.isImportanceLockedByOEM()) {
-                return mChannel.getImportance() == IMPORTANCE_NONE;
+        return isChannelBlockable(mChannel);
+    }
+
+    protected boolean isChannelBlockable(NotificationChannel channel) {
+        if (channel != null && mAppRow != null) {
+            if (channel.isImportanceLockedByCriticalDeviceFunction()
+                    || channel.isImportanceLockedByOEM()) {
+                return channel.getImportance() == IMPORTANCE_NONE;
             }
 
-            return mChannel.isBlockableSystem() || !mAppRow.systemApp
-                    || mChannel.getImportance() == IMPORTANCE_NONE;
+            return channel.isBlockableSystem() || !mAppRow.systemApp
+                    || channel.getImportance() == IMPORTANCE_NONE;
+        }
+        return false;
+    }
+
+    protected boolean isChannelConfigurable(NotificationChannel channel) {
+        if (channel != null && mAppRow != null) {
+            return !channel.isImportanceLockedByOEM();
         }
         return false;
     }
 
     protected boolean isChannelGroupBlockable() {
-        if (mChannelGroup != null && mAppRow != null) {
+        return isChannelGroupBlockable(mChannelGroup);
+    }
+
+    protected boolean isChannelGroupBlockable(NotificationChannelGroup group) {
+        if (group != null && mAppRow != null) {
             if (!mAppRow.systemApp) {
                 return true;
             }
 
-            return mChannelGroup.isBlocked();
+            return group.isBlocked();
         }
         return false;
     }
