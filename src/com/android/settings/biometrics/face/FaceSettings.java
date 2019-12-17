@@ -36,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -68,6 +69,7 @@ public class FaceSettings extends DashboardFragment {
     private List<Preference> mTogglePreferences;
     private Preference mRemoveButton;
     private Preference mEnrollButton;
+    private FaceFeatureProvider mFaceFeatureProvider;
 
     private boolean mConfirmingPassword;
 
@@ -126,6 +128,7 @@ public class FaceSettings extends DashboardFragment {
 
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        mFaceFeatureProvider = FeatureFactory.getFactory(getContext()).getFaceFeatureProvider();
 
         if (mUserManager.getUserInfo(mUserId).isManagedProfile()) {
             getActivity().setTitle(getActivity().getResources().getString(
@@ -199,6 +202,10 @@ public class FaceSettings extends DashboardFragment {
         final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
         mEnrollButton.setVisible(!hasEnrolled);
         mRemoveButton.setVisible(hasEnrolled);
+
+        if (!mFaceFeatureProvider.isAttentionSupported(getContext())) {
+            removePreference(FaceSettingsAttentionPreferenceController.KEY);
+        }
     }
 
     @Override
