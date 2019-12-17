@@ -43,9 +43,9 @@ public class SystemNavigationPreferenceController extends BasePreferenceControll
 
     @Override
     public CharSequence getSummary() {
-        if (isEdgeToEdgeEnabled(mContext)) {
+        if (isGestureNavigationEnabled(mContext)) {
             return mContext.getText(R.string.edge_to_edge_navigation_title);
-        } else if (isSwipeUpEnabled(mContext)) {
+        } else if (is2ButtonNavigationEnabled(mContext)) {
             return mContext.getText(R.string.swipe_up_to_switch_apps_title);
         } else {
             return mContext.getText(R.string.legacy_navigation_title);
@@ -86,15 +86,12 @@ public class SystemNavigationPreferenceController extends BasePreferenceControll
         }
     }
 
-    static boolean isSwipeUpEnabled(Context context) {
-        if (isEdgeToEdgeEnabled(context)) {
-            return false;
-        }
+    static boolean is2ButtonNavigationEnabled(Context context) {
         return NAV_BAR_MODE_2BUTTON == context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode);
     }
 
-    static boolean isEdgeToEdgeEnabled(Context context) {
+    static boolean isGestureNavigationEnabled(Context context) {
         return NAV_BAR_MODE_GESTURAL == context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode);
     }
