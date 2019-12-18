@@ -215,6 +215,8 @@ public class SliceBuilderUtils {
         searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
                 .setAction("com.android.settings.SEARCH_RESULT_TRAMPOLINE")
                 .setComponent(null);
+        searchDestination.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
         return searchDestination;
     }
 
