@@ -241,8 +241,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             case DIALOG_ID_ACCESSIBILITY_BUTTON_TUTORIAL:
                 return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_ACCESSIBILITY_BUTTON;
             case DIALOG_ID_EDIT_SHORTCUT:
-                return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_ACCESSIBILITY_BUTTON;
-                // TODO(b/142531156): Create a settings enum to replace it.
+                return SettingsEnums.DIALOG_MAGNIFICATION_EDIT_SHORTCUT;
             default:
                 return 0;
         }

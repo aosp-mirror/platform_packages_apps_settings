@@ -145,8 +145,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         if (dialogId == DIALOG_ID_EDIT_SHORTCUT) {
-            return SettingsEnums.ACCESSIBILITY_TOGGLE_DALTONIZER;
-            // TODO(b/142531156): Create a settings enum to replace it.
+            return SettingsEnums.DIALOG_DALTONIZER_EDIT_SHORTCUT;
         }
         return 0;
     }
