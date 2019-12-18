@@ -133,6 +133,7 @@ public class FingerprintSettings extends SubSettings {
         private Drawable mHighlightDrawable;
         private int mUserId;
         private CharSequence mFooterTitle;
+        private boolean mEnrollClicked;
 
         private static final String TAG_AUTHENTICATE_SIDECAR = "authenticate_sidecar";
         private static final String TAG_REMOVAL_SIDECAR = "removal_sidecar";
@@ -464,6 +465,14 @@ public class FingerprintSettings extends SubSettings {
         }
 
         @Override
+        public void onStop() {
+            super.onStop();
+            if (!getActivity().isChangingConfigurations() && !mLaunchedConfirm && !mEnrollClicked) {
+                getActivity().finish();
+            }
+        }
+
+        @Override
         public void onSaveInstanceState(final Bundle outState) {
             outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
                     mToken);
@@ -475,6 +484,7 @@ public class FingerprintSettings extends SubSettings {
         public boolean onPreferenceTreeClick(Preference pref) {
             final String key = pref.getKey();
             if (KEY_FINGERPRINT_ADD.equals(key)) {
+                mEnrollClicked = true;
                 Intent intent = new Intent();
                 intent.setClassName(SETTINGS_PACKAGE_NAME,
                         FingerprintEnrollEnrolling.class.getName());
@@ -564,9 +574,10 @@ public class FingerprintSettings extends SubSettings {
                     }
                 }
             } else if (requestCode == ADD_FINGERPRINT_REQUEST) {
+                mEnrollClicked = false;
                 if (resultCode == RESULT_TIMEOUT) {
                     Activity activity = getActivity();
-                    activity.setResult(RESULT_TIMEOUT);
+                    activity.setResult(resultCode);
                     activity.finish();
                 }
             }

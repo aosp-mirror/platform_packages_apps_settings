@@ -178,6 +178,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         }
     }
 
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        return super.shouldFinishWhenBackgrounded() && !mConfirmingCredentials && !mNextClicked;
+    }
+
     private void updatePasswordQuality() {
         final int passwordQuality = new ChooseLockSettingsHelper(this).utils()
                 .getActivePasswordQuality(mUserManager.getCredentialOwnerProfile(mUserId));
@@ -243,7 +248,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
-            if (resultCode == RESULT_FINISHED || resultCode == RESULT_SKIP) {
+            if (resultCode == RESULT_FINISHED || resultCode == RESULT_SKIP
+                    || resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
                 finish();
                 return;
