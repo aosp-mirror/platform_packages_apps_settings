@@ -79,6 +79,7 @@ import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback;
 import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.ConnectStatus;
 import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.DisconnectStatus;
 import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.ForgetStatus;
+import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.SignInStatus;
 
 import java.net.Inet4Address;
 import java.net.Inet6Address;

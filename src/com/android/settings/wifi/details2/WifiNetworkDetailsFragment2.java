@@ -36,7 +36,6 @@ import android.view.MenuItem;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiDialog;
-import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -58,6 +57,9 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
         WifiDialog.WifiDialogListener {
 
     private static final String TAG = "WifiNetworkDetailsFrg2";
+
+    // Key of a Bundle to save/restore the selected WifiEntry
+    public static final String KEY_CHOSEN_WIFIENTRY_KEY = "key_chosen_wifientry_key";
 
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;
@@ -209,6 +211,6 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                 elapsedRealtimeClock,
                 MAX_SCAN_AGE_MILLIS,
                 SCAN_INTERVAL_MILLIS,
-                getArguments().getString(SavedAccessPointsWifiSettings2.KEY_KEY));
+                getArguments().getString(KEY_CHOSEN_WIFIENTRY_KEY));
     }
 }

@@ -68,7 +68,6 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -952,21 +951,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                         ? accessPoint.getTitle()
                         : context.getText(R.string.pref_title_network_details);
 
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-            new SubSettingLauncher(getContext())
-                    .setTitleText(title)
-                    .setDestination(WifiNetworkDetailsFragment2.class.getName())
-                    .setArguments(pref.getExtras())
-                    .setSourceMetricsCategory(getMetricsCategory())
-                    .launch();
-        } else {
-            new SubSettingLauncher(getContext())
-                    .setTitleText(title)
-                    .setDestination(WifiNetworkDetailsFragment.class.getName())
-                    .setArguments(pref.getExtras())
-                    .setSourceMetricsCategory(getMetricsCategory())
-                    .launch();
-        }
+        new SubSettingLauncher(getContext())
+                .setTitleText(title)
+                .setDestination(WifiNetworkDetailsFragment.class.getName())
+                .setArguments(pref.getExtras())
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     private Network getCurrentWifiNetwork() {
