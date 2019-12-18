@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
+import android.app.settings.SettingsEnums;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -139,6 +140,12 @@ public class AddAppNetworksFragmentTest {
                 0).mWifiConfiguration.SSID).isEqualTo(FAKE_NEW_OPEN_SSID);
     }
 
+    @Test
+    public void getMetricsCategory_shouldReturnPanelAddWifiNetworks() {
+        assertThat(mAddAppNetworksFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.PANEL_ADD_WIFI_NETWORKS);
+    }
+
     private void addOneSavedNetworkConfig(@NonNull WifiConfiguration wifiConfiguration) {
         if (mFakeSavedNetworksList == null) {
             mFakeSavedNetworksList = new ArrayList<>();
@@ -180,5 +187,4 @@ public class AddAppNetworksFragmentTest {
         }
         return config;
     }
-
 }
