@@ -21,45 +21,59 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
-import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.Process;
+import android.os.SimpleClock;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.wifi.WifiConfigUiBase;
 import com.android.settings.wifi.WifiDialog;
+import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.wifi.AccessPoint;
+import com.android.wifitrackerlib.NetworkDetailsTracker;
+import com.android.wifitrackerlib.WifiEntry;
 
+import java.time.Clock;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Detail page for the currently connected wifi network.
  *
- * <p>The AccessPoint should be saved to the intent Extras when launching this class via
- * {@link AccessPoint#saveWifiState(Bundle)} in order to properly render this page.
+ * <p>The key of {@link WifiEntry} should be saved to the intent Extras when launching this class
+ * in order to properly render this page.
  */
 public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
         WifiDialog.WifiDialogListener {
 
     private static final String TAG = "WifiNetworkDetailsFrg2";
 
-    private AccessPoint mAccessPoint;
+    // Max age of tracked WifiEntries
+    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
+    // Interval between initiating SavedNetworkTracker scans
+    private static final long SCAN_INTERVAL_MILLIS = 10_000;
+
+    private NetworkDetailsTracker mNetworkDetailsTracker;
+    private HandlerThread mWorkerThread;
     private WifiDetailPreferenceController2 mWifiDetailPreferenceController2;
     private List<WifiDialog.WifiDialogListener> mWifiDialogListeners = new ArrayList<>();
 
     @Override
-    public void onAttach(Context context) {
-        mAccessPoint = new AccessPoint(context, getArguments());
-        super.onAttach(context);
+    public void onDestroy() {
+        mWorkerThread.quit();
+
+        super.onDestroy();
     }
 
     @Override
@@ -87,14 +101,14 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
-        if (getActivity() == null || mWifiDetailPreferenceController2 == null
-                || mAccessPoint == null) {
+        if (getActivity() == null || mWifiDetailPreferenceController2 == null) {
             return null;
         }
-        return WifiDialog.createModal(getActivity(), this, mAccessPoint,
-                WifiConfigUiBase.MODE_MODIFY);
+        // TODO(b/143326832): Replace it with WifiEntry.
+        return null;
+        //return WifiDialog.createModal(getActivity(), this, mAccessPoint,
+        //        WifiConfigUiBase.MODE_MODIFY);
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -124,9 +138,11 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
+        setupNetworksDetailTracker();
+        final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
 
         mWifiDetailPreferenceController2 = WifiDetailPreferenceController2.newInstance(
-                mAccessPoint,
+                wifiEntry,
                 cm,
                 context,
                 this,
@@ -134,20 +150,20 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                 getSettingsLifecycle(),
                 context.getSystemService(WifiManager.class),
                 mMetricsFeatureProvider);
-
         controllers.add(mWifiDetailPreferenceController2);
-        controllers.add(new AddDevicePreferenceController2(context).init(mAccessPoint));
+
+        final AddDevicePreferenceController2 addDevicePreferenceController2 =
+                new AddDevicePreferenceController2(context);
+        addDevicePreferenceController2.setWifiEntry(wifiEntry);
+        controllers.add(addDevicePreferenceController2);
 
         final WifiMeteredPreferenceController2 meteredPreferenceController2 =
-                new WifiMeteredPreferenceController2(context, mAccessPoint.getConfig());
+                new WifiMeteredPreferenceController2(context, wifiEntry);
         controllers.add(meteredPreferenceController2);
 
         final WifiPrivacyPreferenceController2 privacyController2 =
                 new WifiPrivacyPreferenceController2(context);
-        privacyController2.setWifiConfiguration(mAccessPoint.getConfig());
-        privacyController2.setIsEphemeral(mAccessPoint.isEphemeral());
-        privacyController2.setIsPasspoint(
-                mAccessPoint.isPasspoint() || mAccessPoint.isPasspointConfig());
+        privacyController2.setWifiEntry(wifiEntry);
         controllers.add(privacyController2);
 
         // Sets callback listener for wifi dialog.
@@ -163,5 +179,36 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
         for (WifiDialog.WifiDialogListener listener : mWifiDialogListeners) {
             listener.onSubmit(dialog);
         }
+    }
+
+    private void setupNetworksDetailTracker() {
+        if (mNetworkDetailsTracker != null) {
+            return;
+        }
+
+        final Context context = getContext();
+        mWorkerThread = new HandlerThread(TAG
+                + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
+                Process.THREAD_PRIORITY_BACKGROUND);
+        mWorkerThread.start();
+        final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
+            @Override
+            public long millis() {
+                return SystemClock.elapsedRealtime();
+            }
+        };
+
+        mNetworkDetailsTracker = NetworkDetailsTracker.createNetworkDetailsTracker(
+                getSettingsLifecycle(),
+                context,
+                context.getSystemService(WifiManager.class),
+                context.getSystemService(ConnectivityManager.class),
+                context.getSystemService(NetworkScoreManager.class),
+                new Handler(Looper.getMainLooper()),
+                mWorkerThread.getThreadHandler(),
+                elapsedRealtimeClock,
+                MAX_SCAN_AGE_MILLIS,
+                SCAN_INTERVAL_MILLIS,
+                getArguments().getString(SavedAccessPointsWifiSettings2.KEY_KEY));
     }
 }
