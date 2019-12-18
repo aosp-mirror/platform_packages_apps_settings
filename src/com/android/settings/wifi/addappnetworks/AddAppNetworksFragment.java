@@ -164,7 +164,6 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         return inflater.inflate(R.layout.wifi_add_app_networks, container, false);
     }
 
-    // TODO: Makesure function work correctly after rotate.
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -585,8 +584,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/144891278): Need to define a new metric for this page, use the WIFI item first.
-        return SettingsEnums.WIFI;
+        return SettingsEnums.PANEL_ADD_WIFI_NETWORKS;
     }
 
     private void showSaveStatusByState(int status) {
