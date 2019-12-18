@@ -54,6 +54,7 @@ import com.android.settings.widget.SwitchBar;
 public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment implements SwitchBar.OnSwitchChangeListener {
 
+    private static final String SETTINGS_KEY = "screen_magnification_settings";
     private static final int DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL = 1;
     private static final int DIALOG_ID_ACCESSIBILITY_BUTTON_TUTORIAL = 2;
     private static final int DIALOG_ID_EDIT_SHORTCUT = 3;
@@ -170,6 +171,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mVideoPreference.setPersistent(false);
         mVideoPreference.setLayoutResource(R.layout.magnification_video_preference);
 
+        final Preference settingsPreference = new Preference(getPrefContext());
+        final String SettingsText = getString(R.string.settings_button);
+        settingsPreference.setTitle(SettingsText);
+        settingsPreference.setKey(SETTINGS_KEY);
+        settingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
+        settingsPreference.setPersistent(false);
+
         mConfigWarningPreference = new Preference(getPrefContext());
         mConfigWarningPreference.setSelectable(false);
         mConfigWarningPreference.setPersistent(false);
@@ -179,8 +187,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final PreferenceScreen preferenceScreen = getPreferenceManager().getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);
         mVideoPreference.setOrder(0);
+        settingsPreference.setOrder(1);
         mConfigWarningPreference.setOrder(2);
         preferenceScreen.addPreference(mVideoPreference);
+        preferenceScreen.addPreference(settingsPreference);
         preferenceScreen.addPreference(mConfigWarningPreference);
     }
 
