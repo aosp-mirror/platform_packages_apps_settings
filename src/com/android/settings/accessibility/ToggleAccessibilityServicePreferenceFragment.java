@@ -37,10 +37,15 @@ import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.CheckBox;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -57,10 +62,32 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
     private static final int DIALOG_ID_ENABLE_WARNING = 1;
     private static final int DIALOG_ID_DISABLE_WARNING = 2;
     private static final int DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL = 3;
+    private static final int DIALOG_ID_EDIT_SHORTCUT = 4;
 
     public static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION = 1;
 
+    private CharSequence mDialogTitle;
+
     private LockPatternUtils mLockPatternUtils;
+
+    private final DialogInterface.OnClickListener mDialogListener =
+            (DialogInterface dialog, int id) -> {
+                if (id == DialogInterface.BUTTON_POSITIVE) {
+                    // TODO(b/142531156): Save the shortcut type preference.
+                }
+            };
+
+    private final View.OnClickListener mSettingButtonListener = (View view) -> showDialog(
+            DIALOG_ID_EDIT_SHORTCUT);
+
+    private final View.OnClickListener mCheckBoxListener = (View view) -> {
+        CheckBox checkBox = (CheckBox) view;
+        if (checkBox.isChecked()) {
+            // TODO(b/142530063): Enable shortcut when checkbox is checked.
+        } else {
+            // TODO(b/142530063): Disable shortcut when checkbox is unchecked.
+        }
+    };
 
     private final SettingsContentObserver mSettingsContentObserver =
             new SettingsContentObserver(new Handler()) {
@@ -124,6 +151,13 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLockPatternUtils = new LockPatternUtils(getActivity());
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        initShortcutPreference();
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -195,6 +229,13 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
                 }
                 break;
             }
+            case DIALOG_ID_EDIT_SHORTCUT: {
+                final CharSequence dialogTitle = getActivity().getString(
+                        R.string.accessibility_shortcut_edit_dialog_title, mDialogTitle);
+                mDialog = AccessibilityEditDialogUtils.showEditShortcutDialog(getActivity(),
+                        dialogTitle, mDialogListener);
+                break;
+            }
             default: {
                 throw new IllegalArgumentException();
             }
@@ -204,10 +245,21 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
 
     @Override
     public int getDialogMetricsCategory(int dialogId) {
-        if (dialogId == DIALOG_ID_ENABLE_WARNING) {
-            return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
-        } else {
-            return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
+        switch (dialogId) {
+            case DIALOG_ID_ENABLE_WARNING:
+                return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
+            case DIALOG_ID_DISABLE_WARNING:
+                return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
+            case DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL:
+                return isGestureNavigateEnabled()
+                        ? SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE
+                        : SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
+                // TODO(b/142531156): Create a settings enum to replace it.
+            case DIALOG_ID_EDIT_SHORTCUT:
+                return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
+                // TODO(b/142531156): Create a settings enum to replace it.
+            default:
+                return 0;
         }
     }
 
@@ -218,6 +270,21 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
                 getString(R.string.accessibility_service_master_switch_title,
                 info.getResolveInfo().loadLabel(getPackageManager()));
         switchBar.setSwitchBarText(switchBarText, switchBarText);
+    }
+
+    private void initShortcutPreference() {
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(
+                preferenceScreen.getContext(), null);
+        // Put the shortcutPreference before settingsPreference.
+        shortcutPreference.setOrder(-1);
+        shortcutPreference.setTitle(R.string.accessibility_shortcut_title);
+        // TODO(b/142530063): Check the new setting key to decide which summary should be shown.
+        // TODO(b/142530063): Check if gesture mode is on to decide which summary should be shown.
+        // TODO(b/142530063): Check the new key to decide whether checkbox should be checked.
+        shortcutPreference.setSettingButtonListener(mSettingButtonListener);
+        shortcutPreference.setCheckBoxListener(mCheckBoxListener);
+        preferenceScreen.addPreference(shortcutPreference);
     }
 
     private void updateSwitchBarToggleSwitch() {
@@ -350,5 +417,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
 
         // Settings html description.
         mHtmlDescription = arguments.getCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION);
+
+        // Get Accessibility service name.
+        mDialogTitle = getAccessibilityServiceInfo().getResolveInfo().loadLabel(
+                getPackageManager());
     }
 }
