@@ -30,6 +30,7 @@ import com.android.settings.R;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -37,6 +38,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class WifiPrivacyPreferenceController2Test {
 
     private static final int PRIVACY_RANDOMIZED = WifiEntry.PRIVACY_RANDOMIZED_MAC;
