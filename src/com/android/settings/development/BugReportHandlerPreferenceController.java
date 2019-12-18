@@ -73,7 +73,7 @@ public class BugReportHandlerPreferenceController extends DeveloperOptionsPrefer
         final String handlerApp = mBugReportHandlerUtil.getCurrentBugReportHandlerAppAndUser(
                 mContext).first;
         if (BugReportHandlerUtil.SHELL_APP_PACKAGE.equals(handlerApp)) {
-            return mContext.getString(R.string.shell_app);
+            return mContext.getString(com.android.internal.R.string.android_system_label);
         }
         ApplicationInfo applicationInfo;
         try {
