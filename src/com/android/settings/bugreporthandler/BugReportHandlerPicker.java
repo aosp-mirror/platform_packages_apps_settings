@@ -164,13 +164,13 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
     private String getDescription(String handlerApp, int handlerUser) {
         final Context context = getContext();
         if (BugReportHandlerUtil.SHELL_APP_PACKAGE.equals(handlerApp)) {
-            return context.getString(R.string.system_default_app);
+            return context.getString(R.string.system_default_app_subtext);
         }
         final UserHandle managedProfile = Utils.getManagedProfile(mUserManager);
         if (managedProfile != null && managedProfile.getIdentifier() == handlerUser) {
-            return context.getString(R.string.work_profile_app);
+            return context.getString(R.string.work_profile_app_subtext);
         }
-        return context.getString(R.string.personal_profile_app);
+        return context.getString(R.string.personal_profile_app_subtext);
     }
 
     private static class BugreportHandlerAppInfo extends DefaultAppInfo {
