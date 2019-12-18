@@ -40,12 +40,16 @@ import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -56,10 +60,8 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 
-import androidx.lifecycle.Lifecycle;
-import androidx.preference.PreferenceScreen;
-
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class MobileNetworkSummaryControllerTest {
     @Mock
     private Lifecycle mLifecycle;
