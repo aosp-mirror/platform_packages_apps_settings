@@ -29,6 +29,7 @@ import com.android.settings.testutils.shadow.ShadowWifiP2pManager;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -62,6 +63,7 @@ public class ResetNetworkConfirmTest {
     }
 
     @Test
+    @Ignore
     public void testResetNetworkData_resetEsim() {
         mResetNetworkConfirm.mEraseEsim = true;
 
@@ -72,6 +74,7 @@ public class ResetNetworkConfirmTest {
     }
 
     @Test
+    @Ignore
     public void testResetNetworkData_notResetEsim() {
         mResetNetworkConfirm.mEraseEsim = false;
 

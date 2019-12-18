@@ -37,7 +37,10 @@ import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
@@ -47,6 +50,7 @@ import java.util.Locale;
 /**
  * Settings fragment containing captioning properties.
  */
+@SearchIndexable
 public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnValueChangedListener {
     private static final String PREF_CAPTION_PREVIEW = "caption_preview";
@@ -420,4 +424,90 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
         return true;
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final Resources res = context.getResources();
+                    final List<SearchIndexableRaw> indexRaws = new ArrayList<>();
+
+                    SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_SWITCH;
+                    raw.title = res.getString(R.string.accessibility_caption_master_switch_title);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_FONT_SIZE;
+                    raw.title = res.getString(R.string.captioning_text_size);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_PRESET;
+                    raw.title = res.getString(R.string.captioning_preset);
+                    indexRaws.add(raw);
+
+                    return indexRaws;
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final ContentResolver cr = context.getContentResolver();
+                    final int preserValue = Settings.Secure.getInt(cr,
+                            Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET, 0);
+                    if (preserValue != CaptionStyle.PRESET_CUSTOM) {
+                        return null;
+                    }
+                    final Resources res = context.getResources();
+                    final List<SearchIndexableRaw> indexRaws = new ArrayList<>();
+                    SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_TYPEFACE;
+                    raw.title = res.getString(R.string.captioning_typeface);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_FOREGROUND_COLOR;
+                    raw.title = res.getString(R.string.captioning_foreground_color);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_FOREGROUND_OPACITY;
+                    raw.title = res.getString(R.string.captioning_foreground_opacity);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_EDGE_TYPE;
+                    raw.title = res.getString(R.string.captioning_edge_type);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_EDGE_COLOR;
+                    raw.title = res.getString(R.string.captioning_edge_color);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_BACKGROUND_COLOR;
+                    raw.title = res.getString(R.string.captioning_background_color);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_BACKGROUND_OPACITY;
+                    raw.title = res.getString(R.string.captioning_background_opacity);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_WINDOW_COLOR;
+                    raw.title = res.getString(R.string.captioning_window_color);
+                    indexRaws.add(raw);
+
+                    raw = new SearchIndexableRaw(context);
+                    raw.key = PREF_WINDOW_OPACITY;
+                    raw.title = res.getString(R.string.captioning_window_opacity);
+                    indexRaws.add(raw);
+
+                    return indexRaws;
+                }
+            };
 }

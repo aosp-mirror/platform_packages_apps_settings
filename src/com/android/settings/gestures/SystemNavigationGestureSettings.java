@@ -258,9 +258,9 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
 
     @VisibleForTesting
     static String getCurrentSystemNavigationMode(Context context) {
-        if (SystemNavigationPreferenceController.isEdgeToEdgeEnabled(context)) {
+        if (SystemNavigationPreferenceController.isGestureNavigationEnabled(context)) {
             return KEY_SYSTEM_NAV_GESTURAL;
-        } else if (SystemNavigationPreferenceController.isSwipeUpEnabled(context)) {
+        } else if (SystemNavigationPreferenceController.is2ButtonNavigationEnabled(context)) {
             return KEY_SYSTEM_NAV_2BUTTONS;
         } else {
             return KEY_SYSTEM_NAV_3BUTTONS;

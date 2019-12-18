@@ -41,6 +41,7 @@ import android.telephony.euicc.EuiccManager;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -95,12 +96,14 @@ public class MobileNetworkListControllerTest {
     }
 
     @Test
+    @Ignore
     public void displayPreference_noSubscriptions_noCrash() {
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
     }
 
     @Test
+    @Ignore
     public void displayPreference_eSimNotSupported_addMoreLinkNotVisible() {
         when(mEuiccManager.isEnabled()).thenReturn(false);
         mController.displayPreference(mPreferenceScreen);
@@ -109,6 +112,7 @@ public class MobileNetworkListControllerTest {
     }
 
     @Test
+    @Ignore
     public void displayPreference_eSimSupported_addMoreLinkIsVisible() {
         when(mEuiccManager.isEnabled()).thenReturn(true);
         when(mTelephonyManager.getNetworkCountryIso()).thenReturn("");
@@ -118,6 +122,7 @@ public class MobileNetworkListControllerTest {
     }
 
     @Test
+    @Ignore
     public void displayPreference_twoSubscriptions_correctlySetup() {
         final SubscriptionInfo sub1 = createMockSubscription(1, "sub1");
         final SubscriptionInfo sub2 = createMockSubscription(2, "sub2");
@@ -148,6 +153,7 @@ public class MobileNetworkListControllerTest {
     }
 
     @Test
+    @Ignore
     public void displayPreference_oneActiveESimOneInactivePSim_correctlySetup() {
         final SubscriptionInfo sub1 = createMockSubscription(1, "sub1");
         final SubscriptionInfo sub2 = createMockSubscription(2, "sub2");
@@ -184,6 +190,7 @@ public class MobileNetworkListControllerTest {
     }
 
     @Test
+    @Ignore
     public void onSubscriptionsChanged_twoSubscriptionsOneChangesName_preferenceUpdated() {
         final SubscriptionInfo sub1 = createMockSubscription(1, "sub1");
         final SubscriptionInfo sub2 = createMockSubscription(2, "sub2");
@@ -200,6 +207,7 @@ public class MobileNetworkListControllerTest {
     }
 
     @Test
+    @Ignore
     public void onSubscriptionsChanged_startWithThreeSubsAndRemoveOne_correctPreferenceRemoved() {
         final SubscriptionInfo sub1 = createMockSubscription(1, "sub1");
         final SubscriptionInfo sub2 = createMockSubscription(2, "sub2");

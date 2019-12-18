@@ -11,30 +11,15 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License
  */
 
-package com.android.settings.language;
+package com.android.settings.biometrics.face;
 
 import android.content.Context;
 
-import com.android.settings.core.BasePreferenceController;
-
-/**
- * Preference controller for "UserDictionary for work".
- *
- * @see UserDictionaryPreferenceController
- */
-public final class UserDictionaryForWorkPreferenceController
-        extends BasePreferenceController {
-
-    public UserDictionaryForWorkPreferenceController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
-    }
-
-    @AvailabilityStatus
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
-    }
+/** Feature provider for face unlock */
+public interface FaceFeatureProvider {
+    /** Returns true if attention checking is supported. */
+    boolean isAttentionSupported(Context context);
 }

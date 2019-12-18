@@ -102,9 +102,9 @@
 
     <!-- Dark theme scheduling preferences  [CHAR LIMIT=NONE] -->
     <string-array name="dark_ui_scheduler_preference_titles">
-        <!-- 1: None -->
+        <!-- 0: None -->
         <item>@string/dark_ui_auto_mode_never</item>
-        <!-- 2: Auto -->
+        <!-- 1: Auto -->
         <item>@string/dark_ui_auto_mode_auto</item>
     </string-array>
 
@@ -1012,6 +1012,13 @@
         <item>Critical</item>
         <!-- Unknown memory state -->
         <item>\?</item>
+    </string-array>
+
+    <!-- Summary for color space adjustment modes for accessibility -->
+    <string-array name="daltonizer_mode_summary" translatable="false">
+        <item>@string/daltonizer_mode_deuteranomaly</item>
+        <item>@string/daltonizer_mode_protanomaly</item>
+        <item>@string/daltonizer_mode_tritanomaly</item>
     </string-array>
 
     <!-- Keys for color space adjustment modes for accessibility -->

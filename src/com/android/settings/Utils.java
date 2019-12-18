@@ -192,19 +192,6 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Returns the UserManager for a given context
-     *
-     * @throws IllegalStateException if no UserManager could be retrieved.
-     */
-    public static UserManager getUserManager(Context context) {
-        final UserManager um = UserManager.get(context);
-        if (um == null) {
-            throw new IllegalStateException("Unable to load UserManager");
-        }
-        return um;
-    }
-
-    /**
      * Returns true if Monkey is running.
      */
     public static boolean isMonkeyRunning() {
@@ -679,7 +666,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @throws SecurityException if the given userId does not belong to the current user group.
      */
     public static int enforceSameOwner(Context context, int userId) {
-        final UserManager um = getUserManager(context);
+        final UserManager um = UserManager.get(context);
         final int[] profileIds = um.getProfileIdsWithDisabled(UserHandle.myUserId());
         if (ArrayUtils.contains(profileIds, userId)) {
             return userId;
@@ -699,7 +686,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * Returns the user id of the credential owner of the given user id.
      */
     public static int getCredentialOwnerUserId(Context context, int userId) {
-        final UserManager um = getUserManager(context);
+        final UserManager um = UserManager.get(context);
         return um.getCredentialOwnerProfile(userId);
     }
 
@@ -836,7 +823,7 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     public static boolean isDemoUser(Context context) {
-        return UserManager.isDeviceInDemoMode(context) && getUserManager(context).isDemoUser();
+        return UserManager.isDeviceInDemoMode(context) && UserManager.get(context).isDemoUser();
     }
 
     public static ComponentName getDeviceOwnerComponent(Context context) {
