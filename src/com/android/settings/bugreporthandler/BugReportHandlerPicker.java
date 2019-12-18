@@ -197,7 +197,7 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
                 return null;
             }
             if (BugReportHandlerUtil.SHELL_APP_PACKAGE.equals(packageItemInfo.packageName)) {
-                return mContext.getString(R.string.shell_app);
+                return mContext.getString(com.android.internal.R.string.android_system_label);
             }
             return super.loadLabel();
         }
