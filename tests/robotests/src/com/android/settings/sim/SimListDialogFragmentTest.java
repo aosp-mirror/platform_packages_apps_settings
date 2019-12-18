@@ -36,6 +36,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -95,6 +96,7 @@ public class SimListDialogFragmentTest extends SimDialogFragmentTestBase<SimList
     }
 
     @Test
+    @Ignore
     public void onCreateDialog_twoSubscriptionsAskEveryTime_threeSubsForDisplay() {
         final int dialogType = SMS_PICK;
         setDialogType(dialogType);
