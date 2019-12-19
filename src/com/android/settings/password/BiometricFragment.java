@@ -16,8 +16,6 @@
 
 package com.android.settings.password;
 
-import android.app.Activity;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.hardware.biometrics.BiometricConstants;
@@ -26,16 +24,10 @@ import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationResult;
 import android.os.Bundle;
 import android.os.CancellationSignal;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.overlay.FeatureFactory;
 
 import java.util.concurrent.Executor;
 
@@ -139,7 +131,9 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setSubtitle(mBundle.getString(BiometricPrompt.KEY_SUBTITLE))
                 .setDescription(mBundle.getString(BiometricPrompt.KEY_DESCRIPTION))
                 .setConfirmationRequired(
-                        mBundle.getBoolean(BiometricPrompt.KEY_REQUIRE_CONFIRMATION, true));
+                        mBundle.getBoolean(BiometricPrompt.KEY_REQUIRE_CONFIRMATION, true))
+                .setDisallowBiometricsIfPolicyExists(mBundle.getBoolean(
+                        BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false));
 
         mBiometricPrompt = builder.build();
         mCancellationSignal = new CancellationSignal();
