@@ -27,6 +27,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -56,6 +57,7 @@ public class SelectDSUPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void onPreferenceChanged_settingEnabled_turnOnGpuViewUpdates() {
         mController.handlePreferenceTreeClick(mPreference);
         String flag = SystemProperties.get(DSULoader.PROPERTY_KEY_FEATURE_FLAG);

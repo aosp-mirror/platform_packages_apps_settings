@@ -1776,6 +1776,11 @@
     <!-- Debugging developer settings: Enable ART verifier for Debuggable Apps [CHAR LIMIT=NONE] -->
     <string name="art_verifier_for_debuggable_summary">Allow ART to verify bytecode for debuggable apps</string>
 
+    <!-- Debugging developer settings: show refresh rate? [CHAR LIMIT=25] -->
+    <string name="show_refresh_rate">Show refresh rate</string>
+    <!-- Debugging developer settings: show refresh rate summary [CHAR LIMIT=50] -->
+    <string name="show_refresh_rate_summary">Show the current display refresh rate</string>
+
     <!-- NFC settings -->
     <!-- Used in the 1st-level settings screen to turn on NFC -->
     <string name="nfc_quick_toggle_title">NFC</string>
@@ -4784,6 +4789,16 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback">To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold.</string>
     <!-- Button for the Accessibility tutorial dialog to dismiss the dialog when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_tutorial_dialog_button">Got it</string>
+    <!-- Title for accessibility shortcut preference for accessibility apps. [CHAR LIMIT=40] -->
+    <string name="accessibility_shortcut_title">Use shortcut to open</string>
+    <!-- Title for accessibility shortcut preference for magnification. [CHAR LIMIT=40] -->
+    <string name="accessibility_magnification_shortcut_title">Use shortcut to magnify</string>
+    <!-- Title for Accessibility edit shortcut dialog. [CHAR LIMIT=40] -->
+    <string name="accessibility_shortcut_edit_dialog_title">Shortcut to open <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
+    <!-- Title for Accessibility edit shortcut dialog in Magnify. [CHAR LIMIT=40] -->
+    <string name="accessibility_shortcut_edit_dialog_title_magnification">Shortcut to magnify</string>
+    <!-- Title for Accessibility edit shortcut dialog in Color correction. [CHAR LIMIT=40] -->
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer">Shortcut to open Color correction</string>
     <!-- Title for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software">Accessibility Button</string>
     <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
@@ -11386,14 +11401,14 @@
     <!-- Developer Settings: Footer text for bug report handler picker [CHAR LIMIT=NONE] -->
     <string name="bug_report_handler_picker_footer_text">Determines which app handles the Bug Report shortcut on your device.</string>
 
-    <!-- Label of personal profile app for current setting [CHAR LIMIT=NONE] -->
-    <string name="personal_profile_app">(Personal)</string>
+    <!-- Subtext of personal profile app for current setting [CHAR LIMIT=NONE] -->
+    <string name="personal_profile_app_subtext">Personal</string>
 
-    <!-- Label of work profile app for current setting [CHAR LIMIT=NONE] -->
-    <string name="work_profile_app">(Work)</string>
+    <!-- Subtext of work profile app for current setting [CHAR LIMIT=NONE] -->
+    <string name="work_profile_app_subtext">Work</string>
 
-    <!-- Title of Shell app for current setting [CHAR LIMIT=NONE] -->
-    <string name="shell_app">Android System (Shell)</string>
+    <!-- Subtext of system default app for current setting [CHAR LIMIT=NONE] -->
+    <string name="system_default_app_subtext">System default</string>
 
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>

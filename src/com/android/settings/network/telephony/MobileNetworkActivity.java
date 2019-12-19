@@ -35,6 +35,7 @@ import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.network.ProxySubscriptionManager;
+import com.android.settings.network.SubscriptionUtil;
 
 import java.util.List;
 
@@ -161,8 +162,8 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     @VisibleForTesting
     SubscriptionInfo getSubscription() {
         if (mCurSubscriptionId != SUB_ID_NULL) {
-            final SubscriptionInfo subInfo =
-                    mProxySubscriptionMgr.getActiveSubscriptionInfo(mCurSubscriptionId);
+            final SubscriptionInfo subInfo = SubscriptionUtil.getAvailableSubscription(
+                    this, mProxySubscriptionMgr, mCurSubscriptionId);
             if (subInfo != null) {
                 return subInfo;
             }

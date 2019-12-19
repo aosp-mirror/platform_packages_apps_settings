@@ -28,6 +28,7 @@ import android.os.Bundle;
 
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -35,6 +36,7 @@ import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class MyDeviceInfoFragmentTest {
 
     private MyDeviceInfoFragment mMyDeviceInfoFragment;

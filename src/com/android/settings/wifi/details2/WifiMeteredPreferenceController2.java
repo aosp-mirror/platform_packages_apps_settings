@@ -18,8 +18,6 @@ package com.android.settings.wifi.details2;
 
 import android.app.backup.BackupManager;
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.DropDownPreference;
@@ -29,6 +27,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.wifitrackerlib.WifiEntry;
 
 /**
  * {@link AbstractPreferenceController} that controls whether the wifi network is metered or not
@@ -37,14 +36,12 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
         Preference.OnPreferenceChangeListener, WifiDialog.WifiDialogListener {
 
     private static final String KEY_WIFI_METERED = "metered";
-    private WifiConfiguration mWifiConfiguration;
-    private WifiManager mWifiManager;
+    private WifiEntry mWifiEntry;
     private Preference mPreference;
 
-    public WifiMeteredPreferenceController2(Context context, WifiConfiguration wifiConfiguration) {
+    public WifiMeteredPreferenceController2(Context context, WifiEntry wifiEntry) {
         super(context, KEY_WIFI_METERED);
-        mWifiConfiguration = wifiConfiguration;
-        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mWifiEntry = wifiEntry;
     }
 
     @Override
@@ -62,10 +59,10 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (mWifiConfiguration != null) {
-            mWifiConfiguration.meteredOverride = Integer.parseInt((String) newValue);
+        if (mWifiEntry.isSaved()) {
+            mWifiEntry.setMeteredChoice(Integer.parseInt((String) newValue));
         }
-        mWifiManager.updateNetwork(mWifiConfiguration);
+
         // Stage the backup of the SettingsProvider package which backs this up
         BackupManager.dataChanged("com.android.providers.settings");
         updateSummary((DropDownPreference) preference, getMeteredOverride());
@@ -74,11 +71,11 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
 
     @VisibleForTesting
     int getMeteredOverride() {
-        if (mWifiConfiguration != null) {
+        if (mWifiEntry.isSaved()) {
             // Wrap the meteredOverride since robolectric cannot recognize it
-            return mWifiConfiguration.meteredOverride;
+            return mWifiEntry.getMeteredChoice();
         }
-        return WifiConfiguration.METERED_OVERRIDE_NONE;
+        return WifiEntry.METERED_CHOICE_AUTO;
     }
 
     private void updateSummary(DropDownPreference preference, int meteredOverride) {
@@ -93,16 +90,17 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
 
     @Override
     public void onSubmit(WifiDialog dialog) {
-        if (dialog.getController() != null) {
-            final WifiConfiguration newConfig = dialog.getController().getConfig();
-            if (newConfig == null || mWifiConfiguration == null) {
-                return;
-            }
-
-            if (newConfig.meteredOverride != mWifiConfiguration.meteredOverride) {
-                mWifiConfiguration = newConfig;
-                onPreferenceChange(mPreference, String.valueOf(newConfig.meteredOverride));
-            }
-        }
+        // TODO(b/143326832): Create WifiDialog2 and let it work for WifiEntry.
+        //if (dialog.getController() != null) {
+        //    final WifiConfiguration newConfig = dialog.getController().getConfig();
+        //    if (newConfig == null || mWifiConfiguration == null) {
+        //        return;
+        //    }
+        //
+        //    if (newConfig.meteredOverride != mWifiConfiguration.meteredOverride) {
+        //        mWifiConfiguration = newConfig;
+        //        onPreferenceChange(mPreference, String.valueOf(newConfig.meteredOverride));
+        //    }
+        //}
     }
 }

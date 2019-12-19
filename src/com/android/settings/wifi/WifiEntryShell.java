@@ -1,0 +1,131 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.wifi;
+
+import android.net.NetworkInfo.DetailedState;
+
+import com.android.wifitrackerlib.WifiEntry;
+
+/**
+ * {@link WifiEntry is working in progess, many methods are not available, this class is to group
+ * all the unavalable {@link AccessPoint} methods & constants.
+ *
+ * TODO(b/143326832): Replace all methods & constants with WifiEntry version when it's available.
+ * TODO(b/143326832): How about AccessPoint#getSettingsSummary(boolean convertSavedAsDisconnected)?
+ */
+public class WifiEntryShell {
+    public WifiEntryShell(){};
+
+    /**
+     * Lower bound on the 2.4 GHz (802.11b/g/n) WLAN channels
+     */
+    public static final int LOWER_FREQ_24GHZ = 2400;
+
+    /**
+     * Upper bound on the 2.4 GHz (802.11b/g/n) WLAN channels
+     */
+    public static final int HIGHER_FREQ_24GHZ = 2500;
+
+    /**
+     * Lower bound on the 5.0 GHz (802.11a/h/j/n/ac) WLAN channels
+     */
+    public static final int LOWER_FREQ_5GHZ = 4900;
+
+    /**
+     * Upper bound on the 5.0 GHz (802.11a/h/j/n/ac) WLAN channels
+     */
+    public static final int HIGHER_FREQ_5GHZ = 5900;
+
+    /**
+     * Mapping of the corresponding {@link WifiConfiguration} field
+     */
+    public static int getNetworkId(WifiEntry wifiEntry) {
+        return 0;
+    }
+
+    /**
+     * Mapping of the corresponding {@link WifiConfiguration} field
+     */
+    public static boolean hiddenSSID(WifiEntry wifiEntry) {
+        return false;
+    }
+
+    /**
+     * Mapping of the corresponding {@link WifiDetailPreferenceController} method
+     */
+    public static boolean canModifyNetwork(WifiEntry wifiEntry) {
+        return false;
+    }
+
+    /**
+     * Mapping of the corresponding {@link AccessPoint} method
+     */
+    public static String getSecurityString(WifiEntry wifiEntry, boolean concise) {
+        return "None";
+    }
+
+    /**
+     * Mapping of the corresponding {@link AccessPoint} method
+     */
+    public static DetailedState getDetailedState(WifiEntry wifiEntry) {
+        return null;
+    }
+
+    // Passpoint methods
+
+    /**
+     * Mapping of the corresponding {@link AccessPoint} method
+     */
+    public static boolean isPasspoint(WifiEntry wifiEntry) {
+        return false;
+    }
+
+    /**
+     * Mapping of the corresponding {@link AccessPoint} method
+     */
+    public static boolean isExpired(WifiEntry wifiEntry) {
+        return false;
+    }
+
+    /**
+     * Mapping of the corresponding {@link AccessPoint} method
+     */
+    public static boolean isPasspointConfigurationR1(WifiEntry wifiEntry) {
+        return false;
+    }
+
+    /**
+     * Mapping of the corresponding {@link AccessPoint} method
+     */
+    public static boolean isPasspointConfigurationOsuProvisioned(WifiEntry wifiEntry) {
+        return false;
+    }
+
+    /**
+     * Mapping of the corresponding {@link AccessPoint} method
+     */
+    public static boolean isOsuProvider(WifiEntry wifiEntry) {
+        return false;
+    }
+
+    /**
+     * Mapping of the corresponding {@link AccessPoint} method
+     */
+    public static String getPasspointFqdn(WifiEntry wifiEntry) {
+        return "Fake passpoint FQDN";
+    }
+}
