@@ -252,12 +252,10 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
             case DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL:
                 return isGestureNavigateEnabled()
-                        ? SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE
-                        : SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
-                // TODO(b/142531156): Create a settings enum to replace it.
+                        ? SettingsEnums.DIALOG_TOGGLE_SCREEN_GESTURE_NAVIGATION
+                        : SettingsEnums.DIALOG_TOGGLE_SCREEN_ACCESSIBILITY_BUTTON;
             case DIALOG_ID_EDIT_SHORTCUT:
-                return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
-                // TODO(b/142531156): Create a settings enum to replace it.
+                return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_EDIT_SHORTCUT;
             default:
                 return 0;
         }
