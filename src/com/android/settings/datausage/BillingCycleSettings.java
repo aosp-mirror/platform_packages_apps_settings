@@ -150,12 +150,15 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mBillingCycle) {
+            writePreferenceClickMetric(preference);
             CycleEditorFragment.show(this);
             return true;
         } else if (preference == mDataWarning) {
+            writePreferenceClickMetric(preference);
             BytesEditorFragment.show(this, false);
             return true;
         } else if (preference == mDataLimit) {
+            writePreferenceClickMetric(preference);
             BytesEditorFragment.show(this, true);
             return true;
         }

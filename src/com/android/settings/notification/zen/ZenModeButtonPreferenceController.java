@@ -27,6 +27,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.SettingsEnableZenModeDialog;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
@@ -65,23 +66,22 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             mZenButtonOn = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_on_button);
             mZenButtonOn.setFocusableInTouchMode(true);
-            updateZenButtonOnClickListener();
+            updateZenButtonOnClickListener(preference);
         }
 
         if (null == mZenButtonOff) {
             mZenButtonOff = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_off_button);
             mZenButtonOff.setOnClickListener(v -> {
-                mMetricsFeatureProvider.action(mContext,
-                        SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                writeMetrics(preference, false);
                 mBackend.setZenMode(Settings.Global.ZEN_MODE_OFF);
             });
         }
 
-        updateButtons();
+        updateButtons(preference);
     }
 
-    private void updateButtons() {
+    private void updateButtons(Preference preference) {
         switch (getZenMode()) {
             case Settings.Global.ZEN_MODE_ALARMS:
             case Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
@@ -93,35 +93,39 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             case Settings.Global.ZEN_MODE_OFF:
             default:
                 mZenButtonOff.setVisibility(View.GONE);
-                updateZenButtonOnClickListener();
+                updateZenButtonOnClickListener(preference);
                 mZenButtonOn.setVisibility(View.VISIBLE);
                 mZenButtonOn.requestFocus();
         }
     }
 
-    private void updateZenButtonOnClickListener() {
+    private void updateZenButtonOnClickListener(Preference preference) {
         int zenDuration = getZenDuration();
         switch (zenDuration) {
             case Settings.Secure.ZEN_DURATION_PROMPT:
                 mZenButtonOn.setOnClickListener(v -> {
-                    mMetricsFeatureProvider.action(mContext,
-                            SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                    writeMetrics(preference, true);
                     new SettingsEnableZenModeDialog().show(mFragment, TAG);
                 });
                 break;
             case Settings.Secure.ZEN_DURATION_FOREVER:
                 mZenButtonOn.setOnClickListener(v -> {
-                    mMetricsFeatureProvider.action(mContext,
-                            SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                    writeMetrics(preference, true);
                     mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
                 });
                 break;
             default:
                 mZenButtonOn.setOnClickListener(v -> {
-                    mMetricsFeatureProvider.action(mContext,
-                            SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                    writeMetrics(preference, true);
                     mBackend.setZenModeForDuration(zenDuration);
                 });
         }
+    }
+
+    private void writeMetrics(Preference preference, boolean buttonOn) {
+        mMetricsFeatureProvider.logClickedPreference(preference,
+                preference.getExtras().getInt(DashboardFragment.CATEGORY));
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON,
+                buttonOn);
     }
 }
