@@ -252,7 +252,7 @@ public class MobileDataSlice implements CustomSliceable {
             }
 
             public void register(Context context, int subId) {
-                final Uri uri = MobileDataContentObserver.getObservableUri(subId);
+                final Uri uri = MobileDataContentObserver.getObservableUri(context, subId);
                 context.getContentResolver().registerContentObserver(uri, false, this);
             }
 
