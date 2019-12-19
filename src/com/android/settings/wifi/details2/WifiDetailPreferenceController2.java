@@ -588,16 +588,24 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private void refreshButtons() {
         boolean canForgetNetwork = mWifiEntry.canForget();
         boolean canSignIntoNetwork = canSignIntoNetwork();
-        boolean canConnectNetwork = mWifiEntry.canConnect();
+        boolean showConnectButton = mWifiEntry.canConnect()
+                || mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTING;
         boolean canShareNetwork = canShareNetwork();
 
         mButtonsPref.setButton1Visible(canForgetNetwork);
         mButtonsPref.setButton2Visible(canSignIntoNetwork);
-        mButtonsPref.setButton3Visible(canConnectNetwork);
+        mButtonsPref.setButton3Visible(showConnectButton);
+        if (showConnectButton) {
+            if (mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTING) {
+                mButtonsPref.setButton3Text(R.string.wifi_connecting).setButton3Enabled(false);
+            } else {
+                mButtonsPref.setButton3Text(R.string.wifi_connect).setButton3Enabled(true);
+            }
+        }
         mButtonsPref.setButton4Visible(canShareNetwork);
         mButtonsPref.setVisible(canForgetNetwork
                 || canSignIntoNetwork
-                || canConnectNetwork
+                || showConnectButton
                 || canShareNetwork);
     }
 
@@ -804,8 +812,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     @VisibleForTesting
     void connectNetwork() {
-        // TODO(b/143326832): What to do with WifiManager#isWifiEnabled() false case?
-        mButtonsPref.setButton3Text(R.string.wifi_connecting).setButton3Enabled(false);
         mWifiEntry.connect();
     }
 
@@ -845,8 +851,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             Toast.makeText(mContext,
                     mContext.getString(R.string.wifi_connected_to_message, mWifiEntry.getTitle()),
                     Toast.LENGTH_SHORT).show();
-            updateNetworkInfo();
-            refreshPage();
         } else if (mWifiEntry.getLevel() == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
             Toast.makeText(mContext,
                     R.string.wifi_not_in_range_message,
