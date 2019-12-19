@@ -22,7 +22,6 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.storage.StorageManager;
 import android.text.BidiFormatter;
@@ -73,22 +72,6 @@ public class AccessibilityServiceWarning {
         window.setAttributes(params);
         ad.create();
         ad.setCanceledOnTouchOutside(true);
-
-        return ad;
-    }
-
-    public static Dialog createDisableDialog(Activity parentActivity,
-            AccessibilityServiceInfo info, DialogInterface.OnClickListener listener) {
-        final AlertDialog ad = new AlertDialog.Builder(parentActivity)
-                .setTitle(parentActivity.getString(R.string.disable_service_title,
-                        info.getResolveInfo().loadLabel(parentActivity.getPackageManager())))
-                .setMessage(parentActivity.getString(R.string.disable_service_message,
-                        parentActivity.getString(R.string.accessibility_dialog_button_stop),
-                        getServiceName(parentActivity, info)))
-                .setCancelable(true)
-                .setPositiveButton(R.string.accessibility_dialog_button_stop, listener)
-                .setNegativeButton(R.string.accessibility_dialog_button_cancel, listener)
-                .create();
 
         return ad;
     }
