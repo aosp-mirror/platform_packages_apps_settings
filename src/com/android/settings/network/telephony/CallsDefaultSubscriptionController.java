@@ -38,6 +38,6 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
 
     @Override
     protected void setDefaultSubscription(int subscriptionId) {
-        mManager.setDefaultVoiceSubId(subscriptionId);
+        mManager.setDefaultVoiceSubscriptionId(subscriptionId);
     }
 }
