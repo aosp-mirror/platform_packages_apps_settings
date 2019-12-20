@@ -17,8 +17,13 @@ package com.android.settings.accounts;
 
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -97,7 +102,26 @@ public class AccountDashboardFragment extends DashboardFragment {
                 @Override
                 public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context,
                         boolean enabled) {
-                    return null;
+                    final List<SearchIndexableRaw> indexRaws = new ArrayList<>();
+                    final UserManager userManager = (UserManager) context.getSystemService(
+                            Context.USER_SERVICE);
+                    final List<UserInfo> profiles = userManager.getProfiles(UserHandle.myUserId());
+                    for (final UserInfo userInfo : profiles) {
+                        if (userInfo.isManagedProfile()) {
+                            return indexRaws;
+                        }
+                    }
+
+                    final AccountManager accountManager = AccountManager.get(context);
+                    final Account[] accounts = accountManager.getAccounts();
+                    for (Account account : accounts) {
+                        final SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                        raw.key = AccountTypePreference.buildKey(account);
+                        raw.title = account.name;
+                        indexRaws.add(raw);
+                    }
+
+                    return indexRaws;
                 }
             };
 }
