@@ -17,15 +17,21 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
+import static android.provider.Settings.Global.LOW_POWER_MODE;
+
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -39,6 +45,9 @@ import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
+import com.android.settings.slices.SliceBackgroundWorker;
+
+import java.io.IOException;
 
 public class DarkThemeSlice implements CustomSliceable {
     private static final String TAG = "DarkThemeSlice";
@@ -53,10 +62,12 @@ public class DarkThemeSlice implements CustomSliceable {
 
     private final Context mContext;
     private final UiModeManager mUiModeManager;
+    private final PowerManager mPowerManager;
 
     public DarkThemeSlice(Context context) {
         mContext = context;
         mUiModeManager = context.getSystemService(UiModeManager.class);
+        mPowerManager = context.getSystemService(PowerManager.class);
     }
 
     @Override
@@ -67,15 +78,18 @@ public class DarkThemeSlice implements CustomSliceable {
             sActiveUiSession = currentUiSession;
             sKeepSliceShow = false;
         }
-        if (!sKeepSliceShow && !isAvailable(mContext)) {
-            return null;
+        // Dark theme slice will disappear when battery saver is ON.
+        if (mPowerManager.isPowerSaveMode() || (!sKeepSliceShow && !isAvailable(mContext))) {
+            return new ListBuilder(mContext, CustomSliceRegistry.DARK_THEME_SLICE_URI,
+                    ListBuilder.INFINITY)
+                    .setIsError(true)
+                    .build();
         }
         sKeepSliceShow = true;
         final PendingIntent toggleAction = getBroadcastIntent(mContext);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         final IconCompat icon =
                 IconCompat.createWithResource(mContext, R.drawable.dark_theme);
-        final boolean isChecked = mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES;
         return new ListBuilder(mContext, CustomSliceRegistry.DARK_THEME_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
@@ -85,7 +99,7 @@ public class DarkThemeSlice implements CustomSliceable {
                         .setSubtitle(mContext.getText(R.string.dark_theme_slice_subtitle))
                         .setPrimaryAction(
                                 SliceAction.createToggle(toggleAction, null /* actionTitle */,
-                                        isChecked)))
+                                        isDarkThemeMode(mContext))))
                 .build();
     }
 
@@ -100,8 +114,7 @@ public class DarkThemeSlice implements CustomSliceable {
                 false);
         // make toggle transition more smooth before dark theme takes effect
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            mUiModeManager.setNightMode(
-                isChecked ? UiModeManager.MODE_NIGHT_YES : UiModeManager.MODE_NIGHT_NO);
+            mUiModeManager.setNightModeActivated(isChecked);
         }, DELAY_TIME_EXECUTING_DARK_THEME);
     }
 
@@ -110,10 +123,15 @@ public class DarkThemeSlice implements CustomSliceable {
         return null;
     }
 
+    @Override
+    public Class getBackgroundWorkerClass() {
+        return DarkThemeWorker.class;
+    }
+
     @VisibleForTesting
     boolean isAvailable(Context context) {
         // checking dark theme mode.
-        if (mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
+        if (isDarkThemeMode(context)) {
             return false;
         }
 
@@ -121,7 +139,47 @@ public class DarkThemeSlice implements CustomSliceable {
         final BatteryManager batteryManager = context.getSystemService(BatteryManager.class);
         final int level = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
         Log.d(TAG, "battery level=" + level);
-
         return level <= BATTERY_LEVEL_THRESHOLD;
+    }
+
+    @VisibleForTesting
+    boolean isDarkThemeMode(Context context) {
+        final int currentNightMode =
+                context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    public static class DarkThemeWorker extends SliceBackgroundWorker<Void> {
+        private final Context mContext;
+        private final ContentObserver mContentObserver =
+                new ContentObserver(new Handler(Looper.getMainLooper())) {
+                    @Override
+                    public void onChange(boolean bChanged) {
+                        if (mContext.getSystemService(PowerManager.class).isPowerSaveMode()) {
+                            notifySliceChange();
+                        }
+                    }
+                };
+
+        public DarkThemeWorker(Context context, Uri uri) {
+            super(context, uri);
+            mContext = context;
+        }
+
+        @Override
+        protected void onSlicePinned() {
+            mContext.getContentResolver().registerContentObserver(
+                    Settings.Global.getUriFor(LOW_POWER_MODE), false /* notifyForDescendants */,
+                    mContentObserver);
+        }
+
+        @Override
+        protected void onSliceUnpinned() {
+            mContext.getContentResolver().unregisterContentObserver(mContentObserver);
+        }
+
+        @Override
+        public void close() throws IOException {
+        }
     }
 }
