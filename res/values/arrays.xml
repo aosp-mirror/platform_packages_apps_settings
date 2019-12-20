@@ -1029,8 +1029,25 @@
         <item>\?</item>
     </string-array>
 
+    <!-- Summary for magnification adjustment modes for accessibility -->
+    <string-array name="magnification_mode_summaries" translatable="false">
+        <item>@string/accessibility_magnification_area_settings_full_screen_summary</item>
+        <item>@string/accessibility_magnification_area_settings_window_screen_summary</item>
+        <item>@string/accessibility_magnification_area_settings_all_summary</item>
+    </string-array>
+
+    <!-- Values for magnification adjustment modes for accessibility -->
+    <integer-array name="magnification_mode_values" translatable="false">
+        <!-- Full screen -->
+        <item>1</item>
+        <!-- Window screen -->
+        <item>2</item>
+        <!-- Full screen and window screen. -->
+        <item>3</item>
+    </integer-array>
+
     <!-- Summary for color space adjustment modes for accessibility -->
-    <string-array name="daltonizer_mode_summary" translatable="false">
+    <string-array name="daltonizer_mode_summaries" translatable="false">
         <item>@string/daltonizer_mode_deuteranomaly</item>
         <item>@string/daltonizer_mode_protanomaly</item>
         <item>@string/daltonizer_mode_tritanomaly</item>

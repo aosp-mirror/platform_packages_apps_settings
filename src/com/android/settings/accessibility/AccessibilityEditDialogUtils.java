@@ -24,6 +24,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,13 +54,15 @@ public class AccessibilityEditDialogUtils {
      */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
-            DialogType.EDIT_SHORTCUT_GENERIC,
-            DialogType.EDIT_SHORTCUT_MAGNIFICATION,
+         DialogType.EDIT_SHORTCUT_GENERIC,
+         DialogType.EDIT_SHORTCUT_MAGNIFICATION,
+         DialogType.EDIT_MAGNIFICATION_MODE,
     })
 
     private @interface DialogType {
         int EDIT_SHORTCUT_GENERIC = 0;
         int EDIT_SHORTCUT_MAGNIFICATION = 1;
+        int EDIT_MAGNIFICATION_MODE = 2;
     }
 
     /**
@@ -91,6 +94,23 @@ public class AccessibilityEditDialogUtils {
             CharSequence dialogTitle, DialogInterface.OnClickListener listener) {
         final AlertDialog alertDialog = createDialog(context,
                 DialogType.EDIT_SHORTCUT_MAGNIFICATION, dialogTitle, listener);
+        alertDialog.show();
+
+        return alertDialog;
+    }
+
+    /**
+     * Method to show the magnification mode dialog in Magnification.
+     *
+     * @param context A valid context
+     * @param dialogTitle The title of magnify mode dialog
+     * @param listener The listener to determine the action of magnify mode dialog
+     * @return A magnification mode dialog in Magnification
+     */
+    public static AlertDialog showMagnificationModeDialog(Context context,
+            CharSequence dialogTitle, DialogInterface.OnClickListener listener) {
+        final AlertDialog alertDialog = createDialog(context,
+                DialogType.EDIT_MAGNIFICATION_MODE, dialogTitle, listener);
         alertDialog.show();
 
         return alertDialog;
@@ -138,6 +158,12 @@ public class AccessibilityEditDialogUtils {
                 initMagnifyShortcut(context, contentView);
                 initAdvancedWidget(contentView);
                 break;
+            case DialogType.EDIT_MAGNIFICATION_MODE:
+                contentView = inflater.inflate(
+                        R.layout.accessibility_edit_magnification_mode, null);
+                initMagnifyFullScreen(context, contentView);
+                initMagnifyWindowScreen(context, contentView);
+                break;
             default:
                 throw new IllegalArgumentException();
         }
@@ -145,12 +171,37 @@ public class AccessibilityEditDialogUtils {
         return contentView;
     }
 
+    private static void initMagnifyFullScreen(Context context, View view) {
+        final View dialogView = view.findViewById(R.id.magnify_full_screen);
+        final String title = context.getString(
+                R.string.accessibility_magnification_area_settings_full_screen);
+        // TODO(b/146019459): Use vector drawable instead of temporal png file to avoid distorted.
+        setupShortcutWidget(dialogView, title, R.drawable.accessibility_magnification_full_screen);
+    }
+
+    private static void initMagnifyWindowScreen(Context context, View view) {
+        final View dialogView = view.findViewById(R.id.magnify_window_screen);
+        final String title = context.getString(
+                R.string.accessibility_magnification_area_settings_window_screen);
+        // TODO(b/146019459): Use vector drawable instead of temporal png file to avoid distorted.
+        setupShortcutWidget(dialogView, title,
+                R.drawable.accessibility_magnification_window_screen);
+    }
+
+    private static void setupShortcutWidget(View view, CharSequence titleText, int imageResId) {
+        setupShortcutWidget(view, titleText, null, imageResId);
+    }
+
     private static void setupShortcutWidget(View view, CharSequence titleText,
             CharSequence summaryText, int imageResId) {
         final CheckBox checkBox = view.findViewById(R.id.checkbox);
         checkBox.setText(titleText);
         final TextView summary = view.findViewById(R.id.summary);
-        summary.setText(summaryText);
+        if (TextUtils.isEmpty(summaryText)) {
+            summary.setVisibility(View.GONE);
+        } else {
+            summary.setText(summaryText);
+        }
         final ImageView image = view.findViewById(R.id.image);
         image.setImageResource(imageResId);
     }
