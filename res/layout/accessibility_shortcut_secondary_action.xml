@@ -24,12 +24,14 @@
     android:clipToPadding="false">
 
     <LinearLayout
+        android:id="@+id/main_frame"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackground"
         android:gravity="start|center_vertical"
-        android:clipToPadding="false"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
@@ -39,23 +41,26 @@
             android:gravity="start|center_vertical"
             android:minWidth="56dp"
             android:orientation="horizontal"
-            android:clipToPadding="false"
             android:paddingRight="16dp"
             android:paddingTop="4dp"
-            android:paddingBottom="4dp">
+            android:paddingBottom="4dp"
+            android:focusable="false"
+            android:clickable="false">
 
             <CheckBox
                 android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:focusable="false"
+                android:clickable="false"
+                android:background="@null"/>
 
         </FrameLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:paddingTop="16dp"
             android:paddingBottom="16dp">
 
@@ -71,8 +76,8 @@
                 android:id="@android:id/summary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+android:id/title"
-                android:layout_alignStart="@+android:id/title"
+                android:layout_below="@android:id/title"
+                android:layout_alignStart="@android:id/title"
                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
                 android:textColor="?android:attr/textColorSecondary"
                 android:maxLines="10" />
@@ -81,41 +86,20 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="wrap_content"
+    <View
+        android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="?android:attr/listDivider" />
-
-    </FrameLayout>
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/listDivider" />
 
     <!-- Preference should place its actual preference widget here. -->
-    <FrameLayout
+    <LinearLayout
+        android:id="@android:id/widget_frame"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:minWidth="64dp"
-        android:gravity="center"
-        android:orientation="vertical" >
-
-        <ImageView
-            android:id="@+id/settings_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:paddingStart="?android:attr/listPreferredItemPaddingEnd"
-            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-            android:background="?android:attr/selectableItemBackground"
-            android:scaleType="center"
-            android:src="@drawable/ic_mode_edit"
-            android:contentDescription="@string/settings_button" />
-
-    </FrameLayout>
+        android:minWidth="58dp"
+        android:gravity="end|center_vertical"
+        android:orientation="vertical" />
 
 </LinearLayout>
