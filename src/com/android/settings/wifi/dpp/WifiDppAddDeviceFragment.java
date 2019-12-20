@@ -24,6 +24,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +62,22 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         }
 
         @Override
-        public void onFailure(int code) {
-            Log.d(TAG, "EasyConnectConfiguratorStatusCallback.onFailure " + code);
+        public void onFailure(int code, String ssid, SparseArray<int[]> channelListArray,
+                int[] operatingClassArray) {
+            Log.d(TAG, "EasyConnectConfiguratorStatusCallback.onFailure: " + code);
+            if (!TextUtils.isEmpty(ssid)) {
+                Log.d(TAG, "Tried SSID: " + ssid);
+            }
+            if (channelListArray.size() != 0) {
+                Log.d(TAG, "Tried channels: " + channelListArray);
+            }
+            if (operatingClassArray != null && operatingClassArray.length > 0) {
+                StringBuilder sb = new StringBuilder("Supported bands: ");
+                for (int i = 0; i < operatingClassArray.length; i++) {
+                    sb.append(operatingClassArray[i] + " ");
+                }
+                Log.d(TAG, sb.toString());
+            }
 
             showErrorUi(code, /* isConfigurationChange */ false);
         }
@@ -150,6 +165,20 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
                 throw(new IllegalStateException("Wi-Fi DPP configurator used a non-PSK/non-SAE"
                         + "network to handshake"));
 
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_CANNOT_FIND_NETWORK:
+                summaryCharSequence = getText(R.string.wifi_dpp_failure_cannot_find_network);
+                break;
+
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_ENROLLEE_AUTHENTICATION:
+                summaryCharSequence = getText(R.string.wifi_dpp_failure_enrollee_authentication);
+                break;
+
+            case EasyConnectStatusCallback
+                    .EASY_CONNECT_EVENT_FAILURE_ENROLLEE_REJECTED_CONFIGURATION:
+                summaryCharSequence =
+                        getText(R.string.wifi_dpp_failure_enrollee_rejected_configuration);
+                break;
+
             default:
                 throw(new IllegalStateException("Unexpected Wi-Fi DPP error"));
         }
@@ -218,7 +247,8 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             if (code == WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS) {
                 new EasyConnectConfiguratorStatusCallback().onConfiguratorSuccess(code);
             } else {
-                new EasyConnectConfiguratorStatusCallback().onFailure(code);
+                new EasyConnectConfiguratorStatusCallback().onFailure(code, model.getTriedSsid(),
+                        model.getTriedChannels(), model.getBandArray());
             }
         });
     }
