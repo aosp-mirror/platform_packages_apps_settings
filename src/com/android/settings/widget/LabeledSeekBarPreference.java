@@ -14,33 +14,57 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.widget.SeekBarPreference;
 
-/** A slider preference that is used to set the back gesture's sensitivity **/
-public class GestureNavigationSeekBarPreference extends SeekBarPreference {
+/** A slider preference with left and right labels **/
+public class LabeledSeekBarPreference extends SeekBarPreference {
 
+    private final int mTextStartId;
+    private final int mTextEndId;
     private OnPreferenceChangeListener mStopListener;
 
-    public GestureNavigationSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
+    public LabeledSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
 
         super(context, attrs, defStyleAttr, defStyleRes);
-        setLayoutResource(R.layout.preference_gesture_navigation_slider);
+        setLayoutResource(R.layout.preference_labeled_slider);
+
+        final TypedArray styledAttrs = context.obtainStyledAttributes(attrs,
+                R.styleable.LabeledSeekBarPreference);
+        mTextStartId = styledAttrs.getResourceId(
+                R.styleable.LabeledSeekBarPreference_textStart,
+                R.string.summary_placeholder);
+        mTextEndId = styledAttrs.getResourceId(
+                R.styleable.LabeledSeekBarPreference_textEnd,
+                R.string.summary_placeholder);
+        styledAttrs.recycle();
     }
 
-    public GestureNavigationSeekBarPreference(Context context, AttributeSet attrs) {
+    public LabeledSeekBarPreference(Context context, AttributeSet attrs) {
         this(context, attrs, TypedArrayUtils.getAttr(context,
                 androidx.preference.R.attr.seekBarPreferenceStyle,
                 com.android.internal.R.attr.seekBarPreferenceStyle), 0);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+
+        final TextView startText = (TextView) holder.findViewById(android.R.id.text1);
+        final TextView endText = (TextView) holder.findViewById(android.R.id.text2);
+        startText.setText(mTextStartId);
+        endText.setText(mTextEndId);
     }
 
     public void setOnPreferenceChangeStopListener(OnPreferenceChangeListener listener) {
