@@ -75,11 +75,19 @@ public class ProfileSelectFragmentTest {
     }
 
     @Test
-    public void getTabId_setArgument_setCorrectTab() {
+    public void getTabId_setArgumentWork_setCorrectTab() {
         final Bundle bundle = new Bundle();
         bundle.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, WORK_TAB);
 
         assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(WORK_TAB);
+    }
+
+    @Test
+    public void getTabId_setArgumentPersonal_setCorrectTab() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, PERSONAL_TAB);
+
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(PERSONAL_TAB);
     }
 
     @Test
