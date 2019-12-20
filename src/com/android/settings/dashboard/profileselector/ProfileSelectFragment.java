@@ -150,7 +150,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         if (bundle != null) {
             final int extraTab = bundle.getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, -1);
             if (extraTab != -1) {
-                return WORK_TAB;
+                return extraTab;
             }
             final int userId = bundle.getInt(EXTRA_USER_ID, UserHandle.SYSTEM.getIdentifier());
             final boolean isWorkProfile = UserManager.get(activity).isManagedProfile(userId);
