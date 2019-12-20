@@ -49,7 +49,7 @@ import java.util.concurrent.TimeoutException;
 public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 
     @VisibleForTesting
-    static final int DEFAULT_CARD_COUNT = 2;
+    static final int DEFAULT_CARD_COUNT = 3;
     static final int CARD_CONTENT_LOADER_ID = 1;
 
     private static final String TAG = "ContextualCardLoader";
