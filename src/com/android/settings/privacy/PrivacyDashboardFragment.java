@@ -18,14 +18,12 @@ package com.android.settings.privacy;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -73,34 +71,6 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getSettingsLifecycle());
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        use(PermissionBarChartPreferenceController.class).setFragment(this /* fragment */);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(), getListView());
-        initLoadingBar();
-    }
-
-    @VisibleForTesting
-    void initLoadingBar() {
-        mProgressHeader = setPinnedHeaderView(R.layout.progress_header);
-        mProgressAnimation = mProgressHeader.findViewById(R.id.progress_bar_animation);
-        setLoadingEnabled(false);
-    }
-
-    @VisibleForTesting
-    void setLoadingEnabled(boolean enabled) {
-        if (mProgressHeader != null && mProgressAnimation != null) {
-            mProgressHeader.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-            mProgressAnimation.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-        }
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
