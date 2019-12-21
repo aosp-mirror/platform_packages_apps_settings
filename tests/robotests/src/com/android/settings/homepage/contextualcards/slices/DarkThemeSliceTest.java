@@ -22,10 +22,10 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.app.UiModeManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.BatteryManager;
+import android.os.PowerManager;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -48,9 +48,9 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class DarkThemeSliceTest {
     @Mock
-    private UiModeManager mUiModeManager;
-    @Mock
     private BatteryManager mBatteryManager;
+    @Mock
+    private PowerManager mPowerManager;
 
     private Context mContext;
     private DarkThemeSlice mDarkThemeSlice;
@@ -63,11 +63,12 @@ public class DarkThemeSliceTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFeatureFactory.slicesFeatureProvider = new SlicesFeatureProviderImpl();
         mFeatureFactory.slicesFeatureProvider.newUiSession();
-        doReturn(mUiModeManager).when(mContext).getSystemService(UiModeManager.class);
+        doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
+        when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
-        mDarkThemeSlice = new DarkThemeSlice(mContext);
+        mDarkThemeSlice = spy(new DarkThemeSlice(mContext));
         mDarkThemeSlice.sKeepSliceShow = false;
     }
 
@@ -80,7 +81,7 @@ public class DarkThemeSliceTest {
 
     @Test
     public void isAvailable_inDarkThemeMode_returnFalse() {
-        when(mUiModeManager.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
+        doReturn(true).when(mDarkThemeSlice).isDarkThemeMode(mContext);
 
         assertThat(mDarkThemeSlice.isAvailable(mContext)).isFalse();
     }
@@ -100,23 +101,36 @@ public class DarkThemeSliceTest {
     }
 
     @Test
-    public void getSlice_notAvailable_returnNull() {
-        when(mUiModeManager.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
+    public void getSlice_batterySaver_returnErrorSlice() {
+        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
-        assertThat(mDarkThemeSlice.getSlice()).isNull();
+        final Slice mediaSlice = mDarkThemeSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
+        assertThat(metadata.isErrorSlice()).isTrue();
     }
 
     @Test
-    public void getSlice_newSession_notAvailable_returnNull() {
+    public void getSlice_notAvailable_returnErrorSlice() {
+        doReturn(true).when(mDarkThemeSlice).isDarkThemeMode(mContext);
+
+        final Slice mediaSlice = mDarkThemeSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
+        assertThat(metadata.isErrorSlice()).isTrue();
+    }
+
+    @Test
+    public void getSlice_newSession_notAvailable_returnErrorSlice() {
         // previous displayed: yes
         mDarkThemeSlice.sKeepSliceShow = true;
         // Session: use original value + 1 to become a new session
         mDarkThemeSlice.sActiveUiSession =
                 mFeatureFactory.slicesFeatureProvider.getUiSessionToken() + 1;
 
-        when(mUiModeManager.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
+        doReturn(true).when(mDarkThemeSlice).isDarkThemeMode(mContext);
 
-        assertThat(mDarkThemeSlice.getSlice()).isNull();
+        final Slice mediaSlice = mDarkThemeSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
+        assertThat(metadata.isErrorSlice()).isTrue();
     }
 
     @Test
@@ -149,7 +163,7 @@ public class DarkThemeSliceTest {
     }
 
     private void setBatteryCapacityLevel(int power_level) {
-        when(mUiModeManager.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_NO);
+        doReturn(false).when(mDarkThemeSlice).isDarkThemeMode(mContext);
         doReturn(mBatteryManager).when(mContext).getSystemService(BatteryManager.class);
         when(mBatteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY))
                 .thenReturn(power_level);
