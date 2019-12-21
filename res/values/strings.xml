@@ -2056,6 +2056,12 @@
     <string name="wifi_dpp_failure_generic">Make sure the device has been plugged in, charged, and turned on. If the issue continues, contact the device manufacturer</string>
     <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
     <string name="wifi_dpp_failure_not_supported">Adding \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d isn\u2019t supported by this device</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_cannot_find_network">Try moving the device closer to your Wi\u2011Fi access point/router</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_enrollee_authentication">Check the password and try again</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration">Contact the device manufacturer</string>
     <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
     <string name="wifi_dpp_check_connection_try_again">Check connection and try again</string>
     <!-- Title for the fragment choose network [CHAR LIMIT=50]  -->
@@ -4755,6 +4761,26 @@
     <string name="accessibility_captioning_title">Caption preferences</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_title">Magnification</string>
+    <!-- Title for the accessibility preference screen to edit magnification area. [CHAR LIMIT=35] -->
+    <string name="accessibility_magnification_mode_title">Magnification area</string>
+    <!-- Message for the accessibility preference screen to edit magnification area dialog. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_message">Choose the magnification area(s) you want to use when magnifying the screen</string>
+    <!-- Summary for the accessibility preference screen to edit full screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_full_screen_summary">Full screen</string>
+    <!-- Summary for the accessibility preference screen to edit window screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_window_screen_summary">Part of screen</string>
+    <!-- Summary for the accessibility preference screen to edit entire screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_all_summary">Full screen &amp; part of screen</string>
+    <!-- Message for the accessibility preference screen to edit entire screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_full_screen">Magnify entire screen</string>
+    <!-- Message for the accessibility preference screen to edit part of screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_window_screen">Magnify part of screen</string>
+    <!-- Title for the accessibility preference screen to show move controller. [CHAR LIMIT=35] -->
+    <string name="accessibility_magnification_window_control_switch_title">Show move controller</string>
+    <!-- Summary for the accessibility preference screen to show move controller. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_window_control_switch_summary">Show a joystick-like controller to move the magnification area</string>
+    <!-- Title for the accessibility preference screen to enable screen magnification settings. [CHAR LIMIT=35] -->
+    <string name="accessibility_magnification_service_settings_title">Magnify settings</string>
     <!-- Title for the accessibility preference screen to enable triple-tap gesture screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_gestures_title">Magnify with triple-tap</string>
     <!-- Title for the accessibility preference screen to enable navigation bar screen magnification. [CHAR LIMIT=35] -->
@@ -10252,6 +10278,9 @@
     <!-- Title for the screen to show all the gesture navigation settings [CHAR LIMIT=80] -->
     <string name="gesture_settings_activity_title">Gesture Settings</string>
 
+    <!-- Keywords for the gesture navigation settings. [CHAR LIMIT=NONE] -->
+    <string name="keywords_gesture_navigation_settings">gesture navigation, back sensitivity, back gesture</string>
+
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
     <!-- Preference and settings suggestion title text for ambient display double tap (tablet) [CHAR LIMIT=60]-->
@@ -11412,5 +11441,14 @@
 
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
+
+    <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_title"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_no_visible"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_visible_during_call"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_always_visible"></string>
 
 </resources>

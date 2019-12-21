@@ -19,14 +19,18 @@ package com.android.settings.wifi.dpp;
 import android.app.Application;
 import android.net.wifi.EasyConnectStatusCallback;
 import android.net.wifi.WifiManager;
+import android.util.SparseArray;
 
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 
 public class WifiDppInitiatorViewModel extends AndroidViewModel {
     private MutableLiveData<Integer> mEnrolleeSuccessNetworkId;
     private MutableLiveData<Integer> mStatusCode;
     private boolean mIsWifiDppHandshaking;
+    private String mTriedSsid;
+    private SparseArray<int[]> mTriedChannels;
+    private int[] mBandArray;
 
     public WifiDppInitiatorViewModel(Application application) {
         super(application);
@@ -46,6 +50,18 @@ public class WifiDppInitiatorViewModel extends AndroidViewModel {
         }
 
         return mStatusCode;
+    }
+
+    String getTriedSsid() {
+        return mTriedSsid;
+    }
+
+    SparseArray<int[]> getTriedChannels() {
+        return mTriedChannels;
+    }
+
+    int[] getBandArray() {
+        return mBandArray;
     }
 
     boolean isWifiDppHandshaking() {
@@ -83,8 +99,12 @@ public class WifiDppInitiatorViewModel extends AndroidViewModel {
         }
 
         @Override
-        public void onFailure(int code) {
+        public void onFailure(int code, String ssid, SparseArray<int[]> channelListArray,
+                int[] operatingClassArray) {
             mIsWifiDppHandshaking = false;
+            mTriedSsid = ssid;
+            mTriedChannels = channelListArray;
+            mBandArray = operatingClassArray;
             mStatusCode.setValue(code);
         }
 

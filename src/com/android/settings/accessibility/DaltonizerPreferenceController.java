@@ -42,15 +42,15 @@ public class DaltonizerPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        final String[] daltonizerSummarys = mContext.getResources().getStringArray(
-                R.array.daltonizer_mode_summary);
+        final String[] daltonizerSummaries = mContext.getResources().getStringArray(
+                R.array.daltonizer_mode_summaries);
         final int[] daltonizerValues = mContext.getResources().getIntArray(
                 R.array.daltonizer_type_values);
         final int timeoutValue =
                 DaltonizerRadioButtonPreferenceController.getSecureAccessibilityDaltonizerValue(
                         mContext.getContentResolver(), DALTONIZER_TYPE);
         final int idx = Ints.indexOf(daltonizerValues, timeoutValue);
-        final String serviceSummary = daltonizerSummarys[idx == -1 ? 0 : idx];
+        final String serviceSummary = daltonizerSummaries[idx == -1 ? 0 : idx];
 
         final CharSequence serviceState = AccessibilityUtil.getSummary(mContext,
                 DALTONIZER_ENABLED);

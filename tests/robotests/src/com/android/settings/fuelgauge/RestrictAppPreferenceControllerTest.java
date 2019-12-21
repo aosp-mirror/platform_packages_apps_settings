@@ -54,6 +54,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -84,10 +85,12 @@ public class RestrictAppPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         final List<AppOpsManager.OpEntry> allowOps = new ArrayList<>();
         allowOps.add(new AppOpsManager.OpEntry(
-                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_ALLOWED, new Pair[0]));
+                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_ALLOWED,
+                Collections.emptyMap()));
         final List<AppOpsManager.OpEntry> restrictedOps = new ArrayList<>();
         restrictedOps.add(new AppOpsManager.OpEntry(
-                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_IGNORED, new Pair[0]));
+                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_IGNORED,
+                Collections.emptyMap()));
         mAllowedPackageOps = new AppOpsManager.PackageOps(
                 ALLOWED_PACKAGE_NAME, ALLOWED_UID, allowOps);
         mRestrictedPackageOps = new AppOpsManager.PackageOps(

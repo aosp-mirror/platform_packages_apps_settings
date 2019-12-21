@@ -15,31 +15,30 @@
   limitations under the License
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="16dp">
+    android:layout_height="match_parent"
+    android:scrollbarStyle="outsideOverlay">
 
-    <CheckBox
-        android:id="@+id/checkbox"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:saveEnabled="false"/>
+        android:orientation="vertical"
+        android:paddingEnd="24dp"
+        android:paddingStart="24dp">
 
-    <TextView
-        android:id="@+id/summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="?android:attr/textColorSecondary"
-        android:paddingStart="32dp"/>
+        <TextView
+            style="@style/AccessibilityDialogDescription"
+            android:text="@string/accessibility_magnification_area_settings_message" />
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="32dp"
-        android:scaleType="fitCenter"/>
+        <include
+            android:id="@+id/magnify_full_screen"
+            layout="@layout/accessibility_edit_shortcut_component" />
 
-</LinearLayout>
+        <include
+            android:id="@+id/magnify_window_screen"
+            layout="@layout/accessibility_edit_shortcut_component" />
+
+    </LinearLayout>
+
+</ScrollView>

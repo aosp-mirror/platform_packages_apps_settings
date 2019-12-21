@@ -26,8 +26,10 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.display.WallpaperPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +39,15 @@ public class WallpaperSuggestionActivity extends StyleSuggestionActivityBase imp
 
     private static final String WALLPAPER_FLAVOR_EXTRA = "com.android.launcher3.WALLPAPER_FLAVOR";
     private static final String WALLPAPER_FOCUS = "focus_wallpaper";
+    private static final String WALLPAPER_ONLY = "wallpaper_only";
 
     @Override
     protected void addExtras(Intent intent) {
-        intent.putExtra(WALLPAPER_FLAVOR_EXTRA, WALLPAPER_FOCUS);
+        if (WizardManagerHelper.isAnySetupWizard(intent)) {
+            intent.putExtra(WALLPAPER_FLAVOR_EXTRA, WALLPAPER_ONLY);
+        } else {
+            intent.putExtra(WALLPAPER_FLAVOR_EXTRA, WALLPAPER_FOCUS);
+        }
     }
 
     @VisibleForTesting

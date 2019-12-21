@@ -146,6 +146,6 @@ public class MockLocationAppPreferenceControllerTest {
     }
 
     private AppOpsManager.OpEntry createOpEntry(int opMode) {
-        return new OpEntry(0, opMode, new Pair[0]);
+        return new OpEntry(0, opMode, Collections.emptyMap());
     }
 }

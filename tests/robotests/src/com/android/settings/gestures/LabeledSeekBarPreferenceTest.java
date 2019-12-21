@@ -27,6 +27,8 @@ import android.widget.SeekBar;
 
 import androidx.preference.Preference;
 
+import com.android.settings.widget.LabeledSeekBarPreference;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,11 +38,11 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GestureNavigationSeekBarPreferenceTest {
+public class LabeledSeekBarPreferenceTest {
 
     private Context mContext;
     private SeekBar mSeekBar;
-    private GestureNavigationSeekBarPreference mSeekBarPreference;
+    private LabeledSeekBarPreference mSeekBarPreference;
 
     @Mock
     private Preference.OnPreferenceChangeListener mListener;
@@ -50,7 +52,7 @@ public class GestureNavigationSeekBarPreferenceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mSeekBarPreference = new GestureNavigationSeekBarPreference(mContext, null);
+        mSeekBarPreference = new LabeledSeekBarPreference(mContext, null);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view =
                 inflater.inflate(mSeekBarPreference.getLayoutResource(),
