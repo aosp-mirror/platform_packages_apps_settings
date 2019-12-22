@@ -23,7 +23,7 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.wifi.WifiDialog2.WifiDialog2Listener;
-import com.android.settingslib.wifi.AccessPoint;
+import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +37,7 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)
 public class WifiDialog2Test {
-    @Mock private AccessPoint mMockAccessPoint;
+    @Mock private WifiEntry mMockWifiEntry;
 
     private Context mContext = RuntimeEnvironment.application;
 
@@ -51,9 +51,9 @@ public class WifiDialog2Test {
     @Test
     public void createModal_usesDefaultTheme() {
         WifiDialog2 modal = WifiDialog2
-                .createModal(mContext, mListener, mMockAccessPoint, WifiConfigUiBase2.MODE_CONNECT);
+                .createModal(mContext, mListener, mMockWifiEntry, WifiConfigUiBase2.MODE_CONNECT);
 
-        WifiDialog2 wifiDialog2 = new WifiDialog2(mContext, mListener, mMockAccessPoint,
+        WifiDialog2 wifiDialog2 = new WifiDialog2(mContext, mListener, mMockWifiEntry,
                 WifiConfigUiBase2.MODE_CONNECT, 0 /* style */, false /* hideSubmitButton */);
         assertThat(modal.getContext().getThemeResId())
                 .isEqualTo(wifiDialog2.getContext().getThemeResId());
@@ -61,10 +61,10 @@ public class WifiDialog2Test {
 
     @Test
     public void createModal_whenSetTheme_shouldBeCustomizedTheme() {
-        WifiDialog2 modal = WifiDialog2.createModal(mContext, mListener, mMockAccessPoint,
+        WifiDialog2 modal = WifiDialog2.createModal(mContext, mListener, mMockWifiEntry,
                 WifiConfigUiBase2.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light);
 
-        WifiDialog2 wifiDialog2 = new WifiDialog2(mContext, mListener, mMockAccessPoint,
+        WifiDialog2 wifiDialog2 = new WifiDialog2(mContext, mListener, mMockWifiEntry,
                 WifiConfigUiBase2.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light,
                         false /* hideSubmitButton */);
         assertThat(modal.getContext().getThemeResId())

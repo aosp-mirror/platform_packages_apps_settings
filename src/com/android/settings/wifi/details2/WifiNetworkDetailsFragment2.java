@@ -35,7 +35,8 @@ import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.wifi.WifiDialog;
+import com.android.settings.wifi.WifiConfigUiBase2;
+import com.android.settings.wifi.WifiDialog2;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -54,7 +55,7 @@ import java.util.List;
  * in order to properly render this page.
  */
 public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
-        WifiDialog.WifiDialogListener {
+        WifiDialog2.WifiDialog2Listener {
 
     private static final String TAG = "WifiNetworkDetailsFrg2";
 
@@ -69,7 +70,7 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
     private NetworkDetailsTracker mNetworkDetailsTracker;
     private HandlerThread mWorkerThread;
     private WifiDetailPreferenceController2 mWifiDetailPreferenceController2;
-    private List<WifiDialog.WifiDialogListener> mWifiDialogListeners = new ArrayList<>();
+    private List<WifiDialog2.WifiDialog2Listener> mWifiDialogListeners = new ArrayList<>();
 
     @Override
     public void onDestroy() {
@@ -106,10 +107,10 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
         if (getActivity() == null || mWifiDetailPreferenceController2 == null) {
             return null;
         }
-        // TODO(b/143326832): Replace it with WifiEntry.
-        return null;
-        //return WifiDialog.createModal(getActivity(), this, mAccessPoint,
-        //        WifiConfigUiBase.MODE_MODIFY);
+
+        final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
+        return WifiDialog2.createModal(getActivity(), this, wifiEntry,
+                WifiConfigUiBase2.MODE_MODIFY);
     }
 
     @Override
@@ -177,8 +178,8 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
     }
 
     @Override
-    public void onSubmit(WifiDialog dialog) {
-        for (WifiDialog.WifiDialogListener listener : mWifiDialogListeners) {
+    public void onSubmit(WifiDialog2 dialog) {
+        for (WifiDialog2.WifiDialog2Listener listener : mWifiDialogListeners) {
             listener.onSubmit(dialog);
         }
     }

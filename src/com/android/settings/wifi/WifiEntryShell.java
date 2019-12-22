@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi;
 
-import android.net.NetworkInfo.DetailedState;
-
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -65,24 +63,10 @@ public class WifiEntryShell {
     }
 
     /**
-     * Mapping of the corresponding {@link WifiDetailPreferenceController} method
-     */
-    public static boolean canModifyNetwork(WifiEntry wifiEntry) {
-        return false;
-    }
-
-    /**
      * Mapping of the corresponding {@link AccessPoint} method
      */
     public static String getSecurityString(WifiEntry wifiEntry, boolean concise) {
         return "None";
-    }
-
-    /**
-     * Mapping of the corresponding {@link AccessPoint} method
-     */
-    public static DetailedState getDetailedState(WifiEntry wifiEntry) {
-        return null;
     }
 
     // Passpoint methods

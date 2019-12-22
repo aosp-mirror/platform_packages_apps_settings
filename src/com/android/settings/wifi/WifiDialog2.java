@@ -30,7 +30,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.wifi.AccessPoint;
+import com.android.wifitrackerlib.WifiEntry;
 
 /**
  * Dialog for users to edit a Wi-Fi network.
@@ -66,7 +66,7 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
 
     private final int mMode;
     private final WifiDialog2Listener mListener;
-    private final AccessPoint mAccessPoint;
+    private final WifiEntry mWifiEntry;
 
     private View mView;
     private WifiConfigController2 mController;
@@ -77,8 +77,8 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
      * view.
      */
     public static WifiDialog2 createModal(Context context, WifiDialog2Listener listener,
-            AccessPoint accessPoint, int mode) {
-        return new WifiDialog2(context, listener, accessPoint, mode, 0 /* style */,
+            WifiEntry wifiEntry, int mode) {
+        return new WifiDialog2(context, listener, wifiEntry, mode, 0 /* style */,
                 mode == WifiConfigUiBase2.MODE_VIEW /* hideSubmitButton */);
     }
 
@@ -87,17 +87,17 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
      * view.
      */
     public static WifiDialog2 createModal(Context context, WifiDialog2Listener listener,
-            AccessPoint accessPoint, int mode, @StyleRes int style) {
-        return new WifiDialog2(context, listener, accessPoint, mode, style,
+            WifiEntry wifiEntry, int mode, @StyleRes int style) {
+        return new WifiDialog2(context, listener, wifiEntry, mode, style,
                 mode == WifiConfigUiBase2.MODE_VIEW /* hideSubmitButton */);
     }
 
-    /* package */ WifiDialog2(Context context, WifiDialog2Listener listener,
-                AccessPoint accessPoint, int mode, @StyleRes int style, boolean hideSubmitButton) {
+    /* package */ WifiDialog2(Context context, WifiDialog2Listener listener, WifiEntry wifiEntry,
+            int mode, @StyleRes int style, boolean hideSubmitButton) {
         super(context, style);
         mMode = mode;
         mListener = listener;
-        mAccessPoint = accessPoint;
+        mWifiEntry = wifiEntry;
         mHideSubmitButton = hideSubmitButton;
     }
 
@@ -110,7 +110,7 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
     protected void onCreate(Bundle savedInstanceState) {
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, /* root */ null);
         setView(mView);
-        mController = new WifiConfigController2(this, mView, mAccessPoint, mMode);
+        mController = new WifiConfigController2(this, mView, mWifiEntry, mMode);
         super.onCreate(savedInstanceState);
 
         if (mHideSubmitButton) {
@@ -121,7 +121,7 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
             mController.enableSubmitIfAppropriate();
         }
 
-        if (mAccessPoint == null) {
+        if (mWifiEntry == null) {
             mController.hideForgetButton();
         }
     }
@@ -168,7 +168,8 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
                     mListener.onSubmit(this);
                     break;
                 case BUTTON_FORGET:
-                    if (WifiUtils.isNetworkLockedDown(getContext(), mAccessPoint.getConfig())) {
+                    if (WifiUtils.isNetworkLockedDown(getContext(),
+                            mWifiEntry.getWifiConfiguration())) {
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
                                 RestrictedLockUtilsInternal.getDeviceOwner(getContext()));
                         return;
