@@ -187,7 +187,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         final Context context = getContext();
 
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mTelephonyManager = TelephonyManager.from(context).createForSubscriptionId(mSubId);
+        mTelephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
 
         onRestoreInstance(icicle);
     }

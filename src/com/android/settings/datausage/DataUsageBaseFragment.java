@@ -51,7 +51,7 @@ public abstract class DataUsageBaseFragment extends DashboardFragment {
 
         services.mPolicyEditor = new NetworkPolicyEditor(services.mPolicyManager);
 
-        services.mTelephonyManager = TelephonyManager.from(context);
+        services.mTelephonyManager = context.getSystemService(TelephonyManager.class);
         services.mSubscriptionManager = SubscriptionManager.from(context);
         services.mUserManager = UserManager.get(context);
     }

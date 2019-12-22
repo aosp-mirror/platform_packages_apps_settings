@@ -27,7 +27,6 @@ import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.RadioAccessFamily;
-import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -148,7 +147,8 @@ public class EnabledNetworkModePreferenceController extends
     public void init(Lifecycle lifecycle, int subId) {
         mSubId = subId;
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
 
         final boolean isLteOnCdma =
                 mTelephonyManager.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
