@@ -18,9 +18,7 @@ package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
-
-import androidx.preference.PreferenceScreen;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
@@ -28,33 +26,34 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 
 @RunWith(RobolectricTestRunner.class)
 public class SelectDSUPreferenceControllerTest {
 
     @Mock
     private SwitchPreference mPreference;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
 
-    private Context mContext;
+    private FragmentActivity mActivity;
     private SelectDSUPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new SelectDSUPreferenceController(mContext);
-        mPreference = new SwitchPreference(mContext);
+        mActivity = Robolectric.buildActivity(FragmentActivity.class).get();
+        mController = new SelectDSUPreferenceController(mActivity);
+        mPreference = new SwitchPreference(mActivity);
+        mPreference.setKey("dsu_loader");
     }
 
     @Test
-    public void onPreferenceChanged_settingEnabled_turnOnGpuViewUpdates() {
-        assertThat(mPreference != null).isTrue();
-        mPreference.setKey("dsu_loader");
-        assertThat(mPreference.getKey().equals("dsu_loader")).isTrue();
-        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+    public void handlePreferenceTreeClick_shouldLaunchCorrectIntent() {
+        mController.handlePreferenceTreeClick(mPreference);
+
+        assertThat(Shadows.shadowOf(mActivity)
+                .getNextStartedActivityForResult().intent.getComponent().getClassName())
+                .isEqualTo("com.android.settings.development.DSULoader");
     }
 }
