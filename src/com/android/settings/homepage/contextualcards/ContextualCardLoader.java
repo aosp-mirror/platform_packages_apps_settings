@@ -27,6 +27,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,8 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     @VisibleForTesting
     static final int DEFAULT_CARD_COUNT = 3;
+    @VisibleForTesting
+    static final String CONTEXTUAL_CARD_COUNT = "contextual_card_count";
     static final int CARD_CONTENT_LOADER_ID = 1;
 
     private static final String TAG = "ContextualCardLoader";
@@ -130,8 +133,9 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         final List<ContextualCard> hiddenCards = new ArrayList<>();
 
         final int size = eligibleCards.size();
+        final int cardCount = getCardCount();
         for (int i = 0; i < size; i++) {
-            if (i < DEFAULT_CARD_COUNT) {
+            if (i < cardCount) {
                 visibleCards.add(eligibleCards.get(i));
             } else {
                 hiddenCards.add(eligibleCards.get(i));
@@ -147,6 +151,14 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
                     ContextualCardLogUtils.buildCardListLog(hiddenCards));
         }
         return visibleCards;
+    }
+
+    @VisibleForTesting
+    int getCardCount() {
+        // Return the card count if Settings.Global has KEY_CONTEXTUAL_CARD_COUNT key,
+        // otherwise return the default one.
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                CONTEXTUAL_CARD_COUNT, DEFAULT_CARD_COUNT);
     }
 
     @VisibleForTesting
