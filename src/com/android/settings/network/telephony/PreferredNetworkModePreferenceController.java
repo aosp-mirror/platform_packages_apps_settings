@@ -20,7 +20,6 @@ import android.content.Context;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
-import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -97,7 +96,8 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     public void init(int subId) {
         mSubId = subId;
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
 
         final boolean isLteOnCdma =
                 mTelephonyManager.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
