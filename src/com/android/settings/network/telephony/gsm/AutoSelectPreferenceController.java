@@ -144,7 +144,8 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     public AutoSelectPreferenceController init(int subId) {
         mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
         final PersistableBundle carrierConfig = mContext.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(mSubId);
         mOnlyAutoSelectInHome = carrierConfig != null
