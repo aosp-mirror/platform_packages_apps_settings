@@ -18,37 +18,32 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+import static org.robolectric.Shadows.shadowOf;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 
 import androidx.preference.Preference;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowTelephonyManager;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class EuiccPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
-    @Mock
     private TelephonyManager mTelephonyManager;
-
-    @Mock
-    private Activity mActivity;
+    private ShadowTelephonyManager mShadowTelephonyManager;
 
     private EuiccPreferenceController mController;
     private Preference mPreference;
@@ -58,12 +53,14 @@ public class EuiccPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(RuntimeEnvironment.application);
-        doReturn(mTelephonyManager).when(mActivity).getSystemService(Context.TELEPHONY_SERVICE);
-        doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
+        mContext = spy(RuntimeEnvironment.application.getBaseContext());
+
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        mShadowTelephonyManager = shadowOf(mTelephonyManager);
+        mShadowTelephonyManager.setTelephonyManagerForSubscriptionId(SUB_ID, mTelephonyManager);
 
         mPreference = new Preference(mContext);
-        mController = new EuiccPreferenceController(mActivity, "euicc");
+        mController = new EuiccPreferenceController(mContext, "euicc");
         mController.init(SUB_ID);
         mPreference.setKey(mController.getPreferenceKey());
     }
@@ -71,10 +68,10 @@ public class EuiccPreferenceControllerTest {
     @Test
     public void handlePreferenceTreeClick_startActivity() {
         ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(captor.capture());
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mActivity).startActivity(captor.capture());
         assertThat(captor.getValue().getAction()).isEqualTo(
                 EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
     }
