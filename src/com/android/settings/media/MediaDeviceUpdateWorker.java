@@ -18,6 +18,8 @@ package com.android.settings.media;
 
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
 
+import static com.android.settings.media.MediaOutputSlice.MEDIA_PACKAGE_NAME;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -45,8 +47,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     private final Context mContext;
     private final List<MediaDevice> mMediaDevices = new ArrayList<>();
     private final DevicesChangedBroadcastReceiver mReceiver;
-
-    private String mPackageName;
+    private final String mPackageName;
 
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
@@ -54,11 +55,8 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     public MediaDeviceUpdateWorker(Context context, Uri uri) {
         super(context, uri);
         mContext = context;
+        mPackageName = uri.getQueryParameter(MEDIA_PACKAGE_NAME);
         mReceiver = new DevicesChangedBroadcastReceiver();
-    }
-
-    public void setPackageName(String packageName) {
-        mPackageName = packageName;
     }
 
     @Override

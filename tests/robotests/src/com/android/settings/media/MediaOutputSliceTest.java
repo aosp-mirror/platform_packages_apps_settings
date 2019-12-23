@@ -98,7 +98,6 @@ public class MediaOutputSliceTest {
 
         mMediaOutputSlice = new MediaOutputSlice(mContext);
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, MEDIA_OUTPUT_SLICE_URI);
-        mMediaDeviceUpdateWorker.setPackageName(TEST_PACKAGE_NAME);
         mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
         mMediaDeviceUpdateWorker.mLocalMediaManager = mLocalMediaManager;
         mMediaOutputSlice.init(TEST_PACKAGE_NAME, mMediaDeviceUpdateWorker);

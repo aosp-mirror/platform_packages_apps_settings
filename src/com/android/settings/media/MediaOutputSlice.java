@@ -55,16 +55,13 @@ public class MediaOutputSlice implements CustomSliceable {
     private final Context mContext;
 
     private MediaDeviceUpdateWorker mWorker;
-    private String mPackageName;
 
     public MediaOutputSlice(Context context) {
         mContext = context;
-        mPackageName = getUri().getQueryParameter(MEDIA_PACKAGE_NAME);
     }
 
     @VisibleForTesting
     void init(String packageName, MediaDeviceUpdateWorker worker) {
-        mPackageName = packageName;
         mWorker = worker;
     }
 
@@ -129,10 +126,7 @@ public class MediaOutputSlice implements CustomSliceable {
 
     private MediaDeviceUpdateWorker getWorker() {
         if (mWorker == null) {
-            mWorker = (MediaDeviceUpdateWorker) SliceBackgroundWorker.getInstance(getUri());
-            if (mWorker != null) {
-                mWorker.setPackageName(mPackageName);
-            }
+            mWorker = SliceBackgroundWorker.getInstance(getUri());
         }
         return mWorker;
     }
