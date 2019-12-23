@@ -24,6 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -77,10 +78,13 @@ public class AddAppNetworksActivity extends FragmentActivity {
                 getIntent().getParcelableArrayListExtra(Settings.EXTRA_WIFI_CONFIGURATION_LIST));
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager.findFragmentByTag(TAG) == null) {
-            final AddAppNetworksFragment fragment = new AddAppNetworksFragment();
+        Fragment fragment = fragmentManager.findFragmentByTag(TAG);
+        if (fragment == null) {
+            fragment = new AddAppNetworksFragment();
             fragment.setArguments(mBundle);
             fragmentManager.beginTransaction().add(R.id.main_content, fragment, TAG).commit();
+        } else {
+            ((AddAppNetworksFragment) fragment).createContent(mBundle);
         }
     }
 }
