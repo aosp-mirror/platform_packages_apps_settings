@@ -354,16 +354,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Izberi po zamiku glede na UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ura"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Samodejno zaklepanje"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po stanju pripravljenosti"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Takoj po stanju pripravljenosti, razen ko <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> poskrbi, da ostane odklenjen"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po stanju pripravljenosti, razen ko <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> poskrbi, da ostane odklenjen"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Zaklepanje po preteku časovne omejitve za zaslon"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po pre teku časovne omejitve"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Takoj po preteku časovne omejitve, razen ko <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> poskrbi, da ostane odklenjen"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po preteku časovne omejitve, razen ko <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> poskrbi, da ostane odklenjen"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Prikaži lastnikove podatke na zaklenjenem zaslonu"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Sporočilo na zaklenjenem zaslonu"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Omogoči pripomočke"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Onemogočil skrbnik"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Prikaz možnosti za zaklep"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Prikaz možnosti gumba za vklop, s katero izklopite funkcijo Smart Lock, odklepanje s prstnimi odtisi in obvestila na zaklenjenem zaslonu"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Prikaz možnosti gumba za vklop, s katero izklopite funkcijo Smart Lock, odklepanje z biometričnimi podatki in obvestila na zaklenjenem zaslonu"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Posredniki zaupanja le podaljšajo čas odklenjenosti"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Če je ta možnost omogočena, posredniki zaupanja poskrbijo, da naprava ostane odklenjena dalj časa, vendar ne more več odkleniti zaklenjene naprave."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Zakleni zaslon ob izgubljenem zaupanju"</string>
@@ -403,10 +403,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Zaklepanje zaslona, prstni odtis"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Zaklepanje zaslona"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Obraz je dodan"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Dotaknite se za nast. preverjanja obraza"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Preverjanje obraza"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Kako nastaviti odklepanje z obrazom"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Nastavitev odklepanja z obrazom"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Nastavite odklepanje z obrazom"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Odklepanje z obrazom"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Odklepanje z obrazom za službo"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Kako nastavite odklepanje z obrazom"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Nastavitev odklepanja z obrazom"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Preverjanje pristnosti z obrazom"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Začni"</string>
@@ -415,11 +416,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Prekliči"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Ne, hvala"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Strinjam se"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Več"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Odklepanje z obrazom"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Preverjanje pristnosti z obrazom"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Uporabljajte obraz za odklepanje telefona, odobritev nakupov ali prijavo v aplikacije."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Z obrazom odklenite telefon ali odobrite nakupe.\n\nOpomba: obraza ne morete uporabiti za odklepanje te naprave. Za več informacij se obrnite na skrbnika v organizaciji."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Uporabljajte obraz za odklepanje telefona, odobritev nakupov ali prijavo v aplikacije"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -434,19 +439,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Včlanitev obraza ni uspela."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Vse je pravilno nastavljeno."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Končano"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Izboljšajte učinkovitost odklepanja z obrazom"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Znova nastavite odklepanje z obrazom"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Znova nastavite odklepanje z obrazom"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Izboljšajte varnost in učinkovitost"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Nastavite odklepanje z obrazom"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Če želite znova nastaviti odklepanje z obrazom, izbrišite trenutne podatke o obrazu.\n\nPodatki o obrazu, ki jih uporablja odklepanje z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona, prijavo v aplikacije in potrjevanje plačil potrebovali kodo PIN, vzorec ali geslo."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Uporabi odklepanje z obrazom za"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Odklepanje telefona"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Prijava v aplikacije in plačila"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Obvezno za odklepanje z obrazom"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Oči, uprte v zaslon"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Za odklepanje telefona morate vedno gledati v zaslon z odprtimi očmi"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Gumb za potrditev"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Vedno zahtevaj potrditev pri preverjanju pristnosti za aplikacije"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Zahteve za odklepanje z obrazom"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Oči morajo biti odprte"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Če želite odkleniti telefon, morate imeti odprte oči"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Vedno zahtevaj potrditev"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Pri odklepanju z obrazom v aplikacijah vedno zahtevaj korak potrditve"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Izbriši obraz"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Nastavi novo odklepanje z obrazom"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\nče pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nTelefon lahko odklene nekdo drug, če ga podrži pred vašim obrazom, ko imate odprte oči.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš otrok ali enojajčni dvojček."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Nastavite odklepanje z obrazom"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\ntelefon se lahko nenamerno odklene, če ga pogledate.\n\nTelefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom – celo kadar imate oči zaprte.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Želite izbrisati podatke o obrazu?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Podatki, ki jih je zabeležilo odklepanje z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona, prijavo v aplikacije in potrjevanje plačil potrebovali kodo PIN, vzorec ali geslo."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Podatki o obrazu, ki se uporabljajo za odklepanje z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona, prijavo v aplikacije in potrjevanje plačil potrebovali kodo PIN, vzorec ali geslo."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Za odklepanje telefona uporabite funkcijo odklepanja z obrazom"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Prstni odtis"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Upravlj. prst. odtisov"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Upor. prst. odtisa za"</string>
@@ -499,9 +511,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Tablični računalnik zaščitite z možnostjo zaklepanja zaslona, tako da ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Možnost zaklepanja zaslona potrebujete tudi za nastavitev prstnega odtisa. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN, vzorec ali geslo."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Napravo zaščitite z možnostjo zaklepanja zaslona, tako da je ne bo mogel uporabljati nihče drug, če jo izgubite ali vam jo ukradejo. Možnost zaklepanja zaslona potrebujete tudi za nastavitev prstnega odtisa. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN, vzorec ali geslo."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Telefon zaščitite z možnostjo zaklepanja zaslona, tako da ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Možnost zaklepanja zaslona potrebujete tudi za nastavitev prstnega odtisa. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN, vzorec ali geslo."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Tablični računalnik zaščitite z možnostjo zaklepanja zaslona, tako da ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev preverjanja pristnosti z obrazom. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN, vzorec ali geslo."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Napravo zaščitite z možnostjo zaklepanja zaslona, tako da je ne bo mogel uporabljati nihče drug, če jo izgubite ali vam jo ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev preverjanja pristnosti z obrazom. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN, vzorec ali geslo."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Telefon zaščitite z možnostjo zaklepanja zaslona, tako da ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev preverjanja pristnosti z obrazom. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN, vzorec ali geslo."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Če tablični računalnik zaščitite z možnostjo zaklepanja zaslona, ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev odklepanja z obrazom. Za vrnitev se dotaknite »Prekliči«."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Če napravo zaščitite z možnostjo zaklepanja zaslona, je ne bo mogel uporabljati nihče drug, če jo izgubite ali vam jo ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev odklepanja z obrazom. Za vrnitev se dotaknite »Prekliči«."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Če telefon zaščitite z možnostjo zaklepanja zaslona, ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev odklepanja z obrazom. Za vrnitev se dotaknite »Prekliči«."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Ne želite nastaviti kode PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Ne želite nastaviti gesla?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Ne želite nastaviti vzorca?"</string>
@@ -602,10 +614,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Prstni odtis in geslo"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Nadaljevanje brez prstnega odtisa"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Telefon lahko odklenete s prstnim odtisom. Zaradi varnosti ta možnost zahteva uporabo nadomestnega zaklepanja telefona."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Preverjanje pristnosti obraza + vzorec"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Preverjanje pristnosti obraza + koda PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Preverjanje pristnosti obraza + geslo"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Nadaljevanje brez preverjanja pristnosti obraza"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Odklepanje z obrazom + vzorec"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Odklepanje z obrazom + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Odklepanje z obrazom + geslo"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Nadaljevanje brez odklepanja z obrazom"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Telefon lahko odklenete z obrazom. Zaradi varnosti ta možnost zahteva uporabo nadomestnega načina zaklepanja zaslona."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Onemogočil skrbnik, pravilnik za šifriranje ali shramba poverilnic"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Brez"</string>
@@ -1256,11 +1268,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimiziranje ravni svetlosti glede na razpoložljivo svetlobo. Ko je ta funkcija vklopljena, lahko še vedno začasno prilagodite svetlost."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Svetlost zaslona se bo samodejno prilagajala glede na okolje in dejavnosti. Če želite, da funkcija za prilagodljivo svetlost hitreje spozna vaše želje, lahko ročno premaknete drsnik."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Prikaz ravnovesja beline"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Zaznavanje pogleda na zaslon"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Vklopljeno / zaslon se ne bo izklopil, če ga gledate"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Izklopljeno"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Preprečuje, da bi se zaslon izklopil, če ga gledate."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Potreben je dostop do fotoaparata"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Dotaknite se, če želite upravljati dovoljenja za storitve osebnega prilagajanja naprave"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Preprečuje, da bi se zaslon izklopil, če ga gledate"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Funkcija zaznavanja pogleda na zaslon uporablja sprednji fotoaparat, da zazna, ali kdo gleda zaslon. Funkcija se izvaja v napravi, slike pa se v nobenem primeru ne shranijo in ne pošiljajo Googlu."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ko gledate zaslon, naj ostane vklopljen"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nočna svetloba"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Nočna svetloba zaslon obarva z jantarnim odtenkom. To olajša gledanje na zaslon ali branje pri šibki svetlobi in vam lahko pomaga prej zaspati."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Urnik"</string>
@@ -1297,7 +1313,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Prilagajanje zaslona"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Izberite ozadje iz"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Prilagajanje telefona Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Preizkusite različne sloge, ozadja, ure in drugo"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Preizkusite različne sloge, ozadja in drugo"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Ohranjevalnik zaslona"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Med polnjenjem ali v stojalu"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Eno ali drugo"</string>
@@ -1374,7 +1390,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Različica radijske programske opreme"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Različica jedra"</string>
     <string name="build_number" msgid="3075795840572241758">"Delovna različica"</string>
-    <string name="module_version" msgid="7329118610303805859">"Posodobitev sistema za Google Play"</string>
+    <string name="module_version" msgid="7329118610303805859">"Posodobitev sistema prek Googla Play"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Ni na voljo"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Stanje"</string>
     <string name="device_status" msgid="607405385799807324">"Stanje"</string>
@@ -1752,7 +1768,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Priročnik z varn. in zak. predpis. inf."</string>
     <string name="copyright_title" msgid="865906688917260647">"Avtorska pravica"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenca"</string>
-    <string name="module_license_title" msgid="258743239066841860">"Licence za posodabljanje sistema Google Play"</string>
+    <string name="module_license_title" msgid="258743239066841860">"Licence za posodabljanje sistema prek Googla Play"</string>
     <string name="terms_title" msgid="7697580845616764642">"Določila in pogoji"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Licenca za WebView v sistemu"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Ozadja"</string>
@@ -1786,9 +1802,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Geslo je nastavljeno"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Koda PIN je nastavljena"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Vzorec je nastavljen"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Nastavite nadomestek preverjanja obraza"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Nastavite nadomestek preverjanja obraza"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Nastavite nadomestek preverjanja obraza"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Za odklepanje z obrazom nastavite geslo"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Za odklepanje z obrazom nastavite vzorec"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Za odklepanje z obrazom nastavite PIN"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Če želite nadaljevati, uporabite vzorec za napravo"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Če želite nadaljevati, vnesite kodo PIN za napravo"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Če želite nadaljevati, vnesite geslo za napravo"</string>
@@ -1885,7 +1901,7 @@
     <string name="data_size_label" msgid="6117971066063850416">"Uporabniški podatki"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"Podatki na pogonu USB"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"Kartica SD"</string>
-    <string name="uninstall_text" msgid="3644892466144802466">"Odstrani"</string>
+    <string name="uninstall_text" msgid="3644892466144802466">"Odmesti"</string>
     <string name="uninstall_all_users_text" msgid="851857393177950340">"Odstrani za vse uporabnike"</string>
     <string name="install_text" msgid="884360662922471113">"Namesti"</string>
     <string name="disable_text" msgid="6544054052049395202">"Onemogoči"</string>
@@ -2135,6 +2151,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Če želite vklopiti ali izklopiti storitev funkcij za ljudi s posebnimi potrebami, s tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med storitvami, s tremi prsti povlecite navzgor in pridržite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Razumem"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Gumb »Dostopnost« je nastavljen na <xliff:g id="SERVICE">%1$s</xliff:g>. Če želite uporabiti povečavo, se dotaknite gumba »Dostopnost« in ga pridržite, nato pa izberite povečavo."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Poteza za ljudi s posebnimi potrebami je nastavljena na <xliff:g id="SERVICE">%1$s</xliff:g>. Če želite uporabiti povečavo, z dvema prstoma povlecite z dna zaslona navzgor in pridržite. Nato izberite povečavo."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Bližnjica na tipki za glasnost"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Storitev z bližnjico"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Dovoli na zaklenjenem zaslonu"</string>
@@ -2170,7 +2187,8 @@
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Odziv na dotik"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Uporaba storitve"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Uporaba popravljanja barv"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Uporaba napisov"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Uporaba podnapisov"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Te nastavitve ne podpirajo vse aplikacije."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Naprej"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Slušni pripomočki"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Noben slušni pripomoček ni povezan"</string>
@@ -2236,7 +2254,7 @@
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Standardne možnosti"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Jezik"</string>
     <string name="captioning_text_size" msgid="6737002449104466028">"Velikost besedila"</string>
-    <string name="captioning_preset" msgid="8939737196538429044">"Slog napisov"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"Slog podnapisov"</string>
     <string name="captioning_custom_options_title" msgid="5067500939930322405">"Možnosti po meri"</string>
     <string name="captioning_background_color" msgid="9053011212948992570">"Barva ozadja"</string>
     <string name="captioning_background_opacity" msgid="6029993616419971202">"Neprosojnost ozadja"</string>
@@ -3468,6 +3486,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Prikaz na poteznem zaslonu z obvestili, v vrstici stanja in na zaklenjenem zaslonu"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Utripajoča lučka"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Na zaklenjenem zaslonu"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Preskok zaklenjenega zaslona"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Po odklepanju z obrazom se odpre nazadnje uporabljeni zaslon"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"odklepanje zaslona, zaklenjen zaslon, preskok, zaobitje"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Ko je delovni profil zaklenjen"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Obvestila na zaklenjenem zaslonu"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Prikaži obvestila z zvočnim opozorilom in tiha obvestila"</string>
@@ -3959,7 +3980,7 @@
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Aplikaciji za pomoč dovoli dostop do posnetka zaslona"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Utripanje zaslona"</string>
     <string name="assist_flash_summary" msgid="9160668468824099262">"Utripanje robov zaslona, ko aplikacija za pomoč dostopa do besedila z zaslona ali posnetka zaslona"</string>
-    <string name="assist_footer" msgid="1982791172085896864">"Aplikacije za pomoč vam pomagajo na podlagi podatkov na zaslonu, ki si ga ogledujete. Nekatere aplikacije podpirajo storitve zaganjalnika in glasovnega vnosa pri zagotavljanju integrirane pomoči."</string>
+    <string name="assist_footer" msgid="1982791172085896864">"Aplikacije za pomoč vam lahko pomagajo na podlagi podatkov na zaslonu, ki si ga ogledujete. Nekatere aplikacije podpirajo storitve zaganjalnika in glasovnega vnosa in vam tako zagotavljajo celovito pomoč."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Povprečna uporaba pomnilnika"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Največja uporaba pomnilnika"</string>
     <string name="memory_usage" msgid="1781358557214390033">"Uporaba pomnilnika"</string>
@@ -4252,9 +4273,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Manjka predmet za uvrščanje."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Predmet za uvrščanje ne vsebuje tega ključa."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Nastavljanje teme"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Barva poudarka"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Pisava naslova/telesa"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Oblika ikone"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Privzeta nastavitev naprave"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Zareza zaslona"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"izrez prikaza"</string>
@@ -4540,11 +4558,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Grafični gonilnik sistema"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Telefon ne podpira nastavitve"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Tablični računalnik ne podpira nastavitve"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Naprava ne podpira nastavitve"</string>

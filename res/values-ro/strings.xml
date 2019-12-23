@@ -352,16 +352,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Select. după decalaj de la UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Blocare automată"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"La <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după inactivitate"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Imediat după intervalul de inactivitate, cu excepția cazului când este păstrat deblocat prin <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"La <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după intrarea în inactivitate, dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Blochează după dezactivarea ecranului"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după dezactivarea ecranului"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Imediat după dezactivarea ecranului, dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"La <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după dezactivarea ecranului, dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Afișați info. proprietar la blocarea ecranului"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Mesaj pe ecranul de blocare"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Activați widgeturi"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Dezactivat de administrator"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Afișați opțiunea de blocare strictă"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Afișați opțiunea butonului de pornire care dezactivează Smart Lock, deblocarea cu amprentă și notificările pe ecranul de blocare."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Afișați opțiunea butonului de pornire care dezactivează Smart Lock, deblocarea biometrică și notificările pe ecranul de blocare"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Doar agenții de încredere mențin dispozitivul deblocat mai mult timp"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Dacă este activată această opțiune, agenții de încredere vor menține dispozitivul deblocat mai mult timp, dar nu mai pot debloca un dispozitiv blocat."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Ecranul de blocare când încrederea este pierdută"</string>
@@ -400,10 +400,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Blocarea ecranului, amprentă"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Blocarea ecranului"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Chip adăugat"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Atingeți pt. a config. autentif. facială"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Autentificare facială"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Configurarea Deblocării faciale"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Configurați Deblocarea facială"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Configurați deblocarea facială"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Deblocare facială"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Deblocare facială pentru serviciu"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Configurarea deblocării faciale"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Configurați deblocarea facială"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Folosiți-vă chipul pentru autentificare"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Începeți"</string>
@@ -412,11 +413,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Anulați"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Nu, mulțumesc"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Sunt de acord"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Mai multe"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Deblocați folosindu-vă chipul"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Folosiți-vă chipul pentru autentificare"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Folosiți-vă chipul ca să deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Folosiți fața ca să deblocați telefonul sau să aprobați achizițiile.\n\nNotă: nu vă puteți folosi fața ca să deblocați acest dispozitiv. Pentru informații suplimentare, contactați administratorul organizației."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Folosiți-vă chipul ca să deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -431,19 +436,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Înregistrarea feței nu a funcționat."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Gata. Arată bine."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Terminat"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Îmbunătățiți performanța deblocării faciale"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Reconfigurați deblocarea facială"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Reconfigurați deblocarea facială"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Îmbunătățiți securitatea și performanța"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Configurați deblocarea facială"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Ștergeți datele faciale actuale pentru a reconfigura deblocarea facială.\n\nDatele faciale folosite de deblocarea facială vor fi șterse definitiv și în siguranță. După eliminare, veți avea nevoie de codul PIN, de model sau de parolă ca să deblocați telefonul, să vă conectați la aplicații și să confirmați plățile."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Folosiți deblocarea facială pentru"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Se deblochează telefonul"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Conectare la aplicații/plăți"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Obligatoriu pentru deblocarea facială"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Deschideți ochii privind ecranul"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Pentru a debloca telefonul, solicitați întotdeauna utilizatorului să privească ecranul"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Buton de confirmare"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Când vă autentificați în aplicații, solicitați întotdeauna confirmare"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Cerințe pentru deblocarea facială"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Ochii trebuie să fie deschiși"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Pentru a debloca telefonul, trebuie să aveți ochii deschiși"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Se solicită întotdeauna confirmarea"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Când folosiți deblocarea facială în aplicații, solicitați întotdeauna confirmarea"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Ștergeți datele faciale"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Configurați o nouă deblocare facială"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Folosiți Deblocarea facială ca să deblocați dispozitivul, să vă conectați la aplicații și să confirmați plăți.\n\nRețineți:\ndacă vă uitați la telefon, îl puteți debloca când nu doriți.\n\nTelefonul poate fi deblocat de altcineva dacă este ținut în dreptul feței dvs., când aveți ochii deschiși.\n\nTelefonul poate fi deblocat de cineva are seamănă mult cu dvs., cum ar fi copilul dvs. sau un frate sau o soră geamănă."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Configurați deblocarea facială"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Folosiți deblocarea facială ca să deblocați dispozitivul, să vă conectați la aplicații și să confirmați plăți.\n\nRețineți:\ndacă vă uitați la telefon, îl puteți debloca când nu doriți.\n\nTelefonul poate fi deblocat de altcineva dacă este ținut în dreptul feței dvs., chiar dacă aveți ochii închiși.\n\nTelefonul poate fi deblocat de cineva are seamănă mult cu dvs., cum ar fi un frate sau o soră geamănă."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Ștergeți datele faciale?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Datele înregistrate de deblocarea facială vor fi șterse permanent și în siguranță. După eliminare, veți avea nevoie de codul PIN, de model sau de parolă ca să deblocați telefonul, să vă conectați la aplicații și să confirmați plățile."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Datele faciale folosite de deblocarea facială vor fi șterse definitiv și în siguranță. După eliminare, veți avea nevoie de codul PIN, de model sau de parolă ca să deblocați telefonul, să vă conectați la aplicații și să confirmați plățile."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Folosiți deblocarea facială ca să vă deblocați telefonul"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Amprentă"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gestionați amprentele"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Folosiți amprenta la"</string>
@@ -495,9 +507,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Protejați-vă tableta cu o opțiune de blocare a ecranului, astfel încât nimeni să nu o poată folosi dacă o pierdeți sau este furată. Aveți nevoie și de o opțiune de blocare a ecranului pentru a configura amprenta. Atingeți Anulați, apoi setați un PIN, un model sau o parolă."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Protejați-vă dispozitivul cu o opțiune de blocare a ecranului, astfel încât nimeni să nu îl poată folosi dacă îl pierdeți sau este furat. Aveți nevoie și de o opțiune de blocare a ecranului pentru a configura amprenta. Atingeți Anulați, apoi setați un PIN, un model sau o parolă."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Protejați-vă telefonul cu o opțiune de blocare a ecranului, astfel încât nimeni să nu îl poată folosi dacă îl pierdeți sau este furat. Aveți nevoie și de o opțiune de blocare a ecranului pentru a configura amprenta. Atingeți Anulați, apoi setați un PIN, un model sau o parolă."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Protejați-vă tableta cu o opțiune de blocare a ecranului, astfel încât nimeni să nu o poată folosi dacă o pierdeți sau este furată. Aveți nevoie și de o opțiune de blocare a ecranului pentru a configura autentificarea facială. Atingeți Anulați, apoi setați un PIN, un model sau o parolă."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Protejați-vă dispozitivul cu o opțiune de blocare a ecranului, astfel încât nimeni să nu îl poată folosi dacă îl pierdeți sau este furat. Aveți nevoie și de o opțiune de blocare a ecranului pentru a configura autentificarea facială. Atingeți Anulați, apoi setați un PIN, un model sau o parolă."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Protejați-vă telefonul cu o opțiune de blocare a ecranului, astfel încât nimeni să nu îl poată folosi dacă îl pierdeți sau este furat. Aveți nevoie și de o opțiune de blocare a ecranului pentru a configura autentificarea facială. Atingeți Anulați, apoi setați un PIN, un model sau o parolă."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Protejând tableta cu o opțiune de blocare a ecranului, nimeni nu va putea să o folosească dacă o pierdeți sau este furată. Aveți nevoie și de o opțiune de blocare a ecranului pentru a configura deblocarea facială. Pentru a reveni, atingeți Anulați."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Protejând dispozitivul cu o opțiune de blocare a ecranului, nimeni nu va putea să îl folosească dacă îl pierdeți sau este furat. Aveți nevoie și de o opțiune de blocare a ecranului pentru a configura deblocarea facială. Pentru a reveni, atingeți Anulați."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Protejând telefonul cu o opțiune de blocare a ecranului, nimeni nu va putea să îl folosească dacă îl pierdeți sau este furat. Aveți nevoie și de o opțiune de blocare a ecranului pentru a configura deblocarea facială. Pentru a reveni, atingeți Anulați."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Omiteți configurarea PIN-ului?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Omiteți configurarea parolei?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Omiteți configurarea modelului?"</string>
@@ -598,10 +610,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Amprentă + parolă"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Continuați fără amprentă"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Puteți debloca telefonul folosind amprenta. Din motive de securitate, această opțiune necesită o blocare a ecranului de rezervă."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Autentificare facială + model"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Autentificare facială + cod PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Autentificare facială + parolă"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Continuați fără autentificare facială"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Deblocare facială + model"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Deblocare facială + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Deblocare facială + parolă"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Continuați fără deblocarea facială"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Puteți debloca telefonul folosind chipul. Din motive de securitate, această opțiune necesită o blocare a ecranului de rezervă."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Dezactivat de administrator, politica de criptare sau spațiul de stocare a certificatelor"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Fără"</string>
@@ -1237,11 +1249,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimizați luminozitatea pentru lumina disponibilă. Când funcția este activată, puteți ajusta temporar luminozitatea."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Luminozitatea ecranului se va adapta automat la mediul și activitățile dvs. Puteți să mutați manual glisorul pentru a ajuta luminozitatea adaptivă să vă învețe preferințele."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Balansul de alb al ecranului"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Atenție la ecran"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Activat/Ecranul nu se va închide dacă vă uitați la el"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Dezactivat"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Nu lasă ecranul să se închidă dacă vă uitați la el."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Este necesar accesul la camera foto"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Atingeți pentru a gestiona permisiunile pentru Serviciile de personalizare a dispozitivului"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Nu lasă ecranul să se închidă dacă vă uitați la el"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"„Atenție la ecran” folosește camera frontală pentru a vedea dacă se uită cineva la ecran. Funcționează pe dispozitiv, iar imaginile nu sunt niciodată stocate sau trimise la Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Mențineți activat ecranul când îl priviți"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Lumină de noapte"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Lumina de noapte dă o nuanță de chihlimbar ecranului. Astfel, este mai ușor să priviți ecranul sau să citiți într-o lumină slabă și vă poate ajuta să adormiți mai rapid."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Program"</string>
@@ -1278,7 +1294,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizați ecranul"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Alegeți imagine de fundal din"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personalizați telefonul Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Încercați diferite stiluri, imagini de fundal, ceasuri și altele"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Încercați diverse stiluri, imagini de fundal și altele"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Economizor de ecran"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"În timpul încărcării sau andocării"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"În ambele situații"</string>
@@ -1699,7 +1715,7 @@
     <string name="location_no_recent_accesses" msgid="7489449862187886009">"Nicio aplicație nu a accesat recent locația"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Utilizare intensă a bateriei"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Utilizare redusă a bateriei"</string>
-    <string name="location_scanning_screen_title" msgid="2297479353298444503">"Scanare prin Wi‑Fi și Bluetooth"</string>
+    <string name="location_scanning_screen_title" msgid="2297479353298444503">"Căutare Wi‑Fi și Bluetooth"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Căutare de rețele Wi-Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Permiteți aplicațiilor și serviciilor să caute permanent rețele Wi-Fi, chiar și atunci când setarea Wi-Fi este dezactivată. Această permisiune poate fi folosită, de exemplu, pentru a îmbunătăți funcțiile și serviciile bazate pe locație."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Căutare Bluetooth"</string>
@@ -1765,9 +1781,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Parola a fost setată"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Codul PIN a fost setat"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Modelul a fost setat"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Setați parola pt. autentificare facială"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Setați model pt. autentificare facială"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Setați cod PIN pt. autentificare facială"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Setați parola pentru deblocarea facială"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Setați modelul pentru deblocarea facială"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Setați parola pentru deblocarea facială"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Pentru a continua, folosiți modelul dispozitivului"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Pentru a continua, introduceți codul PIN al dispozitivului"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Pentru a continua, introduceți parola dispozitivului"</string>
@@ -2085,7 +2101,7 @@
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Modificați dimensiunea fontului"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Cititoare de ecran"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio și text pe ecran"</string>
-    <string name="display_category_title" msgid="685461049938269166">"Afișare"</string>
+    <string name="display_category_title" msgid="685461049938269166">"Afișaj"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Comenzi pentru interacțiune"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Servicii descărcate"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentale"</string>
@@ -2104,7 +2120,7 @@
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Pentru a mări sau micșora"</b>", atingeți rapid ecranul de 3 ori.\n"<ul><li>"Trageți cu 2 sau mai multe degete pentru a derula"</li>\n<li>"Ciupiți cu 2 sau mai multe degete pentru a ajusta nivelul de zoom"</li></ul>\n\n<b>"Pentru a mări temporar"</b>", atingeți rapid ecranul de 3 ori și țineți apăsat cu degetul la a treia atingere.\n"<ul><li>"Trageți cu degetul pentru a mișca imaginea pe ecran."</li>\n<li>"Ridicați degetul pentru a micșora."</li></ul>\n\n"Nu puteți mări pe tastatură și pe bara de navigare."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Când mărirea este activată, puteți mări pe ecran.\n\n"<b>"Pentru a mări"</b>", începeți mărirea, apoi atingeți oriunde pe ecran.\n"<ul><li>"• Trageți cu 2 sau mai multe degete pentru a derula"</li>\n<li>"• Ciupiți cu 2 sau mai multe degete pentru a regla nivelul de zoom"</li></ul>\n\n<b>"Pentru a mări temporar"</b>", începeți mărirea, apoi atingeți lung oriunde pe ecran.\n"<ul><li>"• Trageți pentru a vă mișca pe ecran"</li>\n<li>"• Ridicați degetul pentru a micșora"</li></ul>\n\n"Nu puteți mări pe tastatură și pe bara de navigare."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Folosiți butonul de accesibilitate pentru a deschide"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Folosiți gestul pentru a deschide"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Folosiți un gest pentru a deschide"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Folosiți noul gest de accesibilitate"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Pentru a activa sau dezactiva acest serviciu, atingeți butonul de accesibilitate<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>din partea de jos a ecranului.\n\nPentru a comuta între servicii, atingeți lung butonul de accesibilitate."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Pentru a activa sau dezactiva acest serviciu, glisați în sus cu două degete din partea de jos a ecranului.\n\nPentru a comuta între servicii, glisați în sus cu două degete și țineți lung."</string>
@@ -2113,6 +2129,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Pentru a activa sau dezactiva un serviciu de accesibilitate, glisați în sus cu trei degete din partea de jos a ecranului.\n\nPentru a comuta între servicii, glisați în sus cu trei degete și țineți lung."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Butonul Accesibilitate este setat pe <xliff:g id="SERVICE">%1$s</xliff:g>. Pentru a folosi mărirea, atingeți lung butonul Accesibilitate și apoi selectați mărirea."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Gestul de accesibilitate este setat la <xliff:g id="SERVICE">%1$s</xliff:g>. Pentru a folosi mărirea, glisați în sus cu două degete din partea de jos a ecranului și mențineți apăsat. Apoi selectați mărirea."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Comandă rapidă pentru butoane volum"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Serviciul comenzii rapide"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Permiteți din ecranul de blocare"</string>
@@ -2149,6 +2166,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utilizați serviciul"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Utilizați corecție de culoare"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Utilizați subtitrările"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Nu toate aplicațiile acceptă această setare."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continuați"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Aparate auditive"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nu s-a conectat niciun aparat auditiv"</string>
@@ -3423,6 +3441,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Afișați în fereastra trasă în jos, bara de stare și ecranul de blocare"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Lumină intermitentă"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Ecran de blocare"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Omiteți ecranul de blocare"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"După deblocarea facială, accesați direct ultimul ecran folosit"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Ecran de blocare, Ecran de blocare, Omitere, Evitare"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Când este blocat profilul de serviciu"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Notificări pe ecranul de blocare"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Afișați notificări de alertare și silențioase"</string>
@@ -4183,9 +4204,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Obiectul clasificării lipsește."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Obiectul clasificării nu conține această cheie."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Personalizare temă"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Culoarea de evidențiere"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Font pentru Titlu / Corp text"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Forma pictogramei"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Prestabilit pentru dispozitiv"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Decupajul ecranului"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"decupare ecran"</string>
@@ -4460,11 +4478,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Driverul plăcii grafice de sistem"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Setarea nu este acceptată pe telefon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Setarea nu este acceptată pe tabletă"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Setarea nu este acceptată pe dispozitiv"</string>
@@ -4633,7 +4649,7 @@
     <string name="no_bluetooth_devices" msgid="861861879657732058">"Nu sunt dispozitive Bluetooth"</string>
     <string name="bluetooth_left_name" msgid="2133431890020995442">"Stânga"</string>
     <string name="bluetooth_right_name" msgid="525578831502355410">"Dreapta"</string>
-    <string name="bluetooth_middle_name" msgid="3272836932362043957">"Husă"</string>
+    <string name="bluetooth_middle_name" msgid="3272836932362043957">"Carcasă"</string>
     <string name="settings_panel_title" msgid="4688575606213055744">"Panou de setări"</string>
     <string name="internet_connectivity_panel_title" msgid="721392242301676444">"Conexiune la internet"</string>
     <string name="volume_connectivity_panel_title" msgid="9192664643867101356">"Volum"</string>

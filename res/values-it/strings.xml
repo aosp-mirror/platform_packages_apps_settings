@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Seleziona per scarto da UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Blocca automaticamente"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo sospensione"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Subito dopo la sospensione, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo la sospensione, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Blocca dopo lo spegnimento schermo"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo il timeout"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Subito dopo lo spegnimento dello schermo, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo lo spegnimento dello schermo, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostra info proprietario su blocco schermo"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Messaggio schermata di blocco"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Abilita widget"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Disattivati dall\'amministratore"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Mostra opzione di blocco"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Visualizza l\'opzione del tasto di accensione che disattiva Smart Lock, lo sblocco tramite impronta digitale e le notifiche nella schermata di blocco"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Visualizza l\'opzione del tasto di accensione che disattiva Smart Lock, lo sblocco tramite dati biometrici e le notifiche nella schermata di blocco"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Sblocco solo per agenti di attendibilità"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Se l\'opzione è attiva, gli agenti di attendibilità manterranno sbloccato il tuo dispositivo per più tempo, ma non potranno più sbloccare un dispositivo bloccato."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Blocco dello schermo quando viene persa l\'attendibilità"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Blocco schermo, impronta digitale"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Blocco schermo"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Volto aggiunto"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tocca per impostare autenticazione volti"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Autenticazione volti"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Come configurare Sblocco col sorriso"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Imposta Sblocco col sorriso"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Imposta Sblocco col sorriso"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Sblocco col sorriso"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Sblocco col sorriso per il lavoro"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Come configurare Sblocco col sorriso"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Imposta Sblocco col sorriso"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Usa il tuo volto per l\'autenticazione"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Inizia"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Annulla"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"No, grazie"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Accetto"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Altro"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Sblocca con il volto"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Usa il tuo volto per l\'autenticazione"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Usa il tuo volto per sbloccare il telefono, autorizzare gli acquisti o accedere alle app."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Utilizza il tuo volto per sbloccare il telefono o approvare gli acquisti.\n\nNota: non puoi utilizzare il tuo volto per sbloccare questo dispositivo. Per ulteriori informazioni, contatta l\'amministratore della tua organizzazione."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Usa il tuo volto per sbloccare il telefono, autorizzare gli acquisti o accedere alle app"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Registrazione del volto non riuscita."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Fatto. Tutto OK."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Fine"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Migliora le prestazioni di Sblocco con sorriso"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Configura nuovamente Sblocco col sorriso"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Configura nuovamente Sblocco col sorriso"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Migliora la sicurezza e le prestazioni"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Configura Sblocco col sorriso"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Elimina i dati del volto attuali per configurare nuovamente Sblocco col sorriso.\n\nI dati del volto di Sblocco col sorriso verranno eliminati in modo definitivo e sicuro. Dopo la rimozione, ti serviranno PIN, sequenza o password per sbloccare il telefono, accedere alle app e confermare i pagamenti."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Usa Sblocco col sorriso per"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Sblocco del telefono"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Accesso all\'app e pagamenti"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Richiedi per Sblocco col sorriso"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Occhi aperti verso lo schermo"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Per sbloccare, occorre sempre guardare lo schermo con occhi aperti"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Pulsante Conferma"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Chiedi sempre conferma per l\'autenticazione nelle app"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Requisiti per Sblocco col sorriso"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Richiedi occhi aperti"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Per sbloccare il telefono gli occhi devono essere aperti"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Chiedi sempre conferma"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Chiedi sempre conferma se viene usato Sblocco col sorriso nelle app"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Elimina dati viso"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Configura un nuovo Sblocco col sorriso"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Usa la funzionalità Sblocco col sorriso per sbloccare il dispositivo, accedere alle app e confermare pagamenti.\n\nTieni presente che:\nSe guardi il telefono puoi sbloccarlo anche quando non hai intenzione di farlo.\n\nIl tuo telefono può essere sbloccato da un\'altra persona se viene rivolto verso il tuo viso e hai gli occhi aperti.\n\nIl tuo telefono può essere sbloccato da qualcuno che ti assomiglia molto, ad esempio tuo figlio o un gemello."</string>
-    <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Rimuovere i dati viso?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"I dati registrati da Sblocco col sorriso verranno eliminati in modo definitivo e sicuro. Dopo la rimozione, ti serviranno il PIN, la sequenza o la password per sbloccare il telefono, accedere alle app e confermare i pagamenti."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Imposta Sblocco col sorriso"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Usa la funzionalità Sblocco col sorriso per sbloccare il dispositivo, accedere alle app e confermare pagamenti.\n\nTieni presente che:\nSe guardi il telefono puoi sbloccarlo anche quando non hai intenzione di farlo.\n\nIl tuo telefono può essere sbloccato da un\'altra persona se viene rivolto verso il tuo viso, anche se hai gli occhi chiusi.\n\nIl tuo telefono può essere sbloccato da qualcuno che ti assomiglia molto, ad esempio un fratello gemello."</string>
+    <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Rimuovere i dati del viso?"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"I dati del viso usati da Sblocco col sorriso verranno eliminati in modo definitivo e sicuro. Dopo la rimozione, ti servirà il PIN, la sequenza o la password per sbloccare il telefono, accedere alle app e confermare i pagamenti."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Usa la funzionalità Sblocco col sorriso per sbloccare il tuo telefono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Impronta digitale"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gestisci impronte digitali"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Utilizza l\'impronta digitale per"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Proteggi il tuo tablet con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'impronta. Tocca Annulla, quindi imposta un PIN, una sequenza o una password."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Proteggi il tuo dispositivo con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'impronta. Tocca Annulla, quindi imposta un PIN, una sequenza o una password."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Proteggi il tuo telefono con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'impronta. Tocca Annulla, quindi imposta un PIN, una sequenza o una password."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Proteggi il tuo tablet con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'autenticazione volti. Tocca Annulla, quindi imposta un PIN, una sequenza o una password."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Proteggi il tuo dispositivo con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'autenticazione volti. Tocca Annulla, quindi imposta un PIN, una sequenza o una password."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Proteggi il tuo telefono con un\'opzione di blocco schermo, così nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare l\'autenticazione volti. Tocca Annulla, quindi imposta un PIN, una sequenza o una password."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Se proteggi il tablet con un\'opzione di blocco schermo, nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare Sblocco col sorriso. Per tornare indietro, tocca Annulla."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Se proteggi il dispositivo con un\'opzione di blocco schermo, nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare Sblocco col sorriso. Per tornare indietro, tocca Annulla."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Se proteggi il telefono con un\'opzione di blocco schermo, nessuno potrà utilizzarlo in caso di smarrimento o furto. Occorre un\'opzione di blocco schermo anche per impostare Sblocco col sorriso. Per tornare indietro, tocca Annulla."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Saltare l\'impostazione del PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Saltare l\'impostazione della password?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Saltare l\'impostazione della sequenza?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Impronta digitale + password"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Continua senza impronta digitale"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Puoi sbloccare il telefono tramite la tua impronta digitale. Per motivi di sicurezza questa opzione richiede un blocco schermo alternativo."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Autenticazione dei volti + sequenza"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Autenticazione dei volti + PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Autenticazione dei volti + password"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Continua senza autenticazione dei volti"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Sblocco col sorriso + sequenza"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Sblocco col sorriso + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Sblocco col sorriso + password"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Continua senza Sblocco col sorriso"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Puoi sbloccare il telefono usando il tuo volto. Per motivi di sicurezza, questa opzione richiede un blocco schermo alternativo."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Disattivata da amministratore, norma crittografia o archivio credenziali"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nessuno"</string>
@@ -790,7 +802,7 @@
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"Elimina dispositivo"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Connessione a…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio multimediale."</string>
-    <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio vivavoce."</string>
+    <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio delle cuffie."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dal dispositivo di input."</string>
     <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"L\'accesso Internet tramite <xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="8355910926439312604">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dalla condivisione della connessione Internet del tablet."</string>
@@ -1199,7 +1211,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"Regola la luminosità dello schermo"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Luminosità adattiva"</string>
     <string name="auto_brightness_summary" msgid="5652108419977937800">"La luminosità dello schermo si adatta all\'ambiente"</string>
-    <string name="auto_brightness_summary_on" msgid="3519854265558828744">"Attiva"</string>
+    <string name="auto_brightness_summary_on" msgid="3519854265558828744">"On"</string>
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Off"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Luminosità preferita molto bassa"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"Luminosità preferita bassa"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Ottimizza il livello di luminosità per la luce disponibile. Quando questa funzione è attiva, puoi comunque regolare la luminosità temporaneamente."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"La luminosità dello schermo verrà regolata automaticamente in base all\'ambiente e alle attività. Puoi spostare manualmente il dispositivo di scorrimento per far sì che la luminosità adattiva memorizzi le tue preferenze."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Bilanciamento bianco display"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Schermo vigile"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"On/Lo schermo non si spegne se lo stai guardando"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Off"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Consente di impedire lo spegnimento dello schermo se lo stai guardando."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Accesso alla fotocamera necessario"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tocca per gestire le autorizzazioni dei Servizi di personalizzazione del dispositivo"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Consente di impedire lo spegnimento dello schermo se lo stai guardando"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"La funzionalità Schermo vigile usa la fotocamera anteriore per controllare se qualcuno sta guardando lo schermo. Funziona sul dispositivo e le immagini non vengono mai memorizzate o inviate a Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Mantiene lo schermo attivo mentre lo guardi"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Luminosità notturna"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Con la funzione Luminosità notturna, il tuo schermo diventa color ambra. In questo modo potrai guardarlo senza sforzare la vista o leggere in condizioni di luce attenuata e potrai addormentarti più facilmente."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Pianificazione"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizza lo schermo"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Scegli sfondo da"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personalizza il tuo Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Prova diversi stili, sfondi, orologi e non solo"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Prova diversi stili, sfondi e non solo"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Salvaschermo"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Durante la ricarica o quando inserito nel dock"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Entrambi i casi"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Password impostata"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN impostato"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Sequenza impostata"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Scegli password per autenticazione volti"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Scegli sequenza per autenticazione volti"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Scegli PIN per autenticazione volti"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Scegli password per Sblocco col sorriso"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Scegli sequenza per Sblocco col sorriso"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Scegli PIN per Sblocco col sorriso"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Per continuare devi utilizzare la sequenza del dispositivo"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Per continuare devi inserire il PIN del dispositivo"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Per continuare devi inserire la password del dispositivo"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Per attivare o disattivare un servizio di accessibilità, scorri verso l\'alto dalla parte inferiore dello schermo con tre dita.\n\nPer spostarti tra i servizi, scorri verso l\'alto con tre dita e tieni premuto."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Il pulsante Accessibilità è impostato su <xliff:g id="SERVICE">%1$s</xliff:g>. Per utilizzare l\'ingrandimento, tocca e tieni premuto il pulsante Accessibilità, quindi seleziona l\'ingrandimento."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Il gesto di accessibilità è impostato per <xliff:g id="SERVICE">%1$s</xliff:g>. Per usare l\'ingrandimento, scorri con due dita verso l\'alto dalla parte inferiore dello schermo e tieni premuto. Dopodiché seleziona l\'ingrandimento."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Scorciatoia per i tasti del volume"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Servizio scorciatoia"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Consenti dalla schermata di blocco"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utilizza servizio"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Usa correzione del colore"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Utilizza sottotitoli"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Non tutte le app supportano questa impostazione."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continua"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Apparecchi acustici"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nessun apparecchio acustico connesso"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Verranno visualizzate nell\'area a discesa, nella barra di stato e nella schermata di blocco"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Luce lampeggiante"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Schermata di blocco"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Ignora schermata di blocco"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Dopo Sblocco col sorriso, vai a ultima schermata usata"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Schermata di blocco, Schermata blocco, Salta, Ignora"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Con profilo di lavoro bloccato"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Notifiche sulla schermata di blocco"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Mostra le notifiche silenziose e di avviso"</string>
@@ -4073,7 +4094,7 @@
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Sblocca con un altro dito"</string>
     <string name="battery_saver_on_summary" msgid="7722791295871319534">"On"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="3953785517002197881">"Si attiva quando la batteria raggiunge <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_off_summary" msgid="784360321235698247">"Non attivo"</string>
+    <string name="battery_saver_off_summary" msgid="784360321235698247">"Off"</string>
     <string name="battery_saver_button_turn_on" msgid="3699954061337848832">"Attiva ora"</string>
     <string name="battery_saver_button_turn_off" msgid="5916996792004611890">"Disattiva ora"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Ottimizzazione della batteria non in uso"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Oggetto di ranking mancante."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"L\'oggetto di ranking non contiene questa chiave."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Applicazione tema"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Colore di contrasto"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Carattere titolo/corpo del testo"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Forma delle icone"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Predefinita dispositivo"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Ritaglio display"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ritaglio display, tacca"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Driver di grafica di sistema"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"L\'impostazione non è supportata su questo telefono"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"L\'impostazione non è supportata su questo tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"L\'impostazione non è supportata su questo dispositivo"</string>

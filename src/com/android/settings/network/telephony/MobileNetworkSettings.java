@@ -150,7 +150,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
-        use(EnabledNetworkModePreferenceController.class).init(mSubId);
+        use(EnabledNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
         if (!FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
             use(EuiccPreferenceController.class).init(mSubId);

@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC  წანაცვლებით არჩევა"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"თარიღი"</string>
     <string name="time_picker_title" msgid="483460752287255019">"დრო"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"ავტომატურად დაბლოკვა"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ძილის შემდეგ"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"დაუყოვნებლივ ძილის შემდეგ, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>-ის მიერ"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ძილის შემდეგ, გარდა <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>-ის მიერ განბლოკილ მდგომარეობაში დატოვებისას"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"ჩაკეტვა ეკრანის დროის ლიმიტის შემდეგ"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ლოდინის დროის შემდეგ"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"ლოდინის დროის დასრულებისთანავე, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>-ის მიერ"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ლოდინის დროის შემდეგ, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>-ის მიერ"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"მფლობელის ინფორმაციის დაბლოკვის ეკრანზე ჩვენება"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"შეტყობინება ჩაკეტილ ეკრანზე"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ვიჯეტების ჩართვა"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"გათიშულია ადმინისტრატორის მიერ"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"დაბლოკვის ვარიანტის ჩვენება"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"ჩართვის ღილაკის ვარიანტის ჩვენება, რომლითაც შესაძლებელია ჩაკეტილ ეკრანზე Smart Lock-ის, თითის ანაბეჭდით განბლოკვის და შეტყობინებების დაბლოკვა"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"ჩართვის ღილაკის ვარიანტის ჩვენება, რომლითაც შესაძლებელია ჩაკეტილ ეკრანზე Smart Lock-ის, ბიომეტრიული განბლოკვის და შეტყობინებების გამორთვა"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"ნდობის აგენტები მხოლოდ ახანგრძლივებს დაბლოკვას"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"ჩართვის შემთხვევაში, ნდობის აგენტები უფრო ხანგრძლივი პერიოდის განმავლობაში შეინარჩუნებს თქვენს მოწყობილობას განბლოკილ მდგომარეობაში, თუმცა ვეღარ განბლოკავს ჩაკეტილ მოწყობილობას."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"ეკრანის ჩაკეტვა ნდობის დაკარგვის შემდეგ"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"ეკრანის დაბლოკვა, თითის ანაბეჭდი"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"ეკრანის დაბლოკვა"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"სახე დამატებულია"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"შეეხეთ სახის ამოცნობის დასაყენებლად"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"სახის ამოცნობა"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"როგორ უნდა დააყენოთ განბლოკვა სახით"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"სახით განბლოკვის პარამეტრების დაყენება"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"სახით განბლოკვის დაყენება"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"განბლოკვა სახით"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"განბლოკვა სახით სამსახურისთვის"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"როგორ უნდა დააყენოთ განბლოკვა სახით"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"სახით განბლოკვის დაყენება"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"გამოიყენეთ თქვენი სახე ავტორიზაციისთვის"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"დაწყება"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"გაუქმება"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"არა, გმადლობთ"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"ვეთანხმები"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"მეტი"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"განბლოკეთ სახის მეშვეობით"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"გამოიყენეთ თქვენი სახე ავტორიზაციისთვის"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"გამოიყენეთ თქვენი სახე ტელეფონის განსაბლოკად, შენაძენების ავტორიზაციისთვის თუ აპებში შესასვლელად."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"გამოიყენეთ თქვენი სახე ტელეფონის განსაბლოკად ან შენაძენების დასადასტურებლად.\n\nგაითვალისწინეთ: ამ მოწყობილობას სახით ვერ განბლოკავთ. დამატებითი ინფორმაციისთვის დაუკავშირდით თქვენი ორგანიზაციის ადმინისტრატორს."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"გამოიყენეთ თქვენი სახე ტელეფონის განსაბლოკად, შენაძენების ავტორიზაციისთვის თუ აპებში შესასვლელად"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"სახის რეგისტრაცია ვერ მოხერხდა."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"ყველაფერი დაყენებულია."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"მზადაა"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"გააუმჯობესეთ სახით განბლოკვის მუშაობა"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"დააყენეთ სახით განბლოკვა ხელახლა"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"დააყენეთ სახით განბლოკვა ხელახლა"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"გააუმჯობესეთ უსაფრთხოება და მუშაობა"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"სახით განბლოკვის დაყენება"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"წაშალეთ სახის ამჟამინდელი მონაცემები სახით განბლოკვის ხელახლა დასაყენებლად.\n\nსახით განბლოკვის მიერ გამოყენებული სახის მონაცემები სამუდამოდ და უსაფრთხოდ წაიშლება. ამოშლის შემდეგ, ტელეფონის განსაბლოკად, აპებში შესასვლელად და გადახდების დასადასტურებლად თქვენი PIN-კოდი, ნიმუში ან პაროლი დაგჭირდებათ."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"სახით განბლ. მიზანი:"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"ტელეფონის განბლოკვა"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"აპებში შესვლა და გადახდა"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"მოითხოვეთ სახით განბლოკვისთვის"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"გახელილი თვალები ეკრანისკენ"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"ტელ. განსაბლოკად ყოველთვის მოითხოვეთ ეკრანზე გახელილი თვალებით შეხედვა"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"დადასტურების ღილაკი"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"აპებში ავტორიზაციისას, ყოველთვის მოითხოვეთ დადასტურება"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"მოთხოვნები სახით განბლოკვისთვის"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"თვალები გახელილი უნდა გქონდეთ"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"ტელეფონის განსაბლოკად თვალები გახელილი უნდა გქონდეთ"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"დადასტურების ყოველთვის მოთხოვნა"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"აპებში სახით განბლოკვის გამოყენებისას, ყოველთვის მოითხოვეთ დადასტურება"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"სახის მონაცემ. წაშლა"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"ახალი სახით განბლოკვის დაყენება"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"მოწყობილობის განსაბლოკად გამოიყენეთ განბლოკვა სახით, შედით აპებში და დაადასტურეთ გადახდები.\n\nგაითვალისწინეთ:\nტელეფონზე შეხედვამ შეიძლება განბლოკოს ის, როდესაც ამის განზრახვა არ გაქვთ.\n\nთქვენი ტელეფონი შეიძლება განბლოკოს სხვა პირმა, თუ მას თქვენი სახის პირისპირ დაიჭერს, როცა თვალები გახელილი გექნებათ.\n\nთქვენი ტელეფონი შესაძლოა განბლოკოს ისეთმა პირმა, რომელიც ძალიან გგავთ, მაგალითად, თქვენმა შვილმა ან იდენტურმა დამ ან ძმამ."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"სახით განბლოკვის დაყენება"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"გამოიყენეთ სახით განბლოკვა მოწყობილობის განსაბლოკად, აპებში შესასვლელად და გადახდების დასადასტურებლად.\n\nგაითვალისწინეთ:\nტელეფონზე შეხედვამ შეიძლება განბლოკოს ის, როდესაც ამის განზრახვა არ გაქვთ.\n\nთქვენი ტელეფონი შეიძლება განბლოკოს სხვა პირმა, თუ მას თქვენი სახის პირისპირ დაიჭერს, თუნდაც თვალები დახუჭული გქონდეთ.\n\nთქვენი ტელეფონი შეიძლება განბლოკოს ისეთმა პირმა, რომელიც ძალიან გგავთ, მაგალითად, თქვენმა იდენტურმა დამ ან ძმამ."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"წაიშალოს სახის მონაცემები?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"სახით განბლოკვის მეშვეობით ჩაწერილი მონაცემები სამუდამოდ და საიმედოდ წაიშლება. ამოშლის შემდეგ, ტელეფონის განსაბლოკად, აპებში შესასვლელად და გადახდების დასადასტურებლად თქვენი PIN-კოდი, ნიმუში ან პაროლი დაგჭირდებათ."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"სახით განბლოკვის მიერ გამოყენებული სახის მონაცემები სამუდამოდ და უსაფრთხოდ წაიშლება. ამოშლის შემდეგ, ტელეფონის განსაბლოკად, აპებში შესასვლელად და გადახდების დასადასტურებლად თქვენი PIN-კოდი, ნიმუში ან პაროლი დაგჭირდებათ."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"ტელეფონის განსაბლოკად გამოიყენეთ განბლოკვა სახით"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"თითის ანაბეჭდი"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"ანაბეჭდების მართვა"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"ანაბეჭდების გამოყენება"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"დაიცავით თქვენი ტაბლეტი ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ თითის ანაბეჭდის დასაყენებლადაც. შეეხეთ გაუქმებას, შემდეგ დააყენეთ PIN-კოდი, ნიმუში ან პაროლი."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"დაიცავით თქვენი მოწყობილობა ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ თითის ანაბეჭდის დასაყენებლადაც. შეეხეთ გაუქმებას, შემდეგ დააყენეთ PIN-კოდი, ნიმუში ან პაროლი."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"დაიცავით თქვენი ტელეფონი ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ თითის ანაბეჭდის დასაყენებლადაც. შეეხეთ გაუქმებას, შემდეგ დააყენეთ PIN-კოდი, ნიმუში ან პაროლი."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"დაიცავით თქვენი ტაბლეტი ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ სახის ამოცნობის დასაყენებლადაც. შეეხეთ გაუქმებას, შემდეგ დააყენეთ PIN-კოდი, ნიმუში ან პაროლი."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"დაიცავით თქვენი მოწყობილობა ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ სახის ამოცნობის დასაყენებლადაც. შეეხეთ გაუქმებას, შემდეგ დააყენეთ PIN-კოდი, ნიმუში ან პაროლი."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"დაიცავით თქვენი ტელეფონი ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ სახის ამოცნობის დასაყენებლადაც. შეეხეთ გაუქმებას, შემდეგ დააყენეთ PIN-კოდი, ნიმუში ან პაროლი."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"თქვენი ტაბლეტის ეკრანის დაბლოკვის ვარიანტით დაცვის შემთხვევაში, ვერავინ შეძლებს მის გამოყენებას დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ სახით განბლოკვის დასაყენებლადაც. უკან დასაბრუნებლად შეეხეთ გაუქმებას."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"თქვენი მოწყობილობის ეკრანის დაბლოკვის ვარიანტით დაცვის შემთხვევაში, ვერავინ შეძლებს მის გამოყენებას დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ სახით განბლოკვის დასაყენებლადაც. უკან დასაბრუნებლად შეეხეთ გაუქმებას."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"თქვენი ტელეფონის ეკრანის დაბლოკვის ვარიანტით დაცვის შემთხვევაში, ვერავინ შეძლებს მის გამოყენებას დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ სახით განბლოკვის დასაყენებლადაც. უკან დასაბრუნებლად შეეხეთ გაუქმებას."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"გამოტოვებთ PIN-კოდის დაყენებას?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"გამოტოვებთ პაროლის დაყენებას?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"გამოტოვებთ ნიმუშის დაყენებას?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"თითის ანაბეჭდი + პაროლი"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"თითის ანაბეჭდის გარეშე გაგრძელება"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"თქვენი ტელეფონის განბლოკვა თითის ანაბეჭდით შეგეძლებათ. უსაფრთხოების მოსაზრებებიდან გამომდინარე, ეს ვარიანტი ეკრანის დაბლოკვის სარეზერვო მეთოდსაც საჭიროებს."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"სახის ამოცნობა + ნიმუში"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"სახის ამოცნობა + PIN-კოდი"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"სახის ამოცნობა + პაროლი"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"გაგრძელება სახის ამოცნობის გარეშე"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"განბლოკვა სახით + ნიმუში"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"განბლოკვა სახით + PIN-კოდი"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"განბლოკვა სახით + პაროლი"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"გაგრძელება სახით განბლოკვის გარეშე"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"თქვენი ტელეფონის განბლოკვას შეძლებთ სახის მეშვეობით. უსაფრთხოების მოსაზრებებიდან გამომდინარე, ეს ვარიანტი საჭიროებს ეკრანის დაბლოკვის სარეზერვო მეთოდსაც."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"გათიშულია ადმინისტრატორის მიერ დაშიფვრის წესების ან სამომხმარებლო მონაცემების საცავის გამო"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"არც ერთი"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"სიკაშკაშის მორგება არსებულ სინათლეზე. სიკაშკაშის დროებით დარეგულირებას მოგვიანებით მაინც შეძლებთ."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"თქვენი ეკრანის სიკაშკაშე ავტომატურად დარეგულირდება თქვენი გარემოსა და აქტივობების გათვალისწინებით. ამ სლაიდერის ამოძრავებას ხელითაც შეძლებთ, რითაც დაეხმარებით მორგებადი სიკაშკაშის პარამეტრს, შეიტყოს, თუ რას ანიჭებთ უპირატესობას."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"ეკრანის თეთრის ბალანსი"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"ეკრანისკენ მიმართული ყურადღება"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"ჩართულია / ეკრანი არ გამოირთვება, თუ მას უყურებთ"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"გამორთულია"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"არ დაუშვებს ეკრანის გამორთვას, თუ მას უყურებთ."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"საჭიროა კამერაზე წვდომა"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"შეეხეთ მოწყობილობის პერსონალიზაციის სერვისების ნებართვების სამართავად"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"არ დაუშვებს ეკრანის გამორთვას, თუ მას უყურებთ"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"ეკრანისკენ მიმართული ყურადღება იყენებს წინა კამერას იმისთვის, რომ გაიგოს, უყურებს თუ არა ვინმე ეკრანს. ის მოწყობილობის დონეზე მუშაობს, სურათები არასოდეს ინახება და არც Google-ს ეგზავნება."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"ყურებისას ეკრანის ჩართული დატოვება"</string>
     <string name="night_display_title" msgid="2626451512200357686">"ღამის განათება"</string>
     <string name="night_display_text" msgid="1837277457033025056">"ღამის განათება თქვენს ეკრანს ღამის პერიოდში ქარვისფერ ელფერს მიანიჭებს. მკრთალი სინათლე გაგიმარტივებთ ეკრანზე კითხვას ან ყურებას და უფრო სწრაფად დაძინებაში დაგეხმარებათ."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"განრიგი"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"თქვენი ეკრანის პერსონალიზება"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"ფონის არჩევა:"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"მოირგეთ თქვენი Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"ცადეთ სხვადასხვა სტილი, ფონი, საათი და ა.შ."</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"ცადეთ სხვადასხვა სტილი, ფონი და ა.შ."</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"ეკრანმზოგი"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"დატენვისას ან სანამ ჩამაგრებულია"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"ორივე შემთხვევაში"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"პაროლი გაიგზავნა"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-კოდი გაიგზავნა"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"გრაფიკული გასაღები გაიგზავნა"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"სახის ამოცნობისთვის დააყენეთ პაროლი"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"სახის ამოცნობისთვის დააყენეთ ნიმუში"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"სახის ამოცნობისთვის დააყენეთ PIN-კოდი"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"სახით განბლოკვისთვის დააყენეთ პაროლი"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"სახით განბლოკვისთვის დააყენეთ ნიმუში"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"სახით განბლოკვისთვის დააყენეთ PIN-კოდი"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"გასაგრძელებლად, გამოიყენეთ თქვენი მოწყობილობის ნიმუში"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"გასაგრძელებლად, შეიყვანეთ თქვენი მოწყობილობის PIN-კოდი"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"გასაგრძელებლად, შეიყვანეთ თქვენი მოწყობილობის პაროლი"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"მარტივი წვდომის სერვისის ჩასართავად ან გამოსართავად, სამი თითით გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ.\n\nსერვისების გადასართავად, სამი თითით გადაფურცლეთ ზემოთ და დააყოვნეთ."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"გასაგებია"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"მარტივი წვდომის ღილაკად დაყენებულია <xliff:g id="SERVICE">%1$s</xliff:g>. გადიდების გამოსაყენებლად ხანგრძლივად შეეხეთ მარტივი წვდომის ღილაკს, ხოლო შემდეგ აირჩიეთ გადიდება."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"მარტივი წვდომის ჟესტი დაყენებულია <xliff:g id="SERVICE">%1$s</xliff:g>-ზე. გადიდების გამოსაყენებლად, გადაფურცლეთ ორი თითით ეკრანის ქვედა კიდიდან ზემოთ და დააყოვნეთ. შემდეგ აირჩიეთ გადიდება."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"ხმის ღილაკის მალსახმობი"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"მალსახმობი სერვისი"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"ჩაკეტილ ეკრანზე გამოყენების დაშვება"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"სერვისის გამოყენება"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"ფერის კორექციის გამოყენება"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"სუბტიტრების გამოყენება"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"ამ პარამეტრის მხარდაჭერა ყველა აპს არ აქვს."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"გაგრძელება"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"სმენის დახმარებები"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"სმენის აპარატები არაა დაკავშირებული"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"გამოჩნდება ჩამოსაწევ ფარდაში, სტატუსის ზოლში და ჩაკეტილ ეკრანზე"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"სინათლის ციმციმი"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"ჩაკეტილი ეკრანი"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"ჩაკეტილი ეკრანის გამოტოვება"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"სახით განბლოკვის შემდეგ ბოლოს გამოყენებულ ეკრანზე გადასვლა"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"ჩაკეტილი ეკრანი, დაბლოკილი ეკრანი, გამოტოვება, გვერდის ავლა"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"როცა სამსახურის პროფილი დაბლოკილია"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"შეტყობინებები ჩაკეტილ ეკრანზე"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"გამაფრთხილებელი და ჩუმი შეტყობინებების ჩვენება"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"აკლია კლასიფიკაციის ობიექტი."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"კლასიფიკაციის ობიექტი ამ გასაღებს არ შეიცავს."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"თემები"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"აქცენტის ფერი"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"სათაურის/ძირითადი ტექსტის შრიფტი"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"ხატულის ფორმა"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"მოწყობილობის ნაგულისხმევი"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"ეკრანის ამოჭრა"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ეკრანის ამოჭრა, ჭრილი"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"სისტემის გრაფიკული დრაივერი"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"ეს პარამეტრი ამ ტელეფონზე მხარდაუჭერელია"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"ეს პარამეტრი ამ ტაბლეტზე მხარდაუჭერელია"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"ეს პარამეტრი ამ მოწყობილობაზე მხარდაუჭერელია"</string>

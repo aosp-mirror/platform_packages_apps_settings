@@ -47,6 +47,7 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_FOR_FINGERPRINT = "for_fingerprint";
     public static final String EXTRA_KEY_FOR_FACE = "for_face";
     public static final String EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT = "for_cred_req_boot";
+    public static final String EXTRA_KEY_FOREGROUND_ONLY = "foreground_only";
 
     /**
      * Intent extra for passing the requested min password complexity to later steps in the set new
@@ -105,7 +106,8 @@ public final class ChooseLockSettingsHelper {
                 null /* header */,
                 null /* description */,
                 false /* returnCredentials */,
-                false /* external */);
+                false /* external */,
+                false /* foregroundOnly */);
     }
 
     /**
@@ -124,7 +126,8 @@ public final class ChooseLockSettingsHelper {
                 null /* header */,
                 null /* description */,
                 returnCredentials /* returnCredentials */,
-                false /* external */);
+                false /* external */,
+                false /* foregroundOnly */);
     }
 
     /**
@@ -148,7 +151,8 @@ public final class ChooseLockSettingsHelper {
                 false /* external */,
                 false /* hasChallenge */,
                 0 /* challenge */,
-                Utils.enforceSameOwner(mActivity, userId) /* userId */);
+                Utils.enforceSameOwner(mActivity, userId) /* userId */,
+                false /* foregroundOnly */);
     }
 
     /**
@@ -162,12 +166,13 @@ public final class ChooseLockSettingsHelper {
      * @param external specifies whether this activity is launched externally, meaning that it will
      *                 get a dark theme, allow fingerprint authentication and it will forward
      *                 activity result.
+     * @param foregroundOnly if the confirmation activity should be finished if it loses foreground.
      * @return true if one exists and we launched an activity to confirm it
      * @see Activity#onActivityResult(int, int, android.content.Intent)
      */
     boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
-            boolean returnCredentials, boolean external) {
+            boolean returnCredentials, boolean external, boolean foregroundOnly) {
         return launchConfirmationActivity(
                 request /* request */,
                 title /* title */,
@@ -177,7 +182,8 @@ public final class ChooseLockSettingsHelper {
                 external /* external */,
                 false /* hasChallenge */,
                 0 /* challenge */,
-                Utils.getCredentialOwnerUserId(mActivity) /* userId */);
+                Utils.getCredentialOwnerUserId(mActivity) /* userId */,
+                foregroundOnly /* foregroundOnly */);
     }
 
     /**
@@ -207,7 +213,8 @@ public final class ChooseLockSettingsHelper {
                 external /* external */,
                 false /* hasChallenge */,
                 0 /* challenge */,
-                Utils.enforceSameOwner(mActivity, userId) /* userId */);
+                Utils.enforceSameOwner(mActivity, userId) /* userId */,
+                false /* foregroundOnly */);
     }
 
     /**
@@ -217,12 +224,13 @@ public final class ChooseLockSettingsHelper {
      * @param header header of the confirmation screen; shown as large text
      * @param description description of the confirmation screen
      * @param challenge a challenge to be verified against the device credential.
+     * @param foregroundOnly if the confirmation activity should be finished if it loses foreground.
      * @return true if one exists and we launched an activity to confirm it
      * @see Activity#onActivityResult(int, int, android.content.Intent)
      */
     public boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
-            long challenge) {
+            long challenge, boolean foregroundOnly) {
         return launchConfirmationActivity(
                 request /* request */,
                 title /* title */,
@@ -232,7 +240,8 @@ public final class ChooseLockSettingsHelper {
                 false /* external */,
                 true /* hasChallenge */,
                 challenge /* challenge */,
-                Utils.getCredentialOwnerUserId(mActivity) /* userId */);
+                Utils.getCredentialOwnerUserId(mActivity) /* userId */,
+                foregroundOnly /* foregroundOnly */);
     }
 
     /**
@@ -243,12 +252,13 @@ public final class ChooseLockSettingsHelper {
      * @param description description of the confirmation screen
      * @param challenge a challenge to be verified against the device credential.
      * @param userId The userId for whom the lock should be confirmed.
+     * @param foregroundOnly if the confirmation activity should be finished if it loses foreground.
      * @return true if one exists and we launched an activity to confirm it
      * @see Activity#onActivityResult(int, int, android.content.Intent)
      */
     public boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
-            long challenge, int userId) {
+            long challenge, int userId, boolean foregroundOnly) {
         return launchConfirmationActivity(
                 request /* request */,
                 title /* title */,
@@ -258,7 +268,8 @@ public final class ChooseLockSettingsHelper {
                 false /* external */,
                 true /* hasChallenge */,
                 challenge /* challenge */,
-                Utils.enforceSameOwner(mActivity, userId) /* userId */);
+                Utils.enforceSameOwner(mActivity, userId) /* userId */,
+                foregroundOnly);
     }
 
     /**
@@ -287,7 +298,8 @@ public final class ChooseLockSettingsHelper {
                 external /* external */,
                 true /* hasChallenge */,
                 challenge /* challenge */,
-                Utils.enforceSameOwner(mActivity, userId) /* userId */);
+                Utils.enforceSameOwner(mActivity, userId) /* userId */,
+                false /* foregroundOnly */);
     }
 
     /**
@@ -316,7 +328,7 @@ public final class ChooseLockSettingsHelper {
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean hasChallenge,
-            long challenge, int userId) {
+            long challenge, int userId, boolean foregroundOnly) {
         return launchConfirmationActivity(
                 request /* request */,
                 title /* title */,
@@ -328,7 +340,8 @@ public final class ChooseLockSettingsHelper {
                 challenge /* challenge */,
                 userId /* userId */,
                 null /* alternateButton */,
-                null /* extras */);
+                null /* extras */,
+                foregroundOnly /* foregroundOnly */);
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
@@ -346,7 +359,8 @@ public final class ChooseLockSettingsHelper {
                 challenge /* challenge */,
                 userId /* userId */,
                 null /* alternateButton */,
-                extras /* extras */);
+                extras /* extras */,
+                false /* foregroundOnly */);
     }
 
     public boolean launchFrpConfirmationActivity(int request, @Nullable CharSequence header,
@@ -362,13 +376,15 @@ public final class ChooseLockSettingsHelper {
                 0 /* challenge */,
                 LockPatternUtils.USER_FRP /* userId */,
                 alternateButton /* alternateButton */,
-                null /* extras */);
+                null /* extras */,
+                false /* foregroundOnly */);
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean hasChallenge,
-            long challenge, int userId, @Nullable CharSequence alternateButton, Bundle extras) {
+            long challenge, int userId, @Nullable CharSequence alternateButton, Bundle extras,
+            boolean foregroundOnly) {
         final int effectiveUserId = UserManager.get(mActivity).getCredentialOwnerProfile(userId);
         boolean launched = false;
 
@@ -378,7 +394,8 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPattern.InternalActivity.class
                                 : ConfirmLockPattern.class, returnCredentials, external,
-                                hasChallenge, challenge, userId, alternateButton, extras);
+                                hasChallenge, challenge, userId, alternateButton, extras,
+                                foregroundOnly);
                 break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
@@ -390,7 +407,8 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPassword.InternalActivity.class
                                 : ConfirmLockPassword.class, returnCredentials, external,
-                                hasChallenge, challenge, userId, alternateButton, extras);
+                                hasChallenge, challenge, userId, alternateButton, extras,
+                                foregroundOnly);
                 break;
         }
         return launched;
@@ -399,7 +417,8 @@ public final class ChooseLockSettingsHelper {
     private boolean launchConfirmationActivity(int request, CharSequence title, CharSequence header,
             CharSequence message, Class<?> activityClass, boolean returnCredentials,
             boolean external, boolean hasChallenge, long challenge,
-            int userId, @Nullable CharSequence alternateButton, Bundle extras) {
+            int userId, @Nullable CharSequence alternateButton, Bundle extras,
+            boolean foregroundOnly) {
         final Intent intent = new Intent();
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.TITLE_TEXT, title);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.HEADER_TEXT, header);
@@ -414,6 +433,7 @@ public final class ChooseLockSettingsHelper {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         intent.putExtra(KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL, alternateButton);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOREGROUND_ONLY, foregroundOnly);
         if (extras != null) {
             intent.putExtras(extras);
         }

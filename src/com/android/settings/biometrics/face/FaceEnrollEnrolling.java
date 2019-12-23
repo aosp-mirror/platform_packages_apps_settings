@@ -32,6 +32,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
+import com.android.settings.slices.CustomSliceRegistry;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -184,6 +185,10 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         // TODO: Have this match any animations that UX comes up with
         if (remaining == 0) {
+            // Force the reload of the FaceEnroll slice in case a user has enrolled,
+            // this will cause the slice to no longer appear.
+            getApplicationContext().getContentResolver().notifyChange(
+                    CustomSliceRegistry.FACE_ENROLL_SLICE_URI, null);
             launchFinish(mToken);
         }
     }

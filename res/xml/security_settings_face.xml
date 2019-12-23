@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="security_settings_face_settings_page"
     android:title="@string/security_settings_face_preference_title">
 
@@ -39,18 +40,17 @@
             android:title="@string/security_settings_face_settings_use_face_for_apps"
             app:keywords="@string/keywords_face_unlock"
             app:controller="com.android.settings.biometrics.face.FaceSettingsAppPreferenceController"/>
+        <SwitchPreference
+            android:key="security_lockscreen_bypass"
+            android:title="@string/lockscreen_bypass_title"
+            android:summary="@string/lockscreen_bypass_summary"
+            settings:keywords="@string/keywords_lockscreen_bypass"
+            settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenBypassPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="security_settings_face_manage_category"
         android:title="@string/security_settings_face_settings_require_category">
-        <SwitchPreference
-            android:key="security_settings_face_require_attention"
-            android:title="@string/security_settings_face_settings_require_attention"
-            android:summary="@string/security_settings_face_settings_require_attention_details"
-            app:keywords="@string/keywords_face_unlock"
-            app:controller="com.android.settings.biometrics.face.FaceSettingsAttentionPreferenceController"/>
-
         <SwitchPreference
             android:key="security_settings_face_require_confirmation"
             android:title="@string/security_settings_face_settings_require_confirmation"

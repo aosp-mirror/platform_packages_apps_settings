@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC オフセットで選択"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日付"</string>
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"自動ロック"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"スリープ開始後 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"スリープの開始直後（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> がロック解除を管理している場合を除く）"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"スリープ開始後 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> がロック解除を管理している場合を除く）"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"画面消灯後にロック"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"タイムアウトから <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"タイムアウトの直後（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> がロック解除を管理している場合を除く）"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"タイムアウトから <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> がロック解除を管理している場合を除く）"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"ロック画面に所有者情報を表示"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"ロック画面メッセージ"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ウィジェットの有効化"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"管理アプリによって無効化"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"ロックダウン オプションの表示"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Smart Lock、指紋認証によるロック解除、ロック画面上の通知を無効にする電源ボタン オプションを表示します"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Smart Lock、生体認証によるロック解除、ロック画面上の通知を無効にする電源ボタン オプションを表示します"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"信頼エージェントはロック解除の延長のみ"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"有効にすると、信頼エージェントによりデバイスのロック解除状態が延長されます。ただし、ロック状態のデバイスのロックは解除できなくなります。"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"信頼が失われた場合に画面をロックする"</string>
@@ -393,14 +393,15 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"プライバシー"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"管理者により無効にされています"</string>
     <string name="security_status_title" msgid="5848766673665944640">"セキュリティ ステータス"</string>
-    <string name="security_dashboard_summary_face" msgid="268234254306703218">"画面ロック、フェイス アンロック"</string>
+    <string name="security_dashboard_summary_face" msgid="268234254306703218">"画面ロック、顔認証"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"画面ロック、指紋"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"画面ロック"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"顔を追加しました"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"タップして顔認証を設定してください"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"顔認証"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"フェイスアンロックの設定方法"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"フェイスアンロックの設定"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"顔認証を設定します"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"顔認証"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"仕事用の顔認証"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"顔認証の設定方法"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"顔認証の設定"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"顔で認証"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"開始"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"キャンセル"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"使用しない"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"同意する"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"もっと見る"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"顔認証でロックを解除"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"顔で認証"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"顔を使って、スマートフォンのロック解除や購入の承認を行います。\n\n注: 顔を使ってこのデバイスのロックを解除することはできません。詳しくは、組織の管理者にお問い合わせください。"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"顔を登録できませんでした。"</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"登録が完了しました。"</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"完了"</string>
-    <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"フェイスアンロックの用途"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"顔認証のパフォーマンスを向上させましょう"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"顔認証をもう一度設定してください"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"顔認証をもう一度設定してください"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"セキュリティの強化とパフォーマンスの向上"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"顔認証を設定してください"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"現在の顔認証データを削除し、顔認証をもう一度設定してください。\n\n顔認証で使用された顔認証データは安全かつ完全に削除されます。削除後に、スマートフォンのロック解除、アプリへのログイン、お支払いの確認を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"顔認証の用途"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"デバイスのロック解除"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"アプリのログインと支払い"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"フェイスアンロックの必要条件"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"目を開いて画面に顔を向ける"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"スマートフォンのロックを解除するには、目を開いて画面に顔を向ける必要があります"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"確認ボタン"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"アプリの認証時に、常に確認が必要"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"顔認証の要件"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"目を開く"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"スマートフォンのロックを解除するには、目を開いている必要があります"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"常に確認が必要"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"アプリで顔認証を使用する場合、常に確認手順が必要です"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"顔認証データを削除"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"新しいフェイスアンロックの設定"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"フェイスアンロックを使用して、デバイスのロック解除、アプリへのログイン、お支払いの確認を行えます。\n\n注:\nスマートフォンを見る動作を無意識に行うと、ロックが解除されることがあります。\n\n目を開いているときにスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\nお子様や双子など、あなたによく似た人であればスマートフォンのロックを解除できます。"</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"顔認証を設定"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"顔認証を使用して、デバイスのロック解除、アプリへのログイン、お支払いの確認を行えます。\n\n注:\nスマートフォンを見る動作を無意識に行うと、ロックが解除されることがあります。\n\n目を閉じているときでもスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できる可能性があります。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"顔認証データを削除しますか？"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"フェイスアンロックによって記録されたデータは安全かつ完全に削除されます。削除後に、スマートフォンのロック解除、アプリへのログイン、お支払いの確認を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"顔認証によって使用された顔認証データは安全かつ完全に削除されます。削除後に、スマートフォンのロック解除、アプリへのログイン、お支払いの確認を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"顔認証を使用して、スマートフォンのロックを解除します"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"指紋"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"指紋の管理"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"指紋の用途"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"画面ロックによって、紛失や盗難があった場合に誰も使用できないようタブレットを保護できます。また、フィンガープリントの設定にも画面ロックが必要になります。[キャンセル] をタップしてから、PIN、パターン、パスワードを設定してください。"</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"画面ロックによって、紛失や盗難があった場合に誰も使用できないようデバイスを保護できます。また、フィンガープリントの設定にも画面ロックが必要になります。[キャンセル] をタップしてから、PIN、パターン、パスワードを設定してください。"</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"画面ロックによって、紛失や盗難があった場合に誰も使用できないようスマートフォンを保護できます。また、フィンガープリントの設定にも画面ロックが必要になります。[キャンセル] をタップしてから、PIN、パターン、パスワードを設定してください。"</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"画面ロックによって、紛失や盗難があった場合に誰も使用できないようタブレットを保護できます。また、顔認証の設定にも画面ロックが必要になります。[キャンセル] をタップしてから、PIN、パターン、パスワードを設定してください。"</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"画面ロックによって、紛失や盗難があった場合に誰も使用できないようデバイスを保護できます。また、顔認証の設定にも画面ロックが必要になります。[キャンセル] をタップしてから、PIN、パターン、パスワードを設定してください。"</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"画面ロックによって、紛失や盗難があった場合に誰も使用できないようスマートフォンを保護できます。また、顔認証の設定にも画面ロックが必要になります。[キャンセル] をタップしてから、PIN、パターン、パスワードを設定してください。"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"画面ロックでタブレットを保護することで、紛失や盗難があった場合に誰も使用できなくなります。また、顔認証の設定にも画面ロックが必要になります。戻るには [キャンセル] をタップします。"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"画面ロックでデバイスを保護することで、紛失や盗難があった場合に誰も使用できなくなります。また、顔認証の設定にも画面ロックが必要になります。戻るには [キャンセル] をタップします。"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"画面ロックでスマートフォンを保護することで、紛失や盗難があった場合に誰も使用できなくなります。また、顔認証の設定にも画面ロックが必要になります。戻るには [キャンセル] をタップします。"</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"PIN の設定をスキップしますか？"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"パスワードの設定をスキップしますか？"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"パターンの設定をスキップしますか？"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"指紋 + パスワード"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"指紋を設定せずに続行"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"指紋を使ってスマートフォンのロックを解除できます。セキュリティ上の理由により、この方法を使用する際は予備の画面ロックを選択する必要があります。"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"顔認証 + パターン"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"顔認証 + PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"顔認証 + パスワード"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"顔認証なしで続行"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"顔認証 + パターン"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"顔認証 + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"顔認証 + パスワード"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"顔認証を設定せずに続行"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"顔認証を使用してスマートフォンのロックを解除できます。セキュリティ上の理由により、この方法を使用する際は予備の画面ロックを選択する必要があります。"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"管理者、暗号化ポリシー、または認証情報ストレージにより無効化"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"なし"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"周囲に合わせて明るさを最適化します。この機能が ON の場合でも、一時的に明るさを調整できます。"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"画面の明るさは環境やアクティビティに応じて自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"ディスプレイのホワイト バランス"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"スクリーン アテンション"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"ON / 見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"OFF"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"見ている間は画面が OFF にならなくなります。"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"カメラへのアクセス権限が必要です"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"タップすると、デバイス パーソナライズ サービスのアクセス権限を管理できます"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"スクリーン アテンションは前面カメラを使用して、ユーザーが画面を見ているかどうかを検出します。この検出はデバイスのみで行われ、画像が保存されたり、Google に送信されたりすることはありません。"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"見ている間は画面を ON のままにします"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜間モード"</string>
     <string name="night_display_text" msgid="1837277457033025056">"夜間モードを利用すると画面が黄味がかった色になります。薄明かりの下でも画面を見やすくなり、寝付きを良くする効果も期待できます。"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"スケジュール"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"画面のカスタマイズ"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"壁紙タイプの選択"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pixel のカスタマイズ"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"別のスタイル、壁紙、時計などを試す"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"別のスタイル、壁紙などを試す"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"スクリーンセーバー"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"充電時またはホルダー装着時"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"いずれか"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"パスワードが設定されました"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PINが設定されました"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"パターンが設定されました"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"顔認証を使うには、パスワードを設定する"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"顔認証を使うには、パターンを設定する"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"顔認証を使うには、PIN を設定する"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"顔認証のバックアップの設定"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"顔認証のバックアップの設定"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"顔認証のバックアップの設定"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"続行するにはデバイスのパターンを使用してください"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"続行するにはデバイスの PIN を入力してください"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"続行するにはデバイスのパスワードを入力してください"</string>
@@ -2082,7 +2098,7 @@
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"ズーム"</b>"するには、画面をすばやく 3 回タップします。\n"<ul><li>"2 本以上の指をドラッグしてスクロール"</li>\n<li>"2 本以上の指でピンチ操作してズームを調整"</li></ul>\n\n<b>"一時的にズーム"</b>"するには、画面をすばやく 3 回タップし、3 回目のタップで指を押し続けます。\n"<ul><li>"ドラッグで画面上を移動"</li>\n<li>"指を放してズームアウト"</li></ul>\n\n"キーボードやナビゲーション バーでは拡大できません。"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"拡大機能を ON にすると、画面をズームインできます。\n\n"<b>"ズームするには"</b>"、拡大機能を ON にし、画面上のどこかをタップします。\n"<ul><li>"• スクロールするには 2 本以上の指でドラッグします"</li>\n<li>"• ズームレベルを調整するには 2 本以上の指でピンチします"</li></ul>\n\n<b>"一時的にズームするには"</b>"、拡大機能を ON にし、画面上のどこかを長押しします。\n"<ul><li>"• 拡大領域を移動するにはドラッグします"</li>\n<li>"• 拡大を停止するには指を離します"</li></ul>\n\n"キーボードやナビゲーション バーはズームインできません。"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"ユーザー補助機能ボタンで開く"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"指の動きで開く"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"ジェスチャーで開く"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"新しいユーザー補助操作を使用する"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"このサービスを ON または OFF にするには、画面の下部にあるユーザー補助機能ボタン <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> をタップします。\n\nサービスを切り替えるには、ユーザー補助機能ボタンを長押しします。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"このサービスを ON または OFF にするには、2 本の指で画面の下から上にスワイプします。\n\nサービスを切り替えるには、2 本の指で上にスワイプしたまま長押しします。"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"ユーザー補助サービスを ON または OFF にするには、3 本の指で画面の下から上にスワイプします。\n\nサービスを切り替えるには、3 本の指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"[ユーザー補助機能] ボタンが [<xliff:g id="SERVICE">%1$s</xliff:g>] に設定されています。拡大を使用するには、[ユーザー補助機能] ボタンを押し続けて [拡大] を選択してください。"</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"ユーザー補助操作は「<xliff:g id="SERVICE">%1$s</xliff:g>」に設定されています。拡大を使用するには、2 本の指で画面の下から上にスワイプして長押しし、拡大を選択してください。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"音量キーのショートカット"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"ショートカット サービス"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"ロック画面から許可"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"サービスの使用"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"色補正の使用"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"字幕を使用する"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"すべてのアプリがこの設定をサポートしているわけではありません。"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"続行"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"補聴器"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"接続されている補聴器なし"</string>
@@ -3091,7 +3109,7 @@
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"仕事用プロファイルのアプリには通知へのアクセス権限はありません。"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"アカウント"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"アカウントが追加されていません"</string>
-    <string name="app_default_dashboard_title" msgid="7342549305933047317">"デフォルト アプリ"</string>
+    <string name="app_default_dashboard_title" msgid="7342549305933047317">"デフォルトのアプリ"</string>
     <string name="system_dashboard_summary" msgid="6839969589170062254">"言語、操作、時間、バックアップ"</string>
     <string name="search_results_title" msgid="1796252422574886932">"設定"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"wifi, wi-fi, ネットワーク接続, インターネット, ワイヤレス, データ, wi fi"</string>
@@ -3139,11 +3157,11 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"スライドでロック解除、パスワード、パターン、PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ワーク チャレンジ, 仕事用, プロファイル"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"仕事用プロファイル, 管理対象プロファイル, 統合する, 統合, 仕事, プロファイル"</string>
-    <string name="keywords_gesture" msgid="3526905012224714078">"操作"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"ジェスチャー"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"支払い, タップ, ペイメント"</string>
     <string name="keywords_backup" msgid="470070289135403022">"バックアップ, バック アップ"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"操作"</string>
-    <string name="keywords_face_unlock" msgid="254144854349092754">"顔, フェイス, ロック解除, アンロック, 認証, ログイン"</string>
+    <string name="keywords_face_unlock" msgid="254144854349092754">"顔, フェイス, ロック解除, アンロック, 認証, ログイン, 顔認証"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"IMEI, MEID, MIN, PRL バージョン, IMEI SV"</string>
     <string name="keywords_sim_status" msgid="6682044233620329507">"ネットワーク, モバイル ネットワークの状態, サービスの状態, 電波強度, モバイル ネットワークの種類, ローミング, ICCID, EID"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"シリアル番号, ハードウェア バージョン"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"プルダウン シェード、ステータスバー、ロック画面に表示されます"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"点滅"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"ロック画面"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"ロック画面をスキップ"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"顔認証後、最後に使用していた画面に直接移動します"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"ロック 画面, ロック画面, スキップ, バイパス"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"仕事用プロファイルのロック時"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"ロック画面上の通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"警告やサイレント通知を表示する"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"ランキング オブジェクトがありません。"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"ランキング オブジェクトにこのキーが含まれていません。"</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"テーマ設定"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"アクセント カラー"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"見出しや本文のフォント"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"アイコンの形"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"デバイスのデフォルト"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"ディスプレイ カットアウト"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ディスプレイ カットアウト, ノッチ"</string>
@@ -4178,7 +4196,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自動"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手動"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"今すぐ空き容量を増やす"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"操作"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"ジェスチャー"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"簡単な操作でスマートフォンを管理できます"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"簡単な操作でタブレットを管理できます"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"簡単な操作でデバイスを管理できます"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"システムのグラフィックス ドライバ"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"このスマートフォンでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"このタブレットでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"このデバイスでは設定がサポートされていません"</string>

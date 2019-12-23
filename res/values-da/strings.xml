@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Vælg efter UTC-forskydning"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Dato"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Tid"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Lås automatisk"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter dvale"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Lige efter dvale, undtagen når <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> holder den låst op"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter dvale, undtagen når den holdes oplåst af <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Lås efter skærmens timeout"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter timeout"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Straks efter timeout, medmindre <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> holder den oplåst"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter timeout, medmindre <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> holder den oplåst"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Vis tekst fra ejer på låseskærm"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Besked på låseskærm"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktivér widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Deaktiveret af administratoren"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Se mulighed for lukning"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Vis mulighed for afbryderknap, der deaktiverer Smart Lock, oplåsning med fingeraftryk og notifikationer på låseskærmen"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Vis mulighed for afbryderknap, der deaktiverer Smart Lock, biometrisk oplåsning og notifikationer på låseskærmen"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Trust agents låser kun op"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Hvis denne indstilling aktiveres, vil trust agents holde din enhed oplåst i længere tid, men en låst enhed kan ikke længere låses op."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Lås skærmen, når der ikke længere er sikkert"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Skærmlås, fingeraftryk"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Skærmlås"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Ansigt tilføjet"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tryk for at konfigurere ansigtsgodk."</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Ansigtsgodkendelse"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Sådan konfigureres Ansigtslås"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Konfigurer Ansigtslås"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Konfigurer ansigtslås"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Ansigtslås"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Brug ansigtslås til arbejdet"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Sådan konfigureres ansigtslås"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Konfigurer ansigtslås"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Brug dit ansigt til godkendelse"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Start"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Annuller"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Nej tak"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Acceptér"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Mere"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Lås op med dit ansigt"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Brug dit ansigt til godkendelse"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Lås din telefon op eller godkend køb ved hjælp af dit ansigt.\n\nBemærk! Du kan ikke bruge dit ansigt til at låse denne enhed op. Kontakt administratoren for din organisation for at få flere oplysninger."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Registrering af ansigt mislykkedes."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Så er du klar. Godt gået."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Udfør"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Gør ansigtslåsens registrering mere effektiv"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Konfigurer ansigtslåsen igen"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Konfigurer ansigtslåsen igen"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Gør sikkerheden og registreringen bedre"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Konfigurer ansigtslåse"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Du skal slette dine aktuelle ansigtsdata for at konfigurere ansigtslåsen igen.\n\nAnsigtsdata, der anvendes af ansigtslåsen, slettes permanent og forsvarligt. Efter fjernelsen skal du bruge din pinkode, dit mønster eller din adgangskode til at låse telefonen op, logge ind i apps og bekræfte betalinger."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Brug Ansigtslås til"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Oplåsning af telefon"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Applogin og betaling"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Påkrævet til Ansigtslås"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Åbne øjne rettet mod skærmen"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Lås altid telefonen op ved at kigge på skærmen med åbne øjne"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Bekræft knap"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Bed altid om bekræftelse i forbindelse med godkendelser i apps"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Krav til ansigtslås"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Kræv, at øjnene skal være åbne"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Din øjne skal være åbne for at låse telefonen op"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Bed altid om bekræftelse"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Kræv altid et bekræftelsestrin ved brug af ansigtslås i apps"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Slet ansigtsdata"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Konfigurer ny ansigtslås"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Brug Ansigtslås til at låse din enhed op, logge ind på apps og bekræfte betalinger.\n\nBemærk!\nDu kan komme til at låse telefonen op, hvis du kigger på den.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt, mens dine øjne er åbne.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. dit barn eller en bror eller søster."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfigurer ansigtslås"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Brug ansigtslås til at låse din enhed op, logge ind på apps og bekræfte betalinger.\n\nBemærk!\nDu kan komme til at låse telefonen op, hvis du kigger på den.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt, også selvom dine øjne er lukkede.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en tvilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vil du slette ansigtsdata?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Data, der er registreret via Ansigtslås slettes permanent på en sikker måde. Efter fjernelsen skal du bruge din pinkode, dit mønster eller din adgangskode til at låse din telefon op, logge ind i apps og bekræfte betalinger."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"De ansigtsdata, der anvendes af ansigtslåsen, slettes perment og forsvarligt. Efter fjernelsen skal du bruge din pinkode, dit mønster eller din adgangskode til at låse telefonen op, logge ind i apps og bekræfte betalinger."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Brug ansigtslås til at låse din telefon op"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingeraftryk"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Adm. fingeraftryk"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Brug fingeraftryk til"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Beskyt din tablet med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere fingeraftryk. Tryk på Annuller, og angiv derefter en pinkode, et mønster eller en adgangskode."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Beskyt din enhed med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere fingeraftryk. Tryk på Annuller, og angiv derefter en pinkode, et mønster eller en adgangskode."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Beskyt din telefon med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere fingeraftryk. Tryk på Annuller, og angiv derefter en pinkode, et mønster eller en adgangskode."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Beskyt din tablet med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere ansigtsgodkendelse. Tryk på Annuller, og angiv derefter en pinkode, et mønster eller en adgangskode."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Beskyt din enhed med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere ansigtsgodkendelse. Tryk på Annuller, og angiv derefter en pinkode, et mønster eller en adgangskode."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Beskyt din telefon med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere ansigtsgodkendelse. Tryk på Annuller, og angiv derefter en pinkode, et mønster eller en adgangskode."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Når du beskytter din tablet med en skærmlås, kan ingen bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere ansigtslås. Tryk på Annuller for at gå tilbage."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Når du beskytter din enhed med en skærmlås, kan ingen bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere ansigtslås. Tryk på Annuller for at gå tilbage."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Når du beskytter din telefon med en skærmlås, kan ingen bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere ansigtslås. Tryk på Annuller for at gå tilbage."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Vil du springe pinkodekonfiguration over?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Vil du springe adgangskodekonfiguration over?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Vil du springe mønsterkonfiguration over?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Fingeraftryk og adgangskode"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Fortsæt uden fingeraftryk"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Du kan låse din telefonen op ved hjælp af dit fingeraftryk. Af hensyn til sikkerheden kræver denne mulighed en alternativ skærmlås."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Ansigtsgodkendelse+mønster"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Ansigtsgodkendelse+pinkode"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Ansigtsgodkendelse+adgangskode"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Fortsæt uden ansigtsgodkendelse"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Ansigtslås + mønster"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Ansigtslås + pinkode"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Ansigtslås + adgangskode"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Fortsæt uden ansigtslås"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Du kan låse din telefonen op ved hjælp af dit ansigt. Af hensyn til sikkerheden kræver denne mulighed en alternativ skærmlås."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Deaktiveret af administrator, krypteringspolitik eller Lager for loginoplysninger"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ingen"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimer lysstyrken til det omgivende lys. Når denne funktion er slået til, kan du stadig justere lysstyrken midlertidigt."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Skærmens lysstyrke tilpasses automatisk på baggrund af dine omgivelser og dine aktiviteter. Du kan flytte skyderen manuelt for at hjælpe Automatisk lysstyrke med at lære dine præferencer."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Skærmens hvidbalance"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Opmærksom skærm"</string>
-    <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Aktiveret/Skærmen slukker ikke, når du kigger på den"</string>
+    <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Til – Skærmen slukker ikke, når du kigger på den"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Fra"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Forhindrer at din skærm slukker, når du kigger på den."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Adgang til kameraet kræves"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tryk for at administrere tilladelser for Personlig tilpasning på enheden"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Holder din skærm tændt, så længe du kigger på den"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Den opmærksomme skærm bruger frontkameraet til at tjekke, om der er nogen, der kigger på skærmen. Funktionen fungerer kun lokalt på enheden, og den gemmer ikke billeder eller sender billeder til Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Lad skærmen være tændt, når du kigger på den"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nattelys"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Nattelys gør farverne på din skærm mere gullige. Det gør din skærm mere behagelig at se på i svag belysning og kan gøre det nemmere at falde i søvn."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Tidsplan"</string>
@@ -1233,11 +1249,11 @@
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Sluttidspunkt"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"Status"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"Intensitet"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Fra/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off" msgid="1792750041697946539">"Fra – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"Aktiveres aldrig automatisk"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"Aktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"Aktiveres automatisk ved solnedgang"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Til/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on" msgid="1355713529996456744">"Til – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"Deaktiveres aldrig automatisk"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="5510753572245577263">"Deaktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Deaktiveres automatisk ved solopgang"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Tilpas din skærm"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Vælg baggrund fra"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Tilpas din Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Prøv forskellige stilarter, baggrunde, ure m.m."</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Prøv forskellige layout, baggrunde og meget mere"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Pauseskærm"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Under opladning, eller når enheden er tilsluttet en dockingstation"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Begge dele"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Adgangskoden er indstillet"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Pinkoden er blevet indstillet"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Mønsteret er blevet indstillet"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Angiv adgangskode for at bruge ansigt"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Angiv mønster for at bruge ansigtsgodk."</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Angiv pinkode for at bruge ansigtsgodk."</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Angiv sikkerhedskopi for ansigtslås"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Angiv mønster for at bruge ansigtslås"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Angiv pinkode for at bruge ansigtslås"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Brug mønsteret til din enhed for at fortsætte"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Angiv pinkoden til din enhed for at fortsætte"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Angiv adgangskoden til din enhed for at fortsætte"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Du kan aktivere eller deaktivere en hjælpefunktion ved at stryge opad med tre fingre fra bunden af skærmen.\n\nDu kan skifte mellem funktioner ved at stryge opad med tre fingre og holde dem nede."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Knappen Hjælpefunktioner er angivet til <xliff:g id="SERVICE">%1$s</xliff:g>. Hvis du vil bruge forstørrelse, skal du trykke på knappen Hjælpefunktioner, holde fingeren nede og derefter vælge forstørrelse."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Bevægelsen for hjælpefunktioner er indstillet til <xliff:g id="SERVICE">%1$s</xliff:g>. Hvis du vil bruge forstørrelse, kan du stryge opad med to fingre fra bunden af skærmen og holde dem nede. Vælg derefter forstørrelse."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Genvej via lydstyrkeknapperne"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Genvejstjeneste"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Tillad fra låseskærm"</string>
@@ -2126,7 +2143,8 @@
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Feedback ved tryk"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Brug tjenesten"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Brug farvekorrigering"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Brug tekster"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Brug undertekster"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Denne indstilling understøttes ikke i alle apps."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Fortsæt"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Høreapparater"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Der er ikke tilknyttet nogen høreapparater"</string>
@@ -2142,7 +2160,7 @@
     <string name="accessibility_summary_state_disabled" msgid="2984230257590246745">"Fra"</string>
     <string name="accessibility_summary_state_stopped" msgid="1144156815350270876">"Kører ikke. Tryk for at få flere oplysninger."</string>
     <string name="accessibility_description_state_stopped" msgid="6953539746047006596">"Denne tjeneste fungerer ikke korrekt."</string>
-    <string name="enable_quick_setting" msgid="2366999897816894536">"Vis i Hurtige indstillinger"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Vis i Kvikmenu"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Korrektionstilstand"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
       <item quantity="one">Ekstremt lille forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
@@ -2373,7 +2391,7 @@
     <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Disse apps har brugt batteri i baggrunden. Begrænsede apps fungerer muligvis ikke korrekt, og notifikationer kan være forsinkede."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Brug batteriadministration"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Registrer, nå apps dræner batteriet"</string>
-    <string name="battery_manager_on" msgid="8643310865054362396">"Til/Registrerer, når apps dræner batteriet"</string>
+    <string name="battery_manager_on" msgid="8643310865054362396">"Til – Registrerer, når apps dræner batteriet"</string>
     <string name="battery_manager_off" msgid="5473135235710343576">"Fra"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="1026141135861471129">
       <item quantity="one">%1$d app er begrænset</item>
@@ -3092,7 +3110,7 @@
     <string name="account_dashboard_title" msgid="5895948991491438911">"Konti"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Ingen konti er tilføjet"</string>
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Standardapps"</string>
-    <string name="system_dashboard_summary" msgid="6839969589170062254">"Sprog, bevægelser, klokkeslæt, bckup"</string>
+    <string name="system_dashboard_summary" msgid="6839969589170062254">"Sprog, bevægelser, klokkeslæt, backup"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Indstillinger"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"wifi, wi-fi, netværksforbindelse, internet, trådløs, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="8745178424405564885">"Wi‑Fi-notifikation, wifi-notifikation"</string>
@@ -3287,8 +3305,8 @@
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="7555742240858292255"><annotation id="link">" Se tilpassede indstillinger"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"Kun prioritet"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"Til/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Fra/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"Til – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Fra – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"Fra"</string>
     <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"Til"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="3483258992533158479">"Spørg hver gang"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Vises i panelet, der trækkes ned, på statusbjælken og på låseskærmen."</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blinkende lys"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Låseskærm"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Spring låseskærmen over"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Gå til den seneste skærm efter oplåsning med Ansigtslås"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Låseskærm, lås skærm, spring over, tilsidesæt"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Når arbejdsprofilen er låst"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Notifikationer på låseskærmen"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Vis underretninger og lydløse notifikationer"</string>
@@ -3535,7 +3556,7 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Ja eller Måske"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Ja"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Reglen blev ikke fundet."</string>
-    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Til/<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Til – <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Dage"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Ingen"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Rangeringsobjektet mangler."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Rangeringobjektet indeholder ikke denne nøgle."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Tilpasning af tema"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Kontrastfarve"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Skrifttype til overskrift/brødtekst"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Ikonform"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Enhedens standardindstilling"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Skærmhak"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"udskæring på skærmen, hak"</string>
@@ -4145,11 +4163,11 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Forbundet med flere enheder"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demotilstand for systemets brugerflade"</string>
     <string name="dark_ui_mode" msgid="6795784845192720944">"Mørkt tema"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Aktiveret/midlertidigt deaktiveret af batterisparefunktionen"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Til – Midlertidigt deaktiveret af batterisparefunktionen"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Midlertidigt aktiveret af batterisparefunktionen"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Understøttede apps skifter også til mørkt tema"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"OK"</string>
-    <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Felter for udviklere til Hurtige indstillinger"</string>
+    <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Felter for udviklere til Kvikmenu"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Sporing af Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Sensorer er slået fra"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Indstillinger for arbejdsprofil"</string>
@@ -4209,7 +4227,7 @@
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tryk to gange for at tjekke din tablet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tryk to gange for at tjekke enheden"</string>
     <string name="ambient_display_summary" msgid="8534654210539169707">"Tryk to gange på skærmen for at se klokkeslæt, notifikationer og andre oplysninger."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Løft for at tjekke telefon"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Løft for at tjekke telefonen"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Løft for at tjekke din tablet"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Løft for at tjekke enheden"</string>
     <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"Aktivering af skærm"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Grafikdriver til system"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Indstillingen understøttes ikke på denne telefon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Indstillingen understøttes ikke på denne tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Indstillingen understøttes ikke på denne enhed"</string>
@@ -4535,7 +4551,7 @@
     <string name="mobile_network_mode_error" msgid="4784347953600013818">"Ugyldig netværkstilstand <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorer."</string>
     <string name="mobile_network_apn_title" msgid="7610812642954395440">"Adgangspunkter"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Utilgængelig ved forbindelse til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="7993926837251874514">"Helbredoplysninger, kontakter til nødsituationer"</string>
+    <string name="emergency_info_contextual_card_summary" msgid="7993926837251874514">"Helbredoplysninger, kontaktpersoner ved nødsituationer"</string>
     <string name="see_more" msgid="5953815986207345223">"Se mere"</string>
     <string name="see_less" msgid="1250265310929558370">"Se mindre"</string>
     <string name="network_connection_request_dialog_title" msgid="3502355504717957803">"Enhed, der skal bruges sammen med <xliff:g id="APPNAME">%1$s</xliff:g>"</string>

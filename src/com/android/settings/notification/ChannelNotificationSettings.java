@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static com.android.settings.notification.ChannelListPreferenceController.ARG_FROM_SETTINGS;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;

@@ -16,7 +16,13 @@
 
 package com.android.settings.network.telephony;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
 import android.content.Context;
+import android.database.ContentObserver;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
@@ -25,8 +31,12 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
@@ -37,17 +47,27 @@ import com.android.settings.R;
  */
 public class EnabledNetworkModePreferenceController extends
         TelephonyBasePreferenceController implements
-        ListPreference.OnPreferenceChangeListener {
+        ListPreference.OnPreferenceChangeListener, LifecycleObserver {
 
     private CarrierConfigManager mCarrierConfigManager;
+    private ContentObserver mPreferredNetworkModeObserver;
     private TelephonyManager mTelephonyManager;
     private boolean mIsGlobalCdma;
     @VisibleForTesting
     boolean mShow4GForLTE;
+    private Preference mPreference;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mPreferredNetworkModeObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+            @Override
+            public void onChange(boolean selfChange) {
+                if (mPreference != null) {
+                    updateState(mPreference);
+                }
+            }
+        };
     }
 
     @Override
@@ -61,13 +81,9 @@ public class EnabledNetworkModePreferenceController extends
         } else if (carrierConfig == null) {
             visible = false;
         } else if (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)) {
-            visible = false;
-        } else if (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)
-                && !telephonyManager.getServiceState().getRoaming()
-                && telephonyManager.getServiceState().getDataRegState()
-                == ServiceState.STATE_IN_SERVICE) {
+                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
+                || carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)) {
             visible = false;
         } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             visible = false;
@@ -76,6 +92,24 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    }
+
+    @OnLifecycleEvent(ON_START)
+    public void onStart() {
+        mContext.getContentResolver().registerContentObserver(
+                Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + mSubId), true,
+                mPreferredNetworkModeObserver);
+    }
+
+    @OnLifecycleEvent(ON_STOP)
+    public void onStop() {
+        mContext.getContentResolver().unregisterContentObserver(mPreferredNetworkModeObserver);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -102,7 +136,7 @@ public class EnabledNetworkModePreferenceController extends
         return false;
     }
 
-    public void init(int subId) {
+    public void init(Lifecycle lifecycle, int subId) {
         mSubId = subId;
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
@@ -115,6 +149,7 @@ public class EnabledNetworkModePreferenceController extends
                 ? carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL)
                 : false;
+        lifecycle.addObserver(this);
     }
 
     private int getPreferredNetworkMode() {

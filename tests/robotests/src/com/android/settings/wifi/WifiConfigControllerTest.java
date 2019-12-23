@@ -28,6 +28,8 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiEnterpriseConfig;
+import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiManager;
 import android.os.ServiceSpecificException;
 import android.security.KeyStore;
@@ -444,5 +446,47 @@ public class WifiConfigControllerTest {
 
         WifiConfiguration config = mController.getConfig();
         assertThat(config.macRandomizationSetting).isEqualTo(WifiConfiguration.RANDOMIZATION_NONE);
+    }
+
+    @Test
+    public void selectSecurity_wpa3Eap192bit_eapMethodTls() {
+        final WifiManager wifiManager = mock(WifiManager.class);
+        when(wifiManager.isWpa3SuiteBSupported()).thenReturn(true);
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_MODIFY, wifiManager);
+        final Spinner securitySpinner = mView.findViewById(R.id.security);
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        int wpa3Eap192bitPosition = -1;
+        final int securityCount = mController.mSecurityInPosition.length;
+        for (int i = 0; i < securityCount; i++) {
+            if (mController.mSecurityInPosition[i] != null &&
+                    mController.mSecurityInPosition[i] == AccessPoint.SECURITY_EAP_SUITE_B) {
+                wpa3Eap192bitPosition = i;
+            }
+        }
+
+        mController.onItemSelected(securitySpinner, null /* view */, wpa3Eap192bitPosition,
+                0 /* id */);
+
+        final int selectedItemPosition = eapMethodSpinner.getSelectedItemPosition();
+        assertThat(eapMethodSpinner.getSelectedItem().toString()).isEqualTo("TLS");
+    }
+
+    @Test
+    public void selectEapMethod_savedAccessPoint_shouldGetCorrectPosition() {
+        when(mAccessPoint.isSaved()).thenReturn(true);
+        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
+        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        when(mockWifiEnterpriseConfig.getEapMethod()).thenReturn(Eap.PEAP);
+        mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig ;
+        when(mAccessPoint.getConfig()).thenReturn(mockWifiConfig);
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+                WifiConfigUiBase.MODE_MODIFY);
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+
+        eapMethodSpinner.setSelection(Eap.TLS);
+
+        assertThat(eapMethodSpinner.getSelectedItemPosition()).isEqualTo(Eap.TLS);
     }
 }

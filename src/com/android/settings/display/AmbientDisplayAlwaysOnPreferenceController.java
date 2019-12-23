@@ -17,6 +17,7 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -29,6 +30,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
     private final int OFF = 0;
 
     private static final int MY_USER = UserHandle.myUserId();
+    private static final String PROP_AWARE_AVAILABLE = "ro.vendor.aware_available";
 
     private AmbientDisplayConfiguration mConfig;
     private OnPreferenceChangedCallback mCallback;
@@ -43,7 +45,9 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
 
     @Override
     public int getAvailabilityStatus() {
-        return isAvailable(getConfig()) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return isAvailable(getConfig())
+                && !SystemProperties.getBoolean(PROP_AWARE_AVAILABLE, false) ?
+                AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

@@ -30,6 +30,11 @@
         android:key="block_desc" />
 
     <!-- Channels/Channel groups added here -->
+    <PreferenceCategory
+        android:key="channels"
+        android:layout="@layout/empty_view"
+        settings:allowDividerAbove="false"
+        settings:allowDividerBelow="false" />
 
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference

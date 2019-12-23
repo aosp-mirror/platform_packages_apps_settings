@@ -55,7 +55,7 @@ public class TetherProvisioningActivity extends Activity {
 
         final int tetherSubId = getIntent().getIntExtra(EXTRA_SUBID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        final int subId = SubscriptionManager.getDefaultDataSubscriptionId();
+        final int subId = SubscriptionManager.getActiveDataSubscriptionId();
         if (tetherSubId != subId) {
             Log.e(TAG, "This Provisioning request is outdated, current subId: " + subId);
             return;
@@ -67,6 +67,7 @@ public class TetherProvisioningActivity extends Activity {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClassName(provisionApp[0], provisionApp[1]);
         intent.putExtra(EXTRA_TETHER_TYPE, tetherType);
+        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, subId);
         if (DEBUG) {
             Log.d(TAG, "Starting provisioning app: " + provisionApp[0] + "." + provisionApp[1]);
         }

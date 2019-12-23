@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Select by UTC offset"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Date"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Time"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Automatically lock"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> after sleep"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Immediately after sleep, except when kept unlocked by <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> after sleep, except when kept unlocked by <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Lock after screen timeout"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> after timeout"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Immediately after timeout, except when kept unlocked by <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> after timeout, except when kept unlocked by <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Show owner info on lock screen"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Lock screen message"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Enable widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Disabled by admin"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Show lockdown option"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Display power button option that turns off Smart Lock, fingerprint unlocking and notifications on the lock screen"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Display power button option that turns off Smart Lock, biometric unlocking and notifications on the lock screen"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Trust agents only extend unlock"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"If enabled, trust agents will keep your device unlocked for longer, but can no longer unlock a locked device."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Lock screen when trust is lost"</string>
@@ -381,7 +381,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="8523775367089431611">"Loading…"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Accounts"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Security"</string>
-    <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Encryption &amp; credentials"</string>
+    <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Encryption and credentials"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Phone encrypted"</string>
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Phone not encrypted"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Device encrypted"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Screen lock, fingerprint"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Screen lock"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Face added"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tap to set up face authentication"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Face authentication"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"How to set up Face Unlock"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Set up Face unlock"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Set up face unlock"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Face unlock"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Face unlock for work"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"How to set up face unlock"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Set up face unlock"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Use your face to authenticate"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Start"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Cancel"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"No, thanks"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Agree"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"More"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Unlock with your face"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Use your face to authenticate"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Use your face to unlock your phone, authorise purchases or sign in to apps."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Use your face to unlock your phone or approve purchases.\n\nNote: You can’t use your face to unlock this device. For more information, contact your organisation’s admin."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Use your face to unlock your phone, authorise purchases or sign in to apps"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Face enrolment didn\'t work."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"All set. Looking good."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Done"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Improve face unlock performance"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Set up face unlock again"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Set up face unlock again"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Improve security and performance"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Set up face unlock"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Delete your current face data to set up face unlock again.\n\nThe face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern or password to unlock your phone, sign in to apps and confirm payments."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Use face unlock for"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Unlocking your phone"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"App sign-in &amp; payments"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Require for face unlock"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Open eyes looking at screen"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"To unlock the phone, always require looking at the screen with your eyes open"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Confirm button"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"When authenticating for apps, always require confirmation"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Requirements for face unlock"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Require eyes to be open"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"To unlock the phone, your eyes must be open"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Always require confirmation"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"When using Face Unlock in apps, always require confirmation step"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Delete face data"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Set up new face unlock"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Use Face unlock to unlock your device, sign in to apps and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, for example your child or an identical sibling."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Set up face unlock"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Use face unlock to unlock your device, sign in to apps and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Delete face data?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Data recorded by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern or password to unlock your phone, sign in to apps and confirm payments."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"The face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern or password to unlock your phone, sign in to apps and confirm payments."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Use face unlock to unlock your phone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerprint"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Manage fingerprints"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Use fingerprint for"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Protect your tablet with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN, pattern or password."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Protect your device with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN, pattern or password."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Protect your phone with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN, pattern or password."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Protect your tablet with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN, pattern or password."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Protect your device with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN, pattern or password."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Protect your phone with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN, pattern or password."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"By protecting your tablet with a screen lock option, no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face unlock. To go back, tap Cancel."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"By protecting your device with a screen lock option, no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face unlock. To go back, tap Cancel."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"By protecting your phone with a screen lock option, no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face unlock. To go back, tap Cancel."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Skip PIN setup?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Skip password setup?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Skip pattern setup?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Fingerprint + Password"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Continue without fingerprint"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Face authentication + Pattern"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Face authentication + PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Face authentication + Password"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Continue without face authentication"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Face unlock + pattern"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Face unlock + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Face unlock + password"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Continue without face unlock"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"You can unlock your phone using your face. For security, this option requires a backup screen lock."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Disabled by admin, encryption policy or credential storage"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"None"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimise brightness level for available light. When this feature is on, you can still adjust brightness temporarily."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help Adaptive brightness learn your preferences."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Display white balance"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Screen attention"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"On/Screen won’t turn off if you’re looking at it"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Off"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Prevents your screen from turning off if you’re looking at it."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Camera access needed"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tap to manage permissions for Device Personalisation Services"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Prevents your screen from turning off if you’re looking at it"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Screen attention uses the front camera to see if someone is looking at the screen. It works on-device, and images are never stored or sent to Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Keep screen on when viewing it"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Night Light"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Night Light tints your screen amber. This makes it easier to look at your screen or read in dim light, and may help you fall asleep more easily."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Schedule"</string>
@@ -1252,14 +1268,14 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"Screen turns off"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"After <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> of inactivity"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Wallpaper"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"Styles &amp; wallpapers"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"Styles and wallpapers"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"Default"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Custom"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Change wallpaper"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalise your screen"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Choose wallpaper from"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Customise your Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Try different styles, wallpapers, clocks and more"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Try different styles, wallpapers and more"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"While charging or docked"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Either"</string>
@@ -1629,7 +1645,7 @@
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Portable hotspot"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth tethering"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Tethering"</string>
-    <string name="tether_settings_title_all" msgid="3058586928118801157">"Hotspot &amp; tethering"</string>
+    <string name="tether_settings_title_all" msgid="3058586928118801157">"Hotspot and tethering"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"Hotspot on, tethering"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"Hotspot on"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"Tethering"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"password has been set"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN has been set"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Pattern has been set"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"To use face authentication, set password"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"To use face authentication, set pattern"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"To use face authentication, set PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"To use face unlock, set password"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"To use face unlock, set pattern"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"To use face unlock, set PIN"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Use your device pattern to continue"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Enter your device PIN to continue"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Enter your device password to continue"</string>
@@ -2080,7 +2096,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Tap 3 times to zoom"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Tap a button to zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"To zoom"</b>", quickly tap the screen 3 times.\n"<ul><li>"Drag 2 or more fingers to scroll"</li>\n<li>"Pinch 2 or more fingers to adjust zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", quickly tap the screen 3 times and hold down your finger on the third tap.\n"<ul><li>"Drag to move around the screen"</li>\n<li>"Lift finger to zoom out"</li></ul>\n\n"You can\'t zoom in on the keyboard and navigation bar."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"To zoom"</b>", start magnification, then tap anywhere on the screen.\n"<ul><li>"• Drag two or more fingers to scroll"</li>\n<li>"• Pinch two or more fingers to adjust zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", start magnification, then touch &amp; hold anywhere on the screen.\n"<ul><li>"• Drag to move around the screen"</li>\n<li>"• Lift finger to zoom out"</li></ul>\n\n"You can’t zoom in on the keyboard or navigation bar."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"To zoom"</b>", start magnification, then tap anywhere on the screen.\n"<ul><li>"• Drag two or more fingers to scroll"</li>\n<li>"• Pinch two or more fingers to adjust zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", start magnification, then touch and hold anywhere on the screen.\n"<ul><li>"• Drag to move around the screen"</li>\n<li>"• Lift finger to zoom out"</li></ul>\n\n"You can’t zoom in on the keyboard or navigation bar."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Use accessibility button to open"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Use gesture to open"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Use new accessibility gesture"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"The accessibility button is set to <xliff:g id="SERVICE">%1$s</xliff:g>. To use magnification, touch &amp; hold the accessibility button, then select magnification."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"The accessibility gesture is set to the <xliff:g id="SERVICE">%1$s</xliff:g>. To use magnification, swipe up with two fingers from the bottom of the screen and hold. Then select magnification."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Volume key shortcut"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Shortcut service"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Allow from lock screen"</string>
@@ -2114,7 +2131,7 @@
     <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Time to take action (Accessibility timeout)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Time to take action"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Choose how long to show messages that ask you to take action, but are visible only temporarily.\n\nNot all apps support this setting."</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Touch &amp; hold delay"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Touch and hold delay"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Colour inversion"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"May affect performance"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Dwell timing"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Use service"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Use colour correction"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Use captions"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Not all apps support this setting."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continue"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Hearing aids"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"No hearing aids connected"</string>
@@ -3077,7 +3095,7 @@
       <item quantity="other">Show %d hidden items</item>
       <item quantity="one">Show %d hidden item</item>
     </plurals>
-    <string name="network_dashboard_title" msgid="3135144174846753758">"Network &amp; Internet"</string>
+    <string name="network_dashboard_title" msgid="3135144174846753758">"Network and Internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"mobile"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"data usage"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"hotspot"</string>
@@ -3086,7 +3104,7 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="3840842725283655533">"Bluetooth, driving mode"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
-    <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Apps &amp; notifications"</string>
+    <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Apps and notifications"</string>
     <string name="app_and_notification_dashboard_summary" msgid="3285151907659820564">"Recent apps, default apps"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Notification access is not available for apps in the work profile."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Accounts"</string>
@@ -3214,7 +3232,7 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> enabled</item>
       <item quantity="one">1 enabled</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="1066226840983908121">"Do Not Disturb"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"Do not disturb"</string>
     <string name="zen_mode_slice_subtitle" msgid="1495506059205752083">"Limit interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"Turn on Do Not Disturb"</string>
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Exceptions"</string>
@@ -3350,7 +3368,7 @@
     <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Adaptive notification priority"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Automatically set lower priority notifications to Gentle"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Suggested actions and replies"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Automatically show suggested actions &amp; replies"</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Automatically show suggested actions and replies"</string>
     <string name="snooze_options_title" msgid="7447722951050463793">"Allow notification snoozing"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Hide icons from gentle notifications"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Icons from gentle notifications aren\'t shown in the status bar"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Display in pull-down shade, status bar &amp; on lock screen"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blink light"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lock screen"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Skip lock screen"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"After face unlock, go directly to last used screen"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Lock screen, Lockscreen, Skip, Bypass"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"When work profile is locked"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Notifications on lockscreen"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Show alerting and silent notifications"</string>
@@ -3735,7 +3756,7 @@
     <string name="app_link_open_never" msgid="3407647600352398543">"Don’t open in this app"</string>
     <string name="default_apps_title" msgid="1660450272764331490">"Default"</string>
     <string name="default_for_work" msgid="9152194239366247932">"Default for work"</string>
-    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assist &amp; voice input"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assist and voice input"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Assist app"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Make <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> your assistant?"</string>
     <string name="assistant_security_warning" msgid="8498726261327239136">"The assistant will be able to read information about apps that are in use on your system, including information visible on your screen or accessible within the apps."</string>
@@ -3967,7 +3988,7 @@
     <string name="condition_battery_summary" msgid="5847532902924566572">"Features restricted"</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Mobile data is off"</string>
     <string name="condition_cellular_summary" msgid="816822977403022625">"Internet only available via Wi‑Fi"</string>
-    <string name="condition_bg_data_title" msgid="5475793236997935138">"Data Saver"</string>
+    <string name="condition_bg_data_title" msgid="5475793236997935138">"Data saver"</string>
     <string name="condition_bg_data_summary" msgid="1852811387315557164">"Features restricted"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Work profile is off"</string>
     <string name="condition_work_summary" msgid="9167580982244020746">"For apps &amp; notifications"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Ranking object is missing."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Ranking object doesn\'t contain this key."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Theming"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Accent colour"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Headline/body font"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Icon shape"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Device default"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Display cutout"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"display cutout, notch"</string>
@@ -4179,9 +4197,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Free up space now"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gestures"</string>
-    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Quick gestures to control your phone"</string>
-    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Quick gestures to control your tablet"</string>
-    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Quick gestures to control your device"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Quick Gestures to control your phone"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Quick Gestures to control your tablet"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Quick Gestures to control your device"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Jump to camera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"To quickly open camera, press the power button twice. Works from any screen."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Open camera quickly"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"System Graphics Driver"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Setting isn’t supported on this phone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Setting isn’t supported on this tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Setting isn’t supported on this device"</string>

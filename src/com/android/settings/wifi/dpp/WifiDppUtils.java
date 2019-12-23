@@ -296,6 +296,7 @@ public class WifiDppUtils {
         if (!TextUtils.isEmpty(preSharedKey)) {
             intent.putExtra(EXTRA_WIFI_PRE_SHARED_KEY, preSharedKey);
         }
+        intent.putExtra(EXTRA_WIFI_HIDDEN_SSID, wifiConfiguration.hiddenSSID);
     }
 
     /**

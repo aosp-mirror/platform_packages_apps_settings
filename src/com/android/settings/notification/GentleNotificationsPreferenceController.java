@@ -16,8 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
-
 import android.content.Context;
 import android.provider.Settings;
 

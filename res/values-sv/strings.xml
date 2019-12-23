@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Välj efter UTC-förskjutning"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Tid"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Lås automatiskt"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter viloläge"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Omedelbart efter viloläge, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter viloläge, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Lås när skärmens tidsgräns har passerats"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter tidsgränsen"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Omedelbart efter tidsgränsen, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter tidsgränsen, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Visa ägaruppgifter på den låsta skärmen"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Låsskärmsmeddelande"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktivera widgetar"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Inaktiverad av administratören"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Visa låsningsalternativ"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Visa alternativet för strömbrytaren som inaktiverar Smart Lock, upplåsning med fingeravtryck och aviseringar på låsskärmen."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Visa alternativet för strömbrytaren som inaktiverar Smart Lock, upplåsning med biometri och aviseringar på låsskärmen."</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Enbart förlängd upplåsning för betrodda"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Om detta aktiveras håller betrodda agenter enheten upplåst längre, men de kan inte längre låsa upp en låst enhet."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Lås skärmen när ingen är betrodd"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Skärmlås, fingeravtryck"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Skärmlås"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Ansikte har lagts till"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tryck för att ange ansiktsautentisering"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Ansiktsautentisering"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Så här konfigurerar du Ansiktslås"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Konfigurera ansiktslås"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Konfigurera ansiktslås"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Ansiktslås"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Ansiktslås för jobbet"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Så här konfigurerar du ansiktslås"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Konfigurera ansiktslås"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Autentisera med hjälp av ditt ansikte"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Börja"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Avbryt"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Nej tack"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Jag godkänner"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Mer"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Lås upp med ansiktet"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Autentisera med hjälp av ditt ansikte"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Lås upp mobilen, godkänn köp eller logga in i appar med ditt ansikte."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Lås upp mobilen eller godkänn köp med hjälp av ansiktet.\n\nObs! Du kan inte låsa upp den här enheten med hjälp av ansiktet. Kontakta organisationens administratör om du vill veta mer."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Lås upp mobilen, godkänn köp eller logga in i appar med ditt ansikte"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Det gick inte att registrera ansiktet."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Nu är det klart."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Klar"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Förbättra prestandan för ansiktslåset"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Konfigurera ansiktslåset på nytt"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Konfigurera ansiktslåset på nytt"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Förbättra säkerheten och prestandan"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Konfigurera ansiktslås"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Radera din nuvarande ansiktsdata och konfigurera om ansiktslåset.\n\nAnsiktsdatan som används för ansiktslåset tas bort permanent på ett säkert sätt. Efter borttagningen låser du upp telefonen, loggar in i appar och bekräftar betalningar med hjälp av pinkoden, det grafiska lösenordet eller lösenordet."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Använd ansiktslås för att"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Låsa upp telefonen"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Logga in och göra köp i appar"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Obligatoriskt för ansiktslås"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Se på skärmen med öppna ögon"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Kräv att mobilen bara låses upp när du ser på skärmen med ögonen öppna"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Knappen Bekräfta"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Autentisering i appar måste alltid bekräftas"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Krav för ansiktslås"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Du måste ha ögonen öppna"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Du måste ha ögonen öppna för att låsa upp mobilen"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Måste alltid bekräftas"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Ansiktslås i appar måste alltid bekräftas"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Radera ansiktsdata"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Konfigurera ett nytt ansiktslås"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Med hjälp av ansiktslåset låser du upp enheten, loggar in i appar och bekräftar betalningar.\n\nTänk på detta:\nOm du tittar på mobilen kan du oavsiktligt låsa upp den.\n\nAndra kan låsa upp din mobil om de håller upp den mot ditt ansikte när dina ögon är öppna.\n\nMobilen kan låsas upp av någon som är mycket lik dig, till exempel ditt barn eller ett syskon."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfigurera ansiktslås"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Med hjälp av ansiktslås kan du låsa upp enheten, logga in i appar och bekräfta betalningar.\n\nTänk på detta:\nOm du tittar på mobilen kan du oavsiktligt låsa upp den.\n\nAndra kan låsa upp din mobil om de håller upp den mot ditt ansikte, även om du inte har ögonen öppna.\n\nMobilen kan låsas upp av någon som är mycket lik dig, till exempel ett syskon."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vill du radera ansiktsdata?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Data som har registrerats av Ansiktslås raderas säkert och permanent. Efter borttagningen låser du upp mobilen, loggar in i appar och bekräftar betalningar med hjälp av pinkoden, det grafiska lösenordet eller lösenordet."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Ansiktsdatan som används för ansiktslåset tas bort permanent på ett säkert sätt. Efter borttagningen använder du pinkoden, det grafiska lösenordet eller lösenordet för att låsa upp telefonen, logga in i appar och bekräfta betalningar ."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Lås upp telefonen med Ansiktslås"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingeravtryck"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Hantera fingeravtryck"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Använd avtryck för"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Skydda surfplattan med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera fingeravtryck. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Skydda enheten med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera fingeravtryck. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Skydda mobilen med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera fingeravtryck. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Skydda surfplattan med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktsautentisering. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Skydda enheten med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktsautentisering. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Skydda mobilen med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktsautentisering. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Om du skyddar surfplattan med ett skärmlåsalternativ kan ingen använda den om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktslås. Återgå genom att trycka på Avbryt."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Om du skyddar enheten med ett skärmlåsalternativ kan ingen använda den om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktslås. Återgå genom att trycka på Avbryt."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Om du skyddar mobilen med ett skärmlåsalternativ kan ingen använda den om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktslås. Återgå genom att trycka på Avbryt."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Vill du hoppa över pinkod?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Vill du hoppa över lösenord?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Vill du hoppa över grafiskt lösenord?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Fingeravtryck + lösenord"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Fortsätt utan fingeravtryck"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Du kan låsa upp mobilen med hjälp av ditt fingeravtryck. Av säkerhetsskäl krävs ett alternativt skärmlås."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Ansiktsautentisering + Grafiskt lösenord"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Ansiktsautentisering + Pinkod"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Ansiktsautentisering + Lösenord"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Fortsätt utan ansiktsautentisering"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Ansiktslås + grafiskt lösenord"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Ansiktslås + pinkod"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Ansiktslås + lösenord"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Fortsätt utan ansiktslås"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Du kan låsa upp mobilen med hjälp av ditt ansikte. Av säkerhetsskäl krävs ett alternativt skärmlås."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Inaktiverad p.g.a. admin., kryptering eller uppgiftslagring"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Inget"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimera ljusstyrka efter tillgängligt ljus. Du kan justera ljusstyrkan tillfälligt om funktionen är aktiverad."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Skärmens ljusstyrka justeras automatiskt efter miljö och aktivitet. Du kan träna Anpassad ljusstyrka med dina egna inställningar genom att flytta reglaget manuellt."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Skärmens vitbalans"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Blickavkänning"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"På/Skärmen stängs inte av om du tittar på den"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Av"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Skärmen hindras från att stängas av när du tittar på den."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kameraåtkomst krävs"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tryck om du vill hantera behörigheter för tjänster för enhetsanpassning"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Skärmen hindras från att stängas av när du tittar på den"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Den främre kameran används i Blickavkänning för att avgöra om någon tittar på skärmen. Funktionen finns på enheten och bilderna varken lagras eller skickas till Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Låt skärmen vara på så länge du tittar på den"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nattljus"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Med nattljus blir skärmen gultonad. Då ser du bättre i svagt ljus och det kan bli lite lättare att somna."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Schemalägg"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Anpassa skärmen"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Välj bakgrund från"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Anpassa Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Testa olika format, bakgrunder, klockor med mera"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Testa olika format, bakgrunder med mera"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Skärmsläckare"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Vid laddning eller dockning"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Båda"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Lösenordet angavs"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-koden angavs"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Lösenordet har angetts"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Ansiktsautentisering: lösenord krävs"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Ansiktsautentisering: graf. lösen krävs"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Ansiktsautentisering: pinkod krävs"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Ange lösenord för ansiktslås"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Ange grafiskt lösenord för ansiktslås"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Ange pinkod för ansiktslås"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Ange det grafiska lösenordet för enheten om du vill fortsätta"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Ange pinkoden för enheten om du vill fortsätta"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Ange lösenordet för enheten om du vill fortsätta"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Aktivera och inaktivera tillgänglighetstjänster genom att svepa uppåt med tre fingrar från skärmens nederkant.\n\nByt mellan tjänster genom att svepa uppåt med tre fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"<xliff:g id="SERVICE">%1$s</xliff:g> har angetts för tillgänglighetsknappen. Om du vill använda förstoring trycker du länge på tillgänglighetsknappen och väljer förstoring."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Tillgänglighetsrörelsen är inställd på <xliff:g id="SERVICE">%1$s</xliff:g>. Om du vill använda förstoring sveper du uppåt med två fingrar från skärmens nederkant och håller kvar fingret. Välj sedan Förstoring."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Kortkommando för volymknapp"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Tjänst för kortkommando"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Tillåt på låsskärmen"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Använd tjänsten"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Använd färgkorrigering"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Använd textning"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Alla appar har inte stöd för den här inställningen."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Fortsätt"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Hörapparater"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Inga hörapparater har anslutits"</string>
@@ -2465,7 +2483,7 @@
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> har använts av <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> av den totala batterianvändningen"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Fördelning sedan senaste fulladdningen"</string>
-    <string name="battery_last_full_charge" msgid="7151251641099019361">"Sedan senaste fulladdning"</string>
+    <string name="battery_last_full_charge" msgid="7151251641099019361">"Senaste fulladdning"</string>
     <string name="battery_full_charge_last" msgid="8892335687734288031">"Fulladdat batteri räcker i ungefär"</string>
     <string name="battery_footer_summary" msgid="67169726550144016">"Informationen om batterianvändning är en uppskattning och kan ändras utifrån användning"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Under aktiv användning"</string>
@@ -2951,7 +2969,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Samtalshistoriken delas med den här användaren."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vill du aktivera telefonsamtal och sms?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Samtals- och sms-historiken delas med den här användaren."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Krisinformation"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Nödinformation"</string>
     <string name="emergency_info_summary" msgid="5062945162967838521">"Information och kontakter för <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Tillåt appar och innehåll"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Appar med begränsningar"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Visa på aviseringspanelen, i statusfältet och på låsskärmen."</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blinkande ljus"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Låsskärm"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Hoppa över låsskärmen"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Öppna den senast använda skärmen när ansiktslåset låses upp"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Låsskärm, Hoppa över, Kringgå"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"När jobbprofilen är låst"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Aviseringar på låsskärmen"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Visa aviseringar med och utan ljud"</string>
@@ -3832,7 +3853,7 @@
     <string name="assist_access_context_title" msgid="2269032346698890257">"Använda text från skärmen"</string>
     <string name="assist_access_context_summary" msgid="1991421283142279560">"Tillåt att assistentappen får åtkomst till innehåll på skärmen, till exempel text"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Använda skärmdump"</string>
-    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Tillåt att assistenappen får åtkomst till en bild på skärmen"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Tillåt att assistentappen får åtkomst till en bild på skärmen"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Lys upp skärmen"</string>
     <string name="assist_flash_summary" msgid="9160668468824099262">"Lys upp skärmens kanter när assistentappen har tillgång till text på skärmen eller på en skärmdump"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Med assistentappar kan du få hjälp som baseras på den information som visas på den aktuella skärmen. Vissa appar har stöd för både översikts- och röstinmatningstjänster som hjälper dig."</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Det finns inget rankningsobjekt."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Rankningsobjektet innehåller inte den här nyckeln."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Teman"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Accentfärg"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Teckensnitt för rubrik/brödtext"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Ikonform"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Enhetens standardinställning"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Skärmutskärning"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"urklipp av skärm, flärp"</string>
@@ -4179,9 +4197,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuellt"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Frigör utrymme nu"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Rörelser"</string>
-    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr mobilen med snabba rörelser"</string>
-    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr surfplattan med snabba rörelser"</string>
-    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr enheten med snabba rörelser"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr mobilen med Quick Gestures"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr surfplattan med Quick Gestures"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr enheten med Quick Gestures"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Hoppa till kameran"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Tryck två gånger på strömbrytaren för att snabbt öppna kameran. Du kan göra det på alla skärmar."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Öppna kameran snabbt"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"System för grafikdrivrutin"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Inställningen stöds inte på den här mobilen"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Inställningen stöds inte på den här surfplattan"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Inställningen stöds inte på den här enheten"</string>

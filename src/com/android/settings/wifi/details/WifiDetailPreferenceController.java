@@ -682,7 +682,11 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         }
 
         mMacAddressPref.setVisible(true);
-        mMacAddressPref.setSummary(macAddress);
+        if (macAddress.equals(WifiInfo.DEFAULT_MAC_ADDRESS)) {
+            mMacAddressPref.setSummary(R.string.device_info_not_available);
+        } else {
+            mMacAddressPref.setSummary(macAddress);
+        }
     }
 
     private String getMacAddress() {

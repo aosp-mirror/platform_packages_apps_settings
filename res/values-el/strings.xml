@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Επιλογή κατά μετατόπιση UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Ημερομηνία"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ώρα"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Αυτόματο κλείδωμα"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> μετά την κατάσταση αναστολής λειτουργίας"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Αμέσως μετά τον ύπνο, εκτός από την περίπτωση που διατηρείται ξεκλείδωτη από <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> μετά την κατάσταση αδράνειας, εκτός από την περίπτωση που διατηρείται ξεκλειδωμένη από <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Κλείδωμα μετά τη λήξη χρονικού ορίου οθόνης"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> μετά το χρονικό όριο"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Αμέσως μετά το χρονικό όριο, εκτός από τις περιπτώσεις όπου διατηρείται ξεκλειδωμένη από το <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> μετά το χρονικό όριο, εκτός από τις περιπτώσεις όπου διατηρείται ξεκλειδωμένη από το <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Εμφάνιση πληροφοριών κατόχου στην οθόνη κλειδώμ."</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Μήνυμα οθόνης κλειδ."</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Ενεργ.γραφ.στοιχείων"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Απενεργοποιήθηκε από τον διαχειριστή"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Εμφάνιση επιλογής κλειδώματος"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Προβάλετε την επιλογή του κουμπιού λειτουργίας που απενεργοποιεί το Smart Lock, το ξεκλείδωμα με δακτυλικό αποτύπωμα και τις ειδοποιήσεις στην οθόνη κλειδώματος."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Προβάλετε την επιλογή του κουμπιού λειτουργίας που απενεργοποιεί το Smart Lock, το ξεκλείδωμα με βιομετρικά χαρακτηριστικά και τις ειδοποιήσεις στην οθόνη κλειδώματος."</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Οι παράγ. εμπιστοσ. μόνο επεκτ. το ξεκλ."</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Αν ενεργοποιήσετε την επιλογή, οι παράγοντες εμπιστοσύνης θα διατηρούν τη συσκευή ξεκλείδωτη για μεγαλύτερο χρονικό διάστημα, αλλά δεν θα μπορούν να ξεκλειδώνουν πλέον μια κλειδωμένη συσκευή."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Κλείδωμα οθόνης όταν χαθεί η εμπιστοσύνη"</string>
@@ -386,7 +386,7 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Το τηλέφωνο δεν είναι κρυπτογραφημένο"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Η συσκευή είναι κρυπτογραφημένη"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Η συσκευή δεν είναι κρυπτογραφημένη"</string>
-    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Εμφάνιση οθόνης κλειδώματος"</string>
+    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Οθόνη κλειδώματος"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"Τι θα εμφανίζεται"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Ορισμός του \"Η τοποθεσία μου\", ξεκλειδώματος οθόνης, κλειδώματος κάρτας SIM, κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Ορισμός του \"Η τοποθεσία μου\", του ξεκλειδώματος οθόνης και του κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Κλείδωμα οθόνης, δακτυλικό αποτύπωμα"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Κλείδωμα οθόνης"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Προστέθηκε πρόσωπο"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Πατήστε για ρύθμ. ελέγχου ταυτότ. προσ."</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Έλεγχος ταυτότ. προσ."</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Τρόπος ρύθμισης του Face unlock"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Ρύθμιση του Face Unlock"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Ρύθμιση του Face Unlock"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Face Unlock"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Face Unlock για εργασία"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Τρόπος ρύθμισης του Face Unlock"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Ρύθμιση του Face Unlock"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Χρήση προσώπου για έλεγχο ταυτότητας"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Αρχή"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Ακύρωση"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Όχι, ευχαριστώ"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Συμφωνώ"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Περισσότερα"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Ξεκλείδωμα με το πρόσωπό σας"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Χρήση προσώπου για έλεγχο ταυτότητας"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Χρησιμοποιήστε το πρόσωπό σας για να ξεκλειδώνετε το τηλέφωνό σας, να εξουσιοδοτείτε αγορές ή να συνδέεστε σε εφαρμογές."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Χρησιμοποιήστε το πρόσωπό σας, για να ξεκλειδώνετε το τηλέφωνό σας ή να εγκρίνετε αγορές.\n\nΣημείωση: Δεν μπορείτε να χρησιμοποιήσετε το πρόσωπό σας για να ξεκλειδώσετε αυτήν τη συσκευή. Για περισσότερες πληροφορίες, επικοινωνήστε με τον διαχειριστή του οργανισμού σας."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Χρησιμοποιήστε το πρόσωπό σας για να ξεκλειδώνετε το τηλέφωνό σας, να εξουσιοδοτείτε αγορές ή να συνδέεστε σε εφαρμογές"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Η εγγραφή προσώπου απέτυχε."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Η εγγραφή ολοκληρώθηκε. Όλα φαίνονται σωστά."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Τέλος"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Βελτίωση της απόδοσης του Face Unlock"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Ρυθμίστε ξανά το Face Unlock"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Ρυθμίστε ξανά το Face Unlock"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Βελτιώστε την ασφάλεια και την απόδοση"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Ρυθμίστε το Face Unlock"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Διαγραψτε τα τρέχοντα δεδ. προσώπου για να ρυθμίσετε ξανά το Face Unlock.\n\nΤα δεδ. προσώπου που χρησιμ. από το Face Unlock θα διαγραφούν οριστικά με ασφαλή τρόπο. Μετά την κατάργηση, θα χρειαστείτε το PIN, το μοτίβο ή τον κωδ. πρόσβ. για ξεκλείδωμα του τηλεφ., σύνδεση σε εφαρμ. και επιβεβαίωση πληρωμ."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Χρ. Face Unlock για"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Ξεκλείδωμα τηλεφώνου"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Σύνδεση και πληρωμές σε εφαρμ."</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Να απαιτείται για το Face Unlock"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Κοιτώντας την οθόνη, ανοικτά μάτια"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Να πρέπει πάντα να κοιτάτε την οθόνη με ανοικτά μάτια για ξεκλείδωμα του τηλ."</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Κουμπί επιβεβαίωσης"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Να απαιτείται πάντα επιβεβαίωση κατά τον έλεγχο ταυτότ. σε εφαρμογές"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Απαιτήσεις για το Face Unlock"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Απαίτηση για ανοιχτά μάτια"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Για να ξεκλειδώσετε το τηλέφωνο, τα μάτια σας πρέπει να είναι ανοικτά"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Να απαιτείται πάντα επιβεβαίωση"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Για χρήση του Face Unlock σε εφαρμ. να απαιτείται το βήμα επιβεβαίωσης"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Διαγρ. δεδ. προσώπου"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Ρύθμιση νέου ξεκλειδώματος με το πρόσωπο"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Χρησιμοποιήστε το Face Unlock για να ξεκλειδώσετε τη συσκευή σας, να συνδεθείτε σε εφαρμογές και να επιβεβαιώσετε πληρωμές.\n\nΛάβετε υπόψη τα εξής:\nΤο τηλέφωνο μπορεί να ξεκλειδώσει όταν το κοιτάτε ακόμη και αν δεν σκοπεύετε να το ξεκλειδώσετε.\n\nΚάποιο άλλο άτομο μπορεί να ξεκλειδώσει το τηλέφωνό σας εάν το τηλέφωνο βρίσκεται μπροστά στο πρόσωπό σας και έχετε τα μάτια ανοικτά.\n\nΤο τηλέφωνο μπορεί να ξεκλειδωθεί από κάποιο άτομο που σας μοιάζει πολύ, όπως για παράδειγμα, το παιδί σας ή τον δίδυμο αδελφό σας."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Ρύθμιση του Face Unlock"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Χρησιμοποιήστε το Face Unlock για να ξεκλειδώσετε τη συσκευή σας, να συνδεθείτε σε εφαρμογές και να επιβεβαιώσετε πληρωμές.\n\nΛάβετε υπόψη τα εξής:\nΤο τηλέφωνο μπορεί να ξεκλειδώσει όταν το κοιτάτε ακόμη και αν δεν σκοπεύετε να το ξεκλειδώσετε.\n\nΚάποιο άλλο άτομο μπορεί να ξεκλειδώσει το τηλέφωνό σας εάν είναι στραμμένο προς το πρόσωπό σας ακόμη και αν τα μάτια σας είναι κλειστά.\n\nΤο τηλέφωνο μπορεί να ξεκλειδωθεί από κάποιο άτομο που σας μοιάζει πολύ, όπως για παράδειγμα, το παιδί σας ή τον δίδυμο αδελφό σας."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Διαγραφή δεδομένων προσώπου;"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Τα δεδομένα που καταγράφονται από το Face Unlock θα διαγραφούν μόνιμα και με ασφάλεια. Μετά την κατάργηση, θα χρειαστείτε το PIN, το μοτίβο ή τον κωδικό πρόσβασης για να ξεκλειδώσετε το τηλέφωνό σας, να συνδεθείτε σε εφαρμογές και να επιβεβαιώσετε πληρωμές."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Τα δεδομένα προσώπου που χρησιμοποιεί το Face Unlock θα διαγραφούν οριστικά και με ασφάλεια. Μετά την κατάργηση, θα χρειαστείτε το PIN, το μοτίβο ή τον κωδικό πρόσβασης, για να ξεκλειδώσετε το τηλέφωνό σας, να συνδεθείτε σε εφαρμογές και να επιβεβαιώσετε πληρωμές."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Χρησιμοποιήστε το Face Unlock για να ξεκλειδώσετε το τηλέφωνό σας"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Δακτυλικά αποτυπώματα"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Διαχείριση μον.χαρακτ."</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Χρήση μον.χαρακτ.για"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Προστατεύστε το tablet με μια επιλογή κλειδώματος οθόνης, έτσι ώστε κανείς να μην μπορεί να το χρησιμοποιήσει σε περίπτωση απώλειας ή κλοπής. Θα χρειαστείτε επίσης μια επιλογή κλειδώματος οθόνης για να ρυθμίσετε το δακτυλικό αποτύπωμα. Πατήστε Ακύρωση και έπειτα ορίστε ένα PIN, μοτίβο ή κωδικό πρόσβασης."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Προστατεύστε τη συσκευή σας με μια επιλογή κλειδώματος οθόνης, έτσι ώστε κανείς να μην μπορεί να τη χρησιμοποιήσει σε περίπτωση απώλειας ή κλοπής. Θα χρειαστείτε επίσης μια επιλογή κλειδώματος οθόνης για να ρυθμίσετε το δακτυλικό αποτύπωμα. Πατήστε Ακύρωση και έπειτα ορίστε ένα PIN, μοτίβο ή κωδικό πρόσβασης."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Προστατεύστε το τηλέφωνό σας με μια επιλογή κλειδώματος οθόνης, έτσι ώστε κανείς να μην μπορεί να το χρησιμοποιήσει σε περίπτωση απώλειας ή κλοπής. Θα χρειαστείτε επίσης μια επιλογή κλειδώματος οθόνης για να ρυθμίσετε το δακτυλικό αποτύπωμα. Πατήστε Ακύρωση και έπειτα ορίστε ένα PIN, μοτίβο ή κωδικό πρόσβασης."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Προστατεύστε το tablet με μια επιλογή κλειδώματος οθόνης, έτσι ώστε κανείς να μην μπορεί να το χρησιμοποιήσει σε περίπτωση απώλειας ή κλοπής. Θα χρειαστείτε επίσης μια επιλογή κλειδώματος οθόνης για να ρυθμίσετε τον έλεγχο ταυτότητας προσώπου. Πατήστε Ακύρωση και έπειτα ορίστε ένα PIN, μοτίβο ή κωδικό πρόσβασης."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Προστατεύστε τη συσκευή σας με μια επιλογή κλειδώματος οθόνης, έτσι ώστε κανείς να μην μπορεί να τη χρησιμοποιήσει σε περίπτωση απώλειας ή κλοπής. Θα χρειαστείτε επίσης μια επιλογή κλειδώματος οθόνης για να ρυθμίσετε τον έλεγχο ταυτότητας προσώπου. Πατήστε Ακύρωση και έπειτα ορίστε ένα PIN, μοτίβο ή κωδικό πρόσβασης."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Προστατεύστε το τηλέφωνό σας με μια επιλογή κλειδώματος οθόνης, έτσι ώστε κανείς να μην μπορεί να το χρησιμοποιήσει σε περίπτωση απώλειας ή κλοπής. Θα χρειαστείτε επίσης μια επιλογή κλειδώματος οθόνης για να ρυθμίσετε τον έλεγχο ταυτότητας προσώπου. Πατήστε Ακύρωση και έπειτα ορίστε ένα PIN, μοτίβο ή κωδικό πρόσβασης."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Προστατεύοντας το tablet με μια επιλογή κλειδώματος οθόνης, κανείς δεν θα μπορεί να το χρησιμοποιήσει σε περίπτωση απώλειας ή κλοπής. Θα χρειαστείτε επίσης μια επιλογή κλειδώματος οθόνης για να ρυθμίσετε το Face Unlock. Για επιστροφή, πατήστε Ακύρωση."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Προστατεύοντας τη συσκευή σας με μια επιλογή κλειδώματος οθόνης, κανείς δεν θα μπορεί να τη χρησιμοποιήσει σε περίπτωση απώλειας ή κλοπής. Θα χρειαστείτε επίσης μια επιλογή κλειδώματος οθόνης για να ρυθμίσετε το Face Unlock. Για επιστροφή, πατήστε Ακύρωση."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Προστατεύοντας το τηλέφωνό σας με μια επιλογή κλειδώματος οθόνης, κανείς δεν θα μπορεί να το χρησιμοποιήσει σε περίπτωση απώλειας ή κλοπής. Θα χρειαστείτε επίσης μια επιλογή κλειδώματος οθόνης για να ρυθμίσετε το Face Unlock. Για επιστροφή, πατήστε Ακύρωση."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Παράβλεψη ρύθμισης PIN;"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Παράβλεψη ρύθμισης κωδικού πρόσβασης;"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Παράβλεψη ρύθμισης μοτίβου;"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Δακτυλικό αποτύπωμα + Κωδικός πρόσβασης"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Συνέχεια χωρίς δακτυλικό αποτύπωμα"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Μπορείτε να ξεκλειδώνετε το τηλέφωνό σας χρησιμοποιώντας το δακτυλικό σας αποτύπωμα. Για λόγους ασφάλειας, αυτή η επιλογή απαιτεί εφεδρικό κλείδωμα οθόνης."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Έλεγχος ταυτότητας προσώπου + μοτίβο"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Έλεγχος ταυτότητας προσώπου + αριθμός PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Έλεγχος ταυτότητας προσώπου + κωδ. πρόσβασης"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Συνέχεια χωρίς έλεγχο ταυτότητας προσώπου"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Face Unlock + μοτίβο"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Face Unlock + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Face Unlock + κωδικός πρόσβασης"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Συνέχεια χωρίς το Face Unlock"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Μπορείτε να ξεκλειδώνετε το τηλέφωνό σας χρησιμοποιώντας το πρόσωπό σας. Για λόγους ασφάλειας, αυτή η επιλογή απαιτεί εφεδρικό κλείδωμα οθόνης."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Απενεργοποιήθηκε λόγω διαχειριστή, πολιτικής κρυπτογράφησης ή αποθηκευτικού χώρου διαπιστευτηρίων"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Κανένα"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Βελτιστοποιήστε το επίπεδο φωτεινότητας για το διαθέσιμο φως. Όταν είναι ενεργή η εφαρμογή, μπορείτε να προσαρμόσετε τη φωτεινότητα προσωρινά."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Η φωτεινότητα της οθόνης σας θα προσαρμοστεί αυτόματα στο περιβάλλον και τις δραστηριότητές σας. Μπορείτε να μετακινήσετε χειροκίνητα το ρυθμιστικό, για να ενημερωθεί η προσαρμοστική φωτεινότητα σχετικά με τις ρυθμίσεις σας."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Εμφάνιση ισορροπίας λευκού"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Παρακολούθηση οθόνης"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Ενεργό/Η οθόνη δεν θα απενεργοποιείται εάν την κοιτάτε"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Ανενεργή"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Αποτρέπει την απενεργοποίηση της οθόνης σας εάν την κοιτάτε."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Απαιτείται άδεια κάμερας"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Πατήστε για να διαχειριστείτε τα δικαιώματα για τις Υπηρεσίες εξατομίκευσης συσκευών"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Αποτρέπει την απενεργοποίηση της οθόνης σας εάν την κοιτάτε"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Η λειτουργία Παρακολούθηση οθόνης χρησιμοποιεί την μπροστινή κάμερα για να διαπιστώσει αν κάποιος χρήστης κοιτάζει την οθόνη. Λειτουργεί στη συσκευή και οι εικόνες δεν αποθηκεύονται ούτε αποστέλλονται στην Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Να διατηρείται η οθόνη αναμμένη όταν την κοιτάτε"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Νυχτερινός φωτισμός"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Η λειτουργία \"Νυχτερινός φωτισμός\" αλλάζει το χρώμα της οθόνης σας σε ζεστό κίτρινο. Έτσι είναι πιο εύκολο να κοιτάτε την οθόνη σας ή να διαβάζετε με χαμηλό φωτισμό και αυτό μπορεί να σας βοηθήσει να αποκοιμηθείτε πιο εύκολα."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Πρόγραμμα"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Εξατομίκευση της οθόνης σας"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Επιλογή ταπετσαρίας από"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Προσαρμόστε το Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Δοκιμάστε διαφορετικά στιλ, ταπετσαρ., ρολόγια και άλλα"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Δοκιμάστε διαφορετικά στιλ, ταπετσαρίες και άλλα"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Προφύλαξη οθόνης"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"κατά τη φόρτιση ή την τοποθέτηση στη βάση σύνδεσης"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Είτε"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Ο κωδικός πρόσβασης έχει οριστεί"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Το PIN έχει οριστεί"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Το μοτίβο έχει οριστεί"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Ορίστε κωδ. πρόσβ. για ελέγ. ταυτ. προσ."</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Ορίστε μοτίβο για τον ελέγχο ταυτ. προσ."</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Ορίστε PIN για τον έλεγχο ταυτ. προσώπου"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Ρυθμ. κωδ. πρ. για χρήση του Face Unlock"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Ρυθμ. μοτίβο για χρήση του Face Unlock"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Για να χρησιμοποιήσετε το Face Unlock, ορίστε ένα PIN"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Χρησιμοποιήστε το μοτίβο της συσκευής σας για να συνεχίσετε"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Εισαγάγετε το PIN της συσκευής σας για να συνεχίσετε"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Εισαγάγετε τον κωδικό πρόσβασης της συσκευής σας για να συνεχίσετε"</string>
@@ -2074,7 +2090,7 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Προτιμήσεις υπότιτλων"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Μεγιστοποίηση"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Μεγέθ. με 3πλό πάτημα"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Μεγέθυνση με συντόμευση"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Συντόμ. μεγέθυνσης"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Μεγέθυνση με συντόμευση και τριπλό πάτημα"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Μεγέθυνση στην οθόνη"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Πατήστε 3 φορές για εστίαση"</string>
@@ -2085,12 +2101,13 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Χρήση κίνησης για άνοιγμα"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Χρήση της νέας κίνησης προσβασιμότητας"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Για να ενεργοποιήσετε ή να απενεργοποιήσετε αυτήν την υπηρεσία, πατήστε το κουμπί προσβασιμότητας <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>στο κάτω μέρος της οθόνης.\n\nΓια εναλλαγή μεταξύ υπηρεσιών, αγγίξτε παρατεταμένα το κουμπί προσβασιμότητας."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Για να ενεργοποιήσετε ή να απενεργοποιήσετε αυτήν την υπηρεσία, σύρετε με δύο δάχτυλα προς τα επάνω από το κάτω μέρος της οθόνης.\n\nΓια εναλλαγή μεταξύ υπηρεσιών, σύρετε παρατεταμένα με δύο δάχτυλα προς τα επάνω."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Για να ενεργοποιήσετε ή να απενεργοποιήσετε αυτήν την υπηρεσία, σύρετε με δύο δάχτυλα προς τα επάνω από το κάτω μέρος της οθόνης.\n\nΓια εναλλαγή μεταξύ υπηρεσιών, σύρετε προς τα επάνω με δύο δάχτυλα και μην τα απομακρύνετε από την οθόνη."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Για να ενεργοποιήσετε ή να απενεργοποιήσετε αυτήν την υπηρεσία, σύρετε με τρία δάχτυλα προς τα επάνω από το κάτω μέρος της οθόνης.\n\nΓια εναλλαγή μεταξύ υπηρεσιών, σύρετε παρατεταμένα με τρία δάχτυλα προς τα επάνω."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Για να ενεργοποιήσετε ή να απενεργοποιήσετε μια υπηρεσία προσβασιμότητας, σύρετε με δύο δάχτυλα προς τα επάνω από το κάτω μέρος της οθόνης.\n\nΓια εναλλαγή μεταξύ υπηρεσιών, σύρετε παρατεταμένα με δύο δάχτυλα προς τα επάνω."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Για να ενεργοποιήσετε ή να απενεργοποιήσετε μια υπηρεσία προσβασιμότητας, σύρετε με τρία δάχτυλα προς τα επάνω από το κάτω μέρος της οθόνης.\n\nΓια εναλλαγή μεταξύ υπηρεσιών, σύρετε παρατεταμένα με τρία δάχτυλα προς τα επάνω."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"ΟΚ"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Το κουμπί Προσβασιμότητας έχει οριστεί σε <xliff:g id="SERVICE">%1$s</xliff:g>. Για να χρησιμοποιήσετε τη μεγέθυνση, αγγίξτε παρατεταμένα το κουμπί Προσβασιμότητας και έπειτα επιλέξτε να κάνετε μεγέθυνση."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Η κίνηση προσβασιμότητας ορίστηκε στην υπηρεσία <xliff:g id="SERVICE">%1$s</xliff:g>. Για να χρησιμοποιήσετε τη μεγιστοποίηση, σύρετε παρατεταμένα προς τα επάνω με δύο δάχτυλα από το κάτω μέρος της οθόνης και μην τα απομακρύνετε από την οθόνη. Στη συνέχεια, επιλέξτε μεγιστοποίηση."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Συντόμευση κουμπιού έντασης ήχου"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Υπηρεσία συντόμευσης"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Να επιτρέπεται από οθ. κλειδώματος"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Χρήση υπηρεσίας"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Χρήση διόρθωσης χρωμάτων"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Χρήση υποτίτλων"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Δεν υποστηρίζουν όλες οι εφαρμογές αυτήν τη ρύθμιση."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Συνέχεια"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Ακουστικά βοηθήματα"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Δεν έχουν συνδεθεί ακουστικά βοηθήματα"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Εμφανίζονται στο αναπτυσσόμενο πλαίσιο σκίασης, τη γραμμή κατάστασης και την οθόνη κλειδώματος"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Φως που αναβοσβήνει"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Οθόνη κλειδώματος"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Παράβλεψη οθόνης κλειδώματος"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Μετά το Face Unlock, απευθείας μετάβαση στην τελευταία οθόνη"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Οθόνη κλειδώματος, Κλειδωμένη οθόνη, Παράβλεψη, Παράκαμψη"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Με κλειδωμένο προφίλ εργασίας"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Ειδοποιήσεις στη οθόνη κλειδώματος"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Εμφάνιση προειδοποιήσεων και αθόρυβων ειδοποιήσεων"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Το αντικείμενο κατάταξης λείπει."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Το αντικείμενο κατάταξης δεν περιέχει αυτό το κλειδί."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Χρήση θεμάτων"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Χρώμα έμφασης"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Γραμματοσειρά επικεφαλίδας/σώματος κειμένου"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Σχήμα εικονιδίου"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Προεπιλογή συσκευής"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Εγκοπή οθόνης"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"διακοπή οθόνης, εγκοπή"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Πρόγραμμα οδήγησης γραφικών συστήματος"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Η ρύθμιση δεν υποστηρίζεται σε αυτό το τηλέφωνο"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Η ρύθμιση δεν υποστηρίζεται σε αυτό το tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Η ρύθμιση δεν υποστηρίζεται σε αυτήν τη συσκευή"</string>

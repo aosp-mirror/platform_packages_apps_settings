@@ -354,16 +354,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Pasirinkti pagal UTC nuokrypį"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Laikas"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Automatiškai užrakinti"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po miego režimo"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Iškart po miego būsenos, išskyrus atvejus, kai „<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>“ laiko jį atrakintą"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po miego būsenos, išskyrus atvejus, kai „<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>“ laiko jį atrakintą"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Užrakinti, kai baigiasi skirtasis ekrano laikas"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pasibaigus skirtajam laikui"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Iškart pasibaigus skirtajam laikui, išskyrus atvejus, kai „<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>“ laiko jį atrakintą"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pasibaigus skirtajam laikui, išskyrus atvejus, kai „<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>“ laiko jį atrakintą"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Rodyti savininko informaciją užrakinimo ekrane"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Užrak. ekrano pran."</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Įgalinti valdiklius"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Išjungė administratorius"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Rodyti užrakinimo parinktį"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Rodyti maitinimo mygtuko parinktį, kuri išjungia „Smart Lock“, atrakinimą naudojant piršto antspaudą ir užrakinimo ekrano pranešimus"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Rodyti maitinimo mygtuko parinktį, kuri išjungia „Smart Lock“, atrakinimą naudojant biometrines sistemas ir užrakinimo ekrano pranešimus"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Patikimos priem. tik pailgina atrakinimą"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Jei parinktis bus įgalinta, patikimos priemonės laikys įrenginį neužrakintą ilgiau, bet nebegalės atrakinti užrakinto įrenginio."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Užrakinti ekraną, kai pasitikėjimas bus prarastas"</string>
@@ -403,10 +403,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Ekrano užraktas, piršto antspaudas"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Ekrano užraktas"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Veidas pridėtas"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Palieskite, kad nust. veido autentifik."</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Veido autentifikavimas"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Kaip nustatyti Atrakinimą pagal veidą"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Nustatykite atrakinimą pagal veidą"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Nustatykite Atrakinimą pagal veidą"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Atrakinimas pagal veidą"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Atrakinimas pagal veidą, skirtas darbo profiliui"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Kaip nustatyti Atrakinimą pagal veidą"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Nustatykite Atrakinimą pagal veidą"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Autentifikavimas naudojant veidą"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Pradėti"</string>
@@ -415,11 +416,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Atšaukti"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Ačiū, ne"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Sutikti"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Daugiau"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Atrakinimas naudojant veidą"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Autentifikavimas naudojant veidą"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Naudokite veidą, norėdami atrakinti telefoną, įgalioti pirkimo veiksmus arba prisijungti prie programų."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Atrakinkite telefoną ir patvirtinkite pirkimo operacijas veidu.\n\nPastaba: negalite atrakinti šio įrenginio veidu. Norėdami gauti daugiau informacijos, susisiekite su organizacijos administratoriumi."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Naudokite veidą, norėdami atrakinti telefoną, įgalioti pirkimo veiksmus arba prisijungti prie programų"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -434,19 +439,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Nepavyko užregistruoti veido."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Viskas nustatyta. Atrodo gerai."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Atlikta"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Atrakinimo pagal veidą našumo tobulinimas"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Iš naujo nustatykite Atrak. pagal veidą"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Atrakinimo pagal veidą nustatymas iš naujo"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Patobulinkite saugumą ir našumą"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Atrakinimo pagal veidą nustatymas"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Kad galėtumėte iš naujo nustatyti Atrak. pagal veidą, ištrinkite esamus veido duom.\n\nAtrak. pagal veidą naudojami veido duomenys bus visam laikui saugiai ištrinti. Pašalinus, kad galėtumėte atrakinti telefoną, prisijungti prie programų ir patv. mokėjimus, reikės PIN kodo, atrak. piešinio arba slaptaž."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Atr. pagal veidą su"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Telefono atrakinimas"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Prisij. prie progr. ir mokėj."</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Reikalaujama naudojant atrakinimo pagal veidą funkciją"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Atsimerkus žiūrėti į ekraną"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Norint atrakinti telefoną, į ekraną visada reikia žiūrėti atsimerkus"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Patvirtinimo mygtukas"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Autentifikuojant programas visada reikalauti patvirtinimo"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Atrakinimo pagal veidą funkcijos reikalavimai"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Reikia būti atsimerkus"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Norint atrakinti telefoną, reikia būti atsimerkus"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Visada reikalauti patvirtinimo"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Naudojant Atrakinimą pagal veidą programose, reikalauti patvirtinimo"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Ištrinti veido duom."</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Nustatyti naują atrakinimo veidą"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Naudodami atrakinimo pagal veidą funkciją atrakinkite įrenginį, prisijunkite prie programų ir patvirtinkite mokėjimus.\n\nNepamirškite toliau nurodytų dalykų:\nŽiūrint į telefoną jis gali būt atrakintas, kai to neketinate atlikti.\n\nTelefoną gali atrakinti kitas asmuo, laikydamas jį prieš jus, kai esate atsimerkę.\n\nTelefoną gali atrakinti į jus labai panašus asmuo, pvz., jūsų vaikas ar identiškas dvynys."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Nustatyti Atrakinimą pagal veidą"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Naudodami Atrakinimą pagal veidą atrakinkite įrenginį, prisijunkite prie programų ir patvirtinkite mokėjimus.\n\nNepamirškite toliau nurodytų dalykų:\nŽiūrint į telefoną jis gali būt atrakintas, kai to neketinate atlikti.\n\nTelefoną gali atrakinti kitas asmuo, laikydamas jį prieš jus, net kai esate užsimerkę.\n\nTelefoną gali atrakinti į jus labai panašus asmuo, pvz., identiškas dvynys."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Ištrinti veido duomenis?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Atrakinimo pagal veidą funkcijos įrašyti duomenys bus visam laikui saugiai ištrinti. Pašalinus reikės PIN kodo, atrakinimo piešinio arba slaptažodžio norint atrakinti telefoną, prisijungti prie programų ir patvirtinti mokėjimus."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Atrakinimo pagal veidą funkcijos naudojami veido duomenys bus visam laikui ir saugiai ištrinti. Pašalinus reikės PIN kodo, atrakinimo piešinio arba slaptažodžio norint atrakinti telefoną, prisijungti prie programų ir patvirtinti mokėjimus."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Naudokite Atrakinimą pagal veidą, kad atrakintumėte telefoną"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Kontr. kodo jutiklis"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Kontrolin. kodų tvark."</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Kontrolinių kodų naud."</string>
@@ -499,9 +511,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Pasirinkę ekrano užrakto parinktį apsaugokite planšetinį kompiuterį, kad jo niekas negalėtų naudoti, jei pamestumėte ar jis būtų pavogtas. Ekrano užrakto taip pat reikia norint nustatyti kontrolinį kodą. Palieskite „Atšaukti“, tada nustatykite PIN kodą, atrakinimo piešinį arba slaptažodį."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Pasirinkę ekrano užrakto parinktį apsaugokite įrenginį, kad jo niekas negalėtų naudoti, jei pamestumėte ar jis būtų pavogtas. Ekrano užrakto taip pat reikia norint nustatyti kontrolinį kodą. Palieskite „Atšaukti“, tada nustatykite PIN kodą, atrakinimo piešinį arba slaptažodį."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Pasirinkę ekrano užrakto parinktį apsaugokite telefoną, kad jo niekas negalėtų naudoti, jei pamestumėte ar jis būtų pavogtas. Ekrano užrakto taip pat reikia norint nustatyti kontrolinį kodą. Palieskite „Atšaukti“, tada nustatykite PIN kodą, atrakinimo piešinį arba slaptažodį."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Pasirinkę ekrano užrakto parinktį apsaugokite planšetinį kompiuterį, kad jo niekas negalėtų naudoti, jei pamestumėte ar jis būtų pavogtas. Ekrano užrakto taip pat reikia norint nustatyti veido autentifikavimą. Palieskite „Atšaukti“, tada nustatykite PIN kodą, atrakinimo piešinį arba slaptažodį."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Pasirinkę ekrano užrakto parinktį apsaugokite įrenginį, kad jo niekas negalėtų naudoti, jei pamestumėte ar jis būtų pavogtas. Ekrano užrakto taip pat reikia norint nustatyti veido autentifikavimą. Palieskite „Atšaukti“, tada nustatykite PIN kodą, atrakinimo piešinį arba slaptažodį."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Pasirinkę ekrano užrakto parinktį apsaugokite telefoną, kad jo niekas negalėtų naudoti, jei pamestumėte ar jis būtų pavogtas. Ekrano užrakto taip pat reikia norint nustatyti veido autentifikavimą. Palieskite „Atšaukti“, tada nustatykite PIN kodą, atrakinimo piešinį arba slaptažodį."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Pasirinkę ekrano užrakto parinktį apsaugosite planšetinį kompiuterį, kad jo niekas negalėtų naudoti, jei jį pamestumėte ar jis būtų pavogtas. Ekrano užrakto taip pat reikia norint nustatyti Atrakinimą pagal veidą. Jei norite grįžti, palieskite „Atšaukti“."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Pasirinkę ekrano užrakto parinktį apsaugosite įrenginį, kad jo niekas negalėtų naudoti, jei jį pamestumėte ar jis būtų pavogtas. Ekrano užrakto taip pat reikia norint nustatyti Atrakinimą pagal veidą. Jei norite grįžti, palieskite „Atšaukti“."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Pasirinkę ekrano užrakto parinktį apsaugosite telefoną, kad jo niekas negalėtų naudoti, jei jį pamestumėte ar jis būtų pavogtas. Ekrano užrakto taip pat reikia norint nustatyti Atrakinimą pagal veidą. Jei norite grįžti, palieskite „Atšaukti“."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Praleisti PIN kodo sąranką?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Praleisti slaptažodžio sąranką?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Praleisti atrakinimo piešinio sąranką?"</string>
@@ -602,10 +614,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Piršto antspaudas + slaptažodis"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Tęsti be piršto antspaudo"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Telefoną galite atrakinti piršto antspaudu. Saugos sumetimais, įgalinus šią parinktį, reikia naudoti atsarginį ekrano užraktą."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Veido autentifikavimas ir atrakinimo piešinys"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Veido autentifikavimas ir PIN kodas"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Veido autentifikavimas ir slaptažodis"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Tęsti be veido autentifikavimo"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Atrakinimas pagal veidą ir atrakin. piešinys"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Atrakinimas pagal veidą ir PIN kodas"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Atrakinimas pagal veidą ir slaptažodis"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Tęsti nenaudojant Atrakinimo pagal veidą"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Telefoną galite atrakinti naudodami veidą. Saugos sumetimais, įgalinus šią parinktį, reikia naudoti atsarginį ekrano užraktą."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Neleido: admin., šifr. polit. ar pr. duom. atmin."</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nėra"</string>
@@ -1256,11 +1268,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimizuokite šviesumo lygį pagal esamą šviesą. Kai ši funkcija įjungta, vis tiek galite laikinai koreguoti šviesumą."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Ekrano šviesumas automatiškai prisitaikys prie jūsų aplinkos ir veiklos. Galite šliaužiklį perkelti patys, kad prisitaikantis šviesumas įsimintų jūsų nuostatas."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Pateikti baltos spalv. balansą"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Žiūrėjimas į ekraną"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Įjungta – ekranas neišsijungs, kol į jį žiūrėsite"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Išjungta"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Neleidžiama išsijungti ekranui, kol į jį žiūrite."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Reikalinga prieiga prie fotoaparato"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Palieskite ir tvarkykite įrenginio suasmeninimo paslaugų leidimus"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Neleidžiama išsijungti ekranui, kol į jį žiūrite"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Funkcija „Žiūrėjimas į ekraną“ naudoja priekinį fotoaparatą, kad nustatytų, ar kas nors žiūri į ekraną. Ši funkcija veikia pačiame įrenginyje, jokie vaizdai neišsaugomi ir nesiunčiami „Google“."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Laikyti ekraną įjungtą, kai į jį žiūrima"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nakties šviesa"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Nustačius Nakties šviesą, naktį rodomas gintaro atspalvio ekranas. Taip bus patogiau žiūrėti į ekraną prietemoje ir galbūt lengviau užmigsite."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Tvarkaraštis"</string>
@@ -1297,7 +1313,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Suasmeninkite ekraną"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Pasirinkti darbalaukio foną iš"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"„Pixel“ įrenginio tinkinimas"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Išbandykite stilius, ekrano fonus, laikrodžius ir kt."</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Išbandykite skirtingus stilius, ekrano fonus ir kt."</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Ekrano užsklanda"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Kai įkraunamas ar prijungtas prie doko"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Abiem atvejais"</string>
@@ -1786,9 +1802,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Slaptažodis nustatytas"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN kodas nustatytas"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Modelis nustatytas"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Nor. naud. veido aut., nust. slaptažodį"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Nor. naud. veido aut., nust. atr. pieš."</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Nor. naud. veido aut., nust. PIN kodą"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"N. naud. Atr. pagal v., nust. slaptaž."</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"N. naud. Atr. pagal v., nust. atr. pieš."</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"N. naud. Atr. pagal v., nust. slaptažodį"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Jei norite tęsti, naudokite įrenginio atrakinimo piešinį"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Jei norite tęsti, įveskite įrenginio PIN kodą"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Jei norite tęsti, įveskite įrenginio slaptažodį"</string>
@@ -2135,6 +2151,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Norėdami įjungti arba išjungti pritaikomumo paslaugą, perbraukite aukštyn trimis pirštais iš ekrano apačios.\n\nNorėdami perjungti paslaugas, perbraukite aukštyn trimis pirštais ir palaikykite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Supratau"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Pritaikymo mobiliesiems mygtukas nustatytas į „<xliff:g id="SERVICE">%1$s</xliff:g>“. Jei norite naudoti didinimo funkciją, palieskite ir palaikykite pritaikymo neįgaliesiems mygtuką, tada pasirinkite didinimo funkciją."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Pritaikomumo gestas nustatytas į „<xliff:g id="SERVICE">%1$s</xliff:g>“. Norėdami naudoti didinimą, perbraukite dviem pirštais iš ekrano apačios ir palaikykite. Tada pasirinkite didinimą."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Garsumo spart. klavišas"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Šaukinio paslauga"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Leisti iš užrakinimo ekrano"</string>
@@ -2171,6 +2188,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Naudoti paslaugą"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Naudoti spalvų taisymą"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Naudoti subtitrus"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Šis nustatymas palaikomas ne visose programose."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Tęsti"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Klausos aparatai"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Prijungtų klausos aparatų nėra"</string>
@@ -3468,6 +3486,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Pateikti išskleidžiamajame skydelyje, būsenos juostoje ir užrakinimo ekrane"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Mirksinti šviesa"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Užrakinimo ekranas"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Praleisti užrakinimo ekraną"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Pan. atr. pagal veidą funkc., ties. eiti į pask. naud. ekr."</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"užrakinimo ekranas, praleisti, apeiti"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kai darbo profilis užrakintas"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Pranešimai užrakinimo ekrane"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Rodyti įspėjamuosius ir tylius pranešimus"</string>
@@ -4252,9 +4273,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Trūksta reitingavimo objekto."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Reitingavimo objekte nėra šio rakto."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Temos nustatymas"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Paryškinimo spalva"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Antraštės / turinio šriftas"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Piktogramos kontūras"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Numatytasis įrenginio nustatymas"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Ekrano išpjova"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ekrano išpjova, įranta"</string>
@@ -4540,11 +4558,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Sistemos grafikos tvarkyklė"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Šiame telefone nustatymas nepalaikomas"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Šiame planšetiniame kompiuteryje nustatymas nepalaikomas"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Šiame įrenginyje nustatymas nepalaikomas"</string>

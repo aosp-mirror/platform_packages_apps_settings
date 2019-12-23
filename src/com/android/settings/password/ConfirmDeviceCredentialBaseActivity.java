@@ -172,6 +172,10 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             mBiometricManager.onConfirmDeviceCredentialError(
                     BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED,
                     getString(com.android.internal.R.string.biometric_error_user_canceled));
+            if (getIntent().getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOREGROUND_ONLY, false)) {
+                finish();
+            }
         }
     }
 
