@@ -172,7 +172,7 @@ public class AccessibilitySettings extends DashboardFragment {
     private SwitchPreference mToggleDisableAnimationsPreference;
     private Preference mDisplayMagnificationPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
-    private SwitchPreference mToggleInversionPreference;
+    private Preference mToggleInversionPreference;
 
     private DevicePolicyManager mDpm;
 
@@ -502,7 +502,8 @@ public class AccessibilitySettings extends DashboardFragment {
                     mToggleInversionPreference.getOrder() + 1);
             mToggleDisableAnimationsPreference.setOrder(
                     mToggleLargePointerIconPreference.getOrder() + 1);
-            mToggleInversionPreference.setSummary(R.string.summary_empty);
+            mToggleInversionPreference.setSummary(AccessibilityUtil.getSummary(
+                    getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED));
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
         }
