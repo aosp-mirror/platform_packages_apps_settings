@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import android.net.wifi.WifiConfiguration;
+
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
