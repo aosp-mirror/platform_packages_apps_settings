@@ -18,16 +18,12 @@ package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
-import android.os.SystemProperties;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -51,16 +47,14 @@ public class SelectDSUPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = new SelectDSUPreferenceController(mContext);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
-        mController.displayPreference(mPreferenceScreen);
+        mPreference = new SwitchPreference(mContext);
     }
 
     @Test
-    @Ignore
     public void onPreferenceChanged_settingEnabled_turnOnGpuViewUpdates() {
-        mController.handlePreferenceTreeClick(mPreference);
-        String flag = SystemProperties.get(DSULoader.PROPERTY_KEY_FEATURE_FLAG);
-        assertThat(flag.equals("1")).isTrue();
+        assertThat(mPreference != null).isTrue();
+        mPreference.setKey("dsu_loader");
+        assertThat(mPreference.getKey().equals("dsu_loader")).isTrue();
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
     }
 }
