@@ -373,8 +373,9 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Supprimer les données de reconnaissance faciale"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Configurer Face Unlock"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Utilisez Face Unlock pour déverrouiller votre appareil, vous connecter à des applications et confirmer des paiements.\n\nÀ savoir :\nSi vous regardez votre téléphone, vous pouvez le déverrouiller sans le vouloir.\n\nUne autre personne peut également déverrouiller votre téléphone en tenant celui-ci devant votre visage quand vous avez les yeux ouverts.\n\nVotre téléphone peut être déverrouillé par quelqu\'un qui vous ressemble beaucoup, comme votre enfant ou votre jumeau/jumelle."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Utilisez Face Unlock pour déverrouiller votre appareil, vous connecter à des applications et confirmer des paiements.\n\nÀ savoir :\nVous pouvez déverrouiller votre téléphone sans le vouloir, simplement en le regardant.\n\nQuelqu\'un d\'autre peut également le déverrouiller en le tenant devant votre visage, même si vous avez les yeux fermés.\n\nEnfin, quelqu\'un qui vous ressemble beaucoup, comme votre jumeau/jumelle peut également déverrouiller votre téléphone."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Supprimer les données de reconnaissance faciale ?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Les données faciales utilisées par Face Unlock seront supprimées définitivement et en toute sécurité. Après quoi, vous devrez utiliser votre code, votre schéma ou votre mot de passe pour déverrouiller votre téléphone, vous connecter aux applications et confirmer les paiements."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Les données de reconnaissance faciale utilisées par Face Unlock seront supprimées définitivement et ce, en toute sécurité. Vous devrez alors utiliser votre code PIN, votre schéma ou votre mot de passe pour déverrouiller votre téléphone, vous connecter aux applications et confirmer les paiements."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Utilisez Face Unlock pour déverrouiller votre téléphone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Empreinte digitale"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Gérer empreintes num."</string>
@@ -770,6 +771,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> requiert la désactivation du Wi-Fi."</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Valider le bytecode des applis autorisant le débogage"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Autoriser ART à valider le bytecode des applications pouvant être déboguées"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Voir fréquence actual."</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Afficher la fréquence d\'actualisation actuelle"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Autoriser l\'échange de données lorsque la tablette est en contact avec un autre appareil"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Autoriser l\'échange de données lorsque le téléphone touche un autre appareil"</string>
@@ -900,6 +903,12 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Assurez-vous que l\'appareil est branché, chargé et allumé"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Assurez-vous que l\'appareil est branché, chargé et allumé. Si le problème persiste, contactez le fabricant de l\'appareil"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"L\'ajout du SSID \"<xliff:g id="SSID">%1$s</xliff:g>\" n\'est pas possible sur cet appareil"</string>
+    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
+    <skip />
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Vérifiez la connexion et réessayez"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Sélectionner un réseau"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Sélectionnez un réseau pour connecter l\'appareil"</string>
@@ -1818,7 +1827,7 @@
     <string name="install_text" msgid="4558333621516996473">"Installer"</string>
     <string name="disable_text" msgid="5146002260857428005">"Désactiver"</string>
     <string name="enable_text" msgid="8570798764647110430">"Activer"</string>
-    <string name="clear_user_data_text" msgid="6773186434260397947">"Effacer les données"</string>
+    <string name="clear_user_data_text" msgid="6773186434260397947">"Vider l\'espace de stockage"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Désinstaller les mises à jour"</string>
     <string name="auto_launch_enable_text" msgid="286244432074382294">"Vous avez choisi de lancer cette application par défaut pour certaines actions."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Vous avez choisi de permettre à cette application de créer des widgets et d\'accéder à leurs données."</string>
@@ -2045,6 +2054,26 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Appuyez sur des éléments à l\'écran pour qu\'ils soient lus à voix haute"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Préférences pour les sous-titres"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Agrandissement"</string>
+    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
+    <skip />
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Agrandir en appuyant trois fois"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Agrandir avec un raccourci"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Agrandir avec un raccourci et trois tapotements"</string>
@@ -2062,6 +2091,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Pour activer ou désactiver un service d\'accessibilité, balayez l\'écran de bas en haut avec deux doigts.\n\nPour changer de service, balayez l\'écran vers le haut avec deux doigts et appuyez de manière prolongée."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Pour activer ou désactiver un service d\'accessibilité, balayez l\'écran de bas en haut avec trois doigts.\n\nPour changer de service, balayez l\'écran vers le haut avec trois doigts et appuyez de manière prolongée."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Utiliser un raccourci pour ouvrir"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Utiliser un raccourci pour agrandir"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Raccourci pour ouvrir <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Raccourci pour agrandir"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Raccourci pour ouvrir correction couleur"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Bouton d\'accessibilité"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Balayer l\'écran vers le haut avec deux doigts"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Appuyez sur le bouton <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> au bas de l\'écran"</string>
@@ -3353,12 +3387,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notifications intelligentes"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Priorité des notifications intelligentes"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Définir automatiquement les notifications à faible priorité sur Discret"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Classement intelligent des notifications"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Classer automatiquement les notifications par pertinence"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Actions et réponses suggérées"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Afficher automatiquement les actions et réponses suggérées"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Autoriser la répétition des notifications"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Masquer les icônes des notifications discrètes"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Les icônes des notifications discrètes ne s\'affichent pas dans la barre d\'état"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Autoriser les pastilles de notification"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Afficher la barre des conversations récentes"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bulles"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Certaines notifications peuvent s\'afficher sous forme d\'info-bulles à l\'écran"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Certaines notifications ainsi que d\'autres contenus peuvent s\'afficher à l\'écran sous forme de bulles. Pour ouvrir une bulle, appuyez dessus. Pour l\'ignorer, faites-la glisser vers le bas de l\'écran."</string>
@@ -4206,8 +4243,13 @@
     <string name="information_label" msgid="6939310810756569298">"Informations"</string>
     <string name="low_label" msgid="6525629096999711220">"Faible"</string>
     <string name="high_label" msgid="357503396626018487">"Élevée"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"Une sensibilité plus élevée peut entrer en conflit avec les gestes d\'application impliquant les bords de l\'écran."</string>
+    <string name="left_edge" msgid="1513576842959071849">"Bord gauche"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Bord droit"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Une sensibilité plus élevée peut entrer en conflit avec les gestes d\'application impliquant les bords de l\'écran."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilité du geste \"retour en arrière\""</string>
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Paramètres des gestes"</string>
+    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Appuyer deux fois sur le téléphone pour le consulter"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Appuyez deux fois sur la tablette pour la consulter"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Appuyez deux fois sur l\'appareil pour le consulter"</string>
@@ -4645,4 +4687,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informations sur les règles professionnelles"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Paramètres gérés par votre administrateur informatique"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Gestionnaire de rapport de bug"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Détermine quelle application gère le raccourci vers le rapport de bug sur votre appareil."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personnel"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Professionnel"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Application par défaut du système"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Ce choix n\'est plus valide. Veuillez réessayer."</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>

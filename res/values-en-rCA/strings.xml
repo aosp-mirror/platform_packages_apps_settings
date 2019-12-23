@@ -364,7 +364,7 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="950213874209080175">"Delete your current face data to set up face unlock again.\n\nThe face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern or password to unlock your phone, sign in to apps and confirm payments."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="2374998717426341095">"Use face unlock for"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5209963876503148501">"Unlocking your phone"</string>
-    <string name="security_settings_face_settings_use_face_for_apps" msgid="8813038341122613020">"App sign-in &amp; payments"</string>
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="8813038341122613020">"App sign-in and payments"</string>
     <string name="security_settings_face_settings_require_category" msgid="3906382658164073665">"Requirements for face unlock"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Require eyes to be open"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"To unlock the phone, your eyes must be open"</string>
@@ -373,6 +373,7 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Delete face data"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Set up face unlock"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Use Face Unlock to unlock your device, sign in to apps and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, such as an identical sibling."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Use face unlock to unlock your device, sign in to apps and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Delete face data?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"The face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern or password to unlock your phone, sign in to apps and confirm payments."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Use face unlock to unlock your phone"</string>
@@ -770,6 +771,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> wants to turn off Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Verify bytecode of debuggable apps"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Allow ART to verify bytecode for debuggable apps"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Show refresh rate"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Show the current display refresh rate"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Allow data exchange when the tablet touches another device"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Allow data exchange when the phone touches another device"</string>
@@ -900,6 +903,12 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Make sure that the device has been plugged in, charged and turned on"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Make sure that the device has been plugged in, charged and turned on. If the issue continues, contact the device manufacturer"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Adding \'<xliff:g id="SSID">%1$s</xliff:g>\' isn’t supported by this device"</string>
+    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
+    <skip />
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Check connection and try again"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Choose network"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"To connect your device, choose a network"</string>
@@ -2045,6 +2054,16 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tap items on your screen to hear them read aloud"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Caption preferences"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Magnification"</string>
+    <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Magnification area"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Choose the magnification area(s) that you want to use when magnifying the screen"</string>
+    <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Full screen"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Part of screen"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Full screen &amp; part of screen"</string>
+    <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Magnify entire screen"</string>
+    <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Magnify part of screen"</string>
+    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Show move controller"</string>
+    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Show a joystick-like controller to move the magnification area"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Magnify settings"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Magnify with triple-tap"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Magnify with shortcut"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Magnify with shortcut &amp; triple-tap"</string>
@@ -2062,6 +2081,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"To turn an accessibility service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Use shortcut to open"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Use shortcut to magnify"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Shortcut to open <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Shortcut to magnify"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Shortcut to open colour correction"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Accessibility button"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Two-finger swipe up from bottom"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Tap the <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> button at the bottom of your screen"</string>
@@ -2669,7 +2693,7 @@
     <string name="header_add_an_account" msgid="3919151542338822661">"Add an account"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Remove account?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Removing this account will delete all of its messages, contacts and other data from the tablet!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Removing this account will delete all of its messages, contacts and other data from the phone!"</string>
+    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Removing this account will delete all of its messages, contacts and other data from the phone."</string>
     <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Removing this account will delete all of its messages, contacts and other data from the device."</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"This change isn\'t allowed by your admin"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Cannot sync manually"</string>
@@ -3353,12 +3377,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Adaptive notifications"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Adaptive notification priority"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Automatically set lower priority notifications to Gentle"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Adaptive notification ranking"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Automatically rank notifications by relevance"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Suggested actions and replies"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automatically show suggested actions and replies"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Allow notification snoozing"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Hide icons from gentle notifications"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Icons from gentle notifications aren\'t shown in the status bar"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Allow notification dots"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Show strip of recent conversations"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbles"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Some notifications can appear as bubbles on the screen"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Some notifications and other content can appear as bubbles on the screen. To open a bubble, tap it. To dismiss it, drag it down the screen."</string>
@@ -4206,8 +4233,12 @@
     <string name="information_label" msgid="6939310810756569298">"Information"</string>
     <string name="low_label" msgid="6525629096999711220">"Low"</string>
     <string name="high_label" msgid="357503396626018487">"High"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"Higher sensitivity may conflict with any app gestures along the edges of the screen."</string>
+    <string name="left_edge" msgid="1513576842959071849">"Left edge"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Right edge"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Higher sensitivity may conflict with any app gestures along the edges of the screen."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Back sensitivity"</string>
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Gesture settings"</string>
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"gesture navigation, back sensitivity, back gesture"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Double-tap to check phone"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Double-tap to check tablet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Double-tap to check device"</string>
@@ -4645,4 +4676,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Your work policy info"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Settings managed by your IT admin"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Bug report handler"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determines which app handles the bug report shortcut on your device."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Work"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"System default"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"This choice is no longer valid. Try again."</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>

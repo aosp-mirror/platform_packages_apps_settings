@@ -373,6 +373,7 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Poista kasvodata"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Määritä Face Unlock"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Face Unlockin avulla voit avata laitteesi latauksen, kirjautua sovelluksiin ja vahvistaa maksuja.\n\nPidä mielessä:\nPuhelimen katsominen voi avata sen lukituksen, vaikka et olisi tarkoittanut tehdä niin.\n\nJoku muu voi avata puhelimesi lukituksen, jos hän pitää puhelinta kasvojesi edessä, kun silmäsi ovat auki.\n\nJoku muu voi avata puhelimesi lukituksen, jos hän näyttää sinulta (esim. identtinen kaksosesi)."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Face Unlockin avulla voit avata laitteesi lukituksen, kirjautua sovelluksiin ja vahvistaa maksuja.\n\nPidä mielessä:\nPuhelimen katsominen voi avata sen lukituksen haluamattasi.\n\nJoku muu voi avata puhelimesi lukituksen pitämällä sitä kasvojesi edessä, vaikka silmäsi ovat kiinni.\n\nSinulta näyttävä henkilö (esim. identtinen kaksonen) voi avata puhelimen lukituksen."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Poistetaanko kasvodata?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Face Unlockin käyttämä kasvodata poistetaan pysyvästi ja turvallisesti. Poistamisen jälkeen tarvitset PIN-koodia, kuviota tai salasanaa puhelimen lukituksen avaamiseen, sovelluksiin kirjautumiseen ja maksujen vahvistamiseen."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Avaa puhelimen lukitus Face Unlockilla"</string>
@@ -770,6 +771,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa poistaa Wi-Fin käytöstä."</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Vahvista korjattavien sovell. tavukoodi"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Salli ART vahvistaaksesi korjattavien sovellusten tavukoodi."</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Näytä päivitysväli"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Näytä nykyisen näytön päivitysväli"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Salli tiedonsiirto, kun tabletti koskettaa toista laitetta"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta."</string>
@@ -900,6 +903,12 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Varmista, että laite on liitetty virtalähteeseen, ladattu ja päällä"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Varmista, että laite on liitetty virtalähteeseen, ladattu ja päällä. Jos ongelma ei ratkea, ota yhteyttä laitteen valmistajaan"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Tämä laite ei tue <xliff:g id="SSID">%1$s</xliff:g>:n lisäämistä"</string>
+    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
+    <skip />
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Tarkista yhteys ja yritä uudelleen"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Valitse verkko"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Yhdistä laitteesi valitsemalla verkko"</string>
@@ -2045,6 +2054,26 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Napauta kohteita näytöllä, niin ne luetaan ääneen."</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Tekstitysvalinnat"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Suurennus"</string>
+    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
+    <skip />
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Suurenna kolmoisnapautuksella"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Suurenna pikanäppäimellä"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Suurenna pikanäppäimellä ja kolmoisnapautuksella."</string>
@@ -2062,6 +2091,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Käynnistä tai sammuta esteettömyyspalvelu pyyhkäisemällä näytön alalaidasta ylös kahdella sormella.\n\nVaihda palveluiden välillä pyyhkäisemällä ylös kahdella sormella ja koskettamalla pitkään."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Käynnistä tai sammuta esteettömyyspalvelu pyyhkäisemällä näytön alalaidasta ylös kolmella sormella.\n\nVaihda palveluiden välillä pyyhkäisemällä ylös kolmella sormella ja koskettamalla pitkään."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Avaa pikanäppäimellä"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Suurenna pikanäppäimellä"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Pikanäppäin, jolla avataan <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Suurennuksen pikanäppäin"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Värinkorjauksen pikanäppäin"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Esteettömyyspainike"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Pyyhkäise kahdella sormella alareunasta ylös"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Napauta näytön alareunasta <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>"</string>
@@ -3353,12 +3387,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Mukautuvat ilmoitukset"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Mukautuva ilmoitusten tärkeys"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Aseta alemman prioriteetin ilmoitukset automaattisesti varovaisiksi."</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Ilmoitusten mukautuva järjestäminen"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Järjestä ilmoitukset automaattisesti olennaisuuden mukaan"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Toiminta- ja vastausehdotukset"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Näytä toiminta- ja vastausehdotukset automaattisesti."</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Salli ilmoitusten torkuttaminen"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Piilota varovaisten ilmoitusten kuvakkeet"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Varovaisten ilmoitusten kuvakkeita ei näytetä tilapalkissa."</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Salli pistemerkit"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Näytä äskeiset keskustelut rivissä"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Kuplat"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Osa ilmoituksista voi näkyä näytöllä kuplina."</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Osa ilmoituksista ja muusta sisällöstä voi näkyä näytöllä kuplina. Avaa kupla napauttamalla sitä. Ohita se vetämällä sitä alaspäin näytöllä."</string>
@@ -4206,8 +4243,13 @@
     <string name="information_label" msgid="6939310810756569298">"Tiedot"</string>
     <string name="low_label" msgid="6525629096999711220">"Matala"</string>
     <string name="high_label" msgid="357503396626018487">"Korkea"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"Korkeampi herkkyys voi olla ristiriidassa näytön reunan sovelluseleiden kanssa."</string>
+    <string name="left_edge" msgid="1513576842959071849">"Vasen reuna"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Oikea reuna"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Suurempi herkkyys voi olla ristiriidassa näytön reunan sovelluseleiden kanssa."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Takaisin-eleen herkkyys"</string>
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Eleasetukset"</string>
+    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tarkista ilmoitukset kaksoisnapauttamalla puhelimen näyttöä"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tarkista ilmoitukset kaksoisnapauttamalla tabletin näyttöä"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tarkista ilmoitukset kaksoisnapauttamalla laitteen näyttöä"</string>
@@ -4645,4 +4687,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Työkäytäntötietosi"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"IT-järjestelmänvalvojan ylläpitämät asetukset"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafiikkasuoritin"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Virheraportin käsittelijä"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Valitsee, mikä sovellus käsittelee laitteen virheraportti-pikanäppäintä."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Henkilökohtainen"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Työ"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Järjestelmän oletusarvo"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Tämä valinta ei enää kelpaa. Yritä uudestaan."</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>

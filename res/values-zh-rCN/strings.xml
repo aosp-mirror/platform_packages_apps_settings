@@ -373,6 +373,7 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"删除人脸数据"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"设置人脸解锁"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"您可以使用人脸解锁功能来解锁设备、登录应用以及确认付款。\n\n注意：\n目视手机可能会让手机意外解锁。\n\n如果有人在您睁开双眼时将手机对准您的脸，手机会因此解锁。\n\n此外，长相与您相似的人（例如同胞兄弟姐妹）也能够解锁您的手机。"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"您可以使用人脸解锁功能来解锁设备、登录应用以及确认付款。\n\n注意：\n目视手机可能会让手机意外解锁。\n\n如果有人将手机对着您的脸，也可能会解锁您的手机（即使您闭上眼睛）。\n\n此外，长相与您相似的人（例如与您具有相同特征的兄弟姐妹）可能也能解锁您的手机。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"要删除人脸数据吗？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"系统会安全地将人脸解锁功能所用的脸部数据永久删除。移除数据后，您将需要使用 PIN 码、图案或密码来解锁手机、登录应用和确认付款。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"使用人脸解锁功能将手机解锁"</string>
@@ -770,6 +771,10 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g>请求关闭 WLAN"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"验证可调试应用的字节码"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"允许 ART 验证可调试应用的字节码"</string>
+    <!-- no translation found for show_refresh_rate (5742688821872354973) -->
+    <skip />
+    <!-- no translation found for show_refresh_rate_summary (3558118122374609663) -->
+    <skip />
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"允许平板电脑在接触其他设备时交换数据"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"允许手机在接触其他设备时交换数据"</string>
@@ -900,6 +905,12 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"请确保设备已连接到电源，正在充电且处于开启状态"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"请确保设备已连接到电源，正在充电且处于开启状态。如果问题依然存在，请与设备制造商联系"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"此设备不支持添加“<xliff:g id="SSID">%1$s</xliff:g>”"</string>
+    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
+    <skip />
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"请检查连接状况，然后重试"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"选择网络"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"要连接设备，请选择一个网络"</string>
@@ -1200,14 +1211,14 @@
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"将在日出时自动关闭"</string>
     <string name="night_display_activation_on_manual" msgid="7999294858026069365">"立即开启"</string>
     <string name="night_display_activation_off_manual" msgid="4842907786868153218">"立即关闭"</string>
-    <string name="night_display_activation_on_twilight" msgid="3440889451767582067">"保持开启状态，直到日出"</string>
+    <string name="night_display_activation_on_twilight" msgid="3440889451767582067">"日出前一直开启"</string>
     <string name="night_display_activation_off_twilight" msgid="2853594955401726956">"保持关闭状态，直到日落"</string>
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"保持开启状态，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"保持关闭状态，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"目前未开启护眼模式"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即开启"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"立即关闭"</string>
-    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"保持开启状态，直到日出"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"日出前一直开启"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"保持关闭状态，直到日落"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"深色模式"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"排定时间"</string>
@@ -2045,6 +2056,26 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"点按屏幕上的内容即可让系统大声朗读出来"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"字幕偏好设置"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"放大功能"</string>
+    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
+    <skip />
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"点按屏幕三次进行放大"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快捷手势进行放大"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"通过“快捷手势”和“点按屏幕三次”进行放大"</string>
@@ -2062,24 +2093,25 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"要开启或关闭无障碍服务，请用双指从屏幕底部向上滑动。\n\n要在多项服务之间切换，请用双指向上滑动并按住。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"要开启或关闭无障碍服务，请用三指从屏幕底部向上滑动。\n\n要在多项服务之间切换，请用三指向上滑动并按住。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"知道了"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (2920806427635233043) -->
+    <!-- no translation found for accessibility_shortcut_title (7219851818023989864) -->
     <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_gesture (6906653331086992721) -->
+    <!-- no translation found for accessibility_magnification_shortcut_title (3850925633238639131) -->
     <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (3917444742336634202) -->
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title (4922086411442295974) -->
     <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (391987875251799972) -->
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_magnification (9029389159199076646) -->
     <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_hardware (2356853121810443026) -->
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_daltonizer (2875485140645140606) -->
     <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_hardware (6508972075712224951) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_triple_tap (6543084611445441109) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_triple_tap (2132280626458501422) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_advance (4567868630655591506) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"“无障碍”按钮"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"用两根手指从屏幕底部向上滑动"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"点按屏幕底部的 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> 按钮"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"用两根手指从屏幕边缘向上滑动"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"按住音量键"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"同时按住两个音量键 1 秒钟"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"点按屏幕三次"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2132280626458501422">"快速点按屏幕三次（设备运行速度可能会因此而减慢）"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"高级"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"“无障碍”按钮已设为“<xliff:g id="SERVICE">%1$s</xliff:g>”。要使用放大功能，请触摸并按住“无障碍”按钮，然后选择“放大功能”。"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"无障碍手势已设为<xliff:g id="SERVICE">%1$s</xliff:g>。要使用放大功能，请用两指从屏幕底部向上滑动并按住，然后选择放大功能。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"音量键快捷方式"</string>
@@ -2139,18 +2171,12 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"此服务出现故障。"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"在“快捷设置”中显示"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"校正模式"</string>
-    <!-- no translation found for daltonizer_mode_deuteranomaly_title (4210949400493358650) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly_title (2929354940552262472) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly_title (2278786218762602022) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranomaly_summary (391621040826073327) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly_summary (877971556622350648) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly_summary (2428218320118180070) -->
-    <skip />
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"红绿不分"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2929354940552262472">"绿红不分"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"蓝黄不分"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"绿色弱视"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"红色弱视"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"蓝色弱视"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
       <item quantity="other">延迟时间极短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> 毫秒）</item>
       <item quantity="one">延迟时间极短（<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> 毫秒）</item>
@@ -3368,12 +3394,18 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"自动调节通知"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"自适应通知优先级"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"自动将优先级较低的通知设为无声通知"</string>
+    <!-- no translation found for asst_capability_ranking_title (312998580233257581) -->
+    <skip />
+    <!-- no translation found for asst_capability_ranking_summary (2293524677144599450) -->
+    <skip />
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"建议的操作和回复"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"自动显示建议的操作和回复"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"允许通知暂停"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"隐藏无声通知的图标"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"无声通知的图标不会显示在状态栏中"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"允许使用通知圆点"</string>
+    <!-- no translation found for notification_people_strip_title (1185857822541001139) -->
+    <skip />
     <string name="notification_bubbles_title" msgid="5681506665322329301">"气泡"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"部分通知可能会以气泡形式显示在屏幕上"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知及其他内容可以在屏幕上以气泡的形式显示。点按气泡即可将其打开，将气泡向屏幕下方拖动即可将其关闭。"</string>
@@ -4221,8 +4253,17 @@
     <string name="information_label" msgid="6939310810756569298">"信息"</string>
     <string name="low_label" msgid="6525629096999711220">"低"</string>
     <string name="high_label" msgid="357503396626018487">"高"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"再调高灵敏度可能会导致与沿屏幕边缘执行的任何应用手势相冲突。"</string>
+    <!-- no translation found for left_edge (1513576842959071849) -->
+    <skip />
+    <!-- no translation found for right_edge (1505309103265829121) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (6638367716784103306) -->
+    <skip />
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"“返回”手势的灵敏度"</string>
+    <!-- no translation found for gesture_settings_activity_title (6047431928567911330) -->
+    <skip />
+    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"点按两次即显示"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"点按两次即可查看平板电脑"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"点按两次即可查看设备"</string>
@@ -4660,4 +4701,20 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"您的工作政策信息"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"由 IT 管理员管理的设置"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <!-- no translation found for bug_report_handler_title (713439959113250125) -->
+    <skip />
+    <!-- no translation found for bug_report_handler_picker_footer_text (4935758328366585673) -->
+    <skip />
+    <!-- no translation found for personal_profile_app_subtext (5586060806997067676) -->
+    <skip />
+    <!-- no translation found for work_profile_app_subtext (5043419461440127879) -->
+    <skip />
+    <!-- no translation found for system_default_app_subtext (5212055189703164839) -->
+    <skip />
+    <!-- no translation found for select_invalid_bug_report_handler_toast_text (8857326334015386692) -->
+    <skip />
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>
