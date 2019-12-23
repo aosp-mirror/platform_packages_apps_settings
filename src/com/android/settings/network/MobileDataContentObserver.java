@@ -33,9 +33,13 @@ public class MobileDataContentObserver extends ContentObserver {
         super(handler);
     }
 
-    public static Uri getObservableUri(int subId) {
+    /**
+     * Return a URI of mobile data(ON vs OFF)
+     */
+    public static Uri getObservableUri(Context context, int subId) {
         Uri uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA);
-        if (TelephonyManager.getDefault().getSimCount() != 1) {
+        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+        if (telephonyManager.getSimCount() != 1) {
             uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA + subId);
         }
         return uri;
@@ -54,7 +58,7 @@ public class MobileDataContentObserver extends ContentObserver {
     }
 
     public void register(Context context, int subId) {
-        final Uri uri = getObservableUri(subId);
+        final Uri uri = getObservableUri(context, subId);
         context.getContentResolver().registerContentObserver(uri, false, this);
 
     }
