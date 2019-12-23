@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -47,6 +48,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class ApnPreferenceControllerTest {
@@ -69,7 +71,7 @@ public class ApnPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(RuntimeEnvironment.application);
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
         doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
@@ -138,10 +140,10 @@ public class ApnPreferenceControllerTest {
     @Test
     public void handPreferenceTreeClick_fireIntent() {
         ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(captor.capture());
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mContext).startActivity(captor.capture());
         final Intent intent = captor.getValue();
         assertThat(intent.getAction()).isEqualTo(Settings.ACTION_APN_SETTINGS);
         assertThat(intent.getIntExtra(ApnSettings.SUB_ID, 0)).isEqualTo(SUB_ID);
