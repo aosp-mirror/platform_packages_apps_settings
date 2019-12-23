@@ -33,7 +33,6 @@ import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,7 +71,7 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             return false;
         }
 
-        final TelephonyManager telephonyManager = TelephonyManager.from(context);
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
         final NetworkStatsManager networkStatsManager =
                 context.getSystemService(NetworkStatsManager.class);
         boolean hasEthernetUsage = false;
@@ -115,7 +114,7 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             }
             return false;
         }
-        final TelephonyManager tele = TelephonyManager.from(context);
+        final TelephonyManager tele = context.getSystemService(TelephonyManager.class);
         // require both supported network and ready SIM
         boolean isReady = true;
         for (SubscriptionInfo subInfo : subInfoList) {

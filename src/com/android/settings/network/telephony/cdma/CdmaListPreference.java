@@ -41,6 +41,7 @@ public class CdmaListPreference extends ListPreference {
     }
 
     public void setSubId(int subId) {
-        mTelephonyManager = TelephonyManager.from(getContext()).createForSubscriptionId(subId);
+        mTelephonyManager = getContext().getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subId);
     }
 }

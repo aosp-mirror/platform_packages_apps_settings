@@ -103,7 +103,7 @@ public class SettingsDumpService extends Service {
         DataUsageController controller = new DataUsageController(this);
         ConnectivityManager connectivityManager = getSystemService(ConnectivityManager.class);
         SubscriptionManager manager = SubscriptionManager.from(this);
-        TelephonyManager telephonyManager = TelephonyManager.from(this);
+        TelephonyManager telephonyManager = this.getSystemService(TelephonyManager.class);
         if (connectivityManager.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)) {
             JSONArray array = new JSONArray();
             for (SubscriptionInfo info : manager.getAllSubscriptionInfoList()) {
