@@ -426,6 +426,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore
     public void initialize_updateEid_shouldNotSetEid() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(PhoneConstants.MAX_PHONE_COUNT_DUAL_SIM);
 
@@ -464,6 +465,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore
     public void initialize_updateEid_shouldSetEidFromCard() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(PhoneConstants.MAX_PHONE_COUNT_DUAL_SIM);
 
@@ -502,6 +504,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore
     public void initialize_updateEid_shouldSetEidFromManager() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(PhoneConstants.MAX_PHONE_COUNT_DUAL_SIM);
 
@@ -543,6 +546,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore
     public void initialize_updateEid_shouldRemoveEid() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(PhoneConstants.MAX_PHONE_COUNT_DUAL_SIM);
 
@@ -582,6 +586,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore
     public void initialize_updateEid_shouldNotSetEidInSingleSimMode() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(
                 PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM);
@@ -612,6 +617,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore
     public void initialize_updateEid_shouldSetEidInSingleSimModeWithEnabledEuicc() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(
                 PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM);
@@ -644,6 +650,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore
     public void initialize_updateEid_shouldSetEidInSingleSimModeWithDisabledEuicc() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(
                 PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM);
@@ -676,6 +683,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore
     public void initialize_updateEid_shouldRemoveEidInSingleSimMode() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(
                 PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM);
