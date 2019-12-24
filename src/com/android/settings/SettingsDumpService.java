@@ -107,8 +107,10 @@ public class SettingsDumpService extends Service {
         if (connectivityManager.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)) {
             JSONArray array = new JSONArray();
             for (SubscriptionInfo info : manager.getAllSubscriptionInfoList()) {
+                telephonyManager = telephonyManager
+                        .createForSubscriptionId(info.getSubscriptionId());
                 NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
-                        telephonyManager.getSubscriberId(info.getSubscriptionId()));
+                        telephonyManager.getSubscriberId());
                 final JSONObject usage = dumpDataUsage(mobileAll, controller);
                 usage.put("subId", info.getSubscriptionId());
                 array.put(usage);
