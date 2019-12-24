@@ -455,6 +455,7 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Izbriši obraz"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Nastavite odklepanje z obrazom"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\nče pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nTelefon lahko odklene nekdo drug, če ga podrži pred vašim obrazom, ko imate odprte oči.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\ntelefon se lahko nenamerno odklene, če ga pogledate.\n\nTelefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom – celo kadar imate oči zaprte.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Želite izbrisati podatke o obrazu?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Podatki o obrazu, ki se uporabljajo za odklepanje z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona, prijavo v aplikacije in potrjevanje plačil potrebovali kodo PIN, vzorec ali geslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Za odklepanje telefona uporabite funkcijo odklepanja z obrazom"</string>
@@ -1280,7 +1281,7 @@
     <string name="night_display_text" msgid="4789324042428095383">"Nočna svetloba zaslon obarva z jantarnim odtenkom. To olajša gledanje na zaslon ali branje pri šibki svetlobi in vam lahko pomaga prej zaspati."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Urnik"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Brez"</string>
-    <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Vklop ob poljubni nastavljeni uri"</string>
+    <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Vklop ob poljubni uri"</string>
     <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Vklop od sončn. zahoda do vzhoda"</string>
     <string name="night_display_start_time_title" msgid="2611541851596977786">"Začetni čas"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Končni čas"</string>
@@ -1301,7 +1302,7 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Vklopi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Izklopi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Nočna svetloba je izklopljena"</string>
-    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Vklopi"</string>
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Vklopi zdaj"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Izklopi"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Vklopi do sončnega vzhoda"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"Izklopi do sončnega zahoda"</string>
@@ -2280,7 +2281,7 @@
     <string name="captioning_edge_color" msgid="6035818279902597518">"Barva roba"</string>
     <string name="captioning_edge_type" msgid="5281259280060811506">"Vrsta roba"</string>
     <string name="captioning_typeface" msgid="285325623518361407">"Skupina pisav"</string>
-    <string name="captioning_preview_text" msgid="4973475065545995704">"Napisi bodo videti tako:"</string>
+    <string name="captioning_preview_text" msgid="4973475065545995704">"Podnapisi bodo videti tako:"</string>
     <string name="captioning_preview_characters" msgid="7854812443613580460">"Aa"</string>
     <string name="locale_default" msgid="8948077172250925164">"Privzeto"</string>
     <string name="color_title" msgid="2511586788643787427">"Barva"</string>
@@ -3325,7 +3326,7 @@
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Vibriranje"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"Zvoki ob zagonu"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Samodejni podnapisi"</string>
-    <string name="live_caption_summary" msgid="2898451867595161809">"Samodejni napisi predstavnosti"</string>
+    <string name="live_caption_summary" msgid="2898451867595161809">"Samodejni podnapisi predstavnosti"</string>
     <string name="zen_mode_settings_summary_off" msgid="7844433300559059480">"Nikoli"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="3254890503929315009">
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> omogočen</item>
@@ -4837,4 +4838,8 @@
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="1049161096896074364">"Kombinacija kartic SIM"</string>
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Podatki o službenem pravilniku"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nastavitve upravlja skrbnik za IT"</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>
