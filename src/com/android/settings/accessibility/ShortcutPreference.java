@@ -20,8 +20,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -33,76 +33,112 @@ import com.android.settings.R;
  */
 public class ShortcutPreference extends Preference {
 
-    private View.OnClickListener mCheckBoxListener;
-    private View.OnClickListener mSettingButtonListener;
+    /**
+     * Interface definition for a callback to be invoked when the checkbox or settings has been
+     * clicked.
+     */
+    public interface OnClickListener {
+        /**
+         * Called when the checkbox in ShortcutPreference has been clicked.
+         *
+         * @param preference The clicked preference
+         */
+        void onCheckboxClicked(ShortcutPreference preference);
+        /**
+         * Called when the settings view has been clicked.
+         *
+         * @param preference The clicked preference
+         */
+        void onSettingsClicked(ShortcutPreference preference);
+    }
+    private OnClickListener mListener = null;
 
+    private int mSettingsVisibility = View.VISIBLE;
     private boolean mChecked = false;
 
     ShortcutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
+        init();
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        holder.itemView.setClickable(false);
 
         final CheckBox checkBox = holder.itemView.findViewById(R.id.checkbox);
-        checkBox.setOnClickListener(mCheckBoxListener);
-        checkBox.setChecked(mChecked);
-        final View settingButton = holder.itemView.findViewById(R.id.settings_button);
-        settingButton.setOnClickListener(mSettingButtonListener);
+        final LinearLayout mainFrame = holder.itemView.findViewById(R.id.main_frame);
+        if (mainFrame != null && checkBox != null) {
+            mainFrame.setOnClickListener(view -> callOnCheckboxClicked());
+            checkBox.setChecked(mChecked);
+        }
+
+        final View settings = holder.itemView.findViewById(android.R.id.widget_frame);
+        if (settings != null) {
+            settings.setOnClickListener(view -> callOnSettingsClicked());
+            settings.setVisibility(mSettingsVisibility);
+        }
     }
 
     /**
      * Set the shortcut checkbox according to checked value.
      *
-     * @param checked the state value of shortcut checkbox.
+     * @param checked the state value of shortcut checkbox
      */
     public void setChecked(boolean checked) {
-        if (checked != mChecked) {
+        if (mChecked != checked) {
             mChecked = checked;
             notifyChanged();
         }
     }
 
     /**
-     * Set the given onClickListener to the SettingButtonListener.
+     * Get the checked value of shortcut checkbox.
      *
-     * @param listener the given onClickListener.
+     * @return the checked value of shortcut checkbox
      */
-    public void setSettingButtonListener(@Nullable View.OnClickListener listener) {
-        mSettingButtonListener = listener;
-        notifyChanged();
+    public boolean getChecked() {
+        return mChecked;
+    }
+
+
+
+    /**
+     * Sets the visibility state of Settings view.
+     *
+     * @param visibility one of {@link View#VISIBLE}, {@link View#INVISIBLE}, or {@link View#GONE}.
+     */
+    public void setSettingsVisibility(@View.Visibility int visibility) {
+        if (mSettingsVisibility != visibility) {
+            mSettingsVisibility = visibility;
+            notifyChanged();
+        }
     }
 
     /**
-     * Returns the callback to be invoked when the setting button is clicked.
+     * Sets the callback to be invoked when this preference is clicked by the user.
      *
-     * @return The callback to be invoked
+     * @param listener the callback to be invoked
      */
-    public View.OnClickListener getSettingButtonListener() {
-        return mSettingButtonListener;
+    public void setOnClickListener(OnClickListener listener) {
+        mListener = listener;
     }
 
-    /**
-     * Set the given onClickListener to the CheckBoxListener.
-     *
-     * @param listener the given onClickListener.
-     */
-    public void setCheckBoxListener(@Nullable View.OnClickListener listener) {
-        mCheckBoxListener = listener;
-        notifyChanged();
+    private void init() {
+        setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
+        setWidgetLayoutResource(R.layout.preference_widget_settings);
+        setIconSpaceReserved(false);
     }
 
-    /**
-     * Returns the callback to be invoked when the checkbox is clicked.
-     *
-     * @return The callback to be invoked
-     */
-    public View.OnClickListener getCheckBoxListener() {
-        return mCheckBoxListener;
+    private void callOnSettingsClicked() {
+        if (mListener != null) {
+            mListener.onSettingsClicked(this);
+        }
+    }
+
+    private void callOnCheckboxClicked() {
+        setChecked(!mChecked);
+        if (mListener != null) {
+            mListener.onCheckboxClicked(this);
+        }
     }
 }
