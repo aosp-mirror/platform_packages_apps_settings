@@ -82,7 +82,8 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
 
     public void init(int subId) {
         mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
     }
 
     @Override

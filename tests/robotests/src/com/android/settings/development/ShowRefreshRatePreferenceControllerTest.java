@@ -39,6 +39,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.testutils.shadow.ShadowParcel;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -86,6 +87,7 @@ public class ShowRefreshRatePreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     @Config(shadows = ShadowParcel.class)
     public void updateState_settingEnabled_shouldCheckPreference() throws RemoteException {
         ShadowParcel.sReadIntResult = 1;

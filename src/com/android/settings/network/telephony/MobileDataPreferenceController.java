@@ -138,7 +138,8 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public void init(FragmentManager fragmentManager, int subId) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
     }
 
     @VisibleForTesting
