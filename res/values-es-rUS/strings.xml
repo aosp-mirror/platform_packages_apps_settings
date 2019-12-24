@@ -373,8 +373,9 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Borrar datos faciales"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Configurar Desbloqueo facial"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Usa el Desbloqueo facial para desbloquear tu dispositivo, acceder a apps y confirmar pagos.\n\nTen en cuenta lo siguiente:\nMirar el teléfono puede desbloquearlo aunque no lo desees.\n\nUn tercero puede desbloquear el teléfono si lo sostiene frente a tu rostro mientras tienes los ojos abiertos.\n\nPor otro lado, también puede desbloquearlo cualquier persona que se parezca a ti, como un hermano gemelo."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Usa el desbloqueo facial para desbloquear tu dispositivo, acceder a apps y confirmar pagos.\n\nTen en cuenta lo siguiente:\nMirar el teléfono puede desbloquearlo aunque no lo desees.\n\nUn tercero puede desbloquear el teléfono si lo sostiene frente a tu rostro, incluso aunque tengas los ojos cerrados.\n\nPor otro lado, también puede desbloquearlo cualquier persona que se parezca mucho a ti, como un hermano gemelo."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"¿Quieres borrar los datos faciales?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Se borrarán de manera segura y permanente los datos del rostro que usa el desbloqueo facial. Tras la eliminación, deberás ingresar tu PIN, patrón o contraseña para desbloquear el teléfono, acceder a apps y confirmar pagos."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Se borrarán los datos del rostro que usa el desbloqueo facial definitivamente y de manera segura. Tras la eliminación, deberás ingresar el PIN, el patrón o la contraseña para desbloquear el teléfono, acceder a las apps y confirmar pagos."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Usa tu rostro para desbloquear el teléfono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Huella digital"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Adm. huellas digitales"</string>
@@ -770,6 +771,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> quiere desactivar la conexión Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Verificar bytecode de apps depurables"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Permitir que ART verifique el bytecode de apps depurables"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Frec. de actualización"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Mostrar frec. de actualización actual de pantalla"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Permitir el intercambio de datos cuando la tablet entre en contacto con otro dispositivo"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Permitir el intercambio de datos cuando el dispositivo toque otro dispositivo"</string>
@@ -900,6 +903,12 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Asegúrate de que el dispositivo se haya enchufado, cargado y encendido"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Asegúrate de que el dispositivo se haya enchufado, cargado y encendido. Si el problema persiste, comunícate con el fabricante"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"No se puede agregar \"<xliff:g id="SSID">%1$s</xliff:g>\" a este dispositivo"</string>
+    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
+    <skip />
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Comprueba la conexión y vuelve a intentarlo"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Elegir una red"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Selecciona una red para conectar tu dispositivo"</string>
@@ -1604,10 +1613,10 @@
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Hotspot portátil"</string>
     <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Conexión Bluetooth"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Compartir conexión"</string>
-    <string name="tether_settings_title_all" msgid="6807525590937697228">"Hotspots y dispositivos portátiles"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Hotspot activado, conexión mediante dispositivo portátil"</string>
+    <string name="tether_settings_title_all" msgid="6807525590937697228">"Hotspot y conexión mediante dispositivos móviles"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Hotspot activado, conexión mediante dispositivo móvil"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Hotspot activado"</string>
-    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Conexión mediante dispositivo portátil"</string>
+    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Conexión mediante dispositivo móvil"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"No podrán establecerse conexiones a través del dispositivo portátil ni hotspots portátiles cuando se active el modo Ahorro de datos."</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Conexión a red por USB"</string>
@@ -2045,6 +2054,26 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Presiona los elementos en tu pantalla para escuchar la lectura en voz alta"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferencias de subtítulos"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliación"</string>
+    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
+    <skip />
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Ampliar presionando tres veces"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ampliar con gesto"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Ampliar con acceso directo y presionar tres veces"</string>
@@ -2062,6 +2091,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Para activar o desactivar un servicio de accesibilidad, desliza dos dedos hacia arriba desde la parte inferior de la pantalla.\n\nSi quieres cambiar de servicio, desliza dos dedos hacia arriba y mantén presionado."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Para activar o desactivar un servicio de accesibilidad, desliza tres dedos hacia arriba desde la parte inferior de la pantalla.\n\nPara cambiar de servicio, desliza tres dedos hacia arriba y mantén presionado."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Usar acceso directo para abrir"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Usar acceso directo para ampliar"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Acceso directo para abrir <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Acceso directo para ampliar"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Acceso directo: abrir corrección color"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Botón de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Deslizar 2 dedos hacia arriba desde la parte inferior"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Presiona el botón <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> en la parte inferior de la pantalla"</string>
@@ -3353,12 +3387,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notificaciones adaptables"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioridad de notificación adaptable"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Configurar automáticamente las notificaciones de menor prioridad a silenciosas"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Clasificación de notificaciones adaptables"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Clasificar las notificaciones automáticamente por relevancia"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Respuestas y acciones sugeridas"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Mostrar automáticamente respuestas y acciones sugeridas"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir posponer alarmas"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ocultar íconos de las notificaciones silenciosas"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Los íconos de las notificaciones silenciosas no se muestran en la barra de estado"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Activar puntos de notificación"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Mostrar la barra de conversaciones recientes"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Cuadros"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Algunas notificaciones pueden aparecer como cuadros en la pantalla"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Algunas notificaciones y otro contenido pueden aparecer como cuadros en la pantalla. Para abrir un cuadro, presiónalo. Para descartarlo, arrástralo hacia el extremo inferior de la pantalla."</string>
@@ -4204,8 +4241,13 @@
     <string name="information_label" msgid="6939310810756569298">"Información"</string>
     <string name="low_label" msgid="6525629096999711220">"Baja"</string>
     <string name="high_label" msgid="357503396626018487">"Alta"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"La sensibilidad alta puede entrar en conflicto con los gestos de la app que se hagan en los bordes de la pantalla."</string>
+    <string name="left_edge" msgid="1513576842959071849">"Borde izquierdo"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Borde derecho"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"La sensibilidad alta puede entrar en conflicto con los gestos de la app que se hagan en los bordes de la pantalla."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilidad posterior"</string>
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Configuración de gestos"</string>
+    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Presiona la pantalla dos veces para consultar el teléfono"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Presionar dos veces la tablet para revisarla"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Presionar dos veces el dispositivo para revisarlo"</string>
@@ -4643,4 +4685,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Información sobre la política de tu trabajo"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Configuración gestionada por tu administrador de TI"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador de informes de errores"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina qué app controla el acceso directo a los informes de errores en el dispositivo."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Trabajo"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Predeterminada del sistema"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Esta opción ya no es válida. Vuelve a intentarlo."</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>

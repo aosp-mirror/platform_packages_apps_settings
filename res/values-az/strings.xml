@@ -373,6 +373,7 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Üz datasını silin"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Üz kilidi ayarlayın"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Cihazı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün üz kilidindən istifadə edin.\n\nUnutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nTelefon gözləriniz açıq halda üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, həmçinin övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Cihazı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün üz kilidindən istifadə edin.\n\nUnutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nHətta gözləriniz bağlı halda telefon üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, həmçinin Sizə oxşayan övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Üz datası silinsin?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Üz ilə kiliddən çıxarma üçün istifadə edilən üz datası həmişəlik və təhlükəsiz silinəcək. Silindikdən sonra telefonu kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün PIN, model və ya parol tələb ediləcək."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Telefonu kiliddən çıxarmaq üçün üz kilidindən istifadə edin"</string>
@@ -770,6 +771,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> Wi-Fi söndürmək istəyir"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Sazlanan tətbiqlərin bayt kodunu təsdiq edin"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Sazlana bilən tətbiqlərin bayt kodunu təsdiq etmək üçün ART-a icazə verin"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Təzələmə tempini göstərin"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Displeyin cari təzələnmə tempini göstərin"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Planşetin başqa cihaza toxunması zamanı data mübadiləsinə icazə verin"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Telefon digər cihazla əlaqədə olduqda data mübadiləsinə icazə verin"</string>
@@ -900,6 +903,12 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Cihazın elektrik mənbəyinə qoşulu olduğuna, batareya yığdığına və aktiv olduğuna əmin olun"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Cihazın elektrik mənbəyinə qoşulu olduğuna, batareya yığdığına və aktiv olduğuna əmin olun. Problem davam edərsə, cihaz istehsalçısı ilə əlaqə saxlayın"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"\"<xliff:g id="SSID">%1$s</xliff:g>\" əlavə etmək bu cihazda dəstəklənmir"</string>
+    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
+    <skip />
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Bağlantını yoxlayın və yenidən cəhd edin"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Şəbəkə seçin"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Cihazın qoşulması üçün şəbəkə seçin"</string>
@@ -2045,6 +2054,26 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Səsli oxunuş üçün ekrandakı elementlərə toxunun"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Subtitr tərcihləri"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Böyütmə"</string>
+    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
+    <skip />
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Üç dəfə klikləməklə böyüdün"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Qısayol ilə böyüdün"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Qısayol &amp; üç toxunuşla böyüdün"</string>
@@ -2062,6 +2091,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Əlçatımlılıq xidmətini aktiv və ya deaktiv etmək üçün iki barmağınızla ekranın aşağısından yuxarı doğru sürüşdürün.\n\nXidmətlər arasında keçid etmək üçün ekranı iki barmağınızla yuxarı sürüşdürüb saxlayın."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Əlçatımlılıq xidmətini aktiv və ya deaktiv etmək üçün üç barmağınızla ekranın aşağısından yuxarı doğru sürüşdürün.\n\nXidmətlər arasında keçid etmək üçün ekranı üç barmağınızla yuxarı sürüşdürüb saxlayın."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Anladım"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Açmaq üçün qısayolu istifadə edin"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Böyütmək üçün qısayolu istifadə edin"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"<xliff:g id="SERVICE">%1$s</xliff:g> xidmətini açmaq üçün qısayol"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Böyütmək üçün qısayol"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Rəng düzəlişini açmaq üçün qısayol"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Əlçatanlıq düyməsi"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"2 barmaqla aşağıdan yuxarıya sürüşdürün"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Ekranın aşağısında <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> düyməsinə toxunun"</string>
@@ -3353,12 +3387,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Adaptiv bildirişlər"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Adaptiv bildiriş prioriteti"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Mühüm olmayan bildirişləri avtomatik olaraq \"Daha az əhəmiyyətli\" seçiminə ayarlayın"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Adaptiv bildiriş sıralaması"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Bildirişləri avtomatik olaraq aktuallığına görə sıralayın"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Təklif edilən əməliyyat və cavablar"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Təklif edilən əməliyyat və cavabları avtomatik göstərin"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Bildirişin mürgü rejiminə keçirilməsinə icazə verin"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Daha az əhəmiyyətli bildirişlərin işarələrini gizlədin"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Daha az əhəmiyyətli bildirişlərin işarələri status panelində görünmür"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Bildiriş nöqtələrinə icazə verin"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Son söhbətlər zolağını göstərin"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Qabarcıqlar"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Bəzi bildirişlər ekranda qabarcıqlar kimi görünə bilər"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Bəzi bildirişlər və başqa kontent ekranda qabarcıqlar kimi görünə bilər. Qabarcığı açmaq üçün ona klikləyin. Qabarcığı kənarlaşdırmaq üçün onu ekranın aşağısına çəkin."</string>
@@ -4206,8 +4243,13 @@
     <string name="information_label" msgid="6939310810756569298">"Məlumat"</string>
     <string name="low_label" msgid="6525629096999711220">"Aşağı"</string>
     <string name="high_label" msgid="357503396626018487">"Yüksək"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"Yüksək həssaslıq ekranın kənarları boyunca hər hansı tətbiq jestləri ilə ziddiyyətə səbəb ola bilər."</string>
+    <string name="left_edge" msgid="1513576842959071849">"Sol kənar"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Sağ kənar"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Yüksək həssaslıq ekranın kənarları boyunca hər hansı tətbiq jestləri ilə ziddiyyətə səbəb ola bilər."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Arxa Həssaslıq"</string>
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Jest ayarları"</string>
+    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Telefonu yoxlamaq üçün iki dəfə tıklayın"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Planşeti yoxlamaq üçün iki dəfə tıklayın"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Cihazı yoxlamaq üçün iki dəfə tıklayın"</string>
@@ -4645,4 +4687,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"İş siyasətiniz haqqında məlumat"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Ayarlar IT admininiz tərəfindən idarə edilir"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Baq hesabatı idarəedicisi"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Hansı tətbiqin cihazınızda Baq Hesabatı qısayolunu idarə etdiyini təyin edin."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Şəxsi"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"İş"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Sistem defoltu"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Bu seçim artıq etibarlı deyil. Yenidən cəhd edin."</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>

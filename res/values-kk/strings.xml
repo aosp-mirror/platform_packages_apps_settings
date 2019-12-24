@@ -373,6 +373,7 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Адам жүзі деректерін жою"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Face Unlock функциясын реттеу"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Құрылғыңыздың құлпын ашу, қолданбаларға кіру және төлемдеріңізді растау үшін Face Unlock функциясын пайдаланыңыз.\n\nЕсте сақтаңыз:\nӘдейі істемесеңіз де, телефонға қараған кезде, оның құлпы ашылады.\n\nБасқа біреу телефоныңызды бетіңізге жақындатып ұстап тұрып та, оның құлпын аша алады (көзіңізді ашып тұруыңыз керек).\n\nТелефонның құлпын өзіңізге ұқсайтын біреу, мысалы, егіз бауырыңыз ашып алуы мүмкін."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Құрылғыңыздың құлпын ашу, қолданбаларға кіру және төлемдеріңізді растау үшін Face Unlock функциясын пайдаланыңыз.\n\nЕсте сақтаңыз:\nӘдейі істемесеңіз де, телефонға қараған кезде, оның құлпы ашылады.\n\nБасқа біреу телефоныңызды бетіңізге жақындатып ұстап тұрып та оның құлпын аша алады (көзіңізді жұмып тұрсаңыз да).\n\nТелефонның құлпын өзіңізге ұқсайтын біреу, мысалы, егіз бауырыңыз ашып алуы мүмкін."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Адам жүзі туралы деректер жойылсын ба?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Face Unlock функциясы пайдаланған адам жүзі туралы деректер біржола және қауіпсіз жойылады. Жойылғаннан кейін, телефоныңыздың құлпын ашу, қолданбаларға кіру және төлемдерді растау үшін PIN коды, өрнек немесе құпия сөз қажет болады."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Телефонның құлпын ашу үшін Face Unlock функциясын пайдаланыңыз."</string>
@@ -770,6 +771,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> Wi-Fi желісінің өшірілуін сұрайды"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Жөнделетін қолданбалардың байт-кодын растау"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"ART растау құралына жөнделетін қолданбалардың байт-кодын растауға рұқсат беру"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Жаңарту жылдамдығын көрсету"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Ағымдағы дисплейдің жаңару жылдамдығын көрсету"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Планшет басқа құрылғымен қатынасқанда дерек алмастыруға рұқсат беру"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Телефонды басқа құрылғыға жақындатқанда, дерек алмасуға рұқсат беру"</string>
@@ -900,6 +903,12 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Құрылғының жалғанғанын, зарядталғанын және қосылғанын тексеріңіз."</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Құрылғының жалғанғанын, зарядталғанын және қосылғанын тексеріңіз. Ақау жойылмаса, құрылғы өндірушісіне хабарласыңыз."</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Құрылғы \"<xliff:g id="SSID">%1$s</xliff:g>\" идентификаторын енгізуді қолдамайды."</string>
+    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
+    <skip />
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Байланысты тексеріп, әрекетті қайталаңыз."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Желіні таңдау"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Құрылғыны жалғау үшін желіні таңдаңыз"</string>
@@ -2045,6 +2054,26 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Дауыстап оқылуы үшін экрандағы элементтерді түртіңіз"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Субтитр параметрлері"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ұлғайту"</string>
+    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
+    <skip />
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Үш рет түртіп үлкейту"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Таңбашамен үлкейту"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Таңбашамен және үш рет түртіп үлкейту"</string>
@@ -2062,12 +2091,17 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Арнайы мүмкіндіктер қызметін қосу немесе өшіру үшін екі саусақпен экранның төменгі жағынан жоғары қарай сипаңыз.\n\nБір қызметтен екіншісіне ауысу үшін екі саусақпен жоғары қарай сипап, ұстап тұрыңыз."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Арнайы мүмкіндіктер қызметін қосу немесе өшіру үшін үш саусақпен экранның төменгі жағынан жоғары қарай сипаңыз.\n\nБір қызметтен екіншісіне ауысу үшін үш саусақпен жоғары қарай сипап, ұстап тұрыңыз."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Түсінікті"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Ашу үшін таңбашаны пайдалану"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Ұлғайтуға арналған таңбашаны пайдалану"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"<xliff:g id="SERVICE">%1$s</xliff:g> қызметін ашуға арналған таңбаша"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Ұлғайтуға арналған таңбаша"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Түс өңдеу мүмкіндігін ашатын таңбаша"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"\"Арнайы мүмкіндіктер\" түймесі"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"2 саусағыңызбен төменнен жоғары сырғыту"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Экранның төменгі жағындағы <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> түймесін түртіңіз."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"Экранның төменгі жағынан 2 саусақпен жоғарыға сырғытыңыз."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Дыбыс деңгейі пернелерін басып ұстап тұру"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Екі дыбыс пернелерін 1 секундқа басып ұстап тұрыңыз."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Екі дыбыс пернесін бірдей басып, 1 секунд ұстап тұрыңыз."</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"Экранды үш рет түрту"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2132280626458501422">"Экранды 3 рет жылдам түртіңіз (құрылғы жұмысы баялауы мүмкін)."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Қосымша"</string>
@@ -2667,9 +2701,9 @@
     <string name="header_account_settings" msgid="1189339410278750008">"Есептік жазба параметрлері"</string>
     <string name="remove_account_label" msgid="4169490568375358010">"Есептік жазбаны жою"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"Есептік жазба қосу"</string>
-    <string name="really_remove_account_title" msgid="253097435885652310">"Есептік жазба алынсын ба?"</string>
+    <string name="really_remove_account_title" msgid="253097435885652310">"Есептік жазба жойылсын ба?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Бұл есептік жазбаны алып тастау нәтижесінде оның хабарлары, контактілері және басқа планшет деректері жойылады!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Бұл есептік жазбаны алып тастаса, телефоннан барлық хабарлар, контактілер мен басқа деректер жойылады!"</string>
+    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Бұл есептік жазба жойылса, телефоннан барлық хабарлар, контактілер мен басқа деректер өшіріледі!"</string>
     <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Бұл есептік жазба жойылса, құрылғыдағы барлық хабарлар, контактілер және басқа деректер қоса жойылады!"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Әкімші бұл өзгертуге рұқсат бермеген"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Қолмен синхрондау мүмкін болмады"</string>
@@ -3353,12 +3387,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Бейімделетін хабарландырулар"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Бейімделетін хабарландырулар басымдығы"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Маңыздылығы төмен хабарландыруларды автоматты түрде дыбыссыз режимге орнату"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Хабарландыруларды автоматты түрде сұрыптау"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Хабарландыруларды қатыстылығына қарай сұрыптау"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Ұсынылған әрекеттер және жауаптар"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Ұсынылған әрекеттер мен жауаптарды автоматты түрде көрсету"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Хабарландыруларды кідіртуге рұқсат беру"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Дыбыссыз хабарландырулардағы белгішелерді жасыру"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Дыбыссыз хабарландырулардағы белгішелер күй жолағында көрсетілмейді."</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Хабарландыру белгілеріне рұқсат беру"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Соңғы сөйлесулердің жолағын көрсету"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Қалқымалы анықтамалар"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Кейбір хабарландырулар экранға қалқымалы анықтамалар түрінде шығады."</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Кейбір хабарландырулар және басқа мазмұндар экранға қалқымалы анықтамалар түрінде шығуы мүмкін. Қалқымалы анықтаманы ашу үшін оны түртіңіз. Жасыру үшін экранның төменгі жағына қарай сүйреңіз."</string>
@@ -4206,8 +4243,13 @@
     <string name="information_label" msgid="6939310810756569298">"Ақпарат"</string>
     <string name="low_label" msgid="6525629096999711220">"Төмен"</string>
     <string name="high_label" msgid="357503396626018487">"Жоғары"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"Сезгіштік деңгейінің жоғары болуы қолданбада экранның жиектерінде жасалған қимылдарға кері әсер етуі мүмкін."</string>
+    <string name="left_edge" msgid="1513576842959071849">"Сол жақ жиегі"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Оң жақ жиегі"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Сезгіштік деңгейінің жоғары болуы қолданбада экранның жиектерінде жасалған қимылдарға кері әсер етуі мүмкін."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Артқы сезгіштік"</string>
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Қимыл параметрлері"</string>
+    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Телефонды тексеру үшін екі рет түрту"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Планшетті тексеру үшін екі рет түртіңіз"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Құрылғыны тексеру үшін екі рет түртіңіз"</string>
@@ -4645,4 +4687,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Жұмыс саясатыңыз туралы ақпарат"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"АТ әкімшісі басқаратын параметрлер"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Қате туралы есеп өңдегіші"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Құрылғыдағы қате туралы есеп таңбашасын қандай қолданба басқаратынын анықтайды."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Жеке"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Жұмыс"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Жүйенің әдепкі мәні"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Бұл таңдау енді жарамайды. Әрекетті қайталаңыз."</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>
