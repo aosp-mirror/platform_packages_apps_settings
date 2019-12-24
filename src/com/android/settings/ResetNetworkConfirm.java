@@ -104,9 +104,10 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             p2pFactoryReset(mContext);
 
             TelephonyManager telephonyManager = (TelephonyManager)
-                    mContext.getSystemService(Context.TELEPHONY_SERVICE);
+                    mContext.getSystemService(TelephonyManager.class)
+                            .createForSubscriptionId(mSubId);
             if (telephonyManager != null) {
-                telephonyManager.factoryReset(mSubId);
+                telephonyManager.resetSettings();
             }
 
             NetworkPolicyManager policyManager = (NetworkPolicyManager)
