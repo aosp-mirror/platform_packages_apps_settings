@@ -62,9 +62,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final int DIALOG_ID_ENABLE_WARNING = 1;
-    private static final int DIALOG_ID_DISABLE_WARNING = 2;
-    private static final int DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL = 3;
-    private static final int DIALOG_ID_EDIT_SHORTCUT = 4;
+    private static final int DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL = 2;
+    private static final int DIALOG_ID_EDIT_SHORTCUT = 3;
 
     public static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION = 1;
 
@@ -109,20 +108,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                     throw new IllegalArgumentException();
                 }
                 mDialog.dismiss();
-            };
-
-    private final DialogInterface.OnClickListener mDialogInterfaceOnClickListener =
-            (DialogInterface dialog, int which) -> {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        handleConfirmServiceEnabled(false);
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        handleConfirmServiceEnabled(true);
-                        break;
-                    default:
-                        throw new IllegalArgumentException();
-                }
             };
 
     @Override
@@ -200,15 +185,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                         .createCapabilitiesDialog(getActivity(), info, mViewOnClickListener);
                 break;
             }
-            case DIALOG_ID_DISABLE_WARNING: {
-                AccessibilityServiceInfo info = getAccessibilityServiceInfo();
-                if (info == null) {
-                    return null;
-                }
-                mDialog = AccessibilityServiceWarning
-                        .createDisableDialog(getActivity(), info, mDialogInterfaceOnClickListener);
-                break;
-            }
             case DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL: {
                 if (isGestureNavigateEnabled()) {
                     mDialog = AccessibilityGestureNavigationTutorial
@@ -238,8 +214,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         switch (dialogId) {
             case DIALOG_ID_ENABLE_WARNING:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
-            case DIALOG_ID_DISABLE_WARNING:
-                return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
             case DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL:
                 return isGestureNavigateEnabled()
                         ? SettingsEnums.DIALOG_TOGGLE_SCREEN_GESTURE_NAVIGATION
@@ -374,9 +348,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                     getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, false);
                     showDialog(DIALOG_ID_ENABLE_WARNING);
                 } else {
-                    mSwitchBar.setCheckedInternal(true);
-                    getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, true);
-                    showDialog(DIALOG_ID_DISABLE_WARNING);
+                    handleConfirmServiceEnabled(false);
                 }
                 return true;
             }
