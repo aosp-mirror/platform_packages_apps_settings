@@ -70,12 +70,12 @@ public class SettingsIntelligenceLogWriter implements LogWriter {
     }
 
     @Override
-    public void hidden(Context context, int pageId) {
+    public void hidden(Context context, int pageId, int visibleTime) {
         action(SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 SettingsEnums.PAGE_HIDE /* action */,
                 pageId /* pageId */,
                 "" /* changedPreferenceKey */,
-                0 /* changedPreferenceIntValue */);
+                visibleTime /* changedPreferenceIntValue */);
     }
 
     @Override

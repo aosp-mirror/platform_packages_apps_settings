@@ -36,13 +36,13 @@ public class StatsLogWriter implements LogWriter {
     }
 
     @Override
-    public void hidden(Context context, int pageId) {
+    public void hidden(Context context, int pageId, int visibleTime) {
         StatsLog.write(StatsLog.SETTINGS_UI_CHANGED /* Atom name */,
                 SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 SettingsEnums.PAGE_HIDE /* action */,
                 pageId,
                 null /* changedPreferenceKey */,
-                0 /* changedPreferenceIntValue */);
+                visibleTime /* changedPreferenceIntValue */);
     }
 
     @Override
