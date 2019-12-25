@@ -79,6 +79,7 @@
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"
         android:order="15"
+        settings:searchable="false"
         settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"

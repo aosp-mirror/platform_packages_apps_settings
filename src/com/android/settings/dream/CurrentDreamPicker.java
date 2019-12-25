@@ -22,9 +22,11 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.HashMap;
@@ -32,6 +34,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Settings picker screen for current screen saver
+ */
+@SearchIndexable
 public final class CurrentDreamPicker extends RadioButtonPickerFragment {
 
     private DreamBackend mBackend;
@@ -122,4 +128,7 @@ public final class CurrentDreamPicker extends RadioButtonPickerFragment {
             return key;
         }
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.current_dream_settings);
 }

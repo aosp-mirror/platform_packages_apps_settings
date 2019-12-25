@@ -30,7 +30,9 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
@@ -42,6 +44,7 @@ import java.util.List;
 /**
  * Provides options for selecting the default USB mode.
  */
+@SearchIndexable
 public class UsbDefaultFragment extends RadioButtonPickerFragment {
     @VisibleForTesting
     UsbBackend mUsbBackend;
@@ -192,4 +195,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
             }
         }
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.usb_default_fragment);
 }

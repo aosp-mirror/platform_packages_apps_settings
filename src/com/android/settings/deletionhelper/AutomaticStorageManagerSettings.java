@@ -163,7 +163,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
 
     /** For Search. */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
+            new BaseSearchIndexProvider(R.xml.automatic_storage_management_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return false;

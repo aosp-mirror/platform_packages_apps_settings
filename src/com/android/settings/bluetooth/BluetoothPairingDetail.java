@@ -29,14 +29,17 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
 /**
  * BluetoothPairingDetail is a page to scan bluetooth devices and pair them.
  */
+@SearchIndexable
 public class BluetoothPairingDetail extends DeviceListPreferenceFragment implements
         Indexable {
     private static final String TAG = "BluetoothPairingDetail";
@@ -233,4 +236,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
         Toast.makeText(getContext(), R.string.connected_device_bluetooth_turned_on_toast,
                 Toast.LENGTH_SHORT).show();
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.bluetooth_pairing_detail);
 }

@@ -21,7 +21,9 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ import java.util.List;
 /**
  * Fragment for displaying a list of default applications set by profile or device admin.
  */
+@SearchIndexable
 public class EnterpriseSetDefaultAppsListFragment extends DashboardFragment {
     static final String TAG = "EnterprisePrivacySettings";
 
@@ -56,4 +59,7 @@ public class EnterpriseSetDefaultAppsListFragment extends DashboardFragment {
         controllers.add(controller);
         return controllers;
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.enterprise_set_default_apps_settings);
 }

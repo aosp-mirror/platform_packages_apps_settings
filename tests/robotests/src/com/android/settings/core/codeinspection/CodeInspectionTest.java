@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.core.BasePreferenceControllerSignatureInspector;
 import com.android.settings.core.instrumentation.InstrumentableFragmentCodeInspector;
+import com.android.settings.search.FragmentSearchIndexableCodeInspector;
 import com.android.settings.search.SearchIndexProviderCodeInspector;
 import com.android.settings.slices.SliceControllerInXmlCodeInspector;
 
@@ -70,5 +71,10 @@ public class CodeInspectionTest {
     @Test
     public void runLifecycleObserverInspection() {
         new LifecycleObserverCodeInspector(mClasses).run();
+    }
+
+    @Test
+    public void runFragmentIndexableInspection() throws Exception {
+        new FragmentSearchIndexableCodeInspector(mClasses).run();
     }
 }

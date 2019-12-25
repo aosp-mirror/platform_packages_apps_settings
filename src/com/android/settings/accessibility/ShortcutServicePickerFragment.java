@@ -43,8 +43,10 @@ import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.accessibility.AccessibilityShortcutController.ToggleableFrameworkFeatureInfo;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.RadioButtonPreference;
 
@@ -55,6 +57,7 @@ import java.util.Map;
 /**
  * Fragment for picking accessibility shortcut service
  */
+@SearchIndexable
 public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
 
     @Override
@@ -264,4 +267,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
             return mServiceInfo.getComponentName().flattenToString();
         }
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.accessibility_shortcut_service_settings);
 }
