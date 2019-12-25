@@ -129,8 +129,7 @@ public class AddAppNetworksFragmentTest {
         mAddAppNetworksFragment.mResultCodeArrayList = mFakedResultArrayList;
 
         // Act
-        mAddAppNetworksFragment.mUiToRequestedList = mAddAppNetworksFragment.filterSavedNetworks(
-                mFakeSavedNetworksList);
+        mAddAppNetworksFragment.filterSavedNetworks(mFakeSavedNetworksList);
 
         // Assert
         assertThat(mAddAppNetworksFragment.mUiToRequestedList).hasSize(1);
@@ -144,6 +143,23 @@ public class AddAppNetworksFragmentTest {
     public void getMetricsCategory_shouldReturnPanelAddWifiNetworks() {
         assertThat(mAddAppNetworksFragment.getMetricsCategory()).isEqualTo(
                 SettingsEnums.PANEL_ADD_WIFI_NETWORKS);
+    }
+
+    @Test
+    public void getThreeNetworksNewIntent_shouldHaveThreeItemsInUiList() {
+        addOneSpecifiedNetworkConfig(mNewWpaConfigEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+
+        // Add two more networks and update framework bundle.
+        addOneSpecifiedNetworkConfig(mNewWpaConfigEntry);
+        addOneSpecifiedNetworkConfig(mNewOpenConfigEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        Bundle bundle = mAddAppNetworksFragment.getArguments();
+        mAddAppNetworksFragment.createContent(bundle);
+
+        // Ui list should contain 3 networks.
+        assertThat(mAddAppNetworksFragment.mUiToRequestedList).hasSize(3);
     }
 
     private void addOneSavedNetworkConfig(@NonNull WifiConfiguration wifiConfiguration) {
