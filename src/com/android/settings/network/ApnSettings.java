@@ -54,7 +54,6 @@ import androidx.preference.PreferenceGroup;
 
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.telephony.uicc.UiccController;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -114,7 +113,6 @@ public class ApnSettings extends RestrictedSettingsFragment
     private SubscriptionInfo mSubscriptionInfo;
     private int mSubId;
     private int mPhoneId;
-    private UiccController mUiccController;
     private String mMvnoType;
     private String mMvnoMatchData;
 
@@ -193,7 +191,6 @@ public class ApnSettings extends RestrictedSettingsFragment
         setIfOnlyAvailableForAdmins(true);
 
         mSubscriptionInfo = getSubscriptionInfo(mSubId);
-        mUiccController = UiccController.getInstance();
 
         CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
