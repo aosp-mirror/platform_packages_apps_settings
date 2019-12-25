@@ -38,19 +38,19 @@ final class AccessibilityUtil {
      *
      * {@code LEGACY} for displaying appearance aligned with sdk version Q accessibility service
      * page, but only hardware shortcut allowed.
-     * {@code HEADLESS} for displaying appearance without switch bar.
+     * {@code INVISIBLE} for displaying appearance without switch bar.
      * {@code INTUITIVE} for displaying appearance with new design.
      */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
             AccessibilityServiceFragmentType.LEGACY,
-            AccessibilityServiceFragmentType.HEADLESS,
+            AccessibilityServiceFragmentType.INVISIBLE,
             AccessibilityServiceFragmentType.INTUITIVE,
     })
 
     public @interface AccessibilityServiceFragmentType {
         int LEGACY = 0;
-        int HEADLESS = 1;
+        int INVISIBLE = 1;
         int INTUITIVE = 2;
     }
 
@@ -83,7 +83,7 @@ final class AccessibilityUtil {
             return AccessibilityServiceFragmentType.LEGACY;
         }
         return requestA11yButton
-                ? AccessibilityServiceFragmentType.HEADLESS
+                ? AccessibilityServiceFragmentType.INVISIBLE
                 : AccessibilityServiceFragmentType.INTUITIVE;
     }
 }
