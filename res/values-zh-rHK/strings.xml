@@ -373,6 +373,7 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"刪除臉容資料"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"設定「臉孔解鎖」"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"使用「臉孔解鎖」即可解鎖裝置、登入應用程式及確認付款。\n\n注意事項：\n即使您不想解鎖手機，但查看手機仍會解鎖。\n\n在您睜開雙眼時，如果其他人將手機舉到您面前，將可解鎖您的手機。\n\n跟您樣貌很相似的人 (例如您的孿生兄弟姊妹) 能夠解鎖您的手機。"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"使用「臉孔解鎖」即可解鎖裝置、登入應用程式及確認付款。\n\n注意事項：\n即使您不想解鎖，看著手機亦會解鎖。\n\n如果其他人將手機舉到您面前，即使您閉上雙眼，手機亦會解鎖。\n\n跟您樣貌很相似的人 (例如您的孿生兄弟姊妹) 能夠解鎖您的手機。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"是否刪除臉容資料？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"系統會妥善地將「臉孔解鎖」功能使用的臉孔資料永久刪除。資料移除後，您便需要使用 PIN、圖案或密碼來解鎖手機、登入應用程式及確認付款。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"使用臉孔解鎖功能解鎖手機"</string>
@@ -770,6 +771,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"「<xliff:g id="REQUESTER">%s</xliff:g>」要求關閉 Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"驗證可偵錯應用程式的位元組碼"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"允許 ART 驗證可偵錯應用程式的位元組碼"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"顯示重新整理頻率"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"顯示現時的顯示屏重新整理頻率"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"允許平板電腦在與其他裝置接觸時交換資料"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"允許手機與其他裝置接觸時交換資料"</string>
@@ -900,6 +903,12 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"確保裝置已插入、充電並開啟"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"確保裝置已插入、充電並開啟。如果仍有問題，請聯絡裝置製造商"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"此裝置不支援新增「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
+    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
+    <skip />
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"請檢查網絡連線，然後再試一次"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"選擇網絡"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"如要連接裝置，請選擇網絡"</string>
@@ -2046,6 +2055,26 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"輕按畫面上的項目即可收聽系統朗讀項目"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"字幕偏好設定"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"放大"</string>
+    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
+    <skip />
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"輕按三下來放大"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快速鍵來放大"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"使用快速鍵和輕按三下來放大"</string>
@@ -2063,6 +2092,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"如要開啟或關閉無障礙服務，請使用兩隻手指從螢幕底部向上滑動。\n\n如要在服務之間切換，請使用兩隻手指向上滑動並按住。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"如要開啟或關閉無障礙服務，請使用三隻手指從螢幕底部向上滑動。\n\n如要在服務之間切換，請使用三隻手指向上滑動並按住。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"知道了"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"使用快速鍵開啟"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"使用快速鍵放大"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"開啟「<xliff:g id="SERVICE">%1$s</xliff:g>」的快速鍵"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"放大功能的快速鍵"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"開啟「色彩校正」的快速鍵"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"無障礙功能按鈕"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"兩指從底部向上滑動"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"輕按畫面底部的 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> 按鈕"</string>
@@ -2131,18 +2165,12 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"呢個服務出現故障。"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"在「快速設定」中顯示"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"校正模式"</string>
-    <!-- no translation found for daltonizer_mode_deuteranomaly_title (4210949400493358650) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly_title (2929354940552262472) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly_title (2278786218762602022) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranomaly_summary (391621040826073327) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly_summary (877971556622350648) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly_summary (2428218320118180070) -->
-    <skip />
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"紅綠不分"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2929354940552262472">"綠紅不分"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"藍黃不分"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"綠色弱視"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"紅色弱視"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"藍色弱視"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
       <item quantity="other">極短時間延誤 (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> 微秒)</item>
       <item quantity="one">極短時間延誤 (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> 微秒)</item>
@@ -3360,12 +3388,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"自動調節通知"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"自動調節通知優先次序"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"自動將優先度較低的通知設為低重要性"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"自動調整通知排序"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"自動按相關性為通知排序"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"建議操作和回覆"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"自動顯示建議操作和回覆"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"允許通知延後"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"隱藏低重要性通知圖示"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"低重要性的通知圖示不會顯示在狀態列"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"允許使用通知圓點"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"顯示最近的對話列"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"小視窗"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"部分通知可在螢幕上以小視窗形式顯示"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知和其他內容可在螢幕中以小視窗形式顯示。輕按小視窗即可開啟。如要關閉小視窗，只需將之拖至螢幕下方。"</string>
@@ -4213,8 +4244,13 @@
     <string name="information_label" msgid="6939310810756569298">"資料"</string>
     <string name="low_label" msgid="6525629096999711220">"低"</string>
     <string name="high_label" msgid="357503396626018487">"高"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"調高敏感度可能會影響螢幕邊緣的應用程式手勢操作。"</string>
+    <string name="left_edge" msgid="1513576842959071849">"左側邊緣"</string>
+    <string name="right_edge" msgid="1505309103265829121">"右側邊緣"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"較高的敏感度可能會與任何在螢幕邊緣的應用程式手勢互相衝突。"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"返回手勢的敏感度"</string>
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"手勢設定"</string>
+    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"輕按兩下以查看手機"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"輕按兩下即可查看平板電腦"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"輕按兩下即可查看裝置"</string>
@@ -4652,4 +4688,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"您的工作政策資料"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"由 IT 管理員管理的設定"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"錯誤報告處理常式"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"選擇由哪個應用程式處理裝置的錯誤報告快速鍵。"</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"個人"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"公司"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"系統預設"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"此選擇已失效，請再試一次。"</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>

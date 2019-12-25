@@ -43,7 +43,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.CheckBox;
 
 import androidx.preference.PreferenceScreen;
 
@@ -57,12 +56,14 @@ import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
 
-public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeaturePreferenceFragment {
+/** Fragment for providing toggle bar and basic accessibility service setup. */
+public class ToggleAccessibilityServicePreferenceFragment extends
+        ToggleFeaturePreferenceFragment implements ShortcutPreference.OnClickListener {
 
+    private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final int DIALOG_ID_ENABLE_WARNING = 1;
-    private static final int DIALOG_ID_DISABLE_WARNING = 2;
-    private static final int DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL = 3;
-    private static final int DIALOG_ID_EDIT_SHORTCUT = 4;
+    private static final int DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL = 2;
+    private static final int DIALOG_ID_EDIT_SHORTCUT = 3;
 
     public static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION = 1;
 
@@ -76,18 +77,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
                     // TODO(b/142531156): Save the shortcut type preference.
                 }
             };
-
-    private final View.OnClickListener mSettingButtonListener = (View view) -> showDialog(
-            DIALOG_ID_EDIT_SHORTCUT);
-
-    private final View.OnClickListener mCheckBoxListener = (View view) -> {
-        CheckBox checkBox = (CheckBox) view;
-        if (checkBox.isChecked()) {
-            // TODO(b/142530063): Enable shortcut when checkbox is checked.
-        } else {
-            // TODO(b/142530063): Disable shortcut when checkbox is unchecked.
-        }
-    };
 
     private final SettingsContentObserver mSettingsContentObserver =
             new SettingsContentObserver(new Handler()) {
@@ -119,20 +108,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
                     throw new IllegalArgumentException();
                 }
                 mDialog.dismiss();
-            };
-
-    private final DialogInterface.OnClickListener mDialogInterfaceOnClickListener =
-            (DialogInterface dialog, int which) -> {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        handleConfirmServiceEnabled(false);
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        handleConfirmServiceEnabled(true);
-                        break;
-                    default:
-                        throw new IllegalArgumentException();
-                }
             };
 
     @Override
@@ -210,15 +185,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
                         .createCapabilitiesDialog(getActivity(), info, mViewOnClickListener);
                 break;
             }
-            case DIALOG_ID_DISABLE_WARNING: {
-                AccessibilityServiceInfo info = getAccessibilityServiceInfo();
-                if (info == null) {
-                    return null;
-                }
-                mDialog = AccessibilityServiceWarning
-                        .createDisableDialog(getActivity(), info, mDialogInterfaceOnClickListener);
-                break;
-            }
             case DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL: {
                 if (isGestureNavigateEnabled()) {
                     mDialog = AccessibilityGestureNavigationTutorial
@@ -248,8 +214,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
         switch (dialogId) {
             case DIALOG_ID_ENABLE_WARNING:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
-            case DIALOG_ID_DISABLE_WARNING:
-                return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
             case DIALOG_ID_LAUNCH_ACCESSIBILITY_TUTORIAL:
                 return isGestureNavigateEnabled()
                         ? SettingsEnums.DIALOG_TOGGLE_SCREEN_GESTURE_NAVIGATION
@@ -275,14 +239,20 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
         final ShortcutPreference shortcutPreference = new ShortcutPreference(
                 preferenceScreen.getContext(), null);
         // Put the shortcutPreference before settingsPreference.
+        shortcutPreference.setPersistent(false);
+        shortcutPreference.setKey(getShortcutPreferenceKey());
         shortcutPreference.setOrder(-1);
         shortcutPreference.setTitle(R.string.accessibility_shortcut_title);
+        shortcutPreference.setOnClickListener(this);
+
         // TODO(b/142530063): Check the new setting key to decide which summary should be shown.
         // TODO(b/142530063): Check if gesture mode is on to decide which summary should be shown.
         // TODO(b/142530063): Check the new key to decide whether checkbox should be checked.
-        shortcutPreference.setSettingButtonListener(mSettingButtonListener);
-        shortcutPreference.setCheckBoxListener(mCheckBoxListener);
         preferenceScreen.addPreference(shortcutPreference);
+    }
+
+    public String getShortcutPreferenceKey() {
+        return KEY_SHORTCUT_PREFERENCE;
     }
 
     private void updateSwitchBarToggleSwitch() {
@@ -378,13 +348,25 @@ public class ToggleAccessibilityServicePreferenceFragment extends ToggleFeatureP
                     getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, false);
                     showDialog(DIALOG_ID_ENABLE_WARNING);
                 } else {
-                    mSwitchBar.setCheckedInternal(true);
-                    getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, true);
-                    showDialog(DIALOG_ID_DISABLE_WARNING);
+                    handleConfirmServiceEnabled(false);
                 }
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onCheckboxClicked(ShortcutPreference preference) {
+        if (preference.getChecked()) {
+            // TODO(b/142530063): Enable shortcut when checkbox is checked.
+        } else {
+            // TODO(b/142530063): Disable shortcut when checkbox is unchecked.
+        }
+    }
+
+    @Override
+    public void onSettingsClicked(ShortcutPreference preference) {
+        showDialog(DIALOG_ID_EDIT_SHORTCUT);
     }
 
     @Override

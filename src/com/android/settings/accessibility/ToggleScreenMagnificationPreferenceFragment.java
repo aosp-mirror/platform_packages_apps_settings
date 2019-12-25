@@ -38,7 +38,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Switch;
@@ -52,7 +51,8 @@ import com.android.settings.R;
 import com.android.settings.widget.SwitchBar;
 
 public class ToggleScreenMagnificationPreferenceFragment extends
-        ToggleFeaturePreferenceFragment implements SwitchBar.OnSwitchChangeListener {
+        ToggleFeaturePreferenceFragment implements SwitchBar.OnSwitchChangeListener,
+        ShortcutPreference.OnClickListener {
 
     private static final String SETTINGS_KEY = "screen_magnification_settings";
     private static final int DIALOG_ID_GESTURE_NAVIGATION_TUTORIAL = 1;
@@ -65,18 +65,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                     // TODO(b/142531156): Save the shortcut type preference.
                 }
             };
-
-    private final View.OnClickListener mSettingButtonListener =
-            (View view) -> showDialog(DIALOG_ID_EDIT_SHORTCUT);
-
-    private final View.OnClickListener mCheckBoxListener = (View view) -> {
-        CheckBox checkBox = (CheckBox) view;
-        if (checkBox.isChecked()) {
-            // TODO(b/142530063): Enable shortcut when checkbox is checked.
-        } else {
-            // TODO(b/142530063): Disable shortcut when checkbox is unchecked.
-        }
-    };
 
     private Dialog mDialog;
 
@@ -327,6 +315,20 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
     }
 
+    @Override
+    public void onCheckboxClicked(ShortcutPreference preference) {
+        if (preference.getChecked()) {
+            // TODO(b/142530063): Enable shortcut when checkbox is checked.
+        } else {
+            // TODO(b/142530063): Disable shortcut when checkbox is unchecked.
+        }
+    }
+
+    @Override
+    public void onSettingsClicked(ShortcutPreference preference) {
+        showDialog(DIALOG_ID_EDIT_SHORTCUT);
+    }
+
     private void initShortcutPreference() {
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         final ShortcutPreference shortcutPreference = new ShortcutPreference(
@@ -334,11 +336,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         // Put the shortcutPreference before videoPreference.
         shortcutPreference.setOrder(mVideoPreference.getOrder() - 1);
         shortcutPreference.setTitle(R.string.accessibility_magnification_shortcut_title);
+        shortcutPreference.setOnClickListener(this);
         // TODO(b/142530063): Check the new setting key to decide which summary should be shown.
         // TODO(b/142530063): Check if gesture mode is on to decide which summary should be shown.
         // TODO(b/142530063): Check the new key to decide whether checkbox should be checked.
-        shortcutPreference.setSettingButtonListener(mSettingButtonListener);
-        shortcutPreference.setCheckBoxListener(mCheckBoxListener);
         preferenceScreen.addPreference(shortcutPreference);
     }
 

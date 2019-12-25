@@ -379,6 +379,7 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Odstrániť údaje o tvári"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Nastaviť odomknutie tvárou"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Odomknutím tvárou môžete odomykať zariadenie, prihlasovať sa do aplikácií a potvrdzovať platby.\n\nDôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár a budete mať otvorené oči.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše dvojča."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Odomknutím tvárou môžete odomykať zariadenie, prihlasovať sa do aplikácií a potvrdzovať platby.\n\nDôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár, a to dokonca aj vtedy, keď budete mať zatvorené oči.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše dvojča."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Chcete odstrániť údaje o tvári?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Údaje o tvári používané na odomknutie tvárou budú natrvalo a bezpečne odstránené. Po ich odstránení budete na odomykanie telefónu, prihlasovanie do aplikácií a potvrdzovanie platieb potrebovať svoj kód PIN, vzor alebo heslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Odomykajte telefón tvárou"</string>
@@ -804,6 +805,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> chce vypnúť Wi‑Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Overovať bajtkód laditeľných aplikácií"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Povoliť nástroju ART overovať bajtkód laditeľných aplikácií"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Zobraziť frekv. obnovenia"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Zobraziť aktuálnu frekvenciu obnovenia obrazovky"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Povoliť výmenu dát, ak sa tablet dotýka iného zariadenia"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Povoliť výmenu dát, ak sa telefón dotýka iného zariadenia"</string>
@@ -934,6 +937,12 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Uistite, sa či je zariadenie zapojené do zásuvky, nabité a zapnuté"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Uistite, sa či je zariadenie zapojené do zásuvky, nabité a zapnuté. Ak problém pretrváva, kontaktujte výrobcu zariadenia."</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Toto zariadenie nepodporuje pridanie siete <xliff:g id="SSID">%1$s</xliff:g>"</string>
+    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
+    <skip />
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Skontrolujte pripojenie a skúste to znova"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Výber siete"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Ak chcete pripojiť svoje zariadenie, vyberte sieť"</string>
@@ -2091,6 +2100,26 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Položky na obrazovke si môžete vypočuť nahlas klepnutím"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Nastavenia titulkov"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Priblíženie"</string>
+    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
+    <skip />
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Priblíženie trojitým klepnutím"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Priblíženie skratkou"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Priblíženie skratkou a trojitým klepnutím"</string>
@@ -2108,6 +2137,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Službu dostupnosti zapnete alebo vypnete potiahnutím dvoma prstami z dolnej časti obrazovky smerom nahor.\n\nSlužby prepnete potiahnutím dvoma prstami smerom nahor a pridržaním."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Službu dostupnosti zapnete alebo vypnete potiahnutím troma prstami z dolnej časti obrazovky smerom nahor.\n\nSlužby prepnete potiahnutím troma prstami smerom nahor a pridržaním."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Dobre"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Spustiť pomocou skratky"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Zväčšiť pomocou skratky"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Skratka na spustenie služby <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Skratka na zväčšenie"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Skratka na spustenie úprav farieb"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Tlačidlo dostupnosti"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Potiahnutie dvoma prstami z dolnej časti nahor"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Klepnite na tlačidlo <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> v dolnej časti obrazovky"</string>
@@ -2178,18 +2212,12 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Táto služba nepracuje správne."</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Zobraziť v rýchlych nastaveniach"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Režim korekcie"</string>
-    <!-- no translation found for daltonizer_mode_deuteranomaly_title (4210949400493358650) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly_title (2929354940552262472) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly_title (2278786218762602022) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranomaly_summary (391621040826073327) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly_summary (877971556622350648) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly_summary (2428218320118180070) -->
-    <skip />
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Červená a zelená"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2929354940552262472">"Zelená a červená"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Modrá a žltá"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomália"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomália"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomália"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
       <item quantity="few">Extrémne krátke oneskorenie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="many">Extrémne krátke oneskorenie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
@@ -2750,9 +2778,9 @@
     <string name="remove_account_label" msgid="4169490568375358010">"Odstrániť účet"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"Pridať účet"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Chcete účet odstrániť?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Odstránením tohto účtu budú z tabletu odstránené aj všetky správy, kontakty a ďalšie údaje!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Odstránením tohto účtu budú z telefónu odstránené aj všetky správy, kontakty a ďalšie dáta."</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Odstránením tohto účtu budú zo zariadenia odstránené aj všetky správy, kontakty a ďalšie dáta."</string>
+    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Odstránením účtu odstránite z tabletu aj všetky správy, kontakty a ďalšie údaje tohto účtu."</string>
+    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Odstránením účtu odstránite z telefónu aj všetky správy, kontakty a ďalšie údaje tohto účtu."</string>
+    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Odstránením účtu odstránite zo zariadenia aj všetky správy, kontakty a ďalšie údaje tohto účtu."</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Správca túto zmenu zakázal"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Nie je možné ručne synchronizovať"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Synchronizácia tejto položky je momentálne zakázaná. Ak chcete toto nastavenie zmeniť, dočasne zapnite dátové prenosy na pozadí a automatickú synchronizáciu."</string>
@@ -3451,12 +3479,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Prispôsobivé upozornenia"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Priorita prispôsobivých upozornení"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Automaticky nastaviť upozornenia s nižšou prioritou ako nenápadné"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Pozícia prispôsobivých upozornení"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Automaticky zoradiť upozornenia podľa relevancie"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Navrhované akcie a odpovede"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automaticky zobrazovať navrhované akcie a odpovede"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Povoliť stlmenie upozornení"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Skrývať ikony nenápadných upozornení"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Ikony nenápadných upozornení sa nezobrazujú v stavovom riadku"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Povoliť bodky upozornení"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Zobraziť panel nedávnych konverzácií"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubliny"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Niektoré upozornenia sa môžu na obrazovke objaviť ako bubliny"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Niektoré upozornenia a ďalší obsah sa môžu na obrazovke zobrazovať ako bubliny. Bublinu otvoríte klepnutím. Zatvoríte ju presunutím nadol."</string>
@@ -4360,8 +4391,13 @@
     <string name="information_label" msgid="6939310810756569298">"Informácie"</string>
     <string name="low_label" msgid="6525629096999711220">"Nízka"</string>
     <string name="high_label" msgid="357503396626018487">"Vysoká"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"Vyššia citlivosť môže kolidovať s gestami aplikácie pri okrajoch obrazovky."</string>
+    <string name="left_edge" msgid="1513576842959071849">"Ľavý okraj"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Pravý okraj"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Vyššia citlivosť môže kolidovať s gestami aplikácie pri okrajoch obrazovky."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Citlivosť prechádzania späť"</string>
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Nastavenia gest"</string>
+    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Kontrola telefónu dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tablet skontrolujete dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Zariadenie skontrolujete dvojitým klepnutím"</string>
@@ -4823,4 +4859,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informácie o pracovných pravidlách"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nastavenia spravované vaším správcom IT"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafický procesor"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Obslužný nástroj hlásenia chyby"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Určuje, ktorá aplikácia spracuje vo vašom zariadení skratku na hlásenie chyby."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Osobné"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Práca"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Predvolené nastavenie systému"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Táto voľba už nie je platná. Skúste to znova."</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>

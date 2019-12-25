@@ -184,7 +184,19 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         createContent(bundle);
     }
 
-    private void createContent(Bundle bundle) {
+    /**
+     * Updates the UI contents to be aligned with the parameters in Bundle. This API may be called
+     * by the Activity directly when get a new intent.
+     */
+    @VisibleForTesting
+    void createContent(Bundle bundle) {
+        // For new intent case, if device is saving those networks specified in old intent, just
+        // ignore this new intent for preventing status error.
+        if (mSaveButton != null && !mSaveButton.isEnabled()) {
+            Log.d(TAG, "Network saving, ignore new intent");
+            return;
+        }
+
         mAllSpecifiedNetworksList =
                 bundle.getParcelableArrayList(Settings.EXTRA_WIFI_CONFIGURATION_LIST);
 
@@ -199,7 +211,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         // Initial the result arry.
         initializeResultCodeArray();
         // Filter the saved networks, and prepare a not saved networks list for UI to present.
-        mUiToRequestedList = filterSavedNetworks(mWifiManager.getPrivilegedConfiguredNetworks());
+        filterSavedNetworks(mWifiManager.getPrivilegedConfiguredNetworks());
 
         // If all the specific networks are all exist, we just need to finish with result.
         if (mUiToRequestedList.size() == 0) {
@@ -209,8 +221,11 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
 
         if (mAllSpecifiedNetworksList.size() == 1) {
             mIsSingleNetwork = true;
-            // Set the multiple networks related layout as GONE.
+            // Set the multiple networks related layout to be gone, and the single network layout
+            // items to be visible.
             mLayoutView.findViewById(R.id.multiple_networks).setVisibility(View.GONE);
+            mLayoutView.findViewById(R.id.single_network).setVisibility(View.VISIBLE);
+
             // Show signal icon for single network case.
             setSingleNetworkSignalIcon();
             // Show the SSID of the proposed network.
@@ -221,13 +236,21 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         } else {
             // Multiple networks request case.
             mIsSingleNetwork = false;
-            // Set the single network related layout as GONE.
+            // Set the single network related layout to be gone, and the multiple networks layout
+            // items to be visible.
             mLayoutView.findViewById(R.id.single_network).setVisibility(View.GONE);
-            // Prepare a UI adapter and set to UI listview.
-            final ListView uiNetworkListView = mLayoutView.findViewById(R.id.config_list);
-            mUiConfigurationItemAdapter = new UiConfigurationItemAdapter(mActivity,
-                    com.android.settingslib.R.layout.preference_access_point, mUiToRequestedList);
-            uiNetworkListView.setAdapter(mUiConfigurationItemAdapter);
+            mLayoutView.findViewById(R.id.multiple_networks).setVisibility(View.VISIBLE);
+
+            if (mUiConfigurationItemAdapter == null) {
+                // Prepare a UI adapter and set to UI listview.
+                final ListView uiNetworkListView = mLayoutView.findViewById(R.id.config_list);
+                mUiConfigurationItemAdapter = new UiConfigurationItemAdapter(mActivity,
+                        com.android.settingslib.R.layout.preference_access_point,
+                        mUiToRequestedList);
+                uiNetworkListView.setAdapter(mUiConfigurationItemAdapter);
+            } else {
+                mUiConfigurationItemAdapter.notifyDataSetChanged();
+            }
         }
 
         // Assigns caller app icon, title, and summary.
@@ -269,13 +292,17 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
 
     /**
      * For the APP specified networks, filter saved ones and mark those saved as existed. And
-     * finally return a new UiConfigurationItem list, which contains those new or need to be
-     * updated networks, back to caller for creating UI to user.
+     * prepare a new UiConfigurationItem list, which contains those new or need to be updated
+     * networks, for creating UI to user.
      */
     @VisibleForTesting
-    ArrayList<UiConfigurationItem> filterSavedNetworks(
+    void filterSavedNetworks(
             List<WifiConfiguration> savedWifiConfigurations) {
-        ArrayList<UiConfigurationItem> uiToRequestedList = new ArrayList<>();
+        if (mUiToRequestedList == null) {
+            mUiToRequestedList = new ArrayList<>();
+        } else {
+            mUiToRequestedList.clear();
+        }
 
         boolean foundInSavedList;
         int networkPositionInBundle = 0;
@@ -327,12 +354,10 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
                 // Prepare to add to UI list to show to user
                 UiConfigurationItem uiConfigurationIcon = new UiConfigurationItem(displayedSsid,
                         specifiecConfig, networkPositionInBundle);
-                uiToRequestedList.add(uiConfigurationIcon);
+                mUiToRequestedList.add(uiConfigurationIcon);
             }
             networkPositionInBundle++;
         }
-
-        return uiToRequestedList;
     }
 
     private void setSingleNetworkSignalIcon() {
@@ -573,6 +598,10 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     }
 
     private void finishWithResult(int resultCode, List<Integer> resultArrayList) {
+        if (mActivity == null) {
+            return;
+        }
+
         if (resultArrayList != null) {
             Intent intent = new Intent();
             intent.putIntegerArrayListExtra(Settings.EXTRA_WIFI_CONFIGURATION_RESULT_LIST,

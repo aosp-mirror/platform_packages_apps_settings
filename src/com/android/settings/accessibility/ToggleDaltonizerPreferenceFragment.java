@@ -26,7 +26,6 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.Switch;
 
 import androidx.preference.Preference;
@@ -46,7 +45,7 @@ import java.util.List;
 @SearchIndexable
 public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements DaltonizerRadioButtonPreferenceController.OnChangeListener,
-        SwitchBar.OnSwitchChangeListener {
+        SwitchBar.OnSwitchChangeListener, ShortcutPreference.OnClickListener {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_daltonizer_settings);
@@ -76,18 +75,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
                     // TODO(b/142531156): Save the shortcut type preference.
                 }
             };
-
-    private final View.OnClickListener mSettingButtonListener =
-            (View view) -> showDialog(DIALOG_ID_EDIT_SHORTCUT);
-
-    private final View.OnClickListener mCheckBoxListener = (View view) -> {
-        CheckBox checkBox = (CheckBox) view;
-        if (checkBox.isChecked()) {
-            // TODO(b/142530063): Enable shortcut when checkbox is checked.
-        } else {
-            // TODO(b/142530063): Disable shortcut when checkbox is unchecked.
-        }
-    };
 
     private Dialog mDialog;
 
@@ -191,6 +178,20 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         mSwitchBar.addOnSwitchChangeListener(this);
     }
 
+    @Override
+    public void onCheckboxClicked(ShortcutPreference preference) {
+        if (preference.getChecked()) {
+            // TODO(b/142530063): Enable shortcut when checkbox is checked.
+        } else {
+            // TODO(b/142530063): Disable shortcut when checkbox is unchecked.
+        }
+    }
+
+    @Override
+    public void onSettingsClicked(ShortcutPreference preference) {
+        showDialog(DIALOG_ID_EDIT_SHORTCUT);
+    }
+
     private void initShortcutPreference() {
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         final ShortcutPreference shortcutPreference = new ShortcutPreference(
@@ -202,8 +203,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         // TODO(b/142530063): Check the new setting key to decide which summary should be shown.
         // TODO(b/142530063): Check if gesture mode is on to decide which summary should be shown.
         // TODO(b/142530063): Check the new key to decide whether checkbox should be checked.
-        shortcutPreference.setSettingButtonListener(mSettingButtonListener);
-        shortcutPreference.setCheckBoxListener(mCheckBoxListener);
+        shortcutPreference.setOnClickListener(this);
         preferenceScreen.addPreference(shortcutPreference);
     }
 }
