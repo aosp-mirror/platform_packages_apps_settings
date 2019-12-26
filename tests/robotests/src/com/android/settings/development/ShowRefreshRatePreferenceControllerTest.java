@@ -39,7 +39,6 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.testutils.shadow.ShadowParcel;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -87,10 +86,9 @@ public class ShowRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = ShadowParcel.class)
     public void updateState_settingEnabled_shouldCheckPreference() throws RemoteException {
-        ShadowParcel.sReadIntResult = 1;
+        ShadowParcel.sReadBoolResult = true;
         doReturn(true).when(mSurfaceFlinger)
             .transact(eq(SURFACE_FLINGER_CODE), any(), any(), eq(0 /* flags */));
         mController.updateState(mPreference);
@@ -101,7 +99,7 @@ public class ShowRefreshRatePreferenceControllerTest {
     @Test
     @Config(shadows = {ShadowParcel.class})
     public void updateState_settingDisabled_shouldUnCheckPreference() throws RemoteException {
-        ShadowParcel.sReadIntResult = 0;
+        ShadowParcel.sReadBoolResult = false;
         doReturn(true).when(mSurfaceFlinger)
             .transact(eq(SURFACE_FLINGER_CODE), any(), any(), eq(0 /* flags */));
         mController.updateState(mPreference);
