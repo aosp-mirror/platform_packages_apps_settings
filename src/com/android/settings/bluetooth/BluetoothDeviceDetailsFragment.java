@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import static android.bluetooth.BluetoothDevice.BOND_NONE;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.settings.SettingsEnums;
@@ -125,6 +126,20 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(BlockingSlicePrefController.class).setSliceUri(sliceEnabled
                 ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        finishFragmentIfNecessary();
+    }
+
+    @VisibleForTesting
+    void finishFragmentIfNecessary() {
+        if (mCachedDevice.getBondState() == BOND_NONE) {
+            finish();
+            return;
+        }
     }
 
     @Override
