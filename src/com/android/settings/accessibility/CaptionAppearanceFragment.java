@@ -35,7 +35,9 @@ import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ import java.util.Locale;
 /**
  * Settings fragment containing font style of captioning properties.
  */
+@SearchIndexable
 public class CaptionAppearanceFragment extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnValueChangedListener {
     private static final String PREF_CAPTION_PREVIEW = "caption_preview";
@@ -407,4 +410,8 @@ public class CaptionAppearanceFragment extends SettingsPreferenceFragment
 
         return true;
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.captioning_appearance);
 }
+
