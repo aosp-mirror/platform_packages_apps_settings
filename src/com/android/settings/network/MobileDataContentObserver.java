@@ -39,7 +39,7 @@ public class MobileDataContentObserver extends ContentObserver {
     public static Uri getObservableUri(Context context, int subId) {
         Uri uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA);
         TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-        if (telephonyManager.getSimCount() != 1) {
+        if (telephonyManager.getActiveModemCount() != 1) {
             uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA + subId);
         }
         return uri;
