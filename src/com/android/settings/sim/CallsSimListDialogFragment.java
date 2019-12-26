@@ -47,8 +47,7 @@ public class CallsSimListDialogFragment extends SimListDialogFragment {
             return result;
         }
         for (PhoneAccountHandle handle : phoneAccounts) {
-            final PhoneAccount phoneAccount = telecomManager.getPhoneAccount(handle);
-            final int subId = telephonyManager.getSubIdForPhoneAccount(phoneAccount);
+            final int subId = telephonyManager.getSubscriptionId(handle);
 
             if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                 continue;

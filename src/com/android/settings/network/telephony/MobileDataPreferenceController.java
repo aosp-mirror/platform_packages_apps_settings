@@ -145,7 +145,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     @VisibleForTesting
     boolean isDialogNeeded() {
         final boolean enableData = !isChecked();
-        final boolean isMultiSim = (mTelephonyManager.getSimCount() > 1);
+        final boolean isMultiSim = (mTelephonyManager.getActiveModemCount() > 1);
         final int defaultSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
         final boolean needToDisableOthers = mSubscriptionManager
                 .isActiveSubscriptionId(defaultSubId) && defaultSubId != mSubId;

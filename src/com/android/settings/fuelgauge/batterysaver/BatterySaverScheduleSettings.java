@@ -34,8 +34,10 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.RadioButtonPreference;
 
@@ -53,6 +55,7 @@ import java.util.List;
  * {@link BatterySaverScheduleSeekBarController} for the controller that manages user
  * interactions in this screen.
  */
+@SearchIndexable
 public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
 
     public BatterySaverScheduleRadioButtonsController mRadioButtonController;
@@ -207,4 +210,7 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
             return mSummary;
         }
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.battery_saver_schedule_settings);
 }

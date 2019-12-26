@@ -37,8 +37,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.wifitrackerlib.SavedNetworkTracker;
 
 import java.time.Clock;
@@ -47,6 +49,7 @@ import java.time.ZoneOffset;
 /**
  * UI to manage saved networks/access points.
  */
+@SearchIndexable
 public class SavedAccessPointsWifiSettings2 extends DashboardFragment
         implements SavedNetworkTracker.SavedNetworkTrackerCallback {
 
@@ -164,4 +167,7 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
         use(SubscribedAccessPointsPreferenceController2.class)
                 .displayPreference(screen, mSavedNetworkTracker.getSubscriptionWifiEntries());
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.wifi_display_saved_access_points2);
 }

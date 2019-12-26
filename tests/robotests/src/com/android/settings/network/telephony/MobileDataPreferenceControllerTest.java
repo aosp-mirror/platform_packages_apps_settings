@@ -99,7 +99,7 @@ public class MobileDataPreferenceControllerTest {
         doReturn(true).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
-        doReturn(1).when(mTelephonyManager).getSimCount();
+        doReturn(1).when(mTelephonyManager).getActiveModemCount();
 
         assertThat(mController.isDialogNeeded()).isFalse();
     }
@@ -110,7 +110,7 @@ public class MobileDataPreferenceControllerTest {
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
         doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(SUB_ID_OTHER);
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_OTHER);
-        doReturn(2).when(mTelephonyManager).getSimCount();
+        doReturn(2).when(mTelephonyManager).getActiveModemCount();
 
         assertThat(mController.isDialogNeeded()).isTrue();
         assertThat(mController.mDialogType).isEqualTo(
@@ -131,7 +131,7 @@ public class MobileDataPreferenceControllerTest {
         doReturn(true).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
-        doReturn(1).when(mTelephonyManager).getSimCount();
+        doReturn(1).when(mTelephonyManager).getActiveModemCount();
 
         mController.onPreferenceChange(mPreference, true);
 
@@ -143,7 +143,7 @@ public class MobileDataPreferenceControllerTest {
         doReturn(true).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
-        doReturn(2).when(mTelephonyManager).getSimCount();
+        doReturn(2).when(mTelephonyManager).getActiveModemCount();
 
         mController.onPreferenceChange(mPreference, true);
 
