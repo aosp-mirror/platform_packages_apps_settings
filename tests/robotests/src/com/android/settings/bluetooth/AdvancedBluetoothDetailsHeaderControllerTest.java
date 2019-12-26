@@ -210,11 +210,8 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void onStop_isAvailable_unregisterCallback() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
-                .thenReturn("true".getBytes());
+    public void onStop_isRegisterCallback_unregisterCallback() {
+        mController.mIsRegisterCallback = true;
 
         mController.onStop();
 
@@ -234,9 +231,8 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void onStop_notAvailable_unregisterCallback() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
-                .thenReturn("false".getBytes());
+    public void onStop_notRegisterCallback_unregisterCallback() {
+        mController.mIsRegisterCallback = false;
 
         mController.onStop();
 
@@ -245,11 +241,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void onDestroy_isAvailable_recycleBitmap() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
-                .thenReturn("true".getBytes());
+    public void onDestroy_recycleBitmap() {
         mController.mIconCache.put(ICON_URI, mBitmap);
 
         mController.onDestroy();
