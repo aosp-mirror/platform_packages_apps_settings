@@ -67,7 +67,7 @@ public class ShortcutPreferenceTest {
                 inflater.inflate(R.layout.accessibility_shortcut_secondary_action, null);
         mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(view);
     }
-    
+
     @Test
     public void testClickLinearLayout_checkboxClicked() {
         mShortcutPreference.onBindViewHolder(mPreferenceViewHolder);

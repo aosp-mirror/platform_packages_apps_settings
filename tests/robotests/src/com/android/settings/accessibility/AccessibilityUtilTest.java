@@ -101,7 +101,7 @@ public final class AccessibilityUtilTest {
         info.flags |= AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON;
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
-                AccessibilityUtil.AccessibilityServiceFragmentType.HEADLESS);
+                AccessibilityUtil.AccessibilityServiceFragmentType.INVISIBLE);
 
     }
 
