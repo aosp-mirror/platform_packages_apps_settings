@@ -113,7 +113,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             NetworkPolicyManager policyManager = (NetworkPolicyManager)
                     mContext.getSystemService(Context.NETWORK_POLICY_SERVICE);
             if (policyManager != null) {
-                String subscriberId = telephonyManager.getSubscriberId(mSubId);
+                String subscriberId = telephonyManager.getSubscriberId();
                 policyManager.factoryReset(subscriberId);
             }
 
