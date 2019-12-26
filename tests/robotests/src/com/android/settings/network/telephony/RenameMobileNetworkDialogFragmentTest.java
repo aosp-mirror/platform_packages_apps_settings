@@ -86,7 +86,8 @@ public class RenameMobileNetworkDialogFragmentTest {
 
         final ServiceState serviceState = mock(ServiceState.class);
         when(serviceState.getOperatorAlphaLong()).thenReturn("fake carrier name");
-        when(mTelephonyMgr.getServiceStateForSubscriber(mSubscriptionId)).thenReturn(serviceState);
+        when(mTelephonyMgr.createForSubscriptionId(anyInt())).thenReturn(mTelephonyMgr);
+        when(mTelephonyMgr.getServiceState()).thenReturn(serviceState);
     }
 
     @Test
