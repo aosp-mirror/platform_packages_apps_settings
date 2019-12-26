@@ -16,8 +16,11 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -35,7 +38,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.ShortcutType;
+import com.android.settings.accessibility.AccessibilityUtil.PreferredShortcutType;
 import com.android.settings.accessibility.AccessibilityUtil.State;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
@@ -57,10 +60,11 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     private static final String EXTRA_SHORTCUT_TYPE = "shortcutType";
     // TODO(b/142530063): Check the new setting key to decide which summary should be shown.
     private static final String KEY_SHORTCUT_TYPE = Settings.System.MASTER_MONO;
+    private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
     private ShortcutPreference mShortcutPreference;
-    private int mShortcutType = ShortcutType.DEFAULT;
+    private int mPreferredShortcutType = PreferredShortcutType.DEFAULT;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
 
@@ -95,7 +99,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(EXTRA_SHORTCUT_TYPE, mShortcutType);
+        outState.putInt(EXTRA_SHORTCUT_TYPE, mPreferredShortcutType);
         super.onSaveInstanceState(outState);
     }
 
@@ -108,6 +112,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
             ((DaltonizerRadioButtonPreferenceController) controller).displayPreference(
                     getPreferenceScreen());
         }
+        updateShortcutPreference();
     }
 
     @Override
@@ -143,8 +148,8 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     private void updateAlertDialogCheckState() {
-        updateCheckStatus(mSoftwareTypeCheckBox, ShortcutType.SOFTWARE);
-        updateCheckStatus(mHardwareTypeCheckBox, ShortcutType.HARDWARE);
+        updateCheckStatus(mSoftwareTypeCheckBox, PreferredShortcutType.SOFTWARE);
+        updateCheckStatus(mHardwareTypeCheckBox, PreferredShortcutType.HARDWARE);
     }
 
     private void updateAlertDialogEnableState() {
@@ -158,48 +163,48 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         }
     }
 
-    private void updateCheckStatus(CheckBox checkBox, @ShortcutType int type) {
-        checkBox.setChecked((mShortcutType & type) == type);
+    private void updateCheckStatus(CheckBox checkBox, @PreferredShortcutType int type) {
+        checkBox.setChecked((mPreferredShortcutType & type) == type);
         checkBox.setOnClickListener(v -> {
-            updateShortcutType(false);
+            updatePreferredShortcutType(false);
             updateAlertDialogEnableState();
         });
     }
 
-    private void updateShortcutType(boolean saveToDB) {
-        mShortcutType = ShortcutType.DEFAULT;
+    private void updatePreferredShortcutType(boolean saveToDB) {
+        mPreferredShortcutType = PreferredShortcutType.DEFAULT;
         if (mSoftwareTypeCheckBox.isChecked()) {
-            mShortcutType |= ShortcutType.SOFTWARE;
+            mPreferredShortcutType |= PreferredShortcutType.SOFTWARE;
         }
         if (mHardwareTypeCheckBox.isChecked()) {
-            mShortcutType |= ShortcutType.HARDWARE;
+            mPreferredShortcutType |= PreferredShortcutType.HARDWARE;
         }
         if (saveToDB) {
-            setShortcutType(mShortcutType);
+            setPreferredShortcutType(mPreferredShortcutType);
         }
     }
 
-    private void setSecureIntValue(String key, @ShortcutType int value) {
+    private void setSecureIntValue(String key, @PreferredShortcutType int value) {
         Settings.Secure.putIntForUser(getPrefContext().getContentResolver(),
                 key, value, getPrefContext().getContentResolver().getUserId());
     }
 
-    private void setShortcutType(@ShortcutType int type) {
+    private void setPreferredShortcutType(@PreferredShortcutType int type) {
         setSecureIntValue(KEY_SHORTCUT_TYPE, type);
     }
 
     private String getShortcutTypeSummary(Context context) {
-        final int shortcutType = getShortcutType(context);
+        final int shortcutType = getPreferredShortcutType(context);
         final CharSequence softwareTitle =
                 context.getText(AccessibilityUtil.isGestureNavigateEnabled(context)
                         ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture
                         : R.string.accessibility_shortcut_edit_dialog_title_software);
 
         List<CharSequence> list = new ArrayList<>();
-        if ((shortcutType & ShortcutType.SOFTWARE) == ShortcutType.SOFTWARE) {
+        if ((shortcutType & PreferredShortcutType.SOFTWARE) == PreferredShortcutType.SOFTWARE) {
             list.add(softwareTitle);
         }
-        if ((shortcutType & ShortcutType.HARDWARE) == ShortcutType.HARDWARE) {
+        if ((shortcutType & PreferredShortcutType.HARDWARE) == PreferredShortcutType.HARDWARE) {
             final CharSequence hardwareTitle = context.getText(
                     R.string.accessibility_shortcut_edit_dialog_title_hardware);
             list.add(hardwareTitle);
@@ -213,20 +218,21 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         return AccessibilityUtil.capitalize(joinStrings);
     }
 
-    @ShortcutType
-    private int getShortcutType(Context context) {
-        return getSecureIntValue(context, KEY_SHORTCUT_TYPE, ShortcutType.SOFTWARE);
+    @PreferredShortcutType
+    private int getPreferredShortcutType(Context context) {
+        return getSecureIntValue(context, KEY_SHORTCUT_TYPE, PreferredShortcutType.SOFTWARE);
     }
 
-    @ShortcutType
-    private int getSecureIntValue(Context context, String key, @ShortcutType int defaultValue) {
+    @PreferredShortcutType
+    private int getSecureIntValue(Context context, String key,
+            @PreferredShortcutType int defaultValue) {
         return Settings.Secure.getIntForUser(
                 context.getContentResolver(),
                 key, defaultValue, context.getContentResolver().getUserId());
     }
 
     private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        updateShortcutType(true);
+        updatePreferredShortcutType(true);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
     }
@@ -288,39 +294,72 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     @Override
     public void onCheckboxClicked(ShortcutPreference preference) {
         if (preference.getChecked()) {
-            // TODO(b/142530063): Enable shortcut when checkbox is checked.
+            // TODO(b/142531156): Replace PreferredShortcutType.SOFTWARE value with dialog shortcut
+            //  preferred key.
+            AccessibilityUtil.optInValueToSettings(getContext(), PreferredShortcutType.SOFTWARE,
+                    getComponentName());
         } else {
-            // TODO(b/142530063): Disable shortcut when checkbox is unchecked.
+            // TODO(b/142531156): Replace PreferredShortcutType.SOFTWARE value with dialog shortcut
+            //  preferred key.
+            AccessibilityUtil.optOutValueFromSettings(getContext(), PreferredShortcutType.SOFTWARE,
+                    getComponentName());
         }
     }
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        mShortcutType = getShortcutType(getPrefContext());
+        mPreferredShortcutType = getPreferredShortcutType(getPrefContext());
         showDialog(DIALOG_ID_EDIT_SHORTCUT);
     }
 
     private void initShortcutPreference(Bundle savedInstanceState) {
-        // Restore the Shortcut type
+        // Restore the PreferredShortcut type
         if (savedInstanceState != null) {
-            mShortcutType = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE, ShortcutType.DEFAULT);
+            mPreferredShortcutType = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
+                    PreferredShortcutType.DEFAULT);
         }
-        if (mShortcutType == ShortcutType.DEFAULT) {
-            mShortcutType = getShortcutType(getPrefContext());
+        if (mPreferredShortcutType == PreferredShortcutType.DEFAULT) {
+            mPreferredShortcutType = getPreferredShortcutType(getPrefContext());
         }
 
         // Initial ShortcutPreference widget
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         mShortcutPreference = new ShortcutPreference(
                 preferenceScreen.getContext(), null);
+        mShortcutPreference.setPersistent(false);
+        mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setTitle(R.string.accessibility_shortcut_title);
-        mShortcutPreference.setOnClickListener(this);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
-        // Put the shortcutPreference before radioButtonPreference.
+        mShortcutPreference.setOnClickListener(this);
         final RadioButtonPreference radioButtonPreference = findPreference(PREFERENCE_KEY);
+        // Put the shortcutPreference before radioButtonPreference.
         mShortcutPreference.setOrder(radioButtonPreference.getOrder() - 1);
-        preferenceScreen.addPreference(mShortcutPreference);
         // TODO(b/142530063): Check the new key to decide whether checkbox should be checked.
+        preferenceScreen.addPreference(mShortcutPreference);
+    }
+
+    private void updateShortcutPreference() {
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        final ShortcutPreference shortcutPreference = preferenceScreen.findPreference(
+                getShortcutPreferenceKey());
+
+        if (shortcutPreference != null) {
+            // TODO(b/142531156): Replace PreferredShortcutType.SOFTWARE value with dialog shortcut
+            //  preferred key.
+            shortcutPreference.setChecked(
+                    AccessibilityUtil.hasValueInSettings(getContext(),
+                            PreferredShortcutType.SOFTWARE,
+                            getComponentName()));
+        }
+
+    }
+
+    private String getShortcutPreferenceKey() {
+        return KEY_SHORTCUT_PREFERENCE;
+    }
+
+    private ComponentName getComponentName() {
+        return DALTONIZER_COMPONENT_NAME;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

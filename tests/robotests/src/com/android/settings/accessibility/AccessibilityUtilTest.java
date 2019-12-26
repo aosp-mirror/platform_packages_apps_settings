@@ -28,6 +28,7 @@ import android.os.Build;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.PreferredShortcutType;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,14 @@ public final class AccessibilityUtilTest {
     private static final String SECURE_TEST_KEY = "secure_test_key";
     private static final String DUMMY_PACKAGE_NAME = "com.dummy.example";
     private static final String DUMMY_CLASS_NAME = DUMMY_PACKAGE_NAME + ".dummy_a11y_service";
-    private static final String DUMMY_COMPONENT_NAME = DUMMY_PACKAGE_NAME + "/" + DUMMY_CLASS_NAME;
+    private static final String DUMMY_CLASS_NAME2 = DUMMY_PACKAGE_NAME + ".dummy_a11y_service2";
+    private static final ComponentName DUMMY_COMPONENT_NAME = new ComponentName(DUMMY_PACKAGE_NAME,
+            DUMMY_CLASS_NAME);
+    private static final ComponentName DUMMY_COMPONENT_NAME2 = new ComponentName(DUMMY_PACKAGE_NAME,
+            DUMMY_CLASS_NAME2);
+    private static final String SOFTWARE_SHORTCUT_KEY =
+            Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT;
+
     private Context mContext;
 
     @Before
@@ -124,6 +132,57 @@ public final class AccessibilityUtilTest {
                 AccessibilityUtil.AccessibilityServiceFragmentType.INTUITIVE);
     }
 
+    @Test
+    public void hasValueInSettings_dummyComponentName_hasValue() {
+        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
+
+        assertThat(AccessibilityUtil.hasValueInSettings(mContext, PreferredShortcutType.SOFTWARE,
+                DUMMY_COMPONENT_NAME)).isTrue();
+    }
+
+    @Test
+    public void optInValueToSettings_optInDummyComponentName2_haveDummyComponentName2String() {
+        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
+        AccessibilityUtil.optInValueToSettings(mContext, PreferredShortcutType.SOFTWARE,
+                DUMMY_COMPONENT_NAME2);
+
+        assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
+                DUMMY_COMPONENT_NAME.flattenToString() + ":"
+                        + DUMMY_COMPONENT_NAME2.flattenToString());
+    }
+
+    @Test
+    public void optInValueToSettings_optInTwoDummyComponentName_haveOneDummyComponentName2String() {
+        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
+        AccessibilityUtil.optInValueToSettings(mContext, PreferredShortcutType.SOFTWARE,
+                DUMMY_COMPONENT_NAME2);
+        AccessibilityUtil.optInValueToSettings(mContext, PreferredShortcutType.SOFTWARE,
+                DUMMY_COMPONENT_NAME2);
+
+        assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
+                DUMMY_COMPONENT_NAME.flattenToString() + ":"
+                        + DUMMY_COMPONENT_NAME2.flattenToString());
+    }
+
+    @Test
+    public void optOutValueFromSettings_optOutDummyComponentName_emptyValue() {
+        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
+        AccessibilityUtil.optOutValueFromSettings(mContext, PreferredShortcutType.SOFTWARE,
+                DUMMY_COMPONENT_NAME);
+
+        assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEmpty();
+    }
+
+    @Test
+    public void optOutValueFromSettings_optOutDummyComponentName2_haveDummyComponentName() {
+        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString() + ":"
+                + DUMMY_COMPONENT_NAME2.flattenToString());
+        AccessibilityUtil.optOutValueFromSettings(mContext, PreferredShortcutType.SOFTWARE,
+                DUMMY_COMPONENT_NAME2);
+
+        assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
+                DUMMY_COMPONENT_NAME.flattenToString());
+    }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {
         final ApplicationInfo applicationInfo = new ApplicationInfo();
@@ -139,14 +198,20 @@ public final class AccessibilityUtilTest {
         try {
             final AccessibilityServiceInfo info = new AccessibilityServiceInfo(resolveInfo,
                     mContext);
-            final ComponentName componentName = ComponentName.unflattenFromString(
-                    DUMMY_COMPONENT_NAME);
-            info.setComponentName(componentName);
+            info.setComponentName(DUMMY_COMPONENT_NAME);
             return info;
         } catch (XmlPullParserException | IOException e) {
             // Do nothing
         }
 
         return null;
+    }
+
+    private void putStringIntoSettings(String key, String componentName) {
+        Settings.Secure.putString(mContext.getContentResolver(), key, componentName);
+    }
+
+    private String getStringFromSettings(String key) {
+        return Settings.Secure.getString(mContext.getContentResolver(), key);
     }
 }
