@@ -36,6 +36,8 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.view.ContextMenu;
+import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -47,9 +49,12 @@ import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.settingslib.wifi.LongPressWifiEntryPreference;
+import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -249,26 +254,28 @@ public class WifiSettings2Test {
         assertThat(adapter.hasStableIds()).isTrue();
     }
 
-// TODO(b/70983952): Add test for context menu
-//    @Test
-//    public void onCreateContextMenu_shouldHaveForgetMenuForConnectedAccessPreference() {
-//        final FragmentActivity mockActivity = mock(FragmentActivity.class);
-//        when(mockActivity.getApplicationContext()).thenReturn(mContext);
-//        when(mWifiSettings2.getActivity()).thenReturn(mockActivity);
-//
-//        final AccessPoint accessPoint = mock(AccessPoint.class);
-//        when(accessPoint.isConnectable()).thenReturn(false);
-//        when(accessPoint.isSaved()).thenReturn(true);
-//        when(accessPoint.isActive()).thenReturn(true);
-//
-//        final ConnectedAccessPointPreference connectedPreference =
-//                mWifiSettings2.createConnectedAccessPointPreference(accessPoint, mContext);
-//        final View view = mock(View.class);
-//        when(view.getTag()).thenReturn(connectedPreference);
-//
-//        final ContextMenu menu = mock(ContextMenu.class);
-//        mWifiSettings2.onCreateContextMenu(menu, view, null /* info */);
-//
-//        verify(menu).add(anyInt(), eq(WifiSettings.MENU_ID_FORGET), anyInt(), anyInt());
-//    }
+    //TODO(b/70983952): Remove @Ignore when WifiEntry API is constructed.
+    @Test
+    @Ignore
+    public void onCreateContextMenu_shouldHaveForgetAndDisconnectMenuForConnectedWifiEntry() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.getApplicationContext()).thenReturn(mContext);
+        when(mWifiSettings2.getActivity()).thenReturn(activity);
+
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.canDisconnect()).thenReturn(true);
+        when(wifiEntry.isSaved()).thenReturn(true);
+        when(wifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+
+        final LongPressWifiEntryPreference connectedWifiEntryPreference =
+                mWifiSettings2.createLongPressWifiEntryPreference(wifiEntry);
+        final View view = mock(View.class);
+        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
+
+        final ContextMenu menu = mock(ContextMenu.class);
+        mWifiSettings2.onCreateContextMenu(menu, view, null /* info */);
+
+        verify(menu).add(anyInt(), eq(WifiSettings2.MENU_ID_FORGET), anyInt(), anyInt());
+        verify(menu).add(anyInt(), eq(WifiSettings2.MENU_ID_DISCONNECT), anyInt(), anyInt());
+    }
 }
