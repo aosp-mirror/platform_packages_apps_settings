@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2013 The Android Open Source Project
+     Copyright (C) 2019 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,24 +18,14 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
-    android:key="captioning_preference_screen"
-    android:title="@string/accessibility_captioning_title" >
+    android:fragment="com.android.settings.accessibility.CaptionMoreOptionsFragment"
+    android:key="captioning_more_options_screen"
+    android:title="@string/captioning_more_options_title" >
 
-    <SwitchPreference
-        android:key="captioning_preference_switch"
-        android:title="@string/accessibility_caption_master_switch_title" />
-
-    <Preference
-        android:key="captioning_caption_appearance"
-        android:title="@string/captioning_caption_appearance_title"
-        android:summary="@string/captioning_caption_appearance_summary"
-        android:fragment="com.android.settings.accessibility.CaptionAppearanceFragment" />
-
-    <Preference
-        android:key="captioning_more_options"
-        android:title="@string/captioning_more_options_title"
-        android:fragment="com.android.settings.accessibility.CaptionMoreOptionsFragment" />
+    <com.android.settings.accessibility.LocalePreference
+        android:key="captioning_locale"
+        android:summary="%s"
+        android:title="@string/captioning_locale" />
 
     <com.android.settingslib.widget.FooterPreference
         android:title="@string/accessibility_caption_preference_summary"

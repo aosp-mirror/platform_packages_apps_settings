@@ -48,6 +48,7 @@ import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -172,7 +173,7 @@ public class AccessibilitySettings extends DashboardFragment {
     private SwitchPreference mToggleDisableAnimationsPreference;
     private Preference mDisplayMagnificationPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
-    private SwitchPreference mToggleInversionPreference;
+    private Preference mToggleInversionPreference;
 
     private DevicePolicyManager mDpm;
 
@@ -402,7 +403,24 @@ public class AccessibilitySettings extends DashboardFragment {
                 preference.setEnabled(true);
             }
 
-            preference.setFragment(ToggleAccessibilityServicePreferenceFragment.class.getName());
+            switch (AccessibilityUtil.getAccessibilityServiceFragmentType(info)) {
+                case AccessibilityServiceFragmentType.LEGACY:
+                    preference.setFragment(
+                            LegacyAccessibilityServicePreferenceFragment.class.getName());
+                    break;
+                case AccessibilityServiceFragmentType.INVISIBLE:
+                    preference.setFragment(
+                            InvisibleToggleAccessibilityServicePreferenceFragment.class.getName());
+                    break;
+                case AccessibilityServiceFragmentType.INTUITIVE:
+                    preference.setFragment(
+                            ToggleAccessibilityServicePreferenceFragment.class.getName());
+                    break;
+                default:
+                    // impossible status
+                    throw new AssertionError();
+            }
+
             preference.setPersistent(true);
 
             final Bundle extras = preference.getExtras();
@@ -502,7 +520,8 @@ public class AccessibilitySettings extends DashboardFragment {
                     mToggleInversionPreference.getOrder() + 1);
             mToggleDisableAnimationsPreference.setOrder(
                     mToggleLargePointerIconPreference.getOrder() + 1);
-            mToggleInversionPreference.setSummary(R.string.summary_empty);
+            mToggleInversionPreference.setSummary(AccessibilityUtil.getSummary(
+                    getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED));
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
         }

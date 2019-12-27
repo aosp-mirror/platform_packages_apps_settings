@@ -47,8 +47,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         implements DaltonizerRadioButtonPreferenceController.OnChangeListener,
         SwitchBar.OnSwitchChangeListener, ShortcutPreference.OnClickListener {
 
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_daltonizer_settings);
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
     private static final String RADIOPREFERENCE_KEY = "daltonizer_mode_deuteranomaly";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
@@ -206,4 +204,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         shortcutPreference.setOnClickListener(this);
         preferenceScreen.addPreference(shortcutPreference);
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.accessibility_daltonizer_settings);
 }

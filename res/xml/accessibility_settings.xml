@@ -209,11 +209,11 @@
             android:title="@string/accessibility_display_daltonizer_preference_title"
             settings:controller="com.android.settings.accessibility.DaltonizerPreferenceController"/>
 
-        <SwitchPreference
+        <Preference
+            android:fragment="com.android.settings.accessibility.ToggleColorInversionPreferenceFragment"
             android:icon="@drawable/ic_color_inversion"
             android:key="toggle_inversion_preference"
             android:persistent="false"
-            android:summary="@string/accessibility_display_inversion_preference_subtitle"
             android:title="@string/accessibility_display_inversion_preference_title"
             settings:controller="com.android.settings.accessibility.ColorInversionPreferenceController"/>
     </PreferenceCategory>
