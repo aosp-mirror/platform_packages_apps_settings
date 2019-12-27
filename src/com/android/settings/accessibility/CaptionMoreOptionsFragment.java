@@ -27,10 +27,13 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 /**
  * Settings fragment containing more options of captioning properties.
  */
+@SearchIndexable
 public class CaptionMoreOptionsFragment extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
     private static final String PREF_LOCALE = "captioning_locale";
@@ -79,4 +82,7 @@ public class CaptionMoreOptionsFragment extends SettingsPreferenceFragment
 
         return true;
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.captioning_more_options);
 }
