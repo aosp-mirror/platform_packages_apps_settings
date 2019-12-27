@@ -42,7 +42,7 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
 
     public static RoamingDialogFragment newInstance(int subId) {
         final RoamingDialogFragment dialogFragment = new RoamingDialogFragment();
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putInt(SUB_ID_KEY, subId);
         dialogFragment.setArguments(args);
 
@@ -52,17 +52,17 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Bundle args = getArguments();
+        final Bundle args = getArguments();
         mSubId = args.getInt(SUB_ID_KEY);
         mCarrierConfigManager = new CarrierConfigManager(context);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        int title = R.string.roaming_alert_title;
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final int title = R.string.roaming_alert_title;
         int message = R.string.roaming_warning;
-        PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         if (carrierConfig != null && carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_CHECK_PRICING_WITH_CARRIER_FOR_DATA_ROAMING_BOOL)) {
             message = R.string.roaming_check_price_warning;
@@ -84,8 +84,13 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
     public void onClick(DialogInterface dialog, int which) {
         // let the host know that the positive button has been clicked
         if (which == dialog.BUTTON_POSITIVE) {
-            TelephonyManager.from(getContext()).createForSubscriptionId(
-                    mSubId).setDataRoamingEnabled(true);
+            final TelephonyManager telephonyManager =
+                    getContext().getSystemService(TelephonyManager.class)
+                    .createForSubscriptionId(mSubId);
+            if (telephonyManager == null) {
+                return;
+            }
+            telephonyManager.setDataRoamingEnabled(true);
         }
     }
 }
