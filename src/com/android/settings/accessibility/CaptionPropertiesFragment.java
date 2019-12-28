@@ -29,6 +29,8 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,7 @@ import java.util.List;
 /**
  * Settings fragment containing captioning properties.
  */
+@SearchIndexable
 public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
     private static final String PREF_SWITCH = "captioning_preference_switch";
@@ -107,4 +110,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
         return true;
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.captioning_settings);
 }

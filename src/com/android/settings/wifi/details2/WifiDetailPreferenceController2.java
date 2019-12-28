@@ -61,9 +61,10 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.datausage.WifiDataUsageSummaryPreferenceController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settings.wifi.WifiDialog;
-import com.android.settings.wifi.WifiDialog.WifiDialogListener;
+import com.android.settings.wifi.WifiDialog2;
+import com.android.settings.wifi.WifiDialog2.WifiDialog2Listener;
 import com.android.settings.wifi.WifiEntryShell;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -93,7 +94,7 @@ import java.util.stream.Collectors;
  * {@link WifiNetworkDetailsFragment}.
  */
 public class WifiDetailPreferenceController2 extends AbstractPreferenceController
-        implements PreferenceControllerMixin, WifiDialogListener, LifecycleObserver, OnPause,
+        implements PreferenceControllerMixin, WifiDialog2Listener, LifecycleObserver, OnPause,
         OnResume, WifiEntryCallback {
 
     private static final String TAG = "WifiDetailsPrefCtrl2";
@@ -670,7 +671,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
      * Returns whether the network represented by this preference can be modified.
      */
     public boolean canModifyNetwork() {
-        return WifiEntryShell.canModifyNetwork(mWifiEntry);
+        return mWifiEntry.isSaved()
+                && !WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration());
     }
 
     /**
@@ -762,7 +764,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     @Override
-    public void onSubmit(WifiDialog dialog) {
+    public void onSubmit(WifiDialog2 dialog) {
         if (dialog.getController() != null) {
             mWifiManager.save(dialog.getController().getConfig(), new WifiManager.ActionListener() {
                 @Override

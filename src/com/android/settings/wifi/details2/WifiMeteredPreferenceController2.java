@@ -18,6 +18,7 @@ package com.android.settings.wifi.details2;
 
 import android.app.backup.BackupManager;
 import android.content.Context;
+import android.net.wifi.WifiConfiguration;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.DropDownPreference;
@@ -25,7 +26,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.wifi.WifiDialog;
+import com.android.settings.wifi.WifiDialog2;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -33,7 +34,7 @@ import com.android.wifitrackerlib.WifiEntry;
  * {@link AbstractPreferenceController} that controls whether the wifi network is metered or not
  */
 public class WifiMeteredPreferenceController2 extends BasePreferenceController implements
-        Preference.OnPreferenceChangeListener, WifiDialog.WifiDialogListener {
+        Preference.OnPreferenceChangeListener, WifiDialog2.WifiDialog2Listener {
 
     private static final String KEY_WIFI_METERED = "metered";
     private WifiEntry mWifiEntry;
@@ -89,18 +90,30 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
     }
 
     @Override
-    public void onSubmit(WifiDialog dialog) {
-        // TODO(b/143326832): Create WifiDialog2 and let it work for WifiEntry.
-        //if (dialog.getController() != null) {
-        //    final WifiConfiguration newConfig = dialog.getController().getConfig();
-        //    if (newConfig == null || mWifiConfiguration == null) {
-        //        return;
-        //    }
-        //
-        //    if (newConfig.meteredOverride != mWifiConfiguration.meteredOverride) {
-        //        mWifiConfiguration = newConfig;
-        //        onPreferenceChange(mPreference, String.valueOf(newConfig.meteredOverride));
-        //    }
-        //}
+    public void onSubmit(WifiDialog2 dialog) {
+        if (dialog.getController() != null) {
+            final WifiConfiguration newConfig = dialog.getController().getConfig();
+            if (newConfig == null || !mWifiEntry.isSaved()) {
+                return;
+            }
+
+            if (newConfig.meteredOverride != mWifiEntry.getWifiConfiguration().meteredOverride) {
+                mWifiEntry.setMeteredChoice(getWifiEntryMeteredChoice(newConfig));
+                onPreferenceChange(mPreference, String.valueOf(newConfig.meteredOverride));
+            }
+        }
+    }
+
+    private int getWifiEntryMeteredChoice(WifiConfiguration wifiConfiguration) {
+        switch (wifiConfiguration.meteredOverride) {
+            case WifiConfiguration.METERED_OVERRIDE_NONE:
+                return WifiEntry.METERED_CHOICE_AUTO;
+            case WifiConfiguration.METERED_OVERRIDE_METERED:
+                return WifiEntry.METERED_CHOICE_METERED;
+            case WifiConfiguration.METERED_OVERRIDE_NOT_METERED:
+                return WifiEntry.METERED_CHOICE_UNMETERED;
+            default:
+                return WifiEntry.METERED_CHOICE_UNKNOWN;
+        }
     }
 }
