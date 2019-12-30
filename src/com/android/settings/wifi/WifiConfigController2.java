@@ -348,9 +348,13 @@ public class WifiConfigController2 implements TextWatcher,
                 showProxyFields();
                 final CheckBox advancedTogglebox =
                         (CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox);
-                advancedTogglebox.setOnCheckedChangeListener(this);
-                advancedTogglebox.setChecked(showAdvancedFields);
-                setAdvancedOptionAccessibilityString(showAdvancedFields);
+                if (!showAdvancedFields) {
+                    // Need to show Advanced Option button.
+                    mView.findViewById(R.id.wifi_advanced_toggle).setVisibility(View.VISIBLE);
+                    advancedTogglebox.setOnCheckedChangeListener(this);
+                    advancedTogglebox.setChecked(showAdvancedFields);
+                    setAdvancedOptionAccessibilityString();
+                }
                 mView.findViewById(R.id.wifi_advanced_fields)
                         .setVisibility(showAdvancedFields ? View.VISIBLE : View.GONE);
             }
@@ -1554,17 +1558,10 @@ public class WifiConfigController2 implements TextWatcher,
                 ((EditText) mPasswordView).setSelection(pos);
             }
         } else if (view.getId() == R.id.wifi_advanced_togglebox) {
-            final int toggleVisibility;
-            final int stringID;
-            if (isChecked) {
-                toggleVisibility = View.VISIBLE;
-                // Hide the SoftKeyboard temporary to let user can see most of the expanded items.
-                hideSoftKeyboard(mView.getWindowToken());
-            } else {
-                toggleVisibility = View.GONE;
-            }
-            mView.findViewById(R.id.wifi_advanced_fields).setVisibility(toggleVisibility);
-            setAdvancedOptionAccessibilityString(isChecked);
+            // Hide the SoftKeyboard temporary to let user can see most of the expanded items.
+            hideSoftKeyboard(mView.getWindowToken());
+            view.setVisibility(View.GONE);
+            mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.VISIBLE);
         }
     }
 
@@ -1674,7 +1671,7 @@ public class WifiConfigController2 implements TextWatcher,
         ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox))
                 .setOnCheckedChangeListener(this);
         // Set correct accessibility strings.
-        setAdvancedOptionAccessibilityString(false /* showAdvancedFields */);
+        setAdvancedOptionAccessibilityString();
     }
 
     /**
@@ -1766,7 +1763,7 @@ public class WifiConfigController2 implements TextWatcher,
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0 /* flags */);
     }
 
-    private void setAdvancedOptionAccessibilityString(boolean showAdvancedFields) {
+    private void setAdvancedOptionAccessibilityString() {
         final CheckBox advancedToggleBox = mView.findViewById(R.id.wifi_advanced_togglebox);
         advancedToggleBox.setAccessibilityDelegate(new AccessibilityDelegate() {
             @Override
@@ -1777,12 +1774,10 @@ public class WifiConfigController2 implements TextWatcher,
                 info.setCheckable(false /* checkable */);
                 // To let TalkBack don't pronounce CheckBox.
                 info.setClassName(null /* className */);
-                final CharSequence accessibilityDoubleTapExtend = mContext.getString(
-                        showAdvancedFields ? R.string.wifi_advanced_toggle_description_expanded
-                                : R.string.wifi_advanced_toggle_description_collapsed);
                 // Customize TalkBack's pronunciation which been appended to "Double-tap to".
                 final AccessibilityAction customClick = new AccessibilityAction(
-                        AccessibilityNodeInfo.ACTION_CLICK, accessibilityDoubleTapExtend);
+                        AccessibilityNodeInfo.ACTION_CLICK,
+                        mContext.getString(R.string.wifi_advanced_toggle_description_collapsed));
                 info.addAction(customClick);
             }
         });
