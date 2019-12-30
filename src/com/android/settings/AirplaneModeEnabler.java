@@ -104,8 +104,8 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
             }
         }
 
-        for (ServiceStateListener ssListener : mServiceStateListeners) {
-            ssListener.start();
+        for (ServiceStateListener listener : mServiceStateListeners) {
+            listener.start();
         }
     }
 
@@ -113,8 +113,8 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         if (mServiceStateListeners == null) {
             return;
         }
-        for (ServiceStateListener ssListener : mServiceStateListeners) {
-            ssListener.stop();
+        for (ServiceStateListener listener : mServiceStateListeners) {
+            listener.stop();
         }
         mServiceStateListeners = null;
     }
@@ -210,9 +210,9 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
             mEnabler = enabler;
         }
 
-        private int mSubId;
-        private TelephonyManager mTelephonyManager;
-        private AirplaneModeEnabler mEnabler;
+        private final int mSubId;
+        private final TelephonyManager mTelephonyManager;
+        private final AirplaneModeEnabler mEnabler;
 
         int getSubscriptionId() {
             return mSubId;
