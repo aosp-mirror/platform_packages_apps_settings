@@ -36,7 +36,6 @@ import androidx.lifecycle.LiveData;
 import androidx.slice.Slice;
 
 import com.android.settings.R;
-import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -53,8 +52,6 @@ import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 public class PanelSlicesAdapterTest {
-
-    private static final Uri DATA_URI = CustomSliceRegistry.DATA_USAGE_SLICE_URI;
 
     private Context mContext;
     private PanelFragment mPanelFragment;
@@ -97,18 +94,6 @@ public class PanelSlicesAdapterTest {
     }
 
     @Test
-    public void onCreateViewHolder_returnsSliceRowViewHolder() {
-        addTestLiveData(DATA_URI);
-        final PanelSlicesAdapter adapter =
-                new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
-        final ViewGroup view = new FrameLayout(mContext);
-        final PanelSlicesAdapter.SliceRowViewHolder viewHolder =
-                adapter.onCreateViewHolder(view, 0);
-
-        assertThat(viewHolder.sliceView).isNotNull();
-    }
-
-    @Test
     public void sizeOfAdapter_shouldNotExceedMaxNum() {
         for (int i = 0; i < MAX_NUM_OF_SLICES + 2; i++) {
             addTestLiveData(Uri.parse("uri" + i));
@@ -124,22 +109,6 @@ public class PanelSlicesAdapterTest {
 
         assertThat(adapter.getItemCount()).isEqualTo(MAX_NUM_OF_SLICES);
         assertThat(adapter.getData().size()).isEqualTo(MAX_NUM_OF_SLICES);
-    }
-
-    @Test
-    public void nonMediaOutputIndicatorSlice_shouldAllowDividerAboveAndBelow() {
-        addTestLiveData(DATA_URI);
-        final PanelSlicesAdapter adapter =
-                new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
-        final int position = 0;
-        final ViewGroup view = new FrameLayout(mContext);
-        final PanelSlicesAdapter.SliceRowViewHolder viewHolder =
-                adapter.onCreateViewHolder(view, 0 /* view type*/);
-
-        adapter.onBindViewHolder(viewHolder, position);
-
-        assertThat(viewHolder.isDividerAllowedAbove()).isTrue();
-        assertThat(viewHolder.isDividerAllowedBelow()).isTrue();
     }
 
     @Test
