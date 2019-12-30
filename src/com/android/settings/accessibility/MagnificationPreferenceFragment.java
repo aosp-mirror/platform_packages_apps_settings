@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
-
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -25,7 +23,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
@@ -36,12 +33,10 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -134,7 +129,7 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
                 if (info.getComponentName().equals(assignedComponentName)) {
                     final CharSequence assignedServiceName = info.getResolveInfo().loadLabel(
                             context.getPackageManager());
-                    final int messageId = isGestureNavigateEnabled(context)
+                    final int messageId = AccessibilityUtil.isGestureNavigateEnabled(context)
                             ? R.string.accessibility_screen_magnification_gesture_navigation_warning
                             : R.string.accessibility_screen_magnification_navbar_configuration_warning;
                     return context.getString(messageId, assignedServiceName);
@@ -159,12 +154,6 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
      */
     static boolean isApplicable(Resources res) {
         return res.getBoolean(com.android.internal.R.bool.config_showNavigationBar);
-    }
-
-    private static boolean isGestureNavigateEnabled(Context context) {
-        return context.getResources().getInteger(
-                com.android.internal.R.integer.config_navBarInteractionMode)
-                == NAV_BAR_MODE_GESTURAL;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

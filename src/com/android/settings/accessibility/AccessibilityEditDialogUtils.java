@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -245,27 +243,21 @@ public class AccessibilityEditDialogUtils {
         });
     }
 
-    private static boolean isGestureNavigateEnabled(Context context) {
-        return context.getResources().getInteger(
-                com.android.internal.R.integer.config_navBarInteractionMode)
-                == NAV_BAR_MODE_GESTURAL;
-    }
-
     private static CharSequence retrieveTitle(Context context) {
-        return context.getString(isGestureNavigateEnabled(context)
+        return context.getString(AccessibilityUtil.isGestureNavigateEnabled(context)
                 ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture
                 : R.string.accessibility_shortcut_edit_dialog_title_software);
     }
 
     private static CharSequence retrieveSummary(Context context, int lineHeight) {
-        return isGestureNavigateEnabled(context)
+        return AccessibilityUtil.isGestureNavigateEnabled(context)
                 ? context.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_software_gesture)
                 : getSummaryStringWithIcon(context, lineHeight);
     }
 
     private static int retrieveImageResId(Context context) {
-        return isGestureNavigateEnabled(context)
+        return AccessibilityUtil.isGestureNavigateEnabled(context)
                 ? R.drawable.accessibility_shortcut_type_software_gesture
                 : R.drawable.accessibility_shortcut_type_software;
         // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
