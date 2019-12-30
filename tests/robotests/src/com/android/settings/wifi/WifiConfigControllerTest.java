@@ -549,4 +549,13 @@ public class WifiConfigControllerTest {
         assertThat(advButton.getContentDescription()).isEqualTo(
                 mContext.getString(R.string.wifi_advanced_toggle_description));
     }
+
+    @Test
+    public void getVisibility_whenAdvancedOptionClicked_shouldBeGone() {
+        final CheckBox advButton = mView.findViewById(R.id.wifi_advanced_togglebox);
+
+        advButton.performClick();
+
+        assertThat(advButton.getVisibility()).isEqualTo(View.GONE);
+    }
 }
