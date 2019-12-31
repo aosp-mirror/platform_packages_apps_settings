@@ -73,9 +73,11 @@ public class ShortcutPreference extends Preference {
         }
 
         final View settings = holder.itemView.findViewById(android.R.id.widget_frame);
-        if (settings != null) {
+        final View divider = holder.itemView.findViewById(R.id.divider);
+        if (settings != null && divider != null) {
             settings.setOnClickListener(view -> callOnSettingsClicked());
             settings.setVisibility(mSettingsVisibility);
+            divider.setVisibility(mSettingsVisibility);
         }
     }
 
