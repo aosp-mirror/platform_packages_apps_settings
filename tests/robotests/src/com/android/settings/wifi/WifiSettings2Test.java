@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -277,5 +278,12 @@ public class WifiSettings2Test {
 
         verify(menu).add(anyInt(), eq(WifiSettings2.MENU_ID_FORGET), anyInt(), anyInt());
         verify(menu).add(anyInt(), eq(WifiSettings2.MENU_ID_DISCONNECT), anyInt(), anyInt());
+    }
+
+    @Test
+    public void onWifiEntriesChanged_shouldChangeNextButtonState() {
+        mWifiSettings2.onWifiEntriesChanged();
+
+        verify(mWifiSettings2).changeNextButtonState(anyBoolean());
     }
 }

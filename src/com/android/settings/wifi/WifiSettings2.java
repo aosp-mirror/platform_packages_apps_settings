@@ -142,6 +142,13 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     private String mDialogWifiEntryKey;
     private WifiEntry mDialogWifiEntry;
 
+    // This boolean extra specifies whether to enable the Next button when connected. Used by
+    // account creation outside of setup wizard.
+    private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
+
+    // Enable the Next button when a Wi-Fi network is connected.
+    private boolean mEnableNextOnConnection;
+
     private static boolean isVerboseLoggingEnabled() {
         return WifiPickerTracker.isVerboseLoggingEnabled();
     }
@@ -329,6 +336,11 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 }
             }
         }
+
+        // If we're supposed to enable/disable the Next button based on our current connection
+        // state, start it off in the right state.
+        final Intent intent = getActivity().getIntent();
+        mEnableNextOnConnection = intent.getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
     }
 
     @Override
@@ -384,6 +396,8 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         if (mWifiEnabler != null) {
             mWifiEnabler.resume(activity);
         }
+
+        changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
     }
 
     @Override
@@ -626,6 +640,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     @Override
     public void onWifiEntriesChanged() {
         updateWifiEntryPreferencesDelayed();
+        changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
     }
 
     @Override
@@ -880,6 +895,19 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     @Override
     public int getHelpResource() {
         return R.string.help_url_wifi;
+    }
+
+    /**
+     * Renames/replaces "Next" button when appropriate. "Next" button usually exists in
+     * Wi-Fi setup screens, not in usual wifi settings screen.
+     *
+     * @param enabled true when the device is connected to a wifi network.
+     */
+    @VisibleForTesting
+    void changeNextButtonState(boolean enabled) {
+        if (mEnableNextOnConnection && hasNextButton()) {
+            getNextButton().setEnabled(enabled);
+        }
     }
 
     @Override
