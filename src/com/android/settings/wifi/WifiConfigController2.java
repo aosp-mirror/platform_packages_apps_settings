@@ -366,7 +366,7 @@ public class WifiConfigController2 implements TextWatcher,
             } else {
                 final String signalLevel = getSignalString();
 
-                if (mWifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED
+                if (mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_DISCONNECTED
                             && signalLevel != null) {
                     mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
                 } else {
@@ -388,16 +388,10 @@ public class WifiConfigController2 implements TextWatcher,
                     }
 
                     final ConnectedInfo info = mWifiEntry.getConnectedInfo();
-                    // TODO(b/143326832): Replace it with ConnectedInfo#linkSpeedMbps.
-                   //if (info != null && info.getTxLinkSpeedMbps() != WifiInfo.LINK_SPEED_UNKNOWN) {
-                    //    addRow(group, R.string.tx_wifi_speed, String.format(
-                   //            res.getString(R.string.tx_link_speed), info.getTxLinkSpeedMbps()));
-                    //}
-
-                   //if (info != null && info.getRxLinkSpeedMbps() != WifiInfo.LINK_SPEED_UNKNOWN) {
-                    //    addRow(group, R.string.rx_wifi_speed, String.format(
-                   //            res.getString(R.string.rx_link_speed), info.getRxLinkSpeedMbps()));
-                    //}
+                    if (info != null && info.linkSpeedMbps >= 0) {
+                        addRow(group, R.string.wifi_speed, String.format(
+                                res.getString(R.string.link_speed), info.linkSpeedMbps));
+                    }
 
                     if (info != null && info.frequencyMhz != WifiEntry.FREQUENCY_UNKNOWN) {
                         final int frequency = info.frequencyMhz;
