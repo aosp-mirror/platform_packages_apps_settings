@@ -32,13 +32,13 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 
 public class BrandedAccountPreferenceController extends BasePreferenceController {
-    private final Account[] mAccounts;
+    private final AccountFeatureProvider mAccountFeatureProvider;
+    private Account[] mAccounts;
 
     public BrandedAccountPreferenceController(Context context, String key) {
         super(context, key);
-        final AccountFeatureProvider accountFeatureProvider = FeatureFactory.getFactory(
-                mContext).getAccountFeatureProvider();
-        mAccounts = accountFeatureProvider.getAccounts(mContext);
+        mAccountFeatureProvider = FeatureFactory.getFactory(mContext).getAccountFeatureProvider();
+        mAccounts = mAccountFeatureProvider.getAccounts(mContext);
     }
 
     @Override
@@ -56,8 +56,6 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final AccountFeatureProvider accountFeatureProvider = FeatureFactory.getFactory(
-                mContext).getAccountFeatureProvider();
         final Preference accountPreference = screen.findPreference(getPreferenceKey());
         if (accountPreference != null && (mAccounts == null || mAccounts.length == 0)) {
             screen.removePreference(accountPreference);
@@ -72,7 +70,7 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
             args.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE,
                     android.os.Process.myUserHandle());
             args.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_TYPE,
-                    accountFeatureProvider.getAccountType());
+                    mAccountFeatureProvider.getAccountType());
 
             new SubSettingLauncher(mContext)
                     .setDestination(AccountDetailDashboardFragment.class.getName())
@@ -82,5 +80,14 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
                     .launch();
             return true;
         });
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        mAccounts = mAccountFeatureProvider.getAccounts(mContext);
+        if (mAccounts == null || mAccounts.length == 0) {
+            preference.setVisible(false);
+        }
     }
 }

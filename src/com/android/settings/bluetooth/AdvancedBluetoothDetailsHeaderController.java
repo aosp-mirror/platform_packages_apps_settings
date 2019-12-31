@@ -73,6 +73,8 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     Handler mHandler = new Handler(Looper.getMainLooper());
     @VisibleForTesting
+    boolean mIsRegisterCallback = false;
+    @VisibleForTesting
     final BluetoothAdapter.OnMetadataChangedListener mMetadataListener =
             new BluetoothAdapter.OnMetadataChangedListener() {
                 @Override
@@ -96,6 +98,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         final boolean untetheredHeadset = mCachedDevice != null
                 && BluetoothUtils.getBooleanMetaData(
                 mCachedDevice.getDevice(), BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
+        Log.d(TAG, "getAvailabilityStatus() is untethered : " + untetheredHeadset);
         return advancedEnabled && untetheredHeadset ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -113,6 +116,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         if (!isAvailable()) {
             return;
         }
+        mIsRegisterCallback = true;
         mCachedDevice.registerCallback(this);
         mBluetoothAdapter.addOnMetadataChangedListener(mCachedDevice.getDevice(),
                 mContext.getMainExecutor(), mMetadataListener);
@@ -120,19 +124,17 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
     @Override
     public void onStop() {
-        if (!isAvailable()) {
+        if (!mIsRegisterCallback) {
             return;
         }
         mCachedDevice.unregisterCallback(this);
         mBluetoothAdapter.removeOnMetadataChangedListener(mCachedDevice.getDevice(),
                 mMetadataListener);
+        mIsRegisterCallback = false;
     }
 
     @Override
     public void onDestroy() {
-        if (!isAvailable()) {
-            return;
-        }
         // Destroy icon bitmap associated with this header
         for (Bitmap bitmap : mIconCache.values()) {
             if (bitmap != null) {

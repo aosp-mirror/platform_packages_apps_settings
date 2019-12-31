@@ -490,8 +490,6 @@
     <string name="activity_picker_label">Choose activity</string>
     <!-- Do not translate. -->
     <string name="debug_intent_sender_label">Debug intent sender</string>
-    <!-- The title of the activity to see random device info. -->
-    <string name="device_info_label">Device info</string>
     <!-- The title of the activity to adjust display settings -->
     <string name="display_label">Screen</string>
     <!-- The title of the activity to adjust SD card settings [CHAR LIMIT=25] -->
@@ -1956,8 +1954,6 @@
     <string name="wifi_show_advanced">Advanced options</string>
     <!-- Message for talkback to say when focus on Advanced Options[CHAR LIMIT=NONE] -->
     <string name="wifi_advanced_toggle_description">Drop down list Advanced Options</string>
-    <!-- Extended message for talkback to say when Advanced Options is expanded. (e.g., Double-tap to collapse) [CHAR LIMIT=NONE] -->
-    <string name="wifi_advanced_toggle_description_expanded">collapse</string>
     <!-- Extended message for talkback to say when Advanced Options is collapsed. (e.g., Double-tap to expand) [CHAR LIMIT=NONE] -->
     <string name="wifi_advanced_toggle_description_collapsed">expand</string>
     <!-- Label for the SSID of the network -->
@@ -7319,6 +7315,8 @@
     <string name="keywords_wifi">wifi, wi-fi, network connection, internet, wireless, data, wi fi</string>
     <!-- Search keyword for "Open Network Notification" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_wifi_notify_open_networks">Wi\u2011Fi notification, wifi notification</string>
+    <!-- Search keyword for "Wi-fi data usage" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_wifi_data_usage">data usage</string>
     <!-- Search keyword for "Vibrate on touch" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_vibrate_on_touch">Stop vibration, tap, keyboard</string>
     <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
@@ -11214,9 +11212,6 @@
 
     <!-- Available networks screen, summary when button disallowed due to permanent automatic mode [CHAR LIMIT=NONE] -->
     <string name="manual_mode_disallowed_summary">Unavailable when connected to <xliff:g id="carrier" example="verizon">%1$s</xliff:g></string>
-
-    <!-- Used for EmergencyInfoSlice slice helper class [CHAR LIMIT=NONE]-->
-    <string name="emergency_info_contextual_card_summary">Medical info, emergency contacts</string>
 
     <!-- See more items in contextual homepage [CHAR LIMIT=30]-->
     <string name="see_more">See more</string>
