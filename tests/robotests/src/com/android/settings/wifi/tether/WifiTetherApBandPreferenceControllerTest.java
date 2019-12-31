@@ -35,7 +35,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -88,7 +87,6 @@ public class WifiTetherApBandPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void display_5GhzSupported_shouldDisplayFullList() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
         when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
@@ -128,7 +126,6 @@ public class WifiTetherApBandPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void changePreference_noDualModeWith5G_shouldUpdateValue() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
         when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
@@ -156,7 +153,6 @@ public class WifiTetherApBandPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void changePreference_dualModeWith5G_shouldUpdateValue() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
         when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
@@ -187,7 +183,6 @@ public class WifiTetherApBandPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateDisplay_shouldUpdateValue() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
         when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
