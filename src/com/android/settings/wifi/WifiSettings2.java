@@ -582,6 +582,16 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         mDialogWifiEntryKey = null;
     }
 
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case WIFI_DIALOG_ID:
+                return SettingsEnums.DIALOG_WIFI_AP_EDIT;
+            default:
+                return 0;
+        }
+    }
+
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged() {
