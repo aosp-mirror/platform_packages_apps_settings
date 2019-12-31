@@ -493,7 +493,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             // could only be disconnected and be put in blacklists so it won't be used again.
             if (mSelectedAccessPoint.isSaved() || mSelectedAccessPoint.isEphemeral()) {
                 final int stringId = mSelectedAccessPoint.isEphemeral() ?
-                    R.string.wifi_disconnect_button_text : R.string.forget;
+                        R.string.wifi_disconnect_button_text : R.string.forget;
                 menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, stringId);
             }
 
@@ -1210,28 +1210,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         ((AccessPointPreference) accessPoint.getTag()).onLevelChanged();
     }
 
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableRaw> result = new ArrayList<>();
-                    final Resources res = context.getResources();
-
-                    // Add fragment title if we are showing this fragment
-                    if (res.getBoolean(R.bool.config_show_wifi_settings)) {
-                        SearchIndexableRaw data = new SearchIndexableRaw(context);
-                        data.title = res.getString(R.string.wifi_settings);
-                        data.screenTitle = res.getString(R.string.wifi_settings);
-                        data.keywords = res.getString(R.string.keywords_wifi);
-                        data.key = DATA_KEY_REFERENCE;
-                        result.add(data);
-                    }
-
-                    return result;
-                }
-            };
-
     private void handleConfigNetworkSubmitEvent(Intent data) {
         final WifiConfiguration wifiConfiguration = data.getParcelableExtra(
                 ConfigureAccessPointFragment.NETWORK_CONFIG_KEY);
@@ -1257,4 +1235,42 @@ public class WifiSettings extends RestrictedSettingsFragment
                 .setResultListener(this, CONFIG_NETWORK_REQUEST)
                 .launch();
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.wifi_settings) {
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableRaw> result = new ArrayList<>();
+                    final Resources res = context.getResources();
+
+                    // Add fragment title if we are showing this fragment
+                    if (res.getBoolean(R.bool.config_show_wifi_settings)) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
+                        data.title = res.getString(R.string.wifi_settings);
+                        data.screenTitle = res.getString(R.string.wifi_settings);
+                        data.keywords = res.getString(R.string.keywords_wifi);
+                        data.key = DATA_KEY_REFERENCE;
+                        result.add(data);
+                    }
+                    return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+
+                    final WifiManager wifiManager = context.getSystemService(WifiManager.class);
+                    final List<AccessPoint> accessPoints = WifiSavedConfigUtils.getAllConfigs(
+                            context, wifiManager);
+                    if (accessPoints == null || accessPoints.size() <= 0) {
+                        keys.add(PREF_KEY_SAVED_NETWORKS);
+                    }
+
+                    if (!DataUsageUtils.hasWifiRadio(context)) {
+                        keys.add(PREF_KEY_DATA_USAGE);
+                    }
+                    return keys;
+                }
+            };
 }
