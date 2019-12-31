@@ -105,8 +105,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         // 2: no 5 GHZ support means we can't have BAND_5GHZ - default to 2GHZ
         // 3: With Dual mode support we can't have BAND_5GHZ only - include 2GHZ
         if (!isDualMode
-                && ((band & (SoftApConfiguration.BAND_5GHZ
-                | SoftApConfiguration.BAND_2GHZ)) != 0)) {
+                && ((band & SoftApConfiguration.BAND_5GHZ) != 0)
+                && ((band & SoftApConfiguration.BAND_2GHZ) != 0)) {
             return SoftApConfiguration.BAND_5GHZ;
         } else if (!is5GhzBandSupported() && SoftApConfiguration.BAND_5GHZ == band) {
             return SoftApConfiguration.BAND_2GHZ;
