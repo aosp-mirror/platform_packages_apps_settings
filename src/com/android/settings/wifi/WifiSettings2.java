@@ -76,11 +76,8 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
-import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback;
-import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.ConnectStatus;
-import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.DisconnectStatus;
-import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.ForgetStatus;
-import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.SignInStatus;
+import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
+import com.android.wifitrackerlib.WifiEntry.ConnectCallback.ConnectStatus;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.time.Clock;
@@ -504,7 +501,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 connect(mSelectedWifiEntry, true /* editIfNoConfig */, false /* fullScreenEdit */);
                 return true;
             case MENU_ID_DISCONNECT:
-                mSelectedWifiEntry.disconnect();
+                mSelectedWifiEntry.disconnect(null /* callback */);
                 return true;
             case MENU_ID_FORGET:
                 forget(mSelectedWifiEntry);
@@ -680,7 +677,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 mConnectedWifiEntryPreferenceCategory.addPreference(pref);
                 pref.setOnPreferenceClickListener(preference -> {
                     if (connectedEntry.canSignIn()) {
-                        connectedEntry.signIn();
+                        connectedEntry.signIn(null /* callback */);
                     } else {
                         launchNetworkDetailsFragment(pref);
                     }
@@ -908,7 +905,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     private void forget(WifiEntry wifiEntry) {
         mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
-        wifiEntry.forget();
+        wifiEntry.forget(null /* callback */);
     }
 
     private void connect(WifiEntry wifiEntry, boolean editIfNoConfig, boolean fullScreenEdit) {
@@ -916,11 +913,9 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 wifiEntry.isSaved());
 
         // If it's an unsaved secure WifiEntry, it will callback
-        // WifiEntryCallback#onConnectResult with
-        // WifiEntryCallback#CONNECT_STATUS_FAILURE_NO_CONFIG
-        wifiEntry.setListener(new WifiEntryConnectCallback(wifiEntry, editIfNoConfig,
+        // ConnectCallback#onConnectResult with ConnectCallback#CONNECT_STATUS_FAILURE_NO_CONFIG
+        wifiEntry.connect(new WifiEntryConnectCallback(wifiEntry, editIfNoConfig,
                 fullScreenEdit));
-        wifiEntry.connect();
     }
 
     private class WifiSaveThenConnectActionListener implements WifiManager.ActionListener {
@@ -986,7 +981,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 }
             };
 
-    private class WifiEntryConnectCallback implements WifiEntryCallback {
+    private class WifiEntryConnectCallback implements ConnectCallback {
         final WifiEntry mConnectWifiEntry;
         final boolean mEditIfNoConfig;
         final boolean mFullScreenEdit;
@@ -999,18 +994,13 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         }
 
         @Override
-        public void onUpdated() {
-            // Do nothing.
-        }
-
-        @Override
         public void onConnectResult(@ConnectStatus int status) {
             final Activity activity = getActivity();
             if (isFisishingOrDestroyed(activity)) {
                 return;
             }
 
-            if (status == WifiEntryCallback.CONNECT_STATUS_FAILURE_NO_CONFIG) {
+            if (status == ConnectCallback.CONNECT_STATUS_FAILURE_NO_CONFIG) {
                 if (mEditIfNoConfig) {
                     // Edit an unsaved secure Wi-Fi network.
                     if (mFullScreenEdit) {
@@ -1032,21 +1022,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 Toast.makeText(getContext(), R.string.wifi_failed_connect_message,
                         Toast.LENGTH_SHORT).show();
             }
-        }
-
-        @Override
-        public void onDisconnectResult(@DisconnectStatus int status) {
-            // Do nothing.
-        }
-
-        @Override
-        public void onForgetResult(@ForgetStatus int status) {
-            // Do nothing.
-        }
-
-        @Override
-        public void onSignInResult(@SignInStatus int status) {
-            // Do nothing.
         }
     }
 
