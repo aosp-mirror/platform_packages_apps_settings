@@ -29,9 +29,6 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.display.AdaptiveSleepPreferenceController;
 import com.android.settings.flashlight.FlashlightSlice;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
-import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
 import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
@@ -116,34 +113,6 @@ public class CustomSliceRegistry {
             .authority(SettingsSlicesContract.AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("contextual_wifi")
-            .build();
-
-    /**
-     * Backing Uri for the Data usage Slice.
-     */
-    public static final Uri DATA_USAGE_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("data_usage_card")
-            .build();
-    /**
-     * Backing Uri for the Device info Slice.
-     */
-    public static final Uri DEVICE_INFO_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
-            .appendPath("device_info_card")
-            .build();
-    /**
-     * Backing Uri for the Emergency Info Slice.
-     */
-    public static final Uri EMERGENCY_INFO_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
-            .appendPath("emergency_info_card")
             .build();
     /**
      * Slice Uri for Enhanced 4G slice
@@ -355,9 +324,6 @@ public class CustomSliceRegistry {
         sUriToSlice.put(CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI,
                 ContextualNotificationChannelSlice.class);
         sUriToSlice.put(CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
-        sUriToSlice.put(DATA_USAGE_SLICE_URI, DataUsageSlice.class);
-        sUriToSlice.put(DEVICE_INFO_SLICE_URI, DeviceInfoSlice.class);
-        sUriToSlice.put(EMERGENCY_INFO_SLICE_URI, EmergencyInfoSlice.class);
         sUriToSlice.put(FACE_ENROLL_SLICE_URI, FaceSetupSlice.class);
         sUriToSlice.put(FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
         sUriToSlice.put(LOCATION_SLICE_URI, LocationSlice.class);

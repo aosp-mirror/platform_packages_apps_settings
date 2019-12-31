@@ -31,7 +31,6 @@ import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
-import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 
@@ -66,14 +65,6 @@ public class EligibleCardCheckerTest {
     }
 
     @Test
-    public void isSliceToggleable_cardWithoutToggle_returnFalse() {
-        final EmergencyInfoSlice emergencyInfoSlice = new EmergencyInfoSlice(mContext);
-        final Slice slice = emergencyInfoSlice.getSlice();
-
-        assertThat(mEligibleCardChecker.isSliceToggleable(slice)).isFalse();
-    }
-
-    @Test
     public void isCardEligibleToDisplay_toggleSlice_hasInlineActionShouldBeTrue() {
         final ContextualWifiSlice wifiSlice = new ContextualWifiSlice(mContext);
         final Slice slice = wifiSlice.getSlice();
@@ -82,17 +73,6 @@ public class EligibleCardCheckerTest {
         mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI));
 
         assertThat(mEligibleCardChecker.mCard.hasInlineAction()).isTrue();
-    }
-
-    @Test
-    public void isCardEligibleToDisplay_notToggleSlice_hasInlineActionShouldBeFalse() {
-        final EmergencyInfoSlice emergencyInfoSlice = new EmergencyInfoSlice(mContext);
-        final Slice slice = emergencyInfoSlice.getSlice();
-        doReturn(slice).when(mEligibleCardChecker).bindSlice(any(Uri.class));
-
-        mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI));
-
-        assertThat(mEligibleCardChecker.mCard.hasInlineAction()).isFalse();
     }
 
     @Test
