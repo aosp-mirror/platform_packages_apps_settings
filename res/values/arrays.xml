@@ -23,19 +23,19 @@
          strings. --> <skip />
     <!-- The time zone picker screen has two levels.  The first level allows the user to choose a region. -->
     <string-array name="timezone_filters">
-    <!-- The next level of the time zoner picker should show time zones from the Americas. -->
+        <!-- The next level of the time zoner picker should show time zones from the Americas. -->
         <item>America</item>
-    <!-- The next level of the time zoner picker should show time zones from Europe. -->
+        <!-- The next level of the time zoner picker should show time zones from Europe. -->
         <item>Europe</item>
-    <!-- The next level of the time zoner picker should show time zones from Africa. -->
+        <!-- The next level of the time zoner picker should show time zones from Africa. -->
         <item>Africa</item>
-    <!-- The next level of the time zoner picker should show time zones from Asia. -->
+        <!-- The next level of the time zoner picker should show time zones from Asia. -->
         <item>Asia</item>
-    <!-- The next level of the time zoner picker should show time zones from Australia. -->
+        <!-- The next level of the time zoner picker should show time zones from Australia. -->
         <item>Australia</item>
-    <!-- The next level of the time zoner picker should show time zones from Pacific. -->
+        <!-- The next level of the time zoner picker should show time zones from Pacific. -->
         <item>Pacific</item>
-    <!-- The next level of the time zoner picker should show time zones from ALL regions. -->
+        <!-- The next level of the time zoner picker should show time zones from ALL regions. -->
         <item>All</item>
     </string-array>
 
@@ -274,8 +274,8 @@
         <item>Require all non-trusted certificate statuses</item>
     </string-array>
 
-   <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array translatable="false" name="wifi_ap_band_config_full">
         <item>1</item>
         <item>2</item>
@@ -301,8 +301,8 @@
         <item>@string/wifi_ap_choose_2G</item>
     </string-array>
 
-   <!-- Wi-Fi WPS setup for p2p connections.  -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Wi-Fi WPS setup for p2p connections.  -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_p2p_wps_setup">
         <!-- Push button based configuration involves pushing a button on two connecting devices [CHAR LIMIT=30]-->
         <item>Push button</item>
@@ -320,7 +320,7 @@
         <item>Unsuccessful</item>
         <item>Available</item>
         <item>Out-of-range</item>
-   </string-array>
+    </string-array>
 
 
     <!-- Bluetooth Settings -->
@@ -410,7 +410,7 @@
     </string-array>
 
     <!-- Wi-Fi IP settings. -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ip_settings">
         <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR LIMIT=25] -->
         <item>DHCP</item>
@@ -1432,15 +1432,15 @@
 
     <!-- WiFi calling mode array -->
     <string-array name="wifi_calling_mode_summaries" translatable="false">
-         <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
-         <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
-         <item>@string/wifi_calling_mode_wifi_only_summary</item>
+        <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
+        <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
+        <item>@string/wifi_calling_mode_wifi_only_summary</item>
     </string-array>
 
     <!-- WiFi calling mode array without wifi only mode -->
     <string-array name="wifi_calling_mode_summaries_without_wifi_only" translatable="false">
-         <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
-         <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
+        <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
+        <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
     </string-array>
 
     <!-- Carrier variant of Enhaced 4G LTE Mode title.  [CHAR LIMIT=NONE] -->
@@ -1469,4 +1469,27 @@
         <item>"com.google.android.googlequicksearchbox"</item>
     </string-array>
 
+    <!-- Array of titles palette list for accessibility. -->
+    <string-array name="setting_palette_colors" translatable="false" >
+        <item>@string/color_red</item>
+        <item>@string/color_orange</item>
+        <item>@string/color_yellow</item>
+        <item>@string/color_green</item>
+        <item>@string/color_cyan</item>
+        <item>@string/color_blue</item>
+        <item>@string/color_purple</item>
+        <item>@string/color_pink</item>
+    </string-array>
+
+    <!-- Values for palette list view preference. -->
+    <array name="setting_palette_data" translatable="false" >
+        <item>@color/palette_list_color_red</item>
+        <item>@color/palette_list_color_orange</item>
+        <item>@color/palette_list_color_yellow</item>
+        <item>@color/palette_list_color_green</item>
+        <item>@color/palette_list_color_cyan</item>
+        <item>@color/palette_list_color_blue</item>
+        <item>@color/palette_list_color_purple</item>
+        <item>@color/palette_list_color_pink</item>
+    </array>
 </resources>
