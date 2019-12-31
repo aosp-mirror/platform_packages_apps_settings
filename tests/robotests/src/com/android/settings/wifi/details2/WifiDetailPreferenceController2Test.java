@@ -1303,22 +1303,35 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void testConnectButton_shouldInvisibleForConnectNetwork() {
+    public void testDisconnectButton_connectedNetwork_shouldVisible() {
         setUpForConnectedNetwork();
+        when(mMockWifiEntry.getLevel()).thenReturn(WifiEntry.WIFI_LEVEL_MAX);
 
         displayAndResume();
 
-        verify(mMockButtonsPref, times(1)).setButton3Visible(false);
+        verify(mMockButtonsPref).setButton3Visible(true);
+        verify(mMockButtonsPref).setButton3Text(R.string.wifi_disconnect);
     }
 
     @Test
-    public void testConnectButton_shouldVisibleForDisconnectNetwork() {
+    public void testConnectButton_disconnectedNetwork_shouldVisibleIfReachable() {
         setUpForDisconnectedNetwork();
+        when(mMockWifiEntry.getLevel()).thenReturn(WifiEntry.WIFI_LEVEL_MAX);
 
         displayAndResume();
 
-        verify(mMockButtonsPref, times(1)).setButton3Visible(true);
-        verify(mMockButtonsPref, times(1)).setButton3Text(R.string.wifi_connect);
+        verify(mMockButtonsPref).setButton3Visible(true);
+        verify(mMockButtonsPref).setButton3Text(R.string.wifi_connect);
+    }
+
+    @Test
+    public void testConnectButton_disconnectedNetwork_shouldInvisibleIfUnreachable() {
+        setUpForDisconnectedNetwork();
+        when(mMockWifiEntry.getLevel()).thenReturn(WifiEntry.WIFI_LEVEL_UNREACHABLE);
+
+        displayAndResume();
+
+        verify(mMockButtonsPref).setButton3Visible(false);
     }
 
     private void setUpForToast() {
@@ -1337,11 +1350,11 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
-        // check connect button exist
-        verifyConnectBtnSetUpAsVisible(inOrder);
+        // check connect button enabled
+        verifyConnectBtnSetUpAsEnabled(inOrder);
 
         // click connect button
-        mController.connectNetwork();
+        mController.connectDisconnectNetwork();
 
         // check display button as connecting
         verify(mMockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
@@ -1352,7 +1365,7 @@ public class WifiDetailPreferenceController2Test {
 
         // check connect button invisible, be init as default state and toast success message
         verifyConnectBtnBeInitAsDefault(inOrder);
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Visible(false);
+        inOrder.verify(mMockButtonsPref).setButton3Enabled(false);
         assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
                 mContext.getString(R.string.wifi_connected_to_message, label));
     }
@@ -1368,11 +1381,11 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
-        // check connect button exist
-        verifyConnectBtnSetUpAsVisible(inOrder);
+        // check connect button enabled
+        verifyConnectBtnSetUpAsEnabled(inOrder);
 
         // click connect button
-        mController.connectNetwork();
+        mController.connectDisconnectNetwork();
 
         // check display button as connecting
         verify(mMockWifiManager, times(1)).connect(anyInt(), connectListenerCaptor.capture());
@@ -1383,26 +1396,26 @@ public class WifiDetailPreferenceController2Test {
 
         // check connect button visible, be init as default and toast failed message
         verifyConnectBtnBeInitAsDefault(inOrder);
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Visible(true);
+        inOrder.verify(mMockButtonsPref).setButton3Enabled(true);
         assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
                 mContext.getString(R.string.wifi_failed_connect_message));
     }
 
-    private void verifyConnectBtnSetUpAsVisible(InOrder inOrder) {
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Text(R.string.wifi_connect);
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Icon(R.drawable.ic_settings_wireless);
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Visible(true);
+    private void verifyConnectBtnSetUpAsEnabled(InOrder inOrder) {
+        inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mMockButtonsPref).setButton3Icon(R.drawable.ic_settings_wireless);
+        inOrder.verify(mMockButtonsPref).setButton3Enabled(true);
     }
 
     private void verifyConnectBtnSetUpAsConnecting(InOrder inOrder) {
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Text(R.string.wifi_connecting);
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Enabled(false);
+        inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_connecting);
+        inOrder.verify(mMockButtonsPref).setButton3Enabled(false);
     }
 
     private void verifyConnectBtnBeInitAsDefault(InOrder inOrder) {
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Text(R.string.wifi_connect);
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Icon(R.drawable.ic_settings_wireless);
-        inOrder.verify(mMockButtonsPref, times(1)).setButton3Enabled(true);
+        inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mMockButtonsPref).setButton3Icon(R.drawable.ic_settings_wireless);
+        inOrder.verify(mMockButtonsPref).setButton3Enabled(true);
     }
 
     @Test
