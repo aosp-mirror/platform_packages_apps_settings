@@ -56,6 +56,11 @@ public class FaceSettings extends DashboardFragment {
     private static final String TAG = "FaceSettings";
     private static final String KEY_TOKEN = "hw_auth_token";
 
+    private static final String PREF_KEY_DELETE_FACE_DATA =
+            "security_settings_face_delete_faces_container";
+    private static final String PREF_KEY_ENROLL_FACE_UNLOCK =
+            "security_settings_face_enroll_faces_container";
+
     private UserManager mUserManager;
     private FaceManager mFaceManager;
     private int mUserId;
@@ -309,6 +314,15 @@ public class FaceSettings extends DashboardFragment {
                 protected boolean isPageSearchEnabled(Context context) {
                     return isAvailable(context);
                 }
-            };
 
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    final FaceManager faceManager = context.getSystemService(FaceManager.class);
+                    final boolean hasEnrolled = faceManager.hasEnrolledTemplates(
+                            UserHandle.myUserId());
+                    keys.add(hasEnrolled ? PREF_KEY_ENROLL_FACE_UNLOCK : PREF_KEY_DELETE_FACE_DATA);
+                    return keys;
+                }
+            };
 }

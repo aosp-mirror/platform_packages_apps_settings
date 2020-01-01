@@ -142,6 +142,19 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     private String mDialogWifiEntryKey;
     private WifiEntry mDialogWifiEntry;
 
+    // This boolean extra specifies whether to enable the Next button when connected. Used by
+    // account creation outside of setup wizard.
+    private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
+
+    // Enable the Next button when a Wi-Fi network is connected.
+    private boolean mEnableNextOnConnection;
+
+    // This string extra specifies a network to open the connect dialog on, so the user can enter
+    // network credentials.  This is used by quick settings for secured networks, among other
+    // things.
+    private static final String EXTRA_START_CONNECT_SSID = "wifi_start_connect_ssid";
+    private String mOpenSsid;
+
     private static boolean isVerboseLoggingEnabled() {
         return WifiPickerTracker.isVerboseLoggingEnabled();
     }
@@ -329,6 +342,15 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 }
             }
         }
+
+        // If we're supposed to enable/disable the Next button based on our current connection
+        // state, start it off in the right state.
+        final Intent intent = getActivity().getIntent();
+        mEnableNextOnConnection = intent.getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
+
+        if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
+            mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
+        }
     }
 
     @Override
@@ -383,6 +405,23 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         if (mWifiEnabler != null) {
             mWifiEnabler.resume(activity);
+        }
+
+        changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
+
+        // Edit the Wi-Fi network of specified SSID.
+        if (mOpenSsid != null) {
+            Optional<WifiEntry> matchedWifiEntry = mWifiPickerTracker.getWifiEntries().stream()
+                    .filter(wifiEntry -> TextUtils.equals(mOpenSsid, wifiEntry.getSsid()))
+                    .filter(wifiEntry -> wifiEntry.getSecurity() != WifiEntry.SECURITY_NONE
+                            && wifiEntry.getSecurity() != WifiEntry.SECURITY_OWE)
+                    .filter(wifiEntry -> !wifiEntry.isSaved()
+                            || isDisabledByWrongPassword(wifiEntry))
+                    .findFirst();
+            if (matchedWifiEntry.isPresent()) {
+                mOpenSsid = null;
+                launchConfigNewNetworkFragment(matchedWifiEntry.get());
+            }
         }
     }
 
@@ -626,6 +665,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     @Override
     public void onWifiEntriesChanged() {
         updateWifiEntryPreferencesDelayed();
+        changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
     }
 
     @Override
@@ -882,6 +922,19 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         return R.string.help_url_wifi;
     }
 
+    /**
+     * Renames/replaces "Next" button when appropriate. "Next" button usually exists in
+     * Wi-Fi setup screens, not in usual wifi settings screen.
+     *
+     * @param enabled true when the device is connected to a wifi network.
+     */
+    @VisibleForTesting
+    void changeNextButtonState(boolean enabled) {
+        if (mEnableNextOnConnection && hasNextButton()) {
+            getNextButton().setEnabled(enabled);
+        }
+    }
+
     @Override
     public void onForget(WifiDialog2 dialog) {
         forget(mDialogWifiEntry);
@@ -1014,16 +1067,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 if (mEditIfNoConfig) {
                     // Edit an unsaved secure Wi-Fi network.
                     if (mFullScreenEdit) {
-                        final Bundle bundle = new Bundle();
-                        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY,
-                                mConnectWifiEntry.getKey());
-                        new SubSettingLauncher(getContext())
-                                .setTitleText(mConnectWifiEntry.getTitle())
-                                .setDestination(ConfigureWifiEntryFragment.class.getName())
-                                .setArguments(bundle)
-                                .setSourceMetricsCategory(getMetricsCategory())
-                                .setResultListener(WifiSettings2.this, CONFIG_NETWORK_REQUEST)
-                                .launch();
+                        launchConfigNewNetworkFragment(mConnectWifiEntry);
                     } else {
                         showDialog(mConnectWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
                     }
@@ -1052,5 +1096,33 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     private boolean isFisishingOrDestroyed(Activity activity) {
         return activity == null || activity.isFinishing() || activity.isDestroyed();
+    }
+
+    private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
+        final Bundle bundle = new Bundle();
+        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY,
+                wifiEntry.getKey());
+        new SubSettingLauncher(getContext())
+                .setTitleText(wifiEntry.getTitle())
+                .setDestination(ConfigureWifiEntryFragment.class.getName())
+                .setArguments(bundle)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .setResultListener(WifiSettings2.this, CONFIG_NETWORK_REQUEST)
+                .launch();
+    }
+
+    /** Helper method to return whether an WifiEntry is disabled due to a wrong password */
+    private static boolean isDisabledByWrongPassword(WifiEntry wifiEntry) {
+        WifiConfiguration config = wifiEntry.getWifiConfiguration();
+        if (config == null) {
+            return false;
+        }
+        WifiConfiguration.NetworkSelectionStatus networkStatus =
+                config.getNetworkSelectionStatus();
+        if (networkStatus == null || networkStatus.isNetworkEnabled()) {
+            return false;
+        }
+        int reason = networkStatus.getNetworkSelectionDisableReason();
+        return WifiConfiguration.NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD == reason;
     }
 }
