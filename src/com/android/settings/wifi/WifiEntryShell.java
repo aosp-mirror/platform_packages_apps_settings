@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi;
 
-import android.net.wifi.WifiConfiguration;
-
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -51,20 +49,6 @@ public class WifiEntryShell {
     public static final int HIGHER_FREQ_5GHZ = 5900;
 
     /**
-     * Mapping of the corresponding {@link WifiConfiguration} field
-     */
-    public static int getNetworkId(WifiEntry wifiEntry) {
-        return 0;
-    }
-
-    /**
-     * Mapping of the corresponding {@link WifiConfiguration} field
-     */
-    public static boolean hiddenSSID(WifiEntry wifiEntry) {
-        return false;
-    }
-
-    /**
      * Mapping of the corresponding {@link AccessPoint} method
      */
     public static String getSecurityString(WifiEntry wifiEntry, boolean concise) {
@@ -72,13 +56,6 @@ public class WifiEntryShell {
     }
 
     // Passpoint methods
-
-    /**
-     * Mapping of the corresponding {@link AccessPoint} method
-     */
-    public static boolean isPasspoint(WifiEntry wifiEntry) {
-        return false;
-    }
 
     /**
      * Mapping of the corresponding {@link AccessPoint} method
