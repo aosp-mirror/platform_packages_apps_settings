@@ -26,6 +26,8 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.network.GlobalSettingsChangeListener;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.overlay.FeatureFactory;
@@ -57,8 +59,8 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
     }
 
     private TelephonyManager mTelephonyManager;
-    private ProxySubscriptionManager mProxySubscriptionMgr;
-    private PhoneStateListener mPhoneStateListener;
+    @VisibleForTesting
+    PhoneStateListener mPhoneStateListener;
 
     private GlobalSettingsChangeListener mAirplaneModeObserver;
 
@@ -70,7 +72,6 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         mOnAirplaneModeChangedListener = listener;
 
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
 
         mPhoneStateListener = new PhoneStateListener() {
             @Override
@@ -143,7 +144,7 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
             return true;
         }
         final List<SubscriptionInfo> subInfoList =
-                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
+                ProxySubscriptionManager.getInstance(mContext).getActiveSubscriptionsInfo();
         if (subInfoList == null) {
             return false;
         }
