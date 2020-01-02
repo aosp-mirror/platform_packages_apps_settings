@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -83,7 +81,7 @@ public class AccessibilityGestureNavigationTutorial {
         final AlertDialog alertDialog = createDialog(context,
                 DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_BUTTON);
 
-        if (!isGestureNavigateEnabled(context)) {
+        if (!AccessibilityUtil.isGestureNavigateEnabled(context)) {
             updateMessageWithIcon(context, alertDialog);
         }
 
@@ -204,12 +202,6 @@ public class AccessibilityGestureNavigationTutorial {
         final int colorResId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
         return colorResId;
-    }
-
-    private static boolean isGestureNavigateEnabled(Context context) {
-        return context.getResources().getInteger(
-                com.android.internal.R.integer.config_navBarInteractionMode)
-                == NAV_BAR_MODE_GESTURAL;
     }
 
     private static boolean isTouchExploreOn(Context context) {

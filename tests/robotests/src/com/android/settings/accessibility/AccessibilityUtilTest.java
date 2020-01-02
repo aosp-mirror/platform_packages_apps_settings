@@ -54,6 +54,16 @@ public final class AccessibilityUtilTest {
     }
 
     @Test
+    public void capitalize_shouldReturnCapitalizedString() {
+        assertThat(AccessibilityUtil.capitalize(null)).isNull();
+        assertThat(AccessibilityUtil.capitalize("")).isEmpty();
+        assertThat(AccessibilityUtil.capitalize("Hans")).isEqualTo("Hans");
+        assertThat(AccessibilityUtil.capitalize("hans")).isEqualTo("Hans");
+        assertThat(AccessibilityUtil.capitalize(",hans")).isEqualTo(",hans");
+        assertThat(AccessibilityUtil.capitalize("Hans, Hans")).isEqualTo("Hans, hans");
+    }
+
+    @Test
     public void getSummary_hasValueAndEqualsToOne_shouldReturnOnString() {
         Settings.Secure.putInt(mContext.getContentResolver(), SECURE_TEST_KEY, ON);
 
@@ -90,7 +100,6 @@ public final class AccessibilityUtilTest {
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
                 AccessibilityUtil.AccessibilityServiceFragmentType.LEGACY);
-
     }
 
     @Test
@@ -102,7 +111,6 @@ public final class AccessibilityUtilTest {
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
                 AccessibilityUtil.AccessibilityServiceFragmentType.INVISIBLE);
-
     }
 
     @Test
@@ -114,7 +122,6 @@ public final class AccessibilityUtilTest {
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
                 AccessibilityUtil.AccessibilityServiceFragmentType.INTUITIVE);
-
     }
 
 

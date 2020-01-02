@@ -21,6 +21,8 @@ import android.view.View;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
+
 /** For accessibility services that target SDK <= Q. */
 public class LegacyAccessibilityServicePreferenceFragment extends
         ToggleAccessibilityServicePreferenceFragment {
@@ -29,10 +31,13 @@ public class LegacyAccessibilityServicePreferenceFragment extends
         super.onViewCreated(view, savedInstanceState);
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        final ShortcutPreference preference = preferenceScreen.findPreference(
+        final ShortcutPreference shortcutPreference = preferenceScreen.findPreference(
                 getShortcutPreferenceKey());
-        if (preference != null) {
-            preference.setSettingsVisibility(View.GONE);
+        if (shortcutPreference != null) {
+            final CharSequence hardwareTitle = getPrefContext().getText(
+                    R.string.accessibility_shortcut_edit_dialog_title_hardware);
+            shortcutPreference.setSummary(hardwareTitle);
+            shortcutPreference.setSettingsVisibility(View.GONE);
         }
     }
 }
