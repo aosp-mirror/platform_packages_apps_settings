@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
@@ -81,6 +82,12 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
                     ((Boolean) o) ? 1 : 0);
             return true;
         });
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mShortcutPreference.setVisible(false);
     }
 
     @Override
