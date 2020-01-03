@@ -216,7 +216,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"Lëvize në fund"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Hiq gjuhën"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Zgjidh aktivitetin"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"Informacioni i pajisjes"</string>
     <string name="display_label" msgid="3056320781191343221">"Ekrani"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"Hapësira për ruajtje e USB-së"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"Karta SD"</string>
@@ -767,17 +766,19 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Trokit këtu për t\'u identifikuar në rrjet"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> kërkon të aktivizojë Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> kërkon të çaktivizojë Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Verifiko kodin me bajte për apl. e korrigjueshme"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Lejo që ART të verifikojë kodin me bajte për aplikacionet e korrigjueshme"</string>
-    <!-- no translation found for show_refresh_rate (5742688821872354973) -->
-    <skip />
-    <!-- no translation found for show_refresh_rate_summary (3558118122374609663) -->
-    <skip />
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Shfaq shpejtësinë e rifreskimit"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Shfaq shpejtësinë aktuale të rifreskimit të ekranit"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Lejo shkëmbimin e të dhënave kur tableti prek një tjetër pajisje"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Lejo shkëmbimin e të dhënave kur telefoni prek një tjetër pajisje"</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Aktivizo NFC-në"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"Të dhënat e shkëmbimit NFC mes kësaj pajisjeje dhe pajisjeve ose objektivave të tjera në afërsi, siç janë terminalet e pagesave, lexuesit e qasjes dhe reklamat apo etiketat interaktive."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"NFC-ja e sigurt"</string>
@@ -855,7 +856,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Skanimi i Wi‑Fi është aktivizuar"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opsionet e përparuara"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Opsionet e përparuara të listës me lëshim poshtë"</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"palos"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"zgjero"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Emri i rrjetit"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Fut SSID-në"</string>
@@ -866,6 +866,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Statusi"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Shpejtësia e lidhjes së transmetimit"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Merr shpejtësinë e lidhjes"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"Shpejtësia e lidhjes"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Frekuenca"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"Adresa e IP-së"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"U ruajt me"</string>
@@ -905,12 +906,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Sigurohu që pajisja është në prizë, e karikuar dhe e ndezur"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Sigurohu që pajisja është në prizë, e karikuar dhe e ndezur. Nëse problemi vazhdon, kontakto me prodhuesin e pajisjes"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Shtimi i “<xliff:g id="SSID">%1$s</xliff:g>” nuk mbështetet nga kjo pajisje"</string>
-    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
-    <skip />
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"Provo ta lëvizësh pajisjen më pranë pikës së qasjes Wi‑Fi/router-it"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Kontrollo fjalëkalimin dhe provo përsëri"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Kontakto me prodhuesin e pajisjes"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Kontrollo lidhjen dhe provo përsëri"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Zgjidh rrjetin"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Për të lidhur pajisjen, zgjidh një rrjet"</string>
@@ -1571,6 +1569,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Rivendosja e cilësimeve të APN-së me parazgjedhje përfundoi."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Opsionet e rivendosjes"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Rrjeti, aplikacionet ose pajisja mund të rivendosen"</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Aplikacionet mund të rivendosen"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Rivendos Wi-Fi, lidhjen celulare dhe Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Kjo do të rivendosë të gjitha cilësimet e rrjetit, duke përfshirë:\n\n"<li>"Wi‑Fi"</li>\n<li>"Të dhënat celulare"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Spastro kartat SIM të shkarkuara"</string>
@@ -2056,26 +2055,16 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Trokit artikujt në ekran për t\'i dëgjuar të lexuar me zë të lartë"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferencat e titrave"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Zmadhimi"</string>
-    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
-    <skip />
+    <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Zona e zmadhimit"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Zgjidh zonën(at) e zmadhimit që dëshiron të përdorësh kur zmadhon ekranin"</string>
+    <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Ekrani i plotë"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Një pjesë e ekranit"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Ekrani i plotë dhe një pjesë e ekranit"</string>
+    <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Zmadho të gjithë ekranin"</string>
+    <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Zmadho një pjesë të ekranit"</string>
+    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Shfaq kontrolluesin e zhvendosjes"</string>
+    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Shfaq një kontrollues si dorezë për të zhvendosur zonën e zmadhimit"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Cilësimet e zmadhimit"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Zmadho me tre trokitje"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Zmadho me shkurtore"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Zmadho me shkurtore dhe tri trokitje"</string>
@@ -2093,16 +2082,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Për të aktivizuar ose çaktivizuar një shërbim qasshmërie, rrëshqit shpejt lart nga fundi i ekranit me dy gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me dy gishta dhe mbaje prekur."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Për të aktivizuar ose çaktivizuar një shërbim qasshmërie, rrëshqit shpejt lart nga fundi i ekranit me tre gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me tre gishta dhe mbaje prekur."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"E kuptova"</string>
-    <!-- no translation found for accessibility_shortcut_title (7219851818023989864) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_shortcut_title (3850925633238639131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title (4922086411442295974) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_magnification (9029389159199076646) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_daltonizer (2875485140645140606) -->
-    <skip />
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Përdor shkurtoren për ta hapur"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Përdor shkurtoren për të zmadhuar"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Shkurtorja për të hapur <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Shkurtorja për te zmadhimi"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Shkurtorja për të hapur \"Korrigjimin e ngjyrave\""</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Butoni i qasshmërisë"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Rrëshqitja shpejt lart me 2 gishta nga poshtë"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Trokit te butoni <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> në fund të ekranit"</string>
@@ -2139,7 +2123,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Zgjidh se për sa kohë të shfaqen mesazhet që të kërkojnë të kryesh një veprim, por që janë të dukshme vetëm përkohësisht.\n\nKy cilësim nuk mbështetet nga të gjitha aplikacionet."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Vonesa e prekjes dhe e mbajtjes shtypur"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Kthimi i ngjyrës"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"Mund të ndikojë te cilësia e funksionimit"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Anasill ngjyrat"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Errëso ekranet e ndritshme që personat e ndjeshëm ndaj dritës së fortë të mund të kenë një përvojë më të mirë me shikimin.\n\nShënim. Ngjyrat e errëta do të bëhen të çelura. Imazhet do të ndërrojnë po ashtu ngjyrat."</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Koha e qëndrimit pa lëvizur"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Nëse po përdor një mi, mund të caktosh që kursori të kryejë automatikisht një veprim kur ai të ndalojë lëvizjen për një kohë të caktuar."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Vonesa përpara klikimit"</string>
@@ -2149,7 +2134,10 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Reagimi me prekje"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Përdor <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Përdor korrigjimin e ngjyrave"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Përdor titrat"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Shfaq titrat"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Paraqitja e titrave"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Madhësia e tekstit, stili i titrave"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Opsione të tjera"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Jo të gjitha aplikacionet e mbështesin këtë cilësim."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Butoni i qasshmërisë"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Rrëshqitja shpejt lart me 2 gishta nga poshtë"</string>
@@ -3139,6 +3127,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"Cilësimet"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, lidhja e rrjetit, internet, pa tel, të dhëna, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Njoftimi i Wi‑Fi, njoftimi i wifi"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Ndalo dridhjet, trokit, tastiera"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Përdor formatin 24-orësh"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Shkarko"</string>
@@ -3394,18 +3384,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Njoftimet me përshtatje"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Përparësia e njoftimeve me përshtatje"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Caktoji automatikisht njoftimet me prioritet më të ulët te \"Me rëndësi të ulët\""</string>
-    <!-- no translation found for asst_capability_ranking_title (312998580233257581) -->
-    <skip />
-    <!-- no translation found for asst_capability_ranking_summary (2293524677144599450) -->
-    <skip />
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Renditja e njoftimeve me përshtatje"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Rendit automatikisht njoftimet sipas përshtatshmërisë"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Veprimet dhe përgjigjet e sugjeruara"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Shfaq automatikisht veprimet dhe përgjigjet e sugjeruara"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Lejo shtyrjen e njoftimeve"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Fshih ikonat nga njoftimet me rëndësi të ulët"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Ikonat nga njoftimet me rëndësi të ulët nuk shfaqen në shiritin e statusit"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Lejo pikat e njoftimeve"</string>
-    <!-- no translation found for notification_people_strip_title (1185857822541001139) -->
-    <skip />
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Shfaq shiritin e bisedave të fundit"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Flluskat"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Disa njoftime mund të shfaqen si flluska në ekran"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Disa njoftime dhe përmbajtje të tjera mund të shfaqen si flluska në ekran. Për ta hapur një flluskë, trokit tek ajo. Për ta hequr, zvarrite poshtë në ekran."</string>
@@ -4253,17 +4240,12 @@
     <string name="information_label" msgid="6939310810756569298">"Informacione"</string>
     <string name="low_label" msgid="6525629096999711220">"I ulët"</string>
     <string name="high_label" msgid="357503396626018487">"I lartë"</string>
-    <!-- no translation found for left_edge (1513576842959071849) -->
-    <skip />
-    <!-- no translation found for right_edge (1505309103265829121) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (6638367716784103306) -->
-    <skip />
+    <string name="left_edge" msgid="1513576842959071849">"Skaji i majtë"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Skaji i djathtë"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Ndjeshmëria më e lartë mund të jetë në konflikt me gjestet e aplikacionit përgjatë anëve të ekranit."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Ndjeshmëria e kthimit pas"</string>
-    <!-- no translation found for gesture_settings_activity_title (6047431928567911330) -->
-    <skip />
-    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
-    <skip />
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Cilësimet e gjestit"</string>
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigimi me gjeste, ndjeshmëria e kthimit prapa, gjesti i kthimit prapa"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Trokit dy herë për të kontrolluar telefonin"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Trokit dy herë për të kontrolluar tabletin"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Trokit dy herë për të kontrolluar pajisjen"</string>
@@ -4610,7 +4592,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Regjim i pavlefshëm i rrjetit <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Shpërfille."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Emrat e pikës së qasjes"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nuk ofrohet kur është e lidhur me <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Informacioni mjekësor, kontaktet e urgjencës"</string>
     <string name="see_more" msgid="7499355691042812723">"Shiko më shumë"</string>
     <string name="see_less" msgid="2642392725363552793">"Shiko më pak"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Pajisja që do të përdoret me <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
@@ -4701,18 +4682,12 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informacioni i politikës sate të punës"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Cilësimet menaxhohen nga administratori yt i TI-së"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for bug_report_handler_title (713439959113250125) -->
-    <skip />
-    <!-- no translation found for bug_report_handler_picker_footer_text (4935758328366585673) -->
-    <skip />
-    <!-- no translation found for personal_profile_app_subtext (5586060806997067676) -->
-    <skip />
-    <!-- no translation found for work_profile_app_subtext (5043419461440127879) -->
-    <skip />
-    <!-- no translation found for system_default_app_subtext (5212055189703164839) -->
-    <skip />
-    <!-- no translation found for select_invalid_bug_report_handler_toast_text (8857326334015386692) -->
-    <skip />
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Administruesi i raportit të gabimeve në kod"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Përcakton se cili aplikacion administron shkurtoren e \"Raportit të defekteve në kod\" në pajisjen tënde."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Puna"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Parazgjedhja e sistemit"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Kjo zgjedhje nuk është më e vlefshme. Provo përsëri."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

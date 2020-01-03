@@ -216,7 +216,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"Ganz nach unten"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Sprache entfernen"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Aktivität auswählen"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"Geräteinfo"</string>
     <string name="display_label" msgid="3056320781191343221">"Display"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"USB-Speicher"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"SD-Karte"</string>
@@ -768,15 +767,19 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Tippe hier, um dich im Netzwerk anzumelden"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbit/s"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbit/s"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> fordert die Berechtigung, das WLAN für dieses Gerät zu aktivieren"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> fordert die Berechtigung, das WLAN für dieses Gerät zu deaktivieren"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Bytecode von Debug-fähigen Apps prüfen"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"ART die Überprüfung des Bytecodes für Debug-fähige Apps gestatten"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"Aktualisierungsrate anzeigen"</string>
-    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Aktuelle Aktualisierungsrate für Display anzeigen"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Aktuelle Aktualisierungsrate des Displays anzeigen"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Datenaustausch bei Kontakt mit anderen Geräten zulassen"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Datenaustausch zulassen, wenn das Smartphone ein anderes Gerät berührt"</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"NFC aktivieren"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC tauscht Daten zwischen diesem Gerät und anderen Geräten oder Zielen in der Nähe aus, darunter Zahlungsterminals, Zutrittsleser und interaktive Werbung oder Tags."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"NFC sichern"</string>
@@ -854,7 +857,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"WLAN-Suche aktiviert"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Erweiterte Optionen"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Drop-down-Liste \"Erweiterte Optionen\""</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"minimieren"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"maximieren"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Netzwerkname"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID eingeben"</string>
@@ -865,6 +867,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Status"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Übertragungsgeschwindigkeit"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Geschwindigkeit abrufen"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"Geschwindigkeit"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Frequenz"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"IP-Adresse"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"Gespeichert über"</string>
@@ -904,12 +907,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Prüfe, ob das Gerät angeschlossen, aufgeladen und eingeschaltet ist"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Prüfe, ob das Gerät angeschlossen, aufgeladen und eingeschaltet ist. Falls das Problem weiterhin besteht, wende dich an den Hersteller des Geräts"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Das Hinzufügen von \"<xliff:g id="SSID">%1$s</xliff:g>\" wird von diesem Gerät nicht unterstützt"</string>
-    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
-    <skip />
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"Versuche, die Entfernung zwischen dem Gerät und deinem WLAN-Zugangspunkt oder Router zu verringern"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Prüfe das Passwort und versuch es noch einmal"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Wende dich an den Hersteller des Geräts"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Prüfe die Verbindung und versuche es noch einmal"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Mobilfunknetz auswählen"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Wenn du dein Gerät verbinden möchtest, wähle ein Netzwerk"</string>
@@ -1570,6 +1570,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Zurücksetzen auf Standard-APN-Einstellungen abgeschlossen"</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Optionen zum Zurücksetzen"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Zurückgesetzt werden können das Netzwerk, Apps und das Gerät"</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Apps können zurückgesetzt werden"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"WLAN, mobile Daten &amp; Bluetooth zurücksetzen"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Hierdurch werden sämtliche Netzwerkeinstellungen zurückgesetzt, einschließlich:\n\n"<li>"WLAN"</li>\n<li>"Mobile Daten"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Heruntergeladene SIMs löschen"</string>
@@ -2055,26 +2056,16 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tippe auf dem Bildschirm auf Elemente, damit sie vorgelesen werden"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Untertitel-Einstellungen"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Vergrößerung"</string>
-    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
-    <skip />
+    <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Vergrößerungsbereich"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Wähle die Bereiche aus, die bei der Bildschirmvergrößerung verwendet werden sollen"</string>
+    <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Ganzer Bildschirm"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Teil des Bildschirms"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Ganzer Bildschirm und Teil des Bildschirms"</string>
+    <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Ganzen Bildschirm vergrößern"</string>
+    <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Teil des Bildschirms vergrößern"</string>
+    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Verschieben-Steuerelement anzeigen"</string>
+    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Joystick-ähnliches Steuerelement zum Verschieben des Vergrößerungsbereichs anzeigen"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Vergrößerungseinstellungen"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Dreimal tippen zum Vergrößern"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Mit Tastenkombination vergrößern"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Mit Tastenkombination und 3-mal Tippen vergrößern"</string>
@@ -2092,11 +2083,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Du kannst die Bedienungshilfen aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit zwei Fingern nach oben wischst.\n\nWenn du zwischen den Diensten wechseln möchtest, wische mit zwei Fingern über das Display nach oben und halte es gedrückt."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Du kannst die Bedienungshilfen aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit drei Fingern nach oben wischst.\n\nWenn du zwischen den Diensten wechseln möchtest, wische mit drei Fingern über das Display nach oben und halte es gedrückt."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
-    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Tastenkombination zum Öffnen verwenden"</string>
-    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Tastenkombination zum Vergrößern verwenden"</string>
-    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Tastenkombination zum Öffnen von <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Tastenkombination zum Vergrößern"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Tastenkombination zum Öffnen der Farbkorrektur"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Verknüpfung zum Öffnen verwenden"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Verknüpfung zum Vergrößern verwenden"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Verknüpfung zum Öffnen von <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Verknüpfung zum Vergrößern"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Verknüpfung zum Öffnen der Farbkorrektur"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Schaltfläche \"Bedienungshilfen\""</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Mit zwei Fingern nach oben wischen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Tippe unten auf deinem Bildschirm auf die Schaltfläche <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>"</string>
@@ -2133,7 +2124,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Hier kannst du auswählen, wie lange Nachrichten sichtbar sind, die eine Reaktion erfordern, aber nur vorübergehend angezeigt werden.\n\nDiese Einstellung wird nicht von allen Apps unterstützt."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"\"Berühren und halten\"-Reaktionszeit"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Farbumkehr"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"Kann sich auf die Leistung auswirken"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Farben umkehren"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Verdunkle helle Bildschirme, sodass Menschen mit lichtempfindlichen Augen die Inhalte besser erkennen können.\n\nHinweis: Dunkle Farben werden hell. Die Farben von Bildern werden ebenfalls umgekehrt."</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Verweildauer"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Wenn du eine Maus verwendest, kannst du sie so einstellen, dass der Mauszeiger automatisch wieder aktiv wird, wenn er sich eine bestimmte Zeit lang nicht mehr bewegt."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Verzögerung vor Klick"</string>
@@ -2143,7 +2135,10 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Haptisches Feedback"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> verwenden"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Farbkorrektur aktivieren"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Untertitel aktivieren"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Untertitel anzeigen"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Untertiteldesign"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Textgröße, Untertitelstil"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Weitere Optionen"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Diese Einstellung wird nicht von allen Apps unterstützt."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Schaltfläche \"Bedienungshilfen\""</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Mit zwei Fingern nach oben wischen"</string>
@@ -3133,6 +3128,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"Einstellungen"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wlan, wi-fi, netzwerkverbindung, internet, kabellos, daten, wifi, wi-fi, w-lan"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WLAN-Benachrichtigung, WLAN-Benachrichtigung"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Vibration abschalten, tippen, Tastatur"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24-Stunden-Format verwenden"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Download"</string>
@@ -3388,7 +3385,7 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Adaptive Benachrichtigungen"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Adaptive Priorität der Benachrichtigungen"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Benachrichtigungen mit niedriger Priorität automatisch auf \"Stumm\" schalten"</string>
-    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Adaptive Benachrichtigungen sortieren"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Adaptive Sortierung der Benachrichtigungen"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Benachrichtigungen automatisch nach Relevanz sortieren"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Maßnahmen- und Antwortvorschläge"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Es werden automatisch Vorschläge für Maßnahmen und Antworten angezeigt"</string>
@@ -3396,7 +3393,7 @@
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Bei stummen Benachrichtigungen keine Symbole anzeigen"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Bei stummen Benachrichtigungen werden in der Statusleiste keine Symbole angezeigt"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Benachrichtigungspunkte zulassen"</string>
-    <string name="notification_people_strip_title" msgid="1185857822541001139">"Leiste mit den neuesten Konversationen anzeigen"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Leiste mit den neuesten Unterhaltungen anzeigen"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbles"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Einige Benachrichtigungen können auf dem Bildschirm als Bubbles angezeigt werden"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Bestimmte Benachrichtigungen und Inhalte können als \"Bubbles\" angezeigt werden. Tippe auf die Bubble, um sie zu öffnen. Wenn du sie wieder schließen möchtest, ziehe sie an den unteren Bildschirmrand."</string>
@@ -4249,8 +4246,7 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Wenn du die Empfindlichkeit erhöhst, werden eventuell Touch-Gesten am Bildschirmrand beeinträchtigt."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Empfindlichkeit bei Touch-Geste \"Zurück\""</string>
     <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Einstellungen für Touch-Gesten"</string>
-    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
-    <skip />
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"bedienung über gesten, gestensteuerung, gestenbedienung, empfindlichkeit bei touch-geste zurück, empfindlichkeit geste zurück, empfindlichkeit zurückgeste, touch-geste zurück, geste zurück, zurückgeste"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Für Blick aufs Display doppeltippen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Doppeltippen für schnellen Blick auf das Display des Tablets"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Doppeltippen für schnellen Blick auf das Display des Geräts"</string>
@@ -4597,7 +4593,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ungültiger Netzmodus <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorieren."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Zugangspunkte (APNs)"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Bei Verbindung mit <xliff:g id="CARRIER">%1$s</xliff:g> nicht verfügbar"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Medizinische Informationen und Notfallkontakte"</string>
     <string name="see_more" msgid="7499355691042812723">"Mehr anzeigen"</string>
     <string name="see_less" msgid="2642392725363552793">"Weniger anzeigen"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Gerät zur Nutzung mit <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
