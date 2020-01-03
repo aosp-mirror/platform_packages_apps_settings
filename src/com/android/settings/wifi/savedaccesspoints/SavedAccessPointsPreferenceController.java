@@ -59,6 +59,7 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
+        refreshSavedAccessPoints();
         return mAccessPoints.size() > 0 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
